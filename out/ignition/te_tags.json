@@ -1,0 +1,778 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "name": "_types_",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "FeedHeader",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "AFeedFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-101 | XMEAS 1 | A feed flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-101"
+              }
+            },
+            {
+              "name": "DFeedFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kg/h",
+              "documentation": "FI-102 | XMEAS 2 | D feed flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-102"
+              }
+            },
+            {
+              "name": "EFeedFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kg/h",
+              "documentation": "FI-103 | XMEAS 3 | E feed flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-103"
+              }
+            },
+            {
+              "name": "DFeedFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-201 | XMV 1 | D feed flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-201"
+              }
+            },
+            {
+              "name": "EFeedFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-202 | XMV 2 | E feed flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-202"
+              }
+            },
+            {
+              "name": "AFeedFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-203 | XMV 3 | A feed flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-203"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reactor",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "ReactorFeedRate",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-106 | XMEAS 6 | Reactor feed rate",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-106"
+              }
+            },
+            {
+              "name": "ReactorPressure",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kPa g",
+              "documentation": "PI-107 | XMEAS 7 | Reactor pressure",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.PI-107"
+              }
+            },
+            {
+              "name": "ReactorLevel",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "LI-108 | XMEAS 8 | Reactor level",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LI-108"
+              }
+            },
+            {
+              "name": "ReactorTemperature",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "degC",
+              "documentation": "TI-109 | XMEAS 9 | Reactor temperature",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TI-109"
+              }
+            },
+            {
+              "name": "ReactorCoolingWaterOutletTemperature",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "degC",
+              "documentation": "TI-121 | XMEAS 21 | Reactor cooling water outlet temperature",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TI-121"
+              }
+            },
+            {
+              "name": "ReactorFeedAnalyzerComponentsAF",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "mol%",
+              "documentation": "AI-123 | XMEAS 23-28 | Reactor feed analyzer (components A-F)",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.AI-123"
+              }
+            },
+            {
+              "name": "ReactorCoolingWaterFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "TV-210 | XMV 10 | Reactor cooling water flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TV-210"
+              }
+            },
+            {
+              "name": "AgitatorSpeed",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "SC-212 | XMV 12 | Agitator speed",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.SC-212"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Condenser",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "CondenserCoolingWaterOutletTemperature",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "degC",
+              "documentation": "TI-122 | XMEAS 22 | Condenser cooling water outlet temperature",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TI-122"
+              }
+            },
+            {
+              "name": "CondenserCoolingWaterFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "TV-211 | XMV 11 | Condenser cooling water flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TV-211"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Separator",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "SeparatorTemperature",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "degC",
+              "documentation": "TI-111 | XMEAS 11 | Separator temperature",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TI-111"
+              }
+            },
+            {
+              "name": "SeparatorLevel",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "LI-112 | XMEAS 12 | Separator level",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LI-112"
+              }
+            },
+            {
+              "name": "SeparatorPressure",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kPa g",
+              "documentation": "PI-113 | XMEAS 13 | Separator pressure",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.PI-113"
+              }
+            },
+            {
+              "name": "SeparatorUnderflow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "m3/h",
+              "documentation": "FI-114 | XMEAS 14 | Separator underflow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-114"
+              }
+            },
+            {
+              "name": "SeparatorPotLiquidFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "LV-207 | XMV 7 | Separator pot liquid flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LV-207"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Compressor",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "RecycleFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-105 | XMEAS 5 | Recycle flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-105"
+              }
+            },
+            {
+              "name": "PurgeRate",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-110 | XMEAS 10 | Purge rate",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-110"
+              }
+            },
+            {
+              "name": "CompressorWork",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kW",
+              "documentation": "JI-120 | XMEAS 20 | Compressor work",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.JI-120"
+              }
+            },
+            {
+              "name": "PurgeGasAnalyzerComponentsAH",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "mol%",
+              "documentation": "AI-129 | XMEAS 29-36 | Purge gas analyzer (components A-H)",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.AI-129"
+              }
+            },
+            {
+              "name": "CompressorRecycleValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "HV-205 | XMV 5 | Compressor recycle valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.HV-205"
+              }
+            },
+            {
+              "name": "PurgeValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-206 | XMV 6 | Purge valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-206"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Stripper",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "AAndCFeedFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-104 | XMEAS 4 | A and C feed flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-104"
+              }
+            },
+            {
+              "name": "StripperLevel",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "LI-115 | XMEAS 15 | Stripper level",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LI-115"
+              }
+            },
+            {
+              "name": "StripperPressure",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kPa g",
+              "documentation": "PI-116 | XMEAS 16 | Stripper pressure",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.PI-116"
+              }
+            },
+            {
+              "name": "StripperUnderflowProduct",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "m3/h",
+              "documentation": "FI-117 | XMEAS 17 | Stripper underflow (product)",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-117"
+              }
+            },
+            {
+              "name": "StripperTemperature",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "degC",
+              "documentation": "TI-118 | XMEAS 18 | Stripper temperature",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TI-118"
+              }
+            },
+            {
+              "name": "StripperSteamFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kg/h",
+              "documentation": "FI-119 | XMEAS 19 | Stripper steam flow",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-119"
+              }
+            },
+            {
+              "name": "ProductAnalyzerComponentsDH",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "mol%",
+              "documentation": "AI-137 | XMEAS 37-41 | Product analyzer (components D-H)",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.AI-137"
+              }
+            },
+            {
+              "name": "AAndCFeedFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-204 | XMV 4 | A and C feed flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-204"
+              }
+            },
+            {
+              "name": "StripperLiquidProductFlowValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "LV-208 | XMV 8 | Stripper liquid product flow valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LV-208"
+              }
+            },
+            {
+              "name": "StripperSteamValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-209 | XMV 9 | Stripper steam valve",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-209"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TE_Plant",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "U-100",
+          "tagType": "UdtInstance",
+          "typeId": "FeedHeader",
+          "documentation": "Feed System",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.U-100"
+            }
+          }
+        },
+        {
+          "name": "R-101",
+          "tagType": "UdtInstance",
+          "typeId": "Reactor",
+          "documentation": "Reactor",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.R-101"
+            }
+          }
+        },
+        {
+          "name": "E-101",
+          "tagType": "UdtInstance",
+          "typeId": "Condenser",
+          "documentation": "Product Condenser",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.E-101"
+            }
+          }
+        },
+        {
+          "name": "V-101",
+          "tagType": "UdtInstance",
+          "typeId": "Separator",
+          "documentation": "Vapor/Liquid Separator",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.V-101"
+            }
+          }
+        },
+        {
+          "name": "K-101",
+          "tagType": "UdtInstance",
+          "typeId": "Compressor",
+          "documentation": "Recycle Compressor",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.K-101"
+            }
+          }
+        },
+        {
+          "name": "C-101",
+          "tagType": "UdtInstance",
+          "typeId": "Stripper",
+          "documentation": "Product Stripper",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=TE.C-101"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

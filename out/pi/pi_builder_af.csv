@@ -1,0 +1,45 @@
+Selected(x),Parent,Name,ObjectType,Description,Template,AttributeValueType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
+x,,TE Plant,Element,Tennessee Eastman Challenge Process,,,,,
+x,TE Plant,U-100,Element,Feed System,FeedHeader,,,,
+x,TE Plant\U-100,AFeedFlow,Attribute,FI-101: A feed flow,,Double,kscmh,PI Point,\\%Server%\TE.FI-101.PV
+x,TE Plant\U-100,DFeedFlow,Attribute,FI-102: D feed flow,,Double,kg/h,PI Point,\\%Server%\TE.FI-102.PV
+x,TE Plant\U-100,EFeedFlow,Attribute,FI-103: E feed flow,,Double,kg/h,PI Point,\\%Server%\TE.FI-103.PV
+x,TE Plant\U-100,DFeedFlowValve,Attribute,FV-201: D feed flow valve,,Double,%,PI Point,\\%Server%\TE.FV-201.PV
+x,TE Plant\U-100,EFeedFlowValve,Attribute,FV-202: E feed flow valve,,Double,%,PI Point,\\%Server%\TE.FV-202.PV
+x,TE Plant\U-100,AFeedFlowValve,Attribute,FV-203: A feed flow valve,,Double,%,PI Point,\\%Server%\TE.FV-203.PV
+x,TE Plant,R-101,Element,Reactor,Reactor,,,,
+x,TE Plant\R-101,ReactorFeedRate,Attribute,FI-106: Reactor feed rate,,Double,kscmh,PI Point,\\%Server%\TE.FI-106.PV
+x,TE Plant\R-101,ReactorPressure,Attribute,PI-107: Reactor pressure,,Double,kPa g,PI Point,\\%Server%\TE.PI-107.PV
+x,TE Plant\R-101,ReactorLevel,Attribute,LI-108: Reactor level,,Double,%,PI Point,\\%Server%\TE.LI-108.PV
+x,TE Plant\R-101,ReactorTemperature,Attribute,TI-109: Reactor temperature,,Double,degC,PI Point,\\%Server%\TE.TI-109.PV
+x,TE Plant\R-101,ReactorCoolingWaterOutletTemperature,Attribute,TI-121: Reactor cooling water outlet temperature,,Double,degC,PI Point,\\%Server%\TE.TI-121.PV
+x,TE Plant\R-101,ReactorFeedAnalyzerComponentsAF,Attribute,AI-123: Reactor feed analyzer (components A-F),,Double,mol%,PI Point,\\%Server%\TE.AI-123.PV
+x,TE Plant\R-101,ReactorCoolingWaterFlowValve,Attribute,TV-210: Reactor cooling water flow valve,,Double,%,PI Point,\\%Server%\TE.TV-210.PV
+x,TE Plant\R-101,AgitatorSpeed,Attribute,SC-212: Agitator speed,,Double,%,PI Point,\\%Server%\TE.SC-212.PV
+x,TE Plant,E-101,Element,Product Condenser,Condenser,,,,
+x,TE Plant\E-101,CondenserCoolingWaterOutletTemperature,Attribute,TI-122: Condenser cooling water outlet temperature,,Double,degC,PI Point,\\%Server%\TE.TI-122.PV
+x,TE Plant\E-101,CondenserCoolingWaterFlowValve,Attribute,TV-211: Condenser cooling water flow valve,,Double,%,PI Point,\\%Server%\TE.TV-211.PV
+x,TE Plant,V-101,Element,Vapor/Liquid Separator,Separator,,,,
+x,TE Plant\V-101,SeparatorTemperature,Attribute,TI-111: Separator temperature,,Double,degC,PI Point,\\%Server%\TE.TI-111.PV
+x,TE Plant\V-101,SeparatorLevel,Attribute,LI-112: Separator level,,Double,%,PI Point,\\%Server%\TE.LI-112.PV
+x,TE Plant\V-101,SeparatorPressure,Attribute,PI-113: Separator pressure,,Double,kPa g,PI Point,\\%Server%\TE.PI-113.PV
+x,TE Plant\V-101,SeparatorUnderflow,Attribute,FI-114: Separator underflow,,Double,m3/h,PI Point,\\%Server%\TE.FI-114.PV
+x,TE Plant\V-101,SeparatorPotLiquidFlowValve,Attribute,LV-207: Separator pot liquid flow valve,,Double,%,PI Point,\\%Server%\TE.LV-207.PV
+x,TE Plant,K-101,Element,Recycle Compressor,Compressor,,,,
+x,TE Plant\K-101,RecycleFlow,Attribute,FI-105: Recycle flow,,Double,kscmh,PI Point,\\%Server%\TE.FI-105.PV
+x,TE Plant\K-101,PurgeRate,Attribute,FI-110: Purge rate,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
+x,TE Plant\K-101,CompressorWork,Attribute,JI-120: Compressor work,,Double,kW,PI Point,\\%Server%\TE.JI-120.PV
+x,TE Plant\K-101,PurgeGasAnalyzerComponentsAH,Attribute,AI-129: Purge gas analyzer (components A-H),,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
+x,TE Plant\K-101,CompressorRecycleValve,Attribute,HV-205: Compressor recycle valve,,Double,%,PI Point,\\%Server%\TE.HV-205.PV
+x,TE Plant\K-101,PurgeValve,Attribute,FV-206: Purge valve,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
+x,TE Plant,C-101,Element,Product Stripper,Stripper,,,,
+x,TE Plant\C-101,AAndCFeedFlow,Attribute,FI-104: A and C feed flow,,Double,kscmh,PI Point,\\%Server%\TE.FI-104.PV
+x,TE Plant\C-101,StripperLevel,Attribute,LI-115: Stripper level,,Double,%,PI Point,\\%Server%\TE.LI-115.PV
+x,TE Plant\C-101,StripperPressure,Attribute,PI-116: Stripper pressure,,Double,kPa g,PI Point,\\%Server%\TE.PI-116.PV
+x,TE Plant\C-101,StripperUnderflowProduct,Attribute,FI-117: Stripper underflow (product),,Double,m3/h,PI Point,\\%Server%\TE.FI-117.PV
+x,TE Plant\C-101,StripperTemperature,Attribute,TI-118: Stripper temperature,,Double,degC,PI Point,\\%Server%\TE.TI-118.PV
+x,TE Plant\C-101,StripperSteamFlow,Attribute,FI-119: Stripper steam flow,,Double,kg/h,PI Point,\\%Server%\TE.FI-119.PV
+x,TE Plant\C-101,ProductAnalyzerComponentsDH,Attribute,AI-137: Product analyzer (components D-H),,Double,mol%,PI Point,\\%Server%\TE.AI-137.PV
+x,TE Plant\C-101,AAndCFeedFlowValve,Attribute,FV-204: A and C feed flow valve,,Double,%,PI Point,\\%Server%\TE.FV-204.PV
+x,TE Plant\C-101,StripperLiquidProductFlowValve,Attribute,LV-208: Stripper liquid product flow valve,,Double,%,PI Point,\\%Server%\TE.LV-208.PV
+x,TE Plant\C-101,StripperSteamValve,Attribute,FV-209: Stripper steam valve,,Double,%,PI Point,\\%Server%\TE.FV-209.PV
