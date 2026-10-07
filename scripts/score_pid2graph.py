@@ -123,6 +123,9 @@ def valid_symbols(pred):
     out = []
     for s in pred.get("symbols", []):
         box = s.get("box")
+        b = s.get("bbox")  # prompt v2: named fields, so axis order can't be ambiguous
+        if box is None and isinstance(b, dict):
+            box = [b.get("x_min"), b.get("y_min"), b.get("x_max"), b.get("y_max")]
         if (isinstance(box, list) and len(box) == 4 and all(isinstance(v, (int, float)) for v in box)
                 and s.get("class") in SCORED and s.get("id") is not None):
             out.append({"id": str(s["id"]), "class": s["class"], "box": [float(v) for v in box]})

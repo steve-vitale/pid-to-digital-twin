@@ -8,7 +8,8 @@ Access paths:
           neutral line; the image is opened with the Read tool. Runs in an empty folder.
   codex   Codex CLI (subscription), `codex exec -i <image>`, --ignore-user-config --ephemeral, read-only sandbox,
           empty folder. Codex keeps its own built-in instructions (unavoidable on this path; recorded).
-  gemini  Gemini API, image inline. Key read at run time from GEMINI_API_KEY or the path in GEMINI_KEY_ENV_FILE.
+  gemini  Gemini API, image inline. --model gemma-4-31b-it runs Google's open-weight Gemma through the same API,
+          as a stand-in for what a self-hosted (air-gapped) model of that size would score. Key read at run time from GEMINI_API_KEY or the path in GEMINI_KEY_ENV_FILE.
           Hard spend cap: refuses to start a call that could push the ledger past $25.
 
 Usage:
@@ -126,10 +127,16 @@ def run_gemini(image, model):
     worst = (6000 / 1e6) * GEMINI_PRICE["input"] + (65536 / 1e6) * GEMINI_PRICE["output"]
     if gemini_spent() + worst > GEMINI_CAP_USD:
         return {"text": None, "model": model, "cost_usd": 0, "error": f"spend cap: ${gemini_spent():.2f} spent"}
-    body = {"contents": [{"parts": [{"text": PROMPT},
-                                    {"inline_data": {"mime_type": "image/png", "data": base64.b64encode(img).decode()}}]}],
-            "systemInstruction": {"parts": [{"text": SYSTEM_LINE}]},
-            "generationConfig": {"responseMimeType": "application/json", "maxOutputTokens": 65536}}
+    image_part = {"inline_data": {"mime_type": "image/png", "data": base64.b64encode(img).decode()}}
+    if model.startswith("gemma"):
+        # Open-weight Gemma on the same API: no separate system instruction or JSON mode, so the system line is
+        # folded into the prompt and the reply goes through the same tolerant JSON parser as the CLI tools.
+        body = {"contents": [{"parts": [{"text": SYSTEM_LINE + "\n\n" + PROMPT}, image_part]}],
+                "generationConfig": {"maxOutputTokens": 32768}}
+    else:
+        body = {"contents": [{"parts": [{"text": PROMPT}, image_part]}],
+                "systemInstruction": {"parts": [{"text": SYSTEM_LINE}]},
+                "generationConfig": {"responseMimeType": "application/json", "maxOutputTokens": 65536}}
     req = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
         data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "x-goog-api-key": gemini_key()})
@@ -156,7 +163,10 @@ def main():
     ap.add_argument("--label", default="first-try")
     ap.add_argument("--model", default=None)
     ap.add_argument("--list-models", action="store_true")
+    ap.add_argument("--prompt", default="extraction/prompt.md", help="prompt file, relative to the repo root")
     a = ap.parse_args()
+    global PROMPT
+    PROMPT = (ROOT / a.prompt).read_text(encoding="utf-8")
     if a.list_models and a.tool == "gemini":
         req = urllib.request.Request("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",
                                      headers={"x-goog-api-key": gemini_key()})
@@ -176,7 +186,7 @@ def main():
         except Exception as e:  # record failures too; a failed run is a result
             res = {"text": None, "model": a.model, "error": f"{type(e).__name__}: {e}"}
         parsed, perr = parse_json(res.get("text"))
-        record = {"tool": a.tool, "drawing": d, "label": a.label, "model": res.get("model"),
+        record = {"tool": a.tool, "drawing": d, "label": a.label, "prompt_file": a.prompt, "model": res.get("model"),
                   "prompt_sha256": sha(PROMPT.encode()), "image_sha256": sha(image.read_bytes()),
                   "ran_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                   "seconds": round(time.time() - t0, 1), "cost_usd": res.get("cost_usd"),

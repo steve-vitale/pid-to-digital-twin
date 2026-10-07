@@ -129,3 +129,52 @@ You don't need perfect extraction to save a lot of time. You need a draft that's
 ---
 
 *Not legal or compliance advice. Your site's PSM, MOC, cybersecurity and data-governance owners have the final say.*
+
+---
+
+## 6. Running an open-weight model in-house (including air-gapped)
+
+If drawings can't leave your network, or policy forbids a third party seeing them, you can run an
+**open-weight** vision model on your own hardware. The weights are a file you download once, then run with no
+internet connection. This project tests one: **Gemma 4 31B**. It's run through an API here for convenience, but
+those are the same weights you could install offline, so its score shows roughly what a self-hosted model of that
+size achieves on this task (see `docs/EVALUATION.md`).
+
+**What it takes:**
+
+| Piece | What it involves | Rough cost (Oct 2026, verify before buying) |
+|---|---|---|
+| **Model** | An open-weight vision-language model in the ~30B class, e.g. Gemma, Qwen-VL or Llama vision families. Check the license (some restrict use or require attribution) and pick one that scores well on *your* sheets | Free to download; license review is staff time |
+| **Hardware: pilot** | One workstation with a single high-memory GPU. A ~30B model at reduced precision (quantized) fits in 24–48 GB of GPU memory; 96 GB leaves room for large drawings and for tuning | One 96 GB workstation GPU is about **$14k–$18k** today ([Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/nvidia-doubles-rtx-pro-6000-blackwells-msrp-to-a-staggering-usd16-000-96gb-card-started-pre-orders-below-usd8-000-last-year), [Thunder Compute](https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing)). Whole workstation **~$20k–$30k** |
+| **Hardware: production** | Datacenter GPUs for larger models, more users, or faster turnaround | One H100 80 GB is **$25k–$40k** ([IntuitionLabs](https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide), [CloudZero](https://www.cloudzero.com/blog/h100-gpu-cost/)). Multi-GPU servers run well into six figures |
+| **Inference software** | An open-source model server (e.g. vLLM, llama.cpp, Ollama), pinned to a vetted version | Free; setup and patching are staff time |
+| **Tuning (optional)** | LoRA fine-tuning (a light, cheap form of tuning) on your own annotated sheets so the model learns your symbols, tag format and drafting style. One 96 GB GPU can do this for a ~30B model | Compute is minor. **Annotation is the real cost**: e.g. 200 sheets at 1–2 engineer-hours each is 200–400 hours |
+| **People** | An engineer comfortable with ML tooling to set up and evaluate (weeks, part-time), plus IT/OT security review | The largest line item for most sites |
+
+**Rough totals (my estimates, not quotes):**
+- **Pilot:** about $20k–$30k hardware plus a few hundred staff hours.
+- **Site program with tuning:** low six figures all-in, most of it people and annotation.
+
+Run either against what the
+manual baseline costs (section 2). Throughput is usually fine for a digitization project. Even at a few minutes per
+sheet on one GPU, a thousand-sheet backlog is days of unattended runtime, not months.
+
+**Governance for an air-gapped model.** Treat the model like any other piece of software entering the plant:
+- **Provenance:**
+  - download weights only from the publisher's official source;
+  - verify published checksums or signatures;
+  - scan the files;
+  - record exactly which file version is installed.
+- **Change control:** a new model version, a new prompt, or a new fine-tune is a change. Re-run the same
+  evaluation suite (with controls and the held-out set, see `docs/EVALUATION.md`) before it replaces the old one,
+  and keep the scorecards. That's an MOC-style record for the AI tooling itself.
+- **No hidden connections:** confirm the inference software makes no outbound calls (telemetry, update checks).
+  On a true air gap, physically and on the firewall.
+- **Same safety rules as section 5:** read-only, derived from the drawing of record, reviewed by people before use.
+  Running the model locally removes the data-egress question. It doesn't remove the review step.
+- **Audit:** log which sheet went in, which model version and prompt produced what, and who approved the reviewed
+  result.
+
+**Choosing between cloud and local is a trade-off, not a rule.** Frontier cloud models scored higher in this
+project. A local model may score lower but keep every drawing in-house. Measure both on *your* sheets with the
+same evaluation, then decide with your security and data-governance owners, not from a vendor slide.

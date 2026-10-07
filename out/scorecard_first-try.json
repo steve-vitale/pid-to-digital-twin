@@ -1,0 +1,299 @@
+{
+ "claude": {
+  "drawings": 12,
+  "failed_runs": 0,
+  "models": [
+   "claude-opus-5-5[1m]"
+  ],
+  "avg_seconds": 100.0,
+  "cost_usd": 0.0,
+  "strict_located": {
+   "tp": 661,
+   "predicted": 813,
+   "in_key": 988,
+   "precision": 0.813,
+   "recall": 0.669,
+   "f1": 0.734
+  },
+  "strict_classified": {
+   "tp": 626,
+   "predicted": 813,
+   "in_key": 988,
+   "precision": 0.77,
+   "recall": 0.634,
+   "f1": 0.695
+  },
+  "rough_located": {
+   "tp": 807,
+   "predicted": 813,
+   "in_key": 988,
+   "precision": 0.993,
+   "recall": 0.817,
+   "f1": 0.896
+  },
+  "rough_classified": {
+   "tp": 767,
+   "predicted": 813,
+   "in_key": 988,
+   "precision": 0.943,
+   "recall": 0.776,
+   "f1": 0.852
+  },
+  "connections": {
+   "tp": 604,
+   "predicted": 886,
+   "in_key": 1953,
+   "precision": 0.682,
+   "recall": 0.309,
+   "f1": 0.426
+  },
+  "rough_by_class": {
+   "tank": {
+    "tp": 28,
+    "predicted": 44,
+    "in_key": 35,
+    "precision": 0.636,
+    "recall": 0.8,
+    "f1": 0.709
+   },
+   "pump": {
+    "tp": 10,
+    "predicted": 22,
+    "in_key": 16,
+    "precision": 0.455,
+    "recall": 0.625,
+    "f1": 0.526
+   },
+   "valve": {
+    "tp": 250,
+    "predicted": 256,
+    "in_key": 257,
+    "precision": 0.977,
+    "recall": 0.973,
+    "f1": 0.975
+   },
+   "instrumentation": {
+    "tp": 350,
+    "predicted": 358,
+    "in_key": 350,
+    "precision": 0.978,
+    "recall": 1.0,
+    "f1": 0.989
+   },
+   "inlet/outlet": {
+    "tp": 95,
+    "predicted": 95,
+    "in_key": 96,
+    "precision": 1.0,
+    "recall": 0.99,
+    "f1": 0.995
+   },
+   "general": {
+    "tp": 34,
+    "predicted": 38,
+    "in_key": 234,
+    "precision": 0.895,
+    "recall": 0.145,
+    "f1": 0.25
+   }
+  }
+ },
+ "codex": {
+  "drawings": 12,
+  "failed_runs": 0,
+  "models": [
+   "gpt-6.1-sol"
+  ],
+  "avg_seconds": 95.1,
+  "cost_usd": 0.0,
+  "strict_located": {
+   "tp": 695,
+   "predicted": 939,
+   "in_key": 988,
+   "precision": 0.74,
+   "recall": 0.703,
+   "f1": 0.721
+  },
+  "strict_classified": {
+   "tp": 656,
+   "predicted": 939,
+   "in_key": 988,
+   "precision": 0.699,
+   "recall": 0.664,
+   "f1": 0.681
+  },
+  "rough_located": {
+   "tp": 886,
+   "predicted": 939,
+   "in_key": 988,
+   "precision": 0.944,
+   "recall": 0.897,
+   "f1": 0.92
+  },
+  "rough_classified": {
+   "tp": 840,
+   "predicted": 939,
+   "in_key": 988,
+   "precision": 0.895,
+   "recall": 0.85,
+   "f1": 0.872
+  },
+  "connections": {
+   "tp": 899,
+   "predicted": 1270,
+   "in_key": 1953,
+   "precision": 0.708,
+   "recall": 0.46,
+   "f1": 0.558
+  },
+  "rough_by_class": {
+   "tank": {
+    "tp": 26,
+    "predicted": 42,
+    "in_key": 35,
+    "precision": 0.619,
+    "recall": 0.743,
+    "f1": 0.675
+   },
+   "pump": {
+    "tp": 8,
+    "predicted": 32,
+    "in_key": 16,
+    "precision": 0.25,
+    "recall": 0.5,
+    "f1": 0.333
+   },
+   "valve": {
+    "tp": 250,
+    "predicted": 257,
+    "in_key": 257,
+    "precision": 0.973,
+    "recall": 0.973,
+    "f1": 0.973
+   },
+   "instrumentation": {
+    "tp": 350,
+    "predicted": 358,
+    "in_key": 350,
+    "precision": 0.978,
+    "recall": 1.0,
+    "f1": 0.989
+   },
+   "inlet/outlet": {
+    "tp": 95,
+    "predicted": 95,
+    "in_key": 96,
+    "precision": 1.0,
+    "recall": 0.99,
+    "f1": 0.995
+   },
+   "general": {
+    "tp": 111,
+    "predicted": 155,
+    "in_key": 234,
+    "precision": 0.716,
+    "recall": 0.474,
+    "f1": 0.571
+   }
+  }
+ },
+ "gemini": {
+  "drawings": 12,
+  "failed_runs": 0,
+  "models": [
+   "gemini-3.1-pro-preview"
+  ],
+  "avg_seconds": 48.9,
+  "cost_usd": 1.25,
+  "strict_located": {
+   "tp": 304,
+   "predicted": 773,
+   "in_key": 988,
+   "precision": 0.393,
+   "recall": 0.308,
+   "f1": 0.345
+  },
+  "strict_classified": {
+   "tp": 289,
+   "predicted": 773,
+   "in_key": 988,
+   "precision": 0.374,
+   "recall": 0.293,
+   "f1": 0.328
+  },
+  "rough_located": {
+   "tp": 416,
+   "predicted": 773,
+   "in_key": 988,
+   "precision": 0.538,
+   "recall": 0.421,
+   "f1": 0.472
+  },
+  "rough_classified": {
+   "tp": 391,
+   "predicted": 773,
+   "in_key": 988,
+   "precision": 0.506,
+   "recall": 0.396,
+   "f1": 0.444
+  },
+  "connections": {
+   "tp": 203,
+   "predicted": 734,
+   "in_key": 1953,
+   "precision": 0.277,
+   "recall": 0.104,
+   "f1": 0.151
+  },
+  "rough_by_class": {
+   "tank": {
+    "tp": 18,
+    "predicted": 46,
+    "in_key": 35,
+    "precision": 0.391,
+    "recall": 0.514,
+    "f1": 0.444
+   },
+   "pump": {
+    "tp": 8,
+    "predicted": 20,
+    "in_key": 16,
+    "precision": 0.4,
+    "recall": 0.5,
+    "f1": 0.444
+   },
+   "valve": {
+    "tp": 90,
+    "predicted": 227,
+    "in_key": 257,
+    "precision": 0.396,
+    "recall": 0.35,
+    "f1": 0.372
+   },
+   "instrumentation": {
+    "tp": 211,
+    "predicted": 360,
+    "in_key": 350,
+    "precision": 0.586,
+    "recall": 0.603,
+    "f1": 0.594
+   },
+   "inlet/outlet": {
+    "tp": 56,
+    "predicted": 95,
+    "in_key": 96,
+    "precision": 0.589,
+    "recall": 0.583,
+    "f1": 0.586
+   },
+   "general": {
+    "tp": 8,
+    "predicted": 25,
+    "in_key": 234,
+    "precision": 0.32,
+    "recall": 0.034,
+    "f1": 0.062
+   }
+  }
+ }
+}

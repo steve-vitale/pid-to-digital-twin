@@ -217,3 +217,83 @@ can say no. Both are needed.
 decided, and ask what a deliberately wrong answer scores under the same rules. If nobody has tried, try it. Also
 decide which symbol classes matter for your use. Scoring line-bend points next to pumps inflates or deflates
 results for reasons that don't matter to operations.
+
+---
+
+## 8. Define "done well" first, then guard the definition from the people chasing it (us)
+
+**What:**
+- Three runs of three frontier models (Claude, GPT via Codex, Gemini) on 12 real drawings: first try, an identical
+  repeat, and a prompt revision.
+- An open-weight model (Gemma 4 31B) as a stand-in for what a plant could run fully offline.
+- The evaluation rules that make those numbers worth anything. They're written up in full in
+  [EVALUATION.md](EVALUATION.md).
+
+**How we define "done well":** not "a high score".
+- The outcome is a reviewed asset model that costs operations less time than building it by hand, with no more
+  errors.
+- Every metric is a proxy for that, so each one is listed with what it *can't* see. Rough detection can't judge
+  graphics precision; strict detection can't tell whether a class matters to operations; nothing on the public
+  dataset can judge tag text.
+- The last word belongs to the operations review: what a person who runs the unit still had to fix.
+
+**How (the anti-Goodhart rules, each one used in this project):**
+1. **Rules written before results.** The scorer's rules are dated and were committed before any model ran.
+2. **The grader was tested before it graded.** A deliberately wrong answer scored 15–32% under the first scorer; it
+   scores about 0 now (entry 7).
+3. **No single headline.** Precision and recall, strict and rough, per class, and connectivity separately.
+4. **Noise measured before claims.**
+   - The identical repeat run showed Claude and Codex move about ±0.03 between runs, so their 0.85 vs 0.87 is a tie.
+   - First-try Gemini moved ±0.13, which is how we found its problem.
+5. **Failures count as zero.** No tool looks better by crashing quietly.
+6. **First try stays the headline.** Every later change is labeled as a change.
+7. **Tune on one set, report on another, and admit it when we didn't.**
+   - Prompt v2 was written after seeing first-try results on all 12 drawings. That breaks the held-out rule in
+     spirit.
+   - Why we think the bias is small: the change was format-only, applied to every tool, and barely moved the two
+     tools without the format problem.
+   - Still, from now on any change is tuned on a declared development set and checked once on a sealed set nobody
+     has looked at.
+8. **Don't teach to the answer key.** Every model scores poorly on the key's catch-all class `general`
+   (F1 0.11–0.45), because "general" means whatever the annotators decided. We could tune prompts to guess their
+   habits and the score would rise. A digital twin would gain nothing. We report it and leave it alone.
+9. **Price the gain.** Time and cost per sheet sit next to every score.
+
+**What the numbers say (12 real drawings; details in EVALUATION.md §4):**
+
+| Tool | Found + right class: first → repeat → v2 | Connections (v2) |
+|---|---|---|
+| Codex (gpt-6.1-sol) | 0.87 → 0.87 → 0.85 | 0.53 |
+| Claude (claude-opus-5-5) | 0.85 → 0.85 → 0.85 | 0.42 |
+| Gemini (gemini-3.1-pro) | 0.44 → 0.57 → 0.74 | 0.24 |
+
+- **Gemini's gap was mostly format, not vision.** On 5 of 12 drawings it wrote box coordinates in a different axis
+  order (y before x). Those drawings scored about 0 as delivered and 0.60–0.92 with the axes swapped back.
+  - Prompt v2 replaced the bare `[x, y, x, y]` list with named fields (`x_min`, `y_min`…). The collapses
+    disappeared, and its score went from 0.44 to 0.74.
+  - The first-try number is still the headline. In production, a silently wrong format would have put every box in
+    the wrong place.
+- **Everyone is near-perfect on instruments and off-page connectors (0.98–0.99), and everyone misses more than half
+  of the connections** (recall 0.17–0.44). Topology is where people stay in the loop.
+- **Twelve drawings from one public design** is enough to see patterns, not enough to rank tools for a different
+  drafting style.
+
+**Why the rules matter more than the ranking:** for each of these numbers, it was easy to find a way to make it
+look better without making the result more useful: a looser grader, a best-of-three run, quiet failures, tuning to
+the key's quirks. The rules exist because the person chasing the metric (here, an AI agent and me) is the one most
+likely to fool themselves.
+
+**Lesson:** write down what "done well" means in operational terms, pick proxies with their blind spots named, and
+decide how you'll catch yourself gaming them, all before the first result arrives.
+
+**At your plant:** the same rules apply whether you evaluate a vendor, a cloud model, or an open-weight model you
+run offline:
+- **Weight the measures by your goal.** A tag list cares about instrument recall and tag text; graphics care about
+  box precision; analytics care about connectivity (see EVALUATION.md §3).
+- **What doesn't flex:** rules before results, controls on the grader, measured noise, failures counted, a held-out
+  check, and a person with the final say. Those are governance, and they shouldn't bend to the use case or to a
+  deadline.
+- **Re-run the same suite for every change:** model, prompt or fine-tune. Keep the scorecards as the change record.
+  That's how AI tooling fits inside MOC instead of around it.
+- **Sensitive drawings and open-weight models:** an open-weight model can run with no network at all.
+  [AT_YOUR_PLANT.md §6](AT_YOUR_PLANT.md) covers what that takes and roughly what it costs.
