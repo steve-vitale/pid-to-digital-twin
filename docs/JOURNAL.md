@@ -4,7 +4,7 @@ How this project was built and why each choice was made, written as it happens. 
 `out/`. This file is the reasoning behind them.
 
 Each entry: **What** (one line) · **How** (the method, concretely) · **Why** (the reasoning, including what we rejected) ·
-**Lesson** (what generalizes beyond this project).
+**Lesson** (what generalizes beyond this project) · **At your plant** (how to apply it to a real site; full guide in [AT_YOUR_PLANT.md](AT_YOUR_PLANT.md)).
 
 ---
 
@@ -33,6 +33,8 @@ Python script (stdlib only) reads that file and produces:
 passed (unique tags, valid references, ISA letters matching the measured variable), but no check could see layout.
 Someone had to look. *Checks prove what they check, and nothing more.*
 
+**At your plant:** define the target format first: your tag convention, your asset hierarchy levels, and which attributes Ignition or PI needs. Then capture a few sheets by hand into exactly that format. That becomes both your spec and your answer key. Always have a person look at rendered output; structural checks miss layout and meaning. See [AT_YOUR_PLANT.md](AT_YOUR_PLANT.md) §2.
+
 ---
 
 ## 2. Plan the whole arc before building more
@@ -55,6 +57,13 @@ failed under research:
 **Lesson:** check vendor reality before promising a workflow. Half a day of research removed a deliverable that
 would have been impossible.
 
+**At your plant:** before promising anyone a workflow, confirm three things:
+- what your platform versions actually import (Ignition, PI AF, PI Vision);
+- whether your drawings are intelligent P&IDs you could export instead of reading as images;
+- what your security policy allows to leave the network.
+
+Any one of these can change the plan. See §1 and §5.
+
 ---
 
 ## 3. Write the fairness rules before running any comparison
@@ -74,6 +83,8 @@ record the path and say so wherever it could explain a gap.
 
 **Lesson:** decide how you'll judge before you see the answer.
 
+**At your plant:** when you evaluate vendors or models, give each one the same sheets, including your worst scans. Score them against the same hand-built key and agree on the scoring rules before the demo. Vendor demos on hand-picked drawings tell you little.
+
 ---
 
 ## 4. Work within the hardware you have
@@ -88,6 +99,8 @@ requests, then fetch only the entries we need (the OPEN100 subset and the real P
 Datasets in this field are large, and most projects need a small slice of them.
 
 **Lesson:** constraints are design inputs, not blockers.
+
+**At your plant:** the equivalent constraints are bandwidth, data-egress policy, and whether a cloud model may see your drawings at all. Design for the narrowest one first: send only the sheets in scope, redact title blocks if policy requires, or use an on-premises model. See §5.
 
 ---
 
@@ -128,6 +141,8 @@ so they're now in the model.
 **Lesson:** verify the verifier. Test a checker with known-bad input before you trust its "all clear". And when
 the source itself is ambiguous, record the question; don't quietly resolve it.
 
+**At your plant:** your sources disagree too. That includes the drawing vs the DCS tag list vs the historian vs the maintenance asset register. A small script that cross-checks extracted tags against those lists does the same job as `verify_te_source.py`, and the mismatches it finds are often real documentation gaps, not AI errors. Test the script with planted errors before trusting it. See §1 and §4.
+
 ---
 
 ## 6. Take 0.2% of a 9.3 GB dataset
@@ -159,3 +174,5 @@ answer keys) out of a 9.3 GB zip. We downloaded 19.5 MB.
 - That's decided now, before any model runs, so no one can tune the mapping after seeing results (entry 3).
 
 **Lesson:** read the answer key's format before building the thing it grades.
+
+**At your plant:** you'll rarely have a third-party answer key. Hand-annotate 3–5 sheets yourself, including a bad scan, and decide up front what counts as a match. Do you need the exact tag text, the right symbol class, the right equipment, the right connection? Decide before the first model run. See §2.

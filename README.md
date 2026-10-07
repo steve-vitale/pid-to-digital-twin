@@ -53,7 +53,8 @@ and graphics, ready for real equipment tags to be connected.
 | `scripts/generate.py` | Model → SVGs + Ignition tag JSON + PI AF sheet + Operations review sheet (Python stdlib only) |
 | `out/` | Generated artifacts (regenerate anytime) |
 | `docs/PLAN.md` | Decisions, phases with completion criteria, comparison fairness rules, risks, sources |
-| `docs/JOURNAL.md` | Build journal: the how and why behind each step |
+| `docs/JOURNAL.md` | Build journal: the how and why behind each step, each with an "At your plant" note |
+| `docs/AT_YOUR_PLANT.md` | Applying this to a real site: preparing messy drawing sets, getting savings from an imperfect draft, and safety and security in production |
 
 ## Status
 
