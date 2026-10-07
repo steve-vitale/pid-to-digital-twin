@@ -100,7 +100,7 @@ Rough "found + right class" F1, plus connectivity F1 (precision and recall are i
 | Codex · gpt-6.1-sol | 0.87 | 0.87 | 0.85 | 0.53 |
 | Claude · claude-opus-5-5 | 0.85 | 0.85 | 0.85 | 0.42 |
 | Gemini · gemini-3.1-pro-preview | 0.44 | 0.57 | 0.74 | 0.24 |
-| Gemma 4 31B (open weights, via API) | — | — | *running* | *running* |
+| Gemma 4 31B (open weights, via hosted API) | — | — | 0.25 first try (5 of 12 timed out → scored 0) | 0.02 |
 
 What this supports:
 - **Codex and Claude** are tied on finding and naming symbols, within noise.
@@ -109,6 +109,18 @@ What this supports:
   different axis order. Naming the fields fixed it.
 - **Every model** finds instruments and off-page connectors almost perfectly, and misses more than half the
   connections.
+
+**Gemma 4 31B (open weights, the offline stand-in):**
+- **First try counts the failures:** 5 of 12 calls hit our 30-minute client timeout on Google's shared hosted
+  endpoint, so they score 0. That's honest for a plant relying on a slow shared service. It says little about a
+  dedicated local GPU, which has no shared queue.
+- **Labeled diagnostic on the 7 that completed:** "found" F1 averages about 0.54. Precision is high (0.93: when it
+  reports a symbol, it's right) and recall is low (it misses most symbols).
+- **Retry:** the 5 timed-out drawings are being retried with a longer timeout, reported separately as a retry and
+  never mixed into first try.
+- **Bottom line so far:** on this task a ~30B open model is well behind the frontier cloud models. For a plant that
+  can't send drawings out, that's the trade-off to weigh: fine-tuning on your own sheets (AT_YOUR_PLANT.md §6) is
+  how that gap usually narrows, and it should be measured with this same suite before and after.
 
 What it doesn't support:
 - **Ranking claims beyond these drawings.** Twelve drawings come from one public design; a different drafting

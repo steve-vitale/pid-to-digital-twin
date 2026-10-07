@@ -38,6 +38,7 @@ DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PI
 RUNS = ROOT / "runs"
 SPEND = RUNS / "gemini_spend.json"
 GEMINI_CAP_USD = 25.0
+TIMEOUT_S = 1800  # per call; --timeout overrides (journal: hosted Gemma needed more on a shared queue)
 # Conservative per-million-token prices used only for the spend cap (over-estimate on purpose).
 GEMINI_PRICE = {"input": 2.50, "output": 15.00}
 SYSTEM_LINE = "You extract structured data from engineering drawings. Follow the user's output format exactly."
@@ -73,7 +74,7 @@ def run_claude(image, model):
         cmd += ["--model", model]
     try:
         p = subprocess.run(cmd, cwd=work, input=prompt, capture_output=True, text=True, encoding="utf-8",
-                           timeout=1800, shell=(os.name == "nt"))
+                           timeout=TIMEOUT_S, shell=(os.name == "nt"))
         if not p.stdout.strip():
             return {"text": None, "model": model, "error": (p.stderr or "no output")[-2000:]}
         out = json.loads(p.stdout)
@@ -95,7 +96,7 @@ def run_codex(image, model):
     cmd.append("-")  # read the prompt from stdin (see run_claude for why)
     try:
         p = subprocess.run(cmd, cwd=work, input=PROMPT, capture_output=True, text=True, encoding="utf-8",
-                           timeout=1800, shell=(os.name == "nt"))
+                           timeout=TIMEOUT_S, shell=(os.name == "nt"))
         m = re.search(r"^model:\s*(\S+)", p.stderr + p.stdout, flags=re.M)
         text = last.read_text(encoding="utf-8") if last.exists() else None
         return {"text": text, "model": m.group(1) if m else (model or "default"), "cost_usd_notional": None,
@@ -140,7 +141,7 @@ def run_gemini(image, model):
     req = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
         data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "x-goog-api-key": gemini_key()})
-    with urllib.request.urlopen(req, timeout=1800) as r:
+    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r:
         out = json.load(r)
     u = out.get("usageMetadata", {})
     cost = (u.get("promptTokenCount", 0) / 1e6) * GEMINI_PRICE["input"] + \
@@ -164,8 +165,10 @@ def main():
     ap.add_argument("--model", default=None)
     ap.add_argument("--list-models", action="store_true")
     ap.add_argument("--prompt", default="extraction/prompt.md", help="prompt file, relative to the repo root")
+    ap.add_argument("--timeout", type=int, default=1800, help="seconds per model call")
     a = ap.parse_args()
-    global PROMPT
+    global PROMPT, TIMEOUT_S
+    TIMEOUT_S = a.timeout
     PROMPT = (ROOT / a.prompt).read_text(encoding="utf-8")
     if a.list_models and a.tool == "gemini":
         req = urllib.request.Request("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",
