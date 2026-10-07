@@ -176,3 +176,44 @@ answer keys) out of a 9.3 GB zip. We downloaded 19.5 MB.
 **Lesson:** read the answer key's format before building the thing it grades.
 
 **At your plant:** you'll rarely have a third-party answer key. Hand-annotate 3–5 sheets yourself, including a bad scan, and decide up front what counts as a match. Do you need the exact tag text, the right symbol class, the right equipment, the right connection? Decide before the first model run. See §2.
+
+---
+
+## 7. Fix the scoring rules first, then test the scorer until it can't be fooled
+
+**What:** a scorer that grades any model's extraction against the PID2Graph answer keys, written and tested before
+a single model ran.
+
+**How:**
+- **Profile the key.** It has 10 classes, not 8. Four are drawing plumbing (2,408 line-bend points, 734 line
+  crossings, 451 flow arrows, 48 drawing frames). Six matter for a twin: instruments (350), valves (257), other
+  inline symbols (234), off-page connectors (96), tanks and vessels (35), pumps (16).
+- **Detection.** Score only the six asset classes, matching predicted boxes to key boxes by overlap. Two thresholds:
+  - strict IoU ≥ 0.5, the object-detection standard;
+  - rough IoU ≥ 0.1, "in about the right place", because vision models give loose coordinates.
+- **Connectivity.** Score at the asset level: which tanks, pumps, valves and instruments connect, tracing through
+  the line-bend and crossing points. That's what a twin needs.
+- **Controls.** Five tests on every drawing: a perfect answer (built from the key itself), an empty answer, every
+  class deliberately wrong, every box moved half a sheet, and half the symbols dropped.
+
+**What the controls caught:**
+1. **First rule:** "the predicted box centre lands near the key box". With every class wrong, it still gave
+   **15–32% credit**, because a mislabeled valve landed in the neighbouring instrument's zone and small symbols sat
+   inside a tank's large box.
+2. **Tightened version:** still 3–20%. The rule itself was wrong, not the setting. Switched to IoU.
+3. **My own control was weak:** the "moved" test also shrank every box to 1×1, which can never overlap anything
+   under IoU, so it passed for the wrong reason. Fixed to keep box sizes.
+4. **One honest chance floor:** drawing 6 contains two identical reactor-coolant-pump details half a sheet apart.
+   Shifting every box half a sheet lands one detail on the other: strict score 0, rough score 8.8%. So the rough
+   score carries a small chance floor on repetitive sheets. It's documented, not hidden.
+
+**Why this matters more than the model comparison itself:** a loose scorer flatters every model at once, and it
+flatters weak ones most. Without the controls, a model that labeled everything wrong would have scored 15–32%.
+
+**Lesson:** test the grader before you grade. Positive controls prove it can say yes; negative controls prove it
+can say no. Both are needed.
+
+**At your plant:** before trusting any accuracy number from a vendor or an internal pilot, ask how a match is
+decided, and ask what a deliberately wrong answer scores under the same rules. If nobody has tried, try it. Also
+decide which symbol classes matter for your use. Scoring line-bend points next to pumps inflates or deflates
+results for reasons that don't matter to operations.
