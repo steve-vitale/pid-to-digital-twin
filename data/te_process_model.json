@@ -5,71 +5,715 @@
     "source_document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
     "extraction_method": "hand-built seed model (Phase 0). Serves as the answer-key draft for scoring AI extraction in Phase 2",
     "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv.",
-    "verification_note": "All items start 'unverified'. Check every row against the source tables before quoting numbers publicly.",
+    "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TI-122). Report: out/te_source_check.md. Units and streams are not yet verified (no machine-readable source); they are checked in operations review.",
     "created": "2026-10-06"
   },
   "units": [
-    {"id": "U-100", "name": "Feed System", "type": "feed_header", "layout": {"x": 90,  "y": 330}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}},
-    {"id": "R-101", "name": "Reactor", "type": "reactor", "layout": {"x": 330, "y": 360}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}},
-    {"id": "E-101", "name": "Product Condenser", "type": "condenser", "layout": {"x": 540, "y": 230}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}},
-    {"id": "V-101", "name": "Vapor/Liquid Separator", "type": "separator", "layout": {"x": 740, "y": 380}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}},
-    {"id": "K-101", "name": "Recycle Compressor", "type": "compressor", "layout": {"x": 740, "y": 130}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}},
-    {"id": "C-101", "name": "Product Stripper", "type": "stripper", "layout": {"x": 1010, "y": 380}, "source": "D&V 1993 Fig. 1", "verification": {"status": "unverified"}}
+    {
+      "id": "U-100",
+      "name": "Feed System",
+      "type": "feed_header",
+      "layout": {
+        "x": 90,
+        "y": 330
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "R-101",
+      "name": "Reactor",
+      "type": "reactor",
+      "layout": {
+        "x": 330,
+        "y": 360
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "E-101",
+      "name": "Product Condenser",
+      "type": "condenser",
+      "layout": {
+        "x": 540,
+        "y": 230
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "V-101",
+      "name": "Vapor/Liquid Separator",
+      "type": "separator",
+      "layout": {
+        "x": 740,
+        "y": 380
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "K-101",
+      "name": "Recycle Compressor",
+      "type": "compressor",
+      "layout": {
+        "x": 740,
+        "y": 130
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "C-101",
+      "name": "Product Stripper",
+      "type": "stripper",
+      "layout": {
+        "x": 1010,
+        "y": 380
+      },
+      "source": "D&V 1993 Fig. 1",
+      "verification": {
+        "status": "unverified"
+      }
+    }
   ],
   "streams": [
-    {"id": "S1",  "name": "A feed",               "from": "BL",    "to": "U-100"},
-    {"id": "S2",  "name": "D feed",               "from": "BL",    "to": "U-100"},
-    {"id": "S3",  "name": "E feed",               "from": "BL",    "to": "U-100"},
-    {"id": "S4",  "name": "A and C feed",         "from": "BL",    "to": "C-101"},
-    {"id": "S5",  "name": "Stripper overhead",    "from": "C-101", "to": "U-100"},
-    {"id": "S6",  "name": "Reactor feed",         "from": "U-100", "to": "R-101"},
-    {"id": "S7",  "name": "Reactor product",      "from": "R-101", "to": "E-101"},
-    {"id": "S7b", "name": "Condensed product",    "from": "E-101", "to": "V-101"},
-    {"id": "S8",  "name": "Recycle",              "from": "V-101", "to": "K-101"},
-    {"id": "S8b", "name": "Recycle to feed",      "from": "K-101", "to": "U-100"},
-    {"id": "S9",  "name": "Purge",                "from": "K-101", "to": "BL"},
-    {"id": "S10", "name": "Separator underflow",  "from": "V-101", "to": "C-101"},
-    {"id": "S11", "name": "Stripper product",     "from": "C-101", "to": "BL"}
+    {
+      "id": "S1",
+      "name": "A feed",
+      "from": "BL",
+      "to": "U-100"
+    },
+    {
+      "id": "S2",
+      "name": "D feed",
+      "from": "BL",
+      "to": "U-100"
+    },
+    {
+      "id": "S3",
+      "name": "E feed",
+      "from": "BL",
+      "to": "U-100"
+    },
+    {
+      "id": "S4",
+      "name": "A and C feed",
+      "from": "BL",
+      "to": "C-101"
+    },
+    {
+      "id": "S5",
+      "name": "Stripper overhead",
+      "from": "C-101",
+      "to": "U-100"
+    },
+    {
+      "id": "S6",
+      "name": "Reactor feed",
+      "from": "U-100",
+      "to": "R-101"
+    },
+    {
+      "id": "S7",
+      "name": "Reactor product",
+      "from": "R-101",
+      "to": "E-101"
+    },
+    {
+      "id": "S7b",
+      "name": "Condensed product",
+      "from": "E-101",
+      "to": "V-101"
+    },
+    {
+      "id": "S8",
+      "name": "Recycle",
+      "from": "V-101",
+      "to": "K-101"
+    },
+    {
+      "id": "S8b",
+      "name": "Recycle to feed",
+      "from": "K-101",
+      "to": "U-100"
+    },
+    {
+      "id": "S9",
+      "name": "Purge",
+      "from": "K-101",
+      "to": "BL"
+    },
+    {
+      "id": "S10",
+      "name": "Separator underflow",
+      "from": "V-101",
+      "to": "C-101"
+    },
+    {
+      "id": "S11",
+      "name": "Stripper product",
+      "from": "C-101",
+      "to": "BL"
+    }
   ],
   "instruments": [
-    {"tag": "FI-101", "xmeas": 1,  "unit": "U-100", "stream": "S1",  "variable": "flow",        "uom": "kscmh",  "description": "A feed flow"},
-    {"tag": "FI-102", "xmeas": 2,  "unit": "U-100", "stream": "S2",  "variable": "flow",        "uom": "kg/h",   "description": "D feed flow"},
-    {"tag": "FI-103", "xmeas": 3,  "unit": "U-100", "stream": "S3",  "variable": "flow",        "uom": "kg/h",   "description": "E feed flow"},
-    {"tag": "FI-104", "xmeas": 4,  "unit": "C-101", "stream": "S4",  "variable": "flow",        "uom": "kscmh",  "description": "A and C feed flow"},
-    {"tag": "FI-105", "xmeas": 5,  "unit": "K-101", "stream": "S8b", "variable": "flow",        "uom": "kscmh",  "description": "Recycle flow"},
-    {"tag": "FI-106", "xmeas": 6,  "unit": "R-101", "stream": "S6",  "variable": "flow",        "uom": "kscmh",  "description": "Reactor feed rate"},
-    {"tag": "PI-107", "xmeas": 7,  "unit": "R-101",                  "variable": "pressure",    "uom": "kPa g",  "description": "Reactor pressure"},
-    {"tag": "LI-108", "xmeas": 8,  "unit": "R-101",                  "variable": "level",       "uom": "%",      "description": "Reactor level"},
-    {"tag": "TI-109", "xmeas": 9,  "unit": "R-101",                  "variable": "temperature", "uom": "degC",   "description": "Reactor temperature"},
-    {"tag": "FI-110", "xmeas": 10, "unit": "K-101", "stream": "S9",  "variable": "flow",        "uom": "kscmh",  "description": "Purge rate"},
-    {"tag": "TI-111", "xmeas": 11, "unit": "V-101",                  "variable": "temperature", "uom": "degC",   "description": "Separator temperature"},
-    {"tag": "LI-112", "xmeas": 12, "unit": "V-101",                  "variable": "level",       "uom": "%",      "description": "Separator level"},
-    {"tag": "PI-113", "xmeas": 13, "unit": "V-101",                  "variable": "pressure",    "uom": "kPa g",  "description": "Separator pressure"},
-    {"tag": "FI-114", "xmeas": 14, "unit": "V-101", "stream": "S10", "variable": "flow",        "uom": "m3/h",   "description": "Separator underflow"},
-    {"tag": "LI-115", "xmeas": 15, "unit": "C-101",                  "variable": "level",       "uom": "%",      "description": "Stripper level"},
-    {"tag": "PI-116", "xmeas": 16, "unit": "C-101",                  "variable": "pressure",    "uom": "kPa g",  "description": "Stripper pressure"},
-    {"tag": "FI-117", "xmeas": 17, "unit": "C-101", "stream": "S11", "variable": "flow",        "uom": "m3/h",   "description": "Stripper underflow (product)"},
-    {"tag": "TI-118", "xmeas": 18, "unit": "C-101",                  "variable": "temperature", "uom": "degC",   "description": "Stripper temperature"},
-    {"tag": "FI-119", "xmeas": 19, "unit": "C-101",                  "variable": "flow",        "uom": "kg/h",   "description": "Stripper steam flow"},
-    {"tag": "JI-120", "xmeas": 20, "unit": "K-101",                  "variable": "power",       "uom": "kW",     "description": "Compressor work"},
-    {"tag": "TI-121", "xmeas": 21, "unit": "R-101",                  "variable": "temperature", "uom": "degC",   "description": "Reactor cooling water outlet temperature"},
-    {"tag": "TI-122", "xmeas": 22, "unit": "E-101",                  "variable": "temperature", "uom": "degC",   "description": "Condenser cooling water outlet temperature"},
-    {"tag": "AI-123", "xmeas": "23-28", "unit": "R-101", "stream": "S6", "variable": "composition", "uom": "mol%", "description": "Reactor feed analyzer (components A-F)"},
-    {"tag": "AI-129", "xmeas": "29-36", "unit": "K-101", "stream": "S9", "variable": "composition", "uom": "mol%", "description": "Purge gas analyzer (components A-H)"},
-    {"tag": "AI-137", "xmeas": "37-41", "unit": "C-101", "stream": "S11","variable": "composition", "uom": "mol%", "description": "Product analyzer (components D-H)"}
+    {
+      "tag": "FI-101",
+      "xmeas": 1,
+      "unit": "U-100",
+      "stream": "S1",
+      "variable": "flow",
+      "uom": "kscmh",
+      "description": "A feed flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 1: \"A Feed\" kscmh"
+      }
+    },
+    {
+      "tag": "FI-102",
+      "xmeas": 2,
+      "unit": "U-100",
+      "stream": "S2",
+      "variable": "flow",
+      "uom": "kg/h",
+      "description": "D feed flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 2: \"D Feed\" kg/hr"
+      }
+    },
+    {
+      "tag": "FI-103",
+      "xmeas": 3,
+      "unit": "U-100",
+      "stream": "S3",
+      "variable": "flow",
+      "uom": "kg/h",
+      "description": "E feed flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 3: \"E Feed\" kg/hr"
+      }
+    },
+    {
+      "tag": "FI-104",
+      "xmeas": 4,
+      "unit": "C-101",
+      "stream": "S4",
+      "variable": "flow",
+      "uom": "kscmh",
+      "description": "A and C feed flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 4: \"A and C Feed\" kscmh"
+      }
+    },
+    {
+      "tag": "FI-105",
+      "xmeas": 5,
+      "unit": "K-101",
+      "stream": "S8b",
+      "variable": "flow",
+      "uom": "kscmh",
+      "description": "Recycle flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 5: \"Recycle Flow\" kscmh"
+      }
+    },
+    {
+      "tag": "FI-106",
+      "xmeas": 6,
+      "unit": "R-101",
+      "stream": "S6",
+      "variable": "flow",
+      "uom": "kscmh",
+      "description": "Reactor feed rate",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 6: \"Reactor Feed Rate\" kscmh"
+      }
+    },
+    {
+      "tag": "PI-107",
+      "xmeas": 7,
+      "unit": "R-101",
+      "variable": "pressure",
+      "uom": "kPa g",
+      "description": "Reactor pressure",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 7: \"Reactor Pressure\" kPa gauge"
+      }
+    },
+    {
+      "tag": "LI-108",
+      "xmeas": 8,
+      "unit": "R-101",
+      "variable": "level",
+      "uom": "%",
+      "description": "Reactor level",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 8: \"Reactor Level\" %"
+      }
+    },
+    {
+      "tag": "TI-109",
+      "xmeas": 9,
+      "unit": "R-101",
+      "variable": "temperature",
+      "uom": "degC",
+      "description": "Reactor temperature",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 9: \"Reactor Temperature\" Deg C"
+      }
+    },
+    {
+      "tag": "FI-110",
+      "xmeas": 10,
+      "unit": "K-101",
+      "stream": "S9",
+      "variable": "flow",
+      "uom": "kscmh",
+      "description": "Purge rate",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 10: \"Purge Rate (stream 9)\" kscmh"
+      }
+    },
+    {
+      "tag": "TI-111",
+      "xmeas": 11,
+      "unit": "V-101",
+      "variable": "temperature",
+      "uom": "degC",
+      "description": "Separator temperature",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 11: \"Product Sep Temp\" Deg C"
+      }
+    },
+    {
+      "tag": "LI-112",
+      "xmeas": 12,
+      "unit": "V-101",
+      "variable": "level",
+      "uom": "%",
+      "description": "Separator level",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 12: \"Product Sep Level\" %"
+      }
+    },
+    {
+      "tag": "PI-113",
+      "xmeas": 13,
+      "unit": "V-101",
+      "variable": "pressure",
+      "uom": "kPa g",
+      "description": "Separator pressure",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 13: \"Prod Sep Pressure\" kPa gauge"
+      }
+    },
+    {
+      "tag": "FI-114",
+      "xmeas": 14,
+      "unit": "V-101",
+      "stream": "S10",
+      "variable": "flow",
+      "uom": "m3/h",
+      "description": "Separator underflow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 14: \"Prod Sep Underflow (stream 10)\" m3/hr"
+      }
+    },
+    {
+      "tag": "LI-115",
+      "xmeas": 15,
+      "unit": "C-101",
+      "variable": "level",
+      "uom": "%",
+      "description": "Stripper level",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 15: \"Stripper Level\" %"
+      }
+    },
+    {
+      "tag": "PI-116",
+      "xmeas": 16,
+      "unit": "C-101",
+      "variable": "pressure",
+      "uom": "kPa g",
+      "description": "Stripper pressure",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 16: \"Stripper Pressure\" kPa gauge"
+      }
+    },
+    {
+      "tag": "FI-117",
+      "xmeas": 17,
+      "unit": "C-101",
+      "stream": "S11",
+      "variable": "flow",
+      "uom": "m3/h",
+      "description": "Stripper underflow (product)",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 17: \"Stripper Underflow (stream 11)\" m3/hr"
+      }
+    },
+    {
+      "tag": "TI-118",
+      "xmeas": 18,
+      "unit": "C-101",
+      "variable": "temperature",
+      "uom": "degC",
+      "description": "Stripper temperature",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 18: \"Stripper Temperature\" Deg C"
+      }
+    },
+    {
+      "tag": "FI-119",
+      "xmeas": 19,
+      "unit": "C-101",
+      "variable": "flow",
+      "uom": "kg/h",
+      "description": "Stripper steam flow",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 19: \"Stripper Steam Flow\" kg/hr"
+      }
+    },
+    {
+      "tag": "JI-120",
+      "xmeas": 20,
+      "unit": "K-101",
+      "variable": "power",
+      "uom": "kW",
+      "description": "Compressor work",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 20: \"Compressor Work\" kW"
+      }
+    },
+    {
+      "tag": "TI-121",
+      "xmeas": 21,
+      "unit": "R-101",
+      "variable": "temperature",
+      "uom": "degC",
+      "description": "Reactor cooling water outlet temperature",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 21: \"Reactor Cooling Water Outlet Temp\" Deg C"
+      }
+    },
+    {
+      "tag": "TI-122",
+      "xmeas": 22,
+      "unit": "E-101",
+      "variable": "temperature",
+      "uom": "degC",
+      "description": "Separator Cooling Water Outlet Temp",
+      "verification": {
+        "status": "corrected",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMEAS 22: \"Separator Cooling Water Outlet Temp\" Deg C",
+        "previous": {
+          "description": "Condenser cooling water outlet temperature"
+        }
+      },
+      "open_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
+    },
+    {
+      "tag": "AI-123",
+      "xmeas": "23-28",
+      "unit": "R-101",
+      "stream": "S6",
+      "variable": "composition",
+      "uom": "mol%",
+      "description": "Reactor feed analyzer (components A-F)",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+      },
+      "sampling": {
+        "period_h": 0.1,
+        "dead_time_h": 0.1,
+        "source": "teprob.f header comments"
+      }
+    },
+    {
+      "tag": "AI-129",
+      "xmeas": "29-36",
+      "unit": "K-101",
+      "stream": "S9",
+      "variable": "composition",
+      "uom": "mol%",
+      "description": "Purge gas analyzer (components A-H)",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "Purge Gas Analysis (stream 9): components A-H"
+      },
+      "sampling": {
+        "period_h": 0.1,
+        "dead_time_h": 0.1,
+        "source": "teprob.f header comments"
+      }
+    },
+    {
+      "tag": "AI-137",
+      "xmeas": "37-41",
+      "unit": "C-101",
+      "stream": "S11",
+      "variable": "composition",
+      "uom": "mol%",
+      "description": "Product analyzer (components D-H)",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "Product Analysis (stream 11): components D-H"
+      },
+      "sampling": {
+        "period_h": 0.25,
+        "dead_time_h": 0.25,
+        "source": "teprob.f header comments"
+      }
+    }
   ],
   "final_elements": [
-    {"tag": "FV-201", "xmv": 1,  "unit": "U-100", "stream": "S2",  "uom": "%", "description": "D feed flow valve"},
-    {"tag": "FV-202", "xmv": 2,  "unit": "U-100", "stream": "S3",  "uom": "%", "description": "E feed flow valve"},
-    {"tag": "FV-203", "xmv": 3,  "unit": "U-100", "stream": "S1",  "uom": "%", "description": "A feed flow valve"},
-    {"tag": "FV-204", "xmv": 4,  "unit": "C-101", "stream": "S4",  "uom": "%", "description": "A and C feed flow valve"},
-    {"tag": "HV-205", "xmv": 5,  "unit": "K-101",                  "uom": "%", "description": "Compressor recycle valve"},
-    {"tag": "FV-206", "xmv": 6,  "unit": "K-101", "stream": "S9",  "uom": "%", "description": "Purge valve"},
-    {"tag": "LV-207", "xmv": 7,  "unit": "V-101", "stream": "S10", "uom": "%", "description": "Separator pot liquid flow valve"},
-    {"tag": "LV-208", "xmv": 8,  "unit": "C-101", "stream": "S11", "uom": "%", "description": "Stripper liquid product flow valve"},
-    {"tag": "FV-209", "xmv": 9,  "unit": "C-101",                  "uom": "%", "description": "Stripper steam valve"},
-    {"tag": "TV-210", "xmv": 10, "unit": "R-101",                  "uom": "%", "description": "Reactor cooling water flow valve"},
-    {"tag": "TV-211", "xmv": 11, "unit": "E-101",                  "uom": "%", "description": "Condenser cooling water flow valve"},
-    {"tag": "SC-212", "xmv": 12, "unit": "R-101",                  "uom": "%", "description": "Agitator speed"}
+    {
+      "tag": "FV-201",
+      "xmv": 1,
+      "unit": "U-100",
+      "stream": "S2",
+      "uom": "%",
+      "description": "D feed flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 1: \"D Feed Flow (stream 2)\""
+      }
+    },
+    {
+      "tag": "FV-202",
+      "xmv": 2,
+      "unit": "U-100",
+      "stream": "S3",
+      "uom": "%",
+      "description": "E feed flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 2: \"E Feed Flow (stream 3)\""
+      }
+    },
+    {
+      "tag": "FV-203",
+      "xmv": 3,
+      "unit": "U-100",
+      "stream": "S1",
+      "uom": "%",
+      "description": "A feed flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 3: \"A Feed Flow (stream 1)\""
+      }
+    },
+    {
+      "tag": "FV-204",
+      "xmv": 4,
+      "unit": "C-101",
+      "stream": "S4",
+      "uom": "%",
+      "description": "A and C feed flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 4: \"A and C Feed Flow (stream 4)\""
+      }
+    },
+    {
+      "tag": "HV-205",
+      "xmv": 5,
+      "unit": "K-101",
+      "uom": "%",
+      "description": "Compressor recycle valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 5: \"Compressor Recycle Valve\""
+      }
+    },
+    {
+      "tag": "FV-206",
+      "xmv": 6,
+      "unit": "K-101",
+      "stream": "S9",
+      "uom": "%",
+      "description": "Purge valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 6: \"Purge Valve (stream 9)\""
+      }
+    },
+    {
+      "tag": "LV-207",
+      "xmv": 7,
+      "unit": "V-101",
+      "stream": "S10",
+      "uom": "%",
+      "description": "Separator pot liquid flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 7: \"Separator Pot Liquid Flow (stream 10)\""
+      }
+    },
+    {
+      "tag": "LV-208",
+      "xmv": 8,
+      "unit": "C-101",
+      "stream": "S11",
+      "uom": "%",
+      "description": "Stripper liquid product flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 8: \"Stripper Liquid Product Flow (stream 11)\""
+      }
+    },
+    {
+      "tag": "FV-209",
+      "xmv": 9,
+      "unit": "C-101",
+      "uom": "%",
+      "description": "Stripper steam valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 9: \"Stripper Steam Valve\""
+      }
+    },
+    {
+      "tag": "TV-210",
+      "xmv": 10,
+      "unit": "R-101",
+      "uom": "%",
+      "description": "Reactor cooling water flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 10: \"Reactor Cooling Water Flow\""
+      }
+    },
+    {
+      "tag": "TV-211",
+      "xmv": 11,
+      "unit": "E-101",
+      "uom": "%",
+      "description": "Condenser cooling water flow valve",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 11: \"Condenser Cooling Water Flow\""
+      }
+    },
+    {
+      "tag": "SC-212",
+      "xmv": 12,
+      "unit": "R-101",
+      "uom": "%",
+      "description": "Agitator speed",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": "teprob.f (Braatz group TE code)",
+        "checked_on": "2026-10-06",
+        "evidence": "XMV 12: \"Agitator Speed\""
+      }
+    }
   ]
 }

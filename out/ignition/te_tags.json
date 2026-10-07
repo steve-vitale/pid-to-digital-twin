@@ -277,12 +277,12 @@
           },
           "tags": [
             {
-              "name": "CondenserCoolingWaterOutletTemperature",
+              "name": "SeparatorCoolingWaterOutletTemp",
               "tagType": "AtomicTag",
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
-              "documentation": "TI-122 | XMEAS 22 | Condenser cooling water outlet temperature",
+              "documentation": "TI-122 | XMEAS 22 | Separator Cooling Water Outlet Temp",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"

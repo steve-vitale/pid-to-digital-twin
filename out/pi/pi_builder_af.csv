@@ -17,7 +17,7 @@ x,TE Plant\R-101,ReactorFeedAnalyzerComponentsAF,Attribute,AI-123: Reactor feed 
 x,TE Plant\R-101,ReactorCoolingWaterFlowValve,Attribute,TV-210: Reactor cooling water flow valve,,Double,%,PI Point,\\%Server%\TE.TV-210.PV
 x,TE Plant\R-101,AgitatorSpeed,Attribute,SC-212: Agitator speed,,Double,%,PI Point,\\%Server%\TE.SC-212.PV
 x,TE Plant,E-101,Element,Product Condenser,Condenser,,,,
-x,TE Plant\E-101,CondenserCoolingWaterOutletTemperature,Attribute,TI-122: Condenser cooling water outlet temperature,,Double,degC,PI Point,\\%Server%\TE.TI-122.PV
+x,TE Plant\E-101,SeparatorCoolingWaterOutletTemp,Attribute,TI-122: Separator Cooling Water Outlet Temp,,Double,degC,PI Point,\\%Server%\TE.TI-122.PV
 x,TE Plant\E-101,CondenserCoolingWaterFlowValve,Attribute,TV-211: Condenser cooling water flow valve,,Double,%,PI Point,\\%Server%\TE.TV-211.PV
 x,TE Plant,V-101,Element,Vapor/Liquid Separator,Separator,,,,
 x,TE Plant\V-101,SeparatorTemperature,Attribute,TI-111: Separator temperature,,Double,degC,PI Point,\\%Server%\TE.TI-111.PV

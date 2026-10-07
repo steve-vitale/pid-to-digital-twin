@@ -57,8 +57,9 @@ and graphics, ready for real equipment tags to be connected.
 
 ## Status
 
-Early. The pipeline runs end to end on a hand-built seed model, and every seed item is marked **unverified** until
-it's checked against published sources. AI extraction, scoring, the Ignition import and live values are planned; see
+Early. The pipeline runs end to end on a hand-built seed model. All 37 instruments and valves have been checked
+against the open TE source code: 36 confirmed, 1 corrected (see `out/te_source_check.md`). Units and streams are
+checked next, in operations review. AI extraction, scoring, the Ignition import and live values are planned; see
 `docs/PLAN.md`.
 
 ## License
@@ -68,5 +69,6 @@ Code: MIT. Third-party datasets keep their own licenses and are downloaded by sc
 ## Run
 
 ```
-python scripts/generate.py
+python scripts/verify_te_source.py --write   # check the model against the open TE source code
+python scripts/generate.py                   # regenerate SVGs, Ignition tags, PI sheet, review sheet
 ```

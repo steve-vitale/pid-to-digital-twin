@@ -88,3 +88,42 @@ requests, then fetch only the entries we need (the OPEN100 subset and the real P
 Datasets in this field are large, and most projects need a small slice of them.
 
 **Lesson:** constraints are design inputs, not blockers.
+
+---
+
+## 5. Check the answer key against a source, with a checker you've tested
+
+**What:** the 37 instruments and valves in the seed model were checked against the open Tennessee Eastman source
+code. 36 matched and 1 was wrong.
+
+**How:**
+- The original 1993 paper is paywalled. The simulation code the research community uses (`teprob.f`, Braatz group,
+  open license) lists every measurement and valve, with units, in its header comments.
+- `scripts/verify_te_source.py` downloads that file and parses the list.
+- It compares each model item's name and units, then writes a verification record into the model: status, source,
+  date, the exact source line, and the old value whenever something was corrected.
+- Run it again any time; correction history is kept.
+
+**Why a script and not a careful read:**
+- A script can be rerun, and anyone can audit it.
+- It also hands the operations review a list in which every row already says where it came from.
+
+**The checker needed checking too:**
+1. **First run:** it flagged "Separator temperature" as wrong because the source abbreviates it to "Sep Temp".
+   That was a false alarm.
+2. **First fix (wrong):** a stop-word list that was too aggressive, which threw away the very words being compared.
+3. **Second fix:** abbreviation handling, plus a small stop-word list.
+4. **Negative control:** we then planted three deliberate errors (a wrong unit, the wrong equipment, an unrelated
+   name). It caught all three. A checker that only ever says "confirmed" proves nothing.
+
+**What it found:** measurement 22 (TI-122) was in the model as the *condenser* cooling-water outlet temperature.
+The source calls it the *separator* cooling-water outlet temperature. Many write-ups say "condenser" because the
+cooling-water valve (XMV 11) is labeled "condenser cooling water flow". The model now uses the source's name.
+Which equipment the tag belongs to is left as an explicit open question for operations review.
+
+**Bonus:** the source also gives each composition analyzer's sampling period and dead time (6 minutes for
+reactor-feed and purge-gas analysis, 15 minutes for product analysis). These map directly to tag scan settings,
+so they're now in the model.
+
+**Lesson:** verify the verifier. Test a checker with known-bad input before you trust its "all clear". And when
+the source itself is ambiguous, record the question; don't quietly resolve it.
