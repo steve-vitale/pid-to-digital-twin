@@ -127,3 +127,35 @@ so they're now in the model.
 
 **Lesson:** verify the verifier. Test a checker with known-bad input before you trust its "all clear". And when
 the source itself is ambiguous, record the question; don't quietly resolve it.
+
+---
+
+## 6. Take 0.2% of a 9.3 GB dataset
+
+**What:** we pulled the 12 real P&IDs from the PID2Graph dataset (the OPEN100 reactor design drawings, plus their
+answer keys) out of a 9.3 GB zip. We downloaded 19.5 MB.
+
+**How:**
+- The server supports HTTP range requests: "send me bytes X to Y".
+- A zip file stores its table of contents at the end. `scripts/fetch_pid2graph.py` wraps the remote file in a small
+  seekable reader, so Python's standard `zipfile` module can read that table of contents over the network (10 MB
+  for all 74,655 entries).
+- It then fetches only the entries we ask for. Nothing else is downloaded.
+
+**What the listing showed (worth knowing before writing a scorer):**
+- **Contents:** the archive has the 12 OPEN100 drawings, 500 synthetic drawings from an earlier dataset (Dataset-P&ID),
+  500 PID2Graph synthetic drawings, and tiled "patched" copies of all three for model training.
+- **Not in the public archive:** the paper's 60 annotated real industrial P&IDs. That leaves OPEN100 as the only real,
+  inspectable test set.
+- **Answer-key format:** each drawing comes with a `.graphml` graph. Nodes are symbols with a class and a bounding box.
+  The 8 classes are connector, crossing, arrow, instrumentation, valve, inlet/outlet, general and background. Edges
+  are the lines between symbols.
+- **No text in the key:** the drawings carry real tags (MOV 1113, TCV 1115, TE 111216A), but the answer key doesn't
+  record any text. Tag reading can't be scored against this key. The TE plant (entry 5) is where tag accuracy gets
+  measured.
+
+**Why it matters:**
+- The extraction prompt's output schema has to map onto these 8 classes, or the score is meaningless.
+- That's decided now, before any model runs, so no one can tune the mapping after seeing results (entry 3).
+
+**Lesson:** read the answer key's format before building the thing it grades.
