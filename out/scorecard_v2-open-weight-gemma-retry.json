@@ -1,0 +1,101 @@
+{
+ "gemini": {
+  "drawings": 5,
+  "failed_runs": 3,
+  "models": [
+   "gemma-4-31b-it"
+  ],
+  "avg_seconds": 3342.1,
+  "cost_usd": 0.27,
+  "strict_located": {
+   "tp": 17,
+   "predicted": 61,
+   "in_key": 469,
+   "precision": 0.279,
+   "recall": 0.036,
+   "f1": 0.064
+  },
+  "strict_classified": {
+   "tp": 14,
+   "predicted": 61,
+   "in_key": 469,
+   "precision": 0.23,
+   "recall": 0.03,
+   "f1": 0.053
+  },
+  "rough_located": {
+   "tp": 56,
+   "predicted": 61,
+   "in_key": 469,
+   "precision": 0.918,
+   "recall": 0.119,
+   "f1": 0.211
+  },
+  "rough_classified": {
+   "tp": 44,
+   "predicted": 61,
+   "in_key": 469,
+   "precision": 0.721,
+   "recall": 0.094,
+   "f1": 0.166
+  },
+  "connections": {
+   "tp": 11,
+   "predicted": 58,
+   "in_key": 1178,
+   "precision": 0.19,
+   "recall": 0.009,
+   "f1": 0.018
+  },
+  "rough_by_class": {
+   "tank": {
+    "tp": 3,
+    "predicted": 5,
+    "in_key": 20,
+    "precision": 0.6,
+    "recall": 0.15,
+    "f1": 0.24
+   },
+   "pump": {
+    "tp": 0,
+    "predicted": 4,
+    "in_key": 6,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   },
+   "valve": {
+    "tp": 2,
+    "predicted": 12,
+    "in_key": 112,
+    "precision": 0.167,
+    "recall": 0.018,
+    "f1": 0.032
+   },
+   "instrumentation": {
+    "tp": 21,
+    "predicted": 22,
+    "in_key": 176,
+    "precision": 0.955,
+    "recall": 0.119,
+    "f1": 0.212
+   },
+   "inlet/outlet": {
+    "tp": 18,
+    "predicted": 18,
+    "in_key": 43,
+    "precision": 1.0,
+    "recall": 0.419,
+    "f1": 0.59
+   },
+   "general": {
+    "tp": 0,
+    "predicted": 0,
+    "in_key": 112,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+   }
+  }
+ }
+}

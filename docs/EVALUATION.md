@@ -116,8 +116,12 @@ What this supports:
   dedicated local GPU, which has no shared queue.
 - **Labeled diagnostic on the 7 that completed:** "found" F1 averages about 0.54. Precision is high (0.93: when it
   reports a symbol, it's right) and recall is low (it misses most symbols).
-- **Retry:** the 5 timed-out drawings are being retried with a longer timeout, reported separately as a retry and
-  never mixed into first try.
+- **Retry with a 90-minute timeout (labeled as a retry):** drawings 5 and 6 completed in about 4 minutes each (F1
+  0.38 and 0.55). Drawings 0, 9 and 10 timed out **again**, the same three both times, two of them among the densest
+  sheets. That is consistent with the model or the hosted service stalling on certain images, not just a slow
+  queue. We can't tell which from outside, and on a self-hosted model you could.
+- **Across both attempts:** 9 of 12 drawings completed, averaging about 0.53 "found" F1, against about 0.90 for the
+  frontier models.
 - **Bottom line so far:** on this task a ~30B open model is well behind the frontier cloud models. For a plant that
   can't send drawings out, that's the trade-off to weigh: fine-tuning on your own sheets (AT_YOUR_PLANT.md §6) is
   how that gap usually narrows, and it should be measured with this same suite before and after.

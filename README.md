@@ -22,7 +22,7 @@ independent answer key: same images, same prompt, same scorer for every model.
 | GPT (gpt-6.1-sol, via Codex) | 0.85–0.87 | 0.53 |
 | Claude (claude-opus-5-5) | 0.85 | 0.42 |
 | Gemini (gemini-3.1-pro) | 0.44 first try → 0.74 after a format fix | 0.24 |
-| Gemma 4 31B (open weights, can run offline) | 0.25 first try; 5 of 12 timed out on a shared hosted endpoint (retry in progress) | 0.02 |
+| Gemma 4 31B (open weights, can run offline) | 0.25 first try (5 of 12 timed out). After a retry, 9 of 12 completed at ~0.53; the same 3 dense sheets never finished | 0.02 |
 
 **What that means in practice:**
 - Instruments and off-page connectors are close to solved (0.98–0.99 for all three).
@@ -117,7 +117,7 @@ it at a real site.
 |---|---|
 | Seed model, generator, platform outputs | Done |
 | Answer keys (TE verified; OPEN100 fetched) | Done |
-| Extraction comparison (3 cloud models × 3 runs) | Done; open-weight lane running |
+| Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
 | Operations review of the Tennessee Eastman extraction | Next |
 | Ignition import + live values from public TE simulation data | Planned |
 

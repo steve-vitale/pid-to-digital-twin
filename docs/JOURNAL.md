@@ -297,3 +297,42 @@ run offline:
   That's how AI tooling fits inside MOC instead of around it.
 - **Sensitive drawings and open-weight models:** an open-weight model can run with no network at all.
   [AT_YOUR_PLANT.md §6](AT_YOUR_PLANT.md) covers what that takes and roughly what it costs.
+
+---
+
+## 9. Ask the offline question with data, not opinions
+
+**What:** Gemma 4 31B, an open-weight model a plant could run with no network connection, went through the same
+evaluation as the cloud models.
+
+**How:**
+- Same prompt v2, same 12 drawings, same scorer.
+- Run through Google's hosted copy of the open weights. That's the cheapest way to see the model's behaviour before
+  anyone buys a GPU.
+
+**What happened, reported the way the rules require:**
+- **First try:** 5 of 12 calls hit the 30-minute timeout and scored zero, for 0.25 "found + right class". That
+  number stays the headline.
+- **Retry with a 90-minute timeout, labeled as a retry:** 2 of the 5 finished in about 4 minutes each. The other
+  three (drawings 0, 9, 10) timed out again, the same three both times.
+- **Where it completed:** high precision (when it names a symbol, it's usually right) and low recall (it misses
+  most). About 0.53 "found" F1 across the 9 completed drawings, against about 0.90 for the frontier models.
+
+**Why it matters:**
+- **For plants that can't send drawings out,** this is the honest trade-off today: a ~30B open model gives up a
+  lot of accuracy out of the box on this task, and it stalls on some dense sheets.
+- **That doesn't make it the wrong choice.** It means the decision needs numbers. Annotating your own sheets and
+  tuning the model (AT_YOUR_PLANT.md §6) is how the gap usually narrows, and this same suite is how you'd prove it
+  narrowed.
+
+**Lesson:** "can we run it offline?" is a measurable question. Measure it with the same rules as everything else,
+including the failures, before anyone signs a hardware purchase order.
+
+**At your plant:**
+- **Before sizing hardware,** run your 3–5 annotated sheets through candidate open-weight models on rented or
+  hosted compute. It costs dollars, not a GPU purchase.
+- **Record timeouts and stalls as failures,** not as missing data. A model that hangs on your densest sheets will
+  hang in production too.
+- **Decide what you'll accept before you look.** Write down the accuracy threshold and the share of sheets that
+  must complete before results come in. Otherwise the procurement decision turns into goalpost-moving (§2 of
+  EVALUATION.md).
