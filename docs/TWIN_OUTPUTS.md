@@ -32,7 +32,7 @@ A small example package for Claude on sheets 0–5 is committed under `out/twin/
 | File | What it is | Load it into |
 |---|---|---|
 | `plant_model.json` | The asset model. Site → system (one per sheet) → equipment → line items → instruments, plus streams, off-page connectors and pairs, and per-item provenance (sheet, box, source run, model, confidence, status). It is a superset of `data/te_process_model.json`: `meta`, `units`, `streams`, `instruments` and `final_elements` keep their meaning, and `meta.model_kind = "extracted_twin"` tells the generator which path to take. | Your asset register, after review |
-| `review_queue.csv` | One row per item (symbols and connections), least certain first. Same plain-language and `OPS_` columns as `out/ops_review_sheet.csv`, plus `rank`, `why_check_this`, `sheet`, `symbol`, location, `tag_status` and `how_attached`. | A spreadsheet, for the reviewer |
+| `review_queue.csv` | One row per item (symbols and connections), riskiest first. Columns `tier` (red / amber / green), `risk_score` and `why` come from the risk rating (see "Risk tiers" below). Same plain-language and `OPS_` columns as `out/ops_review_sheet.csv`, plus `rank`, `why_check_this` (the converter's own flags), `sheet`, `symbol`, location, `tag_status` and `how_attached`. | A spreadsheet, for the reviewer |
 | `ignition/tags.json` | Ignition 8 tag JSON, same shape as `out/ignition/te_tags.json`. UDT types per equipment class (`Equipment_Tank`, `Equipment_Pump`), per instrument type (`Instrument_PT`, `Instrument_TCV`, …) and per line-item class. Instances are foldered Site/System/Equipment, with an `_Unassigned` folder per system. | Ignition Designer → Tag Browser → Import Tags (JSON) |
 | `pi/pi_builder_af.csv` | PI Builder-style flat sheet, same columns as `out/pi/pi_builder_af.csv`. Elements are Site / System / Equipment (plus `Unassigned`), with one PI Point attribute per instrument. | PI Builder (Excel add-in) → Publish |
 | `svg/sheet_<n>.svg` | Each symbol drawn at its extracted box, each extracted connection as a straight line. Every symbol group carries `data-asset`, `data-tag`, `data-class`, `data-confidence`, `data-status` (and `data-parent` / `data-pair`). Low confidence shows red and dashed; placeholder tags show orange. | Ignition Perspective (Drawing / embedded SVG), bound by `data-asset` |
@@ -96,9 +96,53 @@ written. To get AF XML:
 2. Export it.
 3. Template the converter's output from that real export.
 
+## Risk tiers: where to spend review time
+
+Every symbol and every connection gets a risk score (roughly, the chance it is wrong) and a tier. The queue is
+sorted red first, then amber, then green, riskiest first inside each tier.
+
+| Tier | Meaning | What to do |
+|---|---|---|
+| **Red** | More likely wrong than right (risk 50% or more). | Look closely at the sheet. Delete, relabel or fix. |
+| **Amber** | Probably right, with at least one warning sign. | Quick check against the sheet. |
+| **Green** | No strong warning sign. On the development sheets, about 1 in 20 green items was wrong (1 in 8 to 1 in 16 when each sheet was left out of the fitting). | Spot-check a sample, then accept as a batch. |
+
+The `why` column says what raised the risk, in plain words. The rating doesn't trust the model's own confidence
+much, because Codex and Gemini say 0.9–1.0 for almost everything. It uses checks that need no answer key:
+
+- **Did the other models see it?** Claude, Codex and Gemini each read the same sheet. A symbol only one of them
+  found, or a link only one of them drew, is suspect.
+- **Did the same model see it twice?** Each model reads the sheet whole and again as four tiles. A symbol found in
+  only one of those passes is suspect.
+- **Is it on a line?** A valve or instrument with no drawn line touching it, or with a straight line running
+  right through it (a real symbol interrupts its line), is suspect.
+- **Is the tag sensible?** A missing tag where one is expected, or an instrument tag that doesn't read as letters
+  plus a loop number. A duplicate box on the same spot points to a double count.
+- **For links:** whether the model drew the link itself or only the line tracer found it, whether the tracer
+  joins the two ends, and whether the ends are symbols the other passes saw.
+
+How it was built (`scripts/confidence.py`, fit by `scripts/score_triage.py --fit`): one logistic regression for
+symbols (10 signals) and one for links (7), fit on development sheets 0–5 only, with every weight forced to be zero
+or positive, so a warning sign can only raise risk. Signals that didn't help got a weight of zero: placeholder tags
+(placeholders are real symbols with an unassigned tag), duplicate tags, the `general` class, network size and,
+notably, the model's own confidence. The green and red cut-offs were also set on the development sheets. Results:
+`out/triage_<label>_<split>.md`.
+
+**Limits a reviewer should know:**
+
+- **It can only rank what the system output.** A symbol every model missed isn't in the queue at all. Someone still
+  has to scan each sheet for missing items, especially small valves and instruments.
+- **Models can agree and still be wrong.** The rating trusts agreement. When the models make the same mistake
+  (they read the same drawing, and every traced run uses the same line tracer), the item can land in green or amber.
+- **Without the other models' runs,** the agreement signals are neutral (0.5). The rating still works, but it
+  ranks less sharply.
+- **Instrument parents aren't rated here.** The risk is about "is this item real and labeled right", not "which
+  equipment does it hang under". Parent flags stay in `why_check_this`.
+
 ## What must be reviewed before anything goes live
 
-Work the queue top-down. The tiers, in order:
+Work the queue top-down by tier (above). The converter's own flags are still in `why_check_this`. Without a risk
+rating, the queue falls back to this order:
 
 1. low extraction confidence;
 2. off-page connectors that didn't pair, and pairs whose descriptions share nothing;

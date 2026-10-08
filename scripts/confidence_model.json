@@ -1,0 +1,79 @@
+{
+ "symbol": {
+  "features": [
+   "xm_miss",
+   "xp_miss",
+   "detached",
+   "dup_box",
+   "tag_placeholder",
+   "tag_missing",
+   "tag_malformed",
+   "tag_dup",
+   "is_general",
+   "low_conf"
+  ],
+  "coef": [
+   2.7458,
+   1.1518,
+   0.6357,
+   1.4534,
+   0.0,
+   2.0398,
+   4.7835,
+   0.0251,
+   0.0,
+   0.0
+  ],
+  "intercept": -3.1918
+ },
+ "link": {
+  "features": [
+   "end_xm",
+   "end_xp",
+   "not_model",
+   "not_traced",
+   "net_size",
+   "xm_miss",
+   "low_conf"
+  ],
+  "coef": [
+   0.0,
+   0.9491,
+   1.1491,
+   3.2136,
+   0.0,
+   3.154,
+   0.0
+  ],
+  "intercept": -4.0566
+ },
+ "tiers": {
+  "green_max": 0.0755,
+  "red_min": 0.5,
+  "rule": "(fixed before looking at any holdout): green = items whose dev error rate stays at or below 5%\nwhen taken from the lowest risk up; red = items with a predicted risk of at least 50% (more likely wrong than\nright). Both thresholds come from the development drawings only."
+ },
+ "fit": {
+  "labels": [
+   "v2-named-fields",
+   "r2-tiles-2x2",
+   "r2-trace",
+   "r2-tiles-trace"
+  ],
+  "tools": [
+   "claude",
+   "codex",
+   "gemini"
+  ],
+  "sheets": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "l2": 1.0,
+  "fitted_at": "2026-10-08T10:08:31+00:00",
+  "by": "scripts/score_triage.py --fit"
+ }
+}
