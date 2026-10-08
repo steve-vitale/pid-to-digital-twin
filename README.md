@@ -14,6 +14,7 @@ the approach without compromising its safety and data governance.
 | You are… | Read this |
 |---|---|
 | **Evaluating the work** (2 minutes) | [Results](#results-so-far) and [Try it in Ignition](#try-it-in-ignition) below, then [what it cost](docs/COSTS.md). For the judgment calls, journal entries [7](docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled), [13](docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized) and [14](docs/JOURNAL.md#14-the-ignition-build-the-twin-in-a-real-gateway-judged-by-the-gateway) |
+| **Someone who wants to see it run, with no setup** | [The one-click demo](docker/README.md): install Docker Desktop, double-click `start-demo.bat` |
 | **An Ignition user who wants to see it run** | [Load the twin into your own Ignition](docs/IGNITION_QUICKSTART.md) (about 15 minutes, free trial) |
 | **Planning something like this at a plant** | [At your plant](docs/AT_YOUR_PLANT.md), [From demo to a real site](docs/FROM_DEMO_TO_A_REAL_SITE.md), [Costs](docs/COSTS.md) |
 | **Checking or reproducing the numbers** | [Tutorial](#tutorial-reproduce-it), [How "done well" is defined](docs/EVALUATION.md), [Pre-registered goal and results](docs/GOAL.md) |
@@ -104,8 +105,14 @@ see [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 |---|---|---|
 | ![TE overview with live values](docs/screenshots/ignition-te-normal.png) | ![Fault replay, PI-107 red](docs/screenshots/ignition-te-fault6-alarm.png) | ![OPEN100 sheet 0: mapped points live, the rest not connected](docs/screenshots/ignition-open100-sheet0-mapped.png) |
 
-There's no public live instance. It runs on your own gateway, and the free trial is enough. With the gateway's
-settings in place, one command fetches the data, builds and verifies the twin, and keeps it live:
+**Three ways to run it:**
+- **No setup:** [the one-click demo](docker/README.md). Install Docker Desktop, then double-click `start-demo.bat`;
+  the screen opens in your browser. It's checked from scratch on GitHub's machines whenever it changes.
+- **Your own Ignition:** [the 15-minute quickstart](docs/IGNITION_QUICKSTART.md), by hand through the web UI.
+- **Scripted, with every check:** [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
+
+There's no public live instance. It runs on your own computer, and Ignition's free trial is enough. With the
+gateway's settings in place, one command fetches the data, builds and verifies the twin, and keeps it live:
 `python scripts/demo.py --build --verify`.
 
 **What it cost:** $16.57 of metered model spend (a $25 cap), plus two flat-rate subscriptions. Machine time is
@@ -238,6 +245,7 @@ it at a real site.
 | [`out/twin/r2-tiles-trace/codex/`](out/twin/r2-tiles-trace/codex/) | The 12-sheet extracted twin: `plant_model.json`, `review_queue.csv` (risk-tiered), Ignition tags, PI AF sheet, per-sheet SVGs |
 | [`out/ignition/gateway/`](out/ignition/gateway/) | The Ignition kit (tag import, Perspective project) and dated verification receipts in `receipts/` |
 | [`out/mapping/`](out/mapping/), `out/review/` | Point-mapping reports, and the change records each applied review writes |
+| [`docker/`](docker/README.md), `docker-compose.yml`, `*-demo.bat` | The one-click demo: Ignition restored from a prepared backup, plus the two data servers, and the double-click launchers |
 | [`runs/`](runs/README.md) | Raw model run records (not committed) and the Gemini spend ledger (committed) |
 | [`NOTICE.md`](NOTICE.md), [`LICENSE`](LICENSE), [`CITATION.cff`](CITATION.cff) | Licensing (MIT code; CC BY-SA for files derived from PID2Graph) and how to cite |
 
@@ -269,6 +277,7 @@ it at a real site.
 | Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done; also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Done; verified in a running gateway |
 | Round 4: robustness on old-scan images, pre-registered | Done (measured; where it breaks is reported) |
+| One-click Docker demo (`start-demo.bat`), checked from scratch in CI | Done |
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet; not imported into a PI System, by decision (below) | Scoped |

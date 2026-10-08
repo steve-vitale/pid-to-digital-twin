@@ -758,3 +758,42 @@ production.
 **At your plant:** make the acceptance checks part of every deployment, not just the first one, and keep their
 receipts. Intermittent "it imported fine" failures only show up when something checks every time.
 
+## 20. A one-click demo, built and tested without being able to run Docker
+
+**What:** an optional way to run the twin with no setup. Install Docker Desktop, double-click `start-demo.bat`, and
+the plant screen opens in the browser. Three containers:
+- the official Ignition image, restoring a prepared demo backup on first start;
+- two small containers running the data servers, so nobody needs Python.
+
+`fault-demo.bat` trips the alarm, and `stop-demo.bat` stops it. The guide is
+[docker/README.md](../docker/README.md), written for someone who has never used a terminal.
+
+**How, under a constraint:** Docker Desktop installed fine on the build machine, but its Linux layer needed a
+restart. The machine was unattended and 600 miles from its owner, so a restart was not an option. Instead:
+- **The demo backup came from a second, throwaway Ignition** run natively on the same machine, built with
+  `build_gateway.py --demo-backup`. Its temporary API key and permission level were deleted before the backup was
+  downloaded through the web UI. `prepare_demo_backup.py` then set a neutral gateway name, because the download
+  carried the machine's hostname. It refuses if any API key, extra user or personal string remains.
+- **The whole demo is tested on GitHub's own machines,** which have Docker. A workflow starts it from nothing, opens
+  the screens in a real browser, and checks three things:
+  - 36 live values on the plant screen;
+  - 24 live and 12 "not connected" on sheet 0;
+  - the reactor pressure alarm turning red in the fault replay.
+
+  It passed on the first run.
+- **The Windows launchers were tested locally,** with a stand-in `docker` command and the throwaway gateway answering
+  the "is Ignition up?" check.
+
+**What testing caught:**
+- **The window title "P&ID" broke the start script for everyone.** In a batch file, `&` means "and then run".
+- **A build setting was read before it was loaded,** so the first throwaway build still pointed at `localhost`.
+- **I was about to document that restarting resets Ignition's 2-hour trial.** Earlier the same day, a restart had
+  shown the opposite. The guide gives the real steps instead.
+
+**Lesson:** "easy for anyone" is a claim like any other. It needs the same from-nothing test as the code: a check
+that starts where a newcomer starts and looks at what they would see.
+
+**At your plant:** for a pilot, give operations and reviewers the twin in a form they can start themselves on a test
+machine, and keep it from a throwaway, credential-free build. The fastest way to collect operator feedback is to
+remove the setup between them and the screen.
+

@@ -1,5 +1,8 @@
 # Load the twin into your own Ignition (about 15 minutes)
 
+*Rather not install Ignition yourself? The [one-click Docker demo](../docker/README.md) runs the same thing with a
+double-click.*
+
 What you get: a live Tennessee Eastman overview screen whose reactor-pressure alarm fires on a replayed fault, plus
 12 extracted P&ID sheets as screens showing honestly that nothing behind them is connected yet. Everything comes
 from files committed in this repo. There's no public live demo: it runs on your own gateway, and the free trial is

@@ -35,10 +35,17 @@ jobs:
           pip install playwright
           python -m playwright install --with-deps chromium
           sleep 15
-          python scripts/check_docker_demo.py --shots demo-shots
+          set -o pipefail
+          python scripts/check_docker_demo.py --shots demo-shots 2>&1 | tee check.txt
       - name: Logs
         if: always()
-        run: docker compose logs --tail 200 > demo-logs.txt 2>&1 || true
+        run: |
+          docker compose logs --tail 200 > demo-logs.txt 2>&1 || true
+          # Publish the result lines as annotations: readable on the run page without signing in.
+          grep -E "TE overview|OPEN100 sheet|fault 6|ALL PASS|FAILED|Error|Traceback" check.txt 2>/dev/null \
+            | head -8 | while read -r line; do echo "::notice title=demo check::$line"; done || true
+          grep -iE "error|exception|fail" demo-logs.txt | grep -v "Dclock" | tail -5 \
+            | while read -r line; do echo "::notice title=container log::${line:0:300}"; done || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
