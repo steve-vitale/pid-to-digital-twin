@@ -522,27 +522,38 @@ def twin_svgs(model, images_dir=None, out_dir=None):
     return svgs
 
 
-TWIN_REVIEW_COLS = (["rank", "why_check_this"] + REVIEW_COLS
+TWIN_REVIEW_COLS = (["rank", "tier", "risk_score", "why", "why_check_this"] + REVIEW_COLS
                     + ["sheet", "symbol", "location_on_sheet_0_1000", "tag_status", "how_attached"])
+TIER_ORDER = {"red": 0, "amber": 1, "green": 2}  # round-3 risk tiers (scripts/confidence.py)
 
 ITEM_TYPE = {"tank": "equipment (vessel/tank)", "pump": "equipment (pump/compressor)", "valve": "valve",
              "general": "in-line item", "instrumentation": "instrument", "inlet/outlet": "off-page connector"}
 
 
 def twin_review_rows(model):
-    """One row per item, least certain first. Tiers, in order: low confidence; off-page connector not paired;
-    placeholder tag; instrument with no drawn connection; other flags; then everything else. Inside a tier the
-    lowest confidence comes first."""
+    """One row per item, least certain first. When the model carries round-3 risk ratings (scripts/confidence.py,
+    added by build_twin.py), rows sort by risk tier (red, amber, green), then highest risk first, and carry the
+    tier, risk_score and plain-language why. Without ratings, the round-2 order: low confidence; off-page connector
+    not paired; placeholder tag; instrument with no drawn connection; other flags; then everything else. Inside a
+    tier the lowest confidence comes first. The round-2 flags stay in why_check_this either way."""
     low = model["meta"].get("low_confidence_threshold", 0.75)
+    rated = "risk_model" in model["meta"]
     names = {x["id"]: _label(x) for x in model["units"] + model["instruments"] + model["line_items"]
              + model["offpage_connectors"]}
     failed = {s["sheet"] for s in model["systems"] if s.get("extraction_failed")}
     rows = []
 
-    def add(item, kind, what, belongs, reasons, conf, sheet, symbol, box, attach=""):
+    def add(item, kind, what, belongs, reasons, conf, sheet, symbol, box, attach="", risk=None):
         tier = min((t for t, _ in reasons), default=6)
         why = "; ".join(r for _, r in sorted(reasons)) or "routine check"
-        rows.append(((tier, conf if conf is not None else -1, item), [
+        rt = (risk or {}).get("tier") or ("amber" if rated else "")
+        rs = (risk or {}).get("risk_score")
+        rwhy = (risk or {}).get("why") or ("not rated by the risk model; check by hand" if rated else "")
+        key = (tier, conf if conf is not None else -1, item)
+        if rated:
+            key = (TIER_ORDER.get(rt, 1), -(rs if rs is not None else 0.0)) + key
+        rows.append((key, [
+            rt, "" if rs is None else round(rs, 3), rwhy,
             why, item, kind, what, belongs, "", f"{model['meta']['model_id']} sheet {sheet} symbol {symbol}",
             "" if conf is None else conf, "unverified", "", "", "", "", "", sheet, symbol,
             "" if box is None else " ".join(f"{v:g}" for v in box), "", attach]))
@@ -572,7 +583,7 @@ def twin_review_rows(model):
             r.append((5, "equipment has no tag; supply one"))
         p = u["provenance"][0]
         add(u["id"], ITEM_TYPE.get(u["class"], u["class"]), _label(u), u["system"], r, u["confidence"],
-            p["sheet"], p["symbol"], p["box_0_1000"])
+            p["sheet"], p["symbol"], p["box_0_1000"], risk=u.get("risk"))
     for x in model["instruments"]:
         r = common(x)
         if x["parent_method"] == "geometry_nearest":
@@ -580,9 +591,15 @@ def twin_review_rows(model):
                          f'({names.get(x["parent"], x["parent"])}) by position only'))
         elif x["parent_method"] == "no_candidate":
             r.append((4, "no connection and nothing nearby: instrument has no parent"))
-        elif x["parent_method"] == "via_instrument_chain":
+        elif str(x["parent_method"]).endswith("via_instrument_chain"):
             r.append((5, "attached through another instrument; confirm what it measures"))
-        elif x.get("parent_agrees_with_position") is False:
+        elif x.get("along_line_status") in ("not_on_traced_line", "no_asset_reached_along_line"):
+            # Mild: the parent came from a fallback rule, which was still right most of the time on dev.
+            r.append((5, f'not reached along a traced line ({x["along_line_status"].replace("_", " ")}); parent '
+                         f'{names.get(x["parent"], x["parent"])} came from a fallback rule'))
+        elif x.get("parent_agrees_with_position") is False and x["parent_method"] == "linked":
+            # Only for the shared-network "linked" rule, where disagreeing with position meant wrong ~7 in 10 on
+            # dev. Along-line parents that disagree with position were mostly right on dev, so no flag for them.
             r.append((4, f'drawn connection says it belongs to {names.get(x["parent"], x["parent"])}, but the '
                          f'nearest symbol is {names.get(x.get("position_nearest"), x.get("position_nearest"))}'))
         elif x.get("linked_candidates", 1) > 1:
@@ -595,14 +612,14 @@ def twin_review_rows(model):
         what = f'{_label(x)}: {x["variable"]} instrument' if x.get("variable") else _label(x)
         belongs = f'{names.get(x["unit"], "unassigned")} (attached to {names.get(x["parent"], "nothing")})'
         add(x["id"], "instrument", what, belongs, r, x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"],
-            x["parent_method"])
+            x["parent_method"], risk=x.get("risk"))
     for x in model["line_items"]:
         r = common(x)
         if not x["unit"]:
             r.append((5, "no path to any equipment; filed under Unassigned"))
         p = x["provenance"][0]
         add(x["id"], ITEM_TYPE.get(x["class"], x["class"]), _label(x), names.get(x["unit"], "unassigned"), r,
-            x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"], x["unit_method"])
+            x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"], x["unit_method"], risk=x.get("risk"))
     for x in model["offpage_connectors"]:
         r = common(x)
         if not x["pair"]:
@@ -616,7 +633,7 @@ def twin_review_rows(model):
             r.append((5, f'paired with {names.get(x["pair"], x["pair"])} on another sheet; confirm the pairing'))
         p = x["provenance"][0]
         add(x["id"], "off-page connector", x["text"] or "(no text read)", x["system"], r, x["confidence"],
-            p["sheet"], p["symbol"], p["box_0_1000"], x["pair_method"] or "")
+            p["sheet"], p["symbol"], p["box_0_1000"], x["pair_method"] or "", risk=x.get("risk"))
     for st in model["streams"]:
         r = []
         c = st.get("confidence")
@@ -627,13 +644,15 @@ def twin_review_rows(model):
             r.append((5, "cross-sheet link from off-page pairing; confirm"))
         what = f'connection: {names.get(st["from"], st["from"])} - {names.get(st["to"], st["to"])}'
         add(st["id"], "connection", what, "", r or [(6, "check the line exists and joins these two items")],
-            c, st.get("sheet") or "", f'{st.get("from_symbol", "")}-{st.get("to_symbol", "")}'.strip("-"), None)
+            c, st.get("sheet") or "", f'{st.get("from_symbol", "")}-{st.get("to_symbol", "")}'.strip("-"), None,
+            risk=st.get("risk"))
     rows.sort(key=lambda r: r[0])
     status = {x["id"]: x["tag_status"] for x in model["units"] + model["instruments"] + model["line_items"]
               + model["offpage_connectors"]}
     out = []
+    ts, it = TWIN_REVIEW_COLS.index("tag_status") - 1, TWIN_REVIEW_COLS.index("item_id") - 1
     for n, (_, row) in enumerate(rows, 1):
-        row[17] = status.get(row[1], "")
+        row[ts] = status.get(row[it], "")
         out.append([n] + row)
     return out
 

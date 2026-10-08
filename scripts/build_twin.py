@@ -709,6 +709,7 @@ def main():
     built = []
     for tool, run_dir in run_dirs.items():
         model = build(tool, run_dir, sheet_list, Path(args.images), register, label, args.parent_rule)
+        __import__("confidence").annotate_model(model, run_dir, sheet_list, Path(args.images))  # round-3 risk tiers
         out = Path(args.out) / tool if args.out and len(run_dirs) > 1 else Path(args.out) if args.out \
             else ROOT / "out" / "twin" / label / tool
         out.mkdir(parents=True, exist_ok=True)
