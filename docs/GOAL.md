@@ -264,3 +264,39 @@ random order catches 20%).
 **What a reviewer gets now:** the twin built from Codex M3 on all 12 sheets has a review queue of 2,886 items:
 377 red (13%), 676 amber (23%) and 1,833 green (64%), each with a plain-language reason. Green items are about
 95% right on the same-style holdout; spot-checking a sample of them stays part of the process.
+
+# Round 4 (written before any round-4 model run): does it survive old scans?
+
+**Question:** real archives are scans: faded, blurred, low resolution, yellowed, with speckle and worn patches. How
+much does the declared method's review load grow as image quality drops? And where does it break: the models'
+reading, or the code line tracer, which was tuned on clean drawings?
+
+**Images:** holdout A (OPEN100 drawings 6–11), degraded by `scripts/degrade_scans.py` at three cumulative levels:
+- L1, photocopy;
+- L2, old scan;
+- L3, bad scan.
+
+Every operation keeps geometry fixed, so the original answer keys apply unchanged. The levels were set by eye on
+drawing 6, before any model saw a degraded image (`docs/screenshots/scan-levels.png`). Skew and rotation are not
+tested.
+
+**Method:** the declared method M3, unchanged:
+- 2×2 tiles, 0.15 overlap, `extraction/prompt_v2.md`;
+- then `scripts/trace_connections.py` with its default options, run on the degraded image.
+
+**Tools:** GPT (Codex) and Claude, both on subscriptions. Gemini is left out to keep model spend flat, per the
+project owner's direction after round 3.
+
+**Measures:**
+- **Primary:** review load per level, against the clean M3 numbers already recorded (holdout A: GPT 17.8, Claude
+  32.4).
+- **Secondary:** symbol F1, connection F1, and failed tiles or drawings. Plus one isolating comparison: at L3, the
+  tracer run on the CLEAN image with the L3 symbols. That separates the models' loss from the tracer's.
+
+**Rules:**
+- No prompt, tiling or tracer change for this round. Each level is run once per tool.
+- Failures count as zero.
+- Every number is reported, including a level where one tool does better than at a cleaner level, which would be
+  noise. Run-to-run noise from round 2's repeats is quoted beside the results.
+- No decision rides on this round. It is a measurement for planning, so there is nothing to tune toward.
+
