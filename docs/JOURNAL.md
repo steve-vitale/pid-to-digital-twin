@@ -530,3 +530,64 @@ amber to check quickly, and 1,833 green to batch-accept with spot checks, out of
 - **Ask what the tool's confidence is based on.** If the answer is "the model says it's sure", that's not enough.
 - **Expect agreement-based checks to under-trust your best source.** A drawing reading that no other source
   confirms might be the one that's right. Route it to a person rather than rejecting it.
+
+## 14. The Ignition build: the twin in a real gateway, judged by the gateway
+
+**What:** the twin now runs inside an Ignition 8.3 gateway:
+- the Tennessee Eastman plant, live from the open simulation data, with alarms;
+- the extracted 12-sheet twin, honestly "not connected";
+- one Perspective screen per drawing.
+
+A verifier checks the running gateway against nine checks drawn from how Ignition itself judges data. Before its
+results counted, it had to catch five faults planted on purpose. It caught all five, and all nine checks pass.
+Details and receipts: [IGNITION_BUILD.md](IGNITION_BUILD.md).
+
+**How:**
+- **Everything is scripted against the gateway's REST API:** backup first, then an OPC connection to a small replay
+  server, a separate `Twin` tag provider, one tag import, and the screens.
+- **The verifier never reads our own files alone.** It exports the configuration back from the gateway, and it reads
+  live values the way any outside system would: through the gateway's encrypted OPC UA server.
+- **Quality as truth:**
+  - The 36 tags fed by the replay must read Good.
+  - The one instrument with no data in the replay (agitator speed) and the 359 placeholders must not.
+  - A "Good" on a tag with no source is the worst failure a twin can have: it looks fine and is invented.
+- **Alarms proven, not assumed:** the verifier switches the replay to fault 6 (loss of A feed) and watches the
+  reactor pressure alarm go active, using setpoints from published sources only.
+
+**Why:** the extraction work produced files. A digital twin is the running system. "The import said success" and
+"the gateway holds what we meant" turned out to be different statements, several times.
+
+**What went wrong, and what each mistake taught:**
+- **Twice, "accepted" was not "working".**
+  - The gateway saved a connection with a missing settings block (HTTP 200), which then failed at runtime.
+  - An alarm expression read fine but was evaluated only once at startup: it would never have turned true in a
+    fault.
+
+  Neither shows up until you check the running state.
+- **I blamed the gateway, wrongly.** I briefly recorded "changing a tag's type breaks it" as an Ignition bug. A clean
+  reproduction in a throwaway provider showed the real cause was my expression. The claim came out.
+- **The verifier changed what it verifies.** Its "can this client write at all?" test wrote to a review field, and
+  Ignition stores that write as configuration, so the next fidelity check failed. Fixed by writing a probe tag
+  outside the twin.
+- **A refused write proves nothing on its own.** The read-only check uses a write-capable account on purpose, and
+  first proves that account *can* write somewhere. Otherwise "write refused" might only mean "this user has no
+  rights".
+
+**Lessons:**
+- Verify the running system, not the deployment receipt.
+- Every check needs a case it must fail on. The planted faults are what make the nine passes mean something.
+- When the evidence contradicts your story, rewrite the story, including the parts you already wrote down.
+
+**At your plant:**
+- **Run the same checks on your own twin or SCADA build.**
+  - Export the configuration back and diff it against what was approved (that's Management of Change evidence).
+  - Make sure no tag without a live source can read Good.
+  - Prove each critical alarm on a replayed event before go-live.
+- **Keep the twin's tags in their own provider,** read-only at three layers (device, connection, tag). Give the build
+  account its own security level, not an administrator role.
+- **Approve OPC UA client certificates by fingerprint.** Don't accept them all.
+- **Take a gateway backup before every import, and keep the config in version control.** Then "what changed and
+  when" has an answer.
+- **Treat engineering ranges and alarm setpoints as engineering data with a source.** Where none exists (spans
+  here), label the value as assumed and send it to operations to confirm.
+

@@ -46,6 +46,16 @@ sealed sets nobody tuned on:
   drawn line. On a different style it slipped (67.6% vs 70.8%), so the two rules' disagreements go to review.
 - **An open-weight model you can run offline** (Gemma 4 31B, round 1) trailed far behind: about 0.53 detection F1
   where it finished, and it stalled on dense sheets.
+- **It runs in a real Ignition gateway, judged by the gateway.** The Tennessee Eastman plant is live from open
+  simulation data, with alarms. The 12-sheet extracted twin is honestly "not connected", and every drawing has a
+  Perspective screen.
+  - A verifier runs nine checks against the running gateway. Among them: the gateway holds exactly what was sent, no
+    tag without a source ever reads Good, outside writes are refused, and the reactor pressure alarm fires on a
+    replayed fault.
+  - Before its passes counted, it had to catch five faults planted on purpose. It caught all five, and all nine
+    checks pass. See [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
+
+![Ignition Perspective screen during the fault-6 replay: reactor pressure above its 2,895 kPa limit shows red; the agitator speed, which has no data source, shows a not-connected overlay](docs/screenshots/ignition-te-fault6-alarm.png)
 
 Full results, every method tried (including the losses), and caveats: [docs/GOAL.md](docs/GOAL.md) →
 Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
@@ -84,8 +94,8 @@ agents' own mistakes and mine.
 
 ## Tutorial: reproduce it
 
-Requires Python 3.10+ (standard library only). Model runs need the relevant CLI or API key; everything else runs
-offline.
+Requires Python 3.10+. Steps 1–2 use the standard library only; the rest need `pip install -r requirements.txt`.
+Model runs need the relevant CLI or API key; everything else runs offline.
 
 **1. Check the seed model against its source.** This verifies the Tennessee Eastman model against the open TE
 simulation code (36 of 37 items confirmed, 1 corrected):
@@ -124,7 +134,16 @@ python scripts/build_twin.py --label runs/my-run-traced/gemini/ --sheets 0,1,2 -
 The twin package lands in `out/twin/`: asset hierarchy, review queue, Ignition tags, PI AF rows, and per-sheet SVGs.
 See [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md).
 
-**7. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
+**7. Build it into Ignition and verify it** (needs an Ignition 8.3 gateway; the free trial works). The build
+script takes a backup, then creates the replay connection, tag provider, tags and screens. The verifier plants five
+faults, confirms each is caught, restores the gateway, then runs all nine checks:
+```
+python scripts/ignition/build_gateway.py --fresh
+python scripts/ignition/verify_gateway.py --controls
+```
+Setup (API key, HTTPS, OPC UA certificate) is in [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
+
+**8. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.
 
 ## Read next
@@ -135,10 +154,10 @@ it at a real site.
 | [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
+| [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
 | [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources |
-| [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | Extracted sheets to a twin starter kit: hierarchy, Ignition, PI AF, SVG, review queue |
 
 ## Status
 
@@ -149,10 +168,9 @@ it at a real site.
 | Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
-| Next: Ignition build with live values; operator review of the Tennessee Eastman output | Next |
+| Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
 | Operations review of the Tennessee Eastman extraction | Next |
-| Ignition import + live values from public TE simulation data | Planned |
 
 ## Data and credits
 

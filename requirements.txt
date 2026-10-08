@@ -1,4 +1,8 @@
-﻿# Optional: only for round-2 image processing (tiling, traced connections). The core pipeline is stdlib-only.
+﻿# The core pipeline (seed model, generator) is stdlib-only.
+# Round-2 image processing (tiling, traced connections):
 numpy
 pillow
 opencv-python-headless
+# Ignition build and verifier (scripts/ignition/):
+asyncua
+cryptography

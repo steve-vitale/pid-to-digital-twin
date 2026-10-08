@@ -95,8 +95,11 @@ A small example package for Claude on sheets 0–5 is committed under `out/twin/
   `MSCV-XXX`) are kept as written, flagged, and never filled in.
 - **Stream direction** is `unknown`. Extraction gives which items connect, not flow direction.
 - **Read-only intent.** Instrument PV members are written with `"readOnly": true`, because the starter kit is for
-  monitoring, never control (docs/AT_YOUR_PLANT.md). Check the property survives import on your Ignition version.
-  Don't rely on it alone: enforce read-only at the OPC connection and in tag security as well.
+  monitoring, never control (docs/AT_YOUR_PLANT.md). Checked on Ignition 8.3.10: the property survives import, and
+  outside writes are refused (V1 and V7 in [IGNITION_BUILD.md](IGNITION_BUILD.md)). Don't rely on it alone: enforce
+  read-only at the OPC connection and in tag security as well.
+- **Scripted import.** Instead of the Designer, `scripts/ignition/build_gateway.py` imports this file into a running
+  gateway over its REST API, adds Perspective screens built from `svg/`, and `verify_gateway.py` checks the result.
 
 ## AF XML: not emitted
 
