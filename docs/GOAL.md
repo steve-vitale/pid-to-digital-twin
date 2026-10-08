@@ -161,3 +161,50 @@ Review load: corrections per 100 key items, lower is better.
   next to the primary score.
 - **Round-3 direction:** choose an instrument's parent by distance *along* the traced line, not by shared network
   membership. Tune it on development, then score it once on the holdouts.
+
+---
+
+# Round 3 (written before any round-3 work): a confidence marker, and the twin regression
+
+**Constraint: no new Gemini spend.** Round 3 reuses the existing extraction runs (whole-sheet, tiled and traced, for
+Claude, Codex and Gemini on all 12 OPEN100 drawings plus holdout B). The splits are unchanged: tune on dev 0–5,
+score once on holdout A (6–11) and holdout B.
+
+## Goal 1: point reviewers at the most problematic items
+
+Give every item the system outputs (each symbol and each link) a **risk rating** and a tier: **green** (safe to
+batch-accept), **amber** (quick check) or **red** (look closely). The rating may only use signals available without
+the answer key at run time. Examples:
+- agreement between models;
+- agreement between the whole-sheet and tiled passes;
+- whether the symbol sits on a traced line;
+- agreement between the two parent rules;
+- whether the tag is well-formed or a placeholder;
+- the model's own confidence.
+
+**Measured on the holdouts (an item is "right" if the scorer matches it to the answer key with the correct class, or
+for a link, if the key contains it):**
+1. **Errors caught early:** the share of all wrong items that land in the riskiest 20% of items. A random order
+   catches 20%. The rating must beat the model's own self-confidence ordering on both holdouts.
+2. **Green precision and green share:** the share of green items that are right, and the share of all items that
+   are green. That's work a reviewer can batch-accept.
+3. **Calibration:** the error rate by tier. It should rise from green to amber to red.
+
+Tier thresholds are set on dev only. **Stated limitation:** risk ratings can only rank items the system *output*.
+They can't point at symbols the system missed entirely. Missed items still need a person scanning the sheet, which
+the review queue says.
+
+## Goal 2: fix the twin's parent assignment
+
+Choose each instrument's parent by distance along the traced line network (the nearest non-instrument asset reached
+by following the line), instead of by shared network membership.
+
+**Measured:** instrument parent accuracy on holdout A, using the same score_twin.py definition and the Codex M3
+symbols. It's a win only if it beats **both** the round-2 M3 twin (87.0%) and the round-1 twin (90.9%). Holdout B is
+reported; its keys have no tanks or pumps, so parents there are valves and in-line items.
+
+## Decision rules
+- Each round-3 method is scored once per holdout.
+- Everything tried is reported, including what doesn't help.
+- The round-2 primary score (review load) is reported alongside, to show the twin fix doesn't trade away connection
+  quality.
