@@ -140,4 +140,7 @@ What it doesn't support:
 | `scripts/run_extraction.py` | Runs a tool; records model, prompt hash, image hash, time, cost |
 | `scripts/scorecard.py`, `scripts/per_drawing.py` | Aggregate and per-drawing views |
 | `extraction/prompt.md`, `extraction/prompt_v2.md` | Prompt versions; never edited in place once used |
+| `scripts/tiling.py`, `extraction/tile_preface.md` | Round-2 tiled extraction: tile grid, merge rules (stated in the docstring), optional whole-sheet links; run with `run_extraction.py --tiles 2x2` |
+| `scripts/test_tiling.py` | Controls for the tile merge: geometry, synthetic perfect-extractor round trip, and the dev-key oracle (`--oracle-dev`) that shows how many links seams lose by construction |
+| `scripts/remerge_tiles.py` | Re-applies the merge (or adds whole-sheet links) to stored tile replies without new model calls |
 | `out/scorecard_<label>.md` | Published results per run label |
