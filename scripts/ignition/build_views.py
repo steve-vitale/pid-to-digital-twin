@@ -61,13 +61,15 @@ def view(w, h, children):
                      "children": children}}
 
 
-def te_overview(provider, alarmed):
+def te_overview(provider, alarmed, hidden=frozenset()):
     svg = (ROOT / "out" / "svg" / "overview.svg").read_text(encoding="utf-8")
     w, h = svg_size(svg)
     kids = [image(svg, w, h)]
     for m in re.finditer(r'<g id="([^"]+)" data-tag="([^"]+)" data-unit="([^"]+)" data-uom="([^"]*)" '
                          r'transform="translate\(([\d.]+),([\d.]+)\)"', svg):
         _, tag, unit, uom, x, y = m.groups()
+        if tag in hidden:  # operations asked not to show it on the operator screen
+            continue
         base = f"[{provider}]TE_Plant/{unit}/{tag}"
         below = 27 if int(re.sub(r"\D", "", tag)) >= 200 else 20  # valves (2xx) have their tag text underneath
         kids.append(value_label(tag, float(x) - 23, float(y) + below, base + "/PV", uom,
@@ -90,7 +92,7 @@ def asset_paths(provider_doc, provider):
     return out
 
 
-def open100_sheets(twin_dir, provider_doc, provider):
+def open100_sheets(twin_dir, provider_doc, provider, hidden=frozenset()):
     paths = asset_paths(provider_doc, provider)
     views = {}
     for f in sorted((twin_dir / "svg").glob("sheet_*.svg"), key=lambda p: int(p.stem.split("_")[1])):
@@ -100,15 +102,16 @@ def open100_sheets(twin_dir, provider_doc, provider):
         for m in re.finditer(r'<g id="[^"]+" data-asset="([^"]+)"[^>]*data-class="instrumentation"[^>]*>.*?'
                              r'<circle class="inst" cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"', svg):
             asset, cx, cy, r = m.group(1), *map(float, m.groups()[1:])
-            if asset in paths and not any(k["meta"]["name"] == asset for k in kids):
+            if asset in paths and asset not in hidden and not any(k["meta"]["name"] == asset for k in kids):
                 kids.append(value_label(asset, cx + r + 2, cy - 7, paths[asset] + "/PV"))
         views[f"OPEN100/Sheet_{f.stem.split('_')[1]}"] = view(w, h, kids)
     return views
 
 
-def project_zip(provider_doc, twin_dir, provider, alarmed):
-    views = {"TE/Overview": te_overview(provider, alarmed)}
-    views.update(open100_sheets(twin_dir, provider_doc, provider))
+def project_zip(provider_doc, twin_dir, provider, alarmed, hidden=frozenset()):
+    """hidden: tags and asset ids operations asked not to show on screens (scripts/apply_review.py)."""
+    views = {"TE/Overview": te_overview(provider, alarmed, hidden)}
+    views.update(open100_sheets(twin_dir, provider_doc, provider, hidden))
     pages = {"/": {"title": "TE plant", "viewPath": "TE/Overview"}}
     for p in views:
         if p.startswith("OPEN100/"):

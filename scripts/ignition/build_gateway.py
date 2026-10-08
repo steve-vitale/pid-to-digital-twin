@@ -41,6 +41,9 @@ SIM_URL = "opc.tcp://localhost:4841/te-sim"
 SIM_NS = "urn:pid-digital-twin:te-sim"  # namespace URI, not index: survives a server restart that renumbers
 VERIFY_USER = "twin-verifier"
 PROBE_PATH = "[default]_verifier/WriteProbe"  # the verifier's positive write control, kept outside the Twin provider
+# OPC connections for data sources named in the twin's point mappings (scripts/map_points.py). A site lists its own.
+DATA_CONNECTIONS = {"OPEN100-Demo": "opc.tcp://localhost:4842/open100-demo"}
+PRIORITY = {"High": "High", "Medium": "Medium", "Low": "Low"}
 
 # Alarm setpoints come from published sources, never from the replay data.
 ALARMS = {
@@ -98,47 +101,94 @@ def te_tags(model):
                     # direct child. Parameters are NOT substituted inside string literals: concatenate outside
                     # the quotes. A wrong path reads Bad quality, never False, so a broken alarm check can't pass.
                     "expression": 'isAlarmActive("[' + PROVIDER + ']" + {PathToParentFolder} + "/PV")'}
+    review = {"name": "ReviewStatus", "tagType": "AtomicTag", "valueSource": "memory", "dataType": "String",
+              "value": "unverified", "documentation": "Operations review decision (scripts/apply_review.py)."}
     params = {"Tag": {"dataType": "String", "value": ""}, "OPCServer": {"dataType": "String", "value": OPC_CONN}}
     # AlarmActive lives only on the alarmed type: isAlarmActive() on a tag with no alarms configured reads Bad.
     # Wrapping it in try() would also hide a broken path, so the type split is the honest fix.
     types = [
         {"name": "TE_Measurement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Measured process value")]},
+         "tags": [pv("Measured process value"), review]},
         {"name": "TE_AlarmedMeasurement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Measured process value, with alarms"), alarm_active]},
+         "tags": [pv("Measured process value, with alarms"), alarm_active, review]},
         {"name": "TE_FinalElement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Controller output to the final element, %")]},
+         "tags": [pv("Controller output to the final element, %"), review]},
     ]
     units = {u["id"]: {"name": u["id"], "tagType": "Folder", "documentation": u["name"], "tags": []}
              for u in model["units"]}
     ranges = {}
+    rv = {"rejected": [], "hidden": [], "priority_set": [], "needs_moc": [], "status": {}}
     for it in model["instruments"] + model["final_elements"]:
+        ops = it.get("ops_review") or {}
+        status = ops.get("status", "unverified")
+        rv["status"][it["tag"]] = status
+        if status == "rejected":  # operations says it isn't real: left out, kept in the model with the decision
+            rv["rejected"].append(it["tag"])
+            continue
+        if ops.get("show_on_screen") is False:
+            rv["hidden"].append(it["tag"])
         is_fe = "xmv" in it
         col = cols.get(it["tag"])
         mean = sum(r[col] for r in rows) / len(rows) if col is not None else 0.0
         lo, hi, why = eng_range(it, mean)
         member = {"name": "PV", "tagType": "AtomicTag", "engUnit": it["uom"], "engLow": lo, "engHigh": hi}
+        asked = ops.get("alarm_priority")
         if it["tag"] in ALARMS:
+            # Operations may set the priority of a published alarm. They may not remove it or create one here:
+            # that changes what alarms exist, which is a change review (MOC) with an approved setpoint.
+            prio = PRIORITY.get(asked)
             member["alarms"] = [{"name": a["name"], "mode": "AboveValue", "setpointA": a["setpointA"],
-                                 "priority": a["priority"], "notes": a["source"]} for a in ALARMS[it["tag"]]]
+                                 "priority": prio or a["priority"],
+                                 "notes": a["source"] + (f" | priority set by operations review ({ops.get('by')}, "
+                                                         f"{ops.get('on')})" if prio else "")}
+                                for a in ALARMS[it["tag"]]]
+            if prio:
+                rv["priority_set"].append({"tag": it["tag"], "priority": prio})
+            elif asked == "none":
+                rv["needs_moc"].append({"tag": it["tag"], "request": "remove alarm", "applied": False})
+        elif asked in PRIORITY:
+            rv["needs_moc"].append({"tag": it["tag"], "request": f"new {asked} alarm (no published setpoint)",
+                                    "applied": False})
         source = f'{"XMV" if is_fe else "XMEAS"} {it.get("xmv", it.get("xmeas"))}'
         note = ""
         if col is None:
             note = " | NO DATA SOURCE: not in the replay data set, so it must read Bad, never a value"
         elif "-" in str(it.get("xmeas", "")):
             note = " | analyzer: the replay exposes the first component only"
+        if status != "unverified":
+            note += f" | operations review: {status} ({ops.get('by')}, {ops.get('on')})"
+        members = [member]
+        if status != "unverified":
+            members.append({"name": "ReviewStatus", "tagType": "AtomicTag", "value": status})
         units[it["unit"]]["tags"].append({
             "name": it["tag"], "tagType": "UdtInstance",
             "typeId": "TE_FinalElement" if is_fe else
                       "TE_AlarmedMeasurement" if it["tag"] in ALARMS else "TE_Measurement",
             "documentation": f'{it["description"]} | {source} | range {lo}-{hi} {it["uom"]} ({why}){note}',
             "parameters": {"Tag": {"dataType": "String", "value": it["tag"]}},
-            "tags": [member]})
+            "tags": members})
         ranges[it["tag"]] = {"low": lo, "high": hi, "source": why, "has_data": col is not None}
     plant = {"name": "TE_Plant", "tagType": "Folder",
              "documentation": "Tennessee Eastman plant (Downs & Vogel 1993), live from the open replay data",
              "tags": list(units.values())}
-    return types, plant, ranges
+    return types, plant, ranges, rv
+
+
+def twin_review(twin_dir):
+    """Review state and point mappings of the extracted twin, for the screens and the verifier."""
+    m = json.loads((twin_dir / "plant_model.json").read_text(encoding="utf-8"))
+    out = {"status": {}, "rejected": [], "hidden": [], "mapped": {}}
+    for k in ("units", "instruments", "line_items"):
+        for x in m[k]:
+            o = x.get("ops_review") or {}
+            out["status"][x["id"]] = o.get("status", "unverified")
+            if o.get("status") == "rejected":
+                out["rejected"].append(x["id"])
+            elif o.get("show_on_screen") is False:
+                out["hidden"].append(x["id"])
+            if k == "instruments" and x.get("data_point") and o.get("status") != "rejected":
+                out["mapped"][x["id"]] = x["data_point"]
+    return out
 
 
 def twin_tags(twin_dir):
@@ -152,16 +202,20 @@ def twin_tags(twin_dir):
 
 def build_file(twin_dir):
     model = json.loads(MODEL.read_text(encoding="utf-8"))
-    te_types, plant, ranges = te_tags(model)
+    te_types, plant, ranges, te_review = te_tags(model)
     tw_types, site = twin_tags(twin_dir)
+    tw_review = twin_review(twin_dir)
     doc = {"name": "", "tagType": "Provider", "tags": [
         {"name": "_types_", "tagType": "Folder", "tags": te_types + tw_types}, plant, site]}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "twin_provider.json").write_text(json.dumps(doc, indent=1), encoding="utf-8")
     meta = {"provider": PROVIDER, "opc_connection": OPC_CONN, "sim_url": SIM_URL, "sim_namespace": SIM_NS,
-            "twin_source": twin_dir.relative_to(ROOT).as_posix(), "alarms": ALARMS, "te_ranges": ranges}
+            "twin_source": twin_dir.relative_to(ROOT).as_posix(), "alarms": ALARMS, "te_ranges": ranges,
+            "te_review": te_review, "twin_review": tw_review,
+            "data_connections": {n: u for n, u in DATA_CONNECTIONS.items()
+                                 if any(p["server"] == n for p in tw_review["mapped"].values())}}
     (OUT / "build_meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
-    return doc
+    return doc, meta
 
 
 def check(status, body, what):
@@ -268,8 +322,9 @@ def main():
                     help="delete and recreate the Twin provider before importing (after the backup), so nothing "
                          "from an earlier build can survive into this one")
     args = ap.parse_args()
-    doc = build_file(ROOT / args.twin)
-    views_zip, views = build_views.project_zip(doc, ROOT / args.twin, PROVIDER, set(ALARMS))
+    doc, meta = build_file(ROOT / args.twin)
+    hidden = set(meta["te_review"]["hidden"]) | set(meta["twin_review"]["hidden"])
+    views_zip, views = build_views.project_zip(doc, ROOT / args.twin, PROVIDER, set(ALARMS), hidden)
     (OUT / f"{build_views.PROJECT}.zip").write_bytes(views_zip)
     print(f"wrote {(OUT / 'twin_provider.json').relative_to(ROOT).as_posix()} and {build_views.PROJECT}.zip "
           f"({len(views)} views)")
@@ -302,6 +357,11 @@ def main():
     upsert(g, "ignition/opc-connection", OPC_CONN,
            "Tennessee Eastman replay (open data). Read-only: the twin never writes to the process.",
            {"profile": {"type": "com.inductiveautomation.OpcUaServerType", "readOnly": True}, "settings": settings})
+    for name, url in meta["data_connections"].items():  # sources named by the twin's point mappings
+        extra = json.loads(json.dumps(settings))
+        extra["endpoint"] = dict(extra["endpoint"], endpointUrl=url, discoveryUrl=url)
+        upsert(g, "ignition/opc-connection", name, "Data source for mapped twin points. Read-only.",
+               {"profile": {"type": "com.inductiveautomation.OpcUaServerType", "readOnly": True}, "settings": extra})
     if args.fresh:
         s, cur = g.get(f"/data/api/v1/resources/find/ignition/tag-provider/{PROVIDER}")
         if s == 200:

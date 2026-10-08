@@ -1,0 +1,275 @@
+{
+ "model": "out/twin/r2-tiles-trace/codex/plant_model.json",
+ "io_list": "open100_sheet0_demo.csv",
+ "sheets_covered": [
+  "0"
+ ],
+ "mapped": [
+  {
+   "asset": "S0-IN004",
+   "drawing_tag": "TE 14084A",
+   "io_tag": "TE-14084A",
+   "point": "TE_14084A",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN005",
+   "drawing_tag": "TE 14084B",
+   "io_tag": "TE-14084B",
+   "point": "TE_14084B",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN011",
+   "drawing_tag": "TE 14089A",
+   "io_tag": "TE 14089A",
+   "point": "TE_14089A",
+   "how": "exact"
+  },
+  {
+   "asset": "S0-IN012",
+   "drawing_tag": "TE 14089B",
+   "io_tag": "TE 14089B",
+   "point": "TE_14089B",
+   "how": "exact"
+  },
+  {
+   "asset": "S0-IN022",
+   "drawing_tag": "TE 14090A",
+   "io_tag": "TE-14090A",
+   "point": "TE_14090A",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN023",
+   "drawing_tag": "TE 14090B",
+   "io_tag": "TE-14090B",
+   "point": "TE_14090B",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN025",
+   "drawing_tag": "TE 14091A",
+   "io_tag": "te_14091a",
+   "point": "TE_14091A",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN026",
+   "drawing_tag": "TE 14091B",
+   "io_tag": "te_14091b",
+   "point": "TE_14091B",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN029",
+   "drawing_tag": "TE 14092A",
+   "io_tag": "TE-14092A",
+   "point": "TE_14092A",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN030",
+   "drawing_tag": "TE 14092B",
+   "io_tag": "TE-14092B",
+   "point": "TE_14092B",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN033",
+   "drawing_tag": "TE 14093A",
+   "io_tag": "TE-14093A",
+   "point": "TE_14093A",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN032",
+   "drawing_tag": "TE 14093B",
+   "io_tag": "TE-14093B",
+   "point": "TE_14093B",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN007",
+   "drawing_tag": "PT 14085",
+   "io_tag": "PT-14085",
+   "point": "PT_14085",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN008",
+   "drawing_tag": "PT 14086",
+   "io_tag": "PT-14086",
+   "point": "PT_14086",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN009",
+   "drawing_tag": "PT 14087",
+   "io_tag": "PT-14087",
+   "point": "PT_14087",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN010",
+   "drawing_tag": "PT 14088",
+   "io_tag": "PT-14088",
+   "point": "PT_14088",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN006",
+   "drawing_tag": "RE 1402",
+   "io_tag": "RE-1402",
+   "point": "RE_1402",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN021",
+   "drawing_tag": "RE 1403",
+   "io_tag": "RE-1403",
+   "point": "RE_1403",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN001",
+   "drawing_tag": "TCV 1401",
+   "io_tag": "TCV-1401",
+   "point": "TCV_1401_POS",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN013",
+   "drawing_tag": "TCV 1402",
+   "io_tag": "TCV-1402",
+   "point": "TCV_1402_POS",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN024",
+   "drawing_tag": "TCV 1403",
+   "io_tag": "TCV-1403",
+   "point": "TCV_1403_POS",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN031",
+   "drawing_tag": "TCV 1406",
+   "io_tag": "TCV-1406",
+   "point": "TCV_1406_POS",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN035",
+   "drawing_tag": "TCV 1408",
+   "io_tag": "TCV-1408",
+   "point": "TCV_1408_POS",
+   "how": "normalized tag"
+  },
+  {
+   "asset": "S0-IN036",
+   "drawing_tag": "TCV 1409",
+   "io_tag": "TCV-1409",
+   "point": "TCV_1409_POS",
+   "how": "normalized tag"
+  }
+ ],
+ "not_in_io_list": [
+  {
+   "asset": "S0-IN002",
+   "tag": "FT 1401",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN003",
+   "tag": "FT 1401",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN014",
+   "tag": "AORV XXX",
+   "tag_status": "placeholder",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN015",
+   "tag": "PSV 1404",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN016",
+   "tag": "PSV 1405",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN017",
+   "tag": "PSV 1406",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN018",
+   "tag": "PSV 1407",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN019",
+   "tag": "MS 4010",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN020",
+   "tag": "MSIV 1402",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN027",
+   "tag": "MSV 1404",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN028",
+   "tag": "MSV 1405",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  },
+  {
+   "asset": "S0-IN034",
+   "tag": "MSBV 1407",
+   "tag_status": "as_extracted",
+   "sheet": "0"
+  }
+ ],
+ "not_on_drawing": [
+  {
+   "row": 27,
+   "tag": "PT-14094",
+   "point": "PT_14094",
+   "description": "synthetic demo point (not on the drawing: a later addition in this made-up story)"
+  },
+  {
+   "row": 28,
+   "tag": "TE-14095A",
+   "point": "TE_14095A",
+   "description": "synthetic demo point (not on the drawing: a later addition in this made-up story)"
+  }
+ ],
+ "ambiguous": [
+  {
+   "row": 26,
+   "tag": "FT-1401",
+   "assets": [
+    "S0-IN002",
+    "S0-IN003"
+   ]
+  }
+ ]
+}

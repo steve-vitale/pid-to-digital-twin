@@ -258,17 +258,32 @@ REVIEW_COLS = ["item_id", "item_type", "what_it_is", "belongs_to", "units", "sou
                "OPS_alarm_priority_H_M_L_none", "OPS_notes"]
 
 
+def ops_status(item):
+    """The operations review decision (scripts/apply_review.py): confirmed / corrected / rejected / unverified."""
+    return (item.get("ops_review") or {}).get("status", "unverified")
+
+
+def ops_cols(item):
+    """Earlier review decisions, printed back into the OPS_ columns so a regenerated sheet picks up where the
+    reviewer left off. Corrections are already applied to the model, so the correction value column stays empty."""
+    o = item.get("ops_review") or {}
+    word = {"confirmed": "confirm", "corrected": "confirm", "rejected": "reject"}.get(o.get("status"), "")
+    show = {True: "Y", False: "N"}.get(o.get("show_on_screen"), "")
+    prio = {"High": "H", "Medium": "M", "Low": "L", "none": "none"}.get(o.get("alarm_priority"), "")
+    return [word, "", show, prio, o.get("notes") or ""]
+
+
 def review_rows(model):
     unit_names = {u["id"]: u["name"] for u in model["units"]}
     rows = []
     for u in model["units"]:
         rows.append([u["id"], "equipment", u["name"], "", "", u.get("source", ""), "seed",
-                     u["verification"]["status"], "", "", "", "", ""])
+                     u["verification"]["status"]] + ops_cols(u))
     for it in model["instruments"] + model["final_elements"]:
         kind = "control valve / output" if "xmv" in it else "measurement"
         rows.append([it["tag"], kind, it["description"], unit_names[it["unit"]], it["uom"],
                      f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {it.get("xmeas", it.get("xmv"))}',
-                     "seed", it.get("verification", {}).get("status", "unverified"), "", "", "", "", ""])
+                     "seed", it.get("verification", {}).get("status", "unverified")] + ops_cols(it))
     return rows
 
 # ---------------------------------------------------------------- extracted twin (scripts/build_twin.py output)
@@ -343,8 +358,16 @@ def twin_ignition(model):
         if type_name.startswith("Instrument_"):
             params["PointName"] = {"dataType": "String",
                                    "value": f"{TWIN_PLACEHOLDER}_{ign_name(_label(item), set())}"}
-        return {"name": ign_name(_label(item), used), "tagType": "UdtInstance", "typeId": type_name,
+            point = item.get("data_point") or {}  # set by scripts/map_points.py from a plant I/O list
+            if point:
+                params["OPCServer"] = {"dataType": "String", "value": point["server"]}
+                params["BasePath"] = {"dataType": "String", "value": point["base_path"]}
+                params["PointName"] = {"dataType": "String", "value": point["point"]}
+        inst = {"name": ign_name(_label(item), used), "tagType": "UdtInstance", "typeId": type_name,
                 "documentation": _twin_doc(item, extra), "parameters": params}
+        if ops_status(item) != "unverified":  # the review decision travels to the gateway (V2 checks it)
+            inst["tags"] = [{"name": "ReviewStatus", "tagType": "AtomicTag", "value": ops_status(item)}]
+        return inst
 
     sys_folders = {}
     for s in model["systems"]:
@@ -377,13 +400,21 @@ def twin_ignition(model):
             sf["folder"]["tags"].append(f)
         return sf["unassigned"]
 
+    # Items operations rejected (not real) are left out of the platform files; they stay in the model with the
+    # decision. Items under rejected equipment go to _Unassigned until someone re-parents them.
+    live = {u["id"] for u in model["units"] if ops_status(u) != "rejected"}
     for u in model["units"]:
-        equip_folder(u["id"])
+        if u["id"] in live:
+            equip_folder(u["id"])
     for x in model["line_items"]:
-        f, used = equip_folder(x["unit"]) if x["unit"] else unassigned(x["system"])
+        if ops_status(x) == "rejected":
+            continue
+        f, used = equip_folder(x["unit"]) if x["unit"] in live else unassigned(x["system"])
         f["tags"].append(instance(x, udt("LineItem", x["class"]), used))
     for x in model["instruments"]:
-        f, used = equip_folder(x["unit"]) if x["unit"] else unassigned(x["system"])
+        if ops_status(x) == "rejected":
+            continue
+        f, used = equip_folder(x["unit"]) if x["unit"] in live else unassigned(x["system"])
         extra = f'attached to {x["parent"]} ({x["parent_method"]}) | '
         f["tags"].append(instance(x, udt("Instrument", x["isa_letters"] or "Unknown"), used, extra))
     site = {"name": ign_name(model["site"]["name"].split(" (")[0], set()), "tagType": "Folder",
@@ -425,10 +456,14 @@ def twin_pi_rows(model):
             el_path[key] = (f"{parent}\\{name}", set())
         return el_path[key]
 
+    live = {u["id"] for u in model["units"] if ops_status(u) != "rejected"}
     for u in model["units"]:
-        element(u["id"])
+        if u["id"] in live:
+            element(u["id"])
     for x in model["instruments"]:
-        path, used = element(x["unit"]) if x["unit"] else unassigned(x["system"])
+        if ops_status(x) == "rejected":
+            continue
+        path, used = element(x["unit"]) if x["unit"] in live else unassigned(x["system"])
         name = af_name(_label(x), used)
         point = re.sub(r"[^A-Za-z0-9_.-]+", "_", _label(x))
         rows.append(["x", path, name, "Attribute",
@@ -474,6 +509,8 @@ def twin_svgs(model, images_dir=None, out_dir=None):
         sx, sy = W / 1000, H / 1000
         boxes, groups = {}, []
         for it in items:
+            if ops_status(it) == "rejected":
+                continue
             for p in it["provenance"]:
                 if p["sheet"] != sheet:
                     continue
@@ -492,13 +529,13 @@ def twin_svgs(model, images_dir=None, out_dir=None):
                 groups.append(
                     f'<g id="{it["id"]}-s{sheet}-{escape(p["symbol"])}" data-asset="{it["id"]}" '
                     f'data-tag={quoteattr(tag)} data-class="{escape(it["class"])}" data-confidence="{conf}" '
-                    f'data-status="{it["verification"]["status"]}" data-symbol={quoteattr(p["symbol"])}{extra}'
+                    f'data-status="{ops_status(it)}" data-symbol={quoteattr(p["symbol"])}{extra}'
                     f'{" class=" + quoteattr(cls) if cls else ""}><title>{escape(it["id"])} {escape(tag)} '
-                    f'({escape(it["class"])}, confidence {conf}, unverified)</title>'
+                    f'({escape(it["class"])}, confidence {conf}, {ops_status(it)})</title>'
                     f'{TWIN_SHAPES[it["class"]](x0, y0, x1, y1)}{label}</g>')
         lines = []
         for st in model["streams"]:
-            if st.get("sheet") != sheet:
+            if st.get("sheet") != sheet or ops_status(st) == "rejected":
                 continue
             a, b = boxes.get(st["from_symbol"]), boxes.get(st["to_symbol"])
             if a and b:
@@ -540,10 +577,13 @@ def twin_review_rows(model):
     rated = "risk_model" in model["meta"]
     names = {x["id"]: _label(x) for x in model["units"] + model["instruments"] + model["line_items"]
              + model["offpage_connectors"]}
+    objs = {x["id"]: x for x in model["units"] + model["instruments"] + model["line_items"]
+            + model["offpage_connectors"] + model["streams"]}
     failed = {s["sheet"] for s in model["systems"] if s.get("extraction_failed")}
     rows = []
 
     def add(item, kind, what, belongs, reasons, conf, sheet, symbol, box, attach="", risk=None):
+        obj = objs.get(item, {})
         tier = min((t for t, _ in reasons), default=6)
         why = "; ".join(r for _, r in sorted(reasons)) or "routine check"
         rt = (risk or {}).get("tier") or ("amber" if rated else "")
@@ -555,7 +595,7 @@ def twin_review_rows(model):
         rows.append((key, [
             rt, "" if rs is None else round(rs, 3), rwhy,
             why, item, kind, what, belongs, "", f"{model['meta']['model_id']} sheet {sheet} symbol {symbol}",
-            "" if conf is None else conf, "unverified", "", "", "", "", "", sheet, symbol,
+            "" if conf is None else conf, ops_status(obj)] + ops_cols(obj) + [sheet, symbol,
             "" if box is None else " ".join(f"{v:g}" for v in box), "", attach]))
 
     def common(x):

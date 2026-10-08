@@ -163,7 +163,8 @@ def load_sheet(run_dir, sheet, images_dir):
                       "confidence": float(conf) if isinstance(conf, (int, float)) else None,
                       "placeholder": bool(tag and PLACEHOLDER.search(tag))})
     links = [(str(c.get("from")), str(c.get("to"))) for c in pred.get("connections", [])]
-    return {"sheet": sheet, "run_file": path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path),
+    path = Path(path).resolve()  # a relative --label path used to skip the line below and keep Windows separators
+    return {"sheet": sheet, "run_file": path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.as_posix(),
             "model": r.get("model"), "tool": r.get("tool"), "failed": not r.get("prediction"),
             "error": r.get("error") or r.get("parse_error"), "image": img.name, "image_size": size,
             "items": items, "links": links, "dropped": dropped,

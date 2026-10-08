@@ -4,9 +4,10 @@ Every check reads the running gateway (REST export for configuration, its OPC UA
 own generated files alone. Our files are the claim; the gateway is the evidence.
 
   V1 import fidelity      what the gateway holds == what we sent, both ways (tags and screens)
-  V2 reconciliation       every twin item has exactly one tag, and every tag maps back to a twin item
+  V2 reconciliation       every twin item has exactly one tag, every tag maps back to a twin item, items operations
+                          rejected have none, and each tag's ReviewStatus matches the review decision
   V3 binding resolution   every screen binding names a tag that exists; every drawn instrument has a binding
-  V4 quality honesty      fed tags read Good; tags with no source read not-Good; no false-good
+  V4 quality honesty      fed and mapped tags read Good; tags with no source read not-Good; no false-good
   V5 liveness             fed tags' timestamps advance (a Good value that never changes is stale)
   V6 plausibility         live values inside the engineering range the gateway holds (reported, never clipped)
   V7 read-only            config marks every process tag read-only, and a real write attempt is refused
@@ -45,6 +46,7 @@ ROOT = bg.ROOT
 OUT = bg.OUT
 P = bg.PROVIDER
 SIM = ROOT / "scripts" / "ignition" / "te_sim_server.py"
+DEMO = ROOT / "scripts" / "ignition" / "demo_points_server.py"
 LIMIT = 15  # failures listed per check in the receipt
 
 
@@ -155,12 +157,30 @@ def v1(held, sent_doc, sent_views):
 
 # ---------------------------------------------------------------- V2
 
+def ops(x):
+    return (x.get("ops_review") or {}).get("status", "unverified")
+
+
 def v2(held, te_model, twin_model):
     fails = []
-    te_tags = [i["tag"] for i in te_model["instruments"] + te_model["final_elements"]]
+    te_items = te_model["instruments"] + te_model["final_elements"]
+    tw_items = [x for k in ("units", "instruments", "line_items") for x in twin_model[k]]
+    te_tags = [i["tag"] for i in te_items if ops(i) != "rejected"]
     held_te = Counter(inst["parameters"]["Tag"]["value"] for _, inst in held.instances("TE_Plant"))
-    twin_ids = [x["id"] for k in ("units", "instruments", "line_items") for x in twin_model[k]]
+    twin_ids = [x["id"] for x in tw_items if ops(x) != "rejected"]
     held_tw = Counter(inst["parameters"]["AssetId"]["value"] for _, inst in held.instances("OPEN100"))
+    # The review decision must reach the gateway: ReviewStatus on each instance equals the model's decision.
+    want = {("TE", i["tag"]): ops(i) for i in te_items} | {("OPEN100", x["id"]): ops(x) for x in tw_items}
+    reviewed, mismatched = 0, 0
+    for label, root, key in (("TE", "TE_Plant", "Tag"), ("OPEN100", "OPEN100", "AssetId")):
+        for path, inst in held.instances(root):
+            m = held.member(inst, "ReviewStatus")
+            got = (m or {}).get("value", "unverified")
+            exp = want.get((label, inst["parameters"][key]["value"]), "unverified")
+            reviewed += exp != "unverified"
+            if got != exp:
+                mismatched += 1
+                fails.append(f"{path}: ReviewStatus in the gateway is {got!r}, the review decision is {exp!r}")
     for label, want, have in (("TE", te_tags, held_te), ("OPEN100", twin_ids, held_tw)):
         for item in want:
             if have[item] == 0:
@@ -169,9 +189,11 @@ def v2(held, te_model, twin_model):
                 fails.append(f"{label} {item}: {have[item]} tags for one item")
         for item in set(have) - set(want):
             fails.append(f"{label} {item}: tag with no twin item")
-    return result("V2", "Reconciliation", "One asset, one tag", not fails,
+    rejected = sum(ops(x) == "rejected" for x in te_items + tw_items)
+    return result("V2", "Reconciliation", "One asset, one tag; the review decision reaches the gateway", not fails,
                   {"te_items": len(te_tags), "te_tags": sum(held_te.values()), "open100_items": len(twin_ids),
-                   "open100_tags": sum(held_tw.values())}, fails)
+                   "open100_tags": sum(held_tw.values()), "rejected_left_out": rejected,
+                   "reviewed_items": reviewed, "review_status_mismatches": mismatched}, fails)
 
 
 # ---------------------------------------------------------------- V3
@@ -193,7 +215,7 @@ def bindings(view):
     return out
 
 
-def v3(held, twin_dir):
+def v3(held, twin_dir, hidden=frozenset()):
     tags = held.tag_paths()
     fails, n = [], 0
     for name, view in sorted(held.views.items()):
@@ -208,7 +230,7 @@ def v3(held, twin_dir):
         else:
             svg = (twin_dir / "svg" / f"sheet_{name.split('_')[-1]}.svg").read_text(encoding="utf-8")
             drawn = set(re.findall(r'data-asset="([^"]+)"[^>]*data-class="instrumentation"', svg))
-        for item in sorted(drawn - on_screen):
+        for item in sorted(drawn - on_screen - set(hidden)):
             fails.append(f"{name}: instrument {item} drawn but not bound")
     return result("V3", "Binding resolution", "A broken binding shows as a quality error on screen", not fails,
                   {"views": len(held.views), "bindings": n}, fails)
@@ -234,12 +256,13 @@ async def read_many(c, ns, paths):
 
 def live_sets(held, meta):
     te, te_nodata, tw = [], [], []
+    mapped = set(meta.get("twin_review", {}).get("mapped", {}))
     for p, inst in held.instances("TE_Plant"):
         tag = inst["parameters"]["Tag"]["value"]
         (te if meta["te_ranges"][tag]["has_data"] else te_nodata).append((f"[{P}]{p}/PV", p, inst))
     for p, inst in held.instances("OPEN100"):
         if any(m["name"] == "PV" for m in held.types[inst["typeId"]]["tags"]):  # instruments carry a PV
-            tw.append((f"[{P}]{p}/PV", p, inst))
+            (te if inst["parameters"]["AssetId"]["value"] in mapped else tw).append((f"[{P}]{p}/PV", p, inst))
     return te, te_nodata, tw
 
 
@@ -247,9 +270,9 @@ def v4(reads, te, te_nodata, tw):
     fails, dist = [], Counter()
     for path, *_ in te:
         q = reads[path].StatusCode
-        dist["TE fed: " + q.name] += 1
+        dist[("TE fed: " if path.startswith(f"[{P}]TE_Plant") else "OPEN100 mapped: ") + q.name] += 1
         if not q.is_good():
-            fails.append(f"{path}: fed by the replay but reads {q.name}")
+            fails.append(f"{path}: has a data source but reads {q.name}")
     for label, group in (("TE no source", te_nodata), ("OPEN100 placeholder", tw)):
         for path, *_ in group:
             q = reads[path].StatusCode
@@ -257,7 +280,7 @@ def v4(reads, te, te_nodata, tw):
             if q.is_good():
                 fails.append(f"{path}: FALSE GOOD, no data source but reads Good ({reads[path].Value.Value})")
     return result("V4", "Quality honesty", "Tag quality carries the truth; no placeholder ever reads Good", not fails,
-                  {"fed": len(te), "no_source": len(te_nodata), "placeholders": len(tw),
+                  {"fed_or_mapped": len(te), "no_source": len(te_nodata), "placeholders": len(tw),
                    "quality": dict(sorted(dist.items()))}, fails)
 
 
@@ -278,8 +301,8 @@ def v6(held, reads, te):
     fails, checked = [], 0
     for path, _, inst in te:
         dv = reads[path]
-        if not dv.StatusCode.is_good():
-            continue
+        if not dv.StatusCode.is_good() or not path.startswith(f"[{P}]TE_Plant"):
+            continue  # extracted-twin tags carry no engineering range until operations supplies one
         m = held.member(inst, "PV")
         lo, hi, v = m.get("engLow"), m.get("engHigh"), dv.Value.Value
         if lo is None or hi is None:
@@ -337,19 +360,24 @@ async def v7(held, c, ns, te, tw):
 # ---------------------------------------------------------------- V8 (drives the replay)
 
 class Sim:
-    def __init__(self):
+    def __init__(self, demo_points=False):
         self.proc = None
+        self.demo = subprocess.Popen([sys.executable, str(DEMO)], stdout=subprocess.DEVNULL,
+                                     stderr=subprocess.DEVNULL) if demo_points else None
 
     def start(self, run, start=0, rate=1.0):
-        self.stop()
+        if self.proc and self.proc.poll() is None:
+            self.proc.terminate()
+            self.proc.wait(10)
         self.proc = subprocess.Popen([sys.executable, str(SIM), "--run", run, "--start", str(start), "--rate", str(rate)],
                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def stop(self):
-        if self.proc and self.proc.poll() is None:
-            self.proc.terminate()
-            self.proc.wait(10)
-        self.proc = None
+        for p in (self.proc, self.demo):
+            if p and p.poll() is None:
+                p.terminate()
+                p.wait(10)
+        self.proc = self.demo = None
 
 
 async def wait_fed(c, ns, path, seconds=120):
@@ -466,7 +494,8 @@ async def run_all(g, only=None, sim=None, te_override=None):
     if want("V2"):
         out.append(v2(held, te_model, twin_model))
     if want("V3"):
-        out.append(v3(held, twin_dir))
+        out.append(v3(held, twin_dir, set(meta.get("te_review", {}).get("hidden", []))
+                      | set(meta.get("twin_review", {}).get("hidden", []))))
     if any(want(k) for k in ("V4", "V5", "V6", "V7", "V8")):
         te, te_nodata, tw = live_sets(held, meta)
         c = await ua_client.connect()
@@ -612,7 +641,8 @@ async def controls(g):
 
     # 4. a placeholder tag forced to read Good from a memory value
     d4 = json.loads(json.dumps(doc))
-    inst = find_inst(d4, "OPEN100", lambda t: t["typeId"].startswith("Instrument_"))
+    inst = find_inst(d4, "OPEN100", lambda t: t["typeId"].startswith("Instrument_")
+                     and t["parameters"]["PointName"]["value"].startswith("PLACEHOLDER"))
     inst["tags"] = [{"name": "PV", "tagType": "AtomicTag", "valueSource": "memory", "value": 0.0}]
     await run(f"placeholder {inst['name']} forced Good via a memory value", "V4", lambda: import_doc(g, d4))
 
@@ -631,7 +661,8 @@ def main():
     args = ap.parse_args()
     g = gw.Gateway()
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    sim = None if args.no_sim else Sim()
+    meta = json.loads((OUT / "build_meta.json").read_text(encoding="utf-8"))
+    sim = None if args.no_sim else Sim(demo_points=bool(meta.get("twin_review", {}).get("mapped")))
     try:
         ctl = None
         if args.controls:

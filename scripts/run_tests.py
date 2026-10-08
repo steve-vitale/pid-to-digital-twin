@@ -11,6 +11,7 @@ TESTS = [
     ("scripts/test_tiling.py", None),
     ("scripts/test_along_line.py", None),
     ("scripts/test_gateway_diff.py", None),
+    ("scripts/test_apply_review.py", None),
     ("scripts/test_scorer_controls.py", "data/external/pid2graph"),
 ]
 

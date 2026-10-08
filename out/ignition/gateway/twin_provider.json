@@ -36,6 +36,14 @@
         "bindType": "parameter",
         "binding": "nsu=urn:pid-digital-twin:te-sim;s=TE/{Tag}"
        }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified",
+       "documentation": "Operations review decision (scripts/apply_review.py)."
       }
      ]
     },
@@ -79,6 +87,14 @@
        "executionMode": "FixedRate",
        "executionRate": 1000,
        "expression": "isAlarmActive(\"[Twin]\" + {PathToParentFolder} + \"/PV\")"
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified",
+       "documentation": "Operations review decision (scripts/apply_review.py)."
       }
      ]
     },
@@ -112,6 +128,14 @@
         "bindType": "parameter",
         "binding": "nsu=urn:pid-digital-twin:te-sim;s=TE/{Tag}"
        }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified",
+       "documentation": "Operations review decision (scripts/apply_review.py)."
       }
      ]
     },
@@ -3560,7 +3584,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1401"
+           "value": "TCV_1401_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3620,7 +3652,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14084A"
+           "value": "TE_14084A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3640,7 +3680,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14084B"
+           "value": "TE_14084B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3660,7 +3708,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_RE_1402"
+           "value": "RE_1402"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3680,7 +3736,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_PT_14085"
+           "value": "PT_14085"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3700,7 +3764,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_PT_14086"
+           "value": "PT_14086"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3720,7 +3792,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_PT_14087"
+           "value": "PT_14087"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3740,7 +3820,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_PT_14088"
+           "value": "PT_14088"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3760,7 +3848,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14089A"
+           "value": "TE_14089A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3780,7 +3876,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14089B"
+           "value": "TE_14089B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3800,7 +3904,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1402"
+           "value": "TCV_1402_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3960,7 +4072,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_RE_1403"
+           "value": "RE_1403"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -3980,7 +4100,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14090A"
+           "value": "TE_14090A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4000,7 +4128,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14090B"
+           "value": "TE_14090B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4020,7 +4156,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1403"
+           "value": "TCV_1403_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4040,7 +4184,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14091A"
+           "value": "TE_14091A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4060,7 +4212,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14091B"
+           "value": "TE_14091B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4120,7 +4280,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14092A"
+           "value": "TE_14092A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4140,7 +4308,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14092B"
+           "value": "TE_14092B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4160,7 +4336,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1406"
+           "value": "TCV_1406_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4180,7 +4364,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14093B"
+           "value": "TE_14093B"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4200,7 +4392,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TE_14093A"
+           "value": "TE_14093A"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4240,7 +4440,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1408"
+           "value": "TCV_1408_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         },
@@ -4260,7 +4468,15 @@
           },
           "PointName": {
            "dataType": "String",
-           "value": "PLACEHOLDER_TCV_1409"
+           "value": "TCV_1409_POS"
+          },
+          "OPCServer": {
+           "dataType": "String",
+           "value": "OPEN100-Demo"
+          },
+          "BasePath": {
+           "dataType": "String",
+           "value": "nsu=urn:pid-digital-twin:open100-demo;s=PLANT"
           }
          }
         }
