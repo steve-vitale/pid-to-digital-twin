@@ -13,6 +13,8 @@ Usage:
   --run fault6 replays IDV(6), loss of A feed. Reactor pressure rises after sample 160, crosses the 2895 kPa
   operating limit at sample 258 and holds at exactly 3000 kPa (the recorded run stops at the shutdown limit).
   --start N begins the replay at sample N.
+  --control FILE switches the replay while running: write "fault6 236" or "normal 0" to the file. The server keeps
+  running, so connected clients (Ignition) never lose their session. Used by the Docker demo's fault switch.
 """
 import argparse
 import asyncio
@@ -52,12 +54,16 @@ async def main():
     ap.add_argument("--rate", type=float, default=1.0, help="seconds between samples")
     ap.add_argument("--port", type=int, default=4841)
     ap.add_argument("--start", type=int, default=0, help="first sample to replay (fault6 crosses 2895 kPa at 258)")
+    ap.add_argument("--control", default=None, help='file to watch: "<run> <start>" switches the replay live')
     args = ap.parse_args()
     logging.basicConfig(level=logging.WARNING)
 
     model = json.loads(MODEL.read_text(encoding="utf-8"))
     cols = column_map(model)
     rows = load_rows(args.run)
+    runs = {name: load_rows(name) for name in RUNS}
+    control = Path(args.control) if args.control else None
+    last_control = None
 
     server = Server()
     await server.init()
@@ -76,13 +82,22 @@ async def main():
     print(f"TE replay '{args.run}' on opc.tcp://localhost:{args.port}/te-sim, ns={idx}, {len(nodes)} tags, "
           f"{len(rows)} samples at {args.rate}s", flush=True)
     async with server:
-        i = args.start
+        i, current = args.start, args.run
         while True:
+            if control and control.exists():
+                text = control.read_text().strip()
+                if text and text != last_control:
+                    last_control = text
+                    parts = text.split()
+                    if parts[0] in RUNS:
+                        current, rows = parts[0], runs[parts[0]]
+                        i = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 0
+                        print(f"switched to '{current}' at sample {i}", flush=True)
             row = rows[i % len(rows)]
             for node, col in nodes.values():
                 await node.write_value(ua.Variant(row[col], ua.VariantType.Double))
             await sample.write_value(ua.Variant(i % len(rows), ua.VariantType.Int32))
-            await run_name.write_value(ua.Variant(args.run, ua.VariantType.String))
+            await run_name.write_value(ua.Variant(current, ua.VariantType.String))
             i += 1
             await asyncio.sleep(args.rate)
 

@@ -20,11 +20,12 @@ services:
     command: -n twin-demo -r /restore.gwbk
     depends_on: [te-sim, demo-points]
 
-  # Tennessee Eastman replay (open data). TE_RUN=fault6 replays fault 6 (loss of A feed) instead of normal operation.
+  # Tennessee Eastman replay (open data). fault-demo.bat / normal-demo.bat switch it live by writing a control file,
+  # so Ignition's connection never drops (recreating the container made the alarm demo wait on a reconnect).
   te-sim:
     build: { context: ., dockerfile: docker/sim.Dockerfile }
     image: pid-twin-sims
-    command: python scripts/ignition/te_sim_server.py --run ${TE_RUN:-normal} --start ${TE_START:-0}
+    command: python scripts/ignition/te_sim_server.py --control /tmp/te-run
 
   # Synthetic values for the OPEN100 points mapped from the demo I/O list.
   demo-points:

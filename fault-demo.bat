@@ -6,9 +6,7 @@ echo.
 echo  Switching the plant replay to fault 6 (loss of A feed).
 echo  Watch the reactor pressure (PI-107) on the plant screen: it turns red in about 30 seconds.
 echo.
-set TE_RUN=fault6
-set TE_START=236
-call docker compose up -d te-sim
+call docker compose exec -T te-sim sh -c "echo fault6 236 > /tmp/te-run"
 echo.
 echo  To go back to normal operation: double-click normal-demo.bat
 echo.

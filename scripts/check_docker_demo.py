@@ -30,6 +30,9 @@ def wait_counts(page, want_good, want_bad, seconds=180):
         if counts["good"] >= want_good and counts["bad"] <= want_bad and counts["good"] + counts["bad"] > 0:
             return True, counts
         time.sleep(3)
+    # Say what the page showed, so a failure explains itself on the run page.
+    text = " ".join(page.locator("body").inner_text().split())[:160]
+    counts["page_text"] = text
     return False, counts
 
 
@@ -59,15 +62,18 @@ def main():
         if not ok:
             failures.append("sheet 0")
 
-        env = dict(os.environ, TE_RUN="fault6", TE_START="236")
-        subprocess.run(["docker", "compose", "up", "-d", "te-sim"], env=env, check=True)
+        # The same switch fault-demo.bat makes: tell the running replay to start fault 6.
+        subprocess.run(["docker", "compose", "exec", "-T", "te-sim", "sh", "-c", "echo fault6 236 > /tmp/te-run"],
+                       check=True)
         page.goto(f"{a.url}/data/perspective/client/PIDTwin")
         t0, red = time.time(), 0
         while time.time() - t0 < 120 and not red:
             red = page.locator(LABELS).evaluate_all(RED_JS)
             time.sleep(2)
         page.screenshot(path=shots / "3-fault6.png")
-        print(f"fault 6: {red} red label(s) after {time.time() - t0:.0f} s -> {'PASS' if red else 'FAIL'}")
+        pi = page.locator(LABELS).nth(7).inner_text() if page.locator(LABELS).count() > 7 else "?"
+        print(f"fault 6: {red} red label(s) after {time.time() - t0:.0f} s (PI-107 shows {pi!r}) -> "
+              f"{'PASS' if red else 'FAIL'}")
         if not red:
             failures.append("fault alarm")
         b.close()

@@ -33,10 +33,10 @@ You don't need Python, settings or keys. It's an extra option. If you'd rather n
 
 In a terminal, in the unzipped folder:
 ```
-docker compose up -d --build                      # start (first time: several minutes)
-TE_RUN=fault6 TE_START=236 docker compose up -d te-sim   # fault 6: the alarm
-docker compose up -d te-sim                       # back to normal
-docker compose stop                               # stop
+docker compose up -d --build                                          # start (first time: several minutes)
+docker compose exec -T te-sim sh -c "echo fault6 236 > /tmp/te-run"   # fault 6: the alarm
+docker compose exec -T te-sim sh -c "echo normal 0 > /tmp/te-run"     # back to normal
+docker compose stop                                                   # stop
 ```
 Then open the same addresses as above.
 
