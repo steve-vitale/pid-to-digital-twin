@@ -45,7 +45,7 @@ import tiling  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPT = (ROOT / "extraction" / "prompt.md").read_text(encoding="utf-8")
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 RUNS = ROOT / "runs"
 SPEND = RUNS / "gemini_spend.json"
 GEMINI_CAP_USD = 25.0  # --gemini-cap lowers it for a bounded experiment

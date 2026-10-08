@@ -2,6 +2,7 @@
 
 Usage: python scripts/per_drawing.py gemini first-try repeat-v1 v2-named-fields
 """
+import os
 import json
 import sys
 from pathlib import Path
@@ -10,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 
 tool, labels = sys.argv[1], sys.argv[2:]
 print("drawing " + "".join(f"{l:>18}" for l in labels))

@@ -31,6 +31,7 @@ CLI:      python scripts/trace_connections.py --src-label round1-v2-named-fields
 Writes runs/<label>/<tool>/<d>.json: same record shape and same symbols as the source run, with the connections
 replaced by the traced ones (replace) or traced plus the model's own (union), plus a "tracer" block saying how.
 """
+import os
 import argparse
 import hashlib
 import json
@@ -43,7 +44,7 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 RUNS = ROOT / "runs"
 SCORED = ["tank", "pump", "valve", "instrumentation", "inlet/outlet", "general"]
 

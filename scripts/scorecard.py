@@ -5,6 +5,7 @@ Failed or unparseable runs count as zero output, never as skipped, so a tool can
 
 Usage: python scripts/scorecard.py [--label first-try]
 """
+import os
 import argparse
 import json
 import sys
@@ -14,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 
 
 def add(acc, part):

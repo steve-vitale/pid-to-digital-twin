@@ -97,3 +97,29 @@ Overtraining to the scorecard would be cheating, so these rules bind every round
 2. The best method, on holdout scores only, feeds the converter, which outputs the digital twin starter kit for a
    sheet set: asset hierarchy, Ignition tags and views, PI AF import, and a review queue sorted by confidence.
 3. A plain statement of what the numbers do and don't support.
+
+## Addendum (before any holdout run): the declared methods and decision rule
+
+Written after development work finished, and before a single round-2 method touched holdout A or B. All four methods
+run for all three tools. No per-tool choice is made in advance, and nothing changes after the holdout runs start.
+
+| Id | Method | Dev review load: claude / codex / gemini |
+|---|---|---|
+| M0 | Baseline: whole sheet, prompt v2 | 66.4 / 66.5 / 90.8 |
+| M1 | Tiling: 2×2 tiles, 15% overlap, merge rules in `scripts/tiling.py` | 73.5 / 46.3 / 76.1 |
+| M2 | Traced connections on M0's symbols (`scripts/trace_connections.py`, defaults, replace mode) | 29.8 / 34.4 / 87.6 |
+| M3 | Traced connections on M1's symbols | 36.1 / 20.5 / 59.2 |
+
+**Decision rule, fixed now:**
+- Each tool's best method is the one with the lowest holdout A review load.
+- A method beats M0 only if its holdout A review load is lower by more than that tool's measured run-to-run noise
+  (repeat runs differed by about 1 point in round 2).
+- Holdout B is reported for every method. A method that wins on A but loses to M0 on B is reported as style
+  overfitting.
+- Each method is scored on each holdout once. Failures count as zero.
+
+**Known limitation, stated before the results:** the connection score counts every pair of assets on a shared pipe
+network (junctions connect, as in the answer keys). It can't see the order along a line. The tracer matches that
+definition. For the twin, stream order matters, and the scorecard neither rewards nor punishes it.
+
+**Not attempted in round 2:** the planned ensemble method. It's reported as not done, not dropped silently.
