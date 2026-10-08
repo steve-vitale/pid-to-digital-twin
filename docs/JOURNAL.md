@@ -780,7 +780,9 @@ restart. The machine was unattended and 600 miles from its owner, so a restart w
   - 24 live and 12 "not connected" on sheet 0;
   - the reactor pressure alarm turning red in the fault replay.
 
-  It passed on the first run.
+  **Record so far: 5 of 6 from-scratch starts passed.** The first passed. The second failed before the check
+  published its reasons, so that failure is unexplained. Since then, every run starts three independent fresh
+  copies and posts its results publicly, and all of those have passed.
 - **The Windows launchers were tested locally,** with a stand-in `docker` command and the throwaway gateway answering
   the "is Ignition up?" check.
 

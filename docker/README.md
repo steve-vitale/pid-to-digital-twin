@@ -69,7 +69,10 @@ Then open the same addresses as above.
 **Checks:** every change to these files starts the whole demo from nothing on GitHub's test machines and opens the
 screens in a real browser (`.github/workflows/docker-demo.yml`, `scripts/check_docker_demo.py`). It checks the
 screens show live values, that sheet 0 shows 24 live and 12 not connected, and that the fault turns the alarm red.
-Screenshots from each run are kept with the run.
+Screenshots from each run are kept with the run. Each change is started from scratch three times in parallel, and the results are posted on
+the run page. Record at release: 5 of 6 from-scratch starts passed. One early failure is unexplained, because it
+happened before the check posted its reasons. If yours doesn't come up, `stop-demo.bat` then `start-demo.bat` is
+the first thing to try.
 
 ## How the demo backup is made (for maintainers)
 
