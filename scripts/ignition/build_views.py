@@ -118,14 +118,20 @@ def project_zip(provider_doc, twin_dir, provider, alarmed, hidden=frozenset()):
             pages["/open100/" + p.split("_")[-1]] = {"title": p, "viewPath": p}
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("project.json", json.dumps({
+        def put(name, data):
+            # Fixed entry timestamps: the same inputs must give byte-identical output, or every rebuild looks like a
+            # config change and V9 (config matches a commit) fails. V9 caught this.
+            info = zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(info, data)
+        put("project.json", json.dumps({
             "title": "P&ID digital twin", "enabled": True, "inheritable": False, "parent": "",
             "description": "Screens generated from the twin's drawings. Read-only monitoring."}, indent=2))
         for p, v in views.items():
             base = f"com.inductiveautomation.perspective/views/{p}/"
-            z.writestr(base + "view.json", json.dumps(v, indent=1))
-            z.writestr(base + "resource.json", json.dumps(RESOURCE, indent=2))
+            put(base + "view.json", json.dumps(v, indent=1))
+            put(base + "resource.json", json.dumps(RESOURCE, indent=2))
         pc = "com.inductiveautomation.perspective/page-config/"
-        z.writestr(pc + "config.json", json.dumps({"pages": pages}, indent=1))
-        z.writestr(pc + "resource.json", json.dumps(dict(RESOURCE, files=["config.json"]), indent=2))
+        put(pc + "config.json", json.dumps({"pages": pages}, indent=1))
+        put(pc + "resource.json", json.dumps(dict(RESOURCE, files=["config.json"]), indent=2))
     return buf.getvalue(), views
