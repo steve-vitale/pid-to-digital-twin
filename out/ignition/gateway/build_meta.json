@@ -1,0 +1,255 @@
+{
+ "provider": "Twin",
+ "opc_connection": "TE-Sim",
+ "sim_url": "opc.tcp://localhost:4841/te-sim",
+ "sim_namespace": "urn:pid-digital-twin:te-sim",
+ "twin_source": "out/twin/r2-tiles-trace/codex",
+ "alarms": {
+  "PI-107": [
+   {
+    "name": "PressureHigh",
+    "setpointA": 2895.0,
+    "priority": "High",
+    "source": "Downs & Vogel (1993), operating constraints: reactor pressure normal limit 2895 kPa"
+   },
+   {
+    "name": "PressureShutdown",
+    "setpointA": 3000.0,
+    "priority": "Critical",
+    "source": "teprob.f line 703: the simulator shuts down when XMEAS(7) > 3000 kPa"
+   }
+  ],
+  "TI-109": [
+   {
+    "name": "TemperatureShutdown",
+    "setpointA": 175.0,
+    "priority": "Critical",
+    "source": "teprob.f line 706: the simulator shuts down when XMEAS(9) > 175 degC"
+   }
+  ]
+ },
+ "te_ranges": {
+  "FI-101": {
+   "low": 0.0,
+   "high": 0.5,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-102": {
+   "low": 0.0,
+   "high": 7323.003,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-103": {
+   "low": 0.0,
+   "high": 9021.933,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-104": {
+   "low": 0.0,
+   "high": 18.688,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-105": {
+   "low": 0.0,
+   "high": 53.804,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-106": {
+   "low": 0.0,
+   "high": 84.655,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "PI-107": {
+   "low": 0.0,
+   "high": 5411.321,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "LI-108": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "TI-109": {
+   "low": 0.0,
+   "high": 240.8,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-110": {
+   "low": 0.0,
+   "high": 0.674,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "TI-111": {
+   "low": 0.0,
+   "high": 160.173,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "LI-112": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "PI-113": {
+   "low": 0.0,
+   "high": 5268.839,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-114": {
+   "low": 0.0,
+   "high": 50.373,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "LI-115": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "PI-116": {
+   "low": 0.0,
+   "high": 6205.769,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-117": {
+   "low": 0.0,
+   "high": 45.814,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "TI-118": {
+   "low": 0.0,
+   "high": 131.706,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "FI-119": {
+   "low": 0.0,
+   "high": 468.035,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "JI-120": {
+   "low": 0.0,
+   "high": 682.85,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "TI-121": {
+   "low": 0.0,
+   "high": 189.21,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "TI-122": {
+   "low": 0.0,
+   "high": 154.558,
+   "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
+   "has_data": true
+  },
+  "AI-123": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "AI-129": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "AI-137": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-201": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-202": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-203": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-204": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "HV-205": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-206": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "LV-207": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "LV-208": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "FV-209": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "TV-210": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "TV-211": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true
+  },
+  "SC-212": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": false
+  }
+ }
+}

@@ -10,8 +10,9 @@ from the client side: the server never accepts writes.
 
 Usage:
   python scripts/ignition/te_sim_server.py [--run normal|fault6] [--rate 1.0] [--port 4841]
-  --run fault6 replays IDV(6), loss of A feed. Reactor pressure rises toward the 3000 kPa shutdown limit after
-  sample 160.
+  --run fault6 replays IDV(6), loss of A feed. Reactor pressure rises after sample 160, crosses the 2895 kPa
+  operating limit at sample 258 and holds at exactly 3000 kPa (the recorded run stops at the shutdown limit).
+  --start N begins the replay at sample N.
 """
 import argparse
 import asyncio
@@ -50,6 +51,7 @@ async def main():
     ap.add_argument("--run", choices=RUNS, default="normal")
     ap.add_argument("--rate", type=float, default=1.0, help="seconds between samples")
     ap.add_argument("--port", type=int, default=4841)
+    ap.add_argument("--start", type=int, default=0, help="first sample to replay (fault6 crosses 2895 kPa at 258)")
     args = ap.parse_args()
     logging.basicConfig(level=logging.WARNING)
 
@@ -74,7 +76,7 @@ async def main():
     print(f"TE replay '{args.run}' on opc.tcp://localhost:{args.port}/te-sim, ns={idx}, {len(nodes)} tags, "
           f"{len(rows)} samples at {args.rate}s", flush=True)
     async with server:
-        i = 0
+        i = args.start
         while True:
             row = rows[i % len(rows)]
             for node, col in nodes.values():
