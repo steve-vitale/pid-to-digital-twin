@@ -1,0 +1,102 @@
+{
+ "oracle": {
+  "drawings": 6,
+  "failed_runs": 0,
+  "models": [
+   "answer-key-symbols"
+  ],
+  "avg_seconds": 0.0,
+  "cost_usd": 0.0,
+  "strict_located": {
+   "tp": 500,
+   "predicted": 500,
+   "in_key": 500,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "strict_classified": {
+   "tp": 500,
+   "predicted": 500,
+   "in_key": 500,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "rough_located": {
+   "tp": 500,
+   "predicted": 500,
+   "in_key": 500,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "rough_classified": {
+   "tp": 500,
+   "predicted": 500,
+   "in_key": 500,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "connections": {
+   "tp": 1024,
+   "predicted": 1065,
+   "in_key": 1141,
+   "precision": 0.962,
+   "recall": 0.897,
+   "f1": 0.928
+  },
+  "review_load_per_100": 9.6,
+  "rough_by_class": {
+   "tank": {
+    "tp": 16,
+    "predicted": 16,
+    "in_key": 16,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "pump": {
+    "tp": 11,
+    "predicted": 11,
+    "in_key": 11,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "valve": {
+    "tp": 139,
+    "predicted": 139,
+    "in_key": 139,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "instrumentation": {
+    "tp": 160,
+    "predicted": 160,
+    "in_key": 160,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "inlet/outlet": {
+    "tp": 48,
+    "predicted": 48,
+    "in_key": 48,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "general": {
+    "tp": 126,
+    "predicted": 126,
+    "in_key": 126,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   }
+  }
+ }
+}
