@@ -17,6 +17,7 @@ Usage:
     python scripts/build_twin.py --label round1-v2-named-fields --sheets 0,1,2,3,4,5          # every tool
     python scripts/build_twin.py --label runs/round1-v2-named-fields/claude/ --sheets 0,1,2,3,4,5
     python scripts/build_twin.py --label round1-v2-named-fields --sheets 0,1,2,3,4,5 --score  # + score_twin
+    ... --parent-rule along_line|linked|nearest   # instrument parent rule (default along_line; see PARENT_RULES)
 """
 import argparse
 import csv
@@ -30,6 +31,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import generate as gen  # noqa: E402
 import score_pid2graph as sc  # noqa: E402
+import trace_connections as tc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
@@ -45,6 +47,18 @@ ABBR = {"tank": "TK", "pump": "PU", "valve": "VL", "general": "GN", INSTRUMENT: 
 # 0.3-0.7 for symbols it is unsure of; Codex and Gemini rarely go below 0.9. Model confidences are not
 # calibrated against each other, so the same number means different things per model.
 LOW_CONFIDENCE = 0.75
+
+# Instrument parent rules (--parent-rule). Each instrument records the method it actually got (parent_method).
+#   along_line  nearest non-instrument asset reached by following the traced lines from the instrument
+#               (trace_connections.line_geometry / along_line); falls back to the linked rule off the lines
+#   linked      nearest (by centre) of the assets the extraction links it to; then via an instrument chain;
+#               then nearest by position
+#   nearest     nearest non-instrument symbol by position only (box gap); ignores lines and links
+PARENT_RULES = ("along_line", "linked", "nearest")
+# Two assets reached along the line within this share of the median symbol side count as a tie, broken by
+# position. Set on the development set only (0 / 0.25 / 0.5 / 1.0 tried; 0.25 was best or tied for all three
+# tools, by one instrument each, so it is within noise; 1.0 was worse for all three).
+ALONG_LINE_TIE_FRAC = 0.25
 
 # "XXX", "MSCV-XXX", "TBD", "?" ... a tag the drawing leaves to be assigned later. Flagged, never filled in.
 PLACEHOLDER = re.compile(r"(?<![A-Z0-9])(X{2,}|\?+|#{2,}|TBD|TBA|N/A)(?![A-Z0-9])", re.I)
@@ -151,7 +165,9 @@ def load_sheet(run_dir, sheet, images_dir):
     return {"sheet": sheet, "run_file": path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path),
             "model": r.get("model"), "tool": r.get("tool"), "failed": not r.get("prediction"),
             "error": r.get("error") or r.get("parse_error"), "image": img.name, "image_size": size,
-            "items": items, "links": links, "dropped": dropped}
+            "items": items, "links": links, "dropped": dropped,
+            # for the along-line parent rule: re-trace with the run's own symbols and tracer options
+            "raw_symbols": pred.get("symbols", []), "tracer_options": (r.get("tracer") or {}).get("options")}
 
 
 # ---------------------------------------------------------------- sheet identity (system code, drawing number)
@@ -257,7 +273,7 @@ def infer_sheet_identity(sheets, register):
 
 # ---------------------------------------------------------------- the converter
 
-def build(tool, run_dir, sheet_list, images_dir, register, label):
+def build(tool, run_dir, sheet_list, images_dir, register, label, parent_rule="along_line"):
     sheets = {s: load_sheet(run_dir, s, images_dir) for s in sheet_list}
 
     # 1. role per symbol. A "general" symbol becomes equipment only when its tag follows the equipment pattern.
@@ -355,39 +371,82 @@ def build(tool, run_dir, sheet_list, images_dir, register, label):
             frontier = nxt
         return None, None, "no_connection_path"
 
-    # 4. instrument parent: linked neighbour > via instrument chain > nearest symbol by geometry.
+    # 4. instrument parent, by the selected rule (PARENT_RULES); every instrument records the method it got.
+    def nearest_parent(k):
+        s, it = k[0], by_key[k]
+        others = [(s, o["symbol"]) for o in sheets[s]["items"] if o["role"] != "instrument"]
+        if not others:
+            return None, None, {}
+        cand = min(others, key=lambda n: gap(by_key[n]["box"], it["box"]))
+        return cand, "geometry_nearest", {"gap_0_1000": round(gap(by_key[cand]["box"], it["box"]), 1)}
+
+    def linked_parent(k):
+        """Linked neighbour > via instrument chain > nearest symbol by geometry."""
+        it = by_key[k]
+        direct = [n for n in adj[k] if role(n) != "instrument"]
+        if direct:
+            cand = min(direct, key=lambda n: dist(by_key[n]["box"], it["box"]))
+            return cand, "linked", {"linked_candidates": len(direct)}
+        seen, q = {k}, deque([k])
+        chain = []
+        while q and not chain:
+            cur = q.popleft()
+            for n in adj[cur]:
+                if n in seen:
+                    continue
+                seen.add(n)
+                (chain if role(n) != "instrument" else q).append(n)
+        if chain:
+            return min(chain, key=lambda n: dist(by_key[n]["box"], it["box"])), "via_instrument_chain", {}
+        return nearest_parent(k)
+
+    geoms = {}
+    if parent_rule == "along_line":
+        for s, sh in sheets.items():
+            img = images_dir / f"{s}.png"
+            if img.exists() and sh["raw_symbols"]:
+                opts = {k: v for k, v in (sh["tracer_options"] or {}).items() if k in tc.DEFAULTS}
+                geoms[s] = tc.line_geometry(img, sh["raw_symbols"], **opts)
+
+    def along_line_parent(k):
+        """Nearest non-instrument asset reached by following the drawn line from the instrument. Fallbacks, in
+        order: through other instruments (a signal chain); then the linked rule (no traced line reached a target)."""
+        s, it = k
+        g = geoms.get(s)
+        if not g or not g["attach"].get(it):
+            cand, method, extra = linked_parent(k)
+            return cand, method, {**extra, "along_line_status": "not_on_traced_line"}
+        items = sheets[s]["items"]
+        targets = {o["symbol"] for o in items if o["role"] != "instrument"}
+        chain = {o["symbol"] for o in items if o["role"] == "instrument"}
+        tie_px = ALONG_LINE_TIE_FRAC * g["side"]
+        method = "along_line"
+        found = tc.along_line(g, it, targets, tie_px=tie_px)
+        if not found:
+            found = tc.along_line(g, it, targets, passable=chain, tie_px=tie_px)
+            method = "along_line_via_instrument_chain"
+        if not found:
+            cand, m, extra = linked_parent(k)
+            return cand, m, {**extra, "along_line_status": "no_asset_reached_along_line"}
+        # Ties (within ALONG_LINE_TIE_FRAC of a symbol side) are broken by box-to-box gap.
+        best = min(found, key=lambda f: gap(by_key[(s, f[0])]["box"], by_key[k]["box"]))
+        extra = {"along_line_px": best[1], "along_line_status": "tie_broken_by_position" if len(found) > 1 else "ok",
+                 "along_line_candidates": [{"asset": app2asset[(s, f[0])], "px": f[1]} for f in found]}
+        if best[2]:
+            extra["along_line_via"] = [app2asset[(s, v)] for v in best[2]]
+        return (s, best[0]), method, extra
+
+    rule = {"along_line": along_line_parent, "linked": linked_parent, "nearest": nearest_parent}[parent_rule]
     parents = {}
     for s, sh in sheets.items():
         for it in sh["items"]:
             if it["role"] != "instrument":
                 continue
             k = (s, it["symbol"])
-            direct = [n for n in adj[k] if role(n) != "instrument"]
-            method, cand, extra = None, None, {}
-            if direct:
-                cand = min(direct, key=lambda n: dist(by_key[n]["box"], it["box"]))
-                method, extra = "linked", {"linked_candidates": len(direct)}
-            else:
-                seen, q = {k}, deque([k])
-                chain = []
-                while q and not chain:
-                    cur = q.popleft()
-                    for n in adj[cur]:
-                        if n in seen:
-                            continue
-                        seen.add(n)
-                        (chain if role(n) != "instrument" else q).append(n)
-                if chain:
-                    cand = min(chain, key=lambda n: dist(by_key[n]["box"], it["box"]))
-                    method = "via_instrument_chain"
-                else:
-                    others = [(s, o["symbol"]) for o in sh["items"] if o["role"] != "instrument"]
-                    if others:
-                        cand = min(others, key=lambda n: gap(by_key[n]["box"], it["box"]))
-                        method = "geometry_nearest"
-                        extra = {"gap_0_1000": round(gap(by_key[cand]["box"], it["box"]), 1)}
-            # Second opinion by position alone. On the development set, when the two agree the parent was right
-            # about 9 times in 10 (Claude, Codex); when they disagree, about 3 in 10. Disagreement goes to review.
+            cand, method, extra = rule(k)
+            # Second opinion by position alone. Under the linked rule on the development set, when the two agreed
+            # the parent was right about 9 times in 10 (Claude, Codex); when they disagreed, about 3 in 10. Under
+            # along_line, disagreeing parents were mostly right (dev: 12/13 Codex, 15/17 Claude, 8/14 Gemini).
             others = [(s, o["symbol"]) for o in sh["items"] if o["role"] != "instrument"]
             near = min(others, key=lambda n: gap(by_key[n]["box"], it["box"])) if others else None
             extra["position_nearest"] = app2asset[near] if near else None
@@ -555,6 +614,7 @@ def build(tool, run_dir, sheet_list, images_dir, register, label):
                               "<n>) are converter keys, NOT plant tags. Placeholder tags (XXX, TBD) are flagged.",
             "verification_note": "Every item is unverified until a person checks it in review_queue.csv.",
             "low_confidence_threshold": LOW_CONFIDENCE,
+            "parent_rule": parent_rule,
             "superset_of": "data/te_process_model.json (meta/units/streams/instruments/final_elements)",
         },
         "site": site, "systems": systems,
@@ -633,6 +693,8 @@ def main():
     ap.add_argument("--svg-background", action="store_true", help="link the sheet image under the SVG overlay")
     ap.add_argument("--score", action="store_true", help="also run scripts/score_twin.py on the result")
     ap.add_argument("--holdout-ok", action="store_true", help="allow sheets outside the development set 0-5")
+    ap.add_argument("--parent-rule", choices=PARENT_RULES, default="along_line",
+                    help="how each instrument's parent asset is chosen (see PARENT_RULES)")
     args = ap.parse_args()
 
     sheet_list = [s.strip() for s in args.sheets.split(",") if s.strip()]
@@ -645,7 +707,7 @@ def main():
     register = load_register(args.sheet_register)
     built = []
     for tool, run_dir in run_dirs.items():
-        model = build(tool, run_dir, sheet_list, Path(args.images), register, label)
+        model = build(tool, run_dir, sheet_list, Path(args.images), register, label, args.parent_rule)
         out = Path(args.out) / tool if args.out and len(run_dirs) > 1 else Path(args.out) if args.out \
             else ROOT / "out" / "twin" / label / tool
         out.mkdir(parents=True, exist_ok=True)

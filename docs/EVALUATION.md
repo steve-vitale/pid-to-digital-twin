@@ -142,5 +142,6 @@ What it doesn't support:
 | `extraction/prompt.md`, `extraction/prompt_v2.md` | Prompt versions; never edited in place once used |
 | `scripts/tiling.py`, `extraction/tile_preface.md` | Round-2 tiled extraction: tile grid, merge rules (stated in the docstring), optional whole-sheet links; run with `run_extraction.py --tiles 2x2` |
 | `scripts/test_tiling.py` | Controls for the tile merge: geometry, synthetic perfect-extractor round trip, and the dev-key oracle (`--oracle-dev`) that shows how many links seams lose by construction |
+| `scripts/test_along_line.py` | Controls for the along-line parent rule on a synthetic sheet: following the line beats position, signal chains, the off-line fallback, and the tracer's links unchanged when the geometry is requested |
 | `scripts/remerge_tiles.py` | Re-applies the merge (or adds whole-sheet links) to stored tile replies without new model calls |
 | `out/scorecard_<label>.md` | Published results per run label |

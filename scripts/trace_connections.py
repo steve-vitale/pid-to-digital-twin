@@ -24,6 +24,9 @@ drawing-specific. Defaults were set on the development set only (OPEN100 0-5).
      spanning tree) and max_clique are kept as measured, worse-on-dev alternatives.
 
 Library:  trace(image_path, symbols, **options) -> list of {"from": id, "to": id}
+          line_geometry(image_path, symbols, **options) -> the same links plus the line networks, the symbols'
+              attachment points and a graph weighted by pixel length along the lines (round 3)
+          along_line(geometry, source_id, target_ids, ...) -> the targets reached first by following the lines
 CLI:      python scripts/trace_connections.py --src-label round1-v2-named-fields --tool claude --drawings 0,1,2,3,4,5 \\
               --label r2-trace [--mode replace|union] [--options '{"emit": "tree"}']
           python scripts/trace_connections.py --oracle --drawings 0,1,2,3,4,5 --label r2-trace-oracle
@@ -97,7 +100,9 @@ def binarize(gray):
     return ink.astype(np.uint8)
 
 
-def trace(image_path, symbols, debug=None, **opt):
+def trace(image_path, symbols, debug=None, geometry=None, **opt):
+    """Traced links. Pass geometry={} to also receive the line geometry the links came from (see line_geometry);
+    collecting it never changes the links."""
     o = {**DEFAULTS, **opt}
     gray = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
     if gray is None:
@@ -193,7 +198,8 @@ def trace(image_path, symbols, debug=None, **opt):
 
     # 4. Join h and v runs where they overlap, unless the overlap is a 4-arm crossing.
     crossings = []
-    both = ((hor > 0) & (ver > 0)).astype(np.uint8)
+    joins, attachments = [], []  # filled only when geometry is requested
+    both =((hor > 0) & (ver > 0)).astype(np.uint8)
     nb, lb, stats, _ = cv2.connectedComponentsWithStats(both, connectivity=8)
     reach = max(2, L // 2)
     for i in range(1, nb):
@@ -211,6 +217,8 @@ def trace(image_path, symbols, debug=None, **opt):
                 crossings.append((x + w // 2, y + h // 2))
                 continue
         uf.union(hid + oh, vid + ov)
+        if geometry is not None:
+            joins.append((hid + oh, vid + ov, x + (w - 1) / 2, y + (h - 1) / 2))
 
     # Residual pieces join whatever they touch (8-neighbourhood); h/v touching each other only via overlaps above.
     if nr > 1:
@@ -221,8 +229,18 @@ def trace(image_path, symbols, debug=None, **opt):
         for lab_img, off in ((lh, oh), (lv, ov)):
             for near in (lrmax, lrmin):
                 m = (lab_img > 0) & (near > 0) & (near < (1 << 30))
-                for r, lab in np.unique(np.stack([near[m], lab_img[m]], 1), axis=0):
+                pairs = np.stack([near[m], lab_img[m]], 1)
+                for r, lab in np.unique(pairs, axis=0):
                     uf.union(int(r) + orr, int(lab) + off)
+                if geometry is not None and len(pairs):
+                    # where each residual piece touches each run: the mean of the touching run pixels
+                    uq, inv = np.unique(pairs, axis=0, return_inverse=True)
+                    inv = np.asarray(inv).ravel()
+                    yy, xx = np.nonzero(m)
+                    cnt = np.bincount(inv)
+                    mx, my = np.bincount(inv, xx) / cnt, np.bincount(inv, yy) / cnt
+                    for i, (r, lab) in enumerate(uq):
+                        joins.append((int(r) + orr, int(lab) + off, float(mx[i]), float(my[i])))
 
     # 5. Networks and their extents.
     ys, xs = np.nonzero(gid >= 0)
@@ -249,6 +267,14 @@ def trace(image_path, symbols, debug=None, **opt):
         hit = set(np.unique(win[win >= 0]).tolist()) - frame
         for r in hit:
             attach.setdefault(r, []).append(s)
+        if geometry is not None and hit:
+            # where the symbol meets each line piece: the mean of that piece's pixels inside the band window
+            wg = gid[by0:by1 + 1, bx0:bx1 + 1]
+            for p in np.unique(wg[wg >= 0]).tolist():
+                if int(rootarr[p]) in frame:
+                    continue
+                yy, xx = np.nonzero(wg == p)
+                attachments.append((s["id"], int(p), float(bx0 + xx.mean()), float(by0 + yy.mean())))
 
     # 7. Emit links.
     links = set()
@@ -277,7 +303,122 @@ def trace(image_path, symbols, debug=None, **opt):
         debug["_ext"] = {r: ext[r] for r in attach}
         debug.update({"side": side, "band": band, "L": L, "crossings": crossings, "frame_networks": len(frame),
                       "networks_with_links": sum(1 for m in attach.values() if len({x["id"] for x in m}) > 1)})
+    if geometry is not None:
+        geometry.update({
+            "width": W, "height": H, "side": side, "band": band,
+            "symbols": {s["id"]: tuple(int(v) for v in s["px"]) for s in syms},
+            "networks": {int(r): sorted({m["id"] for m in ms}) for r, ms in attach.items()},
+            "piece_kind": lambda p: "h" if p < nh - 1 else "v" if p < nh - 1 + nv - 1 else "r",
+            "piece_network": lambda p: int(rootarr[p]),
+            "frame_networks": sorted(frame),
+            "joins": [j for j in joins if int(rootarr[j[0]]) not in frame],
+            "attachments": attachments,
+        })
     return [{"from": a, "to": b} for a, b in sorted(links)]
+
+
+# ---------------------------------------------------------------- line geometry and distance along the line
+
+def line_geometry(image_path, symbols, **opt):
+    """The traced line geometry, as a graph whose edge weights are pixel lengths along the drawn lines.
+
+    Nodes are points on line pieces: where two pieces join (a horizontal and a vertical run overlapping, or a
+    residual piece touching a run) and where a symbol meets a piece (its attachment point). Edges join consecutive
+    points along one piece, weighted by their straight distance: exact for the horizontal and vertical runs, an
+    under-estimate for curved residual pieces. Frame networks are left out, as in trace().
+    Returns {"links", "symbols", "networks", "side", "band", "points", "adj", "attach"} where
+      symbols   {symbol id: pixel box after the through-line check}
+      networks  {network id: [symbol ids attached]} (the networks trace() links within)
+      points    [(x, y)] node coordinates in pixels; adj {node: [(node, length_px)]}
+      attach    {symbol id: [node]} the symbol's attachment points (none: not on any traced line)"""
+    g = {}
+    links = trace(image_path, symbols, geometry=g, **opt)
+    out = {"links": links, "symbols": g.get("symbols", {}), "networks": g.get("networks", {}),
+           "side": g.get("side"), "band": g.get("band"), "points": [], "adj": {}, "attach": {}}
+    if not g:
+        return out
+    points, on_piece = [], {}
+    for a, b, x, y in g["joins"]:
+        points.append((x, y))
+        on_piece.setdefault(a, []).append(len(points) - 1)
+        on_piece.setdefault(b, []).append(len(points) - 1)
+    for sid, p, x, y in g["attachments"]:
+        points.append((x, y))
+        on_piece.setdefault(p, []).append(len(points) - 1)
+        out["attach"].setdefault(sid, []).append(len(points) - 1)
+    adj = {i: [] for i in range(len(points))}
+
+    def edge(i, j):
+        w = float(np.hypot(points[i][0] - points[j][0], points[i][1] - points[j][1]))
+        adj[i].append((j, w))
+        adj[j].append((i, w))
+
+    for p, nodes in on_piece.items():
+        nodes = sorted(set(nodes))
+        if len(nodes) < 2:
+            continue
+        kind = g["piece_kind"](p)
+        if kind == "r" and len(nodes) <= 12:  # small irregular piece: every pair, straight distance
+            for i in range(len(nodes)):
+                for j in range(i + 1, len(nodes)):
+                    edge(nodes[i], nodes[j])
+            continue
+        if kind == "h":
+            axis = 0
+        elif kind == "v":
+            axis = 1
+        else:  # large residual: chain along its longer spread
+            xs, ys = [points[n][0] for n in nodes], [points[n][1] for n in nodes]
+            axis = 0 if max(xs) - min(xs) >= max(ys) - min(ys) else 1
+        nodes.sort(key=lambda n: points[n][axis])
+        for i in range(len(nodes) - 1):
+            edge(nodes[i], nodes[i + 1])
+    out["points"], out["adj"] = points, adj
+    return out
+
+
+def along_line(geom, source, targets, passable=(), pass_cost=None, tie_px=0.0):
+    """Symbols reached first by following the drawn lines from `source` (Dijkstra over line_geometry's graph).
+
+    A path stops at the first target symbol it reaches. It never crosses a symbol's box (the tracer erased it, so
+    the lines on its two sides are separate pieces), except for symbols in `passable` (e.g. instruments, for a
+    signal chain), which cost `pass_cost` pixels (default: the median symbol side) to cross. Returns [(target id, length_px, [passed symbol ids])] for every target within `tie_px` of the
+    nearest, nearest first; [] if the source has no attachment points or reaches no target."""
+    import heapq
+    starts = geom["attach"].get(source)
+    if not starts:
+        return []
+    owner = {n: sid for sid, ns in geom["attach"].items() for n in ns}
+    cost = geom["side"] if pass_cost is None else pass_cost
+    best = {}
+    heap = [(0.0, n, ()) for n in starts]
+    heapq.heapify(heap)
+    found = {}
+    limit = None
+    while heap:
+        d, n, via = heapq.heappop(heap)
+        if limit is not None and d > limit:
+            break
+        if n in best:
+            continue
+        best[n] = d
+        sid = owner.get(n)
+        if sid is not None and sid != source and sid not in via:
+            if sid in targets:
+                if sid not in found:
+                    found[sid] = (d, list(via))
+                    limit = d + tie_px if limit is None else limit
+                continue  # stop at the first target: never run through it
+            if sid in passable:  # cross the symbol to the lines on its other sides
+                for m in geom["attach"][sid]:
+                    if m not in best:
+                        heapq.heappush(heap, (d + cost, m, via + (sid,)))
+            # Other symbols don't block: their interiors are erased, so a symbol drawn IN a line already splits it
+            # into separate pieces. A line still running on past this attachment point passes beside the symbol.
+        for m, w in geom["adj"][n]:
+            if m not in best:
+                heapq.heappush(heap, (d + w, m, via))
+    return sorted(((sid, round(d, 1), via) for sid, (d, via) in found.items()), key=lambda t: t[1])
 
 
 def oracle_symbols(d):
