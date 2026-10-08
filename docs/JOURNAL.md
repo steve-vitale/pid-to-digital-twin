@@ -429,3 +429,53 @@ translate.
 - **Judge any tool on areas of the site nobody tuned on,** and keep an outcome measure, such as "did the
   instrument land under the right equipment in the asset framework", next to whatever accuracy number a vendor
   quotes.
+
+---
+
+## 12. Round 3 setup: point people at the problems, fix what the better score broke, spend nothing new
+
+**What:** two goals for round 3, set before any work:
+1. **A confidence marker:** every symbol and link gets a risk rating and a green / amber / red tier, so reviewers
+   spend their time where the problems are.
+2. **A fix for the twin regression from round 2:** instrument parents chosen by following the drawn line, not by
+   "shares a pipe network with".
+
+**How (the process steps, in order):**
+1. **Pre-register before building.** The success tests went into `GOAL.md` and were committed first:
+   - **Errors caught early:** the share of all mistakes that land in the riskiest 20% of items. A random order
+     catches 20%, and the model's own confidence ordering is the bar to beat.
+   - **Green tier:** its precision, and how much work it removes.
+   - **Calibration:** error rates must rise from green to amber to red.
+   - **The parent fix wins only if it beats both earlier twins** on the sealed drawings (87.0% and 90.9%).
+2. **No new spend.** The constraint was set by the project owner: "we have plenty of data." Every signal comes from
+   runs that already exist: three models × whole-sheet and tiled passes × the traced lines. No new model calls of
+   any kind in round 3.
+3. **Independent signals instead of self-reported confidence.** Two of the three models report 0.9–1.0 confidence
+   for nearly everything, which ranks nothing. Independent evidence is more honest. Do two different models agree on
+   this symbol? Does the same model agree with itself across two passes? Is the symbol actually sitting on a drawn
+   line? Is the tag well-formed or a placeholder?
+4. **Parallel builders in isolated copies of the repo.** One builder per goal, each tuning on the six development
+   drawings only. Results get verified, then each method is scored once on the sealed sets.
+5. **Housekeeping done safely.** The round-2 workspaces linked to the shared dataset folder. Removing a workspace
+   carelessly can follow such a link and delete the real data, so the links were removed first, the data was
+   confirmed intact, and only then were the workspaces deleted.
+
+**Why:**
+- **Review time is the real cost.** Ranking items so people check the riskiest first turns "review everything" into
+  "review what matters". That's the difference between a tool that saves a plant time and one that just moves the
+  work.
+- **The parent fix closes the loop on round 2.** A better primary score must not be allowed to quietly make the
+  twin worse.
+
+**Stated limitation (written before results):** a risk rating can only rank what the system *found*. It can't point
+at a symbol the system missed entirely, so a person still scans each sheet for gaps, and the review queue says so.
+
+**Lesson:** decide how you'll know the marker helps (errors caught per hour of review) before you build it, or
+you'll end up admiring a colour scheme.
+
+**At your plant:**
+- **Set the review budget first.** For example: "a reviewer checks the riskiest 20% closely and batch-accepts the
+  green items".
+- **Then measure how many real errors that budget catches,** on units nobody tuned on.
+- **Sample the green items from time to time** (spot-check a few percent), so the green tier keeps earning its
+  trust.

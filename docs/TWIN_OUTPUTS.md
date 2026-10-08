@@ -47,14 +47,26 @@ A small example package for Claude on sheets 0–5 is committed under `out/twin/
 - **Line items** (valves, other in-line symbols) belong to the nearest equipment along extracted connections
   through other line items only (fewest hops, then closest). If there is no such path, the item goes under
   `Unassigned`. Equipment is never guessed by position.
-- **Instrument parent**, in order:
-  1. the linked non-instrument neighbour (closest one if several);
-  2. else the first non-instrument reached through other instruments;
-  3. else the nearest symbol by position (`geometry_nearest`, with the gap recorded).
+- **Instrument parent** is chosen by `--parent-rule` (default `along_line`, round 3). Each instrument records the
+  method it actually got (`parent_method`) and, under `along_line`, why (`along_line_status`).
+  - `along_line`: the sheet is re-traced with the run's own symbols and tracer options
+    (`trace_connections.line_geometry`), and the parent is the first non-instrument asset reached by following the
+    drawn lines from the instrument (shortest path in pixels; `along_line_px`). In order:
+    1. directly along the lines (`along_line`). Assets within a quarter of a symbol side of the nearest are a tie,
+       broken by position (`tie_broken_by_position`; every candidate is listed in `along_line_candidates`);
+    2. else through other instruments, for a signal chain (`along_line_via_instrument_chain`, with `along_line_via`);
+    3. else the `linked` rule below, with `along_line_status` = `not_on_traced_line` (no traced line touches the
+       instrument, e.g. a dashed or very short leader) or `no_asset_reached_along_line`.
+  - `linked` (rounds 1-2): the linked non-instrument neighbour (closest centre if several); else the first
+    non-instrument reached through other instruments; else the nearest symbol by position (`geometry_nearest`, with
+    the gap recorded).
+  - `nearest`: the nearest non-instrument symbol by position only.
 
-  A second opinion by position alone is always computed. When it disagrees with the connection-based parent, the
-  instrument goes to the review queue. On the development set, an instrument whose two opinions agree was right
-  about 9 times in 10 for Claude and Codex. One whose opinions disagree was right about 3 in 10.
+  A second opinion by position alone is always computed (`parent_agrees_with_position`). Under the `linked` rule on
+  the development set, an instrument whose two opinions agreed was right about 9 times in 10 for Claude and Codex,
+  and one whose opinions disagreed about 3 in 10. Under `along_line` disagreement is no longer a warning sign:
+  disagreeing parents were right 12/13 (Codex), 15/17 (Claude) and 8/14 (Gemini) on the development set, because
+  following the line is exactly what fixes the cases where the nearest symbol by position is wrong.
 - **Off-page connectors.** The drawing reference is parsed from the text (`HPD PID 190-1`, `RCS-PID-100-2`,
   `PID-120-01`), along with any grid reference (`(E-1)`) and the description words. Two connectors on different
   sheets are paired when each points at the other's sheet. When there are several candidates, the pair whose
@@ -136,8 +148,12 @@ notably, the model's own confidence. The green and red cut-offs were also set on
   (they read the same drawing, and every traced run uses the same line tracer), the item can land in green or amber.
 - **Without the other models' runs,** the agreement signals are neutral (0.5). The rating still works, but it
   ranks less sharply.
-- **Instrument parents aren't rated here.** The risk is about "is this item real and labeled right", not "which
-  equipment does it hang under". Parent flags stay in `why_check_this`.
+- **Instrument parents get a second opinion, not a score.** The risk score is about "is this item real and
+  labeled right". For "which equipment does it hang under", the twin is also built with the other parent rule
+  (`along_line` vs `linked`). When the two pick different equipment, the instrument is at least amber and `why`
+  names both candidates (`parent_second_opinion` in `plant_model.json`). On the development sheets this happened
+  to about 1 instrument in 20, and the along-the-line choice was right in 16 of 18 such cases. So it means "decide
+  which", not "the parent is wrong". Other parent flags stay in `why_check_this`.
 
 ## What must be reviewed before anything goes live
 
@@ -147,7 +163,7 @@ rating, the queue falls back to this order:
 1. low extraction confidence;
 2. off-page connectors that didn't pair, and pairs whose descriptions share nothing;
 3. placeholder tags;
-4. instruments with no drawn connection, or whose connection and position disagree;
+4. instruments with no drawn connection, or (under the `linked` rule only) whose connection and position disagree;
 5. other flags: merged equipment, duplicate tags, items under `Unassigned`, links to doubtful symbols;
 6. everything else, including every connection.
 

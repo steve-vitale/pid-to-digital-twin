@@ -18,6 +18,7 @@ Off-page pairing
 Usage: python scripts/score_twin.py --label round1-v2-named-fields [--sheets 0,1,2,3,4,5] [--tools claude,codex]
 Reads out/twin/<label>/<tool>/plant_model.json; writes out/twin/<label>/twin_scores.{json,md}.
 """
+import os
 import argparse
 import json
 import math
@@ -29,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402  (imported, never edited: the grader is frozen)
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 DEV_SHEETS = {str(i) for i in range(6)}
 
 

@@ -19,12 +19,11 @@ Usage:
     python scripts/score_triage.py --fit                                             # refit on dev, write model
     python scripts/score_triage.py --label r2-tiles-trace --split holdout-a --holdout-ok
     $env:PID2GRAPH_SET="Dataset PID"; python scripts/score_triage.py --label hb-tiles-trace --split holdout-b --holdout-ok
+    python scripts/score_triage.py --parents --label r2-tiles-trace --split dev   # parent-rule agreement check
 Sheets outside 0-5 are refused without --holdout-ok. Writes out/triage_<label>_<split>.{md,json}.
 """
 import argparse
 import json
-import os
-import random
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -205,6 +204,47 @@ def choose_tiers(model, sheets, labels, tools, images_dir=None):
     return {"green_max": round(best, 4), "red_min": 0.5, "rule": choose_tiers.__doc__.split("Tier rule ")[1].strip()}
 
 
+# ---------------------------------------------------------------- parent second opinion (twin instruments)
+
+def parent_check(label, tool, sheets, images_dir):
+    """Instrument parent accuracy when the along_line and linked rules agree vs disagree (score_twin's definition:
+    the key parent is the nearest non-instrument asset reachable through connector/crossing/arrow nodes)."""
+    import build_twin as bt
+    import score_twin as stw
+    run_dir = next((r / label / tool for r in cf.RUN_ROOTS if (r / label / tool).is_dir()), None)
+    if run_dir is None:
+        return None
+    builds = {rule: bt.build(tool, run_dir, sheets, Path(images_dir), {}, label, rule)
+              for rule in ("along_line", "linked")}
+    out = Counter()
+    for sheet in sheets:
+        nodes, adj = sc.load_key(DATA / f"{sheet}.graphml", *sc.png_size(Path(images_dir) / f"{sheet}.png"))
+        keys = {k: v for k, v in nodes.items() if v["class"] in sc.SCORED}
+        kpar = stw.key_parents(nodes, adj)
+        right = {}
+        for rule, model in builds.items():
+            items = stw.sheet_items(model, sheet)
+            preds = [{"id": sym, "class": p["class"], "box": p["box_0_1000"]} for sym, (it, p) in items.items()]
+            located = sc.match(preds, keys, False, sc.THRESHOLDS["rough"])
+            for sym, (it, p) in items.items():
+                if it["class"] != "instrumentation" or sym not in located:
+                    continue
+                kp = kpar.get(located[sym], (None,))[0]
+                if kp is None:
+                    continue
+                src = it.get("parent_source")
+                right[(rule, sym)] = (it.get("parent"), bool(src and located.get(src["symbol"]) == kp))
+        for (rule, sym), (par, ok) in right.items():
+            if rule != "along_line" or ("linked", sym) not in right:
+                continue
+            lpar, lok = right[("linked", sym)]
+            g = "agree" if par == lpar else "disagree"
+            out[f"{g}_n"] += 1
+            out[f"{g}_along_line_right"] += ok
+            out[f"{g}_linked_right"] += lok
+    return dict(out)
+
+
 # ---------------------------------------------------------------- main
 
 def write_report(label, split, results, extra=None):
@@ -245,6 +285,8 @@ def main():
     ap.add_argument("--cv", action="store_true", help="with --fit: leave-one-drawing-out check on dev")
     ap.add_argument("--fit-labels", default=",".join(FIT_LABELS), help="with --fit: run labels pooled for fitting")
     ap.add_argument("--model", default=str(cf.MODEL_FILE), help="model file to write (--fit) or read")
+    ap.add_argument("--parents", action="store_true",
+                    help="instrument parent accuracy when the along_line and linked rules agree vs disagree")
     a = ap.parse_args()
     tools = [t for t in a.tools.split(",") if t]
     if a.fit:
@@ -271,6 +313,10 @@ def main():
     if outside and not a.holdout_ok:
         sys.exit(f"refusing sheets {outside}: outside the development set 0-5 (docs/GOAL.md). Holdouts are scored "
                  "once per finished method; pass --holdout-ok only for that run.")
+    if a.parents:
+        for tool in tools:
+            print(tool, parent_check(a.label, tool, sheets, a.images))
+        return
     model = cf.load_model(a.model)
     results = {}
     for tool in tools:

@@ -38,6 +38,9 @@ Tiers (thresholds on the risk, set on the development drawings only, scripts/con
     amber  in between: quick check
     red    risk at or above red_min: look closely
 
+Twin instruments also get a parent second opinion (annotate_model): the twin is rebuilt with the other parent rule
+(along_line vs linked); when the two disagree the instrument is at least amber, with both candidates in "why".
+
 Library:   rate_run(label, tool, sheet, images_dir) -> {"symbols": {id: rating}, "links": {(a, b): rating}}
            annotate_model(model, run_dir, sheets, images_dir)   (adds "risk" to every twin item; see build_twin.py)
 CLI:       python scripts/confidence.py --label r2-tiles-trace --tool codex --sheets 0,1,2,3,4,5
@@ -157,7 +160,8 @@ def has_prediction(rec):
 def trace_info(image, symbols, options):
     """Which line networks each symbol touches, and which symbols the tracer dropped. Cached on disk by input hash."""
     import trace_connections as tc
-    key = hashlib.sha256(json.dumps([str(image), sorted((s["id"], s["box"]) for s in symbols), options],
+    code = hashlib.sha256(Path(tc.__file__).read_bytes()).hexdigest()  # a tracer change invalidates the cache
+    key = hashlib.sha256(json.dumps([str(image), sorted((s["id"], s["box"]) for s in symbols), options, code],
                                     sort_keys=True).encode()).hexdigest()[:24]
     cpath = CACHE / f"{key}.json"
     if cpath.exists():
@@ -349,6 +353,26 @@ def why_text(why, tier=None):
 
 # ---------------------------------------------------------------- twin integration (called by build_twin.py)
 
+PARENT_ALT = {"along_line": "linked", "linked": "along_line"}
+
+
+def parent_second_opinion(model, run_dir, sheets, images_dir):
+    """(other rule, {instrument asset id: parent asset id under the other rule}). Rebuilds the twin with the other
+    instrument-parent rule; asset ids don't depend on the rule, so parents compare directly. Empty if not possible."""
+    rule = model.get("meta", {}).get("parent_rule")
+    alt_rule = PARENT_ALT.get(rule)
+    if not alt_rule:
+        return None, {}
+    try:
+        import build_twin as bt
+        other = bt.build(Path(run_dir).name, Path(run_dir), [str(s) for s in sheets], Path(images_dir or DATA), {},
+                         "second-opinion", alt_rule)
+    except Exception as e:  # never stop the twin over a second opinion
+        print(f"  confidence: no parent second opinion ({e})")
+        return None, {}
+    return alt_rule, {x["id"]: x.get("parent") for x in other.get("instruments", [])}
+
+
 def annotate_model(model, run_dir, sheets, images_dir=None):
     """Add "risk" = {risk_score, tier, why} to every twin item and stream, from the run the twin was built from.
     run_dir is runs/<label>/<tool>/. Items whose run can't be rated keep no "risk" (the queue shows them amber)."""
@@ -387,6 +411,26 @@ def annotate_model(model, run_dir, sheets, images_dir=None):
         r = rated.get(str(st["sheet"]), {}).get("links", {}).get(k)
         if r:
             st["risk"] = pack(r)
+    # Instrument parents: a second opinion from the other parent rule. When the rules pick different equipment, at
+    # least one of them is wrong, so the instrument is never green. It is not raised further: on the development
+    # set the along_line choice was right in 16 of 18 disagreements on M3 (all tools), about the same as when the
+    # rules agreed, so disagreement says "decide which", not "the chosen parent is wrong".
+    alt_rule, alt = parent_second_opinion(model, run_dir, sheets, images_dir)
+    names = {x["id"]: x.get("tag") or x["id"] for k in ("units", "instruments", "line_items", "offpage_connectors")
+             for x in model.get(k, [])}
+    for x in model.get("instruments", []):
+        if x["id"] not in alt:
+            continue
+        agrees = alt[x["id"]] == x.get("parent")
+        x["parent_second_opinion"] = {"rule": alt_rule, "parent": alt[x["id"]], "agrees": agrees}
+        if not agrees:
+            r = x.setdefault("risk", {"risk_score": None, "tier": "amber", "why": ""})
+            if r["tier"] == "green":
+                r["tier"], r["why"] = "amber", ""
+            note = (f"the two parent rules pick different equipment ({model['meta'].get('parent_rule')}: "
+                    f"{names.get(x.get('parent'), 'none')}; {alt_rule}: {names.get(alt[x['id']], 'none')}); "
+                    "confirm which")
+            r["why"] = f"{r['why']}; {note}" if r["why"] else note
     model.setdefault("meta", {})["risk_model"] = {"file": "scripts/confidence_model.json", "tiers": cp["tiers"],
                                                   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"}
     return model
