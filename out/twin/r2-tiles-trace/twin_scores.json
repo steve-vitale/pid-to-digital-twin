@@ -1,0 +1,169 @@
+{
+ "codex": {
+  "parents": {
+   "key_instruments": 190,
+   "with_key_parent": 154,
+   "matched": 154,
+   "control_geometry_only_correct": 132,
+   "correct": 134,
+   "correct_lenient": 143,
+   "twin_parent_not_in_key": 10,
+   "key_instruments_without_key_parent": 36,
+   "wrong_but_linked": 9,
+   "wrong_parent": 1,
+   "accuracy_end_to_end": 0.87,
+   "accuracy_if_matched": 0.87,
+   "lenient_accuracy_if_matched": 0.929,
+   "control_geometry_only_if_matched": 0.857,
+   "by_parent_method": {
+    "linked": {
+     "n": 125,
+     "correct": 107,
+     "accuracy": 0.856
+    },
+    "geometry_nearest": {
+     "n": 29,
+     "correct": 27,
+     "accuracy": 0.931
+    }
+   },
+   "by_position_agreement": {
+    "agrees_with_position": {
+     "n": 135,
+     "correct": 123,
+     "accuracy": 0.911
+    },
+    "disagrees_with_position": {
+     "n": 19,
+     "correct": 11,
+     "accuracy": 0.579
+    }
+   }
+  },
+  "offpage": {
+   "connectors": 95,
+   "pairs": 7,
+   "status": {
+    "unpaired: target drawing is not in this sheet set": 35,
+    "unpaired: no drawing number read from the text": 31,
+    "paired": 14,
+    "unpaired: target sheet is in this set but no matching connector was found": 15
+   },
+   "sheet_drawing_numbers": {
+    "0": [
+     "140-1",
+     "inferred_offpage_refs"
+    ],
+    "1": [
+     "150-1",
+     "inferred_offpage_refs"
+    ],
+    "2": [
+     "160-1",
+     "inferred_offpage_refs"
+    ],
+    "3": [
+     "170-1",
+     "inferred_offpage_refs"
+    ],
+    "4": [
+     null,
+     "unknown"
+    ],
+    "5": [
+     "100-1",
+     "inferred_offpage_refs"
+    ],
+    "6": [
+     "100-2",
+     "inferred_offpage_refs"
+    ],
+    "7": [
+     "210-1",
+     "inferred_offpage_refs"
+    ],
+    "8": [
+     null,
+     "unknown"
+    ],
+    "9": [
+     null,
+     "ambiguous"
+    ],
+    "10": [
+     "110-1",
+     "inferred_offpage_refs"
+    ],
+    "11": [
+     "120-1",
+     "inferred_offpage_refs"
+    ]
+   },
+   "pair_list": [
+    {
+     "sheet_a": "0",
+     "text_a": "FWS TO STM BYPASS FWS PID 170-1",
+     "sheet_b": "3",
+     "text_b": "FWS TO MAIN STM BYPASS MSS PID 140-1",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "CND PID 160-1 CONDENSATE SYSTEM",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 (C-12) CONDENSATE RETURN",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 2
+    },
+    {
+     "sheet_a": "11",
+     "text_a": "RES HEAT REMOVAL SYSTEM RCS PID 100-1",
+     "sheet_b": "5",
+     "text_b": "RES. HEAT REMOVAL SYSTEM RHRS PID-120-01",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 3
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "PID 160-1 (F-1) CND RECEIVER TANK VENT",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 ACC VACUUM PMPS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 2
+    },
+    {
+     "sheet_a": "11",
+     "text_a": "REACTOR COOLANT SYSTEM RCS PID 100-1 (H-1)",
+     "sheet_b": "5",
+     "text_b": "PID 120-1 (E-1) RHRS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 3
+    },
+    {
+     "sheet_a": "11",
+     "text_a": "RES HEAT REMOVAL SYSTEM RCS PID 100-1",
+     "sheet_b": "5",
+     "text_b": "PID 120-1 (C-1) RHRS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 3
+    },
+    {
+     "sheet_a": "5",
+     "text_a": "REACTOR COOLANT SYSTEM RCS-PID-100-2",
+     "sheet_b": "6",
+     "text_b": "PID 100-1 (D-1) RCS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 0
+    }
+   ]
+  }
+ }
+}

@@ -676,7 +676,8 @@ def export_twin(model, out_dir, images_dir=None):
 # ---------------------------------------------------------------- main
 
 def write_csv(path, header, rows):
-    with path.open("w", newline="", encoding="utf-8") as f:
+    # utf-8-sig: Excel, where plant reviewers open these, needs the BOM to read tags like "ESS–HTR–180".
+    with path.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow(header)
         w.writerows(rows)

@@ -13,25 +13,34 @@ the approach without compromising its safety and data governance.
 
 ## Results so far
 
-Three frontier models read 12 real engineering P&IDs (the open [OPEN100](https://www.open-100.com) reactor design,
-annotated in the [PID2Graph](https://zenodo.org/records/14803338) dataset). Each was scored against that
-independent answer key: same images, same prompt, same scorer for every model.
+The goal ([docs/GOAL.md](docs/GOAL.md)) is a digital twin starter kit that needs as little human correction as
+possible. The primary score, **review load**, counts the corrections a reviewer must make per 100 items on the
+drawing (lower is better).
 
-| Model | Found the symbol and named it right (F1) | Connections between assets (F1) |
+The rules, splits and decision rule were committed before any method was tested. Each method was scored once on two
+sealed sets nobody tuned on:
+- **A:** 6 real OPEN100 drawings;
+- **B:** 20 drawings in a different drafting style.
+
+| Model | Baseline (whole sheet), A / B | **Tiling + line tracing**, A / B |
 |---|---|---|
-| GPT (gpt-6.1-sol, via Codex) | 0.85–0.87 | 0.53 |
-| Claude (claude-opus-5-5) | 0.85 | 0.42 |
-| Gemini (gemini-3.1-pro) | 0.44 first try → 0.74 after a format fix | 0.24 |
-| Gemma 4 31B (open weights, can run offline) | 0.25 first try (5 of 12 timed out). After a retry, 9 of 12 completed at ~0.53; the same 3 dense sheets never finished | 0.02 |
+| GPT (gpt-6.1-sol, via Codex) | 48.8 / 67.0 | **17.8 / 20.7** |
+| Claude (claude-opus-5-5) | 61.1 / 76.6 | **32.4 / 16.5** |
+| Gemini (gemini-3.1-pro) | 75.9 / 92.7 | **40.2 / 38.3** |
 
-**What that means in practice:**
-- Instruments and off-page connectors are close to solved (0.98–0.99 for all three).
-- Every model misses more than half of the process connections, so topology still needs a person.
-- Gemini's first-try gap was an output-format slip: it swapped the x and y axes on 5 of 12 drawings. A one-line
-  prompt change fixed it.
-- Twelve drawings from one design show patterns, not a universal ranking.
+**What that means:**
+- **AI reads symbols and tags; code traces the lines.** Connections are two-thirds of the work and the models'
+  weakest skill. A deterministic line tracer took the best result from about 49 corrections per 100 items to about
+  18.
+- **It held on a different drafting style,** so it isn't tuned to one drawing set.
+- **Not everything improved.** Choosing the right parent equipment for each instrument got slightly worse (90.9% →
+  87.0%), because the tracer links everything on a shared pipe network. That's the next thing to fix, and it's
+  written up.
+- **An open-weight model you can run offline** (Gemma 4 31B, round 1) trailed far behind: about 0.53 detection F1
+  where it finished, and it stalled on dense sheets.
 
-Full method, run-to-run variance and caveats: **[docs/EVALUATION.md](docs/EVALUATION.md)**.
+Full results, every method tried (including the losses), and caveats: [docs/GOAL.md](docs/GOAL.md) →
+Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## What this project demonstrates
 
@@ -99,14 +108,25 @@ python scripts/run_extraction.py --tool gemini --drawings 0,1,2 --label my-run -
 python scripts/scorecard.py --label my-run
 ```
 
-**6. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
+**6. Trace the connections with code and build the digital twin starter kit:**
+```
+python scripts/trace_connections.py --src-label my-run --tool gemini --drawings 0,1,2 --label my-run-traced
+python scripts/build_twin.py --label runs/my-run-traced/gemini/ --sheets 0,1,2 --score
+```
+The twin package lands in `out/twin/`: asset hierarchy, review queue, Ignition tags, PI AF rows, and per-sheet SVGs.
+See [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md).
+
+**7. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.
 
 ## Read next
 
 | Document | For |
 |---|---|
-| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, full results |
+| [docs/GOAL.md](docs/GOAL.md) | The round-2 goal, review-load score, sealed splits, decision rule, and results |
+| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results |
+| [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
+| [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
 | [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources |
@@ -119,6 +139,8 @@ it at a real site.
 | Seed model, generator, platform outputs | Done |
 | Answer keys (TE verified; OPEN100 fetched) | Done |
 | Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
+| Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
+| Round 3: choose instrument parents along the traced line; ensemble of models | Next |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
 | Operations review of the Tennessee Eastman extraction | Next |
 | Ignition import + live values from public TE simulation data | Planned |

@@ -372,3 +372,60 @@ better.
 **At your plant:** the equivalent of the sealed sets is a few areas of the site nobody tunes on. If the tool gets
 better on the pilot unit but not on a unit drafted by a different contractor in a different decade, it learned the
 pilot, not the job.
+
+---
+
+## 11. Round 2: let code do the geometry, then judge it on drawings nobody tuned on
+
+**What:**
+- Three methods built in parallel: tiling, a computer-vision line tracer, and a converter that turns extracted sheets
+  into a twin starter kit.
+- All judged on review load, the corrections a reviewer must make per 100 drawing items.
+- Scored on two sealed sets: same-style drawings and a different drafting style.
+
+**How:**
+- **Rules first.** The goal, the score, the splits and the decision rule were committed before any method existed.
+  The final method list and the decision rule were committed again before any holdout run (`docs/GOAL.md`).
+- **Tiling:** each sheet is cut into four overlapping tiles, so models see small symbols at full size. The tiles are
+  stitched back with seam-aware de-duplication. The grid was chosen by running the stitching on the answer key
+  itself (a perfect model still loses ~10% of links at 2×2 seams), not by sweeping grids against the score.
+- **Line tracing:** an AI model finds the symbols. Code erases them from the image, joins the remaining ink into
+  line networks, blocks undetected valves from passing a connection through, and links assets that share a network.
+  No AI, about 2–18 seconds per sheet.
+- **The converter** builds the hierarchy, Ignition tags, PI AF rows, per-sheet SVGs at the extracted positions, and a
+  review queue with the least certain items first.
+
+**Results (holdout A, the same style; holdout B, a different style; lower is better):**
+- **Tiling + tracing (M3) won for every model on holdout A, and held on holdout B.**
+- **Codex:** 48.8 → **17.8** on holdout A, and 67.0 → 20.7 on holdout B.
+- **Claude:** 61.1 → 32.4 on A, and 76.6 → 16.5 on B.
+- **Gemini:** 75.9 → 40.2 on A, and 92.7 → 38.3 on B.
+- Full table, including every loss: `GOAL.md` → Results.
+
+**Why it worked:** connections are two-thirds of the work and the models' weakest skill, but lines are geometry.
+Giving the geometry to deterministic code and keeping AI for "what is this symbol and what does its tag say" plays
+to each side's strength.
+
+**What didn't go to plan, kept on the record:**
+- **Tiling made Claude worse on the six development drawings and better on both holdouts.** Small development sets
+  mislead; that's why the decision is made on the holdout.
+- **On the different-style set,** plain tracing beat tiling + tracing for Codex. The pre-registered rule still picks
+  M3, and the difference is reported.
+- **The twin's parent assignment got slightly worse** on holdout A (90.9% → 87.0%), even as the connection score
+  improved a lot. The tracer links every asset on a shared pipe network, which is what the score counts but not what
+  "which equipment is this instrument on" needs. **A better score did not automatically mean a better twin.**
+- **Two small engineering catches:**
+  - Windows line endings silently changed a prompt file's bytes between branches. The wording was identical, but it
+    broke "same prompt for every run". Caught by the hash in each run record, and fixed by pinning the files to LF.
+  - The review-queue CSV needed a byte-order mark, or Excel garbles tags like "ESS–HTR–180".
+
+**Lesson:** decide the rules before you look, measure on what you didn't tune on, and keep a second measure that
+the first can't fool. The connection score improved by a lot. The twin measure caught where that improvement didn't
+translate.
+
+**At your plant:**
+- **Split the work by what it is.** Reading symbols and text: AI. Following lines, checking tag syntax,
+  cross-referencing the DCS: code. Deciding: people.
+- **Judge any tool on areas of the site nobody tuned on,** and keep an outcome measure, such as "did the
+  instrument land under the right equipment in the asset framework", next to whatever accuracy number a vendor
+  quotes.

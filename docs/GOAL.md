@@ -123,3 +123,41 @@ network (junctions connect, as in the answer keys). It can't see the order along
 definition. For the twin, stream order matters, and the scorecard neither rewards nor punishes it.
 
 **Not attempted in round 2:** the planned ensemble method. It's reported as not done, not dropped silently.
+
+## Results (round 2, scored after the addendum above; each method once per holdout)
+
+Review load: corrections per 100 key items, lower is better.
+
+| Method | Codex: dev / A / B | Claude: dev / A / B | Gemini: dev / A / B |
+|---|---|---|---|
+| M0 baseline | 66.5 / 48.8 / 67.0 | 66.4 / 61.1 / 76.6 | 90.8 / 75.9 / 92.7 |
+| M1 tiling | 46.3 / 31.7 / 64.8 | 73.5 / 54.9 / 71.5 | 76.1 / 68.0 / 80.2 |
+| M2 traced on M0 | 34.4 / 28.7 / **16.2** | 29.8 / 36.0 / 28.2 | 87.6 / 55.4 / 83.9 |
+| **M3 traced on M1** | 20.5 / **17.8** / 20.7 | 36.1 / **32.4** / **16.5** | 59.2 / **40.2** / **38.3** |
+
+**Verdict under the decision rule:**
+- **M3 is every tool's declared method** (lowest holdout A review load), well beyond the ~1-point run-to-run noise.
+- **M3 also beats M0 on holdout B for every tool,** so by the pre-registered rule it is **not** style overfitting:
+  the gain carries over to a different drafting style.
+- **Best result:** Codex with M3 cuts review load on holdout A from 48.8 to 17.8, about 63% fewer corrections.
+  Connections found go from 55% to 88% (recall), at 89% precision.
+
+**What the decision rule doesn't hide:**
+- **Codex, holdout B:** plain tracing (M2, 16.2) beat M3 (20.7). The rule picks on holdout A, so M3 stays declared,
+  and this difference is reported, not acted on.
+- **Claude, tiling:** tiling made Claude *worse* on development (66.4 → 73.5) but better on holdout A
+  (61.1 → 54.9) and holdout B (76.6 → 71.5). Six development drawings weren't enough to judge it, which is why the
+  decision is made on the holdout.
+- **Failures:** one Gemini M0 run on holdout B (drawing 23) returned malformed JSON and scores zero. The tracer
+  writes an empty record for it, so tracer rows show "0 failed" while still scoring that drawing as zero.
+
+**Twin-level result (secondary score), and an honest step backwards:**
+- Built from Codex M3, instruments are attached to the right parent **87.0%** of the time on holdout A, against a
+  position-only control of 85.7%.
+- **The round-1 twin did better on the same sheets: 90.9%** (140 vs 134 of 154).
+- **Why:** the tracer links every pair of assets on a shared pipe network. That's the connection definition the
+  primary score uses (the limitation stated before the results), and it makes "which asset is this instrument on?"
+  more ambiguous. The primary score improved while this twin measure slipped. It's the reason the twin measures sit
+  next to the primary score.
+- **Round-3 direction:** choose an instrument's parent by distance *along* the traced line, not by shared network
+  membership. Tune it on development, then score it once on the holdouts.
