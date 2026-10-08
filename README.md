@@ -1,5 +1,7 @@
 # P&ID → Digital Twin Jumpstart
 
+[![tests](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml/badge.svg)](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml)
+
 Turning piping and instrumentation diagrams into a tagged asset model for Ignition and AVEVA PI with AI tools,
 **and measuring whether the result can be trusted.**
 
