@@ -75,8 +75,10 @@ review. That second group is often real **documentation drift**, which is worth 
 - **Record the outcome per item:** confirmed / different in field / not found / found but not drawn.
 
 ### 2.7 Make human review a process, not a spreadsheet
-- **Order the queue by uncertainty:** low confidence first, then source disagreements, unpaired connectors,
-  placeholder tags, and instruments with no parent (the converter in this repo produces exactly this queue).
+- **Order the queue by risk:** red, amber and green tiers from independent cross-checks (do other models and
+  passes agree, is the symbol on a line, is the tag well-formed), not the model's own confidence. Then source
+  disagreements, unpaired connectors, placeholder tags, and instruments with no parent. The converter in this repo
+  produces exactly this queue.
 - **Calibrate the reviewers:** double-review a sample, and track agreement between reviewers. A tired reviewer
   has an error rate too.
 - **Measure review time per sheet:** that, not model accuracy, is the cost line that matters (`GOAL.md`'s
@@ -114,7 +116,7 @@ measured on units nobody tuned on, and reported with the failures, exactly as in
 | Demonstrated here | Not demonstrated (needs a real site) |
 |---|---|
 | Extraction scored against independent keys, with controls and sealed holdouts | Calibration across drafting eras and contractors |
-| Review load as the cost measure; a confidence-ordered review queue | Real review minutes per sheet, reviewer agreement |
+| Review load as the cost measure; a risk-tiered review queue checked on unseen drawings | Real review minutes per sheet, reviewer agreement |
 | Cross-sheet stitching on one design's sheet set | Stitching across an archive with missing and superseded sheets |
-| Generated Ignition and PI AF starting points | Reconciliation against a live DCS, historian and maintenance system |
+| Ignition build verified in a running gateway ([IGNITION_BUILD.md](IGNITION_BUILD.md)); PI AF sheet generated, not import-tested | Reconciliation against a live DCS, historian and maintenance system |
 | A governance model (read-only, MOC-tied, audited) | Running it inside a site's MOC and document control |

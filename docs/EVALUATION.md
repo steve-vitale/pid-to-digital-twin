@@ -73,7 +73,8 @@ These are the rules this project follows. Each one also applies at a plant.
      those.
 10. **Price the gain.** Every result carries time and cost per sheet. A quality gain that doubles review time, or
     costs ten times more, may not be a gain.
-11. **Close the loop with people.** The operations review corrections (Phase 4) are the outcome measure. If the
+11. **Close the loop with people.** The operations review corrections (Phase 4, deferred by the project owner)
+    are the outcome measure. If the
     benchmark improves but reviewers still fix the same things, the benchmark is measuring the wrong thing.
 
 ## 3. Be flexible for your situation, without loosening governance
@@ -129,7 +130,7 @@ What this supports:
 What it doesn't support:
 - **Ranking claims beyond these drawings.** Twelve drawings come from one public design; a different drafting
   style may reorder the tools.
-- **Any statement about tag-reading accuracy.** That is scored on Tennessee Eastman, next.
+- **Any statement about tag-reading accuracy.** That needs the Tennessee Eastman operator review, which is deferred.
 
 ## 5. Where the evaluation files live
 
@@ -137,7 +138,10 @@ What it doesn't support:
 |---|---|
 | `scripts/score_pid2graph.py` | Scoring rules (dated docstring) |
 | `scripts/test_scorer_controls.py` | Positive and negative controls; must pass before any score is trusted |
-| `scripts/run_extraction.py` | Runs a tool; records model, prompt hash, image hash, time, cost |
+| `scripts/run_extraction.py` | Runs a tool; records model, prompt hash, image hash, time, cost, token usage |
+| `scripts/cost_report.py` | Time and cost totals from every run record → `out/costs.*` ([COSTS.md](COSTS.md)) |
+| `scripts/run_tests.py` | Every test in one command (CI runs it) |
+| `scripts/run_holdouts.ps1`, `score_holdout_b.ps1`, `score_parent_holdouts.ps1`, `score_triage_holdouts.ps1` | Windows PowerShell helpers that reproduce the GOAL.md holdout tables, each label scored once |
 | `scripts/scorecard.py`, `scripts/per_drawing.py` | Aggregate and per-drawing views |
 | `extraction/prompt.md`, `extraction/prompt_v2.md` | Prompt versions; never edited in place once used |
 | `scripts/tiling.py`, `extraction/tile_preface.md` | Round-2 tiled extraction: tile grid, merge rules (stated in the docstring), optional whole-sheet links; run with `run_extraction.py --tiles 2x2` |

@@ -391,7 +391,7 @@ pilot, not the job.
   itself (a perfect model still loses ~10% of links at 2×2 seams), not by sweeping grids against the score.
 - **Line tracing:** an AI model finds the symbols. Code erases them from the image, joins the remaining ink into
   line networks, blocks undetected valves from passing a connection through, and links assets that share a network.
-  No AI, about 2–18 seconds per sheet.
+  No AI, about 0.3–30 seconds per sheet (mean 13; `out/costs.md`).
 - **The converter** builds the hierarchy, Ignition tags, PI AF rows, per-sheet SVGs at the extracted positions, and a
   review queue with the least certain items first.
 
@@ -590,4 +590,45 @@ Details and receipts: [IGNITION_BUILD.md](IGNITION_BUILD.md).
   when" has an answer.
 - **Treat engineering ranges and alarm setpoints as engineering data with a source.** Where none exists (spans
   here), label the value as assumed and send it to operations to confirm.
+
+## 15. Counting the cost, and a loose-ends sweep
+
+**What:**
+- Every recorded cost and time figure is now in one place, [COSTS.md](COSTS.md), generated from the run records
+  rather than typed in.
+- A sweep fixed the gaps a newcomer or reviewer would hit: a missing data download, stale plan rows, two
+  contradictions, undocumented settings, no test command, no CI.
+
+**How:**
+- `scripts/cost_report.py` reads every run record and writes `out/costs.md`. Its total ties to the Gemini spend
+  ledger to the cent: $16.57 of the $25 cap.
+- Two independent read-only reviews ran in parallel, one on costs and one on loose ends. Their findings were checked
+  against the files before anything was changed.
+
+**What the cost picture says:**
+- **Machine cost is small.** Model calls cost cents per sheet, roughly $200–$600 per thousand sheets at API prices.
+  Compute is about a day of unattended runtime per thousand sheets.
+- **People are the cost.** The declared method still needs about 16–40 corrections per 100 items, and the minutes per
+  correction were never measured here. COSTS.md shows how to size it, with the assumption labeled.
+- **Two vendors' costs aren't known.** Claude and GPT ran on flat subscriptions. Claude's tool reports an
+  API-equivalent figure ($36.37); GPT's reports nothing, so no figure is claimed for it.
+
+**What was wrong:**
+- **Token counts were never saved,** so past runs can't be re-priced at new rates. Every run records them from now on.
+- **Two numbers in the docs didn't match the data:**
+  - the line tracer's "2–18 seconds per sheet" (actually 0.3–30);
+  - an unsourced "for weeks" in the README's first paragraph.
+
+  Both are fixed.
+- **The tutorial's Ignition step needed simulation files no script downloaded.** It worked only on the machine that
+  built it. There is now a fetch script with pinned checksums.
+
+**Lesson:** "every number traces to a file" has to include the cost numbers. A cost claim nobody can recompute is a
+guess with a dollar sign.
+
+**At your plant:**
+- **Before a pilot, write down what you'll measure:** minutes per sheet by hand (the baseline) and minutes per
+  correction for reviewers. Those two numbers decide the business case. Machine cost almost never does.
+- **Ask any vendor for per-sheet cost and per-sheet time from their own logs,** split into machine and reviewer time.
+  If they can't produce it, they haven't measured it.
 

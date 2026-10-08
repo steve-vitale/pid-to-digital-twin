@@ -13,7 +13,7 @@ What it does, in order (each step is idempotent):
   7. Perspective project PIDTwin with one screen per drawing (scripts/ignition/build_views.py).
 
 Usage:
-  python scripts/ignition/build_gateway.py [--write-only] [--twin out/twin/r2-tiles-trace/codex]
+  python scripts/ignition/build_gateway.py [--fresh] [--write-only] [--twin out/twin/r2-tiles-trace/codex]
 Credentials: see scripts/ignition/gw.py. Also needs IGNITION_BACKUP_DIR and IGNITION_SECRETS_DIR (private folders).
 """
 import argparse

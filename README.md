@@ -3,7 +3,7 @@
 Turning piping and instrumentation diagrams into a tagged asset model for Ignition and AVEVA PI with AI tools,
 **and measuring whether the result can be trusted.**
 
-The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand for weeks. This
+The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand. This
 project tests how much of that AI vision models can do, how to check their work honestly, and how a plant could use
 the approach without compromising its safety and data governance.
 
@@ -34,8 +34,8 @@ sealed sets nobody tuned on:
   18.
 - **It held on a different drafting style,** so it isn't tuned to one drawing set.
 - **Not everything improved.** Choosing the right parent equipment for each instrument got slightly worse (90.9% →
-  87.0%), because the tracer links everything on a shared pipe network. That's the next thing to fix, and it's
-  written up.
+  87.0%), because the tracer links everything on a shared pipe network. Round 3 fixed it for this drafting style
+  (next bullet but one).
 - **Reviewers get a risk-ranked queue.** Every item has a green / amber / red tier and a plain-language reason. For
   example, the twin built from 12 sheets has 377 red, 676 amber and 1,833 green items out of 2,886. On drawings
   nobody tuned on, the riskiest 20% held 2–4× as many errors as the models' own confidence would point to (23 of 24
@@ -56,6 +56,9 @@ sealed sets nobody tuned on:
     checks pass. See [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
 ![Ignition Perspective screen during the fault-6 replay: reactor pressure above its 2,895 kPa limit shows red; the agitator speed, which has no data source, shows a not-connected overlay](docs/screenshots/ignition-te-fault6-alarm.png)
+
+**What it cost:** $16.57 of metered model spend (a $25 cap), plus two flat-rate subscriptions. Machine time is
+cents per sheet; reviewer time is the real cost, and the docs show how to size it. See [docs/COSTS.md](docs/COSTS.md).
 
 Full results, every method tried (including the losses), and caveats: [docs/GOAL.md](docs/GOAL.md) →
 Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
@@ -115,9 +118,11 @@ of a 9.3 GB archive that are needed:
 python scripts/fetch_pid2graph.py --get "Complete/PID2Graph OPEN100/"
 ```
 
-**4. Prove the scorer before trusting it.** Positive and negative controls must all pass:
+**4. Prove the scorer before trusting it.** Positive and negative controls must all pass. `run_tests.py` runs every
+test (the same command CI runs):
 ```
 python scripts/test_scorer_controls.py
+python scripts/run_tests.py
 ```
 
 **5. Run a model and score it.** Use `claude`, `codex`, or `gemini`; for Gemini, set `GEMINI_API_KEY`:
@@ -138,8 +143,10 @@ See [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md).
 script takes a backup, then creates the replay connection, tag provider, tags and screens. The verifier plants five
 faults, confirms each is caught, restores the gateway, then runs all nine checks:
 ```
+python scripts/fetch_te_data.py                      # the open TE simulation runs the replay uses
 python scripts/ignition/build_gateway.py --fresh
-python scripts/ignition/verify_gateway.py --controls
+python scripts/ignition/te_sim_server.py --run normal   # live values for the screens (leave running)
+python scripts/ignition/verify_gateway.py --controls   # stop the replay first: the verifier drives it itself
 ```
 Setup (API key, HTTPS, OPC UA certificate) is in [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
@@ -154,6 +161,7 @@ it at a real site.
 | [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
+| [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
@@ -170,7 +178,7 @@ it at a real site.
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
 | Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
-| Operations review of the Tennessee Eastman extraction | Next |
+| Operations review of the Tennessee Eastman extraction | Deferred (owner decision) |
 
 ## Data and credits
 
@@ -178,4 +186,17 @@ it at a real site.
   script, not redistributed.
 - **Tennessee Eastman process**, Downs & Vogel (1993); open simulation code by the Braatz group (University of
   Illinois). Downloaded by script.
-- Code in this repository: MIT.
+- Code in this repository: MIT. Files derived from PID2Graph are CC BY-SA 4.0; see [NOTICE.md](NOTICE.md).
+
+## Environment variables
+
+| Variable | Used by | What |
+|---|---|---|
+| `GEMINI_API_KEY` or `GEMINI_KEY_ENV_FILE` | `run_extraction.py --tool gemini` | The key, or a path to a private `.env` file holding it |
+| `PID2GRAPH_SET` | extraction, scoring, twin scripts | `Dataset PID` selects the holdout-B set; the default is OPEN100 |
+| `IGNITION_ENV_FILE` | `scripts/ignition/*` | A private file of the variables below, as `KEY=VALUE` lines |
+| `IGNITION_URL`, `IGNITION_API_TOKEN`, `IGNITION_CA_FILE` | `scripts/ignition/gw.py` | Gateway HTTPS address, API key, and the CA that signed the gateway's certificate |
+| `IGNITION_BACKUP_DIR`, `IGNITION_SECRETS_DIR` | `build_gateway.py`, `verify_gateway.py`, `ua_client.py` | Private folders for gateway backups, the OPC UA client certificate and the verifier's OPC UA login |
+| `IGNITION_UA_URL` | `ua_client.py` | The gateway's OPC UA server (default `opc.tcp://localhost:62541`) |
+
+Keep every one of these outside the repo.

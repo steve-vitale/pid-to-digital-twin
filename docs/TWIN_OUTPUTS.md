@@ -10,6 +10,8 @@ records the method it used, and every item starts as `unverified`.
 ```
 python scripts/build_twin.py --label round1-v2-named-fields --sheets 0,1,2,3,4,5 --score
 ```
+The label names a folder of your own extraction runs under `runs/` (gitignored). Use the label from README tutorial
+step 5.
 
 - `--label` takes a run label (every tool folder under `runs/<label>/`) or one tool folder
   (`runs/round1-v2-named-fields/claude/`).
@@ -25,7 +27,10 @@ python scripts/build_twin.py --label round1-v2-named-fields --sheets 0,1,2,3,4,5
 `python scripts/generate.py out/twin/<label>/<tool>/plant_model.json` rebuilds the platform files from an edited
 model. Run with no argument, it still produces the Tennessee Eastman outputs, unchanged.
 
-A small example package for Claude on sheets 0–5 is committed under `out/twin/round1-v2-named-fields/claude/`.
+Two packages are committed:
+- `out/twin/round1-v2-named-fields/claude/`: a small round-1 example (Claude, sheets 0–5);
+- `out/twin/r2-tiles-trace/codex/`: the full 12-sheet twin from the declared method. This is the one loaded into
+  Ignition.
 
 ## The files
 
@@ -97,7 +102,8 @@ A small example package for Claude on sheets 0–5 is committed under `out/twin/
 - **Read-only intent.** Instrument PV members are written with `"readOnly": true`, because the starter kit is for
   monitoring, never control (docs/AT_YOUR_PLANT.md). Checked on Ignition 8.3.10: the property survives import, and
   outside writes are refused (V1 and V7 in [IGNITION_BUILD.md](IGNITION_BUILD.md)). Don't rely on it alone: enforce
-  read-only at the OPC connection and in tag security as well.
+  read-only at the OPC connection and in tag security as well. The `ReviewStatus` members are memory tags and
+  stay writable by design: they are review workflow, not process data.
 - **Scripted import.** Instead of the Designer, `scripts/ignition/build_gateway.py` imports this file into a running
   gateway over its REST API, adds Perspective screens built from `svg/`, and `verify_gateway.py` checks the result.
 
@@ -190,4 +196,4 @@ Then:
 - **Off-page pairing.** Counts plus the list of pairs, for checking by hand. The answer keys carry no text, so no
   automatic pairing score is claimed.
 
-Results: `out/twin/round1-v2-named-fields/twin_scores.md`.
+Results: `out/twin/round1-v2-named-fields/twin_scores.md` and `out/twin/r2-tiles-trace/twin_scores.md`.

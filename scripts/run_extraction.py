@@ -92,7 +92,8 @@ def run_claude(image, model, prompt=None):
         out = json.loads(p.stdout)
         models = list((out.get("modelUsage") or {}).keys())
         return {"text": out.get("result"), "model": ",".join(models) or model or "default",
-                "cost_usd_notional": out.get("total_cost_usd"), "error": out.get("result") if out.get("is_error") else None}
+                "cost_usd_notional": out.get("total_cost_usd"), "usage": out.get("usage"),
+                "error": out.get("result") if out.get("is_error") else None}
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
@@ -110,8 +111,10 @@ def run_codex(image, model, prompt=None):
         p = subprocess.run(cmd, cwd=work, input=prompt or PROMPT, capture_output=True, text=True, encoding="utf-8",
                            timeout=TIMEOUT_S, shell=(os.name == "nt"))
         m = re.search(r"^model:\s*(\S+)", p.stderr + p.stdout, flags=re.M)
+        tok = re.search(r"tokens used\s*:?\s*([\d,]+)", p.stderr + p.stdout, flags=re.I)  # as printed by the CLI
         text = last.read_text(encoding="utf-8") if last.exists() else None
         return {"text": text, "model": m.group(1) if m else (model or "default"), "cost_usd_notional": None,
+                "usage": {"total_tokens": int(tok.group(1).replace(",", ""))} if tok else None,
                 "error": None if text else (p.stderr[-2000:] or "no output")}
     finally:
         shutil.rmtree(work, ignore_errors=True)
@@ -203,7 +206,8 @@ def run_tiled(tool, image, model, grid, overlap, workers):
         parsed, perr = parse_json(res.get("text"))
         return {"tile": i, "row": r, "col": c, "box_px": list(boxes[i]), "seconds": round(time.time() - t0, 1),
                 "model": res.get("model"), "cost_usd": res.get("cost_usd"),
-                "cost_usd_notional": res.get("cost_usd_notional"), "error": res.get("error"), "parse_error": perr,
+                "cost_usd_notional": res.get("cost_usd_notional"), "usage": res.get("usage"),
+                "error": res.get("error"), "parse_error": perr,
                 "n_symbols": len((parsed or {}).get("symbols") or []),
                 "n_connections": len((parsed or {}).get("connections") or []),
                 "raw_text": res.get("text"), "prediction": parsed}
@@ -313,8 +317,8 @@ def main():
                   "prompt_sha256": sha(PROMPT.encode()), "image_sha256": sha(image.read_bytes()),
                   "ran_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                   "seconds": round(time.time() - t0 + extra_s, 1), "cost_usd": res.get("cost_usd"),
-                  "cost_usd_notional": res.get("cost_usd_notional"), "error": res.get("error"),
-                  "parse_error": perr, "raw_text": res.get("text"), "prediction": parsed}
+                  "cost_usd_notional": res.get("cost_usd_notional"), "usage": res.get("usage"),
+                  "error": res.get("error"), "parse_error": perr, "raw_text": res.get("text"), "prediction": parsed}
         if a.tiles:
             record["tiling"], record["tiles"] = res["tiling"], res["tiles"]
         out_path.parent.mkdir(parents=True, exist_ok=True)

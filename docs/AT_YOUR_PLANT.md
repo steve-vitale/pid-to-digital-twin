@@ -178,3 +178,7 @@ sheet on one GPU, a thousand-sheet backlog is days of unattended runtime, not mo
 **Choosing between cloud and local is a trade-off, not a rule.** Frontier cloud models scored higher in this
 project. A local model may score lower but keep every drawing in-house. Measure both on *your* sheets with the
 same evaluation, then decide with your security and data-governance owners, not from a vendor slide.
+
+---
+
+Measured costs from this project, and a worked sizing for 1,000 sheets: [COSTS.md](COSTS.md).

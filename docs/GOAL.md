@@ -39,6 +39,7 @@ it from scratch.
   | Gemini (gemini-3.1-pro) | 90.8 | 75.9 |
 
   Holdout B has no baseline yet. Each tool's baseline on it is run once, alongside the final methods.
+  *(Pre-registered text, left as written. Holdout-B baselines are in Results below.)*
 - **Classes:** the six asset classes (tank, pump, valve, instrumentation, inlet/outlet, general). Drawing plumbing
   (line bends, crossings, arrows, frames) is not scored.
 - **Connections:** asset-to-asset links traced through line bends and crossings, same definition as round 1.
@@ -81,7 +82,7 @@ Overtraining to the scorecard would be cheating, so these rules bind every round
 6. **Holdout B is the generalization check.** A method that improves holdout A but makes holdout B worse is
    probably learning OPEN100's style, and is reported as such.
 
-## Round-2 methods (planned)
+## Round-2 methods (planned; results below)
 
 | Method | Idea | Why it might help the goal |
 |---|---|---|

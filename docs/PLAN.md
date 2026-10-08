@@ -2,6 +2,28 @@
 
 Planning locked 2026-10-06. The reasoning behind each decision is in [`JOURNAL.md`](JOURNAL.md).
 
+> **This is the plan as locked on 2026-10-06, kept as written.** What actually happened is in the status section
+> below. Changes are marked there rather than edited into the plan.
+
+## Status as of 2026-10-08
+
+| # | Phase | Status |
+|---|---|---|
+| 0 | Sketch | Done |
+| 1 | Ground truth | Done. The keys turned out to have 10 symbol classes, not 8 (JOURNAL entry 7). 6 are scored |
+| 2 | Extraction harness | Done (`scripts/run_extraction.py`, `scripts/scorecard.py`); the cost meter and the $25 stop held: $16.57 spent |
+| 3 | Comparison runs | Done, plus rounds 2 and 3 on sealed holdouts. Scorecards are `out/scorecard_<label>.md`, not one `out/scorecard.md` |
+| 4 | Operations review | **Deferred by the project owner** |
+| 5 | Ignition proof | Done, and stronger than planned: a scripted build plus a 9-check verifier proven with 5 planted faults ([IGNITION_BUILD.md](IGNITION_BUILD.md)) |
+| 6 | Live values | Done, **by a different route:** the repo's own OPC UA replay server (`scripts/ignition/te_sim_server.py`) with the Braatz group's TE runs (`scripts/fetch_te_data.py`), not the Programmable Device Simulator with Rieth 2017 data. Reason: an OPC UA server is how a plant feeds Ignition, and it can be read-only by construction. The fault-6 alarm is proven by the verifier. Screenshots are committed; the screen recording is still to do |
+| 7 | PI artifact | Done as planned: PI Builder sheet, labeled not import-tested |
+| 8 | Write-up | README, journal (14 entries), costs ([COSTS.md](COSTS.md)). Demo video still to do |
+
+Other changes from the plan:
+- **Story log:** "STORY_LOG" became [`JOURNAL.md`](JOURNAL.md).
+- **Acceptance criterion 2** (first-pass vs post-review numbers for TE) waits on the deferred Phase 4.
+- **Acceptance criterion 3:** the screenshots are in `docs/screenshots/`; the video is not made yet.
+
 ## Decisions
 
 | Question | Decision |

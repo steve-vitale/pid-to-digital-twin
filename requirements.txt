@@ -1,8 +1,8 @@
-﻿# The core pipeline (seed model, generator) is stdlib-only.
+# Versions this project was tested with (2026-10). The core pipeline (seed model, generator) is stdlib-only.
 # Round-2 image processing (tiling, traced connections):
-numpy
-pillow
-opencv-python-headless
+numpy==2.4.6
+pillow==12.2.0
+opencv-python-headless==5.0.0.93
 # Ignition build and verifier (scripts/ignition/):
-asyncua
-cryptography
+asyncua==2.1.0
+cryptography==49.0.0

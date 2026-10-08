@@ -10,7 +10,7 @@ they pass, and when the verifier has itself been shown to catch deliberately bro
 | A dedicated tag provider, `Twin` | Realtime tag provider. It keeps twin tags separate from any production provider, the same separation a site uses between environments | This repo |
 | UDT definitions per equipment and instrument type | UDTs with parameters (`BasePath`, `OPCServer`) and members carrying engineering units, ranges and documentation | `generate.py` / `build_twin.py` |
 | UDT instances, one per asset | UDT instances, foldered by system/sheet | The twin's asset hierarchy |
-| Live values for the TE plant | An OPC UA device (simulator) replaying the open Tennessee Eastman simulation data (normal operation plus a fault case) | `teprob` data files (Braatz group, open license) |
+| Live values for the TE plant | An OPC UA device (simulator) replaying the open Tennessee Eastman simulation data (normal operation plus a fault case): `scripts/ignition/te_sim_server.py` | Braatz group data files, fetched by `scripts/fetch_te_data.py` |
 | Perspective views, one per sheet | A Drawing component built from the generated SVG, with element styles bound to tags | Generated SVGs |
 | Alarms on key members | Alarm configuration on UDT members, from engineering limits | TE model ranges |
 | Read-only access | Tag security plus a read-only OPC path: monitoring, not control | `AT_YOUR_PLANT.md` §5 |
@@ -101,6 +101,8 @@ and an extracted sheet whose instruments all show Ignition's not-connected overl
 - **Data access:** the verifier reads through Ignition's own OPC UA server, which listens on localhost only. It uses
   Basic256Sha256 with SignAndEncrypt and a client certificate that was trusted only after its fingerprint was checked.
 - **No write path:** read-only is enforced three times: the replay server, the OPC connection, and every process tag.
+  The extracted twin's `ReviewStatus` fields are review workflow, not process data, and stay writable by design
+  (910 of them, counted in the V7 receipt).
 - **Lab-only deviation:** the replay server itself uses no OPC UA security. A real device connection would use the
   site's certificates.
 - **Secrets:** API key, admin password, keys and backups live in a private folder outside the repo.
@@ -140,9 +142,11 @@ and an extracted sheet whose instruments all show Ignition's not-connected overl
 ### Reproduce
 
 ```
+python scripts/fetch_te_data.py                                       # the TE runs the replay uses
 python scripts/ignition/make_local_ca.py <private-folder>/pki         # then install it on the gateway's HTTPS
 python scripts/ignition/build_gateway.py --fresh                      # backup, connection, provider, tags, screens
+python scripts/ignition/te_sim_server.py --run normal                 # live values for the screens
 python scripts/ignition/ua_client.py                                  # prints the cert fingerprint to trust
-python scripts/ignition/verify_gateway.py --controls                  # plant 5 faults, restore, verify V1-V9
+python scripts/ignition/verify_gateway.py --controls                  # stop the replay first; plant 5 faults, restore, verify V1-V9
 ```
 Credentials are read from the environment or a private `IGNITION_ENV_FILE` (see `scripts/ignition/gw.py`).
