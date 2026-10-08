@@ -16,6 +16,10 @@ jobs:
   demo:
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        start: [1, 2, 3]   # three independent from-scratch starts: a newcomer's first try must not be luck
     steps:
       - uses: actions/checkout@v4
       - name: Start the demo (docker compose up)
@@ -49,7 +53,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: docker-demo-evidence
+          name: docker-demo-evidence-${{ matrix.start }}
           path: |
             demo-shots/
             demo-logs.txt
