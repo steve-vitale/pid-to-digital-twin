@@ -19,6 +19,7 @@ Usage:
     python scripts/build_twin.py --label round1-v2-named-fields --sheets 0,1,2,3,4,5 --score  # + score_twin
     ... --parent-rule along_line|linked|nearest   # instrument parent rule (default along_line; see PARENT_RULES)
 """
+import os
 import argparse
 import csv
 import json
@@ -34,7 +35,7 @@ import score_pid2graph as sc  # noqa: E402
 import trace_connections as tc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / "PID2Graph OPEN100"
+DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 DEV_SHEETS = {str(i) for i in range(6)}  # docs/GOAL.md: development set. Holdouts are refused by default.
 
 EQUIPMENT = {"tank", "pump"}
