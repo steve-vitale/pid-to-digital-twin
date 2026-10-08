@@ -3,16 +3,16 @@
   {
    "tool": "claude",
    "mode": "all",
-   "drawings": 95,
-   "model_calls": 209,
+   "drawings": 113,
+   "model_calls": 281,
    "failed_drawings": 0,
-   "wall_hours": 2.7,
-   "mean_wall_s_per_drawing": 102.5,
-   "mean_serial_s_per_drawing": 183.8,
+   "wall_hours": 3.04,
+   "mean_wall_s_per_drawing": 96.8,
+   "mean_serial_s_per_drawing": 192.2,
    "usd_estimated": 0.0,
    "usd_estimated_per_drawing": 0.0,
-   "usd_notional": 36.37,
-   "usd_notional_per_drawing": 0.3828
+   "usd_notional": 44.42,
+   "usd_notional_per_drawing": 0.3931
   },
   {
    "tool": "claude",
@@ -31,16 +31,16 @@
   {
    "tool": "claude",
    "mode": "tiled 2x2",
-   "drawings": 38,
-   "model_calls": 152,
+   "drawings": 56,
+   "model_calls": 224,
    "failed_drawings": 0,
-   "wall_hours": 0.94,
-   "mean_wall_s_per_drawing": 89.1,
-   "mean_serial_s_per_drawing": 292.4,
+   "wall_hours": 1.27,
+   "mean_wall_s_per_drawing": 81.9,
+   "mean_serial_s_per_drawing": 274.4,
    "usd_estimated": 0.0,
    "usd_estimated_per_drawing": 0.0,
-   "usd_notional": 21.22,
-   "usd_notional_per_drawing": 0.5584
+   "usd_notional": 29.27,
+   "usd_notional_per_drawing": 0.5227
   },
   {
    "tool": "claude",
@@ -59,12 +59,12 @@
   {
    "tool": "codex",
    "mode": "all",
-   "drawings": 95,
-   "model_calls": 209,
+   "drawings": 113,
+   "model_calls": 281,
    "failed_drawings": 0,
-   "wall_hours": 2.65,
-   "mean_wall_s_per_drawing": 100.6,
-   "mean_serial_s_per_drawing": 159.9,
+   "wall_hours": 2.94,
+   "mean_wall_s_per_drawing": 93.7,
+   "mean_serial_s_per_drawing": 165.1,
    "usd_estimated": 0.0,
    "usd_estimated_per_drawing": 0.0,
    "usd_notional": 0.0,
@@ -87,12 +87,12 @@
   {
    "tool": "codex",
    "mode": "tiled 2x2",
-   "drawings": 38,
-   "model_calls": 152,
+   "drawings": 56,
+   "model_calls": 224,
    "failed_drawings": 0,
-   "wall_hours": 0.78,
-   "mean_wall_s_per_drawing": 74.2,
-   "mean_serial_s_per_drawing": 222.5,
+   "wall_hours": 1.07,
+   "mean_wall_s_per_drawing": 68.9,
+   "mean_serial_s_per_drawing": 212.9,
    "usd_estimated": 0.0,
    "usd_estimated_per_drawing": 0.0,
    "usd_notional": 0.0,
@@ -212,11 +212,11 @@
   }
  ],
  "tracer": {
-  "runs": 174,
-  "seconds": 2219.3,
+  "runs": 222,
+  "seconds": 2325.5,
   "max": 29.9,
   "min": 0.3,
-  "mean_s": 12.8
+  "mean_s": 10.5
  },
  "gemini_ledger_usd": 16.572,
  "gemini_cap_usd": 25.0,

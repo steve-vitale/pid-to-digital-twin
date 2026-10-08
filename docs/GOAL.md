@@ -300,3 +300,31 @@ project owner's direction after round 3.
   noise. Run-to-run noise from round 2's repeats is quoted beside the results.
 - No decision rides on this round. It is a measurement for planning, so there is nothing to tune toward.
 
+## Round 4 results (scored once per level, as pre-registered)
+
+Holdout A, declared method M3 (2×2 tiles + code line tracing), each tool run once per level. Scorecards are
+`out/scorecard_r4-scan-L<n>-trace_holdout-a.md`; the clean numbers are round 2's.
+
+| Image quality | GPT review load | Claude review load | Symbols, rough F1 (GPT / Claude) | Connections F1 (GPT / Claude) |
+|---|---|---|---|---|
+| Clean (round 2) | 17.8 | 32.4 | 0.94 / 0.90 | 0.89 / 0.78 |
+| L1 photocopy | 20.6 | 29.7 | 0.92 / 0.90 | 0.87 / 0.79 |
+| L2 old scan | 51.5 | 57.0 | 0.87 / 0.86 | 0.51 / 0.45 |
+| L3 bad scan | 72.6 | 70.6 | 0.77 / 0.81 | 0.22 / 0.19 |
+| L3 symbols, tracer on the clean image | 60.7 | 47.9 | 0.77 / 0.81 | 0.53 / 0.63 |
+
+No drawing or tile failed at any level. Run-to-run noise from round 2's repeats is about 1 point of review load.
+
+**What it says:**
+- **Photocopy quality made no consistent difference.** GPT got 2.8 points worse and Claude 2.7 better: small, in
+  opposite directions.
+- **Old and bad scans cost 3–4× the review load.** That is far beyond noise.
+- **The models degrade gently; the code tracer breaks.**
+  - Symbol reading fell from 0.94 to 0.77 (GPT) and from 0.90 to 0.81 (Claude) at the worst level.
+  - Connections collapsed to about 0.2. At L3 that is worse than the models' own links without tracing (0.36), so
+    the tracer is hurting there.
+  - Given the same L3 symbols, the tracer run on the clean image recovers connections to 0.53–0.63.
+  - The tracer was tuned on clean digital drawings, and faded, blurred ink defeats it.
+- **For an archive of scans:** clean up the images before tracing, or use the tracer only on sheets above a quality
+  threshold. Either is a new method, so it would need its own sealed test. Nothing was tuned here.
+

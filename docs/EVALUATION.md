@@ -141,6 +141,8 @@ What it doesn't support:
 | `scripts/run_extraction.py` | Runs a tool; records model, prompt hash, image hash, time, cost, token usage |
 | `scripts/cost_report.py` | Time and cost totals from every run record → `out/costs.*` ([COSTS.md](COSTS.md)) |
 | `scripts/run_tests.py` | Every test in one command (CI runs it) |
+| `scripts/degrade_scans.py`, `run_scan_robustness.ps1`, `score_scan_robustness.ps1` | Round 4: old-scan images (geometry kept, keys unchanged), the runs, and the scoring |
+| `scripts/test_apply_review.py` | Controls for the review loop: bad sheets refused, alarm requests routed to change review, round trip stable |
 | `scripts/run_holdouts.ps1`, `score_holdout_b.ps1`, `score_parent_holdouts.ps1`, `score_triage_holdouts.ps1` | Windows PowerShell helpers that reproduce the GOAL.md holdout tables, each label scored once |
 | `scripts/scorecard.py`, `scripts/per_drawing.py` | Aggregate and per-drawing views |
 | `extraction/prompt.md`, `extraction/prompt_v2.md` | Prompt versions; never edited in place once used |

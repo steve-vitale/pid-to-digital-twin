@@ -7,7 +7,9 @@ Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This 
 - `data/sheet_registers/`;
 - the extracted twin packages under `out/twin/` (plant models, review queues, SVGs, Ignition and PI AF files built
   from the drawings);
-- the Perspective screens in `out/ignition/gateway/PIDTwin.zip` that embed those SVGs.
+- the Perspective screens in `out/ignition/gateway/PIDTwin.zip` that embed those SVGs;
+- images made from the drawings: `docs/screenshots/before-after-sheet0.png`, `scan-levels.png`, the OPEN100 screen
+  captures, and `docs/demo.gif`.
 
 The source drawings and answer keys themselves are not redistributed. `scripts/fetch_pid2graph.py` downloads them.
 

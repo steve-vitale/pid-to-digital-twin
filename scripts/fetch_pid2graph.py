@@ -1,4 +1,4 @@
-"""Fetch a subset of the PID2Graph dataset without downloading the whole 8.7 GB archive.
+"""Fetch a subset of the PID2Graph dataset without downloading the whole 9.3 GB archive.
 
 PID2Graph (Zenodo record 14803338, CC BY-SA 4.0) is one zip file. A zip keeps its table of contents (the "central
 directory") at the end, so we can read that over HTTP range requests, then fetch only the entries we want.

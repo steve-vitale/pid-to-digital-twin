@@ -89,7 +89,7 @@ record the path and say so wherever it could explain a gap.
 
 ## 4. Work within the hardware you have
 
-**What:** the scoring dataset is one 8.7 GB zip. The build machine has about 11 GB free, and Ignition needs room
+**What:** the scoring dataset is one 9.3 GB zip. The build machine has about 11 GB free, and Ignition needs room
 too.
 
 **How (planned):** a zip file keeps its table of contents at the end. We read just that part over HTTP range
@@ -659,4 +659,102 @@ from the published files.
 **At your plant:** when an integrator hands over a twin or SCADA project, rebuild it from the handover package on a
 clean test gateway before go-live, and run your acceptance checks there. Anything that only works on their machine
 shows up then, not during commissioning.
+
+## 17. Closing the loop: operations corrections and real data points flow back into the twin
+
+**What:** the two missing halves of "a twin operations can use":
+- the review comes back;
+- the instruments get real data addresses.
+
+`scripts/apply_review.py` reads a filled-in review sheet. `scripts/map_points.py` reads a plant I/O list. Both
+update the asset model, both write a change record, and regenerating carries the result into Ignition, PI AF and the
+screens. Details: [REVIEW_LOOP.md](REVIEW_LOOP.md).
+
+**How:**
+- **The review sheet is the interface operations already use:** a spreadsheet with confirm / correct / reject, show
+  on screen, and alarm priority.
+- **Every row is checked before anything changes.** Unknown items, unknown fields and corrections with no value are
+  refused and listed, so a bad sheet can't half-apply.
+- **The sheet round-trips.** It comes back pre-filled with earlier decisions, and re-applying it changes nothing.
+- **Mapping matches tags after normalizing spelling, and never guesses.** It reports four worklists: mapped; on the
+  drawing but not in the I/O list; in the I/O list but not on the drawing (is the drawing out of date?); and
+  ambiguous.
+- **The demo uses a synthetic I/O list, labeled as such.** It maps 24 instruments on sheet 0 and finds 2 points not
+  on the drawing. It also hits one real ambiguity: the drawing shows `FT 1401` on two symbols.
+- **In Ignition, 24 tags read live and 335 stay honestly Bad.** The verifier checks both, and that each tag's
+  `ReviewStatus` matches the model's decision.
+
+**Why:** the alarm rule is the design decision worth noting. A reviewer may set the priority of an alarm that has a
+published setpoint. Removing an alarm, or adding one without a setpoint, changes what alarms the plant has. Those
+requests are recorded for a change review and not applied. A spreadsheet should never be able to silently delete a
+safety alarm.
+
+**What went wrong:**
+- **My first "keep corrections" rule broke the round trip.** Re-applying a regenerated sheet was refused for asking
+  for a correction value it didn't need. The test caught it.
+- **The first format check measured the wrong thing:** it counted every line after an insertion as changed. Also
+  caught by the test, which was then fixed to compare a real diff.
+
+**Lesson:** the review loop is a data pipeline with a person in it. It needs the same guards as any import: refuse
+bad rows, apply the same input once, and leave a record.
+
+**At your plant:**
+- **Treat the review sheet and the I/O list as controlled inputs,** with a named reviewer and a dated record.
+- **Read "in the I/O list but not on the drawing" as a drawing-update worklist.** In a 40-year archive it will not
+  be empty.
+- **Keep alarm creation and removal on the change-review path,** whatever tool proposes them.
+
+## 18. Old scans: where the method breaks, and which part breaks
+
+**What:** round 4. A pre-registered test of the declared method on holdout-A drawings degraded to three scan
+qualities: photocopy, old scan, bad scan. The degradation keeps geometry fixed, so the original answer keys still
+apply. The levels were set by eye before any model saw them. GPT and Claude only; Gemini was left out to keep spend
+flat.
+
+**Result:**
+- **Photocopy quality: no consistent change.**
+- **Old scan: review load about 3×** (GPT 17.8 → 51.5).
+- **Bad scan: about 4×** (72.6).
+- **The models' symbol reading degraded gently; the code line tracer collapsed.** At the worst level, connections
+  fell to about 0.2, below the models' own untraced links.
+- **The models aren't the main cause.** Feeding the same degraded-image symbols to the tracer on the clean image
+  brings connections back to 0.53–0.63.
+
+**Why it matters:** this is the "40-year archive" question with a number on it. The part of the pipeline that looked
+strongest on clean drawings, deterministic code, is the most brittle on old paper. A lesson about tuning, not about
+AI.
+
+**What I didn't do:** tune anything. An image clean-up step, or a rule to skip tracing on poor sheets, is a new
+method and would need its own sealed test.
+
+**Lesson:** test the conditions you'll actually deploy into before claiming a number. Decompose the failure so the
+fix goes to the right part.
+
+**At your plant:**
+- **Sort the archive by scan quality first.** Clean CAD exports and good scans can use the full pipeline.
+- **For poor scans, budget 3–4× the review time,** or add an image clean-up step and prove it on your own sheets.
+- **Rescanning the worst sheets may be cheaper than reviewing them.**
+
+## 19. Making it shareable: one command, a 30-second demo, and two bugs only the verifier saw
+
+**What:**
+- `scripts/demo.py` goes from a clone to a live, verified twin in one command (given a gateway's settings).
+- A 30-second animation for the README (`docs/demo.gif`), made from the repo's own screens: the drawing and the
+  extraction, then the mapped sheet in Ignition, then the Tennessee Eastman plant through a fault until the alarm
+  turns red.
+- A before/after image of a real drawing with every extracted symbol coloured by review risk.
+
+**Two bugs the verifier found that nothing else would have:**
+- **Rebuilds weren't reproducible.** The project zip stored the time each file was written, so every rebuild looked
+  like a configuration change. V9 (the gateway config matches a commit) failed on a build where nothing had changed.
+  Now the timestamps are fixed and builds are byte-identical.
+- **A fresh build once lost data silently.** One build in about eight imported "1,093 of 1,093" into a provider still
+  starting up, and the tag overrides (ranges, units, alarms) never landed. V1 found 113 differences. The build now
+  reads its import back with V1's own comparison, re-imports once if needed, and fails loudly otherwise.
+
+**Lesson:** a check that runs every time beats a fix you can't reproduce. The rare failure is the one that reaches
+production.
+
+**At your plant:** make the acceptance checks part of every deployment, not just the first one, and keep their
+receipts. Intermittent "it imported fine" failures only show up when something checks every time.
 

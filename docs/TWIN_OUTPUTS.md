@@ -104,10 +104,27 @@ Two packages are committed:
   outside writes are refused (V1 and V7 in [IGNITION_BUILD.md](IGNITION_BUILD.md)). Don't rely on it alone: enforce
   read-only at the OPC connection and in tag security as well. The `ReviewStatus` members are memory tags and
   stay writable by design: they are review workflow, not process data.
+- **Review decisions and data points.** `scripts/apply_review.py` writes operations decisions onto the model, and
+  `scripts/map_points.py` writes real data addresses from an I/O list. Regenerating then carries both into these
+  files: rejected items leave them, `ReviewStatus` carries the decision, and mapped instruments get their real OPC
+  server and path. See [REVIEW_LOOP.md](REVIEW_LOOP.md).
 - **Scripted import.** Instead of the Designer, `scripts/ignition/build_gateway.py` imports this file into a running
   gateway over its REST API, adds Perspective screens built from `svg/`, and `verify_gateway.py` checks the result.
 
-## AF XML: not emitted
+## PI AF: asset structure only, by decision
+
+**PI is scoped to the asset structure, by decision.** The twin produces a PI AF hierarchy as a PI Builder sheet
+(elements, templates, attributes with point references), but it has not been imported into a PI System. Why:
+- **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
+- **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
+  story belongs to Ignition here.
+- **Ignition proves the same model end to end:** import, live values, alarms, verification.
+
+To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
+System Explorer, then bind the attributes to real PI points (the same I/O-list step as
+[REVIEW_LOOP.md](REVIEW_LOOP.md)).
+
+### AF XML: not emitted
 
 PI AF can import an XML export format, but I am not certain of its exact element names and required attributes. A
 file that looks right but fails to import, or imports wrongly, is worse than none. So only the PI Builder sheet is

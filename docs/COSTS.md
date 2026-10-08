@@ -11,10 +11,10 @@ Every measured number here comes from [`out/costs.md`](../out/costs.md) (generat
 | Gemini 3.1 Pro API | **$15.30** estimated | Reported tokens priced at deliberately high list rates, so it's an upper estimate, not a bill |
 | Gemma 4 31B (hosted, same API) | **$1.28** estimated | Priced at the same rates, which overstates an open model |
 | **Total metered model spend** | **$16.57 of a $25 cap** | Ties to the spend ledger `runs/gemini_spend.json` to the cent |
-| Claude (claude-opus-5-5, Claude Code CLI) | $0 marginal; **$36.37** API-equivalent | Flat subscription. The CLI reports what the same calls would cost on the API |
+| Claude (claude-opus-5-5, Claude Code CLI) | $0 marginal; **$44.42** API-equivalent | Flat subscription. The CLI reports what the same calls would cost on the API. Round 4 (old scans) added $8.05 of it |
 | GPT (gpt-6.1-sol, Codex CLI) | $0 marginal; not metered | Flat subscription. The CLI reports no cost, so none is claimed |
-| Model compute time | 14.4 h of wall clock across 303 drawing runs | 7.7 h of it was the open-weight model, mostly timeouts |
-| Line tracer (code, no AI) | 37 min across 174 runs; 0.3–30 s per sheet | Runs on a laptop CPU |
+| Model compute time | 15.0 h of wall clock across 339 drawing runs | 7.7 h of it was the open-weight model, mostly timeouts. Round 4 was 36 runs, about 37 minutes |
+| Line tracer (code, no AI) | 39 min across 222 runs; 0.3–30 s per sheet | Runs on a laptop CPU |
 | Ignition | $0 | Trial mode (2 hours, resettable). Production licensing is quoted by the vendor; not priced here |
 | Hardware | $0 extra | One Windows PC |
 | Human time | **Not tracked** | The author directed and checked the work; agents wrote most of the code. No hours log was kept, so none is claimed |
@@ -26,12 +26,12 @@ shorter.
 
 | Model | Whole sheet: wall s / $ | Tiled 2×2 (the declared method): wall s / serial s / $ |
 |---|---|---|
-| GPT via Codex | 119 / not metered | 74 / 223 / not metered |
-| Claude | 112 / $0.26 API-equivalent | 89 / 292 / $0.56 API-equivalent |
+| GPT via Codex | 119 / not metered | 69 / 213 / not metered |
+| Claude | 112 / $0.26 API-equivalent | 82 / 274 / $0.52 API-equivalent |
 | Gemini | 64 / $0.13 estimated | 34 / 101 / $0.22 estimated |
 | Gemma 4 31B (hosted) | 1,610 incl. timeouts; finished drawings 179–280 s / about $0.07 estimated | not run |
 
-Add about 13 s per sheet for the line tracer.
+Add about 11 s per sheet for the line tracer. Tiled numbers include round 4's runs on degraded images.
 
 **Why GPT has no dollar figure:** Codex ran on a subscription and reports no cost. A plant would get a quote or
 use API list prices at the time.
@@ -43,9 +43,9 @@ comes from the measured error rate, but **minutes per correction are assumed**, 
 
 | | GPT (best accuracy) | Claude | Gemini (cheapest) |
 |---|---|---|---|
-| Model cost | not metered here | about $560 API-equivalent | about $220 (upper estimate) |
-| Serial compute | about 62 h | about 81 h | about 28 h |
-| Wall time with 4 parallel calls | about 21 h | about 25 h | about 10 h |
+| Model cost | not metered here | about $520 API-equivalent | about $220 (upper estimate) |
+| Serial compute | about 59 h | about 76 h | about 28 h |
+| Wall time with 4 parallel calls | about 19 h | about 23 h | about 10 h |
 
 **Machine cost is small.** Even at API prices it's hundreds of dollars per thousand sheets, with about a day of
 unattended runtime.

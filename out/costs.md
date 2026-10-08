@@ -6,13 +6,13 @@ API-equivalent figure for subscription use. GPT via Codex records no cost (subsc
 
 | Tool | Mode | Drawings | Calls | Failed | Wall h | Wall s/drawing | Serial s/drawing | Est. $/drawing | Notional $/drawing | Est. $ total | Notional $ total |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| claude | all | 95 | 209 | 0 | 2.7 | 102.5 | 183.8 |  | 0.3828 |  | 36.37 |
+| claude | all | 113 | 281 | 0 | 3.04 | 96.8 | 192.2 |  | 0.3931 |  | 44.42 |
 | claude | smoke | 1 | 1 | 0 | 0.02 | 76.3 | 76.3 |  | 0.3285 |  | 0.33 |
-| claude | tiled 2x2 | 38 | 152 | 0 | 0.94 | 89.1 | 292.4 |  | 0.5584 |  | 21.22 |
+| claude | tiled 2x2 | 56 | 224 | 0 | 1.27 | 81.9 | 274.4 |  | 0.5227 |  | 29.27 |
 | claude | whole sheet | 56 | 56 | 0 | 1.74 | 112.1 | 112.1 |  | 0.2647 |  | 14.82 |
-| codex | all | 95 | 209 | 0 | 2.65 | 100.6 | 159.9 |  |  |  |  |
+| codex | all | 113 | 281 | 0 | 2.94 | 93.7 | 165.1 |  |  |  |  |
 | codex | smoke | 1 | 1 | 0 | 0.02 | 60.3 | 60.3 |  |  |  |  |
-| codex | tiled 2x2 | 38 | 152 | 0 | 0.78 | 74.2 | 222.5 |  |  |  |  |
+| codex | tiled 2x2 | 56 | 224 | 0 | 1.07 | 68.9 | 212.9 |  |  |  |  |
 | codex | whole sheet | 56 | 56 | 0 | 1.85 | 119.1 | 119.1 |  |  |  |  |
 | gemini | all | 95 | 209 | 1 | 1.36 | 51.7 | 78.3 | 0.161 |  | 15.296 |  |
 | gemini | smoke | 1 | 1 | 0 | 0.01 | 26.2 | 26.2 | 0.0498 |  | 0.05 |  |
@@ -22,5 +22,5 @@ API-equivalent figure for subscription use. GPT via Codex records no cost (subsc
 | gemma | smoke | 1 | 1 | 0 | 0.06 | 226.4 | 226.4 | 0.1198 |  | 0.12 |  |
 | gemma | whole sheet | 17 | 17 | 8 | 7.6 | 1610.1 | 1610.1 | 0.068 |  | 1.157 |  |
 
-Line tracer (code, no model): 174 runs, 2219.3 s total, 0.3-29.9 s per drawing, mean 12.8 s.
+Line tracer (code, no model): 222 runs, 2325.5 s total, 0.3-29.9 s per drawing, mean 10.5 s.
 Estimated model spend in the records: $16.572. Spend ledger (runs/gemini_spend.json): $16.572 of a $25.0 cap. They match.

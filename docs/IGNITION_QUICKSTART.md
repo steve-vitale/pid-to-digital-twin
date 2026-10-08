@@ -63,6 +63,11 @@ Expect 1,093 tags imported, 0 failures.
 - Extracted sheets: `…/client/PIDTwin/open100/0` through `/open100/11`. Every instrument shows Ignition's
   bad-quality overlay and no value, which is the honest state for placeholders.
 
+**Optional: the mapped demo points.** Start `python scripts/ignition/demo_points_server.py` (synthetic values) and
+add a second OPC UA connection the same way as step 2: discovery URL `opc.tcp://localhost:4842/open100-demo`, name
+**`OPEN100-Demo`**, read-only, anonymous. Sheet 0 then shows 24 live values among its placeholders. This step was
+tested through the scripted build, not by hand.
+
 **6. Trip the alarm.** Stop the replay (Ctrl+C) and start the fault case near the point where pressure climbs:
 ```
 python scripts/ignition/te_sim_server.py --run fault6 --start 240
@@ -84,7 +89,8 @@ It needs a little more setup:
 - an approved client certificate (`python scripts/ignition/ua_client.py` prints the fingerprint to approve).
 
 All of it is in [IGNITION_BUILD.md](IGNITION_BUILD.md). Or let `scripts/ignition/build_gateway.py --fresh` do steps
-1–4 for you.
+1–4 for you. With those settings in place, `python scripts/demo.py --build --verify` does everything in one command:
+data, build, the nine checks, then both data servers live until Ctrl+C.
 
 ## Good to know
 

@@ -154,3 +154,20 @@ python scripts/ignition/ua_client.py                                  # prints t
 python scripts/ignition/verify_gateway.py --controls                  # stop the replay first; plant 5 faults, restore, verify V1-V9
 ```
 Credentials are read from the environment or a private `IGNITION_ENV_FILE` (see `scripts/ignition/gw.py`).
+
+### Since the first build (same day)
+
+- **Review decisions reach the gateway.** Every UDT carries `ReviewStatus`; V2 now also checks that each instance's
+  value matches the model's review decision, and that items operations rejected are absent.
+- **Mapped points.** Instruments mapped from an I/O list get their real OPC server and path. The build creates one
+  OPC connection per data source, and V4 expects those tags Good while every placeholder stays Bad. In the demo,
+  24 mapped Good and 335 placeholders Bad.
+- **The build reads its import back.** One fresh build in about eight imported "1,093 of 1,093" while the new
+  provider was still on its initial load, and the instance overrides (ranges, units, alarms) never landed. The
+  verifier caught it (V1: 113 differences). The build now diffs what the gateway holds against what it sent, using
+  V1's comparison, re-imports once if anything is missing, and fails loudly if it still is.
+- **Reproducible output.** The project zip is byte-identical across builds (fixed zip entry timestamps). Before
+  that, every rebuild looked like a configuration change, and V9 (the config matches a commit) failed on an
+  unchanged build.
+- **One command:** `python scripts/demo.py --build --verify`. All nine checks pass on it (receipt
+  `20261008T175223Z`).

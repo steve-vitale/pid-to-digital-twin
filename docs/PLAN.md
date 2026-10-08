@@ -13,11 +13,11 @@ Planning locked 2026-10-06. The reasoning behind each decision is in [`JOURNAL.m
 | 1 | Ground truth | Done. The keys turned out to have 10 symbol classes, not 8 (JOURNAL entry 7). 6 are scored |
 | 2 | Extraction harness | Done (`scripts/run_extraction.py`, `scripts/scorecard.py`); the cost meter and the $25 stop held: $16.57 spent |
 | 3 | Comparison runs | Done, plus rounds 2 and 3 on sealed holdouts. Scorecards are `out/scorecard_<label>.md`, not one `out/scorecard.md` |
-| 4 | Operations review | **Deferred by the project owner** |
+| 4 | Operations review | Tooling done (`scripts/apply_review.py`, [REVIEW_LOOP.md](REVIEW_LOOP.md)); the review itself is next |
 | 5 | Ignition proof | Done, and stronger than planned: a scripted build plus a 9-check verifier proven with 5 planted faults ([IGNITION_BUILD.md](IGNITION_BUILD.md)) |
 | 6 | Live values | Done, **by a different route:** the repo's own OPC UA replay server (`scripts/ignition/te_sim_server.py`) with the Braatz group's TE runs (`scripts/fetch_te_data.py`), not the Programmable Device Simulator with Rieth 2017 data. Reason: an OPC UA server is how a plant feeds Ignition, and it can be read-only by construction. The fault-6 alarm is proven by the verifier. Screenshots are committed; the screen recording is still to do |
-| 7 | PI artifact | Done as planned: PI Builder sheet, labeled not import-tested |
-| 8 | Write-up | README, journal (14 entries), costs ([COSTS.md](COSTS.md)). Demo video still to do |
+| 7 | PI artifact | Done as planned: PI Builder sheet. Scoped to the asset structure by decision (README, Status) |
+| 8 | Write-up | README, journal, costs ([COSTS.md](COSTS.md)), a 30-second demo animation (`docs/demo.gif`). A narrated video is not made |
 
 Other changes from the plan:
 - **Story log:** "STORY_LOG" became [`JOURNAL.md`](JOURNAL.md).
@@ -55,7 +55,7 @@ Other changes from the plan:
   OPEN100 reactor design** and 60 annotated real industrial P&IDs, with graph ground truth (symbols plus connections).
   The OPEN100 subset is ideal because a viewer can inspect the source design. Labels are generic symbol classes, **not
   ISA tags**, so tag-reading accuracy can only be scored on TE.
-- **It's an 8.66 GB single zip**, and C: has ~11 GB free while Ignition wants ~10 GB free to install. **Plan:** read the
+- **It's a 9.3 GB (8.66 GiB) single zip**, and C: has ~11 GB free while Ignition wants ~10 GB free to install. **Plan:** read the
   zip's index over HTTP range requests and pull only the OPEN100 and real-P&ID entries. Never download the whole thing.
 - **PI Vision dropped plain custom-SVG import (2023+).** The SVG story goes to Ignition Perspective, where drag-and-drop
   SVG becomes a Drawing component with element ids kept, so styles can bind to tags. For PI, only the AF hierarchy is

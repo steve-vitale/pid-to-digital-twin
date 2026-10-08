@@ -115,6 +115,8 @@ measured on units nobody tuned on, and reported with the failures, exactly as in
 
 | Demonstrated here | Not demonstrated (needs a real site) |
 |---|---|
+| How quality drops on simulated old scans (round 4): little effect at photocopy quality, 3–4× review load on old and bad scans, mostly from the line tracer | Real scans: skew, stamps, handwriting, torn and annotated sheets; an image clean-up step tuned on them |
+| Operations review applied back to the model with a change record; I/O-list mapping that flags drawings that may be out of date | A real review and a real I/O list; how often drawings and I/O disagree at that site |
 | Extraction scored against independent keys, with controls and sealed holdouts | Calibration across drafting eras and contractors |
 | Review load as the cost measure; a risk-tiered review queue checked on unseen drawings | Real review minutes per sheet, reviewer agreement |
 | Cross-sheet stitching on one design's sheet set | Stitching across an archive with missing and superseded sheets |
