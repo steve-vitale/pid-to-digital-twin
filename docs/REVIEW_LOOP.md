@@ -96,4 +96,4 @@ In Ignition, the 24 mapped tags read Good while the other 335 placeholders stay 
 
 - **Review loop:** tested on copies of both models (`scripts/test_apply_review.py`, in CI).
 - **Point mapping:** proven in a running gateway (receipt `out/ignition/gateway/receipts/20261008T175223Z.md`).
-- **Not done yet:** the Tennessee Eastman operations review itself. It needs the author as the operations reviewer.
+- **Not done yet:** the Tennessee Eastman operations review itself. A review only means something from someone who knows the process and is looking at the drawings; a sign-off without that would be a rubber stamp, so none has been recorded.

@@ -13,7 +13,7 @@ Planning locked 2026-10-06. The reasoning behind each decision is in [`JOURNAL.m
 | 1 | Ground truth | Done. The keys turned out to have 10 symbol classes, not 8 (JOURNAL entry 7). 6 are scored |
 | 2 | Extraction harness | Done (`scripts/run_extraction.py`, `scripts/scorecard.py`); the cost meter and the $25 stop held: $16.57 spent |
 | 3 | Comparison runs | Done, plus rounds 2 and 3 on sealed holdouts. Scorecards are `out/scorecard_<label>.md`, not one `out/scorecard.md` |
-| 4 | Operations review | Tooling done (`scripts/apply_review.py`, [REVIEW_LOOP.md](REVIEW_LOOP.md)); the review itself is next |
+| 4 | Operations review | Tooling done and tested (`scripts/apply_review.py`, [REVIEW_LOOP.md](REVIEW_LOOP.md)). The review itself is not done: the plan named the author as reviewer, but a meaningful review needs Tennessee Eastman process knowledge and the drawings, so none is recorded |
 | 5 | Ignition proof | Done, and stronger than planned: a scripted build plus a 9-check verifier proven with 5 planted faults ([IGNITION_BUILD.md](IGNITION_BUILD.md)) |
 | 6 | Live values | Done, **by a different route:** the repo's own OPC UA replay server (`scripts/ignition/te_sim_server.py`) with the Braatz group's TE runs (`scripts/fetch_te_data.py`), not the Programmable Device Simulator with Rieth 2017 data. Reason: an OPC UA server is how a plant feeds Ignition, and it can be read-only by construction. The fault-6 alarm is proven by the verifier. Screenshots are committed; the screen recording is still to do |
 | 7 | PI artifact | Done as planned: PI Builder sheet. Scoped to the asset structure by decision (README, Status) |

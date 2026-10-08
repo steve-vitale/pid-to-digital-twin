@@ -147,7 +147,7 @@ Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
 ## How it was built
 
 AI coding agents (Claude Code and Codex) wrote most of the code. I set the direction, made the design decisions,
-checked every result, and played the operations reviewer from my own process-plant background. The
+and checked every result. No operations review of the Tennessee Eastman model has been done yet: the tooling for it is built and tested, but a review only counts if it comes from someone who knows the process and is looking at the drawings. The
 [build journal](docs/JOURNAL.md) records each decision, what was rejected, and what went wrong, including the
 agents' own mistakes and mine.
 
@@ -281,7 +281,7 @@ it at a real site.
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet; not imported into a PI System, by decision (below) | Scoped |
-| Operations review of the Tennessee Eastman model | Tooling done; the review itself is next (the author as reviewer) |
+| Operations review of the Tennessee Eastman model | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |
 
 **PI is scoped to the asset structure, by decision.** The twin produces a PI AF hierarchy as a PI Builder sheet
 (elements, templates, attributes with point references), but it has not been imported into a PI System. Why:
