@@ -305,17 +305,17 @@ async def v7(held, c, ns, te, tw):
                     fails.append(f"{p}/{over['name']}: instance overrides read-only to writable")
     if not held.conn["config"]["profile"].get("readOnly"):
         fails.append(f"OPC connection {bg.OPC_CONN} is not read-only")
-    # Positive control first: the same client must be able to write somewhere (a review workflow field, written
-    # with its current value). If it can't write at all, a refused write below would prove nothing.
-    review = tw[0][0].rsplit("/", 1)[0] + "/ReviewStatus"
-    node = c.get_node(f"ns={ns};s={review}")
+    # Positive control first: the same client must be able to write somewhere, or a refused write below proves
+    # nothing. It writes a probe tag in a DIFFERENT provider: in Ignition, writing a memory tag (even its current
+    # value) is stored as configuration, so a probe inside Twin would make the next V1 fail. Learned the hard way.
+    node = c.get_node(f"ns={ns};s={bg.PROBE_PATH}")
     try:
-        current = (await node.read_data_value(raise_on_bad_status=False)).Value.Value
-        await node.write_value(ua.DataValue(ua.Variant(current, ua.VariantType.String)))
-        attempts.append(f"{review}: write accepted (positive control: this client CAN write)")
+        await node.write_value(ua.DataValue(ua.Variant(datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                                                       ua.VariantType.String)))
+        attempts.append(f"{bg.PROBE_PATH}: write accepted (positive control: this client CAN write)")
     except ua.UaStatusCodeError as e:
-        fails.append(f"positive control failed: the verifier could not write {review} ({type(e).__name__}), so "
-                     f"refused writes below would prove nothing")
+        fails.append(f"positive control failed: the verifier could not write {bg.PROBE_PATH} ({type(e).__name__}), "
+                     f"so refused writes below would prove nothing")
     for path in [te[0][0], tw[0][0]]:
         node = c.get_node(f"ns={ns};s={path}")
         try:
@@ -326,6 +326,8 @@ async def v7(held, c, ns, te, tw):
             attempts.append(f"{path}: refused ({type(e).__name__})")
     memory = sum(1 for _, inst in held.instances("OPEN100")
                  if any(m.get("valueSource") == "memory" for m in held.types[inst["typeId"]]["tags"]))
+    # Note for operations: review edits to these fields will show up in V1 as held-but-never-sent values,
+    # which is correct: they are changes made in the gateway, and they belong back in the twin's records.
     return result("V7", "Read-only enforcement", "Monitoring, not control", not fails,
                   {"write_attempts": attempts, "workflow_fields_writable_by_design": memory}, fails,
                   "Write attempts use a ReadWrite OPC UA user on purpose: a refusal must come from the tags, "

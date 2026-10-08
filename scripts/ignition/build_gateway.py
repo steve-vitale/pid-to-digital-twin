@@ -40,6 +40,7 @@ OPC_CONN = "TE-Sim"
 SIM_URL = "opc.tcp://localhost:4841/te-sim"
 SIM_NS = "urn:pid-digital-twin:te-sim"  # namespace URI, not index: survives a server restart that renumbers
 VERIFY_USER = "twin-verifier"
+PROBE_PATH = "[default]_verifier/WriteProbe"  # the verifier's positive write control, kept outside the Twin provider
 
 # Alarm setpoints come from published sources, never from the replay data.
 ALARMS = {
@@ -313,6 +314,13 @@ def main():
            "Digital twin built from P&IDs. Kept apart from production providers.",
            {"profile": {"type": "STANDARD", "allowBackfill": False, "enableTagReferenceStore": True},
             "settings": {"valuePersistence": "Database"}})
+
+    probe = {"name": "", "tagType": "Provider", "tags": [{"name": "_verifier", "tagType": "Folder", "tags": [
+        {"name": "WriteProbe", "tagType": "AtomicTag", "valueSource": "memory", "dataType": "String", "value": "",
+         "documentation": "Written by verify_gateway.py to prove its client can write (V7 positive control)."}]}]}
+    s, b = g.post("/data/api/v1/tags/import?provider=default&path=&type=json&collisionPolicy=Overwrite",
+                  json.dumps(probe).encode(), ctype="application/octet-stream")
+    check(s, b, "write-probe import")
 
     wait_healthy(g, "ignition/tag-provider", PROVIDER)
     s, b = g.post(f"/data/api/v1/tags/import?provider={PROVIDER}&path=&type=json&collisionPolicy=Overwrite",

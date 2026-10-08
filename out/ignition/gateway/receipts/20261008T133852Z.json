@@ -1,0 +1,194 @@
+{
+ "utc": "20261008T133852Z",
+ "gateway": "Ignition 8.3.10 (trial), local",
+ "provider": "Twin",
+ "project": "PIDTwin",
+ "passed": false,
+ "checks": [
+  {
+   "id": "V1",
+   "name": "Import fidelity",
+   "principle": "Configuration is what the gateway holds, not what was sent",
+   "passed": false,
+   "counts": {
+    "tag_nodes_sent": 1204,
+    "views_sent": 13,
+    "differences": 1
+   },
+   "failures": [
+    "/OPEN100/MSS_sheet_0/MSS-XSS-140/RE_1403/ReviewStatus: held, never sent"
+   ],
+   "failure_count": 1,
+   "note": ""
+  },
+  {
+   "id": "V2",
+   "name": "Reconciliation",
+   "principle": "One asset, one tag",
+   "passed": true,
+   "counts": {
+    "te_items": 37,
+    "te_tags": 37,
+    "open100_items": 910,
+    "open100_tags": 910
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V3",
+   "name": "Binding resolution",
+   "principle": "A broken binding shows as a quality error on screen",
+   "passed": true,
+   "counts": {
+    "views": 13,
+    "bindings": 398
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V4",
+   "name": "Quality honesty",
+   "principle": "Tag quality carries the truth; no placeholder ever reads Good",
+   "passed": true,
+   "counts": {
+    "fed": 36,
+    "no_source": 1,
+    "placeholders": 359,
+    "quality": {
+     "OPEN100 placeholder: Bad": 359,
+     "TE fed: Good": 36,
+     "TE no source: Bad": 1
+    }
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V5",
+   "name": "Liveness",
+   "principle": "A Good value that never changes is stale",
+   "passed": true,
+   "counts": {
+    "fed": 36,
+    "values_changed": 36
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V6",
+   "name": "Plausibility",
+   "principle": "Engineering limits belong on the tag; out-of-range is reported, never clipped",
+   "passed": true,
+   "counts": {
+    "checked": 36
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V7",
+   "name": "Read-only enforcement",
+   "principle": "Monitoring, not control",
+   "passed": true,
+   "counts": {
+    "write_attempts": [
+     "[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/RE_1403/ReviewStatus: write accepted (positive control: this client CAN write)",
+     "[Twin]TE_Plant/V-101/FI-114/PV: refused (BadUserAccessDenied)",
+     "[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/RE_1403/PV: refused (BadUserAccessDenied)"
+    ],
+    "workflow_fields_writable_by_design": 910
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "Write attempts use a ReadWrite OPC UA user on purpose: a refusal must come from the tags, not from a client that lacked rights. ReviewStatus memory fields are review workflow, not process."
+  },
+  {
+   "id": "V8",
+   "name": "Alarm pipeline",
+   "principle": "Alarms are configured on the tag and proven, not assumed",
+   "passed": true,
+   "counts": {
+    "log": [
+     "normal: PV 2707.8 Good, AlarmActive False Good, TI-109 AlarmActive False",
+     "fault: PV crossed 2895.0 at 2897.3",
+     "fault: AlarmActive True, PV 2901.2"
+    ],
+    "pv_peak_kPa": 2901.2,
+    "alarm_delay_s": 0.5
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "PressureShutdown (above 3000 kPa) is not expected to activate: the recorded run holds at exactly 3000.0 kPa when the simulator shuts down. Reported, not tuned."
+  },
+  {
+   "id": "V9",
+   "name": "Change record",
+   "principle": "Gateway backups and versioned configuration",
+   "passed": true,
+   "counts": {
+    "backup": "gateway-20261008T133426Z.gwbk",
+    "backup_sha256": "ed4c5c5da19721f5",
+    "commit": "84a8963",
+    "receipt": "out/ignition/gateway/receipts/20261008T133852Z.json"
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  }
+ ],
+ "negative_controls": [
+  {
+   "fault": "UDT member AlarmActive deleted from TE_AlarmedMeasurement",
+   "check": "V1",
+   "caught": true,
+   "restored": true,
+   "evidence": [
+    "/_types_/TE_AlarmedMeasurement/AlarmActive: sent, not held"
+   ]
+  },
+  {
+   "fault": "twin instrument PI-999 with no tag",
+   "check": "V2",
+   "caught": true,
+   "restored": true,
+   "evidence": [
+    "TE PI-999: twin item with no tag"
+   ]
+  },
+  {
+   "fault": "binding on FI-101 misspelled (/PVV)",
+   "check": "V3",
+   "caught": true,
+   "restored": true,
+   "evidence": [
+    "TE/Overview FI-101 props.text: no such tag [Twin]TE_Plant/U-100/FI-101/PVV"
+   ]
+  },
+  {
+   "fault": "placeholder TCV_1401 forced Good via a memory value",
+   "check": "V4",
+   "caught": true,
+   "restored": true,
+   "evidence": [
+    "[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1401/PV: FALSE GOOD, no data source but reads Good (0.0)"
+   ]
+  },
+  {
+   "fault": "TE_Plant FI-101 PV left writable",
+   "check": "V7",
+   "caught": true,
+   "restored": true,
+   "evidence": [
+    "TE_Plant/U-100/FI-101/PV: instance overrides read-only to writable"
+   ]
+  }
+ ]
+}
