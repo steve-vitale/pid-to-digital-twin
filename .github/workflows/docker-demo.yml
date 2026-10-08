@@ -1,0 +1,48 @@
+name: docker-demo
+# Starts the one-click Docker demo from nothing, as a newcomer would, and checks what the browser shows.
+# Runs when the demo's files change, or by hand from the Actions tab.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - docker-compose.yml
+      - docker/**
+      - scripts/ignition/te_sim_server.py
+      - scripts/ignition/demo_points_server.py
+      - scripts/check_docker_demo.py
+      - data/io_lists/**
+      - .github/workflows/docker-demo.yml
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the demo (docker compose up)
+        run: docker compose up -d --build
+      - name: Wait for Ignition
+        run: |
+          for i in $(seq 1 180); do
+            if curl -fs http://localhost:8088/StatusPing | grep -q '"RUNNING"}'; then echo ready; exit 0; fi
+            sleep 5
+          done
+          echo "Ignition did not start"; exit 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Browser check
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+          sleep 15
+          python scripts/check_docker_demo.py --shots demo-shots
+      - name: Logs
+        if: always()
+        run: docker compose logs --tail 200 > demo-logs.txt 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-demo-evidence
+          path: |
+            demo-shots/
+            demo-logs.txt

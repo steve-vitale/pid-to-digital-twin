@@ -28,8 +28,11 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import gw  # noqa: E402
 from gw import Gateway  # noqa: E402
 import build_views  # noqa: E402
+
+gw._load_env()  # before the constants below read their IGNITION_* overrides
 
 ROOT = Path(__file__).resolve().parents[2]
 MODEL = ROOT / "data" / "te_process_model.json"
@@ -37,12 +40,13 @@ DATA = ROOT / "data" / "external" / "te-braatz"
 OUT = ROOT / "out" / "ignition" / "gateway"
 PROVIDER = "Twin"
 OPC_CONN = "TE-Sim"
-SIM_URL = "opc.tcp://localhost:4841/te-sim"
+# Addresses of the data servers. Overridable for Docker, where they are reached by service name (docker/README.md).
+SIM_URL = os.environ.get("IGNITION_SIM_URL", "opc.tcp://localhost:4841/te-sim")
 SIM_NS = "urn:pid-digital-twin:te-sim"  # namespace URI, not index: survives a server restart that renumbers
 VERIFY_USER = "twin-verifier"
 PROBE_PATH = "[default]_verifier/WriteProbe"  # the verifier's positive write control, kept outside the Twin provider
 # OPC connections for data sources named in the twin's point mappings (scripts/map_points.py). A site lists its own.
-DATA_CONNECTIONS = {"OPEN100-Demo": "opc.tcp://localhost:4842/open100-demo"}
+DATA_CONNECTIONS = {"OPEN100-Demo": os.environ.get("IGNITION_DEMO_POINTS_URL", "opc.tcp://localhost:4842/open100-demo")}
 PRIORITY = {"High": "High", "Medium": "Medium", "Low": "Low"}
 
 # Alarm setpoints come from published sources, never from the replay data.
@@ -321,6 +325,9 @@ def main():
     ap.add_argument("--fresh", action="store_true",
                     help="delete and recreate the Twin provider before importing (after the backup), so nothing "
                          "from an earlier build can survive into this one")
+    ap.add_argument("--demo-backup", action="store_true",
+                    help="build a gateway for the shareable Docker demo backup (docker/README.md): skip everything "
+                         "only the verifier needs (its OPC UA user, exposed tag providers, the write probe)")
     args = ap.parse_args()
     doc, meta = build_file(ROOT / args.twin)
     hidden = set(meta["te_review"]["hidden"]) | set(meta["twin_review"]["hidden"])
@@ -334,16 +341,17 @@ def main():
     g = Gateway()
     backup_dir = Path(os.environ.get("IGNITION_BACKUP_DIR", ""))
     secrets_dir = Path(os.environ.get("IGNITION_SECRETS_DIR", ""))
-    if not backup_dir.name or not secrets_dir.name:
+    if not backup_dir.name or (not secrets_dir.name and not args.demo_backup):
         raise SystemExit("set IGNITION_BACKUP_DIR and IGNITION_SECRETS_DIR (private folders outside the repo)")
     record = {"backup": backup(g, backup_dir)}
 
-    ensure_verify_user(g, secrets_dir)
+    if not args.demo_backup:
+        ensure_verify_user(g, secrets_dir)
 
-    def expose(cfg):
-        cfg["advanced"]["exposedTagsEnabled"] = True
-    if put_singleton(g, "com.inductiveautomation.opcua/server-config", expose):
-        print("OPC UA server: tag providers exposed")
+        def expose(cfg):
+            cfg["advanced"]["exposedTagsEnabled"] = True
+        if put_singleton(g, "com.inductiveautomation.opcua/server-config", expose):
+            print("OPC UA server: tag providers exposed")
 
     # Start from the gateway's own loopback connection settings and change only the endpoint and login. The API
     # accepts a config missing any settings block (HTTP 200), then the connection fails at runtime, one missing
@@ -351,7 +359,12 @@ def main():
     # never appears in plaintext here or in the repo.
     s, loop = g.get("/data/api/v1/resources/find/ignition/opc-connection/Ignition%20OPC%20UA%20Server")
     settings = json.loads(json.dumps(check(s, loop, "read loopback connection")["config"]["settings"]))
-    settings["endpoint"] = {"endpointUrl": SIM_URL, "discoveryUrl": SIM_URL, "hostOverride": "",
+    # hostOverride: a server on 0.0.0.0 advertises that address; in Docker the gateway must keep using the
+    # service name it dialled. Empty (no override) for localhost.
+    def host(url):
+        h = url.split("//", 1)[1].split(":", 1)[0].split("/", 1)[0]
+        return "" if h in ("localhost", "127.0.0.1") else h
+    settings["endpoint"] = {"endpointUrl": SIM_URL, "discoveryUrl": SIM_URL, "hostOverride": host(SIM_URL),
                             "securityPolicy": "None", "securityMode": "None"}
     settings["authentication"] = {"authenticationType": "ANONYMOUS"}
     upsert(g, "ignition/opc-connection", OPC_CONN,
@@ -359,7 +372,7 @@ def main():
            {"profile": {"type": "com.inductiveautomation.OpcUaServerType", "readOnly": True}, "settings": settings})
     for name, url in meta["data_connections"].items():  # sources named by the twin's point mappings
         extra = json.loads(json.dumps(settings))
-        extra["endpoint"] = dict(extra["endpoint"], endpointUrl=url, discoveryUrl=url)
+        extra["endpoint"] = dict(extra["endpoint"], endpointUrl=url, discoveryUrl=url, hostOverride=host(url))
         upsert(g, "ignition/opc-connection", name, "Data source for mapped twin points. Read-only.",
                {"profile": {"type": "com.inductiveautomation.OpcUaServerType", "readOnly": True}, "settings": extra})
     if args.fresh:
@@ -375,12 +388,13 @@ def main():
            {"profile": {"type": "STANDARD", "allowBackfill": False, "enableTagReferenceStore": True},
             "settings": {"valuePersistence": "Database"}})
 
-    probe = {"name": "", "tagType": "Provider", "tags": [{"name": "_verifier", "tagType": "Folder", "tags": [
-        {"name": "WriteProbe", "tagType": "AtomicTag", "valueSource": "memory", "dataType": "String", "value": "",
-         "documentation": "Written by verify_gateway.py to prove its client can write (V7 positive control)."}]}]}
-    s, b = g.post("/data/api/v1/tags/import?provider=default&path=&type=json&collisionPolicy=Overwrite",
-                  json.dumps(probe).encode(), ctype="application/octet-stream")
-    check(s, b, "write-probe import")
+    if not args.demo_backup:
+        probe = {"name": "", "tagType": "Provider", "tags": [{"name": "_verifier", "tagType": "Folder", "tags": [
+            {"name": "WriteProbe", "tagType": "AtomicTag", "valueSource": "memory", "dataType": "String", "value": "",
+             "documentation": "Written by verify_gateway.py to prove its client can write (V7 positive control)."}]}]}
+        s, b = g.post("/data/api/v1/tags/import?provider=default&path=&type=json&collisionPolicy=Overwrite",
+                      json.dumps(probe).encode(), ctype="application/octet-stream")
+        check(s, b, "write-probe import")
 
     wait_healthy(g, "ignition/tag-provider", PROVIDER)
     # A provider that has just been created reports healthy before it reliably applies edits: an import sent
