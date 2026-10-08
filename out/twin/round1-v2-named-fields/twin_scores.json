@@ -1,0 +1,344 @@
+{
+ "claude": {
+  "parents": {
+   "key_instruments": 160,
+   "with_key_parent": 122,
+   "matched": 122,
+   "correct": 97,
+   "correct_lenient": 110,
+   "control_geometry_only_correct": 101,
+   "wrong_but_linked": 13,
+   "key_instruments_without_key_parent": 38,
+   "wrong_parent": 6,
+   "twin_parent_not_in_key": 6,
+   "accuracy_end_to_end": 0.795,
+   "accuracy_if_matched": 0.795,
+   "lenient_accuracy_if_matched": 0.902,
+   "control_geometry_only_if_matched": 0.828,
+   "by_parent_method": {
+    "linked": {
+     "n": 122,
+     "correct": 97,
+     "accuracy": 0.795
+    }
+   },
+   "by_position_agreement": {
+    "disagrees_with_position": {
+     "n": 26,
+     "correct": 9,
+     "accuracy": 0.346
+    },
+    "agrees_with_position": {
+     "n": 96,
+     "correct": 88,
+     "accuracy": 0.917
+    }
+   }
+  },
+  "offpage": {
+   "connectors": 48,
+   "pairs": 4,
+   "status": {
+    "unpaired: target drawing is not in this sheet set": 36,
+    "paired": 8,
+    "unpaired: target sheet is in this set but no matching connector was found": 4
+   },
+   "sheet_drawing_numbers": {
+    "0": [
+     "140-1",
+     "inferred_offpage_refs"
+    ],
+    "1": [
+     "150-1",
+     "inferred_offpage_refs"
+    ],
+    "2": [
+     "160-1",
+     "inferred_offpage_refs"
+    ],
+    "3": [
+     "170-1",
+     "inferred_offpage_refs"
+    ],
+    "4": [
+     null,
+     "unknown"
+    ],
+    "5": [
+     null,
+     "unknown"
+    ]
+   },
+   "pair_list": [
+    {
+     "sheet_a": "0",
+     "text_a": "MAIN STEAM BY-PASS ACC PID 150-1",
+     "sheet_b": "1",
+     "text_b": "MSS PID 140-1 (E-1) MAIN STEAM BYPASS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 1.0,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "0",
+     "text_a": "FWS TO STM BYPASS FWS PID 170-1",
+     "sheet_b": "3",
+     "text_b": "FWS TO MAIN STM BYPASS MSS PID 140-1",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "CND PID 160-1 CONDENSATE SYSTEM",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 (C-12) CONDENSATE RETURN",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 2
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "PID 160-1 (F-1) CND RECEIVER TANK VENT",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 ACC VACUUM PMPS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 2
+    }
+   ]
+  }
+ },
+ "codex": {
+  "parents": {
+   "key_instruments": 160,
+   "with_key_parent": 122,
+   "matched": 122,
+   "correct": 92,
+   "correct_lenient": 104,
+   "control_geometry_only_correct": 101,
+   "wrong_but_linked": 12,
+   "twin_parent_not_in_key": 14,
+   "key_instruments_without_key_parent": 38,
+   "wrong_parent": 4,
+   "accuracy_end_to_end": 0.754,
+   "accuracy_if_matched": 0.754,
+   "lenient_accuracy_if_matched": 0.852,
+   "control_geometry_only_if_matched": 0.828,
+   "by_parent_method": {
+    "linked": {
+     "n": 122,
+     "correct": 92,
+     "accuracy": 0.754
+    }
+   },
+   "by_position_agreement": {
+    "disagrees_with_position": {
+     "n": 28,
+     "correct": 6,
+     "accuracy": 0.214
+    },
+    "agrees_with_position": {
+     "n": 94,
+     "correct": 86,
+     "accuracy": 0.915
+    }
+   }
+  },
+  "offpage": {
+   "connectors": 48,
+   "pairs": 4,
+   "status": {
+    "unpaired: target drawing is not in this sheet set": 36,
+    "paired": 8,
+    "unpaired: target sheet is in this set but no matching connector was found": 4
+   },
+   "sheet_drawing_numbers": {
+    "0": [
+     "140-1",
+     "inferred_offpage_refs"
+    ],
+    "1": [
+     "150-1",
+     "inferred_offpage_refs"
+    ],
+    "2": [
+     "160-1",
+     "inferred_offpage_refs"
+    ],
+    "3": [
+     "170-1",
+     "inferred_offpage_refs"
+    ],
+    "4": [
+     null,
+     "unknown"
+    ],
+    "5": [
+     null,
+     "unknown"
+    ]
+   },
+   "pair_list": [
+    {
+     "sheet_a": "0",
+     "text_a": "MAIN STEAM BY-PASS ACC PID 150-1",
+     "sheet_b": "1",
+     "text_b": "MSS PID 140-1 (F-1) MAIN STEAM BYPASS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 1.0,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "0",
+     "text_a": "FWS TO STM BYPASS FWS PID 170-1",
+     "sheet_b": "3",
+     "text_b": "FWS TO MAIN STM BYPASS MSS PID 140-1",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "CND PID 160-1 CONDENSATE SYSTEM",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 (C-12) CONDENSATE RETURN",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 2
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "PID 160-1 (F-1) CND RECEIVER TANK VENT",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 ACC VACUUM PMPS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 2
+    }
+   ]
+  }
+ },
+ "gemini": {
+  "parents": {
+   "key_instruments": 160,
+   "with_key_parent": 122,
+   "matched": 115,
+   "control_geometry_only_correct": 62,
+   "correct": 63,
+   "correct_lenient": 69,
+   "found_but_not_as_instrument": 5,
+   "wrong_but_linked": 6,
+   "wrong_parent": 30,
+   "twin_parent_not_in_key": 16,
+   "key_instruments_without_key_parent": 38,
+   "missed_by_twin": 2,
+   "accuracy_end_to_end": 0.516,
+   "accuracy_if_matched": 0.548,
+   "lenient_accuracy_if_matched": 0.6,
+   "control_geometry_only_if_matched": 0.539,
+   "by_parent_method": {
+    "linked": {
+     "n": 103,
+     "correct": 61,
+     "accuracy": 0.592
+    },
+    "via_instrument_chain": {
+     "n": 1,
+     "accuracy": 0.0
+    },
+    "geometry_nearest": {
+     "n": 11,
+     "correct": 2,
+     "accuracy": 0.182
+    }
+   },
+   "by_position_agreement": {
+    "agrees_with_position": {
+     "n": 85,
+     "correct": 58,
+     "accuracy": 0.682
+    },
+    "disagrees_with_position": {
+     "n": 30,
+     "correct": 5,
+     "accuracy": 0.167
+    }
+   }
+  },
+  "offpage": {
+   "connectors": 48,
+   "pairs": 4,
+   "status": {
+    "unpaired: target drawing is not in this sheet set": 31,
+    "paired": 8,
+    "unpaired: target sheet is in this set but no matching connector was found": 4,
+    "unpaired: no drawing number read from the text": 5
+   },
+   "sheet_drawing_numbers": {
+    "0": [
+     "140-1",
+     "inferred_offpage_refs"
+    ],
+    "1": [
+     "150-1",
+     "inferred_offpage_refs"
+    ],
+    "2": [
+     "160-1",
+     "inferred_offpage_refs"
+    ],
+    "3": [
+     "170-1",
+     "inferred_offpage_refs"
+    ],
+    "4": [
+     null,
+     "unknown"
+    ],
+    "5": [
+     null,
+     "unknown"
+    ]
+   },
+   "pair_list": [
+    {
+     "sheet_a": "0",
+     "text_a": "MAIN STEAM BY-PASS ACC PID 150-1",
+     "sheet_b": "1",
+     "text_b": "MSS PID 140-1 (E-1) MAIN STEAM BYPASS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 1.0,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "0",
+     "text_a": "FWS TO STM BYPASS FWS PID 170-1",
+     "sheet_b": "3",
+     "text_b": "FWS TO MAIN STM BYPASS MSS PID 140-1",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 0
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "CND PID 160-1 CONDENSATE SYSTEM",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 (C-12) CONDENSATE RETURN",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.5,
+     "alternatives": 2
+    },
+    {
+     "sheet_a": "1",
+     "text_a": "PID 160-1 (F-1) CND RECEIVER TANK VENT",
+     "sheet_b": "2",
+     "text_b": "ACC PID 150-1 ACC VACUUM PMPS",
+     "method": "reciprocal_drawing_refs",
+     "description_similarity": 0.0,
+     "alternatives": 2
+    }
+   ]
+  }
+ }
+}

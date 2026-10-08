@@ -1,16 +1,22 @@
 """Process model -> SVG graphics + Ignition tag JSON + PI AF sheet + Operations review sheet.
 
+Two kinds of model are accepted:
+  - a hand-built process model (data/te_process_model.json): outputs go to out/ as before;
+  - an extracted twin (meta.model_kind == "extracted_twin", written by scripts/build_twin.py): outputs go next to
+    the model file (review_queue.csv, ignition/tags.json, pi/pi_builder_af.csv, svg/sheet_<n>.svg).
+
 Stdlib only. Usage:  python scripts/generate.py [path/to/model.json]
 """
 import csv
 import json
+import os
 import re
 import sys
 from pathlib import Path
-from xml.sax.saxutils import escape
+from xml.sax.saxutils import escape, quoteattr
 
 ROOT = Path(__file__).resolve().parent.parent
-MODEL_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "data" / "te_process_model.json"
+DEFAULT_MODEL = ROOT / "data" / "te_process_model.json"
 OUT = ROOT / "out"
 
 STROKE = "#1f2937"
@@ -265,6 +271,408 @@ def review_rows(model):
                      "seed", it.get("verification", {}).get("status", "unverified"), "", "", "", "", ""])
     return rows
 
+# ---------------------------------------------------------------- extracted twin (scripts/build_twin.py output)
+#
+# Everything below reads a model whose meta.model_kind is "extracted_twin". Signal paths are placeholders:
+# no real OPC item path or PI Point name is known from a drawing, so none is invented.
+
+TWIN_PLACEHOLDER = "PLACEHOLDER"
+
+
+def _label(item):
+    return item.get("tag") or item["id"]
+
+
+def _unique(name, used):
+    base, n, i = name, name, 2
+    while n.lower() in used:
+        n, i = f"{base}_{i}", i + 1
+    used.add(n.lower())
+    return n
+
+
+def ign_name(text, used):
+    """Ignition tag/folder name: letters, digits, _ and -; unique within its folder."""
+    n = re.sub(r"[^A-Za-z0-9_-]+", "_", text or "").strip("_") or "item"
+    return _unique(n if n[0].isalpha() or n[0] == "_" else "_" + n, used)
+
+
+def af_name(text, used):
+    """AF element/attribute name: drop the characters AF forbids in names."""
+    n = re.sub(r"[\\*?;{}\[\]|^'\"]+", " ", text or "").strip() or "item"
+    return _unique(re.sub(r"\s+", " ", n), used)
+
+
+def _twin_doc(item, extra=""):
+    p = item["provenance"][0]
+    return (f'{item["id"]} | tag: {item.get("tag") or "none read"} ({item["tag_status"]}) | {extra}'
+            f'sheet {p["sheet"]} symbol {p["symbol"]} | confidence {item.get("confidence")} | UNVERIFIED')
+
+
+def twin_ignition(model):
+    """Ignition 8 tag JSON (same shape as ignition_tags above). One UDT type per equipment class, per instrument
+    type (ISA letters) and per line-item class; one instance per asset, foldered Site/System/Equipment.
+    Instrument PVs are OPC tags marked readOnly (monitoring-only intent); BasePath and PointName are placeholders."""
+    units = {u["id"]: u for u in model["units"]}
+    types, used_types = {}, set()
+
+    def udt(kind, cls):
+        label = cls if kind == "Instrument" else cls.title()  # instrument types keep their ISA letters: PT, TCV
+        name = f"{kind}_{re.sub(r'[^A-Za-z0-9]', '', label) or 'Unknown'}"
+        if name not in types:
+            members = [{"name": "ReviewStatus", "tagType": "AtomicTag", "valueSource": "memory",
+                        "dataType": "String", "value": "unverified"}]
+            params = {"AssetId": {"dataType": "String", "value": ""}, "SourceTag": {"dataType": "String", "value": ""}}
+            if kind == "Instrument":
+                params |= {"BasePath": {"dataType": "String", "value": TWIN_PLACEHOLDER},
+                           "PointName": {"dataType": "String", "value": TWIN_PLACEHOLDER},
+                           "OPCServer": {"dataType": "String", "value": "Ignition OPC UA Server"}}
+                members.insert(0, {
+                    "name": "PV", "tagType": "AtomicTag", "valueSource": "opc", "dataType": "Float8",
+                    "readOnly": True,
+                    "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+                    "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
+                    "opcItemPath": {"bindType": "parameter", "binding": "{BasePath}.{PointName}"}})
+            types[name] = {"name": name, "tagType": "UdtType", "parameters": params, "tags": members}
+            used_types.add(name.lower())
+        return name
+
+    def instance(item, type_name, used, extra=""):
+        params = {"AssetId": {"dataType": "String", "value": item["id"]},
+                  "SourceTag": {"dataType": "String", "value": item.get("tag") or ""}}
+        if type_name.startswith("Instrument_"):
+            params["PointName"] = {"dataType": "String",
+                                   "value": f"{TWIN_PLACEHOLDER}_{ign_name(_label(item), set())}"}
+        return {"name": ign_name(_label(item), used), "tagType": "UdtInstance", "typeId": type_name,
+                "documentation": _twin_doc(item, extra), "parameters": params}
+
+    sys_folders = {}
+    for s in model["systems"]:
+        sys_folders[s["id"]] = {"folder": {"name": "", "tagType": "Folder", "tags": [],
+                                           "documentation": f'{s["name"]} | drawing {s.get("drawing_number")} '
+                                                            f'({s.get("drawing_number_method")})'},
+                                "used": set(), "equip": {}, "unassigned": None}
+    used_sys = set()
+    for s in model["systems"]:
+        sys_folders[s["id"]]["folder"]["name"] = ign_name(s["name"], used_sys)
+
+    def equip_folder(uid):
+        u = units[uid]
+        sf = sys_folders[u["system"]]
+        if uid not in sf["equip"]:
+            f = {"name": ign_name(_label(u), sf["used"]), "tagType": "Folder", "tags": []}
+            used = set()
+            f["tags"].append(instance(u, udt("Equipment", u["class"]), used,
+                                      f'on sheets {",".join(u["sheets"])} | '))
+            sf["equip"][uid] = (f, used)
+            sf["folder"]["tags"].append(f)
+        return sf["equip"][uid]
+
+    def unassigned(system):
+        sf = sys_folders[system]
+        if sf["unassigned"] is None:
+            f = {"name": ign_name("_Unassigned", sf["used"]), "tagType": "Folder", "tags": [],
+                 "documentation": "Items with no connection path to equipment. Assign during review."}
+            sf["unassigned"] = (f, set())
+            sf["folder"]["tags"].append(f)
+        return sf["unassigned"]
+
+    for u in model["units"]:
+        equip_folder(u["id"])
+    for x in model["line_items"]:
+        f, used = equip_folder(x["unit"]) if x["unit"] else unassigned(x["system"])
+        f["tags"].append(instance(x, udt("LineItem", x["class"]), used))
+    for x in model["instruments"]:
+        f, used = equip_folder(x["unit"]) if x["unit"] else unassigned(x["system"])
+        extra = f'attached to {x["parent"]} ({x["parent_method"]}) | '
+        f["tags"].append(instance(x, udt("Instrument", x["isa_letters"] or "Unknown"), used, extra))
+    site = {"name": ign_name(model["site"]["name"].split(" (")[0], set()), "tagType": "Folder",
+            "documentation": model["meta"]["title"] + " | every value is a PLACEHOLDER until mapped",
+            "tags": [sf["folder"] for sf in sys_folders.values()]}
+    return {"name": "", "tagType": "Provider", "tags": [
+        {"name": "_types_", "tagType": "Folder", "tags": sorted(types.values(), key=lambda t: t["name"])}, site]}
+
+
+def twin_pi_rows(model):
+    """PI Builder-style sheet, same columns as pi_af_rows: Site / System / Equipment elements, one attribute per
+    instrument. Attributes reference PI Points whose names are placeholders (PLACEHOLDER.<tag>.PV)."""
+    units = {u["id"]: u for u in model["units"]}
+    root = af_name(model["site"]["name"].split(" (")[0], set())
+    rows = [["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""]]
+    sys_name, used_sys, el_path, el_used = {}, set(), {}, {}
+    for s in model["systems"]:
+        sys_name[s["id"]] = af_name(s["name"], used_sys)
+        rows.append(["x", root, sys_name[s["id"]], "Element",
+                     f'Sheet {s["sheet"]}, drawing {s.get("drawing_number") or "unknown"}', "", "", "", "", ""])
+        el_used[s["id"]] = set()
+
+    def element(uid):
+        if uid not in el_path:
+            u = units[uid]
+            parent = f'{root}\\{sys_name[u["system"]]}'
+            name = af_name(_label(u), el_used[u["system"]])
+            rows.append(["x", parent, name, "Element", _twin_doc(u, f'{u["class"]} | '), "", "", "", "", ""])
+            el_path[uid] = (f"{parent}\\{name}", set())
+        return el_path[uid]
+
+    def unassigned(system):
+        key = ("unassigned", system)
+        if key not in el_path:
+            parent = f'{root}\\{sys_name[system]}'
+            name = af_name("Unassigned", el_used[system])
+            rows.append(["x", parent, name, "Element", "Instruments with no connection path to equipment",
+                         "", "", "", "", ""])
+            el_path[key] = (f"{parent}\\{name}", set())
+        return el_path[key]
+
+    for u in model["units"]:
+        element(u["id"])
+    for x in model["instruments"]:
+        path, used = element(x["unit"]) if x["unit"] else unassigned(x["system"])
+        name = af_name(_label(x), used)
+        point = re.sub(r"[^A-Za-z0-9_.-]+", "_", _label(x))
+        rows.append(["x", path, name, "Attribute",
+                     _twin_doc(x, f'{x.get("variable") or "unknown variable"} | attached to {x["parent"]} | '),
+                     "", "Double", x.get("uom", ""), "PI Point", f"\\\\%Server%\\{TWIN_PLACEHOLDER}.{point}.PV"])
+    return rows
+
+
+TWIN_SHAPES = {
+    "tank": lambda x0, y0, x1, y1: (f'<rect class="eq" x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" '
+                                    f'height="{y1 - y0:.1f}" rx="{min(x1 - x0, y1 - y0) / 4:.1f}"/>'),
+    "pump": lambda x0, y0, x1, y1: (f'<circle class="eq" cx="{(x0 + x1) / 2:.1f}" cy="{(y0 + y1) / 2:.1f}" '
+                                    f'r="{min(x1 - x0, y1 - y0) / 2:.1f}"/>'),
+    "valve": lambda x0, y0, x1, y1: (f'<path class="vl" d="M{x0:.1f} {y0:.1f} L{x1:.1f} {y1:.1f} L{x1:.1f} {y0:.1f} '
+                                     f'L{x0:.1f} {y1:.1f} Z"/>'),
+    "instrumentation": lambda x0, y0, x1, y1: (f'<circle class="inst" cx="{(x0 + x1) / 2:.1f}" '
+                                               f'cy="{(y0 + y1) / 2:.1f}" r="{min(x1 - x0, y1 - y0) / 2:.1f}"/>'),
+    "inlet/outlet": lambda x0, y0, x1, y1: (f'<path class="op" d="M{x0:.1f} {y0:.1f} L{x1 - (y1 - y0) / 2:.1f} '
+                                            f'{y0:.1f} L{x1:.1f} {(y0 + y1) / 2:.1f} L{x1 - (y1 - y0) / 2:.1f} '
+                                            f'{y1:.1f} L{x0:.1f} {y1:.1f} Z"/>'),
+    "general": lambda x0, y0, x1, y1: (f'<path class="gn" d="M{(x0 + x1) / 2:.1f} {y0:.1f} L{x1:.1f} '
+                                       f'{(y0 + y1) / 2:.1f} L{(x0 + x1) / 2:.1f} {y1:.1f} L{x0:.1f} '
+                                       f'{(y0 + y1) / 2:.1f} Z"/>'),
+}
+TWIN_STYLE = (BASE_STYLE + ".vl,.gn,.op{fill:#fff;stroke:#1f2937;stroke-width:1.5}"
+              ".lk{stroke:#64748b;stroke-width:1.2;opacity:.8}.xs{stroke:#9333ea;stroke-width:1.5}"
+              ".low>*:first-child{stroke:#dc2626;stroke-dasharray:4 2}.ph>*:first-child{stroke:#ea580c}"
+              ".tl{font:9px Arial,sans-serif;fill:#1f2937}")
+
+
+def twin_svgs(model, images_dir=None, out_dir=None):
+    """One SVG per sheet from the EXTRACTED geometry: each symbol at its extracted box, each extracted connection
+    as a straight line between symbol centres (a logical link, not the drawn pipe route). Every group carries
+    data-asset / data-tag / data-class / data-confidence / data-status for binding in Ignition Perspective."""
+    low = model["meta"].get("low_confidence_threshold", 0.75)
+    items = model["units"] + model["instruments"] + model["line_items"] + model["offpage_connectors"]
+    svgs = {}
+    for s in model["systems"]:
+        sheet = s["sheet"]
+        w_px, h_px = s.get("image_size_px") or (1000, 1000)
+        W = 1400
+        H = round(W * h_px / w_px)
+        sx, sy = W / 1000, H / 1000
+        boxes, groups = {}, []
+        for it in items:
+            for p in it["provenance"]:
+                if p["sheet"] != sheet:
+                    continue
+                b = p["box_0_1000"]
+                x0, y0, x1, y1 = b[0] * sx, b[1] * sy, b[2] * sx, b[3] * sy
+                boxes[p["symbol"]] = ((x0 + x1) / 2, (y0 + y1) / 2)
+                conf = p["confidence"]
+                cls = " ".join(c for c, on in (("low", conf is not None and conf < low),
+                                               ("ph", it["tag_status"] == "placeholder")) if on)
+                tag = it.get("tag") or ""
+                extra = f' data-pair="{it["pair"]}"' if it.get("pair") else ""
+                if it.get("parent"):
+                    extra += f' data-parent="{it["parent"]}"'
+                label = (f'<text class="tl" x="{x0:.1f}" y="{y1 + 9:.1f}">{escape(tag[:24])}</text>'
+                         if tag else "")
+                groups.append(
+                    f'<g id="{it["id"]}-s{sheet}-{escape(p["symbol"])}" data-asset="{it["id"]}" '
+                    f'data-tag={quoteattr(tag)} data-class="{escape(it["class"])}" data-confidence="{conf}" '
+                    f'data-status="{it["verification"]["status"]}" data-symbol={quoteattr(p["symbol"])}{extra}'
+                    f'{" class=" + quoteattr(cls) if cls else ""}><title>{escape(it["id"])} {escape(tag)} '
+                    f'({escape(it["class"])}, confidence {conf}, unverified)</title>'
+                    f'{TWIN_SHAPES[it["class"]](x0, y0, x1, y1)}{label}</g>')
+        lines = []
+        for st in model["streams"]:
+            if st.get("sheet") != sheet:
+                continue
+            a, b = boxes.get(st["from_symbol"]), boxes.get(st["to_symbol"])
+            if a and b:
+                lines.append(f'<line class="lk" data-stream="{st["id"]}" data-from="{st["from"]}" '
+                             f'data-to="{st["to"]}" x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" '
+                             f'y2="{b[1]:.1f}"/>')
+        bg = ""
+        if images_dir is not None:
+            img = Path(images_dir) / s["image"]
+            href = os.path.relpath(img, out_dir / "svg") if out_dir else str(img)
+            bg = (f'<image href={quoteattr(href.replace(os.sep, "/"))} x="0" y="0" width="{W}" height="{H}" '
+                  f'opacity="0.35" preserveAspectRatio="none"/>')
+        title = f'{s["name"]}: extracted overlay (sheet {sheet}, unverified)'
+        foot = (f'<text class="ts" x="8" y="{H - 8}">Symbols at extracted positions; lines are extracted connections '
+                f'drawn straight (not pipe routes). Red dashed = confidence below {low}. Orange = placeholder tag. '
+                f'Source: {escape(str(s.get("source_run")))}</text>')
+        body = (f'<rect x="0" y="0" width="{W}" height="{H}" fill="#fff"/>{bg}'
+                f'<text class="t" x="8" y="16">{escape(title)}</text>' + "".join(lines) + "".join(groups) + foot)
+        svgs[sheet] = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
+                       f'<title>{escape(title)}</title><defs><style>{TWIN_STYLE}</style></defs>{body}</svg>\n')
+    return svgs
+
+
+TWIN_REVIEW_COLS = (["rank", "why_check_this"] + REVIEW_COLS
+                    + ["sheet", "symbol", "location_on_sheet_0_1000", "tag_status", "how_attached"])
+
+ITEM_TYPE = {"tank": "equipment (vessel/tank)", "pump": "equipment (pump/compressor)", "valve": "valve",
+             "general": "in-line item", "instrumentation": "instrument", "inlet/outlet": "off-page connector"}
+
+
+def twin_review_rows(model):
+    """One row per item, least certain first. Tiers, in order: low confidence; off-page connector not paired;
+    placeholder tag; instrument with no drawn connection; other flags; then everything else. Inside a tier the
+    lowest confidence comes first."""
+    low = model["meta"].get("low_confidence_threshold", 0.75)
+    names = {x["id"]: _label(x) for x in model["units"] + model["instruments"] + model["line_items"]
+             + model["offpage_connectors"]}
+    failed = {s["sheet"] for s in model["systems"] if s.get("extraction_failed")}
+    rows = []
+
+    def add(item, kind, what, belongs, reasons, conf, sheet, symbol, box, attach=""):
+        tier = min((t for t, _ in reasons), default=6)
+        why = "; ".join(r for _, r in sorted(reasons)) or "routine check"
+        rows.append(((tier, conf if conf is not None else -1, item), [
+            why, item, kind, what, belongs, "", f"{model['meta']['model_id']} sheet {sheet} symbol {symbol}",
+            "" if conf is None else conf, "unverified", "", "", "", "", "", sheet, symbol,
+            "" if box is None else " ".join(f"{v:g}" for v in box), "", attach]))
+
+    def common(x):
+        r = []
+        c = x.get("confidence")
+        if c is not None and c < low:
+            r.append((1, f"low extraction confidence ({c})"))
+        if x["tag_status"] == "placeholder":
+            r.append((3, f'tag on the drawing is a placeholder ("{x["tag"]}"); the real tag must be supplied'))
+        if x.get("duplicate_tag"):
+            r.append((5, "the same tag appears on another item; confirm both are real"))
+        if any(p.get("box_axes_were_swapped") for p in x["provenance"]):
+            r.append((5, "extracted box had its corners reversed; position may be wrong"))
+        if {p["sheet"] for p in x["provenance"]} & failed:
+            r.append((1, "the extraction of this sheet failed"))
+        return r
+
+    for u in model["units"]:
+        r = common(u)
+        if len(u["sheets"]) > 1:
+            r.append((5, f'same tag on sheets {", ".join(u["sheets"])}: merged into one asset; confirm it is one item'))
+        if u["class"] == "general":
+            r.append((5, "promoted from an in-line symbol because its tag looks like an equipment tag"))
+        if u["tag_status"] == "missing":
+            r.append((5, "equipment has no tag; supply one"))
+        p = u["provenance"][0]
+        add(u["id"], ITEM_TYPE.get(u["class"], u["class"]), _label(u), u["system"], r, u["confidence"],
+            p["sheet"], p["symbol"], p["box_0_1000"])
+    for x in model["instruments"]:
+        r = common(x)
+        if x["parent_method"] == "geometry_nearest":
+            r.append((4, f'no connection was drawn to this instrument; attached to the nearest symbol '
+                         f'({names.get(x["parent"], x["parent"])}) by position only'))
+        elif x["parent_method"] == "no_candidate":
+            r.append((4, "no connection and nothing nearby: instrument has no parent"))
+        elif x["parent_method"] == "via_instrument_chain":
+            r.append((5, "attached through another instrument; confirm what it measures"))
+        elif x.get("parent_agrees_with_position") is False:
+            r.append((4, f'drawn connection says it belongs to {names.get(x["parent"], x["parent"])}, but the '
+                         f'nearest symbol is {names.get(x.get("position_nearest"), x.get("position_nearest"))}'))
+        elif x.get("linked_candidates", 1) > 1:
+            r.append((5, f'linked to {x["linked_candidates"]} items; the closest was taken as parent'))
+        if not x["unit"]:
+            r.append((5, "no path to any equipment; filed under Unassigned"))
+        if x["tag_status"] == "missing":
+            r.append((5, "no tag read"))
+        p = x["provenance"][0]
+        what = f'{_label(x)}: {x["variable"]} instrument' if x.get("variable") else _label(x)
+        belongs = f'{names.get(x["unit"], "unassigned")} (attached to {names.get(x["parent"], "nothing")})'
+        add(x["id"], "instrument", what, belongs, r, x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"],
+            x["parent_method"])
+    for x in model["line_items"]:
+        r = common(x)
+        if not x["unit"]:
+            r.append((5, "no path to any equipment; filed under Unassigned"))
+        p = x["provenance"][0]
+        add(x["id"], ITEM_TYPE.get(x["class"], x["class"]), _label(x), names.get(x["unit"], "unassigned"), r,
+            x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"], x["unit_method"])
+    for x in model["offpage_connectors"]:
+        r = common(x)
+        if not x["pair"]:
+            in_set = "in this set" in x["pair_status"]
+            r.append((2 if in_set else 2.5, f'off-page connector not matched to another sheet ({x["pair_status"].split(": ", 1)[-1]})'
+                      + ("" if in_set else "; fine if that drawing is not loaded")))
+        elif x.get("pair_description_similarity") == 0:
+            r.append((2, f'paired with {names.get(x["pair"], x["pair"])} by drawing numbers only; the two '
+                         'descriptions share no words'))
+        else:
+            r.append((5, f'paired with {names.get(x["pair"], x["pair"])} on another sheet; confirm the pairing'))
+        p = x["provenance"][0]
+        add(x["id"], "off-page connector", x["text"] or "(no text read)", x["system"], r, x["confidence"],
+            p["sheet"], p["symbol"], p["box_0_1000"], x["pair_method"] or "")
+    for st in model["streams"]:
+        r = []
+        c = st.get("confidence")
+        if c is not None and c < low:
+            # Below the symbol itself: once the doubtful symbol is settled, its links are quick to confirm.
+            r.append((5, f"connection to a low-confidence symbol ({c}); check after that symbol"))
+        if st["kind"] == "cross_sheet":
+            r.append((5, "cross-sheet link from off-page pairing; confirm"))
+        what = f'connection: {names.get(st["from"], st["from"])} - {names.get(st["to"], st["to"])}'
+        add(st["id"], "connection", what, "", r or [(6, "check the line exists and joins these two items")],
+            c, st.get("sheet") or "", f'{st.get("from_symbol", "")}-{st.get("to_symbol", "")}'.strip("-"), None)
+    rows.sort(key=lambda r: r[0])
+    status = {x["id"]: x["tag_status"] for x in model["units"] + model["instruments"] + model["line_items"]
+              + model["offpage_connectors"]}
+    out = []
+    for n, (_, row) in enumerate(rows, 1):
+        row[17] = status.get(row[1], "")
+        out.append([n] + row)
+    return out
+
+
+def validate_twin(model):
+    problems = []
+    ids = [x["id"] for k in ("units", "instruments", "line_items", "offpage_connectors") for x in model[k]]
+    for i in {i for i in ids if ids.count(i) > 1}:
+        problems.append(f"duplicate asset id {i}")
+    known = set(ids)
+    for s in model["streams"]:
+        for end in (s["from"], s["to"]):
+            if end not in known:
+                problems.append(f"stream {s['id']}: unknown endpoint {end}")
+    for x in model["instruments"] + model["line_items"]:
+        for k in ("unit", "parent"):
+            if x.get(k) and x[k] not in known:
+                problems.append(f"{x['id']}: unknown {k} {x[k]}")
+    return problems
+
+
+def export_twin(model, out_dir, images_dir=None):
+    """Write every platform output for an extracted twin next to its plant_model.json. Returns written names."""
+    out_dir = Path(out_dir)
+    for d in ("svg", "ignition", "pi"):
+        (out_dir / d).mkdir(parents=True, exist_ok=True)
+    for old in (out_dir / "svg").glob("sheet_*.svg"):
+        old.unlink()
+    for sheet, svg in twin_svgs(model, images_dir, out_dir).items():
+        (out_dir / "svg" / f"sheet_{sheet}.svg").write_text(svg, encoding="utf-8")
+    (out_dir / "ignition" / "tags.json").write_text(json.dumps(twin_ignition(model), indent=1), encoding="utf-8")
+    write_csv(out_dir / "pi" / "pi_builder_af.csv", PI_COLS, twin_pi_rows(model))
+    write_csv(out_dir / "review_queue.csv", TWIN_REVIEW_COLS, twin_review_rows(model))
+    problems = validate_twin(model)
+    for p in problems:
+        print("  twin validation:", p)
+    return ["review_queue.csv", "ignition/tags.json", "pi/pi_builder_af.csv",
+            f"svg/sheet_*.svg ({len(model['systems'])})"] + (["VALIDATION ISSUES"] if problems else [])
+
 # ---------------------------------------------------------------- main
 
 def write_csv(path, header, rows):
@@ -275,7 +683,12 @@ def write_csv(path, header, rows):
 
 
 def main():
-    model = json.loads(MODEL_PATH.read_text(encoding="utf-8"))
+    model_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_MODEL
+    model = json.loads(model_path.read_text(encoding="utf-8"))
+    if model.get("meta", {}).get("model_kind") == "extracted_twin":
+        written = export_twin(model, model_path.parent)
+        print(f"twin: wrote {', '.join(written)} next to {model_path}")
+        return 0
     problems = validate(model)
     for d in ("svg", "ignition", "pi"):
         (OUT / d).mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,10 @@
+# Drawing register for the development sheets 0-5 (docs/GOAL.md), as a plant would supply from its drawing index.
+# Read by a person from each sheet's title block (TITLE, PID number, SHEET n OF m). Optional input to
+# scripts/build_twin.py --sheet-register; without it, drawing numbers are inferred and marked as such.
+sheet,drawing_number,system_code,system_name
+0,140-1,MSS,Main Steam System
+1,150-1,ACC,Air Cooled Condenser
+2,160-1,CND,Condensate System
+3,170-1,FWS,Feedwater System
+4,180-1,ESS,Extraction Steam System
+5,100-1,RCS,Reactor Coolant System

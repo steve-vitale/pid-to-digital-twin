@@ -4,3 +4,8 @@ data/external/
 *.key
 runs/*/
 !runs/README.md
+out/twin/*
+!out/twin/round1-v2-named-fields/
+out/twin/round1-v2-named-fields/*
+!out/twin/round1-v2-named-fields/claude/
+!out/twin/round1-v2-named-fields/twin_scores.*

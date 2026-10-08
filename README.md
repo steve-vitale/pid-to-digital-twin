@@ -110,6 +110,7 @@ it at a real site.
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
 | [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources |
+| [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | Extracted sheets to a twin starter kit: hierarchy, Ignition, PI AF, SVG, review queue |
 
 ## Status
 
@@ -118,6 +119,7 @@ it at a real site.
 | Seed model, generator, platform outputs | Done |
 | Answer keys (TE verified; OPEN100 fetched) | Done |
 | Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
+| Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
 | Operations review of the Tennessee Eastman extraction | Next |
 | Ignition import + live values from public TE simulation data | Planned |
 
