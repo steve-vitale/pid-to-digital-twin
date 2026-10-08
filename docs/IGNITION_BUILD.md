@@ -89,6 +89,10 @@ each one.**
 
 The first full run failed V9, correctly: the gateway's configuration was not committed yet. That receipt is kept.
 
+**Also verified when loaded by hand.** The twin was deleted from the gateway, then rebuilt through the web UI plus
+one tag import, using only the committed files. All nine checks passed again, including V8 (receipt
+`20261008T163955Z`). Steps: [IGNITION_QUICKSTART.md](IGNITION_QUICKSTART.md).
+
 Screens: the live overview ([normal](screenshots/ignition-te-normal.png), [fault 6](screenshots/ignition-te-fault6-alarm.png))
 and an extracted sheet whose instruments all show Ignition's not-connected overlay
 ([OPEN100 sheet 0](screenshots/ignition-open100-sheet0-not-connected.png)).

@@ -1,0 +1,145 @@
+{
+ "utc": "20261008T163955Z",
+ "gateway": "Ignition 8.3.10 (trial), local",
+ "provider": "Twin",
+ "project": "PIDTwin",
+ "passed": true,
+ "checks": [
+  {
+   "id": "V1",
+   "name": "Import fidelity",
+   "principle": "Configuration is what the gateway holds, not what was sent",
+   "passed": true,
+   "counts": {
+    "tag_nodes_sent": 1204,
+    "views_sent": 13,
+    "differences": 0
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V2",
+   "name": "Reconciliation",
+   "principle": "One asset, one tag",
+   "passed": true,
+   "counts": {
+    "te_items": 37,
+    "te_tags": 37,
+    "open100_items": 910,
+    "open100_tags": 910
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V3",
+   "name": "Binding resolution",
+   "principle": "A broken binding shows as a quality error on screen",
+   "passed": true,
+   "counts": {
+    "views": 13,
+    "bindings": 398
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V4",
+   "name": "Quality honesty",
+   "principle": "Tag quality carries the truth; no placeholder ever reads Good",
+   "passed": true,
+   "counts": {
+    "fed": 36,
+    "no_source": 1,
+    "placeholders": 359,
+    "quality": {
+     "OPEN100 placeholder: Bad": 359,
+     "TE fed: Good": 36,
+     "TE no source: Bad": 1
+    }
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V5",
+   "name": "Liveness",
+   "principle": "A Good value that never changes is stale",
+   "passed": true,
+   "counts": {
+    "fed": 36,
+    "values_changed": 36
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V6",
+   "name": "Plausibility",
+   "principle": "Engineering limits belong on the tag; out-of-range is reported, never clipped",
+   "passed": true,
+   "counts": {
+    "checked": 36
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V7",
+   "name": "Read-only enforcement",
+   "principle": "Monitoring, not control",
+   "passed": true,
+   "counts": {
+    "write_attempts": [
+     "[default]_verifier/WriteProbe: write accepted (positive control: this client CAN write)",
+     "[Twin]TE_Plant/U-100/FV-203/PV: refused (BadUserAccessDenied)",
+     "[Twin]OPEN100/Sheet_9_mostly_RCS_tags/RCS-XR-100A/TE_XXX_15/PV: refused (BadUserAccessDenied)"
+    ],
+    "workflow_fields_writable_by_design": 910
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "Write attempts use a ReadWrite OPC UA user on purpose: a refusal must come from the tags, not from a client that lacked rights. ReviewStatus memory fields are review workflow, not process."
+  },
+  {
+   "id": "V8",
+   "name": "Alarm pipeline",
+   "principle": "Alarms are configured on the tag and proven, not assumed",
+   "passed": true,
+   "counts": {
+    "log": [
+     "normal: PV 2703.1 Good, AlarmActive False Good, TI-109 AlarmActive False",
+     "fault: PV crossed 2895.0 at 2897.3",
+     "fault: AlarmActive True, PV 2901.2"
+    ],
+    "pv_peak_kPa": 2901.2,
+    "alarm_delay_s": 0.5
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "PressureShutdown (above 3000 kPa) is not expected to activate: the recorded run holds at exactly 3000.0 kPa when the simulator shuts down. Reported, not tuned."
+  },
+  {
+   "id": "V9",
+   "name": "Change record",
+   "principle": "Gateway backups and versioned configuration",
+   "passed": true,
+   "counts": {
+    "backup": "gateway-20261008T134147Z.gwbk",
+    "backup_sha256": "81a53ad169e7b5a4",
+    "commit": "cbf622d",
+    "receipt": "out/ignition/gateway/receipts/20261008T163955Z.json"
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  }
+ ]
+}

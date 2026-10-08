@@ -632,3 +632,31 @@ guess with a dollar sign.
 - **Ask any vendor for per-sheet cost and per-sheet time from their own logs,** split into machine and reviewer time.
   If they can't produce it, they haven't measured it.
 
+## 16. Can someone else run it? Rebuilding the gateway by hand
+
+**What:** a test of whether the Ignition result can be shared, not just shown:
+1. I backed up the gateway, then deleted the twin's tag provider, its OPC connection and its project.
+2. I rebuilt the twin through the web UI only (create a provider, create a connection, import a project), plus one
+   tag import, using only files committed in the repo.
+3. The verifier ran its full set against that gateway. All nine checks passed, including the fault-replay alarm.
+
+The steps are now [IGNITION_QUICKSTART.md](IGNITION_QUICKSTART.md).
+
+**Why:** "it works on my gateway with my scripts" isn't the same as "you can load it". The scripted build might
+have been doing something the files alone don't carry.
+
+**What it showed:**
+- **The UI wizard fills in every connection setting the REST API made me copy by hand** (journal 14, lesson 1).
+  Someone using the UI never meets that trap.
+- **The 8.3 web UI imports projects but not tags.** Tags go in through the Designer or the REST API. The quickstart
+  says which path was tested (REST) and which is standard but untested here (Designer).
+- **Names are part of the interface.** The provider must be `Twin` and the connection `TE-Sim`, because the screens
+  and alarm expressions refer to them. The quickstart says so up front.
+
+**Lesson:** a deliverable is only shareable if someone else's path through it has been walked once, start to finish,
+from the published files.
+
+**At your plant:** when an integrator hands over a twin or SCADA project, rebuild it from the handover package on a
+clean test gateway before go-live, and run your acceptance checks there. Anything that only works on their machine
+shows up then, not during commissioning.
+

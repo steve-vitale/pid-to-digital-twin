@@ -9,6 +9,20 @@ The first step of most digital twin projects is someone redrawing P&IDs and typi
 project tests how much of that AI vision models can do, how to check their work honestly, and how a plant could use
 the approach without compromising its safety and data governance.
 
+**Start here:**
+
+| You are… | Read this |
+|---|---|
+| **Evaluating the work** (2 minutes) | [Results](#results-so-far) and [Try it in Ignition](#try-it-in-ignition) below, then [what it cost](docs/COSTS.md). For the judgment calls, journal entries [7](docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled), [13](docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized) and [14](docs/JOURNAL.md#14-the-ignition-build-the-twin-in-a-real-gateway-judged-by-the-gateway) |
+| **An Ignition user who wants to see it run** | [Load the twin into your own Ignition](docs/IGNITION_QUICKSTART.md) (about 15 minutes, free trial) |
+| **Planning something like this at a plant** | [At your plant](docs/AT_YOUR_PLANT.md), [From demo to a real site](docs/FROM_DEMO_TO_A_REAL_SITE.md), [Costs](docs/COSTS.md) |
+| **Checking or reproducing the numbers** | [Tutorial](#tutorial-reproduce-it), [How "done well" is defined](docs/EVALUATION.md), [Pre-registered goal and results](docs/GOAL.md) |
+
+**Contents:** [Results](#results-so-far) · [Try it in Ignition](#try-it-in-ignition) ·
+[What this demonstrates](#what-this-project-demonstrates) · [How it was built](#how-it-was-built) ·
+[Tutorial](#tutorial-reproduce-it) · [Repository map](#repository-map) · [Read next](#read-next) · [Status](#status) ·
+[Data and credits](#data-and-credits) · [Environment variables](#environment-variables)
+
 ![Generated overview of the Tennessee Eastman plant: tagged equipment, instruments and valves](docs/screenshots/overview-phase0.png)
 
 ---
@@ -58,6 +72,23 @@ sealed sets nobody tuned on:
     checks pass. See [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
 ![Ignition Perspective screen during the fault-6 replay: reactor pressure above its 2,895 kPa limit shows red; the agitator speed, which has no data source, shows a not-connected overlay](docs/screenshots/ignition-te-fault6-alarm.png)
+
+## Try it in Ignition
+
+The twin runs in Ignition 8.3, and you can load it into your own gateway from committed files. You need:
+- a tag import ([`twin_provider.json`](out/ignition/gateway/twin_provider.json));
+- a Perspective project ([`PIDTwin.zip`](out/ignition/gateway/PIDTwin.zip));
+- the small replay server that feeds the live values ([`te_sim_server.py`](scripts/ignition/te_sim_server.py)).
+
+A gateway assembled that way, by hand through the web UI plus one tag import, passed all nine verifier checks. Steps:
+**[docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md)**. To do the same thing by script with every check,
+see [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
+
+| Live overview | Fault 6: reactor pressure alarm | An extracted sheet, honestly not connected |
+|---|---|---|
+| ![TE overview with live values](docs/screenshots/ignition-te-normal.png) | ![Fault replay, PI-107 red](docs/screenshots/ignition-te-fault6-alarm.png) | ![OPEN100 sheet 0 with bad-quality overlays](docs/screenshots/ignition-open100-sheet0-not-connected.png) |
+
+There's no public live instance. It runs on your own gateway, and the free trial is enough.
 
 **What it cost:** $16.57 of metered model spend (a $25 cap), plus two flat-rate subscriptions. Machine time is
 cents per sheet; reviewer time is the real cost, and the docs show how to size it. See [docs/COSTS.md](docs/COSTS.md).
@@ -150,10 +181,33 @@ python scripts/ignition/build_gateway.py --fresh
 python scripts/ignition/te_sim_server.py --run normal   # live values for the screens (leave running)
 python scripts/ignition/verify_gateway.py --controls   # stop the replay first: the verifier drives it itself
 ```
-Setup (API key, HTTPS, OPC UA certificate) is in [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
+Setup (API key, HTTPS, OPC UA certificate) is in [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md). To just
+load the committed kit by hand, use [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md).
 
 **8. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.
+
+## Repository map
+
+| Path | What's there |
+|---|---|
+| [`docs/`](docs/) | Everything to read; see [Read next](#read-next). Screenshots are in [`docs/screenshots/`](docs/screenshots/) |
+| [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman seed model, checked against the simulator source |
+| [`data/sheet_registers/`](data/sheet_registers/) | A drawing index read from the OPEN100 title blocks (an example of what a plant supplies) |
+| [`extraction/`](extraction/) | The prompts every model got (`prompt_v2.md` is current), hashed into every run record |
+| [`scripts/`](scripts/) **, by stage** | |
+| · source and data | `verify_te_source.py`, `fetch_te_data.py`, `fetch_pid2graph.py` |
+| · extraction | `run_extraction.py` (Claude / Codex / Gemini adapters, cost meter, spend cap), `tiling.py`, `remerge_tiles.py` |
+| · line tracing (code, no AI) | `trace_connections.py` |
+| · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
+| · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
+| · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_views.py`, `import_tags.py`, `te_sim_server.py`, `verify_gateway.py`, `ua_client.py`, `gw.py`, `make_local_ca.py` |
+| · tests and costs | `run_tests.py` (all tests; CI runs it), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
+| [`out/`](out/) | Committed results: `scorecard_<label>.md`, [`costs.md`](out/costs.md), the TE outputs (`svg/`, `ignition/`, `pi/`, `ops_review_sheet.csv`) |
+| [`out/twin/r2-tiles-trace/codex/`](out/twin/r2-tiles-trace/codex/) | The 12-sheet extracted twin: `plant_model.json`, `review_queue.csv` (risk-tiered), Ignition tags, PI AF sheet, per-sheet SVGs |
+| [`out/ignition/gateway/`](out/ignition/gateway/) | The Ignition kit (tag import, Perspective project) and dated verification receipts in `receipts/` |
+| [`runs/`](runs/README.md) | Raw model run records (not committed) and the Gemini spend ledger (committed) |
+| [`NOTICE.md`](NOTICE.md), [`LICENSE`](LICENSE), [`CITATION.cff`](CITATION.cff) | Licensing (MIT code; CC BY-SA for files derived from PID2Graph) and how to cite |
 
 ## Read next
 
@@ -164,10 +218,11 @@ it at a real site.
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
 | [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
+| [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md) | Load the committed twin into your own Ignition, by hand, in about 15 minutes |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
-| [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources |
+| [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources, and a dated status of what changed |
 
 ## Status
 
@@ -178,7 +233,8 @@ it at a real site.
 | Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
-| Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done |
+| Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done; also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
+| Demo video | Not made yet |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
 | Operations review of the Tennessee Eastman extraction | Deferred (owner decision) |
 
