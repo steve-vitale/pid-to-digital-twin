@@ -479,3 +479,54 @@ you'll end up admiring a colour scheme.
 - **Then measure how many real errors that budget catches,** on units nobody tuned on.
 - **Sample the green items from time to time** (spot-check a few percent), so the green tier keeps earning its
   trust.
+
+---
+
+## 13. Round 3 results: a review queue that points people at the problems, and a fix that only half-generalized
+
+**What:** two round-3 results, scored once each on drawings nobody tuned on, with no new model spend.
+
+**1. The confidence marker. Mostly a success, with one important failure.**
+- **What it is:** every symbol and connection gets a risk score and a green / amber / red tier with a plain-language
+  reason ("the other models didn't find this symbol here; no tag was read").
+- **How the risk is judged:** by independent checks, not by asking the model how sure it is:
+  - Do the other models agree?
+  - Does the same model agree with itself across whole-sheet and tiled passes?
+  - Is the symbol on a drawn line?
+  - Is the tag well-formed?
+  
+  A small formula, fit only on the six development drawings, weighs the checks. Each check can only raise risk.
+- **Result:**
+  - Across 24 holdout comparisons (4 methods × 3 models × 2 holdouts), the riskiest 20% of items held two to four
+    times as many errors as ranking by the model's own confidence, in 23 of them.
+  - Green items were 94–100% right and made up roughly half to three-quarters of everything.
+  - Error rates climb from green to amber to red everywhere.
+- **The failure:** the best model with the best method (Codex, tiling + tracing) on the same-style holdout. There
+  the rating caught 40% of errors in the riskiest 20%, against 43% for Codex's own confidence. The tiers were still
+  calibrated, but the ordering added nothing.
+- **Why:** the strongest signal is "the other models didn't find it", and the best model is often right where the
+  others miss. Agreement is evidence, not proof, and it punishes the model that's right alone.
+
+**2. The twin's parent fix. Fixed for this drafting style, not in general.**
+- **What changed:** each instrument's parent is now chosen by following the drawn line.
+- **Same-style holdout:** 92.2% right, against 87.0% (round 2) and 90.9% (round 1).
+- **Different-style holdout:** 67.6%, against 70.8% for the round-2 rule.
+- **What the review queue does with it:** where the two rules agree, accept; where they disagree, flag for review.
+
+**Why it matters:** review time is the cost. The twin's queue now reads: 377 red items to look at closely, 676
+amber to check quickly, and 1,833 green to batch-accept with spot checks, out of 2,886 items across 12 sheets. Not
+"review all 2,886".
+
+**Lessons:**
+- Honest uncertainty comes from cross-checks, not from a model's own score. Self-confidence ended up with zero
+  weight.
+- Pre-registering "must beat the model's own confidence on both holdouts" is what exposed the one failure that
+  mattered. An average across all combinations would have hidden it.
+- A fix that wins where you tuned it and slips on a new drawing style is a partial fix. Say so.
+
+**At your plant:**
+- **Before anyone batch-accepts the "green" pile,** measure its error rate on units nobody tuned on, and keep
+  spot-checking it after go-live.
+- **Ask what the tool's confidence is based on.** If the answer is "the model says it's sure", that's not enough.
+- **Expect agreement-based checks to under-trust your best source.** A drawing reading that no other source
+  confirms might be the one that's right. Route it to a person rather than rejecting it.

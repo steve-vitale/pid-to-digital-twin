@@ -36,6 +36,14 @@ sealed sets nobody tuned on:
 - **Not everything improved.** Choosing the right parent equipment for each instrument got slightly worse (90.9% →
   87.0%), because the tracer links everything on a shared pipe network. That's the next thing to fix, and it's
   written up.
+- **Reviewers get a risk-ranked queue.** Every item has a green / amber / red tier and a plain-language reason. For
+  example, the twin built from 12 sheets has 377 red, 676 amber and 1,833 green items out of 2,886. On drawings
+  nobody tuned on, the riskiest 20% held 2–4× as many errors as the models' own confidence would point to (23 of 24
+  comparisons), and green items were 94–100% right. The one failure was the best model with the best method on
+  same-style drawings, where it was no better than the model's own confidence. That's reported in
+  [GOAL.md](docs/GOAL.md).
+- **Instrument-to-equipment assignment is fixed for this drafting style** (92.2%, up from 87.0%) by following the
+  drawn line. On a different style it slipped (67.6% vs 70.8%), so the two rules' disagreements go to review.
 - **An open-weight model you can run offline** (Gemma 4 31B, round 1) trailed far behind: about 0.53 detection F1
   where it finished, and it stalled on dense sheets.
 
@@ -140,7 +148,8 @@ it at a real site.
 | Answer keys (TE verified; OPEN100 fetched) | Done |
 | Extraction comparison (3 cloud models × 3 runs, plus an open-weight model) | Done |
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
-| Round 3: choose instrument parents along the traced line; ensemble of models | Next |
+| Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
+| Next: Ignition build with live values; operator review of the Tennessee Eastman output | Next |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`). PI AF XML is not emitted yet: I'm not sure of its exact format, so only the PI Builder sheet is written | Done (dev set) |
 | Operations review of the Tennessee Eastman extraction | Next |
 | Ignition import + live values from public TE simulation data | Planned |

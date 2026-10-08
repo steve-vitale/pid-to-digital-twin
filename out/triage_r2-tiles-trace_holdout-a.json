@@ -1,0 +1,191 @@
+{
+ "label": "r2-tiles-trace",
+ "split": "holdout-a",
+ "tools": {
+  "claude": {
+   "items": 1148,
+   "symbols": 438,
+   "links": 710,
+   "errors": 142,
+   "error_rate": 0.124,
+   "caught": {
+    "top10": {
+     "risk": 0.468,
+     "self_confidence": 0.199,
+     "random": 0.1
+    },
+    "top20": {
+     "risk": 0.635,
+     "self_confidence": 0.308,
+     "random": 0.2
+    },
+    "top30": {
+     "risk": 0.691,
+     "self_confidence": 0.44,
+     "random": 0.3
+    }
+   },
+   "tiers": {
+    "green": {
+     "items": 885,
+     "share": 0.771,
+     "error_rate": 0.053
+    },
+    "amber": {
+     "items": 210,
+     "share": 0.183,
+     "error_rate": 0.257
+    },
+    "red": {
+     "items": 53,
+     "share": 0.046,
+     "error_rate": 0.774
+    }
+   },
+   "green_precision": 0.947,
+   "green_share": 0.771,
+   "symbol_caught_top20": {
+    "risk": 0.437,
+    "self_confidence": 0.391
+   },
+   "link_caught_top20": {
+    "risk": 0.648,
+    "self_confidence": 0.25
+   }
+  },
+  "codex": {
+   "items": 1312,
+   "symbols": 504,
+   "links": 808,
+   "errors": 129,
+   "error_rate": 0.098,
+   "caught": {
+    "top10": {
+     "risk": 0.293,
+     "self_confidence": 0.295,
+     "random": 0.1
+    },
+    "top20": {
+     "risk": 0.398,
+     "self_confidence": 0.432,
+     "random": 0.2
+    },
+    "top30": {
+     "risk": 0.574,
+     "self_confidence": 0.595,
+     "random": 0.3
+    }
+   },
+   "tiers": {
+    "green": {
+     "items": 905,
+     "share": 0.69,
+     "error_rate": 0.057
+    },
+    "amber": {
+     "items": 216,
+     "share": 0.165,
+     "error_rate": 0.153
+    },
+    "red": {
+     "items": 191,
+     "share": 0.146,
+     "error_rate": 0.23
+    }
+   },
+   "green_precision": 0.943,
+   "green_share": 0.69,
+   "symbol_caught_top20": {
+    "risk": 0.612,
+    "self_confidence": 0.57
+   },
+   "link_caught_top20": {
+    "risk": 0.309,
+    "self_confidence": 0.368
+   }
+  },
+  "gemini": {
+   "items": 1022,
+   "symbols": 409,
+   "links": 613,
+   "errors": 132,
+   "error_rate": 0.129,
+   "caught": {
+    "top10": {
+     "risk": 0.599,
+     "self_confidence": 0.179,
+     "random": 0.1
+    },
+    "top20": {
+     "risk": 0.667,
+     "self_confidence": 0.278,
+     "random": 0.2
+    },
+    "top30": {
+     "risk": 0.709,
+     "self_confidence": 0.377,
+     "random": 0.3
+    }
+   },
+   "tiers": {
+    "green": {
+     "items": 777,
+     "share": 0.76,
+     "error_rate": 0.051
+    },
+    "amber": {
+     "items": 173,
+     "share": 0.169,
+     "error_rate": 0.133
+    },
+    "red": {
+     "items": 72,
+     "share": 0.07,
+     "error_rate": 0.958
+    }
+   },
+   "green_precision": 0.949,
+   "green_share": 0.76,
+   "symbol_caught_top20": {
+    "risk": 0.656,
+    "self_confidence": 0.253
+   },
+   "link_caught_top20": {
+    "risk": 0.665,
+    "self_confidence": 0.249
+   }
+  }
+ },
+ "sheets": [
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11"
+ ],
+ "model_fit": {
+  "labels": [
+   "v2-named-fields",
+   "r2-tiles-2x2",
+   "r2-trace",
+   "r2-tiles-trace"
+  ],
+  "tools": [
+   "claude",
+   "codex",
+   "gemini"
+  ],
+  "sheets": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "l2": 1.0,
+  "fitted_at": "2026-10-08T10:08:31+00:00",
+  "by": "scripts/score_triage.py --fit"
+ }
+}

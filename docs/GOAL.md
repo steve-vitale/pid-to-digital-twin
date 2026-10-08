@@ -231,3 +231,35 @@ reported; its keys have no tanks or pumps, so parents there are valves and in-li
 - **So the twin regression is fixed for this drafting style, not in general.** Claiming more would overstate it.
 - **Product decision that follows from the data:** don't trust one rule. Where `along_line` and `linked` agree on a
   parent, accept it. Where they differ, send it to review. The confidence marker (Goal 1) is where that belongs.
+
+### Goal 1: the confidence marker (scored once per holdout, all methods and tools)
+
+Share of all wrong items caught in the riskiest 20% of output items: **risk rating / model's own confidence** (a
+random order catches 20%).
+
+| Method | Holdout A: claude / codex / gemini | Holdout B: claude / codex / gemini |
+|---|---|---|
+| M0 baseline | 70/30 · 65/40 · 61/16 | 71/31 · 69/30 · 53/31 |
+| M1 tiling | 62/24 · 57/44 · 74/24 | 62/37 · 45/32 · 72/34 |
+| M2 tracing | 57/31 · 55/38 · 78/17 | 77/28 · 61/33 · 53/22 |
+| **M3 tiling + tracing (declared)** | 64/31 · **40/43 ✗** · 67/28 | 68/42 · **58/30** · 76/31 |
+
+**Green tier:**
+- **Holdout A:** precision 94–96%, covering 44–79% of items.
+- **Holdout B:** precision 97–100%, covering 27–77% of items.
+- **Calibration:** error rates rise green → amber → red in every combination. For example, Codex M3 on holdout A is
+  6% → 15% → 23%, and on holdout B 3% → 11% → 47%.
+
+**Verdict, stated plainly:**
+- **Passes in 23 of 24 holdout comparisons.** The rating beats the model's own confidence, usually by two to four
+  times.
+- **Fails in the one that matters most:** Codex with M3 on holdout A, the declared tool and method (40% vs 43%).
+  There, the tiers are still calibrated, but the ordering adds nothing over Codex's own confidence.
+- **Likely cause** (flagged by the builder before any holdout run): the strongest signal is "the other models didn't
+  find this". Codex is often right where the others miss, so its correct solo finds get flagged.
+- **The direction for a next round, not done here:** weight agreement by how reliable each peer is, so a weaker
+  model's miss counts for less.
+
+**What a reviewer gets now:** the twin built from Codex M3 on all 12 sheets has a review queue of 2,886 items:
+377 red (13%), 676 amber (23%) and 1,833 green (64%), each with a plain-language reason. Green items are about
+95% right on the same-style holdout; spot-checking a sample of them stays part of the process.
