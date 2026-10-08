@@ -780,13 +780,21 @@ restart. The machine was unattended and 600 miles from its owner, so a restart w
   - 24 live and 12 "not connected" on sheet 0;
   - the reactor pressure alarm turning red in the fault replay.
 
-  **Record so far: 5 of 6 from-scratch starts passed.** The first passed. The second failed before the check
-  published its reasons, so that failure is unexplained. Since then, every run starts three independent fresh
-  copies and posts its results publicly, and all of those have passed.
+  **The record, and the bug it found.** Each change now starts three independent fresh copies, and the results are
+  posted publicly.
+  - The first 9 starts had 2 failures, both at the alarm step.
+  - Once the check reported what the screen showed, the cause was clear. Switching to the fault recreated the replay
+    container, so Ignition had to rebuild its OPC UA session: usually in about 25 seconds, once not within 2
+    minutes.
+  - **The fix is how a real plant behaves:** the data source changes mode without dropping the connection. The
+    replay now switches live from a control file.
+  - Every start since has passed, with the alarm at 26 seconds each time.
 - **The Windows launchers were tested locally,** with a stand-in `docker` command and the throwaway gateway answering
   the "is Ignition up?" check.
 
 **What testing caught:**
+- **A demo that worked 7 times in 9.** "Usually works" isn't one click for a newcomer, and running it three times
+  per change is what made the 2 failures visible.
 - **The window title "P&ID" broke the start script for everyone.** In a batch file, `&` means "and then run".
 - **A build setting was read before it was loaded,** so the first throwaway build still pointed at `localhost`.
 - **I was about to document that restarting resets Ignition's 2-hour trial.** Earlier the same day, a restart had

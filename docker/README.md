@@ -70,9 +70,13 @@ Then open the same addresses as above.
 screens in a real browser (`.github/workflows/docker-demo.yml`, `scripts/check_docker_demo.py`). It checks the
 screens show live values, that sheet 0 shows 24 live and 12 not connected, and that the fault turns the alarm red.
 Screenshots from each run are kept with the run. Each change is started from scratch three times in parallel, and the results are posted on
-the run page. Record at release: 5 of 6 from-scratch starts passed. One early failure is unexplained, because it
-happened before the check posted its reasons. If yours doesn't come up, `stop-demo.bat` then `start-demo.bat` is
-the first thing to try.
+the run page.
+
+**Record:** the first 9 from-scratch starts had 2 failures. Both were the alarm step. Switching to the fault
+recreated the replay container, so Ignition had to rebuild its connection, usually in about 25 seconds but once not
+within 2 minutes. Now the replay switches live inside the running container, the connection never drops, and every
+start since has passed, with the alarm at 26 seconds each time. If yours doesn't come up, `stop-demo.bat` then
+`start-demo.bat` is the first thing to try.
 
 ## How the demo backup is made (for maintainers)
 
