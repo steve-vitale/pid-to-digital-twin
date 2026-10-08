@@ -11,5 +11,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      # Data-free tests run here; the scorer controls need the PID2Graph download and are skipped in CI.
+      # Every test runs here, the scorer controls included: the OPEN100 drawings and answer keys are in the repo.
       - run: python scripts/run_tests.py

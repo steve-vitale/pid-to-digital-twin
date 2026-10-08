@@ -3,21 +3,23 @@
 *Rather not install Ignition yourself? The [one-click Docker demo](../docker/README.md) runs the same thing with a
 double-click.*
 
-What you get: a live Tennessee Eastman overview screen whose reactor-pressure alarm fires on a replayed fault, plus
-12 extracted P&ID sheets as screens showing honestly that nothing behind them is connected yet. Everything comes
-from files committed in this repo. There's no public live demo: it runs on your own gateway, and the free trial is
-enough.
+What you get: live Tennessee Eastman operator screens (a plant overview, a screen per unit, trends, and values that
+turn amber when they leave their normal band before the reactor-pressure alarm fires on a replayed fault), plus the
+12 extracted P&ID drawings with live values where a data point is mapped. Everything comes from files committed in
+this repo. There's no public live demo: it runs on your own gateway, and the free trial is enough. What the screens
+show and how far to trust it: [OPERATOR_SCREENS.md](OPERATOR_SCREENS.md).
 
 **Tested on 2026-10-08:** a gateway assembled exactly this way, through the web UI plus one tag import, then passed
 all nine verifier checks, including the fault alarm (receipt `out/ignition/gateway/receipts/20261008T163955Z.md`).
-Tested on Ignition 8.3.10 only.
+That was before the operator screens and the historian (step 3b) were added; those were tested through the scripted
+build only. Tested on Ignition 8.3.10 only.
 
 ## What's in the kit
 
 | File | What it is |
 |---|---|
 | [`out/ignition/gateway/twin_provider.json`](../out/ignition/gateway/twin_provider.json) | Tag import: UDT types, the TE plant (37 instruments and valves, engineering ranges, alarms), and the 910 extracted OPEN100 assets as placeholders |
-| [`out/ignition/gateway/PIDTwin.zip`](../out/ignition/gateway/PIDTwin.zip) | Perspective project: the TE overview, plus one screen per extracted sheet (`OPEN100/Sheet_0` … `Sheet_11`) |
+| [`out/ignition/gateway/PIDTwin.zip`](../out/ignition/gateway/PIDTwin.zip) | Perspective project: the operator screens, the TE schematic, and one screen per extracted drawing (`OPEN100/Sheet_0` … `Sheet_11`) |
 | [`scripts/ignition/te_sim_server.py`](../scripts/ignition/te_sim_server.py) | Small OPC UA server replaying the open TE simulation data, read-only, standing in for a plant's PLC/OPC server |
 | [`scripts/fetch_te_data.py`](../scripts/fetch_te_data.py) | Downloads the two TE runs it replays (normal operation and fault 6), with checksums |
 
@@ -49,6 +51,10 @@ It should show **CONNECTED**.
 **3. Screens.** Go to **Platform → Projects → Import Project**, choose `out/ignition/gateway/PIDTwin.zip`, and name it
 **`PIDTwin`**.
 
+**3b. Historian (for the trends).** Create a historian of type **Core Historian** named **`TwinHistory`**, exactly;
+the TE tags log to it. Without it everything else works and the trends stay empty. This step was tested through the
+REST API only (`build_gateway.py` creates it), not through the web UI.
+
 **4. Tags.** Import `out/ignition/gateway/twin_provider.json` into the `Twin` provider, either way:
 - **Designer:** Tag Browser → choose the `Twin` provider → Import Tags → the JSON file. This is standard Ignition,
   not the path tested here.
@@ -59,11 +65,13 @@ It should show **CONNECTED**.
   The settings it reads are in `scripts/ignition/gw.py`. API keys only work over HTTPS by default; see
   [IGNITION_BUILD.md](IGNITION_BUILD.md) for the local-CA setup used here.
 
-Expect 1,093 tags imported, 0 failures.
+Expect 1,102 tags imported, 0 failures.
 
 **5. Look at it.**
-- TE overview: `http://localhost:8088/data/perspective/client/PIDTwin`. Values change about once a second.
-- Extracted sheets: `…/client/PIDTwin/open100/0` through `/open100/11`. Every instrument shows Ignition's
+- Plant overview: `http://localhost:8088/data/perspective/client/PIDTwin`. Values change about once a second; the
+  trends fill in over the first few minutes. The bar at the top links every screen.
+- Unit screens `…/unit/R-101` and so on, the schematic `…/schematic`, and the alarm list `…/alarms`.
+- Extracted drawings: `…/drawings`, then `/open100/0` through `/open100/11`. Every instrument shows Ignition's
   bad-quality overlay and no value, which is the honest state for placeholders.
 
 **Optional: the mapped demo points.** Start `python scripts/ignition/demo_points_server.py` (synthetic values) and
@@ -75,12 +83,13 @@ tested through the scripted build, not by hand.
 ```
 python scripts/ignition/te_sim_server.py --run fault6 --start 240
 ```
-Within about 20–30 seconds, reactor pressure (PI-107) passes 2,895 kPa and its label turns red. A-feed flow (FI-101)
-drops to zero, because fault 6 is the loss of A feed.
+Within about 20–30 seconds, reactor pressure (PI-107) passes 2,895 kPa and turns red on every screen. A-feed flow
+(FI-101) drops to zero, because fault 6 is the loss of A feed. To see the early warning instead, start at the fault
+itself (`--start 160`): the A feed turns amber at once, and the pressure alarm follows about 100 seconds later.
 
-| Normal | Fault 6 | An extracted sheet |
+| Normal | Fault 6, at the alarm | An extracted drawing |
 |---|---|---|
-| ![TE overview, normal](screenshots/ignition-te-normal.png) | ![TE overview, fault 6, reactor pressure red](screenshots/ignition-te-fault6-alarm.png) | ![OPEN100 sheet 0, not connected](screenshots/ignition-open100-sheet0-not-connected.png) |
+| ![Plant overview, normal](screenshots/hmi-overview-normal.png) | ![Plant overview at the alarm: values outside their band amber, reactor pressure red](screenshots/hmi-overview-fault-alarm.png) | ![OPEN100 sheet 0 with live values](screenshots/hmi-drawing-sheet0.png) |
 
 ## Optional: verify it the way this repo does
 

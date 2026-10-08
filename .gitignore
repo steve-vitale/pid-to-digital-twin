@@ -1,5 +1,17 @@
-﻿__pycache__/
-data/external/
+__pycache__/
+# Third-party downloads stay out of git, except the drawings every step uses (PID2Graph, CC BY-SA 4.0; NOTICE.md):
+# the 12 OPEN100 sheets with their answer keys, and their degraded "old scan" copies (scripts/degrade_scans.py).
+data/external/*
+!data/external/pid2graph/
+data/external/pid2graph/*
+!data/external/pid2graph/PID2Graph/
+data/external/pid2graph/PID2Graph/*
+!data/external/pid2graph/PID2Graph/Complete/
+data/external/pid2graph/PID2Graph/Complete/*
+!data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/
+!data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L1/
+!data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L2/
+!data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L3/
 .env
 .venv/
 *.gwbk

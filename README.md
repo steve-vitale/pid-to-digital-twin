@@ -101,9 +101,14 @@ A gateway assembled that way, by hand through the web UI plus one tag import, pa
 **[docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md)**. To do the same thing by script with every check,
 see [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
-| Live overview | Fault 6: reactor pressure alarm | An extracted sheet, honestly not connected |
+The screens are generated from the twin in the ISA-101 style: grey when the plant is normal, amber when a value
+leaves its learned normal band, red only for a real alarm. In the fault replay, the first value turns amber 294
+plant-minutes before the pressure alarm. What they infer, and how far to trust it:
+[docs/OPERATOR_SCREENS.md](docs/OPERATOR_SCREENS.md).
+
+| Plant overview, normal | Fault 6: early warning, then the alarm | An extracted drawing, live |
 |---|---|---|
-| ![TE overview with live values](docs/screenshots/ignition-te-normal.png) | ![Fault replay, PI-107 red](docs/screenshots/ignition-te-fault6-alarm.png) | ![OPEN100 sheet 0: mapped points live, the rest not connected](docs/screenshots/ignition-open100-sheet0-mapped.png) |
+| ![Plant overview in normal running: grey tiles with values, indicators and trends](docs/screenshots/hmi-overview-normal.png) | ![Plant overview at the pressure alarm: values outside their normal band amber, reactor pressure red](docs/screenshots/hmi-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments](docs/screenshots/hmi-drawing-sheet0.png) |
 
 **Three ways to run it:**
 - **No setup:** [the one-click demo](docker/README.md). Install Docker Desktop, then double-click `start-demo.bat`;
@@ -146,8 +151,10 @@ Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## How it was built
 
-AI coding agents (Claude Code and Codex) wrote most of the code. I set the direction, made the design decisions,
-and checked every result. No operations review of the Tennessee Eastman model has been done yet: the tooling for it is built and tested, but a review only counts if it comes from someone who knows the process and is looking at the drawings. The
+An AI coding agent (Claude, through Claude Code) wrote the code and drafted the documents. I set the direction, made
+the design decisions, and checked every result. The models under test (Claude, GPT, Gemini, and open-weight Gemma)
+were compared only where it mattered most, reading the drawings; [docs/MODELS.md](docs/MODELS.md) says part by part
+which work used several models and which used Claude alone. No operations review of the Tennessee Eastman model has been done yet: the tooling for it is built and tested, but a review only counts if it comes from someone who knows the process and is looking at the drawings. The
 [build journal](docs/JOURNAL.md) records each decision, what was rejected, and what went wrong, including the
 agents' own mistakes and mine.
 
@@ -170,10 +177,12 @@ go to `out/`:
 python scripts/generate.py
 ```
 
-**3. Fetch the scoring drawings.** This downloads 12 drawings and answer keys, about 20 MB, by reading only the parts
-of a 9.3 GB archive that are needed:
+**3. The scoring drawings are already here.** The 12 OPEN100 drawings with their answer keys, and their degraded
+"old scan" copies from round 4, are committed under `data/external/pid2graph/` (CC BY-SA 4.0, see
+[NOTICE.md](NOTICE.md)). Only the 20 holdout-B drawings (130 MB) are left out; fetch them, or re-fetch the rest from
+the source, by reading only the needed parts of the 9.3 GB archive:
 ```
-python scripts/fetch_pid2graph.py --get "Complete/PID2Graph OPEN100/"
+python scripts/fetch_pid2graph.py --get "Complete/Dataset PID/"
 ```
 
 **4. Prove the scorer before trusting it.** Positive and negative controls must all pass. `run_tests.py` runs every
@@ -229,6 +238,8 @@ it at a real site.
 | [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman seed model, checked against the simulator source |
 | [`data/sheet_registers/`](data/sheet_registers/) | A drawing index read from the OPEN100 title blocks (an example of what a plant supplies) |
 | [`data/io_lists/`](data/io_lists/README.md) | A synthetic I/O list for the point-mapping demo, shaped like a real export |
+| [`data/external/pid2graph/`](data/external/pid2graph/) | The 12 OPEN100 drawings with answer keys, and their degraded-scan copies (CC BY-SA 4.0) |
+| [`data/drawings/`](data/drawings/) | The drawings greyed for use as screen backgrounds |
 | [`extraction/`](extraction/) | The prompts every model got (`prompt_v2.md` is current), hashed into every run record |
 | [`scripts/`](scripts/) **, by stage** | |
 | · source and data | `verify_te_source.py`, `fetch_te_data.py`, `fetch_pid2graph.py` |
@@ -236,10 +247,11 @@ it at a real site.
 | · line tracing (code, no AI) | `trace_connections.py` |
 | · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
 | · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
+| · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run) |
 | · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (I/O list to data addresses) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · demo | `demo.py` (one command to a live twin), `make_before_after.py`, `make_demo_gif.py` |
-| · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_views.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `ua_client.py`, `gw.py`, `make_local_ca.py` |
+| · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `ua_client.py`, `gw.py`, `make_local_ca.py` |
 | · tests and costs | `run_tests.py` (all tests; CI runs it), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
 | [`out/`](out/) | Committed results: `scorecard_<label>.md`, [`costs.md`](out/costs.md), the TE outputs (`svg/`, `ignition/`, `pi/`, `ops_review_sheet.csv`) |
 | [`out/twin/r2-tiles-trace/codex/`](out/twin/r2-tiles-trace/codex/) | The 12-sheet extracted twin: `plant_model.json`, `review_queue.csv` (risk-tiered), Ignition tags, PI AF sheet, per-sheet SVGs |
@@ -261,6 +273,8 @@ it at a real site.
 | [docs/REVIEW_LOOP.md](docs/REVIEW_LOOP.md) | Operations review back into the twin, and mapping instruments to live data points |
 | [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md) | Load the committed twin into your own Ignition, by hand, in about 15 minutes |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
+| [docs/OPERATOR_SCREENS.md](docs/OPERATOR_SCREENS.md) | The generated operator screens: normal bands, early warning, what's data and what's judgement |
+| [docs/MODELS.md](docs/MODELS.md) | Which work used several models, which used Claude alone, and how each was checked |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
 | [docs/PLAN.md](docs/PLAN.md) | Phases, decisions, risks, sources, and a dated status of what changed |
@@ -276,6 +290,7 @@ it at a real site.
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
 | Ignition build: live TE values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Done; also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Done; verified in a running gateway |
+| Operator screens (ISA-101 style): overview, unit screens, trends, learned normal bands, drawings as backgrounds | First pass done and verified; key values and spans are Claude's choice, not yet reviewed by operations |
 | Round 4: robustness on old-scan images, pre-registered | Done (measured; where it breaks is reported) |
 | One-click Docker demo (`start-demo.bat`), checked from scratch in CI | Done |
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
@@ -296,8 +311,9 @@ System Explorer, then bind the attributes to real PI points (the same I/O-list s
 
 ## Data and credits
 
-- **PID2Graph** (Zenodo 14803338, CC BY-SA 4.0) and the **OPEN100** design by the Energy Impact Center. Downloaded by
-  script, not redistributed.
+- **PID2Graph** (Zenodo 14803338, CC BY-SA 4.0) and the **OPEN100** design by the Energy Impact Center. The 12
+  OPEN100 drawings and answer keys are included, with derived copies (degraded scans, greyed screen backgrounds),
+  under the same licence. The holdout-B drawings are fetched by script.
 - **Tennessee Eastman process**, Downs & Vogel (1993); open simulation code by the Braatz group (University of
   Illinois). Downloaded by script.
 - Code in this repository: MIT. Files derived from PID2Graph are CC BY-SA 4.0; see [NOTICE.md](NOTICE.md).

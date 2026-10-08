@@ -10,7 +10,13 @@ What it does, in order (each step is idempotent):
   6. One tag import: UDT types, the live TE plant (TE_Plant) and the extracted OPEN100 twin (OPEN100), placeholders
      and all. The import file is written to out/ignition/gateway/twin_provider.json first, so the verifier can diff
      what we sent against what the gateway holds (V1).
-  7. Perspective project PIDTwin with one screen per drawing (scripts/ignition/build_views.py).
+  7. Historian "TwinHistory" (Ignition's built-in Core Historian), so the operator screens can draw trends.
+  8. Perspective project PIDTwin: the operator screens (scripts/ignition/build_hmi.py) and one screen per drawing
+     (scripts/ignition/build_views.py).
+
+Each TE tag also carries its normal operating band (scripts/normal_bands.py: learned from the normal run, checked on
+data it never saw) and two derived members: OutOfNormal (outside the band) and State (0 normal, 1 outside the band,
+2 alarm), which the screens colour by. A band is a display aid, never an alarm: alarms stay the published setpoints.
 
 Usage:
   python scripts/ignition/build_gateway.py [--fresh] [--write-only] [--twin out/twin/r2-tiles-trace/codex]
@@ -35,6 +41,7 @@ import build_views  # noqa: E402
 gw._load_env()  # before the constants below read their IGNITION_* overrides
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))  # normal_bands
 MODEL = ROOT / "data" / "te_process_model.json"
 DATA = ROOT / "data" / "external" / "te-braatz"
 OUT = ROOT / "out" / "ignition" / "gateway"
@@ -48,6 +55,7 @@ PROBE_PATH = "[default]_verifier/WriteProbe"  # the verifier's positive write co
 # OPC connections for data sources named in the twin's point mappings (scripts/map_points.py). A site lists its own.
 DATA_CONNECTIONS = {"OPEN100-Demo": os.environ.get("IGNITION_DEMO_POINTS_URL", "opc.tcp://localhost:4842/open100-demo")}
 PRIORITY = {"High": "High", "Medium": "Medium", "Low": "Low"}
+HISTORIAN = "TwinHistory"  # Ignition's built-in Core Historian: feeds the trends on the operator screens
 
 # Alarm setpoints come from published sources, never from the replay data.
 ALARMS = {
@@ -87,10 +95,12 @@ def te_columns(model):
 def te_tags(model):
     rows = [list(map(float, l.split())) for l in (DATA / "d00_te.dat").read_text().splitlines() if l.strip()]
     cols = te_columns(model)
+    import normal_bands  # scripts/; deterministic, a few hundred ms
+    bands = normal_bands.main(quiet=True)
 
     def pv(kind):
         return {"name": "PV", "tagType": "AtomicTag", "valueSource": "opc", "dataType": "Float8", "readOnly": True,
-                "engLimitMode": "No_Clamp",
+                "engLimitMode": "No_Clamp", "historyEnabled": True, "historyProvider": HISTORIAN,
                 "documentation": f"{kind}. Read-only: the twin monitors, it never writes to the process.",
                 "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
                 "opcItemPath": {"bindType": "parameter", "binding": "nsu=" + SIM_NS + ";s=TE/{Tag}"}}
@@ -107,16 +117,28 @@ def te_tags(model):
                     "expression": 'isAlarmActive("[' + PROVIDER + ']" + {PathToParentFolder} + "/PV")'}
     review = {"name": "ReviewStatus", "tagType": "AtomicTag", "valueSource": "memory", "dataType": "String",
               "value": "unverified", "documentation": "Operations review decision (scripts/apply_review.py)."}
-    params = {"Tag": {"dataType": "String", "value": ""}, "OPCServer": {"dataType": "String", "value": OPC_CONN}}
+    params = {"Tag": {"dataType": "String", "value": ""}, "OPCServer": {"dataType": "String", "value": OPC_CONN},
+              "NormalLo": {"dataType": "Float", "value": 0.0}, "NormalHi": {"dataType": "Float", "value": 0.0}}
+    # Relative reference {[.]PV}: the PV of this same instance. A Bad PV makes these Bad too, never False.
+    out_of_normal = {"name": "OutOfNormal", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Boolean",
+                     "documentation": "True while PV is outside its normal band (NormalLo-NormalHi, learned from the "
+                                      "normal run by scripts/normal_bands.py). A display aid, not an alarm.",
+                     "expression": "{[.]PV} < {NormalLo} || {[.]PV} > {NormalHi}"}
+
+    def state(alarmed):
+        expr = "if({[.]OutOfNormal}, 1, 0)"
+        return {"name": "State", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
+                "documentation": "What the screens show: 0 normal, 1 outside the normal band, 2 alarm active.",
+                "expression": f"if({{[.]AlarmActive}}, 2, {expr})" if alarmed else expr}
     # AlarmActive lives only on the alarmed type: isAlarmActive() on a tag with no alarms configured reads Bad.
     # Wrapping it in try() would also hide a broken path, so the type split is the honest fix.
     types = [
         {"name": "TE_Measurement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Measured process value"), review]},
+         "tags": [pv("Measured process value"), out_of_normal, state(False), review]},
         {"name": "TE_AlarmedMeasurement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Measured process value, with alarms"), alarm_active, review]},
+         "tags": [pv("Measured process value, with alarms"), alarm_active, out_of_normal, state(True), review]},
         {"name": "TE_FinalElement", "tagType": "UdtType", "parameters": params,
-         "tags": [pv("Controller output to the final element, %"), review]},
+         "tags": [pv("Controller output to the final element, %"), out_of_normal, state(False), review]},
     ]
     units = {u["id"]: {"name": u["id"], "tagType": "Folder", "documentation": u["name"], "tags": []}
              for u in model["units"]}
@@ -164,17 +186,43 @@ def te_tags(model):
         members = [member]
         if status != "unverified":
             members.append({"name": "ReviewStatus", "tagType": "AtomicTag", "value": status})
+        band = bands["bands"].get(it["tag"])
+        inst_params = {"Tag": {"dataType": "String", "value": it["tag"]}}
+        if band:
+            inst_params["NormalLo"] = {"dataType": "Float", "value": band["lo"]}
+            inst_params["NormalHi"] = {"dataType": "Float", "value": band["hi"]}
         units[it["unit"]]["tags"].append({
             "name": it["tag"], "tagType": "UdtInstance",
             "typeId": "TE_FinalElement" if is_fe else
                       "TE_AlarmedMeasurement" if it["tag"] in ALARMS else "TE_Measurement",
-            "documentation": f'{it["description"]} | {source} | range {lo}-{hi} {it["uom"]} ({why}){note}',
-            "parameters": {"Tag": {"dataType": "String", "value": it["tag"]}},
+            "documentation": f'{it["description"]} | {source} | range {lo}-{hi} {it["uom"]} ({why}){note}' +
+                             (f' | normal band {band["lo"]:g}-{band["hi"]:g} (learned, not a site limit)' if band
+                              else ""),
+            "parameters": inst_params,
             "tags": members})
-        ranges[it["tag"]] = {"low": lo, "high": hi, "source": why, "has_data": col is not None}
+        ranges[it["tag"]] = {"low": lo, "high": hi, "source": why, "has_data": col is not None,
+                             "normal": [band["lo"], band["hi"]] if band else None, "unit": it["unit"]}
+    # Counts for the screens' summary bar. Only tags with a data source: a tag with none reads Bad by design, and
+    # one Bad term would make the whole count Bad.
+    fed = [(it["unit"], it["tag"]) for it in model["instruments"] + model["final_elements"]
+           if it["tag"] in ranges and ranges[it["tag"]]["has_data"]]
+
+    def count(member, items):
+        return " + ".join(f"toInt({{[{PROVIDER}]TE_Plant/{u}/{t}/{member}}})" for u, t in items) or "0"
+    summary = [{"name": "OutOfNormal", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
+                "documentation": "How many fed TE values are outside their normal band", "expression": count(
+                    "OutOfNormal", fed)},
+               {"name": "AlarmsActive", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
+                "documentation": "How many TE values have an active alarm", "expression": count(
+                    "AlarmActive", [(u, t) for u, t in fed if t in ALARMS])}]
+    summary += [{"name": f"OutOfNormal_{u}", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
+                 "documentation": f"How many fed values in {u} are outside their normal band",
+                 "expression": count("OutOfNormal", [(uu, t) for uu, t in fed if uu == u])} for u in units]
     plant = {"name": "TE_Plant", "tagType": "Folder",
              "documentation": "Tennessee Eastman plant (Downs & Vogel 1993), live from the open replay data",
-             "tags": list(units.values())}
+             "tags": list(units.values()) + [{"name": "_Summary", "tagType": "Folder",
+                                              "documentation": "Counts for the operator screens", "tags": summary}]}
+    rv["bands"] = {"k": bands["k"], "fit": bands["fit"], "check_normal": bands["check_normal"]}
     return types, plant, ranges, rv
 
 
@@ -331,7 +379,7 @@ def main():
     args = ap.parse_args()
     doc, meta = build_file(ROOT / args.twin)
     hidden = set(meta["te_review"]["hidden"]) | set(meta["twin_review"]["hidden"])
-    views_zip, views = build_views.project_zip(doc, ROOT / args.twin, PROVIDER, set(ALARMS), hidden)
+    views_zip, views = build_views.project_zip(doc, ROOT / args.twin, PROVIDER, set(ALARMS), hidden, meta)
     (OUT / f"{build_views.PROJECT}.zip").write_bytes(views_zip)
     print(f"wrote {(OUT / 'twin_provider.json').relative_to(ROOT).as_posix()} and {build_views.PROJECT}.zip "
           f"({len(views)} views)")
@@ -375,6 +423,12 @@ def main():
         extra["endpoint"] = dict(extra["endpoint"], endpointUrl=url, discoveryUrl=url, hostOverride=host(url))
         upsert(g, "ignition/opc-connection", name, "Data source for mapped twin points. Read-only.",
                {"profile": {"type": "com.inductiveautomation.OpcUaServerType", "readOnly": True}, "settings": extra})
+    upsert(g, "com.inductiveautomation.historian/historian-provider", HISTORIAN,
+           "Trends for the operator screens (TE values only)",
+           {"profile": {"type": "CoreHistorian"},
+            "settings": {"partitionInterval": "MONTH", "dataDeduplication": False,
+                         "maintenanceSettings": {"strategy": "NONE", "directory": "", "maintenanceAgeUnits": "MONTH",
+                                                 "maintenanceAge": 6}}})
     if args.fresh:
         s, cur = g.get(f"/data/api/v1/resources/find/ignition/tag-provider/{PROVIDER}")
         if s == 200:

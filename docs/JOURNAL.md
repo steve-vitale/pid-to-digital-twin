@@ -807,3 +807,58 @@ that starts where a newcomer starts and looks at what they would see.
 machine, and keep it from a throwaway, credential-free build. The fastest way to collect operator feedback is to
 remove the setup between them and the screen.
 
+## 21. Screens an operator could use, and which model made which call
+
+**What:** the first screens were correct and nearly useless: the drawing, with a number on every instrument, all
+with the same weight. The new ones are a first pass at an operator display, generated from the twin in the ISA-101
+style ([OPERATOR_SCREENS.md](OPERATOR_SCREENS.md)):
+- a plant overview with one tile per unit, each with its key values, an analog indicator and a trend;
+- a screen per unit, the alarm list, and the schematic;
+- the 12 extracted drawings, now shown as the **original** drawings, greyed, with live values on top.
+
+Grey means normal, amber means a value has left its normal band, and red is only for a real alarm.
+
+**How, and the one inference that carries it:** an alarm says when it's too late; a band says "this isn't normal".
+TE has no published operating envelopes, so `normal_bands.py` learns them from the normal run, the way the scorer
+was built: rules first, then a test the rules never saw.
+- **Fit:** mean ± K standard deviations on the first half of the normal run.
+- **K chosen on the second half,** which the fit never saw. K = 6 is the smallest width with under 0.5% false flags
+  on every tag. At K = 3, some value would be amber in 27% of normal samples, which operators learn to ignore.
+- **Then the fault run, which chose nothing.** The A feed leaves its band in the same sample the fault starts; the
+  pressure alarm comes **294 plant-minutes later**. Nothing was flagged in the 8 hours before the fault.
+- **The gateway does the logic, not the screen:** each tag got `OutOfNormal` and `State` members, so anything reading
+  the tags agrees with the colours. V8 now checks it: nothing flagged in normal running, the A feed flagged before
+  the alarm, the pressure red at the alarm.
+
+**Which model did what** ([MODELS.md](MODELS.md)), written down now, though it should have been from the start. Several models were compared only where it mattered most: reading the drawings. Everything else was
+built by one model, Claude, through Claude Code. The judgement calls on these screens (which values represent each
+unit, the display spans, the layout) are Claude's alone. They're labelled that way on every screen and are the first
+thing an operator should change.
+
+**What went wrong:**
+- **The gateway ran out of memory, and it looked like a caching bug.** Images inside the views (5.2 MB) exhausted the
+  trial gateway's 1 GB heap while it built each browser's copy of the project. Open screens kept their old views, and
+  I first blamed the browser. The gateway log said `OutOfMemoryError`. Screen-resolution drawings and small thumbnails
+  brought it to 2.4 MB.
+- **Trends showed upsets that never happened.** Gaps in history (a stopped replay) drew as drops to zero. They now
+  use raw points and skip bad quality.
+- **A PowerShell edit corrupted the source,** turning "·" into "Â·" on screen: Windows PowerShell 5 read UTF-8 as the
+  old Windows code page and wrote it back with a byte-order mark. Files are now edited with tools that keep UTF-8.
+
+**Three overclaims, corrected:**
+- **"Played the operations reviewer"** (corrected earlier the same day, commit 475c122). Nobody with TE process
+  knowledge has reviewed the model, so the README now says the review is not done.
+- **"The 3,000 kPa shutdown alarm never activates."** The data never goes above 3,000.0, so it seemed safe. On the new
+  screens it went active at exactly 3,000.0: Ignition's above-setpoint alarm fired at equality. The claim had been
+  inferred, never watched; the verifier stops looking seconds after the first alarm.
+- **"Claude Code and Codex wrote most of the code."** Codex was an extraction model only. None of its sessions
+  edited this repository, and every commit carries Claude's co-author line.
+
+**Lesson:** a claim about what a system does is a prediction until something has watched it happen. The screens
+watched things the checks never looked at: a limit at equality, a gateway out of memory, a trend inventing upsets.
+Walking the screens through a fault, as an operator would, belongs in the test plan next to the automated checks.
+
+**At your plant:** generate the first screens, then spend the saved time with operators. Have them pick the key
+values, and learn normal bands from your own historian, per operating mode. Count false flags on held-out data before
+anyone sees the colour; a band that's amber every shift is worse than none.
+

@@ -1,6 +1,7 @@
 """Run every test in one command: python scripts/run_tests.py
 
-Tests that need downloaded data are skipped (and say so) when the data isn't there, so this also runs in CI.
+A test whose data is missing is skipped and says so. The data every test needs is committed, so in a full checkout
+(and in CI) nothing is skipped.
 """
 import subprocess
 import sys
@@ -12,7 +13,7 @@ TESTS = [
     ("scripts/test_along_line.py", None),
     ("scripts/test_gateway_diff.py", None),
     ("scripts/test_apply_review.py", None),
-    ("scripts/test_scorer_controls.py", "data/external/pid2graph"),
+    ("scripts/test_scorer_controls.py", "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"),
 ]
 
 
@@ -20,7 +21,7 @@ def main():
     failed = 0
     for script, needs in TESTS:
         if needs and not (ROOT / needs).exists():
-            print(f"SKIP  {script} (needs {needs}; run step 3 of the README tutorial)")
+            print(f"SKIP  {script} (needs {needs}, which is committed: is this a partial checkout?)")
             continue
         p = subprocess.run([sys.executable, script], cwd=ROOT, capture_output=True, text=True)
         status = "PASS" if p.returncode == 0 else "FAIL"

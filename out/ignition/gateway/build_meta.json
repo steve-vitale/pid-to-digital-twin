@@ -33,223 +33,405 @@
    "low": 0.0,
    "high": 0.5,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    0.0881,
+    0.4138
+   ],
+   "unit": "U-100"
   },
   "FI-102": {
    "low": 0.0,
    "high": 7323.003,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    3448.8308,
+    3877.9038
+   ],
+   "unit": "U-100"
   },
   "FI-103": {
    "low": 0.0,
    "high": 9021.933,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    4266.5105,
+    4748.7074
+   ],
+   "unit": "U-100"
   },
   "FI-104": {
    "low": 0.0,
    "high": 18.688,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    8.8556,
+    9.8325
+   ],
+   "unit": "C-101"
   },
   "FI-105": {
    "low": 0.0,
    "high": 53.804,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    25.7342,
+    28.0827
+   ],
+   "unit": "K-101"
   },
   "FI-106": {
    "low": 0.0,
    "high": 84.655,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    41.0035,
+    43.6594
+   ],
+   "unit": "R-101"
   },
   "PI-107": {
    "low": 0.0,
    "high": 5411.321,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    2668.8372,
+    2740.9778
+   ],
+   "unit": "R-101"
   },
   "LI-108": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    71.8441,
+    78.1407
+   ],
+   "unit": "R-101"
   },
   "TI-109": {
    "low": 0.0,
    "high": 240.8,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    120.2814,
+    120.5186
+   ],
+   "unit": "R-101"
   },
   "FI-110": {
    "low": 0.0,
    "high": 0.674,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    0.2678,
+    0.4064
+   ],
+   "unit": "K-101"
   },
   "TI-111": {
    "low": 0.0,
    "high": 160.173,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    78.8415,
+    81.3731
+   ],
+   "unit": "V-101"
   },
   "LI-112": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    43.5239,
+    56.3699
+   ],
+   "unit": "V-101"
   },
   "PI-113": {
    "low": 0.0,
    "high": 5268.839,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    2596.0044,
+    2671.3002
+   ],
+   "unit": "V-101"
   },
   "FI-114": {
    "low": 0.0,
    "high": 50.373,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    18.9375,
+    31.4054
+   ],
+   "unit": "V-101"
   },
   "LI-115": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    43.789,
+    56.1341
+   ],
+   "unit": "C-101"
   },
   "PI-116": {
    "low": 0.0,
    "high": 6205.769,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    3070.0636,
+    3134.4905
+   ],
+   "unit": "C-101"
   },
   "FI-117": {
    "low": 0.0,
    "high": 45.814,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    19.241,
+    26.5669
+   ],
+   "unit": "C-101"
   },
   "TI-118": {
    "low": 0.0,
    "high": 131.706,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    64.1658,
+    67.6008
+   ],
+   "unit": "C-101"
   },
   "FI-119": {
    "low": 0.0,
    "high": 468.035,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    194.8169,
+    274.0618
+   ],
+   "unit": "C-101"
   },
   "JI-120": {
    "low": 0.0,
    "high": 682.85,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    333.5234,
+    349.1084
+   ],
+   "unit": "K-101"
   },
   "TI-121": {
    "low": 0.0,
    "high": 189.21,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    93.8145,
+    95.387
+   ],
+   "unit": "R-101"
   },
   "TI-122": {
    "low": 0.0,
    "high": 154.558,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    75.7204,
+    78.8615
+   ],
+   "unit": "E-101"
   },
   "AI-123": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    30.6159,
+    33.7611
+   ],
+   "unit": "R-101"
   },
   "AI-129": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    31.0993,
+    34.7938
+   ],
+   "unit": "K-101"
   },
   "AI-137": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    -0.0421,
+    0.0796
+   ],
+   "unit": "C-101"
   },
   "FV-201": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    59.2508,
+    66.8527
+   ],
+   "unit": "U-100"
   },
   "FV-202": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    51.418,
+    56.5151
+   ],
+   "unit": "U-100"
   },
   "FV-203": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    8.6442,
+    40.739
+   ],
+   "unit": "U-100"
   },
   "FV-204": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    54.106,
+    68.5662
+   ],
+   "unit": "C-101"
   },
   "HV-205": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    19.5852,
+    24.8095
+   ],
+   "unit": "K-101"
   },
   "FV-206": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    31.6247,
+    48.4563
+   ],
+   "unit": "K-101"
   },
   "LV-207": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    19.0421,
+    56.8455
+   ],
+   "unit": "V-101"
   },
   "LV-208": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    32.1597,
+    60.7304
+   ],
+   "unit": "C-101"
   },
   "FV-209": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    38.088,
+    58.9721
+   ],
+   "unit": "C-101"
   },
   "TV-210": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    37.8136,
+    44.3928
+   ],
+   "unit": "R-101"
   },
   "TV-211": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": true
+   "has_data": true,
+   "normal": [
+    9.5668,
+    26.8966
+   ],
+   "unit": "E-101"
   },
   "SC-212": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
-   "has_data": false
+   "has_data": false,
+   "normal": null,
+   "unit": "R-101"
   }
  },
  "te_review": {
@@ -295,6 +477,11 @@
    "TV-210": "unverified",
    "TV-211": "unverified",
    "SC-212": "unverified"
+  },
+  "bands": {
+   "k": 6,
+   "fit": "d00_te samples 0-479",
+   "check_normal": "d00_te samples 480-959"
   }
  },
  "twin_review": {

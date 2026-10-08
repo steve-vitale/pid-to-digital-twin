@@ -1,0 +1,156 @@
+{
+ "utc": "20261008T213814Z",
+ "gateway": "Ignition 8.3.10 (trial), local",
+ "provider": "Twin",
+ "project": "PIDTwin",
+ "passed": false,
+ "checks": [
+  {
+   "id": "V1",
+   "name": "Import fidelity",
+   "principle": "Configuration is what the gateway holds, not what was sent",
+   "passed": true,
+   "counts": {
+    "tag_nodes_sent": 1222,
+    "views_sent": 22,
+    "differences": 0
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V2",
+   "name": "Reconciliation",
+   "principle": "One asset, one tag; the review decision reaches the gateway",
+   "passed": true,
+   "counts": {
+    "te_items": 37,
+    "te_tags": 37,
+    "open100_items": 910,
+    "open100_tags": 910,
+    "rejected_left_out": 0,
+    "reviewed_items": 0,
+    "review_status_mismatches": 0
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V3",
+   "name": "Binding resolution",
+   "principle": "A broken binding shows as a quality error on screen",
+   "passed": true,
+   "counts": {
+    "views": 22,
+    "bindings": 871
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V4",
+   "name": "Quality honesty",
+   "principle": "Tag quality carries the truth; no placeholder ever reads Good",
+   "passed": true,
+   "counts": {
+    "fed_or_mapped": 60,
+    "no_source": 1,
+    "placeholders": 335,
+    "quality": {
+     "OPEN100 mapped: Good": 24,
+     "OPEN100 placeholder: Bad": 335,
+     "TE fed: Good": 36,
+     "TE no source: Bad": 1
+    }
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V5",
+   "name": "Liveness",
+   "principle": "A Good value that never changes is stale",
+   "passed": true,
+   "counts": {
+    "fed": 60,
+    "values_changed": 60
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V6",
+   "name": "Plausibility",
+   "principle": "Engineering limits belong on the tag; out-of-range is reported, never clipped",
+   "passed": true,
+   "counts": {
+    "checked": 36
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": ""
+  },
+  {
+   "id": "V7",
+   "name": "Read-only enforcement",
+   "principle": "Monitoring, not control",
+   "passed": true,
+   "counts": {
+    "write_attempts": [
+     "[default]_verifier/WriteProbe: write accepted (positive control: this client CAN write)",
+     "[Twin]TE_Plant/V-101/LV-207/PV: refused (BadUserAccessDenied)",
+     "[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/PSV_1406/PV: refused (BadUserAccessDenied)"
+    ],
+    "workflow_fields_writable_by_design": 910
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "Write attempts use a ReadWrite OPC UA user on purpose: a refusal must come from the tags, not from a client that lacked rights. ReviewStatus memory fields are review workflow, not process."
+  },
+  {
+   "id": "V8",
+   "name": "Alarm pipeline",
+   "principle": "Alarms are configured on the tag and proven, not assumed",
+   "passed": true,
+   "counts": {
+    "log": [
+     "normal: PV 2704.6 Good, AlarmActive False Good, TI-109 AlarmActive False",
+     "normal: values outside their band 0 (Good), FI-101 State 0, PI-107 State 0",
+     "fault: A feed flagged True (State 1), 20 values outside their band, before the pressure alarm",
+     "fault: PV crossed 2895.0 at 2912.0",
+     "fault: AlarmActive True, PV 2912.0",
+     "fault: PI-107 State 2 (2 = alarm colour on the screens)"
+    ],
+    "pv_peak_kPa": 2912.0,
+    "alarm_delay_s": 0.0
+   },
+   "failures": [],
+   "failure_count": 0,
+   "note": "PressureShutdown (above 3000 kPa) is not expected to activate: the recorded run holds at exactly 3000.0 kPa when the simulator shuts down. Reported, not tuned."
+  },
+  {
+   "id": "V9",
+   "name": "Change record",
+   "principle": "Gateway backups and versioned configuration",
+   "passed": false,
+   "counts": {
+    "backup": "gateway-20261008T213421Z.gwbk",
+    "backup_sha256": "4977ca60816a2cf8",
+    "commit": "475c122",
+    "receipt": "out/ignition/gateway/receipts/20261008T213814Z.json"
+   },
+   "failures": [
+    "out/ignition/gateway/twin_provider.json has uncommitted changes: the gateway config would not match any commit",
+    "out/ignition/gateway/PIDTwin.zip has uncommitted changes: the gateway config would not match any commit",
+    "out/ignition/gateway/build_meta.json has uncommitted changes: the gateway config would not match any commit"
+   ],
+   "failure_count": 3,
+   "note": ""
+  }
+ ]
+}

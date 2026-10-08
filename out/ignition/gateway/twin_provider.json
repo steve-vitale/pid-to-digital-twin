@@ -17,6 +17,14 @@
       "OPCServer": {
        "dataType": "String",
        "value": "TE-Sim"
+      },
+      "NormalLo": {
+       "dataType": "Float",
+       "value": 0.0
+      },
+      "NormalHi": {
+       "dataType": "Float",
+       "value": 0.0
       }
      },
      "tags": [
@@ -27,6 +35,8 @@
        "dataType": "Float8",
        "readOnly": true,
        "engLimitMode": "No_Clamp",
+       "historyEnabled": true,
+       "historyProvider": "TwinHistory",
        "documentation": "Measured process value. Read-only: the twin monitors, it never writes to the process.",
        "opcServer": {
         "bindType": "parameter",
@@ -36,6 +46,22 @@
         "bindType": "parameter",
         "binding": "nsu=urn:pid-digital-twin:te-sim;s=TE/{Tag}"
        }
+      },
+      {
+       "name": "OutOfNormal",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Boolean",
+       "documentation": "True while PV is outside its normal band (NormalLo-NormalHi, learned from the normal run by scripts/normal_bands.py). A display aid, not an alarm.",
+       "expression": "{[.]PV} < {NormalLo} || {[.]PV} > {NormalHi}"
+      },
+      {
+       "name": "State",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "What the screens show: 0 normal, 1 outside the normal band, 2 alarm active.",
+       "expression": "if({[.]OutOfNormal}, 1, 0)"
       },
       {
        "name": "ReviewStatus",
@@ -58,6 +84,14 @@
       "OPCServer": {
        "dataType": "String",
        "value": "TE-Sim"
+      },
+      "NormalLo": {
+       "dataType": "Float",
+       "value": 0.0
+      },
+      "NormalHi": {
+       "dataType": "Float",
+       "value": 0.0
       }
      },
      "tags": [
@@ -68,6 +102,8 @@
        "dataType": "Float8",
        "readOnly": true,
        "engLimitMode": "No_Clamp",
+       "historyEnabled": true,
+       "historyProvider": "TwinHistory",
        "documentation": "Measured process value, with alarms. Read-only: the twin monitors, it never writes to the process.",
        "opcServer": {
         "bindType": "parameter",
@@ -87,6 +123,22 @@
        "executionMode": "FixedRate",
        "executionRate": 1000,
        "expression": "isAlarmActive(\"[Twin]\" + {PathToParentFolder} + \"/PV\")"
+      },
+      {
+       "name": "OutOfNormal",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Boolean",
+       "documentation": "True while PV is outside its normal band (NormalLo-NormalHi, learned from the normal run by scripts/normal_bands.py). A display aid, not an alarm.",
+       "expression": "{[.]PV} < {NormalLo} || {[.]PV} > {NormalHi}"
+      },
+      {
+       "name": "State",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "What the screens show: 0 normal, 1 outside the normal band, 2 alarm active.",
+       "expression": "if({[.]AlarmActive}, 2, if({[.]OutOfNormal}, 1, 0))"
       },
       {
        "name": "ReviewStatus",
@@ -109,6 +161,14 @@
       "OPCServer": {
        "dataType": "String",
        "value": "TE-Sim"
+      },
+      "NormalLo": {
+       "dataType": "Float",
+       "value": 0.0
+      },
+      "NormalHi": {
+       "dataType": "Float",
+       "value": 0.0
       }
      },
      "tags": [
@@ -119,6 +179,8 @@
        "dataType": "Float8",
        "readOnly": true,
        "engLimitMode": "No_Clamp",
+       "historyEnabled": true,
+       "historyProvider": "TwinHistory",
        "documentation": "Controller output to the final element, %. Read-only: the twin monitors, it never writes to the process.",
        "opcServer": {
         "bindType": "parameter",
@@ -128,6 +190,22 @@
         "bindType": "parameter",
         "binding": "nsu=urn:pid-digital-twin:te-sim;s=TE/{Tag}"
        }
+      },
+      {
+       "name": "OutOfNormal",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Boolean",
+       "documentation": "True while PV is outside its normal band (NormalLo-NormalHi, learned from the normal run by scripts/normal_bands.py). A display aid, not an alarm.",
+       "expression": "{[.]PV} < {NormalLo} || {[.]PV} > {NormalHi}"
+      },
+      {
+       "name": "State",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "What the screens show: 0 normal, 1 outside the normal band, 2 alarm active.",
+       "expression": "if({[.]OutOfNormal}, 1, 0)"
       },
       {
        "name": "ReviewStatus",
@@ -1902,11 +1980,19 @@
        "name": "FI-101",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "A feed flow | XMEAS 1 | range 0.0-0.5 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "A feed flow | XMEAS 1 | range 0.0-0.5 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 0.0881-0.4138 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-101"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 0.0881
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 0.4138
         }
        },
        "tags": [
@@ -1923,11 +2009,19 @@
        "name": "FI-102",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "D feed flow | XMEAS 2 | range 0.0-7323.003 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "D feed flow | XMEAS 2 | range 0.0-7323.003 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 3448.83-3877.9 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-102"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 3448.8308
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 3877.9038
         }
        },
        "tags": [
@@ -1944,11 +2038,19 @@
        "name": "FI-103",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "E feed flow | XMEAS 3 | range 0.0-9021.933 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "E feed flow | XMEAS 3 | range 0.0-9021.933 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 4266.51-4748.71 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-103"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 4266.5105
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 4748.7074
         }
        },
        "tags": [
@@ -1965,11 +2067,19 @@
        "name": "FV-201",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "D feed flow valve | XMV 1 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "D feed flow valve | XMV 1 | range 0.0-100.0 % (physical: a percentage) | normal band 59.2508-66.8527 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-201"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 59.2508
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 66.8527
         }
        },
        "tags": [
@@ -1986,11 +2096,19 @@
        "name": "FV-202",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "E feed flow valve | XMV 2 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "E feed flow valve | XMV 2 | range 0.0-100.0 % (physical: a percentage) | normal band 51.418-56.5151 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-202"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 51.418
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 56.5151
         }
        },
        "tags": [
@@ -2007,11 +2125,19 @@
        "name": "FV-203",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "A feed flow valve | XMV 3 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "A feed flow valve | XMV 3 | range 0.0-100.0 % (physical: a percentage) | normal band 8.6442-40.739 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-203"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 8.6442
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 40.739
         }
        },
        "tags": [
@@ -2035,11 +2161,19 @@
        "name": "FI-106",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Reactor feed rate | XMEAS 6 | range 0.0-84.655 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Reactor feed rate | XMEAS 6 | range 0.0-84.655 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 41.0035-43.6594 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-106"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 41.0035
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 43.6594
         }
        },
        "tags": [
@@ -2056,11 +2190,19 @@
        "name": "PI-107",
        "tagType": "UdtInstance",
        "typeId": "TE_AlarmedMeasurement",
-       "documentation": "Reactor pressure | XMEAS 7 | range 0.0-5411.321 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Reactor pressure | XMEAS 7 | range 0.0-5411.321 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 2668.84-2740.98 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "PI-107"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 2668.8372
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 2740.9778
         }
        },
        "tags": [
@@ -2093,11 +2235,19 @@
        "name": "LI-108",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Reactor level | XMEAS 8 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Reactor level | XMEAS 8 | range 0.0-100.0 % (physical: a percentage) | normal band 71.8441-78.1407 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "LI-108"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 71.8441
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 78.1407
         }
        },
        "tags": [
@@ -2114,11 +2264,19 @@
        "name": "TI-109",
        "tagType": "UdtInstance",
        "typeId": "TE_AlarmedMeasurement",
-       "documentation": "Reactor temperature | XMEAS 9 | range 0.0-240.8 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Reactor temperature | XMEAS 9 | range 0.0-240.8 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 120.281-120.519 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TI-109"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 120.2814
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 120.5186
         }
        },
        "tags": [
@@ -2144,11 +2302,19 @@
        "name": "TI-121",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Reactor cooling water outlet temperature | XMEAS 21 | range 0.0-189.21 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Reactor cooling water outlet temperature | XMEAS 21 | range 0.0-189.21 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 93.8145-95.387 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TI-121"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 93.8145
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 95.387
         }
        },
        "tags": [
@@ -2165,11 +2331,19 @@
        "name": "AI-123",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Reactor feed analyzer (components A-F) | XMEAS 23-28 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only",
+       "documentation": "Reactor feed analyzer (components A-F) | XMEAS 23-28 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only | normal band 30.6159-33.7611 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "AI-123"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 30.6159
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 33.7611
         }
        },
        "tags": [
@@ -2186,11 +2360,19 @@
        "name": "TV-210",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Reactor cooling water flow valve | XMV 10 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Reactor cooling water flow valve | XMV 10 | range 0.0-100.0 % (physical: a percentage) | normal band 37.8136-44.3928 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TV-210"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 37.8136
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 44.3928
         }
        },
        "tags": [
@@ -2235,11 +2417,19 @@
        "name": "TI-122",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Separator Cooling Water Outlet Temp | XMEAS 22 | range 0.0-154.558 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Separator Cooling Water Outlet Temp | XMEAS 22 | range 0.0-154.558 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 75.7204-78.8615 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TI-122"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 75.7204
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 78.8615
         }
        },
        "tags": [
@@ -2256,11 +2446,19 @@
        "name": "TV-211",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Condenser cooling water flow valve | XMV 11 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Condenser cooling water flow valve | XMV 11 | range 0.0-100.0 % (physical: a percentage) | normal band 9.5668-26.8966 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TV-211"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 9.5668
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 26.8966
         }
        },
        "tags": [
@@ -2284,11 +2482,19 @@
        "name": "TI-111",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Separator temperature | XMEAS 11 | range 0.0-160.173 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Separator temperature | XMEAS 11 | range 0.0-160.173 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 78.8415-81.3731 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TI-111"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 78.8415
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 81.3731
         }
        },
        "tags": [
@@ -2305,11 +2511,19 @@
        "name": "LI-112",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Separator level | XMEAS 12 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Separator level | XMEAS 12 | range 0.0-100.0 % (physical: a percentage) | normal band 43.5239-56.3699 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "LI-112"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 43.5239
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 56.3699
         }
        },
        "tags": [
@@ -2326,11 +2540,19 @@
        "name": "PI-113",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Separator pressure | XMEAS 13 | range 0.0-5268.839 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Separator pressure | XMEAS 13 | range 0.0-5268.839 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 2596-2671.3 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "PI-113"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 2596.0044
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 2671.3002
         }
        },
        "tags": [
@@ -2347,11 +2569,19 @@
        "name": "FI-114",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Separator underflow | XMEAS 14 | range 0.0-50.373 m3/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Separator underflow | XMEAS 14 | range 0.0-50.373 m3/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 18.9375-31.4054 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-114"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 18.9375
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 31.4054
         }
        },
        "tags": [
@@ -2368,11 +2598,19 @@
        "name": "LV-207",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Separator pot liquid flow valve | XMV 7 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Separator pot liquid flow valve | XMV 7 | range 0.0-100.0 % (physical: a percentage) | normal band 19.0421-56.8455 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "LV-207"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 19.0421
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 56.8455
         }
        },
        "tags": [
@@ -2396,11 +2634,19 @@
        "name": "FI-105",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Recycle flow | XMEAS 5 | range 0.0-53.804 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Recycle flow | XMEAS 5 | range 0.0-53.804 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 25.7342-28.0827 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-105"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 25.7342
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 28.0827
         }
        },
        "tags": [
@@ -2417,11 +2663,19 @@
        "name": "FI-110",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Purge rate | XMEAS 10 | range 0.0-0.674 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Purge rate | XMEAS 10 | range 0.0-0.674 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 0.2678-0.4064 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-110"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 0.2678
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 0.4064
         }
        },
        "tags": [
@@ -2438,11 +2692,19 @@
        "name": "JI-120",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Compressor work | XMEAS 20 | range 0.0-682.85 kW (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Compressor work | XMEAS 20 | range 0.0-682.85 kW (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 333.523-349.108 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "JI-120"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 333.5234
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 349.1084
         }
        },
        "tags": [
@@ -2459,11 +2721,19 @@
        "name": "AI-129",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Purge gas analyzer (components A-H) | XMEAS 29-36 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only",
+       "documentation": "Purge gas analyzer (components A-H) | XMEAS 29-36 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only | normal band 31.0993-34.7938 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "AI-129"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 31.0993
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 34.7938
         }
        },
        "tags": [
@@ -2480,11 +2750,19 @@
        "name": "HV-205",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Compressor recycle valve | XMV 5 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Compressor recycle valve | XMV 5 | range 0.0-100.0 % (physical: a percentage) | normal band 19.5852-24.8095 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "HV-205"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 19.5852
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 24.8095
         }
        },
        "tags": [
@@ -2501,11 +2779,19 @@
        "name": "FV-206",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Purge valve | XMV 6 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Purge valve | XMV 6 | range 0.0-100.0 % (physical: a percentage) | normal band 31.6247-48.4563 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-206"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 31.6247
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 48.4563
         }
        },
        "tags": [
@@ -2529,11 +2815,19 @@
        "name": "FI-104",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "A and C feed flow | XMEAS 4 | range 0.0-18.688 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "A and C feed flow | XMEAS 4 | range 0.0-18.688 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 8.8556-9.8325 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-104"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 8.8556
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 9.8325
         }
        },
        "tags": [
@@ -2550,11 +2844,19 @@
        "name": "LI-115",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Stripper level | XMEAS 15 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Stripper level | XMEAS 15 | range 0.0-100.0 % (physical: a percentage) | normal band 43.789-56.1341 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "LI-115"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 43.789
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 56.1341
         }
        },
        "tags": [
@@ -2571,11 +2873,19 @@
        "name": "PI-116",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Stripper pressure | XMEAS 16 | range 0.0-6205.769 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Stripper pressure | XMEAS 16 | range 0.0-6205.769 kPa g (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 3070.06-3134.49 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "PI-116"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 3070.0636
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 3134.4905
         }
        },
        "tags": [
@@ -2592,11 +2902,19 @@
        "name": "FI-117",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Stripper underflow (product) | XMEAS 17 | range 0.0-45.814 m3/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Stripper underflow (product) | XMEAS 17 | range 0.0-45.814 m3/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 19.241-26.5669 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-117"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 19.241
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 26.5669
         }
        },
        "tags": [
@@ -2613,11 +2931,19 @@
        "name": "TI-118",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Stripper temperature | XMEAS 18 | range 0.0-131.706 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Stripper temperature | XMEAS 18 | range 0.0-131.706 degC (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 64.1658-67.6008 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "TI-118"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 64.1658
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 67.6008
         }
        },
        "tags": [
@@ -2634,11 +2960,19 @@
        "name": "FI-119",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Stripper steam flow | XMEAS 19 | range 0.0-468.035 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span)",
+       "documentation": "Stripper steam flow | XMEAS 19 | range 0.0-468.035 kg/h (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 194.817-274.062 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FI-119"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 194.8169
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 274.0618
         }
        },
        "tags": [
@@ -2655,11 +2989,19 @@
        "name": "AI-137",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
-       "documentation": "Product analyzer (components D-H) | XMEAS 37-41 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only",
+       "documentation": "Product analyzer (components D-H) | XMEAS 37-41 | range 0.0-100.0 mol% (physical: a percentage) | analyzer: the replay exposes the first component only | normal band -0.0421-0.0796 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "AI-137"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": -0.0421
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 0.0796
         }
        },
        "tags": [
@@ -2676,11 +3018,19 @@
        "name": "FV-204",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "A and C feed flow valve | XMV 4 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "A and C feed flow valve | XMV 4 | range 0.0-100.0 % (physical: a percentage) | normal band 54.106-68.5662 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-204"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 54.106
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 68.5662
         }
        },
        "tags": [
@@ -2697,11 +3047,19 @@
        "name": "LV-208",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Stripper liquid product flow valve | XMV 8 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Stripper liquid product flow valve | XMV 8 | range 0.0-100.0 % (physical: a percentage) | normal band 32.1597-60.7304 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "LV-208"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 32.1597
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 60.7304
         }
        },
        "tags": [
@@ -2718,11 +3076,19 @@
        "name": "FV-209",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
-       "documentation": "Stripper steam valve | XMV 9 | range 0.0-100.0 % (physical: a percentage)",
+       "documentation": "Stripper steam valve | XMV 9 | range 0.0-100.0 % (physical: a percentage) | normal band 38.088-58.9721 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
          "value": "FV-209"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 38.088
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 58.9721
         }
        },
        "tags": [
@@ -2734,6 +3100,77 @@
          "engHigh": 100.0
         }
        ]
+      }
+     ]
+    },
+    {
+     "name": "_Summary",
+     "tagType": "Folder",
+     "documentation": "Counts for the operator screens",
+     "tags": [
+      {
+       "name": "OutOfNormal",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed TE values are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
+      },
+      {
+       "name": "AlarmsActive",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many TE values have an active alarm",
+       "expression": "toInt({[Twin]TE_Plant/R-101/PI-107/AlarmActive}) + toInt({[Twin]TE_Plant/R-101/TI-109/AlarmActive})"
+      },
+      {
+       "name": "OutOfNormal_U-100",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in U-100 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal})"
+      },
+      {
+       "name": "OutOfNormal_R-101",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in R-101 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal})"
+      },
+      {
+       "name": "OutOfNormal_E-101",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in E-101 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
+      },
+      {
+       "name": "OutOfNormal_V-101",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in V-101 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal})"
+      },
+      {
+       "name": "OutOfNormal_K-101",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in K-101 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-206/OutOfNormal})"
+      },
+      {
+       "name": "OutOfNormal_C-101",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "documentation": "How many fed values in C-101 are outside their normal band",
+       "expression": "toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal})"
       }
      ]
     }

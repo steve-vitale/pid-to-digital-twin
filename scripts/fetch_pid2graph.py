@@ -7,7 +7,9 @@ Usage:
   python scripts/fetch_pid2graph.py --list [--filter TEXT]     # show entries (optionally filtered)
   python scripts/fetch_pid2graph.py --get TEXT [--get TEXT ...] # extract entries whose path contains TEXT
 
-Files land in data/external/pid2graph/ (gitignored). Dataset files keep their CC BY-SA 4.0 license.
+Files land in data/external/pid2graph/. The OPEN100 drawings and answer keys are already committed there (see
+NOTICE.md), so this is only needed for the holdout-B set ("Complete/Dataset PID/") or to re-fetch from the source.
+Dataset files keep their CC BY-SA 4.0 license.
 """
 import argparse
 import io

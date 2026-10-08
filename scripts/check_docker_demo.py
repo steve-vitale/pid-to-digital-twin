@@ -1,7 +1,8 @@
 """Acceptance test for the Docker demo, from what a newcomer would see in the browser (used by CI).
 
 Run after `docker compose up -d` and the gateway reports RUNNING. Checks:
-  1. the Tennessee Eastman screen: live values on every instrument with data; only SC-212 (no data) not connected;
+  0. the operator overview: every key value live, and the summary bar there;
+  1. the Tennessee Eastman schematic: live values on every instrument with data; only SC-212 (no data) not connected;
   2. extracted sheet 0: 24 mapped points live, 12 not connected;
   3. fault 6: switching the replay turns the reactor pressure label red within 2 minutes.
 Screenshots go to the folder given by --shots (CI keeps them as an artifact).
@@ -20,7 +21,9 @@ from playwright.sync_api import sync_playwright
 LABELS = '[data-component="ia.display.label"]'
 COUNT_JS = """els => els.map(e => e.querySelector('.ia_qualityOverlay') ? 'bad' : 'good')
                      .reduce((a, k) => (a[k] = (a[k] || 0) + 1, a), {good: 0, bad: 0})"""
-RED_JS = "els => els.filter(e => e.style.backgroundColor === 'rgb(254, 202, 202)').length"
+NUMBERS_JS = """els => ({numbers: els.filter(e => /^-?[\\d,]+(\\.\\d+)?$/.test(e.innerText.trim())).length,
+                        bad: els.filter(e => e.querySelector('.ia_qualityOverlay')).length})"""
+RED_JS ="els => els.filter(e => e.style.backgroundColor === 'rgb(254, 202, 202)').length"
 
 
 def wait_counts(page, want_good, want_bad, seconds=180):
@@ -48,12 +51,28 @@ def main():
         b = p.chromium.launch()
         page = b.new_page(viewport={"width": 1400, "height": 960})
 
-        page.goto(f"{a.url}/data/perspective/client/PIDTwin")
+        page.goto(f"{a.url}/data/perspective/client/PIDTwin/schematic")
         ok, c = wait_counts(page, 36, 1)
-        page.screenshot(path=shots / "1-te-overview.png")
-        print(f"TE overview: {c} -> {'PASS' if ok else 'FAIL'} (want 36 live, 1 not connected)")
+        page.screenshot(path=shots / "1-te-schematic.png")
+        print(f"TE schematic: {c} -> {'PASS' if ok else 'FAIL'} (want 36 live, 1 not connected)")
         if not ok:
-            failures.append("TE overview")
+            failures.append("TE schematic")
+
+        # The operator overview: 29 numbers (21 key values + 8 count badges: 2 in the bar, 6 on the tiles), none with
+        # a not-connected overlay. Counting overlays alone would pass on a page whose bindings haven't loaded yet.
+        # 29 was measured on a live gateway, 2026-10-08.
+        page.goto(f"{a.url}/data/perspective/client/PIDTwin")
+        t0, c = time.time(), {}
+        while time.time() - t0 < 180:
+            c = page.locator(LABELS).evaluate_all(NUMBERS_JS)
+            if c["numbers"] >= 29 and c["bad"] == 0:
+                break
+            time.sleep(3)
+        ok = c.get("numbers", 0) >= 29 and c.get("bad", 1) == 0 and page.get_by_text("Outside normal band").count()
+        page.screenshot(path=shots / "0-operator-overview.png")
+        print(f"operator overview: {c} -> {'PASS' if ok else 'FAIL'} (want 29 numbers, none not connected)")
+        if not ok:
+            failures.append("operator overview")
 
         page.goto(f"{a.url}/data/perspective/client/PIDTwin/open100/0")
         ok, c = wait_counts(page, 24, 12)
@@ -65,7 +84,7 @@ def main():
         # The same switch fault-demo.bat makes: tell the running replay to start fault 6.
         subprocess.run(["docker", "compose", "exec", "-T", "te-sim", "sh", "-c", "echo fault6 236 > /tmp/te-run"],
                        check=True)
-        page.goto(f"{a.url}/data/perspective/client/PIDTwin")
+        page.goto(f"{a.url}/data/perspective/client/PIDTwin/schematic")
         t0, red = time.time(), 0
         while time.time() - t0 < 120 and not red:
             red = page.locator(LABELS).evaluate_all(RED_JS)

@@ -1,20 +1,21 @@
 {
  "backup": {
-  "file": "gateway-20261008T175145Z.gwbk",
-  "bytes": 4013192,
-  "sha256": "815e517d5a96ac0aa42904825a33adcad4b0410a4475ec4b6a45b68ec3e5b819",
-  "utc": "20261008T175145Z"
+  "file": "gateway-20261008T215523Z.gwbk",
+  "bytes": 6277212,
+  "sha256": "6e6e61c07137ebd141ac18979157b3418d903c6d155491804ee41a151e5b4bb9",
+  "utc": "20261008T215523Z"
  },
  "import": {
   "status": 200,
   "response": {
-   "successCount": 1093,
+   "successCount": 1102,
    "failureCount": 0,
    "failures": []
   },
   "attempts": 1
  },
  "views": [
+  "OPEN100/Index",
   "OPEN100/Sheet_0",
   "OPEN100/Sheet_1",
   "OPEN100/Sheet_10",
@@ -27,6 +28,14 @@
   "OPEN100/Sheet_7",
   "OPEN100/Sheet_8",
   "OPEN100/Sheet_9",
-  "TE/Overview"
+  "TE/Alarms",
+  "TE/Overview",
+  "TE/Schematic",
+  "TE/Unit_C-101",
+  "TE/Unit_E-101",
+  "TE/Unit_K-101",
+  "TE/Unit_R-101",
+  "TE/Unit_U-100",
+  "TE/Unit_V-101"
  ]
 }

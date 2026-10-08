@@ -119,8 +119,11 @@ and an extracted sheet whose instruments all show Ignition's not-connected overl
 - **Engineering ranges:** percentages use 0–100. Everything else is ASSUMED: 0 to twice the normal-run mean, labeled
   as assumed in each tag's documentation. No published instrument spans exist for this process. Alarm setpoints come
   only from published sources (2,895 kPa from Downs & Vogel; 3,000 kPa and 175 °C from the simulator code).
-- **PressureShutdown (above 3,000 kPa) never activates.** The recorded fault run holds at exactly 3,000.0 when the
-  simulator shuts down. Reported, not tuned.
+- **PressureShutdown (3,000 kPa) does activate, at exactly 3,000.0.** The recorded fault run never goes above
+  3,000.0: it holds there when the simulator shuts down. Ignition's "above setpoint" alarm went active anyway, at
+  equality (seen on the operator screens, 2026-10-08). An earlier version of this page said it never activates.
+  That was inferred from the data, never observed: the verifier stops watching seconds after the first alarm. Lesson:
+  check whether a limit is inclusive on the platform, not just in the data.
 - **Analyzer tags** carry their first component only.
 
 ### What the gateway taught us (each one is now a comment in the code)

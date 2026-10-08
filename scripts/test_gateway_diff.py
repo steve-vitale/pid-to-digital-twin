@@ -47,7 +47,34 @@ CASES = [
     ("instance missing", lambda h: h["tags"][1]["tags"].clear(), True),
 ]
 
+# A screen with a trend: its history binding has a "tags" list of PATHS, not named tags. The diff once crashed on it
+# (it matched every "tags" list by name), so a view with a trend could never be verified.
+VIEW = {"root": {"type": "ia.container.coord", "children": [
+    {"type": "ia.display.sparkline", "meta": {"name": "Trend"}, "propConfig": {"props.points": {"binding": {
+        "type": "tag-history", "config": {"tags": [{"path": "[Twin]Plant/PI-1/PV", "alias": "v"}]}}}}}]}}
+
+
+def trend_tags(h):
+    return h["root"]["children"][0]["propConfig"]["props.points"]["binding"]["config"]["tags"]
+
+
+def run_view(name, mutate, expect_differences):
+    held = copy.deepcopy(VIEW)
+    mutate(held)
+    out = []
+    diff(VIEW, held, "", out)
+    ok = bool(out) == expect_differences
+    print(f"{'PASS' if ok else 'FAIL'}  {name}: {out[:2] if out else 'no differences'}")
+    return ok
+
+
+VIEW_CASES = [
+    ("trend binding identical", lambda h: None, False),
+    ("trend bound to a different tag", lambda h: trend_tags(h)[0].update(path="[Twin]Plant/PI-2/PV"), True),
+    ("trend lost its tag", lambda h: trend_tags(h).clear(), True),
+]
+
 if __name__ == "__main__":
-    results = [run(*c) for c in CASES]
+    results = [run(*c) for c in CASES] + [run_view(*c) for c in VIEW_CASES]
     print("all passed" if all(results) else "FAILURES")
     sys.exit(0 if all(results) else 1)

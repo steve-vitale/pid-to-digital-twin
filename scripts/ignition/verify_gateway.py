@@ -102,6 +102,14 @@ class Held:
             for p, inst in self.instances(root):
                 for m in self.types[inst["typeId"]]["tags"]:
                     paths.add(f"[{P}]{p}/{m['name']}")
+
+        def atomic(node, path):  # plain tags outside UDTs, e.g. the screens' counts in TE_Plant/_Summary
+            for t in node.get("tags", []):
+                if t.get("tagType") == "AtomicTag":
+                    paths.add(f"[{P}]{path}/{t['name']}")
+                elif t.get("tagType") == "Folder":
+                    atomic(t, f"{path}/{t['name']}")
+        atomic(self.folder("TE_Plant"), "TE_Plant")
         return paths
 
 
@@ -110,7 +118,8 @@ class Held:
 def diff(sent, held, path, out):
     if isinstance(sent, dict) and isinstance(held, dict):
         for k in sorted(set(sent) | set(held)):
-            if k == "tags":
+            # A tag list matches by name. (A trend binding's "tags" is a list of paths: compared as a plain list.)
+            if k == "tags" and all("name" in t for t in sent.get("tags", []) + held.get("tags", [])):
                 s_by = {t["name"]: t for t in sent.get("tags", [])}
                 h_by = {t["name"]: t for t in held.get("tags", [])}
                 for n in sorted(set(s_by) | set(h_by)):
@@ -206,6 +215,9 @@ def bindings(view):
             b = cfg.get("binding", {})
             if b.get("type") == "tag":
                 out.append((c["meta"]["name"], prop, b["config"]["tagPath"]))
+            elif b.get("type") == "tag-history":  # trends: a wrong path draws an empty chart, not an error
+                for t in b["config"]["tags"]:
+                    out.append((c["meta"]["name"], prop, t["path"]))
             elif b.get("type") == "expr":
                 for p in re.findall(r"\{(\[[^}]+)\}", b["config"]["expression"]):
                     out.append((c["meta"]["name"], prop, p))
@@ -216,8 +228,11 @@ def bindings(view):
 
 
 def v3(held, twin_dir, hidden=frozenset()):
+    """Every binding names a real tag, and nothing that should be on a screen is missing from it:
+    every TE value on the schematic and on its unit screen, every extracted instrument on its drawing."""
     tags = held.tag_paths()
     fails, n = [], 0
+    te_units = {inst["parameters"]["Tag"]["value"]: p.split("/")[1] for p, inst in held.instances("TE_Plant")}
     for name, view in sorted(held.views.items()):
         bound = bindings(view)
         n += len(bound)
@@ -225,13 +240,20 @@ def v3(held, twin_dir, hidden=frozenset()):
             if path not in tags:
                 fails.append(f"{name} {comp} {prop}: no such tag {path}")
         on_screen = {comp for comp, prop, _ in bound if prop == "props.text"}
-        if name == "TE/Overview":
+        if name == "TE/Schematic":
             drawn = set(re.findall(r'data-tag="([^"]+)"', (ROOT / "out/svg/overview.svg").read_text(encoding="utf-8")))
-        else:
+        elif name.startswith("TE/Unit_"):
+            drawn = {t for t, u in te_units.items() if u == name[len("TE/Unit_"):]}
+        elif name.startswith("OPEN100/Sheet_"):
             svg = (twin_dir / "svg" / f"sheet_{name.split('_')[-1]}.svg").read_text(encoding="utf-8")
             drawn = set(re.findall(r'data-asset="([^"]+)"[^>]*data-class="instrumentation"', svg))
+        else:  # overview, alarms, drawing index: bindings checked above, no completeness rule
+            continue
         for item in sorted(drawn - on_screen - set(hidden)):
-            fails.append(f"{name}: instrument {item} drawn but not bound")
+            fails.append(f"{name}: {item} should be on this screen but has no value bound")
+    units_seen = {name for name in held.views if name.startswith("TE/Unit_")}
+    for u in sorted(set(te_units.values()) - {x[len("TE/Unit_"):] for x in units_seen}):
+        fails.append(f"TE unit {u} has no unit screen")
     return result("V3", "Binding resolution", "A broken binding shows as a quality error on screen", not fails,
                   {"views": len(held.views), "bindings": n}, fails)
 
@@ -404,12 +426,28 @@ async def v8(c, ns, sim):
             fails.append(f"normal: {p} reads {r[p].StatusCode.name}; a broken alarm signal can't count as 'no alarm'")
         elif r[p].Value.Value:
             fails.append(f"normal: {p} active during normal operation")
+    # The screens' colours come from State (0 normal, 1 outside the normal band, 2 alarm) and the summary count.
+    # Normal running must flag nothing; fault 6 (A feed lost) must flag the A feed, and PI-107 must turn to 2.
+    count, feed, feed_state, pstate = (f"[{P}]TE_Plant/_Summary/OutOfNormal", f"[{P}]TE_Plant/U-100/FI-101/OutOfNormal",
+                                       f"[{P}]TE_Plant/U-100/FI-101/State", f"[{P}]TE_Plant/R-101/PI-107/State")
+    r = await read_many(c, ns, [count, feed_state, pstate])
+    log.append(f"normal: values outside their band {r[count].Value.Value} ({r[count].StatusCode.name}), "
+               f"FI-101 State {r[feed_state].Value.Value}, PI-107 State {r[pstate].Value.Value}")
+    if not r[count].StatusCode.is_good() or r[count].Value.Value != 0:
+        fails.append(f"normal: {r[count].Value.Value} values flagged outside their normal band "
+                     f"({r[count].StatusCode.name}); the bands were chosen to flag nothing in normal running")
 
     sim.start("fault6", start=250, rate=0.5)
     if not await wait_fed(c, ns, pv):
         fails.append("fault: gateway never received the fault replay")
         return result("V8", "Alarm pipeline", "Alarms are configured on the tag and proven, not assumed", False,
                       {"log": log}, fails)
+    await asyncio.sleep(2)  # expression tags re-evaluate on the new PV
+    r = await read_many(c, ns, [count, feed, feed_state])
+    log.append(f"fault: A feed flagged {r[feed].Value.Value} (State {r[feed_state].Value.Value}), "
+               f"{r[count].Value.Value} values outside their band, before the pressure alarm")
+    if not (r[feed].StatusCode.is_good() and r[feed].Value.Value and r[feed_state].Value.Value == 1):
+        fails.append("fault: the lost A feed (FI-101) is not flagged outside its normal band")
     crossed = active = None
     t0 = time.time()
     peak = 0.0
@@ -425,7 +463,11 @@ async def v8(c, ns, sim):
             active = time.time()
             log.append(f"fault: AlarmActive True, PV {v}")
         await asyncio.sleep(0.5)
-    r = await read_many(c, ns, [other])
+    await asyncio.sleep(1)
+    r = await read_many(c, ns, [other, pstate])
+    log.append(f"fault: PI-107 State {r[pstate].Value.Value} (2 = alarm colour on the screens)")
+    if active is not None and r[pstate].Value.Value != 2:
+        fails.append(f"fault: PI-107 alarm active but its State is {r[pstate].Value.Value}, so screens would not show red")
     if crossed is None:
         fails.append(f"fault: PV never crossed the setpoint (peak {peak})")
     if active is None:
@@ -437,8 +479,9 @@ async def v8(c, ns, sim):
     delay = round(active - crossed, 1) if active and crossed else None
     return result("V8", "Alarm pipeline", "Alarms are configured on the tag and proven, not assumed", not fails,
                   {"log": log, "pv_peak_kPa": peak, "alarm_delay_s": delay}, fails,
-                  "PressureShutdown (above 3000 kPa) is not expected to activate: the recorded run holds at "
-                  "exactly 3000.0 kPa when the simulator shuts down. Reported, not tuned.")
+                  "Only PressureHigh is checked here; the run stops watching soon after it. PressureShutdown "
+                  "(3000 kPa) also activates later in the run, when PV reaches exactly 3000.0: Ignition's above-"
+                  "setpoint mode fired at equality (seen on the operator screens, docs/IGNITION_BUILD.md).")
 
 
 # ---------------------------------------------------------------- V9
@@ -633,7 +676,8 @@ async def controls(g):
 
     # 3. a screen binding pointing at a misspelled tag path
     v3v = json.loads(json.dumps(views["TE/Overview"]))
-    lab = v3v["root"]["children"][1]
+    lab = next(c for c in v3v["root"]["children"] if c.get("propConfig", {}).get("props.text", {})
+               .get("binding", {}).get("config", {}).get("tagPath", "").endswith("/PV"))
     lab["propConfig"]["props.text"]["binding"]["config"]["tagPath"] = \
         lab["propConfig"]["props.text"]["binding"]["config"]["tagPath"].replace("/PV", "/PVV")
     await run(f"binding on {lab['meta']['name']} misspelled (/PVV)", "V3",
