@@ -208,3 +208,26 @@ reported; its keys have no tanks or pumps, so parents there are valves and in-li
 - Everything tried is reported, including what doesn't help.
 - The round-2 primary score (review load) is reported alongside, to show the twin fix doesn't trade away connection
   quality.
+
+## Round 3 results
+
+### Goal 2: the twin's parent assignment (scored once per holdout; Codex M3 symbols)
+
+| Parent rule | Dev (0–5) | Holdout A | Holdout B |
+|---|---|---|---|
+| Round 1 twin (round-1 links) | 75.4% | 90.9% (140/154) | not scored |
+| Round 2: shared network (`linked`) | 86.9% | 87.0% (134/154) | **70.8%** (286/404) |
+| **Round 3: along the traced line** | **92.6%** | **92.2%** (142/154) | 67.6% (273/404) |
+| Position-only control | 82.8% | 83.8% | 60.6% |
+
+(Holdout B rows are "parent right, if the instrument was found".)
+
+**Verdict, stated plainly:**
+- **Holdout A:** the pre-registered win condition is met. 92.2% beats both 87.0% and 90.9%. It clearly fixes the
+  round-2 regression. The margin over round 1 is 2 instruments, which is within noise.
+- **Holdout B:** the new rule is *worse* than round 2's (67.6% vs 70.8%). By the round-2 convention, that's a
+  style-overfitting warning. Following the line works on the real OPEN100 drafting style and loses on the synthetic
+  different-style set.
+- **So the twin regression is fixed for this drafting style, not in general.** Claiming more would overstate it.
+- **Product decision that follows from the data:** don't trust one rule. Where `along_line` and `linked` agree on a
+  parent, accept it. Where they differ, send it to review. The confidence marker (Goal 1) is where that belongs.
