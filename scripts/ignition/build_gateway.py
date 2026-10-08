@@ -383,11 +383,27 @@ def main():
     check(s, b, "write-probe import")
 
     wait_healthy(g, "ignition/tag-provider", PROVIDER)
-    s, b = g.post(f"/data/api/v1/tags/import?provider={PROVIDER}&path=&type=json&collisionPolicy=Overwrite",
-                  json.dumps(doc).encode(), ctype="application/octet-stream")
-    print("tag import:", s, json.dumps(b)[:600])
-    check(s, b, "tag import")
-    record["import"] = {"status": s, "response": b}
+    # A provider that has just been created reports healthy before it reliably applies edits: an import sent
+    # during its initial load can report full success while instance overrides (ranges, units, alarms) are
+    # silently dropped. Seen once in testing (the verifier's V1 caught it). So read the import back and diff it
+    # against what was sent; re-import once if anything is missing, and fail loudly if it still is.
+    from verify_gateway import diff  # the same comparison V1 uses
+    for attempt in (1, 2):
+        s, b = g.post(f"/data/api/v1/tags/import?provider={PROVIDER}&path=&type=json&collisionPolicy=Overwrite",
+                      json.dumps(doc).encode(), ctype="application/octet-stream")
+        print(f"tag import (attempt {attempt}):", s, json.dumps(b)[:600])
+        check(s, b, "tag import")
+        time.sleep(3)
+        s2, held = g.get(f"/data/api/v1/tags/export?provider={PROVIDER}&type=json&recursive=true&includeUdts=true")
+        differences = []
+        diff(doc, check(s2, held, "tag export"), "", differences)
+        print(f"read back: {len(differences)} differences from what was sent")
+        if not differences:
+            break
+    else:
+        raise SystemExit(f"the gateway does not hold what was sent ({len(differences)} differences), e.g. "
+                         f"{differences[:3]}")
+    record["import"] = {"status": s, "response": b, "attempts": attempt}
     try:
         print("TE-Sim connection:", wait_healthy(g, "ignition/opc-connection", OPC_CONN, 30))
     except SystemExit as e:  # reported, not fatal: the verifier's quality checks will show the consequence
