@@ -29,7 +29,11 @@ def finish(acc):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", default="first-try")
-    label = ap.parse_args().label
+    ap.add_argument("--split", choices=["all", "dev", "holdout-a"], default="all",
+                    help="docs/GOAL.md splits: dev = OPEN100 0-5, holdout-a = OPEN100 6-11")
+    args = ap.parse_args()
+    label = args.label
+    wanted = {"all": None, "dev": {str(i) for i in range(6)}, "holdout-a": {str(i) for i in range(6, 12)}}[args.split]
     base = ROOT / "runs" / label
     summary = {}
     for tool_dir in sorted(p for p in base.iterdir() if p.is_dir()):
@@ -39,6 +43,8 @@ def main():
         for run in sorted(tool_dir.glob("*.json")):
             r = json.loads(run.read_text(encoding="utf-8"))
             d = r["drawing"]
+            if wanted is not None and str(d) not in wanted:
+                continue
             pred = r.get("prediction") or {"symbols": [], "connections": []}
             s = sc.score(DATA / f"{d}.graphml", pred, DATA / f"{d}.png")
             for t in ("strict", "rough"):
@@ -47,6 +53,8 @@ def main():
             for c in sc.SCORED:
                 add(agg["by_class"][c], s["rough"]["by_class"][c])
             add(agg["connections"], s["connections"])
+            for k in ("corrections", "key_items"):
+                agg.setdefault("review", {})[k] = agg.setdefault("review", {}).get(k, 0) + s["review_load"][k]
             meta["drawings"] += 1
             meta["failed"] += 0 if r.get("prediction") else 1
             meta["seconds"] += r.get("seconds") or 0
@@ -58,17 +66,19 @@ def main():
             "strict_located": finish(agg["strict"]["located"]), "strict_classified": finish(agg["strict"]["classified"]),
             "rough_located": finish(agg["rough"]["located"]), "rough_classified": finish(agg["rough"]["classified"]),
             "connections": finish(agg["connections"]),
+            "review_load_per_100": round(100 * agg.get("review", {}).get("corrections", 0)
+                                         / max(agg.get("review", {}).get("key_items", 1), 1), 1),
             "rough_by_class": {c: finish(agg["by_class"][c]) for c in sc.SCORED},
         }
 
     f = lambda m: f'{m["f1"]:.2f} (P {m["precision"]:.2f} / R {m["recall"]:.2f})'  # noqa: E731
-    lines = [f"# Extraction scorecard: `{label}`", "",
+    lines = [f"# Extraction scorecard: `{label}` (split: {args.split})", "",
              "Scored against PID2Graph OPEN100 answer keys with `scripts/score_pid2graph.py` (rules fixed before any "
              "run; controls in `scripts/test_scorer_controls.py`). F1 with precision/recall.", "",
-             "| Tool | Model | Drawings (failed) | Rough: found | Rough: found + right class | Strict (IoU≥0.5): found + right class | Connections | Avg s/drawing | Cost |",
-             "|---|---|---|---|---|---|---|---|---|"]
+             "| Tool | Model | Drawings (failed) | **Review load** (per 100, lower=better) | Rough: found | Rough: found + right class | Strict (IoU≥0.5): found + right class | Connections | Avg s/drawing | Cost |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
     for tool, s in summary.items():
-        lines.append(f'| {tool} | {", ".join(s["models"])} | {s["drawings"]} ({s["failed_runs"]}) | {f(s["rough_located"])} | '
+        lines.append(f'| {tool} | {", ".join(s["models"])} | {s["drawings"]} ({s["failed_runs"]}) | **{s["review_load_per_100"]}** | {f(s["rough_located"])} | '
                      f'{f(s["rough_classified"])} | {f(s["strict_classified"])} | {f(s["connections"])} | '
                      f'{s["avg_seconds"]} | ${s["cost_usd"]:.2f} |')
     lines += ["", "## Rough match by class (F1)", "", "| Tool | " + " | ".join(sc.SCORED) + " |",
@@ -79,8 +89,9 @@ def main():
     lines += ["", "Numbers in parentheses in the class table are how many of that class the answer keys contain.",
               "Subscription tools show $0.00; their cost is a flat subscription, not per call."]
     out = ROOT / "out"
-    (out / f"scorecard_{label}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    (out / f"scorecard_{label}.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
+    suffix = "" if args.split == "all" else f"_{args.split}"
+    (out / f"scorecard_{label}{suffix}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out / f"scorecard_{label}{suffix}.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     print("\n".join(lines))
 
 

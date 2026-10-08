@@ -157,7 +157,25 @@ def score(graphml, prediction, png):
         pred_links.add(frozenset((a, b)) if a and b and a != b else ("unmatched", str(c)))
     hits = sum(1 for l in pred_links if l in key_links)
     result["connections"] = prf(hits, len(pred_links), len(key_links))
+    result["review_load"] = review_load(result["rough"], result["connections"])
     return result
+
+
+def review_load(rough, conn):
+    """Round-2 primary score (docs/GOAL.md): corrections a reviewer needs to reach the answer key, per 100 key items.
+    Delete false symbols + add missed symbols + relabel wrong-class symbols + delete false links + add missed links."""
+    located, classified = rough["located"], rough["classified"]
+    corrections = {
+        "false_symbols": located["predicted"] - located["tp"],
+        "missed_symbols": located["in_key"] - located["tp"],
+        "relabels": located["tp"] - classified["tp"],
+        "false_links": conn["predicted"] - conn["tp"],
+        "missed_links": conn["in_key"] - conn["tp"],
+    }
+    key_items = located["in_key"] + conn["in_key"]
+    total = sum(corrections.values())
+    return {"per_100": round(100 * total / key_items, 1) if key_items else 0.0, "corrections": total,
+            "key_items": key_items, **corrections}
 
 
 if __name__ == "__main__":

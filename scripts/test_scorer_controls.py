@@ -38,8 +38,10 @@ def main():
         perfect = perfect_prediction(graphml, png)
         rot = {c: sc.SCORED[(i + 1) % len(sc.SCORED)] for i, c in enumerate(sc.SCORED)}
         cases = {
-            "perfect": (perfect, lambda r: r["strict"]["classified"]["f1"] == 1 and r["connections"]["f1"] == 1),
-            "empty": ({"symbols": [], "connections": []}, lambda r: r["rough"]["located"]["recall"] == 0),
+            "perfect": (perfect, lambda r: r["strict"]["classified"]["f1"] == 1 and r["connections"]["f1"] == 1
+                        and r["review_load"]["per_100"] == 0),
+            "empty": ({"symbols": [], "connections": []},
+                      lambda r: r["rough"]["located"]["recall"] == 0 and r["review_load"]["per_100"] == 100),
             "wrong_class": ({"symbols": [dict(s, **{"class": rot[s["class"]]}) for s in perfect["symbols"]],
                              "connections": []},
                             lambda r: r["strict"]["located"]["f1"] == 1 and r["rough"]["classified"]["tp"] <= 0.02 * r["rough"]["classified"]["in_key"]),

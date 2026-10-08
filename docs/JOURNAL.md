@@ -336,3 +336,39 @@ including the failures, before anyone signs a hardware purchase order.
 - **Decide what you'll accept before you look.** Write down the accuracy threshold and the share of sheets that
   must complete before results come in. Otherwise the procurement decision turns into goalpost-moving (§2 of
   EVALUATION.md).
+
+---
+
+## 10. Checkpoint: what works, what doesn't yet, and how round 2 will be judged
+
+**Where things stand:**
+- **Works:** extraction by four models, scored honestly; a generator that turns a plant model into SVG graphics,
+  Ignition tags and UDTs, a PI AF sheet, and an operator review sheet.
+- **Not built yet:** the step that turns *extraction output* into a plant model (equipment hierarchy, instruments
+  attached to their equipment, streams from connections, sheets stitched together). Without it the demo stops at
+  "here is what the AI found" instead of "here is your digital twin". Round 2 builds it.
+- **Biggest weakness measured so far:** connections. Every model misses most of them (recall 0.12–0.55). Process
+  topology is what makes a twin more than a parts list.
+
+**The goal, written down before round 2 started ([GOAL.md](GOAL.md)):** produce a digital twin starter kit that
+needs as little human correction as possible, and that says where to look.
+
+**The primary score, review load,** is literally that: the corrections a reviewer must make (delete, add, relabel,
+fix a link) per 100 items on the drawing. Round-1 baseline: about 49–61 on the held-out drawings for the two best
+models.
+
+**How we avoid overtraining to our own scorecard:**
+- **Three fixed splits:**
+  - drawings we may inspect and tune on;
+  - sealed drawings from the same design;
+  - sealed drawings from a *different* drafting style, chosen by a fixed random seed and never opened.
+- **No drawing-specific rules,** a frozen grader, and every method reported including the ones that don't help.
+- **Wins must clear the measured run-to-run noise.** A gain that holds on the same-style holdout but not on the
+  different-style one is reported as overfitting, not success.
+
+**Lesson:** decide what "better" means, and how you'll catch yourself gaming it, before you start making things
+better.
+
+**At your plant:** the equivalent of the sealed sets is a few areas of the site nobody tunes on. If the tool gets
+better on the pilot unit but not on a unit drafted by a different contractor in a different decade, it learned the
+pilot, not the job.
