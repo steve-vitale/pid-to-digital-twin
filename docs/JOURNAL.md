@@ -1602,3 +1602,45 @@ production action occurred. The previous publication blocker was not retried.
 See [results and public-evidence limits](PID2GRAPH_RESERVED23_RESULTS.md) and
 [summary metrics](../out/pid2graph_reserved23_summary.json). The sealed local evidence and trial-specific
 protocol/configuration/harness are not included; this public checkout cannot reproduce the exact trial.
+
+---
+
+## 35. Test the packaged demo after the source checks pass
+
+**What:** on 2026-10-12, fixed a missing Docker dependency exposed by clean-image
+browser testing, then verified the repaired demo in three independent starts.
+
+**How:** the published source passed all 20 offline test scripts, but its
+[first Docker run](https://github.com/steve-vitale/pid-to-digital-twin/actions/runs/38194280260)
+failed all three browser checks. The replay server called the new `te_channels`
+helper, which was present in the checkout but absent from the image's `COPY` list.
+The container logs reported `ModuleNotFoundError`.
+
+Added a regression that reconstructs the Dockerfile's copied files in a temporary
+directory, imports the real server modules in an isolated Python process, and
+exercises the real 52-channel replay mapping. It failed before the fix and passed
+after adding the missing `COPY`; SC-212 remains unavailable. No dependency stubs
+or source-checkout fallback hide a missing packaged module.
+
+At repair commit `36038390cfacb7e19cc1f714ef2b8adeb651a56c`, the
+[offline CI run](https://github.com/steve-vitale/pid-to-digital-twin/actions/runs/38195512089)
+passed **20/20 scripts**, and the
+[Docker/browser run](https://github.com/steve-vitale/pid-to-digital-twin/actions/runs/38195512100)
+passed **all three independent starts**. Each browser check reported 29 overview
+numbers with zero bad-quality overlays; the fault-6 alarm check passed after
+26 seconds.
+
+**Why:** source-level tests could import a neighboring file that the shipped image
+never contained. The repair keeps packaging and functional dependency checks
+together without changing process semantics or weakening the browser check.
+
+**Lesson:** exercise the files actually shipped, and retain a failing regression
+before applying the fix. Passing offline tests and passing a clean-start demo
+answer different questions.
+
+**At your plant:** repeat acceptance against the exact deployment artifact and
+record its identity. This Docker result covers the **historical packaged demo**
+restored from `docker/twin-demo.gwbk`. Native Ignition/browser acceptance of the
+**newly generated 23-view project** remains outstanding, as does licensed PI
+import and read-back. The [current-source handoff](CURRENT_GATEWAY_HANDOFF.md)
+keeps those gates separate; a working demo does not establish plant readiness.
