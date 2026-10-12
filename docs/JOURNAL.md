@@ -1644,3 +1644,42 @@ restored from `docker/twin-demo.gwbk`. Native Ignition/browser acceptance of the
 **newly generated 23-view project** remains outstanding, as does licensed PI
 import and read-back. The [current-source handoff](CURRENT_GATEWAY_HANDOFF.md)
 keeps those gates separate; a working demo does not establish plant readiness.
+
+## 36. Preserve the desktop work and make the next acceptance step explicit
+
+**2026-10-12:** Steve asked to get the pending desktop work committed so Claude
+could resume. The public reviewed branch was rechecked at `e565c74`; `main`
+remained `475c122`. The older desktop checkout was still on `operator-screens`
+at `20aa7cd`, with one October 8 Docker-guide edit. Local commit
+`5315b2ba18cfbc98fe5c169b479e3140b40366b7` preserves that edit as supplied.
+A separate `desktop-claude-resume-20261012` worktree starts directly from the
+reviewed head. [Claude resume](CLAUDE_RESUME.md) records both branches and their
+scope. Existing published commits were retained, without a tidy-up merge or
+another public upload. No private conversation or gateway backup was added.
+
+**What the desktop checks actually showed:** a disposable copy of reviewed
+source, using the existing SHA-256-verified TE cache and installed pinned package
+versions, regenerated 23 views and 23 routes. Source-only checks passed 12/15;
+full cached-data checks passed 16/20. After resolving sandbox temporary-directory
+permissions, remaining failures were a Windows-invalid filename fixture, two
+unavailable symlink-creation privileges, and the packaged-import test's isolated
+Python process correctly excluding a user-site dependency. Those checks were
+not weakened. The current-artifact regression passed, and 76 source/model/layout/
+Dockerfile paths remained byte-identical. This incomplete Windows result does
+not replace the separate final-head Ubuntu CI 20/20 or historical Docker 3/3.
+Native current-source Ignition/browser and licensed PI acceptance remain unrun.
+
+**Direction to preserve:** Steve's contribution is the engineering judgement:
+instrument positions and connection boundaries, realistic process placement,
+source-linked uncertainty, and an overview whose unit detail adds useful context.
+The project should remain an adaptable open-source method readers can evaluate
+themselves; interested readers can initiate a conversation without a consultancy
+sales pitch. No additional model comparison is planned for the second dataset.
+
+The LinkedIn 3D CIP excerpt inspired recommendations for a repeatable operator
+walkthrough, a shared equipment/ports/tag contract for 2D and optional 3D,
+executable simulated fault cases, and requested/feedback-confirmed/unknown route
+states. These are future recommendations, not implemented features; the full
+video was not viewed. Finish native acceptance before expanding 3D. Recorded TE
+replay and synthetic read-only OPEN100 values still establish neither responsive
+physics nor operational readiness or plant validation.

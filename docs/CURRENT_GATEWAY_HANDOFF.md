@@ -1,5 +1,10 @@
 # Current-source Ignition handoff — 2026-10-10
 
+Desktop continuation: see [Claude resume — 2026-10-12](CLAUDE_RESUME.md) for
+current local branches, preservation commits and desktop offline checks. This
+October 10 report retains its historical environment observations and acceptance
+contract; the desktop becoming available does not complete native acceptance.
+
 ## Status and exact scope
 
 **Local artifacts regenerated; runtime and browser acceptance NOT RUN.** Reviewed model source:
