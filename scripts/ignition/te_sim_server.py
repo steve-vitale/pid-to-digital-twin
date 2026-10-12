@@ -36,16 +36,9 @@ def load_rows(name):
 
 
 def column_map(model):
-    """Model tag -> 0-based data column. Analyzers (XMEAS ranges) map to their first component."""
-    cols = {}
-    for item in model["instruments"]:
-        x = item["xmeas"]
-        first = int(str(x).split("-")[0])
-        cols[item["tag"]] = first - 1
-    for item in model["final_elements"]:
-        if item["xmv"] <= 11:
-            cols[item["tag"]] = 41 + item["xmv"] - 1
-    return cols
+    """All 52 recorded channels; legacy analyzer tags retain first component."""
+    from te_channels import channel_columns
+    return channel_columns(model)
 
 
 async def main():

@@ -7,6 +7,29 @@
    "tagType": "Folder",
    "tags": [
     {
+     "name": "Callout_Valve",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      }
+     },
+     "tags": [
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
      "name": "Equipment_General",
      "tagType": "UdtType",
      "parameters": {
@@ -638,57 +661,6 @@
     },
     {
      "name": "Instrument_MOV",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_MS",
      "tagType": "UdtType",
      "parameters": {
       "AssetId": {
@@ -3033,10 +3005,10 @@
          }
         },
         {
-         "name": "MS_4010",
+         "name": "MS_14010",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_MS",
-         "documentation": "S0-IN019 | tag: MS 4010 (as_extracted) | attached to S0-VL013 (geometry_nearest) | sheet 0 symbol s39 | confidence 0.98 | UNVERIFIED",
+         "typeId": "Callout_Valve",
+         "documentation": "S0-IN019 | tag: MS 14010 (as_extracted) | attached to S0-VL013 (geometry_nearest) | valve callout for S0-VL013; function/signal unknown | sheet 0 symbol s39 | confidence 0.98 | UNVERIFIED",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -3044,11 +3016,7 @@
           },
           "SourceTag": {
            "dataType": "String",
-           "value": "MS 4010"
-          },
-          "PointName": {
-           "dataType": "String",
-           "value": "PLACEHOLDER_MS_4010"
+           "value": "MS 14010"
           }
          }
         },

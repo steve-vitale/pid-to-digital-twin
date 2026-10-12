@@ -14,19 +14,28 @@ the approach without compromising its safety and data governance.
 | You are… | Read this |
 |---|---|
 | **Evaluating the work** (2 minutes) | [Results](#results-so-far) and [Try it in Ignition](#try-it-in-ignition) below, then [what it cost](docs/COSTS.md). For the judgment calls, journal entries [7](docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled), [13](docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized) and [14](docs/JOURNAL.md#14-the-ignition-build-the-twin-in-a-real-gateway-judged-by-the-gateway) |
-| **Someone who wants to see it run, with no setup** | [The one-click demo](docker/README.md): install Docker Desktop, double-click `start-demo.bat` |
-| **An Ignition user who wants to see it run** | [Load the twin into your own Ignition](docs/IGNITION_QUICKSTART.md) (about 15 minutes, free trial) |
-| **Planning something like this at a plant** | [At your plant](docs/AT_YOUR_PLANT.md), [From demo to a real site](docs/FROM_DEMO_TO_A_REAL_SITE.md), [Costs](docs/COSTS.md) |
+| **Exploring the historical Docker lab** | [Docker lab demo](docker/README.md): requires Docker setup, an isolated lab and license acceptance; restores the historical backup |
+| **An Ignition user testing an isolated lab** | [Ignition lab workflow](docs/IGNITION_QUICKSTART.md), with setup/license requirements and current-versus-historical validation limits |
+| **Planning something like this at a plant** | [Replicate at your plant: self-guided or assisted](docs/REPLICATE_AT_YOUR_PLANT.md) |
 | **Checking or reproducing the numbers** | [Tutorial](#tutorial-reproduce-it), [How "done well" is defined](docs/EVALUATION.md), [Pre-registered goal and results](docs/GOAL.md) |
+
+Have one local PNG and an existing extraction JSON? The [bounded site-intake recipe](docs/REPLICATE_AT_YOUR_PLANT.md#bounded-local-intake-one-png--an-existing-extraction) builds a source-preserving, unverified review bundle with the standard library. It does not run extraction or establish plant readiness.
+
+For a new single-PNG job, the [frozen extraction handoff](docs/SITE_EXTRACTION_WORKFLOW.md) separates offline preparation/collection from explicitly authorized model execution. [Reviewed PI mapping](docs/PI_MAPPING.md), [offline Ignition acceptance preflight](docs/REPLICATE_AT_YOUR_PLANT.md#offline-exact-candidate-ignition-preflight), and a [future human review-effort protocol](docs/REVIEW_EFFORT_PROTOCOL.md) cover the next handoffs. These are local tools and draft evidence contracts; native imports and the human study remain unrun.
 
 **Contents:** [Results](#results-so-far) · [Try it in Ignition](#try-it-in-ignition) ·
 [What this demonstrates](#what-this-project-demonstrates) · [How it was built](#how-it-was-built) ·
 [Tutorial](#tutorial-reproduce-it) · [Repository map](#repository-map) · [Read next](#read-next) · [Status](#status) ·
 [Data and credits](#data-and-credits) · [Environment variables](#environment-variables)
 
-![30-second demo: a drawing and what the twin extracted; the extracted sheet in Ignition with mapped points live; the Tennessee Eastman plant in Ignition through a fault replay until the reactor pressure alarm turns red](docs/demo.gif)
+![30-second demo: OPEN100 drawing extraction and synthetic point mapping, followed by the separate hand-built Tennessee Eastman model in recorded fault replay](docs/demo.gif)
 
-*30 seconds: the drawing → what the twin extracted → Ignition, live, through a fault. Made from the repo's own screens (`scripts/make_demo_gif.py`).*
+*30 seconds, two separate demonstrations: OPEN100 drawing extraction with synthetic I/O mapping, then the hand-built Tennessee Eastman process model/HMI driven by recorded fault-replay data. The TE fault screen was not extracted from the OPEN100 drawing. Made from the repo's own historical screens (`scripts/make_demo_gif.py`); this GIF does not validate later local display revisions.*
+
+**Keep the evidence tracks separate:**
+- **OPEN100:** drawing extraction, scored outputs and a labeled synthetic point-mapping demo. These are not site-verified live plant connections.
+- **Tennessee Eastman (TE):** a hand-built seed process model and generated HMI, driven by recorded simulation replay. Historical gateway checks apply to their recorded build; the later local spatial-display revision has offline checks only, with runtime limits in [its verification summary](out/process_mimic/VERIFICATION.txt).
+- **PID2Graph Synthetic:** a bounded two-development-sheet adaptation through the existing scorer and exporters, with unresolved ontology and line-semantics review gates. This is neither a held-out generalization result nor operational plant validation. See [the adaptation guide](docs/ADAPT_LABELED_DATASET.md).
 
 ---
 
@@ -92,12 +101,16 @@ sealed sets nobody tuned on:
 
 ## Try it in Ignition
 
-The twin runs in Ignition 8.3, and you can load it into your own gateway from committed files. You need:
+The historical demo ran in Ignition 8.3. For a current-source isolated-lab trial, regenerate the project
+with `python scripts/ignition/build_gateway.py --write-only` after satisfying data/dependency prerequisites.
+The committed project ZIP is historical and is not matched to the current provider/build metadata; see the
+[current-source handoff](docs/CURRENT_GATEWAY_HANDOFF.md). A candidate kit needs:
 - a tag import ([`twin_provider.json`](out/ignition/gateway/twin_provider.json));
-- a Perspective project ([`PIDTwin.zip`](out/ignition/gateway/PIDTwin.zip));
+- a locally regenerated Perspective project (`PIDTwin.zip`; the [committed ZIP](out/ignition/gateway/PIDTwin.zip) is historical);
 - the small replay server that feeds the live values ([`te_sim_server.py`](scripts/ignition/te_sim_server.py)).
 
-A gateway assembled that way, by hand through the web UI plus one tag import, passed all nine verifier checks. Steps:
+The historical gateway assembled through the web UI plus one tag import passed all nine verifier checks;
+current-source native runtime acceptance remains unrun. Steps:
 **[docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md)**. To do the same thing by script with every check,
 see [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
@@ -111,9 +124,8 @@ plant-minutes before the pressure alarm. What they infer, and how far to trust i
 | ![Plant overview in normal running: grey tiles with values, indicators and trends](docs/screenshots/hmi-overview-normal.png) | ![Plant overview at the pressure alarm: values outside their normal band amber, reactor pressure red](docs/screenshots/hmi-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments](docs/screenshots/hmi-drawing-sheet0.png) |
 
 **Three ways to run it:**
-- **No setup:** [the one-click demo](docker/README.md). Install Docker Desktop, then double-click `start-demo.bat`;
-  the screen opens in your browser. It's checked from scratch on GitHub's machines whenever it changes.
-- **Your own Ignition:** [the 15-minute quickstart](docs/IGNITION_QUICKSTART.md), by hand through the web UI.
+- **Historical Docker lab:** [the Docker demo](docker/README.md) requires Docker setup, license acceptance and an isolated lab. Its launcher restores the historical backup; historical CI checks do not validate current provider/project exports.
+- **Isolated Ignition lab:** [the lab workflow](docs/IGNITION_QUICKSTART.md), with explicit setup and current-artifact acceptance requirements.
 - **Scripted, with every check:** [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
 There's no public live instance. It runs on your own computer, and Ignition's free trial is enough. With the
@@ -151,10 +163,10 @@ Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## How it was built
 
-An AI coding agent (Claude, through Claude Code) wrote the code and drafted the documents. I set the direction, made
-the design decisions, and checked every result. The models under test (Claude, GPT, Gemini, and open-weight Gemma)
-were compared only where it mattered most, reading the drawings; [docs/MODELS.md](docs/MODELS.md) says part by part
-which work used several models and which used Claude alone. No operations review of the Tennessee Eastman model has been done yet: the tooling for it is built and tested, but a review only counts if it comes from someone who knows the process and is looking at the drawings. The
+Claude (through Claude Code) and OpenAI/Codex contributed code and documentation under Steve Vitale’s
+guidance. The initial public baseline was built with Claude; later source and documentation work also used
+OpenAI/Codex. The models under test (Claude, GPT, Gemini, and open-weight Gemma) were compared on drawing
+extraction. [docs/MODELS.md](docs/MODELS.md) records the historical baseline’s model roles, not current authorship. No operations review of the Tennessee Eastman model has been done yet: the tooling for it is built and tested, but a review only counts if it comes from someone who knows the process and is looking at the drawings. The
 [build journal](docs/JOURNAL.md) records each decision, what was rejected, and what went wrong, including the
 agents' own mistakes and mine.
 
@@ -163,7 +175,7 @@ agents' own mistakes and mine.
 ## Tutorial: reproduce it
 
 Requires Python 3.10+. Steps 1–2 use the standard library only; the rest need `pip install -r requirements.txt`.
-Model runs need the relevant CLI or API key; everything else runs offline.
+Model runs need the relevant CLI or API key and send drawings to the selected service. File generation and offline tests can run locally; dependency installation, uncached source/data fetches and gateway operations are separate networked steps. Use a disposable learning checkout: generation, source verification with `--write`, review and mapping can overwrite files. Start with [the replication guide](docs/REPLICATE_AT_YOUR_PLANT.md) for the bounded public-data path.
 
 **1. Check the seed model against its source.** This verifies the Tennessee Eastman model against the open TE
 simulation code (36 of 37 items confirmed, 1 corrected):
@@ -185,12 +197,17 @@ the source, by reading only the needed parts of the 9.3 GB archive:
 python scripts/fetch_pid2graph.py --get "Complete/Dataset PID/"
 ```
 
-**4. Prove the scorer before trusting it.** Positive and negative controls must all pass. `run_tests.py` runs every
-test (the same command CI runs):
+**4. Prove the scorer before trusting it.** Start with stdlib and committed-fixture checks; this explicitly narrower mode is not a full-suite pass:
 ```
-python scripts/test_scorer_controls.py
-python scripts/run_tests.py
+python scripts/run_tests.py --source-only
 ```
+The full cached-data suite (also the no-argument/CI default) requires installed pinned dependencies, hash-verified TE replay files and a locally regenerated current-source project ZIP. The committed ZIP is historical. In a disposable checkout, the write-only build below regenerates local exports without contacting a gateway; it overwrites local generated files. The suite fails preflight rather than silently skipping tests or downloading data:
+```
+python scripts/ignition/build_gateway.py --write-only
+python scripts/run_tests.py --full --check-prerequisites
+python scripts/run_tests.py --full
+```
+See [replication prerequisites and limits](docs/REPLICATE_AT_YOUR_PLANT.md#c-check-the-pipeline-then-optionally-rerun-public-extraction) before any separate networked setup. A prerequisite check alone is not a test pass.
 
 **5. Run a model and score it.** Use `claude`, `codex`, or `gemini`; for Gemini, set `GEMINI_API_KEY`:
 ```
@@ -243,21 +260,21 @@ it at a real site.
 | [`extraction/`](extraction/) | The prompts every model got (`prompt_v2.md` is current), hashed into every run record |
 | [`scripts/`](scripts/) **, by stage** | |
 | · source and data | `verify_te_source.py`, `fetch_te_data.py`, `fetch_pid2graph.py` |
-| · extraction | `run_extraction.py` (Claude / Codex / Gemini adapters, cost meter, spend cap), `tiling.py`, `remerge_tiles.py` |
+| · extraction | `run_extraction.py` (Claude / Codex / Gemini adapters, cost meter, spend cap), `tiling.py`, `remerge_tiles.py`; `site_extraction_workflow.py` (frozen single-PNG handoff) |
 | · line tracing (code, no AI) | `trace_connections.py` |
 | · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
 | · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
 | · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run) |
-| · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (I/O list to data addresses) |
+| · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (OPC), `map_pi_points.py` (separately reviewed PI references), `review_effort.py` (future study records) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · demo | `demo.py` (one command to a live twin), `make_before_after.py`, `make_demo_gif.py` |
-| · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `ua_client.py`, `gw.py`, `make_local_ca.py` |
-| · tests and costs | `run_tests.py` (all tests; CI runs it), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
+| · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `acceptance_preflight.py` (offline exact-candidate checks), `ua_client.py`, `gw.py`, `make_local_ca.py` |
+| · tests and costs | `run_tests.py` (explicit source-only/full cached-data modes; CI defaults to full), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
 | [`out/`](out/) | Committed results: `scorecard_<label>.md`, [`costs.md`](out/costs.md), the TE outputs (`svg/`, `ignition/`, `pi/`, `ops_review_sheet.csv`) |
 | [`out/twin/r2-tiles-trace/codex/`](out/twin/r2-tiles-trace/codex/) | The 12-sheet extracted twin: `plant_model.json`, `review_queue.csv` (risk-tiered), Ignition tags, PI AF sheet, per-sheet SVGs |
 | [`out/ignition/gateway/`](out/ignition/gateway/) | The Ignition kit (tag import, Perspective project) and dated verification receipts in `receipts/` |
 | [`out/mapping/`](out/mapping/), `out/review/` | Point-mapping reports, and the change records each applied review writes |
-| [`docker/`](docker/README.md), `docker-compose.yml`, `*-demo.bat` | The one-click demo: Ignition restored from a prepared backup, plus the two data servers, and the double-click launchers |
+| [`docker/`](docker/README.md), `docker-compose.yml`, `*-demo.bat` | Historical Docker lab: Ignition restored from a prepared backup, plus the two data servers and launchers; requires setup/license acceptance |
 | [`runs/`](runs/README.md) | Raw model run records (not committed) and the Gemini spend ledger (committed) |
 | [`NOTICE.md`](NOTICE.md), [`LICENSE`](LICENSE), [`CITATION.cff`](CITATION.cff) | Licensing (MIT code; CC BY-SA for files derived from PID2Graph) and how to cite |
 
@@ -271,7 +288,10 @@ it at a real site.
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
 | [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
 | [docs/REVIEW_LOOP.md](docs/REVIEW_LOOP.md) | Operations review back into the twin, and mapping instruments to live data points |
-| [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md) | Load the committed twin into your own Ignition, by hand, in about 15 minutes |
+| [docs/SITE_EXTRACTION_WORKFLOW.md](docs/SITE_EXTRACTION_WORKFLOW.md) | Frozen single-PNG prepare/execute/collect workflow, provenance and retry boundaries |
+| [docs/PI_MAPPING.md](docs/PI_MAPPING.md) | Reviewed PI-only mapping, staging reconciliation and native-import limits |
+| [docs/REVIEW_EFFORT_PROTOCOL.md](docs/REVIEW_EFFORT_PROTOCOL.md) | Future measured engineering labor and independent residual-error study; no human results yet |
+| [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md) | Historical isolated-lab workflow and current-artifact validation limits; setup and licenses required |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
 | [docs/OPERATOR_SCREENS.md](docs/OPERATOR_SCREENS.md) | The generated operator screens: normal bands, early warning, what's data and what's judgement |
 | [docs/MODELS.md](docs/MODELS.md) | Which work used several models, which used Claude alone, and how each was checked |
@@ -303,11 +323,10 @@ it at a real site.
 - **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
 - **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
   story belongs to Ignition here.
-- **Ignition proves the same model end to end:** import, live values, alarms, verification.
+- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. Current regenerated artifacts have offline checks only; native runtime/browser acceptance is not run.
 
 To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
-System Explorer, then bind the attributes to real PI points (the same I/O-list step as
-[REVIEW_LOOP.md](docs/REVIEW_LOOP.md)).
+System Explorer, then verify real PI point bindings. [The PI-only mapper](docs/PI_MAPPING.md) can stage explicit, reviewer-supplied archive/point/type/UOM references on a copied extracted model; unmapped attributes retain `%Server%`/placeholder references. `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings. Staging CSV columns must be reconciled against the installed PI Builder version before a separately authorized native import.
 
 ## Data and credits
 

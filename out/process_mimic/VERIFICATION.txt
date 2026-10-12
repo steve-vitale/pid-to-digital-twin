@@ -1,0 +1,76 @@
+Local process-display verification summary — refreshed 2026-10-10
+Checked source revision: 676d6a1491d1163c5f2c144f9a6f7bb53df2a32f (before this documentation-only correction)
+Spatial stage: cc5b5eab14db41c8f6857d697a94298679152ed4, final overlap fix ae79f7549a78ab3454efae37f7b6629ad6a2bcb5
+Labeled-dataset adaptation stage: 676d6a1491d1163c5f2c144f9a6f7bb53df2a32f
+Baseline operator-screens: 20aa7cd32ea0ee793394f063bbdf8234f5a12590
+Prior prototype/alignment checkpoint: 3b97ecbe55c37b68a261b95db68b8a9d123cef8e
+Current display stage: compact whole-process Overview, coherent unit navigation, six spatial unit diagrams,
+reviewed display-layout configuration, all 52 uniquely mapped replay channels plus explicitly unavailable SC-212.
+At that verification date, no deployment or gateway import had occurred. Historical push status does not describe the status of this public source snapshot.
+
+RECORDED display-stage passes (receipts retained; generation/rendering not rerun for this documentation change):
+- build_gateway.py --write-only: provider, metadata and complete 23-view project export; no gateway contacted.
+- preview_mimic.py: deterministic project export, hash-verified normal/fault6 fixtures, 7-page offline preview.
+- render_mimic_snapshots.py: normal, fault6 and bad-quality SVG/PNG for Overview and reactor; legacy aliases updated.
+- test_process_mimic.py: 19 focused controls, including existing tag/history paths, full unit/channel coverage,
+  all model stream boundaries, shared tab order and active unit, legacy alias, hidden/rejected parent exclusions,
+  bad/nonfinite/zero/off-scale transforms, deterministic export, aligned compact value/unit pairs and canvas bounds.
+- test_te_channels.py: 52 unique columns + unavailable SC-212, scalar compatibility, analyzer provenance,
+  history/read-only/quality configuration, unchanged alarm set, parent review inheritance.
+- test_display_contract.py: 26 checks, including the second-process presentation fixture.
+- run_tests.py: all 8 aggregate scripts PASS, no skips in the saved spatial-stage receipt.
+- compileall for changed generators, replay-channel mapping and tests.
+- git diff --check.
+
+Normal bands: all 36 original mapped tag bands remain unchanged, K=6. Sixteen additional analyzer
+channels have their own bands under the existing K; no new alarm thresholds. Summary outside-band counts
+now include all 52 observed channels. Analyzer sample/dead times are retained and visible on detail pages.
+
+Historical temporary environment: initial aggregate lacked cv2/asyncua. Installed asyncua 2.1.0 and
+opencv-python-headless 5.0.0.93 from PyPI into an isolated temporary dependency directory, then reran successfully
+with that directory on the Python module path. Includes numpy 2.5.3 and cryptography 50.0.2; full pinned requirements
+were NOT reproduced or changed. That temporary directory is absent in the current executor.
+
+CURRENT documentation-maintenance rerun on the source revision above (repository-pinned dependencies):
+- 19 focused process-mimic tests: PASS.
+- 26 display-contract checks: PASS.
+- 9 PID2Graph Synthetic adapter tests: PASS, separate from the eight-script aggregate.
+- Eight-script aggregate: all 8 PASS, no skips.
+- Initial rerun before dependency restoration: 6 PASS, 2 FAIL at import (missing cv2 and asyncua).
+  This failed run is retained separately in the current receipt, not overwritten.
+- Installed unchanged requirements.txt pins into an isolated temporary dependency directory through the normal package registry:
+  numpy 2.4.6, pillow 12.2.0, opencv-python-headless 5.0.0.93, asyncua 2.1.0, cryptography 49.0.0.
+  All four test commands above were rerun with this dependency directory.
+- No generator change, artifact regeneration, extraction rerun or gateway connection.
+Detailed historical command/output and rendering receipts are not included in this publication.
+
+The adaptation stage uses only two synthetic development sheets; operational exports remain review drafts.
+Both Codex CLI attempts failed before inference; the successful native fallback changed transport/wrapper
+instructions, with reasoning settings unverified/inherited. No new inference was run for this correction.
+
+Visual evidence: approximate offline SVG renders, NOT gateway screenshots. Overview is 1600×930;
+PNG includes a 50px evidence label. Reactor detail includes all13 rows and explicit missing SC-212.
+The preview implements Overview/unit/equipment/neighbor hash navigation and fixture switching.
+Spatial-stage render receipts include normal, fault6 and bad-quality images for all six units.
+Native history and review metadata are explicitly not rendered offline. All exported pages need gateway validation for this revision.
+Browser click/history behavior has not been executed here; static route checks are not browser runtime evidence.
+
+UNRUN: Ignition import, actual Perspective/Jython execution, live OPC bindings, running replay server,
+gateway verifier, browser click/layout QA, operator acceptance. Earlier Chromium startup was blocked
+by socket restrictions. No old gateway receipt covers this revision. No bypass or repeated push attempted.
+
+Import caveat: proposed project ZIP could overwrite PIDTwin; tag import adds component paths and summary
+coverage. Requires explicit approval, backup and authorized development-gateway validation before import.
+Equipment geometry, topology and selection remain unverified; TI-122 ownership remains unresolved.
+
+
+PUBLIC EVIDENCE LIMIT: this file summarizes historical local checks, not a fresh validation of this
+publication. Generated image/project previews and detailed local receipts are omitted. Regenerate artifacts
+from current source and validate the exact candidate before any authorized native import.
+
+Publication-candidate offline validation — 2026-10-12
+The publication review recorded 15/15 source-only scripts and 20/20 full cached-data scripts passing.
+The full run used a locally regenerated --write-only current-source project ZIP. The committed ZIP remains
+the historical public export and must be regenerated before current-source tests; the passing run does
+not validate that historical ZIP against current provider/build metadata. No native gateway/browser,
+PI import or operator acceptance is established by these offline checks.

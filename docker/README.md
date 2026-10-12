@@ -1,5 +1,8 @@
 # The one-click demo (Docker)
 
+> Current-source warning (2026-10-10): the Docker `.gwbk` and historical runtime receipts do not validate the latest reviewed model or spatial views. Compose restores that historical backup, not the regenerated ZIP/provider. See [current-source handoff](../docs/CURRENT_GATEWAY_HANDOFF.md) for exact artifacts and the unexecuted runtime contract.
+
+
 This runs the whole twin on your computer: Ignition, the live Tennessee Eastman plant, and the extracted drawings.
 You don't need Python, settings or keys. It's an extra option. If you'd rather not install Docker, the
 [15-minute quickstart](../docs/IGNITION_QUICKSTART.md) does the same thing with an Ignition you install yourself.

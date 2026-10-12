@@ -41654,6 +41654,23 @@
     "rule": "linked",
     "parent": "S0-GN003",
     "agrees": true
+   },
+   "ops_review": {
+    "status": "unverified",
+    "show_on_screen": null,
+    "alarm_priority": null,
+    "notes": "NEEDS CLARIFICATION: Drawing-owner clarification remains required for FT 1401 records S0-IN002/s7 and S0-IN003/s8. Decision OPEN100-S0-FT1401-clarification-01. Retain both drawing-symbol records; physical-device count/identity and symbol-count interpretation remain unresolved. Duplicate FT 1401 labels and one synthetic FT-1401 I/O row leave mapping ambiguous; no signal is assigned. Tag correctness, parent/connectivity, line/signal semantics and real I/O address remain unknown. Source: publisher raster PID 140-1-A, native crop [651,539,865,697), SHA-256 0335d4e1013fec8acdad38996c7887316c880906f43534f54425281c30f6e094. Raw extraction replay is unavailable; no external clarification response is recorded.",
+    "by": "Steve Vitale, guided review",
+    "on": "2026-10-10",
+    "history": [
+     {
+      "on": "2026-10-10",
+      "by": "Steve Vitale, guided review",
+      "decision": "unverified",
+      "changes": {},
+      "notes": "NEEDS CLARIFICATION: Drawing-owner clarification remains required for FT 1401 records S0-IN002/s7 and S0-IN003/s8. Decision OPEN100-S0-FT1401-clarification-01. Retain both drawing-symbol records; physical-device count/identity and symbol-count interpretation remain unresolved. Duplicate FT 1401 labels and one synthetic FT-1401 I/O row leave mapping ambiguous; no signal is assigned. Tag correctness, parent/connectivity, line/signal semantics and real I/O address remain unknown. Source: publisher raster PID 140-1-A, native crop [651,539,865,697), SHA-256 0335d4e1013fec8acdad38996c7887316c880906f43534f54425281c30f6e094. Raw extraction replay is unavailable; no external clarification response is recorded."
+     }
+    ]
    }
   },
   {
@@ -41715,6 +41732,23 @@
     "rule": "linked",
     "parent": "S0-GN003",
     "agrees": true
+   },
+   "ops_review": {
+    "status": "unverified",
+    "show_on_screen": null,
+    "alarm_priority": null,
+    "notes": "NEEDS CLARIFICATION: Drawing-owner clarification remains required for FT 1401 records S0-IN002/s7 and S0-IN003/s8. Decision OPEN100-S0-FT1401-clarification-01. Retain both drawing-symbol records; physical-device count/identity and symbol-count interpretation remain unresolved. Duplicate FT 1401 labels and one synthetic FT-1401 I/O row leave mapping ambiguous; no signal is assigned. Tag correctness, parent/connectivity, line/signal semantics and real I/O address remain unknown. Source: publisher raster PID 140-1-A, native crop [651,539,865,697), SHA-256 0335d4e1013fec8acdad38996c7887316c880906f43534f54425281c30f6e094. Raw extraction replay is unavailable; no external clarification response is recorded.",
+    "by": "Steve Vitale, guided review",
+    "on": "2026-10-10",
+    "history": [
+     {
+      "on": "2026-10-10",
+      "by": "Steve Vitale, guided review",
+      "decision": "unverified",
+      "changes": {},
+      "notes": "NEEDS CLARIFICATION: Drawing-owner clarification remains required for FT 1401 records S0-IN002/s7 and S0-IN003/s8. Decision OPEN100-S0-FT1401-clarification-01. Retain both drawing-symbol records; physical-device count/identity and symbol-count interpretation remain unresolved. Duplicate FT 1401 labels and one synthetic FT-1401 I/O row leave mapping ambiguous; no signal is assigned. Tag correctness, parent/connectivity, line/signal semantics and real I/O address remain unknown. Source: publisher raster PID 140-1-A, native crop [651,539,865,697), SHA-256 0335d4e1013fec8acdad38996c7887316c880906f43534f54425281c30f6e094. Raw extraction replay is unavailable; no external clarification response is recorded."
+     }
+    ]
    }
   },
   {
@@ -42760,7 +42794,7 @@
   },
   {
    "id": "S0-IN019",
-   "tag": "MS 4010",
+   "tag": "MS 14010",
    "tag_status": "as_extracted",
    "class": "instrumentation",
    "confidence": 0.98,
@@ -42800,12 +42834,12 @@
    "parent_agrees_with_position": true,
    "system": "SYS-0",
    "isa_letters": "MS",
-   "loop": "4010",
-   "instrument_kind": "measurement / control",
-   "variable": "moisture",
-   "variable_method": "ISA-5.1 first letter",
+   "loop": "14010",
+   "instrument_kind": "valve callout",
+   "variable": "unknown",
+   "variable_method": "reviewed unknown; source legend pending",
    "uom": "",
-   "description": "MS 4010",
+   "description": "MS 14010",
    "stream": null,
    "duplicate_tag": false,
    "risk": {
@@ -42817,7 +42851,126 @@
     "rule": "linked",
     "parent": "S0-VL013",
     "agrees": true
-   }
+   },
+   "ops_review": {
+    "status": "unverified",
+    "show_on_screen": null,
+    "alarm_priority": null,
+    "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment.",
+    "by": "Steve Vitale",
+    "on": "2026-10-10",
+    "history": [
+     {
+      "on": "2026-10-10",
+      "by": "Steve Vitale",
+      "decision": "corrected",
+      "changes": {
+       "tag": [
+        "MS 4010",
+        "MS 14010"
+       ],
+       "loop": [
+        "4010",
+        "14010"
+       ],
+       "description": [
+        "MS 4010",
+        "MS 14010"
+       ]
+      },
+      "notes": "IDENTIFIER TEXT ONLY: Correct MS 4010 to MS 14010, derived identifier loop and mirrored description only. Function, classification, parent, connectivity and signal mapping remain unverified. No whole-record approval.",
+      "scope": "identifier_text",
+      "fields": [
+       "description",
+       "loop",
+       "tag"
+      ]
+     },
+     {
+      "on": "2026-10-10",
+      "by": "Steve Vitale",
+      "decision": "corrected",
+      "changes": {
+       "reviewed_valve_association": [
+        null,
+        "S0-VL013"
+       ],
+       "instrument_kind": [
+        "measurement / control",
+        "valve callout"
+       ],
+       "variable": [
+        "moisture",
+        "unknown"
+       ],
+       "variable_method": [
+        "ISA-5.1 first letter",
+        "reviewed unknown; source legend pending"
+       ]
+      },
+      "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment.",
+      "scope": "valve_association",
+      "fields": [
+       "instrument_kind",
+       "reviewed_valve_association",
+       "variable",
+       "variable_method"
+      ]
+     }
+    ],
+    "field_decisions": {
+     "tag": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "identifier_text",
+      "notes": "IDENTIFIER TEXT ONLY: Correct MS 4010 to MS 14010, derived identifier loop and mirrored description only. Function, classification, parent, connectivity and signal mapping remain unverified. No whole-record approval."
+     },
+     "loop": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "identifier_text",
+      "notes": "IDENTIFIER TEXT ONLY: Correct MS 4010 to MS 14010, derived identifier loop and mirrored description only. Function, classification, parent, connectivity and signal mapping remain unverified. No whole-record approval."
+     },
+     "description": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "identifier_text",
+      "notes": "IDENTIFIER TEXT ONLY: Correct MS 4010 to MS 14010, derived identifier loop and mirrored description only. Function, classification, parent, connectivity and signal mapping remain unverified. No whole-record approval."
+     },
+     "reviewed_valve_association": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "valve_association",
+      "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment."
+     },
+     "instrument_kind": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "valve_association",
+      "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment."
+     },
+     "variable": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "valve_association",
+      "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment."
+     },
+     "variable_method": {
+      "status": "corrected",
+      "by": "Steve Vitale",
+      "on": "2026-10-10",
+      "scope": "valve_association",
+      "notes": "VALVE CALLOUT REVIEW: Associate existing callout S0-IN019 with existing valve S0-VL013; measured variable remains unknown pending source legend. Keep MS 14010 and loop 14010. No MS expansion, subtype, control/signal interpretation, merge, whole-record approval or live signal assignment."
+     }
+    }
+   },
+   "reviewed_valve_association": "S0-VL013"
   },
   {
    "id": "S0-IN020",
@@ -88281,7 +88434,7 @@
          {
           "id": "S0-IN019",
           "kind": "instrument",
-          "tag": "MS 4010",
+          "tag": "MS 14010",
           "class": "instrumentation",
           "attach": "geometry_nearest",
           "children": []

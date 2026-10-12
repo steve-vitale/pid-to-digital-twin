@@ -1,9 +1,8 @@
 """Operator screens for the twin, in the ISA-101 style: grey and calm when the plant is normal, so colour means
 something when it is not.
 
-  /               TE level-1 overview: one tile per unit, in process order. Each tile shows the unit's key values, with
-                  a moving analog indicator (where the value sits against its normal band and alarm limits) and a
-                  10-minute trend. The alarm list sits at the bottom.
+  /               Whole-process equipment overview with six units, seed-model boundaries and selected values.
+  /mimic          Legacy alias for the same Overview; no separate tab.
   /unit/<id>      Level 2: every value in one unit, with its band, a 30-minute trend and its review status.
   /schematic      The process schematic with live values (scripts/ignition/build_views.py).
   /alarms         The full alarm list.
@@ -92,10 +91,15 @@ def value_box(name, x, y, w, h, base, band, size=15):
     c = label(name, x, y, w, h, "", {"fontSize": size, "fontWeight": "bold", "textAlign": "right",
                                       "paddingRight": 6, "borderStyle": "solid", "borderWidth": 1,
                                       "borderColor": EDGE, "backgroundColor": "#ffffff"})
+    precision = decimals(band) if band else 1
+    code = ('import math\nif not quality.isGood() or value is None:\n    return "UNKNOWN"\n'
+            'try:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return "UNKNOWN"\n'
+            'if math.isnan(number) or math.isinf(number):\n    return "UNKNOWN"\n'
+            'return "%.' + str(precision) + 'f" % number')
     c["propConfig"] = {
-        "props.text": tag_binding(base + "/PV", [{"type": "format", "formatType": "numeric", "formatValue": fmt}]),
-        "props.style.backgroundColor": tag_binding(base + "/State", [color_map(STATE_BG, "#ffffff")]),
-        "props.style.color": tag_binding(base + "/State", [color_map(STATE_FG, INK)])}
+        "props.text": tag_binding(base + "/PV", [{"type": "script", "code": code}]),
+        "props.style.backgroundColor": tag_binding(base + "/State", [{"type": "script", "code": 'if not quality.isGood() or value is None:\n    return "#d4d4d4"\nreturn {1: "#fcd34d", 2: "#dc2626"}.get(value, "#ffffff")'}]),
+        "props.style.color": tag_binding(base + "/State", [{"type": "script", "code": 'if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn "#ffffff" if value == 2 else "#1f2937"'}])}
     return c
 
 
@@ -120,7 +124,7 @@ def indicator(name, x, y, w, h, base, band, limits):
             props["highHighAlarm"] = limits[1]
     return {"type": "ia.display.moving-analog-indicator", "meta": {"name": name},
             "position": {"x": x, "y": y, "width": w, "height": h}, "props": props,
-            "propConfig": {"props.processValue": tag_binding(base + "/PV")}}
+            "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}])}}
 
 
 def trend(name, x, y, w, h, base, band, minutes):
@@ -164,7 +168,7 @@ def header(provider, title, active):
                   {"fontSize": 11, "color": MUTED})]
     nav = [("Overview", "/"), ("Feed", "/unit/U-100"), ("Reactor", "/unit/R-101"), ("Condenser", "/unit/E-101"),
            ("Separator", "/unit/V-101"), ("Compressor", "/unit/K-101"), ("Stripper", "/unit/C-101"),
-           ("Schematic", "/schematic"), ("Alarms", "/alarms"), ("Drawings", "/drawings")]
+           ("Alarms", "/alarms"), ("Drawings", "/drawings")]
     x = 350
     for text, page in nav:
         w = 8 * len(text) + 22
@@ -174,11 +178,14 @@ def header(provider, title, active):
             "backgroundColor": "#ffffff" if on else "transparent",
             "borderStyle": "solid", "borderWidth": 1, "borderColor": EDGE if on else "transparent"}, page=page))
         x += w + 4
-    kids += [label("AlarmsLabel", 1250, 18, 60, 20, "Alarms", {"textAlign": "right", "color": MUTED}),
-             badge("AlarmsCount", 1316, 15, 40, 26, s + "AlarmsActive", RED),
-             label("OutOfNormalLabel", 1366, 18, 170, 20, "Outside normal band", {"textAlign": "right",
-                                                                                   "color": MUTED}),
-             badge("OutOfNormalCount", 1542, 15, 40, 26, s + "OutOfNormal", AMBER)]
+    for name, x, member, title, color in [('AlarmSummary', 1248, 'AlarmsActive', 'Alarms', '#b91c1c'),
+                                           ('BandSummary', 1410, 'OutOfNormal', 'Outside band', '#8a5d00')]:
+        c = label(name, x, 17, 170, 26, title + ': unknown', {'fontSize': 12, 'fontWeight': 'bold'})
+        code = 'if not quality.isGood() or value is None:\n    return %r\nreturn %r + str(value)' % (title + ': unknown', title + ': ')
+        color_code = 'if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn %r if value > 0 else "#1f2937"' % color
+        c['propConfig'] = {'props.text': tag_binding(s + member, [{'type': 'script', 'code': code}]),
+                           'props.style.color': tag_binding(s + member, [{'type': 'script', 'code': color_code}])}
+        kids.append(c)
     return kids
 
 
@@ -209,55 +216,29 @@ def te_items(model):
 
 
 def overview(provider, model, ranges, hidden):
-    items, units = te_items(model), {u["id"]: u for u in model["units"]}
-    kids = header(provider, "Plant overview", "/")
-    tw, th, gap = 512, 304, 16
-    for n, uid in enumerate(UNIT_ORDER):
-        x, y = gap + (n % 3) * (tw + gap), HEAD + 12 + (n // 3) * (th + 12)
-        kids += [label(f"Tile_{uid}", x, y, tw, th, "", {"backgroundColor": PANEL, "borderStyle": "solid",
-                                                          "borderWidth": 1, "borderColor": EDGE}),
-                 label(f"TileTitle_{uid}", x + 12, y + 8, 300, 22, f"{units[uid]['name']}  ·  {uid}  ›",
-                       {"fontSize": 15, "fontWeight": "bold"}, page=f"/unit/{uid}",
-                       tooltip="Open the unit screen"),
-                 label(f"TileDevLabel_{uid}", x + 300, y + 10, 158, 18, "outside normal",
-                       {"fontSize": 11, "color": MUTED, "textAlign": "right"}),
-                 badge(f"TileDev_{uid}", x + 464, y + 8, 36, 22,
-                       f"[{provider}]TE_Plant/_Summary/OutOfNormal_{uid}", AMBER)]
-        row_y = y + 42
-        for tag in [t for t in KEY_VALUES[uid] if t not in hidden]:
-            it, r = items[tag], ranges[tag]
-            base, band = f"[{provider}]TE_Plant/{uid}/{tag}", r["normal"]
-            limits = [a for a in r.get("alarm_limits", [])]
-            kids += [label(f"Tag_{tag}", x + 12, row_y, 120, 18, tag, {"fontWeight": "bold"}),
-                     label(f"Desc_{tag}", x + 12, row_y + 19, 150, 30, it["description"],
-                           {"fontSize": 11, "color": MUTED, "lineHeight": 1.1}),
-                     value_box(tag, x + 166, row_y + 4, 92, 28, base, band),
-                     label(f"Uom_{tag}", x + 262, row_y + 10, 54, 18, it["uom"], {"fontSize": 11, "color": MUTED}),
-                     indicator(f"Ind_{tag}", x + 318, row_y + 6, 84, 24, base, band, limits),
-                     trend(f"Trend_{tag}", x + 410, row_y, 90, 40, base, band, 10)]
-            row_y += 62
-    y = HEAD + 12 + 2 * (th + 12)
-    kids += [label("AlarmTitle", 16, y, 300, 18, "Active alarms", {"fontWeight": "bold"}),
-             alarm_table("AlarmList", 16, y + 22, W - 32, 150, True), footer(y + 178)]
-    return view(y + 200, kids)
+    import build_mimic
+    return build_mimic.mimic(provider, model, hidden)
 
 
 def unit_screen(provider, model, ranges, uid, hidden):
     unit = next(u for u in model["units"] if u["id"] == uid)
-    tags = [i for i in model["instruments"] + model["final_elements"]
+    from te_channels import expanded_items
+    tags = [ranges.get(i["tag"], {}).get("source_item", i) for i in expanded_items(model)
             if i["unit"] == uid and i["tag"] in ranges and i["tag"] not in hidden]
     kids = header(provider, f"{unit['name']}  ·  {uid}", f"/unit/{uid}")
-    y = HEAD + 14
+    import build_mimic
+    kids += build_mimic.unit_context(provider, model, uid, hidden)
+    y = build_mimic.detail_table_top(model, uid)
     cols = [("Tag", 16, 90), ("Description", 110, 300), ("Value", 414, 110), ("", 528, 64),
             ("Position against normal band and alarms", 596, 260), ("Normal band", 862, 150),
-            ("Last 30 minutes", 1018, 380), ("Review", 1404, 180)]
+            ("Last 30 minutes", 1018, 380), ("Gateway state / review", 1404, 180)]
     kids += [label(f"Col_{i}", x, y, w, 18, t, {"fontSize": 11, "color": MUTED, "fontWeight": "bold"})
              for i, (t, x, w) in enumerate(cols)]
     y += 24
     for it in tags:
         tag, r = it["tag"], ranges[it["tag"]]
         base = f"[{provider}]TE_Plant/{uid}/{tag}"
-        desc = it["description"] + (" (first component only)" if "-" in str(it.get("xmeas", "")) else "")
+        desc = it["description"] + (" (first component only)" if "-" in str(it.get("xmeas", "")) and not it.get("component") else "")
         kids.append(label(f"Row_{tag}", 8, y - 4, W - 16, 60, "", {"backgroundColor": PANEL, "borderStyle": "solid",
                                                                     "borderWidth": 1, "borderColor": "#d4d4d4"}))
         kids += [label(f"Tag_{tag}", 16, y + 14, 90, 20, tag, {"fontWeight": "bold"}),
@@ -273,16 +254,28 @@ def unit_screen(provider, model, ranges, uid, hidden):
                                "\nalarm " + " / ".join(f"{v:g}" for v in limits) if limits else ""),
                            {"fontSize": 12, "whiteSpace": "pre-line", "lineHeight": 1.3}),
                      trend(f"Trend_{tag}", 1018, y + 2, 380, 48, base, band, 30)]
-        else:  # no data source: the value box still binds, so the screen shows it as not connected
+        else:  # no replay source: explicit unavailable label, without a fabricated numeric binding
             box = value_box(tag, 414, y + 10, 110, 32, base, None, 16)
-            del box["propConfig"]["props.style.backgroundColor"], box["propConfig"]["props.style.color"]
+            box.pop("propConfig", None)
+            box["props"]["text"] = "NOT CONNECTED"
+            box["props"]["style"]["fontSize"] = 11
             kids += [box, label(f"Uom_{tag}", 528, y + 18, 64, 18, it["uom"], {"fontSize": 12, "color": MUTED}),
                      label(f"NoData_{tag}", 596, y + 16, 790, 20,
                            "Not in the open replay data set, so it reads as not connected rather than inventing a value.",
                            {"fontSize": 12, "color": MUTED, "fontStyle": "italic"})]
+        if 'xmv' in it and r['normal']:
+            for c in kids:
+                if c['meta']['name'] == 'Ind_' + tag:
+                    c['position']['x'], c['position']['width'] = 746, 110
+            kids.append(build_mimic.image('DetailOutput_' + tag, 596, y + 12, 140, 28, 'output', base))
         rs = label(f"Review_{tag}", 1404, y + 16, 180, 20, "", {"fontSize": 12, "color": MUTED})
         rs["propConfig"] = {"props.text": tag_binding(base + "/ReviewStatus")}
         kids.append(rs)
+        if r["normal"]:
+            import build_mimic
+            state = label('State_' + tag, 1404, y - 1, 180, 17, 'State unknown', {'fontSize': 11})
+            state['propConfig'] = {'props.text': tag_binding(base + '/State', [{'type': 'script', 'code': build_mimic.STATE_SCRIPT}])}
+            kids.append(state)
         y += 64
     kids.append(footer(y + 8))
     return view(y + 30, kids)
@@ -367,11 +360,16 @@ def sheet_screen(provider, sheet, title, img_uri, size, instruments, counts):
 
 def te_views(provider, ranges, alarms, hidden):
     model = json.loads((ROOT / "data" / "te_process_model.json").read_text(encoding="utf-8"))
+    from te_channels import expanded_items
+    hidden = set(hidden) | {i["tag"] for i in expanded_items(model) if i["tag"] not in ranges}
+    hidden |= {i["tag"] for i in expanded_items(model) if i.get("analyzer_parent") in hidden}
     for tag, r in ranges.items():
         r["alarm_limits"] = [a["setpointA"] for a in alarms.get(tag, [])]
     views = {"TE/Overview": overview(provider, model, ranges, hidden), "TE/Alarms": alarms_screen(provider)}
     for uid in UNIT_ORDER:
         views[f"TE/Unit_{uid}"] = unit_screen(provider, model, ranges, uid, hidden)
-    pages = {"/": ("Plant overview", "TE/Overview"), "/alarms": ("Alarms", "TE/Alarms")}
+    import build_mimic
+    views["TE/ProcessMimic"] = views["TE/Overview"]  # safe legacy bookmark alias
+    pages = {"/mimic": ("Plant overview (legacy alias)", "TE/ProcessMimic"), "/": ("Plant overview", "TE/Overview"), "/alarms": ("Alarms", "TE/Alarms")}
     pages.update({f"/unit/{u}": (f"Unit {u}", f"TE/Unit_{u}") for u in UNIT_ORDER})
     return views, pages

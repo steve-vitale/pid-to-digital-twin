@@ -9,11 +9,14 @@ Stdlib only. Usage:  python scripts/generate.py [path/to/model.json]
 """
 import csv
 import json
+import io
+import math
 import os
 import re
 import sys
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
+from pi_mapping import mapping_config, pi_csv_text, reconciliation
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MODEL = ROOT / "data" / "te_process_model.json"
@@ -33,17 +36,67 @@ BASE_STYLE = (
 
 # ---------------------------------------------------------------- validation
 
+class ModelValidationError(ValueError):
+    """The model cannot be exported; no output has been changed."""
+
+
+def _shape_problems(model, collections):
+    """Check container/identity shape before reference checks; do not fill unknowns."""
+    if not isinstance(model, dict):
+        return ["model must be an object"]
+    problems = []
+    if not isinstance(model.get("meta"), dict):
+        problems.append("meta must be an object")
+    for key, identity in collections.items():
+        rows = model.get(key)
+        if not isinstance(rows, list):
+            problems.append(f"{key} must be a list")
+            continue
+        seen = set()
+        for n, item in enumerate(rows):
+            if not isinstance(item, dict):
+                problems.append(f"{key}[{n}] must be an object")
+                continue
+            value = item.get(identity)
+            if not isinstance(value, str) or not value.strip():
+                problems.append(f"{key}[{n}].{identity} must be a nonempty string")
+            elif value in seen:
+                problems.append(f"duplicate {key} {identity} {value}")
+            else:
+                seen.add(value)
+    return problems
+
+
+def _safe_filename(value):
+    return isinstance(value, str) and bool(value) and not any(c in value for c in '/\\\0') and value not in ('.', '..')
+
+
+def _finite(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
 def validate(model):
     """Structural checks. Every failure is a review item, not a silent fix."""
-    problems = []
+    problems = _shape_problems(model, {"units": "id", "streams": "id",
+                                       "instruments": "tag", "final_elements": "tag"})
+    if problems:
+        return problems
+    for u in model["units"]:
+        if not _safe_filename(u["id"]):
+            problems.append(f"unit {u['id']!r}: unsafe output filename")
+        if u.get("type") not in SYMBOLS:
+            problems.append(f"unit {u['id']}: unsupported symbol type {u.get('type')!r}")
+        layout = u.get("layout")
+        if not isinstance(layout, dict) or not all(_finite(layout.get(k)) for k in ("x", "y")):
+            problems.append(f"unit {u['id']}: layout needs finite x and y")
     unit_ids = {u["id"] for u in model["units"]}
     stream_ids = {s["id"] for s in model["streams"]}
     tags = [i["tag"] for i in model["instruments"] + model["final_elements"]]
     for t in {t for t in tags if tags.count(t) > 1}:
         problems.append(f"duplicate tag {t}")
     for item in model["instruments"] + model["final_elements"]:
-        if item["unit"] not in unit_ids:
-            problems.append(f"{item['tag']}: unknown unit {item['unit']}")
+        if item.get("unit") not in unit_ids:
+            problems.append(f"{item['tag']}: unknown unit {item.get('unit')}")
         if item.get("stream") and item["stream"] not in stream_ids:
             problems.append(f"{item['tag']}: unknown stream {item['stream']}")
         letters = item["tag"].split("-")[0]
@@ -52,7 +105,7 @@ def validate(model):
         if expected and not letters.startswith(expected):
             problems.append(f"{item['tag']}: ISA first letter does not match variable '{item['variable']}'")
     for s in model["streams"]:
-        for end in (s["from"], s["to"]):
+        for end in (s.get("from"), s.get("to")):
             if end != "BL" and end not in unit_ids:
                 problems.append(f"stream {s['id']}: unknown endpoint {end}")
     return problems
@@ -93,27 +146,27 @@ SYMBOLS = {"reactor": sym_reactor, "condenser": sym_condenser, "separator": sym_
 def bubble(item, x, y):
     """ISA-5.1 shared-display instrument (circle in square) or control valve, tagged for binding."""
     letters, num = item["tag"].split("-")
-    attrs = (f'id="{item["tag"]}" data-tag="{item["tag"]}" data-unit="{item["unit"]}" '
-             f'data-uom="{escape(item["uom"])}"')
+    attrs = (f'id={quoteattr(item["tag"])} data-tag={quoteattr(item["tag"])} data-unit={quoteattr(item["unit"])} '
+             f'data-uom={quoteattr(item["uom"])}')
     title = f'<title>{escape(item["tag"])}: {escape(item["description"])}</title>'
     if "xmv" in item:  # final element: bowtie valve + actuator + tag label
         body = ('<path class="inst" d="M-14 -8 L14 8 L14 -8 L-14 8 Z"/>'
                 '<line class="inst" x1="0" y1="0" x2="0" y2="-16"/>'
                 '<path class="inst" d="M-9 -16 A9 9 0 0 1 9 -16 Z"/>'
-                f'<text class="ti" y="22" text-anchor="middle">{letters}-{num}</text>')
+                f'<text class="ti" y="22" text-anchor="middle">{escape(letters)}-{escape(num)}</text>')
     else:
         body = ('<rect class="inst" x="-19" y="-19" width="38" height="38"/>'
                 '<circle class="inst" r="17"/><line class="inst" x1="-17" y1="0" x2="17" y2="0"/>'
-                f'<text class="ti" y="-4" text-anchor="middle">{letters}</text>'
-                f'<text class="ti" y="11" text-anchor="middle">{num}</text>')
+                f'<text class="ti" y="-4" text-anchor="middle">{escape(letters)}</text>'
+                f'<text class="ti" y="11" text-anchor="middle">{escape(num)}</text>')
     return f'<g {attrs} transform="translate({x},{y})">{title}{body}</g>'
 
 
 def unit_group(unit, x, y, label=True):
     shape, half_h = SYMBOLS[unit["type"]]()
     text = (f'<text class="t" y="{-half_h - 12 if unit["type"] != "reactor" else -122}" text-anchor="middle">'
-            f'{unit["id"]} {escape(unit["name"])}</text>') if label else ""
-    return (f'<g id="{unit["id"]}" data-asset="{unit["id"]}" data-type="{unit["type"]}" '
+            f'{escape(unit["id"])} {escape(unit["name"])}</text>') if label else ""
+    return (f'<g id={quoteattr(unit["id"])} data-asset={quoteattr(unit["id"])} data-type={quoteattr(unit["type"])} '
             f'transform="translate({x},{y})">{shape}{text}</g>'), half_h
 
 
@@ -166,10 +219,10 @@ def overview_svg(model):
         if not pts:
             continue
         d = " ".join(f"{x},{y}" for x, y in pts)
-        pipes.append(f'<polyline class="pipe" data-stream="{s["id"]}" points="{d}" marker-end="url(#arr)">'
-                     f'<title>{s["id"]} {escape(s["name"])}</title></polyline>')
+        pipes.append(f'<polyline class="pipe" data-stream={quoteattr(s["id"])} points="{d}" marker-end="url(#arr)">'
+                     f'<title>{escape(s["id"])} {escape(s["name"])}</title></polyline>')
         (x1, y1), (x2, y2) = pts[0], pts[1]
-        labels.append(f'<text class="ts" x="{(x1 + x2) / 2 + 4}" y="{(y1 + y2) / 2 - 5}">{s["id"]}</text>')
+        labels.append(f'<text class="ts" x="{(x1 + x2) / 2 + 4}" y="{(y1 + y2) / 2 - 5}">{escape(s["id"])}</text>')
     units = []
     for u in model["units"]:
         g, half_h = unit_group(u, u["layout"]["x"], u["layout"]["y"])
@@ -235,11 +288,18 @@ def ignition_tags(model):
 
 PI_COLS = ["Selected(x)", "Parent", "Name", "ObjectType", "Description", "Template",
            "AttributeValueType", "AttributeDefaultUOM", "AttributeDataReference", "AttributeConfigString"]
+# Only this observed header mismatch is migrated. The whole row/header contract
+# remains unvalidated against an installed PI Builder version.
+PI_CANDIDATE_COLS_V1 = ["AttributeType" if c == "AttributeValueType" else c for c in PI_COLS]
+
 
 
 def pi_af_rows(model):
     """PI Builder-style flat sheet: plant element, unit elements, attributes with PI Point references.
     PI Point names are placeholders (TE.<tag>.PV) until the real historian tags are mapped."""
+    if any("pi_point" in x for group in ("units", "instruments", "final_elements", "streams")
+           for x in model.get(group, [])):
+        raise ValueError("Reviewed pi_point mappings are supported only for extracted_twin models")
     root = "TE Plant"
     rows = [["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""]]
     for u in model["units"]:
@@ -416,7 +476,11 @@ def twin_ignition(model):
             continue
         f, used = equip_folder(x["unit"]) if x["unit"] in live else unassigned(x["system"])
         extra = f'attached to {x["parent"]} ({x["parent_method"]}) | '
-        f["tags"].append(instance(x, udt("Instrument", x["isa_letters"] or "Unknown"), used, extra))
+        if x.get("reviewed_valve_association"):
+            extra += f'valve callout for {x["reviewed_valve_association"]}; function/signal unknown | '
+            f["tags"].append(instance(x, udt("Callout", "valve"), used, extra))
+        else:
+            f["tags"].append(instance(x, udt("Instrument", x["isa_letters"] or "Unknown"), used, extra))
     site = {"name": ign_name(model["site"]["name"].split(" (")[0], set()), "tagType": "Folder",
             "documentation": model["meta"]["title"] + " | every value is a PLACEHOLDER until mapped",
             "tags": [sf["folder"] for sf in sys_folders.values()]}
@@ -426,7 +490,9 @@ def twin_ignition(model):
 
 def twin_pi_rows(model):
     """PI Builder-style sheet, same columns as pi_af_rows: Site / System / Equipment elements, one attribute per
-    instrument. Attributes reference PI Points whose names are placeholders (PLACEHOLDER.<tag>.PV)."""
+    instrument. Only separately reviewed pi_point records replace placeholders; OPC addresses do not."""
+    # Validate existing mapping metadata before rendering even rejected/callout assets.
+    reconciliation(model, [])
     units = {u["id"]: u for u in model["units"]}
     root = af_name(model["site"]["name"].split(" (")[0], set())
     rows = [["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""]]
@@ -465,10 +531,18 @@ def twin_pi_rows(model):
             continue
         path, used = element(x["unit"]) if x["unit"] in live else unassigned(x["system"])
         name = af_name(_label(x), used)
+        if x.get("reviewed_valve_association"):
+            rows.append(["x", path, name, "Attribute",
+                         _twin_doc(x, f'valve callout for {x["reviewed_valve_association"]}; function/signal unknown | '),
+                         "", "String", "", "", ""])
+            continue
         point = re.sub(r"[^A-Za-z0-9_.-]+", "_", _label(x))
         rows.append(["x", path, name, "Attribute",
                      _twin_doc(x, f'{x.get("variable") or "unknown variable"} | attached to {x["parent"]} | '),
-                     "", "Double", x.get("uom", ""), "PI Point", f"\\\\%Server%\\{TWIN_PLACEHOLDER}.{point}.PV"])
+                     "", (x.get("pi_point") or {}).get("value_type", "Double"),
+                     (x.get("pi_point") or {}).get("uom", x.get("uom", "")), "PI Point",
+                     mapping_config(x["pi_point"]) if "pi_point" in x
+                     else f"\\\\%Server%\\{TWIN_PLACEHOLDER}.{point}.PV"])
     return rows
 
 
@@ -521,17 +595,18 @@ def twin_svgs(model, images_dir=None, out_dir=None):
                 cls = " ".join(c for c, on in (("low", conf is not None and conf < low),
                                                ("ph", it["tag_status"] == "placeholder")) if on)
                 tag = it.get("tag") or ""
-                extra = f' data-pair="{it["pair"]}"' if it.get("pair") else ""
+                extra = f' data-pair={quoteattr(it["pair"])}' if it.get("pair") else ""
                 if it.get("parent"):
-                    extra += f' data-parent="{it["parent"]}"'
+                    extra += f' data-parent={quoteattr(it["parent"])}'
                 label = (f'<text class="tl" x="{x0:.1f}" y="{y1 + 9:.1f}">{escape(tag[:24])}</text>'
                          if tag else "")
+                group_id = f'{it["id"]}-s{sheet}-{p["symbol"]}'
                 groups.append(
-                    f'<g id="{it["id"]}-s{sheet}-{escape(p["symbol"])}" data-asset="{it["id"]}" '
-                    f'data-tag={quoteattr(tag)} data-class="{escape(it["class"])}" data-confidence="{conf}" '
-                    f'data-status="{ops_status(it)}" data-symbol={quoteattr(p["symbol"])}{extra}'
+                    f'<g id={quoteattr(group_id)} data-asset={quoteattr(it["id"])} '
+                    f'data-tag={quoteattr(tag)} data-class={quoteattr(it["class"])} data-confidence={quoteattr(str(conf))} '
+                    f'data-status={quoteattr(ops_status(it))} data-symbol={quoteattr(p["symbol"])}{extra}'
                     f'{" class=" + quoteattr(cls) if cls else ""}><title>{escape(it["id"])} {escape(tag)} '
-                    f'({escape(it["class"])}, confidence {conf}, {ops_status(it)})</title>'
+                    f'({escape(it["class"])}, confidence {escape(str(conf))}, {escape(ops_status(it))})</title>'
                     f'{TWIN_SHAPES[it["class"]](x0, y0, x1, y1)}{label}</g>')
         lines = []
         for st in model["streams"]:
@@ -539,8 +614,8 @@ def twin_svgs(model, images_dir=None, out_dir=None):
                 continue
             a, b = boxes.get(st["from_symbol"]), boxes.get(st["to_symbol"])
             if a and b:
-                lines.append(f'<line class="lk" data-stream="{st["id"]}" data-from="{st["from"]}" '
-                             f'data-to="{st["to"]}" x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" '
+                lines.append(f'<line class="lk" data-stream={quoteattr(st["id"])} data-from={quoteattr(st["from"])} '
+                             f'data-to={quoteattr(st["to"])} x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" '
                              f'y2="{b[1]:.1f}"/>')
         bg = ""
         if images_dir is not None:
@@ -550,7 +625,7 @@ def twin_svgs(model, images_dir=None, out_dir=None):
                   f'opacity="0.35" preserveAspectRatio="none"/>')
         title = f'{s["name"]}: extracted overlay (sheet {sheet}, unverified)'
         foot = (f'<text class="ts" x="8" y="{H - 8}">Symbols at extracted positions; lines are extracted connections '
-                f'drawn straight (not pipe routes). Red dashed = confidence below {low}. Orange = placeholder tag. '
+                f'drawn straight (not pipe routes). Red dashed = confidence below {escape(str(low))}. Orange = placeholder tag. '
                 f'Source: {escape(str(s.get("source_run")))}</text>')
         body = (f'<rect x="0" y="0" width="{W}" height="{H}" fill="#fff"/>{bg}'
                 f'<text class="t" x="8" y="16">{escape(title)}</text>' + "".join(lines) + "".join(groups) + foot)
@@ -586,6 +661,12 @@ def twin_review_rows(model):
         obj = objs.get(item, {})
         tier = min((t for t, _ in reasons), default=6)
         why = "; ".join(r for _, r in sorted(reasons)) or "routine check"
+        # A scoped notes-only review must remain visible outside the editable notes
+        # column. This is a presentation marker, not a new verification status or
+        # a change to the model's risk score. Match only an explicit leading marker.
+        notes = (obj.get("ops_review") or {}).get("notes") or ""
+        if notes.startswith("NEEDS CLARIFICATION:"):
+            why = "NEEDS CLARIFICATION: see OPS_notes; " + why
         rt = (risk or {}).get("tier") or ("amber" if rated else "")
         rs = (risk or {}).get("risk_score")
         rwhy = (risk or {}).get("why") or ("not rated by the risk model; check by hand" if rated else "")
@@ -651,7 +732,9 @@ def twin_review_rows(model):
         p = x["provenance"][0]
         what = f'{_label(x)}: {x["variable"]} instrument' if x.get("variable") else _label(x)
         belongs = f'{names.get(x["unit"], "unassigned")} (attached to {names.get(x["parent"], "nothing")})'
-        add(x["id"], "instrument", what, belongs, r, x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"],
+        if x.get("reviewed_valve_association"):
+            what = f'{_label(x)}: valve callout; measured variable unknown; legend pending'
+        add(x["id"], "valve callout" if x.get("reviewed_valve_association") else "instrument", what, belongs, r, x["confidence"], p["sheet"], p["symbol"], p["box_0_1000"],
             x["parent_method"], risk=x.get("risk"))
     for x in model["line_items"]:
         r = common(x)
@@ -698,39 +781,144 @@ def twin_review_rows(model):
 
 
 def validate_twin(model):
-    problems = []
-    ids = [x["id"] for k in ("units", "instruments", "line_items", "offpage_connectors") for x in model[k]]
-    for i in {i for i in ids if ids.count(i) > 1}:
+    """Structural export checks only; passing does not approve inferred engineering."""
+    asset_keys = ("units", "instruments", "line_items", "offpage_connectors")
+    problems = _shape_problems(model, {k: "id" for k in asset_keys + ("streams", "systems")})
+    if problems:
+        return problems
+    assets = [x for k in asset_keys for x in model[k]]
+    ids = [x["id"] for x in assets]
+    for i in sorted({i for i in ids if ids.count(i) > 1}):
         problems.append(f"duplicate asset id {i}")
-    known = set(ids)
-    for s in model["streams"]:
-        for end in (s["from"], s["to"]):
+    known, units = set(ids), {u["id"] for u in model["units"]}
+    systems = {s["id"] for s in model["systems"]}
+    sheets = set()
+    for system in model["systems"]:
+        sheet = system.get("sheet")
+        if not _safe_filename(sheet):
+            problems.append(f"system {system['id']}: sheet must be a safe nonempty filename component")
+        elif sheet in sheets:
+            problems.append(f"duplicate system sheet {sheet}")
+        else:
+            sheets.add(sheet)
+        size = system.get("image_size_px")
+        if size is not None and (not isinstance(size, (list, tuple)) or len(size) != 2
+                                 or not all(_finite(v) and v > 0 for v in size)):
+            problems.append(f"system {system['id']}: image_size_px needs two positive finite dimensions")
+    for x in assets:
+        if x.get("system") not in systems:
+            problems.append(f"{x['id']}: unknown system {x.get('system')}")
+        if x.get("class") not in TWIN_SHAPES:
+            problems.append(f"{x['id']}: unsupported symbol class {x.get('class')!r}")
+        provenance = x.get("provenance")
+        if not isinstance(provenance, list) or not provenance:
+            problems.append(f"{x['id']}: provenance must be a nonempty list")
+            continue
+        for n, evidence in enumerate(provenance):
+            loc = f"{x['id']}.provenance[{n}]"
+            if not isinstance(evidence, dict):
+                problems.append(f"{loc}: must be an object")
+                continue
+            if evidence.get("sheet") not in sheets:
+                problems.append(f"{loc}: unknown sheet {evidence.get('sheet')}")
+            box = evidence.get("box_0_1000")
+            if (not isinstance(box, (list, tuple)) or len(box) != 4
+                    or not all(_finite(v) and 0 <= v <= 1000 for v in box)
+                    or box[0] > box[2] or box[1] > box[3]):
+                problems.append(f"{loc}: box_0_1000 needs four ordered finite coordinates in [0, 1000]")
+    for stream in model["streams"]:
+        for end in (stream.get("from"), stream.get("to")):
             if end not in known:
-                problems.append(f"stream {s['id']}: unknown endpoint {end}")
+                problems.append(f"stream {stream['id']}: unknown endpoint {end}")
+        if stream.get("sheet") is not None and stream["sheet"] not in sheets:
+            problems.append(f"stream {stream['id']}: unknown sheet {stream['sheet']}")
     for x in model["instruments"] + model["line_items"]:
-        for k in ("unit", "parent"):
-            if x.get(k) and x[k] not in known:
-                problems.append(f"{x['id']}: unknown {k} {x[k]}")
+        for key, targets in (("unit", units), ("parent", known)):
+            if x.get(key) and x[key] not in targets:
+                problems.append(f"{x['id']}: unknown {key} {x[key]}")
     return problems
 
 
+def _prepare(model, validator, render):
+    """Validate and render everything before touching outputs, including stale SVGs."""
+    try:
+        problems = validator(model)
+        if problems:
+            raise ModelValidationError("Structural validation failed; no exports changed:\n  - "
+                                       + "\n  - ".join(problems))
+        return render()
+    except ModelValidationError:
+        raise
+    except (KeyError, TypeError, ValueError, AttributeError, IndexError, ArithmeticError) as exc:
+        raise ModelValidationError(
+            f"Invalid model: cannot render exports ({type(exc).__name__}: {exc}). "
+            "Check required fields and their types; no exports changed.") from exc
+
+
+def review_csv_cell(value):
+    """Preserve model text; prefix spreadsheet-active/control text for review CSV only.
+
+    Escape leading apostrophes too so distinct source strings have distinct encodings.
+    apply_review recognizes unchanged encoded notes against the existing model.
+    """
+    if isinstance(value, str) and (value.lstrip().startswith(("=", "+", "-", "@", "'"))
+                                   or any(ord(c) < 32 for c in value)):
+        return "'" + value
+    return value
+
+
+def _csv_text(header, rows):
+    text = io.StringIO(newline="")
+    writer = csv.writer(text, lineterminator="\n")
+    writer.writerow(header)
+    writer.writerows([[review_csv_cell(value) for value in row] for row in rows])
+    return "\ufeff" + text.getvalue()
+
+
+def _write_bundle(out_dir, bundle):
+    for name, content in bundle.items():
+        target = Path(out_dir) / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8", newline="")
+
+
 def export_twin(model, out_dir, images_dir=None):
-    """Write every platform output for an extracted twin next to its plant_model.json. Returns written names."""
+    """Write a structurally valid, fully rendered bundle; invalid models raise before writes.
+
+    This is not engineering/operations approval or a multi-file filesystem transaction.
+    """
     out_dir = Path(out_dir)
-    for d in ("svg", "ignition", "pi"):
-        (out_dir / d).mkdir(parents=True, exist_ok=True)
+
+    def render():
+        bundle = {f"svg/sheet_{sheet}.svg": svg
+                  for sheet, svg in twin_svgs(model, images_dir, out_dir).items()}
+        bundle["ignition/tags.json"] = json.dumps(twin_ignition(model), indent=1)
+        pi_rows = twin_pi_rows(model)
+        bundle["pi/pi_builder_af.csv"] = pi_csv_text(PI_COLS, pi_rows)
+        bundle["pi/pi_builder_UNVALIDATED_candidate_v1.csv"] = pi_csv_text(PI_CANDIDATE_COLS_V1, pi_rows)
+        bundle["pi/reconciliation.json"] = json.dumps(reconciliation(model, pi_rows), indent=2)
+        bundle["review_queue.csv"] = _csv_text(TWIN_REVIEW_COLS, twin_review_rows(model))
+        return bundle
+
+    bundle = _prepare(model, validate_twin, render)
+    _write_bundle(out_dir, bundle)
     for old in (out_dir / "svg").glob("sheet_*.svg"):
-        old.unlink()
-    for sheet, svg in twin_svgs(model, images_dir, out_dir).items():
-        (out_dir / "svg" / f"sheet_{sheet}.svg").write_text(svg, encoding="utf-8")
-    (out_dir / "ignition" / "tags.json").write_text(json.dumps(twin_ignition(model), indent=1), encoding="utf-8")
-    write_csv(out_dir / "pi" / "pi_builder_af.csv", PI_COLS, twin_pi_rows(model))
-    write_csv(out_dir / "review_queue.csv", TWIN_REVIEW_COLS, twin_review_rows(model))
-    problems = validate_twin(model)
-    for p in problems:
-        print("  twin validation:", p)
-    return ["review_queue.csv", "ignition/tags.json", "pi/pi_builder_af.csv",
-            f"svg/sheet_*.svg ({len(model['systems'])})"] + (["VALIDATION ISSUES"] if problems else [])
+        if f"svg/{old.name}" not in bundle:
+            old.unlink()
+    return ["review_queue.csv", "ignition/tags.json", "pi/pi_builder_af.csv", "pi/pi_builder_UNVALIDATED_candidate_v1.csv", "pi/reconciliation.json",
+            f"svg/sheet_*.svg ({len(model['systems'])})"]
+
+
+def export_seed(model, out_dir):
+    """Validate/render the seed bundle before any output is created or overwritten."""
+    def render():
+        bundle = {"svg/overview.svg": overview_svg(model)}
+        bundle.update({f"svg/{u['id']}.svg": unit_svg(model, u) for u in model["units"]})
+        bundle["ignition/te_tags.json"] = json.dumps(ignition_tags(model), indent=2)
+        bundle["pi/pi_builder_af.csv"] = pi_csv_text(PI_COLS, pi_af_rows(model))
+        bundle["ops_review_sheet.csv"] = _csv_text(REVIEW_COLS, review_rows(model))
+        return bundle
+    _write_bundle(out_dir, _prepare(model, validate, render))
 
 # ---------------------------------------------------------------- main
 
@@ -744,31 +932,24 @@ def write_csv(path, header, rows):
 
 def main():
     model_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_MODEL
-    model = json.loads(model_path.read_text(encoding="utf-8"))
-    if model.get("meta", {}).get("model_kind") == "extracted_twin":
-        written = export_twin(model, model_path.parent)
-        print(f"twin: wrote {', '.join(written)} next to {model_path}")
-        return 0
-    problems = validate(model)
-    for d in ("svg", "ignition", "pi"):
-        (OUT / d).mkdir(parents=True, exist_ok=True)
-
-    (OUT / "svg" / "overview.svg").write_text(overview_svg(model), encoding="utf-8")
-    for u in model["units"]:
-        (OUT / "svg" / f'{u["id"]}.svg').write_text(unit_svg(model, u), encoding="utf-8")
-    (OUT / "ignition" / "te_tags.json").write_text(json.dumps(ignition_tags(model), indent=2), encoding="utf-8")
-    write_csv(OUT / "pi" / "pi_builder_af.csv", PI_COLS, pi_af_rows(model))
-    write_csv(OUT / "ops_review_sheet.csv", REVIEW_COLS, review_rows(model))
+    try:
+        model = json.loads(model_path.read_text(encoding="utf-8"))
+        if isinstance(model, dict) and isinstance(model.get("meta"), dict) and model["meta"].get("model_kind") == "extracted_twin":
+            written = export_twin(model, model_path.parent)
+            print(f"twin: wrote {', '.join(written)} next to {model_path}")
+            return 0
+        export_seed(model, OUT)
+    except (ModelValidationError, OSError, ValueError) as exc:
+        print(f"Generation failed for {model_path}: {exc}", file=sys.stderr)
+        return 1
 
     n_inst, n_fe = len(model["instruments"]), len(model["final_elements"])
     print(f"model: {len(model['units'])} units, {len(model['streams'])} streams, "
           f"{n_inst} instruments, {n_fe} final elements")
     print(f"wrote: out/svg ({len(model['units']) + 1} files), out/ignition/te_tags.json, "
           f"out/pi/pi_builder_af.csv, out/ops_review_sheet.csv")
-    print("validation:", "OK" if not problems else f"{len(problems)} issue(s)")
-    for p in problems:
-        print("  -", p)
-    return 1 if problems else 0
+    print("structural validation: OK (not engineering or operations approval)")
+    return 0
 
 
 if __name__ == "__main__":

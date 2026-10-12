@@ -11,5 +11,13 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      # Every test runs here, the scorer controls included: the OPEN100 drawings and answer keys are in the repo.
-      - run: python scripts/run_tests.py
+      # Networked setup is explicit: TE replay fixtures are ignored, not committed.
+      # The fetcher accepts only the pinned SHA-256 bytes; failure stops the job.
+      - name: Stage checksum-verified public TE fixtures
+        run: python scripts/fetch_te_data.py
+      # The committed ZIP is a historical baseline; build current artifacts locally.
+      - name: Generate current offline gateway artifacts
+        run: python scripts/ignition/build_gateway.py --write-only
+      # All tests run offline after setup; OPEN100 drawings/keys are committed.
+      - name: Run full cached-data suite
+        run: python scripts/run_tests.py --full

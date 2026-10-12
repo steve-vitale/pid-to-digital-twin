@@ -172,12 +172,24 @@ def ops(x):
 
 def v2(held, te_model, twin_model):
     fails = []
-    te_items = te_model["instruments"] + te_model["final_elements"]
+    from te_channels import expanded_items
+    te_items = expanded_items(te_model)
     tw_items = [x for k in ("units", "instruments", "line_items") for x in twin_model[k]]
     te_tags = [i["tag"] for i in te_items if ops(i) != "rejected"]
     held_te = Counter(inst["parameters"]["Tag"]["value"] for _, inst in held.instances("TE_Plant"))
     twin_ids = [x["id"] for x in tw_items if ops(x) != "rejected"]
     held_tw = Counter(inst["parameters"]["AssetId"]["value"] for _, inst in held.instances("OPEN100"))
+    callouts = {x["id"] for x in twin_model["instruments"] if x.get("instrument_kind") == "valve callout"}
+    for path, inst in held.instances("OPEN100"):
+        if inst["parameters"]["AssetId"]["value"] not in callouts:
+            continue
+        typ = held.types[inst["typeId"]]
+        params = set(typ.get("parameters", {})) | set(inst.get("parameters", {}))
+        members = typ.get("tags", []) + inst.get("tags", [])
+        if (inst["typeId"] != "Callout_Valve" or params - {"AssetId", "SourceTag"}
+                or any(m.get("name") == "PV" or m.get("valueSource") == "opc"
+                       or "opcItemPath" in m or "opcServer" in m for m in members)):
+            fails.append(f"{path}: reviewed valve callout must remain metadata-only, without PV or OPC assignment")
     # The review decision must reach the gateway: ReviewStatus on each instance equals the model's decision.
     want = {("TE", i["tag"]): ops(i) for i in te_items} | {("OPEN100", x["id"]): ops(x) for x in tw_items}
     reviewed, mismatched = 0, 0
@@ -232,7 +244,21 @@ def v3(held, twin_dir, hidden=frozenset()):
     every TE value on the schematic and on its unit screen, every extracted instrument on its drawing."""
     tags = held.tag_paths()
     fails, n = [], 0
-    te_units = {inst["parameters"]["Tag"]["value"]: p.split("/")[1] for p, inst in held.instances("TE_Plant")}
+    # Completeness follows source semantics, not just the extraction's symbol class.
+    # A reviewed valve callout retains instrumentation provenance but has no PV.
+    model = json.loads((twin_dir / "plant_model.json").read_text(encoding="utf-8"))
+    callouts = {x["id"] for x in model["instruments"] if x.get("instrument_kind") == "valve callout"}
+    from te_channels import expanded_items, channel_columns
+    te_model = json.loads(bg.MODEL.read_text(encoding="utf-8"))
+    recorded = channel_columns(te_model)
+    unavailable = {x["tag"] for x in expanded_items(te_model) if x["tag"] not in recorded}
+
+    def components(node):
+        yield node
+        for child in node.get("children", []):
+            yield from components(child)
+
+    te_units = {x["tag"]: x["unit"] for x in expanded_items(te_model) if ops(x) != "rejected"}
     for name, view in sorted(held.views.items()):
         bound = bindings(view)
         n += len(bound)
@@ -244,9 +270,21 @@ def v3(held, twin_dir, hidden=frozenset()):
             drawn = set(re.findall(r'data-tag="([^"]+)"', (ROOT / "out/svg/overview.svg").read_text(encoding="utf-8")))
         elif name.startswith("TE/Unit_"):
             drawn = {t for t, u in te_units.items() if u == name[len("TE/Unit_"):]}
+            by_name = {c.get("meta", {}).get("name"): c for c in components(view["root"])}
+            for tag in drawn & unavailable - set(hidden):
+                indicator = by_name.get(tag, {})
+                if (indicator.get("props", {}).get("text") != "NOT CONNECTED"
+                        or "props.text" in indicator.get("propConfig", {})):
+                    fails.append(f"{name}: {tag} must show the explicit NOT CONNECTED indicator, never a value")
+                spatial = by_name.get("Unavailable_" + tag, {})
+                if ("UNKNOWN" not in spatial.get("props", {}).get("text", "")
+                        or tag not in spatial.get("props", {}).get("text", "")
+                        or "props.text" in spatial.get("propConfig", {})):
+                    fails.append(f"{name}: {tag} must retain its spatial UNKNOWN / unavailable indicator")
+            drawn -= unavailable
         elif name.startswith("OPEN100/Sheet_"):
             svg = (twin_dir / "svg" / f"sheet_{name.split('_')[-1]}.svg").read_text(encoding="utf-8")
-            drawn = set(re.findall(r'data-asset="([^"]+)"[^>]*data-class="instrumentation"', svg))
+            drawn = set(re.findall(r'data-asset="([^"]+)"[^>]*data-class="instrumentation"', svg)) - callouts
         else:  # overview, alarms, drawing index: bindings checked above, no completeness rule
             continue
         for item in sorted(drawn - on_screen - set(hidden)):

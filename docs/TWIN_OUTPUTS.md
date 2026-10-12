@@ -2,7 +2,7 @@
 
 `scripts/build_twin.py` turns a set of extracted sheets into a package a plant could load. Extraction gives a flat
 list of symbols and links per sheet. The converter adds the structure a twin needs: a site/system/equipment
-hierarchy, cross-sheet links, platform import files and a review queue. Nothing is drawing-specific. Every decision
+hierarchy, cross-sheet links, platform import files and a review queue. The converter includes OPEN100-shaped tag/off-page parsing and confidence assumptions; new sites need an adapter and validation. Every decision
 records the method it used, and every item starts as `unverified`.
 
 ## One command
@@ -25,7 +25,7 @@ step 5.
   single holdout run of a finished method (docs/GOAL.md).
 
 `python scripts/generate.py out/twin/<label>/<tool>/plant_model.json` rebuilds the platform files from an edited
-model. Run with no argument, it still produces the Tennessee Eastman outputs, unchanged.
+model. Run with no argument, it produces the Tennessee Eastman outputs. Both paths validate and render the entire bundle before touching existing exports; malformed models fail nonzero without export changes. This structural gate does not approve inferred semantics or operational use. Writes are not a multi-file atomic transaction, so a filesystem failure can still leave partial output.
 
 Two packages are committed:
 - `out/twin/round1-v2-named-fields/claude/`: a small round-1 example (Claude, sheets 0–5);
@@ -118,11 +118,11 @@ Two packages are committed:
 - **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
 - **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
   story belongs to Ignition here.
-- **Ignition proves the same model end to end:** import, live values, alarms, verification.
+- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. Current regenerated artifacts have offline checks only; native runtime/browser acceptance is not run.
 
 To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
-System Explorer, then bind the attributes to real PI points (the same I/O-list step as
-[REVIEW_LOOP.md](REVIEW_LOOP.md)).
+System Explorer, then separately configure and verify real PI point bindings. The current exporter retains
+`%Server%`/placeholder point references; `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings.
 
 ### AF XML: not emitted
 

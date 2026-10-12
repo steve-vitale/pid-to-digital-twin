@@ -32,7 +32,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import generate as gen  # noqa: E402
 import score_pid2graph as sc  # noqa: E402
-import trace_connections as tc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
@@ -368,7 +367,7 @@ def build(tool, run_dir, sheet_list, images_dir, register, label, parent_rule="a
                     elif role(n) == "line_item":
                         nxt.append(n)
             if found:
-                best = min(found, key=lambda n: dist(by_key[n]["box"], by_key[start]["box"]))
+                best = min(found, key=lambda n: (dist(by_key[n]["box"], by_key[start]["box"]), n))
                 return app2asset[best], hops, "connection_path"
             frontier = nxt
         return None, None, "no_connection_path"
@@ -387,23 +386,25 @@ def build(tool, run_dir, sheet_list, images_dir, register, label, parent_rule="a
         it = by_key[k]
         direct = [n for n in adj[k] if role(n) != "instrument"]
         if direct:
-            cand = min(direct, key=lambda n: dist(by_key[n]["box"], it["box"]))
+            cand = min(direct, key=lambda n: (dist(by_key[n]["box"], it["box"]), n))
             return cand, "linked", {"linked_candidates": len(direct)}
         seen, q = {k}, deque([k])
         chain = []
         while q and not chain:
             cur = q.popleft()
-            for n in adj[cur]:
+            # Stable first-found branch order; still an unverified parenting heuristic.
+            for n in sorted(adj[cur]):
                 if n in seen:
                     continue
                 seen.add(n)
                 (chain if role(n) != "instrument" else q).append(n)
         if chain:
-            return min(chain, key=lambda n: dist(by_key[n]["box"], it["box"])), "via_instrument_chain", {}
+            return min(chain, key=lambda n: (dist(by_key[n]["box"], it["box"]), n)), "via_instrument_chain", {}
         return nearest_parent(k)
 
     geoms = {}
     if parent_rule == "along_line":
+        import trace_connections as tc  # only this rule needs OpenCV/numpy
         for s, sh in sheets.items():
             img = images_dir / f"{s}.png"
             if img.exists() and sh["raw_symbols"]:

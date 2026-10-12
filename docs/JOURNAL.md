@@ -1,5 +1,10 @@
 # Build journal
 
+Entries describe their historical snapshots. Local receipts, private review conversations, intermediate
+render packages and sealed trial evidence are not included in this public source snapshot. Historical
+verification and environment/push-status statements are not current runtime or publication acceptance.
+Current source and documentation include Claude and OpenAI/Codex contributions under Steve Vitale’s guidance.
+
 How this project was built and why each choice was made, written as it happens. Results are in the README and
 `out/`. This file is the reasoning behind them.
 
@@ -851,8 +856,8 @@ thing an operator should change.
 - **"The 3,000 kPa shutdown alarm never activates."** The data never goes above 3,000.0, so it seemed safe. On the new
   screens it went active at exactly 3,000.0: Ignition's above-setpoint alarm fired at equality. The claim had been
   inferred, never watched; the verifier stops looking seconds after the first alarm.
-- **"Claude Code and Codex wrote most of the code."** Codex was an extraction model only. None of its sessions
-  edited this repository, and every commit carries Claude's co-author line.
+- **Authorship at that historical snapshot:** Claude wrote the initial code, while Codex supplied extraction
+  results. Later revisions include OpenAI/Codex code and documentation work under Steve Vitale’s guidance.
 
 **Lesson:** a claim about what a system does is a prediction until something has watched it happen. The screens
 watched things the checks never looked at: a limit at equality, a gateway out of memory, a trend inventing upsets.
@@ -862,3 +867,738 @@ Walking the screens through a fault, as an operator would, belongs in the test p
 values, and learn normal bands from your own historian, per operating mode. Count false flags on held-out data before
 anyone sees the colour; a band that's amber every shift is worse than none.
 
+## 22. Put the process on the overview, then make the unit pages earn the click
+
+**Date:** 2026-10-10. **Status:** implemented and checked locally; native Ignition and browser validation remain
+unrun. No deployment or successful remote push is claimed.
+
+**What:** the three-unit mimic has become the six-unit **Overview**, with one consistent navigation bar and
+more detailed unit graphics. A follow-on request for the maximum available instrumentation expanded the work:
+all 52 recorded channels now have display/mapping entries, alongside the explicitly unconnected agitator.
+The overview stays selective; the unit pages carry the full readings, trends, state and source context.
+
+**The local sequence, checked against the available commit history:**
+1. **October 8, `20aa7cd`:** the baseline carried the operator screens, normal bands and trend historian in the
+   Docker demo backup. That is the starting point for the later local mimic work.
+2. **October 10, `3b97ecb`:** the first read-only mimic covered the reactor, condenser and separator. Its alignment
+   revision put readings into equipment-grouped rows, with each numeric value and engineering unit in one binding.
+   Local tests and approximate SVG renders supported that checkpoint; neither established Ignition or browser
+   runtime behavior.
+3. **October 10, this revision:** the process picture moved into the normal application path, then the detail
+   inventory expanded to every available replay channel. The current implementation and verification notes are in
+   [PROCESS_MIMIC.md](PROCESS_MIMIC.md) and [INSTRUMENT_COVERAGE.md](INSTRUMENT_COVERAGE.md).
+
+This checkout has shallow history. The first two items are inspectable commit checkpoints; the third records the
+current local work rather than inventing additional published milestones.
+
+**How:**
+- **Show the whole process first.** The compact 1600 × 930 Overview contains feed U-100, reactor R-101,
+  condenser E-101, separator V-101, compressor K-101 and stripper C-101, with all 13 seed-model stream directions.
+  Its 21 headline readings are deliberate display choices pending operator review. The branches, recycle and
+  external boundaries remain visible without putting every instrument on the first screen.
+- **Give each destination one name.** Every shared header uses Overview, Feed, Reactor, Condenser, Separator,
+  Compressor, Stripper, Alarms and Drawings in the same order. There is no extra Mimic tab; `/mimic` remains a
+  compatibility alias to Overview. Equipment and neighboring-unit links support drilldown, while the full schematic
+  remains a reference drawing. The tab order does not imply that this branched process is one serial train.
+- **Make detail mean more process context.** Unit pages combine equipment-specific graphics, measured level where
+  available, recorded-output gauges, and all tag rows with the existing state and history configuration. Boundary
+  cards and connection stubs identify each modeled stream's source and destination and its currently mapped scalar
+  readings. A boundary with no mapped instrument says so. Utility instruments are identified separately because
+  the source model supplies no utility endpoints; the drawing does not invent piping to fill that gap.
+- **Count channels before claiming complete coverage.** The seed has 37 model records, including three analyzer
+  groups. The replay has 41 XMEAS channels and 11 XMV channels: 52 unique recorded columns. Sixteen analyzer
+  components were previously undisplayed. They now have source-indexed sibling paths, completing the 19 analyzer
+  components without changing the original scalar paths. The resulting 53 detail rows represent 52 mapped channels
+  and SC-212 explicitly unconnected. New suffixes such as AI-123-B are project-assigned identifiers, not newly
+  discovered physical instrument tags.
+- **Keep timing with the measurement.** Feed and purge analyzers show their 6-minute sample periods and 6-minute
+  dead times; product analyzers show 15 minutes for each. A replay row every 3 minutes does not make those readings
+  instantaneous. Source index, component and review metadata travel with the added channels.
+- **Preserve the existing meaning.** All 36 legacy normal bands are unchanged, including K = 6. Added components
+  use that existing calibration rather than retuning it to flatter the expanded display. Existing alarm limits,
+  read-only behavior and parent analyzer review exclusions remain in force. Normal bands are display aids, not
+  site-approved operating limits.
+- **Keep uncertainty visible.** Bad-quality, missing, nonnumeric and nonfinite readings remain unknown. Vessel
+  fills become hatched and output gauges hide their fill. Zero remains zero, and an off-scale percentage keeps
+  its number even when the graphic is clamped. Value and State quality are checked independently. History retains
+  raw points and ignores bad quality, avoiding the false drops to zero found in entry 21.
+
+**What needed correction along the way:**
+- **A plausible feed label was assigned to the wrong unit in an early selection.** FI-104 sounds like it belongs
+  with the other feeds, but the seed assigns it to stripper C-101 on S4. The final selection follows that ownership
+  and keeps U-100's three actual feed readings together.
+- **The expanded overview became too large.** The layout was reduced to a compact overview with 21 essential
+  readings; the additional cooling, utility, analyzer and final-element detail belongs on the unit pages. Complete
+  instrumentation coverage does not require every value to compete for attention on the first screen.
+- **The first aggregate test run could not complete.** This environment lacked `asyncua` and `cv2`. Temporary PyPI
+  installs of asyncua 2.1.0 and opencv-python-headless 5.0.0.93 supplied those dependencies, then the full runner
+  passed. The repository's pinned requirements were not changed, and this was not an exact-lockfile reproduction.
+
+**What the drawing still cannot prove:** it is a **replay-only, read-only** display. Static stream lines follow the
+seed model; topology and equipment geometry remain **unverified pending operations review**. Recorded XMV outputs
+are not measured valve-position feedback. XMV12 is absent from the replay, so SC-212 remains not connected and the
+agitator stays static. Level percentages are measurements on a display scale, not calculated liquid volumes.
+
+TI-122 remains a useful test of that discipline. The published source calls it **separator cooling-water outlet
+temperature**; the seed retains its E-101 ownership while operations review is open (entry 5). The disagreement is
+kept visible. A condenser graphic cannot turn it into a verified condenser process temperature.
+
+**Evidence and limits:** this revision has its own local results, separate from the earlier prototype's receipts:
+- **15 focused process-display tests passed** in the historical local run.
+- **All seven aggregate test scripts passed, with no skips**, in that local run. These include source-channel coverage and compatibility checks.
+- The gateway builder completed in **write-only** mode, and the proposed project export was checked for
+  deterministic generation. The normal and fault replay fixtures passed their recorded SHA-256 checks.
+- Normal, fault and bad-quality static renders were generated for the Overview and reactor detail. They are
+  approximate offline SVG/PNG renders, not browser or gateway screenshots.
+
+**Still unrun:** Ignition import, native Perspective/Jython execution, live OPC bindings, native historian
+behavior, browser interaction/layout and operator acceptance. The earlier Chromium launch was blocked by the
+environment's socket restrictions. Local configuration checks do not replace any of these stages, and previous
+gateway receipts cover previous builds only. The preceding GitHub push attempt returned HTTP 403; no push retry,
+deployment or public release was performed for this revision.
+
+**Why:** the useful progression is from a complete data model, to readable measurements, to a process picture
+that helps someone decide where to look next. The instrumentation request exposed an important distinction:
+covering every model record had still left recorded analyzer components unused. A channel inventory caught that
+without forcing all 52 values onto the overview or inventing measurements that do not exist.
+
+**Lesson:** check completeness against the source channels, then choose visual detail for the decision each page
+supports. Better-looking equipment can make a viewer assume more has been verified; improve the evidence labels
+alongside the graphics. Local generation, automated checks, runtime observation and operations acceptance remain
+separate milestones.
+
+**At your plant:** agree on the overview-to-unit navigation with operators, then reconcile every available source
+channel against the display inventory, including individual analyzer components and their timing. Keep unmapped
+signals and uncertain ownership visible. Walk the whole path on an authorized development gateway with normal,
+fault and bad-quality data, and have a process reviewer confirm the connections independently of the screen's
+appearance.
+
+**Preserving the handoff:** a historical shallow-checkout restore initially failed when it traversed
+history before the baseline; retaining the known boundary allowed an exact restore. The lesson is to test
+a restore, not just archive integrity. Those private handoff files are not included here.
+
+## 23. Put measurements where operators look, then separate the plant-specific layout
+
+**What:** operator feedback was that each unit page still spread readings away from the process. A complete table
+was not enough to show what was measured and roughly where. All six unit pages now begin with a compact annotated
+process diagram. Plain-language names and value plus engineering unit are primary; project tags are smaller.
+Dashed leaders associate vessel pressure, temperature and level with approximate regions, stream measurements with
+their mapped streams, and composition groups with their sample stream. The full inventory and history remain below.
+
+The reactor was rendered and reviewed before applying the same visual grammar to the other units. Feed A/D/E stay
+in order; reactor feed flow and A–F composition stay on S6; separator liquid readings remain on bottom S10; stripper
+S10 enters above S4, with S5 overhead and S11 product below. All 52 available source channels remain accessible;
+SC-212 has no replay source and stays explicitly unknown. Recorded valve outputs never become measured feedback.
+
+**Evidence and limits:** this correction inspected pixels from the repository's generated overview and from
+[Singhal & Seborg (2006), Figure 1, p.603](https://sites.me.ucsb.edu/~ceweb/faculty/seborg/pdfs/Singhal_JPC.pdf).
+The latter is a published control-strategy schematic, not the original 1993 P&ID or proof of physical instrument taps.
+It supports coarse regions and branch order. Exact tap and along-stream valve/instrument order remain approximate.
+No source utilities, pumps or bypasses were added to the seed topology. Utilities without modeled endpoints appear
+as nearby context, without invented pipes. TI-122 retains the source name “Separator Cooling Water Outlet Temp”
+and disputed E-101 ownership. The published purge branch appears on the separator side of the compressor; the seed
+still assigns S9 to K-101. That disagreement is visible rather than silently resolved by moving a measurement.
+
+**What changed in the method:** this project should support different plant types, not accumulate TE-specific
+screen logic. New labels, rectangles, routes, region anchors, uncertainty and source attribution live in additive
+`data/te_display_layout.json`; the process facts remain in the original model. Shared unit rendering accepts a
+layout parameter. The small display contract checks referenced units, streams and measurements, finite geometry,
+association evidence and conflicts. Unknown direction draws no arrow; TE explicitly opts into its existing seed
+from/to adapter, still unverified. Unknown equipment types receive a neutral symbol; unmapped values remain UNKNOWN.
+A synthetic water-utility fixture exercises the same renderer with different IDs, topology and units. This checks
+a presentation seam only: it does not establish broad industrial coverage or make the TE replay/export adapters generic.
+
+**Lesson:** completeness, spatial readability and generalization are separate tests. Keep association evidence
+separate from drawing coordinates, preserve unresolved data, and validate a second process through the same renderer
+before calling a configuration seam reusable. Plant labels and layout are configuration; process topology, real data
+mapping and operations acceptance remain site-specific work.
+
+**Verification:** detailed local render receipts are not included in this publication. All six units have normal, fault and
+bad-quality SVG/PNG renders. These are approximate offline renders, not browser screenshots or Perspective runtime
+validation. No gateway import, live OPC operation, public action, spending or GitHub retry is part of this correction.
+
+Local verification for this correction: **19 focused process-display tests passed**, **26 display-contract checks
+passed**, and **all eight aggregate test scripts passed with no skips** using the previously documented temporary
+dependencies. Repeated project generation produced the same ZIP hash. Independent pixel review covered all six
+normal diagrams and representative bad-quality views; the final pass moved the stripper S10 caption clear of a
+leader and gave unmapped-stream notes clearance from arrows and measurement cards. An overlap regression test protects the stripper overhead note. Native Ignition/Jython, live bindings, browser layout
+and operations acceptance remain unrun. Private handoff artifacts are omitted from this publication; no remote push was claimed at that stage.
+
+---
+
+## 24. Try a separately labeled collection before claiming a general method
+
+**What:** the next test should show someone adapting this code to their own drawings, and find what the first
+workflow missed. We used an already labeled public collection, **PID2Graph Synthetic**, with the same existing
+scorer and `twin-1` converter/exporters. It is a separate synthetic collection from OPEN100 and the Dataset-P&ID
+holdout already used in round 2, but shares the PID2Graph distribution and ontology. It is not real-plant evidence.
+No second model comparison was run: the selected first-round Codex `gpt-6.1-sol` model and original whole-sheet
+prompt were retained.
+
+**What the data actually contained:** archive inspection found 250 complete JPEG/GraphML pairs, correcting the
+500-complete-drawings statement in entry 6. Development sheets 0 and 1 took 1,575,041 source bytes, or 12,201,709
+range bytes including the archive index and block overhead. Reserved 2 and 3 were not downloaded or opened.
+The JPEG format exposed an existing PNG-only assumption; the adapter now normalizes without resizing and records
+source and converted hashes. The license is CC BY-SA 4.0, with attribution to the dataset authors and Steven
+Baltakatei Sandoval's symbols. Source drawings and answer keys remain gitignored, with a bounded fetch manifest.
+
+**First isolate the plumbing:** ground-truth labels were converted into the existing prediction format. This
+oracle-label path passed all 43 scored assets and 65 collapsed links into a valid twin and draft SVG, Ignition,
+PI and review files. Zero adapter-consistency corrections is expected; it is not an extraction accuracy claim.
+Neither sampled key contains instrumentation labels. Tag text and flow direction are absent from the keys, so
+all 43 oracle tags and all 65 directions remain unknown.
+
+**Then run the selected model:** the subscribed Codex CLI could not initialize because its runtime filesystem was
+read-only. A documented writable-runtime retry failed before inference as well. Those failure receipts were kept.
+Two fresh native workers used the same selected model, exact prompt and images, with no ground-truth context.
+This changed transport and wrapper instructions; reasoning settings are unverified/inherited. It is not a claim
+of bit-for-bit reproduction of the old CLI execution.
+
+| Development sheet | Located symbols | Source-class F1 | Connection TP / predicted / key | Review corrections / key items |
+|---|---:|---:|---:|---:|
+| 0 | 20 / 20 | 0.450 | 19 / 19 / 38 | 30 / 58 |
+| 1 | 22 / 23 | 0.400 | 25 / 26 / 27 | 17 / 50 |
+| Combined | 42 / 43 | 0.424 micro | 44 / 45 / 65 | 47 / 108 (43.52 per 100) |
+
+**The useful failure:** 24 of those corrections are source-class disagreements, not independently proven physical
+misinterpretations. Twenty are source `general` versus more specific model classes. The original prompt's equipment
+definitions and the source's broad General category are not interchangeable. We kept both classes and the original
+score, rather than learning a post-hoc remap from the answer key. The other corrections are one missed symbol,
+21 missed links and one false link.
+
+A second concrete gap is line semantics: the source has 221 solid and 29 non-solid edges, while the current
+prediction/scoring contract collapses those into untyped adjacency. Every original edge style is now preserved
+in a local sidecar; it is not silently interpreted as process versus signal flow. The generated model's structure
+can be valid while its equipment roles, ownership, tags and directions remain unreviewed.
+
+**What changed:** a small dataset config, bounded fetch/normalization adapter, source/hash checks, nine controls,
+reproducible reports and `docs/ADAPT_LABELED_DATASET.md`. Structural validation runs before export. A separate
+operational-readiness gate uses the existing review workflow and refuses `--require-reviewed` while ontology,
+line semantics, operations decisions and site-specific live-data requirements remain unresolved. Default exports
+are explicitly review drafts. No confidence calibration from OPEN100 is applied to this new domain.
+
+**Lesson:** generalization begins with agreeing what a label means. Preserve the source vocabulary, model
+interpretation and uncertain semantics independently. Freeze a domain-reviewed mapping and test it prospectively
+on untouched data; do not rewrite the score after seeing the answer. These two development sheets identify gaps,
+not broad performance. Nine adapter tests and the frozen scorer's controls pass; the review-required gate fails
+closed without changing existing outputs. No gateway/PI import, deployment, public upload or API spending occurred.
+
+---
+
+### Documentation maintenance — 2026-10-10
+
+The README animation caption now separates OPEN100 extraction with synthetic point mapping from the hand-built
+TE process model/HMI with recorded fault replay. A third track identifies the two-development-sheet PID2Graph
+Synthetic adaptation and its unresolved review gates. No new performance result or user decision is attributed.
+The process-display verification summary now identifies the spatial and adaptation stages and distinguishes the
+historical eight-script pass from the current rerun: 19 focused tests, 26 display-contract checks, nine separate
+adapter tests and all eight aggregate scripts passed without skips using the unchanged repository dependency pins.
+The initial rerun lacked cv2/asyncua because the earlier temporary dependency directory was absent; that failure
+was preserved before restoring dependencies into a new temporary directory. Detailed command/output receipts are local and are not included in this publication. Runtime validation,
+operations acceptance, and the prior GitHub HTTP 403 blocker remain unchanged. This is local documentation
+maintenance only: no code behavior change, new extraction, generated image package, public action or push retry.
+
+---
+
+## 25. Flag a real review ambiguity without turning it into a confirmation
+
+**Review outcome — 2026-10-10:** retain both FT 1401 symbols, flag the ambiguity for drawing-owner
+clarification and block automatic signal assignment. This does not settle physical identity or count.
+
+**Evidence:** the publisher's native 2604 × 1744 raster for PID 140-1-A contains two adjacent circles labeled
+FT / 1401. The retained extraction has S0-IN002/s7 and S0-IN003/s8; the demo I/O CSV contains only one synthetic
+FT-1401 row. Detailed local crop evidence is not included here. Raw extraction `runs/r2-tiles-trace/codex/0.json` is absent;
+no extraction replay or vector-original verification is claimed.
+
+**Applied effect:** a dry-run-checked, two-row OPS_notes-only review records the scoped outcome. Both symbols remain, both verification and review statuses remain `unverified`, and neither
+has a data_point. No correction, merge, rejection, screen/alarm decision or MOC request was applied. The existing
+review format has no clarification status enum, so no new engineering status was invented. An explicit leading
+`NEEDS CLARIFICATION:` note is now echoed in the queue's `why_check_this` column when regenerated; original risk
+scores, tiers and order remain intact. Only the queue was regenerated, with original newline style retained.
+
+**Aftereffect and unknowns:** the current mapper dry run still reports FT-1401 row 26 as ambiguous between both
+IDs; existing mapping output is byte-identical. Physical-device count/identity, tag correctness, parent/line
+connectivity, line/signal semantics and real I/O address remain unresolved. Drawing-owner identity/contact,
+clarification answer and resolution date are unknown. No external clarification was sent. Subsequent assignment
+requires evidence and a separately authorized judgment identifying the target; this note is not such authority.
+
+**Verification:** exact before/after records and full-file hashes, dry-run/application logs and a bounded CSV
+are saved with the decision. Regression controls cover notes-only isolation, unverified/no-address retention,
+visible queue flagging and idempotent round-trip. No gateway work, live mapping, public action, spending or push
+retry occurred; the prior HTTP 403 blocker is unchanged. Local restoration was checked separately; those handoff artifacts are omitted here.
+All eight aggregate test scripts passed with no skips using unchanged dependencies in
+an isolated temporary environment; detailed local logs are not included. This does not establish runtime or operator acceptance.
+
+---
+
+## 26. Correct MS 14010 as text without approving the device interpretation
+
+**Review outcome — 2026-10-10:** a field-scoped review corrected the MS 4010 identifier to MS 14010.
+It did not approve function, classification or signal mapping.
+
+**Applied effect:** S0-IN019/s39 now reads MS 14010. The existing review tool gained an optional
+`identifier_text` scope with regression controls. Its matching derived loop changes from 4010 to 14010;
+the exact mirrored description and hierarchy display cache change with it. The scoped decision is recorded
+per field and in history, while whole-record review and verification remain `unverified`. Source extraction
+provenance keeps MS 4010. No function, class, parent, connection, I/O or confidence interpretation is approved
+or recomputed. The FT 1401 pair, its clarification flags and unmapped state are unchanged.
+
+**Verification and limits:** normal CSV review dry run and application, exact before/after paths and hashes,
+focused regression tests and all eight aggregate scripts passed without skips. Local read-only SVG, queue,
+PI AF and Ignition JSON exports were regenerated, retaining unverified status and placeholder addresses.
+No gateway import, production deployment, mapping application, spending, external contact or public push
+occurred. The existing HTTP 403 limitation is unchanged. A historical local restore check established recoverability, not publication or runtime/operator acceptance.
+
+---
+
+## 27. Review the MS 14010 callout as a valve without inventing a signal
+
+**Review outcome — 2026-10-10:** a field-scoped review associated the existing MS 14010 callout
+with an existing valve, without approving a measured variable or signal.
+
+**Applied effect:** the existing S0-IN019/s39 callout is associated by a field-scoped review with the
+existing S0-VL013/s38 valve. Both source symbols remain distinct; no valve is created or merged.
+The unsupported `moisture` variable becomes `unknown`, its method records the missing source legend,
+and its current role becomes `valve callout`. The reusable `valve_association` scope accepts only
+`parent=<existing parent valve>;variable=unknown` and refuses reassignment, mapped records, semantic
+expansion, or screen/alarm decisions. `reviewed_valve_association` is the reviewed callout reference;
+`parent`, `parent_method` and connectivity remain the original inferences. Raw extraction class,
+provenance, geometry, confidence, risk, and the existing valve record are unchanged. No MS expansion,
+valve subtype, actuator/control function, or signal type is inferred.
+
+**Boundaries:** MS 14010, loop 14010, earlier identifier review and FT 1401 clarification are preserved.
+Whole-record verification and operations review remain unverified. The source instrumentation collection
+and class are retained as drawing-symbol provenance, not a claim that the callout is a measured process
+variable. Local Ignition output uses a metadata-only Callout_Valve type without PV/OPC parameters;
+PI output uses a String metadata attribute with no PI Point reference. The queue calls it a valve callout.
+Point mapping refuses callouts even when an I/O row pins an asset ID; assigning a signal needs separate
+review. No current mapping output is changed, and no gateway import or deployment is performed.
+
+**Verification:** scoped isolation, idempotence/queue round-trip, refusal controls, metadata-only exports
+and tag/asset-ID mapping guards pass focused regression. The first aggregate attempt retained two missing
+import failures (cv2/asyncua); unchanged dependency pins were then restored into a temporary directory.
+The final aggregate receipt records all eight scripts passing without skips. This establishes local model
+and export checks, not runtime/operator acceptance. Local restoration was checked separately. No external contact, spending,
+public push, or retry of the existing HTTP 403 failure occurred.
+
+---
+
+## 28. Regenerate current gateway artifacts and prepare isolated runtime acceptance
+
+**2026-10-10:** regenerated `PIDTwin.zip` and `twin_provider.json` locally from the reviewed
+MS 14010 valve-callout model at `3205ce8ea203d5e6e36fa8174cd58d85d40bf07e`, using only the
+supported `--write-only` path after auditing its return before gateway/account/access operations.
+The export contains all 23 views and 1,082 tag/history/expression bindings, all resolving offline;
+53 TE instances retain 52 recorded channels plus unavailable SC-212. The 910 OPEN100 instances
+include a metadata-only MS 14010 callout, 24 existing synthetic mappings, and 334 placeholder PVs.
+Both FT 1401 records remain unmapped and flagged for clarification in the source.
+
+**Local verifier corrections:** V2 previously reconciled only the 37 unexpanded seed items and
+misclassified 16 added analyzer channels as orphans. It now derives expectations from the channel
+expansion and independently rejects invented callout PVs or OPC assignments. V3 derives unit
+coverage from source rather than held instances, excludes only source-reviewed valve callouts
+from PV completeness, and requires the explicit NOT CONNECTED plus spatial UNKNOWN indicators
+for source-unavailable SC-212. Ordinary unmapped instruments still require their quality-bearing
+bindings. An outdated display-code comment was corrected without changing generated output.
+
+**Checks:** ten new offline regressions include deterministic write-only generation under blocked
+Gateway/network entry points, resource/route/tag checks, field-review lineage and negative semantic/
+quality controls. All nine aggregate scripts pass without skips using the unchanged pinned temporary
+dependencies in an isolated temporary environment. JSON/ZIP shape checks are not an Ignition-native schema
+validation. Synthetic quality objects and generated views are not runtime evidence.
+
+**Handoff and blocker:** [current-source handoff](CURRENT_GATEWAY_HANDOFF.md) describes the browser
+acceptance checklist. Detailed local receipts are not included in this publication.
+Compose still restores the untouched historical `docker/twin-demo.gwbk`; that backup and old
+screenshots/receipts do not validate these artifacts. Java 21/Chromium are available, but no container
+engine or running gateway exists here; desktop is offline and no saved coding environment is
+available. No gateway start/import, license acceptance, credential/account change, external contact,
+spending, public push or retry of the existing HTTP 403 failure occurred. Runtime and operator
+acceptance remain unestablished. Local restoration was checked separately.
+
+
+---
+
+## 29. Give readers a bounded replication path, with or without the author
+
+**2026-10-11:** added `docs/REPLICATE_AT_YOUR_PLANT.md` as the plant-reader entrypoint, linked from
+the README. The path starts with public-data file generation in a disposable checkout, distinguishes
+the manual TE seed from OPEN100 extraction and the two-sheet Synthetic development exercise, then
+lists required site inputs, adapter work, review/mapping precautions, target-system requirements,
+acceptance evidence and stop conditions. Optional assistance is a possible bounded scope, not an
+offer of availability, pricing or production approval.
+
+**Inspection findings carried into the docs:** OPC mapping replaces prior mappings across non-rejected
+instruments; `--sheets` only scopes missing-I/O reporting. Dry-run output is a report, not a full diff.
+PI export retains placeholder point references, independent of OPC mappings. Both replay servers
+bind all interfaces with anonymous lab endpoints. Generic file exports are drafts without a blanket
+operational gate; full-suite current-artifact checks need cached TE replay data. New-site input,
+ontology, signal semantics, type/range verification and local inference are not turnkey adapters.
+Directly misleading onboarding statements were corrected in README, IGNITION_QUICKSTART, REVIEW_LOOP
+and TWIN_OUTPUTS; historical evidence and earlier journal entries remain intact.
+
+**Validation:** checked the 16 relative links in the new guide, all 10 fenced Python command script
+paths and five source/example inputs. Seven argparse invocations were accepted using isolated AST
+extraction of the scripts' parser definitions, without importing or executing their entry points.
+The first validation harness missed the review parser's `datetime` dependency; adding that standard
+library binding fixed the harness, and the rerun passed. `git diff --check` passed. This is command
+and file inspection, not execution of the documented workflow or a fresh test-suite pass. This documentation/parser check itself ran no generator,
+model call, dependency installation, gateway/PI import, replay server, security change or public action.
+Existing generated outputs in the working checkout were not changed. The separately authorized
+isolated reproduction below has a distinct scope.
+
+**Independent file-only replication check:** a separate reviewer executed the guide's seed generation,
+copied OPEN100 model generation, blank-review dry run and synthetic point-mapping dry run against
+a fresh archive of `4566e87` in a temporary directory. Python 3.12.14 ran with `-I -S`, a stripped
+environment and an audit hook denying socket/urllib requests. All four commands returned zero.
+Seed generation wrote seven SVGs and its exports; copied-model generation wrote twelve sheet SVGs
+and its exports. The blank review applied/refused zero decisions. The mapping preview reported
+24 mapped, 12 sheet-0 model records without a proposed mapping, two points absent from the drawing and
+one ambiguity. Working source models and the copied model after dry runs were hash-verified unchanged.
+Detailed local logs are not included. This validates those
+four file-only paths on that Python version, not extraction, full-suite tests, model services,
+native import, runtime behavior or engineering acceptance.
+
+**Evidence boundary:** inspected baseline `4566e87` is the offline-verified local gateway handoff.
+Current native Ignition runtime/browser acceptance and PI import remain not run; operations acceptance
+is also outstanding. Historical Docker backup/receipts do not validate the current artifacts. The
+previous public push was blocked by HTTP 403, and no retry occurred. The guide is local documentation
+until separately published; it does not establish production readiness or new extraction performance.
+
+---
+
+## 30. Harden the replication path before wider use
+
+**2026-10-11:** local follow-on hardening from documentation baseline `c774b63` addresses the
+three concrete replication hazards recorded in §29. Its earlier observations remain historical;
+the contracts below supersede the replace-all mapper, post-write validation and implicit test prerequisites.
+No engineering review decisions, signal identities, source model or committed gateway artifacts changed.
+
+**Mapping:** partial updates now preserve omitted mappings. Destructive replacement requires
+`--replace-all` and is restricted by `--sheets` when supplied; unresolved, ambiguous or blocked rows
+refuse replacement. Unknown/rejected explicit asset IDs do not fall back to tags. Duplicate target
+rows, missing address values and invalid/out-of-scope targets reject the complete transaction.
+A sheet filter does not disambiguate globally duplicated tags. Dry-run writes nothing and includes
+complete before/after mapping snapshots and added/changed/removed entries; `--json` exposes the same
+report for machine inspection. Partial mode preserves prior mappings for unresolved rows and may still apply resolved rows while
+reporting unmatched or ambiguous rows, so exit zero is not full row reconciliation. Address checks
+establish nonempty fields, not valid OPC syntax, connectivity or signal identity. Units, types, scaling and real-world
+signal correctness remain outside the mapper's validation.
+
+**Export gate:** seed and extracted models are structurally checked and every export rendered in
+memory before output directories, files or stale SVG cleanup are touched. Invalid structure or
+unrenderable required fields raises an actionable error; the CLI returns nonzero without changing
+existing exports. Unknown semantics are preserved. This is not an atomic multi-file filesystem
+transaction: a later disk/permission error can still leave a partially written bundle, and structural
+success does not establish native-schema compatibility or operational approval.
+
+**Tests and CI:** `--source-only` explicitly runs nine stdlib/committed-fixture scripts and names its
+four exclusions; it never claims a full-suite pass. Default/`--full` runs all thirteen registered
+scripts and requires dependencies plus checksum-verified cached TE data. Missing prerequisites exit
+2 before any test script; test failures exit 1. `--check-prerequisites` does not run tests. The runner
+never installs, downloads or silently skips. The existing CI job now stages the two public TE fixtures
+through the checksum-verifying fetcher before `--full`; triggers, actions and permissions are unchanged.
+That workflow edit was inspected locally, not executed on hosted CI.
+
+**Independent integration evidence (Python 3.12.14):**
+
+- `python -S scripts/run_tests.py --source-only`: 9/9 scripts passed. Separately, a source-only temporary
+  checkout without ignored TE data passed the same nine scripts; full preflight there correctly
+  reported the missing cache instead of passing. Source-only is deliberately narrower evidence.
+- `python scripts/run_tests.py --full --check-prerequisites`: initially exited 2 for missing `cv2` and
+  `asyncua`; cached `d00_te.dat` and `d06_te.dat` hashes passed. No full-suite scripts ran in that attempt.
+- A new disposable virtual environment was then created under the integration receipt directory.
+  `python -m pip install --index-url https://pypi.org/simple -r requirements.txt` installed the repository's
+  unchanged pins (`numpy==2.4.6`, `pillow==12.2.0`, `opencv-python-headless==5.0.0.93`, `asyncua==2.1.0`,
+  `cryptography==49.0.0`) and resolver dependencies. Exact installed versions and the initial blocker
+  were retained. This was explicit test-only setup, not a test runner side effect or global installation.
+- Using that environment in a temporary copy of the final working source and existing verified TE
+  cache, `python scripts/run_tests.py --full --check-prerequisites` exited 0, followed by
+  `python scripts/run_tests.py --full`: **13/13 scripts passed, zero failures or skips**. All six changed
+  implementation/regression scripts were byte-compared to the shared checkout afterward. The full
+  run occurred on the copy so any normal-band regeneration did not touch shared outputs.
+- A separate comparison generated seed and reviewed OPEN100 exports with both baseline `c774b63`
+  and the candidate in temporary destinations: **all 25 files were byte-identical**. Existing review
+  controls, new invalid-model no-write cases and current-artifact controls passed. FT 1401 remains two
+  unverified, unmapped records with clarification notes; MS 14010 remains an unverified metadata-only
+  valve callout, without PV/OPC parameters or PI Point references.
+- `python -S scripts/map_points.py out/twin/r2-tiles-trace/codex/plant_model.json
+  data/io_lists/open100_sheet0_demo.csv --sheets 0 --dry-run --json` produced a valid partial plan:
+  24 mapped rows, two unmatched rows, one FT 1401 ambiguity and **zero mapping changes**. Neither FT
+  record nor the valve callout gained a mapping. SHA-256 checks confirm the reviewed source model,
+  current gateway ZIP/provider and existing untracked process-mimic patch were unchanged.
+- `git diff --check` and checks of all 100 relative links in the four affected user-facing guides passed.
+  Replication, review-loop, twin-output and README instructions now describe
+  the new contracts, explicit setup and remaining gates. Test logs, package versions, baseline export
+  hashes and protected-file hashes are retained in the separate integration receipt for the handoff.
+
+**Limits:** no model calls, extraction rerun, gateway start/import, PI import, live process connection,
+security change, public push or production action occurred. The only networked setup in this pass was
+installation from official PyPI into the disposable test environment. Native runtime/browser, PI and
+operations acceptance remain not run. The prior public HTTP 403 blocker was not retried. These results
+establish local offline hardening and repeatability, not publication, new extraction performance or
+plant readiness.
+
+---
+
+## 31. Add a bounded local drawing-intake path
+
+**2026-10-11:** local follow-on from `55f5734` adds `scripts/import_site_drawing.py` for
+one locally supplied PNG plus an **existing extraction JSON**, described by a
+`site-drawing-intake-1` manifest. It does not read a PDF, obtain extraction, call a model,
+trace lines, apply the trained confidence model, score a drawing or connect process data.
+The detailed manifest and command recipe is in [Replicate at your plant](REPLICATE_AT_YOUR_PLANT.md#bounded-local-intake-one-png--an-existing-extraction).
+
+**Contract:** input filenames need not match or be numeric. The manifest records drawing ID,
+revision, original page and supplied producer claims; optional register fields remain supplied
+claims. The importer accepts only the existing six symbol classes and supported normalized boxes,
+rejects malformed/duplicate-key/non-finite JSON, duplicate or unsafe IDs, bad geometry/confidence,
+unknown endpoints, duplicate undirected links and self-links. It refuses unsupported text that
+could become a spreadsheet formula or invalid XML. Source fields it does not interpret remain
+in the preserved original JSON; they are not silently promoted into engineering semantics.
+PNG checks cover bounded dimensions/container structure/CRCs, **not compressed pixel decoding**,
+readability or revision authority. This is a narrow input boundary, not a hostile-file security certification.
+
+**Publication and evidence:** `--check-only` writes nothing and tests inputs only, not conversion or
+rendering. A normal run requires a new output directory with an existing parent, stages beside it,
+validates/renders before publishing, and refuses existing destinations. Concurrent writers to the
+same destination are unsupported. The bundle retains original manifest/PNG/extraction bytes,
+SHA-256 hashes and implementation hashes, a normalized run record, and bundle-relative model/source
+references. It contains an unverified model, review CSV, SVG and draft Ignition/PI exports. Original
+manifests may expose private paths; keep sources private and review the entire bundle before sharing.
+All items remain unverified and unmapped. Supplied confidence and the inherited 0.75 highlighting
+rule are explicitly uncalibrated; blocked operational-readiness metadata is descriptive, not an
+interlock in other tools. Site ontology, tag/role/parent heuristics, signal identity, native import
+and operational acceptance still require separate qualified review.
+
+**Determinism fix discovered during review:** importing the converter no longer imports OpenCV/numpy
+unless the along-line rule is requested. Three linked/owner distance ties now use stable symbol keys.
+Independent review also found a forked instrument chain whose parent changed with Python's hash seed;
+linked-parent adjacency traversal now has stable ordering. This preserves its first-found-branch
+heuristic and existing method labels. Repeatable selection does not resolve engineering ambiguity
+or establish a better parent assignment.
+
+**Final independent evidence (Python 3.12.14):**
+
+- `python -S scripts/test_site_drawing_intake.py`: **18/18 tests passed**, including original-source
+  hashes, malformed input/no-publish controls, escaping/rejection, image structure, check-only,
+  repeated-bundle byte equality, and distance-tie/forked-chain fixtures across multiple hash seeds.
+- In an isolated copy using the existing disposable test environment and cached TE data:
+  `python -S scripts/run_tests.py --source-only`: **10/10 scripts passed**;
+  full prerequisite check passed, then `python scripts/run_tests.py --full`: **14/14 passed**,
+  zero skips/failures. Source-only remains deliberately narrower. Tested implementation files were
+  byte-compared with the shared checkout after the run.
+- Additional independent checks rejected nested duplicate keys, malformed/multiple JSON documents,
+  duplicate manifest keys and symlink/dangling-symlink destinations without publishing output.
+  Accepted quotes/angle brackets/Unicode rendered parseable SVG, with no formula-prefixed CSV cells.
+  A simulated final rename failure removed staging and published no destination.
+- Converter comparison against `55f5734`: all nine full models were identical under hash seed 1
+  for retained OPEN100 provenance reconstruction and both available Synthetic development sources
+  (oracle/native), each under linked, nearest and along-line rules. Six linked/nearest comparisons
+  were also identical under seed 2. Historical raw OPEN100 extraction runs were absent, so its
+  reconstruction used retained symbols/links from the committed model rather than claiming a raw-run
+  replay. No baseline parent changes were observed in these cases; the synthetic tie fixtures do
+  intentionally replace previously hash-dependent choices with stable, still-unverified choices.
+- SHA-256 checks confirm the reviewed OPEN100 model, current gateway ZIP/provider and pre-existing
+  untracked process-mimic patch are unchanged. `git diff --check` and relative guide links passed.
+  Receipts are retained separately from the repository for the private replication handoff.
+
+**Limits:** no dependency installation, download, model/extraction run, gateway start/import,
+security change, public push or production action occurred. Native Ignition runtime/browser,
+PI import and operations acceptance remain **not run**. This is local intake/review plumbing and
+regression evidence, not plant-readiness evidence or a new extraction/generalization result.
+
+---
+
+## 32. Connect the remaining local replication handoffs
+
+**2026-10-11:** local follow-on from `1e0618b3` adds four bounded pieces, developed in
+parallel and reviewed together. These close local workflow gaps; they do not establish
+plant readiness or replace native target-system and human acceptance.
+
+- **Single-PNG extraction handoff:** `site_extraction_workflow.py` prepares an arbitrary
+  local PNG and drawing/revision/page identity, freezes the existing
+  `synthetic-adaptation-whole-sheet-v1` recipe, and collects a matching preserved record
+  into the local intake. The pinned original prompt, `gpt-6.1-sol`, whole-sheet input
+  and linked-parent conversion are deliberately distinct from the M3 tiled/traced
+  benchmark method. Prepare/check/collect make no model or network call. The separate
+  `execute` path reuses the existing strict Codex adapter, requires independently
+  authorized transmission, preserves failed/incomplete attempts, and never retries
+  automatically. Native replay retains its transport/reasoning deviation; fixtures
+  remain synthetic. No new extraction was executed. The job and importer now record
+  the PI helper hash alongside their generator/converter provenance.
+- **PI-only mapping:** `map_pi_points.py` accepts exact instrument IDs and supplied
+  archive/point/type/UOM/reviewer evidence. It never derives PI identities from OPC
+  mappings. Dry-run exposes complete before/after snapshots and changes; partial
+  updates preserve other PI mappings, while explicit replacement removes omitted
+  mappings. Invalid or blocked rows reject the plan without changing the model.
+  Generation preserves legacy CSVs, adds a mapping reconciliation file, and adds an
+  explicitly `UNVALIDATED` candidate CSV correcting only the known type-column header.
+  The remaining native PI Builder column/row contract, type/UOM compatibility,
+  actual import and read-back remain unverified. Reviewer fields are attestations,
+  not authenticated approval.
+- **Ignition acceptance preflight:** an offline read-only tool verifies the exact 51
+  manifest-listed build inputs, three artifacts and bound browser contract. Candidate
+  identity includes the manifest hash, so changed source provenance rejects old
+  observations even when export bytes are unchanged. Required input paths cannot be
+  omitted or substituted. Historical check/handoff drift is reported separately.
+  Future sample validation distinguishes 52 recorded TE and 24 mapped OPEN100 Good
+  paths from SC-212 Bad and 334 non-Good placeholders; unknown values and absent source
+  timestamps remain unknown. The callout has no PV path. Local sample validation
+  cannot authenticate capture provenance or promote any native stage to accepted.
+- **Future review-effort protocol:** `review_effort.py` supplies a blank registration,
+  strict local record validation and descriptive assignment/pair summaries. It keeps
+  preparation/review/total labor, independent residual-critical-error audit evidence,
+  failures, abstentions and missing observations distinct. It rejects altered protocol
+  hashes and mixed synthetic/human labels. The protocol addresses eligible information,
+  reviewer independence, counterbalancing and same-task learning contamination. It is
+  an administration kit: no human trial, time-saving, quality-equivalence, ROI or
+  operator-usability result is claimed.
+
+The [replication guide](REPLICATE_AT_YOUR_PLANT.md), [extraction handoff](SITE_EXTRACTION_WORKFLOW.md),
+[PI mapping guide](PI_MAPPING.md) and [review-effort protocol](REVIEW_EFFORT_PROTOCOL.md)
+describe the commands, boundaries and remaining gates.
+
+**Independent integration evidence (Python 3.12.14):**
+
+- In a fresh source-only copy containing tracked and proposed files but no ignored TE
+  or Synthetic raw cache, `python -S scripts/run_tests.py --source-only` passed
+  **14/14 scripts**. A separate copy using the existing disposable environment and
+  SHA-256-verified TE cache passed prerequisite checks and the full cached-data suite:
+  **18/18 scripts**, zero failures or skips. No dependency installation or download
+  occurred. All 68 Python source/test files were byte-compared to the final tested copy.
+- Focused standard-library controls passed: **15 workflow**, **14 PI mapping**,
+  **25 acceptance preflight**, **14 review-effort**, and **18 intake** tests. These
+  include explicit fake-process execution failures/retries, malformed input/no-write,
+  source/prompt drift, duplicate JSON keys, stale/missing candidate evidence,
+  unavailable-quality handling and synthetic-versus-human labeling. Fake subprocess
+  output in test logs is not evidence of a real model call.
+- All **25 existing seed/reviewed OPEN100 export files** were byte-identical to the
+  `1e0618b3` generator outputs. Only the two new extracted-model PI staging/reconciliation
+  files were added in temporary destinations. The actual reviewed MS 14010 callout
+  rejects PI assignment and retains a metadata-only `Callout_Valve` UDT with no PV,
+  OPC parameters or PI reference. Both FT 1401 records remain separate, unverified,
+  unmapped clarification items.
+- Existing public Synthetic development sheet 0 and its retained native response
+  replayed through prepare/collect without a model call. The resulting one-sheet
+  bundle retained source/implementation hashes and native recipe deviation, with
+  6 equipment, 1 instrument, 9 line items, 4 off-page connectors and 19 extracted
+  links; all remain unverified/unmapped. This checks local plumbing only, not new
+  extraction accuracy or generalization.
+- Exact current artifact preflight passed **51 required inputs and 3 artifacts**.
+  The older runner hash in the historical handoff correctly reports **DRIFT**;
+  historical receipts were not rewritten. Upstream generation is outside that
+  manifest's direct input scope. The unchanged artifacts need no regeneration for
+  this code-only handoff. `--require-native` exits **3**, keeping every native stage
+  **NOT RUN**. With TE cache absent, preflight exits **2** rather than downloading
+  data or treating missing evidence as acceptance.
+- Protected reviewed-model/current provider/project/pre-existing patch hashes are
+  unchanged. Relative guide links and `git diff --check` passed. Final logs and hash
+  receipts are retained with the separate private replication handoff.
+
+**Limits:** no new model/extraction execution, dependency installation, download,
+gateway start/import, PI import/read-back, process connection, security change,
+participant contact, human trial, public push or production action occurred.
+Native Ignition/browser acceptance, licensed PI acceptance and actual human-effort
+or operator-usability outcomes remain **NOT RUN**. The previous public HTTP 403
+blocker was not retried. Local tests and authenticated-looking supplied strings
+cannot waive engineering, data-sharing, change-control or operational approvals.
+
+## 33. Preserve engineering text at the export and review boundaries
+
+The release-candidate checks exposed three bounded defects in supplied-model
+exports and the operations review loop. This pass fixes those defects without
+changing the engineering interpretation or using a live service:
+
+- **SVG serialization:** use XML attribute quoting for model-derived string
+  attributes, including the complete provenance-based group identifier. Seed tag
+  and asset labels are escaped as text too. Quotes, ampersands and angle brackets
+  remain the supplied engineering text after XML parsing; they cannot become new
+  attributes or elements through string interpolation.
+- **Review CSV text:** spreadsheet-active strings and control-containing cells are
+  prefixed with an apostrophe at serialization. Leading apostrophes are encoded
+  too, preserving distinct source spellings. This covers both review sheets and
+  all their cells, including notes, identifiers and descriptive fields. The model
+  is not rewritten. Unchanged encoded notes are recognized against the model on
+  reapplication, preserving review history and literal text. Identifier spellings
+  must identify exactly one record; ambiguous raw/encoded spellings are refused.
+  Edited notes are taken as written, as explained in [the review guide](REVIEW_LOOP.md).
+- **Mapped callouts:** a scoped valve-association correction refuses any existing
+  OPC `data_point` or PI `pi_point` before model or history mutation. It neither
+  silently discards the mapping nor creates a metadata-only callout that invalidates
+  the retained PI mapping. Separate authorized mapping review is still required.
+
+**Local regression evidence (Python 3.12.14):**
+
+- Nine new standard-library boundary tests passed. XML parser assertions check
+  preserved values and attribute sets; no supplied script was executed in a browser.
+  CSV tests cover each column in both review formats, notes/history round trips,
+  literal apostrophes and ambiguous identifiers. Mapping tests preserve the full
+  model on refusal and verify that an existing PI mapping remains exportable.
+- Existing review-loop controls passed **48/48**, generation validation **8/8**,
+  and PI mapping **14/14**. The new boundary script is registered in both aggregate
+  modes. An isolated tracked-source copy passed **15/15 source-only scripts**.
+- The initial full-suite prerequisite check reported missing `cv2` and `asyncua`
+  and ran no test scripts. A separately authorized temporary virtual environment
+  then installed the exact repository requirements and resolver dependencies from
+  official PyPI. With existing TE cache files verified against their recorded
+  SHA-256 values, the isolated full cached-data suite passed **19/19 scripts**.
+  No global packages or cached source data were changed or downloaded.
+- Regenerating the existing seed and reviewed OPEN100 models into temporary
+  directories produced **27/27 byte-identical export files** compared with the
+  `b13d8e5` generator. The intentional CSV encoding changes affect supplied text
+  requiring protection; these baseline files required none. Committed models,
+  generated outputs and the pre-existing process-mimic patch were untouched.
+
+**Limits:** these are offline serialization and regression checks, not a broader
+security audit or native acceptance. No model API call, gateway operation, PI
+import/read-back, process connection, credential change, publication or production
+operation occurred. Native Ignition/browser, PI and human-effort acceptance remain
+**NOT RUN**.
+
+## 34. Prospective frozen Synthetic 2/3 transfer check
+
+On 2026-10-11, a separately named trial consumed the two previously unopened
+PID2Graph Synthetic sheets 2 and 3. Original freeze `75d6306` preceded image
+acquisition. Effective freeze `00540b1` amended only the reasoning declaration
+before inference: omit the override and record unverified/inherited reasoning.
+Original protocol, config and acquisition evidence were preserved. The explicitly
+selected gpt-6.1-sol, exact original prompt, whole-sheet method and scorer stayed
+unchanged. There was no new model comparison, tuning, answer repair or retry.
+
+Both first native outputs were sealed before parent-authorized unblinding at
+17:48:50 UTC. The unchanged scorer ran once at 17:50:36 UTC. Result: **73 corrections
+/ 158 key items = 46.20 per 100**, comprising 2 missed symbols, 17 source-class
+relabels, 3 false links, 51 missed links and no false symbols. The model located
+47/49 symbols; rough source-class F1 was 0.625. Connection precision/recall/F1 were
+0.951/0.532/0.682 (58 correct / 61 predicted / 109 key links). Both attempts
+succeeded; no malformed symbols were counted.
+
+These are published-label disagreements, not independently verified engineering
+errors. Fourteen relabels involve the source's heterogeneous `general` class.
+The key contains no instrument or off-page positive examples. Original edge
+styles remain in local annotation context, but the frozen adjacency score drops
+solid/non-solid distinctions. Neither semantics nor operational interpretation
+was corrected from these held-out results. Both sheets are now consumed;
+prospective validation of a changed method needs new data.
+
+Observed durations of 103/111 seconds are approximate parent-observed worker
+intervals, not inference-only latency. Selection/timestamps are parent-recorded
+evidence, not independently authenticated provider telemetry. Subscribed native
+execution used no separately invoked paid API; actual token/compute cost was
+unmetered and remains unknown, not free or $0. Backend revision, actual reasoning
+level and worker tool traces
+were not independently verified. Isolation was procedural. Public-model training
+contamination cannot be excluded. These two synthetic sheets do not establish
+real-plant accuracy, actual human-effort savings or operational readiness.
+
+Local regression checks passed **15/15 source-only scripts**, **19/19 full
+cached-data scripts**, and **18/18 separately invoked synthetic harness tests**.
+No new dependency installation or TE download was needed. Development artifacts,
+protected method bytes and the unrelated process-mimic patch were untouched.
+No gateway/PI operation, operational export, public push, paid API request or
+production action occurred. The previous publication blocker was not retried.
+
+See [results and public-evidence limits](PID2GRAPH_RESERVED23_RESULTS.md) and
+[summary metrics](../out/pid2graph_reserved23_summary.json). The sealed local evidence and trial-specific
+protocol/configuration/harness are not included; this public checkout cannot reproduce the exact trial.

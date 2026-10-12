@@ -1,0 +1,46 @@
+{
+  "dataset": "PID2Graph Synthetic",
+  "source": "https://zenodo.org/records/14803338",
+  "archive_url": "https://zenodo.org/records/14803338/files/PID2Graph.zip?download=1",
+  "archive_md5_publisher": "90f782220de97e7e249d2595c49ddc1c",
+  "archive_bytes": 9303633645,
+  "archive_prefix": "PID2Graph/Complete/PID2Graph Synthetic/",
+  "license": "CC-BY-SA-4.0",
+  "provenance": "Synthetic third-party P&IDs; not real plant drawings. Symbols copyright 2023 Steven Baltakatei Sandoval; dataset by Jan Marius St\u00fcrmer, Marius Graumann and Tobias Koch.",
+  "development": [
+    "0",
+    "1"
+  ],
+  "reserved_unopened": [
+    "2",
+    "3"
+  ],
+  "max_sample_bytes": 30000000,
+  "recipe": {
+    "tool": "codex",
+    "model": "gpt-6.1-sol",
+    "prompt": "extraction/prompt.md",
+    "tiles": null,
+    "selection_evidence": [
+      "out/scorecard_first-try.md",
+      "out/scorecard_repeat-v1.md"
+    ]
+  },
+  "annotation_contract": {
+    "symbol_classes": true,
+    "boxes": true,
+    "adjacency": true,
+    "tag_text": false,
+    "process_flow_direction": false,
+    "engineering_units": false,
+    "live_point_mapping": false
+  },
+  "source_image_extension": ".jpg",
+  "complete_pairs_inventory": 250,
+  "expected_source_sha256": {
+    "0.jpg": "1f26b65c5a7f33f78bf147d128bf9490871709aa623ef3a772a152c0aadeaf93",
+    "0.graphml": "7a7bef32bbcd50589589a6f0042084d1110bfd0e1186fb9657220ff728184a52",
+    "1.jpg": "81167d27f579b3e30796c28bf387cdc43e5d0c0ca8692cd1bbe61aa2d433b0a3",
+    "1.graphml": "5bc64af8c5924270993cb836c57fed912c5efe39413b54f2415698f0ee4d9974"
+  }
+}

@@ -83,18 +83,15 @@ def eng_range(item, normal_mean):
 
 
 def te_columns(model):
-    cols = {}
-    for it in model["instruments"]:
-        cols[it["tag"]] = int(str(it["xmeas"]).split("-")[0]) - 1
-    for it in model["final_elements"]:
-        if it["xmv"] <= 11:
-            cols[it["tag"]] = 41 + it["xmv"] - 1
-    return cols
+    from te_channels import channel_columns
+    return channel_columns(model)
 
 
 def te_tags(model):
     rows = [list(map(float, l.split())) for l in (DATA / "d00_te.dat").read_text().splitlines() if l.strip()]
     cols = te_columns(model)
+    from te_channels import expanded_items
+    items = expanded_items(model)
     import normal_bands  # scripts/; deterministic, a few hundred ms
     bands = normal_bands.main(quiet=True)
 
@@ -144,7 +141,7 @@ def te_tags(model):
              for u in model["units"]}
     ranges = {}
     rv = {"rejected": [], "hidden": [], "priority_set": [], "needs_moc": [], "status": {}}
-    for it in model["instruments"] + model["final_elements"]:
+    for it in items:
         ops = it.get("ops_review") or {}
         status = ops.get("status", "unverified")
         rv["status"][it["tag"]] = status
@@ -179,8 +176,9 @@ def te_tags(model):
         note = ""
         if col is None:
             note = " | NO DATA SOURCE: not in the replay data set, so it must read Bad, never a value"
-        elif "-" in str(it.get("xmeas", "")):
-            note = " | analyzer: the replay exposes the first component only"
+        elif it.get("analyzer_parent"):
+            note = " | " + it["channel_provenance"] + " | component " + it["component"]
+            note += " | analyzer sampling/dead time: " + str(it.get("sampling", {}))
         if status != "unverified":
             note += f" | operations review: {status} ({ops.get('by')}, {ops.get('on')})"
         members = [member]
@@ -201,10 +199,11 @@ def te_tags(model):
             "parameters": inst_params,
             "tags": members})
         ranges[it["tag"]] = {"low": lo, "high": hi, "source": why, "has_data": col is not None,
-                             "normal": [band["lo"], band["hi"]] if band else None, "unit": it["unit"]}
+                             "normal": [band["lo"], band["hi"]] if band else None, "unit": it["unit"],
+                             "source_item": it}
     # Counts for the screens' summary bar. Only tags with a data source: a tag with none reads Bad by design, and
     # one Bad term would make the whole count Bad.
-    fed = [(it["unit"], it["tag"]) for it in model["instruments"] + model["final_elements"]
+    fed = [(it["unit"], it["tag"]) for it in items
            if it["tag"] in ranges and ranges[it["tag"]]["has_data"]]
 
     def count(member, items):

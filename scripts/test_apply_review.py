@@ -4,6 +4,7 @@ The loop is only trustworthy if bad sheets are refused, alarm requests that need
 re-applying changes nothing, the regenerated sheet round-trips, and the decisions reach the platform outputs.
 """
 import csv
+import copy
 import json
 import shutil
 import subprocess
@@ -14,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import generate  # noqa: E402
+import apply_review  # noqa: E402
 
 results = []
 
@@ -102,6 +104,141 @@ def main():
         tw = tw_dir / "plant_model.json"
         shutil.copy(ROOT / "out" / "twin" / "r2-tiles-trace" / "codex" / "plant_model.json", tw)
         tm = json.loads(tw.read_text(encoding="utf-8"))
+        # A clarification is a scoped notes-only review, never whole-record confirmation.
+        original = copy.deepcopy(tm)
+        pair = {"S0-IN002", "S0-IN003"}
+        for x in tm["instruments"]:
+            if x["id"] in pair:
+                x.pop("ops_review", None)
+        unreviewed = copy.deepcopy(tm)
+        note_rows = [{"item_id": i, "OPS_notes": "NEEDS CLARIFICATION: retain both; signal unresolved"}
+                     for i in sorted(pair)]
+        log = apply_review.apply(tm, note_rows, "Test reviewer", "2026-10-10", apply_review.index(tm))
+        check("clarification applies no corrections or MOC", len(log["applied"]) == 2
+              and not log["refused"] and not log["needs_moc"]
+              and all(not x["changes"] for x in log["applied"]))
+        stripped = copy.deepcopy(tm)
+        for x in stripped["instruments"]:
+            if x["id"] in pair:
+                check("clarification retains unverified unmapped symbol " + x["id"],
+                      x["verification"]["status"] == x["ops_review"]["status"] == "unverified"
+                      and "data_point" not in x)
+                x.pop("ops_review")
+        check("clarification changes only review metadata", stripped == unreviewed)
+        regen = [dict(zip(generate.TWIN_REVIEW_COLS, r)) for r in generate.twin_review_rows(tm)]
+        flagged = [r for r in regen if r["item_id"] in pair]
+        check("clarification visible in queue without new status", len(flagged) == 2
+              and all(r["why_check_this"].startswith("NEEDS CLARIFICATION:")
+                      and r["model_status"] == "unverified" and not r["OPS_confirm_or_correct"] for r in flagged))
+        log = apply_review.apply(tm, flagged, "Test reviewer", "2026-10-10", apply_review.index(tm))
+        check("clarification round trip idempotent", log["unchanged"] == 2 and not log["applied"])
+        # Identifier-only review never confirms inferred semantics or assigns a signal.
+        scoped = copy.deepcopy(original)
+        target = next(x for x in scoped["instruments"] if x["id"] == "S0-IN019")
+        target.update(tag="MS 4010", description="MS 4010", loop="4010")
+        target.pop("ops_review", None)
+        apply_review.sync_hierarchy_tag(scoped.get("hierarchy"), "S0-IN019", "MS 4010")
+        before_identifier = copy.deepcopy(scoped)
+        row = {"item_id": "S0-IN019", "OPS_confirm_or_correct": "correct",
+               "OPS_correct_value": "tag=MS 14010", "OPS_scope": "identifier_text", "OPS_notes": "Text only"}
+        log = apply_review.apply(scoped, [row], "Test reviewer", "2026-10-10", apply_review.index(scoped))
+        check("identifier correction synchronizes tag, mirrored description and loop", not log["refused"]
+              and (target["tag"], target["description"], target["loop"]) == ("MS 14010", "MS 14010", "14010"))
+        check("identifier review remains record-unverified with field-scoped history",
+              target["ops_review"]["status"] == target["verification"]["status"] == "unverified"
+              and target["ops_review"]["history"][-1]["scope"] == "identifier_text"
+              and set(target["ops_review"]["field_decisions"]) == {"tag", "description", "loop"})
+        stripped = copy.deepcopy(scoped)
+        x = next(x for x in stripped["instruments"] if x["id"] == "S0-IN019")
+        x.update(tag="MS 4010", description="MS 4010", loop="4010")
+        x.pop("ops_review")
+        apply_review.sync_hierarchy_tag(stripped.get("hierarchy"), "S0-IN019", "MS 4010")
+        check("identifier review preserves every other field and record", stripped == before_identifier)
+        log = apply_review.apply(scoped, [row], "Test reviewer", "2026-10-10", apply_review.index(scoped))
+        check("identifier correction repeat is idempotent", log["unchanged"] == 1 and not log["applied"])
+        regen = [dict(zip(generate.TWIN_REVIEW_COLS, r)) for r in generate.twin_review_rows(scoped)]
+        r = next(r for r in regen if r["item_id"] == "S0-IN019")
+        check("identifier queue does not turn narrow correction into confirmation", not r["OPS_confirm_or_correct"]
+              and r["model_status"] == "unverified")
+        log = apply_review.apply(scoped, [r], "Test reviewer", "2026-10-10", apply_review.index(scoped))
+        check("identifier regenerated queue round trip preserves field decisions", log["unchanged"] == 1
+              and not log["applied"] and set(target["ops_review"]["field_decisions"]) == {"tag", "description", "loop"})
+        for correction in ("tag=TT 14010", "tag=MS 14010;variable=temperature", "tag=MS 14010;description=Switch", "tag=unknown"):
+            test_model = copy.deepcopy(before_identifier)
+            log = apply_review.apply(test_model, [{**row, "OPS_correct_value": correction}], "Test reviewer",
+                                     "2026-10-10", apply_review.index(test_model))
+            check("identifier scope refuses semantic expansion: " + correction,
+                  len(log["refused"]) == 1 and test_model == before_identifier)
+        mismatch = copy.deepcopy(before_identifier)
+        next(x for x in mismatch["instruments"] if x["id"] == "S0-IN019")["loop"] = "999"
+        log = apply_review.apply(mismatch, [row], "Test reviewer", "2026-10-10", apply_review.index(mismatch))
+        check("identifier scope refuses mismatched derived loop", len(log["refused"]) == 1 and not log["applied"])
+        # Valve interpretation is a reviewed association, not a second physical valve.
+        valve_model = copy.deepcopy(original)
+        vt = next(x for x in valve_model["instruments"] if x["id"] == "S0-IN019")
+        vt.update(variable="moisture", variable_method="ISA-5.1 first letter", instrument_kind="measurement / control")
+        vt.pop("reviewed_valve_association", None)
+        valve_before = copy.deepcopy(valve_model)
+        vr = {"item_id": "S0-IN019", "OPS_confirm_or_correct": "correct", "OPS_scope": "valve_association",
+              "OPS_correct_value": "parent=S0-VL013;variable=unknown", "OPS_notes": "Valve; legend pending"}
+        log = apply_review.apply(valve_model, [vr], "Test reviewer", "2026-10-10", apply_review.index(valve_model))
+        check("valve association scoped without whole-record approval", not log["refused"]
+              and vt["variable"] == "unknown" and vt["instrument_kind"] == "valve callout"
+              and vt["reviewed_valve_association"] == "S0-VL013"
+              and vt["verification"]["status"] == vt["ops_review"]["status"] == "unverified")
+        restored = copy.deepcopy(valve_model)
+        rt = next(x for x in restored["instruments"] if x["id"] == "S0-IN019")
+        bt = next(x for x in valve_before["instruments"] if x["id"] == "S0-IN019")
+        for k in ("variable", "variable_method", "instrument_kind", "ops_review"):
+            rt[k] = copy.deepcopy(bt[k])
+        rt.pop("reviewed_valve_association")
+        check("valve review preserves all other fields, records and source geometry", restored == valve_before)
+        log = apply_review.apply(valve_model, [vr], "Test reviewer", "2026-10-10", apply_review.index(valve_model))
+        check("valve review idempotent", log["unchanged"] == 1 and not log["applied"])
+        regen = [dict(zip(generate.TWIN_REVIEW_COLS, r)) for r in generate.twin_review_rows(valve_model)]
+        rr = next(r for r in regen if r["item_id"] == "S0-IN019")
+        log = apply_review.apply(valve_model, [rr], "Test reviewer", "2026-10-10", apply_review.index(valve_model))
+        check("valve queue is metadata-only and round-trips unverified", not rr["OPS_confirm_or_correct"]
+              and "valve callout" in str(rr) and log["unchanged"] == 1)
+        tags = generate.twin_ignition(valve_model)
+        flat = []
+        def walk(n):
+            flat.append(n)
+            for c in n.get("tags", []): walk(c)
+        walk(tags)
+        vi = next(n for n in flat if n.get("parameters", {}).get("AssetId", {}).get("value") == "S0-IN019")
+        typ = next(n for n in flat if n.get("tagType") == "UdtType" and n["name"] == vi["typeId"])
+        check("valve Ignition export has no PV or point parameters", vi["typeId"] == "Callout_Valve"
+              and not any(t["name"] == "PV" for t in typ["tags"])
+              and not {"PointName", "BasePath", "OPCServer"}.intersection(vi["parameters"]))
+        pi = next(r for r in generate.twin_pi_rows(valve_model) if "S0-IN019 |" in r[4])
+        check("valve PI export has no PI point reference", pi[6] == "String" and not pi[8] and not pi[9])
+        for correction in ("parent=S0-VL012;variable=unknown", "parent=S0-IN002;variable=unknown",
+                           "parent=S0-VL013;variable=temperature", "parent=S0-VL013;variable=unknown;class=valve"):
+            bad = copy.deepcopy(valve_before)
+            log = apply_review.apply(bad, [{**vr, "OPS_correct_value": correction}], "Test", "2026-10-10", apply_review.index(bad))
+            check("valve scope refuses wider interpretation: " + correction, bool(log["refused"]) and bad == valve_before)
+        mapped = copy.deepcopy(valve_before)
+        next(x for x in mapped["instruments"] if x["id"] == "S0-IN019")["data_point"] = {"point": "existing"}
+        log = apply_review.apply(mapped, [vr], "Test", "2026-10-10", apply_review.index(mapped))
+        check("valve scope refuses mapped record", bool(log["refused"]) and not log["applied"])
+        # Matching by either tag or explicit asset ID cannot invent a callout signal.
+        import map_points
+        from unittest.mock import patch
+        import contextlib
+        import io
+        mapping_model = tmp / "valve-model.json"
+        mapping_model.write_text(json.dumps(valve_model))
+        io_file = tmp / "valve-io.csv"
+        for pin in ("", "S0-IN019"):
+            io_file.write_text("tag,server,base_path,point,asset_id\nMS 14010,test,test,test," + pin + "\n")
+            output = io.StringIO()
+            with patch.object(map_points, "ROOT", tmp), patch.object(sys, "argv", ["map_points", str(mapping_model), str(io_file), "--dry-run"]), contextlib.redirect_stdout(output):
+                map_points.main()
+            check("callout mapping blocked " + ("by ID" if pin else "by tag"), "Mapped: 0" in output.getvalue()
+                  and "signal requires separate review" in output.getvalue()
+                  and json.loads(mapping_model.read_text()) == valve_model)
+        tm = original
         inst = tm["instruments"][0]["id"]
         unit = next(u for u in tm["units"] if any(x["unit"] == u["id"] for x in tm["instruments"]))
         child = next(x for x in tm["instruments"] if x["unit"] == unit["id"] and x["id"] != inst)

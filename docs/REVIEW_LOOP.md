@@ -20,6 +20,16 @@ I/O list (spreadsheet)     ──► map_points.py   ──►      │         
 - Tennessee Eastman: `out/ops_review_sheet.csv`;
 - an extracted twin: `review_queue.csv`.
 
+CSV exports prefix formula-like text (`=`, `+`, `-`, `@`, including after leading
+whitespace), control-containing text and leading apostrophes with one apostrophe.
+This is intentional spreadsheet text encoding, not a change to the engineering
+model. Ordinary cells remain unchanged. The review importer recognizes unchanged
+encoded notes against the existing model, so regenerating and reapplying a sheet
+preserves the original notes and history. New or edited notes are taken as written;
+when editing a protected cell, remove the serialization prefix if it is visible
+and is not intended as literal text. Raw or encoded item identifiers must resolve
+to exactly one record; ambiguous spellings are refused rather than guessed.
+
 The reviewer fills in the `OPS_` columns:
 
 | Column | What to write |
@@ -35,7 +45,7 @@ The reviewer fills in the `OPS_` columns:
 python scripts/apply_review.py data/te_process_model.json reviewed.csv --reviewer "Name, role" --dry-run
 python scripts/apply_review.py data/te_process_model.json reviewed.csv --reviewer "Name, role"
 python scripts/generate.py                                  # or: generate.py <twin>/plant_model.json
-python scripts/ignition/build_gateway.py --fresh            # then verify_gateway.py
+# Gateway import is a separate, approved isolated-lab step; see CURRENT_GATEWAY_HANDOFF.md.
 ```
 
 **What happens:**
@@ -53,6 +63,18 @@ python scripts/ignition/build_gateway.py --fresh            # then verify_gatewa
   - each Ignition instance's `ReviewStatus` tag carries the decision, and the verifier checks it matches (V2);
   - "don't show" items get no screen label.
 
+An existing OPC `data_point` or reviewed PI `pi_point` blocks a scoped valve-callout
+conversion before any fields or review history change. Changing or removing that
+mapping needs a separate authorized mapping review; the correction never erases it.
+
+**Identifier text only.** An optional `OPS_scope=identifier_text` column on a twin correction row limits
+approval to the written identifier. It requires `tag=...`, unchanged function letters and an existing loop
+that matches the old tag. The matching derived loop, exact tag-mirroring description and hierarchy display
+cache update together. A non-mirrored description, semantic-field edit, invalid tag, screen/alarm decision or
+mismatched loop is refused. The whole-record review status stays unchanged; corrected fields and scope are
+recorded separately in `ops_review.field_decisions` and history. Extraction provenance, inferred function,
+classification, parent, connections and I/O are untouched. Regeneration never turns this into `confirm`.
+
 **Alarms stay a change-review decision.** A reviewer may set the priority of an alarm that already has a published
 setpoint, and that is applied. Asking to remove a published alarm, or to add one where no setpoint exists, changes
 which alarms the plant has. Those requests are recorded as needing a change review (MOC) and are not applied.
@@ -64,17 +86,21 @@ which alarms the plant has. Those requests are recorded as needing a change revi
 - `base_path`: the OPC UA namespace and prefix (`nsu=<uri>;s=<prefix>`);
 - `point`: the node under it.
 
-A real site exports this from its control-system or historian database.
+A real site exports this from its control-system or historian database. **Work on a private copy, back it up and preview with `--dry-run` before applying.** Default mapping is a partial update: unrelated mappings remain. The preview includes complete before/after mapping snapshots and every added, changed or removed mapping; `--json` selects machine-readable output. `--sheets` limits eligible targets and replacement scope, but does not resolve globally ambiguous tags. A resolved out-of-scope row rejects the update.
+
+Use `--replace-all` only for an explicitly approved authoritative replacement in that scope (all sheets if omitted). Replacement refuses unmatched, ambiguous or blocked rows. Unknown/rejected explicit IDs never fall back to tags; duplicate target rows, invalid scopes or empty addresses reject the whole transaction without model/report writes. Partial mode reports ambiguous/unmatched/callout rows without assigning them, preserves existing mappings, and may still apply other valid rows. Have the qualified reviewer inspect the complete diff and approve application; inspect the report, not just the exit code. Nonempty address checks do not prove valid OPC syntax, connectivity or signal identity. Validate units, types, scaling and ranges separately: optional CSV units/description do not validate or populate those model properties. This is OPC mapping; the PI exporter still emits placeholder PI point references.
 
 ```
-python scripts/map_points.py out/twin/r2-tiles-trace/codex/plant_model.json data/io_lists/open100_sheet0_demo.csv --sheets 0
+python scripts/map_points.py out/twin/r2-tiles-trace/codex/plant_model.json data/io_lists/open100_sheet0_demo.csv --sheets 0 --dry-run
+# After inspecting the full diff and approving the partial update, repeat without --dry-run.
 python scripts/generate.py out/twin/r2-tiles-trace/codex/plant_model.json
-python scripts/ignition/build_gateway.py --fresh            # creates an OPC connection per data source
+# Gateway import is a separate, approved isolated-lab step; see CURRENT_GATEWAY_HANDOFF.md.
 ```
+
+**Gateway caution:** `build_gateway.py --fresh` deletes/recreates the lab provider and configures gateway resources; it is not a file-only regeneration command. Runtime import and verification require a separately approved isolated lab, not production. See [current handoff](CURRENT_GATEWAY_HANDOFF.md).
 
 **Matching never guesses.** Tags match after separators and case are normalized, so `FT 1401`, `FT-1401` and
-`ft_1401` are the same tag. `asset_id` pins a row when needed. The report (`out/mapping/`) has four lists, each a
-worklist:
+`ft_1401` are the same tag. `asset_id` pins a row when needed. An applied report is saved under `out/mapping/`; dry-run only prints it. In addition to errors and the complete mapping diff, it retains four worklists:
 
 | List | What it usually means at a site |
 |---|---|
@@ -88,7 +114,7 @@ labeled as such. On sheet 0 it maps 24 instruments, with three different spellin
 points that aren't on the drawing. It also hits one real ambiguity: the drawing shows `FT 1401` on two symbols.
 `scripts/ignition/demo_points_server.py` serves synthetic values for those points.
 
-In Ignition, the 24 mapped tags read Good while the other 335 placeholders stay Bad. The verifier checks both (V4).
+The historical runtime receipt showed 24 mapped tags Good and 335 placeholders Bad. The current reviewed model has 334 placeholder PVs plus the metadata-only MS 14010 valve callout; its current artifacts have offline checks, while native runtime acceptance remains not run. V4 checks quality behavior when run in an approved lab.
 
 ![OPEN100 sheet 0 in Ignition: mapped points live, the rest not connected](screenshots/ignition-open100-sheet0-mapped.png)
 

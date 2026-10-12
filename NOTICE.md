@@ -24,3 +24,11 @@ results. The holdout-B drawings are not included; `scripts/fetch_pid2graph.py` d
 license). They are downloaded by `scripts/verify_te_source.py` and `scripts/fetch_te_data.py`, not redistributed.
 The process is from Downs & Vogel (1993). The flowsheet in this repo is redrawn from the model, not copied from the
 paper.
+
+**PID2Graph Synthetic** adaptation and evaluation material (including summaries in `out/`) derives from
+[PID2Graph, Zenodo record 14803338](https://zenodo.org/records/14803338), by Jan Marius Stürmer, Marius Graumann
+and Tobias Koch. Synthetic symbols: copyright 2023 Steven Baltakatei Sandoval. This dataset-derived material is
+shared under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).
+Changes include adaptation, normalization and evaluation summaries; the source Synthetic images and labels are
+not included in this publication. This attribution does not change the MIT license for repository code or any
+other source license stated above.

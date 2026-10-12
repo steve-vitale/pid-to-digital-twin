@@ -1,5 +1,8 @@
 # Ignition build and verification (plan written before the build; results at the end)
 
+> Current-source warning (2026-10-10): the Docker `.gwbk` and historical runtime receipts do not validate the latest reviewed model or spatial views. Compose restores that historical backup, not the regenerated ZIP/provider. See [current-source handoff](CURRENT_GATEWAY_HANDOFF.md) for exact artifacts and the unexecuted runtime contract.
+
+
 Committed before any Ignition configuration exists. The checks below are the acceptance test. The build is done when
 they pass, and when the verifier has itself been shown to catch deliberately broken configurations.
 

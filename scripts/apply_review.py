@@ -17,6 +17,7 @@ Reviewer's columns:
                            A bare value corrects the item's main field (the tag; for TE instruments the description).
   OPS_show_on_operator_screen_Y_N   Y | N (blank = no opinion)
   OPS_alarm_priority_H_M_L_none     H | M | L | none (blank = no opinion)
+  OPS_scope                optional identifier_text or valve_association; retains whole-record status
   OPS_notes                free text, kept with the decision
 
 Re-applying the same sheet changes nothing. The generators print earlier decisions back into the OPS_ columns, so a
@@ -33,6 +34,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from generate import review_csv_cell
 
 ROOT = Path(__file__).resolve().parents[1]
 ACTIONS = {"confirm": "confirmed", "confirmed": "confirmed", "ok": "confirmed", "y": "confirmed", "yes": "confirmed",
@@ -80,9 +82,57 @@ def parse_corrections(text, collection, item, twin):
     return changes, None
 
 
+def identifier_corrections(changes, item):
+    """Text-only correction: preserve semantics, keep a matching derived loop in sync."""
+    def parts(tag):
+        # Same bounded ISA tag grammar as build_twin; no extraction/image dependencies.
+        match = re.fullmatch(r"([A-Z]{1,6})[\s-]*([0-9][0-9A-Z]*(?:-[0-9A-Z]+)?)", str(tag or "").strip().upper())
+        return match.groups() if match else (None, None)
+    if set(changes) - {"tag", "description"} or "tag" not in changes:
+        return {}, "identifier_text scope requires tag (and optional mirrored description) only"
+    old_tag, new_tag = item.get("tag"), changes["tag"]
+    old_letters, old_loop = parts(old_tag)
+    letters, loop = parts(new_tag)
+    if not old_loop or not loop or letters != old_letters or item.get("loop") != old_loop:
+        return {}, "identifier_text requires unchanged letters and a matching existing derived loop"
+    if "description" in changes and (item.get("description") != old_tag or changes["description"] != new_tag):
+        return {}, "identifier_text can only update a description that exactly mirrors the tag"
+    changes = dict(changes)
+    changes["loop"] = loop
+    if item.get("description") == old_tag:
+        changes["description"] = new_tag
+    return changes, None
+
+
+def valve_association_corrections(changes, collection, item, ids):
+    """Review an existing valve callout link, never merge symbols or infer valve function."""
+    if collection != "instruments" or set(changes) != {"parent", "variable"} or changes["variable"] != "unknown":
+        return {}, "valve_association requires an instrument callout with parent=<existing valve>;variable=unknown only"
+    target_collection, target = ids.get(changes["parent"], (None, {}))
+    if target_collection != "line_items" or target.get("class") != "valve" or item.get("parent") != changes["parent"]:
+        return {}, "valve_association must refer to the existing parent valve; reassignment needs separate review"
+    if "data_point" in item or "pi_point" in item:
+        return {}, "valve_association cannot change an already mapped item; mapping requires separate review"
+    return {"reviewed_valve_association": changes["parent"], "instrument_kind": "valve callout",
+            "variable": "unknown", "variable_method": "reviewed unknown; source legend pending"}, None
+
+
+def sync_hierarchy_tag(node, item_id, tag):
+    """Refresh only this identifier's display cache; never rebuild inferred hierarchy."""
+    if isinstance(node, dict):
+        if node.get("id") == item_id and "tag" in node:
+            node["tag"] = tag
+        for child in node.get("children", []):
+            sync_hierarchy_tag(child, item_id, tag)
+
+
 def apply(model, rows, reviewer, today, ids):
     twin = model.get("meta", {}).get("model_kind") == "extracted_twin"
     log = {"applied": [], "unchanged": 0, "refused": [], "needs_moc": []}
+    csv_ids = {}
+    for key in ids:
+        for spelling in (key, review_csv_cell(key)):
+            csv_ids.setdefault(spelling, set()).add(key)
     for n, r in enumerate(rows, 2):
         item_id = (r.get("item_id") or "").strip()
         act = (r.get("OPS_confirm_or_correct") or "").strip().lower()
@@ -91,6 +141,14 @@ def apply(model, rows, reviewer, today, ids):
         notes = (r.get("OPS_notes") or "").strip()
         if not (act or show or prio or notes):
             continue
+        # Accept a raw identifier or its exported CSV text representation only when
+        # it identifies exactly one record. Never guess across an encoding collision.
+        matches = csv_ids.get(r.get("item_id"), csv_ids.get(item_id, set()))
+        if len(matches) > 1:
+            log["refused"].append({"row": n, "item": item_id, "reason": "ambiguous raw/CSV-encoded item_id"})
+            continue
+        if matches:
+            item_id = next(iter(matches))
         if item_id not in ids:
             log["refused"].append({"row": n, "item": item_id, "reason": "no such item in the model"})
             continue
@@ -104,7 +162,16 @@ def apply(model, rows, reviewer, today, ids):
         if show and show not in ("Y", "N"):
             log["refused"].append({"row": n, "item": item_id, "reason": f"show on screen must be Y or N, not '{show}'"})
             continue
+        scope = (r.get("OPS_scope") or "").strip()
+        if scope and (scope not in {"identifier_text", "valve_association"} or not twin or ACTIONS.get(act) != "corrected" or show or prio):
+            log["refused"].append({"row": n, "item": item_id, "reason": "invalid scope or action: scoped reviews require a twin correction without screen/alarm changes"})
+            continue
         prev = item.get("ops_review") or {}
+        # Only undo serialization of an unchanged known note, not a newly entered
+        # literal apostrophe. Keep engineering text and repeat-review idempotence.
+        previous_notes = prev.get("notes")
+        if isinstance(previous_notes, str) and r.get("OPS_notes") == review_csv_cell(previous_notes):
+            notes = previous_notes
         status = ACTIONS.get(act, prev.get("status", "unverified"))
         if status == "confirmed" and prev.get("status") == "corrected":
             status = "corrected"  # confirming a corrected item (as a regenerated sheet prints it) keeps the correction
@@ -114,6 +181,13 @@ def apply(model, rows, reviewer, today, ids):
             if err:
                 log["refused"].append({"row": n, "item": item_id, "reason": err})
                 continue
+            if scope:
+                changes, err = (identifier_corrections(changes, item) if scope == "identifier_text"
+                                else valve_association_corrections(changes, collection, item, ids))
+                if err:
+                    log["refused"].append({"row": n, "item": item_id, "reason": err})
+                    continue
+                status = prev.get("status", "unverified")
             changes = {k: v for k, v in changes.items() if str(item.get(k)) != v}
         new = {"status": status, "show_on_screen": {"Y": True, "N": False}.get(show, prev.get("show_on_screen")),
                "alarm_priority": PRIORITY.get(prio, prev.get("alarm_priority")), "notes": notes or prev.get("notes")}
@@ -124,13 +198,24 @@ def apply(model, rows, reviewer, today, ids):
         history = list(prev.get("history", []))
         history.append({"on": today, "by": reviewer, "decision": status,
                         "changes": {k: [item.get(k), v] for k, v in changes.items()}, "notes": notes or None})
+        if scope:
+            history[-1].update(decision="corrected", scope=scope, fields=sorted(changes))
         for k, v in changes.items():
             item[k] = v
-        item["ops_review"] = {**new, "by": reviewer, "on": today, "history": history}
+        if scope and "tag" in changes:
+            sync_hierarchy_tag(model.get("hierarchy"), item_id, changes["tag"])
+        item["ops_review"] = {**prev, **new, "by": reviewer, "on": today, "history": history}
+        if scope:
+            fields = dict(prev.get("field_decisions", {}))
+            for k in changes:
+                fields[k] = {"status": "corrected", "by": reviewer, "on": today, "scope": scope, "notes": notes or None}
+            item["ops_review"]["field_decisions"] = fields
         log["applied"].append({"item": item_id, "kind": collection, "decision": status,
                                "changes": {k: v for k, v in history[-1]["changes"].items()},
                                "show_on_screen": new["show_on_screen"], "alarm_priority": new["alarm_priority"],
                                "notes": notes or None})
+        if scope:
+            log["applied"][-1].update(decision="corrected", scope=scope, record_status=status)
         # Requests the reviewer can make but that must not be applied silently: they change what alarms exist.
         has_alarm = bool(item.get("alarm_setpoints"))  # TE alarm setpoints live in build_gateway.ALARMS
         asked = PRIORITY.get(prio)

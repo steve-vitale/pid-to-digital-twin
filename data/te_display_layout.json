@@ -1,0 +1,823 @@
+{
+  "schema_version": 1,
+  "model_id": "te-process",
+  "provenance": {
+    "layout_source": "Singhal & Seborg (2006), Fig. 1, p.603",
+    "url": "https://sites.me.ucsb.edu/~ceweb/faculty/seborg/pdfs/Singhal_JPC.pdf",
+    "scope": "Published control schematic supports coarse process regions only; not original plant P&ID or exact taps. Seed stream directions and ownership remain unverified.",
+    "discrepancies": [
+      "TI-122 source name is separator cooling-water outlet; E-101 ownership retained, disputed.",
+      "Published purge branch appears on separator side of compressor; seed S9 ownership remains K-101, unverified."
+    ]
+  },
+  "labels": {
+    "FI-101": "A feed flow",
+    "FI-102": "D feed flow",
+    "FI-103": "E feed flow",
+    "FI-104": "A + C feed flow",
+    "FI-105": "Recycle flow",
+    "FI-106": "Feed flow",
+    "PI-107": "Pressure",
+    "LI-108": "Level",
+    "TI-109": "Temperature",
+    "FI-110": "Purge flow",
+    "TI-111": "Temperature",
+    "LI-112": "Level",
+    "PI-113": "Pressure",
+    "FI-114": "Liquid flow",
+    "LI-115": "Level",
+    "PI-116": "Pressure",
+    "FI-117": "Product flow",
+    "TI-118": "Temperature",
+    "FI-119": "Steam flow",
+    "JI-120": "Compressor work",
+    "TI-121": "Cooling-water outlet T",
+    "TI-122": "Separator CW outlet T ?",
+    "FV-201": "D feed valve output",
+    "FV-202": "E feed valve output",
+    "FV-203": "A feed valve output",
+    "FV-204": "A + C feed valve output",
+    "HV-205": "Recycle valve output",
+    "FV-206": "Purge valve output",
+    "LV-207": "Liquid valve output",
+    "LV-208": "Product valve output",
+    "FV-209": "Steam valve output",
+    "TV-210": "Cooling-water valve output",
+    "TV-211": "Cooling-water valve output"
+  },
+  "units": {
+    "R-101": {
+      "equipment": [
+        680,
+        220,
+        240,
+        250
+      ],
+      "streams": {
+        "S6": [
+          "M60 355 H718",
+          60,
+          320
+        ],
+        "S7": [
+          "M840 245 V210 H1110 V220 H1510",
+          1140,
+          185
+        ]
+      },
+      "cards": {
+        "FI-106": {
+          "box": [
+            380,
+            275
+          ],
+          "anchor": [
+            490,
+            355
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S6",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "PI-107": {
+          "box": [
+            460,
+            175
+          ],
+          "anchor": [
+            733,
+            260
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "R-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "TI-109": {
+          "box": [
+            970,
+            300
+          ],
+          "anchor": [
+            880,
+            370
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "R-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LI-108": {
+          "box": [
+            970,
+            375
+          ],
+          "anchor": [
+            880,
+            405
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "R-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        }
+      },
+      "analyzer": {
+        "parent": "AI-123",
+        "x": 160,
+        "y": 430,
+        "anchor_x": 300,
+        "anchor_y": 355,
+        "sample_minutes": 6,
+        "delay_minutes": 6
+      },
+      "utilities": [
+        1030,
+        475,
+        [
+          "TI-121",
+          "TV-210"
+        ]
+      ],
+      "kind": "reactor",
+      "level": "LI-108",
+      "table_top": 720,
+      "unavailable": [
+        {
+          "tag": "SC-212",
+          "label": "Agitator",
+          "box": [
+            745,
+            145,
+            300,
+            40
+          ],
+          "anchor": [
+            800,
+            230
+          ],
+          "reason": "UNKNOWN / no replay source"
+        }
+      ]
+    },
+    "U-100": {
+      "kind": "feed",
+      "equipment": [
+        660,
+        260,
+        240,
+        250
+      ],
+      "streams": {
+        "S1": [
+          "M40 250 H650 V325 H760",
+          35,
+          255
+        ],
+        "S2": [
+          "M40 350 H650 V385 H760",
+          35,
+          355
+        ],
+        "S3": [
+          "M40 450 H760",
+          35,
+          455
+        ],
+        "S5": [
+          "M70 590 H760 V455",
+          70,
+          554
+        ],
+        "S8b": [
+          "M1510 180 H800 V315 H760",
+          1010,
+          144
+        ],
+        "S6": [
+          "M885 385 H1510",
+          1130,
+          407
+        ]
+      },
+      "cards": {
+        "FI-101": {
+          "box": [
+            160,
+            180
+          ],
+          "anchor": [
+            260,
+            250
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S1",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FV-203": {
+          "box": [
+            410,
+            180
+          ],
+          "anchor": [
+            510,
+            250
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S1",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-102": {
+          "box": [
+            160,
+            280
+          ],
+          "anchor": [
+            260,
+            350
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S2",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FV-201": {
+          "box": [
+            410,
+            280
+          ],
+          "anchor": [
+            510,
+            350
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S2",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-103": {
+          "box": [
+            160,
+            380
+          ],
+          "anchor": [
+            260,
+            450
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S3",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FV-202": {
+          "box": [
+            410,
+            380
+          ],
+          "anchor": [
+            510,
+            450
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S3",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-105": {
+          "box": [
+            1000,
+            220
+          ],
+          "anchor": [
+            1070,
+            180
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S8b",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-106": {
+          "box": [
+            1220,
+            305
+          ],
+          "anchor": [
+            1300,
+            385
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S6",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        }
+      },
+      "level": null,
+      "table_top": 720,
+      "analyzer": {
+        "parent": "AI-123",
+        "x": 990,
+        "y": 470,
+        "anchor_x": 1150,
+        "anchor_y": 385,
+        "sample_minutes": 6,
+        "delay_minutes": 6
+      }
+    },
+    "E-101": {
+      "kind": "condenser",
+      "equipment": [
+        680,
+        250,
+        240,
+        250
+      ],
+      "streams": {
+        "S7": [
+          "M60 375 H700",
+          60,
+          338
+        ],
+        "S7b": [
+          "M900 375 H1510",
+          1160,
+          338
+        ]
+      },
+      "cards": {},
+      "level": null,
+      "table_top": 720,
+      "utilities": [
+        850,
+        475,
+        [
+          "TI-122",
+          "TV-211"
+        ]
+      ],
+      "notes": [
+        "TI-122 ownership disputed: source says separator cooling-water outlet. Seed retains E-101; do not read it as process temperature."
+      ]
+    },
+    "V-101": {
+      "kind": "separator",
+      "equipment": [
+        680,
+        240,
+        240,
+        250
+      ],
+      "streams": {
+        "S7b": [
+          "M50 355 H718",
+          50,
+          317
+        ],
+        "S8": [
+          "M820 263 V185 H1500",
+          1160,
+          147
+        ],
+        "S10": [
+          "M800 462 V550 H1510",
+          1180,
+          575
+        ]
+      },
+      "cards": {
+        "PI-113": {
+          "box": [
+            980,
+            230
+          ],
+          "anchor": [
+            872,
+            290
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "V-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "TI-111": {
+          "box": [
+            450,
+            270
+          ],
+          "anchor": [
+            720,
+            350
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "V-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LI-112": {
+          "box": [
+            980,
+            360
+          ],
+          "anchor": [
+            880,
+            414
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "V-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-114": {
+          "box": [
+            1010,
+            470
+          ],
+          "anchor": [
+            1110,
+            550
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S10",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LV-207": {
+          "box": [
+            1270,
+            470
+          ],
+          "anchor": [
+            1370,
+            550
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S10",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        }
+      },
+      "level": "LI-112",
+      "table_top": 720,
+      "notes": [
+        "TI-122 cooling-water name references separator; retained under E-101 pending ownership review."
+      ]
+    },
+    "K-101": {
+      "kind": "compressor",
+      "equipment": [
+        675,
+        280,
+        240,
+        250
+      ],
+      "streams": {
+        "S8": [
+          "M60 405 H720",
+          60,
+          368
+        ],
+        "S8b": [
+          "M868 405 H1010 V210 H70",
+          75,
+          173
+        ],
+        "S9": [
+          "M1010 405 H1510",
+          1150,
+          368
+        ]
+      },
+      "cards": {
+        "FI-105": {
+          "box": [
+            370,
+            235
+          ],
+          "anchor": [
+            480,
+            210
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S8b",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "JI-120": {
+          "box": [
+            685,
+            260
+          ],
+          "anchor": [
+            795,
+            330
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "K-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-110": {
+          "box": [
+            1030,
+            290
+          ],
+          "anchor": [
+            1140,
+            405
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S9",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FV-206": {
+          "box": [
+            1290,
+            290
+          ],
+          "anchor": [
+            1400,
+            405
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S9",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        }
+      },
+      "level": null,
+      "table_top": 720,
+      "analyzer": {
+        "parent": "AI-129",
+        "x": 1000,
+        "y": 435,
+        "anchor_x": 1170,
+        "anchor_y": 405,
+        "sample_minutes": 6,
+        "delay_minutes": 6
+      },
+      "utilities": [
+        80,
+        475,
+        [
+          "HV-205"
+        ]
+      ],
+      "notes": [
+        "Purge branch location disputed: published schematic places it on separator-side header. S9 stays mapped to K-101; exact tap unverified."
+      ],
+      "utilities_title": "LOCAL OUTPUT \u00b7 stream / tap not assigned"
+    },
+    "C-101": {
+      "kind": "stripper",
+      "equipment": [
+        680,
+        230,
+        240,
+        250
+      ],
+      "streams": {
+        "S5": [
+          "M800 253 V180 H60",
+          65,
+          142
+        ],
+        "S10": [
+          "M60 310 H718",
+          60,
+          315
+        ],
+        "S4": [
+          "M1510 405 H882",
+          1180,
+          368
+        ],
+        "S11": [
+          "M800 452 V590 H1510",
+          1190,
+          606
+        ]
+      },
+      "cards": {
+        "PI-116": {
+          "box": [
+            970,
+            180
+          ],
+          "anchor": [
+            865,
+            270
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "C-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "TI-118": {
+          "box": [
+            440,
+            325
+          ],
+          "anchor": [
+            720,
+            360
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "C-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LI-115": {
+          "box": [
+            970,
+            425
+          ],
+          "anchor": [
+            880,
+            430
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "C-101",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-104": {
+          "box": [
+            1030,
+            290
+          ],
+          "anchor": [
+            1120,
+            405
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S4",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FV-204": {
+          "box": [
+            1290,
+            290
+          ],
+          "anchor": [
+            1400,
+            405
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S4",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-114": {
+          "box": [
+            100,
+            200
+          ],
+          "anchor": [
+            220,
+            310
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S10",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LV-207": {
+          "box": [
+            355,
+            200
+          ],
+          "anchor": [
+            460,
+            310
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S10",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "FI-117": {
+          "box": [
+            1010,
+            510
+          ],
+          "anchor": [
+            1110,
+            590
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S11",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        },
+        "LV-208": {
+          "box": [
+            1270,
+            510
+          ],
+          "anchor": [
+            1380,
+            590
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "S11",
+            "status": "approximate",
+            "evidence": "seed mapping + published schematic coarse region"
+          }
+        }
+      },
+      "level": "LI-115",
+      "table_top": 830,
+      "analyzer": {
+        "parent": "AI-137",
+        "x": 70,
+        "y": 470,
+        "anchor_x": 880,
+        "anchor_y": 590,
+        "sample_minutes": 15,
+        "delay_minutes": 15,
+        "leader_path": "M600 495 H635 V590 H880"
+      },
+      "utilities": [
+        70,
+        670,
+        [
+          "FI-119",
+          "FV-209"
+        ]
+      ],
+      "unmapped_note_positions": {
+        "S5": [
+          585,
+          195
+        ]
+      }
+    }
+  },
+  "binding_template": "[{provider}]TE_Plant/{unit}/{tag}",
+  "channel_adapter": "te_replay",
+  "direction_adapter": "te_seed_from_to_unverified"
+}

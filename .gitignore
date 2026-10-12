@@ -29,3 +29,8 @@ out/twin/r2-tiles-trace/*
 !out/twin/r2-tiles-trace/twin_scores.*
 out/confidence_cache/
 out/confidence/
+
+# Generated review previews and local decision evidence are not publication inputs.
+out/process_mimic/*
+!out/process_mimic/VERIFICATION.txt
+out/review/

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "model_id": "synthetic-water-utility",
+  "provenance": {
+    "scope": "Synthetic presentation contract only; no real process, topology validation or operating approval."
+  },
+  "labels": {
+    "PT-301": "Discharge pressure",
+    "ZS-303": "Parallel branch position switch"
+  },
+  "units": {
+    "S0-PU001": {
+      "kind": "pump",
+      "equipment": [
+        680,
+        220,
+        240,
+        250
+      ],
+      "streams": {
+        "L0-003": [
+          "M920 345 H1510",
+          1120,
+          315
+        ]
+      },
+      "cards": {
+        "PT-301": {
+          "box": [
+            970,
+            375
+          ],
+          "anchor": [
+            1100,
+            345
+          ],
+          "association": {
+            "kind": "stream",
+            "id": "L0-003",
+            "status": "approximate",
+            "evidence": "Synthetic fixture associates pressure with discharge; physical tap coordinates are illustrative."
+          }
+        },
+        "ZS-303": {
+          "box": [
+            450,
+            450
+          ],
+          "association": {
+            "status": "unresolved",
+            "evidence": "Synthetic valve position switch belongs to a different parallel branch; exact tap is intentionally unresolved."
+          }
+        }
+      },
+      "table_top": 760,
+      "unavailable": []
+    },
+    "S0-TK001": {
+      "kind": "tank",
+      "equipment": [
+        680,
+        220,
+        240,
+        250
+      ],
+      "streams": {},
+      "cards": {
+        "LT-302": {
+          "box": [
+            970,
+            300
+          ],
+          "anchor": [
+            900,
+            350
+          ],
+          "association": {
+            "kind": "unit",
+            "id": "S0-TK001",
+            "status": "approximate",
+            "evidence": "Synthetic tank level association; illustrative physical anchor."
+          }
+        }
+      },
+      "level": "LT-302",
+      "table_top": 760
+    }
+  }
+}

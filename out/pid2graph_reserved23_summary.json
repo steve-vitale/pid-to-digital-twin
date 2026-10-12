@@ -1,0 +1,669 @@
+{
+  "trial": "pid2graph-synthetic-reserved23-frozen-v1",
+  "evaluated_at": "2026-10-11T17:50:36.399975+00:00",
+  "claim": "Prospective synthetic-source label agreement, not verified engineering correctness or real-plant reliability",
+  "source": "https://zenodo.org/records/14803338",
+  "license": "CC-BY-SA-4.0",
+  "attribution": "Dataset: Jan Marius St\u00fcrmer, Marius Graumann, Tobias Koch. Synthetic symbols: Copyright 2023 Steven Baltakatei Sandoval.",
+  "aggregate": {
+    "review_load": {
+      "false_symbols": 0,
+      "missed_symbols": 2,
+      "relabels": 17,
+      "false_links": 3,
+      "missed_links": 51,
+      "corrections": 73,
+      "key_items": 158,
+      "per_100": 46.2
+    },
+    "connections": {
+      "tp": 58,
+      "predicted": 61,
+      "in_key": 109,
+      "precision": 0.951,
+      "recall": 0.532,
+      "f1": 0.682
+    },
+    "rough": {
+      "located": {
+        "tp": 47,
+        "predicted": 47,
+        "in_key": 49,
+        "precision": 1.0,
+        "recall": 0.959,
+        "f1": 0.979
+      },
+      "classified": {
+        "tp": 30,
+        "predicted": 47,
+        "in_key": 49,
+        "precision": 0.638,
+        "recall": 0.612,
+        "f1": 0.625
+      },
+      "by_class": {
+        "tank": {
+          "tp": 9,
+          "predicted": 13,
+          "in_key": 10,
+          "precision": 0.692,
+          "recall": 0.9,
+          "f1": 0.783
+        },
+        "pump": {
+          "tp": 2,
+          "predicted": 4,
+          "in_key": 2,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.667
+        },
+        "valve": {
+          "tp": 0,
+          "predicted": 5,
+          "in_key": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "instrumentation": {
+          "tp": 0,
+          "predicted": 4,
+          "in_key": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "inlet/outlet": {
+          "tp": 0,
+          "predicted": 2,
+          "in_key": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "general": {
+          "tp": 19,
+          "predicted": 19,
+          "in_key": 34,
+          "precision": 1.0,
+          "recall": 0.559,
+          "f1": 0.717
+        }
+      }
+    },
+    "strict": {
+      "located": {
+        "tp": 43,
+        "predicted": 47,
+        "in_key": 49,
+        "precision": 0.915,
+        "recall": 0.878,
+        "f1": 0.896
+      },
+      "classified": {
+        "tp": 29,
+        "predicted": 47,
+        "in_key": 49,
+        "precision": 0.617,
+        "recall": 0.592,
+        "f1": 0.604
+      },
+      "by_class": {
+        "tank": {
+          "tp": 9,
+          "predicted": 13,
+          "in_key": 10,
+          "precision": 0.692,
+          "recall": 0.9,
+          "f1": 0.783
+        },
+        "pump": {
+          "tp": 2,
+          "predicted": 4,
+          "in_key": 2,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.667
+        },
+        "valve": {
+          "tp": 0,
+          "predicted": 5,
+          "in_key": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "instrumentation": {
+          "tp": 0,
+          "predicted": 4,
+          "in_key": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "inlet/outlet": {
+          "tp": 0,
+          "predicted": 2,
+          "in_key": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "general": {
+          "tp": 18,
+          "predicted": 19,
+          "in_key": 34,
+          "precision": 0.947,
+          "recall": 0.529,
+          "f1": 0.679
+        }
+      }
+    }
+  },
+  "failed_attempts": 0,
+  "sheets": [
+    {
+      "sheet": "2",
+      "score": {
+        "malformed_symbols": 0,
+        "strict": {
+          "located": {
+            "tp": 22,
+            "predicted": 22,
+            "in_key": 23,
+            "precision": 1.0,
+            "recall": 0.957,
+            "f1": 0.978
+          },
+          "classified": {
+            "tp": 17,
+            "predicted": 22,
+            "in_key": 23,
+            "precision": 0.773,
+            "recall": 0.739,
+            "f1": 0.756
+          },
+          "by_class": {
+            "tank": {
+              "tp": 6,
+              "predicted": 7,
+              "in_key": 7,
+              "precision": 0.857,
+              "recall": 0.857,
+              "f1": 0.857
+            },
+            "pump": {
+              "tp": 2,
+              "predicted": 2,
+              "in_key": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "valve": {
+              "tp": 0,
+              "predicted": 3,
+              "in_key": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "instrumentation": {
+              "tp": 0,
+              "predicted": 0,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "inlet/outlet": {
+              "tp": 0,
+              "predicted": 1,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "general": {
+              "tp": 9,
+              "predicted": 9,
+              "in_key": 13,
+              "precision": 1.0,
+              "recall": 0.692,
+              "f1": 0.818
+            }
+          }
+        },
+        "rough": {
+          "located": {
+            "tp": 22,
+            "predicted": 22,
+            "in_key": 23,
+            "precision": 1.0,
+            "recall": 0.957,
+            "f1": 0.978
+          },
+          "classified": {
+            "tp": 17,
+            "predicted": 22,
+            "in_key": 23,
+            "precision": 0.773,
+            "recall": 0.739,
+            "f1": 0.756
+          },
+          "by_class": {
+            "tank": {
+              "tp": 6,
+              "predicted": 7,
+              "in_key": 7,
+              "precision": 0.857,
+              "recall": 0.857,
+              "f1": 0.857
+            },
+            "pump": {
+              "tp": 2,
+              "predicted": 2,
+              "in_key": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "valve": {
+              "tp": 0,
+              "predicted": 3,
+              "in_key": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "instrumentation": {
+              "tp": 0,
+              "predicted": 0,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "inlet/outlet": {
+              "tp": 0,
+              "predicted": 1,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "general": {
+              "tp": 9,
+              "predicted": 9,
+              "in_key": 13,
+              "precision": 1.0,
+              "recall": 0.692,
+              "f1": 0.818
+            }
+          }
+        },
+        "connections": {
+          "tp": 31,
+          "predicted": 31,
+          "in_key": 74,
+          "precision": 1.0,
+          "recall": 0.419,
+          "f1": 0.59
+        },
+        "review_load": {
+          "per_100": 50.5,
+          "corrections": 49,
+          "key_items": 97,
+          "false_symbols": 0,
+          "missed_symbols": 1,
+          "relabels": 5,
+          "false_links": 0,
+          "missed_links": 43
+        }
+      },
+      "coverage": {
+        "image_size_px": [
+          7000,
+          4500
+        ],
+        "nodes_by_class": {
+          "tank": 7,
+          "crossing": 70,
+          "general": 13,
+          "pump": 2,
+          "valve": 1,
+          "connector": 40
+        },
+        "annotation_keys": [
+          "edge_label",
+          "ymax",
+          "xmax",
+          "ymin",
+          "xmin",
+          "ymax",
+          "xmax",
+          "ymin",
+          "xmin",
+          "label"
+        ],
+        "graph_edgedefault": "undirected",
+        "edge_labels": {
+          "solid": 118,
+          "non-solid": 22
+        },
+        "edge_style_preserved_by_existing_scorer": false,
+        "asset_symbols": 23,
+        "collapsed_undirected_links": 74
+      },
+      "observed_worker_seconds_approximate": 103,
+      "reasoning_effort": "unverified/inherited"
+    },
+    {
+      "sheet": "3",
+      "score": {
+        "malformed_symbols": 0,
+        "strict": {
+          "located": {
+            "tp": 21,
+            "predicted": 25,
+            "in_key": 26,
+            "precision": 0.84,
+            "recall": 0.808,
+            "f1": 0.824
+          },
+          "classified": {
+            "tp": 12,
+            "predicted": 25,
+            "in_key": 26,
+            "precision": 0.48,
+            "recall": 0.462,
+            "f1": 0.471
+          },
+          "by_class": {
+            "tank": {
+              "tp": 3,
+              "predicted": 6,
+              "in_key": 3,
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.667
+            },
+            "pump": {
+              "tp": 0,
+              "predicted": 2,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "valve": {
+              "tp": 0,
+              "predicted": 2,
+              "in_key": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "instrumentation": {
+              "tp": 0,
+              "predicted": 4,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "inlet/outlet": {
+              "tp": 0,
+              "predicted": 1,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "general": {
+              "tp": 9,
+              "predicted": 10,
+              "in_key": 21,
+              "precision": 0.9,
+              "recall": 0.429,
+              "f1": 0.581
+            }
+          }
+        },
+        "rough": {
+          "located": {
+            "tp": 25,
+            "predicted": 25,
+            "in_key": 26,
+            "precision": 1.0,
+            "recall": 0.962,
+            "f1": 0.98
+          },
+          "classified": {
+            "tp": 13,
+            "predicted": 25,
+            "in_key": 26,
+            "precision": 0.52,
+            "recall": 0.5,
+            "f1": 0.51
+          },
+          "by_class": {
+            "tank": {
+              "tp": 3,
+              "predicted": 6,
+              "in_key": 3,
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.667
+            },
+            "pump": {
+              "tp": 0,
+              "predicted": 2,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "valve": {
+              "tp": 0,
+              "predicted": 2,
+              "in_key": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "instrumentation": {
+              "tp": 0,
+              "predicted": 4,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "inlet/outlet": {
+              "tp": 0,
+              "predicted": 1,
+              "in_key": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "general": {
+              "tp": 10,
+              "predicted": 10,
+              "in_key": 21,
+              "precision": 1.0,
+              "recall": 0.476,
+              "f1": 0.645
+            }
+          }
+        },
+        "connections": {
+          "tp": 27,
+          "predicted": 30,
+          "in_key": 35,
+          "precision": 0.9,
+          "recall": 0.771,
+          "f1": 0.831
+        },
+        "review_load": {
+          "per_100": 39.3,
+          "corrections": 24,
+          "key_items": 61,
+          "false_symbols": 0,
+          "missed_symbols": 1,
+          "relabels": 12,
+          "false_links": 3,
+          "missed_links": 8
+        }
+      },
+      "coverage": {
+        "image_size_px": [
+          7000,
+          4500
+        ],
+        "nodes_by_class": {
+          "general": 21,
+          "crossing": 72,
+          "tank": 3,
+          "valve": 2,
+          "connector": 46
+        },
+        "annotation_keys": [
+          "edge_label",
+          "ymax",
+          "xmax",
+          "ymin",
+          "xmin",
+          "ymax",
+          "xmax",
+          "ymin",
+          "xmin",
+          "label"
+        ],
+        "graph_edgedefault": "undirected",
+        "edge_labels": {
+          "solid": 116,
+          "non-solid": 29
+        },
+        "edge_style_preserved_by_existing_scorer": false,
+        "asset_symbols": 26,
+        "collapsed_undirected_links": 35
+      },
+      "observed_worker_seconds_approximate": 111,
+      "reasoning_effort": "unverified/inherited"
+    }
+  ],
+  "source_model_class_disagreements": [
+    {
+      "source_class": "general",
+      "model_class": "instrumentation",
+      "count": 3
+    },
+    {
+      "source_class": "general",
+      "model_class": "pump",
+      "count": 2
+    },
+    {
+      "source_class": "general",
+      "model_class": "tank",
+      "count": 4
+    },
+    {
+      "source_class": "general",
+      "model_class": "valve",
+      "count": 5
+    },
+    {
+      "source_class": "tank",
+      "model_class": "inlet/outlet",
+      "count": 1
+    },
+    {
+      "source_class": "valve",
+      "model_class": "inlet/outlet",
+      "count": 1
+    },
+    {
+      "source_class": "valve",
+      "model_class": "instrumentation",
+      "count": 1
+    }
+  ],
+  "source_files": [
+    {
+      "archive_path": "PID2Graph/Complete/PID2Graph Synthetic/2.jpg",
+      "file": "2.jpg",
+      "bytes": 702969,
+      "sha256": "03508e2f21e9d0da3306cac68caed397fa4082de363bb67cce8e5554238a3c29",
+      "zip_crc32": "c50dc319"
+    },
+    {
+      "archive_path": "PID2Graph/Complete/PID2Graph Synthetic/3.jpg",
+      "file": "3.jpg",
+      "bytes": 768246,
+      "sha256": "a864dfc7fd07cb5c3fea8051f69205c67711ebdaef3f4022fdc959bb4a864708",
+      "zip_crc32": "00b7c711"
+    },
+    {
+      "archive_path": "PID2Graph/Complete/PID2Graph Synthetic/2.graphml",
+      "file": "2.graphml",
+      "bytes": 42467,
+      "sha256": "9f4af7c0febc87021d559d6c9778697240645de5aaef461a8a7f89944920a715",
+      "zip_crc32": "a76c633a"
+    },
+    {
+      "archive_path": "PID2Graph/Complete/PID2Graph Synthetic/3.graphml",
+      "file": "3.graphml",
+      "bytes": 45396,
+      "sha256": "18f61780302e8920443a9e224688f93592b3b2cff42d7e99e6f98a371b45b7ef",
+      "zip_crc32": "05faf39b"
+    }
+  ],
+  "normalized_images": [
+    {
+      "sheet": "2",
+      "sha256": "cc8fd23ce32a099788c49d28b03813ecaf29f49ce6eac74c7b704e2a3f084469",
+      "dimensions_px": [
+        7000,
+        4500
+      ]
+    },
+    {
+      "sheet": "3",
+      "sha256": "26c40826dce1717da1b9648fa73e78974f68c456aaf50e080cd09b97760aa7b7",
+      "dimensions_px": [
+        7000,
+        4500
+      ]
+    }
+  ],
+  "limitations": [
+    "Only two synthetic drawings sharing the PID2Graph ontology; no real-plant or universal generalization claim.",
+    "Metrics measure published-label agreement, not independently adjudicated engineering correctness.",
+    "Source has no instrumentation or off-page positive examples on these sheets.",
+    "Scorer discards solid/non-solid edge style when collapsing undirected adjacency; source style remains in local evaluation context.",
+    "Model selection was recorded locally; backend revision, actual reasoning level and execution trace are not independently verified.",
+    "Isolation is procedural, not a technical security boundary. Public-model training contamination cannot be excluded.",
+    "103/111 seconds are approximate locally observed execution durations, not measured inference-only latency.",
+    "No post-label method changes, second attempts, model comparisons, repairs, calibrated confidence transfer or operational export.",
+    "Reserved 2/3 are now consumed; any future tuned method needs fresh preregistered data.",
+    "Model selection and timestamps are locally recorded evidence, not independently authenticated provider telemetry."
+  ],
+  "operational_export_allowed": false,
+  "cost": {
+    "access_path": "subscribed native execution",
+    "separately_invoked_paid_api": false,
+    "token_compute_cost": "unmetered/unknown",
+    "zero_cost_claim": false
+  },
+  "historical_evidence_boundary": "Sanitized report of a completed, locally frozen experiment. Original private preregistration, execution records, sealed raw outputs and exact historical harness are retained separately and are not included in this public source snapshot. Exact sealed inference reproduction is not available from this checkout.",
+  "method": {
+    "model": "gpt-6.1-sol",
+    "input": "One whole image per independent attempt; original extraction/prompt.md; no tiling or tracing",
+    "reasoning": "Unverified/inherited, without an explicit override",
+    "attempts": "First outputs scored once after acquisition of labels; no repair, retry, alternate model or post-label method change."
+  }
+}

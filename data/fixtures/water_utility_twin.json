@@ -1,0 +1,632 @@
+{
+  "meta": {
+    "model_id": "synthetic-water-utility",
+    "model_kind": "extracted_twin",
+    "schema_version": "twin-1",
+    "title": "Synthetic parallel-pump water utility",
+    "source_document": "Hand-built synthetic test, not real plant evidence",
+    "extraction_method": "synthetic (None), prompt per run file; converted by scripts/build_twin.py",
+    "tag_convention": "Tags are the extracted text, unchanged except whitespace. Asset ids (S<sheet>-<class><n>) are converter keys, NOT plant tags. Placeholder tags (XXX, TBD) are flagged.",
+    "verification_note": "Every item is unverified until a person checks it in review_queue.csv.",
+    "low_confidence_threshold": 0.75,
+    "parent_rule": "linked",
+    "superset_of": "data/te_process_model.json (meta/units/streams/instruments/final_elements)"
+  },
+  "site": {
+    "id": "SITE",
+    "name": "Site (from water-utility)"
+  },
+  "systems": [
+    {
+      "id": "SYS-0",
+      "sheet": "0",
+      "name": "Sheet 0 (mostly WTR tags)",
+      "system_code": "WTR",
+      "system_code_method": "inferred_tag_prefix",
+      "system_codes_seen": {
+        "WTR": 4
+      },
+      "system_name": null,
+      "drawing_number": null,
+      "drawing_number_method": "unknown",
+      "drawing_number_candidates": [],
+      "image": "0.png",
+      "image_size_px": null,
+      "source_run": "synthetic fixture",
+      "model": null,
+      "extraction_failed": false,
+      "extraction_error": null
+    }
+  ],
+  "units": [
+    {
+      "id": "S0-TK001",
+      "tag": "WTR-TK-201",
+      "tag_status": "as_extracted",
+      "class": "tank",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "t",
+          "class": "tank",
+          "box_0_1000": [
+            80.0,
+            280.0,
+            120.0,
+            320.0
+          ],
+          "tag_as_extracted": "WTR-TK-201",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "name": "WTR-TK-201",
+      "type": "tank",
+      "role_reason": "class tank",
+      "system": "SYS-0",
+      "layout": {
+        "x": 100.0,
+        "y": 300.0,
+        "sheet": "0",
+        "frame": "sheet_0_1000"
+      },
+      "source": "synthetic extraction, sheet 0 symbol t",
+      "sheets": [
+        "0"
+      ]
+    },
+    {
+      "id": "S0-PU001",
+      "tag": "WTR-PU-202A",
+      "tag_status": "as_extracted",
+      "class": "pump",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "pa",
+          "class": "pump",
+          "box_0_1000": [
+            330.0,
+            180.0,
+            370.0,
+            220.0
+          ],
+          "tag_as_extracted": "WTR-PU-202A",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "name": "WTR-PU-202A",
+      "type": "pump",
+      "role_reason": "class pump",
+      "system": "SYS-0",
+      "layout": {
+        "x": 350.0,
+        "y": 200.0,
+        "sheet": "0",
+        "frame": "sheet_0_1000"
+      },
+      "source": "synthetic extraction, sheet 0 symbol pa",
+      "sheets": [
+        "0"
+      ]
+    },
+    {
+      "id": "S0-PU002",
+      "tag": "WTR-PU-202B",
+      "tag_status": "as_extracted",
+      "class": "pump",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "pb",
+          "class": "pump",
+          "box_0_1000": [
+            330.0,
+            480.0,
+            370.0,
+            520.0
+          ],
+          "tag_as_extracted": "WTR-PU-202B",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "name": "WTR-PU-202B",
+      "type": "pump",
+      "role_reason": "class pump",
+      "system": "SYS-0",
+      "layout": {
+        "x": 350.0,
+        "y": 500.0,
+        "sheet": "0",
+        "frame": "sheet_0_1000"
+      },
+      "source": "synthetic extraction, sheet 0 symbol pb",
+      "sheets": [
+        "0"
+      ]
+    },
+    {
+      "id": "S0-TK002",
+      "tag": "WTR-HX-203",
+      "tag_status": "as_extracted",
+      "class": "tank",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "hx",
+          "class": "tank",
+          "box_0_1000": [
+            630.0,
+            280.0,
+            670.0,
+            320.0
+          ],
+          "tag_as_extracted": "WTR-HX-203",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "name": "WTR-HX-203",
+      "type": "tank",
+      "role_reason": "class tank",
+      "system": "SYS-0",
+      "layout": {
+        "x": 650.0,
+        "y": 300.0,
+        "sheet": "0",
+        "frame": "sheet_0_1000"
+      },
+      "source": "synthetic extraction, sheet 0 symbol hx",
+      "sheets": [
+        "0"
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "L0-001",
+      "name": "S0-TK001 - S0-PU001",
+      "kind": "extracted_link",
+      "from": "S0-TK001",
+      "to": "S0-PU001",
+      "sheet": "0",
+      "from_symbol": "t",
+      "to_symbol": "pa",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-002",
+      "name": "S0-TK001 - S0-PU002",
+      "kind": "extracted_link",
+      "from": "S0-TK001",
+      "to": "S0-PU002",
+      "sheet": "0",
+      "from_symbol": "t",
+      "to_symbol": "pb",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-003",
+      "name": "S0-PU001 - S0-TK002",
+      "kind": "extracted_link",
+      "from": "S0-PU001",
+      "to": "S0-TK002",
+      "sheet": "0",
+      "from_symbol": "pa",
+      "to_symbol": "hx",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-004",
+      "name": "S0-PU002 - S0-VL001",
+      "kind": "extracted_link",
+      "from": "S0-PU002",
+      "to": "S0-VL001",
+      "sheet": "0",
+      "from_symbol": "pb",
+      "to_symbol": "v",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-005",
+      "name": "S0-VL001 - S0-TK002",
+      "kind": "extracted_link",
+      "from": "S0-VL001",
+      "to": "S0-TK002",
+      "sheet": "0",
+      "from_symbol": "v",
+      "to_symbol": "hx",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-006",
+      "name": "S0-IN001 - S0-PU001",
+      "kind": "extracted_link",
+      "from": "S0-IN001",
+      "to": "S0-PU001",
+      "sheet": "0",
+      "from_symbol": "p",
+      "to_symbol": "pa",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-007",
+      "name": "S0-IN002 - S0-TK001",
+      "kind": "extracted_link",
+      "from": "S0-IN002",
+      "to": "S0-TK001",
+      "sheet": "0",
+      "from_symbol": "l",
+      "to_symbol": "t",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    },
+    {
+      "id": "L0-008",
+      "name": "S0-IN003 - S0-VL001",
+      "kind": "extracted_link",
+      "from": "S0-IN003",
+      "to": "S0-VL001",
+      "sheet": "0",
+      "from_symbol": "z",
+      "to_symbol": "v",
+      "direction": "unknown",
+      "confidence": 0.8,
+      "verification": {
+        "status": "unverified"
+      }
+    }
+  ],
+  "instruments": [
+    {
+      "id": "S0-IN001",
+      "tag": "PT-301",
+      "tag_status": "as_extracted",
+      "class": "instrumentation",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "p",
+          "class": "instrumentation",
+          "box_0_1000": [
+            330.0,
+            80.0,
+            370.0,
+            120.0
+          ],
+          "tag_as_extracted": "PT-301",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "unit": "S0-PU001",
+      "unit_method": "self",
+      "unit_hops": 0,
+      "parent": "S0-PU001",
+      "parent_method": "linked",
+      "parent_source": {
+        "sheet": "0",
+        "symbol": "pa"
+      },
+      "linked_candidates": 1,
+      "position_nearest": "S0-PU001",
+      "parent_agrees_with_position": true,
+      "system": "SYS-0",
+      "isa_letters": "PT",
+      "loop": "301",
+      "instrument_kind": "measurement / control",
+      "variable": "pressure",
+      "variable_method": "ISA-5.1 first letter",
+      "uom": "bar",
+      "description": "Pump discharge pressure",
+      "stream": "L0-003",
+      "duplicate_tag": false
+    },
+    {
+      "id": "S0-IN002",
+      "tag": "LT-302",
+      "tag_status": "as_extracted",
+      "class": "instrumentation",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "l",
+          "class": "instrumentation",
+          "box_0_1000": [
+            80.0,
+            160.0,
+            120.0,
+            200.0
+          ],
+          "tag_as_extracted": "LT-302",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "unit": "S0-TK001",
+      "unit_method": "self",
+      "unit_hops": 0,
+      "parent": "S0-TK001",
+      "parent_method": "linked",
+      "parent_source": {
+        "sheet": "0",
+        "symbol": "t"
+      },
+      "linked_candidates": 1,
+      "position_nearest": "S0-TK001",
+      "parent_agrees_with_position": true,
+      "system": "SYS-0",
+      "isa_letters": "LT",
+      "loop": "302",
+      "instrument_kind": "measurement / control",
+      "variable": "level",
+      "variable_method": "ISA-5.1 first letter",
+      "uom": "%",
+      "description": "Buffer tank level",
+      "stream": null,
+      "duplicate_tag": false
+    },
+    {
+      "id": "S0-IN003",
+      "tag": "ZS-303",
+      "tag_status": "as_extracted",
+      "class": "instrumentation",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "z",
+          "class": "instrumentation",
+          "box_0_1000": [
+            480.0,
+            580.0,
+            520.0,
+            620.0
+          ],
+          "tag_as_extracted": "ZS-303",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "unit": "S0-PU002",
+      "unit_method": "connection_path",
+      "unit_hops": 1,
+      "parent": "S0-VL001",
+      "parent_method": "linked",
+      "parent_source": {
+        "sheet": "0",
+        "symbol": "v"
+      },
+      "linked_candidates": 1,
+      "position_nearest": "S0-VL001",
+      "parent_agrees_with_position": true,
+      "system": "SYS-0",
+      "isa_letters": "ZS",
+      "loop": "303",
+      "instrument_kind": "measurement / control",
+      "variable": "position",
+      "variable_method": "ISA-5.1 first letter",
+      "uom": "state",
+      "description": "Valve position switch",
+      "stream": null,
+      "duplicate_tag": false,
+      "value_type": "boolean"
+    }
+  ],
+  "final_elements": [],
+  "line_items": [
+    {
+      "id": "S0-VL001",
+      "tag": "WTR-VL-204",
+      "tag_status": "as_extracted",
+      "class": "valve",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "sheet": "0",
+          "symbol": "v",
+          "class": "valve",
+          "box_0_1000": [
+            480.0,
+            480.0,
+            520.0,
+            520.0
+          ],
+          "tag_as_extracted": "WTR-VL-204",
+          "confidence": 0.8,
+          "source_run": "synthetic fixture",
+          "tool": "synthetic",
+          "model": null
+        }
+      ],
+      "verification": {
+        "status": "unverified"
+      },
+      "unit": "S0-PU002",
+      "unit_method": "connection_path",
+      "unit_hops": 1,
+      "system": "SYS-0",
+      "description": "WTR-VL-204",
+      "duplicate_tag": false
+    }
+  ],
+  "offpage_connectors": [],
+  "offpage_pairs": [],
+  "dropped": {
+    "symbols": [],
+    "connections": []
+  },
+  "hierarchy": {
+    "id": "SITE",
+    "kind": "site",
+    "name": "Site (from water-utility)",
+    "children": [
+      {
+        "id": "SYS-0",
+        "kind": "system",
+        "name": "Sheet 0 (mostly WTR tags)",
+        "sheet": "0",
+        "children": [
+          {
+            "id": "S0-TK001",
+            "kind": "equipment",
+            "tag": "WTR-TK-201",
+            "class": "tank",
+            "children": [
+              {
+                "id": "S0-IN002",
+                "kind": "instrument",
+                "tag": "LT-302",
+                "class": "instrumentation",
+                "attach": "linked",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "S0-PU001",
+            "kind": "equipment",
+            "tag": "WTR-PU-202A",
+            "class": "pump",
+            "children": [
+              {
+                "id": "S0-IN001",
+                "kind": "instrument",
+                "tag": "PT-301",
+                "class": "instrumentation",
+                "attach": "linked",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "S0-PU002",
+            "kind": "equipment",
+            "tag": "WTR-PU-202B",
+            "class": "pump",
+            "children": [
+              {
+                "id": "S0-VL001",
+                "kind": "line_item",
+                "tag": "WTR-VL-204",
+                "class": "valve",
+                "children": [
+                  {
+                    "id": "S0-IN003",
+                    "kind": "instrument",
+                    "tag": "ZS-303",
+                    "class": "instrumentation",
+                    "attach": "linked",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "S0-TK002",
+            "kind": "equipment",
+            "tag": "WTR-HX-203",
+            "class": "tank",
+            "children": []
+          }
+        ],
+        "unassigned": [],
+        "offpage_connectors": []
+      }
+    ]
+  },
+  "summary": {
+    "systems": 1,
+    "equipment": 4,
+    "equipment_on_several_sheets": 0,
+    "instruments": 3,
+    "line_items": 1,
+    "offpage_connectors": 0,
+    "streams_extracted": 8,
+    "instrument_parent_method": {
+      "linked": 3
+    },
+    "instruments_without_equipment": 0,
+    "line_items_without_equipment": 0,
+    "placeholder_tags": 0,
+    "offpage_pairs": 0,
+    "offpage_status": {},
+    "sheet_drawing_numbers": {
+      "0": [
+        null,
+        "unknown"
+      ]
+    }
+  }
+}

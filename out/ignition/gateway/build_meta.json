@@ -38,7 +38,22 @@
     0.0881,
     0.4138
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FI-101",
+    "xmeas": 1,
+    "unit": "U-100",
+    "stream": "S1",
+    "variable": "flow",
+    "uom": "kscmh",
+    "description": "A feed flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 1: \"A Feed\" kscmh"
+    }
+   }
   },
   "FI-102": {
    "low": 0.0,
@@ -49,7 +64,22 @@
     3448.8308,
     3877.9038
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FI-102",
+    "xmeas": 2,
+    "unit": "U-100",
+    "stream": "S2",
+    "variable": "flow",
+    "uom": "kg/h",
+    "description": "D feed flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 2: \"D Feed\" kg/hr"
+    }
+   }
   },
   "FI-103": {
    "low": 0.0,
@@ -60,7 +90,22 @@
     4266.5105,
     4748.7074
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FI-103",
+    "xmeas": 3,
+    "unit": "U-100",
+    "stream": "S3",
+    "variable": "flow",
+    "uom": "kg/h",
+    "description": "E feed flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 3: \"E Feed\" kg/hr"
+    }
+   }
   },
   "FI-104": {
    "low": 0.0,
@@ -71,7 +116,22 @@
     8.8556,
     9.8325
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "FI-104",
+    "xmeas": 4,
+    "unit": "C-101",
+    "stream": "S4",
+    "variable": "flow",
+    "uom": "kscmh",
+    "description": "A and C feed flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 4: \"A and C Feed\" kscmh"
+    }
+   }
   },
   "FI-105": {
    "low": 0.0,
@@ -82,7 +142,22 @@
     25.7342,
     28.0827
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "FI-105",
+    "xmeas": 5,
+    "unit": "K-101",
+    "stream": "S8b",
+    "variable": "flow",
+    "uom": "kscmh",
+    "description": "Recycle flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 5: \"Recycle Flow\" kscmh"
+    }
+   }
   },
   "FI-106": {
    "low": 0.0,
@@ -93,7 +168,22 @@
     41.0035,
     43.6594
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "FI-106",
+    "xmeas": 6,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "flow",
+    "uom": "kscmh",
+    "description": "Reactor feed rate",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 6: \"Reactor Feed Rate\" kscmh"
+    }
+   }
   },
   "PI-107": {
    "low": 0.0,
@@ -104,7 +194,21 @@
     2668.8372,
     2740.9778
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "PI-107",
+    "xmeas": 7,
+    "unit": "R-101",
+    "variable": "pressure",
+    "uom": "kPa g",
+    "description": "Reactor pressure",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 7: \"Reactor Pressure\" kPa gauge"
+    }
+   }
   },
   "LI-108": {
    "low": 0.0,
@@ -115,7 +219,21 @@
     71.8441,
     78.1407
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "LI-108",
+    "xmeas": 8,
+    "unit": "R-101",
+    "variable": "level",
+    "uom": "%",
+    "description": "Reactor level",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 8: \"Reactor Level\" %"
+    }
+   }
   },
   "TI-109": {
    "low": 0.0,
@@ -126,7 +244,21 @@
     120.2814,
     120.5186
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "TI-109",
+    "xmeas": 9,
+    "unit": "R-101",
+    "variable": "temperature",
+    "uom": "degC",
+    "description": "Reactor temperature",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 9: \"Reactor Temperature\" Deg C"
+    }
+   }
   },
   "FI-110": {
    "low": 0.0,
@@ -137,7 +269,22 @@
     0.2678,
     0.4064
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "FI-110",
+    "xmeas": 10,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "flow",
+    "uom": "kscmh",
+    "description": "Purge rate",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 10: \"Purge Rate (stream 9)\" kscmh"
+    }
+   }
   },
   "TI-111": {
    "low": 0.0,
@@ -148,7 +295,21 @@
     78.8415,
     81.3731
    ],
-   "unit": "V-101"
+   "unit": "V-101",
+   "source_item": {
+    "tag": "TI-111",
+    "xmeas": 11,
+    "unit": "V-101",
+    "variable": "temperature",
+    "uom": "degC",
+    "description": "Separator temperature",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 11: \"Product Sep Temp\" Deg C"
+    }
+   }
   },
   "LI-112": {
    "low": 0.0,
@@ -159,7 +320,21 @@
     43.5239,
     56.3699
    ],
-   "unit": "V-101"
+   "unit": "V-101",
+   "source_item": {
+    "tag": "LI-112",
+    "xmeas": 12,
+    "unit": "V-101",
+    "variable": "level",
+    "uom": "%",
+    "description": "Separator level",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 12: \"Product Sep Level\" %"
+    }
+   }
   },
   "PI-113": {
    "low": 0.0,
@@ -170,7 +345,21 @@
     2596.0044,
     2671.3002
    ],
-   "unit": "V-101"
+   "unit": "V-101",
+   "source_item": {
+    "tag": "PI-113",
+    "xmeas": 13,
+    "unit": "V-101",
+    "variable": "pressure",
+    "uom": "kPa g",
+    "description": "Separator pressure",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 13: \"Prod Sep Pressure\" kPa gauge"
+    }
+   }
   },
   "FI-114": {
    "low": 0.0,
@@ -181,7 +370,22 @@
     18.9375,
     31.4054
    ],
-   "unit": "V-101"
+   "unit": "V-101",
+   "source_item": {
+    "tag": "FI-114",
+    "xmeas": 14,
+    "unit": "V-101",
+    "stream": "S10",
+    "variable": "flow",
+    "uom": "m3/h",
+    "description": "Separator underflow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 14: \"Prod Sep Underflow (stream 10)\" m3/hr"
+    }
+   }
   },
   "LI-115": {
    "low": 0.0,
@@ -192,7 +396,21 @@
     43.789,
     56.1341
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "LI-115",
+    "xmeas": 15,
+    "unit": "C-101",
+    "variable": "level",
+    "uom": "%",
+    "description": "Stripper level",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 15: \"Stripper Level\" %"
+    }
+   }
   },
   "PI-116": {
    "low": 0.0,
@@ -203,7 +421,21 @@
     3070.0636,
     3134.4905
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "PI-116",
+    "xmeas": 16,
+    "unit": "C-101",
+    "variable": "pressure",
+    "uom": "kPa g",
+    "description": "Stripper pressure",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 16: \"Stripper Pressure\" kPa gauge"
+    }
+   }
   },
   "FI-117": {
    "low": 0.0,
@@ -214,7 +446,22 @@
     19.241,
     26.5669
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "FI-117",
+    "xmeas": 17,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "flow",
+    "uom": "m3/h",
+    "description": "Stripper underflow (product)",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 17: \"Stripper Underflow (stream 11)\" m3/hr"
+    }
+   }
   },
   "TI-118": {
    "low": 0.0,
@@ -225,7 +472,21 @@
     64.1658,
     67.6008
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "TI-118",
+    "xmeas": 18,
+    "unit": "C-101",
+    "variable": "temperature",
+    "uom": "degC",
+    "description": "Stripper temperature",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 18: \"Stripper Temperature\" Deg C"
+    }
+   }
   },
   "FI-119": {
    "low": 0.0,
@@ -236,7 +497,21 @@
     194.8169,
     274.0618
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "FI-119",
+    "xmeas": 19,
+    "unit": "C-101",
+    "variable": "flow",
+    "uom": "kg/h",
+    "description": "Stripper steam flow",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 19: \"Stripper Steam Flow\" kg/hr"
+    }
+   }
   },
   "JI-120": {
    "low": 0.0,
@@ -247,7 +522,21 @@
     333.5234,
     349.1084
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "JI-120",
+    "xmeas": 20,
+    "unit": "K-101",
+    "variable": "power",
+    "uom": "kW",
+    "description": "Compressor work",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 20: \"Compressor Work\" kW"
+    }
+   }
   },
   "TI-121": {
    "low": 0.0,
@@ -258,7 +547,21 @@
     93.8145,
     95.387
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "TI-121",
+    "xmeas": 21,
+    "unit": "R-101",
+    "variable": "temperature",
+    "uom": "degC",
+    "description": "Reactor cooling water outlet temperature",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 21: \"Reactor Cooling Water Outlet Temp\" Deg C"
+    }
+   }
   },
   "TI-122": {
    "low": 0.0,
@@ -269,7 +572,25 @@
     75.7204,
     78.8615
    ],
-   "unit": "E-101"
+   "unit": "E-101",
+   "source_item": {
+    "tag": "TI-122",
+    "xmeas": 22,
+    "unit": "E-101",
+    "variable": "temperature",
+    "uom": "degC",
+    "description": "Separator Cooling Water Outlet Temp",
+    "verification": {
+     "status": "corrected",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMEAS 22: \"Separator Cooling Water Outlet Temp\" Deg C",
+     "previous": {
+      "description": "Condenser cooling water outlet temperature"
+     }
+    },
+    "open_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
+   }
   },
   "AI-123": {
    "low": 0.0,
@@ -280,7 +601,206 @@
     30.6159,
     33.7611
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123",
+    "xmeas": 23,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component A",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "A",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 23"
+   }
+  },
+  "AI-123-B": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    8.2684,
+    9.5382
+   ],
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123-B",
+    "xmeas": 24,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component B",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "B",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 24"
+   }
+  },
+  "AI-123-C": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    24.6003,
+    28.1778
+   ],
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123-C",
+    "xmeas": 25,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component C",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "C",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 25"
+   }
+  },
+  "AI-123-D": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    6.1782,
+    7.583
+   ],
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123-D",
+    "xmeas": 26,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component D",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "D",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 26"
+   }
+  },
+  "AI-123-E": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    17.068,
+    20.4959
+   ],
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123-E",
+    "xmeas": 27,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component E",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "E",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 27"
+   }
+  },
+  "AI-123-F": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    1.5081,
+    1.8076
+   ],
+   "unit": "R-101",
+   "source_item": {
+    "tag": "AI-123-F",
+    "xmeas": 28,
+    "unit": "R-101",
+    "stream": "S6",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Reactor feed analyzer | component F",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Reactor Feed Analysis (stream 6): components A-F"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-123",
+    "component": "F",
+    "source_range": "23-28",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 28"
+   }
   },
   "AI-129": {
    "low": 0.0,
@@ -291,7 +811,276 @@
     31.0993,
     34.7938
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129",
+    "xmeas": 29,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component A",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "A",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 29"
+   }
+  },
+  "AI-129-B": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    13.2135,
+    14.4317
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-B",
+    "xmeas": 30,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component B",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "B",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 30"
+   }
+  },
+  "AI-129-C": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    21.9795,
+    25.9689
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-C",
+    "xmeas": 31,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component C",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "C",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 31"
+   }
+  },
+  "AI-129-D": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    0.6,
+    1.8933
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-D",
+    "xmeas": 32,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component D",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "D",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 32"
+   }
+  },
+  "AI-129-E": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    16.8085,
+    20.3311
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-E",
+    "xmeas": 33,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component E",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "E",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 33"
+   }
+  },
+  "AI-129-F": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    2.1154,
+    2.4152
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-F",
+    "xmeas": 34,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component F",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "F",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 34"
+   }
+  },
+  "AI-129-G": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    4.4419,
+    5.2436
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-G",
+    "xmeas": 35,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component G",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "G",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 35"
+   }
+  },
+  "AI-129-H": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    1.9679,
+    2.6344
+   ],
+   "unit": "K-101",
+   "source_item": {
+    "tag": "AI-129-H",
+    "xmeas": 36,
+    "unit": "K-101",
+    "stream": "S9",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Purge gas analyzer | component H",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Purge Gas Analysis (stream 9): components A-H"
+    },
+    "sampling": {
+     "period_h": 0.1,
+     "dead_time_h": 0.1,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-129",
+    "component": "H",
+    "source_range": "29-36",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 36"
+   }
   },
   "AI-137": {
    "low": 0.0,
@@ -302,7 +1091,171 @@
     -0.0421,
     0.0796
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "AI-137",
+    "xmeas": 37,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Product analyzer | component D",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Product Analysis (stream 11): components D-H"
+    },
+    "sampling": {
+     "period_h": 0.25,
+     "dead_time_h": 0.25,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-137",
+    "component": "D",
+    "source_range": "37-41",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 37"
+   }
+  },
+  "AI-137-E": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    0.7575,
+    0.9143
+   ],
+   "unit": "C-101",
+   "source_item": {
+    "tag": "AI-137-E",
+    "xmeas": 38,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Product analyzer | component E",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Product Analysis (stream 11): components D-H"
+    },
+    "sampling": {
+     "period_h": 0.25,
+     "dead_time_h": 0.25,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-137",
+    "component": "E",
+    "source_range": "37-41",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 38"
+   }
+  },
+  "AI-137-F": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    0.038,
+    0.1565
+   ],
+   "unit": "C-101",
+   "source_item": {
+    "tag": "AI-137-F",
+    "xmeas": 39,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Product analyzer | component F",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Product Analysis (stream 11): components D-H"
+    },
+    "sampling": {
+     "period_h": 0.25,
+     "dead_time_h": 0.25,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-137",
+    "component": "F",
+    "source_range": "37-41",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 39"
+   }
+  },
+  "AI-137-G": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    50.9043,
+    56.6221
+   ],
+   "unit": "C-101",
+   "source_item": {
+    "tag": "AI-137-G",
+    "xmeas": 40,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Product analyzer | component G",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Product Analysis (stream 11): components D-H"
+    },
+    "sampling": {
+     "period_h": 0.25,
+     "dead_time_h": 0.25,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-137",
+    "component": "G",
+    "source_range": "37-41",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 40"
+   }
+  },
+  "AI-137-H": {
+   "low": 0.0,
+   "high": 100.0,
+   "source": "physical: a percentage",
+   "has_data": true,
+   "normal": [
+    40.5637,
+    47.1136
+   ],
+   "unit": "C-101",
+   "source_item": {
+    "tag": "AI-137-H",
+    "xmeas": 41,
+    "unit": "C-101",
+    "stream": "S11",
+    "variable": "composition",
+    "uom": "mol%",
+    "description": "Product analyzer | component H",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "Product Analysis (stream 11): components D-H"
+    },
+    "sampling": {
+     "period_h": 0.25,
+     "dead_time_h": 0.25,
+     "source": "teprob.f header comments"
+    },
+    "analyzer_parent": "AI-137",
+    "component": "H",
+    "source_range": "37-41",
+    "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 41"
+   }
   },
   "FV-201": {
    "low": 0.0,
@@ -313,7 +1266,21 @@
     59.2508,
     66.8527
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FV-201",
+    "xmv": 1,
+    "unit": "U-100",
+    "stream": "S2",
+    "uom": "%",
+    "description": "D feed flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 1: \"D Feed Flow (stream 2)\""
+    }
+   }
   },
   "FV-202": {
    "low": 0.0,
@@ -324,7 +1291,21 @@
     51.418,
     56.5151
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FV-202",
+    "xmv": 2,
+    "unit": "U-100",
+    "stream": "S3",
+    "uom": "%",
+    "description": "E feed flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 2: \"E Feed Flow (stream 3)\""
+    }
+   }
   },
   "FV-203": {
    "low": 0.0,
@@ -335,7 +1316,21 @@
     8.6442,
     40.739
    ],
-   "unit": "U-100"
+   "unit": "U-100",
+   "source_item": {
+    "tag": "FV-203",
+    "xmv": 3,
+    "unit": "U-100",
+    "stream": "S1",
+    "uom": "%",
+    "description": "A feed flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 3: \"A Feed Flow (stream 1)\""
+    }
+   }
   },
   "FV-204": {
    "low": 0.0,
@@ -346,7 +1341,21 @@
     54.106,
     68.5662
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "FV-204",
+    "xmv": 4,
+    "unit": "C-101",
+    "stream": "S4",
+    "uom": "%",
+    "description": "A and C feed flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 4: \"A and C Feed Flow (stream 4)\""
+    }
+   }
   },
   "HV-205": {
    "low": 0.0,
@@ -357,7 +1366,20 @@
     19.5852,
     24.8095
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "HV-205",
+    "xmv": 5,
+    "unit": "K-101",
+    "uom": "%",
+    "description": "Compressor recycle valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 5: \"Compressor Recycle Valve\""
+    }
+   }
   },
   "FV-206": {
    "low": 0.0,
@@ -368,7 +1390,21 @@
     31.6247,
     48.4563
    ],
-   "unit": "K-101"
+   "unit": "K-101",
+   "source_item": {
+    "tag": "FV-206",
+    "xmv": 6,
+    "unit": "K-101",
+    "stream": "S9",
+    "uom": "%",
+    "description": "Purge valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 6: \"Purge Valve (stream 9)\""
+    }
+   }
   },
   "LV-207": {
    "low": 0.0,
@@ -379,7 +1415,21 @@
     19.0421,
     56.8455
    ],
-   "unit": "V-101"
+   "unit": "V-101",
+   "source_item": {
+    "tag": "LV-207",
+    "xmv": 7,
+    "unit": "V-101",
+    "stream": "S10",
+    "uom": "%",
+    "description": "Separator pot liquid flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 7: \"Separator Pot Liquid Flow (stream 10)\""
+    }
+   }
   },
   "LV-208": {
    "low": 0.0,
@@ -390,7 +1440,21 @@
     32.1597,
     60.7304
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "LV-208",
+    "xmv": 8,
+    "unit": "C-101",
+    "stream": "S11",
+    "uom": "%",
+    "description": "Stripper liquid product flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 8: \"Stripper Liquid Product Flow (stream 11)\""
+    }
+   }
   },
   "FV-209": {
    "low": 0.0,
@@ -401,7 +1465,20 @@
     38.088,
     58.9721
    ],
-   "unit": "C-101"
+   "unit": "C-101",
+   "source_item": {
+    "tag": "FV-209",
+    "xmv": 9,
+    "unit": "C-101",
+    "uom": "%",
+    "description": "Stripper steam valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 9: \"Stripper Steam Valve\""
+    }
+   }
   },
   "TV-210": {
    "low": 0.0,
@@ -412,7 +1489,20 @@
     37.8136,
     44.3928
    ],
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "TV-210",
+    "xmv": 10,
+    "unit": "R-101",
+    "uom": "%",
+    "description": "Reactor cooling water flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 10: \"Reactor Cooling Water Flow\""
+    }
+   }
   },
   "TV-211": {
    "low": 0.0,
@@ -423,7 +1513,20 @@
     9.5668,
     26.8966
    ],
-   "unit": "E-101"
+   "unit": "E-101",
+   "source_item": {
+    "tag": "TV-211",
+    "xmv": 11,
+    "unit": "E-101",
+    "uom": "%",
+    "description": "Condenser cooling water flow valve",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 11: \"Condenser Cooling Water Flow\""
+    }
+   }
   },
   "SC-212": {
    "low": 0.0,
@@ -431,7 +1534,20 @@
    "source": "physical: a percentage",
    "has_data": false,
    "normal": null,
-   "unit": "R-101"
+   "unit": "R-101",
+   "source_item": {
+    "tag": "SC-212",
+    "xmv": 12,
+    "unit": "R-101",
+    "uom": "%",
+    "description": "Agitator speed",
+    "verification": {
+     "status": "confirmed",
+     "checked_against": "teprob.f (Braatz group TE code)",
+     "checked_on": "2026-10-06",
+     "evidence": "XMV 12: \"Agitator Speed\""
+    }
+   }
   }
  },
  "te_review": {
@@ -463,8 +1579,24 @@
    "TI-121": "unverified",
    "TI-122": "unverified",
    "AI-123": "unverified",
+   "AI-123-B": "unverified",
+   "AI-123-C": "unverified",
+   "AI-123-D": "unverified",
+   "AI-123-E": "unverified",
+   "AI-123-F": "unverified",
    "AI-129": "unverified",
+   "AI-129-B": "unverified",
+   "AI-129-C": "unverified",
+   "AI-129-D": "unverified",
+   "AI-129-E": "unverified",
+   "AI-129-F": "unverified",
+   "AI-129-G": "unverified",
+   "AI-129-H": "unverified",
    "AI-137": "unverified",
+   "AI-137-E": "unverified",
+   "AI-137-F": "unverified",
+   "AI-137-G": "unverified",
+   "AI-137-H": "unverified",
    "FV-201": "unverified",
    "FV-202": "unverified",
    "FV-203": "unverified",
