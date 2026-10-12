@@ -2,6 +2,10 @@
 import ast
 import copy
 import json
+import shlex
+import shutil
+import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -10,6 +14,56 @@ sys.path.insert(0, str(ROOT / 'scripts' / 'ignition'))
 sys.path.insert(0, str(ROOT / 'scripts'))
 from te_channels import expanded_items, channel_columns, ANALYZERS
 from build_gateway import te_tags, te_columns, ALARMS
+
+
+def check_packaged_servers(expected_columns):
+    """Import only the Docker COPY payload, not modules from the source checkout.
+
+    This checks local packaging with installed dependencies; it does not emulate
+    RUN steps, build an image, fetch replay data, or start either OPC UA server.
+    """
+    with tempfile.TemporaryDirectory() as directory:
+        app = Path(directory)
+        for line in (ROOT / 'docker/sim.Dockerfile').read_text().splitlines():
+            parts = shlex.split(line, comments=True)
+            if not parts or parts[0].upper() != 'COPY':
+                continue
+            # This Dockerfile uses simple, single-source COPY instructions.
+            # Fail closed if it changes to flags, globs, JSON or multiline syntax.
+            assert len(parts) == 3 and not parts[1].startswith(('-', '[')), line
+            source, destination = ROOT / parts[1], app / parts[2]
+            assert not Path(parts[2]).is_absolute() and '..' not in Path(parts[2]).parts, line
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if source.is_dir():
+                shutil.copytree(source, destination, dirs_exist_ok=True)
+            else:
+                if parts[2].endswith('/'):
+                    destination.mkdir(parents=True, exist_ok=True)
+                    destination /= source.name
+                shutil.copy2(source, destination)
+        probe = """
+import json
+import sys
+from pathlib import Path
+app = Path.cwd()
+sys.path.insert(0, str(app / 'scripts/ignition'))
+import te_sim_server
+import demo_points_server
+model = json.loads(te_sim_server.MODEL.read_text())
+columns = te_sim_server.column_map(model)
+import te_channels
+for module in (te_sim_server, demo_points_server, te_channels):
+    assert Path(module.__file__).resolve().is_relative_to(app), module.__file__
+assert len(columns) == 52 and set(columns.values()) == set(range(52))
+assert 'SC-212' not in columns
+print(json.dumps(columns, sort_keys=True))
+"""
+        # A fresh isolated interpreter excludes the checkout and PYTHONPATH.
+        # Installed asyncua remains available; no dependency stubs mask failures.
+        result = subprocess.run([sys.executable, '-I', '-c', probe], cwd=app,
+                                capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, result.stdout + result.stderr
+        assert json.loads(result.stdout) == expected_columns
 
 
 def main():
@@ -22,6 +76,7 @@ def main():
     assert set(columns.values()) == set(range(52))
     assert len(set(columns.values())) == 52
     assert columns == te_columns(model)
+    check_packaged_servers(columns)
     # Verify the actual replay function offline without importing the optional
     # asyncua server dependency or starting a listener.
     module = ast.parse((ROOT / 'scripts/ignition/te_sim_server.py').read_text())
@@ -83,7 +138,7 @@ def main():
     parent['ops_review'] = {'show_on_screen': False}
     _, _, _, hidden = te_tags(modified)
     assert len([t for t in hidden['hidden'] if t.startswith('AI-123')]) == 6
-    print('PASS: 52 unique recorded channels + SC-212 unmapped; original paths, analyzer provenance, history/read-only/quality configuration, unchanged alarms, parent review inheritance')
+    print('PASS: 52 unique recorded channels + SC-212 unmapped; original paths, analyzer provenance, history/read-only/quality configuration, unchanged alarms, parent review inheritance; isolated Docker COPY payload imports and replay mapping')
 
 
 if __name__ == '__main__':
