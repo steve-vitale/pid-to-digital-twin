@@ -59,7 +59,10 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402  (iou, valid classes only; never the answer key)
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
+# PID_SHEETS_DIR (absolute, or relative to the repo root) points at any folder of <sheet>.png + <sheet>.graphml,
+# e.g. data/te_pid for the generated Tennessee Eastman sheets. Default: the PID2Graph set, as before.
+DATA = (ROOT / os.environ["PID_SHEETS_DIR"]) if os.environ.get("PID_SHEETS_DIR") else \
+    ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 # Run folders are looked up in order; runs-main is an optional read-only link to another checkout's runs.
 RUN_ROOTS = [ROOT / "runs", ROOT / "runs-main"]
 CACHE = ROOT / "out" / "confidence_cache"

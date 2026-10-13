@@ -1,0 +1,107 @@
+{
+  "about": "Drafting layout for scripts/draw_pid_from_model.py: WHERE things go on the Tennessee Eastman P&ID sheets, never WHAT is on them. Content (units, streams, tags, which unit owns each item, which stream an item sits on) comes from data/te_process_model.json. The generator refuses a layout that leaves a model item undrawn, draws one twice, or names a tag the model does not have. Utility lines (cooling water, steam) and the compressor recycle bypass are drafting additions: the model holds their valves and instruments but not the lines, so they are marked drafting_addition in the answer key. Pixel coordinates on a 3200 x 2130 sheet (the size of OPEN100 sheets 5-9).",
+  "sheet_px": [3200, 2130],
+  "title_block": {
+    "project": "TENNESSEE EASTMAN CHALLENGE PROCESS",
+    "drawn_by": "draw_pid_from_model.py",
+    "date": "10/13/2026",
+    "revision": "A",
+    "scale": "NONE",
+    "notes": ["GENERATED FROM THE VERIFIED PROCESS MODEL", "NOT A DRAWING OF RECORD", "VERIFY AGAINST THE FIELD UNDER", "MOC BEFORE ANY ENGINEERING USE"]
+  },
+  "sheets": [
+    {
+      "id": "101", "drawing": "101-1", "system": "RXN", "title": "FEED AND REACTION",
+      "units": {
+        "U-100": {"shape": "mixer", "at": [1330, 1360]},
+        "R-101": {"shape": "vertical_vessel", "cx": 1760, "top": 700, "bottom": 1500, "w": 240, "head": 60, "agitator": true,
+                   "mount": {"PI-107": [1990, 920], "LI-108": [1990, 1030], "TI-109": [1990, 1140], "SC-212": [1960, 633]}}
+      },
+      "flags": {
+        "F-S1": {"stream": "S1", "at": [120, 360], "dir": "right"},
+        "F-S2": {"stream": "S2", "at": [120, 560], "dir": "right"},
+        "F-S3": {"stream": "S3", "at": [120, 760], "dir": "right"},
+        "F-S5": {"stream": "S5", "at": [120, 960], "dir": "right"},
+        "F-S8b": {"stream": "S8b", "at": [120, 1160], "dir": "right"},
+        "F-S7": {"stream": "S7", "at": [2420, 820], "dir": "right"},
+        "F-CWS-R": {"utility": ["CW PID 901-1", "COOLING WATER SUPPLY"], "at": [1100, 1700], "dir": "right"},
+        "F-CWR-R": {"utility": ["CW PID 901-1", "COOLING WATER RETURN"], "at": [2420, 1700], "dir": "right"}
+      },
+      "routes": [
+        {"id": "S1", "stream": "S1", "from": {"flag": "F-S1"}, "to": {"net": "HDR"}, "pts": [[350, 360], [1100, 360]]},
+        {"id": "S2", "stream": "S2", "from": {"flag": "F-S2"}, "to": {"net": "HDR"}, "pts": [[350, 560], [1100, 560]]},
+        {"id": "S3", "stream": "S3", "from": {"flag": "F-S3"}, "to": {"net": "HDR"}, "pts": [[350, 760], [1100, 760]]},
+        {"id": "S5", "stream": "S5", "from": {"flag": "F-S5"}, "to": {"net": "HDR"}, "pts": [[350, 960], [1100, 960]]},
+        {"id": "S8b", "stream": "S8b", "from": {"flag": "F-S8b"}, "to": {"net": "HDR"}, "pts": [[350, 1160], [1100, 1160]]},
+        {"id": "HDR", "from": {"net": "HDR"}, "to": {"unit": "U-100"}, "pts": [[1100, 360], [1100, 1360], [1295, 1360]]},
+        {"id": "S6", "stream": "S6", "from": {"unit": "U-100"}, "to": {"unit": "R-101"}, "pts": [[1365, 1360], [1640, 1360]],
+         "place": {"FI-106": [1460, 1360], "AI-123": [1555, 1360]}},
+        {"id": "S7", "stream": "S7", "from": {"unit": "R-101"}, "to": {"flag": "F-S7"}, "pts": [[1880, 820], [2420, 820]]},
+        {"id": "CWS-R", "from": {"flag": "F-CWS-R"}, "to": {"unit": "R-101"}, "pts": [[1330, 1700], [1700, 1700], [1700, 1495]],
+         "items": ["TV-210"], "place": {"TV-210": [1520, 1700]}},
+        {"id": "CWR-R", "from": {"unit": "R-101"}, "to": {"flag": "F-CWR-R"}, "pts": [[1880, 1300], [2200, 1300], [2200, 1700], [2420, 1700]],
+         "items": ["TI-121"], "place": {"TI-121": [2050, 1300]}}
+      ]
+    },
+    {
+      "id": "102", "drawing": "102-1", "system": "SEP", "title": "CONDENSING, SEPARATION AND RECYCLE",
+      "units": {
+        "E-101": {"shape": "horizontal_exchanger", "x0": 700, "x1": 1100, "cy": 560, "h": 90},
+        "V-101": {"shape": "vertical_vessel", "cx": 1660, "top": 800, "bottom": 1400, "w": 220, "head": 55,
+                   "mount": {"TI-111": [1880, 960], "LI-112": [1880, 1070], "PI-113": [1880, 1180]}},
+        "K-101": {"shape": "compressor", "at": [1900, 300], "r": 55, "mount": {"JI-120": [1900, 420]}}
+      },
+      "flags": {
+        "F-S7": {"stream": "S7", "at": [120, 560], "dir": "right"},
+        "F-S8b": {"stream": "S8b", "at": [120, 200], "dir": "left"},
+        "F-S9": {"stream": "S9", "at": [2420, 880], "dir": "right"},
+        "F-S10": {"stream": "S10", "at": [2420, 1600], "dir": "right"},
+        "F-CWS-E": {"utility": ["CW PID 901-1", "COOLING WATER SUPPLY"], "at": [120, 820], "dir": "right"},
+        "F-CWR-E": {"utility": ["CW PID 901-1", "COOLING WATER RETURN"], "at": [120, 380], "dir": "left"}
+      },
+      "routes": [
+        {"id": "S7", "stream": "S7", "from": {"flag": "F-S7"}, "to": {"unit": "E-101"}, "pts": [[350, 560], [700, 560]]},
+        {"id": "S7b", "stream": "S7b", "from": {"unit": "E-101"}, "to": {"unit": "V-101"}, "pts": [[1100, 560], [1450, 560], [1450, 950], [1550, 950]]},
+        {"id": "S8", "stream": "S8", "from": {"unit": "V-101"}, "to": {"unit": "K-101"}, "pts": [[1660, 800], [1660, 300], [1845, 300]]},
+        {"id": "S8b", "stream": "S8b", "from": {"unit": "K-101"}, "to": {"flag": "F-S8b"}, "pts": [[1955, 300], [2050, 300], [2050, 200], [350, 200]],
+         "place": {"FI-105": [1750, 200]}},
+        {"id": "S9", "stream": "S9", "from": {"unit": "V-101"}, "to": {"flag": "F-S9"}, "pts": [[1770, 880], [2420, 880]],
+         "place": {"FI-110": [1960, 880], "AI-129": [2080, 880], "FV-206": [2240, 880]}},
+        {"id": "BYP", "from": {"tee": "S8b", "at": [2000, 300]}, "to": {"tee": "S8", "at": [1780, 300]}, "pts": [[2000, 300], [2000, 540], [1780, 540], [1780, 300]],
+         "items": ["HV-205"], "place": {"HV-205": [1890, 540]}, "bubble_side": "down"},
+        {"id": "S10", "stream": "S10", "from": {"unit": "V-101"}, "to": {"flag": "F-S10"}, "pts": [[1660, 1400], [1660, 1600], [2420, 1600]],
+         "place": {"FI-114": [1850, 1600], "LV-207": [2050, 1600]}},
+        {"id": "CWS-E", "from": {"flag": "F-CWS-E"}, "to": {"unit": "E-101"}, "pts": [[350, 820], [900, 820], [900, 605]],
+         "items": ["TV-211"], "place": {"TV-211": [620, 820]}},
+        {"id": "CWR-E", "from": {"unit": "E-101"}, "to": {"flag": "F-CWR-E"}, "pts": [[980, 515], [980, 380], [350, 380]],
+         "items": ["TI-122"], "place": {"TI-122": [800, 380]}}
+      ]
+    },
+    {
+      "id": "103", "drawing": "103-1", "system": "PRD", "title": "PRODUCT STRIPPING",
+      "units": {
+        "C-101": {"shape": "column", "cx": 1400, "top": 600, "bottom": 1340, "w": 200, "head": 50,
+                   "mount": {"PI-116": [1610, 700], "TI-118": [1610, 830], "LI-115": [1610, 960]}}
+      },
+      "flags": {
+        "F-S10": {"stream": "S10", "at": [120, 760], "dir": "right"},
+        "F-S4": {"stream": "S4", "at": [120, 1120], "dir": "right"},
+        "F-S5": {"stream": "S5", "at": [2420, 300], "dir": "right"},
+        "F-S11": {"stream": "S11", "at": [2420, 1600], "dir": "right"},
+        "F-LPS": {"utility": ["LS PID 902-1", "LOW PRESSURE STEAM"], "at": [120, 1440], "dir": "right"},
+        "F-COND": {"utility": ["LS PID 902-1", "CONDENSATE RETURN"], "at": [2420, 1300], "dir": "right"}
+      },
+      "routes": [
+        {"id": "S10", "stream": "S10", "from": {"flag": "F-S10"}, "to": {"unit": "C-101"}, "pts": [[350, 760], [1300, 760]]},
+        {"id": "S4", "stream": "S4", "from": {"flag": "F-S4"}, "to": {"unit": "C-101"}, "pts": [[350, 1120], [1300, 1120]],
+         "place": {"FV-204": [900, 1120], "FI-104": [1100, 1120]}},
+        {"id": "S5", "stream": "S5", "from": {"unit": "C-101"}, "to": {"flag": "F-S5"}, "pts": [[1400, 600], [1400, 300], [2420, 300]]},
+        {"id": "S11", "stream": "S11", "from": {"unit": "C-101"}, "to": {"flag": "F-S11"}, "pts": [[1400, 1340], [1400, 1600], [2420, 1600]],
+         "place": {"FI-117": [1600, 1600], "AI-137": [1720, 1600], "LV-208": [1900, 1600]}},
+        {"id": "LPS", "from": {"flag": "F-LPS"}, "to": {"unit": "C-101"}, "pts": [[350, 1440], [1150, 1440], [1150, 1260], [1300, 1260]],
+         "items": ["FV-209", "FI-119"], "place": {"FV-209": [700, 1440], "FI-119": [900, 1440]}},
+        {"id": "COND", "from": {"unit": "C-101"}, "to": {"flag": "F-COND"}, "pts": [[1500, 1260], [2100, 1260], [2100, 1300], [2420, 1300]]}
+      ]
+    }
+  ]
+}

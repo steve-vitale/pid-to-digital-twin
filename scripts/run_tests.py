@@ -38,6 +38,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
     "scripts/test_te_topology.py",
+    "scripts/test_te_pid_roundtrip.py",
 )
 TESTS = SOURCE_TESTS + FULL_ONLY_TESTS
 DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
@@ -48,6 +49,8 @@ SOURCE_FILES = (
     "data/te_process_model.json", "data/te_display_layout.json", "data/te_unit_purposes.json",
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json",
+    "data/te_pid_layout.json", "data/te_pid/key.json",
+    *(f"data/te_pid/{s}.{e}" for s in ("101", "102", "103") for e in ("png", "graphml")),
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
     "out/svg/overview.svg", f"{TWIN}/plant_model.json",
 ) + tuple(f"{TWIN}/svg/sheet_{i}.svg" for i in range(12)) + tuple(

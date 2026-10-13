@@ -14,6 +14,8 @@ Writes data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L<n>/ (
 side-by-side crop to docs/screenshots/scan-levels.png.
 
 Usage: python scripts/degrade_scans.py
+       python scripts/degrade_scans.py --src data/te_pid --drawings 101,102,103 --dest data/te_pid/scan
+           (any other sheet set, same levels and seeding: writes <dest>-L<n>/, no preview image)
 """
 import shutil
 from pathlib import Path
@@ -68,7 +70,28 @@ def degrade(img, p, rng):
     return out
 
 
+def degrade_set(src, drawings, dest_prefix):
+    """The same levels and per-drawing seeds for any folder of <id>.png + <id>.graphml (ids must be integers)."""
+    for level, p in LEVELS.items():
+        dest = Path(f"{dest_prefix}-L{level}")
+        dest.mkdir(parents=True, exist_ok=True)
+        for d in drawings:
+            rng = np.random.default_rng(SEED + 100 * level + int(d))
+            degrade(Image.open(Path(src) / f"{d}.png"), p, rng).save(dest / f"{d}.png")
+            shutil.copy(Path(src) / f"{d}.graphml", dest / f"{d}.graphml")
+        print(f"L{level}: wrote {len(drawings)} drawings to {dest}")
+
+
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--src", default=None, help="another sheet folder (default: the OPEN100 holdout-A run)")
+    ap.add_argument("--drawings", default="")
+    ap.add_argument("--dest", default=None, help="output prefix; level folders are <dest>-L1..L3")
+    a = ap.parse_args()
+    if a.src:
+        degrade_set(ROOT / a.src, [x for x in a.drawings.split(",") if x], ROOT / a.dest)
+        return
     crops = []
     for level, p in LEVELS.items():
         dest = COMPLETE / f"PID2Graph OPEN100 scan-L{level}"

@@ -47,7 +47,10 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
+# PID_SHEETS_DIR (absolute, or relative to the repo root) points at any folder of <sheet>.png + <sheet>.graphml,
+# e.g. data/te_pid for the generated Tennessee Eastman sheets. Default: the PID2Graph set, as before.
+DATA = (ROOT / os.environ["PID_SHEETS_DIR"]) if os.environ.get("PID_SHEETS_DIR") else \
+    ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 RUNS = ROOT / "runs"
 SCORED = ["tank", "pump", "valve", "instrumentation", "inlet/outlet", "general"]
 
