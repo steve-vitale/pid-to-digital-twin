@@ -73,7 +73,7 @@ class CurrentGatewayContract(unittest.TestCase):
 
     def test_every_exported_script_transform_parses_as_a_perspective_body(self):
         # Perspective compiles TRANSFORM_SIGNATURE + "\n" + code unmodified. The first native import found every
-        # script transform failing to parse (unindented bodies; journal entry 37). This is a Python 3 parse of the
+        # script transform failing to parse (unindented bodies; journal entry 38). This is a Python 3 parse of the
         # exported bytes, a proxy for Jython 2.7: runtime execution still needs a gateway.
         codes = []
 
@@ -95,7 +95,7 @@ class CurrentGatewayContract(unittest.TestCase):
 
     def test_every_band_indicator_shows_its_band(self):
         # TI-109's real 0.24 degC band was drawn on a span stretched to its 175 degC alarm: a sub-pixel sliver that
-        # read as missing data (journal entry 37). Every indicator must give its band a visible share of its span.
+        # read as missing data (journal entry 38). Every indicator must give its band a visible share of its span.
         shares = {}
         for name, view in self.held.views.items():
             for c in walk(view['root']):
@@ -110,7 +110,7 @@ class CurrentGatewayContract(unittest.TestCase):
 
     def test_drawing_and_schematic_values_never_render_null(self):
         # The numeric format transform these labels used rendered a Bad (no data) value as the text "null": all 334
-        # OPEN100 placeholders read "null" on screen (journal entry 37). Bad quality must read as an honest state.
+        # OPEN100 placeholders read "null" on screen (journal entry 38). Bad quality must read as an honest state.
         class Quality:
             def __init__(self, good): self.good = good
             def isGood(self): return self.good

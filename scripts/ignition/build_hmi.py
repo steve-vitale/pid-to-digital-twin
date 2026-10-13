@@ -63,7 +63,7 @@ FOOT = ("Read-only monitoring. Normal bands are learned from the normal run (scr
 # Perspective stores a script transform as the BODY of this function and compiles TRANSFORM_SIGNATURE + "\n" + body
 # exactly as written. An unindented body is a Jython parse error ("Error_Configuration: Parse Error in script
 # transform"): the label shows null under an error overlay, even though its tag reads Good. Seen in the first native
-# import of the 23-view project (journal entry 37); every offline check had re-indented the code before running it.
+# import of the 23-view project (journal entry 38); every offline check had re-indented the code before running it.
 TRANSFORM_SIGNATURE = "def transform(self, value, quality, timestamp):"
 
 
@@ -149,7 +149,7 @@ def span(band, limits):
     mid, half = (band[0] + band[1]) / 2, (band[1] - band[0]) / 2 or 1.0
     lo, hi = mid - DISPLAY_SPAN * half, mid + DISPLAY_SPAN * half
     # A far limit would shrink the band to a sliver that reads as missing data: TI-109's real band is 0.24 degC
-    # wide, its alarm 175 degC (journal entry 37). Such a limit stays in the "Normal band" text and in State colour.
+    # wide, its alarm 175 degC (journal entry 38). Such a limit stays in the "Normal band" text and in State colour.
     for v in shown_limits(band, limits):
         hi = max(hi, v + 0.05 * (v - lo))
     if band[0] >= 0 > lo:
@@ -385,7 +385,7 @@ def sheet_screen(provider, sheet, title, img_uri, size, instruments, counts):
             "backgroundColor": "#ffffff"}, tooltip=f"{tag} ({asset}): " + (
                 "mapped to a data point" if mapped else "extracted from the drawing; no data point yet"))
         # A numeric format transform turns a Bad (no data) value into the literal text "null", which reads as a broken
-        # screen rather than an honest state (journal entry 37). The script returns plain text, so Perspective's red
+        # screen rather than an honest state (journal entry 38). The script returns plain text, so Perspective's red
         # quality overlay no longer appears; the words carry the state instead. The tag binding stays: a placeholder
         # that ever read Good would show its number (and fail V4) rather than be hidden.
         if not mapped:

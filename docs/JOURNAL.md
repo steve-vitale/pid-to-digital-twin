@@ -1714,3 +1714,125 @@ No explicit reply or acknowledgement of the new review was found in the existing
 handoff files. A saved resume pointer makes it available without claiming Claude
 read or agreed with it. Generators, UI, main and the separate 3D-tour worktree are
 outside this docs-only continuation.
+
+## 38. Import the current project into a real gateway, and watch what the offline checks could not
+
+**2026-10-12/13:** the 23-view project finally ran in Ignition. Steve authorized Docker and an isolated test
+target, so the whole current source went into a **disposable Ignition 8.3.10 container** (trial, fresh volume,
+port bound to localhost only, removed afterwards), fed by the replay image built from `docker/sim.Dockerfile`.
+No real plant, controls or site gateway was involved. The first import found that every live reading on the
+new screens was broken. Nothing offline had caught it.
+
+**What the gateway showed first.** The import itself was clean: 1,118 tags with zero read-back differences, and
+the 23 views exported back identical. V1 to V7 passed, and the gateway's own OPC UA server read 52 TE values and 24
+mapped OPEN100 points Good. Yet the overview showed `null` in every reading, each under Perspective's red error
+marker, and the vessels said ERROR ([screenshot](screenshots/native-before-fix-overview-transform-parse-error.png)).
+Opening the marker gave the cause: *Error_Configuration: Parse Error in script transform*. Perspective stores a
+script transform as the body of `def transform(self, value, quality, timestamp):` and compiles it as written. The
+generators stored the body unindented. All **580 of 580** script transforms failed to parse.
+
+The offline preview and tests had run the same code, but they indented it themselves before executing it. So
+they tested a version of the code that Ignition never sees. The historical October 8 screens did not have this
+problem because they used Ignition's built-in format transforms, not scripts. The scripts arrived with the
+October 10 process mimic, which had never been imported.
+
+**The fixes, each with a test that fails on the old code:**
+- One choke point (`build_hmi.tag_binding`) now stores every script transform as an indented body. The offline
+  harness compiles stored code exactly as Perspective does, so an unindented body now fails offline too. An
+  artifact test parses all exported transforms under the Perspective signature. Run against the old export,
+  580 of 580 fail.
+- The drawing sheets and the schematic used a numeric format transform, which turns a value with no data into
+  the literal text `null`. Unmapped placeholders now read **not connected**, in muted italics, and mapped points
+  without Good data read **UNKNOWN**. The tag binding stays, so a placeholder that ever read Good would show its
+  number and fail V4 instead of being hidden. The test covers all 334 placeholders.
+- TI-109's band was invisible. Its real normal band, 120.28–120.52 °C, sat on an indicator stretched to its 175 °C
+  shutdown limit, so the band took 0.4% of the width
+  ([before](screenshots/native-before-fix-reactor-rows-TI-109-band.png), [after](screenshots/native-reactor-rows-bands-normal.png)).
+  The indicator now draws an alarm limit only when it lies within 10 band half-widths. PI-107's limits still
+  appear; TI-109's limit stays in the text column and in the State colour. This reverses an earlier Claude-only
+  display choice, and operations should confirm it.
+
+**Steve's October 8 question, answered.** He had asked why many tags registered as null and whether the normal
+bands were right, since most looked like missing data. To see what he saw, the historical backup was restored into
+a second disposable container. On those screens the agitator SC-212 read `null`
+([screenshot](screenshots/historical-oct8-reactor-sc212-null.png)), and every unmapped drawing instrument read
+`null`: **359** placeholders then, 12 on sheet 0 alone ([screenshot](screenshots/historical-oct8-sheet0-placeholders-null.png)).
+None of these was a broken tag. Each one has no data source: SC-212's channel (XMV 12) is not in the published
+replay, and the drawing instruments have no I/O mapping. Ignition reads them Bad, as it should, and the format
+transform printed that as `null`. Today the count is **334**: 24 instruments have since been mapped to synthetic
+demo points, and MS 14010 became a metadata-only callout with no PV. The census from the final run:
+
+| Group | Count | Gateway quality | Shown on screen |
+|---|---|---|---|
+| TE recorded channels | 52 | Good | numbers |
+| OPEN100 mapped (synthetic demo points) | 24 | Good | numbers |
+| SC-212, no replay channel | 1 | Bad | NOT CONNECTED and UNKNOWN / no replay source |
+| OPEN100 placeholders, no I/O mapping | 334 | Bad | not connected |
+| False-good placeholders | 0 | | |
+
+The bands are right where data exists. All 52 recorded channels have a band learned from the normal run, and
+SC-212, with no data, has none. In normal replay the gateway flagged 0 of 52 values. Early in the fault, 16
+values were outside their band before any alarm. At the alarm, 25 were outside their band, PI-107 among them,
+and PI-107 was red. On the screen, though, only TI-109's band really looked missing, for the reason above. I
+can't be sure that is what Steve saw on October 8. A freshly started demo also shows short trend history for its
+first minutes.
+
+**The final run.** Everything above was repeated from scratch on commit `485f000`: a pristine archive, the same
+write-only build (provider `f735cebe…` unchanged, project ZIP `1a6ce79c…`), and a fresh container. The receipt is
+[`native-current-20261013.json`](../out/ignition/gateway/receipts/native-current-20261013.json). The tools are in
+`scripts/ignition/acceptance/`.
+
+| Check | Result | Evidence |
+|---|---|---|
+| Import fidelity (V1), both directions | PASS: 1,253 tag nodes and 23 views, 0 differences; exported views identical JSON | receipt `verifier.V1`, `exports` |
+| Reconciliation (V2) | PASS: 53/53 TE, 910/910 OPEN100; MS 14010 metadata-only | receipt `V2` |
+| Binding resolution (V3) | PASS: 1,082 bindings on 23 views | receipt `V3` |
+| Quality honesty (V4) | PASS: 76 fed Good, SC-212 and 334 placeholders Bad, 0 false-good | receipt `V4`, `census.normal` |
+| Liveness (V5), plausibility (V6) | PASS: 76 of 76 changed; 52 inside range | receipt `V5`, `V6` |
+| Read-only (V7) | PASS: probe write accepted, two twin writes refused (BadUserAccessDenied) | receipt `V7` |
+| Alarm pipeline (V8), recorded fault 6 | PASS: A feed flagged first; PI-107 active 0.5 s after crossing 2,895 kPa | receipt `V8` |
+| Perspective transforms run | PASS after fix: 0 parse errors in the gateway log, 0 `null` on 23 routes | `native-overview-normal.png` |
+| Direct load and reload of all 23 routes | PASS 23/23 | receipt `browser` |
+| Every navigation target clicked | PASS 277/277; Back after each 277/277; Back/Forward chain 6/6; repeated clicks; 0 console errors | receipt `browser` |
+| `/mimic` is the same overview | PASS: identical view; no second tab | contract, test |
+| Desktop layout 1600 × 930 | PASS: unit pages scroll to their inventory and history rows | `native-reactor-rows-bands-normal.png`, `native-stripper-normal.png` |
+| 390 px layout | **PARTIAL:** every route reachable by two-way scrolling and touch, but it is a fixed 1600 px control-room layout, not a phone layout | `native-overview-390px.png` |
+| Quality transition: replay stopped | PASS: 52 TE values went Uncertain; screens read UNKNOWN with hatched vessels and "Outside band: unknown" | `native-overview-replay-disconnected.png` |
+| Recovery | PASS: 52 Good again within about 14 s of restart | `native-overview-replay-recovered.png` |
+| Fault replay on screen | PASS: amber values before the alarm, PI-107 red at the alarm, alarm table populated | `native-overview-fault-early.png`, `native-overview-fault-alarm.png`, `native-reactor-fault-alarm.png`, `native-alarms-fault.png` |
+| MS 14010 callout | PASS: no value label, PV or OPC address; both FT 1401 records keep separate placeholders | receipt `exports`, `native-sheet0-not-connected.png` |
+
+**What went wrong on the way, besides the product bugs.** My first scroll test said the unit pages could not
+scroll, and I nearly "fixed" that. Git Bash had rewritten the route argument into a Windows path, so the browser
+had opened a missing page. Re-run correctly, the pages already scroll; no change was made. The browser harness also
+counted Perspective's own hidden page chrome ("by null") as a broken value at 390 px; it now reads only the view.
+And a path-conversion bug in my scratch orchestration wrote one run's verifier credential to the wrong folder, so
+the post-import stages were run again on the same fresh gateway. The import itself was not repeated.
+
+**Also observed, not changed:**
+- The header counts *tags* in alarm, so it read "Alarms: 1" while the table listed two active alarms on PI-107.
+- With the replay stopped, "Alarms: 0" stays Good, because no alarm is active on uncertain data. The values
+  around it all read UNKNOWN. Whether stale data should raise an alarm is an operations decision, not a screen edit.
+- The gateway logged "Received event for missing view TE/Alarms" after navigating away from the alarm table. No
+  visible effect was seen.
+- Setup differs from a site in three ways: the API key was provisioned into the disposable gateway's config files,
+  HTTP was used on localhost, and the verifier ran inside the container's network namespace so the OPC UA server
+  could stay bound to localhost.
+
+**Windows test portability, same pass.** On a plain Windows shell the suite failed 4 of 15 source-only scripts
+and 5 of 20 full scripts. The fifth, not seen in the earlier desktop run, was a test reading a child process's
+output as UTF-8 while Windows wrote its ANSI code page. The fixes: portable SVG filenames (identifiers keep their
+XML escaping; distinct names, collision checks); symlink controls that skip only that sub-case, only on Windows
+error 1314, with a printed SKIP that the runner counts; `-E -P` instead of `-I` for the packaging probe, plus an
+assertion that the checkout is not on the path; and the UTF-8 request. After: Windows 15/15 and 20/20 with two
+symlink sub-cases explicitly skipped (the runner withholds "suite passed"); a Linux Python 3.12 container 15/15
+and 20/20 with no skips.
+
+**Lesson:** an offline check that adjusts its input before testing it is checking a different system. The
+gateway was the first thing that ran the generated code unmodified. It also showed that "honest" quality can
+still read as broken: Bad was the right quality for those 334 instruments, and `null` was the wrong way to show it.
+
+**At your plant:** import the exact candidate into a disposable development gateway before anyone reviews the
+screens. Click every link, stop the data source, and watch what an operator would see. Keep "no data source" and
+"broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
+plant readiness. The screens were checked against recorded replay and synthetic points only.

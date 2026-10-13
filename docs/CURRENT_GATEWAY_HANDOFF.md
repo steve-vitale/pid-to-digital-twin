@@ -5,6 +5,20 @@ current local branches, preservation commits and desktop offline checks. This
 October 10 report retains its historical environment observations and acceptance
 contract; the desktop becoming available does not complete native acceptance.
 
+## Update 2026-10-12/13: native run in a disposable gateway
+
+The contract below was exercised in a **disposable Ignition 8.3.10 Docker container** (trial, localhost only,
+removed afterwards) on commit `485f000` ([journal entry 38](JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not),
+receipt [`native-current-20261013.json`](../out/ignition/gateway/receipts/native-current-20261013.json)). The first
+import exposed two defects that offline checks had missed: every script transform failed to parse, and no-data
+values rendered as `null`. A third, TI-109's invisible band, was found on screen. All three were fixed with
+regression tests. After the fixes: V1–V8 PASS; 23/23 routes load and reload; 277/277 click targets, Back, Back/Forward
+and repeated clicks pass; quality census 52 + 24 Good, SC-212 and 334 placeholders Bad, 0 false-good; the
+stopped-replay and recovery transitions and the recorded fault 6 behave as specified. The 390 px viewport is
+**partial**: reachable by scrolling, not a phone layout. Still not established: operator/site acceptance, actual
+write rejection beyond V7's two refused writes, licensed PI import, responsive physics and production readiness.
+The October 10 text below is kept as the historical contract.
+
 ## Status and exact scope
 
 **Local artifacts regenerated; runtime and browser acceptance NOT RUN.** Reviewed model source:
@@ -104,7 +118,11 @@ A qualified authorized operator should:
 
 ## Current-source browser acceptance checklist
 
-Runtime result for every item below: **NOT RUN / blocked on authorized isolated gateway**.
+Runtime result as of October 10: **NOT RUN / blocked on authorized isolated gateway**. Results from the
+disposable-container run on October 12/13 are in journal entry 38: items 1–7 pass in that environment,
+except the narrow viewport (partial) and the write-probe and operator parts that remain unrun. The project
+opens without a login, so the login-interruption case did not apply. Item 8's
+evidence is the receipt above.
 Use project base `/data/perspective/client/PIDTwin` on the verified target; do not assume the
 historical localhost endpoint exists. Derive and record all exact routes from the regenerated candidate.
 

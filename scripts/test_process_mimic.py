@@ -260,7 +260,7 @@ class MimicTests(unittest.TestCase):
         self.assertEqual(self.v,m.mimic('Twin',MODEL))
 
     def test_harness_compiles_stored_body_like_perspective(self):
-        # RED control for journal entry 37: Perspective compiles signature + body unmodified, so an unindented
+        # RED control for journal entry 38: Perspective compiles signature + body unmodified, so an unindented
         # body is a parse error. The harness must fail the same way rather than re-indenting it into validity.
         with self.assertRaises(SyntaxError):
             transform(m.VALUE_SCRIPT, 1.0)

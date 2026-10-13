@@ -26,7 +26,9 @@ You don't need Python, settings or keys. It's an extra option. If you'd rather n
    - **Extracted drawings:** http://localhost:8088/data/perspective/client/PIDTwin/open100/0 (through `/11`).
      - On sheet 0, 24 instruments show live values. They were mapped from a demo I/O list, and their values are
        synthetic.
-     - Every other instrument shows Ignition's "not connected" marker. That's honest: no data source is connected
+     - Every other instrument shows Ignition's bad-quality marker. In this historical backup it prints as `null` in a red
+       box, which reads like a fault; the current generated project says "not connected" instead (journal entry 38).
+       Either way it is honest about the data: no data source is connected
        to it yet.
 4. **See an alarm:** double-click **`fault-demo.bat`**. In about 30 seconds the reactor pressure (PI-107) passes
    its limit and turns red. **`normal-demo.bat`** switches back.

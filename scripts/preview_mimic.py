@@ -24,7 +24,7 @@ class Quality:
 
 def transform(code, value, good=True):
     """Run a STORED transform body the way Perspective compiles it: signature + newline + body, unmodified.
-    Re-indenting here hid a parse error that every native transform hit (journal entry 37)."""
+    Re-indenting here hid a parse error that every native transform hit (journal entry 38)."""
     scope = {}
     exec(build_mimic.TRANSFORM_SIGNATURE + '\n' + code, scope)
     return scope['transform'](None, value, Quality(good), None)

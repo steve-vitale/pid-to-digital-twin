@@ -110,7 +110,7 @@ The committed project ZIP is historical and is not matched to the current provid
 - the small replay server that feeds the live values ([`te_sim_server.py`](scripts/ignition/te_sim_server.py)).
 
 The historical gateway assembled through the web UI plus one tag import passed all nine verifier checks;
-current-source native runtime acceptance remains unrun. Steps:
+the current regenerated project has since passed the verifier and a full browser contract in a disposable Ignition container, after two display bugs that only the gateway exposed were fixed ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)). Steps:
 **[docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md)**. To do the same thing by script with every check,
 see [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md).
 
@@ -323,7 +323,7 @@ it at a real site.
 - **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
 - **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
   story belongs to Ignition here.
-- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. Current regenerated artifacts have offline checks only; native runtime/browser acceptance is not run.
+- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. The current regenerated project was then imported into a disposable Ignition container and passed V1-V8 and a 23-route browser contract (journal entry 38). That is a lab result, not site or operator acceptance.
 
 To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
 System Explorer, then verify real PI point bindings. [The PI-only mapper](docs/PI_MAPPING.md) can stage explicit, reviewer-supplied archive/point/type/UOM references on a copied extracted model; unmapped attributes retain `%Server%`/placeholder references. `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings. Staging CSV columns must be reconciled against the installed PI Builder version before a separately authorized native import.

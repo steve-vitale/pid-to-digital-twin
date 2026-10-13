@@ -89,6 +89,12 @@ The original pinned requirements were not changed. Transitive packages in the te
 and cryptography 50.0.2, rather than the versions pinned in the repository's full requirements file; this is not an
 exact-lockfile environment reproduction.
 
+Update 2026-10-12/13: the first native import (disposable Ignition 8.3.10 container) showed that every script
+transform written by this work failed to parse in Perspective (unindented bodies), so every reading showed `null`.
+The offline harness above had re-indented the code before running it. Both are fixed, and the overview and unit
+pages then passed the native browser contract (journal entry 38). The paragraph below is the original
+pre-import status.
+
 Not run: Ignition import, actual Perspective/Jython transform execution, live OPC bindings, browser interaction,
 gateway verifier, operations review. Chromium launch failed because this execution environment disallows the
 required socket creation, including after escalation. No existing gateway verification receipt covers this change.
