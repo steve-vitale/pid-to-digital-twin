@@ -1,0 +1,7223 @@
+{
+ "meta": {
+  "model_id": "twin-te-L2-trace-r1-codex",
+  "model_kind": "extracted_twin",
+  "schema_version": "twin-1",
+  "title": "Digital twin starter kit: te-L2-trace-r1 / codex",
+  "source_document": "Extraction run te-L2-trace-r1/codex, sheets 101, 102, 103",
+  "extraction_method": "codex (gpt-6.1-sol), prompt per run file; converted by scripts/build_twin.py",
+  "tag_convention": "Tags are the extracted text, unchanged except whitespace. Asset ids (S<sheet>-<class><n>) are converter keys, NOT plant tags. Placeholder tags (XXX, TBD) are flagged.",
+  "verification_note": "Every item is unverified until a person checks it in review_queue.csv.",
+  "low_confidence_threshold": 0.75,
+  "parent_rule": "along_line",
+  "superset_of": "data/te_process_model.json (meta/units/streams/instruments/final_elements)",
+  "risk_model": {
+   "file": "scripts/confidence_model.json",
+   "tiers": {
+    "green_max": 0.0755,
+    "red_min": 0.5,
+    "rule": "(fixed before looking at any holdout): green = items whose dev error rate stays at or below 5%\nwhen taken from the lowest risk up; red = items with a predicted risk of at least 50% (more likely wrong than\nright). Both thresholds come from the development drawings only."
+   },
+   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"
+  }
+ },
+ "site": {
+  "id": "SITE",
+  "name": "Site (from te-L2-trace-r1)"
+ },
+ "systems": [
+  {
+   "id": "SYS-101",
+   "sheet": "101",
+   "name": "Feed And Reaction",
+   "system_code": "RXN",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Feed And Reaction",
+   "drawing_number": "101-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "101.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-L2-trace-r1/codex/101.json",
+   "model": "gpt-6.1-sol",
+   "extraction_failed": false,
+   "extraction_error": null
+  },
+  {
+   "id": "SYS-102",
+   "sheet": "102",
+   "name": "Condensing, Separation And Recycle",
+   "system_code": "SEP",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Condensing, Separation And Recycle",
+   "drawing_number": "102-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "102.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-L2-trace-r1/codex/102.json",
+   "model": "gpt-6.1-sol",
+   "extraction_failed": false,
+   "extraction_error": null
+  },
+  {
+   "id": "SYS-103",
+   "sheet": "103",
+   "name": "Product Stripping",
+   "system_code": "PRD",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Product Stripping",
+   "drawing_number": "103-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "103.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-L2-trace-r1/codex/103.json",
+   "model": "gpt-6.1-sol",
+   "extraction_failed": false,
+   "extraction_error": null
+  }
+ ],
+ "units": [
+  {
+   "id": "S101-TK001",
+   "tag": "R-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s14",
+     "class": "tank",
+     "box_0_1000": [
+      510.9,
+      326.9,
+      589.1,
+      705.0
+     ],
+     "tag_as_extracted": "R-101",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "R-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-101",
+   "layout": {
+    "x": 550.0,
+    "y": 516.0,
+    "sheet": "101",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 101 symbol s14",
+   "sheets": [
+    "101"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-TK001",
+   "tag": "E-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s5",
+     "class": "tank",
+     "box_0_1000": [
+      217.9,
+      239.9,
+      344.4,
+      285.3
+     ],
+     "tag_as_extracted": "E-101",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "E-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-102",
+   "layout": {
+    "x": 281.1,
+    "y": 262.6,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 102 symbol s5",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-TK002",
+   "tag": "V-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s9",
+     "class": "tank",
+     "box_0_1000": [
+      482.6,
+      373.9,
+      554.5,
+      658.5
+     ],
+     "tag_as_extracted": "V-101",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "V-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-102",
+   "layout": {
+    "x": 518.5,
+    "y": 516.2,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 102 symbol s9",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-PU001",
+   "tag": "K-101",
+   "tag_status": "as_extracted",
+   "class": "pump",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s10",
+     "class": "pump",
+     "box_0_1000": [
+      575.6,
+      114.0,
+      612.4,
+      168.1
+     ],
+     "tag_as_extracted": "K-101",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "K-101",
+   "type": "pump",
+   "role_reason": "class pump",
+   "system": "SYS-102",
+   "layout": {
+    "x": 594.0,
+    "y": 141.1,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 102 symbol s10",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-TK001",
+   "tag": "C-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s1",
+     "class": "tank",
+     "box_0_1000": [
+      404.9,
+      280.5,
+      470.3,
+      630.4
+     ],
+     "tag_as_extracted": "C-101",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "C-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-103",
+   "layout": {
+    "x": 437.6,
+    "y": 455.4,
+    "sheet": "103",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 103 symbol s1",
+   "sheets": [
+    "103"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "streams": [
+  {
+   "id": "L101-001",
+   "name": "S101-OP001 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP001",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s1",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-002",
+   "name": "S101-IN004 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-003",
+   "name": "S101-IN004 - S101-IN006",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-IN006",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-004",
+   "name": "S101-IN004 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-005",
+   "name": "S101-IN004 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-006",
+   "name": "S101-IN004 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-007",
+   "name": "S101-IN004 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-008",
+   "name": "S101-IN004 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-009",
+   "name": "S101-IN004 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-010",
+   "name": "S101-IN005 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s11",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-011",
+   "name": "S101-VL003 - S101-IN006",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-IN006",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-012",
+   "name": "S101-VL003 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-013",
+   "name": "S101-VL003 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-014",
+   "name": "S101-VL003 - S101-OP003",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-OP003",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s3",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-015",
+   "name": "S101-VL003 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-016",
+   "name": "S101-VL003 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-017",
+   "name": "S101-VL003 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-018",
+   "name": "S101-VL003 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-VL003",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-019",
+   "name": "S101-IN006 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-020",
+   "name": "S101-IN006 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-021",
+   "name": "S101-IN006 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-022",
+   "name": "S101-IN006 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-023",
+   "name": "S101-IN006 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-024",
+   "name": "S101-IN006 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-025",
+   "name": "S101-TK001 - S101-GN001",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-GN001",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-026",
+   "name": "S101-TK001 - S101-IN008",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN008",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s18",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-027",
+   "name": "S101-TK001 - S101-IN009",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN009",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-028",
+   "name": "S101-TK001 - S101-IN010",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN010",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s20",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-029",
+   "name": "S101-TK001 - S101-OP006",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-OP006",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s21",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-030",
+   "name": "S101-TK001 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-031",
+   "name": "S101-TK001 - S101-IN011",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN011",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s23",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-032",
+   "name": "S101-TK001 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-033",
+   "name": "S101-TK001 - S101-VL004",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-VL004",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-034",
+   "name": "S101-TK001 - S101-IN014",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN014",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s28",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-035",
+   "name": "S101-TK001 - S101-OP008",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-OP008",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s29",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-036",
+   "name": "S101-OP005 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-037",
+   "name": "S101-OP005 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-038",
+   "name": "S101-OP005 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-039",
+   "name": "S101-OP005 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-040",
+   "name": "S101-OP005 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-041",
+   "name": "S101-GN001 - S101-IN007",
+   "kind": "extracted_link",
+   "from": "S101-GN001",
+   "to": "S101-IN007",
+   "sheet": "101",
+   "from_symbol": "s16",
+   "to_symbol": "s17",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-042",
+   "name": "S101-OP002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s2",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-043",
+   "name": "S101-GN002 - S101-IN011",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-IN011",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s23",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-044",
+   "name": "S101-GN002 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-045",
+   "name": "S101-GN002 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-046",
+   "name": "S101-GN002 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-047",
+   "name": "S101-GN002 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-048",
+   "name": "S101-GN002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-049",
+   "name": "S101-IN011 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-IN011",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s23",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-050",
+   "name": "S101-OP007 - S101-VL004",
+   "kind": "extracted_link",
+   "from": "S101-OP007",
+   "to": "S101-VL004",
+   "sheet": "101",
+   "from_symbol": "s25",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-051",
+   "name": "S101-VL004 - S101-IN013",
+   "kind": "extracted_link",
+   "from": "S101-VL004",
+   "to": "S101-IN013",
+   "sheet": "101",
+   "from_symbol": "s26",
+   "to_symbol": "s27",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-052",
+   "name": "S101-IN014 - S101-OP008",
+   "kind": "extracted_link",
+   "from": "S101-IN014",
+   "to": "S101-OP008",
+   "sheet": "101",
+   "from_symbol": "s28",
+   "to_symbol": "s29",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-053",
+   "name": "S101-OP004 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-054",
+   "name": "S101-OP004 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-055",
+   "name": "S101-OP004 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-056",
+   "name": "S101-IN001 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN001",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s5",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-057",
+   "name": "S101-VL001 - S101-IN002",
+   "kind": "extracted_link",
+   "from": "S101-VL001",
+   "to": "S101-IN002",
+   "sheet": "101",
+   "from_symbol": "s6",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-058",
+   "name": "S101-VL001 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-VL001",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s6",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-059",
+   "name": "S101-IN002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s7",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-060",
+   "name": "S101-IN003 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN003",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s8",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-001",
+   "name": "S102-OP001 - S102-PU001",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-PU001",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s10",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-002",
+   "name": "S102-OP001 - S102-IN003",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-IN003",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s11",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-003",
+   "name": "S102-OP001 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-004",
+   "name": "S102-PU001 - S102-IN003",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-IN003",
+   "sheet": "102",
+   "from_symbol": "s10",
+   "to_symbol": "s11",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-005",
+   "name": "S102-PU001 - S102-IN004",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-IN004",
+   "sheet": "102",
+   "from_symbol": "s10",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.87,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-006",
+   "name": "S102-PU001 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s10",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-007",
+   "name": "S102-PU001 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s10",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-008",
+   "name": "S102-IN003 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-IN003",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s11",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-009",
+   "name": "S102-VL002 - S102-IN005",
+   "kind": "extracted_link",
+   "from": "S102-VL002",
+   "to": "S102-IN005",
+   "sheet": "102",
+   "from_symbol": "s13",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.77,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-010",
+   "name": "S102-VL002 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL002",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s13",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-011",
+   "name": "S102-IN006 - S102-IN007",
+   "kind": "extracted_link",
+   "from": "S102-IN006",
+   "to": "S102-IN007",
+   "sheet": "102",
+   "from_symbol": "s15",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.73,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-012",
+   "name": "S102-IN006 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN006",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s15",
+   "to_symbol": "s18",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-013",
+   "name": "S102-IN006 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN006",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s15",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-014",
+   "name": "S102-IN007 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN007",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s16",
+   "to_symbol": "s18",
+   "direction": "unknown",
+   "confidence": 0.73,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-015",
+   "name": "S102-IN007 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN007",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s16",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.73,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-016",
+   "name": "S102-IN008 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN008",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s17",
+   "to_symbol": "s18",
+   "direction": "unknown",
+   "confidence": 0.87,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-017",
+   "name": "S102-VL003 - S102-OP005",
+   "kind": "extracted_link",
+   "from": "S102-VL003",
+   "to": "S102-OP005",
+   "sheet": "102",
+   "from_symbol": "s18",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-018",
+   "name": "S102-VL003 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL003",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s18",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-019",
+   "name": "S102-OP002 - S102-TK001",
+   "kind": "extracted_link",
+   "from": "S102-OP002",
+   "to": "S102-TK001",
+   "sheet": "102",
+   "from_symbol": "s2",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-020",
+   "name": "S102-OP002 - S102-IN001",
+   "kind": "extracted_link",
+   "from": "S102-OP002",
+   "to": "S102-IN001",
+   "sheet": "102",
+   "from_symbol": "s2",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-021",
+   "name": "S102-IN009 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN009",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s20",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-022",
+   "name": "S102-IN010 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN010",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s21",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-023",
+   "name": "S102-IN011 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN011",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s22",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-024",
+   "name": "S102-IN012 - S102-VL004",
+   "kind": "extracted_link",
+   "from": "S102-IN012",
+   "to": "S102-VL004",
+   "sheet": "102",
+   "from_symbol": "s23",
+   "to_symbol": "s25",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-025",
+   "name": "S102-IN012 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN012",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s23",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-026",
+   "name": "S102-IN013 - S102-VL004",
+   "kind": "extracted_link",
+   "from": "S102-IN013",
+   "to": "S102-VL004",
+   "sheet": "102",
+   "from_symbol": "s24",
+   "to_symbol": "s25",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-027",
+   "name": "S102-VL004 - S102-OP006",
+   "kind": "extracted_link",
+   "from": "S102-VL004",
+   "to": "S102-OP006",
+   "sheet": "102",
+   "from_symbol": "s25",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-028",
+   "name": "S102-VL004 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL004",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s25",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-029",
+   "name": "S102-OP003 - S102-TK001",
+   "kind": "extracted_link",
+   "from": "S102-OP003",
+   "to": "S102-TK001",
+   "sheet": "102",
+   "from_symbol": "s3",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-030",
+   "name": "S102-OP004 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-OP004",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s4",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-031",
+   "name": "S102-TK001 - S102-IN001",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-IN001",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-032",
+   "name": "S102-TK001 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-033",
+   "name": "S102-TK001 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-034",
+   "name": "S102-IN002 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-IN002",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s7",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-001",
+   "name": "S103-TK001 - S103-OP003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s10",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-002",
+   "name": "S103-TK001 - S103-VL002",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL002",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-003",
+   "name": "S103-TK001 - S103-IN007",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN007",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.89,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-004",
+   "name": "S103-TK001 - S103-IN008",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN008",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-005",
+   "name": "S103-TK001 - S103-IN009",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN009",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-006",
+   "name": "S103-TK001 - S103-OP005",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP005",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s17",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-007",
+   "name": "S103-TK001 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-008",
+   "name": "S103-TK001 - S103-OP001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s2",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-009",
+   "name": "S103-TK001 - S103-IN001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-010",
+   "name": "S103-TK001 - S103-IN002",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN002",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-011",
+   "name": "S103-TK001 - S103-IN003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-012",
+   "name": "S103-TK001 - S103-VL001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-013",
+   "name": "S103-TK001 - S103-IN005",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN005",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-014",
+   "name": "S103-OP004 - S103-VL002",
+   "kind": "extracted_link",
+   "from": "S103-OP004",
+   "to": "S103-VL002",
+   "sheet": "103",
+   "from_symbol": "s11",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-015",
+   "name": "S103-VL002 - S103-IN006",
+   "kind": "extracted_link",
+   "from": "S103-VL002",
+   "to": "S103-IN006",
+   "sheet": "103",
+   "from_symbol": "s12",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.87,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-016",
+   "name": "S103-VL002 - S103-IN007",
+   "kind": "extracted_link",
+   "from": "S103-VL002",
+   "to": "S103-IN007",
+   "sheet": "103",
+   "from_symbol": "s12",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.89,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-017",
+   "name": "S103-IN008 - S103-IN009",
+   "kind": "extracted_link",
+   "from": "S103-IN008",
+   "to": "S103-IN009",
+   "sheet": "103",
+   "from_symbol": "s15",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-018",
+   "name": "S103-IN008 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN008",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s15",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-019",
+   "name": "S103-IN009 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN009",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s16",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.97,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-020",
+   "name": "S103-IN010 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN010",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s18",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.96,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-021",
+   "name": "S103-VL003 - S103-OP006",
+   "kind": "extracted_link",
+   "from": "S103-VL003",
+   "to": "S103-OP006",
+   "sheet": "103",
+   "from_symbol": "s19",
+   "to_symbol": "s20",
+   "direction": "unknown",
+   "confidence": 0.99,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-022",
+   "name": "S103-OP002 - S103-VL001",
+   "kind": "extracted_link",
+   "from": "S103-OP002",
+   "to": "S103-VL001",
+   "sheet": "103",
+   "from_symbol": "s3",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.98,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-023",
+   "name": "S103-IN004 - S103-VL001",
+   "kind": "extracted_link",
+   "from": "S103-IN004",
+   "to": "S103-VL001",
+   "sheet": "103",
+   "from_symbol": "s7",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.91,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-024",
+   "name": "S103-VL001 - S103-IN005",
+   "kind": "extracted_link",
+   "from": "S103-VL001",
+   "to": "S103-IN005",
+   "sheet": "103",
+   "from_symbol": "s8",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  }
+ ],
+ "instruments": [
+  {
+   "id": "S101-IN001",
+   "tag": "FV 200",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s5",
+     "class": "instrumentation",
+     "box_0_1000": [
+      260.0,
+      118.3,
+      277.3,
+      143.7
+     ],
+     "tag_as_extracted": "FV 200",
+     "confidence": 0.92,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s6"
+   },
+   "along_line_px": 20.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL001",
+     "px": 20.0
+    }
+   ],
+   "position_nearest": "S101-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "200",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 200",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN002",
+   "tag": "FI 101",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      294.6,
+      118.3,
+      311.9,
+      143.7
+     ],
+     "tag_as_extracted": "FI 101",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s6"
+   },
+   "along_line_px": 141.2,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL001",
+     "px": 141.2
+    }
+   ],
+   "position_nearest": "S101-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "101",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 101",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN003",
+   "tag": "FV 201",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s8",
+     "class": "instrumentation",
+     "box_0_1000": [
+      260.0,
+      212.4,
+      277.3,
+      237.8
+     ],
+     "tag_as_extracted": "FV 201",
+     "confidence": 0.93,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s9"
+   },
+   "along_line_px": 20.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL002",
+     "px": 20.0
+    }
+   ],
+   "position_nearest": "S101-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "201",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 201",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN004",
+   "tag": "FI 102",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s10",
+     "class": "instrumentation",
+     "box_0_1000": [
+      294.6,
+      212.4,
+      311.9,
+      237.8
+     ],
+     "tag_as_extracted": "FI 102",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s9"
+   },
+   "along_line_px": 141.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL002",
+     "px": 141.0
+    }
+   ],
+   "position_nearest": "S101-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "102",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 102",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN005",
+   "tag": "FV 202",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      260.0,
+      306.4,
+      277.3,
+      332.3
+     ],
+     "tag_as_extracted": "FV 202",
+     "confidence": 0.93,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s12"
+   },
+   "along_line_px": 20.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL003",
+     "px": 20.0
+    }
+   ],
+   "position_nearest": "S101-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "202",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 202",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN006",
+   "tag": "FI 103",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      294.6,
+      306.4,
+      311.9,
+      332.3
+     ],
+     "tag_as_extracted": "FI 103",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s12"
+   },
+   "along_line_px": 141.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL003",
+     "px": 141.4
+    }
+   ],
+   "position_nearest": "S101-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "103",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 103",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN007",
+   "tag": "SC 721",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.7,
+      284.2,
+      621.0,
+      310.2
+     ],
+     "tag_as_extracted": "SC 721",
+     "confidence": 0.93,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-GN001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s16"
+   },
+   "along_line_px": 143.9,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-GN001",
+     "px": 143.9
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": false,
+   "system": "SYS-101",
+   "isa_letters": "SC",
+   "loop": "721",
+   "instrument_kind": "measurement / control",
+   "variable": "speed",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "SC 721",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN008",
+   "tag": "PR 107",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      613.5,
+      418.8,
+      630.8,
+      445.3
+     ],
+     "tag_as_extracted": "PR 107",
+     "confidence": 0.92,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s14"
+   },
+   "along_line_px": 73.8,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 73.8
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "PR",
+   "loop": "107",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PR 107",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN009",
+   "tag": "LE 108",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s19",
+     "class": "instrumentation",
+     "box_0_1000": [
+      613.5,
+      471.0,
+      630.2,
+      496.4
+     ],
+     "tag_as_extracted": "LE 108",
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s14"
+   },
+   "along_line_px": 74.1,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 74.1
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "LE",
+   "loop": "108",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LE 108",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN010",
+   "tag": "TR 109",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s20",
+     "class": "instrumentation",
+     "box_0_1000": [
+      612.9,
+      522.3,
+      630.2,
+      547.7
+     ],
+     "tag_as_extracted": "TR 109",
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s14"
+   },
+   "along_line_px": 71.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 71.0
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TR",
+   "loop": "109",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TR 109",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN011",
+   "tag": "PI 106",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.88,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s23",
+     "class": "instrumentation",
+     "box_0_1000": [
+      447.6,
+      588.2,
+      464.4,
+      614.2
+     ],
+     "tag_as_extracted": "PI 106",
+     "confidence": 0.88,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-GN002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s22"
+   },
+   "along_line_px": 134.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-GN002",
+     "px": 134.0
+    }
+   ],
+   "position_nearest": "S101-GN002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "PI",
+   "loop": "106",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 106",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN012",
+   "tag": "AI",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s24",
+     "class": "instrumentation",
+     "box_0_1000": [
+      477.8,
+      587.7,
+      494.5,
+      614.2
+     ],
+     "tag_as_extracted": "AI",
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s14"
+   },
+   "along_line_px": 126.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 126.0
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "AI",
+   "loop": null,
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "amber",
+    "why": "the two parent rules pick different equipment (along_line: R-101; linked: U-100); confirm which"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN002",
+    "agrees": false
+   }
+  },
+  {
+   "id": "S101-IN013",
+   "tag": "TV 210",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s27",
+     "class": "instrumentation",
+     "box_0_1000": [
+      466.0,
+      747.1,
+      483.9,
+      773.6
+     ],
+     "tag_as_extracted": "TV 210",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s26"
+   },
+   "along_line_px": 19.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL004",
+     "px": 19.0
+    }
+   ],
+   "position_nearest": "S101-VL004",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TV",
+   "loop": "210",
+   "instrument_kind": "final element (valve)",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TV 210",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN014",
+   "tag": "TI 121",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s28",
+     "class": "instrumentation",
+     "box_0_1000": [
+      632.4,
+      560.1,
+      649.7,
+      586.1
+     ],
+     "tag_as_extracted": "TI 121",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s14"
+   },
+   "along_line_px": 230.8,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 230.8
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TI",
+   "loop": "121",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 121",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN001",
+   "tag": "TI 122",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s6",
+     "class": "instrumentation",
+     "box_0_1000": [
+      241.1,
+      128.1,
+      259.5,
+      154.0
+     ],
+     "tag_as_extracted": "TI 122",
+     "confidence": 0.94,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s5"
+   },
+   "along_line_px": 356.3,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK001",
+     "px": 356.3
+    }
+   ],
+   "position_nearest": "S102-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TI",
+   "loop": "122",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 122",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN002",
+   "tag": "TV 211",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      184.9,
+      334.5,
+      202.7,
+      360.4
+     ],
+     "tag_as_extracted": "TV 211",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s8"
+   },
+   "along_line_px": 18.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL001",
+     "px": 18.0
+    }
+   ],
+   "position_nearest": "S102-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TV",
+   "loop": "211",
+   "instrument_kind": "final element (valve)",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TV 211",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN003",
+   "tag": "PI 109",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      537.8,
+      43.2,
+      555.6,
+      69.2
+     ],
+     "tag_as_extracted": "PI 109",
+     "confidence": 0.94,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-PU001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s10"
+   },
+   "along_line_px": 532.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-PU001",
+     "px": 532.0
+    }
+   ],
+   "position_nearest": "S102-PU001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "PI",
+   "loop": "109",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 109",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-PU001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN004",
+   "tag": "AI 120",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.87,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s12",
+     "class": "instrumentation",
+     "box_0_1000": [
+      584.3,
+      184.3,
+      602.1,
+      210.2
+     ],
+     "tag_as_extracted": "AI 120",
+     "confidence": 0.87,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-PU001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s10"
+   },
+   "along_line_px": 29.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-PU001",
+     "px": 29.0
+    }
+   ],
+   "position_nearest": "S102-PU001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "AI",
+   "loop": "120",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 120",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-PU001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN005",
+   "tag": "FV 205",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.77,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      581.6,
+      278.3,
+      599.9,
+      304.2
+     ],
+     "tag_as_extracted": "FV 205",
+     "confidence": 0.77,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s13"
+   },
+   "along_line_px": 19.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL002",
+     "px": 19.0
+    }
+   ],
+   "position_nearest": "S102-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "FV",
+   "loop": "205",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 205",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN006",
+   "tag": "PI 110",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.7,
+      362.6,
+      621.6,
+      389.1
+     ],
+     "tag_as_extracted": "PI 110",
+     "confidence": 0.94,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 226.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 226.4
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "PI",
+   "loop": "110",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 110",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "amber",
+    "why": "the two parent rules pick different equipment (along_line: V-101; linked: S102-VL003); confirm which"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": false
+   }
+  },
+  {
+   "id": "S102-IN007",
+   "tag": "AI 119",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.73,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      641.0,
+      363.1,
+      659.4,
+      389.1
+     ],
+     "tag_as_extracted": "AI 119",
+     "confidence": 0.73,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s18"
+   },
+   "along_line_px": 189.7,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL003",
+     "px": 189.7
+    }
+   ],
+   "position_nearest": "S102-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "AI",
+   "loop": "119",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 119",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN008",
+   "tag": "FV 206",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.87,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      690.8,
+      362.6,
+      709.1,
+      389.1
+     ],
+     "tag_as_extracted": "FV 206",
+     "confidence": 0.87,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s18"
+   },
+   "along_line_px": 17.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL003",
+     "px": 17.0
+    }
+   ],
+   "position_nearest": "S102-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "FV",
+   "loop": "206",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 206",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN009",
+   "tag": "TI 111",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s20",
+     "class": "instrumentation",
+     "box_0_1000": [
+      578.9,
+      437.7,
+      597.2,
+      463.1
+     ],
+     "tag_as_extracted": "TI 111",
+     "confidence": 0.92,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 72.6,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 72.6
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TI",
+   "loop": "111",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 111",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN010",
+   "tag": "LI 112",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s21",
+     "class": "instrumentation",
+     "box_0_1000": [
+      578.9,
+      489.3,
+      596.7,
+      515.8
+     ],
+     "tag_as_extracted": "LI 112",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 72.9,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 72.9
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "LI",
+   "loop": "112",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LI 112",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN011",
+   "tag": "PI 113",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s22",
+     "class": "instrumentation",
+     "box_0_1000": [
+      578.9,
+      541.2,
+      596.7,
+      567.7
+     ],
+     "tag_as_extracted": "PI 113",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 72.6,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 72.6
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "PI",
+   "loop": "113",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 113",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN012",
+   "tag": "PI 114",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s23",
+     "class": "instrumentation",
+     "box_0_1000": [
+      569.1,
+      700.1,
+      587.0,
+      726.6
+     ],
+     "tag_as_extracted": "PI 114",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s25"
+   },
+   "along_line_px": 231.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL004",
+     "px": 231.4
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": false,
+   "system": "SYS-102",
+   "isa_letters": "PI",
+   "loop": "114",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 114",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN013",
+   "tag": "LV 207",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s24",
+     "class": "instrumentation",
+     "box_0_1000": [
+      631.8,
+      700.1,
+      650.2,
+      726.6
+     ],
+     "tag_as_extracted": "LV 207",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s25"
+   },
+   "along_line_px": 19.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL004",
+     "px": 19.0
+    }
+   ],
+   "position_nearest": "S102-VL004",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "LV",
+   "loop": "207",
+   "instrument_kind": "final element (valve)",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LV 207",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN001",
+   "tag": "PI 116",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s4",
+     "class": "instrumentation",
+     "box_0_1000": [
+      494.5,
+      316.1,
+      512.4,
+      341.5
+     ],
+     "tag_as_extracted": "PI 116",
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 75.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 75.0
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "PI",
+   "loop": "116",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 116",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN002",
+   "tag": "TI 118",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s5",
+     "class": "instrumentation",
+     "box_0_1000": [
+      494.5,
+      377.2,
+      512.4,
+      402.6
+     ],
+     "tag_as_extracted": "TI 118",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 73.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 73.4
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "TI",
+   "loop": "118",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 118",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN003",
+   "tag": "LI 115",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s6",
+     "class": "instrumentation",
+     "box_0_1000": [
+      494.1,
+      438.2,
+      512.0,
+      463.6
+     ],
+     "tag_as_extracted": "LI 115",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 72.1,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 72.1
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "LI",
+   "loop": "115",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LI 115",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN004",
+   "tag": "PV 204",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.91,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      272.5,
+      474.8,
+      290.3,
+      501.2
+     ],
+     "tag_as_extracted": "PV 204",
+     "confidence": 0.91,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s8"
+   },
+   "along_line_px": 19.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL001",
+     "px": 19.0
+    }
+   ],
+   "position_nearest": "S103-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "PV",
+   "loop": "204",
+   "instrument_kind": "final element (valve)",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PV 204",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN005",
+   "tag": "PI 104",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s9",
+     "class": "instrumentation",
+     "box_0_1000": [
+      334.6,
+      474.8,
+      353.0,
+      501.2
+     ],
+     "tag_as_extracted": "PI 104",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s8"
+   },
+   "along_line_px": 227.6,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL001",
+     "px": 227.6
+    }
+   ],
+   "position_nearest": "S103-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "PI",
+   "loop": "104",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 104",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN006",
+   "tag": "PV 209",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.87,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      209.8,
+      625.0,
+      227.6,
+      652.5
+     ],
+     "tag_as_extracted": "PV 209",
+     "confidence": 0.87,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s12"
+   },
+   "along_line_px": 17.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL002",
+     "px": 17.0
+    }
+   ],
+   "position_nearest": "S103-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "PV",
+   "loop": "209",
+   "instrument_kind": "final element (valve)",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PV 209",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN007",
+   "tag": "TI 110",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.89,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      272.5,
+      625.0,
+      290.3,
+      653.1
+     ],
+     "tag_as_extracted": "TI 110",
+     "confidence": 0.89,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s12"
+   },
+   "along_line_px": 228.3,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL002",
+     "px": 228.3
+    }
+   ],
+   "position_nearest": "S103-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "TI",
+   "loop": "110",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 110",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN008",
+   "tag": "TI 133",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      491.3,
+      701.2,
+      508.6,
+      726.6
+     ],
+     "tag_as_extracted": "TI 133",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 338.2,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 338.2
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": false,
+   "system": "SYS-103",
+   "isa_letters": "TI",
+   "loop": "133",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 133",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN009",
+   "tag": "AI 137",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      528.6,
+      701.2,
+      545.9,
+      726.6
+     ],
+     "tag_as_extracted": "AI 137",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 210.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 210.0
+    }
+   ],
+   "position_nearest": "S103-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "AI",
+   "loop": "137",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 137",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN010",
+   "tag": "LV 208",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      584.8,
+      701.2,
+      602.6,
+      726.6
+     ],
+     "tag_as_extracted": "LV 208",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 18.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 18.0
+    }
+   ],
+   "position_nearest": "S103-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "LV",
+   "loop": "208",
+   "instrument_kind": "final element (valve)",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LV 208",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  }
+ ],
+ "final_elements": [],
+ "line_items": [
+  {
+   "id": "S101-VL001",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s6",
+     "class": "valve",
+     "box_0_1000": [
+      263.8,
+      155.6,
+      274.1,
+      174.0
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL002",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s9",
+     "class": "valve",
+     "box_0_1000": [
+      263.8,
+      249.7,
+      274.1,
+      268.0
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL003",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s12",
+     "class": "valve",
+     "box_0_1000": [
+      263.8,
+      343.7,
+      274.1,
+      362.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-GN001",
+   "tag": "M",
+   "tag_status": "as_extracted",
+   "class": "general",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s16",
+     "class": "general",
+     "box_0_1000": [
+      542.6,
+      285.9,
+      557.8,
+      309.1
+     ],
+     "tag_as_extracted": "M",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "M",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-GN002",
+   "tag": "U-100",
+   "tag_status": "as_extracted",
+   "class": "general",
+   "confidence": 0.97,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s22",
+     "class": "general",
+     "box_0_1000": [
+      403.8,
+      630.4,
+      427.1,
+      647.1
+     ],
+     "tag_as_extracted": "U-100",
+     "confidence": 0.97,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "U-100",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL004",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s26",
+     "class": "valve",
+     "box_0_1000": [
+      469.8,
+      784.9,
+      481.2,
+      803.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL001",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s8",
+     "class": "valve",
+     "box_0_1000": [
+      188.7,
+      371.2,
+      199.5,
+      390.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL002",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s13",
+     "class": "valve",
+     "box_0_1000": [
+      584.8,
+      248.0,
+      595.6,
+      266.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL003",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s18",
+     "class": "valve",
+     "box_0_1000": [
+      695.1,
+      399.3,
+      705.9,
+      419.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL004",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s25",
+     "class": "valve",
+     "box_0_1000": [
+      635.6,
+      737.9,
+      645.9,
+      756.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL001",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s8",
+     "class": "valve",
+     "box_0_1000": [
+      275.2,
+      512.6,
+      286.5,
+      531.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL002",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s12",
+     "class": "valve",
+     "box_0_1000": [
+      212.5,
+      662.8,
+      223.8,
+      680.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL003",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "valve",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s19",
+     "class": "valve",
+     "box_0_1000": [
+      588.6,
+      737.4,
+      598.9,
+      755.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "untagged valve",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "offpage_connectors": [
+  {
+   "id": "S101-OP001",
+   "tag": "BATTERY LIMIT A FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s1",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      156.2,
+      108.7,
+      182.1
+     ],
+     "tag_as_extracted": "BATTERY LIMIT A FEED",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT A FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP002",
+   "tag": "BATTERY LIMIT D FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s2",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      250.2,
+      108.7,
+      275.6
+     ],
+     "tag_as_extracted": "BATTERY LIMIT D FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT D FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP003",
+   "tag": "BATTERY LIMIT F FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s3",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      343.7,
+      108.7,
+      369.6
+     ],
+     "tag_as_extracted": "BATTERY LIMIT F FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT F FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP004",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s4",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      437.2,
+      108.7,
+      464.2
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S101-OP005",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s15",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      36.8,
+      532.0,
+      109.7,
+      557.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S101-OP006",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s21",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      372.3,
+      828.6,
+      397.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S101-OP007",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s25",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      342.8,
+      784.9,
+      416.3,
+      811.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S101-OP008",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s29",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      784.4,
+      829.7,
+      811.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/101.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S102-OP001",
+   "tag": "RECYCLE TO FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s1",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      81.6,
+      110.3,
+      107.0
+     ],
+     "tag_as_extracted": "RECYCLE TO FEED",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "RECYCLE TO FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP002",
+   "tag": "COOLING WATER RETURN",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s2",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      166.4,
+      110.3,
+      191.3
+     ],
+     "tag_as_extracted": "COOLING WATER RETURN",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "COOLING WATER RETURN",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP003",
+   "tag": "REACTOR PRODUCT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s3",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      36.8,
+      250.2,
+      109.7,
+      276.1
+     ],
+     "tag_as_extracted": "REACTOR PRODUCT",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "REACTOR PRODUCT",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP004",
+   "tag": "COOLING WATER SUPPLY",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s4",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      36.8,
+      372.3,
+      109.7,
+      398.3
+     ],
+     "tag_as_extracted": "COOLING WATER SUPPLY",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "COOLING WATER SUPPLY",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP005",
+   "tag": "BATTERY LIMIT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.96,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s19",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.1,
+      398.8,
+      828.6,
+      426.9
+     ],
+     "tag_as_extracted": "BATTERY LIMIT",
+     "confidence": 0.96,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "BATTERY LIMIT",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP006",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s26",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      738.5,
+      828.1,
+      763.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/102.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S103-OP001",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s2",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      344.2,
+      109.2,
+      369.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": null,
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.3598,
+    "tier": "amber",
+    "why": "no tag was read; the same model's other pass (whole sheet vs tiles) didn't find it"
+   }
+  },
+  {
+   "id": "S103-OP002",
+   "tag": "SATURATED ACID FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s3",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      36.8,
+      513.1,
+      110.3,
+      538.5
+     ],
+     "tag_as_extracted": "SATURATED ACID FEED",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "SATURATED ACID FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP003",
+   "tag": "STRIPPER OVERHEAD",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s10",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      128.1,
+      828.6,
+      154.5
+     ],
+     "tag_as_extracted": "STRIPPER OVERHEAD",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "STRIPPER OVERHEAD",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP004",
+   "tag": "LOW PRESSURE STEAM",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.98,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s11",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      36.8,
+      662.8,
+      110.3,
+      689.8
+     ],
+     "tag_as_extracted": "LOW PRESSURE STEAM",
+     "confidence": 0.98,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "LOW PRESSURE STEAM",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP005",
+   "tag": "CONDENSATE RETURN",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s17",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      597.4,
+      828.6,
+      623.9
+     ],
+     "tag_as_extracted": "CONDENSATE RETURN",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "CONDENSATE RETURN",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP006",
+   "tag": "STRIPPER PRODUCT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s20",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      755.6,
+      738.5,
+      828.6,
+      764.9
+     ],
+     "tag_as_extracted": "STRIPPER PRODUCT",
+     "confidence": 0.99,
+     "source_run": "runs/te-L2-trace-r1/codex/103.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "STRIPPER PRODUCT",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "offpage_pairs": [],
+ "dropped": {
+  "symbols": [],
+  "connections": []
+ },
+ "hierarchy": {
+  "id": "SITE",
+  "kind": "site",
+  "name": "Site (from te-L2-trace-r1)",
+  "children": [
+   {
+    "id": "SYS-101",
+    "kind": "system",
+    "name": "Feed And Reaction",
+    "sheet": "101",
+    "children": [
+     {
+      "id": "S101-TK001",
+      "kind": "equipment",
+      "tag": "R-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S101-VL001",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN001",
+          "kind": "instrument",
+          "tag": "FV 200",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN002",
+          "kind": "instrument",
+          "tag": "FI 101",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL002",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN003",
+          "kind": "instrument",
+          "tag": "FV 201",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN004",
+          "kind": "instrument",
+          "tag": "FI 102",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL003",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN005",
+          "kind": "instrument",
+          "tag": "FV 202",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN006",
+          "kind": "instrument",
+          "tag": "FI 103",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-GN001",
+        "kind": "line_item",
+        "tag": "M",
+        "class": "general",
+        "children": [
+         {
+          "id": "S101-IN007",
+          "kind": "instrument",
+          "tag": "SC 721",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-GN002",
+        "kind": "line_item",
+        "tag": "U-100",
+        "class": "general",
+        "children": [
+         {
+          "id": "S101-IN011",
+          "kind": "instrument",
+          "tag": "PI 106",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL004",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN013",
+          "kind": "instrument",
+          "tag": "TV 210",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-IN008",
+        "kind": "instrument",
+        "tag": "PR 107",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN009",
+        "kind": "instrument",
+        "tag": "LE 108",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN010",
+        "kind": "instrument",
+        "tag": "TR 109",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN012",
+        "kind": "instrument",
+        "tag": "AI",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN014",
+        "kind": "instrument",
+        "tag": "TI 121",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S101-OP001",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT A FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP002",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT D FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP003",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT F FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP004",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP005",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP006",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP007",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP008",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   },
+   {
+    "id": "SYS-102",
+    "kind": "system",
+    "name": "Condensing, Separation And Recycle",
+    "sheet": "102",
+    "children": [
+     {
+      "id": "S102-TK001",
+      "kind": "equipment",
+      "tag": "E-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S102-VL001",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN002",
+          "kind": "instrument",
+          "tag": "TV 211",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN001",
+        "kind": "instrument",
+        "tag": "TI 122",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     },
+     {
+      "id": "S102-TK002",
+      "kind": "equipment",
+      "tag": "V-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S102-VL003",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN007",
+          "kind": "instrument",
+          "tag": "AI 119",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S102-IN008",
+          "kind": "instrument",
+          "tag": "FV 206",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-VL004",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN012",
+          "kind": "instrument",
+          "tag": "PI 114",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S102-IN013",
+          "kind": "instrument",
+          "tag": "LV 207",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN006",
+        "kind": "instrument",
+        "tag": "PI 110",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN009",
+        "kind": "instrument",
+        "tag": "TI 111",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN010",
+        "kind": "instrument",
+        "tag": "LI 112",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN011",
+        "kind": "instrument",
+        "tag": "PI 113",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     },
+     {
+      "id": "S102-PU001",
+      "kind": "equipment",
+      "tag": "K-101",
+      "class": "pump",
+      "children": [
+       {
+        "id": "S102-VL002",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN005",
+          "kind": "instrument",
+          "tag": "FV 205",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN003",
+        "kind": "instrument",
+        "tag": "PI 109",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN004",
+        "kind": "instrument",
+        "tag": "AI 120",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S102-OP001",
+      "kind": "offpage",
+      "tag": "RECYCLE TO FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP002",
+      "kind": "offpage",
+      "tag": "COOLING WATER RETURN",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP003",
+      "kind": "offpage",
+      "tag": "REACTOR PRODUCT",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP004",
+      "kind": "offpage",
+      "tag": "COOLING WATER SUPPLY",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP005",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP006",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   },
+   {
+    "id": "SYS-103",
+    "kind": "system",
+    "name": "Product Stripping",
+    "sheet": "103",
+    "children": [
+     {
+      "id": "S103-TK001",
+      "kind": "equipment",
+      "tag": "C-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S103-VL001",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN004",
+          "kind": "instrument",
+          "tag": "PV 204",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN005",
+          "kind": "instrument",
+          "tag": "PI 104",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-VL002",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN006",
+          "kind": "instrument",
+          "tag": "PV 209",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN007",
+          "kind": "instrument",
+          "tag": "TI 110",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-VL003",
+        "kind": "line_item",
+        "tag": null,
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN008",
+          "kind": "instrument",
+          "tag": "TI 133",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN009",
+          "kind": "instrument",
+          "tag": "AI 137",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN010",
+          "kind": "instrument",
+          "tag": "LV 208",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-IN001",
+        "kind": "instrument",
+        "tag": "PI 116",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S103-IN002",
+        "kind": "instrument",
+        "tag": "TI 118",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S103-IN003",
+        "kind": "instrument",
+        "tag": "LI 115",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S103-OP001",
+      "kind": "offpage",
+      "tag": null,
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP002",
+      "kind": "offpage",
+      "tag": "SATURATED ACID FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP003",
+      "kind": "offpage",
+      "tag": "STRIPPER OVERHEAD",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP004",
+      "kind": "offpage",
+      "tag": "LOW PRESSURE STEAM",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP005",
+      "kind": "offpage",
+      "tag": "CONDENSATE RETURN",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP006",
+      "kind": "offpage",
+      "tag": "STRIPPER PRODUCT",
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   }
+  ]
+ },
+ "summary": {
+  "systems": 3,
+  "equipment": 5,
+  "equipment_on_several_sheets": 0,
+  "instruments": 37,
+  "line_items": 13,
+  "offpage_connectors": 20,
+  "streams_extracted": 118,
+  "instrument_parent_method": {
+   "along_line": 37
+  },
+  "instruments_without_equipment": 0,
+  "line_items_without_equipment": 0,
+  "placeholder_tags": 0,
+  "offpage_pairs": 0,
+  "offpage_status": {
+   "unpaired: no drawing number read from the text": 20
+  },
+  "sheet_drawing_numbers": {
+   "101": [
+    "101-1",
+    "sheet_register"
+   ],
+   "102": [
+    "102-1",
+    "sheet_register"
+   ],
+   "103": [
+    "103-1",
+    "sheet_register"
+   ]
+  }
+ }
+}

@@ -10,6 +10,42 @@ in a production environment. It grows as the project does. Each journal entry al
 
 ---
 
+## Start wherever you are
+
+A plant doesn't need good drawings to start. There are three ways in, and they end in the same place:
+
+| Where you are | What you do | Shown here on |
+|---|---|---|
+| **(a) You have P&IDs**, scanned or PDF | Extract them: AI reads symbols and tags in tiles, code traces the lines, people review the risk-ranked queue | 12 real OPEN100 sheets (the sealed-holdout results) |
+| **(b) You have process knowledge but no usable drawings:** an instrument index, a historian tag list, a DCS export, a simulator | Build or collect a process model, then **generate** drawings in your house style from it (`scripts/draw_pid_from_model.py`), and put them through the same extraction and review as scanned sheets | Tennessee Eastman: the verified model, drawn as 3 sheets in the OPEN100 style |
+| **(c) Either way** | One reviewed model feeds Ignition tags and screens, the PI AF structure and the 3D orientation tour | Both tracks (the 3D tour is a draft: [drafts/3d-tour](../drafts/3d-tour/README.md)) |
+
+Path (b) is more than a workaround. Generated sheets give people something to walk down and mark up, they make the
+gaps in your lists visible (an instrument with no unit, a stream with no line), and they carry a key, so you can
+measure your extraction method on your own house style before you trust it on your scans. The Tennessee Eastman
+round trip in [EVALUATION.md](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman) is that measurement for this
+repo.
+
+**Capturing your own house style** (what the generator needs; one afternoon with a drafter):
+- **Title block and border:** zone grid, the boxes and their labels, drawing-number format, revision field, the
+  "not for construction" note. Copy them from a current sheet.
+- **Symbol library:** the shapes your sheets actually use for vessels, columns, exchangers, pumps and compressors,
+  control and manual valves, instrument bubbles (field, panel, shared display) and off-page flags, with their sizes
+  relative to the sheet. `scripts/style_fidelity.py` measures these on a set of sheets, so measure 5–10 of yours
+  first and draw to those numbers.
+- **Text and line conventions:** tag format (letters and loop number, separator), line-number format, line weights
+  for process and signal lines, flow arrows, how off-page flags name the other sheet and its grid zone.
+- **Sheet split:** which units go on which sheet, from your drawing index. That is the layout file
+  (`data/te_pid_layout.json` here); the content comes from your model, never from the layout.
+
+**Governance: a generated drawing is not a drawing of record.** It shows what your lists say, not what is in the
+field. Until engineering has walked it down and accepted it under your management of change (and, for covered
+processes, your PSM process safety information procedure), label it as a draft, keep it out of your document
+control system's issued set, and don't let anyone operate, isolate or permit from it. The generated sheets here say
+so in their title block.
+
+---
+
 ## 1. Before you start: decide what you're actually converting
 
 **Check whether you need vision at all.**

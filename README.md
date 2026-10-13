@@ -50,6 +50,69 @@ flowchart LR
 | AVEVA PI AF | Asset structure generated as a PI Builder sheet. **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
+## Start wherever you are
+
+| Your plant has | Path | Shown here on |
+|---|---|---|
+| **P&IDs** (scans, PDFs) | Extract them: AI reads symbols and tags, code traces lines, people review a risk-ranked queue | 12 real OPEN100 sheets (results above) |
+| **Process knowledge but no usable drawings** (instrument index, historian tags, a simulator) | Build a model, **generate** P&IDs in your house style from it (`scripts/draw_pid_from_model.py`), then extract and review them like scans | Tennessee Eastman, drawn in the OPEN100 style |
+| **Either** | One reviewed model feeds Ignition, PI AF and the [draft 3D tour](drafts/3d-tour/README.md) | Both |
+
+A generated drawing is **not a drawing of record** until engineering walks it down and accepts it under management
+of change. How to capture your own title block and symbol library, and the governance rules:
+[AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md#start-wherever-you-are).
+
+![Left: a crop of OPEN100 sheet 6. Right: the same pixel scale on a sheet generated from the Tennessee Eastman model, with ISA tag bubbles, bow-tie control valves with their own tag bubbles, off-page flags and line numbers in the same style](docs/screenshots/te-pid-style-side-by-side.png)
+
+The generated sheets sit inside the OPEN100 range on 32 of 36 style measurements: bubble, valve, flag and equipment
+sizes, line weights, text height and flag counts. The four outside are symbol counts and one ink figure, because the
+model holds no drains, vents or manual valves ([style_fidelity.md](out/te_pid/style_fidelity.md)).
+
+### One plant, end to end (Tennessee Eastman)
+
+```mermaid
+flowchart LR
+    M[Verified TE model] --> G[Generated P&ID<br/>3 sheets, house style]
+    G --> X[Frozen extraction<br/>GPT and Claude, tiles + tracer]
+    X --> T[Extracted twin]
+    T --> D[Reviewer diff<br/>against the verified model]
+    T --> E[Ignition tags, PI AF sheet]
+    T --> L[Replay server<br/>live values by tag]
+```
+
+**This is a round trip.** The sheets and their answer keys come from the same model, so the scores measure how
+faithfully the frozen method (2×2 tiles, prompt v2, code line tracer; nothing re-tuned) reads our own clean drawings.
+They are an upper bound, not real-plant accuracy, and not comparable with the OPEN100 numbers. Gemini was left out.
+
+| Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
+|---|---|---|
+| Clean (5 runs each) | 2.1 · 2.2 | 100% · 100% |
+| Photocopy, L1 (3 runs each) | 2.1 · 8.0 | 100% · 98% |
+| Old scan, L2 | 2.1 · 13.4 | **56%** · 95% |
+| Bad scan, L3 | 16.9 · 17.3 | **14%** · **49%** |
+
+Means over runs; ranges and 95% intervals are in [roundtrip_scores.md](out/te_pid/roundtrip_scores.md). 43 printed
+tags per run (37 instrument and valve bubbles, 6 equipment tags). This is the project's first tag-reading score,
+because the OPEN100 keys carry no text.
+
+- **On clean sheets both models read every tag.** The remaining 2 corrections per 100 come mostly from the agitator
+  motor, which both models report as an extra symbol (the tracer then links through it).
+- **On old scans the risk is in the text, not the shapes.** GPT kept finding every symbol and line at L2 but read
+  FI as PI, LI as LE and FV as PV. Claude at L3 read FV 203, FV 201 and FV 202 as FV 201, FV 202 and FV 203 in one
+  run: three real tags, each on its neighbour's valve. A tag-only check and the live check both pass that; only the
+  position-aware round trip catches it.
+- **The reviewer diff** for the declared chain (GPT, clean, first run) has 10 corrections against the verified model.
+  Nine also appear for a perfect reader, so they come from the converter and the model's conventions, not from the
+  reading: the feed header is drawn as an in-line symbol, so it becomes a line item and its six feed instruments get
+  the reactor as parent; and two extra unit links come from lines that meet at the header and the compressor bypass
+  ([diff](out/te_pid/diff_codex-clean-r1.md), [perfect-reader diff](out/te_pid/diff_key.md)).
+- **Exporters and live values:** the extracted twin went through the same exporters (Ignition tags and UDTs, PI AF
+  sheet, SVG). 36 of its 37 tags resolve to points on the TE replay server, and all 36 moved between reads. SC-212
+  has no recorded data ([live check](out/te_pid/live_codex-clean-r1.md)). The extracted twin's tag file was **not**
+  imported into a gateway in this pass. The gateway-tested project is built from the verified model, which is what
+  the extracted twin becomes after the listed corrections plus the fields no drawing prints (simulator index, units
+  of measure), which come from the instrument list.
+
 ## Try it
 
 - **No Ignition install (Docker):** [docker/README.md](docker/README.md). Double-click `start-demo.bat`. It restores
@@ -86,7 +149,10 @@ Three separate pieces of evidence live here. Keep them apart:
   simulator source: every tag's name and units, and every unit, stream connection, flow direction and tag ownership
   (51 confirmed, 4 corrected, 1 left unresolved; [report](out/te_topology_check.md)). Generated operator screens are
   driven by recorded simulation replay. The model was not extracted from a drawing, tap positions and pipe routes
-  are not in the source, and replay is not a process simulator that responds to control changes.
+  are not in the source, and replay is not a process simulator that responds to control changes. Since journal
+  entry 40, the model is also drawn as three P&ID sheets and extracted back, so the TE chain runs from a drawing
+  (see [One plant, end to end](#one-plant-end-to-end-tennessee-eastman)). That is a round trip on our own drawings,
+  not an extraction of a real plant's sheets.
 - **PID2Graph Synthetic:** a bounded two-sheet adaptation through the existing scorer and exporters, with unresolved
   ontology and line-semantics review gates. It is neither a held-out generalization result nor plant validation.
   See [the adaptation guide](docs/ADAPT_LABELED_DATASET.md).
@@ -313,7 +379,21 @@ python scripts/generate.py && python scripts/generate.py out/twin/r2-tiles-trace
 python scripts/demo.py --build --verify       # one command: data, build, nine checks, then running
 ```
 
-**9. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
+**9. One plant end to end: draw the TE model, read it back, diff it.** The sheets are committed; regenerating
+them checks the model against the layout. The extraction needs the `claude` or `codex` CLI:
+```
+python scripts/draw_pid_from_model.py && python scripts/style_fidelity.py
+python scripts/degrade_scans.py --src data/te_pid --drawings 101,102,103 --dest data/te_pid/scan
+PID_SHEETS_DIR=data/te_pid python scripts/run_extraction.py --tool codex --drawings 101,102,103 --prompt extraction/prompt_v2.md --tiles 2x2 --label te-clean-tiles-r1
+PID_SHEETS_DIR=data/te_pid python scripts/trace_connections.py --src-label te-clean-tiles-r1 --tool codex --drawings 101,102,103 --label te-clean-trace-r1
+python scripts/score_te_roundtrip.py --conditions clean --tools codex
+PID_SHEETS_DIR=data/te_pid python scripts/build_twin.py --label te-clean-trace-r1 --tools codex --sheets 101,102,103 --holdout-ok --sheet-register data/sheet_registers/te_generated.csv --out out/te_pid/twin/codex-clean-r1
+python scripts/te_model_diff.py out/te_pid/twin/codex-clean-r1/plant_model.json
+python scripts/te_live_check.py out/te_pid/twin/codex-clean-r1/plant_model.json   # needs fetch_te_data.py first
+```
+(`PID_SHEETS_DIR=...` is shell syntax; in PowerShell set `$env:PID_SHEETS_DIR` first.)
+
+**10. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.
 
 ## Repository map
@@ -323,6 +403,7 @@ it at a real site.
 | [`docs/`](docs/) | Everything to read; see [Read next](#read-next). Screenshots are in [`docs/screenshots/`](docs/screenshots/) |
 | [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman model: tags, units, streams and directions verified against the simulator source ([tags](out/te_source_check.md), [topology](out/te_topology_check.md)) |
 | [`data/te_unit_purposes.json`](data/te_unit_purposes.json) | One plain-language sentence per TE unit, each citing the simulator lines it restates |
+| [`data/te_pid/`](data/te_pid/), [`data/te_pid_layout.json`](data/te_pid_layout.json) | The TE P&ID generated in the OPEN100 style (3 sheets, PNG + SVG) with answer keys emitted from the model, and the drafting layout that places it |
 | [`data/sheet_registers/`](data/sheet_registers/) | A drawing index read from the OPEN100 title blocks (an example of what a plant supplies) |
 | [`data/io_lists/`](data/io_lists/README.md) | A synthetic I/O list for the point-mapping demo, shaped like a real export |
 | [`data/external/pid2graph/`](data/external/pid2graph/) | The 12 OPEN100 drawings with answer keys, and their degraded-scan copies (CC BY-SA 4.0) |
@@ -336,12 +417,14 @@ it at a real site.
 | · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
 | · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run) |
 | · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (OPC), `map_pi_points.py` (reviewer-supplied PI references), `review_effort.py` (future study records) |
+| · generated drawings (TE) | `draw_pid_from_model.py` (model to house-style sheets + keys), `style_fidelity.py`, `score_te_roundtrip.py` (symbols, tag text, connections, replicates), `te_model_diff.py` (reviewer diff), `te_live_check.py` (tags to replay points) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · demo | `demo.py` (one command to a running twin), `make_before_after.py` (also makes the social preview card), `make_demo_gif.py` |
 | · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `acceptance_preflight.py` (offline exact-candidate checks), `acceptance/` (the native acceptance harness), `ua_client.py`, `gw.py`, `make_local_ca.py` |
 | · tests and costs | `run_tests.py` (explicit source-only/full cached-data modes; CI defaults to full), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
 | [`out/`](out/) | Committed results: `scorecard_<label>.md`, [`costs.md`](out/costs.md), the TE outputs (`svg/`, `ignition/`, `pi/`, `ops_review_sheet.csv`) |
 | [`out/twin/r2-tiles-trace/codex/`](out/twin/r2-tiles-trace/codex/) | The 12-sheet extracted twin: `plant_model.json`, `review_queue.csv` (risk-tiered), Ignition tags, PI AF sheet, per-sheet SVGs |
+| [`out/te_pid/`](out/te_pid/) | The TE round trip: style check, scores, reviewer diffs, live checks, and the extracted TE twins with their Ignition and PI AF files |
 | [`out/ignition/gateway/`](out/ignition/gateway/) | The Ignition kit (tag import, Perspective project) and dated verification receipts in `receipts/` |
 | [`out/mapping/`](out/mapping/), `out/review/` | Point-mapping reports, and the change records each applied review writes |
 | [`docker/`](docker/README.md), `docker-compose.yml`, `*-demo.bat` | Historical Docker demo: Ignition restored from a prepared backup, plus the two data servers and launchers |
@@ -422,6 +505,7 @@ native import.
 |---|---|---|
 | `GEMINI_API_KEY` or `GEMINI_KEY_ENV_FILE` | `run_extraction.py --tool gemini` | The key, or a path to a private `.env` file holding it |
 | `PID2GRAPH_SET` | extraction, scoring, twin scripts | `Dataset PID` selects the holdout-B set; the default is OPEN100 |
+| `PID_SHEETS_DIR` | extraction, tracer, scoring, twin scripts | Any folder of `<sheet>.png` + `<sheet>.graphml`, absolute or relative to the repo (e.g. `data/te_pid`); overrides `PID2GRAPH_SET` |
 | `IGNITION_ENV_FILE` | `scripts/ignition/*` | A private file of the variables below, as `KEY=VALUE` lines |
 | `IGNITION_URL`, `IGNITION_API_TOKEN`, `IGNITION_CA_FILE` | `scripts/ignition/gw.py` | Gateway HTTPS address, API key, and the CA that signed the gateway's certificate |
 | `IGNITION_BACKUP_DIR`, `IGNITION_SECRETS_DIR` | `build_gateway.py`, `verify_gateway.py`, `ua_client.py` | Private folders for gateway backups, the OPC UA client certificate and the verifier's OPC UA login |

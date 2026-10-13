@@ -1,0 +1,412 @@
+{
+  "status": "OFFLINE STAGING ONLY; native PI Builder import NOT tested",
+  "model_id": "twin-te-clean-trace-r1-codex",
+  "candidate_schema": {
+    "version": 1,
+    "file": "pi_builder_UNVALIDATED_candidate_v1.csv",
+    "status": "UNVALIDATED candidate; not native-import-ready",
+    "only_legacy_migration": "AttributeValueType header renamed to AttributeType; same row data",
+    "vendor_source": "https://osicdn.blob.core.windows.net/learningcontent/Online%20Course%20Workbooks/Asset%20Framework_Beyond%20the%20Basics_Workbook.pdf",
+    "vendor_pages": [
+      34,
+      85,
+      86,
+      92
+    ],
+    "remaining_contract_checks": [
+      "Retrieve sample rows from the installed PI Builder version before import.",
+      "Verify complete header names, including Parent, Name, ObjectType, Template and AttributeDataReference.",
+      "Verify element/attribute row identity, parent paths and version-specific row conventions.",
+      "Verify every supplied AF value type and UOM against the installed system and source point."
+    ]
+  },
+  "mapped": {},
+  "unmapped_asset_ids": [
+    "S101-IN001",
+    "S101-IN002",
+    "S101-IN003",
+    "S101-IN004",
+    "S101-IN005",
+    "S101-IN006",
+    "S101-IN007",
+    "S101-IN008",
+    "S101-IN009",
+    "S101-IN010",
+    "S101-IN011",
+    "S101-IN012",
+    "S101-IN013",
+    "S101-IN014",
+    "S102-IN001",
+    "S102-IN002",
+    "S102-IN003",
+    "S102-IN004",
+    "S102-IN005",
+    "S102-IN006",
+    "S102-IN007",
+    "S102-IN008",
+    "S102-IN009",
+    "S102-IN010",
+    "S102-IN011",
+    "S102-IN012",
+    "S102-IN013",
+    "S103-IN001",
+    "S103-IN002",
+    "S103-IN003",
+    "S103-IN004",
+    "S103-IN005",
+    "S103-IN006",
+    "S103-IN007",
+    "S103-IN008",
+    "S103-IN009",
+    "S103-IN010"
+  ],
+  "review_status": "User-supplied reviewer attestations only; archive, point, AF type and UOM compatibility NOT independently verified",
+  "attributes": [
+    {
+      "asset_id": "S101-IN001",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FV 203",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_203.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN002",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FI 101",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_101.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN003",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FV 201",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_201.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN004",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FI 102",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_102.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN005",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FV 202",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_202.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN006",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FI 103",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_103.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN007",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "SC 212",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.SC_212.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN008",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "PI 107",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.PI_107.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN009",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "LI 108",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.LI_108.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN010",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "TI 109",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TI_109.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN011",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "FI 106",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_106.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN012",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "AI 123",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.AI_123.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN013",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "TV 210",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TV_210.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S101-IN014",
+      "parent": "Site\\Feed And Reaction\\R-101",
+      "name": "TI 121",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TI_121.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN001",
+      "parent": "Site\\Condensing, Separation And Recycle\\E-101",
+      "name": "TI 122",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TI_122.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN002",
+      "parent": "Site\\Condensing, Separation And Recycle\\E-101",
+      "name": "TV 211",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TV_211.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN003",
+      "parent": "Site\\Condensing, Separation And Recycle\\K-101",
+      "name": "FI 105",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_105.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN004",
+      "parent": "Site\\Condensing, Separation And Recycle\\K-101",
+      "name": "JI 120",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.JI_120.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN005",
+      "parent": "Site\\Condensing, Separation And Recycle\\K-101",
+      "name": "HV 205",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.HV_205.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN006",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "FI 110",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_110.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN007",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "AI 129",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.AI_129.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN008",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "FV 206",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_206.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN009",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "TI 111",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TI_111.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN010",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "LI 112",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.LI_112.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN011",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "PI 113",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.PI_113.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN012",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "FI 114",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_114.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S102-IN013",
+      "parent": "Site\\Condensing, Separation And Recycle\\V-101",
+      "name": "LV 207",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.LV_207.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN001",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "FV 204",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_204.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN002",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "FI 104",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_104.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN003",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "PI 116",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.PI_116.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN004",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "TI 118",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.TI_118.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN005",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "LI 115",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.LI_115.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN006",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "FV 209",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FV_209.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN007",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "FI 119",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_119.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN008",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "FI 117",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.FI_117.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN009",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "AI 137",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.AI_137.PV",
+      "status": "unmapped placeholder"
+    },
+    {
+      "asset_id": "S103-IN010",
+      "parent": "Site\\Product Stripping\\C-101",
+      "name": "LV 208",
+      "value_type": "Double",
+      "uom": "",
+      "config_string": "\\\\%Server%\\PLACEHOLDER.LV_208.PV",
+      "status": "unmapped placeholder"
+    }
+  ],
+  "expected_element_rows": 9,
+  "expected_attribute_rows": 37,
+  "checklist": [
+    "Obtain approval before any native import or plant/PI connection.",
+    "Export a sample from the installed PI Builder version; reconcile its actual column contract with this staging CSV.",
+    "Verify every reviewed archive and point exists, permissions, AF type and UOM compatibility; no points are created by this workflow.",
+    "Exclude all unresolved placeholders from native import; no placeholder is evidence of an available signal.",
+    "Use a separately authorized isolated AF database; back up existing elements before making changes.",
+    "Compare imported paths, names, element/attribute counts, references, types and UOMs against this file and the staging CSV.",
+    "Read back every mapped attribute; record timestamp, quality, value, source point and reviewer evidence; reject bad or stale values.",
+    "Record native errors and differences and resolve them before any operational-use decision.",
+    "Formula-like free-text CSV cells have an apostrophe prefix; review labels before native import."
+  ]
+}

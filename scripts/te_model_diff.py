@@ -1,7 +1,8 @@
 """Diff an extracted twin against the verified Tennessee Eastman model: what a reviewer would have to correct.
 
 The extracted twin (scripts/build_twin.py output) came from the generated TE sheets (scripts/draw_pid_from_model.py).
-The verified model is data/te_process_model.json (36/37 confirmed, 1 corrected against the simulator source).
+The verified model is data/te_process_model.json: tag names and units checked against the simulator source
+(scripts/verify_te_source.py), units, streams and tag ownership against its balances (scripts/verify_te_topology.py).
 Matching is by tag only, after upper-casing and dropping separators ("FI 101" = "FI-101"); nothing is matched by
 position, so a misread tag shows up as one missing item plus one extra item, exactly as a reviewer would see it.
 

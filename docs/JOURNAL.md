@@ -1891,3 +1891,76 @@ model, the DCS configuration, or the historian's tag-to-unit hierarchy. Check th
 against it mechanically, and keep the disagreements as a list for the process engineer. What still needs a person
 here: PI-116's owner; whether the S7/S7b and S8/S8b splits and FI-105's segment match how a real plant would draw
 them; and every tap position, size and pipe route, none of which any simulator records.
+
+## 40. One plant, end to end: draw the TE model in the house style and read it back
+
+**What:** 2026-10-13. The extraction (OPEN100) and the live twin (Tennessee Eastman) were on two different plants,
+so "drawing → extraction → twin → live values" had never been shown on one plant. The plan called for extracting a
+TE drawing in phase 3; it was never done. Now the verified TE model is drawn as three P&ID sheets in the house style
+learned from OPEN100, read back by the frozen method, diffed against the model, exported, and matched to the replay
+server's live points.
+
+**How:**
+- `scripts/draw_pid_from_model.py` renders the sheets (PNG and SVG) and emits answer keys in the PID2Graph schema
+  from the same model, with each symbol's printed text and the model item it draws. What is drawn comes only from
+  `data/te_process_model.json`; where it goes comes from a drafting layout (`data/te_pid_layout.json`). The generator
+  refuses a layout that drops a model item, draws one twice, or names a tag the model doesn't have. Cooling water,
+  steam and the compressor bypass are lines the model has no stream for, so the key marks them as drafting additions.
+- The style is measured, not asserted: `scripts/style_fidelity.py` runs the same measurements on the 12 OPEN100
+  sheets and the 3 generated ones. 32 of 36 generated values sit inside the OPEN100 range; the four outside are
+  symbol counts and one ink figure, because the model holds no drains, vents or manual valves.
+- The key is checked against the pixels: the code line tracer, given only the key's symbol boxes and the image,
+  recovers exactly the key's links on all three sheets. The first version failed this on two sheets: an equipment
+  box drawn to the centre of its outline let the wall's outer edge join three lines, and a bubble placed inside the
+  reactor's box hid its leader. Both were drawing bugs, fixed in the generator, not in the tracer.
+- Extraction: method M3 unchanged (2×2 tiles, prompt v2, tracer defaults), GPT and Claude, 5 runs each on the clean
+  sheets and 3 each on the round-4 degraded copies (`degrade_scans.py --src`, same levels and seeds). No Gemini.
+  84 sheet runs, no failed tile.
+- Scoring: the frozen scorer for symbols and connections, plus the project's first tag-text score
+  (`scripts/score_te_roundtrip.py`): matched by position, compared after dropping case and separators.
+- `scripts/te_model_diff.py` lists what a reviewer would correct against the verified model; `scripts/te_live_check.py`
+  matches the extracted tags to the replay server's points and reads them twice.
+- Midway, the topology check (entry 39) moved the purge stream and its three tags from the compressor to the
+  separator. Sheet 102 was regenerated with the purge leaving the separator, the 27 runs made on the old sheet 102
+  were set aside by image checksum, and sheet 102 was re-run under every label. Sheets
+  101 and 103 came out byte-identical, so their runs stood.
+
+**What it found** (details in [EVALUATION.md §6](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman)):
+- On clean sheets both models read every one of the 43 printed tags in every run. Review load 2.1 (GPT, all 5 runs)
+  and 2.2 (Claude, 2.1–2.6), almost all of it the agitator motor reported as an extra symbol.
+- Text fails before shapes. At the old-scan level GPT still found every symbol and line but read only 56% of tags
+  exactly (FI as PI, LI as LE, FV as PV). At the bad-scan level GPT read 14% and Claude 49%.
+- In one bad-scan run Claude rotated the three feed valve tags (FV 203 read as FV 201, FV 201 as FV 202, FV 202 as
+  FV 203). Each is a real tag, so a tag-only diff passes it and the live check binds all three to moving points. Only
+  the position-aware score catches it.
+- For the declared chain (GPT, clean, run 1), the reviewer diff has 10 corrections. Feeding the key in as a perfect
+  extraction leaves 9 of them, so they come from the converter and the model's conventions, not from the reading. The
+  feed header drawn as an in-line mixer becomes a line item, so its six feed-line items get the reactor as owner. Two
+  extra unit links come from lines that share pipe at the header and the bypass.
+- 36 of the extracted twin's 37 tags resolve to replay points and all 36 moved; SC-212 has no recorded data.
+
+**Why:**
+- **Generate, don't look for a picture.** A drawing generated from the verified model in a learned house style is
+  closer to what a plant would actually do than any diagram we could find: most sites have an instrument list long
+  before they have trustworthy drawings, and generated sheets can be redrawn in each site's own style.
+- **Call it a round trip.** The drawing and the key come from the same model, so the scores can't say how well this
+  reads a real plant's sheets. They measure reading fidelity on clean house-style drawings: an upper bound. The
+  tracer check and the generator's refusals keep the key honest about what is drawn, not about the plant.
+- **Replicates, not a single run.** Five clean and three degraded runs per model show the spread. GPT's clean runs
+  scored identically; Claude's degraded runs varied by several points.
+- **The perfect-reader diff** separates the converter's errors from the models'. Without it, the feed-header ownership
+  errors would have looked like reading errors.
+- **Rejected:** fixing `build_twin.py` so a tagged in-line mixer becomes a unit. That would tune the converter to the
+  one drawing we generated, and it would change the OPEN100 twin. The diff reports it instead. Also rejected:
+  importing the extracted twin's tags into a gateway here, because the disposable gateway was in use by another
+  workstream at the time.
+
+**Lesson:** on clean drawings the reading is nearly solved and the remaining work is in the converter's rules and the
+model's conventions. On poor images the dangerous error is a misread that is still a valid tag, and only checking
+against position (a walkdown, a loop check) catches it. A live value that moves proves the binding exists, not that
+it is right.
+
+**At your plant:** if you have no usable drawings, generate them from your instrument index in your own house
+style, label them "not a drawing of record", and walk them down under your management of change before anyone
+relies on them. Use the generated sheets and their keys to measure your extraction method on your own style before
+you trust it on your scans. And never accept an I/O binding because the value moves: loop-check it.

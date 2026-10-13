@@ -1,0 +1,5949 @@
+{
+ "summary": [
+  {
+   "condition": "clean",
+   "tool": "codex",
+   "replicates": 5,
+   "review_load": {
+    "n": 5,
+    "mean": 2.1,
+    "min": 2.1,
+    "max": 2.1,
+    "ci95": [
+     2.1,
+     2.1
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 5,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 5,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "tags_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 5,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 5,
+    "mean": 0.987,
+    "min": 0.987,
+    "max": 0.987,
+    "ci95": [
+     0.987,
+     0.987
+    ]
+   },
+   "connections_precision": {
+    "n": 5,
+    "mean": 0.983,
+    "min": 0.983,
+    "max": 0.983,
+    "ci95": [
+     0.983,
+     0.983
+    ]
+   },
+   "connections_recall": {
+    "n": 5,
+    "mean": 0.991,
+    "min": 0.991,
+    "max": 0.991,
+    "ci95": [
+     0.991,
+     0.991
+    ]
+   }
+  },
+  {
+   "condition": "clean",
+   "tool": "claude",
+   "replicates": 5,
+   "review_load": {
+    "n": 5,
+    "mean": 2.2,
+    "min": 2.1,
+    "max": 2.6,
+    "ci95": [
+     1.922,
+     2.478
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 5,
+    "mean": 0.992,
+    "min": 0.987,
+    "max": 0.993,
+    "ci95": [
+     0.988,
+     0.995
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 5,
+    "mean": 0.992,
+    "min": 0.987,
+    "max": 0.993,
+    "ci95": [
+     0.988,
+     0.995
+    ]
+   },
+   "tags_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 5,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 5,
+    "mean": 0.987,
+    "min": 0.987,
+    "max": 0.987,
+    "ci95": [
+     0.987,
+     0.987
+    ]
+   },
+   "connections_precision": {
+    "n": 5,
+    "mean": 0.983,
+    "min": 0.983,
+    "max": 0.983,
+    "ci95": [
+     0.983,
+     0.983
+    ]
+   },
+   "connections_recall": {
+    "n": 5,
+    "mean": 0.991,
+    "min": 0.991,
+    "max": 0.991,
+    "ci95": [
+     0.991,
+     0.991
+    ]
+   }
+  },
+  {
+   "condition": "L1",
+   "tool": "codex",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 2.1,
+    "min": 2.1,
+    "max": 2.1,
+    "ci95": [
+     2.1,
+     2.1
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.929,
+    "min": 0.929,
+    "max": 0.929,
+    "ci95": [
+     0.929,
+     0.929
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.987,
+    "min": 0.987,
+    "max": 0.987,
+    "ci95": [
+     0.987,
+     0.987
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.983,
+    "min": 0.983,
+    "max": 0.983,
+    "ci95": [
+     0.983,
+     0.983
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.991,
+    "max": 0.991,
+    "ci95": [
+     0.991,
+     0.991
+    ]
+   }
+  },
+  {
+   "condition": "L1",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 8.0,
+    "min": 2.6,
+    "max": 11.5,
+    "ci95": [
+     -3.787,
+     19.787
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.969,
+    "min": 0.926,
+    "max": 0.993,
+    "ci95": [
+     0.877,
+     1.061
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.969,
+    "min": 0.926,
+    "max": 0.993,
+    "ci95": [
+     0.877,
+     1.061
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.977,
+    "min": 0.93,
+    "max": 1.0,
+    "ci95": [
+     0.876,
+     1.077
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.956,
+    "min": 0.932,
+    "max": 0.983,
+    "ci95": [
+     0.892,
+     1.02
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.948,
+    "min": 0.879,
+    "max": 0.983,
+    "ci95": [
+     0.8,
+     1.096
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.966,
+    "min": 0.923,
+    "max": 0.991,
+    "ci95": [
+     0.873,
+     1.058
+    ]
+   }
+  },
+  {
+   "condition": "L2",
+   "tool": "codex",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 2.1,
+    "min": 2.1,
+    "max": 2.1,
+    "ci95": [
+     2.1,
+     2.1
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.558,
+    "min": 0.535,
+    "max": 0.581,
+    "ci95": [
+     0.501,
+     0.615
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.558,
+    "min": 0.535,
+    "max": 0.581,
+    "ci95": [
+     0.501,
+     0.615
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.987,
+    "min": 0.987,
+    "max": 0.987,
+    "ci95": [
+     0.987,
+     0.987
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.983,
+    "min": 0.983,
+    "max": 0.983,
+    "ci95": [
+     0.983,
+     0.983
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.991,
+    "max": 0.991,
+    "ci95": [
+     0.991,
+     0.991
+    ]
+   }
+  },
+  {
+   "condition": "L2",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 13.433,
+    "min": 11.5,
+    "max": 14.7,
+    "ci95": [
+     9.208,
+     17.659
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.987,
+    "max": 0.993,
+    "ci95": [
+     0.982,
+     1.0
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.987,
+    "max": 0.993,
+    "ci95": [
+     0.982,
+     1.0
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.953,
+    "min": 0.953,
+    "max": 0.953,
+    "ci95": [
+     0.953,
+     0.953
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.953,
+    "min": 0.953,
+    "max": 0.953,
+    "ci95": [
+     0.953,
+     0.953
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.857,
+    "min": 0.786,
+    "max": 0.929,
+    "ci95": [
+     0.68,
+     1.035
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.905,
+    "min": 0.899,
+    "max": 0.917,
+    "ci95": [
+     0.879,
+     0.931
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.833,
+    "min": 0.823,
+    "max": 0.853,
+    "ci95": [
+     0.79,
+     0.876
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.991,
+    "max": 0.991,
+    "ci95": [
+     0.991,
+     0.991
+    ]
+   }
+  },
+  {
+   "condition": "L3",
+   "tool": "codex",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 16.933,
+    "min": 16.2,
+    "max": 17.8,
+    "ci95": [
+     14.925,
+     18.941
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.991,
+    "min": 0.987,
+    "max": 0.993,
+    "ci95": [
+     0.982,
+     1.0
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.982,
+    "min": 0.973,
+    "max": 0.993,
+    "ci95": [
+     0.957,
+     1.007
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.14,
+    "min": 0.14,
+    "max": 0.14,
+    "ci95": [
+     0.14,
+     0.14
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.14,
+    "min": 0.14,
+    "max": 0.14,
+    "ci95": [
+     0.14,
+     0.14
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.854,
+    "min": 0.85,
+    "max": 0.861,
+    "ci95": [
+     0.84,
+     0.869
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.974,
+    "min": 0.967,
+    "max": 0.978,
+    "ci95": [
+     0.959,
+     0.99
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.761,
+    "min": 0.752,
+    "max": 0.769,
+    "ci95": [
+     0.74,
+     0.782
+    ]
+   }
+  },
+  {
+   "condition": "L3",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 17.267,
+    "min": 15.7,
+    "max": 18.3,
+    "ci95": [
+     13.839,
+     20.694
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.985,
+    "min": 0.98,
+    "max": 0.987,
+    "ci95": [
+     0.975,
+     0.995
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.985,
+    "min": 0.98,
+    "max": 0.987,
+    "ci95": [
+     0.975,
+     0.995
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.489,
+    "min": 0.442,
+    "max": 0.512,
+    "ci95": [
+     0.388,
+     0.589
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.489,
+    "min": 0.442,
+    "max": 0.512,
+    "ci95": [
+     0.388,
+     0.589
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 1.333,
+    "min": 0,
+    "max": 3,
+    "ci95": [
+     -2.462,
+     5.128
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.852,
+    "min": 0.845,
+    "max": 0.867,
+    "ci95": [
+     0.821,
+     0.884
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.978,
+    "min": 0.978,
+    "max": 0.978,
+    "ci95": [
+     0.978,
+     0.978
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.755,
+    "min": 0.744,
+    "max": 0.778,
+    "ci95": [
+     0.707,
+     0.804
+    ]
+   }
+  }
+ ],
+ "runs": [
+  {
+   "label": "te-clean-trace-r1",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:00:50+00:00",
+     "wall_s": 36.6,
+     "serial_s": 125.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.5,
+      "ran_at": "2026-10-13T11:37:32+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:37:27+00:00",
+     "wall_s": 45.0,
+     "serial_s": 113.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-13T11:37:36+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:03:32+00:00",
+     "wall_s": 35.4,
+     "serial_s": 114.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.8,
+      "ran_at": "2026-10-13T11:37:41+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r2",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:03:27+00:00",
+     "wall_s": 41.8,
+     "serial_s": 117.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.5,
+      "ran_at": "2026-10-13T11:21:34+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:21:31+00:00",
+     "wall_s": 37.2,
+     "serial_s": 114.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-13T11:21:37+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:04:51+00:00",
+     "wall_s": 45.8,
+     "serial_s": 130.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.5,
+      "ran_at": "2026-10-13T11:21:40+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r3",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:05:46+00:00",
+     "wall_s": 43.6,
+     "serial_s": 129.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-13T11:22:21+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:22:18+00:00",
+     "wall_s": 37.7,
+     "serial_s": 103.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-13T11:22:24+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:07:04+00:00",
+     "wall_s": 31.4,
+     "serial_s": 101.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.1,
+      "ran_at": "2026-10-13T11:22:27+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r4",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:07:52+00:00",
+     "wall_s": 40.6,
+     "serial_s": 132.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.2,
+      "ran_at": "2026-10-13T11:23:09+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:23:02+00:00",
+     "wall_s": 34.4,
+     "serial_s": 102.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.4,
+      "ran_at": "2026-10-13T11:23:16+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:09:04+00:00",
+     "wall_s": 37.4,
+     "serial_s": 117.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.3,
+      "ran_at": "2026-10-13T11:23:21+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r5",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:09:56+00:00",
+     "wall_s": 42.8,
+     "serial_s": 117.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.8,
+      "ran_at": "2026-10-13T11:24:10+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:05+00:00",
+     "wall_s": 43.6,
+     "serial_s": 125.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.8,
+      "ran_at": "2026-10-13T11:24:15+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:11:25+00:00",
+     "wall_s": 43.0,
+     "serial_s": 122.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-13T11:24:18+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:01:07+00:00",
+     "wall_s": 53.1,
+     "serial_s": 188.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3912,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-13T11:37:15+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:37:10+00:00",
+     "wall_s": 27.8,
+     "serial_s": 92.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2552,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-13T11:37:20+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:02:49+00:00",
+     "wall_s": 42.8,
+     "serial_s": 158.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3077,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.1,
+      "ran_at": "2026-10-13T11:37:24+00:00"
+     }
+    }
+   ],
+   "review_load": 2.6,
+   "corrections": 5,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.987,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:03:38+00:00",
+     "wall_s": 52.3,
+     "serial_s": 168.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3322,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.3,
+      "ran_at": "2026-10-13T11:21:26+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:21:23+00:00",
+     "wall_s": 28.4,
+     "serial_s": 97.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2551,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.2,
+      "ran_at": "2026-10-13T11:21:29+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:05:25+00:00",
+     "wall_s": 56.2,
+     "serial_s": 211.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3117,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 1.7,
+      "ran_at": "2026-10-13T11:21:30+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:06:31+00:00",
+     "wall_s": 56.8,
+     "serial_s": 203.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3282,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-13T11:22:02+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:21:59+00:00",
+     "wall_s": 28.1,
+     "serial_s": 85.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2545,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.6,
+      "ran_at": "2026-10-13T11:22:05+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:08:31+00:00",
+     "wall_s": 54.5,
+     "serial_s": 169.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.308,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.4,
+      "ran_at": "2026-10-13T11:22:08+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r4",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:09:39+00:00",
+     "wall_s": 59.5,
+     "serial_s": 199.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3294,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.5,
+      "ran_at": "2026-10-13T11:22:45+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:22:40+00:00",
+     "wall_s": 31.4,
+     "serial_s": 92.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2561,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.8,
+      "ran_at": "2026-10-13T11:22:51+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:10:47+00:00",
+     "wall_s": 31.3,
+     "serial_s": 111.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.256,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.2,
+      "ran_at": "2026-10-13T11:22:57+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-clean-trace-r5",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3bab8cd5fb2c7345408ba48ee69eac376a90a7383297c70abe020c978481f619",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:11:52+00:00",
+     "wall_s": 55.1,
+     "serial_s": 195.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3296,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-13T11:23:32+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8bf12ea935ce0b73db370d3fed3cfaeb920039891cc74772cbe709e8beb202f9",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:23:29+00:00",
+     "wall_s": 31.0,
+     "serial_s": 104.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2571,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-13T11:23:35+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "0fd4aa79fb59c7a76b100b27e1c145883af2718fb032835f6ca1e4175eb3dc48",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:13:32+00:00",
+     "wall_s": 57.7,
+     "serial_s": 211.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3145,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-13T11:23:38+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r1",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:12:13+00:00",
+     "wall_s": 40.2,
+     "serial_s": 128.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-13T11:24:58+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:55+00:00",
+     "wall_s": 36.6,
+     "serial_s": 110.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.2,
+      "ran_at": "2026-10-13T11:25:03+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:13:38+00:00",
+     "wall_s": 48.2,
+     "serial_s": 141.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.0,
+      "ran_at": "2026-10-13T11:25:07+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 0.929,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r2",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:14:38+00:00",
+     "wall_s": 47.2,
+     "serial_s": 142.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.5,
+      "ran_at": "2026-10-13T11:25:49+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:25:45+00:00",
+     "wall_s": 37.9,
+     "serial_s": 112.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-13T11:25:52+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:15:53+00:00",
+     "wall_s": 39.1,
+     "serial_s": 127.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-13T11:25:55+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 0.929,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r3",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:16:44+00:00",
+     "wall_s": 37.9,
+     "serial_s": 126.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.0,
+      "ran_at": "2026-10-13T11:26:39+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:26:34+00:00",
+     "wall_s": 38.2,
+     "serial_s": 111.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.0,
+      "ran_at": "2026-10-13T11:26:44+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:17:58+00:00",
+     "wall_s": 35.7,
+     "serial_s": 116.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.3,
+      "ran_at": "2026-10-13T11:26:48+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 0.929,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:14:25+00:00",
+     "wall_s": 45.1,
+     "serial_s": 176.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3302,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.3,
+      "ran_at": "2026-10-13T11:24:12+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:05+00:00",
+     "wall_s": 27.3,
+     "serial_s": 90.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2536,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.6,
+      "ran_at": "2026-10-13T11:24:16+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:15:49+00:00",
+     "wall_s": 42.4,
+     "serial_s": 163.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3162,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.1,
+      "ran_at": "2026-10-13T11:24:22+00:00"
+     }
+    }
+   ],
+   "review_load": 2.6,
+   "corrections": 5,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 115,
+    "predicted": 117,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.983,
+    "f1": 0.983
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:17:03+00:00",
+     "wall_s": 61.7,
+     "serial_s": 203.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3316,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.1,
+      "ran_at": "2026-10-13T11:24:56+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:53+00:00",
+     "wall_s": 30.6,
+     "serial_s": 94.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2532,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.5,
+      "ran_at": "2026-10-13T11:25:00+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:18:30+00:00",
+     "wall_s": 36.8,
+     "serial_s": 126.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2563,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.1,
+      "ran_at": "2026-10-13T11:25:04+00:00"
+     }
+    }
+   ],
+   "review_load": 9.9,
+   "corrections": 19,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.987,
+   "connections": {
+    "tp": 116,
+    "predicted": 132,
+    "in_key": 117,
+    "precision": 0.879,
+    "recall": 0.991,
+    "f1": 0.932
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "te-L1-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "33a827efdd9a82109294ece5bfb7496d2fce75fedc71571508f8ca6d362d685c",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:19:09+00:00",
+     "wall_s": 30.8,
+     "serial_s": 96.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.269,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-13T11:25:08+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "21ac23ae68b826cfd286bef1134d7782967d6afefcbabf28b5df059efd308759",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:19:38+00:00",
+     "wall_s": 29.3,
+     "serial_s": 92.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2585,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-13T11:25:12+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "11c5a1a3ecc007d60a6124f88dbf9db9f9e5385098d2d2260e53c4cd5cf16192",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:20:05+00:00",
+     "wall_s": 27.2,
+     "serial_s": 89.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2556,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.7,
+      "ran_at": "2026-10-13T11:25:16+00:00"
+     }
+    }
+   ],
+   "review_load": 11.5,
+   "corrections": 22,
+   "key_items": 191,
+   "symbols_found_f1": 0.926,
+   "symbols_class_f1": 0.926,
+   "connections": {
+    "tp": 108,
+    "predicted": 110,
+    "in_key": 117,
+    "precision": 0.982,
+    "recall": 0.923,
+    "f1": 0.952
+   },
+   "tags_read": 0.93,
+   "tags_read_if_found": 1.0,
+   "tags_total": 43,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": false,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": false,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": false,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r1",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:03:22+00:00",
+     "wall_s": 42.9,
+     "serial_s": 149.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.1,
+      "ran_at": "2026-10-13T11:21:43+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:21:39+00:00",
+     "wall_s": 44.7,
+     "serial_s": 124.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-13T11:21:46+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:04:44+00:00",
+     "wall_s": 37.5,
+     "serial_s": 126.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.9,
+      "ran_at": "2026-10-13T11:21:50+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 0.581,
+   "tags_read_if_found": 0.581,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": "FV\n200",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "PI 106",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "PI 107",
+     "model_ref": "PI-107",
+     "found": true,
+     "extracted": "PR 107",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": "LE 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TR 109",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SC 721",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": "PI 109",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": "PI 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 119",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": "FV 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "PI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "PI 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "TI\n133",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "PV 209",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "TI 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r2",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:05:37+00:00",
+     "wall_s": 41.3,
+     "serial_s": 138.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.4,
+      "ran_at": "2026-10-13T11:22:49+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:22:42+00:00",
+     "wall_s": 52.0,
+     "serial_s": 134.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.7,
+      "ran_at": "2026-10-13T11:22:56+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:07:07+00:00",
+     "wall_s": 43.9,
+     "serial_s": 137.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 7.6,
+      "ran_at": "2026-10-13T11:23:04+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 0.558,
+   "tags_read_if_found": 0.558,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": "PV\n200",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": "PV\n201",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": "PV\n202",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "PI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "PI 107",
+     "model_ref": "PI-107",
+     "found": true,
+     "extracted": "PR\n107",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": "LE\n108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TE",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SC\n721",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": "PI 109",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 119",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": "PV 206",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": "PV 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "PI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "PI\n104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "TI\n137",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "PI\n110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r3",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:07:58+00:00",
+     "wall_s": 41.9,
+     "serial_s": 148.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.1,
+      "ran_at": "2026-10-13T11:23:44+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:23:41+00:00",
+     "wall_s": 37.1,
+     "serial_s": 118.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-13T11:23:47+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:09:34+00:00",
+     "wall_s": 51.6,
+     "serial_s": 148.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.5,
+      "ran_at": "2026-10-13T11:23:50+00:00"
+     }
+    }
+   ],
+   "review_load": 2.1,
+   "corrections": 4,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 118,
+    "in_key": 117,
+    "precision": 0.983,
+    "recall": 0.991,
+    "f1": 0.987
+   },
+   "tags_read": 0.535,
+   "tags_read_if_found": 0.535,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": "PV\n200",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": "PV\n201",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": "PV\n202",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "FI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 102",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": "TI 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": "LE 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SC 727",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": "PI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 109",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": "PV 206",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": "PV 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "PI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": "SI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "PI 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "TI\n137",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "PV 209",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "TI 119",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:03:39+00:00",
+     "wall_s": 59.2,
+     "serial_s": 228.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.327,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 8.5,
+      "ran_at": "2026-10-13T11:21:36+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:21:27+00:00",
+     "wall_s": 32.1,
+     "serial_s": 105.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2579,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.9,
+      "ran_at": "2026-10-13T11:21:40+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:05:36+00:00",
+     "wall_s": 67.7,
+     "serial_s": 218.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3184,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.2,
+      "ran_at": "2026-10-13T11:21:45+00:00"
+     }
+    }
+   ],
+   "review_load": 11.5,
+   "corrections": 22,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 136,
+    "in_key": 117,
+    "precision": 0.853,
+    "recall": 0.991,
+    "f1": 0.917
+   },
+   "tags_read": 0.953,
+   "tags_read_if_found": 0.953,
+   "tags_total": 43,
+   "offpage_refs_read": 0.857,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "FV 208",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:06:46+00:00",
+     "wall_s": 57.3,
+     "serial_s": 161.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3035,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-13T11:22:17+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:22:14+00:00",
+     "wall_s": 28.2,
+     "serial_s": 99.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2602,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-13T11:22:20+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:08:55+00:00",
+     "wall_s": 64.3,
+     "serial_s": 219.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3143,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.2,
+      "ran_at": "2026-10-13T11:22:23+00:00"
+     }
+    }
+   ],
+   "review_load": 14.7,
+   "corrections": 28,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.987,
+   "connections": {
+    "tp": 116,
+    "predicted": 141,
+    "in_key": 117,
+    "precision": 0.823,
+    "recall": 0.991,
+    "f1": 0.899
+   },
+   "tags_read": 0.953,
+   "tags_read_if_found": 0.953,
+   "tags_total": 43,
+   "offpage_refs_read": 0.786,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    }
+   ]
+  },
+  {
+   "label": "te-L2-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "1c3a96847a74068d4f5982d94a448ce9f931380e5f8bc98469b431c1e3366ea6",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:10:05+00:00",
+     "wall_s": 60.7,
+     "serial_s": 204.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3345,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 6.8,
+      "ran_at": "2026-10-13T11:22:59+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8b0beda22f2d74c011b22f14efe32c5e7993e7dd800f566b95a8e82c51fb5572",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:22:51+00:00",
+     "wall_s": 27.8,
+     "serial_s": 91.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2522,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 7.3,
+      "ran_at": "2026-10-13T11:23:06+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "ac1da9f8e478497205641862194024c21279ea6deadd8359155084f9de58654d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:11:52+00:00",
+     "wall_s": 58.0,
+     "serial_s": 191.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3142,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 7.0,
+      "ran_at": "2026-10-13T11:23:13+00:00"
+     }
+    }
+   ],
+   "review_load": 14.1,
+   "corrections": 27,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 116,
+    "predicted": 141,
+    "in_key": 117,
+    "precision": 0.823,
+    "recall": 0.991,
+    "f1": 0.899
+   },
+   "tags_read": 0.953,
+   "tags_read_if_found": 0.953,
+   "tags_total": 43,
+   "offpage_refs_read": 0.929,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r1",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:10:31+00:00",
+     "wall_s": 48.9,
+     "serial_s": 160.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.3,
+      "ran_at": "2026-10-13T11:24:36+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:32+00:00",
+     "wall_s": 41.3,
+     "serial_s": 127.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-13T11:24:39+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:11:56+00:00",
+     "wall_s": 40.2,
+     "serial_s": 142.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.9,
+      "ran_at": "2026-10-13T11:24:43+00:00"
+     }
+    }
+   ],
+   "review_load": 16.8,
+   "corrections": 32,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.993,
+   "connections": {
+    "tp": 88,
+    "predicted": 90,
+    "in_key": 117,
+    "precision": 0.978,
+    "recall": 0.752,
+    "f1": 0.85
+   },
+   "tags_read": 0.14,
+   "tags_read_if_found": 0.14,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 101",
+     "model_ref": "FI-101",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FI 102",
+     "model_ref": "FI-102",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 103",
+     "model_ref": "FI-103",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "PI 107",
+     "model_ref": "PI-107",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "TV 211",
+     "model_ref": "TV-211",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "PI 113",
+     "model_ref": "PI-113",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "PI 116",
+     "model_ref": "PI-116",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r2",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:12:53+00:00",
+     "wall_s": 44.9,
+     "serial_s": 154.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-13T11:25:34+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:25:29+00:00",
+     "wall_s": 46.0,
+     "serial_s": 123.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.1,
+      "ran_at": "2026-10-13T11:25:37+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:14:27+00:00",
+     "wall_s": 43.0,
+     "serial_s": 130.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-13T11:25:40+00:00"
+     }
+    }
+   ],
+   "review_load": 16.2,
+   "corrections": 31,
+   "key_items": 191,
+   "symbols_found_f1": 0.993,
+   "symbols_class_f1": 0.98,
+   "connections": {
+    "tp": 90,
+    "predicted": 92,
+    "in_key": 117,
+    "precision": 0.978,
+    "recall": 0.769,
+    "f1": 0.861
+   },
+   "tags_read": 0.14,
+   "tags_read_if_found": 0.14,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 101",
+     "model_ref": "FI-101",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FI 102",
+     "model_ref": "FI-102",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 103",
+     "model_ref": "FI-103",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "PI 107",
+     "model_ref": "PI-107",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "TV 211",
+     "model_ref": "TV-211",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "PI 113",
+     "model_ref": "PI-113",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "PI 116",
+     "model_ref": "PI-116",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r3",
+   "tool": "codex",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:15:27+00:00",
+     "wall_s": 48.2,
+     "serial_s": 145.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.7,
+      "ran_at": "2026-10-13T11:26:37+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:26:32+00:00",
+     "wall_s": 51.3,
+     "serial_s": 131.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.2,
+      "ran_at": "2026-10-13T11:26:42+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "gpt-6.1-sol",
+     "adapter": "Codex CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:16:52+00:00",
+     "wall_s": 32.1,
+     "serial_s": 109.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": null,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.6,
+      "ran_at": "2026-10-13T11:26:47+00:00"
+     }
+    }
+   ],
+   "review_load": 17.8,
+   "corrections": 34,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.973,
+   "connections": {
+    "tp": 89,
+    "predicted": 92,
+    "in_key": 117,
+    "precision": 0.967,
+    "recall": 0.761,
+    "f1": 0.852
+   },
+   "tags_read": 0.14,
+   "tags_read_if_found": 0.14,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 101",
+     "model_ref": "FI-101",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FI 102",
+     "model_ref": "FI-102",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 103",
+     "model_ref": "FI-103",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "PI 107",
+     "model_ref": "PI-107",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "LI 108",
+     "model_ref": "LI-108",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "HV 205",
+     "model_ref": "HV-205",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "TV 211",
+     "model_ref": "TV-211",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "PI 113",
+     "model_ref": "PI-113",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "JI 120",
+     "model_ref": "JI-120",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "PI 116",
+     "model_ref": "PI-116",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:13:00+00:00",
+     "wall_s": 55.8,
+     "serial_s": 189.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3338,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 5.2,
+      "ran_at": "2026-10-13T11:23:50+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:23:44+00:00",
+     "wall_s": 30.4,
+     "serial_s": 101.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2566,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.6,
+      "ran_at": "2026-10-13T11:23:53+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:14:41+00:00",
+     "wall_s": 61.5,
+     "serial_s": 200.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3642,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-13T11:23:57+00:00"
+     }
+    }
+   ],
+   "review_load": 18.3,
+   "corrections": 35,
+   "key_items": 191,
+   "symbols_found_f1": 0.98,
+   "symbols_class_f1": 0.98,
+   "connections": {
+    "tp": 87,
+    "predicted": 89,
+    "in_key": 117,
+    "precision": 0.978,
+    "recall": 0.744,
+    "f1": 0.845
+   },
+   "tags_read": 0.442,
+   "tags_read_if_found": 0.442,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 3,
+   "tag_misses": [
+    {
+     "key": "instrumentation1",
+     "printed": "FV 203",
+     "model_ref": "FV-203",
+     "found": true,
+     "extracted": "FV 201",
+     "read": false,
+     "is_another_real_tag": true,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FV 201",
+     "model_ref": "FV-201",
+     "found": true,
+     "extracted": "FV 202",
+     "read": false,
+     "is_another_real_tag": true,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": "FV 203",
+     "read": false,
+     "is_another_real_tag": true,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": "TV",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 106",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SIC 212",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": "FX 206",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": "LC 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI 123",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "FT 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "PT",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": "AI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "PV 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 115",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:15:43+00:00",
+     "wall_s": 47.9,
+     "serial_s": 183.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3355,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.8,
+      "ran_at": "2026-10-13T11:24:32+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:24:27+00:00",
+     "wall_s": 30.2,
+     "serial_s": 95.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.2594,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.3,
+      "ran_at": "2026-10-13T11:24:35+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:17:26+00:00",
+     "wall_s": 48.5,
+     "serial_s": 170.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.321,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-13T11:24:38+00:00"
+     }
+    }
+   ],
+   "review_load": 17.8,
+   "corrections": 34,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.987,
+   "connections": {
+    "tp": 87,
+    "predicted": 89,
+    "in_key": 117,
+    "precision": 0.978,
+    "recall": 0.744,
+    "f1": 0.845
+   },
+   "tags_read": 0.512,
+   "tags_read_if_found": 0.512,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation5",
+     "printed": "FV 202",
+     "model_ref": "FV-202",
+     "found": true,
+     "extracted": "FC-202",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": "TC 210",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SIC 212",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": "LC 103",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI 123",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "FT",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "PI 131",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": "AI 131",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "PV 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 118",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "PI 116",
+     "model_ref": "PI-116",
+     "found": true,
+     "extracted": "PI 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "te-L3-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "f34e3a6fc180556a905c7855c0325875865edb00d6d7509887cf4db46dd9e94f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:18:43+00:00",
+     "wall_s": 67.1,
+     "serial_s": 227.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.369,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-13T11:25:26+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "c33cb111e93ec04c92d45c3e0b24fc1b5e4e1fd99ef80a566d4d23a7d4e5b6d8",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:25:23+00:00",
+     "wall_s": 44.8,
+     "serial_s": 127.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.3075,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-13T11:25:30+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5[1m]",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "3cc25ab86aef0e23b2fd01b365547720bccd298cc3b83eb1d8724e6c95bc230f",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-13T11:19:57+00:00",
+     "wall_s": 38.1,
+     "serial_s": 115.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.325,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.5,
+      "ran_at": "2026-10-13T11:25:34+00:00"
+     }
+    }
+   ],
+   "review_load": 15.7,
+   "corrections": 30,
+   "key_items": 191,
+   "symbols_found_f1": 0.987,
+   "symbols_class_f1": 0.987,
+   "connections": {
+    "tp": 91,
+    "predicted": 93,
+    "in_key": 117,
+    "precision": 0.978,
+    "recall": 0.778,
+    "f1": 0.867
+   },
+   "tags_read": 0.512,
+   "tags_read_if_found": 0.512,
+   "tags_total": 43,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 1,
+   "tag_misses": [
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 210",
+     "model_ref": "TV-210",
+     "found": true,
+     "extracted": "TV",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 106",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "SC 212",
+     "model_ref": "SC-212",
+     "found": true,
+     "extracted": "SIC 212",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FV 206",
+     "model_ref": "FV-206",
+     "found": true,
+     "extracted": "FX 205",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "LV 207",
+     "model_ref": "LV-207",
+     "found": true,
+     "extracted": "LC 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI 121",
+     "read": false,
+     "is_another_real_tag": true,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 204",
+     "model_ref": "FV-204",
+     "found": true,
+     "extracted": "PV 204",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "FT",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "PI 133",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": "AI 131",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 208",
+     "model_ref": "LV-208",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 209",
+     "model_ref": "FV-209",
+     "found": true,
+     "extracted": "PV 200",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  }
+ ]
+}
