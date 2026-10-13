@@ -14,6 +14,11 @@ MODEL = json.loads((ROOT / 'data/te_process_model.json').read_text())
 DOC = json.loads((ROOT / 'out/ignition/gateway/twin_provider.json').read_text())
 
 
+def stored(code):
+    """Author-form transform code as the exported view stores it (the body Perspective compiles)."""
+    return m.script(code)['code']
+
+
 def paths():
     types = {t['name']: t for t in next(t for t in DOC['tags'] if t['name'] == '_types_')['tags']}
     found = set()
@@ -60,18 +65,18 @@ class MimicTests(unittest.TestCase):
             self.assertGreater(c['position']['height'], 0)
     def test_quality_and_numeric_controls(self):
         for value in [123, 0, None, float('nan'), float('inf'), 'bad']:
-            self.assertIn('UNKNOWN', transform(m.VALUE_SCRIPT, value, False))
+            self.assertIn('UNKNOWN', transform(stored(m.VALUE_SCRIPT), value, False))
         for value in [None, float('nan'), float('inf'), 'bad']:
-            self.assertIn('UNKNOWN', transform(m.VALUE_SCRIPT, value))
-        self.assertEqual(transform(m.VALUE_SCRIPT, 0), '0.0')
-        self.assertEqual(transform(m.STATE_SCRIPT, 2), 'ALARM ACTIVE')
-        self.assertEqual(transform(m.STATE_SCRIPT, 2, False), 'State unknown')
-        self.assertEqual(transform(m.STATE_SCRIPT, 99), 'State unknown')
+            self.assertIn('UNKNOWN', transform(stored(m.VALUE_SCRIPT), value))
+        self.assertEqual(transform(stored(m.VALUE_SCRIPT), 0), '0.0')
+        self.assertEqual(transform(stored(m.STATE_SCRIPT), 2), 'ALARM ACTIVE')
+        self.assertEqual(transform(stored(m.STATE_SCRIPT), 2, False), 'State unknown')
+        self.assertEqual(transform(stored(m.STATE_SCRIPT), 99), 'State unknown')
     def test_svg_controls(self):
         for kind in ['reactor', 'separator', 'output']:
             for value in [0, 50, 100, -4, 130, None, float('nan'), float('inf')]:
                 for good in [True, False]:
-                    svg = base64.b64decode(transform(m.graphic_script(kind), value, good).split(',')[1]).decode()
+                    svg = base64.b64decode(transform(stored(m.graphic_script(kind)), value, good).split(',')[1]).decode()
                     ET.fromstring(svg)
                     self.assertNotIn('__', svg)
                     if not good or value is None or str(value) in ['nan', 'inf']:
@@ -92,10 +97,10 @@ class MimicTests(unittest.TestCase):
             self.assertEqual(transform(color, 2, False), '#6b7280')
         # PV and State are independent bindings. Neither transform invents good data
         # when its own input quality is bad, even if the other remains temporarily good.
-        self.assertIn('UNKNOWN', transform(m.VALUE_SCRIPT, 2700, False))
-        self.assertEqual(transform(m.STATE_SCRIPT, 0, True), 'Within normal band')
-        self.assertEqual(transform(m.VALUE_SCRIPT, 2700, True), '2700.0')
-        self.assertEqual(transform(m.STATE_SCRIPT, 0, False), 'State unknown')
+        self.assertIn('UNKNOWN', transform(stored(m.VALUE_SCRIPT), 2700, False))
+        self.assertEqual(transform(stored(m.STATE_SCRIPT), 0, True), 'Within normal band')
+        self.assertEqual(transform(stored(m.VALUE_SCRIPT), 2700, True), '2700.0')
+        self.assertEqual(transform(stored(m.STATE_SCRIPT), 0, False), 'State unknown')
 
     def test_measurement_row_alignment_and_spacing(self):
         components = {c['meta']['name']: c for c in self.v['root']['children']}
@@ -253,6 +258,29 @@ class MimicTests(unittest.TestCase):
         for uid in m.UNIT_ORDER: m.unit_context('Twin', MODEL,uid)
         self.assertEqual(original,MODEL)
         self.assertEqual(self.v,m.mimic('Twin',MODEL))
+
+    def test_harness_compiles_stored_body_like_perspective(self):
+        # RED control for journal entry 37: Perspective compiles signature + body unmodified, so an unindented
+        # body is a parse error. The harness must fail the same way rather than re-indenting it into validity.
+        with self.assertRaises(SyntaxError):
+            transform(m.VALUE_SCRIPT, 1.0)
+        self.assertEqual(transform(stored(m.VALUE_SCRIPT), 1.0), '1.0')
+        self.assertEqual(stored(stored(m.VALUE_SCRIPT)), stored(m.VALUE_SCRIPT))
+
+    def test_every_generated_script_transform_parses_as_perspective_body(self):
+        views = [self.v] + [m.unit_context('Twin', MODEL, uid) for uid in m.UNIT_ORDER]
+        found = []
+        def walk(node):
+            if isinstance(node, dict):
+                if node.get('type') == 'script' and 'code' in node:
+                    found.append(node['code'])
+                for v in node.values(): walk(v)
+            elif isinstance(node, list):
+                for v in node: walk(v)
+        walk(views)
+        self.assertGreater(len(found), 50)
+        for code in found:
+            compile(m.TRANSFORM_SIGNATURE + '\n' + code, '<perspective transform>', 'exec')
 
     def test_deterministic_generation(self):
         self.assertEqual(self.v, m.mimic('Twin', MODEL))

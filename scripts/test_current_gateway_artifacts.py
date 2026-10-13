@@ -71,6 +71,60 @@ class CurrentGatewayContract(unittest.TestCase):
                 self.assertEqual((Path(tmp) / filename).read_bytes(),
                                  (ROOT / 'out/ignition/gateway' / filename).read_bytes(), filename)
 
+    def test_every_exported_script_transform_parses_as_a_perspective_body(self):
+        # Perspective compiles TRANSFORM_SIGNATURE + "\n" + code unmodified. The first native import found every
+        # script transform failing to parse (unindented bodies; journal entry 37). This is a Python 3 parse of the
+        # exported bytes, a proxy for Jython 2.7: runtime execution still needs a gateway.
+        codes = []
+
+        def collect(node):
+            if isinstance(node, dict):
+                if node.get('type') == 'script' and 'code' in node:
+                    codes.append(node['code'])
+                for value in node.values():
+                    collect(value)
+            elif isinstance(node, list):
+                for value in node:
+                    collect(value)
+        collect(self.held.views)
+        self.assertGreater(len(codes), 500)
+        for code in codes:
+            compile(bv.build_hmi.TRANSFORM_SIGNATURE + '\n' + code, '<perspective transform>', 'exec')
+        with self.assertRaises(SyntaxError):  # control: the shipped (unindented) form is rejected
+            compile(bv.build_hmi.TRANSFORM_SIGNATURE + '\nreturn value\n', '<perspective transform>', 'exec')
+
+    def test_drawing_and_schematic_values_never_render_null(self):
+        # The numeric format transform these labels used rendered a Bad (no data) value as the text "null": all 334
+        # OPEN100 placeholders read "null" on screen (journal entry 37). Bad quality must read as an honest state.
+        class Quality:
+            def __init__(self, good): self.good = good
+            def isGood(self): return self.good
+
+        def run(code, value, good):
+            scope = {}
+            exec(bv.build_hmi.TRANSFORM_SIGNATURE + '\n' + code, scope)
+            return scope['transform'](None, value, Quality(good), None)
+        mapped = set(self.meta['twin_review']['mapped'])
+        checked = {'not connected': 0, 'UNKNOWN': 0}
+        for name, view in self.held.views.items():
+            if not (name.startswith('OPEN100/Sheet_') or name == 'TE/Schematic'):
+                continue
+            for c in walk(view['root']):
+                b = c.get('propConfig', {}).get('props.text', {}).get('binding', {})
+                if b.get('type') != 'tag' or not b['config']['tagPath'].endswith('/PV'):
+                    continue
+                self.assertEqual([t['type'] for t in b['transforms']], ['script'], (name, c['meta']['name']))
+                code = b['transforms'][0]['code']
+                expect = 'not connected' if name.startswith('OPEN100') and c['meta']['name'] not in mapped \
+                    else 'UNKNOWN'
+                for value in (None, 0.0, float('nan')):
+                    self.assertEqual(run(code, value, False), expect, (name, c['meta']['name']))
+                self.assertEqual(run(code, 1234.56, True), '1,234.6')
+                self.assertEqual(run(code, float('nan'), True), 'UNKNOWN')
+                checked[expect] += 1
+        self.assertEqual(checked['not connected'], 334)
+        self.assertGreaterEqual(checked['UNKNOWN'], 24)
+
     def test_schema_shape_tag_paths_routes_and_spatial_views(self):
         self.assertEqual(len(self.held.views), 23)
         self.assertEqual(set(self.held.views), {p['viewPath'] for p in self.pages.values()})

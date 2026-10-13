@@ -29,6 +29,7 @@ WHERE EACH PART CAME FROM (which used several models, which only Claude):
 """
 import base64
 import json
+import textwrap
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -59,9 +60,41 @@ FOOT = ("Read-only monitoring. Normal bands are learned from the normal run (scr
 
 # ---------------------------------------------------------------- components
 
+# Perspective stores a script transform as the BODY of this function and compiles TRANSFORM_SIGNATURE + "\n" + body
+# exactly as written. An unindented body is a Jython parse error ("Error_Configuration: Parse Error in script
+# transform"): the label shows null under an error overlay, even though its tag reads Good. Seen in the first native
+# import of the 23-view project (journal entry 37); every offline check had re-indented the code before running it.
+TRANSFORM_SIGNATURE = "def transform(self, value, quality, timestamp):"
+
+
+def script_body(code):
+    """Author-form transform code (written at column 0) -> the indented body Perspective stores. Idempotent."""
+    return textwrap.indent(textwrap.dedent(code), "    ")
+
+
+def script_transform(code):
+    return {"type": "script", "code": script_body(code)}
+
+
+# Drawing-sheet value: the number when the gateway has Good data, otherwise the honest state (%s), never "null".
+SHEET_VALUE_SCRIPT = '''import math
+if not quality.isGood() or value is None:
+    return "%s"
+try:
+    number = float(value)
+except (TypeError, ValueError):
+    return "UNKNOWN"
+if math.isnan(number) or math.isinf(number):
+    return "UNKNOWN"
+return "{:,.1f}".format(number)
+'''
+
+
 def tag_binding(path, transforms=()):
+    # Every view builder goes through here, so every script transform gets the stored-body form.
+    transforms = [script_transform(t["code"]) if t.get("type") == "script" else t for t in transforms]
     return {"binding": {"type": "tag", "config": {"mode": "direct", "tagPath": path, "fallbackDelay": 2.5},
-                        "transforms": list(transforms)}}
+                        "transforms": transforms}}
 
 
 def color_map(mappings, fallback):
@@ -339,8 +372,15 @@ def sheet_screen(provider, sheet, title, img_uri, size, instruments, counts):
             "borderStyle": "solid", "borderWidth": 1, "borderColor": INK if mapped else EDGE,
             "backgroundColor": "#ffffff"}, tooltip=f"{tag} ({asset}): " + (
                 "mapped to a data point" if mapped else "extracted from the drawing; no data point yet"))
-        c["propConfig"] = {"props.text": tag_binding(path + "/PV", [
-            {"type": "format", "formatType": "numeric", "formatValue": "#,##0.0"}])}
+        # A numeric format transform turns a Bad (no data) value into the literal text "null", which reads as a broken
+        # screen rather than an honest state (journal entry 37). The script returns plain text, so Perspective's red
+        # quality overlay no longer appears; the words carry the state instead. The tag binding stays: a placeholder
+        # that ever read Good would show its number (and fail V4) rather than be hidden.
+        if not mapped:
+            c["props"]["style"].update(fontSize=8, fontStyle="italic", color=MUTED, whiteSpace="nowrap",
+                                       paddingLeft=1)
+        c["propConfig"] = {"props.text": tag_binding(path + "/PV", [script_transform(
+            SHEET_VALUE_SCRIPT % ("UNKNOWN" if mapped else "not connected"))])}
         kids.append(c)
     x = sw + 16
     kids += [label("Legend", x, HEAD + 12, W - x - 16, 20, "This drawing", {"fontWeight": "bold"}),

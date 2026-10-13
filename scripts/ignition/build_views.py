@@ -46,12 +46,13 @@ def image(svg, w, h, top=0):
 
 
 def value_label(name, x, y, tag_path, uom="", alarm_path=None):
-    """A label showing the tag's value. A Bad-quality binding gets Perspective's quality overlay automatically."""
+    """A label showing the tag's value, or UNKNOWN when the gateway has no Good value for it."""
     comp = label(name, x, y, 46, 14, "", {"fontSize": 9.5, "paddingLeft": 2, "borderStyle": "solid", "borderWidth": 1,
                                           "borderColor": "#94a3b8", "backgroundColor": "#ffffffdd"},
                  tooltip=f"{tag_path} ({uom})" if uom else None)
+    # Bad quality reads UNKNOWN (the legend's word for unavailable data), never the literal "null".
     comp["propConfig"] = {"props.text": tag_binding(tag_path, [
-        {"type": "format", "formatType": "numeric", "formatValue": "#,##0.0"}])}
+        build_hmi.script_transform(build_hmi.SHEET_VALUE_SCRIPT % "UNKNOWN")])}
     if alarm_path:
         # A tag binding plus a map transform (an expression binding errored on every label in testing).
         comp["propConfig"]["props.style.backgroundColor"] = tag_binding(alarm_path, [

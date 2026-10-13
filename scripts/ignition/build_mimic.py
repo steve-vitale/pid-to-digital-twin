@@ -7,7 +7,7 @@ Script transforms are Python 2.7/Jython-compatible for Perspective.
 import base64
 import json
 from pathlib import Path
-from build_hmi import label, tag_binding, view, header, INK, MUTED, UNIT_ORDER
+from build_hmi import TRANSFORM_SIGNATURE, label, tag_binding, script_transform, view, header, INK, MUTED, UNIT_ORDER
 
 ROOT = Path(__file__).resolve().parents[2]
 TAGS = {
@@ -106,7 +106,7 @@ return {0: "Within normal band", 1: "Outside normal band", 2: "ALARM ACTIVE"}.ge
 
 
 def script(code):
-    return {'type': 'script', 'code': code}
+    return script_transform(code)  # stored-body form; see build_hmi.TRANSFORM_SIGNATURE
 
 
 def image(name, x, y, w, h, kind, base=None):
