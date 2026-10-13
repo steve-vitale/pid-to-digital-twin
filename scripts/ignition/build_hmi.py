@@ -1,7 +1,7 @@
 """Operator screens for the twin, in the ISA-101 style: grey and calm when the plant is normal, so colour means
 something when it is not.
 
-  /               Whole-process equipment overview with six units, seed-model boundaries and selected values.
+  /               Whole-process equipment overview with six units, source-verified boundaries and selected values.
   /mimic          Legacy alias for the same Overview; no separate tab.
   /m              Narrow overview for a phone (390 px wide): alarms and data source first, then one tile per unit
                   with its key values. The control-room screens above keep their fixed 1600 px layout.
@@ -17,7 +17,7 @@ fill = normal; amber = outside the normal band (a display aid, not an alarm); re
 colours come from each tag's State member, set in the gateway (build_gateway.py), so the screens and anything else
 reading the tags agree.
 
-Two "no data" states, one look each, on every screen (journal entry 39):
+Two "no data" states, one look each, on every screen (journal entry 40):
   not connected  no data source is configured for this point at all (SC-212, the 334 unmapped drawing instruments).
                  Muted italic text, white background, dashed border. Permanent until someone maps it.
   UNKNOWN        a data source is configured but the gateway has no Good value now (replay stopped, bad quality).
@@ -58,7 +58,7 @@ KEY_VALUES = {
     "R-101": ["PI-107", "TI-109", "LI-108", "TI-121"],
     "E-101": ["TI-122", "TV-211"],
     "V-101": ["PI-113", "TI-111", "LI-112", "FI-114"],
-    "K-101": ["FI-105", "FI-110", "JI-120", "HV-205"],
+    "K-101": ["FI-105", "JI-120", "HV-205"],
     "C-101": ["PI-116", "TI-118", "LI-115", "FI-117"],
 }
 DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus nearby alarm limits)

@@ -44,7 +44,7 @@ How much to trust it:
 - **Fault 6 is an easy fault**: a feed going to zero. One fault is a demonstration, not a detection rate, so the
   bands were then scored on **all 21 published faults** with a rule fixed before scoring
   ([`scripts/fault_detection_eval.py`](../scripts/fault_detection_eval.py), [results](../out/fault_detection/fault_detection.md),
-  journal entry 39). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
+  journal entry 40). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
   first three are the faults the TE literature widely reports as near-invisible in these variables; 19 is a miss
   this method shares with a PCA T² baseline. On 193 hours of normal running they never saw, the bands raised **no
   false alarm** (not a guarantee: the 95% upper bound is about 0.37 per day). The price of K = 6 is lateness on

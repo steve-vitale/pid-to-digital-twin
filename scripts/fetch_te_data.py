@@ -6,12 +6,13 @@ first used it, so a changed upstream file is caught instead of silently replayed
 
   d00_te.dat  normal operation, 960 samples (3 simulated minutes each)
   d06_te.dat  fault IDV(6), loss of A feed
+  teprob.f    the simulator source code (checked by verify_te_source.py and verify_te_topology.py)
 
 With --all it also fetches the rest of the published set, for the fault-detection evaluation
 (scripts/fault_detection_eval.py): the training files d00.dat-d21.dat and the test files d01_te.dat-d21_te.dat
 (fault IDV(n) switched on at sample 160 of 960). The default stays the two replay files, so the Docker replay image
-does not grow. All 44 recorded checksums were taken from files that are byte-identical to the Braatz group's own
-archive (https://web.mit.edu/braatzgroup/TE_process.zip, checked 2026-10-12; journal entry 39).
+does not grow (the default set is the two replay files plus teprob.f). All 44 recorded checksums were taken from files that are byte-identical to the Braatz group's own
+archive (https://web.mit.edu/braatzgroup/TE_process.zip, checked 2026-10-12; journal entry 40).
 
 Usage: python scripts/fetch_te_data.py [--all]
 """
@@ -26,6 +27,8 @@ BASE = "https://raw.githubusercontent.com/camaramm/tennessee-eastman-profBraatz/
 FILES = {
     "d00_te.dat": "57d56da4199e3d73582855d810be1d13d931386fd728bf1694798c7b0a03678c",
     "d06_te.dat": "8a3adc7121eaa9b9300c27f9c57a8ab356315401cb964310a4a8244dd34bf79d",
+    # The simulator source itself, read by verify_te_source.py and verify_te_topology.py and their tests.
+    "teprob.f": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
 }
 # The rest of the published set, used only by the fault-detection evaluation (--all).
 EVALUATION_FILES = {

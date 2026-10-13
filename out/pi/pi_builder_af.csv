@@ -20,18 +20,18 @@ x,TE Plant,E-101,Element,Product Condenser,Condenser,,,,
 x,TE Plant\E-101,SeparatorCoolingWaterOutletTemp,Attribute,TI-122: Separator Cooling Water Outlet Temp,,Double,degC,PI Point,\\%Server%\TE.TI-122.PV
 x,TE Plant\E-101,CondenserCoolingWaterFlowValve,Attribute,TV-211: Condenser cooling water flow valve,,Double,%,PI Point,\\%Server%\TE.TV-211.PV
 x,TE Plant,V-101,Element,Vapor/Liquid Separator,Separator,,,,
+x,TE Plant\V-101,PurgeRate,Attribute,FI-110: Purge rate,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\V-101,SeparatorTemperature,Attribute,TI-111: Separator temperature,,Double,degC,PI Point,\\%Server%\TE.TI-111.PV
 x,TE Plant\V-101,SeparatorLevel,Attribute,LI-112: Separator level,,Double,%,PI Point,\\%Server%\TE.LI-112.PV
 x,TE Plant\V-101,SeparatorPressure,Attribute,PI-113: Separator pressure,,Double,kPa g,PI Point,\\%Server%\TE.PI-113.PV
 x,TE Plant\V-101,SeparatorUnderflow,Attribute,FI-114: Separator underflow,,Double,m3/h,PI Point,\\%Server%\TE.FI-114.PV
+x,TE Plant\V-101,PurgeGasAnalyzerComponentsAH,Attribute,AI-129: Purge gas analyzer (components A-H),,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
+x,TE Plant\V-101,PurgeValve,Attribute,FV-206: Purge valve,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
 x,TE Plant\V-101,SeparatorPotLiquidFlowValve,Attribute,LV-207: Separator pot liquid flow valve,,Double,%,PI Point,\\%Server%\TE.LV-207.PV
 x,TE Plant,K-101,Element,Recycle Compressor,Compressor,,,,
 x,TE Plant\K-101,RecycleFlow,Attribute,FI-105: Recycle flow,,Double,kscmh,PI Point,\\%Server%\TE.FI-105.PV
-x,TE Plant\K-101,PurgeRate,Attribute,FI-110: Purge rate,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\K-101,CompressorWork,Attribute,JI-120: Compressor work,,Double,kW,PI Point,\\%Server%\TE.JI-120.PV
-x,TE Plant\K-101,PurgeGasAnalyzerComponentsAH,Attribute,AI-129: Purge gas analyzer (components A-H),,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
 x,TE Plant\K-101,CompressorRecycleValve,Attribute,HV-205: Compressor recycle valve,,Double,%,PI Point,\\%Server%\TE.HV-205.PV
-x,TE Plant\K-101,PurgeValve,Attribute,FV-206: Purge valve,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
 x,TE Plant,C-101,Element,Product Stripper,Stripper,,,,
 x,TE Plant\C-101,AAndCFeedFlow,Attribute,FI-104: A and C feed flow,,Double,kscmh,PI Point,\\%Server%\TE.FI-104.PV
 x,TE Plant\C-101,StripperLevel,Attribute,LI-115: Stripper level,,Double,%,PI Point,\\%Server%\TE.LI-115.PV

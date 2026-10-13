@@ -273,7 +273,7 @@ def v3(held, twin_dir, hidden=frozenset()):
             by_name = {c.get("meta", {}).get("name"): c for c in components(view["root"])}
             for tag in drawn & unavailable - set(hidden):
                 indicator = by_name.get(tag, {})
-                # One wording for "no data source" on every screen (build_hmi.NOT_CONNECTED; journal entry 39).
+                # One wording for "no data source" on every screen (build_hmi.NOT_CONNECTED; journal entry 40).
                 if (indicator.get("props", {}).get("text") != "not connected"
                         or "props.text" in indicator.get("propConfig", {})):
                     fails.append(f"{name}: {tag} must show the explicit 'not connected' indicator, never a value")

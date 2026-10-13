@@ -82,9 +82,11 @@ came from Claude alone.
 Three separate pieces of evidence live here. Keep them apart:
 - **OPEN100:** drawing extraction, scored outputs and a labeled synthetic point-mapping demo. These are not
   site-verified live plant connections.
-- **Tennessee Eastman (TE):** a hand-built seed process model and generated operator screens, driven by recorded
-  simulation replay. It was not extracted from a drawing, and replay is not a process simulator that responds to
-  control changes.
+- **Tennessee Eastman (TE):** a process model hand-built from the published process, then verified against the
+  simulator source: every tag's name and units, and every unit, stream connection, flow direction and tag ownership
+  (51 confirmed, 4 corrected, 1 left unresolved; [report](out/te_topology_check.md)). Generated operator screens are
+  driven by recorded simulation replay. The model was not extracted from a drawing, tap positions and pipe routes
+  are not in the source, and replay is not a process simulator that responds to control changes.
 - **PID2Graph Synthetic:** a bounded two-sheet adaptation through the existing scorer and exporters, with unresolved
   ontology and line-semantics review gates. It is neither a held-out generalization result nor plant validation.
   See [the adaptation guide](docs/ADAPT_LABELED_DATASET.md).
@@ -229,10 +231,13 @@ operations are separate networked steps. Use a disposable checkout: generation, 
 review and mapping can overwrite files. [The replication guide](docs/REPLICATE_AT_YOUR_PLANT.md) walks the bounded
 public-data path.
 
-**1. Check the seed model against its source.** This verifies the Tennessee Eastman model against the open TE
-simulation code (36 of 37 items confirmed, 1 corrected):
+**1. Check the TE model against its source.** The first script checks every tag's name and units against the
+open TE simulation code (36 of 37 confirmed, 1 corrected). The second reads the code's mass balances, flow lines and
+measurement lines to check every unit, stream, flow direction and tag-to-unit assignment (51 of 56 confirmed,
+4 corrected, 1 unresolvable), cross-checked against the revised TE code of Bathelt, Ricker and Jelali (2015):
 ```
 python scripts/verify_te_source.py --write
+python scripts/verify_te_topology.py --write
 ```
 
 **2. Generate the platform outputs.** SVGs, the Ignition tag import, the PI AF sheet and the operations review sheet
@@ -261,12 +266,15 @@ tests or downloading data:
 ```
 pip install -r requirements.txt
 python scripts/fetch_te_data.py
+python scripts/verify_te_topology.py   # downloads the revised TE code its test cross-checks; report only
 python scripts/ignition/build_gateway.py --write-only
 python scripts/run_tests.py --full --check-prerequisites
 python scripts/run_tests.py --full
 ```
 On 2026-10-13 both suites passed on Windows (15/15 source-only, 20/20 full, with two symlink sub-cases explicitly
-skipped because Windows didn't grant symlink rights) and on Linux with Python 3.12 (15/15 and 20/20, no skips). See
+skipped because Windows didn't grant symlink rights) and on Linux with Python 3.12 (15/15 and 20/20, no skips).
+After the topology test was added the same day, the Windows full suite passed 21/21 (same two skips); Linux was not
+rerun. See
 [replication prerequisites and limits](docs/REPLICATE_AT_YOUR_PLANT.md#c-check-the-pipeline-then-optionally-rerun-public-extraction).
 A prerequisite check alone is not a test pass.
 
@@ -313,14 +321,15 @@ it at a real site.
 | Path | What's there |
 |---|---|
 | [`docs/`](docs/) | Everything to read; see [Read next](#read-next). Screenshots are in [`docs/screenshots/`](docs/screenshots/) |
-| [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman seed model, checked against the simulator source |
+| [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman model: tags, units, streams and directions verified against the simulator source ([tags](out/te_source_check.md), [topology](out/te_topology_check.md)) |
+| [`data/te_unit_purposes.json`](data/te_unit_purposes.json) | One plain-language sentence per TE unit, each citing the simulator lines it restates |
 | [`data/sheet_registers/`](data/sheet_registers/) | A drawing index read from the OPEN100 title blocks (an example of what a plant supplies) |
 | [`data/io_lists/`](data/io_lists/README.md) | A synthetic I/O list for the point-mapping demo, shaped like a real export |
 | [`data/external/pid2graph/`](data/external/pid2graph/) | The 12 OPEN100 drawings with answer keys, and their degraded-scan copies (CC BY-SA 4.0) |
 | [`data/drawings/`](data/drawings/) | The drawings greyed for use as screen backgrounds |
 | [`extraction/`](extraction/) | The prompts every model got (`prompt_v2.md` is current), hashed into every run record |
 | [`scripts/`](scripts/) **, by stage** | |
-| · source and data | `verify_te_source.py`, `fetch_te_data.py`, `fetch_pid2graph.py` |
+| · source and data | `verify_te_source.py` (tag names and units), `verify_te_topology.py` (units, streams, directions, ownership), `fetch_te_data.py`, `fetch_pid2graph.py` |
 | · extraction | `run_extraction.py` (Claude / Codex / Gemini adapters, cost meter, spend cap), `tiling.py`, `remerge_tiles.py`; `site_extraction_workflow.py` (frozen single-PNG handoff) |
 | · line tracing (code, no AI) | `trace_connections.py` |
 | · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
@@ -371,7 +380,7 @@ it at a real site.
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
 | Ignition build: TE replay values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Historical build: done, and also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
-| Current 23-view project in a native gateway | Passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 23/23 routes, 277/277 navigation targets; 390 px layout partial ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)) |
+| Current 23-view project in a native gateway | The build before the topology correction passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 23/23 routes, 277/277 navigation targets; 390 px layout partial ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)). The corrected build (purge tags moved to the separator, [entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) passes the offline suite but has not been re-imported |
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Tooling done; verified in a running gateway with synthetic data |
 | Operator screens (ISA-101 style): overview, unit screens, trends, learned normal bands, drawings as backgrounds | First pass done and checked in a gateway; key values and spans are Claude's choice, not yet reviewed by operations |
 | Round 4: robustness on old-scan images, pre-registered | Done (measured; where it breaks is reported) |
@@ -379,6 +388,7 @@ it at a real site.
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet; not imported into a PI System, by decision (below) | Scoped |
+| Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) |
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |
 
 **PI is scoped to the asset structure, by decision.** The twin produces a PI AF hierarchy as a PI Builder sheet

@@ -5,8 +5,9 @@
     "source_document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
     "extraction_method": "hand-built seed model (Phase 0). Serves as the answer-key draft for scoring AI extraction in Phase 2",
     "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv.",
-    "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TI-122). Report: out/te_source_check.md. Units and streams are not yet verified (no machine-readable source); they are checked in operations review.",
-    "created": "2026-10-06"
+    "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TI-122 description). Report: out/te_source_check.md. Units, streams, directions and tag ownership are checked separately; see topology_verification_note.",
+    "created": "2026-10-06",
+    "topology_verification_note": "Units, streams, flow directions and tag ownership were checked 2026-10-13 against the simulator source (teprob.f, cross-checked with the revised TE code) by scripts/verify_te_topology.py: 51 confirmed, 4 corrected, 1 unresolvable. Report: out/te_topology_check.md. Physical tap positions, sizes and pipe routes are not in the source and remain unverified."
   },
   "units": [
     {
@@ -19,7 +20,13 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "holdup with states YY(28)-YY(36) in TEFUNC (component balance YP(I+27), energy YP(36))"
       }
     },
     {
@@ -32,7 +39,13 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "holdup with states YY(1)-YY(9) in TEFUNC (component balance YP(I+0), energy YP(9))"
       }
     },
     {
@@ -45,7 +58,16 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "heat term QUS = UAS*(TWS - TST(8)) cools the reactor effluent FTM(8); cooling-water flow XMV(11) 'Condenser Cooling Water Flow'",
+        "caveats": [
+          "no holdup in the simulator: its duty is booked into the separator energy balance YP(18)"
+        ]
       }
     },
     {
@@ -58,7 +80,13 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "holdup with states YY(10)-YY(18) in TEFUNC (component balance YP(I+9), energy YP(18))"
       }
     },
     {
@@ -71,7 +99,16 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "compressor curve drives FTM(9) from separator to header; work CPDH = XMEAS(20)",
+        "caveats": [
+          "no holdup in the simulator: flow and work are algebraic"
+        ]
       }
     },
     {
@@ -84,7 +121,13 @@
       },
       "source": "D&V 1993 Fig. 1",
       "verification": {
-        "status": "unverified"
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "holdup with states YY(19)-YY(27) in TEFUNC (component balance YP(I+18), energy YP(27))"
       }
     }
   ],
@@ -93,79 +136,224 @@
       "id": "S1",
       "name": "A feed",
       "from": "BL",
-      "to": "U-100"
+      "to": "U-100",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 1 = internal FTM(3): BL -> U-100; direction: FTM(3) = VPOS(3)*VRNG/100: valve-set, never negative"
+      }
     },
     {
       "id": "S2",
       "name": "D feed",
       "from": "BL",
-      "to": "U-100"
+      "to": "U-100",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 2 = internal FTM(1): BL -> U-100; direction: FTM(1) = VPOS(1)*VRNG/100: valve-set, never negative"
+      }
     },
     {
       "id": "S3",
       "name": "E feed",
       "from": "BL",
-      "to": "U-100"
+      "to": "U-100",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 3 = internal FTM(2): BL -> U-100; direction: FTM(2) = VPOS(2)*VRNG/100: valve-set, never negative"
+      }
     },
     {
       "id": "S4",
       "name": "A and C feed",
       "from": "BL",
-      "to": "C-101"
+      "to": "C-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 4 = internal FTM(4): BL -> C-101; direction: FTM(4) = VPOS(4)*VRNG/100: valve-set, never negative"
+      }
     },
     {
       "id": "S5",
       "name": "Stripper overhead",
       "from": "C-101",
-      "to": "U-100"
+      "to": "U-100",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 5 = internal FTM(5): C-101 -> U-100; direction: computed split of the stripper feed (non-negative fractions SFR of FIN)"
+      }
     },
     {
       "id": "S6",
       "name": "Reactor feed",
       "from": "U-100",
-      "to": "R-101"
+      "to": "R-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 6 = internal FTM(6): U-100 -> R-101; direction: DLP=PTV-PTR; clamped at 0 (header -> reactor)"
+      }
     },
     {
       "id": "S7",
       "name": "Reactor product",
       "from": "R-101",
-      "to": "E-101"
+      "to": "E-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 7 = internal FTM(8): R-101 -> V-101 through E-101; direction: DLP=PTR-PTS; clamped at 0 (reactor -> separator)",
+        "caveats": [
+          "the split at E-101 is the published flowsheet's drawing; the simulator computes one flow FTM(8) for the whole of stream 7"
+        ]
+      }
     },
     {
       "id": "S7b",
       "name": "Condensed product",
       "from": "E-101",
-      "to": "V-101"
+      "to": "V-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 7 = internal FTM(8): R-101 -> V-101 through E-101; direction: DLP=PTR-PTS; clamped at 0 (reactor -> separator)",
+        "caveats": [
+          "the split at E-101 is the published flowsheet's drawing; the simulator computes one flow FTM(8) for the whole of stream 7"
+        ]
+      }
     },
     {
       "id": "S8",
       "name": "Recycle",
       "from": "V-101",
-      "to": "K-101"
+      "to": "K-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 8 = internal FTM(9): V-101 -> U-100 through K-101; direction: PR=PTV/PTS (compressor curve), spill-back VPOS(5); flow floored at 1e-3, never reverses (separator -> header)",
+        "caveats": [
+          "the split at K-101 is the published flowsheet's drawing; the simulator computes one flow FTM(9) for the whole of stream 8"
+        ]
+      }
     },
     {
       "id": "S8b",
       "name": "Recycle to feed",
       "from": "K-101",
-      "to": "U-100"
+      "to": "U-100",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 8 = internal FTM(9): V-101 -> U-100 through K-101; direction: PR=PTV/PTS (compressor curve), spill-back VPOS(5); flow floored at 1e-3, never reverses (separator -> header)",
+        "caveats": [
+          "the split at K-101 is the published flowsheet's drawing; the simulator computes one flow FTM(9) for the whole of stream 8"
+        ]
+      }
     },
     {
       "id": "S9",
       "name": "Purge",
-      "from": "K-101",
-      "to": "BL"
+      "from": "V-101",
+      "to": "BL",
+      "direction": "forward",
+      "verification": {
+        "status": "corrected",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 9 = internal FTM(10): V-101 -> BL; direction: DLP=PTS-760.0; clamped at 0 (separator -> BL)",
+        "previous": {
+          "from": "K-101"
+        }
+      }
     },
     {
       "id": "S10",
       "name": "Separator underflow",
       "from": "V-101",
-      "to": "C-101"
+      "to": "C-101",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 10 = internal FTM(11): V-101 -> C-101; direction: FTM(11) = VPOS(7)*VRNG/100: valve-set, never negative"
+      }
     },
     {
       "id": "S11",
       "name": "Stripper product",
       "from": "C-101",
-      "to": "BL"
+      "to": "BL",
+      "direction": "forward",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "stream 11 = internal FTM(13): C-101 -> BL; direction: FTM(13) = VPOS(8)*VRNG/100: valve-set, never negative"
+      }
     }
   ],
   "instruments": [
@@ -182,6 +370,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 1: \"A Feed\" kscmh"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(1) = FTM(3)*0.359/35.3145; stream 1: BL -> U-100; documented as teprob.f 'A Feed', revised code 'Feed flow component A (stream 1)'"
       }
     },
     {
@@ -197,6 +394,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 2: \"D Feed\" kg/hr"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(2) = FTM(1)*XMWS(1)*0.454; stream 2: BL -> U-100; documented as teprob.f 'D Feed', revised code 'Feed flow component D (stream 2)'"
       }
     },
     {
@@ -212,6 +418,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 3: \"E Feed\" kg/hr"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(3) = FTM(2)*XMWS(2)*0.454; stream 3: BL -> U-100; documented as teprob.f 'E Feed', revised code 'Feed flow component E (stream 3)'"
       }
     },
     {
@@ -227,6 +442,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 4: \"A and C Feed\" kscmh"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(4) = FTM(4)*0.359/35.3145; stream 4: BL -> C-101; documented as teprob.f 'A and C Feed', revised code 'Feed flow components A & C (stream 4)'"
       }
     },
     {
@@ -242,6 +466,18 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 5: \"Recycle Flow\" kscmh"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(5) = FTM(9)*0.359/35.3145; stream 8: V-101 -> U-100 through K-101; documented as teprob.f 'Recycle Flow', revised code 'Recycle flow to reactor from separator (stream 8)'",
+        "caveats": [
+          "which segment of stream 8 carries the tap is a model choice; the simulator has one flow FTM(9)"
+        ]
       }
     },
     {
@@ -257,6 +493,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 6: \"Reactor Feed Rate\" kscmh"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(6) = FTM(6)*0.359/35.3145; stream 6: U-100 -> R-101; documented as teprob.f 'Reactor Feed Rate', revised code 'Reactor feed (stream 6)'"
       }
     },
     {
@@ -271,6 +516,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 7: \"Reactor Pressure\" kPa gauge"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(7) = (PTR-760.0)/760.0*101.325; PTR is the reactor variable; documented as teprob.f 'Reactor Pressure', revised code 'Reactor pressure'"
       }
     },
     {
@@ -285,6 +539,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 8: \"Reactor Level\" %"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(8) = (VLR-84.6)/666.7*100.0; VLR is the reactor variable; documented as teprob.f 'Reactor Level', revised code 'Reactor level'"
       }
     },
     {
@@ -299,12 +562,21 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 9: \"Reactor Temperature\" Deg C"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(9) = TCR; TCR is the reactor variable; documented as teprob.f 'Reactor Temperature', revised code 'Reactor temperature'"
       }
     },
     {
       "tag": "FI-110",
       "xmeas": 10,
-      "unit": "K-101",
+      "unit": "V-101",
       "stream": "S9",
       "variable": "flow",
       "uom": "kscmh",
@@ -314,6 +586,18 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 10: \"Purge Rate (stream 9)\" kscmh"
+      },
+      "topology_verification": {
+        "status": "corrected",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(10) = FTM(10)*0.359/35.3145; stream 9: V-101 -> BL; documented as teprob.f 'Purge Rate', revised code 'Purge flow (stream 9)'",
+        "previous": {
+          "unit": "K-101"
+        }
       }
     },
     {
@@ -328,6 +612,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 11: \"Product Sep Temp\" Deg C"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(11) = TCS; TCS is the separator variable; documented as teprob.f 'Product Sep Temp', revised code 'Separator temperature'"
       }
     },
     {
@@ -342,6 +635,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 12: \"Product Sep Level\" %"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(12) = (VLS-27.5)/290.0*100.0; VLS is the separator variable; documented as teprob.f 'Product Sep Level', revised code 'Separator level'"
       }
     },
     {
@@ -356,6 +658,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 13: \"Prod Sep Pressure\" kPa gauge"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(13) = (PTS-760.0)/760.0*101.325; PTS is the separator variable; documented as teprob.f 'Prod Sep Pressure', revised code 'Separator pressure'"
       }
     },
     {
@@ -371,6 +682,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 14: \"Prod Sep Underflow (stream 10)\" m3/hr"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(14) = FTM(11)/DLS/35.3145; stream 10: V-101 -> C-101; documented as teprob.f 'Prod Sep Underflow', revised code 'Sperator underflow (liquid phase)'"
       }
     },
     {
@@ -385,6 +705,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 15: \"Stripper Level\" %"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(15) = (VLC-78.25)/VTC*100.0; VLC is the stripper variable; documented as teprob.f 'Stripper Level', revised code 'Stripper level'"
       }
     },
     {
@@ -399,6 +728,18 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 16: \"Stripper Pressure\" kPa gauge"
+      },
+      "topology_verification": {
+        "status": "unresolvable",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(16) = (PTV-760.0)/760.0*101.325; PTV is the header variable; documented as teprob.f 'Stripper Pressure', revised code 'Stripper pressure'",
+        "caveats": [
+          "the code computes it from the header but the documented name says stripper"
+        ]
       }
     },
     {
@@ -414,6 +755,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 17: \"Stripper Underflow (stream 11)\" m3/hr"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(17) = FTM(13)/DLC/35.3145; stream 11: C-101 -> BL; documented as teprob.f 'Stripper Underflow', revised code 'Stripper underflow (stream 11)'"
       }
     },
     {
@@ -428,6 +778,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 18: \"Stripper Temperature\" Deg C"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(18) = TCC; TCC is the stripper variable; documented as teprob.f 'Stripper Temperature', revised code 'Stripper temperature'"
       }
     },
     {
@@ -442,6 +801,18 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 19: \"Stripper Steam Flow\" kg/hr"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(19) = QUC*1.04D3*0.454; QUC enters the stripper energy balance; documented as teprob.f 'Stripper Steam Flow', revised code 'Stripper steam flow'",
+        "caveats": [
+          "computed from the unit's heat duty; there is no steam stream in the source or the model"
+        ]
       }
     },
     {
@@ -456,6 +827,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 20: \"Compressor Work\" kW"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(20) = CPDH*0.29307D3; CPDH is the compressor work term; documented as teprob.f 'Compressor Work', revised code 'Compressor work'"
       }
     },
     {
@@ -470,6 +850,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMEAS 21: \"Reactor Cooling Water Outlet Temp\" Deg C"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(21) = TWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Outlet Temp', revised code 'Reactor cooling water outlet temperature', XMV(10) 'Reactor Cooling Water Flow', IDV(4) 'Reactor Cooling Water Inlet Temperature'"
       }
     },
     {
@@ -488,7 +877,19 @@
           "description": "Condenser cooling water outlet temperature"
         }
       },
-      "open_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XMEAS(22) = TWS; QUS cools the reactor effluent FTM(8) (the condenser position); QUS is booked into the separator energy balance; documented as teprob.f 'Separator Cooling Water Outlet Temp', revised code 'Condenser cooling water outlet temperature', XMV(11) 'Condenser Cooling Water Flow', IDV(5) 'Condenser Cooling Water Inlet Temperature'",
+        "caveats": [
+          "documented names disagree (condenser x3, separator x1); the code locus and the majority agree on condenser"
+        ],
+        "resolved_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
+      }
     },
     {
       "tag": "AI-123",
@@ -508,12 +909,21 @@
         "period_h": 0.1,
         "dead_time_h": 0.1,
         "source": "teprob.f header comments"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
       }
     },
     {
       "tag": "AI-129",
       "xmeas": "29-36",
-      "unit": "K-101",
+      "unit": "V-101",
       "stream": "S9",
       "variable": "composition",
       "uom": "mol%",
@@ -528,6 +938,18 @@
         "period_h": 0.1,
         "dead_time_h": 0.1,
         "source": "teprob.f header comments"
+      },
+      "topology_verification": {
+        "status": "corrected",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XCMP(29...) = XST(i,10); stream 9: V-101 -> BL",
+        "previous": {
+          "unit": "K-101"
+        }
       }
     },
     {
@@ -548,6 +970,15 @@
         "period_h": 0.25,
         "dead_time_h": 0.25,
         "source": "teprob.f header comments"
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
       }
     }
   ],
@@ -564,6 +995,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 1: \"D Feed Flow (stream 2)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(1) sets FTM(1); stream 2: BL -> U-100; documented as teprob.f 'D Feed Flow'"
       }
     },
     {
@@ -578,6 +1018,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 2: \"E Feed Flow (stream 3)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(2) sets FTM(2); stream 3: BL -> U-100; documented as teprob.f 'E Feed Flow'"
       }
     },
     {
@@ -592,6 +1041,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 3: \"A Feed Flow (stream 1)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(3) sets FTM(3); stream 1: BL -> U-100; documented as teprob.f 'A Feed Flow'"
       }
     },
     {
@@ -606,6 +1064,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 4: \"A and C Feed Flow (stream 4)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(4) sets FTM(4); stream 4: BL -> C-101; documented as teprob.f 'A and C Feed Flow'"
       }
     },
     {
@@ -619,12 +1086,24 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 5: \"Compressor Recycle Valve\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(5) spills flow back around the compressor (reduces FTM(9)); documented as teprob.f 'Compressor Recycle Valve'",
+        "caveats": [
+          "the spill-back path around the compressor is not a stream in the model; the source computes it only as a reduction of the net compressor flow"
+        ]
       }
     },
     {
       "tag": "FV-206",
       "xmv": 6,
-      "unit": "K-101",
+      "unit": "V-101",
       "stream": "S9",
       "uom": "%",
       "description": "Purge valve",
@@ -633,6 +1112,18 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 6: \"Purge Valve (stream 9)\""
+      },
+      "topology_verification": {
+        "status": "corrected",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(6) sets FTM(10); stream 9: V-101 -> BL; documented as teprob.f 'Purge Valve'",
+        "previous": {
+          "unit": "K-101"
+        }
       }
     },
     {
@@ -647,6 +1138,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 7: \"Separator Pot Liquid Flow (stream 10)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(7) sets FTM(11); stream 10: V-101 -> C-101; documented as teprob.f 'Separator Pot Liquid Flow'"
       }
     },
     {
@@ -661,6 +1161,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 8: \"Stripper Liquid Product Flow (stream 11)\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(8) sets FTM(13); stream 11: C-101 -> BL; documented as teprob.f 'Stripper Liquid Product Flow'"
       }
     },
     {
@@ -674,6 +1183,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 9: \"Stripper Steam Valve\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(9) -> UAC; QUC enters the stripper energy balance; documented as teprob.f 'Stripper Steam Valve'"
       }
     },
     {
@@ -687,6 +1205,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 10: \"Reactor Cooling Water Flow\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(10) -> FWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Flow'"
       }
     },
     {
@@ -700,6 +1227,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 11: \"Condenser Cooling Water Flow\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(11) -> FWS; QUS cools the reactor effluent FTM(8) (the condenser position); QUS is booked into the separator energy balance; documented as teprob.f 'Condenser Cooling Water Flow'"
       }
     },
     {
@@ -713,6 +1249,15 @@
         "checked_against": "teprob.f (Braatz group TE code)",
         "checked_on": "2026-10-06",
         "evidence": "XMV 12: \"Agitator Speed\""
+      },
+      "topology_verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+          "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+        ],
+        "checked_on": "2026-10-13",
+        "evidence": "VPOS(12) -> AGSP; QUR enters the reactor energy balance; documented as teprob.f 'Agitator Speed'"
       }
     }
   ]
