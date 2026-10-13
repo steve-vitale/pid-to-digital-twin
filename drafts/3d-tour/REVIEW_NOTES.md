@@ -116,8 +116,10 @@ TE source check), so its versions of every shared file are stale. Plan:
    the generated outputs (`docs/3d_tour/*`, `docs/screenshots/3d/**`; they are rebuilt in step 6), or the branch's
    resume/handoff note.
 3. **Apply the fixes:** `git apply drafts/3d-tour/3d-content-fixes.patch`, then copy `drafts/3d-tour/replace/scripts/*`
-   over the two tour scripts. Checked against an export of `8a0aff5`: the patch applies, and the 3D tests pass
-   (contract 76/76, render verifier 27/27).
+   over the two tour scripts. The patch also adapts `verify_3d_render.py` to main's PI sheet schema v2: attribute
+   descriptions are read from `attribute_descriptions.csv`, and AF unit abbreviations are mapped back. Checked
+   against an export of `8a0aff5`: the patch applies, and the 3D tests pass (contract 76/76, render verifier 27/27)
+   with both the old v1 PI outputs and main's v2 outputs.
 4. **Resolve the file-name collision.** Main's `data/te_unit_purposes.json` (keyed by unit, with citations) and the
    tour's file of the same name (keyed by equipment kind, with function/highlight/inferred fields) are different
    files. Keep main's as the only source of purpose text. Rename the tour's file to e.g. `data/te_tour_cards.json`,

@@ -1252,3 +1252,75 @@ index bf230d1..3399206 100644
 +            .replace("# __LABEL_LAYOUT__", label_layout.embeddable_source())
 +            .replace("__FONT_PATH__", LABEL_FONT.as_posix()))
  
+diff --git a/scripts/test_verify_3d_render.py b/scripts/test_verify_3d_render.py
+index 39f7712..12c0024 100644
+--- a/scripts/test_verify_3d_render.py
++++ b/scripts/test_verify_3d_render.py
+@@ -33,2 +33,4 @@ def main():
+     pi_csv = (ROOT / 'out/pi/pi_builder_af.csv').read_text(encoding='utf-8-sig')
++    descriptions = ROOT / 'out/pi/attribute_descriptions.csv'  # sheet schema v2
++    pi_desc = descriptions.read_text(encoding='utf-8-sig') if descriptions.is_file() else None
+     persp = v3.perspective_index(ROOT / 'out/ignition/gateway/PIDTwin.zip')
+@@ -43,3 +45,3 @@ def main():
+         args = dict(scene=scene, model=model, provider=provider, seed_tags=seed, pi_csv=pi_csv, perspective=persp,
+-                    bands=bands, alarms=alarms)
++                    bands=bands, alarms=alarms, pi_descriptions=pi_desc)
+         args.update(kw)
+diff --git a/scripts/verify_3d_render.py b/scripts/verify_3d_render.py
+index f59cd92..4e4e249 100644
+--- a/scripts/verify_3d_render.py
++++ b/scripts/verify_3d_render.py
+@@ -82,5 +82,16 @@ def ignition_seed_index(te_tags):
+ 
+-def pi_index(csv_text):
+-    """PI Builder-style sheet -> {tag: {path, unit, uom, description, reference}}, plus unit elements."""
++def pi_index(csv_text, descriptions_text=None):
++    """PI Builder-style sheet -> {tag: {path, unit, uom, description, reference}}, plus unit elements.
++
++    Sheet schema v2 leaves attribute descriptions out of the sheet (their column header is unconfirmed) and writes
++    them to attribute_descriptions.csv; v2 also writes AF unit abbreviations (e.g. the degree-sign form of degC).
++    Both are mapped back here so the comparison with the contract stays like for like."""
+     rows = list(csv.DictReader(io.StringIO(csv_text.lstrip(chr(0xFEFF)))))
++    extra = {r["attribute_path"]: r["description"] for r in
++             csv.DictReader(io.StringIO((descriptions_text or "").lstrip(chr(0xFEFF))))} if descriptions_text else {}
++    try:
++        from pi_mapping import VENDOR_UOM
++    except ImportError:  # sheet schema v1 checkouts
++        VENDOR_UOM = {}
++    model_uom = {v: k for k, v in VENDOR_UOM.items()}
+     out, units = {}, []
+@@ -91,6 +102,8 @@ def pi_index(csv_text):
+             continue
+-        tag = r["Description"].split(":", 1)[0].strip()
++        description = r.get("Description") or extra.get(f'{r["Parent"]}|{r["Name"]}', "")
++        tag = description.split(":", 1)[0].strip()
+         ref = r.get("AttributeConfigString", "")
+         out[tag] = {"path": "\\\\%s|%s" % (r["Parent"], r["Name"]), "unit": r["Parent"].split("\\")[-1],
+-                    "uom": r["AttributeDefaultUOM"], "description": r["Description"], "reference": ref,
++                    "uom": model_uom.get(r["AttributeDefaultUOM"], r["AttributeDefaultUOM"]),
++                    "description": description, "reference": ref,
+                     "reference_tag": (re.search(r"TE\.([A-Z0-9-]+)\.PV", ref) or [None, None])[1]}
+@@ -131,3 +144,3 @@ class Report:
+ def check_exports(rep, scene, model, provider=None, seed_tags=None, pi_csv=None, perspective=None, bands=None,
+-                  alarms=None):
++                  alarms=None, pi_descriptions=None):
+     items = {i["tag"]: i for i in model["instruments"] + model["final_elements"]}
+@@ -196,3 +209,3 @@ def check_exports(rep, scene, model, provider=None, seed_tags=None, pi_csv=None,
+     if pi_csv is not None:
+-        pi, pi_units = pi_index(pi_csv)
++        pi, pi_units = pi_index(pi_csv, pi_descriptions)
+         compare("pi_af", pi, pi_units, ("uom",),
+@@ -611,5 +624,6 @@ def to_markdown(rep, table, trace_rows, legibility):
+ def run(scene, model, provider=None, seed_tags=None, pi_csv=None, perspective=None, bands=None, alarms=None,
+-        boxes=None, image_dir=None, crosscheck=True):
++        boxes=None, image_dir=None, crosscheck=True, pi_descriptions=None):
+     rep = Report()
+-    table = check_exports(rep, scene, model, provider, seed_tags, pi_csv, perspective, bands, alarms)
++    table = check_exports(rep, scene, model, provider, seed_tags, pi_csv, perspective, bands, alarms,
++                          pi_descriptions=pi_descriptions)
+     check_geometry(rep, scene, model)
+@@ -650,2 +664,4 @@ def main(argv=None):
+         pi_csv=Path(args.pi).read_text(encoding="utf-8-sig") if exists(args.pi) else None,
++        pi_descriptions=(Path(args.pi).with_name("attribute_descriptions.csv").read_text(encoding="utf-8-sig")
++                         if exists(Path(args.pi).with_name("attribute_descriptions.csv")) else None),
+         perspective=perspective_index(args.perspective) if exists(args.perspective) else None,
