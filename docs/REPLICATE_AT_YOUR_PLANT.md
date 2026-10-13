@@ -22,7 +22,7 @@ Read [data/te_process_model.json](../data/te_process_model.json), then:
 python scripts/generate.py
 ```
 
-This standard-library command writes `out/svg/`, `out/ignition/te_tags.json`, `out/pi/pi_builder_af.csv` and `out/ops_review_sheet.csv`. It overwrites existing seed outputs; use your learning copy. Inspect the model, SVG, review sheet and export side by side. This shows what an explicitly authored asset model can generate, **not drawing extraction**. The generic TE tag export is not the replay-connected `twin_provider.json`.
+This standard-library command writes `out/svg/`, `out/ignition/te_tags.json`, the PI AF staging files in `out/pi/` (sheet, custom units, attribute descriptions, publish steps; not import-tested) and `out/ops_review_sheet.csv`. It overwrites existing seed outputs; use your learning copy. Inspect the model, SVG, review sheet and export side by side. This shows what an explicitly authored asset model can generate, **not drawing extraction**. The generic TE tag export is not the replay-connected `twin_provider.json`.
 
 Optional source checking is a separate, potentially networked step: `python scripts/verify_te_source.py` fetches missing TE source and writes a report. Its `--write` option also changes the seed model. Do not use it merely as an offline viewer. `python scripts/verify_te_topology.py` works the same way for units, streams, directions and tag ownership (report: `out/te_topology_check.md`); it also downloads the revised TE code from N. L. Ricker's archive as a cross-check.
 
@@ -36,7 +36,7 @@ cp out/twin/r2-tiles-trace/codex/plant_model.json runs/plant-learning/plant_mode
 python scripts/generate.py runs/plant-learning/plant_model.json
 ```
 
-Outputs appear beside that copied model: `svg/`, `ignition/tags.json`, `pi/pi_builder_af.csv`, and `review_queue.csv`. Review an original public drawing against its extracted symbols, tags, parents and links. Preserve unknowns and clarification flags. Regeneration replaces SVGs and the review queue, so keep filled review CSVs separately. Both seed and extracted-model generation validate structure and render the complete bundle before creating, replacing or deleting export files. Invalid models exit nonzero and leave existing exports unchanged. This is not an atomic filesystem transaction: a write-time disk or permission failure can still leave partial output. Successful generation is not an engineering or operational gate; independently review the candidate before using exports. [Twin outputs](TWIN_OUTPUTS.md) explains each file.
+Outputs appear beside that copied model: `svg/`, `ignition/tags.json`, the PI AF staging files in `pi/`, and `review_queue.csv`. Review an original public drawing against its extracted symbols, tags, parents and links. Preserve unknowns and clarification flags. Regeneration replaces SVGs and the review queue, so keep filled review CSVs separately. Both seed and extracted-model generation validate structure and render the complete bundle before creating, replacing or deleting export files. Invalid models exit nonzero and leave existing exports unchanged. This is not an atomic filesystem transaction: a write-time disk or permission failure can still leave partial output. Successful generation is not an engineering or operational gate; independently review the candidate before using exports. [Twin outputs](TWIN_OUTPUTS.md) explains each file.
 
 ### C. Check the pipeline, then optionally rerun public extraction
 

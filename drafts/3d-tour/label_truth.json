@@ -1,0 +1,666 @@
+{
+ "source": "Derived from docs/screenshots/3d/label_boxes.json on the 3D tour branch (commit 8a0aff5): the text and pixel box of every label the renderer reports as drawn in each still. Ground truth for the OCR read-back check.",
+ "resolution": [
+  1920,
+  1080
+ ],
+ "stills": [
+  {
+   "name": "00_overview_normal",
+   "image": "00_overview_normal.jpg",
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "text": "U-100  Feed System",
+     "text_box": [
+      475.9,
+      328.8,
+      717.3,
+      356.4
+     ]
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "text": "R-101  Reactor",
+     "text_box": [
+      615.7,
+      246.5,
+      799.8,
+      267.5
+     ]
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "text": "E-101  Product Condenser",
+     "text_box": [
+      785.7,
+      359.0,
+      1110.6,
+      380.0
+     ]
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "text": "V-101  Vapor/Liquid Separator",
+     "text_box": [
+      836.4,
+      456.3,
+      1209.2,
+      484.0
+     ]
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "text": "K-101  Recycle Compressor",
+     "text_box": [
+      983.6,
+      536.3,
+      1327.3,
+      564.0
+     ]
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "text": "C-101  Product Stripper",
+     "text_box": [
+      1192.0,
+      253.8,
+      1487.2,
+      281.5
+     ]
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "text": "Prototype · placeholder geometry · recorded replay",
+     "text_box": [
+      1423.5,
+      34.0,
+      1886.0,
+      54.1
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "text": "Overview: Tennessee Eastman Challenge Process\nA published benchmark process standing in for a plant; the tour follows the material in flow order.",
+     "text_box": [
+      34.0,
+      999.9,
+      992.3,
+      1046.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "02_r-101_normal",
+   "image": "02_r-101_normal.jpg",
+   "labels": [
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "text": "R-101  Reactor",
+     "text_box": [
+      934.0,
+      264.9,
+      1118.1,
+      285.9
+     ]
+    },
+    {
+     "id": "tag:PI-107",
+     "kind": "tag",
+     "text": "PI-107  Pressure · high alarm 2,895 kPa g",
+     "text_box": [
+      482.4,
+      525.2,
+      894.1,
+      548.2
+     ]
+    },
+    {
+     "id": "tag:TI-109",
+     "kind": "tag",
+     "text": "TI-109  Temperature",
+     "text_box": [
+      666.5,
+      641.1,
+      880.2,
+      664.2
+     ]
+    },
+    {
+     "id": "tag:TV-210",
+     "kind": "tag",
+     "text": "TV-210  Cooling-water valve output",
+     "text_box": [
+      471.9,
+      730.4,
+      839.4,
+      753.5
+     ]
+    },
+    {
+     "id": "tag:TI-121",
+     "kind": "tag",
+     "text": "TI-121  Cooling-water outlet T",
+     "text_box": [
+      1161.4,
+      641.7,
+      1477.2,
+      664.7
+     ]
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "text": "Prototype · placeholder geometry · recorded replay",
+     "text_box": [
+      1423.5,
+      34.0,
+      1886.0,
+      54.1
+     ]
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "text": "Purpose\nThe gas feeds react here to form the liquid\nproducts G and H, and the reactions give off\nheat.\nHeat removal: cooling water carries the heat\nof reaction away; the products leave as\nvapour.",
+     "text_box": [
+      34.0,
+      34.0,
+      434.1,
+      186.1
+     ]
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "text": "Why this matters\nCSB: put the reactor's pressure limit in\noperator training (Kuraray, 2018, 21\ninjured).\nSource: CSB, 2018 · prototype match",
+     "text_box": [
+      1538.5,
+      88.1,
+      1886.0,
+      196.1
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "text": "Stop 2 of 6: R-101 Reactor\nTakes the reactor feed from U-100; sends the reactor product to E-101.",
+     "text_box": [
+      34.0,
+      999.9,
+      739.2,
+      1046.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "21_overview_fault_alarm",
+   "image": "21_overview_fault_alarm.jpg",
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "text": "U-100  Feed System",
+     "text_box": [
+      330.7,
+      401.3,
+      572.1,
+      429.0
+     ]
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "text": "R-101  Reactor",
+     "text_box": [
+      615.7,
+      246.5,
+      799.8,
+      267.5
+     ]
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "text": "E-101  Product Condenser",
+     "text_box": [
+      932.4,
+      376.0,
+      1257.3,
+      397.0
+     ]
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "text": "V-101  Vapor/Liquid Separator",
+     "text_box": [
+      670.4,
+      512.5,
+      1043.2,
+      540.1
+     ]
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "text": "K-101  Recycle Compressor",
+     "text_box": [
+      1195.6,
+      517.6,
+      1539.4,
+      545.3
+     ]
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "text": "C-101  Product Stripper",
+     "text_box": [
+      1192.0,
+      253.8,
+      1487.2,
+      281.5
+     ]
+    },
+    {
+     "id": "tag:PI-107",
+     "kind": "tag",
+     "text": "PI-107  2,897 kPa g · high alarm 2,895 · shutdown 3,000",
+     "text_box": [
+      717.2,
+      309.8,
+      1278.3,
+      332.9
+     ]
+    },
+    {
+     "id": "tag:TI-109",
+     "kind": "tag",
+     "text": "TI-109  120.4 °C · shutdown 175",
+     "text_box": [
+      274.8,
+      457.7,
+      608.5,
+      476.2
+     ]
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "text": "Prototype · placeholder geometry · recorded replay",
+     "text_box": [
+      1423.5,
+      34.0,
+      1886.0,
+      54.1
+     ]
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "text": "Tag markers (replay)\nin normal band\noutside normal band\nabove high alarm\nnot connected",
+     "text_box": [
+      1701.8,
+      862.1,
+      1886.0,
+      965.6
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "text": "Fault 6 (loss of A feed): +294 min\nPI-107 reaches 2,897 kPa g, above its 2,895 kPa g high alarm; 19 tags are outside their normal band.",
+     "text_box": [
+      34.0,
+      999.8,
+      997.6,
+      1046.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "30_flow_legend",
+   "image": "30_flow_legend.jpg",
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "text": "U-100  Feed System",
+     "text_box": [
+      475.9,
+      328.8,
+      717.3,
+      356.4
+     ]
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "text": "R-101  Reactor",
+     "text_box": [
+      615.7,
+      246.5,
+      799.8,
+      267.5
+     ]
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "text": "E-101  Product Condenser",
+     "text_box": [
+      785.7,
+      359.0,
+      1110.6,
+      380.0
+     ]
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "text": "V-101  Vapor/Liquid Separator",
+     "text_box": [
+      836.4,
+      456.3,
+      1209.2,
+      484.0
+     ]
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "text": "K-101  Recycle Compressor",
+     "text_box": [
+      983.6,
+      536.3,
+      1327.3,
+      564.0
+     ]
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "text": "C-101  Product Stripper",
+     "text_box": [
+      1192.0,
+      253.8,
+      1487.2,
+      281.5
+     ]
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "text": "Prototype · placeholder geometry · recorded replay",
+     "text_box": [
+      1423.5,
+      34.0,
+      1886.0,
+      54.1
+     ]
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "text": "Process flow by service\ngas feed\nreactor effluent\nliquid product\nrecycle\npurge\ncooling water (inferred)\nsteam (inferred)",
+     "text_box": [
+      1674.2,
+      791.3,
+      1886.0,
+      965.6
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "text": "Process flow (seed topology, unverified)\nFeeds and recycle meet at the feed system, react in R-101, condense, separate; gas recycles through K-101 and liquid is stripped to product.",
+     "text_box": [
+      34.0,
+      999.8,
+      1395.0,
+      1046.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "40_loto_mockup",
+   "image": "40_loto_mockup.jpg",
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "text": "U-100  Feed System",
+     "text_box": [
+      475.9,
+      328.8,
+      717.3,
+      356.4
+     ]
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "text": "R-101  Reactor",
+     "text_box": [
+      615.7,
+      246.5,
+      799.8,
+      267.5
+     ]
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "text": "E-101  Product Condenser",
+     "text_box": [
+      785.7,
+      359.0,
+      1110.6,
+      380.0
+     ]
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "text": "V-101  Vapor/Liquid Separator",
+     "text_box": [
+      836.4,
+      456.3,
+      1209.2,
+      484.0
+     ]
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "text": "K-101  Recycle Compressor",
+     "text_box": [
+      983.6,
+      536.3,
+      1327.3,
+      564.0
+     ]
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "text": "C-101  Product Stripper",
+     "text_box": [
+      1192.0,
+      253.8,
+      1487.2,
+      281.5
+     ]
+    },
+    {
+     "id": "loto:1",
+     "kind": "loto",
+     "text": "1  A feed: battery-limit block valve*",
+     "text_box": [
+      350.6,
+      404.7,
+      704.6,
+      428.6
+     ]
+    },
+    {
+     "id": "loto:2",
+     "kind": "loto",
+     "text": "2  D feed: battery-limit block valve*",
+     "text_box": [
+      212.3,
+      254.1,
+      572.5,
+      278.0
+     ]
+    },
+    {
+     "id": "loto:3",
+     "kind": "loto",
+     "text": "3  E feed: battery-limit block valve*",
+     "text_box": [
+      79.8,
+      329.3,
+      433.0,
+      353.2
+     ]
+    },
+    {
+     "id": "loto:4",
+     "kind": "loto",
+     "text": "4  A and C feed: battery-limit block valve*",
+     "text_box": [
+      1205.6,
+      840.7,
+      1631.8,
+      864.7
+     ]
+    },
+    {
+     "id": "loto:5",
+     "kind": "loto",
+     "text": "5  Purge: battery-limit block valve*",
+     "text_box": [
+      1338.0,
+      482.6,
+      1687.0,
+      506.5
+     ]
+    },
+    {
+     "id": "loto:6",
+     "kind": "loto",
+     "text": "6  Stripper product: battery-limit block valve*",
+     "text_box": [
+      1225.4,
+      777.9,
+      1686.4,
+      801.8
+     ]
+    },
+    {
+     "id": "loto:7",
+     "kind": "loto",
+     "text": "7  R-101 agitator motor: electrical*",
+     "text_box": [
+      530.6,
+      170.9,
+      887.1,
+      194.8
+     ]
+    },
+    {
+     "id": "loto:8",
+     "kind": "loto",
+     "text": "8  K-101 motor: electrical*",
+     "text_box": [
+      1131.8,
+      407.2,
+      1405.2,
+      425.6
+     ]
+    },
+    {
+     "id": "loto:9",
+     "kind": "loto",
+     "text": "9  C-101 steam*",
+     "text_box": [
+      1069.9,
+      693.1,
+      1235.7,
+      711.5
+     ]
+    },
+    {
+     "id": "loto:10",
+     "kind": "loto",
+     "text": "10  R-101 cooling water in/out*",
+     "text_box": [
+      278.9,
+      463.2,
+      595.6,
+      487.1
+     ]
+    },
+    {
+     "id": "loto:11",
+     "kind": "loto",
+     "text": "11  E-101 cooling water in/out*",
+     "text_box": [
+      429.4,
+      515.1,
+      743.5,
+      539.0
+     ]
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "text": "Prototype · placeholder geometry · recorded replay",
+     "text_box": [
+      1423.5,
+      34.0,
+      1886.0,
+      54.1
+     ]
+    },
+    {
+     "id": "overlay:loto",
+     "kind": "overlay_card",
+     "text": "Design mockup, not a procedure\nIsolation points are inferred from the TE seed\nmodel (marked *). A real lockout/tagout\nprocedure comes from the site's energy-control\nprogram (OSHA 1910.147), its verified P&IDs\nand an authorized person.",
+     "text_box": [
+      34.0,
+      34.0,
+      462.5,
+      164.1
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "text": "Lockout/tagout view: design mockup only\nNumbered tags mark isolation points inferred from the seed model; this is not a LOTO procedure.",
+     "text_box": [
+      34.0,
+      999.9,
+      998.2,
+      1046.0
+     ]
+    }
+   ]
+  }
+ ]
+}

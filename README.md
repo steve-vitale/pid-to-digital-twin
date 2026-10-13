@@ -103,7 +103,7 @@ flowchart LR
 | Platform | What's verified |
 |---|---|
 | Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) |
-| AVEVA PI AF | Asset structure generated as a PI Builder sheet. **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
+| AVEVA PI AF | Asset structure generated as a PI Builder sheet following the vendor-published conventions (element templates, documented headers, AF unit abbreviations, custom units defined rather than assumed). **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
 ## Start wherever you are
@@ -504,8 +504,9 @@ it at a real site.
 | [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
 | [docs/REVIEW_LOOP.md](docs/REVIEW_LOOP.md) | Operations review back into the twin, and mapping instruments to live data points |
 | [docs/SITE_EXTRACTION_WORKFLOW.md](docs/SITE_EXTRACTION_WORKFLOW.md) | Frozen single-PNG prepare/execute/collect workflow, provenance and retry boundaries |
-| [docs/PI_MAPPING.md](docs/PI_MAPPING.md) | PI-only point mapping from reviewer-supplied references, staging reconciliation and native-import limits |
+| [docs/PI_MAPPING.md](docs/PI_MAPPING.md) | PI-only point mapping from reviewer-supplied references, staging reconciliation, native-import limits, what the offline check verifies and the steps a PI site would run |
 | [docs/REVIEW_EFFORT_PROTOCOL.md](docs/REVIEW_EFFORT_PROTOCOL.md) | Future measured engineering labor and independent residual-error study; no human results yet |
+| [docs/review-kit/](docs/review-kit/README.md) | Review day kit: one-sitting checklists per artifact, split into what anyone can check and what needs an operations person; brief for an outside reviewer; how results feed back |
 | [docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md) | Loading the twin into your own isolated Ignition lab by hand |
 | [docs/IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md) | The current project's native acceptance: matched files, the checklist, results and what it doesn't cover |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
@@ -553,7 +554,8 @@ System Explorer, then verify real PI point bindings. [The PI-only mapper](docs/P
 reviewer-supplied archive/point/type/UOM references on a copied extracted model; unmapped attributes keep
 `%Server%`/placeholder references. `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings.
 Staging CSV columns must be reconciled against the installed PI Builder version before a separately authorized
-native import.
+native import. `scripts/check_pi_export.py` does the offline part: it compares the export with the
+vendor-published sheet conventions and units, and lists what a PI administrator must still settle.
 
 ## Data and credits
 

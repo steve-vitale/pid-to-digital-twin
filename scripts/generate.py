@@ -17,7 +17,8 @@ import re
 import sys
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
-from pi_mapping import mapping_config, pi_csv_text, reconciliation
+from pi_mapping import (af_uom, custom_uoms_text, descriptions_text, import_steps_text, is_placeholder_reference,
+                        mapping_config, reconciliation, sheet_text)
 from provenance import element
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -328,11 +329,8 @@ def ignition_tags(model):
     ]}
 
 
-PI_COLS = ["Selected(x)", "Parent", "Name", "ObjectType", "Description", "Template",
-           "AttributeValueType", "AttributeDefaultUOM", "AttributeDataReference", "AttributeConfigString"]
-# Only this observed header mismatch is migrated. The whole row/header contract
-# remains unvalidated against an installed PI Builder version.
-PI_CANDIDATE_COLS_V1 = ["AttributeType" if c == "AttributeValueType" else c for c in PI_COLS]
+# PI Builder sheet columns and the PI-side conventions live in pi_mapping.py (PI_SHEET_COLS, schema v2). Rows are
+# built here as [selected, parent, name, object type, description, template, type, uom, data reference, config].
 
 
 
@@ -343,13 +341,19 @@ def pi_af_rows(model):
            for x in model.get(group, [])):
         raise ValueError("Reviewed pi_point mappings are supported only for extracted_twin models")
     root = "TE Plant"
-    rows = [["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""]]
+    # Element templates first, so an empty AF database gets them before any element refers to one.
+    templates = {}
+    for u in model["units"]:
+        templates.setdefault(member_name(u["type"].replace("_", " ")), u["type"].replace("_", " "))
+    rows = [["x", "", t, "ElementTemplate", f"Seed model unit type: {kind}", "", "", "", "", ""]
+            for t, kind in templates.items()]
+    rows.append(["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""])
     for u in model["units"]:
         rows.append(["x", root, u["id"], "Element", u["name"] + seed_confidence(u), member_name(u["type"].replace("_", " ")),
                      "", "", "", ""])
         for it in items_for(model, u["id"]):
             rows.append(["x", f"{root}\\{u['id']}", member_name(it["description"]), "Attribute",
-                         f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", it["uom"], "PI Point",
+                         f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", af_uom(it["uom"]), "PI Point",
                          f'\\\\%Server%\\TE.{it["tag"]}.PV'])
     return rows
 
@@ -579,12 +583,13 @@ def twin_pi_rows(model):
                          "", "String", "", "", ""])
             continue
         point = re.sub(r"[^A-Za-z0-9_.-]+", "_", _label(x))
-        rows.append(["x", path, name, "Attribute",
+        config = (mapping_config(x["pi_point"]) if "pi_point" in x
+                  else f"\\\\%Server%\\{TWIN_PLACEHOLDER}.{point}.PV")
+        # A placeholder reference is never selected, so PI Builder will not publish it by accident.
+        rows.append(["" if is_placeholder_reference(config) else "x", path, name, "Attribute",
                      _twin_doc(x, f'{x.get("variable") or "unknown variable"} | attached to {x["parent"]} | '),
                      "", (x.get("pi_point") or {}).get("value_type", "Double"),
-                     (x.get("pi_point") or {}).get("uom", x.get("uom", "")), "PI Point",
-                     mapping_config(x["pi_point"]) if "pi_point" in x
-                     else f"\\\\%Server%\\{TWIN_PLACEHOLDER}.{point}.PV"])
+                     (x.get("pi_point") or {}).get("uom", af_uom(x.get("uom", ""))), "PI Point", config])
     return rows
 
 
@@ -925,6 +930,12 @@ def _write_bundle(out_dir, bundle):
         target.write_text(content, encoding="utf-8", newline="")
 
 
+def pi_bundle(rows):
+    """PI AF staging files (not import-tested): the sheet, its custom units, attribute descriptions, the steps."""
+    return {"pi/pi_builder_af.csv": sheet_text(rows), "pi/custom_uoms.csv": custom_uoms_text(rows),
+            "pi/attribute_descriptions.csv": descriptions_text(rows), "pi/IMPORT_STEPS.txt": import_steps_text(rows)}
+
+
 def export_twin(model, out_dir, images_dir=None):
     """Write a structurally valid, fully rendered bundle; invalid models raise before writes.
 
@@ -937,8 +948,7 @@ def export_twin(model, out_dir, images_dir=None):
                   for sheet, svg in twin_svgs(model, images_dir, out_dir).items()}
         bundle["ignition/tags.json"] = json.dumps(twin_ignition(model), indent=1)
         pi_rows = twin_pi_rows(model)
-        bundle["pi/pi_builder_af.csv"] = pi_csv_text(PI_COLS, pi_rows)
-        bundle["pi/pi_builder_UNVALIDATED_candidate_v1.csv"] = pi_csv_text(PI_CANDIDATE_COLS_V1, pi_rows)
+        bundle.update(pi_bundle(pi_rows))
         bundle["pi/reconciliation.json"] = json.dumps(reconciliation(model, pi_rows), indent=2)
         bundle["review_queue.csv"] = _csv_text(TWIN_REVIEW_COLS, twin_review_rows(model))
         return bundle
@@ -948,7 +958,11 @@ def export_twin(model, out_dir, images_dir=None):
     for old in (out_dir / "svg").glob("sheet_*.svg"):
         if f"svg/{old.name}" not in bundle:
             old.unlink()
-    return ["review_queue.csv", "ignition/tags.json", "pi/pi_builder_af.csv", "pi/pi_builder_UNVALIDATED_candidate_v1.csv", "pi/reconciliation.json",
+    stale = out_dir / "pi" / "pi_builder_UNVALIDATED_candidate_v1.csv"  # schema v1 output, replaced by the v2 sheet
+    if stale.is_file():
+        stale.unlink()
+    return ["review_queue.csv", "ignition/tags.json", "pi/pi_builder_af.csv", "pi/custom_uoms.csv",
+            "pi/attribute_descriptions.csv", "pi/IMPORT_STEPS.txt", "pi/reconciliation.json",
             f"svg/sheet_*.svg ({len(model['systems'])})"]
 
 
@@ -958,7 +972,7 @@ def export_seed(model, out_dir):
         bundle = {"svg/overview.svg": overview_svg(model)}
         bundle.update({f"svg/{portable_filename(u['id'])}.svg": unit_svg(model, u) for u in model["units"]})
         bundle["ignition/te_tags.json"] = json.dumps(ignition_tags(model), indent=2)
-        bundle["pi/pi_builder_af.csv"] = pi_csv_text(PI_COLS, pi_af_rows(model))
+        bundle.update(pi_bundle(pi_af_rows(model)))
         bundle["ops_review_sheet.csv"] = _csv_text(REVIEW_COLS, review_rows(model))
         return bundle
     _write_bundle(out_dir, _prepare(model, validate, render))
@@ -990,7 +1004,8 @@ def main():
     print(f"model: {len(model['units'])} units, {len(model['streams'])} streams, "
           f"{n_inst} instruments, {n_fe} final elements")
     print(f"wrote: out/svg ({len(model['units']) + 1} files), out/ignition/te_tags.json, "
-          f"out/pi/pi_builder_af.csv, out/ops_review_sheet.csv")
+          f"out/pi/ (PI Builder sheet v2, custom_uoms.csv, attribute_descriptions.csv, IMPORT_STEPS.txt; "
+          f"not import-tested), out/ops_review_sheet.csv")
     print("structural validation: OK (not engineering or operations approval)")
     return 0
 

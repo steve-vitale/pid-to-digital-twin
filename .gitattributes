@@ -3,3 +3,6 @@ extraction/* text eol=lf
 *.bat text eol=crlf
 # The timed-review kit is hashed in its manifest; keep its bytes identical on every OS.
 out/review_kit/** -text
+
+# Patches are applied with git apply; keep their bytes identical on every OS.
+*.patch -text

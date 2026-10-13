@@ -10,7 +10,8 @@ import tempfile
 import unittest
 
 import generate
-from pi_mapping import FIELDS, mapping_config, pi_csv_text, plan_mapping, reconciliation
+from pi_mapping import (CUSTOM_UOMS, FIELDS, PI_SHEET_COLS, custom_uoms_text, mapping_config, pi_csv_text,
+                        plan_mapping, reconciliation)
 from test_generate_validation import twin_fixture, snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,28 +25,59 @@ def row(**updates):
 
 
 class PIMappingTests(unittest.TestCase):
-    def test_candidate_header_migration_and_row_equivalence(self):
+    def test_sheet_v2_uses_documented_headers_and_holds_back_placeholders(self):
         models = [twin_fixture(), plan_mapping(twin_fixture(), [row()])[0]]
         callout = twin_fixture()
         callout['instruments'][0]['reviewed_valve_association'] = 'V-1'
         models.append(callout)
         for model in models:
-            with self.subTest(mapped='pi_point' in model['instruments'][0]):
+            with self.subTest(mapped='pi_point' in model['instruments'][0],
+                              callout=bool(model['instruments'][0].get('reviewed_valve_association'))):
                 with tempfile.TemporaryDirectory() as tmp:
                     generate.export_twin(model, tmp)
                     folder = Path(tmp) / 'pi'
                     def read(name):
                         with (folder / name).open(encoding='utf-8-sig', newline='') as stream:
                             return list(csv.reader(stream))
-                    legacy = read('pi_builder_af.csv')
-                    candidate = read('pi_builder_UNVALIDATED_candidate_v1.csv')
-                    self.assertEqual(legacy[1:], candidate[1:])
-                    self.assertEqual(candidate[0], ['AttributeType' if x == 'AttributeValueType' else x for x in legacy[0]])
+                    sheet = read('pi_builder_af.csv')
+                    self.assertEqual(sheet[0], PI_SHEET_COLS)
+                    self.assertNotIn('AttributeValueType', sheet[0])
+                    self.assertFalse((folder / 'pi_builder_UNVALIDATED_candidate_v1.csv').exists())
+                    attribute = next(r for r in sheet[1:] if r[3] == 'Attribute')
+                    self.assertEqual(attribute[4], '')  # attribute description header is unconfirmed: not written
+                    self.assertTrue(read('attribute_descriptions.csv')[1][1])
                     report = json.loads((folder / 'reconciliation.json').read_text())
-                    self.assertIn('not native-import-ready', report['candidate_schema']['status'])
-                    self.assertEqual(report['attributes'][0]['config_string'], candidate[-1][-1])
+                    self.assertEqual(report['sheet_schema']['version'], 2)
+                    self.assertIn('NOT import-tested', report['sheet_schema']['status'])
+                    self.assertEqual(report['attributes'][0]['config_string'], attribute[-1])
+                    self.assertIn('NOT import-tested', (folder / 'IMPORT_STEPS.txt').read_text(encoding='utf-8'))
                     if model is callout:
-                        self.assertEqual(candidate[-1][-2:], ['', ''])
+                        self.assertEqual(attribute[-2:], ['', ''])
+                    elif 'pi_point' in model['instruments'][0]:
+                        self.assertEqual(attribute[0], 'x')
+                        self.assertTrue(report['attributes'][0]['selected'])
+                    else:
+                        self.assertIn('PLACEHOLDER', attribute[-1])
+                        self.assertEqual(attribute[0], '')  # never selected, so PI Builder will not publish it
+                        self.assertFalse(report['attributes'][0]['selected'])
+
+    def test_seed_sheet_defines_its_templates_first_and_its_custom_units(self):
+        model = json.loads((ROOT / 'data/te_process_model.json').read_text(encoding='utf-8'))
+        rows = generate.pi_af_rows(model)
+        kinds = [r[3] for r in rows]
+        first_element = kinds.index('Element')
+        self.assertEqual(set(kinds[:first_element]), {'ElementTemplate'})
+        defined = {r[2] for r in rows if r[3] == 'ElementTemplate'}
+        used = {r[5] for r in rows if r[3] == 'Element' and r[5]}
+        self.assertEqual(used, defined)
+        uoms = {r[7] for r in rows if r[3] == 'Attribute'}
+        self.assertNotIn('degC', uoms)
+        self.assertIn('\u00b0C', uoms)
+        custom = list(csv.DictReader(io.StringIO(custom_uoms_text(rows).lstrip('\ufeff'))))
+        self.assertEqual({c['abbreviation'] for c in custom}, uoms & set(CUSTOM_UOMS))
+        self.assertEqual({c['abbreviation'] for c in custom}, {'kg/h', 'kPa g', 'kscmh', 'mol%'})
+        for c in custom:
+            self.assertTrue(c['note'] and c['uom_class'] and int(c['used_by_attributes']) > 0)
 
     def test_actual_reviewed_callout_remains_blocked(self):
         model = json.loads((ROOT / 'out/twin/r2-tiles-trace/codex/plant_model.json').read_text())
@@ -171,7 +203,7 @@ class PIMappingTests(unittest.TestCase):
     def test_reconciliation_is_explicitly_unverified(self):
         mapped, _ = plan_mapping(twin_fixture(), [row()])
         report = reconciliation(mapped, generate.twin_pi_rows(mapped))
-        self.assertIn('NOT tested', report['status'])
+        self.assertIn('NOT import-tested', report['status'])
         self.assertEqual(report['expected_attribute_rows'], 1)
         self.assertEqual(report['unmapped_asset_ids'], [])
         self.assertIn('reviewed_by', report['mapped']['I-1'])

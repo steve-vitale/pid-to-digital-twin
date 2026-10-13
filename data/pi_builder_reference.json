@@ -1,0 +1,1093 @@
+{
+ "schema": "pid-pi-builder-reference/1",
+ "status": "Offline evidence only. Every entry was read on 2026-10-13 in a vendor-published workbook or a vendor-published AF export; some sheet headers were read from workbook screenshots by OCR and checked by eye. None of it was checked against an installed PI Builder or AF server. Absence from these sources is not evidence that PI Builder or AF rejects a value.",
+ "sources": {
+  "beyond": {
+   "title": "Asset Framework: Beyond the Basics, course workbook (OSIsoft/AVEVA)",
+   "url": "https://osicdn.blob.core.windows.net/learningcontent/Online%20Course%20Workbooks/Asset%20Framework_Beyond%20the%20Basics_Workbook.pdf",
+   "pages": "PDF page = printed page"
+  },
+  "techcon2016": {
+   "title": "2016 TechCon: Tips and Tricks with PI System Explorer and PI Builder, lab workbook (OSIsoft)",
+   "url": "http://cdn.osisoft.com/learningcontent/pdfs/TechCon2016_TipsandTrickswithPISystemExplorerandPIBuilder.pdf",
+   "pages": "PDF page = printed page"
+  },
+  "assets": {
+   "title": "Building PI System Assets and Analytics with PI AF, course workbook (AVEVA, 2021)",
+   "url": "https://cdn.osisoft.com/learningcontent/pdfs/BuildingPISystemAssetsWorkbook.pdf",
+   "pages": "printed page, with the PDF page where it differs"
+  },
+  "af_sdk_sample": {
+   "title": "AVEVA AF-SDK-Getting-Started-Guide, 'AF Database - Green Power Company.xml' (AF 2.8.6 export, ExportMode AllReferences)",
+   "url": "https://github.com/AVEVA/AF-SDK-Getting-Started-Guide/blob/master/AF%20Database%20-%20Green%20Power%20Company.xml",
+   "license": "Apache-2.0 (repository AVEVA/AF-SDK-Getting-Started-Guide)"
+  },
+  "af_xsd": {
+   "title": "OSIsoft.AF XML schema (copyright OSIsoft); copies are redistributed in third-party repositories, e.g. ThinkIQ-Labs/PI-AF-to-OPC-UA",
+   "url": "https://github.com/ThinkIQ-Labs/PI-AF-to-OPC-UA/blob/master/PIAF_Interop/Schema/OSIsoft.AF_2018.xsd",
+   "note": "Not redistributed here. AFAttribute Type, DefaultUOM and ConfigString are plain xs:string in it, so XML schema validation alone would not check type or UOM values. The schema does let an import file define its own UOM (UOM: Name, Abbreviation, RefFactor, Class)."
+  }
+ },
+ "columns": {
+  "Selected(x)": [
+   "beyond p87 (text and sheet screenshot)",
+   "techcon2016 p25-26 (sheet screenshots)"
+  ],
+  "Parent": [
+   "beyond p87, p92 (sheet screenshots)",
+   "techcon2016 p26 (element and attribute rows)",
+   "assets printed p49, PDF p53 (sheet screenshot)"
+  ],
+  "Name": [
+   "beyond p87, p92",
+   "techcon2016 p26",
+   "assets printed p49"
+  ],
+  "ObjectType": [
+   "techcon2016 p25: 'There is a mandatory additional property called ObjectType'",
+   "beyond p87, p92",
+   "techcon2016 p26",
+   "assets printed p49"
+  ],
+  "Template": [
+   "techcon2016 p26 (sheet screenshot)",
+   "assets printed p49 (sheet screenshot)"
+  ],
+  "AttributeType": [
+   "beyond p92: 'we set the AttributeDefaultUOM to m2 and the AttributeType to Single'",
+   "beyond p87 (sheet screenshot)"
+  ],
+  "AttributeDefaultUOM": [
+   "beyond p92 (text and sheet screenshot)"
+  ],
+  "AttributeDataReference": [
+   "beyond p87 (sheet screenshot)",
+   "techcon2016 p26 (sheet screenshot)"
+  ],
+  "AttributeConfigString": [
+   "beyond p87 (text and sheet screenshot)",
+   "techcon2016 p26 (sheet screenshot)"
+  ],
+  "AttributeDefaultValue": [
+   "beyond p91 (text)"
+  ],
+  "AttributeValue": [
+   "techcon2016 p26 (sheet screenshot)"
+  ],
+  "ReferenceType": [
+   "techcon2016 p26 (sheet screenshot: Parent-Child)"
+  ],
+  "NewParent": [
+   "techcon2016 p26 (column dialog)"
+  ],
+  "NewName": [
+   "assets printed p49: 'use the NewName column in the PI Builder'"
+  ],
+  "Description": [
+   "techcon2016 p25 (PIPoint sheet screenshot: a Description header)",
+   "techcon2016 p31 (Element column dialog lists Description beside Template and ReferenceType, which appear unprefixed as sheet headers on the same page)",
+   "beyond p89 (ElementTemplate column dialog lists Description)"
+  ]
+ },
+ "columns_unconfirmed": {
+  "AttributeDescription": "An attribute's Description property is listed in the attribute column dialog (techcon2016 p26), but no sheet in the sources read shows the header for it. By the observed Attribute-prefix rule (AttributeType, AttributeDefaultUOM, AttributeTrait on techcon2016 p58, ...) it would be AttributeDescription, but an OCR pass over every screenshot in the three workbooks above (and a 2020 AF lab workbook) found no such header; unconfirmed, so this repository does not write attribute descriptions into the sheet."
+ },
+ "columns_not_documented": {
+  "AttributeValueType": "Not seen in any source read. The column dialog lists the attribute property as Type (techcon2016 p26) and the sheets show AttributeType (beyond p87, p92)."
+ },
+ "object_types": {
+  "Element": [
+   "techcon2016 p26, p31",
+   "assets printed p49"
+  ],
+  "Attribute": [
+   "techcon2016 p26"
+  ],
+  "ElementTemplate": [
+   "beyond p87, p89, p92"
+  ],
+  "AttributeTemplate": [
+   "beyond p87, p91, p92"
+  ],
+  "PIPoint": [
+   "techcon2016 p25"
+  ]
+ },
+ "element_template_rows": "ElementTemplate rows have an empty Parent and the template name in Name (beyond p92 sheet screenshot).",
+ "parent_convention": "Element rows give the parent element's path; attribute rows give their own element's full path, e.g. Facility1\\Area4\\Rotating Equipment\\P-101 (techcon2016 p26).",
+ "attribute_types": {
+  "Double": [
+   "beyond p87 (screenshot)",
+   "af_sdk_sample"
+  ],
+  "Single": [
+   "beyond p92"
+  ],
+  "Int16": [
+   "beyond p92 (sheet screenshot: AreaID, AttributeTemplate, Int16)"
+  ],
+  "String": [
+   "beyond p87 (screenshot)",
+   "af_sdk_sample"
+  ],
+  "AFEnumerationValue": [
+   "beyond p87 (screenshot)",
+   "af_sdk_sample"
+  ]
+ },
+ "attribute_types_note": "Int32 is in this repo's narrow mapper allowlist but was not seen in the sources read.",
+ "data_references": {
+  "PI Point": [
+   "techcon2016 p26",
+   "af_sdk_sample"
+  ],
+  "String Builder": [
+   "techcon2016 p26"
+  ]
+ },
+ "config_string": {
+  "default_template_form": "\\\\%Server%\\%Element%.%Attribute%",
+  "default_template_form_evidence": "assets printed p209, PDF p212: 'The default setting for a PI Point Data Reference attribute template'",
+  "server_substitution_evidence": "assets printed p210, PDF p213: %Server% is the default Data Archive; 'The %Server% parameter does not resolve to the computer on which the AF database resides.'",
+  "uom_suffix_evidence": "techcon2016 p26 screenshot (';UOM=gpm'); af_sdk_sample attribute templates (';UOM=kWh;pointtype=Float64')",
+  "uom_suffix_note": "A ;UOM= suffix states the PI Point value's source UOM; AttributeDefaultUOM is the attribute's default (display) UOM."
+ },
+ "uom_guidance": "assets printed p29, PDF p33: 'Always assign a unit of measurement! Do not leave this undefined.'",
+ "site_uom_lookup": "PI Builder: Library > Units of Measure > Find UOM Classes loads the installed UOM classes and units into a sheet, and new units can be published from a sheet (beyond p110-112). That sheet is the authority for a site, not this file.",
+ "uom_sample": {
+  "source": "af_sdk_sample",
+  "note": "Only the UOM classes that one database references (33 classes, 186 units). It is a subset of the AF default UOM database: absence here does not mean absence there.",
+  "units": [
+   {
+    "class": "Angular Velocity",
+    "name": "radian per second",
+    "abbreviation": "rad/s"
+   },
+   {
+    "class": "Angular Velocity",
+    "name": "revolution per minute",
+    "abbreviation": "rpm"
+   },
+   {
+    "class": "Area",
+    "name": "acre",
+    "abbreviation": "acre"
+   },
+   {
+    "class": "Area",
+    "name": "hectare",
+    "abbreviation": "ha"
+   },
+   {
+    "class": "Area",
+    "name": "square centimeter",
+    "abbreviation": "cm2"
+   },
+   {
+    "class": "Area",
+    "name": "square foot",
+    "abbreviation": "ft2"
+   },
+   {
+    "class": "Area",
+    "name": "square inch",
+    "abbreviation": "in2"
+   },
+   {
+    "class": "Area",
+    "name": "square kilometer",
+    "abbreviation": "km2"
+   },
+   {
+    "class": "Area",
+    "name": "square meter",
+    "abbreviation": "m2"
+   },
+   {
+    "class": "Area",
+    "name": "square mile",
+    "abbreviation": "mi2"
+   },
+   {
+    "class": "Area",
+    "name": "square millimeter",
+    "abbreviation": "mm2"
+   },
+   {
+    "class": "Area",
+    "name": "square yard",
+    "abbreviation": "yd2"
+   },
+   {
+    "class": "Density",
+    "name": "gram per liter",
+    "abbreviation": "g/L"
+   },
+   {
+    "class": "Density",
+    "name": "kilogram per cubic meter",
+    "abbreviation": "kg/m3"
+   },
+   {
+    "class": "Density",
+    "name": "kilogram per liter",
+    "abbreviation": "kg/L"
+   },
+   {
+    "class": "Density",
+    "name": "pound per US gallon",
+    "abbreviation": "lb/US gal"
+   },
+   {
+    "class": "Density",
+    "name": "pound per barrel",
+    "abbreviation": "lb/bbl"
+   },
+   {
+    "class": "Density",
+    "name": "pound per cubic foot",
+    "abbreviation": "lb/ft3"
+   },
+   {
+    "class": "Density",
+    "name": "tonne per cubic meter",
+    "abbreviation": "t/m3"
+   },
+   {
+    "class": "Dynamic Viscosity",
+    "name": "pascal second",
+    "abbreviation": "Pa*s"
+   },
+   {
+    "class": "Dynamic Viscosity",
+    "name": "poise",
+    "abbreviation": "P"
+   },
+   {
+    "class": "Electric Charge",
+    "name": "Ampere hour",
+    "abbreviation": "Ah"
+   },
+   {
+    "class": "Electric Charge",
+    "name": "coulomb",
+    "abbreviation": "C"
+   },
+   {
+    "class": "Electric Current",
+    "name": "ampere",
+    "abbreviation": "A"
+   },
+   {
+    "class": "Electric Current",
+    "name": "milliampere",
+    "abbreviation": "mA"
+   },
+   {
+    "class": "Electric Potential",
+    "name": "kilovolt",
+    "abbreviation": "kV"
+   },
+   {
+    "class": "Electric Potential",
+    "name": "megavolt",
+    "abbreviation": "MV"
+   },
+   {
+    "class": "Electric Potential",
+    "name": "volt",
+    "abbreviation": "V"
+   },
+   {
+    "class": "Electric Resistance",
+    "name": "ohm",
+    "abbreviation": "Ω"
+   },
+   {
+    "class": "Energy",
+    "name": "British thermal unit",
+    "abbreviation": "Btu"
+   },
+   {
+    "class": "Energy",
+    "name": "calorie",
+    "abbreviation": "cal"
+   },
+   {
+    "class": "Energy",
+    "name": "gigajoule",
+    "abbreviation": "GJ"
+   },
+   {
+    "class": "Energy",
+    "name": "gigawatt hour",
+    "abbreviation": "GWh"
+   },
+   {
+    "class": "Energy",
+    "name": "joule",
+    "abbreviation": "J"
+   },
+   {
+    "class": "Energy",
+    "name": "kilocalorie",
+    "abbreviation": "kcal"
+   },
+   {
+    "class": "Energy",
+    "name": "kilojoule",
+    "abbreviation": "kJ"
+   },
+   {
+    "class": "Energy",
+    "name": "kilowatt hour",
+    "abbreviation": "kWh"
+   },
+   {
+    "class": "Energy",
+    "name": "megajoule",
+    "abbreviation": "MJ"
+   },
+   {
+    "class": "Energy",
+    "name": "megawatt hour",
+    "abbreviation": "MWh"
+   },
+   {
+    "class": "Energy",
+    "name": "million British thermal unit",
+    "abbreviation": "MM Btu"
+   },
+   {
+    "class": "Energy",
+    "name": "million calorie",
+    "abbreviation": "MMcal"
+   },
+   {
+    "class": "Energy",
+    "name": "watt hour",
+    "abbreviation": "Wh"
+   },
+   {
+    "class": "Energy",
+    "name": "watt second",
+    "abbreviation": "Ws"
+   },
+   {
+    "class": "Entropy, Heat Capacity",
+    "name": "British thermal unit per degree Fahrenheit",
+    "abbreviation": "Btu/°F"
+   },
+   {
+    "class": "Entropy, Heat Capacity",
+    "name": "British thermal unit per degree Rankine",
+    "abbreviation": "Btu/°R"
+   },
+   {
+    "class": "Entropy, Heat Capacity",
+    "name": "joule per kelvin",
+    "abbreviation": "J/K"
+   },
+   {
+    "class": "Entropy, Heat Capacity",
+    "name": "kilojoule per kelvin",
+    "abbreviation": "kJ/K"
+   },
+   {
+    "class": "Force",
+    "name": "dyne",
+    "abbreviation": "dyne"
+   },
+   {
+    "class": "Force",
+    "name": "kilogram-force",
+    "abbreviation": "kgf"
+   },
+   {
+    "class": "Force",
+    "name": "newton",
+    "abbreviation": "N"
+   },
+   {
+    "class": "Force",
+    "name": "pound-force",
+    "abbreviation": "lbf"
+   },
+   {
+    "class": "Frequency",
+    "name": "hertz",
+    "abbreviation": "Hz"
+   },
+   {
+    "class": "Length",
+    "name": "International nautical mile",
+    "abbreviation": "nmi"
+   },
+   {
+    "class": "Length",
+    "name": "centimeter",
+    "abbreviation": "cm"
+   },
+   {
+    "class": "Length",
+    "name": "foot",
+    "abbreviation": "ft"
+   },
+   {
+    "class": "Length",
+    "name": "inch",
+    "abbreviation": "in"
+   },
+   {
+    "class": "Length",
+    "name": "kilometer",
+    "abbreviation": "km"
+   },
+   {
+    "class": "Length",
+    "name": "meter",
+    "abbreviation": "m"
+   },
+   {
+    "class": "Length",
+    "name": "mile",
+    "abbreviation": "mi"
+   },
+   {
+    "class": "Length",
+    "name": "millimeter",
+    "abbreviation": "mm"
+   },
+   {
+    "class": "Length",
+    "name": "sixteenth of an inch",
+    "abbreviation": "sxi"
+   },
+   {
+    "class": "Length",
+    "name": "yard",
+    "abbreviation": "yd"
+   },
+   {
+    "class": "Luminous Intensity",
+    "name": "candela",
+    "abbreviation": "cd"
+   },
+   {
+    "class": "Mass",
+    "name": "gram",
+    "abbreviation": "g"
+   },
+   {
+    "class": "Mass",
+    "name": "kilogram",
+    "abbreviation": "kg"
+   },
+   {
+    "class": "Mass",
+    "name": "long ton",
+    "abbreviation": "lton"
+   },
+   {
+    "class": "Mass",
+    "name": "milligram",
+    "abbreviation": "mg"
+   },
+   {
+    "class": "Mass",
+    "name": "million pound",
+    "abbreviation": "MM lb"
+   },
+   {
+    "class": "Mass",
+    "name": "ounce",
+    "abbreviation": "oz"
+   },
+   {
+    "class": "Mass",
+    "name": "pound",
+    "abbreviation": "lb"
+   },
+   {
+    "class": "Mass",
+    "name": "short ton",
+    "abbreviation": "ston"
+   },
+   {
+    "class": "Mass",
+    "name": "thousand pound",
+    "abbreviation": "klb"
+   },
+   {
+    "class": "Mass",
+    "name": "ton",
+    "abbreviation": "ton"
+   },
+   {
+    "class": "Mass",
+    "name": "tonne",
+    "abbreviation": "t"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "gram per second",
+    "abbreviation": "g/s"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "kilogram per second",
+    "abbreviation": "kg/s"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "long ton per day",
+    "abbreviation": "lton/d"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "million pound per day",
+    "abbreviation": "MMlb/d"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "pound per second",
+    "abbreviation": "lb/s"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "short ton per day",
+    "abbreviation": "ston/d"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "thousand pound per day",
+    "abbreviation": "klb/d"
+   },
+   {
+    "class": "Mass Flow Rate",
+    "name": "tonne per day",
+    "abbreviation": "t/d"
+   },
+   {
+    "class": "Molar Flow Rate",
+    "name": "gram mole per second",
+    "abbreviation": "gmol/s"
+   },
+   {
+    "class": "Molar Flow Rate",
+    "name": "kilogram mole per second",
+    "abbreviation": "kmol/s"
+   },
+   {
+    "class": "Molar Flow Rate",
+    "name": "mole per second",
+    "abbreviation": "mol/s"
+   },
+   {
+    "class": "Molar Flow Rate",
+    "name": "pound mole per second",
+    "abbreviation": "lbmol/s"
+   },
+   {
+    "class": "Molecular Weight",
+    "name": "gram per gram mole",
+    "abbreviation": "g/gmol"
+   },
+   {
+    "class": "Molecular Weight",
+    "name": "kilogram per kilogram mole",
+    "abbreviation": "kg/kmol"
+   },
+   {
+    "class": "Molecular Weight",
+    "name": "kilogram per mole",
+    "abbreviation": "kg/mol"
+   },
+   {
+    "class": "Molecular Weight",
+    "name": "pound per pound mole",
+    "abbreviation": "lb/lbmol"
+   },
+   {
+    "class": "Moles",
+    "name": "gram mole",
+    "abbreviation": "gmol"
+   },
+   {
+    "class": "Moles",
+    "name": "kilogram mole",
+    "abbreviation": "kmol"
+   },
+   {
+    "class": "Moles",
+    "name": "mole",
+    "abbreviation": "mol"
+   },
+   {
+    "class": "Moles",
+    "name": "pound mole",
+    "abbreviation": "lbmol"
+   },
+   {
+    "class": "Plane Angle",
+    "name": "degree",
+    "abbreviation": "°"
+   },
+   {
+    "class": "Plane Angle",
+    "name": "radian",
+    "abbreviation": "rad"
+   },
+   {
+    "class": "Plane Angle",
+    "name": "revolution",
+    "abbreviation": "r"
+   },
+   {
+    "class": "Power",
+    "name": "British thermal unit per hour",
+    "abbreviation": "Btu/h"
+   },
+   {
+    "class": "Power",
+    "name": "calorie per second",
+    "abbreviation": "cal/s"
+   },
+   {
+    "class": "Power",
+    "name": "gigawatt",
+    "abbreviation": "GW"
+   },
+   {
+    "class": "Power",
+    "name": "horsepower",
+    "abbreviation": "hp"
+   },
+   {
+    "class": "Power",
+    "name": "joule per second",
+    "abbreviation": "J/s"
+   },
+   {
+    "class": "Power",
+    "name": "kilowatt",
+    "abbreviation": "kW"
+   },
+   {
+    "class": "Power",
+    "name": "megajoule per hour",
+    "abbreviation": "MJ/h"
+   },
+   {
+    "class": "Power",
+    "name": "megawatt",
+    "abbreviation": "MW"
+   },
+   {
+    "class": "Power",
+    "name": "million British thermal unit per day",
+    "abbreviation": "MM Btu/d"
+   },
+   {
+    "class": "Power",
+    "name": "million British thermal unit per hour",
+    "abbreviation": "MM Btu/h"
+   },
+   {
+    "class": "Power",
+    "name": "million calorie per hour",
+    "abbreviation": "MMcal/h"
+   },
+   {
+    "class": "Power",
+    "name": "watt",
+    "abbreviation": "W"
+   },
+   {
+    "class": "Pressure",
+    "name": "atmosphere",
+    "abbreviation": "atm"
+   },
+   {
+    "class": "Pressure",
+    "name": "bar",
+    "abbreviation": "bar"
+   },
+   {
+    "class": "Pressure",
+    "name": "inches of mercury",
+    "abbreviation": "inHg"
+   },
+   {
+    "class": "Pressure",
+    "name": "kilogram-force per square centimeter",
+    "abbreviation": "kgf/cm2"
+   },
+   {
+    "class": "Pressure",
+    "name": "kilogram-force per square meter",
+    "abbreviation": "kgf/m2"
+   },
+   {
+    "class": "Pressure",
+    "name": "kilopascal",
+    "abbreviation": "kPa"
+   },
+   {
+    "class": "Pressure",
+    "name": "millimeter of mercury",
+    "abbreviation": "mmHg"
+   },
+   {
+    "class": "Pressure",
+    "name": "newton per square meter",
+    "abbreviation": "N/m2"
+   },
+   {
+    "class": "Pressure",
+    "name": "pascal",
+    "abbreviation": "Pa"
+   },
+   {
+    "class": "Pressure",
+    "name": "pound-force per square inch",
+    "abbreviation": "psi"
+   },
+   {
+    "class": "Pressure",
+    "name": "pound-force per square inch (customary)",
+    "abbreviation": "psia"
+   },
+   {
+    "class": "Pressure",
+    "name": "torr",
+    "abbreviation": "torr"
+   },
+   {
+    "class": "Quantity",
+    "name": "count",
+    "abbreviation": "count"
+   },
+   {
+    "class": "Ratio",
+    "name": "parts per billion",
+    "abbreviation": "ppb"
+   },
+   {
+    "class": "Ratio",
+    "name": "parts per million",
+    "abbreviation": "ppm"
+   },
+   {
+    "class": "Ratio",
+    "name": "percent",
+    "abbreviation": "%"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "British thermal unit per pound",
+    "abbreviation": "Btu/lb"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "joule per gram",
+    "abbreviation": "J/g"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "joule per kilogram",
+    "abbreviation": "J/kg"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "kilocalorie per kilogram",
+    "abbreviation": "kcal/kg"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "kilojoule per kilogram",
+    "abbreviation": "kJ/kg"
+   },
+   {
+    "class": "Specific Energy",
+    "name": "kilojoule per pound",
+    "abbreviation": "kJ/lb"
+   },
+   {
+    "class": "Specific Entropy, Specific Heat Capacity",
+    "name": "British thermal unit per pound degree Fahrenheit",
+    "abbreviation": "Btu/(lb °F)"
+   },
+   {
+    "class": "Specific Entropy, Specific Heat Capacity",
+    "name": "British thermal unit per pound degree Rankine",
+    "abbreviation": "Btu/(lb °R)"
+   },
+   {
+    "class": "Specific Entropy, Specific Heat Capacity",
+    "name": "joule per gram kelvin",
+    "abbreviation": "J/(g K)"
+   },
+   {
+    "class": "Specific Entropy, Specific Heat Capacity",
+    "name": "joule per kilogram kelvin",
+    "abbreviation": "J/(kg K)"
+   },
+   {
+    "class": "Specific Entropy, Specific Heat Capacity",
+    "name": "kilojoule per kilogram kelvin",
+    "abbreviation": "kJ/(kg K)"
+   },
+   {
+    "class": "Specific Volume",
+    "name": "cubic centimeter per gram",
+    "abbreviation": "cm3/g"
+   },
+   {
+    "class": "Specific Volume",
+    "name": "cubic foot per pound",
+    "abbreviation": "ft3/lb"
+   },
+   {
+    "class": "Specific Volume",
+    "name": "cubic meter per kilogram",
+    "abbreviation": "m3/kg"
+   },
+   {
+    "class": "Speed",
+    "name": "International nautical mile per hour",
+    "abbreviation": "nmi/h"
+   },
+   {
+    "class": "Speed",
+    "name": "centimeter per second",
+    "abbreviation": "cm/s"
+   },
+   {
+    "class": "Speed",
+    "name": "foot per second",
+    "abbreviation": "ft/s"
+   },
+   {
+    "class": "Speed",
+    "name": "kilometer per hour",
+    "abbreviation": "km/h"
+   },
+   {
+    "class": "Speed",
+    "name": "meter per second",
+    "abbreviation": "m/s"
+   },
+   {
+    "class": "Speed",
+    "name": "mile per hour",
+    "abbreviation": "mi/h"
+   },
+   {
+    "class": "Temperature",
+    "name": "degree Celsius",
+    "abbreviation": "°C"
+   },
+   {
+    "class": "Temperature",
+    "name": "degree Fahrenheit",
+    "abbreviation": "°F"
+   },
+   {
+    "class": "Temperature",
+    "name": "degree Rankine",
+    "abbreviation": "°R"
+   },
+   {
+    "class": "Temperature",
+    "name": "kelvin",
+    "abbreviation": "K"
+   },
+   {
+    "class": "Temperature (Delta)",
+    "name": "delta degree Celsius",
+    "abbreviation": "delta °C"
+   },
+   {
+    "class": "Temperature (Delta)",
+    "name": "delta degree Fahrenheit",
+    "abbreviation": "delta °F"
+   },
+   {
+    "class": "Temperature (Delta)",
+    "name": "delta degree Rankine",
+    "abbreviation": "delta °R"
+   },
+   {
+    "class": "Temperature (Delta)",
+    "name": "delta kelvin",
+    "abbreviation": "delta K"
+   },
+   {
+    "class": "Time",
+    "name": "day",
+    "abbreviation": "d"
+   },
+   {
+    "class": "Time",
+    "name": "hour",
+    "abbreviation": "h"
+   },
+   {
+    "class": "Time",
+    "name": "minute",
+    "abbreviation": "min"
+   },
+   {
+    "class": "Time",
+    "name": "month",
+    "abbreviation": "month"
+   },
+   {
+    "class": "Time",
+    "name": "second",
+    "abbreviation": "s"
+   },
+   {
+    "class": "Time",
+    "name": "week",
+    "abbreviation": "week"
+   },
+   {
+    "class": "Time",
+    "name": "year",
+    "abbreviation": "yr"
+   },
+   {
+    "class": "Volume",
+    "name": "Imperial gallon",
+    "abbreviation": "Imp gal"
+   },
+   {
+    "class": "Volume",
+    "name": "US gallon",
+    "abbreviation": "US gal"
+   },
+   {
+    "class": "Volume",
+    "name": "acre foot",
+    "abbreviation": "acre ft"
+   },
+   {
+    "class": "Volume",
+    "name": "barrel",
+    "abbreviation": "bbl"
+   },
+   {
+    "class": "Volume",
+    "name": "cubic centimeter",
+    "abbreviation": "cm3"
+   },
+   {
+    "class": "Volume",
+    "name": "cubic foot",
+    "abbreviation": "ft3"
+   },
+   {
+    "class": "Volume",
+    "name": "cubic meter",
+    "abbreviation": "m3"
+   },
+   {
+    "class": "Volume",
+    "name": "kiloliter",
+    "abbreviation": "kL"
+   },
+   {
+    "class": "Volume",
+    "name": "liter",
+    "abbreviation": "L"
+   },
+   {
+    "class": "Volume",
+    "name": "megaliter",
+    "abbreviation": "M L"
+   },
+   {
+    "class": "Volume",
+    "name": "milliliter",
+    "abbreviation": "mL"
+   },
+   {
+    "class": "Volume",
+    "name": "million US gallon",
+    "abbreviation": "US Mgal"
+   },
+   {
+    "class": "Volume",
+    "name": "million barrel",
+    "abbreviation": "MMbbl"
+   },
+   {
+    "class": "Volume",
+    "name": "million imperial gallon",
+    "abbreviation": "Imp Mgal"
+   },
+   {
+    "class": "Volume",
+    "name": "thousand US gallon",
+    "abbreviation": "US kgal"
+   },
+   {
+    "class": "Volume",
+    "name": "thousand barrel",
+    "abbreviation": "kbbl"
+   },
+   {
+    "class": "Volume",
+    "name": "thousand cubic meter",
+    "abbreviation": "k m3"
+   },
+   {
+    "class": "Volume",
+    "name": "thousand imperial gallon",
+    "abbreviation": "Imp kgal"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "Imperial gallon per minute",
+    "abbreviation": "Imp gal/min"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "US gallon per minute",
+    "abbreviation": "US gal/min"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "barrel per day",
+    "abbreviation": "bbl/d"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "cubic centimeter per second",
+    "abbreviation": "cm3/s"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "cubic foot per second",
+    "abbreviation": "ft3/s"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "cubic meter per hour",
+    "abbreviation": "m3/h"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "cubic meter per second",
+    "abbreviation": "m3/s"
+   },
+   {
+    "class": "Volume Flow Rate",
+    "name": "liter per second",
+    "abbreviation": "L/s"
+   }
+  ]
+ }
+}
