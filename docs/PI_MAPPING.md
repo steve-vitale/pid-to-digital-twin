@@ -55,38 +55,50 @@ Simple literal references are supported; complex point names requiring delimiter
 escaping must remain pending until their native syntax has been reviewed. Multiple
 assets may explicitly reference the same point; that choice is retained for review.
 
-## Generated reconciliation and native handoff
+## Generated PI files (sheet schema v2) and native handoff
 
-`pi/pi_builder_af.csv` remains the repository's **PI Builder-style staging format**.
-`pi/pi_builder_UNVALIDATED_candidate_v1.csv` is a separate, versioned candidate
-that corrects only the vendor-observed header mismatch: `AttributeValueType` →
-`AttributeType`. Its row data is identical to the legacy staging CSV. This is an
-**UNVALIDATED candidate, not native-import-ready**; no other schema correction is
-invented. Verify the remaining Parent/Name/ObjectType/Template/data-reference
-headers, element/attribute row identities, parent paths and installed-version
-conventions against a retrieved native workbook before any import.
+**Not import-tested.** None of these files has been published to a licensed PI AF server. Every file says so, and
+so does `reconciliation.json`. Each export writes four files under `pi/`, plus `reconciliation.json` for an extracted
+twin:
 
-`pi/reconciliation.json` lists the candidate schema/version, remaining contract
-checks, vendor source/pages, asset IDs, exported attribute paths/names, mapping
-attestations, config strings, types/UOMs, unresolved placeholders, counts and the
-native verification checklist. The status explicitly says native PI Builder
-import has **not been tested**. No PI point creation, PI connection, account access,
-read-back or import is performed by these scripts.
+| File | What it holds |
+|---|---|
+| `pi_builder_af.csv` | The PI Builder sheet: element templates first, then elements, then attributes, with the headers the vendor sheets show (`Selected(x)`, `Parent`, `Name`, `ObjectType`, `Description`, `Template`, `AttributeType`, `AttributeDefaultUOM`, `AttributeDataReference`, `AttributeConfigString`) |
+| `custom_uoms.csv` | Every unit the sheet uses that has no vendor-published AF abbreviation in the sources read, with a definition (class, whether the class is new, name, abbreviation, reference unit, factor, offset, how many attributes use it, and a note). None of these units is assumed to exist |
+| `attribute_descriptions.csv` | Attribute descriptions (`<parent>\|<name>`, description). No vendor sheet shows the attribute description header, so they are kept out of the sheet |
+| `IMPORT_STEPS.txt` | The publish order, generated with this export's counts |
 
-CSV quoting preserves commas/quotes; spreadsheet formula-like free-text labels are
-prefixed with an apostrophe. Mapping fields reject formula-like text rather than
-silently changing the address. Review any escaped labels before native import.
-Ordinary unmapped legacy CSV rows remain unchanged.
+What changed from the v1 staging sheet:
+- **`AttributeType`** replaces `AttributeValueType`, which appears in no vendor source. The separate "UNVALIDATED
+  candidate" file is gone; a regenerated twin folder deletes its old copy.
+- **Units.**
+  - `degC` is written as the vendor abbreviation `°C`. `%`, `kW` and `m3/h` already matched.
+  - `kg/h`, `kPa g`, `kscmh` and `mol%` are defined in `custom_uoms.csv`:
+    - `kg/h` (Mass Flow Rate, 1/3600 of kg/s) is exact, and may already exist at a site.
+    - `mol%` (Ratio) is equal to percent.
+    - `kPa g` and `kscmh` each get their own new class with no conversion. A gauge-to-absolute conversion needs
+      the local atmospheric pressure, and standard volume is not actual volume.
+  - A site with its own convention maps these to its own units instead.
+- **Element templates.** The six TE templates (`FeedHeader`, `Reactor`, …) are `ElementTemplate` rows with an
+  empty `Parent`, at the top of the sheet (the convention on the vendor's p92 sheet). An empty AF database no longer
+  depends on templates that don't exist.
+- **Descriptions.** `Description` is written for element and template rows. It is listed as an Element and
+  ElementTemplate column in the vendor's column dialogs, and is a sheet header on the PIPoint sheet. It is left empty on
+  attribute rows.
+- **Placeholders.** An attribute whose PI point reference is a placeholder (the extracted twin's, which also have no
+  units) has an empty `Selected(x)`, so PI Builder won't publish it. `reconciliation.json` lists each attribute's
+  `selected` flag and status. Rows with a reviewed `pi_point` mapping are selected.
 
-Before an authorized native import, obtain a sample workbook/export from the
-installed PI Builder version and reconcile every column and row convention. In
-particular, the legacy staging CSV preserves `AttributeValueType`; the separate
-candidate uses the vendor-observed `AttributeType`. Neither is proof that a direct
-import is valid.
-Exclude unresolved placeholders. Use an authorized isolated AF database and
-reconcile imported counts, paths, references, types, UOMs and every mapped
-attribute's read-back value, timestamp and quality. Save native error/read-back
-evidence. Real plant data verification and operational approval remain separate.
+`reconciliation.json` (extracted twins) records the sheet schema, what changed from v1, the remaining contract
+checks, asset IDs, attribute paths, mapping attestations, config strings, types and units, the placeholder status of
+each row, element, template and attribute counts, and the native verification checklist. No PI point creation, PI
+connection, account access, read-back or import is performed by these scripts.
+
+CSV quoting preserves commas and quotes; spreadsheet formula-like free-text labels are prefixed with an apostrophe.
+Mapping fields reject formula-like text rather than silently changing the address.
+
+Before an authorized native import, still compare the header row and row conventions with a sheet retrieved from the
+installed PI Builder version (step 2 below). Both "documented" and "matches the vendor workbooks" mean only that.
 
 ## Primary-source basis and limits
 
@@ -106,17 +118,19 @@ The PI AF files have **never been imported into a licensed PI system**. Nothing 
 | Claim | Status | Evidence |
 |---|---|---|
 | Sheet headers `Selected(x)`, `Parent`, `Name`, `ObjectType`, `Template`, `AttributeType`, `AttributeDefaultUOM`, `AttributeDataReference`, `AttributeConfigString` | **Seen in vendor workbooks** | Beyond the Basics workbook pp87, 92; TechCon 2016 PI Builder lab p26 (sheet screenshots, read by OCR and checked by eye) |
-| `Description` as a sheet column, and attribute rows using it | **Unconfirmed** | Listed in the PI Builder column dialog (TechCon p26); not seen as a sheet header |
-| `AttributeValueType` (legacy staging CSV) | **Not a documented column** | The dialog calls the property Type and the sheets show `AttributeType`. The candidate CSV already uses `AttributeType` |
+| `Description` on element and template rows | **Listed as an Element / ElementTemplate column**, and a sheet header on the PIPoint sheet | TechCon pp25, 31; Beyond p89 |
+| Attribute description header (`AttributeDescription` by the prefix rule) | **Unconfirmed**, so not written: descriptions go to `attribute_descriptions.csv` | TechCon p26 lists the property only |
+| `AttributeValueType` (v1 sheet) | **Not a documented column**; replaced by `AttributeType` in v2 | The dialog calls the property Type and the sheets show `AttributeType` |
 | `ObjectType` values `Element` / `Attribute`; an attribute row's `Parent` is its element's full path | **Seen in a vendor sheet** | TechCon p26 |
 | Attribute type `Double` (all TE rows), `String` | **Seen in vendor sheets and a vendor AF export** | Beyond p87; AVEVA AF SDK sample export |
-| Attribute types `Int16`, `Int32` (mapper allowlist) | **Not seen** in the sources read | — |
+| Attribute type `Int16` | **Seen in a vendor sheet** | Beyond p92 screenshot |
+| Attribute type `Int32` (mapper allowlist) | **Not seen** in the sources read | — |
 | `\\%Server%\TE.<tag>.PV` | **Form documented**: `%Server%` is the default Data Archive, not the AF server | Building PI System Assets workbook, printed pp209–210 |
 | TE default UOMs `%`, `kW`, `m3/h` | **Exact abbreviations in a vendor AF export** | AVEVA AF SDK sample (Ratio, Power, Volume Flow Rate) |
-| `degC` | **Spelling differs**: the vendor abbreviation is `°C` (degree Celsius) | same sample |
-| `kg/h`, `kPa g`, `kscmh`, `mol%` | **Not in the vendor sample**, which holds only 33 of the default classes, so this does not prove they are missing. `kscmh` (thousand standard m³/h, a TE unit) and the gauge pressure `kPa g` are the likeliest to need custom UOMs | same sample |
-| Element templates `FeedHeader`, `Reactor`, … on the TE rows | **Referenced, never defined.** They must exist in the target database, or the column must be blanked | this file |
-| Extracted-twin export | All PI references are placeholders and no attribute has a UOM; the workbook says "Always assign a unit of measurement!" | Assets workbook printed p29 |
+| `degC` | **Spelling differed**; v2 writes the vendor abbreviation `°C` | same sample |
+| `kg/h`, `kPa g`, `kscmh`, `mol%` | **Not in the vendor sample**, which holds only 33 of the default classes, so that alone doesn't prove they are missing. v2 never assumes them: they are defined in `custom_uoms.csv` for the site to create or map | same sample |
+| Element templates `FeedHeader`, `Reactor`, … | v1 referenced them without defining them; **v2 defines them** as ElementTemplate rows ahead of the elements | Beyond p92 (ElementTemplate rows) |
+| Extracted-twin export | All PI references are placeholders and no attribute has a UOM. v2 leaves every placeholder row **unselected**, so it is not published (the workbook says "Always assign a unit of measurement!") | Assets workbook printed p29 |
 | Import, point resolution, read-back, value quality | **Not verified** | needs a PI system |
 
 `scripts/check_pi_export.py` turns that table into a check: `python scripts/check_pi_export.py out/pi/pi_builder_af.csv`
@@ -146,15 +160,16 @@ plant that already runs PI, or through a partner or academic arrangement.
 
 All of it in a separately authorized, isolated AF database, never production:
 
-1. `python scripts/check_pi_export.py <your export>/pi/pi_builder_UNVALIDATED_candidate_v1.csv`. Keep the output.
+1. `python scripts/check_pi_export.py <your export>/pi/pi_builder_af.csv` (it reads `custom_uoms.csv` beside
+   it). Keep the output, and follow `IMPORT_STEPS.txt` for the order.
 2. In PI Builder, connect to the test database. **Elements > Find Elements** on any existing element with attributes,
    with the Parent, Name, ObjectType, Description, Template and Attribute Type/DefaultUOM/DataReference/ConfigString
-   columns. Compare that header row and its row conventions with the candidate, column by column. Record the PI
+   columns. Compare that header row and its row conventions with `pi_builder_af.csv`, column by column. Record the PI
    Builder and AF versions.
 3. **Library > Units of Measure > Find UOM Classes**, all classes. For every UOM the check flagged, find the site's
    name or abbreviation, or decide to add a custom UOM (`kscmh`), and decide how gauge pressure (`kPa g`) is
-   represented. Fix the spellings (`degC` → the site's `°C` entry).
-4. Either create the element templates the file names, or blank the `Template` column.
+   represented. `custom_uoms.csv` gives a definition for each unit that may be missing.
+4. Publish the `ElementTemplate` rows first (select only them), or blank the `Template` column.
 5. Map real points with `scripts/map_pi_points.py` (reviewer-attested CSV), regenerate, re-run step 1. Leave out
    every placeholder row.
 6. Select the rows and **Publish** with Edit Mode **Create Only**. Save the "Publish Selected Objects" result list.

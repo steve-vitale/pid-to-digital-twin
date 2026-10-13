@@ -9,6 +9,8 @@ string) and values outside what the documented sheets show for a required column
 
     python scripts/check_pi_export.py out/pi/pi_builder_af.csv
     python scripts/check_pi_export.py out/pi/pi_builder_af.csv --json   # full report
+A custom_uoms.csv next to the sheet (or --custom-uoms PATH) lists units the sheet defines for the site to create;
+those count as defined, not as unknown.
 Exit codes: 0 no errors (warnings may remain), 1 errors, 2 unreadable input.
 """
 import argparse
@@ -28,6 +30,7 @@ ATTRIBUTE_FIELDS = ("AttributeType", "AttributeValueType", "AttributeDefaultUOM"
 SPELLING_VARIANTS = {"degC": "°C", "degF": "°F", "deg C": "°C", "deg F": "°F", "m^3/h": "m3/h"}
 # Repo mapper allowlist (scripts/pi_mapping.py); kept here so the check can say which entries lack vendor evidence.
 REPO_TYPE_ALLOWLIST = ("Double", "Single", "Int32", "Int16", "String")
+NOT_IMPORT_TESTED = "NOT import-tested on a licensed PI system"
 
 
 def load_reference(path=REFERENCE):
@@ -43,9 +46,21 @@ def read_csv_text(text):
     return rows[0], [dict(zip(rows[0], r)) for r in rows[1:]]
 
 
-def uom_finding(value, units):
+def read_custom_uoms(path):
+    """Units a sheet defines in its companion custom_uoms.csv (abbreviation -> definition row)."""
+    if not path or not Path(path).is_file():
+        return {}
+    _, rows = read_csv_text(Path(path).read_text(encoding="utf-8"))
+    return {r["abbreviation"]: r for r in rows if r.get("abbreviation")}
+
+
+def uom_finding(value, units, custom=None):
     if value == "":
         return {"status": "none", "note": "no default UOM"}
+    if custom and value in custom:
+        c = custom[value]
+        return {"status": "custom_defined", "class": c.get("uom_class"), "name": c.get("name"),
+                "note": "defined in custom_uoms.csv: the site creates it, or maps it to its own equivalent"}
     for u in units:
         if value in (u["abbreviation"], u["name"]):
             return {"status": "in_vendor_sample", "class": u["class"], "name": u["name"], "abbreviation": u["abbreviation"]}
@@ -73,10 +88,11 @@ def config_finding(value):
     return "other"
 
 
-def check(header, rows, ref=None):
+def check(header, rows, ref=None, custom=None):
     ref = ref or load_reference()
     documented = set(ref["columns"])
-    report = {"status": "OFFLINE CONVENTION CHECK ONLY; not a PI Builder import, not proof the file will import",
+    report = {"status": "OFFLINE CONVENTION CHECK ONLY; not a PI Builder import, not proof the file will import; "
+                        + NOT_IMPORT_TESTED,
               "rows": len(rows), "errors": [], "warnings": [], "columns": {}}
     for column in header:
         if column in documented:
@@ -99,7 +115,15 @@ def check(header, rows, ref=None):
         return report
     type_column = next((c for c in ("AttributeType", "AttributeValueType") if c in header), None)
     elements, keys = set(), Counter()
-    templates_defined = {r["Name"] for r in rows if r["ObjectType"] == "ElementTemplate"}
+    templates_defined, late_templates, seen_templates = set(), set(), set()
+    for r in rows:
+        if r["ObjectType"] == "ElementTemplate":
+            templates_defined.add(r["Name"])
+            if r["Name"] in seen_templates:
+                late_templates.add(r["Name"])
+        elif r["ObjectType"] == "Element" and r.get("Template"):
+            seen_templates.add(r["Template"])
+    held_back = 0
     for r in rows:
         if r["ObjectType"] == "Element":
             elements.add(r["Name"] if not r["Parent"] else r["Parent"] + "\\" + r["Name"])
@@ -115,23 +139,33 @@ def check(header, rows, ref=None):
             report["errors"].append(f"row {n}: Selected(x) must be 'x' or empty")
         if not r["Name"]:
             report["errors"].append(f"row {n}: empty Name")
-        if kind == "Element":
+        if kind in ("Element", "ElementTemplate"):
             filled = [c for c in ATTRIBUTE_FIELDS if r.get(c)]
             if filled:
-                report["errors"].append(f"row {n}: element row carries attribute fields {filled}")
-            if r.get("Template"):
+                report["errors"].append(f"row {n}: {kind} row carries attribute fields {filled}")
+            if kind == "Element" and r.get("Template"):
                 templates[r["Template"]] += 1
+            if kind == "ElementTemplate" and r["Parent"]:
+                report["errors"].append(f"row {n}: ElementTemplate rows have an empty Parent ({ref['element_template_rows']})")
         elif kind == "Attribute":
             if r["Parent"] not in elements:
                 report["errors"].append(f"row {n}: attribute parent {r['Parent']!r} is not an element in this file")
             if type_column:
                 types[r[type_column]] += 1
             uoms[r.get("AttributeDefaultUOM", "")] += 1
+            if r.get("Description"):
+                report["warnings"].append(f"row {n}: attribute description in the Description column "
+                                          f"({ref['columns_unconfirmed']['AttributeDescription']})")
             if r.get("AttributeDataReference") == "PI Point":
                 kind_cfg = config_finding(r.get("AttributeConfigString", ""))
                 configs[kind_cfg] += 1
                 if kind_cfg == "empty":
                     report["errors"].append(f"row {n}: PI Point data reference with no config string")
+                if kind_cfg == "placeholder":
+                    if r["Selected(x)"] == "x":
+                        report["errors"].append(f"row {n}: placeholder PI point reference is selected for publishing")
+                    else:
+                        held_back += 1
             elif r.get("AttributeDataReference"):
                 if r["AttributeDataReference"] not in ref["data_references"]:
                     report["warnings"].append(f"row {n}: data reference {r['AttributeDataReference']!r} not in the reference file")
@@ -149,15 +183,24 @@ def check(header, rows, ref=None):
         if status not in ("documented",):
             report["warnings"].append(f"attribute type {t!r}: {status}")
     units = ref["uom_sample"]["units"]
-    report["uoms"] = {u: dict(uom_finding(u, units), rows=c) for u, c in sorted(uoms.items())}
+    report["uoms"] = {u: dict(uom_finding(u, units, custom), rows=c) for u, c in sorted(uoms.items())}
     for u, f in report["uoms"].items():
         if f["status"] in ("spelling_differs", "not_in_vendor_sample"):
             report["warnings"].append(f"UOM {u!r} ({f['rows']} rows): {f['status']}")
+    custom_used = sorted(u for u, f in report["uoms"].items() if f["status"] == "custom_defined")
+    if custom_used:
+        report["warnings"].append(f"units {custom_used} are defined in custom_uoms.csv: create them, or map them to "
+                                  "the site's own units, before publishing")
     if uoms.get(""):
         report["warnings"].append(f"{uoms['']} attributes have no default UOM ({ref['uom_guidance']})")
     report["config_strings"] = dict(configs)
-    if configs.get("placeholder"):
-        report["warnings"].append(f"{configs['placeholder']} PI Point references are placeholders: exclude them from any import")
+    report["placeholder_rows_held_back"] = held_back
+    if held_back:
+        report["warnings"].append(f"{held_back} PI Point references are placeholders; their rows are not selected, "
+                                  "so PI Builder will not publish them")
+    if late_templates:
+        report["warnings"].append(f"element templates {sorted(late_templates)} are defined after an element uses "
+                                  "them; publish the ElementTemplate rows first")
     undefined = sorted(set(templates) - templates_defined)
     report["element_templates_referenced_not_defined"] = undefined
     if undefined:
@@ -170,13 +213,15 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("csv")
     ap.add_argument("--json", action="store_true", help="print the full JSON report")
+    ap.add_argument("--custom-uoms", help="companion custom_uoms.csv (default: the one next to the sheet, if any)")
     args = ap.parse_args(argv)
     try:
         header, rows = read_csv_text(Path(args.csv).read_text(encoding="utf-8"))
+        custom = read_custom_uoms(args.custom_uoms or Path(args.csv).with_name("custom_uoms.csv"))
     except (OSError, UnicodeDecodeError, ValueError, csv.Error) as exc:
         print(f"cannot read {args.csv}: {exc}", file=sys.stderr)
         return 2
-    report = check(header, rows)
+    report = check(header, rows, custom=custom)
     if args.json:
         print(json.dumps(report, indent=1, ensure_ascii=False))
     else:

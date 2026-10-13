@@ -50,7 +50,8 @@ SOURCE_FILES = (
     "data/dataset_adapters/pid2graph_synthetic.json",
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
     "out/svg/overview.svg", f"{TWIN}/plant_model.json",
-    "data/pi_builder_reference.json", "out/pi/pi_builder_af.csv", f"{TWIN}/pi/pi_builder_af.csv",
+    "data/pi_builder_reference.json", "out/pi/pi_builder_af.csv", "out/pi/custom_uoms.csv",
+    f"{TWIN}/pi/pi_builder_af.csv",
 ) + tuple(f"{TWIN}/svg/sheet_{i}.svg" for i in range(12)) + tuple(
     f"{DRAWINGS}/{i}.{extension}" for i in range(12) for extension in ("graphml", "png"))
 

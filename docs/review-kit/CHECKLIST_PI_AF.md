@@ -13,13 +13,16 @@ problems earlier.
    python scripts/check_pi_export.py out/pi/pi_builder_af.csv
    python scripts/check_pi_export.py out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv
    ```
-   Expect no errors and the warnings listed in `docs/PI_MAPPING.md`. Anything else is a finding.
-2. Open `out/pi/pi_builder_af.csv` in a spreadsheet. For 10 attribute rows, check that the `Description`
-   (`<tag>: <text>`) matches the same tag in `out/ops_review_sheet.csv`: same tag, same unit of measure.
+   Expect no errors. The TE sheet should have one warning (create or map the units in `custom_uoms.csv`). The twin
+   sheet should have two warnings: no units, and placeholder rows held back from publishing. Anything else is a
+   finding.
+2. Open `out/pi/attribute_descriptions.csv` and `out/pi/pi_builder_af.csv` in a spreadsheet. For 10 attributes,
+   check that the description (`<tag>: <text>`) matches the same tag in `out/ops_review_sheet.csv`. The unit in the
+   sheet should be the same unit, written the AF way (`°C` for `degC`).
 3. Check that each attribute sits under the unit the screens show it on (`Parent` column against the Ignition
    unit screen), for the same 10 rows.
-4. Read the warnings and say, in plain words, what a PI administrator would have to do before an import
-   (custom units, templates, the `°C` spelling). If you cannot, the documentation is unclear: that is a finding.
+4. Read `out/pi/IMPORT_STEPS.txt` and `out/pi/custom_uoms.csv`, and say in plain words what a PI administrator
+   would have to do before an import. If you cannot, the documentation is unclear: that is a finding.
 
 ## Track B: operations or controls reviewer (ideally someone who administers PI)
 

@@ -9,7 +9,6 @@ import unittest
 
 import check_pi_export as cpe
 import generate
-from test_generate_validation import twin_fixture
 
 ROOT = Path(__file__).resolve().parents[1]
 TE_CSV = ROOT / "out/pi/pi_builder_af.csv"
@@ -44,6 +43,9 @@ class ReferenceFileTests(unittest.TestCase):
         ref = cpe.load_reference()
         self.assertIn("AttributeType", ref["columns"])
         self.assertIn("AttributeValueType", ref["columns_not_documented"])
+        self.assertIn("Description", ref["columns"])
+        self.assertIn("AttributeDescription", ref["columns_unconfirmed"])
+        self.assertIn("Int16", ref["attribute_types"])
         self.assertIn("subset", ref["uom_sample"]["note"])
         self.assertIn("not evidence", ref["status"])
         units = {(u["abbreviation"], u["class"]) for u in ref["uom_sample"]["units"]}
@@ -52,44 +54,79 @@ class ReferenceFileTests(unittest.TestCase):
 
 
 class CommittedExportTests(unittest.TestCase):
-    def test_te_seed_export_findings_are_the_recorded_ones(self):
+    def test_te_seed_export_matches_the_documented_conventions(self):
         header, rows = cpe.read_csv_text(TE_CSV.read_text(encoding="utf-8"))
-        report = cpe.check(header, rows)
+        report = cpe.check(header, rows, custom=cpe.read_custom_uoms(TE_CSV.with_name("custom_uoms.csv")))
         self.assertEqual(report["errors"], [])
-        self.assertEqual(report["columns"]["AttributeValueType"], "not_documented")
+        self.assertEqual({c: s for c, s in report["columns"].items() if s != "documented"}, {})
+        self.assertNotIn("AttributeValueType", header)
         self.assertEqual(report["attribute_types"], {"Double": "documented"})
         status = {u: f["status"] for u, f in report["uoms"].items()}
         self.assertEqual(status, {"%": "in_vendor_sample", "kW": "in_vendor_sample", "m3/h": "in_vendor_sample",
-                                  "degC": "spelling_differs", "kPa g": "not_in_vendor_sample",
-                                  "kg/h": "not_in_vendor_sample", "kscmh": "not_in_vendor_sample",
-                                  "mol%": "not_in_vendor_sample"})
-        self.assertEqual(report["uoms"]["degC"]["vendor_abbreviation"], "°C")
+                                  "°C": "in_vendor_sample", "kPa g": "custom_defined",
+                                  "kg/h": "custom_defined", "kscmh": "custom_defined", "mol%": "custom_defined"})
         self.assertEqual(report["config_strings"], {"default_archive_substitution": 37})
-        self.assertEqual(report["element_templates_referenced_not_defined"],
-                         ["Compressor", "Condenser", "FeedHeader", "Reactor", "Separator", "Stripper"])
+        self.assertEqual(report["element_templates_referenced_not_defined"], [])
+        self.assertEqual(report["object_types"]["ElementTemplate"], 6)
+        self.assertIn("NOT import-tested", report["status"])
+        # The only warning left is the instruction to create or map the custom units.
+        self.assertEqual(len(report["warnings"]), 1)
+        self.assertIn("custom_uoms.csv", report["warnings"][0])
 
-    def test_extracted_twin_export_is_all_placeholders_without_uoms(self):
+    def test_without_the_custom_unit_file_those_units_are_unknown_again(self):
+        header, rows = cpe.read_csv_text(TE_CSV.read_text(encoding="utf-8"))
+        report = cpe.check(header, rows)
+        self.assertEqual({u for u, f in report["uoms"].items() if f["status"] == "not_in_vendor_sample"},
+                         {"kPa g", "kg/h", "kscmh", "mol%"})
+
+    def test_extracted_twin_export_is_placeholder_only_unit_less_and_unselected(self):
         header, rows = cpe.read_csv_text(TWIN_CSV.read_text(encoding="utf-8"))
         report = cpe.check(header, rows)
         self.assertEqual(report["errors"], [])
         attributes = report["object_types"]["Attribute"]
         self.assertEqual(report["uoms"], {"": {"status": "none", "note": "no default UOM", "rows": attributes}})
         self.assertEqual(set(report["config_strings"]), {"placeholder"})
+        self.assertEqual(report["placeholder_rows_held_back"], report["config_strings"]["placeholder"])
+        self.assertTrue(any("no default UOM" in w for w in report["warnings"]))
+        self.assertTrue(any("will not publish" in w for w in report["warnings"]))
 
-    def test_generated_candidate_uses_only_documented_headers_apart_from_description(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            generate.export_twin(twin_fixture(), tmp)
-            header, rows = cpe.read_csv_text((Path(tmp) / "pi/pi_builder_UNVALIDATED_candidate_v1.csv")
-                                             .read_text(encoding="utf-8"))
-        report = cpe.check(header, rows)
-        self.assertEqual(report["errors"], [])
-        self.assertEqual({c for c, s in report["columns"].items() if s != "documented"}, {"Description"})
+    def test_regenerated_exports_equal_the_committed_ones(self):
+        def committed(path):  # a Windows checkout may have CRLF line endings
+            return path.read_text(encoding="utf-8").replace("\r\n", "\n")
+        model = json.loads((ROOT / "data/te_process_model.json").read_text(encoding="utf-8"))
+        for name, text in generate.pi_bundle(generate.pi_af_rows(model)).items():
+            self.assertEqual(text, committed(ROOT / "out" / name), name)
+        twin = json.loads((TWIN_CSV.parent.parent / "plant_model.json").read_text(encoding="utf-8"))
+        for name, text in generate.pi_bundle(generate.twin_pi_rows(twin)).items():
+            self.assertEqual(text, committed(TWIN_CSV.parent.parent / name), name)
 
 
 class PositiveControlTests(unittest.TestCase):
     def assertError(self, rows, fragment, header=None):
         report = cpe.check(*sheet(rows, header))
         self.assertTrue(any(fragment in e for e in report["errors"]), report["errors"])
+
+    def test_placeholder_rows_must_not_be_selected(self):
+        rows = GOOD + [["x", "Plant\\U1", "Spare", "Attribute", "", "", "Double", "", "PI Point",
+                        "\\\\%Server%\\PLACEHOLDER.X.PV"]]
+        self.assertError(rows, "placeholder PI point reference is selected")
+        rows[-1][0] = ""
+        self.assertEqual(cpe.check(*sheet(rows))["errors"], [])
+
+    def test_element_templates_have_no_parent_and_come_first(self):
+        template = ["x", "", "Unit", "ElementTemplate", "", "", "", "", "", ""]
+        self.assertError(GOOD + [["x", "Plant", "Unit", "ElementTemplate", "", "", "", "", "", ""]], "empty Parent")
+        late = [GOOD[0], ["x", "Plant", "U2", "Element", "", "Unit", "", "", "", ""], template]
+        report = cpe.check(*sheet(late))
+        self.assertTrue(any("defined after" in w for w in report["warnings"]))
+        report = cpe.check(*sheet([template] + late[:2]))
+        self.assertFalse(any("defined after" in w for w in report["warnings"]))
+        self.assertEqual(report["element_templates_referenced_not_defined"], [])
+
+    def test_attribute_description_in_the_sheet_is_flagged(self):
+        rows = GOOD[:2] + [["x", "Plant\\U1", "Flow", "Attribute", "a description", "", "Double", "m3/h",
+                             "PI Point", "\\\\A\\B"]]
+        self.assertTrue(any("attribute description" in w for w in cpe.check(*sheet(rows))["warnings"]))
 
     def test_clean_sheet_has_no_errors_or_uom_warnings(self):
         report = cpe.check(*sheet(GOOD))
@@ -100,7 +137,7 @@ class PositiveControlTests(unittest.TestCase):
         self.assertError(GOOD + [GOOD[2]], "rows share Parent")
         self.assertError(GOOD + [["x", "Plant\\Missing", "T", "Attribute", "", "", "Double", "", "PI Point", "\\\\A\\B"]],
                          "is not an element in this file")
-        self.assertError(GOOD + [["x", "Plant", "U2", "Element", "", "", "Double", "", "", ""]], "element row carries")
+        self.assertError(GOOD + [["x", "Plant", "U2", "Element", "", "", "Double", "", "", ""]], "Element row carries")
         self.assertError(GOOD + [["x", "Plant\\U1", "T", "Attribute", "", "", "Double", "", "PI Point", ""]],
                          "no config string")
         self.assertError(GOOD + [["x", "Plant", "U3", "Asset", "", "", "", "", "", ""]], "ObjectType 'Asset'")

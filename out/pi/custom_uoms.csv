@@ -1,0 +1,5 @@
+﻿uom_class,new_class,name,abbreviation,reference_uom,factor,offset,used_by_attributes,note
+Mass Flow Rate,no,kilogram per hour,kg/h,kg/s,0.0002777777777777778,0.0,3,"Exact conversion. The AF default UOM database may already have kg/h; if so, use it and skip this row."
+Gauge Pressure (custom),yes,kilopascal gauge,kPa g,,,,3,Gauge pressure kept in its own class with no conversion: converting to absolute needs the local atmospheric pressure. A site with a gauge-pressure convention should map to that.
+Standard Volume Flow Rate (custom),yes,thousand standard cubic meter per hour,kscmh,,,,5,"Tennessee Eastman unit. Volume at standard conditions, so not convertible to actual m3/h by a fixed factor; kept in its own class with no conversion."
+Ratio,no,mole percent,mol%,%,1.0,0.0,3,Numerically equal to percent; the separate unit keeps 'mole' visible.

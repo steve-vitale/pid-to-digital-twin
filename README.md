@@ -47,7 +47,7 @@ flowchart LR
 | Platform | What's verified |
 |---|---|
 | Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 23-view project: native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 23/23 routes, 277/277 navigation targets, 0 false-good placeholders. The 390 px phone width is only partial ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not), [receipt](out/ignition/gateway/receipts/native-current-20261013.json)) |
-| AVEVA PI AF | Asset structure generated as a PI Builder sheet. **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
+| AVEVA PI AF | Asset structure generated as a PI Builder sheet following the vendor-published conventions (element templates, documented headers, AF unit abbreviations, custom units defined rather than assumed). **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
 ## Try it

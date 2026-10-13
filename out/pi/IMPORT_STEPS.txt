@@ -1,0 +1,20 @@
+PI AF staging files: how to use them
+
+NOT import-tested: these files have never been published to a licensed PI AF server. They follow the vendor-published PI Builder conventions read offline (data/pi_builder_reference.json).
+Use only a separately authorized, isolated AF database. Nothing here connects to PI or creates PI points.
+
+Files:
+  pi_builder_af.csv           PI Builder sheet (schema v2): element templates, elements, attributes.
+  custom_uoms.csv             units this sheet uses that a default AF UOM database may not have.
+  attribute_descriptions.csv  attribute descriptions (not in the sheet: that column header is unconfirmed).
+
+Order:
+  1. Units: in PI Builder, Library > Units of Measure > Find UOM Classes, and compare with custom_uoms.csv (kPa g, kg/h, kscmh, mol%).
+     For each row: if the site already has an equivalent unit, replace the abbreviation in
+     pi_builder_af.csv; otherwise create it (a new class where new_class = yes) before step 3.
+  2. Element templates: select only the 6 ElementTemplate rows and Publish (Edit Mode: Create Only).
+  3. Elements and attributes: select the remaining x rows and Publish (Create Only).
+     0 of 37 attributes are not selected because their PI point reference is a placeholder.
+     Leave them out until a reviewed mapping replaces the placeholder (scripts/map_pi_points.py).
+  4. Check in PI System Explorer: counts, paths, that each mapped attribute resolves to its point, types
+     and UOMs; read back values with timestamps and quality; export to XML as evidence (docs/PI_MAPPING.md).

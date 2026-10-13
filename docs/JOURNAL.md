@@ -1848,6 +1848,21 @@ Track A findings go in as notes or identifier-text-only corrections, never as `c
 later pass for an operations review. The timing log uses the review-effort protocol's fields, but one sitting is
 a pilot, not the study.
 
+**Follow-up, same day: fix the exporter, not just the report.** The PI files are now PI Builder sheet schema v2:
+- `AttributeType` replaces `AttributeValueType`.
+- `°C` replaces `degC`.
+- The four units with no vendor evidence are written to `custom_uoms.csv` with a definition, never assumed. Gauge
+  pressure and standard volume flow each get their own class with no conversion, because converting either needs a
+  local reference: the atmosphere, or the standard conditions.
+- The six TE element templates are defined at the top of the sheet.
+- Attribute descriptions move to their own file. A full OCR pass over the workbooks found no attribute description
+  header, so writing one would have been a guess.
+- Placeholder rows are left unselected, so PI Builder won't publish them.
+
+`IMPORT_STEPS.txt` gives the publish order. The offline check now passes the TE sheet with a single instruction
+(create or map four units) and flags any selected placeholder as an error. It's still not import-tested; every
+generated file says so.
+
 **Lesson:** "we can't test it without a licence" was half true. The import can't be tested, but the vendor's own
 published material settled the header question and found a unit spelling no test of ours could have flagged.
 

@@ -82,17 +82,22 @@
   ],
   "NewName": [
    "assets printed p49: 'use the NewName column in the PI Builder'"
+  ],
+  "Description": [
+   "techcon2016 p25 (PIPoint sheet screenshot: a Description header)",
+   "techcon2016 p31 (Element column dialog lists Description beside Template and ReferenceType, which appear unprefixed as sheet headers on the same page)",
+   "beyond p89 (ElementTemplate column dialog lists Description)"
   ]
  },
  "columns_unconfirmed": {
-  "Description": "Listed in the column dialog (techcon2016 p26) but not seen as a sheet header in the sources read; whether attribute rows carry their description in Description is unconfirmed."
+  "AttributeDescription": "An attribute's Description property is listed in the attribute column dialog (techcon2016 p26), but no sheet in the sources read shows the header for it. By the observed Attribute-prefix rule (AttributeType, AttributeDefaultUOM, AttributeTrait on techcon2016 p58, ...) it would be AttributeDescription, but an OCR pass over every screenshot in the three workbooks above (and a 2020 AF lab workbook) found no such header; unconfirmed, so this repository does not write attribute descriptions into the sheet."
  },
  "columns_not_documented": {
   "AttributeValueType": "Not seen in any source read. The column dialog lists the attribute property as Type (techcon2016 p26) and the sheets show AttributeType (beyond p87, p92)."
  },
  "object_types": {
   "Element": [
-   "techcon2016 p26",
+   "techcon2016 p26, p31",
    "assets printed p49"
   ],
   "Attribute": [
@@ -108,6 +113,7 @@
    "techcon2016 p25"
   ]
  },
+ "element_template_rows": "ElementTemplate rows have an empty Parent and the template name in Name (beyond p92 sheet screenshot).",
  "parent_convention": "Element rows give the parent element's path; attribute rows give their own element's full path, e.g. Facility1\\Area4\\Rotating Equipment\\P-101 (techcon2016 p26).",
  "attribute_types": {
   "Double": [
@@ -116,6 +122,9 @@
   ],
   "Single": [
    "beyond p92"
+  ],
+  "Int16": [
+   "beyond p92 (sheet screenshot: AreaID, AttributeTemplate, Int16)"
   ],
   "String": [
    "beyond p87 (screenshot)",
@@ -126,7 +135,7 @@
    "af_sdk_sample"
   ]
  },
- "attribute_types_note": "Int16 and Int32 are in this repo's narrow mapper allowlist but were not seen in the sources read.",
+ "attribute_types_note": "Int32 is in this repo's narrow mapper allowlist but was not seen in the sources read.",
  "data_references": {
   "PI Point": [
    "techcon2016 p26",

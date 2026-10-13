@@ -124,8 +124,12 @@ class GenerationValidationTests(unittest.TestCase):
                 if exporter is generate.export_twin:
                     rows = list(csv.DictReader(io.StringIO((Path(tmp) / "pi/pi_builder_af.csv").read_text(encoding="utf-8-sig"))))
                     pv = next(r for r in rows if r["ObjectType"] == "Attribute")
-                    self.assertIn("unknown variable", pv["Description"])
+                    descriptions = list(csv.DictReader(io.StringIO((Path(tmp) / "pi/attribute_descriptions.csv")
+                                                                   .read_text(encoding="utf-8-sig"))))
+                    self.assertIn("unknown variable", descriptions[0]["description"])
+                    self.assertEqual(pv["Description"], "")
                     self.assertIn("PLACEHOLDER", pv["AttributeConfigString"])
+                    self.assertEqual(pv["Selected(x)"], "")
                     self.assertEqual(pv["AttributeDefaultUOM"], "")
 
     def test_valve_callouts_stay_metadata_only(self):
@@ -138,7 +142,8 @@ class GenerationValidationTests(unittest.TestCase):
             rows = list(csv.DictReader((Path(tmp) / "pi/pi_builder_af.csv").read_text(encoding="utf-8-sig").splitlines()))
             pv = next(r for r in rows if r["ObjectType"] == "Attribute")
             self.assertEqual((pv["AttributeDataReference"], pv["AttributeConfigString"]), ("", ""))
-            self.assertIn("function/signal unknown", pv["Description"])
+            descriptions = (Path(tmp) / "pi/attribute_descriptions.csv").read_text(encoding="utf-8-sig")
+            self.assertIn("function/signal unknown", descriptions)
 
     def test_cli_failure_is_nonzero_without_success_or_traceback(self):
         with tempfile.TemporaryDirectory() as tmp:
