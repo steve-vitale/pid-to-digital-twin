@@ -22,12 +22,13 @@ const routeOf = u => { const r = u.split('?')[0].replace(BASE, ''); return r ===
 const squash = s => s.replace(/\s+/g, ' ');
 
 async function settle(page, title, ms = 12000) {
-  // Loaded = the view's own title is on screen and no value renders as the literal text "null".
+  // Loaded = the view's own title is on screen and no value renders as the literal text "null". Only the view is
+  // read: Perspective's own page chrome (a project-info panel that says "by null" at narrow widths) is not ours.
   const want = squash(title);
   const t0 = Date.now();
   let body = '';
   while (Date.now() - t0 < ms) {
-    body = squash(await page.innerText('body').catch(() => ''));
+    body = squash(await page.innerText('.ia_container--root').catch(() => ''));
     if (body.includes(want) && !/\bnull\b/.test(body)) return { ok: true, ms: Date.now() - t0 };
     await page.waitForTimeout(400);
   }
@@ -129,9 +130,9 @@ async function capture(contractPath, outDir, label, vpName, routes) {
       await page.screenshot({ path: path.join(outDir, file) });
       files.push(file);
     }
-    const text = await page.innerText('body');
+    const text = await page.innerText('.ia_container--root');
     const count = re => (text.match(re) || []).length;
-    out.push({ route: r, loaded: loaded.ok, geo, files, unknown: count(/UNKNOWN/g), not_connected: count(/not connected/gi),
+    out.push({ route: r, loaded: loaded.ok, geo, files, null_text: count(/bnullb/g), unknown: count(/UNKNOWN/g), not_connected: count(/not connected/gi),
                alarm_active_text: count(/ALARM ACTIVE/g), outside_band_text: count(/Outside normal band/g),
                header: (text.match(/(Alarms|Outside band): [^\n]*/g) || []).join(' | ') });
     console.log(JSON.stringify(out.at(-1)));
