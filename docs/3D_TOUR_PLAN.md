@@ -342,7 +342,7 @@ Two kinds of emphasis come from data, and both now appear as compact annotations
   FI-101 and FV-203 leave at the fault start. It is in the narration and the data, with no box.
 
 A third element comes from a prototype: one **"Why this matters"** card per stop, citing a public incident. It is
-matched to the unit's equipment kind by a keyword heuristic over a separate permit/hazard system's public-incident
+matched to the unit's equipment kind by a keyword heuristic over a public-incident
 corpus and curated by Claude. The sources are CSB, OSHA and EPA RMP records, with their URLs as recorded in that
 corpus. The method, the 21 citations, the reactor aptness check, the false positives and the integration path are in
 [HAZARD_CITATIONS_DESIGN.md](HAZARD_CITATIONS_DESIGN.md). The citations are mechanism analogies, not a hazard
@@ -375,7 +375,7 @@ The mockup carries no sequence logic. Its numbers are the order the points were 
 What a real build would need:
 - a reviewed isolation list per job: point, energy type, isolating device, lock/tag, verification method;
 - the site's procedure as the source of the steps, with the 3D scene only showing where each point is;
-- a link from each point to the isolation permit in a permit/hazard system, so the walk-through shows the permit
+- a link from each point to the site's isolation permit, so the walk-through shows the permit
   status and nothing else.
 
 ## Effort and cost for a real site

@@ -6,7 +6,7 @@ Two jobs:
    NTSB, EPA RMP) with the URL exactly as recorded in the corpus it came from, plus a one-line hazard summary
    written by Claude. No private or company data.
 2. `--corpus-repo PATH` (optional, read-only) re-runs the keyword heuristic over a local checkout of the corpus
-   repository (a separate permit/hazard system) (`git show <ref>:<file>`; nothing is written there, nothing is fetched) and prints the ranked
+   repository (`git show <ref>:<file>`; nothing is written there, nothing is fetched) and prints the ranked
    candidates per equipment kind. This is how the curated file was shortlisted. It mirrors that system's own
    precedent matcher in spirit: lowercase substring keyword hits, and a precision floor (a record only counts if
    at least one equipment-specific term hits; generic words like "startup" never count alone).

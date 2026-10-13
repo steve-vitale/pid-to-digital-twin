@@ -1,10 +1,9 @@
 {
  "schema": "pid-hazard-citations/0 (prototype)",
  "status": "PROTOTYPE heuristic shortlist, curated by Claude. Not a hazard analysis, not reviewed by a process-safety engineer or an operator. A citation shows that a hazard mechanism has hurt people in the public record; it does not say the mechanism applies to this unit at a real plant. A PHA/HAZOP team decides that.",
- "method": "scripts/hazard_citations.py --corpus-repo <corpus repository checkout> --ref origin/main: lowercase substring keyword hits per equipment kind (KIND_TERMS), specific hits weigh 2 and generic words 1, and a record scores zero unless at least one equipment-specific term hits (the same precision-floor idea as the source system's incident-precedent matcher). Claude then picked 3-5 per kind from the ranked list, dropped duplicates and false positives, and wrote the one-line hazard summaries. heuristic_score and matched_terms below are copied from that run.",
+ "method": "scripts/hazard_citations.py --corpus <public incident records checkout>: lowercase substring keyword hits per equipment kind (KIND_TERMS), specific hits weigh 2 and generic words 1, and a record scores zero unless at least one equipment-specific term hits. Claude then picked 3-5 per kind from the ranked list, dropped duplicates and false positives, and wrote the one-line hazard summaries. heuristic_score and matched_terms below are copied from that run.",
  "source_snapshot": {
-  "corpus": "Public-incident corpus of a separate permit/hazard system (private repository; only public agency records were read)",
-  "commit": "9a96a4d42da2d077ad12e92a6c56e32306907c81",
+  "corpus": "Public agency incident records (CSB, EPA RMP via the Data Liberation Project, OSHA, NTSB); only public records were used",
   "records_scanned": 972,
   "corpora": {
    "csb_corpus": "CSB investigations corpus (CSB recommendation text, public)",

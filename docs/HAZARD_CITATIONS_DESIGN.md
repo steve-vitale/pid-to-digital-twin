@@ -2,7 +2,7 @@
 
 **Status: design plus a prototype heuristic, part of the 3D tour proof of concept.** Nothing here is a
 hazard analysis. No external service was called and no company data was used. The matching ran once, offline,
-over a local read-only checkout of a separate permit/hazard system's public-incident corpus. Its curated output is committed as
+over a local read-only checkout of a public-incident corpus. Its curated output is committed as
 [`data/hazard_citations_prototype.json`](../data/hazard_citations_prototype.json). A process-safety engineer and an
 operator must review it before any of it is used for training.
 
@@ -13,33 +13,19 @@ An orientation tour should tell a new operator which parts of the process deserv
 the twin's equipment be matched against a catalogue of real, public accident records, so that each tour stop cites
 a few process-specific hazards with a source a trainee can read?
 
-## How the source permit/hazard system identifies risks (what was read)
+## Where the incident records come from
 
-The public-incident corpus belongs to a separate, private permit/hazard system by the same author. Its repository
-was read only (`git show` at a pinned commit, recorded in the citation file). Only public agency records were used.
-What carries over, described by mechanism:
+The catalogue is built only from public agency records:
 
-- **Curated public-incident precedents.** A small hand-curated set of investigation summaries, each with:
-  - its public source URL (CSB for process incidents);
-  - a summary in the system's own words;
-  - keywords, and the kinds of change it relates to (startup, restart after shutdown, isolation, and so on).
+- CSB investigation reports and their recommendations;
+- about 500 EPA Risk Management Program (RMP) accident records, compiled by the Data Liberation Project under
+  CC-BY-SA-4.0;
+- public OSHA and NTSB reports.
 
-  The matcher is deterministic: a card scores the number of its keywords found as lowercase substrings of the
-  work being planned. A **precision floor** means generic words such as "startup" or "refinery" never surface a
-  card on their own; at least one specific term must hit.
-- **Larger public corpora**, used for evaluation:
-  - CSB investigation recommendations;
-  - about 500 EPA Risk Management Program (RMP) accident records, compiled by the Data Liberation Project under
-    CC-BY-SA-4.0;
-  - evaluation specimens built from public CSB, OSHA and NTSB records.
-- **Rule-based risk insights** keyed on equipment type and properties: a high-pressure vessel in hazardous service,
-  a safety relief valve, a safety-instrumented loop, an overdue inspection. Its equipment types include vessel,
-  valve, pump and instrument, but not reactor, compressor, column or heat exchanger.
-- **Agent-facing tools**: risk insights for one piece of planned work, and similarity search over the
-  organisation's own change history. None of them exposes the public incident catalogue today.
-
-Two lessons carry over. Keep the matching deterministic and explainable (which words matched), and keep the
-precision floor; a keyword match on "tower" also finds an airport control tower (below).
+Matching is deterministic and explainable: a record scores the number of its keywords found as lowercase substrings
+of an equipment kind's search terms, and a **precision floor** means generic words such as "startup" or "refinery"
+never surface a record on their own; at least one equipment-specific term must hit. Keeping the floor matters: a
+keyword match on "tower" also finds an airport control tower (below).
 
 ## Design: matching twin equipment to public incidents
 
@@ -111,7 +97,7 @@ selection bias), so they explain why a hazard matters; they do not show how like
 ## The offline proof: what was actually run
 
 `python scripts/hazard_citations.py --corpus-repo <corpus repository checkout> --ref origin/main` scanned **972 public
-records** at commit `9a96a4d`. The curated picks:
+records**. The curated picks:
 
 | Twin kind (unit) | Public incident | Agency | Score (matched terms) | URL as recorded |
 |---|---|---|---|---|
@@ -183,18 +169,18 @@ against EPA data.
 
 1. **Now (this repo):** a static, curated JSON beside the twin, regenerated when the twin's equipment changes;
    tests check the file's shape, domains and the prototype label (`scripts/test_build_3d_scene.py`).
-2. **A read-only precedent lookup in a permit/hazard system:** `find_public_precedents(equipment_kind,
+2. **A read-only precedent lookup in the plant's own permit/hazard or MOC tooling:** `find_public_precedents(equipment_kind,
    mechanisms, limit)`, returning cards with source URL, matched terms and score under the same precision floor.
    It writes nothing.
-3. **Equipment kinds in that system's model:** reactor, compressor, column, exchanger and separator as first-class
-   kinds, so rule-based insights and precedent matching can use them.
+3. **Equipment kinds:** reactor, compressor, column, exchanger and separator as first-class kinds in whatever
+   equipment model the plant uses, so rule-based checks and precedent matching can use them.
 4. **Management of change:** when the twin changes, regenerate the tour and re-run the matching, and route the
-   updated training material through the system's propose, approve and record steps, so the training record shows
-   which plant state and citations it was built from.
-5. **The plant's own history first:** a site's own incidents and near misses, searched inside its own tenant, rank
-   above public precedents. That needs the plant's consent; nothing crosses organisations.
+   updated training material through the site's management-of-change approval, so the training record shows which
+   plant state and citations it was built from.
+5. **The plant's own history first:** a site's own incidents and near misses, rank above public precedents. That
+   stays inside the plant's own systems.
 6. **LOTO isolation permits:** the lockout/tagout mode designed in [3D_TOUR_PLAN.md](3D_TOUR_PLAN.md) would link
-   each isolation point to the site's isolation permit in such a system. The procedure itself comes from the
+   each isolation point to the site's isolation permit. The procedure itself comes from the
    site's energy-control program, never from this scene.
 7. **Import the PHA, don't invent risk:** if the site has HAZOP/LOPA records, the tour's emphasis should come from
    them (node, deviation, consequence, safeguards). Public incidents then only illustrate them.
