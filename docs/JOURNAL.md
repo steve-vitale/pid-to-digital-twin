@@ -1803,3 +1803,58 @@ still read as broken: Bad was the right quality for those 334 instruments, and `
 screens. Click every link, stop the data source, and watch what an operator would see. Keep "no data source" and
 "broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
 plant readiness. The screens were checked against recorded replay and synthetic points only.
+
+## 39. Give the drawings-only track the deliverables it can support
+
+**What:** the OPEN100 track (12 real drawings, no process data) gets flow direction read from the drawings, the 12
+sheets stitched into one plant, a process mimic, a 3D orientation tour and a LOTO isolation view. All of it is
+structure. Where the drawings can't supply something, the README matrix says so and says what is missing.
+
+**How:**
+- **Direction first, because everything else draws arrows.** The twin's 1,881 connections all said "unknown", and
+  the answer keys can't help: every graphml is undirected, and its `arrow` nodes have a position and no
+  orientation. `scripts/flow_direction.py` re-traces each sheet with the same tracer and symbols, and checks that the
+  links come out identical to the twin's (1,874 of 1,874). It then reads three kinds of evidence. Arrowheads: ink
+  sticking out on both sides of a straight run, tapering to a tip. Off-page flags: which end of the pentagon is
+  pointed, compared with where the line attaches. Pumps: discharge at the top of the casing. A fourth rule carries
+  direction through in-line valves with exactly two connections.
+- **The first version over-claimed, and the conflicts showed it.** At first an arrow oriented every symbol behind it
+  against every symbol ahead of it. On a header with two outlets, that says outlet A flows to outlet B and back
+  again: 380 conflicts, still 237 after instrument links were taken out. The fix split the evidence. "First-hand" means the arrow sits on the pipe between the two
+  symbols, with no branch in between. "Across a branch" is the weaker reading. Two more rounds were needed before
+  "no branch" meant what it says: instrument taps and arrowheads' own wings had made every pipe look branched, and
+  so had three join points stacked on one corner.
+- **Checking a direction with no key.** The detector's settings were chosen on sheets 0-5. On the held-out sheets
+  6-11 it found 77% of the keys' arrow nodes, with 83% of its detections on one. For direction itself, 65 directed
+  links (stratified, fixed seed) were cut out as crops with the two symbols outlined A and B, A picked at random.
+  GPT (Codex CLI) and Claude (a fresh claude CLI session) read them blind. Neither disagreed with the code once. Each
+  left some unclear, mostly across-a-branch links. Each link carries the lower end of the 95% interval as its
+  confidence, not the 100%.
+- **Two things the extraction never read.** The equipment schedules printed along the bottom of each sheet
+  ("SERVICE: LETDOWN FILTER") say what each piece of equipment is for. Claude transcribed them, and 49 of the 74
+  purpose cards come from them. Drawing numbers written with en dashes ("PID 110–1") had defeated the twin's
+  connector pairing. Read as numbers, they let 31 more connectors find their sheet: 38 sheet-to-sheet connections
+  instead of 7.
+- **The screens reuse what exists.** The mimic is built from the TE screens' components and their "not connected"
+  transform. The 3D tour uses the 3D branch's renderer, copied byte for byte in its own commit. The LOTO view numbers
+  each isolation point on the real drawing.
+
+**Why:**
+- A twin without process data is still most of a starter kit. Steve put it plainly: the mimic and the tour don't
+  need the data, so show what the two sets we have can do.
+- Rejected: drawing every link with an arrow by guessing from layout (left to right, top to bottom). It would have
+  looked complete and taught people to trust arrows nobody drew. Two-thirds of the process links stay undirected,
+  and the screens show them dashed.
+- Rejected: tank nozzle position as direction evidence (bottom inlets are common), and direction on instrument
+  links (they carry signals, not flow).
+
+**Lesson:** when there is no key, two independent readings agreeing is the next best evidence. Here it took three
+forms: arrowheads and flags agreed on all 70 links where both spoke, two models read blind crops, and the
+re-traced links had to match the twin before any direction was trusted. Conflicts are information too. 380 of
+them said the rule was wrong, not that the drawings were.
+
+**At your plant:** if you have the drawings and no historian access yet, build the model, the asset framework, the
+mimic, the tour and the isolation view now, and add values when the data arrives. Read the equipment schedules on
+your sheets. Keep arrows only where the drawing shows them. Treat the isolation list as a reviewer's checklist for
+your energy-control procedure (OSHA 1910.147), never as the procedure: a valve the extraction missed is missing from
+the list too.

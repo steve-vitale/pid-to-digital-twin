@@ -37,6 +37,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_trace_connections_v2.py",
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
+    "scripts/test_open100_structural.py",
 )
 TESTS = SOURCE_TESTS + FULL_ONLY_TESTS
 DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
@@ -52,6 +53,12 @@ SOURCE_FILES = (
 ) + tuple(f"{TWIN}/svg/sheet_{i}.svg" for i in range(12)) + tuple(
     f"{DRAWINGS}/{i}.{extension}" for i in range(12) for extension in ("graphml", "png"))
 
+# Committed files the full-mode tests read beyond SOURCE_FILES.
+FULL_FILES = ("out/ignition/gateway/PIDTwin.zip", f"{TWIN}/ignition/tags.json",
+              "out/open100_structural/flow_direction.json", "out/open100_structural/plant_structure.json",
+              "out/open100_structural/mimic/views.json", "data/open100_direction_confidence.json",
+              "data/open100_equipment_schedule.json", "docs/deliverables_matrix.json")
+
 
 def prerequisites(root, source_only):
     """Check local files and module discovery only; never import third-party code."""
@@ -59,7 +66,7 @@ def prerequisites(root, source_only):
     scripts = SOURCE_TESTS if source_only else TESTS
     paths = SOURCE_FILES + scripts
     if not source_only:
-        paths += ("out/ignition/gateway/PIDTwin.zip", f"{TWIN}/ignition/tags.json")
+        paths += FULL_FILES
     for relative in paths:
         path = root / relative
         if not path.is_file():

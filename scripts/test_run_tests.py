@@ -14,8 +14,7 @@ import run_tests as runner
 
 class RunnerControls(unittest.TestCase):
     def fixture(self, root, cached=True):
-        paths = runner.SOURCE_FILES + runner.TESTS + (
-            'out/ignition/gateway/PIDTwin.zip', f'{runner.TWIN}/ignition/tags.json')
+        paths = runner.SOURCE_FILES + runner.TESTS + runner.FULL_FILES
         for relative in paths:
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)

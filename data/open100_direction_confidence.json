@@ -1,0 +1,135 @@
+{
+ "readers": [
+  "GPT (Codex CLI)",
+  "Claude (claude CLI, fresh session)"
+ ],
+ "method": "blind spot check: the readers listed read crops of the original drawing with A/B outlined. agreement = share of decided readings (readers pooled) that agree with the inferred direction; confidence = the lower end of its 95% Wilson interval. UNCLEAR readings are not counted either way. Not an answer key.",
+ "sample": "scripts/direction_spot_check.py, seed 20261013, per source {'arrowhead': 15, 'offpage_flag': 10, 'pump_ports': 7, 'arrowhead_via_junction': 15, 'offpage_flag_via_junction': 10, 'valve_chain': 8}",
+ "sources": {
+  "arrowhead": {
+   "readers": {
+    "gpt": {
+     "agree": 15
+    },
+    "claude": {
+     "agree": 15
+    }
+   },
+   "agree": 30,
+   "decided": 30,
+   "unclear": 0,
+   "agreement": 1.0,
+   "wilson95": [
+    0.886,
+    1.0
+   ],
+   "confidence": 0.886
+  },
+  "offpage_flag": {
+   "readers": {
+    "gpt": {
+     "agree": 10
+    },
+    "claude": {
+     "agree": 10
+    }
+   },
+   "agree": 20,
+   "decided": 20,
+   "unclear": 0,
+   "agreement": 1.0,
+   "wilson95": [
+    0.839,
+    1.0
+   ],
+   "confidence": 0.839
+  },
+  "pump_ports": {
+   "readers": {
+    "gpt": {
+     "agree": 5,
+     "unclear": 2
+    },
+    "claude": {
+     "agree": 5,
+     "unclear": 2
+    }
+   },
+   "agree": 10,
+   "decided": 10,
+   "unclear": 4,
+   "agreement": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "confidence": 0.722
+  },
+  "arrowhead_via_junction": {
+   "readers": {
+    "gpt": {
+     "unclear": 5,
+     "agree": 10
+    },
+    "claude": {
+     "unclear": 10,
+     "agree": 5
+    }
+   },
+   "agree": 15,
+   "decided": 15,
+   "unclear": 15,
+   "agreement": 1.0,
+   "wilson95": [
+    0.796,
+    1.0
+   ],
+   "confidence": 0.796
+  },
+  "offpage_flag_via_junction": {
+   "readers": {
+    "gpt": {
+     "agree": 7,
+     "unclear": 3
+    },
+    "claude": {
+     "agree": 10
+    }
+   },
+   "agree": 17,
+   "decided": 17,
+   "unclear": 3,
+   "agreement": 1.0,
+   "wilson95": [
+    0.816,
+    1.0
+   ],
+   "confidence": 0.816
+  },
+  "valve_chain": {
+   "readers": {
+    "gpt": {
+     "agree": 7,
+     "unclear": 1
+    },
+    "claude": {
+     "agree": 5,
+     "unclear": 3
+    }
+   },
+   "agree": 12,
+   "decided": 12,
+   "unclear": 4,
+   "agreement": 1.0,
+   "wilson95": [
+    0.757,
+    1.0
+   ],
+   "confidence": 0.757
+  }
+ },
+ "reader_agreement": {
+  "both decided, same": 46,
+  "at least one unclear": 19
+ }
+}

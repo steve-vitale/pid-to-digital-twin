@@ -10,6 +10,32 @@ in a production environment. It grows as the project does. Each journal entry al
 
 ---
 
+## What you can do with only drawings, only process knowledge, or both
+
+You may not have everything at once. Drawings are often easier to get than historian access, and the reverse
+happens too. This repo has one of each: the OPEN100 track has 12 real drawings and no process data, and the
+Tennessee Eastman track has process knowledge (a model and recorded data) and no drawing. What each supports is in
+the [deliverables matrix](../README.md#what-you-can-do-with-only-drawings-only-process-knowledge-or-both).
+
+| What you have | What you can build now | What has to wait |
+|---|---|---|
+| **Drawings, no historian access** | The asset model and tag list; the asset framework (Ignition UDTs and tags, a PI AF structure); drawing screens; flow direction wherever the drawing shows it; the sheets stitched into one plant by their off-page connectors; an overview mimic; a 3D orientation tour; a LOTO isolation view on your own drawings | Values, normal bands, alarms, replay. Every value says "not connected" until an I/O list or historian mapping arrives |
+| **Process knowledge, no usable drawings** | A model built by hand from the process description or control narrative; a mimic with values; normal bands and early warning; alarms from your setpoints; replay of recorded data | Drawing screens, and the topology and isolation points that only a drawing shows. Hand-built topology is a guess until someone checks it against the drawings |
+| **Both** | Everything above, plus the cross-check between them: each place the drawing and the data disagree is an extraction error or a real documentation gap | |
+
+So a plant with drawings but no historian access can still get the model, asset framework, mimic, tour and LOTO view
+in the first pilot, and add values when the data access comes through. In practice:
+- **Ask what the drawing actually shows.** Flow arrows, off-page flags and pump symbols give direction on part of
+  the plant only. On these 12 sheets, a third of the process links. Keep the rest undirected and visibly so: a
+  screen that guesses directions teaches people to trust arrows that were never drawn.
+- **Read the equipment schedules.** Many drawings print what each piece of equipment is for along the bottom of the
+  sheet. It is the best source for purpose cards and is easy to miss: the extraction here never read it.
+- **Treat the isolation view as a review aid.** A list of block valves, motor-operated valves, motor-driven
+  equipment and boundary lines, each pointing at its place on the drawing, speeds up writing or checking an
+  energy-control procedure. It is not the procedure, and a valve the extraction missed is missing from it.
+
+---
+
 ## 1. Before you start: decide what you're actually converting
 
 **Check whether you need vision at all.**

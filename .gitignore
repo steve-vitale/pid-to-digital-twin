@@ -34,3 +34,10 @@ out/confidence/
 out/process_mimic/*
 !out/process_mimic/VERIFICATION.txt
 out/review/
+
+# OPEN100 structural outputs: the JSON/CSV results and the spot-check crops are committed; renders, previews and
+# working crops are regenerated (scripts/render_open100_structural.py, scripts/build_open100_3d.py).
+out/open100_structural/mimic/*.html
+out/open100_structural/3d/renders/
+out/open100_structural/3d/open100_scene_blender.py
+out/open100_structural/schedule_crops/
