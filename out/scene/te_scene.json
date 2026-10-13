@@ -1,0 +1,851 @@
+{
+ "meta": {
+  "kind": "proof_of_concept",
+  "status": "built to iterate on; not a validated deliverable and not reviewed by operations",
+  "generated_by": "scripts/build_scene_data.py",
+  "source": "data/te_process_model.json",
+  "source_sha256": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+  "inherits": "every element carries the provenance of the model item it came from; geometry adds none",
+  "geometry": "positions are the model's 2D layout scaled to metres; sizes, elevations and routes are placeholders",
+  "loto": "candidates are inferred from the model; this is not a LOTO procedure (OSHA 1910.147)"
+ },
+ "units": [
+  {
+   "id": "C-101",
+   "name": "Product Stripper",
+   "type": "stripper",
+   "position_m": [
+    20.2,
+    0.0,
+    7.6
+   ],
+   "size_m": [
+    2.0,
+    9.0,
+    2.0
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "AI-137",
+     "description": "Product analyzer (components D-H)",
+     "uom": "mol%",
+     "kind": "measurement",
+     "stream": "S11",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-104",
+     "description": "A and C feed flow",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S4",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-117",
+     "description": "Stripper underflow (product)",
+     "uom": "m3/h",
+     "kind": "measurement",
+     "stream": "S11",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-119",
+     "description": "Stripper steam flow",
+     "uom": "kg/h",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-204",
+     "description": "A and C feed flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S4",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-209",
+     "description": "Stripper steam valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "LI-115",
+     "description": "Stripper level",
+     "uom": "%",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "LV-208",
+     "description": "Stripper liquid product flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S11",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "PI-116",
+     "description": "Stripper pressure",
+     "uom": "kPa g",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "TI-118",
+     "description": "Stripper temperature",
+     "uom": "degC",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  },
+  {
+   "id": "E-101",
+   "name": "Product Condenser",
+   "type": "condenser",
+   "position_m": [
+    10.8,
+    0.0,
+    4.6
+   ],
+   "size_m": [
+    4.0,
+    1.5,
+    1.5
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "TI-122",
+     "description": "Separator Cooling Water Outlet Temp",
+     "uom": "degC",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "corrected",
+      "ops_review": "unverified",
+      "open_question": true
+     }
+    },
+    {
+     "tag": "TV-211",
+     "description": "Condenser cooling water flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  },
+  {
+   "id": "K-101",
+   "name": "Recycle Compressor",
+   "type": "compressor",
+   "position_m": [
+    14.8,
+    0.0,
+    2.6
+   ],
+   "size_m": [
+    2.5,
+    2.0,
+    2.0
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "AI-129",
+     "description": "Purge gas analyzer (components A-H)",
+     "uom": "mol%",
+     "kind": "measurement",
+     "stream": "S9",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-105",
+     "description": "Recycle flow",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S8b",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-110",
+     "description": "Purge rate",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S9",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-206",
+     "description": "Purge valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S9",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "HV-205",
+     "description": "Compressor recycle valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "JI-120",
+     "description": "Compressor work",
+     "uom": "kW",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  },
+  {
+   "id": "R-101",
+   "name": "Reactor",
+   "type": "reactor",
+   "position_m": [
+    6.6,
+    0.0,
+    7.2
+   ],
+   "size_m": [
+    3.0,
+    6.0,
+    3.0
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "AI-123",
+     "description": "Reactor feed analyzer (components A-F)",
+     "uom": "mol%",
+     "kind": "measurement",
+     "stream": "S6",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-106",
+     "description": "Reactor feed rate",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S6",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "LI-108",
+     "description": "Reactor level",
+     "uom": "%",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "PI-107",
+     "description": "Reactor pressure",
+     "uom": "kPa g",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "SC-212",
+     "description": "Agitator speed",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "TI-109",
+     "description": "Reactor temperature",
+     "uom": "degC",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "TI-121",
+     "description": "Reactor cooling water outlet temperature",
+     "uom": "degC",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "TV-210",
+     "description": "Reactor cooling water flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  },
+  {
+   "id": "U-100",
+   "name": "Feed System",
+   "type": "feed_header",
+   "position_m": [
+    1.8,
+    0.0,
+    6.6
+   ],
+   "size_m": [
+    1.0,
+    1.0,
+    6.0
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "FI-101",
+     "description": "A feed flow",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S1",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-102",
+     "description": "D feed flow",
+     "uom": "kg/h",
+     "kind": "measurement",
+     "stream": "S2",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-103",
+     "description": "E feed flow",
+     "uom": "kg/h",
+     "kind": "measurement",
+     "stream": "S3",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-201",
+     "description": "D feed flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S2",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-202",
+     "description": "E feed flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S3",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-203",
+     "description": "A feed flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S1",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  },
+  {
+   "id": "V-101",
+   "name": "Vapor/Liquid Separator",
+   "type": "separator",
+   "position_m": [
+    14.8,
+    0.0,
+    7.6
+   ],
+   "size_m": [
+    2.5,
+    5.0,
+    2.5
+   ],
+   "geometry": "placeholder",
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   },
+   "tags": [
+    {
+     "tag": "FI-114",
+     "description": "Separator underflow",
+     "uom": "m3/h",
+     "kind": "measurement",
+     "stream": "S10",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "LI-112",
+     "description": "Separator level",
+     "uom": "%",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "LV-207",
+     "description": "Separator pot liquid flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S10",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "PI-113",
+     "description": "Separator pressure",
+     "uom": "kPa g",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "TI-111",
+     "description": "Separator temperature",
+     "uom": "degC",
+     "kind": "measurement",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    }
+   ]
+  }
+ ],
+ "pipes": [
+  {
+   "stream": "S1",
+   "name": "A feed",
+   "from": "BL",
+   "to": "U-100",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-101",
+    "FV-203"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S2",
+   "name": "D feed",
+   "from": "BL",
+   "to": "U-100",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-102",
+    "FV-201"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S3",
+   "name": "E feed",
+   "from": "BL",
+   "to": "U-100",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-103",
+    "FV-202"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S4",
+   "name": "A and C feed",
+   "from": "BL",
+   "to": "C-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-104",
+    "FV-204"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S5",
+   "name": "Stripper overhead",
+   "from": "C-101",
+   "to": "U-100",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S6",
+   "name": "Reactor feed",
+   "from": "U-100",
+   "to": "R-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "AI-123",
+    "FI-106"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S7",
+   "name": "Reactor product",
+   "from": "R-101",
+   "to": "E-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S7b",
+   "name": "Condensed product",
+   "from": "E-101",
+   "to": "V-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S8",
+   "name": "Recycle",
+   "from": "V-101",
+   "to": "K-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S8b",
+   "name": "Recycle to feed",
+   "from": "K-101",
+   "to": "U-100",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-105"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S9",
+   "name": "Purge",
+   "from": "K-101",
+   "to": "BL",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "AI-129",
+    "FI-110",
+    "FV-206"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S10",
+   "name": "Separator underflow",
+   "from": "V-101",
+   "to": "C-101",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "FI-114",
+    "LV-207"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "stream": "S11",
+   "name": "Stripper product",
+   "from": "C-101",
+   "to": "BL",
+   "direction": "as listed in the model (from -> to); not separately verified",
+   "route": "placeholder: straight run between unit positions",
+   "tags_on_stream": [
+    "AI-137",
+    "FI-117",
+    "LV-208"
+   ],
+   "provenance": {
+    "source_check": "unverified",
+    "ops_review": "unverified"
+   }
+  }
+ ],
+ "loto_candidates": [
+  {
+   "unit": "C-101",
+   "isolation_candidate": "FV-204",
+   "stream": "S4",
+   "valve_owner_in_model": "C-101",
+   "inferred": true,
+   "basis": "final element on stream S4 (BL -> C-101) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "C-101",
+   "isolation_candidate": "LV-207",
+   "stream": "S10",
+   "valve_owner_in_model": "V-101",
+   "inferred": true,
+   "basis": "final element on stream S10 (V-101 -> C-101) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "C-101",
+   "isolation_candidate": "LV-208",
+   "stream": "S11",
+   "valve_owner_in_model": "C-101",
+   "inferred": true,
+   "basis": "final element on stream S11 (C-101 -> BL) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "K-101",
+   "isolation_candidate": "FV-206",
+   "stream": "S9",
+   "valve_owner_in_model": "K-101",
+   "inferred": true,
+   "basis": "final element on stream S9 (K-101 -> BL) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "U-100",
+   "isolation_candidate": "FV-201",
+   "stream": "S2",
+   "valve_owner_in_model": "U-100",
+   "inferred": true,
+   "basis": "final element on stream S2 (BL -> U-100) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "U-100",
+   "isolation_candidate": "FV-202",
+   "stream": "S3",
+   "valve_owner_in_model": "U-100",
+   "inferred": true,
+   "basis": "final element on stream S3 (BL -> U-100) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "U-100",
+   "isolation_candidate": "FV-203",
+   "stream": "S1",
+   "valve_owner_in_model": "U-100",
+   "inferred": true,
+   "basis": "final element on stream S1 (BL -> U-100) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "V-101",
+   "isolation_candidate": "LV-207",
+   "stream": "S10",
+   "valve_owner_in_model": "V-101",
+   "inferred": true,
+   "basis": "final element on stream S10 (V-101 -> C-101) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  }
+ ]
+}

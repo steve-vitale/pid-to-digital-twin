@@ -163,7 +163,7 @@ def mimic(provider, model, hidden=frozenset()):
     for uid in UNIT_ORDER:
         x, _ = positions[uid]
         left, top = (1210, 150) if uid == 'K-101' else (x - 45, 535)
-        for row, tag in enumerate(t for t in TAGS[uid] if t not in hidden):
+        for row, tag in enumerate(t for t in placed_tags(model, uid) if t not in hidden):
             it = items[tag]
             base = '[%s]TE_Plant/%s/%s' % (provider, it['unit'], tag)
             y = top + row*30
@@ -287,3 +287,13 @@ def unit_context(provider, model, uid, hidden=frozenset(), layout=None):
     kids.append(label('UnitGraphicNote',24,foot,1550,23,('Approximate process arrangement. Solid arrows = seed-model direction. Level fill = measured %, not volume. Outputs are not measured valve position.' if replay else 'Display coordinates are illustrative. Arrows require explicit direction. Missing mappings remain UNKNOWN; unresolved locations have no physical anchor.'),{'fontSize':12,'color':MUTED}))
     kids.append(label('UnitCaveat',24,foot+25,1550,23,('Full channel inventory, quality, normal bands, alarms and history below. Grey = normal; amber = outside normal band; red = existing alarm; UNKNOWN = unavailable.' if replay else 'Configured unit presentation only. This does not establish native platform bindings, site-approved limits or operations acceptance.'),{'fontSize':12}))
     return kids
+
+
+def placed_tags(model, uid):
+    """The overview's curated selection (TAGS), drawn beside whichever unit the model says owns each tag.
+
+    TAGS chooses WHICH readings the overview shows; the model decides WHERE they belong. A corrected owner in
+    data/te_process_model.json therefore moves the reading on the next build without editing this file
+    (scripts/pipeline.py and scripts/test_pipeline.py prove it)."""
+    owner = {i['tag']: i['unit'] for i in model['instruments'] + model['final_elements']}
+    return [t for tags in TAGS.values() for t in tags if owner.get(t) == uid]

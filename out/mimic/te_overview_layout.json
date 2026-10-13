@@ -1,0 +1,363 @@
+{
+ "meta": {
+  "kind": "proof_of_concept",
+  "status": "first-pass display layout, built to iterate on; not reviewed by operations",
+  "generated_by": "scripts/export_mimic_layout.py (renders scripts/ignition/build_mimic.py offline)",
+  "source": "data/te_process_model.json",
+  "source_sha256": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+  "inherits": "each reading carries the provenance of its model item; positions are illustrative"
+ },
+ "units": [
+  {
+   "id": "U-100",
+   "equipment_box": [
+    70,
+    350,
+    180,
+    150
+   ]
+  },
+  {
+   "id": "R-101",
+   "equipment_box": [
+    360,
+    350,
+    180,
+    150
+   ]
+  },
+  {
+   "id": "E-101",
+   "equipment_box": [
+    650,
+    350,
+    180,
+    150
+   ]
+  },
+  {
+   "id": "V-101",
+   "equipment_box": [
+    940,
+    350,
+    180,
+    150
+   ]
+  },
+  {
+   "id": "K-101",
+   "equipment_box": [
+    940,
+    170,
+    180,
+    125
+   ]
+  },
+  {
+   "id": "C-101",
+   "equipment_box": [
+    1300,
+    350,
+    180,
+    150
+   ]
+  }
+ ],
+ "readings": [
+  {
+   "tag": "FI-101",
+   "drawn_beside": "U-100",
+   "label_xy": [
+    25,
+    535
+   ],
+   "reads": "[Twin]TE_Plant/U-100/FI-101/PV",
+   "owner_in_model": "U-100",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-102",
+   "drawn_beside": "U-100",
+   "label_xy": [
+    25,
+    565
+   ],
+   "reads": "[Twin]TE_Plant/U-100/FI-102/PV",
+   "owner_in_model": "U-100",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-103",
+   "drawn_beside": "U-100",
+   "label_xy": [
+    25,
+    595
+   ],
+   "reads": "[Twin]TE_Plant/U-100/FI-103/PV",
+   "owner_in_model": "U-100",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "PI-107",
+   "drawn_beside": "R-101",
+   "label_xy": [
+    315,
+    535
+   ],
+   "reads": "[Twin]TE_Plant/R-101/PI-107/PV",
+   "owner_in_model": "R-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "TI-109",
+   "drawn_beside": "R-101",
+   "label_xy": [
+    315,
+    565
+   ],
+   "reads": "[Twin]TE_Plant/R-101/TI-109/PV",
+   "owner_in_model": "R-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "LI-108",
+   "drawn_beside": "R-101",
+   "label_xy": [
+    315,
+    595
+   ],
+   "reads": "[Twin]TE_Plant/R-101/LI-108/PV",
+   "owner_in_model": "R-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-106",
+   "drawn_beside": "R-101",
+   "label_xy": [
+    315,
+    625
+   ],
+   "reads": "[Twin]TE_Plant/R-101/FI-106/PV",
+   "owner_in_model": "R-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "TI-122",
+   "drawn_beside": "E-101",
+   "label_xy": [
+    605,
+    535
+   ],
+   "reads": "[Twin]TE_Plant/E-101/TI-122/PV",
+   "owner_in_model": "E-101",
+   "provenance": {
+    "source_check": "corrected",
+    "ops_review": "unverified",
+    "open_question": true
+   }
+  },
+  {
+   "tag": "TV-211",
+   "drawn_beside": "E-101",
+   "label_xy": [
+    605,
+    565
+   ],
+   "reads": "[Twin]TE_Plant/E-101/TV-211/PV",
+   "owner_in_model": "E-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "PI-113",
+   "drawn_beside": "V-101",
+   "label_xy": [
+    895,
+    535
+   ],
+   "reads": "[Twin]TE_Plant/V-101/PI-113/PV",
+   "owner_in_model": "V-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "TI-111",
+   "drawn_beside": "V-101",
+   "label_xy": [
+    895,
+    565
+   ],
+   "reads": "[Twin]TE_Plant/V-101/TI-111/PV",
+   "owner_in_model": "V-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "LI-112",
+   "drawn_beside": "V-101",
+   "label_xy": [
+    895,
+    595
+   ],
+   "reads": "[Twin]TE_Plant/V-101/LI-112/PV",
+   "owner_in_model": "V-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-114",
+   "drawn_beside": "V-101",
+   "label_xy": [
+    895,
+    625
+   ],
+   "reads": "[Twin]TE_Plant/V-101/FI-114/PV",
+   "owner_in_model": "V-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-105",
+   "drawn_beside": "K-101",
+   "label_xy": [
+    1210,
+    150
+   ],
+   "reads": "[Twin]TE_Plant/K-101/FI-105/PV",
+   "owner_in_model": "K-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-110",
+   "drawn_beside": "K-101",
+   "label_xy": [
+    1210,
+    180
+   ],
+   "reads": "[Twin]TE_Plant/K-101/FI-110/PV",
+   "owner_in_model": "K-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "JI-120",
+   "drawn_beside": "K-101",
+   "label_xy": [
+    1210,
+    210
+   ],
+   "reads": "[Twin]TE_Plant/K-101/JI-120/PV",
+   "owner_in_model": "K-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "HV-205",
+   "drawn_beside": "K-101",
+   "label_xy": [
+    1210,
+    240
+   ],
+   "reads": "[Twin]TE_Plant/K-101/HV-205/PV",
+   "owner_in_model": "K-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "PI-116",
+   "drawn_beside": "C-101",
+   "label_xy": [
+    1255,
+    535
+   ],
+   "reads": "[Twin]TE_Plant/C-101/PI-116/PV",
+   "owner_in_model": "C-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "TI-118",
+   "drawn_beside": "C-101",
+   "label_xy": [
+    1255,
+    565
+   ],
+   "reads": "[Twin]TE_Plant/C-101/TI-118/PV",
+   "owner_in_model": "C-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "LI-115",
+   "drawn_beside": "C-101",
+   "label_xy": [
+    1255,
+    595
+   ],
+   "reads": "[Twin]TE_Plant/C-101/LI-115/PV",
+   "owner_in_model": "C-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "tag": "FI-117",
+   "drawn_beside": "C-101",
+   "label_xy": [
+    1255,
+    625
+   ],
+   "reads": "[Twin]TE_Plant/C-101/FI-117/PV",
+   "owner_in_model": "C-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  }
+ ]
+}
