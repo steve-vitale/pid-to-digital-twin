@@ -1,9 +1,12 @@
 # The one-click demo (Docker)
 
-> Current-source warning (2026-10-10): the Docker `.gwbk` and historical runtime receipts do not validate the latest reviewed model or spatial views. Compose restores that historical backup, not the regenerated ZIP/provider. See [current-source handoff](../docs/CURRENT_GATEWAY_HANDOFF.md) for exact artifacts and the unexecuted runtime contract.
+> **This demo restores a historical backup.** `docker/twin-demo.gwbk` holds the October 8 build of the screens, not
+> the current 23-view project, and its CI checks cover that backup only. The current project was tested separately in a
+> disposable Ignition gateway: see [the native acceptance page](../docs/IGNITION_ACCEPTANCE.md). All Tennessee Eastman
+> values are recorded replay, not a live process simulation.
 
-
-This runs the whole twin on your computer: Ignition, the live Tennessee Eastman plant, and the extracted drawings.
+This runs the whole twin on your computer: Ignition, the Tennessee Eastman plant replayed from recorded data, and the
+extracted drawings.
 You don't need Python, settings or keys. It's an extra option. If you'd rather not install Docker, the
 [15-minute quickstart](../docs/IGNITION_QUICKSTART.md) does the same thing with an Ignition you install yourself.
 
@@ -21,17 +24,19 @@ You don't need Python, settings or keys. It's an extra option. If you'd rather n
    - The first time takes several minutes: it downloads Ignition (about 1 GB).
    - When it's ready, the plant screen opens in your browser by itself.
 3. Look around:
-   - **Plant screen:** http://localhost:8088/data/perspective/client/PIDTwin. Live values from the open Tennessee
-     Eastman simulation.
-   - **Extracted drawings:** http://localhost:8088/data/perspective/client/PIDTwin/open100/0 (through `/11`).
+   - **Plant overview:** http://localhost:8088/data/perspective/client/PIDTwin. Values replayed from a recorded run of
+     the open Tennessee Eastman simulation, one tile per unit; the trends fill in over the first few minutes. The bar
+     at the top leads to every other screen. What they show: [docs/OPERATOR_SCREENS.md](../docs/OPERATOR_SCREENS.md).
+   - **Extracted drawings:** the **Drawings** button, or
+     http://localhost:8088/data/perspective/client/PIDTwin/open100/0 (through `/11`).
      - On sheet 0, 24 instruments show live values. They were mapped from a demo I/O list, and their values are
        synthetic.
-     - Every other instrument shows Ignition's bad-quality marker. In this historical backup it prints as `null` in a red
-       box, which reads like a fault; the current generated project says "not connected" instead (journal entry 38).
-       Either way it is honest about the data: no data source is connected
-       to it yet.
-4. **See an alarm:** double-click **`fault-demo.bat`**. In about 30 seconds the reactor pressure (PI-107) passes
-   its limit and turns red. **`normal-demo.bat`** switches back.
+     - Every other instrument shows Ignition's bad-quality marker. In this historical backup it prints as `null` in a
+       red box, which reads like a fault; the current generated project says "not connected" instead (journal entry
+       38). Either way it is honest about the data: no data source is connected to it yet.
+4. **See an alarm:** double-click **`fault-demo.bat`**. The replay jumps into the recorded fault 6 run (the A feed is
+   lost): values that have left their normal range turn amber at once, and in about 30 seconds the reactor pressure
+   (PI-107) passes its alarm limit and turns red. **`normal-demo.bat`** switches back.
 5. **Stop:** double-click **`stop-demo.bat`**. Nothing is deleted, and `start-demo.bat` brings it back.
 
 ## Start it (Mac or Linux)
@@ -68,12 +73,13 @@ Then open the same addresses as above.
 | Part | What it is |
 |---|---|
 | `gateway` | The official Ignition 8.3.10 image. On first start it restores `docker/twin-demo.gwbk`: the Twin tags, the PIDTwin screens, and read-only connections to the two data servers |
-| `te-sim` | `scripts/ignition/te_sim_server.py`, replaying the open Tennessee Eastman data (normal, or fault 6) |
+| `te-sim` | `scripts/ignition/te_sim_server.py`, replaying recorded runs of the open Tennessee Eastman simulation (normal, or fault 6) |
 | `demo-points` | `scripts/ignition/demo_points_server.py`, serving synthetic values for the 24 mapped demo points |
 
 **Checks:** every change to these files starts the whole demo from nothing on GitHub's test machines and opens the
-screens in a real browser (`.github/workflows/docker-demo.yml`, `scripts/check_docker_demo.py`). It checks the
-screens show live values, that sheet 0 shows 24 live and 12 not connected, and that the fault turns the alarm red.
+screens in a real browser (`.github/workflows/docker-demo.yml`, `scripts/check_docker_demo.py`). It checks that
+the overview shows all its key values live, the schematic shows live values, sheet 0 shows 24 live and 12 not
+connected, and the fault turns the alarm red.
 Screenshots from each run are kept with the run. Each change is started from scratch three times in parallel, and the results are posted on
 the run page.
 

@@ -74,7 +74,7 @@ Estimates, dated October 2026, from [AT_YOUR_PLANT.md](AT_YOUR_PLANT.md) §6:
 - annotation to tune and test it: 200 sheets at 1–2 engineer-hours each, so 200–400 hours.
 
 **Measured here:** the hosted Gemma 4 31B, before any tuning, finished 9 of 12 sheets at about 3–5 minutes each. It
-scored about 0.53 symbol F1 where it finished, against about 0.85–0.90 for the cloud models. Self-hosted speed was
+scored about 0.53 "found" F1 where it finished, against about 0.90 for the frontier models. Self-hosted speed was
 not measured.
 
 ## 5. What is not measured, and why

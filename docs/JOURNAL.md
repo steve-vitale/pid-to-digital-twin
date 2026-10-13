@@ -1,9 +1,9 @@
 # Build journal
 
-Entries describe their historical snapshots. Local receipts, private review conversations, intermediate
-render packages and sealed trial evidence are not included in this public source snapshot. Historical
-verification and environment/push-status statements are not current runtime or publication acceptance.
-Current source and documentation include Claude and OpenAI/Codex contributions under Steve Vitale’s guidance.
+Entries describe their historical snapshots. Local receipts, review conversations, intermediate render packages
+and sealed trial evidence are not included here. A historical verification statement is not a current result.
+AI coding agents (Claude Code, and later Codex) wrote most of the code and first drafts; I set the direction and
+checked the results.
 
 How this project was built and why each choice was made, written as it happens. Results are in the README and
 `out/`. This file is the reasoning behind them.
@@ -270,7 +270,7 @@ results for reasons that don't matter to operations.
 |---|---|---|
 | Codex (gpt-6.1-sol) | 0.87 → 0.87 → 0.85 | 0.53 |
 | Claude (claude-opus-5-5) | 0.85 → 0.85 → 0.85 | 0.42 |
-| Gemini (gemini-3.1-pro) | 0.44 → 0.57 → 0.74 | 0.24 |
+| Gemini (gemini-3.1-pro-preview) | 0.44 → 0.57 → 0.74 | 0.24 |
 
 - **Gemini's gap was mostly format, not vision.** On 5 of 12 drawings it wrote box coordinates in a different axis
   order (y before x). Those drawings scored about 0 as delivered and 0.60–0.92 with the axes swapped back.
@@ -1207,7 +1207,7 @@ quality controls. All nine aggregate scripts pass without skips using the unchan
 dependencies in an isolated temporary environment. JSON/ZIP shape checks are not an Ignition-native schema
 validation. Synthetic quality objects and generated views are not runtime evidence.
 
-**Handoff and blocker:** [current-source handoff](CURRENT_GATEWAY_HANDOFF.md) describes the browser
+**Handoff and blocker:** [current-source handoff](IGNITION_ACCEPTANCE.md) describes the browser
 acceptance checklist. Detailed local receipts are not included in this publication.
 Compose still restores the untouched historical `docker/twin-demo.gwbk`; that backup and old
 screenshots/receipts do not validate these artifacts. Java 21/Chromium are available, but no container
@@ -1642,78 +1642,45 @@ answer different questions.
 record its identity. This Docker result covers the **historical packaged demo**
 restored from `docker/twin-demo.gwbk`. Native Ignition/browser acceptance of the
 **newly generated 23-view project** remains outstanding, as does licensed PI
-import and read-back. The [current-source handoff](CURRENT_GATEWAY_HANDOFF.md)
+import and read-back. The [current-source handoff](IGNITION_ACCEPTANCE.md)
 keeps those gates separate; a working demo does not establish plant readiness.
 
-## 36. Preserve the desktop work and make the next acceptance step explicit
+## 36. Bring the reviewed work onto one branch and make the next step explicit
 
-**2026-10-12:** Steve asked to get the pending desktop work committed so Claude
-could resume. The public reviewed branch was rechecked at `e565c74`; `main`
-remained `475c122`. The older desktop checkout was still on `operator-screens`
-at `20aa7cd`, with one October 8 Docker-guide edit. Local commit
-`5315b2ba18cfbc98fe5c169b479e3140b40366b7` preserves that edit as supplied.
-A separate `desktop-claude-resume-20261012` worktree starts directly from the
-reviewed head. [Claude resume](CLAUDE_RESUME.md) records both branches and their
-scope. Existing published commits were retained, without a tidy-up merge or
-another public upload. No private conversation or gateway backup was added.
+**2026-10-12:** the reviewed public branch (`e565c74`) and a later Docker-guide edit made on another checkout were
+brought together on one working branch, without rewriting any published commit. No private conversation or
+gateway backup was added.
 
-**What the desktop checks actually showed:** a disposable copy of reviewed
-source, using the existing SHA-256-verified TE cache and installed pinned package
-versions, regenerated 23 views and 23 routes. Source-only checks passed 12/15;
-full cached-data checks passed 16/20. After resolving sandbox temporary-directory
-permissions, remaining failures were a Windows-invalid filename fixture, two
-unavailable symlink-creation privileges, and the packaged-import test's isolated
-Python process correctly excluding a user-site dependency. Those checks were
-not weakened. The current-artifact regression passed, and 76 source/model/layout/
-Dockerfile paths remained byte-identical. This incomplete Windows result does
-not replace the separate final-head Ubuntu CI 20/20 or historical Docker 3/3.
-Native current-source Ignition/browser and licensed PI acceptance remain unrun.
+**What a Windows run of the tests showed at that point:** a disposable copy of the reviewed source, using the
+SHA-256-verified TE cache and the pinned package versions, regenerated 23 views and 23 routes. Source-only checks
+passed 12/15 and the full suite 16/20. The failures were a filename that Windows doesn't allow, two tests that need
+symlink rights Windows hadn't granted, and the packaging test's isolated Python process correctly refusing a
+user-site package. None of the checks was weakened to make them pass; entry 38 fixes the portability problems.
+This result didn't replace the Linux CI run (20/20) or the historical Docker starts (3/3).
 
-**Direction to preserve:** Steve's contribution is the engineering judgement:
-instrument positions and connection boundaries, realistic process placement,
-source-linked uncertainty, and an overview whose unit detail adds useful context.
-The project should remain an adaptable open-source method readers can evaluate
-themselves; interested readers can initiate a conversation without a consultancy
-sales pitch. No additional model comparison is planned for the second dataset.
+**Direction kept:** the engineering judgement is the point of the project: instrument positions and connection
+boundaries, realistic process placement, uncertainty linked to its source, and an overview whose unit screens add
+useful detail. It stays an open-source method that readers can evaluate and adapt themselves. No further model
+comparison is planned for the second dataset. A 3D walkthrough was considered and deferred until native acceptance
+of the 2D screens was finished. Recorded TE replay and synthetic OPEN100 values establish neither responsive
+physics nor plant readiness.
 
-The LinkedIn 3D CIP excerpt inspired recommendations for a repeatable operator
-walkthrough, a shared equipment/ports/tag contract for 2D and optional 3D,
-executable simulated fault cases, and requested/feedback-confirmed/unknown route
-states. These are future recommendations, not implemented features; the full
-video was not viewed. Finish native acceptance before expanding 3D. Recorded TE
-replay and synthetic read-only OPEN100 values still establish neither responsive
-physics nor operational readiness or plant validation.
+## 37. Take a cold-reader documentation review seriously
 
-## 37. Preserve a cold-reader replication review without overwriting active work
+**2026-10-13:** a cold-reader review, done from GitHub alone with no access to the working machine, read the
+replication docs at `e565c74` and asked whether a competent engineer could follow them from a fresh checkout. Two findings mattered most. The
+quickstart warned about versions, but its import steps could still pair the committed historical project ZIP
+with the current tag provider. And the full-suite instructions skipped the step that regenerates the project ZIP.
+Neither was a claim that a check passed without evidence; both were places where a careful reader could still go
+wrong.
 
-**2026-10-13:** saved the supplied [replication documentation review](REPLICATION_COLD_READER_REVIEW_2026-10-13.md)
-of public `e565c74`, with a separate desktop comparison at
-`485f000f276b4c52ae2a91850a503cb921d57bb2`. The quickstart, README, replication,
-dataset-adaptation and twin-output guides retain the reviewed text, so the five
-documentation findings remain. The current-source handoff differs only by its
-earlier resume pointer. This preservation pass did not implement the suggested
-insertions or run a build, test, model call, gateway operation or publication.
+Both are fixed in release v1.2.0: the quickstart now makes you pick one set of files before importing, and the
+README's full-suite block lists every step in order. The other findings (a real-candidate recipe beside the offline
+preflight, an own-dataset handoff contract, and a domain warning beside the batch advice in the twin outputs guide)
+are still open.
 
-The two independently narrowed findings matter: the quickstart already warns
-about versions, but its import path can still mix a historical ZIP with a current
-provider. The preflight already supports alternate inputs and has synthetic
-fixtures, but its bare public commands lack an adjacent recipe for real-candidate
-evidence. These are replication/documentation gaps, not claims that checks pass
-without evidence or that all contract examples are absent.
-
-Later Claude-coauthored source commits have already addressed Windows test
-portability and added native acceptance tools/activity. Their code is preserved;
-the old Windows failures and NOT RUN snapshot are not silently restated as current
-results. Full acceptance still requires exact candidate observations and gate
-results; commit messages alone are not that evidence. Historical Docker starts
-remain a different artifact generation. Symbol/class correctness and a plausible
-graph parent remain distinct from verified measurement attachment, especially
-where the labeled dataset contains no instruments.
-
-No explicit reply or acknowledgement of the new review was found in the existing
-handoff files. A saved resume pointer makes it available without claiming Claude
-read or agreed with it. Generators, UI, main and the separate 3D-tour worktree are
-outside this docs-only continuation.
+**Lesson:** a warning at the top of a page doesn't help if the numbered steps below it contradict it. Readers follow
+the steps.
 
 ## 38. Import the current project into a real gateway, and watch what the offline checks could not
 

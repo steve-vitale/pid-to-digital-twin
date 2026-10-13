@@ -118,7 +118,7 @@ Two packages are committed:
 - **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
 - **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
   story belongs to Ignition here.
-- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. Current regenerated artifacts have offline checks only; native runtime/browser acceptance is not run.
+- **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. The current regenerated project then passed V1–V8 and a 23-route browser contract in a disposable Ignition gateway ([native acceptance page](IGNITION_ACCEPTANCE.md)). PI import has not been run.
 
 To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
 System Explorer, then separately configure and verify real PI point bindings. The current exporter retains

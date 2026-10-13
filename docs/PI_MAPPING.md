@@ -1,4 +1,4 @@
-# Reviewed PI mapping: offline staging, not a native import
+# PI point mapping from reviewer-supplied references: offline staging, not a native import
 
 The extracted-twin exporter now accepts a separate `pi_point` record. The OPC
 `data_point` mapper remains Ignition-only; it cannot establish a PI mapping.

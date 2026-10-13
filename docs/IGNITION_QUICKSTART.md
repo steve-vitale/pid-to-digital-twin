@@ -1,6 +1,16 @@
 # Load the twin into an isolated Ignition lab
 
-**Version boundary:** the workflow and receipts below describe the historical lab build. Current provider/project files have offline checks only; native runtime/browser acceptance is **not run**. Follow [CURRENT_GATEWAY_HANDOFF.md](CURRENT_GATEWAY_HANDOFF.md) for the exact current candidate and checks. The [Docker demo](../docker/README.md) restores an older backup, not the current files. Use an isolated non-production gateway; imports, account setup and verifier fault controls change lab state.
+**Pick one set of files before you import.** The committed `out/ignition/gateway/PIDTwin.zip` is the historical
+export and does not match the current tag provider. Don't combine them.
+- **Current project (recommended):** stage the dependencies and TE data (step 0), then run
+  `python scripts/ignition/build_gateway.py --write-only` in a disposable checkout. Import the `twin_provider.json`
+  and `PIDTwin.zip` produced by that same build, and keep its `build_meta.json`, the commit and the SHA-256 hashes.
+  This project passed native acceptance in a disposable Ignition 8.3.10 gateway on 2026-10-13; see
+  [the native acceptance page](IGNITION_ACCEPTANCE.md) for what was checked and what wasn't.
+- **Historical demo:** use the [Docker demo](../docker/README.md), which restores the October 8 backup, and its
+  historical expectations.
+
+Use an isolated, non-production gateway. Imports, account setup and verifier fault controls change its state.
 
 What you get: live Tennessee Eastman operator screens (a plant overview, a screen per unit, trends, and values that
 turn amber when they leave their normal band before the reactor-pressure alarm fires on a replayed fault), plus the
@@ -18,7 +28,7 @@ build only. Tested on Ignition 8.3.10 only.
 | File | What it is |
 |---|---|
 | [`out/ignition/gateway/twin_provider.json`](../out/ignition/gateway/twin_provider.json) | Tag import: UDT types, the current TE model (53 instances: 52 recorded channels plus unavailable SC-212), and 910 OPEN100 assets including a metadata-only valve callout, 24 synthetic mappings and 334 placeholder PVs |
-| [`out/ignition/gateway/PIDTwin.zip`](../out/ignition/gateway/PIDTwin.zip) | Perspective project: the operator screens, the TE schematic, and one screen per extracted drawing (`OPEN100/Sheet_0` … `Sheet_11`) |
+| `out/ignition/gateway/PIDTwin.zip` (regenerate it; the [committed copy](../out/ignition/gateway/PIDTwin.zip) is historical) | Perspective project: the operator screens, the TE schematic, and one screen per extracted drawing (`OPEN100/Sheet_0` … `Sheet_11`) |
 | [`scripts/ignition/te_sim_server.py`](../scripts/ignition/te_sim_server.py) | Small OPC UA server replaying the open TE simulation data, read-only, standing in for a plant's PLC/OPC server |
 | [`scripts/fetch_te_data.py`](../scripts/fetch_te_data.py) | Downloads the two TE runs it replays (normal operation and fault 6), with checksums |
 
@@ -35,6 +45,7 @@ build only. Tested on Ignition 8.3.10 only.
   ```
   pip install -r requirements.txt
   python scripts/fetch_te_data.py
+  python scripts/ignition/build_gateway.py --write-only     # regenerates the matched provider + project; no gateway contact
   python scripts/ignition/te_sim_server.py --run normal      # leave this running
   ```
 
@@ -49,8 +60,8 @@ Name it **`Twin`**, exactly. The screens and alarm expressions refer to `[Twin]`
 
 It should show **CONNECTED**.
 
-**3. Screens.** Go to **Platform → Projects → Import Project**, choose `out/ignition/gateway/PIDTwin.zip`, and name it
-**`PIDTwin`**.
+**3. Screens.** Go to **Platform → Projects → Import Project**, choose the `out/ignition/gateway/PIDTwin.zip` you just
+regenerated, and name it **`PIDTwin`**.
 
 **3b. Historian (for the trends).** Create a historian of type **Core Historian** named **`TwinHistory`**, exactly;
 the TE tags log to it. Without it everything else works and the trends stay empty. This step was tested through the
@@ -72,7 +83,7 @@ The historical import reported 1,102 tags and 0 failures. Do not use that old co
 - Plant overview: `http://localhost:8088/data/perspective/client/PIDTwin`. Values change about once a second; the
   trends fill in over the first few minutes. The bar at the top links every screen.
 - Unit screens `…/unit/R-101` and so on, the schematic `…/schematic`, and the alarm list `…/alarms`.
-- Extracted drawings: `…/drawings`, then `/open100/0` through `/open100/11`. Unmapped instruments must show bad quality and no healthy value. Current exports also include 24 synthetic mappings (unavailable until their server is connected) and a metadata-only valve callout; see the current handoff for exact expected sets.
+- Extracted drawings: `…/drawings`, then `/open100/0` through `/open100/11`. Unmapped instruments must show bad quality and no healthy value. Current exports also include 24 synthetic mappings (unavailable until their server is connected) and a metadata-only valve callout; see [the native acceptance page](IGNITION_ACCEPTANCE.md) for the exact expected sets.
 
 **Optional: the mapped demo points.** Start `python scripts/ignition/demo_points_server.py` (synthetic values) and
 add a second OPC UA connection the same way as step 2: discovery URL `opc.tcp://localhost:4842/open100-demo`, name

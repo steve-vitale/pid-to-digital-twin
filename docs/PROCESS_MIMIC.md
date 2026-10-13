@@ -1,8 +1,8 @@
 # Whole-process Overview and instrumented unit detail (local prototype)
 
-Built from `operator-screens` at `20aa7cd32ea0ee793394f063bbdf8234f5a12590`, following the three-unit
-prototype/alignment checkpoint `3b97ecbe55c37b68a261b95db68b8a9d123cef8e`.
-No gateway import, deployment, public release or successful remote push is claimed.
+Built from `operator-screens` at `20aa7cd32ea0ee793394f063bbdf8234f5a12590`, following an earlier three-unit
+prototype checkpoint that was not published separately.
+Later imported into a disposable Ignition gateway; see journal entry 38 and the [native acceptance page](IGNITION_ACCEPTANCE.md). No deployment is claimed.
 
 ## Navigation and process coverage
 

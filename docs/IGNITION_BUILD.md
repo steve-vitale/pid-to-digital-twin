@@ -1,6 +1,8 @@
 # Ignition build and verification (plan written before the build; results at the end)
 
-> Current-source warning (2026-10-10): the Docker `.gwbk` and historical runtime receipts do not validate the latest reviewed model or spatial views. Compose restores that historical backup, not the regenerated ZIP/provider. See [current-source handoff](CURRENT_GATEWAY_HANDOFF.md) for exact artifacts and the unexecuted runtime contract. Update: the current project was later run in a disposable gateway (journal entry 38).
+> **Version note:** the results on this page are the historical scripted build (October 8). The Docker `.gwbk` restores that
+> build too. The current 23-view project was imported separately into a disposable Ignition 8.3.10 gateway on 2026-10-13
+> and passed V1–V8 plus a browser contract; see [the native acceptance page](IGNITION_ACCEPTANCE.md) and journal entry 38.
 
 
 Committed before any Ignition configuration exists. The checks below are the acceptance test. The build is done when

@@ -18,7 +18,7 @@ models disagree there most. The rest of this page says, part by part, which kind
 
 | Part | Models | How it was checked |
 |---|---|---|
-| **Reading the drawings** (symbols, tags, connections) | **Claude** (claude-opus-5-5, Claude Code CLI), **GPT** (gpt-6.1-sol, Codex CLI), **Gemini** (gemini-3.1-pro, API); three runs each, plus **Gemma** (31B open weights) as an offline-capable baseline | Scored against PID2Graph answer keys; repeat runs to measure noise; sealed holdouts. [EVALUATION.md](EVALUATION.md), [GOAL.md](GOAL.md) |
+| **Reading the drawings** (symbols, tags, connections) | **Claude** (claude-opus-5-5, Claude Code CLI), **GPT** (gpt-6.1-sol, Codex CLI), **Gemini** (gemini-3.1-pro-preview, API); three runs each (two with the identical prompt, one with the revised prompt), plus **Gemma** (31B open weights) as an offline-capable baseline | Scored against PID2Graph answer keys; repeat runs to measure noise; sealed holdouts. [EVALUATION.md](EVALUATION.md), [GOAL.md](GOAL.md) |
 | **Rounds 2–3 methods** (tiling, line tracing, parent choice) | Claude, GPT, Gemini, each scored on both holdouts | Pre-registered rule picked the method; losses reported |
 | **Round 4** (old-scan robustness) | Claude and GPT. Gemini left out to keep metered spend down | Pre-registered; results in GOAL.md round 4 |
 | **Which model's output became the published twin** | GPT's, with tiling + tracing (method M3) | Chosen by the rule written before the holdouts were scored, not by preference |

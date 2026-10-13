@@ -1,6 +1,6 @@
 """Derive the browser contract from a generated project ZIP: every route, its view title and every click target.
 
-Stdlib only; reads a local file, contacts nothing. The browser harness (browser_contract.mjs) clicks each target at
+Stdlib only; reads a local file, contacts nothing. The browser harness (browser_contract.js) clicks each target at
 its exported position and checks it lands on the right route and view, so the contract always matches the exact
 candidate under test rather than a hand-kept list.
 

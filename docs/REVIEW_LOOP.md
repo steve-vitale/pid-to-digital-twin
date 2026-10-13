@@ -45,7 +45,7 @@ The reviewer fills in the `OPS_` columns:
 python scripts/apply_review.py data/te_process_model.json reviewed.csv --reviewer "Name, role" --dry-run
 python scripts/apply_review.py data/te_process_model.json reviewed.csv --reviewer "Name, role"
 python scripts/generate.py                                  # or: generate.py <twin>/plant_model.json
-# Gateway import is a separate, approved isolated-lab step; see CURRENT_GATEWAY_HANDOFF.md.
+# Gateway import is a separate, approved isolated-lab step; see IGNITION_ACCEPTANCE.md.
 ```
 
 **What happens:**
@@ -94,10 +94,10 @@ Use `--replace-all` only for an explicitly approved authoritative replacement in
 python scripts/map_points.py out/twin/r2-tiles-trace/codex/plant_model.json data/io_lists/open100_sheet0_demo.csv --sheets 0 --dry-run
 # After inspecting the full diff and approving the partial update, repeat without --dry-run.
 python scripts/generate.py out/twin/r2-tiles-trace/codex/plant_model.json
-# Gateway import is a separate, approved isolated-lab step; see CURRENT_GATEWAY_HANDOFF.md.
+# Gateway import is a separate, approved isolated-lab step; see IGNITION_ACCEPTANCE.md.
 ```
 
-**Gateway caution:** `build_gateway.py --fresh` deletes/recreates the lab provider and configures gateway resources; it is not a file-only regeneration command. Runtime import and verification require a separately approved isolated lab, not production. See [current handoff](CURRENT_GATEWAY_HANDOFF.md).
+**Gateway caution:** `build_gateway.py --fresh` deletes/recreates the lab provider and configures gateway resources; it is not a file-only regeneration command. Runtime import and verification require a separately approved isolated lab, not production. See [native acceptance page](IGNITION_ACCEPTANCE.md).
 
 **Matching never guesses.** Tags match after separators and case are normalized, so `FT 1401`, `FT-1401` and
 `ft_1401` are the same tag. `asset_id` pins a row when needed. An applied report is saved under `out/mapping/`; dry-run only prints it. In addition to errors and the complete mapping diff, it retains four worklists:
@@ -114,7 +114,7 @@ labeled as such. On sheet 0 it maps 24 instruments, with three different spellin
 points that aren't on the drawing. It also hits one real ambiguity: the drawing shows `FT 1401` on two symbols.
 `scripts/ignition/demo_points_server.py` serves synthetic values for those points.
 
-The historical runtime receipt showed 24 mapped tags Good and 335 placeholders Bad. The current reviewed model has 334 placeholder PVs plus the metadata-only MS 14010 valve callout; its current artifacts have offline checks, while native runtime acceptance remains not run. V4 checks quality behavior when run in an approved lab.
+The historical runtime receipt showed 24 mapped tags Good and 335 placeholders Bad. The current reviewed model has 334 placeholder PVs plus the metadata-only MS 14010 valve callout; in the 2026-10-13 native run of the current project, the gateway read 24 mapped points Good and all 334 placeholders Bad, with 0 false-good ([native acceptance page](IGNITION_ACCEPTANCE.md)).
 
 ![OPEN100 sheet 0 in Ignition: mapped points live, the rest not connected](screenshots/ignition-open100-sheet0-mapped.png)
 

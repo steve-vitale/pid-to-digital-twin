@@ -8,7 +8,7 @@ Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This 
 - the extracted twin packages under `out/twin/` (plant models, review queues, SVGs, Ignition and PI AF files built
   from the drawings);
 - the Perspective screens in `out/ignition/gateway/PIDTwin.zip`, which embed those SVGs and the greyed drawings;
-- images made from the drawings: `docs/screenshots/before-after-sheet0.png`, `scan-levels.png`, the OPEN100 screen
+- images made from the drawings: `docs/screenshots/before-after-sheet0.png`, `docs/social-preview.png`, `scan-levels.png`, the OPEN100 screen
   captures, and `docs/demo.gif`;
 - `data/drawings/`: the 12 OPEN100 drawings, greyed and downscaled as screen backgrounds
   (`scripts/ignition/prepare_drawings.py`);

@@ -39,9 +39,9 @@ These are the rules this project follows. Each one also applies at a plant.
    `scripts/score_pid2graph.py`, and committed before any model ran. Changing them later is allowed, but it's
    visible in the history, with the reason.
 2. **Test the grader before you grade.** Five controls run on every drawing: a perfect answer, an empty answer,
-   every class wrong, every box moved, and half the symbols dropped (`scripts/test_scorer_controls.py`). The first
-   two versions of the scorer failed them: a deliberately wrong answer scored 15–32%. See journal entry 7. Rerun the
-   controls after every scorer change.
+   every class wrong, every box moved, and half the symbols dropped (`scripts/test_scorer_controls.py`). The scorer's
+   first version gave a deliberately wrong answer 15–32%, and the tightened second version still gave 3–20%. See
+   journal entry 7. Rerun the controls after every scorer change.
 3. **Never let one number be the headline.** Report precision *and* recall, strict *and* rough, per class, and
    connectivity separately. A tool can raise one by sacrificing another, for example by reporting fewer symbols to
    raise precision.

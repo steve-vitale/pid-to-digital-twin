@@ -22,7 +22,7 @@ when it isn't.**
 
 Every page has the same bar: navigation, the number of values in alarm, and the number outside their normal band.
 
-![Reactor unit screen during fault 6: pressure red at its 3,000 kPa limit; cooling water outlet temperature, feed analyzer and cooling water valve amber; agitator speed honestly not connected](screenshots/hmi-unit-reactor-fault.png)
+![Reactor unit screen during fault 6 (historical October 8 build): pressure red at 3,000 kPa, past its 2,895 kPa high-pressure alarm and at the 3,000 kPa shutdown limit; cooling water outlet temperature, feed analyzer and cooling water valve amber; agitator speed has no data source and shows as null on this older build](screenshots/hmi-unit-reactor-fault.png)
 
 ![An extracted drawing: the original OPEN100 sheet, greyed, with live values beside mapped instruments and not-connected markers on the rest](screenshots/hmi-drawing-sheet0.png)
 
