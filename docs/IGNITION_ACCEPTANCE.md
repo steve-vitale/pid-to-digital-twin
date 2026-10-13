@@ -24,8 +24,10 @@ network, both images and the build cache were removed afterwards; the rollback i
 **Commit identity.** The candidate was a `git archive` of local commit `4a00c35` on the working branch. A
 `--write-only` build of it reproduced the committed project ZIP byte for byte (SHA-256 `8982ccd2…`; provider
 `3ae2621c…`), so the file hashes identify the candidate even if the commit is later rebased or squashed before
-publishing. After the branches were integrated (journal entry 49), a `--write-only` build of the merged source
-reproduced the same ZIP byte for byte, so this acceptance applies to the merged build.
+publishing. After the branches were integrated (journal entry 49), a `--write-only` build of the merged source on
+Windows, where the acceptance ran, reproduced the same ZIP byte for byte, so this acceptance applies to the merged
+build. A Linux build writes the same members, but its compressed bytes differ (another zlib build), so the pipeline
+compares archives by their members.
 
 The first import of this candidate found one defect the offline tests had missed: both data-source alarms stayed
 active with a count of 0, because Ignition's AboveValue alarm mode is inclusive and the setpoint was 0. The setpoint

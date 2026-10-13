@@ -47,7 +47,7 @@
     },
     {
      "what": "gateway",
-     "value": "native acceptance of the current 24-view project in a disposable Ignition 8.3.10 gateway on recorded and synthetic data, 2026-10-13: V1-V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders, data-source diagnostic alarms fire and clear; the integrated build reproduces the accepted project ZIP byte for byte",
+     "value": "native acceptance of the current 24-view project in a disposable Ignition 8.3.10 gateway on recorded and synthetic data, 2026-10-13: V1-V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders, data-source diagnostic alarms fire and clear; a Windows build of the integrated source reproduces the accepted project ZIP byte for byte (on Linux the members are identical)",
      "source": "out/ignition/gateway/receipts/native-current-20261013-alarms.json"
     },
     {
@@ -1455,7 +1455,7 @@
     "numpy"
    ],
    "requires_note": "BLENDER_EXE: a Blender executable (rendered with Blender 5.2.2; stills only, no video); the fault-6 replay for the fault stills (python scripts/fetch_te_data.py); Pillow",
-   "treatment": "Equipment, tags, ownership and stream ends from the model (purge at V-101); purpose sentences from data/te_unit_purposes.json; sizes, elevations and pipe routes are placeholders; labels in Atkinson Hyperlegible; twelve stills rendered and measured, five published; a legacy-label render is re-measured as the 'before' evidence.",
+   "treatment": "Equipment, tags, ownership and stream ends from the model (purge at V-101); purpose sentences from data/te_unit_purposes.json; sizes, elevations and pipe routes are placeholders; labels in Atkinson Hyperlegible; twelve stills rendered and measured, five published; a legacy-label render is re-measured as the 'before' evidence. Blender's renders can differ by a few grey levels between runs (two of the five JPEGs did, max 7 of 255), so a rebuild may rewrite the stills; the measured label boxes and the verification report came out identical.",
    "carries": "PROOF OF CONCEPT: placeholder geometry, recorded replay, inferred LOTO points (not a procedure), a Claude-written script not reviewed by an operator",
    "checked_by": "scripts/test_build_3d_scene.py (contract, hygiene with HAZARD_DENY_TERMS), scripts/test_verify_3d_render.py; verify_3d_render.py: no check fails on the twelve stills (15 pass, 2 informational) (exports, topology from geometry, legibility); OCR read-back not re-run (drafts/3d-tour/REVIEW_NOTES.md)"
   },

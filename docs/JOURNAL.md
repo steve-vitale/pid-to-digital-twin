@@ -2591,8 +2591,13 @@ branch whose history could not be published. This entry is the merge.
 - **Two formats meeting.** The PI sheet v2 moved attribute descriptions out of the sheet, and the lineage branch had
   added each item's confidence to those descriptions. The merged exporter keeps both, the propagation test reads the
   v2 layout, and the 3D render verifier compares descriptions with the confidence suffix removed.
-- **The accepted gateway build is still the accepted build.** Rebuilt from the merged source, the project ZIP is
-  byte-identical to the one natively accepted (`8982ccd2…`), so the acceptance in entry 47 applies to it.
+- **The accepted gateway build is still the accepted build.** Rebuilt from the merged source on Windows, the project
+  ZIP is byte-identical to the one natively accepted (`8982ccd2…`), so the acceptance in entry 47 applies to it.
+- **The first CI run after the push found one more.** On Linux the same build writes the same ZIP members, but the
+  compressed bytes differ (another zlib build, and the archive records the OS that wrote it), so the orchestrator
+  called the gateway stage stale. ZIPs are now hashed by their members. Rendered stills are the other
+  non-reproducible output: Blender's renders can differ by a few grey levels between runs, so a rebuild may rewrite
+  the JPEGs while the measured label boxes stay identical.
 - **The tour's new font measured smaller.** Atkinson Hyperlegible at the old sizes drew labels of 14.9-16.6 px, under
   the 18 px minimum; sizes were scaled by 1.25 and the minimum kept. Rendering all twelve stills (not only the five
   that are committed) found one more defect: a stripper tag sat in the plane of a platform deck, hidden from every

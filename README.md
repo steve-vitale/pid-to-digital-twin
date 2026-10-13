@@ -432,8 +432,9 @@ python scripts/run_tests.py --full --check-prerequisites
 python scripts/run_tests.py --full
 ```
 After the integration on 2026-10-13, both suites passed on Windows (21/21 source-only, 32/32 full, with two
-symlink sub-cases explicitly skipped because Windows didn't grant symlink rights). The earlier Linux run (Python
-3.12: 15/15 and 20/20, no skips) predates the new tests; CI runs the full suite on Linux on every push. See
+symlink sub-cases explicitly skipped because Windows didn't grant symlink rights) and on Linux in a Python 3.12
+container (21/21 with the standard library only, 32/32 with the pinned dependencies, no skips). CI runs the full
+suite on Linux on every push. See
 [replication prerequisites and limits](docs/REPLICATE_AT_YOUR_PLANT.md#c-check-the-pipeline-then-optionally-rerun-public-extraction).
 A prerequisite check alone is not a test pass.
 

@@ -25,17 +25,20 @@ prerequisite. Manual and recorded steps downstream are listed either way; they n
   python scripts/pipeline.py record --stage <id>
 marks a check, runtime or recorded stage as done after you ran its command by hand (hashes it as it is now).
 
-Hashes normalise CRLF to LF, so a Windows checkout and a Linux checkout agree. Stdlib only. No downloads, model
+Hashes normalise CRLF to LF, and ZIP archives are hashed by their members, so a Windows checkout and a Linux
+checkout agree. Stdlib only. No downloads, model
 calls or gateway operations happen here: the commands that need them are only ever printed.
 """
 import argparse
 import glob
 import hashlib
 import importlib.util
+import io
 import json
 import os
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
@@ -68,7 +71,22 @@ def expand(root, patterns):
 
 
 def file_hash(path):
-    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    data = path.read_bytes()
+    if path.suffix.lower() == ".zip":
+        # A ZIP is hashed by its members (name, timestamp, uncompressed bytes): the compressed bytes and the "made by"
+        # field depend on the platform's zlib and OS, so the same project archive differs byte for byte between a
+        # Windows and a Linux build while every member is identical.
+        try:
+            with zipfile.ZipFile(io.BytesIO(data)) as z:
+                h = hashlib.sha256(b"zip-members-1")
+                for info in sorted(z.infolist(), key=lambda i: i.filename):
+                    member = z.read(info)
+                    h.update(info.filename.encode() + repr(info.date_time).encode()
+                             + len(member).to_bytes(8, "big") + member)
+                return h.hexdigest()
+        except zipfile.BadZipFile:
+            pass
+    return hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()
 
 
 def hashes(root, patterns):
