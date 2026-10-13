@@ -1550,6 +1550,18 @@
    }
   }
  },
+ "diagnostic_alarms": {
+  "ReplayValuesNotGood": {
+   "connection": "TE-Sim",
+   "label": "Data source lost: TE replay",
+   "priority": "Medium"
+  },
+  "DemoPointsNotGood": {
+   "connection": "OPEN100-Demo",
+   "label": "Data source lost: OPEN100 demo points",
+   "priority": "Medium"
+  }
+ },
  "te_review": {
   "rejected": [],
   "hidden": [],

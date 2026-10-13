@@ -38,8 +38,8 @@ class AcceptancePreflightControls(unittest.TestCase):
             "reviewed_model_commit": "a" * 40, "project": "PIDTwin", "provider": "Twin",
             "relative_project_base": "/data/perspective/client/PIDTwin",
             "artifacts": copy.deepcopy(self.manifest["artifacts"]),
-            "routes": {f"/route/{i}": {"viewPath": f"View{i}"} for i in range(23)},
-            "views": {f"View{i}": {} for i in range(23)},
+            "routes": {f"/route/{i}": {"viewPath": f"View{i}"} for i in range(24)},
+            "views": {f"View{i}": {} for i in range(24)},
             "expected_runtime_quality": {group: [f"[Twin]{group}/{i}/PV" for i in range(count)]
                                          for group, count in ap.QUALITY_COUNTS.items()},
             "prohibited_pv_asset_ids": ["S0-IN019"],

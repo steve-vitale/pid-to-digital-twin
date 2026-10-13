@@ -3557,8 +3557,10 @@
        "tagType": "AtomicTag",
        "valueSource": "expr",
        "dataType": "Int4",
-       "documentation": "How many TE values have an active alarm",
-       "expression": "toInt({[Twin]TE_Plant/R-101/PI-107/AlarmActive}) + toInt({[Twin]TE_Plant/R-101/TI-109/AlarmActive})"
+       "documentation": "How many process alarms are active (each configured alarm counts once; diagnostic alarms are counted separately in DiagnosticAlarmsActive)",
+       "executionMode": "FixedRate",
+       "executionRate": 1000,
+       "expression": "toInt(isAlarmActive(\"[Twin]TE_Plant/R-101/PI-107/PV\", \"PressureHigh\")) + toInt(isAlarmActive(\"[Twin]TE_Plant/R-101/PI-107/PV\", \"PressureShutdown\")) + toInt(isAlarmActive(\"[Twin]TE_Plant/R-101/TI-109/PV\", \"TemperatureShutdown\"))"
       },
       {
        "name": "OutOfNormal_U-100",
@@ -3607,6 +3609,56 @@
        "dataType": "Int4",
        "documentation": "How many fed values in C-101 are outside their normal band",
        "expression": "toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal})"
+      },
+      {
+       "name": "ReplayValuesNotGood",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "executionMode": "FixedRate",
+       "executionRate": 1000,
+       "documentation": "How many of 52 Tennessee Eastman replay values without Good quality (OPC connection TE-Sim). Diagnostic, not a process value.",
+       "expression": "toInt(!isGood({[Twin]TE_Plant/U-100/FI-101/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-102/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-103/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-201/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-202/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-203/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/FI-106/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/PI-107/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/LI-108/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-109/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-121/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-B/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-C/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-D/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-E/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-F/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TV-210/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/TI-122/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/TV-211/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/TI-111/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LI-112/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/PI-113/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FI-114/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LV-207/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FI-105/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FI-110/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/JI-120/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-B/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-C/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-D/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-E/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-F/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-G/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/AI-129-H/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/HV-205/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FV-206/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-104/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LI-115/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/PI-116/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-117/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/TI-118/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-119/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-E/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-F/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-G/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-H/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-204/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LV-208/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-209/PV}))",
+       "alarms": [
+        {
+         "name": "DataSourceLost",
+         "mode": "AboveValue",
+         "setpointA": 0.0,
+         "priority": "Medium",
+         "label": "Data source lost: TE replay",
+         "notes": "DIAGNOSTIC alarm, not a process alarm: Tennessee Eastman replay values without Good quality on connection TE-Sim. The screens show UNKNOWN for these values while it is active. Priority is a first-pass choice by the screen generator, not an operations decision."
+        }
+       ]
+      },
+      {
+       "name": "DemoPointsNotGood",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "executionMode": "FixedRate",
+       "executionRate": 1000,
+       "documentation": "How many of 24 mapped OPEN100 demo values without Good quality (OPC connection OPEN100-Demo). Diagnostic, not a process value.",
+       "expression": "toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/PT_14085/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/PT_14086/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/PT_14087/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/PT_14088/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/RE_1402/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/RE_1403/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1401/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1402/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1403/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1406/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1408/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TCV_1409/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14084A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14084B/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14089A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14089B/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14090A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14090B/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14091A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14091B/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14092A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14092B/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14093A/PV})) + toInt(!isGood({[Twin]OPEN100/MSS_sheet_0/MSS-XSS-140/TE_14093B/PV}))",
+       "alarms": [
+        {
+         "name": "DataSourceLost",
+         "mode": "AboveValue",
+         "setpointA": 0.0,
+         "priority": "Medium",
+         "label": "Data source lost: OPEN100 demo points",
+         "notes": "DIAGNOSTIC alarm, not a process alarm: mapped OPEN100 demo values without Good quality on connection OPEN100-Demo. The screens show UNKNOWN for these values while it is active. Priority is a first-pass choice by the screen generator, not an operations decision."
+        }
+       ]
+      },
+      {
+       "name": "DiagnosticAlarmsActive",
+       "tagType": "AtomicTag",
+       "valueSource": "expr",
+       "dataType": "Int4",
+       "executionMode": "FixedRate",
+       "executionRate": 1000,
+       "documentation": "How many data-loss diagnostic alarms are active",
+       "expression": "toInt(isAlarmActive(\"[Twin]TE_Plant/_Summary/ReplayValuesNotGood\", \"DataSourceLost\")) + toInt(isAlarmActive(\"[Twin]TE_Plant/_Summary/DemoPointsNotGood\", \"DataSourceLost\"))"
       }
      ]
     }

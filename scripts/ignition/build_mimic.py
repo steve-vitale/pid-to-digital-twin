@@ -7,7 +7,8 @@ Script transforms are Python 2.7/Jython-compatible for Perspective.
 import base64
 import json
 from pathlib import Path
-from build_hmi import TRANSFORM_SIGNATURE, label, tag_binding, script_transform, view, header, INK, MUTED, UNIT_ORDER
+from build_hmi import (TRANSFORM_SIGNATURE, label, tag_binding, script_transform, view, header, INK, MUTED,
+                       UNIT_ORDER, NO_SOURCE_STYLE, quality_background)
 
 ROOT = Path(__file__).resolve().parents[2]
 TAGS = {
@@ -175,11 +176,12 @@ def mimic(provider, model, hidden=frozenset()):
             if it['uom'] == '%':
                 code = code.rstrip() + ' + (" (off scale)" if number < 0 or number > 100 else "")\n'
             c['propConfig'] = {'props.text': tag_binding(base + '/PV', [script(code)]),
-                              'props.style.color': tag_binding(base + '/State', [script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1: "#8a5d00", 2: "#b91c1c"}.get(value, "#1f2937")')])}
+                              'props.style.color': tag_binding(base + '/State', [script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1: "#8a5d00", 2: "#b91c1c"}.get(value, "#1f2937")')]),
+                              'props.style.backgroundColor': quality_background(base + '/PV', 'transparent')}
             kids.append(c)
     kids += [label('TI122Review', 24, 765, 1552, 36, 'TI-122 ownership unresolved: source says separator cooling-water outlet; model retains E-101 pending operations review.', {'fontSize': 12, 'color': '#624d25', 'backgroundColor': '#f1e9d9', 'padding': 8}),
              label('ValveMeaning', 24, 811, 1552, 28, 'XMV readings are recorded output (%), not measured valve position. No controls or inferred flow animation. Full instrumentation and utility notes are on each unit page.', {'fontSize': 12, 'color': MUTED}),
-             label('Legend', 24, 850, 1552, 30, 'Grey = normal; amber = outside existing normal band (not alarm); red = existing alarm. UNKNOWN / hatching = unavailable data. Level shape is not vessel volume.', {'fontSize': 12}),
+             label('Legend', 24, 850, 1552, 30, 'Grey = normal; amber = outside existing normal band (not alarm); red = existing alarm. UNKNOWN on grey / hatching = no Good data from a configured source; dashed italic not connected = no data source. Level shape is not vessel volume.', {'fontSize': 12}),
              label('Scope', 24, 890, 1552, 24, 'Local prototype. Selection and layout need operator review. Hover a tag for its measurement name; select equipment to investigate boundaries, all readings and history.', {'fontSize': 12, 'color': MUTED})]
     return view(VIEW_HEIGHT, kids)
 
@@ -246,7 +248,7 @@ def unit_context(provider, model, uid, hidden=frozenset(), layout=None):
         c=label('Boundary_'+it['stream']+'_'+tag if it.get('stream') else 'SpatialValue_'+tag,x,y+20,width,23,'UNKNOWN',{'fontSize':16,'fontWeight':'bold','backgroundColor':'#e5e5e5'})
         code=VALUE_SCRIPT.replace('return "%.1f" % number','return ("%.1f" % number) + '+repr(' '+it['uom'])).replace('UNKNOWN / bad quality','UNKNOWN').replace('UNKNOWN / invalid value','UNKNOWN')
         path=source_path(it)
-        if path: c['propConfig']={'props.text':tag_binding(path+'/PV',[script(code)]),'props.style.color':tag_binding(path+'/State',[script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1:"#8a5d00",2:"#b91c1c"}.get(value,"#1f2937")')])}
+        if path: c['propConfig']={'props.text':tag_binding(path+'/PV',[script(code)]),'props.style.color':tag_binding(path+'/State',[script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1:"#8a5d00",2:"#b91c1c"}.get(value,"#1f2937")')]),'props.style.backgroundColor':quality_background(path+'/PV','#e5e5e5')}
         kids.append(c)
         kids.append(label('SpatialTag_'+tag,x,y+43,width,17,tag+(' · recorded output' if 'xmv' in it else ''),{'fontSize':10,'color':MUTED,'backgroundColor':'#e5e5e5'}))
     for tag,placement in spec['cards'].items():
@@ -277,7 +279,7 @@ def unit_context(provider, model, uid, hidden=frozenset(), layout=None):
     for unavailable in spec.get('unavailable',[]):
         if unavailable['tag'] in hidden: continue
         x,y,w,h=unavailable['box']
-        kids.append(label('Unavailable_'+unavailable['tag'],x,y,w,h,unavailable['label']+' · '+unavailable['tag']+'\n'+unavailable['reason'],{'fontSize':12,'whiteSpace':'pre-line'}))
+        kids.append(label('Unavailable_'+unavailable['tag'],x,y,w,h,unavailable['label']+' · '+unavailable['tag']+'\n'+unavailable['reason'],{**NO_SOURCE_STYLE,'fontSize':12,'whiteSpace':'pre-line'}))
         svg+=leader(x+55,y+h,*unavailable['anchor'])
     svg+='</svg>'
     kids.insert(0,{'type':'ia.display.image','meta':{'name':'UnitSpatialConnections'},'position':{'x':0,'y':0,'width':1600,'height':diagram_height},'props':{'source':uri(svg),'fit':{'mode':'fill'},'style':{'pointerEvents':'none'}}})

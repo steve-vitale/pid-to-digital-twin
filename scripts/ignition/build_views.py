@@ -57,6 +57,8 @@ def value_label(name, x, y, tag_path, uom="", alarm_path=None):
         # A tag binding plus a map transform (an expression binding errored on every label in testing).
         comp["propConfig"]["props.style.backgroundColor"] = tag_binding(alarm_path, [
             color_map([{"input": True, "output": "#fecaca"}], "#ffffffdd")])
+    else:  # the shared UNKNOWN look: grey fill while there is no Good value (build_hmi docstring)
+        comp["propConfig"]["props.style.backgroundColor"] = build_hmi.quality_background(tag_path, "#ffffffdd")
     return comp
 
 

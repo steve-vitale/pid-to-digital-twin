@@ -134,7 +134,10 @@ async function capture(contractPath, outDir, label, vpName, routes) {
     const count = re => (text.match(re) || []).length;
     out.push({ route: r, loaded: loaded.ok, geo, files, null_text: count(/\bnull\b/g), unknown: count(/UNKNOWN/g), not_connected: count(/not connected/gi),
                alarm_active_text: count(/ALARM ACTIVE/g), outside_band_text: count(/Outside normal band/g),
-               header: (text.match(/(Alarms|Outside band): [^\n]*/g) || []).join(' | ') });
+               header: (text.match(/(Process alarms|Outside band|Data source): [^\n]*|DATA SOURCE LOST/g) || []).join(' | '),
+               // Alarm names as the alarm table prints them, to compare with the header's count.
+               alarm_names: Object.fromEntries(['PressureHigh', 'PressureShutdown', 'TemperatureShutdown', 'DataSourceLost',
+                 'Data source lost'].map(n => [n, count(new RegExp(n, 'g'))])) });
     console.log(JSON.stringify(out.at(-1)));
     await page.close();
   }
