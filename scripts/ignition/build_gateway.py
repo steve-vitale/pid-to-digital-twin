@@ -128,8 +128,11 @@ def diagnostics(plant, site, tw_review):
             "documentation": f"How many of {len(sources[name])} {what} (OPC connection {conn}). Diagnostic, not "
                              "a process value.",
             "expression": not_good(sources[name]),
-            "alarms": [{"name": "DataSourceLost", "mode": "AboveValue", "setpointA": 0.0,
-                        "priority": DIAGNOSTIC_PRIORITY, "label": label,
+            # Setpoint 0.5, not 0: Ignition's AboveValue is inclusive (PI-107's 3,000 kPa shutdown alarm fires at
+            # exactly 3,000.0), so a setpoint of 0 held the alarm active at a count of 0. Seen in the first native
+            # import (journal entry 39). The count is an integer, so 0.5 means "at least one value".
+            "alarms": [{"name": "DataSourceLost", "mode": "AboveValue", "setpointA": 0.5,
+                        "priority": DIAGNOSTIC_PRIORITY, "label": label, "displayPath": label,
                         "notes": f"DIAGNOSTIC alarm, not a process alarm: {what} on connection {conn}. The screens "
                                  "show UNKNOWN for these values while it is active. Priority is a first-pass "
                                  "choice by the screen generator, not an operations decision."}]})

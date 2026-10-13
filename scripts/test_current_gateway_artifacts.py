@@ -164,8 +164,10 @@ class CurrentGatewayContract(unittest.TestCase):
             self.assertEqual(sorted(t[len('toInt(!isGood({'):-len('}))')] for t in terms), paths, name)
             self.assertEqual(tag['executionMode'], 'FixedRate')
             (alarm,) = tag['alarms']
-            self.assertEqual((alarm['name'], alarm['mode'], alarm['setpointA']), ('DataSourceLost', 'AboveValue', 0.0))
+            # Inclusive AboveValue: a setpoint of 0 stayed active at a count of 0 in the gateway (journal entry 39).
+            self.assertEqual((alarm['name'], alarm['mode'], alarm['setpointA']), ('DataSourceLost', 'AboveValue', 0.5))
             self.assertTrue(alarm['label'].startswith('Data source lost'))
+            self.assertEqual(alarm['displayPath'], alarm['label'])
             self.assertIn('DIAGNOSTIC alarm, not a process alarm', alarm['notes'])
         self.assertNotIn('SC-212', s['ReplayValuesNotGood']['expression'])  # no source: Bad by design, not a loss
         self.assertEqual(s['DiagnosticAlarmsActive']['expression'].count('isAlarmActive('), 2)

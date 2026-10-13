@@ -3623,9 +3623,10 @@
         {
          "name": "DataSourceLost",
          "mode": "AboveValue",
-         "setpointA": 0.0,
+         "setpointA": 0.5,
          "priority": "Medium",
          "label": "Data source lost: TE replay",
+         "displayPath": "Data source lost: TE replay",
          "notes": "DIAGNOSTIC alarm, not a process alarm: Tennessee Eastman replay values without Good quality on connection TE-Sim. The screens show UNKNOWN for these values while it is active. Priority is a first-pass choice by the screen generator, not an operations decision."
         }
        ]
@@ -3643,9 +3644,10 @@
         {
          "name": "DataSourceLost",
          "mode": "AboveValue",
-         "setpointA": 0.0,
+         "setpointA": 0.5,
          "priority": "Medium",
          "label": "Data source lost: OPEN100 demo points",
+         "displayPath": "Data source lost: OPEN100 demo points",
          "notes": "DIAGNOSTIC alarm, not a process alarm: mapped OPEN100 demo values without Good quality on connection OPEN100-Demo. The screens show UNKNOWN for these values while it is active. Priority is a first-pass choice by the screen generator, not an operations decision."
         }
        ]
