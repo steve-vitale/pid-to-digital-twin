@@ -134,6 +134,60 @@ What it doesn't support:
 - **Any statement about tag-reading accuracy on real drawings.** The only tag-reading score is the Tennessee Eastman
   round trip (§6): sheets we generated, read back. It is an upper bound for clean house-style drawings.
 
+## 4b. Fault detection with the normal bands (Tennessee Eastman, all 21 faults)
+
+The operator screens flag a value that leaves its normal band (mean ± 6 sd, learned from the normal run;
+[OPERATOR_SCREENS.md](OPERATOR_SCREENS.md)). The fault demo shows one easy fault, so this asks how the same bands do
+on every published fault. Script: `scripts/fault_detection_eval.py`; data: the full Braatz set
+(`python scripts/fetch_te_data.py --all`, 44 files, byte-identical to the Braatz group's own archive); results:
+[`out/fault_detection/fault_detection.md`](../out/fault_detection/fault_detection.md).
+
+**Rule, fixed before any fault file was scored:** the plant is flagged when any of the 52 channels is outside its
+band; a fault counts as detected at the first post-onset sample that starts 3 consecutive flagged samples (9
+minutes). Each test run switches its fault on at sample 160 of 960 (3 minutes per sample). Nothing was tuned on fault
+data. False alarms are measured on normal running the bands never fitted on: the separate normal training run
+(d00.dat, 500 samples) and the fault-free first 8 hours of each of the 21 fault runs (3,360 samples, 21 separate
+simulation runs).
+
+| Method | Detected | Median delay | Mean detection rate | False alarms on normal data |
+|---|---|---|---|---|
+| Shipped bands (what the screens use) | **17/21** | 48 min | 57.7% | **0 flagged samples of 3,860; 0 alarm events in 193 h** |
+| Same K, refit on d00.dat (held-out d00_te) | 17/21 | 48 min | 57.6% | 0 of 4,320; 0 events in 216 h |
+| PCA T² baseline (12 components) | 19/21 | 84 min | 54.5% | 1.04% of samples; 5 events in 216 h |
+
+Detection rate is the share of post-onset samples flagged, the per-sample measure most TE papers report.
+
+**What the bands miss, said plainly:**
+- **Faults 3, 9 and 15** (D feed temperature step and random variation, condenser cooling-water valve sticking):
+  missed, 0% of post-onset samples flagged. These were named as expected misses before scoring: the TE literature
+  widely reports them as hard or impossible to see with data-driven monitoring of these variables.
+- **Fault 19** (unknown in the original paper): missed. One sample flagged, 25.6 hours after onset. PCA T² misses it
+  too.
+- **Slow and random faults are late.** Fault 21 (stream 4 valve stuck) is flagged after 26.5 hours, faults 10, 18 and
+  20 after 4 to 4.5 hours. K = 6 buys the zero false alarms with lateness.
+- Per fault, the first tags to leave their band are in the results file. They are what an operator would see turn
+  amber first, and they are mostly the obvious ones (FI-101 for the A feed loss, TI-109 and TV-210 for the reactor
+  cooling-water faults).
+
+**The PCA T² baseline is reimplemented, not cited.** Standardised on d00.dat, components kept by parallel analysis
+(12), 99% threshold from the F distribution, the same 3-sample rule. It "detects" 19, but its detections of faults
+3, 4 and 15 come at 18 to 34 hours with 2–8% of samples flagged, close to its own 1% normal flag rate: about 0.9
+chance alarm events are expected in a 40-hour window, so those three are probably chance. Counting them out, PCA T²
+detects 16, the bands 17. On fault 4 the difference is real: the bands catch it in 6 minutes through TI-109, PCA T²
+does not. PCA T² is faster on fault 10 and catches more of faults 10 and 16 per sample. Published PCA results on
+this data set vary with the number of components, the threshold and the detection rule, so no literature numbers
+are quoted here; I could not verify a table's exact values from a primary source in this pass.
+
+**What it doesn't show:**
+- One operating mode, simulated data, one set of 21 runs. A plant has modes, sensor faults, maintenance and noise
+  the simulator doesn't have.
+- The detection rule is the band flag, which on the screens is amber, a display aid. No alarm was added.
+- Zero false alarms in 193 hours is a measurement, not a guarantee: the 95% upper bound is about 0.37 alarm events
+  per day. A site would measure its own rate over weeks before trusting the colour.
+- Delays are from fault onset to the first 9-minute run of flags. An operator's time to notice is extra.
+
+---
+
 ## 5. Where the evaluation files live
 
 | File | Role |
@@ -143,6 +197,7 @@ What it doesn't support:
 | `scripts/run_extraction.py` | Runs a tool; records model, prompt hash, image hash, time, cost, token usage |
 | `scripts/cost_report.py` | Time and cost totals from every run record → `out/costs.*` ([COSTS.md](COSTS.md)) |
 | `scripts/run_tests.py` | Every test in one command (CI runs it) |
+| `scripts/fault_detection_eval.py`, `scripts/test_fault_detection_eval.py` | Section 4b: band and PCA T² fault detection on all 21 TE faults; the test regenerates the committed results |
 | `scripts/degrade_scans.py`, `run_scan_robustness.ps1`, `score_scan_robustness.ps1` | Round 4: old-scan images (geometry kept, keys unchanged), the runs, and the scoring |
 | `scripts/verify_te_topology.py`, `scripts/test_te_topology.py` | Checks the TE answer key's topology against the simulator code; controls plant wrong models and edit the simulator text to prove the check reads the code |
 | `scripts/draw_pid_from_model.py`, `scripts/style_fidelity.py`, `scripts/score_te_roundtrip.py`, `scripts/te_model_diff.py`, `scripts/te_live_check.py`, `scripts/test_te_pid_roundtrip.py` | §6: the generated TE sheets and keys, the style check, the round-trip scorer (tag text, replicates), the reviewer diff, the replay live check, and their tests (layout refusals, key regeneration, tracer-key agreement, planted misreads) |

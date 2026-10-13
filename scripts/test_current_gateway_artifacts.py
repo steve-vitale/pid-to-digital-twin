@@ -140,8 +140,146 @@ class CurrentGatewayContract(unittest.TestCase):
         self.assertEqual(checked['not connected'], 334)
         self.assertGreaterEqual(checked['UNKNOWN'], 24)
 
+    def summary(self):
+        plant = next(t for t in self.held.provider['tags'] if t['name'] == 'TE_Plant')
+        return {t['name']: t for t in next(u for u in plant['tags'] if u['name'] == '_Summary')['tags']}
+
+    def test_alarm_count_counts_alarms_not_tags(self):
+        # Journal 38: the header read "Alarms: 1" while the table listed PI-107's two active alarms.
+        s = self.summary()['AlarmsActive']
+        want = [(f'[Twin]TE_Plant/{self.meta["te_ranges"][t]["unit"]}/{t}/PV', a['name'])
+                for t, alarms in bg.ALARMS.items() for a in alarms]
+        self.assertEqual(s['expression'], ' + '.join(f'toInt(isAlarmActive("{p}", "{n}"))' for p, n in want))
+        self.assertEqual(len(want), 3)
+        self.assertEqual(s['executionMode'], 'FixedRate')
+
+    def test_data_source_diagnostic_alarms(self):
+        s = self.summary()
+        te_fed = sorted(p for p, _, _ in vg.live_sets(self.held, self.meta)[0] if p.startswith('[Twin]TE_Plant'))
+        demo = sorted(p for p, _, _ in vg.live_sets(self.held, self.meta)[0] if p.startswith('[Twin]OPEN100'))
+        self.assertEqual((len(te_fed), len(demo)), (52, 24))
+        for name, paths in (('ReplayValuesNotGood', te_fed), ('DemoPointsNotGood', demo)):
+            tag = s[name]
+            terms = tag['expression'].split(' + ')
+            self.assertEqual(sorted(t[len('toInt(!isGood({'):-len('}))')] for t in terms), paths, name)
+            self.assertEqual(tag['executionMode'], 'FixedRate')
+            (alarm,) = tag['alarms']
+            # Inclusive AboveValue: a setpoint of 0 stayed active at a count of 0 in the gateway (journal entry 40).
+            self.assertEqual((alarm['name'], alarm['mode'], alarm['setpointA']), ('DataSourceLost', 'AboveValue', 0.5))
+            self.assertTrue(alarm['label'].startswith('Data source lost'))
+            self.assertEqual(alarm['displayPath'], alarm['label'])
+            self.assertIn('DIAGNOSTIC alarm, not a process alarm', alarm['notes'])
+        self.assertNotIn('SC-212', s['ReplayValuesNotGood']['expression'])  # no source: Bad by design, not a loss
+        self.assertEqual(s['DiagnosticAlarmsActive']['expression'].count('isAlarmActive('), 2)
+        # Diagnostic alarms are not process alarms: the process count must not include them.
+        self.assertNotIn('_Summary', s['AlarmsActive']['expression'])
+
+    def test_header_labels_and_data_source_box(self):
+        class Quality:
+            def __init__(self, good): self.good = good
+            def isGood(self): return self.good
+
+        def run(code, value, good=True):
+            scope = {}
+            exec(bv.build_hmi.TRANSFORM_SIGNATURE + '\n' + code, scope)
+            return scope['transform'](None, value, Quality(good), None)
+        for name, view in self.held.views.items():
+            kids = {c['meta']['name']: c for c in view['root']['children']}
+            if 'AlarmSummary' not in kids:
+                continue  # counted below: every view must have one
+            text = kids['AlarmSummary']['propConfig']['props.text']['binding']
+            self.assertTrue(text['config']['tagPath'].endswith('/_Summary/AlarmsActive'))
+            self.assertEqual(run(text['transforms'][0]['code'], 2), 'Process alarms: 2', name)
+            box = kids['DataSourceSummary']['propConfig']
+            self.assertTrue(box['props.text']['binding']['config']['tagPath'].endswith('/DiagnosticAlarmsActive'))
+            self.assertEqual(run(box['props.text']['binding']['transforms'][0]['code'], 1), 'DATA SOURCE LOST')
+            self.assertEqual(run(box['props.text']['binding']['transforms'][0]['code'], 0), 'Data source: OK')
+            self.assertEqual(run(box['props.text']['binding']['transforms'][0]['code'], 0, False), 'Data source: unknown')
+            bgcode = box['props.style.backgroundColor']['binding']['transforms'][0]['code']
+            self.assertNotIn(run(bgcode, 1), (bv.build_hmi.RED, bv.build_hmi.AMBER, '#b91c1c'))  # not a process colour
+        every = [n for n, v in self.held.views.items()
+                 if 'AlarmSummary' in {c['meta']['name'] for c in v['root']['children']}]
+        self.assertEqual(len(every), 24)  # every screen, including /m
+
+    def test_no_data_states_share_one_look(self):
+        """'not connected' (no source) and UNKNOWN (source, no Good data) each look the same on every screen."""
+        style = bv.build_hmi.NO_SOURCE_STYLE
+        mapped = set(self.meta['twin_review']['mapped'])
+        no_source = 0
+        for name, view in self.held.views.items():
+            for c in walk(view['root']):
+                props, cfg = c.get('props', {}), c.get('propConfig', {})
+                b = cfg.get('props.text', {}).get('binding', {})
+                code = ''.join(t.get('code', '') for t in b.get('transforms', []))
+                # The indicator itself, not legends or notes that explain the word.
+                static_nc = props.get('text') == 'not connected' or c['meta']['name'].startswith('Unavailable_')
+                if static_nc or 'return "not connected"' in code:
+                    no_source += 1
+                    for k, v in style.items():
+                        self.assertEqual(props['style'].get(k), v, (name, c['meta']['name'], k))
+                    continue
+                if (b.get('type') == 'tag' and b['config']['tagPath'].endswith('/PV') and 'UNKNOWN' in code
+                        and c['type'] == 'ia.display.label'):
+                    # Two schematic labels keep their alarm-colour binding instead (PI-107, TI-109): a label has
+                    # one background binding, and alarm red wins there. Recorded as a known gap.
+                    if name == 'TE/Schematic' and c['meta']['name'] in bg.ALARMS:
+                        continue
+                    bgb = cfg.get('props.style.backgroundColor', {}).get('binding', {})
+                    bcode = ''.join(t.get('code', '') for t in bgb.get('transforms', []))
+                    self.assertIn(bv.build_hmi.BAD_QUALITY_BG, bcode, (name, c['meta']['name']))
+                    self.assertIn('quality.isGood()', bcode, (name, c['meta']['name']))
+        # 334 drawing placeholders, SC-212's table box and its spatial label.
+        self.assertEqual(no_source, 336)
+        self.assertEqual(len(mapped), 24)
+
+    def test_indicators_hide_their_pointer_without_good_data(self):
+        class Quality:
+            def __init__(self, good): self.good = good
+            def isGood(self): return self.good
+
+        def run(code, value, good=True):
+            scope = {}
+            exec(bv.build_hmi.TRANSFORM_SIGNATURE + '\n' + code, scope)
+            return scope['transform'](None, value, Quality(good), None)
+        n = 0
+        for name, view in self.held.views.items():
+            for c in walk(view['root']):
+                if c.get('type') == 'ia.display.moving-analog-indicator':
+                    b = c['propConfig']['props.style.visibility']['binding']
+                    self.assertEqual(b['config']['tagPath'], c['propConfig']['props.processValue']['binding']['config']['tagPath'])
+                    code = b['transforms'][0]['code']
+                    self.assertEqual(run(code, 2700.0), 'visible')
+                    self.assertEqual(run(code, 2700.0, False), 'hidden')
+                    self.assertEqual(run(code, float('nan')), 'hidden')
+                    n += 1
+        self.assertGreater(n, 50)
+
+    def test_narrow_overview(self):
+        v = self.held.views['TE/Narrow']
+        self.assertEqual(self.pages['/m']['viewPath'], 'TE/Narrow')
+        self.assertEqual(v['props']['defaultSize']['width'], 390)
+        kids = v['root']['children']
+        for c in kids:  # nothing wider than the phone
+            self.assertLessEqual(c['position']['x'] + c['position']['width'], 390, c['meta']['name'])
+        order = [c['meta']['name'] for c in kids]
+        # Alarms first: the alarm count, data source and alarm list come before the first unit tile.
+        first_tile = order.index('Tile_U-100')
+        for name in ('AlarmSummary', 'DataSourceSummary', 'BandSummary', 'AlarmTable'):
+            self.assertLess(order.index(name), first_tile, name)
+        tiles = [n for n in order if n.startswith('Tile_')]
+        self.assertEqual(tiles, ['Tile_' + u for u in bv.build_hmi.UNIT_ORDER])
+        import build_mimic
+        shown = {n[2:] for n in order if n.startswith('N_')}
+        self.assertEqual(shown, {t for ts in build_mimic.TAGS.values() for t in ts})  # same key values as overview
+        table = next(c for c in kids if c['meta']['name'] == 'AlarmTable')
+        self.assertFalse(table['props']['filters']['active']['states']['clearAcked'])
+        # The control-room views are untouched: still 1600 px wide.
+        for name, view in self.held.views.items():
+            if name != 'TE/Narrow':
+                self.assertEqual(view['props']['defaultSize']['width'], 1600, name)
+
     def test_schema_shape_tag_paths_routes_and_spatial_views(self):
-        self.assertEqual(len(self.held.views), 23)
+        self.assertEqual(len(self.held.views), 24)  # 23 control-room views + TE/Narrow (/m)
         self.assertEqual(set(self.held.views), {p['viewPath'] for p in self.pages.values()})
         self.assertEqual(self.held.views['TE/Overview'], self.held.views['TE/ProcessMimic'])
         for uid in bv.build_hmi.UNIT_ORDER:
@@ -230,7 +368,7 @@ class CurrentGatewayContract(unittest.TestCase):
         indicator = next(c for c in walk(view['root']) if c.get('meta', {}).get('name') == 'SC-212')
         indicator['props']['text'] = '0.0'
         self.assertFalse(vg.v3(self.held, TWIN)['passed'])
-        indicator['props']['text'] = 'NOT CONNECTED'
+        indicator['props']['text'] = 'not connected'
         indicator['propConfig'] = {'props.text': {'binding': {'type': 'tag', 'config': {'tagPath': '[Twin]TE_Plant/R-101/SC-212/PV'}}}}
         self.assertFalse(vg.v3(self.held, TWIN)['passed'])
         view['root']['children'].remove(indicator)

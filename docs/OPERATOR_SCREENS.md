@@ -19,8 +19,21 @@ when it isn't.**
 | `/schematic` | The process schematic with live values (the original screen) |
 | `/alarms` | The full alarm list, with acknowledged and cleared alarms |
 | `/drawings`, `/open100/<n>` | The 12 extracted drawings as thumbnails; each opens the **original** drawing, greyed, with a live value beside every extracted instrument. Mapped instruments read live; the rest show as not connected |
+| `/m` Narrow overview | For a phone (390 px): process alarm count, data source and the active alarm list first, then the six units stacked with the overview's key values. Tiles open the unit screens, which stay 1600 px control-room layouts |
 
-Every page has the same bar: navigation, the number of values in alarm, and the number outside their normal band.
+Every page has the same bar: navigation, **Process alarms: N** (active alarms, each configured alarm counted once, so
+it matches the alarm table; until journal entry 40 it counted tags in alarm), the **data source** box (DATA SOURCE
+LOST while a data connection delivers no Good values: a diagnostic alarm, kept apart from process alarms), and the
+number of values outside their normal band.
+
+Two "no data" looks, the same on every page: **not connected** (muted italic, dashed border: no data source is
+configured, as for SC-212 and the unmapped drawing instruments) and **UNKNOWN** (muted on grey, vessels hatched, band
+pointer hidden: a source is configured but no Good value is arriving). The intent follows ISA-101: one indication,
+one meaning on every display, data quality never mistakable for a value, and alarm colours kept for alarms.
+
+| Narrow, normal | Narrow, replay stopped | Overview, replay stopped |
+|---|---|---|
+| ![Narrow overview at 390 px in normal replay: process alarms 0, data source OK, no active alarms, then the feed and reactor tiles with their values](screenshots/native-narrow-m-normal.png) | ![Narrow overview with the replay stopped: DATA SOURCE LOST, one diagnostic alarm row, every value UNKNOWN on grey](screenshots/native-narrow-m-replay-disconnected.png) | ![Whole-process overview with the replay stopped: header reads DATA SOURCE LOST, values UNKNOWN on grey, vessels hatched](screenshots/native-overview-replay-disconnected.png) |
 
 ![Reactor unit screen during fault 6 (historical October 8 build): pressure red at 3,000 kPa, past its 2,895 kPa high-pressure alarm and at the 3,000 kPa shutdown limit; cooling water outlet temperature, feed analyzer and cooling water valve amber; agitator speed has no data source and shows as null on this older build](screenshots/hmi-unit-reactor-fault.png)
 
@@ -41,8 +54,14 @@ band is learned from the published normal run (`scripts/normal_bands.py`):
   Full table: [`out/ignition/normal_bands.md`](../out/ignition/normal_bands.md).
 
 How much to trust it:
-- **Fault 6 is an easy fault**: a feed going to zero. A slow drift would be caught later, or not at all, by a band
-  this wide. One fault is a demonstration, not a detection rate.
+- **Fault 6 is an easy fault**: a feed going to zero. One fault is a demonstration, not a detection rate, so the
+  bands were then scored on **all 21 published faults** with a rule fixed before scoring
+  ([`scripts/fault_detection_eval.py`](../scripts/fault_detection_eval.py), [results](../out/fault_detection/fault_detection.md),
+  journal entry 40). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
+  first three are the faults the TE literature widely reports as near-invisible in these variables; 19 is a miss
+  this method shares with a PCA T² baseline. On 193 hours of normal running they never saw, the bands raised **no
+  false alarm** (not a guarantee: the 95% upper bound is about 0.37 per day). The price of K = 6 is lateness on
+  slow faults: fault 21 is flagged after 26.5 hours.
 - **The bands assume one operating mode.** The stripper steam flow and temperature drift slowly even in the normal
   run (they are the worst tags at K = 3–5). A real plant has several modes (rates, grades, startup) and needs a band
   per mode, refitted when the process changes.

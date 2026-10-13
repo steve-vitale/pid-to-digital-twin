@@ -3,15 +3,29 @@ something when it is not.
 
   /               Whole-process equipment overview with six units, source-verified boundaries and selected values.
   /mimic          Legacy alias for the same Overview; no separate tab.
+  /m              Narrow overview for a phone (390 px wide): alarms and data source first, then one tile per unit
+                  with its key values. The control-room screens above keep their fixed 1600 px layout.
   /unit/<id>      Level 2: every value in one unit, with its band, a 30-minute trend and its review status.
   /schematic      The process schematic with live values (scripts/ignition/build_views.py).
   /alarms         The full alarm list.
   /drawings       The 12 extracted drawings, and /open100/<n>: each ORIGINAL drawing (greyed) with live values on top.
 
-Every screen has the same summary bar: navigation, the count of active alarms and the count of values outside their
-normal band. Colour, everywhere: no fill = normal; amber = outside the normal band (a display aid, not an alarm);
-red = an alarm is active. The colours come from each tag's State member, set in the gateway (build_gateway.py), so the
-screens and anything else reading the tags agree.
+Every screen has the same summary bar: navigation, the number of active PROCESS alarms (each configured alarm counts
+once, so it matches the alarm table; it used to count tags in alarm), the data-source diagnostic (separate from
+process alarms, in the ISA-18.2 sense), and the count of values outside their normal band. Colour, everywhere: no
+fill = normal; amber = outside the normal band (a display aid, not an alarm); red = a process alarm is active. The
+colours come from each tag's State member, set in the gateway (build_gateway.py), so the screens and anything else
+reading the tags agree.
+
+Two "no data" states, one look each, on every screen (journal entry 40):
+  not connected  no data source is configured for this point at all (SC-212, the 334 unmapped drawing instruments).
+                 Muted italic text, white background, dashed border. Permanent until someone maps it.
+  UNKNOWN        a data source is configured but the gateway has no Good value now (replay stopped, bad quality).
+                 Muted text on a grey fill; vessels hatched. Temporary: it should clear when the source returns.
+Rationale, stated as intent rather than quoted: ISA-101.01 asks for one documented style in which an indication
+means the same thing on every display, and for data quality to be shown so that it is never mistaken for a valid
+value. High-performance HMI practice also keeps alarm colours for alarms only, so neither state uses red or amber,
+and each is carried by words and border or fill as well as colour.
 
 WHERE EACH PART CAME FROM (which used several models, which only Claude):
   - The tags, units and drawing positions are the twin itself. The Tennessee Eastman model was transcribed from the
@@ -51,6 +65,11 @@ DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x ab
 
 GREY_BG, PANEL, EDGE, INK, MUTED = "#e5e5e5", "#f2f2f2", "#a3a3a3", "#1f2937", "#6b7280"
 AMBER, RED = "#fcd34d", "#dc2626"
+DIAG = "#334155"  # data-source diagnostic: dark slate, never alarm red or band amber
+NOT_CONNECTED, UNKNOWN = "not connected", "UNKNOWN"
+BAD_QUALITY_BG = "#d4d4d4"
+NO_SOURCE_STYLE = {"color": MUTED, "fontStyle": "italic", "backgroundColor": "#ffffff",
+                   "borderStyle": "dashed", "borderWidth": 1, "borderColor": EDGE}
 STATE_BG = [{"input": 1, "output": AMBER}, {"input": 2, "output": RED}]
 STATE_FG = [{"input": 2, "output": "#ffffff"}]
 FOOT = ("Read-only monitoring. Normal bands are learned from the normal run (scripts/normal_bands.py), not site "
@@ -74,6 +93,13 @@ def script_body(code):
 
 def script_transform(code):
     return {"type": "script", "code": script_body(code)}
+
+
+def quality_background(path, normal):
+    """Grey fill while the tag has no Good value (the UNKNOWN state); `normal` otherwise, so normal rendering is
+    unchanged."""
+    code = 'if not quality.isGood() or value is None:\n    return %r\nreturn %r' % (BAD_QUALITY_BG, normal)
+    return tag_binding(path, [{"type": "script", "code": code}])
 
 
 # Drawing-sheet value: the number when the gateway has Good data, otherwise the honest state (%s), never "null".
@@ -136,6 +162,9 @@ def value_box(name, x, y, w, h, base, band, size=15):
     return c
 
 
+INDICATOR_VISIBILITY = ('import math\nif not quality.isGood() or value is None:\n    return "hidden"\ntry:\n'
+                        '    number = float(value)\nexcept (TypeError, ValueError):\n    return "hidden"\n'
+                        'return "hidden" if math.isnan(number) or math.isinf(number) else "visible"')
 ALARM_SPAN_LIMIT = 10  # widen an indicator to show an alarm limit only if it is within 10 band half-widths
 
 
@@ -169,7 +198,10 @@ def indicator(name, x, y, w, h, base, band, limits):
             props["highHighAlarm"] = limits[1]
     return {"type": "ia.display.moving-analog-indicator", "meta": {"name": name},
             "position": {"x": x, "y": y, "width": w, "height": h}, "props": props,
-            "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}])}}
+            "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}]),
+                           # With no Good value Perspective still draws the pointer, at the scale minimum, which reads
+                           # as a real low value (seen with the replay stopped, journal entry 40). Hide it instead.
+                           "props.style.visibility": tag_binding(base + "/PV", [{"type": "script", "code": INDICATOR_VISIBILITY}])}}
 
 
 def trend(name, x, y, w, h, base, band, minutes):
@@ -206,7 +238,6 @@ def badge(name, x, y, w, h, path, color):
 
 
 def header(provider, title, active):
-    s = f"[{provider}]TE_Plant/_Summary/"
     kids = [label("HeaderBar", 0, 0, W, HEAD, "", {"backgroundColor": "#d4d4d4", "borderBottom": f"1px solid {EDGE}"}),
             label("Title", 16, 8, 330, 20, title, {"fontSize": 16, "fontWeight": "bold"}),
             label("Subtitle", 16, 30, 330, 18, "Tennessee Eastman · live replay · read-only",
@@ -223,9 +254,36 @@ def header(provider, title, active):
             "backgroundColor": "#ffffff" if on else "transparent",
             "borderStyle": "solid", "borderWidth": 1, "borderColor": EDGE if on else "transparent"}, page=page))
         x += w + 4
-    for name, x, member, title, color in [('AlarmSummary', 1248, 'AlarmsActive', 'Alarms', '#b91c1c'),
-                                           ('BandSummary', 1410, 'OutOfNormal', 'Outside band', '#8a5d00')]:
-        c = label(name, x, 17, 170, 26, title + ': unknown', {'fontSize': 12, 'fontWeight': 'bold'})
+    return kids + summary_boxes(provider, [('AlarmSummary', 1140, 150), ('DataSourceSummary', 1294, 150),
+                                           ('BandSummary', 1448, 146)])
+
+
+def summary_boxes(provider, places, size=12, height=26, y=17):
+    """The three summary boxes, shared by every header and the narrow overview. "Process alarms" counts active
+    alarms (PI-107's two alarms count twice), not tags in alarm. The data-source box shows the diagnostic alarm
+    state: when the replay stops it is the one indication that changes besides every value turning UNKNOWN."""
+    s = f"[{provider}]TE_Plant/_Summary/"
+    spec = {'AlarmSummary': ('AlarmsActive', 'Process alarms', '#b91c1c'),
+            'BandSummary': ('OutOfNormal', 'Outside band', '#8a5d00')}
+    kids = []
+    for name, x, w in places:
+        if name == 'DataSourceSummary':
+            c = label(name, x, y, w, height, 'Data source: unknown', {'fontSize': size, 'fontWeight': 'bold',
+                                                                     'textAlign': 'center', 'borderRadius': 3})
+            path = s + 'DiagnosticAlarmsActive'
+            text = ('if not quality.isGood() or value is None:\n    return "Data source: unknown"\n'
+                    'return "DATA SOURCE LOST" if value > 0 else "Data source: OK"')
+            bg = 'if not quality.isGood() or value is None:\n    return %r\nreturn %r if value > 0 else "transparent"' % (
+                BAD_QUALITY_BG, DIAG)
+            fg = 'if not quality.isGood() or value is None:\n    return %r\nreturn "#ffffff" if value > 0 else %r' % (
+                MUTED, INK)
+            c['propConfig'] = {'props.text': tag_binding(path, [{'type': 'script', 'code': text}]),
+                               'props.style.backgroundColor': tag_binding(path, [{'type': 'script', 'code': bg}]),
+                               'props.style.color': tag_binding(path, [{'type': 'script', 'code': fg}])}
+            kids.append(c)
+            continue
+        member, title, color = spec[name]
+        c = label(name, x, y, w, height, title + ': unknown', {'fontSize': size, 'fontWeight': 'bold'})
         code = 'if not quality.isGood() or value is None:\n    return %r\nreturn %r + str(value)' % (title + ': unknown', title + ': ')
         color_code = 'if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn %r if value > 0 else "#1f2937"' % color
         c['propConfig'] = {'props.text': tag_binding(s + member, [{'type': 'script', 'code': code}]),
@@ -302,11 +360,11 @@ def unit_screen(provider, model, ranges, uid, hidden):
         else:  # no replay source: explicit unavailable label, without a fabricated numeric binding
             box = value_box(tag, 414, y + 10, 110, 32, base, None, 16)
             box.pop("propConfig", None)
-            box["props"]["text"] = "NOT CONNECTED"
-            box["props"]["style"]["fontSize"] = 11
+            box["props"]["text"] = NOT_CONNECTED
+            box["props"]["style"].update(NO_SOURCE_STYLE, fontSize=12, fontWeight="normal", textAlign="center")
             kids += [box, label(f"Uom_{tag}", 528, y + 18, 64, 18, it["uom"], {"fontSize": 12, "color": MUTED}),
                      label(f"NoData_{tag}", 596, y + 16, 790, 20,
-                           "Not in the open replay data set, so it reads as not connected rather than inventing a value.",
+                           "No replay source: not in the open data set, so it reads as not connected rather than inventing a value.",
                            {"fontSize": 12, "color": MUTED, "fontStyle": "italic"})]
         if 'xmv' in it and r['normal']:
             for c in kids:
@@ -326,13 +384,77 @@ def unit_screen(provider, model, ranges, uid, hidden):
     return view(y + 30, kids)
 
 
+NARROW_W = 390
+
+
+def narrow_overview(provider, model, ranges, hidden):
+    """/m: a phone-width overview. Alarms first (process count, data-source diagnostic, band count, the active alarm
+    list), then the six units stacked in process order, each with the same key values as the whole-process overview,
+    coloured by State like every other screen. Navigation goes to the unit pages and the alarm table, which are still
+    1600 px control-room layouts (scroll on a phone). Same bindings, same colours, nothing new inferred."""
+    import build_mimic
+    items = {i["tag"]: i for i in model["instruments"] + model["final_elements"]}
+    x0, w = 10, NARROW_W - 20
+    kids = [label("Title", x0, 10, w, 22, "Plant overview", {"fontSize": 17, "fontWeight": "bold"}),
+            label("Subtitle", x0, 34, w, 18, "Tennessee Eastman · live replay · read-only · narrow view",
+                  {"fontSize": 11, "color": MUTED})]
+    y = 60
+    kids += summary_boxes(provider, [("AlarmSummary", x0, 180), ("DataSourceSummary", x0 + 184, w - 184)],
+                          size=13, height=30, y=y)
+    y += 34
+    kids += summary_boxes(provider, [("BandSummary", x0, w)], size=13, height=24, y=y)
+    y += 30
+    kids.append(alarm_table("AlarmTable", x0, y, w, 190, True))
+    y += 196
+    kids.append(label("OpenAlarms", x0, y, w, 26, "Full alarm table (control-room layout) ›",
+                      {"fontSize": 13, "fontWeight": "bold", "textAlign": "right"}, page="/alarms"))
+    y += 36
+    for uid in UNIT_ORDER:
+        unit = next(u for u in model["units"] if u["id"] == uid)
+        tags = [t for t in build_mimic.TAGS[uid] if t not in hidden and ranges.get(t, {}).get("normal")]
+        h = 34 + 36 * len(tags) + 6
+        kids.append(label(f"Tile_{uid}", x0, y, w, h, "", {"backgroundColor": PANEL, "borderStyle": "solid",
+                                                            "borderWidth": 1, "borderColor": EDGE, "borderRadius": 4}))
+        kids.append(label(f"TileTitle_{uid}", x0 + 8, y + 6, 220, 24, f"{uid} · {unit['name']} ›",
+                          {"fontSize": 14, "fontWeight": "bold"}, page=f"/unit/{uid}"))
+        band = label(f"TileBand_{uid}", x0 + 232, y + 8, w - 240, 20, "Outside band: unknown",
+                     {"fontSize": 11, "textAlign": "right", "color": MUTED})
+        path = f"[{provider}]TE_Plant/_Summary/OutOfNormal_{uid}"
+        band_text = ('if not quality.isGood() or value is None:\n    return "Outside band: unknown"\n'
+                     'return "Outside band: " + str(value)')
+        band_color = ('if not quality.isGood() or value is None:\n    return "#6b7280"\n'
+                      'return "#8a5d00" if value > 0 else "#1f2937"')
+        band["propConfig"] = {"props.text": tag_binding(path, [{"type": "script", "code": band_text}]),
+                              "props.style.color": tag_binding(path, [{"type": "script", "code": band_color}])}
+        kids.append(band)
+        ry = y + 34
+        for tag in tags:
+            it, r = items[tag], ranges[tag]
+            kids += [label(f"NTag_{tag}", x0 + 8, ry + 6, 66, 20, tag, {"fontSize": 13, "fontWeight": "bold"}),
+                     label(f"NDesc_{tag}", x0 + 76, ry + 2, 150, 30, it["description"],
+                           {"fontSize": 11, "lineHeight": 1.15, "color": MUTED}),
+                     value_box(f"N_{tag}", x0 + 228, ry + 2, 88, 30, f"[{provider}]TE_Plant/{uid}/{tag}", r["normal"], 14),
+                     label(f"NUom_{tag}", x0 + 320, ry + 9, w - 324, 18, it["uom"], {"fontSize": 11, "color": MUTED})]
+            ry += 36
+        y += h + 8
+    kids.append(label("NarrowNote", x0, y, w, 64,
+                      "Grey = normal; amber = outside the normal band (not an alarm); red = process alarm; UNKNOWN on "
+                      "grey = no Good data. Key values: first pass by the screen generator, not reviewed by operations.",
+                      {"fontSize": 11, "color": MUTED, "lineHeight": 1.3}))
+    y += 70
+    return {"custom": {}, "params": {}, "props": {"defaultSize": {"width": NARROW_W, "height": int(y)}},
+            "root": {"type": "ia.container.coord", "meta": {"name": "root"},
+                     "props": {"mode": "fixed", "style": {"backgroundColor": GREY_BG}}, "children": kids}}
+
+
 def alarms_screen(provider):
     kids = header(provider, "Alarms", "/alarms")
     kids += [alarm_table("AlarmTable", 16, HEAD + 16, W - 32, 640, False),
              label("AlarmNote", 16, HEAD + 668, W - 32, 36,
-                   "The only alarms are the published ones: reactor pressure high (2895 kPa) and the simulator's "
-                   "shutdown limits (3000 kPa, 175 °C). Adding or removing an alarm is a change review, not a "
-                   "screen edit.", {"fontSize": 12, "color": MUTED})]
+                   "Process alarms are only the published ones: reactor pressure high (2895 kPa) and the simulator's "
+                   "shutdown limits (3000 kPa, 175 °C). \"Data source lost\" alarms are diagnostics: a data connection "
+                   "stopped delivering Good values, so the screens show UNKNOWN. Adding or removing a process alarm is a "
+                   "change review, not a screen edit.", {"fontSize": 12, "color": MUTED})]
     return view(HEAD + 720, kids)
 
 
@@ -389,10 +511,11 @@ def sheet_screen(provider, sheet, title, img_uri, size, instruments, counts):
         # quality overlay no longer appears; the words carry the state instead. The tag binding stays: a placeholder
         # that ever read Good would show its number (and fail V4) rather than be hidden.
         if not mapped:
-            c["props"]["style"].update(fontSize=8, fontStyle="italic", color=MUTED, whiteSpace="nowrap",
-                                       paddingLeft=1)
+            c["props"]["style"].update(NO_SOURCE_STYLE, fontSize=8, whiteSpace="nowrap", paddingLeft=1)
         c["propConfig"] = {"props.text": tag_binding(path + "/PV", [script_transform(
-            SHEET_VALUE_SCRIPT % ("UNKNOWN" if mapped else "not connected"))])}
+            SHEET_VALUE_SCRIPT % (UNKNOWN if mapped else NOT_CONNECTED))])}
+        if mapped:
+            c["propConfig"]["props.style.backgroundColor"] = quality_background(path + "/PV", "#ffffff")
         kids.append(c)
     x = sw + 16
     kids += [label("Legend", x, HEAD + 12, W - x - 16, 20, "This drawing", {"fontWeight": "bold"}),
@@ -417,11 +540,13 @@ def te_views(provider, ranges, alarms, hidden):
     hidden |= {i["tag"] for i in expanded_items(model) if i.get("analyzer_parent") in hidden}
     for tag, r in ranges.items():
         r["alarm_limits"] = [a["setpointA"] for a in alarms.get(tag, [])]
-    views = {"TE/Overview": overview(provider, model, ranges, hidden), "TE/Alarms": alarms_screen(provider)}
+    views = {"TE/Overview": overview(provider, model, ranges, hidden), "TE/Alarms": alarms_screen(provider),
+             "TE/Narrow": narrow_overview(provider, model, ranges, hidden)}
     for uid in UNIT_ORDER:
         views[f"TE/Unit_{uid}"] = unit_screen(provider, model, ranges, uid, hidden)
     import build_mimic
     views["TE/ProcessMimic"] = views["TE/Overview"]  # safe legacy bookmark alias
-    pages = {"/mimic": ("Plant overview (legacy alias)", "TE/ProcessMimic"), "/": ("Plant overview", "TE/Overview"), "/alarms": ("Alarms", "TE/Alarms")}
+    pages = {"/mimic": ("Plant overview (legacy alias)", "TE/ProcessMimic"), "/": ("Plant overview", "TE/Overview"), "/alarms": ("Alarms", "TE/Alarms"),
+             "/m": ("Plant overview (narrow)", "TE/Narrow")}
     pages.update({f"/unit/{u}": (f"Unit {u}", f"TE/Unit_{u}") for u in UNIT_ORDER})
     return views, pages

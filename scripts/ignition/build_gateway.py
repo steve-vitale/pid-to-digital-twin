@@ -72,6 +72,77 @@ ALARMS = {
 }
 
 
+# Expression tags that reference no tag (isAlarmActive takes a path string) run once at startup unless polled.
+POLLED = {"executionMode": "FixedRate", "executionRate": 1000}
+# Diagnostic (system) alarms, distinct from the process alarms above, in the ISA-18.2 sense: they say the operator
+# has lost sight of the process, not that the process is abnormal. One per data connection that feeds the screens.
+# The setpoint is not a process limit (it is "more than 0 values without Good quality"), so it needs no published
+# source; its priority is a first-pass choice by the screen generator, for operations to confirm.
+DIAGNOSTIC_PRIORITY = "Medium"
+DIAGNOSTICS = {
+    "ReplayValuesNotGood": ("TE-Sim", "Data source lost: TE replay",
+                            "Tennessee Eastman replay values without Good quality"),
+    "DemoPointsNotGood": ("OPEN100-Demo", "Data source lost: OPEN100 demo points",
+                          "mapped OPEN100 demo values without Good quality"),
+}
+
+
+def active_alarms(pairs):
+    """Sum of isAlarmActive over (tag path, alarm name) pairs: active alarms, each counted once."""
+    return " + ".join(f'toInt(isAlarmActive("[{PROVIDER}]{path}", "{name}"))' for path, name in pairs) or "0"
+
+
+def not_good(paths):
+    """How many of these PVs lack Good quality. isGood() reads a value's quality, so the count itself stays Good
+    while its inputs are Bad or Uncertain; that is what lets a data-loss alarm fire at all."""
+    return " + ".join(f"toInt(!isGood({{[{PROVIDER}]{p}}}))" for p in paths) or "0"
+
+
+def mapped_paths(site, mapped):
+    """Provider paths of the OPEN100 instruments mapped to a data point (they carry a PV that should read Good)."""
+    out = []
+
+    def walk(node, path):
+        for c in node.get("tags", []):
+            q = f"{path}/{c['name']}"
+            if c["tagType"] == "UdtInstance":
+                if c.get("parameters", {}).get("AssetId", {}).get("value") in mapped:
+                    out.append(q + "/PV")
+            elif c.get("tags"):
+                walk(c, q)
+    walk(site, site["name"])
+    return sorted(out)
+
+
+def diagnostics(plant, site, tw_review):
+    """Add the data-loss diagnostic tags and alarms to TE_Plant/_Summary, plus their own active-alarm count."""
+    summary = next(t for t in plant["tags"] if t["name"] == "_Summary")
+    fed = [f"TE_Plant/{u['name']}/{i['name']}/PV" for u in plant["tags"] if u["name"] != "_Summary"
+           for i in u["tags"] if i["parameters"].get("NormalLo")]  # fed TE values are the ones with a band
+    sources = {"ReplayValuesNotGood": fed, "DemoPointsNotGood": mapped_paths(site, set(tw_review["mapped"]))}
+    for name, (conn, label, what) in DIAGNOSTICS.items():
+        if not sources[name]:
+            continue
+        summary["tags"].append({
+            "name": name, "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4", **POLLED,
+            "documentation": f"How many of {len(sources[name])} {what} (OPC connection {conn}). Diagnostic, not "
+                             "a process value.",
+            "expression": not_good(sources[name]),
+            # Setpoint 0.5, not 0: Ignition's AboveValue is inclusive (PI-107's 3,000 kPa shutdown alarm fires at
+            # exactly 3,000.0), so a setpoint of 0 held the alarm active at a count of 0. Seen in the first native
+            # import (journal entry 40). The count is an integer, so 0.5 means "at least one value".
+            "alarms": [{"name": "DataSourceLost", "mode": "AboveValue", "setpointA": 0.5,
+                        "priority": DIAGNOSTIC_PRIORITY, "label": label, "displayPath": label,
+                        "notes": f"DIAGNOSTIC alarm, not a process alarm: {what} on connection {conn}. The screens "
+                                 "show UNKNOWN for these values while it is active. Priority is a first-pass "
+                                 "choice by the screen generator, not an operations decision."}]})
+    summary["tags"].append({
+        "name": "DiagnosticAlarmsActive", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
+        **POLLED, "documentation": "How many data-loss diagnostic alarms are active",
+        "expression": active_alarms([(f"TE_Plant/_Summary/{n}", "DataSourceLost") for n in DIAGNOSTICS
+                                     if sources[n]])})
+
+
 def eng_range(item, normal_mean):
     """Engineering range per tag, with where it came from. Ignition defaults every tag to 0-100, which would make
     a 2700 kPa pressure look out of range, so every tag gets an explicit range."""
@@ -211,9 +282,13 @@ def te_tags(model):
     summary = [{"name": "OutOfNormal", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
                 "documentation": "How many fed TE values are outside their normal band", "expression": count(
                     "OutOfNormal", fed)},
+               # ACTIVE ALARMS, not tags in alarm: PI-107 carries two alarms, and the header once read "Alarms: 1"
+               # while the alarm table listed both (journal entry 38). One term per configured process alarm.
                {"name": "AlarmsActive", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
-                "documentation": "How many TE values have an active alarm", "expression": count(
-                    "AlarmActive", [(u, t) for u, t in fed if t in ALARMS])}]
+                "documentation": "How many process alarms are active (each configured alarm counts once; "
+                                 "diagnostic alarms are counted separately in DiagnosticAlarmsActive)",
+                **POLLED, "expression": active_alarms(
+                    [(f"TE_Plant/{u}/{t}/PV", a["name"]) for u, t in fed if t in ALARMS for a in ALARMS[t]])}]
     summary += [{"name": f"OutOfNormal_{u}", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
                  "documentation": f"How many fed values in {u} are outside their normal band",
                  "expression": count("OutOfNormal", [(uu, t) for uu, t in fed if uu == u])} for u in units]
@@ -256,12 +331,15 @@ def build_file(twin_dir):
     te_types, plant, ranges, te_review = te_tags(model)
     tw_types, site = twin_tags(twin_dir)
     tw_review = twin_review(twin_dir)
+    diagnostics(plant, site, tw_review)
     doc = {"name": "", "tagType": "Provider", "tags": [
         {"name": "_types_", "tagType": "Folder", "tags": te_types + tw_types}, plant, site]}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "twin_provider.json").write_text(json.dumps(doc, indent=1), encoding="utf-8")
     meta = {"provider": PROVIDER, "opc_connection": OPC_CONN, "sim_url": SIM_URL, "sim_namespace": SIM_NS,
             "twin_source": twin_dir.relative_to(ROOT).as_posix(), "alarms": ALARMS, "te_ranges": ranges,
+            "diagnostic_alarms": {n: {"connection": c, "label": l, "priority": DIAGNOSTIC_PRIORITY}
+                                  for n, (c, l, _) in DIAGNOSTICS.items()},
             "te_review": te_review, "twin_review": tw_review,
             "data_connections": {n: u for n, u in DATA_CONNECTIONS.items()
                                  if any(p["server"] == n for p in tw_review["mapped"].values())}}

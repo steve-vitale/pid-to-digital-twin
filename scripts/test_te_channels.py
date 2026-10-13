@@ -137,9 +137,12 @@ def main():
     summary = next(u for u in plant['tags'] if u['name'] == '_Summary')
     out = next(m for m in summary['tags'] if m['name'] == 'OutOfNormal')['expression']
     assert out.count('/OutOfNormal}') == 52 and 'SC-212' not in out
-    alarm = next(m for m in summary['tags'] if m['name'] == 'AlarmsActive')['expression']
-    assert alarm.count('/AlarmActive}') == len(ALARMS)
-    assert not any(tag in alarm for tag in columns if tag.startswith('AI-'))
+    alarm = next(m for m in summary['tags'] if m['name'] == 'AlarmsActive')
+    # One isAlarmActive term per configured alarm (PI-107 has two), not one per tag in alarm.
+    assert alarm['expression'].count('isAlarmActive(') == sum(len(a) for a in ALARMS.values()) == 3
+    assert '"PressureHigh"' in alarm['expression'] and '"PressureShutdown"' in alarm['expression']
+    assert alarm['executionMode'] == 'FixedRate'  # it references no tag, so it must poll
+    assert not any(tag in alarm['expression'] for tag in columns if tag.startswith('AI-'))
     # Operations decisions on a parent must propagate to every derived component.
     modified = copy.deepcopy(model)
     parent = next(i for i in modified['instruments'] if i['tag'] == 'AI-123')

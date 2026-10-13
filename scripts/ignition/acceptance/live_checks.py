@@ -60,7 +60,10 @@ async def census(label):
     meta = json.loads((vg.OUT / "build_meta.json").read_text(encoding="utf-8"))
     te, te_nodata, tw = vg.live_sets(held, meta)
     states = [f"[{vg.P}]{p}/State" for p, _ in held.instances("TE_Plant")]
-    summary = [f"[{vg.P}]TE_Plant/_Summary/OutOfNormal", f"[{vg.P}]TE_Plant/_Summary/AlarmsActive"]
+    # Header counts, plus the data-source diagnostics (journal entry 40): the count of fed values without Good
+    # quality per connection and the number of active diagnostic alarms.
+    summary = [f"[{vg.P}]TE_Plant/_Summary/{m}" for m in ("OutOfNormal", "AlarmsActive", "DiagnosticAlarmsActive",
+                                                          "ReplayValuesNotGood", "DemoPointsNotGood")]
     c = await ua_client.connect()
     async with c:
         ns = await ua_client.tag_ns(c)

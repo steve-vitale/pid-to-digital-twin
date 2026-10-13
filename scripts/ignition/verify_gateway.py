@@ -273,14 +273,15 @@ def v3(held, twin_dir, hidden=frozenset()):
             by_name = {c.get("meta", {}).get("name"): c for c in components(view["root"])}
             for tag in drawn & unavailable - set(hidden):
                 indicator = by_name.get(tag, {})
-                if (indicator.get("props", {}).get("text") != "NOT CONNECTED"
+                # One wording for "no data source" on every screen (build_hmi.NOT_CONNECTED; journal entry 40).
+                if (indicator.get("props", {}).get("text") != "not connected"
                         or "props.text" in indicator.get("propConfig", {})):
-                    fails.append(f"{name}: {tag} must show the explicit NOT CONNECTED indicator, never a value")
+                    fails.append(f"{name}: {tag} must show the explicit 'not connected' indicator, never a value")
                 spatial = by_name.get("Unavailable_" + tag, {})
-                if ("UNKNOWN" not in spatial.get("props", {}).get("text", "")
+                if ("not connected" not in spatial.get("props", {}).get("text", "")
                         or tag not in spatial.get("props", {}).get("text", "")
                         or "props.text" in spatial.get("propConfig", {})):
-                    fails.append(f"{name}: {tag} must retain its spatial UNKNOWN / unavailable indicator")
+                    fails.append(f"{name}: {tag} must retain its spatial 'not connected' indicator")
             drawn -= unavailable
         elif name.startswith("OPEN100/Sheet_"):
             svg = (twin_dir / "svg" / f"sheet_{name.split('_')[-1]}.svg").read_text(encoding="utf-8")

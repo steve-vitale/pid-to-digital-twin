@@ -13,8 +13,9 @@ jobs:
       - run: pip install -r requirements.txt
       # Networked setup is explicit: TE replay fixtures are ignored, not committed.
       # The fetcher accepts only the pinned SHA-256 bytes; failure stops the job.
+      # --all adds the rest of the Braatz set (d00-d21), so the fault-detection results regenerate in CI.
       - name: Stage checksum-verified public TE fixtures
-        run: python scripts/fetch_te_data.py
+        run: python scripts/fetch_te_data.py --all
       # Second source for the topology check (revised TE code, Ricker's archive), pinned by SHA-256; report only.
       - name: Stage the revised TE code
         run: python scripts/verify_te_topology.py

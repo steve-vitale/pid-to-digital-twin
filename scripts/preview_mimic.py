@@ -41,10 +41,13 @@ def resolve(component, values, states, good):
         tag, member = p.split('/')[-2:]
         value = (values if member == 'PV' else states).get(tag)
         if tag == '_Summary':
-            value = sum(v == 2 for v in states.values()) if member == 'AlarmsActive' else values.get('_OutOfNormalCount')
+            # Active alarms (each configured alarm once), band count, and the data-source diagnostic, which stays
+            # Good and reads 1 when the fed values are not Good (the disconnected fixture).
+            value = {'AlarmsActive': values.get('_AlarmCount'), 'OutOfNormal': values.get('_OutOfNormalCount'),
+                     'DiagnosticAlarmsActive': 0 if good else 1}.get(member)
         if member == 'ReviewStatus':
             value = 'Gateway metadata'
-        ok = good and value is not None
+        ok = (good or member == 'DiagnosticAlarmsActive') and value is not None
         for t in binding.get('transforms', []):
             if t['type'] == 'script': value = transform(t['code'], value, ok)
             elif t['type'] == 'map': value = next((m['output'] for m in t['mappings'] if m['input'] == value), t['fallback'])
@@ -100,7 +103,9 @@ def fixtures(model, meta):
             band = meta['te_ranges'][tag]['normal']
             alarm = any(value > a['setpointA'] for a in meta['alarms'].get(tag, []))
             states[tag] = 2 if alarm else int(bool(band and not band[0] <= value <= band[1]))
-        vals['_OutOfNormalCount'] = sum(bool(meta['te_ranges'][tag]['normal'] and not meta['te_ranges'][tag]['normal'][0] <= value <= meta['te_ranges'][tag]['normal'][1]) for tag, value in vals.items())
+        vals['_AlarmCount'] = sum(vals[tag] > a['setpointA'] for tag, alarms in meta['alarms'].items()
+                                  if tag in vals for a in alarms)
+        vals['_OutOfNormalCount'] = sum(bool(meta['te_ranges'][tag]['normal'] and not meta['te_ranges'][tag]['normal'][0] <= value <= meta['te_ranges'][tag]['normal'][1]) for tag, value in vals.items() if not tag.startswith('_'))
         result.append((name + ' / sample ' + str(rowno), vals, states, True))
     result.append(('Disconnected / bad-quality fixture', result[0][1], result[0][2], False))
     return result

@@ -38,6 +38,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_trace_connections_v2.py",
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
+    "scripts/test_fault_detection_eval.py",
     "scripts/test_te_topology.py",
     "scripts/test_te_pid_roundtrip.py",
 )

@@ -164,8 +164,8 @@ def candidate(root, manifest_path, contract_path):
             "PIDTwin", "Twin", "/data/perspective/client/PIDTwin"):
         raise InvalidEvidence("unexpected project/provider/base")
     routes, views = contract.get("routes"), contract.get("views")
-    if not isinstance(routes, dict) or not isinstance(views, dict) or len(routes) != 23 or len(views) != 23:
-        raise InvalidEvidence("current candidate requires 23 routes and 23 views")
+    if not isinstance(routes, dict) or not isinstance(views, dict) or len(routes) != 24 or len(views) != 24:
+        raise InvalidEvidence("current candidate requires 24 routes and 24 views (23 control-room routes plus /m)")
     for route, page in routes.items():
         if not isinstance(route, str) or not route.startswith("/") or route.startswith("//") or any(c in route for c in ("?", "#", "\\", ":")) or ".." in route.split("/"):
             raise InvalidEvidence("invalid contract route")
