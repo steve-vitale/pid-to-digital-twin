@@ -1803,3 +1803,53 @@ still read as broken: Bad was the right quality for those 334 instruments, and `
 screens. Click every link, stop the data source, and watch what an operator would see. Keep "no data source" and
 "broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
 plant readiness. The screens were checked against recorded replay and synthetic points only.
+
+## 40. Check the PI files against what AVEVA publishes, and get ready for a first human review
+
+**2026-10-13:** three gaps a reviewer would point at first. The PI AF files have never been in a PI system. The
+3D tour's text has never been checked against a source. And no one with operations knowledge has looked at
+anything. None of the three is closed. Each is now smaller, and what remains open is written down.
+
+**PI without a licence.** The free route is gone. The PI Developers Club, which included a personal development
+PI System and a 45-day free trial, was retired on January 1, 2026. What remains is partner agreements, paid Flex
+test credits, or a university's academic licence ([PI_MAPPING.md](PI_MAPPING.md) lists the terms and sources;
+nothing was signed up for). So the check stays offline, against what AVEVA itself publishes: three course
+workbooks and an Apache-2.0 AF export in AVEVA's own SDK samples. The sheet headers are mostly in screenshots, so
+they were read by OCR and checked by eye. The results, now in `data/pi_builder_reference.json` with a page for
+each entry:
+- `AttributeType` is the documented column. `AttributeValueType`, which the legacy staging CSV still writes, appears
+  nowhere. The candidate CSV's one correction was right.
+- `%`, `kW` and `m3/h` match the vendor export's abbreviations exactly. `degC` does not: the vendor writes `°C`.
+  `kg/h`, `kPa g`, `kscmh` and `mol%` are not in the sample, which covers only 33 UOM classes. Most likely
+  `kscmh` (a TE unit) and the gauge pressure need custom UOMs at a site.
+- The TE sheet names six element templates it never defines. The extracted twin's attributes have no units at all,
+  while the vendor workbook says "Always assign a unit of measurement!"
+- The AF XML schema types `Type`, `DefaultUOM` and `ConfigString` as plain strings. Adding an AF XML export and
+  validating it against the schema would not have caught any of the above.
+
+`scripts/check_pi_export.py` reports those findings with their evidence and fails only on internal
+inconsistencies. Its test plants each error class to show the check catches it.
+
+**The 3D tour's text.** The purpose cards were checked against Ricker's revised simulator code and against open
+papers that restate Downs and Vogel. That check found the same purge error as the TE topology work, which used
+the original Fortran: the compressor card said the purge leaves at the compressor, and both codes draw it from the
+separator. The cards now take their sentences from the verified TE file. The public-incident citations were read
+against the CSB and OSHA pages. Seven needed a correction or a missing detail, and the six EPA RMP links did not
+resolve to their records. The biggest: Tesoro Anacortes ruptured during a
+maintenance stream switch, not "during a restart". The Williams Geismar link returned 404. And the Bayer summary said more than its
+cited page does. The fixes wait as a patch for the clean merge ([drafts/3d-tour/REVIEW_NOTES.md](../drafts/3d-tour/REVIEW_NOTES.md)).
+An OCR read-back of the five stills found one real legibility problem. In the tour's typeface, 1, I and l look
+alike. Every tag ID the whole-frame read missed was one of those confusions: `Pl-107`, `Tl-109`, `E-10I`.
+
+**The first human review.** [docs/review-kit/](review-kit/README.md) is a one-sitting kit with two tracks that
+must not mix. Anyone can check that text matches the drawing, that boxes sit on symbols, and that labels can be
+read. Only an operations person can say whether a line, an alarm limit, an isolation point or a hazard is right.
+Track A findings go in as notes or identifier-text-only corrections, never as `confirm`, so the record cannot
+later pass for an operations review. The timing log uses the review-effort protocol's fields, but one sitting is
+a pilot, not the study.
+
+**Lesson:** "we can't test it without a licence" was half true. The import can't be tested, but the vendor's own
+published material settled the header question and found a unit spelling no test of ours could have flagged.
+
+**At your plant:** run `check_pi_export.py`, then pull your own UOM classes out of PI Builder before mapping
+anything. The vendor sample is a subset; your UOM database is the authority.
