@@ -13,8 +13,9 @@ all back.
 
 rebuild runs the named stage and everything downstream of it, in manifest order:
   source     accepted as it is (its hash is recorded): a correction is made with the stage's edited_by tool first;
-  auto       its command is run when its requires (files) and requires_modules (Python packages) are present,
-             otherwise it is reported BLOCKED and left stale;
+  auto       its command is run when its requires (files), requires_modules (Python packages) and requires_env
+             (a variable naming a local program, used in the command as $NAME) are present, otherwise it is
+             reported BLOCKED and left stale;
   recorded   never re-run here (model calls, or inputs that are not committed); accepted as it is only when the
              rebuild starts from it or --accept-recorded is given;
   manual     never run here; the command is printed.
@@ -80,10 +81,12 @@ def stage_inputs(stage):
 
 
 def missing_requires(root, stage):
-    """Local prerequisites that are absent: files (cached downloads) and Python modules (requires_modules)."""
+    """Local prerequisites that are absent: files (cached downloads), Python modules (requires_modules) and
+    environment variables naming a local program (requires_env, e.g. BLENDER_EXE; commands use them as $NAME)."""
     files = [p for p in stage.get("requires", []) if not (root / p).exists()]
     modules = [m for m in stage.get("requires_modules", []) if importlib.util.find_spec(m) is None]
-    return files + [f"python module {m}" for m in modules]
+    env = [v for v in stage.get("requires_env", []) if not os.environ.get(v)]
+    return files + [f"python module {m}" for m in modules] + [f"environment variable {v}" for v in env]
 
 
 def short_requires(missing, n=4):
@@ -309,7 +312,7 @@ def cmd_rebuild(root, manifest, lock, args):
                 status = 2
                 continue
             for command in s["command"]:
-                argv = [sys.executable if c == "python" else c for c in command]
+                argv = [sys.executable if c == "python" else os.path.expandvars(c) for c in command]
                 print(f"RUN       {sid}: {' '.join(command)}")
                 if args.dry_run:
                     continue

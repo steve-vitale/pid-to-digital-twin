@@ -49,6 +49,84 @@
     "out/ignition/gateway/twin_provider.json": "dba12b98f20c1e636a490834ed5f3f5b2c05e9e3cbdbced0800af9a5b5607ad5"
    }
   },
+  "open100.direction_spot_check": {
+   "inputs": {
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
+    "scripts/direction_spot_check.py": "f08ab3978ab08fd9c2b4b65bb9c1ca051277e61d540e5824bdd519a5e2518405"
+   },
+   "outputs": {
+    "data/open100_direction_confidence.json": "d74f9d929d1d9bbc1f9671d7c95788596b5af0d5bc06495aab6805ccd4088b68",
+    "out/open100_structural/spot_check/answers_claude.json": "7d5a70e9d49d8b30ef0e4fc0be0a577ffb38dd3320e143097df4797669bf64b9",
+    "out/open100_structural/spot_check/answers_gpt.json": "ce059e23bc1d4cfb7a610607e40d30385ee0a9a836786047dba39e7c8169d46a",
+    "out/open100_structural/spot_check/crops/q00.png": "8e3426b1dc3bc12ee8e4183098512a111eb9ec09df04155f05928bf0421928cd",
+    "out/open100_structural/spot_check/crops/q01.png": "f01860f6ca38362a183fedc3b698572fe9edadc079fec225481bc45085c39001",
+    "out/open100_structural/spot_check/crops/q02.png": "c029765f77b13989286723368987ad0ed143cb6bccf8a7dd6473e8aaa0cbdda0",
+    "out/open100_structural/spot_check/crops/q03.png": "c4c70fdad7eb0a342f3841877bc9c9b77d3fd4761a25aeb5dc67e522dd83e996",
+    "out/open100_structural/spot_check/crops/q04.png": "93e77beccf0b4c49563b50b7d59562e5b9ec425b8a71ade7d6298755e7e4f399",
+    "out/open100_structural/spot_check/crops/q05.png": "f7442a6737897ac93f6a92495cc10444c6593dd667acee7c31757d7417e71532",
+    "out/open100_structural/spot_check/crops/q06.png": "0391b0de88bc6ff06d6e8091fb56c91bfbd1c14d187644124b3176924e2aa977",
+    "out/open100_structural/spot_check/crops/q07.png": "45158e6a4a78c046a974b40d3fb4a9147847ace009177704775ad6c271b85fe8",
+    "out/open100_structural/spot_check/crops/q08.png": "3d79640225a812434cde2c52450925bb92113516b7fbd200ff1a37e7b9f45d93",
+    "out/open100_structural/spot_check/crops/q09.png": "c3179858f680f197022254e7cb55947c19cb757bbb738f42ec4c30b860ab7c7c",
+    "out/open100_structural/spot_check/crops/q10.png": "4b1782724e86b0c69a7777d2e6873a45bc0f73903f077c271de860d7fcc853e7",
+    "out/open100_structural/spot_check/crops/q11.png": "0e20243956428040ffd58bb1142f456229ad287a6edbe585110bd6daaaf023c8",
+    "out/open100_structural/spot_check/crops/q12.png": "368ad05441e589771ec7763427c05cbdf44fec0a693037bb692dbfe2def4a943",
+    "out/open100_structural/spot_check/crops/q13.png": "0c0d739448d443fbb11617961b55d4577053145db4bc80067d6299abb3dd3ca5",
+    "out/open100_structural/spot_check/crops/q14.png": "67efbdb9680ad6bd4579f0f796c2ea403f79acd7d5766918bb5f2fe19fc6c6d3",
+    "out/open100_structural/spot_check/crops/q15.png": "8afdab3358a37b8295e4394648838ce0e75c4bdb4f58b86aa8e19e1f9bce40d7",
+    "out/open100_structural/spot_check/crops/q16.png": "677bf013cd9b18929e0975fcf8fc75bf04465e31fd910a9aa9b8470efdcd3a35",
+    "out/open100_structural/spot_check/crops/q17.png": "e3b9aee68972929c69835672327ace05a49f8702ced60dd7bd074cd589c8efbc",
+    "out/open100_structural/spot_check/crops/q18.png": "7599dd6c565a61ed2025025147babaf1df1c278e822ddb7b8ab7bc68e1fb3997",
+    "out/open100_structural/spot_check/crops/q19.png": "545916c71ccb9126f384b2e7c00e1a9625442e45aee313f40bb75ff0edb4d6c9",
+    "out/open100_structural/spot_check/crops/q20.png": "754a3b9b36832a5cd21b2df2b799184b1382bae0ef91e8c75969d83a0d5ba81f",
+    "out/open100_structural/spot_check/crops/q21.png": "21214b1638512be7041adac7d7fa8bae4266b1d616b531ca4205bb4a342a4425",
+    "out/open100_structural/spot_check/crops/q22.png": "74fd49196b1d748c0e35039a7bfbbc21136d20c3ecea1768ac872cfe54bbd1a4",
+    "out/open100_structural/spot_check/crops/q23.png": "c2de8349beae188e1661259d4c331614dd60b80140ff7a1cf836c4fc77bf2f7f",
+    "out/open100_structural/spot_check/crops/q24.png": "9bcd9f03ae80405afd32ce1692e2683ccf7c99ecc4df4fbba6f08978a2b8c522",
+    "out/open100_structural/spot_check/crops/q25.png": "8f307332529f562a67efa249fee3ec5fc5c79e8bf8f2a6db4a031315810912ce",
+    "out/open100_structural/spot_check/crops/q26.png": "5b1c226f3d5dcecc6e03b18d01e9316a4e009d519ebc689ab5a35b5236766d56",
+    "out/open100_structural/spot_check/crops/q27.png": "438f36e80599699201da127758c5a02ba1dd62d5c5aa074c3573b1e5360bd0a8",
+    "out/open100_structural/spot_check/crops/q28.png": "7cc2c59e1a64ab1458642ea95d024f56276e72b7ed774455b31fef15837b2dd3",
+    "out/open100_structural/spot_check/crops/q29.png": "36e85ad1eaef1e56a92853c9369c531b6653d3ae3b6a9f9d5ef31fa28d44621f",
+    "out/open100_structural/spot_check/crops/q30.png": "3a373d776ed0164662431531e293cc124a87a42ff0dae5bc9c82dcb2300e4c92",
+    "out/open100_structural/spot_check/crops/q31.png": "c6aa18ba74f2335a25f7b65736174c5b19b8565261670807ecf368c1ee4553f4",
+    "out/open100_structural/spot_check/crops/q32.png": "ddb36ac7632125dc24d914507848408363b5c9162e14793e4bd3a495cf7a787a",
+    "out/open100_structural/spot_check/crops/q33.png": "539504e4735883fb3ec77fb691efb24bc13f1ea2e1a8e74d05d4aa9e08973d34",
+    "out/open100_structural/spot_check/crops/q34.png": "695d6ecfe7e7c2bff45923d9d1cf48612dfa58c40bca7eff0afedf3cc9282705",
+    "out/open100_structural/spot_check/crops/q35.png": "6a41309a4a65cdb2d9c36249475cf079d4057ea4f309dcfa87d72c9f1ee879e5",
+    "out/open100_structural/spot_check/crops/q36.png": "b25abeb0ddb12ef6731d006f0c5cda65886f268b2e7d5eeb74e6d4e909920d74",
+    "out/open100_structural/spot_check/crops/q37.png": "6e3fff5281e3aade5ddf6e86d5ce2cb7de573ffa34f9c1c4734ee32473ec50f4",
+    "out/open100_structural/spot_check/crops/q38.png": "265df5d8f47e8b263b0532ee79c3f52ad75c1c31eeb44b3860539490b5d72f9b",
+    "out/open100_structural/spot_check/crops/q39.png": "d7c92665a16a755a7b68f8fb57c531a84f6f37c4f29712f72d855384324e1300",
+    "out/open100_structural/spot_check/crops/q40.png": "8439cc3f53eaf91b5aba1f52fb4fb60ba42f49f70fdbc735f1a8f729857dae79",
+    "out/open100_structural/spot_check/crops/q41.png": "63bf07cba74455f6d31fe07e66c3ade3ad0100d2be1133974c971c688c02382d",
+    "out/open100_structural/spot_check/crops/q42.png": "d3af29ac4c913d7e9ecd8a53bb6112229c44ba3c6d4d42526b8082f1835a81b1",
+    "out/open100_structural/spot_check/crops/q43.png": "52f53aa9d1d7ae13e4906cb3407946492ea50e898ea0be9b4cd9bb305c77a84e",
+    "out/open100_structural/spot_check/crops/q44.png": "8ea9a3f475c2afffb8adaa9e186327451371db8ca585fcfef0a6e1aacd7a92ef",
+    "out/open100_structural/spot_check/crops/q45.png": "a745e1ae4e1be74ed556988363cacd7db5c4d0b4845f04f4370c479dc36d750b",
+    "out/open100_structural/spot_check/crops/q46.png": "2ff1491af49b0b1d763e3354aa11df2cf288f75b8c3b5aada99b6fc3cba697dc",
+    "out/open100_structural/spot_check/crops/q47.png": "7709e627055223f56da3bc3555ef1823542850b58803dc9d19d132a479ba69e6",
+    "out/open100_structural/spot_check/crops/q48.png": "93a0303dc437d76843eeac01684170c0c4373f64cf4f08fd7c52f0f039a390a4",
+    "out/open100_structural/spot_check/crops/q49.png": "a5aa0b02fbc1f42500780ee72b4a01b81f6e77fbb639b55b31ab17352abad6b9",
+    "out/open100_structural/spot_check/crops/q50.png": "a1bc06c2a316e3f41b272b7052e12cb505bc4f8ff054bd7f5f7ab02f94898b5e",
+    "out/open100_structural/spot_check/crops/q51.png": "6095d7a3a8aacefc438e95a445cef71198867068b9439fd11bb50d6fb05c178f",
+    "out/open100_structural/spot_check/crops/q52.png": "07a3e28c6d149488a28a86205c5f5ded7703342f71c75c063c5ac7b736c9bcff",
+    "out/open100_structural/spot_check/crops/q53.png": "d47aaeed599fdd02ff1083e9b8ee50b684449164106d694e6074417df726ffde",
+    "out/open100_structural/spot_check/crops/q54.png": "623e1c0a9cc6c79fa0a9f86075d6d2fc646c117a26f183643e0b64cca5f4c426",
+    "out/open100_structural/spot_check/crops/q55.png": "663b8a03af486f6118a1b0540f4dc46c52a494851978172ee688b3108286f989",
+    "out/open100_structural/spot_check/crops/q56.png": "6b924afcd760c50d849c44e062abf11245fbb792f9545e34bc19686dec6be34a",
+    "out/open100_structural/spot_check/crops/q57.png": "201af18f6c43e62d56e6ac1462b8d916a0f851a9015e6dcf06b519cfb501c64f",
+    "out/open100_structural/spot_check/crops/q58.png": "008b206d4b10a0a7ee7f7e67916cf576272f181595827d6c5bc5ab885cf18dfb",
+    "out/open100_structural/spot_check/crops/q59.png": "b65bfd78b50ebc61bbb0c77be4a2c89126df95877b5d1c04494ae5ca0e355722",
+    "out/open100_structural/spot_check/crops/q60.png": "b79198975181fb6e2335e0b092a8001105a23206c3e1b8ccf7ce7ea1a5c15e57",
+    "out/open100_structural/spot_check/crops/q61.png": "95ba1d7962510c0194b6b31d397cd775280c13030b47707ec76331f42f1eedd0",
+    "out/open100_structural/spot_check/crops/q62.png": "a828055bbc63dc7b42c90918ce6143b45a6bf3a4cba74dc8ccd78f1d5c710f8f",
+    "out/open100_structural/spot_check/crops/q63.png": "5416de44cc4b626e6620805905dddca3160db418c2117e40ffc31beab3a83ebd",
+    "out/open100_structural/spot_check/crops/q64.png": "5854ebe3d645df2af441825874fe161565141d52dd606e6f5dd98b92f0955109",
+    "out/open100_structural/spot_check/inferred_hidden.json": "63f483730b3ac57eb68b3b3d234466d7730eeba349f66796208c9b71bc10b972",
+    "out/open100_structural/spot_check/manifest.json": "769b5ec063cf5b28128ce806028658cfdda7332e27c21367f244e76cd69eb2ec"
+   }
+  },
   "open100.exports": {
    "inputs": {
     "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
@@ -100,6 +178,46 @@
     "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
    },
    "outputs": {}
+  },
+  "open100.flow_direction": {
+   "inputs": {
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png": "2a55b00991b7c33a5d681d203ba21ea5740ddf4d54bd0dfe0b02f88210dc6897",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/1.png": "0ce7f9639c0da3246342919c7e655f5b925a17ae3be58908d90781307fdead63",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/10.png": "5b54b1d977b333687e426f3815990acc33cbfb4005873e0591cb9d9eac38bb16",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/11.png": "3c1ea8292ce352cae1a5c03451240075a7b2daa3673486e87d81d23671d20baa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/2.png": "61cd3fe4c4f7e809a38722db3b17dbd9f05cbe5c35b6f5061d54f0d05ab56f4d",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/3.png": "6ea51e46371927425987ebbc26fd266d9c21de4cdcc59858365f5589585258fa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/4.png": "a1b7a572b85108bd3568e965f20f12ca1c44da9405e84656dfef3d2f6eef57aa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/5.png": "1931987ccf246b596571f88a5cc47ae807cce1a405465ee9d7b0ec0095991329",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/6.png": "c15a63a7d23dcafbfa21adb12aa80f519f1ce4f9906406fcac33b7a585f5df5c",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/7.png": "6e90a988ad18e58c422d8bfd1b552138f0fc07d67f8e81d8853f766777671daa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png": "3e618c63f11ea59ca96813ae3658ac878c09261a29b7df8f7b6fbef3778f4ed2",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c",
+    "data/open100_direction_confidence.json": "d74f9d929d1d9bbc1f9671d7c95788596b5af0d5bc06495aab6805ccd4088b68",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
+    "scripts/flow_direction.py": "8731cbe78469c59cdd223486fa383d580c6d77b065c78cd2fa832367aa6ef62e",
+    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+   },
+   "outputs": {
+    "docs/screenshots/open100/flow-evidence-sheet5.png": "4b132d20aafeeedfc4d5bc459f4111065be42bbc75c1566272f2d90fe41a0fe0",
+    "out/open100_structural/flow_direction.json": "16a57faf86142c8b346ee58fc61baa8dda0b53742267c8fb2631e66295a1420f"
+   }
+  },
+  "open100.mimic": {
+   "inputs": {
+    "out/ignition/gateway/build_meta.json": "6cb64026662afa33501b02001a9627a0119fa1e4ae539d1ad0a4100d178c883c",
+    "out/ignition/gateway/twin_provider.json": "dba12b98f20c1e636a490834ed5f3f5b2c05e9e3cbdbced0800af9a5b5607ad5",
+    "out/open100_structural/plant_structure.json": "f856d2727ede991fad80a41bfe2eb262eaec7e84837bcac6f394dfdc1c1926a7",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
+    "scripts/ignition/build_open100_mimic.py": "42025dfe7c3a49ada63339675c63d6ef989ec92f1bb3108d956efaeae84396f0",
+    "scripts/render_open100_structural.py": "433e6e2de660d15bda8a6981c3b2cf48cd6b4c673ab03c98aefb06d38f2e5ac2"
+   },
+   "outputs": {
+    "docs/screenshots/open100/loto-isolation-sheet7.png": "11dab7f2fb96df43e0e5ee3c3a0784523f9255697a5dd87e653698e23273e781",
+    "docs/screenshots/open100/mimic-area-sheet7.png": "84cabc33c6a5f5dee646d118758f71481c9d2138f289ac8b77fed25b161a9f11",
+    "docs/screenshots/open100/mimic-plant-overview.png": "9e04176d947fe2f7ce57defd2839a012864b43422e05655764a5708e31d25431",
+    "out/open100_structural/mimic/views.json": "a2951743eb952aaf4caad261ceed9d7ed29cf422f87b1bacd9ba7560cd5d8c3f"
+   }
   },
   "open100.model": {
    "inputs": {
@@ -154,6 +272,40 @@
     "out/review_kit/sheet-8/timer_log.csv": "7e2621f8ace00d7615447a87cca83443ec820738f297d40c7261948ca7e1eb66"
    }
   },
+  "open100.scene": {
+   "inputs": {
+    "out/open100_structural/plant_structure.json": "f856d2727ede991fad80a41bfe2eb262eaec7e84837bcac6f394dfdc1c1926a7",
+    "scripts/blender_tour_template.py": "1b15b3771a3d9c9bc55b3614ec162c733e2043d3a69ee3a6e70ab145b0151b3c",
+    "scripts/build_open100_3d.py": "ad23863346e8cb4b15cba9d57af37f3ed146dd320dfb28d35b7b484303897027",
+    "scripts/label_layout.py": "0c1af7a7dbed9c3e44d95c4537c9070173d2b371b486cd981a13ef9563631709"
+   },
+   "outputs": {
+    "docs/screenshots/open100/3d-00_overview.jpg": "6c7ef7b9f966d53bdd798dcdb72e9d488e96b18f20b7d9bd07791f2c4051ec94",
+    "docs/screenshots/open100/3d-01_stop_sheet3.jpg": "7b5689ee21f42e27ffd085476dcdc374997634c9b6f5cd67cf787f81dbdd0282",
+    "docs/screenshots/open100/3d-05_stop_sheet7.jpg": "4b53ab4513b7f42da9d7243278d5ef743928c5dfc70558ed009bbaa60c829666",
+    "out/open100_structural/3d/open100_scene.json": "897f102c7f4162773abe22c8444b4442e6b45aee3093fc1b9a1de985da05f0ad"
+   }
+  },
+  "open100.schedule": {
+   "inputs": {
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png": "2a55b00991b7c33a5d681d203ba21ea5740ddf4d54bd0dfe0b02f88210dc6897",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/1.png": "0ce7f9639c0da3246342919c7e655f5b925a17ae3be58908d90781307fdead63",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/10.png": "5b54b1d977b333687e426f3815990acc33cbfb4005873e0591cb9d9eac38bb16",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/11.png": "3c1ea8292ce352cae1a5c03451240075a7b2daa3673486e87d81d23671d20baa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/2.png": "61cd3fe4c4f7e809a38722db3b17dbd9f05cbe5c35b6f5061d54f0d05ab56f4d",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/3.png": "6ea51e46371927425987ebbc26fd266d9c21de4cdcc59858365f5589585258fa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/4.png": "a1b7a572b85108bd3568e965f20f12ca1c44da9405e84656dfef3d2f6eef57aa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/5.png": "1931987ccf246b596571f88a5cc47ae807cce1a405465ee9d7b0ec0095991329",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/6.png": "c15a63a7d23dcafbfa21adb12aa80f519f1ce4f9906406fcac33b7a585f5df5c",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/7.png": "6e90a988ad18e58c422d8bfd1b552138f0fc07d67f8e81d8853f766777671daa",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png": "3e618c63f11ea59ca96813ae3658ac878c09261a29b7df8f7b6fbef3778f4ed2",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c",
+    "scripts/transcribe_equipment_schedules.py": "e715f4bf3860f917100c6010edc474c7e42987d06b277e224df08d322a931319"
+   },
+   "outputs": {
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4"
+   }
+  },
   "open100.score": {
    "inputs": {
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.graphml": "e76bf9c6ddda990f114cf685924ce8482177723585410e8a338052c31373e6ed",
@@ -205,6 +357,19 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png": "3e618c63f11ea59ca96813ae3658ac878c09261a29b7df8f7b6fbef3778f4ed2",
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.graphml": "b187afadfa6382cb0c08046c78fbea8a010999ca4c6e02118f275251588dc309",
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c"
+   }
+  },
+  "open100.structure": {
+   "inputs": {
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4",
+    "data/sheet_registers/open100_dev.csv": "4a90c0b1e7fbb22fdce1db0b0cdd366bb2358e4fb5e5906eb2cbe8b432b084ba",
+    "out/open100_structural/flow_direction.json": "16a57faf86142c8b346ee58fc61baa8dda0b53742267c8fb2631e66295a1420f",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
+    "scripts/open100_structure.py": "77c938faa1b8cb65c88b1615ff175d1fbf3586d00137229f0edd73a57f6f55c2"
+   },
+   "outputs": {
+    "out/open100_structural/loto_isolation_points.csv": "d8d9132a1be3b7be8d703d3dc6dfd9048b032232c0c823cfbf18c98cff1e8b8a",
+    "out/open100_structural/plant_structure.json": "f856d2727ede991fad80a41bfe2eb262eaec7e84837bcac6f394dfdc1c1926a7"
    }
   },
   "pi.export_check": {

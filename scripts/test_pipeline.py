@@ -41,9 +41,14 @@ def check(name, ok, detail=""):
     print(f"{'PASS' if ok else 'FAIL'}  {name}{'' if ok else ': ' + str(detail)}")
 
 
+# The temp-copy rebuilds never start a renderer (Blender, a headless browser): those stages block instead.
+RENDER_ENV = ("BLENDER_EXE", "BROWSER_EXE")
+
+
 def run(args, cwd=ROOT):
+    env = {k: v for k, v in os.environ.items() if k not in RENDER_ENV}
     return subprocess.run([sys.executable] + [str(a) for a in args], cwd=cwd, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace", env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+                          encoding="utf-8", errors="replace", env={**env, "PYTHONIOENCODING": "utf-8"})
 
 
 def tree_hash(folder):
@@ -194,7 +199,8 @@ def te_propagation(tmp):
     by_id = {s["id"]: s for s in manifest["stages"]}
     may_block = set()
     for s in manifest["stages"]:
-        if pipeline.missing_requires(tmp, s) or any(u in may_block for u in s.get("upstream", [])):
+        if (pipeline.missing_requires(tmp, s) or set(s.get("requires_env", [])) & set(RENDER_ENV)
+                or any(u in may_block for u in s.get("upstream", []))):
             may_block.add(s["id"])
     must_block = {"te.bands", "ignition.gateway", "te.fault_detection"}
     check("rebuild ran; only stages needing the TE replay download or a missing package were blocked (exit 2)",

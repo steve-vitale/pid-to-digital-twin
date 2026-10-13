@@ -1441,6 +1441,306 @@
    "checked_by": "the receipt: 24/24 routes, 284/284 navigation targets, 0 false-good, diagnostics fire and clear, header count matches the alarm table"
   },
   {
+   "dataset": "open100",
+   "poc": false,
+   "upstream": [
+    "open100.model"
+   ],
+   "inputs": [
+    "out/twin/r2-tiles-trace/codex/plant_model.json"
+   ],
+   "code": [
+    "scripts/direction_spot_check.py"
+   ],
+   "outputs": [
+    "out/open100_structural/spot_check/*.json",
+    "out/open100_structural/spot_check/crops/*",
+    "data/open100_direction_confidence.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "open100.direction_spot_check",
+   "stage": 3,
+   "title": "Blind direction spot check (recorded): 65 crops read by GPT and Claude",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/direction_spot_check.py",
+     "make"
+    ],
+    [
+     "python",
+     "scripts/direction_spot_check.py",
+     "ask-gpt"
+    ],
+    [
+     "python",
+     "scripts/direction_spot_check.py",
+     "ask-claude"
+    ],
+    [
+     "python",
+     "scripts/direction_spot_check.py",
+     "score"
+    ]
+   ],
+   "requires_note": "model calls (Codex and Claude CLIs); the links were sampled from a previous flow_direction run (stratified, fixed seed)",
+   "treatment": "Directed links cut out as crops with the two symbols outlined A and B, A picked at random; both models read them blind; UNCLEAR is not counted either way.",
+   "carries": "per evidence source: agreement and the lower end of its 95% Wilson interval, used as the confidence of every link it directs; not an answer key",
+   "checked_by": "the two readers agree with the code on every decided crop; scripts/test_open100_structural.py"
+  },
+  {
+   "dataset": "open100",
+   "poc": false,
+   "upstream": [
+    "open100.model"
+   ],
+   "inputs": [
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.png"
+   ],
+   "code": [
+    "scripts/transcribe_equipment_schedules.py"
+   ],
+   "outputs": [
+    "data/open100_equipment_schedule.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "open100.schedule",
+   "stage": 3,
+   "title": "Equipment schedules transcribed from the drawings (recorded: model calls)",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/transcribe_equipment_schedules.py"
+    ]
+   ],
+   "requires_note": "model calls (claude CLI) on crops of the printed schedules",
+   "treatment": "The schedules printed along the bottom of each sheet (SERVICE: ...) transcribed per equipment tag.",
+   "carries": "purpose text for 49 of the 74 equipment cards; not checked by a second model",
+   "checked_by": "read back by eye on the crops; no second transcription"
+  },
+  {
+   "dataset": "open100",
+   "poc": false,
+   "upstream": [
+    "open100.model"
+   ],
+   "inputs": [
+    "out/twin/r2-tiles-trace/codex/plant_model.json",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.png"
+   ],
+   "code": [
+    "scripts/flow_direction.py",
+    "scripts/trace_connections.py"
+   ],
+   "outputs": [
+    "out/open100_structural/flow_direction.json",
+    "docs/screenshots/open100/flow-evidence-sheet5.png"
+   ],
+   "requires": [],
+   "config": [
+    "data/open100_direction_confidence.json"
+   ],
+   "id": "open100.flow_direction",
+   "stage": 3,
+   "title": "Flow direction from drawing evidence: arrowheads, off-page flags, pump ports, valve continuity",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/flow_direction.py",
+     "--overlay",
+     "5"
+    ]
+   ],
+   "requires_modules": [
+    "cv2",
+    "numpy"
+   ],
+   "requires_note": "numpy, opencv-python-headless",
+   "treatment": "Re-traces each sheet and requires the links to match the twin (1,874 of 1,874) before reading any direction; settings chosen on sheets 0-5; instrument links are never directed.",
+   "carries": "361 of 1,133 process links directed (84 first-hand), 101 conflicts, the rest undirected; each directed link carries the lower 95% bound of its evidence source's spot-check agreement",
+   "checked_by": "arrowhead detection scored by position against the keys' arrow nodes on sheets 6-11 (83% precision, 77% recall); arrowheads and flags agree on 70 of 70 shared links; the blind spot check"
+  },
+  {
+   "dataset": "open100",
+   "poc": true,
+   "upstream": [
+    "open100.model",
+    "open100.flow_direction",
+    "open100.schedule"
+   ],
+   "inputs": [
+    "out/twin/r2-tiles-trace/codex/plant_model.json",
+    "out/open100_structural/flow_direction.json",
+    "data/open100_equipment_schedule.json"
+   ],
+   "code": [
+    "scripts/open100_structure.py"
+   ],
+   "outputs": [
+    "out/open100_structural/plant_structure.json",
+    "out/open100_structural/loto_isolation_points.csv"
+   ],
+   "requires": [],
+   "config": [
+    "data/sheet_registers/open100_dev.csv"
+   ],
+   "id": "open100.structure",
+   "stage": 4,
+   "title": "Plant structure: areas, equipment purposes, sheets stitched by connector drawing numbers, tour order, candidate isolation points",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/open100_structure.py"
+    ]
+   ],
+   "treatment": "Areas named from title blocks or other sheets' connector text; purposes from the transcribed schedules; 38 sheet-to-sheet links (36 directed); 375 candidate isolation points with boxes.",
+   "carries": "structure only; every item stays unverified; the isolation points are a reviewer's checklist, not a LOTO procedure",
+   "checked_by": "scripts/test_open100_structural.py (output consistency)"
+  },
+  {
+   "dataset": "open100",
+   "poc": true,
+   "upstream": [
+    "open100.structure",
+    "ignition.gateway"
+   ],
+   "inputs": [
+    "out/open100_structural/plant_structure.json",
+    "out/twin/r2-tiles-trace/codex/plant_model.json",
+    "out/ignition/gateway/build_meta.json",
+    "out/ignition/gateway/twin_provider.json"
+   ],
+   "code": [
+    "scripts/render_open100_structural.py",
+    "scripts/ignition/build_open100_mimic.py"
+   ],
+   "outputs": [
+    "out/open100_structural/mimic/views.json",
+    "docs/screenshots/open100/mimic-plant-overview.png",
+    "docs/screenshots/open100/mimic-area-sheet7.png",
+    "docs/screenshots/open100/loto-isolation-sheet7.png"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "open100.mimic",
+   "stage": 5,
+   "title": "OPEN100 mimic: plant overview and 12 area views, every value 'not connected', plus the LOTO isolation view (offline render)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/render_open100_structural.py",
+     "--png"
+    ]
+   ],
+   "requires_env": [
+    "BROWSER_EXE"
+   ],
+   "requires_note": "BROWSER_EXE: a headless Edge or Chrome for the PNG stills",
+   "treatment": "Built from the TE screens' components and their 'not connected' transform; arrows only where a direction was read; rendered offline, not imported into a gateway.",
+   "carries": "PROOF OF CONCEPT: positions and icons are first-pass display choices; no values; the LOTO view is a mockup on the real sheet 7 drawing",
+   "checked_by": "scripts/test_open100_structural.py; not reviewed by operations"
+  },
+  {
+   "dataset": "open100",
+   "poc": true,
+   "upstream": [
+    "open100.structure"
+   ],
+   "inputs": [
+    "out/open100_structural/plant_structure.json"
+   ],
+   "code": [
+    "scripts/build_open100_3d.py",
+    "scripts/blender_tour_template.py",
+    "scripts/label_layout.py"
+   ],
+   "outputs": [
+    "out/open100_structural/3d/open100_scene.json",
+    "docs/screenshots/open100/3d-*.jpg"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "open100.scene",
+   "stage": 5,
+   "title": "OPEN100 3D orientation tour: overview and two stops, structure only (Blender stills)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/build_open100_3d.py",
+     "--blender",
+     "$BLENDER_EXE"
+    ]
+   ],
+   "requires_env": [
+    "BLENDER_EXE"
+   ],
+   "requires_modules": [
+    "PIL"
+   ],
+   "requires_note": "BLENDER_EXE: a Blender executable (the stills were rendered with Blender 5.2.2); Pillow",
+   "treatment": "Equipment, pipes and markers from the plant structure; every shape is a placeholder; pipes drawn directed only where a direction was read.",
+   "carries": "PROOF OF CONCEPT: placeholder geometry, no sizes, elevations or routes from any source",
+   "checked_by": "scripts/test_open100_structural.py; looked at by eye"
+  },
+  {
+   "dataset": "open100",
+   "poc": false,
+   "upstream": [
+    "open100.flow_direction",
+    "open100.structure",
+    "open100.mimic",
+    "open100.scene"
+   ],
+   "inputs": [
+    "out/open100_structural/flow_direction.json",
+    "out/open100_structural/plant_structure.json",
+    "out/open100_structural/mimic/views.json",
+    "out/open100_structural/3d/open100_scene.json"
+   ],
+   "code": [
+    "scripts/test_open100_structural.py",
+    "scripts/deliverables_matrix.py"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [
+    "docs/deliverables_matrix.json"
+   ],
+   "id": "open100.structural_check",
+   "stage": 5,
+   "title": "Structural check: direction rules on synthetic drawings, output consistency, the deliverables matrix",
+   "kind": "check",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/test_open100_structural.py"
+    ]
+   ],
+   "requires_modules": [
+    "cv2",
+    "numpy"
+   ],
+   "requires_note": "numpy, opencv-python-headless",
+   "treatment": "Runs the structural test: planted arrowheads and flags on synthetic drawings, consistency between the committed outputs, and the README matrix against docs/deliverables_matrix.json.",
+   "carries": "nothing new: a check",
+   "checked_by": "the test's own controls"
+  },
+  {
    "poc": false,
    "upstream": [],
    "inputs": [],
