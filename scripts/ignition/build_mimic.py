@@ -14,8 +14,8 @@ TAGS = {
     'U-100': ['FI-101', 'FI-102', 'FI-103'],
     'R-101': ['PI-107', 'TI-109', 'LI-108', 'FI-106'],
     'E-101': ['TI-122', 'TV-211'],
-    'V-101': ['PI-113', 'TI-111', 'LI-112', 'FI-114'],
-    'K-101': ['FI-105', 'FI-110', 'JI-120', 'HV-205'],
+    'V-101': ['PI-113', 'TI-111', 'LI-112', 'FI-114', 'FI-110'],
+    'K-101': ['FI-105', 'JI-120', 'HV-205'],
     'C-101': ['PI-116', 'TI-118', 'LI-115', 'FI-117'],
 }
 
@@ -125,7 +125,7 @@ def mimic(provider, model, hidden=frozenset()):
     streams = {s['id']: s for s in model['streams']}
     kids = header(provider, 'Whole-process overview', '/')
     kids += [label('Mode', 24, 72, 1500, 24, 'RECORDED TE REPLAY  /  READ ONLY  /  NO RESPONSIVE PROCESS PHYSICS', {'fontWeight': 'bold', 'fontSize': 15}),
-             label('Caveat', 24, 102, 1510, 36, 'Asset shapes are illustrative. Units and stream topology are UNVERIFIED pending operations review. Arrows reproduce the seed model only; no measured-flow animation.', {'fontSize': 13}),
+             label('Caveat', 24, 102, 1510, 36, 'Asset shapes are illustrative. Units, stream connections and flow directions are verified against the simulator source (teprob.f); positions and taps are not. No measured-flow animation.', {'fontSize': 13}),
              label('FullSchematic', 1280, 70, 290, 26, 'Open full model schematic >', {'textAlign': 'right'}, page='/schematic')]
     positions = {'U-100': (70, 350), 'R-101': (360, 350), 'E-101': (650, 350),
                  'V-101': (940, 350), 'K-101': (940, 170), 'C-101': (1300, 350)}
@@ -139,13 +139,13 @@ def mimic(provider, model, hidden=frozenset()):
         eq['events'] = {'dom': {'onClick': {'type': 'nav', 'scope': 'C', 'config': {'page': '/unit/' + uid}}}}
         eq['props']['style'] = {'cursor': 'pointer'}
         kids.append(eq)
-        note = ('Fill = ' + level + ' measured %') if level else ('TI-122 ownership unresolved' if uid == 'E-101' else '')
+        note = ('Fill = ' + level + ' measured %') if level else ('TI-122 = condenser CW outlet' if uid == 'E-101' else '')
         kids.append(label('GraphicNote_' + uid, 1120 if uid == 'K-101' else x - 45, 170 if uid == 'K-101' else top + 151, 280, 20, note, {'fontSize': 12, 'textAlign': 'center', 'color': MUTED}))
-    # Draw only directions explicitly supplied in the unverified seed model.
+    # Directions come from the model, where each one is verified against the simulator source.
     paths = {'S1': 'M15 389 H100', 'S2': 'M15 425 H100', 'S3': 'M15 461 H100',
              'S4': 'M1555 285 H1515 V390 H1430', 'S5': 'M1340 380 H1225 V700 H15 V510 H148 V467',
              'S6': 'M217 425 H398', 'S7': 'M502 425 H680', 'S7b': 'M800 425 H978',
-             'S8': 'M1030 366 V278', 'S8b': 'M990 234 H260 V425 H223', 'S9': 'M1070 234 H1190',
+             'S8': 'M1030 366 V278', 'S8b': 'M990 234 H260 V425 H223', 'S9': 'M1030 300 H1200',
              'S10': 'M1082 425 H1338', 'S11': 'M1442 425 H1570'}
     svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#717b85"/></marker></defs>'
     for stream in model['streams']:
@@ -153,12 +153,12 @@ def mimic(provider, model, hidden=frozenset()):
     svg += '</svg>'
     kids.insert(0, {'type': 'ia.display.image', 'meta': {'name': 'ModeledStreams'}, 'position': {'x': 0, 'y': 0, 'width': 1600, 'height': 720}, 'props': {'source': uri(svg), 'fit': {'mode': 'fill'}, 'style': {'pointerEvents': 'none'}}})
     loc = {'S1': (16, 365), 'S2': (16, 401), 'S3': (16, 437), 'S4': (1420, 258), 'S5': (640, 675),
-           'S6': (261, 400), 'S7': (547, 400), 'S7b': (845, 400), 'S8': (1070, 300),
-           'S8b': (550, 209), 'S9': (1140, 208), 'S10': (1130, 400), 'S11': (1480, 400)}
+           'S6': (261, 400), 'S7': (547, 400), 'S7b': (845, 400), 'S8': (995, 300),
+           'S8b': (550, 209), 'S9': (1140, 276), 'S10': (1130, 400), 'S11': (1480, 400)}
     for sid, (x, y) in loc.items():
         st = streams[sid]
-        kids.append(label('Stream_' + sid, x, y, 110, 22, sid + (' / BL' if 'BL' in (st['from'], st['to']) else ''), {'fontSize': 12}, tooltip='%s: %s → %s (%s); unverified seed direction' % (sid, st['from'], st['to'], st['name'])))
-    kids.append(label('OverviewGuide', 24, 725, 1552, 32, 'Select equipment for all mapped readings, 30-minute history, normal bands and review status. BL = model boundary. Static arrows are seed-model directions, not measured flow.', {'fontSize': 13}))
+        kids.append(label('Stream_' + sid, x, y, 110, 22, sid + (' / BL' if 'BL' in (st['from'], st['to']) else ''), {'fontSize': 12}, tooltip='%s: %s → %s (%s); direction verified against the simulator source' % (sid, st['from'], st['to'], st['name'])))
+    kids.append(label('OverviewGuide', 24, 725, 1552, 32, 'Select equipment for all mapped readings, 30-minute history, normal bands and review status. BL = model boundary. Static arrows show the source-verified flow direction, not measured flow.', {'fontSize': 13}))
     # Level-one essentials sit beside their equipment, not in a second inventory.
     for uid in UNIT_ORDER:
         x, _ = positions[uid]
@@ -177,7 +177,7 @@ def mimic(provider, model, hidden=frozenset()):
             c['propConfig'] = {'props.text': tag_binding(base + '/PV', [script(code)]),
                               'props.style.color': tag_binding(base + '/State', [script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1: "#8a5d00", 2: "#b91c1c"}.get(value, "#1f2937")')])}
             kids.append(c)
-    kids += [label('TI122Review', 24, 765, 1552, 36, 'TI-122 ownership unresolved: source says separator cooling-water outlet; model retains E-101 pending operations review.', {'fontSize': 12, 'color': '#624d25', 'backgroundColor': '#f1e9d9', 'padding': 8}),
+    kids += [label('TopologyReview', 24, 765, 1552, 36, 'Topology verified against the simulator source: purge S9 corrected to leave the separator; TI-122 confirmed as condenser cooling-water outlet; PI-116 ownership unresolved in the source (computed from feed-header pressure).', {'fontSize': 12, 'color': '#624d25', 'backgroundColor': '#f1e9d9', 'padding': 8}),
              label('ValveMeaning', 24, 811, 1552, 28, 'XMV readings are recorded output (%), not measured valve position. No controls or inferred flow animation. Full instrumentation and utility notes are on each unit page.', {'fontSize': 12, 'color': MUTED}),
              label('Legend', 24, 850, 1552, 30, 'Grey = normal; amber = outside existing normal band (not alarm); red = existing alarm. UNKNOWN / hatching = unavailable data. Level shape is not vessel volume.', {'fontSize': 12}),
              label('Scope', 24, 890, 1552, 24, 'Local prototype. Selection and layout need operator review. Hover a tag for its measurement name; select equipment to investigate boundaries, all readings and history.', {'fontSize': 12, 'color': MUTED})]
@@ -215,17 +215,14 @@ def unit_context(provider, model, uid, hidden=frozenset(), layout=None):
         template = layout.get('binding_template')
         return template.format(provider=provider, unit=it['unit'], tag=it['tag']) if template else it.get('data_point', {}).get('tag_path')
     kids = [label('BackOverview',24,70,220,24,'< Whole-process overview',{'fontWeight':'bold'},page='/'),
-            label('DetailMode',270,70,1290,24,('UNIT DETAIL / RECORDED REPLAY / READ ONLY / TOPOLOGY UNVERIFIED' if replay else 'UNIT DETAIL / READ ONLY / REVIEWED DISPLAY CONFIGURATION; CHECK ASSOCIATION STATUS'),{'fontWeight':'bold'}),
+            label('DetailMode',270,70,1290,24,('UNIT DETAIL / RECORDED REPLAY / READ ONLY / TOPOLOGY VERIFIED AGAINST SIMULATOR SOURCE' if replay else 'UNIT DETAIL / READ ONLY / REVIEWED DISPLAY CONFIGURATION; CHECK ASSOCIATION STATUS'),{'fontWeight':'bold'}),
             label('DetailGuide',24,106,1540,24,'Readings beside their process region. Dashed leaders = approximate location; exact taps and along-stream instrument order are unverified.',{'fontSize':13})]
     diagram_height = spec['table_top']-20
     svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 %s"><defs><marker id="spatialArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#717b85"/></marker></defs>' % diagram_height
     for sid,(path,x,y) in spec['streams'].items():
         st = next(s for s in model['streams'] if s['id']==sid)
         other = st['to'] if st['from']==uid else st['from']
-        direction = dict(st)
-        if layout.get('direction_adapter') == 'te_seed_from_to_unverified' and 'direction' not in st:
-            direction['direction'] = 'forward'
-        directed = stream_is_directed(direction)
+        directed = stream_is_directed(st)
         svg += '<path d="%s" fill="none" stroke="#717b85" stroke-width="2.5"%s/>' % (path, ' marker-end="url(#spatialArrow)"' if directed else '')
         kids.append(label('UnitStream_'+sid,x,y,360,29,sid+' | '+st.get('name',sid)+' | '+st['from']+(' → ' if directed else ' — ')+st['to']+('' if directed else ' · direction unknown'),{'fontSize':12},page='/unit/'+other if other!='BL' else None))
         if not any(i.get('stream')==sid for i in items.values()):
@@ -284,6 +281,6 @@ def unit_context(provider, model, uid, hidden=frozenset(), layout=None):
     foot=spec['table_top']-65
     for n,note in enumerate(spec.get('notes',[])):
         kids.append(label('PlacementReview_'+str(n),24,foot-32,1550,28,note,{'fontSize':12,'color':'#624d25'}))
-    kids.append(label('UnitGraphicNote',24,foot,1550,23,('Approximate process arrangement. Solid arrows = seed-model direction. Level fill = measured %, not volume. Outputs are not measured valve position.' if replay else 'Display coordinates are illustrative. Arrows require explicit direction. Missing mappings remain UNKNOWN; unresolved locations have no physical anchor.'),{'fontSize':12,'color':MUTED}))
+    kids.append(label('UnitGraphicNote',24,foot,1550,23,('Approximate process arrangement. Solid arrows = flow direction verified against the simulator source. Level fill = measured %, not volume. Outputs are not measured valve position.' if replay else 'Display coordinates are illustrative. Arrows require explicit direction. Missing mappings remain UNKNOWN; unresolved locations have no physical anchor.'),{'fontSize':12,'color':MUTED}))
     kids.append(label('UnitCaveat',24,foot+25,1550,23,('Full channel inventory, quality, normal bands, alarms and history below. Grey = normal; amber = outside normal band; red = existing alarm; UNKNOWN = unavailable.' if replay else 'Configured unit presentation only. This does not establish native platform bindings, site-approved limits or operations acceptance.'),{'fontSize':12}))
     return kids

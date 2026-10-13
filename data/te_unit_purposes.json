@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "model_id": "te-process",
+  "note": "One plain-language sentence per unit, each restating what the cited simulator code does. Line numbers refer to teprob.f at the pinned checksum below. Written with AI assistance from the code, then checked line by line by scripts/test_te_topology.py (every cited line must still contain the quoted code). Not reviewed by an operator.",
+  "sources": {
+    "teprob": {
+      "title": "teprob.f, Tennessee Eastman process simulation (J. J. Downs and E. F. Vogel), Braatz group mirror",
+      "url": "https://raw.githubusercontent.com/camaramm/tennessee-eastman-profBraatz/master/teprob.f",
+      "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3"
+    },
+    "revised": {
+      "title": "temexd_mod.c header, revised TE code (A. Bathelt, N. L. Ricker, M. Jelali), from N. L. Ricker's Tennessee Eastman archive",
+      "url": "https://depts.washington.edu/control/LARRY/TE/download.html",
+      "paper": "Bathelt, A., Ricker, N. L. & Jelali, M. (2015). Revision of the Tennessee Eastman process model. IFAC-PapersOnLine 48(8), 309-314. https://doi.org/10.1016/j.ifacol.2015.08.199"
+    }
+  },
+  "units": {
+    "U-100": {
+      "purpose": "A vapour header where the fresh A, D and E feeds, the stripper overhead gas and the compressed recycle gas mix before flowing on to the reactor as the reactor feed (stream 6).",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 767,
+          "code": "YP(I+27)=FCM(I,1)+FCM(I,2)+",
+          "shows": "header component balance: feeds 1-3, stripper overhead 5 and recycle 9 in, reactor feed 6 out (continues on lines 768-769)"
+        },
+        {
+          "source": "revised",
+          "text": "States 28-36: holdup in vapor phase of header (stream 6)"
+        }
+      ]
+    },
+    "R-101": {
+      "purpose": "The agitated reactor where A, C, D and E react to the products G and H (with F as a byproduct); cooling water removes the heat of reaction, and the products leave as vapour with the unreacted gas (stream 7).",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 521,
+          "code": "CRXR(1)=-RR(1)-RR(2)-RR(3)",
+          "shows": "reaction terms CRXR(1)-CRXR(8) on lines 521-527: G and H made from A, C, D and E; F from side reactions"
+        },
+        {
+          "source": "teprob",
+          "line": 672,
+          "code": "QUR=UAR*(TWR-TCR)",
+          "shows": "reactor cooling-water heat removal; UAR depends on agitator speed AGSP (line 670)"
+        },
+        {
+          "source": "teprob",
+          "line": 763,
+          "code": "YP(I)=FCM(I,7)-FCM(I,8)+CRXR(I)",
+          "shows": "reactor balance: feed in, effluent out, plus reaction"
+        }
+      ]
+    },
+    "E-101": {
+      "purpose": "The condenser that cools the reactor effluent with cooling water on its way to the separator; the simulator has no separate condenser vessel and adds this cooling to the separator's energy balance.",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 675,
+          "code": "QUS=UAS*(TWS-TST(8))",
+          "shows": "heat exchanged between the condenser cooling water (TWS) and the reactor effluent temperature"
+        },
+        {
+          "source": "teprob",
+          "line": 574,
+          "code": "FWS=VPOS(11)*VRNG(11)/100.0",
+          "shows": "cooling-water flow set by XMV(11), documented as 'Condenser Cooling Water Flow'"
+        },
+        {
+          "source": "revised",
+          "text": "Output 22: Condenser cooling water outlet temperature"
+        }
+      ]
+    },
+    "V-101": {
+      "purpose": "The vapour-liquid separator that splits the cooled effluent: vapour goes to the recycle compressor or out through the purge (streams 8 and 9), and the condensed liquid goes to the stripper (stream 10).",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 764,
+          "code": "YP(I+9)=FCM(I,8)-FCM(I,9)-",
+          "shows": "separator balance: effluent 8 in; recycle 9, purge 10 and underflow 11 out (continues on line 765)"
+        },
+        {
+          "source": "teprob",
+          "line": 585,
+          "code": "DLP=PTS-760.0",
+          "shows": "purge flow is driven by separator pressure, so the purge leaves from the separator vapour"
+        }
+      ]
+    },
+    "K-101": {
+      "purpose": "The compressor that returns separator vapour to the reactor feed header as recycle gas (stream 8); its recycle valve spills some flow back around the machine.",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 589,
+          "code": "PR=PTV/PTS",
+          "shows": "compressor pressure ratio between the separator (suction) and the feed header (discharge)"
+        },
+        {
+          "source": "teprob",
+          "line": 598,
+          "code": "FLMS=FLMS-VPOS(5)*53.349D0*DSQRT(DLP)",
+          "shows": "XMV(5) 'Compressor Recycle Valve' reduces the net compressor flow"
+        },
+        {
+          "source": "revised",
+          "text": "Output 5: Recycle flow to reactor from separator (stream 8)"
+        }
+      ]
+    },
+    "C-101": {
+      "purpose": "The steam-heated stripper that uses the A and C feed (stream 4) to strip most of the lighter components (A to F) out of the separator liquid, sending them overhead to the feed header (stream 5) while the heavy products G and H leave the bottom as product (stream 11).",
+      "citations": [
+        {
+          "source": "teprob",
+          "line": 637,
+          "code": "FIN(I)=FIN(I)+FCM(I,4)",
+          "shows": "stripper feed: A and C feed 4 plus separator underflow 11 (line 638)"
+        },
+        {
+          "source": "teprob",
+          "line": 622,
+          "code": "VOVRL=FTM(4)/FTM(11)*TMPFAC",
+          "shows": "stripping depends on the ratio of A and C feed to separator liquid"
+        },
+        {
+          "source": "teprob",
+          "line": 623,
+          "code": "SFR(4)=8.5010*VOVRL/(1.0+8.5010*VOVRL)",
+          "shows": "overhead split fractions for D to H (lines 623-627): high for D, E, F, low for G and H; A, B, C keep fixed fractions of 0.99 or more (TEINIT, lines 1126-1128)"
+        },
+        {
+          "source": "teprob",
+          "line": 643,
+          "code": "FCM(I,5)=SFR(I)*FIN(I)",
+          "shows": "the stripped fraction goes overhead as stream 5"
+        },
+        {
+          "source": "teprob",
+          "line": 678,
+          "code": "IF(TCC.LT.100.)QUC=UAC*(100.0-TCC)",
+          "shows": "steam heat duty set by XMV(9) 'Stripper Steam Valve' (line 572)"
+        }
+      ]
+    }
+  }
+}

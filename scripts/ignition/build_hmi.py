@@ -1,7 +1,7 @@
 """Operator screens for the twin, in the ISA-101 style: grey and calm when the plant is normal, so colour means
 something when it is not.
 
-  /               Whole-process equipment overview with six units, seed-model boundaries and selected values.
+  /               Whole-process equipment overview with six units, source-verified boundaries and selected values.
   /mimic          Legacy alias for the same Overview; no separate tab.
   /unit/<id>      Level 2: every value in one unit, with its band, a 30-minute trend and its review status.
   /schematic      The process schematic with live values (scripts/ignition/build_views.py).
@@ -44,7 +44,7 @@ KEY_VALUES = {
     "R-101": ["PI-107", "TI-109", "LI-108", "TI-121"],
     "E-101": ["TI-122", "TV-211"],
     "V-101": ["PI-113", "TI-111", "LI-112", "FI-114"],
-    "K-101": ["FI-105", "FI-110", "JI-120", "HV-205"],
+    "K-101": ["FI-105", "JI-120", "HV-205"],
     "C-101": ["PI-116", "TI-118", "LI-115", "FI-117"],
 }
 DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus nearby alarm limits)

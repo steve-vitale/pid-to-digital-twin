@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 import fetch_te_data
 import run_tests as runner
+import verify_te_topology
 
 
 class RunnerControls(unittest.TestCase):
@@ -25,6 +26,9 @@ class RunnerControls(unittest.TestCase):
                 path = root / 'data/external/te-braatz' / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(b'cache fixture')
+            path = root / 'data/external/te-ricker/temexd_mod.zip'
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b'cache fixture')
 
     def invoke(self, args, issues=(), returncode=0):
         output = io.StringIO()
@@ -103,13 +107,14 @@ class RunnerControls(unittest.TestCase):
         expected = hashlib.sha256(b'cache fixture').hexdigest()
         with tempfile.TemporaryDirectory() as tmp, \
              patch.object(fetch_te_data, 'FILES', {'d00_te.dat': expected, 'd06_te.dat': expected}), \
+             patch.object(verify_te_topology, 'REVISED_SHA256', expected), \
              patch.object(runner.importlib.util, 'find_spec', return_value=object()), \
              patch('urllib.request.urlopen', side_effect=AssertionError('network forbidden')), \
              patch.object(runner.subprocess, 'run', side_effect=AssertionError('process forbidden')):
             root = Path(tmp)
             self.fixture(root, cached=False)
             issues = runner.prerequisites(root, False)
-            self.assertEqual([kind for kind, _ in issues], ['cache', 'cache'])
+            self.assertEqual([kind for kind, _ in issues], ['cache', 'cache', 'source-cache'])
             self.assertTrue(any('d00_te.dat' in reason for _, reason in issues))
             self.assertTrue(any('d06_te.dat' in reason for _, reason in issues))
             self.fixture(root)
