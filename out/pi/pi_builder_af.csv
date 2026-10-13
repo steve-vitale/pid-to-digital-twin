@@ -6,14 +6,14 @@ x,,Separator,ElementTemplate,Seed model unit type: separator,,,,,
 x,,Compressor,ElementTemplate,Seed model unit type: compressor,,,,,
 x,,Stripper,ElementTemplate,Seed model unit type: stripper,,,,,
 x,,TE Plant,Element,Tennessee Eastman Challenge Process,,,,,
-x,TE Plant,U-100,Element,Feed System,FeedHeader,,,,
+x,TE Plant,U-100,Element,Feed System | source check: confirmed | ops review: unverified,FeedHeader,,,,
 x,TE Plant\U-100,AFeedFlow,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-101.PV
 x,TE Plant\U-100,DFeedFlow,Attribute,,,Double,kg/h,PI Point,\\%Server%\TE.FI-102.PV
 x,TE Plant\U-100,EFeedFlow,Attribute,,,Double,kg/h,PI Point,\\%Server%\TE.FI-103.PV
 x,TE Plant\U-100,DFeedFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.FV-201.PV
 x,TE Plant\U-100,EFeedFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.FV-202.PV
 x,TE Plant\U-100,AFeedFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.FV-203.PV
-x,TE Plant,R-101,Element,Reactor,Reactor,,,,
+x,TE Plant,R-101,Element,Reactor | source check: confirmed | ops review: unverified,Reactor,,,,
 x,TE Plant\R-101,ReactorFeedRate,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-106.PV
 x,TE Plant\R-101,ReactorPressure,Attribute,,,Double,kPa g,PI Point,\\%Server%\TE.PI-107.PV
 x,TE Plant\R-101,ReactorLevel,Attribute,,,Double,%,PI Point,\\%Server%\TE.LI-108.PV
@@ -22,23 +22,23 @@ x,TE Plant\R-101,ReactorCoolingWaterOutletTemperature,Attribute,,,Double,°C,PI 
 x,TE Plant\R-101,ReactorFeedAnalyzerComponentsAF,Attribute,,,Double,mol%,PI Point,\\%Server%\TE.AI-123.PV
 x,TE Plant\R-101,ReactorCoolingWaterFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.TV-210.PV
 x,TE Plant\R-101,AgitatorSpeed,Attribute,,,Double,%,PI Point,\\%Server%\TE.SC-212.PV
-x,TE Plant,E-101,Element,Product Condenser,Condenser,,,,
+x,TE Plant,E-101,Element,Product Condenser | source check: confirmed | ops review: unverified,Condenser,,,,
 x,TE Plant\E-101,SeparatorCoolingWaterOutletTemp,Attribute,,,Double,°C,PI Point,\\%Server%\TE.TI-122.PV
 x,TE Plant\E-101,CondenserCoolingWaterFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.TV-211.PV
-x,TE Plant,V-101,Element,Vapor/Liquid Separator,Separator,,,,
+x,TE Plant,V-101,Element,Vapor/Liquid Separator | source check: confirmed | ops review: unverified,Separator,,,,
+x,TE Plant\V-101,PurgeRate,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\V-101,SeparatorTemperature,Attribute,,,Double,°C,PI Point,\\%Server%\TE.TI-111.PV
 x,TE Plant\V-101,SeparatorLevel,Attribute,,,Double,%,PI Point,\\%Server%\TE.LI-112.PV
 x,TE Plant\V-101,SeparatorPressure,Attribute,,,Double,kPa g,PI Point,\\%Server%\TE.PI-113.PV
 x,TE Plant\V-101,SeparatorUnderflow,Attribute,,,Double,m3/h,PI Point,\\%Server%\TE.FI-114.PV
+x,TE Plant\V-101,PurgeGasAnalyzerComponentsAH,Attribute,,,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
+x,TE Plant\V-101,PurgeValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
 x,TE Plant\V-101,SeparatorPotLiquidFlowValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.LV-207.PV
-x,TE Plant,K-101,Element,Recycle Compressor,Compressor,,,,
+x,TE Plant,K-101,Element,Recycle Compressor | source check: confirmed | ops review: unverified,Compressor,,,,
 x,TE Plant\K-101,RecycleFlow,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-105.PV
-x,TE Plant\K-101,PurgeRate,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\K-101,CompressorWork,Attribute,,,Double,kW,PI Point,\\%Server%\TE.JI-120.PV
-x,TE Plant\K-101,PurgeGasAnalyzerComponentsAH,Attribute,,,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
 x,TE Plant\K-101,CompressorRecycleValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.HV-205.PV
-x,TE Plant\K-101,PurgeValve,Attribute,,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
-x,TE Plant,C-101,Element,Product Stripper,Stripper,,,,
+x,TE Plant,C-101,Element,Product Stripper | source check: confirmed | ops review: unverified,Stripper,,,,
 x,TE Plant\C-101,AAndCFeedFlow,Attribute,,,Double,kscmh,PI Point,\\%Server%\TE.FI-104.PV
 x,TE Plant\C-101,StripperLevel,Attribute,,,Double,%,PI Point,\\%Server%\TE.LI-115.PV
 x,TE Plant\C-101,StripperPressure,Attribute,,,Double,kPa g,PI Point,\\%Server%\TE.PI-116.PV

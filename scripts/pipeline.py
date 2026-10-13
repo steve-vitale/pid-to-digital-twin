@@ -6,14 +6,15 @@ pipeline/pipeline.lock.json. A stage is STALE when any of those changed since; a
 (a review applied to a model) therefore shows up as every downstream stage going stale, and one rebuild brings them
 all back.
 
-  python scripts/pipeline.py status [--dataset te|open100]
+  python scripts/pipeline.py status [--dataset te|open100|dexpi]
   python scripts/pipeline.py rebuild --from <stage> [--dry-run] [--accept-recorded]
-  python scripts/pipeline.py confidence [--dataset te|open100] [--json]
+  python scripts/pipeline.py confidence [--dataset te|open100|dexpi] [--json]
   (all take --root <dir> to work on a copy of the repository)
 
 rebuild runs the named stage and everything downstream of it, in manifest order:
   source     accepted as it is (its hash is recorded): a correction is made with the stage's edited_by tool first;
-  auto       its command is run when its requires are present, otherwise it is reported BLOCKED and left stale;
+  auto       its command is run when its requires (files) and requires_modules (Python packages) are present,
+             otherwise it is reported BLOCKED and left stale;
   recorded   never re-run here (model calls, or inputs that are not committed); accepted as it is only when the
              rebuild starts from it or --accept-recorded is given;
   manual     never run here; the command is printed.
@@ -29,6 +30,7 @@ calls or gateway operations happen here: the commands that need them are only ev
 import argparse
 import glob
 import hashlib
+import importlib.util
 import json
 import os
 import subprocess
@@ -77,6 +79,17 @@ def stage_inputs(stage):
     return stage.get("inputs", []) + stage.get("code", []) + stage.get("config", [])
 
 
+def missing_requires(root, stage):
+    """Local prerequisites that are absent: files (cached downloads) and Python modules (requires_modules)."""
+    files = [p for p in stage.get("requires", []) if not (root / p).exists()]
+    modules = [m for m in stage.get("requires_modules", []) if importlib.util.find_spec(m) is None]
+    return files + [f"python module {m}" for m in modules]
+
+
+def short_requires(missing, n=4):
+    return ", ".join(missing[:n]) + (f" (+{len(missing) - n} more)" if len(missing) > n else "")
+
+
 def descendants(manifest, start):
     ids = [s["id"] for s in manifest["stages"]]
     if start not in ids:
@@ -101,10 +114,10 @@ def freshness(root, manifest, lock):
             result[s["id"]] = ("MISSING", "input not in this checkout: " + ", ".join(missing_in))
             continue
         if entry is None:
-            missing_req = [p for p in s.get("requires", []) if not (root / p).exists()]
+            missing_req = missing_requires(root, s)
             detail = ("committed outputs predate the lock, not built by pipeline.py here; " if outs else "") + how_to(s)
             if missing_req and s["rebuild"] == "auto":
-                detail += f" (needs {', '.join(missing_req)}: {s.get('requires_note', '')})"
+                detail += f" (needs {short_requires(missing_req)}: {s.get('requires_note', '')})"
             result[s["id"]] = ("NEVER BUILT HERE", detail)
             continue
         changed_in = sorted(p for p in set(ins) | set(entry.get("inputs", {})) if ins.get(p) != entry["inputs"].get(p))
@@ -140,7 +153,10 @@ def how_to(s):
 # ---------------------------------------------------------------- confidence
 
 def dataset_rollup(root, manifest, dataset):
-    path = root / manifest["datasets"][dataset]["model"]
+    model = manifest["datasets"][dataset].get("model")
+    if not model:
+        return None
+    path = root / model
     if not path.exists():
         return None
     return rollup(json.loads(path.read_text(encoding="utf-8")))
@@ -158,6 +174,8 @@ def ops_counts(counts):
 
 def summary(root, manifest, dataset):
     """One line: what the dataset's per-element fields say, carried by every stage built from it."""
+    if not manifest["datasets"][dataset].get("model"):
+        return manifest["datasets"][dataset].get("no_model", "no asset model; scored extraction only")
     r = dataset_rollup(root, manifest, dataset)
     if r is None:
         return "model not in this checkout"
@@ -184,7 +202,7 @@ def summary(root, manifest, dataset):
 
 def carried(root, manifest, stage, cache):
     ds = stage["dataset"]
-    names = ["te", "open100"] if ds == "shared" else [ds]
+    names = [n for n in manifest["datasets"] if manifest["datasets"][n].get("model")] if ds == "shared" else [ds]
     for name in names:
         if name not in cache:
             cache[name] = summary(root, manifest, name)
@@ -203,10 +221,10 @@ def cmd_confidence(root, manifest, args):
         print(json.dumps(out, indent=1, sort_keys=True))
         return 0
     for name, d in out.items():
-        print(f"\n== {d['title']}  ({d['model']})")
+        print(f"\n== {d['title']}  ({d['model'] or 'no asset model'})")
         print(f"   carried by every stage built from it: {d['summary']}")
         if d["per_element"] is None:
-            print("   model not in this checkout")
+            print("   " + ("model not in this checkout" if d["model"] else "no per-element confidence: no asset model"))
             continue
         print(f"   {'class':<19}{'total':>6}  {'source check':<28}{'ops review':<34}{'risk tier':<30}{'tag status / open'}")
         for cls, c in d["per_element"].items():
@@ -231,7 +249,7 @@ def cmd_status(root, manifest, lock, args):
     fresh = freshness(root, manifest, lock)
     cache = {}
     width = max(len(s["id"]) for s in manifest["stages"])
-    for ds in ("te", "open100", "shared"):
+    for ds in (*manifest["datasets"], "shared"):
         rows = [s for s in manifest["stages"] if s["dataset"] == ds and (not args.dataset or ds in (args.dataset, "shared"))]
         if not rows:
             continue
@@ -284,10 +302,10 @@ def cmd_rebuild(root, manifest, lock, args):
             print(f"MANUAL    {sid}: run by hand, then record: {commands}"
                   + (f" ({s['requires_note']})" if s.get("requires_note") else ""))
         else:
-            missing = [p for p in s.get("requires", []) if not (root / p).exists()]
+            missing = missing_requires(root, s)
             if missing:
                 blocked.add(sid)
-                print(f"BLOCKED   {sid}: needs {', '.join(missing)}" + (f" ({s['requires_note']})" if s.get("requires_note") else ""))
+                print(f"BLOCKED   {sid}: needs {short_requires(missing)}" + (f" ({s['requires_note']})" if s.get("requires_note") else ""))
                 status = 2
                 continue
             for command in s["command"]:
@@ -316,7 +334,7 @@ def main(argv=None):
     ap.add_argument("--root", default=str(DEFAULT_ROOT), help="repository root (default: this checkout)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     st = sub.add_parser("status")
-    st.add_argument("--dataset", choices=["te", "open100"])
+    st.add_argument("--dataset", choices=["te", "open100", "dexpi"])
     rb = sub.add_parser("rebuild")
     rb.add_argument("--from", dest="start", required=True)
     rb.add_argument("--dry-run", action="store_true")
@@ -325,7 +343,7 @@ def main(argv=None):
     rc = sub.add_parser("record")
     rc.add_argument("--stage", required=True)
     cf = sub.add_parser("confidence")
-    cf.add_argument("--dataset", choices=["te", "open100"])
+    cf.add_argument("--dataset", choices=["te", "open100", "dexpi"])
     cf.add_argument("--json", action="store_true")
     args = ap.parse_args(argv)
     root = Path(args.root).resolve()

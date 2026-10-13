@@ -1,4 +1,4 @@
-﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeValueType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
+﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
 x,,Site,Element,Digital twin starter kit: te-clean-trace-r1 / claude,,,,,
 x,Site,Feed And Reaction,Element,"Sheet 101, drawing 101-1",,,,,
 x,Site,"Condensing, Separation And Recycle",Element,"Sheet 102, drawing 102-1",,,,,
@@ -8,41 +8,41 @@ x,"Site\Condensing, Separation And Recycle",E-101,Element,S102-TK001 | tag: E-10
 x,"Site\Condensing, Separation And Recycle",V-101,Element,S102-TK002 | tag: V-101 (as_extracted) | tank | sheet 102 symbol s9 | confidence 0.95 | UNVERIFIED,,,,,
 x,"Site\Condensing, Separation And Recycle",K-101,Element,S102-PU001 | tag: K-101 (as_extracted) | pump | sheet 102 symbol s12 | confidence 0.93 | UNVERIFIED,,,,,
 x,Site\Product Stripping,C-101,Element,S103-TK001 | tag: C-101 (as_extracted) | tank | sheet 103 symbol s1 | confidence 0.95 | UNVERIFIED,,,,,
-x,Site\Feed And Reaction\R-101,FV 203,Attribute,S101-IN001 | tag: FV 203 (as_extracted) | flow | attached to S101-VL001 | sheet 101 symbol s9 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_203.PV
-x,Site\Feed And Reaction\R-101,FV 201,Attribute,S101-IN002 | tag: FV 201 (as_extracted) | flow | attached to S101-VL002 | sheet 101 symbol s10 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_201.PV
-x,Site\Feed And Reaction\R-101,FV 202,Attribute,S101-IN003 | tag: FV 202 (as_extracted) | flow | attached to S101-VL003 | sheet 101 symbol s11 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_202.PV
-x,Site\Feed And Reaction\R-101,FI 101,Attribute,S101-IN004 | tag: FI 101 (as_extracted) | flow | attached to S101-VL001 | sheet 101 symbol s12 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_101.PV
-x,Site\Feed And Reaction\R-101,FI 102,Attribute,S101-IN005 | tag: FI 102 (as_extracted) | flow | attached to S101-VL002 | sheet 101 symbol s13 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_102.PV
-x,Site\Feed And Reaction\R-101,FI 103,Attribute,S101-IN006 | tag: FI 103 (as_extracted) | flow | attached to S101-VL003 | sheet 101 symbol s14 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_103.PV
-x,Site\Feed And Reaction\R-101,SC 212,Attribute,S101-IN007 | tag: SC 212 (as_extracted) | speed | attached to S101-GN001 | sheet 101 symbol s17 | confidence 0.92 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.SC_212.PV
-x,Site\Feed And Reaction\R-101,PI 107,Attribute,S101-IN008 | tag: PI 107 (as_extracted) | pressure | attached to S101-TK001 | sheet 101 symbol s19 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_107.PV
-x,Site\Feed And Reaction\R-101,LI 108,Attribute,S101-IN009 | tag: LI 108 (as_extracted) | level | attached to S101-TK001 | sheet 101 symbol s20 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_108.PV
-x,Site\Feed And Reaction\R-101,TI 109,Attribute,S101-IN010 | tag: TI 109 (as_extracted) | temperature | attached to S101-TK001 | sheet 101 symbol s21 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_109.PV
-x,Site\Feed And Reaction\R-101,FI 106,Attribute,S101-IN011 | tag: FI 106 (as_extracted) | flow | attached to S101-GN002 | sheet 101 symbol s23 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_106.PV
-x,Site\Feed And Reaction\R-101,AI 123,Attribute,S101-IN012 | tag: AI 123 (as_extracted) | analysis | attached to S101-TK001 | sheet 101 symbol s24 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_123.PV
-x,Site\Feed And Reaction\R-101,TV 210,Attribute,S101-IN013 | tag: TV 210 (as_extracted) | temperature | attached to S101-VL004 | sheet 101 symbol s27 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TV_210.PV
-x,Site\Feed And Reaction\R-101,TI 121,Attribute,S101-IN014 | tag: TI 121 (as_extracted) | temperature | attached to S101-TK001 | sheet 101 symbol s28 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_121.PV
-x,"Site\Condensing, Separation And Recycle\E-101",TI 122,Attribute,S102-IN001 | tag: TI 122 (as_extracted) | temperature | attached to S102-TK001 | sheet 102 symbol s6 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_122.PV
-x,"Site\Condensing, Separation And Recycle\E-101",TV 211,Attribute,S102-IN002 | tag: TV 211 (as_extracted) | temperature | attached to S102-VL001 | sheet 102 symbol s7 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TV_211.PV
-x,"Site\Condensing, Separation And Recycle\K-101",S102-IN003,Attribute,S102-IN003 | tag: none read (missing) | unknown variable | attached to S102-PU001 | sheet 102 symbol s10 | confidence 0.3 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.S102-IN003.PV
-x,"Site\Condensing, Separation And Recycle\K-101",FI 105,Attribute,S102-IN004 | tag: FI 105 (as_extracted) | flow | attached to S102-PU001 | sheet 102 symbol s11 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_105.PV
-x,"Site\Condensing, Separation And Recycle\K-101",JI 120,Attribute,S102-IN005 | tag: JI 120 (as_extracted) | power | attached to S102-PU001 | sheet 102 symbol s13 | confidence 0.94 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.JI_120.PV
-x,"Site\Condensing, Separation And Recycle\K-101",HV 205,Attribute,S102-IN006 | tag: HV 205 (as_extracted) | hand | attached to S102-VL002 | sheet 102 symbol s15 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.HV_205.PV
-x,"Site\Condensing, Separation And Recycle\V-101",FI 110,Attribute,S102-IN007 | tag: FI 110 (as_extracted) | flow | attached to S102-TK002 | sheet 102 symbol s16 | confidence 0.94 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_110.PV
-x,"Site\Condensing, Separation And Recycle\V-101",AI 129,Attribute,S102-IN008 | tag: AI 129 (as_extracted) | analysis | attached to S102-VL003 | sheet 102 symbol s17 | confidence 0.94 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_129.PV
-x,"Site\Condensing, Separation And Recycle\V-101",FV 206,Attribute,S102-IN009 | tag: FV 206 (as_extracted) | flow | attached to S102-VL003 | sheet 102 symbol s18 | confidence 0.93 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_206.PV
-x,"Site\Condensing, Separation And Recycle\V-101",TI 111,Attribute,S102-IN010 | tag: TI 111 (as_extracted) | temperature | attached to S102-TK002 | sheet 102 symbol s21 | confidence 0.94 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_111.PV
-x,"Site\Condensing, Separation And Recycle\V-101",LI 112,Attribute,S102-IN011 | tag: LI 112 (as_extracted) | level | attached to S102-TK002 | sheet 102 symbol s22 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_112.PV
-x,"Site\Condensing, Separation And Recycle\V-101",PI 113,Attribute,S102-IN012 | tag: PI 113 (as_extracted) | pressure | attached to S102-TK002 | sheet 102 symbol s23 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_113.PV
-x,"Site\Condensing, Separation And Recycle\V-101",FI 114,Attribute,S102-IN013 | tag: FI 114 (as_extracted) | flow | attached to S102-VL004 | sheet 102 symbol s24 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_114.PV
-x,"Site\Condensing, Separation And Recycle\V-101",LV 207,Attribute,S102-IN014 | tag: LV 207 (as_extracted) | level | attached to S102-VL004 | sheet 102 symbol s25 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.LV_207.PV
-x,Site\Product Stripping\C-101,PI 116,Attribute,S103-IN001 | tag: PI 116 (as_extracted) | pressure | attached to S103-TK001 | sheet 103 symbol s2 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_116.PV
-x,Site\Product Stripping\C-101,TI 118,Attribute,S103-IN002 | tag: TI 118 (as_extracted) | temperature | attached to S103-TK001 | sheet 103 symbol s3 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_118.PV
-x,Site\Product Stripping\C-101,LI 115,Attribute,S103-IN003 | tag: LI 115 (as_extracted) | level | attached to S103-TK001 | sheet 103 symbol s4 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_115.PV
-x,Site\Product Stripping\C-101,FV 204,Attribute,S103-IN004 | tag: FV 204 (as_extracted) | flow | attached to S103-VL001 | sheet 103 symbol s5 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_204.PV
-x,Site\Product Stripping\C-101,FI 104,Attribute,S103-IN005 | tag: FI 104 (as_extracted) | flow | attached to S103-VL001 | sheet 103 symbol s7 | confidence 0.92 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_104.PV
-x,Site\Product Stripping\C-101,FV 209,Attribute,S103-IN006 | tag: FV 209 (as_extracted) | flow | attached to S103-VL002 | sheet 103 symbol s13 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_209.PV
-x,Site\Product Stripping\C-101,FI 119,Attribute,S103-IN007 | tag: FI 119 (as_extracted) | flow | attached to S103-VL002 | sheet 103 symbol s14 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_119.PV
-x,Site\Product Stripping\C-101,FI 117,Attribute,S103-IN008 | tag: FI 117 (as_extracted) | flow | attached to S103-VL003 | sheet 103 symbol s15 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_117.PV
-x,Site\Product Stripping\C-101,AI 137,Attribute,S103-IN009 | tag: AI 137 (as_extracted) | analysis | attached to S103-VL003 | sheet 103 symbol s16 | confidence 0.95 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_137.PV
-x,Site\Product Stripping\C-101,LV 208,Attribute,S103-IN010 | tag: LV 208 (as_extracted) | level | attached to S103-VL003 | sheet 103 symbol s18 | confidence 0.9 | UNVERIFIED,,Double,,PI Point,\\%Server%\PLACEHOLDER.LV_208.PV
+,Site\Feed And Reaction\R-101,FV 203,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_203.PV
+,Site\Feed And Reaction\R-101,FV 201,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_201.PV
+,Site\Feed And Reaction\R-101,FV 202,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_202.PV
+,Site\Feed And Reaction\R-101,FI 101,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_101.PV
+,Site\Feed And Reaction\R-101,FI 102,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_102.PV
+,Site\Feed And Reaction\R-101,FI 103,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_103.PV
+,Site\Feed And Reaction\R-101,SC 212,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.SC_212.PV
+,Site\Feed And Reaction\R-101,PI 107,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_107.PV
+,Site\Feed And Reaction\R-101,LI 108,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_108.PV
+,Site\Feed And Reaction\R-101,TI 109,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_109.PV
+,Site\Feed And Reaction\R-101,FI 106,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_106.PV
+,Site\Feed And Reaction\R-101,AI 123,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_123.PV
+,Site\Feed And Reaction\R-101,TV 210,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TV_210.PV
+,Site\Feed And Reaction\R-101,TI 121,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_121.PV
+,"Site\Condensing, Separation And Recycle\E-101",TI 122,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_122.PV
+,"Site\Condensing, Separation And Recycle\E-101",TV 211,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TV_211.PV
+,"Site\Condensing, Separation And Recycle\K-101",S102-IN003,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.S102-IN003.PV
+,"Site\Condensing, Separation And Recycle\K-101",FI 105,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_105.PV
+,"Site\Condensing, Separation And Recycle\K-101",JI 120,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.JI_120.PV
+,"Site\Condensing, Separation And Recycle\K-101",HV 205,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.HV_205.PV
+,"Site\Condensing, Separation And Recycle\V-101",FI 110,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_110.PV
+,"Site\Condensing, Separation And Recycle\V-101",AI 129,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_129.PV
+,"Site\Condensing, Separation And Recycle\V-101",FV 206,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_206.PV
+,"Site\Condensing, Separation And Recycle\V-101",TI 111,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_111.PV
+,"Site\Condensing, Separation And Recycle\V-101",LI 112,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_112.PV
+,"Site\Condensing, Separation And Recycle\V-101",PI 113,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_113.PV
+,"Site\Condensing, Separation And Recycle\V-101",FI 114,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_114.PV
+,"Site\Condensing, Separation And Recycle\V-101",LV 207,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.LV_207.PV
+,Site\Product Stripping\C-101,PI 116,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.PI_116.PV
+,Site\Product Stripping\C-101,TI 118,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.TI_118.PV
+,Site\Product Stripping\C-101,LI 115,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.LI_115.PV
+,Site\Product Stripping\C-101,FV 204,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_204.PV
+,Site\Product Stripping\C-101,FI 104,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_104.PV
+,Site\Product Stripping\C-101,FV 209,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_209.PV
+,Site\Product Stripping\C-101,FI 119,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_119.PV
+,Site\Product Stripping\C-101,FI 117,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_117.PV
+,Site\Product Stripping\C-101,AI 137,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.AI_137.PV
+,Site\Product Stripping\C-101,LV 208,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.LV_208.PV

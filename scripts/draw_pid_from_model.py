@@ -633,7 +633,11 @@ class Sheet:
 
 
 def sha_file(p):
-    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+    """sha256 of a file; text files are hashed with CRLF normalised to LF, so a Windows and a Linux checkout agree."""
+    data = Path(p).read_bytes()
+    if Path(p).suffix.lower() != ".png":
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def generate(model_path, layout_path, out_dir, write=True, register=None):

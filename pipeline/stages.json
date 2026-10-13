@@ -26,9 +26,9 @@
      "source": "out/te_source_check.md"
     },
     {
-     "what": "units and streams",
-     "value": "not checked against a source on this branch; a topology check (51 confirmed, 4 corrected, 1 unresolvable of 56) is on a separate branch and moves the purge to V-101",
-     "source": "docs/DATA_LINEAGE.md#te-stage-0"
+     "what": "units, streams, flow directions and tag ownership checked against the simulator source (teprob.f, cross-checked with the revised TE code)",
+     "value": "51 confirmed, 4 corrected, 1 unresolvable of 56 elements; the purge S9 with FI-110, FV-206 and AI-129 moved from K-101 to V-101; PI-116's owner unresolvable",
+     "source": "out/te_topology_check.md"
     },
     {
      "what": "normal bands",
@@ -36,9 +36,19 @@
      "source": "docs/OPERATOR_SCREENS.md"
     },
     {
+     "what": "normal bands on all 21 published faults",
+     "value": "17/21 detected (median delay 48 min), 0 false alarms in 193 h of held-out normal running; faults 3, 9, 15 and 19 missed; PCA T2 baseline 19/21 with 5 false alarm events in 216 h",
+     "source": "out/fault_detection/fault_detection.md"
+    },
+    {
+     "what": "generated TE P&ID read back (a round trip on our own drawings: an upper bound, not real-plant accuracy)",
+     "value": "clean sheets: review load 2.1 (GPT) and 2.2 (Claude) per 100, every tag read; at the worst degraded copy (L3) GPT read 14% and Claude 49% of the tags exactly",
+     "source": "out/te_pid/roundtrip_scores.md"
+    },
+    {
      "what": "gateway",
-     "value": "verifier V1-V8 and a 23-route browser contract passed in a disposable Ignition 8.3.10 gateway on recorded and synthetic data, 2026-10-13",
-     "source": "out/ignition/gateway/receipts/native-current-20261013.json"
+     "value": "native acceptance of the current 24-view project in a disposable Ignition 8.3.10 gateway on recorded and synthetic data, 2026-10-13: V1-V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders, data-source diagnostic alarms fire and clear; the integrated build reproduces the accepted project ZIP byte for byte",
+     "source": "out/ignition/gateway/receipts/native-current-20261013-alarms.json"
     },
     {
      "what": "operations review",
@@ -54,8 +64,8 @@
    "measured": [
     {
      "what": "review load, GPT tiling + code line tracing (the published twin's method)",
-     "value": "17.8 corrections per 100 key items on 6 sealed real drawings (holdout A); 20.7 on 20 synthetic drawings in another style (holdout B)",
-     "source": "docs/GOAL.md"
+     "value": "holdout A (6 sealed real drawings): 20.1 per 100 key items, mean of five round-5 replicates (95% interval 18.3-21.8 across runs, 14.2-28.0 across drawings); the earlier single round-2 run scored 17.8. Holdout B (20 synthetic drawings in another style): 20.7, single round-2 run",
+     "source": "out/replicates_r5_holdout-a.md"
     },
     {
      "what": "symbols found / found with the right class / connections (F1, holdout A)",
@@ -83,6 +93,24 @@
      "source": "docs/JOURNAL.md"
     }
    ]
+  },
+  "dexpi": {
+   "title": "DEXPI example P&IDs (round 5, tag text)",
+   "model": null,
+   "no_model": "no asset model: five public example sheets scored for symbols, connections and tag text only",
+   "licence": "DEXPI TrainingTestCases, CC BY 4.0, pinned to one commit; downloaded by script, not redistributed (NOTICE.md)",
+   "measured": [
+    {
+     "what": "review load, M3, 3 XML sheets, five replicates per tool",
+     "value": "GPT 95.4, Claude 61.8 per 100; a tie across drawings",
+     "source": "out/replicates_r5_dexpi.md"
+    },
+    {
+     "what": "tag text, end to end, strict",
+     "value": "GPT 29 of 33, Claude 28 of 33; identical in all five runs",
+     "source": "out/replicates_r5_dexpi.md"
+    }
+   ]
   }
  },
  "stages": [
@@ -106,8 +134,31 @@
     "python scripts/verify_te_source.py --write"
    ],
    "carries": "verification.status per item (source check); ops_review.status and reviewer; open_question",
-   "checked_by": "scripts/verify_te_source.py against teprob.f (instruments and final elements only on this branch)",
+   "checked_by": "scripts/verify_te_source.py (instruments and final elements) and scripts/verify_te_topology.py (units, streams, directions, ownership) against teprob.f",
    "config": []
+  },
+  {
+   "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/te_unit_purposes.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.purposes",
+   "dataset": "te",
+   "stage": 0,
+   "title": "Unit purposes: one plain-language sentence per TE unit, each citing the simulator lines it restates",
+   "kind": "source",
+   "rebuild": "source",
+   "treatment": "Written from teprob.f during the topology check; every sentence carries the line numbers it restates.",
+   "edited_by": [
+    "edit data/te_unit_purposes.json by hand, then python scripts/test_te_topology.py"
+   ],
+   "carries": "the citation per sentence; not reviewed by operations",
+   "checked_by": "scripts/test_te_topology.py (every citation is read against teprob.f)"
   },
   {
    "id": "te.source_check",
@@ -143,10 +194,43 @@
    "config": []
   },
   {
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/verify_te_topology.py"
+   ],
+   "outputs": [
+    "out/te_topology_check.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.topology_check",
+   "dataset": "te",
+   "stage": 0,
+   "title": "Topology check: units, streams, directions and tag ownership against the simulator code",
+   "kind": "check",
+   "rebuild": "manual",
+   "command": [
+    [
+     "python",
+     "scripts/verify_te_topology.py"
+    ]
+   ],
+   "requires_note": "downloads teprob.f and the revised TE code (temexd_mod.zip, N. L. Ricker's archive) into data/external/ if they are not cached (network)",
+   "treatment": "Reads the component balances, state mapping, pressure-driven flow lines and XMEAS/XCMP/VPOS lines out of teprob.f; cross-checks names with the revised code; report only (no --write).",
+   "carries": "writes the verification.status the model's units, streams and tag owners carry (with --write); 51 confirmed, 4 corrected, 1 unresolvable",
+   "checked_by": "scripts/test_te_topology.py (the parser on the pinned source, planted wrong answers)"
+  },
+  {
    "id": "te.exports",
    "dataset": "te",
    "stage": 1,
-   "title": "Platform exports: Ignition tags, PI AF sheet, SVGs, operations review sheet",
+   "title": "Platform exports: Ignition tags, PI Builder sheet (schema v2), SVGs, operations review sheet",
    "kind": "generated",
    "rebuild": "auto",
    "poc": false,
@@ -165,6 +249,9 @@
     "out/svg/*.svg",
     "out/ignition/te_tags.json",
     "out/pi/pi_builder_af.csv",
+    "out/pi/custom_uoms.csv",
+    "out/pi/attribute_descriptions.csv",
+    "out/pi/IMPORT_STEPS.txt",
     "out/ops_review_sheet.csv"
    ],
    "command": [
@@ -176,7 +263,7 @@
    "requires": [],
    "treatment": "One model, every format: structural validation first, nothing written on failure.",
    "carries": "Ignition tag documentation and PI attribute descriptions end with '| source check: <status> | ops review: <status>'; the review sheet's model_status and OPS_ columns",
-   "checked_by": "scripts/test_generate_validation.py, scripts/test_apply_review.py (offline); the PI sheet has never been imported into a PI System",
+   "checked_by": "scripts/test_generate_validation.py, scripts/test_apply_review.py, scripts/test_pi_mapping.py; the PI sheet is checked offline by pi.export_check and has never been imported into a PI System",
    "config": []
   },
   {
@@ -247,7 +334,7 @@
    "requires": [],
    "treatment": "Equipment, tags, ownership and stream ends copied from the model; positions are the 2D layout scaled; sizes, elevations and pipe routes are placeholders; LOTO candidates are inferred (valves on streams touching a unit).",
    "carries": "every unit, tag, pipe and LOTO candidate: the provenance of its model item; geometry is marked placeholder; LOTO is marked inferred and not a procedure",
-   "checked_by": "scripts/test_pipeline.py (that it follows the model). The 3D renderer itself is a separate, unpublished prototype; its stills are in drafts/3d-tour/",
+   "checked_by": "scripts/test_pipeline.py (that it follows the model). The 3D tour that renders it is te.tour (proof of concept)",
    "config": []
   },
   {
@@ -289,6 +376,90 @@
    "config": []
   },
   {
+   "poc": false,
+   "upstream": [
+    "te.bands"
+   ],
+   "inputs": [
+    "out/ignition/normal_bands.json"
+   ],
+   "code": [
+    "scripts/fault_detection_eval.py",
+    "scripts/normal_bands.py",
+    "scripts/ignition/te_channels.py"
+   ],
+   "outputs": [
+    "out/fault_detection/fault_detection.json",
+    "out/fault_detection/fault_detection.md"
+   ],
+   "requires": [
+    "data/external/te-braatz/d00.dat",
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d01.dat",
+    "data/external/te-braatz/d01_te.dat",
+    "data/external/te-braatz/d02.dat",
+    "data/external/te-braatz/d02_te.dat",
+    "data/external/te-braatz/d03.dat",
+    "data/external/te-braatz/d03_te.dat",
+    "data/external/te-braatz/d04.dat",
+    "data/external/te-braatz/d04_te.dat",
+    "data/external/te-braatz/d05.dat",
+    "data/external/te-braatz/d05_te.dat",
+    "data/external/te-braatz/d06.dat",
+    "data/external/te-braatz/d06_te.dat",
+    "data/external/te-braatz/d07.dat",
+    "data/external/te-braatz/d07_te.dat",
+    "data/external/te-braatz/d08.dat",
+    "data/external/te-braatz/d08_te.dat",
+    "data/external/te-braatz/d09.dat",
+    "data/external/te-braatz/d09_te.dat",
+    "data/external/te-braatz/d10.dat",
+    "data/external/te-braatz/d10_te.dat",
+    "data/external/te-braatz/d11.dat",
+    "data/external/te-braatz/d11_te.dat",
+    "data/external/te-braatz/d12.dat",
+    "data/external/te-braatz/d12_te.dat",
+    "data/external/te-braatz/d13.dat",
+    "data/external/te-braatz/d13_te.dat",
+    "data/external/te-braatz/d14.dat",
+    "data/external/te-braatz/d14_te.dat",
+    "data/external/te-braatz/d15.dat",
+    "data/external/te-braatz/d15_te.dat",
+    "data/external/te-braatz/d16.dat",
+    "data/external/te-braatz/d16_te.dat",
+    "data/external/te-braatz/d17.dat",
+    "data/external/te-braatz/d17_te.dat",
+    "data/external/te-braatz/d18.dat",
+    "data/external/te-braatz/d18_te.dat",
+    "data/external/te-braatz/d19.dat",
+    "data/external/te-braatz/d19_te.dat",
+    "data/external/te-braatz/d20.dat",
+    "data/external/te-braatz/d20_te.dat",
+    "data/external/te-braatz/d21.dat",
+    "data/external/te-braatz/d21_te.dat"
+   ],
+   "config": [],
+   "id": "te.fault_detection",
+   "dataset": "te",
+   "stage": 3,
+   "title": "Fault evaluation: the shipped normal bands and a PCA T2 baseline on all 21 TE faults",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/fault_detection_eval.py"
+    ]
+   ],
+   "requires_modules": [
+    "numpy"
+   ],
+   "requires_note": "the full Braatz set, 44 hash-verified files: python scripts/fetch_te_data.py --all (network)",
+   "treatment": "Detection rule fixed before any fault file was scored (3 consecutive flagged samples); the bands are not retuned; false alarms on normal running the bands never fitted on.",
+   "carries": "17/21 detected, 0 false alarm events in 193 h; one operating mode, simulated data; the band flag is a display aid, not an alarm",
+   "checked_by": "scripts/test_fault_detection_eval.py (regenerates the committed results exactly; synthetic controls for the rule, the F quantile and the PCA)"
+  },
+  {
    "id": "open100.source",
    "dataset": "open100",
    "stage": 0,
@@ -308,6 +479,489 @@
    "carries": "answer keys are the ground truth for symbols and connections only",
    "checked_by": "the PID2Graph authors; the scorer's positive and negative controls (scripts/test_scorer_controls.py)",
    "config": []
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/draw_pid_from_model.py"
+   ],
+   "outputs": [
+    "data/te_pid/*.png",
+    "data/te_pid/*.svg",
+    "data/te_pid/*.graphml",
+    "data/te_pid/key.json",
+    "data/te_pid/manifest.json",
+    "data/sheet_registers/te_generated.csv"
+   ],
+   "requires": [],
+   "config": [
+    "data/te_pid_layout.json"
+   ],
+   "id": "te.pid",
+   "dataset": "te",
+   "stage": 1,
+   "title": "Generated P&ID: the TE model drawn in the OPEN100 house style, with answer keys emitted from the same model",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/draw_pid_from_model.py"
+    ]
+   ],
+   "requires_modules": [
+    "PIL"
+   ],
+   "requires_note": "Pillow (PNG bytes can differ between Pillow versions; the manifest records the version)",
+   "treatment": "Draws only what the model holds, where the drafting layout puts it; refuses a layout that drops, duplicates or invents a model item. Lines the model has no stream for are drafting additions, marked in the key.",
+   "carries": "every symbol's model reference (model_ref); a generated drawing is not a drawing of record",
+   "checked_by": "scripts/test_te_pid_roundtrip.py; the code line tracer recovers every key link from the key's own boxes"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid",
+    "open100.source"
+   ],
+   "inputs": [
+    "data/te_pid/*.png",
+    "data/te_pid/*.graphml",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.png",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.graphml"
+   ],
+   "code": [
+    "scripts/style_fidelity.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/te_pid/style_fidelity.json",
+    "out/te_pid/style_fidelity.md",
+    "docs/screenshots/te-pid-style-side-by-side.png"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_style",
+   "dataset": "te",
+   "stage": 1,
+   "title": "Style check: the generated sheets against the 12 OPEN100 sheets",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/style_fidelity.py"
+    ]
+   ],
+   "requires_modules": [
+    "cv2",
+    "numpy",
+    "PIL"
+   ],
+   "requires_note": "numpy, opencv-python-headless, Pillow",
+   "treatment": "The same measurements on every sheet, nothing tuned per sheet; a value sits inside the style when it is within the OPEN100 per-sheet range.",
+   "carries": "32 of 36 measurements inside the OPEN100 range; the four outside are symbol counts and ink coverage (the model has no drains, vents or manual valves)",
+   "checked_by": "the measurements are reported, not gated"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid"
+   ],
+   "inputs": [
+    "data/te_pid/*.png"
+   ],
+   "code": [
+    "scripts/run_extraction.py",
+    "scripts/tiling.py",
+    "scripts/remerge_tiles.py",
+    "scripts/trace_connections.py",
+    "scripts/degrade_scans.py"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [
+    "extraction/prompt_v2.md",
+    "extraction/tile_preface.md"
+   ],
+   "id": "te.pid_extract",
+   "dataset": "te",
+   "stage": 2,
+   "title": "Extraction of the generated sheets (recorded): clean and degraded copies, five or three runs per model",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "external_outputs": [
+    "runs/te-<cond>-tiles-<rep>/<tool>/<sheet>.json",
+    "runs/te-<cond>-trace-<rep>/<tool>/<sheet>.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/degrade_scans.py",
+     "--src",
+     "data/te_pid",
+     "--drawings",
+     "101,102,103",
+     "--dest",
+     "data/te_pid/scan"
+    ],
+    [
+     "python",
+     "scripts/run_extraction.py",
+     "--tool",
+     "codex",
+     "--drawings",
+     "101,102,103",
+     "--prompt",
+     "extraction/prompt_v2.md",
+     "--tiles",
+     "2x2",
+     "--label",
+     "te-clean-tiles-r1"
+    ],
+    [
+     "python",
+     "scripts/trace_connections.py",
+     "--src-label",
+     "te-clean-tiles-r1",
+     "--tool",
+     "codex",
+     "--drawings",
+     "101,102,103",
+     "--label",
+     "te-clean-trace-r1"
+    ]
+   ],
+   "requires_note": "model calls (Codex and Claude CLIs) with PID_SHEETS_DIR=data/te_pid; run records are not committed",
+   "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
+   "carries": "per item: the model's confidence and the source run",
+   "checked_by": "the frozen scorer, through te.pid_roundtrip"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid",
+    "te.pid_extract"
+   ],
+   "inputs": [
+    "data/te_pid/*.graphml",
+    "data/te_pid/key.json"
+   ],
+   "code": [
+    "scripts/score_te_roundtrip.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/te_pid/roundtrip_scores.json",
+    "out/te_pid/roundtrip_scores.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_roundtrip",
+   "dataset": "te",
+   "stage": 2,
+   "title": "Round-trip check: symbols, tag text and connections read back from the generated sheets",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/score_te_roundtrip.py",
+     "--conditions",
+     "clean,L1,L2,L3",
+     "--tools",
+     "codex,claude"
+    ]
+   ],
+   "requires_note": "the run records under runs/ (not committed)",
+   "treatment": "The frozen scorer for symbols and connections; tag text matched by position and compared after dropping case and separators; means with min-max and 95% t-intervals.",
+   "carries": "an UPPER BOUND for clean house-style drawings: the keys come from the same model as the drawings; not real-plant accuracy and not comparable with OPEN100",
+   "checked_by": "scripts/test_te_pid_roundtrip.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid_extract"
+   ],
+   "inputs": [],
+   "code": [
+    "scripts/build_twin.py",
+    "scripts/confidence.py",
+    "scripts/confidence_model.json"
+   ],
+   "outputs": [
+    "out/te_pid/twin/key/plant_model.json",
+    "out/te_pid/twin/codex-clean-r1/plant_model.json",
+    "out/te_pid/twin/claude-clean-r1/plant_model.json",
+    "out/te_pid/twin/codex-L2-r1/plant_model.json",
+    "out/te_pid/twin/claude-L3-r1/plant_model.json"
+   ],
+   "requires": [],
+   "config": [
+    "data/sheet_registers/te_generated.csv"
+   ],
+   "id": "te.pid_twins",
+   "dataset": "te",
+   "stage": 3,
+   "title": "Extracted TE twins (recorded): one per declared run, plus the key fed in as a perfect extraction",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/build_twin.py",
+     "--label",
+     "te-clean-trace-r1",
+     "--tools",
+     "codex",
+     "--sheets",
+     "101,102,103",
+     "--holdout-ok",
+     "--sheet-register",
+     "data/sheet_registers/te_generated.csv",
+     "--out",
+     "out/te_pid/twin/codex-clean-r1"
+    ]
+   ],
+   "requires_note": "the run records under runs/ (not committed), PID_SHEETS_DIR=data/te_pid",
+   "treatment": "The same converter as OPEN100; every item starts unverified.",
+   "carries": "verification.status (unverified), risk.tier, tag_status",
+   "checked_by": "te.pid_diff against the verified model"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid_twins"
+   ],
+   "inputs": [
+    "out/te_pid/twin/key/plant_model.json",
+    "out/te_pid/twin/codex-clean-r1/plant_model.json",
+    "out/te_pid/twin/claude-clean-r1/plant_model.json",
+    "out/te_pid/twin/codex-L2-r1/plant_model.json",
+    "out/te_pid/twin/claude-L3-r1/plant_model.json"
+   ],
+   "code": [
+    "scripts/generate.py",
+    "scripts/pi_mapping.py",
+    "scripts/provenance.py"
+   ],
+   "outputs": [
+    "out/te_pid/twin/key/review_queue.csv",
+    "out/te_pid/twin/key/ignition/tags.json",
+    "out/te_pid/twin/key/pi/pi_builder_af.csv",
+    "out/te_pid/twin/key/pi/custom_uoms.csv",
+    "out/te_pid/twin/key/pi/attribute_descriptions.csv",
+    "out/te_pid/twin/key/pi/IMPORT_STEPS.txt",
+    "out/te_pid/twin/key/pi/reconciliation.json",
+    "out/te_pid/twin/key/svg/sheet_*.svg",
+    "out/te_pid/twin/codex-clean-r1/review_queue.csv",
+    "out/te_pid/twin/codex-clean-r1/ignition/tags.json",
+    "out/te_pid/twin/codex-clean-r1/pi/pi_builder_af.csv",
+    "out/te_pid/twin/codex-clean-r1/pi/custom_uoms.csv",
+    "out/te_pid/twin/codex-clean-r1/pi/attribute_descriptions.csv",
+    "out/te_pid/twin/codex-clean-r1/pi/IMPORT_STEPS.txt",
+    "out/te_pid/twin/codex-clean-r1/pi/reconciliation.json",
+    "out/te_pid/twin/codex-clean-r1/svg/sheet_*.svg",
+    "out/te_pid/twin/claude-clean-r1/review_queue.csv",
+    "out/te_pid/twin/claude-clean-r1/ignition/tags.json",
+    "out/te_pid/twin/claude-clean-r1/pi/pi_builder_af.csv",
+    "out/te_pid/twin/claude-clean-r1/pi/custom_uoms.csv",
+    "out/te_pid/twin/claude-clean-r1/pi/attribute_descriptions.csv",
+    "out/te_pid/twin/claude-clean-r1/pi/IMPORT_STEPS.txt",
+    "out/te_pid/twin/claude-clean-r1/pi/reconciliation.json",
+    "out/te_pid/twin/claude-clean-r1/svg/sheet_*.svg",
+    "out/te_pid/twin/codex-L2-r1/review_queue.csv",
+    "out/te_pid/twin/codex-L2-r1/ignition/tags.json",
+    "out/te_pid/twin/codex-L2-r1/pi/pi_builder_af.csv",
+    "out/te_pid/twin/codex-L2-r1/pi/custom_uoms.csv",
+    "out/te_pid/twin/codex-L2-r1/pi/attribute_descriptions.csv",
+    "out/te_pid/twin/codex-L2-r1/pi/IMPORT_STEPS.txt",
+    "out/te_pid/twin/codex-L2-r1/pi/reconciliation.json",
+    "out/te_pid/twin/codex-L2-r1/svg/sheet_*.svg",
+    "out/te_pid/twin/claude-L3-r1/review_queue.csv",
+    "out/te_pid/twin/claude-L3-r1/ignition/tags.json",
+    "out/te_pid/twin/claude-L3-r1/pi/pi_builder_af.csv",
+    "out/te_pid/twin/claude-L3-r1/pi/custom_uoms.csv",
+    "out/te_pid/twin/claude-L3-r1/pi/attribute_descriptions.csv",
+    "out/te_pid/twin/claude-L3-r1/pi/IMPORT_STEPS.txt",
+    "out/te_pid/twin/claude-L3-r1/pi/reconciliation.json",
+    "out/te_pid/twin/claude-L3-r1/svg/sheet_*.svg"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_exports",
+   "dataset": "te",
+   "stage": 4,
+   "title": "Exports of the extracted TE twins: review queue, Ignition tags, PI sheet, SVG",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/generate.py",
+     "out/te_pid/twin/key/plant_model.json"
+    ],
+    [
+     "python",
+     "scripts/generate.py",
+     "out/te_pid/twin/codex-clean-r1/plant_model.json"
+    ],
+    [
+     "python",
+     "scripts/generate.py",
+     "out/te_pid/twin/claude-clean-r1/plant_model.json"
+    ],
+    [
+     "python",
+     "scripts/generate.py",
+     "out/te_pid/twin/codex-L2-r1/plant_model.json"
+    ],
+    [
+     "python",
+     "scripts/generate.py",
+     "out/te_pid/twin/claude-L3-r1/plant_model.json"
+    ]
+   ],
+   "treatment": "The same exporters as the OPEN100 twin; signal paths stay placeholders.",
+   "carries": "every description carries the item's confidence and UNVERIFIED",
+   "checked_by": "scripts/test_te_pid_roundtrip.py; not imported into a gateway"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.source",
+    "te.pid_twins"
+   ],
+   "inputs": [
+    "data/te_process_model.json",
+    "out/te_pid/twin/key/plant_model.json",
+    "out/te_pid/twin/codex-clean-r1/plant_model.json",
+    "out/te_pid/twin/claude-clean-r1/plant_model.json",
+    "out/te_pid/twin/codex-L2-r1/plant_model.json",
+    "out/te_pid/twin/claude-L3-r1/plant_model.json"
+   ],
+   "code": [
+    "scripts/te_model_diff.py"
+   ],
+   "outputs": [
+    "out/te_pid/diff_key.json",
+    "out/te_pid/diff_key.md",
+    "out/te_pid/diff_codex-clean-r1.json",
+    "out/te_pid/diff_codex-clean-r1.md",
+    "out/te_pid/diff_claude-clean-r1.json",
+    "out/te_pid/diff_claude-clean-r1.md",
+    "out/te_pid/diff_codex-L2-r1.json",
+    "out/te_pid/diff_codex-L2-r1.md",
+    "out/te_pid/diff_claude-L3-r1.json",
+    "out/te_pid/diff_claude-L3-r1.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_diff",
+   "dataset": "te",
+   "stage": 4,
+   "title": "Reviewer diff: each extracted TE twin against the verified model",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/te_model_diff.py",
+     "out/te_pid/twin/key/plant_model.json",
+     "--name",
+     "key"
+    ],
+    [
+     "python",
+     "scripts/te_model_diff.py",
+     "out/te_pid/twin/codex-clean-r1/plant_model.json",
+     "--name",
+     "codex-clean-r1"
+    ],
+    [
+     "python",
+     "scripts/te_model_diff.py",
+     "out/te_pid/twin/claude-clean-r1/plant_model.json",
+     "--name",
+     "claude-clean-r1"
+    ],
+    [
+     "python",
+     "scripts/te_model_diff.py",
+     "out/te_pid/twin/codex-L2-r1/plant_model.json",
+     "--name",
+     "codex-L2-r1"
+    ],
+    [
+     "python",
+     "scripts/te_model_diff.py",
+     "out/te_pid/twin/claude-L3-r1/plant_model.json",
+     "--name",
+     "claude-L3-r1"
+    ]
+   ],
+   "treatment": "Tag-only matching after normalising case and separators; nothing is matched by position.",
+   "carries": "the corrections a reviewer would make; 9 of the 10 on the declared chain come from the converter, not the reading (diff_key)",
+   "checked_by": "scripts/test_te_pid_roundtrip.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid_twins"
+   ],
+   "inputs": [
+    "out/te_pid/twin/codex-clean-r1/plant_model.json",
+    "out/te_pid/twin/claude-L3-r1/plant_model.json"
+   ],
+   "code": [
+    "scripts/te_live_check.py",
+    "scripts/ignition/te_sim_server.py"
+   ],
+   "outputs": [
+    "out/te_pid/live_codex-clean-r1.json",
+    "out/te_pid/live_codex-clean-r1.md",
+    "out/te_pid/live_claude-L3-r1.json",
+    "out/te_pid/live_claude-L3-r1.md"
+   ],
+   "requires": [
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d06_te.dat"
+   ],
+   "config": [],
+   "id": "te.pid_live",
+   "dataset": "te",
+   "stage": 5,
+   "title": "Live check: tags read off the generated drawings resolved to moving replay points",
+   "kind": "check",
+   "rebuild": "manual",
+   "command": [
+    [
+     "python",
+     "scripts/te_live_check.py",
+     "out/te_pid/twin/codex-clean-r1/plant_model.json",
+     "--name",
+     "codex-clean-r1"
+    ],
+    [
+     "python",
+     "scripts/te_live_check.py",
+     "out/te_pid/twin/claude-L3-r1/plant_model.json",
+     "--name",
+     "claude-L3-r1"
+    ]
+   ],
+   "requires_modules": [
+    "asyncua"
+   ],
+   "requires_note": "the TE replay files (python scripts/fetch_te_data.py) and asyncua; starts the replay server on a private port, no gateway",
+   "treatment": "Matches each extracted tag to a replay point by tag only and reads it twice; values differ between runs, the counts should not.",
+   "carries": "which tags resolve and move (36 of 37 for the declared chain); a real tag misread as another real tag still passes",
+   "checked_by": "the counts in the report"
   },
   {
    "id": "open100.extract",
@@ -415,6 +1069,66 @@
    "config": []
   },
   {
+   "poc": false,
+   "upstream": [
+    "open100.source"
+   ],
+   "inputs": [
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.graphml"
+   ],
+   "code": [
+    "scripts/run_extraction.py",
+    "scripts/trace_connections.py",
+    "scripts/replicate_stats.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/replicates_r5_holdout-a.json",
+    "out/replicates_r5_holdout-a.md"
+   ],
+   "requires": [],
+   "config": [
+    "extraction/prompt_v2.md",
+    "extraction/tile_preface.md"
+   ],
+   "id": "open100.replicates",
+   "dataset": "open100",
+   "stage": 1,
+   "title": "Round 5: five replicate runs per tool on holdout A, with run and bootstrap intervals",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "external_outputs": [
+    "runs/r5-hA-rep<k>-trace/<tool>/<sheet>.json"
+   ],
+   "recorded_commands": [
+    [
+     "powershell",
+     "-File",
+     "scripts/run_round5.ps1",
+     "-Tool",
+     "codex",
+     "-Set",
+     "holdout-a"
+    ],
+    [
+     "python",
+     "scripts/replicate_stats.py",
+     "--set",
+     "holdout-a",
+     "--labels",
+     "r5-hA-rep1-trace,r5-hA-rep2-trace,r5-hA-rep3-trace,r5-hA-rep4-trace,r5-hA-rep5-trace",
+     "--tools",
+     "claude,codex",
+     "--out",
+     "out/replicates_r5_holdout-a"
+    ]
+   ],
+   "requires_note": "model calls (Codex and Claude CLIs); run records are not committed",
+   "treatment": "Pre-registered in docs/GOAL.md before the runs; a failed drawing scores as zero, never re-run to replace it.",
+   "carries": "GPT 20.1, Claude 29.8 review load per 100; GPT minus Claude is beyond run noise on these 6 sheets and a tie across drawings",
+   "checked_by": "scripts/test_replicate_stats.py (interval arithmetic on synthetic cases)"
+  },
+  {
    "id": "open100.model",
    "dataset": "open100",
    "stage": 2,
@@ -478,7 +1192,9 @@
     "out/twin/r2-tiles-trace/codex/review_queue.csv",
     "out/twin/r2-tiles-trace/codex/ignition/tags.json",
     "out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv",
-    "out/twin/r2-tiles-trace/codex/pi/pi_builder_UNVALIDATED_candidate_v1.csv",
+    "out/twin/r2-tiles-trace/codex/pi/custom_uoms.csv",
+    "out/twin/r2-tiles-trace/codex/pi/attribute_descriptions.csv",
+    "out/twin/r2-tiles-trace/codex/pi/IMPORT_STEPS.txt",
     "out/twin/r2-tiles-trace/codex/pi/reconciliation.json",
     "out/twin/r2-tiles-trace/codex/svg/sheet_*.svg"
    ],
@@ -496,10 +1212,100 @@
    "config": []
   },
   {
+   "poc": false,
+   "upstream": [
+    "open100.exports",
+    "open100.source"
+   ],
+   "inputs": [
+    "out/twin/r2-tiles-trace/codex/review_queue.csv",
+    "out/twin/r2-tiles-trace/codex/svg/sheet_8.svg",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png"
+   ],
+   "code": [
+    "scripts/review_kit.py"
+   ],
+   "outputs": [
+    "out/review_kit/sheet-8/README.md",
+    "out/review_kit/sheet-8/drawing_sheet8.png",
+    "out/review_kit/sheet-8/extracted_overlay_sheet8.svg",
+    "out/review_kit/sheet-8/manifest.json",
+    "out/review_kit/sheet-8/protocol_draft.json",
+    "out/review_kit/sheet-8/review_queue_sheet8.csv",
+    "out/review_kit/sheet-8/timer_log.csv"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "open100.review_kit",
+   "dataset": "open100",
+   "stage": 4,
+   "title": "Timed-review kit for sheet 8 (no measurement yet)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/review_kit.py",
+     "make",
+     "--twin",
+     "out/twin/r2-tiles-trace/codex",
+     "--sheet",
+     "8",
+     "--out",
+     "out/review_kit/sheet-8"
+    ]
+   ],
+   "treatment": "Copies the sheet's review rows with blank OPS_ columns, the drawing and overlay, an empty timer log and a draft protocol that fails validation until an administrator completes it.",
+   "carries": "no minutes: the kit ships no measured result",
+   "checked_by": "scripts/test_review_kit.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.exports",
+    "open100.exports"
+   ],
+   "inputs": [
+    "out/pi/pi_builder_af.csv",
+    "out/pi/custom_uoms.csv",
+    "out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv",
+    "out/twin/r2-tiles-trace/codex/pi/custom_uoms.csv"
+   ],
+   "code": [
+    "scripts/check_pi_export.py"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [
+    "data/pi_builder_reference.json"
+   ],
+   "id": "pi.export_check",
+   "dataset": "shared",
+   "stage": 4,
+   "title": "Offline PI check: the PI Builder sheets against what AVEVA publishes (not an import test)",
+   "kind": "check",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/check_pi_export.py",
+     "out/pi/pi_builder_af.csv"
+    ],
+    [
+     "python",
+     "scripts/check_pi_export.py",
+     "out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv"
+    ]
+   ],
+   "treatment": "Compares headers, ObjectType values, the Parent convention, value types and default UOMs with the vendor-published conventions in the reference file; fails only on internal inconsistencies or values outside the documented sheets.",
+   "carries": "offline-checked only: it cannot say a file will import; no PI System was used",
+   "checked_by": "scripts/test_check_pi_export.py (positive controls)"
+  },
+  {
    "id": "ignition.gateway",
    "dataset": "shared",
    "stage": 4,
-   "title": "Ignition gateway kit: tag provider, alarms, 23-view Perspective project (mimic and sheet screens)",
+   "title": "Ignition gateway kit: tag provider, alarms, 24-view Perspective project (mimic, sheet screens, narrow /m overview)",
    "kind": "generated",
    "rebuild": "auto",
    "poc": false,
@@ -522,10 +1328,8 @@
    ],
    "outputs": [
     "out/ignition/gateway/twin_provider.json",
-    "out/ignition/gateway/build_meta.json"
-   ],
-   "local_outputs": [
-    "out/ignition/gateway/PIDTwin.zip (regenerated locally; the committed ZIP is the older historical export)"
+    "out/ignition/gateway/build_meta.json",
+    "out/ignition/gateway/PIDTwin.zip"
    ],
    "command": [
     [
@@ -539,9 +1343,9 @@
     "data/external/te-braatz/d06_te.dat"
    ],
    "requires_note": "hash-verified TE replay files: python scripts/fetch_te_data.py (network). Writes files only; no gateway is contacted",
-   "treatment": "TE tags with published alarm setpoints and learned bands; the extracted twin as placeholders that read 'not connected'; ReviewStatus member on every tag.",
+   "treatment": "TE tags with published alarm setpoints and learned bands; data-source diagnostic alarms (setpoint 0.5: AboveValue is inclusive) and an active-alarm count in the header; the extracted twin as placeholders that read 'not connected'; ReviewStatus member on every tag; a 390 px overview at /m.",
    "carries": "a ReviewStatus member per tag (ops review); placeholders stay Bad quality, never a false Good",
-   "checked_by": "scripts/ignition/verify_gateway.py V1-V8 with planted faults in a disposable gateway (lab result, not site acceptance)",
+   "checked_by": "scripts/ignition/verify_gateway.py V1-V8 with planted faults, and the native acceptance run (ignition.acceptance) in a disposable gateway (lab result, not site acceptance)",
    "config": [
     "data/te_display_layout.json"
    ]
@@ -564,7 +1368,8 @@
    ],
    "outputs": [],
    "evidence": [
-    "out/ignition/gateway/receipts/native-current-20261013.json"
+    "out/ignition/gateway/receipts/native-current-20261013.json",
+    "out/ignition/gateway/receipts/native-current-20261013-alarms.json"
    ],
    "command": [
     [
@@ -588,6 +1393,177 @@
    "carries": "recorded values only; the alarm setpoints are published ones",
    "checked_by": "verify_gateway.py V8 (the pressure alarm fires on the replayed fault)",
    "config": []
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "ignition.gateway"
+   ],
+   "inputs": [],
+   "code": [
+    "scripts/ignition/acceptance/live_checks.py",
+    "scripts/ignition/acceptance/nav_contract.py",
+    "scripts/ignition/acceptance/browser_contract.js"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [],
+   "id": "ignition.acceptance",
+   "dataset": "shared",
+   "stage": 5,
+   "title": "Native acceptance in a disposable Ignition 8.3.10 gateway: alarms, alarm count, the /m narrow overview",
+   "kind": "runtime",
+   "rebuild": "manual",
+   "evidence": [
+    "out/ignition/gateway/receipts/native-current-20261013-alarms.json"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/ignition/acceptance/live_checks.py"
+    ],
+    [
+     "python",
+     "scripts/ignition/acceptance/nav_contract.py",
+     "out/ignition/gateway/PIDTwin.zip"
+    ],
+    [
+     "node",
+     "scripts/ignition/acceptance/browser_contract.js",
+     "contract",
+     "contract.json",
+     "out.json"
+    ]
+   ],
+   "requires_note": "an isolated, non-production Ignition 8.3 gateway, the replay image, Node and Playwright (docs/IGNITION_ACCEPTANCE.md)",
+   "treatment": "Import, export back and compare; V1-V8 and a per-path quality census; every route and click target loaded at desktop and 390 px; both data sources stopped and restarted.",
+   "carries": "a lab result on recorded and synthetic data, not site acceptance; the control-room screens stay fixed 1600 px layouts",
+   "checked_by": "the receipt: 24/24 routes, 284/284 navigation targets, 0 false-good, diagnostics fire and clear, header count matches the alarm table"
+  },
+  {
+   "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/dataset_adapters/dexpi_examples.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "dexpi.source",
+   "dataset": "dexpi",
+   "stage": 0,
+   "title": "Data state & confidence assessment: five DEXPI example sheets, pinned by commit and SHA-256",
+   "kind": "source",
+   "rebuild": "source",
+   "treatment": "Third-party example drawings (CC BY 4.0) pinned to one commit; the files are downloaded and hash-checked, not committed. Three sheets carry DEXPI XML geometry and labels; two carry published tag lists.",
+   "edited_by": [],
+   "carries": "tag text truth for five clean sheets from one publisher",
+   "checked_by": "the pinned hashes"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "dexpi.source"
+   ],
+   "inputs": [
+    "data/dataset_adapters/dexpi_examples.json"
+   ],
+   "code": [
+    "scripts/adapt_dexpi.py"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [],
+   "id": "dexpi.keys",
+   "dataset": "dexpi",
+   "stage": 1,
+   "title": "DEXPI drawings to answer keys (recorded: needs the download and MuPDF)",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "external_outputs": [
+    "data/external/dexpi/sheets/<id>.png",
+    "data/external/dexpi/sheets/<id>.graphml",
+    "data/external/dexpi/sheets/<id>.tags.json",
+    "data/external/dexpi/sheets/<id>.taglist.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/adapt_dexpi.py",
+     "fetch"
+    ],
+    [
+     "python",
+     "scripts/adapt_dexpi.py",
+     "build"
+    ]
+   ],
+   "requires_note": "network and PyMuPDF; outputs stay in the gitignored data/external/dexpi/",
+   "treatment": "Conversion rules written before any model saw a DEXPI image (in the script's docstring); nozzles, actuators and other internals are not separate symbols.",
+   "carries": "the key scope decides part of the score (nozzles drawn but not DEXPI items)",
+   "checked_by": "scripts/test_dexpi_adapter.py (a converted key scores itself perfectly)"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "dexpi.keys"
+   ],
+   "inputs": [],
+   "code": [
+    "scripts/run_extraction.py",
+    "scripts/trace_connections.py",
+    "scripts/replicate_stats.py",
+    "scripts/score_tags.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/replicates_r5_dexpi.json",
+    "out/replicates_r5_dexpi.md",
+    "out/replicates_r5_dexpi_tiles_only_diagnostic.json",
+    "out/replicates_r5_dexpi_tiles_only_diagnostic.md"
+   ],
+   "requires": [],
+   "config": [
+    "extraction/prompt_v2.md",
+    "extraction/tile_preface.md"
+   ],
+   "id": "dexpi.replicates",
+   "dataset": "dexpi",
+   "stage": 2,
+   "title": "Round 5 on DEXPI: five replicate runs per tool, symbols, connections and tag text",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "external_outputs": [
+    "runs/r5-dx-rep<k>-trace/<tool>/<sheet>.json"
+   ],
+   "recorded_commands": [
+    [
+     "powershell",
+     "-File",
+     "scripts/run_round5.ps1",
+     "-Tool",
+     "codex",
+     "-Set",
+     "dexpi"
+    ],
+    [
+     "python",
+     "scripts/replicate_stats.py",
+     "--set",
+     "dexpi",
+     "--labels",
+     "r5-dx-rep1-trace,r5-dx-rep2-trace,r5-dx-rep3-trace,r5-dx-rep4-trace,r5-dx-rep5-trace",
+     "--tools",
+     "claude,codex",
+     "--out",
+     "out/replicates_r5_dexpi"
+    ]
+   ],
+   "requires_note": "model calls and the DEXPI download; run records are not committed",
+   "treatment": "Pre-registered in docs/GOAL.md; tag scoring rules dated in score_tags.py before any run.",
+   "carries": "clean vector drawings from one publisher; says nothing about scans or real archives",
+   "checked_by": "scripts/test_score_tags.py, scripts/test_replicate_stats.py"
   }
  ]
 }

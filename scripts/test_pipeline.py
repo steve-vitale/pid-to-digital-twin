@@ -107,9 +107,9 @@ def manifest_checks():
     check("platform exports are not labelled proof of concept",
           not by_id["te.exports"]["poc"] and not by_id["open100.exports"]["poc"])
     check("every lock entry names a manifest stage", set(lock["stages"]) <= set(ids), set(lock["stages"]) - set(ids))
-    check("every dataset model is a source or recorded stage output",
+    check("every dataset model is a source or recorded stage output (a dataset without an asset model says so)",
           all(any(d["model"] in s.get("outputs", []) for s in stages if s["kind"] in ("source", "recorded"))
-              for d in manifest["datasets"].values()))
+              if d.get("model") else bool(d.get("no_model")) for d in manifest["datasets"].values()))
     # 2. the committed lock agrees with the committed files
     fresh = pipeline.freshness(ROOT, manifest, lock)
     offline_auto = [s["id"] for s in stages if s["rebuild"] == "auto" and not s.get("requires")]
@@ -188,8 +188,18 @@ def te_propagation(tmp):
 
     r = run([tmp / "scripts/pipeline.py", "--root", tmp, "rebuild", "--from", "te.source"], cwd=tmp)
     blocked = sorted(line.split()[1].rstrip(":") for line in r.stdout.splitlines() if line.startswith("BLOCKED"))
-    check("rebuild ran; only stages needing the TE replay download were blocked (exit 2)",
-          r.returncode == 2 and blocked == ["ignition.gateway", "te.bands", "te.replay"], (r.returncode, blocked, r.stdout[-1500:]))
+    # The temp copy has no TE replay download, so the stages that need it (and everything below them) must block;
+    # a stage may also block on a missing optional package (e.g. Pillow for the generated P&ID). Nothing else may.
+    manifest, _ = pipeline.load(tmp)
+    by_id = {s["id"]: s for s in manifest["stages"]}
+    may_block = set()
+    for s in manifest["stages"]:
+        if pipeline.missing_requires(tmp, s) or any(u in may_block for u in s.get("upstream", [])):
+            may_block.add(s["id"])
+    must_block = {"te.bands", "ignition.gateway", "te.fault_detection"}
+    check("rebuild ran; only stages needing the TE replay download or a missing package were blocked (exit 2)",
+          r.returncode == 2 and must_block <= set(blocked) and set(blocked) <= may_block
+          and all(by_id[i]["rebuild"] in ("auto", "manual") for i in blocked), (r.returncode, blocked, r.stdout[-1500:]))
 
     tags = json.loads((tmp / "out/ignition/te_tags.json").read_text(encoding="utf-8"))
     folders = {t["name"]: t for t in tags["tags"]}
@@ -203,7 +213,7 @@ def te_propagation(tmp):
     check("Ignition tags: a non-operations confirmation keeps its label",
           any(d.startswith("FI-101 ") and d.endswith("ops review: confirmed (non-operations reviewer)") for d in members[type_of["U-100"]]))
     rows = list(csv.reader((tmp / "out/pi/pi_builder_af.csv").read_text(encoding="utf-8-sig").splitlines()))
-    fi105 = [r for r in rows if r[4].startswith("FI-105:")]
+    fi105 = [r for r in rows if r and r[-1].endswith(".FI-105.PV")]  # sheet v2: descriptions are in attribute_descriptions.csv
     check("PI AF sheet: FI-105 sits under TE Plant\\V-101", [r[1] for r in fi105] == ["TE Plant\\V-101"], fi105)
     review = list(csv.DictReader((tmp / "out/ops_review_sheet.csv").read_text(encoding="utf-8-sig").splitlines()))
     row = next(r for r in review if r["item_id"] == "FI-105")

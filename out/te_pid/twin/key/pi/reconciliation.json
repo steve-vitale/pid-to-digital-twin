@@ -1,22 +1,34 @@
 {
-  "status": "OFFLINE STAGING ONLY; native PI Builder import NOT tested",
+  "status": "OFFLINE STAGING ONLY; NOT import-tested: these files have never been published to a licensed PI AF server. They follow the vendor-published PI Builder conventions read offline (data/pi_builder_reference.json).",
   "model_id": "twin-te-key-key",
-  "candidate_schema": {
-    "version": 1,
-    "file": "pi_builder_UNVALIDATED_candidate_v1.csv",
-    "status": "UNVALIDATED candidate; not native-import-ready",
-    "only_legacy_migration": "AttributeValueType header renamed to AttributeType; same row data",
-    "vendor_source": "https://osicdn.blob.core.windows.net/learningcontent/Online%20Course%20Workbooks/Asset%20Framework_Beyond%20the%20Basics_Workbook.pdf",
-    "vendor_pages": [
-      34,
-      85,
-      86,
-      92
+  "sheet_schema": {
+    "version": 2,
+    "file": "pi_builder_af.csv",
+    "columns": [
+      "Selected(x)",
+      "Parent",
+      "Name",
+      "ObjectType",
+      "Description",
+      "Template",
+      "AttributeType",
+      "AttributeDefaultUOM",
+      "AttributeDataReference",
+      "AttributeConfigString"
     ],
+    "status": "NOT import-tested: these files have never been published to a licensed PI AF server. They follow the vendor-published PI Builder conventions read offline (data/pi_builder_reference.json).",
+    "changes_from_v1": [
+      "AttributeValueType header replaced by the documented AttributeType",
+      "vendor UOM abbreviations where known (degC written in the degree-sign form)",
+      "units without vendor evidence defined in custom_uoms.csv, never assumed",
+      "element templates defined as ElementTemplate rows ahead of the elements",
+      "attribute descriptions moved to attribute_descriptions.csv",
+      "placeholder PI point rows left unselected so PI Builder will not publish them"
+    ],
+    "vendor_sources": "data/pi_builder_reference.json",
     "remaining_contract_checks": [
-      "Retrieve sample rows from the installed PI Builder version before import.",
-      "Verify complete header names, including Parent, Name, ObjectType, Template and AttributeDataReference.",
-      "Verify element/attribute row identity, parent paths and version-specific row conventions.",
+      "Compare the header row and row conventions with a sheet retrieved from the installed PI Builder version.",
+      "Confirm every unit in custom_uoms.csv against the site UOM database, or create it.",
       "Verify every supplied AF value type and UOM against the installed system and source point."
     ]
   },
@@ -66,337 +78,375 @@
       "asset_id": "S101-IN001",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FV 203",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_203.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN002",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FI 101",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_101.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN003",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FV 201",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_201.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN004",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FI 102",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_102.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN005",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FV 202",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_202.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN006",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FI 103",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_103.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN007",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "FI 106",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_106.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN008",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "AI 123",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.AI_123.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN009",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "TV 210",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TV_210.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN010",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "TI 121",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TI_121.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN011",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "PI 107",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.PI_107.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN012",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "LI 108",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.LI_108.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN013",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "TI 109",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TI_109.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S101-IN014",
       "parent": "Site\\Feed And Reaction\\R-101",
       "name": "SC 212",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.SC_212.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN001",
       "parent": "Site\\Condensing, Separation And Recycle\\K-101",
       "name": "FI 105",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_105.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN002",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "FI 110",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_110.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN003",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "AI 129",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.AI_129.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN004",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "FV 206",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_206.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN005",
       "parent": "Site\\Condensing, Separation And Recycle\\K-101",
       "name": "HV 205",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.HV_205.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN006",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "FI 114",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_114.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN007",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "LV 207",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.LV_207.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN008",
       "parent": "Site\\Condensing, Separation And Recycle\\E-101",
       "name": "TV 211",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TV_211.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN009",
       "parent": "Site\\Condensing, Separation And Recycle\\E-101",
       "name": "TI 122",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TI_122.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN010",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "TI 111",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TI_111.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN011",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "LI 112",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.LI_112.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN012",
       "parent": "Site\\Condensing, Separation And Recycle\\V-101",
       "name": "PI 113",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.PI_113.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S102-IN013",
       "parent": "Site\\Condensing, Separation And Recycle\\K-101",
       "name": "JI 120",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.JI_120.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN001",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "FV 204",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_204.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN002",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "FI 104",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_104.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN003",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "FI 117",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_117.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN004",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "AI 137",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.AI_137.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN005",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "LV 208",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.LV_208.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN006",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "FV 209",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FV_209.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN007",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "FI 119",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.FI_119.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN008",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "PI 116",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.PI_116.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN009",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "TI 118",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.TI_118.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     },
     {
       "asset_id": "S103-IN010",
       "parent": "Site\\Product Stripping\\C-101",
       "name": "LI 115",
+      "selected": false,
       "value_type": "Double",
       "uom": "",
       "config_string": "\\\\%Server%\\PLACEHOLDER.LI_115.PV",
-      "status": "unmapped placeholder"
+      "status": "unmapped placeholder (row not selected; excluded from publish)"
     }
   ],
   "expected_element_rows": 9,
+  "expected_template_rows": 0,
   "expected_attribute_rows": 37,
   "checklist": [
     "Obtain approval before any native import or plant/PI connection.",

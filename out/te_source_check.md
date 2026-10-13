@@ -1,4 +1,4 @@
-# TE model vs. open source code (2026-10-06)
+# TE model vs. open source code (2026-10-13)
 
 Source: `teprob.f (Braatz group TE code)`, https://raw.githubusercontent.com/camaramm/tennessee-eastman-profBraatz/master/teprob.f
 
