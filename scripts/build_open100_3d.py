@@ -37,6 +37,7 @@ from build_open100_mimic import directed_pair, display_links, icon_kind  # noqa:
 from display_contract import stream_is_directed  # noqa: E402
 
 TEMPLATE = ROOT / "scripts" / "blender_tour_template.py"
+LABEL_FONT = ROOT / "assets" / "fonts" / "AtkinsonHyperlegible-Regular.ttf"  # the TE tour's label font (SIL OFL 1.1; NOTICE.md)
 OUT = ROOT / "out" / "open100_structural" / "3d"
 SHOTS = ROOT / "docs" / "screenshots" / "open100"
 LENS_MM, SENSOR_MM = 28.0, 36.0
@@ -338,7 +339,7 @@ def blender_script(scene):
     if '"""' in payload:
         raise ValueError("scene text cannot contain a triple quote")
     return TEMPLATE.read_text(encoding="utf-8").replace("__SCENE_JSON__", payload).replace(
-        "# __LABEL_LAYOUT__", label_layout.embeddable_source())
+        "# __LABEL_LAYOUT__", label_layout.embeddable_source()).replace("__FONT_PATH__", LABEL_FONT.as_posix())
 
 
 def main():

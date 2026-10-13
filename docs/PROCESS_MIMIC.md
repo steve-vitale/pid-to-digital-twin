@@ -47,7 +47,7 @@ numbers in the overview. Readout/state bindings are independently quality-checke
 existing raw-point / ignore-bad-quality configuration; no zero-filled gap is invented by the preview.
 
 Unit ownership, stream endpoints and flow directions are verified against the simulator source
-(`out/te_topology_check.md`, journal entry 39); equipment geometry, tap positions and pipe routes are not, because
+(`out/te_topology_check.md`, journal entry 42); equipment geometry, tap positions and pipe routes are not, because
 the source has none. Stream arrows are static source-verified directions, not measured flow. Level percentages are
 not calculated vessel volumes. XMV outputs are not measured valve positions. TI-122 is the condenser cooling-water
 outlet temperature (the source's "separator" label reflects where the simulator books condenser duty). PI-116
@@ -110,7 +110,7 @@ Unit pages now begin with compact annotated diagrams; full inventory/history are
 names and value/unit pairs are placed by mapped stream or approximate vessel region, with dashed association leaders.
 Analyzer components sit together by the mapped sample stream. Unmodeled utility endpoints and disputed ownership
 remain explicit. The original process model is unchanged. See journal entry 23 for the published schematic source.
-The purge and TI-122 discrepancies noted there were settled against the simulator source in journal entry 39.
+The purge and TI-122 discrepancies noted there were settled against the simulator source in journal entry 42.
 
 `data/te_display_layout.json` is additive presentation configuration. `unit_context(..., layout=...)` accepts another
 validated layout for the existing model shape. `scripts/display_contract.py` validates reference/evidence geometry;

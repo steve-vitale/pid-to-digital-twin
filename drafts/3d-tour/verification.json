@@ -1,0 +1,1026 @@
+{
+ "checks": [
+  {
+   "details": [],
+   "group": "A",
+   "id": "A0 scene tags = contract tags",
+   "status": "pass",
+   "summary": "37 scene markers, 37 contract records"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A0 scene units = contract units",
+   "status": "pass",
+   "summary": "6 scene units"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A ignition_gateway: 1:1 tags, units, owning unit, UOM",
+   "status": "pass",
+   "summary": "37/37 scene tags found; 16 extra explained (analyzer component channels; the 3D marker shows the first component only); 0 unexplained extra; 0 mismatches; unit folders differ: none"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A bands and alarm setpoints colouring the 3D markers = gateway tag parameters",
+   "status": "pass",
+   "summary": "36 banded tags compared, 2 alarmed tags"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A ignition_seed_udt: 1:1 tags, units, owning unit, UOM",
+   "status": "pass",
+   "summary": "37/37 scene tags found; 0 extra explained (analyzer component channels; the 3D marker shows the first component only); 0 unexplained extra; 0 mismatches; unit folders differ: none"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A pi_af: 1:1 tags, units, owning unit, UOM",
+   "status": "pass",
+   "summary": "37/37 scene tags found; 0 extra explained (analyzer component channels; the 3D marker shows the first component only); 0 unexplained extra; 0 mismatches; unit folders differ: none"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A perspective: every scene tag bound in the TE views under its owning unit",
+   "status": "pass",
+   "summary": "37/37 tags bound"
+  },
+  {
+   "details": [],
+   "group": "A",
+   "id": "A stream membership: scene stream placement agrees with the contract",
+   "status": "pass",
+   "summary": "19 tags placed on streams; the Ignition and PI exports carry no stream field, so membership is checked against the contract only"
+  },
+  {
+   "details": [],
+   "group": "B",
+   "id": "B pipe endpoints in 3D reproduce the contract stream topology",
+   "status": "pass",
+   "summary": "13/13 streams derived from geometry match from/to"
+  },
+  {
+   "details": [],
+   "group": "B",
+   "id": "B no tag marker inside equipment; markers near what they measure",
+   "status": "pass",
+   "summary": "0 markers inside equipment, 0 far from their stream/unit"
+  },
+  {
+   "details": [],
+   "group": "B",
+   "id": "B utility stubs are labelled inferred and valve symbols map to contract final elements",
+   "status": "pass",
+   "summary": "5 inferred utility stubs, 10 valve symbols"
+  },
+  {
+   "details": [
+    "stop 1 U-100: entered via S1 (BL -> U-100)",
+    "stop 2 R-101: entered via S6 (U-100 -> R-101)",
+    "stop 3 E-101: entered via S7 (R-101 -> E-101)",
+    "stop 4 V-101: entered via S7b (E-101 -> V-101)",
+    "stop 5 K-101: entered via S8 (V-101 -> K-101)",
+    "stop 6 C-101: entered via S4 (BL -> C-101)"
+   ],
+   "group": "B",
+   "id": "B tour order is a valid walk of the directed stream graph",
+   "status": "pass",
+   "summary": "each stop is reached by a directed stream from the battery limit or an earlier stop (directions from the model, checked against the simulator source)"
+  },
+  {
+   "details": [],
+   "group": "C",
+   "id": "C every scene tag traces to a drawing (id + bbox) or is declared seed/synthetic",
+   "status": "pass",
+   "summary": "drawing-traced 0/37; declared seed 37/37 (37 of them checked against teprob.f (Braatz group TE code)); unexplained 0/37"
+  },
+  {
+   "details": [],
+   "group": "C",
+   "id": "C drawing coverage",
+   "status": "info",
+   "summary": "0 of 37 tags trace to a P&ID drawing: this model is 'hand-built seed model (Phase 0). Serves as the answer-key dr...', built from a paper, not extracted from a drawing"
+  },
+  {
+   "details": [],
+   "group": "D",
+   "id": "D legibility: no overlap, crowding, covered markers, pills on the silhouette, all-caps, off-screen, occlusion, small text or low contrast",
+   "status": "pass",
+   "summary": "12 stills, 116 labels + captions; overlaps 0, crowded 0, labels covering markers 0, pills on the focus silhouette 0, all-caps runs 0, off-screen 0, occluded 0, text < 18px 0, contrast < 4.5:1 0, expected-but-missing 0; min text height 18.7px, min contrast 8.18:1; 0 drawn labels entirely outside their still's frame were not counted (layout 'declutter')"
+  },
+  {
+   "details": [],
+   "group": "D",
+   "id": "D contrast cross-check with an independent pixel reader (Pillow)",
+   "status": "info",
+   "summary": "skipped: 00_overview_normal.png not found next to the boxes file"
+  },
+  {
+   "details": [],
+   "group": "D",
+   "id": "D OCR readability",
+   "status": "info",
+   "summary": "skipped: no tesseract executable on PATH (not installed by this verifier)"
+  }
+ ],
+ "failed": 0,
+ "legibility": {
+  "per_still": [
+   {
+    "issues": [],
+    "labels": 8,
+    "still": "00_overview_normal"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "01_u-100_normal"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "02_r-101_normal"
+   },
+   {
+    "issues": [],
+    "labels": 7,
+    "still": "03_e-101_normal"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "04_v-101_normal"
+   },
+   {
+    "issues": [],
+    "labels": 8,
+    "still": "05_k-101_normal"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "06_c-101_normal"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "20_overview_fault_early"
+   },
+   {
+    "issues": [],
+    "labels": 11,
+    "still": "21_overview_fault_alarm"
+   },
+   {
+    "issues": [],
+    "labels": 8,
+    "still": "22_reactor_fault_alarm"
+   },
+   {
+    "issues": [],
+    "labels": 9,
+    "still": "30_flow_legend"
+   },
+   {
+    "issues": [],
+    "labels": 20,
+    "still": "40_loto_mockup"
+   }
+  ],
+  "totals": {
+   "caps": 0,
+   "covers_marker": 0,
+   "crowded": 0,
+   "labels": 116,
+   "low_contrast": 0,
+   "no_contrast": 0,
+   "not_in_view": 0,
+   "occluded": 0,
+   "offscreen": 0,
+   "on_silhouette": 0,
+   "overlaps": 0,
+   "small": 0,
+   "stills": 12
+  },
+  "worst": {
+   "min_contrast": 8.178628338210808,
+   "min_height_px_1080": 18.673131465911865
+  }
+ },
+ "pid_trace": [
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-101",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-102",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-103",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-104",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-105",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-106",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "PI-107",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "LI-108",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TI-109",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-110",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TI-111",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "LI-112",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "PI-113",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-114",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "LI-115",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "PI-116",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-117",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TI-118",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FI-119",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "JI-120",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TI-121",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "corrected",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TI-122",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "AI-123",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "AI-129",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "AI-137",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-201",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-202",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-203",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-204",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "HV-205",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-206",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "LV-207",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "LV-208",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "FV-209",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TV-210",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "TV-211",
+   "trace": "seed (no drawing)"
+  },
+  {
+   "check_status": "confirmed",
+   "checked_against": "teprob.f (Braatz group TE code)",
+   "source": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+   "tag": "SC-212",
+   "trace": "seed (no drawing)"
+  }
+ ],
+ "tag_map": {
+  "AI-123": {
+   "attach": "stream/S6",
+   "ignition_gateway": "TE_Plant/R-101/AI-123",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorFeedAnalyzerComponentsAF",
+   "perspective_views": [
+    "Schematic",
+    "Unit_R-101",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorFeedAnalyzerComponentsAF",
+   "scene_unit": "R-101",
+   "scene_uom": "mol%",
+   "tag": "AI-123"
+  },
+  "AI-129": {
+   "attach": "stream/S9",
+   "ignition_gateway": "TE_Plant/V-101/AI-129",
+   "ignition_seed_udt": "TE_Plant/V-101/PurgeGasAnalyzerComponentsAH",
+   "perspective_views": [
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|PurgeGasAnalyzerComponentsAH",
+   "scene_unit": "V-101",
+   "scene_uom": "mol%",
+   "tag": "AI-129"
+  },
+  "AI-137": {
+   "attach": "stream/S11",
+   "ignition_gateway": "TE_Plant/C-101/AI-137",
+   "ignition_seed_udt": "TE_Plant/C-101/ProductAnalyzerComponentsDH",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|ProductAnalyzerComponentsDH",
+   "scene_unit": "C-101",
+   "scene_uom": "mol%",
+   "tag": "AI-137"
+  },
+  "FI-101": {
+   "attach": "stream/S1",
+   "ignition_gateway": "TE_Plant/U-100/FI-101",
+   "ignition_seed_udt": "TE_Plant/U-100/AFeedFlow",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|AFeedFlow",
+   "scene_unit": "U-100",
+   "scene_uom": "kscmh",
+   "tag": "FI-101"
+  },
+  "FI-102": {
+   "attach": "stream/S2",
+   "ignition_gateway": "TE_Plant/U-100/FI-102",
+   "ignition_seed_udt": "TE_Plant/U-100/DFeedFlow",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|DFeedFlow",
+   "scene_unit": "U-100",
+   "scene_uom": "kg/h",
+   "tag": "FI-102"
+  },
+  "FI-103": {
+   "attach": "stream/S3",
+   "ignition_gateway": "TE_Plant/U-100/FI-103",
+   "ignition_seed_udt": "TE_Plant/U-100/EFeedFlow",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|EFeedFlow",
+   "scene_unit": "U-100",
+   "scene_uom": "kg/h",
+   "tag": "FI-103"
+  },
+  "FI-104": {
+   "attach": "stream/S4",
+   "ignition_gateway": "TE_Plant/C-101/FI-104",
+   "ignition_seed_udt": "TE_Plant/C-101/AAndCFeedFlow",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|AAndCFeedFlow",
+   "scene_unit": "C-101",
+   "scene_uom": "kscmh",
+   "tag": "FI-104"
+  },
+  "FI-105": {
+   "attach": "stream/S8b",
+   "ignition_gateway": "TE_Plant/K-101/FI-105",
+   "ignition_seed_udt": "TE_Plant/K-101/RecycleFlow",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_K-101",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\K-101|RecycleFlow",
+   "scene_unit": "K-101",
+   "scene_uom": "kscmh",
+   "tag": "FI-105"
+  },
+  "FI-106": {
+   "attach": "stream/S6",
+   "ignition_gateway": "TE_Plant/R-101/FI-106",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorFeedRate",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_R-101",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorFeedRate",
+   "scene_unit": "R-101",
+   "scene_uom": "kscmh",
+   "tag": "FI-106"
+  },
+  "FI-110": {
+   "attach": "stream/S9",
+   "ignition_gateway": "TE_Plant/V-101/FI-110",
+   "ignition_seed_udt": "TE_Plant/V-101/PurgeRate",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|PurgeRate",
+   "scene_unit": "V-101",
+   "scene_uom": "kscmh",
+   "tag": "FI-110"
+  },
+  "FI-114": {
+   "attach": "stream/S10",
+   "ignition_gateway": "TE_Plant/V-101/FI-114",
+   "ignition_seed_udt": "TE_Plant/V-101/SeparatorUnderflow",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_C-101",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|SeparatorUnderflow",
+   "scene_unit": "V-101",
+   "scene_uom": "m3/h",
+   "tag": "FI-114"
+  },
+  "FI-117": {
+   "attach": "stream/S11",
+   "ignition_gateway": "TE_Plant/C-101/FI-117",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperUnderflowProduct",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperUnderflowProduct",
+   "scene_unit": "C-101",
+   "scene_uom": "m3/h",
+   "tag": "FI-117"
+  },
+  "FI-119": {
+   "attach": "unit/C-101",
+   "ignition_gateway": "TE_Plant/C-101/FI-119",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperSteamFlow",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperSteamFlow",
+   "scene_unit": "C-101",
+   "scene_uom": "kg/h",
+   "tag": "FI-119"
+  },
+  "FV-201": {
+   "attach": "stream/S2",
+   "ignition_gateway": "TE_Plant/U-100/FV-201",
+   "ignition_seed_udt": "TE_Plant/U-100/DFeedFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|DFeedFlowValve",
+   "scene_unit": "U-100",
+   "scene_uom": "%",
+   "tag": "FV-201"
+  },
+  "FV-202": {
+   "attach": "stream/S3",
+   "ignition_gateway": "TE_Plant/U-100/FV-202",
+   "ignition_seed_udt": "TE_Plant/U-100/EFeedFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|EFeedFlowValve",
+   "scene_unit": "U-100",
+   "scene_uom": "%",
+   "tag": "FV-202"
+  },
+  "FV-203": {
+   "attach": "stream/S1",
+   "ignition_gateway": "TE_Plant/U-100/FV-203",
+   "ignition_seed_udt": "TE_Plant/U-100/AFeedFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_U-100"
+   ],
+   "pi_af": "\\\\TE Plant\\U-100|AFeedFlowValve",
+   "scene_unit": "U-100",
+   "scene_uom": "%",
+   "tag": "FV-203"
+  },
+  "FV-204": {
+   "attach": "stream/S4",
+   "ignition_gateway": "TE_Plant/C-101/FV-204",
+   "ignition_seed_udt": "TE_Plant/C-101/AAndCFeedFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|AAndCFeedFlowValve",
+   "scene_unit": "C-101",
+   "scene_uom": "%",
+   "tag": "FV-204"
+  },
+  "FV-206": {
+   "attach": "stream/S9",
+   "ignition_gateway": "TE_Plant/V-101/FV-206",
+   "ignition_seed_udt": "TE_Plant/V-101/PurgeValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|PurgeValve",
+   "scene_unit": "V-101",
+   "scene_uom": "%",
+   "tag": "FV-206"
+  },
+  "FV-209": {
+   "attach": "unit/C-101",
+   "ignition_gateway": "TE_Plant/C-101/FV-209",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperSteamValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperSteamValve",
+   "scene_unit": "C-101",
+   "scene_uom": "%",
+   "tag": "FV-209"
+  },
+  "HV-205": {
+   "attach": "unit/K-101",
+   "ignition_gateway": "TE_Plant/K-101/HV-205",
+   "ignition_seed_udt": "TE_Plant/K-101/CompressorRecycleValve",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_K-101"
+   ],
+   "pi_af": "\\\\TE Plant\\K-101|CompressorRecycleValve",
+   "scene_unit": "K-101",
+   "scene_uom": "%",
+   "tag": "HV-205"
+  },
+  "JI-120": {
+   "attach": "unit/K-101",
+   "ignition_gateway": "TE_Plant/K-101/JI-120",
+   "ignition_seed_udt": "TE_Plant/K-101/CompressorWork",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_K-101"
+   ],
+   "pi_af": "\\\\TE Plant\\K-101|CompressorWork",
+   "scene_unit": "K-101",
+   "scene_uom": "kW",
+   "tag": "JI-120"
+  },
+  "LI-108": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/LI-108",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorLevel",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorLevel",
+   "scene_unit": "R-101",
+   "scene_uom": "%",
+   "tag": "LI-108"
+  },
+  "LI-112": {
+   "attach": "unit/V-101",
+   "ignition_gateway": "TE_Plant/V-101/LI-112",
+   "ignition_seed_udt": "TE_Plant/V-101/SeparatorLevel",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|SeparatorLevel",
+   "scene_unit": "V-101",
+   "scene_uom": "%",
+   "tag": "LI-112"
+  },
+  "LI-115": {
+   "attach": "unit/C-101",
+   "ignition_gateway": "TE_Plant/C-101/LI-115",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperLevel",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperLevel",
+   "scene_unit": "C-101",
+   "scene_uom": "%",
+   "tag": "LI-115"
+  },
+  "LV-207": {
+   "attach": "stream/S10",
+   "ignition_gateway": "TE_Plant/V-101/LV-207",
+   "ignition_seed_udt": "TE_Plant/V-101/SeparatorPotLiquidFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|SeparatorPotLiquidFlowValve",
+   "scene_unit": "V-101",
+   "scene_uom": "%",
+   "tag": "LV-207"
+  },
+  "LV-208": {
+   "attach": "stream/S11",
+   "ignition_gateway": "TE_Plant/C-101/LV-208",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperLiquidProductFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperLiquidProductFlowValve",
+   "scene_unit": "C-101",
+   "scene_uom": "%",
+   "tag": "LV-208"
+  },
+  "PI-107": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/PI-107",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorPressure",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorPressure",
+   "scene_unit": "R-101",
+   "scene_uom": "kPa g",
+   "tag": "PI-107"
+  },
+  "PI-113": {
+   "attach": "unit/V-101",
+   "ignition_gateway": "TE_Plant/V-101/PI-113",
+   "ignition_seed_udt": "TE_Plant/V-101/SeparatorPressure",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|SeparatorPressure",
+   "scene_unit": "V-101",
+   "scene_uom": "kPa g",
+   "tag": "PI-113"
+  },
+  "PI-116": {
+   "attach": "unit/C-101",
+   "ignition_gateway": "TE_Plant/C-101/PI-116",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperPressure",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperPressure",
+   "scene_unit": "C-101",
+   "scene_uom": "kPa g",
+   "tag": "PI-116"
+  },
+  "SC-212": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/SC-212",
+   "ignition_seed_udt": "TE_Plant/R-101/AgitatorSpeed",
+   "perspective_views": [
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|AgitatorSpeed",
+   "scene_unit": "R-101",
+   "scene_uom": "%",
+   "tag": "SC-212"
+  },
+  "TI-109": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/TI-109",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorTemperature",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorTemperature",
+   "scene_unit": "R-101",
+   "scene_uom": "degC",
+   "tag": "TI-109"
+  },
+  "TI-111": {
+   "attach": "unit/V-101",
+   "ignition_gateway": "TE_Plant/V-101/TI-111",
+   "ignition_seed_udt": "TE_Plant/V-101/SeparatorTemperature",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_V-101"
+   ],
+   "pi_af": "\\\\TE Plant\\V-101|SeparatorTemperature",
+   "scene_unit": "V-101",
+   "scene_uom": "degC",
+   "tag": "TI-111"
+  },
+  "TI-118": {
+   "attach": "unit/C-101",
+   "ignition_gateway": "TE_Plant/C-101/TI-118",
+   "ignition_seed_udt": "TE_Plant/C-101/StripperTemperature",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_C-101"
+   ],
+   "pi_af": "\\\\TE Plant\\C-101|StripperTemperature",
+   "scene_unit": "C-101",
+   "scene_uom": "degC",
+   "tag": "TI-118"
+  },
+  "TI-121": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/TI-121",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorCoolingWaterOutletTemperature",
+   "perspective_views": [
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorCoolingWaterOutletTemperature",
+   "scene_unit": "R-101",
+   "scene_uom": "degC",
+   "tag": "TI-121"
+  },
+  "TI-122": {
+   "attach": "unit/E-101",
+   "ignition_gateway": "TE_Plant/E-101/TI-122",
+   "ignition_seed_udt": "TE_Plant/E-101/SeparatorCoolingWaterOutletTemp",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_E-101"
+   ],
+   "pi_af": "\\\\TE Plant\\E-101|SeparatorCoolingWaterOutletTemp",
+   "scene_unit": "E-101",
+   "scene_uom": "degC",
+   "tag": "TI-122"
+  },
+  "TV-210": {
+   "attach": "unit/R-101",
+   "ignition_gateway": "TE_Plant/R-101/TV-210",
+   "ignition_seed_udt": "TE_Plant/R-101/ReactorCoolingWaterFlowValve",
+   "perspective_views": [
+    "Schematic",
+    "Unit_R-101"
+   ],
+   "pi_af": "\\\\TE Plant\\R-101|ReactorCoolingWaterFlowValve",
+   "scene_unit": "R-101",
+   "scene_uom": "%",
+   "tag": "TV-210"
+  },
+  "TV-211": {
+   "attach": "unit/E-101",
+   "ignition_gateway": "TE_Plant/E-101/TV-211",
+   "ignition_seed_udt": "TE_Plant/E-101/CondenserCoolingWaterFlowValve",
+   "perspective_views": [
+    "Narrow",
+    "Overview",
+    "ProcessMimic",
+    "Schematic",
+    "Unit_E-101"
+   ],
+   "pi_af": "\\\\TE Plant\\E-101|CondenserCoolingWaterFlowValve",
+   "scene_unit": "E-101",
+   "scene_uom": "%",
+   "tag": "TV-211"
+  }
+ }
+}

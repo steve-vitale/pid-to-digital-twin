@@ -164,7 +164,7 @@ class CurrentGatewayContract(unittest.TestCase):
             self.assertEqual(sorted(t[len('toInt(!isGood({'):-len('}))')] for t in terms), paths, name)
             self.assertEqual(tag['executionMode'], 'FixedRate')
             (alarm,) = tag['alarms']
-            # Inclusive AboveValue: a setpoint of 0 stayed active at a count of 0 in the gateway (journal entry 40).
+            # Inclusive AboveValue: a setpoint of 0 stayed active at a count of 0 in the gateway (journal entry 47).
             self.assertEqual((alarm['name'], alarm['mode'], alarm['setpointA']), ('DataSourceLost', 'AboveValue', 0.5))
             self.assertTrue(alarm['label'].startswith('Data source lost'))
             self.assertEqual(alarm['displayPath'], alarm['label'])

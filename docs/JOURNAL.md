@@ -1769,7 +1769,7 @@ write-only build (provider `f735cebe…` unchanged, project ZIP `1a6ce79c…`), 
 | Fault replay on screen | PASS: amber values before the alarm, PI-107 red at the alarm, alarm table populated | `native-overview-fault-early.png`, `native-overview-fault-alarm.png`, `native-reactor-fault-alarm.png`, `native-alarms-fault.png` |
 | MS 14010 callout | PASS: no value label, PV or OPC address; both FT 1401 records keep separate placeholders | receipt `exports`, `native-sheet0-not-connected.png` |
 
-*(Note added with entry 40: the `native-*.png` screenshots named in this table were replaced by the entry 40 run of the corrected build. The originals from this run are in the repository history at commit `f5c270e`.)*
+*(Note added with entry 47: the `native-*.png` screenshots named in this table were replaced by the entry 47 run of the corrected build. The originals from this run are in the repository history at commit `f5c270e`.)*
 
 **What went wrong on the way, besides the product bugs.** My first scroll test said the unit pages could not
 scroll, and I nearly "fixed" that. Git Bash had rewritten the route argument into a Windows path, so the browser
@@ -1806,77 +1806,220 @@ screens. Click every link, stop the data source, and watch what an operator woul
 "broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
 plant readiness. The screens were checked against recorded replay and synthetic points only.
 
-## 41. Start from the data: assess both datasets first, then make every correction travel
+---
 
-**What:** a written Stage 0 for each dataset (where the data came from, what is checked, what is inferred, how sure
-we are per element class), a machine-readable list of every stage after it, and an orchestrator that shows which
-outputs are stale after a correction and rebuilds them.
+## 39. Prototype: a 3D tour generated from the same contract as the screens (proof of concept)
 
-**How:**
-- [DATA_LINEAGE.md](DATA_LINEAGE.md) lays out Tennessee Eastman and OPEN100 as staged pipelines: input, treatment,
-  output, confidence carried forward, and who or what checked it. The numbers come from files already in the repo:
-  37 TE tags checked against the simulator source (36 confirmed, 1 corrected), units and streams not yet checked on
-  this branch, OPEN100 review load 17.8 per 100 on sealed drawings, and 2,886 twin items, all unverified.
-- [`pipeline/stages.json`](../pipeline/stages.json) lists the 13 stages with their real scripts, inputs, outputs,
-  prerequisites and the provenance fields each output carries. `scripts/pipeline.py` hashes each stage's inputs,
-  code and config into a lock file when it builds the stage; `status` marks a stage stale when any of them changed;
-  `rebuild --from <stage>` re-runs it and everything downstream; `confidence` rolls the per-element fields
-  (source check, review status, risk tier, tag status) up per dataset.
-- `scripts/provenance.py` reads one item's provenance from fields the models already carry. The seed exports now
-  end each Ignition tag's documentation and each PI attribute's description with
-  `source check: … | ops review: …`, the way the extracted twin's exports already did. Two new generators are
-  labelled proof of concept in their own files: the overview mimic as layout data, and 3D scene data with
-  inferred LOTO candidates.
-- `scripts/test_pipeline.py` copies the repo to a temp folder, moves FI-110 from K-101 to V-101 with
-  `apply_review.py` (one part of the purge correction the topology check makes), rebuilds from the model, and checks the move in
-  the Ignition tags, the PI sheet, the review sheet, the mimic layout and the scene data. It also checks that no
-  script changed and that a second rebuild writes identical bytes.
+**2026-10-12, built on a separate local branch and merged as a proof of concept on 2026-10-13 (entry 49); not
+reviewed by operations.** Steve asked whether a Blender 3D tour of the process would help operations training. Native
+acceptance still came first; this entry scopes the idea and records a small build that ran.
 
-**What the test found:** the overview mimic picked its readings from a hard-coded list per unit. With FI-110 moved
-in the model, the reading's tag path followed the model (`TE_Plant/V-101/FI-110`) but the reading was still drawn
-beside the compressor. The topology branch had to edit that list by hand to move the purge. The fix is small: the
-list still chooses *which* readings the overview shows, and the model decides *where* each one is drawn. With the
-old placement put back, the propagation check fails on exactly that reading.
+**What:** a generator that turns the TE seed model and the 2D display layout into a 3D scene, rendered headless in
+Blender, with a camera that walks the units in flow order and tag markers coloured from the recorded fault-6
+replay. Plan: [3D_TOUR_PLAN.md](3D_TOUR_PLAN.md).
 
-**Why:**
-- **Changes at the start have to be cheap.** The review day will correct things in the models. If each correction
-  also needs hand edits in four generators, corrections stop happening, or they happen in one output and not the
-  others. A stale flag after the correction and one rebuild command make the cheap path the right one.
-- **Confidence has to be visible before results are.** It is easy to read a polished screen as a validated one.
-  Every output inherits its inputs' confidence, and the replay, the mimic, the 3D data and the LOTO candidates say
-  "proof of concept" in their own files. They are there to iterate on.
-- **Who checked matters as much as what was checked.** The rollup counts a review as an operations review only
-  when the reviewer string names an operations role. A confirmation by anyone else, including me, keeps its label
-  in every output. This trusts the string; nothing authenticates it.
-- **Rejected:** a general workflow engine (more machinery than 13 stages need), timestamps instead of hashes (a
-  checkout changes them; Windows and Linux line endings are normalised before hashing instead), and rewriting the
-  generators to emit provenance (a one-line passthrough where a format has a free-text field was enough).
+**How:** `scripts/build_3d_scene.py` reads `data/te_process_model.json`, `data/te_display_layout.json`, the committed
+normal bands and the published alarm setpoints. It validates the layout with the same contract check the 2D
+renderer uses, derives a scene (`out/3d/te_scene.json`) and writes a self-contained Blender script. Blender 5.2.2 LTS,
+the official portable ZIP with its checksum verified, rendered ten stills in about 20 seconds and a 361-frame
+low-resolution walkthrough in about two minutes on a GTX 1060. The same scene exports to a GLB with each marker's tag
+id in its node extras. `scripts/test_build_3d_scene.py` (40 checks at the time) runs the generated script against a
+stub `bpy` and fails when a deliberate break marks every tag connected.
 
-**What it does not do:**
-- Two stages need the TE replay download (the normal bands and the gateway kit). They show `NEVER BUILT HERE` in
-  this checkout: their committed outputs predate the lock, and I have not rebuilt them through the orchestrator.
-- Extraction, scoring and the twin build are "recorded" stages. They need model calls or run records that are not
-  committed, so the lock accepts their committed outputs as the record. It does not re-run them.
-- "Fresh" means rebuilt from current inputs, not correct.
+**What is data and what is Claude's:**
+- From data: which units, streams and tags exist; tag ownership; the 26 stream/unit associations already reviewed
+  for the 2D cards; the seed flow directions (then unverified; checked against the simulator source in entry
+  42) and the flow order derived from them; every colour (replay samples 150, 200 and 258 against the existing
+  bands and the 2895 kPa published limit); SC-212 not connected; TI-122's disputed owner.
+- Claude only: every shape, size, height, nozzle, pipe route and marker height; the plan scale (2D seed pixels ×
+  0.03 m); the camera stops and the choice of fault samples. These are placeholders, labelled as such in the scene
+  data, on the ground plane and in a caption on every frame. Nothing was compared with another model or reviewed by
+  an operator.
 
-**Who did what:** Claude (Claude Code) wrote the manifest, the orchestrator, the tests, the docs and this entry
-from my direction. No second model reviewed it, and I have not walked the lineage myself yet; that walk is the
-review day ([review-kit/FOLLOW_THE_DATA.md](review-kit/FOLLOW_THE_DATA.md)). The source-only suite passed 16/16 on
-Windows with two symlink sub-cases skipped by the platform. The full suite was not run in this checkout because the
-TE replay files are not downloaded here.
+**Why:** the tempting version is a nice-looking model built by hand in Blender. It would drift from the screens on the
+first correction, and it would look more certain than the drawing allows. Generating it from the screens' own
+contract keeps one source of truth, and the drift checks fail before anything is drawn. A P&ID gives topology, not
+geometry, so the honest scene is schematic: plausible shapes in the 2D arrangement, every dimension declared a
+placeholder. The OPEN100 twin was not used then: its 1,881 links had unknown direction and its units are drawing
+symbols (entry 48 later read direction from the drawings and gave OPEN100 its own structure-only tour).
 
-**Lesson:** a pipeline that regenerates outputs from one model can still hide hand-kept copies of that model. Here
-it was a per-unit list in a screen generator. The way to find them is to change one fact upstream and check every
-output for it, rather than read the generators.
+**Recommendation recorded in the plan:** rendered video for training material now, because a fixed, captioned video
+is hardest to mistake for an engineering model and needs no runtime or gateway change; an interactive viewer (from the
+same GLB) once a site has verified geometry and instrument locations.
 
-**At your plant:** write each source's Stage 0 before building anything: who owns it, what checks it, what is
-inferred, and how sure you are per element class. Then make sure every correction goes into the source, not an
-output, and that one command shows what a correction left stale. When a reviewer signs off, record their role with
-the decision, so a document-control check never reads as an operations approval.
+**Lesson:** a 3D view adds no process information; it adds credibility, which is the risk. Label the placeholders in
+the artifact itself, not only in the documentation, and generate the scene from the same contract as everything else.
+
+**At your plant:** the software is the cheap part. The cost is real geometry (a 3D design model, scan, plot plan or
+walkdown), instrument locations from isometrics or the field, an operator-written tour script, and keeping it current
+under management of change. Walk it down with an operator before anyone trains on it.
 
 ---
 
-## 39. Verify the TE topology against the simulator source
+## 40. Check the 3D render procedurally, then make it an orientation tour (proof of concept)
+
+**2026-10-12, same local branch; not reviewed by operations or a process-safety engineer.** Steve asked for three
+things:
+1. a way to verify the render procedurally against the Ignition/PI asset framework and the P&ID;
+2. a version for orienting new operators, or existing operators on a new process;
+3. emphasis on the highest-risk elements, tied to what public accident data shows.
+
+**What:**
+- `scripts/verify_3d_render.py`: four groups of checks.
+  - Accuracy against the Ignition gateway import, the seed UDT export, the PI AF sheet and the Perspective
+    bindings.
+  - Topology derived from the 3D pipe ends, markers inside equipment, and the tour as a valid walk.
+  - Trace of each tag to a P&ID drawing.
+  - Legibility from Blender's own measurement of each still: projected label boxes, raycast occlusion and WCAG
+    contrast from the rendered pixels.
+- A narrated orientation tour: captions, an SRT and an offline synthetic voice.
+- Emphasis, from data, on the unit carrying published shutdown limits (R-101) and on the unit where fault 6 shows first
+  (U-100).
+- One cited public incident per stop, from a prototype keyword match over a compiled corpus of public agency records
+  (CSB, OSHA, EPA RMP; [HAZARD_CITATIONS_DESIGN.md](HAZARD_CITATIONS_DESIGN.md)).
+
+**What the checks found in the first prototype** (reproduced with `--label-layout legacy` and measured by the same
+code):
+- 25 label overlaps, 166 labels under 20 px at 1080p (the smallest 4.6 px), 241 under 4.5:1 contrast, and 105
+  labels or markers hidden by geometry.
+- Two tag markers (FI-106, AI-123) were **inside** the reactor shell. A fixed offset from the riser pushed them in.
+- Two pipes (S4, S11) ended 0.8 m off the stripper, because nozzles on a thin column were spread sideways.
+
+The legibility numbers were visible by eye. The buried markers and floating pipe ends were not; they were found by
+the occlusion raycast and by deriving each pipe's endpoints from geometry.
+
+After the fixes, all 16 checks passed on all 10 stills. Every scene tag maps 1:1 to its Ignition path and PI AF
+attribute; the 16 extra analyzer component channels in Ignition are explained.
+
+**The E-101 / K-101 case, honestly:** Steve saw those two labels "overlapping". The strict overlap test did not flag
+them: they sat 13 px apart on one baseline and read as one string. Looking at the crop, I added two checks:
+- a crowding rule for plate-less labels closer than one line height;
+- occlusion sampled over a grid of points on each label instead of its centre.
+
+With those, the case is caught (crowded, 11 px text, contrast 2.9 and 3.2:1, a pipe hiding a third of K-101). The
+rules were written after seeing the defect, so this shows they catch it now. It does not show they would have found
+it first.
+
+**P&ID trace, honestly:** 0 of 37 TE tags trace to a drawing, because the TE model was built from a paper. All 37
+are declared seed and checked against `teprob.f`. The check also reads the extracted twin's drawing id and bbox, so
+an extracted plant would report real coverage.
+
+**How the fixes work:**
+- **Labels per still.** A still shows only the labels it needs.
+- **Fixed screen size.** Labels are scaled to a fixed on-screen size and sit on dark plates.
+- **Greedy declutter.** Placement avoids other labels, every marker and the caption band. The rectangle code is
+  shared with the verifier.
+- **View choice.** Cameras are fitted to each unit's shape, markers and battery limits. The renderer takes the
+  first of seven candidate views that hides the fewest markers, by raycast.
+- Pillow re-read the same pixels and agreed with Blender's contrast to 0.00. OCR was not run; tesseract is not
+  installed and was not added.
+
+**What is data and what is Claude's:**
+- **From data:** every number in the narration and captions (streams in and out, normal bands, published limits,
+  first band exits and counts in the recorded fault-6 replay, values at the alarm sample), the emphasis, and the
+  incident URLs exactly as recorded.
+- **Claude only:**
+  - the one-sentence role of each unit and the connecting prose;
+  - the choice of 3-5 citations per equipment kind from the heuristic's shortlist, and their one-line summaries;
+  - the label sizes, thresholds and candidate views.
+
+  Every caption says the script is Claude's and not operator-reviewed. The video's audio track is titled as a
+  synthetic voice.
+
+**Voice:** Windows' built-in System.Speech (SAPI), offline, one WAV per segment, timed into the video. ffmpeg, which
+was already installed, muxes it with soft subtitles. The narration runs about 640 seconds, longer than my word-count
+estimate of 466 seconds; the timeline uses the measured WAV lengths.
+
+**Why:**
+- A 3D render adds credibility faster than it adds information, so it needs checks that do not depend on someone
+  looking.
+- An orientation tour is only safe if its numbers cannot drift from the screens. So the narration is generated from
+  the same files as the screens and the Ignition and PI exports, and the verifier proves the 1:1 mapping.
+- The hazard emphasis keeps the data-backed parts (limits, first warning) apart from the heuristic part (public
+  incidents). The heuristic produced false positives: NTSB's Asiana 214 matched "tower".
+
+**A wording slip, caught before the final render:** my first summaries or captions for seven incidents said more than
+their records do: most stated CSB recommendations as findings ("dead legs in feed piping caused..."). The emphasis
+label also said "HIGHEST CONSEQUENCE", which the data does not show; it now says "PUBLISHED SHUTDOWN LIMITS". All were
+rewritten and the tour was re-rendered.
+
+**Lesson:** a verifier written after seeing a defect needs to say so. Separately, the two most important defects
+here (buried markers, pipes ending in air) were invisible in the stills and were caught only by checks that reason
+about geometry.
+
+**At your plant:** a tour script for real operators must be written or reviewed by an operator. The hazard emphasis
+should come from the site's PHA/HAZOP. Public incidents can illustrate it; they cannot rank it. Run the verifier
+whenever the twin, the Ignition tags or the PI AF model change, because the tour is only as right as the 1:1 mapping.
+
+---
+
+## 41. Review: clean up the 3D stills before rendering any more video (proof of concept)
+
+**2026-10-12, same local branch; review stills only, not reviewed by operations.** Steve looked at the reactor still
+from entry 40 and said "it kinda looks like we need quite a bit of cleanup and review". The full video render that
+was running was stopped and its partial output deleted. The review became ten rules:
+- focus per stop and 3-4 key tags;
+- one pill label system;
+- pipes coloured by service on two racks;
+- recognizable equipment and an eye-height camera;
+- a corner badge instead of per-frame disclaimers, and a two-line caption;
+- natural, short narration;
+- operating alarm vs shutdown limit kept apart;
+- a reactor-apt citation.
+
+A second round from Steve asked for:
+- the process flow made visible;
+- a "why each piece exists" card at each stop;
+- essential-function animations later;
+- a lockout/tagout version designed now.
+
+**What was built:** the redesign in [3D_TOUR_PLAN.md](3D_TOUR_PLAN.md#review-redesign-2026-10-12). Only five stills
+were rendered: overview, reactor stop, fault 6 at the high alarm, a flow legend, and a LOTO mockup. The verifier
+gained three checks: no pill on the focus unit's silhouette, no all-caps runs, and the review's 18 px minimum. It
+also now checks that inferred utilities and valve symbols map to contract final elements. All 17 checks passed on
+the five stills; the first prototype's layout, measured the same way, failed 3.
+
+**What I got wrong first, and fixed before reporting:**
+- Overlay cards rendered pale grey. Swapping a plate's mesh dropped its material.
+- The flow legend's plate came out too short. Blender does not re-evaluate hidden text, so the bounding box was stale.
+- The ground grid showed as one big cross. The texture used object coordinates on a scaled plane.
+
+None of these was caught by a check; they were seen by looking at the stills. The legibility checks then caught three
+pills at 16.2 px (text with no descenders measures shorter). The pills were enlarged; the threshold was not loosened.
+
+**Limits, honestly:**
+- PI-107's 2,895 kPa g is the operating high alarm the Ignition screens use. 3,000 kPa g and TI-109's 175 °C are
+  the simulator's published shutdown points, shown only on fault stills.
+- TI-109 has no operating alarm, so at the normal reactor stop its pill shows no limit. That is my reading of "the
+  shutdown limit only on the fault stop".
+
+**Purpose cards:** at the time, paraphrased by Claude from the published TE description (Downs & Vogel 1993), with
+the paper not in this repo. The text check in entry 43 found errors in them (the purge placed at the compressor,
+the stripper overhead missing from the feed header); since the merge every card takes its purpose sentence from
+`data/te_unit_purposes.json`, which cites the simulator lines it restates (entry 42).
+
+**Reactor citation aptness:** the corpus has no gas-phase reactor incident. Kuraray (a reactor taken above its
+pressure limit; the CSB asked for the limit to be made clear to operators) now leads. Bayer CropScience is kept,
+phrased generally.
+
+**Naming:** the incident corpus was compiled in a separate, private project. Nothing in this repository names it,
+reads it at build time or depends on it; only public agency records were used, and the curated result is committed.
+
+**LOTO:** a design section and a mockup still. Every isolation point is inferred from the seed model and marked `*`;
+the numbers are list order, not an isolation sequence. The still says it is not a procedure, and points to OSHA 29
+CFR 1910.147, the site's verified P&IDs and an authorized person.
+
+**Lesson:** checks of legibility and accuracy do not catch "looks like scaffolding". A person looking at one still
+found more than the 17 checks did. Keep both, and render a handful of stills for review before rendering minutes of
+video.
+
+**At your plant:** design reviews of training visuals belong with operators early, on stills, before anyone spends
+render time or narration on them. A LOTO view built from a P&ID alone is a sketch; the isolation list comes from the
+energy-control program.
+
+---
+
+## 42. Verify the TE topology against the simulator source
 
 **What:** every unit, stream, flow direction and tag-to-unit assignment in the Tennessee Eastman model was checked
 against the simulator code. Until now only tag names and units had been checked (entry 5); the topology was a
@@ -1962,7 +2105,76 @@ against it mechanically, and keep the disagreements as a list for the process en
 here: PI-116's owner; whether the S7/S7b and S8/S8b splits and FI-105's segment match how a real plant would draw
 them; and every tap position, size and pipe route, none of which any simulator records.
 
-## 40. One plant, end to end: draw the TE model in the house style and read it back
+---
+
+## 43. Check the PI files against what AVEVA publishes, and get ready for a first human review
+
+**2026-10-13:** three gaps a reviewer would point at first. The PI AF files have never been in a PI system. The
+3D tour's text has never been checked against a source. And no one with operations knowledge has looked at
+anything. None of the three is closed. Each is now smaller, and what remains open is written down.
+
+**PI without a licence.** The free route is gone. The PI Developers Club, which included a personal development
+PI System and a 45-day free trial, was retired on January 1, 2026. What remains is partner agreements, paid Flex
+test credits, or a university's academic licence ([PI_MAPPING.md](PI_MAPPING.md) lists the terms and sources;
+nothing was signed up for). So the check stays offline, against what AVEVA itself publishes: three course
+workbooks and an Apache-2.0 AF export in AVEVA's own SDK samples. The sheet headers are mostly in screenshots, so
+they were read by OCR and checked by eye. The results, now in `data/pi_builder_reference.json` with a page for
+each entry:
+- `AttributeType` is the documented column. `AttributeValueType`, which the legacy staging CSV still writes, appears
+  nowhere. The candidate CSV's one correction was right.
+- `%`, `kW` and `m3/h` match the vendor export's abbreviations exactly. `degC` does not: the vendor writes `°C`.
+  `kg/h`, `kPa g`, `kscmh` and `mol%` are not in the sample, which covers only 33 UOM classes. Most likely
+  `kscmh` (a TE unit) and the gauge pressure need custom UOMs at a site.
+- The TE sheet names six element templates it never defines. The extracted twin's attributes have no units at all,
+  while the vendor workbook says "Always assign a unit of measurement!"
+- The AF XML schema types `Type`, `DefaultUOM` and `ConfigString` as plain strings. Adding an AF XML export and
+  validating it against the schema would not have caught any of the above.
+
+`scripts/check_pi_export.py` reports those findings with their evidence and fails only on internal
+inconsistencies. Its test plants each error class to show the check catches it.
+
+**The 3D tour's text.** The purpose cards were checked against Ricker's revised simulator code and against open
+papers that restate Downs and Vogel. That check found the same purge error as the TE topology work, which used
+the original Fortran: the compressor card said the purge leaves at the compressor, and both codes draw it from the
+separator. The cards now take their sentences from the verified TE file. The public-incident citations were read
+against the CSB and OSHA pages. Seven needed a correction or a missing detail, and the six EPA RMP links did not
+resolve to their records. The biggest: Tesoro Anacortes ruptured during a
+maintenance stream switch, not "during a restart". The Williams Geismar link returned 404. And the Bayer summary said more than its
+cited page does. The fixes wait as a patch for the clean merge ([drafts/3d-tour/REVIEW_NOTES.md](../drafts/3d-tour/REVIEW_NOTES.md)).
+An OCR read-back of the five stills found one real legibility problem. In the tour's typeface, 1, I and l look
+alike. Every tag ID the whole-frame read missed was one of those confusions: `Pl-107`, `Tl-109`, `E-10I`.
+
+**The first human review.** [docs/review-kit/](review-kit/README.md) is a one-sitting kit with two tracks that
+must not mix. Anyone can check that text matches the drawing, that boxes sit on symbols, and that labels can be
+read. Only an operations person can say whether a line, an alarm limit, an isolation point or a hazard is right.
+Track A findings go in as notes or identifier-text-only corrections, never as `confirm`, so the record cannot
+later pass for an operations review. The timing log uses the review-effort protocol's fields, but one sitting is
+a pilot, not the study.
+
+**Follow-up, same day: fix the exporter, not just the report.** The PI files are now PI Builder sheet schema v2:
+- `AttributeType` replaces `AttributeValueType`.
+- `°C` replaces `degC`.
+- The four units with no vendor evidence are written to `custom_uoms.csv` with a definition, never assumed. Gauge
+  pressure and standard volume flow each get their own class with no conversion, because converting either needs a
+  local reference: the atmosphere, or the standard conditions.
+- The six TE element templates are defined at the top of the sheet.
+- Attribute descriptions move to their own file. A full OCR pass over the workbooks found no attribute description
+  header, so writing one would have been a guess.
+- Placeholder rows are left unselected, so PI Builder won't publish them.
+
+`IMPORT_STEPS.txt` gives the publish order. The offline check now passes the TE sheet with a single instruction
+(create or map four units) and flags any selected placeholder as an error. It's still not import-tested; every
+generated file says so.
+
+**Lesson:** "we can't test it without a licence" was half true. The import can't be tested, but the vendor's own
+published material settled the header question and found a unit spelling no test of ours could have flagged.
+
+**At your plant:** run `check_pi_export.py`, then pull your own UOM classes out of PI Builder before mapping
+anything. The vendor sample is a subset; your UOM database is the authority.
+
+---
+
+## 44. One plant, end to end: draw the TE model in the house style and read it back
 
 **What:** 2026-10-13. The extraction (OPEN100) and the live twin (Tennessee Eastman) were on two different plants,
 so "drawing → extraction → twin → live values" had never been shown on one plant. The plan called for extracting a
@@ -1990,7 +2202,7 @@ server's live points.
   (`scripts/score_te_roundtrip.py`): matched by position, compared after dropping case and separators.
 - `scripts/te_model_diff.py` lists what a reviewer would correct against the verified model; `scripts/te_live_check.py`
   matches the extracted tags to the replay server's points and reads them twice.
-- Midway, the topology check (entry 39) moved the purge stream and its three tags from the compressor to the
+- Midway, the topology check (entry 42) moved the purge stream and its three tags from the compressor to the
   separator. Sheet 102 was regenerated with the purge leaving the separator, the 27 runs made on the old sheet 102
   were set aside by image checksum, and sheet 102 was re-run under every label. Sheets
   101 and 103 came out byte-identical, so their runs stood.
@@ -2035,107 +2247,79 @@ style, label them "not a drawing of record", and walk them down under your manag
 relies on them. Use the generated sheets and their keys to measure your extraction method on your own style before
 you trust it on your scans. And never accept an I/O binding because the value moves: loop-check it.
 
-## 40. Count what the bands detect, and make lost data an alarm
+---
 
-**2026-10-13.** Three gaps a reviewer would point at first. The fault demo showed one easy fault and called the
-bands an early warning. When the replay stopped, every value read UNKNOWN while the header still said "Alarms: 0".
-And the header counted tags in alarm, not alarms. A fourth: at 390 px the screens were a 1600 px control room you
-scroll around in.
+## 45. Start from the data: assess both datasets first, then make every correction travel
 
-**How often do the bands detect a fault?** I fetched the rest of the Braatz set (44 files; every one is
-byte-identical to the Braatz group's own archive at MIT, which I checked before recording the checksums) and wrote
-the rule down before scoring any fault file: the plant is flagged when any of the 52 channels is outside its band,
-and a fault counts as detected at the first post-onset sample that starts 3 flagged samples in a row (9 minutes).
-Nothing was tuned on fault data; the bands are the shipped ones (K = 6). False alarms were measured on normal
-running the bands never fitted on: the separate normal training run and the fault-free first 8 hours of all 21
-fault runs, 193 plant hours in all.
+**What:** a written Stage 0 for each dataset (where the data came from, what is checked, what is inferred, how sure
+we are per element class), a machine-readable list of every stage after it, and an orchestrator that shows which
+outputs are stale after a correction and rebuilds them.
 
-| | Shipped bands | PCA T² baseline |
-|---|---|---|
-| Faults detected | **17 of 21** | 19 of 21, of which 3 are probably chance (below) |
-| Median delay, detected faults | 48 min | 84 min |
-| False alarms, held-out normal data | **0 in 193 h** (95% upper bound about 0.37 a day) | 5 in 216 h, 1.04% of samples flagged |
+**How:**
+- [DATA_LINEAGE.md](DATA_LINEAGE.md) lays out Tennessee Eastman and OPEN100 as staged pipelines: input, treatment,
+  output, confidence carried forward, and who or what checked it. The numbers come from files already in the repo:
+  37 TE tags checked against the simulator source (36 confirmed, 1 corrected), units and streams not yet checked on
+  this branch, OPEN100 review load 17.8 per 100 on sealed drawings, and 2,886 twin items, all unverified.
+- [`pipeline/stages.json`](../pipeline/stages.json) lists the 13 stages with their real scripts, inputs, outputs,
+  prerequisites and the provenance fields each output carries. `scripts/pipeline.py` hashes each stage's inputs,
+  code and config into a lock file when it builds the stage; `status` marks a stage stale when any of them changed;
+  `rebuild --from <stage>` re-runs it and everything downstream; `confidence` rolls the per-element fields
+  (source check, review status, risk tier, tag status) up per dataset.
+- `scripts/provenance.py` reads one item's provenance from fields the models already carry. The seed exports now
+  end each Ignition tag's documentation and each PI attribute's description with
+  `source check: … | ops review: …`, the way the extracted twin's exports already did. Two new generators are
+  labelled proof of concept in their own files: the overview mimic as layout data, and 3D scene data with
+  inferred LOTO candidates.
+- `scripts/test_pipeline.py` copies the repo to a temp folder, moves FI-110 from K-101 to V-101 with
+  `apply_review.py` (one part of the purge correction the topology check makes), rebuilds from the model, and checks the move in
+  the Ignition tags, the PI sheet, the review sheet, the mimic layout and the scene data. It also checks that no
+  script changed and that a second rebuild writes identical bytes.
 
-The bands miss faults 3, 9 and 15, which I had named as expected misses before scoring (the literature widely
-reports them as near-invisible in these variables), and 19, which PCA misses too. Slow faults are late: fault 21 is
-flagged after 26.5 hours. PCA T² is my own reimplementation (numpy, parallel analysis, F threshold), not a
-literature number; I couldn't verify a published table's exact values from a primary source, so none is quoted.
-Its "detections" of faults 3, 4 and 15 come after 18 to 34 hours with 2–8% of samples flagged, which is close to
-its own false-alarm rate, so I count them as chance. On fault 4 the bands are clearly better (6 minutes, through
-TI-109). Details: [EVALUATION.md section 4b](EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults).
-The first tags to leave their band are reported per fault by tag. They don't depend on which unit a tag belongs
-to, so the topology correction in entry 39 doesn't change them.
+**What the test found:** the overview mimic picked its readings from a hard-coded list per unit. With FI-110 moved
+in the model, the reading's tag path followed the model (`TE_Plant/V-101/FI-110`) but the reading was still drawn
+beside the compressor. The topology branch had to edit that list by hand to move the purge. The fix is small: the
+list still chooses *which* readings the overview shows, and the model decides *where* each one is drawn. With the
+old placement put back, the propagation check fails on exactly that reading.
 
-**Lost data is now an alarm, of its own kind.** Two expression tags count the fed values that are not Good, one
-per data connection (52 replay values, 24 demo points). Each carries a "Data source lost" alarm. ISA-18.2 treats
-this as a diagnostic, not a process alarm: it says the operator has lost sight of the process. So the header now
-has three boxes: "Process alarms: N", a data-source box that turns dark slate and reads DATA SOURCE LOST, and
-"Outside band". Process alarms now count each configured alarm once, so PI-107's two alarms count as two, which is
-what the alarm table lists. Two choices here are mine alone and need operations: the diagnostic priority (Medium)
-and the dark slate colour. Neither the setpoints nor any process alarm changed.
+**Why:**
+- **Changes at the start have to be cheap.** The review day will correct things in the models. If each correction
+  also needs hand edits in four generators, corrections stop happening, or they happen in one output and not the
+  others. A stale flag after the correction and one rebuild command make the cheap path the right one.
+- **Confidence has to be visible before results are.** It is easy to read a polished screen as a validated one.
+  Every output inherits its inputs' confidence, and the replay, the mimic, the 3D data and the LOTO candidates say
+  "proof of concept" in their own files. They are there to iterate on.
+- **Who checked matters as much as what was checked.** The rollup counts a review as an operations review only
+  when the reviewer string names an operations role. A confirmation by anyone else, including me, keeps its label
+  in every output. This trusts the string; nothing authenticates it.
+- **Rejected:** a general workflow engine (more machinery than 13 stages need), timestamps instead of hashes (a
+  checkout changes them; Windows and Linux line endings are normalised before hashing instead), and rewriting the
+  generators to emit provenance (a one-line passthrough where a format has a free-text field was enough).
 
-**"Not connected" and UNKNOWN now look the same everywhere.** Before, the same no-source agitator read NOT
-CONNECTED in its table row and UNKNOWN in its label beside the reactor drawing, and a mapped drawing value with no data looked like a
-normal white label. Now there are two states with one look each: *not connected* (no data source configured;
-muted italic on white, dashed border) and *UNKNOWN* (a source is configured but nothing Good is arriving; muted on
-grey). The rationale is ISA-101's intent, stated rather than quoted: one documented style in which an indication
-means the same thing on every screen, quality never mistaken for a value, and alarm colours kept for alarms.
-Exception, recorded in a test: two schematic labels with alarms keep their alarm colour binding, because a label has
-one background.
+**What it does not do:**
+- Two stages need the TE replay download (the normal bands and the gateway kit). They show `NEVER BUILT HERE` in
+  this checkout: their committed outputs predate the lock, and I have not rebuilt them through the orchestrator.
+- Extraction, scoring and the twin build are "recorded" stages. They need model calls or run records that are not
+  committed, so the lock accepts their committed outputs as the record. It does not re-run them.
+- "Fresh" means rebuilt from current inputs, not correct.
 
-**A narrow overview.** `/m` is a 390 px view: process alarm count, data source and band count first, then the active
-alarm list, then the six units stacked in process order with the same key values as the overview, coloured the
-same way. The control-room views are unchanged in layout and still 1600 px; the tiles link to them.
+**Who did what:** Claude (Claude Code) wrote the manifest, the orchestrator, the tests, the docs and this entry
+from my direction. No second model reviewed it, and I have not walked the lineage myself yet; that walk is the
+review day ([review-kit/FOLLOW_THE_DATA.md](review-kit/FOLLOW_THE_DATA.md)). The source-only suite passed 16/16 on
+Windows with two symlink sub-cases skipped by the platform. The full suite was not run in this checkout because the
+TE replay files are not downloaded here.
 
-**Merged first.** Midway, the topology check (entry 39) moved the purge and its tags from the compressor to the
-separator. I merged that branch before the gateway run and regenerated the provider, project and drawings instead of
-merging generated files. The auto-merged provider would have been wrong: its new data-source expression still
-pointed at the purge tags' old compressor paths.
+**Lesson:** a pipeline that regenerates outputs from one model can still hide hand-kept copies of that model. Here
+it was a per-unit list in a screen generator. The way to find them is to change one fact upstream and check every
+output for it, rather than read the generators.
 
-**What the gateway found.** The first import held both data-source alarms active with a count of 0. Ignition's
-AboveValue mode is inclusive (the 3,000 kPa shutdown alarm firing at exactly 3,000.0 had already shown that, and I
-didn't apply it), so a setpoint of 0 meant "0 or more". The setpoint is now 0.5, with a test. Walking the screens
-with the replay stopped showed every band indicator drawing its pointer at the scale minimum, which reads as a real
-low value; it is now hidden without Good data. And the Alarms page still said "the only alarms are the published
-ones", which stopped being true. All three were fixed before the final run of commit `4a00c35`.
-
-| Check | Result |
-|---|---|
-| V1–V8 | PASS: 1,256 tag nodes and 24 views, 0 differences; 1,448 bindings; 76 Good, 335 Bad as designed; writes refused; PI-107 alarm 0.5 s after crossing |
-| Routes and navigation | PASS: 24/24 load and reload; 284/284 clicks, Back after each, 0 console errors |
-| Replay stopped / restarted | PASS: diagnostic fires, header DATA SOURCE LOST, 52 UNKNOWN; clears within about 25 s of restart |
-| Demo points stopped / restarted | PASS: second diagnostic fires and clears |
-| Header vs alarm table | 40/40 samples through the fault, 29/30 through a loss and recovery. The miss, and one capture, fell within about 2 s of an alarm changing state: the header polls every second, the table refreshes every two |
-| Process alarm active when data is lost | Observed: PI-107's alarm stays active on its last value while PI-107 reads UNKNOWN. Ignition's default; whether stale data should hold, clear or suppress a process alarm is an operations decision |
-| `/m` at 390 × 844 | PASS: no horizontal scroll, alarms first, honest UNKNOWN and DATA SOURCE LOST |
-
-The `native-*.png` screenshots now show this build; entry 38's originals are in the history at `f5c270e`.
-Receipt: [`native-current-20261013-alarms.json`](../out/ignition/gateway/receipts/native-current-20261013-alarms.json).
-Afterwards I removed the containers, the volume, the network, both images and the build cache, and checked that
-Docker held nothing. The rollback is in the receipt.
-
-**What went wrong on the way.** Git Bash rewrote a route argument into a Windows path again, the same trap as entry
-38: my alarm-count sampler asked the gateway for a project called `PIDTwinC:` for six minutes before I read the
-gateway log. My scratch orchestration also had two path bugs that cost one stage-1 rerun. None reached the
-committed tools; the sampler is now a `count` mode of the browser harness, added after the run.
-
-**Not established:** real phones (headless Chromium only), operator usability, operations approval of the diagnostic
-priority and of process-alarm behaviour on stale data, and anything beyond one simulated operating mode for the
-fault evaluation.
-
-**Lesson:** a detection claim needs a denominator and a false-alarm rate measured on data the method never saw,
-and both numbers belong in the same sentence. The single fault was true and misleading. On the alarm side, a
-quiet header is a claim too: "Alarms: 0" over a screen of UNKNOWN said nothing was wrong, when the truth was that
-nothing could be known.
-
-**At your plant:** score the band, or any detector, on every recorded upset you have, with the rule fixed first,
-and measure false alarms over weeks of normal running before trusting the colour. Treat loss of a data source as a
-diagnostic alarm with an owner and a response, separate from process alarms, and decide with operations what a
-process alarm should do while its value is stale.
+**At your plant:** write each source's Stage 0 before building anything: who owns it, what checks it, what is
+inferred, and how sure you are per element class. Then make sure every correction goes into the source, not an
+output, and that one command shows what a correction left stale. When a reviewer signs off, record their role with
+the decision, so a document-control check never reads as an operations approval.
 
 ---
 
-## 39. More drawings with tag text, five runs per model, and a kit for the first timed review
+## 46. More drawings with tag text, five runs per model, and a kit for the first timed review
 
 **2026-10-13.** Reviewers of the results could point at four gaps. Holdout A is six drawings. Tag reading had never
 been scored, because the OPEN100 keys carry no text. Claude against GPT was called a tie or a win from single runs.
@@ -2211,74 +2395,107 @@ replaces the most important assumption in the cost case.
 
 ---
 
-## 40. Check the PI files against what AVEVA publishes, and get ready for a first human review
+## 47. Count what the bands detect, and make lost data an alarm
 
-**2026-10-13:** three gaps a reviewer would point at first. The PI AF files have never been in a PI system. The
-3D tour's text has never been checked against a source. And no one with operations knowledge has looked at
-anything. None of the three is closed. Each is now smaller, and what remains open is written down.
+**2026-10-13.** Three gaps a reviewer would point at first. The fault demo showed one easy fault and called the
+bands an early warning. When the replay stopped, every value read UNKNOWN while the header still said "Alarms: 0".
+And the header counted tags in alarm, not alarms. A fourth: at 390 px the screens were a 1600 px control room you
+scroll around in.
 
-**PI without a licence.** The free route is gone. The PI Developers Club, which included a personal development
-PI System and a 45-day free trial, was retired on January 1, 2026. What remains is partner agreements, paid Flex
-test credits, or a university's academic licence ([PI_MAPPING.md](PI_MAPPING.md) lists the terms and sources;
-nothing was signed up for). So the check stays offline, against what AVEVA itself publishes: three course
-workbooks and an Apache-2.0 AF export in AVEVA's own SDK samples. The sheet headers are mostly in screenshots, so
-they were read by OCR and checked by eye. The results, now in `data/pi_builder_reference.json` with a page for
-each entry:
-- `AttributeType` is the documented column. `AttributeValueType`, which the legacy staging CSV still writes, appears
-  nowhere. The candidate CSV's one correction was right.
-- `%`, `kW` and `m3/h` match the vendor export's abbreviations exactly. `degC` does not: the vendor writes `°C`.
-  `kg/h`, `kPa g`, `kscmh` and `mol%` are not in the sample, which covers only 33 UOM classes. Most likely
-  `kscmh` (a TE unit) and the gauge pressure need custom UOMs at a site.
-- The TE sheet names six element templates it never defines. The extracted twin's attributes have no units at all,
-  while the vendor workbook says "Always assign a unit of measurement!"
-- The AF XML schema types `Type`, `DefaultUOM` and `ConfigString` as plain strings. Adding an AF XML export and
-  validating it against the schema would not have caught any of the above.
+**How often do the bands detect a fault?** I fetched the rest of the Braatz set (44 files; every one is
+byte-identical to the Braatz group's own archive at MIT, which I checked before recording the checksums) and wrote
+the rule down before scoring any fault file: the plant is flagged when any of the 52 channels is outside its band,
+and a fault counts as detected at the first post-onset sample that starts 3 flagged samples in a row (9 minutes).
+Nothing was tuned on fault data; the bands are the shipped ones (K = 6). False alarms were measured on normal
+running the bands never fitted on: the separate normal training run and the fault-free first 8 hours of all 21
+fault runs, 193 plant hours in all.
 
-`scripts/check_pi_export.py` reports those findings with their evidence and fails only on internal
-inconsistencies. Its test plants each error class to show the check catches it.
+| | Shipped bands | PCA T² baseline |
+|---|---|---|
+| Faults detected | **17 of 21** | 19 of 21, of which 3 are probably chance (below) |
+| Median delay, detected faults | 48 min | 84 min |
+| False alarms, held-out normal data | **0 in 193 h** (95% upper bound about 0.37 a day) | 5 in 216 h, 1.04% of samples flagged |
 
-**The 3D tour's text.** The purpose cards were checked against Ricker's revised simulator code and against open
-papers that restate Downs and Vogel. That check found the same purge error as the TE topology work, which used
-the original Fortran: the compressor card said the purge leaves at the compressor, and both codes draw it from the
-separator. The cards now take their sentences from the verified TE file. The public-incident citations were read
-against the CSB and OSHA pages. Seven needed a correction or a missing detail, and the six EPA RMP links did not
-resolve to their records. The biggest: Tesoro Anacortes ruptured during a
-maintenance stream switch, not "during a restart". The Williams Geismar link returned 404. And the Bayer summary said more than its
-cited page does. The fixes wait as a patch for the clean merge ([drafts/3d-tour/REVIEW_NOTES.md](../drafts/3d-tour/REVIEW_NOTES.md)).
-An OCR read-back of the five stills found one real legibility problem. In the tour's typeface, 1, I and l look
-alike. Every tag ID the whole-frame read missed was one of those confusions: `Pl-107`, `Tl-109`, `E-10I`.
+The bands miss faults 3, 9 and 15, which I had named as expected misses before scoring (the literature widely
+reports them as near-invisible in these variables), and 19, which PCA misses too. Slow faults are late: fault 21 is
+flagged after 26.5 hours. PCA T² is my own reimplementation (numpy, parallel analysis, F threshold), not a
+literature number; I couldn't verify a published table's exact values from a primary source, so none is quoted.
+Its "detections" of faults 3, 4 and 15 come after 18 to 34 hours with 2–8% of samples flagged, which is close to
+its own false-alarm rate, so I count them as chance. On fault 4 the bands are clearly better (6 minutes, through
+TI-109). Details: [EVALUATION.md section 4b](EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults).
+The first tags to leave their band are reported per fault by tag. They don't depend on which unit a tag belongs
+to, so the topology correction in entry 42 doesn't change them.
 
-**The first human review.** [docs/review-kit/](review-kit/README.md) is a one-sitting kit with two tracks that
-must not mix. Anyone can check that text matches the drawing, that boxes sit on symbols, and that labels can be
-read. Only an operations person can say whether a line, an alarm limit, an isolation point or a hazard is right.
-Track A findings go in as notes or identifier-text-only corrections, never as `confirm`, so the record cannot
-later pass for an operations review. The timing log uses the review-effort protocol's fields, but one sitting is
-a pilot, not the study.
+**Lost data is now an alarm, of its own kind.** Two expression tags count the fed values that are not Good, one
+per data connection (52 replay values, 24 demo points). Each carries a "Data source lost" alarm. ISA-18.2 treats
+this as a diagnostic, not a process alarm: it says the operator has lost sight of the process. So the header now
+has three boxes: "Process alarms: N", a data-source box that turns dark slate and reads DATA SOURCE LOST, and
+"Outside band". Process alarms now count each configured alarm once, so PI-107's two alarms count as two, which is
+what the alarm table lists. Two choices here are mine alone and need operations: the diagnostic priority (Medium)
+and the dark slate colour. Neither the setpoints nor any process alarm changed.
 
-**Follow-up, same day: fix the exporter, not just the report.** The PI files are now PI Builder sheet schema v2:
-- `AttributeType` replaces `AttributeValueType`.
-- `°C` replaces `degC`.
-- The four units with no vendor evidence are written to `custom_uoms.csv` with a definition, never assumed. Gauge
-  pressure and standard volume flow each get their own class with no conversion, because converting either needs a
-  local reference: the atmosphere, or the standard conditions.
-- The six TE element templates are defined at the top of the sheet.
-- Attribute descriptions move to their own file. A full OCR pass over the workbooks found no attribute description
-  header, so writing one would have been a guess.
-- Placeholder rows are left unselected, so PI Builder won't publish them.
+**"Not connected" and UNKNOWN now look the same everywhere.** Before, the same no-source agitator read NOT
+CONNECTED in its table row and UNKNOWN in its label beside the reactor drawing, and a mapped drawing value with no data looked like a
+normal white label. Now there are two states with one look each: *not connected* (no data source configured;
+muted italic on white, dashed border) and *UNKNOWN* (a source is configured but nothing Good is arriving; muted on
+grey). The rationale is ISA-101's intent, stated rather than quoted: one documented style in which an indication
+means the same thing on every screen, quality never mistaken for a value, and alarm colours kept for alarms.
+Exception, recorded in a test: two schematic labels with alarms keep their alarm colour binding, because a label has
+one background.
 
-`IMPORT_STEPS.txt` gives the publish order. The offline check now passes the TE sheet with a single instruction
-(create or map four units) and flags any selected placeholder as an error. It's still not import-tested; every
-generated file says so.
+**A narrow overview.** `/m` is a 390 px view: process alarm count, data source and band count first, then the active
+alarm list, then the six units stacked in process order with the same key values as the overview, coloured the
+same way. The control-room views are unchanged in layout and still 1600 px; the tiles link to them.
 
-**Lesson:** "we can't test it without a licence" was half true. The import can't be tested, but the vendor's own
-published material settled the header question and found a unit spelling no test of ours could have flagged.
+**Merged first.** Midway, the topology check (entry 42) moved the purge and its tags from the compressor to the
+separator. I merged that branch before the gateway run and regenerated the provider, project and drawings instead of
+merging generated files. The auto-merged provider would have been wrong: its new data-source expression still
+pointed at the purge tags' old compressor paths.
 
-**At your plant:** run `check_pi_export.py`, then pull your own UOM classes out of PI Builder before mapping
-anything. The vendor sample is a subset; your UOM database is the authority.
+**What the gateway found.** The first import held both data-source alarms active with a count of 0. Ignition's
+AboveValue mode is inclusive (the 3,000 kPa shutdown alarm firing at exactly 3,000.0 had already shown that, and I
+didn't apply it), so a setpoint of 0 meant "0 or more". The setpoint is now 0.5, with a test. Walking the screens
+with the replay stopped showed every band indicator drawing its pointer at the scale minimum, which reads as a real
+low value; it is now hidden without Good data. And the Alarms page still said "the only alarms are the published
+ones", which stopped being true. All three were fixed before the final run of commit `4a00c35`.
+
+| Check | Result |
+|---|---|
+| V1–V8 | PASS: 1,256 tag nodes and 24 views, 0 differences; 1,448 bindings; 76 Good, 335 Bad as designed; writes refused; PI-107 alarm 0.5 s after crossing |
+| Routes and navigation | PASS: 24/24 load and reload; 284/284 clicks, Back after each, 0 console errors |
+| Replay stopped / restarted | PASS: diagnostic fires, header DATA SOURCE LOST, 52 UNKNOWN; clears within about 25 s of restart |
+| Demo points stopped / restarted | PASS: second diagnostic fires and clears |
+| Header vs alarm table | 40/40 samples through the fault, 29/30 through a loss and recovery. The miss, and one capture, fell within about 2 s of an alarm changing state: the header polls every second, the table refreshes every two |
+| Process alarm active when data is lost | Observed: PI-107's alarm stays active on its last value while PI-107 reads UNKNOWN. Ignition's default; whether stale data should hold, clear or suppress a process alarm is an operations decision |
+| `/m` at 390 × 844 | PASS: no horizontal scroll, alarms first, honest UNKNOWN and DATA SOURCE LOST |
+
+The `native-*.png` screenshots now show this build; entry 38's originals are in the history at `f5c270e`.
+Receipt: [`native-current-20261013-alarms.json`](../out/ignition/gateway/receipts/native-current-20261013-alarms.json).
+Afterwards I removed the containers, the volume, the network, both images and the build cache, and checked that
+Docker held nothing. The rollback is in the receipt.
+
+**What went wrong on the way.** Git Bash rewrote a route argument into a Windows path again, the same trap as entry
+38: my alarm-count sampler asked the gateway for a project called `PIDTwinC:` for six minutes before I read the
+gateway log. My scratch orchestration also had two path bugs that cost one stage-1 rerun. None reached the
+committed tools; the sampler is now a `count` mode of the browser harness, added after the run.
+
+**Not established:** real phones (headless Chromium only), operator usability, operations approval of the diagnostic
+priority and of process-alarm behaviour on stale data, and anything beyond one simulated operating mode for the
+fault evaluation.
+
+**Lesson:** a detection claim needs a denominator and a false-alarm rate measured on data the method never saw,
+and both numbers belong in the same sentence. The single fault was true and misleading. On the alarm side, a
+quiet header is a claim too: "Alarms: 0" over a screen of UNKNOWN said nothing was wrong, when the truth was that
+nothing could be known.
+
+**At your plant:** score the band, or any detector, on every recorded upset you have, with the rule fixed first,
+and measure false alarms over weeks of normal running before trusting the colour. Treat loss of a data source as a
+diagnostic alarm with an owner and a response, separate from process alarms, and decide with operations what a
+process alarm should do while its value is stale.
 
 ---
 
-## 39. Give the drawings-only track the deliverables it can support
+## 48. Give the drawings-only track the deliverables it can support
 
 **What:** the OPEN100 track (12 real drawings, no process data) gets flow direction read from the drawings, the 12
 sheets stitched into one plant, a process mimic, a 3D orientation tour and a LOTO isolation view. All of it is
@@ -2332,3 +2549,71 @@ mimic, the tour and the isolation view now, and add values when the data arrives
 your sheets. Keep arrows only where the drawing shows them. Treat the isolation list as a reviewer's checklist for
 your energy-control procedure (OSHA 1910.147), never as the procedure: a valve the extraction missed is missing from
 the list too.
+
+---
+
+## 49. Bring eight lines of work onto one branch, and make every output a stage
+
+**2026-10-13.** Seven branches had been built side by side from the same starting commit, each finished and tested on
+its own: the data-lineage spine (entry 45), the topology check (42), the generated TE P&ID (44),
+the fault evaluation with the data-loss alarms (47), round 5 (46), the PI and review-kit work (43)
+and the OPEN100 structural deliverables (48). The 3D tour (39-41) lived on an unpublished local
+branch whose history could not be published. This entry is the merge.
+
+**How:**
+- **Real merges, in dependency order:** lineage first (everything else is a stage in it), then the topology check,
+  the generated P&ID and the fault work (both already contained the topology check), round 5, the PI and review-kit
+  work, and the OPEN100 structural branch last. No branch was rebased.
+- **Generated files were never hand-merged.** Where a conflict was in an output (the TE tag export, the PI sheets,
+  the reconciliation file), one side was taken and the file rebuilt with `pipeline.py rebuild`. Hand merges were
+  only in source and documents.
+- **Every branch's outputs became stages** in `pipeline/stages.json`: 39 stages over three datasets (DEXPI joined
+  TE and OPEN100). Recorded stages (model calls, downloads) are accepted as the record, not re-run. The
+  orchestrator learned two things on the way: a stage can need a Python package (`requires_modules`) or a local
+  program named in an environment variable (`requires_env`, used as `$BLENDER_EXE` in the command), so no machine
+  path is written into the manifest. 37 of 39 are fresh; the two that need a running Ignition gateway are listed as
+  such.
+- **The 3D tour came in without its history:** only its current source files were copied from the local branch's
+  last commit, the review patch was applied to that copy, two files were replaced by scrubbed versions, and the
+  public-hygiene check ran with the private terms supplied from the environment, never written down. Details:
+  [drafts/3d-tour/REVIEW_NOTES.md](../drafts/3d-tour/REVIEW_NOTES.md), section 6.
+
+**What the merge itself found** (none of it was a text conflict):
+- **A demonstration became a fact.** The lineage test proved propagation by moving FI-110 from K-101 to V-101 on a
+  temp copy. The topology check had made that move real, so the test's "before" control failed. The fixture now
+  moves FI-105 instead, and says it is a fixture.
+- **The same feature twice, under two names.** The P&ID branch and round 5 both added a setting that points the
+  extraction scripts at another folder of sheets: `PID_SHEETS_DIR` and `PID_DATA_DIR`. Every script now reads one
+  setting and accepts both names.
+- **A hash that depended on the operating system.** The generated P&ID's manifest hashed raw bytes, so a Windows
+  checkout (CRLF) and a Linux one disagreed about the same files. Text is now hashed with line endings normalised,
+  as the orchestrator already did.
+- **Two formats meeting.** The PI sheet v2 moved attribute descriptions out of the sheet, and the lineage branch had
+  added each item's confidence to those descriptions. The merged exporter keeps both, the propagation test reads the
+  v2 layout, and the 3D render verifier compares descriptions with the confidence suffix removed.
+- **The accepted gateway build is still the accepted build.** Rebuilt from the merged source, the project ZIP is
+  byte-identical to the one natively accepted (`8982ccd2…`), so the acceptance in entry 47 applies to it.
+- **The tour's new font measured smaller.** Atkinson Hyperlegible at the old sizes drew labels of 14.9-16.6 px, under
+  the 18 px minimum; sizes were scaled by 1.25 and the minimum kept. Rendering all twelve stills (not only the five
+  that are committed) found one more defect: a stripper tag sat in the plane of a platform deck, hidden from every
+  camera. Both tours share the renderer, so the OPEN100 stills were re-rendered too.
+
+**Numbers, reconciled:** the holdout-A review load is now quoted from the round-5 replicates (GPT 20.1, Claude 29.8,
+with run and drawing intervals). The round-2 figures (17.8 and 32.4 with the method, 48.8 for GPT alone) stay where
+they are, labelled as the earlier single runs, because the decisions of round 2 were taken on them.
+
+**Why:**
+- Branches built in parallel each pass their own tests. What breaks at the merge is an assumption one branch made
+  about another: that a correction had not happened yet, that a file format had not changed, that nobody else had
+  added the same setting.
+- Rebuilding instead of hand-merging outputs is what makes those visible. A hand-merged CSV would have hidden the
+  description that moved columns.
+
+**Lesson:** after a merge, rebuild from the source and read the test failures as findings about the merge, not as
+noise. Most of what broke here was in tests, hashes and checks rather than product logic, and each would have
+silently weakened a check if it had been "fixed" by loosening it.
+
+**At your plant:** when pilot workstreams converge (drawing extraction, historian mapping, screens, a PI structure),
+merge them through the same lineage: correct the source, rebuild everything downstream, never edit an output to make
+two of them agree, and tie acceptance evidence to file hashes so you can tell whether it still applies after the
+merge.

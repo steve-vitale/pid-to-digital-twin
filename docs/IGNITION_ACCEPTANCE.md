@@ -4,12 +4,12 @@ This page covers the current Perspective project (24 views: the 23 control-room 
 overview) and its tag provider: which files belong together, what had to survive the import, how it was tested in a
 real gateway, and what that test doesn't cover. The full stories, including the bugs each gateway run found, are
 [journal entry 38](JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)
-(first import) and [journal entry 40](JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm) (this run).
+(first import) and [journal entry 47](JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm) (this run).
 
 ## Result
 
 **Passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway, on commit `4a00c35`.** This build includes the
-topology correction ([journal entry 39](JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source): the
+topology correction ([journal entry 42](JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source): the
 purge and its tags on the separator), the data-source diagnostic alarms, the active-alarm count and the narrow
 overview. The 390 px width is now a real narrow layout at `/m`; the control-room screens are still fixed 1600 px
 layouts that scroll on a phone.
@@ -185,7 +185,7 @@ source reconciliation, every tag binding, all routes and navigation targets, the
 FT 1401 rules, and synthetic quality decisions. It parses every exported script transform under Perspective's own
 function signature, so the parse bug the gateway found now fails offline too. Negative controls reject a missing analyzer channel, an
 omitted FT 1401 binding, a fabricated callout PV or address, missing SC-212 markers, a missing value binding,
-false-good placeholders and bad fed data. Since journal entry 40 it also checks that the header counts each configured
+false-good placeholders and bad fed data. Since journal entry 47 it also checks that the header counts each configured
 alarm once, that each data-source diagnostic counts exactly the fed values of its connection with a 0.5 setpoint,
 that "not connected" and UNKNOWN each have one style on every screen (two alarmed schematic labels keep their
 alarm colour instead), that band pointers hide without Good data, and

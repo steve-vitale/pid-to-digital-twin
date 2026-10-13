@@ -19,7 +19,7 @@ jobs:
       # Second source for the topology check (revised TE code, Ricker's archive), pinned by SHA-256; report only.
       - name: Stage the revised TE code
         run: python scripts/verify_te_topology.py
-      # The committed ZIP is a historical baseline; build current artifacts locally.
+      # Rebuild the gateway artifacts from source (the build reproduces the committed project ZIP byte for byte).
       - name: Generate current offline gateway artifacts
         run: python scripts/ignition/build_gateway.py --write-only
       # All tests run offline after setup; OPEN100 drawings/keys are committed.

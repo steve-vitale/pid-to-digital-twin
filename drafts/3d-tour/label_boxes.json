@@ -1,0 +1,4954 @@
+{
+ "resolution": [
+  1920,
+  1080
+ ],
+ "label_layout": "declutter",
+ "em_px_targets_1080": {
+  "unit": 37.5,
+  "tag": 31.25,
+  "boundary": 31.25,
+  "loto": 31.25
+ },
+ "overlay_em_px_1080": {
+  "caption": 30.0,
+  "badge": 27.5,
+  "card": 27.5,
+  "legend": 27.5
+ },
+ "stills": [
+  {
+   "name": "00_overview_normal",
+   "image": "00_overview_normal.png",
+   "visible": [
+    "unit:U-100",
+    "unit:R-101",
+    "unit:E-101",
+    "unit:V-101",
+    "unit:K-101",
+    "unit:C-101",
+    "overlay:badge",
+    "overlay:caption"
+   ],
+   "focus": null,
+   "view_choice": null,
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      450.9221076965332,
+      326.26697301864624,
+      742.2887420654297,
+      353.9801359176636
+     ],
+     "plate_box": [
+      429.24593925476074,
+      314.5499897003174,
+      764.8762893676758,
+      366.1983275413513
+     ],
+     "in_front": true,
+     "anchor_px": [
+      596.6054534912109,
+      379.9800753593445
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      603.6601066589355,
+      242.2692632675171,
+      811.7887115478516,
+      265.0725030899048
+     ],
+     "plate_box": [
+      582.7730941772461,
+      230.65759420394897,
+      833.3084678649902,
+      277.4021887779236
+     ],
+     "in_front": true,
+     "anchor_px": [
+      707.724552154541,
+      291.07250690460205
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      825.3123092651367,
+      359.7744154930115,
+      1198.2025909423828,
+      382.5775909423828
+     ],
+     "plate_box": [
+      804.1474342346191,
+      348.0154609680176,
+      1219.2376327514648,
+      394.7599267959595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      948.1556510925293,
+      403.56667041778564
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023964272812008858,
+      "text": 1.0,
+      "ratio": 14.196043036463433,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      804.2638206481934,
+      452.2779893875122,
+      1241.3460159301758,
+      481.5398383140564
+     ],
+     "plate_box": [
+      781.8351745605469,
+      440.40303468704224,
+      1263.6172485351562,
+      493.59806299209595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1022.8049468994141,
+      507.53971338272095
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      959.3943786621094,
+      541.6430246829987,
+      1351.465072631836,
+      569.3562519550323
+     ],
+     "plate_box": [
+      937.0804595947266,
+      529.6560287475586,
+      1373.2887268066406,
+      581.3044631481171
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1155.4297256469727,
+      479.81502771377563
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      1171.0715103149414,
+      250.20214319229126,
+      1508.0765533447266,
+      279.06848430633545
+     ],
+     "plate_box": [
+      1148.261833190918,
+      238.58049631118774,
+      1529.934425354004,
+      291.38066053390503
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1339.573860168457,
+      305.068359375
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6933975219727,
+      33.99996042251587,
+      1886.0022354125977,
+      54.78163003921509
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Overview: Tennessee Eastman Challenge Process\nA published benchmark process standing in for a plant; the tour follows the material in flow order.",
+     "lines": 2,
+     "text_box": [
+      33.997331857681274,
+      992.0907443761826,
+      1162.0594024658203,
+      1046.000284999609
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.0896289348602,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {},
+   "focus_rects": [],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "unit:R-101": 0.0,
+    "unit:E-101": 0.0,
+    "unit:V-101": 0.0,
+    "unit:K-101": 0.0,
+    "unit:C-101": 0.0
+   }
+  },
+  {
+   "name": "01_u-100_normal",
+   "image": "01_u-100_normal.png",
+   "visible": [
+    "unit:U-100",
+    "tag:FV-201",
+    "tag:FI-101",
+    "tag:FI-102",
+    "tag:FI-103",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "U-100",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      886.501350402832,
+      385.0947690010071,
+      1177.8675842285156,
+      412.80773878097534
+     ],
+     "plate_box": [
+      864.2788696289062,
+      373.30394983291626,
+      1199.9090194702148,
+      424.95222330093384
+     ],
+     "in_front": true,
+     "anchor_px": [
+      960.0,
+      464.49585914611816
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FV-201",
+     "kind": "tag",
+     "shown": true,
+     "text": "FV-201  D feed valve output",
+     "lines": 1,
+     "text_box": [
+      700.7570457458496,
+      264.640109539032,
+      1031.3261032104492,
+      288.4480834007263
+     ],
+     "plate_box": [
+      682.2859382629395,
+      254.93825912475586,
+      1049.9935913085938,
+      298.7006449699402
+     ],
+     "in_front": true,
+     "anchor_px": [
+      671.9953536987305,
+      276.54409646987915
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FV-201",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FI-101",
+     "kind": "tag",
+     "shown": true,
+     "text": "FI-101  A feed flow",
+     "lines": 1,
+     "text_box": [
+      439.89054679870605,
+      318.1234645843506,
+      663.995418548584,
+      337.8400182723999
+     ],
+     "plate_box": [
+      422.5097179412842,
+      308.3658027648926,
+      682.2294044494629,
+      348.04088830947876
+     ],
+     "in_front": true,
+     "anchor_px": [
+      551.9429969787598,
+      361.8400168418884
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FI-101",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.03166624903678894,
+      "text": 1.0,
+      "ratio": 12.857208606789285,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FI-102",
+     "kind": "tag",
+     "shown": true,
+     "text": "FI-102  D feed flow",
+     "lines": 1,
+     "text_box": [
+      723.9929008483887,
+      317.64034509658813,
+      953.4250831604004,
+      337.3568344116211
+     ],
+     "plate_box": [
+      706.3150405883789,
+      307.8830051422119,
+      971.3565444946289,
+      347.5582194328308
+     ],
+     "in_front": true,
+     "anchor_px": [
+      678.1974792480469,
+      373.05765867233276
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FI-102",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.028212079778313637,
+      "text": 1.0,
+      "ratio": 13.425036170578093,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FI-103",
+     "kind": "tag",
+     "shown": true,
+     "text": "FI-103  E feed flow",
+     "lines": 1,
+     "text_box": [
+      539.5191192626953,
+      420.7179594039917,
+      766.7270851135254,
+      440.4345774650574
+     ],
+     "plate_box": [
+      522.0340347290039,
+      410.85298776626587,
+      784.8536682128906,
+      450.5281376838684
+     ],
+     "in_front": true,
+     "anchor_px": [
+      812.8005981445312,
+      385.01694202423096
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FI-103",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.026230551302433014,
+      "text": 1.0,
+      "ratio": 13.774005068312915,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6925964355469,
+      34.00002479553223,
+      1886.0005187988281,
+      54.78201627731323
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.026037639006972313,
+      "text": 1.0,
+      "ratio": 13.808950589637845,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nA vapour header where the fresh A, D and E\nfeeds, the stripper overhead gas and the\ncompressed recycle gas mix before flowing on\nto the reactor as the reactor feed (stream 6).\nFlow control: each fresh feed has its own\ncontrol valve; everything mixes in one header.",
+     "lines": 7,
+     "text_box": [
+      33.99978160858154,
+      34.00002479553223,
+      524.3843078613281,
+      219.78203058242798
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      536.3845305389,
+      231.78207578923966
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nCSB: find and remove dead legs in piping\n(TPC Port Neches explosions, 2019).\nSource: CSB, 2019 \u00b7 prototype match",
+     "lines": 4,
+     "text_box": [
+      1447.0875549316406,
+      88.7819766998291,
+      1886.0002899169922,
+      192.4509859085083
+     ],
+     "in_front": true,
+     "plate_box": [
+      1435.0873788781466,
+      76.7820747296015,
+      1898.0,
+      204.45079147815704
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023246021941304207,
+      "text": 1.0,
+      "ratio": 14.335249508040434,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 1 of 6: U-100 Feed System\nReceives from outside the plant, C-101 and K-101; sends to R-101.",
+     "lines": 2,
+     "text_box": [
+      33.99978160858154,
+      993.1443938612938,
+      789.1142463684082,
+      1046.0003373026848
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      981.1441131830215,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "FI-101": [
+     551.9,
+     361.8
+    ],
+    "FI-102": [
+     678.2,
+     373.1
+    ],
+    "FI-103": [
+     812.8,
+     385.0
+    ],
+    "FV-201": [
+     672.0,
+     276.5
+    ]
+   },
+   "focus_rects": [
+    [
+     549.2840766906738,
+     465.79400539398193,
+     1433.2010650634766,
+     688.5465288162231
+    ],
+    [
+     531.4203643798828,
+     463.8324308395386,
+     619.8260879516602,
+     570.0176846981049
+    ],
+    [
+     675.2441024780273,
+     562.7126348018646,
+     731.5409088134766,
+     730.3494644165039
+    ],
+    [
+     1390.3437423706055,
+     558.2617235183716,
+     1458.6455154418945,
+     692.2506487369537
+    ],
+    [
+     1221.7794799804688,
+     636.5578186511993,
+     1279.013900756836,
+     825.671900510788
+    ],
+    [
+     613.311595916748,
+     478.6175608634949,
+     655.2602005004883,
+     529.18044090271
+    ],
+    [
+     738.1094741821289,
+     492.92858362197876,
+     778.8238906860352,
+     545.2561855316162
+    ],
+    [
+     870.9323501586914,
+     508.14385414123535,
+     910.1681900024414,
+     562.3619627952576
+    ],
+    [
+     1012.0431518554688,
+     524.3519496917725,
+     1050.970115661621,
+     580.6001257896423
+    ],
+    [
+     1161.8087768554688,
+     541.6532599925995,
+     1201.8590927124023,
+     600.0868999958038
+    ],
+    [
+     1322.11669921875,
+     560.1623046398163,
+     1363.3547973632812,
+     620.9551513195038
+    ]
+   ],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "tag:FV-201": 0.0,
+    "tag:FI-101": 0.0,
+    "tag:FI-102": 0.0,
+    "tag:FI-103": 0.0
+   }
+  },
+  {
+   "name": "02_r-101_normal",
+   "image": "02_r-101_normal.png",
+   "visible": [
+    "unit:R-101",
+    "tag:PI-107",
+    "tag:TI-109",
+    "tag:TV-210",
+    "tag:TI-121",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "R-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      921.9560050964355,
+      260.67795038223267,
+      1130.0843811035156,
+      283.48119020462036
+     ],
+     "plate_box": [
+      900.6698226928711,
+      249.04330015182495,
+      1151.2049102783203,
+      295.78776597976685
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1026.020393371582,
+      309.48112964630127
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:PI-107",
+     "kind": "tag",
+     "shown": true,
+     "text": "PI-107  Pressure \u00b7 high alarm 2,895 kPa g",
+     "lines": 1,
+     "text_box": [
+      390.920934677124,
+      524.2109084129333,
+      891.7448043823242,
+      549.1175365447998
+     ],
+     "plate_box": [
+      372.5543689727783,
+      514.2379188537598,
+      910.777702331543,
+      559.0976071357727
+     ],
+     "in_front": true,
+     "anchor_px": [
+      920.7263946533203,
+      536.6642546653748
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "PI-107",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-109",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-109  Temperature",
+     "lines": 1,
+     "text_box": [
+      619.3224906921387,
+      641.1025536060333,
+      870.8028602600098,
+      664.1968238353729
+     ],
+     "plate_box": [
+      601.0791206359863,
+      631.0073518753052,
+      889.5436477661133,
+      674.0565490722656
+     ],
+     "in_front": true,
+     "anchor_px": [
+      991.4397811889648,
+      652.649656534195
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-109",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TV-210",
+     "kind": "tag",
+     "shown": true,
+     "text": "TV-210  Cooling-water valve output",
+     "lines": 1,
+     "text_box": [
+      416.59071922302246,
+      734.4945394992828,
+      837.8889656066895,
+      759.4011676311493
+     ],
+     "plate_box": [
+      398.1972312927246,
+      724.3017482757568,
+      856.9779396057129,
+      769.1614365577698
+     ],
+     "in_front": true,
+     "anchor_px": [
+      866.1744117736816,
+      696.9772374629974
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TV-210",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-121",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-121  Cooling-water outlet T",
+     "lines": 1,
+     "text_box": [
+      1174.4105529785156,
+      640.7557439804077,
+      1531.369285583496,
+      665.6624042987823
+     ],
+     "plate_box": [
+      1155.2247619628906,
+      630.6609284877777,
+      1549.7331619262695,
+      675.5206167697906
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1050.197525024414,
+      653.2090902328491
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-121",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6906509399414,
+      33.99950981140137,
+      1885.9997177124023,
+      54.78182315826416
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.019467085599899292,
+      "text": 1.0,
+      "ratio": 15.115071993196189,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nThe agitated reactor where A, C, D and E react\nto the products G and H (with F as a\nbyproduct); cooling water removes the heat of\nreaction, and the products leave as vapour\nwith the unreacted gas (stream 7).\nHeat removal: cooling water carries the heat\nof reaction away; the products leave as\nvapour.",
+     "lines": 9,
+     "text_box": [
+      33.9972460269928,
+      33.99944543838501,
+      524.5515632629395,
+      274.0329694747925
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      536.5536990695529,
+      286.032968852255
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.019213898107409477,
+      "text": 1.0,
+      "ratio": 15.170363593314152,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nCSB: put the reactor's pressure limit in\noperator training (Kuraray, 2018, 21\ninjured).\nSource: CSB, 2018 \u00b7 prototype match",
+     "lines": 5,
+     "text_box": [
+      1478.7908935546875,
+      88.78171920776367,
+      1885.9993743896484,
+      219.95068788528442
+     ],
+     "in_front": true,
+     "plate_box": [
+      1466.792124700629,
+      76.7820747296015,
+      1898.0,
+      231.950783001052
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.019213898107409477,
+      "text": 1.0,
+      "ratio": 15.170363593314152,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 2 of 6: R-101 Reactor\nTakes the reactor feed from U-100; sends the reactor product to E-101.",
+     "lines": 2,
+     "text_box": [
+      33.9971387386322,
+      993.1443053483963,
+      853.1991004943848,
+      1046.0006068646908
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      981.1441131830215,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.018582988530397415,
+      "text": 1.0,
+      "ratio": 15.30991901198091,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "PI-107": [
+     920.7,
+     536.7
+    ],
+    "TI-109": [
+     991.4,
+     652.6
+    ],
+    "TI-121": [
+     1050.2,
+     653.2
+    ],
+    "TV-210": [
+     866.2,
+     697.0
+    ]
+   },
+   "focus_rects": [
+    [
+     923.4758377075195,
+     438.46798181533813,
+     1121.9118118286133,
+     762.4268281459808
+    ],
+    [
+     923.4428787231445,
+     396.0099220275879,
+     1122.0491409301758,
+     482.08482027053833
+    ],
+    [
+     923.6950492858887,
+     691.5594112873077,
+     1120.9992599487305,
+     804.2011499404907
+    ],
+    [
+     926.8731880187988,
+     728.6087536811829,
+     1118.0839920043945,
+     813.1332439184189
+    ],
+    [
+     1009.0065765380859,
+     370.5540633201599,
+     1042.639503479004,
+     403.423376083374
+    ],
+    [
+     1001.3022994995117,
+     326.43202543258667,
+     1050.2606964111328,
+     373.8814401626587
+    ],
+    [
+     953.1024169921875,
+     600.3021311759949,
+     973.2057952880859,
+     614.6723127365112
+    ],
+    [
+     949.0798759460449,
+     595.9528005123138,
+     965.5173110961914,
+     618.264970779419
+    ],
+    [
+     1086.7100143432617,
+     601.675271987915,
+     1106.9803619384766,
+     616.1138498783112
+    ],
+    [
+     1096.5276718139648,
+     597.2527492046356,
+     1110.692481994629,
+     620.062780380249
+    ]
+   ],
+   "placement_cost": {
+    "unit:R-101": 0.0,
+    "tag:PI-107": 0.0,
+    "tag:TI-109": 0.0,
+    "tag:TV-210": 0.0,
+    "tag:TI-121": 0.0
+   }
+  },
+  {
+   "name": "03_e-101_normal",
+   "image": "03_e-101_normal.png",
+   "visible": [
+    "unit:E-101",
+    "tag:TV-211",
+    "tag:TI-122",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "E-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      911.1139869689941,
+      237.318913936615,
+      1284.004898071289,
+      260.1220893859863
+     ],
+     "plate_box": [
+      889.84130859375,
+      225.71361780166626,
+      1304.9323654174805,
+      272.4580192565918
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1097.559471130371,
+      319.0040874481201
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TV-211",
+     "kind": "tag",
+     "shown": true,
+     "text": "TV-211  Cooling-water valve output",
+     "lines": 1,
+     "text_box": [
+      235.81754207611084,
+      378.5594916343689,
+      650.3604698181152,
+      403.46599102020264
+     ],
+     "plate_box": [
+      217.61291027069092,
+      368.73855113983154,
+      669.6456527709961,
+      413.5982394218445
+     ],
+     "in_front": true,
+     "anchor_px": [
+      679.3417167663574,
+      391.01264476776123
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TV-211",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-122",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-122  Condenser CW outlet T \u00b7 owner disputed",
+     "lines": 1,
+     "text_box": [
+      296.60242080688477,
+      623.9568650722504,
+      874.5905113220215,
+      648.0121922492981
+     ],
+     "plate_box": [
+      278.5042476654053,
+      613.8795268535614,
+      893.4713745117188,
+      657.8889441490173
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1028.3345031738281,
+      635.9845125675201
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-122",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.692481994629,
+      34.000282287597656,
+      1885.9999465942383,
+      54.782209396362305
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023964272812008858,
+      "text": 1.0,
+      "ratio": 14.196043036463433,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nThe condenser that cools the reactor effluent\nwith cooling water on its way to the\nseparator; the simulator has no separate\ncondenser vessel and adds this cooling to the\nseparator's energy balance.\nVapour in, cooled stream out: cooling water\ntakes the heat (the simulator counts it in the\nseparator).",
+     "lines": 9,
+     "text_box": [
+      33.9995276927948,
+      34.0002179145813,
+      520.2257537841797,
+      274.03316259384155
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      532.2684207492405,
+      286.032968852255
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nA heat exchanger weakened by hydrogen attack\nruptured at Tesoro Anacortes in 2010,\nkilling 7 (CSB).\nSource: CSB, 2010 \u00b7 prototype match",
+     "lines": 5,
+     "text_box": [
+      1380.0763320922852,
+      88.7819766998291,
+      1885.9996032714844,
+      219.95068788528442
+     ],
+     "in_front": true,
+     "plate_box": [
+      1368.0773894575734,
+      76.7820747296015,
+      1898.0,
+      231.950783001052
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 3 of 6: E-101 Product Condenser\nTakes the reactor product from R-101; sends the condensed product to V-101.",
+     "lines": 2,
+     "text_box": [
+      33.99946689605713,
+      993.1440237164497,
+      927.8841018676758,
+      1045.9999953210354
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      981.1441131830215,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "TI-122": [
+     1028.3,
+     636.0
+    ],
+    "TV-211": [
+     679.3,
+     391.0
+    ]
+   },
+   "focus_rects": [
+    [
+     837.9804039001465,
+     355.286328792572,
+     1367.4609375,
+     501.7005658149719
+    ],
+    [
+     764.5329666137695,
+     346.96521520614624,
+     885.1766967773438,
+     480.9520483016968
+    ],
+    [
+     745.2234649658203,
+     346.52239322662354,
+     837.905101776123,
+     478.07457447052
+    ],
+    [
+     1318.0713272094727,
+     367.13823795318604,
+     1397.845687866211,
+     503.4793210029602
+    ],
+    [
+     900.3909873962402,
+     441.77141189575195,
+     971.0272979736328,
+     798.0978155136108
+    ],
+    [
+     1223.5157775878906,
+     456.5378737449646,
+     1294.3338775634766,
+     841.2028241157532
+    ],
+    [
+     918.9416313171387,
+     310.08488416671753,
+     953.3493804931641,
+     367.7522921562195
+    ],
+    [
+     1253.129539489746,
+     314.992618560791,
+     1288.7376022338867,
+     377.42369413375854
+    ]
+   ],
+   "placement_cost": {
+    "unit:E-101": 0.0,
+    "tag:TV-211": 0.0,
+    "tag:TI-122": 0.0
+   }
+  },
+  {
+   "name": "04_v-101_normal",
+   "image": "04_v-101_normal.png",
+   "visible": [
+    "unit:V-101",
+    "tag:FV-206",
+    "tag:PI-113",
+    "tag:TI-111",
+    "tag:LI-112",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "V-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      728.1437873840332,
+      257.8985810279846,
+      1165.2267837524414,
+      287.16049432754517
+     ],
+     "plate_box": [
+      705.8106994628906,
+      246.26734256744385,
+      1187.5935745239258,
+      299.4624352455139
+     ],
+     "in_front": true,
+     "anchor_px": [
+      946.6856002807617,
+      313.1604337692261
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FV-206",
+     "kind": "tag",
+     "shown": true,
+     "text": "FV-206  Purge valve output",
+     "lines": 1,
+     "text_box": [
+      1113.3076858520508,
+      398.1064224243164,
+      1440.1969528198242,
+      422.0520257949829
+     ],
+     "plate_box": [
+      1094.377784729004,
+      388.2651400566101,
+      1458.46435546875,
+      432.1647047996521
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1053.3516311645508,
+      410.0791597366333
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FV-206",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:PI-113",
+     "kind": "tag",
+     "shown": true,
+     "text": "PI-113  Pressure",
+     "lines": 1,
+     "text_box": [
+      1108.6071395874023,
+      525.2836203575134,
+      1302.3104095458984,
+      544.2863094806671
+     ],
+     "plate_box": [
+      1090.6697845458984,
+      515.3094720840454,
+      1319.7831344604492,
+      554.2713367938995
+     ],
+     "in_front": true,
+     "anchor_px": [
+      996.2020111083984,
+      534.7848844528198
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "PI-113",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.027112139388918877,
+      "text": 1.0,
+      "ratio": 13.616533120735676,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-111",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-111  Temperature",
+     "lines": 1,
+     "text_box": [
+      526.9147682189941,
+      631.9774532318115,
+      766.2577056884766,
+      654.7421658039093
+     ],
+     "plate_box": [
+      508.83378982543945,
+      621.8917787075043,
+      785.0420951843262,
+      664.611804485321
+     ],
+     "in_front": true,
+     "anchor_px": [
+      825.3180885314941,
+      643.3597612380981
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-111",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:LI-112",
+     "kind": "tag",
+     "shown": true,
+     "text": "LI-112  Level",
+     "lines": 1,
+     "text_box": [
+      634.6584892272949,
+      715.7846188545227,
+      784.0438270568848,
+      734.7872757911682
+     ],
+     "plate_box": [
+      617.2168350219727,
+      705.6113004684448,
+      802.009391784668,
+      744.573165178299
+     ],
+     "in_front": true,
+     "anchor_px": [
+      896.4490699768066,
+      725.2859473228455
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "LI-112",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.02111501805484295,
+      "text": 1.0,
+      "ratio": 14.76481380051474,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6907653808594,
+      34.0002179145813,
+      1885.9982299804688,
+      54.782466888427734
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nThe vapour-liquid separator that splits the\ncooled effluent: vapour goes to the recycle\ncompressor or out through the purge (streams 8\nand 9), and the condensed liquid goes to the\nstripper (stream 10).\nPhase split: vapour goes to the compressor or\nthe purge; liquid holds a level and goes to\nthe stripper.",
+     "lines": 9,
+     "text_box": [
+      33.999563455581665,
+      34.00015354156494,
+      545.0217247009277,
+      274.0333557128906
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      557.0214959726565,
+      286.032968852255
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02104070782661438,
+      "text": 1.0,
+      "ratio": 14.78025813823089,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nCSB: keep liquid out of relief from drums\nwith little vapor space (Cuisine Solutions,\n2024).\nSource: CSB, 2024 \u00b7 prototype match",
+     "lines": 5,
+     "text_box": [
+      1450.1305389404297,
+      88.78229856491089,
+      1885.9989166259766,
+      219.95094537734985
+     ],
+     "in_front": true,
+     "plate_box": [
+      1438.1322284274631,
+      76.7820747296015,
+      1898.0,
+      231.950783001052
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02104070782661438,
+      "text": 1.0,
+      "ratio": 14.78025813823089,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 4 of 6: V-101 Vapor/Liquid Separator\nTakes the condensed product from E-101; sends the recycle to K-101, the purge out of the plant and the separator underflow to C-101.",
+     "lines": 2,
+     "text_box": [
+      33.99992823600769,
+      992.0894327759743,
+      1575.1240539550781,
+      1045.9998947381973
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.0896289348602,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "TI-111": [
+     825.3,
+     643.4
+    ],
+    "LI-112": [
+     896.4,
+     725.3
+    ],
+    "PI-113": [
+     996.2,
+     534.8
+    ],
+    "FV-206": [
+     1053.4,
+     410.1
+    ]
+   },
+   "focus_rects": [
+    [
+     820.4465675354004,
+     370.7710647583008,
+     1063.9616775512695,
+     727.9928648471832
+    ],
+    [
+     819.7947692871094,
+     326.59849405288696,
+     1064.4120025634766,
+     429.86246824264526
+    ],
+    [
+     824.2336463928223,
+     628.307386636734,
+     1061.3389205932617,
+     776.0523104667664
+    ],
+    [
+     1003.0573654174805,
+     687.1038007736206,
+     1021.5339660644531,
+     778.8931882381439
+    ],
+    [
+     908.8995552062988,
+     679.0381836891174,
+     927.3970985412598,
+     768.7374758720398
+    ],
+    [
+     869.2244338989258,
+     702.1226370334625,
+     889.5069694519043,
+     797.8084909915924
+    ],
+    [
+     969.0917587280273,
+     711.2931847572327,
+     988.7107086181641,
+     809.3610978126526
+    ],
+    [
+     951.027889251709,
+     578.0938267707825,
+     973.2148361206055,
+     601.1440336704254
+    ],
+    [
+     948.0867004394531,
+     571.5768957138062,
+     979.5732879638672,
+     603.8498246669769
+    ],
+    [
+     986.3064193725586,
+     580.2108299732208,
+     1014.393196105957,
+     604.290361404419
+    ],
+    [
+     991.5613174438477,
+     573.3007407188416,
+     1021.0245895385742,
+     608.0187821388245
+    ],
+    [
+     1000.6190872192383,
+     607.4404549598694,
+     1032.9953384399414,
+     634.7391200065613
+    ],
+    [
+     1010.6074905395508,
+     602.8405201435089,
+     1039.9194717407227,
+     642.8952777385712
+    ],
+    [
+     1022.8214263916016,
+     587.8014707565308,
+     1051.8289947509766,
+     612.1956253051758
+    ],
+    [
+     1038.0706787109375,
+     580.478847026825,
+     1057.0939636230469,
+     618.1394755840302
+    ]
+   ],
+   "placement_cost": {
+    "unit:V-101": 0.0,
+    "tag:FV-206": 0.0,
+    "tag:PI-113": 0.0,
+    "tag:TI-111": 0.0,
+    "tag:LI-112": 0.0
+   }
+  },
+  {
+   "name": "05_k-101_normal",
+   "image": "05_k-101_normal.png",
+   "visible": [
+    "unit:K-101",
+    "tag:HV-205",
+    "tag:FI-105",
+    "tag:JI-120",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "K-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      1035.2146911621094,
+      376.2092328071594,
+      1427.2845840454102,
+      403.9223313331604
+     ],
+     "plate_box": [
+      1012.8057861328125,
+      364.42955017089844,
+      1449.0134811401367,
+      416.0778880119324
+     ],
+     "in_front": true,
+     "anchor_px": [
+      967.8448104858398,
+      390.0659108161926
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02312280610203743,
+      "text": 1.0,
+      "ratio": 14.35940517018457,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:HV-205",
+     "kind": "tag",
+     "shown": true,
+     "text": "HV-205  Recycle valve output",
+     "lines": 1,
+     "text_box": [
+      792.4834442138672,
+      881.8914467096329,
+      1144.4994735717773,
+      904.9857974052429
+     ],
+     "plate_box": [
+      774.0593147277832,
+      871.5444499254227,
+      1162.9059219360352,
+      914.5937758684158
+     ],
+     "in_front": true,
+     "anchor_px": [
+      968.4917449951172,
+      673.9522969722748
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "HV-205",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FI-105",
+     "kind": "tag",
+     "shown": true,
+     "text": "FI-105  Recycle flow",
+     "lines": 1,
+     "text_box": [
+      402.2526168823242,
+      449.1681933403015,
+      645.1955795288086,
+      472.9764246940613
+     ],
+     "plate_box": [
+      384.0937614440918,
+      439.27361011505127,
+      664.2670440673828,
+      483.03606033325195
+     ],
+     "in_front": true,
+     "anchor_px": [
+      673.9571571350098,
+      461.07250213623047
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FI-105",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:JI-120",
+     "kind": "tag",
+     "shown": true,
+     "text": "JI-120  Compressor work",
+     "lines": 1,
+     "text_box": [
+      745.4601860046387,
+      301.93596839904785,
+      1049.447135925293,
+      325.03023862838745
+     ],
+     "plate_box": [
+      727.0851516723633,
+      292.19523668289185,
+      1067.9529190063477,
+      335.244562625885
+     ],
+     "in_front": true,
+     "anchor_px": [
+      897.4532318115234,
+      624.9385857582092
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "JI-120",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6930541992188,
+      33.999316692352295,
+      1886.0015487670898,
+      54.78137254714966
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nThe compressor that returns separator vapour\nto the reactor feed header as recycle gas\n(stream 8); its recycle valve spills some flow\nback around the machine.\nPressure boost: raises the recycle gas from\nseparator to header pressure; a recycle valve\nspills some back.",
+     "lines": 8,
+     "text_box": [
+      33.9997923374176,
+      33.99938106536865,
+      521.1947822570801,
+      246.53236627578735
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      533.1947230709095,
+      258.53294765949244
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nEPA RMP record: a compressor gas release\nexploded, about $13M damage (2024).\nSource: EPA RMP, 2024 \u00b7 prototype match",
+     "lines": 4,
+     "text_box": [
+      1427.7152252197266,
+      88.7815260887146,
+      1885.9579467773438,
+      192.4500846862793
+     ],
+     "in_front": true,
+     "plate_box": [
+      1415.714972872287,
+      76.7820747296015,
+      1898.0,
+      204.45079147815704
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 5 of 6: K-101 Recycle Compressor\nTakes the recycle from V-101; sends the recycle to U-100.",
+     "lines": 2,
+     "text_box": [
+      33.999366760253906,
+      993.1440398097038,
+      696.5311431884766,
+      1045.9999752044678
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      981.1441131830215,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.028299350291490555,
+      "text": 1.0,
+      "ratio": 13.410072958346275,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "FI-105": [
+     674.0,
+     461.1
+    ],
+    "JI-120": [
+     897.5,
+     624.9
+    ],
+    "HV-205": [
+     968.5,
+     674.0
+    ]
+   },
+   "focus_rects": [
+    [
+     642.1207237243652,
+     585.7669293880463,
+     1275.446662902832,
+     851.3792484998703
+    ],
+    [
+     745.4317474365234,
+     404.0837788581848,
+     972.7851104736328,
+     733.4819841384888
+    ],
+    [
+     764.4192695617676,
+     375.6591010093689,
+     950.9466934204102,
+     765.6854867935181
+    ],
+    [
+     825.2590942382812,
+     346.3664174079895,
+     901.9564819335938,
+     458.22109937667847
+    ],
+    [
+     924.8266410827637,
+     545.8339333534241,
+     1009.9370956420898,
+     604.2576277256012
+    ],
+    [
+     967.0818328857422,
+     503.3664107322693,
+     1216.2099838256836,
+     764.4373261928558
+    ],
+    [
+     1141.3962936401367,
+     525.0190472602844,
+     1242.286491394043,
+     769.4158387184143
+    ]
+   ],
+   "placement_cost": {
+    "unit:K-101": 0.0,
+    "tag:HV-205": 0.0,
+    "tag:FI-105": 0.0,
+    "tag:JI-120": 0.0
+   }
+  },
+  {
+   "name": "06_c-101_normal",
+   "image": "06_c-101_normal.png",
+   "visible": [
+    "unit:C-101",
+    "tag:FV-204",
+    "tag:PI-116",
+    "tag:TI-118",
+    "tag:LI-115",
+    "overlay:badge",
+    "overlay:purpose",
+    "overlay:why",
+    "overlay:caption"
+   ],
+   "focus": "C-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      832.2486305236816,
+      237.90618896484375,
+      1169.2538452148438,
+      266.7725944519043
+     ],
+     "plate_box": [
+      809.8639297485352,
+      226.30005598068237,
+      1191.536521911621,
+      279.1001558303833
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1000.7511520385742,
+      292.77259826660156
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.016718799248337746,
+      "text": 1.0,
+      "ratio": 15.73769330127985,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:FV-204",
+     "kind": "tag",
+     "shown": true,
+     "text": "FV-204  A + C feed valve output",
+     "lines": 1,
+     "text_box": [
+      1123.6088562011719,
+      580.8747410774231,
+      1508.6321640014648,
+      604.6829724311829
+     ],
+     "plate_box": [
+      1104.6956634521484,
+      570.8424961566925,
+      1526.8006896972656,
+      614.604914188385
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1001.5924072265625,
+      592.7788889408112
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "FV-204",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.016718799248337746,
+      "text": 1.0,
+      "ratio": 15.73769330127985,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:PI-116",
+     "kind": "tag",
+     "shown": true,
+     "text": "PI-116  Pressure (see note)",
+     "lines": 1,
+     "text_box": [
+      555.7035255432129,
+      401.7745900154114,
+      877.7053642272949,
+      424.868860244751
+     ],
+     "plate_box": [
+      537.5267601013184,
+      391.92950963974,
+      896.3909912109375,
+      434.9787712097168
+     ],
+     "in_front": true,
+     "anchor_px": [
+      967.6373291015625,
+      413.321692943573
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "PI-116",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.016886280849575996,
+      "text": 1.0,
+      "ratio": 15.698286504543422,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-118",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-118  Temperature",
+     "lines": 1,
+     "text_box": [
+      649.4904327392578,
+      544.2652916908264,
+      894.6823883056641,
+      567.3595297336578
+     ],
+     "plate_box": [
+      631.2155914306641,
+      534.2713165283203,
+      913.3983993530273,
+      577.3204815387726
+     ],
+     "in_front": true,
+     "anchor_px": [
+      984.6623611450195,
+      555.8124268054962
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-118",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.016718799248337746,
+      "text": 1.0,
+      "ratio": 15.73769330127985,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:LI-115",
+     "kind": "tag",
+     "shown": true,
+     "text": "LI-115  Level",
+     "lines": 1,
+     "text_box": [
+      753.5861778259277,
+      659.4771230220795,
+      903.9047241210938,
+      678.1502544879913
+     ],
+     "plate_box": [
+      736.0857582092285,
+      649.3627059459686,
+      921.6796875,
+      687.9954314231873
+     ],
+     "in_front": true,
+     "anchor_px": [
+      959.6432876586914,
+      668.8137531280518
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "LI-115",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.017483171075582504,
+      "text": 1.0,
+      "ratio": 15.559434793364689,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6946563720703,
+      33.9997673034668,
+      1886.0020065307617,
+      54.78201627731323
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.018336616456508636,
+      "text": 1.0,
+      "ratio": 15.36511543073324,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Purpose\nThe steam-heated stripper that uses the A and\nC feed (stream 4) to strip most of the lighter\ncomponents (A to F) out of the separator\nliquid, sending them overhead to the feed\nheader (stream 5) while the heavy products G\nand H leave the bottom as product (stream 11).\nGas rises, liquid falls: the stripped gas\nreturns to the feed header and steam heats the\ncolumn.",
+     "lines": 10,
+     "text_box": [
+      34.000164270401,
+      33.99996042251587,
+      535.2334785461426,
+      297.93235301971436
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      547.2748851192495,
+      309.93232908513806
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.017483171075582504,
+      "text": 1.0,
+      "ratio": 15.559434793364689,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:why",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Why this matters\nAn overfilled tower during startup killed 15\nat BP Texas City in 2005 (CSB).\nSource: CSB, 2005 \u00b7 prototype match",
+     "lines": 4,
+     "text_box": [
+      1439.5250701904297,
+      88.78210544586182,
+      1886.0009765625,
+      192.45105028152466
+     ],
+     "in_front": true,
+     "plate_box": [
+      1427.523669195258,
+      76.7820747296015,
+      1898.0,
+      204.45079147815704
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.017483171075582504,
+      "text": 1.0,
+      "ratio": 15.559434793364689,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Stop 6 of 6: C-101 Product Stripper\nReceives from outside the plant and V-101; sends to U-100 and out of the plant.",
+     "lines": 2,
+     "text_box": [
+      34.000622034072876,
+      992.90632635355,
+      953.6145973205566,
+      1045.999375730753
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.9068557686276,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.016886280849575996,
+      "text": 1.0,
+      "ratio": 15.698286504543422,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "LI-115": [
+     959.6,
+     668.8
+    ],
+    "PI-116": [
+     967.6,
+     413.3
+    ],
+    "TI-118": [
+     984.7,
+     555.8
+    ],
+    "FV-204": [
+     1001.6,
+     592.8
+    ]
+   },
+   "focus_rects": [
+    [
+     966.9290542602539,
+     312.4357223510742,
+     1035.0643157958984,
+     779.9578857421875
+    ],
+    [
+     966.9259643554688,
+     299.01742458343506,
+     1033.9695739746094,
+     338.68839025497437
+    ],
+    [
+     967.0337677001953,
+     759.2931175231934,
+     1035.0977325439453,
+     793.8153684139252
+    ],
+    [
+     968.0791854858398,
+     772.6179456710815,
+     1034.1406631469727,
+     811.5114623308182
+    ],
+    [
+     929.450569152832,
+     686.5728199481964,
+     1070.03173828125,
+     696.5864932537079
+    ],
+    [
+     929.7439956665039,
+     650.3027772903442,
+     1069.6610641479492,
+     655.860550403595
+    ],
+    [
+     929.5701026916504,
+     573.1587016582489,
+     1069.6197509765625,
+     579.4652938842773
+    ],
+    [
+     929.8622131347656,
+     533.5862588882446,
+     1069.2510223388672,
+     542.7100396156311
+    ],
+    [
+     929.688720703125,
+     453.52161169052124,
+     1069.2108535766602,
+     470.58799266815186
+    ],
+    [
+     929.9795150756836,
+     414.28529262542725,
+     1068.8439559936523,
+     434.08276319503784
+    ],
+    [
+     929.8064231872559,
+     334.8378539085388,
+     1068.805046081543,
+     362.50054836273193
+    ],
+    [
+     930.0959587097168,
+     295.9337639808655,
+     1068.4399795532227,
+     326.24264001846313
+    ],
+    [
+     1033.4489822387695,
+     323.4936547279358,
+     1036.7461395263672,
+     796.6933250427246
+    ],
+    [
+     1026.803970336914,
+     324.9510598182678,
+     1029.9843978881836,
+     795.7676732540131
+    ],
+    [
+     998.3914947509766,
+     649.3195116519928,
+     1007.4953842163086,
+     658.1731510162354
+    ],
+    [
+     996.0796737670898,
+     646.759911775589,
+     1010.3085708618164,
+     660.960373878479
+    ],
+    [
+     971.1352157592773,
+     648.1918251514435,
+     983.2207489013672,
+     656.8297183513641
+    ],
+    [
+     968.6414337158203,
+     645.4941773414612,
+     978.5625457763672,
+     659.4161939620972
+    ],
+    [
+     966.5840148925781,
+     648.5567879676819,
+     976.3177871704102,
+     657.2118365764618
+    ],
+    [
+     965.1719284057617,
+     645.8300113677979,
+     968.8199615478516,
+     659.9555432796478
+    ],
+    [
+     1024.8717498779297,
+     648.4807634353638,
+     1035.662612915039,
+     657.1376144886017
+    ],
+    [
+     1031.7454147338867,
+     645.7587826251984,
+     1037.4599075317383,
+     659.8514199256897
+    ]
+   ],
+   "placement_cost": {
+    "unit:C-101": 0.0,
+    "tag:FV-204": 0.0,
+    "tag:PI-116": 0.0,
+    "tag:TI-118": 0.0,
+    "tag:LI-115": 0.0
+   }
+  },
+  {
+   "name": "20_overview_fault_early",
+   "image": "20_overview_fault_early.png",
+   "visible": [
+    "unit:U-100",
+    "unit:R-101",
+    "unit:E-101",
+    "unit:V-101",
+    "unit:K-101",
+    "unit:C-101",
+    "overlay:badge",
+    "overlay:legend",
+    "overlay:caption"
+   ],
+   "focus": null,
+   "view_choice": null,
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      282.350435256958,
+      403.96578311920166,
+      573.716983795166,
+      431.67888164520264
+     ],
+     "plate_box": [
+      260.8856391906738,
+      392.151403427124,
+      596.5160751342773,
+      443.7996768951416
+     ],
+     "in_front": true,
+     "anchor_px": [
+      596.6054534912109,
+      379.9800753593445
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      603.6601066589355,
+      242.2692632675171,
+      811.7887115478516,
+      265.0725030899048
+     ],
+     "plate_box": [
+      582.7730941772461,
+      230.65759420394897,
+      833.3084678649902,
+      277.4021887779236
+     ],
+     "in_front": true,
+     "anchor_px": [
+      707.724552154541,
+      291.07250690460205
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      928.8043212890625,
+      373.4643030166626,
+      1301.6946029663086,
+      396.26747846603394
+     ],
+     "plate_box": [
+      907.5096130371094,
+      361.6882252693176,
+      1322.599868774414,
+      408.43262672424316
+     ],
+     "in_front": true,
+     "anchor_px": [
+      948.1556510925293,
+      403.56667041778564
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      548.0893135070801,
+      549.9813258647919,
+      985.1716232299805,
+      579.2432069778442
+     ],
+     "plate_box": [
+      525.9818458557129,
+      537.9839015007019,
+      1007.7639770507812,
+      591.1789298057556
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1022.8049468994141,
+      507.53971338272095
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      1196.7580032348633,
+      521.714780330658,
+      1588.8288116455078,
+      549.4280076026917
+     ],
+     "plate_box": [
+      1174.1466522216797,
+      509.75279331207275,
+      1610.3548049926758,
+      561.4011633396149
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1155.4297256469727,
+      479.81502771377563
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      1171.0715103149414,
+      250.20214319229126,
+      1508.0765533447266,
+      279.06848430633545
+     ],
+     "plate_box": [
+      1148.261833190918,
+      238.58049631118774,
+      1529.934425354004,
+      291.38066053390503
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1339.573860168457,
+      305.068359375
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6933975219727,
+      33.99996042251587,
+      1886.0022354125977,
+      54.78163003921509
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "shown": true,
+     "text": "Tag markers (replay)\nin normal band\noutside normal band\nabove high alarm\nnot connected",
+     "lines": 5,
+     "text_box": [
+      1668.2969284057617,
+      831.6580921411514,
+      1886.0028076171875,
+      958.091379404068
+     ],
+     "in_front": true,
+     "plate_box": [
+      1621.5456757599281,
+      819.6572871340646,
+      1898.0,
+      970.0896289348602
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Fault 6 (loss of A feed): +120 min\n9 tags have left their normal band (amber); none is in alarm yet.",
+     "lines": 2,
+     "text_box": [
+      33.9979362487793,
+      992.0907443761826,
+      767.4185943603516,
+      1046.0013994574547
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.0896289348602,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "FI-101": [
+     535.5,
+     346.9
+    ],
+    "FI-102": [
+     553.8,
+     354.4
+    ],
+    "FI-103": [
+     572.4,
+     362.1
+    ],
+    "FI-104": [
+     1281.4,
+     659.0
+    ],
+    "FI-105": [
+     1097.7,
+     488.8
+    ],
+    "FI-106": [
+     690.9,
+     385.2
+    ],
+    "PI-107": [
+     665.7,
+     394.5
+    ],
+    "LI-108": [
+     674.5,
+     481.6
+    ],
+    "TI-109": [
+     685.1,
+     466.9
+    ],
+    "FI-110": [
+     1044.5,
+     609.0
+    ],
+    "TI-111": [
+     970.9,
+     613.5
+    ],
+    "LI-112": [
+     990.1,
+     650.8
+    ],
+    "PI-113": [
+     1025.7,
+     602.4
+    ],
+    "FI-114": [
+     1074.8,
+     574.2
+    ],
+    "LI-115": [
+     1238.6,
+     664.0
+    ],
+    "PI-116": [
+     1276.1,
+     447.6
+    ],
+    "FI-117": [
+     1341.7,
+     629.0
+    ],
+    "TI-118": [
+     1274.2,
+     591.0
+    ],
+    "FI-119": [
+     1304.8,
+     653.9
+    ],
+    "JI-120": [
+     1133.4,
+     524.6
+    ],
+    "TI-121": [
+     709.8,
+     472.5
+    ],
+    "TI-122": [
+     923.9,
+     483.1
+    ],
+    "AI-123": [
+     688.9,
+     367.7
+    ],
+    "AI-129": [
+     1045.3,
+     589.8
+    ],
+    "AI-137": [
+     1345.6,
+     607.9
+    ],
+    "FV-201": [
+     551.0,
+     338.2
+    ],
+    "FV-202": [
+     569.7,
+     345.8
+    ],
+    "FV-203": [
+     532.6,
+     330.7
+    ],
+    "FV-204": [
+     1284.7,
+     637.7
+    ],
+    "HV-205": [
+     1145.0,
+     535.2
+    ],
+    "FV-206": [
+     1046.1,
+     570.2
+    ],
+    "LV-207": [
+     1075.8,
+     555.3
+    ],
+    "LV-208": [
+     1349.5,
+     586.4
+    ],
+    "FV-209": [
+     1195.1,
+     724.5
+    ],
+    "TV-210": [
+     648.0,
+     462.0
+    ],
+    "TV-211": [
+     845.4,
+     394.6
+    ],
+    "SC-212": [
+     676.1,
+     361.9
+    ]
+   },
+   "focus_rects": [],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "unit:R-101": 0.0,
+    "unit:E-101": 0.0,
+    "unit:V-101": 0.0,
+    "unit:K-101": 0.0,
+    "unit:C-101": 0.0
+   }
+  },
+  {
+   "name": "21_overview_fault_alarm",
+   "image": "21_overview_fault_alarm.png",
+   "visible": [
+    "unit:U-100",
+    "unit:R-101",
+    "unit:E-101",
+    "unit:V-101",
+    "unit:K-101",
+    "unit:C-101",
+    "tag:PI-107",
+    "tag:TI-109",
+    "overlay:badge",
+    "overlay:legend",
+    "overlay:caption"
+   ],
+   "focus": null,
+   "view_choice": null,
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      282.350435256958,
+      403.96578311920166,
+      573.716983795166,
+      431.67888164520264
+     ],
+     "plate_box": [
+      260.8856391906738,
+      392.151403427124,
+      596.5160751342773,
+      443.7996768951416
+     ],
+     "in_front": true,
+     "anchor_px": [
+      596.6054534912109,
+      379.9800753593445
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      603.6601066589355,
+      242.2692632675171,
+      811.7887115478516,
+      265.0725030899048
+     ],
+     "plate_box": [
+      582.7730941772461,
+      230.65759420394897,
+      833.3084678649902,
+      277.4021887779236
+     ],
+     "in_front": true,
+     "anchor_px": [
+      707.724552154541,
+      291.07250690460205
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      928.8043212890625,
+      373.4643030166626,
+      1301.6946029663086,
+      396.26747846603394
+     ],
+     "plate_box": [
+      907.5096130371094,
+      361.6882252693176,
+      1322.599868774414,
+      408.43262672424316
+     ],
+     "in_front": true,
+     "anchor_px": [
+      948.1556510925293,
+      403.56667041778564
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      548.0893135070801,
+      549.9813258647919,
+      985.1716232299805,
+      579.2432069778442
+     ],
+     "plate_box": [
+      525.9818458557129,
+      537.9839015007019,
+      1007.7639770507812,
+      591.1789298057556
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1022.8049468994141,
+      507.53971338272095
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      1196.7580032348633,
+      521.714780330658,
+      1588.8288116455078,
+      549.4280076026917
+     ],
+     "plate_box": [
+      1174.1466522216797,
+      509.75279331207275,
+      1610.3548049926758,
+      561.4011633396149
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1155.4297256469727,
+      479.81502771377563
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      1171.0715103149414,
+      250.20214319229126,
+      1508.0765533447266,
+      279.06848430633545
+     ],
+     "plate_box": [
+      1148.261833190918,
+      238.58049631118774,
+      1529.934425354004,
+      291.38066053390503
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1339.573860168457,
+      305.068359375
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:PI-107",
+     "kind": "tag",
+     "shown": true,
+     "text": "PI-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
+     "lines": 1,
+     "text_box": [
+      324.13021087646484,
+      186.90653800964355,
+      1007.3186874389648,
+      211.81316614151
+     ],
+     "plate_box": [
+      305.8333110809326,
+      177.2859263420105,
+      1026.2307357788086,
+      222.14574337005615
+     ],
+     "in_front": true,
+     "anchor_px": [
+      665.7243919372559,
+      394.53288316726685
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "PI-107",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-109",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-109  120.4 \u00b0C \u00b7 shutdown 175",
+     "lines": 1,
+     "text_box": [
+      627.2942733764648,
+      306.28822803497314,
+      1010.2309799194336,
+      325.29088497161865
+     ],
+     "plate_box": [
+      609.8600578308105,
+      296.54292583465576,
+      1027.9603958129883,
+      335.50482273101807
+     ],
+     "in_front": true,
+     "anchor_px": [
+      685.0659942626953,
+      466.9190526008606
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-109",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6933975219727,
+      33.99996042251587,
+      1886.0022354125977,
+      54.78163003921509
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "shown": true,
+     "text": "Tag markers (replay)\nin normal band\noutside normal band\nabove high alarm\nnot connected",
+     "lines": 5,
+     "text_box": [
+      1668.2969284057617,
+      831.6580921411514,
+      1886.0028076171875,
+      958.091379404068
+     ],
+     "in_front": true,
+     "plate_box": [
+      1621.5456757599281,
+      819.6572871340646,
+      1898.0,
+      970.0896289348602
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Fault 6 (loss of A feed): +294 min\nPI-107 reaches 2,897 kPa g, above its 2,895 kPa g high alarm; 19 tags are outside their normal band.",
+     "lines": 2,
+     "text_box": [
+      33.99622678756714,
+      992.0907443761826,
+      1200.469093322754,
+      1046.0015121102333
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.0896289348602,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "FI-101": [
+     535.5,
+     346.9
+    ],
+    "FI-102": [
+     553.8,
+     354.4
+    ],
+    "FI-103": [
+     572.4,
+     362.1
+    ],
+    "FI-104": [
+     1281.4,
+     659.0
+    ],
+    "FI-105": [
+     1097.7,
+     488.8
+    ],
+    "FI-106": [
+     690.9,
+     385.2
+    ],
+    "PI-107": [
+     665.7,
+     394.5
+    ],
+    "LI-108": [
+     674.5,
+     481.6
+    ],
+    "TI-109": [
+     685.1,
+     466.9
+    ],
+    "FI-110": [
+     1044.5,
+     609.0
+    ],
+    "TI-111": [
+     970.9,
+     613.5
+    ],
+    "LI-112": [
+     990.1,
+     650.8
+    ],
+    "PI-113": [
+     1025.7,
+     602.4
+    ],
+    "FI-114": [
+     1074.8,
+     574.2
+    ],
+    "LI-115": [
+     1238.6,
+     664.0
+    ],
+    "PI-116": [
+     1276.1,
+     447.6
+    ],
+    "FI-117": [
+     1341.7,
+     629.0
+    ],
+    "TI-118": [
+     1274.2,
+     591.0
+    ],
+    "FI-119": [
+     1304.8,
+     653.9
+    ],
+    "JI-120": [
+     1133.4,
+     524.6
+    ],
+    "TI-121": [
+     709.8,
+     472.5
+    ],
+    "TI-122": [
+     923.9,
+     483.1
+    ],
+    "AI-123": [
+     688.9,
+     367.7
+    ],
+    "AI-129": [
+     1045.3,
+     589.8
+    ],
+    "AI-137": [
+     1345.6,
+     607.9
+    ],
+    "FV-201": [
+     551.0,
+     338.2
+    ],
+    "FV-202": [
+     569.7,
+     345.8
+    ],
+    "FV-203": [
+     532.6,
+     330.7
+    ],
+    "FV-204": [
+     1284.7,
+     637.7
+    ],
+    "HV-205": [
+     1145.0,
+     535.2
+    ],
+    "FV-206": [
+     1046.1,
+     570.2
+    ],
+    "LV-207": [
+     1075.8,
+     555.3
+    ],
+    "LV-208": [
+     1349.5,
+     586.4
+    ],
+    "FV-209": [
+     1195.1,
+     724.5
+    ],
+    "TV-210": [
+     648.0,
+     462.0
+    ],
+    "TV-211": [
+     845.4,
+     394.6
+    ],
+    "SC-212": [
+     676.1,
+     361.9
+    ]
+   },
+   "focus_rects": [],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "unit:R-101": 0.0,
+    "unit:E-101": 0.0,
+    "unit:V-101": 0.0,
+    "unit:K-101": 0.0,
+    "unit:C-101": 0.0,
+    "tag:PI-107": 0.0,
+    "tag:TI-109": 0.0
+   }
+  },
+  {
+   "name": "22_reactor_fault_alarm",
+   "image": "22_reactor_fault_alarm.png",
+   "visible": [
+    "unit:R-101",
+    "tag:PI-107",
+    "tag:TI-109",
+    "tag:TV-210",
+    "tag:TI-121",
+    "overlay:badge",
+    "overlay:legend",
+    "overlay:caption"
+   ],
+   "focus": "R-101",
+   "view_choice": {
+    "chosen": 0,
+    "of": 6,
+    "hidden_markers": []
+   },
+   "labels": [
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      921.9560050964355,
+      260.67795038223267,
+      1130.0843811035156,
+      283.48119020462036
+     ],
+     "plate_box": [
+      900.6698226928711,
+      249.04330015182495,
+      1151.2049102783203,
+      295.78776597976685
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1026.020393371582,
+      309.48112964630127
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.020187707617878914,
+      "text": 1.0,
+      "ratio": 14.959884510212063,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:PI-107",
+     "kind": "tag",
+     "shown": true,
+     "text": "PI-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
+     "lines": 1,
+     "text_box": [
+      208.5560703277588,
+      524.2109084129333,
+      891.7449188232422,
+      549.1175365447998
+     ],
+     "plate_box": [
+      190.37997722625732,
+      514.2379188537598,
+      910.777759552002,
+      559.0976071357727
+     ],
+     "in_front": true,
+     "anchor_px": [
+      920.7263946533203,
+      536.6642546653748
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "PI-107",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-109",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-109  120.4 \u00b0C \u00b7 shutdown 175",
+     "lines": 1,
+     "text_box": [
+      496.0982894897461,
+      643.1483602523804,
+      879.034423828125,
+      662.1509850025177
+     ],
+     "plate_box": [
+      478.8013458251953,
+      633.0510020256042,
+      896.9008827209473,
+      672.0128667354584
+     ],
+     "in_front": true,
+     "anchor_px": [
+      991.4397811889648,
+      652.649656534195
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-109",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.0201152004301548,
+      "text": 1.0,
+      "ratio": 14.975354752725218,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TV-210",
+     "kind": "tag",
+     "shown": true,
+     "text": "TV-210  37.73 % \u00b7 band 37.81\u201344.39",
+     "lines": 1,
+     "text_box": [
+      411.7001152038574,
+      732.4281656742096,
+      847.0031547546387,
+      751.4307582378387
+     ],
+     "plate_box": [
+      394.4912624359131,
+      722.2374987602234,
+      864.9030876159668,
+      761.1993312835693
+     ],
+     "in_front": true,
+     "anchor_px": [
+      866.1744117736816,
+      696.9772374629974
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TV-210",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.0201152004301548,
+      "text": 1.0,
+      "ratio": 14.975354752725218,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "tag:TI-121",
+     "kind": "tag",
+     "shown": true,
+     "text": "TI-121  96.28 \u00b0C \u00b7 band 93.81\u201395.39",
+     "lines": 1,
+     "text_box": [
+      1162.602767944336,
+      643.7077617645264,
+      1594.9676513671875,
+      662.7104187011719
+     ],
+     "plate_box": [
+      1144.6089935302734,
+      633.609824180603,
+      1612.085952758789,
+      672.5717210769653
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1050.197525024414,
+      653.2090902328491
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "marker": "TI-121",
+     "marker_occluded_by": null,
+     "contrast": {
+      "background": 0.0201152004301548,
+      "text": 1.0,
+      "ratio": 14.975354752725218,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6906509399414,
+      33.99950981140137,
+      1885.9997177124023,
+      54.78182315826416
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.019467085599899292,
+      "text": 1.0,
+      "ratio": 15.115071993196189,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "shown": true,
+     "text": "Tag markers (replay)\nin normal band\noutside normal band\nabove high alarm\nnot connected",
+     "lines": 5,
+     "text_box": [
+      1668.2938385009766,
+      832.5802356004715,
+      1885.9984588623047,
+      959.0127182006836
+     ],
+     "in_front": true,
+     "plate_box": [
+      1621.5456757599281,
+      820.5799578958089,
+      1898.0,
+      971.0122996966046
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.019213898107409477,
+      "text": 1.0,
+      "ratio": 15.170363593314152,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Fault 6 at the reactor: sample 258\nValues at the first sample above the PI-107 high alarm, with the published shutdown limits.",
+     "lines": 2,
+     "text_box": [
+      33.997710943222046,
+      993.0126222968102,
+      1084.921646118164,
+      1046.0002166032791
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      981.0122996966045,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.018405558541417122,
+      "text": 1.0,
+      "ratio": 15.349629801856855,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {
+    "PI-107": [
+     920.7,
+     536.7
+    ],
+    "TI-109": [
+     991.4,
+     652.6
+    ],
+    "TI-121": [
+     1050.2,
+     653.2
+    ],
+    "TV-210": [
+     866.2,
+     697.0
+    ]
+   },
+   "focus_rects": [
+    [
+     923.4758377075195,
+     438.46798181533813,
+     1121.9118118286133,
+     762.4268281459808
+    ],
+    [
+     923.4428787231445,
+     396.0099220275879,
+     1122.0491409301758,
+     482.08482027053833
+    ],
+    [
+     923.6950492858887,
+     691.5594112873077,
+     1120.9992599487305,
+     804.2011499404907
+    ],
+    [
+     926.8731880187988,
+     728.6087536811829,
+     1118.0839920043945,
+     813.1332439184189
+    ],
+    [
+     1009.0065765380859,
+     370.5540633201599,
+     1042.639503479004,
+     403.423376083374
+    ],
+    [
+     1001.3022994995117,
+     326.43202543258667,
+     1050.2606964111328,
+     373.8814401626587
+    ],
+    [
+     953.1024169921875,
+     600.3021311759949,
+     973.2057952880859,
+     614.6723127365112
+    ],
+    [
+     949.0798759460449,
+     595.9528005123138,
+     965.5173110961914,
+     618.264970779419
+    ],
+    [
+     1086.7100143432617,
+     601.675271987915,
+     1106.9803619384766,
+     616.1138498783112
+    ],
+    [
+     1096.5276718139648,
+     597.2527492046356,
+     1110.692481994629,
+     620.062780380249
+    ]
+   ],
+   "placement_cost": {
+    "unit:R-101": 0.0,
+    "tag:PI-107": 0.0,
+    "tag:TI-109": 0.0,
+    "tag:TV-210": 0.0,
+    "tag:TI-121": 0.0
+   }
+  },
+  {
+   "name": "30_flow_legend",
+   "image": "30_flow_legend.png",
+   "visible": [
+    "unit:U-100",
+    "unit:R-101",
+    "unit:E-101",
+    "unit:V-101",
+    "unit:K-101",
+    "unit:C-101",
+    "overlay:badge",
+    "overlay:legend",
+    "overlay:caption"
+   ],
+   "focus": null,
+   "view_choice": null,
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      450.9221076965332,
+      326.26697301864624,
+      742.2887420654297,
+      353.9801359176636
+     ],
+     "plate_box": [
+      429.24593925476074,
+      314.5499897003174,
+      764.8762893676758,
+      366.1983275413513
+     ],
+     "in_front": true,
+     "anchor_px": [
+      596.6054534912109,
+      379.9800753593445
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      603.6601066589355,
+      242.2692632675171,
+      811.7887115478516,
+      265.0725030899048
+     ],
+     "plate_box": [
+      582.7730941772461,
+      230.65759420394897,
+      833.3084678649902,
+      277.4021887779236
+     ],
+     "in_front": true,
+     "anchor_px": [
+      707.724552154541,
+      291.07250690460205
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      825.3123092651367,
+      359.7744154930115,
+      1198.2025909423828,
+      382.5775909423828
+     ],
+     "plate_box": [
+      804.1474342346191,
+      348.0154609680176,
+      1219.2376327514648,
+      394.7599267959595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      948.1556510925293,
+      403.56667041778564
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023964272812008858,
+      "text": 1.0,
+      "ratio": 14.196043036463433,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      804.2638206481934,
+      452.2779893875122,
+      1241.3460159301758,
+      481.5398383140564
+     ],
+     "plate_box": [
+      781.8351745605469,
+      440.40303468704224,
+      1263.6172485351562,
+      493.59806299209595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1022.8049468994141,
+      507.53971338272095
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      959.3943786621094,
+      541.6430246829987,
+      1351.465072631836,
+      569.3562519550323
+     ],
+     "plate_box": [
+      937.0804595947266,
+      529.6560287475586,
+      1373.2887268066406,
+      581.3044631481171
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1155.4297256469727,
+      479.81502771377563
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      1171.0715103149414,
+      250.20214319229126,
+      1508.0765533447266,
+      279.06848430633545
+     ],
+     "plate_box": [
+      1148.261833190918,
+      238.58049631118774,
+      1529.934425354004,
+      291.38066053390503
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1339.573860168457,
+      305.068359375
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6933975219727,
+      33.99996042251587,
+      1886.0022354125977,
+      54.78163003921509
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "overlay_legend",
+     "shown": true,
+     "text": "Process flow by service\ngas feed\nreactor effluent\nliquid product\nrecycle\npurge\ncooling water (inferred)\nsteam (inferred)",
+     "lines": 8,
+     "text_box": [
+      1640.819320678711,
+      744.6585881710052,
+      1886.0005187988281,
+      958.3276525139809
+     ],
+     "in_front": true,
+     "plate_box": [
+      1594.069846186373,
+      732.6581738392513,
+      1898.0,
+      970.3268863492542
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Process flow (source-checked topology)\nFeeds and recycle meet at the feed system, react in R-101, condense, separate; gas recycles through K-101 and liquid is stripped to product.",
+     "lines": 2,
+     "text_box": [
+      33.99622678756714,
+      992.3281037807465,
+      1649.7307205200195,
+      1046.0018742084503
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.3268863492542,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {},
+   "focus_rects": [],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "unit:R-101": 0.0,
+    "unit:E-101": 0.0,
+    "unit:V-101": 0.0,
+    "unit:K-101": 0.0,
+    "unit:C-101": 0.0
+   }
+  },
+  {
+   "name": "40_loto_mockup",
+   "image": "40_loto_mockup.png",
+   "visible": [
+    "unit:U-100",
+    "unit:R-101",
+    "unit:E-101",
+    "unit:V-101",
+    "unit:K-101",
+    "unit:C-101",
+    "loto:1",
+    "loto:2",
+    "loto:3",
+    "loto:4",
+    "loto:5",
+    "loto:6",
+    "loto:7",
+    "loto:8",
+    "loto:9",
+    "loto:10",
+    "loto:11",
+    "overlay:badge",
+    "overlay:loto",
+    "overlay:caption"
+   ],
+   "focus": null,
+   "view_choice": null,
+   "labels": [
+    {
+     "id": "unit:U-100",
+     "kind": "unit",
+     "shown": true,
+     "text": "U-100  Feed System",
+     "lines": 1,
+     "text_box": [
+      450.9221076965332,
+      326.26697301864624,
+      742.2887420654297,
+      353.9801359176636
+     ],
+     "plate_box": [
+      429.24593925476074,
+      314.5499897003174,
+      764.8762893676758,
+      366.1983275413513
+     ],
+     "in_front": true,
+     "anchor_px": [
+      596.6054534912109,
+      379.9800753593445
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:R-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "R-101  Reactor",
+     "lines": 1,
+     "text_box": [
+      603.6601066589355,
+      242.2692632675171,
+      811.7887115478516,
+      265.0725030899048
+     ],
+     "plate_box": [
+      582.7730941772461,
+      230.65759420394897,
+      833.3084678649902,
+      277.4021887779236
+     ],
+     "in_front": true,
+     "anchor_px": [
+      707.724552154541,
+      291.07250690460205
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.025070050731301308,
+      "text": 1.0,
+      "ratio": 13.986936065332785,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:E-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "E-101  Product Condenser",
+     "lines": 1,
+     "text_box": [
+      825.3123092651367,
+      359.7744154930115,
+      1198.2025909423828,
+      382.5775909423828
+     ],
+     "plate_box": [
+      804.1474342346191,
+      348.0154609680176,
+      1219.2376327514648,
+      394.7599267959595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      948.1556510925293,
+      403.56667041778564
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023964272812008858,
+      "text": 1.0,
+      "ratio": 14.196043036463433,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:V-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "V-101  Vapor/Liquid Separator",
+     "lines": 1,
+     "text_box": [
+      804.2638206481934,
+      452.2779893875122,
+      1241.3460159301758,
+      481.5398383140564
+     ],
+     "plate_box": [
+      781.8351745605469,
+      440.40303468704224,
+      1263.6172485351562,
+      493.59806299209595
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1022.8049468994141,
+      507.53971338272095
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:K-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "K-101  Recycle Compressor",
+     "lines": 1,
+     "text_box": [
+      959.3943786621094,
+      541.6430246829987,
+      1351.465072631836,
+      569.3562519550323
+     ],
+     "plate_box": [
+      937.0804595947266,
+      529.6560287475586,
+      1373.2887268066406,
+      581.3044631481171
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1155.4297256469727,
+      479.81502771377563
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02206672541797161,
+      "text": 1.0,
+      "ratio": 14.569830860362037,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "unit:C-101",
+     "kind": "unit",
+     "shown": true,
+     "text": "C-101  Product Stripper",
+     "lines": 1,
+     "text_box": [
+      1171.0715103149414,
+      250.20214319229126,
+      1508.0765533447266,
+      279.06848430633545
+     ],
+     "plate_box": [
+      1148.261833190918,
+      238.58049631118774,
+      1529.934425354004,
+      291.38066053390503
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1339.573860168457,
+      305.068359375
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.02296506240963936,
+      "text": 1.0,
+      "ratio": 14.39044887133935,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:1",
+     "kind": "loto",
+     "shown": true,
+     "text": "1  A feed: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      320.4601764678955,
+      409.1265678405762,
+      735.0026321411133,
+      433.1818628311157
+     ],
+     "plate_box": [
+      302.3371982574463,
+      399.27382707595825,
+      754.0291786193848,
+      443.2830834388733
+     ],
+     "in_front": true,
+     "anchor_px": [
+      527.7313613891602,
+      353.89336109161377
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:2",
+     "kind": "loto",
+     "shown": true,
+     "text": "2  D feed: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      285.8763027191162,
+      487.7862739562988,
+      705.966796875,
+      511.8416976928711
+     ],
+     "plate_box": [
+      267.7895164489746,
+      477.8513288497925,
+      725.0237274169922,
+      521.8606495857239
+     ],
+     "in_front": true,
+     "anchor_px": [
+      495.92153549194336,
+      370.08652210235596
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:3",
+     "kind": "loto",
+     "shown": true,
+     "text": "3  E feed: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      138.79550457000732,
+      262.54708528518677,
+      556.4418983459473,
+      286.6024446487427
+     ],
+     "plate_box": [
+      120.8624267578125,
+      252.8475522994995,
+      575.6551551818848,
+      296.85693740844727
+     ],
+     "in_front": true,
+     "anchor_px": [
+      462.8841018676758,
+      386.92193269729614
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:4",
+     "kind": "loto",
+     "shown": true,
+     "text": "4  A and C feed: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      1169.4208145141602,
+      838.5351258516312,
+      1668.2125854492188,
+      862.5905978679657
+     ],
+     "plate_box": [
+      1150.4104614257812,
+      828.233528137207,
+      1686.2636947631836,
+      872.2429132461548
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1418.8168716430664,
+      886.5904837846756
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:5",
+     "kind": "loto",
+     "shown": true,
+     "text": "5  Purge: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      864.9832534790039,
+      710.6400561332703,
+      1276.3966369628906,
+      735.5468451976776
+     ],
+     "plate_box": [
+      846.1210441589355,
+      700.4722416400909,
+      1295.0276184082031,
+      745.3320908546448
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1070.6900024414062,
+      759.5467793941498
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:6",
+     "kind": "loto",
+     "shown": true,
+     "text": "6  Stripper product: battery-limit block valve*",
+     "lines": 1,
+     "text_box": [
+      1186.4883041381836,
+      773.2178056240082,
+      1725.4293823242188,
+      797.2733902931213
+     ],
+     "plate_box": [
+      1167.4600982666016,
+      762.9846203327179,
+      1743.420524597168,
+      806.9941663742065
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1455.9589004516602,
+      852.5067096948624
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:7",
+     "kind": "loto",
+     "shown": true,
+     "text": "7  R-101 agitator motor: electrical*",
+     "lines": 1,
+     "text_box": [
+      618.8346290588379,
+      176.4967131614685,
+      1029.7531127929688,
+      201.40347003936768
+     ],
+     "plate_box": [
+      600.2298545837402,
+      166.88710927963257,
+      1048.641700744629,
+      211.7467975616455
+     ],
+     "in_front": true,
+     "anchor_px": [
+      708.9545059204102,
+      302.9927158355713
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:8",
+     "kind": "loto",
+     "shown": true,
+     "text": "8  K-101 motor: electrical*",
+     "lines": 1,
+     "text_box": [
+      1026.6049575805664,
+      619.7885513305664,
+      1337.5391006469727,
+      639.7522974014282
+     ],
+     "plate_box": [
+      1008.5614013671875,
+      609.7157192230225,
+      1355.1182556152344,
+      649.6375787258148
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1182.0719146728516,
+      509.4541025161743
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.07838338613510132,
+      "text": 1.0,
+      "ratio": 8.178628338210808,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:9",
+     "kind": "loto",
+     "shown": true,
+     "text": "9  C-101 steam*",
+     "lines": 1,
+     "text_box": [
+      913.1492614746094,
+      768.8799011707306,
+      1103.1211853027344,
+      787.882719039917
+     ],
+     "plate_box": [
+      895.4162979125977,
+      758.6511898040771,
+      1120.7533264160156,
+      797.6130545139313
+     ],
+     "in_front": true,
+     "anchor_px": [
+      1152.9587173461914,
+      733.4289407730103
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.07838338613510132,
+      "text": 1.0,
+      "ratio": 8.178628338210808,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:10",
+     "kind": "loto",
+     "shown": true,
+     "text": "10  R-101 cooling water in/out*",
+     "lines": 1,
+     "text_box": [
+      438.22179794311523,
+      562.5734281539917,
+      807.0705986022949,
+      587.48002409935
+     ],
+     "plate_box": [
+      419.80570793151855,
+      552.5602054595947,
+      826.1919593811035,
+      597.4199903011322
+     ],
+     "in_front": true,
+     "anchor_px": [
+      622.6462554931641,
+      475.0853490829468
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "loto:11",
+     "kind": "loto",
+     "shown": true,
+     "text": "11  E-101 cooling water in/out*",
+     "lines": 1,
+     "text_box": [
+      647.7235794067383,
+      117.98511743545532,
+      1008.4165191650391,
+      142.89168119430542
+     ],
+     "plate_box": [
+      629.0885353088379,
+      108.43660354614258,
+      1027.3273086547852,
+      153.29629182815552
+     ],
+     "in_front": true,
+     "anchor_px": [
+      828.0700492858887,
+      452.58723735809326
+     ],
+     "anchor_on_screen": true,
+     "label_occluded_fraction": 0.0,
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.0775994062423706,
+      "text": 1.0,
+      "ratio": 8.228878416609259,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:badge",
+     "kind": "overlay_badge",
+     "shown": true,
+     "text": "Prototype \u00b7 placeholder geometry \u00b7 recorded replay",
+     "lines": 1,
+     "text_box": [
+      1350.6933975219727,
+      33.99996042251587,
+      1886.0022354125977,
+      54.78163003921509
+     ],
+     "in_front": true,
+     "plate_box": [
+      1338.6923819018734,
+      21.99999999999995,
+      1898.0,
+      66.78207472960152
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.024044062942266464,
+      "text": 1.0,
+      "ratio": 14.180745332933776,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:loto",
+     "kind": "overlay_card",
+     "shown": true,
+     "text": "Design mockup, not a procedure\nIsolation points are inferred from the TE seed\nmodel (marked *). A real lockout/tagout\nprocedure comes from the site's energy-control\nprogram (OSHA 1910.147), its verified P&IDs\nand an authorized person.",
+     "lines": 6,
+     "text_box": [
+      33.99774670600891,
+      33.99950981140137,
+      536.5389060974121,
+      192.66818046569824
+     ],
+     "in_front": true,
+     "plate_box": [
+      21.99999999999995,
+      21.99999999999995,
+      548.5395588659577,
+      204.6687146292792
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "overlay_caption",
+     "shown": true,
+     "text": "Lockout/tagout view: design mockup only\nNumbered tags mark isolation points inferred from the seed model; this is not a LOTO procedure.",
+     "lines": 2,
+     "text_box": [
+      33.99622678756714,
+      992.0907443761826,
+      1162.0841217041016,
+      1046.000924706459
+     ],
+     "in_front": true,
+     "plate_box": [
+      -4.977777777777781,
+      980.0896289348602,
+      1924.977777777778,
+      1084.9777777777779
+     ],
+     "label_occluded_by": null,
+     "contrast": {
+      "background": 0.023043015971779823,
+      "text": 1.0,
+      "ratio": 14.375090979343838,
+      "method": "median vs 97th/3rd percentile luminance in text box"
+     }
+    }
+   ],
+   "markers_px": {},
+   "focus_rects": [],
+   "placement_cost": {
+    "unit:U-100": 0.0,
+    "unit:R-101": 0.0,
+    "unit:E-101": 0.0,
+    "unit:V-101": 0.0,
+    "unit:K-101": 0.0,
+    "unit:C-101": 0.0,
+    "loto:1": 0.0,
+    "loto:2": 0.0,
+    "loto:3": 0.0,
+    "loto:4": 0.0,
+    "loto:5": 0.0,
+    "loto:6": 0.0,
+    "loto:7": 0.0,
+    "loto:8": 0.0,
+    "loto:9": 0.0,
+    "loto:10": 0.0,
+    "loto:11": 0.0
+   }
+  }
+ ]
+}

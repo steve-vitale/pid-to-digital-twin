@@ -22,7 +22,7 @@ when it isn't.**
 | `/m` Narrow overview | For a phone (390 px): process alarm count, data source and the active alarm list first, then the six units stacked with the overview's key values. Tiles open the unit screens, which stay 1600 px control-room layouts |
 
 Every page has the same bar: navigation, **Process alarms: N** (active alarms, each configured alarm counted once, so
-it matches the alarm table; until journal entry 40 it counted tags in alarm), the **data source** box (DATA SOURCE
+it matches the alarm table; until journal entry 47 it counted tags in alarm), the **data source** box (DATA SOURCE
 LOST while a data connection delivers no Good values: a diagnostic alarm, kept apart from process alarms), and the
 number of values outside their normal band.
 
@@ -57,7 +57,7 @@ How much to trust it:
 - **Fault 6 is an easy fault**: a feed going to zero. One fault is a demonstration, not a detection rate, so the
   bands were then scored on **all 21 published faults** with a rule fixed before scoring
   ([`scripts/fault_detection_eval.py`](../scripts/fault_detection_eval.py), [results](../out/fault_detection/fault_detection.md),
-  journal entry 40). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
+  journal entry 47). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
   first three are the faults the TE literature widely reports as near-invisible in these variables; 19 is a miss
   this method shares with a PCA T² baseline. On 193 hours of normal running they never saw, the bands raised **no
   false alarm** (not a guarantee: the 95% upper bound is about 0.37 per day). The price of K = 6 is lateness on

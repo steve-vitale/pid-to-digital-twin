@@ -3,8 +3,12 @@
 These notes check the text that rides on the 3D tour stills: the unit purpose cards, the public-incident
 citations and the labels' legibility. They also set out how the tour gets into the main branch. The 3D work itself
 lives on a separate local branch that has not been published (its tip is commit `8a0aff5`). Nothing here was
-reviewed by an operator or a process-safety engineer. The fixes are in [3d-content-fixes.patch](3d-content-fixes.patch)
-plus two scrubbed replacement files in [replace/](replace/) (see section 4), to be applied when the tour is merged. The stills in this folder are **from before the fixes**.
+reviewed by an operator or a process-safety engineer. The fixes were in `3d-content-fixes.patch`
+plus two scrubbed replacement files (see section 4), to be applied when the tour is merged.
+
+**Merged on 2026-10-13 (section 6).** The patch and the replacement files were applied and then removed from this
+folder (they are in the history); the stills here are now re-rendered **with** the fixes. Sections 1-5 are the
+review as it was written before the merge.
 
 ## 1. Purpose cards
 
@@ -129,7 +133,7 @@ TE source check), so its versions of every shared file are stale. Plan:
    path to the private corpus repository, that repository's internal file layout, a directory named after a
    person, and a real site's name as a deny-list term. The test file spelled out the private product's name in
    order to assert its absence. Both files are replaced wholesale by the scrubbed versions in
-   [replace/scripts/](replace/scripts/). They are full files rather than patch hunks, so that the patch never
+   `replace/scripts/`. They are full files rather than patch hunks, so that the patch never
    quotes the removed strings. In them:
    - the corpus layout and the deny terms come only from an untracked local JSON (`--corpus-config`) and the
      `HAZARD_DENY_TERMS` environment variable; nothing private is in the repository;
@@ -172,7 +176,37 @@ TE source check), so its versions of every shared file are stale. Plan:
 ## 5. What is still not done
 
 - No operator, process-safety engineer or second model has reviewed the cards, citations or LOTO points.
-- The stills are not re-rendered; the taller cards, the moved purge and the font change are untested visually.
+- The stills were not re-rendered before the merge; at the merge they were (section 6).
 - EPA RMP record contents were not re-checked against EPA data.
 - The aptness of each incident to its equipment kind is a judgement, not a check: see the Track B questions in
   `docs/review-kit/CHECKLIST_3D_STILLS.md`.
+
+## 6. The merge (2026-10-13)
+
+Done as planned in section 4, with these specifics:
+
+- **Copied:** only the tour's own source files at `8a0aff5` (`git archive`, read only; the branch was not merged and
+  nothing of its history is in this repository). `blender_tour_template.py` and `label_layout.py` were already here,
+  byte-identical, from the OPEN100 structural branch.
+- **Applied:** `3d-content-fixes.patch` on that export, then the two replacement files. Then removed from this folder.
+- **File-name collision:** the tour's purpose file is now `data/te_tour_cards.json` (function line, highlights,
+  inferred items per kind; no purpose text). `orientation_tour.load_purposes()` takes each purpose sentence and its
+  citations from `data/te_unit_purposes.json` by unit ID, and refuses a card that carries its own. A test checks that
+  every card's sentence is the model file's, verbatim.
+- **Topology:** the scene follows the model, so the purge pipe, FI-110, FV-206, AI-129 and LOTO point 5 are at V-101.
+  The model's streams now carry their own source-checked direction, so the old seed direction adapter is not needed;
+  the captions and the scene's basis strings say "source-checked topology, not reviewed by operations" instead of
+  "unverified seed".
+- **Font:** every label is Atkinson Hyperlegible, in both tours. At the old em sizes the new face measured 14.9-16.6
+  px at 1080p, under the 18 px minimum, so every em size is scaled by 1.25 (the threshold was not changed). The
+  larger labels then overlapped on the LOTO still, so the declutter search radius for overview stills grew from 0.22
+  to 0.30 of the frame height.
+- **One new defect, found by rendering all twelve stills:** TI-118 sat exactly in the plane of the stripper's second
+  platform deck and was hidden from every candidate camera. Markers on a column are now lifted 0.5 m clear of a deck.
+- **Result:** the verifier passes 17 of 17 on all twelve stills (five committed). The legacy-rule render, re-measured
+  as the "before" evidence, still fails legibility; its crowding now falls on tag pairs rather than E-101/K-101, and
+  the test asks for crowding anywhere.
+- **Hygiene:** `scripts/test_build_3d_scene.py` passed 78/78 with `HAZARD_DENY_TERMS` set in the environment (never
+  written to a file), and the staged tree and commit messages were searched for the terms.
+- **Not done:** the OCR read-back on the new stills (the OCR engine is not installed on the rendering machine); any
+  operator or process-safety review.

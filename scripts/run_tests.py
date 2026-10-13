@@ -47,6 +47,8 @@ FULL_ONLY_TESTS = (
     "scripts/test_te_topology.py",
     "scripts/test_te_pid_roundtrip.py",
     "scripts/test_open100_structural.py",
+    "scripts/test_build_3d_scene.py",
+    "scripts/test_verify_3d_render.py",
 )
 TESTS = SOURCE_TESTS + FULL_ONLY_TESTS
 DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
@@ -58,6 +60,8 @@ SOURCE_FILES = (
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json", "data/dataset_adapters/dexpi_examples.json",
     "data/te_pid_layout.json", "data/te_pid/key.json",
+    "data/te_tour_cards.json", "data/hazard_citations_prototype.json", "assets/fonts/AtkinsonHyperlegible-Regular.ttf",
+    "drafts/3d-tour/label_boxes.json", "drafts/3d-tour/before/label_boxes.json",
     *(f"data/te_pid/{s}.{e}" for s in ("101", "102", "103") for e in ("png", "graphml")),
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
     "out/svg/overview.svg", f"{TWIN}/plant_model.json",

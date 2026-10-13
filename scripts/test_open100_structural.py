@@ -217,10 +217,12 @@ def committed_outputs():
     check("tour stops follow the inferred tour order",
           [s["name"].split("sheet")[-1] for s in scene["shots"][1:]] ==
           [x for x in sdoc["tour_order"] if any(e["area"] == x for e in scene["equipment"])])
-    check("the copied renderer is byte-identical to the 3D tour branch's",
-          __import__("hashlib").sha1(b"blob %d\0" % len((ROOT / "scripts/blender_tour_template.py").read_bytes())
-                                     + (ROOT / "scripts/blender_tour_template.py").read_bytes()).hexdigest()
-          == "aa6e6e203c5d13553a5c5feb617e67dd7f7497fb")
+    # The renderer was first copied byte for byte from the 3D tour prototype; with the tour merged, both tours
+    # render through the one file (the label font and sizes changed there, for both).
+    import build_3d_scene as te3d
+    import build_open100_3d as o3d
+    check("both 3D tours render through the one shared renderer, scripts/blender_tour_template.py",
+          te3d.TEMPLATE == o3d.TEMPLATE == ROOT / "scripts" / "blender_tour_template.py" and o3d.TEMPLATE.is_file())
 
 
 def matrix():

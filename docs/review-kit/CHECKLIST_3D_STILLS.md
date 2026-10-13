@@ -2,7 +2,8 @@
 
 **Files:** `drafts/3d-tour/00_overview_normal.jpg`, `02_r-101_normal.jpg`, `21_overview_fault_alarm.jpg`,
 `30_flow_legend.jpg`, `40_loto_mockup.jpg`. Context: `drafts/3d-tour/README.md`. Automated checks already run:
-`drafts/3d-tour/REVIEW_NOTES.md` (OCR read-back, purpose-card sources, citation check).
+`drafts/3d-tour/REVIEW_NOTES.md` (purpose-card sources, citation check, an OCR read-back of the earlier stills) and
+`drafts/3d-tour/verification.md` (the render verifier on the current stills).
 
 Geometry, sizes and pipe routes are placeholders by design. Do not review them as if they were the plant.
 
@@ -11,8 +12,9 @@ Geometry, sizes and pipe routes are placeholders by design. Do not review them a
 View each still at 100 % on a normal monitor.
 
 1. **Every label readable** without zooming? Note any you had to zoom for.
-2. **1 versus I.** In this typeface the digit 1 and capital I look alike. Can you tell `TI-109` from `TI-I09`,
-   and LOTO tag `1` from `I`? (OCR confused them; see the review notes.)
+2. **1 versus I.** The earlier stills used a typeface in which the digit 1 and capital I look alike (OCR confused
+   them; see the review notes). The current stills use Atkinson Hyperlegible, designed to tell them apart. Can you
+   tell `TI-109` from `TI-I09`, and LOTO tag `1` from `I`?
 3. **Labels point at the right thing.** Each tag pill sits next to the marker it names, and each unit label next
    to its unit.
 4. **The draft status is visible:** the corner badge ("Prototype · placeholder geometry · recorded replay") and,
@@ -24,11 +26,11 @@ View each still at 100 % on a normal monitor.
 
 ## Track B: operations reviewer
 
-1. **Purpose cards** (text on `02`; all six cards in the 3D branch's `data/te_unit_purposes.json`, sourced
-   versions in `drafts/3d-tour/3d-content-fixes.patch`): is each unit's purpose and function right, and is
-   anything an operator needs missing?
+1. **Purpose cards** (text on `02`; the purpose sentences of all six units in `data/te_unit_purposes.json`, the
+   function lines in `data/te_tour_cards.json`): is each unit's purpose and function right, and is anything an
+   operator needs missing?
 2. **Flow (`30`):** is the order "feeds and recycle meet, react, condense, separate, recycle, strip" how you would
-   explain this process? The review notes record one known topology difference (where the purge is taken).
+   explain this process? The purge now leaves from the separator, as the simulator code shows (journal entry 42).
 3. **LOTO mockup (`40`):** are these the energy sources you would expect to isolate for these units (process
    feeds, purge, product, motors, cooling water, steam)? What is missing (e.g. the separator and stripper
    liquid outlets, analyser sample lines, instrument air, relief paths)? This is a design question about the view.

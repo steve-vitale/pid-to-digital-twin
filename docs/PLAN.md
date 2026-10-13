@@ -26,7 +26,7 @@ Other changes from the plan:
 - **Phase 3's TE drawing:** done on 2026-10-13, as a P&ID generated from the verified TE model in the OPEN100
   house style and read back with Claude and GPT (no Gemini). Its key comes from the same model, so it is a round
   trip, not a third-party score ([EVALUATION.md §6](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman),
-  journal entry 40).
+  journal entry 44).
 
 ## Decisions
 

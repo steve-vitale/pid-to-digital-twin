@@ -58,8 +58,8 @@ Apache License 2.0. Only those three fields were extracted; nothing else from th
 PI AF are AVEVA trademarks. This project is not affiliated with or endorsed by AVEVA.
 
 **Atkinson Hyperlegible** (Regular), copyright 2020 Braille Institute of America, Inc., licensed under the
-[SIL Open Font License 1.1](https://openfontlicense.org), is the label typeface of the 3D orientation tour. It arrives
-with the tour as `assets/fonts/AtkinsonHyperlegible-Regular.ttf`, with the licence text in `assets/fonts/OFL.txt`
-(source: the google/fonts repository, `ofl/atkinsonhyperlegible/`). Until the tour is merged, both files are carried
-in `drafts/3d-tour/3d-content-fixes.patch`. The font is bundled unmodified; the OFL allows bundling and
+[SIL Open Font License 1.1](https://openfontlicense.org), is the label typeface of the 3D orientation tour. It is bundled
+as `assets/fonts/AtkinsonHyperlegible-Regular.ttf`, with the licence text in `assets/fonts/OFL.txt`
+(source: the google/fonts repository, `ofl/atkinsonhyperlegible/`), and the OPEN100 structural tour uses it too.
+The font is bundled unmodified; the OFL allows bundling and
 redistribution with software, but not selling the font by itself.

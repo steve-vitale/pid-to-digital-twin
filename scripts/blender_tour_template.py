@@ -15,6 +15,18 @@ except ImportError:  # stub environments (the offline dry-run test)
     world_to_camera_view = Vector = None
 
 SCENE = json.loads(r"""__SCENE_JSON__""")
+# Label typeface: Atkinson Hyperlegible (SIL OFL 1.1, assets/fonts/), chosen because its 1, I and l are clearly
+# different; tag IDs are made of them. Filled in by build_3d_scene.blender_script.
+FONT_PATH = r"""__FONT_PATH__"""
+_FONT = []
+
+
+def label_font():
+    if not _FONT:
+        _FONT.append(bpy.data.fonts.load(FONT_PATH, check_existing=True) if os.path.isfile(FONT_PATH) else None)
+        if _FONT[0] is None:
+            print("WARNING label font not found, Blender default used:", FONT_PATH)
+    return _FONT[0]
 
 # __LABEL_LAYOUT__
 
@@ -38,8 +50,12 @@ COLORS = {"equipment": (0.55, 0.57, 0.6, 1), "pipe": (0.32, 0.34, 0.37, 1), "gro
           "platform": (0.55, 0.50, 0.30, 1), "valve": (0.28, 0.29, 0.31, 1), "actuator": (0.70, 0.72, 0.75, 1),
           "loto_plate": (0.20, 0.05, 0.03, 1), "band": (0.40, 0.75, 0.95, 1)}
 COLORS.update(STATE_COLORS)
-EM_PX = {"unit": 30.0, "tag": 25.0, "boundary": 25.0, "loto": 25.0}   # font size (em) in px at 1080p
-OVERLAY_EM_PX = {"caption": 24.0, "badge": 22.0, "card": 22.0, "legend": 22.0}
+# Atkinson Hyperlegible draws smaller glyphs than Blender's default font at the same em size, so every em size is
+# scaled by this factor; the render verifier's 18 px minimum line height at 1080p is measured, not assumed.
+LABEL_FONT_EM_SCALE = 1.25
+EM_PX = {k: v * LABEL_FONT_EM_SCALE for k, v in
+         {"unit": 30.0, "tag": 25.0, "boundary": 25.0, "loto": 25.0}.items()}   # font size (em) in px at 1080p
+OVERLAY_EM_PX = {k: v * LABEL_FONT_EM_SCALE for k, v in {"caption": 24.0, "badge": 22.0, "card": 22.0, "legend": 22.0}.items()}
 LABEL_DEPTH = 0.5        # labels float at half the anchor's distance: same screen spot, in front of the geometry
 GHOST_ALPHA = 0.25
 
@@ -178,6 +194,8 @@ def segment(name, a, b, r, mat=None, vertices=12):
 def text(name, body, loc, size, mat, camera=None, align="CENTER", align_y=None):
     curve = bpy.data.curves.new(name, "FONT")
     curve.body, curve.size, curve.align_x = body, size, align
+    if label_font() is not None:
+        curve.font = label_font()
     if align_y:
         try:
             curve.align_y = align_y
@@ -879,7 +897,7 @@ def main(argv):
         # Units first, then tags in shot order: priority = order of appearance.
         items.sort(key=lambda it: 0 if it["id"].startswith("unit:") else 1)
         placed = place_labels(items, W, H, obstacles, margin=14.0 * H / 1080, gap=8.0 * H / 1080,
-                              max_radius=0.34 * H if shot.get("focus") else 0.22 * H)
+                              max_radius=0.34 * H if shot.get("focus") else 0.30 * H)  # 0.22 before the larger label font
         for lid, r in placed.items():
             a, ax, ay, ppm, s, w0, h0, cx0, cy0, pad = info[lid]
             L = LABELS[lid]

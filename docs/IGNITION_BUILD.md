@@ -1,9 +1,9 @@
 # Ignition build and verification (plan written before the build; results at the end)
 
 > **Version note:** the results on this page are the historical scripted build (October 8). The Docker `.gwbk` restores that
-> build too. The current project (24 views since journal entry 40) was imported separately into a disposable Ignition
+> build too. The current project (24 views since journal entry 47) was imported separately into a disposable Ignition
 > 8.3.10 gateway on 2026-10-13 and passed V1–V8 plus a browser contract; see [the native acceptance page](IGNITION_ACCEPTANCE.md)
-> and journal entries 38 and 40.
+> and journal entries 38 and 47.
 
 
 Committed before any Ignition configuration exists. The checks below are the acceptance test. The build is done when

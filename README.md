@@ -102,7 +102,7 @@ flowchart LR
 
 | Platform | What's verified |
 |---|---|
-| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) |
+| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) |
 | AVEVA PI AF | Asset structure generated as a PI Builder sheet following the vendor-published conventions (element templates, documented headers, AF unit abbreviations, custom units defined rather than assumed). **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
@@ -208,7 +208,7 @@ Three separate pieces of evidence live here. Keep them apart:
   (51 confirmed, 4 corrected, 1 left unresolved; [report](out/te_topology_check.md)). Generated operator screens are
   driven by recorded simulation replay. The model was not extracted from a drawing, tap positions and pipe routes
   are not in the source, and replay is not a process simulator that responds to control changes. Since journal
-  entry 40, the model is also drawn as three P&ID sheets and extracted back, so the TE chain runs from a drawing
+  entry 44, the model is also drawn as three P&ID sheets and extracted back, so the TE chain runs from a drawing
   (see [One plant, end to end](#one-plant-end-to-end-tennessee-eastman)). That is a round trip on our own drawings,
   not an extraction of a real plant's sheets.
 - **PID2Graph Synthetic:** a bounded two-sheet adaptation through the existing scorer and exporters, with unresolved
@@ -315,7 +315,7 @@ placeholders stayed "not connected", and the recorded fault raised the alarm. St
 "Data source lost" diagnostic alarm, separate from process alarms, and the header counts active alarms the way the
 alarm table does. Each gateway run found bugs no offline check had caught; all were fixed with regression tests
 ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not),
-[entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm)).
+[entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm)).
 That is a lab result on recorded and synthetic data, not site or operator acceptance. `/m` is a 390 px overview
 (alarms first, then the units); the control-room screens stay 1600 px and scroll on a phone.
 
@@ -518,6 +518,7 @@ it at a real site.
 | · generated drawings (TE) | `draw_pid_from_model.py` (model to house-style sheets + keys), `style_fidelity.py`, `score_te_roundtrip.py` (symbols, tag text, connections, replicates), `te_model_diff.py` (reviewer diff), `te_live_check.py` (tags to replay points) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · OPEN100 structure (no process data) | `flow_direction.py` (direction from arrowheads, flags, pump ports), `direction_spot_check.py`, `open100_structure.py`, `transcribe_equipment_schedules.py`, `render_open100_structural.py`, `build_open100_3d.py` (with `blender_tour_template.py`, `label_layout.py`), `ignition/build_open100_mimic.py`, `deliverables_matrix.py` |
+| · 3D tour (proof of concept) | `build_3d_scene.py` (TE contract to a placeholder Blender scene and stills; Blender code in `blender_tour_template.py`, shared with the OPEN100 tour), `orientation_tour.py` (stop scripts, captions, purpose cards read from `data/te_unit_purposes.json`), `label_layout.py` (label declutter and contrast), `verify_3d_render.py` (render vs Ignition/PI exports, topology, P&ID trace, legibility), `hazard_citations.py` (prototype public-incident matching); data in `data/te_tour_cards.json` and `data/hazard_citations_prototype.json`; see [docs/3D_TOUR_PLAN.md](docs/3D_TOUR_PLAN.md) |
 | · demo | `demo.py` (one command to a running twin), `make_before_after.py` (also makes the social preview card), `make_demo_gif.py` |
 | · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `acceptance_preflight.py` (offline exact-candidate checks), `acceptance/` (the native acceptance harness), `ua_client.py`, `gw.py`, `make_local_ca.py` |
 | · tests and costs | `run_tests.py` (explicit source-only/full cached-data modes; CI defaults to full), `test_*.py`, `cost_report.py`; `*.ps1` reproduce the holdout tables on Windows |
@@ -551,6 +552,8 @@ it at a real site.
 | [docs/IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md) | The current project's native acceptance: matched files, the checklist, results and what it doesn't cover |
 | [docs/IGNITION_BUILD.md](docs/IGNITION_BUILD.md) | The twin in a running Ignition gateway: the nine checks, planted faults, results, security |
 | [docs/OPERATOR_SCREENS.md](docs/OPERATOR_SCREENS.md) | The generated operator screens: normal bands, early warning, what's data and what's judgement |
+| [docs/3D_TOUR_PLAN.md](docs/3D_TOUR_PLAN.md) | The 3D operator-orientation tour (proof of concept): what it adds, what is placeholder, procedural render verification, the review redesign, the LOTO design mockup, video vs interactive |
+| [docs/HAZARD_CITATIONS_DESIGN.md](docs/HAZARD_CITATIONS_DESIGN.md) | Citing public CSB/OSHA/EPA incidents per equipment type in the tour (prototype heuristic), and the integration path |
 | [docs/MODELS.md](docs/MODELS.md) | Which work used several models, which used Claude alone, and how each was checked |
 | [docs/JOURNAL.md](docs/JOURNAL.md) | Each step: what, how, why, lesson, and "at your plant" |
 | [docs/AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md) | Messy data, savings from imperfect drafts, safety and security, offline models and cost |
@@ -566,7 +569,7 @@ it at a real site.
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
 | Ignition build: TE replay values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Historical build: done, and also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
-| Current project in a native gateway | The corrected build (purge on the separator, [entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 24/24 routes, 284/284 navigation targets, data-source loss and recovery, header count = alarm table, 390 px `/m` overview ([journal entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm)) |
+| Current project in a native gateway | The corrected build (purge on the separator, [entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 24/24 routes, 284/284 navigation targets, data-source loss and recovery, header count = alarm table, 390 px `/m` overview ([journal entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm)) |
 | Fault detection with the normal bands, all 21 TE faults | Done: 17/21 detected, median 48 min, 0 false alarms in 193 h of held-out normal data; misses 3, 9, 15, 19; PCA T² baseline reimplemented ([EVALUATION.md](docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults)) |
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Tooling done; verified in a running gateway with synthetic data |
 | Operator screens (ISA-101 style): overview, unit screens, trends, learned normal bands, drawings as backgrounds | First pass done and checked in a gateway; key values and spans are Claude's choice, not yet reviewed by operations |
@@ -577,7 +580,7 @@ it at a real site.
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet; not imported into a PI System, by decision (below) | Scoped |
-| Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) |
+| Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |
 
 **PI is scoped to the asset structure, by decision.** The twin produces a PI AF hierarchy as a PI Builder sheet

@@ -105,7 +105,7 @@ class FakeVector(tuple):
 TOUR_FILES = ("scripts/build_3d_scene.py", "scripts/blender_tour_template.py", "scripts/orientation_tour.py",
               "scripts/label_layout.py", "scripts/hazard_citations.py", "scripts/verify_3d_render.py",
               "scripts/test_build_3d_scene.py", "scripts/test_verify_3d_render.py",
-              "data/hazard_citations_prototype.json", "data/te_unit_purposes.json",
+              "data/hazard_citations_prototype.json", "data/te_tour_cards.json",
               "docs/3D_TOUR_PLAN.md", "docs/HAZARD_CITATIONS_DESIGN.md")
 # Generic patterns only. The sensitive strings themselves are never written here: specific terms come from the
 # HAZARD_DENY_TERMS environment variable (hazard_citations.deny_terms), outside the repository.
@@ -241,7 +241,7 @@ def main():
     walk(scene)
     check('all scene coordinates are finite', numbers and all(math.isfinite(n) for n in numbers))
     check('tour follows seed flow order', [t['unit'] for t in scene['tour']] == ['U-100', 'R-101', 'E-101', 'V-101', 'K-101', 'C-101'])
-    check('tour order states its unverified basis', 'unverified' in scene['tour_order_basis'])
+    check('tour order states its basis, unverified by operations', 'unverified by operations' in scene['tour_order_basis'])
     marker = {m['tag']: m for m in scene['markers']}
     check('SC-212 (no replay source) is not connected', not marker['SC-212']['connected'])
     check('only SC-212 is not connected', [m['tag'] for m in scene['markers'] if not m['connected']] == ['SC-212'])
@@ -253,11 +253,18 @@ def main():
           math.dist(marker['FI-101']['position'][:2], next(p for p in scene['pipes'] if p['id'] == 'S1')['points'][-1][:2]) < 0.6)
     check('deterministic: same inputs give an identical scene', b3.build_scene(model, layout, bands, alarms) == scene)
 
-    # Directions: only the layout's adapter (or an explicit direction) authorizes arrows and a flow-ordered tour.
+    # Directions: only an explicit stream direction (verified against the simulator source, out/te_topology_check.md)
+    # or the layout's old seed adapter authorizes arrows and a flow-ordered tour.
+    check('every stream in the verified model carries its own direction, so every pipe is directed',
+          all(s.get('direction') == 'forward' for s in model['streams']) and all(p['directed'] for p in scene['pipes']))
     no_adapter = copy.deepcopy(layout)
-    no_adapter.pop('direction_adapter')
-    undirected = b3.build_scene(model, no_adapter)
-    check('without a direction adapter no pipe is directed', not any(p['directed'] for p in undirected['pipes']))
+    no_adapter.pop('direction_adapter', None)
+    undirected_model = copy.deepcopy(model)
+    for s in undirected_model['streams']:
+        s.pop('direction', None)
+    undirected = b3.build_scene(undirected_model, no_adapter)
+    check('without a direction (no stream direction, no adapter) no pipe is directed',
+          not any(p['directed'] for p in undirected['pipes']))
     check('without directions the tour is model order and says so',
           [t['unit'] for t in undirected['tour']] == [u['id'] for u in model['units']] and undirected['tour_order_basis'].startswith('model_order'))
 
@@ -300,7 +307,11 @@ def main():
 
     # The Blender script embeds exactly this scene and runs end to end against a stub bpy.
     hazards = hz.load_citations()
-    purposes = json.loads((ROOT / 'data/te_unit_purposes.json').read_text(encoding='utf-8'))
+    purposes = ot.load_purposes(ROOT / 'data/te_tour_cards.json', ROOT / 'data/te_unit_purposes.json')
+    main_purposes = json.loads((ROOT / 'data/te_unit_purposes.json').read_text(encoding='utf-8'))['units']
+    check('every tour card takes its purpose sentence verbatim from data/te_unit_purposes.json (none of its own)',
+          all(k['purpose'] == main_purposes[k['unit']]['purpose'] for k in purposes['kinds'].values())
+          and not any('purpose' in k for k in json.loads((ROOT / 'data/te_tour_cards.json').read_text(encoding='utf-8'))['kinds'].values()))
     toured = b3.tour_scene(with_states, model, layout, bands, alarms, replay, hazards, 1, purposes=purposes)
     source = b3.blender_script(toured)
     compile(source, 'te_scene_blender.py', 'exec')

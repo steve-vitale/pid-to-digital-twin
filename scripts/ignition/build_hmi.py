@@ -17,7 +17,7 @@ fill = normal; amber = outside the normal band (a display aid, not an alarm); re
 colours come from each tag's State member, set in the gateway (build_gateway.py), so the screens and anything else
 reading the tags agree.
 
-Two "no data" states, one look each, on every screen (journal entry 40):
+Two "no data" states, one look each, on every screen (journal entry 47):
   not connected  no data source is configured for this point at all (SC-212, the 334 unmapped drawing instruments).
                  Muted italic text, white background, dashed border. Permanent until someone maps it.
   UNKNOWN        a data source is configured but the gateway has no Good value now (replay stopped, bad quality).
@@ -200,7 +200,7 @@ def indicator(name, x, y, w, h, base, band, limits):
             "position": {"x": x, "y": y, "width": w, "height": h}, "props": props,
             "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}]),
                            # With no Good value Perspective still draws the pointer, at the scale minimum, which reads
-                           # as a real low value (seen with the replay stopped, journal entry 40). Hide it instead.
+                           # as a real low value (seen with the replay stopped, journal entry 47). Hide it instead.
                            "props.style.visibility": tag_binding(base + "/PV", [{"type": "script", "code": INDICATOR_VISIBILITY}])}}
 
 

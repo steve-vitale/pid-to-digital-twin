@@ -1,0 +1,428 @@
+{
+ "schema": "pid-hazard-citations/0 (prototype)",
+ "status": "PROTOTYPE heuristic shortlist, curated by Claude. Not a hazard analysis, not reviewed by a process-safety engineer or an operator. A citation shows that a hazard mechanism has hurt people in the public record; it does not say the mechanism applies to this unit at a real plant. A PHA/HAZOP team decides that.",
+ "method": "scripts/hazard_citations.py --corpus-repo <corpus repository checkout> --ref origin/main: lowercase substring keyword hits per equipment kind (KIND_TERMS), specific hits weigh 2 and generic words 1, and a record scores zero unless at least one equipment-specific term hits (the same precision-floor idea as the source system's incident-precedent matcher). Claude then picked 3-5 per kind from the ranked list, dropped duplicates and false positives, and wrote the one-line hazard summaries. heuristic_score and matched_terms below are copied from that run.",
+ "source_snapshot": {
+  "corpus": "Public-incident corpus of a separate permit/hazard system (private repository; only public agency records were read)",
+  "commit": "9a96a4d42da2d077ad12e92a6c56e32306907c81",
+  "records_scanned": 972,
+  "corpora": {
+   "csb_corpus": "CSB investigations corpus (CSB recommendation text, public)",
+   "precedent_cards": "curated CSB precedent cards (public CSB URLs)",
+   "public_eval_fixture": "evaluation fixtures marked as public-source specimens (CSB/OSHA)",
+   "epa_rmp": "EPA RMP accident records as compiled by the Data Liberation Project (CC-BY-SA-4.0). The corpus built record URLs as https://www.epa.gov/rmp?facility=<id>; checked 2026-10-13, that address returns the RMP landing page and ignores the facility id, so it is not used. Each EPA RMP citation links EPA's RMP Public Data Sharing search tool and gives the accident and facility ids to look up there or in the Data Liberation Project mirror."
+  },
+  "excluded": "Anything that is not a public agency record (synthetic fixtures, non-public material, non-agency sources). No private data was read into or copied to this file."
+ },
+ "heuristic_false_positives_seen": [
+  {
+   "kind": "stripper",
+   "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR1401.pdf",
+   "why": "matched 'tower' (an airport control tower), not a process column"
+  },
+  {
+   "kind": "stripper",
+   "url": "https://www.epa.gov/rmp?facility=100000194112",
+   "why": "matched 'column' in 'sight column' on an ammonia vessel, not a distillation column",
+   "record_note": "facility id 100000194112; the corpus URL does not resolve to the record"
+  },
+  {
+   "kind": "reactor",
+   "url": "https://www.csb.gov/husky-energy-superior-refinery-explosion-and-fire/",
+   "why": "matched 'reactor' (an FCC reactor) at rank 3; an FCC isolation failure, a weak fit for a gas-phase reactor"
+  }
+ ],
+ "kinds": {
+  "feed": {
+   "twin_units": [
+    "U-100"
+   ],
+   "twin_link": "Feed header with flow control valves FV-201, FV-202, FV-203 on gaseous feeds; isolation and line-opening practice",
+   "citations": [
+    {
+     "id": "csb-tpc-port-neches",
+     "title": "TPC Group Port Neches explosions and fire",
+     "agency": "CSB",
+     "year": 2019,
+     "url": "https://www.csb.gov/tpc-port-neches-explosions-and-fire/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 7,
+     "matched_terms": [
+      "dead leg",
+      "piping"
+     ],
+     "hazard": "Explosions and fire at a butadiene plant on November 27, 2019. The CSB asked for guidance on finding and eliminating dead legs in piping, including ones formed when a spare pump is out of service.",
+     "caption": "CSB: find and remove dead legs in piping (TPC Port Neches explosions, 2019)."
+    },
+    {
+     "id": "csb-pemex-deer-park",
+     "title": "PEMEX Deer Park chemical release",
+     "agency": "CSB",
+     "year": 2024,
+     "url": "https://www.csb.gov/pemex-deer-park-chemical-release-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 5,
+     "matched_terms": [
+      "blind",
+      "piping"
+     ],
+     "hazard": "Hydrogen sulfide was released while workers removed an isolation blind from a gas line: two fatalities, 13 injuries.",
+     "caption": "H2S was released while a blind was removed from a gas line: 2 died at PEMEX Deer Park, 2024 (CSB)."
+    },
+    {
+     "id": "csb-lyondellbasell-la-porte",
+     "title": "LyondellBasell La Porte fatal chemical release",
+     "agency": "CSB",
+     "year": 2021,
+     "url": "https://www.csb.gov/lyondellbasell-la-porte-fatal-chemical-release-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 4,
+     "matched_terms": [
+      "plug valve"
+     ],
+     "hazard": "About 100,000 lb of acetic acid was released during a maintenance event; two contractors died. The CSB's recommendations target plug valves (API 599).",
+     "caption": "100,000 lb released during maintenance at LyondellBasell La Porte, 2021; CSB targets plug valves."
+    },
+    {
+     "id": "csb-remote-isolation-study",
+     "title": "CSB safety study: remote isolation of process equipment",
+     "agency": "CSB",
+     "year": 2024,
+     "url": "https://www.csb.gov/csb-safety-study-remote-isolation-of-process-equipment/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 4,
+     "matched_terms": [
+      "remote isolation"
+     ],
+     "hazard": "Across many incidents, losses of containment escalated because equipment could not be isolated remotely (CSB safety study, July 25, 2024).",
+     "caption": "CSB found releases escalate when equipment cannot be isolated remotely."
+    }
+   ]
+  },
+  "reactor": {
+   "twin_units": [
+    "R-101"
+   ],
+   "twin_link": "Reactor pressure PI-107 and temperature TI-109 (published shutdown limits), cooling water valve TV-210, outlet TI-121",
+   "citations": [
+    {
+     "id": "csb-kuraray-pasadena",
+     "title": "Kuraray America EVAL plant release and fire",
+     "agency": "CSB",
+     "year": 2018,
+     "url": "https://www.csb.gov/kuraray-pasadena-release-and-fire/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 6,
+     "matched_terms": [
+      "pressure-relief",
+      "reactor"
+     ],
+     "hazard": "An explosion injured 21 workers. The CSB asked for the reactor's lower design pressure to be made clear in operator training, procedures and the control interface, and for emergency relief to discharge to a safe location.",
+     "caption": "CSB: put the reactor's pressure limit in operator training (Kuraray, 2018, 21 injured)."
+    },
+    {
+     "id": "csb-bayer-cropscience-mic",
+     "title": "Bayer CropScience runaway reaction and explosion",
+     "agency": "CSB",
+     "year": 2008,
+     "url": "https://www.csb.gov/bayer-cropscience-pesticide-waste-tank-explosion/",
+     "corpus": "precedent_cards",
+     "heuristic_score": 8,
+     "matched_terms": [
+      "overpressur",
+      "runaway"
+     ],
+     "hazard": "A runaway chemical reaction destroyed a waste-treatment vessel; two workers died. Cited for runaway exothermic reactions in general, not as a gas-phase reactor case.",
+     "caption": "A runaway reaction destroyed a waste-treatment vessel at Bayer CropScience, 2008: 2 died (CSB)."
+    },
+    {
+     "id": "osha-polycarbon-seqens",
+     "title": "PolyCarbon Industries pressure vessel explosion (OSHA PSM citations)",
+     "agency": "OSHA (US DOL)",
+     "year": 2023,
+     "url": "https://www.dol.gov/newsroom/releases/osha/osha20231116",
+     "corpus": "public_eval_fixture",
+     "heuristic_score": 4,
+     "matched_terms": [
+      "decomposition",
+      "temperature limit"
+     ],
+     "hazard": "On May 4, 2023, a pressure vessel exploded at PolyCarbon Industries in Newburyport, Massachusetts, and killed an employee; OSHA found no safe upper and lower temperature limits and no evaluation of what happens when the process deviates.",
+     "caption": "OSHA: no safe temperature limits before a fatal vessel explosion (PolyCarbon, 2023)."
+    },
+    {
+     "id": "csb-arkema-crosby",
+     "title": "Arkema Crosby chemical plant fire",
+     "agency": "CSB",
+     "year": 2017,
+     "url": "https://www.csb.gov/arkema-inc-chemical-plant-fire-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 2,
+     "matched_terms": [
+      "refrigeration"
+     ],
+     "hazard": "Flooding disabled refrigeration; without cooling, organic peroxides decomposed and burned. A loss-of-cooling case, not a reactor.",
+     "caption": "Loss of cooling led to decomposition and fire at Arkema Crosby in 2017 (CSB)."
+    }
+   ],
+   "aptness_note": "Checked for a gas-phase exothermic reactor case: the 972-record corpus has none. Kuraray (a reactor taken above its pressure limit; the CSB asked for that limit to be made clear in operator training and the control interface) is the closest fit to the PI-107 alarm and leads; Bayer CropScience is kept, phrased generally, as a runaway-reaction example."
+  },
+  "condenser": {
+   "twin_units": [
+    "E-101"
+   ],
+   "twin_link": "Product condenser with cooling water valve TV-211 and outlet temperature TI-122 (ownership disputed)",
+   "citations": [
+    {
+     "id": "csb-tesoro-anacortes",
+     "title": "Tesoro Anacortes refinery fatal explosion and fire",
+     "agency": "CSB",
+     "year": 2010,
+     "url": "https://www.csb.gov/tesoro-anacortes-refinery-fatal-explosion-and-fire-/",
+     "corpus": "public_eval_fixture",
+     "heuristic_score": 11,
+     "matched_terms": [
+      "exchanger",
+      "heat exchanger"
+     ],
+     "hazard": "On April 2, 2010, a carbon-steel heat exchanger weakened by high-temperature hydrogen attack ruptured during a maintenance operation to switch a process stream between two parallel banks of exchangers; seven workers died.",
+     "caption": "A heat exchanger weakened by hydrogen attack ruptured at Tesoro Anacortes in 2010, killing 7 (CSB)."
+    },
+    {
+     "id": "epa-rmp-1000086158",
+     "title": "EPA RMP accident 1000086158: chlorine release from a heat exchanger",
+     "agency": "EPA RMP",
+     "year": 2024,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000086158",
+     "heuristic_score": 6,
+     "matched_terms": [
+      "exchanger",
+      "heat exchanger"
+     ],
+     "hazard": "Chlorine gas release from a heat exchanger; equipment failure and process design failure recorded as contributing factors.",
+     "caption": "EPA RMP record: chlorine released from a failed heat exchanger (2024).",
+     "facility_id": "100000053014",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000086158 (facility 100000053014) there or in the Data Liberation Project mirror."
+    },
+    {
+     "id": "epa-rmp-1000086219",
+     "title": "EPA RMP accident 1000086219: ammonia release from a heat exchanger",
+     "agency": "EPA RMP",
+     "year": 2022,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000086219",
+     "heuristic_score": 5,
+     "matched_terms": [
+      "exchanger",
+      "heat exchanger"
+     ],
+     "hazard": "Anhydrous ammonia released for 1.5 hours from a heat exchanger; equipment failure and overpressurization recorded.",
+     "caption": "EPA RMP record: an overpressured heat exchanger released ammonia for 90 min (2022).",
+     "facility_id": "100000123724",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000086219 (facility 100000123724) there or in the Data Liberation Project mirror."
+    },
+    {
+     "id": "csb-williams-geismar",
+     "title": "Williams Olefins Geismar plant explosion and fire",
+     "agency": "CSB",
+     "year": 2013,
+     "url": "https://www.csb.gov/williams-olefins-plant-explosion-and-fire-/",
+     "corpus": "public_eval_fixture",
+     "heuristic_score": 2,
+     "matched_terms": [
+      "reboiler"
+     ],
+     "hazard": "Heat was put into a standby exchanger (a reboiler) while it was isolated from its relief path; it ruptured. Two workers died and 167 were injured.",
+     "caption": "An exchanger heated while isolated from relief ruptured at Williams Geismar, 2013 (CSB)."
+    }
+   ]
+  },
+  "separator": {
+   "twin_units": [
+    "V-101"
+   ],
+   "twin_link": "Vapor/liquid separator: level LI-112 and liquid valve LV-207 (liquid carryover into the recycle compressor), pressure PI-113",
+   "citations": [
+    {
+     "id": "csb-cuisine-solutions",
+     "title": "Cuisine Solutions ammonia release",
+     "agency": "CSB",
+     "year": 2024,
+     "url": "https://www.csb.gov/cuisine-solutions-ammonia-release-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 10,
+     "matched_terms": [
+      "knockout",
+      "surge drum",
+      "two-phase",
+      "vapor-liquid"
+     ],
+     "hazard": "A July 31, 2024 ammonia release at a food plant in Loudoun County, Virginia; forty people were evaluated at hospitals. In its final report (September 25, 2025) the CSB asked for liquid or two-phase relief discharges to be prevented or mitigated, with attention to horizontal surge vessels with little vapor space and to vapor-liquid disengagement during relief.",
+     "caption": "CSB: keep liquid out of relief from drums with little vapor space (Cuisine Solutions, 2024)."
+    },
+    {
+     "id": "csb-bp-husky-oregon",
+     "title": "BP-Husky Toledo refinery (Oregon, Ohio) chemical release and fire",
+     "agency": "CSB",
+     "year": 2022,
+     "url": "https://www.csb.gov/bp---husky-oregon-chemical-release-and-fire-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 8,
+     "matched_terms": [
+      "drum overflow",
+      "mix drum"
+     ],
+     "hazard": "Two workers died in a release and fire on September 20, 2022. The CSB asked for guidance on fuel gas mix drum overflow, for high-level detection to prevent overfilling, and for overflow prevention on towers and drums.",
+     "caption": "CSB: detect high level and prevent drum overflow (BP-Husky Toledo, 2022)."
+    },
+    {
+     "id": "epa-rmp-1000085523",
+     "title": "EPA RMP accident 1000085523: relief valve on a compressor oil separator lifted",
+     "agency": "EPA RMP",
+     "year": 2023,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000085523",
+     "heuristic_score": 3,
+     "matched_terms": [
+      "separator"
+     ],
+     "hazard": "A relief valve on an oil separator lifted to atmosphere through the relief header for 10 hours; 38 people evacuated.",
+     "caption": "EPA RMP record: a separator relief valve vented for 10 hours; 38 evacuated (2023).",
+     "facility_id": "100000029346",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000085523 (facility 100000029346) there or in the Data Liberation Project mirror."
+    }
+   ]
+  },
+  "compressor": {
+   "twin_units": [
+    "K-101"
+   ],
+   "twin_link": "Recycle compressor: work JI-120, recycle valve HV-205, purge FV-206 and purge flow FI-110",
+   "note": "No CSB investigation in this corpus centres on a compressor; the three citations are EPA RMP accident records.",
+   "citations": [
+    {
+     "id": "epa-rmp-1000086318",
+     "title": "EPA RMP accident 1000086318: propane/ethane release, fire and explosion at a compressor",
+     "agency": "EPA RMP",
+     "year": 2024,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000086318",
+     "heuristic_score": 5,
+     "matched_terms": [
+      "compressor"
+     ],
+     "hazard": "Hydrocarbon gas release from a compressor ignited and exploded; about $13M property damage; equipment and process design failure recorded.",
+     "caption": "EPA RMP record: a compressor gas release exploded, about $13M damage (2024).",
+     "facility_id": "100000060667",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000086318 (facility 100000060667) there or in the Data Liberation Project mirror."
+    },
+    {
+     "id": "epa-rmp-1000085901",
+     "title": "EPA RMP accident 1000085901: chlorine release and fire at a compressor",
+     "agency": "EPA RMP",
+     "year": 2022,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000085901",
+     "heuristic_score": 4,
+     "matched_terms": [
+      "compressor"
+     ],
+     "hazard": "A compressor release and fire during a process upset lasted almost 34 hours; 6,395 people sheltered in place.",
+     "caption": "EPA RMP record: a compressor upset led to a 34-hour release; 6,395 sheltered (2022).",
+     "facility_id": "100000231536",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000085901 (facility 100000231536) there or in the Data Liberation Project mirror."
+    },
+    {
+     "id": "epa-rmp-1000085297",
+     "title": "EPA RMP accident 1000085297: methane release and fire at a compressor discharge bottle",
+     "agency": "EPA RMP",
+     "year": 2017,
+     "url": "https://cdxapps.epa.gov/olem-rmp-pds/",
+     "corpus": "epa_rmp",
+     "record_id": "1000085297",
+     "heuristic_score": 4,
+     "matched_terms": [
+      "compressor"
+     ],
+     "hazard": "A small fitting on a compressor's discharge bottle failed; the methane release caught fire.",
+     "caption": "EPA RMP record: a failed fitting on a compressor discharge caught fire (2017).",
+     "facility_id": "100000227248",
+     "url_note": "EPA RMP Public Data Sharing search, not a record page: look up accident 1000085297 (facility 100000227248) there or in the Data Liberation Project mirror."
+    }
+   ]
+  },
+  "stripper": {
+   "twin_units": [
+    "C-101"
+   ],
+   "twin_link": "Product stripper: level LI-115 and product valve LV-208, steam FI-119 / FV-209, pressure PI-116",
+   "citations": [
+    {
+     "id": "csb-bp-texas-city",
+     "title": "BP Texas City refinery explosion (15 fatalities)",
+     "agency": "CSB",
+     "year": 2005,
+     "url": "https://www.csb.gov/bp-america-refinery-explosion/",
+     "corpus": "precedent_cards",
+     "heuristic_score": 10,
+     "matched_terms": [
+      "distillation",
+      "splitter",
+      "tower"
+     ],
+     "hazard": "During startup a distillation tower was overfilled and overheated; hydrocarbon vented from a blowdown stack and ignited. Fifteen people died.",
+     "caption": "An overfilled tower during startup killed 15 at BP Texas City in 2005 (CSB)."
+    },
+    {
+     "id": "csb-bp-husky-oregon-tower",
+     "title": "BP-Husky Toledo refinery (Oregon, Ohio) chemical release and fire",
+     "agency": "CSB",
+     "year": 2022,
+     "url": "https://www.csb.gov/bp---husky-oregon-chemical-release-and-fire-/",
+     "corpus": "csb_corpus",
+     "heuristic_score": 6,
+     "matched_terms": [
+      "tower"
+     ],
+     "hazard": "The CSB asked for a publication on preventing the overflow of pressure vessels such as towers and drums.",
+     "caption": "CSB asks industry to prevent towers and drums from overflowing (BP-Husky Toledo, 2022)."
+    },
+    {
+     "id": "csb-williams-geismar-stripper",
+     "title": "Williams Olefins Geismar plant explosion and fire",
+     "agency": "CSB",
+     "year": 2013,
+     "url": "https://www.csb.gov/williams-olefins-plant-explosion-and-fire-/",
+     "corpus": "public_eval_fixture",
+     "heuristic_score": 2,
+     "matched_terms": [
+      "reboiler"
+     ],
+     "hazard": "Heat went into a column reboiler that was isolated from its relief path; it ruptured. Two workers died and 167 were injured. The TE stripper is heated with steam (FI-119), so blocked-in heating is the shared mechanism.",
+     "caption": "Heat into a blocked-in reboiler killed two at Williams Geismar in 2013 (CSB)."
+    }
+   ]
+  }
+ },
+ "wording_rule": "Summaries state only what the corpus record states; where the record is a CSB recommendation, the summary says what the CSB asked for, not what happened.",
+ "source_check": {
+  "date": "2026-10-13",
+  "method": "Each citation's date, location, casualty count and quoted recommendation was read against the agency page (csb.gov, dol.gov). Corrections from that check are applied in this file; EPA RMP record details were not re-checked against EPA data.",
+  "corrections": [
+   "Tesoro Anacortes: the rupture was during a maintenance operation to switch a process stream between two parallel banks of exchangers, not during a restart.",
+   "Williams Olefins Geismar: URL corrected to the live CSB page; 167 injured added.",
+   "Bayer CropScience: the residue-treater and restart-before-ready details are not on the cited CSB page; the summary now says only what the page supports.",
+   "PolyCarbon Industries: location (Newburyport, Massachusetts) and date (May 4, 2023) added from the OSHA release.",
+   "Cuisine Solutions: completed investigation (final report September 25, 2025); 'knockout drums' removed (not in the recommendation text); location added.",
+   "BP-Husky Toledo (Oregon, Ohio): year 2022 and two fatalities added.",
+   "EPA RMP: record URLs that do not resolve to a record replaced by EPA's RMP search tool plus the record ids.",
+   "CSB remote-isolation safety study: publication date (July 25, 2024) added."
+  ]
+ }
+}

@@ -45,3 +45,7 @@ out/open100_structural/mimic/*.html
 out/open100_structural/3d/renders/
 out/open100_structural/3d/open100_scene_blender.py
 out/open100_structural/schedule_crops/
+
+# 3D tour (proof of concept): scene JSON, generated Blender script and full-size renders are regenerable
+# (python scripts/build_3d_scene.py); the review stills and their measured label boxes are committed under drafts/3d-tour/.
+out/3d/

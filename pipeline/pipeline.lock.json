@@ -36,8 +36,8 @@
     "data/te_display_layout.json": "1e9e0cdfbe094368e6faa2f2744897248309c2ad57c2d7d594256b856453293b",
     "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
     "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
-    "scripts/ignition/build_gateway.py": "3a3e31f870f830d311ca5e0461e905db99fd58eb5ab21f74010a8d5f99aadf1a",
-    "scripts/ignition/build_hmi.py": "b85e35fa97bbeb79cc9d64127b0aa0f11728c03e0a18fc6aeb02d1af535aaa09",
+    "scripts/ignition/build_gateway.py": "526aec6b442846c02424c9580aa52f03b8c3c64f4108aac484a64f72c645c7df",
+    "scripts/ignition/build_hmi.py": "754c47f228e52d846a1008bbe04209fc9e79030e4cc9826053c29cf341d05b05",
     "scripts/ignition/build_mimic.py": "6312cf7c82a2282d663078a4373c725a1541a3801ea2f122eb1589f8c14211c7",
     "scripts/ignition/build_views.py": "f8dd3205c46b5d4e255f0a6339cec59c8d8efe4dd1397dc0c3ea6e672cab15e0",
     "scripts/ignition/te_channels.py": "f9954ede386a5283d75aa0e12cc4e753c764c2f729ecdd839f8831c91abfb7dd",
@@ -274,15 +274,16 @@
   },
   "open100.scene": {
    "inputs": {
+    "assets/fonts/AtkinsonHyperlegible-Regular.ttf": "e15fd8fb72cdeff36164aa706c84a50e3ddcc6b0c5b42ad52b6ae8792ff0a755",
     "out/open100_structural/plant_structure.json": "f856d2727ede991fad80a41bfe2eb262eaec7e84837bcac6f394dfdc1c1926a7",
-    "scripts/blender_tour_template.py": "1b15b3771a3d9c9bc55b3614ec162c733e2043d3a69ee3a6e70ab145b0151b3c",
-    "scripts/build_open100_3d.py": "ad23863346e8cb4b15cba9d57af37f3ed146dd320dfb28d35b7b484303897027",
+    "scripts/blender_tour_template.py": "cc8c7644158105e9108bb840ca295870ebf37d8aed80c7c23a4d696841796d63",
+    "scripts/build_open100_3d.py": "603466983d8511444e3f27b78bd6487ff51710971d6082d663cb60988e3b05c1",
     "scripts/label_layout.py": "0c1af7a7dbed9c3e44d95c4537c9070173d2b371b486cd981a13ef9563631709"
    },
    "outputs": {
-    "docs/screenshots/open100/3d-00_overview.jpg": "6c7ef7b9f966d53bdd798dcdb72e9d488e96b18f20b7d9bd07791f2c4051ec94",
-    "docs/screenshots/open100/3d-01_stop_sheet3.jpg": "7b5689ee21f42e27ffd085476dcdc374997634c9b6f5cd67cf787f81dbdd0282",
-    "docs/screenshots/open100/3d-05_stop_sheet7.jpg": "4b53ab4513b7f42da9d7243278d5ef743928c5dfc70558ed009bbaa60c829666",
+    "docs/screenshots/open100/3d-00_overview.jpg": "a515d980727d33ac043977f4dc7c8ee6e0bb3ec26d4dd49a8ce7256cb99bdbb4",
+    "docs/screenshots/open100/3d-01_stop_sheet3.jpg": "d5947b401f17dfbb67648f22849577ff050f0047fce40ac3bab24acf2622f9a5",
+    "docs/screenshots/open100/3d-05_stop_sheet7.jpg": "90ee342274efc747f47979e895de5d00baf49cd61959d7fa809bb07822db8b4b",
     "out/open100_structural/3d/open100_scene.json": "897f102c7f4162773abe22c8444b4442e6b45aee3093fc1b9a1de985da05f0ad"
    }
   },
@@ -358,6 +359,18 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.graphml": "b187afadfa6382cb0c08046c78fbea8a010999ca4c6e02118f275251588dc309",
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c"
    }
+  },
+  "open100.structural_check": {
+   "inputs": {
+    "docs/deliverables_matrix.json": "e7ae499231c11023b4927a5c91c102eec46b3f06d6088286444c6cf55cc08dc1",
+    "out/open100_structural/3d/open100_scene.json": "897f102c7f4162773abe22c8444b4442e6b45aee3093fc1b9a1de985da05f0ad",
+    "out/open100_structural/flow_direction.json": "16a57faf86142c8b346ee58fc61baa8dda0b53742267c8fb2631e66295a1420f",
+    "out/open100_structural/mimic/views.json": "a2951743eb952aaf4caad261ceed9d7ed29cf422f87b1bacd9ba7560cd5d8c3f",
+    "out/open100_structural/plant_structure.json": "f856d2727ede991fad80a41bfe2eb262eaec7e84837bcac6f394dfdc1c1926a7",
+    "scripts/deliverables_matrix.py": "f1420285254a8b8567f069f0084c8fd850ead8225b8e0d5cb7820d6822334d4f",
+    "scripts/test_open100_structural.py": "1cd8aee51229b1d5b52a5cd62a921556b7a6c7b410a77b53ba5c2fe9102d0749"
+   },
+   "outputs": {}
   },
   "open100.structure": {
    "inputs": {
@@ -435,7 +448,7 @@
     "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
     "scripts/build_scene_data.py": "e490027bfb7cad92463e15aef591cf3c771a0fd428c9ba7e467ceb6c3caff876",
     "scripts/export_mimic_layout.py": "2fcbc5601694ad37e2d48df1e0b01f1b2f339fb0b30a6378263677e3212e2261",
-    "scripts/ignition/build_hmi.py": "b85e35fa97bbeb79cc9d64127b0aa0f11728c03e0a18fc6aeb02d1af535aaa09",
+    "scripts/ignition/build_hmi.py": "754c47f228e52d846a1008bbe04209fc9e79030e4cc9826053c29cf341d05b05",
     "scripts/ignition/build_mimic.py": "6312cf7c82a2282d663078a4373c725a1541a3801ea2f122eb1589f8c14211c7",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
@@ -688,6 +701,41 @@
    },
    "outputs": {
     "out/te_topology_check.md": "55f92d70203e19b018a784ce2ef8e5020a77431279c10196c82801e1e0b43a8a"
+   }
+  },
+  "te.tour": {
+   "inputs": {
+    "assets/fonts/AtkinsonHyperlegible-Regular.ttf": "e15fd8fb72cdeff36164aa706c84a50e3ddcc6b0c5b42ad52b6ae8792ff0a755",
+    "data/hazard_citations_prototype.json": "49081c58d5fa352237145eaf081a71dc6baa7bac23380097273fd2920c331df2",
+    "data/te_display_layout.json": "1e9e0cdfbe094368e6faa2f2744897248309c2ad57c2d7d594256b856453293b",
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+    "data/te_tour_cards.json": "da8b79944311260984d11d9ddb05a03534547cbdd13f84df55dd613f03eb4d47",
+    "data/te_unit_purposes.json": "747d44e9a432c9908ce3c485d010d70ef60db1c1f29fb04d542881b36ecbcf9d",
+    "out/ignition/gateway/PIDTwin.zip": "ed30b285c9f5c0ddebbe90cdec024600777e821db53d645e3c7428c1b2b432c4",
+    "out/ignition/gateway/build_meta.json": "6cb64026662afa33501b02001a9627a0119fa1e4ae539d1ad0a4100d178c883c",
+    "out/ignition/gateway/twin_provider.json": "dba12b98f20c1e636a490834ed5f3f5b2c05e9e3cbdbced0800af9a5b5607ad5",
+    "out/ignition/normal_bands.json": "e3054edc52bfc4b5b80cf9d89770afc5e183c6b004c7abf47c723603c96d2de3",
+    "out/ignition/te_tags.json": "a8483e6a380455b7ee97b777fa96435247a69836af534fa28882905843a1c967",
+    "out/pi/attribute_descriptions.csv": "740cd75033bec3aa70c9c03bf70a406f2e3bb53260d1a9b852e51ffaad8f9b91",
+    "out/pi/pi_builder_af.csv": "0919829efc214b94566977c801234c188ed7566339b2b5474651a3ae5afc2f43",
+    "scripts/blender_tour_template.py": "cc8c7644158105e9108bb840ca295870ebf37d8aed80c7c23a4d696841796d63",
+    "scripts/build_3d_scene.py": "1c3ca4ef8dfadc0c20147b743a8b6d7648a9d7fd7aa81d8e700d6d101b4a2709",
+    "scripts/display_contract.py": "0f906bbf2210dcfe8ef3bdfdf7be573c8142fd87ac9551917b703d0d6d88ebf5",
+    "scripts/hazard_citations.py": "96adb97e30a70613dc6115abbdd4713617cf99bb40f5a016003ffa2581915733",
+    "scripts/label_layout.py": "0c1af7a7dbed9c3e44d95c4537c9070173d2b371b486cd981a13ef9563631709",
+    "scripts/orientation_tour.py": "3875f1933fcf981762351d97ad026cad5badd057b97df8334b5a82197abd95ca",
+    "scripts/verify_3d_render.py": "5d6c2c24c6f0b34aded3d67b90c8dc1d62d1d11d809237b1abf982fe73f32144"
+   },
+   "outputs": {
+    "drafts/3d-tour/00_overview_normal.jpg": "ea07a82989873d5e78459ecaf90c8bd503e3a637754fd47ec975330dfed2aee8",
+    "drafts/3d-tour/02_r-101_normal.jpg": "0214f36f60cded9ae5b1baf22b19691fcbfb0afbd418a933f4c929ed00a1e07b",
+    "drafts/3d-tour/21_overview_fault_alarm.jpg": "63463e97fd7f07a8f63a959adcedabe540326697ba25d8943680e4388545fa78",
+    "drafts/3d-tour/30_flow_legend.jpg": "27ce65d27478b84dcb1eb86f6fe288f676a1e301c79703bd00493e32fd459fbe",
+    "drafts/3d-tour/40_loto_mockup.jpg": "3d2c754c1cd20e6aef841984e0df3689fa84d1815333d7b6f9d5c6aa97d5d474",
+    "drafts/3d-tour/before/label_boxes.json": "cade4a23c94011845e6040d80f24b496b46f00df29fe3e30ca120314f44d7eb8",
+    "drafts/3d-tour/label_boxes.json": "100e60c93fa390ab38a85bb4b9c29e39d05e9059f8730022300edec8405692d0",
+    "drafts/3d-tour/verification.json": "9df2a6211dd57a2a8bd4f2bcc34f57ca506db4aead09dfcb209288d2bfdae5b8",
+    "drafts/3d-tour/verification.md": "7d889b75dd3637422f20079e2b27b353b28de842a19fd0da0492b428108bfc29"
    }
   }
  }

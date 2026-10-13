@@ -352,5 +352,5 @@ verified model, which is what the extracted twin becomes after the listed correc
 (simulator index, units of measure, descriptions), which come from the instrument list.
 
 **Cost:** subscriptions only. Claude's CLI reported $12.56 API-equivalent for the 42 published Claude sheet runs, plus
-$3.86 for 13 runs on a superseded version of sheet 102 (redrawn after the purge correction, journal entry 40). Codex
+$3.86 for 13 runs on a superseded version of sheet 102 (redrawn after the purge correction, journal entry 44). Codex
 reports no cost. No Gemini call; the Gemini ledger is unchanged at $16.57.

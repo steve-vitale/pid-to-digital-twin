@@ -1,0 +1,67 @@
+{
+ "schema": "pid-tour-cards/1 (prototype)",
+ "source": "Tour cards: the short function line, what each stop highlights and what is inferred, per equipment kind. The purpose sentence and its citations are NOT kept here: scripts/orientation_tour.py reads them by unit ID from data/te_unit_purposes.json (one sentence per unit, each citing teprob.f lines, checked by scripts/test_te_topology.py), the only source of purpose text. Function lines are this tour's short paraphrase of the same cited code. Not reviewed by an operator.",
+ "purposes_file": "data/te_unit_purposes.json",
+ "topology_note": "The published process has five major units: reactor, product condenser, vapor-liquid separator, recycle compressor and product stripper. U-100 'Feed System' is the seed model's grouping of the feed lines; in the simulator it is the vapour header where the feeds, the stripper overhead and the recycle mix. Stream connections follow the main repository's verified seed topology: the purge (S9, with FI-110, FV-206 and AI-129) leaves from the separator V-101, not the compressor.",
+ "inferred_note": "Items marked inferred are not in the contract's stream list: cooling water and steam lines are drawn only because a final element's own description names the utility (TV-210, TV-211, FV-209).",
+ "kinds": {
+  "feed": {
+   "function": "Flow control: each fresh feed has its own control valve; everything mixes in one header.",
+   "highlight": [
+    "valves"
+   ],
+   "inferred": [
+    "the feed header itself (seed-model grouping)"
+   ],
+   "unit": "U-100"
+  },
+  "reactor": {
+   "function": "Heat removal: cooling water carries the heat of reaction away; the products leave as vapour.",
+   "highlight": [
+    "cooling_water"
+   ],
+   "inferred": [
+    "cooling-water supply and return lines (from TV-210)"
+   ],
+   "unit": "R-101"
+  },
+  "condenser": {
+   "function": "Vapour in, cooled stream out: cooling water takes the heat (the simulator counts it in the separator).",
+   "highlight": [
+    "cooling_water"
+   ],
+   "inferred": [
+    "cooling-water supply and return lines (from TV-211)"
+   ],
+   "unit": "E-101"
+  },
+  "separator": {
+   "function": "Phase split: vapour goes to the compressor or the purge; liquid holds a level and goes to the stripper.",
+   "highlight": [
+    "vapour_outlet",
+    "level"
+   ],
+   "inferred": [],
+   "unit": "V-101"
+  },
+  "compressor": {
+   "function": "Pressure boost: raises the recycle gas from separator to header pressure; a recycle valve spills some back.",
+   "highlight": [
+    "recycle"
+   ],
+   "inferred": [],
+   "unit": "K-101"
+  },
+  "stripper": {
+   "function": "Gas rises, liquid falls: the stripped gas returns to the feed header and steam heats the column.",
+   "highlight": [
+    "steam",
+    "level"
+   ],
+   "inferred": [
+    "steam line (from FV-209)"
+   ],
+   "unit": "C-101"
+  }
+ }
+}

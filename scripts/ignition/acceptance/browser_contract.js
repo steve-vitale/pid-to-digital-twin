@@ -9,7 +9,7 @@
 //       Screenshots of each route (scrolling the view; at most MAXSHOTS per route) plus text counts.
 //   node browser_contract.js count OUT.json SAMPLES INTERVAL_MS
 //       Samples /alarms: the header's "Process alarms: N" plus the data-source box against the alarm table's own
-//       "N ACTIVE" count. Ported from the scratch sampler used in the 2026-10-13 run (journal entry 40); it counts
+//       "N ACTIVE" count. Ported from the scratch sampler used in the 2026-10-13 run (journal entry 47); it counts
 //       one diagnostic alarm when the box reads DATA SOURCE LOST, so with both sources lost it under-counts.
 //
 // Environment: PIDTWIN_BASE (default http://localhost:8088/data/perspective/client/PIDTwin),

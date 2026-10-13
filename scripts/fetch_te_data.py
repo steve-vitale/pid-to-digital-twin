@@ -12,7 +12,7 @@ With --all it also fetches the rest of the published set, for the fault-detectio
 (scripts/fault_detection_eval.py): the training files d00.dat-d21.dat and the test files d01_te.dat-d21_te.dat
 (fault IDV(n) switched on at sample 160 of 960). The default stays the two replay files, so the Docker replay image
 does not grow (the default set is the two replay files plus teprob.f). All 44 recorded checksums were taken from files that are byte-identical to the Braatz group's own
-archive (https://web.mit.edu/braatzgroup/TE_process.zip, checked 2026-10-12; journal entry 40).
+archive (https://web.mit.edu/braatzgroup/TE_process.zip, checked 2026-10-12; journal entry 47).
 
 Usage: python scripts/fetch_te_data.py [--all]
 """
