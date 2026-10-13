@@ -1,0 +1,6 @@
+# Drawing register for the generated Tennessee Eastman sheets (scripts/draw_pid_from_model.py).
+# Read from each sheet's title block, as a plant would supply from its drawing index.
+sheet,drawing_number,system_code,system_name
+101,101-1,RXN,"Feed And Reaction"
+102,102-1,SEP,"Condensing, Separation And Recycle"
+103,103-1,PRD,"Product Stripping"

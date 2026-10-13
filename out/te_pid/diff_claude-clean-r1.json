@@ -1,0 +1,624 @@
+{
+ "rows": [
+  {
+   "kind": "unit",
+   "tag": "U-100",
+   "status": "wrong role/class",
+   "extracted": {
+    "id": "S101-GN002",
+    "class": "general",
+    "role": "line item"
+   }
+  },
+  {
+   "kind": "unit",
+   "tag": "R-101",
+   "status": "ok",
+   "extracted": {
+    "id": "S101-TK001",
+    "class": "tank",
+    "role": "equipment"
+   }
+  },
+  {
+   "kind": "unit",
+   "tag": "E-101",
+   "status": "ok",
+   "extracted": {
+    "id": "S102-TK001",
+    "class": "tank",
+    "role": "equipment"
+   }
+  },
+  {
+   "kind": "unit",
+   "tag": "V-101",
+   "status": "ok",
+   "extracted": {
+    "id": "S102-TK002",
+    "class": "tank",
+    "role": "equipment"
+   }
+  },
+  {
+   "kind": "unit",
+   "tag": "K-101",
+   "status": "ok",
+   "extracted": {
+    "id": "S102-PU001",
+    "class": "pump",
+    "role": "equipment"
+   }
+  },
+  {
+   "kind": "unit",
+   "tag": "C-101",
+   "status": "ok",
+   "extracted": {
+    "id": "S103-TK001",
+    "class": "tank",
+    "role": "equipment"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-101",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN004",
+    "tag": "FI 101",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-102",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN005",
+    "tag": "FI 102",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-103",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN006",
+    "tag": "FI 103",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-104",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN005",
+    "tag": "FI 104",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-105",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN004",
+    "tag": "FI 105",
+    "unit": "K-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-106",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN011",
+    "tag": "FI 106",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "PI-107",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN008",
+    "tag": "PI 107",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "pressure"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "LI-108",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN009",
+    "tag": "LI 108",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "level"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "TI-109",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN010",
+    "tag": "TI 109",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-110",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN007",
+    "tag": "FI 110",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "TI-111",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN010",
+    "tag": "TI 111",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "LI-112",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN011",
+    "tag": "LI 112",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "level"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "PI-113",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN012",
+    "tag": "PI 113",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "pressure"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-114",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN013",
+    "tag": "FI 114",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "LI-115",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN003",
+    "tag": "LI 115",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "level"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "PI-116",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN001",
+    "tag": "PI 116",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "pressure"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-117",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN008",
+    "tag": "FI 117",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "TI-118",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN002",
+    "tag": "TI 118",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "FI-119",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN007",
+    "tag": "FI 119",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "JI-120",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN005",
+    "tag": "JI 120",
+    "unit": "K-101",
+    "kind": "instrument",
+    "variable": "power"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "TI-121",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN014",
+    "tag": "TI 121",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "TI-122",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN001",
+    "tag": "TI 122",
+    "unit": "E-101",
+    "kind": "instrument",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "AI-123",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN012",
+    "tag": "AI 123",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "analysis"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "AI-129",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN008",
+    "tag": "AI 129",
+    "unit": "V-101",
+    "kind": "instrument",
+    "variable": "analysis"
+   }
+  },
+  {
+   "kind": "instrument",
+   "tag": "AI-137",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN009",
+    "tag": "AI 137",
+    "unit": "C-101",
+    "kind": "instrument",
+    "variable": "analysis"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-201",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN002",
+    "tag": "FV 201",
+    "unit": "R-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-202",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN003",
+    "tag": "FV 202",
+    "unit": "R-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-203",
+   "status": "found, fields differ",
+   "problems": [
+    "unit R-101 (model: U-100)"
+   ],
+   "extracted": {
+    "id": "S101-IN001",
+    "tag": "FV 203",
+    "unit": "R-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-204",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN004",
+    "tag": "FV 204",
+    "unit": "C-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "HV-205",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN006",
+    "tag": "HV 205",
+    "unit": "K-101",
+    "kind": "final_element",
+    "variable": "hand"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-206",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN009",
+    "tag": "FV 206",
+    "unit": "V-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "LV-207",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN014",
+    "tag": "LV 207",
+    "unit": "V-101",
+    "kind": "final_element",
+    "variable": "level"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "LV-208",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN010",
+    "tag": "LV 208",
+    "unit": "C-101",
+    "kind": "final_element",
+    "variable": "level"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "FV-209",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S103-IN006",
+    "tag": "FV 209",
+    "unit": "C-101",
+    "kind": "final_element",
+    "variable": "flow"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "TV-210",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S101-IN013",
+    "tag": "TV 210",
+    "unit": "R-101",
+    "kind": "final_element",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "TV-211",
+   "status": "ok",
+   "problems": [],
+   "extracted": {
+    "id": "S102-IN002",
+    "tag": "TV 211",
+    "unit": "E-101",
+    "kind": "final_element",
+    "variable": "temperature"
+   }
+  },
+  {
+   "kind": "final_element",
+   "tag": "SC-212",
+   "status": "found, fields differ",
+   "problems": [
+    "kind instrument (model: final_element)"
+   ],
+   "extracted": {
+    "id": "S101-IN007",
+    "tag": "SC 212",
+    "unit": "R-101",
+    "kind": "instrument",
+    "variable": "speed"
+   }
+  }
+ ],
+ "extras": [
+  {
+   "id": "S101-GN001",
+   "tag": "M",
+   "class": "general"
+  }
+ ],
+ "untagged": [
+  "S102-IN003"
+ ],
+ "topology": {
+  "verified_pairs": [
+   "C-101 - U-100",
+   "C-101 - V-101",
+   "E-101 - R-101",
+   "E-101 - V-101",
+   "K-101 - U-100",
+   "K-101 - V-101",
+   "R-101 - U-100"
+  ],
+  "extracted_pairs": [
+   "C-101 - K-101",
+   "C-101 - U-100",
+   "C-101 - V-101",
+   "E-101 - R-101",
+   "E-101 - V-101",
+   "K-101 - U-100",
+   "K-101 - V-101",
+   "R-101 - U-100",
+   "U-100 - V-101"
+  ],
+  "matched": 7,
+  "missing": [],
+  "extra": [
+   "C-101 - K-101",
+   "U-100 - V-101"
+  ]
+ },
+ "not_on_drawing": {
+  "xmeas/xmv index": 37,
+  "unit of measure": 37,
+  "description": 37,
+  "verification evidence": 37
+ },
+ "corrections": [
+  "RECLASS U-100: extracted as line item 'general', the model has a feed_header unit",
+  "SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-201: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-202: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-203: R-101 -> U-100 (converter rule: connection_path)",
+  "DELETE or explain S101-GN001 'M' (general): not a model item",
+  "DELETE or tag S102-IN003: extracted without a tag",
+  "DELETE connection C-101 - K-101: no model stream joins these units",
+  "DELETE connection U-100 - V-101: no model stream joins these units"
+ ],
+ "counts": {
+  "final_element: found, fields differ": 4,
+  "final_element: ok": 8,
+  "instrument: found, fields differ": 3,
+  "instrument: ok": 22,
+  "unit: ok": 5,
+  "unit: wrong role/class": 1
+ }
+}

@@ -1,0 +1,7408 @@
+{
+ "meta": {
+  "model_id": "twin-te-clean-trace-r1-claude",
+  "model_kind": "extracted_twin",
+  "schema_version": "twin-1",
+  "title": "Digital twin starter kit: te-clean-trace-r1 / claude",
+  "source_document": "Extraction run te-clean-trace-r1/claude, sheets 101, 102, 103",
+  "extraction_method": "claude (claude-opus-5-5[1m]), prompt per run file; converted by scripts/build_twin.py",
+  "tag_convention": "Tags are the extracted text, unchanged except whitespace. Asset ids (S<sheet>-<class><n>) are converter keys, NOT plant tags. Placeholder tags (XXX, TBD) are flagged.",
+  "verification_note": "Every item is unverified until a person checks it in review_queue.csv.",
+  "low_confidence_threshold": 0.75,
+  "parent_rule": "along_line",
+  "superset_of": "data/te_process_model.json (meta/units/streams/instruments/final_elements)",
+  "risk_model": {
+   "file": "scripts/confidence_model.json",
+   "tiers": {
+    "green_max": 0.0755,
+    "red_min": 0.5,
+    "rule": "(fixed before looking at any holdout): green = items whose dev error rate stays at or below 5%\nwhen taken from the lowest risk up; red = items with a predicted risk of at least 50% (more likely wrong than\nright). Both thresholds come from the development drawings only."
+   },
+   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"
+  }
+ },
+ "site": {
+  "id": "SITE",
+  "name": "Site (from te-clean-trace-r1)"
+ },
+ "systems": [
+  {
+   "id": "SYS-101",
+   "sheet": "101",
+   "name": "Feed And Reaction",
+   "system_code": "RXN",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Feed And Reaction",
+   "drawing_number": "101-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "101.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-clean-trace-r1/claude/101.json",
+   "model": "claude-opus-5-5[1m]",
+   "extraction_failed": false,
+   "extraction_error": null
+  },
+  {
+   "id": "SYS-102",
+   "sheet": "102",
+   "name": "Condensing, Separation And Recycle",
+   "system_code": "SEP",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Condensing, Separation And Recycle",
+   "drawing_number": "102-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "102.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-clean-trace-r1/claude/102.json",
+   "model": "claude-opus-5-5[1m]",
+   "extraction_failed": false,
+   "extraction_error": null
+  },
+  {
+   "id": "SYS-103",
+   "sheet": "103",
+   "name": "Product Stripping",
+   "system_code": "PRD",
+   "system_code_method": "sheet_register",
+   "system_codes_seen": {},
+   "system_name": "Product Stripping",
+   "drawing_number": "103-1",
+   "drawing_number_method": "sheet_register",
+   "drawing_number_candidates": [],
+   "image": "103.png",
+   "image_size_px": [
+    3200,
+    2130
+   ],
+   "source_run": "runs/te-clean-trace-r1/claude/103.json",
+   "model": "claude-opus-5-5[1m]",
+   "extraction_failed": false,
+   "extraction_error": null
+  }
+ ],
+ "units": [
+  {
+   "id": "S101-TK001",
+   "tag": "R-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s15",
+     "class": "tank",
+     "box_0_1000": [
+      512.5,
+      328.5,
+      588.6,
+      703.3
+     ],
+     "tag_as_extracted": "R-101",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "R-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-101",
+   "layout": {
+    "x": 550.5,
+    "y": 515.9,
+    "sheet": "101",
+    "frame": "sheet_0_1000"
+   },
+   "source": "claude extraction, sheet 101 symbol s15",
+   "sheets": [
+    "101"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-TK001",
+   "tag": "E-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s5",
+     "class": "tank",
+     "box_0_1000": [
+      219.0,
+      241.5,
+      343.8,
+      284.8
+     ],
+     "tag_as_extracted": "E-101",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "E-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-102",
+   "layout": {
+    "x": 281.4,
+    "y": 263.1,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "claude extraction, sheet 102 symbol s5",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-TK002",
+   "tag": "V-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s9",
+     "class": "tank",
+     "box_0_1000": [
+      484.2,
+      375.6,
+      554.0,
+      657.4
+     ],
+     "tag_as_extracted": "V-101",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "V-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-102",
+   "layout": {
+    "x": 519.1,
+    "y": 516.5,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "claude extraction, sheet 102 symbol s9",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-PU001",
+   "tag": "K-101",
+   "tag_status": "as_extracted",
+   "class": "pump",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s12",
+     "class": "pump",
+     "box_0_1000": [
+      577.8,
+      115.1,
+      611.8,
+      166.4
+     ],
+     "tag_as_extracted": "K-101",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "K-101",
+   "type": "pump",
+   "role_reason": "class pump",
+   "system": "SYS-102",
+   "layout": {
+    "x": 594.8,
+    "y": 140.8,
+    "sheet": "102",
+    "frame": "sheet_0_1000"
+   },
+   "source": "claude extraction, sheet 102 symbol s12",
+   "sheets": [
+    "102"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-TK001",
+   "tag": "C-101",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s1",
+     "class": "tank",
+     "box_0_1000": [
+      406.0,
+      281.5,
+      469.6,
+      628.8
+     ],
+     "tag_as_extracted": "C-101",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "C-101",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-103",
+   "layout": {
+    "x": 437.8,
+    "y": 455.1,
+    "sheet": "103",
+    "frame": "sheet_0_1000"
+   },
+   "source": "claude extraction, sheet 103 symbol s1",
+   "sheets": [
+    "103"
+   ],
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "streams": [
+  {
+   "id": "L101-001",
+   "name": "S101-OP001 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP001",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s1",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-002",
+   "name": "S101-IN002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s10",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-003",
+   "name": "S101-IN003 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN003",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s11",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-004",
+   "name": "S101-IN004 - S101-IN005",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-IN005",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-005",
+   "name": "S101-IN004 - S101-IN006",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-IN006",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-006",
+   "name": "S101-IN004 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-007",
+   "name": "S101-IN004 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-008",
+   "name": "S101-IN004 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-009",
+   "name": "S101-IN004 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-010",
+   "name": "S101-IN004 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-011",
+   "name": "S101-IN004 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN004",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s12",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-012",
+   "name": "S101-IN005 - S101-IN006",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-IN006",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-013",
+   "name": "S101-IN005 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-014",
+   "name": "S101-IN005 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-015",
+   "name": "S101-IN005 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-016",
+   "name": "S101-IN005 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-017",
+   "name": "S101-IN005 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-018",
+   "name": "S101-IN005 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN005",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s13",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-019",
+   "name": "S101-IN006 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-020",
+   "name": "S101-IN006 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-021",
+   "name": "S101-IN006 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-022",
+   "name": "S101-IN006 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-023",
+   "name": "S101-IN006 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-024",
+   "name": "S101-IN006 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-IN006",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s14",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-025",
+   "name": "S101-TK001 - S101-GN001",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-GN001",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.8,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-026",
+   "name": "S101-TK001 - S101-OP006",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-OP006",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s18",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-027",
+   "name": "S101-TK001 - S101-IN008",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN008",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-028",
+   "name": "S101-TK001 - S101-IN009",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN009",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s20",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-029",
+   "name": "S101-TK001 - S101-IN010",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN010",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s21",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-030",
+   "name": "S101-TK001 - S101-GN002",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-GN002",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s22",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-031",
+   "name": "S101-TK001 - S101-IN011",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN011",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s23",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-032",
+   "name": "S101-TK001 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-033",
+   "name": "S101-TK001 - S101-VL004",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-VL004",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-034",
+   "name": "S101-TK001 - S101-IN014",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-IN014",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s28",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-035",
+   "name": "S101-TK001 - S101-OP008",
+   "kind": "extracted_link",
+   "from": "S101-TK001",
+   "to": "S101-OP008",
+   "sheet": "101",
+   "from_symbol": "s15",
+   "to_symbol": "s29",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-036",
+   "name": "S101-GN001 - S101-IN007",
+   "kind": "extracted_link",
+   "from": "S101-GN001",
+   "to": "S101-IN007",
+   "sheet": "101",
+   "from_symbol": "s16",
+   "to_symbol": "s17",
+   "direction": "unknown",
+   "confidence": 0.8,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-037",
+   "name": "S101-OP002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s2",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-038",
+   "name": "S101-GN002 - S101-IN011",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-IN011",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s23",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-039",
+   "name": "S101-GN002 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-040",
+   "name": "S101-GN002 - S101-OP004",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-OP004",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-041",
+   "name": "S101-GN002 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-042",
+   "name": "S101-GN002 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-043",
+   "name": "S101-GN002 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-044",
+   "name": "S101-GN002 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-GN002",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s22",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.85,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-045",
+   "name": "S101-IN011 - S101-IN012",
+   "kind": "extracted_link",
+   "from": "S101-IN011",
+   "to": "S101-IN012",
+   "sheet": "101",
+   "from_symbol": "s23",
+   "to_symbol": "s24",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-046",
+   "name": "S101-OP007 - S101-VL004",
+   "kind": "extracted_link",
+   "from": "S101-OP007",
+   "to": "S101-VL004",
+   "sheet": "101",
+   "from_symbol": "s25",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-047",
+   "name": "S101-VL004 - S101-IN013",
+   "kind": "extracted_link",
+   "from": "S101-VL004",
+   "to": "S101-IN013",
+   "sheet": "101",
+   "from_symbol": "s26",
+   "to_symbol": "s27",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-048",
+   "name": "S101-IN014 - S101-OP008",
+   "kind": "extracted_link",
+   "from": "S101-IN014",
+   "to": "S101-OP008",
+   "sheet": "101",
+   "from_symbol": "s28",
+   "to_symbol": "s29",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-049",
+   "name": "S101-OP003 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-OP003",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s3",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-050",
+   "name": "S101-OP004 - S101-OP005",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-OP005",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-051",
+   "name": "S101-OP004 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-052",
+   "name": "S101-OP004 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-053",
+   "name": "S101-OP004 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-OP004",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s4",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-054",
+   "name": "S101-OP005 - S101-VL001",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-VL001",
+   "sheet": "101",
+   "from_symbol": "s5",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-055",
+   "name": "S101-OP005 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s5",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-056",
+   "name": "S101-OP005 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-OP005",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s5",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-057",
+   "name": "S101-VL001 - S101-VL002",
+   "kind": "extracted_link",
+   "from": "S101-VL001",
+   "to": "S101-VL002",
+   "sheet": "101",
+   "from_symbol": "s6",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-058",
+   "name": "S101-VL001 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-VL001",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s6",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L101-059",
+   "name": "S101-VL001 - S101-IN001",
+   "kind": "extracted_link",
+   "from": "S101-VL001",
+   "to": "S101-IN001",
+   "sheet": "101",
+   "from_symbol": "s6",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L101-060",
+   "name": "S101-VL002 - S101-VL003",
+   "kind": "extracted_link",
+   "from": "S101-VL002",
+   "to": "S101-VL003",
+   "sheet": "101",
+   "from_symbol": "s7",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-001",
+   "name": "S102-OP001 - S102-IN004",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-IN004",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s11",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-002",
+   "name": "S102-OP001 - S102-PU001",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-PU001",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-003",
+   "name": "S102-OP001 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-OP001",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s1",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-004",
+   "name": "S102-IN004 - S102-PU001",
+   "kind": "extracted_link",
+   "from": "S102-IN004",
+   "to": "S102-PU001",
+   "sheet": "102",
+   "from_symbol": "s11",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-005",
+   "name": "S102-IN004 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-IN004",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s11",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-006",
+   "name": "S102-PU001 - S102-IN005",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-IN005",
+   "sheet": "102",
+   "from_symbol": "s12",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-007",
+   "name": "S102-PU001 - S102-VL002",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-VL002",
+   "sheet": "102",
+   "from_symbol": "s12",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-008",
+   "name": "S102-PU001 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-PU001",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s12",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-009",
+   "name": "S102-VL002 - S102-IN006",
+   "kind": "extracted_link",
+   "from": "S102-VL002",
+   "to": "S102-IN006",
+   "sheet": "102",
+   "from_symbol": "s14",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-010",
+   "name": "S102-VL002 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL002",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s14",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.88,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-011",
+   "name": "S102-IN007 - S102-IN008",
+   "kind": "extracted_link",
+   "from": "S102-IN007",
+   "to": "S102-IN008",
+   "sheet": "102",
+   "from_symbol": "s16",
+   "to_symbol": "s17",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-012",
+   "name": "S102-IN007 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN007",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s16",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-013",
+   "name": "S102-IN007 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN007",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s16",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-014",
+   "name": "S102-IN008 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN008",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s17",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-015",
+   "name": "S102-IN008 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN008",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s17",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-016",
+   "name": "S102-IN009 - S102-VL003",
+   "kind": "extracted_link",
+   "from": "S102-IN009",
+   "to": "S102-VL003",
+   "sheet": "102",
+   "from_symbol": "s18",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-017",
+   "name": "S102-VL003 - S102-OP005",
+   "kind": "extracted_link",
+   "from": "S102-VL003",
+   "to": "S102-OP005",
+   "sheet": "102",
+   "from_symbol": "s19",
+   "to_symbol": "s20",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-018",
+   "name": "S102-VL003 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL003",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s19",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-019",
+   "name": "S102-OP002 - S102-TK001",
+   "kind": "extracted_link",
+   "from": "S102-OP002",
+   "to": "S102-TK001",
+   "sheet": "102",
+   "from_symbol": "s2",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-020",
+   "name": "S102-OP002 - S102-IN001",
+   "kind": "extracted_link",
+   "from": "S102-OP002",
+   "to": "S102-IN001",
+   "sheet": "102",
+   "from_symbol": "s2",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-021",
+   "name": "S102-IN010 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN010",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s21",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.94,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-022",
+   "name": "S102-IN011 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN011",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s22",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-023",
+   "name": "S102-IN012 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN012",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s23",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-024",
+   "name": "S102-IN013 - S102-VL004",
+   "kind": "extracted_link",
+   "from": "S102-IN013",
+   "to": "S102-VL004",
+   "sheet": "102",
+   "from_symbol": "s24",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-025",
+   "name": "S102-IN013 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-IN013",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s24",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-026",
+   "name": "S102-IN014 - S102-VL004",
+   "kind": "extracted_link",
+   "from": "S102-IN014",
+   "to": "S102-VL004",
+   "sheet": "102",
+   "from_symbol": "s25",
+   "to_symbol": "s26",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-027",
+   "name": "S102-VL004 - S102-OP006",
+   "kind": "extracted_link",
+   "from": "S102-VL004",
+   "to": "S102-OP006",
+   "sheet": "102",
+   "from_symbol": "s26",
+   "to_symbol": "s27",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-028",
+   "name": "S102-VL004 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-VL004",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s26",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L102-029",
+   "name": "S102-OP003 - S102-TK001",
+   "kind": "extracted_link",
+   "from": "S102-OP003",
+   "to": "S102-TK001",
+   "sheet": "102",
+   "from_symbol": "s3",
+   "to_symbol": "s5",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-030",
+   "name": "S102-OP004 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-OP004",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s4",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-031",
+   "name": "S102-TK001 - S102-IN001",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-IN001",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.93,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-032",
+   "name": "S102-TK001 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-033",
+   "name": "S102-TK001 - S102-TK002",
+   "kind": "extracted_link",
+   "from": "S102-TK001",
+   "to": "S102-TK002",
+   "sheet": "102",
+   "from_symbol": "s5",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L102-034",
+   "name": "S102-IN002 - S102-VL001",
+   "kind": "extracted_link",
+   "from": "S102-IN002",
+   "to": "S102-VL001",
+   "sheet": "102",
+   "from_symbol": "s7",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-001",
+   "name": "S103-TK001 - S103-OP003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s10",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-002",
+   "name": "S103-TK001 - S103-VL002",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL002",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-003",
+   "name": "S103-TK001 - S103-IN007",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN007",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-004",
+   "name": "S103-TK001 - S103-IN008",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN008",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s15",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-005",
+   "name": "S103-TK001 - S103-IN009",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN009",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-006",
+   "name": "S103-TK001 - S103-OP005",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP005",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s17",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-007",
+   "name": "S103-TK001 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-008",
+   "name": "S103-TK001 - S103-IN001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s2",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-009",
+   "name": "S103-TK001 - S103-IN002",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN002",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s3",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-010",
+   "name": "S103-TK001 - S103-IN003",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN003",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s4",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-011",
+   "name": "S103-TK001 - S103-VL001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-VL001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-012",
+   "name": "S103-TK001 - S103-IN005",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-IN005",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-013",
+   "name": "S103-TK001 - S103-OP001",
+   "kind": "extracted_link",
+   "from": "S103-TK001",
+   "to": "S103-OP001",
+   "sheet": "103",
+   "from_symbol": "s1",
+   "to_symbol": "s8",
+   "direction": "unknown",
+   "confidence": 0.92,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-014",
+   "name": "S103-OP004 - S103-VL002",
+   "kind": "extracted_link",
+   "from": "S103-OP004",
+   "to": "S103-VL002",
+   "sheet": "103",
+   "from_symbol": "s11",
+   "to_symbol": "s12",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-015",
+   "name": "S103-VL002 - S103-IN006",
+   "kind": "extracted_link",
+   "from": "S103-VL002",
+   "to": "S103-IN006",
+   "sheet": "103",
+   "from_symbol": "s12",
+   "to_symbol": "s13",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-016",
+   "name": "S103-VL002 - S103-IN007",
+   "kind": "extracted_link",
+   "from": "S103-VL002",
+   "to": "S103-IN007",
+   "sheet": "103",
+   "from_symbol": "s12",
+   "to_symbol": "s14",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-017",
+   "name": "S103-IN008 - S103-IN009",
+   "kind": "extracted_link",
+   "from": "S103-IN008",
+   "to": "S103-IN009",
+   "sheet": "103",
+   "from_symbol": "s15",
+   "to_symbol": "s16",
+   "direction": "unknown",
+   "confidence": 0.95,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-018",
+   "name": "S103-IN008 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN008",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s15",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0807,
+    "tier": "amber",
+    "why": "found by line tracing only; the model didn't draw this link; one end is a symbol the model's other pass didn't see"
+   }
+  },
+  {
+   "id": "L103-019",
+   "name": "S103-IN009 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN009",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s16",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-020",
+   "name": "S103-IN010 - S103-VL003",
+   "kind": "extracted_link",
+   "from": "S103-IN010",
+   "to": "S103-VL003",
+   "sheet": "103",
+   "from_symbol": "s18",
+   "to_symbol": "s19",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-021",
+   "name": "S103-VL003 - S103-OP006",
+   "kind": "extracted_link",
+   "from": "S103-VL003",
+   "to": "S103-OP006",
+   "sheet": "103",
+   "from_symbol": "s19",
+   "to_symbol": "s20",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-022",
+   "name": "S103-IN004 - S103-VL001",
+   "kind": "extracted_link",
+   "from": "S103-IN004",
+   "to": "S103-VL001",
+   "sheet": "103",
+   "from_symbol": "s5",
+   "to_symbol": "s6",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-023",
+   "name": "S103-VL001 - S103-IN005",
+   "kind": "extracted_link",
+   "from": "S103-VL001",
+   "to": "S103-IN005",
+   "sheet": "103",
+   "from_symbol": "s6",
+   "to_symbol": "s7",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "L103-024",
+   "name": "S103-VL001 - S103-OP002",
+   "kind": "extracted_link",
+   "from": "S103-VL001",
+   "to": "S103-OP002",
+   "sheet": "103",
+   "from_symbol": "s6",
+   "to_symbol": "s9",
+   "direction": "unknown",
+   "confidence": 0.9,
+   "verification": {
+    "status": "unverified"
+   },
+   "risk": {
+    "risk_score": 0.0271,
+    "tier": "green",
+    "why": "no strong warning signs (minor: one end is a symbol the model's other pass didn't see)"
+   }
+  },
+  {
+   "id": "XP-001",
+   "name": "off-page PRD PID 103-1 (H-3) STRIPPER OVERHEAD <-> RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+   "kind": "cross_sheet",
+   "from": "S101-OP004",
+   "to": "S103-OP003",
+   "sheet": null,
+   "direction": "unknown",
+   "confidence": null,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-002",
+   "name": "off-page SEP PID 102-1 (H-12) RECYCLE TO FEED <-> RXN PID 101-1 (D-11) RECYCLE TO FEED",
+   "kind": "cross_sheet",
+   "from": "S101-OP005",
+   "to": "S102-OP001",
+   "sheet": null,
+   "direction": "unknown",
+   "confidence": null,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-003",
+   "name": "off-page SEP PID 102-1 (G-11) REACTOR PRODUCT <-> RXN PID 101-1 (E-3) REACTOR PRODUCT",
+   "kind": "cross_sheet",
+   "from": "S101-OP006",
+   "to": "S102-OP003",
+   "sheet": null,
+   "direction": "unknown",
+   "confidence": null,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-004",
+   "name": "off-page PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW <-> SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+   "kind": "cross_sheet",
+   "from": "S102-OP006",
+   "to": "S103-OP001",
+   "sheet": null,
+   "direction": "unknown",
+   "confidence": null,
+   "verification": {
+    "status": "unverified"
+   }
+  }
+ ],
+ "instruments": [
+  {
+   "id": "S101-IN001",
+   "tag": "FV 203",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s9",
+     "class": "instrumentation",
+     "box_0_1000": [
+      261.1,
+      120.0,
+      276.8,
+      143.7
+     ],
+     "tag_as_extracted": "FV 203",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s6"
+   },
+   "along_line_px": 23.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL001",
+     "px": 23.0
+    }
+   ],
+   "position_nearest": "S101-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "203",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 203",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN002",
+   "tag": "FV 201",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s10",
+     "class": "instrumentation",
+     "box_0_1000": [
+      261.1,
+      214.0,
+      276.8,
+      237.8
+     ],
+     "tag_as_extracted": "FV 201",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s7"
+   },
+   "along_line_px": 24.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL002",
+     "px": 24.5
+    }
+   ],
+   "position_nearest": "S101-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "201",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 201",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN003",
+   "tag": "FV 202",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      261.1,
+      308.0,
+      276.8,
+      331.8
+     ],
+     "tag_as_extracted": "FV 202",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s8"
+   },
+   "along_line_px": 24.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL003",
+     "px": 24.5
+    }
+   ],
+   "position_nearest": "S101-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FV",
+   "loop": "202",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 202",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN004",
+   "tag": "FI 101",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s12",
+     "class": "instrumentation",
+     "box_0_1000": [
+      295.2,
+      120.0,
+      311.4,
+      143.7
+     ],
+     "tag_as_extracted": "FI 101",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s6"
+   },
+   "along_line_px": 142.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL001",
+     "px": 142.5
+    }
+   ],
+   "position_nearest": "S101-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "101",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 101",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN005",
+   "tag": "FI 102",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      295.2,
+      214.0,
+      311.4,
+      237.8
+     ],
+     "tag_as_extracted": "FI 102",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s7"
+   },
+   "along_line_px": 142.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL002",
+     "px": 142.5
+    }
+   ],
+   "position_nearest": "S101-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "102",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 102",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN006",
+   "tag": "FI 103",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      295.2,
+      308.0,
+      311.4,
+      331.8
+     ],
+     "tag_as_extracted": "FI 103",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "parent": "S101-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s8"
+   },
+   "along_line_px": 142.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL003",
+     "px": 142.5
+    }
+   ],
+   "position_nearest": "S101-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "103",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 103",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN007",
+   "tag": "SC 212",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      605.9,
+      285.9,
+      621.6,
+      309.1
+     ],
+     "tag_as_extracted": "SC 212",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-GN001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s16"
+   },
+   "along_line_px": 149.7,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-GN001",
+     "px": 149.7
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": false,
+   "system": "SYS-101",
+   "isa_letters": "SC",
+   "loop": "212",
+   "instrument_kind": "measurement / control",
+   "variable": "speed",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "SC 212",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN008",
+   "tag": "PI 107",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s19",
+     "class": "instrumentation",
+     "box_0_1000": [
+      615.6,
+      420.4,
+      630.8,
+      443.1
+     ],
+     "tag_as_extracted": "PI 107",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s15"
+   },
+   "along_line_px": 81.1,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 81.1
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "PI",
+   "loop": "107",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 107",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN009",
+   "tag": "LI 108",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s20",
+     "class": "instrumentation",
+     "box_0_1000": [
+      615.6,
+      471.7,
+      630.8,
+      495.0
+     ],
+     "tag_as_extracted": "LI 108",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s15"
+   },
+   "along_line_px": 81.1,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 81.1
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "LI",
+   "loop": "108",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LI 108",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN010",
+   "tag": "TI 109",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s21",
+     "class": "instrumentation",
+     "box_0_1000": [
+      615.1,
+      523.4,
+      630.8,
+      546.1
+     ],
+     "tag_as_extracted": "TI 109",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s15"
+   },
+   "along_line_px": 80.7,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 80.7
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TI",
+   "loop": "109",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 109",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN011",
+   "tag": "FI 106",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s23",
+     "class": "instrumentation",
+     "box_0_1000": [
+      448.2,
+      589.3,
+      463.9,
+      612.0
+     ],
+     "tag_as_extracted": "FI 106",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-GN002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s22"
+   },
+   "along_line_px": 145.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-GN002",
+     "px": 145.5
+    }
+   ],
+   "position_nearest": "S101-GN002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "FI",
+   "loop": "106",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 106",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN012",
+   "tag": "AI 123",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s24",
+     "class": "instrumentation",
+     "box_0_1000": [
+      477.9,
+      589.3,
+      493.6,
+      612.0
+     ],
+     "tag_as_extracted": "AI 123",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s15"
+   },
+   "along_line_px": 136.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 136.5
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "AI",
+   "loop": "123",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 123",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "amber",
+    "why": "the two parent rules pick different equipment (along_line: R-101; linked: U-100); confirm which"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-GN002",
+    "agrees": false
+   }
+  },
+  {
+   "id": "S101-IN013",
+   "tag": "TV 210",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s27",
+     "class": "instrumentation",
+     "box_0_1000": [
+      467.1,
+      749.3,
+      482.8,
+      772.0
+     ],
+     "tag_as_extracted": "TV 210",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S101-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s26"
+   },
+   "along_line_px": 24.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-VL004",
+     "px": 24.0
+    }
+   ],
+   "position_nearest": "S101-VL004",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TV",
+   "loop": "210",
+   "instrument_kind": "final element (valve)",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TV 210",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S101-IN014",
+   "tag": "TI 121",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s28",
+     "class": "instrumentation",
+     "box_0_1000": [
+      634.0,
+      560.7,
+      649.7,
+      583.4
+     ],
+     "tag_as_extracted": "TI 121",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S101-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "101",
+    "symbol": "s15"
+   },
+   "along_line_px": 222.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S101-TK001",
+     "px": 222.5
+    }
+   ],
+   "position_nearest": "S101-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-101",
+   "isa_letters": "TI",
+   "loop": "121",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 121",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S101-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN001",
+   "tag": "TI 122",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s6",
+     "class": "instrumentation",
+     "box_0_1000": [
+      242.2,
+      130.2,
+      257.9,
+      152.4
+     ],
+     "tag_as_extracted": "TI 122",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s5"
+   },
+   "along_line_px": 365.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK001",
+     "px": 365.5
+    }
+   ],
+   "position_nearest": "S102-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TI",
+   "loop": "122",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 122",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN002",
+   "tag": "TV 211",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      186.0,
+      336.1,
+      201.7,
+      359.3
+     ],
+     "tag_as_extracted": "TV 211",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s8"
+   },
+   "along_line_px": 25.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL001",
+     "px": 25.5
+    }
+   ],
+   "position_nearest": "S102-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TV",
+   "loop": "211",
+   "instrument_kind": "final element (valve)",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TV 211",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN003",
+   "tag": null,
+   "tag_status": "missing",
+   "class": "instrumentation",
+   "confidence": 0.3,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s10",
+     "class": "instrumentation",
+     "box_0_1000": [
+      538.5,
+      48.6,
+      540.6,
+      64.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.3,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-PU001",
+   "parent_method": "geometry_nearest",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s12"
+   },
+   "gap_0_1000": 62.6,
+   "along_line_status": "not_on_traced_line",
+   "position_nearest": "S102-PU001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": null,
+   "loop": null,
+   "instrument_kind": null,
+   "variable": null,
+   "variable_method": null,
+   "uom": "",
+   "description": "untagged instrument",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.943,
+    "tier": "red",
+    "why": "the other models didn't find this symbol here; no tag was read; it isn't on any drawn line (or a straight line runs right through its box)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-PU001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN004",
+   "tag": "FI 105",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      539.4,
+      44.9,
+      555.1,
+      68.6
+     ],
+     "tag_as_extracted": "FI 105",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-PU001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s12"
+   },
+   "along_line_px": 541.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-PU001",
+     "px": 541.5
+    }
+   ],
+   "position_nearest": "S102-PU001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "FI",
+   "loop": "105",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 105",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-PU001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN005",
+   "tag": "JI 120",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      586.4,
+      185.9,
+      602.6,
+      209.1
+     ],
+     "tag_as_extracted": "JI 120",
+     "confidence": 0.94,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-PU001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s12"
+   },
+   "along_line_px": 36.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-PU001",
+     "px": 36.0
+    }
+   ],
+   "position_nearest": "S102-PU001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "JI",
+   "loop": "120",
+   "instrument_kind": "measurement / control",
+   "variable": "power",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "JI 120",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-PU001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN006",
+   "tag": "HV 205",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      583.7,
+      279.9,
+      599.4,
+      303.2
+     ],
+     "tag_as_extracted": "HV 205",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s14"
+   },
+   "along_line_px": 25.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL002",
+     "px": 25.5
+    }
+   ],
+   "position_nearest": "S102-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "HV",
+   "loop": "205",
+   "instrument_kind": "final element (valve)",
+   "variable": "hand",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "HV 205",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN007",
+   "tag": "FI 110",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      605.3,
+      364.2,
+      621.0,
+      388.0
+     ],
+     "tag_as_extracted": "FI 110",
+     "confidence": 0.94,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 235.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 235.5
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "FI",
+   "loop": "110",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 110",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "amber",
+    "why": "the two parent rules pick different equipment (along_line: V-101; linked: FV 206); confirm which"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": false
+   }
+  },
+  {
+   "id": "S102-IN008",
+   "tag": "AI 129",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      643.2,
+      364.2,
+      658.9,
+      388.0
+     ],
+     "tag_as_extracted": "AI 129",
+     "confidence": 0.94,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s19"
+   },
+   "along_line_px": 202.3,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL003",
+     "px": 202.3
+    }
+   ],
+   "position_nearest": "S102-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "AI",
+   "loop": "129",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 129",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN009",
+   "tag": "FV 206",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      693.5,
+      364.2,
+      709.1,
+      388.0
+     ],
+     "tag_as_extracted": "FV 206",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s19"
+   },
+   "along_line_px": 21.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL003",
+     "px": 21.0
+    }
+   ],
+   "position_nearest": "S102-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "FV",
+   "loop": "206",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 206",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN010",
+   "tag": "TI 111",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.94,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s21",
+     "class": "instrumentation",
+     "box_0_1000": [
+      580.5,
+      438.8,
+      596.2,
+      462.6
+     ],
+     "tag_as_extracted": "TI 111",
+     "confidence": 0.94,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 81.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 81.5
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "TI",
+   "loop": "111",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 111",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN011",
+   "tag": "LI 112",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s22",
+     "class": "instrumentation",
+     "box_0_1000": [
+      580.5,
+      490.4,
+      596.2,
+      513.7
+     ],
+     "tag_as_extracted": "LI 112",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 81.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 81.5
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "LI",
+   "loop": "112",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LI 112",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN012",
+   "tag": "PI 113",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s23",
+     "class": "instrumentation",
+     "box_0_1000": [
+      580.5,
+      541.8,
+      596.2,
+      565.0
+     ],
+     "tag_as_extracted": "PI 113",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S102-TK002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s9"
+   },
+   "along_line_px": 81.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-TK002",
+     "px": 81.5
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "PI",
+   "loop": "113",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 113",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-TK002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN013",
+   "tag": "FI 114",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s24",
+     "class": "instrumentation",
+     "box_0_1000": [
+      570.7,
+      700.1,
+      586.4,
+      723.3
+     ],
+     "tag_as_extracted": "FI 114",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s26"
+   },
+   "along_line_px": 242.6,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL004",
+     "px": 242.6
+    }
+   ],
+   "position_nearest": "S102-TK002",
+   "parent_agrees_with_position": false,
+   "system": "SYS-102",
+   "isa_letters": "FI",
+   "loop": "114",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 114",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S102-IN014",
+   "tag": "LV 207",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s25",
+     "class": "instrumentation",
+     "box_0_1000": [
+      634.0,
+      700.1,
+      649.7,
+      723.3
+     ],
+     "tag_as_extracted": "LV 207",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S102-VL004",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "102",
+    "symbol": "s26"
+   },
+   "along_line_px": 22.8,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S102-VL004",
+     "px": 22.8
+    }
+   ],
+   "position_nearest": "S102-VL004",
+   "parent_agrees_with_position": true,
+   "system": "SYS-102",
+   "isa_letters": "LV",
+   "loop": "207",
+   "instrument_kind": "final element (valve)",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LV 207",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S102-VL004",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN001",
+   "tag": "PI 116",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s2",
+     "class": "instrumentation",
+     "box_0_1000": [
+      495.6,
+      317.2,
+      511.3,
+      340.4
+     ],
+     "tag_as_extracted": "PI 116",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 78.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 78.0
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "PI",
+   "loop": "116",
+   "instrument_kind": "measurement / control",
+   "variable": "pressure",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "PI 116",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN002",
+   "tag": "TI 118",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s3",
+     "class": "instrumentation",
+     "box_0_1000": [
+      495.6,
+      378.3,
+      511.3,
+      401.5
+     ],
+     "tag_as_extracted": "TI 118",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 78.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 78.0
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "TI",
+   "loop": "118",
+   "instrument_kind": "measurement / control",
+   "variable": "temperature",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "TI 118",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN003",
+   "tag": "LI 115",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s4",
+     "class": "instrumentation",
+     "box_0_1000": [
+      495.6,
+      439.3,
+      511.3,
+      462.6
+     ],
+     "tag_as_extracted": "LI 115",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "self",
+   "unit_hops": 0,
+   "parent": "S103-TK001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s1"
+   },
+   "along_line_px": 78.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-TK001",
+     "px": 78.0
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "LI",
+   "loop": "115",
+   "instrument_kind": "measurement / control",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LI 115",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-TK001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN004",
+   "tag": "FV 204",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s5",
+     "class": "instrumentation",
+     "box_0_1000": [
+      273.0,
+      476.6,
+      289.8,
+      500.4
+     ],
+     "tag_as_extracted": "FV 204",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s6"
+   },
+   "along_line_px": 24.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL001",
+     "px": 24.0
+    }
+   ],
+   "position_nearest": "S103-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "FV",
+   "loop": "204",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 204",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN005",
+   "tag": "FI 104",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      335.7,
+      476.6,
+      351.9,
+      500.4
+     ],
+     "tag_as_extracted": "FI 104",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL001",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s6"
+   },
+   "along_line_px": 235.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL001",
+     "px": 235.5
+    }
+   ],
+   "position_nearest": "S103-VL001",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "FI",
+   "loop": "104",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 104",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL001",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN006",
+   "tag": "FV 209",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      210.8,
+      627.1,
+      226.5,
+      650.9
+     ],
+     "tag_as_extracted": "FV 209",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s12"
+   },
+   "along_line_px": 23.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL002",
+     "px": 23.0
+    }
+   ],
+   "position_nearest": "S103-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "FV",
+   "loop": "209",
+   "instrument_kind": "final element (valve)",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FV 209",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN007",
+   "tag": "FI 119",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      273.6,
+      627.1,
+      289.2,
+      650.9
+     ],
+     "tag_as_extracted": "FI 119",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL002",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s12"
+   },
+   "along_line_px": 235.5,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL002",
+     "px": 235.5
+    }
+   ],
+   "position_nearest": "S103-VL002",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "FI",
+   "loop": "119",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 119",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL002",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN008",
+   "tag": "FI 117",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      492.4,
+      702.3,
+      508.6,
+      725.5
+     ],
+     "tag_as_extracted": "FI 117",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 343.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 343.4
+    }
+   ],
+   "position_nearest": "S103-TK001",
+   "parent_agrees_with_position": false,
+   "system": "SYS-103",
+   "isa_letters": "FI",
+   "loop": "117",
+   "instrument_kind": "measurement / control",
+   "variable": "flow",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "FI 117",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN009",
+   "tag": "AI 137",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      530.2,
+      702.3,
+      546.4,
+      725.5
+     ],
+     "tag_as_extracted": "AI 137",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 223.4,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 223.4
+    }
+   ],
+   "position_nearest": "S103-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "AI",
+   "loop": "137",
+   "instrument_kind": "measurement / control",
+   "variable": "analysis",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "AI 137",
+   "stream": null,
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  },
+  {
+   "id": "S103-IN010",
+   "tag": "LV 208",
+   "tag_status": "as_extracted",
+   "class": "instrumentation",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      587.5,
+      702.3,
+      603.2,
+      725.5
+     ],
+     "tag_as_extracted": "LV 208",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "parent": "S103-VL003",
+   "parent_method": "along_line",
+   "parent_source": {
+    "sheet": "103",
+    "symbol": "s19"
+   },
+   "along_line_px": 21.0,
+   "along_line_status": "ok",
+   "along_line_candidates": [
+    {
+     "asset": "S103-VL003",
+     "px": 21.0
+    }
+   ],
+   "position_nearest": "S103-VL003",
+   "parent_agrees_with_position": true,
+   "system": "SYS-103",
+   "isa_letters": "LV",
+   "loop": "208",
+   "instrument_kind": "final element (valve)",
+   "variable": "level",
+   "variable_method": "ISA-5.1 first letter",
+   "uom": "",
+   "description": "LV 208",
+   "stream": null,
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   },
+   "parent_second_opinion": {
+    "rule": "linked",
+    "parent": "S103-VL003",
+    "agrees": true
+   }
+  }
+ ],
+ "final_elements": [],
+ "line_items": [
+  {
+   "id": "S101-VL001",
+   "tag": "FV 203",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s6",
+     "class": "valve",
+     "box_0_1000": [
+      264.4,
+      157.2,
+      273.6,
+      173.5
+     ],
+     "tag_as_extracted": "FV 203",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "FV 203",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL002",
+   "tag": "FV 201",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s7",
+     "class": "valve",
+     "box_0_1000": [
+      264.4,
+      251.3,
+      273.6,
+      267.5
+     ],
+     "tag_as_extracted": "FV 201",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "FV 201",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL003",
+   "tag": "FV 202",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s8",
+     "class": "valve",
+     "box_0_1000": [
+      264.4,
+      345.3,
+      273.6,
+      361.5
+     ],
+     "tag_as_extracted": "FV 202",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 2,
+   "system": "SYS-101",
+   "description": "FV 202",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-GN001",
+   "tag": "M",
+   "tag_status": "as_extracted",
+   "class": "general",
+   "confidence": 0.8,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s16",
+     "class": "general",
+     "box_0_1000": [
+      543.7,
+      286.9,
+      557.8,
+      308.0
+     ],
+     "tag_as_extracted": "M",
+     "confidence": 0.8,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "M",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-GN002",
+   "tag": "U-100",
+   "tag_status": "as_extracted",
+   "class": "general",
+   "confidence": 0.85,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s22",
+     "class": "general",
+     "box_0_1000": [
+      404.9,
+      632.0,
+      426.6,
+      645.5
+     ],
+     "tag_as_extracted": "U-100",
+     "confidence": 0.85,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "U-100",
+   "duplicate_tag": false,
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-VL004",
+   "tag": "TV 210",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s26",
+     "class": "valve",
+     "box_0_1000": [
+      470.9,
+      785.5,
+      479.0,
+      802.2
+     ],
+     "tag_as_extracted": "TV 210",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-101",
+   "description": "TV 210",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL001",
+   "tag": "TV 211",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s8",
+     "class": "valve",
+     "box_0_1000": [
+      189.2,
+      373.4,
+      197.9,
+      389.6
+     ],
+     "tag_as_extracted": "TV 211",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "TV 211",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL002",
+   "tag": "HV 205",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.88,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s14",
+     "class": "valve",
+     "box_0_1000": [
+      587.0,
+      248.0,
+      596.2,
+      265.9
+     ],
+     "tag_as_extracted": "HV 205",
+     "confidence": 0.88,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "HV 205",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL003",
+   "tag": "FV 206",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s19",
+     "class": "valve",
+     "box_0_1000": [
+      696.7,
+      400.4,
+      705.9,
+      418.3
+     ],
+     "tag_as_extracted": "FV 206",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "FV 206",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-VL004",
+   "tag": "LV 207",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s26",
+     "class": "valve",
+     "box_0_1000": [
+      636.7,
+      736.3,
+      646.4,
+      754.1
+     ],
+     "tag_as_extracted": "LV 207",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-102",
+   "description": "LV 207",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL001",
+   "tag": "FV 204",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s6",
+     "class": "valve",
+     "box_0_1000": [
+      277.3,
+      513.7,
+      285.5,
+      529.9
+     ],
+     "tag_as_extracted": "FV 204",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "FV 204",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL002",
+   "tag": "FV 209",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s12",
+     "class": "valve",
+     "box_0_1000": [
+      214.6,
+      663.9,
+      222.7,
+      680.6
+     ],
+     "tag_as_extracted": "FV 209",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "FV 209",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-VL003",
+   "tag": "LV 208",
+   "tag_status": "as_extracted",
+   "class": "valve",
+   "confidence": 0.9,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s19",
+     "class": "valve",
+     "box_0_1000": [
+      590.7,
+      737.9,
+      599.9,
+      756.3
+     ],
+     "tag_as_extracted": "LV 208",
+     "confidence": 0.9,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "unit_hops": 1,
+   "system": "SYS-103",
+   "description": "LV 208",
+   "duplicate_tag": true,
+   "risk": {
+    "risk_score": 0.0697,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "offpage_connectors": [
+  {
+   "id": "S101-OP001",
+   "tag": "BATTERY LIMIT A FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s1",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      157.2,
+      109.2,
+      181.0
+     ],
+     "tag_as_extracted": "BATTERY LIMIT A FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT A FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP002",
+   "tag": "BATTERY LIMIT D FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s2",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      251.3,
+      109.2,
+      275.1
+     ],
+     "tag_as_extracted": "BATTERY LIMIT D FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT D FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP003",
+   "tag": "BATTERY LIMIT E FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s3",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      345.3,
+      109.2,
+      369.1
+     ],
+     "tag_as_extracted": "BATTERY LIMIT E FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "BATTERY LIMIT E FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP004",
+   "tag": "PRD PID 103-1 (H-3) STRIPPER OVERHEAD",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s4",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      438.8,
+      109.2,
+      463.1
+     ],
+     "tag_as_extracted": "PRD PID 103-1 (H-3) STRIPPER OVERHEAD",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "PRD PID 103-1 (H-3) STRIPPER OVERHEAD",
+   "refers_to_drawing": "103-1",
+   "refers_to_system_code": "PRD",
+   "grid_ref_on_target": "H-3",
+   "pair": "S103-OP003",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP005",
+   "tag": "SEP PID 102-1 (H-12) RECYCLE TO FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s5",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      533.1,
+      109.2,
+      556.4
+     ],
+     "tag_as_extracted": "SEP PID 102-1 (H-12) RECYCLE TO FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "SEP PID 102-1 (H-12) RECYCLE TO FEED",
+   "refers_to_drawing": "102-1",
+   "refers_to_system_code": "SEP",
+   "grid_ref_on_target": "H-12",
+   "pair": "S102-OP001",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP006",
+   "tag": "SEP PID 102-1 (G-11) REACTOR PRODUCT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s18",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      758.3,
+      373.4,
+      830.8,
+      397.2
+     ],
+     "tag_as_extracted": "SEP PID 102-1 (G-11) REACTOR PRODUCT",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "SEP PID 102-1 (G-11) REACTOR PRODUCT",
+   "refers_to_drawing": "102-1",
+   "refers_to_system_code": "SEP",
+   "grid_ref_on_target": "G-11",
+   "pair": "S102-OP003",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP007",
+   "tag": "CW PID 901-1 COOLING WATER SUPPLY",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s25",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      343.8,
+      786.0,
+      415.7,
+      809.8
+     ],
+     "tag_as_extracted": "CW PID 901-1 COOLING WATER SUPPLY",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "CW PID 901-1 COOLING WATER SUPPLY",
+   "refers_to_drawing": "901-1",
+   "refers_to_system_code": "CW",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S101-OP008",
+   "tag": "CW PID 901-1 COOLING WATER RETURN",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "101",
+     "symbol": "s29",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      757.8,
+      783.8,
+      830.2,
+      807.6
+     ],
+     "tag_as_extracted": "CW PID 901-1 COOLING WATER RETURN",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/101.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-101",
+   "text": "CW PID 901-1 COOLING WATER RETURN",
+   "refers_to_drawing": "901-1",
+   "refers_to_system_code": "CW",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S101-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP001",
+   "tag": "RXN PID 101-1 (D-11) RECYCLE TO FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s1",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      82.7,
+      109.2,
+      105.9
+     ],
+     "tag_as_extracted": "RXN PID 101-1 (D-11) RECYCLE TO FEED",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "RXN PID 101-1 (D-11) RECYCLE TO FEED",
+   "refers_to_drawing": "101-1",
+   "refers_to_system_code": "RXN",
+   "grid_ref_on_target": "D-11",
+   "pair": "S101-OP005",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S102-PU001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP002",
+   "tag": "CW PID 901-1 COOLING WATER RETURN",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s2",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      166.4,
+      109.2,
+      190.2
+     ],
+     "tag_as_extracted": "CW PID 901-1 COOLING WATER RETURN",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "CW PID 901-1 COOLING WATER RETURN",
+   "refers_to_drawing": "901-1",
+   "refers_to_system_code": "CW",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP003",
+   "tag": "RXN PID 101-1 (E-3) REACTOR PRODUCT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s3",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      251.3,
+      109.2,
+      274.5
+     ],
+     "tag_as_extracted": "RXN PID 101-1 (E-3) REACTOR PRODUCT",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "RXN PID 101-1 (E-3) REACTOR PRODUCT",
+   "refers_to_drawing": "101-1",
+   "refers_to_system_code": "RXN",
+   "grid_ref_on_target": "E-3",
+   "pair": "S101-OP006",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP004",
+   "tag": "CW PID 901-1 COOLING WATER SUPPLY",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s4",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      373.9,
+      109.2,
+      397.2
+     ],
+     "tag_as_extracted": "CW PID 901-1 COOLING WATER SUPPLY",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "CW PID 901-1 COOLING WATER SUPPLY",
+   "refers_to_drawing": "901-1",
+   "refers_to_system_code": "CW",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S102-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP005",
+   "tag": "BATTERY LIMIT PURGE",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s20",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      757.8,
+      401.5,
+      830.2,
+      424.7
+     ],
+     "tag_as_extracted": "BATTERY LIMIT PURGE",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "BATTERY LIMIT PURGE",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S102-OP006",
+   "tag": "PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "102",
+     "symbol": "s27",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      757.8,
+      737.4,
+      830.2,
+      761.2
+     ],
+     "tag_as_extracted": "PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/102.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-102",
+   "text": "PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW",
+   "refers_to_drawing": "103-1",
+   "refers_to_system_code": "PRD",
+   "grid_ref_on_target": "F-11",
+   "pair": "S103-OP001",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S102-TK002",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP001",
+   "tag": "SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.92,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s8",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      344.8,
+      109.7,
+      369.1
+     ],
+     "tag_as_extracted": "SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+     "confidence": 0.92,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+   "refers_to_drawing": "102-1",
+   "refers_to_system_code": "SEP",
+   "grid_ref_on_target": "B-3",
+   "pair": "S102-OP006",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP002",
+   "tag": "BATTERY LIMIT A AND C FEED",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s9",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      514.7,
+      109.2,
+      537.4
+     ],
+     "tag_as_extracted": "BATTERY LIMIT A AND C FEED",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "BATTERY LIMIT A AND C FEED",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP003",
+   "tag": "RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s10",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      759.4,
+      129.1,
+      831.9,
+      152.4
+     ],
+     "tag_as_extracted": "RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+   "refers_to_drawing": "101-1",
+   "refers_to_system_code": "RXN",
+   "grid_ref_on_target": "E-11",
+   "pair": "S101-OP004",
+   "pair_method": "reciprocal_drawing_refs",
+   "pair_status": "paired",
+   "pair_description_similarity": 1.0,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP004",
+   "tag": "LS PID 902-1 LOW PRESSURE STEAM",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.93,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s11",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      37.3,
+      665.0,
+      109.2,
+      688.2
+     ],
+     "tag_as_extracted": "LS PID 902-1 LOW PRESSURE STEAM",
+     "confidence": 0.93,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "LS PID 902-1 LOW PRESSURE STEAM",
+   "refers_to_drawing": "902-1",
+   "refers_to_system_code": "LS",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP005",
+   "tag": "LS PID 902-1 CONDENSATE RETURN",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s17",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      759.4,
+      598.5,
+      831.9,
+      621.7
+     ],
+     "tag_as_extracted": "LS PID 902-1 CONDENSATE RETURN",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "LS PID 902-1 CONDENSATE RETURN",
+   "refers_to_drawing": "902-1",
+   "refers_to_system_code": "LS",
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: target drawing is not in this sheet set",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  },
+  {
+   "id": "S103-OP006",
+   "tag": "BATTERY LIMIT STRIPPER PRODUCT",
+   "tag_status": "as_extracted",
+   "class": "inlet/outlet",
+   "confidence": 0.95,
+   "provenance": [
+    {
+     "sheet": "103",
+     "symbol": "s20",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      759.4,
+      739.5,
+      831.9,
+      763.3
+     ],
+     "tag_as_extracted": "BATTERY LIMIT STRIPPER PRODUCT",
+     "confidence": 0.95,
+     "source_run": "runs/te-clean-trace-r1/claude/103.json",
+     "tool": "claude",
+     "model": "claude-opus-5-5[1m]"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "system": "SYS-103",
+   "text": "BATTERY LIMIT STRIPPER PRODUCT",
+   "refers_to_drawing": null,
+   "refers_to_system_code": null,
+   "grid_ref_on_target": null,
+   "pair": null,
+   "pair_method": null,
+   "pair_status": "unpaired: no drawing number read from the text",
+   "pair_description_similarity": null,
+   "unit": "S103-TK001",
+   "unit_method": "connection_path",
+   "risk": {
+    "risk_score": 0.0681,
+    "tier": "green",
+    "why": "no strong warning signs (minor: the same model's other pass (whole sheet vs tiles) didn't find it)"
+   }
+  }
+ ],
+ "offpage_pairs": [
+  {
+   "id": "XP-001",
+   "a": "S101-OP004",
+   "b": "S103-OP003",
+   "sheet_a": "101",
+   "sheet_b": "103",
+   "text_a": "PRD PID 103-1 (H-3) STRIPPER OVERHEAD",
+   "text_b": "RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+   "method": "reciprocal_drawing_refs",
+   "description_similarity": 1.0,
+   "alternatives": 0,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-002",
+   "a": "S101-OP005",
+   "b": "S102-OP001",
+   "sheet_a": "101",
+   "sheet_b": "102",
+   "text_a": "SEP PID 102-1 (H-12) RECYCLE TO FEED",
+   "text_b": "RXN PID 101-1 (D-11) RECYCLE TO FEED",
+   "method": "reciprocal_drawing_refs",
+   "description_similarity": 1.0,
+   "alternatives": 1,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-003",
+   "a": "S101-OP006",
+   "b": "S102-OP003",
+   "sheet_a": "101",
+   "sheet_b": "102",
+   "text_a": "SEP PID 102-1 (G-11) REACTOR PRODUCT",
+   "text_b": "RXN PID 101-1 (E-3) REACTOR PRODUCT",
+   "method": "reciprocal_drawing_refs",
+   "description_similarity": 1.0,
+   "alternatives": 1,
+   "verification": {
+    "status": "unverified"
+   }
+  },
+  {
+   "id": "XP-004",
+   "a": "S102-OP006",
+   "b": "S103-OP001",
+   "sheet_a": "102",
+   "sheet_b": "103",
+   "text_a": "PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW",
+   "text_b": "SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+   "method": "reciprocal_drawing_refs",
+   "description_similarity": 1.0,
+   "alternatives": 0,
+   "verification": {
+    "status": "unverified"
+   }
+  }
+ ],
+ "dropped": {
+  "symbols": [],
+  "connections": []
+ },
+ "hierarchy": {
+  "id": "SITE",
+  "kind": "site",
+  "name": "Site (from te-clean-trace-r1)",
+  "children": [
+   {
+    "id": "SYS-101",
+    "kind": "system",
+    "name": "Feed And Reaction",
+    "sheet": "101",
+    "children": [
+     {
+      "id": "S101-TK001",
+      "kind": "equipment",
+      "tag": "R-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S101-VL001",
+        "kind": "line_item",
+        "tag": "FV 203",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN001",
+          "kind": "instrument",
+          "tag": "FV 203",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN004",
+          "kind": "instrument",
+          "tag": "FI 101",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL002",
+        "kind": "line_item",
+        "tag": "FV 201",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN002",
+          "kind": "instrument",
+          "tag": "FV 201",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN005",
+          "kind": "instrument",
+          "tag": "FI 102",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL003",
+        "kind": "line_item",
+        "tag": "FV 202",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN003",
+          "kind": "instrument",
+          "tag": "FV 202",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S101-IN006",
+          "kind": "instrument",
+          "tag": "FI 103",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-GN001",
+        "kind": "line_item",
+        "tag": "M",
+        "class": "general",
+        "children": [
+         {
+          "id": "S101-IN007",
+          "kind": "instrument",
+          "tag": "SC 212",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-GN002",
+        "kind": "line_item",
+        "tag": "U-100",
+        "class": "general",
+        "children": [
+         {
+          "id": "S101-IN011",
+          "kind": "instrument",
+          "tag": "FI 106",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-VL004",
+        "kind": "line_item",
+        "tag": "TV 210",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S101-IN013",
+          "kind": "instrument",
+          "tag": "TV 210",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S101-IN008",
+        "kind": "instrument",
+        "tag": "PI 107",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN009",
+        "kind": "instrument",
+        "tag": "LI 108",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN010",
+        "kind": "instrument",
+        "tag": "TI 109",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN012",
+        "kind": "instrument",
+        "tag": "AI 123",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S101-IN014",
+        "kind": "instrument",
+        "tag": "TI 121",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S101-OP001",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT A FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP002",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT D FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP003",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT E FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP004",
+      "kind": "offpage",
+      "tag": "PRD PID 103-1 (H-3) STRIPPER OVERHEAD",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP005",
+      "kind": "offpage",
+      "tag": "SEP PID 102-1 (H-12) RECYCLE TO FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP006",
+      "kind": "offpage",
+      "tag": "SEP PID 102-1 (G-11) REACTOR PRODUCT",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP007",
+      "kind": "offpage",
+      "tag": "CW PID 901-1 COOLING WATER SUPPLY",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S101-OP008",
+      "kind": "offpage",
+      "tag": "CW PID 901-1 COOLING WATER RETURN",
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   },
+   {
+    "id": "SYS-102",
+    "kind": "system",
+    "name": "Condensing, Separation And Recycle",
+    "sheet": "102",
+    "children": [
+     {
+      "id": "S102-TK001",
+      "kind": "equipment",
+      "tag": "E-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S102-VL001",
+        "kind": "line_item",
+        "tag": "TV 211",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN002",
+          "kind": "instrument",
+          "tag": "TV 211",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN001",
+        "kind": "instrument",
+        "tag": "TI 122",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     },
+     {
+      "id": "S102-TK002",
+      "kind": "equipment",
+      "tag": "V-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S102-VL003",
+        "kind": "line_item",
+        "tag": "FV 206",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN008",
+          "kind": "instrument",
+          "tag": "AI 129",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S102-IN009",
+          "kind": "instrument",
+          "tag": "FV 206",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-VL004",
+        "kind": "line_item",
+        "tag": "LV 207",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN013",
+          "kind": "instrument",
+          "tag": "FI 114",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S102-IN014",
+          "kind": "instrument",
+          "tag": "LV 207",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN007",
+        "kind": "instrument",
+        "tag": "FI 110",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN010",
+        "kind": "instrument",
+        "tag": "TI 111",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN011",
+        "kind": "instrument",
+        "tag": "LI 112",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN012",
+        "kind": "instrument",
+        "tag": "PI 113",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     },
+     {
+      "id": "S102-PU001",
+      "kind": "equipment",
+      "tag": "K-101",
+      "class": "pump",
+      "children": [
+       {
+        "id": "S102-VL002",
+        "kind": "line_item",
+        "tag": "HV 205",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S102-IN006",
+          "kind": "instrument",
+          "tag": "HV 205",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S102-IN003",
+        "kind": "instrument",
+        "tag": null,
+        "class": "instrumentation",
+        "attach": "geometry_nearest",
+        "children": []
+       },
+       {
+        "id": "S102-IN004",
+        "kind": "instrument",
+        "tag": "FI 105",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S102-IN005",
+        "kind": "instrument",
+        "tag": "JI 120",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S102-OP001",
+      "kind": "offpage",
+      "tag": "RXN PID 101-1 (D-11) RECYCLE TO FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP002",
+      "kind": "offpage",
+      "tag": "CW PID 901-1 COOLING WATER RETURN",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP003",
+      "kind": "offpage",
+      "tag": "RXN PID 101-1 (E-3) REACTOR PRODUCT",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP004",
+      "kind": "offpage",
+      "tag": "CW PID 901-1 COOLING WATER SUPPLY",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP005",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT PURGE",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S102-OP006",
+      "kind": "offpage",
+      "tag": "PRD PID 103-1 (F-11) SEPARATOR UNDERFLOW",
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   },
+   {
+    "id": "SYS-103",
+    "kind": "system",
+    "name": "Product Stripping",
+    "sheet": "103",
+    "children": [
+     {
+      "id": "S103-TK001",
+      "kind": "equipment",
+      "tag": "C-101",
+      "class": "tank",
+      "children": [
+       {
+        "id": "S103-VL001",
+        "kind": "line_item",
+        "tag": "FV 204",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN004",
+          "kind": "instrument",
+          "tag": "FV 204",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN005",
+          "kind": "instrument",
+          "tag": "FI 104",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-VL002",
+        "kind": "line_item",
+        "tag": "FV 209",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN006",
+          "kind": "instrument",
+          "tag": "FV 209",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN007",
+          "kind": "instrument",
+          "tag": "FI 119",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-VL003",
+        "kind": "line_item",
+        "tag": "LV 208",
+        "class": "valve",
+        "children": [
+         {
+          "id": "S103-IN008",
+          "kind": "instrument",
+          "tag": "FI 117",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN009",
+          "kind": "instrument",
+          "tag": "AI 137",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         },
+         {
+          "id": "S103-IN010",
+          "kind": "instrument",
+          "tag": "LV 208",
+          "class": "instrumentation",
+          "attach": "along_line",
+          "children": []
+         }
+        ]
+       },
+       {
+        "id": "S103-IN001",
+        "kind": "instrument",
+        "tag": "PI 116",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S103-IN002",
+        "kind": "instrument",
+        "tag": "TI 118",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       },
+       {
+        "id": "S103-IN003",
+        "kind": "instrument",
+        "tag": "LI 115",
+        "class": "instrumentation",
+        "attach": "along_line",
+        "children": []
+       }
+      ]
+     }
+    ],
+    "unassigned": [],
+    "offpage_connectors": [
+     {
+      "id": "S103-OP001",
+      "kind": "offpage",
+      "tag": "SEP PID 102-1 (B-3) SEPARATOR UNDERFLOW",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP002",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT A AND C FEED",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP003",
+      "kind": "offpage",
+      "tag": "RXN PID 101-1 (E-11) STRIPPER OVERHEAD",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP004",
+      "kind": "offpage",
+      "tag": "LS PID 902-1 LOW PRESSURE STEAM",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP005",
+      "kind": "offpage",
+      "tag": "LS PID 902-1 CONDENSATE RETURN",
+      "class": "inlet/outlet",
+      "children": []
+     },
+     {
+      "id": "S103-OP006",
+      "kind": "offpage",
+      "tag": "BATTERY LIMIT STRIPPER PRODUCT",
+      "class": "inlet/outlet",
+      "children": []
+     }
+    ]
+   }
+  ]
+ },
+ "summary": {
+  "systems": 3,
+  "equipment": 5,
+  "equipment_on_several_sheets": 0,
+  "instruments": 38,
+  "line_items": 13,
+  "offpage_connectors": 20,
+  "streams_extracted": 118,
+  "instrument_parent_method": {
+   "along_line": 37,
+   "geometry_nearest": 1
+  },
+  "instruments_without_equipment": 0,
+  "line_items_without_equipment": 0,
+  "placeholder_tags": 0,
+  "offpage_pairs": 4,
+  "offpage_status": {
+   "unpaired: no drawing number read from the text": 6,
+   "paired": 8,
+   "unpaired: target drawing is not in this sheet set": 6
+  },
+  "sheet_drawing_numbers": {
+   "101": [
+    "101-1",
+    "sheet_register"
+   ],
+   "102": [
+    "102-1",
+    "sheet_register"
+   ],
+   "103": [
+    "103-1",
+    "sheet_register"
+   ]
+  }
+ }
+}

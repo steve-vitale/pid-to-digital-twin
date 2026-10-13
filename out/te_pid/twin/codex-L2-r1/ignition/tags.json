@@ -1,0 +1,1853 @@
+{
+ "name": "",
+ "tagType": "Provider",
+ "tags": [
+  {
+   "name": "_types_",
+   "tagType": "Folder",
+   "tags": [
+    {
+     "name": "Equipment_Pump",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      }
+     },
+     "tags": [
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Equipment_Tank",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      }
+     },
+     "tags": [
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_AI",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_FI",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_FV",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_LE",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_LI",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_LV",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_PI",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_PR",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_PV",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_SC",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_TI",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_TR",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "Instrument_TV",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      },
+      "BasePath": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "PointName": {
+       "dataType": "String",
+       "value": "PLACEHOLDER"
+      },
+      "OPCServer": {
+       "dataType": "String",
+       "value": "Ignition OPC UA Server"
+      }
+     },
+     "tags": [
+      {
+       "name": "PV",
+       "tagType": "AtomicTag",
+       "valueSource": "opc",
+       "dataType": "Float8",
+       "readOnly": true,
+       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
+       "opcServer": {
+        "bindType": "parameter",
+        "binding": "{OPCServer}"
+       },
+       "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "{BasePath}.{PointName}"
+       }
+      },
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "LineItem_General",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      }
+     },
+     "tags": [
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    },
+    {
+     "name": "LineItem_Valve",
+     "tagType": "UdtType",
+     "parameters": {
+      "AssetId": {
+       "dataType": "String",
+       "value": ""
+      },
+      "SourceTag": {
+       "dataType": "String",
+       "value": ""
+      }
+     },
+     "tags": [
+      {
+       "name": "ReviewStatus",
+       "tagType": "AtomicTag",
+       "valueSource": "memory",
+       "dataType": "String",
+       "value": "unverified"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Site",
+   "tagType": "Folder",
+   "documentation": "Digital twin starter kit: te-L2-trace-r1 / codex | every value is a PLACEHOLDER until mapped",
+   "tags": [
+    {
+     "name": "Feed_And_Reaction",
+     "tagType": "Folder",
+     "tags": [
+      {
+       "name": "R-101",
+       "tagType": "Folder",
+       "tags": [
+        {
+         "name": "R-101",
+         "tagType": "UdtInstance",
+         "typeId": "Equipment_Tank",
+         "documentation": "S101-TK001 | tag: R-101 (as_extracted) | on sheets 101 | sheet 101 symbol s14 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-TK001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "R-101"
+          }
+         }
+        },
+        {
+         "name": "S101-VL001",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S101-VL001 | tag: none read (missing) | sheet 101 symbol s6 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-VL001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "S101-VL002",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S101-VL002 | tag: none read (missing) | sheet 101 symbol s9 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-VL002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "S101-VL003",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S101-VL003 | tag: none read (missing) | sheet 101 symbol s12 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-VL003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "M",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_General",
+         "documentation": "S101-GN001 | tag: M (as_extracted) | sheet 101 symbol s16 | confidence 0.95 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-GN001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "M"
+          }
+         }
+        },
+        {
+         "name": "U-100",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_General",
+         "documentation": "S101-GN002 | tag: U-100 (as_extracted) | sheet 101 symbol s22 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-GN002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "U-100"
+          }
+         }
+        },
+        {
+         "name": "S101-VL004",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S101-VL004 | tag: none read (missing) | sheet 101 symbol s26 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-VL004"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "FV_200",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FV",
+         "documentation": "S101-IN001 | tag: FV 200 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s5 | confidence 0.92 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FV 200"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FV_200"
+          }
+         }
+        },
+        {
+         "name": "FI_101",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FI",
+         "documentation": "S101-IN002 | tag: FI 101 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s7 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FI 101"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FI_101"
+          }
+         }
+        },
+        {
+         "name": "FV_201",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FV",
+         "documentation": "S101-IN003 | tag: FV 201 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s8 | confidence 0.93 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FV 201"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FV_201"
+          }
+         }
+        },
+        {
+         "name": "FI_102",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FI",
+         "documentation": "S101-IN004 | tag: FI 102 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s10 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN004"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FI 102"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FI_102"
+          }
+         }
+        },
+        {
+         "name": "FV_202",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FV",
+         "documentation": "S101-IN005 | tag: FV 202 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s11 | confidence 0.93 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN005"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FV 202"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FV_202"
+          }
+         }
+        },
+        {
+         "name": "FI_103",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FI",
+         "documentation": "S101-IN006 | tag: FI 103 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s13 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN006"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FI 103"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FI_103"
+          }
+         }
+        },
+        {
+         "name": "SC_721",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_SC",
+         "documentation": "S101-IN007 | tag: SC 721 (as_extracted) | attached to S101-GN001 (along_line) | sheet 101 symbol s17 | confidence 0.93 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN007"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "SC 721"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_SC_721"
+          }
+         }
+        },
+        {
+         "name": "PR_107",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PR",
+         "documentation": "S101-IN008 | tag: PR 107 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s18 | confidence 0.92 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN008"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PR 107"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PR_107"
+          }
+         }
+        },
+        {
+         "name": "LE_108",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_LE",
+         "documentation": "S101-IN009 | tag: LE 108 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s19 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN009"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "LE 108"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_LE_108"
+          }
+         }
+        },
+        {
+         "name": "TR_109",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TR",
+         "documentation": "S101-IN010 | tag: TR 109 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s20 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN010"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TR 109"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TR_109"
+          }
+         }
+        },
+        {
+         "name": "PI_106",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S101-IN011 | tag: PI 106 (as_extracted) | attached to S101-GN002 (along_line) | sheet 101 symbol s23 | confidence 0.88 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN011"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 106"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_106"
+          }
+         }
+        },
+        {
+         "name": "AI",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_AI",
+         "documentation": "S101-IN012 | tag: AI (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s24 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN012"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "AI"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_AI"
+          }
+         }
+        },
+        {
+         "name": "TV_210",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TV",
+         "documentation": "S101-IN013 | tag: TV 210 (as_extracted) | attached to S101-VL004 (along_line) | sheet 101 symbol s27 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN013"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TV 210"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TV_210"
+          }
+         }
+        },
+        {
+         "name": "TI_121",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S101-IN014 | tag: TI 121 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s28 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S101-IN014"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 121"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_121"
+          }
+         }
+        }
+       ]
+      }
+     ],
+     "documentation": "Feed And Reaction | drawing 101-1 (sheet_register)"
+    },
+    {
+     "name": "Condensing_Separation_And_Recycle",
+     "tagType": "Folder",
+     "tags": [
+      {
+       "name": "E-101",
+       "tagType": "Folder",
+       "tags": [
+        {
+         "name": "E-101",
+         "tagType": "UdtInstance",
+         "typeId": "Equipment_Tank",
+         "documentation": "S102-TK001 | tag: E-101 (as_extracted) | on sheets 102 | sheet 102 symbol s5 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-TK001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "E-101"
+          }
+         }
+        },
+        {
+         "name": "S102-VL001",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S102-VL001 | tag: none read (missing) | sheet 102 symbol s8 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-VL001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "TI_122",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S102-IN001 | tag: TI 122 (as_extracted) | attached to S102-TK001 (along_line) | sheet 102 symbol s6 | confidence 0.94 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 122"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_122"
+          }
+         }
+        },
+        {
+         "name": "TV_211",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TV",
+         "documentation": "S102-IN002 | tag: TV 211 (as_extracted) | attached to S102-VL001 (along_line) | sheet 102 symbol s7 | confidence 0.95 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TV 211"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TV_211"
+          }
+         }
+        }
+       ]
+      },
+      {
+       "name": "V-101",
+       "tagType": "Folder",
+       "tags": [
+        {
+         "name": "V-101",
+         "tagType": "UdtInstance",
+         "typeId": "Equipment_Tank",
+         "documentation": "S102-TK002 | tag: V-101 (as_extracted) | on sheets 102 | sheet 102 symbol s9 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-TK002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "V-101"
+          }
+         }
+        },
+        {
+         "name": "S102-VL003",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S102-VL003 | tag: none read (missing) | sheet 102 symbol s18 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-VL003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "S102-VL004",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S102-VL004 | tag: none read (missing) | sheet 102 symbol s25 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-VL004"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "PI_110",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S102-IN006 | tag: PI 110 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s15 | confidence 0.94 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN006"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 110"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_110"
+          }
+         }
+        },
+        {
+         "name": "AI_119",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_AI",
+         "documentation": "S102-IN007 | tag: AI 119 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s16 | confidence 0.73 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN007"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "AI 119"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_AI_119"
+          }
+         }
+        },
+        {
+         "name": "FV_206",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FV",
+         "documentation": "S102-IN008 | tag: FV 206 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s17 | confidence 0.87 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN008"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FV 206"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FV_206"
+          }
+         }
+        },
+        {
+         "name": "TI_111",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S102-IN009 | tag: TI 111 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s20 | confidence 0.92 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN009"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 111"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_111"
+          }
+         }
+        },
+        {
+         "name": "LI_112",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_LI",
+         "documentation": "S102-IN010 | tag: LI 112 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s21 | confidence 0.96 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN010"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "LI 112"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_LI_112"
+          }
+         }
+        },
+        {
+         "name": "PI_113",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S102-IN011 | tag: PI 113 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s22 | confidence 0.95 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN011"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 113"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_113"
+          }
+         }
+        },
+        {
+         "name": "PI_114",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S102-IN012 | tag: PI 114 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s23 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN012"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 114"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_114"
+          }
+         }
+        },
+        {
+         "name": "LV_207",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_LV",
+         "documentation": "S102-IN013 | tag: LV 207 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s24 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN013"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "LV 207"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_LV_207"
+          }
+         }
+        }
+       ]
+      },
+      {
+       "name": "K-101",
+       "tagType": "Folder",
+       "tags": [
+        {
+         "name": "K-101",
+         "tagType": "UdtInstance",
+         "typeId": "Equipment_Pump",
+         "documentation": "S102-PU001 | tag: K-101 (as_extracted) | on sheets 102 | sheet 102 symbol s10 | confidence 0.96 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-PU001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "K-101"
+          }
+         }
+        },
+        {
+         "name": "S102-VL002",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S102-VL002 | tag: none read (missing) | sheet 102 symbol s13 | confidence 0.96 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-VL002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "PI_109",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S102-IN003 | tag: PI 109 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s11 | confidence 0.94 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 109"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_109"
+          }
+         }
+        },
+        {
+         "name": "AI_120",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_AI",
+         "documentation": "S102-IN004 | tag: AI 120 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s12 | confidence 0.87 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN004"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "AI 120"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_AI_120"
+          }
+         }
+        },
+        {
+         "name": "FV_205",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_FV",
+         "documentation": "S102-IN005 | tag: FV 205 (as_extracted) | attached to S102-VL002 (along_line) | sheet 102 symbol s14 | confidence 0.77 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S102-IN005"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "FV 205"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_FV_205"
+          }
+         }
+        }
+       ]
+      }
+     ],
+     "documentation": "Condensing, Separation And Recycle | drawing 102-1 (sheet_register)"
+    },
+    {
+     "name": "Product_Stripping",
+     "tagType": "Folder",
+     "tags": [
+      {
+       "name": "C-101",
+       "tagType": "Folder",
+       "tags": [
+        {
+         "name": "C-101",
+         "tagType": "UdtInstance",
+         "typeId": "Equipment_Tank",
+         "documentation": "S103-TK001 | tag: C-101 (as_extracted) | on sheets 103 | sheet 103 symbol s1 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-TK001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "C-101"
+          }
+         }
+        },
+        {
+         "name": "S103-VL001",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S103-VL001 | tag: none read (missing) | sheet 103 symbol s8 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-VL001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "S103-VL002",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S103-VL002 | tag: none read (missing) | sheet 103 symbol s12 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-VL002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "S103-VL003",
+         "tagType": "UdtInstance",
+         "typeId": "LineItem_Valve",
+         "documentation": "S103-VL003 | tag: none read (missing) | sheet 103 symbol s19 | confidence 0.99 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-VL003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": ""
+          }
+         }
+        },
+        {
+         "name": "PI_116",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S103-IN001 | tag: PI 116 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s4 | confidence 0.98 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN001"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 116"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_116"
+          }
+         }
+        },
+        {
+         "name": "TI_118",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S103-IN002 | tag: TI 118 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s5 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN002"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 118"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_118"
+          }
+         }
+        },
+        {
+         "name": "LI_115",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_LI",
+         "documentation": "S103-IN003 | tag: LI 115 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s6 | confidence 0.95 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN003"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "LI 115"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_LI_115"
+          }
+         }
+        },
+        {
+         "name": "PV_204",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PV",
+         "documentation": "S103-IN004 | tag: PV 204 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s7 | confidence 0.91 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN004"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PV 204"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PV_204"
+          }
+         }
+        },
+        {
+         "name": "PI_104",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PI",
+         "documentation": "S103-IN005 | tag: PI 104 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s9 | confidence 0.95 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN005"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PI 104"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PI_104"
+          }
+         }
+        },
+        {
+         "name": "PV_209",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_PV",
+         "documentation": "S103-IN006 | tag: PV 209 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s13 | confidence 0.87 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN006"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "PV 209"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_PV_209"
+          }
+         }
+        },
+        {
+         "name": "TI_110",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S103-IN007 | tag: TI 110 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s14 | confidence 0.89 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN007"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 110"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_110"
+          }
+         }
+        },
+        {
+         "name": "TI_133",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_TI",
+         "documentation": "S103-IN008 | tag: TI 133 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s15 | confidence 0.96 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN008"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "TI 133"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_TI_133"
+          }
+         }
+        },
+        {
+         "name": "AI_137",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_AI",
+         "documentation": "S103-IN009 | tag: AI 137 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s16 | confidence 0.97 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN009"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "AI 137"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_AI_137"
+          }
+         }
+        },
+        {
+         "name": "LV_208",
+         "tagType": "UdtInstance",
+         "typeId": "Instrument_LV",
+         "documentation": "S103-IN010 | tag: LV 208 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s18 | confidence 0.96 | UNVERIFIED",
+         "parameters": {
+          "AssetId": {
+           "dataType": "String",
+           "value": "S103-IN010"
+          },
+          "SourceTag": {
+           "dataType": "String",
+           "value": "LV 208"
+          },
+          "PointName": {
+           "dataType": "String",
+           "value": "PLACEHOLDER_LV_208"
+          }
+         }
+        }
+       ]
+      }
+     ],
+     "documentation": "Product Stripping | drawing 103-1 (sheet_register)"
+    }
+   ]
+  }
+ ]
+}

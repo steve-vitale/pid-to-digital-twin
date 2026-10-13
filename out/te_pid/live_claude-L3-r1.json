@@ -1,0 +1,344 @@
+{
+ "twin": "out/te_pid/twin/claude-L3-r1/plant_model.json",
+ "instruments": 37,
+ "mapped_to_a_replay_point": 16,
+ "values_moved": 16,
+ "served_points": 52,
+ "served_points_not_on_the_drawings": [
+  "AI-123",
+  "AI-123-B",
+  "AI-123-C",
+  "AI-123-D",
+  "AI-123-E",
+  "AI-123-F",
+  "AI-129",
+  "AI-129-B",
+  "AI-129-C",
+  "AI-129-D",
+  "AI-129-E",
+  "AI-129-F",
+  "AI-129-G",
+  "AI-129-H",
+  "AI-137",
+  "AI-137-E",
+  "AI-137-F",
+  "AI-137-G",
+  "AI-137-H",
+  "FI-104",
+  "FI-106",
+  "FI-114",
+  "FI-117",
+  "FI-119",
+  "FV-204",
+  "FV-206",
+  "FV-209",
+  "LI-115",
+  "LV-207",
+  "LV-208",
+  "TI-109",
+  "TI-111",
+  "TI-118",
+  "TI-121",
+  "TI-122",
+  "TV-210"
+ ],
+ "wait_s": 5.0,
+ "rows": [
+  {
+   "id": "S101-IN001",
+   "tag": "FV 201",
+   "point": "FV-201",
+   "first": 63.334,
+   "second": 63.247,
+   "moved": true
+  },
+  {
+   "id": "S101-IN002",
+   "tag": "FI 101",
+   "point": "FI-101",
+   "first": 0.24563,
+   "second": 0.29736,
+   "moved": true
+  },
+  {
+   "id": "S101-IN003",
+   "tag": "FV 202",
+   "point": "FV-202",
+   "first": 53.906,
+   "second": 53.335,
+   "moved": true
+  },
+  {
+   "id": "S101-IN004",
+   "tag": "FI 102",
+   "point": "FI-102",
+   "first": 3698.0,
+   "second": 3720.7,
+   "moved": true
+  },
+  {
+   "id": "S101-IN005",
+   "tag": "FV 203",
+   "point": "FV-203",
+   "first": 24.451,
+   "second": 29.462,
+   "moved": true
+  },
+  {
+   "id": "S101-IN006",
+   "tag": "FI 103",
+   "point": "FI-103",
+   "first": 4537.4,
+   "second": 4532.6,
+   "moved": true
+  },
+  {
+   "id": "S101-IN007",
+   "tag": "SIC 212",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S101-IN008",
+   "tag": "PI 107",
+   "point": "PI-107",
+   "first": 2705.3,
+   "second": 2706.3,
+   "moved": true
+  },
+  {
+   "id": "S101-IN009",
+   "tag": "LI 108",
+   "point": "LI-108",
+   "first": 75.283,
+   "second": 74.807,
+   "moved": true
+  },
+  {
+   "id": "S101-IN010",
+   "tag": "TI 106",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S101-IN011",
+   "tag": "TI",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S101-IN012",
+   "tag": "AI",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S101-IN013",
+   "tag": "TV",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S101-IN014",
+   "tag": null,
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN001",
+   "tag": "TI 123",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN002",
+   "tag": "TV 211",
+   "point": "TV-211",
+   "first": 18.33,
+   "second": 16.776,
+   "moved": true
+  },
+  {
+   "id": "S102-IN003",
+   "tag": "FI 105",
+   "point": "FI-105",
+   "first": 26.736,
+   "second": 26.994,
+   "moved": true
+  },
+  {
+   "id": "S102-IN004",
+   "tag": "JI 120",
+   "point": "JI-120",
+   "first": 341.24,
+   "second": 341.55,
+   "moved": true
+  },
+  {
+   "id": "S102-IN005",
+   "tag": "HV 205",
+   "point": "HV-205",
+   "first": 22.271,
+   "second": 22.393,
+   "moved": true
+  },
+  {
+   "id": "S102-IN006",
+   "tag": "FI 110",
+   "point": "FI-110",
+   "first": 0.32521,
+   "second": 0.33947,
+   "moved": true
+  },
+  {
+   "id": "S102-IN007",
+   "tag": "AI 120",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN008",
+   "tag": "FX 206",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN009",
+   "tag": null,
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN010",
+   "tag": "LI 112",
+   "point": "LI-112",
+   "first": 49.518,
+   "second": 48.81,
+   "moved": true
+  },
+  {
+   "id": "S102-IN011",
+   "tag": "PI 113",
+   "point": "PI-113",
+   "first": 2634.1,
+   "second": 2635.4,
+   "moved": true
+  },
+  {
+   "id": "S102-IN012",
+   "tag": "TI 114",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S102-IN013",
+   "tag": "LC 101",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN001",
+   "tag": "PI 116",
+   "point": "PI-116",
+   "first": 3103.5,
+   "second": 3102.4,
+   "moved": true
+  },
+  {
+   "id": "S103-IN002",
+   "tag": "TI 116",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN003",
+   "tag": "LI 116",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN004",
+   "tag": "PV 204",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN005",
+   "tag": "FT 204",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN006",
+   "tag": "PV 205",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN007",
+   "tag": "FI 115",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN008",
+   "tag": "PT",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN009",
+   "tag": "AI",
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  },
+  {
+   "id": "S103-IN010",
+   "tag": null,
+   "point": null,
+   "first": null,
+   "second": null,
+   "moved": false
+  }
+ ]
+}

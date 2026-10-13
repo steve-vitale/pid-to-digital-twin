@@ -21,7 +21,7 @@ No single number captures that. Every metric below is a **proxy**, and each one 
 | **Classification** (class must also match) | Did it call a valve a valve? | Whether the answer key's classes match *your* needs |
 | **Per-class scores** | Where it's strong and where it's weak | Rare classes (16 pumps in 12 drawings) swing a lot |
 | **Connectivity** (asset-to-asset links) | Does it understand the process topology? | Line sizes, flow direction, spec breaks |
-| **Tag text** (Tennessee Eastman only) | Did it read the tag exactly? | Not scorable on the public dataset, whose key has no text |
+| **Tag text** (Tennessee Eastman only) | Did it read the tag exactly? Scored on the generated TE sheets (§6), a round trip on our own drawings | Not scorable on the public dataset, whose key has no text; real-plant tag reading is still unmeasured |
 | **Answer-key topology** (Tennessee Eastman only) | Do the key's units, stream endpoints, flow directions and tag ownership match the simulator source? 51 confirmed, 4 corrected, 1 unresolvable (`out/te_topology_check.md`) | Tap positions, sizes and pipe routes, which the simulator does not model; anything where the source itself is split |
 | **Operations review corrections** | What a real reviewer still had to fix | Only as good as the reviewer's time and attention |
 | **Time and cost per sheet** | Whether it saves anything at all | Quality, so always read alongside the measures above |
@@ -131,7 +131,8 @@ What this supports:
 What it doesn't support:
 - **Ranking claims beyond these drawings.** Twelve drawings come from one public design; a different drafting
   style may reorder the tools.
-- **Any statement about tag-reading accuracy.** That needs the Tennessee Eastman operator review, which is deferred.
+- **Any statement about tag-reading accuracy on real drawings.** The only tag-reading score is the Tennessee Eastman
+  round trip (§6): sheets we generated, read back. It is an upper bound for clean house-style drawings.
 
 ## 5. Where the evaluation files live
 
@@ -144,6 +145,7 @@ What it doesn't support:
 | `scripts/run_tests.py` | Every test in one command (CI runs it) |
 | `scripts/degrade_scans.py`, `run_scan_robustness.ps1`, `score_scan_robustness.ps1` | Round 4: old-scan images (geometry kept, keys unchanged), the runs, and the scoring |
 | `scripts/verify_te_topology.py`, `scripts/test_te_topology.py` | Checks the TE answer key's topology against the simulator code; controls plant wrong models and edit the simulator text to prove the check reads the code |
+| `scripts/draw_pid_from_model.py`, `scripts/style_fidelity.py`, `scripts/score_te_roundtrip.py`, `scripts/te_model_diff.py`, `scripts/te_live_check.py`, `scripts/test_te_pid_roundtrip.py` | §6: the generated TE sheets and keys, the style check, the round-trip scorer (tag text, replicates), the reviewer diff, the replay live check, and their tests (layout refusals, key regeneration, tracer-key agreement, planted misreads) |
 | `scripts/test_apply_review.py` | Controls for the review loop: bad sheets refused, alarm requests routed to change review, round trip stable |
 | `scripts/run_holdouts.ps1`, `score_holdout_b.ps1`, `score_parent_holdouts.ps1`, `score_triage_holdouts.ps1` | Windows PowerShell helpers that reproduce the GOAL.md holdout tables, each label scored once |
 | `scripts/scorecard.py`, `scripts/per_drawing.py` | Aggregate and per-drawing views |
@@ -153,3 +155,80 @@ What it doesn't support:
 | `scripts/test_along_line.py` | Controls for the along-line parent rule on a synthetic sheet: following the line beats position, signal chains, the off-line fallback, and the tracer's links unchanged when the geometry is requested |
 | `scripts/remerge_tiles.py` | Re-applies the merge (or adds whole-sheet links) to stored tile replies without new model calls |
 | `out/scorecard_<label>.md` | Published results per run label |
+| `out/te_pid/` | §6 results: `style_fidelity.md`, `roundtrip_scores.md` (+ `.json` with every run's model, prompt hash, date, time and cost), `diff_*.md`, `live_*.md`, extracted TE twins |
+
+## 6. One plant, end to end (Tennessee Eastman)
+
+**Why:** the extraction (OPEN100) and the live twin (TE) were on two different plants, so "drawing → extraction →
+twin → live values" was never shown on one plant. TE has a verified model but no public drawing we may use, so the
+drawing is generated from the model in the house style learned from OPEN100 (`scripts/draw_pid_from_model.py`,
+3 sheets). The same path is open to a plant with process knowledge and no usable drawings.
+
+**What is and isn't being measured.** The keys come from the same model as the drawings, so this is a **round
+trip**: how faithfully the frozen method reads clean drawings in a known style. It is an upper bound, not real-plant
+accuracy, and not comparable with §4 or the OPEN100 holdouts: the sheets are sparser (20–28 scored symbols against
+40–134), cleaner, and the key is ours. Two checks keep the key honest. The generator refuses a layout that drops,
+duplicates or invents a model item. And the code line tracer, which sees only pixels, recovers every key link on all
+three sheets from the key's symbol boxes, so the key's links describe what is drawn.
+
+**Style check** (`out/te_pid/style_fidelity.md`): 32 of 36 measurements inside the OPEN100 per-sheet range. The four
+outside are symbol counts on all three sheets and ink coverage on one, because the model has no drains, vents or
+manual valves to draw.
+
+**Method, unchanged:** M3 (2×2 tiles, 0.15 overlap, `extraction/prompt_v2.md`, then `trace_connections.py` with
+defaults), GPT (gpt-6.1-sol, Codex CLI) and Claude (claude-opus-5-5, Claude Code CLI). Gemini was left out by the
+project owner's direction. Clean sheets: 5 runs per model. Round-4 degraded copies L1–L3 (`degrade_scans.py --src`,
+same levels and seeding): 3 runs per model per level. 84 sheet runs, no failed tile. Scores: the frozen scorer for
+symbols and connections, plus tag text, matched by position (rough IoU ≥ 0.1) and compared after dropping case and
+separators (`scripts/score_te_roundtrip.py`).
+
+| Image | Review load /100: GPT · Claude | Symbols found F1 | Connections F1 | Tags read exactly (of 43) | Off-page refs read |
+|---|---|---|---|---|---|
+| Clean | 2.1 (2.1–2.1) · 2.2 (2.1–2.6) | 0.99 · 0.99 | 0.99 · 0.99 | 100% · 100% | 100% · 100% |
+| L1 photocopy | 2.1 · 8.0 (2.6–11.5) | 0.99 · 0.97 | 0.99 · 0.96 | 100% · 98% | 93% · 100% |
+| L2 old scan | 2.1 · 13.4 (11.5–14.7) | 0.99 · 0.99 | 0.99 · 0.91 | 56% (54–58%) · 95% | 0% · 86% |
+| L3 bad scan | 16.9 (16.2–17.8) · 17.3 (15.7–18.3) | 0.99 · 0.98 | 0.85 · 0.85 | 14% · 49% (44–51%) | 0% · 0% |
+
+Means over runs, min–max in brackets where runs differed; 95% t-intervals are in `roundtrip_scores.json`.
+
+**What it says:**
+- **Clean house-style sheets read almost perfectly** by both models: every tag and every symbol was found. The
+  residual 2 per 100 is mostly the agitator motor, which both models report as an extra symbol; the tracer then
+  routes the agitator speed bubble through it.
+- **Text fails before shapes.** At L2, GPT's symbols and connections were as good as on clean sheets while it read
+  only 56% of the tags exactly: FI became PI, LI became LE, FV became PV, and off-page references were dropped. Claude
+  held tags better (95%) but lost connections (0.91); whether its boxes or the tracer caused that was not isolated.
+  In round 4 on OPEN100, connections collapsed at L2; GPT's held here until L3, on sparser and cleaner geometry.
+- **The dangerous misread is a real tag.** Claude at L3 read the three feed valves FV 203, FV 201 and FV 202 as FV 201,
+  FV 202 and FV 203 in one run, and TI 122 as TI 121 in another. Each is a real tag, so an I/O list would bind it to
+  the wrong live point. A tag-only diff and the live check both pass these (all three valves "matched" and "moved",
+  `out/te_pid/live_claude-L3-r1.md`); only comparing by position catches them. On a real plant that is what a
+  walkdown or a loop check is for.
+- **No winner is called.** The runs show the two models fail differently, not that one is better: GPT was steadier on
+  shapes, Claude on text. Three runs per degraded level is enough to see that, not to rank.
+
+**The reviewer diff** (`scripts/te_model_diff.py`, tag-only matching against the verified model). For the declared
+chain (GPT, clean, run 1; chosen before scoring because GPT + M3 is the published method): 35 of 43 units and tagged
+items came through exactly, all 7 unit-to-unit process connections were recovered, and 10 corrections remain. Nine of
+them appear even when the key itself is fed in as a perfect extraction (`diff_key.md`), so they come from the
+converter and the model's conventions, not from the reading:
+- the feed header U-100 is drawn as an in-line mixer, and `build_twin.py` treats in-line symbols as line items, not
+  units;
+- so the six feed-line items (FI-101–103, FV-201–203) get the reactor as their owning unit instead of U-100;
+- two extra unit links (C-101–K-101, U-100–V-101) come from lines that meet at the feed header and at the compressor
+  bypass. On the drawing they share pipe; the model's stream list doesn't join them.
+
+The tenth is the motor symbol. On degraded sheets the corrections grow to 47 (GPT, L2) and 54 (Claude, L3), almost
+all misread or unread tags (`diff_codex-L2-r1.md`, `diff_claude-L3-r1.md`).
+
+**Exporters and live values.** Each extracted twin went through the same exporters as the OPEN100 twin (Ignition tags
+and UDTs, PI AF sheet, SVG, review queue). `scripts/te_live_check.py` starts the TE replay server and matches the
+twin's tags to its points: for the declared chain, 36 of 37 resolve and all 36 values moved between reads. SC-212 has
+no recorded data, and the 16 per-component analyzer channels have no bubble of their own on the drawings. Not done:
+importing the extracted twin's tag file into a gateway. The natively accepted gateway project is built from the
+verified model, which is what the extracted twin becomes after the listed corrections plus the fields no P&ID prints
+(simulator index, units of measure, descriptions), which come from the instrument list.
+
+**Cost:** subscriptions only. Claude's CLI reported $12.56 API-equivalent for the 42 published Claude sheet runs, plus
+$3.86 for 13 runs on a superseded version of sheet 102 (redrawn after the purge correction, journal entry 40). Codex
+reports no cost. No Gemini call; the Gemini ledger is unchanged at $16.57.

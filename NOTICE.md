@@ -13,7 +13,13 @@ Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This 
 - `data/drawings/`: the 12 OPEN100 drawings, greyed and downscaled as screen backgrounds
   (`scripts/ignition/prepare_drawings.py`);
 - `data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L1` to `scan-L3`: degraded "old scan" copies
-  of six drawings (`scripts/degrade_scans.py`), with their answer keys.
+  of six drawings (`scripts/degrade_scans.py`), with their answer keys;
+- `docs/screenshots/te-pid-style-side-by-side.png`, whose left half is a crop of OPEN100 sheet 6.
+
+The **generated Tennessee Eastman P&ID sheets** in `data/te_pid/` (images, SVG, answer keys) are drawn by this
+repo's code from this repo's own process model, so they are MIT licensed like the code. Their drafting style
+imitates the OPEN100 sheets' conventions (symbol shapes, sizes, line weights, flags, title-block layout); no
+OPEN100 artwork, logo or text is copied into them.
 
 **PID2Graph files redistributed unchanged**, under CC BY-SA 4.0 with credit to the PID2Graph authors and the Energy
 Impact Center: the 12 OPEN100 drawings and their answer keys in

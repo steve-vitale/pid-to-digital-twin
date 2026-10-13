@@ -12,6 +12,7 @@ Every measured number here comes from [`out/costs.md`](../out/costs.md) (generat
 | Gemma 4 31B (hosted, same API) | **$1.28** estimated | Priced at the same rates, which overstates an open model |
 | **Total metered model spend** | **$16.57 of a $25 cap** | Ties to the spend ledger `runs/gemini_spend.json` to the cent |
 | Claude (claude-opus-5-5, Claude Code CLI) | $0 marginal; **$44.42** API-equivalent | Flat subscription. The CLI reports what the same calls would cost on the API. Round 4 (old scans) added $8.05 of it |
+| TE round trip (journal entry 40), not in the totals above | Claude: $0 marginal; **$16.42** API-equivalent ($12.56 for the 42 published sheet runs, $3.86 for 13 runs on a superseded sheet 102). GPT: not metered | 84 published sheet runs (42 per model), 2×2 tiles: 29 min (GPT) and 31 min (Claude) of wall time. Per-run records are in [`out/te_pid/roundtrip_scores.json`](../out/te_pid/roundtrip_scores.json). No Gemini call |
 | GPT (gpt-6.1-sol, Codex CLI) | $0 marginal; not metered | Flat subscription. The CLI reports no cost, so none is claimed |
 | Model compute time | 15.0 h of wall clock across 339 drawing runs | 7.7 h of it was the open-weight model, mostly timeouts. Round 4 was 36 runs, about 37 minutes |
 | Line tracer (code, no AI) | 39 min across 222 runs; 0.3–30 s per sheet | Runs on a laptop CPU |

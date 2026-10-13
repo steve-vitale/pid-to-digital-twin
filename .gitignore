@@ -34,3 +34,7 @@ out/confidence/
 out/process_mimic/*
 !out/process_mimic/VERIFICATION.txt
 out/review/
+
+# Degraded copies of the generated TE sheets: regenerate with
+# python scripts/degrade_scans.py --src data/te_pid --drawings 101,102,103 --dest data/te_pid/scan
+data/te_pid/scan-L*/
