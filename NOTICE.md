@@ -32,3 +32,9 @@ shared under [Creative Commons Attribution-ShareAlike 4.0 International](https:/
 Changes include adaptation, normalization and evaluation summaries; the source Synthetic images and labels are
 not included in this publication. This attribution does not change the MIT license for repository code or any
 other source license stated above.
+
+**AVEVA AF SDK sample**: the unit-of-measure list in `data/pi_builder_reference.json` (`uom_sample.units`: class,
+name and abbreviation) is extracted from `AF Database - Green Power Company.xml` in
+[AVEVA/AF-SDK-Getting-Started-Guide](https://github.com/AVEVA/AF-SDK-Getting-Started-Guide), licensed under the
+Apache License 2.0. Only those three fields were extracted; nothing else from that file is included. AVEVA, PI System, PI Builder and
+PI AF are AVEVA trademarks. This project is not affiliated with or endorsed by AVEVA.

@@ -25,6 +25,7 @@ SOURCE_TESTS = (
     "scripts/test_site_drawing_intake.py",
     "scripts/test_site_extraction_workflow.py",
     "scripts/test_pi_mapping.py",
+    "scripts/test_check_pi_export.py",
     "scripts/test_gateway_acceptance_preflight.py",
     "scripts/test_review_effort.py",
     "scripts/test_map_points.py",
@@ -49,6 +50,7 @@ SOURCE_FILES = (
     "data/dataset_adapters/pid2graph_synthetic.json",
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
     "out/svg/overview.svg", f"{TWIN}/plant_model.json",
+    "data/pi_builder_reference.json", "out/pi/pi_builder_af.csv", f"{TWIN}/pi/pi_builder_af.csv",
 ) + tuple(f"{TWIN}/svg/sheet_{i}.svg" for i in range(12)) + tuple(
     f"{DRAWINGS}/{i}.{extension}" for i in range(12) for extension in ("graphml", "png"))
 
