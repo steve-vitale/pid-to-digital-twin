@@ -23,15 +23,53 @@ about the same work as drawing it from scratch.
 | Gemini (gemini-3.1-pro-preview) | 75.9 / 92.7 | **40.2 / 38.3** |
 
 A = 6 real OPEN100 drawings. B = 20 synthetic drawings in a different drafting style. Each method was scored once
-per set. Source: [docs/GOAL.md](docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout).
+per set; Gemini's numbers are earlier runs and it was not run after round 3. Five later reruns of the bold method
+on A (round 5, below) average 20.1 for GPT and 29.8 for Claude. Source: [docs/GOAL.md](docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout).
 
 - Reviewers get a risk-ranked queue. The twin built from 12 sheets has 2,886 items: 377 red, 676 amber and 1,833
   green. Green items were 94–100% right on drawings nobody tuned on.
-- Where it breaks: old-scan image quality roughly triples review load (17.8 → 51.5), mostly because the line
-  tracer fails on faded ink. See [round 4](docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered).
+- Where it breaks: old-scan image quality roughly triples review load, mostly because the line tracer fails on
+  faded ink (table below).
 - How "done well" is defined, and the rules that stop me gaming my own score: [docs/EVALUATION.md](docs/EVALUATION.md).
 - Cost: $16.57 of metered model spend, plus two flat-rate subscriptions. Reviewer time is the real cost:
   [docs/COSTS.md](docs/COSTS.md).
+
+**Old scans (round 4, pre-registered).** Holdout A degraded to three synthetic scan levels, same method, each level
+run once per model:
+
+| Image quality | GPT review load | Claude review load | Connection F1 (GPT / Claude) |
+|---|---|---|---|
+| Clean | 17.8 | 32.4 | 0.89 / 0.78 |
+| Photocopy | 20.6 | 29.7 | 0.87 / 0.79 |
+| Old scan | 51.5 | 57.0 | 0.51 / 0.45 |
+| Bad scan | 72.6 | 70.6 | 0.22 / 0.19 |
+
+Symbol reading fell gently (rough F1 0.94 → 0.77 for GPT, 0.90 → 0.81 for Claude at the worst level). The code
+line tracer is what breaks: run on the clean image with the bad-scan symbols, connections recover to 0.53–0.63.
+The scans are synthetic degradations, not real archive scans. Details: [GOAL.md, round 4](docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered).
+
+**More drawings, tag text and replicates (round 5, pre-registered).** Five fresh runs per model, Claude and GPT:
+
+| | GPT mean (95% across runs / across drawings) | Claude mean (same) |
+|---|---|---|
+| Holdout A, review load | 20.1 (18.3–21.8 / 14.2–28.0) | 29.8 (27.5–32.1 / 12.8–47.3) |
+| DEXPI sheets, review load | 95.4 (53.2–137.6 / 42.1–138.6) | 61.8 (60.5–63.1 / 26.3–127.9) |
+| DEXPI tag text, read exactly | 29 of 33 | 28 of 33 |
+| DEXPI tag lists, identifiers found | 145 of 145 | 99.4% |
+
+- **GPT vs Claude:** on these six drawings GPT is better by more than run-to-run noise (9.8 points). Across
+  drawings like these the gap is not established: the interval includes zero. Six drawings are the limit, not the
+  runs.
+- **New drawings, worse result.** Five public example and training P&IDs from the DEXPI standards initiative
+  (CC BY 4.0), with tag text in their keys. Review load was 2–5× holdout A's. Much of it is what counts as a symbol:
+  equipment nozzles and some drawn marks aren't items in the DEXPI key, and GPT reported the nozzles in 3 of 5
+  runs, which swung one sheet between about 33 and 145.
+- **Tag text, measured for the first time:** on clean vector drawings both models read almost every printed tag.
+  The misses are vertical labels, multi-line labels and a number drawn on a separate actuator bubble. Scans and
+  real archives remain untested for tags.
+- Details and every caveat: [GOAL.md, round 5](docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above).
+- **Review time is still unmeasured.** A ready-to-run timing kit for one sheet is in
+  [`out/review_kit/sheet-8/`](out/review_kit/sheet-8/README.md).
 
 ## How it works
 
@@ -266,7 +304,9 @@ python scripts/run_tests.py --full --check-prerequisites
 python scripts/run_tests.py --full
 ```
 On 2026-10-13 both suites passed on Windows (15/15 source-only, 20/20 full, with two symlink sub-cases explicitly
-skipped because Windows didn't grant symlink rights) and on Linux with Python 3.12 (15/15 and 20/20, no skips). See
+skipped because Windows didn't grant symlink rights) and on Linux with Python 3.12 (15/15 and 20/20, no skips).
+Round 5 added four test scripts; on Windows the suites then passed 19/19 and 24/24 with the same two skips (Linux
+not rerun yet). See
 [replication prerequisites and limits](docs/REPLICATE_AT_YOUR_PLANT.md#c-check-the-pipeline-then-optionally-rerun-public-extraction).
 A prerequisite check alone is not a test pass.
 
@@ -323,10 +363,10 @@ it at a real site.
 | · source and data | `verify_te_source.py`, `fetch_te_data.py`, `fetch_pid2graph.py` |
 | · extraction | `run_extraction.py` (Claude / Codex / Gemini adapters, cost meter, spend cap), `tiling.py`, `remerge_tiles.py`; `site_extraction_workflow.py` (frozen single-PNG handoff) |
 | · line tracing (code, no AI) | `trace_connections.py` |
-| · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
+| · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py`; round 5: `score_tags.py` (tag text), `replicate_stats.py` (means and intervals), `adapt_dexpi.py` (DEXPI drawings to answer keys) |
 | · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
 | · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run) |
-| · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (OPC), `map_pi_points.py` (reviewer-supplied PI references), `review_effort.py` (future study records) |
+| · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (OPC), `map_pi_points.py` (reviewer-supplied PI references), `review_effort.py` (future study records), `review_kit.py` (one-sheet timed-review kit) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · demo | `demo.py` (one command to a running twin), `make_before_after.py` (also makes the social preview card), `make_demo_gif.py` |
 | · Ignition | [`scripts/ignition/`](scripts/ignition/): `build_gateway.py`, `build_hmi.py` (operator screens), `build_views.py`, `prepare_drawings.py`, `import_tags.py`, `te_sim_server.py`, `demo_points_server.py`, `verify_gateway.py`, `acceptance_preflight.py` (offline exact-candidate checks), `acceptance/` (the native acceptance harness), `ua_client.py`, `gw.py`, `make_local_ca.py` |
@@ -343,8 +383,8 @@ it at a real site.
 
 | Document | For |
 |---|---|
-| [docs/GOAL.md](docs/GOAL.md) | The round-2 goal, review-load score, sealed splits, decision rule, and results |
-| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results |
+| [docs/GOAL.md](docs/GOAL.md) | The review-load goal, sealed splits and decision rules, and the pre-registration and results of rounds 2–5 |
+| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results and every later round at a glance |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
 | [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
@@ -375,6 +415,8 @@ it at a real site.
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Tooling done; verified in a running gateway with synthetic data |
 | Operator screens (ISA-101 style): overview, unit screens, trends, learned normal bands, drawings as backgrounds | First pass done and checked in a gateway; key values and spans are Claude's choice, not yet reviewed by operations |
 | Round 4: robustness on old-scan images, pre-registered | Done (measured; where it breaks is reported) |
+| Round 5: DEXPI drawings with tag text, five replicates per model, intervals | Done (pre-registered; the method does worse on the new drawings; GPT vs Claude is a tie across drawings) |
+| Timed review (minutes per sheet) | Kit ready (`out/review_kit/sheet-8/`); not measured |
 | One-click Docker demo (`start-demo.bat`) | Done for the historical backup; 3/3 clean starts in CI after the packaging fix ([journal entry 35](docs/JOURNAL.md#35-test-the-packaged-demo-after-the-source-checks-pass)) |
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
@@ -404,6 +446,8 @@ native import.
   under the same licence. The holdout-B drawings are fetched by script.
 - **Tennessee Eastman process**, Downs & Vogel (1993); open simulation code by the Braatz group (University of
   Illinois). Downloaded by script.
+- **DEXPI example P&IDs** from the DEXPI initiative's TrainingTestCases repository (CC BY 4.0). Downloaded by
+  script and pinned by SHA-256; not redistributed. See [NOTICE.md](NOTICE.md).
 - Code in this repository: MIT. Files derived from PID2Graph are CC BY-SA 4.0; see [NOTICE.md](NOTICE.md).
 
 ## Environment variables
@@ -412,6 +456,7 @@ native import.
 |---|---|---|
 | `GEMINI_API_KEY` or `GEMINI_KEY_ENV_FILE` | `run_extraction.py --tool gemini` | The key, or a path to a private `.env` file holding it |
 | `PID2GRAPH_SET` | extraction, scoring, twin scripts | `Dataset PID` selects the holdout-B set; the default is OPEN100 |
+| `PID_DATA_DIR` | `run_extraction.py`, `trace_connections.py`, `scorecard.py` | Another folder of `<drawing>.png` (+ `.graphml`), e.g. `data/external/dexpi/sheets` from `adapt_dexpi.py` |
 | `IGNITION_ENV_FILE` | `scripts/ignition/*` | A private file of the variables below, as `KEY=VALUE` lines |
 | `IGNITION_URL`, `IGNITION_API_TOKEN`, `IGNITION_CA_FILE` | `scripts/ignition/gw.py` | Gateway HTTPS address, API key, and the CA that signed the gateway's certificate |
 | `IGNITION_BACKUP_DIR`, `IGNITION_SECRETS_DIR` | `build_gateway.py`, `verify_gateway.py`, `ua_client.py` | Private folders for gateway backups, the OPC UA client certificate and the verifier's OPC UA login |

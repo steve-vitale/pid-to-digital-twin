@@ -434,3 +434,92 @@ counted against the model.
   runs interval is shown beside it.
 - **Carry-over check:** if the DEXPI review load falls outside holdout A's bootstrap interval for that tool, the
   method is reported as behaving differently on this source. It is a measurement, not a pass/fail gate.
+
+## Round 5 results (scored after the pre-registration above)
+
+All 220 run records came back (2 tools × 11 sheets × 5 replicates, tiled and traced). No tile or drawing failed, and
+every record reports the pre-registered model (`claude-opus-5-5[1m]`, `gpt-6.1-sol`). Full tables:
+`out/replicates_r5_holdout-a.md` and `out/replicates_r5_dexpi.md`.
+
+### Replicates on holdout A (M3, five fresh runs per tool)
+
+| Measure | GPT: 5 runs | GPT mean (runs 95% / bootstrap 95%) | Claude: 5 runs | Claude mean (runs 95% / bootstrap 95%) |
+|---|---|---|---|---|
+| Review load | 20.7, 21.5, 18.4, 18.8, 21.0 | **20.1** (18.3–21.8 / 14.2–28.0) | 30.9, 30.8, 28.5, 27.2, 31.6 | **29.8** (27.5–32.1 / 12.8–47.3) |
+| Symbol F1, rough + class | | 0.929 (0.918–0.940 / 0.908–0.949) | | 0.898 (0.892–0.904 / 0.840–0.952) |
+| Connection F1 | | 0.872 (0.864–0.879 / 0.801–0.916) | | 0.795 (0.779–0.811 / 0.638–0.920) |
+
+Round 2's single runs (GPT 17.8, Claude 32.4) sit just outside the five-run intervals, on opposite sides: GPT's
+round-2 run was a good draw, Claude's a bad one.
+
+**GPT minus Claude, review load:** −9.8. Runs interval −12.2 to −7.3: on these six sheets, GPT is better by more than
+run-to-run noise. Bootstrap interval −26.5 to +4.5: across drawings like these, the gap is **not** established. By
+the pre-registered rule (bootstrap is the headline) this is a **tie**. The same holds for symbol F1 and connection
+F1: different on these sheets, a tie across drawings. One sheet carries much of it: sheet 10 (Claude 58.7, GPT
+20.1 mean review load).
+
+**Run-to-run noise is larger than round 2 assumed.** Round 2's decision rule used "about 1 point" of review load,
+from one repeat on the development set. Five runs on holdout A give a standard deviation of 1.4 (GPT) and 1.9
+(Claude) points, and a spread of 3–4 points between the best and worst run. The round-2 verdict (M3 beats M0 by
+31 points for GPT and 29 for Claude) is far outside either figure, so it stands.
+
+### DEXPI sheets (M3, five runs per tool): symbols and connections
+
+| Measure | GPT mean (runs 95% / bootstrap 95%) | Claude mean (runs 95% / bootstrap 95%) |
+|---|---|---|
+| Review load | **95.4** (53.2–137.6 / 42.1–138.6) | **61.8** (60.5–63.1 / 26.3–127.9) |
+| Symbol F1, rough + class | 0.728 (0.658–0.797 / 0.585–0.826) | 0.754 (0.736–0.773 / 0.529–0.917) |
+| Connection F1 | 0.454 (0.238–0.670 / 0.218–0.778) | 0.605 (0.591–0.618 / 0.071–0.821) |
+
+Per sheet (mean review load, GPT / Claude): C01 100.0 / 25.8, C02 77.7 / 93.1, C03 103.8 / 129.5.
+
+- **Carry-over check:** both tools' DEXPI review load is outside their holdout-A bootstrap interval (GPT 14.2–28.0,
+  Claude 12.8–47.3). By the pre-registered wording, **the method behaves differently on this source: it does
+  worse.** GPT minus Claude: a tie under both intervals.
+- **GPT was bimodal.** On C01 it reported the equipment nozzles (labelled N1, N2…) as separate "general" symbols in 3
+  of 5 runs, and not in the other 2. Those runs scored 143.5–146.8 on C01; the other two scored 32–34. The tracer
+  then attached lines to every nozzle, which multiplied false links (50 per run). One run would have shown either
+  number with no hint of the other.
+- **Why the review load is high on C02 and C03.** These are small sheets (26 and 21 key items), so each correction weighs about 4–5 points. Most false symbols are drawn things the DEXPI model does not list as items: nozzles (45 of
+  GPT's 102 false symbols across all runs, 17 of Claude's 51), sample-point boxes, the shut-down trigger and the
+  second actuator bubble on C03, all of which were named as limitations before the run. Whether a nozzle is a
+  symbol is a key-scope choice. The key was frozen before the runs, so these count as errors, and the count is
+  reported here rather than corrected.
+
+### Tag text (first measurement in this project)
+
+**DEXPI XML sheets (33 symbols with label text):** identical in all five runs for each tool.
+
+| | GPT | Claude |
+|---|---|---|
+| Correct, strict | 29 of 33 (0.879) | 28 of 33 (0.848) |
+| Accuracy on symbols it found | 29 of 33 (0.879) | 28 of 31 (0.903) |
+| Lenient (letters and digits only) | same as strict | same as strict |
+| Bootstrap 95% (end-to-end) | 0.67–1.00 | 0.60–1.00 |
+
+Every tag on the reference sheet C01 was read exactly by both tools (20 of 20): equipment, valve labels, control-
+valve numbers and two-line instrument bubbles. The misses are all of one kind: text that isn't next to its symbol in
+the usual way. Vertical valve labels on C02 were left empty (Claude) or replaced by nearby text, "25 / AS9" (GPT); the
+blind-flange size labels on C02 were missed with their symbols (Claude); the column's two-line label "K 2750 / KX
+2750" was read whole where the key's first-line rule wants "K 2750" (GPT); the C03 control valve's number sits on a
+separate actuator bubble, and neither tool attached it to the valve.
+
+**C08 tag lists (145 identifiers printed on two sheets):** GPT found every listed identifier in all five runs; Claude
+found 99.4% on average (it missed 0–3 identifiers per run, mostly different ones). Precision cannot be scored
+from the lists. A cross-sheet control finds 5 of sheet 2's 16 identifiers in a sheet-1 answer, because valve numbers
+AB001–AB006 exist on both sheets; short identifiers can match by coincidence, so these recall figures are an upper
+bound on true item-level reading.
+
+**What the tag numbers support:** on clean, vector-rendered drawings at 3,200 px, both models read printed tags
+almost perfectly. They do not show tag reading on scans, on handwriting, or on dense real archives, and 33 + 145
+items on five sheets from one publisher is a small sample. The bootstrap intervals (0.6–1.0) are that size.
+
+### Diagnostics (not pre-registered, labelled as such)
+
+- **Tracer on DEXPI:** the model's own links without tracing (M1) give a review load of 79.3 (GPT) and 65.0
+  (Claude). Tracing helped Claude a little (to 61.8) and hurt GPT (to 95.4), mostly through the nozzle runs above.
+  `out/replicates_r5_dexpi_tiles_only_diagnostic.md`.
+- **M1 on holdout A, five runs:** GPT 36.7 (round 2's single run: 31.7), Claude 53.0 (54.9).
+
+**Nothing was changed because of these results.** A key that counts nozzles, a tracer that ignores small stubs on
+equipment, or a prompt line about nozzles would each be a new method and would need new, unseen drawings.

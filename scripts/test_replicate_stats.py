@@ -29,6 +29,8 @@ class Intervals(unittest.TestCase):
         self.assertIsNone(rs.welch([1.0], [2.0])["lo"])
         w = rs.welch([10.0, 11.0, 12.0], [20.0, 21.0, 22.0])
         self.assertTrue(w["hi"] < 0)
+        flat = rs.welch([0.9, 0.9, 0.9], [0.8, 0.8, 0.8])
+        self.assertEqual(flat["lo"], flat["hi"])   # zero width: reported as no run variation, not a difference
         same = rs.welch([10.0, 12.0, 11.0], [11.0, 10.0, 12.0])
         self.assertTrue(same["lo"] <= 0 <= same["hi"])
 

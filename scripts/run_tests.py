@@ -23,6 +23,7 @@ SOURCE_TESTS = (
     "scripts/test_dexpi_adapter.py",
     "scripts/test_score_tags.py",
     "scripts/test_replicate_stats.py",
+    "scripts/test_review_kit.py",
     "scripts/test_generate_validation.py",
     "scripts/test_export_review_boundaries.py",
     "scripts/test_site_drawing_intake.py",

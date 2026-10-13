@@ -1,0 +1,26 @@
+{
+ "schema": "review-effort-1",
+ "study_id": "",
+ "synthetic": false,
+ "frozen_at": null,
+ "baseline_workflow": "",
+ "assisted_workflow": "Review the extracted draft for OPEN100 sheet 8: one row per item in review_queue_sheet8.csv (88 rows), riskiest first, using the drawing and the overlay SVG in this packet. Fill the OPS_ columns as described in docs/REVIEW_LOOP.md. Draft produced by the declared method M3 (GPT, 2x2 tiles + code line tracing); no re-extraction during the review.",
+ "task_definition": "Deliverable: every row of the sheet 8 review queue has a decision (confirm, correct with a value, or reject). Rows left blank are reported as unanswered. Items the draft missed entirely are not in the queue; noting them in OPS_notes of the nearest row is allowed and counted separately.",
+ "timing_rule": "Active minutes only, from timer start to stop with pauses excluded (scripts/review_kit.py timer). Reading these instructions is before start. Breaks and interruptions are paused. The timer is never stopped early in one arm only.",
+ "assignment_rule": "",
+ "analysis_plan": "",
+ "critical_error_rubric": "",
+ "quality_acceptance_rule": "",
+ "exclusion_rule": "",
+ "sample_size_rationale": "",
+ "eligible_information_rule": "The reviewer sees only the packet files listed in manifest.json (drawing, overlay, queue). The answer key (.graphml) is withheld from the reviewer and used only by the independent auditor.",
+ "tasks": [
+  {
+   "task_id": "open100-sheet-8",
+   "source_bundle_sha256": "a82aa687ef237fec1f3d28d1ca3fe09f014cfce1d36e30322d54ac3c7ebe7a21",
+   "truth_reference": "PID2Graph OPEN100 8.graphml (symbols and links only; no tag text)"
+  }
+ ],
+ "assignments": [],
+ "_kit_note": "Blank fields are the administrator's decisions (baseline workflow, assignment, rubric, acceptance rule, exclusions, sample size). review_effort.py validate refuses this file until they are filled, frozen and given both arms with different reviewers."
+}

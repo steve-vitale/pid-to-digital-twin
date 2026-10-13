@@ -5,6 +5,7 @@
 **Data derived from PID2Graph** (Zenodo record 14803338, CC BY-SA 4.0, including the OPEN100 design by the Energy
 Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This covers:
 - `data/sheet_registers/`;
+- the timed-review kit in `out/review_kit/` (one sheet's drawing, overlay and review queue);
 - the extracted twin packages under `out/twin/` (plant models, review queues, SVGs, Ignition and PI AF files built
   from the drawings);
 - the Perspective screens in `out/ignition/gateway/PIDTwin.zip`, which embed those SVGs and the greyed drawings;

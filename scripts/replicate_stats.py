@@ -226,8 +226,12 @@ def main():
             result["differences"][metric] = {
                 "pair": f"{t1} minus {t2}", "runs_welch": w,
                 "bootstrap": {"lo": bl, "hi": bh},
+                # Identical values in every run give a zero-width interval; that is "no run-to-run variation",
+                # not evidence of a difference beyond noise (fixed 2026-10-13 after the first round-5 report
+                # printed "different" for constant tag scores).
                 "verdict_runs": "n/a (one run)" if w["lo"] is None else
-                                ("tie" if w["lo"] <= 0 <= w["hi"] else "different"),
+                                ("no run-to-run variation" if w["lo"] == w["hi"] else
+                                 ("tie" if w["lo"] <= 0 <= w["hi"] else "different")),
                 "verdict_bootstrap": "tie" if bl is None or bl <= 0 <= bh else "different"}
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)

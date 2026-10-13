@@ -83,7 +83,7 @@ not measured.
 |---|---|---|
 | Token counts for past runs | Not saved by the harness until 2026-10-08 | Recorded on every run from now on (`usage` in each run record) |
 | GPT cost | Subscription; the CLI reports none | API list price × tokens, now recorded where the CLI prints them |
-| Review minutes, manual baseline | Needs real reviewers; the operator review was deferred | Time a pilot unit (§3) |
+| Review minutes, manual baseline | Needs real reviewers; the operator review was deferred | Time a pilot unit (§3). A ready-to-run one-sheet timing kit is in `out/review_kit/sheet-8/` |
 | Build effort in people-hours | No hours log | Not reconstructable honestly |
 | Ignition / PI production licenses | Vendor-quoted | Ask the vendor or integrator; the build used the free trial |
 | Self-hosted open-model speed | Ran on a hosted endpoint only | Benchmark on the target GPU before buying |

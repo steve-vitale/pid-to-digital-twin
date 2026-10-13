@@ -115,3 +115,4 @@ Each phase ends with a commit, a STORY_LOG entry, and at least one screenshot.
 - Ignition licensing/trial: docs.inductiveautomation.com/docs/8.1/platform/licensing-and-activation
 - Ignition tag import/export: docs.inductiveautomation.com/docs/8.1/platform/tags/exporting-and-importing-tags
 - PI Builder: AVEVA "Building PI System Assets" workbook (cdn.osisoft.com)
+- DEXPI example P&IDs (round 5, verified 2026-10-13): gitlab.com/dexpi/TrainingTestCases, commit `a23d61e2`, CC BY 4.0

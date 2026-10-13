@@ -18,9 +18,10 @@ models disagree there most. The rest of this page says, part by part, which kind
 
 | Part | Models | How it was checked |
 |---|---|---|
-| **Reading the drawings** (symbols, tags, connections) | **Claude** (claude-opus-5-5, Claude Code CLI), **GPT** (gpt-6.1-sol, Codex CLI), **Gemini** (gemini-3.1-pro-preview, API); three runs each (two with the identical prompt, one with the revised prompt), plus **Gemma** (31B open weights) as an offline-capable baseline | Scored against PID2Graph answer keys; repeat runs to measure noise; sealed holdouts. [EVALUATION.md](EVALUATION.md), [GOAL.md](GOAL.md) |
+| **Reading the drawings** (symbols, tags, connections) | **Claude** (claude-opus-5-5, Claude Code CLI), **GPT** (gpt-6.1-sol, Codex CLI), **Gemini** (gemini-3.1-pro-preview, API); three runs each in round 1 (two with the identical prompt, one with the revised prompt), plus **Gemma** (31B open weights) as an offline-capable baseline. From round 4 on, only Claude and GPT | Scored against PID2Graph answer keys; repeat runs to measure noise; sealed holdouts. [EVALUATION.md](EVALUATION.md), [GOAL.md](GOAL.md) |
 | **Rounds 2–3 methods** (tiling, line tracing, parent choice) | Claude, GPT, Gemini, each scored on both holdouts | Pre-registered rule picked the method; losses reported |
 | **Round 4** (old-scan robustness) | Claude and GPT. Gemini left out to keep metered spend down | Pre-registered; results in GOAL.md round 4 |
+| **Round 5** (DEXPI drawings with tag text; replicate runs) | Claude and GPT, five fresh runs each on holdout A and on the DEXPI sheets. Gemini not run, by the project owner's direction; its earlier results stay as earlier runs | Pre-registered in GOAL.md round 5; means with run and bootstrap intervals (`replicate_stats.py`) |
 | **Which model's output became the published twin** | GPT's, with tiling + tracing (method M3) | Chosen by the rule written before the holdouts were scored, not by preference |
 | **Review risk tiers** (green / amber / red) | Uses all three models' outputs as evidence: a symbol only one model saw is riskier | Calibrated on development drawings, tested on holdouts; where it failed is reported. [TWIN_OUTPUTS.md](TWIN_OUTPUTS.md) |
 | **Line tracing, twin conversion, scoring** | None: deterministic code | Scorer has positive and negative controls (`test_scorer_controls.py`) |
