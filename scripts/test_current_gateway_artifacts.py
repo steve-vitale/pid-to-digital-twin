@@ -93,6 +93,21 @@ class CurrentGatewayContract(unittest.TestCase):
         with self.assertRaises(SyntaxError):  # control: the shipped (unindented) form is rejected
             compile(bv.build_hmi.TRANSFORM_SIGNATURE + '\nreturn value\n', '<perspective transform>', 'exec')
 
+    def test_every_band_indicator_shows_its_band(self):
+        # TI-109's real 0.24 degC band was drawn on a span stretched to its 175 degC alarm: a sub-pixel sliver that
+        # read as missing data (journal entry 37). Every indicator must give its band a visible share of its span.
+        shares = {}
+        for name, view in self.held.views.items():
+            for c in walk(view['root']):
+                if c.get('type') == 'ia.display.moving-analog-indicator':
+                    p = c['props']
+                    shares[(name, c['meta']['name'])] = (p['desiredHigh'] - p['desiredLow']) / (p['maxValue'] - p['minValue'])
+                    for key in ('highAlarm', 'highHighAlarm'):
+                        if key in p:
+                            self.assertLessEqual(p[key], p['maxValue'], (name, c['meta']['name'], key))
+        self.assertGreater(len(shares), 50)
+        self.assertGreaterEqual(min(shares.values()), 0.1, min(shares, key=shares.get))
+
     def test_drawing_and_schematic_values_never_render_null(self):
         # The numeric format transform these labels used rendered a Bad (no data) value as the text "null": all 334
         # OPEN100 placeholders read "null" on screen (journal entry 37). Bad quality must read as an honest state.

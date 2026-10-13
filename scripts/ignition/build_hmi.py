@@ -47,7 +47,7 @@ KEY_VALUES = {
     "K-101": ["FI-105", "FI-110", "JI-120", "HV-205"],
     "C-101": ["PI-116", "TI-118", "LI-115", "FI-117"],
 }
-DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus alarm limits)
+DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus nearby alarm limits)
 
 GREY_BG, PANEL, EDGE, INK, MUTED = "#e5e5e5", "#f2f2f2", "#a3a3a3", "#1f2937", "#6b7280"
 AMBER, RED = "#fcd34d", "#dc2626"
@@ -136,10 +136,21 @@ def value_box(name, x, y, w, h, base, band, size=15):
     return c
 
 
+ALARM_SPAN_LIMIT = 10  # widen an indicator to show an alarm limit only if it is within 10 band half-widths
+
+
+def shown_limits(band, limits):
+    """Alarm limits close enough to the band to draw on the indicator without hiding the band."""
+    mid, half = (band[0] + band[1]) / 2, (band[1] - band[0]) / 2 or 1.0
+    return [v for v in limits if abs(v - mid) <= ALARM_SPAN_LIMIT * half]
+
+
 def span(band, limits):
     mid, half = (band[0] + band[1]) / 2, (band[1] - band[0]) / 2 or 1.0
     lo, hi = mid - DISPLAY_SPAN * half, mid + DISPLAY_SPAN * half
-    for v in limits:
+    # A far limit would shrink the band to a sliver that reads as missing data: TI-109's real band is 0.24 degC
+    # wide, its alarm 175 degC (journal entry 37). Such a limit stays in the "Normal band" text and in State colour.
+    for v in shown_limits(band, limits):
         hi = max(hi, v + 0.05 * (v - lo))
     if band[0] >= 0 > lo:
         lo = 0.0  # flows, levels and outputs don't go negative
@@ -151,6 +162,7 @@ def indicator(name, x, y, w, h, base, band, limits):
     props = {"minValue": lo, "maxValue": hi, "desiredLow": band[0], "desiredHigh": band[1],
              "desiredRangeColor": "#c4c4c4", "defaultRangeColor": "#f5f5f5", "indicatorColor": INK,
              "level1AlarmColor": RED, "level2AlarmColor": "#7f1d1d", "sectionOutline": {"color": EDGE, "width": 1}}
+    limits = shown_limits(band, limits)
     if limits:
         props["highAlarm"] = limits[0]
         if len(limits) > 1:
@@ -161,8 +173,8 @@ def indicator(name, x, y, w, h, base, band, limits):
 
 
 def trend(name, x, y, w, h, base, band, minutes):
-    # Scaled to the normal band, not to the alarm limits: the indicator already shows how far away a limit is, and a
-    # far-off shutdown limit would flatten the trend into a line (TI-109's 175 degC against a 0.24 degC band).
+    # Scaled to the normal band, not to the alarm limits: a far-off shutdown limit would flatten the trend into a line
+    # (TI-109's 175 degC against a 0.24 degC band). The indicator shows only nearby limits, for the same reason.
     lo, hi = span(band, [])
     no_marker = {"shape": "circle", "size": 0, "stroke": {"color": "", "width": 0, "opacity": 0, "dashArray": ""},
                  "fill": {"color": "", "opacity": 0}, "style": {"classes": ""}}
