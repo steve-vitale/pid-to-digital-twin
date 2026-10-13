@@ -5,7 +5,7 @@ Start with public data on a separate learning copy. Then decide whether a small,
 ## 1. Know which demonstration you are copying
 
 - **OPEN100:** drawing extraction, measured against published graph labels, followed by draft asset/export files. Its mapped values are synthetic, not plant signals.
-- **Tennessee Eastman (TE):** a **hand-built seed model** and generated screens driven by **recorded simulation replay**. The TE model and screens were not extracted from OPEN100. Replay is not a live process simulator responding to control changes.
+- **Tennessee Eastman (TE):** a **hand-built seed model**, verified against the simulator source (tag names and units; units, streams, flow directions and tag ownership), and generated screens driven by **recorded simulation replay**. The TE model and screens were not extracted from OPEN100. Replay is not a live process simulator responding to control changes.
 - **PID2Graph Synthetic:** two development sheets through a labeled-dataset adapter. Oracle-label scores test adapter consistency; model scores are development results. Ontology and line-semantics gaps remain. This is not a held-out plant trial. See [the adaptation guide](ADAPT_LABELED_DATASET.md).
 
 **Version matters.** This guide matches release v1.2.0 on `main`. Parts of it were written against development snapshots that were later published as one sanitized commit, so the short commit IDs in journal entries 30–32 are not in this repository's history. Confirm the files and revision you have before following the instructions. Historical screenshots, gateway receipts and the Docker backup do not validate the current provider/project exports. The current project passed native Ignition acceptance in a disposable lab gateway on 2026-10-13, with the 390 px layout only partial; see the [native acceptance page](IGNITION_ACCEPTANCE.md). PI import has **not** been run.
@@ -24,7 +24,7 @@ python scripts/generate.py
 
 This standard-library command writes `out/svg/`, `out/ignition/te_tags.json`, `out/pi/pi_builder_af.csv` and `out/ops_review_sheet.csv`. It overwrites existing seed outputs; use your learning copy. Inspect the model, SVG, review sheet and export side by side. This shows what an explicitly authored asset model can generate, **not drawing extraction**. The generic TE tag export is not the replay-connected `twin_provider.json`.
 
-Optional source checking is a separate, potentially networked step: `python scripts/verify_te_source.py` fetches missing TE source and writes a report. Its `--write` option also changes the seed model. Do not use it merely as an offline viewer.
+Optional source checking is a separate, potentially networked step: `python scripts/verify_te_source.py` fetches missing TE source and writes a report. Its `--write` option also changes the seed model. Do not use it merely as an offline viewer. `python scripts/verify_te_topology.py` works the same way for units, streams, directions and tag ownership (report: `out/te_topology_check.md`); it also downloads the revised TE code from N. L. Ricker's archive as a cross-check.
 
 ### B. Existing drawing-derived model → draft exports
 
@@ -46,9 +46,9 @@ Start with the explicitly narrower standard-library suite and committed fixtures
 python scripts/run_tests.py --source-only
 ```
 
-This includes OPEN100 scorer controls, the Synthetic adapter tests, one-sheet site-intake/workflow controls, OPC/PI mapping and export controls, synthetic exact-candidate preflight checks and review-effort record controls, but excludes TE channel, along-line, gateway-diff and current-artifact tests. Its summary explicitly says it is **not a full-suite pass**. No dependencies are installed or data downloaded by the runner.
+This includes OPEN100 scorer controls, the Synthetic adapter tests, one-sheet site-intake/workflow controls, OPC/PI mapping and export controls, synthetic exact-candidate preflight checks and review-effort record controls, but excludes TE channel, along-line, gateway-diff, current-artifact and TE topology tests. Its summary explicitly says it is **not a full-suite pass**. No dependencies are installed or data downloaded by the runner.
 
-For the full cached-data suite, use an approved environment with the pinned dependencies already installed and the TE replay files already staged. `python scripts/fetch_te_data.py` is a separate network-capable setup command, not an offline test. Check prerequisites first:
+For the full cached-data suite, use an approved environment with the pinned dependencies already installed and the TE replay files already staged. `python scripts/fetch_te_data.py` (replay files and the simulator source) and `python scripts/verify_te_topology.py` (the revised TE code used as a second source; report only) are separate network-capable setup commands, not offline tests. Check prerequisites first:
 
 ```sh
 python scripts/run_tests.py --full --check-prerequisites

@@ -8,6 +8,13 @@ including the bugs the gateway found, is [journal entry 38](JOURNAL.md#38-import
 
 **Passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway**, except the 390 px width, which is partial.
 
+**This result is for the build before the topology correction.** Later the same day the TE model's topology was
+checked against the simulator source ([journal entry 39](JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)).
+The purge stream moved from the compressor to the separator, so ten TE tag paths moved from `TE_Plant/K-101/...` to
+`TE_Plant/V-101/...` (FI-110, FV-206, AI-129 and AI-129-B to -H), and some screen wording changed. The regenerated
+project passes the offline suite, but it has not been imported into a gateway. Its hashes no longer match the
+receipt below, so this receipt does not cover it.
+
 The gateway was the official `inductiveautomation/ignition:8.3.10` image on the trial license, in a fresh container
 with a fresh volume, its port bound to localhost only, and removed afterwards. It was fed by the replay image built
 from `docker/sim.Dockerfile` (recorded Tennessee Eastman replay plus 24 synthetic OPEN100 points). No real plant,

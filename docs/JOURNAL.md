@@ -1803,3 +1803,91 @@ still read as broken: Bad was the right quality for those 334 instruments, and `
 screens. Click every link, stop the data source, and watch what an operator would see. Keep "no data source" and
 "broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
 plant readiness. The screens were checked against recorded replay and synthetic points only.
+
+---
+
+## 39. Verify the TE topology against the simulator source
+
+**What:** every unit, stream, flow direction and tag-to-unit assignment in the Tennessee Eastman model was checked
+against the simulator code. Until now only tag names and units had been checked (entry 5); the topology was a
+hand-built seed that every screen inherited. Result, over 56 elements (6 units, 13 streams, 37 tags): **51
+confirmed, 4 corrected, 1 unresolvable.**
+
+**How:**
+- `scripts/verify_te_topology.py` reads `teprob.f`, the same open Downs & Vogel code entry 5 used, and pins its
+  checksum. It does not use a hand-typed table of the answer. It reads the code itself:
+  - the component balances (`YP(I+9)=FCM(I,8)-FCM(I,9)-FCM(I,10)-FCM(I,11)` is the separator: stream 8 in,
+    9, 10 and 11 out) give each internal stream's source and destination;
+  - the state mapping (`UCLS(I)=YY(I+9)`) and variable suffixes give which holdup is which unit;
+  - each pressure-driven flow line (`DLP=PTS-760.0`, then `IF(DLP.LT.0.0)DLP=0.0`) gives a direction that cannot
+    reverse, and valve-set flows are never negative;
+  - the `XMEAS(n)=`, `XCMP(n)=XST(i,k)` and `VPOS(k)` lines give what each measurement and valve acts on;
+  - the header comments give each internal stream's published number.
+- The second source is the revised TE code by Bathelt, Ricker and Jelali (2015), `temexd_mod.c` from
+  [N. L. Ricker's TE archive](https://depts.washington.edu/control/LARRY/TE/download.html) (paper:
+  [IFAC-PapersOnLine 48(8), 309-314](https://doi.org/10.1016/j.ifacol.2015.08.199)). Its header documents the states,
+  measurements and stream names in words. It cross-checks every holdup and stream number teprob.f gives (all agree).
+  It also supplies the one fact teprob.f doesn't state: the numbers of the two streams with no instrument (5,
+  stripper overhead; 7, reactor effluent). Without it, those streams are reported unresolvable.
+- The model's own `type` field maps units to source roles; no unit ID is hard-coded. Corrections are written into
+  the model with the old value kept under `previous`, the same way `verify_te_source.py` does it. The full table
+  is [`out/te_topology_check.md`](../out/te_topology_check.md).
+
+**What it found:**
+- **Corrected: the purge.** The seed drew the purge (S9) leaving the compressor. In the code the purge flow is
+  driven by separator pressure (`DLP=PTS-760.0`), carries separator vapour composition, and is subtracted from
+  the separator balance, independently of the compressor. S9 now starts at V-101, and its three tags (FI-110,
+  FV-206, AI-129 with its seven component channels) moved from K-101 to V-101. Entry 23 had already noticed the
+  published schematic disagreed and left it flagged. The code settles it.
+- **Resolved: TI-122 stays on the condenser.** The source header calls XMEAS 22 the *separator* cooling-water
+  outlet temperature. But it is the outlet of the circuit whose flow is XMV 11 ("Condenser Cooling Water Flow") and
+  whose inlet is disturbed by IDV 5 ("Condenser Cooling Water Inlet Temperature"). Its heat term
+  `QUS=UAS*(TWS-TST(8))` exchanges heat with the reactor effluent, which is where the condenser sits. The revised
+  code names it "Condenser cooling water outlet temperature". The "separator" label comes from where the code books
+  the duty: in the separator's energy balance, because the simulator has no condenser vessel. The open question
+  from entry 5 is closed and kept in the model as `resolved_question`.
+- **Unresolvable: PI-116.** Both sources call XMEAS 16 "stripper pressure", but the code computes it from `PTV`,
+  the feed-header pressure. The simulator has no separate stripper vapour space. The code and the names point at
+  different units, so the script keeps it on C-101 and flags it. The screens say so.
+- **Confirmed with caveats.** The condenser and compressor have no holdup in the simulator; their positions come
+  from the heat term and the compressor curve. The split of streams 7 and 8 at those machines (S7/S7b, S8/S8b) is
+  the published flowsheet's drawing: the code has one flow for each. Which segment FI-105 is on is therefore a
+  model choice. The compressor recycle valve HV-205 spills flow back around the machine, and the code computes
+  that only as a reduction of net flow, so no spill-back stream exists to assign it to. FI-119 "steam flow" is
+  computed from the stripper heat duty.
+- **Plain-language purposes.** `data/te_unit_purposes.json` did not exist on any branch. It now holds one
+  sentence per unit. Each one restates cited simulator lines and carries line numbers against the pinned checksum.
+  A test confirms every cited line still says what is quoted, so the purposes can't drift from the source unnoticed.
+  The 3D tour draft's narration predates this and should take its purpose text from here.
+
+**Downstream:** stream directions now live in the model (`direction: forward`), so the display's "seed direction"
+adapter was removed. The screens now say "TOPOLOGY VERIFIED AGAINST SIMULATOR SOURCE" where they used to say
+UNVERIFIED. They keep the caveats that are still true: tap positions and along-line order are not in the source.
+The separator page gained the purge route, its two cards and the purge analyzer. The compressor page lost them.
+SVGs, Ignition tags, the PI sheet, the review sheet and the 23-view project were regenerated. Ten TE tag paths
+moved, so the native gateway acceptance from entry 38 covers the build before this change, not this one.
+
+**Tests:** `scripts/test_te_topology.py` (20 checks, in the full suite). Two kinds of control matter most:
+- **Wrong models must be rejected.** Reverse a stream, move a stream's endpoint, put the purge back on the
+  compressor, move a reactor tag or valve to another unit, give an instrument the wrong stream. Each one is
+  corrected or flagged.
+- **The check must read the code.** Edit the simulator text and the conclusions must follow. Point the condenser
+  heat term at another stream and E-101 and TI-122 lose their confirmation. Reverse the purge pressure difference
+  and S9 becomes unresolvable. Move the purge into the header balance and S9 becomes unresolvable while the
+  pressure driver still says separator. Change both and it is corrected to the header.
+
+**Why a script that reads the code, not a careful read of the code:** a reviewer can rerun it and audit every
+row. Each row names the code line that decided it. When the source is split, the script says so instead of
+picking a side quietly.
+
+**Lesson:** "verified" needs a scope. Entry 5 verified names and units, and the topology underneath stayed a
+guess while every screen drew it. When two parts of one source disagree (a header label and the equation behind
+it), the deciding rule has to be explicit and applied the same way everywhere. Here it is: the code's location
+plus a majority of documented names; where they split, the element stays flagged. The same rule that confirms
+TI-122 leaves PI-116 unresolved. It was written while looking at both cases, so it is not pre-registered.
+
+**At your plant:** the equivalent of `teprob.f` is whatever system already computes the process: a simulator
+model, the DCS configuration, or the historian's tag-to-unit hierarchy. Check the drawing-derived topology
+against it mechanically, and keep the disagreements as a list for the process engineer. What still needs a person
+here: PI-116's owner; whether the S7/S7b and S8/S8b splits and FI-105's segment match how a real plant would draw
+them; and every tap position, size and pipe route, none of which any simulator records.
