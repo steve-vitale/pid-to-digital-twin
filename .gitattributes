@@ -1,3 +1,5 @@
 # Prompt files are hashed into every run record; keep their bytes identical on every OS.
 extraction/* text eol=lf
 *.bat text eol=crlf
+# The timed-review kit is hashed in its manifest; keep its bytes identical on every OS.
+out/review_kit/** -text

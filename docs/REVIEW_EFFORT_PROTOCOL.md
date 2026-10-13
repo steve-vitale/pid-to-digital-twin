@@ -8,6 +8,11 @@ The intended question is whether a specified AI-assisted draft workflow changes 
 
 Operator screen usability, situational awareness, alarm response, and process safety are separate questions requiring their own qualified evaluation. This kit authorizes no participant contact, external model calls, plant access, publication, deployment, or operation of equipment. Any actual trial needs its owner's approval and applicable site governance. Use only eligible nonpersonal source material and pseudonymous study role IDs; keep any participant identity roster separately under the administrator's controls. Do not place personal or clinical data in these files.
 
+**Ready-to-run first step:** [`out/review_kit/sheet-8/`](../out/review_kit/sheet-8/README.md) packages one holdout
+sheet's review queue (88 rows) with the drawing, the overlay, a timer (`scripts/review_kit.py`) and a draft protocol
+whose study decisions are left blank. One timed review there gives the first measured minutes for one reviewer on
+one sheet. It is a pilot observation, not the two-arm comparison below.
+
 ## 1. Freeze before observations
 
 Create and fill a protocol privately:

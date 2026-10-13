@@ -2132,3 +2132,79 @@ nothing could be known.
 and measure false alarms over weeks of normal running before trusting the colour. Treat loss of a data source as a
 diagnostic alarm with an owner and a response, separate from process alarms, and decide with operations what a
 process alarm should do while its value is stale.
+
+---
+
+## 39. More drawings with tag text, five runs per model, and a kit for the first timed review
+
+**2026-10-13.** Reviewers of the results could point at four gaps. Holdout A is six drawings. Tag reading had never
+been scored, because the OPEN100 keys carry no text. Claude against GPT was called a tie or a win from single runs.
+And review time, the number the cost case rests on, was never measured. This entry closes the first three as far
+as public data allows, and prepares the fourth.
+
+**Finding drawings with tag truth.** The PID2Graph paper's 60 industrial P&IDs aren't public. Dataset-P&ID has text
+labels, but they are random strings, its licence forbids sharing adaptations, and its drawings are already holdout
+B. The DEXPI standards initiative publishes example and training P&IDs with their DEXPI XML (CC BY 4.0, on GitLab
+now; the old GitHub repositories point there). The XML carries every item's class, its drawn shape and position, its label
+text and the piping topology, which is all an answer key needs. One example also ships a CAD tool's equipment,
+instrument and valve lists for its two drawings. The selection rule took every complete DEXPI 1.3 example sheet
+plus that one: three XML-keyed sheets (49 symbols, 60 links, 33 tags) and two list-keyed sheets (145 identifiers).
+
+**The adapter, and what the oracle check caught.** `scripts/adapt_dexpi.py` places each shape-catalogue symbol by
+its position, rotation, mirroring and scale, rasterises the published SVG or PDF, and writes keys in the PID2Graph
+format so the frozen scorer reads them unchanged. Drawing the key boxes over each render and scoring the key against
+itself found three problems before any model ran: a column section drawn inside its column counted as a second
+tank; flanges and blinds, drawn as a single stroke, had zero-area boxes that can never match; and one instrument
+label's third line (an area prefix) had joined its tag. All three were fixed and recorded in the pre-registration,
+which was committed before the first model call (`bd7d7ff`).
+
+**Replicates.** Five fresh runs of the declared method per model on holdout A and on the DEXPI sheets, Claude and
+GPT only. Gemini wasn't run, on Steve's direction; its earlier numbers stay, labelled as earlier runs. 220 records,
+no failures, and every record reports the same model IDs as round 2.
+
+- **Holdout A:** GPT 20.1, Claude 29.8 review load. GPT is better by more than run noise on these six drawings (9.8
+  points, interval 7.3–12.2), but resampling the drawings gives −4.5 to +26.5 for the gap, so across drawings like
+  these it is a tie. The pre-registered rule made that call before the numbers existed, which is the only reason I
+  trust it: the runs-only interval is the more flattering one, and I would have been tempted to lead with it.
+- **Noise was underestimated.** Round 2 assumed "about 1 point" between runs, from one repeat on the development
+  set. Five runs give a standard deviation of 1.4–1.9 points. Round 2's single runs were a lucky draw for GPT (17.8,
+  below its five-run interval) and an unlucky one for Claude (32.4, above). The round-2 verdict, a ~30-point gain
+  from tiling plus tracing, is far outside that and stands.
+
+**DEXPI: worse, and partly for a reason the key decides.** Review load was 95.4 (GPT) and 61.8 (Claude), against
+about 20–30 on holdout A. Much of it is what counts as a symbol. Equipment nozzles are drawn as little stubs with
+labels (N1, N2), but DEXPI treats them as parts of the equipment, and the key followed DEXPI. GPT reported them as
+symbols in three of five runs on the reference sheet and not in the other two; the tracer then attached lines to
+each one. Its review load on that sheet swung between about 33 and 145. A single run would have shown either
+number, and either would have been wrong as a summary. The small sheets also amplify: on a 21-item sheet each
+correction is about 5 points.
+
+**Tag text, finally measured.** On the reference sheet both models read all 20 tags exactly, including two-line
+instrument bubbles. Across the three XML sheets: GPT 29 of 33, Claude 28 of 33, identical in every run. The misses
+share a cause: vertical valve labels, a two-line equipment label, and a control-valve number drawn on a separate
+actuator bubble. On the list-keyed sheets GPT found all 145 identifiers in every run and Claude 99.4% on average. A
+cross-sheet control showed why that is an upper bound: valve numbers repeat between the two sheets, so a short
+identifier can match by coincidence.
+
+**A bug in my own report, caught by reading it.** The first replicate summary called the tag difference "different"
+under the runs interval. Every run had the same score, so the interval had zero width and excluded zero trivially.
+The script now says "no run-to-run variation" in that case, with a test, and the commit says when and why.
+
+**The review kit.** Review minutes stay unmeasured: no reviewer timed anything, and inventing a number would undo
+everything above. `out/review_kit/sheet-8/` packages the smallest holdout-A sheet's review queue (88 rows) with the
+drawing, the overlay, a timer that records only pseudonymous start/pause/stop timestamps, a summary that refuses an
+unfinished log or a reordered sheet, and a draft study protocol whose design decisions are deliberately blank. One
+sitting gives one reviewer's minutes on one sheet: a first observation, not a saving.
+
+**What this doesn't fix.** Five DEXPI sheets from one publisher are clean, vector-drawn and small; they test a third
+drafting style and tag reading, not real archives. The sample of drawings, not of runs, is still the limit on every
+model comparison. Nothing was tuned on these results: a key that counts nozzles, or a tracer that ignores stubs on
+equipment, would be a new method needing new drawings.
+
+**Lesson:** report the interval that answers the question you are asking. "Would it change if I ran it again?" and
+"would it hold on other drawings?" have different answers here, and only the second one matters to a plant.
+
+**At your plant:** run the selected method several times on your pilot sheets before believing a single score; a
+bimodal result (like the nozzles) is a sign that a definition, not the model, needs a decision. Write down which
+drawn things are symbols for you before scoring anything. And time the first review: it costs one sitting and
+replaces the most important assumption in the cost case.

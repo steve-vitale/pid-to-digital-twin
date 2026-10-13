@@ -328,3 +328,198 @@ No drawing or tile failed at any level. Run-to-run noise from round 2's repeats 
 - **For an archive of scans:** clean up the images before tracing, or use the tracer only on sheets above a quality
   threshold. Either is a new method, so it would need its own sealed test. Nothing was tuned here.
 
+
+# Round 5 (written before any round-5 model run): tag text on new public drawings, and replicate runs
+
+Committed 2026-10-13, before any model saw a DEXPI image and before any replicate run started. The commit history is
+the timestamp. Changes after this point go in a new dated commit that says what changed and why.
+
+**Questions:**
+1. Does the declared method M3 carry over to drawings from a different publisher, and how well does it read tag
+   text? The OPEN100 and Dataset-P&ID keys have no text, so tag reading has never been scored.
+2. How much does M3 move between runs of the same model on holdout A, and is the GPT–Claude gap bigger than that?
+
+No decision rides on this round. Nothing is tuned: no prompt, tiling, tracer or scorer change, and no DEXPI result
+feeds a change in this round.
+
+## Data
+
+**Holdout A (OPEN100 6–11), again.** It was scored once per method in round 2. Re-running the already declared
+method only measures its noise; no method is chosen on it. That still uses the set up further, which is why the
+replicates are pre-registered here rather than added quietly.
+
+**New: DEXPI example P&IDs.** Source: the DEXPI initiative's public TrainingTestCases repository
+(gitlab.com/dexpi/TrainingTestCases), pinned to commit `a23d61e2`, licensed **CC BY 4.0** (its LICENSE file). Every
+file is fetched by SHA-256 (`data/dataset_adapters/dexpi_examples.json`); downloads, renders and converted keys stay
+out of git. These are example and training drawings published by the standards body to test software exchange:
+digital, vector-drawn, clean and small. They are not scans and not drawings of a running plant.
+
+| Sheet | What it is | Key | Scored items |
+|---|---|---|---|
+| dexpi-c01 | The DEXPI reference P&ID (pumps, exchangers, tank, valves, 4 instrument loops) | DEXPI XML: shapes, topology, labels | 25 symbols, 37 links, 20 tags |
+| dexpi-c02 | A process column with instruments | DEXPI XML | 13 symbols, 13 links, 10 tags |
+| dexpi-c03 | A short pipe run with an emergency shut-off valve | DEXPI XML | 11 symbols, 10 links, 3 tags |
+| dexpi-c08a | A training plant drawing exported from a CAD tool, black and white | published equipment, instrument and valve lists | 129 identifiers |
+| dexpi-c08b | Its connected second sheet | same lists | 16 identifiers |
+
+Totals: 49 symbols, 60 links and 33 tags with geometry, plus 145 listed identifiers without geometry.
+
+**How the sheets were chosen (a rule, not taste):** every DEXPI 1.3 example in the repository that is a complete
+sheet with both XML and a rendering (C01–C03), plus the only example that ships drawings with item lists (C08). Left
+out: the one-object test cases (E, I and P series: a single tank, a single pipe), the DEXPI 1.2 copies of C01–C04
+(the same reference plant at an earlier revision, so not independent), and the colour PDFs of C08 (the same drawings
+as the black-and-white ones, which are closer to archive drawings).
+
+**Other public sets considered:** Dataset-P&ID (CC BY-NC-ND 4.0) has text labels, but they are synthetic random
+strings, the licence forbids sharing adaptations, and its drawings are already holdout B. PID2Graph Synthetic has no
+text. Symbol-only sets (box labels, no lines or text) cannot score the review load. The PID2Graph paper's 60
+industrial sheets are not public. None of these was used.
+
+## Conversion (scripts/adapt_dexpi.py, rules in its docstring)
+
+- **Images:** the published SVG (C01–C03) or PDF (C08) rasterised with MuPDF, long side 3,200 px, the size of the
+  larger OPEN100 sheets. No other processing.
+- **Classes:** pumps/compressors → pump; other top-level equipment → tank; valves → valve; instrument bubbles →
+  instrumentation; off-page connectors → inlet/outlet; reducers, flanges, blinds, orifices, fittings → general; tees
+  → pass-through connectors, as in the PID2Graph keys. Equipment internals, actuators, nozzles and flow marks are
+  not separate symbols. The mapping follows the class names and the prompt's own definitions.
+- **Boxes:** the symbol's own drawn shape, placed by its position, rotation, mirroring and scale.
+- **Links:** every drawn line, as in the PID2Graph keys: pipe segments item to item, measuring lines and signal
+  lines end to end, nozzles standing for their equipment.
+- **Tag truth:** the item's own label as drawn: equipment tag, valve label, the two lines of an instrument bubble,
+  or a control valve's actuator number. Items without a label carry no tag truth.
+- **Tag lists (C08):** an identifier counts for a sheet only if its list row names that drawing and it is printed
+  in the PDF's text layer (one listed valve is not printed and is left out).
+
+**Checked before freezing, on the keys only:** the key boxes were drawn over each render and inspected, and the key
+converted to an answer scores zero corrections with the unchanged scorer (`scripts/test_dexpi_adapter.py`). That
+check led to three adapter changes, all before any model run: column sections drawn inside the column are not
+separate symbols; boxes drawn as a single stroke (flanges, blinds) are widened to 0.5% of the long side, because a
+zero-area box can never match; an instrument label's third line (an area prefix on C03) is not part of the tag.
+
+**Known key limitations, stated now:** a few drawn things are not DEXPI items, so a model that reports them is
+counted as a false symbol. Examples: the second "ESV 3712" bubble on the C03 actuator, C03's shut-down trigger
+symbol, C02's sample-point boxes. Only 3 of C03's 11 symbols have tag text. The C08 lists cannot judge precision:
+they do not cover everything printed on a sheet (line numbers, nozzles, notes), so extra predicted tags are not
+counted against the model.
+
+## Method and runs
+
+- **Method:** the declared M3, unchanged: `extraction/prompt_v2.md` (SHA-256 `d98a6475…`), 2×2 tiles with 0.15
+  overlap and `extraction/tile_preface.md`, then `scripts/trace_connections.py` with its defaults. The only harness
+  change is a path setting (`PID_DATA_DIR`) so the runner, tracer and scorecard can read the DEXPI folder.
+- **Tools:** Claude through the Claude Code CLI and GPT through the Codex CLI, each on its default model, which on
+  2026-10-13 is the same as round 2 (`claude-opus-5-5[1m]`, `gpt-6.1-sol`). Gemini is not run (project owner's
+  direction); its earlier results stay in the documents, labelled as earlier runs. A record that reports a
+  different model is reported, not dropped.
+- **Replicates:** five fresh runs per tool on holdout A (labels `r5-hA-rep1…5`) and five on the DEXPI sheets
+  (`r5-dx-rep1…5`). Every replicate is a new call; nothing is reused or selected. The round-2 run is shown beside
+  them as earlier context, not pooled into the intervals.
+- **Failures count as zero**, as before.
+
+## Measures and statistics
+
+- **Frozen scorer:** review load, rough "found + right class" F1, connection F1 (`scripts/score_pid2graph.py`,
+  unchanged).
+- **Tags (`scripts/score_tags.py`, new; rules in its docstring):** on the DEXPI XML sheets, a key symbol's tag is
+  correct, wrong, empty, or missed (symbol not found). Headline: strict match (case and spaces ignored). Lenient
+  match (letters and digits only) beside it. Reported as accuracy on found symbols and as end-to-end recall. On C08,
+  the share of listed identifiers that appear in any predicted tag.
+- **Intervals (`scripts/replicate_stats.py`):** for each number, the mean of the five runs with two 95% intervals:
+  1. **runs** (t-interval over the five values, drawings fixed): how much it moves when run again;
+  2. **bootstrap** (resample drawings, then one run per drawing; 10,000 draws, seed 20261013): how much it could move
+     with other drawings like these as well.
+- **Model comparison rule:** Claude and GPT are called different on a measure only if the 95% interval of the
+  difference excludes zero. The bootstrap interval is the headline, because six drawings are the real limit; the
+  runs interval is shown beside it.
+- **Carry-over check:** if the DEXPI review load falls outside holdout A's bootstrap interval for that tool, the
+  method is reported as behaving differently on this source. It is a measurement, not a pass/fail gate.
+
+## Round 5 results (scored after the pre-registration above)
+
+All 220 run records came back (2 tools × 11 sheets × 5 replicates, tiled and traced). No tile or drawing failed, and
+every record reports the pre-registered model (`claude-opus-5-5[1m]`, `gpt-6.1-sol`). Full tables:
+`out/replicates_r5_holdout-a.md` and `out/replicates_r5_dexpi.md`.
+
+### Replicates on holdout A (M3, five fresh runs per tool)
+
+| Measure | GPT: 5 runs | GPT mean (runs 95% / bootstrap 95%) | Claude: 5 runs | Claude mean (runs 95% / bootstrap 95%) |
+|---|---|---|---|---|
+| Review load | 20.7, 21.5, 18.4, 18.8, 21.0 | **20.1** (18.3–21.8 / 14.2–28.0) | 30.9, 30.8, 28.5, 27.2, 31.6 | **29.8** (27.5–32.1 / 12.8–47.3) |
+| Symbol F1, rough + class | | 0.929 (0.918–0.940 / 0.908–0.949) | | 0.898 (0.892–0.904 / 0.840–0.952) |
+| Connection F1 | | 0.872 (0.864–0.879 / 0.801–0.916) | | 0.795 (0.779–0.811 / 0.638–0.920) |
+
+Round 2's single runs (GPT 17.8, Claude 32.4) sit just outside the five-run intervals, on opposite sides: GPT's
+round-2 run was a good draw, Claude's a bad one.
+
+**GPT minus Claude, review load:** −9.8. Runs interval −12.2 to −7.3: on these six sheets, GPT is better by more than
+run-to-run noise. Bootstrap interval −26.5 to +4.5: across drawings like these, the gap is **not** established. By
+the pre-registered rule (bootstrap is the headline) this is a **tie**. The same holds for symbol F1 and connection
+F1: different on these sheets, a tie across drawings. One sheet carries much of it: sheet 10 (Claude 58.7, GPT
+20.1 mean review load).
+
+**Run-to-run noise is larger than round 2 assumed.** Round 2's decision rule used "about 1 point" of review load,
+from one repeat on the development set. Five runs on holdout A give a standard deviation of 1.4 (GPT) and 1.9
+(Claude) points, and a spread of 3–4 points between the best and worst run. The round-2 verdict (M3 beats M0 by
+31 points for GPT and 29 for Claude) is far outside either figure, so it stands.
+
+### DEXPI sheets (M3, five runs per tool): symbols and connections
+
+| Measure | GPT mean (runs 95% / bootstrap 95%) | Claude mean (runs 95% / bootstrap 95%) |
+|---|---|---|
+| Review load | **95.4** (53.2–137.6 / 42.1–138.6) | **61.8** (60.5–63.1 / 26.3–127.9) |
+| Symbol F1, rough + class | 0.728 (0.658–0.797 / 0.585–0.826) | 0.754 (0.736–0.773 / 0.529–0.917) |
+| Connection F1 | 0.454 (0.238–0.670 / 0.218–0.778) | 0.605 (0.591–0.618 / 0.071–0.821) |
+
+Per sheet (mean review load, GPT / Claude): C01 100.0 / 25.8, C02 77.7 / 93.1, C03 103.8 / 129.5.
+
+- **Carry-over check:** both tools' DEXPI review load is outside their holdout-A bootstrap interval (GPT 14.2–28.0,
+  Claude 12.8–47.3). By the pre-registered wording, **the method behaves differently on this source: it does
+  worse.** GPT minus Claude: a tie under both intervals.
+- **GPT was bimodal.** On C01 it reported the equipment nozzles (labelled N1, N2…) as separate "general" symbols in 3
+  of 5 runs, and not in the other 2. Those runs scored 143.5–146.8 on C01; the other two scored 32–34. The tracer
+  then attached lines to every nozzle, which multiplied false links (50 per run). One run would have shown either
+  number with no hint of the other.
+- **Why the review load is high on C02 and C03.** These are small sheets (26 and 21 key items), so each correction weighs about 4–5 points. Most false symbols are drawn things the DEXPI model does not list as items: nozzles (45 of
+  GPT's 102 false symbols across all runs, 17 of Claude's 51), sample-point boxes, the shut-down trigger and the
+  second actuator bubble on C03, all of which were named as limitations before the run. Whether a nozzle is a
+  symbol is a key-scope choice. The key was frozen before the runs, so these count as errors, and the count is
+  reported here rather than corrected.
+
+### Tag text (first measurement in this project)
+
+**DEXPI XML sheets (33 symbols with label text):** identical in all five runs for each tool.
+
+| | GPT | Claude |
+|---|---|---|
+| Correct, strict | 29 of 33 (0.879) | 28 of 33 (0.848) |
+| Accuracy on symbols it found | 29 of 33 (0.879) | 28 of 31 (0.903) |
+| Lenient (letters and digits only) | same as strict | same as strict |
+| Bootstrap 95% (end-to-end) | 0.67–1.00 | 0.60–1.00 |
+
+Every tag on the reference sheet C01 was read exactly by both tools (20 of 20): equipment, valve labels, control-
+valve numbers and two-line instrument bubbles. The misses are all of one kind: text that isn't next to its symbol in
+the usual way. Vertical valve labels on C02 were left empty (Claude) or replaced by nearby text, "25 / AS9" (GPT); the
+blind-flange size labels on C02 were missed with their symbols (Claude); the column's two-line label "K 2750 / KX
+2750" was read whole where the key's first-line rule wants "K 2750" (GPT); the C03 control valve's number sits on a
+separate actuator bubble, and neither tool attached it to the valve.
+
+**C08 tag lists (145 identifiers printed on two sheets):** GPT found every listed identifier in all five runs; Claude
+found 99.4% on average (it missed 0–3 identifiers per run, mostly different ones). Precision cannot be scored
+from the lists. A cross-sheet control finds 5 of sheet 2's 16 identifiers in a sheet-1 answer, because valve numbers
+AB001–AB006 exist on both sheets; short identifiers can match by coincidence, so these recall figures are an upper
+bound on true item-level reading.
+
+**What the tag numbers support:** on clean, vector-rendered drawings at 3,200 px, both models read printed tags
+almost perfectly. They do not show tag reading on scans, on handwriting, or on dense real archives, and 33 + 145
+items on five sheets from one publisher is a small sample. The bootstrap intervals (0.6–1.0) are that size.
+
+### Diagnostics (not pre-registered, labelled as such)
+
+- **Tracer on DEXPI:** the model's own links without tracing (M1) give a review load of 79.3 (GPT) and 65.0
+  (Claude). Tracing helped Claude a little (to 61.8) and hurt GPT (to 95.4), mostly through the nozzle runs above.
+  `out/replicates_r5_dexpi_tiles_only_diagnostic.md`.
+- **M1 on holdout A, five runs:** GPT 36.7 (round 2's single run: 31.7), Claude 53.0 (54.9).
+
+**Nothing was changed because of these results.** A key that counts nozzles, a tracer that ignores small stubs on
+equipment, or a prompt line about nozzles would each be a new method and would need new, unseen drawings.

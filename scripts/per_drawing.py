@@ -11,9 +11,11 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-# PID_SHEETS_DIR (absolute, or relative to the repo root) points at any folder of <sheet>.png + <sheet>.graphml,
-# e.g. data/te_pid for the generated Tennessee Eastman sheets. Default: the PID2Graph set, as before.
-DATA = (ROOT / os.environ["PID_SHEETS_DIR"]) if os.environ.get("PID_SHEETS_DIR") else \
+# PID_SHEETS_DIR (absolute, or relative to the repo root) points at any other folder of <sheet>.png (+ .graphml),
+# e.g. data/te_pid (the generated Tennessee Eastman sheets) or data/external/dexpi/sheets (round 5, built by
+# scripts/adapt_dexpi.py). PID_DATA_DIR is accepted as the same setting. Unset, the PID2Graph set is used as before.
+_SHEETS = os.environ.get("PID_SHEETS_DIR") or os.environ.get("PID_DATA_DIR")
+DATA = (ROOT / _SHEETS) if _SHEETS else \
     ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 
 tool, labels = sys.argv[1], sys.argv[2:]

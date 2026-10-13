@@ -1,0 +1,51 @@
+{
+  "dataset": "DEXPI public example P&IDs (TrainingTestCases)",
+  "source_repository": "https://gitlab.com/dexpi/TrainingTestCases",
+  "source_commit": "a23d61e2e089eb2ca464cd552f9ae580a2785963",
+  "raw_url_template": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/{commit}/{path}",
+  "license": "CC-BY-4.0",
+  "license_file_sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+  "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and its contributing members), licensed CC BY 4.0. Rendered to PNG and converted to the repository's answer-key format by scripts/adapt_dexpi.py; the converted files are adaptations under the same license.",
+  "provenance": "Example and training P&IDs published by the DEXPI standards initiative to test software import/export. Digital, vector-drawn, small. Not scans and not drawings of an operating plant.",
+  "render": {"long_side_px": 3200, "min_box_side_frac": 0.005, "background": "white", "tool": "PyMuPDF (MuPDF) rasterising the published SVG or PDF"},
+  "geometry_keyed": [
+    {"id": "dexpi-c01", "title": "DEXPI reference P&ID (example C01, version 4)",
+     "xml": "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.xml",
+     "xml_sha256": "a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c",
+     "image": "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.svg",
+     "image_sha256": "49696872639b2f99a9da72cd83adb0ae29e427c24c75ad374d33e3382e1db047"},
+    {"id": "dexpi-c02", "title": "Process column (example C02, version 3)",
+     "xml": "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.xml",
+     "xml_sha256": "dfe4323c18d018caa4b28ec789b3dbee21be73c6a07c7cbd0791ceebd322113b",
+     "image": "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.svg",
+     "image_sha256": "a2e5f4e740ab203213ca9e697956b3a10d7603ffe4d1239158e077cd4cc260a9"},
+    {"id": "dexpi-c03", "title": "Piping with a control valve (example C03, version 4)",
+     "xml": "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.xml",
+     "xml_sha256": "a1c892f3bc21338c2546baf71e10abf11e3653b7cd6956b1a24bcfab0db88f14",
+     "image": "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.svg",
+     "image_sha256": "6c0dacb00362dba4261b6b752b3b9e73ad9ac952bb7d6fac068fe1a37540d18d"}
+  ],
+  "tag_list_keyed": {
+    "lists": {
+      "equipment": {"path": "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Equipment List.xlsm",
+                    "sha256": "afdf56ceaf1b4c37753c3db64089474b591c7c2f4aad611d1d27e551cccc2756"},
+      "instrument": {"path": "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Instrument List.xlsm",
+                     "sha256": "b3efe5b9938846c667962a6129c8c2a11a95c9b8d314c5d6243c489d2fd1326f"},
+      "valve": {"path": "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Valve List.xlsm",
+                "sha256": "382ac22ad1f5091f9a4764347c544b19e8afa11916b4c6bf24759797e1216cc9"}
+    },
+    "sheets": [
+      {"id": "dexpi-c08a", "drawing_name": "UER-1234567", "title": "Two connected P&IDs (example C08), sheet 1, black and white",
+       "pdf": "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-1234567_bw.pdf",
+       "pdf_sha256": "c4184cab8538f728f1ab23787415ad90076582d50f8039509c384a2398bf8ccf"},
+      {"id": "dexpi-c08b", "drawing_name": "UER-2345678", "title": "Two connected P&IDs (example C08), sheet 2, black and white",
+       "pdf": "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-2345678_bw.pdf",
+       "pdf_sha256": "a9bfe903a2a8ba07eea128190f6332239790d3246aaeef498b761a8c0e5ff622"}
+    ]
+  },
+  "annotation_contract": {
+    "geometry_keyed": {"symbol_classes": true, "boxes": "derived from the published shape geometry", "adjacency": true, "tag_text": true},
+    "tag_list_keyed": {"symbol_classes": "list type only", "boxes": false, "adjacency": false, "tag_text": "identifiers from the published equipment, instrument and valve lists"}
+  },
+  "class_map_note": "The mapping from DEXPI component classes to the six scored classes is code (scripts/adapt_dexpi.py, dexpi_class) and was written from the class names and extraction/prompt_v2.md definitions before any model saw a DEXPI image."
+}
