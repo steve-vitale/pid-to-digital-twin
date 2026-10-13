@@ -20,6 +20,9 @@ SOURCE_TESTS = (
     "scripts/test_apply_review.py",
     "scripts/test_scorer_controls.py",
     "scripts/test_pid2graph_synthetic_adapter.py",
+    "scripts/test_dexpi_adapter.py",
+    "scripts/test_score_tags.py",
+    "scripts/test_replicate_stats.py",
     "scripts/test_generate_validation.py",
     "scripts/test_export_review_boundaries.py",
     "scripts/test_site_drawing_intake.py",
@@ -46,7 +49,7 @@ DRAWINGS = "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"
 SOURCE_FILES = (
     "data/te_process_model.json", "data/te_display_layout.json",
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
-    "data/dataset_adapters/pid2graph_synthetic.json",
+    "data/dataset_adapters/pid2graph_synthetic.json", "data/dataset_adapters/dexpi_examples.json",
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
     "out/svg/overview.svg", f"{TWIN}/plant_model.json",
 ) + tuple(f"{TWIN}/svg/sheet_{i}.svg" for i in range(12)) + tuple(

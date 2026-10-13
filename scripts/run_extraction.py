@@ -45,7 +45,10 @@ import tiling  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPT = (ROOT / "extraction" / "prompt.md").read_text(encoding="utf-8")
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
+# PID_DATA_DIR points at another folder of <drawing>.png (+ .graphml) files, e.g. the DEXPI sheets from
+# scripts/adapt_dexpi.py (round 5). Unset, the PID2Graph folders are used exactly as before.
+DATA = Path(os.environ["PID_DATA_DIR"]) if os.environ.get("PID_DATA_DIR") else \
+    ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 RUNS = ROOT / "runs"
 SPEND = RUNS / "gemini_spend.json"
 GEMINI_CAP_USD = 25.0  # --gemini-cap lowers it for a bounded experiment

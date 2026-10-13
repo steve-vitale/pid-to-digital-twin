@@ -32,3 +32,11 @@ shared under [Creative Commons Attribution-ShareAlike 4.0 International](https:/
 Changes include adaptation, normalization and evaluation summaries; the source Synthetic images and labels are
 not included in this publication. This attribution does not change the MIT license for repository code or any
 other source license stated above.
+
+**DEXPI example P&IDs** (round 5) are from the DEXPI initiative's public
+[TrainingTestCases repository](https://gitlab.com/dexpi/TrainingTestCases), commit `a23d61e2`, licensed
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). The drawings, XML
+files and item lists are downloaded by `scripts/adapt_dexpi.py` and are not redistributed. Material derived from
+them (scores, summaries and any committed review-kit images in `out/`) is shared under CC BY 4.0 with credit to the
+DEXPI initiative and its contributing members. Changes: rasterised to PNG, converted to this repository's
+answer-key format, and scored.

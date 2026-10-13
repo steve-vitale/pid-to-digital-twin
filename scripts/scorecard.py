@@ -15,7 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent))
 import score_pid2graph as sc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
+# PID_DATA_DIR points at another folder of <drawing>.png (+ .graphml) files, e.g. the DEXPI sheets from
+# scripts/adapt_dexpi.py (round 5). Unset, the PID2Graph folders are used exactly as before.
+DATA = Path(os.environ["PID_DATA_DIR"]) if os.environ.get("PID_DATA_DIR") else \
+    ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" / os.environ.get("PID2GRAPH_SET", "PID2Graph OPEN100")
 
 
 def add(acc, part):
