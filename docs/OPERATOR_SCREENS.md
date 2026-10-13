@@ -41,8 +41,14 @@ band is learned from the published normal run (`scripts/normal_bands.py`):
   Full table: [`out/ignition/normal_bands.md`](../out/ignition/normal_bands.md).
 
 How much to trust it:
-- **Fault 6 is an easy fault**: a feed going to zero. A slow drift would be caught later, or not at all, by a band
-  this wide. One fault is a demonstration, not a detection rate.
+- **Fault 6 is an easy fault**: a feed going to zero. One fault is a demonstration, not a detection rate, so the
+  bands were then scored on **all 21 published faults** with a rule fixed before scoring
+  ([`scripts/fault_detection_eval.py`](../scripts/fault_detection_eval.py), [results](../out/fault_detection/fault_detection.md),
+  journal entry 39). They flag **17 of 21** (median 48 minutes after onset) and miss faults 3, 9, 15 and 19. The
+  first three are the faults the TE literature widely reports as near-invisible in these variables; 19 is a miss
+  this method shares with a PCA T² baseline. On 193 hours of normal running they never saw, the bands raised **no
+  false alarm** (not a guarantee: the 95% upper bound is about 0.37 per day). The price of K = 6 is lateness on
+  slow faults: fault 21 is flagged after 26.5 hours.
 - **The bands assume one operating mode.** The stripper steam flow and temperature drift slowly even in the normal
   run (they are the worst tags at K = 3–5). A real plant has several modes (rates, grades, startup) and needs a band
   per mode, refitted when the process changes.
