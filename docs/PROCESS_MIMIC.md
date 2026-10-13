@@ -39,7 +39,7 @@ Each unit has an equipment-specific rendering, dynamic level where a level tag e
 readings, selected condition readouts, and all available tag rows. Rows include the recorded reading, existing
 normal band and alarm limits, existing State text, 30-minute history and source-review metadata. Final elements
 also get recorded-output gauges. Analyzer components have their own source-indexed readings, bands and history;
-original scalar paths remain compatible. SC-212 remains NOT CONNECTED because XMV12 is absent from the replay.
+original scalar paths remain compatible. SC-212 remains not connected because XMV12 is absent from the replay.
 
 UNKNOWN is explicit for bad-quality, missing, nonnumeric and nonfinite readings. Level fill becomes hatched;
 output gauges hide fill. A valid zero remains zero. Percentage graphics clamp to 0–100, retaining off-scale

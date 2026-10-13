@@ -46,7 +46,7 @@ flowchart LR
 
 | Platform | What's verified |
 |---|---|
-| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 23-view project: native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 23/23 routes, 277/277 navigation targets, 0 false-good placeholders. The 390 px phone width is only partial ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not), [receipt](out/ignition/gateway/receipts/native-current-20261013.json)) |
+| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) |
 | AVEVA PI AF | Asset structure generated as a PI Builder sheet. **Not imported into a PI System** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
@@ -150,16 +150,18 @@ possible. The rules, splits and decision rule were committed before any method w
 
 ## Try it in Ignition
 
-The current 23-view project was imported into a disposable Ignition 8.3.10 gateway on 2026-10-13 and passed the
+The current project (24 views) was imported into a disposable Ignition 8.3.10 gateway on 2026-10-13 and passed the
 verifier (V1–V8) and a full browser contract: every route loaded and reloaded, every navigation target was clicked,
-placeholders stayed "not connected", and the recorded fault raised the alarm. The first import found two display
-bugs that no offline check had caught; both were fixed with regression tests
-([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)).
-That is a lab result on recorded and synthetic data, not site or operator acceptance. The 390 px width scrolls but
-isn't a phone layout.
+placeholders stayed "not connected", and the recorded fault raised the alarm. Stopping a data source raises a
+"Data source lost" diagnostic alarm, separate from process alarms, and the header counts active alarms the way the
+alarm table does. Each gateway run found bugs no offline check had caught; all were fixed with regression tests
+([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not),
+[entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm)).
+That is a lab result on recorded and synthetic data, not site or operator acceptance. `/m` is a 390 px overview
+(alarms first, then the units); the control-room screens stay 1600 px and scroll on a phone.
 
 To build the current project yourself, regenerate it with `python scripts/ignition/build_gateway.py --write-only`.
-The committed project ZIP is the older historical export; [docs/IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md)
+The committed project ZIP matches a `--write-only` build of the tested commit; [docs/IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md)
 explains which files belong together and how the acceptance run was done. A kit needs:
 - a tag import ([`twin_provider.json`](out/ignition/gateway/twin_provider.json));
 - a Perspective project (`PIDTwin.zip`), regenerated locally as above;
@@ -170,7 +172,10 @@ Loading by hand: **[docs/IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md)**.
 
 The screens are generated from the twin in the ISA-101 style: grey when the plant is normal, amber when a value
 leaves its learned normal band, red only for a real alarm. In the fault replay, the first value turns amber 294
-plant-minutes before the pressure alarm. What they infer, and how far to trust it:
+plant-minutes before the pressure alarm. That is one easy fault: scored on all 21 published faults, the bands flag
+17 (median 48 minutes after onset) with no false alarm in 193 hours of held-out normal running, and miss faults 3,
+9, 15 and 19 ([EVALUATION.md](docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults)).
+What they infer, and how far to trust it:
 [docs/OPERATOR_SCREENS.md](docs/OPERATOR_SCREENS.md). The key values, spans and layout are first-pass choices by
 Claude and haven't been reviewed by operations.
 
@@ -334,7 +339,7 @@ it at a real site.
 | · line tracing (code, no AI) | `trace_connections.py` |
 | · scoring | `score_pid2graph.py` (the frozen scorer), `scorecard.py`, `per_drawing.py`, `score_twin.py`, `score_triage.py` |
 | · the twin | `build_twin.py` (sheets to hierarchy, review queue, platform files), `confidence.py` + `confidence_model.json` (risk tiers), `generate.py` (SVG, Ignition, PI AF, review sheet) |
-| · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run) |
+| · operator screens | `normal_bands.py` (learned normal bands, checked on unseen normal data and a fault run), `fault_detection_eval.py` (the bands and a PCA T² baseline on all 21 TE faults) |
 | · review loop | `apply_review.py` (operations decisions back into the model), `map_points.py` (OPC), `map_pi_points.py` (reviewer-supplied PI references), `review_effort.py` (future study records) |
 | · scans (round 4) | `degrade_scans.py` (geometry-preserving old-scan images), `run_scan_robustness.ps1`, `score_scan_robustness.ps1` |
 | · demo | `demo.py` (one command to a running twin), `make_before_after.py` (also makes the social preview card), `make_demo_gif.py` |
@@ -380,7 +385,8 @@ it at a real site.
 | Round 2: tiling, computer-vision line tracing, extraction-to-twin converter, scored on sealed holdouts | Done |
 | Round 3: risk-tiered review queue; instrument parents chosen along the traced line | Done (one partial result, reported) |
 | Ignition build: TE replay values and alarms, extracted twin as placeholders, Perspective screens, 9-check verifier with 5 planted faults | Historical build: done, and also verified when loaded by hand ([quickstart](docs/IGNITION_QUICKSTART.md)) |
-| Current 23-view project in a native gateway | The build before the topology correction passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 23/23 routes, 277/277 navigation targets; 390 px layout partial ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not)). The corrected build (purge tags moved to the separator, [entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) passes the offline suite but has not been re-imported |
+| Current project in a native gateway | The corrected build (purge on the separator, [entry 39](docs/JOURNAL.md#39-verify-the-te-topology-against-the-simulator-source)) passed in a disposable Ignition 8.3.10 gateway on 2026-10-13: V1–V8, 24/24 routes, 284/284 navigation targets, data-source loss and recovery, header count = alarm table, 390 px `/m` overview ([journal entry 40](docs/JOURNAL.md#40-count-what-the-bands-detect-and-make-lost-data-an-alarm)) |
+| Fault detection with the normal bands, all 21 TE faults | Done: 17/21 detected, median 48 min, 0 false alarms in 193 h of held-out normal data; misses 3, 9, 15, 19; PCA T² baseline reimplemented ([EVALUATION.md](docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults)) |
 | Review loop and point mapping: decisions and data addresses flow into Ignition, PI AF and the screens | Tooling done; verified in a running gateway with synthetic data |
 | Operator screens (ISA-101 style): overview, unit screens, trends, learned normal bands, drawings as backgrounds | First pass done and checked in a gateway; key values and spans are Claude's choice, not yet reviewed by operations |
 | Round 4: robustness on old-scan images, pre-registered | Done (measured; where it breaks is reported) |

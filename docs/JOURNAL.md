@@ -1769,6 +1769,8 @@ write-only build (provider `f735cebe…` unchanged, project ZIP `1a6ce79c…`), 
 | Fault replay on screen | PASS: amber values before the alarm, PI-107 red at the alarm, alarm table populated | `native-overview-fault-early.png`, `native-overview-fault-alarm.png`, `native-reactor-fault-alarm.png`, `native-alarms-fault.png` |
 | MS 14010 callout | PASS: no value label, PV or OPC address; both FT 1401 records keep separate placeholders | receipt `exports`, `native-sheet0-not-connected.png` |
 
+*(Note added with entry 40: the `native-*.png` screenshots named in this table were replaced by the entry 40 run of the corrected build. The originals from this run are in the repository history at commit `f5c270e`.)*
+
 **What went wrong on the way, besides the product bugs.** My first scroll test said the unit pages could not
 scroll, and I nearly "fixed" that. Git Bash had rewritten the route argument into a Windows path, so the browser
 had opened a missing page. Re-run correctly, the pages already scroll; no change was made. The browser harness also
@@ -1891,3 +1893,101 @@ model, the DCS configuration, or the historian's tag-to-unit hierarchy. Check th
 against it mechanically, and keep the disagreements as a list for the process engineer. What still needs a person
 here: PI-116's owner; whether the S7/S7b and S8/S8b splits and FI-105's segment match how a real plant would draw
 them; and every tap position, size and pipe route, none of which any simulator records.
+
+## 40. Count what the bands detect, and make lost data an alarm
+
+**2026-10-13.** Three gaps a reviewer would point at first. The fault demo showed one easy fault and called the
+bands an early warning. When the replay stopped, every value read UNKNOWN while the header still said "Alarms: 0".
+And the header counted tags in alarm, not alarms. A fourth: at 390 px the screens were a 1600 px control room you
+scroll around in.
+
+**How often do the bands detect a fault?** I fetched the rest of the Braatz set (44 files; every one is
+byte-identical to the Braatz group's own archive at MIT, which I checked before recording the checksums) and wrote
+the rule down before scoring any fault file: the plant is flagged when any of the 52 channels is outside its band,
+and a fault counts as detected at the first post-onset sample that starts 3 flagged samples in a row (9 minutes).
+Nothing was tuned on fault data; the bands are the shipped ones (K = 6). False alarms were measured on normal
+running the bands never fitted on: the separate normal training run and the fault-free first 8 hours of all 21
+fault runs, 193 plant hours in all.
+
+| | Shipped bands | PCA T² baseline |
+|---|---|---|
+| Faults detected | **17 of 21** | 19 of 21, of which 3 are probably chance (below) |
+| Median delay, detected faults | 48 min | 84 min |
+| False alarms, held-out normal data | **0 in 193 h** (95% upper bound about 0.37 a day) | 5 in 216 h, 1.04% of samples flagged |
+
+The bands miss faults 3, 9 and 15, which I had named as expected misses before scoring (the literature widely
+reports them as near-invisible in these variables), and 19, which PCA misses too. Slow faults are late: fault 21 is
+flagged after 26.5 hours. PCA T² is my own reimplementation (numpy, parallel analysis, F threshold), not a
+literature number; I couldn't verify a published table's exact values from a primary source, so none is quoted.
+Its "detections" of faults 3, 4 and 15 come after 18 to 34 hours with 2–8% of samples flagged, which is close to
+its own false-alarm rate, so I count them as chance. On fault 4 the bands are clearly better (6 minutes, through
+TI-109). Details: [EVALUATION.md section 4b](EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults).
+The first tags to leave their band are reported per fault by tag. They don't depend on which unit a tag belongs
+to, so the topology correction in entry 39 doesn't change them.
+
+**Lost data is now an alarm, of its own kind.** Two expression tags count the fed values that are not Good, one
+per data connection (52 replay values, 24 demo points). Each carries a "Data source lost" alarm. ISA-18.2 treats
+this as a diagnostic, not a process alarm: it says the operator has lost sight of the process. So the header now
+has three boxes: "Process alarms: N", a data-source box that turns dark slate and reads DATA SOURCE LOST, and
+"Outside band". Process alarms now count each configured alarm once, so PI-107's two alarms count as two, which is
+what the alarm table lists. Two choices here are mine alone and need operations: the diagnostic priority (Medium)
+and the dark slate colour. Neither the setpoints nor any process alarm changed.
+
+**"Not connected" and UNKNOWN now look the same everywhere.** Before, the same no-source agitator read NOT
+CONNECTED in its table row and UNKNOWN in its label beside the reactor drawing, and a mapped drawing value with no data looked like a
+normal white label. Now there are two states with one look each: *not connected* (no data source configured;
+muted italic on white, dashed border) and *UNKNOWN* (a source is configured but nothing Good is arriving; muted on
+grey). The rationale is ISA-101's intent, stated rather than quoted: one documented style in which an indication
+means the same thing on every screen, quality never mistaken for a value, and alarm colours kept for alarms.
+Exception, recorded in a test: two schematic labels with alarms keep their alarm colour binding, because a label has
+one background.
+
+**A narrow overview.** `/m` is a 390 px view: process alarm count, data source and band count first, then the active
+alarm list, then the six units stacked in process order with the same key values as the overview, coloured the
+same way. The control-room views are unchanged in layout and still 1600 px; the tiles link to them.
+
+**Merged first.** Midway, the topology check (entry 39) moved the purge and its tags from the compressor to the
+separator. I merged that branch before the gateway run and regenerated the provider, project and drawings instead of
+merging generated files. The auto-merged provider would have been wrong: its new data-source expression still
+pointed at the purge tags' old compressor paths.
+
+**What the gateway found.** The first import held both data-source alarms active with a count of 0. Ignition's
+AboveValue mode is inclusive (the 3,000 kPa shutdown alarm firing at exactly 3,000.0 had already shown that, and I
+didn't apply it), so a setpoint of 0 meant "0 or more". The setpoint is now 0.5, with a test. Walking the screens
+with the replay stopped showed every band indicator drawing its pointer at the scale minimum, which reads as a real
+low value; it is now hidden without Good data. And the Alarms page still said "the only alarms are the published
+ones", which stopped being true. All three were fixed before the final run of commit `4a00c35`.
+
+| Check | Result |
+|---|---|
+| V1–V8 | PASS: 1,256 tag nodes and 24 views, 0 differences; 1,448 bindings; 76 Good, 335 Bad as designed; writes refused; PI-107 alarm 0.5 s after crossing |
+| Routes and navigation | PASS: 24/24 load and reload; 284/284 clicks, Back after each, 0 console errors |
+| Replay stopped / restarted | PASS: diagnostic fires, header DATA SOURCE LOST, 52 UNKNOWN; clears within about 25 s of restart |
+| Demo points stopped / restarted | PASS: second diagnostic fires and clears |
+| Header vs alarm table | 40/40 samples through the fault, 29/30 through a loss and recovery. The miss, and one capture, fell within about 2 s of an alarm changing state: the header polls every second, the table refreshes every two |
+| Process alarm active when data is lost | Observed: PI-107's alarm stays active on its last value while PI-107 reads UNKNOWN. Ignition's default; whether stale data should hold, clear or suppress a process alarm is an operations decision |
+| `/m` at 390 × 844 | PASS: no horizontal scroll, alarms first, honest UNKNOWN and DATA SOURCE LOST |
+
+The `native-*.png` screenshots now show this build; entry 38's originals are in the history at `f5c270e`.
+Receipt: [`native-current-20261013-alarms.json`](../out/ignition/gateway/receipts/native-current-20261013-alarms.json).
+Afterwards I removed the containers, the volume, the network, both images and the build cache, and checked that
+Docker held nothing. The rollback is in the receipt.
+
+**What went wrong on the way.** Git Bash rewrote a route argument into a Windows path again, the same trap as entry
+38: my alarm-count sampler asked the gateway for a project called `PIDTwinC:` for six minutes before I read the
+gateway log. My scratch orchestration also had two path bugs that cost one stage-1 rerun. None reached the
+committed tools; the sampler is now a `count` mode of the browser harness, added after the run.
+
+**Not established:** real phones (headless Chromium only), operator usability, operations approval of the diagnostic
+priority and of process-alarm behaviour on stale data, and anything beyond one simulated operating mode for the
+fault evaluation.
+
+**Lesson:** a detection claim needs a denominator and a false-alarm rate measured on data the method never saw,
+and both numbers belong in the same sentence. The single fault was true and misleading. On the alarm side, a
+quiet header is a claim too: "Alarms: 0" over a screen of UNKNOWN said nothing was wrong, when the truth was that
+nothing could be known.
+
+**At your plant:** score the band, or any detector, on every recorded upset you have, with the rule fixed first,
+and measure false alarms over weeks of normal running before trusting the colour. Treat loss of a data source as a
+diagnostic alarm with an owner and a response, separate from process alarms, and decide with operations what a
+process alarm should do while its value is stale.

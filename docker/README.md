@@ -1,7 +1,7 @@
 # The one-click demo (Docker)
 
 > **This demo restores a historical backup.** `docker/twin-demo.gwbk` holds the October 8 build of the screens, not
-> the current 23-view project, and its CI checks cover that backup only. The current project was tested separately in a
+> the current 24-view project, and its CI checks cover that backup only. The current project was tested separately in a
 > disposable Ignition gateway: see [the native acceptance page](../docs/IGNITION_ACCEPTANCE.md). All Tennessee Eastman
 > values are recorded replay, not a live process simulation.
 
