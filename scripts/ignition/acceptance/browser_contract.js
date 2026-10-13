@@ -7,6 +7,10 @@
 //       Back/Forward chain; repeated rapid clicks.
 //   node browser_contract.js capture CONTRACT.json OUTDIR LABEL desktop|narrow ROUTE...
 //       Screenshots of each route (scrolling the view; at most MAXSHOTS per route) plus text counts.
+//   node browser_contract.js count OUT.json SAMPLES INTERVAL_MS
+//       Samples /alarms: the header's "Process alarms: N" plus the data-source box against the alarm table's own
+//       "N ACTIVE" count. Ported from the scratch sampler used in the 2026-10-13 run (journal entry 40); it counts
+//       one diagnostic alarm when the box reads DATA SOURCE LOST, so with both sources lost it under-counts.
 //
 // Environment: PIDTWIN_BASE (default http://localhost:8088/data/perspective/client/PIDTwin),
 // PLAYWRIGHT_MODULE (default "playwright"; a path to an installed package also works).
@@ -146,7 +150,28 @@ async function capture(contractPath, outDir, label, vpName, routes) {
   await browser.close();
 }
 
+async function count(outPath, samples, gap) {
+  const browser = await chromium.launch();
+  const page = await (await browser.newContext({ viewport: VIEWPORTS.desktop })).newPage();
+  await page.goto(url('/alarms'), { waitUntil: 'load' });
+  await page.waitForTimeout(8000);
+  const rows = [];
+  for (let i = 0; i < Number(samples); i++) {
+    const t = await page.innerText('.ia_container--root', { timeout: 10000 }).catch(() => '');
+    const p = Number((t.match(/Process alarms: (\d+)/) || [])[1]);
+    const d = /DATA SOURCE LOST/.test(t) ? 1 : 0;
+    const a = Number((t.match(/(\d+)\s+ACTIVE/) || [])[1]);
+    rows.push({ utc: new Date().toISOString(), header_process: p, header_diag_lost: d, table_active: a, match: p + d === a });
+    console.log(JSON.stringify(rows.at(-1)));
+    await page.waitForTimeout(Number(gap));
+  }
+  fs.writeFileSync(outPath, JSON.stringify(rows, null, 1));
+  console.log(`header matches table ${rows.filter(r => r.match).length}/${rows.length}`);
+  await browser.close();
+}
+
 const [mode, ...args] = process.argv.slice(2);
 (mode === 'contract' ? contract(args[0], args[1]) : mode === 'capture' ? capture(args[0], args[1], args[2], args[3], args.slice(4))
-  : Promise.reject(new Error('usage: contract CONTRACT OUT | capture CONTRACT OUTDIR LABEL desktop|narrow ROUTE...')))
+  : mode === 'count' ? count(args[0], args[1] || 30, args[2] || 3000)
+  : Promise.reject(new Error('usage: contract CONTRACT OUT | capture CONTRACT OUTDIR LABEL desktop|narrow ROUTE... | count OUT [N] [MS]')))
   .catch(e => { console.error(e); process.exit(1); });
