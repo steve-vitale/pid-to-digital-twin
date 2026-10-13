@@ -8,6 +8,7 @@ Two kinds of model are accepted:
 Stdlib only. Usage:  python scripts/generate.py [path/to/model.json]
 """
 import csv
+import hashlib
 import json
 import io
 import math
@@ -71,6 +72,37 @@ def _safe_filename(value):
     return isinstance(value, str) and bool(value) and not any(c in value for c in '/\\\0') and value not in ('.', '..')
 
 
+_UNPORTABLE = set('<>:"/\\|?*')
+_RESERVED = {"CON", "PRN", "AUX", "NUL"} | {f"{p}{i}" for p in ("COM", "LPT") for i in range(1, 10)}
+
+
+def portable_filename(value):
+    """Output filename stem for an identifier: unchanged when every common filesystem accepts it.
+
+    Otherwise (characters Windows forbids, control characters, a trailing dot or space, a reserved device name)
+    those characters become "_" and a short hash of the original is appended, so distinct identifiers keep distinct
+    files. Only the filename changes: the identifier inside every export, and its XML escaping, stay as supplied.
+    """
+    if (value and value[-1] not in ". " and value.split(".")[0].upper() not in _RESERVED
+            and not any(c in _UNPORTABLE or ord(c) < 32 for c in value)):
+        return value
+    safe = "".join("_" if c in _UNPORTABLE or ord(c) < 32 else c for c in value).rstrip(". ")
+    return f"{safe}-{hashlib.sha256(value.encode('utf-8')).hexdigest()[:8]}"
+
+
+def _filename_collisions(idents, reserved=()):
+    """Identifiers whose output files would collide on a case-insensitive filesystem (Windows, macOS)."""
+    seen, problems = {name.lower(): None for name in reserved}, []
+    for ident in idents:
+        key = portable_filename(ident).lower()
+        if key in seen:
+            other = repr(seen[key]) if seen[key] is not None else "a reserved bundle file"
+            problems.append(f"{ident!r}: output filename collides with {other} on case-insensitive filesystems")
+        else:
+            seen[key] = ident
+    return problems
+
+
 def _finite(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
@@ -81,6 +113,8 @@ def validate(model):
                                        "instruments": "tag", "final_elements": "tag"})
     if problems:
         return problems
+    problems += ["unit " + p for p in _filename_collisions(
+        [u["id"] for u in model["units"] if _safe_filename(u["id"])], reserved=("overview",))]
     for u in model["units"]:
         if not _safe_filename(u["id"]):
             problems.append(f"unit {u['id']!r}: unsafe output filename")
@@ -805,6 +839,7 @@ def validate_twin(model):
         if size is not None and (not isinstance(size, (list, tuple)) or len(size) != 2
                                  or not all(_finite(v) and v > 0 for v in size)):
             problems.append(f"system {system['id']}: image_size_px needs two positive finite dimensions")
+    problems += ["sheet " + p for p in _filename_collisions(sorted(sheets))]
     for x in assets:
         if x.get("system") not in systems:
             problems.append(f"{x['id']}: unknown system {x.get('system')}")
@@ -890,7 +925,7 @@ def export_twin(model, out_dir, images_dir=None):
     out_dir = Path(out_dir)
 
     def render():
-        bundle = {f"svg/sheet_{sheet}.svg": svg
+        bundle = {f"svg/sheet_{portable_filename(sheet)}.svg": svg
                   for sheet, svg in twin_svgs(model, images_dir, out_dir).items()}
         bundle["ignition/tags.json"] = json.dumps(twin_ignition(model), indent=1)
         pi_rows = twin_pi_rows(model)
@@ -913,7 +948,7 @@ def export_seed(model, out_dir):
     """Validate/render the seed bundle before any output is created or overwritten."""
     def render():
         bundle = {"svg/overview.svg": overview_svg(model)}
-        bundle.update({f"svg/{u['id']}.svg": unit_svg(model, u) for u in model["units"]})
+        bundle.update({f"svg/{portable_filename(u['id'])}.svg": unit_svg(model, u) for u in model["units"]})
         bundle["ignition/te_tags.json"] = json.dumps(ignition_tags(model), indent=2)
         bundle["pi/pi_builder_af.csv"] = pi_csv_text(PI_COLS, pi_af_rows(model))
         bundle["ops_review_sheet.csv"] = _csv_text(REVIEW_COLS, review_rows(model))

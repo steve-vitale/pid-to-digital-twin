@@ -46,6 +46,16 @@ import json
 import sys
 from pathlib import Path
 app = Path.cwd()
+checkout = Path(sys.argv[1]).resolve()
+# The source checkout must not be importable: the payload alone has to carry every module.
+leaks = [p for p in sys.path if Path(p or '.').resolve() == checkout
+         or Path(p or '.').resolve().is_relative_to(checkout / 'scripts')]
+assert not leaks, leaks
+try:
+    import asyncua  # noqa: F401  installed dependency, not part of the COPY payload
+except ImportError as error:
+    raise SystemExit('asyncua is not importable by ' + sys.executable + ' (' + str(error) + '); '
+                     'install requirements.txt for this interpreter. The packaging check cannot run.')
 sys.path.insert(0, str(app / 'scripts/ignition'))
 import te_sim_server
 import demo_points_server
@@ -58,9 +68,11 @@ assert len(columns) == 52 and set(columns.values()) == set(range(52))
 assert 'SC-212' not in columns
 print(json.dumps(columns, sort_keys=True))
 """
-        # A fresh isolated interpreter excludes the checkout and PYTHONPATH.
-        # Installed asyncua remains available; no dependency stubs mask failures.
-        result = subprocess.run([sys.executable, '-I', '-c', probe], cwd=app,
+        # A fresh interpreter excludes the checkout and PYTHONPATH: -E ignores PYTHON* variables and -P (3.11+)
+        # never prepends the working/script directory. Unlike -I it keeps the user site directory, because an
+        # installed dependency (a per-user pip install on Windows, for example) is legitimately installed; the probe
+        # asserts the checkout itself is absent from sys.path instead. No dependency stubs mask failures.
+        result = subprocess.run([sys.executable, '-E', '-P', '-c', probe, str(ROOT)], cwd=app,
                                 capture_output=True, text=True, timeout=30)
         assert result.returncode == 0, result.stdout + result.stderr
         assert json.loads(result.stdout) == expected_columns

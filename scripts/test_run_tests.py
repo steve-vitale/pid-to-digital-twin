@@ -53,6 +53,19 @@ class RunnerControls(unittest.TestCase):
         self.assertNotIn('SKIP', output)
         self.assertEqual(len(set(runner.TESTS)), len(runner.TESTS))
 
+    def test_platform_skips_are_surfaced_and_withhold_the_complete_pass(self):
+        output = io.StringIO()
+        result = subprocess.CompletedProcess([], 0, stdout='OK (skipped=1)\n',
+                                             stderr='SKIP case: this Windows account cannot create symlinks\n')
+        with patch.object(runner, 'prerequisites', return_value=[]), \
+             patch.object(runner.subprocess, 'run', return_value=result), contextlib.redirect_stdout(output):
+            self.assertEqual(runner.main([]), 0)
+        text = output.getvalue()
+        self.assertIn('SKIP (platform) case: this Windows account cannot create symlinks', text)
+        self.assertIn(f'{len(runner.TESTS)} sub-case(s) skipped by the platform', text)
+        self.assertIn('not a complete pass here', text)
+        self.assertNotIn('FULL CACHED-DATA suite passed', text)
+
     def test_source_only_exclusions_and_label_are_explicit(self):
         status, output, run = self.invoke(['--source-only'])
         self.assertEqual(status, 0)

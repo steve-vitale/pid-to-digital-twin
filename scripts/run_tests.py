@@ -125,6 +125,7 @@ def main(argv=None):
         return 0
     selected = SOURCE_TESTS if args.source_only else TESTS
     failed = 0
+    skipped = []  # (script, reason): platform gaps printed by scripts/platform_capabilities.py, never silent
     for script in selected:
         # -S makes the source-only promise testable even on a machine with packages installed.
         command = [sys.executable] + (["-S"] if args.source_only else []) + [script]
@@ -138,11 +139,19 @@ def main(argv=None):
         status = "PASS" if result.returncode == 0 else "FAIL"
         last = (result.stdout.strip().splitlines() or result.stderr.strip().splitlines() or [""])[-1]
         print(f"{status}  {script}: {last}".rstrip())
+        for line in (result.stdout + "\n" + result.stderr).splitlines():
+            if line.startswith("SKIP "):
+                skipped.append((script, line[5:]))
+                print(f"      SKIP (platform) {line[5:]}")
         if result.returncode:
             print(result.stdout[-2000:], result.stderr[-2000:])
-    print(f"{label}: {len(selected) - failed}/{len(selected)} scripts passed; {failed} failed.")
+    print(f"{label}: {len(selected) - failed}/{len(selected)} scripts passed; {failed} failed; "
+          f"{len(skipped)} sub-case(s) skipped by the platform.")
     if args.source_only:
         print("SOURCE-ONLY result is NOT a full-suite pass; cached-data and dependency checks were excluded.")
+    elif not failed and skipped:
+        print("FULL CACHED-DATA scripts passed, but the SKIP lines above did not run on this machine: "
+              "not a complete pass here. This is offline evidence, not gateway/runtime acceptance.")
     elif not failed:
         print("FULL CACHED-DATA suite passed. This is offline evidence, not gateway/runtime acceptance.")
     return 1 if failed else 0

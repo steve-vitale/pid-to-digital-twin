@@ -8,6 +8,8 @@ import unittest
 from unittest.mock import patch
 import urllib.request
 
+from platform_capabilities import symlink_or_skip
+
 import site_extraction_workflow as workflow
 from test_site_drawing_intake import png
 
@@ -95,7 +97,7 @@ class WorkflowControls(unittest.TestCase):
         self.assertEqual(marker.read_text(), 'reviewer decisions preserved')
 
     def test_symlink_outputs_rejected(self):
-        self.out.symlink_to(self.root / 'missing-target')
+        symlink_or_skip(self, self.out, self.root / 'missing-target')
         with self.assertRaises(ValueError):
             self.collect()
         with self.assertRaises(ValueError):

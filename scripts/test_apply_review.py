@@ -6,6 +6,7 @@ re-applying changes nothing, the regenerated sheet round-trips, and the decision
 import csv
 import copy
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -34,7 +35,10 @@ def run(model, rows, cols, tmp, extra=()):
             w.writerow({c: r.get(c, "") for c in cols})
     p = subprocess.run([sys.executable, str(ROOT / "scripts" / "apply_review.py"), str(model), str(sheet),
                         "--reviewer", "Test reviewer", "--date", "2026-10-08", "--record-dir", str(tmp / "rec"),
-                        *extra], capture_output=True, text=True, encoding="utf-8")
+                        *extra], capture_output=True, text=True, encoding="utf-8",
+                       # This test reads the child's output as UTF-8, so it asks for UTF-8: a piped Windows child
+                       # otherwise writes the ANSI code page and the read fails on the first non-ASCII character.
+                       env={**os.environ, "PYTHONIOENCODING": "utf-8"})
     rec = tmp / "rec" / f"2026-10-08-{model.stem if model.name != 'plant_model.json' else model.parent.name}.json"
     return p, (json.loads(rec.read_text(encoding="utf-8")) if rec.exists() else None)
 

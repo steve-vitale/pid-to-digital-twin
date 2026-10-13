@@ -14,6 +14,8 @@ import urllib.request
 from pathlib import Path
 from unittest.mock import patch
 
+from platform_capabilities import symlink_or_skip
+
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("acceptance_preflight", ROOT / "scripts/ignition/acceptance_preflight.py")
 ap = importlib.util.module_from_spec(SPEC)
@@ -163,15 +165,18 @@ class AcceptancePreflightControls(unittest.TestCase):
         self.save_candidate()
         self.assertEqual(self.invoke()[0], 2)
 
-    def test_paths_reject_escape_urls_aliases_and_external_symlinks(self):
+    def test_paths_reject_escape_urls_and_aliases(self):
         for name in ("../outside", "/absolute", "a/../data/te_process_model.json", "./data/te_process_model.json",
                      "https://example.test/capture", "source\\model.json", "source//model.json"):
             with self.subTest(path=name), self.assertRaises(ap.InvalidEvidence):
                 ap.local_file(self.root, name)
+
+    def test_paths_reject_external_symlinks(self):
+        # Separate test so a platform that refuses symlink creation skips only this sub-case, with a printed reason.
         with tempfile.TemporaryDirectory() as outside:
             external = Path(outside) / "secret"
             external.write_text("not for preflight")
-            (self.root / "escape").symlink_to(external)
+            symlink_or_skip(self, self.root / "escape", external)
             with self.assertRaises(ap.InvalidEvidence):
                 ap.local_file(self.root, "escape")
 

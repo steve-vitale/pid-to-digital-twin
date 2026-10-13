@@ -77,10 +77,35 @@ class ExportReviewBoundaryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             generate.export_seed(model, tmp)
             root = ET.fromstring((Path(tmp) / 'svg/overview.svg').read_text())
+            # The unit's own SVG gets a portable filename (Windows forbids quotes and angle brackets in names);
+            # its content still carries the literal identifier through XML escaping.
+            unit_file = Path(tmp) / 'svg' / (generate.portable_filename(text) + '.svg')
+            self.assertTrue(unit_file.is_file())
+            self.assertIn(text, ''.join(ET.fromstring(unit_file.read_text(encoding='utf-8')).itertext()))
+            self.assertTrue((Path(tmp) / 'svg' / (model['units'][1]['id'] + '.svg')).is_file())
         group = next(n for n in root.iter(NS + 'g') if n.get('data-tag') == instrument['tag'])
         self.assertEqual(group.get('data-uom'), text)
         self.assertEqual(set(group.attrib), {'id', 'data-tag', 'data-unit', 'data-uom', 'transform'})
         self.assertIn(text, ''.join(root.itertext()))
+
+    def test_output_filenames_are_portable_distinct_and_collision_checked(self):
+        for ident in ('U-100', 'R-101', 'sheet 3', 'Ünïcode-7'):
+            self.assertEqual(generate.portable_filename(ident), ident)  # existing outputs keep their names
+        names = {}
+        for ident in ('a"b', 'a<b', 'a:b', 'a|b', 'a?b', 'a*b', 'tab\there', 'trailing.', 'trailing ', 'CON', 'nul.txt'):
+            name = generate.portable_filename(ident)
+            self.assertFalse(set(name) & set('<>:"/\\|?*'), ident)
+            self.assertFalse(any(ord(c) < 32 for c in name), ident)
+            self.assertNotIn(name[-1], '. ')
+            names[name] = ident
+        self.assertEqual(len(names), 11)  # the hash suffix keeps sanitized identifiers distinct
+        model = json.loads((ROOT / 'data/te_process_model.json').read_text())
+        for clash in ('u-100', 'OVERVIEW'):  # case-insensitive filesystems: one file would overwrite another
+            with self.subTest(clash=clash):
+                bad = copy.deepcopy(model)
+                bad['units'].append(dict(copy.deepcopy(bad['units'][0]), id=clash))
+                self.assertTrue(any('collides' in p for p in generate.validate(bad)), clash)
+        self.assertFalse([p for p in generate.validate(model) if 'collides' in p])
 
     def test_every_review_csv_cell_uses_text_encoding(self):
         values = ['=1+1', '+engineering', '-engineering', '@engineering', ' \t=1',
