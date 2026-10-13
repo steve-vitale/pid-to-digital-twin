@@ -37,6 +37,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_trace_connections_v2.py",
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
+    "scripts/test_fault_detection_eval.py",
 )
 TESTS = SOURCE_TESTS + FULL_ONLY_TESTS
 DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
