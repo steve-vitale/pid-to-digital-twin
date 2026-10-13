@@ -132,7 +132,7 @@ async function capture(contractPath, outDir, label, vpName, routes) {
     }
     const text = await page.innerText('.ia_container--root');
     const count = re => (text.match(re) || []).length;
-    out.push({ route: r, loaded: loaded.ok, geo, files, null_text: count(/bnullb/g), unknown: count(/UNKNOWN/g), not_connected: count(/not connected/gi),
+    out.push({ route: r, loaded: loaded.ok, geo, files, null_text: count(/\bnull\b/g), unknown: count(/UNKNOWN/g), not_connected: count(/not connected/gi),
                alarm_active_text: count(/ALARM ACTIVE/g), outside_band_text: count(/Outside normal band/g),
                header: (text.match(/(Alarms|Outside band): [^\n]*/g) || []).join(' | ') });
     console.log(JSON.stringify(out.at(-1)));
