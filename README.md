@@ -11,6 +11,24 @@ tests how much of that AI can do, how to check its work honestly, and what a pla
 
 ![Before and after: a crop of a public OPEN100 drawing, and the same crop with every extracted symbol boxed and coloured by review risk tier](docs/screenshots/before-after-sheet0.png)
 
+## Data first: what we know, how sure we are
+
+Everything here is built from two datasets, and each starts with an assessment before anything is built: where the
+data came from, what has been checked against an independent source, and what is inferred. **Every output inherits
+its inputs' confidence; nothing downstream upgrades it.** The live replay, the mimic, the 3D tour data and the LOTO
+candidates are **proof-of-concept outputs, built to iterate on**, and are labelled that way in their own files. One
+manifest lists every stage, and `python scripts/pipeline.py status` shows which outputs are stale after a
+correction; `rebuild --from <stage>` carries it forward. Stage by stage: [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md).
+
+| Dataset | Element class | Checked against | How sure (`python scripts/pipeline.py confidence`) |
+|---|---|---|---|
+| Tennessee Eastman | 37 instruments and valves | the open simulator source code | 36 confirmed, 1 corrected; 0 reviewed by operations |
+| Tennessee Eastman | 6 units, 13 streams | not yet on this branch | unverified; a topology check is pending merge |
+| OPEN100 (12 real P&IDs) | symbols and connections | third-party answer keys, sealed drawings | symbols found F1 0.97, connections 0.89; review load 17.8 per 100 |
+| OPEN100 | tag text | nothing: the answer keys carry no text | unscored; 56 placeholder tags flagged |
+| OPEN100 | all 2,886 items of the 12-sheet twin | risk tiers calibrated on development drawings | all unverified; 1,833 green / 676 amber / 377 red |
+| Both | replay, mimic layout, 3D scene data, LOTO candidates | nothing yet | proof of concept |
+
 ## Results (sealed drawings nobody tuned on)
 
 Review load = the corrections a reviewer must make per 100 items on the drawing. Lower is better. Around 100 is
@@ -313,6 +331,7 @@ it at a real site.
 | Path | What's there |
 |---|---|
 | [`docs/`](docs/) | Everything to read; see [Read next](#read-next). Screenshots are in [`docs/screenshots/`](docs/screenshots/) |
+| [`pipeline/`](pipeline/stages.json) | The stage manifest and lock: `scripts/pipeline.py` (status, rebuild, confidence), `provenance.py`, and two proof-of-concept generators, `build_scene_data.py` and `export_mimic_layout.py` |
 | [`data/te_process_model.json`](data/te_process_model.json) | The Tennessee Eastman seed model, checked against the simulator source |
 | [`data/sheet_registers/`](data/sheet_registers/) | A drawing index read from the OPEN100 title blocks (an example of what a plant supplies) |
 | [`data/io_lists/`](data/io_lists/README.md) | A synthetic I/O list for the point-mapping demo, shaped like a real export |
@@ -343,6 +362,7 @@ it at a real site.
 
 | Document | For |
 |---|---|
+| [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md) | Each dataset's Stage 0 confidence assessment, then every stage: input, treatment, output, confidence carried, who checked it |
 | [docs/GOAL.md](docs/GOAL.md) | The round-2 goal, review-load score, sealed splits, decision rule, and results |
 | [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |

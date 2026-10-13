@@ -1803,3 +1803,71 @@ still read as broken: Bad was the right quality for those 334 instruments, and `
 screens. Click every link, stop the data source, and watch what an operator would see. Keep "no data source" and
 "broken" visibly different. None of this establishes operator usability, responsive physics, PI integration or
 plant readiness. The screens were checked against recorded replay and synthetic points only.
+
+## 41. Start from the data: assess both datasets first, then make every correction travel
+
+**What:** a written Stage 0 for each dataset (where the data came from, what is checked, what is inferred, how sure
+we are per element class), a machine-readable list of every stage after it, and an orchestrator that shows which
+outputs are stale after a correction and rebuilds them.
+
+**How:**
+- [DATA_LINEAGE.md](DATA_LINEAGE.md) lays out Tennessee Eastman and OPEN100 as staged pipelines: input, treatment,
+  output, confidence carried forward, and who or what checked it. The numbers come from files already in the repo:
+  37 TE tags checked against the simulator source (36 confirmed, 1 corrected), units and streams not yet checked on
+  this branch, OPEN100 review load 17.8 per 100 on sealed drawings, and 2,886 twin items, all unverified.
+- [`pipeline/stages.json`](../pipeline/stages.json) lists the 13 stages with their real scripts, inputs, outputs,
+  prerequisites and the provenance fields each output carries. `scripts/pipeline.py` hashes each stage's inputs,
+  code and config into a lock file when it builds the stage; `status` marks a stage stale when any of them changed;
+  `rebuild --from <stage>` re-runs it and everything downstream; `confidence` rolls the per-element fields
+  (source check, review status, risk tier, tag status) up per dataset.
+- `scripts/provenance.py` reads one item's provenance from fields the models already carry. The seed exports now
+  end each Ignition tag's documentation and each PI attribute's description with
+  `source check: … | ops review: …`, the way the extracted twin's exports already did. Two new generators are
+  labelled proof of concept in their own files: the overview mimic as layout data, and 3D scene data with
+  inferred LOTO candidates.
+- `scripts/test_pipeline.py` copies the repo to a temp folder, moves FI-110 from K-101 to V-101 with
+  `apply_review.py` (one part of the purge correction the topology check makes), rebuilds from the model, and checks the move in
+  the Ignition tags, the PI sheet, the review sheet, the mimic layout and the scene data. It also checks that no
+  script changed and that a second rebuild writes identical bytes.
+
+**What the test found:** the overview mimic picked its readings from a hard-coded list per unit. With FI-110 moved
+in the model, the reading's tag path followed the model (`TE_Plant/V-101/FI-110`) but the reading was still drawn
+beside the compressor. The topology branch had to edit that list by hand to move the purge. The fix is small: the
+list still chooses *which* readings the overview shows, and the model decides *where* each one is drawn. With the
+old placement put back, the propagation check fails on exactly that reading.
+
+**Why:**
+- **Changes at the start have to be cheap.** The review day will correct things in the models. If each correction
+  also needs hand edits in four generators, corrections stop happening, or they happen in one output and not the
+  others. A stale flag after the correction and one rebuild command make the cheap path the right one.
+- **Confidence has to be visible before results are.** It is easy to read a polished screen as a validated one.
+  Every output inherits its inputs' confidence, and the replay, the mimic, the 3D data and the LOTO candidates say
+  "proof of concept" in their own files. They are there to iterate on.
+- **Who checked matters as much as what was checked.** The rollup counts a review as an operations review only
+  when the reviewer string names an operations role. A confirmation by anyone else, including me, keeps its label
+  in every output. This trusts the string; nothing authenticates it.
+- **Rejected:** a general workflow engine (more machinery than 13 stages need), timestamps instead of hashes (a
+  checkout changes them; Windows and Linux line endings are normalised before hashing instead), and rewriting the
+  generators to emit provenance (a one-line passthrough where a format has a free-text field was enough).
+
+**What it does not do:**
+- Two stages need the TE replay download (the normal bands and the gateway kit). They show `NEVER BUILT HERE` in
+  this checkout: their committed outputs predate the lock, and I have not rebuilt them through the orchestrator.
+- Extraction, scoring and the twin build are "recorded" stages. They need model calls or run records that are not
+  committed, so the lock accepts their committed outputs as the record. It does not re-run them.
+- "Fresh" means rebuilt from current inputs, not correct.
+
+**Who did what:** Claude (Claude Code) wrote the manifest, the orchestrator, the tests, the docs and this entry
+from my direction. No second model reviewed it, and I have not walked the lineage myself yet; that walk is the
+review day ([review-kit/FOLLOW_THE_DATA.md](review-kit/FOLLOW_THE_DATA.md)). The source-only suite passed 16/16 on
+Windows with two symlink sub-cases skipped by the platform. The full suite was not run in this checkout because the
+TE replay files are not downloaded here.
+
+**Lesson:** a pipeline that regenerates outputs from one model can still hide hand-kept copies of that model. Here
+it was a per-unit list in a screen generator. The way to find them is to change one fact upstream and check every
+output for it, rather than read the generators.
+
+**At your plant:** write each source's Stage 0 before building anything: who owns it, what checks it, what is
+inferred, and how sure you are per element class. Then make sure every correction goes into the source, not an
+output, and that one command shows what a correction left stale. When a reviewer signs off, record their role with
+the decision, so a document-control check never reads as an operations approval.
