@@ -1683,3 +1683,34 @@ states. These are future recommendations, not implemented features; the full
 video was not viewed. Finish native acceptance before expanding 3D. Recorded TE
 replay and synthetic read-only OPEN100 values still establish neither responsive
 physics nor operational readiness or plant validation.
+
+## 37. Preserve a cold-reader replication review without overwriting active work
+
+**2026-10-13:** saved the supplied [replication documentation review](REPLICATION_COLD_READER_REVIEW_2026-10-13.md)
+of public `e565c74`, with a separate desktop comparison at
+`485f000f276b4c52ae2a91850a503cb921d57bb2`. The quickstart, README, replication,
+dataset-adaptation and twin-output guides retain the reviewed text, so the five
+documentation findings remain. The current-source handoff differs only by its
+earlier resume pointer. This preservation pass did not implement the suggested
+insertions or run a build, test, model call, gateway operation or publication.
+
+The two independently narrowed findings matter: the quickstart already warns
+about versions, but its import path can still mix a historical ZIP with a current
+provider. The preflight already supports alternate inputs and has synthetic
+fixtures, but its bare public commands lack an adjacent recipe for real-candidate
+evidence. These are replication/documentation gaps, not claims that checks pass
+without evidence or that all contract examples are absent.
+
+Later Claude-coauthored source commits have already addressed Windows test
+portability and added native acceptance tools/activity. Their code is preserved;
+the old Windows failures and NOT RUN snapshot are not silently restated as current
+results. Full acceptance still requires exact candidate observations and gate
+results; commit messages alone are not that evidence. Historical Docker starts
+remain a different artifact generation. Symbol/class correctness and a plausible
+graph parent remain distinct from verified measurement attachment, especially
+where the labeled dataset contains no instruments.
+
+No explicit reply or acknowledgement of the new review was found in the existing
+handoff files. A saved resume pointer makes it available without claiming Claude
+read or agreed with it. Generators, UI, main and the separate 3D-tour worktree are
+outside this docs-only continuation.
