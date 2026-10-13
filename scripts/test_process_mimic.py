@@ -50,8 +50,9 @@ class MimicTests(unittest.TestCase):
             for event in c.get('events', {}).get('dom', {}).values():
                 self.assertEqual(event['type'], 'nav')
         text = json.dumps(self.v)
-        self.assertIn('UNVERIFIED', text)
-        self.assertIn('ownership unresolved', text)
+        self.assertIn('verified against the simulator source', text)
+        self.assertIn('PI-116 ownership unresolved', text)
+        self.assertNotIn('TOPOLOGY UNVERIFIED', text)
         self.assertIn('not measured valve position', text)
     def test_no_unmapped_agitator_binding(self):
         for c in self.v['root']['children']:

@@ -325,6 +325,22 @@
           },
           "tags": [
             {
+              "name": "PurgeRate",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "kscmh",
+              "documentation": "FI-110 | XMEAS 10 | Purge rate | source check: confirmed | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FI-110"
+              }
+            },
+            {
               "name": "SeparatorTemperature",
               "tagType": "AtomicTag",
               "valueSource": "opc",
@@ -389,6 +405,38 @@
               }
             },
             {
+              "name": "PurgeGasAnalyzerComponentsAH",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "mol%",
+              "documentation": "AI-129 | XMEAS 29-36 | Purge gas analyzer (components A-H) | source check: confirmed | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.AI-129"
+              }
+            },
+            {
+              "name": "PurgeValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "documentation": "FV-206 | XMV 6 | Purge valve | source check: confirmed | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-206"
+              }
+            },
+            {
               "name": "SeparatorPotLiquidFlowValve",
               "tagType": "AtomicTag",
               "valueSource": "opc",
@@ -437,22 +485,6 @@
               }
             },
             {
-              "name": "PurgeRate",
-              "tagType": "AtomicTag",
-              "valueSource": "opc",
-              "dataType": "Float8",
-              "engUnit": "kscmh",
-              "documentation": "FI-110 | XMEAS 10 | Purge rate | source check: confirmed | ops review: unverified",
-              "opcServer": {
-                "bindType": "parameter",
-                "binding": "{OPCServer}"
-              },
-              "opcItemPath": {
-                "bindType": "parameter",
-                "binding": "{BasePath}.FI-110"
-              }
-            },
-            {
               "name": "CompressorWork",
               "tagType": "AtomicTag",
               "valueSource": "opc",
@@ -469,22 +501,6 @@
               }
             },
             {
-              "name": "PurgeGasAnalyzerComponentsAH",
-              "tagType": "AtomicTag",
-              "valueSource": "opc",
-              "dataType": "Float8",
-              "engUnit": "mol%",
-              "documentation": "AI-129 | XMEAS 29-36 | Purge gas analyzer (components A-H) | source check: confirmed | ops review: unverified",
-              "opcServer": {
-                "bindType": "parameter",
-                "binding": "{OPCServer}"
-              },
-              "opcItemPath": {
-                "bindType": "parameter",
-                "binding": "{BasePath}.AI-129"
-              }
-            },
-            {
               "name": "CompressorRecycleValve",
               "tagType": "AtomicTag",
               "valueSource": "opc",
@@ -498,22 +514,6 @@
               "opcItemPath": {
                 "bindType": "parameter",
                 "binding": "{BasePath}.HV-205"
-              }
-            },
-            {
-              "name": "PurgeValve",
-              "tagType": "AtomicTag",
-              "valueSource": "opc",
-              "dataType": "Float8",
-              "engUnit": "%",
-              "documentation": "FV-206 | XMV 6 | Purge valve | source check: confirmed | ops review: unverified",
-              "opcServer": {
-                "bindType": "parameter",
-                "binding": "{OPCServer}"
-              },
-              "opcItemPath": {
-                "bindType": "parameter",
-                "binding": "{BasePath}.FV-206"
               }
             }
           ]
@@ -704,7 +704,7 @@
           "name": "U-100",
           "tagType": "UdtInstance",
           "typeId": "FeedHeader",
-          "documentation": "Feed System | source check: unverified | ops review: unverified",
+          "documentation": "Feed System | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",
@@ -716,7 +716,7 @@
           "name": "R-101",
           "tagType": "UdtInstance",
           "typeId": "Reactor",
-          "documentation": "Reactor | source check: unverified | ops review: unverified",
+          "documentation": "Reactor | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",
@@ -728,7 +728,7 @@
           "name": "E-101",
           "tagType": "UdtInstance",
           "typeId": "Condenser",
-          "documentation": "Product Condenser | source check: unverified | ops review: unverified",
+          "documentation": "Product Condenser | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",
@@ -740,7 +740,7 @@
           "name": "V-101",
           "tagType": "UdtInstance",
           "typeId": "Separator",
-          "documentation": "Vapor/Liquid Separator | source check: unverified | ops review: unverified",
+          "documentation": "Vapor/Liquid Separator | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",
@@ -752,7 +752,7 @@
           "name": "K-101",
           "tagType": "UdtInstance",
           "typeId": "Compressor",
-          "documentation": "Recycle Compressor | source check: unverified | ops review: unverified",
+          "documentation": "Recycle Compressor | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",
@@ -764,7 +764,7 @@
           "name": "C-101",
           "tagType": "UdtInstance",
           "typeId": "Stripper",
-          "documentation": "Product Stripper | source check: unverified | ops review: unverified",
+          "documentation": "Product Stripper | source check: confirmed | ops review: unverified",
           "parameters": {
             "BasePath": {
               "dataType": "String",

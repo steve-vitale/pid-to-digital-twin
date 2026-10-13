@@ -4,7 +4,8 @@
    and every stage input is a source, produced upstream, or listed code/config.
 2. The committed lock matches the committed outputs: every auto stage that needs no download is FRESH.
 3. Propagation, on a temp copy of the repository (committed data is never touched):
-   - a Tennessee Eastman review correction (FI-110 moved from K-101 to V-101, applied with scripts/apply_review.py)
+   - a Tennessee Eastman review correction (a test fixture: FI-105 moved from K-101 to V-101, applied with
+     scripts/apply_review.py; the real FI-110 purge move already came from the topology check)
      makes the downstream stages stale; one `pipeline.py rebuild --from te.source` brings the change into the
      Ignition tags, the PI AF sheet, the review sheet, the mimic layout and the 3D scene data, with no file edited
      by hand, and everything rebuildable is fresh again;
@@ -169,12 +170,12 @@ def te_propagation(tmp):
     st = status(tmp)
     check("temp copy starts fresh", all(st[i][0] == "FRESH" for i in ["te.source"] + te_auto), st)
     layout = json.loads((tmp / "out/mimic/te_overview_layout.json").read_text(encoding="utf-8"))
-    before = next(r for r in layout["readings"] if r["tag"] == "FI-110")
-    check("control: before the correction FI-110 is drawn beside K-101", before["drawn_beside"] == "K-101", before)
+    before = next(r for r in layout["readings"] if r["tag"] == "FI-105")
+    check("control: before the correction FI-105 is drawn beside K-101", before["drawn_beside"] == "K-101", before)
 
     p = apply(tmp, "data/te_process_model.json",
-              [{"item_id": "FI-110", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "unit=V-101",
-                "OPS_notes": "test fixture: purge leaves the separator"}],
+              [{"item_id": "FI-105", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "unit=V-101",
+                "OPS_notes": "test fixture: a tag moved to show propagation, not a real finding"}],
               "B-1, process engineer (test fixture, not a real review)")
     check("review correction applied through scripts/apply_review.py", p.returncode == 0, p.stdout + p.stderr)
     p = apply(tmp, "data/te_process_model.json", [{"item_id": "FI-101", "OPS_confirm_or_correct": "confirm"}],
@@ -194,32 +195,32 @@ def te_propagation(tmp):
     folders = {t["name"]: t for t in tags["tags"]}
     type_of = {i["name"]: i["typeId"] for i in folders["TE_Plant"]["tags"]}
     members = {t["name"]: [m["documentation"] for m in t["tags"]] for t in folders["_types_"]["tags"]}
-    check("Ignition tags: FI-110 is now a member of the separator's UDT, not the compressor's",
-          any(d.startswith("FI-110 ") for d in members[type_of["V-101"]])
-          and not any(d.startswith("FI-110 ") for d in members[type_of["K-101"]]))
+    check("Ignition tags: FI-105 is now a member of the separator's UDT, not the compressor's",
+          any(d.startswith("FI-105 ") for d in members[type_of["V-101"]])
+          and not any(d.startswith("FI-105 ") for d in members[type_of["K-101"]]))
     check("Ignition tags: the documentation carries the review",
-          any(d.startswith("FI-110 ") and d.endswith("ops review: corrected") for d in members[type_of["V-101"]]))
+          any(d.startswith("FI-105 ") and d.endswith("ops review: corrected") for d in members[type_of["V-101"]]))
     check("Ignition tags: a non-operations confirmation keeps its label",
           any(d.startswith("FI-101 ") and d.endswith("ops review: confirmed (non-operations reviewer)") for d in members[type_of["U-100"]]))
     rows = list(csv.reader((tmp / "out/pi/pi_builder_af.csv").read_text(encoding="utf-8-sig").splitlines()))
-    fi110 = [r for r in rows if r[4].startswith("FI-110:")]
-    check("PI AF sheet: FI-110 sits under TE Plant\\V-101", [r[1] for r in fi110] == ["TE Plant\\V-101"], fi110)
+    fi105 = [r for r in rows if r[4].startswith("FI-105:")]
+    check("PI AF sheet: FI-105 sits under TE Plant\\V-101", [r[1] for r in fi105] == ["TE Plant\\V-101"], fi105)
     review = list(csv.DictReader((tmp / "out/ops_review_sheet.csv").read_text(encoding="utf-8-sig").splitlines()))
-    row = next(r for r in review if r["item_id"] == "FI-110")
-    check("review sheet: FI-110 belongs to the separator and prints the decision back",
+    row = next(r for r in review if r["item_id"] == "FI-105")
+    check("review sheet: FI-105 belongs to the separator and prints the decision back",
           row["belongs_to"] == "Vapor/Liquid Separator" and row["OPS_confirm_or_correct"] == "confirm", row)
     layout = json.loads((tmp / "out/mimic/te_overview_layout.json").read_text(encoding="utf-8"))
-    after = next(r for r in layout["readings"] if r["tag"] == "FI-110")
+    after = next(r for r in layout["readings"] if r["tag"] == "FI-105")
     v101 = next(u for u in layout["units"] if u["id"] == "V-101")["equipment_box"]
-    check("mimic layout: FI-110 is drawn beside V-101, in the V-101 column, reading the V-101 tag path",
+    check("mimic layout: FI-105 is drawn beside V-101, in the V-101 column, reading the V-101 tag path",
           after["drawn_beside"] == "V-101" and after["label_xy"][0] == v101[0] - 45
-          and after["reads"].endswith("/V-101/FI-110/PV") and after["owner_in_model"] == "V-101", after)
+          and after["reads"].endswith("/V-101/FI-105/PV") and after["owner_in_model"] == "V-101", after)
     scene = json.loads((tmp / "out/scene/te_scene.json").read_text(encoding="utf-8"))
     units = {u["id"]: u for u in scene["units"]}
-    tag = next((t for t in units["V-101"]["tags"] if t["tag"] == "FI-110"), None)
-    check("3D scene data: FI-110 is on V-101 and gone from K-101, carrying the review",
+    tag = next((t for t in units["V-101"]["tags"] if t["tag"] == "FI-105"), None)
+    check("3D scene data: FI-105 is on V-101 and gone from K-101, carrying the review",
           tag and tag["provenance"]["ops_review"] == "corrected"
-          and not any(t["tag"] == "FI-110" for t in units["K-101"]["tags"]), tag)
+          and not any(t["tag"] == "FI-105" for t in units["K-101"]["tags"]), tag)
     fi101 = next(t for t in units["U-100"]["tags"] if t["tag"] == "FI-101")
     check("3D scene data: the non-operations confirmation keeps its label",
           fi101["provenance"]["ops_review"] == "confirmed (non-operations reviewer)"

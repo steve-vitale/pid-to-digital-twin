@@ -12,7 +12,7 @@ Feed, Reactor, Condenser, Separator, Compressor, Stripper, Alarms, Drawings. The
 available from Overview. This tab order is a navigation convention for a branched/recycling process, not a claim
 that all equipment lies in one serial train.
 
-The compact 1600 × 930 Overview shows 21 essential readings alongside all six modeled units and all 13 seed-model stream directions, including recycle,
+The compact 1600 × 930 Overview shows 21 essential readings alongside all six modeled units and all 13 stream directions (verified against the simulator source), including recycle,
 stripper overhead, purge, external feeds and product boundary. BL means model boundary. Click equipment or a
 unit tab to drill down. Unit pages link back to Overview and directly to modeled neighboring equipment.
 Stream cards identify stream ID, name, source/destination and every currently mapped scalar boundary reading;
@@ -23,10 +23,10 @@ the source model has no utility stream endpoints, so no utility piping or direct
 
 - Feed: FI-101/102/103 show all three feeds actually owned by U-100. FI-104 belongs to C-101/S4 and stays there.
 - Reactor: PI-107/TI-109 show constrained condition, LI-108 inventory, FI-106 throughput. TI-121/TV-210 cooling context is on detail. SC-212 is explicitly unavailable on detail.
-- Condenser: only TI-122 and TV-211 are mapped; the disputed TI-122 ownership is visible. No process pressure,
+- Condenser: only TI-122 (cooling-water outlet) and TV-211 are mapped, the two tags the source assigns to it. No process pressure,
   temperature or level is substituted for the missing condenser instrumentation.
-- Separator: PI-113/TI-111 condition, LI-112 inventory, FI-114 throughput; LV-207 recorded output is on detail.
-- Compressor: FI-105 recycle, FI-110 purge, JI-120 work and HV-205 recorded output give recycle/purge context.
+- Separator: PI-113/TI-111 condition, LI-112 inventory, FI-114 throughput, FI-110 purge; LV-207, FV-206 and the purge analyzer are on detail.
+- Compressor: FI-105 recycle, JI-120 work and HV-205 recorded output give recycle context.
 - Stripper: PI-116/TI-118 condition, LI-115 inventory, FI-117 product; FI-104 feed and FI-119 steam input are on detail.
 
 These are reviewable display choices, not validated operating envelopes or new safety limits. Detail screens
@@ -46,10 +46,12 @@ output gauges hide fill. A valid zero remains zero. Percentage graphics clamp to
 numbers in the overview. Readout/state bindings are independently quality-checked. Native history retains the
 existing raw-point / ignore-bad-quality configuration; no zero-filled gap is invented by the preview.
 
-Equipment geometry and stream topology remain UNVERIFIED pending operations review. Stream arrows are static
-seed-model directions, not measured flow. Level percentages are not calculated vessel volumes. XMV outputs are
-not measured valve positions. TI-122 still means the source's separator cooling-water outlet temperature under
-disputed E-101 ownership. No responsive physics, closed-loop controls, new alarms or operator acceptance are implied.
+Unit ownership, stream endpoints and flow directions are verified against the simulator source
+(`out/te_topology_check.md`, journal entry 39); equipment geometry, tap positions and pipe routes are not, because
+the source has none. Stream arrows are static source-verified directions, not measured flow. Level percentages are
+not calculated vessel volumes. XMV outputs are not measured valve positions. TI-122 is the condenser cooling-water
+outlet temperature (the source's "separator" label reflects where the simulator books condenser duty). PI-116
+ownership is unresolved in the source and is flagged on the stripper page. No responsive physics, closed-loop controls, new alarms or operator acceptance are implied.
 
 ## Generate and inspect locally
 
@@ -107,12 +109,12 @@ does not authorize that import or any public action.
 Unit pages now begin with compact annotated diagrams; full inventory/history are secondary below. Plain-language
 names and value/unit pairs are placed by mapped stream or approximate vessel region, with dashed association leaders.
 Analyzer components sit together by the mapped sample stream. Unmodeled utility endpoints and disputed ownership
-remain explicit. The original process model is unchanged. See journal entry 23 for the published schematic source
-and the purge/TI-122 discrepancies that remain unresolved.
+remain explicit. The original process model is unchanged. See journal entry 23 for the published schematic source.
+The purge and TI-122 discrepancies noted there were settled against the simulator source in journal entry 39.
 
 `data/te_display_layout.json` is additive presentation configuration. `unit_context(..., layout=...)` accepts another
 validated layout for the existing model shape. `scripts/display_contract.py` validates reference/evidence geometry;
-unknown flow direction does not draw arrows. TE's existing seed directions require an explicit adapter. The synthetic
+unknown flow direction does not draw arrows. TE streams carry an explicit `direction`, each verified against the simulator source; the former direction adapter is gone. The synthetic
 water-utility fixture demonstrates the same unit renderer with unfamiliar IDs, mixed units and absent point mappings;
 it is not evidence of majority-plant coverage. Overview, replay and gateway/export assumptions remain TE-specific.
 

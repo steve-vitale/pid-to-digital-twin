@@ -38,6 +38,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_trace_connections_v2.py",
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
+    "scripts/test_te_topology.py",
 )
 TESTS = SOURCE_TESTS + FULL_ONLY_TESTS
 DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
@@ -45,7 +46,7 @@ DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
 TWIN = "out/twin/r2-tiles-trace/codex"
 DRAWINGS = "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"
 SOURCE_FILES = (
-    "data/te_process_model.json", "data/te_display_layout.json",
+    "data/te_process_model.json", "data/te_display_layout.json", "data/te_unit_purposes.json",
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json",
     "out/ignition/gateway/twin_provider.json", "out/ignition/gateway/build_meta.json",
@@ -88,6 +89,14 @@ def prerequisites(root, source_only):
         else:
             if actual != expected:
                 issues.append(("cache", f"checksum mismatch: {path.relative_to(root)}"))
+    # The revised TE code (second source for the topology check). Stdlib module; importing it downloads nothing.
+    from verify_te_topology import REVISED_SHA256
+    path = root / "data/external/te-ricker/temexd_mod.zip"
+    try:
+        if hashlib.sha256(path.read_bytes()).hexdigest() != REVISED_SHA256:
+            issues.append(("source-cache", f"checksum mismatch: {path.relative_to(root)}"))
+    except OSError as error:
+        issues.append(("source-cache", f"missing/unreadable revised TE code: {path.relative_to(root)}: {error.strerror}"))
     return issues
 
 
@@ -100,6 +109,8 @@ def report_remediation(issues):
         print("  python -m pip install -r requirements.txt  # may access the network; use your chosen environment")
     if "cache" in kinds:
         print("  python scripts/fetch_te_data.py  # network download if cache is absent/invalid; verifies hashes")
+    if "source-cache" in kinds:
+        print("  python scripts/verify_te_topology.py  # downloads the revised TE code if absent; report only")
     print("  python scripts/run_tests.py --source-only  # narrower checks; NOT a full-suite pass")
 
 
@@ -107,7 +118,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--full", action="store_true", help="full cached-data suite (default)")
-    modes.add_argument("--source-only", action="store_true", help="stdlib and committed fixtures only; excludes four full-only scripts")
+    modes.add_argument("--source-only", action="store_true", help="stdlib and committed fixtures only; excludes the full-only scripts")
     parser.add_argument("--check-prerequisites", action="store_true", help="preflight only; no tests or setup actions")
     args = parser.parse_args(argv)
     label = "SOURCE-ONLY" if args.source_only else "FULL CACHED-DATA"

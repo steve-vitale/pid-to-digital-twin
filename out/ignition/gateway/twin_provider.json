@@ -2596,6 +2596,35 @@
      "documentation": "Vapor/Liquid Separator",
      "tags": [
       {
+       "name": "FI-110",
+       "tagType": "UdtInstance",
+       "typeId": "TE_Measurement",
+       "documentation": "Purge rate | XMEAS 10 | range 0.0-0.674 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 0.2678-0.4064 (learned, not a site limit)",
+       "parameters": {
+        "Tag": {
+         "dataType": "String",
+         "value": "FI-110"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 0.2678
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 0.4064
+        }
+       },
+       "tags": [
+        {
+         "name": "PV",
+         "tagType": "AtomicTag",
+         "engUnit": "kscmh",
+         "engLow": 0.0,
+         "engHigh": 0.674
+        }
+       ]
+      },
+      {
        "name": "TI-111",
        "tagType": "UdtInstance",
        "typeId": "TE_Measurement",
@@ -2708,129 +2737,6 @@
          "engUnit": "m3/h",
          "engLow": 0.0,
          "engHigh": 50.373
-        }
-       ]
-      },
-      {
-       "name": "LV-207",
-       "tagType": "UdtInstance",
-       "typeId": "TE_FinalElement",
-       "documentation": "Separator pot liquid flow valve | XMV 7 | range 0.0-100.0 % (physical: a percentage) | normal band 19.0421-56.8455 (learned, not a site limit)",
-       "parameters": {
-        "Tag": {
-         "dataType": "String",
-         "value": "LV-207"
-        },
-        "NormalLo": {
-         "dataType": "Float",
-         "value": 19.0421
-        },
-        "NormalHi": {
-         "dataType": "Float",
-         "value": 56.8455
-        }
-       },
-       "tags": [
-        {
-         "name": "PV",
-         "tagType": "AtomicTag",
-         "engUnit": "%",
-         "engLow": 0.0,
-         "engHigh": 100.0
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "name": "K-101",
-     "tagType": "Folder",
-     "documentation": "Recycle Compressor",
-     "tags": [
-      {
-       "name": "FI-105",
-       "tagType": "UdtInstance",
-       "typeId": "TE_Measurement",
-       "documentation": "Recycle flow | XMEAS 5 | range 0.0-53.804 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 25.7342-28.0827 (learned, not a site limit)",
-       "parameters": {
-        "Tag": {
-         "dataType": "String",
-         "value": "FI-105"
-        },
-        "NormalLo": {
-         "dataType": "Float",
-         "value": 25.7342
-        },
-        "NormalHi": {
-         "dataType": "Float",
-         "value": 28.0827
-        }
-       },
-       "tags": [
-        {
-         "name": "PV",
-         "tagType": "AtomicTag",
-         "engUnit": "kscmh",
-         "engLow": 0.0,
-         "engHigh": 53.804
-        }
-       ]
-      },
-      {
-       "name": "FI-110",
-       "tagType": "UdtInstance",
-       "typeId": "TE_Measurement",
-       "documentation": "Purge rate | XMEAS 10 | range 0.0-0.674 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 0.2678-0.4064 (learned, not a site limit)",
-       "parameters": {
-        "Tag": {
-         "dataType": "String",
-         "value": "FI-110"
-        },
-        "NormalLo": {
-         "dataType": "Float",
-         "value": 0.2678
-        },
-        "NormalHi": {
-         "dataType": "Float",
-         "value": 0.4064
-        }
-       },
-       "tags": [
-        {
-         "name": "PV",
-         "tagType": "AtomicTag",
-         "engUnit": "kscmh",
-         "engLow": 0.0,
-         "engHigh": 0.674
-        }
-       ]
-      },
-      {
-       "name": "JI-120",
-       "tagType": "UdtInstance",
-       "typeId": "TE_Measurement",
-       "documentation": "Compressor work | XMEAS 20 | range 0.0-682.85 kW (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 333.523-349.108 (learned, not a site limit)",
-       "parameters": {
-        "Tag": {
-         "dataType": "String",
-         "value": "JI-120"
-        },
-        "NormalLo": {
-         "dataType": "Float",
-         "value": 333.5234
-        },
-        "NormalHi": {
-         "dataType": "Float",
-         "value": 349.1084
-        }
-       },
-       "tags": [
-        {
-         "name": "PV",
-         "tagType": "AtomicTag",
-         "engUnit": "kW",
-         "engLow": 0.0,
-         "engHigh": 682.85
         }
        ]
       },
@@ -3067,35 +2973,6 @@
        ]
       },
       {
-       "name": "HV-205",
-       "tagType": "UdtInstance",
-       "typeId": "TE_FinalElement",
-       "documentation": "Compressor recycle valve | XMV 5 | range 0.0-100.0 % (physical: a percentage) | normal band 19.5852-24.8095 (learned, not a site limit)",
-       "parameters": {
-        "Tag": {
-         "dataType": "String",
-         "value": "HV-205"
-        },
-        "NormalLo": {
-         "dataType": "Float",
-         "value": 19.5852
-        },
-        "NormalHi": {
-         "dataType": "Float",
-         "value": 24.8095
-        }
-       },
-       "tags": [
-        {
-         "name": "PV",
-         "tagType": "AtomicTag",
-         "engUnit": "%",
-         "engLow": 0.0,
-         "engHigh": 100.0
-        }
-       ]
-      },
-      {
        "name": "FV-206",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
@@ -3112,6 +2989,129 @@
         "NormalHi": {
          "dataType": "Float",
          "value": 48.4563
+        }
+       },
+       "tags": [
+        {
+         "name": "PV",
+         "tagType": "AtomicTag",
+         "engUnit": "%",
+         "engLow": 0.0,
+         "engHigh": 100.0
+        }
+       ]
+      },
+      {
+       "name": "LV-207",
+       "tagType": "UdtInstance",
+       "typeId": "TE_FinalElement",
+       "documentation": "Separator pot liquid flow valve | XMV 7 | range 0.0-100.0 % (physical: a percentage) | normal band 19.0421-56.8455 (learned, not a site limit)",
+       "parameters": {
+        "Tag": {
+         "dataType": "String",
+         "value": "LV-207"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 19.0421
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 56.8455
+        }
+       },
+       "tags": [
+        {
+         "name": "PV",
+         "tagType": "AtomicTag",
+         "engUnit": "%",
+         "engLow": 0.0,
+         "engHigh": 100.0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "K-101",
+     "tagType": "Folder",
+     "documentation": "Recycle Compressor",
+     "tags": [
+      {
+       "name": "FI-105",
+       "tagType": "UdtInstance",
+       "typeId": "TE_Measurement",
+       "documentation": "Recycle flow | XMEAS 5 | range 0.0-53.804 kscmh (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 25.7342-28.0827 (learned, not a site limit)",
+       "parameters": {
+        "Tag": {
+         "dataType": "String",
+         "value": "FI-105"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 25.7342
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 28.0827
+        }
+       },
+       "tags": [
+        {
+         "name": "PV",
+         "tagType": "AtomicTag",
+         "engUnit": "kscmh",
+         "engLow": 0.0,
+         "engHigh": 53.804
+        }
+       ]
+      },
+      {
+       "name": "JI-120",
+       "tagType": "UdtInstance",
+       "typeId": "TE_Measurement",
+       "documentation": "Compressor work | XMEAS 20 | range 0.0-682.85 kW (ASSUMED: 0 to 2x normal-run mean (d00), not a published span) | normal band 333.523-349.108 (learned, not a site limit)",
+       "parameters": {
+        "Tag": {
+         "dataType": "String",
+         "value": "JI-120"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 333.5234
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 349.1084
+        }
+       },
+       "tags": [
+        {
+         "name": "PV",
+         "tagType": "AtomicTag",
+         "engUnit": "kW",
+         "engLow": 0.0,
+         "engHigh": 682.85
+        }
+       ]
+      },
+      {
+       "name": "HV-205",
+       "tagType": "UdtInstance",
+       "typeId": "TE_FinalElement",
+       "documentation": "Compressor recycle valve | XMV 5 | range 0.0-100.0 % (physical: a percentage) | normal band 19.5852-24.8095 (learned, not a site limit)",
+       "parameters": {
+        "Tag": {
+         "dataType": "String",
+         "value": "HV-205"
+        },
+        "NormalLo": {
+         "dataType": "Float",
+         "value": 19.5852
+        },
+        "NormalHi": {
+         "dataType": "Float",
+         "value": 24.8095
         }
        },
        "tags": [
@@ -3550,7 +3550,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed TE values are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
       },
       {
        "name": "AlarmsActive",
@@ -3590,7 +3590,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in V-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_K-101",
@@ -3598,7 +3598,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in K-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-206/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_C-101",

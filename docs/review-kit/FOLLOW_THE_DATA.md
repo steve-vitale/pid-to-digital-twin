@@ -58,7 +58,7 @@ git diff --stat                          # the model, the regenerated outputs an
 ```
 
 Then open the corrected item in each output (the Ignition tags, the PI sheet, the review sheet, the mimic layout,
-the scene data) and check it moved. `scripts/test_pipeline.py` does exactly this on a temp copy with FI-110, if you
+the scene data) and check it moved. `scripts/test_pipeline.py` does exactly this on a temp copy with a test-fixture move (FI-105 from K-101 to V-101), if you
 want to see the expected result first.
 
 ## Walk 2: OPEN100

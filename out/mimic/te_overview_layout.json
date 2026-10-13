@@ -4,7 +4,7 @@
   "status": "first-pass display layout, built to iterate on; not reviewed by operations",
   "generated_by": "scripts/export_mimic_layout.py (renders scripts/ignition/build_mimic.py offline)",
   "source": "data/te_process_model.json",
-  "source_sha256": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+  "source_sha256": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
   "inherits": "each reading carries the provenance of its model item; positions are illustrative"
  },
  "units": [
@@ -173,8 +173,7 @@
    "owner_in_model": "E-101",
    "provenance": {
     "source_check": "corrected",
-    "ops_review": "unverified",
-    "open_question": true
+    "ops_review": "unverified"
    }
   },
   {
@@ -248,6 +247,20 @@
    }
   },
   {
+   "tag": "FI-110",
+   "drawn_beside": "V-101",
+   "label_xy": [
+    895,
+    655
+   ],
+   "reads": "[Twin]TE_Plant/V-101/FI-110/PV",
+   "owner_in_model": "V-101",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
    "tag": "FI-105",
    "drawn_beside": "K-101",
    "label_xy": [
@@ -262,25 +275,11 @@
    }
   },
   {
-   "tag": "FI-110",
-   "drawn_beside": "K-101",
-   "label_xy": [
-    1210,
-    180
-   ],
-   "reads": "[Twin]TE_Plant/K-101/FI-110/PV",
-   "owner_in_model": "K-101",
-   "provenance": {
-    "source_check": "confirmed",
-    "ops_review": "unverified"
-   }
-  },
-  {
    "tag": "JI-120",
    "drawn_beside": "K-101",
    "label_xy": [
     1210,
-    210
+    180
    ],
    "reads": "[Twin]TE_Plant/K-101/JI-120/PV",
    "owner_in_model": "K-101",
@@ -294,7 +293,7 @@
    "drawn_beside": "K-101",
    "label_xy": [
     1210,
-    240
+    210
    ],
    "reads": "[Twin]TE_Plant/K-101/HV-205/PV",
    "owner_in_model": "K-101",

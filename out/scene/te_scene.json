@@ -4,7 +4,7 @@
   "status": "built to iterate on; not a validated deliverable and not reviewed by operations",
   "generated_by": "scripts/build_scene_data.py",
   "source": "data/te_process_model.json",
-  "source_sha256": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+  "source_sha256": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
   "inherits": "every element carries the provenance of the model item it came from; geometry adds none",
   "geometry": "positions are the model's 2D layout scaled to metres; sizes, elevations and routes are placeholders",
   "loto": "candidates are inferred from the model; this is not a LOTO procedure (OSHA 1910.147)"
@@ -26,7 +26,7 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
@@ -158,7 +158,7 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
@@ -170,8 +170,7 @@
      "stream": null,
      "provenance": {
       "source_check": "corrected",
-      "ops_review": "unverified",
-      "open_question": true
+      "ops_review": "unverified"
      }
     },
     {
@@ -203,49 +202,16 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
-    {
-     "tag": "AI-129",
-     "description": "Purge gas analyzer (components A-H)",
-     "uom": "mol%",
-     "kind": "measurement",
-     "stream": "S9",
-     "provenance": {
-      "source_check": "confirmed",
-      "ops_review": "unverified"
-     }
-    },
     {
      "tag": "FI-105",
      "description": "Recycle flow",
      "uom": "kscmh",
      "kind": "measurement",
      "stream": "S8b",
-     "provenance": {
-      "source_check": "confirmed",
-      "ops_review": "unverified"
-     }
-    },
-    {
-     "tag": "FI-110",
-     "description": "Purge rate",
-     "uom": "kscmh",
-     "kind": "measurement",
-     "stream": "S9",
-     "provenance": {
-      "source_check": "confirmed",
-      "ops_review": "unverified"
-     }
-    },
-    {
-     "tag": "FV-206",
-     "description": "Purge valve",
-     "uom": "%",
-     "kind": "output (recorded %, not valve position)",
-     "stream": "S9",
      "provenance": {
       "source_check": "confirmed",
       "ops_review": "unverified"
@@ -291,7 +257,7 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
@@ -401,7 +367,7 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
@@ -489,16 +455,49 @@
    ],
    "geometry": "placeholder",
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    },
    "tags": [
+    {
+     "tag": "AI-129",
+     "description": "Purge gas analyzer (components A-H)",
+     "uom": "mol%",
+     "kind": "measurement",
+     "stream": "S9",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FI-110",
+     "description": "Purge rate",
+     "uom": "kscmh",
+     "kind": "measurement",
+     "stream": "S9",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
     {
      "tag": "FI-114",
      "description": "Separator underflow",
      "uom": "m3/h",
      "kind": "measurement",
      "stream": "S10",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-206",
+     "description": "Purge valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S9",
      "provenance": {
       "source_check": "confirmed",
       "ops_review": "unverified"
@@ -557,14 +556,14 @@
    "name": "A feed",
    "from": "BL",
    "to": "U-100",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-101",
     "FV-203"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -573,14 +572,14 @@
    "name": "D feed",
    "from": "BL",
    "to": "U-100",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-102",
     "FV-201"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -589,14 +588,14 @@
    "name": "E feed",
    "from": "BL",
    "to": "U-100",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-103",
     "FV-202"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -605,14 +604,14 @@
    "name": "A and C feed",
    "from": "BL",
    "to": "C-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-104",
     "FV-204"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -621,11 +620,11 @@
    "name": "Stripper overhead",
    "from": "C-101",
    "to": "U-100",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -634,14 +633,14 @@
    "name": "Reactor feed",
    "from": "U-100",
    "to": "R-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "AI-123",
     "FI-106"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -650,11 +649,11 @@
    "name": "Reactor product",
    "from": "R-101",
    "to": "E-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -663,11 +662,11 @@
    "name": "Condensed product",
    "from": "E-101",
    "to": "V-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -676,11 +675,11 @@
    "name": "Recycle",
    "from": "V-101",
    "to": "K-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -689,22 +688,22 @@
    "name": "Recycle to feed",
    "from": "K-101",
    "to": "U-100",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-105"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
   {
    "stream": "S9",
    "name": "Purge",
-   "from": "K-101",
+   "from": "V-101",
    "to": "BL",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "AI-129",
@@ -712,7 +711,7 @@
     "FV-206"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "corrected",
     "ops_review": "unverified"
    }
   },
@@ -721,14 +720,14 @@
    "name": "Separator underflow",
    "from": "V-101",
    "to": "C-101",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-114",
     "LV-207"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   },
@@ -737,7 +736,7 @@
    "name": "Stripper product",
    "from": "C-101",
    "to": "BL",
-   "direction": "as listed in the model (from -> to); not separately verified",
+   "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "AI-137",
@@ -745,7 +744,7 @@
     "LV-208"
    ],
    "provenance": {
-    "source_check": "unverified",
+    "source_check": "confirmed",
     "ops_review": "unverified"
    }
   }
@@ -788,18 +787,6 @@
    }
   },
   {
-   "unit": "K-101",
-   "isolation_candidate": "FV-206",
-   "stream": "S9",
-   "valve_owner_in_model": "K-101",
-   "inferred": true,
-   "basis": "final element on stream S9 (K-101 -> BL) in the model",
-   "provenance": {
-    "source_check": "confirmed",
-    "ops_review": "unverified"
-   }
-  },
-  {
    "unit": "U-100",
    "isolation_candidate": "FV-201",
    "stream": "S2",
@@ -830,6 +817,18 @@
    "valve_owner_in_model": "U-100",
    "inferred": true,
    "basis": "final element on stream S1 (BL -> U-100) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "V-101",
+   "isolation_candidate": "FV-206",
+   "stream": "S9",
+   "valve_owner_in_model": "V-101",
+   "inferred": true,
+   "basis": "final element on stream S9 (V-101 -> BL) in the model",
    "provenance": {
     "source_check": "confirmed",
     "ops_review": "unverified"

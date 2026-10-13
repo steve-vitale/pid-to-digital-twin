@@ -1,10 +1,27 @@
 {
  "about": "Hashes (sha256, CRLF normalised to LF) of each stage's inputs, code, config and outputs when scripts/pipeline.py last built or accepted it. Written by the orchestrator; do not edit by hand.",
  "stages": {
+  "ignition.gateway": {
+   "inputs": {
+    "data/te_display_layout.json": "05bca98f17d5be9ee16ff5a9b3698097cb03a36805588a05f13bf66dd7d8e67d",
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
+    "scripts/ignition/build_gateway.py": "c240553422b592090ba569167334133f685ee49e3dd89efa6ece49e47323bbd8",
+    "scripts/ignition/build_hmi.py": "f4ca7c01bb62d4dc7e2c27670c4cb92dbdac26ca97c3458d2ad3295f9ba2299e",
+    "scripts/ignition/build_mimic.py": "3000c2761c068454fab5de7e8342345e5bc9a8d22edaa95a494767959c87a024",
+    "scripts/ignition/build_views.py": "44aa8d629c4fbe070f4043c01a525bfdc26b26ddb6a359ef9a95b7c03455db41",
+    "scripts/ignition/te_channels.py": "f9954ede386a5283d75aa0e12cc4e753c764c2f729ecdd839f8831c91abfb7dd",
+    "scripts/normal_bands.py": "0ade5a8656ca60a517eaa5eaa9ecaffbc9ec8fc247deb4d0fbd54f2308b49770"
+   },
+   "outputs": {
+    "out/ignition/gateway/build_meta.json": "4c53a21962b7b828136f459a3e5330b1c202f4cd65a1a2f222a4d50f4233f402",
+    "out/ignition/gateway/twin_provider.json": "dd0b614f09aa176d7bd3419d505d9962c9f2587d4231ba0a8ea08417bfd1d138"
+   }
+  },
   "open100.exports": {
    "inputs": {
     "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
-    "scripts/generate.py": "cc189fa6344bab6d3ac2d7e7188cdcd9c01f05e11f9899a5e6a9b829326002f1",
+    "scripts/generate.py": "e3e0d72fd69c4e5fd309a3c3b8db24aa4c1a453251a944d0095f9175b62ee901",
     "scripts/pi_mapping.py": "c99867456b4ec97e278c49f0210af7af7d029c26f066b24a2ae29c6711d2ace3",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
@@ -114,54 +131,65 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c"
    }
   },
+  "te.bands": {
+   "inputs": {
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+    "scripts/ignition/te_channels.py": "f9954ede386a5283d75aa0e12cc4e753c764c2f729ecdd839f8831c91abfb7dd",
+    "scripts/normal_bands.py": "0ade5a8656ca60a517eaa5eaa9ecaffbc9ec8fc247deb4d0fbd54f2308b49770"
+   },
+   "outputs": {
+    "out/ignition/normal_bands.json": "e3054edc52bfc4b5b80cf9d89770afc5e183c6b004c7abf47c723603c96d2de3",
+    "out/ignition/normal_bands.md": "321664a5df1ae4592b20881704dee1b2fb94bbddeae22debd1b50a1792bffcbc"
+   }
+  },
   "te.exports": {
    "inputs": {
-    "data/te_process_model.json": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
-    "scripts/generate.py": "cc189fa6344bab6d3ac2d7e7188cdcd9c01f05e11f9899a5e6a9b829326002f1",
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+    "scripts/generate.py": "e3e0d72fd69c4e5fd309a3c3b8db24aa4c1a453251a944d0095f9175b62ee901",
     "scripts/pi_mapping.py": "c99867456b4ec97e278c49f0210af7af7d029c26f066b24a2ae29c6711d2ace3",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
    "outputs": {
-    "out/ignition/te_tags.json": "0f62995169284bbe213caee574dea3f6dfbd03c46a802669c676baeffea67e99",
-    "out/ops_review_sheet.csv": "3b636e85679d3681c4b2d101052a9ceacd749345f017c935fffff461fb1636a6",
-    "out/pi/pi_builder_af.csv": "75da76877e30350bc452b3a363ae28a095e0c41544ba236534846f2926928f65",
+    "out/ignition/te_tags.json": "a8483e6a380455b7ee97b777fa96435247a69836af534fa28882905843a1c967",
+    "out/ops_review_sheet.csv": "4cd9da9bf1236787dda7fdb0c5c6e31b449fdfce08f74306b140514f76e46d59",
+    "out/pi/pi_builder_af.csv": "0584c3700a8b008ec26432313eee688e9021e4938724a674c57d45a0dfaaf482",
     "out/svg/C-101.svg": "a53a52f4614551ef8f42f1d9f5b6bd735aaa70ba0d2f83a9d138aa395d56088c",
     "out/svg/E-101.svg": "6f1c112246992b894e78901617e9740ee80cf4604de81a64bf5fd6e0153c6916",
-    "out/svg/K-101.svg": "7e9e42778dd0165bd24b01669bde78b5c85ec26937216b1f4028c569c3512b41",
+    "out/svg/K-101.svg": "c6ee56321b695bb589b1edc6d05273f2708835dbd657299ea0b02226b1cc793e",
     "out/svg/R-101.svg": "9ca63f05cb47ea2943baee601b2d20f1e8215ee559a7b26c608120ff6d54f0bd",
     "out/svg/U-100.svg": "7d2eec50ed01597512568531edd0f0925373b5279c92ffe0b4df74a24c805c74",
-    "out/svg/V-101.svg": "0d4be858d59cd64ca6e7e16f4898b694a5e6ffb96b7ee387cf810d2b0f659b09",
-    "out/svg/overview.svg": "1c6544f5c30fe8b35de6a56b96f61d90f083e66a5262f7f7bf2ee5823956569a"
+    "out/svg/V-101.svg": "dbba1809373c526b969060ef72548a289b52fb304b8bc228e3a35d506c0ced14",
+    "out/svg/overview.svg": "0c9e4ce673fca1577a2772d411642e4426d58e57df69cf706667ba9309631d21"
    }
   },
   "te.mimic": {
    "inputs": {
-    "data/te_display_layout.json": "ef639fb2b4acc1a2e696c1ec2f1cbfbe04d7782a1a0799abb4c605d5705d5e53",
-    "data/te_process_model.json": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+    "data/te_display_layout.json": "05bca98f17d5be9ee16ff5a9b3698097cb03a36805588a05f13bf66dd7d8e67d",
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
     "scripts/build_scene_data.py": "e490027bfb7cad92463e15aef591cf3c771a0fd428c9ba7e467ceb6c3caff876",
     "scripts/export_mimic_layout.py": "2fcbc5601694ad37e2d48df1e0b01f1b2f339fb0b30a6378263677e3212e2261",
-    "scripts/ignition/build_hmi.py": "b5d037c797dd666d1b7e108afad2d10aaaa524442705b08e78fd0913d6cba6ad",
-    "scripts/ignition/build_mimic.py": "ad40f5224054e9225997e2e7944d7eccfe07cd0a5b4b01930cbdc97bacf631c1",
+    "scripts/ignition/build_hmi.py": "f4ca7c01bb62d4dc7e2c27670c4cb92dbdac26ca97c3458d2ad3295f9ba2299e",
+    "scripts/ignition/build_mimic.py": "3000c2761c068454fab5de7e8342345e5bc9a8d22edaa95a494767959c87a024",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
    "outputs": {
-    "out/mimic/te_overview_layout.json": "5be55588447277b3b0246787a15b80001e472fd12a96a453297a8e8221cbc2fe"
+    "out/mimic/te_overview_layout.json": "24ef78a86445d47af6f49c40e7e069b8416f182011343d1a28e0173015820ae5"
    }
   },
   "te.scene": {
    "inputs": {
-    "data/te_process_model.json": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3",
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
     "scripts/build_scene_data.py": "e490027bfb7cad92463e15aef591cf3c771a0fd428c9ba7e467ceb6c3caff876",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
    "outputs": {
-    "out/scene/te_scene.json": "de6081ccb2651d99673f0359ef3d9caf869257512e2f4f511f82aaa9422d3550"
+    "out/scene/te_scene.json": "a1769be5b8b2705cc5487d5e162f04f50e59da7210c340b23422bcd6c296b9d5"
    }
   },
   "te.source": {
    "inputs": {},
    "outputs": {
-    "data/te_process_model.json": "87cd0a98f0d737266578e31b7133665eea74441163b66b2223864f0437bb97a3"
+    "data/te_process_model.json": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113"
    }
   }
  }

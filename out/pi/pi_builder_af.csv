@@ -1,13 +1,13 @@
 ﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeValueType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
 x,,TE Plant,Element,Tennessee Eastman Challenge Process,,,,,
-x,TE Plant,U-100,Element,Feed System | source check: unverified | ops review: unverified,FeedHeader,,,,
+x,TE Plant,U-100,Element,Feed System | source check: confirmed | ops review: unverified,FeedHeader,,,,
 x,TE Plant\U-100,AFeedFlow,Attribute,FI-101: A feed flow | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-101.PV
 x,TE Plant\U-100,DFeedFlow,Attribute,FI-102: D feed flow | source check: confirmed | ops review: unverified,,Double,kg/h,PI Point,\\%Server%\TE.FI-102.PV
 x,TE Plant\U-100,EFeedFlow,Attribute,FI-103: E feed flow | source check: confirmed | ops review: unverified,,Double,kg/h,PI Point,\\%Server%\TE.FI-103.PV
 x,TE Plant\U-100,DFeedFlowValve,Attribute,FV-201: D feed flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.FV-201.PV
 x,TE Plant\U-100,EFeedFlowValve,Attribute,FV-202: E feed flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.FV-202.PV
 x,TE Plant\U-100,AFeedFlowValve,Attribute,FV-203: A feed flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.FV-203.PV
-x,TE Plant,R-101,Element,Reactor | source check: unverified | ops review: unverified,Reactor,,,,
+x,TE Plant,R-101,Element,Reactor | source check: confirmed | ops review: unverified,Reactor,,,,
 x,TE Plant\R-101,ReactorFeedRate,Attribute,FI-106: Reactor feed rate | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-106.PV
 x,TE Plant\R-101,ReactorPressure,Attribute,PI-107: Reactor pressure | source check: confirmed | ops review: unverified,,Double,kPa g,PI Point,\\%Server%\TE.PI-107.PV
 x,TE Plant\R-101,ReactorLevel,Attribute,LI-108: Reactor level | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.LI-108.PV
@@ -16,23 +16,23 @@ x,TE Plant\R-101,ReactorCoolingWaterOutletTemperature,Attribute,TI-121: Reactor 
 x,TE Plant\R-101,ReactorFeedAnalyzerComponentsAF,Attribute,AI-123: Reactor feed analyzer (components A-F) | source check: confirmed | ops review: unverified,,Double,mol%,PI Point,\\%Server%\TE.AI-123.PV
 x,TE Plant\R-101,ReactorCoolingWaterFlowValve,Attribute,TV-210: Reactor cooling water flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.TV-210.PV
 x,TE Plant\R-101,AgitatorSpeed,Attribute,SC-212: Agitator speed | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.SC-212.PV
-x,TE Plant,E-101,Element,Product Condenser | source check: unverified | ops review: unverified,Condenser,,,,
+x,TE Plant,E-101,Element,Product Condenser | source check: confirmed | ops review: unverified,Condenser,,,,
 x,TE Plant\E-101,SeparatorCoolingWaterOutletTemp,Attribute,TI-122: Separator Cooling Water Outlet Temp | source check: corrected | ops review: unverified,,Double,degC,PI Point,\\%Server%\TE.TI-122.PV
 x,TE Plant\E-101,CondenserCoolingWaterFlowValve,Attribute,TV-211: Condenser cooling water flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.TV-211.PV
-x,TE Plant,V-101,Element,Vapor/Liquid Separator | source check: unverified | ops review: unverified,Separator,,,,
+x,TE Plant,V-101,Element,Vapor/Liquid Separator | source check: confirmed | ops review: unverified,Separator,,,,
+x,TE Plant\V-101,PurgeRate,Attribute,FI-110: Purge rate | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\V-101,SeparatorTemperature,Attribute,TI-111: Separator temperature | source check: confirmed | ops review: unverified,,Double,degC,PI Point,\\%Server%\TE.TI-111.PV
 x,TE Plant\V-101,SeparatorLevel,Attribute,LI-112: Separator level | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.LI-112.PV
 x,TE Plant\V-101,SeparatorPressure,Attribute,PI-113: Separator pressure | source check: confirmed | ops review: unverified,,Double,kPa g,PI Point,\\%Server%\TE.PI-113.PV
 x,TE Plant\V-101,SeparatorUnderflow,Attribute,FI-114: Separator underflow | source check: confirmed | ops review: unverified,,Double,m3/h,PI Point,\\%Server%\TE.FI-114.PV
+x,TE Plant\V-101,PurgeGasAnalyzerComponentsAH,Attribute,AI-129: Purge gas analyzer (components A-H) | source check: confirmed | ops review: unverified,,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
+x,TE Plant\V-101,PurgeValve,Attribute,FV-206: Purge valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
 x,TE Plant\V-101,SeparatorPotLiquidFlowValve,Attribute,LV-207: Separator pot liquid flow valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.LV-207.PV
-x,TE Plant,K-101,Element,Recycle Compressor | source check: unverified | ops review: unverified,Compressor,,,,
+x,TE Plant,K-101,Element,Recycle Compressor | source check: confirmed | ops review: unverified,Compressor,,,,
 x,TE Plant\K-101,RecycleFlow,Attribute,FI-105: Recycle flow | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-105.PV
-x,TE Plant\K-101,PurgeRate,Attribute,FI-110: Purge rate | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-110.PV
 x,TE Plant\K-101,CompressorWork,Attribute,JI-120: Compressor work | source check: confirmed | ops review: unverified,,Double,kW,PI Point,\\%Server%\TE.JI-120.PV
-x,TE Plant\K-101,PurgeGasAnalyzerComponentsAH,Attribute,AI-129: Purge gas analyzer (components A-H) | source check: confirmed | ops review: unverified,,Double,mol%,PI Point,\\%Server%\TE.AI-129.PV
 x,TE Plant\K-101,CompressorRecycleValve,Attribute,HV-205: Compressor recycle valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.HV-205.PV
-x,TE Plant\K-101,PurgeValve,Attribute,FV-206: Purge valve | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.FV-206.PV
-x,TE Plant,C-101,Element,Product Stripper | source check: unverified | ops review: unverified,Stripper,,,,
+x,TE Plant,C-101,Element,Product Stripper | source check: confirmed | ops review: unverified,Stripper,,,,
 x,TE Plant\C-101,AAndCFeedFlow,Attribute,FI-104: A and C feed flow | source check: confirmed | ops review: unverified,,Double,kscmh,PI Point,\\%Server%\TE.FI-104.PV
 x,TE Plant\C-101,StripperLevel,Attribute,LI-115: Stripper level | source check: confirmed | ops review: unverified,,Double,%,PI Point,\\%Server%\TE.LI-115.PV
 x,TE Plant\C-101,StripperPressure,Attribute,PI-116: Stripper pressure | source check: confirmed | ops review: unverified,,Double,kPa g,PI Point,\\%Server%\TE.PI-116.PV

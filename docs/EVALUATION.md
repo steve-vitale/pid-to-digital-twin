@@ -22,6 +22,7 @@ No single number captures that. Every metric below is a **proxy**, and each one 
 | **Per-class scores** | Where it's strong and where it's weak | Rare classes (16 pumps in 12 drawings) swing a lot |
 | **Connectivity** (asset-to-asset links) | Does it understand the process topology? | Line sizes, flow direction, spec breaks |
 | **Tag text** (Tennessee Eastman only) | Did it read the tag exactly? | Not scorable on the public dataset, whose key has no text |
+| **Answer-key topology** (Tennessee Eastman only) | Do the key's units, stream endpoints, flow directions and tag ownership match the simulator source? 51 confirmed, 4 corrected, 1 unresolvable (`out/te_topology_check.md`) | Tap positions, sizes and pipe routes, which the simulator does not model; anything where the source itself is split |
 | **Operations review corrections** | What a real reviewer still had to fix | Only as good as the reviewer's time and attention |
 | **Time and cost per sheet** | Whether it saves anything at all | Quality, so always read alongside the measures above |
 
@@ -142,6 +143,7 @@ What it doesn't support:
 | `scripts/cost_report.py` | Time and cost totals from every run record → `out/costs.*` ([COSTS.md](COSTS.md)) |
 | `scripts/run_tests.py` | Every test in one command (CI runs it) |
 | `scripts/degrade_scans.py`, `run_scan_robustness.ps1`, `score_scan_robustness.ps1` | Round 4: old-scan images (geometry kept, keys unchanged), the runs, and the scoring |
+| `scripts/verify_te_topology.py`, `scripts/test_te_topology.py` | Checks the TE answer key's topology against the simulator code; controls plant wrong models and edit the simulator text to prove the check reads the code |
 | `scripts/test_apply_review.py` | Controls for the review loop: bad sheets refused, alarm requests routed to change review, round trip stable |
 | `scripts/run_holdouts.ps1`, `score_holdout_b.ps1`, `score_parent_holdouts.ps1`, `score_triage_holdouts.ps1` | Windows PowerShell helpers that reproduce the GOAL.md holdout tables, each label scored once |
 | `scripts/scorecard.py`, `scripts/per_drawing.py` | Aggregate and per-drawing views |
