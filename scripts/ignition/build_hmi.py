@@ -162,6 +162,9 @@ def value_box(name, x, y, w, h, base, band, size=15):
     return c
 
 
+INDICATOR_VISIBILITY = ('import math\nif not quality.isGood() or value is None:\n    return "hidden"\ntry:\n'
+                        '    number = float(value)\nexcept (TypeError, ValueError):\n    return "hidden"\n'
+                        'return "hidden" if math.isnan(number) or math.isinf(number) else "visible"')
 ALARM_SPAN_LIMIT = 10  # widen an indicator to show an alarm limit only if it is within 10 band half-widths
 
 
@@ -195,7 +198,10 @@ def indicator(name, x, y, w, h, base, band, limits):
             props["highHighAlarm"] = limits[1]
     return {"type": "ia.display.moving-analog-indicator", "meta": {"name": name},
             "position": {"x": x, "y": y, "width": w, "height": h}, "props": props,
-            "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}])}}
+            "propConfig": {"props.processValue": tag_binding(base + "/PV", [{"type": "script", "code": 'import math\nif not quality.isGood() or value is None:\n    return None\ntry:\n    number = float(value)\nexcept (TypeError, ValueError):\n    return None\nreturn None if math.isnan(number) or math.isinf(number) else number'}]),
+                           # With no Good value Perspective still draws the pointer, at the scale minimum, which reads
+                           # as a real low value (seen with the replay stopped, journal entry 40). Hide it instead.
+                           "props.style.visibility": tag_binding(base + "/PV", [{"type": "script", "code": INDICATOR_VISIBILITY}])}}
 
 
 def trend(name, x, y, w, h, base, band, minutes):
@@ -445,9 +451,10 @@ def alarms_screen(provider):
     kids = header(provider, "Alarms", "/alarms")
     kids += [alarm_table("AlarmTable", 16, HEAD + 16, W - 32, 640, False),
              label("AlarmNote", 16, HEAD + 668, W - 32, 36,
-                   "The only alarms are the published ones: reactor pressure high (2895 kPa) and the simulator's "
-                   "shutdown limits (3000 kPa, 175 °C). Adding or removing an alarm is a change review, not a "
-                   "screen edit.", {"fontSize": 12, "color": MUTED})]
+                   "Process alarms are only the published ones: reactor pressure high (2895 kPa) and the simulator's "
+                   "shutdown limits (3000 kPa, 175 °C). \"Data source lost\" alarms are diagnostics: a data connection "
+                   "stopped delivering Good values, so the screens show UNKNOWN. Adding or removing a process alarm is a "
+                   "change review, not a screen edit.", {"fontSize": 12, "color": MUTED})]
     return view(HEAD + 720, kids)
 
 

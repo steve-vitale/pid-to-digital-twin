@@ -232,6 +232,28 @@ class CurrentGatewayContract(unittest.TestCase):
         self.assertEqual(no_source, 336)
         self.assertEqual(len(mapped), 24)
 
+    def test_indicators_hide_their_pointer_without_good_data(self):
+        class Quality:
+            def __init__(self, good): self.good = good
+            def isGood(self): return self.good
+
+        def run(code, value, good=True):
+            scope = {}
+            exec(bv.build_hmi.TRANSFORM_SIGNATURE + '\n' + code, scope)
+            return scope['transform'](None, value, Quality(good), None)
+        n = 0
+        for name, view in self.held.views.items():
+            for c in walk(view['root']):
+                if c.get('type') == 'ia.display.moving-analog-indicator':
+                    b = c['propConfig']['props.style.visibility']['binding']
+                    self.assertEqual(b['config']['tagPath'], c['propConfig']['props.processValue']['binding']['config']['tagPath'])
+                    code = b['transforms'][0]['code']
+                    self.assertEqual(run(code, 2700.0), 'visible')
+                    self.assertEqual(run(code, 2700.0, False), 'hidden')
+                    self.assertEqual(run(code, float('nan')), 'hidden')
+                    n += 1
+        self.assertGreater(n, 50)
+
     def test_narrow_overview(self):
         v = self.held.views['TE/Narrow']
         self.assertEqual(self.pages['/m']['viewPath'], 'TE/Narrow')
