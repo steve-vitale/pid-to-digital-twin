@@ -1,0 +1,9872 @@
+{
+ "schema": "pid-3d-scene/0 (prototype)",
+ "model_id": "twin-r2-tiles-trace-codex",
+ "title": "OPEN100: 12 drawings stitched into one plant",
+ "label_layout": "declutter",
+ "disclaimer": "PROTOTYPE. Structure only, no process data. Positions are drawing positions; sizes, elevations and routes are placeholders.",
+ "equipment": [
+  {
+   "id": "S3-TK001",
+   "name": "CND-HTR-160",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    8.909,
+    -6.621,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "3",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Heater",
+    "source": "tag type code"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S3-PU001",
+   "name": "FWS-PU-170A",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    10.637,
+    -12.333,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "3",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Feedwater pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S3-PU002",
+   "name": "FWS-PU-170B",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    10.637,
+    -16.433,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "3",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Feedwater pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S3-TK002",
+   "name": "FWS-HTR-170",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    20.875,
+    -13.138,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "3",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Hp feedwater heater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S0-TK001",
+   "name": "MSS-XSS-140",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    53.284,
+    -11.02,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "0",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Steam superheater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S0-TK002",
+   "name": "RCS-SG-100",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    49.081,
+    -13.937,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "0",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Steam generator",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-TK001",
+   "name": "ACC-AC-150",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    100.76,
+    -7.133,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Air cooled condenser",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU001",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    94.724,
+    -1.797,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU002",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    98.634,
+    -0.096,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU003",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    107.065,
+    -3.525,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU004",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    94.87,
+    -11.506,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU005",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    102.629,
+    0.224,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU006",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    102.894,
+    -10.528,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU007",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    95.647,
+    -7.477,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU008",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    101.084,
+    -14.181,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU009",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    103.01,
+    -3.765,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU010",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    98.01,
+    -4.149,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU011",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    98.877,
+    -10.726,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU012",
+   "name": "untagged pump",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    105.394,
+    -7.192,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump class: moves liquid from its suction to its discharge. Motor-driven, so it has an electrical energy source as well as the process fluid. (On sheet 1 this class also caught the air-cooler fans.)",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU013",
+   "name": "ACC-PU-151",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    106.431,
+    -12.423,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Air cooled condenser pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU014",
+   "name": "ACC-PU-152",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    109.052,
+    -9.289,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Air cooled condenser pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-PU015",
+   "name": "ACC-PU-153",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    112.54,
+    -11.367,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Air cooled condenser pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-GN004",
+   "name": "ACC-SX-154",
+   "kind": "general",
+   "icon": "box",
+   "shape": "box",
+   "position": [
+    111.585,
+    -6.158,
+    0.0
+   ],
+   "dims": [
+    1.6,
+    1.6,
+    0
+   ],
+   "height": 1.9,
+   "nozzle_z": 0.8,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.1,
+    1.1,
+    1.9
+   ],
+   "purpose": {
+    "text": "Silencer",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-TK002",
+   "name": "TURBINE EXHAUST DUCT",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    104.967,
+    -16.15,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Turbine Exhaust Duct",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S1-TK003",
+   "name": "AIR COOLED CONDENSER",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    109.907,
+    -14.526,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "1",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Air Cooled Condenser",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-TK001",
+   "name": "CND-TK-160",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    140.451,
+    -10.282,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Condensate storage tank",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-TK002",
+   "name": "CND-TK-165",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    153.556,
+    -7.713,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Deareator storage tank",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-TK003",
+   "name": "CND-HTR-166",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    153.801,
+    -3.695,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Heater",
+    "source": "tag type code"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-TK004",
+   "name": "CND-HTR-161",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    155.395,
+    -11.377,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Condensate heater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-PU001",
+   "name": "CND-PU-162",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    144.643,
+    -11.603,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Condensate pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-PU002",
+   "name": "CND-PU-163",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    141.69,
+    -14.349,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Condensate pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-PU003",
+   "name": "CND-PU-164",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    139.111,
+    -17.535,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Condensate pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S2-TK005",
+   "name": "CND-HTR-161",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    148.425,
+    -16.727,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "2",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Condensate heater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-TK001",
+   "name": "ACW-TK-212",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    139.189,
+    -38.353,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Aux cooling water tank",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-TK002",
+   "name": "ACW-AXC-210",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    146.791,
+    -39.53,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Aux cooling water cooler",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-TK003",
+   "name": "LUBE OIL COOLER",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    153.048,
+    -42.034,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Lube Oil Cooler",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-PU001",
+   "name": "ACW-PU-211A",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    142.154,
+    -42.934,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Aux cooling water pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-PU002",
+   "name": "ACW-PU-211B",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    142.154,
+    -47.034,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Aux cooling water pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S7-PU003",
+   "name": "ACW-PU-211C",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    142.154,
+    -51.077,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "7",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Aux cooling water pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S8-TK001",
+   "name": "CVCS-HX-111",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    102.523,
+    -43.594,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "8",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Letdown heat exchanger",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK001",
+   "name": "RCS-V-103",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    53.8,
+    -42.487,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Pressurizer",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK002",
+   "name": "RCS-VE-104",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    64.046,
+    -36.886,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Pressure relief tank",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK003",
+   "name": "untagged tank",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    65.911,
+    -40.538,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Vessel class. PID2Graph's 'tank' covers tanks, pressure vessels, heat exchangers and similar shells: it holds, heats, cools or separates process fluid.",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK004",
+   "name": "untagged tank",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    64.292,
+    -44.235,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Vessel class. PID2Graph's 'tank' covers tanks, pressure vessels, heat exchangers and similar shells: it holds, heats, cools or separates process fluid.",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-GN017",
+   "name": "RCS-EX-105",
+   "kind": "general",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    52.741,
+    -46.448,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Electric heater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK005",
+   "name": "RC-P100-X001",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    60.964,
+    -48.488,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Vessel class. PID2Graph's 'tank' covers tanks, pressure vessels, heat exchangers and similar shells: it holds, heats, cools or separates process fluid.",
+    "source": "generic"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S6-TK006",
+   "name": "COOLANT HT EXCH RC-P100-X001",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    68.209,
+    -45.493,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "6",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Coolant Ht Exch Rc-P100-X001",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S4-TK001",
+   "name": "ESS-HTR-180",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    18.085,
+    -36.876,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "4",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "De superheater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S4-TK002",
+   "name": "FWS-HTR-161",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    19.748,
+    -46.639,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "4",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Hp fws heater",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S11-PU001",
+   "name": "RHR-PU-120A",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    11.559,
+    -72.097,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "11",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Rhr pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S11-TK001",
+   "name": "RHR-HX-121A",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    17.105,
+    -72.009,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "11",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Rhr heat exchanger",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S11-PU002",
+   "name": "RHR-PU-120B",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    11.357,
+    -78.203,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "11",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Rhr pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S11-TK002",
+   "name": "RHR-HX-121B",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    17.105,
+    -78.01,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "11",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Rhr heat exchanger",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S5-TK001",
+   "name": "RCS-XR-100",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    54.351,
+    -73.043,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "5",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Reactor vessel",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S5-TK002",
+   "name": "RCS-SG-101",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    67.375,
+    -72.969,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "5",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Steam generator",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S5-PU001",
+   "name": "RCS-PU-102A",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    59.846,
+    -76.836,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "5",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump",
+    "source": "tag type code"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S5-PU002",
+   "name": "RCS-PU-102B",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    57.763,
+    -80.8,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "5",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Pump",
+    "source": "tag type code"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK001",
+   "name": "CVCS-VCT-118",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    95.146,
+    -73.254,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Volume control tank",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK002",
+   "name": "CVCS-HX-110",
+   "kind": "tank",
+   "icon": "exchanger",
+   "shape": "horizontal_exchanger",
+   "position": [
+    100.158,
+    -69.862,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    3.6
+   ],
+   "height": 2.15,
+   "nozzle_z": 1.4,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    2.1,
+    0.75,
+    2.15
+   ],
+   "purpose": {
+    "text": "Regen heat exchanger",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK003",
+   "name": "CVCS-AN-113A",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    103.506,
+    -73.169,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Boron analyzer",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK004",
+   "name": "CVCS-AN-113B",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    107.606,
+    -73.161,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Radiation analyzer",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK005",
+   "name": "CVCS-FL-112A",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    111.27,
+    -75.562,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Letdown filter",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK006",
+   "name": "CVCS-FL-112B",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    115.37,
+    -75.562,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Letdown filter",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-PU001",
+   "name": "CVCS-PU-115",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    98.661,
+    -75.364,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Positive displacement charging pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-PU002",
+   "name": "CVCS-PU-116",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    97.051,
+    -79.092,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Positive displacement charging pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-PU003",
+   "name": "CVCS-PU-117",
+   "kind": "pump",
+   "icon": "pump",
+   "shape": "compressor",
+   "position": [
+    98.089,
+    -83.075,
+    0.0
+   ],
+   "dims": [
+    0.9,
+    0.9,
+    1.4
+   ],
+   "height": 1.45,
+   "nozzle_z": 0.7,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.0,
+    0.75,
+    1.45
+   ],
+   "purpose": {
+    "text": "Positive displacement charging pump",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK007",
+   "name": "CVCS ION-114A",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    101.085,
+    -78.758,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Cvcs Ion-114A",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S10-TK008",
+   "name": "CVCS ION-114B",
+   "kind": "tank",
+   "icon": "vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    105.097,
+    -77.912,
+    0.0
+   ],
+   "dims": [
+    2.2,
+    3.6,
+    0
+   ],
+   "height": 4.884,
+   "nozzle_z": 1.6,
+   "agitator": false,
+   "nozzles": [],
+   "area": "10",
+   "extent": [
+    1.4,
+    1.4,
+    4.884
+   ],
+   "purpose": {
+    "text": "Cvcs Ion-114B",
+    "source": "drawing label"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK001",
+   "name": "RCS-XR-100F",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    137.943,
+    -74.674,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Sixth issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK002",
+   "name": "RCS-XR-100E",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    141.947,
+    -74.669,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Fifth issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK003",
+   "name": "RCS-XR-100D",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    145.952,
+    -74.718,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Fourth issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK004",
+   "name": "RCS-XR-100C",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    150.049,
+    -74.538,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Third issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK005",
+   "name": "RCS-XR-100B",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    154.042,
+    -74.858,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "Second issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  },
+  {
+   "id": "S9-TK006",
+   "name": "RCS-XR-100A",
+   "kind": "tank",
+   "icon": "tall_vessel",
+   "shape": "vertical_vessel",
+   "position": [
+    158.045,
+    -74.696,
+    0.0
+   ],
+   "dims": [
+    2.8,
+    6.0,
+    0
+   ],
+   "height": 7.416,
+   "nozzle_z": 2.5,
+   "agitator": false,
+   "nozzles": [],
+   "area": "9",
+   "extent": [
+    1.7,
+    1.7,
+    7.416
+   ],
+   "purpose": {
+    "text": "First issue reactor",
+    "source": "equipment schedule"
+   },
+   "geometry_status": "placeholder: parametric shape and size, not plant geometry; position = drawing position"
+  }
+ ],
+ "boundaries": [],
+ "pipes": [
+  {
+   "id": "P-S3-PU001-S3-PU002",
+   "from": "S3-PU001",
+   "to": "S3-PU002",
+   "service": "process",
+   "points": [
+    [
+     10.637,
+     -12.333,
+     1.1
+    ],
+    [
+     10.637,
+     -16.083,
+     4.2
+    ],
+    [
+     10.637,
+     -16.236,
+     4.178
+    ],
+    [
+     10.637,
+     -16.346,
+     4.113
+    ],
+    [
+     10.637,
+     -16.411,
+     4.003
+    ],
+    [
+     10.637,
+     -16.433,
+     3.85
+    ],
+    [
+     10.637,
+     -16.433,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S3-PU001-S3-TK002",
+   "from": "S3-PU001",
+   "to": "S3-TK002",
+   "service": "process",
+   "points": [
+    [
+     10.637,
+     -12.333,
+     1.1
+    ],
+    [
+     10.637,
+     -12.333,
+     4.2
+    ],
+    [
+     10.659,
+     -12.333,
+     4.353
+    ],
+    [
+     10.725,
+     -12.333,
+     4.463
+    ],
+    [
+     10.834,
+     -12.333,
+     4.528
+    ],
+    [
+     10.987,
+     -12.333,
+     4.55
+    ],
+    [
+     20.525,
+     -12.333,
+     4.55
+    ],
+    [
+     20.678,
+     -12.355,
+     4.55
+    ],
+    [
+     20.787,
+     -12.421,
+     4.55
+    ],
+    [
+     20.853,
+     -12.53,
+     4.55
+    ],
+    [
+     20.875,
+     -12.683,
+     4.55
+    ],
+    [
+     20.875,
+     -12.788,
+     4.55
+    ],
+    [
+     20.875,
+     -12.941,
+     4.528
+    ],
+    [
+     20.875,
+     -13.05,
+     4.462
+    ],
+    [
+     20.875,
+     -13.116,
+     4.353
+    ],
+    [
+     20.875,
+     -13.138,
+     4.2
+    ],
+    [
+     20.875,
+     -13.138,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (4/6, confidence 0.757)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S7-PU001-S3-PU002",
+   "from": "S7-PU001",
+   "to": "S3-PU002",
+   "service": "process",
+   "points": [
+    [
+     142.154,
+     -42.934,
+     1.1
+    ],
+    [
+     142.154,
+     -42.934,
+     4.55
+    ],
+    [
+     142.132,
+     -42.934,
+     4.703
+    ],
+    [
+     142.066,
+     -42.934,
+     4.812
+    ],
+    [
+     141.957,
+     -42.934,
+     4.878
+    ],
+    [
+     141.804,
+     -42.934,
+     4.9
+    ],
+    [
+     10.987,
+     -42.934,
+     4.9
+    ],
+    [
+     10.834,
+     -42.912,
+     4.9
+    ],
+    [
+     10.725,
+     -42.847,
+     4.9
+    ],
+    [
+     10.659,
+     -42.737,
+     4.9
+    ],
+    [
+     10.637,
+     -42.584,
+     4.9
+    ],
+    [
+     10.637,
+     -16.783,
+     4.9
+    ],
+    [
+     10.637,
+     -16.63,
+     4.878
+    ],
+    [
+     10.637,
+     -16.521,
+     4.812
+    ],
+    [
+     10.637,
+     -16.455,
+     4.703
+    ],
+    [
+     10.637,
+     -16.433,
+     4.55
+    ],
+    [
+     10.637,
+     -16.433,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (2/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S7-PU002-S3-PU002",
+   "from": "S7-PU002",
+   "to": "S3-PU002",
+   "service": "process",
+   "points": [
+    [
+     142.154,
+     -47.034,
+     1.1
+    ],
+    [
+     142.154,
+     -47.034,
+     3.85
+    ],
+    [
+     142.132,
+     -47.034,
+     4.003
+    ],
+    [
+     142.066,
+     -47.034,
+     4.112
+    ],
+    [
+     141.957,
+     -47.034,
+     4.178
+    ],
+    [
+     141.804,
+     -47.034,
+     4.2
+    ],
+    [
+     10.987,
+     -47.034,
+     4.2
+    ],
+    [
+     10.834,
+     -47.012,
+     4.2
+    ],
+    [
+     10.725,
+     -46.947,
+     4.2
+    ],
+    [
+     10.659,
+     -46.837,
+     4.2
+    ],
+    [
+     10.637,
+     -46.684,
+     4.2
+    ],
+    [
+     10.637,
+     -16.783,
+     4.2
+    ],
+    [
+     10.637,
+     -16.63,
+     4.178
+    ],
+    [
+     10.637,
+     -16.521,
+     4.113
+    ],
+    [
+     10.637,
+     -16.455,
+     4.003
+    ],
+    [
+     10.637,
+     -16.433,
+     3.85
+    ],
+    [
+     10.637,
+     -16.433,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (4/5, confidence 0.722)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S7-PU003-S3-PU002",
+   "from": "S7-PU003",
+   "to": "S3-PU002",
+   "service": "process",
+   "points": [
+    [
+     142.154,
+     -51.077,
+     1.1
+    ],
+    [
+     142.154,
+     -51.077,
+     4.2
+    ],
+    [
+     142.132,
+     -51.077,
+     4.353
+    ],
+    [
+     142.066,
+     -51.077,
+     4.463
+    ],
+    [
+     141.957,
+     -51.077,
+     4.528
+    ],
+    [
+     141.804,
+     -51.077,
+     4.55
+    ],
+    [
+     10.987,
+     -51.077,
+     4.55
+    ],
+    [
+     10.834,
+     -51.055,
+     4.55
+    ],
+    [
+     10.725,
+     -50.99,
+     4.55
+    ],
+    [
+     10.659,
+     -50.88,
+     4.55
+    ],
+    [
+     10.637,
+     -50.727,
+     4.55
+    ],
+    [
+     10.637,
+     -16.783,
+     4.55
+    ],
+    [
+     10.637,
+     -16.63,
+     4.528
+    ],
+    [
+     10.637,
+     -16.521,
+     4.462
+    ],
+    [
+     10.637,
+     -16.455,
+     4.353
+    ],
+    [
+     10.637,
+     -16.433,
+     4.2
+    ],
+    [
+     10.637,
+     -16.433,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (4/5, confidence 0.722)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S3-PU002-S7-TK002",
+   "from": "S3-PU002",
+   "to": "S7-TK002",
+   "service": "process",
+   "points": [
+    [
+     10.637,
+     -16.433,
+     1.1
+    ],
+    [
+     10.637,
+     -16.433,
+     4.55
+    ],
+    [
+     10.659,
+     -16.433,
+     4.703
+    ],
+    [
+     10.725,
+     -16.433,
+     4.812
+    ],
+    [
+     10.834,
+     -16.433,
+     4.878
+    ],
+    [
+     10.987,
+     -16.433,
+     4.9
+    ],
+    [
+     146.441,
+     -16.433,
+     4.9
+    ],
+    [
+     146.594,
+     -16.455,
+     4.9
+    ],
+    [
+     146.703,
+     -16.521,
+     4.9
+    ],
+    [
+     146.769,
+     -16.63,
+     4.9
+    ],
+    [
+     146.791,
+     -16.783,
+     4.9
+    ],
+    [
+     146.791,
+     -39.18,
+     4.9
+    ],
+    [
+     146.791,
+     -39.333,
+     4.878
+    ],
+    [
+     146.791,
+     -39.442,
+     4.812
+    ],
+    [
+     146.791,
+     -39.508,
+     4.703
+    ],
+    [
+     146.791,
+     -39.53,
+     4.55
+    ],
+    [
+     146.791,
+     -39.53,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S3-PU002-S7-TK003",
+   "from": "S3-PU002",
+   "to": "S7-TK003",
+   "service": "process",
+   "points": [
+    [
+     10.637,
+     -16.433,
+     1.1
+    ],
+    [
+     10.637,
+     -16.433,
+     3.85
+    ],
+    [
+     10.659,
+     -16.433,
+     4.003
+    ],
+    [
+     10.725,
+     -16.433,
+     4.112
+    ],
+    [
+     10.834,
+     -16.433,
+     4.178
+    ],
+    [
+     10.987,
+     -16.433,
+     4.2
+    ],
+    [
+     152.698,
+     -16.433,
+     4.2
+    ],
+    [
+     152.852,
+     -16.455,
+     4.2
+    ],
+    [
+     152.961,
+     -16.521,
+     4.2
+    ],
+    [
+     153.027,
+     -16.63,
+     4.2
+    ],
+    [
+     153.048,
+     -16.783,
+     4.2
+    ],
+    [
+     153.048,
+     -41.684,
+     4.2
+    ],
+    [
+     153.048,
+     -41.837,
+     4.178
+    ],
+    [
+     153.048,
+     -41.947,
+     4.113
+    ],
+    [
+     153.048,
+     -42.012,
+     4.003
+    ],
+    [
+     153.048,
+     -42.034,
+     3.85
+    ],
+    [
+     153.048,
+     -42.034,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "3"
+  },
+  {
+   "id": "P-S0-TK002-S0-TK001",
+   "from": "S0-TK002",
+   "to": "S0-TK001",
+   "service": "process",
+   "points": [
+    [
+     49.081,
+     -13.937,
+     1.6
+    ],
+    [
+     49.081,
+     -13.937,
+     3.85
+    ],
+    [
+     49.103,
+     -13.937,
+     4.003
+    ],
+    [
+     49.169,
+     -13.937,
+     4.112
+    ],
+    [
+     49.278,
+     -13.937,
+     4.178
+    ],
+    [
+     49.431,
+     -13.937,
+     4.2
+    ],
+    [
+     52.934,
+     -13.937,
+     4.2
+    ],
+    [
+     53.087,
+     -13.915,
+     4.2
+    ],
+    [
+     53.197,
+     -13.849,
+     4.2
+    ],
+    [
+     53.262,
+     -13.74,
+     4.2
+    ],
+    [
+     53.284,
+     -13.587,
+     4.2
+    ],
+    [
+     53.284,
+     -11.37,
+     4.2
+    ],
+    [
+     53.284,
+     -11.217,
+     4.178
+    ],
+    [
+     53.284,
+     -11.107,
+     4.113
+    ],
+    [
+     53.284,
+     -11.042,
+     4.003
+    ],
+    [
+     53.284,
+     -11.02,
+     3.85
+    ],
+    [
+     53.284,
+     -11.02,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/3, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "0"
+  },
+  {
+   "id": "P-S1-PU014-S1-GN004",
+   "from": "S1-PU014",
+   "to": "S1-GN004",
+   "service": "process",
+   "points": [
+    [
+     109.052,
+     -9.289,
+     1.1
+    ],
+    [
+     109.052,
+     -9.289,
+     3.85
+    ],
+    [
+     109.074,
+     -9.289,
+     4.003
+    ],
+    [
+     109.139,
+     -9.289,
+     4.112
+    ],
+    [
+     109.249,
+     -9.289,
+     4.178
+    ],
+    [
+     109.402,
+     -9.289,
+     4.2
+    ],
+    [
+     111.235,
+     -9.289,
+     4.2
+    ],
+    [
+     111.388,
+     -9.267,
+     4.2
+    ],
+    [
+     111.498,
+     -9.201,
+     4.2
+    ],
+    [
+     111.563,
+     -9.092,
+     4.2
+    ],
+    [
+     111.585,
+     -8.939,
+     4.2
+    ],
+    [
+     111.585,
+     -6.508,
+     4.2
+    ],
+    [
+     111.585,
+     -6.355,
+     4.178
+    ],
+    [
+     111.585,
+     -6.246,
+     4.113
+    ],
+    [
+     111.585,
+     -6.18,
+     4.003
+    ],
+    [
+     111.585,
+     -6.158,
+     3.85
+    ],
+    [
+     111.585,
+     -6.158,
+     1.2
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/2, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "1"
+  },
+  {
+   "id": "P-S1-PU014-S1-PU015",
+   "from": "S1-PU014",
+   "to": "S1-PU015",
+   "service": "process",
+   "points": [
+    [
+     109.052,
+     -9.289,
+     1.1
+    ],
+    [
+     109.052,
+     -9.289,
+     4.2
+    ],
+    [
+     109.074,
+     -9.289,
+     4.353
+    ],
+    [
+     109.139,
+     -9.289,
+     4.463
+    ],
+    [
+     109.249,
+     -9.289,
+     4.528
+    ],
+    [
+     109.402,
+     -9.289,
+     4.55
+    ],
+    [
+     112.19,
+     -9.289,
+     4.55
+    ],
+    [
+     112.343,
+     -9.311,
+     4.55
+    ],
+    [
+     112.453,
+     -9.376,
+     4.55
+    ],
+    [
+     112.518,
+     -9.486,
+     4.55
+    ],
+    [
+     112.54,
+     -9.639,
+     4.55
+    ],
+    [
+     112.54,
+     -11.017,
+     4.55
+    ],
+    [
+     112.54,
+     -11.17,
+     4.528
+    ],
+    [
+     112.54,
+     -11.28,
+     4.462
+    ],
+    [
+     112.54,
+     -11.345,
+     4.353
+    ],
+    [
+     112.54,
+     -11.367,
+     4.2
+    ],
+    [
+     112.54,
+     -11.367,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/2, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "1"
+  },
+  {
+   "id": "P-S1-PU013-S1-PU014",
+   "from": "S1-PU013",
+   "to": "S1-PU014",
+   "service": "process",
+   "points": [
+    [
+     106.431,
+     -12.423,
+     1.1
+    ],
+    [
+     106.431,
+     -12.423,
+     4.55
+    ],
+    [
+     106.453,
+     -12.423,
+     4.703
+    ],
+    [
+     106.518,
+     -12.423,
+     4.812
+    ],
+    [
+     106.628,
+     -12.423,
+     4.878
+    ],
+    [
+     106.781,
+     -12.423,
+     4.9
+    ],
+    [
+     108.702,
+     -12.423,
+     4.9
+    ],
+    [
+     108.855,
+     -12.402,
+     4.9
+    ],
+    [
+     108.964,
+     -12.336,
+     4.9
+    ],
+    [
+     109.03,
+     -12.227,
+     4.9
+    ],
+    [
+     109.052,
+     -12.073,
+     4.9
+    ],
+    [
+     109.052,
+     -9.639,
+     4.9
+    ],
+    [
+     109.052,
+     -9.486,
+     4.878
+    ],
+    [
+     109.052,
+     -9.376,
+     4.812
+    ],
+    [
+     109.052,
+     -9.311,
+     4.703
+    ],
+    [
+     109.052,
+     -9.289,
+     4.55
+    ],
+    [
+     109.052,
+     -9.289,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/2, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "1"
+  },
+  {
+   "id": "P-S1-TK002-S1-TK003",
+   "from": "S1-TK002",
+   "to": "S1-TK003",
+   "service": "process",
+   "points": [
+    [
+     104.967,
+     -16.15,
+     1.6
+    ],
+    [
+     104.967,
+     -16.15,
+     3.85
+    ],
+    [
+     104.988,
+     -16.15,
+     4.003
+    ],
+    [
+     105.054,
+     -16.15,
+     4.112
+    ],
+    [
+     105.163,
+     -16.15,
+     4.178
+    ],
+    [
+     105.317,
+     -16.15,
+     4.2
+    ],
+    [
+     109.557,
+     -16.15,
+     4.2
+    ],
+    [
+     109.711,
+     -16.128,
+     4.2
+    ],
+    [
+     109.82,
+     -16.063,
+     4.2
+    ],
+    [
+     109.886,
+     -15.953,
+     4.2
+    ],
+    [
+     109.907,
+     -15.8,
+     4.2
+    ],
+    [
+     109.907,
+     -14.876,
+     4.2
+    ],
+    [
+     109.907,
+     -14.723,
+     4.178
+    ],
+    [
+     109.907,
+     -14.613,
+     4.113
+    ],
+    [
+     109.907,
+     -14.548,
+     4.003
+    ],
+    [
+     109.907,
+     -14.526,
+     3.85
+    ],
+    [
+     109.907,
+     -14.526,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "1"
+  },
+  {
+   "id": "P-S1-TK001-S1-PU013",
+   "from": "S1-TK001",
+   "to": "S1-PU013",
+   "service": "process",
+   "points": [
+    [
+     100.76,
+     -7.133,
+     1.6
+    ],
+    [
+     100.76,
+     -7.133,
+     4.2
+    ],
+    [
+     100.782,
+     -7.133,
+     4.353
+    ],
+    [
+     100.847,
+     -7.133,
+     4.463
+    ],
+    [
+     100.957,
+     -7.133,
+     4.528
+    ],
+    [
+     101.11,
+     -7.133,
+     4.55
+    ],
+    [
+     106.081,
+     -7.133,
+     4.55
+    ],
+    [
+     106.234,
+     -7.155,
+     4.55
+    ],
+    [
+     106.343,
+     -7.221,
+     4.55
+    ],
+    [
+     106.409,
+     -7.33,
+     4.55
+    ],
+    [
+     106.431,
+     -7.483,
+     4.55
+    ],
+    [
+     106.431,
+     -12.073,
+     4.55
+    ],
+    [
+     106.431,
+     -12.227,
+     4.528
+    ],
+    [
+     106.431,
+     -12.336,
+     4.462
+    ],
+    [
+     106.431,
+     -12.402,
+     4.353
+    ],
+    [
+     106.431,
+     -12.423,
+     4.2
+    ],
+    [
+     106.431,
+     -12.423,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/2, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "1"
+  },
+  {
+   "id": "P-S2-PU002-S2-PU003",
+   "from": "S2-PU002",
+   "to": "S2-PU003",
+   "service": "process",
+   "points": [
+    [
+     141.69,
+     -14.349,
+     1.1
+    ],
+    [
+     141.69,
+     -14.349,
+     3.85
+    ],
+    [
+     141.669,
+     -14.349,
+     4.003
+    ],
+    [
+     141.603,
+     -14.349,
+     4.112
+    ],
+    [
+     141.494,
+     -14.349,
+     4.178
+    ],
+    [
+     141.34,
+     -14.349,
+     4.2
+    ],
+    [
+     139.461,
+     -14.349,
+     4.2
+    ],
+    [
+     139.308,
+     -14.371,
+     4.2
+    ],
+    [
+     139.198,
+     -14.436,
+     4.2
+    ],
+    [
+     139.133,
+     -14.546,
+     4.2
+    ],
+    [
+     139.111,
+     -14.699,
+     4.2
+    ],
+    [
+     139.111,
+     -17.185,
+     4.2
+    ],
+    [
+     139.111,
+     -17.339,
+     4.178
+    ],
+    [
+     139.111,
+     -17.448,
+     4.113
+    ],
+    [
+     139.111,
+     -17.514,
+     4.003
+    ],
+    [
+     139.111,
+     -17.535,
+     3.85
+    ],
+    [
+     139.111,
+     -17.535,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/3, confidence 0.722)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK001-S2-PU002",
+   "from": "S2-TK001",
+   "to": "S2-PU002",
+   "service": "process",
+   "points": [
+    [
+     140.451,
+     -10.282,
+     1.6
+    ],
+    [
+     140.451,
+     -10.282,
+     4.2
+    ],
+    [
+     140.473,
+     -10.282,
+     4.353
+    ],
+    [
+     140.538,
+     -10.282,
+     4.463
+    ],
+    [
+     140.648,
+     -10.282,
+     4.528
+    ],
+    [
+     140.801,
+     -10.282,
+     4.55
+    ],
+    [
+     141.34,
+     -10.282,
+     4.55
+    ],
+    [
+     141.494,
+     -10.304,
+     4.55
+    ],
+    [
+     141.603,
+     -10.37,
+     4.55
+    ],
+    [
+     141.669,
+     -10.479,
+     4.55
+    ],
+    [
+     141.69,
+     -10.632,
+     4.55
+    ],
+    [
+     141.69,
+     -13.999,
+     4.55
+    ],
+    [
+     141.69,
+     -14.152,
+     4.528
+    ],
+    [
+     141.69,
+     -14.261,
+     4.462
+    ],
+    [
+     141.69,
+     -14.327,
+     4.353
+    ],
+    [
+     141.69,
+     -14.349,
+     4.2
+    ],
+    [
+     141.69,
+     -14.349,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK002-S2-TK003",
+   "from": "S2-TK002",
+   "to": "S2-TK003",
+   "service": "process",
+   "points": [
+    [
+     153.556,
+     -7.713,
+     1.6
+    ],
+    [
+     153.556,
+     -7.713,
+     4.777
+    ],
+    [
+     153.563,
+     -7.713,
+     4.831
+    ],
+    [
+     153.586,
+     -7.713,
+     4.869
+    ],
+    [
+     153.625,
+     -7.713,
+     4.892
+    ],
+    [
+     153.678,
+     -7.713,
+     4.9
+    ],
+    [
+     153.678,
+     -7.713,
+     4.9
+    ],
+    [
+     153.732,
+     -7.705,
+     4.9
+    ],
+    [
+     153.77,
+     -7.682,
+     4.9
+    ],
+    [
+     153.793,
+     -7.644,
+     4.9
+    ],
+    [
+     153.801,
+     -7.59,
+     4.9
+    ],
+    [
+     153.801,
+     -4.045,
+     4.9
+    ],
+    [
+     153.801,
+     -3.892,
+     4.878
+    ],
+    [
+     153.801,
+     -3.782,
+     4.812
+    ],
+    [
+     153.801,
+     -3.717,
+     4.703
+    ],
+    [
+     153.801,
+     -3.695,
+     4.55
+    ],
+    [
+     153.801,
+     -3.695,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-PU001-S2-PU002",
+   "from": "S2-PU001",
+   "to": "S2-PU002",
+   "service": "process",
+   "points": [
+    [
+     144.643,
+     -11.603,
+     1.1
+    ],
+    [
+     144.643,
+     -11.603,
+     3.85
+    ],
+    [
+     144.621,
+     -11.603,
+     4.003
+    ],
+    [
+     144.555,
+     -11.603,
+     4.112
+    ],
+    [
+     144.446,
+     -11.603,
+     4.178
+    ],
+    [
+     144.293,
+     -11.603,
+     4.2
+    ],
+    [
+     142.04,
+     -11.603,
+     4.2
+    ],
+    [
+     141.887,
+     -11.625,
+     4.2
+    ],
+    [
+     141.778,
+     -11.691,
+     4.2
+    ],
+    [
+     141.712,
+     -11.8,
+     4.2
+    ],
+    [
+     141.69,
+     -11.953,
+     4.2
+    ],
+    [
+     141.69,
+     -13.999,
+     4.2
+    ],
+    [
+     141.69,
+     -14.152,
+     4.178
+    ],
+    [
+     141.69,
+     -14.261,
+     4.113
+    ],
+    [
+     141.69,
+     -14.327,
+     4.003
+    ],
+    [
+     141.69,
+     -14.349,
+     3.85
+    ],
+    [
+     141.69,
+     -14.349,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-PU001-S2-TK005",
+   "from": "S2-PU001",
+   "to": "S2-TK005",
+   "service": "process",
+   "points": [
+    [
+     144.643,
+     -11.603,
+     1.1
+    ],
+    [
+     144.643,
+     -11.603,
+     4.2
+    ],
+    [
+     144.665,
+     -11.603,
+     4.353
+    ],
+    [
+     144.73,
+     -11.603,
+     4.463
+    ],
+    [
+     144.84,
+     -11.603,
+     4.528
+    ],
+    [
+     144.993,
+     -11.603,
+     4.55
+    ],
+    [
+     148.076,
+     -11.603,
+     4.55
+    ],
+    [
+     148.229,
+     -11.625,
+     4.55
+    ],
+    [
+     148.338,
+     -11.691,
+     4.55
+    ],
+    [
+     148.404,
+     -11.8,
+     4.55
+    ],
+    [
+     148.425,
+     -11.953,
+     4.55
+    ],
+    [
+     148.425,
+     -16.377,
+     4.55
+    ],
+    [
+     148.425,
+     -16.53,
+     4.528
+    ],
+    [
+     148.425,
+     -16.639,
+     4.462
+    ],
+    [
+     148.425,
+     -16.705,
+     4.353
+    ],
+    [
+     148.425,
+     -16.727,
+     4.2
+    ],
+    [
+     148.425,
+     -16.727,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK005-S2-TK004",
+   "from": "S2-TK005",
+   "to": "S2-TK004",
+   "service": "process",
+   "points": [
+    [
+     148.425,
+     -16.727,
+     1.6
+    ],
+    [
+     148.425,
+     -16.727,
+     4.55
+    ],
+    [
+     148.447,
+     -16.727,
+     4.703
+    ],
+    [
+     148.513,
+     -16.727,
+     4.812
+    ],
+    [
+     148.622,
+     -16.727,
+     4.878
+    ],
+    [
+     148.775,
+     -16.727,
+     4.9
+    ],
+    [
+     155.045,
+     -16.727,
+     4.9
+    ],
+    [
+     155.198,
+     -16.705,
+     4.9
+    ],
+    [
+     155.307,
+     -16.639,
+     4.9
+    ],
+    [
+     155.373,
+     -16.53,
+     4.9
+    ],
+    [
+     155.395,
+     -16.377,
+     4.9
+    ],
+    [
+     155.395,
+     -11.727,
+     4.9
+    ],
+    [
+     155.395,
+     -11.574,
+     4.878
+    ],
+    [
+     155.395,
+     -11.465,
+     4.812
+    ],
+    [
+     155.395,
+     -11.399,
+     4.703
+    ],
+    [
+     155.395,
+     -11.377,
+     4.55
+    ],
+    [
+     155.395,
+     -11.377,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (2/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK003-S2-TK004",
+   "from": "S2-TK003",
+   "to": "S2-TK004",
+   "service": "process",
+   "points": [
+    [
+     153.801,
+     -3.695,
+     1.6
+    ],
+    [
+     153.801,
+     -3.695,
+     3.85
+    ],
+    [
+     153.823,
+     -3.695,
+     4.003
+    ],
+    [
+     153.888,
+     -3.695,
+     4.112
+    ],
+    [
+     153.998,
+     -3.695,
+     4.178
+    ],
+    [
+     154.151,
+     -3.695,
+     4.2
+    ],
+    [
+     155.045,
+     -3.695,
+     4.2
+    ],
+    [
+     155.198,
+     -3.717,
+     4.2
+    ],
+    [
+     155.307,
+     -3.782,
+     4.2
+    ],
+    [
+     155.373,
+     -3.892,
+     4.2
+    ],
+    [
+     155.395,
+     -4.045,
+     4.2
+    ],
+    [
+     155.395,
+     -11.027,
+     4.2
+    ],
+    [
+     155.395,
+     -11.181,
+     4.178
+    ],
+    [
+     155.395,
+     -11.29,
+     4.113
+    ],
+    [
+     155.395,
+     -11.356,
+     4.003
+    ],
+    [
+     155.395,
+     -11.377,
+     3.85
+    ],
+    [
+     155.395,
+     -11.377,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK002-S3-PU001",
+   "from": "S2-TK002",
+   "to": "S3-PU001",
+   "service": "process",
+   "points": [
+    [
+     153.556,
+     -7.713,
+     1.6
+    ],
+    [
+     153.556,
+     -7.713,
+     4.2
+    ],
+    [
+     153.534,
+     -7.713,
+     4.353
+    ],
+    [
+     153.468,
+     -7.713,
+     4.463
+    ],
+    [
+     153.359,
+     -7.713,
+     4.528
+    ],
+    [
+     153.206,
+     -7.713,
+     4.55
+    ],
+    [
+     10.987,
+     -7.713,
+     4.55
+    ],
+    [
+     10.834,
+     -7.735,
+     4.55
+    ],
+    [
+     10.725,
+     -7.8,
+     4.55
+    ],
+    [
+     10.659,
+     -7.91,
+     4.55
+    ],
+    [
+     10.637,
+     -8.063,
+     4.55
+    ],
+    [
+     10.637,
+     -11.983,
+     4.55
+    ],
+    [
+     10.637,
+     -12.136,
+     4.528
+    ],
+    [
+     10.637,
+     -12.246,
+     4.462
+    ],
+    [
+     10.637,
+     -12.311,
+     4.353
+    ],
+    [
+     10.637,
+     -12.333,
+     4.2
+    ],
+    [
+     10.637,
+     -12.333,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/3, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK002-S3-PU002",
+   "from": "S2-TK002",
+   "to": "S3-PU002",
+   "service": "process",
+   "points": [
+    [
+     153.556,
+     -7.713,
+     1.6
+    ],
+    [
+     153.556,
+     -7.713,
+     4.55
+    ],
+    [
+     153.534,
+     -7.713,
+     4.703
+    ],
+    [
+     153.468,
+     -7.713,
+     4.812
+    ],
+    [
+     153.359,
+     -7.713,
+     4.878
+    ],
+    [
+     153.206,
+     -7.713,
+     4.9
+    ],
+    [
+     10.987,
+     -7.713,
+     4.9
+    ],
+    [
+     10.834,
+     -7.735,
+     4.9
+    ],
+    [
+     10.725,
+     -7.8,
+     4.9
+    ],
+    [
+     10.659,
+     -7.91,
+     4.9
+    ],
+    [
+     10.637,
+     -8.063,
+     4.9
+    ],
+    [
+     10.637,
+     -16.083,
+     4.9
+    ],
+    [
+     10.637,
+     -16.236,
+     4.878
+    ],
+    [
+     10.637,
+     -16.346,
+     4.812
+    ],
+    [
+     10.637,
+     -16.411,
+     4.703
+    ],
+    [
+     10.637,
+     -16.433,
+     4.55
+    ],
+    [
+     10.637,
+     -16.433,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/3, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S2-TK002-S3-TK001",
+   "from": "S2-TK002",
+   "to": "S3-TK001",
+   "service": "process",
+   "points": [
+    [
+     153.556,
+     -7.713,
+     1.6
+    ],
+    [
+     153.556,
+     -7.713,
+     3.85
+    ],
+    [
+     153.534,
+     -7.713,
+     4.003
+    ],
+    [
+     153.468,
+     -7.713,
+     4.112
+    ],
+    [
+     153.359,
+     -7.713,
+     4.178
+    ],
+    [
+     153.206,
+     -7.713,
+     4.2
+    ],
+    [
+     9.259,
+     -7.713,
+     4.2
+    ],
+    [
+     9.106,
+     -7.691,
+     4.2
+    ],
+    [
+     8.996,
+     -7.625,
+     4.2
+    ],
+    [
+     8.931,
+     -7.516,
+     4.2
+    ],
+    [
+     8.909,
+     -7.363,
+     4.2
+    ],
+    [
+     8.909,
+     -6.971,
+     4.2
+    ],
+    [
+     8.909,
+     -6.817,
+     4.178
+    ],
+    [
+     8.909,
+     -6.708,
+     4.113
+    ],
+    [
+     8.909,
+     -6.642,
+     4.003
+    ],
+    [
+     8.909,
+     -6.621,
+     3.85
+    ],
+    [
+     8.909,
+     -6.621,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "2"
+  },
+  {
+   "id": "P-S7-PU002-S7-PU003",
+   "from": "S7-PU002",
+   "to": "S7-PU003",
+   "service": "process",
+   "points": [
+    [
+     142.154,
+     -47.034,
+     1.1
+    ],
+    [
+     142.154,
+     -50.727,
+     4.2
+    ],
+    [
+     142.154,
+     -50.88,
+     4.178
+    ],
+    [
+     142.154,
+     -50.99,
+     4.113
+    ],
+    [
+     142.154,
+     -51.055,
+     4.003
+    ],
+    [
+     142.154,
+     -51.077,
+     3.85
+    ],
+    [
+     142.154,
+     -51.077,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "7"
+  },
+  {
+   "id": "P-S7-PU001-S7-PU002",
+   "from": "S7-PU001",
+   "to": "S7-PU002",
+   "service": "process",
+   "points": [
+    [
+     142.154,
+     -42.934,
+     1.1
+    ],
+    [
+     142.154,
+     -46.684,
+     4.55
+    ],
+    [
+     142.154,
+     -46.837,
+     4.528
+    ],
+    [
+     142.154,
+     -46.947,
+     4.462
+    ],
+    [
+     142.154,
+     -47.012,
+     4.353
+    ],
+    [
+     142.154,
+     -47.034,
+     4.2
+    ],
+    [
+     142.154,
+     -47.034,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "7"
+  },
+  {
+   "id": "P-S7-TK001-S7-PU001",
+   "from": "S7-TK001",
+   "to": "S7-PU001",
+   "service": "process",
+   "points": [
+    [
+     139.189,
+     -38.353,
+     1.6
+    ],
+    [
+     139.189,
+     -38.353,
+     4.55
+    ],
+    [
+     139.21,
+     -38.353,
+     4.703
+    ],
+    [
+     139.276,
+     -38.353,
+     4.812
+    ],
+    [
+     139.385,
+     -38.353,
+     4.878
+    ],
+    [
+     139.538,
+     -38.353,
+     4.9
+    ],
+    [
+     141.804,
+     -38.353,
+     4.9
+    ],
+    [
+     141.957,
+     -38.375,
+     4.9
+    ],
+    [
+     142.066,
+     -38.441,
+     4.9
+    ],
+    [
+     142.132,
+     -38.55,
+     4.9
+    ],
+    [
+     142.154,
+     -38.703,
+     4.9
+    ],
+    [
+     142.154,
+     -42.584,
+     4.9
+    ],
+    [
+     142.154,
+     -42.737,
+     4.878
+    ],
+    [
+     142.154,
+     -42.847,
+     4.812
+    ],
+    [
+     142.154,
+     -42.912,
+     4.703
+    ],
+    [
+     142.154,
+     -42.934,
+     4.55
+    ],
+    [
+     142.154,
+     -42.934,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "7"
+  },
+  {
+   "id": "P-S7-TK002-S7-PU001",
+   "from": "S7-TK002",
+   "to": "S7-PU001",
+   "service": "process",
+   "points": [
+    [
+     146.791,
+     -39.53,
+     1.6
+    ],
+    [
+     146.791,
+     -39.53,
+     3.85
+    ],
+    [
+     146.769,
+     -39.53,
+     4.003
+    ],
+    [
+     146.703,
+     -39.53,
+     4.112
+    ],
+    [
+     146.594,
+     -39.53,
+     4.178
+    ],
+    [
+     146.441,
+     -39.53,
+     4.2
+    ],
+    [
+     142.504,
+     -39.53,
+     4.2
+    ],
+    [
+     142.351,
+     -39.551,
+     4.2
+    ],
+    [
+     142.242,
+     -39.617,
+     4.2
+    ],
+    [
+     142.176,
+     -39.726,
+     4.2
+    ],
+    [
+     142.154,
+     -39.88,
+     4.2
+    ],
+    [
+     142.154,
+     -42.584,
+     4.2
+    ],
+    [
+     142.154,
+     -42.737,
+     4.178
+    ],
+    [
+     142.154,
+     -42.847,
+     4.113
+    ],
+    [
+     142.154,
+     -42.912,
+     4.003
+    ],
+    [
+     142.154,
+     -42.934,
+     3.85
+    ],
+    [
+     142.154,
+     -42.934,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (2/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "7"
+  },
+  {
+   "id": "P-S7-TK003-S7-TK002",
+   "from": "S7-TK003",
+   "to": "S7-TK002",
+   "service": "process",
+   "points": [
+    [
+     153.048,
+     -42.034,
+     1.6
+    ],
+    [
+     153.048,
+     -42.034,
+     4.2
+    ],
+    [
+     153.027,
+     -42.034,
+     4.353
+    ],
+    [
+     152.961,
+     -42.034,
+     4.463
+    ],
+    [
+     152.852,
+     -42.034,
+     4.528
+    ],
+    [
+     152.698,
+     -42.034,
+     4.55
+    ],
+    [
+     147.141,
+     -42.034,
+     4.55
+    ],
+    [
+     146.987,
+     -42.012,
+     4.55
+    ],
+    [
+     146.878,
+     -41.947,
+     4.55
+    ],
+    [
+     146.812,
+     -41.837,
+     4.55
+    ],
+    [
+     146.791,
+     -41.684,
+     4.55
+    ],
+    [
+     146.791,
+     -39.88,
+     4.55
+    ],
+    [
+     146.791,
+     -39.726,
+     4.528
+    ],
+    [
+     146.791,
+     -39.617,
+     4.462
+    ],
+    [
+     146.791,
+     -39.551,
+     4.353
+    ],
+    [
+     146.791,
+     -39.53,
+     4.2
+    ],
+    [
+     146.791,
+     -39.53,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "7"
+  },
+  {
+   "id": "P-S6-TK003-S6-TK004",
+   "from": "S6-TK003",
+   "to": "S6-TK004",
+   "service": "process",
+   "points": [
+    [
+     65.911,
+     -40.538,
+     1.6
+    ],
+    [
+     65.911,
+     -40.538,
+     3.85
+    ],
+    [
+     65.889,
+     -40.538,
+     4.003
+    ],
+    [
+     65.823,
+     -40.538,
+     4.112
+    ],
+    [
+     65.714,
+     -40.538,
+     4.178
+    ],
+    [
+     65.561,
+     -40.538,
+     4.2
+    ],
+    [
+     64.642,
+     -40.538,
+     4.2
+    ],
+    [
+     64.489,
+     -40.559,
+     4.2
+    ],
+    [
+     64.38,
+     -40.625,
+     4.2
+    ],
+    [
+     64.314,
+     -40.734,
+     4.2
+    ],
+    [
+     64.292,
+     -40.888,
+     4.2
+    ],
+    [
+     64.292,
+     -43.885,
+     4.2
+    ],
+    [
+     64.292,
+     -44.038,
+     4.178
+    ],
+    [
+     64.292,
+     -44.148,
+     4.113
+    ],
+    [
+     64.292,
+     -44.213,
+     4.003
+    ],
+    [
+     64.292,
+     -44.235,
+     3.85
+    ],
+    [
+     64.292,
+     -44.235,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "6"
+  },
+  {
+   "id": "P-S6-TK001-S6-TK002",
+   "from": "S6-TK001",
+   "to": "S6-TK002",
+   "service": "process",
+   "points": [
+    [
+     53.8,
+     -42.487,
+     1.6
+    ],
+    [
+     53.8,
+     -42.487,
+     4.2
+    ],
+    [
+     53.822,
+     -42.487,
+     4.353
+    ],
+    [
+     53.887,
+     -42.487,
+     4.463
+    ],
+    [
+     53.997,
+     -42.487,
+     4.528
+    ],
+    [
+     54.15,
+     -42.487,
+     4.55
+    ],
+    [
+     63.696,
+     -42.487,
+     4.55
+    ],
+    [
+     63.849,
+     -42.466,
+     4.55
+    ],
+    [
+     63.958,
+     -42.4,
+     4.55
+    ],
+    [
+     64.024,
+     -42.291,
+     4.55
+    ],
+    [
+     64.046,
+     -42.137,
+     4.55
+    ],
+    [
+     64.046,
+     -37.236,
+     4.55
+    ],
+    [
+     64.046,
+     -37.083,
+     4.528
+    ],
+    [
+     64.046,
+     -36.974,
+     4.462
+    ],
+    [
+     64.046,
+     -36.908,
+     4.353
+    ],
+    [
+     64.046,
+     -36.886,
+     4.2
+    ],
+    [
+     64.046,
+     -36.886,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (4/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "6"
+  },
+  {
+   "id": "P-S11-PU001-S11-TK001",
+   "from": "S11-PU001",
+   "to": "S11-TK001",
+   "service": "process",
+   "points": [
+    [
+     11.559,
+     -72.097,
+     1.1
+    ],
+    [
+     11.559,
+     -72.097,
+     3.85
+    ],
+    [
+     11.581,
+     -72.097,
+     4.003
+    ],
+    [
+     11.647,
+     -72.097,
+     4.112
+    ],
+    [
+     11.756,
+     -72.097,
+     4.178
+    ],
+    [
+     11.909,
+     -72.097,
+     4.2
+    ],
+    [
+     17.061,
+     -72.097,
+     4.2
+    ],
+    [
+     17.08,
+     -72.095,
+     4.2
+    ],
+    [
+     17.094,
+     -72.086,
+     4.2
+    ],
+    [
+     17.102,
+     -72.073,
+     4.2
+    ],
+    [
+     17.105,
+     -72.053,
+     4.2
+    ],
+    [
+     17.105,
+     -72.053,
+     4.2
+    ],
+    [
+     17.105,
+     -72.034,
+     4.197
+    ],
+    [
+     17.105,
+     -72.02,
+     4.189
+    ],
+    [
+     17.105,
+     -72.012,
+     4.175
+    ],
+    [
+     17.105,
+     -72.009,
+     4.156
+    ],
+    [
+     17.105,
+     -72.009,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "11"
+  },
+  {
+   "id": "P-S11-PU002-S11-TK002",
+   "from": "S11-PU002",
+   "to": "S11-TK002",
+   "service": "process",
+   "points": [
+    [
+     11.357,
+     -78.203,
+     1.1
+    ],
+    [
+     11.357,
+     -78.203,
+     4.2
+    ],
+    [
+     11.379,
+     -78.203,
+     4.353
+    ],
+    [
+     11.444,
+     -78.203,
+     4.463
+    ],
+    [
+     11.554,
+     -78.203,
+     4.528
+    ],
+    [
+     11.707,
+     -78.203,
+     4.55
+    ],
+    [
+     17.008,
+     -78.203,
+     4.55
+    ],
+    [
+     17.051,
+     -78.197,
+     4.55
+    ],
+    [
+     17.081,
+     -78.179,
+     4.55
+    ],
+    [
+     17.099,
+     -78.149,
+     4.55
+    ],
+    [
+     17.105,
+     -78.106,
+     4.55
+    ],
+    [
+     17.105,
+     -78.106,
+     4.55
+    ],
+    [
+     17.105,
+     -78.064,
+     4.544
+    ],
+    [
+     17.105,
+     -78.034,
+     4.526
+    ],
+    [
+     17.105,
+     -78.016,
+     4.496
+    ],
+    [
+     17.105,
+     -78.01,
+     4.453
+    ],
+    [
+     17.105,
+     -78.01,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "11"
+  },
+  {
+   "id": "P-S11-TK001-S11-TK002",
+   "from": "S11-TK001",
+   "to": "S11-TK002",
+   "service": "process",
+   "points": [
+    [
+     17.105,
+     -72.009,
+     1.6
+    ],
+    [
+     17.105,
+     -77.66,
+     4.9
+    ],
+    [
+     17.105,
+     -77.813,
+     4.878
+    ],
+    [
+     17.105,
+     -77.922,
+     4.812
+    ],
+    [
+     17.105,
+     -77.988,
+     4.703
+    ],
+    [
+     17.105,
+     -78.01,
+     4.55
+    ],
+    [
+     17.105,
+     -78.01,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "11"
+  },
+  {
+   "id": "P-S5-PU001-S5-PU002",
+   "from": "S5-PU001",
+   "to": "S5-PU002",
+   "service": "process",
+   "points": [
+    [
+     59.846,
+     -76.836,
+     1.1
+    ],
+    [
+     59.846,
+     -76.836,
+     3.85
+    ],
+    [
+     59.825,
+     -76.836,
+     4.003
+    ],
+    [
+     59.759,
+     -76.836,
+     4.112
+    ],
+    [
+     59.65,
+     -76.836,
+     4.178
+    ],
+    [
+     59.496,
+     -76.836,
+     4.2
+    ],
+    [
+     58.113,
+     -76.836,
+     4.2
+    ],
+    [
+     57.96,
+     -76.858,
+     4.2
+    ],
+    [
+     57.851,
+     -76.923,
+     4.2
+    ],
+    [
+     57.785,
+     -77.033,
+     4.2
+    ],
+    [
+     57.763,
+     -77.186,
+     4.2
+    ],
+    [
+     57.763,
+     -80.45,
+     4.2
+    ],
+    [
+     57.763,
+     -80.603,
+     4.178
+    ],
+    [
+     57.763,
+     -80.712,
+     4.113
+    ],
+    [
+     57.763,
+     -80.778,
+     4.003
+    ],
+    [
+     57.763,
+     -80.8,
+     3.85
+    ],
+    [
+     57.763,
+     -80.8,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "5"
+  },
+  {
+   "id": "P-S5-PU001-S5-TK001",
+   "from": "S5-PU001",
+   "to": "S5-TK001",
+   "service": "process",
+   "points": [
+    [
+     59.846,
+     -76.836,
+     1.1
+    ],
+    [
+     59.846,
+     -76.836,
+     4.2
+    ],
+    [
+     59.825,
+     -76.836,
+     4.353
+    ],
+    [
+     59.759,
+     -76.836,
+     4.463
+    ],
+    [
+     59.65,
+     -76.836,
+     4.528
+    ],
+    [
+     59.496,
+     -76.836,
+     4.55
+    ],
+    [
+     54.701,
+     -76.836,
+     4.55
+    ],
+    [
+     54.547,
+     -76.814,
+     4.55
+    ],
+    [
+     54.438,
+     -76.748,
+     4.55
+    ],
+    [
+     54.372,
+     -76.639,
+     4.55
+    ],
+    [
+     54.351,
+     -76.486,
+     4.55
+    ],
+    [
+     54.351,
+     -73.392,
+     4.55
+    ],
+    [
+     54.351,
+     -73.239,
+     4.528
+    ],
+    [
+     54.351,
+     -73.13,
+     4.462
+    ],
+    [
+     54.351,
+     -73.064,
+     4.353
+    ],
+    [
+     54.351,
+     -73.043,
+     4.2
+    ],
+    [
+     54.351,
+     -73.043,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "5"
+  },
+  {
+   "id": "P-S5-PU001-S6-TK005",
+   "from": "S5-PU001",
+   "to": "S6-TK005",
+   "service": "process",
+   "points": [
+    [
+     59.846,
+     -76.836,
+     1.1
+    ],
+    [
+     59.846,
+     -76.836,
+     4.55
+    ],
+    [
+     59.868,
+     -76.836,
+     4.703
+    ],
+    [
+     59.934,
+     -76.836,
+     4.812
+    ],
+    [
+     60.043,
+     -76.836,
+     4.878
+    ],
+    [
+     60.197,
+     -76.836,
+     4.9
+    ],
+    [
+     60.614,
+     -76.836,
+     4.9
+    ],
+    [
+     60.767,
+     -76.814,
+     4.9
+    ],
+    [
+     60.877,
+     -76.748,
+     4.9
+    ],
+    [
+     60.942,
+     -76.639,
+     4.9
+    ],
+    [
+     60.964,
+     -76.486,
+     4.9
+    ],
+    [
+     60.964,
+     -48.838,
+     4.9
+    ],
+    [
+     60.964,
+     -48.685,
+     4.878
+    ],
+    [
+     60.964,
+     -48.576,
+     4.812
+    ],
+    [
+     60.964,
+     -48.51,
+     4.703
+    ],
+    [
+     60.964,
+     -48.488,
+     4.55
+    ],
+    [
+     60.964,
+     -48.488,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "5"
+  },
+  {
+   "id": "P-S5-PU002-S6-TK004",
+   "from": "S5-PU002",
+   "to": "S6-TK004",
+   "service": "process",
+   "points": [
+    [
+     57.763,
+     -80.8,
+     1.1
+    ],
+    [
+     57.763,
+     -80.8,
+     3.85
+    ],
+    [
+     57.785,
+     -80.8,
+     4.003
+    ],
+    [
+     57.85,
+     -80.8,
+     4.112
+    ],
+    [
+     57.96,
+     -80.8,
+     4.178
+    ],
+    [
+     58.113,
+     -80.8,
+     4.2
+    ],
+    [
+     63.942,
+     -80.8,
+     4.2
+    ],
+    [
+     64.095,
+     -80.778,
+     4.2
+    ],
+    [
+     64.205,
+     -80.712,
+     4.2
+    ],
+    [
+     64.27,
+     -80.603,
+     4.2
+    ],
+    [
+     64.292,
+     -80.45,
+     4.2
+    ],
+    [
+     64.292,
+     -44.585,
+     4.2
+    ],
+    [
+     64.292,
+     -44.432,
+     4.178
+    ],
+    [
+     64.292,
+     -44.323,
+     4.113
+    ],
+    [
+     64.292,
+     -44.257,
+     4.003
+    ],
+    [
+     64.292,
+     -44.235,
+     3.85
+    ],
+    [
+     64.292,
+     -44.235,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "5"
+  },
+  {
+   "id": "P-S5-PU002-S6-TK003",
+   "from": "S5-PU002",
+   "to": "S6-TK003",
+   "service": "process",
+   "points": [
+    [
+     57.763,
+     -80.8,
+     1.1
+    ],
+    [
+     57.763,
+     -80.8,
+     4.2
+    ],
+    [
+     57.785,
+     -80.8,
+     4.353
+    ],
+    [
+     57.85,
+     -80.8,
+     4.463
+    ],
+    [
+     57.96,
+     -80.8,
+     4.528
+    ],
+    [
+     58.113,
+     -80.8,
+     4.55
+    ],
+    [
+     65.561,
+     -80.8,
+     4.55
+    ],
+    [
+     65.714,
+     -80.778,
+     4.55
+    ],
+    [
+     65.823,
+     -80.712,
+     4.55
+    ],
+    [
+     65.889,
+     -80.603,
+     4.55
+    ],
+    [
+     65.911,
+     -80.45,
+     4.55
+    ],
+    [
+     65.911,
+     -40.888,
+     4.55
+    ],
+    [
+     65.911,
+     -40.734,
+     4.528
+    ],
+    [
+     65.911,
+     -40.625,
+     4.462
+    ],
+    [
+     65.911,
+     -40.559,
+     4.353
+    ],
+    [
+     65.911,
+     -40.538,
+     4.2
+    ],
+    [
+     65.911,
+     -40.538,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "5"
+  },
+  {
+   "id": "P-S10-TK001-S10-PU001",
+   "from": "S10-TK001",
+   "to": "S10-PU001",
+   "service": "process",
+   "points": [
+    [
+     95.146,
+     -73.254,
+     1.6
+    ],
+    [
+     95.146,
+     -73.254,
+     3.85
+    ],
+    [
+     95.168,
+     -73.254,
+     4.003
+    ],
+    [
+     95.233,
+     -73.254,
+     4.112
+    ],
+    [
+     95.343,
+     -73.254,
+     4.178
+    ],
+    [
+     95.496,
+     -73.254,
+     4.2
+    ],
+    [
+     98.311,
+     -73.254,
+     4.2
+    ],
+    [
+     98.464,
+     -73.276,
+     4.2
+    ],
+    [
+     98.574,
+     -73.342,
+     4.2
+    ],
+    [
+     98.639,
+     -73.451,
+     4.2
+    ],
+    [
+     98.661,
+     -73.604,
+     4.2
+    ],
+    [
+     98.661,
+     -75.014,
+     4.2
+    ],
+    [
+     98.661,
+     -75.167,
+     4.178
+    ],
+    [
+     98.661,
+     -75.277,
+     4.113
+    ],
+    [
+     98.661,
+     -75.342,
+     4.003
+    ],
+    [
+     98.661,
+     -75.364,
+     3.85
+    ],
+    [
+     98.661,
+     -75.364,
+     1.1
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK004-S10-TK003",
+   "from": "S10-TK004",
+   "to": "S10-TK003",
+   "service": "process",
+   "points": [
+    [
+     107.606,
+     -73.161,
+     1.6
+    ],
+    [
+     107.606,
+     -73.161,
+     4.2
+    ],
+    [
+     107.584,
+     -73.161,
+     4.353
+    ],
+    [
+     107.518,
+     -73.161,
+     4.463
+    ],
+    [
+     107.409,
+     -73.161,
+     4.528
+    ],
+    [
+     107.256,
+     -73.161,
+     4.55
+    ],
+    [
+     103.51,
+     -73.161,
+     4.55
+    ],
+    [
+     103.508,
+     -73.162,
+     4.55
+    ],
+    [
+     103.507,
+     -73.162,
+     4.55
+    ],
+    [
+     103.506,
+     -73.164,
+     4.55
+    ],
+    [
+     103.506,
+     -73.165,
+     4.55
+    ],
+    [
+     103.506,
+     -73.165,
+     4.55
+    ],
+    [
+     103.506,
+     -73.167,
+     4.55
+    ],
+    [
+     103.506,
+     -73.168,
+     4.549
+    ],
+    [
+     103.506,
+     -73.169,
+     4.548
+    ],
+    [
+     103.506,
+     -73.169,
+     4.546
+    ],
+    [
+     103.506,
+     -73.169,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/3, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK005-S10-TK004",
+   "from": "S10-TK005",
+   "to": "S10-TK004",
+   "service": "process",
+   "points": [
+    [
+     111.27,
+     -75.562,
+     1.6
+    ],
+    [
+     111.27,
+     -75.562,
+     4.55
+    ],
+    [
+     111.248,
+     -75.562,
+     4.703
+    ],
+    [
+     111.182,
+     -75.562,
+     4.812
+    ],
+    [
+     111.073,
+     -75.562,
+     4.878
+    ],
+    [
+     110.92,
+     -75.562,
+     4.9
+    ],
+    [
+     107.956,
+     -75.562,
+     4.9
+    ],
+    [
+     107.803,
+     -75.541,
+     4.9
+    ],
+    [
+     107.693,
+     -75.475,
+     4.9
+    ],
+    [
+     107.628,
+     -75.366,
+     4.9
+    ],
+    [
+     107.606,
+     -75.213,
+     4.9
+    ],
+    [
+     107.606,
+     -73.511,
+     4.9
+    ],
+    [
+     107.606,
+     -73.358,
+     4.878
+    ],
+    [
+     107.606,
+     -73.249,
+     4.812
+    ],
+    [
+     107.606,
+     -73.183,
+     4.703
+    ],
+    [
+     107.606,
+     -73.161,
+     4.55
+    ],
+    [
+     107.606,
+     -73.161,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (2/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-PU001-S10-PU002",
+   "from": "S10-PU001",
+   "to": "S10-PU002",
+   "service": "process",
+   "points": [
+    [
+     98.661,
+     -75.364,
+     1.1
+    ],
+    [
+     98.661,
+     -75.364,
+     3.85
+    ],
+    [
+     98.639,
+     -75.364,
+     4.003
+    ],
+    [
+     98.574,
+     -75.364,
+     4.112
+    ],
+    [
+     98.464,
+     -75.364,
+     4.178
+    ],
+    [
+     98.311,
+     -75.364,
+     4.2
+    ],
+    [
+     97.401,
+     -75.364,
+     4.2
+    ],
+    [
+     97.248,
+     -75.386,
+     4.2
+    ],
+    [
+     97.138,
+     -75.452,
+     4.2
+    ],
+    [
+     97.073,
+     -75.561,
+     4.2
+    ],
+    [
+     97.051,
+     -75.714,
+     4.2
+    ],
+    [
+     97.051,
+     -78.742,
+     4.2
+    ],
+    [
+     97.051,
+     -78.895,
+     4.178
+    ],
+    [
+     97.051,
+     -79.004,
+     4.113
+    ],
+    [
+     97.051,
+     -79.07,
+     4.003
+    ],
+    [
+     97.051,
+     -79.092,
+     3.85
+    ],
+    [
+     97.051,
+     -79.092,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK007-S10-TK008",
+   "from": "S10-TK007",
+   "to": "S10-TK008",
+   "service": "process",
+   "points": [
+    [
+     101.085,
+     -78.758,
+     1.6
+    ],
+    [
+     101.085,
+     -78.758,
+     4.2
+    ],
+    [
+     101.107,
+     -78.758,
+     4.353
+    ],
+    [
+     101.172,
+     -78.758,
+     4.463
+    ],
+    [
+     101.282,
+     -78.758,
+     4.528
+    ],
+    [
+     101.435,
+     -78.758,
+     4.55
+    ],
+    [
+     104.747,
+     -78.758,
+     4.55
+    ],
+    [
+     104.9,
+     -78.736,
+     4.55
+    ],
+    [
+     105.009,
+     -78.67,
+     4.55
+    ],
+    [
+     105.075,
+     -78.561,
+     4.55
+    ],
+    [
+     105.097,
+     -78.408,
+     4.55
+    ],
+    [
+     105.097,
+     -78.262,
+     4.55
+    ],
+    [
+     105.097,
+     -78.109,
+     4.528
+    ],
+    [
+     105.097,
+     -77.999,
+     4.462
+    ],
+    [
+     105.097,
+     -77.934,
+     4.353
+    ],
+    [
+     105.097,
+     -77.912,
+     4.2
+    ],
+    [
+     105.097,
+     -77.912,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK005-S10-TK006",
+   "from": "S10-TK005",
+   "to": "S10-TK006",
+   "service": "process",
+   "points": [
+    [
+     111.27,
+     -75.562,
+     1.6
+    ],
+    [
+     111.27,
+     -75.562,
+     4.55
+    ],
+    [
+     111.292,
+     -75.562,
+     4.703
+    ],
+    [
+     111.357,
+     -75.562,
+     4.812
+    ],
+    [
+     111.467,
+     -75.562,
+     4.878
+    ],
+    [
+     111.62,
+     -75.562,
+     4.9
+    ],
+    [
+     115.37,
+     -75.562,
+     1.6
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-PU002-S10-PU003",
+   "from": "S10-PU002",
+   "to": "S10-PU003",
+   "service": "process",
+   "points": [
+    [
+     97.051,
+     -79.092,
+     1.1
+    ],
+    [
+     97.051,
+     -79.092,
+     3.85
+    ],
+    [
+     97.073,
+     -79.092,
+     4.003
+    ],
+    [
+     97.138,
+     -79.092,
+     4.112
+    ],
+    [
+     97.248,
+     -79.092,
+     4.178
+    ],
+    [
+     97.401,
+     -79.092,
+     4.2
+    ],
+    [
+     97.739,
+     -79.092,
+     4.2
+    ],
+    [
+     97.892,
+     -79.113,
+     4.2
+    ],
+    [
+     98.002,
+     -79.179,
+     4.2
+    ],
+    [
+     98.067,
+     -79.288,
+     4.2
+    ],
+    [
+     98.089,
+     -79.442,
+     4.2
+    ],
+    [
+     98.089,
+     -82.725,
+     4.2
+    ],
+    [
+     98.089,
+     -82.878,
+     4.178
+    ],
+    [
+     98.089,
+     -82.988,
+     4.113
+    ],
+    [
+     98.089,
+     -83.053,
+     4.003
+    ],
+    [
+     98.089,
+     -83.075,
+     3.85
+    ],
+    [
+     98.089,
+     -83.075,
+     1.1
+    ]
+   ],
+   "directed": false,
+   "direction_basis": "not shown on the drawing: no chevrons",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK003-S10-TK008",
+   "from": "S10-TK003",
+   "to": "S10-TK008",
+   "service": "process",
+   "points": [
+    [
+     103.506,
+     -73.169,
+     1.6
+    ],
+    [
+     103.506,
+     -73.169,
+     4.2
+    ],
+    [
+     103.528,
+     -73.169,
+     4.353
+    ],
+    [
+     103.593,
+     -73.169,
+     4.463
+    ],
+    [
+     103.703,
+     -73.169,
+     4.528
+    ],
+    [
+     103.856,
+     -73.169,
+     4.55
+    ],
+    [
+     104.747,
+     -73.169,
+     4.55
+    ],
+    [
+     104.9,
+     -73.191,
+     4.55
+    ],
+    [
+     105.009,
+     -73.257,
+     4.55
+    ],
+    [
+     105.075,
+     -73.366,
+     4.55
+    ],
+    [
+     105.097,
+     -73.519,
+     4.55
+    ],
+    [
+     105.097,
+     -77.562,
+     4.55
+    ],
+    [
+     105.097,
+     -77.715,
+     4.528
+    ],
+    [
+     105.097,
+     -77.824,
+     4.462
+    ],
+    [
+     105.097,
+     -77.89,
+     4.353
+    ],
+    [
+     105.097,
+     -77.912,
+     4.2
+    ],
+    [
+     105.097,
+     -77.912,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (2/5, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK002-S10-TK001",
+   "from": "S10-TK002",
+   "to": "S10-TK001",
+   "service": "process",
+   "points": [
+    [
+     100.158,
+     -69.862,
+     1.6
+    ],
+    [
+     100.158,
+     -69.862,
+     4.55
+    ],
+    [
+     100.136,
+     -69.862,
+     4.703
+    ],
+    [
+     100.07,
+     -69.862,
+     4.812
+    ],
+    [
+     99.961,
+     -69.862,
+     4.878
+    ],
+    [
+     99.808,
+     -69.862,
+     4.9
+    ],
+    [
+     95.496,
+     -69.862,
+     4.9
+    ],
+    [
+     95.343,
+     -69.884,
+     4.9
+    ],
+    [
+     95.233,
+     -69.949,
+     4.9
+    ],
+    [
+     95.168,
+     -70.059,
+     4.9
+    ],
+    [
+     95.146,
+     -70.212,
+     4.9
+    ],
+    [
+     95.146,
+     -72.904,
+     4.9
+    ],
+    [
+     95.146,
+     -73.057,
+     4.878
+    ],
+    [
+     95.146,
+     -73.167,
+     4.812
+    ],
+    [
+     95.146,
+     -73.232,
+     4.703
+    ],
+    [
+     95.146,
+     -73.254,
+     4.55
+    ],
+    [
+     95.146,
+     -73.254,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/6, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK007-S10-TK001",
+   "from": "S10-TK007",
+   "to": "S10-TK001",
+   "service": "process",
+   "points": [
+    [
+     101.085,
+     -78.758,
+     1.6
+    ],
+    [
+     101.085,
+     -78.758,
+     3.85
+    ],
+    [
+     101.063,
+     -78.758,
+     4.003
+    ],
+    [
+     100.997,
+     -78.758,
+     4.112
+    ],
+    [
+     100.888,
+     -78.758,
+     4.178
+    ],
+    [
+     100.735,
+     -78.758,
+     4.2
+    ],
+    [
+     95.496,
+     -78.758,
+     4.2
+    ],
+    [
+     95.343,
+     -78.736,
+     4.2
+    ],
+    [
+     95.233,
+     -78.67,
+     4.2
+    ],
+    [
+     95.168,
+     -78.561,
+     4.2
+    ],
+    [
+     95.146,
+     -78.408,
+     4.2
+    ],
+    [
+     95.146,
+     -73.604,
+     4.2
+    ],
+    [
+     95.146,
+     -73.451,
+     4.178
+    ],
+    [
+     95.146,
+     -73.342,
+     4.113
+    ],
+    [
+     95.146,
+     -73.276,
+     4.003
+    ],
+    [
+     95.146,
+     -73.254,
+     3.85
+    ],
+    [
+     95.146,
+     -73.254,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.796)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "P-S10-TK002-S8-TK001",
+   "from": "S10-TK002",
+   "to": "S8-TK001",
+   "service": "process",
+   "points": [
+    [
+     100.158,
+     -69.862,
+     1.6
+    ],
+    [
+     100.158,
+     -69.862,
+     4.2
+    ],
+    [
+     100.18,
+     -69.862,
+     4.353
+    ],
+    [
+     100.245,
+     -69.862,
+     4.463
+    ],
+    [
+     100.355,
+     -69.862,
+     4.528
+    ],
+    [
+     100.508,
+     -69.862,
+     4.55
+    ],
+    [
+     102.174,
+     -69.862,
+     4.55
+    ],
+    [
+     102.327,
+     -69.84,
+     4.55
+    ],
+    [
+     102.436,
+     -69.774,
+     4.55
+    ],
+    [
+     102.502,
+     -69.665,
+     4.55
+    ],
+    [
+     102.523,
+     -69.512,
+     4.55
+    ],
+    [
+     102.523,
+     -43.944,
+     4.55
+    ],
+    [
+     102.523,
+     -43.791,
+     4.528
+    ],
+    [
+     102.523,
+     -43.681,
+     4.462
+    ],
+    [
+     102.523,
+     -43.616,
+     4.353
+    ],
+    [
+     102.523,
+     -43.594,
+     4.2
+    ],
+    [
+     102.523,
+     -43.594,
+     1.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "read from the drawing (1/4, confidence 0.886)",
+   "route_status": "placeholder route, not a piping route",
+   "area": "10"
+  },
+  {
+   "id": "A-0-1",
+   "from": "area:0",
+   "to": "area:1",
+   "service": "process",
+   "points": [
+    [
+     61.0,
+     -11.0,
+     0.6
+    ],
+    [
+     61.0,
+     -11.0,
+     5.2
+    ],
+    [
+     61.05,
+     -11.0,
+     5.55
+    ],
+    [
+     61.2,
+     -11.0,
+     5.8
+    ],
+    [
+     61.45,
+     -11.0,
+     5.95
+    ],
+    [
+     61.8,
+     -11.0,
+     6.0
+    ],
+    [
+     105.0,
+     -11.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-0-4",
+   "from": "area:0",
+   "to": "area:4",
+   "service": "process",
+   "points": [
+    [
+     61.0,
+     -11.0,
+     0.6
+    ],
+    [
+     61.0,
+     -11.0,
+     5.6
+    ],
+    [
+     60.95,
+     -11.0,
+     5.95
+    ],
+    [
+     60.8,
+     -11.0,
+     6.2
+    ],
+    [
+     60.55,
+     -11.0,
+     6.35
+    ],
+    [
+     60.2,
+     -11.0,
+     6.4
+    ],
+    [
+     17.8,
+     -11.0,
+     6.4
+    ],
+    [
+     17.45,
+     -11.05,
+     6.4
+    ],
+    [
+     17.2,
+     -11.2,
+     6.4
+    ],
+    [
+     17.05,
+     -11.45,
+     6.4
+    ],
+    [
+     17.0,
+     -11.8,
+     6.4
+    ],
+    [
+     17.0,
+     -42.2,
+     6.4
+    ],
+    [
+     17.0,
+     -42.55,
+     6.35
+    ],
+    [
+     17.0,
+     -42.8,
+     6.2
+    ],
+    [
+     17.0,
+     -42.95,
+     5.95
+    ],
+    [
+     17.0,
+     -43.0,
+     5.6
+    ],
+    [
+     17.0,
+     -43.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-1-2",
+   "from": "area:1",
+   "to": "area:2",
+   "service": "process",
+   "points": [
+    [
+     106.2,
+     -9.8,
+     0.6
+    ],
+    [
+     106.2,
+     -9.8,
+     6.0
+    ],
+    [
+     106.25,
+     -9.8,
+     6.35
+    ],
+    [
+     106.4,
+     -9.8,
+     6.6
+    ],
+    [
+     106.65,
+     -9.8,
+     6.75
+    ],
+    [
+     107.0,
+     -9.8,
+     6.8
+    ],
+    [
+     150.2,
+     -9.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-10-11",
+   "from": "area:10",
+   "to": "area:11",
+   "service": "process",
+   "points": [
+    [
+     106.2,
+     -73.8,
+     0.6
+    ],
+    [
+     106.2,
+     -73.8,
+     5.2
+    ],
+    [
+     106.15,
+     -73.8,
+     5.55
+    ],
+    [
+     106.0,
+     -73.8,
+     5.8
+    ],
+    [
+     105.75,
+     -73.8,
+     5.95
+    ],
+    [
+     105.4,
+     -73.8,
+     6.0
+    ],
+    [
+     18.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-10-5",
+   "from": "area:10",
+   "to": "area:5",
+   "service": "process",
+   "points": [
+    [
+     106.2,
+     -73.8,
+     0.6
+    ],
+    [
+     106.2,
+     -73.8,
+     5.6
+    ],
+    [
+     106.15,
+     -73.8,
+     5.95
+    ],
+    [
+     106.0,
+     -73.8,
+     6.2
+    ],
+    [
+     105.75,
+     -73.8,
+     6.35
+    ],
+    [
+     105.4,
+     -73.8,
+     6.4
+    ],
+    [
+     62.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-11-10",
+   "from": "area:11",
+   "to": "area:10",
+   "service": "process",
+   "points": [
+    [
+     18.2,
+     -73.8,
+     0.6
+    ],
+    [
+     18.2,
+     -73.8,
+     6.0
+    ],
+    [
+     18.25,
+     -73.8,
+     6.35
+    ],
+    [
+     18.4,
+     -73.8,
+     6.6
+    ],
+    [
+     18.65,
+     -73.8,
+     6.75
+    ],
+    [
+     19.0,
+     -73.8,
+     6.8
+    ],
+    [
+     106.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-11-5",
+   "from": "area:11",
+   "to": "area:5",
+   "service": "process",
+   "points": [
+    [
+     18.2,
+     -73.8,
+     0.6
+    ],
+    [
+     18.2,
+     -73.8,
+     5.2
+    ],
+    [
+     18.25,
+     -73.8,
+     5.55
+    ],
+    [
+     18.4,
+     -73.8,
+     5.8
+    ],
+    [
+     18.65,
+     -73.8,
+     5.95
+    ],
+    [
+     19.0,
+     -73.8,
+     6.0
+    ],
+    [
+     62.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-11-9",
+   "from": "area:11",
+   "to": "area:9",
+   "service": "process",
+   "points": [
+    [
+     18.2,
+     -73.8,
+     0.6
+    ],
+    [
+     18.2,
+     -73.8,
+     5.6
+    ],
+    [
+     18.25,
+     -73.8,
+     5.95
+    ],
+    [
+     18.4,
+     -73.8,
+     6.2
+    ],
+    [
+     18.65,
+     -73.8,
+     6.35
+    ],
+    [
+     19.0,
+     -73.8,
+     6.4
+    ],
+    [
+     150.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-2-1",
+   "from": "area:2",
+   "to": "area:1",
+   "service": "process",
+   "points": [
+    [
+     150.2,
+     -9.8,
+     0.6
+    ],
+    [
+     150.2,
+     -9.8,
+     6.0
+    ],
+    [
+     150.15,
+     -9.8,
+     6.35
+    ],
+    [
+     150.0,
+     -9.8,
+     6.6
+    ],
+    [
+     149.75,
+     -9.8,
+     6.75
+    ],
+    [
+     149.4,
+     -9.8,
+     6.8
+    ],
+    [
+     106.2,
+     -9.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-2-4",
+   "from": "area:2",
+   "to": "area:4",
+   "service": "process",
+   "points": [
+    [
+     149.0,
+     -11.0,
+     0.6
+    ],
+    [
+     149.0,
+     -11.0,
+     5.2
+    ],
+    [
+     148.95,
+     -11.0,
+     5.55
+    ],
+    [
+     148.8,
+     -11.0,
+     5.8
+    ],
+    [
+     148.55,
+     -11.0,
+     5.95
+    ],
+    [
+     148.2,
+     -11.0,
+     6.0
+    ],
+    [
+     17.8,
+     -11.0,
+     6.0
+    ],
+    [
+     17.45,
+     -11.05,
+     6.0
+    ],
+    [
+     17.2,
+     -11.2,
+     6.0
+    ],
+    [
+     17.05,
+     -11.45,
+     6.0
+    ],
+    [
+     17.0,
+     -11.8,
+     6.0
+    ],
+    [
+     17.0,
+     -42.2,
+     6.0
+    ],
+    [
+     17.0,
+     -42.55,
+     5.95
+    ],
+    [
+     17.0,
+     -42.8,
+     5.8
+    ],
+    [
+     17.0,
+     -42.95,
+     5.55
+    ],
+    [
+     17.0,
+     -43.0,
+     5.2
+    ],
+    [
+     17.0,
+     -43.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-2-7",
+   "from": "area:2",
+   "to": "area:7",
+   "service": "process",
+   "points": [
+    [
+     149.0,
+     -11.0,
+     0.6
+    ],
+    [
+     149.0,
+     -42.2,
+     6.4
+    ],
+    [
+     149.0,
+     -42.55,
+     6.35
+    ],
+    [
+     149.0,
+     -42.8,
+     6.2
+    ],
+    [
+     149.0,
+     -42.95,
+     5.95
+    ],
+    [
+     149.0,
+     -43.0,
+     5.6
+    ],
+    [
+     149.0,
+     -43.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-3-0",
+   "from": "area:3",
+   "to": "area:0",
+   "service": "process",
+   "points": [
+    [
+     17.0,
+     -11.0,
+     0.6
+    ],
+    [
+     17.0,
+     -11.0,
+     6.0
+    ],
+    [
+     17.05,
+     -11.0,
+     6.35
+    ],
+    [
+     17.2,
+     -11.0,
+     6.6
+    ],
+    [
+     17.45,
+     -11.0,
+     6.75
+    ],
+    [
+     17.8,
+     -11.0,
+     6.8
+    ],
+    [
+     61.0,
+     -11.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-5-10",
+   "from": "area:5",
+   "to": "area:10",
+   "service": "process",
+   "points": [
+    [
+     62.2,
+     -73.8,
+     0.6
+    ],
+    [
+     62.2,
+     -73.8,
+     5.2
+    ],
+    [
+     62.25,
+     -73.8,
+     5.55
+    ],
+    [
+     62.4,
+     -73.8,
+     5.8
+    ],
+    [
+     62.65,
+     -73.8,
+     5.95
+    ],
+    [
+     63.0,
+     -73.8,
+     6.0
+    ],
+    [
+     106.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-5-6",
+   "from": "area:5",
+   "to": "area:6",
+   "service": "process",
+   "points": [
+    [
+     61.0,
+     -75.0,
+     0.6
+    ],
+    [
+     61.0,
+     -43.8,
+     6.8
+    ],
+    [
+     61.0,
+     -43.45,
+     6.75
+    ],
+    [
+     61.0,
+     -43.2,
+     6.6
+    ],
+    [
+     61.0,
+     -43.05,
+     6.35
+    ],
+    [
+     61.0,
+     -43.0,
+     6.0
+    ],
+    [
+     61.0,
+     -43.0,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-6-8",
+   "from": "area:6",
+   "to": "area:8",
+   "service": "process",
+   "points": [
+    [
+     62.2,
+     -41.8,
+     0.6
+    ],
+    [
+     62.2,
+     -41.8,
+     5.2
+    ],
+    [
+     62.25,
+     -41.8,
+     5.55
+    ],
+    [
+     62.4,
+     -41.8,
+     5.8
+    ],
+    [
+     62.65,
+     -41.8,
+     5.95
+    ],
+    [
+     63.0,
+     -41.8,
+     6.0
+    ],
+    [
+     106.2,
+     -41.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-7-8",
+   "from": "area:7",
+   "to": "area:8",
+   "service": "process",
+   "points": [
+    [
+     150.2,
+     -41.8,
+     0.6
+    ],
+    [
+     150.2,
+     -41.8,
+     5.6
+    ],
+    [
+     150.15,
+     -41.8,
+     5.95
+    ],
+    [
+     150.0,
+     -41.8,
+     6.2
+    ],
+    [
+     149.75,
+     -41.8,
+     6.35
+    ],
+    [
+     149.4,
+     -41.8,
+     6.4
+    ],
+    [
+     106.2,
+     -41.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-8-6",
+   "from": "area:8",
+   "to": "area:6",
+   "service": "process",
+   "points": [
+    [
+     106.2,
+     -41.8,
+     0.6
+    ],
+    [
+     106.2,
+     -41.8,
+     6.0
+    ],
+    [
+     106.15,
+     -41.8,
+     6.35
+    ],
+    [
+     106.0,
+     -41.8,
+     6.6
+    ],
+    [
+     105.75,
+     -41.8,
+     6.75
+    ],
+    [
+     105.4,
+     -41.8,
+     6.8
+    ],
+    [
+     62.2,
+     -41.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-8-7",
+   "from": "area:8",
+   "to": "area:7",
+   "service": "process",
+   "points": [
+    [
+     106.2,
+     -41.8,
+     0.6
+    ],
+    [
+     106.2,
+     -41.8,
+     5.2
+    ],
+    [
+     106.25,
+     -41.8,
+     5.55
+    ],
+    [
+     106.4,
+     -41.8,
+     5.8
+    ],
+    [
+     106.65,
+     -41.8,
+     5.95
+    ],
+    [
+     107.0,
+     -41.8,
+     6.0
+    ],
+    [
+     150.2,
+     -41.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  },
+  {
+   "id": "A-9-11",
+   "from": "area:9",
+   "to": "area:11",
+   "service": "process",
+   "points": [
+    [
+     150.2,
+     -73.8,
+     0.6
+    ],
+    [
+     150.2,
+     -73.8,
+     5.6
+    ],
+    [
+     150.15,
+     -73.8,
+     5.95
+    ],
+    [
+     150.0,
+     -73.8,
+     6.2
+    ],
+    [
+     149.75,
+     -73.8,
+     6.35
+    ],
+    [
+     149.4,
+     -73.8,
+     6.4
+    ],
+    [
+     18.2,
+     -73.8,
+     0.6
+    ]
+   ],
+   "directed": true,
+   "direction_basis": "off-page connector flags",
+   "route_status": "schematic link between areas, not a route"
+  }
+ ],
+ "utilities": [],
+ "valves": [],
+ "markers": [
+  {
+   "tag": "TCV 1401",
+   "unit": "S0-TK001",
+   "position": [
+    54.584,
+    -13.272,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "LCV 1501",
+   "unit": "S1-TK001",
+   "position": [
+    102.06,
+    -9.385,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1511",
+   "unit": "S1-PU013",
+   "position": [
+    107.181,
+    -13.722,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1521",
+   "unit": "S1-PU014",
+   "position": [
+    109.802,
+    -10.588,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1531",
+   "unit": "S1-PU015",
+   "position": [
+    113.29,
+    -12.666,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 16096B",
+   "unit": "S2-TK001",
+   "position": [
+    141.401,
+    -11.927,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TCV 1622",
+   "unit": "S2-TK004",
+   "position": [
+    156.695,
+    -13.629,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "FIT 16299",
+   "unit": "S2-PU001",
+   "position": [
+    145.393,
+    -12.902,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "FIT 163101",
+   "unit": "S2-PU002",
+   "position": [
+    142.44,
+    -15.648,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PIT 160104",
+   "unit": "S3-TK001",
+   "position": [
+    10.209,
+    -8.873,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 160106B",
+   "unit": "S3-PU001",
+   "position": [
+    11.387,
+    -13.632,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PIT 170116",
+   "unit": "S3-TK002",
+   "position": [
+    22.175,
+    -15.39,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1652",
+   "unit": "S3-PU002",
+   "position": [
+    11.387,
+    -17.732,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TCV 16013",
+   "unit": "S4-TK001",
+   "position": [
+    19.385,
+    -39.128,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 161143A",
+   "unit": "S4-TK002",
+   "position": [
+    21.048,
+    -48.891,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 1002A",
+   "unit": "S5-TK001",
+   "position": [
+    55.451,
+    -74.948,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PT 1009A",
+   "unit": "S5-PU001",
+   "position": [
+    60.596,
+    -78.135,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 10215B",
+   "unit": "S5-PU002",
+   "position": [
+    58.513,
+    -82.099,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 10117",
+   "unit": "S6-TK001",
+   "position": [
+    54.9,
+    -44.392,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PRV 1032",
+   "unit": "S6-TK002",
+   "position": [
+    64.996,
+    -38.531,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 102B39",
+   "unit": "S6-TK003",
+   "position": [
+    66.861,
+    -42.183,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 102B40",
+   "unit": "S6-TK004",
+   "position": [
+    65.242,
+    -45.88,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "LG 212204",
+   "unit": "S7-TK001",
+   "position": [
+    140.139,
+    -39.998,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 210207A",
+   "unit": "S7-TK002",
+   "position": [
+    148.091,
+    -41.782,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 170215B",
+   "unit": "S7-TK003",
+   "position": [
+    154.348,
+    -44.286,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PIT 210208",
+   "unit": "S7-PU001",
+   "position": [
+    142.904,
+    -44.233,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1113",
+   "unit": "S8-TK001",
+   "position": [
+    103.823,
+    -45.846,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "TE 11051B",
+   "unit": "S10-TK002",
+   "position": [
+    101.458,
+    -72.114,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1151",
+   "unit": "S10-PU001",
+   "position": [
+    99.411,
+    -76.663,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PSV 1161",
+   "unit": "S10-TK001",
+   "position": [
+    96.096,
+    -74.899,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "PIT 11154A",
+   "unit": "S10-TK004",
+   "position": [
+    108.556,
+    -74.806,
+    2.2
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1001",
+   "unit": "S11-PU001",
+   "position": [
+    12.309,
+    -73.396,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "FO 1201",
+   "unit": "S11-TK001",
+   "position": [
+    18.405,
+    -74.261,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "FT 1211",
+   "unit": "S11-TK002",
+   "position": [
+    18.405,
+    -80.262,
+    1.69
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  },
+  {
+   "tag": "MOV 1004",
+   "unit": "S11-PU002",
+   "position": [
+    12.107,
+    -79.502,
+    1.27
+   ],
+   "connected": false,
+   "placement_basis": "beside its equipment; no tap location implied"
+  }
+ ],
+ "labels": [
+  {
+   "id": "unit:S3-TK001",
+   "kind": "tag",
+   "body": "CND-HTR-160\nHeater",
+   "anchor": [
+    8.909,
+    -6.621,
+    2.65
+   ],
+   "unit": "S3-TK001"
+  },
+  {
+   "id": "unit:S3-PU001",
+   "kind": "tag",
+   "body": "FWS-PU-170A\nFeedwater pump",
+   "anchor": [
+    10.637,
+    -12.333,
+    1.95
+   ],
+   "unit": "S3-PU001"
+  },
+  {
+   "id": "unit:S3-PU002",
+   "kind": "tag",
+   "body": "FWS-PU-170B\nFeedwater pump",
+   "anchor": [
+    10.637,
+    -16.433,
+    1.95
+   ],
+   "unit": "S3-PU002"
+  },
+  {
+   "id": "unit:S3-TK002",
+   "kind": "tag",
+   "body": "FWS-HTR-170\nHp feedwater heater",
+   "anchor": [
+    20.875,
+    -13.138,
+    2.65
+   ],
+   "unit": "S3-TK002"
+  },
+  {
+   "id": "area:3",
+   "kind": "unit",
+   "body": "1. Feedwater System \u00b7 PID 170-1",
+   "anchor": [
+    17.0,
+    -11.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S0-TK001",
+   "kind": "tag",
+   "body": "MSS-XSS-140\nSteam superheater",
+   "anchor": [
+    53.284,
+    -11.02,
+    2.65
+   ],
+   "unit": "S0-TK001"
+  },
+  {
+   "id": "unit:S0-TK002",
+   "kind": "tag",
+   "body": "RCS-SG-100\nSteam generator",
+   "anchor": [
+    49.081,
+    -13.937,
+    7.916
+   ],
+   "unit": "S0-TK002"
+  },
+  {
+   "id": "area:0",
+   "kind": "unit",
+   "body": "2. Main Steam System \u00b7 PID 140-1",
+   "anchor": [
+    61.0,
+    -11.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S1-TK001",
+   "kind": "tag",
+   "body": "ACC-AC-150\nAir cooled condenser",
+   "anchor": [
+    100.76,
+    -7.133,
+    2.65
+   ],
+   "unit": "S1-TK001"
+  },
+  {
+   "id": "unit:S1-PU001",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    94.724,
+    -1.797,
+    1.95
+   ],
+   "unit": "S1-PU001"
+  },
+  {
+   "id": "unit:S1-PU002",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    98.634,
+    -0.096,
+    1.95
+   ],
+   "unit": "S1-PU002"
+  },
+  {
+   "id": "unit:S1-PU003",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    107.065,
+    -3.525,
+    1.95
+   ],
+   "unit": "S1-PU003"
+  },
+  {
+   "id": "unit:S1-PU004",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    94.87,
+    -11.506,
+    1.95
+   ],
+   "unit": "S1-PU004"
+  },
+  {
+   "id": "unit:S1-PU005",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    102.629,
+    0.224,
+    1.95
+   ],
+   "unit": "S1-PU005"
+  },
+  {
+   "id": "unit:S1-PU006",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    102.894,
+    -10.528,
+    1.95
+   ],
+   "unit": "S1-PU006"
+  },
+  {
+   "id": "unit:S1-PU007",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    95.647,
+    -7.477,
+    1.95
+   ],
+   "unit": "S1-PU007"
+  },
+  {
+   "id": "unit:S1-PU008",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    101.084,
+    -14.181,
+    1.95
+   ],
+   "unit": "S1-PU008"
+  },
+  {
+   "id": "unit:S1-PU009",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    103.01,
+    -3.765,
+    1.95
+   ],
+   "unit": "S1-PU009"
+  },
+  {
+   "id": "unit:S1-PU010",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    98.01,
+    -4.149,
+    1.95
+   ],
+   "unit": "S1-PU010"
+  },
+  {
+   "id": "unit:S1-PU011",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    98.877,
+    -10.726,
+    1.95
+   ],
+   "unit": "S1-PU011"
+  },
+  {
+   "id": "unit:S1-PU012",
+   "kind": "tag",
+   "body": "untagged pump\nPump class: moves liquid from its suction to i",
+   "anchor": [
+    105.394,
+    -7.192,
+    1.95
+   ],
+   "unit": "S1-PU012"
+  },
+  {
+   "id": "unit:S1-PU013",
+   "kind": "tag",
+   "body": "ACC-PU-151\nAir cooled condenser pump",
+   "anchor": [
+    106.431,
+    -12.423,
+    1.95
+   ],
+   "unit": "S1-PU013"
+  },
+  {
+   "id": "unit:S1-PU014",
+   "kind": "tag",
+   "body": "ACC-PU-152\nAir cooled condenser pump",
+   "anchor": [
+    109.052,
+    -9.289,
+    1.95
+   ],
+   "unit": "S1-PU014"
+  },
+  {
+   "id": "unit:S1-PU015",
+   "kind": "tag",
+   "body": "ACC-PU-153\nAir cooled condenser pump",
+   "anchor": [
+    112.54,
+    -11.367,
+    1.95
+   ],
+   "unit": "S1-PU015"
+  },
+  {
+   "id": "unit:S1-GN004",
+   "kind": "tag",
+   "body": "ACC-SX-154\nSilencer",
+   "anchor": [
+    111.585,
+    -6.158,
+    2.4
+   ],
+   "unit": "S1-GN004"
+  },
+  {
+   "id": "unit:S1-TK002",
+   "kind": "tag",
+   "body": "TURBINE EXHAUST DUCT\nTurbine Exhaust Duct",
+   "anchor": [
+    104.967,
+    -16.15,
+    5.384
+   ],
+   "unit": "S1-TK002"
+  },
+  {
+   "id": "unit:S1-TK003",
+   "kind": "tag",
+   "body": "AIR COOLED CONDENSER\nAir Cooled Condenser",
+   "anchor": [
+    109.907,
+    -14.526,
+    2.65
+   ],
+   "unit": "S1-TK003"
+  },
+  {
+   "id": "area:1",
+   "kind": "unit",
+   "body": "3. Air Cooled Condenser \u00b7 PID 150-1",
+   "anchor": [
+    105.0,
+    -11.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S2-TK001",
+   "kind": "tag",
+   "body": "CND-TK-160\nCondensate storage tank",
+   "anchor": [
+    140.451,
+    -10.282,
+    5.384
+   ],
+   "unit": "S2-TK001"
+  },
+  {
+   "id": "unit:S2-TK002",
+   "kind": "tag",
+   "body": "CND-TK-165\nDeareator storage tank",
+   "anchor": [
+    153.556,
+    -7.713,
+    5.384
+   ],
+   "unit": "S2-TK002"
+  },
+  {
+   "id": "unit:S2-TK003",
+   "kind": "tag",
+   "body": "CND-HTR-166\nHeater",
+   "anchor": [
+    153.801,
+    -3.695,
+    2.65
+   ],
+   "unit": "S2-TK003"
+  },
+  {
+   "id": "unit:S2-TK004",
+   "kind": "tag",
+   "body": "CND-HTR-161\nCondensate heater",
+   "anchor": [
+    155.395,
+    -11.377,
+    2.65
+   ],
+   "unit": "S2-TK004"
+  },
+  {
+   "id": "unit:S2-PU001",
+   "kind": "tag",
+   "body": "CND-PU-162\nCondensate pump",
+   "anchor": [
+    144.643,
+    -11.603,
+    1.95
+   ],
+   "unit": "S2-PU001"
+  },
+  {
+   "id": "unit:S2-PU002",
+   "kind": "tag",
+   "body": "CND-PU-163\nCondensate pump",
+   "anchor": [
+    141.69,
+    -14.349,
+    1.95
+   ],
+   "unit": "S2-PU002"
+  },
+  {
+   "id": "unit:S2-PU003",
+   "kind": "tag",
+   "body": "CND-PU-164\nCondensate pump",
+   "anchor": [
+    139.111,
+    -17.535,
+    1.95
+   ],
+   "unit": "S2-PU003"
+  },
+  {
+   "id": "unit:S2-TK005",
+   "kind": "tag",
+   "body": "CND-HTR-161\nCondensate heater",
+   "anchor": [
+    148.425,
+    -16.727,
+    2.65
+   ],
+   "unit": "S2-TK005"
+  },
+  {
+   "id": "area:2",
+   "kind": "unit",
+   "body": "4. Condensate System \u00b7 PID 160-1",
+   "anchor": [
+    149.0,
+    -11.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S7-TK001",
+   "kind": "tag",
+   "body": "ACW-TK-212\nAux cooling water tank",
+   "anchor": [
+    139.189,
+    -38.353,
+    5.384
+   ],
+   "unit": "S7-TK001"
+  },
+  {
+   "id": "unit:S7-TK002",
+   "kind": "tag",
+   "body": "ACW-AXC-210\nAux cooling water cooler",
+   "anchor": [
+    146.791,
+    -39.53,
+    2.65
+   ],
+   "unit": "S7-TK002"
+  },
+  {
+   "id": "unit:S7-TK003",
+   "kind": "tag",
+   "body": "LUBE OIL COOLER\nLube Oil Cooler",
+   "anchor": [
+    153.048,
+    -42.034,
+    2.65
+   ],
+   "unit": "S7-TK003"
+  },
+  {
+   "id": "unit:S7-PU001",
+   "kind": "tag",
+   "body": "ACW-PU-211A\nAux cooling water pump",
+   "anchor": [
+    142.154,
+    -42.934,
+    1.95
+   ],
+   "unit": "S7-PU001"
+  },
+  {
+   "id": "unit:S7-PU002",
+   "kind": "tag",
+   "body": "ACW-PU-211B\nAux cooling water pump",
+   "anchor": [
+    142.154,
+    -47.034,
+    1.95
+   ],
+   "unit": "S7-PU002"
+  },
+  {
+   "id": "unit:S7-PU003",
+   "kind": "tag",
+   "body": "ACW-PU-211C\nAux cooling water pump",
+   "anchor": [
+    142.154,
+    -51.077,
+    1.95
+   ],
+   "unit": "S7-PU003"
+  },
+  {
+   "id": "area:7",
+   "kind": "unit",
+   "body": "5. Aux Cooling Water System \u00b7 PID 210-1",
+   "anchor": [
+    149.0,
+    -43.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S8-TK001",
+   "kind": "tag",
+   "body": "CVCS-HX-111\nLetdown heat exchanger",
+   "anchor": [
+    102.523,
+    -43.594,
+    2.65
+   ],
+   "unit": "S8-TK001"
+  },
+  {
+   "id": "area:8",
+   "kind": "unit",
+   "body": "6. Sheet 8, unnamed (CVCS tags)",
+   "anchor": [
+    105.0,
+    -43.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S6-TK001",
+   "kind": "tag",
+   "body": "RCS-V-103\nPressurizer",
+   "anchor": [
+    53.8,
+    -42.487,
+    7.916
+   ],
+   "unit": "S6-TK001"
+  },
+  {
+   "id": "unit:S6-TK002",
+   "kind": "tag",
+   "body": "RCS-VE-104\nPressure relief tank",
+   "anchor": [
+    64.046,
+    -36.886,
+    5.384
+   ],
+   "unit": "S6-TK002"
+  },
+  {
+   "id": "unit:S6-TK003",
+   "kind": "tag",
+   "body": "untagged tank\nVessel class. PID2Graph's 'tank' covers tanks,",
+   "anchor": [
+    65.911,
+    -40.538,
+    5.384
+   ],
+   "unit": "S6-TK003"
+  },
+  {
+   "id": "unit:S6-TK004",
+   "kind": "tag",
+   "body": "untagged tank\nVessel class. PID2Graph's 'tank' covers tanks,",
+   "anchor": [
+    64.292,
+    -44.235,
+    5.384
+   ],
+   "unit": "S6-TK004"
+  },
+  {
+   "id": "unit:S6-GN017",
+   "kind": "tag",
+   "body": "RCS-EX-105\nElectric heater",
+   "anchor": [
+    52.741,
+    -46.448,
+    2.65
+   ],
+   "unit": "S6-GN017"
+  },
+  {
+   "id": "unit:S6-TK005",
+   "kind": "tag",
+   "body": "RC-P100-X001\nVessel class. PID2Graph's 'tank' covers tanks,",
+   "anchor": [
+    60.964,
+    -48.488,
+    5.384
+   ],
+   "unit": "S6-TK005"
+  },
+  {
+   "id": "unit:S6-TK006",
+   "kind": "tag",
+   "body": "COOLANT HT EXCH RC-P100-X001\nCoolant Ht Exch Rc-P100-X001",
+   "anchor": [
+    68.209,
+    -45.493,
+    5.384
+   ],
+   "unit": "S6-TK006"
+  },
+  {
+   "id": "area:6",
+   "kind": "unit",
+   "body": "7. Reactor Coolant System \u00b7 PID 100-2",
+   "anchor": [
+    61.0,
+    -43.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S4-TK001",
+   "kind": "tag",
+   "body": "ESS-HTR-180\nDe superheater",
+   "anchor": [
+    18.085,
+    -36.876,
+    2.65
+   ],
+   "unit": "S4-TK001"
+  },
+  {
+   "id": "unit:S4-TK002",
+   "kind": "tag",
+   "body": "FWS-HTR-161\nHp fws heater",
+   "anchor": [
+    19.748,
+    -46.639,
+    2.65
+   ],
+   "unit": "S4-TK002"
+  },
+  {
+   "id": "area:4",
+   "kind": "unit",
+   "body": "8. Extraction Steam System \u00b7 PID 180-1",
+   "anchor": [
+    17.0,
+    -43.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S11-PU001",
+   "kind": "tag",
+   "body": "RHR-PU-120A\nRhr pump",
+   "anchor": [
+    11.559,
+    -72.097,
+    1.95
+   ],
+   "unit": "S11-PU001"
+  },
+  {
+   "id": "unit:S11-TK001",
+   "kind": "tag",
+   "body": "RHR-HX-121A\nRhr heat exchanger",
+   "anchor": [
+    17.105,
+    -72.009,
+    2.65
+   ],
+   "unit": "S11-TK001"
+  },
+  {
+   "id": "unit:S11-PU002",
+   "kind": "tag",
+   "body": "RHR-PU-120B\nRhr pump",
+   "anchor": [
+    11.357,
+    -78.203,
+    1.95
+   ],
+   "unit": "S11-PU002"
+  },
+  {
+   "id": "unit:S11-TK002",
+   "kind": "tag",
+   "body": "RHR-HX-121B\nRhr heat exchanger",
+   "anchor": [
+    17.105,
+    -78.01,
+    2.65
+   ],
+   "unit": "S11-TK002"
+  },
+  {
+   "id": "area:11",
+   "kind": "unit",
+   "body": "9. Res Heat Removal System \u00b7 PID 120-1",
+   "anchor": [
+    17.0,
+    -75.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S5-TK001",
+   "kind": "tag",
+   "body": "RCS-XR-100\nReactor vessel",
+   "anchor": [
+    54.351,
+    -73.043,
+    7.916
+   ],
+   "unit": "S5-TK001"
+  },
+  {
+   "id": "unit:S5-TK002",
+   "kind": "tag",
+   "body": "RCS-SG-101\nSteam generator",
+   "anchor": [
+    67.375,
+    -72.969,
+    7.916
+   ],
+   "unit": "S5-TK002"
+  },
+  {
+   "id": "unit:S5-PU001",
+   "kind": "tag",
+   "body": "RCS-PU-102A\nPump",
+   "anchor": [
+    59.846,
+    -76.836,
+    1.95
+   ],
+   "unit": "S5-PU001"
+  },
+  {
+   "id": "unit:S5-PU002",
+   "kind": "tag",
+   "body": "RCS-PU-102B\nPump",
+   "anchor": [
+    57.763,
+    -80.8,
+    1.95
+   ],
+   "unit": "S5-PU002"
+  },
+  {
+   "id": "area:5",
+   "kind": "unit",
+   "body": "10. Reactor Coolant System \u00b7 PID 100-1",
+   "anchor": [
+    61.0,
+    -75.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S10-TK001",
+   "kind": "tag",
+   "body": "CVCS-VCT-118\nVolume control tank",
+   "anchor": [
+    95.146,
+    -73.254,
+    5.384
+   ],
+   "unit": "S10-TK001"
+  },
+  {
+   "id": "unit:S10-TK002",
+   "kind": "tag",
+   "body": "CVCS-HX-110\nRegen heat exchanger",
+   "anchor": [
+    100.158,
+    -69.862,
+    2.65
+   ],
+   "unit": "S10-TK002"
+  },
+  {
+   "id": "unit:S10-TK003",
+   "kind": "tag",
+   "body": "CVCS-AN-113A\nBoron analyzer",
+   "anchor": [
+    103.506,
+    -73.169,
+    5.384
+   ],
+   "unit": "S10-TK003"
+  },
+  {
+   "id": "unit:S10-TK004",
+   "kind": "tag",
+   "body": "CVCS-AN-113B\nRadiation analyzer",
+   "anchor": [
+    107.606,
+    -73.161,
+    5.384
+   ],
+   "unit": "S10-TK004"
+  },
+  {
+   "id": "unit:S10-TK005",
+   "kind": "tag",
+   "body": "CVCS-FL-112A\nLetdown filter",
+   "anchor": [
+    111.27,
+    -75.562,
+    5.384
+   ],
+   "unit": "S10-TK005"
+  },
+  {
+   "id": "unit:S10-TK006",
+   "kind": "tag",
+   "body": "CVCS-FL-112B\nLetdown filter",
+   "anchor": [
+    115.37,
+    -75.562,
+    5.384
+   ],
+   "unit": "S10-TK006"
+  },
+  {
+   "id": "unit:S10-PU001",
+   "kind": "tag",
+   "body": "CVCS-PU-115\nPositive displacement charging pump",
+   "anchor": [
+    98.661,
+    -75.364,
+    1.95
+   ],
+   "unit": "S10-PU001"
+  },
+  {
+   "id": "unit:S10-PU002",
+   "kind": "tag",
+   "body": "CVCS-PU-116\nPositive displacement charging pump",
+   "anchor": [
+    97.051,
+    -79.092,
+    1.95
+   ],
+   "unit": "S10-PU002"
+  },
+  {
+   "id": "unit:S10-PU003",
+   "kind": "tag",
+   "body": "CVCS-PU-117\nPositive displacement charging pump",
+   "anchor": [
+    98.089,
+    -83.075,
+    1.95
+   ],
+   "unit": "S10-PU003"
+  },
+  {
+   "id": "unit:S10-TK007",
+   "kind": "tag",
+   "body": "CVCS ION-114A\nCvcs Ion-114A",
+   "anchor": [
+    101.085,
+    -78.758,
+    5.384
+   ],
+   "unit": "S10-TK007"
+  },
+  {
+   "id": "unit:S10-TK008",
+   "kind": "tag",
+   "body": "CVCS ION-114B\nCvcs Ion-114B",
+   "anchor": [
+    105.097,
+    -77.912,
+    5.384
+   ],
+   "unit": "S10-TK008"
+  },
+  {
+   "id": "area:10",
+   "kind": "unit",
+   "body": "11. Chemical & Volume Control \u00b7 PID 110-1",
+   "anchor": [
+    105.0,
+    -75.0,
+    9.0
+   ]
+  },
+  {
+   "id": "unit:S9-TK001",
+   "kind": "tag",
+   "body": "RCS-XR-100F\nSixth issue reactor",
+   "anchor": [
+    137.943,
+    -74.674,
+    7.916
+   ],
+   "unit": "S9-TK001"
+  },
+  {
+   "id": "unit:S9-TK002",
+   "kind": "tag",
+   "body": "RCS-XR-100E\nFifth issue reactor",
+   "anchor": [
+    141.947,
+    -74.669,
+    7.916
+   ],
+   "unit": "S9-TK002"
+  },
+  {
+   "id": "unit:S9-TK003",
+   "kind": "tag",
+   "body": "RCS-XR-100D\nFourth issue reactor",
+   "anchor": [
+    145.952,
+    -74.718,
+    7.916
+   ],
+   "unit": "S9-TK003"
+  },
+  {
+   "id": "unit:S9-TK004",
+   "kind": "tag",
+   "body": "RCS-XR-100C\nThird issue reactor",
+   "anchor": [
+    150.049,
+    -74.538,
+    7.916
+   ],
+   "unit": "S9-TK004"
+  },
+  {
+   "id": "unit:S9-TK005",
+   "kind": "tag",
+   "body": "RCS-XR-100B\nSecond issue reactor",
+   "anchor": [
+    154.042,
+    -74.858,
+    7.916
+   ],
+   "unit": "S9-TK005"
+  },
+  {
+   "id": "unit:S9-TK006",
+   "kind": "tag",
+   "body": "RCS-XR-100A\nFirst issue reactor",
+   "anchor": [
+    158.045,
+    -74.696,
+    7.916
+   ],
+   "unit": "S9-TK006"
+  },
+  {
+   "id": "area:9",
+   "kind": "unit",
+   "body": "12. Sheet 9, unnamed (RCS tags)",
+   "anchor": [
+    149.0,
+    -75.0,
+    9.0
+   ]
+  },
+  {
+   "id": "tag:TCV 1401@S0-TK001",
+   "kind": "tag",
+   "body": "TCV 1401  not connected",
+   "anchor": [
+    54.584,
+    -13.272,
+    1.69
+   ],
+   "marker": "TCV 1401",
+   "unit": "S0-TK001"
+  },
+  {
+   "id": "tag:LCV 1501@S1-TK001",
+   "kind": "tag",
+   "body": "LCV 1501  not connected",
+   "anchor": [
+    102.06,
+    -9.385,
+    1.69
+   ],
+   "marker": "LCV 1501",
+   "unit": "S1-TK001"
+  },
+  {
+   "id": "tag:MOV 1511@S1-PU013",
+   "kind": "tag",
+   "body": "MOV 1511  not connected",
+   "anchor": [
+    107.181,
+    -13.722,
+    1.27
+   ],
+   "marker": "MOV 1511",
+   "unit": "S1-PU013"
+  },
+  {
+   "id": "tag:MOV 1521@S1-PU014",
+   "kind": "tag",
+   "body": "MOV 1521  not connected",
+   "anchor": [
+    109.802,
+    -10.588,
+    1.27
+   ],
+   "marker": "MOV 1521",
+   "unit": "S1-PU014"
+  },
+  {
+   "id": "tag:MOV 1531@S1-PU015",
+   "kind": "tag",
+   "body": "MOV 1531  not connected",
+   "anchor": [
+    113.29,
+    -12.666,
+    1.27
+   ],
+   "marker": "MOV 1531",
+   "unit": "S1-PU015"
+  },
+  {
+   "id": "tag:TE 16096B@S2-TK001",
+   "kind": "tag",
+   "body": "TE 16096B  not connected",
+   "anchor": [
+    141.401,
+    -11.927,
+    2.2
+   ],
+   "marker": "TE 16096B",
+   "unit": "S2-TK001"
+  },
+  {
+   "id": "tag:TCV 1622@S2-TK004",
+   "kind": "tag",
+   "body": "TCV 1622  not connected",
+   "anchor": [
+    156.695,
+    -13.629,
+    1.69
+   ],
+   "marker": "TCV 1622",
+   "unit": "S2-TK004"
+  },
+  {
+   "id": "tag:FIT 16299@S2-PU001",
+   "kind": "tag",
+   "body": "FIT 16299  not connected",
+   "anchor": [
+    145.393,
+    -12.902,
+    1.27
+   ],
+   "marker": "FIT 16299",
+   "unit": "S2-PU001"
+  },
+  {
+   "id": "tag:FIT 163101@S2-PU002",
+   "kind": "tag",
+   "body": "FIT 163101  not connected",
+   "anchor": [
+    142.44,
+    -15.648,
+    1.27
+   ],
+   "marker": "FIT 163101",
+   "unit": "S2-PU002"
+  },
+  {
+   "id": "tag:PIT 160104@S3-TK001",
+   "kind": "tag",
+   "body": "PIT 160104  not connected",
+   "anchor": [
+    10.209,
+    -8.873,
+    1.69
+   ],
+   "marker": "PIT 160104",
+   "unit": "S3-TK001"
+  },
+  {
+   "id": "tag:TE 160106B@S3-PU001",
+   "kind": "tag",
+   "body": "TE 160106B  not connected",
+   "anchor": [
+    11.387,
+    -13.632,
+    1.27
+   ],
+   "marker": "TE 160106B",
+   "unit": "S3-PU001"
+  },
+  {
+   "id": "tag:PIT 170116@S3-TK002",
+   "kind": "tag",
+   "body": "PIT 170116  not connected",
+   "anchor": [
+    22.175,
+    -15.39,
+    1.69
+   ],
+   "marker": "PIT 170116",
+   "unit": "S3-TK002"
+  },
+  {
+   "id": "tag:MOV 1652@S3-PU002",
+   "kind": "tag",
+   "body": "MOV 1652  not connected",
+   "anchor": [
+    11.387,
+    -17.732,
+    1.27
+   ],
+   "marker": "MOV 1652",
+   "unit": "S3-PU002"
+  },
+  {
+   "id": "tag:TCV 16013@S4-TK001",
+   "kind": "tag",
+   "body": "TCV 16013  not connected",
+   "anchor": [
+    19.385,
+    -39.128,
+    1.69
+   ],
+   "marker": "TCV 16013",
+   "unit": "S4-TK001"
+  },
+  {
+   "id": "tag:TE 161143A@S4-TK002",
+   "kind": "tag",
+   "body": "TE 161143A  not connected",
+   "anchor": [
+    21.048,
+    -48.891,
+    1.69
+   ],
+   "marker": "TE 161143A",
+   "unit": "S4-TK002"
+  },
+  {
+   "id": "tag:TE 1002A@S5-TK001",
+   "kind": "tag",
+   "body": "TE 1002A  not connected",
+   "anchor": [
+    55.451,
+    -74.948,
+    2.2
+   ],
+   "marker": "TE 1002A",
+   "unit": "S5-TK001"
+  },
+  {
+   "id": "tag:PT 1009A@S5-PU001",
+   "kind": "tag",
+   "body": "PT 1009A  not connected",
+   "anchor": [
+    60.596,
+    -78.135,
+    1.27
+   ],
+   "marker": "PT 1009A",
+   "unit": "S5-PU001"
+  },
+  {
+   "id": "tag:TE 10215B@S5-PU002",
+   "kind": "tag",
+   "body": "TE 10215B  not connected",
+   "anchor": [
+    58.513,
+    -82.099,
+    1.27
+   ],
+   "marker": "TE 10215B",
+   "unit": "S5-PU002"
+  },
+  {
+   "id": "tag:TE 10117@S6-TK001",
+   "kind": "tag",
+   "body": "TE 10117  not connected",
+   "anchor": [
+    54.9,
+    -44.392,
+    2.2
+   ],
+   "marker": "TE 10117",
+   "unit": "S6-TK001"
+  },
+  {
+   "id": "tag:PRV 1032@S6-TK002",
+   "kind": "tag",
+   "body": "PRV 1032  not connected",
+   "anchor": [
+    64.996,
+    -38.531,
+    2.2
+   ],
+   "marker": "PRV 1032",
+   "unit": "S6-TK002"
+  },
+  {
+   "id": "tag:TE 102B39@S6-TK003",
+   "kind": "tag",
+   "body": "TE 102B39  not connected",
+   "anchor": [
+    66.861,
+    -42.183,
+    2.2
+   ],
+   "marker": "TE 102B39",
+   "unit": "S6-TK003"
+  },
+  {
+   "id": "tag:TE 102B40@S6-TK004",
+   "kind": "tag",
+   "body": "TE 102B40  not connected",
+   "anchor": [
+    65.242,
+    -45.88,
+    2.2
+   ],
+   "marker": "TE 102B40",
+   "unit": "S6-TK004"
+  },
+  {
+   "id": "tag:LG 212204@S7-TK001",
+   "kind": "tag",
+   "body": "LG 212204  not connected",
+   "anchor": [
+    140.139,
+    -39.998,
+    2.2
+   ],
+   "marker": "LG 212204",
+   "unit": "S7-TK001"
+  },
+  {
+   "id": "tag:TE 210207A@S7-TK002",
+   "kind": "tag",
+   "body": "TE 210207A  not connected",
+   "anchor": [
+    148.091,
+    -41.782,
+    1.69
+   ],
+   "marker": "TE 210207A",
+   "unit": "S7-TK002"
+  },
+  {
+   "id": "tag:TE 170215B@S7-TK003",
+   "kind": "tag",
+   "body": "TE 170215B  not connected",
+   "anchor": [
+    154.348,
+    -44.286,
+    1.69
+   ],
+   "marker": "TE 170215B",
+   "unit": "S7-TK003"
+  },
+  {
+   "id": "tag:PIT 210208@S7-PU001",
+   "kind": "tag",
+   "body": "PIT 210208  not connected",
+   "anchor": [
+    142.904,
+    -44.233,
+    1.27
+   ],
+   "marker": "PIT 210208",
+   "unit": "S7-PU001"
+  },
+  {
+   "id": "tag:MOV 1113@S8-TK001",
+   "kind": "tag",
+   "body": "MOV 1113  not connected",
+   "anchor": [
+    103.823,
+    -45.846,
+    1.69
+   ],
+   "marker": "MOV 1113",
+   "unit": "S8-TK001"
+  },
+  {
+   "id": "tag:TE 11051B@S10-TK002",
+   "kind": "tag",
+   "body": "TE 11051B  not connected",
+   "anchor": [
+    101.458,
+    -72.114,
+    1.69
+   ],
+   "marker": "TE 11051B",
+   "unit": "S10-TK002"
+  },
+  {
+   "id": "tag:MOV 1151@S10-PU001",
+   "kind": "tag",
+   "body": "MOV 1151  not connected",
+   "anchor": [
+    99.411,
+    -76.663,
+    1.27
+   ],
+   "marker": "MOV 1151",
+   "unit": "S10-PU001"
+  },
+  {
+   "id": "tag:PSV 1161@S10-TK001",
+   "kind": "tag",
+   "body": "PSV 1161  not connected",
+   "anchor": [
+    96.096,
+    -74.899,
+    2.2
+   ],
+   "marker": "PSV 1161",
+   "unit": "S10-TK001"
+  },
+  {
+   "id": "tag:PIT 11154A@S10-TK004",
+   "kind": "tag",
+   "body": "PIT 11154A  not connected",
+   "anchor": [
+    108.556,
+    -74.806,
+    2.2
+   ],
+   "marker": "PIT 11154A",
+   "unit": "S10-TK004"
+  },
+  {
+   "id": "tag:MOV 1001@S11-PU001",
+   "kind": "tag",
+   "body": "MOV 1001  not connected",
+   "anchor": [
+    12.309,
+    -73.396,
+    1.27
+   ],
+   "marker": "MOV 1001",
+   "unit": "S11-PU001"
+  },
+  {
+   "id": "tag:FO 1201@S11-TK001",
+   "kind": "tag",
+   "body": "FO 1201  not connected",
+   "anchor": [
+    18.405,
+    -74.261,
+    1.69
+   ],
+   "marker": "FO 1201",
+   "unit": "S11-TK001"
+  },
+  {
+   "id": "tag:FT 1211@S11-TK002",
+   "kind": "tag",
+   "body": "FT 1211  not connected",
+   "anchor": [
+    18.405,
+    -80.262,
+    1.69
+   ],
+   "marker": "FT 1211",
+   "unit": "S11-TK002"
+  },
+  {
+   "id": "tag:MOV 1004@S11-PU002",
+   "kind": "tag",
+   "body": "MOV 1004  not connected",
+   "anchor": [
+    12.107,
+    -79.502,
+    1.27
+   ],
+   "marker": "MOV 1004",
+   "unit": "S11-PU002"
+  }
+ ],
+ "replay_states": [],
+ "level_bands": [],
+ "camera_lens_mm": 28.0,
+ "camera_sensor_mm": 36.0,
+ "still_resolution": [
+  1920,
+  1080
+ ],
+ "video": {
+  "width": 960,
+  "height": 540,
+  "fps": 10
+ },
+ "timeline": [],
+ "tour_order": [
+  "3",
+  "0",
+  "1",
+  "2",
+  "7",
+  "8",
+  "6",
+  "4",
+  "11",
+  "5",
+  "10",
+  "9"
+ ],
+ "tour_order_basis": "follows 36 directed sheet-to-sheet connections read from off-page flags; where none says, sheet order. Plants loop (condensate to feedwater to steam and back), so any start point is a choice.",
+ "shots": [
+  {
+   "name": "00_overview",
+   "camera": [
+    142.709,
+    -213.485,
+    225.484
+   ],
+   "target": [
+    83.0,
+    -42.888,
+    3.708
+   ],
+   "state_index": 0,
+   "focus": null,
+   "visible": [
+    "area:3",
+    "area:0",
+    "area:1",
+    "area:2",
+    "area:7",
+    "area:8",
+    "area:6",
+    "area:4",
+    "area:11",
+    "area:5",
+    "area:10",
+    "area:9"
+   ],
+   "bodies": {},
+   "markers": [],
+   "utilities": [],
+   "chevrons": true,
+   "highlight": [],
+   "level_bands": [],
+   "overlays": [
+    {
+     "id": "overlay:badge",
+     "kind": "badge",
+     "corner": "top_right",
+     "text": "STRUCTURE ONLY \u00b7 NO PROCESS DATA\nOPEN100 drawings, extracted, unverified"
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "legend",
+     "corner": "bottom_right",
+     "title": "What the marks mean",
+     "rows": [
+      {
+       "text": "Chevrons: direction read from the drawing",
+       "swatch": "service:process"
+      },
+      {
+       "text": "No chevrons: direction not shown",
+       "swatch": "service:process"
+      },
+      {
+       "text": "Dark marker: instrument, not connected",
+       "swatch": "state:not_connected"
+      }
+     ]
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "caption",
+     "text": "Overview: OPEN100: 12 drawings stitched into one plant\nAreas in the inferred tour order 1-12. Lines between areas carry flow chevrons only where off-page flags show the direction. No live values."
+    }
+   ]
+  },
+  {
+   "name": "01_stop_sheet3",
+   "camera": [
+    26.648,
+    -50.988,
+    42.721
+   ],
+   "target": [
+    14.892,
+    -11.802,
+    1.575
+   ],
+   "state_index": 0,
+   "focus": null,
+   "visible": [
+    "area:3",
+    "unit:S3-TK001",
+    "unit:S3-PU001",
+    "unit:S3-PU002",
+    "unit:S3-TK002",
+    "tag:PIT 160104@S3-TK001",
+    "tag:TE 160106B@S3-PU001",
+    "tag:PIT 170116@S3-TK002",
+    "tag:MOV 1652@S3-PU002"
+   ],
+   "bodies": {},
+   "markers": [
+    "PIT 160104",
+    "TE 160106B",
+    "PIT 170116",
+    "MOV 1652"
+   ],
+   "utilities": [],
+   "chevrons": true,
+   "highlight": [],
+   "level_bands": [],
+   "optional": true,
+   "overlays": [
+    {
+     "id": "overlay:badge",
+     "kind": "badge",
+     "corner": "top_right",
+     "text": "STRUCTURE ONLY \u00b7 NO PROCESS DATA\nOPEN100 drawings, extracted, unverified"
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "legend",
+     "corner": "bottom_right",
+     "title": "What the marks mean",
+     "rows": [
+      {
+       "text": "Chevrons: direction read from the drawing",
+       "swatch": "service:process"
+      },
+      {
+       "text": "No chevrons: direction not shown",
+       "swatch": "service:process"
+      },
+      {
+       "text": "Dark marker: instrument, not connected",
+       "swatch": "state:not_connected"
+      }
+     ]
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "card",
+     "corner": "top_left",
+     "text": "What is here (from the drawing)\nCND-HTR-160: Heater [tag type code]\nFWS-PU-170A: Feedwater pump [equipment schedule]\nFWS-PU-170B: Feedwater pump [equipment schedule]\nFWS-HTR-170: Hp feedwater heater [equipment schedule]\nArea name: title block"
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "caption",
+     "text": "Stop 1 of 12: sheet 3, Feedwater System \u00b7 PID 170-1\nFlow read from off-page flags: in from none; out to sheet 0. Structure only, no process data."
+    }
+   ]
+  },
+  {
+   "name": "05_stop_sheet7",
+   "camera": [
+    162.129,
+    -96.59,
+    57.752
+   ],
+   "target": [
+    146.469,
+    -44.39,
+    2.942
+   ],
+   "state_index": 0,
+   "focus": null,
+   "visible": [
+    "area:7",
+    "unit:S7-TK001",
+    "unit:S7-TK002",
+    "unit:S7-TK003",
+    "unit:S7-PU001",
+    "unit:S7-PU002",
+    "unit:S7-PU003",
+    "tag:LG 212204@S7-TK001",
+    "tag:TE 210207A@S7-TK002",
+    "tag:TE 170215B@S7-TK003",
+    "tag:PIT 210208@S7-PU001"
+   ],
+   "bodies": {},
+   "markers": [
+    "LG 212204",
+    "TE 210207A",
+    "TE 170215B",
+    "PIT 210208"
+   ],
+   "utilities": [],
+   "chevrons": true,
+   "highlight": [],
+   "level_bands": [],
+   "optional": true,
+   "overlays": [
+    {
+     "id": "overlay:badge",
+     "kind": "badge",
+     "corner": "top_right",
+     "text": "STRUCTURE ONLY \u00b7 NO PROCESS DATA\nOPEN100 drawings, extracted, unverified"
+    },
+    {
+     "id": "overlay:legend",
+     "kind": "legend",
+     "corner": "bottom_right",
+     "title": "What the marks mean",
+     "rows": [
+      {
+       "text": "Chevrons: direction read from the drawing",
+       "swatch": "service:process"
+      },
+      {
+       "text": "No chevrons: direction not shown",
+       "swatch": "service:process"
+      },
+      {
+       "text": "Dark marker: instrument, not connected",
+       "swatch": "state:not_connected"
+      }
+     ]
+    },
+    {
+     "id": "overlay:purpose",
+     "kind": "card",
+     "corner": "top_left",
+     "text": "What is here (from the drawing)\nACW-TK-212: Aux cooling water tank [equipment schedule]\nACW-AXC-210: Aux cooling water cooler [equipment schedule]\nLUBE OIL COOLER: Lube Oil Cooler [drawing label]\nACW-PU-211A: Aux cooling water pump [equipment schedule]\nACW-PU-211B: Aux cooling water pump [equipment schedule]\nACW-PU-211C: Aux cooling water pump [equipment schedule]\nArea name: connector text"
+    },
+    {
+     "id": "overlay:caption",
+     "kind": "caption",
+     "text": "Stop 5 of 12: sheet 7, Aux Cooling Water System \u00b7 PID 210-1\nFlow read from off-page flags: in from sheet 2, sheet 8; out to sheet 8. Structure only, no process data."
+    }
+   ]
+  }
+ ],
+ "all_shot_names": [
+  "00_overview",
+  "01_stop_sheet3",
+  "02_stop_sheet0",
+  "03_stop_sheet1",
+  "04_stop_sheet2",
+  "05_stop_sheet7",
+  "06_stop_sheet8",
+  "07_stop_sheet6",
+  "08_stop_sheet4",
+  "09_stop_sheet11",
+  "10_stop_sheet5",
+  "11_stop_sheet10",
+  "12_stop_sheet9"
+ ]
+}

@@ -11,6 +11,9 @@ Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This 
 - the Perspective screens in `out/ignition/gateway/PIDTwin.zip`, which embed those SVGs and the greyed drawings;
 - images made from the drawings: `docs/screenshots/before-after-sheet0.png`, `docs/social-preview.png`, `scan-levels.png`, the OPEN100 screen
   captures, and `docs/demo.gif`;
+- `out/open100_structural/` (flow directions, plant structure, mimic views, 3D scene, isolation points, and the
+  spot-check crops of the drawings), `data/open100_equipment_schedule.json` (equipment schedules transcribed from
+  the drawings), `data/open100_direction_confidence.json`, and the images in `docs/screenshots/open100/`;
 - `data/drawings/`: the 12 OPEN100 drawings, greyed and downscaled as screen backgrounds
   (`scripts/ignition/prepare_drawings.py`);
 - `data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L1` to `scan-L3`: degraded "old scan" copies

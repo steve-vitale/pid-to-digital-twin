@@ -38,3 +38,10 @@ out/review/
 # Degraded copies of the generated TE sheets: regenerate with
 # python scripts/degrade_scans.py --src data/te_pid --drawings 101,102,103 --dest data/te_pid/scan
 data/te_pid/scan-L*/
+
+# OPEN100 structural outputs: the JSON/CSV results and the spot-check crops are committed; renders, previews and
+# working crops are regenerated (scripts/render_open100_structural.py, scripts/build_open100_3d.py).
+out/open100_structural/mimic/*.html
+out/open100_structural/3d/renders/
+out/open100_structural/3d/open100_scene_blender.py
+out/open100_structural/schedule_crops/

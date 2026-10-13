@@ -1,0 +1,272 @@
+{
+ "about": "What each evidence track can deliver. Source of truth for the README table under 'What you can do with only drawings, only process knowledge, or both' (python scripts/deliverables_matrix.py --write regenerates it; scripts/test_open100_structural.py checks they match and that every evidence path exists).",
+ "tracks": {
+  "te": "Tennessee Eastman: process knowledge only (hand-built seed model from the published process, recorded simulator replay), no P&ID",
+  "open100": "OPEN100: 12 real P&IDs, extracted and scored, no process data"
+ },
+ "statuses": {
+  "done": "built and checked; the note says how far",
+  "done_offline": "built and rendered offline; not imported into a gateway",
+  "partial": "built for part of the plant; the note says how much",
+  "draft": "draft stills or text, not reviewed",
+  "mockup": "design mockup, not a procedure or a verified result",
+  "synthetic_demo": "works end to end on synthetic inputs only",
+  "not_done": "possible, not done yet",
+  "not_possible": "cannot be done with this track's inputs; the note says what is missing",
+  "not_applicable": "the question does not arise for this track"
+ },
+ "rows": [
+  {
+   "deliverable": "Asset model (equipment, instruments, connections, hierarchy)",
+   "te": {
+    "status": "done",
+    "note": "transcribed from the published process and checked line by line against the simulator source (36 confirmed, 1 corrected)",
+    "evidence": [
+     "data/te_process_model.json",
+     "out/te_source_check.md"
+    ]
+   },
+   "open100": {
+    "status": "done",
+    "note": "extracted from the drawings, risk-tiered, unverified until reviewed",
+    "evidence": [
+     "out/twin/r2-tiles-trace/codex/plant_model.json",
+     "out/twin/r2-tiles-trace/codex/review_queue.csv"
+    ]
+   }
+  },
+  {
+   "deliverable": "Ignition tags and PI AF asset structure",
+   "te": {
+    "status": "done",
+    "note": "loaded into a lab gateway; the PI Builder sheet is not imported into a PI System",
+    "evidence": [
+     "out/ignition/te_tags.json",
+     "out/pi"
+    ]
+   },
+   "open100": {
+    "status": "done",
+    "note": "same; instrument tags are placeholders until an I/O list maps them",
+    "evidence": [
+     "out/twin/r2-tiles-trace/codex/ignition/tags.json",
+     "out/twin/r2-tiles-trace/codex/pi"
+    ]
+   }
+  },
+  {
+   "deliverable": "Original drawing on screen with each instrument's value",
+   "te": {
+    "status": "not_possible",
+    "note": "no TE drawing exists in this repository: TE was built from the process description",
+    "evidence": []
+   },
+   "open100": {
+    "status": "done",
+    "note": "12 drawing screens, checked in a lab gateway; every unmapped value reads 'not connected'",
+    "evidence": [
+     "docs/screenshots/native-sheet0-not-connected.png"
+    ]
+   }
+  },
+  {
+   "deliverable": "Flow direction on connections",
+   "te": {
+    "status": "done",
+    "note": "seed-model directions as transcribed, unverified",
+    "evidence": [
+     "data/te_process_model.json"
+    ]
+   },
+   "open100": {
+    "status": "partial",
+    "note": "read from drawing evidence (arrowheads, off-page flags, pump ports) on 361 of 1,133 process links; the rest stay undirected and show no arrow",
+    "evidence": [
+     "out/open100_structural/flow_direction.json",
+     "docs/screenshots/open100/flow-evidence-sheet5.png"
+    ]
+   }
+  },
+  {
+   "deliverable": "Sheets stitched into one plant",
+   "te": {
+    "status": "not_applicable",
+    "note": "one process description, no sheets",
+    "evidence": []
+   },
+   "open100": {
+    "status": "done_offline",
+    "note": "off-page connectors join the 12 sheets; 38 sheet-to-sheet connections, 36 with a direction",
+    "evidence": [
+     "out/open100_structural/plant_structure.json"
+    ]
+   }
+  },
+  {
+   "deliverable": "Process mimic overview (ISA-101 style)",
+   "te": {
+    "status": "done",
+    "note": "native acceptance in a lab gateway; layout and key values not reviewed by operations",
+    "evidence": [
+     "docs/screenshots/native-overview-normal.png"
+    ]
+   },
+   "open100": {
+    "status": "done_offline",
+    "note": "plant overview and 12 area views from the same screen components; offline render",
+    "evidence": [
+     "docs/screenshots/open100/mimic-plant-overview.png",
+     "docs/screenshots/open100/mimic-area-sheet7.png"
+    ]
+   }
+  },
+  {
+   "deliverable": "Equipment purpose cards",
+   "te": {
+    "status": "draft",
+    "note": "written with AI assistance from the data files, not reviewed by an operator",
+    "evidence": [
+     "drafts/3d-tour/02_r-101_normal.jpg"
+    ]
+   },
+   "open100": {
+    "status": "done_offline",
+    "note": "from the drawings' own equipment schedules and labels (transcribed, unverified); generic class text where the drawing says nothing, marked as such",
+    "evidence": [
+     "data/open100_equipment_schedule.json"
+    ]
+   }
+  },
+  {
+   "deliverable": "3D orientation tour (stills)",
+   "te": {
+    "status": "draft",
+    "note": "placeholder geometry, colours from recorded replay",
+    "evidence": [
+     "drafts/3d-tour/00_overview_normal.jpg"
+    ]
+   },
+   "open100": {
+    "status": "draft",
+    "note": "placeholder geometry at drawing positions, stops in inferred flow order, structure only",
+    "evidence": [
+     "docs/screenshots/open100/3d-00_overview.jpg",
+     "docs/screenshots/open100/3d-01_stop_sheet3.jpg",
+     "docs/screenshots/open100/3d-05_stop_sheet7.jpg"
+    ]
+   }
+  },
+  {
+   "deliverable": "Lockout/tagout isolation view",
+   "te": {
+    "status": "mockup",
+    "note": "isolation points inferred from the seed model",
+    "evidence": [
+     "drafts/3d-tour/40_loto_mockup.jpg"
+    ]
+   },
+   "open100": {
+    "status": "mockup",
+    "note": "isolation points from the extracted symbols, on the real drawing, with sheet and box for each; not a procedure",
+    "evidence": [
+     "docs/screenshots/open100/loto-isolation-sheet7.png",
+     "out/open100_structural/loto_isolation_points.csv"
+    ]
+   }
+  },
+  {
+   "deliverable": "Values on the screens",
+   "te": {
+    "status": "done",
+    "note": "recorded simulator replay, not a live plant",
+    "evidence": [
+     "docs/screenshots/native-overview-normal.png"
+    ]
+   },
+   "open100": {
+    "status": "not_possible",
+    "note": "needs process data: an I/O list or historian mapping for these instruments",
+    "evidence": []
+   }
+  },
+  {
+   "deliverable": "Point mapping to data addresses",
+   "te": {
+    "status": "done",
+    "note": "replay channels mapped in the lab gateway",
+    "evidence": [
+     "out/ignition/gateway/build_meta.json"
+    ]
+   },
+   "open100": {
+    "status": "synthetic_demo",
+    "note": "a synthetic I/O list shaped like a real export; no real addresses exist for these drawings",
+    "evidence": [
+     "data/io_lists"
+    ]
+   }
+  },
+  {
+   "deliverable": "Normal bands and early warning",
+   "te": {
+    "status": "done",
+    "note": "learned on half the normal run, tested on the other half and a fault run",
+    "evidence": [
+     "out/ignition/normal_bands.md"
+    ]
+   },
+   "open100": {
+    "status": "not_possible",
+    "note": "needs a historian record of normal operation",
+    "evidence": []
+   }
+  },
+  {
+   "deliverable": "Alarms",
+   "te": {
+    "status": "done",
+    "note": "published setpoints only; the gateway verifier proves one fires",
+    "evidence": [
+     "docs/IGNITION_BUILD.md"
+    ]
+   },
+   "open100": {
+    "status": "not_possible",
+    "note": "needs setpoints and process data; the drawings name some alarm points but give no setpoints",
+    "evidence": []
+   }
+  },
+  {
+   "deliverable": "Fault replay and live process tour",
+   "te": {
+    "status": "done",
+    "note": "recorded fault-6 replay; replay is not a simulator that responds to control",
+    "evidence": [
+     "docs/screenshots/native-overview-fault-alarm.png"
+    ]
+   },
+   "open100": {
+    "status": "not_possible",
+    "note": "needs recorded process data",
+    "evidence": []
+   }
+  },
+  {
+   "deliverable": "Operations review",
+   "te": {
+    "status": "not_done",
+    "note": "tooling built; needs someone who knows the process",
+    "evidence": [
+     "docs/REVIEW_LOOP.md"
+    ]
+   },
+   "open100": {
+    "status": "not_done",
+    "note": "same; the review queue is ready",
+    "evidence": [
+     "out/twin/r2-tiles-trace/codex/review_queue.csv"
+    ]
+   }
+  }
+ ]
+}
