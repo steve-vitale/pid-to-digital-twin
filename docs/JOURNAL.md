@@ -1744,7 +1744,7 @@ and PI-107 was red. On the screen, though, only TI-109's band really looked miss
 can't be sure that is what Steve saw on October 8. A freshly started demo also shows short trend history for its
 first minutes.
 
-**The final run.** Everything above was repeated from scratch on commit `485f000`: a pristine archive, the same
+**The final run.** Everything above was repeated from scratch on commit `485f000` (published as `34b4ef5`; see [commit identity](IGNITION_ACCEPTANCE.md#result)): a pristine archive, the same
 write-only build (provider `f735cebe…` unchanged, project ZIP `1a6ce79c…`), and a fresh container. The receipt is
 [`native-current-20261013.json`](../out/ignition/gateway/receipts/native-current-20261013.json). The tools are in
 `scripts/ignition/acceptance/`.

@@ -11,8 +11,14 @@ including the bugs the gateway found, is [journal entry 38](JOURNAL.md#38-import
 The gateway was the official `inductiveautomation/ignition:8.3.10` image on the trial license, in a fresh container
 with a fresh volume, its port bound to localhost only, and removed afterwards. It was fed by the replay image built
 from `docker/sim.Dockerfile` (recorded Tennessee Eastman replay plus 24 synthetic OPEN100 points). No real plant,
-controls or site gateway was involved. Commit under test: `485f000`. Receipt:
+controls or site gateway was involved. Receipt:
 [`native-current-20261013.json`](../out/ignition/gateway/receipts/native-current-20261013.json).
+
+**Commit identity.** The receipt and journal entry 38 name the commit under test as `485f000`. That was a local
+commit. Before publishing, two internal working notes were removed from the unpublished history, which changed
+every later commit ID; the same commit is published as `34b4ef5`, with identical source and generated files. The
+stronger identity is the candidate's file hashes: a `--write-only` build of release v1.2.0 reproduces the tested
+project ZIP byte for byte (SHA-256 `1a6ce79c…`, full value in the receipt).
 
 The first import found two defects that every offline check had missed: all 580 script transforms failed to parse,
 and no-data values rendered as the text `null`. A third, TI-109's invisible normal band, was found on screen. All
