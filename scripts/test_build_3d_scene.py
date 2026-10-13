@@ -245,7 +245,8 @@ def main():
     marker = {m['tag']: m for m in scene['markers']}
     check('SC-212 (no replay source) is not connected', not marker['SC-212']['connected'])
     check('only SC-212 is not connected', [m['tag'] for m in scene['markers'] if not m['connected']] == ['SC-212'])
-    check('disputed TI-122 ownership stays visible', marker['TI-122']['disputed'] and marker['TI-122']['unit'] == 'E-101')
+    check('an open discrepancy stays visible (PI-116, unresolvable in the source) and a resolved one does not (TI-122)',
+          marker['PI-116']['disputed'] and not marker['TI-122']['disputed'] and marker['TI-122']['unit'] == 'E-101')
     check('display-card associations are reused for placement',
           marker['FI-106']['attach'] == ['stream', 'S6'] and marker['PI-107']['attach'] == ['unit', 'R-101'])
     check('tags without a display card say so', marker['TI-121']['placement_basis'].startswith('seed model unit ownership only'))

@@ -123,13 +123,14 @@ nearest connections that join everything up. The full set of paths stays in the 
 left out.
 
 The stills are **offline renders** (`scripts/render_open100_structural.py`: the TE preview's renderer, screenshotted
-by a headless browser). These views are not part of the 23-view project that passed native acceptance, and they have
+by a headless browser). These views are not part of the 24-view project that passed native acceptance, and they have
 not been imported into a gateway.
 
 ## 4. 3D orientation tour
 
-`scripts/build_open100_3d.py` writes a scene for the Blender renderer copied unchanged from the 3D tour prototype
-(`scripts/blender_tour_template.py`, `scripts/label_layout.py`). The 12 areas sit on a plot in tour order. Equipment
+`scripts/build_open100_3d.py` writes a scene for the Blender renderer it shares with the TE 3D tour
+(`scripts/blender_tour_template.py`, `scripts/label_layout.py`; first copied unchanged from the tour prototype, and
+since the tour's merge both tours label in Atkinson Hyperlegible at the sizes the 18 px minimum needs). The 12 areas sit on a plot in tour order. Equipment
 is placed by its drawing position, as a placeholder shape for its class and tag type. Pipes have chevrons only where
 the path's direction was read from the drawing. Each stop carries a purpose card, every source named. Instrument
 markers are dark and labelled "not connected", and every still is badged STRUCTURE ONLY · NO PROCESS DATA. Three

@@ -2,7 +2,7 @@
 
 This is the order to check things in: start where the data starts, confirm or correct each stage, and watch each
 correction travel forward. It pairs with the rest of the review day kit (`README.md`, `FEEDBACK.md` and the
-`CHECKLIST_*.md` files in this folder, merged separately), which says *what* to look at in each artifact and who is
+`CHECKLIST_*.md` files in this folder), which says *what* to look at in each artifact and who is
 qualified to decide it. This page says *in what order*, and how to prove a correction reached everything built
 from it.
 
@@ -32,16 +32,19 @@ python scripts/pipeline.py status > status-before.txt
 python scripts/pipeline.py confidence > confidence-before.txt
 ```
 
-Expect `te.bands`, `ignition.gateway`, `te.replay` and `te.source_check` to show `NEVER BUILT HERE` unless the TE
-replay files are downloaded (`python scripts/fetch_te_data.py`) and someone has run the manual steps. That is
-expected, not a failure. Everything else should be `FRESH`. If it isn't, find out why before reviewing anything:
+Expect 37 of 39 stages `FRESH` on a checkout of this commit. `te.replay` and `ignition.acceptance` show
+`NEVER BUILT HERE`: they need a running Ignition gateway, and their evidence is the receipts. After a correction, a
+rebuild may report a stage `BLOCKED` if this machine lacks what it needs: the TE replay files
+(`python scripts/fetch_te_data.py --all`), a package (Pillow, OpenCV), or a program named in `BLENDER_EXE` or
+`BROWSER_EXE` (the 3D stills and the OPEN100 mimic PNGs). That is expected, not a failure, but those outputs stay
+stale until someone rebuilds them where the prerequisite exists. If it isn't, find out why before reviewing anything:
 a stale output is not the thing you think you are reviewing.
 
 ## Walk 1: Tennessee Eastman
 
 | Step | Look at | You can confirm (Track A) | Only an operations reviewer can decide (Track B) | If you correct something |
 |---|---|---|---|---|
-| **Stage 0: the model** | `data/te_process_model.json`, `out/te_source_check.md` | each tag's description and units match the source-check report; the open question on TI-122 is still open | that a unit, stream or tag owner is right for the process | review sheet row → `apply_review.py` (dry run first), then `rebuild --from te.source` |
+| **Stage 0: the model** | `data/te_process_model.json`, `out/te_source_check.md`, `out/te_topology_check.md` | each tag's description and units match the source-check report; the purge and its three tags sit on V-101 and PI-116 is still flagged unresolvable, as the topology report says | that a unit, stream or tag owner is right for the process | review sheet row → `apply_review.py` (dry run first), then `rebuild --from te.source` |
 | Optional: re-run the source check | `python scripts/verify_te_source.py` (report only; downloads `teprob.f` if not cached) | the report is unchanged, or explain every difference | n/a | then `python scripts/pipeline.py record --stage te.source_check` |
 | **Stage 1: exports** | `out/ops_review_sheet.csv`, `out/ignition/te_tags.json`, `out/pi/pi_builder_af.csv` | every tag is present, under the unit the model says, and its documentation ends with the same source check and review status as the model | which values belong on a screen; alarm priorities | never here: go back to Stage 0 |
 | **Stage 2: mimic layout (proof of concept)** | `out/mimic/te_overview_layout.json`, the overview screenshots | each reading is drawn beside the unit that owns it in the model, and reads that unit's tag path | which 2–4 readings represent a unit | a display choice goes into the findings file; an ownership fix goes back to Stage 0 |

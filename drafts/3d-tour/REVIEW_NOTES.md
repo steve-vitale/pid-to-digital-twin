@@ -203,7 +203,7 @@ Done as planned in section 4, with these specifics:
   to 0.30 of the frame height.
 - **One new defect, found by rendering all twelve stills:** TI-118 sat exactly in the plane of the stripper's second
   platform deck and was hidden from every candidate camera. Markers on a column are now lifted 0.5 m clear of a deck.
-- **Result:** the verifier passes 17 of 17 on all twelve stills (five committed). The legacy-rule render, re-measured
+- **Result:** the verifier fails none of its 17 checks on all twelve stills (15 pass, 2 informational; five stills committed). The legacy-rule render, re-measured
   as the "before" evidence, still fails legibility; its crowding now falls on tag pairs rather than E-101/K-101, and
   the test asks for crowding anywhere.
 - **Hygiene:** `scripts/test_build_3d_scene.py` passed 78/78 with `HAZARD_DENY_TERMS` set in the environment (never

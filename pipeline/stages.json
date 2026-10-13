@@ -1400,7 +1400,9 @@
     "drafts/3d-tour/label_boxes.json",
     "drafts/3d-tour/before/label_boxes.json",
     "drafts/3d-tour/verification.json",
-    "drafts/3d-tour/verification.md"
+    "drafts/3d-tour/verification.md",
+    "drafts/3d-tour/before/00_overview_normal.jpg",
+    "drafts/3d-tour/before/03_e-101_normal.jpg"
    ],
    "command": [
     [
@@ -1427,7 +1429,9 @@
      "--blender",
      "$BLENDER_EXE",
      "--publish",
-     "drafts/3d-tour/before"
+     "drafts/3d-tour/before",
+     "--publish-stills",
+     "00_overview_normal,03_e-101_normal"
     ],
     [
      "python",
@@ -1435,7 +1439,9 @@
      "--boxes",
      "drafts/3d-tour/label_boxes.json",
      "--report",
-     "drafts/3d-tour/verification"
+     "drafts/3d-tour/verification",
+     "--images",
+     "out/3d/renders"
     ]
    ],
    "requires": [
@@ -1451,7 +1457,7 @@
    "requires_note": "BLENDER_EXE: a Blender executable (rendered with Blender 5.2.2; stills only, no video); the fault-6 replay for the fault stills (python scripts/fetch_te_data.py); Pillow",
    "treatment": "Equipment, tags, ownership and stream ends from the model (purge at V-101); purpose sentences from data/te_unit_purposes.json; sizes, elevations and pipe routes are placeholders; labels in Atkinson Hyperlegible; twelve stills rendered and measured, five published; a legacy-label render is re-measured as the 'before' evidence.",
    "carries": "PROOF OF CONCEPT: placeholder geometry, recorded replay, inferred LOTO points (not a procedure), a Claude-written script not reviewed by an operator",
-   "checked_by": "scripts/test_build_3d_scene.py (contract, hygiene with HAZARD_DENY_TERMS), scripts/test_verify_3d_render.py; verify_3d_render.py 17/17 on the twelve stills (exports, topology from geometry, legibility); OCR read-back not re-run (drafts/3d-tour/REVIEW_NOTES.md)"
+   "checked_by": "scripts/test_build_3d_scene.py (contract, hygiene with HAZARD_DENY_TERMS), scripts/test_verify_3d_render.py; verify_3d_render.py: no check fails on the twelve stills (15 pass, 2 informational) (exports, topology from geometry, legibility); OCR read-back not re-run (drafts/3d-tour/REVIEW_NOTES.md)"
   },
   {
    "id": "te.replay",

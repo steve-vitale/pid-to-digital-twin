@@ -1,7 +1,8 @@
 """3D orientation tour for the OPEN100 plant: structure only, no process data.
 
-Builds a scene for the Blender renderer copied from the 3D tour prototype (scripts/blender_tour_template.py, with
-scripts/label_layout.py embedded, both unchanged) from the OPEN100 plant structure (scripts/open100_structure.py):
+Builds a scene for the Blender renderer shared with the TE 3D tour (scripts/blender_tour_template.py, with
+scripts/label_layout.py embedded; first copied unchanged from the tour prototype) from the OPEN100 plant structure
+(scripts/open100_structure.py):
 
   - the 12 sheets become 12 areas on a plot, in the inferred tour order (off-page flags say which way flow crosses);
   - each area's equipment sits where it sits on its drawing, scaled to metres, as a placeholder shape for its class;

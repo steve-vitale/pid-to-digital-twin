@@ -48,7 +48,7 @@ python scripts/run_tests.py --source-only
 
 This includes OPEN100 scorer controls, the Synthetic adapter tests, one-sheet site-intake/workflow controls, OPC/PI mapping and export controls, synthetic exact-candidate preflight checks and review-effort record controls, but excludes TE channel, along-line, gateway-diff, current-artifact and TE topology tests. Its summary explicitly says it is **not a full-suite pass**. No dependencies are installed or data downloaded by the runner.
 
-For the full cached-data suite, use an approved environment with the pinned dependencies already installed and the TE replay files already staged. `python scripts/fetch_te_data.py` (replay files and the simulator source) and `python scripts/verify_te_topology.py` (the revised TE code used as a second source; report only) are separate network-capable setup commands, not offline tests. Check prerequisites first:
+For the full cached-data suite, use an approved environment with the pinned dependencies already installed and the TE replay files already staged. `python scripts/fetch_te_data.py --all` (replay files, the simulator source, and the rest of the published fault set the 21-fault evaluation needs) and `python scripts/verify_te_topology.py` (the revised TE code used as a second source; report only) are separate network-capable setup commands, not offline tests. Check prerequisites first:
 
 ```sh
 python scripts/run_tests.py --full --check-prerequisites

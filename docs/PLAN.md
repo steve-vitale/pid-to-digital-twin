@@ -23,6 +23,9 @@ Other changes from the plan:
 - **Story log:** "STORY_LOG" became [`JOURNAL.md`](JOURNAL.md).
 - **Acceptance criterion 2** (first-pass vs post-review numbers for TE) waits on the deferred Phase 4.
 - **Acceptance criterion 3:** the screenshots are in `docs/screenshots/`; the video is not made yet.
+- **Integration (2026-10-13):** the data-lineage spine, the TE topology check, the generated TE P&ID, the 21-fault
+  evaluation and data-loss alarms, round 5, the PI v2 export and review kit, the OPEN100 structural deliverables and
+  the 3D tour were merged onto one branch; every output is a pipeline stage (journal entry 49).
 - **Phase 3's TE drawing:** done on 2026-10-13, as a P&ID generated from the verified TE model in the OPEN100
   house style and read back with Claude and GPT (no Gemini). Its key comes from the same model, so it is a round
   trip, not a third-party score ([EVALUATION.md §6](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman),

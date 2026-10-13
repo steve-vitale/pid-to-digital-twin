@@ -5,7 +5,7 @@ recorded, the LOTO points are inferred and the script is Claude's, not reviewed 
 whether a 3D tour is worth building, what it may and may not claim, and records the generator that was actually run.
 Since the merge (2026-10-13) the tour reads the source-checked topology (the purge leaves from V-101), takes each
 purpose sentence from `data/te_unit_purposes.json`, and labels in Atkinson Hyperlegible; twelve stills were
-re-rendered and verified (17/17), five are committed in [drafts/3d-tour/](../drafts/3d-tour/README.md).
+re-rendered and verified (no check failed: 15 pass, 2 informational), five are committed in [drafts/3d-tour/](../drafts/3d-tour/README.md).
 
 **Second pass (2026-10-12):** the render is checked procedurally against the twin contract, the Ignition and PI
 exports, the P&ID trace and its own pixels ([Procedural verification](#procedural-verification)). Those checks found
@@ -24,7 +24,7 @@ The prototype uses the **Tennessee Eastman (TE) seed model**, the same one the 2
 not use the OPEN100 extracted twin, whose stream directions are `unknown` and which has no units arranged as a
 process (see [Adapting it](#how-a-plant-would-adapt-it)).
 
-![Reactor stop after the review redesign: the reactor in full colour with other units ghosted, four tag pills on short leaders, PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines, a purpose card and a why-this-matters card, a corner badge and a two-line caption](screenshots/3d/02_r-101_normal.jpg)
+![Reactor stop after the review redesign: the reactor in full colour with other units ghosted, four tag pills on short leaders, PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines, a purpose card and a why-this-matters card, a corner badge and a two-line caption](../drafts/3d-tour/02_r-101_normal.jpg)
 
 ## What a 3D tour adds for operators
 
@@ -54,8 +54,8 @@ TE source is a process description, not a plant. So in this prototype:
 
 | Element | Source | Status |
 |---|---|---|
-| Units, their names and types | `data/te_process_model.json` (Downs & Vogel 1993) | Sourced; unit/stream topology still unverified, as in the 2D screens |
-| Stream endpoints | seed model `from`/`to` | Sourced topology; **direction is the unverified seed**, drawn only because the display layout's `direction_adapter` authorizes it |
+| Units, their names and types | `data/te_process_model.json` (Downs & Vogel 1993) | Sourced; unit/stream topology checked against the simulator code (`out/te_topology_check.md`), not reviewed by operations |
+| Stream endpoints | model `from`/`to` and `direction` | Source-checked: endpoints from the component balances, direction from the pressure-driven flow lines (the purge leaves from V-101). The display layout's old seed `direction_adapter` is no longer needed |
 | Tags, units of measure, which unit/stream a tag belongs to | seed model, checked against `teprob.f` (36 confirmed, 1 corrected) | Sourced |
 | Which stream or unit a tag sits on | the 2D display layout's reviewed cards (26 tags); seed ownership only for 10 tags; 1 marked unavailable | Sourced association, **approximate**; not a tap location |
 | Plan position of each unit | the 2D seed-layout pixel coordinates × 0.03 m | **Placeholder** (relative arrangement from the 2D screen, not a plot plan) |
@@ -67,7 +67,7 @@ TE source is a process description, not a plant. So in this prototype:
 | "Why this matters" citations | prototype keyword match against public incident records, curated by Claude | **Heuristic**; mechanism analogies, not a hazard analysis |
 | Tag colours | recorded TE replay (`d06_te.dat`, SHA-256 checked), committed normal bands, published alarm setpoints | Sourced data; **recorded replay, not live**; bands are display aids, not limits |
 | Agitator SC-212 | no replay source (XMV12 absent) | Shown black, "NOT CONNECTED", never animated |
-| TI-122 | source name says separator cooling water; seed assigns E-101 | Shown on E-101 with "(?)": the dispute stays visible |
+| TI-122, PI-116 | the topology check settled TI-122 on E-101 (same cooling-water circuit); PI-116's owner is unresolvable in the source | A tag is marked "owner disputed" only while the layout records an open discrepancy about it: PI-116 now, not TI-122 |
 
 Every rendered frame carries a caption saying recorded replay, placeholder geometry and source-checked (not operations-reviewed) topology. The
 GLB carries the same statement as text on the ground plane. Renders hide that text: the caption already says it,
@@ -190,9 +190,9 @@ placeholder.
 
 | Overview (elevated three-quarter) | Reactor stop (focus, purpose and why cards) |
 |---|---|
-| ![Overview: six units with unit labels on dark pills, pipes coloured by service with white flow chevrons, a ground grid, the corner badge and a two-line caption bar](screenshots/3d/00_overview_normal.jpg) | ![Reactor stop at eye height: the reactor in full colour, other units ghosted, four tag pills on short leaders with PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines with a valve symbol, a purpose card top left and a Kuraray why-this-matters card top right](screenshots/3d/02_r-101_normal.jpg) |
+| ![Overview: six units with unit labels on dark pills, pipes coloured by service with white flow chevrons, a ground grid, the corner badge and a two-line caption bar](../drafts/3d-tour/00_overview_normal.jpg) | ![Reactor stop at eye height: the reactor in full colour, other units ghosted, four tag pills on short leaders with PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines with a valve symbol, a purpose card top left and a Kuraray why-this-matters card top right](../drafts/3d-tour/02_r-101_normal.jpg) |
 | **Fault 6 at the high alarm (+294 min)** | **Process flow by service** |
-| ![Fault overview: amber and red tag markers, PI-107 pill reading 2,897 kPa g with high alarm 2,895 and shutdown 3,000, TI-109 pill with shutdown 175, and a marker-state legend](screenshots/3d/21_overview_fault_alarm.jpg) | ![Flow still: every stream in its service colour with chevrons, inferred cooling-water and steam stubs, and a legend card of seven services](screenshots/3d/30_flow_legend.jpg) |
+| ![Fault overview: amber and red tag markers, PI-107 pill reading 2,897 kPa g with high alarm 2,895 and shutdown 3,000, TI-109 pill with shutdown 175, and a marker-state legend](../drafts/3d-tour/21_overview_fault_alarm.jpg) | ![Flow still: every stream in its service colour with chevrons, inferred cooling-water and steam stubs, and a legend card of seven services](../drafts/3d-tour/30_flow_legend.jpg) |
 
 Measured on the author's desktop (GTX 1060 6 GB, Eevee): the five review stills, with measurement, render in about
 25 seconds including Blender start-up. The portable Blender ZIP is about 400 MB, checksum verified against
@@ -282,9 +282,15 @@ they read as one string. The overlap test missed it; the crowding rule, the grid
 height and the 2.9 and 3.2:1 contrast catch it. The crowding rule and grid occlusion were added after looking at
 that case.
 
-| Before: overview (429d7a7 labels) | Before: E-101 stop |
+The two "before" stills below were re-rendered at the merge (2026-10-13) from the current model with the old label
+rules (`--label-layout legacy`), so they show the corrected purge; the numbers in the table above were measured on the
+original 429d7a7 render. On the merged tour the redesign fails none of the 17 checks on twelve stills (15 pass; 2 are informational:
+drawing coverage, and the OCR read-back, not run)
+([verification.md](../drafts/3d-tour/verification.md)).
+
+| Before: overview (old label rules) | Before: E-101 stop |
 |---|---|
-| ![Before: the 429d7a7 overview at 1080p, with tiny tag labels everywhere, unit labels crossed by pipes, and E-101 and K-101 reading as one line](screenshots/3d/before/00_overview_normal.jpg) | ![Before: the E-101 stop, with the K-101 label cut off at the right edge and the TI-122 label under the caption](screenshots/3d/before/03_e-101_normal.jpg) |
+| ![Before: the overview with the old label rules at 1080p: tiny tag labels everywhere and unit labels crossed by pipes](../drafts/3d-tour/before/00_overview_normal.jpg) | ![Before: the E-101 stop with the old label rules: the K-101 label cut off at the right edge, labels crossed by pipes, and the TI-122 label running into the caption](../drafts/3d-tour/before/03_e-101_normal.jpg) |
 
 ## Orientation tour for operators
 
@@ -321,7 +327,7 @@ otherwise they are constant and labelled "illustrative":
 | Asset | Visual | Driven by |
 |---|---|---|
 | Reactor | Heat produced in the vessel, carried away by cooling water: a warm-to-cool gradient along the inferred CW return and supply | TV-210 valve output and TI-121 outlet temperature (replay); the gradient itself illustrative |
-| Condenser | Vapour in at the top, cooled stream out | TV-211 and TI-122 (owner disputed, marked) |
+| Condenser | Vapour in at the top, cooled stream out | TV-211 and TI-122 (owner settled on E-101 by the topology check) |
 | Separator | Phases splitting: vapour chevrons up and out to recycle, a liquid level band holding at the LI-112 value | LI-112, FI-114 (replay) |
 | Compressor | A pulsing arrow on the recycle line for the pressure boost | JI-120 compressor work, FI-105 recycle flow (replay) |
 | Stripper | Stripping gas and steam rising, product falling to the base | FI-119 steam flow, FI-117 product flow (replay) |
@@ -350,7 +356,7 @@ walks through:
 - verification of zero energy (try the start, check pressure and temperature are gone);
 - restoration in reverse order.
 
-![Design mockup: the plant ghosted, eleven numbered isolation tags (battery-limit block valves on each feed, purge and product line, the compressor motor, the agitator motor, cooling water in and out at the reactor and condenser, steam at the stripper), each marked * for inferred, a card saying "Design mockup, not a procedure" with the OSHA 1910.147 note, and a caption saying it is not a LOTO procedure](screenshots/3d/40_loto_mockup.jpg)
+![Design mockup: the plant ghosted, eleven numbered isolation tags (battery-limit block valves on each feed, purge and product line, the compressor motor, the agitator motor, cooling water in and out at the reactor and condenser, steam at the stripper), each marked * for inferred, a card saying "Design mockup, not a procedure" with the OSHA 1910.147 note, and a caption saying it is not a LOTO procedure](../drafts/3d-tour/40_loto_mockup.jpg)
 
 What the mockup shows, all inferred from the TE seed model and marked `*`:
 - battery-limit block valves on every boundary stream (the contract has no block valves; control valves such as

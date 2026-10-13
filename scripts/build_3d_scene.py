@@ -31,6 +31,7 @@ Model use: none at run time. Claude (the coding agent) wrote this script and cho
 import argparse
 import json
 import math
+import re
 import subprocess
 import sys
 from copy import deepcopy
@@ -447,7 +448,12 @@ def build_scene(model, layout, bands=None, alarms=None, replay=None, samples=(),
     for spec in layout["units"].values():
         for item in spec.get("unavailable", []) or []:
             unavailable.add(item.get("tag") if isinstance(item, dict) else item)
-    disputed = {t for t in ("TI-122",) if any(t in d for d in layout.get("provenance", {}).get("discrepancies", []))}
+    # A tag is disputed while a discrepancy the layout records about it is still open; "Resolved ..." and
+    # "Corrected ..." notes (the topology check, out/te_topology_check.md) settle it.
+    open_notes = [d for d in layout.get("provenance", {}).get("discrepancies", [])
+                  if not d.lower().startswith(("resolved", "corrected"))]
+    disputed = {i["tag"] for i in model["instruments"] + model["final_elements"]
+                if any(re.search(r"(?<![A-Z0-9-])%s(?![0-9])" % re.escape(i["tag"]), d) for d in open_notes)}
 
     markers, on_stream, on_unit, planned = [], {}, {}, []
     for item in model["instruments"] + model["final_elements"]:

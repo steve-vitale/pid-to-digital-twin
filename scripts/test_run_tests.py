@@ -106,6 +106,7 @@ class RunnerControls(unittest.TestCase):
         expected = hashlib.sha256(b'cache fixture').hexdigest()
         with tempfile.TemporaryDirectory() as tmp, \
              patch.object(fetch_te_data, 'FILES', {'d00_te.dat': expected, 'd06_te.dat': expected}), \
+             patch.object(fetch_te_data, 'EVALUATION_FILES', {}), \
              patch.object(verify_te_topology, 'REVISED_SHA256', expected), \
              patch.object(runner.importlib.util, 'find_spec', return_value=object()), \
              patch('urllib.request.urlopen', side_effect=AssertionError('network forbidden')), \

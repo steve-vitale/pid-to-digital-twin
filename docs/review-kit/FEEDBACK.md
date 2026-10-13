@@ -53,7 +53,7 @@ Then:
   them (`docs/IGNITION_ACCEPTANCE.md`);
 - **PI AF:** UOM and template answers go into `docs/PI_MAPPING.md` and, once confirmed by a PI administrator,
   into the exporter. Re-run `python scripts/check_pi_export.py` afterwards;
-- **3D stills:** findings go into `drafts/3d-tour/REVIEW_NOTES.md` until the tour is merged;
+- **3D stills:** findings go into `drafts/3d-tour/REVIEW_NOTES.md` (the tour is merged as a proof of concept; the notes stay the review record);
 - **anything about the TE process itself** (topology, purposes) is checked against the simulator source before it
   changes the seed model, and the journal records it.
 

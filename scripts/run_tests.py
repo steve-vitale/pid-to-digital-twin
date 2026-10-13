@@ -101,8 +101,10 @@ def prerequisites(root, source_only):
         if importlib.util.find_spec(module) is None:
             issues.append(("dependency", f"missing Python module {module} (package {package})"))
     # This local stdlib module only defines download functions. Do NOT call main().
-    from fetch_te_data import FILES
-    for name, expected in FILES.items():
+    # The full suite includes the 21-fault evaluation, so it needs the whole published set (fetch_te_data.py --all);
+    # a missing file is a prerequisite failure, never a quietly skipped regeneration.
+    import fetch_te_data
+    for name, expected in {**fetch_te_data.FILES, **getattr(fetch_te_data, "EVALUATION_FILES", {})}.items():
         path = root / "data/external/te-braatz" / name
         try:
             actual = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -130,7 +132,7 @@ def report_remediation(issues):
     if "dependency" in kinds:
         print("  python -m pip install -r requirements.txt  # may access the network; use your chosen environment")
     if "cache" in kinds:
-        print("  python scripts/fetch_te_data.py  # network download if cache is absent/invalid; verifies hashes")
+        print("  python scripts/fetch_te_data.py --all  # network download if cache is absent/invalid; verifies hashes")
     if "source-cache" in kinds:
         print("  python scripts/verify_te_topology.py  # downloads the revised TE code if absent; report only")
     print("  python scripts/run_tests.py --source-only  # narrower checks; NOT a full-suite pass")

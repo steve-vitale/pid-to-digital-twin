@@ -9,9 +9,10 @@ simulator lines it restates. Nothing here has been reviewed by an operator.
 The stills were re-rendered on 2026-10-13 from the merged tour (`python scripts/pipeline.py rebuild --from te.tour`,
 with `BLENDER_EXE` set; Blender 5.2.2, stills only, no video). They show the source-checked topology (the purge
 leaves from the separator V-101, with FI-110, FV-206 and AI-129) and the Atkinson Hyperlegible label font. Twelve
-stills were rendered and measured; the five below are committed. The render verifier passed 17 of 17 checks on all
-twelve ([verification.md](verification.md); label boxes in [label_boxes.json](label_boxes.json); the old label rules,
-re-measured on the same scene, in [before/](before/label_boxes.json)).
+stills were rendered and measured; the five below are committed. The render verifier failed none of its 17 checks on
+all twelve: 15 pass, and 2 are informational (drawing coverage, and OCR, which was not run). See
+[verification.md](verification.md), the label boxes in [label_boxes.json](label_boxes.json), and the old label rules
+re-measured on the same scene in [before/](before/label_boxes.json) (two of those stills are in `before/` too).
 
 | Still | What it shows |
 |---|---|

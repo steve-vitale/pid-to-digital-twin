@@ -53,8 +53,8 @@ unattended runtime.
 
 **People are the real cost.** Here is how to size it:
 - **Corrections:** the declared method needed about 16–40 corrections per 100 items on sealed drawings
-  ([GOAL.md](GOAL.md) results). The 12-sheet twin has 2,886 review items, about 240 per sheet. At GPT's 17.8 per 100,
-  that's roughly 43 corrections per sheet. *Assumes the holdout rate carries over to the twin's items.*
+  ([GOAL.md](GOAL.md) results). The 12-sheet twin has 2,886 review items, about 240 per sheet. At GPT's 17.8 per 100
+  (the round-2 run; the round-5 mean of five runs is 20.1), that's roughly 43 to 48 corrections per sheet. *Assumes the holdout rate carries over to the twin's items.*
 - **Where to look:** the risk tiers put 1,053 of the 2,886 items (36%) in red and amber. The green pile was 94–100%
   right on unseen drawings, so it gets spot checks instead of item-by-item review.
 - **Minutes per correction: not measured.** At an *assumed* 1 minute each, 43 corrections is about 45 minutes per

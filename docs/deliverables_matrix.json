@@ -1,7 +1,7 @@
 {
- "about": "What each evidence track can deliver. Source of truth for the README table under 'What you can do with only drawings, only process knowledge, or both' (python scripts/deliverables_matrix.py --write regenerates it; scripts/test_open100_structural.py checks they match and that every evidence path exists).",
+ "about": "What each evidence track can deliver, and how sure each deliverable is. Source of truth for the README table under 'What you can do with only drawings, only process knowledge, or both', inside the README's 'Data first' section (python scripts/deliverables_matrix.py --write regenerates it; scripts/test_open100_structural.py checks they match and that every evidence path exists). Per-element confidence: python scripts/pipeline.py confidence.",
  "tracks": {
-  "te": "Tennessee Eastman: process knowledge only (hand-built seed model from the published process, recorded simulator replay), no P&ID",
+  "te": "Tennessee Eastman: process knowledge (a model transcribed from the published process and checked against the simulator source, recorded simulator replay); no original P&ID, only one generated from the model",
   "open100": "OPEN100: 12 real P&IDs, extracted and scored, no process data"
  },
  "statuses": {
@@ -20,26 +20,42 @@
    "deliverable": "Asset model (equipment, instruments, connections, hierarchy)",
    "te": {
     "status": "done",
-    "note": "transcribed from the published process and checked line by line against the simulator source (36 confirmed, 1 corrected)",
+    "note": "transcribed from the published process; every tag checked against the simulator source (36 confirmed, 1 corrected) and every unit, stream, direction and tag owner against its balances and flow lines (51 confirmed, 4 corrected, 1 unresolvable of 56); 0 items reviewed by operations",
     "evidence": [
-     "data/te_process_model.json",
-     "out/te_source_check.md"
+     "out/te_topology_check.md",
+     "out/te_source_check.md",
+     "data/te_process_model.json"
     ]
    },
    "open100": {
     "status": "done",
-    "note": "extracted from the drawings, risk-tiered, unverified until reviewed",
+    "note": "extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on the sealed drawings symbols found F1 0.97, connections 0.89, review load 20.1 per 100 (mean of five round-5 runs; the earlier single round-2 run scored 17.8)",
     "evidence": [
-     "out/twin/r2-tiles-trace/codex/plant_model.json",
-     "out/twin/r2-tiles-trace/codex/review_queue.csv"
+     "out/twin/r2-tiles-trace/codex/review_queue.csv",
+     "out/replicates_r5_holdout-a.md",
+     "out/twin/r2-tiles-trace/codex/plant_model.json"
     ]
+   }
+  },
+  {
+   "deliverable": "Tag text read from drawings",
+   "te": {
+    "status": "done",
+    "note": "a round trip on the generated sheets: every tag read on clean sheets by both models, 14% (GPT) and 49% (Claude) at the worst scan level; an upper bound for clean house-style drawings, not real-plant accuracy",
+    "evidence": [
+     "out/te_pid/roundtrip_scores.md"
+    ]
+   },
+   "open100": {
+    "status": "not_possible",
+    "note": "the public answer keys carry no text, so tag reading cannot be scored here; on three DEXPI example sheets with labelled symbols (round 5) GPT read 29 of 33 tags exactly and Claude 28, and on two more both found 99-100% of 145 identifiers from the published tag lists"
    }
   },
   {
    "deliverable": "Ignition tags and PI AF asset structure",
    "te": {
     "status": "done",
-    "note": "loaded into a lab gateway; the PI Builder sheet is not imported into a PI System",
+    "note": "loaded into a lab gateway; the PI Builder sheet (schema v2) is checked offline against the vendor-published conventions, not imported into a PI System",
     "evidence": [
      "out/ignition/te_tags.json",
      "out/pi"
@@ -47,7 +63,7 @@
    },
    "open100": {
     "status": "done",
-    "note": "same; instrument tags are placeholders until an I/O list maps them",
+    "note": "same; instrument tags are placeholders until an I/O list maps them, and placeholder PI rows are left unselected",
     "evidence": [
      "out/twin/r2-tiles-trace/codex/ignition/tags.json",
      "out/twin/r2-tiles-trace/codex/pi"
@@ -57,9 +73,12 @@
   {
    "deliverable": "Original drawing on screen with each instrument's value",
    "te": {
-    "status": "not_possible",
-    "note": "no TE drawing exists in this repository: TE was built from the process description",
-    "evidence": []
+    "status": "not_done",
+    "note": "no original TE drawing exists; a P&ID is now generated from the model in the OPEN100 style (three sheets, not a drawing of record), but it is not a screen background yet",
+    "evidence": [
+     "data/te_pid/101.png",
+     "out/te_pid/style_fidelity.md"
+    ]
    },
    "open100": {
     "status": "done",
@@ -73,8 +92,9 @@
    "deliverable": "Flow direction on connections",
    "te": {
     "status": "done",
-    "note": "seed-model directions as transcribed, unverified",
+    "note": "every stream's direction checked against the simulator's pressure-driven flow lines",
     "evidence": [
+     "out/te_topology_check.md",
      "data/te_process_model.json"
     ]
    },
@@ -106,14 +126,15 @@
    "deliverable": "Process mimic overview (ISA-101 style)",
    "te": {
     "status": "done",
-    "note": "native acceptance in a lab gateway; layout and key values not reviewed by operations",
+    "note": "native acceptance in a lab gateway, plus a 390 px overview at /m; proof of concept: layout and key values are first-pass, not reviewed by operations",
     "evidence": [
-     "docs/screenshots/native-overview-normal.png"
+     "docs/screenshots/native-overview-normal.png",
+     "docs/screenshots/native-narrow-m-normal.png"
     ]
    },
    "open100": {
     "status": "done_offline",
-    "note": "plant overview and 12 area views from the same screen components; offline render",
+    "note": "plant overview and 12 area views from the same screen components; offline render; proof of concept, structure only",
     "evidence": [
      "docs/screenshots/open100/mimic-plant-overview.png",
      "docs/screenshots/open100/mimic-area-sheet7.png"
@@ -123,9 +144,10 @@
   {
    "deliverable": "Equipment purpose cards",
    "te": {
-    "status": "draft",
-    "note": "written with AI assistance from the data files, not reviewed by an operator",
+    "status": "done",
+    "note": "one sentence per unit, each citing the simulator lines it restates, shown on the 3D tour's stop cards; not reviewed by an operator",
     "evidence": [
+     "data/te_unit_purposes.json",
      "drafts/3d-tour/02_r-101_normal.jpg"
     ]
    },
@@ -141,14 +163,15 @@
    "deliverable": "3D orientation tour (stills)",
    "te": {
     "status": "draft",
-    "note": "placeholder geometry, colours from recorded replay",
+    "note": "proof of concept: placeholder geometry, source-checked topology, colours from recorded replay; no render check fails on twelve stills (15 pass, 2 informational), five committed",
     "evidence": [
-     "drafts/3d-tour/00_overview_normal.jpg"
+     "drafts/3d-tour/00_overview_normal.jpg",
+     "drafts/3d-tour/verification.md"
     ]
    },
    "open100": {
     "status": "draft",
-    "note": "placeholder geometry at drawing positions, stops in inferred flow order, structure only",
+    "note": "proof of concept: placeholder geometry at drawing positions, stops in inferred flow order, structure only",
     "evidence": [
      "docs/screenshots/open100/3d-00_overview.jpg",
      "docs/screenshots/open100/3d-01_stop_sheet3.jpg",
@@ -160,7 +183,7 @@
    "deliverable": "Lockout/tagout isolation view",
    "te": {
     "status": "mockup",
-    "note": "isolation points inferred from the seed model",
+    "note": "isolation points inferred from the seed model (the purge's isolation point now sits at the separator); not a procedure",
     "evidence": [
      "drafts/3d-tour/40_loto_mockup.jpg"
     ]
@@ -178,7 +201,7 @@
    "deliverable": "Values on the screens",
    "te": {
     "status": "done",
-    "note": "recorded simulator replay, not a live plant",
+    "note": "recorded simulator replay (proof of concept: not a live plant, and not a simulator that responds to control)",
     "evidence": [
      "docs/screenshots/native-overview-normal.png"
     ]
@@ -210,8 +233,9 @@
    "deliverable": "Normal bands and early warning",
    "te": {
     "status": "done",
-    "note": "learned on half the normal run, tested on the other half and a fault run",
+    "note": "learned on half the normal run; on all 21 published faults the bands flag 17 (median 48 min after onset) with 0 false alarms in 193 h of held-out normal running, and miss faults 3, 9, 15 and 19",
     "evidence": [
+     "out/fault_detection/fault_detection.md",
      "out/ignition/normal_bands.md"
     ]
    },
@@ -225,9 +249,10 @@
    "deliverable": "Alarms",
    "te": {
     "status": "done",
-    "note": "published setpoints only; the gateway verifier proves one fires",
+    "note": "published setpoints, plus a data-source-lost diagnostic alarm per data source; in the lab gateway the pressure alarm fires on the recorded fault, the diagnostic fires and clears, and the header count matches the alarm table",
     "evidence": [
-     "docs/IGNITION_BUILD.md"
+     "docs/IGNITION_ACCEPTANCE.md",
+     "out/ignition/gateway/receipts/native-current-20261013-alarms.json"
     ]
    },
    "open100": {
@@ -240,7 +265,7 @@
    "deliverable": "Fault replay and live process tour",
    "te": {
     "status": "done",
-    "note": "recorded fault-6 replay; replay is not a simulator that responds to control",
+    "note": "recorded fault-6 replay; proof of concept: replay is not a simulator that responds to control",
     "evidence": [
      "docs/screenshots/native-overview-fault-alarm.png"
     ]

@@ -52,7 +52,7 @@ def cell(c):
 
 
 def markdown(doc):
-    lines = ["| Deliverable | TE: process knowledge, no drawing | OPEN100: drawings, no process data |",
+    lines = ["| Deliverable | TE: process knowledge, no original drawing | OPEN100: drawings, no process data |",
              "|---|---|---|"]
     for r in doc["rows"]:
         lines.append("| %s | %s | %s |" % (r["deliverable"], cell(r["te"]), cell(r["open100"])))
