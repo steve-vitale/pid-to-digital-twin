@@ -1,0 +1,593 @@
+{
+ "schema": "pipeline-stages-1",
+ "about": "Every stage of both datasets, in dependency order. scripts/pipeline.py reads this file; docs/DATA_LINEAGE.md explains it. Paths are relative to the repository root. 'inputs' and 'code' are hashed into pipeline/pipeline.lock.json when a stage is built; a stage is stale when any of them changed since. 'config' lists curated settings files (hashed like code).",
+ "kinds": {
+  "source": "the data everything else is built from; corrected only through the tools in edited_by",
+  "recorded": "built once outside this orchestrator (model calls, or inputs that are not committed); its committed outputs are the record",
+  "generated": "rebuilt deterministically by its command",
+  "check": "a check run by hand; never marked fresh without being run",
+  "runtime": "something that runs live (a gateway, a replay server); has evidence, not build outputs"
+ },
+ "rebuild_modes": {
+  "source": "accepted as it is (hashed) when a rebuild starts from it",
+  "auto": "run by scripts/pipeline.py rebuild when its requires are present",
+  "recorded": "never re-run here; accepted as it is only when a rebuild starts from it or --accept-recorded is given",
+  "manual": "never run here; the command is printed"
+ },
+ "datasets": {
+  "te": {
+   "title": "Tennessee Eastman (TE)",
+   "model": "data/te_process_model.json",
+   "licence": "Process published by Downs & Vogel (1993); open simulation code and recorded runs by the Braatz group (University of Illinois), downloaded by script, not redistributed",
+   "measured": [
+    {
+     "what": "instruments and final elements checked against the simulator source (teprob.f)",
+     "value": "36 confirmed, 1 corrected (TI-122 description) of 37",
+     "source": "out/te_source_check.md"
+    },
+    {
+     "what": "units and streams",
+     "value": "not checked against a source on this branch; a topology check (51 confirmed, 4 corrected, 1 unresolvable of 56) is on a separate branch and moves the purge to V-101",
+     "source": "docs/DATA_LINEAGE.md#te-stage-0"
+    },
+    {
+     "what": "normal bands",
+     "value": "fitted on the first half of the normal run, K = 6 chosen on the second half (under 0.5% false flags per tag); fault 6 flagged 294 plant-minutes before the pressure alarm; one easy fault, not a detection rate",
+     "source": "docs/OPERATOR_SCREENS.md"
+    },
+    {
+     "what": "gateway",
+     "value": "verifier V1-V8 and a 23-route browser contract passed in a disposable Ignition 8.3.10 gateway on recorded and synthetic data, 2026-10-13",
+     "source": "out/ignition/gateway/receipts/native-current-20261013.json"
+    },
+    {
+     "what": "operations review",
+     "value": "none yet",
+     "source": "README.md#status"
+    }
+   ]
+  },
+  "open100": {
+   "title": "OPEN100 (12 real P&IDs from PID2Graph)",
+   "model": "out/twin/r2-tiles-trace/codex/plant_model.json",
+   "licence": "PID2Graph (Zenodo 14803338), CC BY-SA 4.0; OPEN100 design by the Energy Impact Center. Drawings, answer keys and derived files keep that licence (NOTICE.md)",
+   "measured": [
+    {
+     "what": "review load, GPT tiling + code line tracing (the published twin's method)",
+     "value": "17.8 corrections per 100 key items on 6 sealed real drawings (holdout A); 20.7 on 20 synthetic drawings in another style (holdout B)",
+     "source": "docs/GOAL.md"
+    },
+    {
+     "what": "symbols found / found with the right class / connections (F1, holdout A)",
+     "value": "0.97 / 0.94 / 0.89",
+     "source": "out/scorecard_r2-tiles-trace_holdout-a.md"
+    },
+    {
+     "what": "instrument attached to the right equipment (holdout A)",
+     "value": "87.0% with the round-2 rule; 92.2% after the round-3 along-line rule on this drafting style, 67.6% on the other style",
+     "source": "docs/GOAL.md"
+    },
+    {
+     "what": "green tier precision",
+     "value": "94-96% right on holdout A, 97-100% on holdout B",
+     "source": "docs/GOAL.md"
+    },
+    {
+     "what": "tag text",
+     "value": "not scorable: the public answer keys carry no text",
+     "source": "docs/EVALUATION.md"
+    },
+    {
+     "what": "operations review",
+     "value": "none yet; 3 records carry author notes or a scoped text correction, none is an operations confirmation",
+     "source": "docs/JOURNAL.md"
+    }
+   ]
+  }
+ },
+ "stages": [
+  {
+   "id": "te.source",
+   "dataset": "te",
+   "stage": 0,
+   "title": "Data state & confidence assessment: the TE seed model",
+   "kind": "source",
+   "rebuild": "source",
+   "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/te_process_model.json"
+   ],
+   "treatment": "Hand-transcribed from Downs & Vogel (1993); tag numbers assigned by this project, the XMEAS/XMV index kept on every item. Every item carries verification.status, and ops_review once someone reviews it.",
+   "edited_by": [
+    "python scripts/apply_review.py data/te_process_model.json <reviewed.csv> --reviewer \"<ID>, <role>\"",
+    "python scripts/verify_te_source.py --write"
+   ],
+   "carries": "verification.status per item (source check); ops_review.status and reviewer; open_question",
+   "checked_by": "scripts/verify_te_source.py against teprob.f (instruments and final elements only on this branch)",
+   "config": []
+  },
+  {
+   "id": "te.source_check",
+   "dataset": "te",
+   "stage": 0,
+   "title": "Source check report: the model against the simulator code",
+   "kind": "check",
+   "rebuild": "manual",
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/verify_te_source.py"
+   ],
+   "outputs": [
+    "out/te_source_check.md"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/verify_te_source.py"
+    ]
+   ],
+   "requires": [],
+   "requires_note": "downloads teprob.f into data/external/te-braatz/ if it is not cached (network)",
+   "treatment": "Compares each instrument and final element's description and units with the simulator source; report only (no --write).",
+   "carries": "writes the verification.status the model then carries (with --write)",
+   "checked_by": "the script itself, line by line against teprob.f",
+   "config": []
+  },
+  {
+   "id": "te.exports",
+   "dataset": "te",
+   "stage": 1,
+   "title": "Platform exports: Ignition tags, PI AF sheet, SVGs, operations review sheet",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/generate.py",
+    "scripts/pi_mapping.py",
+    "scripts/provenance.py"
+   ],
+   "outputs": [
+    "out/svg/*.svg",
+    "out/ignition/te_tags.json",
+    "out/pi/pi_builder_af.csv",
+    "out/ops_review_sheet.csv"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/generate.py"
+    ]
+   ],
+   "requires": [],
+   "treatment": "One model, every format: structural validation first, nothing written on failure.",
+   "carries": "Ignition tag documentation and PI attribute descriptions end with '| source check: <status> | ops review: <status>'; the review sheet's model_status and OPS_ columns",
+   "checked_by": "scripts/test_generate_validation.py, scripts/test_apply_review.py (offline); the PI sheet has never been imported into a PI System",
+   "config": []
+  },
+  {
+   "id": "te.mimic",
+   "dataset": "te",
+   "stage": 2,
+   "title": "Overview mimic layout (offline)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": true,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/export_mimic_layout.py",
+    "scripts/ignition/build_mimic.py",
+    "scripts/ignition/build_hmi.py",
+    "scripts/build_scene_data.py",
+    "scripts/provenance.py"
+   ],
+   "outputs": [
+    "out/mimic/te_overview_layout.json"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/export_mimic_layout.py"
+    ]
+   ],
+   "requires": [],
+   "treatment": "Renders the overview with the same function the Ignition build uses and keeps, per reading: the unit it is drawn beside, where, and the tag path it reads.",
+   "carries": "each reading: the provenance of its model item; positions and the choice of readings are first-pass display choices",
+   "checked_by": "scripts/test_process_mimic.py, scripts/test_pipeline.py; the full screens were checked in a disposable gateway (README); not reviewed by operations",
+   "config": [
+    "data/te_display_layout.json"
+   ]
+  },
+  {
+   "id": "te.scene",
+   "dataset": "te",
+   "stage": 2,
+   "title": "3D scene data and inferred LOTO candidates",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": true,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/build_scene_data.py",
+    "scripts/provenance.py"
+   ],
+   "outputs": [
+    "out/scene/te_scene.json"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/build_scene_data.py"
+    ]
+   ],
+   "requires": [],
+   "treatment": "Equipment, tags, ownership and stream ends copied from the model; positions are the 2D layout scaled; sizes, elevations and pipe routes are placeholders; LOTO candidates are inferred (valves on streams touching a unit).",
+   "carries": "every unit, tag, pipe and LOTO candidate: the provenance of its model item; geometry is marked placeholder; LOTO is marked inferred and not a procedure",
+   "checked_by": "scripts/test_pipeline.py (that it follows the model). The 3D renderer itself is a separate, unpublished prototype; its stills are in drafts/3d-tour/",
+   "config": []
+  },
+  {
+   "id": "te.bands",
+   "dataset": "te",
+   "stage": 3,
+   "title": "Learned normal bands from the recorded normal run",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/normal_bands.py",
+    "scripts/ignition/te_channels.py"
+   ],
+   "outputs": [
+    "out/ignition/normal_bands.json",
+    "out/ignition/normal_bands.md"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/normal_bands.py"
+    ]
+   ],
+   "requires": [
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d06_te.dat"
+   ],
+   "requires_note": "hash-verified TE replay files: python scripts/fetch_te_data.py (network)",
+   "treatment": "Mean +/- K standard deviations on the first half of the normal run; K chosen on the second half; the fault run chooses nothing.",
+   "carries": "statistics on published data; one operating mode assumed",
+   "checked_by": "the held-out half of the normal run and the fault-6 run (docs/OPERATOR_SCREENS.md)",
+   "config": []
+  },
+  {
+   "id": "open100.source",
+   "dataset": "open100",
+   "stage": 0,
+   "title": "Data state & confidence assessment: the 12 OPEN100 drawings and their answer keys",
+   "kind": "source",
+   "rebuild": "source",
+   "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.png",
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.graphml"
+   ],
+   "treatment": "Third-party drawings with third-party answer keys (symbol classes, boxes, connections; no tag text). Sheets 0-5 are the development set, 6-11 the sealed holdout A.",
+   "edited_by": [],
+   "carries": "answer keys are the ground truth for symbols and connections only",
+   "checked_by": "the PID2Graph authors; the scorer's positive and negative controls (scripts/test_scorer_controls.py)",
+   "config": []
+  },
+  {
+   "id": "open100.extract",
+   "dataset": "open100",
+   "stage": 1,
+   "title": "Extraction: models read symbols and tags (2x2 tiles), code traces the lines",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "poc": false,
+   "upstream": [
+    "open100.source"
+   ],
+   "inputs": [
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.png"
+   ],
+   "code": [
+    "scripts/run_extraction.py",
+    "scripts/tiling.py",
+    "scripts/remerge_tiles.py",
+    "scripts/trace_connections.py"
+   ],
+   "outputs": [],
+   "external_outputs": [
+    "runs/r2-tiles-2x2/codex/<sheet>.json",
+    "runs/r2-tiles-trace/codex/<sheet>.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/run_extraction.py",
+     "--tool",
+     "codex",
+     "--drawings",
+     "<sheets>",
+     "--label",
+     "r2-tiles-2x2",
+     "--prompt",
+     "extraction/prompt_v2.md",
+     "--tiles",
+     "2x2",
+     "--overlap",
+     "0.15"
+    ],
+    [
+     "python",
+     "scripts/trace_connections.py",
+     "--src-label",
+     "r2-tiles-2x2",
+     "--tool",
+     "codex",
+     "--drawings",
+     "<sheets>",
+     "--label",
+     "r2-tiles-trace"
+    ]
+   ],
+   "requires_note": "model calls (sends drawings to the selected service); run records are not committed (runs/README.md)",
+   "treatment": "Method M3, chosen by a rule written before the holdouts were scored.",
+   "carries": "per item: the model's confidence and the source run; scored per set against the answer keys",
+   "checked_by": "scripts/score_pid2graph.py (frozen scorer) on sealed holdouts",
+   "config": [
+    "extraction/prompt_v2.md",
+    "extraction/tile_preface.md"
+   ]
+  },
+  {
+   "id": "open100.score",
+   "dataset": "open100",
+   "stage": 1,
+   "title": "Scorecards against the answer keys",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "poc": false,
+   "upstream": [
+    "open100.source",
+    "open100.extract"
+   ],
+   "inputs": [
+    "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/*.graphml"
+   ],
+   "code": [
+    "scripts/scorecard.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/scorecard_r2-tiles-trace_holdout-a.md",
+    "out/scorecard_r2-tiles-trace_holdout-a.json",
+    "out/scorecard_r2-tiles-trace_dev.md",
+    "out/scorecard_r2-tiles-trace_dev.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/scorecard.py",
+     "--label",
+     "r2-tiles-trace",
+     "--split",
+     "holdout-a"
+    ]
+   ],
+   "requires_note": "the run records under runs/ (not committed)",
+   "treatment": "Rules fixed before any run; failures count as zero.",
+   "carries": "set-level accuracy (review load, F1 by class); it does not say which individual item is right",
+   "checked_by": "scripts/test_scorer_controls.py (the scorer must fail deliberately wrong answers)",
+   "config": []
+  },
+  {
+   "id": "open100.model",
+   "dataset": "open100",
+   "stage": 2,
+   "title": "Asset model: sheets to hierarchy, risk-tiered review queue",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "poc": false,
+   "upstream": [
+    "open100.extract"
+   ],
+   "inputs": [],
+   "code": [
+    "scripts/build_twin.py",
+    "scripts/confidence.py",
+    "scripts/confidence_model.json"
+   ],
+   "outputs": [
+    "out/twin/r2-tiles-trace/codex/plant_model.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/build_twin.py",
+     "--label",
+     "runs/r2-tiles-trace/codex/",
+     "--sheets",
+     "0,1,2,3,4,5,6,7,8,9,10,11",
+     "--holdout-ok"
+    ]
+   ],
+   "requires_note": "the run records under runs/ (not committed); after building, review decisions are applied to this file in place",
+   "treatment": "Deterministic conversion; every item starts unverified, gets a risk tier and a plain-language reason. Review corrections and I/O mappings are then applied to this file by the edited_by tools.",
+   "edited_by": [
+    "python scripts/apply_review.py out/twin/r2-tiles-trace/codex/plant_model.json <reviewed.csv> --reviewer \"<ID>, <role>\"",
+    "python scripts/map_points.py out/twin/r2-tiles-trace/codex/plant_model.json <io_list.csv> --sheets <n>"
+   ],
+   "carries": "verification.status (unverified), risk.tier, tag_status (placeholder/missing), ops_review",
+   "checked_by": "scripts/score_twin.py (parent assignment), scripts/score_triage.py (risk tiers) on the holdouts",
+   "config": []
+  },
+  {
+   "id": "open100.exports",
+   "dataset": "open100",
+   "stage": 3,
+   "title": "Platform exports: review queue, Ignition tags, PI AF sheet, SVG overlays",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": false,
+   "upstream": [
+    "open100.model"
+   ],
+   "inputs": [
+    "out/twin/r2-tiles-trace/codex/plant_model.json"
+   ],
+   "code": [
+    "scripts/generate.py",
+    "scripts/pi_mapping.py",
+    "scripts/provenance.py"
+   ],
+   "outputs": [
+    "out/twin/r2-tiles-trace/codex/review_queue.csv",
+    "out/twin/r2-tiles-trace/codex/ignition/tags.json",
+    "out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv",
+    "out/twin/r2-tiles-trace/codex/pi/pi_builder_UNVALIDATED_candidate_v1.csv",
+    "out/twin/r2-tiles-trace/codex/pi/reconciliation.json",
+    "out/twin/r2-tiles-trace/codex/svg/sheet_*.svg"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/generate.py",
+     "out/twin/r2-tiles-trace/codex/plant_model.json"
+    ]
+   ],
+   "requires": [],
+   "treatment": "Same generator as TE; signal paths are placeholders, never invented.",
+   "carries": "Ignition documentation and PI descriptions carry the item's confidence and 'UNVERIFIED'; the review queue carries tier, reason and status",
+   "checked_by": "scripts/test_generate_validation.py, scripts/test_export_review_boundaries.py, scripts/test_pi_mapping.py",
+   "config": []
+  },
+  {
+   "id": "ignition.gateway",
+   "dataset": "shared",
+   "stage": 4,
+   "title": "Ignition gateway kit: tag provider, alarms, 23-view Perspective project (mimic and sheet screens)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": false,
+   "upstream": [
+    "te.source",
+    "te.bands",
+    "open100.model"
+   ],
+   "inputs": [
+    "data/te_process_model.json",
+    "out/twin/r2-tiles-trace/codex/plant_model.json"
+   ],
+   "code": [
+    "scripts/ignition/build_gateway.py",
+    "scripts/ignition/build_views.py",
+    "scripts/ignition/build_hmi.py",
+    "scripts/ignition/build_mimic.py",
+    "scripts/ignition/te_channels.py",
+    "scripts/normal_bands.py"
+   ],
+   "outputs": [
+    "out/ignition/gateway/twin_provider.json",
+    "out/ignition/gateway/build_meta.json"
+   ],
+   "local_outputs": [
+    "out/ignition/gateway/PIDTwin.zip (regenerated locally; the committed ZIP is the older historical export)"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/ignition/build_gateway.py",
+     "--write-only"
+    ]
+   ],
+   "requires": [
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d06_te.dat"
+   ],
+   "requires_note": "hash-verified TE replay files: python scripts/fetch_te_data.py (network). Writes files only; no gateway is contacted",
+   "treatment": "TE tags with published alarm setpoints and learned bands; the extracted twin as placeholders that read 'not connected'; ReviewStatus member on every tag.",
+   "carries": "a ReviewStatus member per tag (ops review); placeholders stay Bad quality, never a false Good",
+   "checked_by": "scripts/ignition/verify_gateway.py V1-V8 with planted faults in a disposable gateway (lab result, not site acceptance)",
+   "config": [
+    "data/te_display_layout.json"
+   ]
+  },
+  {
+   "id": "te.replay",
+   "dataset": "te",
+   "stage": 5,
+   "title": "Live replay: recorded TE runs drive the gateway",
+   "kind": "runtime",
+   "rebuild": "manual",
+   "poc": true,
+   "upstream": [
+    "ignition.gateway"
+   ],
+   "inputs": [],
+   "code": [
+    "scripts/ignition/te_sim_server.py",
+    "scripts/ignition/verify_gateway.py"
+   ],
+   "outputs": [],
+   "evidence": [
+    "out/ignition/gateway/receipts/native-current-20261013.json"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/ignition/te_sim_server.py",
+     "--run",
+     "normal"
+    ],
+    [
+     "python",
+     "scripts/ignition/verify_gateway.py",
+     "--controls"
+    ]
+   ],
+   "requires": [
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d06_te.dat"
+   ],
+   "requires_note": "a running Ignition 8.3 gateway (docs/IGNITION_BUILD.md) and the TE replay files",
+   "treatment": "Replays recorded simulator output; it is not a process simulator and does not respond to control changes.",
+   "carries": "recorded values only; the alarm setpoints are published ones",
+   "checked_by": "verify_gateway.py V8 (the pressure alarm fires on the replayed fault)",
+   "config": []
+  }
+ ]
+}

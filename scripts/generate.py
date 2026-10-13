@@ -18,6 +18,7 @@ import sys
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from pi_mapping import mapping_config, pi_csv_text, reconciliation
+from provenance import element
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MODEL = ROOT / "data" / "te_process_model.json"
@@ -287,6 +288,12 @@ def member_name(desc):
     return re.sub(r"[^A-Za-z0-9]", "", desc.title())[:40]
 
 
+def seed_confidence(item):
+    """Provenance passthrough (scripts/provenance.py): the seed outputs inherit the item's source check and review."""
+    p = element(item)
+    return f' | source check: {p["source_check"]} | ops review: {p["ops_review"]}'
+
+
 def ignition_tags(model):
     """Ignition 8.x tag JSON: one UDT type per equipment type + one instance per unit.
     Members are OPC tags whose path is built from instance parameters. The asset exists and is
@@ -303,7 +310,8 @@ def ignition_tags(model):
                 "valueSource": "opc",
                 "dataType": "Float8",
                 "engUnit": it["uom"],
-                "documentation": f'{it["tag"]} | {"XMV" if "xmv" in it else "XMEAS"} {idx} | {it["description"]}',
+                "documentation": f'{it["tag"]} | {"XMV" if "xmv" in it else "XMEAS"} {idx} | {it["description"]}'
+                                 + seed_confidence(it),
                 "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
                 "opcItemPath": {"bindType": "parameter", "binding": "{BasePath}." + it["tag"]},
             })
@@ -312,7 +320,7 @@ def ignition_tags(model):
                                      "OPCServer": {"dataType": "String", "value": "Ignition OPC UA Server"}},
                       "tags": members})
         instances.append({"name": u["id"], "tagType": "UdtInstance", "typeId": type_name,
-                          "documentation": u["name"],
+                          "documentation": u["name"] + seed_confidence(u),
                           "parameters": {"BasePath": {"dataType": "String", "value": f"ns=1;s=TE.{u['id']}"}}})
     return {"name": "", "tagType": "Provider", "tags": [
         {"name": "_types_", "tagType": "Folder", "tags": types},
@@ -337,11 +345,11 @@ def pi_af_rows(model):
     root = "TE Plant"
     rows = [["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""]]
     for u in model["units"]:
-        rows.append(["x", root, u["id"], "Element", u["name"], member_name(u["type"].replace("_", " ")),
+        rows.append(["x", root, u["id"], "Element", u["name"] + seed_confidence(u), member_name(u["type"].replace("_", " ")),
                      "", "", "", ""])
         for it in items_for(model, u["id"]):
             rows.append(["x", f"{root}\\{u['id']}", member_name(it["description"]), "Attribute",
-                         f'{it["tag"]}: {it["description"]}', "", "Double", it["uom"], "PI Point",
+                         f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", it["uom"], "PI Point",
                          f'\\\\%Server%\\TE.{it["tag"]}.PV'])
     return rows
 
