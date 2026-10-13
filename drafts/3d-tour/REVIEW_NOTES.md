@@ -3,8 +3,8 @@
 These notes check the text that rides on the 3D tour stills: the unit purpose cards, the public-incident
 citations and the labels' legibility. They also set out how the tour gets into the main branch. The 3D work itself
 lives on a separate local branch that has not been published (its tip is commit `8a0aff5`). Nothing here was
-reviewed by an operator or a process-safety engineer. The fixes are in [3d-content-fixes.patch](3d-content-fixes.patch),
-to be applied when the tour is merged. The stills in this folder are **from before the fixes**.
+reviewed by an operator or a process-safety engineer. The fixes are in [3d-content-fixes.patch](3d-content-fixes.patch)
+plus two scrubbed replacement files in [replace/](replace/) (see section 4), to be applied when the tour is merged. The stills in this folder are **from before the fixes**.
 
 ## 1. Purpose cards
 
@@ -34,7 +34,7 @@ to V-101. The 3D scene builds its pipes from that model, so the purge pipe, the 
 mockup's point 5 ("Purge: battery-limit block valve") all move to the separator when the tour is rebuilt.
 
 **Card size:** the sourced sentences are longer. Card height grows from 5–7 lines to 7–10 (the stripper card is 10).
-The scene contract tests still pass (73/73) with the patch, and so do the render-verifier unit tests (27/27). Each
+The scene contract tests still pass with the fixes applied (76/76, including the new font and hygiene checks), and so do the render-verifier unit tests (27/27). Each
 stop's narration stays within 70 words. But nothing has been re-rendered, so whether the taller cards collide with
 labels is unchecked until the Blender render and `verify_3d_render.py` run again.
 
@@ -82,8 +82,18 @@ own label report) is [label_truth.json](label_truth.json), and the full result i
 ID the whole-frame read missed is one of these: `Pl-107` (twice, plus once in the fault caption), `Tl-121`,
 `Tl-109`, `E-10I`, `V-10I`. LOTO tag 1 came back as `I` and tag 11 as `II`. A person reads the stills easily at
 100 % (crops checked by eye), but an operator copying a tag from a screen is exactly the case that matters.
-Recommendation for the re-render: set tag IDs and LOTO numbers in a face with distinct 1/I/l (a serifed 1 and a
-tailed l, e.g. DejaVu Sans Mono or Atkinson Hyperlegible), then run the OCR check again.
+**Fix, in the patch (not yet rendered):** every Blender text object now uses **Atkinson Hyperlegible Regular**
+(Braille Institute, SIL Open Font License 1.1; bundled as `assets/fonts/AtkinsonHyperlegible-Regular.ttf` with
+`OFL.txt`; NOTICE.md entry added). It was designed so that 1, I and l differ, and it covers every character the
+labels use (checked against its character map, including `°` and `·`). The generated Blender script loads it from
+the repository, not from a machine path. Two new contract checks:
+- the script references the bundled font and its OFL text;
+- 1, I and l rasterize as clearly different shapes (each pair differs in at least 25 % of its ink).
+
+A flat test render (each unit, tag and LOTO label in the new font at the stills' 25 px size, read by the same
+OCR) read **36 of 36** tag and unit IDs correctly. That is not a like-for-like comparison with the stills (no
+scene, no perspective), and the lone LOTO numerals were inconclusive: the detector skipped six of the 11 short
+numbers entirely rather than misreading them. The real test is the OCR check on the re-rendered stills at merge.
 
 The other misses are the engine, not the image: duplicated fragments (`Feed d System` on four stills,
 `placeholder g r geometry` on all five badges, `Separator` doubled). They pull the exact-match count down and are
@@ -105,27 +115,46 @@ TE source check), so its versions of every shared file are stale. Plan:
    `docs/3D_TOUR_PLAN.md`, `docs/HAZARD_CITATIONS_DESIGN.md`. **Do not copy:** any shared file (they are stale),
    the generated outputs (`docs/3d_tour/*`, `docs/screenshots/3d/**`; they are rebuilt in step 6), or the branch's
    resume/handoff note.
-3. **Apply `drafts/3d-tour/3d-content-fixes.patch`.** It was checked with `git apply --check` against an export of
-   `8a0aff5`, and the 3D tests pass with it.
+3. **Apply the fixes:** `git apply drafts/3d-tour/3d-content-fixes.patch`, then copy `drafts/3d-tour/replace/scripts/*`
+   over the two tour scripts. Checked against an export of `8a0aff5`: the patch applies, and the 3D tests pass
+   (contract 76/76, render verifier 27/27).
 4. **Resolve the file-name collision.** Main's `data/te_unit_purposes.json` (keyed by unit, with citations) and the
    tour's file of the same name (keyed by equipment kind, with function/highlight/inferred fields) are different
    files. Keep main's as the only source of purpose text. Rename the tour's file to e.g. `data/te_tour_cards.json`,
    remove its `purpose` fields, and make `orientation_tour.py` read the purpose by unit ID from main's file. A
    test should check that every tour stop's purpose equals main's sentence.
-5. **Scrub, then prove it with a grep that must return nothing on the staged tree and on the commit message:**
-   - `hazard_citations.py`: the example `--corpus-repo` path names the private repository; `CORPUS_FILES` and
-     `PUBLIC_FIXTURE_DIR` give that repository's internal file layout and a person's name; `FORBIDDEN` holds a real
-     site's name. Make the corpus layout a command-line or untracked local config. Keep the deny-list outside the
-     repository (an environment variable or untracked file), and have the test skip that check when it is absent.
-   - `test_build_3d_scene.py` line 338 spells out the private product's name in order to assert its absence.
-     Replace it with the same untracked deny-list.
-   - `data/hazard_citations_prototype.json`: the `excluded` sentence describes one kind of private material by a
-     person's role; reword it generically ("partner or customer material"). Keep or drop the private corpus commit
-     hash: it is opaque, but it points at a private repository. (The patch leaves this line alone, and is cut with one
-     line of context so that it does not quote it.)
-   - `docs/3D_TOUR_PLAN.md` and the journal entries link the resume note; drop the links.
-   - `build_3d_scene.py` usage line `C:/path/blender.exe`: write `<path to blender>`.
-6. **Port the shared-file hunks by hand onto main's current versions:** `.gitignore` (`out/3d/`), `README.md`
+5. **Scrub: a hard pre-merge step. Do not merge until it passes.** The tour's `hazard_citations.py` hard-coded a
+   path to the private corpus repository, that repository's internal file layout, a directory named after a
+   person, and a real site's name as a deny-list term. The test file spelled out the private product's name in
+   order to assert its absence. Both files are replaced wholesale by the scrubbed versions in
+   [replace/scripts/](replace/scripts/). They are full files rather than patch hunks, so that the patch never
+   quotes the removed strings. In them:
+   - the corpus layout and the deny terms come only from an untracked local JSON (`--corpus-config`) and the
+     `HAZARD_DENY_TERMS` environment variable; nothing private is in the repository;
+   - `test_build_3d_scene.py` has a **public-hygiene check** over every file the tour adds. It uses generic
+     rules, so no sensitive string is written in the test:
+     - absolute user or drive paths;
+     - hard-coded deny-lists;
+     - e-mail addresses;
+     - file or directory path literals that point outside this repository;
+     - Markdown links to missing documents (this catches the resume-note links once they are in main);
+     - any `HAZARD_DENY_TERMS` term, when the variable is set.
+
+     A positive control plants one example of each rule, built at run time, and requires every one to be
+     caught. Run against the original files, the check flags the drive paths in two scripts and a doc, the
+     hard-coded deny-list, and all four outside-repository paths. With the deny terms set locally, it also
+     catches the person's name, the site, the repository name and the product name. On the scrubbed files
+     it reports nothing.
+   - The patch also removes the resume-note link and the machine-specific Blender path from `docs/3D_TOUR_PLAN.md`,
+     and the `C:/path` example from `build_3d_scene.py`.
+
+   Before committing the merge, run `HAZARD_DENY_TERMS=<the private terms> python scripts/test_build_3d_scene.py`
+   locally (never write the terms into a file in the repository), and confirm the hygiene check passes. Also confirm
+   that `git grep -i` for each term over the staged tree and the commit message returns nothing. Separately reword
+   the citation file's `excluded` sentence ("partner or customer material"), and drop or keep the opaque private
+   corpus commit hash.
+6. **Port the shared-file hunks by hand onto main's current versions** (main's NOTICE.md already credits the label
+   font, which the patch adds under `assets/fonts/`): `.gitignore` (`out/3d/`), `README.md`
    (two rows), `docs/MODELS.md` (four rows; the purpose-card row now says the text comes from the verified TE file),
    `scripts/run_tests.py` (two tests, citation and label-box source files), `docs/JOURNAL.md` (three entries,
    **renumbered** after main's latest entry: the branch numbers them 37–39, which main has already used).

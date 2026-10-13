@@ -38,3 +38,10 @@ name and abbreviation) is extracted from `AF Database - Green Power Company.xml`
 [AVEVA/AF-SDK-Getting-Started-Guide](https://github.com/AVEVA/AF-SDK-Getting-Started-Guide), licensed under the
 Apache License 2.0. Only those three fields were extracted; nothing else from that file is included. AVEVA, PI System, PI Builder and
 PI AF are AVEVA trademarks. This project is not affiliated with or endorsed by AVEVA.
+
+**Atkinson Hyperlegible** (Regular), copyright 2020 Braille Institute of America, Inc., licensed under the
+[SIL Open Font License 1.1](https://openfontlicense.org), is the label typeface of the 3D orientation tour. It arrives
+with the tour as `assets/fonts/AtkinsonHyperlegible-Regular.ttf`, with the licence text in `assets/fonts/OFL.txt`
+(source: the google/fonts repository, `ofl/atkinsonhyperlegible/`). Until the tour is merged, both files are carried
+in `drafts/3d-tour/3d-content-fixes.patch`. The font is bundled unmodified; the OFL allows bundling and
+redistribution with software, but not selling the font by itself.
