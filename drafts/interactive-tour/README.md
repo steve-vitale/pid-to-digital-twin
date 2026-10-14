@@ -30,7 +30,7 @@ All stills, both themes and both widths, are in [shots/](shots/).
 | Tags, which unit or line each belongs to, units of measure | the same model and layout | Sourced; marker position along a line or on a shell is a **placeholder** |
 | Ignition tag path and PI AF path on each card | `out/ignition/gateway/twin_provider.json`, `out/pi/pi_builder_af.csv` | Read from the exports |
 | Normal bands, alarm setpoints | `out/ignition/normal_bands.json`, `out/ignition/gateway/build_meta.json` | Sourced; bands are display aids, only published setpoints make an alarm |
-| Every value, level, ring colour and pulse speed | `data/external/te-braatz/d00_te.dat`, `d06_te.dat` (downloaded, checksum-verified, not redistributed) | Recorded replay, not live; lines without a flow tag pulse at a constant, labelled illustrative rate |
+| Every value, level, ring colour and pulse speed | `data/external/te-braatz/d00_te.dat`, `d06_te.dat` (downloaded and checksum-verified; the built pages embed their values under [TE_DATA_NOTICE.txt](TE_DATA_NOTICE.txt)) | Recorded replay, not live; lines without a flow tag pulse at a constant, labelled illustrative rate |
 | Purpose sentences and citations | `data/te_unit_purposes.json` | Written with AI assistance, checked against `teprob.f` by `scripts/test_te_topology.py`; not operator-reviewed |
 | "Why this matters" citations | `data/hazard_citations_prototype.json` (the same one each Blender stop shows) | Prototype keyword match over public records; mechanism analogies, not a hazard analysis |
 | Service colours | the Blender flow legend (`SERVICE_COLORS` in `scripts/blender_tour_template.py`) | Presentation; service per stream is the existing reading of the flowsheet |
@@ -87,7 +87,7 @@ python scripts/pipeline.py rebuild --from te.interactive_tour
 or step by step: `python scripts/export_interactive_tour.py`, `node drafts/interactive-tour/build.mjs --audit`,
 `node drafts/interactive-tour/build.mjs --light`, `node drafts/interactive-tour/verify.mjs`. Needs Node.js 20.10+ and,
 for `verify.mjs`, a Chrome or Chromium (`CHROME_PATH`, or a Playwright browser cache). The pages are written to
-`out/interactive_tour/te-tour.html` and `te-tour-light.html`; they are ignored by git because they embed the replay.
+`out/interactive_tour/te-tour.html` and `te-tour-light.html`. Copies of the current build are committed in [page/](page/) (open `page/te-tour.html` in a browser after downloading the repository); they embed the replay under the University of Illinois notice in [TE_DATA_NOTICE.txt](TE_DATA_NOTICE.txt).
 Open them directly in a browser: no server and no network are needed.
 
 ## Credits
