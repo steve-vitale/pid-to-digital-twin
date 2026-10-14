@@ -57,6 +57,14 @@ name and abbreviation) is extracted from `AF Database - Green Power Company.xml`
 Apache License 2.0. Only those three fields were extracted; nothing else from that file is included. AVEVA, PI System, PI Builder and
 PI AF are AVEVA trademarks. This project is not affiliated with or endorsed by AVEVA.
 
+**anatomy** (MIT License, Copyright (c) 2026 Ryan, [github.com/wheresryan22/anatomy](https://github.com/wheresryan22/anatomy),
+commit `e6600ff`): the interactive process tour in `drafts/interactive-tour/` vendors four files of its drawing kit
+unchanged, `kit/iso-kit.mjs`, `kit/lathe.mjs`, `kit/tube.mjs` and `kit/audit.mjs`, with the MIT licence text in
+`drafts/interactive-tour/kit/LICENSE`. `drafts/interactive-tour/cdp.mjs` adapts its `scripts/drive.mjs` and
+`scripts/chrome-port.mjs` (headless Chrome over the DevTools protocol), and `build.mjs` follows the patterns of its
+`examples/raptor-engine/build.mjs` (pipes, valves, seated nozzle pads, the audit hook). Those adapted files remain
+under the MIT licence of their origin.
+
 **Atkinson Hyperlegible** (Regular), copyright 2020 Braille Institute of America, Inc., licensed under the
 [SIL Open Font License 1.1](https://openfontlicense.org), is the label typeface of the 3D orientation tour. It is bundled
 as `assets/fonts/AtkinsonHyperlegible-Regular.ttf`, with the licence text in `assets/fonts/OFL.txt`
