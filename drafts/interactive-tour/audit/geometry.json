@@ -1,0 +1,265 @@
+{
+ "tool": "anatomy kit/audit.mjs (vendored, commit e6600ff): audit(R, P)",
+ "items": 589,
+ "tubes": 28,
+ "solids": 314,
+ "failures": 0,
+ "counts": {
+  "clearance": 0,
+  "terminals": 0,
+  "loose_ends": 0,
+  "folds": 0,
+  "crowding": 0,
+  "self_overlap": 0,
+  "wobble": 0,
+  "stand_in_shapes": 0,
+  "unsupported_solids": 0,
+  "hanging_tubes": 0,
+  "sunk_pairs": 0,
+  "depth_order": 0,
+  "items_without_shape": 0
+ },
+ "landed": {
+  "S1:start": {
+   "mount": "BL-S1.flange",
+   "unit": "BL-S1",
+   "landed": true
+  },
+  "S1:end": {
+   "mount": "U-100.nozzle.S1.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S2:start": {
+   "mount": "BL-S2.flange",
+   "unit": "BL-S2",
+   "landed": true
+  },
+  "S2:end": {
+   "mount": "U-100.nozzle.S2.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S3:start": {
+   "mount": "BL-S3.flange",
+   "unit": "BL-S3",
+   "landed": true
+  },
+  "S3:end": {
+   "mount": "U-100.nozzle.S3.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S4:start": {
+   "mount": "BL-S4.flange",
+   "unit": "BL-S4",
+   "landed": true
+  },
+  "S4:end": {
+   "mount": "C-101.nozzle.S4.flange",
+   "unit": "C-101",
+   "landed": true
+  },
+  "S5:start": {
+   "mount": "C-101.nozzle.S5.flange",
+   "unit": "C-101",
+   "landed": true
+  },
+  "S5:end": {
+   "mount": "U-100.nozzle.S5.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S6:start": {
+   "mount": "U-100.nozzle.S6.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S6:end": {
+   "mount": "R-101.nozzle.S6.flange",
+   "unit": "R-101",
+   "landed": true
+  },
+  "S7:start": {
+   "mount": "R-101.nozzle.S7.flange",
+   "unit": "R-101",
+   "landed": true
+  },
+  "S7:end": {
+   "mount": "E-101.nozzle.S7.flange",
+   "unit": "E-101",
+   "landed": true
+  },
+  "S7b:start": {
+   "mount": "E-101.nozzle.S7b.flange",
+   "unit": "E-101",
+   "landed": true
+  },
+  "S7b:end": {
+   "mount": "V-101.nozzle.S7b.flange",
+   "unit": "V-101",
+   "landed": true
+  },
+  "S8:start": {
+   "mount": "V-101.nozzle.S8.flange",
+   "unit": "V-101",
+   "landed": true
+  },
+  "S8:end": {
+   "mount": "K-101.nozzle.S8.flange",
+   "unit": "K-101",
+   "landed": true
+  },
+  "S8b:start": {
+   "mount": "K-101.nozzle.S8b.flange",
+   "unit": "K-101",
+   "landed": true
+  },
+  "S8b:end": {
+   "mount": "U-100.nozzle.S8b.flange",
+   "unit": "U-100",
+   "landed": true
+  },
+  "S9:start": {
+   "mount": "V-101.nozzle.S9.flange",
+   "unit": "V-101",
+   "landed": true
+  },
+  "S9:end": {
+   "mount": "BL-S9.flange",
+   "unit": "BL-S9",
+   "landed": true
+  },
+  "S10:start": {
+   "mount": "V-101.nozzle.S10.flange",
+   "unit": "V-101",
+   "landed": true
+  },
+  "S10:end": {
+   "mount": "C-101.nozzle.S10.flange",
+   "unit": "C-101",
+   "landed": true
+  },
+  "S11:start": {
+   "mount": "C-101.nozzle.S11.flange",
+   "unit": "C-101",
+   "landed": true
+  },
+  "S11:end": {
+   "mount": "BL-S11.flange",
+   "unit": "BL-S11",
+   "landed": true
+  },
+  "FV-209-steam:start": {
+   "mount": "UT-FV-209-steam.flange",
+   "unit": "UT-FV-209-steam",
+   "landed": true
+  },
+  "FV-209-steam:end": {
+   "mount": "C-101.nozzle.FV-209-steam.flange",
+   "unit": "C-101",
+   "landed": true
+  },
+  "TV-210-supply:start": {
+   "mount": "UT-TV-210-supply.flange",
+   "unit": "UT-TV-210-supply",
+   "landed": true
+  },
+  "TV-210-supply:end": {
+   "mount": "R-101.nozzle.TV-210-supply.flange",
+   "unit": "R-101",
+   "landed": true
+  },
+  "TV-210-return:start": {
+   "mount": "R-101.nozzle.TV-210-return.flange",
+   "unit": "R-101",
+   "landed": true
+  },
+  "TV-210-return:end": {
+   "mount": "UT-TV-210-return.flange",
+   "unit": "UT-TV-210-return",
+   "landed": true
+  },
+  "TV-211-supply:start": {
+   "mount": "UT-TV-211-supply.flange",
+   "unit": "UT-TV-211-supply",
+   "landed": true
+  },
+  "TV-211-supply:end": {
+   "mount": "E-101.nozzle.TV-211-supply.flange",
+   "unit": "E-101",
+   "landed": true
+  },
+  "TV-211-return:start": {
+   "mount": "E-101.nozzle.TV-211-return.flange",
+   "unit": "E-101",
+   "landed": true
+  },
+  "TV-211-return:end": {
+   "mount": "UT-TV-211-return.flange",
+   "unit": "UT-TV-211-return",
+   "landed": true
+  }
+ },
+ "allowed": {
+  "rule": "a valve body against chunks of its own pipe, which meet it face to end cap",
+  "patterns": [
+   [
+    "S1.valve.FV-203",
+    "S1:*"
+   ],
+   [
+    "S2.valve.FV-201",
+    "S2:*"
+   ],
+   [
+    "S3.valve.FV-202",
+    "S3:*"
+   ],
+   [
+    "S4.valve.FV-204",
+    "S4:*"
+   ],
+   [
+    "S9.valve.FV-206",
+    "S9:*"
+   ],
+   [
+    "S10.valve.LV-207",
+    "S10:*"
+   ],
+   [
+    "S11.valve.LV-208",
+    "S11:*"
+   ],
+   [
+    "FV-209-steam.valve.FV-209",
+    "FV-209-steam:*"
+   ],
+   [
+    "TV-210-supply.valve.TV-210",
+    "TV-210-supply:*"
+   ],
+   [
+    "TV-211-supply.valve.TV-211",
+    "TV-211-supply:*"
+   ]
+  ],
+  "excused_depth_pairs": []
+ },
+ "report": [
+  "clearance: 0 problems",
+  "clearance apart: 0 problems",
+  "terminals: 0 ends not on a mount",
+  "loose ends: 0",
+  "screen folds: 0",
+  "support: 0 unsupported solids · 0 hanging tubes · 0 sunk pairs",
+  "depth order: 0 problems",
+  "through in mid-flight: 0 pairs",
+  "self-overlap: 0 chunks whose outline crosses itself on screen",
+  "wobble: 0 smoothed profiles whose slope turns between its ends",
+  "saddles off their host apart: 0",
+  "stand-in shapes: 0 items whose recorded shape covers too little of what it draws",
+  "crowding: 0 pairs where a bend or end touches another line on screen"
+ ]
+}

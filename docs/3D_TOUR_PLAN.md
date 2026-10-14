@@ -444,5 +444,6 @@ finish the native Ignition and PI acceptance already queued.
 - OCR read-back of the labels, if tesseract is ever installed. The verifier runs it only when the executable is
   already on PATH.
 - Optional `ports` and route-state fields in the contract, once there is a plant with position feedback.
-- A browser viewer reading the GLB and a replay file, if interactive use is wanted.
+- A browser viewer reading the GLB and a replay file, if interactive use is wanted. A first draft of an interactive browser tour, drawn as isometric cutaways rather than from the GLB, is in
+  [drafts/interactive-tour/](../drafts/interactive-tour/README.md) (proof of concept, not reviewed).
 - Not done: any comparison with another model's choices, any operator review, any plant geometry.

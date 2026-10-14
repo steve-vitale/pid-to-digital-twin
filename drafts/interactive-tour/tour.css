@@ -1,0 +1,119 @@
+/* Interactive TE tour: page styles on top of the anatomy kit's ISO_CSS. Both themes; every text colour pair is
+   checked for WCAG AA contrast by verify.mjs from the computed styles. */
+.iso{--tour-alarm-bg:#6b1111;--tour-alarm-fg:#ffe4e4;--tour-amber:#f0a030;--tour-red:#ff5a52;--tour-ok:#bdbdbd;
+  --tour-pill-bg:#0d0d0dee;--tour-pill-fg:#ececec;--tour-pill-line:#5a5a5a;--tour-focus:#ffd166;--tour-lock:#ff7a6b;
+  --tour-cavity:#070707;--tour-liquid:#3b9a5a;--tour-off:#3a3a3a;--tour-link:#9ec5ff}
+.iso[data-theme="light"]{--tour-alarm-bg:#a3181a;--tour-alarm-fg:#ffffff;--tour-amber:#b25e00;--tour-red:#c4161c;--tour-ok:#6a6a6a;
+  --tour-pill-bg:#ffffffee;--tour-pill-fg:#141416;--tour-pill-line:#8a8a8f;--tour-focus:#8a5a00;--tour-lock:#b3261e;
+  --tour-cavity:#cfcfcb;--tour-liquid:#2f8a4e;--tour-off:#c8c8c8;--tour-link:#1d4fbf}
+body.iso{font-family:"Atkinson Hyperlegible",ui-sans-serif,system-ui,"Segoe UI",sans-serif;font-size:15px}
+.iso-page{margin:24px auto 64px}
+.tour-skip{position:absolute;left:-999px;top:0}
+.tour-skip:focus{left:8px;top:8px;background:var(--anatomy-card);color:var(--anatomy-strong);padding:6px 10px;z-index:9}
+.tour-head h1{color:var(--anatomy-strong);font-size:clamp(20px,3.2vw,30px);line-height:1.2;margin:4px 0 8px;font-weight:400}
+.tour-kicker{margin:0;color:var(--anatomy-text);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.tour-badge{display:inline-block;margin:0 0 8px;padding:3px 9px;border:1px solid var(--anatomy-mid);color:var(--anatomy-strong);font-size:13px}
+.tour-lede{max-width:78ch;margin:0 0 6px}
+.tour-theme{margin:0 0 14px;font-size:14px}
+a{color:var(--tour-link)}
+.tour-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+@media (min-width:1080px){.tour-layout{grid-template-columns:minmax(0,1fr) 370px}.tour-left{display:grid;gap:14px;align-content:start}.tour-panel{position:sticky;top:10px;align-self:start;max-height:calc(100vh - 20px);overflow:auto}}
+@media (max-width:1079px){.tour-left{display:contents}}
+.tour-figure{order:1}.tour-panel{order:2}.tour-card{order:3}.tour-legend{order:4}
+.tour-figure[data-mode="loto"] .tour-ring{stroke:var(--anatomy-mid)!important;stroke-dasharray:none!important;stroke-width:1.2!important}
+.tour-figure{margin:0}
+.tour-plate{padding:40px 14px 40px}
+.iso-plate-corner{font-size:12px!important;color:var(--anatomy-text)!important}
+.tour-stage{position:relative;outline:none;touch-action:manipulation;overflow:hidden}
+.tour-stage svg.iso-svg{overflow:hidden}
+.tour-stage:focus-visible{box-shadow:0 0 0 2px var(--tour-focus)}
+.tour-stage{aspect-ratio:var(--vb-aspect)}
+.tour-stage svg{position:absolute;inset:0;width:100%;height:100%}
+@media (max-width:700px){.tour-stage{aspect-ratio:4/3}}
+.tour-svg path.tour-flow,.tour-svg path.tour-chev,.tour-svg path.tour-ring,.tour-svg path.tour-blade{vector-effect:none}
+.tour-flow{fill:none;stroke:var(--svc,#888);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:7 17;opacity:.95}
+.tour-chev{fill:none;stroke:var(--anatomy-page);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+[data-line] .tb-body{fill:color-mix(in srgb,var(--svc,#888) 34%,var(--anatomy-shade-2))}
+[data-line] .tb-shine{fill:color-mix(in srgb,var(--svc,#888) 30%,var(--anatomy-top))}
+[data-line] .tb-shade{fill:color-mix(in srgb,var(--svc,#888) 26%,var(--anatomy-shade-0))}
+.tour-off [data-line] .tb-body,.it.tour-off .tb-body{fill:var(--anatomy-shade-2)}
+.it.tour-off .tb-shine{fill:var(--anatomy-top)}.it.tour-off .tb-shade{fill:var(--anatomy-shade-0)}
+.it.tour-off .tour-flow{opacity:0}
+.it.tour-off .tour-chev{stroke:var(--anatomy-mid)}
+.tour-cavity{fill:var(--tour-cavity);stroke:none}
+.tour-blade{fill:var(--anatomy-shade-1);stroke:var(--anatomy-mid);stroke-width:.5}
+.tour-liquid{fill:var(--tour-liquid);fill-opacity:.26;stroke:none}
+.tour-liquid-top{fill:var(--tour-liquid);fill-opacity:.25;stroke:var(--tour-liquid);stroke-width:1.2;vector-effect:none}
+.tour-cut{stroke-width:1px}
+.tour-ring{fill:none;stroke:var(--tour-ok);stroke-width:1.6}
+.tour-marker[data-state="outside_band"] .tour-ring{stroke:var(--tour-amber);stroke-width:2.2}
+.tour-marker[data-state="alarm"] .tour-ring{stroke:var(--tour-red);stroke-width:2.8}
+.tour-marker[data-state="not_connected"] .tour-ring{stroke:var(--anatomy-mid);stroke-dasharray:2 2}
+.tour-marker[data-state="unknown"] .tour-ring{stroke:#b04cc2;stroke-dasharray:1 2}
+.it{transition:opacity .35s var(--anatomy-ease)}
+.it.tour-dim{opacity:.22}
+@media (prefers-reduced-motion:reduce){.it{transition:none}}
+.tour-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tour-leaders{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tour-leaders line{stroke:var(--tour-pill-line);stroke-width:1}
+.tour-pill{position:absolute;left:0;top:0;white-space:nowrap;padding:2px 7px;border:1px solid var(--tour-pill-line);background:var(--tour-pill-bg);color:var(--tour-pill-fg);font-size:13px;line-height:18px;border-radius:9px;pointer-events:auto;cursor:pointer}
+.tour-pill[data-kind="unit"]{font-size:14px;border-radius:3px;border-color:var(--anatomy-mid)}
+.tour-pill[data-kind="unit"][data-focus]{border-color:var(--tour-focus);box-shadow:0 0 0 1px var(--tour-focus)}
+.tour-pill[data-state="alarm"]{background:var(--tour-alarm-bg);color:var(--tour-alarm-fg);border-color:var(--tour-red)}
+.tour-pill[data-state="outside_band"]{border-color:var(--tour-amber);box-shadow:inset 3px 0 0 var(--tour-amber)}
+.tour-pill[data-kind="loto"]{border-color:var(--tour-lock)}
+.tour-pill[data-kind="loto"][data-isolated]{background:var(--tour-alarm-bg);color:var(--tour-alarm-fg)}
+.tour-loto-pin circle{fill:var(--anatomy-card);stroke:var(--tour-lock);stroke-width:1.6}
+.tour-loto-pin[data-isolated] circle{fill:var(--tour-lock)}
+.tour-loto-pin path{fill:none;stroke:var(--tour-lock);stroke-width:1.6;stroke-linecap:round}
+.tour-loto-pin[data-isolated] path{stroke:var(--anatomy-card)}
+.tour-legend{font-size:14px;color:var(--anatomy-text)}
+.tour-services,.tour-states{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px}
+.tour-services li{display:inline-flex;align-items:center;gap:6px;color:var(--anatomy-strong)}
+.tour-swatch{width:28px;height:10px}
+.tour-swatch path{fill:none;stroke:var(--svc);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.tour-states li{display:inline-flex;align-items:center;gap:6px;color:var(--anatomy-strong)}
+.tour-states li::before{content:"";width:11px;height:11px;border-radius:50%;border:2px solid var(--tour-ok)}
+.tour-states li[data-state="outside_band"]::before{border-color:var(--tour-amber)}
+.tour-states li[data-state="alarm"]::before{border-color:var(--tour-red)}
+.tour-states li[data-state="not_connected"]::before{border-style:dashed;border-color:var(--anatomy-mid)}
+.tour-legend-note{margin:2px 0;color:var(--anatomy-text)}
+.tour-panel{display:grid;gap:12px;align-content:start;color:var(--anatomy-text)}
+.tour-panel button{font:inherit;font-size:14px;color:var(--anatomy-strong);background:var(--anatomy-card);border:1px solid var(--anatomy-mid);padding:6px 10px;border-radius:4px;cursor:pointer;text-align:left;min-height:34px}
+.tour-panel button[aria-pressed="true"]{border-color:var(--tour-focus);box-shadow:inset 0 0 0 1px var(--tour-focus)}
+.tour-panel button:focus-visible,.tour-panel input:focus-visible{outline:2px solid var(--tour-focus);outline-offset:2px}
+.tour-modes{display:flex;gap:8px;flex-wrap:wrap}
+.tour-units,.tour-points{display:flex;flex-wrap:wrap;gap:6px}
+.tour-n{display:inline-block;min-width:1.3em;margin-right:4px;color:var(--anatomy-text)}
+.tour-uname{color:var(--anatomy-text)}
+.tour-inf{color:var(--anatomy-text);font-size:13px}
+.tour-points button[aria-pressed="true"]{background:var(--tour-alarm-bg);color:var(--tour-alarm-fg);border-color:var(--tour-red)}
+.tour-points button[aria-pressed="true"] .tour-n,.tour-points button[aria-pressed="true"] .tour-inf{color:var(--tour-alarm-fg)}
+.tour-runs{display:flex;gap:14px;flex-wrap:wrap;color:var(--anatomy-strong)}
+.tour-scrub{display:flex;gap:10px;align-items:center}
+.tour-scrub input{flex:1;min-width:0;accent-color:var(--tour-focus)}
+.tour-time{margin:0;color:var(--anatomy-strong);font-variant-numeric:tabular-nums}
+.tour-alarms p{margin:4px 0;padding:6px 8px;background:var(--tour-alarm-bg);color:var(--tour-alarm-fg)}
+.tour-alarms .tour-quiet{background:none;color:var(--anatomy-text);padding:0}
+.tour-warning{margin:0;padding:8px 10px;border:1px solid var(--tour-lock);color:var(--anatomy-strong)}
+.tour-energy ul{margin:4px 0 8px;padding-left:18px}
+.tour-energy li{margin:2px 0}
+.tour-energy .on{color:var(--anatomy-strong)}
+.tour-card{border-top:1px solid var(--anatomy-mid);padding-top:10px;color:var(--anatomy-text)}
+@media (min-width:1080px){.tour-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:28px}.tour-card h2{grid-column:1/-1}}
+.tour-card h2{font-size:19px;font-weight:400;color:var(--anatomy-strong);margin:0 0 6px}
+.tour-card h3{font-size:15px;color:var(--anatomy-strong);margin:12px 0 4px;font-weight:700}
+.tour-card p{margin:4px 0}
+.tour-card .tour-cite{font-size:14px;color:var(--anatomy-text)}
+.tour-card code,.tour-foot code{font-family:var(--anatomy-mono);font-size:13px;color:var(--anatomy-strong)}
+.tour-card table{border-collapse:collapse;width:100%;font-size:14px}
+.tour-card td,.tour-card th{text-align:left;padding:3px 4px;border-bottom:1px solid var(--anatomy-faint);vertical-align:top;color:var(--anatomy-strong)}
+.tour-card th{color:var(--anatomy-text);font-weight:400}
+.tour-card td[data-state="alarm"]{background:var(--tour-alarm-bg);color:var(--tour-alarm-fg)}
+.tour-card td[data-state="outside_band"]{box-shadow:inset 3px 0 0 var(--tour-amber)}
+.tour-card .tour-paths{font-size:13px;color:var(--anatomy-text);overflow-wrap:anywhere}
+.tour-foot{margin-top:28px;max-width:90ch;color:var(--anatomy-text)}
+.tour-foot h2{font-size:17px;font-weight:400;color:var(--anatomy-strong)}
+@media (max-width:560px){.iso-page{width:calc(100% - 20px)}.tour-plate{padding:34px 4px 34px}.tour-pill{font-size:12px;line-height:16px;padding:1px 5px}.tour-pill[data-kind="unit"]{font-size:12px}}
+.tour-glass .iso-fill,.tour-glass .iso-shade,.tour-glass .iso-top{fill-opacity:.35}
+.tour-glass-liquid{fill-opacity:.85}

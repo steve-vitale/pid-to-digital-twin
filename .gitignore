@@ -49,3 +49,7 @@ out/open100_structural/schedule_crops/
 # 3D tour (proof of concept): scene JSON, generated Blender script and full-size renders are regenerable
 # (python scripts/build_3d_scene.py); the review stills and their measured label boxes are committed under drafts/3d-tour/.
 out/3d/
+
+# Interactive tour (proof of concept): the built pages embed the downloaded replay, which is not redistributed;
+# rebuild with python scripts/pipeline.py rebuild --from te.interactive_tour. The audit and review stills are committed under drafts/interactive-tour/.
+out/interactive_tour/

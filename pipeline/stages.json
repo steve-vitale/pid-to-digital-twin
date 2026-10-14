@@ -1460,6 +1460,94 @@
    "checked_by": "scripts/test_build_3d_scene.py (contract, hygiene with HAZARD_DENY_TERMS), scripts/test_verify_3d_render.py; verify_3d_render.py: no check fails on the twelve stills (15 pass, 2 informational) (exports, topology from geometry, legibility); OCR read-back not re-run (drafts/3d-tour/REVIEW_NOTES.md)"
   },
   {
+   "id": "te.interactive_tour",
+   "dataset": "te",
+   "stage": 5,
+   "title": "Interactive browser process tour (anatomy-style cutaway): data export, page build, geometry audit and verification",
+   "kind": "generated",
+   "rebuild": "auto",
+   "poc": true,
+   "upstream": [
+    "te.source",
+    "te.purposes",
+    "te.exports",
+    "te.bands",
+    "te.pid",
+    "ignition.gateway"
+   ],
+   "inputs": [
+    "data/te_process_model.json",
+    "data/te_unit_purposes.json",
+    "out/ignition/normal_bands.json",
+    "out/ignition/te_tags.json",
+    "out/pi/pi_builder_af.csv",
+    "out/pi/attribute_descriptions.csv",
+    "out/ignition/gateway/twin_provider.json",
+    "out/ignition/gateway/build_meta.json",
+    "data/te_pid/key.json"
+   ],
+   "code": [
+    "scripts/export_interactive_tour.py",
+    "scripts/build_3d_scene.py",
+    "scripts/orientation_tour.py",
+    "scripts/verify_3d_render.py",
+    "scripts/display_contract.py",
+    "scripts/label_layout.py",
+    "scripts/ignition/te_channels.py",
+    "scripts/blender_tour_template.py",
+    "drafts/interactive-tour/build.mjs",
+    "drafts/interactive-tour/model.mjs",
+    "drafts/interactive-tour/live.js",
+    "drafts/interactive-tour/tour.css",
+    "drafts/interactive-tour/verify.mjs",
+    "drafts/interactive-tour/cdp.mjs",
+    "drafts/interactive-tour/kit/iso-kit.mjs",
+    "drafts/interactive-tour/kit/lathe.mjs",
+    "drafts/interactive-tour/kit/tube.mjs",
+    "drafts/interactive-tour/kit/audit.mjs"
+   ],
+   "config": [
+    "data/te_tour_cards.json",
+    "data/hazard_citations_prototype.json",
+    "data/te_display_layout.json",
+    "assets/fonts/AtkinsonHyperlegible-Regular.ttf"
+   ],
+   "outputs": [
+    "drafts/interactive-tour/audit/geometry.json",
+    "drafts/interactive-tour/audit/report.json",
+    "drafts/interactive-tour/audit/report.md",
+    "drafts/interactive-tour/shots/*.jpg"
+   ],
+   "command": [
+    [
+     "python",
+     "scripts/export_interactive_tour.py"
+    ],
+    [
+     "node",
+     "drafts/interactive-tour/build.mjs",
+     "--audit"
+    ],
+    [
+     "node",
+     "drafts/interactive-tour/build.mjs",
+     "--light"
+    ],
+    [
+     "node",
+     "drafts/interactive-tour/verify.mjs"
+    ]
+   ],
+   "requires": [
+    "data/external/te-braatz/d00_te.dat",
+    "data/external/te-braatz/d06_te.dat"
+   ],
+   "requires_note": "the recorded normal and fault-6 replays (python scripts/fetch_te_data.py); Node.js 20.10+ on PATH; a Chrome or Chromium for verify.mjs (CHROME_PATH, or a Playwright browser cache); optional TOUR_DENY_TERMS for the publication hygiene check",
+   "treatment": "Topology, tags, purposes, hazard citations, limits and LOTO points are read through the same functions the Blender tour uses (build_3d_scene.build_scene, tour_scene); the page itself (out/interactive_tour/te-tour.html and te-tour-light.html, ignored by git because it embeds the replay) is built with drawing code adapted from the MIT anatomy skill; sizes, heights, nozzles, routes and cutaway internals are placeholders; verify.mjs re-reads the model, the P&ID answer key, the Ignition and PI AF exports and the raw replay files independently and drives the page in headless Chrome. Screenshot pixels can differ slightly between runs (animation phase), so a rebuild may rewrite the stills.",
+   "carries": "PROOF OF CONCEPT: placeholder geometry, recorded replay, inferred LOTO points (not a procedure), text written with AI assistance and not reviewed by an operator",
+   "checked_by": "drafts/interactive-tour/verify.mjs (topology and tags against the raw model, P&ID key, Ignition and PI AF exports and replay files; the anatomy kit geometry audit; legibility at 390 and 1440 px in both themes; behaviour drive)"
+  },
+  {
    "id": "te.replay",
    "dataset": "te",
    "stage": 5,
