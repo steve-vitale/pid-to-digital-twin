@@ -80,7 +80,7 @@ does not mean an operator finds it useful.
 ## Build it
 
 ```
-python scripts/fetch_te_data.py                       # the replays (not redistributed)
+python scripts/fetch_te_data.py                       # download the source replays
 python scripts/pipeline.py rebuild --from te.interactive_tour
 ```
 
@@ -100,8 +100,6 @@ headless-Chrome scripts. See [NOTICE.md](../../NOTICE.md). Labels in Atkinson Hy
 
 - Is the cut-away machine picture useful for orientation, or does it invite reading sizes and positions that are
   placeholders?
-- Should the built page be published? It would redistribute a rounded excerpt of the Braatz replay, which this
-  repository so far only downloads; its licence terms would need checking first. For now it stays a local build.
 - Which units deserve more internal detail, and which instruments should each stop show first?
 - The LOTO mockup's energy model is reachability only; is that the right first picture, or should stored energy be
   shown per vessel?
