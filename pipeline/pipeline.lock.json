@@ -31,6 +31,14 @@
     "data/dataset_adapters/dexpi_examples.json": "23228640937e468099918af66de52b9e3c66d7d80ce79cc931a080e1821b6706"
    }
   },
+  "ignition.acceptance": {
+   "inputs": {
+    "scripts/ignition/acceptance/browser_contract.js": "c1f4a448c9c4ca789480225a8fc293a16b643e88370272bf46adf15988682df4",
+    "scripts/ignition/acceptance/live_checks.py": "757a5b3b1c03aef4d84597952b9ba1dd8a97cd81bb7d2955efa10cfa9ec9e051",
+    "scripts/ignition/acceptance/nav_contract.py": "495c08d18b8e8efb2b7130190caa2a342664582939e25040f196f0334eace4a2"
+   },
+   "outputs": {}
+  },
   "ignition.gateway": {
    "inputs": {
     "data/te_display_layout.json": "f679450fa2cc7c7e07deef2335167cd66ae5ebd05272fc689d76229c493b8a6c",
@@ -751,6 +759,13 @@
    "outputs": {
     "data/te_unit_purposes.json": "747d44e9a432c9908ce3c485d010d70ef60db1c1f29fb04d542881b36ecbcf9d"
    }
+  },
+  "te.replay": {
+   "inputs": {
+    "scripts/ignition/te_sim_server.py": "a52d0307d5da97560c08e20ab943e700d44218877646e8e2725b135e44b96607",
+    "scripts/ignition/verify_gateway.py": "870a552886168b75994e3aff08f56b65500b1e36f9ebfae398e46be0d02bb3e5"
+   },
+   "outputs": {}
   },
   "te.scene": {
    "inputs": {

@@ -2742,9 +2742,16 @@ closed-loop code, and every control valve now carries the number of the loop tha
   purge override from PI-113 as a signal. The code implements it as a latched trip with a hand-back inside the purge
   controller; drawing it properly needs a selector symbol and a cause-and-effect note, not a dashed line.
 
-**Not done here:** the revision-B sheets haven't been read back by the models (a paid, recorded run), the rebuilt
-gateway project hasn't been through native acceptance, the 3D OCR read-back still describes the old stills, and no
-control engineer has reviewed the loops. The audit grades the drawing against the code; it doesn't judge the control
+**Native acceptance, the same evening:** the rebuilt project went into the local disposable gateway with
+`build_gateway.py --fresh` (1,121 tags, 0 failures, 0 read-back differences). The verifier caught 5/5 planted faults
+and passed V1–V9 on `c15b362`; the browser contract passed 24/24 routes and 284/284 clicks with no console errors;
+stopping the replay raised the data-source-lost diagnostic and restarting it cleared it, with the header's count
+matching the alarm table in all 24 samples ([receipt](../out/ignition/gateway/receipts/native-revB-20261028.json)).
+One snag: Git Bash rewrote the browser contract's route arguments (`/unit/U-100`) into Windows paths;
+`MSYS_NO_PATHCONV=1` fixed it.
+
+**Not done here:** the revision-B sheets haven't been read back by the models (a paid, recorded run), the 3D OCR
+read-back still describes the old stills, and no control engineer has reviewed the loops. The audit grades the drawing against the code; it doesn't judge the control
 strategy.
 
 **Lesson:** a loop table is cheap to read and expensive to guess. Once the drawing came from the table, the drawing,

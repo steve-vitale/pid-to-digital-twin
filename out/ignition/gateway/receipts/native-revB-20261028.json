@@ -1,0 +1,59 @@
+{
+ "what": "Native acceptance of revision B (valves renumbered to their loops, journal entry 51) in the local disposable Ignition gateway",
+ "date_utc": "2026-10-28",
+ "commit": "c15b362",
+ "ignition_version": "8.3.10 (trial, console mode)",
+ "files_sha256": {
+  "out/ignition/gateway/PIDTwin.zip": "ccf0aa3619b4a21e392c2ba226a12bb0d050471664a62a4f94bd135adbd55c57",
+  "out/ignition/gateway/twin_provider.json": "76d56a9a6fb6c42ff891868529fb08d983270a79cc1ccb023be6be27732fa03b",
+  "out/ignition/gateway/build_meta.json": "66a78d5917295fefe20885d3865a2418ea882bac17092af560460887133df002"
+ },
+ "build": "scripts/ignition/build_gateway.py --fresh: 1121 tags imported, 0 failures; read back 0 differences; 24 views",
+ "verifier_controls": "5/5 planted faults caught (V1, V2, V3, V4, V7)",
+ "verifier": "V1-V9 PASS; receipt out/ignition/gateway/receipts/20261028T231401Z.json",
+ "browser_contract": {
+  "direct_load_and_reload": "24/24",
+  "clicks": "284/284",
+  "back_after_click": "284/284",
+  "back_forward_chain": "6/6",
+  "repeated_clicks": "pass",
+  "console_errors": 0
+ },
+ "alarm_count": {
+  "replay_running": {
+   "samples": 4,
+   "matches": 4,
+   "diag_lost": [
+    0
+   ],
+   "process": [
+    0
+   ]
+  },
+  "replay_stopped": {
+   "samples": 8,
+   "matches": 8,
+   "diag_lost": [
+    1
+   ],
+   "process": [
+    0
+   ]
+  },
+  "replay_restarted": {
+   "samples": 12,
+   "matches": 12,
+   "diag_lost": [
+    0
+   ],
+   "process": [
+    0
+   ]
+  }
+ },
+ "screenshots": [
+  "docs/screenshots/native-revB-feed-desktop.png",
+  "docs/screenshots/native-revB-m-narrow.png"
+ ],
+ "not_covered": "The 390 px check uses headless Chromium, not a physical phone. No operator or site review. The fault replay was checked by V8, not watched on screen in this run. PI is not import-tested."
+}

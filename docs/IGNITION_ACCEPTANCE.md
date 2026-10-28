@@ -8,7 +8,9 @@ real gateway, and what that test doesn't cover. The full stories, including the 
 
 ## Result
 
-**Not yet re-run for revision B.** On 2026-10-28 the control valves were renumbered to their loops (FV-201 became FV-102 and so on; [journal entry 51](JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). The rebuilt project passes the offline checks, but the run below used the earlier tag names and does not cover it.
+**Revision B passed on 2026-10-28 in the local disposable Ignition 8.3.10 gateway, on commit `c15b362`.** The control valves were renumbered to their loops that day (FV-201 became FV-102 and so on; [journal entry 51](JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). `build_gateway.py --fresh` imported 1,121 tags with no failures and read back 0 differences; the verifier caught all 5 planted faults and passed V1–V9; the browser contract loaded 24/24 routes directly and on reload and landed 284/284 clicks with 0 console errors; the header's alarm count matched the alarm table in every sample with the replay running (4/4), stopped (8/8, data-source-lost diagnostic active) and restarted (12/12, cleared). Receipt: [`native-revB-20261028.json`](../out/ignition/gateway/receipts/native-revB-20261028.json); screenshots: [feed, desktop](screenshots/native-revB-feed-desktop.png), [overview at 390 px](screenshots/native-revB-m-narrow.png). Not covered: a physical phone, the fault watched on screen (V8 checked it), operator or site review.
+
+The earlier run, on the revision-A tag names:
 
 **Passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway, on commit `4a00c35`.** This build includes the
 topology correction ([journal entry 42](JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source): the
