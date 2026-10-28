@@ -4,8 +4,8 @@
  "chrome": "Application/chrome.exe",
  "summary": {
   "checks": 42,
-  "pass": 38,
-  "info": 4,
+  "pass": 37,
+  "info": 5,
   "fail": 0
  },
  "checks": [
@@ -262,7 +262,7 @@
    "group": "C",
    "id": "labels_off_geometry",
    "status": "pass",
-   "summary": "no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 8.8%); 0 states over the limit",
+   "summary": "no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 9.1%); 0 states over the limit",
    "details": []
   },
   {
@@ -303,8 +303,8 @@
   {
    "group": "E",
    "id": "hygiene",
-   "status": "pass",
-   "summary": "17 files scanned for local paths and 8 deny terms (TOUR_DENY_TERMS): 0 hits",
+   "status": "info",
+   "summary": "17 files scanned for local paths (TOUR_DENY_TERMS not set: deny-term part skipped): 0 hits",
    "details": []
   }
  ],
@@ -339,7 +339,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.013,
+   "max_cover": 0.01,
    "low": [],
    "hscroll": false
   },
@@ -356,7 +356,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.008,
+   "max_cover": 0,
    "low": [],
    "hscroll": false
   },
@@ -390,7 +390,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.088,
+   "max_cover": 0.091,
    "low": [],
    "hscroll": false
   },
@@ -407,7 +407,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.007,
+   "max_cover": 0.008,
    "low": [],
    "hscroll": false
   },
@@ -424,7 +424,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.003,
+   "max_cover": 0,
    "low": [],
    "hscroll": false
   },
@@ -492,7 +492,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.003,
+   "max_cover": 0.007,
    "low": [],
    "hscroll": false
   },
@@ -509,7 +509,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.054,
+   "max_cover": 0.028,
    "low": [],
    "hscroll": false
   },
@@ -560,7 +560,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.006,
+   "max_cover": 0.013,
    "low": [],
    "hscroll": false
   },
@@ -594,7 +594,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.057,
+   "max_cover": 0.056,
    "low": [],
    "hscroll": false
   },
@@ -645,7 +645,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.049,
+   "max_cover": 0.035,
    "low": [],
    "hscroll": false
   },
@@ -696,7 +696,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.082,
+   "max_cover": 0.084,
    "low": [],
    "hscroll": false
   },
@@ -713,7 +713,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.007,
+   "max_cover": 0.008,
    "low": [],
    "hscroll": false
   },
@@ -747,7 +747,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.008,
+   "max_cover": 0.011,
    "low": [],
    "hscroll": false
   },
@@ -798,7 +798,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.012,
+   "max_cover": 0.007,
    "low": [],
    "hscroll": false
   },
@@ -815,7 +815,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.054,
+   "max_cover": 0.056,
    "low": [],
    "hscroll": false
   },
@@ -900,7 +900,7 @@
    "dropped": [],
    "small": [],
    "cover": [],
-   "max_cover": 0.028,
+   "max_cover": 0.029,
    "low": [],
    "hscroll": false
   },

@@ -4,7 +4,7 @@
   "status": "first-pass display layout, built to iterate on; not reviewed by operations",
   "generated_by": "scripts/export_mimic_layout.py (renders scripts/ignition/build_mimic.py offline)",
   "source": "data/te_process_model.json",
-  "source_sha256": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+  "source_sha256": "f8fb1ef85b27fe10b06b0f88582649fb96080ad57eb10aeb300cf9918bdc18ae",
   "inherits": "each reading carries the provenance of its model item; positions are illustrative"
  },
  "units": [
@@ -177,13 +177,13 @@
    }
   },
   {
-   "tag": "TV-211",
+   "tag": "FV-117",
    "drawn_beside": "E-101",
    "label_xy": [
     605,
     565
    ],
-   "reads": "[Twin]TE_Plant/E-101/TV-211/PV",
+   "reads": "[Twin]TE_Plant/E-101/FV-117/PV",
    "owner_in_model": "E-101",
    "provenance": {
     "source_check": "confirmed",
@@ -289,13 +289,13 @@
    }
   },
   {
-   "tag": "HV-205",
+   "tag": "FV-105",
    "drawn_beside": "K-101",
    "label_xy": [
     1210,
     210
    ],
-   "reads": "[Twin]TE_Plant/K-101/HV-205/PV",
+   "reads": "[Twin]TE_Plant/K-101/FV-105/PV",
    "owner_in_model": "K-101",
    "provenance": {
     "source_check": "confirmed",

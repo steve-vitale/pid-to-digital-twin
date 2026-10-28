@@ -5,6 +5,9 @@ The verified model is data/te_process_model.json: tag names and units checked ag
 (scripts/verify_te_source.py), units, streams and tag ownership against its balances (scripts/verify_te_topology.py).
 Matching is by tag only, after upper-casing and dropping separators ("FI 101" = "FI-101"); nothing is matched by
 position, so a misread tag shows up as one missing item plus one extra item, exactly as a reviewer would see it.
+A final element renamed since the drawing was made (its `former_tag`, journal entry 51) also matches under its old
+tag, so a twin extracted from a revision-A sheet is diffed against the same items it was drawn from. Controllers are
+known model items (not extras) but are not diffed here; scripts/te_control_loops.py scores the loops.
 
 Compared, item by item:
   units          found as equipment / found but as a line item (wrong role) / missing; class vs the verified type
@@ -68,6 +71,10 @@ def diff(twin, verified):
                      [(f, "final_element") for f in verified["final_elements"]]
     for it, kind in verified_items:
         cands = ext_inst.get(norm(it["tag"]), [])
+        read_as = None
+        if not cands and it.get("former_tag"):
+            cands = ext_inst.get(norm(it["former_tag"]), [])
+            read_as = it["former_tag"] if cands else None
         if not cands:
             rows.append({"kind": kind, "tag": it["tag"], "status": "missing"})
             corrections.append(f"ADD {it['tag']} ({it['description']}): tag not read on the drawings")
@@ -89,12 +96,15 @@ def diff(twin, verified):
         if len(cands) > 1:
             problems.append(f"read on {len(cands)} symbols")
             corrections.append(f"MERGE {it['tag']}: the tag was read on {len(cands)} instrument symbols")
+        row_notes = [f"read as {read_as}, its revision-A tag"] if read_as else []
         rows.append({"kind": kind, "tag": it["tag"], "status": "ok" if not problems else "found, fields differ",
-                     "problems": problems, "extracted": {"id": e["id"], "tag": e["tag"], "unit": unit_tag,
+                     "problems": problems, **({"notes": row_notes} if row_notes else {}), "extracted": {"id": e["id"], "tag": e["tag"], "unit": unit_tag,
                                                          "kind": ext_kind, "variable": e.get("variable")}})
 
     # extras: tagged extracted items that are not in the verified model
-    known = {norm(u["id"]) for u in verified["units"]} | {norm(i["tag"]) for i, _ in verified_items}
+    known = ({norm(u["id"]) for u in verified["units"]} | {norm(i["tag"]) for i, _ in verified_items}
+             | {norm(i["former_tag"]) for i, _ in verified_items if i.get("former_tag")}
+             | {norm(c["tag"]) for c in verified.get("controllers", [])})
     extras = []
     for x in twin["units"] + twin["instruments"] + twin["line_items"]:
         if x.get("tag") and norm(x["tag"]) not in known:
@@ -166,7 +176,7 @@ def report(d, name, twin_path):
     md += [f"1. {c}" for c in d["corrections"]] or ["(none)"]
     md += ["", "## Item by item", "", "| Kind | Tag | Status | Notes |", "|---|---|---|---|"]
     for r in d["rows"]:
-        notes = "; ".join(r.get("problems", [])) or ("" if r["status"] != "missing" else "not read")
+        notes = "; ".join(r.get("problems", []) + r.get("notes", [])) or ("" if r["status"] != "missing" else "not read")
         if r["kind"] == "unit" and r.get("extracted"):
             notes = f"extracted as {r['extracted']['role']} ({r['extracted']['class']})"
         md.append(f"| {r['kind']} | {r['tag']} | {r['status']} | {notes} |")

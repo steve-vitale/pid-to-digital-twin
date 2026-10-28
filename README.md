@@ -17,8 +17,8 @@ Everything here is built from two datasets (plus five public DEXPI sheets used o
 starts with an assessment before anything is built: where the data came from, what has been checked against an
 independent source, and what is inferred. **Every output inherits its inputs' confidence; nothing downstream upgrades
 it.** The live replay, the mimics, the 3D tours and the LOTO views are **proof-of-concept outputs, built to iterate
-on**, and are labelled that way in their own files. One manifest lists all 39 stages of the pipeline;
-`python scripts/pipeline.py status` shows which outputs are stale after a correction (37 are fresh in this commit;
+on**, and are labelled that way in their own files. One manifest lists all 42 stages of the pipeline;
+`python scripts/pipeline.py status` shows which outputs are stale after a correction (40 are fresh in this commit;
 the other two, the live replay and the native acceptance run, need a running Ignition gateway), and
 `rebuild --from <stage>` carries a correction forward. Per-element confidence: `python scripts/pipeline.py
 confidence`. Stage by stage: [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md).
@@ -133,7 +133,7 @@ flowchart LR
 
 | Platform | What's verified |
 |---|---|
-| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) |
+| Ignition 8.3 | Historical build: 9/9 verifier checks after catching 5/5 planted faults ([IGNITION_BUILD.md](docs/IGNITION_BUILD.md)). Current 24-view project (after the topology correction): native acceptance passed on 2026-10-13 in a disposable Ignition 8.3.10 gateway: verifier checks V1–V8, 24/24 routes, 284/284 navigation targets, 0 false-good placeholders; the data-source-lost diagnostic fires when a source stops and clears on recovery; the header's alarm count matches the alarm table; a 390 px overview at `/m` ([journal entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm), [receipt](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) On 2026-10-28 the control valves were renumbered to their loops (revision B, [journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)); the rebuilt project passes the offline checks but has **not yet been through native acceptance**, so that run applies to the revision-A tag set |
 | AVEVA PI AF | Asset structure generated as a PI Builder sheet following the vendor-published conventions (element templates, documented headers, AF unit abbreviations, custom units defined rather than assumed), checked offline against them by `check_pi_export.py`. **Not imported into a PI System; not import-tested** ([PI_MAPPING.md](docs/PI_MAPPING.md)) |
 | Operations review | Tooling built and tested. **No operations or operator review has been done yet** |
 
@@ -151,9 +151,22 @@ of change. How to capture your own title block and symbol library, and the gover
 
 ![Left: a crop of OPEN100 sheet 6. Right: the same pixel scale on a sheet generated from the Tennessee Eastman model, with ISA tag bubbles, bow-tie control valves with their own tag bubbles, off-page flags and line numbers in the same style](docs/screenshots/te-pid-style-side-by-side.png)
 
-The generated sheets sit inside the OPEN100 range on 32 of 36 style measurements: bubble, valve, flag and equipment
-sizes, line weights, text height and flag counts. The four outside are symbol counts and one ink figure, because the
-model holds no drains, vents or manual valves ([style_fidelity.md](out/te_pid/style_fidelity.md)).
+The revision-A sheets sat inside the OPEN100 range on 32 of 36 style measurements: bubble, valve, flag and equipment
+sizes, line weights, text height and flag counts. The four outside were symbol counts and one ink figure, because the
+model holds no drains, vents or manual valves ([style_fidelity.md](out/te_pid/style_fidelity.md)). That was revision
+A. Revision B adds the control loops (below), and the count drops to **30 of 36**: the sheets now carry more
+instruments per symbol than any OPEN100 sheet, because they have controllers but still none of the block valves,
+bypasses, drains and vents a real P&ID shows around them.
+
+**Control loops.** Revision A drew every transmitter and valve but no controller or signal line, and its valve
+numbers didn't match the loops that move them: a PFD with bubbles on it. The loops are now read out of the
+simulator's closed-loop code (19 running: 11 move a valve, 8 move another loop's setpoint), checked against the
+recorded data (every controlled variable within 0.34 SD of its coded setpoint), drawn as DCS functions with dashed
+signal lines, and scored by `scripts/te_control_loops.py`: **0 of 19 loops on revision A, 19 of 19 on revision B**,
+with every valve carrying its loop's number ([te_loop_audit.md](out/te_loop_audit.md), journal entries
+[50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none) and
+[51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). The audit grades the
+drawing against the code; it is not an engineering review of the control strategy.
 
 ### One plant, end to end (Tennessee Eastman)
 
@@ -170,6 +183,9 @@ flowchart LR
 **This is a round trip.** The sheets and their answer keys come from the same model, so the scores measure how
 faithfully the frozen method (2×2 tiles, prompt v2, code line tracer; nothing re-tuned) reads our own clean drawings.
 They are an upper bound, not real-plant accuracy, and not comparable with the OPEN100 numbers. Gemini was left out.
+The runs below read the **revision-A sheets** (kept in [`data/te_pid/rev-a/`](data/te_pid/rev-a/)), so their tags
+are quoted in revision-A numbering (FV 201 is now FV-102; the full map is
+[`data/te_retag_2026-10-28.json`](data/te_retag_2026-10-28.json)). Revision B has not been read back yet.
 
 | Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
 |---|---|---|
@@ -578,8 +594,9 @@ it at a real site.
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet (schema v2); not imported into a PI System, by decision (below) | Scoped: checked offline against the vendor-published conventions (`check_pi_export.py`), not import-tested |
 | Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
-| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 39 stages, 37 fresh; the live replay and the native acceptance run need a gateway ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
-| One plant end to end: TE P&ID generated in the OPEN100 style and read back | Done: a round trip on our own drawings, so an upper bound (clean sheets 2.1 and 2.2 per 100, every tag read), not real-plant accuracy ([journal entry 44](docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back)) |
+| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 42 stages, 40 fresh; the live replay and the native acceptance run need a gateway ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
+| One plant end to end: TE P&ID generated in the OPEN100 style and read back | Done: a round trip on our own drawings, so an upper bound (clean sheets 2.1 and 2.2 per 100, every tag read), not real-plant accuracy ([journal entry 44](docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back)); measured on revision A |
+| Control loops on the generated P&ID, from the simulator's closed-loop code | Done: 19 of 19 loops drawn and numbered (revision A: 0 of 19); data-checked against the recorded run; revision B not yet read back by the models, not yet through native gateway acceptance ([journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)) |
 | OPEN100 from drawings alone: flow direction, stitched plant, mimic, 3D tour, LOTO view | Done as a proof of concept, structure only: 361 of 1,133 process links directed, 12 sheets stitched, every value "not connected" ([OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md)) |
 | 3D orientation tour (TE) | Proof of concept: no render check fails on twelve stills (15 pass, 2 informational), five committed; no video, no operator review ([drafts/3d-tour](drafts/3d-tour/README.md)) |
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |

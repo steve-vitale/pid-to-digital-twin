@@ -2036,14 +2036,14 @@
        ]
       },
       {
-       "name": "FV-201",
+       "name": "FV-102",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "D feed flow valve | XMV 1 | range 0.0-100.0 % (physical: a percentage) | normal band 59.2508-66.8527 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-201"
+         "value": "FV-102"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -2065,14 +2065,14 @@
        ]
       },
       {
-       "name": "FV-202",
+       "name": "FV-103",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "E feed flow valve | XMV 2 | range 0.0-100.0 % (physical: a percentage) | normal band 51.418-56.5151 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-202"
+         "value": "FV-103"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -2094,14 +2094,14 @@
        ]
       },
       {
-       "name": "FV-203",
+       "name": "FV-101",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "A feed flow valve | XMV 3 | range 0.0-100.0 % (physical: a percentage) | normal band 8.6442-40.739 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-203"
+         "value": "FV-101"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -2474,14 +2474,14 @@
        ]
       },
       {
-       "name": "TV-210",
+       "name": "TV-121",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Reactor cooling water flow valve | XMV 10 | range 0.0-100.0 % (physical: a percentage) | normal band 37.8136-44.3928 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "TV-210"
+         "value": "TV-121"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -2560,14 +2560,14 @@
        ]
       },
       {
-       "name": "TV-211",
+       "name": "FV-117",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Condenser cooling water flow valve | XMV 11 | range 0.0-100.0 % (physical: a percentage) | normal band 9.5668-26.8966 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "TV-211"
+         "value": "FV-117"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -2973,14 +2973,14 @@
        ]
       },
       {
-       "name": "FV-206",
+       "name": "FV-110",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Purge valve | XMV 6 | range 0.0-100.0 % (physical: a percentage) | normal band 31.6247-48.4563 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-206"
+         "value": "FV-110"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3002,14 +3002,14 @@
        ]
       },
       {
-       "name": "LV-207",
+       "name": "LV-112",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Separator pot liquid flow valve | XMV 7 | range 0.0-100.0 % (physical: a percentage) | normal band 19.0421-56.8455 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "LV-207"
+         "value": "LV-112"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3096,14 +3096,14 @@
        ]
       },
       {
-       "name": "HV-205",
+       "name": "FV-105",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Compressor recycle valve | XMV 5 | range 0.0-100.0 % (physical: a percentage) | normal band 19.5852-24.8095 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "HV-205"
+         "value": "FV-105"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3451,14 +3451,14 @@
        ]
       },
       {
-       "name": "FV-204",
+       "name": "FV-104",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "A and C feed flow valve | XMV 4 | range 0.0-100.0 % (physical: a percentage) | normal band 54.106-68.5662 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-204"
+         "value": "FV-104"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3480,14 +3480,14 @@
        ]
       },
       {
-       "name": "LV-208",
+       "name": "LV-115",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Stripper liquid product flow valve | XMV 8 | range 0.0-100.0 % (physical: a percentage) | normal band 32.1597-60.7304 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "LV-208"
+         "value": "LV-115"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3509,14 +3509,14 @@
        ]
       },
       {
-       "name": "FV-209",
+       "name": "FV-119",
        "tagType": "UdtInstance",
        "typeId": "TE_FinalElement",
        "documentation": "Stripper steam valve | XMV 9 | range 0.0-100.0 % (physical: a percentage) | normal band 38.088-58.9721 (learned, not a site limit)",
        "parameters": {
         "Tag": {
          "dataType": "String",
-         "value": "FV-209"
+         "value": "FV-119"
         },
         "NormalLo": {
          "dataType": "Float",
@@ -3550,7 +3550,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed TE values are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-103/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-101/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-104/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-105/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-112/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-119/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-121/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/FV-117/OutOfNormal})"
       },
       {
        "name": "AlarmsActive",
@@ -3568,7 +3568,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in U-100 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-201/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-202/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-203/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/U-100/FI-101/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FI-103/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-102/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-103/OutOfNormal}) + toInt({[Twin]TE_Plant/U-100/FV-101/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_R-101",
@@ -3576,7 +3576,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in R-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-210/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/R-101/FI-106/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/PI-107/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/LI-108/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-109/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TI-121/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-B/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-C/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-D/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-E/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/AI-123-F/OutOfNormal}) + toInt({[Twin]TE_Plant/R-101/TV-121/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_E-101",
@@ -3584,7 +3584,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in E-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/TV-211/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/E-101/TI-122/OutOfNormal}) + toInt({[Twin]TE_Plant/E-101/FV-117/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_V-101",
@@ -3592,7 +3592,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in V-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-206/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-207/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/V-101/FI-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/TI-111/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LI-112/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/PI-113/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FI-114/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-B/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-C/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-D/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-E/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-F/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-G/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/AI-129-H/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/FV-110/OutOfNormal}) + toInt({[Twin]TE_Plant/V-101/LV-112/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_K-101",
@@ -3600,7 +3600,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in K-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/HV-205/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/K-101/FI-105/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/JI-120/OutOfNormal}) + toInt({[Twin]TE_Plant/K-101/FV-105/OutOfNormal})"
       },
       {
        "name": "OutOfNormal_C-101",
@@ -3608,7 +3608,7 @@
        "valueSource": "expr",
        "dataType": "Int4",
        "documentation": "How many fed values in C-101 are outside their normal band",
-       "expression": "toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-204/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-208/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-209/OutOfNormal})"
+       "expression": "toInt({[Twin]TE_Plant/C-101/FI-104/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LI-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/PI-116/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-117/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/TI-118/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FI-119/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-E/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-F/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-G/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/AI-137-H/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-104/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/LV-115/OutOfNormal}) + toInt({[Twin]TE_Plant/C-101/FV-119/OutOfNormal})"
       },
       {
        "name": "ReplayValuesNotGood",
@@ -3618,7 +3618,7 @@
        "executionMode": "FixedRate",
        "executionRate": 1000,
        "documentation": "How many of 52 Tennessee Eastman replay values without Good quality (OPC connection TE-Sim). Diagnostic, not a process value.",
-       "expression": "toInt(!isGood({[Twin]TE_Plant/U-100/FI-101/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-102/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-103/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-201/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-202/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-203/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/FI-106/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/PI-107/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/LI-108/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-109/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-121/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-B/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-C/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-D/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-E/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-F/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TV-210/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/TI-122/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/TV-211/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FI-110/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/TI-111/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LI-112/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/PI-113/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FI-114/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-B/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-C/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-D/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-E/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-F/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-G/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-H/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FV-206/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LV-207/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FI-105/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/JI-120/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/HV-205/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-104/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LI-115/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/PI-116/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-117/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/TI-118/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-119/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-E/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-F/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-G/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-H/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-204/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LV-208/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-209/PV}))",
+       "expression": "toInt(!isGood({[Twin]TE_Plant/U-100/FI-101/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-102/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FI-103/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-102/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-103/PV})) + toInt(!isGood({[Twin]TE_Plant/U-100/FV-101/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/FI-106/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/PI-107/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/LI-108/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-109/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TI-121/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-B/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-C/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-D/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-E/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/AI-123-F/PV})) + toInt(!isGood({[Twin]TE_Plant/R-101/TV-121/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/TI-122/PV})) + toInt(!isGood({[Twin]TE_Plant/E-101/FV-117/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FI-110/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/TI-111/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LI-112/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/PI-113/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FI-114/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-B/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-C/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-D/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-E/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-F/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-G/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/AI-129-H/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/FV-110/PV})) + toInt(!isGood({[Twin]TE_Plant/V-101/LV-112/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FI-105/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/JI-120/PV})) + toInt(!isGood({[Twin]TE_Plant/K-101/FV-105/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-104/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LI-115/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/PI-116/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-117/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/TI-118/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FI-119/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-E/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-F/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-G/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/AI-137-H/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-104/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/LV-115/PV})) + toInt(!isGood({[Twin]TE_Plant/C-101/FV-119/PV}))",
        "alarms": [
         {
          "name": "DataSourceLost",

@@ -377,7 +377,7 @@ def main():
           {p['service'] for p in scene['pipes']} <= set(b3.SERVICE_LEVEL) and
           {round(max(c[2] for c in p['corners']), 3) for p in scene['pipes']} <= set(b3.RACK_LEVELS.values()))
     check('utility stubs come only from final elements that name the utility, labelled inferred',
-          sorted({u['tag'] for u in scene['utilities']}) == ['FV-209', 'TV-210', 'TV-211'] and
+          sorted({u['tag'] for u in scene['utilities']}) == ['FV-117', 'FV-119', 'TV-121'] and
           all(u['basis'].startswith('inferred') for u in scene['utilities']))
     check('every stop names 2-4 key tags, all connected and banded',
           all(1 <= len(e['key_tags']) <= 4 and all(marker[t]['connected'] and t in bands for t in e['key_tags'])
@@ -444,8 +444,8 @@ def main():
     check('SRT cues never overlap, and the first one says the voice is synthetic',
           all(b[0] >= a[1] - 1e-6 for a, b in zip(spans, spans[1:])) and 'synthetic voice' in cues[0])
     check('spoken text spells out units and tag dashes',
-          ot.spoken('PI-107 is 2897 kPa g at +294 min, TV-210 37.7%') ==
-          'P I 107 is 2897 kilopascals gauge at plus 294 min, T V 210 37.7 percent')
+          ot.spoken('PI-107 is 2897 kPa g at +294 min, TV-121 37.7%') ==
+          'P I 107 is 2897 kilopascals gauge at plus 294 min, T V 121 37.7 percent')
     prof = ot.fault_profile(['PI-107', 'FI-101'], {'rows': [[2700.0, 0.25], [2700.0, 0.0], [2900.0, 0.0]],
                                                    'columns': {'PI-107': 0, 'FI-101': 1}}, bands, alarms, 0, 2)
     check('fault profile: first band exit and minutes come from the replay rows',

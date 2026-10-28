@@ -79,7 +79,7 @@ class CommittedModelMatchesSource(unittest.TestCase):
         result = run()
         self.assertEqual(vt.totals(result), {"confirmed": 51, "corrected": 4, "unresolvable": 1})
         r = rows(result)
-        for ident in ("S9", "FI-110", "FV-206", "AI-129"):
+        for ident in ("S9", "FI-110", "FV-110", "AI-129"):
             self.assertEqual(r[ident][0], "corrected", ident)
             self.assertIsNone(r[ident][1], ident + " still needs a fix: rerun verify_te_topology.py --write")
         self.assertEqual(r["PI-116"][0], "unresolvable")
@@ -133,8 +133,8 @@ class CatchesWrongModels(unittest.TestCase):
         self.assertEqual(r["PI-107"][:2], ("corrected", {"unit": "R-101"}))
 
     def test_valve_on_wrong_unit(self):
-        r = rows(run(edit(MODEL, "final_elements", "TV-210", unit="C-101")))
-        self.assertEqual(r["TV-210"][:2], ("corrected", {"unit": "R-101"}))
+        r = rows(run(edit(MODEL, "final_elements", "TV-121", unit="C-101")))
+        self.assertEqual(r["TV-121"][:2], ("corrected", {"unit": "R-101"}))
 
     def test_wrong_stream_on_instrument(self):
         r = rows(run(edit(MODEL, "instruments", "FI-114", stream="S11")))

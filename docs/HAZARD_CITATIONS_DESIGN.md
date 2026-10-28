@@ -76,7 +76,7 @@ overpressure are real ways reactors hurt people. It does not say that the TE rea
 | | Source | In this prototype |
 |---|---|---|
 | **Shutdown limits** | Data: a unit carrying a published Critical (shutdown) limit, where the simulator trips the plant | R-101 (PI-107 > 3000 kPa g, TI-109 > 175 degC, from `build_meta.json`) |
-| **First warning** | Data: the unit whose tag leaves its normal band first in the recorded fault | U-100 (FI-101 and FV-203 at the fault-6 start) |
+| **First warning** | Data: the unit whose tag leaves its normal band first in the recorded fault | U-100 (FI-101 and FV-101 at the fault-6 start) |
 | **Why this matters** | Prototype citation file: public incidents matched to the equipment kind | One citation per stop, in the caption and narration |
 
 The public catalogue never makes a unit "highest risk" by itself. At a real plant, risk ranking comes from the

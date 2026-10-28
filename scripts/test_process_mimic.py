@@ -84,9 +84,9 @@ class MimicTests(unittest.TestCase):
                         self.assertIn('UNKNOWN', svg)
                     if good and value in [-4, 130]: self.assertIn('off scale', svg)
     def test_hidden_tags(self):
-        v = m.mimic('Twin', MODEL, {'LI-108', 'TV-211', 'SC-212'})
+        v = m.mimic('Twin', MODEL, {'LI-108', 'FV-117', 'SC-212'})
         bindings = json.dumps([c.get('propConfig', {}) for c in v['root']['children']])
-        for tag in ['LI-108', 'TV-211', 'SC-212']: self.assertNotIn('/' + tag + '/', bindings)
+        for tag in ['LI-108', 'FV-117', 'SC-212']: self.assertNotIn('/' + tag + '/', bindings)
     def test_summary_quality_and_independent_bindings(self):
         for name in ['AlarmSummary', 'BandSummary']:
             c = next(c for c in self.v['root']['children'] if c['meta']['name'] == name)

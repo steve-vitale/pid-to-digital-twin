@@ -22,11 +22,11 @@ the source model has no utility stream endpoints, so no utility piping or direct
 ## Deliberate Overview selection
 
 - Feed: FI-101/102/103 show all three feeds actually owned by U-100. FI-104 belongs to C-101/S4 and stays there.
-- Reactor: PI-107/TI-109 show constrained condition, LI-108 inventory, FI-106 throughput. TI-121/TV-210 cooling context is on detail. SC-212 is explicitly unavailable on detail.
-- Condenser: only TI-122 (cooling-water outlet) and TV-211 are mapped, the two tags the source assigns to it. No process pressure,
+- Reactor: PI-107/TI-109 show constrained condition, LI-108 inventory, FI-106 throughput. TI-121/TV-121 cooling context is on detail. SC-212 is explicitly unavailable on detail.
+- Condenser: only TI-122 (cooling-water outlet) and FV-117 are mapped, the two tags the source assigns to it. No process pressure,
   temperature or level is substituted for the missing condenser instrumentation.
-- Separator: PI-113/TI-111 condition, LI-112 inventory, FI-114 throughput, FI-110 purge; LV-207, FV-206 and the purge analyzer are on detail.
-- Compressor: FI-105 recycle, JI-120 work and HV-205 recorded output give recycle context.
+- Separator: PI-113/TI-111 condition, LI-112 inventory, FI-114 throughput, FI-110 purge; LV-112, FV-110 and the purge analyzer are on detail.
+- Compressor: FI-105 recycle, JI-120 work and FV-105 recorded output give recycle context.
 - Stripper: PI-116/TI-118 condition, LI-115 inventory, FI-117 product; FI-104 feed and FI-119 steam input are on detail.
 
 These are reviewable display choices, not validated operating envelopes or new safety limits. Detail screens

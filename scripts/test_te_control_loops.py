@@ -41,17 +41,28 @@ class TableFromSource(unittest.TestCase):
     def test_pairings_come_from_code_not_comments(self):
         # temain_mod.f labels CONTRL6 and CONTRL10 "Stripper Level Controller"; the code says otherwise.
         self.assertEqual((self.loops["C6"]["measurement"]["tag"], self.loops["C6"]["output"]["tag"]),
-                         ("FI-110", "FV-206"))
+                         ("FI-110", "FV-110"))
         self.assertEqual((self.loops["C10"]["measurement"]["tag"], self.loops["C10"]["output"]["tag"]),
-                         ("TI-121", "TV-210"))
+                         ("TI-121", "TV-121"))
         self.assertEqual((self.loops["C11"]["measurement"]["tag"], self.loops["C11"]["output"]["tag"]),
-                         ("FI-117", "TV-211"))
+                         ("FI-117", "FV-117"))
 
     def test_cascades_name_their_inner_loop(self):
         inner = {i: lp["output"]["inner_loop"] for i, lp in self.loops.items() if lp["output"]["kind"] == "setpoint"}
         self.assertEqual(inner, {"C13": "C3", "C14": "C1", "C15": "C2", "C16": "C9", "C17": "C4",
                                  "C18": "C10", "C19": "C6", "C20": "C16"})
         self.assertEqual(self.loops["C14"]["measurement"]["component"], "D")
+
+    def test_controller_tags(self):
+        tags = {i: lp["controller_tag"] for i, lp in self.loops.items() if lp["runs"]}
+        self.assertEqual(tags["C1"], "FIC-102")
+        self.assertEqual([tags[i] for i in ("C13", "C14", "C15")], ["AIC-123A", "AIC-123D", "AIC-123E"])
+        self.assertEqual(tags["C19"], "AIC-129")  # one controller on that analyzer: no suffix
+        self.assertEqual(self.loops["C18"]["output"]["tag"], "TIC-121")
+
+    def test_model_carries_the_same_controllers(self):
+        model = json.loads(tcl.MODEL.read_text(encoding="utf-8"))
+        self.assertEqual(model["controllers"], tcl.model_controllers(self.table, tcl.data_check(self.table)))
 
     def test_scan_periods(self):
         self.assertEqual(self.loops["C1"]["scan_s"], 3)
@@ -149,17 +160,29 @@ class AuditControls(unittest.TestCase):
         self.assertTrue(self.score(symbols=symbols)["C1"]["measured"])
 
 
-class GeneratedSheetsBaseline(unittest.TestCase):
-    def test_current_sheets_draw_no_loops(self):
-        # Pins the starting point. When the generator draws controllers and signals, update this to the new score.
+    def test_cross_sheet_loop_needs_both_flags(self):
+        # C1's valve on another sheet: controller -> outbound flag here, inbound flag -> valve there.
+        here = {"m": sym("FI 102"), "c": sym("FIC 102"),
+                "fo": dict(sym("SIG / TO FV 102", "inlet/outlet"), signal_to="FV-102")}
+        there = {"fi": dict(sym("SIG / FROM FIC 102", "inlet/outlet"), signal_from="FIC-102"),
+                 "v": sym("FV 102", "valve")}
+        table = {"loops": [self.table["loops"][0]]}
+        both = {"sheets": {"1": {"drawing": "A", "symbols": here, "signal_edges": [["m", "c"], ["c", "fo"]]},
+                           "2": {"drawing": "B", "symbols": there, "signal_edges": [["fi", "v"]]}}}
+        self.assertTrue(tcl.audit(table, both)["rows"][0]["checks"]["signal"])
+        both["sheets"]["2"]["signal_edges"] = []
+        self.assertFalse(tcl.audit(table, both)["rows"][0]["checks"]["signal"])
+
+
+class GeneratedSheets(unittest.TestCase):
+    def test_revision_b_draws_every_loop(self):
         result = tcl.audit(tcl.build(), json.loads(tcl.KEY.read_text(encoding="utf-8")))
         self.assertEqual((result["correct"], result["by_check"]),
-                         (0, {"measured": 19, "controller": 0, "signal": 0, "numbering": 0}))
+                         (19, {"measured": 19, "controller": 19, "signal": 19, "numbering": 19}))
 
-    def test_naming_findings(self):
-        findings = tcl.naming_findings(tcl.build())
-        self.assertEqual(sum("different loop numbers" in f for f in findings), 11)
-        self.assertEqual(sorted(f.split("'")[0] for f in findings if "first letter" in f), ["HV-205", "TV-211"])
+    def test_tags_follow_their_loops(self):
+        # Revision A had 11 valves with another loop's number and two with the wrong letter (journal entry 50).
+        self.assertEqual(tcl.naming_findings(tcl.build()), [])
 
 
 if __name__ == "__main__":

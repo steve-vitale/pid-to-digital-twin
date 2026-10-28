@@ -4,7 +4,7 @@
     "title": "Tennessee Eastman Challenge Process",
     "source_document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
     "extraction_method": "hand-built seed model (Phase 0). Serves as the answer-key draft for scoring AI extraction in Phase 2",
-    "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv.",
+    "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv. Measurements are numbered 101-137 in XMEAS order; each control valve carries the loop number of the measurement its controller reads (data/te_control_loops.json), with its pre-2026-10-28 tag kept as former_tag. Controllers are listed under controllers.",
     "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TI-122 description). Report: out/te_source_check.md. Units, streams, directions and tag ownership are checked separately; see topology_verification_note.",
     "created": "2026-10-06",
     "topology_verification_note": "Units, streams, flow directions and tag ownership were checked 2026-10-13 against the simulator source (teprob.f, cross-checked with the revised TE code) by scripts/verify_te_topology.py: 51 confirmed, 4 corrected, 1 unresolvable. Report: out/te_topology_check.md. Physical tap positions, sizes and pipe routes are not in the source and remain unverified."
@@ -984,7 +984,7 @@
   ],
   "final_elements": [
     {
-      "tag": "FV-201",
+      "tag": "FV-102",
       "xmv": 1,
       "unit": "U-100",
       "stream": "S2",
@@ -1004,10 +1004,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(1) sets FTM(1); stream 2: BL -> U-100; documented as teprob.f 'D Feed Flow'"
-      }
+      },
+      "former_tag": "FV-201"
     },
     {
-      "tag": "FV-202",
+      "tag": "FV-103",
       "xmv": 2,
       "unit": "U-100",
       "stream": "S3",
@@ -1027,10 +1028,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(2) sets FTM(2); stream 3: BL -> U-100; documented as teprob.f 'E Feed Flow'"
-      }
+      },
+      "former_tag": "FV-202"
     },
     {
-      "tag": "FV-203",
+      "tag": "FV-101",
       "xmv": 3,
       "unit": "U-100",
       "stream": "S1",
@@ -1050,10 +1052,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(3) sets FTM(3); stream 1: BL -> U-100; documented as teprob.f 'A Feed Flow'"
-      }
+      },
+      "former_tag": "FV-203"
     },
     {
-      "tag": "FV-204",
+      "tag": "FV-104",
       "xmv": 4,
       "unit": "C-101",
       "stream": "S4",
@@ -1073,10 +1076,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(4) sets FTM(4); stream 4: BL -> C-101; documented as teprob.f 'A and C Feed Flow'"
-      }
+      },
+      "former_tag": "FV-204"
     },
     {
-      "tag": "HV-205",
+      "tag": "FV-105",
       "xmv": 5,
       "unit": "K-101",
       "uom": "%",
@@ -1098,10 +1102,11 @@
         "caveats": [
           "the spill-back path around the compressor is not a stream in the model; the source computes it only as a reduction of the net compressor flow"
         ]
-      }
+      },
+      "former_tag": "HV-205"
     },
     {
-      "tag": "FV-206",
+      "tag": "FV-110",
       "xmv": 6,
       "unit": "V-101",
       "stream": "S9",
@@ -1124,10 +1129,11 @@
         "previous": {
           "unit": "K-101"
         }
-      }
+      },
+      "former_tag": "FV-206"
     },
     {
-      "tag": "LV-207",
+      "tag": "LV-112",
       "xmv": 7,
       "unit": "V-101",
       "stream": "S10",
@@ -1147,10 +1153,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(7) sets FTM(11); stream 10: V-101 -> C-101; documented as teprob.f 'Separator Pot Liquid Flow'"
-      }
+      },
+      "former_tag": "LV-207"
     },
     {
-      "tag": "LV-208",
+      "tag": "LV-115",
       "xmv": 8,
       "unit": "C-101",
       "stream": "S11",
@@ -1170,10 +1177,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(8) sets FTM(13); stream 11: C-101 -> BL; documented as teprob.f 'Stripper Liquid Product Flow'"
-      }
+      },
+      "former_tag": "LV-208"
     },
     {
-      "tag": "FV-209",
+      "tag": "FV-119",
       "xmv": 9,
       "unit": "C-101",
       "uom": "%",
@@ -1192,10 +1200,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(9) -> UAC; QUC enters the stripper energy balance; documented as teprob.f 'Stripper Steam Valve'"
-      }
+      },
+      "former_tag": "FV-209"
     },
     {
-      "tag": "TV-210",
+      "tag": "TV-121",
       "xmv": 10,
       "unit": "R-101",
       "uom": "%",
@@ -1214,10 +1223,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(10) -> FWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Flow'"
-      }
+      },
+      "former_tag": "TV-210"
     },
     {
-      "tag": "TV-211",
+      "tag": "FV-117",
       "xmv": 11,
       "unit": "E-101",
       "uom": "%",
@@ -1236,7 +1246,8 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(11) -> FWS; QUS cools the reactor effluent FTM(8) (the condenser position); QUS is booked into the separator energy balance; documented as teprob.f 'Condenser Cooling Water Flow'"
-      }
+      },
+      "former_tag": "TV-211"
     },
     {
       "tag": "SC-212",
@@ -1258,6 +1269,412 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "VPOS(12) -> AGSP; QUR enters the reactor energy balance; documented as teprob.f 'Agitator Speed'"
+      }
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "FIC-102",
+      "loop": "C1",
+      "unit": "U-100",
+      "measurement": "FI-102",
+      "output": {
+        "final_element": "FV-102"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "D feed flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL1: error line 501 reads XMEAS(2) against SETPT(1); update line 509 moves XMV(1); recorded mean 3662 vs setpoint 3664 (0.07 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-103",
+      "loop": "C2",
+      "unit": "U-100",
+      "measurement": "FI-103",
+      "output": {
+        "final_element": "FV-103"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "E feed flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL2: error line 542 reads XMEAS(3) against SETPT(2); update line 550 moves XMV(2); recorded mean 4511 vs setpoint 4509.3 (0.04 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-101",
+      "loop": "C3",
+      "unit": "U-100",
+      "measurement": "FI-101",
+      "output": {
+        "final_element": "FV-101"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "A feed flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL3: error line 583 reads XMEAS(1) against SETPT(3); update line 591 moves XMV(3); recorded mean 0.2502 vs setpoint 0.25052 (0.01 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-104",
+      "loop": "C4",
+      "unit": "C-101",
+      "measurement": "FI-104",
+      "output": {
+        "final_element": "FV-104"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "A and C feed flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL4: error line 624 reads XMEAS(4) against SETPT(4); update line 632 moves XMV(4); recorded mean 9.344 vs setpoint 9.3477 (0.04 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-105",
+      "loop": "C5",
+      "unit": "K-101",
+      "measurement": "FI-105",
+      "output": {
+        "final_element": "FV-105"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Recycle flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL5: error line 665 reads XMEAS(5) against SETPT(5); update line 678 moves XMV(5); recorded mean 26.9 vs setpoint 26.902 (0.00 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-110",
+      "loop": "C6",
+      "unit": "V-101",
+      "measurement": "FI-110",
+      "output": {
+        "final_element": "FV-110"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "Purge rate controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL6: error line 735 reads XMEAS(10) against SETPT(6); update line 747 moves XMV(6); recorded mean 0.3369 vs setpoint 0.33712 (0.02 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "LIC-112",
+      "loop": "C7",
+      "unit": "V-101",
+      "measurement": "LI-112",
+      "output": {
+        "final_element": "LV-112"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "Separator level controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL7: error line 784 reads XMEAS(12) against SETPT(7); update line 792 moves XMV(7); recorded mean 49.93 vs setpoint 50 (0.07 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "LIC-115",
+      "loop": "C8",
+      "unit": "C-101",
+      "measurement": "LI-115",
+      "output": {
+        "final_element": "LV-115"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "Stripper level controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL8: error line 825 reads XMEAS(15) against SETPT(8); update line 833 moves XMV(8); recorded mean 49.96 vs setpoint 50 (0.04 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-119",
+      "loop": "C9",
+      "unit": "C-101",
+      "measurement": "FI-119",
+      "output": {
+        "final_element": "FV-119"
+      },
+      "mode": "P",
+      "scan_s": 3,
+      "description": "Stripper steam flow controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL9: error line 866 reads XMEAS(19) against SETPT(9); update line 874 moves XMV(9); recorded mean 234 vs setpoint 230.31 (0.34 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "TIC-121",
+      "loop": "C10",
+      "unit": "R-101",
+      "measurement": "TI-121",
+      "output": {
+        "final_element": "TV-121"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Reactor cooling water outlet temperature controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL10: error line 907 reads XMEAS(21) against SETPT(10); update line 915 moves XMV(10); recorded mean 94.61 vs setpoint 94.599 (0.05 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "FIC-117",
+      "loop": "C11",
+      "unit": "C-101",
+      "measurement": "FI-117",
+      "output": {
+        "final_element": "FV-117"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Stripper underflow (product) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL11: error line 948 reads XMEAS(17) against SETPT(11); update line 956 moves XMV(11); recorded mean 22.91 vs setpoint 22.949 (0.07 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "AIC-123A",
+      "loop": "C13",
+      "unit": "R-101",
+      "measurement": "AI-123",
+      "component": "A",
+      "output": {
+        "setpoint_of": "FIC-101"
+      },
+      "mode": "PI",
+      "scan_s": 360,
+      "description": "Reactor feed analyzer (components A-F) (A) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL13: error line 989 reads XMEAS(23) against SETPT(13); update line 997 moves SETPT(3); recorded mean 32.19 vs setpoint 32.188 (0.00 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "AIC-123D",
+      "loop": "C14",
+      "unit": "R-101",
+      "measurement": "AI-123",
+      "component": "D",
+      "output": {
+        "setpoint_of": "FIC-102"
+      },
+      "mode": "PI",
+      "scan_s": 360,
+      "description": "Reactor feed analyzer (components A-F) (D) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL14: error line 1030 reads XMEAS(26) against SETPT(14); update line 1038 moves SETPT(1); recorded mean 6.883 vs setpoint 6.882 (0.01 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "AIC-123E",
+      "loop": "C15",
+      "unit": "R-101",
+      "measurement": "AI-123",
+      "component": "E",
+      "output": {
+        "setpoint_of": "FIC-103"
+      },
+      "mode": "PI",
+      "scan_s": 360,
+      "description": "Reactor feed analyzer (components A-F) (E) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL15: error line 1071 reads XMEAS(27) against SETPT(15); update line 1079 moves SETPT(2); recorded mean 18.77 vs setpoint 18.776 (0.02 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "TIC-118",
+      "loop": "C16",
+      "unit": "C-101",
+      "measurement": "TI-118",
+      "output": {
+        "setpoint_of": "FIC-119"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Stripper temperature controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL16: error line 1112 reads XMEAS(18) against SETPT(16); update line 1120 moves SETPT(9); recorded mean 65.85 vs setpoint 65.731 (0.26 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "LIC-108",
+      "loop": "C17",
+      "unit": "R-101",
+      "measurement": "LI-108",
+      "output": {
+        "setpoint_of": "FIC-104"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Reactor level controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL17: error line 1153 reads XMEAS(8) against SETPT(17); update line 1161 moves SETPT(4); recorded mean 75.02 vs setpoint 75 (0.04 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "TIC-109",
+      "loop": "C18",
+      "unit": "R-101",
+      "measurement": "TI-109",
+      "output": {
+        "setpoint_of": "TIC-121"
+      },
+      "mode": "PI",
+      "scan_s": 3,
+      "description": "Reactor temperature controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL18: error line 1194 reads XMEAS(9) against SETPT(18); update line 1202 moves SETPT(10); recorded mean 120.4 vs setpoint 120.4 (0.01 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "AIC-129",
+      "loop": "C19",
+      "unit": "V-101",
+      "measurement": "AI-129",
+      "component": "B",
+      "output": {
+        "setpoint_of": "FIC-110"
+      },
+      "mode": "PI",
+      "scan_s": 360,
+      "description": "Purge gas analyzer (components A-H) (B) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL19: error line 1235 reads XMEAS(30) against SETPT(19); update line 1244 moves SETPT(6); recorded mean 13.82 vs setpoint 13.823 (0.02 SD)",
+        "checked_by": "scripts/te_control_loops.py"
+      }
+    },
+    {
+      "tag": "AIC-137",
+      "loop": "C20",
+      "unit": "C-101",
+      "measurement": "AI-137",
+      "component": "E",
+      "output": {
+        "setpoint_of": "TIC-118"
+      },
+      "mode": "PI",
+      "scan_s": 900,
+      "description": "Product analyzer (components D-H) (E) controller",
+      "verification": {
+        "status": "confirmed",
+        "checked_against": [
+          "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+          "d00_te.dat (recorded normal run)"
+        ],
+        "evidence": "CONTRL20: error line 1278 reads XMEAS(38) against SETPT(20); update line 1286 moves SETPT(16); recorded mean 0.8355 vs setpoint 0.8357 (0.01 SD)",
+        "checked_by": "scripts/te_control_loops.py"
       }
     }
   ]

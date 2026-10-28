@@ -1,11 +1,11 @@
 {
-  "about": "Drafting layout for scripts/draw_pid_from_model.py: WHERE things go on the Tennessee Eastman P&ID sheets, never WHAT is on them. Content (units, streams, tags, which unit owns each item, which stream an item sits on) comes from data/te_process_model.json. The generator refuses a layout that leaves a model item undrawn, draws one twice, or names a tag the model does not have. Utility lines (cooling water, steam) and the compressor recycle bypass are drafting additions: the model holds their valves and instruments but not the lines, so they are marked drafting_addition in the answer key. Pixel coordinates on a 3200 x 2130 sheet (the size of OPEN100 sheets 5-9).",
+  "about": "Drafting layout for scripts/draw_pid_from_model.py: WHERE things go on the Tennessee Eastman P&ID sheets, never WHAT is on them. Content (units, streams, tags, which unit owns each item, which stream an item sits on) comes from data/te_process_model.json. The generator refuses a layout that leaves a model item undrawn, draws one twice, or names a tag the model does not have. Utility lines (cooling water, steam) and the compressor recycle bypass are drafting additions: the model holds their valves and instruments but not the lines, so they are marked drafting_addition in the answer key. Pixel coordinates on a 3200 x 2130 sheet (the size of OPEN100 sheets 5-9). Controllers, signal continuation flags and signal routes (corner points only; the ends snap to the symbols) are drafting choices too: which loops exist and what they connect come from the model's controllers.",
   "sheet_px": [3200, 2130],
   "title_block": {
     "project": "TENNESSEE EASTMAN CHALLENGE PROCESS",
     "drawn_by": "draw_pid_from_model.py",
-    "date": "10/13/2026",
-    "revision": "A",
+    "date": "10/28/2026",
+    "revision": "B",
     "scale": "NONE",
     "notes": ["GENERATED FROM THE VERIFIED PROCESS MODEL", "NOT A DRAWING OF RECORD", "VERIFY AGAINST THE FIELD UNDER", "MOC BEFORE ANY ENGINEERING USE"]
   },
@@ -27,6 +27,28 @@
         "F-CWS-R": {"utility": ["CW PID 901-1", "COOLING WATER SUPPLY"], "at": [1100, 1700], "dir": "right"},
         "F-CWR-R": {"utility": ["CW PID 901-1", "COOLING WATER RETURN"], "at": [2420, 1700], "dir": "right"}
       },
+      "controllers": {"FIC-101": [915, 170], "FIC-102": [915, 410], "FIC-103": [915, 610], "AIC-123A": [1250, 170], "AIC-123D": [1250, 410], "AIC-123E": [1250, 610], "LIC-108": [2300, 1030], "TIC-109": [2300, 1140], "TIC-121": [2300, 1220]},
+      "signal_flags": {"SIG-C17": {"loop": "C17", "role": "out", "at": [2420, 1030], "dir": "right"}},
+      "signals": [
+        {"from": "FI-101", "to": "FIC-101", "via": [[970, 225], [915, 225]]},
+        {"from": "FIC-101", "to": "FV-101", "via": [[860, 170]]},
+        {"from": "FI-102", "to": "FIC-102", "via": [[970, 445], [915, 445]]},
+        {"from": "FIC-102", "to": "FV-102", "via": [[860, 410]]},
+        {"from": "FI-103", "to": "FIC-103", "via": [[970, 645], [915, 645]]},
+        {"from": "FIC-103", "to": "FV-103", "via": [[860, 610]]},
+        {"from": "AI-123", "to": "AIC-123A", "via": [[1555, 170]]},
+        {"from": "AI-123", "to": "AIC-123D", "via": [[1555, 410]]},
+        {"from": "AI-123", "to": "AIC-123E", "via": [[1555, 610]]},
+        {"from": "AIC-123A", "to": "FIC-101"},
+        {"from": "AIC-123D", "to": "FIC-102"},
+        {"from": "AIC-123E", "to": "FIC-103"},
+        {"from": "LI-108", "to": "LIC-108"},
+        {"from": "LIC-108", "to": "flag:SIG-C17"},
+        {"from": "TI-109", "to": "TIC-109"},
+        {"from": "TIC-109", "to": "TIC-121"},
+        {"from": "TI-121", "to": "TIC-121"},
+        {"from": "TIC-121", "to": "TV-121", "via": [[2300, 1560], [1520, 1560]]}
+      ],
       "routes": [
         {"id": "S1", "stream": "S1", "from": {"flag": "F-S1"}, "to": {"net": "HDR"}, "pts": [[350, 360], [1100, 360]]},
         {"id": "S2", "stream": "S2", "from": {"flag": "F-S2"}, "to": {"net": "HDR"}, "pts": [[350, 560], [1100, 560]]},
@@ -38,7 +60,7 @@
          "place": {"FI-106": [1460, 1360], "AI-123": [1555, 1360]}},
         {"id": "S7", "stream": "S7", "from": {"unit": "R-101"}, "to": {"flag": "F-S7"}, "pts": [[1880, 820], [2420, 820]]},
         {"id": "CWS-R", "from": {"flag": "F-CWS-R"}, "to": {"unit": "R-101"}, "pts": [[1330, 1700], [1700, 1700], [1700, 1495]],
-         "items": ["TV-210"], "place": {"TV-210": [1520, 1700]}},
+         "items": ["TV-121"], "place": {"TV-121": [1520, 1700]}},
         {"id": "CWR-R", "from": {"unit": "R-101"}, "to": {"flag": "F-CWR-R"}, "pts": [[1880, 1300], [2200, 1300], [2200, 1700], [2420, 1700]],
          "items": ["TI-121"], "place": {"TI-121": [2050, 1300]}}
       ]
@@ -59,6 +81,19 @@
         "F-CWS-E": {"utility": ["CW PID 901-1", "COOLING WATER SUPPLY"], "at": [120, 820], "dir": "right"},
         "F-CWR-E": {"utility": ["CW PID 901-1", "COOLING WATER RETURN"], "at": [120, 380], "dir": "left"}
       },
+      "controllers": {"FIC-105": [1600, 120], "FIC-110": [1960, 690], "AIC-129": [2080, 690], "LIC-112": [2050, 1070]},
+      "signal_flags": {"SIG-C11": {"loop": "C11", "role": "in", "at": [120, 690], "dir": "right"}},
+      "signals": [
+        {"from": "FI-105", "to": "FIC-105"},
+        {"from": "FIC-105", "to": "FV-105", "via": [[1600, 620]]},
+        {"from": "FI-110", "to": "FIC-110"},
+        {"from": "FIC-110", "to": "FV-110", "via": [[1960, 600], [2240, 600]]},
+        {"from": "AI-129", "to": "AIC-129"},
+        {"from": "AIC-129", "to": "FIC-110"},
+        {"from": "LI-112", "to": "LIC-112"},
+        {"from": "LIC-112", "to": "LV-112"},
+        {"from": "flag:SIG-C11", "to": "FV-117", "via": [[620, 690]]}
+      ],
       "routes": [
         {"id": "S7", "stream": "S7", "from": {"flag": "F-S7"}, "to": {"unit": "E-101"}, "pts": [[350, 560], [700, 560]]},
         {"id": "S7b", "stream": "S7b", "from": {"unit": "E-101"}, "to": {"unit": "V-101"}, "pts": [[1100, 560], [1450, 560], [1450, 950], [1550, 950]]},
@@ -66,13 +101,13 @@
         {"id": "S8b", "stream": "S8b", "from": {"unit": "K-101"}, "to": {"flag": "F-S8b"}, "pts": [[1955, 300], [2050, 300], [2050, 200], [350, 200]],
          "place": {"FI-105": [1750, 200]}},
         {"id": "S9", "stream": "S9", "from": {"unit": "V-101"}, "to": {"flag": "F-S9"}, "pts": [[1770, 880], [2420, 880]],
-         "place": {"FI-110": [1960, 880], "AI-129": [2080, 880], "FV-206": [2240, 880]}},
+         "place": {"FI-110": [1960, 880], "AI-129": [2080, 880], "FV-110": [2240, 880]}},
         {"id": "BYP", "from": {"tee": "S8b", "at": [2000, 300]}, "to": {"tee": "S8", "at": [1780, 300]}, "pts": [[2000, 300], [2000, 540], [1780, 540], [1780, 300]],
-         "items": ["HV-205"], "place": {"HV-205": [1890, 540]}, "bubble_side": "down"},
+         "items": ["FV-105"], "place": {"FV-105": [1890, 540]}, "bubble_side": "down"},
         {"id": "S10", "stream": "S10", "from": {"unit": "V-101"}, "to": {"flag": "F-S10"}, "pts": [[1660, 1400], [1660, 1600], [2420, 1600]],
-         "place": {"FI-114": [1850, 1600], "LV-207": [2050, 1600]}},
+         "place": {"FI-114": [1850, 1600], "LV-112": [2050, 1600]}},
         {"id": "CWS-E", "from": {"flag": "F-CWS-E"}, "to": {"unit": "E-101"}, "pts": [[350, 820], [900, 820], [900, 605]],
-         "items": ["TV-211"], "place": {"TV-211": [620, 820]}},
+         "items": ["FV-117"], "place": {"FV-117": [620, 820]}},
         {"id": "CWR-E", "from": {"unit": "E-101"}, "to": {"flag": "F-CWR-E"}, "pts": [[980, 515], [980, 380], [350, 380]],
          "items": ["TI-122"], "place": {"TI-122": [800, 380]}}
       ]
@@ -91,15 +126,32 @@
         "F-LPS": {"utility": ["LS PID 902-1", "LOW PRESSURE STEAM"], "at": [120, 1440], "dir": "right"},
         "F-COND": {"utility": ["LS PID 902-1", "CONDENSATE RETURN"], "at": [2420, 1300], "dir": "right"}
       },
+      "controllers": {"FIC-104": [1000, 940], "FIC-119": [800, 1260], "TIC-118": [1800, 830], "LIC-115": [1900, 960], "AIC-137": [1720, 1420], "FIC-117": [1600, 1700]},
+      "signal_flags": {"SIG-C17": {"loop": "C17", "role": "in", "at": [120, 860], "dir": "right"}, "SIG-C11": {"loop": "C11", "role": "out", "at": [2420, 1700], "dir": "right"}},
+      "signals": [
+        {"from": "FI-104", "to": "FIC-104", "via": [[1100, 940]]},
+        {"from": "FIC-104", "to": "FV-104", "via": [[900, 940]]},
+        {"from": "flag:SIG-C17", "to": "FIC-104", "via": [[1000, 860]]},
+        {"from": "FI-119", "to": "FIC-119", "via": [[900, 1260]]},
+        {"from": "FIC-119", "to": "FV-119", "via": [[700, 1260]]},
+        {"from": "TI-118", "to": "TIC-118"},
+        {"from": "TIC-118", "to": "FIC-119", "via": [[2200, 830], [2200, 1800], [800, 1800]]},
+        {"from": "AI-137", "to": "AIC-137"},
+        {"from": "AIC-137", "to": "TIC-118", "via": [[2000, 1420], [2000, 740], [1800, 740]]},
+        {"from": "LI-115", "to": "LIC-115"},
+        {"from": "LIC-115", "to": "LV-115"},
+        {"from": "FI-117", "to": "FIC-117", "via": [[1520, 1520], [1520, 1700]]},
+        {"from": "FIC-117", "to": "flag:SIG-C11"}
+      ],
       "routes": [
         {"id": "S10", "stream": "S10", "from": {"flag": "F-S10"}, "to": {"unit": "C-101"}, "pts": [[350, 760], [1300, 760]]},
         {"id": "S4", "stream": "S4", "from": {"flag": "F-S4"}, "to": {"unit": "C-101"}, "pts": [[350, 1120], [1300, 1120]],
-         "place": {"FV-204": [900, 1120], "FI-104": [1100, 1120]}},
+         "place": {"FV-104": [900, 1120], "FI-104": [1100, 1120]}},
         {"id": "S5", "stream": "S5", "from": {"unit": "C-101"}, "to": {"flag": "F-S5"}, "pts": [[1400, 600], [1400, 300], [2420, 300]]},
         {"id": "S11", "stream": "S11", "from": {"unit": "C-101"}, "to": {"flag": "F-S11"}, "pts": [[1400, 1340], [1400, 1600], [2420, 1600]],
-         "place": {"FI-117": [1600, 1600], "AI-137": [1720, 1600], "LV-208": [1900, 1600]}},
+         "place": {"FI-117": [1600, 1600], "AI-137": [1720, 1600], "LV-115": [1900, 1600]}},
         {"id": "LPS", "from": {"flag": "F-LPS"}, "to": {"unit": "C-101"}, "pts": [[350, 1440], [1150, 1440], [1150, 1260], [1300, 1260]],
-         "items": ["FV-209", "FI-119"], "place": {"FV-209": [700, 1440], "FI-119": [900, 1440]}},
+         "items": ["FV-119", "FI-119"], "place": {"FV-119": [700, 1440], "FI-119": [900, 1440]}},
         {"id": "COND", "from": {"unit": "C-101"}, "to": {"flag": "F-COND"}, "pts": [[1500, 1260], [2100, 1260], [2100, 1300], [2420, 1300]]}
       ]
     }

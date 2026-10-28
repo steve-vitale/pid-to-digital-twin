@@ -24,15 +24,15 @@ Extracted twin: `out/te_pid/twin/claude-L3-r1/plant_model.json`. Verified model:
 1. ADD AI-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings
 1. ADD AI-129 (Purge gas analyzer (components A-H)): tag not read on the drawings
 1. ADD AI-137 (Product analyzer (components D-H)): tag not read on the drawings
-1. SET unit of FV-201: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FV-202: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FV-203: R-101 -> U-100 (converter rule: connection_path)
-1. ADD FV-204 (A and C feed flow valve): tag not read on the drawings
-1. ADD FV-206 (Purge valve): tag not read on the drawings
-1. ADD LV-207 (Separator pot liquid flow valve): tag not read on the drawings
-1. ADD LV-208 (Stripper liquid product flow valve): tag not read on the drawings
-1. ADD FV-209 (Stripper steam valve): tag not read on the drawings
-1. ADD TV-210 (Reactor cooling water flow valve): tag not read on the drawings
+1. SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FV-101: R-101 -> U-100 (converter rule: connection_path)
+1. ADD FV-104 (A and C feed flow valve): tag not read on the drawings
+1. ADD FV-110 (Purge valve): tag not read on the drawings
+1. ADD LV-112 (Separator pot liquid flow valve): tag not read on the drawings
+1. ADD LV-115 (Stripper liquid product flow valve): tag not read on the drawings
+1. ADD FV-119 (Stripper steam valve): tag not read on the drawings
+1. ADD TV-121 (Reactor cooling water flow valve): tag not read on the drawings
 1. ADD SC-212 (Agitator speed): tag not read on the drawings
 1. DELETE or explain S101-IN007 'SIC 212' (instrumentation): not a model item
 1. DELETE or explain S101-IN010 'TI 106' (instrumentation): not a model item
@@ -96,17 +96,17 @@ Extracted twin: `out/te_pid/twin/claude-L3-r1/plant_model.json`. Verified model:
 | instrument | AI-123 | missing | not read |
 | instrument | AI-129 | missing | not read |
 | instrument | AI-137 | missing | not read |
-| final_element | FV-201 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-202 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-203 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-204 | missing | not read |
-| final_element | HV-205 | ok |  |
-| final_element | FV-206 | missing | not read |
-| final_element | LV-207 | missing | not read |
-| final_element | LV-208 | missing | not read |
-| final_element | FV-209 | missing | not read |
-| final_element | TV-210 | missing | not read |
-| final_element | TV-211 | ok |  |
+| final_element | FV-102 | found, fields differ | unit R-101 (model: U-100); read as FV-201, its revision-A tag |
+| final_element | FV-103 | found, fields differ | unit R-101 (model: U-100); read as FV-202, its revision-A tag |
+| final_element | FV-101 | found, fields differ | unit R-101 (model: U-100); read as FV-203, its revision-A tag |
+| final_element | FV-104 | missing | not read |
+| final_element | FV-105 | ok | read as HV-205, its revision-A tag |
+| final_element | FV-110 | missing | not read |
+| final_element | LV-112 | missing | not read |
+| final_element | LV-115 | missing | not read |
+| final_element | FV-119 | missing | not read |
+| final_element | TV-121 | missing | not read |
+| final_element | FV-117 | ok | read as TV-211, its revision-A tag |
 | final_element | SC-212 | missing | not read |
 
 ## Connections between units

@@ -10,9 +10,9 @@ Extracted twin: `out/te_pid/twin/key/plant_model.json`. Verified model: `data/te
 1. SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FV-201: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FV-202: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FV-203: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FV-101: R-101 -> U-100 (converter rule: connection_path)
 1. DELETE connection C-101 - K-101: no model stream joins these units
 1. DELETE connection U-100 - V-101: no model stream joins these units
 
@@ -51,17 +51,17 @@ Extracted twin: `out/te_pid/twin/key/plant_model.json`. Verified model: `data/te
 | instrument | AI-123 | ok |  |
 | instrument | AI-129 | ok |  |
 | instrument | AI-137 | ok |  |
-| final_element | FV-201 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-202 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-203 | found, fields differ | unit R-101 (model: U-100) |
-| final_element | FV-204 | ok |  |
-| final_element | HV-205 | ok |  |
-| final_element | FV-206 | ok |  |
-| final_element | LV-207 | ok |  |
-| final_element | LV-208 | ok |  |
-| final_element | FV-209 | ok |  |
-| final_element | TV-210 | ok |  |
-| final_element | TV-211 | ok |  |
+| final_element | FV-102 | found, fields differ | unit R-101 (model: U-100); read as FV-201, its revision-A tag |
+| final_element | FV-103 | found, fields differ | unit R-101 (model: U-100); read as FV-202, its revision-A tag |
+| final_element | FV-101 | found, fields differ | unit R-101 (model: U-100); read as FV-203, its revision-A tag |
+| final_element | FV-104 | ok | read as FV-204, its revision-A tag |
+| final_element | FV-105 | ok | read as HV-205, its revision-A tag |
+| final_element | FV-110 | ok | read as FV-206, its revision-A tag |
+| final_element | LV-112 | ok | read as LV-207, its revision-A tag |
+| final_element | LV-115 | ok | read as LV-208, its revision-A tag |
+| final_element | FV-119 | ok | read as FV-209, its revision-A tag |
+| final_element | TV-121 | ok | read as TV-210, its revision-A tag |
+| final_element | FV-117 | ok | read as TV-211, its revision-A tag |
 | final_element | SC-212 | found, fields differ | kind instrument (model: final_element) |
 
 ## Connections between units

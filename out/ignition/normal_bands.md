@@ -22,9 +22,9 @@ K = 6 preserves calibration from the original 36 mapped scalar tags. The table r
 | First flags after the fault | Sample | Minutes after fault |
 |---|---|---|
 | FI-101 | 160 | 0 |
-| FV-203 | 160 | 0 |
+| FV-101 | 160 | 0 |
 | JI-120 | 167 | 21 |
-| HV-205 | 170 | 30 |
+| FV-105 | 170 | 30 |
 | AI-129 | 172 | 36 |
 | AI-123 | 176 | 48 |
 | PI-116 | 182 | 66 |

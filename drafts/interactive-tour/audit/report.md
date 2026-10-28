@@ -2,7 +2,7 @@
 
 Proof of concept, not reviewed by an operator. Passing these checks means the drawing agrees with the repository's model, exports and replay files and is legible by these measures; it does not mean an operator finds it useful, and the geometry is placeholder.
 
-Result: 38 pass, 4 informational, 0 fail, of 42 checks. Written by `node drafts/interactive-tour/verify.mjs`.
+Result: 37 pass, 5 informational, 0 fail, of 42 checks. Written by `node drafts/interactive-tour/verify.mjs`.
 
 | Group | Check | Status | Result |
 |---|---|---|---|
@@ -41,13 +41,13 @@ Result: 38 pass, 4 informational, 0 fail, of 42 checks. Written by `node drafts/
 | D | keyboard | pass | arrow keys on the focused figure: U-100, then R-101; Escape returns to the overview (yes) |
 | D | controls_named | pass | 0 visible buttons or inputs without an accessible name |
 | C | label_overlaps | pass | 36 page states (2 themes × 390 and 1440 px × 9 views): 0 with overlapping labels |
-| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 8.8%); 0 states over the limit |
+| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 9.1%); 0 states over the limit |
 | C | min_font_size | pass | smallest visible text 12 px (minimum 12 px) in every state |
 | C | contrast_wcag_aa | pass | lowest text contrast 6.41:1 over 4366 visible text runs (WCAG AA for normal text: 4.5:1) |
 | C | labels_inside_figure | pass | labels outside the figure: 0 states |
 | C | no_horizontal_scroll | pass | pages wider than the viewport: 0 states |
 | C | labels_without_room | info | labels the layout had no room for (hidden rather than overlapped; the same information stays on the purpose card): 0 of 36 states |
-| E | hygiene | pass | 17 files scanned for local paths and 8 deny terms (TOUR_DENY_TERMS): 0 hits |
+| E | hygiene | info | 17 files scanned for local paths (TOUR_DENY_TERMS not set: deny-term part skipped): 0 hits |
 
 Groups: A topology and tags against the raw model, P&ID key, Ignition and PI AF exports and replay files; B the anatomy kit geometry audit; C legibility in headless Chrome; D behaviour; E publication hygiene.
 

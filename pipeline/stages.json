@@ -27,7 +27,7 @@
     },
     {
      "what": "units, streams, flow directions and tag ownership checked against the simulator source (teprob.f, cross-checked with the revised TE code)",
-     "value": "51 confirmed, 4 corrected, 1 unresolvable of 56 elements; the purge S9 with FI-110, FV-206 and AI-129 moved from K-101 to V-101; PI-116's owner unresolvable",
+     "value": "51 confirmed, 4 corrected, 1 unresolvable of 56 elements; the purge S9 with FI-110, FV-110 and AI-129 moved from K-101 to V-101; PI-116's owner unresolvable",
      "source": "out/te_topology_check.md"
     },
     {
@@ -561,6 +561,31 @@
   },
   {
    "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/te_pid/rev-a/*.png",
+    "data/te_pid/rev-a/*.svg",
+    "data/te_pid/rev-a/*.graphml",
+    "data/te_pid/rev-a/key.json",
+    "data/te_pid/rev-a/manifest.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_rev_a",
+   "dataset": "te",
+   "stage": 1,
+   "title": "Generated TE sheets, revision A (archived): the sheets the recorded extraction runs read",
+   "kind": "source",
+   "rebuild": "source",
+   "treatment": "The three sheets and their keys exactly as scripts/draw_pid_from_model.py drew them on 2026-10-13 (no controllers, valves numbered 201-212), archived from git on 2026-10-28 when revision B added the control loops (journal entry 51). Byte-identical to the files the recorded extraction stages hashed when they ran. Never regenerated: revision B is te.pid.",
+   "edited_by": [],
+   "carries": "revision A: 0 of 19 control loops drawn (out/te_loop_audit.md, journal entry 50)",
+   "checked_by": "pipeline lock hashes recorded by te.pid_extract and te.pid_roundtrip before the archive"
+  },
+  {
+   "poc": false,
    "upstream": [
     "te.pid",
     "open100.source"
@@ -607,10 +632,10 @@
   {
    "poc": false,
    "upstream": [
-    "te.pid"
+    "te.pid_rev_a"
    ],
    "inputs": [
-    "data/te_pid/*.png"
+    "data/te_pid/rev-a/*.png"
    ],
    "code": [
     "scripts/run_extraction.py",
@@ -628,7 +653,7 @@
    "id": "te.pid_extract",
    "dataset": "te",
    "stage": 2,
-   "title": "Extraction of the generated sheets (recorded): clean and degraded copies, five or three runs per model",
+   "title": "Extraction of the generated sheets (recorded): clean and degraded copies, five or three runs per model (revision A sheets, data/te_pid/rev-a)",
    "kind": "recorded",
    "rebuild": "recorded",
    "external_outputs": [
@@ -673,7 +698,7 @@
      "te-clean-trace-r1"
     ]
    ],
-   "requires_note": "model calls (Codex and Claude CLIs) with PID_SHEETS_DIR=data/te_pid; run records are not committed",
+   "requires_note": "model calls (Codex and Claude CLIs) with PID_SHEETS_DIR=data/te_pid/rev-a; run records are not committed",
    "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
    "carries": "per item: the model's confidence and the source run",
    "checked_by": "the frozen scorer, through te.pid_roundtrip"
@@ -681,12 +706,12 @@
   {
    "poc": false,
    "upstream": [
-    "te.pid",
+    "te.pid_rev_a",
     "te.pid_extract"
    ],
    "inputs": [
-    "data/te_pid/*.graphml",
-    "data/te_pid/key.json"
+    "data/te_pid/rev-a/*.graphml",
+    "data/te_pid/rev-a/key.json"
    ],
    "code": [
     "scripts/score_te_roundtrip.py",
@@ -701,7 +726,7 @@
    "id": "te.pid_roundtrip",
    "dataset": "te",
    "stage": 2,
-   "title": "Round-trip check: symbols, tag text and connections read back from the generated sheets",
+   "title": "Round-trip check: symbols, tag text and connections read back from the generated sheets (revision A sheets, data/te_pid/rev-a)",
    "kind": "recorded",
    "rebuild": "recorded",
    "recorded_commands": [
@@ -744,7 +769,7 @@
    "id": "te.pid_twins",
    "dataset": "te",
    "stage": 3,
-   "title": "Extracted TE twins (recorded): one per declared run, plus the key fed in as a perfect extraction",
+   "title": "Extracted TE twins (recorded): one per declared run, plus the key fed in as a perfect extraction (revision A sheets, data/te_pid/rev-a)",
    "kind": "recorded",
    "rebuild": "recorded",
    "recorded_commands": [
@@ -764,7 +789,7 @@
      "out/te_pid/twin/codex-clean-r1"
     ]
    ],
-   "requires_note": "the run records under runs/ (not committed), PID_SHEETS_DIR=data/te_pid",
+   "requires_note": "the run records under runs/ (not committed), PID_SHEETS_DIR=data/te_pid/rev-a",
    "treatment": "The same converter as OPEN100; every item starts unverified.",
    "carries": "verification.status (unverified), risk.tier, tag_status",
    "checked_by": "te.pid_diff against the verified model"

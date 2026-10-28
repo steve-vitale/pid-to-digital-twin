@@ -1,0 +1,35 @@
+{
+ "about": "Valve renumbering applied by scripts/retag_te_valves.py on 2026-10-28 (journal entry 51). Each control valve takes the loop number of the measurement that drives it, per data/te_control_loops.json (read from the closed-loop code temain_mod.f and checked against the recorded run). HV-205 and TV-211 also change letter: both sit on flow loops. SC-212 (agitator speed, no controller in the code) keeps its tag. Tags before this date appear in the journal and in dated results as revision A.",
+ "map": {
+  "FV-201": "FV-102",
+  "FV-202": "FV-103",
+  "FV-203": "FV-101",
+  "FV-204": "FV-104",
+  "HV-205": "FV-105",
+  "FV-206": "FV-110",
+  "LV-207": "LV-112",
+  "LV-208": "LV-115",
+  "FV-209": "FV-119",
+  "TV-210": "TV-121",
+  "TV-211": "FV-117"
+ },
+ "model_tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv. Measurements are numbered 101-137 in XMEAS order; each control valve carries the loop number of the measurement its controller reads (data/te_control_loops.json), with its pre-2026-10-28 tag kept as former_tag. Controllers are listed under controllers.",
+ "files": [
+  "data/te_process_model.json",
+  "data/te_pid_layout.json",
+  "data/te_display_layout.json",
+  "data/te_tour_cards.json",
+  "data/hazard_citations_prototype.json",
+  "scripts/ignition/build_hmi.py",
+  "scripts/ignition/build_mimic.py",
+  "scripts/test_build_3d_scene.py",
+  "scripts/test_process_mimic.py",
+  "scripts/test_te_topology.py",
+  "pipeline/stages.json",
+  "docs/INSTRUMENT_COVERAGE.md",
+  "docs/PROCESS_MIMIC.md",
+  "docs/HAZARD_CITATIONS_DESIGN.md",
+  "docs/3D_TOUR_PLAN.md",
+  "docs/DATA_LINEAGE.md"
+ ]
+}

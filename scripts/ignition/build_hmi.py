@@ -56,9 +56,9 @@ UNIT_ORDER = ["U-100", "R-101", "E-101", "V-101", "K-101", "C-101"]
 KEY_VALUES = {
     "U-100": ["FI-101", "FI-102", "FI-103"],
     "R-101": ["PI-107", "TI-109", "LI-108", "TI-121"],
-    "E-101": ["TI-122", "TV-211"],
+    "E-101": ["TI-122", "FV-117"],
     "V-101": ["PI-113", "TI-111", "LI-112", "FI-114"],
-    "K-101": ["FI-105", "JI-120", "HV-205"],
+    "K-101": ["FI-105", "JI-120", "FV-105"],
     "C-101": ["PI-116", "TI-118", "LI-115", "FI-117"],
 }
 DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus nearby alarm limits)

@@ -150,7 +150,7 @@
       369
      ],
      "text": null,
-     "model_ref": "FV-203",
+     "model_ref": "FV-101",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -162,8 +162,8 @@
       885,
       305
      ],
-     "text": "FV 203",
-     "model_ref": "FV-203",
+     "text": "FV 101",
+     "model_ref": "FV-101",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -189,7 +189,7 @@
       569
      ],
      "text": null,
-     "model_ref": "FV-201",
+     "model_ref": "FV-102",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -201,8 +201,8 @@
       885,
       505
      ],
-     "text": "FV 201",
-     "model_ref": "FV-201",
+     "text": "FV 102",
+     "model_ref": "FV-102",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -228,7 +228,7 @@
       769
      ],
      "text": null,
-     "model_ref": "FV-202",
+     "model_ref": "FV-103",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -240,8 +240,8 @@
       885,
       705
      ],
-     "text": "FV 202",
-     "model_ref": "FV-202",
+     "text": "FV 103",
+     "model_ref": "FV-103",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -293,7 +293,7 @@
       1709
      ],
      "text": null,
-     "model_ref": "TV-210",
+     "model_ref": "TV-121",
      "model_kind": "final_element",
      "drafting_addition": true
     },
@@ -305,8 +305,8 @@
       1545,
       1645
      ],
-     "text": "TV 210",
-     "model_ref": "TV-210",
+     "text": "TV 121",
+     "model_ref": "TV-121",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -374,6 +374,147 @@
      "model_ref": "SC-212",
      "model_kind": "final_element",
      "drafting_addition": false
+    },
+    "instrumentation15": {
+     "class": "instrumentation",
+     "box": [
+      890,
+      145,
+      940,
+      195
+     ],
+     "text": "FIC 101",
+     "model_ref": "FIC-101",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C3"
+    },
+    "instrumentation16": {
+     "class": "instrumentation",
+     "box": [
+      890,
+      385,
+      940,
+      435
+     ],
+     "text": "FIC 102",
+     "model_ref": "FIC-102",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C1"
+    },
+    "instrumentation17": {
+     "class": "instrumentation",
+     "box": [
+      890,
+      585,
+      940,
+      635
+     ],
+     "text": "FIC 103",
+     "model_ref": "FIC-103",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C2"
+    },
+    "instrumentation18": {
+     "class": "instrumentation",
+     "box": [
+      1225,
+      145,
+      1275,
+      195
+     ],
+     "text": "AIC 123A",
+     "model_ref": "AIC-123A",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C13"
+    },
+    "instrumentation19": {
+     "class": "instrumentation",
+     "box": [
+      1225,
+      385,
+      1275,
+      435
+     ],
+     "text": "AIC 123D",
+     "model_ref": "AIC-123D",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C14"
+    },
+    "instrumentation20": {
+     "class": "instrumentation",
+     "box": [
+      1225,
+      585,
+      1275,
+      635
+     ],
+     "text": "AIC 123E",
+     "model_ref": "AIC-123E",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C15"
+    },
+    "instrumentation21": {
+     "class": "instrumentation",
+     "box": [
+      2275,
+      1005,
+      2325,
+      1055
+     ],
+     "text": "LIC 108",
+     "model_ref": "LIC-108",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C17"
+    },
+    "instrumentation22": {
+     "class": "instrumentation",
+     "box": [
+      2275,
+      1115,
+      2325,
+      1165
+     ],
+     "text": "TIC 109",
+     "model_ref": "TIC-109",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C18"
+    },
+    "instrumentation23": {
+     "class": "instrumentation",
+     "box": [
+      2275,
+      1195,
+      2325,
+      1245
+     ],
+     "text": "TIC 121",
+     "model_ref": "TIC-121",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C10"
+    },
+    "inlet_outlet9": {
+     "class": "inlet/outlet",
+     "box": [
+      2420,
+      1005.0,
+      2650,
+      1055.0
+     ],
+     "text": "SIG PID 103-1 (E-12) / TO FIC 104",
+     "model_ref": "signal:C17",
+     "model_kind": "signal_flag",
+     "drafting_addition": false,
+     "loop": "C17",
+     "signal_to": "FIC-104"
     }
    },
    "edges": [
@@ -553,6 +694,80 @@
      "connector9",
      "valve1"
     ]
+   ],
+   "signal_edges": [
+    [
+     "instrumentation10",
+     "instrumentation23"
+    ],
+    [
+     "instrumentation12",
+     "instrumentation21"
+    ],
+    [
+     "instrumentation13",
+     "instrumentation22"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation1"
+    ],
+    [
+     "instrumentation16",
+     "instrumentation3"
+    ],
+    [
+     "instrumentation17",
+     "instrumentation5"
+    ],
+    [
+     "instrumentation18",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation19",
+     "instrumentation16"
+    ],
+    [
+     "instrumentation2",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation20",
+     "instrumentation17"
+    ],
+    [
+     "instrumentation21",
+     "inlet_outlet9"
+    ],
+    [
+     "instrumentation22",
+     "instrumentation23"
+    ],
+    [
+     "instrumentation23",
+     "instrumentation9"
+    ],
+    [
+     "instrumentation4",
+     "instrumentation16"
+    ],
+    [
+     "instrumentation6",
+     "instrumentation17"
+    ],
+    [
+     "instrumentation8",
+     "instrumentation18"
+    ],
+    [
+     "instrumentation8",
+     "instrumentation19"
+    ],
+    [
+     "instrumentation8",
+     "instrumentation20"
+    ]
    ]
   },
   "102": {
@@ -729,7 +944,7 @@
       889
      ],
      "text": null,
-     "model_ref": "FV-206",
+     "model_ref": "FV-110",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -741,8 +956,8 @@
       2265,
       825
      ],
-     "text": "FV 206",
-     "model_ref": "FV-206",
+     "text": "FV 110",
+     "model_ref": "FV-110",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -755,7 +970,7 @@
       566
      ],
      "text": null,
-     "model_ref": "HV-205",
+     "model_ref": "FV-105",
      "model_kind": "final_element",
      "drafting_addition": true
     },
@@ -767,8 +982,8 @@
       1915,
       645
      ],
-     "text": "HV 205",
-     "model_ref": "HV-205",
+     "text": "FV 105",
+     "model_ref": "FV-105",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -794,7 +1009,7 @@
       1609
      ],
      "text": null,
-     "model_ref": "LV-207",
+     "model_ref": "LV-112",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -806,8 +1021,8 @@
       2075,
       1545
      ],
-     "text": "LV 207",
-     "model_ref": "LV-207",
+     "text": "LV 112",
+     "model_ref": "LV-112",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -820,7 +1035,7 @@
       829
      ],
      "text": null,
-     "model_ref": "TV-211",
+     "model_ref": "FV-117",
      "model_kind": "final_element",
      "drafting_addition": true
     },
@@ -832,8 +1047,8 @@
       645,
       765
      ],
-     "text": "TV 211",
-     "model_ref": "TV-211",
+     "text": "FV 117",
+     "model_ref": "FV-117",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -901,6 +1116,77 @@
      "model_ref": "JI-120",
      "model_kind": "instrument",
      "drafting_addition": false
+    },
+    "instrumentation14": {
+     "class": "instrumentation",
+     "box": [
+      1575,
+      95,
+      1625,
+      145
+     ],
+     "text": "FIC 105",
+     "model_ref": "FIC-105",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C5"
+    },
+    "instrumentation15": {
+     "class": "instrumentation",
+     "box": [
+      1935,
+      665,
+      1985,
+      715
+     ],
+     "text": "FIC 110",
+     "model_ref": "FIC-110",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C6"
+    },
+    "instrumentation16": {
+     "class": "instrumentation",
+     "box": [
+      2055,
+      665,
+      2105,
+      715
+     ],
+     "text": "AIC 129",
+     "model_ref": "AIC-129",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C19"
+    },
+    "instrumentation17": {
+     "class": "instrumentation",
+     "box": [
+      2025,
+      1045,
+      2075,
+      1095
+     ],
+     "text": "LIC 112",
+     "model_ref": "LIC-112",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C7"
+    },
+    "inlet_outlet7": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      665.0,
+      350,
+      715.0
+     ],
+     "text": "SIG PID 103-1 (B-3) / FROM FIC 117",
+     "model_ref": "signal:C11",
+     "model_kind": "signal_flag",
+     "drafting_addition": false,
+     "loop": "C11",
+     "signal_from": "FIC-117"
     }
    },
    "edges": [
@@ -1084,6 +1370,44 @@
      "connector9",
      "tank1"
     ]
+   ],
+   "signal_edges": [
+    [
+     "inlet_outlet7",
+     "instrumentation8"
+    ],
+    [
+     "instrumentation1",
+     "instrumentation14"
+    ],
+    [
+     "instrumentation11",
+     "instrumentation17"
+    ],
+    [
+     "instrumentation14",
+     "instrumentation5"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation4"
+    ],
+    [
+     "instrumentation16",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation17",
+     "instrumentation7"
+    ],
+    [
+     "instrumentation2",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation3",
+     "instrumentation16"
+    ]
    ]
   },
   "103": {
@@ -1195,7 +1519,7 @@
       1129
      ],
      "text": null,
-     "model_ref": "FV-204",
+     "model_ref": "FV-104",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -1207,8 +1531,8 @@
       925,
       1065
      ],
-     "text": "FV 204",
-     "model_ref": "FV-204",
+     "text": "FV 104",
+     "model_ref": "FV-104",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -1260,7 +1584,7 @@
       1609
      ],
      "text": null,
-     "model_ref": "LV-208",
+     "model_ref": "LV-115",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -1272,8 +1596,8 @@
       1925,
       1545
      ],
-     "text": "LV 208",
-     "model_ref": "LV-208",
+     "text": "LV 115",
+     "model_ref": "LV-115",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -1286,7 +1610,7 @@
       1449
      ],
      "text": null,
-     "model_ref": "FV-209",
+     "model_ref": "FV-119",
      "model_kind": "final_element",
      "drafting_addition": true
     },
@@ -1298,8 +1622,8 @@
       725,
       1385
      ],
-     "text": "FV 209",
-     "model_ref": "FV-209",
+     "text": "FV 119",
+     "model_ref": "FV-119",
      "model_kind": "final_element",
      "drafting_addition": false
     },
@@ -1354,6 +1678,120 @@
      "model_ref": "LI-115",
      "model_kind": "instrument",
      "drafting_addition": false
+    },
+    "instrumentation11": {
+     "class": "instrumentation",
+     "box": [
+      975,
+      915,
+      1025,
+      965
+     ],
+     "text": "FIC 104",
+     "model_ref": "FIC-104",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C4"
+    },
+    "instrumentation12": {
+     "class": "instrumentation",
+     "box": [
+      775,
+      1235,
+      825,
+      1285
+     ],
+     "text": "FIC 119",
+     "model_ref": "FIC-119",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C9"
+    },
+    "instrumentation13": {
+     "class": "instrumentation",
+     "box": [
+      1775,
+      805,
+      1825,
+      855
+     ],
+     "text": "TIC 118",
+     "model_ref": "TIC-118",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C16"
+    },
+    "instrumentation14": {
+     "class": "instrumentation",
+     "box": [
+      1875,
+      935,
+      1925,
+      985
+     ],
+     "text": "LIC 115",
+     "model_ref": "LIC-115",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C8"
+    },
+    "instrumentation15": {
+     "class": "instrumentation",
+     "box": [
+      1695,
+      1395,
+      1745,
+      1445
+     ],
+     "text": "AIC 137",
+     "model_ref": "AIC-137",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C20"
+    },
+    "instrumentation16": {
+     "class": "instrumentation",
+     "box": [
+      1575,
+      1675,
+      1625,
+      1725
+     ],
+     "text": "FIC 117",
+     "model_ref": "FIC-117",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "C11"
+    },
+    "inlet_outlet7": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      835.0,
+      350,
+      885.0
+     ],
+     "text": "SIG PID 101-1 (E-3) / FROM LIC 108",
+     "model_ref": "signal:C17",
+     "model_kind": "signal_flag",
+     "drafting_addition": false,
+     "loop": "C17",
+     "signal_from": "LIC-108"
+    },
+    "inlet_outlet8": {
+     "class": "inlet/outlet",
+     "box": [
+      2420,
+      1675.0,
+      2650,
+      1725.0
+     ],
+     "text": "SIG PID 102-1 (F-12) / TO FV 117",
+     "model_ref": "signal:C11",
+     "model_kind": "signal_flag",
+     "drafting_addition": false,
+     "loop": "C11",
+     "signal_to": "FV-117"
     }
    },
    "edges": [
@@ -1492,6 +1930,60 @@
     [
      "connector9",
      "valve1"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "inlet_outlet7",
+     "instrumentation11"
+    ],
+    [
+     "instrumentation10",
+     "instrumentation14"
+    ],
+    [
+     "instrumentation11",
+     "instrumentation1"
+    ],
+    [
+     "instrumentation12",
+     "instrumentation6"
+    ],
+    [
+     "instrumentation13",
+     "instrumentation12"
+    ],
+    [
+     "instrumentation14",
+     "instrumentation5"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation13"
+    ],
+    [
+     "instrumentation16",
+     "inlet_outlet8"
+    ],
+    [
+     "instrumentation2",
+     "instrumentation11"
+    ],
+    [
+     "instrumentation3",
+     "instrumentation16"
+    ],
+    [
+     "instrumentation4",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation7",
+     "instrumentation12"
+    ],
+    [
+     "instrumentation9",
+     "instrumentation13"
     ]
    ]
   }

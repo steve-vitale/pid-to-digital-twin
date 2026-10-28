@@ -37,9 +37,12 @@ class GeneratorTests(unittest.TestCase):
         model = json.loads(MODEL.read_text(encoding="utf-8"))
         refs = [n["model_ref"] for sh in sheets for n in sh.nodes.values() if n["model_ref"]]
         tags = {i["tag"] for i in model["instruments"] + model["final_elements"]}
-        # every tag once as a bubble; final elements on a line also once as a valve
-        bubbles = [n["model_ref"] for sh in sheets for n in sh.nodes.values() if n["class"] == "instrumentation"]
+        # every tag once as a bubble; final elements on a line also once as a valve; every controller once
+        bubbles = [n["model_ref"] for sh in sheets for n in sh.nodes.values() if n["class"] == "instrumentation"
+                   and n["model_kind"] != "controller"]
         self.assertEqual(sorted(bubbles), sorted(tags))
+        ctrls = [n["model_ref"] for sh in sheets for n in sh.nodes.values() if n["model_kind"] == "controller"]
+        self.assertEqual(sorted(ctrls), sorted(c["tag"] for c in model["controllers"]))
         self.assertEqual(sorted(r for r in refs if r.startswith("unit:")), sorted(f"unit:{u['id']}" for u in model["units"]))
 
     def test_layout_that_drops_an_item_is_refused(self):
@@ -62,6 +65,40 @@ class GeneratorTests(unittest.TestCase):
                 layout["sheets"][2]["units"]["C-101"]["mount"]["PI-107"] = [1610, 1100]
             with self.assertRaisesRegex(ValueError, "PI-107: drawn 2 times"):
                 draw.generate(MODEL, write_layout(tmp, twice), None, write=False)
+
+    def test_a_missing_signal_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def drop(layout):
+                layout["sheets"][0]["signals"] = [s for s in layout["sheets"][0]["signals"]
+                                                  if (s["from"], s["to"]) != ("FIC-101", "FV-101")]
+            with self.assertRaisesRegex(ValueError, "signal FIC-101 -> FV-101: drawn 0 times"):
+                draw.generate(MODEL, write_layout(tmp, drop), None, write=False)
+
+    def test_a_signal_the_model_does_not_have_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def invent(layout):  # TI-109 does not feed the level controller
+                layout["sheets"][0]["signals"].append({"from": "TI-109", "to": "LIC-108",
+                                                       "via": [[2100, 1140], [2100, 1030]]})
+            with self.assertRaisesRegex(ValueError, "signal TI-109 -> LIC-108 is not in the model"):
+                draw.generate(MODEL, write_layout(tmp, invent), None, write=False)
+
+    def test_a_signal_through_a_symbol_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def through(layout):  # into FIC-101 from below, along y=280: straight through FI-101's bubble
+                for s in layout["sheets"][0]["signals"]:
+                    if (s["from"], s["to"]) == ("AIC-123A", "FIC-101"):
+                        s["via"] = [[1250, 280], [915, 280]]
+            with self.assertRaisesRegex(ValueError, "AIC-123A -> FIC-101: .* runs through FI 101"):
+                draw.generate(MODEL, write_layout(tmp, through), None, write=False)
+
+    def test_a_diagonal_signal_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def diagonal(layout):
+                for s in layout["sheets"][1]["signals"]:
+                    if (s["from"], s["to"]) == ("LIC-112", "LV-112"):
+                        s["via"] = [[2000, 1300]]
+            with self.assertRaisesRegex(ValueError, "is not horizontal or vertical"):
+                draw.generate(MODEL, write_layout(tmp, diagonal), None, write=False)
 
     def test_regenerated_keys_match_the_committed_keys(self):
         with tempfile.TemporaryDirectory() as tmp:

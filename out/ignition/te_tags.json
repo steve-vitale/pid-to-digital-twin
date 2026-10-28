@@ -74,14 +74,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-201 | XMV 1 | D feed flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-102 | XMV 1 | D feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-201"
+                "binding": "{BasePath}.FV-102"
               }
             },
             {
@@ -90,14 +90,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-202 | XMV 2 | E feed flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-103 | XMV 2 | E feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-202"
+                "binding": "{BasePath}.FV-103"
               }
             },
             {
@@ -106,14 +106,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-203 | XMV 3 | A feed flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-101 | XMV 3 | A feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-203"
+                "binding": "{BasePath}.FV-101"
               }
             }
           ]
@@ -234,14 +234,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "TV-210 | XMV 10 | Reactor cooling water flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "TV-121 | XMV 10 | Reactor cooling water flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.TV-210"
+                "binding": "{BasePath}.TV-121"
               }
             },
             {
@@ -298,14 +298,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "TV-211 | XMV 11 | Condenser cooling water flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-117 | XMV 11 | Condenser cooling water flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.TV-211"
+                "binding": "{BasePath}.FV-117"
               }
             }
           ]
@@ -426,14 +426,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-206 | XMV 6 | Purge valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-110 | XMV 6 | Purge valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-206"
+                "binding": "{BasePath}.FV-110"
               }
             },
             {
@@ -442,14 +442,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "LV-207 | XMV 7 | Separator pot liquid flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "LV-112 | XMV 7 | Separator pot liquid flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.LV-207"
+                "binding": "{BasePath}.LV-112"
               }
             }
           ]
@@ -506,14 +506,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "HV-205 | XMV 5 | Compressor recycle valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-105 | XMV 5 | Compressor recycle valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.HV-205"
+                "binding": "{BasePath}.FV-105"
               }
             }
           ]
@@ -650,14 +650,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-204 | XMV 4 | A and C feed flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-104 | XMV 4 | A and C feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-204"
+                "binding": "{BasePath}.FV-104"
               }
             },
             {
@@ -666,14 +666,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "LV-208 | XMV 8 | Stripper liquid product flow valve | source check: confirmed | ops review: unverified",
+              "documentation": "LV-115 | XMV 8 | Stripper liquid product flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.LV-208"
+                "binding": "{BasePath}.LV-115"
               }
             },
             {
@@ -682,14 +682,14 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
-              "documentation": "FV-209 | XMV 9 | Stripper steam valve | source check: confirmed | ops review: unverified",
+              "documentation": "FV-119 | XMV 9 | Stripper steam valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
                 "binding": "{OPCServer}"
               },
               "opcItemPath": {
                 "bindType": "parameter",
-                "binding": "{BasePath}.FV-209"
+                "binding": "{BasePath}.FV-119"
               }
             }
           ]

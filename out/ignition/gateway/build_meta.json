@@ -1665,7 +1665,7 @@
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 41"
    }
   },
-  "FV-201": {
+  "FV-102": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1676,7 +1676,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FV-201",
+    "tag": "FV-102",
     "xmv": 1,
     "unit": "U-100",
     "stream": "S2",
@@ -1696,10 +1696,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(1) sets FTM(1); stream 2: BL -> U-100; documented as teprob.f 'D Feed Flow'"
-    }
+    },
+    "former_tag": "FV-201"
    }
   },
-  "FV-202": {
+  "FV-103": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1710,7 +1711,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FV-202",
+    "tag": "FV-103",
     "xmv": 2,
     "unit": "U-100",
     "stream": "S3",
@@ -1730,10 +1731,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(2) sets FTM(2); stream 3: BL -> U-100; documented as teprob.f 'E Feed Flow'"
-    }
+    },
+    "former_tag": "FV-202"
    }
   },
-  "FV-203": {
+  "FV-101": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1744,7 +1746,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FV-203",
+    "tag": "FV-101",
     "xmv": 3,
     "unit": "U-100",
     "stream": "S1",
@@ -1764,10 +1766,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(3) sets FTM(3); stream 1: BL -> U-100; documented as teprob.f 'A Feed Flow'"
-    }
+    },
+    "former_tag": "FV-203"
    }
   },
-  "FV-204": {
+  "FV-104": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1778,7 +1781,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "FV-204",
+    "tag": "FV-104",
     "xmv": 4,
     "unit": "C-101",
     "stream": "S4",
@@ -1798,10 +1801,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(4) sets FTM(4); stream 4: BL -> C-101; documented as teprob.f 'A and C Feed Flow'"
-    }
+    },
+    "former_tag": "FV-204"
    }
   },
-  "HV-205": {
+  "FV-105": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1812,7 +1816,7 @@
    ],
    "unit": "K-101",
    "source_item": {
-    "tag": "HV-205",
+    "tag": "FV-105",
     "xmv": 5,
     "unit": "K-101",
     "uom": "%",
@@ -1834,10 +1838,11 @@
      "caveats": [
       "the spill-back path around the compressor is not a stream in the model; the source computes it only as a reduction of the net compressor flow"
      ]
-    }
+    },
+    "former_tag": "HV-205"
    }
   },
-  "FV-206": {
+  "FV-110": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1848,7 +1853,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "FV-206",
+    "tag": "FV-110",
     "xmv": 6,
     "unit": "V-101",
     "stream": "S9",
@@ -1871,10 +1876,11 @@
      "previous": {
       "unit": "K-101"
      }
-    }
+    },
+    "former_tag": "FV-206"
    }
   },
-  "LV-207": {
+  "LV-112": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1885,7 +1891,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "LV-207",
+    "tag": "LV-112",
     "xmv": 7,
     "unit": "V-101",
     "stream": "S10",
@@ -1905,10 +1911,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(7) sets FTM(11); stream 10: V-101 -> C-101; documented as teprob.f 'Separator Pot Liquid Flow'"
-    }
+    },
+    "former_tag": "LV-207"
    }
   },
-  "LV-208": {
+  "LV-115": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1919,7 +1926,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "LV-208",
+    "tag": "LV-115",
     "xmv": 8,
     "unit": "C-101",
     "stream": "S11",
@@ -1939,10 +1946,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(8) sets FTM(13); stream 11: C-101 -> BL; documented as teprob.f 'Stripper Liquid Product Flow'"
-    }
+    },
+    "former_tag": "LV-208"
    }
   },
-  "FV-209": {
+  "FV-119": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1953,7 +1961,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "FV-209",
+    "tag": "FV-119",
     "xmv": 9,
     "unit": "C-101",
     "uom": "%",
@@ -1972,10 +1980,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(9) -> UAC; QUC enters the stripper energy balance; documented as teprob.f 'Stripper Steam Valve'"
-    }
+    },
+    "former_tag": "FV-209"
    }
   },
-  "TV-210": {
+  "TV-121": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1986,7 +1995,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "TV-210",
+    "tag": "TV-121",
     "xmv": 10,
     "unit": "R-101",
     "uom": "%",
@@ -2005,10 +2014,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(10) -> FWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Flow'"
-    }
+    },
+    "former_tag": "TV-210"
    }
   },
-  "TV-211": {
+  "FV-117": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -2019,7 +2029,7 @@
    ],
    "unit": "E-101",
    "source_item": {
-    "tag": "TV-211",
+    "tag": "FV-117",
     "xmv": 11,
     "unit": "E-101",
     "uom": "%",
@@ -2038,7 +2048,8 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "VPOS(11) -> FWS; QUS cools the reactor effluent FTM(8) (the condenser position); QUS is booked into the separator energy balance; documented as teprob.f 'Condenser Cooling Water Flow'"
-    }
+    },
+    "former_tag": "TV-211"
    }
   },
   "SC-212": {
@@ -2131,17 +2142,17 @@
    "AI-137-F": "unverified",
    "AI-137-G": "unverified",
    "AI-137-H": "unverified",
-   "FV-201": "unverified",
-   "FV-202": "unverified",
-   "FV-203": "unverified",
-   "FV-204": "unverified",
-   "HV-205": "unverified",
-   "FV-206": "unverified",
-   "LV-207": "unverified",
-   "LV-208": "unverified",
-   "FV-209": "unverified",
-   "TV-210": "unverified",
-   "TV-211": "unverified",
+   "FV-102": "unverified",
+   "FV-103": "unverified",
+   "FV-101": "unverified",
+   "FV-104": "unverified",
+   "FV-105": "unverified",
+   "FV-110": "unverified",
+   "LV-112": "unverified",
+   "LV-115": "unverified",
+   "FV-119": "unverified",
+   "TV-121": "unverified",
+   "FV-117": "unverified",
    "SC-212": "unverified"
   },
   "bands": {

@@ -4,7 +4,7 @@
   "status": "built to iterate on; not a validated deliverable and not reviewed by operations",
   "generated_by": "scripts/build_scene_data.py",
   "source": "data/te_process_model.json",
-  "source_sha256": "23386b664c09b7a9c0a023bbc52d7bf3954d1daa9e5ff079e825e7e090918113",
+  "source_sha256": "f8fb1ef85b27fe10b06b0f88582649fb96080ad57eb10aeb300cf9918bdc18ae",
   "inherits": "every element carries the provenance of the model item it came from; geometry adds none",
   "geometry": "positions are the model's 2D layout scaled to metres; sizes, elevations and routes are placeholders",
   "loto": "candidates are inferred from the model; this is not a LOTO procedure (OSHA 1910.147)"
@@ -75,7 +75,7 @@
      }
     },
     {
-     "tag": "FV-204",
+     "tag": "FV-104",
      "description": "A and C feed flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -86,7 +86,7 @@
      }
     },
     {
-     "tag": "FV-209",
+     "tag": "FV-119",
      "description": "Stripper steam valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -108,7 +108,7 @@
      }
     },
     {
-     "tag": "LV-208",
+     "tag": "LV-115",
      "description": "Stripper liquid product flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -163,6 +163,17 @@
    },
    "tags": [
     {
+     "tag": "FV-117",
+     "description": "Condenser cooling water flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": null,
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
      "tag": "TI-122",
      "description": "Separator Cooling Water Outlet Temp",
      "uom": "degC",
@@ -170,17 +181,6 @@
      "stream": null,
      "provenance": {
       "source_check": "corrected",
-      "ops_review": "unverified"
-     }
-    },
-    {
-     "tag": "TV-211",
-     "description": "Condenser cooling water flow valve",
-     "uom": "%",
-     "kind": "output (recorded %, not valve position)",
-     "stream": null,
-     "provenance": {
-      "source_check": "confirmed",
       "ops_review": "unverified"
      }
     }
@@ -218,7 +218,7 @@
      }
     },
     {
-     "tag": "HV-205",
+     "tag": "FV-105",
      "description": "Compressor recycle valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -339,7 +339,7 @@
      }
     },
     {
-     "tag": "TV-210",
+     "tag": "TV-121",
      "description": "Reactor cooling water flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -405,7 +405,18 @@
      }
     },
     {
-     "tag": "FV-201",
+     "tag": "FV-101",
+     "description": "A feed flow valve",
+     "uom": "%",
+     "kind": "output (recorded %, not valve position)",
+     "stream": "S1",
+     "provenance": {
+      "source_check": "confirmed",
+      "ops_review": "unverified"
+     }
+    },
+    {
+     "tag": "FV-102",
      "description": "D feed flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -416,22 +427,11 @@
      }
     },
     {
-     "tag": "FV-202",
+     "tag": "FV-103",
      "description": "E feed flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
      "stream": "S3",
-     "provenance": {
-      "source_check": "confirmed",
-      "ops_review": "unverified"
-     }
-    },
-    {
-     "tag": "FV-203",
-     "description": "A feed flow valve",
-     "uom": "%",
-     "kind": "output (recorded %, not valve position)",
-     "stream": "S1",
      "provenance": {
       "source_check": "confirmed",
       "ops_review": "unverified"
@@ -493,7 +493,7 @@
      }
     },
     {
-     "tag": "FV-206",
+     "tag": "FV-110",
      "description": "Purge valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -515,7 +515,7 @@
      }
     },
     {
-     "tag": "LV-207",
+     "tag": "LV-112",
      "description": "Separator pot liquid flow valve",
      "uom": "%",
      "kind": "output (recorded %, not valve position)",
@@ -560,7 +560,7 @@
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-101",
-    "FV-203"
+    "FV-101"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -576,7 +576,7 @@
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-102",
-    "FV-201"
+    "FV-102"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -592,7 +592,7 @@
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-103",
-    "FV-202"
+    "FV-103"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -608,7 +608,7 @@
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-104",
-    "FV-204"
+    "FV-104"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -708,7 +708,7 @@
    "tags_on_stream": [
     "AI-129",
     "FI-110",
-    "FV-206"
+    "FV-110"
    ],
    "provenance": {
     "source_check": "corrected",
@@ -724,7 +724,7 @@
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
     "FI-114",
-    "LV-207"
+    "LV-112"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -741,7 +741,7 @@
    "tags_on_stream": [
     "AI-137",
     "FI-117",
-    "LV-208"
+    "LV-115"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -752,7 +752,7 @@
  "loto_candidates": [
   {
    "unit": "C-101",
-   "isolation_candidate": "FV-204",
+   "isolation_candidate": "FV-104",
    "stream": "S4",
    "valve_owner_in_model": "C-101",
    "inferred": true,
@@ -764,7 +764,7 @@
   },
   {
    "unit": "C-101",
-   "isolation_candidate": "LV-207",
+   "isolation_candidate": "LV-112",
    "stream": "S10",
    "valve_owner_in_model": "V-101",
    "inferred": true,
@@ -776,7 +776,7 @@
   },
   {
    "unit": "C-101",
-   "isolation_candidate": "LV-208",
+   "isolation_candidate": "LV-115",
    "stream": "S11",
    "valve_owner_in_model": "C-101",
    "inferred": true,
@@ -788,7 +788,19 @@
   },
   {
    "unit": "U-100",
-   "isolation_candidate": "FV-201",
+   "isolation_candidate": "FV-101",
+   "stream": "S1",
+   "valve_owner_in_model": "U-100",
+   "inferred": true,
+   "basis": "final element on stream S1 (BL -> U-100) in the model",
+   "provenance": {
+    "source_check": "confirmed",
+    "ops_review": "unverified"
+   }
+  },
+  {
+   "unit": "U-100",
+   "isolation_candidate": "FV-102",
    "stream": "S2",
    "valve_owner_in_model": "U-100",
    "inferred": true,
@@ -800,7 +812,7 @@
   },
   {
    "unit": "U-100",
-   "isolation_candidate": "FV-202",
+   "isolation_candidate": "FV-103",
    "stream": "S3",
    "valve_owner_in_model": "U-100",
    "inferred": true,
@@ -811,20 +823,8 @@
    }
   },
   {
-   "unit": "U-100",
-   "isolation_candidate": "FV-203",
-   "stream": "S1",
-   "valve_owner_in_model": "U-100",
-   "inferred": true,
-   "basis": "final element on stream S1 (BL -> U-100) in the model",
-   "provenance": {
-    "source_check": "confirmed",
-    "ops_review": "unverified"
-   }
-  },
-  {
    "unit": "V-101",
-   "isolation_candidate": "FV-206",
+   "isolation_candidate": "FV-110",
    "stream": "S9",
    "valve_owner_in_model": "V-101",
    "inferred": true,
@@ -836,7 +836,7 @@
   },
   {
    "unit": "V-101",
-   "isolation_candidate": "LV-207",
+   "isolation_candidate": "LV-112",
    "stream": "S10",
    "valve_owner_in_model": "V-101",
    "inferred": true,

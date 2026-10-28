@@ -83,7 +83,7 @@
       <data key="d2">913</data>
       <data key="d3">1094</data>
       <data key="d4">1129</data>
-      <data key="d12">FV-204</data>
+      <data key="d12">FV-104</data>
     </node>
     <node id="instrumentation1">
       <data key="d0">instrumentation</data>
@@ -91,8 +91,8 @@
       <data key="d2">925</data>
       <data key="d3">1015</data>
       <data key="d4">1065</data>
-      <data key="d11">FV 204</data>
-      <data key="d12">FV-204</data>
+      <data key="d11">FV 104</data>
+      <data key="d12">FV-104</data>
     </node>
     <node id="connector1">
       <data key="d0">connector</data>
@@ -155,7 +155,7 @@
       <data key="d2">1913</data>
       <data key="d3">1574</data>
       <data key="d4">1609</data>
-      <data key="d12">LV-208</data>
+      <data key="d12">LV-115</data>
     </node>
     <node id="instrumentation5">
       <data key="d0">instrumentation</data>
@@ -163,8 +163,8 @@
       <data key="d2">1925</data>
       <data key="d3">1495</data>
       <data key="d4">1545</data>
-      <data key="d11">LV 208</data>
-      <data key="d12">LV-208</data>
+      <data key="d11">LV 115</data>
+      <data key="d12">LV-115</data>
     </node>
     <node id="connector2">
       <data key="d0">connector</data>
@@ -186,7 +186,7 @@
       <data key="d2">713</data>
       <data key="d3">1414</data>
       <data key="d4">1449</data>
-      <data key="d12">FV-209</data>
+      <data key="d12">FV-119</data>
     </node>
     <node id="instrumentation6">
       <data key="d0">instrumentation</data>
@@ -194,8 +194,8 @@
       <data key="d2">725</data>
       <data key="d3">1335</data>
       <data key="d4">1385</data>
-      <data key="d11">FV 209</data>
-      <data key="d12">FV-209</data>
+      <data key="d11">FV 119</data>
+      <data key="d12">FV-119</data>
     </node>
     <node id="connector3">
       <data key="d0">connector</data>
@@ -281,6 +281,78 @@
       <data key="d2">1504.0</data>
       <data key="d3">956</data>
       <data key="d4">964</data>
+    </node>
+    <node id="instrumentation11">
+      <data key="d0">instrumentation</data>
+      <data key="d1">975</data>
+      <data key="d2">1025</data>
+      <data key="d3">915</data>
+      <data key="d4">965</data>
+      <data key="d11">FIC 104</data>
+      <data key="d12">FIC-104</data>
+    </node>
+    <node id="instrumentation12">
+      <data key="d0">instrumentation</data>
+      <data key="d1">775</data>
+      <data key="d2">825</data>
+      <data key="d3">1235</data>
+      <data key="d4">1285</data>
+      <data key="d11">FIC 119</data>
+      <data key="d12">FIC-119</data>
+    </node>
+    <node id="instrumentation13">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1775</data>
+      <data key="d2">1825</data>
+      <data key="d3">805</data>
+      <data key="d4">855</data>
+      <data key="d11">TIC 118</data>
+      <data key="d12">TIC-118</data>
+    </node>
+    <node id="instrumentation14">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1875</data>
+      <data key="d2">1925</data>
+      <data key="d3">935</data>
+      <data key="d4">985</data>
+      <data key="d11">LIC 115</data>
+      <data key="d12">LIC-115</data>
+    </node>
+    <node id="instrumentation15">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1695</data>
+      <data key="d2">1745</data>
+      <data key="d3">1395</data>
+      <data key="d4">1445</data>
+      <data key="d11">AIC 137</data>
+      <data key="d12">AIC-137</data>
+    </node>
+    <node id="instrumentation16">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1575</data>
+      <data key="d2">1625</data>
+      <data key="d3">1675</data>
+      <data key="d4">1725</data>
+      <data key="d11">FIC 117</data>
+      <data key="d12">FIC-117</data>
+    </node>
+    <node id="inlet_outlet7">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">120</data>
+      <data key="d2">350</data>
+      <data key="d3">835.0</data>
+      <data key="d4">885.0</data>
+      <data key="d11">SIG PID 101-1 (E-3) / FROM LIC 108</data>
+      <data key="d12">signal:C17</data>
+    </node>
+    <node id="inlet_outlet8">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">2420</data>
+      <data key="d2">2650</data>
+      <data key="d3">1675.0</data>
+      <data key="d4">1725.0</data>
+      <data key="d11">SIG PID 102-1 (F-12) / TO FV 117</data>
+      <data key="d12">signal:C11</data>
     </node>
     <node id="connector7">
       <data key="d0">connector</data>

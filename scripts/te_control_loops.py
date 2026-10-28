@@ -175,7 +175,51 @@ def attach_tags(loops, overrides, model):
             lp["output"].update(tag=fe["tag"], description=fe["description"])
     for ov in overrides:
         ov["tag"] = by_xmeas[ov["xmeas"]]["tag"]
+    # Controller tags: the measurement's first letter + IC + its number (ISA-5.1). An analyzer that feeds more than
+    # one controller gets the component as a suffix (AIC-123A, AIC-123D, AIC-123E).
+    shared = {}
+    for lp in loops:
+        if lp["runs"]:
+            shared[lp["measurement"]["tag"]] = shared.get(lp["measurement"]["tag"], 0) + 1
+    for lp in loops:
+        meas = lp["measurement"]
+        suffix = meas.get("component", "") if shared.get(meas["tag"], 0) > 1 else ""
+        lp["controller_tag"] = f"{meas['tag'][0]}IC-{meas['tag'].split('-')[1]}{suffix}" if lp["runs"] else None
+    by_id = {lp["id"]: lp for lp in loops}
+    for lp in loops:
+        if lp["output"]["kind"] == "setpoint" and lp["output"].get("inner_loop"):
+            lp["output"]["tag"] = by_id[lp["output"]["inner_loop"]]["controller_tag"]
     return loops, overrides
+
+
+def model_controllers(table, check):
+    """The controllers as model items: what scripts/draw_pid_from_model.py draws and the exports can name."""
+    dev = {r["loop"]: r for r in check["rows"]}
+    out = []
+    for lp in table["loops"]:
+        if not lp["runs"]:
+            continue
+        meas, o = lp["measurement"], lp["output"]
+        out.append({
+            "tag": lp["controller_tag"], "loop": lp["id"], "unit": meas["unit"],
+            "measurement": meas["tag"], **({"component": meas["component"]} if "component" in meas else {}),
+            "output": ({"final_element": o["tag"]} if o["kind"] == "final_element" else {"setpoint_of": o["tag"]}),
+            "mode": lp["mode"], "scan_s": lp["scan_s"],
+            "description": f"{meas['description']}{' (' + meas['component'] + ')' if 'component' in meas else ''}"
+                           f" controller",
+            "verification": {
+                "status": "confirmed",
+                "checked_against": [f"temain_mod.f (Braatz group closed-loop TE code, sha256 {SOURCE_SHA256[:16]}...)",
+                                    "d00_te.dat (recorded normal run)"],
+                "evidence": (f"{lp['subroutine']}: error line {meas['line']} reads XMEAS({meas['xmeas']}) against "
+                             f"SETPT({lp['setpoint_index']}); update line {o['line']} moves "
+                             + (f"XMV({o['xmv']})" if o["kind"] == "final_element" else f"SETPT({o['setpoint_index']})")
+                             + f"; recorded mean {dev[lp['id']]['mean']:.4g} vs setpoint {lp['initial_setpoint']:g} "
+                             f"({dev[lp['id']]['dev_sd']:.2f} SD)"),
+                "checked_by": "scripts/te_control_loops.py",
+            },
+        })
+    return out
 
 
 def build(source_path=SOURCE):
@@ -240,6 +284,14 @@ def audit(table, key):
     for ref, sym in symbols.items():
         by_text.setdefault(_compact(sym.get("text")), []).append(ref)
     controllers = {ref for ref, sym in symbols.items() if CONTROLLER_TEXT.match((sym.get("text") or ""))}
+    # Signal continuation flags carry a loop to another sheet: signal_to names what the line drives there,
+    # signal_from names the controller it comes from.
+    flags_out, flags_in = {}, {}
+    for ref, sym in symbols.items():
+        if sym.get("signal_to"):
+            flags_out.setdefault(_compact(sym["signal_to"]), []).append(ref)
+        if sym.get("signal_from"):
+            flags_in.setdefault(_compact(sym["signal_from"]), []).append(ref)
 
     def linked(a_refs, b_refs):
         return any(b in signal.get(a, ()) for a in a_refs for b in b_refs)
@@ -251,20 +303,32 @@ def audit(table, key):
         meas_refs = by_text.get(_compact(meas_tag), [])
         own = [c for c in controllers if linked(meas_refs, [c])
                and symbols[c]["text"][0] == meas_tag[0]]
+        # Several controllers can read one analyzer; a key that says which loop a symbol draws narrows it.
+        if any(symbols[c].get("loop") == lp["id"] for c in own):
+            own = [c for c in own if symbols[c].get("loop") == lp["id"]]
         if lp["output"]["kind"] == "final_element":
             target_tag = lp["output"]["tag"]
             target_refs = by_text.get(_compact(target_tag), [])
+            target_texts = {_compact(target_tag)}
         else:
             inner = running[lp["output"]["inner_loop"]]
             target_tag = f"{inner['id']} controller"
-            target_refs = [c for c in controllers if linked(by_text.get(_compact(inner["measurement"]["tag"]), []), [c])]
+            target_refs = [c for c in controllers if linked(by_text.get(_compact(inner["measurement"]["tag"]), []), [c])
+                           and (symbols[c].get("loop") in (None, inner["id"]))]
+            target_texts = {_compact(symbols[c]["text"]) for c in target_refs}
+
+        def crosses(c):
+            """Controller -> outbound flag naming the target; inbound flag naming the controller -> target."""
+            outs = [f for t in target_texts for f in flags_out.get(t, [])]
+            ins = flags_in.get(_compact(symbols[c]["text"]), [])
+            return linked([c], outs) and linked(ins, target_refs)
         numbers = {_number_of(meas_tag)} | {_number_of(symbols[c]["text"]) for c in own}
         if lp["output"]["kind"] == "final_element":
             numbers.add(_number_of(target_tag))
         checks = {
             "measured": bool(meas_refs),
             "controller": bool(own),
-            "signal": bool(own) and linked(own, target_refs),
+            "signal": bool(own) and (linked(own, target_refs) or any(crosses(c) for c in own)),
             "numbering": bool(own) and len(numbers) == 1,
         }
         rows.append({"loop": lp["id"], "measurement": meas_tag, "target": target_tag,
@@ -351,6 +415,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--write", action="store_true", help="write data/te_control_loops.json")
     ap.add_argument("--check", action="store_true", help="data check + drawing audit -> out/te_loop_audit.md")
+    ap.add_argument("--write-model", action="store_true",
+                    help="write the controllers into data/te_process_model.json (the model the drawing is made from)")
     ap.add_argument("--key", type=Path, default=KEY)
     args = ap.parse_args(argv)
     table = build()
@@ -361,6 +427,11 @@ def main(argv=None):
     elif LOOPS.exists() and LOOPS.read_text(encoding="utf-8") != text:
         print(f"{LOOPS.relative_to(ROOT)} differs from the source; rerun with --write")
         return 1
+    if args.write_model:
+        model = json.loads(MODEL.read_text(encoding="utf-8"))
+        model["controllers"] = model_controllers(table, data_check(table))
+        MODEL.write_text(json.dumps(model, indent=2, ensure_ascii=True) + "\n", encoding="utf-8", newline="\n")
+        print(f"wrote {len(model['controllers'])} controllers into {MODEL.relative_to(ROOT)}")
     if args.check:
         key_path = args.key if args.key.is_absolute() else ROOT / args.key
         result = audit(table, json.loads(key_path.read_text(encoding="utf-8")))

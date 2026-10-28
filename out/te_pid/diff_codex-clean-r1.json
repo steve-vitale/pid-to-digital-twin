@@ -393,10 +393,13 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-201",
+   "tag": "FV-102",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FV-201, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN003",
@@ -408,10 +411,13 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-202",
+   "tag": "FV-103",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FV-202, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN005",
@@ -423,10 +429,13 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-203",
+   "tag": "FV-101",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FV-203, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN001",
@@ -438,9 +447,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-204",
+   "tag": "FV-104",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as FV-204, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN001",
     "tag": "FV 204",
@@ -451,9 +463,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "HV-205",
+   "tag": "FV-105",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as HV-205, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN005",
     "tag": "HV 205",
@@ -464,9 +479,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-206",
+   "tag": "FV-110",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as FV-206, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN008",
     "tag": "FV 206",
@@ -477,9 +495,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "LV-207",
+   "tag": "LV-112",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LV-207, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN013",
     "tag": "LV 207",
@@ -490,9 +511,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "LV-208",
+   "tag": "LV-115",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LV-208, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN010",
     "tag": "LV 208",
@@ -503,9 +527,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-209",
+   "tag": "FV-119",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as FV-209, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN006",
     "tag": "FV 209",
@@ -516,9 +543,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "TV-210",
+   "tag": "TV-121",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TV-210, its revision-A tag"
+   ],
    "extracted": {
     "id": "S101-IN013",
     "tag": "TV 210",
@@ -529,9 +559,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "TV-211",
+   "tag": "FV-117",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TV-211, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN002",
     "tag": "TV 211",
@@ -603,9 +636,9 @@
   "SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)",
   "SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)",
   "SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FV-201: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FV-202: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FV-203: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-101: R-101 -> U-100 (converter rule: connection_path)",
   "DELETE or explain S101-GN001 'M' (general): not a model item",
   "DELETE connection C-101 - K-101: no model stream joins these units",
   "DELETE connection U-100 - V-101: no model stream joins these units"

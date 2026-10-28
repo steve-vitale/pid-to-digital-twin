@@ -289,10 +289,13 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-201",
+   "tag": "FV-102",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FV-201, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN003",
@@ -304,10 +307,13 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-202",
+   "tag": "FV-103",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FV-202, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN005",
@@ -319,24 +325,27 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-203",
+   "tag": "FV-101",
    "status": "missing"
   },
   {
    "kind": "final_element",
-   "tag": "FV-204",
+   "tag": "FV-104",
    "status": "missing"
   },
   {
    "kind": "final_element",
-   "tag": "HV-205",
+   "tag": "FV-105",
    "status": "missing"
   },
   {
    "kind": "final_element",
-   "tag": "FV-206",
+   "tag": "FV-110",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as FV-206, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN008",
     "tag": "FV 206",
@@ -347,9 +356,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "LV-207",
+   "tag": "LV-112",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LV-207, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN013",
     "tag": "LV 207",
@@ -360,9 +372,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "LV-208",
+   "tag": "LV-115",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LV-208, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN010",
     "tag": "LV 208",
@@ -373,14 +388,17 @@
   },
   {
    "kind": "final_element",
-   "tag": "FV-209",
+   "tag": "FV-119",
    "status": "missing"
   },
   {
    "kind": "final_element",
-   "tag": "TV-210",
+   "tag": "TV-121",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TV-210, its revision-A tag"
+   ],
    "extracted": {
     "id": "S101-IN013",
     "tag": "TV 210",
@@ -391,9 +409,12 @@
   },
   {
    "kind": "final_element",
-   "tag": "TV-211",
+   "tag": "FV-117",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TV-211, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN002",
     "tag": "TV 211",
@@ -554,12 +575,12 @@
   "ADD JI-120 (Compressor work): tag not read on the drawings",
   "ADD AI-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings",
   "ADD AI-129 (Purge gas analyzer (components A-H)): tag not read on the drawings",
-  "SET unit of FV-201: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FV-202: R-101 -> U-100 (converter rule: connection_path)",
-  "ADD FV-203 (A feed flow valve): tag not read on the drawings",
-  "ADD FV-204 (A and C feed flow valve): tag not read on the drawings",
-  "ADD HV-205 (Compressor recycle valve): tag not read on the drawings",
-  "ADD FV-209 (Stripper steam valve): tag not read on the drawings",
+  "SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)",
+  "ADD FV-101 (A feed flow valve): tag not read on the drawings",
+  "ADD FV-104 (A and C feed flow valve): tag not read on the drawings",
+  "ADD FV-105 (Compressor recycle valve): tag not read on the drawings",
+  "ADD FV-119 (Stripper steam valve): tag not read on the drawings",
   "ADD SC-212 (Agitator speed): tag not read on the drawings",
   "DELETE or explain S101-IN001 'FV 200' (instrumentation): not a model item",
   "DELETE or explain S101-IN007 'SC 721' (instrumentation): not a model item",

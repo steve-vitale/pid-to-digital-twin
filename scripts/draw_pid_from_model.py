@@ -10,9 +10,15 @@ border, an equipment legend and a title block. Sizes come from the OPEN100 keys 
 them).
 
 What is drawn comes ONLY from the model (data/te_process_model.json): units, streams, every instrument and final
-element, which unit owns each item and which stream it sits on. WHERE it is drawn comes from a drafting layout
+element, which unit owns each item and which stream it sits on, and every controller with what it reads and what it
+moves (written into the model by scripts/te_control_loops.py from the closed-loop code). Controllers are drawn as
+control-system functions (ISA-5.1: a circle in a square, with a line for "visible to the operator") joined by dashed
+signal lines to their measurement and to their valve, or to the inner controller of a cascade. A loop that runs onto
+another sheet ends in a signal continuation flag naming the sheet and what it drives there. WHERE it is drawn comes from a drafting layout
 (data/te_pid_layout.json). The generator refuses to draw if the layout drops a model item, draws one twice, or
-names a tag the model doesn't have. Lines the model has no stream for (cooling water, steam, the compressor recycle
+names a tag the model doesn't have. It also refuses a controller placed twice or not at all, a model signal not
+drawn (or drawn twice), a signal the model doesn't have, a signal line that isn't horizontal or vertical, and a
+signal line that runs through any symbol or vessel other than its own two ends. Lines the model has no stream for (cooling water, steam, the compressor recycle
 bypass) are drafting additions and are marked so in the key.
 
 A generated drawing is NOT a drawing of record. It shows what the model says, not what is in the field, until
@@ -25,8 +31,11 @@ Outputs (data/te_pid/):
   <sheet>.png        the rendered sheet (3200 x 2130 px): what the extraction pipeline reads
   <sheet>.svg        the same primitives as vector graphics
   <sheet>.graphml    answer key in the PID2Graph schema, so the frozen scorer reads it unchanged; extra node
-                     attributes `text` (what is printed in/at the symbol) and `model_ref` (the model item it draws)
-  key.json           every symbol with its printed text, model reference and drafting flag; every link
+                     attributes `text` (what is printed in/at the symbol) and `model_ref` (the model item it draws).
+                     Its edges are process lines only, as in the OPEN100 keys, so the frozen connection score keeps
+                     its meaning; controllers are in it as symbols
+  key.json           every symbol with its printed text, model reference and drafting flag; every link; and
+                     signal_edges, the symbol pairs joined by signal lines (scored by scripts/te_control_loops.py)
   manifest.json      sha256 of the model, layout, generator and each output
   ../sheet_registers/te_generated.csv   the drawing register (sheet, drawing number, system), as a plant supplies
 
@@ -58,6 +67,7 @@ TEXT = 15          # bubble and flag text
 SMALL = 13
 EQ_TEXT = 26       # equipment tag
 ARROW_L, ARROW_W = 18, 12
+SIGNAL_DASH = (12, 7)   # ISA-5.1 electric signal
 FRAME = (70, 70, 3130, 2060)
 COLS, ROWS = 12, 8
 
@@ -198,14 +208,19 @@ class Sheet:
         self.nodes = {}           # id -> {class, box, text, model_ref, drafting}
         self.counts = {}
         self.edges = set()
+        self.signal_edges = set()      # (a, b) symbol pairs joined by a signal line (key.json signal_edges)
+        self.signal_paths = []         # (signal spec, drawn points, its two end nodes), for the clearance check
+        self.centers = {}              # tag -> (x, y, half size): where a signal line meets the symbol
+        self.tag_node = {}
+        self.ctrl_by_tag = {}
         self.unit_geo = {}
 
     # -- key bookkeeping
-    def node(self, cls, box, text=None, model_ref=None, drafting=False, kind=None):
+    def node(self, cls, box, text=None, model_ref=None, drafting=False, kind=None, extra=None):
         self.counts[cls] = self.counts.get(cls, 0) + 1
         nid = f"{cls.replace('/', '_')}{self.counts[cls]}"
         self.nodes[nid] = {"class": cls, "box": [round(v, 1) for v in box], "text": text, "model_ref": model_ref,
-                           "model_kind": kind, "drafting_addition": drafting}
+                           "model_kind": kind, "drafting_addition": drafting, **(extra or {})}
         return nid
 
     def link_group(self, members, at):
@@ -223,8 +238,94 @@ class Sheet:
         self.c.circle(cx, cy, BUBBLE_R, THIN_W)
         self.c.text(cx, cy - 9, letters, TEXT)
         self.c.text(cx, cy + 9, num, TEXT)
-        return self.node("instrumentation", (cx - BUBBLE_R, cy - BUBBLE_R, cx + BUBBLE_R, cy + BUBBLE_R),
-                         f"{letters} {num}", tag, kind=kind)
+        nid = self.node("instrumentation", (cx - BUBBLE_R, cy - BUBBLE_R, cx + BUBBLE_R, cy + BUBBLE_R),
+                        f"{letters} {num}", tag, kind=kind)
+        self.centers[tag], self.tag_node[tag] = (cx, cy, BUBBLE_R), nid
+        return nid
+
+    def controller(self, tag, at, loop):
+        """A control-system function: circle in a square, with the operator-visible line across it (ISA-5.1)."""
+        cx, cy = at
+        letters, num = split_tag(tag)
+        r = BUBBLE_R
+        self.c.rect((cx - r, cy - r, cx + r, cy + r), THIN_W, "white")
+        self.c.circle(cx, cy, r, THIN_W, fill=None)
+        self.c.line([(cx - r, cy), (cx + r, cy)], 1)
+        self.c.text(cx, cy - 11, letters, SMALL)
+        self.c.text(cx, cy + 11, num, SMALL)
+        nid = self.node("instrumentation", (cx - r, cy - r, cx + r, cy + r), f"{letters} {num}", tag,
+                        kind="controller", extra={"loop": loop})
+        self.centers[tag], self.tag_node[tag] = (cx, cy, r), nid
+        return nid
+
+    def signal_flag(self, fid, f, ctrl):
+        """Continuation flag for a signal that runs onto another sheet; text names the sheet and the far end."""
+        partner = [(sh, fl) for sh in self.layout["sheets"] if sh["id"] != self.spec["id"]
+                   for fl in sh.get("signal_flags", {}).values() if fl["loop"] == f["loop"] and fl["role"] != f["role"]]
+        if len(partner) != 1:
+            raise ValueError(f"sheet {self.spec['id']} signal flag {fid}: needs exactly one partner flag for loop "
+                             f"{f['loop']} on another sheet, found {len(partner)}")
+        sh, fl = partner[0]
+        far = next(iter(ctrl["output"].values())) if f["role"] == "out" else ctrl["tag"]
+        lines = [f"SIG PID {sh['drawing']} ({zone(*fl['at'])})",
+                 f"{'TO' if f['role'] == 'out' else 'FROM'} " + " ".join(split_tag(far))]
+        x, y = f["at"]
+        y0, y1 = y - FLAG_H / 2, y + FLAG_H / 2
+        if f["dir"] == "right":
+            pts = [(x, y0), (x + FLAG_W - FLAG_TIP, y0), (x + FLAG_W, y), (x + FLAG_W - FLAG_TIP, y1), (x, y1)]
+            tx = x + (FLAG_W - FLAG_TIP) / 2
+        else:
+            pts = [(x + FLAG_TIP, y0), (x + FLAG_W, y0), (x + FLAG_W, y1), (x + FLAG_TIP, y1), (x, y)]
+            tx = x + FLAG_TIP + (FLAG_W - FLAG_TIP) / 2
+        self.c.polygon(pts, THIN_W, "white")
+        self.c.text(tx, y - 11, lines[0], SMALL)
+        self.c.text(tx, y + 11, lines[1], SMALL)
+        extra = {"loop": f["loop"], ("signal_to" if f["role"] == "out" else "signal_from"): far}
+        nid = self.node("inlet/outlet", (x, y0, x + FLAG_W, y1), " / ".join(lines), f"signal:{f['loop']}",
+                        kind="signal_flag", extra=extra)
+        attach = (x + FLAG_W, y) if x < self.w / 2 else (x, y)
+        self.centers[f"flag:{fid}"], self.tag_node[f"flag:{fid}"] = (*attach, 0), nid
+        return nid
+
+    def signal(self, sig):
+        """A dashed signal line between two symbols, through the layout's corner points (orthogonal only)."""
+        ends = []
+        for key in (sig["from"], sig["to"]):
+            if key not in self.centers:
+                raise ValueError(f"sheet {self.spec['id']} signal {sig['from']} -> {sig['to']}: {key} is not drawn "
+                                 f"on this sheet")
+            ends.append(self.centers[key])
+        pts = [ends[0][:2]] + [tuple(v) for v in sig.get("via", [])] + [ends[1][:2]]
+        for a, b in zip(pts, pts[1:]):
+            if seg_dir(a, b) is None:
+                raise ValueError(f"sheet {self.spec['id']} signal {sig['from']} -> {sig['to']}: segment {a} -> {b} "
+                                 f"is not horizontal or vertical")
+
+        def clip(p, q, half):
+            L = math.dist(p, q)
+            if half >= L:
+                raise ValueError(f"signal {sig['from']} -> {sig['to']}: a corner sits inside a symbol")
+            return (p[0] + (q[0] - p[0]) * half / L, p[1] + (q[1] - p[1]) * half / L)
+        pts[0] = clip(pts[0], pts[1], ends[0][2])
+        pts[-1] = clip(pts[-1], pts[-2], ends[1][2])
+        self.c.line(pts, THIN_W, dash=SIGNAL_DASH)
+        a, b = self.tag_node[sig["from"]], self.tag_node[sig["to"]]
+        self.signal_edges.add((a, b))
+        self.signal_paths.append((sig, pts, {a, b}))
+
+    def check_signal_clearance(self):
+        """Refuse a signal line that runs through a symbol or vessel other than its own ends."""
+        solid = {nid: n["box"] for nid, n in self.nodes.items() if n["class"] not in ("connector", "arrow")}
+        for sig, pts, own in self.signal_paths:
+            for a, b in zip(pts, pts[1:]):
+                x0, x1 = sorted((a[0], b[0]))
+                y0, y1 = sorted((a[1], b[1]))
+                for nid, (bx0, by0, bx1, by1) in solid.items():
+                    if nid in own:
+                        continue
+                    if x0 < bx1 - 1 and x1 > bx0 + 1 and y0 < by1 - 1 and y1 > by0 + 1:
+                        raise ValueError(f"sheet {self.spec['id']} signal {sig['from']} -> {sig['to']}: segment "
+                                         f"{a} -> {b} runs through {self.nodes[nid]['text'] or nid}")
 
     def valve(self, p, orient, tag, side, drafting):
         x, y = p
@@ -450,6 +551,18 @@ class Sheet:
                 bid = self.bubble(*bc, tag, kind)
                 self.link_group([bid, unit_nodes[uid]], lead[1])
                 drawn.setdefault(tag, []).append(spec["id"])
+        # Controllers, signal continuation flags, then the signal lines between them.
+        for tag, at in spec.get("controllers", {}).items():
+            if tag not in self.ctrl_by_tag:
+                raise ValueError(f"sheet {spec['id']}: controller {tag} is not in the model")
+            self.controller(tag, at, self.ctrl_by_tag[tag]["loop"])
+            drawn.setdefault(tag, []).append(spec["id"])
+        by_loop = {c["loop"]: c for c in self.ctrl_by_tag.values()}
+        for fid, f in spec.get("signal_flags", {}).items():
+            self.signal_flag(fid, f, by_loop[f["loop"]])
+        for sig in spec.get("signals", []):
+            self.signal(sig)
+        self.check_signal_clearance()
         self.connect(routes, unit_nodes, flag_nodes)
         self.legend()
         self.title_block()
@@ -632,6 +745,39 @@ class Sheet:
         return "\n".join(out)
 
 
+def signal_problems(sheets, ctrl_by_tag):
+    """Every signal the model implies drawn exactly once (a cross-sheet one as two halves), and nothing else."""
+    want = {}
+    for c in ctrl_by_tag.values():
+        want[(c["measurement"], c["tag"])] = 0
+        want[(c["tag"], next(iter(c["output"].values())))] = 0
+    by_loop = {c["loop"]: c for c in ctrl_by_tag.values()}
+    halves, problems = {}, []
+    for sh in sheets:
+        flags = {nid: n for nid, n in sh.nodes.items() if n.get("model_kind") == "signal_flag"}
+        for a, b in sh.signal_edges:
+            if a in flags or b in flags:
+                c = by_loop[(flags.get(a) or flags.get(b))["loop"]]
+                pair = (c["tag"], next(iter(c["output"].values())))
+                halves.setdefault(pair, []).append("in" if a in flags else "out")
+                continue
+            pair = (sh.nodes[a]["model_ref"], sh.nodes[b]["model_ref"])
+            if pair not in want:
+                problems.append(f"sheet {sh.spec['id']}: signal {pair[0]} -> {pair[1]} is not in the model")
+                continue
+            want[pair] += 1
+    for pair, sides in halves.items():
+        if pair not in want:
+            problems.append(f"signal {pair[0]} -> {pair[1]} (across sheets) is not in the model")
+        elif sorted(sides) == ["in", "out"]:
+            want[pair] += 1
+        else:
+            problems.append(f"signal {pair[0]} -> {pair[1]}: across sheets needs one outbound and one inbound "
+                            f"half, found {sorted(sides)}")
+    return problems + [f"signal {a} -> {b}: drawn {n} times (must be exactly once)"
+                       for (a, b), n in sorted(want.items()) if n != 1]
+
+
 def sha_file(p):
     """sha256 of a file; text files are hashed with CRLF normalised to LF, so a Windows and a Linux checkout agree."""
     data = Path(p).read_bytes()
@@ -644,17 +790,20 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
     model = json.loads(Path(model_path).read_text(encoding="utf-8"))
     layout = json.loads(Path(layout_path).read_text(encoding="utf-8"))
     items_by_tag = {i["tag"]: i for i in model["instruments"] + model["final_elements"]}
+    ctrl_by_tag = {c["tag"]: c for c in model.get("controllers", [])}
     drawn, sheets = {}, []
     for spec in layout["sheets"]:
         sh = Sheet(spec, model, layout, None)
+        sh.ctrl_by_tag = ctrl_by_tag
         sh.draw(items_by_tag, drawn)
         sheets.append(sh)
     # Completeness: every model unit, item and stream drawn; items exactly once.
     problems = []
-    for tag in items_by_tag:
+    for tag in list(items_by_tag) + list(ctrl_by_tag):
         n = len(drawn.get(tag, []))
         if n != 1:
             problems.append(f"{tag}: drawn {n} times (must be exactly once)")
+    problems += signal_problems(sheets, ctrl_by_tag)
     for u in model["units"]:
         if len(drawn.get(f"unit:{u['id']}", [])) != 1:
             problems.append(f"unit {u['id']}: drawn {len(drawn.get('unit:' + u['id'], []))} times")
@@ -684,7 +833,8 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
         key["sheets"][sid] = {"drawing": sh.spec["drawing"], "system": sh.spec["system"], "title": sh.spec["title"],
                               "size_px": [sh.w, sh.h],
                               "symbols": {k: v for k, v in sh.nodes.items() if v["class"] not in ("connector", "arrow")},
-                              "edges": sorted(sh.edges)}
+                              "edges": sorted(sh.edges),
+                              "signal_edges": sorted(sh.signal_edges)}
         for p in (png, svg, gml):
             manifest["files"][p.name] = sha_file(p)
     (out_dir / "key.json").write_text(json.dumps(key, indent=1), encoding="utf-8")

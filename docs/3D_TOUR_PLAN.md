@@ -184,8 +184,8 @@ each piece exists, and design a lockout/tagout version. What changed:
 | **Why each piece exists** | A purpose card at each stop gives one plain sentence on what the unit does for the process and one on its essential function. The purpose sentence comes from `data/te_unit_purposes.json`, the model's own file: one sentence per unit, each citing the `teprob.f` lines it restates, checked by `scripts/test_te_topology.py`. The function line and the highlights come from the tour's `data/te_tour_cards.json`. The parts doing the job are highlighted: cooling-water lines at the reactor and condenser, the vapour outlet and level band at the separator, the feed valves at the feed system. |
 
 Cooling water and steam are **not streams in the contract**. A stub is drawn only where a final element's own
-description names the utility (TV-210 and TV-211 "cooling water", FV-209 "steam"). Each stub is labelled inferred in
-the scene data and in the legend. TV-210's marker sits at its valve symbol on that line; the position is still a
+description names the utility (TV-121 and FV-117 "cooling water", FV-119 "steam"). Each stub is labelled inferred in
+the scene data and in the legend. TV-121's marker sits at its valve symbol on that line; the position is still a
 placeholder.
 
 | Overview (elevated three-quarter) | Reactor stop (focus, purpose and why cards) |
@@ -326,8 +326,8 @@ otherwise they are constant and labelled "illustrative":
 
 | Asset | Visual | Driven by |
 |---|---|---|
-| Reactor | Heat produced in the vessel, carried away by cooling water: a warm-to-cool gradient along the inferred CW return and supply | TV-210 valve output and TI-121 outlet temperature (replay); the gradient itself illustrative |
-| Condenser | Vapour in at the top, cooled stream out | TV-211 and TI-122 (owner settled on E-101 by the topology check) |
+| Reactor | Heat produced in the vessel, carried away by cooling water: a warm-to-cool gradient along the inferred CW return and supply | TV-121 valve output and TI-121 outlet temperature (replay); the gradient itself illustrative |
+| Condenser | Vapour in at the top, cooled stream out | FV-117 and TI-122 (owner settled on E-101 by the topology check) |
 | Separator | Phases splitting: vapour chevrons up and out to recycle, a liquid level band holding at the LI-112 value | LI-112, FI-114 (replay) |
 | Compressor | A pulsing arrow on the recycle line for the pressure boost | JI-120 compressor work, FI-105 recycle flow (replay) |
 | Stripper | Stripping gas and steam rising, product falling to the base | FI-119 steam flow, FI-117 product flow (replay) |
@@ -339,7 +339,7 @@ Two kinds of emphasis come from data, and both now appear as compact annotations
 - **Limits:** PI-107's operating high alarm at normal stops. The published shutdown limits on PI-107 and TI-109,
   the trip points of the simulator, appear only on fault stills.
 - **First warning:** the unit whose tags leave their band first in the recorded fault. In TE that is U-100, where
-  FI-101 and FV-203 leave at the fault start. It is in the narration and the data, with no box.
+  FI-101 and FV-101 leave at the fault start. It is in the narration and the data, with no box.
 
 A third element comes from a prototype: one **"Why this matters"** card per stop, citing a public incident. It is
 matched to the unit's equipment kind by a keyword heuristic over a public-incident
@@ -360,10 +360,10 @@ walks through:
 
 What the mockup shows, all inferred from the TE seed model and marked `*`:
 - battery-limit block valves on every boundary stream (the contract has no block valves; control valves such as
-  FV-201 are not positive isolation);
+  FV-102 are not positive isolation);
 - the K-101 motor and the R-101 agitator motor (electrical isolation; SC-212 is the agitator tag);
-- cooling water in and out at R-101 and E-101 (from TV-210 and TV-211);
-- steam at C-101 (from FV-209).
+- cooling water in and out at R-101 and E-101 (from TV-121 and FV-117);
+- steam at C-101 (from FV-119).
 
 **This is not a lockout/tagout procedure, and nothing here may be used as one.** A real procedure comes from:
 - the site's energy-control program under OSHA 29 CFR 1910.147;

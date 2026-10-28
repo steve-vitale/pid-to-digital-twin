@@ -7,7 +7,7 @@
     "scope": "Published control schematic supports coarse process regions only; not original plant P&ID or exact taps. Unit ownership, stream endpoints and directions are verified against the simulator source (out/te_topology_check.md); positions on screen remain approximate.",
     "discrepancies": [
       "Resolved 2026-10-13: TI-122 is the condenser cooling-water outlet (same circuit as XMV 11; the source labels it 'separator' because the simulator books condenser duty in the separator energy balance). Stays on E-101.",
-      "Corrected 2026-10-13: the purge S9 leaves the separator vapour, not the compressor (purge flow is driven by separator pressure in teprob.f). S9, FI-110, FV-206 and AI-129 moved from K-101 to V-101.",
+      "Corrected 2026-10-13: the purge S9 leaves the separator vapour, not the compressor (purge flow is driven by separator pressure in teprob.f). S9, FI-110, FV-110 and AI-129 moved from K-101 to V-101.",
       "Unresolvable in the source: PI-116 is documented as stripper pressure but computed from the feed-header pressure. Kept on C-101 and flagged."
     ]
   },
@@ -34,17 +34,17 @@
     "JI-120": "Compressor work",
     "TI-121": "Cooling-water outlet T",
     "TI-122": "Condenser CW outlet T",
-    "FV-201": "D feed valve output",
-    "FV-202": "E feed valve output",
-    "FV-203": "A feed valve output",
-    "FV-204": "A + C feed valve output",
-    "HV-205": "Recycle valve output",
-    "FV-206": "Purge valve output",
-    "LV-207": "Liquid valve output",
-    "LV-208": "Product valve output",
-    "FV-209": "Steam valve output",
-    "TV-210": "Cooling-water valve output",
-    "TV-211": "Cooling-water valve output"
+    "FV-102": "D feed valve output",
+    "FV-103": "E feed valve output",
+    "FV-101": "A feed valve output",
+    "FV-104": "A + C feed valve output",
+    "FV-105": "Recycle valve output",
+    "FV-110": "Purge valve output",
+    "LV-112": "Liquid valve output",
+    "LV-115": "Product valve output",
+    "FV-119": "Steam valve output",
+    "TV-121": "Cooling-water valve output",
+    "FV-117": "Cooling-water valve output"
   },
   "units": {
     "R-101": {
@@ -146,7 +146,7 @@
         475,
         [
           "TI-121",
-          "TV-210"
+          "TV-121"
         ]
       ],
       "kind": "reactor",
@@ -227,7 +227,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FV-203": {
+        "FV-101": {
           "box": [
             410,
             180
@@ -259,7 +259,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FV-201": {
+        "FV-102": {
           "box": [
             410,
             280
@@ -291,7 +291,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FV-202": {
+        "FV-103": {
           "box": [
             410,
             380
@@ -380,11 +380,11 @@
         475,
         [
           "TI-122",
-          "TV-211"
+          "FV-117"
         ]
       ],
       "notes": [
-        "TI-122 is the condenser cooling-water outlet temperature: same circuit as TV-211 (XMV 11). The source's 'separator' label reflects that the simulator books condenser duty in the separator energy balance."
+        "TI-122 is the condenser cooling-water outlet temperature: same circuit as FV-117 (XMV 11). The source's 'separator' label reflects that the simulator books condenser duty in the separator energy balance."
       ]
     },
     "V-101": {
@@ -482,7 +482,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LV-207": {
+        "LV-112": {
           "box": [
             1270,
             470
@@ -514,7 +514,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FV-206": {
+        "FV-110": {
           "box": [
             330,
             215
@@ -607,11 +607,11 @@
         80,
         475,
         [
-          "HV-205"
+          "FV-105"
         ]
       ],
       "notes": [
-        "HV-205 spills flow back around the compressor; the simulator has no separate spill-back stream, so none is drawn."
+        "FV-105 spills flow back around the compressor; the simulator has no separate spill-back stream, so none is drawn."
       ],
       "utilities_title": "LOCAL OUTPUT \u00b7 stream / tap not assigned"
     },
@@ -710,7 +710,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FV-204": {
+        "FV-104": {
           "box": [
             1290,
             290
@@ -742,7 +742,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LV-207": {
+        "LV-112": {
           "box": [
             355,
             200
@@ -774,7 +774,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LV-208": {
+        "LV-115": {
           "box": [
             1270,
             510
@@ -808,7 +808,7 @@
         670,
         [
           "FI-119",
-          "FV-209"
+          "FV-119"
         ]
       ],
       "unmapped_note_positions": {

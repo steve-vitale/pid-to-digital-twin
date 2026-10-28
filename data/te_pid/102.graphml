@@ -156,7 +156,7 @@
       <data key="d2">2253</data>
       <data key="d3">854</data>
       <data key="d4">889</data>
-      <data key="d12">FV-206</data>
+      <data key="d12">FV-110</data>
     </node>
     <node id="instrumentation4">
       <data key="d0">instrumentation</data>
@@ -164,8 +164,8 @@
       <data key="d2">2265</data>
       <data key="d3">775</data>
       <data key="d4">825</data>
-      <data key="d11">FV 206</data>
-      <data key="d12">FV-206</data>
+      <data key="d11">FV 110</data>
+      <data key="d12">FV-110</data>
     </node>
     <node id="connector1">
       <data key="d0">connector</data>
@@ -180,7 +180,7 @@
       <data key="d2">1903</data>
       <data key="d3">531</data>
       <data key="d4">566</data>
-      <data key="d12">HV-205</data>
+      <data key="d12">FV-105</data>
     </node>
     <node id="instrumentation5">
       <data key="d0">instrumentation</data>
@@ -188,8 +188,8 @@
       <data key="d2">1915</data>
       <data key="d3">595</data>
       <data key="d4">645</data>
-      <data key="d11">HV 205</data>
-      <data key="d12">HV-205</data>
+      <data key="d11">FV 105</data>
+      <data key="d12">FV-105</data>
     </node>
     <node id="connector2">
       <data key="d0">connector</data>
@@ -213,7 +213,7 @@
       <data key="d2">2063</data>
       <data key="d3">1574</data>
       <data key="d4">1609</data>
-      <data key="d12">LV-207</data>
+      <data key="d12">LV-112</data>
     </node>
     <node id="instrumentation7">
       <data key="d0">instrumentation</data>
@@ -221,8 +221,8 @@
       <data key="d2">2075</data>
       <data key="d3">1495</data>
       <data key="d4">1545</data>
-      <data key="d11">LV 207</data>
-      <data key="d12">LV-207</data>
+      <data key="d11">LV 112</data>
+      <data key="d12">LV-112</data>
     </node>
     <node id="connector3">
       <data key="d0">connector</data>
@@ -244,7 +244,7 @@
       <data key="d2">633</data>
       <data key="d3">794</data>
       <data key="d4">829</data>
-      <data key="d12">TV-211</data>
+      <data key="d12">FV-117</data>
     </node>
     <node id="instrumentation8">
       <data key="d0">instrumentation</data>
@@ -252,8 +252,8 @@
       <data key="d2">645</data>
       <data key="d3">715</data>
       <data key="d4">765</data>
-      <data key="d11">TV 211</data>
-      <data key="d12">TV-211</data>
+      <data key="d11">FV 117</data>
+      <data key="d12">FV-117</data>
     </node>
     <node id="connector4">
       <data key="d0">connector</data>
@@ -348,6 +348,51 @@
       <data key="d2">1904</data>
       <data key="d3">351.0</data>
       <data key="d4">359.0</data>
+    </node>
+    <node id="instrumentation14">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1575</data>
+      <data key="d2">1625</data>
+      <data key="d3">95</data>
+      <data key="d4">145</data>
+      <data key="d11">FIC 105</data>
+      <data key="d12">FIC-105</data>
+    </node>
+    <node id="instrumentation15">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1935</data>
+      <data key="d2">1985</data>
+      <data key="d3">665</data>
+      <data key="d4">715</data>
+      <data key="d11">FIC 110</data>
+      <data key="d12">FIC-110</data>
+    </node>
+    <node id="instrumentation16">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2055</data>
+      <data key="d2">2105</data>
+      <data key="d3">665</data>
+      <data key="d4">715</data>
+      <data key="d11">AIC 129</data>
+      <data key="d12">AIC-129</data>
+    </node>
+    <node id="instrumentation17">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2025</data>
+      <data key="d2">2075</data>
+      <data key="d3">1045</data>
+      <data key="d4">1095</data>
+      <data key="d11">LIC 112</data>
+      <data key="d12">LIC-112</data>
+    </node>
+    <node id="inlet_outlet7">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">120</data>
+      <data key="d2">350</data>
+      <data key="d3">665.0</data>
+      <data key="d4">715.0</data>
+      <data key="d11">SIG PID 103-1 (B-3) / FROM FIC 117</data>
+      <data key="d12">signal:C11</data>
     </node>
     <node id="connector9">
       <data key="d0">connector</data>

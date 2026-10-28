@@ -2684,3 +2684,72 @@ about control, not what it says about equipment.
 (PV, OP or cascade target, mode) and audit your P&IDs against it the same way: every loop needs a controller, signal
 lines and one loop number. Drawings where indicators sit next to valves with different numbers are the ones to walk
 down first.
+
+---
+
+## 51. Draw the control loops, and give each valve its loop's number
+
+**What:** 2026-10-28. Revision B of the generated TE sheets draws all 19 control loops that entry 50 read out of the
+closed-loop code, and every control valve now carries the number of the loop that moves it. The loop audit goes from
+0 of 19 to 19 of 19. Revision A stays in the repository, because the recorded extraction runs read it.
+
+**How:**
+- **Controllers belong to the model.** `scripts/te_control_loops.py --write-model` adds a `controllers` list to
+  `data/te_process_model.json`: tag, loop, what it reads, what it moves (a valve, or another controller's setpoint),
+  mode, scan period, and the source lines and recorded-data deviation as evidence. Tags follow ISA-5.1: FIC-101 reads
+  FI-101. The analyzer that feeds three loops gets component suffixes (AIC-123A, AIC-123D, AIC-123E).
+- **One mapping renames the valves.** `scripts/retag_te_valves.py` applies `data/te_retag_2026-10-28.json` to the
+  source files that name tags (126 replacements in 16 files: the model, layouts, tour cards, hazard citations, HMI
+  unit lists, tests, current-state docs). It refuses a mapping that isn't one-to-one or that would chain. Each renamed
+  valve keeps `former_tag`. HV-205 became FV-105 and TV-211 became FV-117: both sit on flow loops. Outputs were rebuilt
+  by `scripts/pipeline.py`, never edited.
+- **The generator draws what the model says.** Controllers are drawn as DCS functions (a circle in a square, with
+  the operator-visible line), joined by dashed signal lines; the two loops that cross sheets (reactor level to the
+  A and C feed, stripper product flow to condenser cooling water) end in signal continuation flags naming the other
+  sheet, the grid zone and the far end. The layout only gives positions and corner points. The generator refuses a
+  controller placed twice or not at all, a model signal not drawn, a signal the model doesn't have, a diagonal
+  segment, and a signal line through any symbol or vessel. The first full layout drew clean; the refusal tests break
+  it on purpose.
+- **Signals stay out of the scored graph.** The frozen scorer counts every edge in a key's graph file regardless of
+  its label, and the line tracer follows solid lines only. Putting signal lines there failed the tracer check (18
+  untraced links on sheet 101 alone) and would have changed what the round-trip connection score means. Signal lines live in `key.json` as
+  `signal_edges` and are scored by the loop audit; the graph file keeps process lines, as the OPEN100 keys do.
+  Controllers are in it as symbols, because they are on the drawing.
+- **Revision A is kept as evidence.** The recorded extraction, round-trip and twin stages read the 2026-10-13
+  sheets. Those sheets are archived in `data/te_pid/rev-a/`, byte-identical to the hashes the lock recorded when the
+  runs were made, and a source stage (`te.pid_rev_a`) owns them. The reviewer diff joins old extractions through
+  `former_tag`, so all five diffs keep their correction counts (9, 10, 11, 47, 54) and note each valve as "read as
+  FV-201, its revision-A tag".
+- **Everything downstream rebuilt:** Ignition project, PI sheet, SVGs, mimic, scene, bands, fault detection, both
+  tours (the Blender stills re-rendered; the render verifier passes 15 and reports 2 informational, as before) and the
+  style check. 40 of 42 pipeline stages are fresh; the two that aren't need a running gateway.
+
+**What it found:**
+- **Style fidelity dropped from 32 to 30 of 36.** The instrument share per sheet (0.55 to 0.61) is now above every
+  OPEN100 sheet (at most 0.54): the drawing gained 19 controllers but still has none of the block valves, bypasses,
+  drains and vents that surround a control valve on a real P&ID. Ink coverage moved into range.
+- **The model already knew the answer.** Every pairing was in the code; only the numbering hid it. Once tags follow
+  loops, a reader can check a loop by eye: FI-117, FIC-117, FV-117.
+
+**Why:**
+- **Rename at the source, rebuild the rest.** Hand-editing about 1,300 references across exports would have left
+  some behind; the pipeline found the ones the rename tool didn't own (a sorted list and a spoken "T V 210" in the 3D
+  tests).
+- **Keep the old evidence honest.** Re-pointing recorded runs at new sheets would have called stale evidence fresh.
+  Archiving the exact bytes they read keeps their numbers true and says what they describe.
+- **Rejected:** renaming the transmitters to FT (purists draw FT under an FIC). The I letters are the replay points'
+  names everywhere; the loop audit and a reader both get the loop from the shared number. Also rejected: drawing the
+  purge override from PI-113 as a signal. The code implements it as a latched trip with a hand-back inside the purge
+  controller; drawing it properly needs a selector symbol and a cause-and-effect note, not a dashed line.
+
+**Not done here:** the revision-B sheets haven't been read back by the models (a paid, recorded run), the rebuilt
+gateway project hasn't been through native acceptance, the 3D OCR read-back still describes the old stills, and no
+control engineer has reviewed the loops. The audit grades the drawing against the code; it doesn't judge the control
+strategy.
+
+**Lesson:** a loop table is cheap to read and expensive to guess. Once the drawing came from the table, the drawing,
+the tags and every export agreed by construction.
+
+**At your plant:** number control valves by the loop that moves them and draw the controller even when it lives in the
+DCS. When you renumber, do it from one mapping table at the source, keep the old tag on each item, and leave dated
+evidence pointing at the drawing revision it was made from.
