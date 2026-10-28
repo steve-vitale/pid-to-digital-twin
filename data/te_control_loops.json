@@ -1,0 +1,656 @@
+{
+ "about": "Tennessee Eastman control loops read by scripts/te_control_loops.py from the closed-loop code distributed with the Braatz group's TE data. Measurements and valves are named with this project's assigned tags (data/te_process_model.json); xmeas/xmv keep the source indices. Cascade loops move an inner loop's setpoint instead of a valve. Loops with runs=false are defined in the code but never called.",
+ "source": {
+  "file": "temain_mod.f",
+  "sha256": "31b83c17f8d52332d6f6fe46d9da3ee7131de2d018bb83945453350bf635c8b6",
+  "archive": {
+   "url": "https://web.mit.edu/braatzgroup/TE_process.zip",
+   "member": "TE_process/temain_mod.f.txt"
+  },
+  "mirror": "https://raw.githubusercontent.com/camaramm/tennessee-eastman-profBraatz/master/temain_mod.f",
+  "license": "Braatz group NCSA-style notice (data/external/te-braatz/readme.txt)"
+ },
+ "summary": {
+  "running": 19,
+  "valve_loops": 11,
+  "cascades": 8,
+  "defined_not_called": [
+   "C22"
+  ]
+ },
+ "loops": [
+  {
+   "id": "C1",
+   "subroutine": "CONTRL1",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 2,
+    "span": 5811.0,
+    "line": 501,
+    "tag": "FI-102",
+    "description": "D feed flow",
+    "unit": "U-100"
+   },
+   "setpoint_index": 1,
+   "initial_setpoint": 3664.0,
+   "output": {
+    "kind": "final_element",
+    "xmv": 1,
+    "line": 509,
+    "tag": "FV-201",
+    "description": "D feed flow valve"
+   },
+   "gain": {
+    "expression": "1.0",
+    "value": 1.0
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C2",
+   "subroutine": "CONTRL2",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 3,
+    "span": 8354.0,
+    "line": 542,
+    "tag": "FI-103",
+    "description": "E feed flow",
+    "unit": "U-100"
+   },
+   "setpoint_index": 2,
+   "initial_setpoint": 4509.3,
+   "output": {
+    "kind": "final_element",
+    "xmv": 2,
+    "line": 550,
+    "tag": "FV-202",
+    "description": "E feed flow valve"
+   },
+   "gain": {
+    "expression": "1.0",
+    "value": 1.0
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C3",
+   "subroutine": "CONTRL3",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 1,
+    "span": 1.017,
+    "line": 583,
+    "tag": "FI-101",
+    "description": "A feed flow",
+    "unit": "U-100"
+   },
+   "setpoint_index": 3,
+   "initial_setpoint": 0.25052,
+   "output": {
+    "kind": "final_element",
+    "xmv": 3,
+    "line": 591,
+    "tag": "FV-203",
+    "description": "A feed flow valve"
+   },
+   "gain": {
+    "expression": "1.",
+    "value": 1.0
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C4",
+   "subroutine": "CONTRL4",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 4,
+    "span": 15.25,
+    "line": 624,
+    "tag": "FI-104",
+    "description": "A and C feed flow",
+    "unit": "C-101"
+   },
+   "setpoint_index": 4,
+   "initial_setpoint": 9.3477,
+   "output": {
+    "kind": "final_element",
+    "xmv": 4,
+    "line": 632,
+    "tag": "FV-204",
+    "description": "A and C feed flow valve"
+   },
+   "gain": {
+    "expression": "1.",
+    "value": 1.0
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C5",
+   "subroutine": "CONTRL5",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 5,
+    "span": 53.0,
+    "line": 665,
+    "tag": "FI-105",
+    "description": "Recycle flow",
+    "unit": "K-101"
+   },
+   "setpoint_index": 5,
+   "initial_setpoint": 26.902,
+   "output": {
+    "kind": "final_element",
+    "xmv": 5,
+    "line": 678,
+    "tag": "HV-205",
+    "description": "Compressor recycle valve"
+   },
+   "gain": {
+    "expression": "-0.083",
+    "value": -0.083
+   },
+   "reset_s": 1.0
+  },
+  {
+   "id": "C6",
+   "subroutine": "CONTRL6",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 10,
+    "span": 1.0,
+    "line": 735,
+    "tag": "FI-110",
+    "description": "Purge rate",
+    "unit": "V-101"
+   },
+   "setpoint_index": 6,
+   "initial_setpoint": 0.33712,
+   "output": {
+    "kind": "final_element",
+    "xmv": 6,
+    "line": 747,
+    "tag": "FV-206",
+    "description": "Purge valve"
+   },
+   "gain": {
+    "expression": "1.22",
+    "value": 1.22
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C7",
+   "subroutine": "CONTRL7",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 12,
+    "span": 70.0,
+    "line": 784,
+    "tag": "LI-112",
+    "description": "Separator level",
+    "unit": "V-101"
+   },
+   "setpoint_index": 7,
+   "initial_setpoint": 50.0,
+   "output": {
+    "kind": "final_element",
+    "xmv": 7,
+    "line": 792,
+    "tag": "LV-207",
+    "description": "Separator pot liquid flow valve"
+   },
+   "gain": {
+    "expression": "-2.06",
+    "value": -2.06
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C8",
+   "subroutine": "CONTRL8",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 15,
+    "span": 70.0,
+    "line": 825,
+    "tag": "LI-115",
+    "description": "Stripper level",
+    "unit": "C-101"
+   },
+   "setpoint_index": 8,
+   "initial_setpoint": 50.0,
+   "output": {
+    "kind": "final_element",
+    "xmv": 8,
+    "line": 833,
+    "tag": "LV-208",
+    "description": "Stripper liquid product flow valve"
+   },
+   "gain": {
+    "expression": "-1.62",
+    "value": -1.62
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C9",
+   "subroutine": "CONTRL9",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "P",
+   "measurement": {
+    "xmeas": 19,
+    "span": 460.0,
+    "line": 866,
+    "tag": "FI-119",
+    "description": "Stripper steam flow",
+    "unit": "C-101"
+   },
+   "setpoint_index": 9,
+   "initial_setpoint": 230.31,
+   "output": {
+    "kind": "final_element",
+    "xmv": 9,
+    "line": 874,
+    "tag": "FV-209",
+    "description": "Stripper steam valve"
+   },
+   "gain": {
+    "expression": "0.41",
+    "value": 0.41
+   },
+   "reset_s": null
+  },
+  {
+   "id": "C10",
+   "subroutine": "CONTRL10",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 21,
+    "span": 150.0,
+    "line": 907,
+    "tag": "TI-121",
+    "description": "Reactor cooling water outlet temperature",
+    "unit": "R-101"
+   },
+   "setpoint_index": 10,
+   "initial_setpoint": 94.599,
+   "output": {
+    "kind": "final_element",
+    "xmv": 10,
+    "line": 915,
+    "tag": "TV-210",
+    "description": "Reactor cooling water flow valve"
+   },
+   "gain": {
+    "expression": "-0.156     * 10.",
+    "value": -1.56
+   },
+   "reset_s": 1452.0
+  },
+  {
+   "id": "C11",
+   "subroutine": "CONTRL11",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 17,
+    "span": 46.0,
+    "line": 948,
+    "tag": "FI-117",
+    "description": "Stripper underflow (product)",
+    "unit": "C-101"
+   },
+   "setpoint_index": 11,
+   "initial_setpoint": 22.949,
+   "output": {
+    "kind": "final_element",
+    "xmv": 11,
+    "line": 956,
+    "tag": "TV-211",
+    "description": "Condenser cooling water flow valve"
+   },
+   "gain": {
+    "expression": "1.09",
+    "value": 1.09
+   },
+   "reset_s": 2600.0
+  },
+  {
+   "id": "C13",
+   "subroutine": "CONTRL13",
+   "runs": true,
+   "scan_s": 360,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 23,
+    "span": 100.0,
+    "line": 989,
+    "tag": "AI-123",
+    "description": "Reactor feed analyzer (components A-F)",
+    "unit": "R-101",
+    "component": "A"
+   },
+   "setpoint_index": 13,
+   "initial_setpoint": 32.188,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 3,
+    "line": 997,
+    "inner_loop": "C3"
+   },
+   "gain": {
+    "expression": "18.",
+    "value": 18.0
+   },
+   "reset_s": 3168.0
+  },
+  {
+   "id": "C14",
+   "subroutine": "CONTRL14",
+   "runs": true,
+   "scan_s": 360,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 26,
+    "span": 100.0,
+    "line": 1030,
+    "tag": "AI-123",
+    "description": "Reactor feed analyzer (components A-F)",
+    "unit": "R-101",
+    "component": "D"
+   },
+   "setpoint_index": 14,
+   "initial_setpoint": 6.882,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 1,
+    "line": 1038,
+    "inner_loop": "C1"
+   },
+   "gain": {
+    "expression": "8.3",
+    "value": 8.3
+   },
+   "reset_s": 3168.0
+  },
+  {
+   "id": "C15",
+   "subroutine": "CONTRL15",
+   "runs": true,
+   "scan_s": 360,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 27,
+    "span": 100.0,
+    "line": 1071,
+    "tag": "AI-123",
+    "description": "Reactor feed analyzer (components A-F)",
+    "unit": "R-101",
+    "component": "E"
+   },
+   "setpoint_index": 15,
+   "initial_setpoint": 18.776,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 2,
+    "line": 1079,
+    "inner_loop": "C2"
+   },
+   "gain": {
+    "expression": "2.37",
+    "value": 2.37
+   },
+   "reset_s": 5069.0
+  },
+  {
+   "id": "C16",
+   "subroutine": "CONTRL16",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 18,
+    "span": 130.0,
+    "line": 1112,
+    "tag": "TI-118",
+    "description": "Stripper temperature",
+    "unit": "C-101"
+   },
+   "setpoint_index": 16,
+   "initial_setpoint": 65.731,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 9,
+    "line": 1120,
+    "inner_loop": "C9"
+   },
+   "gain": {
+    "expression": "1.69\t  / 10.",
+    "value": 0.169
+   },
+   "reset_s": 236.0
+  },
+  {
+   "id": "C17",
+   "subroutine": "CONTRL17",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 8,
+    "span": 50.0,
+    "line": 1153,
+    "tag": "LI-108",
+    "description": "Reactor level",
+    "unit": "R-101"
+   },
+   "setpoint_index": 17,
+   "initial_setpoint": 75.0,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 4,
+    "line": 1161,
+    "inner_loop": "C4"
+   },
+   "gain": {
+    "expression": "11.1\t/ 10.",
+    "value": 1.11
+   },
+   "reset_s": 3168.0
+  },
+  {
+   "id": "C18",
+   "subroutine": "CONTRL18",
+   "runs": true,
+   "scan_s": 3,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 9,
+    "span": 150.0,
+    "line": 1194,
+    "tag": "TI-109",
+    "description": "Reactor temperature",
+    "unit": "R-101"
+   },
+   "setpoint_index": 18,
+   "initial_setpoint": 120.4,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 10,
+    "line": 1202,
+    "inner_loop": "C10"
+   },
+   "gain": {
+    "expression": "2.83\t* 10.",
+    "value": 28.3
+   },
+   "reset_s": 982.0
+  },
+  {
+   "id": "C19",
+   "subroutine": "CONTRL19",
+   "runs": true,
+   "scan_s": 360,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 30,
+    "span": 26.0,
+    "line": 1235,
+    "tag": "AI-129",
+    "description": "Purge gas analyzer (components A-H)",
+    "unit": "V-101",
+    "component": "B"
+   },
+   "setpoint_index": 19,
+   "initial_setpoint": 13.823,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 6,
+    "line": 1244,
+    "inner_loop": "C6"
+   },
+   "gain": {
+    "expression": "-83.2\t  / 5. /3.",
+    "value": -5.546667
+   },
+   "reset_s": 6336.0
+  },
+  {
+   "id": "C20",
+   "subroutine": "CONTRL20",
+   "runs": true,
+   "scan_s": 900,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 38,
+    "span": 1.6,
+    "line": 1278,
+    "tag": "AI-137",
+    "description": "Product analyzer (components D-H)",
+    "unit": "C-101",
+    "component": "E"
+   },
+   "setpoint_index": 20,
+   "initial_setpoint": 0.8357,
+   "output": {
+    "kind": "setpoint",
+    "setpoint_index": 16,
+    "line": 1286,
+    "inner_loop": "C16"
+   },
+   "gain": {
+    "expression": "-16.3\t / 5.",
+    "value": -3.26
+   },
+   "reset_s": 12408.0
+  },
+  {
+   "id": "C22",
+   "subroutine": "CONTRL22",
+   "runs": false,
+   "scan_s": null,
+   "mode": "PI",
+   "measurement": {
+    "xmeas": 13,
+    "span": null,
+    "line": 1319,
+    "tag": "PI-113",
+    "description": "Separator pressure",
+    "unit": "V-101"
+   },
+   "setpoint_index": 12,
+   "initial_setpoint": 2633.7,
+   "output": {
+    "kind": "final_element",
+    "xmv": 6,
+    "line": 1327,
+    "tag": "FV-206",
+    "description": "Purge valve"
+   },
+   "gain": {
+    "expression": "-1.0\t  * 5.",
+    "value": -5.0
+   },
+   "reset_s": 1000.0
+  }
+ ],
+ "overrides": [
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": ">= 2950",
+   "only_after_trip": null,
+   "forces_output_to": 100.0,
+   "line": 710,
+   "tag": "PI-113"
+  },
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": ">= 2633.7",
+   "only_after_trip": 1,
+   "forces_output_to": 100.0,
+   "line": 713,
+   "tag": "PI-113"
+  },
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": "<= 2633.7",
+   "only_after_trip": 1,
+   "forces_output_to": 40.06,
+   "line": 715,
+   "tag": "PI-113"
+  },
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": "<= 2300",
+   "only_after_trip": null,
+   "forces_output_to": 0.0,
+   "line": 720,
+   "tag": "PI-113"
+  },
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": "<= 2633.7",
+   "only_after_trip": 2,
+   "forces_output_to": 0.0,
+   "line": 723,
+   "tag": "PI-113"
+  },
+  {
+   "controller": "CONTRL6",
+   "xmeas": 13,
+   "condition": ">= 2633.7",
+   "only_after_trip": 2,
+   "forces_output_to": 40.06,
+   "line": 725,
+   "tag": "PI-113"
+  }
+ ]
+}

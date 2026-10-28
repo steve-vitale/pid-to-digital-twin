@@ -227,6 +227,42 @@
    "checked_by": "scripts/test_te_topology.py (the parser on the pinned source, planted wrong answers)"
   },
   {
+   "poc": false,
+   "upstream": [
+    "te.source"
+   ],
+   "inputs": [
+    "data/te_process_model.json"
+   ],
+   "code": [
+    "scripts/te_control_loops.py"
+   ],
+   "outputs": [
+    "data/te_control_loops.json",
+    "out/te_loop_audit.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.control_loops",
+   "dataset": "te",
+   "stage": 0,
+   "title": "Control loops: read from the closed-loop code, checked against the recorded data, and scored on the generated drawing",
+   "kind": "check",
+   "rebuild": "manual",
+   "command": [
+    [
+     "python",
+     "scripts/te_control_loops.py",
+     "--write",
+     "--check"
+    ]
+   ],
+   "requires_note": "needs temain_mod.f and d00_te.dat cached by scripts/fetch_te_data.py (network on first fetch)",
+   "treatment": "Each CONTRLn subroutine's error line gives the measurement and setpoint; its update line moves a valve or another loop's setpoint (a cascade). The CALL lines give which loops run and how often. File comments are ignored. Measurements and valves are named with the model's assigned tags.",
+   "carries": "19 running loops (11 valve, 8 cascade), the purge override on separator pressure; the data check (every controlled variable within 0.34 SD of its setpoint in d00_te.dat); the drawing audit score for data/te_pid/key.json",
+   "checked_by": "scripts/test_te_control_loops.py (pinned pairings, a rotated-pairing negative control for the data check, and pass/fail controls for the drawing audit)"
+  },
+  {
    "id": "te.exports",
    "dataset": "te",
    "stage": 1,

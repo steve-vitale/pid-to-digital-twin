@@ -63,6 +63,11 @@ house style (`te.pid`) and read back by the frozen extraction method: a round tr
   TE code (Bathelt, Ricker & Jelali 2015): 51 confirmed, 4 corrected (the purge stream S9 and FI-110, FV-206, AI-129
   moved from the compressor K-101 to the separator V-101), 1 unresolvable. Report:
   [`out/te_topology_check.md`](../out/te_topology_check.md).
+- **Control loops (19 running):** read out of the closed-loop code `temain_mod.f` by `scripts/te_control_loops.py`
+  (measurement, valve or cascade target, mode, scan period; file comments ignored) and checked against the recorded
+  normal run: every controlled variable within 0.34 SD of its coded setpoint. The same script scores the generated
+  P&ID: 0 of 19 loops drawn. Table: `data/te_control_loops.json`; report:
+  [`out/te_loop_audit.md`](../out/te_loop_audit.md).
 - **Unit purposes:** one sentence per unit in `data/te_unit_purposes.json`, each citing the `teprob.f` lines it
   restates; `scripts/test_te_topology.py` checks every citation.
 - **Alarm setpoints:** published values only; the gateway verifier (V8) proves the reactor pressure alarm fires on

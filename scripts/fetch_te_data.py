@@ -7,11 +7,12 @@ first used it, so a changed upstream file is caught instead of silently replayed
   d00_te.dat  normal operation, 960 samples (3 simulated minutes each)
   d06_te.dat  fault IDV(6), loss of A feed
   teprob.f    the simulator source code (checked by verify_te_source.py and verify_te_topology.py)
+  temain_mod.f the closed-loop code: the controllers that produced the data (read by te_control_loops.py)
 
 With --all it also fetches the rest of the published set, for the fault-detection evaluation
 (scripts/fault_detection_eval.py): the training files d00.dat-d21.dat and the test files d01_te.dat-d21_te.dat
 (fault IDV(n) switched on at sample 160 of 960). The default stays the two replay files, so the Docker replay image
-does not grow (the default set is the two replay files plus teprob.f). All 44 recorded checksums were taken from files that are byte-identical to the Braatz group's own
+does not grow (the default set is the two replay files plus teprob.f and temain_mod.f). All 44 recorded checksums were taken from files that are byte-identical to the Braatz group's own
 archive (https://web.mit.edu/braatzgroup/TE_process.zip, checked 2026-10-12; journal entry 47).
 
 Usage: python scripts/fetch_te_data.py [--all]
@@ -29,6 +30,9 @@ FILES = {
     "d06_te.dat": "8a3adc7121eaa9b9300c27f9c57a8ab356315401cb964310a4a8244dd34bf79d",
     # The simulator source itself, read by verify_te_source.py and verify_te_topology.py and their tests.
     "teprob.f": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+    # The closed-loop code: where the control loops come from (scripts/te_control_loops.py). Byte-identical to
+    # TE_process/temain_mod.f.txt in the Braatz group's archive, checked 2026-10-28.
+    "temain_mod.f": "31b83c17f8d52332d6f6fe46d9da3ee7131de2d018bb83945453350bf635c8b6",
 }
 # The rest of the published set, used only by the fault-detection evaluation (--all).
 EVALUATION_FILES = {

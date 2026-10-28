@@ -2622,3 +2622,65 @@ silently weakened a check if it had been "fixed" by loosening it.
 merge them through the same lineage: correct the source, rebuild everything downstream, never edit an output to make
 two of them agree, and tie acceptance evidence to file hashes so you can tell whether it still applies after the
 merge.
+
+---
+
+## 50. Find the control loops before drawing them: the generated P&ID draws none
+
+**What:** 2026-10-28. The generated TE sheets (entry 44) draw every transmitter and every valve, but no controller and
+no signal line. FI-102 sits beside FV-201 and nothing says one drives the other. A practitioner reads that as a
+process flow diagram with bubbles on it, not a P&ID, and would be right. Before fixing the drawing, this entry finds
+out what the loops actually are and measures how much of them the sheets show. The answer is none of them.
+
+**How:**
+- **Source:** `temain_mod.f`, the closed-loop code in the Braatz group's TE archive, the same archive the replay data
+  comes from. The GitHub mirror's copy is byte-identical to the archive member (SHA-256 `31b83c17…`, checked
+  2026-10-28), so `scripts/fetch_te_data.py` now fetches and verifies it with the other files.
+- **Reading it:** `scripts/te_control_loops.py` takes each controller subroutine's error line
+  (`ERRn = (SETPT(j) - XMEAS(m))`) for the measurement, and its update line for what it moves: a valve
+  (`XMV(k) = XMV(k) + DXMV`) or another loop's setpoint (`SETPT(j) = SETPT(j) + DXMV`), which makes it a cascade.
+  The `CALL` lines in the simulation loop give which controllers run and how often. The result is
+  `data/te_control_loops.json`, named with the model's tags.
+- **Comments ignored on purpose:** the file's comments were copied from one subroutine to the next. "Stripper Level
+  Controller" sits on the purge loop and on the reactor cooling loop. Only the code is read.
+- **Checked against the data:** that copy of the code is set up for a fault-12 run, so the code alone doesn't prove
+  the published files used these loops. Every controlled variable in `d00_te.dat` sits on its coded setpoint: all 19
+  within 0.34 standard deviations, 17 within 0.07. The two furthest off are steam flow and stripper temperature,
+  inner loops whose setpoints a cascade moves. A negative control rotates the pairings by one place, and 18 of 19
+  loops then miss by more than 3 standard deviations.
+- **Drawing audit:** for each running loop, an answer key passes if it draws the measurement, a controller with
+  matching letters (FIC for a flow), signal lines from measurement to controller and from controller to valve (or
+  to the inner controller), and one loop number across all three. Process lines don't count as signals. The test
+  file checks the grader before the score: it passes a correctly drawn loop and a cascade, and fails each mistake
+  separately.
+
+**What it found** ([`out/te_loop_audit.md`](../out/te_loop_audit.md)):
+- **19 loops run:** 11 move a valve and 8 move another loop's setpoint. Three composition loops on the reactor feed
+  analyzer trim the A, D and E feed flows. Purge composition trims purge flow. Reactor level trims the A and C feed.
+  Reactor temperature trims the cooling water outlet temperature. Product composition trims stripper temperature,
+  which trims steam flow. One more controller (separator pressure to purge) is defined but never called.
+- **Production rate is set by condenser cooling water.** The stripper product flow loop moves the condenser
+  cooling-water valve, not the product valve. The model tagged that valve TV-211, which says temperature control.
+- **An override sits on the purge:** separator pressure at or above 2,950 kPa forces the purge fully open, at or
+  below 2,300 kPa fully shut, and the controller gets it back when pressure returns to 2,633.7 kPa.
+- **Score on the generated sheets: 0 of 19 loops.** Every measurement is drawn (19/19). No controller, no signal and
+  no shared loop number (0/19 each).
+- **The tags are wrong before anything is drawn.** All 11 valves carry a different loop number from the measurement
+  that drives them (FV-201 is moved by FI-102's loop). Two carry the wrong letter: HV-205 (a hand valve on a flow
+  loop) and TV-211 (a temperature valve on a flow loop).
+
+**Why:**
+- **Measure, then fix.** Drawing controllers without the table would have meant guessing pairings from tag numbers,
+  which is how the wrong pairings got there in the first place.
+- **The data check is the independent witness.** The code and the drawing share an author's interpretation; the
+  recorded run doesn't.
+- **Rejected:** fixing the tag numbers in this entry. They run through the Ignition project, the PI sheet, both tours
+  and the replay mapping (about 1,300 references), so renumbering is a separate, regenerated change.
+
+**Lesson:** a drawing that shows every instrument can still miss the reason they're there. Count what the sheet says
+about control, not what it says about equipment.
+
+**At your plant:** the control narrative is in the DCS configuration, not the drawing. Export the controller list
+(PV, OP or cascade target, mode) and audit your P&IDs against it the same way: every loop needs a controller, signal
+lines and one loop number. Drawings where indicators sit next to valves with different numbers are the ones to walk
+down first.

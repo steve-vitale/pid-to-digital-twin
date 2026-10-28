@@ -31,7 +31,7 @@ Impact Center: the 12 OPEN100 drawings and their answer keys in
 results. The holdout-B drawings are not included; `scripts/fetch_pid2graph.py` downloads them.
 
 **Tennessee Eastman** simulation code and data are from the Braatz group (University of Illinois, NCSA-style
-license). They are downloaded by `scripts/verify_te_source.py` and `scripts/fetch_te_data.py`, not redistributed as files. The one exception is the draft interactive tour pages in `drafts/interactive-tour/page/`, which embed values from the test runs `d00_te.dat` and `d06_te.dat`; they are redistributed under the permission notice in the Braatz group's `TE_process` archive readme, reproduced verbatim in `drafts/interactive-tour/TE_DATA_NOTICE.txt` and summarized on each page.
+license). They are downloaded by `scripts/verify_te_source.py` and `scripts/fetch_te_data.py`, not redistributed as files. The one exception is the draft interactive tour pages in `drafts/interactive-tour/page/`, which embed values from the test runs `d00_te.dat` and `d06_te.dat`; they are redistributed under the permission notice in the Braatz group's `TE_process` archive readme, reproduced verbatim in `drafts/interactive-tour/TE_DATA_NOTICE.txt` and summarized on each page. `data/te_control_loops.json` restates the controller pairings, setpoints and tuning read from the archive's closed-loop code (`temain_mod.f`), under the same permission notice.
 The process is from Downs & Vogel (1993). The flowsheet in this repo is redrawn from the model, not copied from the
 paper.
 

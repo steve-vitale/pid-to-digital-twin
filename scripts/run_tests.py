@@ -45,6 +45,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_current_gateway_artifacts.py",
     "scripts/test_fault_detection_eval.py",
     "scripts/test_te_topology.py",
+    "scripts/test_te_control_loops.py",
     "scripts/test_te_pid_roundtrip.py",
     "scripts/test_open100_structural.py",
     "scripts/test_build_3d_scene.py",
@@ -71,7 +72,7 @@ SOURCE_FILES = (
     f"{DRAWINGS}/{i}.{extension}" for i in range(12) for extension in ("graphml", "png"))
 
 # Committed files the full-mode tests read beyond SOURCE_FILES.
-FULL_FILES = ("out/ignition/gateway/PIDTwin.zip", f"{TWIN}/ignition/tags.json",
+FULL_FILES = ("out/ignition/gateway/PIDTwin.zip", "data/te_control_loops.json", f"{TWIN}/ignition/tags.json",
               "out/open100_structural/flow_direction.json", "out/open100_structural/plant_structure.json",
               "out/open100_structural/mimic/views.json", "data/open100_direction_confidence.json",
               "data/open100_equipment_schedule.json", "docs/deliverables_matrix.json")
