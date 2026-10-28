@@ -31,8 +31,8 @@
       <data key="d0">inlet/outlet</data>
       <data key="d1">120</data>
       <data key="d2">350</data>
-      <data key="d3">335.0</data>
-      <data key="d4">385.0</data>
+      <data key="d3">305.0</data>
+      <data key="d4">355.0</data>
       <data key="d11">BATTERY LIMIT / A FEED</data>
       <data key="d12">stream:S1</data>
     </node>
@@ -40,8 +40,8 @@
       <data key="d0">inlet/outlet</data>
       <data key="d1">120</data>
       <data key="d2">350</data>
-      <data key="d3">535.0</data>
-      <data key="d4">585.0</data>
+      <data key="d3">565.0</data>
+      <data key="d4">615.0</data>
       <data key="d11">BATTERY LIMIT / D FEED</data>
       <data key="d12">stream:S2</data>
     </node>
@@ -49,8 +49,8 @@
       <data key="d0">inlet/outlet</data>
       <data key="d1">120</data>
       <data key="d2">350</data>
-      <data key="d3">735.0</data>
-      <data key="d4">785.0</data>
+      <data key="d3">825.0</data>
+      <data key="d4">875.0</data>
       <data key="d11">BATTERY LIMIT / E FEED</data>
       <data key="d12">stream:S3</data>
     </node>
@@ -101,16 +101,16 @@
       <data key="d0">valve</data>
       <data key="d1">847</data>
       <data key="d2">873</data>
-      <data key="d3">334</data>
-      <data key="d4">369</data>
+      <data key="d3">304</data>
+      <data key="d4">339</data>
       <data key="d12">FV-101</data>
     </node>
     <node id="instrumentation1">
       <data key="d0">instrumentation</data>
       <data key="d1">835</data>
       <data key="d2">885</data>
-      <data key="d3">255</data>
-      <data key="d4">305</data>
+      <data key="d3">225</data>
+      <data key="d4">275</data>
       <data key="d11">FV 101</data>
       <data key="d12">FV-101</data>
     </node>
@@ -118,15 +118,36 @@
       <data key="d0">connector</data>
       <data key="d1">856</data>
       <data key="d2">864</data>
-      <data key="d3">330</data>
-      <data key="d4">338</data>
+      <data key="d3">300</data>
+      <data key="d4">308</data>
+    </node>
+    <node id="valve2">
+      <data key="d0">valve</data>
+      <data key="d1">802</data>
+      <data key="d2">828</data>
+      <data key="d3">321</data>
+      <data key="d4">339</data>
+    </node>
+    <node id="valve3">
+      <data key="d0">valve</data>
+      <data key="d1">892</data>
+      <data key="d2">918</data>
+      <data key="d3">321</data>
+      <data key="d4">339</data>
+    </node>
+    <node id="valve4">
+      <data key="d0">valve</data>
+      <data key="d1">847</data>
+      <data key="d2">873</data>
+      <data key="d3">366</data>
+      <data key="d4">384</data>
     </node>
     <node id="instrumentation2">
       <data key="d0">instrumentation</data>
       <data key="d1">945</data>
       <data key="d2">995</data>
-      <data key="d3">255</data>
-      <data key="d4">305</data>
+      <data key="d3">225</data>
+      <data key="d4">275</data>
       <data key="d11">FI 101</data>
       <data key="d12">FI-101</data>
     </node>
@@ -134,23 +155,23 @@
       <data key="d0">arrow</data>
       <data key="d1">710.0</data>
       <data key="d2">740.0</data>
-      <data key="d3">354.0</data>
-      <data key="d4">366.0</data>
+      <data key="d3">324.0</data>
+      <data key="d4">336.0</data>
     </node>
-    <node id="valve2">
+    <node id="valve5">
       <data key="d0">valve</data>
       <data key="d1">847</data>
       <data key="d2">873</data>
-      <data key="d3">534</data>
-      <data key="d4">569</data>
+      <data key="d3">564</data>
+      <data key="d4">599</data>
       <data key="d12">FV-102</data>
     </node>
     <node id="instrumentation3">
       <data key="d0">instrumentation</data>
       <data key="d1">835</data>
       <data key="d2">885</data>
-      <data key="d3">455</data>
-      <data key="d4">505</data>
+      <data key="d3">485</data>
+      <data key="d4">535</data>
       <data key="d11">FV 102</data>
       <data key="d12">FV-102</data>
     </node>
@@ -158,15 +179,36 @@
       <data key="d0">connector</data>
       <data key="d1">856</data>
       <data key="d2">864</data>
-      <data key="d3">530</data>
-      <data key="d4">538</data>
+      <data key="d3">560</data>
+      <data key="d4">568</data>
+    </node>
+    <node id="valve6">
+      <data key="d0">valve</data>
+      <data key="d1">802</data>
+      <data key="d2">828</data>
+      <data key="d3">581</data>
+      <data key="d4">599</data>
+    </node>
+    <node id="valve7">
+      <data key="d0">valve</data>
+      <data key="d1">892</data>
+      <data key="d2">918</data>
+      <data key="d3">581</data>
+      <data key="d4">599</data>
+    </node>
+    <node id="valve8">
+      <data key="d0">valve</data>
+      <data key="d1">847</data>
+      <data key="d2">873</data>
+      <data key="d3">626</data>
+      <data key="d4">644</data>
     </node>
     <node id="instrumentation4">
       <data key="d0">instrumentation</data>
       <data key="d1">945</data>
       <data key="d2">995</data>
-      <data key="d3">455</data>
-      <data key="d4">505</data>
+      <data key="d3">485</data>
+      <data key="d4">535</data>
       <data key="d11">FI 102</data>
       <data key="d12">FI-102</data>
     </node>
@@ -174,23 +216,23 @@
       <data key="d0">arrow</data>
       <data key="d1">710.0</data>
       <data key="d2">740.0</data>
-      <data key="d3">554.0</data>
-      <data key="d4">566.0</data>
+      <data key="d3">584.0</data>
+      <data key="d4">596.0</data>
     </node>
-    <node id="valve3">
+    <node id="valve9">
       <data key="d0">valve</data>
       <data key="d1">847</data>
       <data key="d2">873</data>
-      <data key="d3">734</data>
-      <data key="d4">769</data>
+      <data key="d3">824</data>
+      <data key="d4">859</data>
       <data key="d12">FV-103</data>
     </node>
     <node id="instrumentation5">
       <data key="d0">instrumentation</data>
       <data key="d1">835</data>
       <data key="d2">885</data>
-      <data key="d3">655</data>
-      <data key="d4">705</data>
+      <data key="d3">745</data>
+      <data key="d4">795</data>
       <data key="d11">FV 103</data>
       <data key="d12">FV-103</data>
     </node>
@@ -198,15 +240,36 @@
       <data key="d0">connector</data>
       <data key="d1">856</data>
       <data key="d2">864</data>
-      <data key="d3">730</data>
-      <data key="d4">738</data>
+      <data key="d3">820</data>
+      <data key="d4">828</data>
+    </node>
+    <node id="valve10">
+      <data key="d0">valve</data>
+      <data key="d1">802</data>
+      <data key="d2">828</data>
+      <data key="d3">841</data>
+      <data key="d4">859</data>
+    </node>
+    <node id="valve11">
+      <data key="d0">valve</data>
+      <data key="d1">892</data>
+      <data key="d2">918</data>
+      <data key="d3">841</data>
+      <data key="d4">859</data>
+    </node>
+    <node id="valve12">
+      <data key="d0">valve</data>
+      <data key="d1">847</data>
+      <data key="d2">873</data>
+      <data key="d3">886</data>
+      <data key="d4">904</data>
     </node>
     <node id="instrumentation6">
       <data key="d0">instrumentation</data>
       <data key="d1">945</data>
       <data key="d2">995</data>
-      <data key="d3">655</data>
-      <data key="d4">705</data>
+      <data key="d3">745</data>
+      <data key="d4">795</data>
       <data key="d11">FI 103</data>
       <data key="d12">FI-103</data>
     </node>
@@ -214,8 +277,8 @@
       <data key="d0">arrow</data>
       <data key="d1">710.0</data>
       <data key="d2">740.0</data>
-      <data key="d3">754.0</data>
-      <data key="d4">766.0</data>
+      <data key="d3">844.0</data>
+      <data key="d4">856.0</data>
     </node>
     <node id="arrow4">
       <data key="d0">arrow</data>
@@ -235,8 +298,8 @@
       <data key="d0">arrow</data>
       <data key="d1">1094.0</data>
       <data key="d2">1106.0</data>
-      <data key="d3">845.0</data>
-      <data key="d4">875.0</data>
+      <data key="d3">830.0</data>
+      <data key="d4">860.0</data>
     </node>
     <node id="instrumentation7">
       <data key="d0">instrumentation</data>
@@ -263,7 +326,7 @@
       <data key="d3">814.0</data>
       <data key="d4">826.0</data>
     </node>
-    <node id="valve4">
+    <node id="valve13">
       <data key="d0">valve</data>
       <data key="d1">1507</data>
       <data key="d2">1533</data>
@@ -286,6 +349,27 @@
       <data key="d2">1524</data>
       <data key="d3">1670</data>
       <data key="d4">1678</data>
+    </node>
+    <node id="valve14">
+      <data key="d0">valve</data>
+      <data key="d1">1462</data>
+      <data key="d2">1488</data>
+      <data key="d3">1691</data>
+      <data key="d4">1709</data>
+    </node>
+    <node id="valve15">
+      <data key="d0">valve</data>
+      <data key="d1">1552</data>
+      <data key="d2">1578</data>
+      <data key="d3">1691</data>
+      <data key="d4">1709</data>
+    </node>
+    <node id="valve16">
+      <data key="d0">valve</data>
+      <data key="d1">1507</data>
+      <data key="d2">1533</data>
+      <data key="d3">1736</data>
+      <data key="d4">1754</data>
     </node>
     <node id="arrow8">
       <data key="d0">arrow</data>
@@ -385,8 +469,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">890</data>
       <data key="d2">940</data>
-      <data key="d3">145</data>
-      <data key="d4">195</data>
+      <data key="d3">125</data>
+      <data key="d4">175</data>
       <data key="d11">FIC 101</data>
       <data key="d12">FIC-101</data>
     </node>
@@ -394,8 +478,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">890</data>
       <data key="d2">940</data>
-      <data key="d3">385</data>
-      <data key="d4">435</data>
+      <data key="d3">395</data>
+      <data key="d4">445</data>
       <data key="d11">FIC 102</data>
       <data key="d12">FIC-102</data>
     </node>
@@ -403,8 +487,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">890</data>
       <data key="d2">940</data>
-      <data key="d3">585</data>
-      <data key="d4">635</data>
+      <data key="d3">660</data>
+      <data key="d4">710</data>
       <data key="d11">FIC 103</data>
       <data key="d12">FIC-103</data>
     </node>
@@ -412,8 +496,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">1225</data>
       <data key="d2">1275</data>
-      <data key="d3">145</data>
-      <data key="d4">195</data>
+      <data key="d3">125</data>
+      <data key="d4">175</data>
       <data key="d11">AIC 123A</data>
       <data key="d12">AIC-123A</data>
     </node>
@@ -421,8 +505,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">1225</data>
       <data key="d2">1275</data>
-      <data key="d3">385</data>
-      <data key="d4">435</data>
+      <data key="d3">395</data>
+      <data key="d4">445</data>
       <data key="d11">AIC 123D</data>
       <data key="d12">AIC-123D</data>
     </node>
@@ -430,8 +514,8 @@
       <data key="d0">instrumentation</data>
       <data key="d1">1225</data>
       <data key="d2">1275</data>
-      <data key="d3">585</data>
-      <data key="d4">635</data>
+      <data key="d3">660</data>
+      <data key="d4">710</data>
       <data key="d11">AIC 123E</data>
       <data key="d12">AIC-123E</data>
     </node>
@@ -473,61 +557,117 @@
     </node>
     <node id="connector9">
       <data key="d0">connector</data>
-      <data key="d1">601.0</data>
-      <data key="d2">609.0</data>
-      <data key="d3">356.0</data>
-      <data key="d4">364.0</data>
+      <data key="d1">578.5</data>
+      <data key="d2">586.5</data>
+      <data key="d3">326.0</data>
+      <data key="d4">334.0</data>
     </node>
     <node id="connector10">
       <data key="d0">connector</data>
-      <data key="d1">976.0</data>
-      <data key="d2">984.0</data>
-      <data key="d3">356.0</data>
-      <data key="d4">364.0</data>
+      <data key="d1">833.5</data>
+      <data key="d2">841.5</data>
+      <data key="d3">326.0</data>
+      <data key="d4">334.0</data>
     </node>
     <node id="connector11">
       <data key="d0">connector</data>
-      <data key="d1">601.0</data>
-      <data key="d2">609.0</data>
-      <data key="d3">556.0</data>
-      <data key="d4">564.0</data>
+      <data key="d1">878.5</data>
+      <data key="d2">886.5</data>
+      <data key="d3">326.0</data>
+      <data key="d4">334.0</data>
     </node>
     <node id="connector12">
       <data key="d0">connector</data>
-      <data key="d1">601.0</data>
-      <data key="d2">609.0</data>
-      <data key="d3">756.0</data>
-      <data key="d4">764.0</data>
+      <data key="d1">998.5</data>
+      <data key="d2">1006.5</data>
+      <data key="d3">326.0</data>
+      <data key="d4">334.0</data>
     </node>
     <node id="connector13">
+      <data key="d0">connector</data>
+      <data key="d1">578.5</data>
+      <data key="d2">586.5</data>
+      <data key="d3">586.0</data>
+      <data key="d4">594.0</data>
+    </node>
+    <node id="connector14">
+      <data key="d0">connector</data>
+      <data key="d1">833.5</data>
+      <data key="d2">841.5</data>
+      <data key="d3">586.0</data>
+      <data key="d4">594.0</data>
+    </node>
+    <node id="connector15">
+      <data key="d0">connector</data>
+      <data key="d1">878.5</data>
+      <data key="d2">886.5</data>
+      <data key="d3">586.0</data>
+      <data key="d4">594.0</data>
+    </node>
+    <node id="connector16">
+      <data key="d0">connector</data>
+      <data key="d1">578.5</data>
+      <data key="d2">586.5</data>
+      <data key="d3">846.0</data>
+      <data key="d4">854.0</data>
+    </node>
+    <node id="connector17">
+      <data key="d0">connector</data>
+      <data key="d1">833.5</data>
+      <data key="d2">841.5</data>
+      <data key="d3">846.0</data>
+      <data key="d4">854.0</data>
+    </node>
+    <node id="connector18">
+      <data key="d0">connector</data>
+      <data key="d1">878.5</data>
+      <data key="d2">886.5</data>
+      <data key="d3">846.0</data>
+      <data key="d4">854.0</data>
+    </node>
+    <node id="connector19">
       <data key="d0">connector</data>
       <data key="d1">1498.5</data>
       <data key="d2">1506.5</data>
       <data key="d3">1356.0</data>
       <data key="d4">1364.0</data>
     </node>
-    <node id="connector14">
+    <node id="connector20">
       <data key="d0">connector</data>
       <data key="d1">2146.0</data>
       <data key="d2">2154.0</data>
       <data key="d3">816.0</data>
       <data key="d4">824.0</data>
     </node>
-    <node id="connector15">
+    <node id="connector21">
       <data key="d0">connector</data>
-      <data key="d1">1421.0</data>
-      <data key="d2">1429.0</data>
+      <data key="d1">1398.5</data>
+      <data key="d2">1406.5</data>
       <data key="d3">1696.0</data>
       <data key="d4">1704.0</data>
     </node>
-    <node id="connector16">
+    <node id="connector22">
+      <data key="d0">connector</data>
+      <data key="d1">1493.5</data>
+      <data key="d2">1501.5</data>
+      <data key="d3">1696.0</data>
+      <data key="d4">1704.0</data>
+    </node>
+    <node id="connector23">
+      <data key="d0">connector</data>
+      <data key="d1">1538.5</data>
+      <data key="d2">1546.5</data>
+      <data key="d3">1696.0</data>
+      <data key="d4">1704.0</data>
+    </node>
+    <node id="connector24">
       <data key="d0">connector</data>
       <data key="d1">1696.0</data>
       <data key="d2">1704.0</data>
-      <data key="d3">1683.5</data>
-      <data key="d4">1691.5</data>
+      <data key="d3">1661.0</data>
+      <data key="d4">1669.0</data>
     </node>
-    <node id="connector17">
+    <node id="connector25">
       <data key="d0">connector</data>
       <data key="d1">2196.0</data>
       <data key="d2">2204.0</data>
@@ -536,38 +676,61 @@
     </node>
     <edge source="connector1" target="instrumentation1"><data key="d9">solid</data></edge>
     <edge source="connector1" target="valve1"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="general1"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="inlet_outlet4"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="inlet_outlet5"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="instrumentation2"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="instrumentation4"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="instrumentation6"><data key="d9">solid</data></edge>
     <edge source="connector10" target="valve1"><data key="d9">solid</data></edge>
     <edge source="connector10" target="valve2"><data key="d9">solid</data></edge>
-    <edge source="connector10" target="valve3"><data key="d9">solid</data></edge>
-    <edge source="connector11" target="inlet_outlet2"><data key="d9">solid</data></edge>
-    <edge source="connector11" target="valve2"><data key="d9">solid</data></edge>
-    <edge source="connector12" target="inlet_outlet3"><data key="d9">solid</data></edge>
+    <edge source="connector11" target="valve1"><data key="d9">solid</data></edge>
+    <edge source="connector11" target="valve3"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="general1"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="inlet_outlet4"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="inlet_outlet5"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="instrumentation2"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="instrumentation4"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="instrumentation6"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="valve11"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="valve12"><data key="d9">solid</data></edge>
     <edge source="connector12" target="valve3"><data key="d9">solid</data></edge>
-    <edge source="connector13" target="general1"><data key="d9">solid</data></edge>
-    <edge source="connector13" target="instrumentation7"><data key="d9">solid</data></edge>
-    <edge source="connector13" target="instrumentation8"><data key="d9">solid</data></edge>
-    <edge source="connector13" target="tank1"><data key="d9">solid</data></edge>
-    <edge source="connector14" target="inlet_outlet6"><data key="d9">solid</data></edge>
-    <edge source="connector14" target="tank1"><data key="d9">solid</data></edge>
-    <edge source="connector15" target="inlet_outlet7"><data key="d9">solid</data></edge>
-    <edge source="connector15" target="valve4"><data key="d9">solid</data></edge>
-    <edge source="connector16" target="tank1"><data key="d9">solid</data></edge>
-    <edge source="connector16" target="valve4"><data key="d9">solid</data></edge>
-    <edge source="connector17" target="inlet_outlet8"><data key="d9">solid</data></edge>
-    <edge source="connector17" target="instrumentation10"><data key="d9">solid</data></edge>
-    <edge source="connector17" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="valve4"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="valve7"><data key="d9">solid</data></edge>
+    <edge source="connector12" target="valve8"><data key="d9">solid</data></edge>
+    <edge source="connector13" target="inlet_outlet2"><data key="d9">solid</data></edge>
+    <edge source="connector13" target="valve6"><data key="d9">solid</data></edge>
+    <edge source="connector13" target="valve8"><data key="d9">solid</data></edge>
+    <edge source="connector14" target="valve5"><data key="d9">solid</data></edge>
+    <edge source="connector14" target="valve6"><data key="d9">solid</data></edge>
+    <edge source="connector15" target="valve5"><data key="d9">solid</data></edge>
+    <edge source="connector15" target="valve7"><data key="d9">solid</data></edge>
+    <edge source="connector16" target="inlet_outlet3"><data key="d9">solid</data></edge>
+    <edge source="connector16" target="valve10"><data key="d9">solid</data></edge>
+    <edge source="connector16" target="valve12"><data key="d9">solid</data></edge>
+    <edge source="connector17" target="valve10"><data key="d9">solid</data></edge>
+    <edge source="connector17" target="valve9"><data key="d9">solid</data></edge>
+    <edge source="connector18" target="valve11"><data key="d9">solid</data></edge>
+    <edge source="connector18" target="valve9"><data key="d9">solid</data></edge>
+    <edge source="connector19" target="general1"><data key="d9">solid</data></edge>
+    <edge source="connector19" target="instrumentation7"><data key="d9">solid</data></edge>
+    <edge source="connector19" target="instrumentation8"><data key="d9">solid</data></edge>
+    <edge source="connector19" target="tank1"><data key="d9">solid</data></edge>
     <edge source="connector2" target="instrumentation3"><data key="d9">solid</data></edge>
-    <edge source="connector2" target="valve2"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="valve5"><data key="d9">solid</data></edge>
+    <edge source="connector20" target="inlet_outlet6"><data key="d9">solid</data></edge>
+    <edge source="connector20" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector21" target="inlet_outlet7"><data key="d9">solid</data></edge>
+    <edge source="connector21" target="valve14"><data key="d9">solid</data></edge>
+    <edge source="connector21" target="valve16"><data key="d9">solid</data></edge>
+    <edge source="connector22" target="valve13"><data key="d9">solid</data></edge>
+    <edge source="connector22" target="valve14"><data key="d9">solid</data></edge>
+    <edge source="connector23" target="valve13"><data key="d9">solid</data></edge>
+    <edge source="connector23" target="valve15"><data key="d9">solid</data></edge>
+    <edge source="connector24" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector24" target="valve15"><data key="d9">solid</data></edge>
+    <edge source="connector24" target="valve16"><data key="d9">solid</data></edge>
+    <edge source="connector25" target="inlet_outlet8"><data key="d9">solid</data></edge>
+    <edge source="connector25" target="instrumentation10"><data key="d9">solid</data></edge>
+    <edge source="connector25" target="tank1"><data key="d9">solid</data></edge>
     <edge source="connector3" target="instrumentation5"><data key="d9">solid</data></edge>
-    <edge source="connector3" target="valve3"><data key="d9">solid</data></edge>
+    <edge source="connector3" target="valve9"><data key="d9">solid</data></edge>
     <edge source="connector4" target="instrumentation9"><data key="d9">solid</data></edge>
-    <edge source="connector4" target="valve4"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="valve13"><data key="d9">solid</data></edge>
     <edge source="connector5" target="instrumentation11"><data key="d9">solid</data></edge>
     <edge source="connector5" target="tank1"><data key="d9">solid</data></edge>
     <edge source="connector6" target="instrumentation12"><data key="d9">solid</data></edge>
@@ -577,6 +740,7 @@
     <edge source="connector8" target="instrumentation14"><data key="d9">solid</data></edge>
     <edge source="connector8" target="tank1"><data key="d9">solid</data></edge>
     <edge source="connector9" target="inlet_outlet1"><data key="d9">solid</data></edge>
-    <edge source="connector9" target="valve1"><data key="d9">solid</data></edge>
+    <edge source="connector9" target="valve2"><data key="d9">solid</data></edge>
+    <edge source="connector9" target="valve4"><data key="d9">solid</data></edge>
   </graph>
 </graphml>

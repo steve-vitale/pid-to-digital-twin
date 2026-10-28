@@ -2760,3 +2760,44 @@ the tags and every export agreed by construction.
 **At your plant:** number control valves by the loop that moves them and draw the controller even when it lives in the
 DCS. When you renumber, do it from one mapping table at the source, keep the old tag on each item, and leave dated
 evidence pointing at the drawing revision it was made from.
+
+---
+
+## 52. Put each control valve in a station: block valves and a bypass
+
+**What:** 2026-10-28, later the same day. Revision C of the generated TE sheets draws a control valve station around
+every inline control valve: a manual block valve on each side and a bypass with a hand-operated globe valve. That is
+how a real P&ID draws a control valve, so it can be isolated and pulled while the line runs on the bypass. Style
+fidelity goes from 30 to 35 of 36 OPEN100 measurements.
+
+**How:**
+- **A layout switch, not model content.** The model holds no manual valves, so the stations are drafting additions:
+  `control_valve_stations` in the layout turns them on, and each block and bypass valve is in the key with
+  `drafting_addition` set and no model reference. A route opts out with `"station": false` and must give a
+  `station_reason`. The compressor's spill-back valve (FV-105) does: it sits inside its own recycle loop.
+- **Refuse rather than squeeze.** A station needs a straight run 80 px either side of its valve with nothing else in
+  it, and its bypass must clear every symbol. The generator refuses otherwise. The first try failed on paper before
+  any code ran: at a 60 px offset, the feed-line bypasses ran through the flow controllers between the feed lines. The
+  bypass offset became 45 px and the three feed lines moved apart (330, 590, 850).
+- **The pixels still agree with the key.** The bypass joins the line at two tees, so the key's process links change.
+  The code line tracer, given only the symbol boxes and the image, recovered every key link on all three sheets,
+  bypasses included. New tests check one station per inline control valve, the crowded-station refusal and the
+  opt-out reason.
+- Revision C, because revision B was already on the public main branch. The loop audit still reads 19 of 19, and
+  every downstream stage was rebuilt (42 of 42 fresh).
+
+**What it found:** the remaining style miss is sheet 103's symbol count (37 against an OPEN100 minimum of 40). Real
+sheets also carry drains, vents, reducers and line breaks that a process model doesn't hold.
+
+**Why:**
+- **A reviewer's first question.** A practitioner looking at a control valve with no block valves sees a drawing
+  nobody checked. This is the cheapest fix that answers it honestly, because it's a convention, not process data.
+- **Rejected:** adding drains and vents the same way. Where they go depends on line routing and low and high points
+  that the model doesn't hold, so placing them would be decoration rather than a convention.
+
+**Lesson:** separate what the process says from what the drafting convention says, and label which is which in the
+key. Then a convention can be added everywhere at once without anyone mistaking it for plant data.
+
+**At your plant:** when you generate drawings, apply your drafting standard's conventions (valve stations, spec
+breaks, vents and drains at the high and low points your routing defines) as declared rules, not hand edits, and walk
+the result down before anyone treats it as a drawing of record.

@@ -14,7 +14,13 @@ element, which unit owns each item and which stream it sits on, and every contro
 moves (written into the model by scripts/te_control_loops.py from the closed-loop code). Controllers are drawn as
 control-system functions (ISA-5.1: a circle in a square, with a line for "visible to the operator") joined by dashed
 signal lines to their measurement and to their valve, or to the inner controller of a cascade. A loop that runs onto
-another sheet ends in a signal continuation flag naming the sheet and what it drives there. WHERE it is drawn comes from a drafting layout
+another sheet ends in a signal continuation flag naming the sheet and what it drives there.
+
+Control valve stations (layout `control_valve_stations`): each inline control valve gets a manual block valve on
+either side and a bypass with a hand-operated globe valve, as a real P&ID draws them so the control valve can be
+isolated and removed while the line runs on the bypass. The model holds no manual valves, so these are drafting
+additions, marked so in the key. A route opts out with "station": false and a "station_reason". A station that
+doesn't fit (a bend, or another item within the station) is refused, never squeezed. WHERE it is drawn comes from a drafting layout
 (data/te_pid_layout.json). The generator refuses to draw if the layout drops a model item, draws one twice, or
 names a tag the model doesn't have. It also refuses a controller placed twice or not at all, a model signal not
 drawn (or drawn twice), a signal the model doesn't have, a signal line that isn't horizontal or vertical, and a
@@ -68,6 +74,7 @@ SMALL = 13
 EQ_TEXT = 26       # equipment tag
 ARROW_L, ARROW_W = 18, 12
 SIGNAL_DASH = (12, 7)   # ISA-5.1 electric signal
+BLOCK_AT, BYPASS_AT, BYPASS_OFF = 45, 80, 45   # control valve station: block valves, bypass tees, bypass offset
 FRAME = (70, 70, 3130, 2060)
 COLS, ROWS = 12, 8
 
@@ -213,6 +220,8 @@ class Sheet:
         self.centers = {}              # tag -> (x, y, half size): where a signal line meets the symbol
         self.tag_node = {}
         self.ctrl_by_tag = {}
+        self.extra_routes = []         # bypass lines of control valve stations: drawn and joined like layout routes
+        self.station_lines = []        # (bypass points, its hand valve node), for the clearance check
         self.unit_geo = {}
 
     # -- key bookkeeping
@@ -313,6 +322,20 @@ class Sheet:
         self.signal_edges.add((a, b))
         self.signal_paths.append((sig, pts, {a, b}))
 
+    def check_station_clearance(self):
+        """Refuse a valve-station bypass that runs through any symbol or vessel other than its own globe valve."""
+        solid = {nid: n["box"] for nid, n in self.nodes.items() if n["class"] not in ("connector", "arrow")}
+        for rid, pts, hv in self.station_lines:
+            for a, b in zip(pts, pts[1:]):
+                x0, x1 = sorted((a[0], b[0]))
+                y0, y1 = sorted((a[1], b[1]))
+                for nid, (bx0, by0, bx1, by1) in solid.items():
+                    if nid == hv:
+                        continue
+                    if x0 < bx1 - 1 and x1 > bx0 + 1 and y0 < by1 - 1 and y1 > by0 + 1:
+                        raise ValueError(f"sheet {self.spec['id']} {rid}: the bypass runs through "
+                                         f"{self.nodes[nid]['text'] or nid}")
+
     def check_signal_clearance(self):
         """Refuse a signal line that runs through a symbol or vessel other than its own ends."""
         solid = {nid: n["box"] for nid, n in self.nodes.items() if n["class"] not in ("connector", "arrow")}
@@ -359,6 +382,59 @@ class Sheet:
         bid = self.bubble(*bc, tag, "final_element")
         self.link_group([vid, bid], lead[0])
         return vid
+
+    def manual_valve(self, p, orient, globe=False):
+        """A hand-operated valve: the bow-tie with no actuator; a globe valve has a filled dot in the middle."""
+        x, y = p
+        if orient == "h":
+            self.c.polygon([(x - VALVE_HALF, y - VALVE_H), (x, y), (x - VALVE_HALF, y + VALVE_H)], THIN_W, "white")
+            self.c.polygon([(x + VALVE_HALF, y - VALVE_H), (x, y), (x + VALVE_HALF, y + VALVE_H)], THIN_W, "white")
+            box = (x - VALVE_HALF, y - VALVE_H, x + VALVE_HALF, y + VALVE_H)
+        else:
+            self.c.polygon([(x - VALVE_H, y - VALVE_HALF), (x, y), (x + VALVE_H, y - VALVE_HALF)], THIN_W, "white")
+            self.c.polygon([(x - VALVE_H, y + VALVE_HALF), (x, y), (x + VALVE_H, y + VALVE_HALF)], THIN_W, "white")
+            box = (x - VALVE_H, y - VALVE_HALF, x + VALVE_H, y + VALVE_HALF)
+        if globe:
+            self.d_dot(x, y)
+        return self.node("valve", box, None, None, drafting=True,
+                         kind="bypass_valve" if globe else "block_valve")
+
+    def d_dot(self, x, y, r=4):
+        self.c.d.ellipse((x - r, y - r, x + r, y + r), fill=0)
+        self.c.svg.append(f'<circle cx="{x:g}" cy="{y:g}" r="{r}" fill="#000"/>')
+
+    def station(self, r, rr, t_valve, tag, orient, side, others):
+        """Block valves either side of a control valve and a bypass with a globe valve, on the side away from the
+        valve's tag bubble. Refuses rather than squeezing a station that doesn't fit."""
+        pts = rr["pts"]
+        seg = point_at(pts, t_valve)[2]
+        for dt in (-BYPASS_AT, BYPASS_AT):
+            if not 0 < t_valve + dt < length(pts) or point_at(pts, t_valve + dt)[2] != seg:
+                raise ValueError(f"route {r['id']}: no straight run for {tag}'s valve station; move it or set "
+                                 f"\"station\": false with a station_reason")
+        crowd = [o for o, t in others if o != tag and abs(t - t_valve) <= BYPASS_AT + 20]
+        if crowd:
+            raise ValueError(f"route {r['id']}: {crowd} sit inside {tag}'s valve station; move them or set "
+                             f"\"station\": false with a station_reason")
+        s = -1 if side in ("down", "right") else 1          # the bubble sits at -s; the bypass goes to +s
+        for dt in (-BLOCK_AT, BLOCK_AT):
+            q, o, _ = point_at(pts, t_valve + dt)
+            rr["valves"].append((t_valve + dt, self.manual_valve((round(q[0]), round(q[1])), o)))
+        a = point_at(pts, t_valve - BYPASS_AT)[0]
+        b = point_at(pts, t_valve + BYPASS_AT)[0]
+        if orient == "h":
+            a2, b2 = (a[0], a[1] + s * BYPASS_OFF), (b[0], b[1] + s * BYPASS_OFF)
+        else:
+            a2, b2 = (a[0] + s * BYPASS_OFF, a[1]), (b[0] + s * BYPASS_OFF, b[1])
+        bpts = [tuple(map(round, v)) for v in (a, a2, b2, b)]
+        self.c.line(bpts, PROCESS_W)
+        mid = ((a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2)
+        hv = self.manual_valve((round(mid[0]), round(mid[1])), orient, globe=True)
+        rid = f"BYP-{tag}"
+        self.extra_routes.append({"id": rid, "from": {"tee": r["id"], "at": list(bpts[0])},
+                                  "to": {"tee": r["id"], "at": list(bpts[-1])}, "pts": bpts})
+        self.station_lines.append((rid, bpts, hv))
+        return rid, {"pts": bpts, "placed": [], "valves": [(length(bpts) / 2, hv)], "taps": []}
 
     def tap(self, p, orient, tag, side):
         x, y = p
@@ -527,11 +603,18 @@ class Sheet:
         for r in spec["routes"]:
             rr = routes[r["id"]]
             side = r.get("bubble_side", "up")
+            stations = self.layout.get("control_valve_stations") and r.get("station", True)
+            if r.get("station") is False and not r.get("station_reason"):
+                raise ValueError(f"route {r['id']}: \"station\": false needs a station_reason")
+            others = [(tg, tt) for tg, _, _, tt in rr["placed"]]
             for tag, p, orient, t in rr["placed"]:
                 it = items_by_tag[tag]
                 s = side if orient == "h" else ("right" if side == "down" else "left")
                 if "xmv" in it:
                     rr["valves"].append((t, self.valve(p, orient, tag, s, not r.get("stream"))))
+                    if stations:
+                        rid, brr = self.station(r, rr, t, tag, orient, s, others)
+                        routes[rid] = brr
                 else:
                     rr["taps"].append((t, self.tap(p, orient, tag, s)))
                 drawn.setdefault(tag, []).append(spec["id"])
@@ -563,6 +646,7 @@ class Sheet:
         for sig in spec.get("signals", []):
             self.signal(sig)
         self.check_signal_clearance()
+        self.check_station_clearance()
         self.connect(routes, unit_nodes, flag_nodes)
         self.legend()
         self.title_block()
@@ -632,7 +716,7 @@ class Sheet:
             cuts = [tv for tv, _ in sorted(routes[rid]["valves"])]
             return (rid, sum(1 for cv in cuts if cv < t))
 
-        for r in self.spec["routes"]:
+        for r in self.spec["routes"] + self.extra_routes:
             rid, rr = r["id"], routes[r["id"]]
             valves = sorted(rr["valves"])
             n = len(valves)

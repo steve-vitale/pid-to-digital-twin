@@ -131,7 +131,8 @@ def main():
                   f"{g} | {r['inside']} |")
     md += ["", "Reading it: symbol sizes, line weights and text height are the drafting style and should sit inside. "
            "Counts and ink coverage describe how much is on a sheet; the generated sheets draw only what the process "
-           "model holds (no drains, vents, manual valves or reducers), so they can fall below the OPEN100 range there "
+           "model holds plus the drafting additions the layout declares (control valve stations: block valves and "
+           "a bypass); they still have no drains, vents or reducers, so they can fall below the OPEN100 range there "
            "without being a style mismatch.", ""]
     (OUT / "style_fidelity.md").write_text("\n".join(md), encoding="utf-8")
     side_by_side(ROOT / "docs" / "screenshots" / "te-pid-style-side-by-side.png")

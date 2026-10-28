@@ -293,7 +293,7 @@ accuracy, and not comparable with §4 or the OPEN100 holdouts: the sheets are sp
 duplicates or invents a model item. And the code line tracer, which sees only pixels, recovers every key link on all
 three sheets from the key's symbol boxes, so the key's links describe what is drawn.
 
-**Style check** (`out/te_pid/style_fidelity.md`): 32 of 36 measurements inside the OPEN100 per-sheet range on revision A (30 of 36 on revision B, which adds 19 controllers but no manual valves: the instrument share rises above every OPEN100 sheet). The four
+**Style check** (`out/te_pid/style_fidelity.md`): 32 of 36 measurements inside the OPEN100 per-sheet range on revision A (30 of 36 on revision B, which added 19 controllers but no manual valves; 35 of 36 on revision C, which adds a control valve station around each inline control valve but one). The four
 outside are symbol counts on all three sheets and ink coverage on one, because the model has no drains, vents or
 manual valves to draw.
 

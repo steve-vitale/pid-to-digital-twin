@@ -154,9 +154,12 @@ of change. How to capture your own title block and symbol library, and the gover
 The revision-A sheets sat inside the OPEN100 range on 32 of 36 style measurements: bubble, valve, flag and equipment
 sizes, line weights, text height and flag counts. The four outside were symbol counts and one ink figure, because the
 model holds no drains, vents or manual valves ([style_fidelity.md](out/te_pid/style_fidelity.md)). That was revision
-A. Revision B adds the control loops (below), and the count drops to **30 of 36**: the sheets now carry more
-instruments per symbol than any OPEN100 sheet, because they have controllers but still none of the block valves,
-bypasses, drains and vents a real P&ID shows around them.
+A. Revision B added the control loops (below) and the count dropped to 30 of 36: controllers, but none of the
+block valves and bypasses a real P&ID draws around a control valve. Revision C adds those control valve stations
+(two block valves and a globe-valve bypass around each of 10 control valves; the compressor's spill-back valve opts
+out, with its reason in the layout) and the count is **35 of 36**. The one outside: sheet 103 has 37 scored symbols
+against an OPEN100 minimum of 40. Drains and vents are still not drawn
+([journal entry 52](docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass)).
 
 **Control loops.** Revision A drew every transmitter and valve but no controller or signal line, and its valve
 numbers didn't match the loops that move them: a PFD with bubbles on it. The loops are now read out of the

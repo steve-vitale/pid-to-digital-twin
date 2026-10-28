@@ -84,12 +84,42 @@ class GeneratorTests(unittest.TestCase):
 
     def test_a_signal_through_a_symbol_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
-            def through(layout):  # into FIC-101 from below, along y=280: straight through FI-101's bubble
+            def through(layout):  # into FIC-101 from below, along y=250: straight through FI-101's bubble
                 for s in layout["sheets"][0]["signals"]:
                     if (s["from"], s["to"]) == ("AIC-123A", "FIC-101"):
-                        s["via"] = [[1250, 280], [915, 280]]
+                        s["via"] = [[1250, 250], [915, 250]]
             with self.assertRaisesRegex(ValueError, "AIC-123A -> FIC-101: .* runs through FI 101"):
                 draw.generate(MODEL, write_layout(tmp, through), None, write=False)
+
+    def test_every_inline_control_valve_gets_one_station(self):
+        sheets = draw.generate(MODEL, LAYOUT, None, write=False)
+        kinds = [n["model_kind"] for sh in sheets for n in sh.nodes.values()]
+        layout = json.loads(LAYOUT.read_text(encoding="utf-8"))
+        opted_out = [i for sh in layout["sheets"] for r in sh["routes"] if r.get("station") is False
+                     for i in r.get("items", [])]
+        self.assertEqual(opted_out, ["FV-105"])
+        self.assertEqual(kinds.count("bypass_valve"), 10)   # 11 inline control valves, one opted out
+        self.assertEqual(kinds.count("block_valve"), 20)
+        manual = [n for sh in sheets for n in sh.nodes.values() if n["model_kind"] in ("block_valve", "bypass_valve")]
+        self.assertTrue(all(n["drafting_addition"] and n["model_ref"] is None for n in manual))
+
+    def test_a_station_without_room_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def crowd(layout):  # FI-101 placed 40 px from its valve, inside the station
+                for r in layout["sheets"][0]["routes"]:
+                    if r["id"] == "S1":
+                        r["place"] = {"FI-101": [900, 330]}
+            with self.assertRaisesRegex(ValueError, "sit inside FV-101's valve station"):
+                draw.generate(MODEL, write_layout(tmp, crowd), None, write=False)
+
+    def test_opting_out_of_a_station_needs_a_reason(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def no_reason(layout):
+                for r in layout["sheets"][1]["routes"]:
+                    if r["id"] == "BYP":
+                        del r["station_reason"]
+            with self.assertRaisesRegex(ValueError, "needs a station_reason"):
+                draw.generate(MODEL, write_layout(tmp, no_reason), None, write=False)
 
     def test_a_diagonal_signal_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
