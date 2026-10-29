@@ -3034,3 +3034,34 @@ use, then make what you saw into a check.
 
 **At your plant:** before you trust an overview screen, ask what it shows when a value is uncertain, and whether
 anything coloured as abnormal is actually normal operation.
+
+## 59. Walk the report's timeline beside the screen
+
+**What:** 2026-10-29. The six events the report times on the evening (pp. 38-40), each paired with the replayed
+overview screen at that moment and with the checks that test it. On the overview page, below the screen; details in
+[BAYER_RT.md](BAYER_RT.md).
+
+**How:** `scripts/bayer_walkthrough.py` derives nothing new. A small data file names which checks test which event;
+the script places every existing check (11 figure against text, 5 report statements) under exactly one event and
+fails if one is missing or doubled. The digitizer now also writes its checks as JSON, so nothing parses markdown.
+
+**What it found:**
+- **13 of 16 checks agree; no report statement disagrees with the replay.** The 3 that don't are the
+  figure-against-text disagreements from entry 56, now shown at the moment they apply.
+- **The report times 3 of the replay's 20 state changes.** The other 17 are listed, not hidden: the two short flow
+  starts, the minimum-temperature condition leaving "met" at 21:26, and the pressure condition's brief "cannot tell"
+  around the pump start.
+- **My own plan's wording was wrong.** It said every derived state would match the report or be a disagreement. Most
+  derived changes are neither: the report just doesn't time them. They get their own list.
+
+**Why:**
+- **Rejected: a second page.** The timeline already sat under the screen; making it the walk-through kept one page,
+  one data source and one verifier.
+- **Rejected: nearest event by eye.** Each event shows the replayed column nearest its time, worked out again by the
+  verifier from the CSV; the 18:14 event lands on 18:13:54, before the pump start registers, and the page shows the screen time beside the event.
+
+**Lesson:** put every check you already have in the order a reader meets the story, and count what's left over. The
+leftover list is where the next question is.
+
+**At your plant:** when an incident timeline is rebuilt from trends, ask for two lists: where the trend and the
+written account disagree, and what the trend shows that the account never mentions.

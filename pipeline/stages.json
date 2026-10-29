@@ -2278,7 +2278,8 @@
     "data/bayer_rt/fig11_calibration.json",
     "data/bayer_rt/fig10_inventory.json",
     "data/bayer_rt/pid_layout.json",
-    "data/bayer_rt/replay_rules.json"
+    "data/bayer_rt/replay_rules.json",
+    "data/bayer_rt/walkthrough_steps.json"
    ],
    "requires": [],
    "config": [],
@@ -2395,7 +2396,8 @@
    ],
    "outputs": [
     "data/bayer_rt/fig11_digitized.csv",
-    "out/bayer_rt/fig11_check.md"
+    "out/bayer_rt/fig11_check.md",
+    "out/bayer_rt/fig11_check.json"
    ],
    "requires": [],
    "config": [],
@@ -2454,17 +2456,60 @@
    "checked_by": "scripts/test_bayer_rt.py (current outputs, every rule cited, a straddling bound never called, a planted flow-loss time fails)"
   },
   {
+   "poc": false,
+   "upstream": [
+    "bayer.source",
+    "bayer.fig11",
+    "bayer.replay"
+   ],
+   "inputs": [
+    "data/bayer_rt/process_model.json",
+    "data/bayer_rt/walkthrough_steps.json",
+    "data/bayer_rt/replay_rules.json",
+    "data/bayer_rt/replay.csv",
+    "out/bayer_rt/fig11_check.json",
+    "out/bayer_rt/replay_states.json"
+   ],
+   "code": [
+    "scripts/bayer_walkthrough.py"
+   ],
+   "outputs": [
+    "out/bayer_rt/walkthrough.json",
+    "out/bayer_rt/walkthrough.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.walkthrough",
+   "dataset": "bayer",
+   "stage": 3,
+   "title": "The report's timeline walked through beside the replay: each timed event, the screen at that moment, and the checks that test it",
+   "kind": "check",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/bayer_walkthrough.py"
+    ]
+   ],
+   "treatment": "Each event the report times (pp. 38-40) is paired with the replayed column nearest it and with the checks that test it, named in data/bayer_rt/walkthrough_steps.json. Nothing is derived again. Then the failed checks with their explanations, and every derived interlock or limit state change that no report statement tests.",
+   "carries": "6 events, 16 checks: 13 agree, 3 disagree (all figure against text); 17 of 20 derived state changes are not timed by the report and are listed, not counted as disagreements",
+   "checked_by": "scripts/test_bayer_rt.py (current outputs, every check placed exactly once, disagreements equal the failed checks, every state change listed, planted faults)"
+  },
+  {
    "poc": true,
    "upstream": [
     "bayer.source",
     "bayer.pid",
-    "bayer.replay"
+    "bayer.replay",
+    "bayer.walkthrough"
    ],
    "inputs": [
     "data/bayer_rt/process_model.json",
     "data/bayer_rt/pid_layout.json",
     "data/bayer_rt/replay_rules.json",
-    "data/bayer_rt/replay.csv"
+    "data/bayer_rt/replay.csv",
+    "out/bayer_rt/walkthrough.json",
+    "data/bayer_rt/walkthrough_steps.json"
    ],
    "code": [
     "scripts/build_bayer_overview.py",
@@ -2481,7 +2526,7 @@
    "id": "bayer.overview",
    "dataset": "bayer",
    "stage": 3,
-   "title": "Overview screen of the residue treater, generated from the model and driven by the replay (proof of concept)",
+   "title": "Overview screen of the residue treater, generated from the model and driven by the replay, with the report's timeline as a walk-through (proof of concept)",
    "kind": "generated",
    "rebuild": "auto",
    "command": [
@@ -2495,9 +2540,9 @@
     ]
    ],
    "requires_note": "node and a Chrome or Chromium (found by drafts/interactive-tour/cdp.mjs) for the verification",
-   "treatment": "One self-contained page: mimic geometry from the generated P&ID layout, items and tags from the model, values, bounds and states from the replay, grey process with colour only for an abnormal state. The verifier reads replay.csv itself and checks every row on the page, the failure note only at the end, and layout at 390 and 1440 px in light and dark.",
+   "treatment": "One self-contained page: mimic geometry from the generated P&ID layout, items and tags from the model, values, bounds and states from the replay, grey process with colour only for an abnormal state. The verifier reads replay.csv itself and checks every row on the page, the failure note only at the end, and layout at 390 and 1440 px in light and dark. Below it, each event in the report's timeline sets the screen to its moment, with the checks that test it; the verifier recomputes each moment from replay.csv and each agree mark from the checks' own outputs.",
    "carries": "proof of concept; not the plant's screen; tags assigned by this project; values with their digitizing bounds",
-   "checked_by": "drafts/bayer-overview/verify.mjs (16 checks)"
+   "checked_by": "drafts/bayer-overview/verify.mjs (17 checks)"
   }
  ]
 }

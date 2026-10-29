@@ -2,11 +2,12 @@
 
 Written by `node drafts/bayer-overview/verify.mjs`, which reads `data/bayer_rt/replay.csv` itself rather than the data embedded in the page.
 
-Result: 16 pass, 0 fail, of 16 checks.
+Result: 17 pass, 0 fail, of 17 checks.
 
 | Check | Result | Detail |
 |---|---|---|
 | rows_match_replay_csv | pass | all 519 rows: values, 3 interlocks, 4 limits |
+| walkthrough_steps_match | pass | 6 events: each Show sets the nearest CSV row; 16 agree/disagree marks equal the checks' own results |
 | failure_note_only_at_the_end | pass | shown at 22:32:31 only |
 | mimic_text_size_light | pass | smallest mimic text 12.0 px tall (at 390 px the "Values now" card carries the values) |
 | no_horizontal_scroll_1440_light | pass | 0 px wider than the viewport |

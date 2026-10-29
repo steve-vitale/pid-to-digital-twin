@@ -1,0 +1,103 @@
+{
+ "checks": [
+  {
+   "name": "Failure line position (the figure's dotted line)",
+   "source": "Fig 11 caption: failure at 22:33",
+   "stated": "0 min from 22:33",
+   "digitized": "0.1 min from 22:33",
+   "tolerance": "\u00b11",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Temperature at failure",
+   "source": "Fig 11 label: 150.3 C",
+   "stated": "150.3 \u00b0C",
+   "digitized": "148.7 \u00b0C",
+   "tolerance": "\u00b11.5",
+   "ok": false,
+   "note": "The trace reaches the failure line about 1.6 \u00b0C below the figure's own 150.3 \u00b0C label, about 4.5 pixels. The trace was rising about 1 \u00b0C per 30-second column there, so the label may be a later reading than the last drawn point, which the dotted failure line partly covers."
+  },
+  {
+   "name": "Pressure at failure",
+   "source": "Fig 11 label: 51.2 psig",
+   "stated": "51.2 psig",
+   "digitized": "51.4 psig",
+   "tolerance": "\u00b11",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Pressure when the relief valve opened",
+   "source": "Fig 11 label: 44 psig at 22:27",
+   "stated": "44 psig",
+   "digitized": "43.5 psig",
+   "tolerance": "\u00b11.5",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Level when recirculation stopped",
+   "source": "p. 39: 51 percent at 10:21 p.m.",
+   "stated": "51 %",
+   "digitized": "50.4 %",
+   "tolerance": "\u00b12",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Recirculation flow, 22:23 to 22:32",
+   "source": "p. 39: flow dropped to zero at 10:21 p.m.",
+   "stated": "0 klb/h",
+   "digitized": "0.0 klb/h",
+   "tolerance": "\u00b11.5",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Temperature less than 3 minutes after 22:21",
+   "source": "p. 39: 141 C in less than 3 minutes",
+   "stated": "141 \u00b0C",
+   "digitized": "138.9 \u00b0C",
+   "tolerance": "\u00b12",
+   "ok": false,
+   "note": "The trace reaches 141 \u00b0C at about 22:27, not before 22:24. The report says the control system measured both the bulk liquid and the recirculation loop (p. 28); the text may quote the other sensor. Not verified: the report does not say which temperature the figure plots."
+  },
+  {
+   "name": "Level when the pump started",
+   "source": "p. 38: about 30 percent at 6:14 p.m.",
+   "stated": "30 %",
+   "digitized": "30.6 %",
+   "tolerance": "\u00b13",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Heating rate from 18:38",
+   "source": "p. 39: about 0.6 degrees per minute",
+   "stated": "0.6 \u00b0C/min",
+   "digitized": "0.5 \u00b0C/min",
+   "tolerance": "\u00b10.15",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Temperature after the pump started, before heating (18:16 to 18:38, mean)",
+   "source": "p. 38: pump started 6:14 p.m.; temperature between 60 and 65 C",
+   "stated": "62.5 \u00b0C",
+   "digitized": "64.9 \u00b0C",
+   "tolerance": "\u00b12.5",
+   "ok": true,
+   "note": null
+  },
+  {
+   "name": "Pressure while steady (18:30 to 21:30, mean)",
+   "source": "p. 39: remained constant at 22 psig",
+   "stated": "22 psig",
+   "digitized": "25.0 psig",
+   "tolerance": "\u00b11.5",
+   "ok": false,
+   "note": "The figure's own pressure trace sits about 3 psig above the text's 22 psig for the whole steady period, about 22 pixels, far outside the pixel error. The pressure scale itself is confirmed by the two labelled pressures (44 psig at the relief, 51.2 psig at failure), which both pass. The figure and the text disagree; the replay uses the figure and states the difference."
+  }
+ ]
+}

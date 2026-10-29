@@ -1,0 +1,11 @@
+{
+ "about": "Which checks test each event in the report's timeline (process_model.json events_2008_08_28). scripts/bayer_walkthrough.py pairs each event with the replayed screen at that moment and with these checks: the figure-against-text checks in out/bayer_rt/fig11_check.json (by name) and the report-statement checks in out/bayer_rt/replay_states.json (K1-K5). Every check must sit under exactly one event; a test fails otherwise.",
+ "steps": [
+  {"event": "18:14", "fig11": ["Level when the pump started", "Temperature after the pump started, before heating (18:16 to 18:38, mean)", "Pressure while steady (18:30 to 21:30, mean)"], "replay": ["K1"]},
+  {"event": "18:38", "fig11": ["Heating rate from 18:38"], "replay": []},
+  {"event": "22:21", "fig11": ["Level when recirculation stopped", "Recirculation flow, 22:23 to 22:32", "Temperature less than 3 minutes after 22:21"], "replay": ["K2", "K5"]},
+  {"event": "22:25", "fig11": [], "replay": ["K3"]},
+  {"event": "22:27", "fig11": ["Pressure when the relief valve opened"], "replay": ["K4"]},
+  {"event": "22:33", "fig11": ["Failure line position (the figure's dotted line)", "Temperature at failure", "Pressure at failure"], "replay": []}
+ ]
+}

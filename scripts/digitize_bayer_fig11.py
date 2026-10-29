@@ -18,7 +18,7 @@ How:
             reported, not tuned away.
 
 Outputs: data/bayer_rt/fig11_digitized.csv (one row per pixel column, about 32 s apart, with the pixel-error bound
-per series) and out/bayer_rt/fig11_check.md.
+per series) and out/bayer_rt/fig11_check.md (and .json, for the walk-through).
 
 The figure is not stored in the repository; only the digitized values, each cited to the figure, are. Not legal
 advice: see docs/REAL_UNIT_SELECTION.md for the reuse stance.
@@ -42,6 +42,7 @@ CAL = ROOT / "data" / "bayer_rt" / "fig11_calibration.json"
 PDF = ROOT / "data" / "external" / "csb" / "Bayer_Report_Final.pdf"
 CSV_OUT = ROOT / "data" / "bayer_rt" / "fig11_digitized.csv"
 REPORT = ROOT / "out" / "bayer_rt" / "fig11_check.md"
+CHECK_JSON = ROOT / "out" / "bayer_rt" / "fig11_check.json"
 SERIES = ("temperature_C", "pressure_psig", "level_pct", "recirc_flow_klbh")
 
 
@@ -265,6 +266,10 @@ def check(c, bounds):
         lines += [f"- **{k}.** No explanation recorded yet." for k in sorted(failed - set(notes))]
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    CHECK_JSON.write_text(json.dumps({"checks": [
+        {"name": n, "source": src, "stated": st, "digitized": g, "tolerance": t, "ok": r == "pass",
+         "note": notes.get(n) if r != "pass" else None} for n, src, st, g, t, r in checks]}, indent=1) + "\n",
+        encoding="utf-8", newline="\n")
     print(f"{passed}/{len(checks)} checks pass; report {REPORT.relative_to(ROOT)}")
     for row in checks:
         if row[5] != "pass":

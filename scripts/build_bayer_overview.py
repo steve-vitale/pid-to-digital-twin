@@ -13,6 +13,11 @@ with the bound it carries. An interlock is shown as its condition (met / clear /
 supports), with its as-operated state from the report: bypassed. The replay stops at 22:33, the failure, and says
 what happened there in one plain sentence with its page.
 
+Below the screen, the report's timeline is a walk-through (out/bayer_rt/walkthrough.json, from
+scripts/bayer_walkthrough.py): each event the report times, a button that sets the screen to that moment, and the
+checks that test the event, agreeing or not; then where the figure and text disagree, and every derived state change
+the report doesn't time.
+
 It is a proof of concept: not the plant's screen, not its DCS, tags assigned by this project. Stdlib only.
 """
 import csv
@@ -24,6 +29,7 @@ MODEL = ROOT / "data" / "bayer_rt" / "process_model.json"
 LAYOUT = ROOT / "data" / "bayer_rt" / "pid_layout.json"
 RULES = ROOT / "data" / "bayer_rt" / "replay_rules.json"
 REPLAY = ROOT / "data" / "bayer_rt" / "replay.csv"
+WALK = ROOT / "out" / "bayer_rt" / "walkthrough.json"
 OUT = ROOT / "drafts" / "bayer-overview" / "index.html"
 REPORT = "https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf"
 
@@ -82,7 +88,7 @@ def build():
         "interlocks": [{k: il[k] for k in ("id", "condition", "tag", "why_these_bounds", "as_operated")}
                        for il in rules["interlocks"]],
         "limits": rules["limits"],
-        "events": [{"t": e["time"], "what": e["what"], "source": e["source"]} for e in model["events_2008_08_28"]],
+        "walk": json.loads(WALK.read_text(encoding="utf-8")),
         "feed": {"tag": "FV-107", "state": "open, in manual",
                  "why": "opened by hand at about 4 a.m. and feeding since (p. 38); its interlocks bypassed (pp. 38, 69)"},
         "rows": replay_rows(),
@@ -146,9 +152,21 @@ svg{display:block;width:100%;height:auto}
 .events{list-style:none;padding:0;margin:0;font-size:13px}
 .events li{padding:4px 0;border-bottom:1px solid var(--grid)}
 .events li.past{color:var(--muted)}
-.events li.now{font-weight:700}
+.events li.now{border-left:4px solid var(--accent);padding-left:8px}
+.events button{font:inherit;font-size:13px;padding:3px 10px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;margin-right:6px}
+.events .checks{list-style:none;padding:0;margin:6px 0 2px}
+.events .checks li{border:0;padding:2px 0;display:flex;gap:8px;align-items:baseline}
+.agree{color:var(--ok);border:1px solid var(--ok)}
+.disagree{background:var(--warn-bg);color:var(--warn)}
+table.ch{border-collapse:collapse;font-size:13px;width:100%}
+table.ch td,table.ch th{border-bottom:1px solid var(--grid);padding:3px 6px;text-align:left;vertical-align:top}
+.tw{overflow-x:auto}
 .end{display:none;margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
 .end.show{display:block}
+.stepnow{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:0 0 12px;padding:10px 12px;border:1px solid var(--grid);border-left:4px solid var(--accent);border-radius:8px;background:var(--panel)}
+.stepnow button{font:inherit;font-size:13px;padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;margin-right:6px}
+.stepnow button:disabled{opacity:.45;cursor:default}
+#steptext{flex:1 1 320px;min-width:0;color:var(--ink)}
 footer{padding:18px 16px 30px;font-size:13px;color:var(--muted)}
 </style>
 </head>
@@ -164,6 +182,7 @@ footer{padding:18px 16px 30px;font-size:13px;color:var(--muted)}
 <input id="scrub" type="range" min="0" value="0" aria-label="Replay time">
 </div>
 <div class="end" id="end" role="status"></div>
+<div class="stepnow" id="stepnow" role="status" aria-live="polite"><div><button type="button" id="prevstep">Previous event</button><button type="button" id="nextstep">Next event</button></div><div id="steptext" class="small"></div></div>
 <div class="grid">
 <section class="card" aria-label="Unit overview">
 <h2>Unit</h2>
@@ -183,9 +202,16 @@ footer{padding:18px 16px 30px;font-size:13px;color:var(--muted)}
 <h2>The evening so far</h2>
 <div class="trends" id="trends"></div>
 </section>
-<section class="card" style="margin-top:14px" aria-label="Report timeline">
-<h2>The report's timeline</h2>
+<section class="card" style="margin-top:14px" aria-label="Report timeline walk-through">
+<h2>Walk through the report's timeline</h2>
+<p class="small" id="walksum"></p>
 <ul class="events" id="events"></ul>
+<h2 style="margin-top:14px">Where the figure and the report's text disagree</h2>
+<ul class="events" id="disagree"></ul>
+<details class="small" style="margin-top:12px"><summary id="unsum"></summary>
+<p>Not disagreements: the report doesn't time these. Each row is the first replayed column in the new state.</p>
+<div class="tw"><table class="ch" id="unstated"><thead><tr><th>Time</th><th>Rule</th><th>From</th><th>To</th></tr></thead><tbody></tbody></table></div>
+</details>
 </section>
 </main>
 <footer>
@@ -236,7 +262,20 @@ for(const lim of D.limits){const d=document.createElement("div");d.className="li
 const valBox=document.getElementById("vals");
 for(const t of Object.keys(D.instruments)){valBox.insertAdjacentHTML("beforeend",`<div><strong>${t}</strong> ${D.instruments[t].desc.replace(/ \(.*\)$/,"")}</div><div class="v" id="vn-${t}">—</div><div class="b" id="vb-${t}"></div>`);}
 const evBox=document.getElementById("events");
-for(const e of D.events){const li=document.createElement("li");li.dataset.t=e.t;li.innerHTML=`<strong>${e.t}</strong> ${e.what} <span class="small">(${e.source})</span>`;evBox.appendChild(li);}
+const W=D.walk,C=W.counts;
+document.getElementById("walksum").textContent=`${C.events} events the report times on the evening, ${C.checks} checks: ${C.agree} agree, ${C.disagree} disagree. Show sets the screen above to the replayed moment nearest the event.`;
+W.steps.forEach((s,k)=>{const li=document.createElement("li");li.dataset.t=s.event;li.dataset.step=k;
+  li.innerHTML=`<button type="button" aria-label="Show the screen at ${s.event}">Show ${s.event}</button><strong>${s.event}</strong> ${s.what} <span class="small">(${s.source})</span>`+
+  `<ul class="checks">${s.checks.map(c=>`<li data-agrees="${c.agrees}"><span class="badge ${c.agrees?"agree":"disagree"}">${c.agrees?"agrees":"disagrees"}</span><span>${c.kind==="report statement"?`${c.id}: ${c.stated}; replay ${c.got}`:`${c.id}: stated ${c.stated}, figure ${c.got}`}</span></li>`).join("")}</ul>`;
+  li.querySelector("button").addEventListener("click",()=>showStep(k,true));evBox.appendChild(li);});
+function showStep(k,scroll){stop();setTime(W.steps[k].row);if(scroll)document.querySelector(".bar").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}
+const curStep=()=>W.steps.findIndex(s=>s.row===idx);
+document.getElementById("prevstep").addEventListener("click",()=>{const k=W.steps.map(s=>s.row).filter(r=>r<idx).length-1;if(k>=0)showStep(k);});
+document.getElementById("nextstep").addEventListener("click",()=>{const k=W.steps.findIndex(s=>s.row>idx);if(k>=0)showStep(k);});
+document.getElementById("disagree").innerHTML=W.disagreements.map(d=>`<li><strong>${d.event}</strong> ${d.id}: stated ${d.stated}, figure ${d.got}. <span class="small">${d.note||""}</span></li>`).join("");
+const un=W.unstated_changes.filter(x=>!x.tested);
+document.getElementById("unsum").textContent=`${un.length} of ${C.state_changes} interlock and limit state changes in the replay are not tested by any report statement`;
+document.querySelector("#unstated tbody").innerHTML=un.map(x=>`<tr><td>${x.time}</td><td>${x.rule}: ${x.what}</td><td>${x.from}</td><td>${x.to}</td></tr>`).join("");
 const trendBox=document.getElementById("trends"),cursors=[];
 const toMin=t=>{const [h,m,s]=t.split(":").map(Number);return h*60+m+s/60;};
 const t0=toMin(rows[0].t),t1=toMin(rows[rows.length-1].t);
@@ -276,20 +315,27 @@ function setTime(i){idx=Math.max(0,Math.min(rows.length-1,i));const r=rows[idx];
     const abn=D.limits.some(l=>l.tag===tag&&!l.informational&&r[l.id]==="crossed");
     const n=document.getElementById("vn-"+tag);n.textContent=v==null?"no reading":`${fmt(v)} ${u}`;n.className="v"+(abn?" abn":"");
     document.getElementById("vb-"+tag).textContent=v==null?"":`bounds ${fmt(r[tag+"_lo"])} to ${fmt(r[tag+"_hi"])} ${u}`+(abn?" · limit crossed":"");}
-  const now=toMin(r.t);for(const li of evBox.children){const t=toMin(li.dataset.t+":00");li.className=t<=now?(now-t<1.5?"now":"past"):"";}
+  for(const li of evBox.children){const s=W.steps[li.dataset.step];li.className=s.row===idx?"now":idx>s.row?"past":"";}
+  const k=curStep(),st=W.steps[k];document.getElementById("prevstep").disabled=!W.steps.some(s=>s.row<idx);document.getElementById("nextstep").disabled=!W.steps.some(s=>s.row>idx);
+  document.getElementById("steptext").innerHTML=st?`<strong>The report, ${st.event}</strong> (${st.source}): ${st.what}. Screen at ${st.screen_time}. ${st.checks.filter(c=>c.agrees).length} of ${st.checks.length} checks agree${st.checks.some(c=>!c.agrees)?": "+st.checks.filter(c=>!c.agrees).map(c=>c.id).join("; ")+" disagrees":""}.`:`Between the report's timed events. Next: ${W.steps.find(s=>s.row>idx)?.event??"none"}.`;
   for(const c of cursors){const x=c.X(r.t);c.cur.setAttribute("x1",x);c.cur.setAttribute("x2",x);c.shade.setAttribute("x",x);c.shade.setAttribute("width",Math.max(0,c.W-x));}
   const end=document.getElementById("end");const last=idx===rows.length-1;end.classList.toggle("show",last);
   end.innerHTML=last?`<strong>22:33.</strong> The residue treater ruptured during the restart. Two employees died (<a href="${D.report}">CSB report</a>, p. 1). The replay stops here.`:"";}
 scrub.addEventListener("input",()=>setTime(Number(scrub.value)));
 const playBtn=document.getElementById("play");
-playBtn.addEventListener("click",()=>{if(timer){clearInterval(timer);timer=null;playBtn.textContent="Play";return;}
+function stop(){if(timer){clearInterval(timer);timer=null;playBtn.textContent="Play";}}
+playBtn.addEventListener("click",()=>{if(timer){stop();return;}
   if(idx>=rows.length-1)setTime(0);playBtn.textContent="Pause";timer=setInterval(()=>{if(idx>=rows.length-1){clearInterval(timer);timer=null;playBtn.textContent="Play";return;}setTime(idx+1);},matchMedia("(prefers-reduced-motion: reduce)").matches?400:120);});
 setTime(0);
 window.__tour={rows:rows.length,setTime,state:()=>({t:rows[idx].t,
   values:Object.fromEntries(Object.keys(D.instruments).map(t=>[t,document.getElementById("box-"+t).getAttribute("data-value")])),
   interlocks:Object.fromEntries(D.interlocks.map(il=>[il.id,document.querySelector(`#il-${il.id} .state`).dataset.state])),
   limits:Object.fromEntries(D.limits.map(l=>[l.id,document.querySelector(`#lim-${l.id} .state`).dataset.state])),
-  endShown:document.getElementById("end").classList.contains("show")})};
+  endShown:document.getElementById("end").classList.contains("show"),
+  step:[...evBox.children].findIndex(li=>li.className==="now")}),
+  showStep:k=>evBox.children[k].querySelector("button").click(),
+  nextStep:()=>document.getElementById("nextstep").click(),
+  stepChecks:k=>[...evBox.children[k].querySelectorAll(".checks li")].map(li=>li.dataset.agrees==="true")};
 </script>
 </body>
 </html>

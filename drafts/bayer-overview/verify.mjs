@@ -6,6 +6,9 @@
 // the page's own code shows up as a mismatch. In headless Chrome at 390 and 1440 px, light and dark:
 //   every replay row   the four values, three interlock conditions and four limit states shown equal the CSV row
 //   the end            the failure note shows at the last row only, and nowhere earlier
+//   the walk-through   each report event's Show button sets the screen to the CSV row nearest the event (computed
+//                      here), and the agree/disagree marks under it equal the checks' own results, read here from
+//                      out/bayer_rt/fig11_check.json and replay_states.json through data/bayer_rt/walkthrough_steps.json
 //   layout             no horizontal page scroll; every visible text at least 12 px; no console errors
 // Writes drafts/bayer-overview/verification.md and review stills in drafts/bayer-overview/shots/.
 // Exit 0 when nothing fails, 1 otherwise, 2 when Chrome or the built page is missing.
@@ -24,6 +27,11 @@ const lines = readFileSync(join(ROOT, "data", "bayer_rt", "replay.csv"), "utf8")
 const head = lines[0].split(",");
 const csv = lines.slice(1).map((l) => Object.fromEntries(l.split(",").map((v, i) => [head[i], v])));
 const TAGS = ["TI-104", "PI-101", "LI-102", "FI-103"];
+const readJson = (...p) => JSON.parse(readFileSync(join(ROOT, ...p), "utf8"));
+const STEPS = readJson("data", "bayer_rt", "walkthrough_steps.json").steps;
+const FIG11 = Object.fromEntries(readJson("out", "bayer_rt", "fig11_check.json").checks.map((c) => [c.name, c.ok]));
+const KOK = Object.fromEntries(readJson("out", "bayer_rt", "replay_states.json").checks.map((c) => [c.id, c.ok]));
+const sec = (t) => { const [h, m, s = 0] = t.split(":").map(Number); return h * 3600 + m * 60 + s; };
 const ILS = head.filter((h) => /^IL-\d$/.test(h));
 const LIMS = head.filter((h) => !h.startsWith("IL-") && !TAGS.some((t) => h.startsWith(t)) && h !== "time");
 
@@ -53,6 +61,23 @@ try {
           if (s.endShown !== (i === csv.length - 1)) early.push(r.time);
         }
         record("rows_match_replay_csv", bad.length === 0, bad.length ? `${bad.length} rows differ; first ${bad[0].slice(0, 300)}` : `all ${csv.length} rows: values, ${ILS.length} interlocks, ${LIMS.length} limits`);
+        const walkBad = [];
+        for (let k = 0; k < STEPS.length; k++) {
+          const st = STEPS[k];
+          let want = 0;
+          csv.forEach((r, i) => { if (Math.abs(sec(r.time) - sec(st.event)) < Math.abs(sec(csv[want].time) - sec(st.event))) want = i; });
+          const s = await page.evaluate(`(window.__tour.showStep(${k}), window.__tour.state())`);
+          if (s.t !== csv[want].time || s.step !== k) walkBad.push(`${st.event}: screen ${s.t} step ${s.step}, want ${csv[want].time} step ${k}`);
+          const marks = await page.evaluate(`window.__tour.stepChecks(${k})`);
+          const truth = [...st.fig11.map((n) => FIG11[n]), ...st.replay.map((id) => KOK[id])];
+          if (JSON.stringify(marks) !== JSON.stringify(truth)) walkBad.push(`${st.event}: marks ${JSON.stringify(marks)} vs checks ${JSON.stringify(truth)}`);
+        }
+        await page.evaluate("window.__tour.setTime(0)");
+        const seq = [];
+        for (let k = 0; k <= STEPS.length; k++) seq.push((await page.evaluate("(window.__tour.nextStep(), window.__tour.state())")).step);
+        if (JSON.stringify(seq) !== JSON.stringify([...STEPS.keys(), STEPS.length - 1])) walkBad.push(`Next event from the start visits ${JSON.stringify(seq)}`);
+        const nChecks = STEPS.reduce((n, st) => n + st.fig11.length + st.replay.length, 0);
+        record("walkthrough_steps_match", walkBad.length === 0, walkBad.length ? walkBad.slice(0, 3).join("; ") : `${STEPS.length} events: each Show sets the nearest CSV row; ${nChecks} agree/disagree marks equal the checks' own results`);
         record("failure_note_only_at_the_end", early.length === 0, early.length ? `shown at ${early.slice(0, 5).join(", ")}` : `shown at ${csv[csv.length - 1].time} only`);
       }
       for (const [name, i] of [["start", 0], ["flow-lost", csv.findIndex((r) => r.time >= "22:23:00")], ["end", csv.length - 1]]) {

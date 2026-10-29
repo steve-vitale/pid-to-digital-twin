@@ -153,6 +153,51 @@ class Replay(unittest.TestCase):
         self.assertFalse(self.br.check(k2, rows)["ok"])
 
 
+class Walkthrough(unittest.TestCase):
+    """The report's timed events beside the replayed screen: every check placed once, every state change accounted."""
+
+    @classmethod
+    def setUpClass(cls):
+        import bayer_walkthrough as bw
+        cls.bw = bw
+        cls.w, cls.fig11, cls.kchecks, cls.events = bw.build()
+
+    def test_committed_outputs_are_current(self):
+        self.assertEqual(json.loads(self.bw.OUT_JSON.read_text(encoding="utf-8")), json.loads(json.dumps(self.w)))
+        self.assertEqual(self.bw.OUT_MD.read_text(encoding="utf-8"), self.bw.render(self.w))
+
+    def test_fig11_json_matches_its_markdown(self):
+        md = (ROOT / "out" / "bayer_rt" / "fig11_check.md").read_text(encoding="utf-8")
+        for name, c in self.fig11.items():
+            self.assertIn(f"| {name} | {c['source']} | {c['stated']} | {c['digitized']} |", md)
+
+    def test_every_check_and_event_placed_exactly_once(self):
+        self.assertEqual(self.bw.problems(self.w, self.fig11, self.kchecks, self.events), [])
+
+    def test_disagreements_are_exactly_the_failed_checks(self):
+        failed = sorted([n for n, c in self.fig11.items() if not c["ok"]] +
+                        [k for k, c in self.kchecks.items() if not c["ok"]])
+        self.assertEqual(sorted(d["id"] for d in self.w["disagreements"]), failed)
+        self.assertTrue(all(d["note"] for d in self.w["disagreements"]), "every disagreement carries its explanation")
+
+    def test_every_state_change_is_listed(self):
+        states = json.loads(self.bw.STATES.read_text(encoding="utf-8"))
+        n = sum(1 for g in ("interlocks", "limits") for runs in states[g].values()
+                for a, _ in zip(runs, runs[1:]) if a["state"] != "no reading")
+        self.assertEqual(len(self.w["unstated_changes"]), n)
+        self.assertEqual(self.w["counts"]["state_changes_tested"], 3)   # K1, K2, K3 land on a change
+
+    def test_planted_unplaced_check_is_caught(self):
+        w = json.loads(json.dumps(self.w))
+        w["steps"][0]["checks"] = w["steps"][0]["checks"][1:]
+        self.assertTrue(any("placed under 0" in p for p in self.bw.problems(w, self.fig11, self.kchecks, self.events)))
+
+    def test_planted_far_screen_time_is_caught(self):
+        w = json.loads(json.dumps(self.w))
+        w["steps"][1]["seconds_from_event"] = 300
+        self.assertTrue(any("over a minute" in p for p in self.bw.problems(w, self.fig11, self.kchecks, self.events)))
+
+
 class Figure10(unittest.TestCase):
     """The model and the generated drawing against the report's own drawing, and that the check can fail."""
 

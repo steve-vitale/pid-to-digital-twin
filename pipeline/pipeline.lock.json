@@ -16,10 +16,11 @@
   "bayer.fig11": {
    "inputs": {
     "data/bayer_rt/fig11_calibration.json": "c12a0bb42f80f0b0d4ebc28e2b1aa8621c33d1dc8e3aba19ea0b6937c163fab4",
-    "scripts/digitize_bayer_fig11.py": "f500dd47bd098b955ff330e26190b1958423a3064a90b2ac504604a37632d27a"
+    "scripts/digitize_bayer_fig11.py": "fbcb07f8b26b47f6545121724f6ce511916e95358287901f0e7fdc76c729f521"
    },
    "outputs": {
     "data/bayer_rt/fig11_digitized.csv": "efb7884ec0f2cb5c7369a00f480a946a798a196ff92abac0919f293ab1d9e9f8",
+    "out/bayer_rt/fig11_check.json": "dad0712cb8920a7ed3eb7c75dfaecc54b6e96e47676230079ef5105051134fb0",
     "out/bayer_rt/fig11_check.md": "538830b8ced7f732a857e8df62bd23d74b4996068360ccd9777f171df0906f1e"
    }
   },
@@ -29,19 +30,21 @@
     "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
     "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
     "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
-    "drafts/bayer-overview/verify.mjs": "19971ada3a83ad2b5b5541967a859086c80626fef14a63568193099dd4173b11",
+    "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39",
+    "drafts/bayer-overview/verify.mjs": "724026d32cc8579394d02e82eb6f9288c4bd30cdec7e11cda6b71494c3964f5c",
     "drafts/interactive-tour/cdp.mjs": "f4ee2bfb3ed59701eea53fceb61fbc378ff2e98e5af2e3efd9452533c83ab437",
-    "scripts/build_bayer_overview.py": "a4a2bbc30311ad2e8b9c2ddf0dc3ce2d7f8d9d5b82d6f7c9a7ee1f25716bc649"
+    "out/bayer_rt/walkthrough.json": "dad7a49a5b34a9503e4705d625618e6bd346f2f8e2f54416969cd236172d9921",
+    "scripts/build_bayer_overview.py": "bfbabcbf61dafaad8d0e8b5b62a4d63a2b26323287d2562c9cc086d763909ff7"
    },
    "outputs": {
-    "drafts/bayer-overview/index.html": "6a6e650a7a3132ee149de937352c6a7cb8961ad1432d3c81e006804dad51f105",
-    "drafts/bayer-overview/shots/end-1440-dark.png": "87f15af38c1cd8c9b24f057a38f5547d523ad3edabf27e594c8d434fc9e7393c",
-    "drafts/bayer-overview/shots/end-1440-light.png": "9d562c9a355bd62a38619b8426deb2a6c085cc14c2da1135c1de4e69b4f7a50c",
-    "drafts/bayer-overview/shots/end-390-dark.png": "0efe4aaa409df170e07fcef3231d420a80356114f8a9a74a8b551b2af8cb8262",
-    "drafts/bayer-overview/shots/end-390-light.png": "9ee5bb3d9d5f6e86c0e01153d205802c8bf0089819bd3bb901d7f74a6660ff09",
-    "drafts/bayer-overview/shots/flow-lost-1440-light.png": "fbb0c27baca6aace6a4ccda9c70f80df2c62f713af8ddb92772997f221b9131e",
-    "drafts/bayer-overview/shots/start-1440-light.png": "ae4ff00368e4fc05bbff06aeeeb2f6a19ebc33bd3274bb816507b30a13173b89",
-    "drafts/bayer-overview/verification.md": "b1721e570780e071f7332c98bac350674a4f6abec30ce8bde20a11efe3ad4751"
+    "drafts/bayer-overview/index.html": "1eda92aa0826ea62d0499ee635071b6b6ce1f2e7e5c42719e69a46ecf5e96602",
+    "drafts/bayer-overview/shots/end-1440-dark.png": "692ba65aa328208c75361ca591d7060978d32c8ed0bfdedcaa84fb8c273a658e",
+    "drafts/bayer-overview/shots/end-1440-light.png": "0b2e91e6c983c57e456dfba9d47a0ec071e4b65ad01e37fc81608ba1739f2e81",
+    "drafts/bayer-overview/shots/end-390-dark.png": "4ae43db1fe8049841e7e01ddaa5b0a58a53b9fb404d9b431b2af5d9b5bdb03a2",
+    "drafts/bayer-overview/shots/end-390-light.png": "cd20070f37135fe65b5ebc00dd8c135d2fe31bbcdc55d598490ae6b1a1c862aa",
+    "drafts/bayer-overview/shots/flow-lost-1440-light.png": "cb1790a78f28f218652641bfd23fd83572a5bcf372f4f3dc5cfbc554b71e6c6b",
+    "drafts/bayer-overview/shots/start-1440-light.png": "730ec24a6b5e2dc5cadc36e212f42399adc525bceb14b68ac32ae6c874bef5ab",
+    "drafts/bayer-overview/verification.md": "c92128d62cd69638486e15828f4ee9de168273efb34570ad1979964bab9db66d"
    }
   },
   "bayer.pid": {
@@ -64,7 +67,7 @@
     "data/bayer_rt/fig11_digitized.csv": "efb7884ec0f2cb5c7369a00f480a946a798a196ff92abac0919f293ab1d9e9f8",
     "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
     "scripts/bayer_replay.py": "0efab18694a8d8ee2b2bfd93ce46041b166c528d0f76e26f47c5711d950f0c73",
-    "scripts/digitize_bayer_fig11.py": "f500dd47bd098b955ff330e26190b1958423a3064a90b2ac504604a37632d27a"
+    "scripts/digitize_bayer_fig11.py": "fbcb07f8b26b47f6545121724f6ce511916e95358287901f0e7fdc76c729f521"
    },
    "outputs": {
     "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
@@ -79,7 +82,23 @@
     "data/bayer_rt/fig11_calibration.json": "c12a0bb42f80f0b0d4ebc28e2b1aa8621c33d1dc8e3aba19ea0b6937c163fab4",
     "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
     "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
-    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d"
+    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
+    "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39"
+   }
+  },
+  "bayer.walkthrough": {
+   "inputs": {
+    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
+    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
+    "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39",
+    "out/bayer_rt/fig11_check.json": "dad0712cb8920a7ed3eb7c75dfaecc54b6e96e47676230079ef5105051134fb0",
+    "out/bayer_rt/replay_states.json": "4409497acbf88ae312f7dc77c61bfecad89b4c6c5a95f2aa5bc92e626a629068",
+    "scripts/bayer_walkthrough.py": "744d1c82278374cf207340c48ed66dcff58ce85f01c1896c483887d0d0f6cb62"
+   },
+   "outputs": {
+    "out/bayer_rt/walkthrough.json": "dad7a49a5b34a9503e4705d625618e6bd346f2f8e2f54416969cd236172d9921",
+    "out/bayer_rt/walkthrough.md": "7e6e63d8e1cf186500aedede8e9ae563a0b7e9ca2061e3ab7b98c67a0f109afb"
    }
   },
   "dexpi.keys": {
