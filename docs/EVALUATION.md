@@ -297,10 +297,13 @@ three sheets from the key's symbol boxes, so the key's links describe what is dr
 outside are symbol counts on all three sheets and ink coverage on one, because the model has no drains, vents or
 manual valves to draw.
 
-**Revision C (2026-10-28, GPT so far).** The same method and protocol on the sheets that now draw controllers,
-signal lines and control valve stations, scored against their own keys
-([roundtrip_scores_revC.md](../out/te_pid/roundtrip_scores_revC.md)): review load 1.26, 1.30, 1.20 and 14.9 per 100 for
-clean, L1, L2 and L3; tags read 100%, 100%, 61% and 9%. The table below is revision A.
+**Revision C (2026-10-28).** The same method and protocol on the sheets that now draw controllers, signal lines and
+control valve stations, scored against their own keys
+([roundtrip_scores_revC.md](../out/te_pid/roundtrip_scores_revC.md)). GPT: review load 1.26, 1.30, 1.20 and 14.9 per
+100 for clean, L1, L2 and L3; tags read 100%, 100%, 61% and 9%. Claude: 1.38, 4.1, 10.0 and 15.7; tags read 100%,
+100%, 89% and 50%. Claude's L1 and L2 loads come from a tracer interaction, not reading: its equipment boxes sit just
+inside the drawn vessel wall, the tracer follows the wall, and whole networks merge; growing only those boxes 4 px
+removes every extra link (journal entry 54). The table below is revision A.
 
 **Method, unchanged:** M3 (2×2 tiles, 0.15 overlap, `extraction/prompt_v2.md`, then `trace_connections.py` with
 defaults), GPT (gpt-6.1-sol, Codex CLI) and Claude (claude-opus-5-5, Claude Code CLI). Gemini was left out by the

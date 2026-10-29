@@ -838,7 +838,7 @@
    ],
    "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude; run records are not committed",
    "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
-   "carries": "GPT: 42 sheet runs, 0 failed tiles (2026-10-28). Claude: not run yet (its CLI sign-in had expired)",
+   "carries": "GPT and Claude: 42 sheet runs each, 0 failed tiles (2026-10-28 and 2026-10-29)",
    "checked_by": "the frozen scorer, through te.pid_roundtrip"
   },
   {
@@ -881,7 +881,7 @@
    ],
    "requires_note": "the run records under runs/ (not committed)",
    "treatment": "The frozen scorer for symbols and connections; tag text matched by position and compared after dropping case and separators; means with min-max and 95% t-intervals.",
-   "carries": "GPT only so far: clean review load 1.26 per 100, every tag read; L3 14.9 per 100, 9% of tags read",
+   "carries": "clean review load 1.26 (GPT) and 1.38 (Claude) per 100, every tag read; L3 14.9 and 15.7, tags read 9% and 50%; Claude's L1-L2 load is a tracer interaction with tight equipment boxes (journal 54)",
    "checked_by": "scripts/test_te_pid_roundtrip.py"
   },
   {

@@ -190,11 +190,13 @@ The runs below read the **revision-A sheets** (kept in [`data/te_pid/rev-a/`](da
 are quoted in revision-A numbering (FV 201 is now FV-102; the full map is
 [`data/te_retag_2026-10-28.json`](data/te_retag_2026-10-28.json)).
 
-**Revision C read back (GPT so far).** The same frozen method and protocol on the sheets with controllers, signal
-lines and valve stations ([roundtrip_scores_revC.md](out/te_pid/roundtrip_scores_revC.md), journal entry 54): review
-load 1.26 per 100 on clean sheets (every tag read), 1.30 at L1, 1.20 at L2 with 61% of tags read, and 14.9 at L3 with
-9% read. The added symbols didn't make the sheets harder to read; on bad scans tag text still fails first. The Claude
-runs are pending (its command-line sign-in had expired).
+**Revision C read back.** The same frozen method and protocol on the sheets with controllers, signal lines and valve
+stations ([roundtrip_scores_revC.md](out/te_pid/roundtrip_scores_revC.md), journal entry 54). Clean sheets: review
+load 1.26 (GPT) and 1.38 (Claude) per 100, every tag read by both. On bad scans tag text still fails first, and Claude
+reads far more of it: 89% against 61% at L2, 50% against 9% at L3. Claude's higher review load at L1 and L2 (4.1 and
+10.0 against 1.30 and 1.20) comes from the line tracer, not from reading: its tighter vessel boxes let the tracer
+follow a vessel wall as a pipe. Growing those boxes 4 px removes every extra link; that fix is a method change and
+will be measured as one.
 
 | Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
 |---|---|---|

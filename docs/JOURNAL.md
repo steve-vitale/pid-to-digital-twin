@@ -2842,14 +2842,15 @@ the recorded revision-A scoring command had no way to name its keys, and the def
 recorded command now names `data/te_pid/rev-a`. The revision-A scores themselves were not re-run (their run records
 aren't on this machine); they are unchanged.
 
-**What it found (GPT, gpt-6.1-sol through the Codex CLI, 42 sheet runs, no failed tile):**
+**What it found (GPT, gpt-6.1-sol through the Codex CLI, and Claude, claude-opus-5-5 through the Claude Code CLI;
+42 sheet runs each, no failed tile):**
 
-| Image | Revision A | Revision C |
-|---|---|---|
-| Clean | 2.1 per 100, 100% of tags | 1.26 per 100, 100% of tags |
-| L1 photocopy | 2.1, 100% | 1.30, 100% |
-| L2 old scan | 2.1, 56% | 1.20, 61% |
-| L3 bad scan | 16.9, 14% | 14.9, 9% |
+| Image | GPT, revision A | GPT, revision C | Claude, revision A | Claude, revision C |
+|---|---|---|---|---|
+| Clean | 2.1 per 100, 100% of tags | 1.26, 100% | 2.2, 100% | 1.38, 100% |
+| L1 photocopy | 2.1, 100% | 1.30, 100% | 8.0, 98% | 4.1, 100% |
+| L2 old scan | 2.1, 56% | 1.20, 61% | 13.4, 95% | 10.0, 89% |
+| L3 bad scan | 16.9, 14% | 14.9, 9% | 17.3, 49% | 15.7, 50% |
 
 - **More symbols didn't make the drawing harder to read.** Revision C has 19 controllers, 30 manual valves and more
   tags, and the clean review load fell. Part of that is denominator: more key items, about as many corrections.
@@ -2857,8 +2858,23 @@ aren't on this machine); they are unchanged.
   (letters above a line, number below) goes first: at L2, 51% of controller tags were misread against 34% of the
   others; at L3, all of them against 87%. A drafting choice (text size inside the DCS symbol) costs readability on
   poor copies.
-- **Claude's half is not run.** The Claude Code CLI's sign-in had expired, and signing in is the account owner's
-  step. The runner resumes where it stopped once it is signed in again.
+- **Claude reads tags far better on poor copies** (89% against 61% at L2, 50% against 9% at L3), and its
+  controller tags hold up better too (missed at L2: 21% against 7% for other tags; GPT 51% against 34%). One habit
+  shows: 13 of its misses read an FI bubble as FT, a transmitter tag, the letters it expects rather than the ones
+  printed.
+- **Claude's higher review load at L1 and L2 is not worse reading. It comes from the line tracer.** Its connections
+  fall to 0.93 at L2 while every symbol is found, with about 30 extra links per run, all whole networks merged into
+  one: everything on the reactor wall linked to everything else. Claude's equipment boxes stay tight on degraded
+  scans (median vessel box 20,708 px² against GPT's 21,859), sitting just inside the drawn wall, so the tracer
+  follows the wall as if it were a pipe. Growing only the equipment boxes by 4 px removes every extra link (sheet
+  101: 0.93 to 0.99; sheet 103: 0.86 to 1.00) and changes nothing for GPT. The revision-A Claude scores at L1 and L2
+  (8.0 and 13.4) look like the same cause; those run records aren't on this machine, so that is unverified.
+- **The scores above stay as measured.** The method is frozen; the tracer fix (pad equipment boxes by the outline
+  width before tracing) is a method change, to be measured on every result it would touch, not slipped into this
+  one.
+
+**Lesson:** when two models differ on a score that neither model produces (here, connections come from code), look
+for the interaction before ranking the models. The difference was in my tracer's assumption about box size.
 
 **At your plant:** when a drawing standard changes (new symbols, new tags), re-measure your extraction method on the
 new drawings with the same protocol, and keep the old results tied to the old drawings rather than overwriting them.

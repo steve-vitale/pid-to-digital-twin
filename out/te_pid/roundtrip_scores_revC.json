@@ -106,6 +106,111 @@
    }
   },
   {
+   "condition": "clean",
+   "tool": "claude",
+   "replicates": 5,
+   "review_load": {
+    "n": 5,
+    "mean": 1.38,
+    "min": 1.2,
+    "max": 1.8,
+    "ci95": [
+     1.047,
+     1.713
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 5,
+    "mean": 0.994,
+    "min": 0.988,
+    "max": 0.996,
+    "ci95": [
+     0.989,
+     0.998
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 5,
+    "mean": 0.994,
+    "min": 0.988,
+    "max": 0.996,
+    "ci95": [
+     0.989,
+     0.998
+    ]
+   },
+   "tags_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 5,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 5,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 5,
+    "mean": 0.993,
+    "min": 0.993,
+    "max": 0.993,
+    "ci95": [
+     0.993,
+     0.993
+    ]
+   },
+   "connections_precision": {
+    "n": 5,
+    "mean": 0.99,
+    "min": 0.99,
+    "max": 0.99,
+    "ci95": [
+     0.99,
+     0.99
+    ]
+   },
+   "connections_recall": {
+    "n": 5,
+    "mean": 0.995,
+    "min": 0.995,
+    "max": 0.995,
+    "ci95": [
+     0.995,
+     0.995
+    ]
+   }
+  },
+  {
    "condition": "L1",
    "tool": "codex",
    "replicates": 3,
@@ -197,6 +302,111 @@
     "ci95": [
      0.99,
      0.99
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.995,
+    "min": 0.995,
+    "max": 0.995,
+    "ci95": [
+     0.995,
+     0.995
+    ]
+   }
+  },
+  {
+   "condition": "L1",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 4.1,
+    "min": 1.5,
+    "max": 5.4,
+    "ci95": [
+     -1.494,
+     9.694
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.995,
+    "min": 0.992,
+    "max": 0.996,
+    "ci95": [
+     0.989,
+     1.0
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.995,
+    "min": 0.992,
+    "max": 0.996,
+    "ci95": [
+     0.989,
+     1.0
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.972,
+    "min": 0.961,
+    "max": 0.993,
+    "ci95": [
+     0.926,
+     1.018
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.949,
+    "min": 0.928,
+    "max": 0.99,
+    "ci95": [
+     0.86,
+     1.038
     ]
    },
    "connections_recall": {
@@ -316,6 +526,111 @@
    }
   },
   {
+   "condition": "L2",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 10.033,
+    "min": 9.9,
+    "max": 10.1,
+    "ci95": [
+     9.746,
+     10.32
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.996,
+    "min": 0.996,
+    "max": 0.996,
+    "ci95": [
+     0.996,
+     0.996
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.996,
+    "min": 0.996,
+    "max": 0.996,
+    "ci95": [
+     0.996,
+     0.996
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.887,
+    "min": 0.839,
+    "max": 0.919,
+    "ci95": [
+     0.782,
+     0.992
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.887,
+    "min": 0.839,
+    "max": 0.919,
+    "ci95": [
+     0.782,
+     0.992
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.907,
+    "min": 0.889,
+    "max": 0.944,
+    "ci95": [
+     0.828,
+     0.986
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.927,
+    "min": 0.926,
+    "max": 0.928,
+    "ci95": [
+     0.924,
+     0.93
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.867,
+    "min": 0.866,
+    "max": 0.87,
+    "ci95": [
+     0.862,
+     0.873
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.995,
+    "min": 0.995,
+    "max": 0.995,
+    "ci95": [
+     0.995,
+     0.995
+    ]
+   }
+  },
+  {
    "condition": "L3",
    "tool": "codex",
    "replicates": 3,
@@ -417,6 +732,111 @@
     "ci95": [
      0.781,
      0.825
+    ]
+   }
+  },
+  {
+   "condition": "L3",
+   "tool": "claude",
+   "replicates": 3,
+   "review_load": {
+    "n": 3,
+    "mean": 15.7,
+    "min": 13.4,
+    "max": 17.0,
+    "ci95": [
+     10.738,
+     20.662
+    ]
+   },
+   "symbols_found_f1": {
+    "n": 3,
+    "mean": 0.985,
+    "min": 0.984,
+    "max": 0.988,
+    "ci95": [
+     0.98,
+     0.991
+    ]
+   },
+   "symbols_class_f1": {
+    "n": 3,
+    "mean": 0.978,
+    "min": 0.976,
+    "max": 0.98,
+    "ci95": [
+     0.972,
+     0.983
+    ]
+   },
+   "tags_read": {
+    "n": 3,
+    "mean": 0.495,
+    "min": 0.452,
+    "max": 0.516,
+    "ci95": [
+     0.403,
+     0.586
+    ]
+   },
+   "tags_read_if_found": {
+    "n": 3,
+    "mean": 0.495,
+    "min": 0.452,
+    "max": 0.516,
+    "ci95": [
+     0.403,
+     0.586
+    ]
+   },
+   "offpage_refs_read": {
+    "n": 3,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "misreads_that_are_another_real_tag": {
+    "n": 3,
+    "mean": 0.333,
+    "min": 0,
+    "max": 1,
+    "ci95": [
+     -1.101,
+     1.768
+    ]
+   },
+   "connections_f1": {
+    "n": 3,
+    "mean": 0.873,
+    "min": 0.862,
+    "max": 0.895,
+    "ci95": [
+     0.826,
+     0.92
+    ]
+   },
+   "connections_precision": {
+    "n": 3,
+    "mean": 0.972,
+    "min": 0.964,
+    "max": 0.988,
+    "ci95": [
+     0.938,
+     1.006
+    ]
+   },
+   "connections_recall": {
+    "n": 3,
+    "mean": 0.792,
+    "min": 0.779,
+    "max": 0.817,
+    "ci95": [
+     0.737,
+     0.846
     ]
    }
   }
@@ -898,6 +1318,481 @@
    "tag_misses": []
   },
   {
+   "label": "tec-clean-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "04a2cfa4cc002f6236e3f8a4a539ba7c8d5ef70440173292756a3c8315fe5b7e",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:22:32+00:00",
+     "wall_s": 60.7,
+     "serial_s": 208.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 1.1031,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.1,
+      "ran_at": "2026-10-29T02:24:23+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "e11ade1245b00b75eeb30078bb355c69880cb523c8a15dde51806e983b7d7f7a",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:23:25+00:00",
+     "wall_s": 53.2,
+     "serial_s": 187.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4108,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.4,
+      "ran_at": "2026-10-29T02:24:26+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "4ed8ebf55f4bb9d009b2d69c8ad320b18cd99fddbdef9b067f9e026e15609b8d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:24:19+00:00",
+     "wall_s": 54.4,
+     "serial_s": 192.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4349,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.6,
+      "ran_at": "2026-10-29T02:24:28+00:00"
+     }
+    }
+   ],
+   "review_load": 1.8,
+   "corrections": 6,
+   "key_items": 335,
+   "symbols_found_f1": 0.988,
+   "symbols_class_f1": 0.988,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-clean-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "04a2cfa4cc002f6236e3f8a4a539ba7c8d5ef70440173292756a3c8315fe5b7e",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:25:35+00:00",
+     "wall_s": 66.1,
+     "serial_s": 219.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4549,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.7,
+      "ran_at": "2026-10-29T02:27:25+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "e11ade1245b00b75eeb30078bb355c69880cb523c8a15dde51806e983b7d7f7a",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:26:29+00:00",
+     "wall_s": 54.1,
+     "serial_s": 185.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4124,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.8,
+      "ran_at": "2026-10-29T02:27:29+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "4ed8ebf55f4bb9d009b2d69c8ad320b18cd99fddbdef9b067f9e026e15609b8d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:27:20+00:00",
+     "wall_s": 51.6,
+     "serial_s": 189.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4289,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.8,
+      "ran_at": "2026-10-29T02:27:32+00:00"
+     }
+    }
+   ],
+   "review_load": 1.5,
+   "corrections": 5,
+   "key_items": 335,
+   "symbols_found_f1": 0.992,
+   "symbols_class_f1": 0.992,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-clean-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "04a2cfa4cc002f6236e3f8a4a539ba7c8d5ef70440173292756a3c8315fe5b7e",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:28:30+00:00",
+     "wall_s": 57.0,
+     "serial_s": 189.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4625,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.6,
+      "ran_at": "2026-10-29T02:30:25+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "e11ade1245b00b75eeb30078bb355c69880cb523c8a15dde51806e983b7d7f7a",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:29:26+00:00",
+     "wall_s": 56.5,
+     "serial_s": 183.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4046,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.8,
+      "ran_at": "2026-10-29T02:30:30+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "4ed8ebf55f4bb9d009b2d69c8ad320b18cd99fddbdef9b067f9e026e15609b8d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:30:19+00:00",
+     "wall_s": 52.8,
+     "serial_s": 193.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4344,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.4,
+      "ran_at": "2026-10-29T02:30:35+00:00"
+     }
+    }
+   ],
+   "review_load": 1.2,
+   "corrections": 4,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-clean-trace-r4",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "04a2cfa4cc002f6236e3f8a4a539ba7c8d5ef70440173292756a3c8315fe5b7e",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:31:37+00:00",
+     "wall_s": 62.1,
+     "serial_s": 212.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4601,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.2,
+      "ran_at": "2026-10-29T02:33:30+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "e11ade1245b00b75eeb30078bb355c69880cb523c8a15dde51806e983b7d7f7a",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:32:33+00:00",
+     "wall_s": 55.7,
+     "serial_s": 174.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4035,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-29T02:33:33+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "4ed8ebf55f4bb9d009b2d69c8ad320b18cd99fddbdef9b067f9e026e15609b8d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:33:26+00:00",
+     "wall_s": 53.2,
+     "serial_s": 179.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4244,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-29T02:33:36+00:00"
+     }
+    }
+   ],
+   "review_load": 1.2,
+   "corrections": 4,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-clean-trace-r5",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "04a2cfa4cc002f6236e3f8a4a539ba7c8d5ef70440173292756a3c8315fe5b7e",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:34:35+00:00",
+     "wall_s": 58.5,
+     "serial_s": 189.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4558,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-29T02:36:31+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "e11ade1245b00b75eeb30078bb355c69880cb523c8a15dde51806e983b7d7f7a",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:35:30+00:00",
+     "wall_s": 55.8,
+     "serial_s": 187.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4128,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.4,
+      "ran_at": "2026-10-29T02:36:33+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "4ed8ebf55f4bb9d009b2d69c8ad320b18cd99fddbdef9b067f9e026e15609b8d",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:36:27+00:00",
+     "wall_s": 57.1,
+     "serial_s": 195.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4303,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.2,
+      "ran_at": "2026-10-29T02:36:35+00:00"
+     }
+    }
+   ],
+   "review_load": 1.2,
+   "corrections": 4,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
    "label": "tec-L1-trace-r1",
    "tool": "codex",
    "missing_sheets": [],
@@ -1179,6 +2074,291 @@
    "tags_read_if_found": 1.0,
    "tags_total": 62,
    "offpage_refs_read": 0.944,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-L1-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "75adf3fd501c44c3066bdcd728f8bf4910151d6d52ee92d60e4bea0210448248",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:37:36+00:00",
+     "wall_s": 60.7,
+     "serial_s": 198.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4619,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.5,
+      "ran_at": "2026-10-29T02:39:27+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "71b357cac2cd2a3e1490a3f21e9b461d3e0e3dd46323fe71b364579b5438e783",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:38:32+00:00",
+     "wall_s": 55.6,
+     "serial_s": 180.5,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4151,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-29T02:39:30+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "07b4fcd43c241ba55c93438f5832c9b51081b52cb0917c3c32218cfc1d4c4569",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:39:24+00:00",
+     "wall_s": 52.5,
+     "serial_s": 186.0,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4287,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.3,
+      "ran_at": "2026-10-29T02:39:34+00:00"
+     }
+    }
+   ],
+   "review_load": 1.5,
+   "corrections": 5,
+   "key_items": 335,
+   "symbols_found_f1": 0.992,
+   "symbols_class_f1": 0.992,
+   "connections": {
+    "tp": 207,
+    "predicted": 209,
+    "in_key": 208,
+    "precision": 0.99,
+    "recall": 0.995,
+    "f1": 0.993
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-L1-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "75adf3fd501c44c3066bdcd728f8bf4910151d6d52ee92d60e4bea0210448248",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:40:32+00:00",
+     "wall_s": 58.3,
+     "serial_s": 199.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4584,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.1,
+      "ran_at": "2026-10-29T02:42:25+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "71b357cac2cd2a3e1490a3f21e9b461d3e0e3dd46323fe71b364579b5438e783",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:41:27+00:00",
+     "wall_s": 54.9,
+     "serial_s": 180.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4133,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.7,
+      "ran_at": "2026-10-29T02:42:29+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "07b4fcd43c241ba55c93438f5832c9b51081b52cb0917c3c32218cfc1d4c4569",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:42:22+00:00",
+     "wall_s": 54.7,
+     "serial_s": 188.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4319,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.8,
+      "ran_at": "2026-10-29T02:42:32+00:00"
+     }
+    }
+   ],
+   "review_load": 5.4,
+   "corrections": 18,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 223,
+    "in_key": 208,
+    "precision": 0.928,
+    "recall": 0.995,
+    "f1": 0.961
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": []
+  },
+  {
+   "label": "tec-L1-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "75adf3fd501c44c3066bdcd728f8bf4910151d6d52ee92d60e4bea0210448248",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:43:35+00:00",
+     "wall_s": 63.1,
+     "serial_s": 202.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4653,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.7,
+      "ran_at": "2026-10-29T02:45:35+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "71b357cac2cd2a3e1490a3f21e9b461d3e0e3dd46323fe71b364579b5438e783",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:44:33+00:00",
+     "wall_s": 58.1,
+     "serial_s": 181.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4171,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-29T02:45:39+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "07b4fcd43c241ba55c93438f5832c9b51081b52cb0917c3c32218cfc1d4c4569",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:45:31+00:00",
+     "wall_s": 57.6,
+     "serial_s": 204.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4263,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.2,
+      "ran_at": "2026-10-29T02:45:42+00:00"
+     }
+    }
+   ],
+   "review_load": 5.4,
+   "corrections": 18,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 223,
+    "in_key": 208,
+    "precision": 0.928,
+    "recall": 0.995,
+    "f1": 0.961
+   },
+   "tags_read": 1.0,
+   "tags_read_if_found": 1.0,
+   "tags_total": 62,
+   "offpage_refs_read": 1.0,
    "misreads_that_are_another_real_tag": 0,
    "tag_misses": []
   },
@@ -2194,6 +3374,504 @@
      "model_ref": "FIC-117",
      "found": true,
      "extracted": "AIC\n112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L2-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "7698bce6d156b9b18657abcdab2db279eb106dd8076facf4c4b48027f22eacb0",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:46:42+00:00",
+     "wall_s": 60.1,
+     "serial_s": 209.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4671,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 4.2,
+      "ran_at": "2026-10-29T02:48:46+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "66e910523dd8ac9dff0ff6ccecb18ca5ea26a3e964ee96f5bc1167e1d8794bfe",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:47:42+00:00",
+     "wall_s": 59.6,
+     "serial_s": 183.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4128,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.8,
+      "ran_at": "2026-10-29T02:48:50+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "059b61bcc194be1e85b8d5fc0ec08f407901b620d83e1b8665b70c4175c8b730",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:48:41+00:00",
+     "wall_s": 59.4,
+     "serial_s": 198.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4331,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-29T02:48:53+00:00"
+     }
+    }
+   ],
+   "review_load": 10.1,
+   "corrections": 34,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 239,
+    "in_key": 208,
+    "precision": 0.866,
+    "recall": 0.995,
+    "f1": 0.926
+   },
+   "tags_read": 0.919,
+   "tags_read_if_found": 0.919,
+   "tags_total": 62,
+   "offpage_refs_read": 0.944,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation22",
+     "printed": "TIC 109",
+     "model_ref": "TIC-109",
+     "found": true,
+     "extracted": "TIC 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L2-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "7698bce6d156b9b18657abcdab2db279eb106dd8076facf4c4b48027f22eacb0",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:49:58+00:00",
+     "wall_s": 64.6,
+     "serial_s": 204.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4555,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-29T02:51:55+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "66e910523dd8ac9dff0ff6ccecb18ca5ea26a3e964ee96f5bc1167e1d8794bfe",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:50:59+00:00",
+     "wall_s": 60.5,
+     "serial_s": 190.1,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4184,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.4,
+      "ran_at": "2026-10-29T02:51:57+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "059b61bcc194be1e85b8d5fc0ec08f407901b620d83e1b8665b70c4175c8b730",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:51:51+00:00",
+     "wall_s": 52.5,
+     "serial_s": 178.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4355,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-29T02:52:00+00:00"
+     }
+    }
+   ],
+   "review_load": 10.1,
+   "corrections": 34,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 239,
+    "in_key": 208,
+    "precision": 0.866,
+    "recall": 0.995,
+    "f1": 0.926
+   },
+   "tags_read": 0.839,
+   "tags_read_if_found": 0.839,
+   "tags_total": 62,
+   "offpage_refs_read": 0.889,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation19",
+     "printed": "AIC 123D",
+     "model_ref": "AIC-123D",
+     "found": true,
+     "extracted": "AIC 123B",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation20",
+     "printed": "AIC 123E",
+     "model_ref": "AIC-123E",
+     "found": true,
+     "extracted": "AIC 123C",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation22",
+     "printed": "TIC 109",
+     "model_ref": "TIC-109",
+     "found": true,
+     "extracted": "TIC 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 119",
+     "model_ref": "FV-119",
+     "found": true,
+     "extracted": "FV 118",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 118",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "FIC 119",
+     "model_ref": "FIC-119",
+     "found": true,
+     "extracted": "FIC 118",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L2-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "7698bce6d156b9b18657abcdab2db279eb106dd8076facf4c4b48027f22eacb0",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:52:59+00:00",
+     "wall_s": 58.9,
+     "serial_s": 195.7,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4648,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.9,
+      "ran_at": "2026-10-29T02:54:50+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "66e910523dd8ac9dff0ff6ccecb18ca5ea26a3e964ee96f5bc1167e1d8794bfe",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:53:51+00:00",
+     "wall_s": 51.5,
+     "serial_s": 171.9,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.407,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.6,
+      "ran_at": "2026-10-29T02:54:54+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "059b61bcc194be1e85b8d5fc0ec08f407901b620d83e1b8665b70c4175c8b730",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:54:47+00:00",
+     "wall_s": 56.0,
+     "serial_s": 180.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4322,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.2,
+      "ran_at": "2026-10-29T02:54:57+00:00"
+     }
+    }
+   ],
+   "review_load": 9.9,
+   "corrections": 33,
+   "key_items": 335,
+   "symbols_found_f1": 0.996,
+   "symbols_class_f1": 0.996,
+   "connections": {
+    "tp": 207,
+    "predicted": 238,
+    "in_key": 208,
+    "precision": 0.87,
+    "recall": 0.995,
+    "f1": 0.928
+   },
+   "tags_read": 0.903,
+   "tags_read_if_found": 0.903,
+   "tags_total": 62,
+   "offpage_refs_read": 0.889,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation22",
+     "printed": "TIC 109",
+     "model_ref": "TIC-109",
+     "found": true,
+     "extracted": "TIC 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
      "read": false,
      "is_another_real_tag": false,
      "sheet": "103"
@@ -4172,6 +5850,1234 @@
      "model_ref": "FIC-117",
      "found": true,
      "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L3-trace-r1",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "9b66c3d7bcbba80a3b42e3523aa47f795eca79f9766e2e10ef3f4ce37ed7f781",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:55:56+00:00",
+     "wall_s": 59.4,
+     "serial_s": 194.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4562,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.6,
+      "ran_at": "2026-10-29T02:58:08+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8a064290c0c7a8f902b60bc9e2003405c5bcfa17161c6058a73cc8c7b1f3ec17",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:56:54+00:00",
+     "wall_s": 57.6,
+     "serial_s": 186.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4191,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-29T02:58:11+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "916150d8cf144f01733d51a20bddf41c3d499b91ced2f7f4022c6cf2bc830994",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:58:05+00:00",
+     "wall_s": 71.2,
+     "serial_s": 219.6,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.596,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.6,
+      "ran_at": "2026-10-29T02:58:14+00:00"
+     }
+    }
+   ],
+   "review_load": 16.7,
+   "corrections": 56,
+   "key_items": 335,
+   "symbols_found_f1": 0.988,
+   "symbols_class_f1": 0.98,
+   "connections": {
+    "tp": 162,
+    "predicted": 168,
+    "in_key": 208,
+    "precision": 0.964,
+    "recall": 0.779,
+    "f1": 0.862
+   },
+   "tags_read": 0.516,
+   "tags_read_if_found": 0.516,
+   "tags_total": 62,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": "TT 111",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation18",
+     "printed": "AIC 123A",
+     "model_ref": "AIC-123A",
+     "found": true,
+     "extracted": "AIC",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation19",
+     "printed": "AIC 123D",
+     "model_ref": "AIC-123D",
+     "found": true,
+     "extracted": "AIC",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation20",
+     "printed": "AIC 123E",
+     "model_ref": "AIC-123E",
+     "found": true,
+     "extracted": "AIC",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation23",
+     "printed": "TIC 121",
+     "model_ref": "TIC-121",
+     "found": true,
+     "extracted": "TIC 111",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": "FT 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AT 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI 123",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": "LT 112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "FIC 105",
+     "model_ref": "FIC-105",
+     "found": true,
+     "extracted": "FC 105",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation17",
+     "printed": "LIC 112",
+     "model_ref": "LIC-112",
+     "found": true,
+     "extracted": "LC 112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 104",
+     "model_ref": "FV-104",
+     "found": true,
+     "extracted": "PV 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "FT 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "FT 113",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 115",
+     "model_ref": "LV-115",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 119",
+     "model_ref": "FV-119",
+     "found": true,
+     "extracted": "PV 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "FIC 119",
+     "model_ref": "FIC-119",
+     "found": true,
+     "extracted": "FC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "LIC 115",
+     "model_ref": "LIC-115",
+     "found": true,
+     "extracted": "LIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation15",
+     "printed": "AIC 137",
+     "model_ref": "AIC-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "FIC 117",
+     "model_ref": "FIC-117",
+     "found": true,
+     "extracted": "FC 117",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L3-trace-r2",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "9b66c3d7bcbba80a3b42e3523aa47f795eca79f9766e2e10ef3f4ce37ed7f781",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T02:59:33+00:00",
+     "wall_s": 79.2,
+     "serial_s": 222.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.5985,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.0,
+      "ran_at": "2026-10-29T03:01:27+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8a064290c0c7a8f902b60bc9e2003405c5bcfa17161c6058a73cc8c7b1f3ec17",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T03:00:24+00:00",
+     "wall_s": 50.8,
+     "serial_s": 156.8,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4185,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.5,
+      "ran_at": "2026-10-29T03:01:30+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "916150d8cf144f01733d51a20bddf41c3d499b91ced2f7f4022c6cf2bc830994",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T03:01:23+00:00",
+     "wall_s": 59.1,
+     "serial_s": 209.3,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.5885,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.4,
+      "ran_at": "2026-10-29T03:01:34+00:00"
+     }
+    }
+   ],
+   "review_load": 13.4,
+   "corrections": 45,
+   "key_items": 335,
+   "symbols_found_f1": 0.984,
+   "symbols_class_f1": 0.977,
+   "connections": {
+    "tp": 170,
+    "predicted": 172,
+    "in_key": 208,
+    "precision": 0.988,
+    "recall": 0.817,
+    "f1": 0.895
+   },
+   "tags_read": 0.516,
+   "tags_read_if_found": 0.516,
+   "tags_total": 62,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 1,
+   "tag_misses": [
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 121",
+     "model_ref": "TV-121",
+     "found": true,
+     "extracted": "TV 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": "TT 121",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation18",
+     "printed": "AIC 123A",
+     "model_ref": "AIC-123A",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation19",
+     "printed": "AIC 123D",
+     "model_ref": "AIC-123D",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation20",
+     "printed": "AIC 123E",
+     "model_ref": "AIC-123E",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": "FT 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AT 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI-123",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": "LT 112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation17",
+     "printed": "LIC 112",
+     "model_ref": "LIC-112",
+     "found": true,
+     "extracted": "LC 112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FV 104",
+     "model_ref": "FV-104",
+     "found": true,
+     "extracted": "PV 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "FT 117",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 115",
+     "model_ref": "LV-115",
+     "found": true,
+     "extracted": "FV 117",
+     "read": false,
+     "is_another_real_tag": true,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 119",
+     "model_ref": "FV-119",
+     "found": true,
+     "extracted": "PV 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "FIC 104",
+     "model_ref": "FIC-104",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "FIC 119",
+     "model_ref": "FIC-119",
+     "found": true,
+     "extracted": "FC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "LIC 115",
+     "model_ref": "LIC-115",
+     "found": true,
+     "extracted": "LIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation15",
+     "printed": "AIC 137",
+     "model_ref": "AIC-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "FIC 117",
+     "model_ref": "FIC-117",
+     "found": true,
+     "extracted": "FC 117",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    }
+   ]
+  },
+  {
+   "label": "tec-L3-trace-r3",
+   "tool": "claude",
+   "missing_sheets": [],
+   "records": [
+    {
+     "sheet": "101",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "9b66c3d7bcbba80a3b42e3523aa47f795eca79f9766e2e10ef3f4ce37ed7f781",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T03:02:42+00:00",
+     "wall_s": 68.4,
+     "serial_s": 232.4,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.6076,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.7,
+      "ran_at": "2026-10-29T03:04:25+00:00"
+     }
+    },
+    {
+     "sheet": "102",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "8a064290c0c7a8f902b60bc9e2003405c5bcfa17161c6058a73cc8c7b1f3ec17",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T03:03:27+00:00",
+     "wall_s": 44.7,
+     "serial_s": 140.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.4169,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 2.3,
+      "ran_at": "2026-10-29T03:04:27+00:00"
+     }
+    },
+    {
+     "sheet": "103",
+     "model": "claude-opus-5-5",
+     "adapter": "Claude Code CLI",
+     "prompt_file": "extraction/prompt_v2.md",
+     "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+     "image_sha256": "916150d8cf144f01733d51a20bddf41c3d499b91ced2f7f4022c6cf2bc830994",
+     "tiles": "2x2",
+     "overlap": 0.15,
+     "preface_sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+     "ran_at": "2026-10-29T03:04:22+00:00",
+     "wall_s": 54.6,
+     "serial_s": 188.2,
+     "tiles_failed": 0,
+     "cost_usd_notional": 0.5777,
+     "error": null,
+     "tracer": {
+      "script": "scripts/trace_connections.py",
+      "mode": "replace",
+      "seconds": 3.2,
+      "ran_at": "2026-10-29T03:04:30+00:00"
+     }
+    }
+   ],
+   "review_load": 17.0,
+   "corrections": 57,
+   "key_items": 335,
+   "symbols_found_f1": 0.984,
+   "symbols_class_f1": 0.976,
+   "connections": {
+    "tp": 162,
+    "predicted": 168,
+    "in_key": 208,
+    "precision": 0.964,
+    "recall": 0.779,
+    "f1": 0.862
+   },
+   "tags_read": 0.452,
+   "tags_read_if_found": 0.452,
+   "tags_total": 62,
+   "offpage_refs_read": 0.0,
+   "misreads_that_are_another_real_tag": 0,
+   "tag_misses": [
+    {
+     "key": "instrumentation2",
+     "printed": "FI 101",
+     "model_ref": "FI-101",
+     "found": true,
+     "extracted": "FT 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "FI 102",
+     "model_ref": "FI-102",
+     "found": true,
+     "extracted": "FT 102",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 103",
+     "model_ref": "FI-103",
+     "found": true,
+     "extracted": "FT 103",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 106",
+     "model_ref": "FI-106",
+     "found": true,
+     "extracted": "TI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation8",
+     "printed": "AI 123",
+     "model_ref": "AI-123",
+     "found": true,
+     "extracted": "AI 100",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TV 121",
+     "model_ref": "TV-121",
+     "found": true,
+     "extracted": "TV 101",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 121",
+     "model_ref": "TI-121",
+     "found": true,
+     "extracted": "TT 121",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TI 109",
+     "model_ref": "TI-109",
+     "found": true,
+     "extracted": "TI 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation18",
+     "printed": "AIC 123A",
+     "model_ref": "AIC-123A",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation19",
+     "printed": "AIC 123D",
+     "model_ref": "AIC-123D",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation20",
+     "printed": "AIC 123E",
+     "model_ref": "AIC-123E",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation22",
+     "printed": "TIC 109",
+     "model_ref": "TIC-109",
+     "found": true,
+     "extracted": "TIC 108",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "101"
+    },
+    {
+     "key": "instrumentation1",
+     "printed": "FI 105",
+     "model_ref": "FI-105",
+     "found": true,
+     "extracted": "FT 105",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 110",
+     "model_ref": "FI-110",
+     "found": true,
+     "extracted": "FT 110",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "AI 129",
+     "model_ref": "AI-129",
+     "found": true,
+     "extracted": "AT 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FI 114",
+     "model_ref": "FI-114",
+     "found": true,
+     "extracted": "TI 114",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 122",
+     "model_ref": "TI-122",
+     "found": true,
+     "extracted": "TI 123",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "TI 111",
+     "model_ref": "TI-111",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation11",
+     "printed": "LI 112",
+     "model_ref": "LI-112",
+     "found": true,
+     "extracted": "LT 112",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "FIC 105",
+     "model_ref": "FIC-105",
+     "found": true,
+     "extracted": "FC 105",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "AIC 129",
+     "model_ref": "AIC-129",
+     "found": true,
+     "extracted": "AIC 120",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "102"
+    },
+    {
+     "key": "instrumentation2",
+     "printed": "FI 104",
+     "model_ref": "FI-104",
+     "found": true,
+     "extracted": "FT 104",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation3",
+     "printed": "FI 117",
+     "model_ref": "FI-117",
+     "found": true,
+     "extracted": "FT 117",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation4",
+     "printed": "AI 137",
+     "model_ref": "AI-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation5",
+     "printed": "LV 115",
+     "model_ref": "LV-115",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation6",
+     "printed": "FV 119",
+     "model_ref": "FV-119",
+     "found": true,
+     "extracted": "PV 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation7",
+     "printed": "FI 119",
+     "model_ref": "FI-119",
+     "found": true,
+     "extracted": "FT 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation9",
+     "printed": "TI 118",
+     "model_ref": "TI-118",
+     "found": true,
+     "extracted": "TI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation10",
+     "printed": "LI 115",
+     "model_ref": "LI-115",
+     "found": true,
+     "extracted": "LI 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation12",
+     "printed": "FIC 119",
+     "model_ref": "FIC-119",
+     "found": true,
+     "extracted": "FC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation13",
+     "printed": "TIC 118",
+     "model_ref": "TIC-118",
+     "found": true,
+     "extracted": "TIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation14",
+     "printed": "LIC 115",
+     "model_ref": "LIC-115",
+     "found": true,
+     "extracted": "LIC 116",
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation15",
+     "printed": "AIC 137",
+     "model_ref": "AIC-137",
+     "found": true,
+     "extracted": null,
+     "read": false,
+     "is_another_real_tag": false,
+     "sheet": "103"
+    },
+    {
+     "key": "instrumentation16",
+     "printed": "FIC 117",
+     "model_ref": "FIC-117",
+     "found": true,
+     "extracted": "FC 117",
      "read": false,
      "is_another_real_tag": false,
      "sheet": "103"
