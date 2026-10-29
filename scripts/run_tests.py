@@ -35,6 +35,7 @@ SOURCE_TESTS = (
     "scripts/test_map_points.py",
     "scripts/test_run_tests.py",
     "scripts/test_pipeline.py",
+    "scripts/test_bayer_rt.py",
 )
 # These tests need cached data or third-party imports, even though none needs a gateway.
 FULL_ONLY_TESTS = (
@@ -61,6 +62,8 @@ SOURCE_FILES = (
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json", "data/dataset_adapters/dexpi_examples.json",
     "data/te_pid_layout.json", "data/te_pid/key.json",
+    "data/bayer_rt/process_model.json", "data/bayer_rt/fig11_calibration.json", "data/bayer_rt/fig11_digitized.csv",
+    "out/bayer_rt/fig11_check.md", "scripts/digitize_bayer_fig11.py",
     "data/te_tour_cards.json", "data/hazard_citations_prototype.json", "assets/fonts/AtkinsonHyperlegible-Regular.ttf",
     "drafts/3d-tour/label_boxes.json", "drafts/3d-tour/before/label_boxes.json",
     *(f"data/te_pid/{s}.{e}" for s in ("101", "102", "103") for e in ("png", "graphml")),

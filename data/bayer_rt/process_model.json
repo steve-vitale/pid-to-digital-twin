@@ -1,0 +1,434 @@
+{
+  "meta": {
+    "model_id": "bayer-residue-treater",
+    "title": "Bayer CropScience methomyl residue treater (Institute, West Virginia), as described by the CSB",
+    "source_document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+    "page_convention": "p. = the report's printed page number; Fig = the report's figure number.",
+    "tag_convention": "The report names instrument types but no instrument or valve tag numbers for the residue treater, so every tag here is ASSIGNED by this project (ISA-5.1 letters, loop numbers 101-110) and marked assigned_tag: true. Equipment identifiers RT-1, E-1, E-2, E-3, P-1 are assigned the same way. Nothing here is the plant's own numbering.",
+    "scope": "The residue treater and its recirculation, heating, cooling, vent and discharge systems as drawn in Fig 10 (p. 29) and described on pp. 27-32 and 38-40. Upstream (methomyl synthesis, flashers) and downstream (alternate fuel tank, flare) are battery limits.",
+    "not_a_drawing_of_record": "Built from a public investigation report to show the method. Not the plant's design, not reviewed by anyone who operated it.",
+    "created": "2026-10-28"
+  },
+  "units": [
+    {
+      "id": "RT-1",
+      "name": "Residue treater",
+      "type": "pressure_vessel",
+      "assigned_tag": true,
+      "facts": {
+        "volume_gal": 4500,
+        "mawp_psig": 50,
+        "material": "stainless steel (replacement vessel, 2008)",
+        "relief_basis": "methomyl concentration not to exceed 1.0 percent"
+      },
+      "source": "p. 28 (§1.7.3); Fig 10"
+    },
+    {
+      "id": "E-1",
+      "name": "Vent condenser",
+      "type": "condenser",
+      "assigned_tag": true,
+      "source": "Fig 10; p. 28 (vent piping prone to blockages)"
+    },
+    {
+      "id": "P-1",
+      "name": "Recirculation pump",
+      "type": "pump",
+      "assigned_tag": true,
+      "source": "Fig 10; p. 31, p. 38"
+    },
+    {
+      "id": "E-2",
+      "name": "Recirculation heater (steam)",
+      "type": "heat_exchanger",
+      "assigned_tag": true,
+      "source": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+    },
+    {
+      "id": "E-3",
+      "name": "Recirculation cooler (80 C water)",
+      "type": "heat_exchanger",
+      "assigned_tag": true,
+      "facts": {
+        "cooling_water_C": 80
+      },
+      "source": "Fig 10; p. 29"
+    }
+  ],
+  "streams": [
+    {
+      "id": "S1",
+      "name": "Flasher bottoms feed (methomyl-solvent liquid)",
+      "from": "BL",
+      "to": "RT-1",
+      "facts": {
+        "normal_temperature_C": 80
+      },
+      "source": "Fig 10; p. 29"
+    },
+    {
+      "id": "S2",
+      "name": "Solvent fill",
+      "from": "BL",
+      "to": "P-1",
+      "source": "Fig 10 (From Solvent Tank)"
+    },
+    {
+      "id": "S3",
+      "name": "Recirculation suction",
+      "from": "RT-1",
+      "to": "P-1",
+      "source": "Fig 10"
+    },
+    {
+      "id": "S4",
+      "name": "Recirculation through the heater",
+      "from": "P-1",
+      "to": "RT-1",
+      "via": "E-2",
+      "source": "Fig 10; p. 29"
+    },
+    {
+      "id": "S5",
+      "name": "Recirculation through the cooler",
+      "from": "P-1",
+      "to": "RT-1",
+      "via": "E-3",
+      "source": "Fig 10; p. 29"
+    },
+    {
+      "id": "S6",
+      "name": "Discharge to the auxiliary (alternate) fuel tank",
+      "from": "RT-1",
+      "to": "BL",
+      "source": "Fig 10; p. 32"
+    },
+    {
+      "id": "S7",
+      "name": "Vapour to the vent condenser",
+      "from": "RT-1",
+      "to": "E-1",
+      "source": "Fig 10; p. 28"
+    },
+    {
+      "id": "S8",
+      "name": "Condenser vent to the process vent (flare)",
+      "from": "E-1",
+      "to": "BL",
+      "source": "Fig 10; p. 28"
+    },
+    {
+      "id": "S9",
+      "name": "Relief to the vent header",
+      "from": "RT-1",
+      "to": "BL",
+      "source": "Fig 10"
+    },
+    {
+      "id": "U1",
+      "name": "Steam to the heater",
+      "from": "BL",
+      "to": "E-2",
+      "utility": true,
+      "source": "Fig 10; p. 72"
+    },
+    {
+      "id": "U2",
+      "name": "Cooling water (80 C) through the cooler",
+      "from": "BL",
+      "to": "E-3",
+      "utility": true,
+      "source": "Fig 10; p. 29"
+    }
+  ],
+  "instruments": [
+    {
+      "tag": "PI-101",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "variable": "pressure",
+      "uom": "psig",
+      "description": "Residue treater pressure",
+      "fig11_series": "pressure_psig",
+      "source": "Fig 10 (Pressure Transmitter); Fig 11"
+    },
+    {
+      "tag": "LI-102",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "variable": "level",
+      "uom": "%",
+      "description": "Residue treater liquid level",
+      "fig11_series": "level_pct",
+      "source": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+    },
+    {
+      "tag": "FI-103",
+      "assigned_tag": true,
+      "unit": "P-1",
+      "stream": "S3",
+      "variable": "flow",
+      "uom": "klb/h",
+      "description": "Recirculation flow",
+      "fig11_series": "recirc_flow_klbh",
+      "source": "Fig 10 (Flow Transmitter); Fig 11"
+    },
+    {
+      "tag": "TI-104",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "variable": "temperature",
+      "uom": "C",
+      "description": "Residue treater temperature (as plotted in Fig 11)",
+      "fig11_series": "temperature_C",
+      "source": "Fig 10 (Temperature Transmitter); Fig 11",
+      "open_question": "The report says the control system monitored both the bulk liquid and the recirculation loop (p. 28) but does not say which one Fig 11 plots or Fig 10's transmitter measures."
+    },
+    {
+      "tag": "TI-105",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "variable": "temperature",
+      "uom": "C",
+      "description": "Second temperature measurement (bulk liquid or recirculation loop; see TI-104)",
+      "source": "p. 28 (text only; not drawn in Fig 10)",
+      "drawn_in_source_figure": false
+    },
+    {
+      "tag": "FI-106",
+      "assigned_tag": true,
+      "unit": "E-2",
+      "stream": "U1",
+      "variable": "flow",
+      "uom": "klb/h",
+      "description": "Indicated steam flow to the heater",
+      "source": "Fig 19 (p. 72)",
+      "drawn_in_source_figure": false
+    }
+  ],
+  "final_elements": [
+    {
+      "tag": "FV-107",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "stream": "S1",
+      "description": "Feed control valve (flasher bottoms)",
+      "source": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+    },
+    {
+      "tag": "LV-102",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "stream": "S6",
+      "description": "Discharge control valve to the alternate fuel tank",
+      "source": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+    },
+    {
+      "tag": "TV-104A",
+      "assigned_tag": true,
+      "unit": "E-2",
+      "stream": "S4",
+      "description": "Recirculation valve, heater leg",
+      "source": "Fig 10; p. 29; p. 39 footnote 29"
+    },
+    {
+      "tag": "TV-104B",
+      "assigned_tag": true,
+      "unit": "E-3",
+      "stream": "S5",
+      "description": "Recirculation valve, cooler leg",
+      "source": "Fig 10; p. 29; p. 39 footnote 29"
+    },
+    {
+      "tag": "TV-104C",
+      "assigned_tag": true,
+      "unit": "E-2",
+      "stream": "U1",
+      "description": "Steam flow valve to the heater (Fig 10: Temperature Control Valve)",
+      "source": "Fig 10; p. 29"
+    }
+  ],
+  "manual_valves": [
+    {
+      "tag": "HV-108",
+      "assigned_tag": true,
+      "stream": "U1",
+      "description": "Steam block valve, heater steam supply",
+      "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+    },
+    {
+      "tag": "HV-109",
+      "assigned_tag": true,
+      "stream": "S2",
+      "description": "Solvent fill valve",
+      "source": "Fig 10"
+    },
+    {
+      "tag": "HV-110",
+      "assigned_tag": true,
+      "stream": "S3",
+      "description": "Vessel bottom valve",
+      "source": "Fig 10"
+    }
+  ],
+  "relief_devices": [
+    {
+      "tag": "PSV-101",
+      "assigned_tag": true,
+      "unit": "RT-1",
+      "stream": "S9",
+      "description": "Residue treater relief valve",
+      "facts": {
+        "opened_at_psig": 44,
+        "opened_at": "22:27"
+      },
+      "source": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+    },
+    {
+      "tag": "PSV-102",
+      "assigned_tag": true,
+      "unit": "E-1",
+      "description": "Vent condenser relief valve",
+      "source": "Fig 10"
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "LIC-102",
+      "measurement": "LI-102",
+      "output": {
+        "final_element": "LV-102"
+      },
+      "description": "Automatic level control at about 50 percent",
+      "setpoint": {
+        "value": 50,
+        "uom": "%",
+        "source": "p. 28"
+      },
+      "as_operated": "kept in manual; level allowed to rise to the upper fill limit and transferred in batches (p. 32)",
+      "source": "p. 28; p. 32"
+    },
+    {
+      "tag": "TIC-104",
+      "measurement": "TI-104",
+      "output": {
+        "split_range": [
+          "TV-104A",
+          "TV-104B",
+          "TV-104C"
+        ]
+      },
+      "description": "Split-range temperature control: heats through the heater (steam valve and heater-leg valve) during startup; at the setpoint it closes the steam valve and moves recirculation from the heater to the cooler",
+      "setpoint": {
+        "value": 135,
+        "uom": "C",
+        "source": "p. 29 (contents maintained at approximately 135 C)"
+      },
+      "as_found": "incorrectly programmed: changing from heating to cooling closed the recirculation valves to both the heater and the cooler, blocking all recirculation flow (p. 39, footnote 29; CSB: not causal)",
+      "source": "p. 28-29; p. 39 footnote 29"
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "IL-1",
+      "class": "safety",
+      "cause": "TI-104 below the minimum temperature setpoint",
+      "effect": "FV-107 held closed",
+      "bypass": "password-protected",
+      "as_found": "bypassed on the night of the incident, based on experience with the heater (p. 69)",
+      "source": "p. 30; p. 69"
+    },
+    {
+      "id": "IL-2",
+      "class": "safety",
+      "cause": "PI-101 at or above the maximum pressure setpoint",
+      "effect": "FV-107 held closed",
+      "bypass": "password-protected",
+      "source": "p. 30"
+    },
+    {
+      "id": "IL-3",
+      "class": "operating",
+      "cause": "FI-103 recirculation flow not established",
+      "effect": "FV-107 held closed",
+      "source": "p. 30"
+    }
+  ],
+  "limits": [
+    {
+      "what": "Minimum fill before starting the pump",
+      "value": 30,
+      "uom": "%",
+      "source": "p. 31"
+    },
+    {
+      "what": "Methomyl in the vessel before feeding",
+      "value": 0.5,
+      "uom": "% (max)",
+      "source": "p. 28-31"
+    },
+    {
+      "what": "Sample before re-heating if cooled below",
+      "value": 130,
+      "uom": "C",
+      "source": "p. 30 (SOP administrative control)"
+    },
+    {
+      "what": "Methomyl concentration with runaway risk on heating",
+      "value": 1.3,
+      "uom": "% (above)",
+      "source": "p. 31 (SOP)"
+    },
+    {
+      "what": "Critical decomposition temperature (normal operation)",
+      "value": 135,
+      "uom": "C",
+      "source": "p. 29; p. 39"
+    },
+    {
+      "what": "Safe operating limit",
+      "value": 155,
+      "uom": "C",
+      "source": "p. 39"
+    },
+    {
+      "what": "Maximum allowable operating pressure",
+      "value": 50,
+      "uom": "psig",
+      "source": "p. 28"
+    }
+  ],
+  "events_2008_08_28": [
+    {
+      "time": "18:14",
+      "what": "Recirculation pump started; level about 30 percent; temperature 60-65 C; pressure 22 psig",
+      "source": "p. 38-39"
+    },
+    {
+      "time": "18:38",
+      "what": "Temperature begins rising about 0.6 C per minute",
+      "source": "p. 39"
+    },
+    {
+      "time": "22:21",
+      "what": "Level 51 percent; recirculation flow drops to zero",
+      "source": "p. 39"
+    },
+    {
+      "time": "22:25",
+      "what": "High pressure alarm at the work station (approximately)",
+      "source": "p. 40"
+    },
+    {
+      "time": "22:27",
+      "what": "Relief valve open at 44 psig",
+      "source": "Fig 11 label"
+    },
+    {
+      "time": "22:33",
+      "what": "Vessel fails: 150.3 C, 51.2 psig (figure labels)",
+      "source": "Fig 11; p. 40"
+    }
+  ],
+  "people": "Two employees died: one at the scene, the second 41 days later. Six volunteer firefighters and two contractors were treated for possible toxic chemical exposure (p. 1). This model exists to show how published operating data and a drawing can be checked against each other; it does not judge the operators."
+}

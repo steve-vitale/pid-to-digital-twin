@@ -2826,3 +2826,78 @@ locations remain illustrative placeholders, and the stills still need the owner'
 
 **Lesson:** corrections made outside the main line are a liability until they're merged. Carry the source, not the
 outputs, and let the pipeline rebuild.
+
+---
+
+## 54. Read revision C back with the same method
+
+**What:** 2026-10-28. The project owner approved paying for the model read-back of the revised drawings. Revision C
+(controllers, signal lines, valve stations) was read with exactly the protocol of entry 44: 2×2 tiles, prompt v2, the
+line tracer, 5 clean runs and 3 per degraded level per model.
+
+**How:** `scripts/run_te_roundtrip.py` runs every condition and replicate, labelled `tec-*` so revision C's runs never
+mix with revision A's `te-*`, and skips anything already done so it can resume. The scorer gained `--keys`,
+`--prefix` and `--out`, so each revision is scored against its own sheets. That also exposed a gap from revision B:
+the recorded revision-A scoring command had no way to name its keys, and the default folder now holds revision C. Its
+recorded command now names `data/te_pid/rev-a`. The revision-A scores themselves were not re-run (their run records
+aren't on this machine); they are unchanged.
+
+**What it found (GPT, gpt-6.1-sol through the Codex CLI, 42 sheet runs, no failed tile):**
+
+| Image | Revision A | Revision C |
+|---|---|---|
+| Clean | 2.1 per 100, 100% of tags | 1.26 per 100, 100% of tags |
+| L1 photocopy | 2.1, 100% | 1.30, 100% |
+| L2 old scan | 2.1, 56% | 1.20, 61% |
+| L3 bad scan | 16.9, 14% | 14.9, 9% |
+
+- **More symbols didn't make the drawing harder to read.** Revision C has 19 controllers, 30 manual valves and more
+  tags, and the clean review load fell. Part of that is denominator: more key items, about as many corrections.
+- **Tag text is still what fails on bad scans,** and slightly worse at L3. The controller symbols' smaller text
+  (letters above a line, number below) goes first: at L2, 51% of controller tags were misread against 34% of the
+  others; at L3, all of them against 87%. A drafting choice (text size inside the DCS symbol) costs readability on
+  poor copies.
+- **Claude's half is not run.** The Claude Code CLI's sign-in had expired, and signing in is the account owner's
+  step. The runner resumes where it stopped once it is signed in again.
+
+**At your plant:** when a drawing standard changes (new symbols, new tags), re-measure your extraction method on the
+new drawings with the same protocol, and keep the old results tied to the old drawings rather than overwriting them.
+
+---
+
+## 55. Start the real unit: a sourced model and a checked trend
+
+**What:** 2026-10-28. The owner chose the Bayer CropScience residue treater (docs/REAL_UNIT_SELECTION.md). Two pieces
+are built: a process model that cites the CSB report for every item, and a digitization of the report's DCS trend
+(Figure 11) checked against the report's own text. Details: [BAYER_RT.md](BAYER_RT.md).
+
+**How:**
+- **The model** follows Figure 10 and pp. 27-32 and 38-40: units, streams, instruments, valves, the two controllers
+  the report describes, three interlocks, limits and the timeline. The report gives no tag numbers, so every tag is
+  assigned and marked so. Findings sit on the items they concern: the bypassed minimum-temperature interlock (p. 69),
+  the steam block valve found closed (p. 70), the mis-programmed split range (p. 39).
+- **The trend** is read from the figure's pixels. Calibration uses only the figure's tick marks and gridlines; the
+  figure's dotted failure line then lands 0.1 minutes from 22:33 before any curve is read. Eleven values stated in
+  the text and labels are checks, never calibration inputs.
+- **Research claims were checked against the PDF before use.** A research pass said "8 injured". The report says six
+  volunteer firefighters and two contractors were treated for possible toxic exposure, so the model and the selection
+  memo now say that.
+
+**What it found:** 6 of 11 checks passed on the first run. Two failures were my own bugs (the flow classifier caught
+the red trace's anti-aliased edge; one check used the wrong time window) and were fixed. The other three are real
+disagreements between the figure and the text: the figure's steady pressure is about 25 psig where the text says 22,
+and its temperature runs about 2 °C below the text's values near the end. The pressure scale is confirmed by the two
+labelled pressures, which both agree, so the replay will use the figure and state the difference.
+
+**Why:**
+- **A trend digitized without checks is a drawing of a drawing.** The report's own numbers are the only independent
+  reference available, so they test the digitizer instead of tuning it.
+- **Rejected:** shifting the pressure calibration by 3 psig to match the text. Two labelled pressures on the same axis
+  agree with the figure as calibrated; moving the axis would break them to hide a disagreement in the source.
+
+**Lesson:** when two parts of one source disagree, record both and say which the twin uses. Picking the convenient
+one silently is how a replay gains false precision.
+
+**At your plant:** historian exports carry tag names and units, but screenshots of trends in incident reports,
+shift logs and old studies don't. When you digitize them, calibrate on the axes, test against every number written
+down elsewhere, and keep the error with every value.

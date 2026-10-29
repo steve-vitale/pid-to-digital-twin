@@ -111,6 +111,24 @@
      "source": "out/replicates_r5_dexpi.md"
     }
    ]
+  },
+  "bayer": {
+   "title": "Bayer CropScience residue treater (CSB report 2008-08-I-WV)",
+   "model": null,
+   "no_model": "process model data/bayer_rt/process_model.json cites the report for every item but carries no per-item verification status yet; every tag is assigned by this project",
+   "licence": "CSB investigation report, fetched from csb.gov by script and not redistributed; only digitized values (facts cited to Figure 11) and the project's own model are committed (docs/REAL_UNIT_SELECTION.md)",
+   "measured": [
+    {
+     "what": "Figure 11 digitized and checked against the report's own text",
+     "value": "8 of 11 checks pass; the 3 failures are disagreements between the figure and the text (steady pressure 25 vs 22 psig; temperature near the end about 2 C below the text), recorded, not tuned",
+     "source": "out/bayer_rt/fig11_check.md"
+    },
+    {
+     "what": "operations review",
+     "value": "none",
+     "source": "docs/BAYER_RT.md"
+    }
+   ]
   }
  },
  "stages": [
@@ -736,12 +754,134 @@
      "--conditions",
      "clean,L1,L2,L3",
      "--tools",
-     "codex,claude"
+     "codex,claude",
+     "--keys",
+     "data/te_pid/rev-a",
+     "--prefix",
+     "te"
     ]
    ],
    "requires_note": "the run records under runs/ (not committed)",
    "treatment": "The frozen scorer for symbols and connections; tag text matched by position and compared after dropping case and separators; means with min-max and 95% t-intervals.",
    "carries": "an UPPER BOUND for clean house-style drawings: the keys come from the same model as the drawings; not real-plant accuracy and not comparable with OPEN100",
+   "checked_by": "scripts/test_te_pid_roundtrip.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid"
+   ],
+   "inputs": [
+    "data/te_pid/*.png"
+   ],
+   "code": [
+    "scripts/degrade_scans.py",
+    "scripts/remerge_tiles.py",
+    "scripts/run_extraction.py",
+    "scripts/run_te_roundtrip.py",
+    "scripts/tiling.py",
+    "scripts/trace_connections.py"
+   ],
+   "outputs": [],
+   "requires": [],
+   "config": [
+    "extraction/prompt_v2.md",
+    "extraction/tile_preface.md"
+   ],
+   "id": "te.pid_extract_revc",
+   "dataset": "te",
+   "stage": 2,
+   "title": "Extraction of the revision C sheets (recorded): the same frozen method and protocol as revision A, labels tec-*",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "external_outputs": [
+    "runs/tec-<cond>-tiles-<rep>/<tool>/<sheet>.json",
+    "runs/tec-<cond>-trace-<rep>/<tool>/<sheet>.json"
+   ],
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/degrade_scans.py",
+     "--src",
+     "data/te_pid",
+     "--drawings",
+     "101,102,103",
+     "--dest",
+     "data/te_pid/scan"
+    ],
+    [
+     "python",
+     "scripts/run_extraction.py",
+     "--tool",
+     "codex",
+     "--drawings",
+     "101,102,103",
+     "--prompt",
+     "extraction/prompt_v2.md",
+     "--tiles",
+     "2x2",
+     "--label",
+     "te-clean-tiles-r1"
+    ],
+    [
+     "python",
+     "scripts/trace_connections.py",
+     "--src-label",
+     "te-clean-tiles-r1",
+     "--tool",
+     "codex",
+     "--drawings",
+     "101,102,103",
+     "--label",
+     "te-clean-trace-r1"
+    ]
+   ],
+   "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude; run records are not committed",
+   "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
+   "carries": "GPT: 42 sheet runs, 0 failed tiles (2026-10-28). Claude: not run yet (its CLI sign-in had expired)",
+   "checked_by": "the frozen scorer, through te.pid_roundtrip"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "te.pid",
+    "te.pid_extract_revc"
+   ],
+   "inputs": [
+    "data/te_pid/*.graphml",
+    "data/te_pid/key.json"
+   ],
+   "code": [
+    "scripts/score_te_roundtrip.py",
+    "scripts/score_pid2graph.py"
+   ],
+   "outputs": [
+    "out/te_pid/roundtrip_scores_revC.json",
+    "out/te_pid/roundtrip_scores_revC.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_roundtrip_revc",
+   "dataset": "te",
+   "stage": 2,
+   "title": "Round-trip check on the revision C sheets (controllers, signal lines and valve stations drawn)",
+   "kind": "recorded",
+   "rebuild": "recorded",
+   "recorded_commands": [
+    [
+     "python",
+     "scripts/score_te_roundtrip.py",
+     "--keys",
+     "data/te_pid",
+     "--prefix",
+     "tec",
+     "--out",
+     "roundtrip_scores_revC"
+    ]
+   ],
+   "requires_note": "the run records under runs/ (not committed)",
+   "treatment": "The frozen scorer for symbols and connections; tag text matched by position and compared after dropping case and separators; means with min-max and 95% t-intervals.",
+   "carries": "GPT only so far: clean review load 1.26 per 100, every tag read; L3 14.9 per 100, 9% of tags read",
    "checked_by": "scripts/test_te_pid_roundtrip.py"
   },
   {
@@ -2127,6 +2267,64 @@
    "treatment": "Pre-registered in docs/GOAL.md; tag scoring rules dated in score_tags.py before any run.",
    "carries": "clean vector drawings from one publisher; says nothing about scans or real archives",
    "checked_by": "scripts/test_score_tags.py, scripts/test_replicate_stats.py"
+  },
+  {
+   "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/bayer_rt/process_model.json",
+    "data/bayer_rt/fig11_calibration.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.source",
+   "dataset": "bayer",
+   "stage": 0,
+   "title": "Bayer residue treater: process model and Figure 11 calibration, written from the CSB report",
+   "kind": "source",
+   "rebuild": "source",
+   "treatment": "Every unit, stream, instrument, valve, controller, interlock, limit and event cites the report's page or figure. The report gives no tag numbers for the residue treater, so every tag is assigned by this project and marked so. The calibration is read off Figure 11's own axes, gridlines and ticks only.",
+   "edited_by": [
+    "edit data/bayer_rt/*.json by hand, then python scripts/test_bayer_rt.py"
+   ],
+   "carries": "a page or figure citation per item; assigned_tag on every tag; open questions (which temperature Fig 11 plots)",
+   "checked_by": "scripts/test_bayer_rt.py (citations, assigned tags, references between items)"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "bayer.source"
+   ],
+   "inputs": [
+    "data/bayer_rt/fig11_calibration.json"
+   ],
+   "code": [
+    "scripts/digitize_bayer_fig11.py"
+   ],
+   "outputs": [
+    "data/bayer_rt/fig11_digitized.csv",
+    "out/bayer_rt/fig11_check.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.fig11",
+   "dataset": "bayer",
+   "stage": 1,
+   "title": "Figure 11 digitized: the residue treater's DCS trend, checked against the report's text",
+   "kind": "check",
+   "rebuild": "manual",
+   "command": [
+    [
+     "python",
+     "scripts/digitize_bayer_fig11.py"
+    ]
+   ],
+   "requires_note": "downloads the CSB report into data/external/csb/ if absent (network) and needs PyMuPDF",
+   "treatment": "Colour classification per series, gridlines and two annotation boxes removed, small black components dropped, median row per pixel column; time and values from the calibration. Then 11 checks against values the report states, never used to calibrate.",
+   "carries": "one row per pixel column (about 32 s) with min/median/max per series and the pixel-error bound; 8 of 11 checks pass, the 3 disagreements explained",
+   "checked_by": "the 11 text checks in out/bayer_rt/fig11_check.md; scripts/test_bayer_rt.py"
   }
  ]
 }

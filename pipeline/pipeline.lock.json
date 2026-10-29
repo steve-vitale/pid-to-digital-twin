@@ -1,6 +1,23 @@
 {
  "about": "Hashes (sha256, CRLF normalised to LF) of each stage's inputs, code, config and outputs when scripts/pipeline.py last built or accepted it. Written by the orchestrator; do not edit by hand.",
  "stages": {
+  "bayer.fig11": {
+   "inputs": {
+    "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
+    "scripts/digitize_bayer_fig11.py": "b29ae827097fe074895a994e61a7c0d8937dab84ff589aed4508d82f1b156433"
+   },
+   "outputs": {
+    "data/bayer_rt/fig11_digitized.csv": "56f370b9209e4293350a670819e87cb9dd1d142e258f354481667d51aeff4aee",
+    "out/bayer_rt/fig11_check.md": "538830b8ced7f732a857e8df62bd23d74b4996068360ccd9777f171df0906f1e"
+   }
+  },
+  "bayer.source": {
+   "inputs": {},
+   "outputs": {
+    "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
+    "data/bayer_rt/process_model.json": "5cb6f711523eb45826db7d87df0be6d0524861fe250f47b3e91c4bff923ad675"
+   }
+  },
   "dexpi.keys": {
    "inputs": {
     "data/dataset_adapters/dexpi_examples.json": "23228640937e468099918af66de52b9e3c66d7d80ce79cc931a080e1821b6706",
@@ -666,6 +683,22 @@
    },
    "outputs": {}
   },
+  "te.pid_extract_revc": {
+   "inputs": {
+    "data/te_pid/101.png": "dd93aa034bcca425dbca2550ceaefbad9663e008a9b5bd629d1f4eb954baf9f9",
+    "data/te_pid/102.png": "36726a47ef067856f3a88fa6f76025fd678094466643d9b0e98e917c84e83bb0",
+    "data/te_pid/103.png": "0d3564b813243824103b5d05ea6b9086c971882aecd11d57c4da3a51d3c79c45",
+    "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+    "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+    "scripts/degrade_scans.py": "95ff4b696e29205dacb0ff3776acf05a9f7ef8c40d0b15851f763c91799b5207",
+    "scripts/remerge_tiles.py": "623aab7cfee6e972217eea46f37da6207c8880969c050660645bb2986707698a",
+    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_te_roundtrip.py": "c951c72aaf35830d58a1f918b28f5b0b0e06a3778f6072a84e4867c53a4f265f",
+    "scripts/tiling.py": "c5f334f06f3377e46c67383b6eeac94fbebaeeda169cfb080bc412e249f227eb",
+    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+   },
+   "outputs": {}
+  },
   "te.pid_live": {
    "inputs": {
     "out/te_pid/twin/claude-L3-r1/plant_model.json": "81886a00988aa08041f874a430725a1770724a5b669bfef956e172273469c566",
@@ -703,11 +736,25 @@
     "data/te_pid/rev-a/103.graphml": "e44ac706b1585fe9e20cd1ac2aaa28aa7abb3716d1ab2cbc1d888989edf537ca",
     "data/te_pid/rev-a/key.json": "d2171dddf09fd5034e99bb7a543c6c89743a92deeef256518816d5d879126341",
     "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
-    "scripts/score_te_roundtrip.py": "acf7ff8ae7622ad7b8b977b4cfd42fb5f838dd9a9bc790c649538fb75b7af598"
+    "scripts/score_te_roundtrip.py": "1e2da75bc241255668ab6a6c71eb40fd23ef8726fad8cf3db3e7544dd9cc30c9"
    },
    "outputs": {
     "out/te_pid/roundtrip_scores.json": "e732c60331ec87ec2651b3745f94c5c62035c104aeca6409f69af3dbaf71d083",
     "out/te_pid/roundtrip_scores.md": "2aa34698926a69a38bd51be6700bb85b9fcfab71cfdc01af3fc415d6fc9faea2"
+   }
+  },
+  "te.pid_roundtrip_revc": {
+   "inputs": {
+    "data/te_pid/101.graphml": "3e4fdbb64a811c18bc1b2e62280319120f6df7c88349431fe7badd6724b85602",
+    "data/te_pid/102.graphml": "86ec9008f349f4f0ceec58c97b2e479b415e5f0cf51bb50d31265052411d8779",
+    "data/te_pid/103.graphml": "90b0ee1ebb42828a48d9f92ea0f89dfe2569165ac7a08a1e2cde76d05ba63f77",
+    "data/te_pid/key.json": "7469921cacda3adbfce3e53424a4b767d78fedfdc459d45abd6a578967efb97e",
+    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_te_roundtrip.py": "1e2da75bc241255668ab6a6c71eb40fd23ef8726fad8cf3db3e7544dd9cc30c9"
+   },
+   "outputs": {
+    "out/te_pid/roundtrip_scores_revC.json": "bbb7876c110628e334ed7348035a22a67c9d6462ed65f4db5445e032bfc43867",
+    "out/te_pid/roundtrip_scores_revC.md": "8554c2fa5247f97cf0ea6e2c838aeda798ac3c1251f11c725024a1c304c9deb7"
    }
   },
   "te.pid_style": {

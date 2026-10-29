@@ -19,7 +19,10 @@ Replicates are summarized as mean, min-max and a 95% t-interval (n = number of r
 t-interval is wide on purpose).
 
 Usage: python scripts/score_te_roundtrip.py [--conditions clean,L1,L2,L3] [--tools codex,claude]
-Reads runs/te-<cond>-trace-<rep>/<tool>/<sheet>.json; writes out/te_pid/roundtrip_scores.{json,md}.
+                                             [--keys data/te_pid] [--prefix te] [--out roundtrip_scores]
+Reads runs/<prefix>-<cond>-trace-<rep>/<tool>/<sheet>.json; writes out/te_pid/<out>.{json,md}.
+Revision A (journal entry 44): --keys data/te_pid/rev-a --prefix te (the default output name).
+Revision C: --keys data/te_pid --prefix tec --out roundtrip_scores_revC. Each revision is scored against its own keys.
 """
 import argparse
 import json
@@ -173,7 +176,12 @@ def main():
     ap.add_argument("--conditions", default="clean,L1,L2,L3")
     ap.add_argument("--tools", default="codex,claude")
     ap.add_argument("--write-key-run", action="store_true", help="write runs/te-key/key/ and stop")
+    ap.add_argument("--keys", default="data/te_pid", help="the sheets and answer keys the runs read")
+    ap.add_argument("--prefix", default="te", help="run label prefix: runs/<prefix>-<cond>-trace-r<n>")
+    ap.add_argument("--out", default="roundtrip_scores", help="output name in out/te_pid/")
     a = ap.parse_args()
+    global KEYS
+    KEYS = ROOT / a.keys
     key = json.loads((KEYS / "key.json").read_text(encoding="utf-8"))
     if a.write_key_run:
         write_key_run(key)
@@ -181,7 +189,7 @@ def main():
     runs, table = [], []
     for cond in a.conditions.split(","):
         for tool in a.tools.split(","):
-            labels = sorted(p.name for p in (ROOT / "runs").glob(f"te-{cond}-trace-r*") if (p / tool).is_dir())
+            labels = sorted(p.name for p in (ROOT / "runs").glob(f"{a.prefix}-{cond}-trace-r*") if (p / tool).is_dir())
             rs = [run_scores(lb, tool, key) for lb in labels]
             runs += rs
             if not rs:
@@ -196,7 +204,7 @@ def main():
             table.append(row)
     out = ROOT / "out" / "te_pid"
     out.mkdir(parents=True, exist_ok=True)
-    (out / "roundtrip_scores.json").write_text(json.dumps({"summary": table, "runs": runs}, indent=1),
+    (out / f"{a.out}.json").write_text(json.dumps({"summary": table, "runs": runs}, indent=1),
                                                encoding="utf-8")
 
     def cell(s, pct=False):
@@ -205,7 +213,7 @@ def main():
         f = (lambda v: f"{100 * v:.0f}%") if pct else (lambda v: f"{v:.2f}" if v <= 1.5 else f"{v:.1f}")
         rng = f" ({f(s['min'])}–{f(s['max'])})" if s["n"] > 1 else ""
         return f"{f(s['mean'])}{rng}"
-    md = ["# Round trip on the generated Tennessee Eastman sheets", "",
+    md = ["# Round trip on the generated Tennessee Eastman sheets", "", f"Sheets and keys: `{a.keys}`; runs `{a.prefix}-*`.", "",
           "**A round trip, not real-plant accuracy.** The three sheets were generated from the verified TE model and "
           "the answer keys come from the same model, so these numbers measure how faithfully the frozen method "
           "(2×2 tiles, prompt v2, code line tracer; nothing re-tuned) reads clean drawings in the learned house style. "
@@ -220,7 +228,7 @@ def main():
                   f"{cell(r['tags_read'], True)} | {cell(r['tags_read_if_found'], True)} | "
                   f"{cell(r['offpage_refs_read'], True)} | {cell(r['misreads_that_are_another_real_tag'])} |")
     md += ["", "## What produced these numbers", "",
-           "Every sheet's {model, prompt, adapter, date, seconds, cost} is in `roundtrip_scores.json` (`runs[].records`). "
+           "Every sheet's {model, prompt, adapter, date, seconds, cost} is in " f"`{a.out}.json` (`runs[].records`). "
            "Claude dollars are the CLI's API-equivalent figure (the runs used a flat subscription); Codex reports no "
            "cost. No Gemini call was made.", "",
            "| Tool | Models | Prompt | Sheet runs | Failed tiles | Wall s (sum) | Serial s (sum) | Claude API-equivalent $ |",
@@ -242,7 +250,7 @@ def main():
             md.append(f"| {r['label']} | {r['tool']} | {m['sheet']} | {m['printed']} | {got}"
                       f"{' **(another real tag)**' if m['is_another_real_tag'] else ''} |")
     md.append("")
-    (out / "roundtrip_scores.md").write_text("\n".join(md), encoding="utf-8")
+    (out / f"{a.out}.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md[:8 + len(table)]))
 
 

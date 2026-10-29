@@ -1,6 +1,6 @@
 # Choosing a real unit from the public record (selection memo, not yet built)
 
-**Status, 2026-10-28:** a proposal for the next phase. Nothing below has been built. The candidates and page
+**Status, 2026-10-28:** Bayer CropScience selected by the project owner. First steps built: a sourced process model and a checked digitization of Figure 11 ([BAYER_RT.md](BAYER_RT.md)). The candidates and page
 references were researched from the CSB reports themselves and spot-checked against the PDFs' text.
 
 ## Why a real unit
@@ -29,7 +29,7 @@ The plan is the TE path from entries 44, 50 and 51, run on a real unit:
 | Process figure | Fig 10, residue treater piping layout (report p. 29): instrument types and three control valves, **no tag numbers**, no loop lines | Fig 1, raffinate section (p. 34): instrument bubbles (LT, LAH, LAL, PT), no tag numbers. A DCS screen capture (Fig 14) shows partial tags | Fig 4: closest to P&ID style, small scope, one flow loop, no tags |
 | Published data | **Fig 11 (p. 39): DCS trend of temperature, pressure, level and recirculation flow over about 6 hours**, failure marked at 22:33. Fig 19: steam flow | Table 1 (p. 43): timestamped events and readings (indicated vs actual level, pressures, valve outputs). No trend charts | Figs 5 and 6: historian trends of two variables (quench water flow, reboiler outlet temperature) |
 | Control narrative | Strong: automatic temperature control with split range, minimum-temperature and maximum-pressure interlocks on the feed valve, a minimum-recirculation interlock, operating limits | Strong on alarms and level indication; tags named in the text and tables | Thin |
-| People harmed | 2 killed, 8 injured | 15 killed, 180 injured | 2 killed, 167 injured |
+| People harmed | 2 killed; 6 volunteer firefighters and 2 contractors treated for possible toxic exposure | 15 killed, 180 injured | 2 killed, 167 injured |
 
 ## Recommendation: Bayer CropScience residue treater
 

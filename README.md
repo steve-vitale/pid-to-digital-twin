@@ -17,8 +17,8 @@ Everything here is built from two datasets (plus five public DEXPI sheets used o
 starts with an assessment before anything is built: where the data came from, what has been checked against an
 independent source, and what is inferred. **Every output inherits its inputs' confidence; nothing downstream upgrades
 it.** The live replay, the mimics, the 3D tours and the LOTO views are **proof-of-concept outputs, built to iterate
-on**, and are labelled that way in their own files. One manifest lists all 42 stages of the pipeline;
-`python scripts/pipeline.py status` shows which outputs are stale after a correction (all 42 are fresh in this commit;
+on**, and are labelled that way in their own files. One manifest lists all 46 stages of the pipeline;
+`python scripts/pipeline.py status` shows which outputs are stale after a correction (all 46 are fresh in this commit;
 the live replay and the native acceptance run are recorded by hand because they need a running Ignition gateway), and
 `rebuild --from <stage>` carries a correction forward. Per-element confidence: `python scripts/pipeline.py
 confidence`. Stage by stage: [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md).
@@ -188,7 +188,13 @@ faithfully the frozen method (2×2 tiles, prompt v2, code line tracer; nothing r
 They are an upper bound, not real-plant accuracy, and not comparable with the OPEN100 numbers. Gemini was left out.
 The runs below read the **revision-A sheets** (kept in [`data/te_pid/rev-a/`](data/te_pid/rev-a/)), so their tags
 are quoted in revision-A numbering (FV 201 is now FV-102; the full map is
-[`data/te_retag_2026-10-28.json`](data/te_retag_2026-10-28.json)). Revision B has not been read back yet.
+[`data/te_retag_2026-10-28.json`](data/te_retag_2026-10-28.json)).
+
+**Revision C read back (GPT so far).** The same frozen method and protocol on the sheets with controllers, signal
+lines and valve stations ([roundtrip_scores_revC.md](out/te_pid/roundtrip_scores_revC.md), journal entry 54): review
+load 1.26 per 100 on clean sheets (every tag read), 1.30 at L1, 1.20 at L2 with 61% of tags read, and 14.9 at L3 with
+9% read. The added symbols didn't make the sheets harder to read; on bad scans tag text still fails first. The Claude
+runs are pending (its command-line sign-in had expired).
 
 | Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
 |---|---|---|
@@ -556,7 +562,8 @@ it at a real site.
 | [docs/GOAL.md](docs/GOAL.md) | The review-load goal, sealed splits and decision rules, and the pre-registration and results of rounds 2–5 |
 | [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results, every later round at a glance, the 21-fault band evaluation and the TE round trip |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
-| [docs/REAL_UNIT_SELECTION.md](docs/REAL_UNIT_SELECTION.md) | Proposal for the next phase: one real unit from a CSB investigation report, with its published trends; candidates, recommendation and reuse limits (not built) |
+| [docs/REAL_UNIT_SELECTION.md](docs/REAL_UNIT_SELECTION.md) | Choosing the next phase: one real unit from a CSB investigation report, with its published trends; candidates, choice (Bayer CropScience) and reuse limits |
+| [docs/BAYER_RT.md](docs/BAYER_RT.md) | The Bayer CropScience residue treater: a process model citing the report for every item, and its published DCS trend digitized and checked against the report's text (started) |
 | [docs/OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md) | What the 12 drawings support with no process data: flow direction, stitching, mimic, 3D tour, LOTO view, and how each was checked |
 | [docs/TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) | The digital twin starter kit: each output file and how to load it into Ignition and PI AF |
 | [docs/COSTS.md](docs/COSTS.md) | What it cost, per drawing and in total, and how to size it for 1,000 sheets |
@@ -598,9 +605,10 @@ it at a real site.
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet (schema v2); not imported into a PI System, by decision (below) | Scoped: checked offline against the vendor-published conventions (`check_pi_export.py`), not import-tested |
 | Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
-| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 42 stages, all fresh; the live replay and the native acceptance run need a gateway and are recorded by hand ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
+| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 46 stages, all fresh; the live replay and the native acceptance run need a gateway and are recorded by hand ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
 | One plant end to end: TE P&ID generated in the OPEN100 style and read back | Done: a round trip on our own drawings, so an upper bound (clean sheets 2.1 and 2.2 per 100, every tag read), not real-plant accuracy ([journal entry 44](docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back)); measured on revision A |
 | Control loops on the generated P&ID, from the simulator's closed-loop code | Done: 19 of 19 loops drawn and numbered (revision A: 0 of 19); data-checked against the recorded run; revision B passed native gateway acceptance; not yet read back by the models ([journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)) |
+| A real unit from the public record: the Bayer CropScience residue treater (CSB report) | Started: process model citing the report for every item (tags assigned by this project); Figure 11's DCS trend digitized, 8 of 11 checks against the report's text agree and the 3 disagreements are written up ([BAYER_RT.md](docs/BAYER_RT.md)). Drawing, comparison with the report's figure and replay not built yet |
 | OPEN100 from drawings alone: flow direction, stitched plant, mimic, 3D tour, LOTO view | Done as a proof of concept, structure only: 361 of 1,133 process links directed, 12 sheets stitched, every value "not connected" ([OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md)) |
 | 3D orientation tour (TE) | Proof of concept: no render check fails on twelve stills (15 pass, 2 informational), five committed; no video, no operator review ([drafts/3d-tour](drafts/3d-tour/README.md)) |
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |
