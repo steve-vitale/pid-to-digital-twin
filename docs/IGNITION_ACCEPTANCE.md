@@ -8,6 +8,21 @@ real gateway, and what that test doesn't cover. The full stories, including the 
 
 ## Result
 
+**Revision D passed on 2026-10-29 in the local disposable Ignition 8.3.10 gateway, on commit `1b9e815`.** Every
+field measurement was retagged as a transmitter that day (FI-101 became FT-101, PI-107 became PT-107 and so on;
+[journal entry 61](JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme)).
+`build_gateway.py --fresh` imported 1,121 tags with no failures and read back 0 differences; the verifier caught all
+5 planted faults and passed V1–V9; the browser contract loaded 24/24 routes directly and on reload and landed 284/284
+clicks with 0 console errors; the header's alarm count matched the alarm table with the replay running (4/4),
+stopped (8/8, data-source-lost diagnostic active) and restarted (12/12, cleared). Fault 6 was watched on screen this
+time: at the alarm the overview showed PT-107 at 3,000.0 kPa g in red and the header and the alarm table both read
+2 active. Receipt: [`native-revD-20261029.json`](../out/ignition/gateway/receipts/native-revD-20261029.json);
+screenshots: [overview, normal](screenshots/native-revD-overview-normal.png),
+[overview at the alarm](screenshots/native-revD-overview-fault-alarm.png). Not covered: a 390 px capture (the narrow
+route was clicked through, not photographed), operator or site review.
+
+The earlier runs, on older tag names:
+
 **Revision B passed on 2026-10-28 in the local disposable Ignition 8.3.10 gateway, on commit `c15b362`.** The control valves were renumbered to their loops that day (FV-201 became FV-102 and so on; [journal entry 51](JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). `build_gateway.py --fresh` imported 1,121 tags with no failures and read back 0 differences; the verifier caught all 5 planted faults and passed V1–V9; the browser contract loaded 24/24 routes directly and on reload and landed 284/284 clicks with 0 console errors; the header's alarm count matched the alarm table in every sample with the replay running (4/4), stopped (8/8, data-source-lost diagnostic active) and restarted (12/12, cleared). Receipt: [`native-revB-20261028.json`](../out/ignition/gateway/receipts/native-revB-20261028.json); screenshots: [feed, desktop](screenshots/native-revB-feed-desktop.png), [overview at 390 px](screenshots/native-revB-m-narrow.png). Not covered: a physical phone, the fault watched on screen (V8 checked it), operator or site review.
 
 The earlier run, on the revision-A tag names:
@@ -47,16 +62,16 @@ now hidden without Good data, also with a test. The run below is of the fixed co
 | Quality honesty (V4) | PASS: 76 fed values Good; SC-212 and 334 placeholders Bad; 0 false-good |
 | Liveness (V5), plausibility (V6) | PASS: 76 of 76 changed; 52 inside range |
 | Read-only (V7) | PASS: two writes to twin tags refused (BadUserAccessDenied) |
-| Alarm pipeline (V8), recorded fault 6 | PASS: A feed flagged first; PT-107 alarm active 0.5 s after crossing 2,895 kPa |
+| Alarm pipeline (V8), recorded fault 6 | PASS: A feed flagged first; PI-107 alarm active 0.5 s after crossing 2,895 kPa |
 | Direct load and reload of all 24 routes | PASS 24/24 |
 | Every navigation target clicked | PASS 284/284 (277 control-room targets plus 7 on `/m`); Back after each 284/284; Back/Forward chain 6/6; repeated clicks; 0 console errors |
 | **Data source lost: TE replay stopped** | PASS: 52 TE values went Uncertain, `ReplayValuesNotGood` read 52, the "Data source lost: TE replay" diagnostic alarm went active and every header read DATA SOURCE LOST |
 | **Data source recovered** | PASS: 52 Good again and the diagnostic alarm cleared within about 25 s of restarting the replay |
 | **Data source lost: OPEN100 demo points stopped** | PASS: 24 mapped values went Uncertain, the second diagnostic alarm fired, then cleared within about 25 s of restart |
 | **Header count = active alarms in the table** | PASS with a timing caveat: sampled every 3 s, 40/40 matches through the fault (0, 1, then 2 active process alarms) and 29/30 through a replay loss and recovery. The one mismatch, and one capture during the fault, came within about 2 s of an alarm changing state: the header's count polls every second, the table refreshes every two |
-| **Process alarm active when the data is lost** | Observed, unchanged: PT-107's high-pressure alarm stayed active on its last value while PT-107 read UNKNOWN and DATA SOURCE LOST was raised. Header and table agreed (1 process + 1 diagnostic = 2 active) |
+| **Process alarm active when the data is lost** | Observed, unchanged: PI-107's high-pressure alarm stayed active on its last value while PI-107 read UNKNOWN and DATA SOURCE LOST was raised. Header and table agreed (1 process + 1 diagnostic = 2 active) |
 | **390 px narrow overview (`/m`)** | PASS: 390 px wide with no horizontal scroll; alarm count, data source and active alarm list first, then the six units with their key values; UNKNOWN on grey with the replay stopped; DATA SOURCE LOST and the diagnostic alarm row at the top |
-| Fault replay on screen | PASS: amber values before the alarm, PT-107 red at the alarm, alarm table populated |
+| Fault replay on screen | PASS: amber values before the alarm, PI-107 red at the alarm, alarm table populated |
 | Desktop layout, 1600 × 930 | PASS; the control-room screens are unchanged in layout. At 390 px they still scroll in both directions |
 
 Screenshots: [narrow, normal](screenshots/native-narrow-m-normal.png),

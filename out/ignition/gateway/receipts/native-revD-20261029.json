@@ -1,0 +1,61 @@
+{
+ "what": "Native acceptance of revision D (field transmitters tagged FT/PT/LT/TT/AT/JT, journal entry 61) in the local disposable Ignition gateway",
+ "date_utc": "2026-10-29",
+ "commit": "1b9e815",
+ "ignition_version": "8.3.10 (trial, console mode)",
+ "files_sha256": {
+  "out/ignition/gateway/PIDTwin.zip": "8a1db2e144a63cf4ec5293be3d2496264dc3166e53ca0903b328a1c886341087",
+  "out/ignition/gateway/twin_provider.json": "c122c33cfabd7baff7473deee41defcb62802c8d398f4e9ffc9350bbb7419ff8",
+  "out/ignition/gateway/build_meta.json": "b92f84144bb7861a6cd8c4720702b991f917663c669fe91de5ba51d59f4553bd"
+ },
+ "build": "scripts/ignition/build_gateway.py --fresh: 1121 tags imported, 0 failures; read back 0 differences; 24 views",
+ "verifier_controls": "5/5 planted faults caught (V1, V2, V3, V4, V7); receipt out/ignition/gateway/receipts/20261029T145654Z.json (its V9 failed by design: the build was not committed yet)",
+ "verifier": "V1-V9 PASS on 1b9e815; receipt out/ignition/gateway/receipts/20261029T151156Z.json",
+ "browser_contract": {
+  "direct_load_and_reload": "24/24",
+  "clicks": "284/284",
+  "back_after_click": "284/284",
+  "back_forward_chain": "6/6",
+  "repeated_clicks": "pass",
+  "console_errors": 0,
+  "browser": "Chromium 145.0.7632.6"
+ },
+ "alarm_count": {
+  "replay_running": {
+   "samples": 4,
+   "matches": 4,
+   "diag_lost": [
+    0
+   ],
+   "process": [
+    0
+   ]
+  },
+  "replay_stopped": {
+   "samples": 8,
+   "matches": 8,
+   "diag_lost": [
+    1
+   ],
+   "process": [
+    0
+   ]
+  },
+  "replay_restarted": {
+   "samples": 12,
+   "matches": 12,
+   "diag_lost": [
+    0
+   ],
+   "process": [
+    0
+   ]
+  }
+ },
+ "fault_6_on_screen": "overview at the alarm: PT-107 3000.0 kPa g red, header 'Process alarms: 2', /alarms table 2 ACTIVE",
+ "screenshots": [
+  "docs/screenshots/native-revD-overview-normal.png",
+  "docs/screenshots/native-revD-overview-fault-alarm.png"
+ ],
+ "not_covered": "No 390 px capture in this run (the narrow route was covered by the 284-click contract only). No operator or site review. PI is not import-tested."
+}

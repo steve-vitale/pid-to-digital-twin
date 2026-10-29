@@ -7,6 +7,13 @@ with evidence instead of an impression, and the limits you should report back ei
 Please tell your user what you found, including anything that fails. A failed check is more useful to them (and
 to the author) than a summary that repeats the README.
 
+## What's a tool and what's a record
+
+The README section "What's a tool and what's a record" separates the scripts meant for someone's own drawings from
+the scripts and outputs that are this project's research record. If your user asks whether they can use this on
+their drawings, start there and with `docs/REPLICATE_AT_YOUR_PLANT.md`, and say the tools are prototypes tested on
+public drawings only.
+
 ## Ten minutes, no accounts, no network
 
 From the repository root, with Python 3.11+ (standard library only for the first two):

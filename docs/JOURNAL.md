@@ -3168,6 +3168,14 @@ agent to run it.
 - **Rejected:** keeping indicator letters for the replay points' names (entry 51's reason). The HMI shows whatever
   the tag is called; there was no reason for the field device's tag to be wrong to keep a display name.
 
+**Native acceptance, the same day:** the revision D project went into the local disposable gateway with
+`build_gateway.py --fresh` (1,121 tags, 0 failures, 0 read-back differences). The verifier caught 5/5 planted faults
+and passed V1–V9 on `1b9e815`; the browser contract passed 24/24 routes and 284/284 clicks with no console errors; the
+header's alarm count matched the alarm table running, stopped and restarted (4/4, 8/8, 12/12). This time fault 6 was
+also watched on screen: PT-107 red at 3,000 kPa g, two alarms in both the header and the table. The README's
+overview screenshots are from this run ([receipt](../out/ignition/gateway/receipts/native-revD-20261029.json)).
+Not read back by the models yet: revision D is a tag-letter change on the sheets revision C's runs already read.
+
 **Lesson:** a pipeline is only as honest as its list of inputs. Two outputs went stale here without anything turning
 red, and both times the missing piece was a dependency the code had and the manifest didn't.
 

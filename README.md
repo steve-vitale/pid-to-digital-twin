@@ -29,6 +29,8 @@ tests how much of that AI can do, how to check its work honestly, and what a pla
 - **Check it yourself.** `python scripts/check_claims.py` compares every headline number here with the committed file
   it comes from (standard library only, under a minute). If you'd rather have your coding agent do it,
   [AGENTS.md](AGENTS.md) tells it what to run and which limits to report back. More: [REVIEWING.md](docs/REVIEWING.md).
+- **Using it on your own drawings.** A handful of the scripts are tools for that; the rest are this project's research
+  record. [Which is which](#whats-a-tool-and-whats-a-record).
 
 ![Before and after: a crop of a public OPEN100 drawing, and the same crop with every extracted symbol boxed and coloured by review risk tier](docs/screenshots/before-after-sheet0.png)
 
@@ -65,15 +67,15 @@ a 3D orientation tour and a LOTO isolation view on the real drawing.
 | Original drawing on screen with each instrument's value | **Not done yet**: no original TE drawing exists; a P&ID is now generated from the model in the OPEN100 style (three sheets, not a drawing of record), but it is not a screen background yet ([101.png](data/te_pid/101.png), [style_fidelity.md](out/te_pid/style_fidelity.md)) | **Done**: 12 drawing screens, checked in a lab gateway; every unmapped value reads 'not connected' ([native-sheet0-not-connected.png](docs/screenshots/native-sheet0-not-connected.png)) |
 | Flow direction on connections | **Done**: every stream's direction checked against the simulator's pressure-driven flow lines ([te_topology_check.md](out/te_topology_check.md), [te_process_model.json](data/te_process_model.json)) | **Partial**: read from drawing evidence (arrowheads, off-page flags, pump ports) on 361 of 1,133 process links; the rest stay undirected and show no arrow ([flow_direction.json](out/open100_structural/flow_direction.json), [flow-evidence-sheet5.png](docs/screenshots/open100/flow-evidence-sheet5.png)) |
 | Sheets stitched into one plant | **Not applicable**: one process description, no sheets | **Done offline (not in a gateway)**: off-page connectors join the 12 sheets; 38 sheet-to-sheet connections, 36 with a direction ([plant_structure.json](out/open100_structural/plant_structure.json)) |
-| Process mimic overview (ISA-101 style) | **Done**: native acceptance in a lab gateway, plus a 390 px overview at /m; proof of concept: layout and key values are first-pass, not reviewed by operations ([native-revB-overview-normal.png](docs/screenshots/native-revB-overview-normal.png), [native-narrow-m-normal.png](docs/screenshots/native-narrow-m-normal.png)) | **Done offline (not in a gateway)**: plant overview and 12 area views from the same screen components; offline render; proof of concept, structure only ([mimic-plant-overview.png](docs/screenshots/open100/mimic-plant-overview.png), [mimic-area-sheet7.png](docs/screenshots/open100/mimic-area-sheet7.png)) |
+| Process mimic overview (ISA-101 style) | **Done**: native acceptance in a lab gateway, plus a 390 px overview at /m; proof of concept: layout and key values are first-pass, not reviewed by operations ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png), [native-narrow-m-normal.png](docs/screenshots/native-narrow-m-normal.png)) | **Done offline (not in a gateway)**: plant overview and 12 area views from the same screen components; offline render; proof of concept, structure only ([mimic-plant-overview.png](docs/screenshots/open100/mimic-plant-overview.png), [mimic-area-sheet7.png](docs/screenshots/open100/mimic-area-sheet7.png)) |
 | Equipment purpose cards | **Done**: one sentence per unit, each citing the simulator lines it restates, shown on the 3D tour's stop cards; not reviewed by an operator ([te_unit_purposes.json](data/te_unit_purposes.json), [02_r-101_normal.jpg](drafts/3d-tour/02_r-101_normal.jpg)) | **Done offline (not in a gateway)**: from the drawings' own equipment schedules and labels (transcribed, unverified); generic class text where the drawing says nothing, marked as such ([open100_equipment_schedule.json](data/open100_equipment_schedule.json)) |
 | 3D orientation tour (stills) | **Draft**: proof of concept: placeholder geometry, source-checked topology, colours from recorded replay; no render check fails on twelve stills (15 pass, 2 informational), five committed ([00_overview_normal.jpg](drafts/3d-tour/00_overview_normal.jpg), [verification.md](drafts/3d-tour/verification.md)) | **Draft**: proof of concept: placeholder geometry at drawing positions, stops in inferred flow order, structure only ([3d-00_overview.jpg](docs/screenshots/open100/3d-00_overview.jpg), [3d-01_stop_sheet3.jpg](docs/screenshots/open100/3d-01_stop_sheet3.jpg)) |
 | Lockout/tagout isolation view | **Mockup**: isolation points inferred from the seed model (the purge's isolation point now sits at the separator); not a procedure ([40_loto_mockup.jpg](drafts/3d-tour/40_loto_mockup.jpg)) | **Mockup**: isolation points from the extracted symbols, on the real drawing, with sheet and box for each; not a procedure ([loto-isolation-sheet7.png](docs/screenshots/open100/loto-isolation-sheet7.png), [loto_isolation_points.csv](out/open100_structural/loto_isolation_points.csv)) |
-| Values on the screens | **Done**: recorded simulator replay (proof of concept: not a live plant, and not a simulator that responds to control) ([native-revB-overview-normal.png](docs/screenshots/native-revB-overview-normal.png)) | **Not possible**: needs process data: an I/O list or historian mapping for these instruments |
+| Values on the screens | **Done**: recorded simulator replay (proof of concept: not a live plant, and not a simulator that responds to control) ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png)) | **Not possible**: needs process data: an I/O list or historian mapping for these instruments |
 | Point mapping to data addresses | **Done**: replay channels mapped in the lab gateway ([build_meta.json](out/ignition/gateway/build_meta.json)) | **Synthetic demo**: a synthetic I/O list shaped like a real export; no real addresses exist for these drawings ([io_lists](data/io_lists)) |
 | Normal bands and early warning | **Done**: learned on half the normal run; on all 21 published faults the bands flag 17 (median 48 min after onset) with 0 false alarms in 193 h of held-out normal running, and miss faults 3, 9, 15 and 19 ([fault_detection.md](out/fault_detection/fault_detection.md), [normal_bands.md](out/ignition/normal_bands.md)) | **Not possible**: needs a historian record of normal operation |
 | Alarms | **Done**: published setpoints, plus a data-source-lost diagnostic alarm per data source; in the lab gateway the pressure alarm fires on the recorded fault, the diagnostic fires and clears, and the header count matches the alarm table ([IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md), [native-current-20261013-alarms.json](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) | **Not possible**: needs setpoints and process data; the drawings name some alarm points but give no setpoints |
-| Fault replay and live process tour | **Done**: recorded fault-6 replay; proof of concept: replay is not a simulator that responds to control ([native-revB-overview-fault-alarm.png](docs/screenshots/native-revB-overview-fault-alarm.png)) | **Not possible**: needs recorded process data |
+| Fault replay and live process tour | **Done**: recorded fault-6 replay; proof of concept: replay is not a simulator that responds to control ([native-revD-overview-fault-alarm.png](docs/screenshots/native-revD-overview-fault-alarm.png)) | **Not possible**: needs recorded process data |
 | Operations review | **Not done yet**: tooling built; needs someone who knows the process ([REVIEW_LOOP.md](docs/REVIEW_LOOP.md)) | **Not done yet**: same; the review queue is ready ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv)) |
 <!-- deliverables-matrix:end -->
 
@@ -284,7 +286,7 @@ problem, set the evaluation rules before seeing results, made the design calls a
 mistakes and mine. [docs/MODELS.md](docs/MODELS.md) says which parts were compared across several models and which
 came from Claude alone.
 
-**Contents:** [Status and evidence tracks](#status-and-evidence-tracks) ·
+**Contents:** [What's a tool and what's a record](#whats-a-tool-and-whats-a-record) · [Status and evidence tracks](#status-and-evidence-tracks) ·
 [Drawings only, process knowledge only, or both](#what-you-can-do-with-only-drawings-only-process-knowledge-or-both) ·
 [What the numbers mean](#what-the-numbers-mean) ·
 [Try it in Ignition](#try-it-in-ignition) · [What this demonstrates](#what-this-project-demonstrates) ·
@@ -404,9 +406,9 @@ Claude and haven't been reviewed by operations.
 
 | Plant overview, normal | Fault 6 at the alarm | An extracted drawing, live |
 |---|---|---|
-| ![Current plant overview in normal replay: grey values beside each unit on the process flow](docs/screenshots/native-revB-overview-normal.png) | ![Current plant overview at the pressure alarm: values outside their normal band amber, reactor pressure PT-107 red past its 2,895 kPa alarm](docs/screenshots/native-revB-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments and "not connected" on the rest](docs/screenshots/native-sheet0-not-connected.png) |
+| ![Current plant overview in normal replay: grey values beside each unit on the process flow](docs/screenshots/native-revD-overview-normal.png) | ![Current plant overview at the pressure alarm: values outside their normal band amber, reactor pressure PT-107 red past its 2,895 kPa alarm](docs/screenshots/native-revD-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments and "not connected" on the rest](docs/screenshots/native-sheet0-not-connected.png) |
 
-The two overview screenshots are from the revision B build in the local disposable gateway (normal: the 2026-10-28 acceptance run; fault: captured 2026-10-29 from the same build); the extracted-drawing screenshot is from the 2026-10-13 run.
+The two overview screenshots are from the revision D acceptance run in the local disposable gateway (2026-10-29); the extracted-drawing screenshot is from the 2026-10-13 run.
 
 **Three ways to run it:**
 - **Historical Docker demo:** [the Docker demo](docker/README.md) needs Docker Desktop and accepts the Ignition
@@ -558,6 +560,34 @@ python scripts/te_live_check.py out/te_pid/twin/codex-clean-r1/plant_model.json 
 
 **10. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.
+
+## What's a tool and what's a record
+
+Three kinds of thing live in this repository. Only the first is meant to be pointed at your own drawings.
+
+**Tools for your own drawings and systems.** Prototypes: tested on public drawings only, never on a plant's own.
+The order to use them in, with the inputs a plant has to supply, is [docs/REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
+
+| Step | Scripts | Guide |
+|---|---|---|
+| Extract a drawing | `site_extraction_workflow.py` (one PNG, prepare / execute / collect), `import_site_drawing.py` (local intake check); for a batch, `run_extraction.py` then `trace_connections.py` | [SITE_EXTRACTION_WORKFLOW.md](docs/SITE_EXTRACTION_WORKFLOW.md) |
+| Build the asset model and exports | `build_twin.py` (risk-ranked review queue), `generate.py` (Ignition tags, PI AF sheet, SVG, review sheet) | [TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) |
+| Review and map to data | `apply_review.py`, `review_kit.py`, `map_points.py`, `map_pi_points.py`, `check_pi_export.py` | [REVIEW_LOOP.md](docs/REVIEW_LOOP.md), [PI_MAPPING.md](docs/PI_MAPPING.md) |
+| Load and verify in Ignition | `ignition/acceptance_preflight.py`, `ignition/build_gateway.py`, `ignition/verify_gateway.py`, `ignition/acceptance/` | [IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md), [IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md) |
+| Score an extraction against your own answer key | `score_pid2graph.py` (keys in the PID2Graph GraphML format), `scorecard.py` | [EVALUATION.md](docs/EVALUATION.md) |
+
+**Checks on this repository.** `check_claims.py`, `pipeline.py status` and `run_tests.py`. Nothing to configure;
+see [REVIEWING.md](docs/REVIEWING.md).
+
+**This project's research record.** Read it, or rerun it to reproduce a result; it isn't built for other inputs.
+- Scripts that produced one result each: the Tennessee Eastman work (`verify_te_*.py`, `te_*.py`,
+  `draw_pid_from_model.py`, `retag_te_valves.py`, `normal_bands.py`, `fault_detection_eval.py`), the Bayer unit
+  (`bayer_*.py`, `digitize_bayer_fig11.py`, `compare_bayer_fig10.py`), the evaluation rounds (`*.ps1`,
+  `degrade_scans.py`, `score_tags.py`, `replicate_stats.py`, `adapt_dexpi.py`), the drawings-only OPEN100 work, the
+  3D and browser tours, and the demo scripts.
+- Outputs: `out/` (scores, exports, receipts), `drafts/` (proof-of-concept pages, tours and stills), the generated
+  sheets in `data/te_pid/` and `data/bayer_rt/`, and the [journal](docs/JOURNAL.md). `pipeline.py` regenerates
+  them; edit the inputs, never an output.
 
 ## Repository map
 
