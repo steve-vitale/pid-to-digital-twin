@@ -37,7 +37,7 @@ All stills, both themes and both widths, are in [shots/](shots/).
 | Cooling water and steam lines | inferred where a valve's own description names the utility | **Inferred**, labelled so; not streams in the model |
 | LOTO isolation points | `orientation_tour.loto_mockup` (the Blender mockup's list) | **Inferred** from the seed model; not a procedure |
 | Plan positions | the 2D seed layout | **Placeholder** (relative arrangement, not a plot plan) |
-| Sizes, heights, nozzles, pipe routes, valve bodies, cutaway internals (agitator, coil, trays, demister, tube bundle; the compressor and header are not cut away) | `build.mjs` | **Placeholder**, chosen to make each machine recognisable |
+| Sizes, heights, nozzles, pipe routes, overhead rack, valve bodies, cutaway internals (agitator, coil, trays, demister, tube bundle, header bore and compressor impeller) | `build.mjs` | **Placeholder**, chosen to make each machine recognisable; the radial impeller is an illustration, not a verified compressor type |
 
 ## Lockout/tagout mockup
 
@@ -85,7 +85,8 @@ python scripts/pipeline.py rebuild --from te.interactive_tour
 ```
 
 or step by step: `python scripts/export_interactive_tour.py`, `node drafts/interactive-tour/build.mjs --audit`,
-`node drafts/interactive-tour/build.mjs --light`, `node drafts/interactive-tour/verify.mjs`. Needs Node.js 20.10+ and,
+`node drafts/interactive-tour/build.mjs --light`, `node --test drafts/interactive-tour/review-geometry.test.mjs`,
+`node drafts/interactive-tour/verify.mjs`. Needs Node.js 20.10+ and,
 for `verify.mjs`, a Chrome or Chromium (`CHROME_PATH`, or a Playwright browser cache). The pages are written to
 `out/interactive_tour/te-tour.html` and `te-tour-light.html`. Copies of the current build are committed in [page/](page/) (open `page/te-tour.html` in a browser after downloading the repository); they embed the replay under the University of Illinois notice in [TE_DATA_NOTICE.txt](TE_DATA_NOTICE.txt).
 Open them directly in a browser: no server and no network are needed.
@@ -97,6 +98,12 @@ Drawing technique, kit and audit adapted from [anatomy](https://github.com/where
 headless-Chrome scripts. See [NOTICE.md](../../NOTICE.md). Labels in Atkinson Hyperlegible (SIL OFL 1.1).
 
 ## Open questions for review
+
+The 2026-10-15 review cut gives V-101 and K-101 on-body callout dots, keeps their short equipment names on phones,
+adds a framed overhead recycle corridor, simplifies the separator-to-compressor suction to one rise and one drop,
+and opens the feed header and compressor casing. The stream graph, tag ownership and recorded replay are unchanged.
+The [header](shots/header-1440-light.jpg), [separator](shots/separator-1440-dark.jpg) and
+[compressor](shots/compressor-1440-dark.jpg) focus views are included at 1440 and 390 px in both themes.
 
 - Is the cut-away machine picture useful for orientation, or does it invite reading sizes and positions that are
   placeholders?

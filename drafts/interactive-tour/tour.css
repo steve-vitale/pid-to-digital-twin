@@ -56,6 +56,7 @@ a{color:var(--tour-link)}
 .tour-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .tour-leaders{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .tour-leaders line{stroke:var(--tour-pill-line);stroke-width:1}
+.tour-leaders circle{fill:var(--tour-pill-fg);stroke:var(--tour-pill-bg);stroke-width:1}
 .tour-pill{position:absolute;left:0;top:0;white-space:nowrap;padding:2px 7px;border:1px solid var(--tour-pill-line);background:var(--tour-pill-bg);color:var(--tour-pill-fg);font-size:13px;line-height:18px;border-radius:9px;pointer-events:auto;cursor:pointer}
 .tour-pill[data-kind="unit"]{font-size:14px;border-radius:3px;border-color:var(--anatomy-mid)}
 .tour-pill[data-kind="unit"][data-focus]{border-color:var(--tour-focus);box-shadow:0 0 0 1px var(--tour-focus)}

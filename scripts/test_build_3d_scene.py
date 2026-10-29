@@ -224,6 +224,17 @@ def main():
           sorted(b['stream'] for b in scene['boundaries']) == sorted(s['id'] for s in model['streams'] if 'BL' in (s['from'], s['to'])))
     check('every equipment size is declared a placeholder', all(e['geometry_status'].startswith('placeholder') for e in scene['equipment']))
     check('every pipe route is declared a placeholder', all(p['route_status'].startswith('placeholder') for p in scene['pipes']))
+    check('recycle return has a paired-column overhead corridor, explicitly placeholder',
+          scene.get('rack', {}).get('status', '').startswith('placeholder') and
+          len(scene.get('rack', {}).get('stations', [])) >= 3)
+    rendered_source = b3.blender_script(b3.tour_scene(scene, model, layout, bands, alarms))
+    check('header and compressor render real cutaway shells with illustrative internals',
+          'cutaway_shell(uid + "_header"' in rendered_source and
+          'cutaway_shell(uid + "_casing"' in rendered_source and '"_impeller_vane' in rendered_source)
+    for uid in ('V-101', 'K-101'):
+        eq = next(e for e in scene['equipment'] if e['id'] == uid)
+        label = next(l for l in scene['labels'] if l['id'] == 'unit:' + uid)
+        check(uid + ' callout terminates on its machine, below its top extent', label['anchor'][2] < eq['extent'][2])
     check('scene carries the plain-language disclaimer', 'not plant geometry' in scene['disclaimer'])
     check('plan positions come from the 2D seed layout',
           all(abs(e['position'][0] - u['layout']['x'] * b3.SCALE) < 1e-3 for e, u in zip(scene['equipment'], model['units'])))

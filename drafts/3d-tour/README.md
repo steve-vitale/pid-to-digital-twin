@@ -6,20 +6,31 @@ Tennessee Eastman replay, not a live plant. The narration and the tour's short f
 assistance from the data files; each purpose sentence comes from `data/te_unit_purposes.json`, which cites the
 simulator lines it restates. Nothing here has been reviewed by an operator.
 
-The stills were re-rendered on 2026-10-28 after the control valves were renumbered to their loops (journal entry 51;
-`python scripts/pipeline.py rebuild --from te.tour`, with `BLENDER_EXE` set; Blender 5.2.2, stills only, no video).
-They show the source-checked topology (the purge leaves from the separator V-101, with FI-110, FV-110 and AI-129)
-and the Atkinson Hyperlegible label font. The OCR read-back files (`label_truth.json`, `ocr_readback.json`) still
-describe the 2026-10-13 stills and their revision-A tags; they were not re-run. Twelve
-stills were rendered and measured; the five below are committed. The render verifier failed none of its 17 checks on
+The stills were re-rendered on 2026-10-28, after the control valves were renumbered to their loops (journal entry 51),
+with the review corrections of 2026-10-15 re-applied (V-101 and K-101 callouts, the overhead rack corridor, the
+header bore and an illustrative compressor impeller) (`python scripts/pipeline.py rebuild --from te.tour`, with
+`BLENDER_EXE` set; Blender 5.2.2, stills only, no video). They show the source-checked topology (the purge leaves
+from the separator V-101, with FI-110, FV-110 and AI-129) and the Atkinson Hyperlegible label font. The OCR
+read-back files (`label_truth.json`, `ocr_readback.json`) still describe the 2026-10-13 stills and their
+revision-A tags; they were not re-run. Twelve stills were rendered and measured; eight review JPEGs are committed.
+The render verifier failed none of its 17 checks on
 all twelve: 15 pass, and 2 are informational (drawing coverage, and OCR, which was not run). See
-[verification.md](verification.md), the label boxes in [label_boxes.json](label_boxes.json), and the old label rules
-re-measured on the same scene in [before/](before/label_boxes.json) (two of those stills are in `before/` too).
+[verification.md](verification.md) and the label boxes in [label_boxes.json](label_boxes.json). The 2026-10-13
+[before/](before/label_boxes.json) evidence remains a historical control of the old label rules; it was not re-rendered
+with the new cutaway geometry.
+
+This review cut anchors the V-101 and K-101 callouts on their own machine bodies, adds a paired-column overhead
+recycle corridor, and opens the header bore and compressor casing. The radial impeller and all rack dimensions are
+illustrative placeholders, not verified plant construction or compressor-type evidence. Purpose cards sit in front
+of nearby geometry; the render audit now checks them for occlusion by ghosted parts as well.
 
 | Still | What it shows |
 |---|---|
 | ![overview](00_overview_normal.jpg) | Elevated overview, normal replay |
 | ![reactor](02_r-101_normal.jpg) | Reactor stop: purpose card, key tags, operating alarm, public-incident citation |
+| ![header](01_u-100_normal.jpg) | Feed header with an illustrative open bore |
+| ![separator](04_v-101_normal.jpg) | V-101 callout ending on the separator body |
+| ![compressor](05_k-101_normal.jpg) | K-101 cutaway with an illustrative radial impeller |
 | ![fault](21_overview_fault_alarm.jpg) | Fault 6 at the reactor pressure high alarm (+294 min) |
 | ![flow](30_flow_legend.jpg) | Process flow coloured by service, arrows showing direction |
 | ![loto](40_loto_mockup.jpg) | Lockout/tagout view design mockup. Isolation points are inferred from the seed model; this is not a procedure. A real LOTO procedure comes from the site's energy-control program (OSHA 1910.147), its verified P&IDs and an authorized person. |

@@ -77,6 +77,10 @@ const P = (() => {
 const V = G.viewOf(P);
 const KS = G.scaleOf(P);
 const at = (p) => k.iso(p, P);
+const segmentDistance2 = (q, a, b) => {
+  const t = Math.max(0, Math.min(1, ((q[0] - a[0]) * (b[0] - a[0]) + (q[1] - a[1]) * (b[1] - a[1])) / ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2 || 1)));
+  return Math.hypot(q[0] - a[0] - t * (b[0] - a[0]), q[1] - a[1] - t * (b[1] - a[1]));
+};
 const S = (paths, style) => k.solidSvg(paths, style);
 const Ln = (d, style) => k.lineSvg(d, style);
 const Dots = (points, style) => k.dotsSvg(points, style);
@@ -246,8 +250,9 @@ function vessel(u) {
   g.hosts.head = head;
   vcyl(u.id, x, y, Rv, zb, zt + h);
   g.top = zt + h;
-  g.label = [x, y, zt + h + (spec.agitator ? 22 : 4)];
-  g.focus = [[x - Rv - 8, y - Rv - 8, 0], [x + Rv + 8, y + Rv + 8, g.label[2]]];
+  // Callout leaders terminate on the shell, not in the empty space above a neighbouring machine.
+  g.label = [x, y, zt - 4];
+  g.focus = [[x - Rv - 8, y - Rv - 8, 0], [x + Rv + 8, y + Rv + 8, zt + h + (spec.agitator ? 22 : 4)]];
   if (spec.agitator) agitator(u, F, g);
   vesselDetails(u, F, g, spec);
 }
@@ -404,13 +409,18 @@ function header(u) {
     boxAt(u.id, [x - 2.6, y0 + s - 2, 0], [x + 2.6, y0 + s + 2, spec.zc - spec.r], { tone: "mid" }, { name: `${u.id}.support` });
   }
   const r = spec.r;
-  const shell = turned(u.id, F, [[0, r], [spec.L, r]], { tone: "hi" }, { name: `${u.id}.header`, inner: Ln([12, spec.L - 12].map((s) => G.arcOf(F, s, r, P)).join(""), { tone: "faint" }) });
+  const bore = windowPath(F, r, 5, spec.L - 5, Math.atan2(G.dot3(V, F.v), G.dot3(V, F.u)), 58 * DEG);
+  clips.push(`<clipPath id="win-${u.id}"><path d="${poly(bore, true)}"/></clipPath>`);
+  const boreSvg = `<g clip-path="url(#win-${u.id})" data-internal="header-bore"><path class="tour-cavity" d="${poly(bore, true)}"/>`
+    + Ln([10, 20, 30, 40].map((s) => G.arcOf(F, s, r - .6, P, { inward: true })).join(""), { tone: "mid" })
+    + Ln(poly([G.pointOf(F, 4, 0, 0), G.pointOf(F, spec.L - 4, 0, 0)]), { tone: "hi" }) + `</g><path class="iso-line tour-cut" data-tone="hi" d="${poly(bore, true)}"/>`;
+  const shell = turned(u.id, F, [[0, r], [spec.L, r]], { tone: "hi" }, { name: `${u.id}.header`, extra: boreSvg });
   const capR = (s) => r * Math.sqrt(Math.max(0, 1 - (s / (r / 2)) ** 2));
   turned(u.id, F, [[spec.L, r], [spec.L + (r / 2) * 0.985, capR((r / 2) * 0.985)]], { tone: "hi" }, { name: `${u.id}.cap`, smooth: { radius: (s) => capR(s - spec.L), slope: (s) => { const t = Math.min(0.999, (s - spec.L) / (r / 2)); return (-r * t) / ((r / 2) * Math.sqrt(1 - t * t)); } } });
   turned(u.id, F, [[-(r / 2) * 0.985, capR((r / 2) * 0.985)], [0, r]], { tone: "hi" }, { name: `${u.id}.cap`, smooth: { radius: (s) => capR(-s), slope: (s) => { const t = Math.min(0.999, -s / (r / 2)); return (r * t) / ((r / 2) * Math.sqrt(1 - t * t)); } } });
   g.hosts.shell = shell;
   VOLUMES.push({ owner: u.id, kind: "box", min: [x - r, y0 - r, spec.zc - r], max: [x + r, y0 + spec.L + r, spec.zc + r] });
-  g.label = [x, cy, spec.zc + 12];
+  g.label = [x, cy, spec.zc];
   g.focus = [[x - 14, y0 - 10, 0], [x + 14, y0 + spec.L + 10, spec.zc + 14]];
 }
 
@@ -477,7 +487,17 @@ function compressor(u) {
   const casingProfile = [[-3.2, 0], [-3.2, 8.6], ...Array.from({ length: 13 }, (_, i) => { const s0 = -3.2 + (6.4 * i) / 12; return [s0, bulge(s0), i && i < 12 ? 1 : 0]; }), [3.2, 8.6], [3.2, 0]];
   const casing = record(A.body(F, casingProfile, { name: `${u.id}.casing`, owner: u.id }));
   const faceDots = Dots(G.dotsOf(F, -3.2, 7.4, 12, P, { fade: [0.04, 0.42] }), { size: 0.4 });
-  put(u.id, F.o, S(G.lathe(casingProfile, F, P, { steps: 64, smooth: { slope: bulgeSlope, rows: 4 } }), { tone: "hi" }) + faceDots, { name: `${u.id}.casing`, shapes: [casing] });
+  // Illustrative radial impeller behind a front-cover opening; the benchmark does not specify compressor internals.
+  const opening = G.circleOf(F, -3.24, 6.6, P, 48);
+  clips.push(`<clipPath id="win-${u.id}"><path d="${opening}"/></clipPath>`);
+  const vanes = Array.from({ length: 9 }, (_, i) => {
+    const a = i * Math.PI * 2 / 9;
+    return poly([G.pointOf(F, -3.3, 1.5, a), G.pointOf(F, -3.3, 3.8, a + .35), G.pointOf(F, -3.3, 5.8, a + .55)]);
+  }).join("");
+  const wheel = `<g clip-path="url(#win-${u.id})" data-internal="compressor-impeller"><path class="tour-cavity" d="${opening}"/>`
+    + Ln(G.circleOf(F, -3.3, 5.8, P, 48) + vanes, { tone: "hi" })
+    + S(G.disc(-3.5, -3.3, 1.5, F, P), { tone: "hi" }) + `</g><path class="iso-line tour-cut" data-tone="hi" d="${opening}"/>`;
+  put(u.id, F.o, S(G.lathe(casingProfile, F, P, { steps: 64, smooth: { slope: bulgeSlope, rows: 4 } }), { tone: "hi" }) + faceDots + wheel, { name: `${u.id}.casing`, shapes: [casing] });
   g.hosts.casing = casing;
   discAt(u.id, F, 3.2, 7, 3, { tone: "mid" }, { name: `${u.id}.bearing` });
   discAt(u.id, F, 7, 11, 1.1, { tone: "hi" }, { name: `${u.id}.shaft` });
@@ -489,7 +509,7 @@ function compressor(u) {
   VOLUMES.push({ owner: u.id, kind: "box", min: [x - 10.2, yc - 31, 0], max: [x + 10.2, yc + 3.6, zc + 10.2] });
   g.motor = { at: [x, yc - 20, zc + 10], shape: motor };
   g.F = F;
-  g.label = [x, yc - 10, zc + 22];
+  g.label = [x, yc, zc + 5];
   g.focus = [[x - 14, yc - 34, 0], [x + 14, yc + 12, zc + 22]];
 }
 
@@ -754,9 +774,22 @@ function pinches(line, r) {
   return false;
 }
 const LANES = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 62, 66, 70, 74, 78, 82, 86, 90, 95, 105, 115, 128, 136];
+// A deliberate overhead corridor for the long recycle return. Only its connections are source-backed.
+const RACK = { status: "inferred placeholder structure, not a plant layout", x: [45, 195], y: [26, 60], z: 74, frames: [], rails: [] };
+function bendsOverRack(points) {
+  return points.slice(1, -1).some((p) => RACK.y.some((y) => segmentDistance2(at(p), at([RACK.x[0], y, RACK.z - RP - 1.5]), at([RACK.x[1], y, RACK.z - RP - 1.5])) < (RP + .8) * KS + 6));
+}
 function route(id, a, b, r, owners, need) {
   const stub = (port, len) => G.add3(port.p, G.mul3(port.axis, len));
   let best = null;
+  if (id === "S8b") {
+    const shoulder = G.add3(a.p, [0, 0, 12]);
+    const riser = G.add3(shoulder, [-24, 0, 0]);
+    const simple = [a.p, shoulder, riser, [riser[0], riser[1], RACK.z], [b.p[0], a.p[1], RACK.z], [b.p[0], b.p[1], RACK.z], b.p];
+    const line = G.fillet(simple, Math.max(r * 5.6, 6), 14, { P, tube: r });
+    if (!pinches(line, r) && clearOf(line, r, [a, b], owners)) best = { simple, line, score: -1 };
+    else throw new Error(`recycle corridor obstructed: ${WHY.slice(-4).join("; ")}`);
+  }
   const escapes = (port, toward) => {
     if (Math.abs(port.axis[2]) < 0.5) return [null];
     const dx = toward[0] - port.p[0];
@@ -768,7 +801,7 @@ function route(id, a, b, r, owners, need) {
     }
     return out;
   };
-  for (const lenA of [6, 11, 17, 24]) {
+  for (const lenA of best ? [] : [6, 11, 17, 24]) {
     for (const lenB of [6, 11, 17, 24]) {
       const pa0 = stub(a, lenA);
       const pb0 = stub(b, lenB);
@@ -795,8 +828,13 @@ function route(id, a, b, r, owners, need) {
             const d2 = G.unit3(G.sub3(clean[i + 1], p));
             return G.dot3(d1, d2) < 0.999;
           });
+          if (bendsOverRack(simple)) continue; // a projected bend must not read as a joint on a rack beam
           // no hooks: two vertical legs within three legs of each other may not run in opposite directions
           const vert = simple.slice(1).map((p, i) => { const d = p[2] - simple[i][2]; const h = Math.hypot(p[0] - simple[i][0], p[1] - simple[i][1]); return Math.abs(d) > h ? Math.sign(d) : 0; });
+          if (id === "S8") {
+            const directions = vert.filter(Boolean);
+            if (simple.length > 6 || directions.length > 2 || directions.filter((d, i) => i && d !== directions[i - 1]).length > 1) continue;
+          }
           const hook = vert.some((v, i) => v && vert.slice(i + 1, i + 4).some((w, j) => w === -v && Math.hypot(simple[i + 1 + j][0] - simple[i + 1][0], simple[i + 1 + j][1] - simple[i + 1][1]) < 16));
           if (hook) continue;
           // no leg may reverse straight back on the previous one
@@ -960,7 +998,8 @@ function drawLine(id, kind, service, unit, ports, r, { valve } = {}) {
     .flatMap(([a0, b0]) => { const cut = []; let from = a0; for (const [g0, g1] of [...gaps].sort((p, q) => p[0] - q[0])) { if (g1 < from || g0 > b0) continue; if (g0 - 10 > from) cut.push([from, g0 - 10]); from = Math.max(from, g1 + 10); } if (b0 > from) cut.push([from, b0]); return cut; });
   const breaks = gaps.flatMap(([g0, g1]) => [g0 - 1.5, g1 + 1.5]).filter((b) => b > 0.5 && b < total - 0.5);
   const pieces = tubePieces(line, r, P, { maxLength: 8, spacing: 2, gaps, breaks, caps: true });
-  R.route(id, line, r, { owner: id, gaps, ends: [true, true], rims: [r, r], piece: unit, touch: [`${id}.support*`] });
+  // Only the supporting crossbeams intentionally touch the recycle pipe; columns and rails keep full clearance checks.
+  R.route(id, line, r, { owner: id, gaps, ends: [true, true], rims: [r, r], piece: unit, touch: [`${id}.support*`, ...(id === "S8b" ? [(name) => name.startsWith("rack.") && name.endsWith(".crossbeam")] : [])] });
   const marks = chevrons(line, total, service, gaps);
   // per chunk: the tube, then its flow pulse and chevrons, so pulses sit in the tube's own depth slot
   let screenRun = 0;
@@ -996,7 +1035,7 @@ for (const [uid, u] of Object.entries(UTIL)) {
   JOBS.push({ id: uid, a: u.from, b: u.to, r: RU, owners, need: { valve: u.data.role !== "return" && Boolean(ft && ft.connected), markers: 0 } });
 }
 // short lines first: their ends are fixed by the nozzles, and the long runs then route around them
-JOBS.sort((p, q) => G.len3(G.sub3(p.a.p, p.b.p)) - G.len3(G.sub3(q.a.p, q.b.p)));
+JOBS.sort((p, q) => (p.id === "S8b" ? -1 : q.id === "S8b" ? 1 : G.len3(G.sub3(p.a.p, p.b.p)) - G.len3(G.sub3(q.a.p, q.b.p))));
 const PLANS = planRoutes();
 for (const s of DATA.streams) {
   const fe = finalOnStream(s.id);
@@ -1129,9 +1168,28 @@ for (const t of DATA.tags) {
 // ------------------------------------------------------------------ pipe supports under elevated runs
 // A T-post from the ground to the underside of every long horizontal run above 22 units, every ~36 units, where the
 // post and its foot are clear of every machine, other line, valve and marker. Placeholder structure; it holds the
-// pipe for the audit's support check and reads as a pipe rack.
+// pipe for the audit's support check. The long recycle line instead rests on a framed overhead corridor.
 const SUPPORTS = [];
+const rackTop = RACK.z - RP;
+for (let x = RACK.x[0]; x <= RACK.x[1]; x += 5) {
+  if (RACK.frames.some((f) => Math.abs(f.crossbeam[0] - x) < 35)) continue;
+  const segments = RACK.y.map((y) => [at([x, y, 0]), at([x, y, rackTop])]);
+  segments.push(RACK.y.map((y) => at([x, y, rackTop])));
+  if (ROUTED.some((o) => o.corners.some((p) => segments.some(([a, b]) => segmentDistance2(p, a, b) < (o.r + .8) * KS + 5)))) continue;
+  const columns = RACK.y.map((y) => [x, y, 0]);
+  for (const [i, y] of RACK.y.entries()) {
+    boxAt("rack", [x - 2, y - 2, 0], [x + 2, y + 2, .8], { tone: "lo" }, { name: `rack.${x}.foot${i}`, owner: "rack" });
+    boxAt("rack", [x - .65, y - .65, .8], [x + .65, y + .65, rackTop - 1.5], { tone: "mid" }, { name: `rack.${x}.column${i}`, owner: "rack" });
+  }
+  boxAt("rack", [x - .8, RACK.y[0] - .65, rackTop - 1.5], [x + .8, RACK.y[1] + .65, rackTop], { tone: "mid" }, { name: `rack.${x}.crossbeam`, owner: "rack" });
+  RACK.frames.push({ columns, crossbeam: [x, (RACK.y[0] + RACK.y[1]) / 2, rackTop] });
+}
+for (const [i, y] of RACK.y.entries()) {
+  boxAt("rack", [RACK.x[0], y - .55, rackTop - 3], [RACK.x[1], y + .55, rackTop - 1.5], { tone: "mid" }, { name: `rack.rail${i}`, owner: "rack" });
+  RACK.rails.push([[RACK.x[0], y, rackTop - 1.5], [RACK.x[1], y, rackTop - 1.5]]);
+}
 for (const f of FLOW) {
+  if (f.id === "S8b") continue;
   const r = f.kind === "utility" ? RU : RP;
   for (const [a0, b0, dir] of straights(f.line, 30)) {
     const z = G.pointAlong(f.line, a0)[2];
@@ -1144,8 +1202,7 @@ for (const f of FLOW) {
       for (let zz = 1; zz < top - 0.5 && clear; zz += 1.5) clear = ok([p[0], p[1], zz]);
       // keep the post off other lines on screen too (a post drawn across a bend reads as a joint)
       const a2 = at([p[0], p[1], 0]), b2 = at([p[0], p[1], top]);
-      const segDist = (q) => { const t = Math.max(0, Math.min(1, ((q[0] - a2[0]) * (b2[0] - a2[0]) + (q[1] - a2[1]) * (b2[1] - a2[1])) / ((b2[0] - a2[0]) ** 2 + (b2[1] - a2[1]) ** 2 || 1))); return Math.hypot(q[0] - a2[0] - t * (b2[0] - a2[0]), q[1] - a2[1] - t * (b2[1] - a2[1])); };
-      if (clear) clear = ROUTED.every((o) => o.id === f.id || o.corners.every((w) => segDist(w) > (o.r + 1.5) * KS + 4));
+      if (clear) clear = ROUTED.every((o) => o.id === f.id || o.corners.every((w) => segmentDistance2(w, a2, b2) > (o.r + 1.5) * KS + 4));
       if (!clear) continue;
       const id = `${f.id}.support${SUPPORTS.length}`;
       const tan = G.tangentAlong(f.line, s0);
@@ -1244,6 +1301,7 @@ const sceneOut = {
   units: unitGeom, markers: MARKERS.map(({ centre, ...rest }) => rest), loto: lotoPoints,
   posts: Object.values(POSTS).map((p) => ({ id: p.id, unit: p.unit, at: at(p.port.p), label: p.label })),
   windows: liquids,
+  rack: RACK, routes: Object.fromEntries(Object.entries(PLANS).map(([id, p]) => [id, p.simple])),
 };
 mkdirSync(OUT, { recursive: true });
 writeFileSync(join(OUT, THEME === "light" ? "scene-light.json" : "scene.json"), JSON.stringify(sceneOut, null, 1));

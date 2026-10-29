@@ -190,7 +190,8 @@ function wanted() {
   for (const id of D.tour_order) {
     if (focus && id !== focus) continue;
     const u = unitOf[id];
-    out.push({ id: `unit:${id}`, kind: "unit", unit: id, at: L.units[id].label, text: narrow && !focus ? id : `${id} ${u.name}`, focus: id === focus, priority: 3 });
+    const short = u.kind === "separator" ? "Separator" : u.kind === "compressor" ? "Compressor" : "";
+    out.push({ id: `unit:${id}`, kind: "unit", unit: id, at: L.units[id].label, text: narrow && !focus ? `${id}${short ? ` ${short}` : ""}` : `${id} ${u.name}`, focus: id === focus, priority: 3 });
   }
   if (S.mode === "flow") {
     const show = new Set();
@@ -327,7 +328,7 @@ function layoutLabels() {
     placed.push(spot);
     const ex = Math.max(spot.x, Math.min(spot.x + spot.w, ax));
     const ey = Math.max(spot.y, Math.min(spot.y + spot.h, ay));
-    if (Math.hypot(ex - ax, ey - ay) > 5) leaders += `<line x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}"/>`;
+    if (w.kind === "unit" || Math.hypot(ex - ax, ey - ay) > 5) leaders += `<g${w.kind === "unit" ? ` data-leader-unit="${w.unit}"` : ""}><line x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}"/>${w.kind === "unit" ? `<circle cx="${ax.toFixed(1)}" cy="${ay.toFixed(1)}" r="2.5"/>` : ""}</g>`;
   });
   leaderSvg.innerHTML = leaders;
 }

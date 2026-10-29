@@ -2801,3 +2801,28 @@ key. Then a convention can be added everywhere at once without anyone mistaking 
 **At your plant:** when you generate drawings, apply your drafting standard's conventions (valve stations, spec
 breaks, vents and drains at the high and low points your routing defines) as declared rules, not hand edits, and walk
 the result down before anyone treats it as a drawing of record.
+
+---
+
+## 53. Carry the October 15 tour review onto the renumbered build
+
+**What:** 2026-10-28. A review of the draft 3D and browser tours on October 15 found confusing callouts on the
+separator and compressor, no proper overhead corridor for the recycle, an S-bend, and no cutaway into the feed header
+or compressor. Those corrections were made in a separate working copy on the old main branch and never merged. They
+are now applied on top of revision C's tags.
+
+**How:**
+- Only the source changes were carried over (the tour builders, the browser tour's code, styles and verifier, the
+  Blender template and the 3D scene builder, their tests and READMEs, plus a new geometry test). They were taken as a
+  patch against the old base and applied with a three-way merge. Every output (pages, stills, audits, label boxes)
+  was then rebuilt by the pipeline, not copied, so it carries the new valve tags.
+- One conflict, in the 3D tour README: both the October 15 review and the renumbering had rewritten the same
+  paragraph. The merged text keeps both. The tour stage now publishes the eight review stills, not five.
+- The 3D scene builder is shared with the OPEN100 structure-only scene, so that scene was re-rendered too.
+
+**Result:** the browser tour's verifier passes 38 checks with 5 informational and none failing; the 3D render verifier
+fails none; the new geometry test passes; all 42 pipeline stages are fresh. The impeller, rack dimensions and LOTO
+locations remain illustrative placeholders, and the stills still need the owner's approval before any video.
+
+**Lesson:** corrections made outside the main line are a liability until they're merged. Carry the source, not the
+outputs, and let the pipeline rebuild.

@@ -302,6 +302,44 @@ def steel(obj, unit):
     return part(obj, unit, "steel", "steel", COLORS["steel"])
 
 
+def cutaway_shell(name, radius, length, location, opening=math.pi / 2):
+    """Illustrative hollow shell along X, with the upper-front quarter removed; not measured internals."""
+    n, inner = 48, radius * .84
+    angles = [math.pi / 2 + opening + (2 * math.pi - opening) * i / n for i in range(n + 1)]
+    verts = [(s, r * math.cos(a), r * math.sin(a))
+             for s, r in ((-length / 2, radius), (length / 2, radius), (-length / 2, inner), (length / 2, inner))
+             for a in angles]
+    m = n + 1
+    faces = []
+    for i in range(n):
+        faces += [(i, i + 1, m + i + 1, m + i), (2*m + i, 3*m + i, 3*m + i + 1, 2*m + i + 1),
+                  (i, 2*m + i, 2*m + i + 1, i + 1), (m + i, m + i + 1, 3*m + i + 1, 3*m + i)]
+    for i in (0, n):
+        faces.append((i, m + i, 3*m + i, 2*m + i))
+    mesh = bpy.data.meshes.new(name + "_cutaway_mesh")
+    mesh.from_pydata(verts, [], faces)
+    mesh.update()
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = location
+    obj["geometry"] = "placeholder cutaway; illustrative internals, not a plant or compressor-type claim"
+    return link(obj)
+
+
+def build_rack(rack):
+    if not rack:
+        return
+    y0, y1 = rack["y"]
+    top = rack["z"]
+    for i, x in enumerate(rack["stations"]):
+        for j, y in enumerate((y0, y1)):
+            steel(box("rack_%d_column%d" % (i, j), (.13, .13, top - .15), (x, y, (top - .15) / 2)), "rack")
+            steel(box("rack_%d_foot%d" % (i, j), (.4, .4, .08), (x, y, .04)), "rack")
+        steel(box("rack_%d_crossbeam" % i, (.16, y1 - y0 + .16, .15), (x, (y0 + y1) / 2, top - .075)), "rack")
+    for j, y in enumerate((y0, y1)):
+        steel(box("rack_rail%d" % j, (rack["x"][1] - rack["x"][0], .12, .15),
+                  (sum(rack["x"]) / 2, y, top - .225)), "rack")
+
+
 def build_nozzles(e):
     """Short radial nozzle with a flange where each stream meets the shell (placeholder positions)."""
     x, y, _ = e["position"]
@@ -361,7 +399,7 @@ def build_equipment_v2(e):
             steel(cylinder("%s_nozzle%d" % (uid, k), 0.12, 0.5, (x + xo, y, z + r + 0.2)), uid)
     elif shape == "header":
         z = e["nozzle_z"]
-        part(cylinder(uid + "_header", r, length, (x, y, z), (0, math.pi / 2, 0)), uid, kind)
+        part(cutaway_shell(uid + "_header", r, length, (x, y, z)), uid, kind)
         for s in (-1, 1):
             part(sphere("%s_cap%d" % (uid, s), r, (x + s * length / 2, y, z), scale=(0.5, 1, 1)), uid, kind)
             steel(box("%s_support%d" % (uid, s), (0.25, 0.25, z - r), (x + s * length / 3, y, (z - r) / 2)), uid)
@@ -372,7 +410,14 @@ def build_equipment_v2(e):
         base_w = length + 1.2
         steel(box(uid + "_baseplate", (base_w, d + 0.4, 0.25), (x, y, 0.125)), uid)
         cz = 0.25 + r
-        part(cylinder(uid + "_casing", r, 0.9, (x - 0.7, y, cz), (0, math.pi / 2, 0)), uid, kind)
+        part(cutaway_shell(uid + "_casing", r, .9, (x - .7, y, cz), opening=math.pi), uid, kind)
+        steel(cylinder(uid + "_impeller", r * .7, .08, (x - .7, y, cz), (0, math.pi / 2, 0)), uid)
+        for i in range(9):
+            a = i * 2 * math.pi / 9
+            part(segment(uid + "_impeller_vane%d" % i,
+                         (x - .62, y + r * .2 * math.cos(a), cz + r * .2 * math.sin(a)),
+                         (x - .62, y + r * .72 * math.cos(a + .4), cz + r * .72 * math.sin(a + .4)), .035),
+                 uid, kind, "illustrative_impeller", (.68, .60, .34, 1))
         part(torus(uid + "_volute", r * 0.95, 0.22, (x - 0.7, y, cz)), uid, kind)
         bpy.context.active_object.rotation_euler = (0, math.pi / 2, 0)
         steel(cylinder(uid + "_suction", 0.18, 0.6, (x - 0.7, y, cz + r + 0.3)), uid)
@@ -568,6 +613,7 @@ def main(argv):
             build_equipment_v2(e)
         for p in SCENE["pipes"]:
             build_pipe_v2(p)
+        build_rack(SCENE.get("rack"))
         for u in SCENE.get("utilities", []):
             build_utility(u)
         for v in SCENE.get("valves", []):
@@ -633,7 +679,9 @@ def main(argv):
     still_w, still_h = SCENE["still_resolution"]
     scene.render.resolution_x, scene.render.resolution_y = still_w, still_h
     scene.render.resolution_percentage = 100
-    half_w = 3.0 * (SCENE["camera_sensor_mm"] / 2.0) / SCENE["camera_lens_mm"]
+    # Keep cards close to the camera: ghosted near-field piping must not paint over the text.
+    overlay_depth = 3.0 if LEGACY else .3
+    half_w = overlay_depth * (SCENE["camera_sensor_mm"] / 2.0) / SCENE["camera_lens_mm"]
 
     # ------------------------------------------------------------ 2D overlays (camera-fixed)
     OVERLAYS = {}
@@ -649,7 +697,7 @@ def main(argv):
 
     def overlay_obj(oid):
         if oid not in OVERLAYS:
-            t = text("ov_" + oid, "", (0, 0, -3.0), 0.1, mats["text"], align="LEFT", align_y="TOP")
+            t = text("ov_" + oid, "", (0, 0, -overlay_depth), 0.1, mats["text"], align="LEFT", align_y="TOP")
             t.parent = cam
             pl = bpy.data.objects.new("ovplate_" + oid, rounded_rect_mesh("ovplate_" + oid, 0, 0, 1, 1, 0))
             link(pl)
@@ -691,7 +739,7 @@ def main(argv):
             corner = o.get("corner", "bottom_left")
             t.data.align_x = "LEFT"
             t.data.align_y = "TOP"
-            t.location = (0, 0, -3.0)
+            t.location = (0, 0, -overlay_depth)
             show(t, True)          # hidden objects are not re-evaluated: measure only while visible
             b = text_bbox(t)
             tw, th = b[2] - b[0], b[3] - b[1]
@@ -707,13 +755,13 @@ def main(argv):
                 left, top = half_w - m - pad - tw, below - gap - pad
             else:   # bottom_right, above the caption bar
                 left, top = half_w - m - pad - tw, caption_top + gap + pad + th
-            t.location = (left - b[0], top - b[3], -3.0)
+            t.location = (left - b[0], top - b[3], -overlay_depth)
             x0, y0, x1, y1 = left - pad - sw_space, top - th - pad, left + tw + pad, top + pad
             if kind == "caption":
                 x0, x1 = -half_w - 0.01, half_w + 0.01
                 y0 = -half_h - 0.01
                 caption_top = y1
-            new = rounded_rect_mesh("ovplate_" + o["id"], x0, y0, x1, y1, 0.0 if kind == "caption" else pad * 0.9, -3.01)
+            new = rounded_rect_mesh("ovplate_" + o["id"], x0, y0, x1, y1, 0.0 if kind == "caption" else pad * 0.9, -overlay_depth * (1 + 1 / 300))
             ov["plate"].data = new
             new.materials.append(mats["plate"])
             show(t, True)
@@ -731,7 +779,7 @@ def main(argv):
                     sw = ov["swatches"][k]
                     key, name = row["swatch"].split(":", 1)
                     col = SERVICE_COLORS.get(name) if key == "service" else STATE_COLORS.get(name)
-                    sw.data = rounded_rect_mesh("sw", 0, 0, size * 0.9, size * 0.42, size * 0.21, -3.005)
+                    sw.data = rounded_rect_mesh("sw", 0, 0, size * 0.9, size * 0.42, size * 0.21, -overlay_depth * (1 + 1 / 600))
                     sw.data.materials.clear()
                     swm = material("swatch_" + name, (0, 0, 0, 1), 0.0, 1.0)   # pure emission = the exact service colour
                     bsdf = swm.node_tree.nodes.get("Principled BSDF")
@@ -810,7 +858,7 @@ def main(argv):
         for tag, ring in bands_objs.items():
             show(ring, tag in shot.get("level_bands", []))
 
-    def first_hit(origin, dest, ignore):
+    def first_hit(origin, dest, ignore, include_ghost=False):
         """(object name, distance) of the first opaque hit from origin toward dest, skipping ignored/hidden/ghosted."""
         dg = bpy.context.evaluated_depsgraph_get()
         vec = dest - origin
@@ -823,7 +871,7 @@ def main(argv):
             step = (loc - o).length
             name = obj.name if obj is not None else ""
             src = bpy.data.objects.get(name)
-            if name in ignore or name in GHOSTED or (src is not None and src.hide_render) or name.startswith(("ov", "plate_", "label_")):
+            if name in ignore or (name in GHOSTED and not include_ghost) or (src is not None and src.hide_render) or name.startswith(("ov", "plate_", "label_")):
                 o, travelled = loc + direction * 1e-3, travelled + step + 1e-3
                 continue
             return name, travelled + step
@@ -1038,9 +1086,20 @@ def main(argv):
             for o in shot.get("overlays", []):
                 ov = OVERLAYS[o["id"]]
                 tb, tf = screen_box(ov["text"], dg)
+                ev = ov["text"].evaluated_get(dg)
+                bx, by = [c[0] for c in ev.bound_box], [c[1] for c in ev.bound_box]
+                occluders = set()
+                for i in range(7):
+                    for j in range(3):
+                        lp = Vector((min(bx) + (max(bx) - min(bx)) * (i + .5) / 7,
+                                     min(by) + (max(by) - min(by)) * (j + .5) / 3, 0))
+                        wp = ev.matrix_world @ lp
+                        hit = first_hit(cam_loc, wp, label_parts, include_ghost=True)
+                        if hit and hit[1] < (wp - cam_loc).length - .005:
+                            occluders.add(hit[0])
                 entries.append({"id": o["id"], "kind": "overlay_" + o["kind"], "shown": True, "text": ov["text"].data.body,
                                 "lines": ov["text"].data.body.count("\n") + 1, "text_box": tb, "in_front": tf,
-                                "plate_box": rects[o["id"]], "label_occluded_by": None})
+                                "plate_box": rects[o["id"]], "label_occluded_by": ", ".join(sorted(occluders)) or None})
         markers_px = {}
         for tag, m in marker_objs.items():
             if m.hide_render:

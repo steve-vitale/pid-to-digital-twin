@@ -439,6 +439,15 @@ def build_scene(model, layout, bands=None, alarms=None, replay=None, samples=(),
                       if directed[s["id"]] else "unknown: no arrow",
                       "route_status": "placeholder: schematic rack route, not a piping route"})
     pipe_by_id = {p["id"]: p for p in pipes}
+    # A paired-column corridor under the recycle return's actual long rack run. Invented structure, not plant data.
+    recycle = pipe_by_id.get("S8b")
+    rack = None
+    if recycle and not legacy_markers:
+        a, b = recycle["corners"][1:3]
+        lo, hi = sorted((a[0], b[0]))
+        rack = {"status": "placeholder: inferred overhead corridor, not a plant layout",
+                "stations": [_r(lo + (hi - lo) * t) for t in (.15, .38, .61, .84)],
+                "x": [lo, hi], "y": [_r(a[1] - .8), _r(a[1] + .8)], "z": _r(a[2] - .1)}
 
     cards = {}
     for uid, spec in layout["units"].items():
@@ -626,7 +635,7 @@ def build_scene(model, layout, bands=None, alarms=None, replay=None, samples=(),
                        "nozzle and pipe route is a placeholder, not plant geometry. Stream connections and "
                        "directions are checked against the simulator source (out/te_topology_check.md), not reviewed by operations. Colours come from recorded replay, not a live plant."),
         "plan_scale_m_per_px": SCALE, "equipment": list(equipment.values()), "boundaries": boundaries,
-        "pipes": pipes, "utilities": utilities, "valves": valves, "markers": markers, "tour": tour, "tour_order_basis": order_basis, "overview": overview,
+        "pipes": pipes, "utilities": utilities, "valves": valves, "markers": markers, "tour": tour, "tour_order_basis": order_basis, "overview": overview, "rack": rack,
         "replay_states": states, "state_vocabulary": list(STATES),
         "camera_lens_mm": LENS_MM, "camera_sensor_mm": SENSOR_MM, "still_resolution": list(STILL_RESOLUTION),
         "video": dict(VIDEO), "labels": label_specs(equipment, boundaries, markers, layout.get("labels", {})),
@@ -689,8 +698,13 @@ def label_specs(equipment, boundaries, markers, short_labels):
         x, y, _ = e["position"]
         top = e["extent"][2]
         legacy_top = e["height"] + (3.4 if e["shape"] in ("vertical_vessel", "column") else 3.0)
+        anchor = [x, y, _r(top + 0.4)]
+        if e["shape"] == "compressor":
+            anchor = [_r(x - .7), y, _r(.25 + e["dims"][0] * .75)]
+        elif e["kind"] == "separator":
+            anchor = [x, y, _r(1 + e["dims"][1] * .8)]
         specs.append({"id": "unit:" + e["id"], "kind": "unit", "body": "%s  %s" % (e["id"], e["name"]),
-                      "anchor": [x, y, _r(top + 0.4)], "legacy_location": [x, y, _r(legacy_top)], "unit": e["id"]})
+                      "anchor": anchor, "legacy_location": [x, y, _r(legacy_top)], "unit": e["id"]})
     for b in boundaries:
         bx, by, _ = b["position"]
         specs.append({"id": "bl:" + b["stream"], "kind": "boundary", "body": "BL %s %s" % (b["stream"], b["name"]),

@@ -278,7 +278,9 @@ const LEGIBILITY = `(() => {
   for (let i = 0; i < pills.length; i++) for (let j = i + 1; j < pills.length; j++) { const a = pills[i], b = pills[j]; if (a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h) overlaps.push(a.id + " x " + b.id); }
   const outside = pills.filter((p) => p.x < stage.left - 0.5 || p.y < stage.top - 0.5 || p.x + p.w > stage.right + 0.5 || p.y + p.h > stage.bottom + 0.5).map((p) => p.id);
   const dropped = [...document.querySelectorAll('.tour-pill[data-placed="no"]')].map((p) => p.dataset.label);
-  return { texts: out, pills: pills.length, overlaps, outside, dropped, scrollX: document.documentElement.scrollWidth > innerWidth + 1 };
+  const unitLabels = pills.filter((p) => p.id.startsWith("unit:")).map((p) => p.id.slice(5));
+  const unitLeaders = [...document.querySelectorAll('[data-leader-unit]')].map((p) => p.dataset.leaderUnit);
+  return { texts: out, pills: pills.length, overlaps, outside, dropped, unitLabels, unitLeaders, scrollX: document.documentElement.scrollWidth > innerWidth + 1 };
 })()`;
 
 const VIEWS = [
@@ -287,7 +289,7 @@ const VIEWS = [
   { id: "fault6-alarm", js: "document.querySelector('[data-jump-alarm]').click()" },
   { id: "loto", js: "document.querySelector('[data-mode-button=\"loto\"]').click(); document.querySelector('[data-loto=\"bl:S1\"]').click()" },
 ];
-const STILLS = { "overview": "overview", "fault6-alarm": "fault6-alarm", "loto": "loto-mockup", "focus-R-101": "reactor" };
+const STILLS = { "overview": "overview", "fault6-alarm": "fault6-alarm", "loto": "loto-mockup", "focus-R-101": "reactor", "focus-U-100": "header", "focus-V-101": "separator", "focus-K-101": "compressor" };
 let browser;
 try { browser = await launch(); } catch (e) { console.log(`no browser: ${e.message}`); process.exit(2); }
 mkdirSync(SHOTS, { recursive: true });
@@ -306,7 +308,10 @@ try {
         const cover = await page.evaluate("window.__tour.labelCover()");
         const small = r.texts.filter((t) => t.size < 12);
         const low = r.texts.filter((t) => t.contrast < 4.5);
-        legibility.push({ theme, width: w, view: view.id, texts: r.texts.length, pills: r.pills, min_font: Math.min(...r.texts.map((t) => t.size)), min_contrast: +Math.min(...r.texts.map((t) => t.contrast)).toFixed(2), overlaps: r.overlaps, outside: r.outside, dropped: r.dropped, small: small.map((t) => `${t.text} (${t.size}px)`), cover: cover.filter((c) => c.cover > 0.1).map((c) => `${c.id} ${(c.cover * 100).toFixed(0)}%`), max_cover: Math.max(0, ...cover.map((c) => c.cover)), low: low.map((t) => `${t.text} (${t.contrast.toFixed(2)}:1)`), hscroll: r.scrollX });
+        // Jump-to-alarm intentionally focuses the reactor containing PI-107.
+        const expectedUnits = view.id.startsWith("focus-") ? [view.id.slice(6)] : view.id === "fault6-alarm" ? ["R-101"] : data.tour_order;
+        const missingUnits = expectedUnits.filter((id) => !r.unitLabels.includes(id) || !r.unitLeaders.includes(id));
+        legibility.push({ theme, width: w, view: view.id, texts: r.texts.length, pills: r.pills, min_font: Math.min(...r.texts.map((t) => t.size)), min_contrast: +Math.min(...r.texts.map((t) => t.contrast)).toFixed(2), overlaps: r.overlaps, outside: r.outside, dropped: r.dropped, missing_units: missingUnits, small: small.map((t) => `${t.text} (${t.size}px)`), cover: cover.filter((c) => c.cover > 0.1).map((c) => `${c.id} ${(c.cover * 100).toFixed(0)}%`), max_cover: Math.max(0, ...cover.map((c) => c.cover)), low: low.map((t) => `${t.text} (${t.contrast.toFixed(2)}:1)`), hscroll: r.scrollX });
         const still = STILLS[view.id];
         if (still) {
           const name = `${still}-${w}-${theme}.jpg`;
@@ -399,6 +404,8 @@ const small = legibility.filter((r) => r.small.length);
 const low = legibility.filter((r) => r.low.length);
 const outside = legibility.filter((r) => r.outside.length);
 const scroll = legibility.filter((r) => r.hscroll);
+const missingUnits = legibility.filter((r) => r.missing_units.length);
+add("C", "unit_callouts_identify_bodies", !missingUnits.length, `${legibility.length} states retain every expected unit label and its own on-body leader`, missingUnits.map((r) => `${r.theme} ${r.width} ${r.view}: ${r.missing_units.join(", ")}`));
 add("C", "label_overlaps", !overl.length, `${legibility.length} page states (2 themes × 390 and 1440 px × ${VIEWS.length} views): ${overl.length} with overlapping labels`, overl.map((r) => `${r.theme} ${r.width} ${r.view}: ${r.overlaps.join("; ")}`));
 const covered = legibility.filter((r) => r.cover.length);
 add("C", "labels_off_geometry", !covered.length, `no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share ${(Math.max(...legibility.map((r) => r.max_cover)) * 100).toFixed(1)}%); ${covered.length} states over the limit`, covered.map((r) => `${r.theme} ${r.width} ${r.view}: ${r.cover.join(", ")}`));

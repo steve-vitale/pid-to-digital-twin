@@ -110,7 +110,7 @@
    "group": "D",
    "id": "D legibility: no overlap, crowding, covered markers, pills on the silhouette, all-caps, off-screen, occlusion, small text or low contrast",
    "status": "pass",
-   "summary": "12 stills, 116 labels + captions; overlaps 0, crowded 0, labels covering markers 0, pills on the focus silhouette 0, all-caps runs 0, off-screen 0, occluded 0, text < 18px 0, contrast < 4.5:1 0, expected-but-missing 0; min text height 18.7px, min contrast 8.18:1; 0 drawn labels entirely outside their still's frame were not counted (layout 'declutter')"
+   "summary": "12 stills, 116 labels + captions; overlaps 0, crowded 0, labels covering markers 0, pills on the focus silhouette 0, all-caps runs 0, off-screen 0, occluded 0, text < 18px 0, contrast < 4.5:1 0, expected-but-missing 0; min text height 18.7px, min contrast 8.11:1; 0 drawn labels entirely outside their still's frame were not counted (layout 'declutter')"
   },
   {
    "details": [],
@@ -207,7 +207,7 @@
    "stills": 12
   },
   "worst": {
-   "min_contrast": 8.178628338210808,
+   "min_contrast": 8.105495397013405,
    "min_height_px_1080": 18.673131465911865
   }
  },
