@@ -4,16 +4,33 @@
 
 AI vision models read the symbols and tags on piping and instrumentation diagrams (P&IDs), code traces the lines,
 and the result becomes a tagged asset model for Ignition and a PI AF structure. Every step is scored against public
-third-party answer keys, and the scoring rules were committed before any model ran.
+third-party answer keys, and the scoring rules were committed before any model ran (the one rule I later bent is
+logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
 
 The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand. This project
 tests how much of that AI can do, how to check its work honestly, and what a plant would need to use it safely.
+
+**In two minutes:**
+- **Reading real drawings.** On public drawings held out from tuning, symbols are found with F1 0.97 and connections
+  0.89, leaving about 20 differences from the answer key per 100 items for a person to check. The 2,886 extracted
+  items arrive ranked by risk: 377 to check first. [Results](#results-held-out-drawings-and-how-they-were-used)
+- **Drawing what matters.** A P&ID generated from a verified model had every instrument and no control loops: 0 of
+  19. The loops were read out of the simulator's own code and drawn. [Journal 50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none)
+- **Proving it in a real platform.** The Ignition project is read back out of a running gateway by a verifier that
+  first had to catch 5 planted faults. [Acceptance](docs/IGNITION_ACCEPTANCE.md)
+- **A real unit from a public investigation.** A model written from the CSB report's text got the report's own
+  drawing wrong in 11 of 21 checks; corrected, 20 of 21. The report's DCS trend is digitized and checked against
+  its text, disagreements included. [Bayer residue treater](docs/BAYER_RT.md)
+- **Not done:** no reviewer has been timed, no operator has reviewed the screens, nothing is imported into a PI
+  System, and no plant's own data was used. Coding agents wrote most of the code; I set the tests first and logged
+  where they and I were wrong ([how it was built](#how-it-was-built)).
 
 ![Before and after: a crop of a public OPEN100 drawing, and the same crop with every extracted symbol boxed and coloured by review risk tier](docs/screenshots/before-after-sheet0.png)
 
 ## Data first: what we know, how sure we are
 
-Everything here is built from two datasets (plus five public DEXPI sheets used only to score tag reading), and each
+Everything here is built from two datasets and one real unit rebuilt from a public investigation report (plus five
+public DEXPI sheets used only to score tag reading), and each
 starts with an assessment before anything is built: where the data came from, what has been checked against an
 independent source, and what is inferred. **Every output inherits its inputs' confidence; nothing downstream upgrades
 it.** The live replay, the mimics, the 3D tours and the LOTO views are **proof-of-concept outputs, built to iterate
@@ -59,10 +76,11 @@ a 3D orientation tour and a LOTO isolation view on the real drawing.
 |---|---|---|
 | ![OPEN100 plant overview: 12 areas in inferred tour order, arrows between areas where off-page flags show the direction, every value 'not connected'](docs/screenshots/open100/mimic-plant-overview.png) | ![3D tour stop 5, aux cooling water: placeholder equipment at drawing positions, purpose card from the drawing's equipment schedule, instruments marked not connected](docs/screenshots/open100/3d-05_stop_sheet7.jpg) | ![OPEN100 sheet 7 with numbered isolation points: manual and motor-operated valves, motor-driven pumps, lines from other systems, control valves marked as not isolation devices](docs/screenshots/open100/loto-isolation-sheet7.png) |
 
-## Results (sealed drawings nobody tuned on)
+## Results (held-out drawings, and how they were used)
 
-Review load = the corrections a reviewer must make per 100 items on the drawing. Lower is better. Around 100 is
-about the same work as drawing it from scratch. Round 2, each method scored once per set:
+Review load = the scored differences from the answer key per 100 key items (missed, extra or wrong symbols and
+connections). Lower is better. Around 100 is about the same work as drawing it from scratch. It counts differences,
+not a reviewer's minutes: no review has been timed. Round 2, each method scored once per set:
 
 | Model | Model alone, A / B | Tiling + code line tracing, A / B |
 |---|---|---|
@@ -72,11 +90,13 @@ about the same work as drawing it from scratch. Round 2, each method scored once
 
 A = 6 real OPEN100 drawings. B = 20 synthetic drawings in a different drafting style. Each method was scored once
 per set; Gemini's numbers are earlier runs and it was not run after round 3. These single round-2 runs are the ones
-the round-2 decisions were taken on. Five later reruns of the bold method on A (round 5, below) average **20.1** for
+the round-2 decisions were taken on. **Holdout A chose each tool's method**, so its numbers are selection numbers,
+not an untouched test, and round-1 outputs had been seen for all 12 OPEN100 sheets ([GOAL.md](docs/GOAL.md));
+holdout B is the check of that choice on a drawing style nothing was tuned on. Five later reruns of the bold method on A (round 5, below) average **20.1** for
 GPT and **29.8** for Claude, the figures to quote for holdout A now. Source: [docs/GOAL.md](docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout).
 
 - Reviewers get a risk-ranked queue. The twin built from 12 sheets has 2,886 items: 377 red, 676 amber and 1,833
-  green. Green items were 94–100% right on drawings nobody tuned on.
+  green. Green items were 94–100% right on the held-out drawings.
 - Where it breaks: old-scan image quality roughly triples review load, mostly because the line tracer fails on
   faded ink (table below).
 - How "done well" is defined, and the rules that stop me gaming my own score: [docs/EVALUATION.md](docs/EVALUATION.md).
@@ -155,9 +175,11 @@ The revision-A sheets sat inside the OPEN100 range on 32 of 36 style measurement
 sizes, line weights, text height and flag counts. The four outside were symbol counts and one ink figure, because the
 model holds no drains, vents or manual valves ([style_fidelity.md](out/te_pid/style_fidelity.md)). That was revision
 A. Revision B added the control loops (below) and the count dropped to 30 of 36: controllers, but none of the
-block valves and bypasses a real P&ID draws around a control valve. Revision C adds those control valve stations
+block valves and bypasses many plants draw around a control valve. Revision C adds those control valve stations
 (two block valves and a globe-valve bypass around each of 10 control valves; the compressor's spill-back valve opts
-out, with its reason in the layout) and the count is **35 of 36**. The one outside: sheet 103 has 37 scored symbols
+out, with its reason in the layout) and the count is **35 of 36**. The stations are a drafting assumption, not
+process design: the TE model has no block valves or bypasses, and whether a valve gets one is an engineering
+decision. The style score measures resemblance to the OPEN100 sheets, not engineering quality. The one outside: sheet 103 has 37 scored symbols
 against an OPEN100 minimum of 40. Drains and vents are still not drawn
 ([journal entry 52](docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass)).
 
@@ -169,7 +191,9 @@ signal lines, and scored by `scripts/te_control_loops.py`: **0 of 19 loops on re
 with every valve carrying its loop's number ([te_loop_audit.md](out/te_loop_audit.md), journal entries
 [50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none) and
 [51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). The audit grades the
-drawing against the code; it is not an engineering review of the control strategy.
+drawing's answer key against the code: 0 of 19 is the real finding, and 19 of 19 is a regression check that the
+generator now draws every loop the model holds. It reads the key the generator writes, not the image, so it doesn't
+show that a model can read the loops off the sheet, and it is not an engineering review of the control strategy.
 
 ### One plant, end to end (Tennessee Eastman)
 
@@ -190,13 +214,7 @@ The runs below read the **revision-A sheets** (kept in [`data/te_pid/rev-a/`](da
 are quoted in revision-A numbering (FV 201 is now FV-102; the full map is
 [`data/te_retag_2026-10-28.json`](data/te_retag_2026-10-28.json)).
 
-**Revision C read back.** The same frozen method and protocol on the sheets with controllers, signal lines and valve
-stations ([roundtrip_scores_revC.md](out/te_pid/roundtrip_scores_revC.md), journal entry 54). Clean sheets: review
-load 1.26 (GPT) and 1.38 (Claude) per 100, every tag read by both. On bad scans tag text still fails first, and Claude
-reads far more of it: 89% against 61% at L2, 50% against 9% at L3. Claude's higher review load at L1 and L2 (4.1 and
-10.0 against 1.30 and 1.20) comes from the line tracer, not from reading: its tighter vessel boxes let the tracer
-follow a vessel wall as a pipe. Growing those boxes 4 px removes every extra link; that fix is a method change and
-will be measured as one.
+**Revision A sheets** (no controllers):
 
 | Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
 |---|---|---|
@@ -205,7 +223,21 @@ will be measured as one.
 | Old scan, L2 | 2.1 · 13.4 | **56%** · 95% |
 | Bad scan, L3 | 16.9 · 17.3 | **14%** · **49%** |
 
-Means over runs; ranges and 95% intervals are in [roundtrip_scores.md](out/te_pid/roundtrip_scores.md). 43 printed
+**Revision C sheets** (controllers, signal lines and valve stations; same frozen method and protocol;
+[roundtrip_scores_revC.md](out/te_pid/roundtrip_scores_revC.md), journal entry 54):
+
+| Image | Review load /100, GPT · Claude | Tags read exactly, GPT · Claude |
+|---|---|---|
+| Clean (5 runs each) | 1.26 · 1.38 | 100% · 100% |
+| Photocopy, L1 (3 runs each) | 1.30 · 4.1 | 100% · 100% |
+| Old scan, L2 | 1.20 · 10.0 | **61%** · 89% |
+| Bad scan, L3 | 14.9 · 15.7 | **9%** · **50%** |
+
+On bad scans tag text fails first, and controller tags fail before the rest. Claude's higher review load at L1 and
+L2 comes from my line tracer, not from its reading: its tighter vessel boxes let the tracer follow a vessel wall as a
+pipe. Growing those boxes 4 px removes every extra link; that fix is a method change and will be measured as one.
+
+Revision A table: means over runs; ranges and 95% intervals are in [roundtrip_scores.md](out/te_pid/roundtrip_scores.md). 43 printed
 tags per run (37 instrument and valve bubbles, 6 equipment tags). This is the project's first tag-reading score,
 because the OPEN100 keys carry no text.
 
@@ -258,7 +290,7 @@ came from Claude alone.
 
 ## Status and evidence tracks
 
-Three separate pieces of evidence live here. Keep them apart:
+Four separate pieces of evidence live here. Keep them apart:
 - **OPEN100:** drawing extraction, scored outputs and a labeled synthetic point-mapping demo. These are not
   site-verified live plant connections.
 - **Tennessee Eastman (TE):** a process model hand-built from the published process, then verified against the
@@ -272,6 +304,10 @@ Three separate pieces of evidence live here. Keep them apart:
 - **PID2Graph Synthetic:** a bounded two-sheet adaptation through the existing scorer and exporters, with unresolved
   ontology and line-semantics review gates. It is neither a held-out generalization result nor plant validation.
   See [the adaptation guide](docs/ADAPT_LABELED_DATASET.md).
+- **Bayer CropScience residue treater:** a real unit rebuilt from the U.S. Chemical Safety Board's investigation
+  report: a process model citing the report for every item, checked against the report's own drawing (Figure 10),
+  and the report's published DCS trend (Figure 11) digitized and replayed. Tags are assigned by this project; no
+  plant data or drawing of record was used. See [docs/BAYER_RT.md](docs/BAYER_RT.md).
 
 Have one local PNG and an existing extraction JSON? The [bounded site-intake recipe](docs/REPLICATE_AT_YOUR_PLANT.md#bounded-local-intake-one-png--an-existing-extraction)
 builds a source-preserving, unverified review bundle with the standard library. For a new single-PNG job, the
@@ -300,7 +336,7 @@ possible. The rules, splits and decision rule were committed before any method w
   87.0%), because the tracer links everything on a shared pipe network. Round 3 fixed it for this drafting style
   (two bullets down).
 - **The risk tiers mostly work.** Every item has a green / amber / red tier and a plain-language reason. On
-  drawings nobody tuned on, the riskiest 20% held 2–4× as many errors as the models' own confidence would point to
+  held-out drawings, the riskiest 20% held 2–4× as many errors as the models' own confidence would point to
   (23 of 24 comparisons). The one failure was the best model with the best method on same-style drawings, where it
   was no better than the model's own confidence. That's reported in [GOAL.md](docs/GOAL.md).
 - **Instrument-to-equipment assignment is fixed for this drafting style** (92.2%, up from 87.0%) by following the
@@ -393,7 +429,8 @@ Results, and [docs/EVALUATION.md](docs/EVALUATION.md).
   - Scoring rules were written before any model ran.
   - The scorer was tested with deliberately wrong answers. Its first version gave them 15–32% credit and had to be
     rebuilt.
-  - Every result is repeated to measure noise.
+  - Round 5 and the TE round trip repeat every run (five times on clean sheets) to measure noise; earlier rounds
+    were single runs and are labelled that way.
   - Failures count as zero.
   - Where I broke one of my own rules, the docs say so.
 - **Judgment about tools.** Three cloud models compared fairly, plus an open-weight model as a stand-in for a fully
@@ -609,8 +646,8 @@ it at a real site.
 | Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
 | Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 51 stages, all fresh; the live replay and the native acceptance run need a gateway and are recorded by hand ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
 | One plant end to end: TE P&ID generated in the OPEN100 style and read back | Done: a round trip on our own drawings, so an upper bound (clean sheets 2.1 and 2.2 per 100, every tag read), not real-plant accuracy ([journal entry 44](docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back)); measured on revision A |
-| Control loops on the generated P&ID, from the simulator's closed-loop code | Done: 19 of 19 loops drawn and numbered (revision A: 0 of 19); data-checked against the recorded run; revision B passed native gateway acceptance; not yet read back by the models ([journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)) |
-| A real unit from the public record: the Bayer CropScience residue treater (CSB report) | Done (proof of concept): process model citing the report for every item (tags assigned by this project), corrected against the report's Figure 10 (20 of 21 checks; first run 10 of 21); generated P&ID with controllers and interlocks, all 15 of the figure's lines agree; Figure 11's DCS trend digitized, 8 of 11 checks against the report's text agree and the 3 disagreements are written up; the trend replayed through the model's interlocks and limits, 5 of 5 of the report's statements about the evening agree (a consistency check, not blind) ([BAYER_RT.md](docs/BAYER_RT.md), journal entries [56](docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing) and [57](docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks)); a generated overview screen replays it, proof of concept, every row checked against the replay file ([drafts/bayer-overview](drafts/bayer-overview/verification.md), [journal entry 58](docs/JOURNAL.md#58-an-overview-screen-for-the-unit)); the report's six timed events walked through beside it, 13 of 16 checks agree and the 3 that don't are the figure-against-text disagreements ([journal entry 59](docs/JOURNAL.md#59-walk-the-reports-timeline-beside-the-screen)) |
+| Control loops on the generated P&ID, from the simulator's closed-loop code | Done: revision A drew 0 of 19 loops; the generator now draws all 19 and the audit fails if one goes missing (it reads the answer key, not the image); data-checked against the recorded run; revision B passed native gateway acceptance; revision C read back by both models, every tag read on clean sheets (journal entry 54; [journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)) |
+| A real unit from the public record: the Bayer CropScience residue treater (CSB report) | Done (proof of concept): process model citing the report for every item (tags assigned by this project), corrected against the report's Figure 10 (20 of 21 checks; first run 10 of 21); generated P&ID with controllers and interlocks, all 15 of the figure's lines agree; Figure 11's DCS trend digitized, 8 of 11 checks against the report's text agree and the 3 disagreements are written up; the trend replayed through the model's interlocks and limits, five limited consistency checks against the report's account of the evening agree (two use proxies; rules written after seeing the data) ([BAYER_RT.md](docs/BAYER_RT.md), journal entries [56](docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing) and [57](docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks)); a generated overview screen replays it, proof of concept, every row checked against the replay file ([drafts/bayer-overview](drafts/bayer-overview/verification.md), [journal entry 58](docs/JOURNAL.md#58-an-overview-screen-for-the-unit)); the report's six timed events walked through beside it, 13 of 16 checks agree and the 3 that don't are the figure-against-text disagreements ([journal entry 59](docs/JOURNAL.md#59-walk-the-reports-timeline-beside-the-screen)) |
 | OPEN100 from drawings alone: flow direction, stitched plant, mimic, 3D tour, LOTO view | Done as a proof of concept, structure only: 361 of 1,133 process links directed, 12 sheets stitched, every value "not connected" ([OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md)) |
 | 3D orientation tour (TE) | Proof of concept: no render check fails on twelve stills (15 pass, 2 informational), five committed; no video, no operator review ([drafts/3d-tour](drafts/3d-tour/README.md)) |
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |

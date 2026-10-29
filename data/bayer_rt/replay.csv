@@ -1,5 +1,5 @@
 # Residue treater replay from the digitized Figure 11 (CSB report, p. 39), by scripts/bayer_replay.py. Tags are this project's (data/bayer_rt/process_model.json). _lo/_hi: the column range widened by the digitizing error. Interlock and limit states from data/bayer_rt/replay_rules.json. Ends at the failure, 22:33.
-time,TI-104,TI-104_lo,TI-104_hi,PI-101,PI-101_lo,PI-101_hi,LI-102,LI-102_lo,LI-102_hi,FI-103,FI-103_lo,FI-103_hi,IL-1,IL-2,IL-3,T-crit,T-SOL,P-MAWP,L-fill
+time,TT-104,TT-104_lo,TT-104_hi,PT-101,PT-101_lo,PT-101_hi,LT-102,LT-102_lo,LT-102_hi,FT-103,FT-103_lo,FT-103_hi,IL-1,IL-2,IL-3,T-crit,T-SOL,P-MAWP,L-fill
 17:59:07,,,,24.96,24.69,25.23,,,,,,,no reading,clear,no reading,no reading,no reading,not crossed,no reading
 17:59:39,67.96,67.25,68.67,24.96,24.55,25.36,30.27,29.38,31.15,,,,met,clear,no reading,not crossed,not crossed,not crossed,cannot tell
 18:00:11,68.14,67.25,69.03,24.89,24.55,25.23,30.27,29.38,31.15,0.0,-0.71,0.71,met,clear,met,not crossed,not crossed,not crossed,cannot tell

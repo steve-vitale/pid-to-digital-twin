@@ -2984,9 +2984,10 @@ Details: [BAYER_RT.md](BAYER_RT.md).
   middle of the clean 10-20 px range), with a test against any one-column spike. The 11 text checks never sampled
   those minutes, which is why they passed with the bug.
 - **5 of 5 statements agree,** within two minutes where the statement gives a time.
-- **The minimum-temperature condition was met for the first three and a half hours shown.** Had that interlock not
-  been bypassed (p. 69), it would have held the feed closed until about 21:25; the feed had been open since about
-  4 a.m. (p. 38).
+- **The minimum-temperature condition was met for the first three and a half hours shown,** until about 21:25. The
+  report says that interlock was bypassed (p. 69) and the feed had been open since about 4 a.m. (p. 38). (Corrected
+  2026-10-29: an earlier wording here said what the interlock "would have" done, an outcome claim this project
+  doesn't make; entry 60.)
 - **The figure shows two short flow starts after the pump started,** each falling back to zero, before flow was
   established at about 18:25. The report doesn't mention them; the replay records them as the figure shows them.
 
@@ -3065,3 +3066,52 @@ leftover list is where the next question is.
 
 **At your plant:** when an incident timeline is rebuilt from trends, ask for two lists: where the trend and the
 written account disagree, and what the trend shows that the account never mentions.
+
+## 60. Let two hostile reviewers read it before anyone else does
+
+**What:** 2026-10-29. Before the project is linked from a public post series, two independent reviewers, a Claude
+panel and a Codex (GPT) reviewer, each read the repository and the draft posts cold, playing the commenters a post
+like this gets: a controls engineer, a process-safety specialist, an HMI practitioner, an evaluation skeptic, a
+hiring manager and the general snark. Every finding was checked against the files before anything changed.
+
+**What it found, and what changed:**
+- **An outcome claim I said I'd never make.** BAYER_RT.md and entry 57 said the bypassed minimum-temperature
+  interlock "would have held the feed closed" for three and a half hours. That is a counterfactual about the night,
+  and the same document says the project makes none. Both now state the condition and the report's facts only; the
+  overview's badge says "condition true" instead of "would hold feed closed".
+- **A finding listed as a cause that the report says wasn't one.** The split-range programming fault was cited among
+  the reasons this unit belongs here; the CSB concluded it was not causal (p. 39, footnote 29). Now said where it's
+  cited, and the opening sentence no longer says the report "ties the incident" to control-system findings.
+- **Indicators where the figure shows transmitters.** The Bayer field instruments were tagged PI, LI, FI and TI, which
+  an ISA-5.1 reader takes for local gauges, while Figure 10 calls them transmitters and two of them feed controllers.
+  Retagged PT, LT, FT, TT with `former_tag` kept; the drawing is revision B; every Bayer output rebuilt, all checks
+  unchanged (Figure 10 20 of 21 and 15 of 15; walk-through 13 of 16). The TE sheets have the same convention issue
+  (an indicator bubble feeding a controller); that retag touches the gateway and the recorded runs, so it is a
+  separate decision.
+- **README overclaims.** "Sealed drawings nobody tuned on": holdout A chose each tool's method, and round-1 outputs had
+  been seen for all twelve sheets, so its numbers are selection numbers. "Every result is repeated": rounds 2 and 4
+  were single runs. "19 of 19 loops": the audit reads the key the generator writes, so it's a regression check, not
+  evidence a model can read loops off a sheet. "Review load" was described as a reviewer's corrections; it counts
+  differences from the answer key, and no review has been timed. Each is now said plainly.
+- **Stale facts.** The README's loop row still said revision C hadn't been read back; the revision C scores now have
+  their own table beside revision A's; the Bayer work is counted as its own evidence track; "8 of 11 within the pixel
+  error" is "within each check's tolerance"; the "5 of 5" report checks are described as five limited consistency
+  checks, two of them proxies.
+- **Valve stations as a universal rule.** They are a drafting assumption the TE model doesn't contain, and the style
+  score measures resemblance to OPEN100, not engineering quality. Now said.
+
+**Why:**
+- **Rejected: answering the critiques in posts instead of fixing the repo.** A commenter reads the linked file, not the
+  reply.
+- **Rejected: one reviewer.** The two overlapped on the biggest points (the counterfactual, the circular 19 of 19) and
+  each found things the other didn't: the Claude panel the transmitter tags and stale screenshots, the Codex reviewer
+  the non-causal footnote and the holdout-selection history.
+- **Not yet done:** the README's Ignition screenshots predate the valve renumbering and still show two retired tags;
+  they need a fresh capture from a gateway.
+
+**Lesson:** the same document can state a rule and break it a hundred lines later. A reader looking for the break finds
+it in minutes; the author, reading for flow, doesn't.
+
+**At your plant:** before a model, a drawing or a screen goes to the people who'll use it, give it to someone whose job
+is to find what's wrong with it, and fix what they find in the artifact, not in the cover note.
+

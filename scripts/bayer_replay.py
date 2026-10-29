@@ -149,7 +149,7 @@ def check(stmt, rows):
         return {"got": None, "ok": False}
     if stmt.get("never"):
         hit = next((r["time"] for r in rows if r[stmt["limit"]] == "crossed"), None)
-        peak = max(r["TI-104"] for r in rows if r["TI-104"] is not None)
+        peak = max(r["TT-104"] for r in rows if r["TT-104"] is not None)
         return {"got": hit or f"never (highest {peak} C)", "ok": hit is None}
     raise ValueError(f"statement {stmt['id']}: no test of a known shape")
 
@@ -176,8 +176,8 @@ def render(rules, res):
            f"{res['rows']} columns from {res['from']} to {res['to']}; the replay stops at the failure, 22:33.",
            "",
            "**What a state means.** A value's bounds are its column range in the figure widened by the digitizing "
-           "error. An interlock condition is *met* (the feed valve would be held closed, if the interlock weren't "
-           "bypassed) or *clear* only when the whole bound is on one side of the bound the report supports; "
+           "error. An interlock condition is *met* (the condition the interlock acts on is true; its design action is "
+           "to hold the feed valve closed, p. 30) or *clear* only when the whole bound is on one side of the bound the report supports; "
            "otherwise *cannot tell*. The report publishes no interlock setpoints, so each rule says which pages "
            "bound it.",
            "",

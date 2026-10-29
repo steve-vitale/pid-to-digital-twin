@@ -132,9 +132,9 @@ class Replay(unittest.TestCase):
 
     def test_a_straddling_bound_is_never_called(self):
         il1 = next(il for il in self.rules["interlocks"] if il["id"] == "IL-1")
-        row = {"TI-104_lo": 129.0, "TI-104_hi": 131.0}
+        row = {"TT-104_lo": 129.0, "TT-104_hi": 131.0}
         self.assertEqual(self.br.interlock_state(il1, row), self.br.UNSURE)
-        row = {"TI-104_lo": 131.0, "TI-104_hi": 134.0}      # inside the gap where the setpoint lies
+        row = {"TT-104_lo": 131.0, "TT-104_hi": 134.0}      # inside the gap where the setpoint lies
         self.assertEqual(self.br.interlock_state(il1, row), self.br.UNSURE)
 
     def test_every_rule_cites_the_report(self):
@@ -229,7 +229,7 @@ class Figure10(unittest.TestCase):
 
     def test_catches_a_transmitter_on_the_wrong_line(self):
         m = self.model()
-        next(i for i in m["instruments"] if i["tag"] == "FI-103")["stream"] = "S3"   # the first, wrong reading
+        next(i for i in m["instruments"] if i["tag"] == "FT-103")["stream"] = "S3"   # the first, wrong reading
         diffs = " ".join(self.cf.compare(self.fig, m)["differences"])
         self.assertIn("Line L3 / S3", diffs)
         self.assertIn("Line L6 / S10", diffs)

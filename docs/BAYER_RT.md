@@ -17,7 +17,7 @@ public report. It shows what the published data showed and when. It does not jud
 ## Why this unit belongs in this project
 
 This project builds operator screens from a process model and checks the model against what the plant publishes.
-The report ties the incident to exactly that, in its own findings:
+Among the report's findings, several are about exactly that (it found many other causes too):
 
 - **The unit was restarted on a new control system that operators hadn't been trained on.** "Operations personnel
   were inadequately trained to operate the methomyl unit with the new distributed control system" (key findings,
@@ -28,7 +28,8 @@ The report ties the incident to exactly that, in its own findings:
   (p. 62).
 - **The control logic wasn't checked before startup.** Engineers had not verified all process controls and
   instruments in the new system (p. 35); the recirculation-flow interlock was left bypassed by the programmers
-  (p. 38); the split-range temperature control was mis-programmed (p. 39).
+  (p. 38); the split-range temperature control was mis-programmed (p. 39), though the CSB concluded that fault was
+  not causal (p. 39, footnote 29).
 - **An indication was wrong.** The DCS showed steam flowing to the heater while the steam block valve was closed
   (p. 71, Fig 19).
 
@@ -49,7 +50,10 @@ three interlocks, seven operating limits and six timed events. **Every item cite
 
 - **Tags are assigned.** The report names instrument types (Fig 10: pressure, level, flow and temperature
   transmitters; feed, discharge and temperature control valves) but no tag numbers for the residue treater. Every
-  tag here is this project's and is marked `assigned_tag`.
+  tag here is this project's and is marked `assigned_tag`. The field instruments are tagged as the transmitters the
+  figure shows (PT-101, LT-102, FT-103, TT-104, TT-105, FT-106); until 2026-10-29 they were tagged as indicators
+  (PI-101 and so on), which an ISA-5.1 reader would take for local gauges. Each keeps its old tag as `former_tag`
+  (journal entry 60). The drawing is now revision B.
 - **Only what the report describes.** The level controller (automatic at about 50 percent, p. 28; in practice kept in
   manual, p. 32) and the split-range temperature controller (p. 28-29) are controllers. The feed valve has three
   interlocks (minimum temperature and maximum pressure, both safety; recirculation flow, operating; p. 30), not a flow
@@ -118,7 +122,8 @@ pixels.
   removed, and small black blobs (text, the dotted line) are dropped, because the pressure trace and the gridlines
   are the same black.
 - **Checked against the text, never tuned to it.** Eleven values the report states (the figure's labels and pp. 38-39)
-  are compared with the digitized trace. 8 of 11 agree within the pixel error. The 3 that don't are disagreements
+  are compared with the digitized trace. 8 of 11 agree within each check's stated tolerance (never tighter than the
+pixel error; the tolerances are in the table). The 3 that don't are disagreements
   between the figure and the text, written up in [`fig11_check.md`](../out/bayer_rt/fig11_check.md): the figure's
   steady pressure is 25 psig where the text says 22 (the pressure scale is confirmed by the two labelled pressures,
   44 and 51.2 psig, which both agree), and its temperature runs about 2 °C below the text near the end.
@@ -149,11 +154,13 @@ column by column from `data/bayer_rt/replay_rules.json`, where every rule cites 
   established (p. 30). A state is *met* or *clear* only when the whole bound is on one side; otherwise *cannot tell*.
   A test fails if a straddling bound is ever called.
 - **What the replay derives** (`out/bayer_rt/replay_states.md`): the minimum-temperature condition was met from the
-  start of the trend until 21:25, so that interlock, had it not been bypassed (p. 69), would have held the feed
-  closed for the first three and a half hours shown; the feed had been open since about 4 a.m. (p. 38). The
+  start of the trend until 21:25. The report says that interlock was bypassed (p. 69) and the feed had been open
+  since about 4 a.m. (p. 38); the replay states the condition and makes no claim about what would have followed. The
   temperature was clear of it from 22:12. Recirculation flow was established from about 18:25, after two short
   starts the report doesn't mention, and was zero again from 22:22. The pressure left its normal level at 22:15.
-- **Checked against the report's own account: 5 of 5 statements agree.** Pump start at 18:14 (no-flow ends
+- **Five limited consistency checks against the report's account all agree.** Two use proxies: the alarm check
+  tests that the pressure had left its normal level, not the alarm itself, and the relief check tests that the
+  pressure stops rising, not the valve's position. Pump start at 18:14 (no-flow ends
   18:14:26), flow lost at 22:21 (no flow from 22:22:29), the pressure off its normal level before the 22:25 alarm
   (22:15), the relief valve near 22:27 (pressure peaks 22:27:46 and falls), and the 155 C safe operating limit
   never reached (highest 147.8 C). **This is a consistency check, not a blind test:** I wrote the rules after

@@ -31,7 +31,7 @@ FIG11 = ROOT / "out" / "bayer_rt" / "fig11_check.json"
 STATES = ROOT / "out" / "bayer_rt" / "replay_states.json"
 OUT_JSON = ROOT / "out" / "bayer_rt" / "walkthrough.json"
 OUT_MD = ROOT / "out" / "bayer_rt" / "walkthrough.md"
-TAGS = ["TI-104", "PI-101", "LI-102", "FI-103"]
+TAGS = ["TT-104", "PT-101", "LT-102", "FT-103"]
 
 
 def secs(t):

@@ -139,12 +139,12 @@
  ],
  "model_items_not_in_figure": [
   {
-   "tag": "TI-105",
+   "tag": "TT-105",
    "type": "temperature_transmitter",
    "declared_not_shown": true
   },
   {
-   "tag": "FI-106",
+   "tag": "FT-106",
    "type": "flow_transmitter",
    "declared_not_shown": true
   }
@@ -184,7 +184,7 @@
    {
     "what": "line L6",
     "figure": "['heater', 'cooler'] -> residue_treater: {'flow_transmitter': 1}",
-    "drawing": "{'flow_transmitter': 1} (FI-103)",
+    "drawing": "{'flow_transmitter': 1} (FT-103)",
     "ok": true
    },
    {

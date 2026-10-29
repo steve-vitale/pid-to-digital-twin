@@ -1,13 +1,13 @@
 {
- "about": "How scripts/bayer_replay.py turns the digitized Figure 11 trend into the state of each interlock and operating limit, column by column. Every number cites the report. Where the report doesn't publish a setpoint, the rule uses the bounds the report does support and returns 'cannot tell' between them, never a guessed value. A value's bounds are its column range in the figure widened by the digitizing error, so a state is 'met' or 'clear' only when the whole bound is on one side.",
+ "about": "How scripts/bayer_replay.py turns the digitized Figure 11 trend into the state of each interlock and operating limit, column by column. Every number cites the report. Where the report doesn't publish a setpoint, the rule uses the bounds the report does support and returns 'cannot tell' between them, never a single guessed setpoint. Where a bound is itself an analytical choice (IL-3's 9 klb/h 'flow established' line, IL-2's 26 psig 'normal pressure' line), its why_these_bounds says so; these are assumptions, not the plant's settings. A value's bounds are its column range in the figure widened by the digitizing error, so a state is 'met' or 'clear' only when the whole bound is on one side.",
  "source": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011)",
- "series_tags": {"TI-104": "temperature_C", "PI-101": "pressure_psig", "LI-102": "level_pct", "FI-103": "recirc_flow_klbh"},
+ "series_tags": {"TT-104": "temperature_C", "PT-101": "pressure_psig", "LT-102": "level_pct", "FT-103": "recirc_flow_klbh"},
  "replay_ends": {"time": "22:33:00", "why": "The vessel failed at 22:33 (Fig 11's dotted line; p. 40). The figure's traces after that line are not process values, and the replay stops there."},
  "interlocks": [
   {
    "id": "IL-1",
-   "condition": "TI-104 below the minimum-temperature setpoint (feed valve held closed)",
-   "tag": "TI-104",
+   "condition": "TT-104 below the minimum-temperature setpoint (feed valve held closed)",
+   "tag": "TT-104",
    "met_if_below": 130,
    "clear_if_at_or_above": 135,
    "setpoint_published": false,
@@ -16,8 +16,8 @@
   },
   {
    "id": "IL-2",
-   "condition": "PI-101 at or above the maximum-pressure setpoint (feed valve held closed)",
-   "tag": "PI-101",
+   "condition": "PT-101 at or above the maximum-pressure setpoint (feed valve held closed)",
+   "tag": "PT-101",
    "met_if_at_or_above": 50,
    "clear_if_below": 26,
    "setpoint_published": false,
@@ -26,8 +26,8 @@
   },
   {
    "id": "IL-3",
-   "condition": "FI-103 recirculation flow not established (feed valve held closed)",
-   "tag": "FI-103",
+   "condition": "FT-103 recirculation flow not established (feed valve held closed)",
+   "tag": "FT-103",
    "met_if_at_or_below": 1.0,
    "clear_if_at_or_above": 9.0,
    "setpoint_published": false,
@@ -36,10 +36,10 @@
   }
  ],
  "limits": [
-  {"id": "T-crit", "short": "135 °C normal / critical", "tag": "TI-104", "what": "Critical decomposition temperature (the normal operating temperature)", "at_or_above": 135, "source": "p. 30; p. 39", "informational": "Normal operation is at about 135 C (p. 30), so being above it is expected once the unit is running; screens show it without alarm colour."},
-  {"id": "T-SOL", "short": "155 °C safe limit", "tag": "TI-104", "what": "Safe operating limit", "at_or_above": 155, "source": "p. 39"},
-  {"id": "P-MAWP", "short": "50 psig MAWP", "tag": "PI-101", "what": "Maximum allowable operating pressure", "at_or_above": 50, "source": "p. 28"},
-  {"id": "L-fill", "short": "30 % minimum fill", "tag": "LI-102", "what": "Minimum fill before starting the recirculation pump", "below": 30, "source": "p. 31"}
+  {"id": "T-crit", "short": "135 °C normal operation", "tag": "TT-104", "what": "Critical decomposition temperature (the normal operating temperature)", "at_or_above": 135, "source": "p. 30; p. 39", "informational": "Normal operation is at about 135 C (p. 30), so being above it is expected once the unit is running; screens show it without alarm colour."},
+  {"id": "T-SOL", "short": "155 °C safe limit", "tag": "TT-104", "what": "Safe operating limit", "at_or_above": 155, "source": "p. 39"},
+  {"id": "P-MAWP", "short": "50 psig MAWP", "tag": "PT-101", "what": "Maximum allowable operating pressure", "at_or_above": 50, "source": "p. 28"},
+  {"id": "L-fill", "short": "30 % minimum fill", "tag": "LT-102", "what": "Minimum fill before starting the recirculation pump", "below": 30, "source": "p. 31"}
  ],
  "report_statements": [
   {"id": "K1", "statement": "The outside operator started the recirculation pump at 6:14 p.m.", "source": "p. 38",
@@ -49,7 +49,7 @@
   {"id": "K3", "statement": "At approximately 10:25 p.m., the residue treater high pressure alarm sounded ... the pressure was above the maximum operating pressure.", "source": "p. 40",
    "test": "IL-2 stops being 'clear' before 22:25 (the pressure has left its normal level by the alarm)", "rule": "IL-2", "from": "clear", "first_after": "20:00:00", "before": "22:25:00"},
   {"id": "K4", "statement": "Relief valve open, 44 psig, 22:27.", "source": "Fig 11 label",
-   "test": "PI-101 stops rising within 1.5 minutes of 22:27 (its first local maximum after 22:20)", "peak_of": "PI-101", "first_after": "22:20:00", "expect": "22:27:00", "tolerance_min": 1.5},
+   "test": "PT-101 stops rising within 1.5 minutes of 22:27 (its first local maximum after 22:20)", "peak_of": "PT-101", "first_after": "22:20:00", "expect": "22:27:00", "tolerance_min": 1.5},
   {"id": "K5", "statement": "The temperature was at 141 C, rapidly approaching 155 C, the safe operating limit.", "source": "p. 39",
    "test": "T-SOL (155 C) is never reached before the failure", "limit": "T-SOL", "never": true}
  ]

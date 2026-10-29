@@ -33,7 +33,7 @@ WALK = ROOT / "out" / "bayer_rt" / "walkthrough.json"
 OUT = ROOT / "drafts" / "bayer-overview" / "index.html"
 REPORT = "https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf"
 
-TAGS = ["TI-104", "PI-101", "LI-102", "FI-103"]
+TAGS = ["TT-104", "PT-101", "LT-102", "FT-103"]
 
 
 def replay_rows():
@@ -105,7 +105,7 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Residue Treater Overview</title>
+<title>Residue Treater Replay</title>
 <meta name="description" content="An overview screen of the Bayer CropScience residue treater generated from a model of the CSB report, replaying the published Figure 11 trend. Proof of concept.">
 <style>
 :root{--bg:#f4f5f7;--panel:#ffffff;--ink:#1d2229;--muted:#59626e;--line:#8b939e;--util:#b3b9c1;--equip:#3d454f;
@@ -172,7 +172,7 @@ footer{padding:18px 16px 30px;font-size:13px;color:var(--muted)}
 </head>
 <body>
 <header>
-<h1>Residue treater overview, August 28, 2008</h1>
+<h1>Residue treater: the CSB report's Figure 11 trend, replayed</h1>
 <p class="note">Generated from a model of the <a href="" id="rep">CSB investigation report</a>: geometry from this project's generated P&amp;ID, values replayed from the report's Figure 11, each with the bound it carries. Tags are assigned by this project. Not the plant's screen. Proof of concept.</p>
 </header>
 <main>
@@ -215,7 +215,7 @@ footer{padding:18px 16px 30px;font-size:13px;color:var(--muted)}
 </section>
 </main>
 <footer>
-Values: the median of each pixel column of Figure 11 (report p. 39); bounds: the column's range widened by the digitizing error. Interlock conditions: <em>met</em> (the feed valve would be held closed, were the interlock not bypassed), <em>clear</em>, or <em>cannot tell</em> where the bound straddles the range the report allows for an unpublished setpoint. Source data and method: data/bayer_rt/ and docs/BAYER_RT.md in this repository.
+Values: the median of each pixel column of Figure 11 (report p. 39); bounds: the column's range widened by the digitizing error. Interlock conditions: <em>met</em> (the condition the interlock acts on is true; its design action is to hold the feed valve closed, report p. 30), <em>clear</em>, or <em>cannot tell</em> where the bound straddles the range the report allows for an unpublished setpoint. Source data and method: data/bayer_rt/ and docs/BAYER_RT.md in this repository.
 </footer>
 <script>
 const D=__DATA__;
@@ -244,7 +244,7 @@ function drawMimic(){
     el("polygon",{points:pts,fill:"var(--panel)",stroke:"var(--equip)","stroke-width":4,id:"v-"+v.tag},g);
     if(v.kind!=="manual"||["HV-108","HV-110"].includes(v.tag))el("text",{x:v.vertical?x+26:x,y:v.vertical?y+12:y-28,"text-anchor":v.vertical?"start":"middle","font-size":36,fill:"var(--muted)"},g,v.tag);}
   for(const t of Object.keys(D.instruments)){const [x,y]=G.points[t];const g=el("g",{id:"box-"+t},svg);
-    const w=300,h=112,off={"LI-102":[-w-30,-h/2],"FI-103":[-w/2,-h-40],"PI-101":[-w-60,-h-40],"TI-104":[40,-h/2]}[t],bx=x+off[0],by=y+off[1];
+    const w=300,h=112,off={"LT-102":[-w-30,-h/2],"FT-103":[-w/2,-h-40],"PT-101":[-w-60,-h-40],"TT-104":[40,-h/2]}[t],bx=x+off[0],by=y+off[1];
     el("rect",{x:bx,y:by,width:w,height:h,rx:8,fill:"var(--panel)",stroke:"var(--line)","stroke-width":3,class:"frame"},g);
     el("text",{x:bx+16,y:by+40,"font-size":34,fill:"var(--muted)"},g,t);
     el("text",{x:bx+16,y:by+94,"font-size":48,"font-weight":700,fill:"var(--ink)",class:"val"},g,"—");}
@@ -296,14 +296,14 @@ for(const tag of Object.keys(D.instruments)){const info=D.instruments[tag];const
   const shade=el("rect",{x:0,y:0,width:0,height:H-18,fill:"var(--bg)",opacity:.7},s);
   const cur=el("line",{y1:6,y2:H-18,stroke:"var(--accent)","stroke-width":2},s);
   cursors.push({X,W,H,shade,cur});trendBox.appendChild(wrap);}
-const label={met:"MET: would hold feed closed",clear:"CLEAR","cannot tell":"CANNOT TELL","no reading":"NO READING"};
+const label={met:"MET: condition true",clear:"CLEAR","cannot tell":"CANNOT TELL","no reading":"NO READING"};
 const cls={met:"met",clear:"clear","cannot tell":"unsure","no reading":"none",crossed:"met","not crossed":"clear"};
 const scrub=document.getElementById("scrub");scrub.max=rows.length-1;
 let idx=0,timer=null;
 function setTime(i){idx=Math.max(0,Math.min(rows.length-1,i));const r=rows[idx];scrub.value=idx;
   document.getElementById("clock").textContent=r.t.slice(0,5);
   for(const tag of Object.keys(D.instruments)){const g=document.getElementById("box-"+tag),v=r[tag],lo=r[tag+"_lo"],hi=r[tag+"_hi"];
-    const d=tag==="PI-101"?1:1;g.querySelector(".val").textContent=v==null?"no reading":`${fmt(v,d)} ${D.instruments[tag].uom==="C"?"°C":D.instruments[tag].uom}`;
+    const d=tag==="PT-101"?1:1;g.querySelector(".val").textContent=v==null?"no reading":`${fmt(v,d)} ${D.instruments[tag].uom==="C"?"°C":D.instruments[tag].uom}`;
     g.setAttribute("data-value",v==null?"":String(v));g.setAttribute("data-lo",lo==null?"":String(lo));g.setAttribute("data-hi",hi==null?"":String(hi));
     g.querySelector("title")?.remove();el("title",{},g,v==null?`${tag}: no reading`:`${tag}: ${fmt(v)} (bounds ${fmt(lo)} to ${fmt(hi)})`);
     const crossed=D.limits.filter(l=>l.tag===tag&&!l.informational).some(l=>r[l.id]==="crossed"),unsure=D.limits.filter(l=>l.tag===tag).some(l=>r[l.id]==="cannot tell");

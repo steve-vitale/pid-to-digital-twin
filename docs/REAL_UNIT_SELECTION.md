@@ -1,4 +1,4 @@
-# Choosing a real unit from the public record (selection memo, not yet built)
+# Choosing a real unit from the public record (selection memo)
 
 **Status, 2026-10-29:** Bayer CropScience selected by the project owner. Built: a sourced process model and a generated drawing, both checked against Figure 10; a checked digitization of Figure 11, replayed through the model's interlocks; and an overview screen with the report's timeline walked through beside it ([BAYER_RT.md](BAYER_RT.md)). The candidates and page
 references were researched from the CSB reports themselves and spot-checked against the PDFs' text.

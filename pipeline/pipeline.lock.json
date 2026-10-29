@@ -4,13 +4,13 @@
   "bayer.fig10": {
    "inputs": {
     "data/bayer_rt/fig10_inventory.json": "adaff7442d40a4dd555ff720d78b44a0657bd8ff18fa7b47aac7b0e6e4e7ce11",
-    "data/bayer_rt/pid/key.json": "473c7dd74c8bc3e2f4262bffc85212d9326c094c124d910bebfc4160d3a53a5b",
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
     "scripts/compare_bayer_fig10.py": "4f68edd90deeac5ea1e8480e1069666a18eefd1d2f3f7a99f48bf7c137f0cb7c"
    },
    "outputs": {
-    "out/bayer_rt/fig10_compare.json": "8d198db78a9abfc5350df39b4b3a24a284d5bed2f76d985a4ec917bbc6859e33",
-    "out/bayer_rt/fig10_compare.md": "5e5dcb642e0972fe2d92b05e3ab938d5d3dd14d5dd230e8d574606ef400366c0"
+    "out/bayer_rt/fig10_compare.json": "ac8f65922b679d6d2a4c35c569738f7b70b41772c294d1837c83bb6e6692a40a",
+    "out/bayer_rt/fig10_compare.md": "d878d3fa6936976777a79335f08f8fb7fa34a9fe620011065c12de260119cc7a"
    }
   },
   "bayer.fig11": {
@@ -26,53 +26,53 @@
   },
   "bayer.overview": {
    "inputs": {
-    "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
-    "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
-    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
+    "data/bayer_rt/pid_layout.json": "f293228373d0e4cf8aa2593dc5439aa9daea5b160ab2f639cf399fa7a8f4a3ba",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/replay.csv": "5203033b3716a96bd566be8b497488819e812f418a5a47a9fba8188eb90b3599",
+    "data/bayer_rt/replay_rules.json": "586a2b9115b7eec59f063268d4f2a42c72f5e742791a01148a224ae9d324742e",
     "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39",
-    "drafts/bayer-overview/verify.mjs": "724026d32cc8579394d02e82eb6f9288c4bd30cdec7e11cda6b71494c3964f5c",
+    "drafts/bayer-overview/verify.mjs": "c070b4e2a7b7ca3af4ca63045c56fe2026915a0da825f4b759106f8326f62971",
     "drafts/interactive-tour/cdp.mjs": "f4ee2bfb3ed59701eea53fceb61fbc378ff2e98e5af2e3efd9452533c83ab437",
-    "out/bayer_rt/walkthrough.json": "dad7a49a5b34a9503e4705d625618e6bd346f2f8e2f54416969cd236172d9921",
-    "scripts/build_bayer_overview.py": "bfbabcbf61dafaad8d0e8b5b62a4d63a2b26323287d2562c9cc086d763909ff7"
+    "out/bayer_rt/walkthrough.json": "b79550a379d08ef44d721326b00a80f3580dcd3d317920e9e3ec1e0bbad7d7ee",
+    "scripts/build_bayer_overview.py": "7c1c22b415cf4fb2baa0479416252a9886c34ee1c20c4cef6678befbef7de2a2"
    },
    "outputs": {
-    "drafts/bayer-overview/index.html": "1eda92aa0826ea62d0499ee635071b6b6ce1f2e7e5c42719e69a46ecf5e96602",
-    "drafts/bayer-overview/shots/end-1440-dark.png": "692ba65aa328208c75361ca591d7060978d32c8ed0bfdedcaa84fb8c273a658e",
-    "drafts/bayer-overview/shots/end-1440-light.png": "0b2e91e6c983c57e456dfba9d47a0ec071e4b65ad01e37fc81608ba1739f2e81",
-    "drafts/bayer-overview/shots/end-390-dark.png": "4ae43db1fe8049841e7e01ddaa5b0a58a53b9fb404d9b431b2af5d9b5bdb03a2",
-    "drafts/bayer-overview/shots/end-390-light.png": "cd20070f37135fe65b5ebc00dd8c135d2fe31bbcdc55d598490ae6b1a1c862aa",
-    "drafts/bayer-overview/shots/flow-lost-1440-light.png": "cb1790a78f28f218652641bfd23fd83572a5bcf372f4f3dc5cfbc554b71e6c6b",
-    "drafts/bayer-overview/shots/start-1440-light.png": "730ec24a6b5e2dc5cadc36e212f42399adc525bceb14b68ac32ae6c874bef5ab",
+    "drafts/bayer-overview/index.html": "b4317bc102e661e9dac7f8d63d3c1dc0fe1ed8980f34f203b5ba220bc0dc8d7c",
+    "drafts/bayer-overview/shots/end-1440-dark.png": "be5f8b6ced811eee4a10592aec792e66eb67bde5c13d55ab3c2d077d8c1f825a",
+    "drafts/bayer-overview/shots/end-1440-light.png": "1faa7aac13468687ee2b79ce686e84559082473ff8e58a998212fa4debc2d255",
+    "drafts/bayer-overview/shots/end-390-dark.png": "0e84fd95283f82b6a08b522976b542c8223a410bd2817296190482836b1b0548",
+    "drafts/bayer-overview/shots/end-390-light.png": "ae19d5d16937e8d2caa27d57dd1679192f8ad47ed84bc86f1d0dc4d801b7df60",
+    "drafts/bayer-overview/shots/flow-lost-1440-light.png": "a97ea43597ac04b40e38e37cae47f60c0e759ed0769a0c22e54734e2c1120dba",
+    "drafts/bayer-overview/shots/start-1440-light.png": "919e657d2ac10fb549858947e4a0b0b49681e87e5962568cae53f6892ec9d3ec",
     "drafts/bayer-overview/verification.md": "c92128d62cd69638486e15828f4ee9de168273efb34570ad1979964bab9db66d"
    }
   },
   "bayer.pid": {
    "inputs": {
-    "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "data/bayer_rt/pid_layout.json": "f293228373d0e4cf8aa2593dc5439aa9daea5b160ab2f639cf399fa7a8f4a3ba",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
     "scripts/draw_pid_from_model.py": "6b2575236028dd470a6c8047189d7d0a80712fabce40a4c2d8800dfa99e4d1f8"
    },
    "outputs": {
-    "data/bayer_rt/pid/RT1.graphml": "4104b254627f5c3f0b830c4395dbe02c310f578758ca0d3521c677131e415bfd",
-    "data/bayer_rt/pid/RT1.png": "31e018e3c5b65b4a913639a02e63970bbfef9ae4830309b100562e63726fd2ac",
-    "data/bayer_rt/pid/RT1.svg": "839f2708d5aae6fc75e01df7f497b4d2e5f319ac25e994faede70d2047099f3e",
-    "data/bayer_rt/pid/key.json": "473c7dd74c8bc3e2f4262bffc85212d9326c094c124d910bebfc4160d3a53a5b",
-    "data/bayer_rt/pid/manifest.json": "e5e6cfeb7e82bd984e360e8d75b2e016940a76d1327583dec78e46251c02f36b",
+    "data/bayer_rt/pid/RT1.graphml": "2d9dc3bb54c35f3e3fbfdab15f2faf68928c3ee1d6d2e769fd99aa55a685abd5",
+    "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
+    "data/bayer_rt/pid/RT1.svg": "6cfb64ecc6d9b7cae468a70e5b00f6d40ae39ae1bf8054399ba3aa87ced8e9c6",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "data/bayer_rt/pid/manifest.json": "ae76585a603effe1a8d068f30ca670d0eb17239a8683621806fbe68de51c9fbc",
     "data/bayer_rt/pid/sheet_register.csv": "d049d9fe38d511cd48bca76c2dfe30eee498c03e9065dc579670ef2f2e2c7297"
    }
   },
   "bayer.replay": {
    "inputs": {
     "data/bayer_rt/fig11_digitized.csv": "efb7884ec0f2cb5c7369a00f480a946a798a196ff92abac0919f293ab1d9e9f8",
-    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
-    "scripts/bayer_replay.py": "0efab18694a8d8ee2b2bfd93ce46041b166c528d0f76e26f47c5711d950f0c73",
+    "data/bayer_rt/replay_rules.json": "586a2b9115b7eec59f063268d4f2a42c72f5e742791a01148a224ae9d324742e",
+    "scripts/bayer_replay.py": "a421a65c3e2f376ece29cfe806f0389c711e5189aff9f81dc8820b9ec15fee0d",
     "scripts/digitize_bayer_fig11.py": "fbcb07f8b26b47f6545121724f6ce511916e95358287901f0e7fdc76c729f521"
    },
    "outputs": {
-    "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
-    "out/bayer_rt/replay_states.json": "4409497acbf88ae312f7dc77c61bfecad89b4c6c5a95f2aa5bc92e626a629068",
-    "out/bayer_rt/replay_states.md": "0d10ac20e6347d795543e280dabc39b8730628b949fb4500cf288dd942195a7e"
+    "data/bayer_rt/replay.csv": "5203033b3716a96bd566be8b497488819e812f418a5a47a9fba8188eb90b3599",
+    "out/bayer_rt/replay_states.json": "e1ef7d1784666a4191775e8ae6fa9c1399f9cd409bc1f9a4781163104f272008",
+    "out/bayer_rt/replay_states.md": "2f62f43c6a2eae618ff6a66085fba57d990d0cac0cb852b38c4fe262ae2deddb"
    }
   },
   "bayer.source": {
@@ -80,25 +80,25 @@
    "outputs": {
     "data/bayer_rt/fig10_inventory.json": "adaff7442d40a4dd555ff720d78b44a0657bd8ff18fa7b47aac7b0e6e4e7ce11",
     "data/bayer_rt/fig11_calibration.json": "c12a0bb42f80f0b0d4ebc28e2b1aa8621c33d1dc8e3aba19ea0b6937c163fab4",
-    "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
-    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
+    "data/bayer_rt/pid_layout.json": "f293228373d0e4cf8aa2593dc5439aa9daea5b160ab2f639cf399fa7a8f4a3ba",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/replay_rules.json": "586a2b9115b7eec59f063268d4f2a42c72f5e742791a01148a224ae9d324742e",
     "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39"
    }
   },
   "bayer.walkthrough": {
    "inputs": {
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
-    "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
-    "data/bayer_rt/replay_rules.json": "d45954474ee556fb5cc655907273c5a1a1ce910c5e27f506dfe10278bb5d9c6d",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/replay.csv": "5203033b3716a96bd566be8b497488819e812f418a5a47a9fba8188eb90b3599",
+    "data/bayer_rt/replay_rules.json": "586a2b9115b7eec59f063268d4f2a42c72f5e742791a01148a224ae9d324742e",
     "data/bayer_rt/walkthrough_steps.json": "5b466f72e472f3728844b41f3179ac3d5b780c062052d108499fd55b580aaa39",
     "out/bayer_rt/fig11_check.json": "dad0712cb8920a7ed3eb7c75dfaecc54b6e96e47676230079ef5105051134fb0",
-    "out/bayer_rt/replay_states.json": "4409497acbf88ae312f7dc77c61bfecad89b4c6c5a95f2aa5bc92e626a629068",
-    "scripts/bayer_walkthrough.py": "744d1c82278374cf207340c48ed66dcff58ce85f01c1896c483887d0d0f6cb62"
+    "out/bayer_rt/replay_states.json": "e1ef7d1784666a4191775e8ae6fa9c1399f9cd409bc1f9a4781163104f272008",
+    "scripts/bayer_walkthrough.py": "cfb5daab361bd1e22851ba528621633739b555518a394280949ac253da934639"
    },
    "outputs": {
-    "out/bayer_rt/walkthrough.json": "dad7a49a5b34a9503e4705d625618e6bd346f2f8e2f54416969cd236172d9921",
-    "out/bayer_rt/walkthrough.md": "7e6e63d8e1cf186500aedede8e9ae563a0b7e9ca2061e3ab7b98c67a0f109afb"
+    "out/bayer_rt/walkthrough.json": "b79550a379d08ef44d721326b00a80f3580dcd3d317920e9e3ec1e0bbad7d7ee",
+    "out/bayer_rt/walkthrough.md": "9df05178e4fbeba65ef77c0da7725e36ddf8a40982ebee71732a9a596e20bd2b"
    }
   },
   "dexpi.keys": {

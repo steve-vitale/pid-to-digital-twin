@@ -26,7 +26,7 @@ if (!existsSync(PAGE)) { console.error("build the page first: python scripts/bui
 const lines = readFileSync(join(ROOT, "data", "bayer_rt", "replay.csv"), "utf8").split(/\r?\n/).filter((l) => l && !l.startsWith("#"));
 const head = lines[0].split(",");
 const csv = lines.slice(1).map((l) => Object.fromEntries(l.split(",").map((v, i) => [head[i], v])));
-const TAGS = ["TI-104", "PI-101", "LI-102", "FI-103"];
+const TAGS = ["TT-104", "PT-101", "LT-102", "FT-103"];
 const readJson = (...p) => JSON.parse(readFileSync(join(ROOT, ...p), "utf8"));
 const STEPS = readJson("data", "bayer_rt", "walkthrough_steps.json").steps;
 const FIG11 = Object.fromEntries(readJson("out", "bayer_rt", "fig11_check.json").checks.map((c) => [c.name, c.ok]));

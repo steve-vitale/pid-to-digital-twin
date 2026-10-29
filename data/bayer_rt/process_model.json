@@ -176,7 +176,7 @@
   ],
   "instruments": [
     {
-      "tag": "PI-101",
+      "tag": "PT-101", "former_tag": "PI-101",
       "assigned_tag": true,
       "unit": "RT-1",
       "variable": "pressure",
@@ -186,7 +186,7 @@
       "source": "Fig 10 (Pressure Transmitter); Fig 11"
     },
     {
-      "tag": "LI-102",
+      "tag": "LT-102", "former_tag": "LI-102",
       "assigned_tag": true,
       "unit": "RT-1",
       "variable": "level",
@@ -196,7 +196,7 @@
       "source": "Fig 10 (Level Transmitter); Fig 11; p. 28"
     },
     {
-      "tag": "FI-103",
+      "tag": "FT-103", "former_tag": "FI-103",
       "assigned_tag": true,
       "unit": "P-1",
       "stream": "S10",
@@ -207,7 +207,7 @@
       "source": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
     },
     {
-      "tag": "TI-104",
+      "tag": "TT-104", "former_tag": "TI-104",
       "assigned_tag": true,
       "unit": "RT-1",
       "variable": "temperature",
@@ -218,17 +218,17 @@
       "open_question": "The report says the control system monitored both the bulk liquid and the recirculation loop (p. 28) but does not say which one Fig 11 plots or Fig 10's transmitter measures."
     },
     {
-      "tag": "TI-105",
+      "tag": "TT-105", "former_tag": "TI-105",
       "assigned_tag": true,
       "unit": "RT-1",
       "variable": "temperature",
       "uom": "C",
-      "description": "Second temperature measurement (bulk liquid or recirculation loop; see TI-104)",
+      "description": "Second temperature measurement (bulk liquid or recirculation loop; see TT-104)",
       "source": "p. 28 (text only; not drawn in Fig 10)",
       "drawn_in_source_figure": false
     },
     {
-      "tag": "FI-106",
+      "tag": "FT-106", "former_tag": "FI-106",
       "assigned_tag": true,
       "unit": "E-2",
       "stream": "U1",
@@ -350,7 +350,7 @@
   "controllers": [
     {
       "tag": "LIC-102",
-      "measurement": "LI-102",
+      "measurement": "LT-102",
       "output": {
         "final_element": "LV-102"
       },
@@ -365,7 +365,7 @@
     },
     {
       "tag": "TIC-104",
-      "measurement": "TI-104",
+      "measurement": "TT-104",
       "output": {
         "split_range": [
           "TV-104A",
@@ -387,34 +387,34 @@
     {
       "id": "IL-1",
       "class": "safety",
-      "cause": "TI-104 below the minimum temperature setpoint",
+      "cause": "TT-104 below the minimum temperature setpoint",
       "effect": "FV-107 held closed",
       "bypass": "password-protected",
       "as_found": "bypassed on the night of the incident, based on experience with the heater (p. 69)",
       "source": "p. 30; p. 69",
-      "measurement": "TI-104",
+      "measurement": "TT-104",
       "final_element": "FV-107",
       "drawn_in_source_figure": false
     },
     {
       "id": "IL-2",
       "class": "safety",
-      "cause": "PI-101 at or above the maximum pressure setpoint",
+      "cause": "PT-101 at or above the maximum pressure setpoint",
       "effect": "FV-107 held closed",
       "bypass": "password-protected",
       "source": "p. 30",
-      "measurement": "PI-101",
+      "measurement": "PT-101",
       "final_element": "FV-107",
       "drawn_in_source_figure": false
     },
     {
       "id": "IL-3",
       "class": "operating",
-      "cause": "FI-103 recirculation flow not established",
+      "cause": "FT-103 recirculation flow not established",
       "effect": "FV-107 held closed",
       "source": "p. 30; p. 38",
       "as_found": "left bypassed by the computer programmers (p. 38)",
-      "measurement": "FI-103",
+      "measurement": "FT-103",
       "final_element": "FV-107",
       "drawn_in_source_figure": false
     }
