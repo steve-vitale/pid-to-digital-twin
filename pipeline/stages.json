@@ -2452,6 +2452,52 @@
    "treatment": "Each column up to the failure at 22:33 gets a value and bounds per tag (column range widened by the digitizing error); each interlock condition and limit is met, clear or cannot tell, never called while the bound straddles the gap the report leaves. Then five statements in the report about the evening are tested against the derived states.",
    "carries": "5 of 5 report statements agree (rules written after the trend was seen: a consistency check, not a blind test); no interlock setpoint is published, so each state is bounded, not exact",
    "checked_by": "scripts/test_bayer_rt.py (current outputs, every rule cited, a straddling bound never called, a planted flow-loss time fails)"
+  },
+  {
+   "poc": true,
+   "upstream": [
+    "bayer.source",
+    "bayer.pid",
+    "bayer.replay"
+   ],
+   "inputs": [
+    "data/bayer_rt/process_model.json",
+    "data/bayer_rt/pid_layout.json",
+    "data/bayer_rt/replay_rules.json",
+    "data/bayer_rt/replay.csv"
+   ],
+   "code": [
+    "scripts/build_bayer_overview.py",
+    "drafts/bayer-overview/verify.mjs",
+    "drafts/interactive-tour/cdp.mjs"
+   ],
+   "outputs": [
+    "drafts/bayer-overview/index.html",
+    "drafts/bayer-overview/verification.md",
+    "drafts/bayer-overview/shots/*.png"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.overview",
+   "dataset": "bayer",
+   "stage": 3,
+   "title": "Overview screen of the residue treater, generated from the model and driven by the replay (proof of concept)",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/build_bayer_overview.py"
+    ],
+    [
+     "node",
+     "drafts/bayer-overview/verify.mjs"
+    ]
+   ],
+   "requires_note": "node and a Chrome or Chromium (found by drafts/interactive-tour/cdp.mjs) for the verification",
+   "treatment": "One self-contained page: mimic geometry from the generated P&ID layout, items and tags from the model, values, bounds and states from the replay, grey process with colour only for an abnormal state. The verifier reads replay.csv itself and checks every row on the page, the failure note only at the end, and layout at 390 and 1440 px in light and dark.",
+   "carries": "proof of concept; not the plant's screen; tags assigned by this project; values with their digitizing bounds",
+   "checked_by": "drafts/bayer-overview/verify.mjs (16 checks)"
   }
  ]
 }

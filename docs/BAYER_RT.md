@@ -3,7 +3,7 @@
 **Status, 2026-10-28:** built: a sourced process model checked against the report's own drawing (Figure 10), a
 generated P&ID of the unit checked against the same figure, and a checked digitization of the published trend
 (Figure 11), replayed through the model's interlocks and limits and checked against the report's account of the
-evening. Not built yet: the overview screen and the walk-through.
+evening, and shown on a generated overview screen of the unit (proof of concept). Not built yet: the walk-through.
 Why this unit: [REAL_UNIT_SELECTION.md](REAL_UNIT_SELECTION.md).
 
 On August 28, 2008, the residue treater in Bayer CropScience's methomyl unit in Institute, West Virginia, ruptured
@@ -158,13 +158,35 @@ column by column from `data/bayer_rt/replay_rules.json`, where every rule cites 
   never reached (highest 147.8 C). **This is a consistency check, not a blind test:** I wrote the rules after
   looking at the digitized values.
 
-`data/bayer_rt/replay.csv` holds every column with values, bounds and states, ready for the overview screen.
+`data/bayer_rt/replay.csv` holds every column with values, bounds and states.
+
+## The overview screen: `drafts/bayer-overview/index.html` (proof of concept)
+
+The board operators asked for equipment overview screens, and they "were not available for the August 2008
+startup" (p. 60). This page is an overview of the one unit, generated the way this project builds screens:
+`scripts/build_bayer_overview.py` takes the mimic's geometry from the generated P&ID's layout, the items and tags from
+the model, and the values and states from the replay. Nothing on it is typed in by hand.
+
+- **High-performance HMI practice:** grey process, colour only for an abnormal state. The 135 C line is also the
+  normal operating temperature, so being above it is shown without alarm colour (the rules file says why).
+- **Every value with its bound,** and every interlock as its condition (met, clear, cannot tell) beside its
+  as-operated state from the report: two of the three bypassed.
+- **A timeline to scrub,** with the report's events and their pages, and trends of the evening so far.
+- **It stops at 22:33** and says, in one sentence with its page, what happened: the vessel ruptured and two
+  employees died. No effects.
+- **On a phone** the values, interlocks and limits come first; the mimic is an overview, not where values are read.
+
+`drafts/bayer-overview/verify.mjs` reads `replay.csv` itself and checks the page in headless Chrome: all 519 rows'
+values, interlock and limit states equal the file; the failure note shows at the last row only; no horizontal scroll,
+no text under 12 px, no console errors at 390 and 1440 px in light and dark; mimic text at least 11 px on desktop.
+16 of 16 pass. The first build passed every check and was still unreadable (mimic text about 6 px, no values on a
+phone); the readability checks were added after looking at the screens.
+
+This is not the plant's screen or its DCS, and it claims nothing about what any screen would have changed.
 
 ## Next
 
-1. An overview screen of the unit generated from the model, the kind the operators asked for (p. 60), driven by
-   `data/bayer_rt/replay.csv`, with the limits as bands and each interlock's condition shown with its bounds.
-2. A walk-through page that puts the published timeline (pp. 38-40) next to the replayed overview. Every derived
+1. A walk-through page that puts the published timeline (pp. 38-40) next to the replayed overview. Every derived
    state either matches a statement in the report or goes on a list of disagreements.
 
 Run: `python scripts/compare_bayer_fig10.py`, `python scripts/digitize_bayer_fig11.py` (needs PyMuPDF),

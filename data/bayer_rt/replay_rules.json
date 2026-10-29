@@ -36,10 +36,10 @@
   }
  ],
  "limits": [
-  {"id": "T-crit", "tag": "TI-104", "what": "Critical decomposition temperature (the normal operating temperature)", "at_or_above": 135, "source": "p. 30; p. 39"},
-  {"id": "T-SOL", "tag": "TI-104", "what": "Safe operating limit", "at_or_above": 155, "source": "p. 39"},
-  {"id": "P-MAWP", "tag": "PI-101", "what": "Maximum allowable operating pressure", "at_or_above": 50, "source": "p. 28"},
-  {"id": "L-fill", "tag": "LI-102", "what": "Minimum fill before starting the recirculation pump", "below": 30, "source": "p. 31"}
+  {"id": "T-crit", "short": "135 °C normal / critical", "tag": "TI-104", "what": "Critical decomposition temperature (the normal operating temperature)", "at_or_above": 135, "source": "p. 30; p. 39", "informational": "Normal operation is at about 135 C (p. 30), so being above it is expected once the unit is running; screens show it without alarm colour."},
+  {"id": "T-SOL", "short": "155 °C safe limit", "tag": "TI-104", "what": "Safe operating limit", "at_or_above": 155, "source": "p. 39"},
+  {"id": "P-MAWP", "short": "50 psig MAWP", "tag": "PI-101", "what": "Maximum allowable operating pressure", "at_or_above": 50, "source": "p. 28"},
+  {"id": "L-fill", "short": "30 % minimum fill", "tag": "LI-102", "what": "Minimum fill before starting the recirculation pump", "below": 30, "source": "p. 31"}
  ],
  "report_statements": [
   {"id": "K1", "statement": "The outside operator started the recirculation pump at 6:14 p.m.", "source": "p. 38",

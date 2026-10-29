@@ -3001,3 +3001,36 @@ The bug sat in the minutes nobody sampled.
 
 **At your plant:** when you rebuild an event from a trend, publish the bounds and say when a state can't be told.
 A timeline that is crisp everywhere has usually guessed somewhere.
+
+## 58. An overview screen for the unit
+
+**What:** 2026-10-29. A generated overview screen of the residue treater, replaying the evening: the kind of screen
+the operators asked for and didn't have at the startup (report p. 60). Proof of concept, at
+`drafts/bayer-overview/index.html`. Details: [BAYER_RT.md](BAYER_RT.md).
+
+**How:** `scripts/build_bayer_overview.py` writes one self-contained page from the P&ID layout (geometry), the model
+(items and tags) and the replay (values, bounds, states). `drafts/bayer-overview/verify.mjs` checks it in headless
+Chrome against `replay.csv`, read independently of the page.
+
+**What it found:**
+- **Every check passed on the first build, and the page was unusable.** Mimic text came out about 6 px on a desktop,
+  and a phone had no readable values anywhere. The checks covered data and layout, not legibility of the drawing.
+  Looking at the screens found it; the fix was a "Values now" card that comes first on a phone, larger mimic text,
+  and a check that mimic text is at least 11 px on desktop.
+- **The "critical decomposition temperature" is also the normal operating temperature** (p. 30). Shown as a crossed
+  limit in amber, it would flag normal operation as abnormal, the alarm habit high-performance HMI guidance warns
+  against. It is now marked informational in the rules and shown without colour.
+- **All 519 rows on the page match the replay file,** and the failure note appears at the last row only.
+
+**Why:**
+- **Rejected: a live Ignition screen first.** The project's gateway path exists for TE, but this replay is 519
+  points from a figure, not a running process; a static page shows the same states with less to go wrong, and the
+  gateway version can follow if the series wants it.
+- **Rejected: colouring every interlock that would act.** "Met" is amber because the feed valve should then be
+  closed and isn't; "cannot tell" is a dashed outline, so an unknown never looks like an alarm or an all-clear.
+
+**Lesson:** a page that passes every check can still fail the person reading it. Look at it at the sizes people
+use, then make what you saw into a check.
+
+**At your plant:** before you trust an overview screen, ask what it shows when a value is uncertain, and whether
+anything coloured as abnormal is actually normal operation.
