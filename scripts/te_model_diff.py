@@ -81,7 +81,7 @@ def diff(twin, verified):
             continue
         e = cands[0]
         problems = []
-        ext_kind = "final_element" if (e.get("instrument_kind") or "").startswith(("final", "operated")) else \
+        ext_kind = "final_element" if (e.get("instrument_kind") or "").startswith(("final", "operated", "valve")) else \
             "instrument"
         if ext_kind != kind:
             problems.append(f"kind {ext_kind} (model: {kind})")

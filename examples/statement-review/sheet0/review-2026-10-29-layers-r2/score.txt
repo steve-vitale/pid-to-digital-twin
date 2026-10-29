@@ -1,0 +1,22 @@
+MATCHES ITS SOURCE, per relationship layer (no blended rate: 5 layers are different facts)
+[item] the items themselves: identity, attributes and other relations
+ : 1 mismatch of 14 checked = error rate 7.1% (Wilson 95%: 1.3% to 31.5%); unclear 1; not reviewed 0
+  weighted to the whole population (stratum sizes from the sample file): 7.1%
+  item             1/14  error   7.1%  95% 1.3%-31.5%      unclear 1
+[network] network layer: a drawn line network and what is attached to it
+ : 0 mismatch of 15 checked = error rate 0.0% (Wilson 95%: 0.0% to 20.4%); unclear 0; not reviewed 0
+  weighted to the whole population (stratum sizes from the sample file): 0.0%
+  network          0/15  error   0.0%  95% 0.0%-20.4%      unclear 0
+[network_pair] pairwise link: two items on the same drawn line network (the tracer's links)
+ : 0 mismatch of 15 checked = error rate 0.0% (Wilson 95%: 0.0% to 20.4%); unclear 0; not reviewed 0
+  weighted to the whole population (stratum sizes from the sample file): 0.0%
+  network_pair     0/15  error   0.0%  95% 0.0%-20.4%      unclear 0
+[non_pipe] drawn lines that are not pipe: instrument connections and taps, actuator stems, nozzle stubs
+ : 0 mismatch of 15 checked = error rate 0.0% (Wilson 95%: 0.0% to 20.4%); unclear 0; not reviewed 0
+  weighted to the whole population (stratum sizes from the sample file): 0.0%
+  non_pipe         0/15  error   0.0%  95% 0.0%-20.4%      unclear 0
+[pipe] pipe layer: a pipe segment or pipe junction (what is piped directly to what)
+ : 0 mismatch of 15 checked = error rate 0.0% (Wilson 95%: 0.0% to 20.4%); unclear 0; not reviewed 0
+  weighted to the whole population (stratum sizes from the sample file): 0.0%
+  pipe             0/15  error   0.0%  95% 0.0%-20.4%      unclear 0
+TRUE IN THE PLANT (separate; only statements that matched their source): not given 73

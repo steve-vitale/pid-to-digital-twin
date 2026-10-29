@@ -1,10 +1,14 @@
 # From a DEXPI file: a draft twin bundle with no model reading the drawing
 
+**Why it matters:** If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether.
+
 A DEXPI P&ID (the ISO 15926 / DEXPI XML exchange format) already holds the symbols, their labels and the lines
 between them. This example turns one public DEXPI sheet into the same review bundle that
 [`examples/own-drawing`](../own-drawing/README.md) builds from a model's extraction: asset model, review sheet,
-Ignition tags, PI AF staging and SVG overlay. No model, OCR or line tracer runs at any step, so the tags in the
-bundle are the drawn label text exactly.
+Ignition tags, PI AF staging and SVG overlay. No model, OCR or line tracer runs at any step, so every tag in the
+bundle comes from the drawn label text with no reading step: an equipment tag is its label as drawn, and an
+instrument bubble's tag is assembled from the label's first two separate text pieces joined with a space (`PI` and
+`4712.01` become `PI 4712.01`).
 
 It is a ceiling, not a result: it shows what the intake produces when the extraction is perfect. It says nothing
 about how well a model reads drawings.

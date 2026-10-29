@@ -1,0 +1,933 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="t_dist">
+      <data key="d0">tank</data>
+      <data key="d1">393.0</data>
+      <data key="d2">681.0</data>
+      <data key="d3">203.0</data>
+      <data key="d4">354.0</data>
+      <data key="d11">78711</data>
+    </node>
+    <node id="t_still">
+      <data key="d0">tank</data>
+      <data key="d1">914.0</data>
+      <data key="d2">1054.0</data>
+      <data key="d3">253.0</data>
+      <data key="d4">469.0</data>
+      <data key="d11">78521</data>
+    </node>
+    <node id="t_feed">
+      <data key="d0">tank</data>
+      <data key="d1">59.0</data>
+      <data key="d2">354.0</data>
+      <data key="d3">588.0</data>
+      <data key="d4">754.0</data>
+      <data key="d11">78761</data>
+    </node>
+    <node id="t_wht">
+      <data key="d0">tank</data>
+      <data key="d1">1220.0</data>
+      <data key="d2">1437.0</data>
+      <data key="d3">593.0</data>
+      <data key="d4">701.0</data>
+      <data key="d11">78751</data>
+    </node>
+    <node id="t_wst">
+      <data key="d0">tank</data>
+      <data key="d1">83.0</data>
+      <data key="d2">747.0</data>
+      <data key="d3">1076.0</data>
+      <data key="d4">1360.0</data>
+      <data key="d11">78727</data>
+    </node>
+    <node id="p_still">
+      <data key="d0">pump</data>
+      <data key="d1">527.0</data>
+      <data key="d2">600.0</data>
+      <data key="d3">720.0</data>
+      <data key="d4">787.0</data>
+      <data key="d11">78121</data>
+    </node>
+    <node id="p_feed">
+      <data key="d0">pump</data>
+      <data key="d1">0.0</data>
+      <data key="d2">38.0</data>
+      <data key="d3">829.0</data>
+      <data key="d4">904.0</data>
+      <data key="d11">78141</data>
+    </node>
+    <node id="p_vac">
+      <data key="d0">pump</data>
+      <data key="d1">1372.0</data>
+      <data key="d2">1427.0</data>
+      <data key="d3">1130.0</data>
+      <data key="d4">1179.0</data>
+    </node>
+    <node id="g_trap">
+      <data key="d0">general</data>
+      <data key="d1">441.0</data>
+      <data key="d2">477.0</data>
+      <data key="d3">37.0</data>
+      <data key="d4">129.0</data>
+      <data key="d11">78 22</data>
+    </node>
+    <node id="g_cond">
+      <data key="d0">general</data>
+      <data key="d1">575.0</data>
+      <data key="d2">638.0</data>
+      <data key="d3">109.0</data>
+      <data key="d4">205.0</data>
+      <data key="d11">78511</data>
+    </node>
+    <node id="g_cooler">
+      <data key="d0">general</data>
+      <data key="d1">741.0</data>
+      <data key="d2">828.0</data>
+      <data key="d3">493.0</data>
+      <data key="d4">603.0</data>
+      <data key="d11">78221</data>
+    </node>
+    <node id="g_heater">
+      <data key="d0">general</data>
+      <data key="d1">932.0</data>
+      <data key="d2">1030.0</data>
+      <data key="d3">463.0</data>
+      <data key="d4">532.0</data>
+    </node>
+    <node id="g_orifice">
+      <data key="d0">general</data>
+      <data key="d1">58.0</data>
+      <data key="d2">73.0</data>
+      <data key="d3">855.0</data>
+      <data key="d4">879.0</data>
+    </node>
+    <node id="g_tube1">
+      <data key="d0">general</data>
+      <data key="d1">1097.0</data>
+      <data key="d2">1147.0</data>
+      <data key="d3">1189.0</data>
+      <data key="d4">1252.0</data>
+    </node>
+    <node id="g_tube2">
+      <data key="d0">general</data>
+      <data key="d1">1202.0</data>
+      <data key="d2">1252.0</data>
+      <data key="d3">1191.0</data>
+      <data key="d4">1255.0</data>
+    </node>
+    <node id="g_tube3">
+      <data key="d0">general</data>
+      <data key="d1">1307.0</data>
+      <data key="d2">1352.0</data>
+      <data key="d3">1191.0</data>
+      <data key="d4">1252.0</data>
+    </node>
+    <node id="g_coldtrap">
+      <data key="d0">general</data>
+      <data key="d1">1448.0</data>
+      <data key="d2">1543.0</data>
+      <data key="d3">1187.0</data>
+      <data key="d4">1247.0</data>
+    </node>
+    <node id="v_cv_cw">
+      <data key="d0">valve</data>
+      <data key="d1">26.0</data>
+      <data key="d2">61.0</data>
+      <data key="d3">70.0</data>
+      <data key="d4">150.0</data>
+    </node>
+    <node id="v_trap">
+      <data key="d0">valve</data>
+      <data key="d1">442.0</data>
+      <data key="d2">465.0</data>
+      <data key="d3">0.0</data>
+      <data key="d4">24.0</data>
+    </node>
+    <node id="v_317">
+      <data key="d0">valve</data>
+      <data key="d1">181.0</data>
+      <data key="d2">204.0</data>
+      <data key="d3">388.0</data>
+      <data key="d4">430.0</data>
+      <data key="d11">1-4</data>
+    </node>
+    <node id="v_25a">
+      <data key="d0">valve</data>
+      <data key="d1">343.0</data>
+      <data key="d2">384.0</data>
+      <data key="d3">449.0</data>
+      <data key="d4">507.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_feedbot">
+      <data key="d0">valve</data>
+      <data key="d1">127.0</data>
+      <data key="d2">187.0</data>
+      <data key="d3">778.0</data>
+      <data key="d4">822.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_check_fp">
+      <data key="d0">valve</data>
+      <data key="d1">37.0</data>
+      <data key="d2">53.0</data>
+      <data key="d3">856.0</data>
+      <data key="d4">878.0</data>
+    </node>
+    <node id="v_future">
+      <data key="d0">valve</data>
+      <data key="d1">172.0</data>
+      <data key="d2">214.0</data>
+      <data key="d3">852.0</data>
+      <data key="d4">882.0</data>
+    </node>
+    <node id="v_suct">
+      <data key="d0">valve</data>
+      <data key="d1">549.0</data>
+      <data key="d2">571.0</data>
+      <data key="d3">675.0</data>
+      <data key="d4">708.0</data>
+    </node>
+    <node id="v_dis">
+      <data key="d0">valve</data>
+      <data key="d1">659.0</data>
+      <data key="d2">705.0</data>
+      <data key="d3">701.0</data>
+      <data key="d4">744.0</data>
+      <data key="d11">3/4-23</data>
+    </node>
+    <node id="v_cw256">
+      <data key="d0">valve</data>
+      <data key="d1">674.0</data>
+      <data key="d2">716.0</data>
+      <data key="d3">493.0</data>
+      <data key="d4">551.0</data>
+    </node>
+    <node id="v_cdrain">
+      <data key="d0">valve</data>
+      <data key="d1">744.0</data>
+      <data key="d2">762.0</data>
+      <data key="d3">618.0</data>
+      <data key="d4">645.0</data>
+    </node>
+    <node id="v_203">
+      <data key="d0">valve</data>
+      <data key="d1">1219.0</data>
+      <data key="d2">1253.0</data>
+      <data key="d3">282.0</data>
+      <data key="d4">311.0</data>
+    </node>
+    <node id="v_123a">
+      <data key="d0">valve</data>
+      <data key="d1">1264.0</data>
+      <data key="d2">1290.0</data>
+      <data key="d3">319.0</data>
+      <data key="d4">359.0</data>
+      <data key="d11">1-23</data>
+    </node>
+    <node id="v_210">
+      <data key="d0">valve</data>
+      <data key="d1">1106.0</data>
+      <data key="d2">1138.0</data>
+      <data key="d3">522.0</data>
+      <data key="d4">551.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_14b">
+      <data key="d0">valve</data>
+      <data key="d1">1397.0</data>
+      <data key="d2">1439.0</data>
+      <data key="d3">490.0</data>
+      <data key="d4">548.0</data>
+      <data key="d11">1-4</data>
+    </node>
+    <node id="v_stillout">
+      <data key="d0">valve</data>
+      <data key="d1">978.0</data>
+      <data key="d2">999.0</data>
+      <data key="d3">761.0</data>
+      <data key="d4">799.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_samp">
+      <data key="d0">valve</data>
+      <data key="d1">1181.0</data>
+      <data key="d2">1213.0</data>
+      <data key="d3">714.0</data>
+      <data key="d4">741.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_whtbot">
+      <data key="d0">valve</data>
+      <data key="d1">1249.0</data>
+      <data key="d2">1302.0</data>
+      <data key="d3">751.0</data>
+      <data key="d4">798.0</data>
+      <data key="d11">2-5</data>
+    </node>
+    <node id="v_t1">
+      <data key="d0">valve</data>
+      <data key="d1">1132.0</data>
+      <data key="d2">1151.0</data>
+      <data key="d3">1153.0</data>
+      <data key="d4">1188.0</data>
+    </node>
+    <node id="v_t2">
+      <data key="d0">valve</data>
+      <data key="d1">1239.0</data>
+      <data key="d2">1261.0</data>
+      <data key="d3">1162.0</data>
+      <data key="d4">1198.0</data>
+    </node>
+    <node id="v_t3">
+      <data key="d0">valve</data>
+      <data key="d1">1336.0</data>
+      <data key="d2">1355.0</data>
+      <data key="d3">1158.0</data>
+      <data key="d4">1193.0</data>
+    </node>
+    <node id="v_123b">
+      <data key="d0">valve</data>
+      <data key="d1">1036.0</data>
+      <data key="d2">1063.0</data>
+      <data key="d3">1270.0</data>
+      <data key="d4">1292.0</data>
+      <data key="d11">1-23</data>
+    </node>
+    <node id="v_vp">
+      <data key="d0">valve</data>
+      <data key="d1">1428.0</data>
+      <data key="d2">1446.0</data>
+      <data key="d3">1146.0</data>
+      <data key="d4">1164.0</data>
+    </node>
+    <node id="v_ct">
+      <data key="d0">valve</data>
+      <data key="d1">1526.0</data>
+      <data key="d2">1549.0</data>
+      <data key="d3">1160.0</data>
+      <data key="d4">1196.0</data>
+    </node>
+    <node id="i_btic257v">
+      <data key="d0">instrumentation</data>
+      <data key="d1">90.0</data>
+      <data key="d2">136.0</data>
+      <data key="d3">41.0</data>
+      <data key="d4">87.0</data>
+      <data key="d11">BTIC 257V</data>
+    </node>
+    <node id="i_e12">
+      <data key="d0">instrumentation</data>
+      <data key="d1">146.0</data>
+      <data key="d2">175.0</data>
+      <data key="d3">55.0</data>
+      <data key="d4">84.0</data>
+      <data key="d11">E12</data>
+    </node>
+    <node id="i_b4">
+      <data key="d0">instrumentation</data>
+      <data key="d1">246.0</data>
+      <data key="d2">283.0</data>
+      <data key="d3">0.0</data>
+      <data key="d4">28.0</data>
+      <data key="d11">B4</data>
+    </node>
+    <node id="i_ab">
+      <data key="d0">instrumentation</data>
+      <data key="d1">349.0</data>
+      <data key="d2">382.0</data>
+      <data key="d3">5.0</data>
+      <data key="d4">38.0</data>
+      <data key="d11">AB</data>
+    </node>
+    <node id="i_btim305">
+      <data key="d0">instrumentation</data>
+      <data key="d1">374.0</data>
+      <data key="d2">418.0</data>
+      <data key="d3">95.0</data>
+      <data key="d4">137.0</data>
+      <data key="d11">BTIM 305</data>
+    </node>
+    <node id="i_bhpa301">
+      <data key="d0">instrumentation</data>
+      <data key="d1">341.0</data>
+      <data key="d2">379.0</data>
+      <data key="d3">157.0</data>
+      <data key="d4">195.0</data>
+      <data key="d11">BHPA 301</data>
+    </node>
+    <node id="i_bpi301">
+      <data key="d0">instrumentation</data>
+      <data key="d1">379.0</data>
+      <data key="d2">416.0</data>
+      <data key="d3">157.0</data>
+      <data key="d4">195.0</data>
+      <data key="d11">BPI 301</data>
+    </node>
+    <node id="i_bli301">
+      <data key="d0">instrumentation</data>
+      <data key="d1">328.0</data>
+      <data key="d2">368.0</data>
+      <data key="d3">249.0</data>
+      <data key="d4">291.0</data>
+      <data key="d11">BLI 301</data>
+    </node>
+    <node id="i_btim301">
+      <data key="d0">instrumentation</data>
+      <data key="d1">325.0</data>
+      <data key="d2">368.0</data>
+      <data key="d3">297.0</data>
+      <data key="d4">339.0</data>
+      <data key="d11">BTIM 301</data>
+    </node>
+    <node id="i_b2">
+      <data key="d0">instrumentation</data>
+      <data key="d1">526.0</data>
+      <data key="d2">555.0</data>
+      <data key="d3">121.0</data>
+      <data key="d4">150.0</data>
+      <data key="d11">B2</data>
+    </node>
+    <node id="i_btrm304">
+      <data key="d0">instrumentation</data>
+      <data key="d1">604.0</data>
+      <data key="d2">648.0</data>
+      <data key="d3">17.0</data>
+      <data key="d4">63.0</data>
+      <data key="d11">BTRM 304</data>
+    </node>
+    <node id="i_bpi304">
+      <data key="d0">instrumentation</data>
+      <data key="d1">664.0</data>
+      <data key="d2">702.0</data>
+      <data key="d3">21.0</data>
+      <data key="d4">63.0</data>
+      <data key="d11">BPI 304</data>
+    </node>
+    <node id="i_blank">
+      <data key="d0">instrumentation</data>
+      <data key="d1">733.0</data>
+      <data key="d2">770.0</data>
+      <data key="d3">307.0</data>
+      <data key="d4">344.0</data>
+    </node>
+    <node id="i_sprc300">
+      <data key="d0">instrumentation</data>
+      <data key="d1">834.0</data>
+      <data key="d2">879.0</data>
+      <data key="d3">297.0</data>
+      <data key="d4">343.0</data>
+      <data key="d11">SPRC 300</data>
+    </node>
+    <node id="i_bli300">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1082.0</data>
+      <data key="d2">1122.0</data>
+      <data key="d3">317.0</data>
+      <data key="d4">359.0</data>
+      <data key="d11">BLI 300</data>
+    </node>
+    <node id="i_btrc300">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1082.0</data>
+      <data key="d2">1125.0</data>
+      <data key="d3">392.0</data>
+      <data key="d4">437.0</data>
+      <data key="d11">BTRC 300</data>
+    </node>
+    <node id="i_bhpa253">
+      <data key="d0">instrumentation</data>
+      <data key="d1">80.0</data>
+      <data key="d2">118.0</data>
+      <data key="d3">429.0</data>
+      <data key="d4">459.0</data>
+      <data key="d11">BHPA 253</data>
+    </node>
+    <node id="i_bpi253">
+      <data key="d0">instrumentation</data>
+      <data key="d1">118.0</data>
+      <data key="d2">158.0</data>
+      <data key="d3">429.0</data>
+      <data key="d4">459.0</data>
+      <data key="d11">BPI 253</data>
+    </node>
+    <node id="i_lc256">
+      <data key="d0">instrumentation</data>
+      <data key="d1">673.0</data>
+      <data key="d2">712.0</data>
+      <data key="d3">451.0</data>
+      <data key="d4">490.0</data>
+      <data key="d11">LC 256</data>
+    </node>
+    <node id="i_d5">
+      <data key="d0">instrumentation</data>
+      <data key="d1">871.0</data>
+      <data key="d2">906.0</data>
+      <data key="d3">472.0</data>
+      <data key="d4">507.0</data>
+      <data key="d11">D5</data>
+    </node>
+    <node id="i_bli253">
+      <data key="d0">instrumentation</data>
+      <data key="d1">381.0</data>
+      <data key="d2">420.0</data>
+      <data key="d3">602.0</data>
+      <data key="d4">643.0</data>
+      <data key="d11">BLI 253</data>
+    </node>
+    <node id="i_btim253">
+      <data key="d0">instrumentation</data>
+      <data key="d1">383.0</data>
+      <data key="d2">424.0</data>
+      <data key="d3">693.0</data>
+      <data key="d4">737.0</data>
+      <data key="d11">BTIM 253</data>
+    </node>
+    <node id="i_bpi302">
+      <data key="d0">instrumentation</data>
+      <data key="d1">492.0</data>
+      <data key="d2">530.0</data>
+      <data key="d3">639.0</data>
+      <data key="d4">679.0</data>
+      <data key="d11">BPI 302</data>
+    </node>
+    <node id="i_btrm303">
+      <data key="d0">instrumentation</data>
+      <data key="d1">811.0</data>
+      <data key="d2">855.0</data>
+      <data key="d3">620.0</data>
+      <data key="d4">665.0</data>
+      <data key="d11">BTRM 303</data>
+    </node>
+    <node id="i_a4">
+      <data key="d0">instrumentation</data>
+      <data key="d1">618.0</data>
+      <data key="d2">659.0</data>
+      <data key="d3">669.0</data>
+      <data key="d4">710.0</data>
+      <data key="d11">A4</data>
+    </node>
+    <node id="i_a2">
+      <data key="d0">instrumentation</data>
+      <data key="d1">793.0</data>
+      <data key="d2">830.0</data>
+      <data key="d3">708.0</data>
+      <data key="d4">745.0</data>
+      <data key="d11">A2</data>
+    </node>
+    <node id="i_c3">
+      <data key="d0">instrumentation</data>
+      <data key="d1">472.0</data>
+      <data key="d2">512.0</data>
+      <data key="d3">723.0</data>
+      <data key="d4">763.0</data>
+      <data key="d11">C3</data>
+    </node>
+    <node id="i_c2">
+      <data key="d0">instrumentation</data>
+      <data key="d1">670.0</data>
+      <data key="d2">703.0</data>
+      <data key="d3">825.0</data>
+      <data key="d4">858.0</data>
+      <data key="d11">C2</data>
+    </node>
+    <node id="i_b6">
+      <data key="d0">instrumentation</data>
+      <data key="d1">711.0</data>
+      <data key="d2">744.0</data>
+      <data key="d3">818.0</data>
+      <data key="d4">851.0</data>
+      <data key="d11">B6</data>
+    </node>
+    <node id="i_j4">
+      <data key="d0">instrumentation</data>
+      <data key="d1">100.0</data>
+      <data key="d2">141.0</data>
+      <data key="d3">928.0</data>
+      <data key="d4">969.0</data>
+      <data key="d11">J4</data>
+    </node>
+    <node id="i_e11">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1089.0</data>
+      <data key="d2">1124.0</data>
+      <data key="d3">607.0</data>
+      <data key="d4">642.0</data>
+      <data key="d11">E11</data>
+    </node>
+    <node id="i_bhpa254">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1351.0</data>
+      <data key="d2">1384.0</data>
+      <data key="d3">409.0</data>
+      <data key="d4">448.0</data>
+      <data key="d11">BHPA 254</data>
+    </node>
+    <node id="i_bpi254">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1351.0</data>
+      <data key="d2">1384.0</data>
+      <data key="d3">451.0</data>
+      <data key="d4">499.0</data>
+      <data key="d11">BPI 254</data>
+    </node>
+    <node id="i_bli254">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1142.0</data>
+      <data key="d2">1180.0</data>
+      <data key="d3">594.0</data>
+      <data key="d4">632.0</data>
+      <data key="d11">BLI 254</data>
+    </node>
+    <node id="i_btim254">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1139.0</data>
+      <data key="d2">1182.0</data>
+      <data key="d3">639.0</data>
+      <data key="d4">680.0</data>
+      <data key="d11">BTIM 254</data>
+    </node>
+    <node id="i_b7a">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1253.0</data>
+      <data key="d2">1294.0</data>
+      <data key="d3">1044.0</data>
+      <data key="d4">1085.0</data>
+      <data key="d11">B7</data>
+    </node>
+    <node id="i_b7b">
+      <data key="d0">instrumentation</data>
+      <data key="d1">974.0</data>
+      <data key="d2">1007.0</data>
+      <data key="d3">1338.0</data>
+      <data key="d4">1371.0</data>
+      <data key="d11">B7</data>
+    </node>
+    <node id="i_a5">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1127.0</data>
+      <data key="d2">1156.0</data>
+      <data key="d3">1331.0</data>
+      <data key="d4">1360.0</data>
+      <data key="d11">A5</data>
+    </node>
+    <node id="io_steamvent">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">739.0</data>
+      <data key="d2">756.0</data>
+      <data key="d3">383.0</data>
+      <data key="d4">401.0</data>
+      <data key="d11">STEAM TO ATMOSPHERE</data>
+    </node>
+    <node id="io_326">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">779.0</data>
+      <data key="d2">798.0</data>
+      <data key="d3">829.0</data>
+      <data key="d4">851.0</data>
+      <data key="d11">FROM EQ 78641</data>
+    </node>
+    <node id="io_future">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">247.0</data>
+      <data key="d2">261.0</data>
+      <data key="d3">856.0</data>
+      <data key="d4">878.0</data>
+      <data key="d11">FUTURE CONNECTION</data>
+    </node>
+    <node id="io_port">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">1150.0</data>
+      <data key="d2">1165.0</data>
+      <data key="d3">717.0</data>
+      <data key="d4">735.0</data>
+      <data key="d11">SAMP. OR TO PORT CONT.</data>
+    </node>
+    <node id="io_cup">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">1648.0</data>
+      <data key="d2">1668.0</data>
+      <data key="d3">875.0</data>
+      <data key="d4">902.0</data>
+    </node>
+    <node id="io_blower">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">1292.0</data>
+      <data key="d2">1328.0</data>
+      <data key="d3">997.0</data>
+      <data key="d4">1019.0</data>
+      <data key="d11">TO BLOWER</data>
+    </node>
+    <node id="j_bpi253">
+      <data key="d0">crossing</data>
+      <data key="d1">191.0</data>
+      <data key="d2">199.0</data>
+      <data key="d3">448.0</data>
+      <data key="d4">456.0</data>
+    </node>
+    <node id="j_fp1">
+      <data key="d0">crossing</data>
+      <data key="d1">76.0</data>
+      <data key="d2">84.0</data>
+      <data key="d3">863.0</data>
+      <data key="d4">871.0</data>
+    </node>
+    <node id="j_fp2">
+      <data key="d0">crossing</data>
+      <data key="d1">136.0</data>
+      <data key="d2">144.0</data>
+      <data key="d3">863.0</data>
+      <data key="d4">871.0</data>
+    </node>
+    <node id="j_301">
+      <data key="d0">crossing</data>
+      <data key="d1">433.0</data>
+      <data key="d2">441.0</data>
+      <data key="d3">171.0</data>
+      <data key="d4">179.0</data>
+    </node>
+    <node id="j_trap">
+      <data key="d0">crossing</data>
+      <data key="d1">458.0</data>
+      <data key="d2">466.0</data>
+      <data key="d3">148.0</data>
+      <data key="d4">156.0</data>
+    </node>
+    <node id="j_13">
+      <data key="d0">crossing</data>
+      <data key="d1">508.0</data>
+      <data key="d2">516.0</data>
+      <data key="d3">148.0</data>
+      <data key="d4">156.0</data>
+    </node>
+    <node id="j_btrm304">
+      <data key="d0">crossing</data>
+      <data key="d1">622.0</data>
+      <data key="d2">630.0</data>
+      <data key="d3">69.0</data>
+      <data key="d4">77.0</data>
+    </node>
+    <node id="j_bpi304">
+      <data key="d0">crossing</data>
+      <data key="d1">682.0</data>
+      <data key="d2">690.0</data>
+      <data key="d3">69.0</data>
+      <data key="d4">77.0</data>
+    </node>
+    <node id="j_218">
+      <data key="d0">crossing</data>
+      <data key="d1">826.0</data>
+      <data key="d2">834.0</data>
+      <data key="d3">115.0</data>
+      <data key="d4">123.0</data>
+    </node>
+    <node id="j_302">
+      <data key="d0">crossing</data>
+      <data key="d1">555.0</data>
+      <data key="d2">563.0</data>
+      <data key="d3">653.0</data>
+      <data key="d4">661.0</data>
+    </node>
+    <node id="j_pump">
+      <data key="d0">crossing</data>
+      <data key="d1">623.0</data>
+      <data key="d2">631.0</data>
+      <data key="d3">727.0</data>
+      <data key="d4">735.0</data>
+    </node>
+    <node id="j_303">
+      <data key="d0">crossing</data>
+      <data key="d1">783.0</data>
+      <data key="d2">791.0</data>
+      <data key="d3">628.0</data>
+      <data key="d4">636.0</data>
+    </node>
+    <node id="j_still">
+      <data key="d0">crossing</data>
+      <data key="d1">984.0</data>
+      <data key="d2">992.0</data>
+      <data key="d3">535.0</data>
+      <data key="d4">543.0</data>
+    </node>
+    <node id="j_still2">
+      <data key="d0">crossing</data>
+      <data key="d1">1004.0</data>
+      <data key="d2">1012.0</data>
+      <data key="d3">535.0</data>
+      <data key="d4">543.0</data>
+    </node>
+    <node id="j_213">
+      <data key="d0">crossing</data>
+      <data key="d1">1273.0</data>
+      <data key="d2">1281.0</data>
+      <data key="d3">531.0</data>
+      <data key="d4">539.0</data>
+    </node>
+    <node id="j_254">
+      <data key="d0">crossing</data>
+      <data key="d1">1366.0</data>
+      <data key="d2">1374.0</data>
+      <data key="d3">531.0</data>
+      <data key="d4">539.0</data>
+    </node>
+    <node id="j_318">
+      <data key="d0">crossing</data>
+      <data key="d1">1653.0</data>
+      <data key="d2">1661.0</data>
+      <data key="d3">528.0</data>
+      <data key="d4">536.0</data>
+    </node>
+    <node id="j_319">
+      <data key="d0">crossing</data>
+      <data key="d1">1653.0</data>
+      <data key="d2">1661.0</data>
+      <data key="d3">868.0</data>
+      <data key="d4">876.0</data>
+    </node>
+    <node id="j_326">
+      <data key="d0">crossing</data>
+      <data key="d1">783.0</data>
+      <data key="d2">791.0</data>
+      <data key="d3">910.0</data>
+      <data key="d4">918.0</data>
+    </node>
+    <node id="j_219">
+      <data key="d0">crossing</data>
+      <data key="d1">903.0</data>
+      <data key="d2">911.0</data>
+      <data key="d3">910.0</data>
+      <data key="d4">918.0</data>
+    </node>
+    <node id="j_so">
+      <data key="d0">crossing</data>
+      <data key="d1">988.0</data>
+      <data key="d2">996.0</data>
+      <data key="d3">910.0</data>
+      <data key="d4">918.0</data>
+    </node>
+    <node id="j_samp">
+      <data key="d0">crossing</data>
+      <data key="d1">1254.0</data>
+      <data key="d2">1262.0</data>
+      <data key="d3">725.0</data>
+      <data key="d4">733.0</data>
+    </node>
+    <node id="j_b1">
+      <data key="d0">crossing</data>
+      <data key="d1">1069.0</data>
+      <data key="d2">1077.0</data>
+      <data key="d3">1273.0</data>
+      <data key="d4">1281.0</data>
+    </node>
+    <node id="j_b2">
+      <data key="d0">crossing</data>
+      <data key="d1">1174.0</data>
+      <data key="d2">1182.0</data>
+      <data key="d3">1273.0</data>
+      <data key="d4">1281.0</data>
+    </node>
+    <edge source="p_feed" target="v_check_fp"><data key="d9">solid</data></edge>
+    <edge source="v_check_fp" target="g_orifice"><data key="d9">solid</data></edge>
+    <edge source="g_orifice" target="j_fp1"><data key="d9">solid</data></edge>
+    <edge source="j_fp1" target="j_fp2"><data key="d9">solid</data></edge>
+    <edge source="j_fp2" target="v_feedbot"><data key="d9">solid</data></edge>
+    <edge source="v_feedbot" target="t_feed"><data key="d9">solid</data></edge>
+    <edge source="j_fp2" target="v_future"><data key="d9">solid</data></edge>
+    <edge source="v_future" target="io_future"><data key="d9">solid</data></edge>
+    <edge source="i_j4" target="g_orifice"><data key="d9">solid</data></edge>
+    <edge source="j_bpi253" target="t_feed"><data key="d9">solid</data></edge>
+    <edge source="j_bpi253" target="v_317"><data key="d9">solid</data></edge>
+    <edge source="j_bpi253" target="i_bpi253"><data key="d9">solid</data></edge>
+    <edge source="t_feed" target="v_25a"><data key="d9">solid</data></edge>
+    <edge source="v_25a" target="t_dist"><data key="d9">solid</data></edge>
+    <edge source="t_feed" target="i_bli253"><data key="d9">solid</data></edge>
+    <edge source="t_feed" target="i_btim253"><data key="d9">solid</data></edge>
+    <edge source="t_dist" target="i_bli301"><data key="d9">solid</data></edge>
+    <edge source="t_dist" target="i_btim301"><data key="d9">solid</data></edge>
+    <edge source="t_dist" target="j_301"><data key="d9">solid</data></edge>
+    <edge source="j_301" target="i_bpi301"><data key="d9">solid</data></edge>
+    <edge source="j_301" target="j_trap"><data key="d9">solid</data></edge>
+    <edge source="j_trap" target="g_trap"><data key="d9">solid</data></edge>
+    <edge source="g_trap" target="v_trap"><data key="d9">solid</data></edge>
+    <edge source="v_trap" target="i_ab"><data key="d9">solid</data></edge>
+    <edge source="i_btim305" target="g_trap"><data key="d9">solid</data></edge>
+    <edge source="j_trap" target="j_13"><data key="d9">solid</data></edge>
+    <edge source="j_13" target="i_b2"><data key="d9">solid</data></edge>
+    <edge source="t_dist" target="g_cond"><data key="d9">solid</data></edge>
+    <edge source="t_dist" target="j_302"><data key="d9">solid</data></edge>
+    <edge source="j_302" target="i_bpi302"><data key="d9">solid</data></edge>
+    <edge source="j_302" target="v_suct"><data key="d9">solid</data></edge>
+    <edge source="v_suct" target="p_still"><data key="d9">solid</data></edge>
+    <edge source="p_still" target="j_pump"><data key="d9">solid</data></edge>
+    <edge source="j_pump" target="v_dis"><data key="d9">solid</data></edge>
+    <edge source="v_dis" target="j_303"><data key="d9">solid</data></edge>
+    <edge source="j_303" target="i_btrm303"><data key="d9">solid</data></edge>
+    <edge source="j_303" target="g_cooler"><data key="d9">solid</data></edge>
+    <edge source="j_pump" target="v_t1"><data key="d9">solid</data></edge>
+    <edge source="v_t1" target="g_tube1"><data key="d9">solid</data></edge>
+    <edge source="g_tube1" target="j_b1"><data key="d9">solid</data></edge>
+    <edge source="j_b1" target="j_b2"><data key="d9">solid</data></edge>
+    <edge source="g_tube2" target="j_b2"><data key="d9">solid</data></edge>
+    <edge source="g_tube3" target="j_b2"><data key="d9">solid</data></edge>
+    <edge source="j_b1" target="v_123b"><data key="d9">solid</data></edge>
+    <edge source="v_123b" target="j_219"><data key="d9">solid</data></edge>
+    <edge source="g_cond" target="j_btrm304"><data key="d9">solid</data></edge>
+    <edge source="j_btrm304" target="i_btrm304"><data key="d9">solid</data></edge>
+    <edge source="j_btrm304" target="j_bpi304"><data key="d9">solid</data></edge>
+    <edge source="j_bpi304" target="i_bpi304"><data key="d9">solid</data></edge>
+    <edge source="j_bpi304" target="g_cooler"><data key="d9">solid</data></edge>
+    <edge source="g_cond" target="j_218"><data key="d9">solid</data></edge>
+    <edge source="j_218" target="t_still"><data key="d9">solid</data></edge>
+    <edge source="j_218" target="v_ct"><data key="d9">solid</data></edge>
+    <edge source="v_ct" target="g_coldtrap"><data key="d9">solid</data></edge>
+    <edge source="g_coldtrap" target="v_vp"><data key="d9">solid</data></edge>
+    <edge source="v_vp" target="p_vac"><data key="d9">solid</data></edge>
+    <edge source="g_cooler" target="io_steamvent"><data key="d9">solid</data></edge>
+    <edge source="g_cooler" target="v_cdrain"><data key="d9">solid</data></edge>
+    <edge source="g_cooler" target="v_cw256"><data key="d9">solid</data></edge>
+    <edge source="i_lc256" target="v_cw256"><data key="d9">non-solid</data></edge>
+    <edge source="i_lc256" target="g_cooler"><data key="d9">solid</data></edge>
+    <edge source="i_sprc300" target="t_still"><data key="d9">solid</data></edge>
+    <edge source="i_sprc300" target="g_heater"><data key="d9">non-solid</data></edge>
+    <edge source="i_bli300" target="t_still"><data key="d9">solid</data></edge>
+    <edge source="i_btrc300" target="t_still"><data key="d9">solid</data></edge>
+    <edge source="t_still" target="v_203"><data key="d9">solid</data></edge>
+    <edge source="t_still" target="j_still"><data key="d9">solid</data></edge>
+    <edge source="j_still" target="j_still2"><data key="d9">solid</data></edge>
+    <edge source="j_still" target="v_stillout"><data key="d9">solid</data></edge>
+    <edge source="v_stillout" target="j_so"><data key="d9">solid</data></edge>
+    <edge source="j_still2" target="v_210"><data key="d9">solid</data></edge>
+    <edge source="j_still2" target="v_t2"><data key="d9">solid</data></edge>
+    <edge source="v_t2" target="g_tube2"><data key="d9">solid</data></edge>
+    <edge source="v_210" target="j_213"><data key="d9">solid</data></edge>
+    <edge source="j_213" target="v_123a"><data key="d9">solid</data></edge>
+    <edge source="j_213" target="t_wht"><data key="d9">solid</data></edge>
+    <edge source="v_t3" target="g_tube3"><data key="d9">solid</data></edge>
+    <edge source="t_wht" target="i_bli254"><data key="d9">solid</data></edge>
+    <edge source="t_wht" target="i_btim254"><data key="d9">solid</data></edge>
+    <edge source="t_wht" target="j_254"><data key="d9">solid</data></edge>
+    <edge source="j_254" target="i_bpi254"><data key="d9">solid</data></edge>
+    <edge source="j_254" target="v_14b"><data key="d9">solid</data></edge>
+    <edge source="v_14b" target="j_318"><data key="d9">solid</data></edge>
+    <edge source="j_318" target="j_319"><data key="d9">solid</data></edge>
+    <edge source="j_319" target="io_cup"><data key="d9">solid</data></edge>
+    <edge source="j_319" target="t_wst"><data key="d9">solid</data></edge>
+    <edge source="t_wht" target="j_samp"><data key="d9">solid</data></edge>
+    <edge source="j_samp" target="v_samp"><data key="d9">solid</data></edge>
+    <edge source="v_samp" target="io_port"><data key="d9">solid</data></edge>
+    <edge source="j_samp" target="v_whtbot"><data key="d9">solid</data></edge>
+    <edge source="v_whtbot" target="j_so"><data key="d9">solid</data></edge>
+    <edge source="j_so" target="j_219"><data key="d9">solid</data></edge>
+    <edge source="j_219" target="j_326"><data key="d9">solid</data></edge>
+    <edge source="j_326" target="io_326"><data key="d9">solid</data></edge>
+    <edge source="j_326" target="t_wst"><data key="d9">solid</data></edge>
+  </graph>
+</graphml>

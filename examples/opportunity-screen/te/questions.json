@@ -1,0 +1,1146 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "data/te_process_model.json",
+ "catalog": "data/questions.json",
+ "loops": "examples/loop-audit/te_loops.csv",
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "C9",
+  "E25",
+  "E26"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 10,
+  "by_family": {
+   "controls": 2,
+   "energy": 2,
+   "heat_grade": 3,
+   "metering": 2,
+   "safety_question": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E6@K-101",
+   "question_id": "E6",
+   "family": "energy",
+   "question": "Is this compressor spilling flow back (recycle or blow-off) more than surge protection needs?",
+   "about": "K-101",
+   "assets": [
+    {
+     "id": "K-101",
+     "tag": "K-101"
+    },
+    {
+     "id": "FV-105",
+     "tag": "FV-105"
+    },
+    {
+     "id": "JT-120",
+     "tag": "JT-120"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-101",
+     "tag": "K-101",
+     "text": "equipment K-101 reads \"K-101 Recycle Compressor\"",
+     "field": "units[K-101]"
+    },
+    {
+     "role": "recycle valve",
+     "id": "FV-105",
+     "tag": "FV-105",
+     "text": "valve FV-105 reads \"FV-105 Compressor recycle valve\" at K-101",
+     "field": "final_elements[FV-105]"
+    },
+    {
+     "role": "compressor power",
+     "id": "JT-120",
+     "tag": "JT-120",
+     "text": "instrument JT-120 reads \"JT-120 Compressor work\" at K-101",
+     "field": "instruments[JT-120]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Recycle (or blow-off) valve opening over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: FV-105: recorded signal XMV(5) in the TE data files",
+      "DCS/PLC configuration: anti-surge or recycle controller output"
+     ],
+     "how": "Take a month or more of valve position; note the hours it is open at normal throughput."
+    },
+    {
+     "item": "Surge margin at normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: compressor map with the surge line",
+      "DCS/PLC configuration: the anti-surge controller's surge-line settings"
+     ],
+     "how": "Compare the normal operating point with the surge line plus the controller's margin."
+    },
+    {
+     "item": "Compressor power",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: JT-120: recorded signal XMEAS(20) in the TE data files",
+      "a walkdown: power meter at the drive"
+     ],
+     "how": "Record power with the valve at its normal opening."
+    }
+   ],
+   "decision_rule": "Worth a look when the recycle or blow-off valve is open at normal throughput, or the controller margin is wider than the vendor map needs. If it only opens during upsets or turndown, close it.",
+   "typical_benefit": {
+    "wording": "Blow-off \"is a waste of energy and should be used only where necessary to avoid surge.\" Inlet throttling: \"Capacity can typically be reduced from 100 percent capacity to about 70-80 percent with reasonable energy reduction.\" No % saving stated.",
+    "source": [
+     "S11"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   },
+   "limits": "Surge protection is a machine-protection function: any change goes through the compressor vendor and a change review.",
+   "status": "asked"
+  },
+  {
+   "id": "E18@model",
+   "question_id": "E18",
+   "family": "energy",
+   "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+   "about": "TT-121, TT-122, TV-121, FV-117",
+   "assets": [
+    {
+     "id": "TT-121",
+     "tag": "TT-121"
+    },
+    {
+     "id": "TT-122",
+     "tag": "TT-122"
+    },
+    {
+     "id": "TV-121",
+     "tag": "TV-121"
+    },
+    {
+     "id": "FV-117",
+     "tag": "FV-117"
+    },
+    {
+     "id": "FT-119",
+     "tag": "FT-119"
+    },
+    {
+     "id": "FV-119",
+     "tag": "FV-119"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TT-121",
+     "tag": "TT-121",
+     "text": "instrument TT-121 reads \"TT-121 Reactor cooling water outlet temperature\" at R-101",
+     "field": "instruments[TT-121]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-122",
+     "tag": "TT-122",
+     "text": "instrument TT-122 reads \"TT-122 Separator Cooling Water Outlet Temp\" at E-101",
+     "field": "instruments[TT-122]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-121",
+     "tag": "TV-121",
+     "text": "valve TV-121 reads \"TV-121 Reactor cooling water flow valve\" at R-101",
+     "field": "final_elements[TV-121]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-117",
+     "tag": "FV-117",
+     "text": "valve FV-117 reads \"FV-117 Condenser cooling water flow valve\" at E-101",
+     "field": "final_elements[FV-117]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "FT-119",
+     "tag": "FT-119",
+     "text": "instrument FT-119 reads \"FT-119 Stripper steam flow\" at C-101",
+     "field": "instruments[FT-119]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "FV-119",
+     "tag": "FV-119",
+     "text": "valve FV-119 reads \"FV-119 Stripper steam valve\" at C-101",
+     "field": "final_elements[FV-119]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Temperatures and duties of the cooled and the heated streams",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TT-121: recorded signal XMEAS(21) in the TE data files; TT-122: recorded signal XMEAS(22) in the TE data files; only the valve position is recorded (FV-117: recorded signal XMV(11) in the TE data files; TV-121: recorded signal XMV(10) in the TE data files); flow needs a meter or a calibrated valve curve",
+      "historian / recorded data: FT-119: recorded signal XMEAS(19) in the TE data files; only the valve position is recorded (FV-119: recorded signal XMV(9) in the TE data files); flow needs a meter or a calibrated valve curve",
+      "site records: heat and material balance"
+     ],
+     "how": "For each stream: supply and target temperature and duty."
+    },
+    {
+     "item": "Whether the duties overlap in time",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operating sequence: are both duties needed at the same time?"
+     ],
+     "how": "Mark each duty continuous, batch or startup-only."
+    },
+    {
+     "item": "Layout distance and fouling",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: distance between the two exchangers",
+      "maintenance records: cleaning history"
+     ],
+     "how": "Note pipe run and fouling service."
+    }
+   ],
+   "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+    "source": [
+     "S19",
+     "S24"
+    ],
+    "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "H2@C-101",
+   "question_id": "H2",
+   "family": "heat_grade",
+   "question": "Is high-grade (or unknown-grade) steam doing a low-temperature job?",
+   "about": "C-101",
+   "assets": [
+    {
+     "id": "C-101",
+     "tag": "C-101"
+    },
+    {
+     "id": "FV-119",
+     "tag": "FV-119"
+    },
+    {
+     "id": "TT-118",
+     "tag": "TT-118"
+    },
+    {
+     "id": "FIC-119",
+     "tag": "FIC-119"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FV-119",
+     "tag": "FV-119",
+     "text": "valve FV-119 reads \"FV-119 Stripper steam valve\" at C-101",
+     "field": "final_elements[FV-119]"
+    },
+    {
+     "role": "temperature measurement at the user",
+     "id": "TT-118",
+     "tag": "TT-118",
+     "text": "instrument TT-118 reads \"TT-118 Stripper temperature\" at C-101",
+     "field": "instruments[TT-118]"
+    },
+    {
+     "role": "controller",
+     "id": "FIC-119",
+     "tag": "FIC-119",
+     "text": "controller FIC-119 reads \"FIC-119 Stripper steam flow controller\" at C-101",
+     "field": "controllers[FIC-119]"
+    },
+    {
+     "role": "equipment",
+     "id": "C-101",
+     "tag": "C-101",
+     "text": "equipment C-101 reads \"C-101 Product Stripper\"",
+     "field": "units[C-101]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam supply pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: pressure gauge and thermometer at the supply",
+      "site records: steam header list"
+     ],
+     "how": "Record supply conditions; saturation temperature follows from pressure."
+    },
+    {
+     "item": "Temperature the user actually needs",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TT-118: recorded signal XMEAS(18) in the TE data files",
+      "DCS/PLC configuration: the temperature setpoint"
+     ],
+     "how": "Note setpoint and normal range."
+    },
+    {
+     "item": "A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: site steam balance",
+      "a walkdown: headers and hot streams near this user"
+     ],
+     "how": "List sources whose temperature exceeds the need with a practical approach."
+    }
+   ],
+   "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
+   "typical_benefit": {
+    "wording": "Closest source wordings: pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management\" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.",
+    "source": [
+     "S19",
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "status": "asked"
+  },
+  {
+   "id": "H4@R-101",
+   "question_id": "H4",
+   "family": "heat_grade",
+   "question": "Is heat rejected to cooling water at a temperature another user could use?",
+   "about": "R-101",
+   "assets": [
+    {
+     "id": "R-101",
+     "tag": "R-101"
+    },
+    {
+     "id": "TT-121",
+     "tag": "TT-121"
+    },
+    {
+     "id": "TV-121",
+     "tag": "TV-121"
+    },
+    {
+     "id": "TT-109",
+     "tag": "TT-109"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TT-121",
+     "tag": "TT-121",
+     "text": "instrument TT-121 reads \"TT-121 Reactor cooling water outlet temperature\" at R-101",
+     "field": "instruments[TT-121]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-121",
+     "tag": "TV-121",
+     "text": "valve TV-121 reads \"TV-121 Reactor cooling water flow valve\" at R-101",
+     "field": "final_elements[TV-121]"
+    },
+    {
+     "role": "temperature measurement",
+     "id": "TT-109",
+     "tag": "TT-109",
+     "text": "instrument TT-109 reads \"TT-109 Reactor temperature\" at R-101",
+     "field": "instruments[TT-109]"
+    },
+    {
+     "role": "equipment",
+     "id": "R-101",
+     "tag": "R-101",
+     "text": "equipment R-101 reads \"R-101 Reactor\"",
+     "field": "units[R-101]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cooling water supply temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: thermometer on the supply"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Cooling water return temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TT-121: recorded signal XMEAS(21) in the TE data files",
+      "a walkdown: thermometer on the return"
+     ],
+     "how": "Record at normal operation; the return temperature is the grade of the heat on offer."
+    },
+    {
+     "item": "Temperature of the stream being cooled (in and out)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TT-109: recorded signal XMEAS(9) in the TE data files",
+      "site records: heat and material balance"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Cooler duty",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: exchanger datasheet",
+      "site records: heat and material balance"
+     ],
+     "how": "Duty = flow x heat capacity x temperature rise."
+    },
+    {
+     "item": "A heat user that needs heat below the return temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: list of heating duties with temperatures",
+      "a walkdown: users nearby"
+     ],
+     "how": "Match by temperature, hours and distance."
+    }
+   ],
+   "decision_rule": "Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.",
+   "typical_benefit": {
+    "wording": "Closest source wording (S19, pinch): potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated. For air compressors S11 says recovery \"anywhere from 50 to 90 percent\" of the heat, which applies to compressors only.",
+    "source": [
+     "S19",
+     "S11"
+    ],
+    "arc": "2.243x (by description)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   },
+   "limits": "Does not fire on equipment that cools the cooling water itself (a cooling water cooler, air-cooled exchanger or cooling tower): that equipment rejects the loop's heat, it does not receive process heat.",
+   "status": "asked"
+  },
+  {
+   "id": "H4@E-101",
+   "question_id": "H4",
+   "family": "heat_grade",
+   "question": "Is heat rejected to cooling water at a temperature another user could use?",
+   "about": "E-101",
+   "assets": [
+    {
+     "id": "E-101",
+     "tag": "E-101"
+    },
+    {
+     "id": "TT-122",
+     "tag": "TT-122"
+    },
+    {
+     "id": "FV-117",
+     "tag": "FV-117"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TT-122",
+     "tag": "TT-122",
+     "text": "instrument TT-122 reads \"TT-122 Separator Cooling Water Outlet Temp\" at E-101",
+     "field": "instruments[TT-122]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-117",
+     "tag": "FV-117",
+     "text": "valve FV-117 reads \"FV-117 Condenser cooling water flow valve\" at E-101",
+     "field": "final_elements[FV-117]"
+    },
+    {
+     "role": "equipment",
+     "id": "E-101",
+     "tag": "E-101",
+     "text": "equipment E-101 reads \"E-101 Product Condenser\"",
+     "field": "units[E-101]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cooling water supply temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: thermometer on the supply"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Cooling water return temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TT-122: recorded signal XMEAS(22) in the TE data files",
+      "a walkdown: thermometer on the return"
+     ],
+     "how": "Record at normal operation; the return temperature is the grade of the heat on offer."
+    },
+    {
+     "item": "Temperature of the stream being cooled (in and out)",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: heat and material balance"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Cooler duty",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: exchanger datasheet",
+      "site records: heat and material balance"
+     ],
+     "how": "Duty = flow x heat capacity x temperature rise."
+    },
+    {
+     "item": "A heat user that needs heat below the return temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: list of heating duties with temperatures",
+      "a walkdown: users nearby"
+     ],
+     "how": "Match by temperature, hours and distance."
+    }
+   ],
+   "decision_rule": "Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.",
+   "typical_benefit": {
+    "wording": "Closest source wording (S19, pinch): potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated. For air compressors S11 says recovery \"anywhere from 50 to 90 percent\" of the heat, which applies to compressors only.",
+    "source": [
+     "S19",
+     "S11"
+    ],
+    "arc": "2.243x (by description)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   },
+   "limits": "Does not fire on equipment that cools the cooling water itself (a cooling water cooler, air-cooled exchanger or cooling tower): that equipment rejects the loop's heat, it does not receive process heat.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@R-101",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "R-101",
+   "assets": [
+    {
+     "id": "R-101",
+     "tag": "R-101"
+    },
+    {
+     "id": "TV-121",
+     "tag": "TV-121"
+    },
+    {
+     "id": "TT-121",
+     "tag": "TT-121"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TV-121",
+     "tag": "TV-121",
+     "text": "valve TV-121 reads \"TV-121 Reactor cooling water flow valve\" at R-101",
+     "field": "final_elements[TV-121]"
+    },
+    {
+     "role": "utility temperature or pressure",
+     "id": "TT-121",
+     "tag": "TT-121",
+     "text": "instrument TT-121 reads \"TT-121 Reactor cooling water outlet temperature\" at R-101",
+     "field": "instruments[TT-121]"
+    },
+    {
+     "role": "equipment",
+     "id": "R-101",
+     "tag": "R-101",
+     "text": "equipment R-101 reads \"R-101 Reactor\"",
+     "field": "units[R-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "only the valve position is recorded (TV-121: recorded signal XMV(10) in the TE data files); flow needs a meter or a calibrated valve curve",
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@E-101",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "E-101",
+   "assets": [
+    {
+     "id": "E-101",
+     "tag": "E-101"
+    },
+    {
+     "id": "FV-117",
+     "tag": "FV-117"
+    },
+    {
+     "id": "TT-122",
+     "tag": "TT-122"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FV-117",
+     "tag": "FV-117",
+     "text": "valve FV-117 reads \"FV-117 Condenser cooling water flow valve\" at E-101",
+     "field": "final_elements[FV-117]"
+    },
+    {
+     "role": "utility temperature or pressure",
+     "id": "TT-122",
+     "tag": "TT-122",
+     "text": "instrument TT-122 reads \"TT-122 Separator Cooling Water Outlet Temp\" at E-101",
+     "field": "instruments[TT-122]"
+    },
+    {
+     "role": "equipment",
+     "id": "E-101",
+     "tag": "E-101",
+     "text": "equipment E-101 reads \"E-101 Product Condenser\"",
+     "field": "units[E-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "only the valve position is recorded (FV-117: recorded signal XMV(11) in the TE data files); flow needs a meter or a calibrated valve curve",
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C2@model",
+   "question_id": "C2",
+   "family": "controls",
+   "question": "Which measurements have no controller (read by people, or by nothing)?",
+   "about": "FT-106, PT-107, TT-111, PT-113, FT-114, PT-116 and 2 more",
+   "assets": [
+    {
+     "id": "FT-106",
+     "tag": "FT-106"
+    },
+    {
+     "id": "PT-107",
+     "tag": "PT-107"
+    },
+    {
+     "id": "TT-111",
+     "tag": "TT-111"
+    },
+    {
+     "id": "PT-113",
+     "tag": "PT-113"
+    },
+    {
+     "id": "FT-114",
+     "tag": "FT-114"
+    },
+    {
+     "id": "PT-116",
+     "tag": "PT-116"
+    },
+    {
+     "id": "JT-120",
+     "tag": "JT-120"
+    },
+    {
+     "id": "TT-122",
+     "tag": "TT-122"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FT-106",
+     "tag": "FT-106",
+     "text": "instrument FT-106 reads \"FT-106 Reactor feed rate\" at R-101",
+     "field": "instruments[FT-106]"
+    },
+    {
+     "role": "trigger",
+     "id": "PT-107",
+     "tag": "PT-107",
+     "text": "instrument PT-107 reads \"PT-107 Reactor pressure\" at R-101",
+     "field": "instruments[PT-107]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-111",
+     "tag": "TT-111",
+     "text": "instrument TT-111 reads \"TT-111 Separator temperature\" at V-101",
+     "field": "instruments[TT-111]"
+    },
+    {
+     "role": "trigger",
+     "id": "PT-113",
+     "tag": "PT-113",
+     "text": "instrument PT-113 reads \"PT-113 Separator pressure\" at V-101",
+     "field": "instruments[PT-113]"
+    },
+    {
+     "role": "trigger",
+     "id": "FT-114",
+     "tag": "FT-114",
+     "text": "instrument FT-114 reads \"FT-114 Separator underflow\" at V-101",
+     "field": "instruments[FT-114]"
+    },
+    {
+     "role": "trigger",
+     "id": "PT-116",
+     "tag": "PT-116",
+     "text": "instrument PT-116 reads \"PT-116 Stripper pressure\" at C-101",
+     "field": "instruments[PT-116]"
+    },
+    {
+     "role": "trigger",
+     "id": "JT-120",
+     "tag": "JT-120",
+     "text": "instrument JT-120 reads \"JT-120 Compressor work\" at K-101",
+     "field": "instruments[JT-120]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-122",
+     "tag": "TT-122",
+     "text": "instrument TT-122 reads \"TT-122 Separator Cooling Water Outlet Temp\" at E-101",
+     "field": "instruments[TT-122]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no controller in the model or loop list reads these measurements",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Whether operators adjust anything by hand from these readings",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operator logs and round sheets",
+      "ask the operators which of these they act on, and how often"
+     ],
+     "how": "Note manual adjustments per shift tied to each reading."
+    },
+    {
+     "item": "The control system's own loop list",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: export the loop and point list"
+     ],
+     "how": "Confirm the reading is indication-only and not read by logic the model lacks."
+    }
+   ],
+   "decision_rule": "Worth automating a reading that operators adjust by hand often, on a service where steadier control saves energy or quality; indication-only readings nobody acts on close the question.",
+   "typical_benefit": {
+    "wording": "\"energy and cost savings are around 5% or more for many industrial applications of process control systems\" (for plants without updated controls). Process control: \"Typically 2-18% savings.\" The source says these figures \"cannot be added\".",
+    "source": [
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "The model or loop list may be incomplete; an uncontrolled reading may be read by logic not in the model.",
+   "status": "asked"
+  },
+  {
+   "id": "C3@model",
+   "question_id": "C3",
+   "family": "controls",
+   "question": "Do these control valves lack position feedback?",
+   "about": "FV-102, FV-103, FV-101, FV-104, FV-105, FV-110 and 5 more",
+   "assets": [
+    {
+     "id": "FV-102",
+     "tag": "FV-102"
+    },
+    {
+     "id": "FV-103",
+     "tag": "FV-103"
+    },
+    {
+     "id": "FV-101",
+     "tag": "FV-101"
+    },
+    {
+     "id": "FV-104",
+     "tag": "FV-104"
+    },
+    {
+     "id": "FV-105",
+     "tag": "FV-105"
+    },
+    {
+     "id": "FV-110",
+     "tag": "FV-110"
+    },
+    {
+     "id": "LV-112",
+     "tag": "LV-112"
+    },
+    {
+     "id": "LV-115",
+     "tag": "LV-115"
+    },
+    {
+     "id": "FV-119",
+     "tag": "FV-119"
+    },
+    {
+     "id": "TV-121",
+     "tag": "TV-121"
+    },
+    {
+     "id": "FV-117",
+     "tag": "FV-117"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FV-102",
+     "tag": "FV-102",
+     "text": "valve FV-102 reads \"FV-102 D feed flow valve\" at U-100",
+     "field": "final_elements[FV-102]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-103",
+     "tag": "FV-103",
+     "text": "valve FV-103 reads \"FV-103 E feed flow valve\" at U-100",
+     "field": "final_elements[FV-103]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-101",
+     "tag": "FV-101",
+     "text": "valve FV-101 reads \"FV-101 A feed flow valve\" at U-100",
+     "field": "final_elements[FV-101]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-104",
+     "tag": "FV-104",
+     "text": "valve FV-104 reads \"FV-104 A and C feed flow valve\" at C-101",
+     "field": "final_elements[FV-104]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-105",
+     "tag": "FV-105",
+     "text": "valve FV-105 reads \"FV-105 Compressor recycle valve\" at K-101",
+     "field": "final_elements[FV-105]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-110",
+     "tag": "FV-110",
+     "text": "valve FV-110 reads \"FV-110 Purge valve\" at V-101",
+     "field": "final_elements[FV-110]"
+    },
+    {
+     "role": "trigger",
+     "id": "LV-112",
+     "tag": "LV-112",
+     "text": "valve LV-112 reads \"LV-112 Separator pot liquid flow valve\" at V-101",
+     "field": "final_elements[LV-112]"
+    },
+    {
+     "role": "trigger",
+     "id": "LV-115",
+     "tag": "LV-115",
+     "text": "valve LV-115 reads \"LV-115 Stripper liquid product flow valve\" at C-101",
+     "field": "final_elements[LV-115]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-119",
+     "tag": "FV-119",
+     "text": "valve FV-119 reads \"FV-119 Stripper steam valve\" at C-101",
+     "field": "final_elements[FV-119]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-121",
+     "tag": "TV-121",
+     "text": "valve TV-121 reads \"TV-121 Reactor cooling water flow valve\" at R-101",
+     "field": "final_elements[TV-121]"
+    },
+    {
+     "role": "trigger",
+     "id": "FV-117",
+     "tag": "FV-117",
+     "text": "valve FV-117 reads \"FV-117 Condenser cooling water flow valve\" at E-101",
+     "field": "final_elements[FV-117]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+      "maintenance records: valve records"
+     ],
+     "how": "List which valves report position."
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: FV-101: recorded signal XMV(3) in the TE data files; FV-102: recorded signal XMV(1) in the TE data files; FV-103: recorded signal XMV(2) in the TE data files; FV-104: recorded signal XMV(4) in the TE data files; FV-105: recorded signal XMV(5) in the TE data files; FV-110: recorded signal XMV(6) in the TE data files; FV-117: recorded signal XMV(11) in the TE data files; FV-119: recorded signal XMV(9) in the TE data files; LV-112: recorded signal XMV(7) in the TE data files; LV-115: recorded signal XMV(8) in the TE data files; TV-121: recorded signal XMV(10) in the TE data files",
+      "a walkdown: a small step test on each loop in manual"
+     ],
+     "how": "Compare controller output with measured response."
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   },
+   "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted.",
+   "status": "asked"
+  },
+  {
+   "id": "C9@model",
+   "question_id": "C9",
+   "family": "safety_question",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "about": "K-101",
+   "assets": [
+    {
+     "id": "K-101",
+     "tag": "K-101"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-101",
+     "tag": "K-101",
+     "text": "equipment K-101 reads \"K-101 Recycle Compressor\"",
+     "field": "units[K-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+      "DCS/PLC configuration: safety system configuration"
+     ],
+     "how": "Confirm what protects each machine and that it is tested."
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   },
+   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H3",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "E25",
+  "E26"
+ ],
+ "left_out": {}
+}

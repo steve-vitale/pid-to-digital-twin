@@ -1,0 +1,791 @@
+{
+ "about": "AGENT-MADE answer keys (first pass), PID2Graph-style. See data/agent_keys/README.md.",
+ "sheets": {
+  "fig1": {
+   "size_px": [
+    1782,
+    1312
+   ],
+   "image": "PRONTO technical report PDF, page index 4 (printed page 5), embedded image xref 91, extracted bytes unchanged (PNG 1782 x 1312)",
+   "image_sha256": "b8fc67ae3d9e9a72ab7ba01a8c6ecdc903bcfaf24f73baa5cb2bf14ac715b953",
+   "symbols": {
+    "sep2": {
+     "class": "tank",
+     "box": [
+      85,
+      73,
+      206,
+      281
+     ],
+     "text": "2 phase separator"
+    },
+    "b_pt403": {
+     "class": "instrumentation",
+     "box": [
+      111,
+      24,
+      139,
+      52
+     ],
+     "text": "PT403"
+    },
+    "v_pic401": {
+     "class": "valve",
+     "box": [
+      238,
+      50,
+      266,
+      78
+     ],
+     "text": "PIC401"
+    },
+    "b_pt408": {
+     "class": "instrumentation",
+     "box": [
+      329,
+      68,
+      356,
+      94
+     ],
+     "text": "PT408"
+    },
+    "b_b05": {
+     "class": "instrumentation",
+     "box": [
+      372,
+      92,
+      393,
+      113
+     ],
+     "text": "B05"
+    },
+    "ultrasonic": {
+     "class": "general",
+     "box": [
+      350,
+      208,
+      370,
+      254
+     ],
+     "text": "Ultrasonic sensor"
+    },
+    "b_b20": {
+     "class": "instrumentation",
+     "box": [
+      425,
+      293,
+      447,
+      315
+     ],
+     "text": "B20"
+    },
+    "b_b08": {
+     "class": "instrumentation",
+     "box": [
+      391,
+      321,
+      413,
+      343
+     ],
+     "text": "B08"
+    },
+    "b_b09": {
+     "class": "instrumentation",
+     "box": [
+      357,
+      411,
+      379,
+      433
+     ],
+     "text": "B09"
+    },
+    "b_b10": {
+     "class": "instrumentation",
+     "box": [
+      402,
+      456,
+      424,
+      478
+     ],
+     "text": "B10"
+    },
+    "b_b11": {
+     "class": "instrumentation",
+     "box": [
+      402,
+      624,
+      424,
+      646
+     ],
+     "text": "B11"
+    },
+    "ft406": {
+     "class": "general",
+     "box": [
+      12,
+      477,
+      40,
+      535
+     ],
+     "text": "FT406"
+    },
+    "ft404": {
+     "class": "general",
+     "box": [
+      298,
+      477,
+      327,
+      535
+     ],
+     "text": "FT404"
+    },
+    "b_pt417": {
+     "class": "instrumentation",
+     "box": [
+      660,
+      74,
+      687,
+      100
+     ],
+     "text": "PT417"
+    },
+    "b_pt312": {
+     "class": "instrumentation",
+     "box": [
+      675,
+      586,
+      704,
+      614
+     ],
+     "text": "PT312"
+    },
+    "v_v11": {
+     "class": "valve",
+     "box": [
+      705,
+      625,
+      744,
+      650
+     ],
+     "text": "V11"
+    },
+    "v_v10": {
+     "class": "valve",
+     "box": [
+      705,
+      688,
+      744,
+      714
+     ],
+     "text": "V10"
+    },
+    "ft305": {
+     "class": "general",
+     "box": [
+      831,
+      570,
+      873,
+      599
+     ],
+     "text": "FT305"
+    },
+    "v_fic302": {
+     "class": "valve",
+     "box": [
+      920,
+      559,
+      959,
+      595
+     ],
+     "text": "FIC302"
+    },
+    "ft302": {
+     "class": "general",
+     "box": [
+      831,
+      628,
+      873,
+      656
+     ],
+     "text": "FT302"
+    },
+    "v_fic301": {
+     "class": "valve",
+     "box": [
+      920,
+      619,
+      959,
+      652
+     ],
+     "text": "FIC301"
+    },
+    "air_receiver": {
+     "class": "tank",
+     "box": [
+      1040,
+      547,
+      1125,
+      694
+     ],
+     "text": null
+    },
+    "compressor": {
+     "class": "pump",
+     "box": [
+      1184,
+      557,
+      1244,
+      616
+     ],
+     "text": "Air compressor"
+    },
+    "t200": {
+     "class": "tank",
+     "box": [
+      1235,
+      8,
+      1348,
+      145
+     ],
+     "text": "T200"
+    },
+    "b_li201": {
+     "class": "instrumentation",
+     "box": [
+      1202,
+      62,
+      1229,
+      88
+     ],
+     "text": "LI201"
+    },
+    "v_lvc507": {
+     "class": "valve",
+     "box": [
+      1481,
+      183,
+      1513,
+      210
+     ],
+     "text": "LVC507"
+    },
+    "coalescer": {
+     "class": "tank",
+     "box": [
+      1579,
+      165,
+      1659,
+      337
+     ],
+     "text": "Water coalescer"
+    },
+    "b_li503": {
+     "class": "instrumentation",
+     "box": [
+      1667,
+      213,
+      1695,
+      241
+     ],
+     "text": "LI503"
+    },
+    "t100": {
+     "class": "tank",
+     "box": [
+      1235,
+      232,
+      1348,
+      382
+     ],
+     "text": "T100"
+    },
+    "b_li101": {
+     "class": "instrumentation",
+     "box": [
+      1201,
+      270,
+      1228,
+      297
+     ],
+     "text": "LI101"
+    },
+    "v_lvc502": {
+     "class": "valve",
+     "box": [
+      1431,
+      346,
+      1462,
+      377
+     ],
+     "text": "LVC502"
+    },
+    "p01": {
+     "class": "pump",
+     "box": [
+      1082,
+      332,
+      1145,
+      398
+     ],
+     "text": "P01"
+    },
+    "v_fic102": {
+     "class": "valve",
+     "box": [
+      931,
+      308,
+      959,
+      342
+     ],
+     "text": "FIC102"
+    },
+    "ft102": {
+     "class": "general",
+     "box": [
+      985,
+      319,
+      1030,
+      346
+     ],
+     "text": "FT102"
+    },
+    "v_fic101": {
+     "class": "valve",
+     "box": [
+      931,
+      369,
+      959,
+      400
+     ],
+     "text": "FIC101"
+    },
+    "ft104": {
+     "class": "general",
+     "box": [
+      985,
+      377,
+      1030,
+      405
+     ],
+     "text": "FT104"
+    },
+    "transparent": {
+     "class": "general",
+     "box": [
+      433,
+      700,
+      448,
+      742
+     ],
+     "text": "Transparent pipeline"
+    },
+    "v_u39": {
+     "class": "valve",
+     "box": [
+      495,
+      813,
+      525,
+      838
+     ],
+     "text": "U39"
+    },
+    "b_b14": {
+     "class": "instrumentation",
+     "box": [
+      626,
+      808,
+      648,
+      830
+     ],
+     "text": "B14"
+    },
+    "b_b12": {
+     "class": "instrumentation",
+     "box": [
+      457,
+      893,
+      479,
+      915
+     ],
+     "text": "B12"
+    },
+    "b_b13": {
+     "class": "instrumentation",
+     "box": [
+      561,
+      893,
+      583,
+      915
+     ],
+     "text": "B13"
+    },
+    "b_pt501": {
+     "class": "instrumentation",
+     "box": [
+      321,
+      1013,
+      349,
+      1041
+     ],
+     "text": "PT501"
+    },
+    "v_relief501": {
+     "class": "valve",
+     "box": [
+      385,
+      1023,
+      404,
+      1062
+     ],
+     "text": null
+    },
+    "v_pic501": {
+     "class": "valve",
+     "box": [
+      496,
+      962,
+      531,
+      992
+     ],
+     "text": "PIC501"
+    },
+    "sep3": {
+     "class": "tank",
+     "box": [
+      219,
+      1063,
+      619,
+      1227
+     ],
+     "text": "3 phase separator"
+    },
+    "b_li502": {
+     "class": "instrumentation",
+     "box": [
+      188,
+      1178,
+      216,
+      1206
+     ],
+     "text": "LI502"
+    }
+   },
+   "edges": [
+    [
+     "air_receiver",
+     "compressor"
+    ],
+    [
+     "air_receiver",
+     "j_ar"
+    ],
+    [
+     "b_b05",
+     "j_b05"
+    ],
+    [
+     "b_b08",
+     "j_b08"
+    ],
+    [
+     "b_b09",
+     "j_b09"
+    ],
+    [
+     "b_b10",
+     "j_b10"
+    ],
+    [
+     "b_b11",
+     "j_b11"
+    ],
+    [
+     "b_b12",
+     "j_b12"
+    ],
+    [
+     "b_b13",
+     "j_b13"
+    ],
+    [
+     "b_b14",
+     "j_b14"
+    ],
+    [
+     "b_b20",
+     "j_b20"
+    ],
+    [
+     "b_li101",
+     "t100"
+    ],
+    [
+     "b_li201",
+     "t200"
+    ],
+    [
+     "b_li502",
+     "sep3"
+    ],
+    [
+     "b_li503",
+     "coalescer"
+    ],
+    [
+     "b_pt312",
+     "j_pt312"
+    ],
+    [
+     "b_pt403",
+     "sep2"
+    ],
+    [
+     "b_pt408",
+     "j_pt408"
+    ],
+    [
+     "b_pt417",
+     "j_pt417"
+    ],
+    [
+     "b_pt501",
+     "sep3"
+    ],
+    [
+     "coalescer",
+     "sep3"
+    ],
+    [
+     "coalescer",
+     "v_lvc502"
+    ],
+    [
+     "coalescer",
+     "v_lvc507"
+    ],
+    [
+     "ft102",
+     "j_pr1"
+    ],
+    [
+     "ft102",
+     "v_fic102"
+    ],
+    [
+     "ft104",
+     "j_pr1"
+    ],
+    [
+     "ft104",
+     "v_fic101"
+    ],
+    [
+     "ft302",
+     "j_al"
+    ],
+    [
+     "ft302",
+     "v_fic301"
+    ],
+    [
+     "ft305",
+     "j_al"
+    ],
+    [
+     "ft305",
+     "v_fic302"
+    ],
+    [
+     "ft404",
+     "sep3"
+    ],
+    [
+     "ft404",
+     "v_pic401"
+    ],
+    [
+     "ft406",
+     "sep2"
+    ],
+    [
+     "ft406",
+     "sep3"
+    ],
+    [
+     "j_al",
+     "j_v10"
+    ],
+    [
+     "j_ar",
+     "v_fic301"
+    ],
+    [
+     "j_ar",
+     "v_fic302"
+    ],
+    [
+     "j_b05",
+     "j_pt408"
+    ],
+    [
+     "j_b05",
+     "ultrasonic"
+    ],
+    [
+     "j_b08",
+     "j_b09"
+    ],
+    [
+     "j_b08",
+     "j_b20"
+    ],
+    [
+     "j_b09",
+     "ultrasonic"
+    ],
+    [
+     "j_b10",
+     "j_b11"
+    ],
+    [
+     "j_b10",
+     "j_b20"
+    ],
+    [
+     "j_b11",
+     "transparent"
+    ],
+    [
+     "j_b12",
+     "j_b13"
+    ],
+    [
+     "j_b12",
+     "j_u39b"
+    ],
+    [
+     "j_b13",
+     "j_b14"
+    ],
+    [
+     "j_b14",
+     "j_u39a"
+    ],
+    [
+     "j_mix",
+     "j_pl"
+    ],
+    [
+     "j_mix",
+     "j_pt312"
+    ],
+    [
+     "j_mix",
+     "j_pt417"
+    ],
+    [
+     "j_pl",
+     "v_fic101"
+    ],
+    [
+     "j_pl",
+     "v_fic102"
+    ],
+    [
+     "j_pr1",
+     "p01"
+    ],
+    [
+     "j_pt312",
+     "v_v11"
+    ],
+    [
+     "j_pt408",
+     "sep2"
+    ],
+    [
+     "j_pt417",
+     "j_u39a"
+    ],
+    [
+     "j_u39a",
+     "v_u39"
+    ],
+    [
+     "j_u39b",
+     "transparent"
+    ],
+    [
+     "j_u39b",
+     "v_u39"
+    ],
+    [
+     "j_v10",
+     "v_v10"
+    ],
+    [
+     "j_v10",
+     "v_v11"
+    ],
+    [
+     "p01",
+     "t100"
+    ],
+    [
+     "sep2",
+     "v_pic401"
+    ],
+    [
+     "sep3",
+     "v_pic501"
+    ],
+    [
+     "sep3",
+     "v_relief501"
+    ],
+    [
+     "t100",
+     "v_lvc502"
+    ],
+    [
+     "t200",
+     "v_lvc507"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "b_li502",
+     "v_lvc502"
+    ],
+    [
+     "b_li503",
+     "v_lvc507"
+    ],
+    [
+     "b_pt403",
+     "v_pic401"
+    ],
+    [
+     "b_pt501",
+     "v_pic501"
+    ],
+    [
+     "ft102",
+     "v_fic102"
+    ],
+    [
+     "ft104",
+     "v_fic101"
+    ],
+    [
+     "ft302",
+     "v_fic301"
+    ],
+    [
+     "ft305",
+     "v_fic302"
+    ]
+   ]
+  }
+ }
+}

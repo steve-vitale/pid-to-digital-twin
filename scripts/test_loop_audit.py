@@ -114,6 +114,29 @@ class LoopAuditTest(unittest.TestCase):
         for f in fragments:
             self.assertIn(f, str(ctx.exception))
 
+    def test_a_combined_instrument_counts_its_own_measurement(self):
+        loops = self.write("combined.csv", "controller,measurement,output\nFIC-101,FIC-101,FV-101\n")
+        rows = la.run(loops, ROOT / "data" / "te_pid" / "key.json")["loops"]
+        self.assertEqual(rows[0]["status"], "drawn")
+        self.assertIn("combined", rows[0]["note"])
+
+    def test_report_table_says_combined_not_yes_for_a_combined_instrument(self):
+        # No signal line stands behind signal_in for a combined instrument: the cell must not read as a drawn line.
+        loops = self.write("combined.csv", "controller,measurement,output\nFIC-101,FIC-101,FV-101\n"
+                                           "FIC-102,FT-102,FV-102\n")
+        md = la.markdown(la.run(loops, KEY_D))
+        rows = {ln.split(" | ")[1]: ln for ln in md.splitlines() if ln.startswith("| 2 ") or ln.startswith("| 3 ")}
+        combined_cells = rows["FIC-101"].split(" | ")[5:10]
+        self.assertEqual(combined_cells, ["yes", "combined", "yes", "combined", "yes"])
+        self.assertEqual(rows["FIC-102"].split(" | ")[5:10], ["yes"] * 5)
+        self.assertIn("signal line measurement -> controller 2/2 (1 combined instrument, no line drawn)", md)
+
+    def test_a_tag_on_no_symbol_gets_a_spelling_hint(self):
+        loops = self.write("typo.csv", "controller,measurement,output\nFIC-101.PV,FT-101,FV-101\n")
+        rows = la.run(loops, ROOT / "data" / "te_pid" / "key.json")["loops"]
+        self.assertEqual(rows[0]["status"], "not_drawn")
+        self.assertIn(".PV", rows[0]["hint"])
+
     def test_bad_rows_refused_with_line_number(self):
         head = "# exported 2026-10-29\ncontroller,measurement,output\nFIC-1,FT-1,FV-1\n"
         self.assertRefused(head + "FIC-2,,FV-2\n", "line 4", "empty measurement")
@@ -151,6 +174,27 @@ class LoopAuditTest(unittest.TestCase):
         row = next(x for x in r["loops"] if x["controller"] == "FIC-105")
         self.assertEqual(row["missing"], ["output symbol"])
         self.assertIsNone(row["checks"]["signal_in"])
+
+    def test_unplaced_items_and_underscore_tags_count_as_drawn(self):
+        # From the DEXPI matrix: a valve on a line with open ends sits in "unplaced" (still on the drawing), and a tool
+        # allowing one hyphen per tag writes P-4712.02 as P_4712.02.
+        model = {"units": [], "instruments": [], "final_elements": [], "line_items": [],
+                 "controllers": [{"id": "C1", "tag": "PICSA-P_4712.02"}, {"id": "C2", "tag": "FIC-04"}],
+                 "unplaced": [{"tag": "FV-04"}, {"tag": "PT-P_4712.01"}, {"tag": "PV-P_4712.02"}]}
+        loops = self.write("loops.csv", "controller,measurement,output\nPICSA P-4712.02,PT P-4712.01,PV P-4712.02\n"
+                                        "FIC-04,FIC-04,FV-04\n")
+        r = la.run(loops, self.write("plant_model.json", model))
+        self.assertEqual(r["totals"]["tags_present"], 2, r["loops"])
+
+    def test_plant_model_combined_instrument_does_not_claim_three_tags(self):
+        model = {"instruments": [{"id": "I1", "tag": "PICSA 4712.02"}, {"id": "I2", "tag": "PV4712.02"}]}
+        loops = self.write("c.csv", "controller,measurement,output\nPICSA 4712.02,PICSA 4712.02,PV4712.02\n")
+        r = la.run(loops, self.write("plant_model.json", model))
+        self.assertTrue(r["loops"][0]["combined"])
+        self.assertNotIn("all three tags", la.headline(r))
+        self.assertIn("1 combined instrument", la.headline(r))
+        row = next(l for l in la.markdown(r).splitlines() if l.startswith("| 2 "))
+        self.assertEqual(row.split(" | ")[5:8], ["yes", "combined", "yes"])
 
     def test_unknown_drawing_refused(self):
         with self.assertRaises(la.InputError):

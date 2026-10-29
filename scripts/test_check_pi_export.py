@@ -1,8 +1,12 @@
 """Offline PI Builder convention check: the reference file is self-consistent, the committed exports give the
 recorded findings, and each error class fires on a planted fault (positive controls). No PI runtime needed."""
+import contextlib
 import csv
 import io
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -152,6 +156,54 @@ class PositiveControlTests(unittest.TestCase):
         self.assertTrue(report["attribute_types"]["Int32"].startswith("repo_allowlist_only"))
         self.assertEqual(report["uoms"]["widgets"]["status"], "not_in_vendor_sample")
         self.assertTrue(any("'widgets'" in w for w in report["warnings"]))
+
+    def test_an_unknown_unit_is_called_unrecognised_in_plain_words(self):
+        # Kept a warning: the vendor UOM list here is a sample of AF's default database, so absence is not proof.
+        rows = GOOD + [["x", "Plant\\U1", "Length", "Attribute", "", "", "Double", "furlongs", "PI Point", "\\\\A\\B"]]
+        report = cpe.check(*sheet(rows))
+        self.assertEqual(report["errors"], [])
+        warning = next(w for w in report["warnings"] if "'furlongs'" in w)
+        self.assertIn("not recognised", warning)
+        self.assertNotIn("not_in_vendor_sample", warning)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "sheet.csv"
+            stream = io.StringIO()
+            csv.writer(stream, lineterminator="\n").writerows(
+                [["Selected(x)", "Parent", "Name", "ObjectType", "Description", "Template", "AttributeType",
+                  "AttributeDefaultUOM", "AttributeDataReference", "AttributeConfigString"]] + rows)
+            path.write_text(stream.getvalue(), encoding="utf-8")
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                self.assertEqual(cpe.main([str(path)]), 0)
+        self.assertIn("not recognised", out.getvalue())
+        self.assertIn("no errors, 1 warning to review", out.getvalue())
+
+
+class ImportTagsRefusals(unittest.TestCase):
+    """scripts/ignition/import_tags.py: a bad file is refused before any gateway is contacted."""
+
+    def run_import(self, *args):
+        env = {k: v for k, v in os.environ.items() if not k.startswith("IGNITION_")}
+        env["IGNITION_URL"] = "https://127.0.0.1:9"   # nothing listens; the refusal must come first
+        env["IGNITION_API_TOKEN"] = "unused:unused"
+        return subprocess.run([sys.executable, str(ROOT / "scripts" / "ignition" / "import_tags.py"), *args],
+                              capture_output=True, text=True, timeout=60, env=env)
+
+    def test_missing_file_is_refused_with_a_message(self):
+        r = self.run_import("no/such/provider.json", "--provider", "Twin")
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("refused:", r.stderr)
+        self.assertIn("provider.json", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+
+    def test_a_file_that_is_not_json_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = Path(tmp) / "tags.json"
+            bad.write_text("not json", encoding="utf-8")
+            r = self.run_import(str(bad))
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("not valid JSON", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1432 @@
+{
+ "about": "Independent reviews of each feature's committed example outputs: who reviewed (a fresh agent or model given only the outputs and their sources), when, the sha256 of every file reviewed, the verdict and any findings with how they were resolved. Read by scripts/feature_catalog.py.",
+ "reviews": [
+  {
+   "feature": "drawing-to-bundle",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/own-drawing/extraction_sheet0.json": "fbb9c92c322c0b4dd8e5a48482b0dc13c52a3144f92c3c77c5f2d4a308d571de",
+    "examples/own-drawing/manifest.json": "fb92b0ad0194687c1872cc35c06bdc5aea4b1382e87a5e7218072758e707f0df"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "'88 s per sheet' was measured on sheet 8 only; this example's sheet 0 run took 75 s + 1.3 s"
+    }
+   ],
+   "resolution": "wording fixed"
+  },
+  {
+   "feature": "vendor-evaluation",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/vendor-evaluation/report.md": "aafd85c888f89bd7cd28e6a2ca54af6237ae7aa8fd8a8cf78c1fc2957cfc0cfb",
+    "examples/vendor-evaluation/report.json": "98785bd72e52262c54f09ee68d7741fb823b87a72d1bbd70c3fb20e35d86bab3"
+   },
+   "findings": [],
+   "resolution": ""
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "55c51d1d729ddcb2dbe13f07dd6f54569eedd19f0f9fce9d4fc5f3be5822a03f"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "counts read only from review_queue.csv; a truncated or stale queue gives a confident wrong report, and a reviewed model still reads as unchecked"
+    },
+    {
+     "severity": "nit",
+     "issue": "refusals print raw exception reprs"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+    "examples/review-and-mapping/records/2026-10-29-bundle.md": "f36bc54ea74a6b6e52d823fd63a0f0f81b8eff655eb7831ad0ef6a17189c3e35",
+    "examples/review-and-mapping/mapping_dry_run.md": "2a5eaa3eaff5904c37b6e1b74c4e711502fc023f4ae0fbc76562cf2f27ea8d91",
+    "examples/review-and-mapping/graph_after_review.json": "f9287f64bfbd70ebe654bf253f1fd023172f765c763aeea4510582a50de8b6e5"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "apply_review accepts an empty correction value and blanks the tag"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "map_pi_points.py and review_kit.py listed but not shown or exampled"
+    },
+    {
+     "severity": "nit",
+     "issue": "partial apply on refused rows not stated; duplicate OPC point unflagged; missing input gives traceback"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "dexpi-to-bundle",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/from-dexpi/c01/dexpi-c01.prediction.json": "bcd31dad784ada4a131427461afb0660496786782e25dd52610e6c30e959112e",
+    "examples/from-dexpi/c01/REPORT.html": "0d629652662666e7d8c658cf1e48c297ce185316754f480ff71fdd13e262bebe"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "use matrix says 'a DEXPI XML file, seconds'; the tool reads three prepared public sheets built by adapt_dexpi.py (network, PyMuPDF)"
+    },
+    {
+     "severity": "nit",
+     "issue": "REPORT.html embedded image differs across environments"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "description-to-model",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "examples/from-description/bayer-exports/svg/overview.svg": "458bbe10ab573b1a89396f6e863e55f65450bfb2797b63522845972b2fa10bf9",
+    "examples/from-description/bayer-exports/ignition/tags.json": "8431f3c44fff5ecf3b49e63ce044da5d5fb4e30347f3791fdc80fac1b44e4191",
+    "examples/from-description/bayer-exports/ops_review_sheet.csv": "57f5ed44024db6dce61aa781a5564beb2dc65a0f2aefb555fe19c76dd0c1685a"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "two Ignition UDT types both named HeatExchanger"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "TE folder and BasePath namespace hardcoded on a non-TE model"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "an item with no source exports silently"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/graph-export/te_graph.json": "9ad9fa8b0b982a263668a32088184e32a74017a13169f49c0b736abf395e7967",
+    "examples/graph-export/bayer_graph.json": "4a5b5c1bb35a316cd4365c71c0c2ac36aa79cb2cdf5021b9f907566bcfdc1a3e",
+    "examples/graph-export/sheet0_graph.json": "6a9dc702e7599e4a51cc2ef0f450a5e25162844c3df21fd622c95a9cf5fc8c8a"
+   },
+   "findings": [
+    {
+     "severity": "blocker",
+     "issue": "nested and list content dropped silently (TIC-104 setpoint and split-range valves; manual valves, relief devices, interlocks, limits)"
+    },
+    {
+     "severity": "nit",
+     "issue": "model-level source fallback hides missing item citations; empty input gives a traceback"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "loop-audit",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "examples/loop-audit/results/rev_a.md": "c33abb62665b0891411384398ed804427950f48fea0288029cfa0f11e5df55ca",
+    "examples/loop-audit/results/rev_d.md": "78bc9ac18158a561050d61aa4142193d9ca817a63e8e86d6904a7195b2584e09"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "README says both audits match out/te_loop_audit.md, which only holds revision D"
+    },
+    {
+     "severity": "nit",
+     "issue": "a mistyped or suffixed controller tag reads 'not drawn' with no hint"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "platform-exports",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "out/ignition/te_tags.json": "56176d3c3acd0a6008c0d861967628549a9a67e7cc6d0fd90ee7b6785db6c7fe",
+    "out/pi/pi_builder_af.csv": "ba2379b28ab5fae73c7e940496ab4ba5ef6899501eeaee6cb2d39193929db5d8"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "guide says PV members are readOnly; the TE export never set it"
+    },
+    {
+     "severity": "nit",
+     "issue": "import_tags.py not in the guide; missing file gives a traceback"
+    },
+    {
+     "severity": "nit",
+     "issue": "check_pi_export warns but passes a nonsense unit"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/historian-csv/results/csv_normal_bands.md": "0bd83ea41f4ad27125aa7a3c4650029fb93fb2f9d043d0b62b5339ef9a188398",
+    "examples/historian-csv/results/csv_normal_bands.json": "f285aaf5f06d61c1e97bb2c9eca0dbee30f176a2d09c084a3cb7da9c8606e67d",
+    "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "replay test timing-dependent (failed 4 of 4 standalone)"
+    },
+    {
+     "severity": "nit",
+     "issue": "tracebacks on a missing file or bad --fault-start; --start past the end wraps silently; no small-sample warning"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "out/claims_check.md": "de26c37d19ceb03c42b64193959564cbb824d8464a9b8163109efab2d178b667",
+    "docs/TRIED.md": "0e3b7d9486fc5a8e748c2714748aa3d9033ee702e74071c2012f006f6d982ce3",
+    "docs/SCRIPTS.md": "905b985a5270bbcf36aa53ba20df23b631e70aa91cece968bbe4b51f9aff85b0"
+   },
+   "findings": [
+    {
+     "severity": "blocker",
+     "issue": "full suite not green on the in-progress tree (script index and pipeline stages stale)"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "script_index, attempts_ledger and feature_catalog ignore --help and rewrite files"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "script index descriptions cut at the first colon"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Claude agent (fresh context, given only the guide, outputs and sources)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "327a7039763c31c9a2e82385e2d740dcc407ce4994f81405df1b56fecca60777",
+    "examples/opportunity-screen/te/questions.json": "d7f24502444c2553327bfc6fd427a02eae9de18b4a4a21080a598bc687be1c9e",
+    "examples/opportunity-screen/bayer/screen.md": "42df5ee8f39c36847234e1aba100ccea65070d51475888e6bb5f0c3f0ca6b3c3",
+    "examples/opportunity-screen/bayer/questions.json": "dc588d5ec71bb6adc8f2ee60d1cc395d09671fc5a321c2436f7019f2762e26c4",
+    "examples/opportunity-screen/open100/screen.md": "17d6c790373528c6c9fde3c05e0057ce25c971a619266f94590d138db2255e30",
+    "examples/opportunity-screen/open100/questions.json": "bbeb556b4eabecfdf5244a4e8e0bf3d8c6b2fd750723fb77b3fdb162a1b3ca05"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "README says the Bayer C6 evidence quotes the split-range misprogramming; the outputs don't"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "empty or wrong-shaped model gives a 'found nothing' screen; bad loop CSV or JSON gives a traceback"
+    },
+    {
+     "severity": "nit",
+     "issue": "return-temperature request dropped for E-3; synthetic demo point not labelled synthetic; '27 control valves' counts a duplicate; setpoint text concatenated"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "327a7039763c31c9a2e82385e2d740dcc407ce4994f81405df1b56fecca60777",
+    "examples/opportunity-screen/te/questions.json": "d7f24502444c2553327bfc6fd427a02eae9de18b4a4a21080a598bc687be1c9e",
+    "examples/opportunity-screen/bayer/screen.md": "42df5ee8f39c36847234e1aba100ccea65070d51475888e6bb5f0c3f0ca6b3c3",
+    "examples/opportunity-screen/bayer/questions.json": "dc588d5ec71bb6adc8f2ee60d1cc395d09671fc5a321c2436f7019f2762e26c4",
+    "examples/opportunity-screen/open100/screen.md": "17d6c790373528c6c9fde3c05e0057ce25c971a619266f94590d138db2255e30",
+    "examples/opportunity-screen/open100/questions.json": "bbeb556b4eabecfdf5244a4e8e0bf3d8c6b2fd750723fb77b3fdb162a1b3ca05"
+   },
+   "findings": [
+    {
+     "severity": "blocker",
+     "issue": "OPEN100 H4 on ACW-AXC-210 reverses the heat-transfer direction: an air cooler rejecting cooling-water heat to air, not process heat into cooling water"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "Bayer H4 drops the return-temperature request when only the supply is known"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "flow requests pointed at a valve-position point (TCV_1408_POS) and a valve output in % (XMV 10)"
+    },
+    {
+     "severity": "nit",
+     "issue": "H4 quotes S11 but lists only S19 as its source"
+    }
+   ],
+   "resolution": ""
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "lists of records and dicts nested deeper than one level were dropped silently; problems() did not catch it as its docstring said"
+    },
+    {
+     "severity": "nit",
+     "issue": "--check on an empty or missing file gave a traceback; --reviews with a missing folder gave 0 events silently"
+    },
+    {
+     "severity": "nit",
+     "issue": "the guide promised 'what a valve's failure affects' and 'which instruments nobody has checked' with no way to get them"
+    }
+   ],
+   "resolution": "Fixed: claims at any depth (indexed lists), CONSUMED table; a second silent drop found and fixed (8 TE cascade edges were missing: output.setpoint_of); clear refusals; two runnable queries in the guide with a test that runs them. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "following the README with --out my-bundle did not reproduce the committed outputs; one output committed with CRLF"
+    },
+    {
+     "severity": "nit",
+     "issue": "a header-only sheet said 'no item_id column'"
+    },
+    {
+     "severity": "nit",
+     "issue": "missing paths gave tracebacks"
+    },
+    {
+     "severity": "nit",
+     "issue": "a corrected tag kept its placeholder status, so the report still called it a placeholder"
+    }
+   ],
+   "resolution": "Fixed: README commands reproduce byte for byte (test runs them); LF outputs; plain refusals; apply_review sets tag_status reviewed on a tag correction. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "consistency check compared only ids and reviewed status: an edited or stale queue still gave a confident report"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "decided items were still counted in 'to check first'"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the committed REPORT.html was stale against the script"
+    },
+    {
+     "severity": "nit",
+     "issue": "a missing column printed a raw KeyError"
+    }
+   ],
+   "resolution": "Fixed: every generated column compared cell by cell against the model; decided items leave the to-check list and show their decision; example regenerated with a byte-identical test; plain message. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "description-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "member names truncated to 40 characters without de-duplication gave duplicate UDT members and PI rows while validation said OK"
+    },
+    {
+     "severity": "nit",
+     "issue": "missing files in draw_pid_from_model gave tracebacks; a missing unit name gave KeyError"
+    }
+   ],
+   "resolution": "Fixed: collisions get the tag appended (existing outputs unchanged) and validation refuses any remaining duplicate; field-specific refusals. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "dexpi-to-bundle",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {},
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "'tags are the drawn label text exactly' while instrument tags join two label pieces"
+    }
+   ],
+   "resolution": "Nit fixed in the README. The example REPORT.html was later regenerated (it was stale against the report script), so this pass no longer covers it. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "README and the reader's report said edges carry no attributes and gave a wrong claim count"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the report crashed on a cp1252 console"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "a connection to a missing id was reported as a closed end"
+    },
+    {
+     "severity": "nit",
+     "issue": "'DEXPI 1.x' though only 1.3 was tested; pump power attributed to the wrong pump; reproduce line used '...'"
+    }
+   ],
+   "resolution": "Fixed: wording, UTF-8 output, dangling references flagged as broken references, tested-version wording, real attribution text. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "platform-exports",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the guide did not cover import_tags.py or check_pi_export.py"
+    },
+    {
+     "severity": "nit",
+     "issue": "import_tags.py traceback on a missing file"
+    },
+    {
+     "severity": "nit",
+     "issue": "a nonsense unit gave only 'not_in_vendor_sample' then 'no errors'"
+    }
+   ],
+   "resolution": "Fixed: guide section with real output; file checked before any gateway call; plain 'not recognised' warning (kept a warning: the vendor list is a subset). Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "loop-audit",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "README said a controller naming itself as its measurement stops the audit; the code allows it as a combined instrument, shown as a bare 'yes'"
+    }
+   ],
+   "resolution": "Fixed: README describes combined instruments; the table says 'combined', not 'yes'. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "csv_replay_server traceback on a missing file"
+    },
+    {
+     "severity": "nit",
+     "issue": "unclear message for a bad --fault-start"
+    },
+    {
+     "severity": "nit",
+     "issue": "no small-sample warning"
+    },
+    {
+     "severity": "nit",
+     "issue": "the replay test no longer guaranteed a blank cell was read"
+    }
+   ],
+   "resolution": "Fixed: clear messages, a warnings list below 30 rows, deterministic blank-cell test; committed outputs byte-identical. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "REVIEWING.md never gave the test-suite command"
+    },
+    {
+     "severity": "nit",
+     "issue": "script_index.py ignored unknown flags"
+    }
+   ],
+   "resolution": "Fixed: run_tests commands documented; unknown flags refused. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the DEXPI loop cell was partly vacuous (combined instruments) and carried a stale explanation"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the page said every criterion was fixed before the run; the PRONTO criterion was set after the first run and not stated"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the header implied one run; cells had no timestamps or tool hashes"
+    },
+    {
+     "severity": "nit",
+     "issue": "self-generated inputs not flagged; '0/19 drawn' read like success"
+    }
+   ],
+   "resolution": "Fixed: cell values say what was checked; each criterion stated (PRONTO's marked post-hoc); per-cell run time and tool hashes, --check fails on a stale cell; self-generated inputs flagged. Full rerun 2026-10-29 passed --check. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "H4's cooler exclusion applied only to the equipment anchor, so it still fired on an air cooler through its line or valve"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "H4 offered the cooling-water outlet temperature as the process-side temperature (TE E-101)"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "a loop list matching no model tag was accepted silently"
+    }
+   ],
+   "resolution": "Fixed: unit-level exclusion with line ends standing in for an unowned line; process-side request excludes cooling-water signals; such a loop list is refused, partial mismatches listed. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 2)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a null model fact was treated as known and closed its data request"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "nested malformed records raised uncaught exceptions"
+    },
+    {
+     "severity": "nit",
+     "issue": "'most opportunities show on the P&ID first' overclaims"
+    }
+   ],
+   "resolution": "Fixed: null or placeholder facts are blank; malformed records refused naming the field; wording softened. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "independent Claude agent (fresh context, round 2: earlier findings re-checked, then new problems sought)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "impossible inputs (negative or >8760 hours, efficiency 85 for 0.85, negative price) gave plausible output"
+    },
+    {
+     "severity": "nit",
+     "issue": "kw_reduction silently won over inconsistent kw_before/kw_after"
+    },
+    {
+     "severity": "nit",
+     "issue": "empty spec message did not name the file"
+    },
+    {
+     "severity": "nit",
+     "issue": "eGRID components recombine to 770.925 vs the stated 770.884"
+    }
+   ],
+   "resolution": "Fixed: physical bounds refused with the reason; inconsistent inputs refused; file named; the rounding is explained in the constants file. All example figures and constants were recomputed by hand and matched. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 2)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {},
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the increase flag accepted strings like 'false'"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "non-object changes and infinite numbers bypassed refusal"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the public Mcf heat-content default lost its source in the output"
+    },
+    {
+     "severity": "nit",
+     "issue": "exact unit conversions had no citation"
+    }
+   ],
+   "resolution": "Fixed: boolean required, objects and finite numbers required, the conversion's source carried and listed, conversions cited. Codex verified every default constant against offline copies of the EPA, eGRID, EIA and DOE sources. Round 2 did not record file hashes; the outputs it saw have since been regenerated by its fixes, so it counts as a stale review. Round 3 verifies the fixes."
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "b07aa5d3edd04f365c6d287a1dcd4d3bc0aa45a74960a4dde17d40da42a86ee8"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "byte-identity of REPORT.html depends on Pillow's JPEG encoder (PNG fallback without Pillow)"
+    },
+    {
+     "severity": "nit",
+     "issue": "a junk OPS_ entry is accepted; consistent with the documented 'OPS_ entries aren't checked'"
+    }
+   ],
+   "resolution": "All four round-2 findings reproduced as fixed; outputs byte-identical; tests pass."
+  },
+  {
+   "feature": "platform-exports",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "out/ignition/te_tags.json": "fbfcab3b38b901cf88284ec3540c04a1542b73bee1318d0c9e429dcfb2621ad4",
+    "out/pi/pi_builder_af.csv": "ba2379b28ab5fae73c7e940496ab4ba5ef6899501eeaee6cb2d39193929db5d8"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "importing a package's own tags.json via import_tags.py is documented as not run; not verifiable offline"
+    }
+   ],
+   "resolution": "All round-2 findings fixed; TE and twin exports byte-identical; check_pi_export output matches the guide."
+  },
+  {
+   "feature": "loop-audit",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "examples/loop-audit/results/rev_a.md": "ab2d4400416f098c548456587fd90ab0b258e76136781328da65ea5bbfe4e42a",
+    "examples/loop-audit/results/rev_d.md": "78bc9ac18158a561050d61aa4142193d9ca817a63e8e86d6904a7195b2584e09"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "a .PV-suffixed tag reads 'not drawn' with no hint in the report (README says to strip suffixes)"
+    }
+   ],
+   "resolution": "Combined-instrument fix verified; results byte-identical; 16 tests pass."
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/historian-csv/results/csv_normal_bands.md": "0bd83ea41f4ad27125aa7a3c4650029fb93fb2f9d043d0b62b5339ef9a188398",
+    "examples/historian-csv/results/csv_normal_bands.json": "f285aaf5f06d61c1e97bb2c9eca0dbee30f176a2d09c084a3cb7da9c8606e67d",
+    "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "--k 0 or negative accepted"
+    }
+   ],
+   "resolution": "All round-2 nits fixed; outputs byte-identical; tests deterministic over 4 runs. The --k nit was fixed after this review (positive K required)."
+  },
+  {
+   "feature": "dexpi-to-bundle",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/from-dexpi/c01/dexpi-c01.prediction.json": "bcd31dad784ada4a131427461afb0660496786782e25dd52610e6c30e959112e",
+    "examples/from-dexpi/c01/REPORT.html": "6e04448f240d195157365a1f82c1df0fe4b1448fdd261d62eb029f34999f9e9b"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "features you_get and README row said 'tags and links exactly as the file holds them', but 16 of 37 links come from expanding tees and direction is dropped"
+    },
+    {
+     "severity": "nit",
+     "issue": "a 0-byte graphml gives a raw ParseError; a tags file matching nothing gives 0 tags without a warning"
+    }
+   ],
+   "resolution": "Outputs byte-identical and the per-sheet F1 1.0 reproduced. The wording was corrected after this review (registry text, not an example output); needs a re-check."
+  },
+  {
+   "feature": "description-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "examples/from-description/bayer-exports/svg/overview.svg": "458bbe10ab573b1a89396f6e863e55f65450bfb2797b63522845972b2fa10bf9",
+    "examples/from-description/bayer-exports/ignition/tags.json": "cf6a54374d27803d03e6e6a34b196878a05ecd1e2692420d3d3f36d82058a990",
+    "examples/from-description/bayer-exports/ops_review_sheet.csv": "57f5ed44024db6dce61aa781a5564beb2dc65a0f2aefb555fe19c76dd0c1685a"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "an empty or all-punctuation description gave an empty tag name while validation said OK"
+    },
+    {
+     "severity": "nit",
+     "issue": "accented letters are dropped and the 40-character cut can lose a differentiating character"
+    }
+   ],
+   "resolution": "Round-2 findings verified fixed; outputs byte-identical. The empty-description case is refused since (with a test); needs a re-check."
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "out/claims_check.md": "de26c37d19ceb03c42b64193959564cbb824d8464a9b8163109efab2d178b667",
+    "docs/TRIED.md": "41db02abc1f3d2d9013b76444c4eabfed4687f1489a5e41ae7e28af95cad8f8c",
+    "docs/SCRIPTS.md": "687c245f7f5bc791f2fa496dd054a0c262b95f7eea6048d921331148ea9cf505"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "attempts_ledger.py and feature_catalog.py treated an unknown flag (a typo like --chek) as 'regenerate', rewriting files"
+    },
+    {
+     "severity": "nit",
+     "issue": "suite red on the in-progress tree: a renamed README anchor (A145), stale row-8 cells, and the TE sheet register overwritten by a Bayer draw through draw_pid_from_model.py's default --register"
+    }
+   ],
+   "resolution": "Both tools now refuse unknown flags (exit 2). The anchor was fixed; the drawing script's default register is now TE's only when drawing TE (with a test), and the TE register was restored. Needs a re-check."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "four wrong-typed fields (unit id {}, instrument unit list, unit type 5, facts string) still gave tracebacks"
+    },
+    {
+     "severity": "nit",
+     "issue": "'n/a' counted as a known fact; controllers={} and duplicate unit ids accepted silently"
+    }
+   ],
+   "resolution": "Every round-2 finding verified fixed; outputs byte-identical. Shape checks added after this review refuse each case naming the field; 'n/a' is now a placeholder. Example outputs unchanged."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 3)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a non-object 'meta' raised an uncaught AttributeError"
+    },
+    {
+     "severity": "nit",
+     "issue": "the stdout screen omitted schedule sources and unmatched-loop warnings"
+    }
+   ],
+   "resolution": "Fixed after this review: 'meta' must be an object; stdout output carries the same provenance as the files. Example outputs unchanged."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "b5d656420add261b237bda3313090f55d23cf7363abeb70702f9467aa08eb85f",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "a76365c3d6cecf80c3742274c6786ae018b3146ccae5e17c1e0c8cdf2da497e1",
+    "examples/impact-estimate/steam-traps-site/impact.md": "3a576c2491fe558eb995f2e02a349e54b062537074e0c34d33f43480135f922c",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "9994eb9faf6098256eb2d9b0a22d3cab13751ff9e4cdf18eca47f01b0b015fd8",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "negative or absurd energy_btu_per_lb accepted"
+    },
+    {
+     "severity": "nit",
+     "issue": "kwh_per_year silently won over inconsistent kW x hours; a demand reduction larger than the load reduction accepted"
+    },
+    {
+     "severity": "nit",
+     "issue": "the guide's exit-code line omitted the physical-bounds refusals"
+    }
+   ],
+   "resolution": "All fixed after this review with tests. The example outputs were then regenerated to mark every estimate a first draft with its assumptions and the data to firm it up (owner's request), so this review is stale and a re-review is due."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 3)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "b5d656420add261b237bda3313090f55d23cf7363abeb70702f9467aa08eb85f",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "a76365c3d6cecf80c3742274c6786ae018b3146ccae5e17c1e0c8cdf2da497e1",
+    "examples/impact-estimate/steam-traps-site/impact.md": "3a576c2491fe558eb995f2e02a349e54b062537074e0c34d33f43480135f922c",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "9994eb9faf6098256eb2d9b0a22d3cab13751ff9e4cdf18eca47f01b0b015fd8",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a measured increase flagged increase=true flipped the sign twice and reported a saving"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "8,784 leap-year hours refused"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "a list as change type crashed"
+    },
+    {
+     "severity": "nit",
+     "issue": "arithmetic overflow uncaught"
+    }
+   ],
+   "resolution": "All fixed after this review: the double flag is refused with the reason; the cap is 8,784; non-text types refused; overflow refused with a message."
+  },
+  {
+   "feature": "dexpi-to-bundle",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/from-dexpi/c01/dexpi-c01.prediction.json": "bcd31dad784ada4a131427461afb0660496786782e25dd52610e6c30e959112e",
+    "examples/from-dexpi/c01/REPORT.html": "6e04448f240d195157365a1f82c1df0fe4b1448fdd261d62eb029f34999f9e9b"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "a 0-byte graphml or malformed tags file gives a raw traceback; the example REPORT.html has no documented command and is byte-identical only with Pillow"
+    }
+   ],
+   "resolution": "All earlier findings verified fixed; outputs reproduce; tests pass."
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "1c523a28bfd7d123ca1d40790c1d4ada018c5585e10d6b68ea7e5760a4512648",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "46cbe1afda2dbecb94113ad611873075e9f2f07054c52b1ebc07b878765b48d2",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "a1afbfdc2b6e2a0f31f75fda49314897c7cafd87f00090da346844a008707f69"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "only a stale round-2 record existed"
+    }
+   ],
+   "resolution": "All round-2 findings verified fixed. The example graph was regenerated after this review (the model's meta notes are now exported), so a re-check is due."
+  },
+  {
+   "feature": "description-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "examples/from-description/bayer-exports/svg/overview.svg": "458bbe10ab573b1a89396f6e863e55f65450bfb2797b63522845972b2fa10bf9",
+    "examples/from-description/bayer-exports/ignition/tags.json": "cf6a54374d27803d03e6e6a34b196878a05ecd1e2692420d3d3f36d82058a990",
+    "examples/from-description/bayer-exports/ops_review_sheet.csv": "57f5ed44024db6dce61aa781a5564beb2dc65a0f2aefb555fe19c76dd0c1685a"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "accented letters dropped from member names; Pillow requirement for draw_pid_from_model not stated in step 4; 'Fig 11' cut to 'Fig1'"
+    }
+   ],
+   "resolution": "All earlier findings verified fixed; outputs byte-identical."
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "42747f3292d00ed74fb1fa525dce5da47c92f8dbd8a04db037b8748065e6e0f4"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a duplicated row in review_queue.csv was accepted and every headline count rose by one"
+    }
+   ],
+   "resolution": "Fixed after this review: a repeated item id is refused (test added). Example outputs unchanged."
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/graph-export/te_graph.json": "82daca99efb13acefa35ea82093f0f29f33a50b816c0c32b200612521046a625",
+    "examples/graph-export/bayer_graph.json": "a74e8a3a10ff311c22059dbc4aa63f2d9f05c4c8e947a3a905b53358a11a3043",
+    "examples/graph-export/sheet0_graph.json": "1891ef94332dd7e62f7d4266eae3897d48a57ed73df66340c4eba879d72cb786",
+    "examples/graph-export/sheet0_graph_core.json": "2e01e9c0e52daaac6f3852edffab8d5685d2b3a26401d9ffe912d1033e9289fd"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the hand-built TE export silently dropped verification caveats, a second check's evidence, an item's own citation and the model's meta notes, contradicting 'nothing leaves silently'"
+    }
+   ],
+   "resolution": "Fixed after this review: check records' notes, cited sources and meta notes are claims (TE 336 to 495 claims; a test asserts no sentence-length value in a hand-built model is lost outside declared sections). Examples regenerated, so a re-check is due."
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+    "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+    "examples/review-and-mapping/mapping_dry_run.md": "94f103eb01920d44e03ea953430f78b11a1b6261be165d5fa9130121db63619d",
+    "examples/review-and-mapping/graph_after_review.json": "e2e6d4a6002c0e0c3574f655e3272ca6e2cbb08f6e3a022f493bccc670ba8005",
+    "examples/review-and-mapping/REPORT_after_review.html": "bf1c7e2652161d4fbc32df8b773baaf4b21e935b41a5efe243cfe2b2b2b02fde",
+    "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+    "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "0-byte review CSV gives a traceback in apply_review; header-only I/O list reports 'mapped 0' without saying it is empty"
+    }
+   ],
+   "resolution": "All earlier findings verified fixed; README commands reproduce byte for byte."
+  },
+  {
+   "feature": "statement-review",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/statement-review/bayer/statements.json": "4779512776b845c7ee98e53f44070bb4a7606290b16537e1dafb53dd6e5b3f96",
+    "examples/statement-review/bayer/sample_60.csv": "639359a89637c435b55ef4a9d8b0500047ba77bacc9a62937deb53f3a4600be7",
+    "examples/statement-review/sheet0/statements.json": "c7783a41968ccfcd795a5076cc002311803aafcb3e3a3d304a7aee03aa5f9655",
+    "examples/statement-review/sheet0/sample_60.csv": "e83a6affbd920e8e15f9f6b52f5ab7adb4dd8b0cf3bf90116c72c26c1cdbd354",
+    "examples/statement-review/sheet0/sample_layers.csv": "56d42a3d28906013fbb99e325ff2b355f94f8425876fbc57791db1e3dd05c483",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt": "7cb60a63f9f6291ae34b9be29312e9f38ced5237932ecee76cedb0210cbfd034",
+    "examples/statement-review/sheet0/sample_layers_r2.csv": "67d05a9a3fda5b3f9016166c70806a795db94bd863fbca37a59ed63c789b6ac3",
+    "examples/statement-review/bayer/review-2026-10-29/score.txt": "c6e358d0f360b1ae9fea830dd832425b7d8cbdb32a95bd45f059a3d3a337069a",
+    "examples/statement-review/sheet0/review-2026-10-29/score.txt": "9fec66f7c2caa1ddd09daedf2d911ddbb66fff89034e1dcf1706db45931922dd",
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt": "350e00f66f01f8052909ae49fca6b6bdd197de866b4f4b94095601391fe0f4a2"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the README's sheet-0 counts were stale (1,078 vs 1,073)"
+    },
+    {
+     "severity": "nit",
+     "issue": "the layered score label wording had changed since the score file was written"
+    }
+   ],
+   "resolution": "Fixed after this review: counts corrected; score file regenerated (numbers unchanged). Bayer statements re-rendered after the graph export fix (215 statements; the reviewed sample is unchanged), so a re-check is due."
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "out/claims_check.md": "de26c37d19ceb03c42b64193959564cbb824d8464a9b8163109efab2d178b667"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the use-matrix said 'Python; nothing else' though the full suite needs the requirements and cached data"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "pipeline 48/52 fresh after concurrent edits during the review"
+    }
+   ],
+   "resolution": "Fixed after this review: wording corrected; pipeline rebuilt to 52/52; example outputs narrowed to the claims report (TRIED.md and SCRIPTS.md are living registries checked by --check)."
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/historian-csv/results/csv_normal_bands.md": "a62b0a81709805a9f7b99b76d19230dd821de3b0e54fd65172b4acef6ed92c73",
+    "examples/historian-csv/results/csv_normal_bands.json": "e79960e130007050cb6f32b332f53cff4034f21b381430ee740cecc060937e96",
+    "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "--fit-fraction 1.5 message names 1; you_need omitted asyncua for the replay server"
+    }
+   ],
+   "resolution": "Every earlier finding fixed; outputs byte-identical; the README's which-method claims checked against results. you_need fixed after."
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "docs/GENERALIZATION.md": "78482b8f22c5f0c290baa425c9ede042cb2fee6b6a792463bf7cb91ceaeaeed9",
+    "out/generalization/matrix.json": "b8375094aa3bc5babb4626e68885fc082868317956c007f3477d30f96c8514ed",
+    "data/corpus.json": "5b985c7d4a3b94e1479d90d4e653e01bec00407de1770b55bbdc028c33c1ffd1"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "'about 13 minutes' understated the ~25-minute rerun"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "15 row-3 cells went stale after a concurrent edit to deliverable_report.py"
+    },
+    {
+     "severity": "nit",
+     "issue": "HAI passes with K target not met; scan cells in rows 2-3 use key-only inputs; 6 AutoCAD passes are correct refusals"
+    }
+   ],
+   "resolution": "All 93 cell verdicts matched their recorded evidence. Fixed after: time wording; stale cells re-run and labelling notes added (re-check due)."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "a schedule entry with an int tag and a list-valued verification are accepted silently"
+    }
+   ],
+   "resolution": "Every earlier Claude and Codex finding re-run and fixed; outputs byte-identical."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 4)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "meta: null crashed rendering"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "a split_range written as one tag string was split into characters, silently losing a C6 finding"
+    }
+   ],
+   "resolution": "Fixed after this review with tests: null meta is treated as absent; controller output shapes are validated. Example outputs unchanged."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "a31aefc9487307036167b2b63b9c283a66e182eeeba12ac9b75ccfca77e7065e",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "50850cce12eedd426a4e231bcc69ddd4e0ad359b8d58d31d4cc4b4eeff5d6949",
+    "examples/impact-estimate/steam-traps-site/impact.md": "7d6c91555314621f34fbb8e0f7f3534097a467b50a30c0058009e9f6990fcf23",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "d814a5647a8bbab04e066891bd59ff03a4db9b849dabde032e1f8d2fd8fed541",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the public Mcf heat content behind a per-Mcf price was missing from the assumptions, the data list and the grade count"
+    }
+   ],
+   "resolution": "Fixed after this review with a test. Output nits (duplicate firm-up item, ordering note on site runs, electricity limits on steam runs) fixed too; examples regenerated, so a re-check is due."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 4)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "a31aefc9487307036167b2b63b9c283a66e182eeeba12ac9b75ccfca77e7065e",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "50850cce12eedd426a4e231bcc69ddd4e0ad359b8d58d31d4cc4b4eeff5d6949",
+    "examples/impact-estimate/steam-traps-site/impact.md": "7d6c91555314621f34fbb8e0f7f3534097a467b50a30c0058009e9f6990fcf23",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "d814a5647a8bbab04e066891bd59ff03a4db9b849dabde032e1f8d2fd8fed541",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "kWh against a kW reduction x hours was not cross-checked"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the demand bound wrongly refused a billing-peak cut larger than the average-load cut"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "the public Mcf conversion was missing from the draft notes"
+    }
+   ],
+   "resolution": "Fixed after this review: the cross-check covers both forms; a larger peak cut is an assumption to check against interval data, not a refusal; the Mcf value is listed."
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/graph-export/te_graph.json": "a55c1eb0a677f698258da8b1aa1e272467b56d7af8f26e7db5ec5bf3753ec2de",
+    "examples/graph-export/bayer_graph.json": "424f95f1891a6293930b31727b5adb3447bd496ef0ff4d85df0b33a78b125659",
+    "examples/graph-export/sheet0_graph.json": "1891ef94332dd7e62f7d4266eae3897d48a57ed73df66340c4eba879d72cb786",
+    "examples/graph-export/sheet0_graph_core.json": "2e01e9c0e52daaac6f3852edffab8d5685d2b3a26401d9ffe912d1033e9289fd"
+   },
+   "findings": [],
+   "resolution": "Round-4 fix confirmed: no string of 8+ characters in the TE or Bayer model is missing from its graph outside the declared not_exported sections; all four example graphs reproduce byte for byte."
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "42747f3292d00ed74fb1fa525dce5da47c92f8dbd8a04db037b8748065e6e0f4"
+   },
+   "findings": [],
+   "resolution": "Duplicate-row refusal confirmed; REPORT.html reproduces byte for byte."
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "1c523a28bfd7d123ca1d40790c1d4ada018c5585e10d6b68ea7e5760a4512648",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "46cbe1afda2dbecb94113ad611873075e9f2f07054c52b1ebc07b878765b48d2",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "ce38b284c1c8522b1484f20548dc7f22f5e7920033aa35c60423588dc2a2cfc1"
+   },
+   "findings": [],
+   "resolution": "Regenerated graph reproduces from the README's commands; --check clean; model and report byte-identical."
+  },
+  {
+   "feature": "statement-review",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/statement-review/bayer/statements.json": "ee24e35976010a19eec7ba7b4a1af5186665021309a68950dfb88aa377cecde9",
+    "examples/statement-review/bayer/sample_60.csv": "639359a89637c435b55ef4a9d8b0500047ba77bacc9a62937deb53f3a4600be7",
+    "examples/statement-review/sheet0/statements.json": "c7783a41968ccfcd795a5076cc002311803aafcb3e3a3d304a7aee03aa5f9655",
+    "examples/statement-review/sheet0/sample_60.csv": "e83a6affbd920e8e15f9f6b52f5ab7adb4dd8b0cf3bf90116c72c26c1cdbd354",
+    "examples/statement-review/sheet0/sample_layers.csv": "56d42a3d28906013fbb99e325ff2b355f94f8425876fbc57791db1e3dd05c483",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt": "fade0763048e916461ee40c31f1359275c5969785593483cc60fe48302e726d6",
+    "examples/statement-review/sheet0/sample_layers_r2.csv": "67d05a9a3fda5b3f9016166c70806a795db94bd863fbca37a59ed63c789b6ac3",
+    "examples/statement-review/bayer/review-2026-10-29/score.txt": "c6e358d0f360b1ae9fea830dd832425b7d8cbdb32a95bd45f059a3d3a337069a",
+    "examples/statement-review/sheet0/review-2026-10-29/score.txt": "9fec66f7c2caa1ddd09daedf2d911ddbb66fff89034e1dcf1706db45931922dd",
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt": "350e00f66f01f8052909ae49fca6b6bdd197de866b4f4b94095601391fe0f4a2"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "the README's reproduce command would redraw the reviewed Bayer sample from today's 215 statements and overwrite it; only sheet 0 said its samples are not drawn again; the Bayer strata line summed to 208"
+    }
+   ],
+   "resolution": "Fixed after this review (README only; example outputs unchanged): the Bayer sample is described as drawn from the 208-statement version and kept as drawn, and the command writes to a scratch folder."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [],
+   "resolution": "Both round-4 Codex findings confirmed fixed; outputs byte-identical."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 5)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "f3507dfe54134ad1b3baed03eeebffeb51cfe516cbb71ead5a75097ed1719c38",
+    "examples/opportunity-screen/te/questions.json": "2914ba784949f795d733c987aa3bd2ddd5525242e70744a0b9f15d590622f385",
+    "examples/opportunity-screen/bayer/screen.md": "7c26049f01c700b8afb5e3324c4b3776c60c8675b3141d80c2b694d654fc0ad9",
+    "examples/opportunity-screen/bayer/questions.json": "b134a423490d6e52b43045e04a4b8f84a9b81ba0317b80b5378110cc4679e001",
+    "examples/opportunity-screen/open100/screen.md": "dfc2c336725b19d667def547be7e45ee9666e43b11da0bdb98844df3537a55ed",
+    "examples/opportunity-screen/open100/questions.json": "3565e50945710118f5022e68d566699385ffee7775d2f42dd1bf77a6facec70d"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "an integer schedule tag and a list-valued verification are still accepted silently"
+    }
+   ],
+   "resolution": "Round-4 findings confirmed fixed."
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "out/claims_check.md": "de26c37d19ceb03c42b64193959564cbb824d8464a9b8163109efab2d178b667"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "the round-4 record's claims_check.md hash predates a regeneration"
+    }
+   ],
+   "resolution": "Wording fix and pipeline freshness (52/52) confirmed."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "0397c54354816c5bd0d286be7b1a45b9f8136e107b5751a5fe0fe593ad46b534",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "33bd23cdebf57071077921898731993ad77936deeaceaf1350f40bff4d905202",
+    "examples/impact-estimate/steam-traps-site/impact.md": "3478bbfe84a79a3c4453928e47941da48243235d701c2e9c1ddef86ff3ddc1b3",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "bd476d1e17c9056a9c94987c011db2266fcaad7f4f2ebd7f42c6dd0271b84df7",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a per-Mcf price with --use-defaults crashed writing impact.json (a range nested in uses_default)"
+    }
+   ],
+   "resolution": "Fixed after this review with a test through the --out writer; examples unchanged."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 5)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "0397c54354816c5bd0d286be7b1a45b9f8136e107b5751a5fe0fe593ad46b534",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "33bd23cdebf57071077921898731993ad77936deeaceaf1350f40bff4d905202",
+    "examples/impact-estimate/steam-traps-site/impact.md": "3478bbfe84a79a3c4453928e47941da48243235d701c2e9c1ddef86ff3ddc1b3",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "bd476d1e17c9056a9c94987c011db2266fcaad7f4f2ebd7f42c6dd0271b84df7",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "with kw_before, kw_after, kw_reduction, hours and kWh all given, a contradictory kw_reduction slipped past the kWh cross-check"
+    }
+   ],
+   "resolution": "Fixed after this review: every form supplied is checked against the annual kWh; test added. A final Codex confirmation was run."
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "independent Claude agent (fresh context, round 6: latest findings reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "docs/GENERALIZATION.md": "0566cd97fec5f0963d9935cdd1f93e35754efa81fae8ae37492968ba41c8d718",
+    "out/generalization/matrix.json": "ebf8163d49717103f34d1fe33a38b79a95db33cca1d3c16801c7ec5a48edb170",
+    "data/corpus.json": "5b985c7d4a3b94e1479d90d4e653e01bec00407de1770b55bbdc028c33c1ffd1"
+   },
+   "findings": [],
+   "resolution": "Round-4 findings confirmed fixed; all 93 cells' tool hashes recomputed independently with 0 mismatches; five cells re-run into scratch reproduce."
+  },
+  {
+   "feature": "statement-review",
+   "reviewer": "independent Claude agent (fresh context, round 6: latest findings reproduced, outputs and tests re-run)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/statement-review/bayer/statements.json": "ee24e35976010a19eec7ba7b4a1af5186665021309a68950dfb88aa377cecde9",
+    "examples/statement-review/bayer/sample_60.csv": "639359a89637c435b55ef4a9d8b0500047ba77bacc9a62937deb53f3a4600be7",
+    "examples/statement-review/sheet0/statements.json": "c7783a41968ccfcd795a5076cc002311803aafcb3e3a3d304a7aee03aa5f9655",
+    "examples/statement-review/sheet0/sample_60.csv": "e83a6affbd920e8e15f9f6b52f5ab7adb4dd8b0cf3bf90116c72c26c1cdbd354",
+    "examples/statement-review/sheet0/sample_layers.csv": "56d42a3d28906013fbb99e325ff2b355f94f8425876fbc57791db1e3dd05c483",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt": "fade0763048e916461ee40c31f1359275c5969785593483cc60fe48302e726d6",
+    "examples/statement-review/sheet0/sample_layers_r2.csv": "67d05a9a3fda5b3f9016166c70806a795db94bd863fbca37a59ed63c789b6ac3",
+    "examples/statement-review/bayer/review-2026-10-29/score.txt": "c6e358d0f360b1ae9fea830dd832425b7d8cbdb32a95bd45f059a3d3a337069a",
+    "examples/statement-review/sheet0/review-2026-10-29/score.txt": "9fec66f7c2caa1ddd09daedf2d911ddbb66fff89034e1dcf1706db45931922dd",
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt": "350e00f66f01f8052909ae49fca6b6bdd197de866b4f4b94095601391fe0f4a2"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "the r2 sample's file-table row said 'not reviewed yet' and its reproduce command would redraw it from a later version"
+    }
+   ],
+   "resolution": "Round-5 finding confirmed fixed; all five score files and both statement renders reproduce. Nits fixed after (README only)."
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "Codex (OpenAI model family, read-only sandbox, fresh context, round 6)",
+   "date": "2026-10-29",
+   "verdict": "findings",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "0397c54354816c5bd0d286be7b1a45b9f8136e107b5751a5fe0fe593ad46b534",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "33bd23cdebf57071077921898731993ad77936deeaceaf1350f40bff4d905202",
+    "examples/impact-estimate/steam-traps-site/impact.md": "3478bbfe84a79a3c4453928e47941da48243235d701c2e9c1ddef86ff3ddc1b3",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "bd476d1e17c9056a9c94987c011db2266fcaad7f4f2ebd7f42c6dd0271b84df7",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "a range whose upper reduction bound is zero with increase=true reported an increase as a saving"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "redundant forms not cross-checked when a complete alternate form was missing (kW reduction vs before/after with kWh but no hours; annual heat vs rate x hours)"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "a direct fuel price beside a per-unit price was silently overridden"
+    },
+    {
+     "severity": "should-fix",
+     "issue": "impossible steam conditions were kept when energy_btu_per_lb was supplied"
+    },
+    {
+     "severity": "nit",
+     "issue": "steam-table conditions don't accept ranges"
+    }
+   ],
+   "resolution": "Three rounds found the same class (inputs never examined together), so the fix is one validation pass at the door (check_spec): unknown field names refused, every recognised number bounds-checked whether used or not, every complete form of a quantity cross-checked, two forms of one price refused; the range limit is documented. Tests cover each case; examples unchanged. A further Codex confirmation was run."
+  }
+ ]
+}

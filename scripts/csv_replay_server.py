@@ -51,7 +51,10 @@ def data_value(v):
 
 
 async def serve(args, stop=None):
-    tname, tags, texts, rows = load(args.csv)
+    try:
+        tname, tags, texts, rows = load(args.csv)
+    except OSError as e:  # a missing or unreadable --csv: say so, exit nonzero, no traceback
+        raise SystemExit(f"error: can't read {args.csv}: {e.strerror or e}") from None
     server = Server()
     await server.init()
     server.set_endpoint(f"opc.tcp://{args.host}:{args.port}/csv-replay")
@@ -71,7 +74,9 @@ async def serve(args, stop=None):
           f"folder {f}, {len(tags)} tags, {len(rows)} rows ({bad} bad cells) at {args.rate}s"
           f"{', looping' if args.loop else ''}", flush=True)
     async with server:
-        i, held = args.start % len(rows), False
+        if not 0 <= args.start < len(rows):  # never wrap silently onto a different row than was asked for
+            raise SystemExit(f"--start {args.start} is outside the {len(rows)} rows of {Path(args.csv).name}")
+        i, held = args.start, False
         while stop is None or not stop.is_set():
             row = rows[i]
             for node, v in zip(nodes, row):

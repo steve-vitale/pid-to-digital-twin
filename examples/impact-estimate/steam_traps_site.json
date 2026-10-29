@@ -1,0 +1,29 @@
+{
+  "title": "Failed steam traps repaired, with site constants",
+  "illustrative": true,
+  "description": "ILLUSTRATIVE: a trap survey found failed-open traps on a 150 psig saturated steam main losing 150 to 210 lb/h in total (the range reflects the survey's orifice estimates). Steam is on all year. All numbers, including the site constants, are made up for this example.",
+  "fuel": "natural_gas",
+  "changes": [
+    {
+      "type": "steam",
+      "label": "Failed steam traps on the 150 psig main",
+      "steam_lb_per_h": {"low": 150, "high": 210},
+      "hours_per_year": 8760,
+      "steam_pressure_psig": 150,
+      "feedwater_temp_F": 200,
+      "energy_btu_per_lb": 1000,
+      "energy_note": "ILLUSTRATIVE steam-table value (steam enthalpy minus feedwater enthalpy)"
+    }
+  ],
+  "site": {
+    "boiler_efficiency": {"low": 0.78, "high": 0.82},
+    "fuel_price_per_unit": 0.55,
+    "fuel_price_unit": "therm",
+    "fuel_kg_co2e_per_mmbtu": 53.11
+  },
+  "site_notes": {
+    "boiler_efficiency": "ILLUSTRATIVE range from a made-up boiler test",
+    "fuel_price_per_unit": "ILLUSTRATIVE delivered gas price from a made-up gas bill",
+    "fuel_kg_co2e_per_mmbtu": "ILLUSTRATIVE, rounded from the EPA Hub natural gas factor"
+  }
+}

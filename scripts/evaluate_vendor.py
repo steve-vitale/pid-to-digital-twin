@@ -67,6 +67,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # and on any one sheet. The shifted control's honest chance floor is 8.8% rough *location* recall on OPEN100 sheet 6
 # (journal entry 7); its class-matched F1 there is lower. Anything above this means the scorer is being fooled.
 WRONG_MAX_F1 = 0.10
+SHIFT_CHANCE = 0.05  # share of key symbols a half-sheet shift may hit by chance on a repeating layout
 # Headline metrics: (key in the report, label, replicate_stats metric name or None for the extra strict metric).
 HEADLINE = (("review_load_per_100", "Review load per 100 key items (lower is better)"),
             ("symbol_f1_rough_classified", "Symbol F1, rough, class must match"),
@@ -198,8 +199,13 @@ def check_controls(per_sheet, agg):
             if r["review_load_per_100"] < 90:
                 fails.append(f"sheet {sheet}: the {name} answer needed only {r['review_load_per_100']} corrections"
                              " per 100 key items (an empty answer needs 100)")
-        if s["_strict_located_tp"] != 0:
-            fails.append(f"sheet {sheet}: a box moved half a sheet still matched at strict IoU")
+        # A box moved half a sheet can land on an identical symbol by chance where a layout repeats (synthetic
+        # sheets do): allow that up to SHIFT_CHANCE of the key's symbols. A scorer that ignored location would match
+        # nearly all of them.
+        allowed = max(1, int(SHIFT_CHANCE * s.get("_strict_located_key", 0)))
+        if s["_strict_located_tp"] > allowed:
+            fails.append(f"sheet {sheet}: {s['_strict_located_tp']} boxes moved half a sheet still matched at strict "
+                         f"IoU (chance allowance {allowed})")
     for name in ("wrong_class", "shifted"):
         if agg[name]["symbol_f1_rough_classified"] > WRONG_MAX_F1:
             fails.append(f"all sheets: the {name} answer earned symbol F1 {agg[name]['symbol_f1_rough_classified']:.3f}")
@@ -232,6 +238,7 @@ def evaluate(keys_dir, pred_dirs, sheets=None, name="vendor"):
             m = sheet_metrics(detail)
             if cname == "shifted":
                 m["_strict_located_tp"] = detail["strict"]["located"]["tp"]
+                m["_strict_located_key"] = detail["strict"]["located"]["in_key"]
             ctrl_sheet[s][cname] = m
         ctrl_sheet[s]["_key_links"] = ctrl_counts["perfect"][s]["conn_key"]
     ctrl_agg = {c: metrics(total(ctrl_counts[c].values())) for c in CONTROL_ORDER}

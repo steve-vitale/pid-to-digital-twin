@@ -9,7 +9,8 @@ optional, so a model that lacks one simply reports it as missing):
   ops_review           a person's decision, written by scripts/apply_review.py: status confirmed / corrected /
                        rejected / unverified, the reviewer string in `by`, and scoped `field_decisions`.
   risk.tier            green / amber / red (extracted twin only, scripts/confidence.py)
-  tag_status           as_extracted / missing / placeholder (extracted twin only)
+  tag_status           as_extracted / missing / placeholder (extracted twin only); reviewed once a person
+                       corrected or supplied the tag (scripts/apply_review.py)
   open_question        a recorded doubt that nobody has settled
 
 Who reviewed matters. A reviewer string only counts as an operations review when it names an operations role

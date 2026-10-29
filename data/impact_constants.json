@@ -1,0 +1,240 @@
+{
+ "about": "Public typical constants that scripts/estimate_impact.py may use ONLY when the user passes --use-defaults, and then always labelled 'PUBLIC TYPICAL VALUE, replace with your own'. None of these is a value for any particular plant. Every value was read from the official file or page named in its entry (downloaded or fetched on the date in 'checked'); nothing here is typed from memory. Values that could not be confirmed from an official US EPA, DOE or EIA source are listed under 'not_included' with the reason. See docs/IMPACT_ESTIMATE.md.",
+ "checked": "2026-10-29",
+ "unit_conversions": {
+  "kg_per_lb": {
+   "value": 0.45359237,
+   "note": "Exact by definition of the international avoirdupois pound.",
+   "source": "NIST Special Publication 811 (2008), Appendix B; international avoirdupois pound defined as exactly 0.45359237 kg",
+   "url": "https://www.nist.gov/pml/special-publication-811"
+  },
+  "mmbtu_per_therm": {
+   "value": 0.1,
+   "note": "Exact by definition: 1 therm = 100,000 Btu.",
+   "source": "US EIA, Natural gas explained: units and conversions (1 therm = 100,000 Btu; 1 dekatherm = 10 therms)",
+   "url": "https://www.eia.gov/energyexplained/units-and-calculators/"
+  },
+  "mmbtu_per_dekatherm": {
+   "value": 1.0,
+   "note": "Exact by definition: 1 dekatherm = 10 therms = 1,000,000 Btu.",
+   "source": "US EIA, Natural gas explained: units and conversions (1 therm = 100,000 Btu; 1 dekatherm = 10 therms)",
+   "url": "https://www.eia.gov/energyexplained/units-and-calculators/"
+  }
+ },
+ "gwp": {
+  "basis": "IPCC Fifth Assessment Report (AR5), 100-year GWP",
+  "CO2": 1,
+  "CH4": 28,
+  "N2O": 265,
+  "source": "US EPA, GHG Emission Factors Hub (2025), GWP table at the top of the 'Emission Factors Hub' sheet (CH4 28, N2O 265; 'Source: IPCC Fifth Assessment Report (AR5), 2013'); see also its Table 11.",
+  "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+  "year": 2025,
+  "license": "Public domain (US federal government work)",
+  "note": "eGRID2023 uses the same basis: its Technical Guide (section on CO2e) states AR5 without climate-carbon feedbacks, CH4 28 and N2O 265."
+ },
+ "fuels": {
+  "natural_gas": {
+   "name": "Natural gas (pipeline quality)",
+   "cite": "US EPA GHG Emission Factors Hub, Table 1 Stationary Combustion",
+   "hhv_mmbtu_per_scf": 0.001026,
+   "kg_co2_per_mmbtu": 53.06,
+   "g_ch4_per_mmbtu": 1.0,
+   "g_n2o_per_mmbtu": 0.1,
+   "kg_co2_per_scf": 0.05444,
+   "g_ch4_per_scf": 0.00103,
+   "g_n2o_per_scf": 0.0001,
+   "kg_co2e_per_mmbtu": 53.1145,
+   "kg_co2e_per_scf": 0.05449534,
+   "computed_as": "kg CO2e = kg CO2 + (g CH4 x 28 + g N2O x 265) / 1000, AR5 GWPs",
+   "source": "US EPA, GHG Emission Factors Hub (2025), Table 1 Stationary Combustion, row 'Natural Gas' (Last Modified: January 15, 2025). The Hub cites 40 CFR Part 98 Tables C-1 and C-2.",
+   "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+   "page": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+   "table": "Table 1 Stationary Combustion",
+   "year": 2025,
+   "license": "Public domain (US federal government work)",
+   "scope_note": "Combustion emissions only (the Hub: 'do not represent upstream emissions'). Higher heating value basis. The Hub page, fetched 2026-10-29, listed the 2025 edition as the latest."
+  },
+  "distillate_fuel_oil_no2": {
+   "name": "Distillate fuel oil No. 2",
+   "cite": "US EPA GHG Emission Factors Hub, Table 1 Stationary Combustion",
+   "kg_co2_per_mmbtu": 73.96,
+   "g_ch4_per_mmbtu": 3.0,
+   "g_n2o_per_mmbtu": 0.6,
+   "kg_co2e_per_mmbtu": 74.203,
+   "computed_as": "kg CO2e = kg CO2 + (g CH4 x 28 + g N2O x 265) / 1000",
+   "source": "US EPA, GHG Emission Factors Hub (2025), Table 1 Stationary Combustion, row 'Distillate Fuel Oil No. 2'.",
+   "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+   "table": "Table 1 Stationary Combustion",
+   "year": 2025,
+   "license": "Public domain (US federal government work)"
+  },
+  "residual_fuel_oil_no6": {
+   "name": "Residual fuel oil No. 6",
+   "cite": "US EPA GHG Emission Factors Hub, Table 1 Stationary Combustion",
+   "kg_co2_per_mmbtu": 75.1,
+   "g_ch4_per_mmbtu": 3.0,
+   "g_n2o_per_mmbtu": 0.6,
+   "kg_co2e_per_mmbtu": 75.343,
+   "computed_as": "kg CO2e = kg CO2 + (g CH4 x 28 + g N2O x 265) / 1000",
+   "source": "US EPA, GHG Emission Factors Hub (2025), Table 1 Stationary Combustion, row 'Residual Fuel Oil No. 6'.",
+   "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+   "table": "Table 1 Stationary Combustion",
+   "year": 2025,
+   "license": "Public domain (US federal government work)"
+  },
+  "propane": {
+   "name": "Propane",
+   "cite": "US EPA GHG Emission Factors Hub, Table 1 Stationary Combustion",
+   "kg_co2_per_mmbtu": 62.87,
+   "g_ch4_per_mmbtu": 3.0,
+   "g_n2o_per_mmbtu": 0.6,
+   "kg_co2e_per_mmbtu": 63.113,
+   "computed_as": "kg CO2e = kg CO2 + (g CH4 x 28 + g N2O x 265) / 1000",
+   "source": "US EPA, GHG Emission Factors Hub (2025), Table 1 Stationary Combustion, row 'Propane' (Petroleum Products).",
+   "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+   "table": "Table 1 Stationary Combustion",
+   "year": 2025,
+   "license": "Public domain (US federal government work)"
+  }
+ },
+ "constants": {
+  "grid_kg_co2e_per_kwh": {
+   "value": 0.3496671,
+   "unit": "kg CO2e/kWh",
+   "label": "US average grid emission rate (eGRID2023 national total output CO2e rate)",
+   "cite": "US EPA eGRID2023 Summary Tables rev. 2, Table 1, U.S. total output CO2e rate",
+   "derived_from": {
+    "lb_co2e_per_mwh": 770.884,
+    "lb_co2_per_mwh": 767.209,
+    "lb_ch4_per_mwh": 0.057,
+    "lb_n2o_per_mwh": 0.008
+   },
+   "computed_as": "770.884 lb CO2e/MWh x 0.45359237 kg/lb / 1000 kWh/MWh = 0.3496671 kg CO2e/kWh (rounded to 7 significant figures)",
+   "source": "US EPA, eGRID2023 Summary Tables (Revision 2), Table 1 Subregion Output Emission Rates, row 'U.S.', total output emission rate CO2e (sheet 'Table 1', cell G32).",
+   "url": "https://www.epa.gov/system/files/documents/2025-06/summary_tables_rev2.xlsx",
+   "page": "https://www.epa.gov/egrid/summary-data",
+   "table": "Table 1 Subregion Output Emission Rates (eGRID2023)",
+   "year": 2023,
+   "published": "eGRID2023 released January 15, 2025; Revision 2 June 12, 2025. The summary-data page, fetched 2026-10-29, listed 2023 as the latest data year.",
+   "license": "Public domain (US federal government work)",
+   "accounting": "Location-based Scope 2 (average emission rate of generation on the grid). Not a market-based factor and not a marginal (avoided-emissions) rate. Excludes transmission and distribution losses (eGRID lists a separate grid gross loss, 4.2% for the U.S.).",
+   "subregion_spread": "Subregion total output CO2e rates in the same table run from 242.776 lb/MWh (NYUP, NPCC Upstate NY) to 1,248.582 lb/MWh (SRMW, SERC Midwest) in the contiguous US, about 5 times, and to 1,548.530 lb/MWh (PRMS, Puerto Rico Miscellaneous). Use your subregion, found by ZIP code in EPA's Power Profiler: https://www.epa.gov/egrid/power-profiler",
+   "derived_from_note": "The components are eGRID's own published rates, each rounded to three decimals; recombined with GWP 28 and 265 they give 770.925, 0.005% above eGRID's published CO2e rate (770.884). The published rate is used, not the recombination."
+  },
+  "electricity_price_per_kwh": {
+   "value": 0.0851,
+   "unit": "$/kWh",
+   "label": "US average price of electricity to industrial customers, 2025 (8.51 cents/kWh, nominal dollars)",
+   "cite": "US EIA Electric Power Annual Table 2.4, industrial",
+   "source": "US EIA, Electric Power Annual, Table 2.4 Average Price of Electricity to Ultimate Customers by End-Use Sectors, 2015 through 2025, row 2025, 'Total Electric Industry', column Industrial: 8.51 cents per kilowatthour. Data for 2025, released October 21, 2026.",
+   "url": "https://www.eia.gov/electricity/annual/html/epa_02_04.html",
+   "table": "Electric Power Annual Table 2.4",
+   "year": 2025,
+   "license": "Public domain (EIA: 'U.S. government publications are in the public domain', https://www.eia.gov/about/copyrights_reuse.php)",
+   "note": "An average revenue per kWh (energy, demand and fixed charges together) across all US industrial customers. Your marginal energy rate can differ a great deal by state, utility, tariff and time of day."
+  },
+  "natural_gas_heat_content_mmbtu_per_mcf": {
+   "value": 1.036,
+   "unit": "MMBtu/Mcf",
+   "label": "US average heat content of natural gas delivered to consumers, 2025 (1,036 Btu per cubic foot)",
+   "cite": "US EIA, heat content of natural gas delivered to consumers, U.S.",
+   "source": "US EIA, Natural Gas Annual data: Heat Content of Natural Gas Consumed, 'Delivered to Consumers', U.S., 2025: 1,036 Btu per cubic foot.",
+   "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm",
+   "year": 2025,
+   "license": "Public domain (EIA: https://www.eia.gov/about/copyrights_reuse.php)",
+   "note": "Your gas bill states your own heat content (the 'Btu factor' or 'therm factor')."
+  },
+  "natural_gas_price_per_mmbtu": {
+   "value": 5.048263,
+   "unit": "$/MMBtu",
+   "label": "US average natural gas industrial price, 2025, converted to $/MMBtu",
+   "cite": "US EIA natural gas industrial price, U.S., / EIA heat content",
+   "derived_from": {
+    "dollars_per_mcf": 5.23,
+    "mmbtu_per_mcf": 1.036
+   },
+   "computed_as": "$5.23/Mcf / 1.036 MMBtu/Mcf = $5.048263/MMBtu (rounded to 7 significant figures)",
+   "source": "US EIA, Natural Gas Prices (annual), U.S., 'Industrial Price', 2025: 5.23 dollars per thousand cubic feet (page release date 9/30/2026); divided by the EIA 2025 US heat content of gas delivered to consumers (1,036 Btu/cf).",
+   "url": "https://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm",
+   "year": 2025,
+   "license": "Public domain (EIA: https://www.eia.gov/about/copyrights_reuse.php)",
+   "note": "EIA's industrial price covers only gas sold by local distribution companies: the same table gives 13.4% as the share of total industrial deliveries included in the 2025 price. Most industrial gas is bought from marketers under contracts, so your delivered price (commodity plus transport) may differ widely."
+  },
+  "boiler_efficiency": {
+   "value": 0.8,
+   "unit": "fraction (fuel HHV in to useful heat or steam out)",
+   "label": "Thermal efficiency EPA assumes for natural-gas-fired steam or heat generation",
+   "cite": "US EPA GHG Emission Factors Hub, Table 7 note",
+   "source": "US EPA, GHG Emission Factors Hub (2025), Table 7 Steam and Heat, note: 'These factors assume natural gas fuel is used to generate steam or heat at 80 percent thermal efficiency.'",
+   "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+   "table": "Table 7 Steam and Heat (note)",
+   "year": 2025,
+   "license": "Public domain (US federal government work)",
+   "note": "An inventory assumption, not a measured boiler. DOE Steam Tip Sheet #15 Table 2 instead lists 85.7% COMBUSTION efficiency for natural gas, for boilers with economizers or air preheaters and 3% flue O2; combustion efficiency excludes shell and blowdown losses, so it is not the same quantity. Use your own boiler's tested fuel-to-steam efficiency."
+  },
+  "steam_energy_btu_per_lb": {
+   "unit": "Btu/lb (heat input to make 1 lb of saturated steam from feedwater)",
+   "label": "Energy required to produce one pound of saturated steam (enthalpy of saturated steam minus enthalpy of feedwater)",
+   "cite": "US DOE Steam Tip Sheet #15, Table 1",
+   "feedwater_temps_F": [
+    50,
+    100,
+    150,
+    200,
+    250
+   ],
+   "table": {
+    "150": [
+     1178,
+     1128,
+     1078,
+     1028,
+     977
+    ],
+    "450": [
+     1187,
+     1137,
+     1087,
+     1037,
+     986
+    ],
+    "600": [
+     1184,
+     1134,
+     1084,
+     1034,
+     984
+    ]
+   },
+   "table_keys": "operating pressure in psig; values align with feedwater_temps_F",
+   "interpolation": "estimate_impact.py looks up only these three pressures; between tabulated feedwater temperatures (50-250 F) it interpolates linearly (DOE's own worked example uses 1,006 Btu/lb at 450 psig and 230 F, which is the linear interpolation). Outside the table it refuses and asks for your value.",
+   "source": "US DOE Advanced Manufacturing Office, Energy Tips: STEAM, Steam Tip Sheet #15 'Benchmark the Fuel Cost of Steam Generation', Table 1 'Energy Required to Produce One Pound of Saturated Steam, Btu' ('Calculated from steam tables based on the difference between the enthalpies of saturated steam and feedwater'). DOE/GO-102012-3391, January 2012.",
+   "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/steam15_benchmark.pdf",
+   "year": 2012,
+   "license": "Public domain (US federal government work)",
+   "note": "Saturated steam only. Superheated steam, steam lost at a pressure not tabulated, or makeup water colder or warmer than the feedwater temperature you name all need your own steam-table value."
+  }
+ },
+ "not_included": [
+  {
+   "item": "Demand charge ($/kW-month)",
+   "reason": "No national typical value is meaningful: demand charges, ratchets and billing intervals are set by each utility's tariff. The tool never defaults it; take it from your bill or rate schedule."
+  },
+  {
+   "item": "Steam energy per lb at pressures other than 150, 450 and 600 psig, or for superheated steam",
+   "reason": "The only federal steam table checked for this file (DOE Steam Tip Sheet #15) tabulates these three saturated pressures. A full steam table (for example NIST) was outside the sources allowed for this check, so other conditions need your own steam-table value."
+  },
+  {
+   "item": "Prices of fuels other than natural gas",
+   "reason": "Not fetched and verified for this file. Supply your own fuel price for oil, propane or coal."
+  },
+  {
+   "item": "Marginal or non-baseload grid emission rates for avoided-emissions estimates",
+   "reason": "eGRID publishes non-baseload rates in the same table, but choosing a marginal method is an accounting decision for the user (EPA's AVERT is the tool built for it). The default here is the location-based average rate only."
+  },
+  {
+   "item": "Steam loss per failed trap and air leak rates per orifice",
+   "reason": "These are measured quantities, never defaults. DOE Steam Tip Sheet #1 and Compressed Air Tip Sheet #3 print orifice tables, but those are credited to the Boiler Efficiency Institute and the Compressed Air Challenge, and a survey of your own traps or leaks is the measurement."
+  }
+ ]
+}

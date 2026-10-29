@@ -30,7 +30,8 @@ DRAWINGS = ROOT / "data" / "external" / "pid2graph" / "PID2Graph" / "Complete" /
 BANNER = "OFFLINE RENDER OF THE PERSPECTIVE VIEW / NOT A GATEWAY SCREENSHOT / STRUCTURE ONLY, NO PROCESS DATA"
 LOTO_FRAME = ("DESIGN MOCKUP, NOT A PROCEDURE. Isolation points are read from the extracted symbols of this drawing and "
               "are unverified. A real lockout/tagout procedure comes from the site's energy-control program "
-              "(OSHA 1910.147), its verified P&IDs and an authorized person.")
+              "(OSHA 1910.147), its verified P&IDs and an authorized person. A valve the extraction missed is not "
+              "on this view.")
 LOTO_STYLE = {  # kind -> (outline colour, legend text)
     "manual_block_valve": ((200, 30, 30), "Manual valve in a line: candidate block valve"),
     "motor_operated_valve": ((200, 30, 30), "Motor-operated valve: isolation point + its own electrical energy"),
@@ -108,7 +109,7 @@ def loto_still(structure, sheet, path, crop=None):
             legend_rows.append((k, "%s (%d): %s" % (LOTO_STYLE[k][1], len(n), ", ".join(map(str, n[:14])) +
                                                      (" ..." if len(n) > 14 else ""))))
     pad = 16
-    top_h = 74
+    top_h = 92
     leg_h = 28 * len(legend_rows) + 2 * pad
     canvas = Image.new("RGB", (im.size[0], im.size[1] + top_h + leg_h), "white")
     canvas.paste(im, (0, top_h))
@@ -125,7 +126,7 @@ def loto_still(structure, sheet, path, crop=None):
         else:
             line = (line + " " + w).strip()
     lines.append(line)
-    for i, l in enumerate(lines[:2]):
+    for i, l in enumerate(lines[:3]):
         d2.text((pad, 38 + i * 18), l, fill=(255, 230, 220), font=small)
     y = im.size[1] + top_h + pad
     for k, text in legend_rows:

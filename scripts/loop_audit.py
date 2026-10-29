@@ -7,7 +7,8 @@ Inputs
              output       what it moves: a final element (FV-101), or, for a cascade, the inner controller (FIC-101)
              description  optional free text, copied into the report
            Lines starting with # are skipped; other columns are ignored and listed in the report. A row with a
-           missing field, a repeated controller, or a loop that names itself is refused with its line number.
+           missing field, a repeated controller, or a loop whose output is itself is refused with its line number (a
+           controller listed as its own measurement is a combined instrument, and is allowed).
   drawing  either an answer key in this repository's key.json format (data/te_pid/key.json is the example: per
            sheet, `symbols` with printed `text`, and `signal_edges`, the signal lines), or a plant_model.json made by
            scripts/import_site_drawing.py or scripts/build_twin.py from an extraction.
@@ -66,7 +67,10 @@ CHECK_TEXT = {
     "controller": "controller symbol", "measurement": "measurement symbol", "output": "output symbol",
     "signal_in": "signal line measurement -> controller", "signal_out": "signal line controller -> output",
 }
-MODEL_TAG_LISTS = ("units", "instruments", "final_elements", "line_items", "controllers")
+# "unplaced" holds items read off the drawing that no unit could be found for (e.g. a valve on a line whose ends
+# are open): they are on the drawing, so a loop tag found there is present.
+MODEL_TAG_LISTS = ("units", "instruments", "final_elements", "line_items", "controllers", "manual_valves",
+                   "relief_devices", "unplaced")
 
 
 class InputError(Exception):
@@ -74,8 +78,9 @@ class InputError(Exception):
 
 
 def compact(text):
-    """Printed tag text as a lookup key: bubbles print 'FT 101' (letters over number), lists say FT-101."""
-    return re.sub(r"[\s\-]", "", text or "").upper()
+    """Printed tag text as a lookup key: bubbles print 'FT 101' (letters over number), lists say FT-101, and a tool
+    that allows one hyphen per tag writes P-4712.02 as P_4712.02."""
+    return re.sub(r"[\s\-_]", "", text or "").upper()
 
 
 def read_loops(path):
@@ -117,8 +122,10 @@ def read_loops(path):
         ctl = compact(rec["controller"])
         if ctl in seen:
             raise InputError(f"{path} line {line}: controller {rec['controller']} already listed on line {seen[ctl]}")
-        if compact(rec["measurement"]) == ctl or compact(rec["output"]) == ctl:
-            raise InputError(f"{path} line {line}: {rec['controller']} names itself as its own measurement or output")
+        if compact(rec["output"]) == ctl:
+            raise InputError(f"{path} line {line}: {rec['controller']} names itself as its own output")
+        # measurement == controller is allowed: a combined instrument (one bubble that measures and controls, as
+        # DEXPI and many P&IDs draw it, e.g. PICSA 4712.02). The measurement is then inside the controller symbol.
         seen[ctl] = line
         loops.append({"line": line, "controller": rec["controller"], "measurement": rec["measurement"],
                       "output": rec["output"], "description": rec.get("description", "")})
@@ -180,12 +187,21 @@ def audit_key(loops, key):
     rows = []
     for lp in loops:
         ctl, meas, out = (by_text.get(compact(lp[c]), []) for c in REQUIRED)
+        combined = compact(lp["measurement"]) == compact(lp["controller"])
         # Cross-sheet: controller -> outbound flag naming the output; inbound flag naming the controller -> output.
         crosses = linked(ctl, flags_out.get(compact(lp["output"]), [])) and \
             linked(flags_in.get(compact(lp["controller"]), []), out)
         checks = {"controller": bool(ctl), "measurement": bool(meas), "output": bool(out),
-                  "signal_in": linked(meas, ctl), "signal_out": bool(ctl) and (linked(ctl, out) or crosses)}
+                  "signal_in": linked(meas, ctl) or (combined and bool(ctl)),
+                  "signal_out": bool(ctl) and (linked(ctl, out) or crosses)}
         row = _row(lp, checks, sorted({d for d, _ in ctl + meas + out}))
+        if combined:
+            row["combined"] = True
+            row["note"] = ("combined instrument: the measurement is inside the controller symbol, so the measurement "
+                           "and signal-in checks pass on the controller symbol alone, with no signal line behind them")
+        if not ctl:
+            row["hint"] = ("no symbol carries this controller tag: check its spelling, and strip DCS suffixes "
+                           "such as .PV or .OUT from the loop list")
         if row["status"] == "partly_drawn":
             # What the controller's signal lines do reach: shows a tag printed differently from the list
             # (an indicator 'FI 101' where the list says transmitter FT-101) without guessing it is the same thing.
@@ -214,6 +230,10 @@ def audit_model(loops, model):
         row = _row(lp, checks, [])
         if row["status"] == "drawn":
             row["status"] = "tags_present"
+        if compact(lp["measurement"]) == compact(lp["controller"]):
+            row["combined"] = True
+            row["note"] = ("combined instrument: the measurement is the controller's own tag, so only the controller "
+                           "and output tags are distinct checks")
         row["found_as"] = {c: tags[compact(lp[c])] for c in REQUIRED if checks[c]}
         rows.append(row)
     return rows
@@ -254,11 +274,33 @@ def _display(path):
 
 def headline(result):
     t = result["totals"]
+    k = sum(1 for r in result["loops"] if r.get("combined"))
+    combined = f" ({k} combined instrument{'s' if k > 1 else ''}: measurement = controller tag)" if k else ""
     if result["drawing_kind"] == "key":
         return (f"{t['drawn']} of {t['loops']} loops drawn, {t['partly_drawn']} partly drawn, "
-                f"{t['not_drawn']} not drawn")
-    return (f"{t['tags_present']} of {t['loops']} loops have all three tags present (signal lines not checked: "
+                f"{t['not_drawn']} not drawn{combined}")
+    tags = "all their tags" if k else "all three tags"
+    return (f"{t['tags_present']} of {t['loops']} loops have {tags} present{combined} (signal lines not checked: "
             f"an extracted model has none), {t['partly_drawn']} partly, {t['not_drawn']} without the controller")
+
+
+# Checks a combined instrument passes on its controller symbol alone: the report must not show them as drawn lines.
+COMBINED_CHECKS = {"measurement": "read from the controller symbol", "signal_in": "no line drawn"}
+
+
+def _cell(row, check):
+    value = row["checks"][check]
+    if value and row.get("combined") and check in COMBINED_CHECKS:
+        return "combined"
+    return "yes" if value else "no"
+
+
+def _per_check(result, check, value, n):
+    text = f"{CHECK_TEXT[check]} {value}/{n}"
+    k = sum(1 for r in result["loops"] if r.get("combined") and r["checks"][check] and check in COMBINED_CHECKS)
+    if k:
+        text += f" ({k} combined instrument{'s' if k > 1 else ''}, {COMBINED_CHECKS[check]})"
+    return text
 
 
 def markdown(result):
@@ -269,7 +311,7 @@ def markdown(result):
              f"`{result['drawing_file']}`. Generated by `scripts/loop_audit.py`; it grades the drawing against the "
              "list and never judges the control strategy.", "",
              f"**{headline(result)}.** Per check: "
-             + ", ".join(f"{CHECK_TEXT[c]} {v}/{n}" for c, v in result["by_check"].items()) + ".", ""]
+             + ", ".join(_per_check(result, c, v, n) for c, v in result["by_check"].items()) + ".", ""]
     if not key:
         lines += ["An extracted plant_model.json carries tags but no signal lines, so a loop here can show its "
                   "three tags and still be undrawn. Check the signal lines on the sheet, or audit an answer key.", ""]
@@ -279,9 +321,20 @@ def markdown(result):
     lines += ["| Line | Controller | Measurement | Output | Status | " + " | ".join(cols) + " | Missing |",
               "|---|---|---|---|---|" + "---|" * len(cols) + "---|"]
     for r in result["loops"]:
-        cells = ["yes" if r["checks"][c] else "no" for c in cols]
+        cells = [_cell(r, c) for c in cols]
         lines.append(f"| {r['line']} | {r['controller']} | {r['measurement']} | {r['output']} | "
                      f"{r['status'].replace('_', ' ')} | " + " | ".join(cells) + f" | {'; '.join(r['missing'])} |")
+    combined = [r["controller"] for r in result["loops"] if r.get("combined")]
+    if combined:
+        lines += ["", f"Combined instruments (the list names the controller as its own measurement, so the measurement "
+                      f"is taken to be inside the controller symbol): {', '.join(combined)}. Their measurement and "
+                      "signal_in cells read \"combined\": those checks pass on the controller symbol alone, and no "
+                      "drawn signal line stands behind them. Only the controller, the output and the signal line "
+                      "controller -> output are actually checked for these loops."]
+    absent = [r["controller"] for r in result["loops"] if r.get("hint")]
+    if absent:
+        lines += ["", f"{len(absent)} controller tag(s) appear nowhere on the drawing. If the drawing should show them, "
+                      "check the spelling and strip DCS suffixes such as .PV or .OUT from the loop list."]
     hints = [r for r in result["loops"] if r.get("controller_signal_links")]
     if hints:
         lines += ["", "Partly drawn loops: what each controller's signal lines reach on the drawing. A tag here that "

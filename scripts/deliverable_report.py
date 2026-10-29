@@ -8,6 +8,10 @@ every extracted item boxed, the items to check first and why, the asset hierarch
 for, the next steps, and what the package does not establish. It reads only the bundle; it adds no judgement of its
 own, and every number in it comes from the bundle's files. With Pillow installed the drawing is embedded as a
 reduced JPEG; without it, as the original PNG.
+
+It refuses a review_queue.csv that doesn't describe plant_model.json as it is now: every column but the reviewer's
+OPS_ ones is rewritten from the model by the sheet's own writer and must match. Items a person has decided are listed
+with their decision and left out of the items to check first.
 """
 import argparse
 import base64
@@ -19,6 +23,9 @@ import struct
 import sys
 from collections import Counter
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from generate import TWIN_REVIEW_COLS, _csv_text, twin_review_rows  # noqa: E402  (the queue's own writer)
 
 CLASS_COLOURS = {"tank": "#b45309", "pump": "#7c3aed", "valve": "#0f766e", "instrumentation": "#2563eb",
                  "inlet/outlet": "#be185d", "general": "#4b5563"}
@@ -90,18 +97,84 @@ def hierarchy_html(node, depth=0):
             f"{', ' + str(len(kids)) + ' below' if kids else ''}</span></summary><ul>{inner}</ul></details></li>")
 
 
+class BundleError(ValueError):
+    pass
+
+
+MODEL_GROUPS = ("units", "instruments", "final_elements", "line_items", "offpage_connectors", "streams")
+
+
+def columns(fieldnames):
+    """The report needs the sheet scripts/generate.py writes: every column of it, by name."""
+    missing = [c for c in TWIN_REVIEW_COLS if c not in (fieldnames or [])]
+    if missing:
+        raise BundleError(f"review_queue.csv has no {', '.join(missing)} column{'s' if len(missing) > 1 else ''}, so "
+                          "it isn't the review sheet scripts/generate.py writes: regenerate the exports with "
+                          "scripts/generate.py before making the report")
+
+
+def consistency(model, rows):
+    """The report reads counts and reasons from the review sheet, so the sheet must describe this model, as it is
+    now. Every column except the reviewer's OPS_ ones is rewritten from the model by the sheet's own writer
+    (generate.twin_review_rows) and compared: an edited reason, a changed tag or a sheet older than the model is
+    refused rather than reported."""
+    model_ids = {it["id"] for g in MODEL_GROUPS for it in model.get(g, [])}
+    queue_ids = {r["item_id"] for r in rows}
+    dupes = sorted({r["item_id"] for r in rows if sum(1 for x in rows if x["item_id"] == r["item_id"]) > 1})
+    if dupes:  # a repeated row would be counted twice in every headline number
+        raise BundleError(f"review_queue.csv lists {len(dupes)} item(s) more than once ({', '.join(dupes[:5])}): "
+                          "regenerate the exports with scripts/generate.py before making the report")
+    if model_ids != queue_ids:
+        raise BundleError(f"review_queue.csv lists {len(queue_ids)} items and plant_model.json {len(model_ids)} "
+                          f"({len(model_ids - queue_ids)} missing from the sheet, {len(queue_ids - model_ids)} not in "
+                          "the model): regenerate the exports with scripts/generate.py before making the report")
+    by_id = {it["id"]: it for g in MODEL_GROUPS for it in model.get(g, [])}
+    stale = [r["item_id"] for r in rows if (by_id[r["item_id"]].get("ops_review") or {}).get("status")
+             and r.get("model_status") not in (by_id[r["item_id"]]["ops_review"]["status"],)]
+    if stale:
+        raise BundleError(f"{len(stale)} item(s) were reviewed after review_queue.csv was written (e.g. {stale[0]}): "
+                          "regenerate the exports with scripts/generate.py before making the report")
+    expected = {r["item_id"]: r for r in csv.DictReader(io.StringIO(
+        _csv_text(TWIN_REVIEW_COLS, twin_review_rows(model)).lstrip("\ufeff"), newline=""))}
+    differ = [(r["item_id"], c, r.get(c), expected[r["item_id"]][c]) for r in rows for c in TWIN_REVIEW_COLS
+              if not c.startswith("OPS_") and r.get(c) != expected[r["item_id"]][c]]
+    if differ:
+        item, col, has, should = differ[0]
+        raise BundleError(f"review_queue.csv doesn't describe plant_model.json as it is now: {len(differ)} cell(s) "
+                          f"differ (e.g. {item} {col}: the sheet says {has!r}, the model gives {should!r}); it was "
+                          "edited or written from another version of the model: regenerate the exports with "
+                          "scripts/generate.py before making the report")
+
+
 def build(bundle):
     bundle = Path(bundle)
+    need = ["plant_model.json", "intake_manifest.json", "review_queue.csv", "READ_ME.txt"]
+    missing = [n for n in need if not (bundle / n).is_file()]
+    pngs = sorted((bundle / "source").glob("*.png")) if (bundle / "source").is_dir() else []
+    if missing or not pngs:
+        raise BundleError("not a review bundle from import_site_drawing.py: missing "
+                          + ", ".join(missing + ([] if pngs else ["source/*.png"])))
     model = json.loads((bundle / "plant_model.json").read_text(encoding="utf-8"))
     intake = json.loads((bundle / "intake_manifest.json").read_text(encoding="utf-8"))
+    if not isinstance(model, dict) or "summary" not in model or "hierarchy" not in model:
+        raise BundleError("plant_model.json is not an extracted model (no summary or hierarchy)")
     with open(bundle / "review_queue.csv", encoding="utf-8-sig", newline="") as f:
-        rows = list(csv.DictReader(f))
-    png = next((bundle / "source").glob("*.png")).read_bytes()
+        reader = csv.DictReader(f)
+        columns(reader.fieldnames)
+        rows = list(reader)
+    consistency(model, rows)
+    reviewed = [it for g in MODEL_GROUPS for it in model.get(g, []) if (it.get("ops_review") or {}).get("status")]
+    png = pngs[0].read_bytes()
     w, h = png_size(png)
     s = model["summary"]
     meta = model["meta"]
     limits = [ln for ln in (bundle / "READ_ME.txt").read_text(encoding="utf-8").splitlines()[1:] if ln.strip()]
-    first = [r for r in rows if not r["why_check_this"].startswith(ROUTINE)]
+    # A person's decision settles an item: it leaves the to-check list and is shown, with the decision, under
+    # "Reviewed so far". The sheet's model_status is the model's own (consistency() checked it).
+    decided = {r["item_id"]: r for r in rows if r["model_status"] != "unverified"}
+    open_rows = [r for r in rows if r["item_id"] not in decided]
+    first = [r for r in open_rows if not r["why_check_this"].startswith(ROUTINE)]
+    settled = sum(1 for r in decided.values() if not r["why_check_this"].startswith(ROUTINE))
     reasons = Counter(r["why_check_this"].split(";")[0] for r in first)
     kinds = Counter(r["item_type"] for r in rows)
     drawing = intake.get("drawing") or {}
@@ -144,14 +217,17 @@ ol li,ul li{{margin:3px 0}}
 <div class=sub>Revision {e(str(drawing.get('revision', '?')))}, page {e(str(drawing.get('page', '?')))} ·
 {e(meta.get('title', ''))} · extraction: {e(producer.get('method', 'not stated'))}
 {('(' + e(producer.get('model')) + ')') if producer.get('model') else ''}</div>
-<div class=draft><b>Draft, unverified.</b> Every item below was read off the drawing by software and has not been
-checked by a person. Nothing here is approved for operational use.</div>
+{('<div class=draft><b>Draft, unverified.</b> Every item below was read off the drawing by software and has not '
+  'been checked by a person. Nothing here is approved for operational use.</div>') if not reviewed else
+ ('<div class=draft><b>Draft, partly reviewed.</b> ' + f'{len(reviewed)} of {len(rows)} items have a person&#39;s '
+  'decision (listed below); the rest were read off the drawing by software and not checked. Nothing here is '
+  'approved for operational use.</div>')}
 
 <h2>What was extracted</h2>
 <div class=tiles>{tile(s['equipment'], 'equipment')}{tile(s['instruments'], 'instruments')}
 {tile(kinds.get('valve', 0), 'valves')}{tile(kinds.get('in-line item', 0), 'other in-line items')}
 {tile(s['offpage_connectors'], 'off-page connectors')}{tile(s['streams_extracted'], 'links between items')}
-{tile(len(rows), 'rows to review')}{tile(len(first), 'to check first')}</div>
+{tile(len(open_rows), 'rows still to review' if decided else 'rows to review')}{tile(len(first), 'to check first')}</div>
 
 <h2>The drawing, with what was extracted</h2>
 <figure>{overlay(model, w, h, drawing_uri(png))}
@@ -159,9 +235,11 @@ checked by a person. Nothing here is approved for operational use.</div>
 <p class=sub>Each box is one extracted item, coloured by class; hover for its id and tag. Links aren't drawn here
 (see <code>svg/sheet_0.svg</code>).</p>
 
-<h2>Check these first ({len(first)} of {len(rows)} rows)</h2>
+{reviewed_html(reviewed, decided)}
+<h2>Check these first ({len(first)} of {len(open_rows)} rows{' still to review' if decided else ''})</h2>
 <p>The software flagged these for a specific reason; the rest are routine checks (does this line exist, is this
-item right). Reasons:</p><ul>{reason_list}</ul>
+item right).{f' {settled} flagged item(s) already have a decision and are listed above instead.' if settled else ''}
+Reasons:</p><ul>{reason_list}</ul>
 <div class=scroll><table><thead><tr><th>Item</th><th>What it is</th><th>Type</th><th>Why check it</th></tr></thead>
 <tbody>{first_rows}</tbody></table></div>
 
@@ -187,7 +265,25 @@ fills the <code>OPS_</code> columns.</li>
 """
 
 
+def reviewed_html(reviewed, decided):
+    """Items with a person's decision: the decision, who and when, and what the sheet now says about the item."""
+    if not reviewed:
+        return ""
+    e = html.escape
+    rows = "".join(f"<tr><td>{e(it['id'])}</td><td>{e(str(it.get('tag') or 'no tag'))}</td>"
+                   f"<td>{e(it['ops_review']['status'])}</td><td>{e(str(it['ops_review'].get('by') or ''))}</td>"
+                   f"<td>{e(str(it['ops_review'].get('on') or ''))}</td><td>{e(str(it['ops_review'].get('notes') or ''))}</td>"
+                   f"<td>{e(decided[it['id']]['why_check_this'])}</td></tr>"
+                   for it in reviewed)
+    return (f"<h2>Reviewed so far ({len(reviewed)})</h2><p class=sub>A person decided these; they are left out of the "
+            "list to check below.</p><div class=scroll><table><thead><tr><th>Item</th><th>Tag now</th>"
+            "<th>Decision</th><th>By</th><th>On</th><th>Notes</th><th>The sheet now says</th></tr></thead>"
+            f"<tbody>{rows}</tbody></table></div>")
+
+
 def main(argv=None):
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("bundle")
     ap.add_argument("--out")
@@ -195,8 +291,11 @@ def main(argv=None):
     out = Path(a.out) if a.out else Path(a.bundle) / "REPORT.html"
     try:
         text = build(a.bundle)
-    except (OSError, KeyError, ValueError, StopIteration) as exc:
-        print(f"{a.bundle}: not a complete review bundle ({exc!r})", file=sys.stderr)
+    except BundleError as exc:
+        print(f"{a.bundle}: {exc}", file=sys.stderr)
+        return 1
+    except (OSError, KeyError, ValueError) as exc:
+        print(f"{a.bundle}: can't read the bundle ({type(exc).__name__}: {exc})", file=sys.stderr)
         return 1
     out.write_text(text, encoding="utf-8", newline="\n")
     print(f"wrote {out} ({len(text) // 1024} KB)")

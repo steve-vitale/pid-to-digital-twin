@@ -345,6 +345,8 @@ def details(results):
 
 
 def main(argv=None):
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--quiet", action="store_true", help="print only failures")
     parser.add_argument("--no-write", action="store_true", help="do not write out/claims_check.{md,json}")

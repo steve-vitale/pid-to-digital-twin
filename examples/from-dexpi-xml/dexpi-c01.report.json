@@ -1,0 +1,318 @@
+{
+ "file": "C01V04-VER.EX01.xml",
+ "sha256": "a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c",
+ "sheet_id": "dexpi-c01",
+ "dexpi_file": {
+  "Application": "Dexpi",
+  "ApplicationVersion": "1.3.1",
+  "Date": "2022-11-04",
+  "Discipline": "PID",
+  "Is3D": "no",
+  "OriginatingSystem": "P&ID Toolbox",
+  "OriginatingSystemVendor": "pnb plants & bytes GmbH, Aachen, Germany",
+  "OriginatingSystemVersion": "1.1.0",
+  "SchemaVersion": "4.1.1",
+  "Time": "20:30:49.613611",
+  "Units": "mm"
+ },
+ "items": {
+  "units": 5,
+  "streams": 12,
+  "instruments": 3,
+  "final_elements": 3,
+  "controllers": 3,
+  "manual_valves": 7,
+  "relief_devices": 1,
+  "unplaced": 0
+ },
+ "attributes": {
+  "in_file": 783,
+  "kept_as_sourced_records": 727,
+  "kept_in_meta_only": 41,
+  "kept_on_unplaced_items": 0,
+  "dropped": 15,
+  "dropped_by_reason": {
+   "no value in the file": 10,
+   "person name: left out on purpose": 5
+  },
+  "in_shape_catalogue_not_read": 24
+ },
+ "sourced_records_on_items": 873,
+ "sourced_records_by_section": {
+  "units": 239,
+  "streams": 420,
+  "instruments": 12,
+  "final_elements": 73,
+  "controllers": 26,
+  "manual_valves": 91,
+  "relief_devices": 12,
+  "unplaced": 0
+ },
+ "elements_read": {
+  "ActuatingFunction": 3,
+  "ActuatingSystem": 3,
+  "ActuatingSystemComponent": 6,
+  "Equipment": 16,
+  "InformationFlow": 6,
+  "InstrumentationLoopFunction": 4,
+  "Label": 60,
+  "MetaData": 1,
+  "Node": 148,
+  "Nozzle": 19,
+  "PipeOffPageConnector": 2,
+  "PipingComponent": 19,
+  "PipingNetworkSegment": 23,
+  "PipingNetworkSystem": 11,
+  "ProcessInstrumentationFunction": 4,
+  "ProcessSignalGeneratingFunction": 3
+ },
+ "elements_not_read": {
+  "<PipeFlowArrow>: flow arrow (direction comes from segment From/To)": 8,
+  "<PipeSlopeSymbol>: slope mark": 1,
+  "<InsulationSymbol>: insulation mark (insulation attributes are on the line)": 1
+ },
+ "drawing_title_block_labels_not_read": 1,
+ "unit_types": {
+  "H1007": "PlateHeatExchanger -> heat_exchanger (approximate: heat transfer equipment)",
+  "H1008": "TubularHeatExchanger -> heat_exchanger (approximate: heat transfer equipment)",
+  "P4711": "CentrifugalPump -> pump (exact)",
+  "P4712": "ReciprocatingPump -> pump (exact)",
+  "T4750": "Tank -> tank (exact)"
+ },
+ "unmapped_equipment_classes": {},
+ "fittings_folded_into_streams": {
+  "FlowInPipeOffPageConnector": 1,
+  "PipeReducer": 1,
+  "PipeTee": 5,
+  "BlindFlange": 2,
+  "FlowOutPipeOffPageConnector": 1
+ },
+ "inferred_units": {
+  "PI-4712.01": "first unit upstream through the piping from BlindFlange-1 (5 step(s), via Nozzle-9)",
+  "PT-4712.02": "first unit upstream through the piping from BlindFlange-2 (8 step(s), via Nozzle-9)",
+  "TT-4750.03": "on Nozzle-17 of the unit",
+  "HV-4750.01": "first unit upstream through the piping from GlobeValve-2 (1 step(s), via Nozzle-4)",
+  "PV-4712.02": "first unit upstream through the piping from GlobeValve-1 (1 step(s), via Nozzle-11)",
+  "TV-4750.03": "first unit upstream through the piping from GlobeValve-3 (1 step(s), via Nozzle-16)",
+  "SV 104.01": "first unit upstream through the piping from SpringLoadedGlobeSafetyValve-1 (3 step(s), via Nozzle-9)"
+ },
+ "unplaced": [],
+ "notes": [],
+ "broken_references": [],
+ "lossy_steps": [
+  "Geometry, presentation and the shape catalogue are not read: the model has no positions (generate.py places units automatically, display only).",
+  "Equipment classes map onto the generator's symbol types; approximate and unmapped ones say so in type_basis.",
+  "Lines become unit-to-unit streams; tees, reducers, flanges, blinds and off-page connectors are folded into the stream they sit on (their attributes kept, keyed by XML ID), not separate nodes.",
+  "A line that ends only at a closed end (blind, plug, vent or drain valve) gets BL as its far end, said in to_end.",
+  "A segment Connection that names an ID the file does not contain (a broken reference) gets BL at that end, said in from_end/to_end and listed under broken_references.",
+  "Units of instruments, final elements and relief devices are inferred through the piping (unit_basis).",
+  "Signal lines between bubbles are kept as signal_from/signal_to lists, not graph edges.",
+  "Items that need a unit but reach none through the piping go to 'unplaced': kept in the model, not exported by generate.py or graph_export.py.",
+  "Person names in the drawing metadata and the title block text are left out on purpose.",
+  "Values are kept as written (text); units of measure as DEXPI names (Bar, DegreeCelsius), not converted."
+ ],
+ "comparison": {
+  "key_nodes": 30,
+  "items": {
+   "folded into streams": 10,
+   "own item": 20
+  },
+  "tags_compared": 20,
+  "tags_model_id_equal": 12,
+  "tags_drawn_label_kept": 20,
+  "tag_rows": [
+   {
+    "dexpi_id": "ButterflyValve-1",
+    "key_tag": "66KL21-80",
+    "model": "manual_valves ButterflyValve-1",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "SwingCheckValve-1",
+    "key_tag": "75SA21-80",
+    "model": "manual_valves SwingCheckValve-1",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "PipeReducer-1",
+    "key_tag": "80/50",
+    "model": "streams (folded part) 47124",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "BallValve-1",
+    "key_tag": "73KH12-50",
+    "model": "manual_valves BallValve-1",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "SpringLoadedGlobeSafetyValve-1",
+    "key_tag": "SV 104.01",
+    "model": "relief_devices SV 104.01",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "BallValve-2",
+    "key_tag": "73KH12-25",
+    "model": "manual_valves BallValve-2",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "BallValve-3",
+    "key_tag": "73KH12-25",
+    "model": "manual_valves BallValve-3",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "BallValve-4",
+    "key_tag": "73KH12-50",
+    "model": "manual_valves BallValve-4",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "BallValve-5",
+    "key_tag": "73KH12-25",
+    "model": "manual_valves BallValve-5",
+    "model_tag_equals_key_tag": false,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "GlobeValve-1",
+    "key_tag": "PV4712.02",
+    "model": "final_elements PV-4712.02",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "GlobeValve-3",
+    "key_tag": "TV4750.03",
+    "model": "final_elements TV-4750.03",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "ProcessInstrumentationFunction-1",
+    "key_tag": "PI 4712.01",
+    "model": "instruments PI-4712.01",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "ProcessInstrumentationFunction-2",
+    "key_tag": "PICSA 4712.02",
+    "model": "controllers PICSA-4712.02",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "ProcessInstrumentationFunction-3",
+    "key_tag": "HS 4750.01",
+    "model": "controllers HS-4750.01",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "ProcessInstrumentationFunction-4",
+    "key_tag": "TICSA 4750.03",
+    "model": "controllers TICSA-4750.03",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "PlateHeatExchanger-1",
+    "key_tag": "H1007",
+    "model": "units H1007",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "TubularHeatExchanger-1",
+    "key_tag": "H1008",
+    "model": "units H1008",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "CentrifugalPump-1",
+    "key_tag": "P4711",
+    "model": "units P4711",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "ReciprocatingPump-1",
+    "key_tag": "P4712",
+    "model": "units P4712",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   },
+   {
+    "dexpi_id": "Tank-1",
+    "key_tag": "T4750",
+    "model": "units T4750",
+    "model_tag_equals_key_tag": true,
+    "drawn_label_kept": true
+   }
+  ],
+  "unit_links": {
+   "key": [
+    "BL - H1008",
+    "BL - P4711",
+    "BL - P4712",
+    "BL - T4750",
+    "H1007 - P4711",
+    "H1007 - T4750",
+    "H1008 - P4712",
+    "H1008 - T4750",
+    "P4712 - T4750"
+   ],
+   "model": [
+    "BL - P4711",
+    "BL - P4712",
+    "H1007 - P4711",
+    "H1007 - T4750",
+    "H1008 - P4712",
+    "H1008 - T4750",
+    "P4712 - T4750"
+   ],
+   "both": [
+    "BL - P4711",
+    "BL - P4712",
+    "H1007 - P4711",
+    "H1007 - T4750",
+    "H1008 - P4712",
+    "H1008 - T4750",
+    "P4712 - T4750"
+   ],
+   "key_only": [
+    "BL - H1008",
+    "BL - T4750"
+   ],
+   "model_only": [],
+   "model_streams_not_compared": [
+    "47130: BL - H1007 (line end with no connector (open-start:PipingNetworkSegment-20): leaves the sheet)",
+    "47131: H1007 - BL (line end with no connector (open-end:PipingNetworkSegment-21): leaves the sheet)",
+    "47140: BL - H1008 (line end with no connector (open-start:PipingNetworkSegment-22): leaves the sheet)",
+    "47141: H1008 - BL (line end with no connector (open-end:PipingNetworkSegment-23): leaves the sheet)"
+   ],
+   "key_only_explained": {
+    "BL - H1008": "both fed from P4712: branches of one tee, which the key links pairwise (undirected); the model keeps the drawn direction",
+    "BL - T4750": "both fed from P4712: branches of one tee, which the key links pairwise (undirected); the model keeps the drawn direction"
+   }
+  },
+  "key_item_attributes": {
+   "values": 432,
+   "values_kept": 432,
+   "distinct_per_item": 249,
+   "distinct_per_item_kept": 249
+  }
+ }
+}

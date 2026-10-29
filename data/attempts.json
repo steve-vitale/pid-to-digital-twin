@@ -1955,6 +1955,604 @@
       "source": [
         "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
       ]
+    },
+    {
+      "id": "A135",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Learned normal bands (csv_normal_bands.py, same method as the TE bands) on 10 minutes of real normal running from the PRONTO multiphase flow facility and scored an air-leakage run and a diverted-flow run",
+      "hypothesis": "Bands that work on the Tennessee Eastman simulator hold on real facility data",
+      "evidence": "K = 6, 0 of 300 held-out normal rows flagged, but 231 of 300 pre-fault rows flagged before the air leak and 600 of 600 before the diverted flow: slow drift leaves bands one 0.011 C wide far behind",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Short-window bands are too narrow for real drift; the simulator never drifts, so the TE results hid it",
+      "source": [
+        "docs/GENERALIZATION.md",
+        "docs/CORPUS_FETCH.md"
+      ]
+    },
+    {
+      "id": "A136",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Generated 10 synthetic DEXPI P&IDs with pyDEXPI 1.2.0 as exact-answer-key test drawings for the DEXPI route",
+      "hypothesis": "pyDEXPI can supply unlimited DEXPI test drawings with exact keys",
+      "evidence": "All 10 files contain equipment and nozzles only (2 to 21 equipment, 4 to 64 nozzles); 3 to 47 connections per drawing, plus every valve and pipe, were dropped by its exporter",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "Useful for equipment-scale reader tests only; piping, instruments, tags and loops need a writer that exports them or real DEXPI samples",
+      "source": [
+        "data/corpus.json"
+      ]
+    },
+    {
+      "id": "A137",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Statement review: every graph claim rendered as a plain sentence with its source; a seeded stratified sample of 60 per dataset checked against its source by an independent agent",
+      "hypothesis": "A sampled, sourced statement review gives a measured error rate with an interval, instead of 'looks right'",
+      "evidence": "Bayer model 5/57 do not match their cited source (8.8%, Wilson 95% 3.8-18.9%; 7.9% weighted), 3 unclear; sheet-0 extraction 2/60 (3.3%, 0.9-11.4%). Five real model errors found (FT-106 unit, 135 C page, TT-105, an invented earlier tag TI-104, stream S6 routing)",
+      "runs": "1 review per sample",
+      "verdict": "kept",
+      "why": "It found errors the earlier structural and figure checks passed. One reviewer per sample; a second reviewer and a re-review after fixes are still to do",
+      "source": [
+        "examples/statement-review/README.md",
+        "examples/statement-review/bayer/review-2026-10-29/score.txt",
+        "examples/statement-review/sheet0/review-2026-10-29/score.txt"
+      ]
+    },
+    {
+      "id": "A138",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Read the extracted 'connects' links as sentences ('X and Y are joined by a line') and had them checked on the drawing",
+      "hypothesis": "An extracted link means a pipe runs between the two items",
+      "evidence": "Only 5 of 27 sampled links were next to each other; 22 were on the same branched network through 1 to 6+ tees. The tracer emits all pairs per network by design (the answer key's definition). Read as adjacency the sheet-0 error rate is 24/60 (40%, 28.6-52.6%), connections 23/36",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The link means 'on the same line network', not adjacency. Scores against the key stand; the sentence wording and graph docs now say what a link means. Emitting adjacency (emit='tree' was worse against the key) is a separate, untried change",
+      "source": [
+        "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt",
+        "docs/GRAPH_EXPORT.md"
+      ]
+    },
+    {
+      "id": "A139",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Pipe layer from the tracer's own geometry (scripts/line_layers.py): items and junctions as nodes, pipe segments between consecutive nodes along a run; arms at a horizontal/vertical overlap counted with the tracer's own split_crossings test (any run pixel within half a line length past the overlap)",
+      "hypothesis": "The tracer's existing geometry is enough to tell a tee from a bend and a crossing",
+      "evidence": "On OPEN100 sheet 0 it found 18 pass-through crossings and 16 dot-marked ones, and missed tees: a branch run that stops a line-width past the through line (or a junction dot's stub) reads as a fourth arm, so the tee became a crossing and the items on both runs came out piped straight to each other (seen on an overlay of the sheet; 27 junctions)",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "A tee read as a crossing is the exact error the layer exists to avoid; replaced by a minimum arm length (A140)",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A140",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "An arm counts only if its run continues at least a quarter of a symbol side past the overlap",
+      "hypothesis": "Real crossings have long arms on all four sides; tee overshoots and junction-dot stubs are short",
+      "evidence": "Sheet 0: 0 crossings left (they were all tees), 41 junctions. Pipe-segment F1 against the drawer's own routes (key symbols): TE revision D 1.000 (153 of 153 segments, 41 of 41 junctions), Bayer RT1 1.000 (49 of 49, 7 of 7). Against the DEXPI XML piping with every line scored: 0.371 (P 0.264 / R 0.622)",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Fixes the tee/crossing confusion without touching the tracer's own crossing join (the network and pairwise layers are unchanged). DEXPI's low precision is not this rule (A141-A143)",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A141",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Score DEXPI's pipe layer on process piping only: instrument symbols left out of the traced pipe layer before scoring (their lines become dead ends; a branch they made is passed through)",
+      "hypothesis": "The DEXPI truth has no measuring or signal lines (they are InformationFlow, and where they meet a pipe is no element of the file), so scoring them against it counts true drawn lines as wrong",
+      "evidence": "DEXPI pipe-segment F1 0.371 -> 0.394 (P 0.289 / R 0.622); TE and Bayer keep every line (their truth has the taps)",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "The scope follows what the truth can express; stated in the matrix row-8 criterion",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A142",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Drop pipe-layer line that joins fewer than two items (loops, an item's own outline or internals drawn outside its box), with its junctions",
+      "hypothesis": "Junctions on line that reaches only one item are drawing of that item, not pipe between items",
+      "evidence": "DEXPI 0.394 -> 0.483 (C02 0.25 -> 0.714: the column's shell and trays drawn outside its key box had made 14 junctions); TE and Bayer unchanged at 1.000. Decided after looking at the C02 overlay, a scored set",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "General (no drawing-specific number), but chosen after seeing a scored sheet, so the DEXPI figure is not a blind result",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A143",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "A line meeting point inside an item's box, or on its outline just outside it, belongs to the item (lines meeting there meet at the item, not at a junction)",
+      "hypothesis": "Actuators, connector outlines and nozzle stubs drawn at an item make false junctions next to it",
+      "evidence": "DEXPI 0.483 -> 0.681 (P 0.653 / R 0.711; C01 0.58 -> 0.724, C03 0.182 -> 0.545; 5 of 5 tees found, 15 junctions predicted); TE and Bayer unchanged at 1.000; sheet 0 37 junctions, 123 segments. Decided after looking at the C03 overlay",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Same caveat as A142. Tuning stopped here: the rest of DEXPI's gap is symbol shapes outside their key boxes and missed pipe ends at equipment walls, and more rules picked on these three sheets would overfit them",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A144",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Checked the sheet-0 pipe layer against the 2026-10-29 reviewer's notes on the 27 sampled network links (each note says 'direct' or 'through N junctions')",
+      "hypothesis": "If the pipe layer is right, its direct item-to-item segments are the links the reviewer called direct",
+      "evidence": "24 of 27 agree on direct vs not. Of the 3 others, 2 are drawn lines the reviewer said are not process lines (a tag leader, an actuator box) and 1 is a pair with one tee the reviewer saw and the pipe layer did not. Junction counts along a path are higher in the pipe layer (it counts other instruments' taps)",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "One reviewer's notes on a sample drawn for another question; a diagnostic, not a scored review. The layered sample (A145) is the measurement",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "examples/statement-review/sheet0/review-2026-10-29/reviewed_sample_60.csv"
+      ]
+    },
+    {
+      "id": "A145",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Statements carry their relationship layer (pipe, network, network_pair, stream, item) with wording for each; score reports one error rate per layer and none blended; a new sheet-0 sample of 60, 15 per layer (seed 1030)",
+      "hypothesis": "One blended rate hid a 3.3% vs 40% difference that depended on which fact a reader took a link to state",
+      "evidence": "Sheet 0 now has 1,085 statements: 359 item, 345 pairwise, 221 network, 160 pipe. The 2026-10-29 sample still redraws exactly from its 704-statement population. The layered sample is not reviewed yet",
+      "runs": "0 reviews",
+      "verdict": "kept",
+      "why": "The measurement needs a fresh review of the layered sample",
+      "source": [
+        "examples/statement-review/README.md#the-layered-sample-and-its-review-2026-10-29",
+        "docs/STATEMENT_REVIEW.md"
+      ]
+    },
+    {
+      "id": "A146",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Class each traced line by what it joins (scripts/line_layers.py item_roles + classify): a line to an instrument bubble is an instrument connection; a short stem from a valve to a small 'general' symbol stacked on it is an actuator stem; the stub from a nozzle mark (N1, N2) to its vessel is part of the vessel; the rest is pipe. Junctions get a kind (pipe_tee, instrument_tap, marked_crossing, instrument_line_junction); a tap sits on the pipe segment and does not split it. Truths are split the same way by the symbols' classes before scoring",
+      "hypothesis": "The 2026-10-29 layered review's 3 of 15 pipe errors (20%) all came from drawn lines that are not pipe being emitted as piped_to",
+      "evidence": "Sheet 0: 123 pipe segments -> 90 pipe + 20 instrument connections + 2 actuator stems (H, M) + 2 nozzle stubs (N1, N2); 38 junctions = 28 pipe tees + 10 instrument taps (every tap the reviewer named). Pairwise links unchanged (345). Pipe-segment F1 with key symbols: TE revision D 1.000 (101 of 101; instrument connections 37 of 37; 41 of 41 junctions, every kind right), Bayer 1.000 (34 of 34; 13 of 13; 7 of 7), DEXPI 0.681 unchanged (process piping only). TE/Bayer measured with the drawer's manifest hash check skipped: draw_pid_from_model.py was being edited by another task (validation code only)",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Fixes the reviewed root cause without changing any network or pairwise link; not yet re-reviewed (sample_layers_r2)",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines",
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt"
+      ]
+    },
+    {
+      "id": "A147",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "A meeting point just outside an item's box is the item's own drawing unless the points there have two or more arms leading away to other items (not ones drawn against the item, like a nozzle on its vessel) and one into the item: then they are one junction beside the item. Actuator and valve count as one assembly for this",
+      "hypothesis": "The tee where the drop from MS 14010 meets the main line 3 px left of MSCV-XXX's box was absorbed into the valve by the near-box band (A143)",
+      "evidence": "Sheet 0: S0-JN-537-274 found (VL013, GN007 and MSCV-XXX piped to it instead of VL013 -> MSCV and GN007 -> MSCV); the leader of MSV 1404/1405 now goes to its valve, not to the H/M box. First version made 3 false tees at the N2 nozzles on OPEN100 sheet 2 (the 'away' arm was the vessel the nozzle is drawn against); excluding items drawn against the item fixed them (decided after seeing a scored sheet). DEXPI, TE and Bayer unchanged",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "General rule; the nozzle exception was chosen after looking at a scored sheet, so OPEN100 sheet 2 is not a blind test of it",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines",
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "A148",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Take a 'general' symbol beside a valve as its actuator only if, read without that role, every line it has goes to the valve, to a bubble or to a point where only those meet",
+      "hypothesis": "A box rule alone takes flanges and reducers drawn against a valve on its own pipe for actuators",
+      "evidence": "Without the check DEXPI C03 took two flanges and a reducer for actuators and fell from 0.545 to 0.308 (0.471 with a check run after the assembly rule, which had already rewired the flange's line); with it C03 is back at 0.545, DEXPI total 0.681 unchanged, sheet 0 keeps H and M",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Limit: an actuator with a signal line to something other than a bubble loses the role and its stem reads as pipe",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines",
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "A149",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Corrected the claim that the PID2Graph/OPEN100 keys hold no adjacency, and derived a pipe truth from the key graph (line_layers.pid2graph_truth: symbol, connector/crossing/arrow chains, symbol; 3+-edge crossings are junctions) for the six OPEN100 development sheets (score --set open100)",
+      "hypothesis": "The key is a graph whose connector nodes are line points and whose 3-edge crossings are tees; it is this repository's scorer that collapses them to all pairs",
+      "evidence": "Sheet 0 key: 225 connectors, all with 2 edges; 71 crossings with 1-3 edges; its 38 three-edge crossings each lie within 3 px of one of line_layers' 38 sheet-0 junctions. The derived truth's line networks equal score_pid2graph's all-pairs links on all 6 sheets. Pipe-segment F1 (key symbols) 0.911 (P 0.937 / R 0.887; sheets 0.969 / 0.883 / 0.960 / 0.958 / 0.955 / 0.726), junctions 154 of 165 (163 predicted), instrument connections 0.835; every drawn line of any kind 0.894, against 0.890 for the version before A146 (0.708 if its lines are all taken as pipe). Network-layer scores unchanged. The paper (arXiv 2411.13929) was not available offline; that it scores direct edges is the coordinator's lead, not checked here",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "A derived truth, labelled so: the key does not say which lines are pipe or how a 4-edge crossing's arms pair (2 on sheet 5). Development sheets, which the tracer was tuned on. docs/GENERALIZATION.md row 8 (generated by corpus_matrix.py) still says the key has no adjacency",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines",
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "A150",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Statements word each line and junction by kind (new layer non_pipe for instrument connections, taps, actuator stems, nozzle stubs); a network whose lines meet only at an item's edge says so (joined_only_at) instead of claiming 'no item between', and its pairs say they are joined through that item; extracted classes are said as the extraction's ('classed as a tank by the extraction'); 'belongs to ... (assigned by tracing the lines)' became 'the extraction attributes it to ... by tracing the lines'. Drew sample_layers_r2: 75 statements, 15 per layer, seed 1031",
+      "hypothesis": "The network layer must stay the tracer's (the pairwise links and every score come from it), so the honest fix for NET018/NET019 is wording, not re-cutting",
+      "evidence": "Sheet 0: 1,078 statements (359 item, 345 pairwise, 222 network, 118 pipe, 34 non_pipe). The reviewed samples (sample_60, sample_layers) are kept as drawn. 0 reviews of the new version yet",
+      "runs": "0 reviews",
+      "verdict": "kept",
+      "why": "Needs the fresh review of sample_layers_r2",
+      "source": [
+        "examples/statement-review/README.md#the-layered-sample-and-its-review-2026-10-29"
+      ]
+    },
+    {
+      "id": "A151",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Pre-registered the pass criteria for the generalization-matrix cells added from the 2026-10-29 corpus expansion, written into scripts/corpus_matrix.py (ROW_CRITERIA, NEW_CRITERIA_SET) before any of these cells ran: row 7 dexpi_reader.py per DEXPI exporter (file read or refusal confirmed in the XML; units = top-level equipment; every control function a controller; every instrument function in the model; all files) and cross-vendor agreement with the reference export (all equal); row 4 loop functions audited against the reader's model where the reader found a controller (all tags present); row 5 IDAES HDA and 42 DWSIM flowsheets through generate.py (exit 0, validation OK, counts equal, one SVG per unit + overview; IDAES also every unit and stream id in an output and the mixer balance within 1e-4); row 6 SKAB, HAI 21.03 and PRONTO days 2 and 4 under the PRONTO criterion (3 in a row at or after the start, at most 0.5% of pre-fault rows flagged); row 8 OPEN100 dev and holdout against the truth derived from the key graph (pipe-segment F1 >= 0.88)",
+      "hypothesis": "Criteria fixed before the runs make these cells tests rather than descriptions; the tools were never tuned on these sources",
+      "evidence": "Not blind: the staging pilot had run dexpi_reader.py over all 220 DEXPI files (0 controllers on any 1.2 file), and check (c) was set as 'every control function is a controller' after checking the truth definitions on the 1.3 C01-C03 files the reader was built on (there a hand switch HS driving a valve is also a controller). The OPEN100 development sheets had been scored with the derived truth while it was written (A149). No tool was changed for these inputs",
+      "runs": "0 (criteria only)",
+      "verdict": "kept",
+      "why": "Results are in A152",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A152",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Ran the generalization-matrix cells added from the corpus expansion (scripts/corpus_matrix.py --inputs, merged into out/generalization/matrix.json without re-running any other cell) under the criteria pre-registered in A151; adapters in scripts/corpus_adapters.py, no tool changed",
+      "hypothesis": "The DEXPI reader, loop audit, generate.py exports and CSV historian bands carry over to source families they were not built on",
+      "evidence": "Row 7 dexpi_reader.py: DEXPI 1.3 E/I/P cases 22/31 files pass (6/9 control functions read as controllers); 1.2 reference exports 9/11 (0/3); SPPID 35/55 (0/18); Comos 22/41 (0/7); AVEVA 22/24 (0/0: AVEVA writes no instrument letters this truth can read); AutoCAD 36/54 (0/16; 6 refused for duplicate IDs, confirmed in the XML); cross-vendor 36/45 exports match the reference's reader counts, 37/45 its XML counts. Row 4: 1.3 cases 0/2 loops with tags present (the reader keeps LICSA 03 and FIC 04 as controllers but drops their valves LV 03 / FV 04), 29 of 31 files not auditable; every 1.2 exporter n/a (the reader found no controller in any 1.2 file). Row 5: IDAES HDA pass (7 units, 11 streams, 14 files, mixer balance 0.0); DWSIM 42/42 flowsheets pass (360 units, 611 streams; no instruments or controllers to test). Row 6 (PRONTO criterion): PRONTO day 2 1/2 runs (leakage: 361/361 pre-fault rows flagged), day 4 1/2 (slugging2: 2770/2770), SKAB 1/34 (all 34 detected, 33 with every pre-fault row flagged; fitted on each run's own start instead, 23/34 pass), HAI 21.03 0/2 (K target not met; all pre-attack rows flagged; 5/5 attack events flagged in each file). Row 8: OPEN100 dev 0.911 pass, holdout 0.872 fail (sheet 6 0.729)",
+      "runs": "1 per cell",
+      "verdict": "inconclusive",
+      "why": "A measurement round, recorded as found: the historian bands flag normal running on every real source with drift (the PRONTO day 3 finding generalizes), and the DEXPI reader reads no 1.2 controller. Nothing was tuned; fixing either is a separate change to be judged on these cells",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A153",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Pre-registered a development / held-out split for finding a historian-band method that tolerates slow drift (csv_normal_bands.py), written before any candidate method was run. DEVELOPMENT: PRONTO day 3 (leakage, diverted) and the first half of SKAB's 34 labelled runs sorted alphabetically as group/name (other/1-14, valve1/0, valve1/1, valve1/10: 17 runs). HELD OUT, run once at the end with the frozen method: PRONTO days 2 and 4, the other 17 SKAB runs (valve1/11-15, valve1/2-9, valve2/0-3), HAI 21.03 test1 and test4, and the 21 TE fault runs of row 6. Criterion unchanged: detected by 3 flagged rows in a row at or after the labelled start AND at most 0.5% of pre-fault rows flagged",
+      "hypothesis": "Tuning only on the development runs and scoring the held-out runs once keeps the reported result from being fitted to the cells it is judged on",
+      "evidence": "Split only; no candidate run yet. The alphabetical split puts 14 of SKAB's 'other' runs and only 3 valve1 runs in development, so the held-out SKAB half is mostly valve faults: a known imbalance, kept because the split was fixed before seeing results",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in the entries that follow",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A154",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "build_twin.plant_coded: an instrument letter group that starts with a system code seen on its own sheet (the sheet's system_code or an equipment tag prefix in system_codes_seen; a 3+ letter code ending in S also matches without the S, so MSS gives MS; stem 2+ letters) is a plant tag, not ISA-5.1 letters: no measured variable, variable_method says which code matched, instrument_kind 'valve (plant-coded tag)' for a ...V and none otherwise. MOV/AOV/SOV/AORV keep their own rule. te_model_diff reads the new kind as a final element, as question_engine already did for MSV/MSIV/MSBV",
+      "hypothesis": "The sheet's own system codes are the evidence that separates the plant's tag prefixes (MS on a main steam sheet) from ISA function letters, without a list of plant prefixes",
+      "evidence": "Independent review r2 of sheet 0: 'MSBV 1407 is a valve in a moisture loop' was the one item mismatch. On the OPEN100 extraction (r2-tiles-trace/codex, all 12 sheets) the rule changes 5 of 359 instruments, all on sheet 0 (MSS): MS 14010 (S0-IN019, now a reviewed valve callout in the recorded model), MSIV 1402, MSV 1404, MSV 1405, MSBV 1407 (moisture -> none). The own-drawing example (GPT extraction of sheet 0): the same 5 (MS 4010 there). 0 changes on the 5 TE twins, the r3 holdout twins and the 3 DEXPI bundles. Control: the same tags on an ACC sheet are still read as ISA (test_along_line). Limits: a sheet with no SYS-TYPE-NUM equipment tag has no codes; a code whose stem is also an ISA pair would hide real variables; a neighbouring system's tags are not caught",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "Removes a false 'moisture' reading on every MS tag of sheet 0 and touches nothing else measured. The recorded OPEN100 model (open100.model) is left stale: rebuilding it means re-applying its reviews",
+      "source": [
+        "docs/TWIN_OUTPUTS.md#what-is-placeholder",
+        "examples/statement-review/README.md#the-layered-sample-and-its-review-2026-10-29"
+      ]
+    },
+    {
+      "id": "A155",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Statements say an extracted instrument's kind as the tag letters' reading, with the extraction's class beside it ('PSV 1405's tag letters read as a valve (PSV: pressure safety valve); the extraction classed the symbol as an instrument bubble'; expanded only for ?CV, ?SV and MOV/AOV/SOV/AORV), never 'final element'. 'By tracing the lines' follows each item's parent_method / unit_method: geometry_nearest says 'by nearest position on the drawing (to P), then by tracing the lines from it' and 'The extraction attaches X to P, the nearest item by position on the drawing'; along_line, linked, via_instrument_chain and connection_path say 'by tracing the lines'; any other method claims no 'by'",
+      "hypothesis": "The two r2 wording findings are both a sentence saying more than the field it renders",
+      "evidence": "Sheet 0: 1,073 statements (was 1,078: five 'moisture' variable statements withdrawn); 43 reworded, 4 kind statements replaced. 16 of 36 instruments were placed by nearest position and now say so. Reviewed samples kept as drawn: sample_60 and sample_layers_r2 each hold one withdrawn MSBV 1407 statement (test_statements checks only those are missing). 0 reviews of the new wording yet",
+      "runs": "0 reviews",
+      "verdict": "kept",
+      "why": "Needs a fresh review sample drawn from today's statements",
+      "source": [
+        "examples/statement-review/README.md#the-layered-sample-and-its-review-2026-10-29"
+      ]
+    },
+    {
+      "id": "A156",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers: a meeting point within the grown boxes of two items whose boxes touch, whose only arms are those items' own attachment points, makes no line (two outlines touching, as flow element GN003's outline drawn wider than its box running past FT 1401's bubble: S0-NET005's one 'instrument line'). Tried for any two items, then only where one is an instrument bubble. Not kept: the code is unchanged",
+      "hypothesis": "Ink between two touching items' boxes is their outlines, not a drawn line",
+      "evidence": "Any two items: OPEN100 dev pipe F1 0.911 -> 0.901, instrument connections 0.835 -> 0.742, DEXPI pipe F1 0.681 -> 0.652, and a nozzle stub on its own vessel lost (test_line_layers). Bubble only: pipe, TE, Bayer and DEXPI unchanged, but OPEN100 instrument connections 0.835 -> 0.742 (109/114 -> 89/93 predicted, 147 true): 20 of the 21 lines removed are connections in the key graph's derived truth. Network and pairwise layers unchanged in both (they are the tracer's)",
+      "runs": "2",
+      "verdict": "inconclusive",
+      "why": "The key counts a bubble touching its element as a connection, so the rule cannot tell this outline sliver from the contacts the key keeps. Known limit: S0-NET005's line stays an instrument connection",
+      "source": [
+        "examples/statement-review/README.md#the-layered-sample-and-its-review-2026-10-29",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A157",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "dexpi_reader.py reads the instrumentation other DEXPI exports write: any actuating system component that refers to a piping component operates it (DEXPI 1.2 ShutOffValveReference, 1.3 OperatedValveReference; also the valve's own 'is referenced by'); the valve's tag falls back to the reference's SubTagName and the valve's own number when the actuating system has none; a bubble whose letters hold C after the first is a controller even with no valve it drives (cascade to another controller as output.setpoint_of; measures the instrument bubble signalling it when it has no sensor); the modifier letter joins the tag letters (HS); equipment keeps a TagName XML attribute as its tag",
+      "hypothesis": "The 0 of 44 DEXPI 1.2 control functions and the dropped valves come from structures the reader had no rule for, not from the files",
+      "evidence": "Split written before the change: development = DEXPI 1.2 reference (11), 1.3 C01-C03, 1.3 single-feature cases at even file-name positions (15); held out = the four vendors' 1.2 exports and the other 16 cases, run once at the end. Development: 1.2 reference 9/11 -> 11/11 files pass, control functions 0/3 -> 3/3, loops 2/2 (none auditable before); C01-C03 unchanged (2/3, C03's valve has no unit); even cases 11/15 -> 11/15, 4/5 -> 5/5. Held out: SPPID 35/55 -> 51/55, 0/18 -> 18/18; AutoCAD 36/54 -> 40/54, 0/16 -> 15/16; AVEVA 22/24 -> 24/24; Comos 22/41 -> 22/41, 0/7 -> 0/7; odd cases 11/16 -> 12/16, 2/4 -> 4/4. DEXPI 1.2 overall 0/44 -> 36/44 control functions. Loops with tags present: SPPID 0/11 (tag text P-4712.02 written PICSA-P_4712.02 for generate.py's one-dash rule), FIC 04 and LICSA 03 still 0/1 each (valve on a line with no unit, kept in unplaced, which loop_audit does not read). C01 model, report and graph byte-identical",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Every development structure is read with a synthetic test; held-out gains confirm it generalizes to SPPID, AutoCAD and AVEVA. Not fixed, so the held-out result stays honest: the Comos dialect (letters only in TagName, no actuating system), AutoCAD leader links, Proteus 3.3.3. Unit-less items need a schema or audit decision",
+      "source": [
+        "examples/from-dexpi-xml/README.md#other-tools-exports"
+      ]
+    },
+    {
+      "id": "A158",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development (A153 split): csv_normal_bands.py level bands with a floor on band width, the floor a fraction (0.5% or 2%) of the tag's normal mean, K chosen as before (3-6, worst tag)",
+      "hypothesis": "Bands are failing only because some are absurdly narrow (one 0.011 C wide); a width floor fixes the false alarms",
+      "evidence": "Development: PRONTO day 3 0/2 runs pass (pre-fault flagged 52% on average, from 88%), SKAB 1/17 (76% of pre-fault rows flagged, unchanged). SKAB's normal run is another day: accelerometers sit 40-58 sd from it before any fault, and flow 58 sd, so a fixed level is wrong whatever the width",
+      "runs": "19 development runs, 2 settings",
+      "verdict": "rejected",
+      "why": "A floor cannot fix a level that moved between days; the band centre has to follow the process",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A159",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development: band on the residual from a slow moving baseline (value minus an exponentially weighted average started on the scored export), time constant 1, 10, 60 or 300 rows, K chosen per tag on held-out normal rows (3-10)",
+      "hypothesis": "Detrending against a slow baseline stops slow drift being flagged while a step still opens a residual",
+      "evidence": "Development: best PRONTO day 3 1/2 (T = 10), best SKAB 8/17 (T = 300; 5 undetected). PRONTO's pre-fault flags come from historian interpolation: Air.T, WaterIn and Water.Density are straight ramps 20 times steeper than in the 10-minute normal window, so the lag behind any baseline exceeds a residual band fitted on that window. SKAB: K = 10 never met the 0.5% target on the anomaly-free run's own second half",
+      "runs": "19 development runs, 4 settings",
+      "verdict": "rejected",
+      "why": "Right idea for SKAB's day-to-day offsets, but the residual band fitted on a quiet window is still far too narrow for real ramps",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A160",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development: variants of the residual band. (a) floor of 0.1% or 0.3% of the tag's mean on the residual spread; (b) level-plus-trend prediction (Holt) residual, T 10/60/300, with and without the floor, so a straight ramp predicts itself; (c) median/MAD spread instead of sd; (d) at least 2 tags flagged in the same row",
+      "hypothesis": "A ramp-aware prediction, a floor, a robust spread or agreement between tags removes the drift flags without losing detection",
+      "evidence": "Development, best of each: (a) EWMA T 60/300 + floor: PRONTO 1/2, SKAB 6-8/17; (b) Holt T 300: SKAB 10/17, PRONTO 0/2 (Holt 300 + floor: pre-fault 4/300 and 20/600, both over 0.5%); (c) MAD: SKAB 4/17 (a narrower spread flags more); (d) 2 tags: SKAB 7/17 with only 0.6% of pre-fault rows flagged on average but 8 of 17 faults undetected, PRONTO 1/2",
+      "runs": "19 development runs, 13 settings",
+      "verdict": "rejected",
+      "why": "None passes both sources; requiring two tags trades false alarms for missed faults one for one on SKAB, whose faults show in one or two tags",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A161",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development: fast-versus-slow averages (fast 1/5/10/30 rows minus slow 300/600 rows, with and without a trend term, the baselines started on the first sample or as running averages), width K x sd or K x the largest normal gap, K chosen on held-out normal rows from 3-20 by the worst tag or by the share of rows with any tag flagged (the criterion's own measure)",
+      "hypothesis": "Averaging a few samples before comparing lifts small SKAB level shifts above the noise; choosing K on the any-tag rate matches the 0.5% criterion",
+      "evidence": "Development: best SKAB 12/17 (fast 30 / slow 600 with trend) but every K-chosen variant failed PRONTO day 3 (0-1/2): the 5-minute held-out half picks K = 4-6, far too narrow for drift 2.5 h later. Found a startup fault: a baseline started on one noisy sample keeps that sample's error for hundreds of rows (PRONTO FR.topsep.liquid flagged from row 0); starting as a running average removed it. The largest-gap width did no better (SKAB 9-11/17, PRONTO 0-1/2)",
+      "runs": "19 development runs, 40 settings",
+      "verdict": "rejected",
+      "why": "A K chosen on minutes of normal running cannot see the next hours of drift; the K search had to start higher",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A162",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Pre-registered a development / held-out split for closing the OPEN100 holdout pipe-layer gap (matrix row 8: holdout pipe-segment F1 0.872 < 0.88, sheet 6 0.729; development 0.911), written before any line_layers.py change. DEVELOPMENT (error classes diagnosed and any rule judged here only): OPEN100 sheets 0-5 against the key-graph derived truth, DEXPI 1.3 C01 and C02 against their XML piping, TE revision D and Bayer RT1 against the drawer's routes. HELD OUT, run once at the end with the frozen rule: OPEN100 sheets 6-11 (and DEXPI C03, reported, not used to choose). Holdout images may be looked at to name failure CLASSES only; no threshold is set from a holdout score. Guards: network and pairwise layers unchanged (trace_connections.py not edited; links compared before/after on every development sheet); TE rev D and Bayer stay 1.000. Criterion unchanged (pipe-segment F1 >= 0.88)",
+      "hypothesis": "If the holdout shortfall comes from error classes that also occur on the development sheets (sheet 5 0.726 and sheet 1 0.883 are the development's worst), a general rule chosen on development will lift the holdout without being fitted to it",
+      "evidence": "Split only; no candidate run yet. Not blind: the holdout per-sheet scores were already seen in A152 (6: 0.729, 7: 0.900, 8: 0.862, 9: 0.976, 10: 0.847, 11: 0.927)",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in A170, the rule change made under this split",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A163",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Frozen on development data, then scored once on the held-out runs (A153 split): csv_normal_bands.py --method drift. Per tag, the gap between a 10-sample and a 600-sample exponentially weighted average (both start as running averages of the export scored, so it sets its own level; the slow one as it stood a sample earlier); band on the gap = its fit mean +/- max(K x its fit sd, 1% of the tag's fit mean); K = smallest of 10, 12, 15, 20 with under 0.5% of held-out normal rows flagged on any tag",
+      "hypothesis": "Following each tag's own slow baseline stops normal drift being flagged, a floor of 1% of the reading stops quiet-window bands being absurdly narrow, and steps still show",
+      "evidence": "DEVELOPMENT (tuned on): PRONTO day 3 2/2 runs pass (0/300 and 0/600 pre-fault rows flagged; detected 631 s and 1923 s after the labelled starts); SKAB first half 10/17 (14 detected; 4 runs over 0.5% pre-fault: valve1/1, other/1, other/5, other/13 with 330/495; other/2-4 not detected). Level bands on the same runs: 0/2 and 1/17. HELD OUT (scored once, nothing changed after): PRONTO day 2 1/2 (blockage, detection only, at 1296 s; leakage still 347/361 pre-fault rows flagged on Air.P, Air.T, Air.Valve; level bands 1/2, 361/361); PRONTO day 4 1/2 (slugging1, detection only, at 891 s; slugging2 492/2770 pre-fault flagged, 17.8% against 100% with level bands; level 1/2); SKAB second half 2/17 (only 4/17 detected; 6 runs over 0.5% pre-fault, all on Temperature; level 0/17 with every run flagged throughout); HAI 21.03 2/2 (0/2111 and 0/2583 pre-attack rows flagged, detected 72 s and 52 s after the first attack, 4/5 attack events in each file; K = 20 did not meet the 0.5% target on train1's held-out half; level 0/2); TE fault runs: no pre-fault flag in any of 21, 14/21 detected on XMEAS 1-22 (level 16/21), 18/21 agree with fault_detection.json (level 20/21), fault 6 at 21 min (level 0). Matrix cells: pronto-day3 and hai-21.03 pass; pronto-day2, pronto-day4, skab (12/34) and te-braatz-runs fail",
+      "runs": "1 held-out pass over 2 + 2 + 17 + 2 + 21 runs (deterministic); 19 development runs",
+      "verdict": "superseded",
+      "why": "Better than the level bands on every real source and never worse in passing runs, but it does not reach the criterion on held-out PRONTO days 2 and 4 or on most held-out SKAB valve faults, which it does not detect at all (the level bands' 'detections' there came with every pre-fault row flagged). The development split put only 3 valve runs in SKAB's development half; the held-out half is mostly valve faults and that is where it fails. Not tuned further: anything more would be fitted to the held-out runs. Superseded by A171 (the same method with bands that follow the reading)",
+      "source": [
+        "docs/GENERALIZATION.md",
+        "examples/historian-csv/README.md"
+      ]
+    },
+    {
+      "id": "A164",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Made --method drift the default of csv_normal_bands.py (the generalization matrix runs the default); the TE scripts' fixed-level bands stay available as --method level, and examples/historian-csv/results was regenerated with the README command",
+      "hypothesis": "A default that does not flag normal running on real data is worth slower detection on the stationary TE simulator",
+      "evidence": "TE fault-6 example: 0/160 pre-fault flags either way; detection 21 min (7 samples: a 10-sample average needs 7 TE samples to carry FT-101 past its band) against 0 min; 99.1% of post-fault samples flagged against 100%. Faults 4, 11 and 14 are lost on XMEAS 1-22: TT-109 and TT-121 move 0.2-2.4 degC, the gap between the averages stays under 0.25 degC, inside their 1% floors. The level method still reproduces normal_bands.py exactly (asserted in test_csv_tools.py)",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "On real data the level method flags normal running before almost every fault, so its detections mean little; on a stationary simulation --method level is still the better choice and the README says so",
+      "source": [
+        "examples/historian-csv/README.md",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A165",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Pre-registered a second split for csv_normal_bands.py, written before any method was run on the new sources. DEVELOPMENT is now everything already seen: PRONTO days 2, 3 and 4 (6 runs), all 34 SKAB runs, HAI 21.03 test1 and test4, and the 21 TE fault runs. HELD OUT, scored once with the frozen method: three sources never run through the tool. Criterion unchanged (3 flagged rows in a row at or after the labelled start; at most 0.5% of pre-fault rows flagged). Label mappings (adapters in scripts/historian_adapters.py). UCI hydraulic: one row per 60-s cycle, each of the 17 sensors averaged over the cycle; three runs, one per cooler grade (cycles 1-732, 733-1464, 1465-2205), each opening with a 200-210-cycle block at constant grades; normal CSV = the block's first 100 cycles; score CSV = the rest of the section; fault start = the first cycle graded worse than the block on any component (cycles 211, 943 and 1675, each a pump going to severe leakage; in the last two an accumulator repair, 90 to 130 bar, sits 10 cycles earlier and counts as pre-fault). 110 pre-fault rows each, so no pre-fault flag is allowed. MetroPT-3: the 7 analogue signals (the 8 digital on/off signals left out: they are states, not measurements), timestamps as logged (about 10 s apart); normal CSV = 2020-02-01 00:00 to 2020-02-08 00:00; one run per reported failure (the PDF's 4 air leaks: 04-18 00:00, 05-29 23:30, 06-05 10:00, 07-15 14:30), score CSV = 24 h before the start to the report's end. BattLeDIM 2018: the 33 pressures, 3 flows and 1 tank level joined by timestamp (5 min; ';' separator, decimal comma); normal CSV = 2018-01-01 00:00 to 2018-01-08 13:25, before the first leak; one run per leak starting in 2018 in dataset_configuration.yaml (14), score CSV = 2 days before its start to the earlier of its repair or 7 days after; fault start = the leak start. Leaks already running count as pre-fault rows for later leaks",
+      "hypothesis": "Scoring sources nobody tuned on, under mappings fixed before the first run, measures whether the band method carries over",
+      "evidence": "Split and mappings only; no run on UCI, MetroPT-3 or BattLeDIM yet. Known strictness: a UCI run fails on a single pre-fault flag, and BattLeDIM's incipient leaks grow over weeks, so 7 days may hold little to detect",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in the entries that follow",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A166",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "dexpi_reader.py reads the three dialects A157's held-out run found. Comos: bubble letters only in TagName with the number on its loop; actuator drawn inside the valve (Equipment/Component nested in the PipingComponent) joined to the bubble by an information flow in either direction; flows to plant elements place the bubble. AutoCAD: Leader information flows and pipe segments ending at a bubble place it (not pipe); ControlValve-class instrument functions are operated valves. Proteus 3.3.3: ProcessInstrument / InstrumentComponent bubbles, in-line ProcessInstruments as the valve, actuator InstrumentComponent tied to its valve by their InstrumentLoop and to the controller by a SignalLine, associations by GUID in TagName. A bubble wired only to bubbles also takes the unit of the bubble it signals",
+      "hypothesis": "The remaining vendor failures that were reader gaps, not XML problems, come from these structures",
+      "evidence": "NOT HELD OUT: fixed on the files A157 had held out, so these numbers are after fixing gaps found on these files (A157 keeps the held-out result). Files pass: SPPID 51/55 -> 52/55, AutoCAD 40/54 -> 45/54, Comos 22/41 -> 33/41 (control functions 0/7 -> 7/7), AVEVA 24/24; DEXPI 1.2 control functions 36/44 -> 43/44. Development inputs unchanged (1.2 reference 11/11, C01-C03 2/3, 1.3 single-feature 23/31); C01 model, report and graph byte-identical. Remaining: items with no unit (no equipment or unconnected piping), 4 Comos I01 files whose bubble the XML ties to nothing, 6 AutoCAD duplicate-ID refusals (confirmed), AutoCAD I05 'IEC-?' control valve whose category reads as a control function",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Each structure has a synthetic test that failed first; read by element structure, not by exporter or file name. Not a generalization claim: a new tool's export is the next real test",
+      "source": [
+        "examples/from-dexpi-xml/README.md#other-tools-exports"
+      ]
+    },
+    {
+      "id": "A167",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development (A165 split; all of PRONTO days 2-4, SKAB, HAI 21.03 and TE): a second, slower detector beside the drift method's 10-vs-600-sample gap, a 60-sample average against the 600- or 3000-sample baseline, each with its own fitted spread and the same K, a row flagged if either fires",
+      "hypothesis": "A longer averaging window lifts slow valve degradation (SKAB) above the noise",
+      "evidence": "Against the frozen drift method (A163: PRONTO day 3 2/2, day 2 1/2, day 4 1/2, SKAB 12/34, TE 14/21 detected with no pre-fault flag): 60/600 SKAB 13/34 but TE 2/21 pass, pre-fault flags in 18 of 21 runs; 60/3000 SKAB 12/34, TE the same collapse. The slow gap's spread cannot be estimated from TE's 480 fit rows, shorter than the baseline window; SKAB's extra detections came with 16 runs over 0.5% pre-fault",
+      "runs": "65 development runs (HAI not run), 2 settings",
+      "verdict": "rejected",
+      "why": "A slow window needs a normal export several windows long; on short ones it flags normal running",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A168",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development: the gap's spread re-estimated while scoring, from the scored export's own unflagged rows (running variance over 600 or 1800 samples, seeded with the normal fit's spread as if from 60 or 300 samples, the first 30 samples excluded)",
+      "hypothesis": "SKAB runs are at another operating point than its normal run, with 3-4 times less flow noise; letting each export set its own noise level narrows the bands where it should",
+      "evidence": "SKAB 7/34, TE 0/21 and 2/21 detected, PRONTO day 4 0-1/2. A fault that develops over a few samples teaches the running spread before it crosses the band, so the band runs away from it (TE fault 6 not detected at all)",
+      "runs": "65 development runs, 2 settings",
+      "verdict": "rejected",
+      "why": "Self-adapting noise estimates learn the fault they should detect",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A169",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development: band scaled with the tag's current baseline relative to its normal mean (noise proportional to the reading, as in a flowmeter's percent-of-reading accuracy), unclipped or with K searched from 6; plus a ramp-following (level + trend) baseline with and without that scaling; plus a second path flagging when 2 tags are beyond half the band (10/600 or 60/600)",
+      "hypothesis": "Percent-of-reading bands carry noise across operating points (SKAB flow: 1.3% of reading on the normal run at 125, 1.1-1.5% in the valve runs at 32); a trend baseline absorbs pump warm-up ramps; agreement catches slow multi-tag drift",
+      "evidence": "Unclipped scaling: SKAB 14/34 with 32/34 detected but 20 runs over 0.5% pre-fault (Pressure, whose normal mean is near zero, and Accelerometer2RMS at 15% of its normal level get bands far too narrow; Temperature warm-up); K from 6: SKAB 10/34, TE 8/21. Trend baseline: SKAB 12/34 alone, 14/34 with scaling. Two-tag path: SKAB 11/34 and PRONTO day 3 1/2 (10/600), SKAB 15/34 and TE 3/21 (60/600)",
+      "runs": "65 development runs, 5 settings",
+      "verdict": "rejected",
+      "why": "Unbounded scaling over-narrows tags whose noise does not follow their level; the trend term and agreement paths added false flags faster than detections",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A170",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers.py pipe layer, two rules under the A162 split (trace_connections.py untouched, so the network and pairwise layers are the same by construction). (1) A 4-arm crossing counts as marked connected only if the residual ink also fills all four corners between its arms (at least the thinner run's width in pixels per corner, within the dot radius): a dot is a filled disc wider than the lines; stray pixels at a crossing (anti-aliasing, a thin line's ragged edge) touch both runs but fill only some corners, and strokes that touch only the two runs at an unmarked crossing are its own ink and join nothing. (2) A slanted residual stroke that carries on straight across a run (ink on both sides where it touches, each side reaching at least an arm's length, ARM_FRAC of a symbol side, from the run, the two sides on one straight line) does not join that run in the pipe layer: a label's leader drawn across a pipe to the next line, a dashed outline or hatching crossing a pipe. The traced output lists those points as slanted_crossings. Error classes found on development: OPEN100 sheet 1 (leaders across pipes, 5 crossing points), DEXPI C01 (26 'marked' crossings, 3 of them false junctions on the pipe; no development sheet had a real dot); the stray-pixel class was first seen on holdout sheet 6's images (allowed by A162 for naming classes), then confirmed on C01. Of the development errors left, OPEN100 sheet 5's (33 of 33 missed segments) come from line networks the tracer itself got wrong, and most others are key-graph omissions (an instrument leader or an arrow-tipped line drawn onto a pipe but not joined to it in the key), neither of which this layer can fix",
+      "hypothesis": "False junctions from crossing-corner specks and slanted leaders are general drawing artefacts, so removing them lifts the pipe layer on drawings it was not chosen on",
+      "evidence": "Development, before -> after: OPEN100 sheets 0-5 pipe-segment F1 0.911 -> 0.914 (P 0.937 -> 0.943, R 0.887; sheet 1 0.883 -> 0.907, others unchanged; junctions 154/165 found, 163 -> 161 predicted; instrument connections 0.835 unchanged); DEXPI C01 0.724 -> 0.902, C02 0.714 unchanged (DEXPI set with C03 0.681 -> 0.782; C03 0.545 unchanged; 15 -> 11 junctions predicted, 5 of 5 tees found); TE revision D 1.000 and Bayer 1.000 unchanged (instrument connections 1.000). Pairwise links identical on every sheet (OPEN100 0-5: 346, 72, 160, 92, 117, 278). Committed examples regenerated with their documented commands: sheet0_graph.json and dexpi-c01.* byte-identical. Held out, run once with the frozen rule: OPEN100 sheets 6-11 0.872 -> 0.898 (P 0.899 / R 0.897; 348 of 388 true segments, 387 predicted; sheets 6 0.729 -> 0.826, 7 0.900, 8 0.862, 9 0.976 unchanged, 10 0.847 -> 0.906, 11 0.927 -> 0.901; junctions 134 of 139, 148 predicted; instrument connections 0.827). Sheet 11 lost one: at (1909, 932) a signal line with an arrowhead lands on the pipe from above opposite a valve drop from below; it had been read as a marked crossing because of the arrowhead's ink, and is now a plain crossing, so the drop is no longer piped to the main line (the key has a tee there)",
+      "runs": "1 per development set; holdout 1 (single run)",
+      "verdict": "kept",
+      "why": "Holdout passes the pre-registered 0.88 with the frozen rule, but most of its gain came from the stray-pixel class, which was first seen on holdout images; the development gain on OPEN100 is small (+0.003), so treat the holdout lift as partly informed by the holdout, not a blind result. Known limit: two lines meeting a pipe from opposite sides with no dot (sheet 11) now read as a crossing",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A171",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Frozen on the A165 development runs, then scored once on the held-out sources: csv_normal_bands.py --method drift with the band following the reading. Band and gap mean are multiplied by the baseline's share of the tag's normal mean, kept between 0.5 and 1 (DRIFT_SCALE_MIN), so a tag running below its normal reading (SKAB's valve runs flow at 32 against 125 in the normal run) gets a proportionally narrower band, never under half and never wider than fitted. Everything else as A163",
+      "hypothesis": "Noise in proportion to the reading carries across operating points, so slow valve degradation that sat inside bands sized for another operating point shows, without losing PRONTO or HAI",
+      "evidence": "DEVELOPMENT, before (A163) -> after: PRONTO day 3 2/2 -> 2/2; day 2 1/2 -> 1/2; day 4 1/2 -> 1/2; SKAB 12/34 -> 16/34 (valve1 3 -> 5 of 16, valve2 1 -> 2 of 4, other 8 -> 9 of 14; 18 -> 23 detected; runs over 0.5% pre-fault 10 -> 13; no run lost); HAI 21.03 2/2 -> 2/2; TE no pre-fault flag in any run and 14/21 detected either way, fault 6 at 18 min (was 21). Level bands on the same runs: PRONTO 2/6, SKAB 1/34, HAI 0/2, TE 16/21. HELD OUT, scored once (drift / level for comparison): UCI hydraulic 0/3 / 0/3 (all detected; pre-fault flags 38, 1 and 16 of 110 rows, mostly PS4, and one is enough to fail); MetroPT-3 1/4 / 1/4 (failure 1 detected 1448 s after the reported start with 27 of 6301 pre-fault rows flagged; the others 187-211 pre-fault rows flagged on DV_pressure, a near-zero signal that pulses when the dryer towers discharge; failure 4 not detected; K = 20 did not meet the 0.5% target on the normal week); BattLeDIM 2018 0/14 / 1/14 (the drift method detects none of the 14 leaks and flags no pre-fault row; the level bands detect 11 but flag 10 runs' pre-fault rows, passing only p232, 7.5 h after its start). Diagnostic after the held-out run, not a tuning step: with the 1% floor removed BattLeDIM is still 1/14; only 1 of its 37 bands is set by the floor; the rest are set by the daily demand swing, which a 600-sample (50-hour) baseline turns into large gaps",
+      "runs": "1 held-out pass over 3 + 4 + 14 runs (deterministic); 65 development runs",
+      "verdict": "kept",
+      "why": "Kept as the default for real data on development evidence (more runs pass than with the level bands on every real development source, none lost). On the three held-out sources it does not reach the criterion (1 of 21 runs; the level bands 2 of 21): it does not carry over to cyclic processes (UCI's 60-s load cycles averaged per cycle, MetroPT's compressor duty cycle, BattLeDIM's daily demand). Not tuned further on them",
+      "source": [
+        "docs/GENERALIZATION.md",
+        "examples/historian-csv/README.md"
+      ]
+    },
+    {
+      "id": "A172",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Made AGENT-MADE first-pass answer keys (not reviewed by a person) for the corpus inputs that had none: PID2Graph-format graphml plus key.json for 5 Wikimedia Commons sheets (Sch_ma_P_ID, Sch_ma_P_ID1 by affine transfer from the first scan, RI_Sample_ISO, Pump_with_tank_pid_en, P_ID), the bottom-right quadrant of the OMRE 1958 scan, and PRONTO Figure 1; a HAI DCS loop list holding only the loops the HAI technical PDF supports. Oil_field_flow_metering.svg skipped (not a P&ID). No tool changed; data/agent_keys/",
+      "hypothesis": "An agent can key public sheets with no answer key well enough to run the row-1/3/8 tools on them, provided every number from such a key is labelled agent-made and kept apart from human-key results",
+      "evidence": "Counts (symbols / junctions / edges): Sch_ma_P_ID 39/1/41, Sch_ma_P_ID1 39/1/41 (affine residual max 3.9 px), RI_Sample_ISO 56/8/64, Pump_with_tank 16/3/20, P_ID 153/49/207, OMRE quadrant 85/24/95, PRONTO fig1 46/20/78. Every graphml scores F1 1.0 against itself with score_pid2graph (perfect control) and line_layers.pid2graph_truth gives networks_match_key_pairs true on each. Same-agent re-key of a seeded 20% of cells (NOT independent): symbol agreement F1 1.0 on every sheet re-keyed (samples of 3 to 37 symbols); link agreement 1.0 (Sch, Pump, PRONTO, OMRE), 0.968 (RI), 0.885 (P_ID; recheck did not follow lines out of the cells). HAI: 3 documented loops (P1-PC PIT01->PCV01, P1-LC LIT01->LCV01, P1-FC FT03->FCV03) plus the PCV02 leg; P1-TC cascade and P1-CC left unresolved. PRONTO: DeltaV module descriptions pair FIC301 with FIR305 and FIC302 with FIR302, the opposite of Figure 1's labels; no output tags are documented, so no PRONTO loop list was written",
+      "runs": "1 keying pass per sheet; 1 same-agent consistency re-key per sheet (except Sch_ma_P_ID1)",
+      "verdict": "inconclusive",
+      "why": "Inputs for measurement, not a measurement: the keys make cells scorable, but a self-consistency check by the same agent says nothing about whether the keys are right or whether their conventions (leader lines as edges, inline meters as general) match a human keyer's; matrix cells using them must say 'agent-made key'",
+      "source": [
+        "data/agent_keys/README.md"
+      ]
+    },
+    {
+      "id": "A173",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Adapter A2 (scripts/corpus_adapters.py build_vendor_keys): each DEXPI 1.2 vendor export with the exporting tool's own render beside it (same file stem; 81 files: SPPID 19, Comos 28, AVEVA 22, AutoCAD 12) becomes a keyed sheet: adapt_dexpi.convert_xml's symbols and links, their boxes put through a per-axis scale-and-offset map from drawing coordinates to render pixels fitted by iterated closest points from the XML's drawn geometry onto the render's ink; a dark-background screen capture is first made dark-on-light by colour distance from its background. Clean = at least 85% of the geometry within max(2 px, 0.003 x long side) of ink, at least 50 points more (per 100) than with the map moved 5 tolerances diagonally, and x/y scales within 0.8-1.25; anything else is n/a with its reason. The map check was revised twice while looking at overlays, before any tracer or scorer ran on these renders: arcs had been drawn as full circles (a geometry bug), and a dot-grid screenshot passed on chance, hence the by-chance rule. Scoring plan, fixed here before the first scored run: the mapped renders are HELD OUT (fresh drafting styles; no tracer or line_layers rule is chosen or changed on them). Per vendor, pooled over its mapped renders: network-layer connection F1 (trace_connections with the key's symbols, score_pid2graph, as matrix row 1) and pipe-segment F1 (line_layers with the key's symbols, process piping only, truth from the XML's PipingNetworkSegment chains, as the dexpi row-8 cell). Pass bars, if the cells are wired into the matrix, are the rows' own: 0.88 each",
+      "hypothesis": "The vendors' own renders, keyed from their own XML, test the tracer and the pipe layer on drafting styles neither was built on",
+      "evidence": "Mapping only, no scores yet: 22 of 81 renders map cleanly (SPPID 14 of 19, Comos 7 of 28, AVEVA 1 of 22, AutoCAD 0 of 12). n/a reasons: 37 have fewer than two scored symbols under adapt_dexpi's class rules (single-equipment and pipe-only test cases, nozzles not symbols), 6 have an item adapt_dexpi.convert_xml refuses (no geometry), 16 fail the map check (AVEVA and AutoCAD screen captures of 860-1370 px with the application window or a display grid around the drawing; Comos screenshots of 154-1303 px on a dot grid; one Comos file whose fitted map collapses one axis). Overlays checked by eye on a sample per vendor (SPPID 6, Comos 6, AVEVA 4, AutoCAD 3): every mapped one sits on the drawing; the AutoCAD and most AVEVA failures are close but off by a few pixels on low-resolution captures",
+      "runs": "0 scored (mapping only)",
+      "verdict": "kept",
+      "why": "Scores follow in the next entry for this adapter; a render that fails the map check is n/a with its reason, not scored",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A174",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Scored the 22 cleanly mapped DEXPI 1.2 vendor renders once, as pre-registered in A173 (held out: nothing chosen or changed on them): trace_connections and line_layers (frozen at A170) with the key's symbols; network-layer connection F1 by score_pid2graph, pipe-segment F1 by line_layers score_set('dexpi-1.2-vendor') against the XML's piping segments, process piping only",
+      "hypothesis": "The vendors' own renders test the tracer and the pipe layer on drafting styles neither was built on",
+      "evidence": "Pooled per vendor. SPPID (14 renders): network F1 0.844 (92 of 104 key links, 114 predicted), pipe F1 0.679 (55 of 81 segments, 81 predicted); its three full sheets C01 EX02 / C01 EX03 / C02 / C03: network 0.794 / 0.754 / 0.933 / 0.968, pipe 0.609 / 0.609 / 0.811 / 0.720. Comos (7): network 0.436 (17 of 31, 47 predicted), pipe 0.246 (7 of 19, 38 predicted); C01 SAG network 0.449, pipe 0.158 with 6 junctions predicted and none true, C03 SAG 0.400 / 0.375. AVEVA (1, P01: two items, one pipe): 1.000 / 1.000. AutoCAD: none mapped. All 22: network 0.738, pipe 0.570. 10 of the 22 are single-feature test cases with 0-2 links (several with no pipe truth at all), so the vendor figures rest on the C01-C03 sheets. Both rows' 0.88 bars would fail for SPPID and Comos",
+      "runs": "1 (single run)",
+      "verdict": "inconclusive",
+      "why": "A measurement on fresh real-world styles, reported as found; the low Comos figures were not diagnosed, so nothing about their cause is claimed. Not wired into the generalization matrix yet",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A175",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Generalization matrix (scripts/corpus_matrix.py) wired to the tools as they now are, no criterion changed: row 6 runs csv_normal_bands.py's default drift method and records it per cell; the TE cell's README check reads the fault-6 statement the README makes for the method run (not a hard-coded 0 min); HAI attack events are scored with the method and K the cell scored; three held-out cells added (uci-hydraulic, metropt3, battledim via historian_adapters.py, pinned in fetch_corpus.py). Row 7: a second reading set after the results were seen (unplaced items with a reason count as present) reported beside the pre-registered result, and the AutoCAD I05 'IEC-?' truth limit stated. Agent-made keys (A172) scored on rows 1, 2, 3 and 8 for OMRE quadrant, five Commons sheets and PRONTO Figure 1, marked (agent-made key) everywhere and kept out of the independent-family count. Vendor renders (A173/A174) wired into rows 1 and 8. Row 8 re-run on every input after line_layers.py A170",
+      "hypothesis": "Wiring the changed tools into the matrix reproduces the attempts' own numbers and shows where the tools stand on every input",
+      "evidence": "Full run plus row 8 and the vendor row-1 cell re-run: 61 pass, 24 fail, 8 n/a. Row 6 (drift): TE 18/21 agree with the shipped bands (14/21 detected; README fault-6 statement 18 min / 0 pre-fault reproduced), PRONTO day 3 pass, days 2 and 4 1/2 each, SKAB 16/34, HAI 2/2 (4/5 attack events in each file); held out: UCI 0/3, MetroPT-3 1/4, BattLeDIM 0/14 (as A171). Row 7 primary: 1.3 cases 23/31, reference 11/11, SPPID 52/55, Comos 33/41, AVEVA 24/24, AutoCAD 45/54, cross-vendor 35/45; second reading 31/31, 11/11, 55/55, 41/41, 24/24, 54/54. Row 4: 1.3 cases 2/2, reference 2/2, SPPID 11/11 loops tags present; Comos, AVEVA, AutoCAD n/a. Agent-made keys: tracer F1 OMRE 0.561, Commons 0.697, PRONTO 0.918; pipe F1 0.244, 0.745, 0.810; controls and intake pass on all three. Vendor renders (22 of 81 mapped): network F1 0.738, pipe 0.570 (as A174). Row 8 after A170: OPEN100 dev 0.914, holdout 0.898 (now passes; only partly blind), DEXPI 0.782, TE rev D and Bayer 1.000",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "Matrix numbers reproduce A170, A171 and A174 exactly; agent-key and second-reading results are labelled as such and never replace a primary or human-keyed result",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
     }
   ],
   "not_tried": [
@@ -2519,6 +3117,56 @@
       "why_not_yet": "More machinery than 13 stages need; a checkout changes timestamps.",
       "source": [
         "docs/JOURNAL.md#45-start-from-the-data-assess-both-datasets-first-then-make-every-correction-travel"
+      ]
+    },
+    {
+      "id": "N056",
+      "function": "replay_and_bands",
+      "status": "not-done",
+      "idea": "Fit normal bands on a longer, multi-day window of normal running (PRONTO has more normal periods across its test days)",
+      "why_not_yet": "Found 2026-10-29 that 10 minutes is far too short; not yet tried",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "N057",
+      "function": "replay_and_bands",
+      "status": "not-done",
+      "idea": "Drift-tolerant bands: rolling or rate-of-change limits instead of fixed mean plus K standard deviations",
+      "why_not_yet": "Found 2026-10-29 that fixed bands flag slow drift; not yet tried",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "N058",
+      "function": "line_tracing",
+      "status": "open-question",
+      "idea": "Derive a pipe-adjacency key from the PID2Graph keys' connector and crossing nodes (sheet 0: 225 connectors, all with 2 edges; 71 crossings with 1 to 3 edges), to score the pipe layer on OPEN100",
+      "why_not_yet": "What those nodes mean for adjacency (tee, bend, how a crossing's arms pair) is not documented; guessing it would make a key to fit the method",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "N059",
+      "function": "line_tracing",
+      "status": "not-done",
+      "idea": "Score the pipe layer with a model's own symbols and on scans, and review the layered sheet-0 sample",
+      "why_not_yet": "Row 8 uses the key's symbols on clean sheets only; the sample is drawn but not reviewed",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "N060",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "Have a person review or independently re-key the agent-made keys in data/agent_keys/ (one OMRE quadrant by two keyers for an agreement figure, as the corpus note asks), and confirm the HAI P1-TC cascade, the PRONTO FIC301/FIC302 pairing and the PRONTO output tags",
+      "why_not_yet": "needs a person; the agent's own re-key is not independent",
+      "source": [
+        "data/agent_keys/README.md"
       ]
     }
   ]

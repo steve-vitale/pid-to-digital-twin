@@ -1,0 +1,2739 @@
+{
+ "format": "statement-sample-1",
+ "statements_file": "statements.json",
+ "statements_sha256": "68820ee21f899f2188b3c18e60b76f7f3c9f1b2b4307eb3d8bc1afdc6fd02ecc",
+ "graph": "examples/graph-export/sheet0_graph.json",
+ "seed": 1029,
+ "n": 60,
+ "method": "stratified random sample; strata = statement type x consequence rank; every stratum gets min(2, its size), the rest is split in proportion to stratum size (largest remainder); within a stratum, random.Random('1029:<stratum>').sample over statements sorted by id. Small strata are over-sampled on purpose: use each stratum's weight (population / sampled) for a plant-wide estimate.",
+ "strata": [
+  {
+   "stratum": "attribute|2",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "population": 61,
+   "sampled": 6,
+   "weight": 10.1667
+  },
+  {
+   "stratum": "attribute|4",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "population": 94,
+   "sampled": 8,
+   "weight": 11.75
+  },
+  {
+   "stratum": "attribute|5",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "population": 1,
+   "sampled": 1,
+   "weight": 1.0
+  },
+  {
+   "stratum": "identity|4",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "population": 102,
+   "sampled": 9,
+   "weight": 11.3333
+  },
+  {
+   "stratum": "relation|2",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "population": 446,
+   "sampled": 36,
+   "weight": 12.3889
+  }
+ ],
+ "statements": [
+  {
+   "id": "st-095b82e97097",
+   "subject": "S0-OP009",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "Off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP009) belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP009)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     807.5,
+     838.3,
+     830.8
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 808, 838, 831] (0-1000 scale), read as “HIGH PRESSURE STEAM DRAINS HPD PID 190-1”",
+   "targets": [
+    [
+     "claim",
+     "S0-OP009",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     807.5,
+     838.3,
+     830.8
+    ],
+    "image": "evidence/s0_c71bad3797.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-22f133dfecad",
+   "subject": "S0-OP005",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "Off-page connector “MAIN STEAM BY-PASS” (S0-OP005) belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "off-page connector “MAIN STEAM BY-PASS” (S0-OP005)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     526.3,
+     838.3,
+     549.0
+    ],
+    "read_as": "MAIN STEAM BY-PASS",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 526, 838, 549] (0-1000 scale), read as “MAIN STEAM BY-PASS”",
+   "targets": [
+    [
+     "claim",
+     "S0-OP005",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     526.3,
+     838.3,
+     549.0
+    ],
+    "image": "evidence/s0_a8b182298d.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-57f5e7aa1451",
+   "subject": "S0-OP007",
+   "predicate": "refers_to_drawing",
+   "object": "190-1",
+   "text": "Off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP007) continues on drawing 190-1.",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP007)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     686.9,
+     838.3,
+     710.2
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 687, 838, 710] (0-1000 scale), read as “HIGH PRESSURE STEAM DRAINS HPD PID 190-1”",
+   "targets": [
+    [
+     "claim",
+     "S0-OP007",
+     "refers_to_drawing"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     686.9,
+     838.3,
+     710.2
+    ],
+    "image": "evidence/s0_7c6b1908b0.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-6c5931dfa7fc",
+   "subject": "S0-IN027",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "MSV 1404 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "MSV 1404",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     646.9,
+     242.2,
+     662.6,
+     265.5
+    ],
+    "read_as": "MSV 1404",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [647, 242, 663, 266] (0-1000 scale), read as “MSV 1404”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN027",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     646.9,
+     242.2,
+     662.6,
+     265.5
+    ],
+    "image": "evidence/s0_d87e3a5df3.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-7c2eb17f5ee4",
+   "subject": "S0-IN024",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "TCV 1403 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "TCV 1403",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     328.2,
+     478.0,
+     352.0
+    ],
+    "read_as": "TCV 1403",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [462, 328, 478, 352] (0-1000 scale), read as “TCV 1403”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN024",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     328.2,
+     478.0,
+     352.0
+    ],
+    "image": "evidence/s0_57e93178d5.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-aa132bce9164",
+   "subject": "S0-IN035",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "TCV 1408 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "attribute|2",
+   "group": "TCV 1408",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     540.9,
+     633.4,
+     563.6
+    ],
+    "read_as": "TCV 1408",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [618, 541, 633, 564] (0-1000 scale), read as “TCV 1408”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN035",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     540.9,
+     633.4,
+     563.6
+    ],
+    "image": "evidence/s0_e48e71c8c0.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-077c35bcd8f4",
+   "subject": "S0-IN018",
+   "predicate": "is_a",
+   "object": "final element (valve)",
+   "text": "PSV 1407 is a final element (valve).",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "PSV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "read_as": "PSV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [506, 142, 522, 166] (0-1000 scale), read as “PSV 1407”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN018",
+     "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "image": "evidence/s0_93781321e8.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-31f1e0056e51",
+   "subject": "S0-IN021",
+   "predicate": "variable",
+   "object": "radiation",
+   "text": "RE 1403 measures radiation.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "RE 1403",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     515.5,
+     223.3,
+     530.7,
+     246.0
+    ],
+    "read_as": "RE 1403",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [516, 223, 531, 246] (0-1000 scale), read as “RE 1403”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN021",
+     "variable"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     515.5,
+     223.3,
+     530.7,
+     246.0
+    ],
+    "image": "evidence/s0_ea663abc29.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-53aeae404037",
+   "subject": "S0-IN009",
+   "predicate": "variable",
+   "object": "pressure",
+   "text": "PT 14087 measures pressure.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "PT 14087",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     379.0,
+     222.8,
+     395.3,
+     247.1
+    ],
+    "read_as": "PT 14087",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [379, 223, 395, 247] (0-1000 scale), read as “PT 14087”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN009",
+     "variable"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     379.0,
+     222.8,
+     395.3,
+     247.1
+    ],
+    "image": "evidence/s0_6a93d6750f.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-70ca9eb2dbc2",
+   "subject": "S0-IN013",
+   "predicate": "variable",
+   "object": "temperature",
+   "text": "TCV 1402 is a valve in a temperature loop.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "TCV 1402",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     362.8,
+     326.0,
+     378.5,
+     349.8
+    ],
+    "read_as": "TCV 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [363, 326, 378, 350] (0-1000 scale), read as “TCV 1402”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN013",
+     "variable"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     362.8,
+     326.0,
+     378.5,
+     349.8
+    ],
+    "image": "evidence/s0_9d2ad46412.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-7c14ee05d993",
+   "subject": "S0-IN034",
+   "predicate": "is_a",
+   "object": "final element (valve)",
+   "text": "MSBV 1407 is a final element (valve).",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "MSBV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     639.3,
+     497.5,
+     655.6,
+     521.2
+    ],
+    "read_as": "MSBV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [639, 498, 656, 521] (0-1000 scale), read as “MSBV 1407”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN034",
+     "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     639.3,
+     497.5,
+     655.6,
+     521.2
+    ],
+    "image": "evidence/s0_4b31ad7758.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-98438a81293f",
+   "subject": "S0-GN008",
+   "predicate": "duplicate_tag",
+   "object": true,
+   "text": "The tag T (S0-GN008) appears more than once on the drawing.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "T (S0-GN008)",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     465.5,
+     373.1,
+     472.6,
+     383.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [466, 373, 473, 384] (0-1000 scale), read as “T”",
+   "targets": [
+    [
+     "claim",
+     "S0-GN008",
+     "duplicate_tag"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     465.5,
+     373.1,
+     472.6,
+     383.9
+    ],
+    "image": "evidence/s0_779fce9965.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c613444d1c54",
+   "subject": "S0-IN025",
+   "predicate": "variable",
+   "object": "temperature",
+   "text": "TE 14091A measures temperature.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "TE 14091A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     605.8,
+     233.0,
+     621.5,
+     256.3
+    ],
+    "read_as": "TE 14091A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [606, 233, 622, 256] (0-1000 scale), read as “TE 14091A”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN025",
+     "variable"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     605.8,
+     233.0,
+     621.5,
+     256.3
+    ],
+    "image": "evidence/s0_2d852244d9.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f11eecd01df5",
+   "subject": "S0-VL025",
+   "predicate": "is_a",
+   "object": "valve",
+   "text": "Untagged valve S0-VL025 is a valve.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "group": "untagged valve S0-VL025",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     592.3,
+     374.7,
+     600.4,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [592, 375, 600, 383] (0-1000 scale)",
+   "targets": [
+    [
+     "claim",
+     "S0-VL025",
+     "class"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     592.3,
+     374.7,
+     600.4,
+     382.8
+    ],
+    "image": "evidence/s0_22a15cf285.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-77363a88b51c",
+   "subject": "SYS-0",
+   "predicate": "described_as",
+   "object": "Public example: PID2Graph OPEN100 sheet 0 (CC BY-SA 4.0)",
+   "text": "SYS-0 is described as “Public example: PID2Graph OPEN100 sheet 0 (CC BY-SA 4.0)”.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "group": "SYS-0",
+   "system": "the plant",
+   "subject_kind": "system",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "claim",
+     "SYS-0",
+     "name"
+    ]
+   ],
+   "evidence": {
+    "kind": "none",
+    "note": "no source of its own"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-171c9b35551d",
+   "subject": "S0-VL026",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged valve S0-VL026 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "untagged valve S0-VL026",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     374.7,
+     626.9,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [618, 375, 627, 383] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-VL026"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     374.7,
+     626.9,
+     382.8
+    ],
+    "image": "evidence/s0_205a4466ce.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-41733e76424d",
+   "subject": "S0-IN016",
+   "predicate": "kind",
+   "object": "instrument",
+   "text": "PSV 1405 is an instrument.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "PSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "read_as": "PSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [463, 142, 479, 166] (0-1000 scale), read as “PSV 1405”",
+   "targets": [
+    [
+     "node",
+     "S0-IN016"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "image": "evidence/s0_4e61673a80.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-5f79c54f4985",
+   "subject": "S0-OP003",
+   "predicate": "kind",
+   "object": "offpage_connector",
+   "text": "There is an off-page connector reading “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003): the line continues on another drawing.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     333.1,
+     838.3,
+     356.3
+    ],
+    "read_as": "TBS PID 240-1 TURBINE SYSTEM",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [768, 333, 838, 356] (0-1000 scale), read as “TBS PID 240-1 TURBINE SYSTEM”",
+   "targets": [
+    [
+     "node",
+     "S0-OP003"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     333.1,
+     838.3,
+     356.3
+    ],
+    "image": "evidence/s0_6af6711895.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-bdd07516e53a",
+   "subject": "S0-IN021",
+   "predicate": "kind",
+   "object": "instrument",
+   "text": "RE 1403 is an instrument.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "RE 1403",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     515.5,
+     223.3,
+     530.7,
+     246.0
+    ],
+    "read_as": "RE 1403",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [516, 223, 531, 246] (0-1000 scale), read as “RE 1403”",
+   "targets": [
+    [
+     "node",
+     "S0-IN021"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     515.5,
+     223.3,
+     530.7,
+     246.0
+    ],
+    "image": "evidence/s0_ea663abc29.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-cc666bc04ec2",
+   "subject": "S0-IN005",
+   "predicate": "kind",
+   "object": "instrument",
+   "text": "TE 14084B is an instrument.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "TE 14084B",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     246.6,
+     327.1,
+     261.7,
+     350.4
+    ],
+    "read_as": "TE 14084B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [247, 327, 262, 350] (0-1000 scale), read as “TE 14084B”",
+   "targets": [
+    [
+     "node",
+     "S0-IN005"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     246.6,
+     327.1,
+     261.7,
+     350.4
+    ],
+    "image": "evidence/s0_201a2f8aa1.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d2a6554410c8",
+   "subject": "S0-VL035",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged valve S0-VL035 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "untagged valve S0-VL035",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     578.2,
+     682.1,
+     586.4,
+     690.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [578, 682, 586, 691] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-VL035"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     578.2,
+     682.1,
+     586.4,
+     690.7
+    ],
+    "image": "evidence/s0_394da20281.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d82c4ba682e8",
+   "subject": "S0-GN018",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged general S0-GN018 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "untagged general S0-GN018",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     557.7,
+     665.8,
+     564.7,
+     673.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [558, 666, 565, 673] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-GN018"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     557.7,
+     665.8,
+     564.7,
+     673.4
+    ],
+    "image": "evidence/s0_21358b9b9e.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-eb7742296f50",
+   "subject": "S0-IN017",
+   "predicate": "kind",
+   "object": "instrument",
+   "text": "PSV 1406 is an instrument.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "PSV 1406",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "read_as": "PSV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [484, 142, 501, 166] (0-1000 scale), read as “PSV 1406”",
+   "targets": [
+    [
+     "node",
+     "S0-IN017"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "image": "evidence/s0_14fa8bc4b3.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-fcc7294bed53",
+   "subject": "S0-IN031",
+   "predicate": "kind",
+   "object": "instrument",
+   "text": "TCV 1406 is an instrument.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "group": "TCV 1406",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     603.1,
+     331.5,
+     618.8,
+     354.7
+    ],
+    "read_as": "TCV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [603, 332, 619, 355] (0-1000 scale), read as “TCV 1406”",
+   "targets": [
+    [
+     "node",
+     "S0-IN031"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     603.1,
+     331.5,
+     618.8,
+     354.7
+    ],
+    "image": "evidence/s0_b4c2a7f531.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-03d0af69ecb3",
+   "subject": "S0-VL010",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "Untagged valve S0-VL010 and untagged general S0-GN009 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL010",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-180"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_3a6d772744.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-057cba247420",
+   "subject": "S0-IN029",
+   "predicate": "edge:connects",
+   "object": "S0-VL025",
+   "text": "TE 14092A and untagged valve S0-VL025 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "TE 14092A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-293"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_75c93c890b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-0b7b8c3d895d",
+   "subject": "S0-IN025",
+   "predicate": "edge:connects",
+   "object": "S0-VL022",
+   "text": "TE 14091A and untagged valve S0-VL022 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "TE 14091A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-252"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_872589862b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-0ce31929a199",
+   "subject": "S0-VL018",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "Untagged valve S0-VL018 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL018",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     448.2,
+     410.9,
+     456.9,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [448, 411, 457, 421] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00066"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     448.2,
+     410.9,
+     456.9,
+     420.7
+    ],
+    "image": "evidence/s0_1a15590040.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-0ec4424da2a9",
+   "subject": "S0-IN011",
+   "predicate": "edge:contains",
+   "object": "S0-VL002",
+   "text": "TE 14089A is drawn attached to untagged valve S0-VL002.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "TE 14089A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     354.2,
+     295.8,
+     369.8,
+     320.1
+    ],
+    "read_as": "TE 14089A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [354, 296, 370, 320] (0-1000 scale), read as “TE 14089A”",
+   "targets": [
+    [
+     "edge",
+     "E00014"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     354.2,
+     295.8,
+     369.8,
+     320.1
+    ],
+    "image": "evidence/s0_1bd2b44f83.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-16be682dc69d",
+   "subject": "S0-IN010",
+   "predicate": "edge:connects",
+   "object": "S0-VL011",
+   "text": "PT 14088 and untagged valve S0-VL011 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "PT 14088",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-084"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_9a83a9319f.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-17aa6bdfe05c",
+   "subject": "S0-VL010",
+   "predicate": "edge:connects",
+   "object": "S0-VL012",
+   "text": "Untagged valve S0-VL010 and untagged valve S0-VL012 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL010",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-174"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_060255f120.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-19c8156d3d9b",
+   "subject": "S0-VL011",
+   "predicate": "edge:connects",
+   "object": "S0-VL016",
+   "text": "Untagged valve S0-VL011 and untagged valve S0-VL016 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL011",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-187"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_49f1a052e1.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-1a900530a99a",
+   "subject": "S0-VL012",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "Untagged valve S0-VL012 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL012",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     506.1,
+     167.6,
+     512.6,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [506, 168, 513, 183] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00057"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     506.1,
+     167.6,
+     512.6,
+     183.3
+    ],
+    "image": "evidence/s0_35fefcf86c.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-1b38afc721b4",
+   "subject": "S0-VL024",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "Untagged valve S0-VL024 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL024",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     595.6,
+     343.4,
+     604.2,
+     364.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [596, 343, 604, 364] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00074"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     595.6,
+     343.4,
+     604.2,
+     364.4
+    ],
+    "image": "evidence/s0_948f1fdc4a.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-27491cff2bd0",
+   "subject": "S0-VL013",
+   "predicate": "edge:connects",
+   "object": "S0-VL020",
+   "text": "Untagged valve S0-VL013 and MSCV-XXX are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL013",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-202"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_d132525a2f.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-372e71a3302e",
+   "subject": "S0-VL022",
+   "predicate": "edge:connects",
+   "object": "S0-VL025",
+   "text": "Untagged valve S0-VL022 and untagged valve S0-VL025 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL022",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-272"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_5d779e22ea.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-3ae8130220d5",
+   "subject": "S0-GN004",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "Untagged general S0-GN004 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged general S0-GN004",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     301.7,
+     266.0,
+     318.5,
+     286.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [302, 266, 318, 287] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00044"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     301.7,
+     266.0,
+     318.5,
+     286.6
+    ],
+    "image": "evidence/s0_ca9888f506.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-3b5cea69586a",
+   "subject": "S0-VL009",
+   "predicate": "edge:connects",
+   "object": "S0-VL016",
+   "text": "Untagged valve S0-VL009 and untagged valve S0-VL016 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL009",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-170"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_605b91479b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-402efb646274",
+   "subject": "S0-VL023",
+   "predicate": "edge:connects",
+   "object": "S0-GN011",
+   "text": "Untagged valve S0-VL023 and M are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL023",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-281"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_6e42a889cc.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-49cddb126ad0",
+   "subject": "S0-VL025",
+   "predicate": "edge:connects",
+   "object": "S0-VL032",
+   "text": "Untagged valve S0-VL025 and untagged valve S0-VL032 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL025",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-314"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_854df95cea.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-6e04a550fe64",
+   "subject": "S0-GN013",
+   "predicate": "edge:connects",
+   "object": "S0-VL027",
+   "text": "Untagged general S0-GN013 and untagged valve S0-VL027 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged general S0-GN013",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-318"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_80775f9dd3.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-6e483468a578",
+   "subject": "S0-GN010",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "H belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "H",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     639.9,
+     256.8,
+     645.3,
+     269.8
+    ],
+    "read_as": "H",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [640, 257, 645, 270] (0-1000 scale), read as “H”",
+   "targets": [
+    [
+     "edge",
+     "E00071"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     639.9,
+     256.8,
+     645.3,
+     269.8
+    ],
+    "image": "evidence/s0_81aa101e8a.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-803c54ee88dc",
+   "subject": "S0-OP005",
+   "predicate": "edge:contains",
+   "object": "SYS-0",
+   "text": "Off-page connector “MAIN STEAM BY-PASS” (S0-OP005) is in system SYS-0.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "off-page connector “MAIN STEAM BY-PASS” (S0-OP005)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     526.3,
+     838.3,
+     549.0
+    ],
+    "read_as": "MAIN STEAM BY-PASS",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 526, 838, 549] (0-1000 scale), read as “MAIN STEAM BY-PASS”",
+   "targets": [
+    [
+     "edge",
+     "E00097"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     526.3,
+     838.3,
+     549.0
+    ],
+    "image": "evidence/s0_a8b182298d.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-82df631eca75",
+   "subject": "S0-IN008",
+   "predicate": "edge:connects",
+   "object": "S0-VL013",
+   "text": "PT 14086 and untagged valve S0-VL013 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "PT 14086",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-055"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_3d3a079396.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8b244ca792d6",
+   "subject": "S0-GN012",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "T (S0-GN012) belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "T (S0-GN012)",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     606.4,
+     373.1,
+     613.4,
+     383.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [606, 373, 613, 384] (0-1000 scale), read as “T”",
+   "targets": [
+    [
+     "edge",
+     "E00076"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     606.4,
+     373.1,
+     613.4,
+     383.9
+    ],
+    "image": "evidence/s0_00c6659557.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8d0dc063182a",
+   "subject": "S0-VL014",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "Untagged valve S0-VL014 and untagged general S0-GN009 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL014",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-209"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_09a08b46b5.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-922504305fbe",
+   "subject": "S0-VL022",
+   "predicate": "edge:connects",
+   "object": "S0-VL032",
+   "text": "Untagged valve S0-VL022 and untagged valve S0-VL032 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL022",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-277"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_9308895bd8.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-9c473cfc4498",
+   "subject": "S0-VL016",
+   "predicate": "edge:connects",
+   "object": "S0-GN008",
+   "text": "Untagged valve S0-VL016 and T (S0-GN008) are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL016",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-219"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_45faadca13.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ad1453c5be51",
+   "subject": "S0-GN004",
+   "predicate": "edge:connects",
+   "object": "S0-VL010",
+   "text": "Untagged general S0-GN004 and untagged valve S0-VL010 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged general S0-GN004",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-015"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_641446f6e0.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ad7967956ad1",
+   "subject": "S0-VL009",
+   "predicate": "edge:connects",
+   "object": "S0-VL013",
+   "text": "Untagged valve S0-VL009 and untagged valve S0-VL013 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL009",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-166"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_bf3b4f0800.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b027e07bea7b",
+   "subject": "S0-VL021",
+   "predicate": "edge:connects",
+   "object": "S0-IN033",
+   "text": "Untagged valve S0-VL021 and TE 14093A are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL021",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-247"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_a7d2676b62.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b22fde505337",
+   "subject": "S0-VL020",
+   "predicate": "edge:connects",
+   "object": "S0-VL032",
+   "text": "MSCV-XXX and untagged valve S0-VL032 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "MSCV-XXX",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-237"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_8392c55a96.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c12366d5cb91",
+   "subject": "S0-OP003",
+   "predicate": "edge:connects",
+   "object": "S0-VL031",
+   "text": "Off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003) and untagged valve S0-VL031 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-289"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_7a25c63d79.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-de592713b312",
+   "subject": "S0-VL014",
+   "predicate": "edge:connects",
+   "object": "S0-VL016",
+   "text": "Untagged valve S0-VL014 and untagged valve S0-VL016 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL014",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-208"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_ec84b6eb41.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-e52e34761d56",
+   "subject": "S0-VL014",
+   "predicate": "edge:connects",
+   "object": "S0-GN007",
+   "text": "Untagged valve S0-VL014 and untagged general S0-GN007 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL014",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-205"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_aad86c5842.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-e66a5c4c6242",
+   "subject": "S0-VL010",
+   "predicate": "edge:connects",
+   "object": "S0-IN016",
+   "text": "Untagged valve S0-VL010 and PSV 1405 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL010",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-172"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_51b988a73c.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f03ecbaa38e8",
+   "subject": "S0-IN009",
+   "predicate": "edge:connects",
+   "object": "S0-GN006",
+   "text": "PT 14087 and untagged general S0-GN006 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "PT 14087",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-065"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_cce1c4660d.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f45b59a2487f",
+   "subject": "S0-IN009",
+   "predicate": "edge:connects",
+   "object": "S0-VL016",
+   "text": "PT 14087 and untagged valve S0-VL016 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "PT 14087",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-075"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_65ab2cbe35.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f5a728e4d1ff",
+   "subject": "S0-VL006",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "Untagged valve S0-VL006 belongs to tank MSS-XSS-140 (assigned by tracing the lines).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL006",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     357.4,
+     410.9,
+     366.1,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [357, 411, 366, 421] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00051"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     357.4,
+     410.9,
+     366.1,
+     420.7
+    ],
+    "image": "evidence/s0_fbfbecd2dd.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-fafef2411d5d",
+   "subject": "S0-VL003",
+   "predicate": "edge:connects",
+   "object": "S0-VL016",
+   "text": "Untagged valve S0-VL003 and untagged valve S0-VL016 are joined by a line on the drawing (direction not shown).",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "group": "untagged valve S0-VL003",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-135"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_580e8f1e81.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  }
+ ]
+}

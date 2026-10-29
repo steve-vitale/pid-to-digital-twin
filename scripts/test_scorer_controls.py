@@ -19,9 +19,12 @@ DATA = Path(__file__).resolve().parent.parent / "data" / "external" / "pid2graph
 def perfect_prediction(graphml, png):
     w, h = sc.png_size(png)
     nodes, adj = sc.load_key(graphml, w, h)
-    syms = [{"id": k, "class": v["class"], "box": v["box"], "tag": None, "confidence": 1}
+    # Key node ids can hold "/" (inlet/outlet79); ids in a prediction must be safe for the intake, which refuses
+    # them. The scorer matches by box, so renaming ids changes no score.
+    safe = lambda k: k.replace("/", "_")  # noqa: E731
+    syms = [{"id": safe(k), "class": v["class"], "box": v["box"], "tag": None, "confidence": 1}
             for k, v in nodes.items() if v["class"] in sc.SCORED]
-    conns = [{"from": a, "to": b} for a, b in (tuple(l) for l in sc.asset_links(nodes, adj))]
+    conns = [{"from": safe(a), "to": safe(b)} for a, b in (tuple(l) for l in sc.asset_links(nodes, adj))]
     return {"symbols": syms, "connections": conns}
 
 

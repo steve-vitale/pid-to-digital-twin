@@ -3277,3 +3277,65 @@ moved), and that is what this sentence says.
 
 **Lesson:** "it supports X" means nothing until X runs from a clean clone. Every one of the six ways in needed new
 code or a fix before it ran on someone else's input, and the one I estimated, I estimated wrong.
+
+## 64. Review everything, measure what the graph says, and widen the corpus until it fails honestly
+
+**What:** 2026-10-29. Every feature now has an entry in `data/features.json` (what it is for, who it serves, its
+guide, example outputs and tests), and every review is recorded in `data/reviews.json` with the hashes of the files
+it checked, so "proven" means a passing independent review that still matches today's outputs
+([FEATURES.md](FEATURES.md)). Four review rounds by fresh Claude agents, with Codex (another model family) on the
+opportunity screen and the estimator, recorded 89 findings in rounds 2 to 4 (46 should-fix, the rest nits); every should-fix was fixed or is listed open. Proven features went from 2 to 8 of 16 in
+this batch; the rest are in a final confirmation round.
+
+**The statement review measured something the earlier checks couldn't.** Every graph claim rendered as a plain
+sentence, and a seeded, stratified sample checked against its source by an independent agent
+([statement review](../examples/statement-review/README.md)):
+- The Bayer model, written from the CSB report: 5 of 57 sentences don't match their cited source (8.8%, 95%
+  interval 3.8–18.9%). Five real model errors that the structural and figure checks had passed.
+- The sheet-0 extraction: 3.3% read as written, 40% read as a person would. The extracted "links" mean "on the
+  same drawn line network", which is the public answer key's definition, not "a pipe runs between them". Only 5
+  of 27 sampled links were next to each other.
+
+**So the graph now has layers** ([GRAPH_EXPORT.md](GRAPH_EXPORT.md#three-layers-for-the-lines)): pipe segments and
+their tees (`piped_to`, junctions by kind), line networks (`on_network`), and the network pairs the key scores.
+Instrument connections, actuator stems and nozzle stubs are their own edge types, because the first layered review
+found them read as pipe (3 of 15 pipe sentences wrong). After the fix a fresh sample had 0 of 15 wrong in every line
+layer. That review also caught plant tags read as ISA letters: MSBV, the main steam bypass valve, became "a
+moisture valve". Now a tag whose letters start with a system code on its own sheet isn't read as ISA. Each
+evaluation now names the layer it measures ([EVALUATION.md §7](EVALUATION.md#7-which-layer-each-evaluation-measures)).
+One correction came from outside: the PID2Graph key *is* a graph with connector nodes, so pipe truth can be derived
+from it. That gave the first real-world pipe-layer score: OPEN100 development sheets 0.914, holdout 0.898 (only
+partly blind, because one error class was first noticed on holdout images).
+
+**The export no longer drops anything silently.** A review found nested records, verification caveats, a second
+check's evidence and the model's own notes missing; the TE export went from 336 to 495 claims, and a test now fails if
+any sentence in a hand-built model doesn't reach the graph outside the declared exclusions. Two missed cases surfaced
+on the way: all 8 TE cascade loops had no `sets_point_of` edge. A `--profile core` export keeps what a change system
+needs (identity, settings, impact relations, sources) and counts everything it leaves out.
+
+**The corpus grew until things failed.** Twelve openly licensed families were staged (527 MB, pinned by hash) and 29
+cells added to the [matrix](GENERALIZATION.md), each criterion fixed before its run:
+- The DEXPI reader read no controller in any DEXPI 1.2 export. After fixes developed on reference files and checked
+  once on held-out vendor exports, it reads 43 of 44 across SPPID, Comos, AVEVA and AutoCAD (the held-out score
+  before the remaining gaps were fixed is kept in the ledger).
+- Historian bands flagged normal running on every real source. A drift-aware default passes PRONTO day 3 and the
+  HAI testbed but fails three untouched cyclic sources (1 of 21 runs). Neither method handles cyclic processes yet,
+  and the README says so.
+- Exported vendor renders and agent-keyed scans fail the pipe layer. Agent-made keys are labelled as weaker than a
+  human key and never counted as an independent source.
+
+**Estimates are first drafts and say so:** a banner and grade before the numbers, the assumptions the figure rests
+on, and the data to collect (and where) to replace each one, generated from what the run actually used.
+
+**Six people from LinkedIn, role-played:** a solo plant engineer, an Ignition integrator, an energy manager, a
+process-safety engineer, a hiring manager and an ML researcher. They found the first screen too dense, the headline
+stronger than the evidence ("a tagged asset model for Ignition" when the tags are placeholders), the LOTO warning
+three clicks from the artifact, no Windows or scanned-PDF path, and a headline split that is really a same-plant
+validation set. The README now opens with what goes in, what comes out and how long, and safety warnings sit on the
+isolation CSV and image themselves.
+
+**Recorded, not re-run:** the OPEN100 direction spot check (model calls) was marked current after the twin's
+`variable` fields changed for four instruments, because neither of its scripts reads those fields.
+
+**Lesson:** a claim checked only against the thing that produced it isn't checked. The statement review, the corpus
+and the role-played readers each found what every internal test had passed.

@@ -1,0 +1,14 @@
+{
+  "title": "Pump moved from throttling to a variable speed drive, measured inputs only",
+  "illustrative": true,
+  "description": "ILLUSTRATIVE: the same made-up pump measurements with no site constants, to show --use-defaults. No demand kW reduction is given, because demand charges have no public default.",
+  "changes": [
+    {
+      "type": "electricity",
+      "label": "Pump P-101 on a variable speed drive",
+      "kw_before": 75.0,
+      "kw_after": {"low": 45.0, "high": 50.0},
+      "hours_per_year": 8000
+    }
+  ]
+}

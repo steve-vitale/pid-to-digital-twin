@@ -235,6 +235,39 @@ class MappingTests(unittest.TestCase):
             self.assertEqual(len(reports), 1)
             self.assertEqual(json.loads(reports[0].read_text())['mapping_changes'], [])
 
+    def test_cli_missing_files_are_refused_in_plain_words(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            model_path = root / 'model.json'
+            model_path.write_text(json.dumps(self.model))
+            csv_path = root / 'io.csv'
+            csv_path.write_text('tag,server,base_path,point\nFT-1,OPC,path,new\n')
+            for args, missing in (([root / 'nope.json', csv_path], 'nope.json'), ([model_path, root / 'nope.csv'], 'nope.csv')):
+                with self.subTest(missing=missing):
+                    err = io.StringIO()
+                    with patch.object(map_points, 'ROOT', root), patch.object(sys, 'argv', ['map_points', *map(str, args)]), contextlib.redirect_stderr(err):
+                        with self.assertRaises(SystemExit) as raised:
+                            map_points.main()
+                    self.assertEqual(raised.exception.code, 2)
+                    self.assertIn(missing, err.getvalue())
+                    self.assertFalse((root / 'out').exists())
+
+    def test_cli_report_redirected_to_a_file_is_lf_with_one_final_newline(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            model_path = root / 'model.json'
+            model_path.write_text(json.dumps(self.model))
+            csv_path = root / 'io.csv'
+            csv_path.write_text('tag,server,base_path,point\nFT-1,OPC,path,new\n')
+            with (root / 'plan.md').open('wb') as out:
+                p = subprocess.run([sys.executable, str(Path(map_points.__file__)), str(model_path), str(csv_path),
+                                    '--dry-run'], stdout=out, stderr=subprocess.PIPE, timeout=120)
+            self.assertEqual(p.returncode, 0, p.stderr)
+            text = (root / 'plan.md').read_bytes()
+            self.assertNotIn(b'\r\n', text)
+            self.assertTrue(text.endswith(b'}\n') and not text.endswith(b'\n\n'), text[-20:])
+
 
 if __name__ == '__main__':
     unittest.main()

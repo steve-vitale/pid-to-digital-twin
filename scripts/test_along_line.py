@@ -94,8 +94,42 @@ def main():
               par["along_line_status"]["I4"] == "not_on_traced_line"
               and par["along_line_method"]["I4"] == "geometry_nearest",
               (par["along_line_method"]["I4"], par["along_line_status"]["I4"]))
+        plant_coded_tags(tmp, check)
     print(f"{len(fails)} failed" if fails else "all passed")
     sys.exit(1 if fails else 0)
+
+
+def plant_coded_tags(tmp, check):
+    """A letter group that starts with a system code seen on its own sheet (MS... on an MSS sheet) is the plant's
+    own tag, not ISA-5.1 letters: no measured variable, and a ...V is still a valve. The same tags on a sheet with
+    another system code are read as ISA letters, as before (the rule rests on the sheet's own evidence)."""
+    tags = ["MSBV 1407", "MSIV 2", "MS 4010", "MOV 5", "PT 6", "PSV 7", "TCV 8"]
+    for code in ("MSS", "ACC"):
+        run = tmp / f"plant-{code}"
+        run.mkdir()
+        syms = [{"id": "E", "class": "tank", "box": [40, 40, 100, 100], "tag": f"{code}-TK-1"}] + \
+               [{"id": f"I{n}", "class": "instrumentation", "box": [200 + 60 * n, 500, 240 + 60 * n, 540], "tag": t}
+                for n, t in enumerate(tags)]
+        (run / "0.json").write_text(json.dumps({"tool": "synthetic", "drawing": "0", "prediction": {
+            "symbols": syms, "connections": []}}), encoding="utf-8")
+        m = bt.build("synthetic", run, ["0"], tmp, {}, "test", "nearest")
+        got = {i["tag"]: (i["variable"], i["instrument_kind"], i["variable_method"]) for i in m["instruments"]}
+        if code == "MSS":
+            for t in ("MSBV 1407", "MSIV 2"):
+                v, k, how = got[t]
+                check(f"MSS sheet: {t} is a plant tag, no measured variable, still a valve",
+                      v is None and k == "valve (plant-coded tag)" and "MSS" in (how or ""), got[t])
+            v, k, how = got["MS 4010"]
+            check("MSS sheet: MS 4010 is a plant tag with no ISA kind or variable",
+                  v is None and k is None and "MSS" in (how or ""), got["MS 4010"])
+            check("MSS sheet: ISA tags keep their first-letter variable",
+                  got["PT 6"][0] == "pressure" and got["PSV 7"][0] == "pressure" and
+                  got["TCV 8"][0] == "temperature" and got["PT 6"][2] == "ISA-5.1 first letter", got)
+            check("MSS sheet: MOV stays an operated valve", got["MOV 5"][:2] == (None, "operated valve"), got["MOV 5"])
+        else:
+            check("ACC sheet: with no MS system code the letters are read as ISA, as before",
+                  got["MSBV 1407"][0] == "moisture" and got["MSBV 1407"][1] == "final element (valve)",
+                  got["MSBV 1407"])
 
 
 if __name__ == "__main__":

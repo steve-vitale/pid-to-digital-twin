@@ -22,6 +22,7 @@ SOURCE_TESTS = (
     "scripts/test_pid2graph_synthetic_adapter.py",
     "scripts/test_dexpi_adapter.py",
     "scripts/test_dexpi_to_twin.py",
+    "scripts/test_dexpi_reader.py",
     "scripts/test_score_tags.py",
     "scripts/test_replicate_stats.py",
     "scripts/test_review_kit.py",
@@ -44,6 +45,14 @@ SOURCE_TESTS = (
     "scripts/test_generate_any_model.py",
     "scripts/test_script_index.py",
     "scripts/test_attempts_ledger.py",
+    "scripts/test_graph_export.py",
+    "scripts/test_feature_catalog.py",
+    "scripts/test_corpus_matrix.py",
+    "scripts/test_question_engine.py",
+    "scripts/test_estimate_impact.py",
+    "scripts/test_statements.py",
+    "scripts/test_deliverable_report.py",
+    "scripts/test_fetch_corpus.py",
 )
 # These tests need cached data or third-party imports, even though none needs a gateway.
 FULL_ONLY_TESTS = (
@@ -51,6 +60,7 @@ FULL_ONLY_TESTS = (
     "scripts/test_te_channels.py",
     "scripts/test_along_line.py",
     "scripts/test_trace_connections_v2.py",
+    "scripts/test_line_layers.py",
     "scripts/test_gateway_diff.py",
     "scripts/test_current_gateway_artifacts.py",
     "scripts/test_fault_detection_eval.py",

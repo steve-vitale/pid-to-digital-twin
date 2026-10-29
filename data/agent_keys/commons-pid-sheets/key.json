@@ -1,0 +1,4597 @@
+{
+ "about": "AGENT-MADE answer keys (first pass), PID2Graph-style. See data/agent_keys/README.md.",
+ "sheets": {
+  "Sch_ma_P_ID": {
+   "size_px": [
+    3344,
+    2012
+   ],
+   "image": "data/external/wikimedia-pid/Sch_ma_P_ID.jpg",
+   "image_sha256": "5b24a05a0a45b0a43aa7d5b29cb224fda2deac0ff94567c9f63e537e533cf257",
+   "symbols": {
+    "v_hv7": {
+     "class": "valve",
+     "box": [
+      228,
+      170,
+      290,
+      236
+     ],
+     "text": null
+    },
+    "v_tv42a": {
+     "class": "valve",
+     "box": [
+      668,
+      140,
+      732,
+      236
+     ],
+     "text": null
+    },
+    "red_top": {
+     "class": "general",
+     "box": [
+      1128,
+      190,
+      1190,
+      230
+     ],
+     "text": null
+    },
+    "flex_left": {
+     "class": "general",
+     "box": [
+      118,
+      1062,
+      158,
+      1185
+     ],
+     "text": null
+    },
+    "v_hv6": {
+     "class": "valve",
+     "box": [
+      92,
+      1262,
+      155,
+      1328
+     ],
+     "text": null
+    },
+    "sq_left": {
+     "class": "general",
+     "box": [
+      107,
+      1383,
+      169,
+      1446
+     ],
+     "text": null
+    },
+    "v_hv1": {
+     "class": "valve",
+     "box": [
+      80,
+      1645,
+      144,
+      1712
+     ],
+     "text": null
+    },
+    "flex_bot": {
+     "class": "general",
+     "box": [
+      245,
+      1668,
+      360,
+      1708
+     ],
+     "text": null
+    },
+    "v_hv2": {
+     "class": "valve",
+     "box": [
+      565,
+      1645,
+      628,
+      1712
+     ],
+     "text": null
+    },
+    "v_tv42b": {
+     "class": "valve",
+     "box": [
+      830,
+      1606,
+      893,
+      1712
+     ],
+     "text": null
+    },
+    "red_bot": {
+     "class": "general",
+     "box": [
+      1255,
+      1494,
+      1316,
+      1528
+     ],
+     "text": null
+    },
+    "vessel": {
+     "class": "tank",
+     "box": [
+      1655,
+      350,
+      2290,
+      1390
+     ],
+     "text": "RESERVOIR DU HAUT"
+    },
+    "v_lv41": {
+     "class": "valve",
+     "box": [
+      2355,
+      148,
+      2425,
+      230
+     ],
+     "text": null
+    },
+    "fe15_el": {
+     "class": "general",
+     "box": [
+      2606,
+      80,
+      2672,
+      127
+     ],
+     "text": null
+    },
+    "m_fe14": {
+     "class": "general",
+     "box": [
+      3184,
+      68,
+      3246,
+      132
+     ],
+     "text": null
+    },
+    "fe16_el": {
+     "class": "general",
+     "box": [
+      2878,
+      552,
+      2946,
+      598
+     ],
+     "text": null
+    },
+    "strainer": {
+     "class": "general",
+     "box": [
+      3068,
+      552,
+      3196,
+      592
+     ],
+     "text": null
+    },
+    "offpage": {
+     "class": "inlet/outlet",
+     "box": [
+      2240,
+      1553,
+      2790,
+      1654
+     ],
+     "text": "2 32 EAU 5"
+    },
+    "b_hv7": {
+     "class": "instrumentation",
+     "box": [
+      308,
+      326,
+      450,
+      468
+     ],
+     "text": "HV 7"
+    },
+    "b_tv42a": {
+     "class": "instrumentation",
+     "box": [
+      647,
+      294,
+      790,
+      437
+     ],
+     "text": "TV 42"
+    },
+    "b_lahh91": {
+     "class": "instrumentation",
+     "box": [
+      1280,
+      364,
+      1422,
+      506
+     ],
+     "text": "LAHH 91"
+    },
+    "b_lsh91": {
+     "class": "instrumentation",
+     "box": [
+      1483,
+      377,
+      1628,
+      522
+     ],
+     "text": "LSH 91"
+    },
+    "b_lah91": {
+     "class": "instrumentation",
+     "box": [
+      1279,
+      536,
+      1426,
+      685
+     ],
+     "text": "LAH 91"
+    },
+    "b_ly91": {
+     "class": "instrumentation",
+     "box": [
+      1484,
+      566,
+      1634,
+      716
+     ],
+     "text": "LY 91"
+    },
+    "b_hmy91": {
+     "class": "instrumentation",
+     "box": [
+      1295,
+      728,
+      1442,
+      876
+     ],
+     "text": "HMY 91"
+    },
+    "b_hms91": {
+     "class": "instrumentation",
+     "box": [
+      1489,
+      747,
+      1630,
+      888
+     ],
+     "text": "HMS 91"
+    },
+    "b_tc42": {
+     "class": "instrumentation",
+     "box": [
+      1133,
+      818,
+      1282,
+      965
+     ],
+     "text": "TC 42"
+    },
+    "b_hv6": {
+     "class": "instrumentation",
+     "box": [
+      240,
+      1179,
+      387,
+      1326
+     ],
+     "text": "HV 6"
+    },
+    "b_hv1": {
+     "class": "instrumentation",
+     "box": [
+      186,
+      1430,
+      328,
+      1572
+     ],
+     "text": "HV 1"
+    },
+    "b_hv2": {
+     "class": "instrumentation",
+     "box": [
+      592,
+      1424,
+      739,
+      1571
+     ],
+     "text": "HV 2"
+    },
+    "b_tv42b": {
+     "class": "instrumentation",
+     "box": [
+      832,
+      1427,
+      975,
+      1570
+     ],
+     "text": "TV 42"
+    },
+    "b_tt42": {
+     "class": "instrumentation",
+     "box": [
+      1495,
+      1511,
+      1636,
+      1652
+     ],
+     "text": "TT 42"
+    },
+    "b_lt41": {
+     "class": "instrumentation",
+     "box": [
+      1728,
+      1510,
+      1873,
+      1655
+     ],
+     "text": "LT 41"
+    },
+    "b_lv41": {
+     "class": "instrumentation",
+     "box": [
+      2364,
+      267,
+      2513,
+      416
+     ],
+     "text": "LV 41"
+    },
+    "b_fe15": {
+     "class": "instrumentation",
+     "box": [
+      2704,
+      208,
+      2851,
+      355
+     ],
+     "text": "FE 15"
+    },
+    "b_fe16": {
+     "class": "instrumentation",
+     "box": [
+      2999,
+      368,
+      3146,
+      515
+     ],
+     "text": "FE 16"
+    },
+    "b_fe14": {
+     "class": "instrumentation",
+     "box": [
+      3128,
+      188,
+      3280,
+      340
+     ],
+     "text": "FE 14"
+    },
+    "b_lc41": {
+     "class": "instrumentation",
+     "box": [
+      2820,
+      1765,
+      2966,
+      1911
+     ],
+     "text": "LC 41"
+    },
+    "b_lic41": {
+     "class": "instrumentation",
+     "box": [
+      3171,
+      1761,
+      3320,
+      1911
+     ],
+     "text": "LIC 41"
+    }
+   },
+   "edges": [
+    [
+     "b_fe14",
+     "m_fe14"
+    ],
+    [
+     "b_fe15",
+     "fe15_el"
+    ],
+    [
+     "b_fe16",
+     "fe16_el"
+    ],
+    [
+     "b_hms91",
+     "b_ly91"
+    ],
+    [
+     "b_hmy91",
+     "b_lah91"
+    ],
+    [
+     "b_hv1",
+     "v_hv1"
+    ],
+    [
+     "b_hv2",
+     "v_hv2"
+    ],
+    [
+     "b_hv6",
+     "v_hv6"
+    ],
+    [
+     "b_hv7",
+     "v_hv7"
+    ],
+    [
+     "b_lah91",
+     "b_lahh91"
+    ],
+    [
+     "b_lahh91",
+     "b_lsh91"
+    ],
+    [
+     "b_lsh91",
+     "b_ly91"
+    ],
+    [
+     "b_lsh91",
+     "vessel"
+    ],
+    [
+     "b_lt41",
+     "vessel"
+    ],
+    [
+     "b_tt42",
+     "vessel"
+    ],
+    [
+     "fe15_el",
+     "m_fe14"
+    ],
+    [
+     "fe15_el",
+     "vessel"
+    ],
+    [
+     "fe16_el",
+     "strainer"
+    ],
+    [
+     "fe16_el",
+     "v_lv41"
+    ],
+    [
+     "flex_bot",
+     "v_hv1"
+    ],
+    [
+     "flex_bot",
+     "v_hv2"
+    ],
+    [
+     "flex_left",
+     "v_hv6"
+    ],
+    [
+     "flex_left",
+     "v_hv7"
+    ],
+    [
+     "offpage",
+     "vessel"
+    ],
+    [
+     "red_bot",
+     "v_tv42b"
+    ],
+    [
+     "red_bot",
+     "vessel"
+    ],
+    [
+     "red_top",
+     "v_tv42a"
+    ],
+    [
+     "red_top",
+     "vessel"
+    ],
+    [
+     "sq_left",
+     "v_hv1"
+    ],
+    [
+     "sq_left",
+     "v_hv6"
+    ],
+    [
+     "v_hv2",
+     "v_tv42b"
+    ],
+    [
+     "v_hv7",
+     "v_tv42a"
+    ],
+    [
+     "v_lv41",
+     "vessel"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "b_hms91",
+     "b_tc42"
+    ],
+    [
+     "b_hms91",
+     "b_tt42"
+    ],
+    [
+     "b_lc41",
+     "b_lic41"
+    ],
+    [
+     "b_lc41",
+     "b_lt41"
+    ],
+    [
+     "b_lc41",
+     "b_lv41"
+    ],
+    [
+     "b_tc42",
+     "b_tt42"
+    ],
+    [
+     "b_tc42",
+     "b_tv42a"
+    ],
+    [
+     "b_tc42",
+     "b_tv42b"
+    ]
+   ]
+  },
+  "Sch_ma_P_ID1": {
+   "size_px": [
+    3306,
+    1982
+   ],
+   "image": "data/external/wikimedia-pid/Sch_ma_P_ID1.jpg",
+   "image_sha256": "62fbe32d484551e2753d396457ff47ed75f961de6ab63d06297ba58687482b88",
+   "symbols": {
+    "v_hv7": {
+     "class": "valve",
+     "box": [
+      212,
+      140,
+      274,
+      206
+     ],
+     "text": null
+    },
+    "v_tv42a": {
+     "class": "valve",
+     "box": [
+      652,
+      110,
+      716,
+      206
+     ],
+     "text": null
+    },
+    "red_top": {
+     "class": "general",
+     "box": [
+      1112,
+      160,
+      1174,
+      200
+     ],
+     "text": null
+    },
+    "flex_left": {
+     "class": "general",
+     "box": [
+      103,
+      1033,
+      143,
+      1156
+     ],
+     "text": null
+    },
+    "v_hv6": {
+     "class": "valve",
+     "box": [
+      77,
+      1233,
+      140,
+      1300
+     ],
+     "text": null
+    },
+    "sq_left": {
+     "class": "general",
+     "box": [
+      92,
+      1355,
+      154,
+      1418
+     ],
+     "text": null
+    },
+    "v_hv1": {
+     "class": "valve",
+     "box": [
+      65,
+      1617,
+      129,
+      1684
+     ],
+     "text": null
+    },
+    "flex_bot": {
+     "class": "general",
+     "box": [
+      230,
+      1640,
+      345,
+      1680
+     ],
+     "text": null
+    },
+    "v_hv2": {
+     "class": "valve",
+     "box": [
+      550,
+      1617,
+      613,
+      1684
+     ],
+     "text": null
+    },
+    "v_tv42b": {
+     "class": "valve",
+     "box": [
+      815,
+      1578,
+      878,
+      1684
+     ],
+     "text": null
+    },
+    "red_bot": {
+     "class": "general",
+     "box": [
+      1240,
+      1465,
+      1301,
+      1499
+     ],
+     "text": null
+    },
+    "vessel": {
+     "class": "tank",
+     "box": [
+      1639,
+      319,
+      2276,
+      1361
+     ],
+     "text": "RESERVOIR DU HAUT"
+    },
+    "v_lv41": {
+     "class": "valve",
+     "box": [
+      2339,
+      117,
+      2410,
+      199
+     ],
+     "text": null
+    },
+    "fe15_el": {
+     "class": "general",
+     "box": [
+      2590,
+      49,
+      2656,
+      96
+     ],
+     "text": null
+    },
+    "m_fe14": {
+     "class": "general",
+     "box": [
+      3169,
+      36,
+      3231,
+      100
+     ],
+     "text": null
+    },
+    "fe16_el": {
+     "class": "general",
+     "box": [
+      2863,
+      521,
+      2931,
+      567
+     ],
+     "text": null
+    },
+    "strainer": {
+     "class": "general",
+     "box": [
+      3053,
+      521,
+      3181,
+      561
+     ],
+     "text": null
+    },
+    "offpage": {
+     "class": "inlet/outlet",
+     "box": [
+      2226,
+      1523,
+      2776,
+      1625
+     ],
+     "text": "2 32 EAU 5"
+    },
+    "b_hv7": {
+     "class": "instrumentation",
+     "box": [
+      292,
+      296,
+      434,
+      438
+     ],
+     "text": "HV 7"
+    },
+    "b_tv42a": {
+     "class": "instrumentation",
+     "box": [
+      631,
+      264,
+      774,
+      407
+     ],
+     "text": "TV 42"
+    },
+    "b_lahh91": {
+     "class": "instrumentation",
+     "box": [
+      1264,
+      334,
+      1406,
+      476
+     ],
+     "text": "LAHH 91"
+    },
+    "b_lsh91": {
+     "class": "instrumentation",
+     "box": [
+      1467,
+      347,
+      1613,
+      492
+     ],
+     "text": "LSH 91"
+    },
+    "b_lah91": {
+     "class": "instrumentation",
+     "box": [
+      1263,
+      506,
+      1411,
+      655
+     ],
+     "text": "LAH 91"
+    },
+    "b_ly91": {
+     "class": "instrumentation",
+     "box": [
+      1469,
+      536,
+      1619,
+      686
+     ],
+     "text": "LY 91"
+    },
+    "b_hmy91": {
+     "class": "instrumentation",
+     "box": [
+      1280,
+      698,
+      1427,
+      846
+     ],
+     "text": "HMY 91"
+    },
+    "b_hms91": {
+     "class": "instrumentation",
+     "box": [
+      1474,
+      717,
+      1615,
+      858
+     ],
+     "text": "HMS 91"
+    },
+    "b_tc42": {
+     "class": "instrumentation",
+     "box": [
+      1118,
+      788,
+      1267,
+      936
+     ],
+     "text": "TC 42"
+    },
+    "b_hv6": {
+     "class": "instrumentation",
+     "box": [
+      225,
+      1150,
+      372,
+      1298
+     ],
+     "text": "HV 6"
+    },
+    "b_hv1": {
+     "class": "instrumentation",
+     "box": [
+      171,
+      1402,
+      313,
+      1544
+     ],
+     "text": "HV 1"
+    },
+    "b_hv2": {
+     "class": "instrumentation",
+     "box": [
+      577,
+      1395,
+      724,
+      1543
+     ],
+     "text": "HV 2"
+    },
+    "b_tv42b": {
+     "class": "instrumentation",
+     "box": [
+      817,
+      1398,
+      960,
+      1542
+     ],
+     "text": "TV 42"
+    },
+    "b_tt42": {
+     "class": "instrumentation",
+     "box": [
+      1480,
+      1482,
+      1622,
+      1623
+     ],
+     "text": "TT 42"
+    },
+    "b_lt41": {
+     "class": "instrumentation",
+     "box": [
+      1714,
+      1481,
+      1859,
+      1626
+     ],
+     "text": "LT 41"
+    },
+    "b_lv41": {
+     "class": "instrumentation",
+     "box": [
+      2349,
+      236,
+      2498,
+      385
+     ],
+     "text": "LV 41"
+    },
+    "b_fe15": {
+     "class": "instrumentation",
+     "box": [
+      2689,
+      177,
+      2836,
+      324
+     ],
+     "text": "FE 15"
+    },
+    "b_fe16": {
+     "class": "instrumentation",
+     "box": [
+      2984,
+      337,
+      3131,
+      484
+     ],
+     "text": "FE 16"
+    },
+    "b_fe14": {
+     "class": "instrumentation",
+     "box": [
+      3113,
+      156,
+      3265,
+      309
+     ],
+     "text": "FE 14"
+    },
+    "b_lc41": {
+     "class": "instrumentation",
+     "box": [
+      2806,
+      1736,
+      2952,
+      1882
+     ],
+     "text": "LC 41"
+    },
+    "b_lic41": {
+     "class": "instrumentation",
+     "box": [
+      3157,
+      1731,
+      3306,
+      1882
+     ],
+     "text": "LIC 41"
+    }
+   },
+   "edges": [
+    [
+     "b_fe14",
+     "m_fe14"
+    ],
+    [
+     "b_fe15",
+     "fe15_el"
+    ],
+    [
+     "b_fe16",
+     "fe16_el"
+    ],
+    [
+     "b_hms91",
+     "b_ly91"
+    ],
+    [
+     "b_hmy91",
+     "b_lah91"
+    ],
+    [
+     "b_hv1",
+     "v_hv1"
+    ],
+    [
+     "b_hv2",
+     "v_hv2"
+    ],
+    [
+     "b_hv6",
+     "v_hv6"
+    ],
+    [
+     "b_hv7",
+     "v_hv7"
+    ],
+    [
+     "b_lah91",
+     "b_lahh91"
+    ],
+    [
+     "b_lahh91",
+     "b_lsh91"
+    ],
+    [
+     "b_lsh91",
+     "b_ly91"
+    ],
+    [
+     "b_lsh91",
+     "vessel"
+    ],
+    [
+     "b_lt41",
+     "vessel"
+    ],
+    [
+     "b_tt42",
+     "vessel"
+    ],
+    [
+     "fe15_el",
+     "m_fe14"
+    ],
+    [
+     "fe15_el",
+     "vessel"
+    ],
+    [
+     "fe16_el",
+     "strainer"
+    ],
+    [
+     "fe16_el",
+     "v_lv41"
+    ],
+    [
+     "flex_bot",
+     "v_hv1"
+    ],
+    [
+     "flex_bot",
+     "v_hv2"
+    ],
+    [
+     "flex_left",
+     "v_hv6"
+    ],
+    [
+     "flex_left",
+     "v_hv7"
+    ],
+    [
+     "offpage",
+     "vessel"
+    ],
+    [
+     "red_bot",
+     "v_tv42b"
+    ],
+    [
+     "red_bot",
+     "vessel"
+    ],
+    [
+     "red_top",
+     "v_tv42a"
+    ],
+    [
+     "red_top",
+     "vessel"
+    ],
+    [
+     "sq_left",
+     "v_hv1"
+    ],
+    [
+     "sq_left",
+     "v_hv6"
+    ],
+    [
+     "v_hv2",
+     "v_tv42b"
+    ],
+    [
+     "v_hv7",
+     "v_tv42a"
+    ],
+    [
+     "v_lv41",
+     "vessel"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "b_hms91",
+     "b_tc42"
+    ],
+    [
+     "b_hms91",
+     "b_tt42"
+    ],
+    [
+     "b_lc41",
+     "b_lic41"
+    ],
+    [
+     "b_lc41",
+     "b_lt41"
+    ],
+    [
+     "b_lc41",
+     "b_lv41"
+    ],
+    [
+     "b_tc42",
+     "b_tt42"
+    ],
+    [
+     "b_tc42",
+     "b_tv42a"
+    ],
+    [
+     "b_tc42",
+     "b_tv42b"
+    ]
+   ]
+  },
+  "RI_Sample_ISO": {
+   "size_px": [
+    2201,
+    1701
+   ],
+   "image": "data/external/wikimedia-pid/RI_Sample_ISO.png",
+   "image_sha256": "0cbc47c34fcdb624c7002b815d4e91f77e114c9d237bec1e1209f41f219910b1",
+   "symbols": {
+    "in_tankfarm": {
+     "class": "inlet/outlet",
+     "box": [
+      74,
+      104,
+      124,
+      150
+     ],
+     "text": "Tank Farm"
+    },
+    "v_lcv11010": {
+     "class": "valve",
+     "box": [
+      167,
+      118,
+      197,
+      166
+     ],
+     "text": "10-LCV-11010"
+    },
+    "tank_b0001": {
+     "class": "tank",
+     "box": [
+      413,
+      210,
+      700,
+      975
+     ],
+     "text": "B-0001"
+    },
+    "v_psv322": {
+     "class": "valve",
+     "box": [
+      630,
+      80,
+      650,
+      147
+     ],
+     "text": "01-PSV-322"
+    },
+    "vent_psv": {
+     "class": "inlet/outlet",
+     "box": [
+      768,
+      0,
+      814,
+      22
+     ],
+     "text": null
+    },
+    "v_pdt_top": {
+     "class": "valve",
+     "box": [
+      357,
+      308,
+      382,
+      323
+     ],
+     "text": null
+    },
+    "v_pdt_bot": {
+     "class": "valve",
+     "box": [
+      357,
+      872,
+      382,
+      887
+     ],
+     "text": null
+    },
+    "v_fcv115": {
+     "class": "valve",
+     "box": [
+      1095,
+      418,
+      1123,
+      464
+     ],
+     "text": "14-FCV-115"
+    },
+    "v_tcv115": {
+     "class": "valve",
+     "box": [
+      1223,
+      327,
+      1270,
+      353
+     ],
+     "text": "14-TCV-115"
+    },
+    "v_v109": {
+     "class": "valve",
+     "box": [
+      1252,
+      725,
+      1270,
+      753
+     ],
+     "text": "V-109"
+    },
+    "out_19": {
+     "class": "inlet/outlet",
+     "box": [
+      2036,
+      153,
+      2083,
+      198
+     ],
+     "text": null
+    },
+    "in_stm": {
+     "class": "inlet/outlet",
+     "box": [
+      2034,
+      670,
+      2084,
+      715
+     ],
+     "text": "STM"
+    },
+    "v_tcv105": {
+     "class": "valve",
+     "box": [
+      1516,
+      653,
+      1544,
+      700
+     ],
+     "text": "15-TCV-105"
+    },
+    "hx_w0001": {
+     "class": "general",
+     "box": [
+      1236,
+      818,
+      1661,
+      916
+     ],
+     "text": "W-0001"
+    },
+    "out_cond": {
+     "class": "inlet/outlet",
+     "box": [
+      2033,
+      996,
+      2083,
+      1043
+     ],
+     "text": "Cond."
+    },
+    "v_v110": {
+     "class": "valve",
+     "box": [
+      1661,
+      1063,
+      1681,
+      1097
+     ],
+     "text": "V-110"
+    },
+    "a110": {
+     "class": "general",
+     "box": [
+      1658,
+      1123,
+      1684,
+      1151
+     ],
+     "text": "A-110"
+    },
+    "drain": {
+     "class": "inlet/outlet",
+     "box": [
+      1646,
+      1182,
+      1696,
+      1255
+     ],
+     "text": null
+    },
+    "v_v101": {
+     "class": "valve",
+     "box": [
+      549,
+      975,
+      563,
+      1008
+     ],
+     "text": "V-101"
+    },
+    "v_v102": {
+     "class": "valve",
+     "box": [
+      772,
+      1567,
+      790,
+      1600
+     ],
+     "text": "V-102"
+    },
+    "f100": {
+     "class": "general",
+     "box": [
+      853,
+      1652,
+      870,
+      1682
+     ],
+     "text": "F-100"
+    },
+    "red_s1": {
+     "class": "general",
+     "box": [
+      940,
+      1625,
+      955,
+      1650
+     ],
+     "text": "250/200"
+    },
+    "p1001": {
+     "class": "pump",
+     "box": [
+      907,
+      1510,
+      982,
+      1587
+     ],
+     "text": "P-1001"
+    },
+    "m1001": {
+     "class": "general",
+     "box": [
+      1003,
+      1522,
+      1050,
+      1573
+     ],
+     "text": "PM-1001"
+    },
+    "red_d1": {
+     "class": "general",
+     "box": [
+      935,
+      1470,
+      952,
+      1497
+     ],
+     "text": "150/200"
+    },
+    "v_v104": {
+     "class": "valve",
+     "box": [
+      935,
+      1393,
+      952,
+      1425
+     ],
+     "text": "V-104"
+    },
+    "v_v103": {
+     "class": "valve",
+     "box": [
+      933,
+      1350,
+      953,
+      1375
+     ],
+     "text": "V-103"
+    },
+    "v_v105": {
+     "class": "valve",
+     "box": [
+      1359,
+      1560,
+      1376,
+      1592
+     ],
+     "text": "V-105"
+    },
+    "f101": {
+     "class": "general",
+     "box": [
+      1440,
+      1650,
+      1456,
+      1680
+     ],
+     "text": "F-101"
+    },
+    "red_s2": {
+     "class": "general",
+     "box": [
+      1526,
+      1622,
+      1541,
+      1648
+     ],
+     "text": "250/200"
+    },
+    "p1002": {
+     "class": "pump",
+     "box": [
+      1494,
+      1510,
+      1567,
+      1584
+     ],
+     "text": "P-1002"
+    },
+    "m1002": {
+     "class": "general",
+     "box": [
+      1588,
+      1522,
+      1637,
+      1573
+     ],
+     "text": "PM-1002"
+    },
+    "red_d2": {
+     "class": "general",
+     "box": [
+      1523,
+      1470,
+      1540,
+      1497
+     ],
+     "text": "150/200"
+    },
+    "v_v107": {
+     "class": "valve",
+     "box": [
+      1523,
+      1392,
+      1540,
+      1423
+     ],
+     "text": "V-107"
+    },
+    "v_v106": {
+     "class": "valve",
+     "box": [
+      1523,
+      1343,
+      1540,
+      1373
+     ],
+     "text": "V-106"
+    },
+    "b_fc110": {
+     "class": "instrumentation",
+     "box": [
+      156,
+      384,
+      208,
+      436
+     ],
+     "text": "FC 110"
+    },
+    "b_lirc110": {
+     "class": "instrumentation",
+     "box": [
+      134,
+      574,
+      229,
+      621
+     ],
+     "text": "LIRC 110"
+    },
+    "b_pdt110": {
+     "class": "instrumentation",
+     "box": [
+      298,
+      572,
+      346,
+      620
+     ],
+     "text": "PDT 110"
+    },
+    "b_li110": {
+     "class": "instrumentation",
+     "box": [
+      157,
+      667,
+      206,
+      716
+     ],
+     "text": "LI 110"
+    },
+    "b_tirc115": {
+     "class": "instrumentation",
+     "box": [
+      1061,
+      269,
+      1156,
+      315
+     ],
+     "text": "TIRC 115"
+    },
+    "b_ffc115": {
+     "class": "instrumentation",
+     "box": [
+      1061,
+      315,
+      1156,
+      364
+     ],
+     "text": "FFC 115"
+    },
+    "b_ti105": {
+     "class": "instrumentation",
+     "box": [
+      1331,
+      479,
+      1377,
+      525
+     ],
+     "text": "TI 105"
+    },
+    "b_tirc105": {
+     "class": "instrumentation",
+     "box": [
+      1484,
+      480,
+      1577,
+      527
+     ],
+     "text": "TIRC 105"
+    },
+    "b_fc105": {
+     "class": "instrumentation",
+     "box": [
+      1484,
+      527,
+      1577,
+      575
+     ],
+     "text": "FC 105"
+    },
+    "b_pi103": {
+     "class": "instrumentation",
+     "box": [
+      864,
+      1432,
+      908,
+      1476
+     ],
+     "text": "PI 103"
+    },
+    "b_soal101": {
+     "class": "instrumentation",
+     "box": [
+      993,
+      1419,
+      1074,
+      1464
+     ],
+     "text": "SOAL 101"
+    },
+    "b_hshl101b": {
+     "class": "instrumentation",
+     "box": [
+      1085,
+      1419,
+      1177,
+      1464
+     ],
+     "text": "HSHL 101B"
+    },
+    "b_ei101": {
+     "class": "instrumentation",
+     "box": [
+      1177,
+      1418,
+      1227,
+      1467
+     ],
+     "text": "EI 101"
+    },
+    "b_hzl101": {
+     "class": "instrumentation",
+     "box": [
+      1107,
+      1523,
+      1157,
+      1573
+     ],
+     "text": "HZL 101"
+    },
+    "b_hshl101a": {
+     "class": "instrumentation",
+     "box": [
+      1157,
+      1525,
+      1250,
+      1571
+     ],
+     "text": "HSHL 101A"
+    },
+    "b_pi104": {
+     "class": "instrumentation",
+     "box": [
+      1448,
+      1432,
+      1496,
+      1480
+     ],
+     "text": "PI 104"
+    },
+    "b_soal102": {
+     "class": "instrumentation",
+     "box": [
+      1567,
+      1419,
+      1660,
+      1466
+     ],
+     "text": "SOAL 102"
+    },
+    "b_hshl102b": {
+     "class": "instrumentation",
+     "box": [
+      1671,
+      1419,
+      1762,
+      1466
+     ],
+     "text": "HSHL 102B"
+    },
+    "b_ei102": {
+     "class": "instrumentation",
+     "box": [
+      1764,
+      1418,
+      1813,
+      1467
+     ],
+     "text": "EI 102"
+    },
+    "b_hzl102": {
+     "class": "instrumentation",
+     "box": [
+      1693,
+      1523,
+      1743,
+      1574
+     ],
+     "text": "HZL 102"
+    },
+    "b_hshl102a": {
+     "class": "instrumentation",
+     "box": [
+      1744,
+      1524,
+      1837,
+      1573
+     ],
+     "text": "HSHL 102A"
+    }
+   },
+   "edges": [
+    [
+     "a110",
+     "drain"
+    ],
+    [
+     "a110",
+     "v_v110"
+    ],
+    [
+     "b_pdt110",
+     "v_pdt_bot"
+    ],
+    [
+     "b_pdt110",
+     "v_pdt_top"
+    ],
+    [
+     "b_pi103",
+     "j_pi103"
+    ],
+    [
+     "b_pi104",
+     "j_pi104"
+    ],
+    [
+     "b_ti105",
+     "j_ti105"
+    ],
+    [
+     "b_tirc115",
+     "j_tirc"
+    ],
+    [
+     "f100",
+     "red_s1"
+    ],
+    [
+     "f100",
+     "v_v102"
+    ],
+    [
+     "f101",
+     "red_s2"
+    ],
+    [
+     "f101",
+     "v_v105"
+    ],
+    [
+     "hx_w0001",
+     "j_cond"
+    ],
+    [
+     "hx_w0001",
+     "j_hdr"
+    ],
+    [
+     "hx_w0001",
+     "v_tcv105"
+    ],
+    [
+     "hx_w0001",
+     "v_v109"
+    ],
+    [
+     "in_stm",
+     "v_tcv105"
+    ],
+    [
+     "in_tankfarm",
+     "v_lcv11010"
+    ],
+    [
+     "j_cond",
+     "out_cond"
+    ],
+    [
+     "j_cond",
+     "v_v110"
+    ],
+    [
+     "j_fcv",
+     "j_ti105"
+    ],
+    [
+     "j_fcv",
+     "v_fcv115"
+    ],
+    [
+     "j_fcv",
+     "v_tcv115"
+    ],
+    [
+     "j_hdr",
+     "v_v103"
+    ],
+    [
+     "j_hdr",
+     "v_v106"
+    ],
+    [
+     "j_pi103",
+     "red_d1"
+    ],
+    [
+     "j_pi103",
+     "v_v104"
+    ],
+    [
+     "j_pi104",
+     "red_d2"
+    ],
+    [
+     "j_pi104",
+     "v_v107"
+    ],
+    [
+     "j_suc",
+     "v_v101"
+    ],
+    [
+     "j_suc",
+     "v_v102"
+    ],
+    [
+     "j_suc",
+     "v_v105"
+    ],
+    [
+     "j_ti105",
+     "v_v109"
+    ],
+    [
+     "j_tirc",
+     "out_19"
+    ],
+    [
+     "j_tirc",
+     "v_tcv115"
+    ],
+    [
+     "m1001",
+     "p1001"
+    ],
+    [
+     "m1002",
+     "p1002"
+    ],
+    [
+     "p1001",
+     "red_d1"
+    ],
+    [
+     "p1001",
+     "red_s1"
+    ],
+    [
+     "p1002",
+     "red_d2"
+    ],
+    [
+     "p1002",
+     "red_s2"
+    ],
+    [
+     "tank_b0001",
+     "v_fcv115"
+    ],
+    [
+     "tank_b0001",
+     "v_lcv11010"
+    ],
+    [
+     "tank_b0001",
+     "v_pdt_bot"
+    ],
+    [
+     "tank_b0001",
+     "v_pdt_top"
+    ],
+    [
+     "tank_b0001",
+     "v_psv322"
+    ],
+    [
+     "tank_b0001",
+     "v_v101"
+    ],
+    [
+     "v_psv322",
+     "vent_psv"
+    ],
+    [
+     "v_v103",
+     "v_v104"
+    ],
+    [
+     "v_v106",
+     "v_v107"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "b_fc105",
+     "v_tcv105"
+    ],
+    [
+     "b_fc110",
+     "b_lirc110"
+    ],
+    [
+     "b_fc110",
+     "v_lcv11010"
+    ],
+    [
+     "b_ffc115",
+     "v_fcv115"
+    ],
+    [
+     "b_ffc115",
+     "v_tcv115"
+    ],
+    [
+     "b_hshl101b",
+     "b_hzl101"
+    ],
+    [
+     "b_hshl102b",
+     "b_hzl102"
+    ],
+    [
+     "b_hzl101",
+     "m1001"
+    ],
+    [
+     "b_hzl102",
+     "m1002"
+    ],
+    [
+     "b_li110",
+     "b_lirc110"
+    ],
+    [
+     "b_lirc110",
+     "b_pdt110"
+    ],
+    [
+     "b_soal101",
+     "m1001"
+    ],
+    [
+     "b_soal102",
+     "m1002"
+    ],
+    [
+     "b_ti105",
+     "b_tirc105"
+    ]
+   ]
+  },
+  "Pump_with_tank_pid_en": {
+   "size_px": [
+    1052,
+    744
+   ],
+   "image": "data/external/wikimedia-pid/Pump_with_tank_pid_en.svg (rasterised with PyMuPDF at zoom 1: 1052 x 744 px, SVG user units = pixels)",
+   "image_sha256": "ee186d73483f530ea38007d903c2dec6460fc88b8227f4b8631dbd0d722417be",
+   "symbols": {
+    "in_solvent": {
+     "class": "inlet/outlet",
+     "box": [
+      27,
+      318,
+      221,
+      371
+     ],
+     "text": "SOLVENT FROM UNIT 1"
+    },
+    "tank_t001": {
+     "class": "tank",
+     "box": [
+      275,
+      293,
+      417,
+      557
+     ],
+     "text": "T001"
+    },
+    "vent_n4": {
+     "class": "inlet/outlet",
+     "box": [
+      292,
+      246,
+      329,
+      275
+     ],
+     "text": null
+    },
+    "b_l0011": {
+     "class": "instrumentation",
+     "box": [
+      336,
+      194,
+      443,
+      244
+     ],
+     "text": "L 0011"
+    },
+    "b_l0012": {
+     "class": "instrumentation",
+     "box": [
+      123,
+      496,
+      232,
+      546
+     ],
+     "text": "L 0012"
+    },
+    "v_psv": {
+     "class": "valve",
+     "box": [
+      602,
+      438,
+      633,
+      488
+     ],
+     "text": "PA: 6 barg"
+    },
+    "motor": {
+     "class": "general",
+     "box": [
+      504,
+      512,
+      542,
+      550
+     ],
+     "text": "M"
+    },
+    "p001": {
+     "class": "pump",
+     "box": [
+      496,
+      567,
+      550,
+      617
+     ],
+     "text": "P001"
+    },
+    "v_drain": {
+     "class": "valve",
+     "box": [
+      333,
+      618,
+      357,
+      660
+     ],
+     "text": null
+    },
+    "v_chk1": {
+     "class": "valve",
+     "box": [
+      377,
+      582,
+      417,
+      604
+     ],
+     "text": null
+    },
+    "red1": {
+     "class": "general",
+     "box": [
+      442,
+      582,
+      488,
+      602
+     ],
+     "text": "100/50"
+    },
+    "red2": {
+     "class": "general",
+     "box": [
+      554,
+      582,
+      604,
+      602
+     ],
+     "text": "100/50"
+    },
+    "b_pi0013": {
+     "class": "instrumentation",
+     "box": [
+      646,
+      478,
+      752,
+      531
+     ],
+     "text": "PI 0013"
+    },
+    "v_chk2": {
+     "class": "valve",
+     "box": [
+      712,
+      582,
+      754,
+      604
+     ],
+     "text": null
+    },
+    "v_chk3": {
+     "class": "valve",
+     "box": [
+      777,
+      582,
+      817,
+      604
+     ],
+     "text": null
+    },
+    "out_solvent": {
+     "class": "inlet/outlet",
+     "box": [
+      840,
+      567,
+      1036,
+      619
+     ],
+     "text": "SOLVENT TO UNIT 3"
+    }
+   },
+   "edges": [
+    [
+     "b_l0011",
+     "tank_t001"
+    ],
+    [
+     "b_l0012",
+     "tank_t001"
+    ],
+    [
+     "b_pi0013",
+     "j_pi"
+    ],
+    [
+     "in_solvent",
+     "tank_t001"
+    ],
+    [
+     "j_dis",
+     "j_pi"
+    ],
+    [
+     "j_dis",
+     "red2"
+    ],
+    [
+     "j_dis",
+     "v_psv"
+    ],
+    [
+     "j_n3",
+     "tank_t001"
+    ],
+    [
+     "j_n3",
+     "v_chk1"
+    ],
+    [
+     "j_n3",
+     "v_drain"
+    ],
+    [
+     "j_pi",
+     "v_chk2"
+    ],
+    [
+     "motor",
+     "p001"
+    ],
+    [
+     "out_solvent",
+     "v_chk3"
+    ],
+    [
+     "p001",
+     "red1"
+    ],
+    [
+     "p001",
+     "red2"
+    ],
+    [
+     "red1",
+     "v_chk1"
+    ],
+    [
+     "tank_t001",
+     "v_psv"
+    ],
+    [
+     "tank_t001",
+     "vent_n4"
+    ],
+    [
+     "v_chk2",
+     "v_chk3"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "b_l0011",
+     "motor"
+    ]
+   ]
+  },
+  "P_ID": {
+   "size_px": [
+    2201,
+    1614
+   ],
+   "image": "data/external/wikimedia-pid/P_ID.JPG",
+   "image_sha256": "d6cb339eeb240e6fac23f2f5ce1317a9b7acf6f0323f02b8da4930a1c5b35cba",
+   "symbols": {
+    "sp01": {
+     "class": "tank",
+     "box": [
+      957,
+      261,
+      1101,
+      676
+     ],
+     "text": "SP 01"
+    },
+    "sc01": {
+     "class": "general",
+     "box": [
+      826,
+      604,
+      898,
+      1070
+     ],
+     "text": "SC 01"
+    },
+    "sc02": {
+     "class": "general",
+     "box": [
+      1636,
+      130,
+      1708,
+      506
+     ],
+     "text": "SC 02"
+    },
+    "mp02s": {
+     "class": "pump",
+     "box": [
+      327,
+      1120,
+      399,
+      1201
+     ],
+     "text": "MP 02 S"
+    },
+    "mp02a": {
+     "class": "pump",
+     "box": [
+      565,
+      1120,
+      637,
+      1201
+     ],
+     "text": "MP 02 A"
+    },
+    "mk01s": {
+     "class": "pump",
+     "box": [
+      1303,
+      442,
+      1375,
+      521
+     ],
+     "text": "MK 01 S"
+    },
+    "mk01a": {
+     "class": "pump",
+     "box": [
+      1469,
+      442,
+      1541,
+      521
+     ],
+     "text": "MK 01 A"
+    },
+    "p_circ": {
+     "class": "pump",
+     "box": [
+      839,
+      1105,
+      935,
+      1188
+     ],
+     "text": null
+    },
+    "in_vapore": {
+     "class": "inlet/outlet",
+     "box": [
+      124,
+      758,
+      220,
+      794
+     ],
+     "text": "Vapore vivo"
+    },
+    "out_condpura": {
+     "class": "inlet/outlet",
+     "box": [
+      124,
+      901,
+      220,
+      937
+     ],
+     "text": "Condensa pura"
+    },
+    "out_condproc": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      460,
+      2078,
+      496
+     ],
+     "text": "Condensa di processo"
+    },
+    "in_acqua": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      591,
+      2078,
+      628
+     ],
+     "text": "Acqua di raffreddamento"
+    },
+    "out_ritorno": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      687,
+      2078,
+      723
+     ],
+     "text": "Ritorno acqua di raffreddamento"
+    },
+    "in_alim": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      925,
+      2078,
+      960
+     ],
+     "text": "Alimentazione"
+    },
+    "out_torbida": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      996,
+      2078,
+      1033
+     ],
+     "text": "Torbida a filtrazione"
+    },
+    "in_riciclo": {
+     "class": "inlet/outlet",
+     "box": [
+      1981,
+      1091,
+      2078,
+      1128
+     ],
+     "text": "Riciclo"
+    },
+    "pw1": {
+     "class": "inlet/outlet",
+     "box": [
+      791,
+      288,
+      815,
+      313
+     ],
+     "text": "pW"
+    },
+    "pw2": {
+     "class": "inlet/outlet",
+     "box": [
+      1303,
+      644,
+      1329,
+      670
+     ],
+     "text": "pW"
+    },
+    "pw3": {
+     "class": "inlet/outlet",
+     "box": [
+      1327,
+      907,
+      1350,
+      931
+     ],
+     "text": "pW"
+    },
+    "pw4": {
+     "class": "inlet/outlet",
+     "box": [
+      1077,
+      1234,
+      1102,
+      1258
+     ],
+     "text": "pW"
+    },
+    "drain_mk1": {
+     "class": "inlet/outlet",
+     "box": [
+      1406,
+      618,
+      1415,
+      633
+     ],
+     "text": null
+    },
+    "drain_mk2": {
+     "class": "inlet/outlet",
+     "box": [
+      1430,
+      618,
+      1439,
+      633
+     ],
+     "text": null
+    },
+    "drain_seal": {
+     "class": "inlet/outlet",
+     "box": [
+      1013,
+      1288,
+      1023,
+      1303
+     ],
+     "text": null
+    },
+    "vent_st": {
+     "class": "inlet/outlet",
+     "box": [
+      331,
+      751,
+      347,
+      758
+     ],
+     "text": null
+    },
+    "vent_cp": {
+     "class": "inlet/outlet",
+     "box": [
+      284,
+      895,
+      299,
+      900
+     ],
+     "text": null
+    },
+    "vent_s": {
+     "class": "inlet/outlet",
+     "box": [
+      896,
+      323,
+      911,
+      329
+     ],
+     "text": null
+    },
+    "vent_r": {
+     "class": "inlet/outlet",
+     "box": [
+      896,
+      372,
+      911,
+      376
+     ],
+     "text": null
+    },
+    "vent_w": {
+     "class": "inlet/outlet",
+     "box": [
+      1141,
+      360,
+      1157,
+      365
+     ],
+     "text": null
+    },
+    "vent_mks": {
+     "class": "inlet/outlet",
+     "box": [
+      1282,
+      466,
+      1298,
+      472
+     ],
+     "text": null
+    },
+    "vent_mka": {
+     "class": "inlet/outlet",
+     "box": [
+      1449,
+      466,
+      1466,
+      472
+     ],
+     "text": null
+    },
+    "vent_o": {
+     "class": "inlet/outlet",
+     "box": [
+      1700,
+      455,
+      1713,
+      460
+     ],
+     "text": null
+    },
+    "vent_lv01": {
+     "class": "inlet/outlet",
+     "box": [
+      1807,
+      919,
+      1823,
+      923
+     ],
+     "text": null
+    },
+    "vent_xv": {
+     "class": "inlet/outlet",
+     "box": [
+      1093,
+      990,
+      1108,
+      995
+     ],
+     "text": null
+    },
+    "vent_dv": {
+     "class": "inlet/outlet",
+     "box": [
+      1664,
+      1085,
+      1680,
+      1090
+     ],
+     "text": null
+    },
+    "vent_pl": {
+     "class": "inlet/outlet",
+     "box": [
+      807,
+      1152,
+      823,
+      1157
+     ],
+     "text": null
+    },
+    "vent_pr": {
+     "class": "inlet/outlet",
+     "box": [
+      938,
+      1152,
+      953,
+      1157
+     ],
+     "text": null
+    },
+    "g_steam": {
+     "class": "general",
+     "box": [
+      382,
+      771,
+      397,
+      782
+     ],
+     "text": null
+    },
+    "fe01_el": {
+     "class": "general",
+     "box": [
+      645,
+      770,
+      654,
+      782
+     ],
+     "text": null
+    },
+    "fe05_el": {
+     "class": "general",
+     "box": [
+      1666,
+      936,
+      1679,
+      950
+     ],
+     "text": null
+    },
+    "fe06_el": {
+     "class": "general",
+     "box": [
+      1525,
+      1104,
+      1534,
+      1115
+     ],
+     "text": null
+    },
+    "fe07_el": {
+     "class": "general",
+     "box": [
+      1716,
+      603,
+      1729,
+      615
+     ],
+     "text": null
+    },
+    "red_circ": {
+     "class": "general",
+     "box": [
+      939,
+      1129,
+      960,
+      1151
+     ],
+     "text": "250/200"
+    },
+    "red_s": {
+     "class": "general",
+     "box": [
+      357,
+      1071,
+      368,
+      1086
+     ],
+     "text": "32/25"
+    },
+    "red_a": {
+     "class": "general",
+     "box": [
+      596,
+      1071,
+      607,
+      1086
+     ],
+     "text": "32/25"
+    },
+    "seal_box": {
+     "class": "general",
+     "box": [
+      1005,
+      1237,
+      1030,
+      1257
+     ],
+     "text": null
+    },
+    "v_pv01": {
+     "class": "valve",
+     "box": [
+      355,
+      759,
+      371,
+      781
+     ],
+     "text": null
+    },
+    "v_sol_pv": {
+     "class": "valve",
+     "box": [
+      347,
+      720,
+      371,
+      737
+     ],
+     "text": null
+    },
+    "v_pt01": {
+     "class": "valve",
+     "box": [
+      430,
+      756,
+      439,
+      772
+     ],
+     "text": null
+    },
+    "v_fv01": {
+     "class": "valve",
+     "box": [
+      570,
+      759,
+      585,
+      781
+     ],
+     "text": null
+    },
+    "v_ft_l": {
+     "class": "valve",
+     "box": [
+      632,
+      745,
+      642,
+      760
+     ],
+     "text": null
+    },
+    "v_ft_r": {
+     "class": "valve",
+     "box": [
+      657,
+      745,
+      666,
+      760
+     ],
+     "text": null
+    },
+    "v_19a": {
+     "class": "valve",
+     "box": [
+      740,
+      483,
+      747,
+      499
+     ],
+     "text": null
+    },
+    "v_19b": {
+     "class": "valve",
+     "box": [
+      764,
+      483,
+      771,
+      499
+     ],
+     "text": null
+    },
+    "v_pi02": {
+     "class": "valve",
+     "box": [
+      815,
+      677,
+      829,
+      685
+     ],
+     "text": null
+    },
+    "v_s": {
+     "class": "valve",
+     "box": [
+      903,
+      344,
+      918,
+      352
+     ],
+     "text": null
+    },
+    "v_r": {
+     "class": "valve",
+     "box": [
+      903,
+      392,
+      918,
+      400
+     ],
+     "text": null
+    },
+    "v_hv01": {
+     "class": "valve",
+     "box": [
+      1110,
+      365,
+      1129,
+      388
+     ],
+     "text": null
+    },
+    "v_sol_hs": {
+     "class": "valve",
+     "box": [
+      1154,
+      321,
+      1171,
+      344
+     ],
+     "text": null
+    },
+    "v_l_up": {
+     "class": "valve",
+     "box": [
+      1110,
+      403,
+      1128,
+      412
+     ],
+     "text": null
+    },
+    "v_l_low": {
+     "class": "valve",
+     "box": [
+      1092,
+      581,
+      1111,
+      589
+     ],
+     "text": null
+    },
+    "v_mk_drain": {
+     "class": "valve",
+     "box": [
+      1406,
+      530,
+      1415,
+      547
+     ],
+     "text": null
+    },
+    "v_mk_hdr": {
+     "class": "valve",
+     "box": [
+      1569,
+      415,
+      1585,
+      423
+     ],
+     "text": null
+    },
+    "v_mk01a": {
+     "class": "valve",
+     "box": [
+      1567,
+      463,
+      1584,
+      472
+     ],
+     "text": null
+    },
+    "v_cw1": {
+     "class": "valve",
+     "box": [
+      1573,
+      531,
+      1581,
+      545
+     ],
+     "text": null
+    },
+    "v_cw2": {
+     "class": "valve",
+     "box": [
+      1573,
+      570,
+      1581,
+      587
+     ],
+     "text": null
+    },
+    "v_fi04": {
+     "class": "valve",
+     "box": [
+      1641,
+      606,
+      1656,
+      613
+     ],
+     "text": null
+    },
+    "v_sc02_drain": {
+     "class": "valve",
+     "box": [
+      1702,
+      507,
+      1710,
+      524
+     ],
+     "text": null
+    },
+    "v_pi05": {
+     "class": "valve",
+     "box": [
+      1905,
+      582,
+      1915,
+      599
+     ],
+     "text": null
+    },
+    "v_dc1": {
+     "class": "valve",
+     "box": [
+      1050,
+      724,
+      1066,
+      733
+     ],
+     "text": null
+    },
+    "v_dc2": {
+     "class": "valve",
+     "box": [
+      1050,
+      796,
+      1066,
+      804
+     ],
+     "text": null
+    },
+    "v_xv01": {
+     "class": "valve",
+     "box": [
+      1027,
+      997,
+      1042,
+      1019
+     ],
+     "text": null
+    },
+    "v_sol_xc": {
+     "class": "valve",
+     "box": [
+      1069,
+      974,
+      1085,
+      998
+     ],
+     "text": null
+    },
+    "v_pi06": {
+     "class": "valve",
+     "box": [
+      1525,
+      917,
+      1533,
+      931
+     ],
+     "text": null
+    },
+    "v_sol_dc": {
+     "class": "valve",
+     "box": [
+      1609,
+      899,
+      1632,
+      916
+     ],
+     "text": null
+    },
+    "v_lv01": {
+     "class": "valve",
+     "box": [
+      1760,
+      926,
+      1775,
+      948
+     ],
+     "text": null
+    },
+    "v_sol_uc": {
+     "class": "valve",
+     "box": [
+      1752,
+      899,
+      1775,
+      916
+     ],
+     "text": null
+    },
+    "v_pi09": {
+     "class": "valve",
+     "box": [
+      1383,
+      1081,
+      1391,
+      1098
+     ],
+     "text": null
+    },
+    "v_dv01": {
+     "class": "valve",
+     "box": [
+      1617,
+      1092,
+      1632,
+      1115
+     ],
+     "text": null
+    },
+    "v_lv02": {
+     "class": "valve",
+     "box": [
+      307,
+      892,
+      324,
+      923
+     ],
+     "text": null
+    },
+    "v_mp02s_1": {
+     "class": "valve",
+     "box": [
+      357,
+      1009,
+      368,
+      1025
+     ],
+     "text": null
+    },
+    "v_ck_s": {
+     "class": "valve",
+     "box": [
+      357,
+      1027,
+      368,
+      1043
+     ],
+     "text": null
+    },
+    "v_pi08": {
+     "class": "valve",
+     "box": [
+      374,
+      1057,
+      390,
+      1066
+     ],
+     "text": null
+    },
+    "v_mp02a_1": {
+     "class": "valve",
+     "box": [
+      597,
+      1009,
+      605,
+      1025
+     ],
+     "text": null
+    },
+    "v_ck_a": {
+     "class": "valve",
+     "box": [
+      597,
+      1027,
+      605,
+      1040
+     ],
+     "text": null
+    },
+    "v_pi08a": {
+     "class": "valve",
+     "box": [
+      612,
+      1057,
+      628,
+      1066
+     ],
+     "text": null
+    },
+    "v_mp02s_d": {
+     "class": "valve",
+     "box": [
+      457,
+      1153,
+      474,
+      1161
+     ],
+     "text": null
+    },
+    "v_mp02a_d": {
+     "class": "valve",
+     "box": [
+      696,
+      1153,
+      713,
+      1161
+     ],
+     "text": null
+    },
+    "v_lt02_up": {
+     "class": "valve",
+     "box": [
+      896,
+      939,
+      914,
+      947
+     ],
+     "text": null
+    },
+    "v_lt02_low": {
+     "class": "valve",
+     "box": [
+      896,
+      975,
+      914,
+      983
+     ],
+     "text": null
+    },
+    "v_pw_seal": {
+     "class": "valve",
+     "box": [
+      1046,
+      1243,
+      1061,
+      1250
+     ],
+     "text": null
+    },
+    "py01": {
+     "class": "instrumentation",
+     "box": [
+      353,
+      686,
+      372,
+      705
+     ],
+     "text": "PY 01"
+    },
+    "pv01": {
+     "class": "instrumentation",
+     "box": [
+      373,
+      747,
+      392,
+      766
+     ],
+     "text": "PV 01"
+    },
+    "ac01": {
+     "class": "instrumentation",
+     "box": [
+      424,
+      686,
+      444,
+      706
+     ],
+     "text": "AC 01"
+    },
+    "pt01": {
+     "class": "instrumentation",
+     "box": [
+      424,
+      731,
+      444,
+      750
+     ],
+     "text": "PT 01"
+    },
+    "e50a": {
+     "class": "instrumentation",
+     "box": [
+      291,
+      717,
+      316,
+      741
+     ],
+     "text": "E50"
+    },
+    "fy01": {
+     "class": "instrumentation",
+     "box": [
+      567,
+      686,
+      586,
+      705
+     ],
+     "text": "FY 01"
+    },
+    "fv01": {
+     "class": "instrumentation",
+     "box": [
+      586,
+      752,
+      606,
+      771
+     ],
+     "text": "FV 01"
+    },
+    "fc01": {
+     "class": "instrumentation",
+     "box": [
+      640,
+      686,
+      659,
+      706
+     ],
+     "text": "FC 01"
+    },
+    "ft01": {
+     "class": "instrumentation",
+     "box": [
+      640,
+      719,
+      658,
+      738
+     ],
+     "text": "FT 01"
+    },
+    "fe01": {
+     "class": "instrumentation",
+     "box": [
+      638,
+      791,
+      658,
+      810
+     ],
+     "text": "FE 01"
+    },
+    "ti02": {
+     "class": "instrumentation",
+     "box": [
+      772,
+      609,
+      792,
+      629
+     ],
+     "text": "TI 02"
+    },
+    "tt02": {
+     "class": "instrumentation",
+     "box": [
+      814,
+      609,
+      832,
+      628
+     ],
+     "text": "TT 02"
+    },
+    "te02": {
+     "class": "instrumentation",
+     "box": [
+      814,
+      632,
+      832,
+      650
+     ],
+     "text": "TE 02"
+    },
+    "pi02": {
+     "class": "instrumentation",
+     "box": [
+      784,
+      671,
+      803,
+      690
+     ],
+     "text": "PI 02"
+    },
+    "pi03": {
+     "class": "instrumentation",
+     "box": [
+      972,
+      275,
+      991,
+      294
+     ],
+     "text": "PI 03"
+    },
+    "hv01": {
+     "class": "instrumentation",
+     "box": [
+      1110,
+      312,
+      1130,
+      332
+     ],
+     "text": "HV 01"
+    },
+    "hs01": {
+     "class": "instrumentation",
+     "box": [
+      1200,
+      302,
+      1221,
+      322
+     ],
+     "text": "HS 01"
+    },
+    "lt01": {
+     "class": "instrumentation",
+     "box": [
+      1138,
+      622,
+      1160,
+      642
+     ],
+     "text": "LT 01"
+    },
+    "fi02a": {
+     "class": "instrumentation",
+     "box": [
+      1210,
+      620,
+      1230,
+      642
+     ],
+     "text": "FI 02A"
+    },
+    "fi02b": {
+     "class": "instrumentation",
+     "box": [
+      1234,
+      620,
+      1254,
+      642
+     ],
+     "text": "FI 02B"
+    },
+    "pi04": {
+     "class": "instrumentation",
+     "box": [
+      1604,
+      362,
+      1623,
+      382
+     ],
+     "text": "PI 04"
+    },
+    "tt04": {
+     "class": "instrumentation",
+     "box": [
+      1805,
+      572,
+      1824,
+      591
+     ],
+     "text": "TT 04"
+    },
+    "ti04": {
+     "class": "instrumentation",
+     "box": [
+      1862,
+      552,
+      1880,
+      570
+     ],
+     "text": "TI 04"
+    },
+    "te04": {
+     "class": "instrumentation",
+     "box": [
+      1805,
+      615,
+      1824,
+      634
+     ],
+     "text": "TE 04"
+    },
+    "tt05": {
+     "class": "instrumentation",
+     "box": [
+      1758,
+      669,
+      1777,
+      688
+     ],
+     "text": "TT 05"
+    },
+    "ti05": {
+     "class": "instrumentation",
+     "box": [
+      1791,
+      636,
+      1810,
+      655
+     ],
+     "text": "TI 05"
+    },
+    "te05": {
+     "class": "instrumentation",
+     "box": [
+      1758,
+      709,
+      1777,
+      728
+     ],
+     "text": "TE 05"
+    },
+    "fe07": {
+     "class": "instrumentation",
+     "box": [
+      1710,
+      622,
+      1730,
+      640
+     ],
+     "text": "FE 07"
+    },
+    "fi04": {
+     "class": "instrumentation",
+     "box": [
+      1603,
+      599,
+      1624,
+      619
+     ],
+     "text": "FI 04"
+    },
+    "pi05": {
+     "class": "instrumentation",
+     "box": [
+      1900,
+      551,
+      1920,
+      571
+     ],
+     "text": "PI 05"
+    },
+    "uc01": {
+     "class": "instrumentation",
+     "box": [
+      1758,
+      767,
+      1778,
+      787
+     ],
+     "text": "UC 01"
+    },
+    "ly01": {
+     "class": "instrumentation",
+     "box": [
+      1757,
+      862,
+      1778,
+      880
+     ],
+     "text": "LY 01"
+    },
+    "lv01": {
+     "class": "instrumentation",
+     "box": [
+      1777,
+      914,
+      1798,
+      934
+     ],
+     "text": "LV 01"
+    },
+    "e50c": {
+     "class": "instrumentation",
+     "box": [
+      1695,
+      895,
+      1720,
+      920
+     ],
+     "text": "E50"
+    },
+    "dc01": {
+     "class": "instrumentation",
+     "box": [
+      1616,
+      814,
+      1635,
+      834
+     ],
+     "text": "DC 01"
+    },
+    "dy01": {
+     "class": "instrumentation",
+     "box": [
+      1615,
+      862,
+      1635,
+      881
+     ],
+     "text": "DY 01"
+    },
+    "dv01": {
+     "class": "instrumentation",
+     "box": [
+      1635,
+      1080,
+      1654,
+      1100
+     ],
+     "text": "DV 01"
+    },
+    "e50b": {
+     "class": "instrumentation",
+     "box": [
+      1553,
+      895,
+      1578,
+      920
+     ],
+     "text": "E50"
+    },
+    "tt03": {
+     "class": "instrumentation",
+     "box": [
+      1424,
+      907,
+      1444,
+      926
+     ],
+     "text": "TT 03"
+    },
+    "ti03": {
+     "class": "instrumentation",
+     "box": [
+      1481,
+      886,
+      1501,
+      906
+     ],
+     "text": "TI 03"
+    },
+    "te03": {
+     "class": "instrumentation",
+     "box": [
+      1424,
+      947,
+      1444,
+      966
+     ],
+     "text": "TE 03"
+    },
+    "pi06": {
+     "class": "instrumentation",
+     "box": [
+      1519,
+      886,
+      1540,
+      906
+     ],
+     "text": "PI 06"
+    },
+    "fe05": {
+     "class": "instrumentation",
+     "box": [
+      1662,
+      956,
+      1681,
+      975
+     ],
+     "text": "FE 05"
+    },
+    "dt01": {
+     "class": "instrumentation",
+     "box": [
+      1162,
+      885,
+      1182,
+      905
+     ],
+     "text": "DT 01"
+    },
+    "fi05a": {
+     "class": "instrumentation",
+     "box": [
+      1234,
+      883,
+      1250,
+      905
+     ],
+     "text": "FI 05A"
+    },
+    "fi05b": {
+     "class": "instrumentation",
+     "box": [
+      1258,
+      883,
+      1278,
+      905
+     ],
+     "text": "FI 05B"
+    },
+    "xv01": {
+     "class": "instrumentation",
+     "box": [
+      1024,
+      967,
+      1044,
+      987
+     ],
+     "text": "XV 01"
+    },
+    "xc01": {
+     "class": "instrumentation",
+     "box": [
+      1115,
+      957,
+      1135,
+      977
+     ],
+     "text": "XC 01"
+    },
+    "tt07": {
+     "class": "instrumentation",
+     "box": [
+      1280,
+      1074,
+      1300,
+      1093
+     ],
+     "text": "TT 07"
+    },
+    "ti07": {
+     "class": "instrumentation",
+     "box": [
+      1339,
+      1052,
+      1359,
+      1072
+     ],
+     "text": "TI 07"
+    },
+    "te07": {
+     "class": "instrumentation",
+     "box": [
+      1280,
+      1113,
+      1300,
+      1133
+     ],
+     "text": "TE 07"
+    },
+    "pi09": {
+     "class": "instrumentation",
+     "box": [
+      1377,
+      1052,
+      1397,
+      1071
+     ],
+     "text": "PI 09"
+    },
+    "fe06": {
+     "class": "instrumentation",
+     "box": [
+      1519,
+      1124,
+      1540,
+      1144
+     ],
+     "text": "FE 06"
+    },
+    "lv02": {
+     "class": "instrumentation",
+     "box": [
+      305,
+      861,
+      325,
+      882
+     ],
+     "text": "LV 02"
+    },
+    "uc02": {
+     "class": "instrumentation",
+     "box": [
+      924,
+      862,
+      944,
+      882
+     ],
+     "text": "UC 02"
+    },
+    "lt02": {
+     "class": "instrumentation",
+     "box": [
+      923,
+      1006,
+      945,
+      1024
+     ],
+     "text": "LT 02"
+    },
+    "ti01": {
+     "class": "instrumentation",
+     "box": [
+      770,
+      1004,
+      790,
+      1024
+     ],
+     "text": "TI 01"
+    },
+    "tt01": {
+     "class": "instrumentation",
+     "box": [
+      812,
+      1028,
+      831,
+      1047
+     ],
+     "text": "TT 01"
+    },
+    "te01": {
+     "class": "instrumentation",
+     "box": [
+      829,
+      1043,
+      849,
+      1062
+     ],
+     "text": "TE 01"
+    },
+    "pi07": {
+     "class": "instrumentation",
+     "box": [
+      900,
+      1027,
+      920,
+      1047
+     ],
+     "text": "PI 07"
+    },
+    "pi08": {
+     "class": "instrumentation",
+     "box": [
+      400,
+      1052,
+      420,
+      1073
+     ],
+     "text": "PI 08"
+    },
+    "pi08a": {
+     "class": "instrumentation",
+     "box": [
+      638,
+      1052,
+      658,
+      1071
+     ],
+     "text": "PI 08A"
+    },
+    "pi_circ": {
+     "class": "instrumentation",
+     "box": [
+      782,
+      1145,
+      802,
+      1165
+     ],
+     "text": "PI 08A"
+    }
+   },
+   "edges": [
+    [
+     "drain_mk1",
+     "j_mk_585"
+    ],
+    [
+     "drain_mk2",
+     "j_mka_vent"
+    ],
+    [
+     "drain_seal",
+     "seal_box"
+    ],
+    [
+     "dt01",
+     "j_dt_l"
+    ],
+    [
+     "dt01",
+     "j_dt_r"
+    ],
+    [
+     "fe01_el",
+     "sc01"
+    ],
+    [
+     "fe01_el",
+     "v_ft_l"
+    ],
+    [
+     "fe01_el",
+     "v_ft_r"
+    ],
+    [
+     "fe01_el",
+     "v_fv01"
+    ],
+    [
+     "fe05_el",
+     "j_pi06"
+    ],
+    [
+     "fe05_el",
+     "v_lv01"
+    ],
+    [
+     "fe06_el",
+     "j_pi09"
+    ],
+    [
+     "fe06_el",
+     "v_dv01"
+    ],
+    [
+     "fe07_el",
+     "j_sc02_a"
+    ],
+    [
+     "fe07_el",
+     "j_tt04"
+    ],
+    [
+     "fi02a",
+     "j_fi02"
+    ],
+    [
+     "fi02a",
+     "j_lt01_l"
+    ],
+    [
+     "fi02b",
+     "j_fi02"
+    ],
+    [
+     "fi02b",
+     "j_lt01_r"
+    ],
+    [
+     "fi04",
+     "v_cw2"
+    ],
+    [
+     "fi04",
+     "v_fi04"
+    ],
+    [
+     "fi05a",
+     "j_dt_l"
+    ],
+    [
+     "fi05a",
+     "j_fi05"
+    ],
+    [
+     "fi05b",
+     "j_dt_r"
+    ],
+    [
+     "fi05b",
+     "j_fi05"
+    ],
+    [
+     "ft01",
+     "v_ft_l"
+    ],
+    [
+     "ft01",
+     "v_ft_r"
+    ],
+    [
+     "g_steam",
+     "j_pt01"
+    ],
+    [
+     "g_steam",
+     "v_pv01"
+    ],
+    [
+     "in_acqua",
+     "j_pi05"
+    ],
+    [
+     "in_alim",
+     "j_lv01_vent"
+    ],
+    [
+     "in_riciclo",
+     "j_dv_vent"
+    ],
+    [
+     "in_vapore",
+     "j_st_vent"
+    ],
+    [
+     "j_circ_pi",
+     "j_pl_vent"
+    ],
+    [
+     "j_circ_pi",
+     "pi_circ"
+    ],
+    [
+     "j_circ_pi",
+     "seal_box"
+    ],
+    [
+     "j_cp_tee",
+     "v_lv02"
+    ],
+    [
+     "j_cp_tee",
+     "v_mp02a_1"
+    ],
+    [
+     "j_cp_tee",
+     "v_mp02s_1"
+    ],
+    [
+     "j_cp_vent",
+     "out_condpura"
+    ],
+    [
+     "j_cp_vent",
+     "v_lv02"
+    ],
+    [
+     "j_cp_vent",
+     "vent_cp"
+    ],
+    [
+     "j_cw_562",
+     "j_mk_562"
+    ],
+    [
+     "j_cw_562",
+     "v_cw1"
+    ],
+    [
+     "j_cw_562",
+     "v_cw2"
+    ],
+    [
+     "j_dc1013",
+     "j_dc1037"
+    ],
+    [
+     "j_dc1013",
+     "j_dc943"
+    ],
+    [
+     "j_dc1013",
+     "v_xv01"
+    ],
+    [
+     "j_dc1037",
+     "j_tt07"
+    ],
+    [
+     "j_dc1037",
+     "red_circ"
+    ],
+    [
+     "j_dc728",
+     "j_dc799"
+    ],
+    [
+     "j_dc728",
+     "sp01"
+    ],
+    [
+     "j_dc728",
+     "v_dc1"
+    ],
+    [
+     "j_dc799",
+     "j_dc943"
+    ],
+    [
+     "j_dc799",
+     "v_dc2"
+    ],
+    [
+     "j_dc943",
+     "j_tt03"
+    ],
+    [
+     "j_dt_l",
+     "v_dc2"
+    ],
+    [
+     "j_dt_r",
+     "v_dc1"
+    ],
+    [
+     "j_dv_vent",
+     "v_dv01"
+    ],
+    [
+     "j_dv_vent",
+     "vent_dv"
+    ],
+    [
+     "j_e19_bot",
+     "sc01"
+    ],
+    [
+     "j_e19_bot",
+     "v_19a"
+    ],
+    [
+     "j_e19_bot",
+     "v_19b"
+    ],
+    [
+     "j_e19_top",
+     "j_vap"
+    ],
+    [
+     "j_e19_top",
+     "v_19a"
+    ],
+    [
+     "j_e19_top",
+     "v_19b"
+    ],
+    [
+     "j_fi02",
+     "pw2"
+    ],
+    [
+     "j_fi05",
+     "pw3"
+    ],
+    [
+     "j_lt01_l",
+     "lt01"
+    ],
+    [
+     "j_lt01_l",
+     "v_l_low"
+    ],
+    [
+     "j_lt01_r",
+     "lt01"
+    ],
+    [
+     "j_lt01_r",
+     "v_l_up"
+    ],
+    [
+     "j_lv01_vent",
+     "v_lv01"
+    ],
+    [
+     "j_lv01_vent",
+     "vent_lv01"
+    ],
+    [
+     "j_mk_562",
+     "j_mk_585"
+    ],
+    [
+     "j_mk_562",
+     "v_mk_drain"
+    ],
+    [
+     "j_mk_585",
+     "j_mks_vent"
+    ],
+    [
+     "j_mk_hdr",
+     "sc02"
+    ],
+    [
+     "j_mk_hdr",
+     "v_mk01a"
+    ],
+    [
+     "j_mk_hdr",
+     "v_mk_hdr"
+    ],
+    [
+     "j_mka_vent",
+     "mk01a"
+    ],
+    [
+     "j_mka_vent",
+     "vent_mka"
+    ],
+    [
+     "j_mks_vent",
+     "mk01s"
+    ],
+    [
+     "j_mks_vent",
+     "vent_mks"
+    ],
+    [
+     "j_mp02_dis",
+     "sc01"
+    ],
+    [
+     "j_mp02_dis",
+     "v_mp02a_d"
+    ],
+    [
+     "j_mp02_dis",
+     "v_mp02s_d"
+    ],
+    [
+     "j_mp02a_pi",
+     "red_a"
+    ],
+    [
+     "j_mp02a_pi",
+     "v_ck_a"
+    ],
+    [
+     "j_mp02a_pi",
+     "v_pi08a"
+    ],
+    [
+     "j_mp02s_pi",
+     "red_s"
+    ],
+    [
+     "j_mp02s_pi",
+     "v_ck_s"
+    ],
+    [
+     "j_mp02s_pi",
+     "v_pi08"
+    ],
+    [
+     "j_o_vent",
+     "out_condproc"
+    ],
+    [
+     "j_o_vent",
+     "sc02"
+    ],
+    [
+     "j_o_vent",
+     "vent_o"
+    ],
+    [
+     "j_pi05",
+     "j_tt04"
+    ],
+    [
+     "j_pi05",
+     "v_pi05"
+    ],
+    [
+     "j_pi06",
+     "j_tt03"
+    ],
+    [
+     "j_pi06",
+     "v_pi06"
+    ],
+    [
+     "j_pi09",
+     "j_tt07"
+    ],
+    [
+     "j_pi09",
+     "v_pi09"
+    ],
+    [
+     "j_pl_vent",
+     "p_circ"
+    ],
+    [
+     "j_pl_vent",
+     "vent_pl"
+    ],
+    [
+     "j_pr_vent",
+     "p_circ"
+    ],
+    [
+     "j_pr_vent",
+     "seal_box"
+    ],
+    [
+     "j_pr_vent",
+     "vent_pr"
+    ],
+    [
+     "j_pt01",
+     "v_fv01"
+    ],
+    [
+     "j_pt01",
+     "v_pt01"
+    ],
+    [
+     "j_pw_300",
+     "j_pw_348"
+    ],
+    [
+     "j_pw_300",
+     "j_w_vent"
+    ],
+    [
+     "j_pw_300",
+     "pw1"
+    ],
+    [
+     "j_pw_348",
+     "j_r_vent"
+    ],
+    [
+     "j_pw_348",
+     "j_s_vent"
+    ],
+    [
+     "j_r_vent",
+     "v_r"
+    ],
+    [
+     "j_r_vent",
+     "vent_r"
+    ],
+    [
+     "j_s_vent",
+     "v_s"
+    ],
+    [
+     "j_s_vent",
+     "vent_s"
+    ],
+    [
+     "j_sc02_a",
+     "j_sc02_a515"
+    ],
+    [
+     "j_sc02_a",
+     "v_fi04"
+    ],
+    [
+     "j_sc02_a515",
+     "j_sc02_b515"
+    ],
+    [
+     "j_sc02_a515",
+     "sc02"
+    ],
+    [
+     "j_sc02_a515",
+     "v_sc02_drain"
+    ],
+    [
+     "j_sc02_b515",
+     "j_tt05"
+    ],
+    [
+     "j_sc02_b515",
+     "sc02"
+    ],
+    [
+     "j_st_vent",
+     "v_pv01"
+    ],
+    [
+     "j_st_vent",
+     "vent_st"
+    ],
+    [
+     "j_tt03",
+     "tt03"
+    ],
+    [
+     "j_tt04",
+     "tt04"
+    ],
+    [
+     "j_tt05",
+     "out_ritorno"
+    ],
+    [
+     "j_tt05",
+     "tt05"
+    ],
+    [
+     "j_tt07",
+     "tt07"
+    ],
+    [
+     "j_vap",
+     "sc02"
+    ],
+    [
+     "j_vap",
+     "sp01"
+    ],
+    [
+     "j_w_vent",
+     "v_hv01"
+    ],
+    [
+     "j_w_vent",
+     "vent_w"
+    ],
+    [
+     "j_xv_vent",
+     "out_torbida"
+    ],
+    [
+     "j_xv_vent",
+     "v_xv01"
+    ],
+    [
+     "j_xv_vent",
+     "vent_xv"
+    ],
+    [
+     "lt02",
+     "v_lt02_low"
+    ],
+    [
+     "lt02",
+     "v_lt02_up"
+    ],
+    [
+     "mk01a",
+     "v_cw1"
+    ],
+    [
+     "mk01a",
+     "v_mk01a"
+    ],
+    [
+     "mk01s",
+     "v_mk_drain"
+    ],
+    [
+     "mk01s",
+     "v_mk_hdr"
+    ],
+    [
+     "mp02a",
+     "red_a"
+    ],
+    [
+     "mp02a",
+     "v_mp02a_d"
+    ],
+    [
+     "mp02s",
+     "red_s"
+    ],
+    [
+     "mp02s",
+     "v_mp02s_d"
+    ],
+    [
+     "p_circ",
+     "red_circ"
+    ],
+    [
+     "p_circ",
+     "sc01"
+    ],
+    [
+     "pi02",
+     "v_pi02"
+    ],
+    [
+     "pi03",
+     "sp01"
+    ],
+    [
+     "pi04",
+     "sc02"
+    ],
+    [
+     "pi05",
+     "v_pi05"
+    ],
+    [
+     "pi06",
+     "v_pi06"
+    ],
+    [
+     "pi07",
+     "sc01"
+    ],
+    [
+     "pi08",
+     "v_pi08"
+    ],
+    [
+     "pi08a",
+     "v_pi08a"
+    ],
+    [
+     "pi09",
+     "v_pi09"
+    ],
+    [
+     "pt01",
+     "v_pt01"
+    ],
+    [
+     "pw4",
+     "v_pw_seal"
+    ],
+    [
+     "sc01",
+     "sp01"
+    ],
+    [
+     "sc01",
+     "tt01"
+    ],
+    [
+     "sc01",
+     "tt02"
+    ],
+    [
+     "sc01",
+     "v_lt02_low"
+    ],
+    [
+     "sc01",
+     "v_lt02_up"
+    ],
+    [
+     "sc01",
+     "v_pi02"
+    ],
+    [
+     "seal_box",
+     "v_pw_seal"
+    ],
+    [
+     "sp01",
+     "v_hv01"
+    ],
+    [
+     "sp01",
+     "v_l_low"
+    ],
+    [
+     "sp01",
+     "v_l_up"
+    ],
+    [
+     "sp01",
+     "v_r"
+    ],
+    [
+     "sp01",
+     "v_s"
+    ],
+    [
+     "v_ck_a",
+     "v_mp02a_1"
+    ],
+    [
+     "v_ck_s",
+     "v_mp02s_1"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "ac01",
+     "pt01"
+    ],
+    [
+     "ac01",
+     "py01"
+    ],
+    [
+     "dc01",
+     "dt01"
+    ],
+    [
+     "dc01",
+     "dy01"
+    ],
+    [
+     "dy01",
+     "v_sol_dc"
+    ],
+    [
+     "e50a",
+     "v_sol_pv"
+    ],
+    [
+     "e50b",
+     "v_sol_dc"
+    ],
+    [
+     "e50c",
+     "v_sol_uc"
+    ],
+    [
+     "fc01",
+     "ft01"
+    ],
+    [
+     "fc01",
+     "fy01"
+    ],
+    [
+     "fy01",
+     "v_fv01"
+    ],
+    [
+     "hs01",
+     "v_sol_hs"
+    ],
+    [
+     "lt01",
+     "uc01"
+    ],
+    [
+     "lt02",
+     "uc02"
+    ],
+    [
+     "lv02",
+     "uc02"
+    ],
+    [
+     "lv02",
+     "v_lv02"
+    ],
+    [
+     "ly01",
+     "uc01"
+    ],
+    [
+     "ly01",
+     "v_sol_uc"
+    ],
+    [
+     "py01",
+     "v_sol_pv"
+    ],
+    [
+     "ti01",
+     "tt01"
+    ],
+    [
+     "ti02",
+     "tt02"
+    ],
+    [
+     "ti03",
+     "tt03"
+    ],
+    [
+     "ti04",
+     "tt04"
+    ],
+    [
+     "ti05",
+     "tt05"
+    ],
+    [
+     "ti07",
+     "tt07"
+    ],
+    [
+     "v_dv01",
+     "v_sol_dc"
+    ],
+    [
+     "v_hv01",
+     "v_sol_hs"
+    ],
+    [
+     "v_lv01",
+     "v_sol_uc"
+    ],
+    [
+     "v_pv01",
+     "v_sol_pv"
+    ],
+    [
+     "v_sol_xc",
+     "v_xv01"
+    ],
+    [
+     "v_sol_xc",
+     "xc01"
+    ]
+   ]
+  }
+ }
+}

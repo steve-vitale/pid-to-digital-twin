@@ -78,6 +78,8 @@ def parse_corrections(text, collection, item, twin):
         k, v = [x.strip() for x in part.split("=", 1)]
         if k not in EDITABLE:
             return {}, f"field '{k}' can't be edited here (allowed: {', '.join(sorted(EDITABLE))})"
+        if not v:  # "tag=" is a typo, not a request to blank the tag: refuse rather than erase a value
+            return {}, f"'{k}=' has no value; give the corrected value, or reject the item instead"
         changes[k] = v
     return changes, None
 
@@ -189,6 +191,11 @@ def apply(model, rows, reviewer, today, ids):
                     continue
                 status = prev.get("status", "unverified")
             changes = {k: v for k, v in changes.items() if str(item.get(k)) != v}
+            if "tag" in changes and item.get("tag_status") in ("placeholder", "missing"):
+                # The tag now comes from a person, not the drawing: a corrected placeholder (or a supplied missing tag)
+                # is no longer one, and the generators (review queue reason, SVG colour, point matching) read
+                # tag_status, not the history. Scoped identifier corrections never reach here (they need a real tag).
+                changes["tag_status"] = "reviewed"
         new = {"status": status, "show_on_screen": {"Y": True, "N": False}.get(show, prev.get("show_on_screen")),
                "alarm_priority": PRIORITY.get(prio, prev.get("alarm_priority")), "notes": notes or prev.get("notes")}
         same = all(prev.get(k) == v for k, v in new.items()) and not changes
@@ -233,7 +240,8 @@ def apply(model, rows, reviewer, today, ids):
 
 def rel(path):
     path = Path(path)
-    return path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.as_posix()
+    # Outside the repository, keep only the folder and file name: a change record gets shared, a home path shouldn't.
+    return path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else f"{path.parent.name}/{path.name}"
 
 
 def write_record(log, model_path, reviewer, today, dry, rec_dir=None):
@@ -257,15 +265,17 @@ def write_record(log, model_path, reviewer, today, dry, rec_dir=None):
     if log["needs_moc"]:
         lines += ["## Needs a change review (not applied to alarms)", "", "| Item | Request | Why |", "|---|---|---|"]
         lines += [f"| {m['item']} | {m['request']} | {m['why']} |" for m in log["needs_moc"]] + [""]
-    if not dry:
-        (rec_dir / f"{stem}.md").write_text("\n".join(lines), encoding="utf-8")
+    if not dry:  # LF on every OS, so a record is byte-identical wherever it is made
+        (rec_dir / f"{stem}.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
         (rec_dir / f"{stem}.json").write_text(json.dumps({"model": rel(model_path),
                                                           "reviewer": reviewer, "date": today, **log}, indent=1),
-                                              encoding="utf-8")
+                                              encoding="utf-8", newline="\n")
     return "\n".join(lines)
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash;
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace", newline="\n")  # and LF when redirected
     ap = argparse.ArgumentParser()
     ap.add_argument("model")
     ap.add_argument("sheet")
@@ -275,16 +285,24 @@ def main():
     ap.add_argument("--record-dir", default=None, help="where the change record goes (default out/review)")
     a = ap.parse_args()
     model_path = Path(a.model).resolve()
-    raw = model_path.read_text(encoding="utf-8")
-    model = json.loads(raw)
+    try:
+        raw = model_path.read_text(encoding="utf-8")
+        model = json.loads(raw)
+        with open(a.sheet, encoding="utf-8-sig", newline="") as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+    except (OSError, ValueError, csv.Error) as exc:  # a missing or unreadable file: say which, no traceback
+        ap.exit(2, f"review not applied; nothing written: {exc}\n")
     # Keep the file's own formatting, so the git diff shows only what the review changed.
     second = raw.splitlines()[1] if "\n" in raw else ""
     indent = len(second) - len(second.lstrip(" ")) or None
     ascii_only = raw.isascii()
     trailing = "\n" if raw.endswith("\n") else ""
-    rows = list(csv.DictReader(open(a.sheet, encoding="utf-8-sig", newline="")))
-    if "item_id" not in (rows[0] if rows else {}):
+    newline = "\r\n" if b"\r\n" in model_path.read_bytes() else "\n"  # read_text hides the line endings
+    if "item_id" not in (reader.fieldnames or []):
         sys.exit("not a review sheet: no item_id column")
+    if not rows:
+        sys.exit("the review sheet has no rows: nothing to apply")
     # TE alarm setpoints come from the gateway build; mark which TE items carry one so requests are judged right.
     try:
         sys.path.insert(0, str(ROOT / "scripts" / "ignition"))
@@ -301,7 +319,8 @@ def main():
             it.pop("alarm_setpoints", None)
     print(write_record(log, model_path, a.reviewer, a.date, a.dry_run, a.record_dir))
     if not a.dry_run and log["applied"]:
-        model_path.write_text(json.dumps(model, indent=indent, ensure_ascii=ascii_only) + trailing, encoding="utf-8")
+        model_path.write_text(json.dumps(model, indent=indent, ensure_ascii=ascii_only) + trailing, encoding="utf-8",
+                              newline=newline)
         print(f"\nupdated {rel(model_path)}; now regenerate (scripts/generate.py)")
     sys.exit(1 if log["refused"] else 0)
 

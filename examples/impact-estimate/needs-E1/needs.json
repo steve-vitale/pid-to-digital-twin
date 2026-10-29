@@ -1,0 +1,59 @@
+{
+  "about": "What to measure and which site constants an annual energy, cost and CO2e estimate needs, per question, and where each constant comes from. Public typical values are used only with --use-defaults and always labelled. See docs/IMPACT_ESTIMATE.md.",
+  "questions": [
+    {
+      "question_id": "E1",
+      "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+      "family": "energy",
+      "estimate_forms": [
+        "electricity"
+      ],
+      "note": "Pump on a variable speed drive: measured kW before and after. Before installing, the after kW can only be estimated from the flow-duration curve, the pump curve and the static head; say so.",
+      "measure": [
+        {
+          "key": "kw",
+          "what": "Average electrical input kW before and after (or the kW reduction): a clamp-on three-phase power meter, the drive or MCC power reading, or the historian's motor kW tag, over a representative period at the same production rate. An estimate from curves (pump/fan curve and affinity laws) must say so."
+        },
+        {
+          "key": "hours",
+          "what": "Operating hours per year the change applies: historian run status, the operating schedule, or maintenance records. Not 8,760 unless it really runs all year."
+        },
+        {
+          "key": "demand_kw",
+          "what": "Optional: the reduction in billing-peak kW (interval meter data at the billing interval) and the months it applies."
+        }
+      ],
+      "constants": [
+        {
+          "key": "electricity_price_per_kwh",
+          "name": "Electricity energy price",
+          "unit": "$/kWh",
+          "where": "Your electricity bill and rate schedule: the energy charge per kWh in the hours the change applies (weight time-of-use periods by the hours saved in each). Not total bill / total kWh, which mixes in demand and fixed charges.",
+          "urls": [
+            "https://www.eia.gov/electricity/annual/html/epa_02_04.html"
+          ],
+          "public_typical_value": "EIA Electric Power Annual Table 2.4, US average industrial price (2025)"
+        },
+        {
+          "key": "grid_kg_co2e_per_kwh",
+          "name": "Grid emission factor",
+          "unit": "kg CO2e/kWh",
+          "where": "Location-based Scope 2: the EPA eGRID total output emission rate (CO2e) for your eGRID subregion; find the subregion by ZIP code in EPA's Power Profiler, then read the rate from the eGRID summary tables. Market-based Scope 2 instead uses your utility's published supplier-specific emission factor or your contract instruments (RECs, PPAs). Subregion rates differ about 5 times.",
+          "urls": [
+            "https://www.epa.gov/egrid/power-profiler",
+            "https://www.epa.gov/egrid/summary-data"
+          ],
+          "public_typical_value": "EPA eGRID2023 US total output CO2e rate"
+        },
+        {
+          "key": "demand_charge_per_kw_month",
+          "name": "Demand charge (only to estimate a demand kW reduction)",
+          "unit": "$/kW-month",
+          "where": "Your electricity bill and rate schedule: the demand charge per kW per month, its billing interval (often 15 minutes) and any ratchet clause. A kW reduction saves demand charges only if it lowers the billing peak; check against interval meter data. Never defaulted.",
+          "urls": [],
+          "public_typical_value": null
+        }
+      ]
+    }
+  ]
+}

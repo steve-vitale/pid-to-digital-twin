@@ -137,6 +137,9 @@ def plan_mapping(model, rows, io_name, scope=None, replace_all=False):
 
 
 def main():
+    import sys
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash;
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace", newline="\n")  # and LF when redirected
     ap = argparse.ArgumentParser()
     ap.add_argument("model")
     ap.add_argument("io_list")
@@ -147,26 +150,31 @@ def main():
     a = ap.parse_args()
     scope = {s.strip() for s in a.sheets.split(",") if s.strip()}
     model_path = Path(a.model).resolve()
-    raw = model_path.read_text(encoding="utf-8")
-    model = json.loads(raw)
+    try:
+        raw = model_path.read_text(encoding="utf-8")
+        model = json.loads(raw)
+        with open(a.io_list, encoding="utf-8-sig", newline="") as stream:
+            reader = csv.DictReader(stream)
+            fields = reader.fieldnames or []
+            rows = list(reader)
+    except (OSError, ValueError, csv.Error) as exc:  # a missing or unreadable file: say which, no traceback
+        ap.exit(2, f"point mapping rejected; no model update: {exc}\n")
     second = raw.splitlines()[1] if "\n" in raw else ""
     indent = len(second) - len(second.lstrip(" ")) or None
-    with open(a.io_list, encoding="utf-8-sig", newline="") as stream:
-        reader = csv.DictReader(stream)
-        required = {"tag", "server", "base_path", "point"}
-        if not required.issubset(reader.fieldnames or []):
-            ap.error("I/O CSV must contain tag, server, base_path and point columns")
-        if len(reader.fieldnames) != len(set(reader.fieldnames)):
-            ap.error("I/O CSV has duplicate column names")
-        rows = list(reader)
-        if any(None in r for r in rows):
-            ap.error("I/O CSV contains rows with extra fields")
+    newline = "\r\n" if b"\r\n" in model_path.read_bytes() else "\n"  # read_text hides the line endings
+    required = {"tag", "server", "base_path", "point"}
+    if not required.issubset(fields):
+        ap.error("I/O CSV must contain tag, server, base_path and point columns")
+    if len(fields) != len(set(fields)):
+        ap.error("I/O CSV has duplicate column names")
+    if any(None in r for r in rows):
+        ap.error("I/O CSV contains rows with extra fields")
     io_name = Path(a.io_list).name
     model, report = plan_mapping(model, rows, io_name, scope, a.replace_all)
     try:
         model_name = model_path.relative_to(ROOT).as_posix()
     except ValueError:
-        model_name = str(model_path)
+        model_name = f"{model_path.parent.name}/{model_path.name}"  # reports get shared; a home path shouldn't
     report.update(model=model_name, io_list=io_name, dry_run=a.dry_run)
     mapped = report["mapped"]
     not_in_io = report["not_in_io_list"]
@@ -202,17 +210,17 @@ def main():
     lines += ["", "## All mappings before", "", json.dumps(report["mappings_before"], sort_keys=True),
               "", "## All mappings after", "", json.dumps(report["mappings_after"], sort_keys=True)]
     text = "\n".join(lines) + "\n"
-    print(json.dumps(report, indent=1) if a.json else text)
+    print(json.dumps(report, indent=1) if a.json else text, end="\n" if a.json else "")
     if not report["valid"]:
         raise SystemExit(1)
     if not a.dry_run:
         out_dir.mkdir(parents=True, exist_ok=True)
-        (out_dir / f"{stem}.md").write_text(text, encoding="utf-8")
-        (out_dir / f"{stem}.json").write_text(json.dumps(report, indent=1), encoding="utf-8")
+        (out_dir / f"{stem}.md").write_text(text, encoding="utf-8", newline="\n")
+        (out_dir / f"{stem}.json").write_text(json.dumps(report, indent=1), encoding="utf-8", newline="\n")
         model_path.write_text(json.dumps(model, indent=indent, ensure_ascii=raw.isascii())
-                              + ("\n" if raw.endswith("\n") else ""), encoding="utf-8")
+                              + ("\n" if raw.endswith("\n") else ""), encoding="utf-8", newline=newline)
         if not a.json:
-            print(f"updated {report['model']}; now regenerate (scripts/generate.py {report['model']})")
+            print(f"updated {model_path}; now regenerate (scripts/generate.py {model_path})")
 
 
 if __name__ == "__main__":

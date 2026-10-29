@@ -3,7 +3,9 @@
 [![tests](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml/badge.svg)](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml)
 
 AI vision models read the symbols and tags on piping and instrumentation diagrams (P&IDs), code traces the lines,
-and the result becomes a tagged asset model for Ignition and a PI AF structure. Extraction from real drawings is
+and the result is a draft asset model plus import files for Ignition (an HMI/SCADA platform) and PI AF (the PI
+historian's asset tree), whose data points stay placeholders
+until someone maps them from an I/O list. Extraction from real drawings is
 scored against public third-party answer keys (the generated drawings and the real unit use checks this project
 wrote, and say so), and the scoring rules were committed before any model ran (the one rule I later bent is
 logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
@@ -11,23 +13,56 @@ logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
 The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand. This project
 tests how much of that AI can do, how to check its work honestly, and what a plant would need to use it safely.
 
+**If you work at a plant:**
+- **You put in** one P&ID as a PNG. For a PDF or a scanned PDF, convert each page first (`pip install pymupdf`):
+  `python -c "import pymupdf,sys; d=pymupdf.open(sys.argv[1]); [p.get_pixmap(dpi=200).save(f'{sys.argv[2]}/{i}.png') for i,p in enumerate(d)]" drawing.pdf mysheets`
+  writes `mysheets/0.png`, `1.png` and so on (the folder must exist).
+- **You get** a draft asset list and a review sheet ranked for checking, plus an Ignition tag file and a PI Builder
+  sheet. Those two are placeholder shells: no point is connected until your I/O list maps it.
+- **Time:** machine time was 88 s of commands for one new sheet, measured once. Review time has not been measured;
+  [COSTS.md](docs/COSTS.md) *assumes* about 45 minutes per sheet, at an assumed 1 minute per correction.
+- **Old scans:** on synthetic old-scan copies, the review load (differences from the answer key per 100 items)
+  roughly tripled (GPT 17.8 → 51.5,
+  [table](#results-held-out-drawings-and-how-they-were-used)). The runbook is
+  [examples/own-drawing](examples/own-drawing/README.md); its extraction step needs a model CLI and subscription.
+
+**Who did what.** I chose the problem, set the goals and the evaluation rules before seeing results, made the design
+calls and checked the results. AI coding agents (Claude Code, and later Codex) wrote most of the code and the first
+drafts of the docs. The [build journal](docs/JOURNAL.md) logs where they and I were wrong.
+
+**Start here:**
+- *Plant engineers:* [your own drawing](examples/own-drawing/README.md) · [at your plant](docs/AT_YOUR_PLANT.md) ·
+  [costs and review time](docs/COSTS.md)
+- *Controls and Ignition integrators:* [the output files](docs/TWIN_OUTPUTS.md) ·
+  [gateway acceptance](docs/IGNITION_ACCEPTANCE.md) · [PI mapping](docs/PI_MAPPING.md)
+- *Energy and sustainability:* [questions to ask of a drawing](docs/OPPORTUNITY_SCREEN.md) ·
+  [from a measured change to cost and CO2e](docs/IMPACT_ESTIMATE.md)
+- *Process safety reviewers:* [what the Bayer replay can't show](docs/BAYER_RT.md#the-evening-replayed-through-the-model-scriptsbayer_replaypy) ·
+  [LOTO view limits](docs/OPEN100_STRUCTURAL.md#5-loto-isolation-view) ·
+  [generated drawings are not drawings of record](docs/AT_YOUR_PLANT.md#start-wherever-you-are)
+- *Researchers:* [evaluation rules and layers](docs/EVALUATION.md) · [where each tool holds and breaks](docs/GENERALIZATION.md) ·
+  [what already exists, and what this adds](docs/PRIOR_ART.md)
+
 **In two minutes:**
-- **Reading real drawings.** On six held-out public drawings (they also chose between methods), symbols are found
-  with F1 0.93 and connections 0.87 over five runs, leaving about 20 differences from the answer key per 100 items
-  for a person to check. The 2,886 extracted
+- **Reading real drawings.** On six drawings held out from tuning (a same-plant validation split that also chose
+  the method), symbols are found with F1 0.93 and connections 0.87 over five runs (F1 runs 0 to 1 and combines
+  items missed with items wrongly added; 1 is perfect), leaving about 20 differences from
+  the answer key per 100 items for a person to check. The 2,886 extracted
   items arrive ranked by risk: 377 to check first. [Results](#results-held-out-drawings-and-how-they-were-used)
 - **Drawing what matters.** A P&ID generated from a verified model had every instrument and no control loops: 0 of
   19. The loops were read out of the simulator's own code and drawn. [Journal 50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none)
-- **Proving it in a real platform.** The Ignition project is read back out of a running gateway by a verifier that
-  first had to catch 5 planted faults. [Acceptance](docs/IGNITION_ACCEPTANCE.md)
+- **Checked in a lab Ignition gateway, on the Tennessee Eastman kit.** That project is read back out of a running
+  local gateway by a verifier that first had to catch 5 planted faults. A bundle made from your own drawing has not
+  been import-tested on a gateway, and nothing was imported into PI. [Acceptance](docs/IGNITION_ACCEPTANCE.md)
 - **A real unit from a public investigation.** A model written from the CSB report's text got the report's own
   drawing wrong in four places (10 of 21 checks agreed at first; corrected, 20 of 21). The report's DCS trend is digitized and checked against
   its text, disagreements included. [Bayer residue treater](docs/BAYER_RT.md)
 - **Not done:** no reviewer has been timed, no operator has reviewed the screens, nothing is imported into a PI
-  System, and no plant's own data was used. Coding agents wrote most of the code; I set the tests first and logged
-  where they and I were wrong ([how it was built](#how-it-was-built)).
-- **Check it yourself.** `python scripts/check_claims.py` compares every headline number here with the committed file
-  it comes from (standard library only, under a minute). If you'd rather have your coding agent do it,
+  System, and no plant's own data was used.
+- **Check it yourself.** `python scripts/check_claims.py` checks that every headline number here matches the
+  committed results file it comes from (standard library only, under a minute). It does not re-run models or
+  re-score predictions: the per-drawing model outputs are not committed ([why](runs/README.md)), so the headline
+  scores can be re-scored only from run records you produce. If you'd rather have your coding agent do it,
   [AGENTS.md](AGENTS.md) tells it what to run and which limits to report back. More: [REVIEWING.md](docs/REVIEWING.md).
 - **What was tried.** Every tuning attempt with its number and verdict (134 so far, most of them single runs), and
   the 55 ideas not tried yet: [TRIED.md](docs/TRIED.md), generated from `data/attempts.json` and checked in CI.
@@ -50,47 +85,40 @@ the live replay and the native acceptance run are recorded by hand because they 
 `rebuild --from <stage>` carries a correction forward. Per-element confidence: `python scripts/pipeline.py
 confidence`. Stage by stage: [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md).
 
-### What you can do with only drawings, only process knowledge, or both
+### Drawings only, process knowledge only, or both
 
-The two main tracks have opposite halves of the picture. **TE** has process knowledge (a model checked against the
-simulator source, and recorded simulator replay) and no original drawing. **OPEN100** has 12 real drawings and
-no process data. Most of a digital twin starter kit needs only the structure, and drawings carry structure: equipment, connections, flow arrows,
-off-page links, isolation valves. Values, normal bands, alarms and replay need process data, so OPEN100 can't have
-them, and the table says so instead of faking them. What OPEN100 gets from its drawings alone is in
-[docs/OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md): flow direction read from arrowheads, flags and pump ports
-(361 of 1,133 process links; the rest stay undirected), the 12 sheets stitched into one plant, an ISA-101-style mimic,
-a 3D orientation tour and a LOTO isolation view on the real drawing.
+The two main tracks have opposite halves of the picture: **TE** (Tennessee Eastman) has process knowledge and no
+original drawing, and **OPEN100** has 12 real drawings and no process data. In short:
 
-<!-- deliverables-matrix:start -->
 | Deliverable | TE: process knowledge, no original drawing | OPEN100: drawings, no process data |
 |---|---|---|
-| Asset model (equipment, instruments, connections, hierarchy) | **Done**: transcribed from the published process; every tag checked against the simulator source (36 confirmed, 1 corrected) and every unit, stream, direction and tag owner against its balances and flow lines (51 confirmed, 4 corrected, 1 unresolvable of 56); 0 items reviewed by operations ([te_topology_check.md](out/te_topology_check.md), [te_source_check.md](out/te_source_check.md)) | **Done**: extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on six held-out drawings (which also chose the method) symbols found F1 0.93, connections 0.87, review load 20.1 per 100, all means of five round-5 runs (the earlier single round-2 run scored 17.8) ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv), [replicates_r5_holdout-a.md](out/replicates_r5_holdout-a.md)) |
-| Tag text read from drawings | **Done**: a round trip on the generated sheets: every tag read on clean sheets by both models, 14% (GPT) and 49% (Claude) at the worst scan level; an upper bound for clean house-style drawings, not real-plant accuracy ([roundtrip_scores.md](out/te_pid/roundtrip_scores.md)) | **Not possible**: the public answer keys carry no text, so tag reading cannot be scored here; on three DEXPI example sheets with labelled symbols (round 5) GPT read 29 of 33 tags exactly and Claude 28, and on two more both found 99-100% of 145 identifiers from the published tag lists |
-| Ignition tags and PI AF asset structure | **Done**: loaded into a lab gateway; the PI Builder sheet (schema v2) is checked offline against the vendor-published conventions, not imported into a PI System ([te_tags.json](out/ignition/te_tags.json), [pi](out/pi)) | **Done**: same; instrument tags are placeholders until an I/O list maps them, and placeholder PI rows are left unselected ([tags.json](out/twin/r2-tiles-trace/codex/ignition/tags.json), [pi](out/twin/r2-tiles-trace/codex/pi)) |
-| Original drawing on screen with each instrument's value | **Not done yet**: no original TE drawing exists; a P&ID is now generated from the model in the OPEN100 style (three sheets, not a drawing of record), but it is not a screen background yet ([101.png](data/te_pid/101.png), [style_fidelity.md](out/te_pid/style_fidelity.md)) | **Done**: 12 drawing screens, checked in a lab gateway; every unmapped value reads 'not connected' ([native-sheet0-not-connected.png](docs/screenshots/native-sheet0-not-connected.png)) |
-| Flow direction on connections | **Done**: every stream's direction checked against the simulator's pressure-driven flow lines ([te_topology_check.md](out/te_topology_check.md), [te_process_model.json](data/te_process_model.json)) | **Partial**: read from drawing evidence (arrowheads, off-page flags, pump ports) on 361 of 1,133 process links; the rest stay undirected and show no arrow ([flow_direction.json](out/open100_structural/flow_direction.json), [flow-evidence-sheet5.png](docs/screenshots/open100/flow-evidence-sheet5.png)) |
-| Sheets stitched into one plant | **Not applicable**: one process description, no sheets | **Done offline (not in a gateway)**: off-page connectors join the 12 sheets; 38 sheet-to-sheet connections, 36 with a direction ([plant_structure.json](out/open100_structural/plant_structure.json)) |
-| Process mimic overview (ISA-101 style) | **Done**: native acceptance in a lab gateway, plus a 390 px overview at /m; proof of concept: layout and key values are first-pass, not reviewed by operations ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png), [native-narrow-m-normal.png](docs/screenshots/native-narrow-m-normal.png)) | **Done offline (not in a gateway)**: plant overview and 12 area views from the same screen components; offline render; proof of concept, structure only ([mimic-plant-overview.png](docs/screenshots/open100/mimic-plant-overview.png), [mimic-area-sheet7.png](docs/screenshots/open100/mimic-area-sheet7.png)) |
-| Equipment purpose cards | **Done**: one sentence per unit, each citing the simulator lines it restates, shown on the 3D tour's stop cards; not reviewed by an operator ([te_unit_purposes.json](data/te_unit_purposes.json), [02_r-101_normal.jpg](drafts/3d-tour/02_r-101_normal.jpg)) | **Done offline (not in a gateway)**: from the drawings' own equipment schedules and labels (transcribed, unverified); generic class text where the drawing says nothing, marked as such ([open100_equipment_schedule.json](data/open100_equipment_schedule.json)) |
-| 3D orientation tour (stills) | **Draft**: proof of concept: placeholder geometry, source-checked topology, colours from recorded replay; no render check fails on twelve stills (15 pass, 2 informational), five committed ([00_overview_normal.jpg](drafts/3d-tour/00_overview_normal.jpg), [verification.md](drafts/3d-tour/verification.md)) | **Draft**: proof of concept: placeholder geometry at drawing positions, stops in inferred flow order, structure only ([3d-00_overview.jpg](docs/screenshots/open100/3d-00_overview.jpg), [3d-01_stop_sheet3.jpg](docs/screenshots/open100/3d-01_stop_sheet3.jpg)) |
-| Lockout/tagout isolation view | **Mockup**: isolation points inferred from the seed model (the purge's isolation point now sits at the separator); not a procedure ([40_loto_mockup.jpg](drafts/3d-tour/40_loto_mockup.jpg)) | **Mockup**: isolation points from the extracted symbols, on the real drawing, with sheet and box for each; not a procedure ([loto-isolation-sheet7.png](docs/screenshots/open100/loto-isolation-sheet7.png), [loto_isolation_points.csv](out/open100_structural/loto_isolation_points.csv)) |
-| Values on the screens | **Done**: recorded simulator replay (proof of concept: not a live plant, and not a simulator that responds to control) ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png)) | **Not possible**: needs process data: an I/O list or historian mapping for these instruments |
-| Point mapping to data addresses | **Done**: replay channels mapped in the lab gateway ([build_meta.json](out/ignition/gateway/build_meta.json)) | **Synthetic demo**: a synthetic I/O list shaped like a real export; no real addresses exist for these drawings ([io_lists](data/io_lists)) |
-| Normal bands and early warning | **Done**: learned on half the normal run; on all 21 published faults the bands flag 17 (median 48 min after onset) with 0 false alarms in 193 h of held-out normal running, and miss faults 3, 9, 15 and 19 ([fault_detection.md](out/fault_detection/fault_detection.md), [normal_bands.md](out/ignition/normal_bands.md)) | **Not possible**: needs a historian record of normal operation |
-| Alarms | **Done**: published setpoints, plus a data-source-lost diagnostic alarm per data source; in the lab gateway the pressure alarm fires on the recorded fault, the diagnostic fires and clears, and the header count matches the alarm table ([IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md), [native-current-20261013-alarms.json](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) | **Not possible**: needs setpoints and process data; the drawings name some alarm points but give no setpoints |
-| Fault replay and live process tour | **Done**: recorded fault-6 replay; proof of concept: replay is not a simulator that responds to control ([native-revD-overview-fault-alarm.png](docs/screenshots/native-revD-overview-fault-alarm.png)) | **Not possible**: needs recorded process data |
-| Operations review | **Not done yet**: tooling built; needs someone who knows the process ([REVIEW_LOOP.md](docs/REVIEW_LOOP.md)) | **Not done yet**: same; the review queue is ready ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv)) |
-<!-- deliverables-matrix:end -->
+| Asset model | Done, checked against the simulator source | Done, extracted; every item unverified until reviewed |
+| Ignition tags and PI AF structure | Loaded into a lab Ignition gateway; PI sheet checked offline, not imported | Same, with every data point a placeholder until an I/O list maps it |
+| Values, normal bands, alarms, replay | Done on recorded simulator replay (proof of concept) | Not possible: needs process data |
+| Flow direction, mimic, 3D tour, LOTO view | Done or draft | Partial or offline proof of concept. The LOTO view is a mockup, not a procedure: a valve the extraction missed is not on the list |
+| Operations review | Not done | Not done |
 
-| OPEN100 plant overview (offline render) | 3D tour stop, structure only | LOTO isolation view on the real drawing (mockup) |
-|---|---|---|
-| ![OPEN100 plant overview: 12 areas in inferred tour order, arrows between areas where off-page flags show the direction, every value 'not connected'](docs/screenshots/open100/mimic-plant-overview.png) | ![3D tour stop 5, aux cooling water: placeholder equipment at drawing positions, purpose card from the drawing's equipment schedule, instruments marked not connected](docs/screenshots/open100/3d-05_stop_sheet7.jpg) | ![OPEN100 sheet 7 with numbered isolation points: manual and motor-operated valves, motor-driven pumps, lines from other systems, control valves marked as not isolation devices](docs/screenshots/open100/loto-isolation-sheet7.png) |
+Every row with its evidence, in full: [the deliverables matrix](#what-you-can-do-with-only-drawings-only-process-knowledge-or-both)
+near the end of this page.
 
 ## Results (held-out drawings, and how they were used)
 
-Review load = the scored differences from the answer key per 100 key items (missed, extra or wrong symbols and
-connections). Lower is better. Around 100 is about the same work as drawing it from scratch. It counts differences,
-not a reviewer's minutes: no review has been timed. Round 2, each method scored once per set:
+**The number to quote.** On six held-out OPEN100 drawings, GPT with tiling and code line tracing leaves **20.1**
+differences from the answer key per 100 key items for a person to check, and Claude leaves **29.8**. Each is the
+mean of five round-5 runs ([replicates_r5_holdout-a.md](out/replicates_r5_holdout-a.md)). This is the review load:
+missed, extra or wrong symbols and connections per 100 key items. Lower is better; around 100 is about the same work
+as drawing it from scratch. It counts differences, not a reviewer's minutes: no review has been timed.
+
+**What kind of test this is.** A same-plant validation split: OPEN100 sheets 6–11 (holdout A) against development
+sheets 0–5, from one plant in one drafting style. Holdout A also chose each tool's method, and round-1 outputs had
+been seen for all 12 sheets, so these are selection numbers, not an untouched test ([GOAL.md](docs/GOAL.md)).
+Holdout B, 20 synthetic drawings in a different drafting style, is the check of that choice.
+
+**GPT vs Claude is a tie across drawings.** Resampling the six drawings (a bootstrap), Claude minus GPT is 9.8
+points with a 95% interval of −4.5 to 26.5, which includes zero. Holding the same six drawings fixed, run-to-run
+noise alone gives 7.3 to 12.2, so on these six drawings GPT did better. Six drawings are the limit, not the runs.
+
+**How it got there.** Round 2, each method scored once per set:
 
 | Model | Model alone, A / B | Tiling + code line tracing, A / B |
 |---|---|---|
@@ -100,16 +128,27 @@ not a reviewer's minutes: no review has been timed. Round 2, each method scored 
 
 A = 6 real OPEN100 drawings. B = 20 synthetic drawings in a different drafting style. Each method was scored once
 per set; Gemini's numbers are earlier runs and it was not run after round 3. These single round-2 runs are the ones
-the round-2 decisions were taken on. **Holdout A chose each tool's method**, so its numbers are selection numbers,
-not an untouched test, and round-1 outputs had been seen for all 12 OPEN100 sheets ([GOAL.md](docs/GOAL.md));
-holdout B is the check of that choice on a drawing style nothing was tuned on. Five later reruns of the bold method on A (round 5, below) average **20.1** for
-GPT and **29.8** for Claude, the figures to quote for holdout A now. Source: [docs/GOAL.md](docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout).
+the round-2 decisions were taken on. Five later reruns of the bold method on A (round 5, below) give the figures
+above. Source: [docs/GOAL.md](docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout).
 
 - Reviewers get a risk-ranked queue. The twin built from 12 sheets has 2,886 items: 377 red, 676 amber and 1,833
-  green. Green items were 94–100% right on the held-out drawings.
+  green. Green items were 94–100% right on the held-out drawings. The tiers come from agreement between
+  extractions (other models, the other pass, the line tracer, a clean tag), not from what the item does: a green
+  relief valve or interlock still needs checking.
 - Where it breaks: old-scan image quality roughly triples review load, mostly because the line tracer fails on
   faded ink (table below).
 - How "done well" is defined, and the rules that stop me gaming my own score: [docs/EVALUATION.md](docs/EVALUATION.md).
+- Every connection number on this page is the **network layer**: two items count as connected when they are on the
+  same drawn line network (the scorer collapses the answer key's graph to every pair on a network), not when a pipe
+  runs directly from one to the other. The pipe layer is scored separately, against topology from the source (DEXPI
+  XML, the generated drawings, or derived from the PID2Graph key graph). Which evaluation measures which:
+  [EVALUATION.md §7](docs/EVALUATION.md#7-which-layer-each-evaluation-measures).
+- **Not comparable with the PID2Graph paper.** The headline connection F1 scores network co-membership (every pair
+  on a drawn line network). The PID2Graph paper scores direct edges, so its numbers and these can't be compared.
+  That reading of the paper's metric was not checked against the paper's text (EVALUATION.md §7).
+- **Seen before?** PID2Graph (holdout B included) and the DEXPI examples are public, and the models were trained on
+  web data, so exposure during their training can't be ruled out. Holdout B was sealed from tuning, not from the
+  web. Only the drawings this project generated (Tennessee Eastman and Bayer) are certainly new to the models.
 - Cost: $16.57 of metered model spend, plus two flat-rate subscriptions. Reviewer time is the real cost:
   [docs/COSTS.md](docs/COSTS.md).
 
@@ -136,9 +175,7 @@ The scans are synthetic degradations, not real archive scans. Details: [GOAL.md,
 | DEXPI tag text, read exactly | 29 of 33 | 28 of 33 |
 | DEXPI tag lists, identifiers found | 145 of 145 | 99.4% |
 
-- **GPT vs Claude:** on these six drawings GPT is better by more than run-to-run noise (9.8 points). Across
-  drawings like these the gap is not established: the interval includes zero. Six drawings are the limit, not the
-  runs.
+- **GPT vs Claude:** a tie across drawings, as above; better for GPT only on these six drawings.
 - **New drawings, worse result.** Five public example and training P&IDs from the DEXPI standards initiative
   (CC BY 4.0), with tag text in their keys. Review load was 2–5× holdout A's. Much of it is what counts as a symbol:
   equipment nozzles and some drawn marks aren't items in the DEXPI key, and GPT reported the nozzles in 3 of 5
@@ -169,24 +206,41 @@ flowchart LR
 
 ## Start wherever you are
 
-Each row has a runnable example that works offline from a clean clone (the drawing row's model call is optional:
-a recorded extraction is committed). Every output is a draft for review.
+What each job needs from you, how long it takes, what you get back, and whether it's proven (committed example
+outputs, tests, and an independent review of those exact outputs). This table is generated from
+`data/features.json` and grows as features are added; the evidence for each row is in [FEATURES.md](docs/FEATURES.md).
+Every output is a draft for review. In the Evidence column, *proven* means committed example outputs, tests, and a
+passing independent review whose recorded file hashes still match those outputs; *stale review* means the outputs
+changed after the review; *findings open* means the latest review found problems; *needs review* means none yet.
 
-| You have | What you get | Run it |
-|---|---|---|
-| **A P&ID image** | A draft asset model, review sheet, Ignition tags, PI AF staging and a [client report](examples/own-drawing/deliverable/REPORT.html). Measured: 88 s from PNG to bundle on a drawing the agent hadn't seen, matching published accuracy for that sheet | [examples/own-drawing](examples/own-drawing/README.md) |
-| **A DEXPI P&ID file** (the ISO 15926 exchange format) | The same bundle with no model reading at all: tags and links come straight from the file (lossless against its key on three public sheets) | [examples/from-dexpi](examples/from-dexpi/README.md) |
-| **A written description** (procedure, design basis, report) | A cited process model, then Ignition, PI and SVG exports from it, and a P&ID once someone writes a drafting layout | [examples/from-description](examples/from-description/README.md) |
-| **A DCS/PLC loop list** (controller, measurement, output) | Which control loops a drawing shows, partly shows or misses | [examples/loop-audit](examples/loop-audit/README.md) |
-| **Historian exports** (CSV) | Normal bands learned from normal running, scored against an upset, and an OPC UA replay of the CSV to test screens against | [examples/historian-csv](examples/historian-csv/README.md) |
-| **A few hand-labelled sheets** | A score for any digitization tool or vendor, always beside a perfect, a deliberately wrong and an empty answer, so a fooled scorer can't pass | [examples/vendor-evaluation](examples/vendor-evaluation/README.md) |
+<!-- use-matrix:start -->
+| I need to... | Why it matters | You need | Time | You get | Evidence |
+|---|---|---|---|---|---|
+| [Get a starting asset model out of a P&ID without retyping it](examples/own-drawing/README.md) | Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking. | One P&ID as a PNG; a model subscription (or the committed example) | 88 s of commands on one new sheet (sheet 8), measured once; sheet 0's recorded run took 75 s plus 1 s; review time not measured | Every symbol, tag and link as a draft model, a review sheet ranked for checking, Ignition tags and PI staging | proven |
+| [Show someone what came out of a drawing, and what still needs checking](examples/own-drawing/README.md) | Whoever approves the work needs one page that says what was found and what is still unchecked, without opening a spreadsheet of 445 rows. | A review bundle from the step above | Under a second | One page: the drawing with every item boxed, what is still to check first and why, what a person has already decided (shown with the decision and left out of the to-check list), next steps, limits. Refuses if any generated column of the review sheet doesn't match what the model gives now; the reviewer's OPS_ entries aren't checked, so decisions not yet applied with apply_review.py don't appear | proven |
+| [Use a DEXPI file my CAD tool already exports](examples/from-dexpi/README.md) | If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether. | One of the three public DEXPI example sheets, prepared once by adapt_dexpi.py (downloads them; needs PyMuPDF). For your own DEXPI XML, use the DEXPI reader instead | Seconds once the sheets are prepared | The same bundle with no model reading: tags are the drawn label text, and links are the drawn connections, undirected, with each pipe tee expanded into pairwise links | proven |
+| [Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits](examples/from-dexpi-xml/README.md) | A plant's own CAD export already holds sizes, specs and design limits. Reading it directly keeps all of them, each citing the XML element it came from, with no reading errors and no retyping. | A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle | Seconds per sheet | A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why | proven |
+| [Build a model of a unit that has no usable drawing](examples/from-description/README.md) | Many older units have no usable drawing but do have procedures and design notes. A model with a source on every item lets you build asset lists and screens for them anyway, and shows where the text and the plant disagree. | A written description (procedure, design basis, report); someone to cite every item | Writing the model is the work; exports take seconds | Ignition tags, PI staging and overview screens from the model; a P&ID once a drafting layout is written | proven |
+| [Load the model into an asset register, graph database or change system](docs/GRAPH_EXPORT.md) | A plant model is a web of relationships: this transmitter measures that line, this controller moves that valve. Kept as a graph, it answers questions a flat tag list can't, like what a valve's failure affects or which instruments nobody has checked, and other systems can load it without retyping. | Any model this repository produces | Seconds | One open JSON graph: assets, typed links in three layers (pipe segments and tees, line networks, and network pairs), every attribute with its source and status; plus a smaller core profile (identity, settings, impact relations and sources) for loading into another system, with everything it leaves out counted | proven |
+| [Get the model into Ignition and PI](docs/TWIN_OUTPUTS.md) | Building an Ignition tag structure and a PI asset tree by hand is days of clicking. Generating both from one model keeps them consistent with the drawing and with each other. | A reviewed model | Seconds to generate; import is a manual step in a lab gateway | Ignition tag import with UDTs, PI Builder staging sheets; values are placeholders until mapped | proven |
+| [Check whether a drawing shows the control loops the DCS actually runs](examples/loop-audit/README.md) | Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change. | A loop list exported from the DCS or PLC configuration (controller, measurement, output) | Seconds | Each loop drawn, partly drawn (and what's missing) or not drawn | proven |
+| [Find out whether a digitization tool or vendor is actually accurate on our drawings](examples/vendor-evaluation/README.md) | Vendors quote accuracy on their own test drawings. Scoring them on yours, with a deliberately wrong answer scored beside them, shows whether the number means anything. | A few of our sheets labelled by hand, and the tool's output for them | Seconds once labelled; labelling takes hours | A score beside perfect, wrong and empty answers, per sheet, refusing to report if the scorer can be fooled | proven |
+| [Decide whether to trust this repository at all](docs/REVIEWING.md) | Before trusting any tool with your plant's data, you should be able to check its claims yourself in minutes. | Python alone for the claim check and pipeline status; the full test suite also needs the packages in requirements.txt and the cached public data (it says what is missing and stops) | Under a minute for the claim check | Every headline number checked against its source file, stage freshness, the full test suite | proven |
+| [Learn normal operating bands from history, or test screens against recorded data](examples/historian-csv/README.md) | Normal bands catch a value drifting before it reaches an alarm, and replaying recorded data lets you test new screens without touching the live system. | Historian exports as CSV: one of normal running, optionally one of an upset. Standard library only; the replay server also needs asyncua | Seconds | Bands per tag with false-alarm rates, the first tag to leave its band in an upset, and an OPC UA server replaying the CSV | proven |
+| [Feed operators' review decisions back into the model, and connect instruments to real signals](examples/review-and-mapping/README.md) | A model is only useful once someone who knows the unit has checked it and its instruments point at real signals. This records who decided what and when, so every change can be traced. | A filled review sheet; the plant's I/O list | Seconds per apply; the review itself is people's time | An updated model with a dated change record, and instruments mapped to OPC or PI addresses | proven |
+| [Find out whether a tool will work on drawings or data like mine, not just the ones it was built on](docs/GENERALIZATION.md) | A tool that only ever saw one set of drawings can fail quietly on the next. Running each tool on every public input it applies to shows where it holds and where it breaks, red cells included, before you bet your own data on it. | Nothing to read the page; the public datasets (fetched by script) to re-run it | Reading: minutes. Re-running everything: about 25 minutes of cell time, plus downloading the public data once | A pass/fail grid of tools against inputs, the reason for every failure, and the public datasets that would close each gap | proven |
+| [Find energy, heat-grade and control questions worth asking about my unit, and what data answers each](docs/OPPORTUNITY_SCREEN.md) | Many energy and controls questions can be spotted on a P&ID before anyone collects data: a throttled pump, high-pressure steam let down for a low-temperature job, heat dumped to cooling water, a loop with no controller. A solo engineer rarely has time to look. This lists the questions with the evidence by tag and exactly what to collect, and where, to settle each one, without inventing a savings number. | A process model or extracted drawing set; optionally the plant's loop list and equipment schedules | Seconds | Per question and asset: the evidence by tag, what to collect and where (down to a blank field on a named schedule), how the data decides it, and what public sources say is typical. A screen, not an audit | proven |
+| [Turn a change I measured into an annual energy, cost and greenhouse-gas figure](docs/IMPACT_ESTIMATE.md) | A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it. | What you measured (kW before and after, steam lb/h, fuel saved, hours) and your tariff, gas price, emission factors and boiler efficiency, or labelled public typical values | Minutes | A first-draft estimate, marked as one: annual kWh or MMBtu, cost and CO2e with the formula and source of every constant, the assumptions it rests on, and the data to collect (and where) to replace each one; or, per question, what to measure and where each constant comes from | not yet: findings open |
+| [Measure how often the model's statements match their sources, and let an operator check a unit in plain English](docs/STATEMENT_REVIEW.md) | "Does this look right?" has no answer you can track. A sampled review of plain sentences against their sources gives an error rate for each kind of statement, and keeps 'matches the drawing' apart from 'true in the plant', which only someone who knows the unit can say. | A graph export (twin-graph-1), plus the sheet image or report PDF its sources cite | Seconds to render; review time per statement not yet measured | A stratified sample of plain sentences, each beside its drawing crop or report page, with two separate verdict columns; an error rate with a 95% interval; and the verdicts written back into the graph as dated events | proven |
+<!-- use-matrix:end -->
 
 Every script is listed with what it's for in [docs/SCRIPTS.md](docs/SCRIPTS.md); only those marked as tools are
 built for other inputs. The longer path for a real pilot is [REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
 
 A generated drawing is **not a drawing of record** until engineering walks it down and accepts it under management
-of change. How to capture your own title block and symbol library, and the governance rules:
-[AT_YOUR_PLANT.md](docs/AT_YOUR_PLANT.md#start-wherever-you-are).
+of change. Do not operate, isolate or permit from it
+([governance](docs/AT_YOUR_PLANT.md#start-wherever-you-are)). How to capture your own title block and symbol
+library is on the same page.
 
 ![Left: a crop of OPEN100 sheet 6. Right: the same pixel scale on a sheet generated from the Tennessee Eastman model, with ISA tag bubbles, bow-tie control valves with their own tag bubbles, off-page flags and line numbers in the same style](docs/screenshots/te-pid-style-side-by-side.png)
 
@@ -292,11 +346,10 @@ because the OPEN100 keys carry no text.
 
 ## How it was built
 
-AI coding agents (Claude Code, and later Codex) wrote most of the code and the first drafts of the docs. I chose the
-problem, set the evaluation rules before seeing results, made the design calls and checked the results. The
-[build journal](docs/JOURNAL.md) records each decision, what was rejected and what went wrong, including the agents'
-mistakes and mine. [docs/MODELS.md](docs/MODELS.md) says which parts were compared across several models and which
-came from Claude alone.
+Who did what is at the top of this page. The [build journal](docs/JOURNAL.md) records each
+decision, what was rejected and what went wrong, including the agents' mistakes and mine.
+[docs/MODELS.md](docs/MODELS.md) says which parts were compared across several models and which came from Claude
+alone.
 
 **Contents:** [What's a tool and what's a record](#whats-a-tool-and-whats-a-record) · [Status and evidence tracks](#status-and-evidence-tracks) ·
 [Drawings only, process knowledge only, or both](#what-you-can-do-with-only-drawings-only-process-knowledge-or-both) ·
@@ -377,11 +430,8 @@ possible. The rules, splits and decision rule were committed before any method w
 - **Placeholders become live points from an I/O list.** Matching never guesses. It also lists the points a plant
   has that the drawing doesn't show, the first sign of an out-of-date drawing. In the demo (a labeled synthetic I/O
   list), 24 mapped instruments read live in Ignition while the rest stay honestly "not connected".
-- **Old scans: where it breaks** (round 4, pre-registered). Photocopy quality made no consistent difference. On
-  old-scan quality, review load roughly tripled (GPT 17.8 on the clean round-2 run → 51.5); on a bad scan it
-  quadrupled (72.6). Most of the loss is the code line tracer, not the models: their symbol reading fell gently,
-  and tracing the same symbols on the clean image recovers much of the connection score. An archive of scans needs image cleanup before tracing.
-  Details in [GOAL.md](docs/GOAL.md), round 4.
+- **Old scans: where it breaks** (round 4, pre-registered; [table above](#results-held-out-drawings-and-how-they-were-used)).
+  Most of the loss is the code line tracer, not the models, so an archive of scans needs image cleanup before tracing.
 
 ![Ignition Perspective screen during the fault-6 replay: reactor pressure above its 2,895 kPa high-pressure alarm shows red; the agitator speed, which has no data source, shows a not-connected overlay](docs/screenshots/ignition-te-fault6-alarm.png)
 
@@ -650,7 +700,7 @@ see [REVIEWING.md](docs/REVIEWING.md).
 |---|---|
 | [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md) | Each dataset's Stage 0 confidence assessment, then every stage: input, treatment, output, confidence carried, who checked it |
 | [docs/GOAL.md](docs/GOAL.md) | The review-load goal, sealed splits and decision rules, and the pre-registration and results of rounds 2–5 |
-| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results, every later round at a glance, the 21-fault band evaluation and the TE round trip |
+| [docs/EVALUATION.md](docs/EVALUATION.md) | How "done well" is defined, the anti-Goodhart rules, round-1 results, every later round at a glance, the 21-fault band evaluation, the TE round trip, and which line layer (network or pipe) each connection score measures |
 | [docs/FROM_DEMO_TO_A_REAL_SITE.md](docs/FROM_DEMO_TO_A_REAL_SITE.md) | What it takes to go from a clean annotated set to a 40-year drawing archive |
 | [docs/REAL_UNIT_SELECTION.md](docs/REAL_UNIT_SELECTION.md) | Choosing the next phase: one real unit from a CSB investigation report, with its published trends; candidates, choice (Bayer CropScience) and reuse limits |
 | [docs/BAYER_RT.md](docs/BAYER_RT.md) | The Bayer CropScience residue treater: a process model citing the report for every item, a generated P&ID, both checked against the report's own drawing, and its published DCS trend digitized and replayed through the model's interlocks and limits, each checked against the report's text |
@@ -704,22 +754,49 @@ see [REVIEWING.md](docs/REVIEWING.md).
 | Operations review of the Tennessee Eastman model and the screens | Tooling done and tested; the review itself is not done. It needs someone who knows the process, working from the drawings |
 
 **PI is scoped to the asset structure, by decision.** The twin produces a PI AF hierarchy as a PI Builder sheet
-(elements, templates, attributes with point references), but it has not been imported into a PI System. Why:
-- **No free PI environment exists.** The 45-day developer trial is a full Windows Server install behind an account.
-- **The asset structure is PI's transferable value.** PI Vision dropped plain custom-SVG import, so the graphics
-  story belongs to Ignition here.
-- **Ignition was tested end to end instead.** The historical build passed import, replayed values, alarms and
-  verification. The current regenerated project then passed V1–V8 and a 23-route browser contract in a disposable
-  Ignition container (journal entry 38), and the corrected 24-view build passed again with 24 routes (journal entry
-  47). That is a lab result, not site or operator acceptance.
+(elements, templates, attributes with point references), but it has not been imported into a PI System: no free PI
+environment was available, and Ignition was tested end to end instead (a lab result, not site or operator
+acceptance). `scripts/check_pi_export.py` checks the sheet offline against the vendor-published conventions and
+units; unmapped attributes keep `%Server%`/placeholder references, and `map_points.py` fills OPC addresses for
+Ignition, not PI bindings. Why, and the steps a PI site would run:
+[TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md#pi-af-asset-structure-only-by-decision) and [PI_MAPPING.md](docs/PI_MAPPING.md).
 
-To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
-System Explorer, then verify real PI point bindings. [The PI-only mapper](docs/PI_MAPPING.md) can stage explicit,
-reviewer-supplied archive/point/type/UOM references on a copied extracted model; unmapped attributes keep
-`%Server%`/placeholder references. `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings.
-Staging CSV columns must be reconciled against the installed PI Builder version before a separately authorized
-native import. `scripts/check_pi_export.py` does the offline part: it compares the export with the
-vendor-published sheet conventions and units, and lists what a PI administrator must still settle.
+## What you can do with only drawings, only process knowledge, or both
+
+The two main tracks have opposite halves of the picture. **TE** has process knowledge (a model checked against the
+simulator source, and recorded simulator replay) and no original drawing. **OPEN100** has 12 real drawings and
+no process data. Most of a digital twin starter kit needs only the structure, and drawings carry structure: equipment, connections, flow arrows,
+off-page links, isolation valves. Values, normal bands, alarms and replay need process data, so OPEN100 can't have
+them, and the table says so instead of faking them. What OPEN100 gets from its drawings alone is in
+[docs/OPEN100_STRUCTURAL.md](docs/OPEN100_STRUCTURAL.md): flow direction read from arrowheads, flags and pump ports
+(361 of 1,133 process links; the rest stay undirected), the 12 sheets stitched into one plant, an ISA-101-style mimic,
+a 3D orientation tour and a LOTO isolation view on the real drawing (a mockup, not a procedure: a valve the
+extraction missed is not on the list).
+
+<!-- deliverables-matrix:start -->
+| Deliverable | TE: process knowledge, no original drawing | OPEN100: drawings, no process data |
+|---|---|---|
+| Asset model (equipment, instruments, connections, hierarchy) | **Done**: transcribed from the published process; every tag checked against the simulator source (36 confirmed, 1 corrected) and every unit, stream, direction and tag owner against its balances and flow lines (51 confirmed, 4 corrected, 1 unresolvable of 56); 0 items reviewed by operations ([te_topology_check.md](out/te_topology_check.md), [te_source_check.md](out/te_source_check.md)) | **Done**: extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on six held-out drawings (which also chose the method) symbols found F1 0.93, connections 0.87, review load 20.1 per 100, all means of five round-5 runs (the earlier single round-2 run scored 17.8) ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv), [replicates_r5_holdout-a.md](out/replicates_r5_holdout-a.md)) |
+| Tag text read from drawings | **Done**: a round trip on the generated sheets: every tag read on clean sheets by both models, 14% (GPT) and 49% (Claude) at the worst scan level; an upper bound for clean house-style drawings, not real-plant accuracy ([roundtrip_scores.md](out/te_pid/roundtrip_scores.md)) | **Not possible**: the public answer keys carry no text, so tag reading cannot be scored here; on three DEXPI example sheets with labelled symbols (round 5) GPT read 29 of 33 tags exactly and Claude 28, and on two more both found 99-100% of 145 identifiers from the published tag lists |
+| Ignition tags and PI AF asset structure | **Done**: loaded into a lab gateway; the PI Builder sheet (schema v2) is checked offline against the vendor-published conventions, not imported into a PI System ([te_tags.json](out/ignition/te_tags.json), [pi](out/pi)) | **Done**: same; instrument tags are placeholders until an I/O list maps them, and placeholder PI rows are left unselected ([tags.json](out/twin/r2-tiles-trace/codex/ignition/tags.json), [pi](out/twin/r2-tiles-trace/codex/pi)) |
+| Original drawing on screen with each instrument's value | **Not done yet**: no original TE drawing exists; a P&ID is now generated from the model in the OPEN100 style (three sheets, not a drawing of record), but it is not a screen background yet ([101.png](data/te_pid/101.png), [style_fidelity.md](out/te_pid/style_fidelity.md)) | **Done**: 12 drawing screens, checked in a lab gateway; every unmapped value reads 'not connected' ([native-sheet0-not-connected.png](docs/screenshots/native-sheet0-not-connected.png)) |
+| Flow direction on connections | **Done**: every stream's direction checked against the simulator's pressure-driven flow lines ([te_topology_check.md](out/te_topology_check.md), [te_process_model.json](data/te_process_model.json)) | **Partial**: read from drawing evidence (arrowheads, off-page flags, pump ports) on 361 of 1,133 process links; the rest stay undirected and show no arrow ([flow_direction.json](out/open100_structural/flow_direction.json), [flow-evidence-sheet5.png](docs/screenshots/open100/flow-evidence-sheet5.png)) |
+| Sheets stitched into one plant | **Not applicable**: one process description, no sheets | **Done offline (not in a gateway)**: off-page connectors join the 12 sheets; 38 sheet-to-sheet connections, 36 with a direction ([plant_structure.json](out/open100_structural/plant_structure.json)) |
+| Process mimic overview (ISA-101 style) | **Done**: native acceptance in a lab gateway, plus a 390 px overview at /m; proof of concept: layout and key values are first-pass, not reviewed by operations ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png), [native-narrow-m-normal.png](docs/screenshots/native-narrow-m-normal.png)) | **Done offline (not in a gateway)**: plant overview and 12 area views from the same screen components; offline render; proof of concept, structure only ([mimic-plant-overview.png](docs/screenshots/open100/mimic-plant-overview.png), [mimic-area-sheet7.png](docs/screenshots/open100/mimic-area-sheet7.png)) |
+| Equipment purpose cards | **Done**: one sentence per unit, each citing the simulator lines it restates, shown on the 3D tour's stop cards; not reviewed by an operator ([te_unit_purposes.json](data/te_unit_purposes.json), [02_r-101_normal.jpg](drafts/3d-tour/02_r-101_normal.jpg)) | **Done offline (not in a gateway)**: from the drawings' own equipment schedules and labels (transcribed, unverified); generic class text where the drawing says nothing, marked as such ([open100_equipment_schedule.json](data/open100_equipment_schedule.json)) |
+| 3D orientation tour (stills) | **Draft**: proof of concept: placeholder geometry, source-checked topology, colours from recorded replay; no render check fails on twelve stills (15 pass, 2 informational), five committed ([00_overview_normal.jpg](drafts/3d-tour/00_overview_normal.jpg), [verification.md](drafts/3d-tour/verification.md)) | **Draft**: proof of concept: placeholder geometry at drawing positions, stops in inferred flow order, structure only ([3d-00_overview.jpg](docs/screenshots/open100/3d-00_overview.jpg), [3d-01_stop_sheet3.jpg](docs/screenshots/open100/3d-01_stop_sheet3.jpg)) |
+| Lockout/tagout isolation view | **Mockup**: isolation points inferred from the seed model (the purge's isolation point now sits at the separator); not a procedure ([40_loto_mockup.jpg](drafts/3d-tour/40_loto_mockup.jpg)) | **Mockup**: isolation points from the extracted symbols, on the real drawing, with sheet and box for each; not a procedure ([loto-isolation-sheet7.png](docs/screenshots/open100/loto-isolation-sheet7.png), [loto_isolation_points.csv](out/open100_structural/loto_isolation_points.csv)) |
+| Values on the screens | **Done**: recorded simulator replay (proof of concept: not a live plant, and not a simulator that responds to control) ([native-revD-overview-normal.png](docs/screenshots/native-revD-overview-normal.png)) | **Not possible**: needs process data: an I/O list or historian mapping for these instruments |
+| Point mapping to data addresses | **Done**: replay channels mapped in the lab gateway ([build_meta.json](out/ignition/gateway/build_meta.json)) | **Synthetic demo**: a synthetic I/O list shaped like a real export; no real addresses exist for these drawings ([io_lists](data/io_lists)) |
+| Normal bands and early warning | **Done**: learned on half the normal run; on all 21 published faults the bands flag 17 (median 48 min after onset) with 0 false alarms in 193 h of held-out normal running, and miss faults 3, 9, 15 and 19 ([fault_detection.md](out/fault_detection/fault_detection.md), [normal_bands.md](out/ignition/normal_bands.md)) | **Not possible**: needs a historian record of normal operation |
+| Alarms | **Done**: published setpoints, plus a data-source-lost diagnostic alarm per data source; in the lab gateway the pressure alarm fires on the recorded fault, the diagnostic fires and clears, and the header count matches the alarm table ([IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md), [native-current-20261013-alarms.json](out/ignition/gateway/receipts/native-current-20261013-alarms.json)) | **Not possible**: needs setpoints and process data; the drawings name some alarm points but give no setpoints |
+| Fault replay and live process tour | **Done**: recorded fault-6 replay; proof of concept: replay is not a simulator that responds to control ([native-revD-overview-fault-alarm.png](docs/screenshots/native-revD-overview-fault-alarm.png)) | **Not possible**: needs recorded process data |
+| Operations review | **Not done yet**: tooling built; needs someone who knows the process ([REVIEW_LOOP.md](docs/REVIEW_LOOP.md)) | **Not done yet**: same; the review queue is ready ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv)) |
+<!-- deliverables-matrix:end -->
+
+| OPEN100 plant overview (offline render) | 3D tour stop, structure only | LOTO isolation view on the real drawing (mockup) |
+|---|---|---|
+| ![OPEN100 plant overview: 12 areas in inferred tour order, arrows between areas where off-page flags show the direction, every value 'not connected'](docs/screenshots/open100/mimic-plant-overview.png) | ![3D tour stop 5, aux cooling water: placeholder equipment at drawing positions, purpose card from the drawing's equipment schedule, instruments marked not connected](docs/screenshots/open100/3d-05_stop_sheet7.jpg) | ![OPEN100 sheet 7 with numbered isolation points: manual and motor-operated valves, motor-driven pumps, lines from other systems, control valves marked as not isolation devices](docs/screenshots/open100/loto-isolation-sheet7.png) |
 
 ## Data and credits
 

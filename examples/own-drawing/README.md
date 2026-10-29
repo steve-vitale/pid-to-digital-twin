@@ -1,11 +1,33 @@
 # Your own drawing: from one P&ID to a draft asset model
 
+**Why it matters:** Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking.
+
 This is the runbook for using this repository on a drawing it has never seen. Start with the worked example below:
 it runs offline from a clean clone, on a public sheet, with a real model extraction that is committed here.
 
 What you get is a **draft**: an asset model, a review sheet, Ignition tags and PI AF staging files, every item marked
 unverified. What you don't get: verified structure, flow direction, live values, alarms or the Tennessee Eastman
 screens. Those need your process knowledge, your I/O list and a person's review.
+
+## On Windows, from zero
+
+1. Install Python 3.10 or newer from python.org. In the installer, tick "Add python.exe to PATH".
+2. Get the repository. With git: `git clone https://github.com/steve-vitale/pid-to-digital-twin`. Without git:
+   on the repository page choose Code, then Download ZIP, and unzip it.
+3. Open PowerShell in the repository folder and run:
+
+   ```powershell
+   python -m venv .venv
+   .venv\Scripts\pip install -r requirements.txt
+   ```
+
+4. Use `.venv\Scripts\python` wherever the commands below say `python`. PowerShell sets environment variables on a
+   line of their own: instead of `PID_SHEETS_DIR=mysheets python ...`, run `$env:PID_SHEETS_DIR = "mysheets"` once,
+   then the command without the prefix.
+
+The worked example (step 0) needs only Python. The extraction (step 2, route A) also needs a model's command-line
+tool (`codex`, `claude` or `gemini`) installed and signed in, with a subscription or API key; the worked example
+skips that by using a recorded extraction.
 
 ## 0. The worked example (offline, about a minute)
 
@@ -45,6 +67,21 @@ trained on OPEN100; it isn't applied to a drawing it wasn't trained on.
 
 Export one approved revision of one sheet to PNG. PDFs aren't read directly. Keep the drawing private: decide first
 whether you're allowed to send it to a hosted model at all.
+
+**From a PDF, or a scanned PDF:** convert each page to PNG first. PyMuPDF does it (`pip install pymupdf`; it isn't
+in `requirements.txt`). Create the output folder, then:
+
+```sh
+python -c "import pymupdf,sys; d=pymupdf.open(sys.argv[1]); [p.get_pixmap(dpi=200).save(f'{sys.argv[2]}/{i}.png') for i,p in enumerate(d)]" drawing.pdf mysheets
+```
+
+That writes `mysheets/0.png`, `1.png` and so on, one per page, which is the naming step 2 expects. The same line
+works in PowerShell. The drawings behind the results are about 2,600 px wide and the tracer was tuned on them; how
+much a very different image size changes the result has not been tested.
+
+**Scanned archives:** expect much more to check. On synthetic old-scan copies of the held-out sheets the review load
+roughly tripled (GPT 17.8 to 51.5 differences per 100 answer-key items), mostly because the line tracer loses faded
+lines ([round 4](../../README.md#results-held-out-drawings-and-how-they-were-used)). Try one clean sheet first.
 
 ## 2. An extraction of it
 

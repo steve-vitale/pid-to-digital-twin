@@ -14,6 +14,16 @@ class ScriptIndex(unittest.TestCase):
                            capture_output=True, text=True, timeout=120)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
+    def test_unknown_flag_is_a_usage_error_and_writes_nothing(self):
+        out = ROOT / "docs" / "SCRIPTS.md"
+        before = out.read_bytes() if out.exists() else None
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "script_index.py"), "--bogus"],
+                           capture_output=True, text=True, timeout=120)
+        self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+        self.assertIn("--bogus", r.stderr)
+        self.assertIn("usage", r.stderr.lower())
+        self.assertEqual(out.read_bytes() if out.exists() else None, before)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)

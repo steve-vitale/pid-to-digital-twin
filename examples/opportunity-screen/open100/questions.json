@@ -1,0 +1,2804 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "out/twin/r2-tiles-trace/codex/plant_model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [
+  "data/open100_equipment_schedule.json",
+  "examples/opportunity-screen/open100_schedule_fields.json"
+ ],
+ "questions_run": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "C9",
+  "E25",
+  "E26"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 29,
+  "by_family": {
+   "controls": 1,
+   "energy": 16,
+   "heat_grade": 4,
+   "metering": 7,
+   "safety_question": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E1@S2-PU001",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "CND-PU-162",
+   "assets": [
+    {
+     "id": "S2-PU001",
+     "tag": "CND-PU-162"
+    },
+    {
+     "id": "S2-IN022",
+     "tag": "FCV-1621"
+    },
+    {
+     "id": "S2-IN015",
+     "tag": "FIT-16299"
+    },
+    {
+     "id": "S2-IN018",
+     "tag": "FO-1621"
+    },
+    {
+     "id": "S2-IN019",
+     "tag": "FT-XXX"
+    },
+    {
+     "id": "S2-IN020",
+     "tag": "FIT-163101"
+    },
+    {
+     "id": "S2-IN021",
+     "tag": "FIT-164102"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU001",
+     "tag": "CND-PU-162",
+     "text": "equipment CND-PU-162 (asset S2-PU001) reads \"CND-PU-162 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU001]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S2-IN022",
+     "tag": "FCV-1621",
+     "text": "valve FCV-1621 (asset S2-IN022) on sheet 2 at CND-HTR-161 (by the extraction's attribution)",
+     "field": "instruments[S2-IN022]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN015",
+     "tag": "FIT-16299",
+     "text": "instrument FIT-16299 (asset S2-IN015) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN015]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN018",
+     "tag": "FO-1621",
+     "text": "instrument FO-1621 (asset S2-IN018) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN018]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN019",
+     "tag": "FT-XXX",
+     "text": "instrument FT-XXX (asset S2-IN019) [placeholder tag on the drawing] on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN019]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN020",
+     "tag": "FIT-163101",
+     "text": "instrument FIT-163101 (asset S2-IN020) on sheet 2 at CND-PU-163 (by the extraction's attribution)",
+     "field": "instruments[S2-IN020]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN021",
+     "tag": "FIT-164102",
+     "text": "instrument FIT-164102 (asset S2-IN021) on sheet 2 at CND-PU-164 (by the extraction's attribution)",
+     "field": "instruments[S2-IN021]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    },
+    {
+     "role": "caveat",
+     "text": "the extracted links have no recorded flow direction, so 'near' means within the stated number of drawn links on the same sheet; which side of the equipment it is on is not established by the model",
+     "field": "streams[].direction"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FCV-1621 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FIT-16299, FIT-163101, FIT-164102, FO-1621, FT-XXX (no historian tag is mapped in this model for these)",
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 2 equipment schedule, entry CND-PU-162",
+      "the blank DISCHARGE field on the sheet 2 equipment schedule, entry CND-PU-162",
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-162"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-162",
+      "the blank RPM field on the sheet 2 equipment schedule, entry CND-PU-162",
+      "the motor nameplate on CND-PU-162",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E1@S2-PU002",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "CND-PU-163",
+   "assets": [
+    {
+     "id": "S2-PU002",
+     "tag": "CND-PU-163"
+    },
+    {
+     "id": "S2-IN022",
+     "tag": "FCV-1621"
+    },
+    {
+     "id": "S2-IN015",
+     "tag": "FIT-16299"
+    },
+    {
+     "id": "S2-IN018",
+     "tag": "FO-1621"
+    },
+    {
+     "id": "S2-IN019",
+     "tag": "FT-XXX"
+    },
+    {
+     "id": "S2-IN020",
+     "tag": "FIT-163101"
+    },
+    {
+     "id": "S2-IN021",
+     "tag": "FIT-164102"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU002",
+     "tag": "CND-PU-163",
+     "text": "equipment CND-PU-163 (asset S2-PU002) reads \"CND-PU-163 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU002]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S2-IN022",
+     "tag": "FCV-1621",
+     "text": "valve FCV-1621 (asset S2-IN022) on sheet 2 at CND-HTR-161 (by the extraction's attribution)",
+     "field": "instruments[S2-IN022]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN015",
+     "tag": "FIT-16299",
+     "text": "instrument FIT-16299 (asset S2-IN015) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN015]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN018",
+     "tag": "FO-1621",
+     "text": "instrument FO-1621 (asset S2-IN018) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN018]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN019",
+     "tag": "FT-XXX",
+     "text": "instrument FT-XXX (asset S2-IN019) [placeholder tag on the drawing] on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN019]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN020",
+     "tag": "FIT-163101",
+     "text": "instrument FIT-163101 (asset S2-IN020) on sheet 2 at CND-PU-163 (by the extraction's attribution)",
+     "field": "instruments[S2-IN020]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN021",
+     "tag": "FIT-164102",
+     "text": "instrument FIT-164102 (asset S2-IN021) on sheet 2 at CND-PU-164 (by the extraction's attribution)",
+     "field": "instruments[S2-IN021]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    },
+    {
+     "role": "caveat",
+     "text": "the extracted links have no recorded flow direction, so 'near' means within the stated number of drawn links on the same sheet; which side of the equipment it is on is not established by the model",
+     "field": "streams[].direction"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FCV-1621 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FIT-16299, FIT-163101, FIT-164102, FO-1621, FT-XXX (no historian tag is mapped in this model for these)",
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 2 equipment schedule, entry CND-PU-163",
+      "the blank DISCHARGE field on the sheet 2 equipment schedule, entry CND-PU-163",
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-163"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-163",
+      "the blank RPM field on the sheet 2 equipment schedule, entry CND-PU-163",
+      "the motor nameplate on CND-PU-163",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E1@S2-PU003",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "CND-PU-164",
+   "assets": [
+    {
+     "id": "S2-PU003",
+     "tag": "CND-PU-164"
+    },
+    {
+     "id": "S2-IN022",
+     "tag": "FCV-1621"
+    },
+    {
+     "id": "S2-IN015",
+     "tag": "FIT-16299"
+    },
+    {
+     "id": "S2-IN018",
+     "tag": "FO-1621"
+    },
+    {
+     "id": "S2-IN019",
+     "tag": "FT-XXX"
+    },
+    {
+     "id": "S2-IN020",
+     "tag": "FIT-163101"
+    },
+    {
+     "id": "S2-IN021",
+     "tag": "FIT-164102"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU003",
+     "tag": "CND-PU-164",
+     "text": "equipment CND-PU-164 (asset S2-PU003) reads \"CND-PU-164 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU003]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S2-IN022",
+     "tag": "FCV-1621",
+     "text": "valve FCV-1621 (asset S2-IN022) on sheet 2 at CND-HTR-161 (by the extraction's attribution)",
+     "field": "instruments[S2-IN022]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN015",
+     "tag": "FIT-16299",
+     "text": "instrument FIT-16299 (asset S2-IN015) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN015]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN018",
+     "tag": "FO-1621",
+     "text": "instrument FO-1621 (asset S2-IN018) on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN018]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN019",
+     "tag": "FT-XXX",
+     "text": "instrument FT-XXX (asset S2-IN019) [placeholder tag on the drawing] on sheet 2 at CND-PU-162 (by the extraction's attribution)",
+     "field": "instruments[S2-IN019]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN020",
+     "tag": "FIT-163101",
+     "text": "instrument FIT-163101 (asset S2-IN020) on sheet 2 at CND-PU-163 (by the extraction's attribution)",
+     "field": "instruments[S2-IN020]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "S2-IN021",
+     "tag": "FIT-164102",
+     "text": "instrument FIT-164102 (asset S2-IN021) on sheet 2 at CND-PU-164 (by the extraction's attribution)",
+     "field": "instruments[S2-IN021]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    },
+    {
+     "role": "caveat",
+     "text": "the extracted links have no recorded flow direction, so 'near' means within the stated number of drawn links on the same sheet; which side of the equipment it is on is not established by the model",
+     "field": "streams[].direction"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FCV-1621 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FIT-16299, FIT-163101, FIT-164102, FO-1621, FT-XXX (no historian tag is mapped in this model for these)",
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 2 equipment schedule, entry CND-PU-164",
+      "the blank DISCHARGE field on the sheet 2 equipment schedule, entry CND-PU-164",
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-164"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-164",
+      "the blank RPM field on the sheet 2 equipment schedule, entry CND-PU-164",
+      "the motor nameplate on CND-PU-164",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E1@S3-PU001",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "FWS-PU-170A",
+   "assets": [
+    {
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A"
+    },
+    {
+     "id": "S3-IN006",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S3-IN029",
+     "tag": "PCV-1703"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A",
+     "text": "equipment FWS-PU-170A (asset S3-PU001) reads \"FWS-PU-170A FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU001]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S3-IN006",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S3-IN006) [placeholder tag on the drawing] on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN006]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S3-IN029",
+     "tag": "PCV-1703",
+     "text": "valve PCV-1703 (asset S3-IN029) on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN029]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    },
+    {
+     "role": "caveat",
+     "text": "the extracted links have no recorded flow direction, so 'near' means within the stated number of drawn links on the same sheet; which side of the equipment it is on is not established by the model",
+     "field": "streams[].direction"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FCV-XXX, PCV-1703 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 3 equipment schedule, entry FWS-PU-170A",
+      "the blank DISCHARGE field on the sheet 3 equipment schedule, entry FWS-PU-170A",
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on FWS-PU-170A"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 3 equipment schedule, entry FWS-PU-170A",
+      "the blank RPM field on the sheet 3 equipment schedule, entry FWS-PU-170A",
+      "the motor nameplate on FWS-PU-170A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E1@S3-PU002",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "FWS-PU-170B",
+   "assets": [
+    {
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B"
+    },
+    {
+     "id": "S3-IN006",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S3-IN029",
+     "tag": "PCV-1703"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B",
+     "text": "equipment FWS-PU-170B (asset S3-PU002) reads \"FWS-PU-170B FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU002]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S3-IN006",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S3-IN006) [placeholder tag on the drawing] on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN006]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "S3-IN029",
+     "tag": "PCV-1703",
+     "text": "valve PCV-1703 (asset S3-IN029) on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN029]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    },
+    {
+     "role": "caveat",
+     "text": "the extracted links have no recorded flow direction, so 'near' means within the stated number of drawn links on the same sheet; which side of the equipment it is on is not established by the model",
+     "field": "streams[].direction"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FCV-XXX, PCV-1703 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 3 equipment schedule, entry FWS-PU-170B",
+      "the blank DISCHARGE field on the sheet 3 equipment schedule, entry FWS-PU-170B",
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on FWS-PU-170B"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 3 equipment schedule, entry FWS-PU-170B",
+      "the blank RPM field on the sheet 3 equipment schedule, entry FWS-PU-170B",
+      "the motor nameplate on FWS-PU-170B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S1-PU013",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACC-PU-151",
+   "assets": [
+    {
+     "id": "S1-PU013",
+     "tag": "ACC-PU-151"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S1-PU013",
+     "tag": "ACC-PU-151",
+     "text": "equipment ACC-PU-151 (asset S1-PU013) reads \"ACC-PU-151 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU013]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 1 equipment schedule, entry ACC-PU-151",
+      "the motor nameplate on ACC-PU-151",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S1-PU014",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACC-PU-152",
+   "assets": [
+    {
+     "id": "S1-PU014",
+     "tag": "ACC-PU-152"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S1-PU014",
+     "tag": "ACC-PU-152",
+     "text": "equipment ACC-PU-152 (asset S1-PU014) reads \"ACC-PU-152 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU014]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 1 equipment schedule, entry ACC-PU-152",
+      "the motor nameplate on ACC-PU-152",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S1-PU015",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACC-PU-153",
+   "assets": [
+    {
+     "id": "S1-PU015",
+     "tag": "ACC-PU-153"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S1-PU015",
+     "tag": "ACC-PU-153",
+     "text": "equipment ACC-PU-153 (asset S1-PU015) reads \"ACC-PU-153 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU015]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 1 equipment schedule, entry ACC-PU-153",
+      "the motor nameplate on ACC-PU-153",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S2-PU001",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "CND-PU-162",
+   "assets": [
+    {
+     "id": "S2-PU001",
+     "tag": "CND-PU-162"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU001",
+     "tag": "CND-PU-162",
+     "text": "equipment CND-PU-162 (asset S2-PU001) reads \"CND-PU-162 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU001]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-162",
+      "the motor nameplate on CND-PU-162",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S2-PU002",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "CND-PU-163",
+   "assets": [
+    {
+     "id": "S2-PU002",
+     "tag": "CND-PU-163"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU002",
+     "tag": "CND-PU-163",
+     "text": "equipment CND-PU-163 (asset S2-PU002) reads \"CND-PU-163 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU002]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-163",
+      "the motor nameplate on CND-PU-163",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S2-PU003",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "CND-PU-164",
+   "assets": [
+    {
+     "id": "S2-PU003",
+     "tag": "CND-PU-164"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-PU003",
+     "tag": "CND-PU-164",
+     "text": "equipment CND-PU-164 (asset S2-PU003) reads \"CND-PU-164 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU003]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-164",
+      "the motor nameplate on CND-PU-164",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S3-PU001",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "FWS-PU-170A",
+   "assets": [
+    {
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A",
+     "text": "equipment FWS-PU-170A (asset S3-PU001) reads \"FWS-PU-170A FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU001]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 3 equipment schedule, entry FWS-PU-170A",
+      "the motor nameplate on FWS-PU-170A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S3-PU002",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "FWS-PU-170B",
+   "assets": [
+    {
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B",
+     "text": "equipment FWS-PU-170B (asset S3-PU002) reads \"FWS-PU-170B FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU002]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 3 equipment schedule, entry FWS-PU-170B",
+      "the motor nameplate on FWS-PU-170B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S7-PU001",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACW-PU-211A",
+   "assets": [
+    {
+     "id": "S7-PU001",
+     "tag": "ACW-PU-211A"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S7-PU001",
+     "tag": "ACW-PU-211A",
+     "text": "equipment ACW-PU-211A (asset S7-PU001) reads \"ACW-PU-211A AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU001]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 7 equipment schedule, entry ACW-PU-211A",
+      "the motor nameplate on ACW-PU-211A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S7-PU002",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACW-PU-211B",
+   "assets": [
+    {
+     "id": "S7-PU002",
+     "tag": "ACW-PU-211B"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S7-PU002",
+     "tag": "ACW-PU-211B",
+     "text": "equipment ACW-PU-211B (asset S7-PU002) reads \"ACW-PU-211B AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU002]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 7 equipment schedule, entry ACW-PU-211B",
+      "the motor nameplate on ACW-PU-211B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E4@S7-PU003",
+   "question_id": "E4",
+   "family": "energy",
+   "question": "Is this motor oversized for its load?",
+   "about": "ACW-PU-211C",
+   "assets": [
+    {
+     "id": "S7-PU003",
+     "tag": "ACW-PU-211C"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S7-PU003",
+     "tag": "ACW-PU-211C",
+     "text": "equipment ACW-PU-211C (asset S7-PU003) reads \"ACW-PU-211C AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU003]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Motor rated power",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank HP field on the sheet 7 equipment schedule, entry ACW-PU-211C",
+      "the motor nameplate on ACW-PU-211C",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, full-load amps and efficiency."
+    },
+    {
+     "item": "Measured input power or current at normal load",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+     ],
+     "how": "Measure kW (or amps and volts) over a typical period."
+    }
+   ],
+   "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+   "typical_benefit": {
+    "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+    "source": [
+     "S16",
+     "S24"
+    ],
+    "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S16: Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "H1@S4-TK001",
+   "question_id": "H1",
+   "family": "heat_grade",
+   "question": "Is high-grade steam let down, bypassed or desuperheated for a duty a lower grade could serve?",
+   "about": "ESS-HTR-180",
+   "assets": [
+    {
+     "id": "S4-TK001",
+     "tag": "ESS-HTR-180"
+    },
+    {
+     "id": "S4-IN001",
+     "tag": "TCV-16013"
+    },
+    {
+     "id": "S4-IN014",
+     "tag": "FCV-18012"
+    },
+    {
+     "id": "S4-IN016",
+     "tag": "PCV-14011"
+    },
+    {
+     "id": "S4-OP005",
+     "tag": null
+    },
+    {
+     "id": "S4-OP001",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-TK001",
+     "tag": "ESS-HTR-180",
+     "text": "equipment ESS-HTR-180 (asset S4-TK001) reads \"ESS-HTR-180 DE SUPERHEATER\" on sheet 4",
+     "field": "units[S4-TK001]"
+    },
+    {
+     "role": "station valve",
+     "id": "S4-IN001",
+     "tag": "TCV-16013",
+     "text": "valve TCV-16013 (asset S4-IN001) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN001]"
+    },
+    {
+     "role": "station valve",
+     "id": "S4-IN014",
+     "tag": "FCV-18012",
+     "text": "valve FCV-18012 (asset S4-IN014) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN014]"
+    },
+    {
+     "role": "station valve",
+     "id": "S4-IN016",
+     "tag": "PCV-14011",
+     "text": "valve PCV-14011 (asset S4-IN016) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN016]"
+    },
+    {
+     "role": "steam source or user",
+     "id": "S4-OP005",
+     "tag": null,
+     "text": "offpage \"MSS PID 140-1 PEGGING STEAM\" (S4-OP005) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "offpage_connectors[S4-OP005].text"
+    },
+    {
+     "role": "spray or quench water",
+     "id": "S4-OP001",
+     "tag": null,
+     "text": "offpage \"CND PID 160-1 (E-1) CONDENSATE SYSTEM\" (S4-OP001) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "offpage_connectors[S4-OP001].text"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam flow through the station, with hours",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (FCV-18012, PCV-14011, TCV-16013) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "site records: steam balance"
+     ],
+     "how": "Build a flow-duration curve: how many hours at each flow."
+    },
+    {
+     "item": "Upstream and downstream pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: gauges and thermometers either side of the station",
+      "site records: header design conditions"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Station rating",
+     "state": "blank_on_drawing",
+     "where": [
+      "the blank CAPACITY field on the sheet 4 equipment schedule, entry ESS-HTR-180",
+      "the vendor datasheet: station or desuperheater datasheet"
+     ],
+     "how": "Copy rated flow."
+    },
+    {
+     "item": "When the station is used",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operating procedures: startup, trip, normal duty"
+     ],
+     "how": "Mark the station startup-only, trip-only or normal duty."
+    }
+   ],
+   "decision_rule": "If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
+   "typical_benefit": {
+    "wording": "Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has \"constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi.\" No source found with a number for desuperheater or bypass stations themselves.",
+    "source": [
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "status": "asked"
+  },
+  {
+   "id": "H1@S0-OP005",
+   "question_id": "H1",
+   "family": "heat_grade",
+   "question": "Is high-grade steam let down, bypassed or desuperheated for a duty a lower grade could serve?",
+   "about": "\"MAIN STEAM BY-PASS\" (S0-OP005)",
+   "assets": [
+    {
+     "id": "S0-OP005",
+     "tag": null
+    },
+    {
+     "id": "S0-IN034",
+     "tag": "MSBV-1407"
+    },
+    {
+     "id": "S0-IN035",
+     "tag": "TCV-1408"
+    },
+    {
+     "id": "S0-OP006",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S0-OP005",
+     "tag": null,
+     "text": "offpage \"MAIN STEAM BY-PASS\" (S0-OP005) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "offpage_connectors[S0-OP005].text"
+    },
+    {
+     "role": "station valve",
+     "id": "S0-IN034",
+     "tag": "MSBV-1407",
+     "text": "final element MSBV-1407 (asset S0-IN034) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN034]"
+    },
+    {
+     "role": "station valve",
+     "id": "S0-IN035",
+     "tag": "TCV-1408",
+     "text": "valve TCV-1408 (asset S0-IN035) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN035]"
+    },
+    {
+     "role": "spray or quench water",
+     "id": "S0-OP006",
+     "tag": null,
+     "text": "offpage \"FWS TO STM BYPASS FWS PID 170-1\" (S0-OP006) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "offpage_connectors[S0-OP006].text"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam flow through the station, with hours",
+     "state": "not_on_drawing",
+     "where": [
+      "only the valve position is recorded (TCV-1408: SYNTHETIC mapped data point TCV_1408_POS on OPEN100-Demo (open100_sheet0_demo.csv row 24: synthetic demo point (valve position)), not plant data); flow needs a meter or a calibrated valve curve",
+      "site records: steam balance"
+     ],
+     "how": "Build a flow-duration curve: how many hours at each flow."
+    },
+    {
+     "item": "Upstream and downstream pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: gauges and thermometers either side of the station",
+      "site records: header design conditions"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Station rating",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: station or desuperheater datasheet"
+     ],
+     "how": "Copy rated flow."
+    },
+    {
+     "item": "When the station is used",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operating procedures: startup, trip, normal duty"
+     ],
+     "how": "Mark the station startup-only, trip-only or normal duty."
+    }
+   ],
+   "decision_rule": "If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
+   "typical_benefit": {
+    "wording": "Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has \"constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi.\" No source found with a number for desuperheater or bypass stations themselves.",
+    "source": [
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "status": "asked"
+  },
+  {
+   "id": "H1@S1-OP002",
+   "question_id": "H1",
+   "family": "heat_grade",
+   "question": "Is high-grade steam let down, bypassed or desuperheated for a duty a lower grade could serve?",
+   "about": "\"MSS PID 140-1 (E-1) MAIN STEAM BYPASS\" (S1-OP002)",
+   "assets": [
+    {
+     "id": "S1-OP002",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S1-OP002",
+     "tag": null,
+     "text": "offpage \"MSS PID 140-1 (E-1) MAIN STEAM BYPASS\" (S1-OP002) on sheet 1 at ACC-AC-150 (by the extraction's attribution)",
+     "field": "offpage_connectors[S1-OP002].text"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam flow through the station, with hours",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: steam balance"
+     ],
+     "how": "Build a flow-duration curve: how many hours at each flow."
+    },
+    {
+     "item": "Upstream and downstream pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: gauges and thermometers either side of the station",
+      "site records: header design conditions"
+     ],
+     "how": "Record at normal operation."
+    },
+    {
+     "item": "Station rating",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: station or desuperheater datasheet"
+     ],
+     "how": "Copy rated flow."
+    },
+    {
+     "item": "When the station is used",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operating procedures: startup, trip, normal duty"
+     ],
+     "how": "Mark the station startup-only, trip-only or normal duty."
+    }
+   ],
+   "decision_rule": "If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
+   "typical_benefit": {
+    "wording": "Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has \"constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi.\" No source found with a number for desuperheater or bypass stations themselves.",
+    "source": [
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "status": "asked"
+  },
+  {
+   "id": "H2@S4-OP005",
+   "question_id": "H2",
+   "family": "heat_grade",
+   "question": "Is high-grade (or unknown-grade) steam doing a low-temperature job?",
+   "about": "\"MSS PID 140-1 PEGGING STEAM\" (S4-OP005)",
+   "assets": [
+    {
+     "id": "S4-OP005",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-OP005",
+     "tag": null,
+     "text": "offpage \"MSS PID 140-1 PEGGING STEAM\" (S4-OP005) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "offpage_connectors[S4-OP005].text"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam supply pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: pressure gauge and thermometer at the supply",
+      "site records: steam header list"
+     ],
+     "how": "Record supply conditions; saturation temperature follows from pressure."
+    },
+    {
+     "item": "Temperature the user actually needs",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: the temperature setpoint"
+     ],
+     "how": "Note setpoint and normal range."
+    },
+    {
+     "item": "A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: site steam balance",
+      "a walkdown: headers and hot streams near this user"
+     ],
+     "how": "List sources whose temperature exceeds the need with a practical approach."
+    }
+   ],
+   "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
+   "typical_benefit": {
+    "wording": "Closest source wordings: pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management\" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.",
+    "source": [
+     "S19",
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S0-OP001",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"EXTRACTION STEAM ES PID 180-1\" (S0-OP001)",
+   "assets": [
+    {
+     "id": "S0-OP001",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S0-OP001",
+     "tag": null,
+     "text": "offpage \"EXTRACTION STEAM ES PID 180-1\" (S0-OP001) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "offpage_connectors[S0-OP001].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S2-OP003",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"WTS PID 200-4 MAKE-UP WATER\" (S2-OP003)",
+   "assets": [
+    {
+     "id": "S2-OP003",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S2-OP003",
+     "tag": null,
+     "text": "offpage \"WTS PID 200-4 MAKE-UP WATER\" (S2-OP003) on sheet 2 at CND-TK-160 (by the extraction's attribution)",
+     "field": "offpage_connectors[S2-OP003].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S4-OP004",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"WTS PID 200-4 MAKE-UP WATER\" (S4-OP004)",
+   "assets": [
+    {
+     "id": "S4-OP004",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-OP004",
+     "tag": null,
+     "text": "offpage \"WTS PID 200-4 MAKE-UP WATER\" (S4-OP004) on sheet 4",
+     "field": "offpage_connectors[S4-OP004].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S4-OP005",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"MSS PID 140-1 PEGGING STEAM\" (S4-OP005)",
+   "assets": [
+    {
+     "id": "S4-OP005",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-OP005",
+     "tag": null,
+     "text": "offpage \"MSS PID 140-1 PEGGING STEAM\" (S4-OP005) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "offpage_connectors[S4-OP005].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S4-OP006",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"TBS PID 240-1 (E-1) LP EXTRACTION STEAM\" (S4-OP006)",
+   "assets": [
+    {
+     "id": "S4-OP006",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-OP006",
+     "tag": null,
+     "text": "offpage \"TBS PID 240-1 (E-1) LP EXTRACTION STEAM\" (S4-OP006) on sheet 4 at CND-HTR-166 (by the extraction's attribution)",
+     "field": "offpage_connectors[S4-OP006].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S4-OP008",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"TBS PID 240-1 (D-1) HP EXTRACTION STEAM\" (S4-OP008)",
+   "assets": [
+    {
+     "id": "S4-OP008",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S4-OP008",
+     "tag": null,
+     "text": "offpage \"TBS PID 240-1 (D-1) HP EXTRACTION STEAM\" (S4-OP008) on sheet 4",
+     "field": "offpage_connectors[S4-OP008].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@S7-OP001",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "\"WTS PID 160-1 MAKE-UP WATER\" (S7-OP001)",
+   "assets": [
+    {
+     "id": "S7-OP001",
+     "tag": null
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S7-OP001",
+     "tag": null,
+     "text": "offpage \"WTS PID 160-1 MAKE-UP WATER\" (S7-OP001) on sheet 7",
+     "field": "offpage_connectors[S7-OP001].text"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C3@model",
+   "question_id": "C3",
+   "family": "controls",
+   "question": "Do these control valves lack position feedback?",
+   "about": "TCV-1401, TCV-1402, TCV-1403, TCV-1406, TCV-1408, TCV-1409 and 21 more",
+   "assets": [
+    {
+     "id": "S0-IN001",
+     "tag": "TCV-1401"
+    },
+    {
+     "id": "S0-IN013",
+     "tag": "TCV-1402"
+    },
+    {
+     "id": "S0-IN024",
+     "tag": "TCV-1403"
+    },
+    {
+     "id": "S0-IN031",
+     "tag": "TCV-1406"
+    },
+    {
+     "id": "S0-IN035",
+     "tag": "TCV-1408"
+    },
+    {
+     "id": "S0-IN036",
+     "tag": "TCV-1409"
+    },
+    {
+     "id": "S1-IN001",
+     "tag": "LCV-1501"
+    },
+    {
+     "id": "S1-IN007",
+     "tag": "LCV-1501"
+    },
+    {
+     "id": "S2-IN011",
+     "tag": "TCV-1622"
+    },
+    {
+     "id": "S2-IN012",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S2-IN013",
+     "tag": "LCV-1611"
+    },
+    {
+     "id": "S2-IN022",
+     "tag": "FCV-1621"
+    },
+    {
+     "id": "S3-IN006",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S3-IN019",
+     "tag": "FCV-1615"
+    },
+    {
+     "id": "S3-IN029",
+     "tag": "PCV-1703"
+    },
+    {
+     "id": "S4-IN001",
+     "tag": "TCV-16013"
+    },
+    {
+     "id": "S4-IN006",
+     "tag": "FCV-6508"
+    },
+    {
+     "id": "S4-IN007",
+     "tag": "FCV-6506"
+    },
+    {
+     "id": "S4-IN011",
+     "tag": "TCV-2502"
+    },
+    {
+     "id": "S4-IN012",
+     "tag": "LCV-6507"
+    },
+    {
+     "id": "S4-IN013",
+     "tag": "LCV-5509"
+    },
+    {
+     "id": "S4-IN014",
+     "tag": "FCV-18012"
+    },
+    {
+     "id": "S4-IN016",
+     "tag": "PCV-14011"
+    },
+    {
+     "id": "S7-IN001",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S7-IN009",
+     "tag": "FCV-XXX"
+    },
+    {
+     "id": "S7-IN010",
+     "tag": "TCV-XXX"
+    },
+    {
+     "id": "S7-IN024",
+     "tag": "TCV-XXX"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S0-IN001",
+     "tag": "TCV-1401",
+     "text": "valve TCV-1401 (asset S0-IN001) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S0-IN013",
+     "tag": "TCV-1402",
+     "text": "valve TCV-1402 (asset S0-IN013) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN013]"
+    },
+    {
+     "role": "trigger",
+     "id": "S0-IN024",
+     "tag": "TCV-1403",
+     "text": "valve TCV-1403 (asset S0-IN024) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN024]"
+    },
+    {
+     "role": "trigger",
+     "id": "S0-IN031",
+     "tag": "TCV-1406",
+     "text": "valve TCV-1406 (asset S0-IN031) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN031]"
+    },
+    {
+     "role": "trigger",
+     "id": "S0-IN035",
+     "tag": "TCV-1408",
+     "text": "valve TCV-1408 (asset S0-IN035) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN035]"
+    },
+    {
+     "role": "trigger",
+     "id": "S0-IN036",
+     "tag": "TCV-1409",
+     "text": "valve TCV-1409 (asset S0-IN036) on sheet 0 at MSS-XSS-140 (by the extraction's attribution)",
+     "field": "instruments[S0-IN036]"
+    },
+    {
+     "role": "trigger",
+     "id": "S1-IN001",
+     "tag": "LCV-1501",
+     "text": "valve LCV-1501 (asset S1-IN001) on sheet 1 at ACC-AC-150 (by the extraction's attribution)",
+     "field": "instruments[S1-IN001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S1-IN007",
+     "tag": "LCV-1501",
+     "text": "valve LCV-1501 (asset S1-IN007) on sheet 1 at TURBINE-EXHAUST-DUCT (by the extraction's attribution)",
+     "field": "instruments[S1-IN007]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-IN011",
+     "tag": "TCV-1622",
+     "text": "valve TCV-1622 (asset S2-IN011) on sheet 2 at CND-HTR-161 (by the extraction's attribution)",
+     "field": "instruments[S2-IN011]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-IN012",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S2-IN012) [placeholder tag on the drawing] on sheet 2 at CND-HTR-166 (by the extraction's attribution)",
+     "field": "instruments[S2-IN012]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-IN013",
+     "tag": "LCV-1611",
+     "text": "valve LCV-1611 (asset S2-IN013) on sheet 2",
+     "field": "instruments[S2-IN013]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-IN022",
+     "tag": "FCV-1621",
+     "text": "valve FCV-1621 (asset S2-IN022) on sheet 2 at CND-HTR-161 (by the extraction's attribution)",
+     "field": "instruments[S2-IN022]"
+    },
+    {
+     "role": "trigger",
+     "id": "S3-IN006",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S3-IN006) [placeholder tag on the drawing] on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN006]"
+    },
+    {
+     "role": "trigger",
+     "id": "S3-IN019",
+     "tag": "FCV-1615",
+     "text": "valve FCV-1615 (asset S3-IN019) on sheet 3 at FWS-HTR-170 (by the extraction's attribution)",
+     "field": "instruments[S3-IN019]"
+    },
+    {
+     "role": "trigger",
+     "id": "S3-IN029",
+     "tag": "PCV-1703",
+     "text": "valve PCV-1703 (asset S3-IN029) on sheet 3 at FWS-PU-170A (by the extraction's attribution)",
+     "field": "instruments[S3-IN029]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN001",
+     "tag": "TCV-16013",
+     "text": "valve TCV-16013 (asset S4-IN001) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN006",
+     "tag": "FCV-6508",
+     "text": "valve FCV-6508 (asset S4-IN006) on sheet 4",
+     "field": "instruments[S4-IN006]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN007",
+     "tag": "FCV-6506",
+     "text": "valve FCV-6506 (asset S4-IN007) on sheet 4 at CND-HTR-166 (by the extraction's attribution)",
+     "field": "instruments[S4-IN007]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN011",
+     "tag": "TCV-2502",
+     "text": "valve TCV-2502 (asset S4-IN011) on sheet 4 at CND-HTR-166 (by the extraction's attribution)",
+     "field": "instruments[S4-IN011]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN012",
+     "tag": "LCV-6507",
+     "text": "valve LCV-6507 (asset S4-IN012) on sheet 4",
+     "field": "instruments[S4-IN012]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN013",
+     "tag": "LCV-5509",
+     "text": "valve LCV-5509 (asset S4-IN013) on sheet 4",
+     "field": "instruments[S4-IN013]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN014",
+     "tag": "FCV-18012",
+     "text": "valve FCV-18012 (asset S4-IN014) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN014]"
+    },
+    {
+     "role": "trigger",
+     "id": "S4-IN016",
+     "tag": "PCV-14011",
+     "text": "valve PCV-14011 (asset S4-IN016) on sheet 4 at ESS-HTR-180 (by the extraction's attribution)",
+     "field": "instruments[S4-IN016]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-IN001",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S7-IN001) [placeholder tag on the drawing] on sheet 7",
+     "field": "instruments[S7-IN001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-IN009",
+     "tag": "FCV-XXX",
+     "text": "valve FCV-XXX (asset S7-IN009) [placeholder tag on the drawing] on sheet 7 at LUBE-OIL-COOLER (by the extraction's attribution)",
+     "field": "instruments[S7-IN009]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-IN010",
+     "tag": "TCV-XXX",
+     "text": "valve TCV-XXX (asset S7-IN010) [placeholder tag on the drawing] on sheet 7 at LUBE-OIL-COOLER (by the extraction's attribution)",
+     "field": "instruments[S7-IN010]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-IN024",
+     "tag": "TCV-XXX",
+     "text": "valve TCV-XXX (asset S7-IN024) [placeholder tag on the drawing] on sheet 7 at FWS-PU-170B (by the extraction's attribution)",
+     "field": "instruments[S7-IN024]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+      "maintenance records: valve records"
+     ],
+     "how": "List which valves report position."
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "state": "not_on_drawing",
+     "where": [
+      "historian / recorded data: TCV-1401: SYNTHETIC mapped data point TCV_1401_POS on OPEN100-Demo (open100_sheet0_demo.csv row 20: synthetic demo point (valve position)), not plant data; TCV-1402: SYNTHETIC mapped data point TCV_1402_POS on OPEN100-Demo (open100_sheet0_demo.csv row 21: synthetic demo point (valve position)), not plant data; TCV-1403: SYNTHETIC mapped data point TCV_1403_POS on OPEN100-Demo (open100_sheet0_demo.csv row 22: synthetic demo point (valve position)), not plant data; TCV-1406: SYNTHETIC mapped data point TCV_1406_POS on OPEN100-Demo (open100_sheet0_demo.csv row 23: synthetic demo point (valve position)), not plant data; TCV-1408: SYNTHETIC mapped data point TCV_1408_POS on OPEN100-Demo (open100_sheet0_demo.csv row 24: synthetic demo point (valve position)), not plant data; TCV-1409: SYNTHETIC mapped data point TCV_1409_POS on OPEN100-Demo (open100_sheet0_demo.csv row 25: synthetic demo point (valve position)), not plant data (no historian tag is mapped in this model for FCV-1615, FCV-1621, FCV-18012, FCV-6506, FCV-6508, FCV-XXX, LCV-1501, LCV-1611, LCV-5509, LCV-6507, PCV-14011, PCV-1703, TCV-16013, TCV-1622, TCV-2502, TCV-XXX)",
+      "a walkdown: a small step test on each loop in manual"
+     ],
+     "how": "Compare controller output with measured response."
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   },
+   "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted.",
+   "status": "asked"
+  },
+  {
+   "id": "C9@model",
+   "question_id": "C9",
+   "family": "safety_question",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "about": "ACC-PU-151, ACC-PU-152, ACC-PU-153, CND-PU-162, CND-PU-163, CND-PU-164 and 5 more",
+   "assets": [
+    {
+     "id": "S1-PU013",
+     "tag": "ACC-PU-151"
+    },
+    {
+     "id": "S1-PU014",
+     "tag": "ACC-PU-152"
+    },
+    {
+     "id": "S1-PU015",
+     "tag": "ACC-PU-153"
+    },
+    {
+     "id": "S2-PU001",
+     "tag": "CND-PU-162"
+    },
+    {
+     "id": "S2-PU002",
+     "tag": "CND-PU-163"
+    },
+    {
+     "id": "S2-PU003",
+     "tag": "CND-PU-164"
+    },
+    {
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A"
+    },
+    {
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B"
+    },
+    {
+     "id": "S7-PU001",
+     "tag": "ACW-PU-211A"
+    },
+    {
+     "id": "S7-PU002",
+     "tag": "ACW-PU-211B"
+    },
+    {
+     "id": "S7-PU003",
+     "tag": "ACW-PU-211C"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "S1-PU013",
+     "tag": "ACC-PU-151",
+     "text": "equipment ACC-PU-151 (asset S1-PU013) reads \"ACC-PU-151 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU013]"
+    },
+    {
+     "role": "trigger",
+     "id": "S1-PU014",
+     "tag": "ACC-PU-152",
+     "text": "equipment ACC-PU-152 (asset S1-PU014) reads \"ACC-PU-152 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU014]"
+    },
+    {
+     "role": "trigger",
+     "id": "S1-PU015",
+     "tag": "ACC-PU-153",
+     "text": "equipment ACC-PU-153 (asset S1-PU015) reads \"ACC-PU-153 AIR COOLED CONDENSER PUMP\" on sheet 1",
+     "field": "units[S1-PU015]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-PU001",
+     "tag": "CND-PU-162",
+     "text": "equipment CND-PU-162 (asset S2-PU001) reads \"CND-PU-162 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-PU002",
+     "tag": "CND-PU-163",
+     "text": "equipment CND-PU-163 (asset S2-PU002) reads \"CND-PU-163 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU002]"
+    },
+    {
+     "role": "trigger",
+     "id": "S2-PU003",
+     "tag": "CND-PU-164",
+     "text": "equipment CND-PU-164 (asset S2-PU003) reads \"CND-PU-164 CONDENSATE PUMP\" on sheet 2",
+     "field": "units[S2-PU003]"
+    },
+    {
+     "role": "trigger",
+     "id": "S3-PU001",
+     "tag": "FWS-PU-170A",
+     "text": "equipment FWS-PU-170A (asset S3-PU001) reads \"FWS-PU-170A FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S3-PU002",
+     "tag": "FWS-PU-170B",
+     "text": "equipment FWS-PU-170B (asset S3-PU002) reads \"FWS-PU-170B FEEDWATER PUMP\" on sheet 3",
+     "field": "units[S3-PU002]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-PU001",
+     "tag": "ACW-PU-211A",
+     "text": "equipment ACW-PU-211A (asset S7-PU001) reads \"ACW-PU-211A AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU001]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-PU002",
+     "tag": "ACW-PU-211B",
+     "text": "equipment ACW-PU-211B (asset S7-PU002) reads \"ACW-PU-211B AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU002]"
+    },
+    {
+     "role": "trigger",
+     "id": "S7-PU003",
+     "tag": "ACW-PU-211C",
+     "text": "equipment ACW-PU-211C (asset S7-PU003) reads \"ACW-PU-211C AUX COOLING WATER PUMP\" on sheet 7",
+     "field": "units[S7-PU003]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+      "DCS/PLC configuration: safety system configuration"
+     ],
+     "how": "Confirm what protects each machine and that it is tested."
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   },
+   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [
+  {
+   "question_id": "C2",
+   "reason": "the model holds no controllers; give a loop list with --loops (controller,measurement,output) to check this"
+  },
+  {
+   "question_id": "C6",
+   "reason": "the model holds no controllers; give a loop list with --loops to check this"
+  }
+ ],
+ "did_not_fire": [
+  "E2",
+  "E3",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H3",
+  "H4",
+  "C4",
+  "C5",
+  "C7",
+  "C10",
+  "C8",
+  "E25",
+  "E26"
+ ],
+ "left_out": {
+  "nuclear reactor coolant, chemical and volume control and residual heat removal systems: safety-related design changes go through the licensing basis, not an energy or controls screen": [
+   "COOLANT-HT-EXCH-RC-P100-X001",
+   "CVCS-AN-113A",
+   "CVCS-AN-113B",
+   "CVCS-FL-112A",
+   "CVCS-FL-112B",
+   "CVCS-HX-110",
+   "CVCS-HX-111",
+   "CVCS-ION-114A",
+   "CVCS-ION-114B",
+   "CVCS-PU-115",
+   "CVCS-PU-116",
+   "CVCS-PU-117",
+   "CVCS-VCT-118",
+   "RC-P100-X001",
+   "RCS-EX-105",
+   "RCS-PU-102A",
+   "RCS-PU-102B",
+   "RCS-SG-101",
+   "RCS-V-103",
+   "RCS-VE-104",
+   "RCS-XR-100",
+   "RCS-XR-100A",
+   "RCS-XR-100B",
+   "RCS-XR-100C",
+   "RCS-XR-100D",
+   "RCS-XR-100E",
+   "RCS-XR-100F",
+   "RHR-HX-121A",
+   "RHR-HX-121B",
+   "RHR-PU-120A",
+   "RHR-PU-120B",
+   "S6-TK003",
+   "S6-TK004"
+  ]
+ }
+}

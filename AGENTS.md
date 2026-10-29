@@ -26,10 +26,16 @@ From the repository root, with Python 3.10+ (standard library only for the first
 python scripts/check_claims.py      # each headline number in README.md against the committed file it comes from
 python scripts/pipeline.py status   # whether every output is fresh against the inputs and code that made it
 python scripts/attempts_ledger.py --check   # the tuning ledger is complete, sourced and current
+python scripts/feature_catalog.py --check   # every feature, its evidence and its independent review status
+python scripts/corpus_matrix.py --check     # the generalization matrix page matches its results
 ```
 
 Before suggesting a change to a method, read `docs/TRIED.md`: it lists every variant tried with its result and
 verdict, and the ideas not tried yet, so you can tell your user whether a suggestion was already tested.
+
+To tell your user whether a tool will hold up on their kind of drawings or data, read `docs/GENERALIZATION.md`:
+each tool run on every public input it applies to, with the reason for every red cell. `docs/FEATURES.md` lists each
+feature with its example outputs and whether an independent review of exactly those outputs passed.
 
 Then, if `pip install -r requirements.txt` is acceptable in your environment:
 
@@ -38,7 +44,9 @@ python scripts/run_tests.py         # the same suite CI runs
 ```
 
 `check_claims.py` prints one row per claim: what the README says, what the evidence file says, the file, and
-whether they agree. Claims marked "prose only" rest on narrative in the journal, not on a result file; say so if
+whether they agree. It checks that the README's numbers match the committed results files. It does not re-run
+models or re-score predictions, so a pass means "the README matches the results files", not "the results were
+reproduced"; tell your user which one you checked. Claims marked "prose only" rest on narrative in the journal, not on a result file; say so if
 your user relies on one.
 
 ## One claim end to end
@@ -56,8 +64,9 @@ Pick whichever matters to your user and follow it from source to number. Each of
 ## What you can't reproduce here, and why
 
 - **Model extraction runs.** They call commercial models through the author's subscriptions. The prompts, images,
-  hashes and scored outputs are committed; the raw run records are not. Scores can be recomputed from what is
-  committed, the model calls can't.
+  hashes and scorecards are committed. The raw run records, which hold the per-drawing model outputs, are not
+  (`runs/README.md` says why), so the headline scores can be re-scored only from run records you produce by running
+  the models again.
 - **The Ignition acceptance run.** It needs a local Ignition 8.3 gateway. The receipts are committed;
   `docs/IGNITION_QUICKSTART.md` is how to stand one up.
 - **The 3D stills.** They need Blender (`BLENDER_EXE`).

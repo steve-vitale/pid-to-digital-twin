@@ -26,6 +26,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kscmh",
+              "readOnly": true,
               "documentation": "FT-101 | XMEAS 1 | A feed flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -42,6 +43,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kg/h",
+              "readOnly": true,
               "documentation": "FT-102 | XMEAS 2 | D feed flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -58,6 +60,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kg/h",
+              "readOnly": true,
               "documentation": "FT-103 | XMEAS 3 | E feed flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -74,6 +77,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-102 | XMV 1 | D feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -90,6 +94,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-103 | XMV 2 | E feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -106,6 +111,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-101 | XMV 3 | A feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -138,6 +144,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kscmh",
+              "readOnly": true,
               "documentation": "FT-106 | XMEAS 6 | Reactor feed rate | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -154,6 +161,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kPa g",
+              "readOnly": true,
               "documentation": "PT-107 | XMEAS 7 | Reactor pressure | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -170,6 +178,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "LT-108 | XMEAS 8 | Reactor level | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -186,6 +195,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
+              "readOnly": true,
               "documentation": "TT-109 | XMEAS 9 | Reactor temperature | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -202,6 +212,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
+              "readOnly": true,
               "documentation": "TT-121 | XMEAS 21 | Reactor cooling water outlet temperature | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -218,6 +229,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "mol%",
+              "readOnly": true,
               "documentation": "AT-123 | XMEAS 23-28 | Reactor feed analyzer (components A-F) | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -234,6 +246,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "TV-121 | XMV 10 | Reactor cooling water flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -250,6 +263,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "SC-212 | XMV 12 | Agitator speed | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -282,6 +296,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
+              "readOnly": true,
               "documentation": "TT-122 | XMEAS 22 | Separator Cooling Water Outlet Temp | source check: corrected | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -298,6 +313,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-117 | XMV 11 | Condenser cooling water flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -330,6 +346,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kscmh",
+              "readOnly": true,
               "documentation": "FT-110 | XMEAS 10 | Purge rate | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -346,6 +363,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
+              "readOnly": true,
               "documentation": "TT-111 | XMEAS 11 | Separator temperature | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -362,6 +380,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "LT-112 | XMEAS 12 | Separator level | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -378,6 +397,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kPa g",
+              "readOnly": true,
               "documentation": "PT-113 | XMEAS 13 | Separator pressure | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -394,6 +414,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "m3/h",
+              "readOnly": true,
               "documentation": "FT-114 | XMEAS 14 | Separator underflow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -410,6 +431,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "mol%",
+              "readOnly": true,
               "documentation": "AT-129 | XMEAS 29-36 | Purge gas analyzer (components A-H) | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -426,6 +448,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-110 | XMV 6 | Purge valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -442,6 +465,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "LV-112 | XMV 7 | Separator pot liquid flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -474,6 +498,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kscmh",
+              "readOnly": true,
               "documentation": "FT-105 | XMEAS 5 | Recycle flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -490,6 +515,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kW",
+              "readOnly": true,
               "documentation": "JT-120 | XMEAS 20 | Compressor work | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -506,6 +532,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-105 | XMV 5 | Compressor recycle valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -538,6 +565,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kscmh",
+              "readOnly": true,
               "documentation": "FT-104 | XMEAS 4 | A and C feed flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -554,6 +582,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "LT-115 | XMEAS 15 | Stripper level | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -570,6 +599,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kPa g",
+              "readOnly": true,
               "documentation": "PT-116 | XMEAS 16 | Stripper pressure | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -586,6 +616,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "m3/h",
+              "readOnly": true,
               "documentation": "FT-117 | XMEAS 17 | Stripper underflow (product) | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -602,6 +633,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "degC",
+              "readOnly": true,
               "documentation": "TT-118 | XMEAS 18 | Stripper temperature | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -618,6 +650,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "kg/h",
+              "readOnly": true,
               "documentation": "FT-119 | XMEAS 19 | Stripper steam flow | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -634,6 +667,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "mol%",
+              "readOnly": true,
               "documentation": "AT-137 | XMEAS 37-41 | Product analyzer (components D-H) | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -650,6 +684,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-104 | XMV 4 | A and C feed flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -666,6 +701,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "LV-115 | XMV 8 | Stripper liquid product flow valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",
@@ -682,6 +718,7 @@
               "valueSource": "opc",
               "dataType": "Float8",
               "engUnit": "%",
+              "readOnly": true,
               "documentation": "FV-119 | XMV 9 | Stripper steam valve | source check: confirmed | ops review: unverified",
               "opcServer": {
                 "bindType": "parameter",

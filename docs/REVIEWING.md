@@ -19,6 +19,19 @@ python scripts/pipeline.py status   # whether every output is fresh against what
 
 Both use only the Python standard library and finish in under a minute.
 
+To run the test suite too:
+
+```sh
+python scripts/run_tests.py --check-prerequisites   # what is missing, if anything (runs no tests)
+python scripts/run_tests.py --full                  # every registered test (the default mode)
+python scripts/run_tests.py --source-only           # stdlib + committed fixtures only; NOT a full-suite pass
+```
+
+`--full` runs every test registered in `scripts/run_tests.py` (unit, round-trip and agreement tests across the
+tools), offline: it needs the packages in `requirements.txt` and the cached public data (Tennessee Eastman runs,
+PID2Graph OPEN100 drawings), and stops with exit code 2 naming what is missing instead of downloading anything.
+`--source-only` is the subset a bare clone with only the standard library can run.
+
 ## One hour: time a review of one drawing
 
 The biggest number this project hasn't measured is how long a person takes to check what the extraction produced.

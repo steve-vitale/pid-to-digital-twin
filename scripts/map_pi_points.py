@@ -10,6 +10,7 @@ import argparse
 import csv
 import json
 import os
+import sys
 from pathlib import Path
 import tempfile
 from pi_mapping import FIELDS, plan_mapping
@@ -35,6 +36,8 @@ def main():
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--replace-all', action='store_true')
     args = parser.parse_args()
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(newline='\n')  # a redirected report is LF on every OS
     try:
         original = args.model.read_text(encoding='utf-8')
         model = json.loads(original, object_pairs_hook=strict_object, parse_constant=nonfinite)

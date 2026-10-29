@@ -1,0 +1,978 @@
+{
+ "about": "Every public input the generalization matrix (scripts/corpus_matrix.py, docs/GENERALIZATION.md) runs the repository's tools against, plus public sources not yet added. local_path is relative to the repository root. committed=true means a clean clone has it; otherwise fetch is the command that builds or downloads it, and the matrix marks the cells 'needs data: <fetch>' until it is run. 'exercises' names the matrix rows the input feeds (1 tracer, 2 scorer controls, 3 intake + report, 4 loop audit, 5 exports, 6 historian bands, 7 DEXPI route, 8 pipe layer). Licenses of inputs are as stated in NOTICE.md; candidate licenses are copied from a license check done 2026-10-29 and are not legal advice. Inputs of kind needs_key (a sheet without a machine-readable key) or needs_confirmation (a pairing a person must confirm) get an n/a cell with the reason in 'not_scored' and are never scored. 'attribution' is the credit line to give when reusing the source; 'real' says whether the data were measured or drawn by people outside this repository (true) or simulated/synthetic (false).",
+ "inputs": [
+  {
+   "id": "open100-dev",
+   "name": "PID2Graph OPEN100, sheets 0-5 (development set: the tracer was tuned on these)",
+   "family": "pid2graph-open100",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100",
+   "sheets": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "committed": true,
+   "fetch": "python scripts/fetch_pid2graph.py --get \"Complete/PID2Graph OPEN100/\"",
+   "style": "real plant drawings (Energy Impact Center OPEN100 design), clean digital",
+   "exercises": [
+    1,
+    2,
+    3,
+    8
+   ]
+  },
+  {
+   "id": "open100-holdout",
+   "name": "PID2Graph OPEN100, sheets 6-11 (holdout A: nothing was tuned on them)",
+   "family": "pid2graph-open100",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100",
+   "sheets": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11"
+   ],
+   "committed": true,
+   "fetch": "python scripts/fetch_pid2graph.py --get \"Complete/PID2Graph OPEN100/\"",
+   "style": "real plant drawings, clean digital, same drafting house as the development set",
+   "exercises": [
+    1,
+    2,
+    3,
+    8
+   ]
+  },
+  {
+   "id": "open100-scan-L1",
+   "name": "OPEN100 holdout A as a photocopy (degrade level L1)",
+   "family": "pid2graph-open100",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0 (adaptation made by scripts/degrade_scans.py)",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L1",
+   "sheets": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11"
+   ],
+   "committed": true,
+   "fetch": "python scripts/degrade_scans.py",
+   "style": "synthetic degradation: faded ink, slight blur, speckle",
+   "exercises": [
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "open100-scan-L2",
+   "name": "OPEN100 holdout A as an old scan (degrade level L2)",
+   "family": "pid2graph-open100",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0 (adaptation made by scripts/degrade_scans.py)",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L2",
+   "sheets": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11"
+   ],
+   "committed": true,
+   "fetch": "python scripts/degrade_scans.py",
+   "style": "synthetic degradation: skew, blur, noise",
+   "exercises": [
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "open100-scan-L3",
+   "name": "OPEN100 holdout A as a bad scan (degrade level L3)",
+   "family": "pid2graph-open100",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0 (adaptation made by scripts/degrade_scans.py)",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L3",
+   "sheets": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11"
+   ],
+   "committed": true,
+   "fetch": "python scripts/degrade_scans.py",
+   "style": "synthetic degradation: heavy skew, blur, broken strokes",
+   "exercises": [
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "pid2graph-synthetic",
+   "name": "PID2Graph synthetic 'Dataset PID' (holdout B, 20 sheets)",
+   "family": "pid2graph-synthetic",
+   "kind": "keyed-sheets",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0",
+   "local_path": "data/external/pid2graph/PID2Graph/Complete/Dataset PID",
+   "sheets": "all",
+   "committed": false,
+   "fetch": "python scripts/fetch_pid2graph.py --get \"Complete/Dataset PID/\"",
+   "style": "synthetic sheets in a different drafting style (large canvases, thin lines, many crossings)",
+   "exercises": [
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "dexpi",
+   "name": "DEXPI TrainingTestCases C01-C03, rendered and keyed by scripts/adapt_dexpi.py",
+   "family": "dexpi",
+   "kind": "keyed-sheets",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases",
+   "license": "CC BY 4.0",
+   "local_path": "data/external/dexpi/sheets",
+   "sheets": [
+    "dexpi-c01",
+    "dexpi-c02",
+    "dexpi-c03"
+   ],
+   "committed": false,
+   "fetch": "python scripts/adapt_dexpi.py fetch && python scripts/adapt_dexpi.py build",
+   "style": "vector exports from three P&ID tools (reference P&ID, BASF column, Equinor piping), ISO 10628 symbols",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    7,
+    8
+   ]
+  },
+  {
+   "id": "te-rev-a",
+   "name": "Generated Tennessee Eastman sheets, revision A (no controllers or signal lines)",
+   "family": "te-generated",
+   "kind": "keyed-sheets",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT (generated by this repository's code from its own model; NOTICE.md)",
+   "local_path": "data/te_pid/rev-a",
+   "sheets": [
+    "101",
+    "102",
+    "103"
+   ],
+   "committed": true,
+   "fetch": null,
+   "style": "this repository's OPEN100-like house style, generated",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ]
+  },
+  {
+   "id": "te-rev-c",
+   "name": "Generated Tennessee Eastman sheets, revision C (controllers, signal lines, valve stations; indicators instead of transmitters)",
+   "family": "te-generated",
+   "kind": "keyed-sheets",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT (generated by this repository's code from its own model; NOTICE.md)",
+   "local_path": "data/te_pid/rev-c",
+   "sheets": [
+    "101",
+    "102",
+    "103"
+   ],
+   "committed": true,
+   "fetch": null,
+   "style": "this repository's house style, generated",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ]
+  },
+  {
+   "id": "te-rev-d",
+   "name": "Generated Tennessee Eastman sheets, revision D (current: every loop drawn)",
+   "family": "te-generated",
+   "kind": "keyed-sheets",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT (generated by this repository's code from its own model; NOTICE.md)",
+   "local_path": "data/te_pid",
+   "sheets": [
+    "101",
+    "102",
+    "103"
+   ],
+   "committed": true,
+   "fetch": null,
+   "style": "this repository's house style, generated",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ]
+  },
+  {
+   "id": "te-rev-c-scan-L3",
+   "name": "Generated TE revision C sheets as a bad scan (degrade level L3)",
+   "family": "te-generated",
+   "kind": "keyed-sheets",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT (generated by this repository's code; NOTICE.md)",
+   "local_path": "data/te_pid/rev-c/scan-L3",
+   "sheets": [
+    "101",
+    "102",
+    "103"
+   ],
+   "committed": false,
+   "fetch": "python scripts/degrade_scans.py --src data/te_pid/rev-c --drawings 101,102,103 --dest data/te_pid/rev-c/scan",
+   "style": "generated house style, synthetic degradation L3",
+   "exercises": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "bayer-rt1",
+   "name": "Generated Bayer CropScience residue treater sheet RT1",
+   "family": "bayer-generated",
+   "kind": "keyed-sheets",
+   "source_url": "https://www.csb.gov/bayer-cropscience-pesticide-waste-tank-explosion/",
+   "license": "MIT (sheet and key generated by this repository from a model written from the public CSB report 2008-08-I-WV)",
+   "local_path": "data/bayer_rt/pid",
+   "sheets": [
+    "RT1"
+   ],
+   "committed": true,
+   "fetch": null,
+   "style": "this repository's house style, generated from a second, independently written model",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ]
+  },
+  {
+   "id": "te-model",
+   "name": "Tennessee Eastman process model (hand-built, cited to Downs and Vogel and the Braatz simulator code)",
+   "family": "te-model",
+   "kind": "process-model",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT (this repository's model); simulator facts under the Braatz group permission notice (NOTICE.md)",
+   "local_path": "data/te_process_model.json",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    5
+   ]
+  },
+  {
+   "id": "bayer-model",
+   "name": "Bayer residue treater process model (written from the CSB report, every item cited)",
+   "family": "bayer-model",
+   "kind": "process-model",
+   "source_url": "https://www.csb.gov/bayer-cropscience-pesticide-waste-tank-explosion/",
+   "license": "MIT (this repository's model of a public CSB report)",
+   "local_path": "data/bayer_rt/process_model.json",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    4,
+    5
+   ]
+  },
+  {
+   "id": "water-fixture",
+   "name": "Synthetic parallel-pump water utility, an extracted-twin fixture (hand-built test, not plant evidence)",
+   "family": "water-fixture",
+   "kind": "extracted-twin",
+   "source_url": "https://github.com/steve-vitale/pid-to-digital-twin",
+   "license": "MIT",
+   "local_path": "data/fixtures/water_utility_twin.json",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    5
+   ]
+  },
+  {
+   "id": "te-loop-list",
+   "name": "The 19 running TE control loops as a loop list (from the simulator's closed-loop code)",
+   "family": "te-braatz",
+   "kind": "loop-list",
+   "source_url": "https://web.mit.edu/braatzgroup/TE_process.zip",
+   "license": "Braatz group permission notice (NOTICE.md)",
+   "local_path": "examples/loop-audit/te_loops.csv",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    4
+   ]
+  },
+  {
+   "id": "te-braatz-runs",
+   "name": "Braatz TE test runs d00-d21 (d00 normal; d01-d21 one fault each, switched on at sample 160)",
+   "family": "te-braatz",
+   "kind": "historian",
+   "source_url": "https://web.mit.edu/braatzgroup/TE_process.zip",
+   "license": "Braatz group permission notice (NOTICE.md)",
+   "local_path": "data/external/te-braatz",
+   "committed": false,
+   "fetch": "python scripts/fetch_te_data.py --all",
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "historian-csv-d00",
+   "name": "TE run d00 exported as a historian CSV (XMEAS 1-22, minutes)",
+   "family": "te-braatz",
+   "kind": "historian",
+   "source_url": "https://web.mit.edu/braatzgroup/TE_process.zip",
+   "license": "Braatz group permission notice (examples/historian-csv/TE_DATA_NOTICE.txt)",
+   "local_path": "examples/historian-csv/te_normal_d00.csv",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "own-drawing-extraction",
+   "name": "Recorded GPT extraction of OPEN100 sheet 0 (tiles + tracer), with its intake manifest",
+   "family": "pid2graph-open100",
+   "kind": "recorded-extraction",
+   "source_url": "https://zenodo.org/records/14803338",
+   "license": "CC BY-SA 4.0 (derived from OPEN100 sheet 0)",
+   "local_path": "examples/own-drawing/extraction_sheet0.json",
+   "committed": true,
+   "fetch": null,
+   "exercises": [
+    3
+   ]
+  },
+  {
+   "id": "pronto-day3",
+   "name": "PRONTO multiphase flow facility, test day 3 (2017-09-11): normal, air-leakage and diverted-flow runs as historian CSVs (17 process variables, 1 s)",
+   "family": "pronto",
+   "kind": "historian",
+   "source_url": "https://zenodo.org/record/1341582",
+   "license": "CC BY 4.0 (Stief et al. 2019; data doi:10.5281/zenodo.1341583)",
+   "local_path": "data/external/pronto/historian",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py pronto",
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "dexpi-1.2-reference",
+   "name": "DEXPI 1.2 TrainingTestCases: the DEXPI initiative's reference exports (VER/DXI files)",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "reference solutions written by the DEXPI initiative's own test tool (11 files)",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-sppid",
+   "name": "DEXPI 1.2 TrainingTestCases: exports by SPPID (Intergraph/Hexagon), all cases",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "commercial P&ID tool export, Proteus 4.0.1 (one C01 file in Proteus 3.3.3)",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-comos",
+   "name": "DEXPI 1.2 TrainingTestCases: exports by Comos, all cases",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "commercial P&ID tool export; tags split across loop and function elements",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-aveva",
+   "name": "DEXPI 1.2 TrainingTestCases: exports by AVEVA P&ID, all cases",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "commercial P&ID tool export; tags in vendor attributes (TagType, Number)",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-autocad",
+   "name": "DEXPI 1.2 TrainingTestCases: exports by AutoCAD P&ID, all cases",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "commercial P&ID tool export, including re-imports of other tools' exports",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-cross-vendor",
+   "name": "DEXPI 1.2 TrainingTestCases: every export of a case compared with the case's reference export",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "all exporters of the same test drawings",
+   "exercises": [
+    7
+   ]
+  },
+  {
+   "id": "dexpi-1.3-small-cases",
+   "name": "DEXPI 1.3 TrainingTestCases E, I and P cases (one feature per file: equipment, instrumentation, piping)",
+   "family": "dexpi",
+   "kind": "dexpi-xml",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.3",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/extracted",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "P&ID Toolbox exports, the same exporter as the dexpi input (breadth, not independence)",
+   "exercises": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "dexpi-1.2-vendor-renders",
+   "name": "DEXPI 1.2 vendor exports' own renders, keyed from their own XML (adapter A2: the renders that map cleanly)",
+   "family": "dexpi-1.2-vendor-exports",
+   "kind": "keyed-sheets",
+   "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2",
+   "license": "CC BY 4.0 (TrainingTestCases LICENSE at commit a23d61e2, sha256 7e7170e3...2661)",
+   "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+   "local_path": "data/external/dexpi-ttc-all/vendor-keys",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+   "real": true,
+   "style": "four commercial drafting styles (SPPID, Comos, AVEVA, AutoCAD)",
+   "exercises": [
+    1,
+    8
+   ],
+   "sheets": "set:dexpi-1.2-vendor",
+   "build": "corpus_adapters.build_vendor_keys (run by the matrix before rows 1 and 8; writes <id>.png/.graphml/.json into the gitignored vendor-keys folder from the fetched XML and renders)",
+   "held_out": "scored held out once as attempt A174 (mapping and scoring plan fixed in A173 before any scored run; no tracer or line_layers rule chosen or changed on these renders)"
+  },
+  {
+   "id": "omre-1958-pid",
+   "name": "Organic Moderated Reactor Experiment P&ID (US AEC, 1958, OSTI 4307822), a scan of a real facility drawing: bottom-right quadrant with an agent-made first-pass key",
+   "family": "osti-aec-scans",
+   "kind": "agent-keyed-sheets",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg",
+   "license": "Public domain (US Government work; Commons file page); the key adds no restriction",
+   "attribution": "US Atomic Energy Commission, OMRE P&ID (OSTI 4307822). Key: agent-made (Claude), 2026-10-29",
+   "local_path": "data/agent_keys/omre-1958-pid",
+   "committed": true,
+   "fetch": "python scripts/fetch_corpus.py wikimedia-pid",
+   "real": true,
+   "style": "1950s hand-lettered engineering drawing, scanned (4000 x 3266)",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ],
+   "key_note": "agent-made key, first pass, not reviewed by a person (data/agent_keys/README.md; attempt A172): weaker evidence than a hand key, never pooled with human-keyed results",
+   "sheets": [
+    "omre_q4"
+   ],
+   "stage": {
+    "omre_q4": {
+     "source": "data/external/wikimedia-pid/Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg",
+     "how": "crop",
+     "crop": [
+      2000,
+      1633,
+      4000,
+      3266
+     ]
+    }
+   },
+   "scope": "bottom-right quadrant only: crop box (2000, 1633, 4000, 3266) of the 4000 x 3266 scan; key coordinates are in the crop's pixels",
+   "row4_na": "no loop list: the drawing names no controller-to-valve pairings that could be checked against a list made from another source, and no such list exists for the OMRE"
+  },
+  {
+   "id": "commons-pid-sheets",
+   "name": "Five Wikimedia Commons P&ID sheets (textbook and hand-drawn, EN/FR/ISO) with agent-made first-pass keys",
+   "family": "commons-textbook",
+   "kind": "agent-keyed-sheets",
+   "source_url": "https://commons.wikimedia.org/wiki/Category:Piping_and_instrumentation_diagrams",
+   "license": "images per file: CC BY-SA 3.0 (Sch_ma_P_ID, Sch_ma_P_ID1, Pump_with_tank_pid_en, P_ID) or public domain (RI_Sample_ISO). The keys annotate the images, so a key of a CC BY-SA 3.0 image is a derivative shared under CC BY-SA 3.0 (share-alike) with the same attribution",
+   "attribution": "Sch_ma_P_ID and Sch_ma_P_ID1: Evinfo; Pump_with_tank_pid_en: Con-struct; P_ID: Ub (all Wikimedia Commons, own work, CC BY-SA 3.0); RI_Sample_ISO: Geichler (public domain). Keys: agent-made (Claude), 2026-10-29",
+   "local_path": "data/agent_keys/commons-pid-sheets",
+   "committed": true,
+   "fetch": "python scripts/fetch_corpus.py wikimedia-pid",
+   "real": false,
+   "style": "teaching sheets in several standards; not plant drawings",
+   "exercises": [
+    1,
+    2,
+    3,
+    8
+   ],
+   "key_note": "agent-made key, first pass, not reviewed by a person (data/agent_keys/README.md; attempt A172): weaker evidence than a hand key, never pooled with human-keyed results",
+   "sheets": [
+    "Sch_ma_P_ID",
+    "Sch_ma_P_ID1",
+    "RI_Sample_ISO",
+    "Pump_with_tank_pid_en",
+    "P_ID"
+   ],
+   "stage": {
+    "Sch_ma_P_ID": {
+     "source": "data/external/wikimedia-pid/Sch_ma_P_ID.jpg",
+     "how": "raster"
+    },
+    "Sch_ma_P_ID1": {
+     "source": "data/external/wikimedia-pid/Sch_ma_P_ID1.jpg",
+     "how": "raster"
+    },
+    "RI_Sample_ISO": {
+     "source": "data/external/wikimedia-pid/RI_Sample_ISO.png",
+     "how": "raster"
+    },
+    "Pump_with_tank_pid_en": {
+     "source": "data/external/wikimedia-pid/Pump_with_tank_pid_en.svg",
+     "how": "svg"
+    },
+    "P_ID": {
+     "source": "data/external/wikimedia-pid/P_ID.JPG",
+     "how": "raster"
+    }
+   },
+   "not_independent": {
+    "Sch_ma_P_ID1": "a second scan of the same drawing as Sch_ma_P_ID; its key is the first key moved by an affine map fitted on 19 shared bubbles (residual at most 3.9 px). Not independent data"
+   },
+   "skipped_sheets": {
+    "Oil_field_flow_metering.svg": "not a P&ID (a block illustration); not keyed"
+   }
+  },
+  {
+   "id": "pronto-fig1",
+   "name": "PRONTO technical report Figure 1 (facility schematic) with an agent-made first-pass key",
+   "family": "pronto",
+   "kind": "agent-keyed-sheets",
+   "source_url": "https://zenodo.org/record/1341582",
+   "license": "CC BY 4.0 (Stief et al. 2019; data doi:10.5281/zenodo.1341583); the key is a derivative of the figure, CC BY 4.0 with the same attribution",
+   "attribution": "A. Stief et al., PRONTO heterogeneous benchmark, doi:10.5281/zenodo.1341583, technical report Figure 1, CC BY 4.0. Key: agent-made (Claude), 2026-10-29",
+   "local_path": "data/agent_keys/pronto-fig1",
+   "committed": true,
+   "fetch": "python scripts/fetch_corpus.py pronto-more",
+   "real": true,
+   "style": "a real facility's schematic and DCS loop tags",
+   "exercises": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ],
+   "key_note": "agent-made key, first pass, not reviewed by a person (data/agent_keys/README.md; attempt A172): weaker evidence than a hand key, never pooled with human-keyed results",
+   "sheets": [
+    "fig1"
+   ],
+   "stage": {
+    "fig1": {
+     "source": "data/external/pronto-more/PRONTO benchmark case study/Technical documents/Technical report/Multiphase flow facility case study technical report.pdf",
+     "how": "pdf_image",
+     "xref": 91
+    }
+   },
+   "row4_na": "no loop list: the sources contradict each other on the controller pairings (the DeltaV module descriptions pair FIC301 with FIR305 and FIC302 with FIR302, the opposite of Figure 1's labels) and no source names an output tag; a person must decide them first (data/agent_keys/pronto-fig1/controllers_documented.json)"
+  },
+  {
+   "id": "hai-dcs-loops",
+   "name": "HAI boiler DCS control-sheet graphs (7 Ovation sheets as node-link graphs)",
+   "family": "hai",
+   "kind": "needs_confirmation",
+   "source_url": "https://github.com/icsdataset/hai",
+   "license": "CC BY-SA 4.0",
+   "attribution": "H.-K. Shin, W. Lee, J.-H. Yun, B.-G. Min, HAI dataset",
+   "local_path": "data/external/hai/graph/boiler",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py hai",
+   "real": true,
+   "style": "a real testbed's DCS function-block graphs",
+   "exercises": [
+    4
+   ],
+   "not_scored": "a loop list now exists (data/agent_keys/hai-dcs-loops/loops.csv, loops_leg2.csv: agent-made first pass, not confirmed by a person; P1-PC PIT01->PCV01 and its PCV02 leg, P1-LC LIT01->LCV01, P1-FC FT03->FCV03, each stated in the HAI technical PDF; P1-TC and P1-CC unresolved, resolution.json), but there is no drawing to audit it against: the DCS graphs carry no controller tag or block type, so the controller could only be named from the same PDF the loop list came from, which would make the audit circular. phy_boiler.json's link codes are still unconfirmed (staging adapters A6, A7). The candidate pairs traced from the graphs are in the cell's detail",
+   "loop_list": "data/agent_keys/hai-dcs-loops/loops.csv"
+  },
+  {
+   "id": "idaes-hda",
+   "name": "IDAES hydrodealkylation (HDA) flowsheet, solved (HDA_solved.json: 7 units, 11 streams with the solved stream table)",
+   "family": "idaes",
+   "kind": "process-model",
+   "source_url": "https://github.com/IDAES/examples/tree/c4fe326d32614f3bc2814c5fd261d3eb1ae0276c",
+   "license": "IDAES license (BSD-3-Clause style with a DOE notice; LICENSE.md at the pinned commit)",
+   "attribution": "IDAES Process Systems Engineering Framework examples",
+   "local_path": "data/external/idaes-hda/idaes_examples/notebooks/docs/tut/core/HDA_solved.json",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py idaes-hda",
+   "real": false,
+   "style": "a simulation flowsheet written by the IDAES team (a model, not measured data)",
+   "exercises": [
+    5
+   ]
+  },
+  {
+   "id": "dwsim-fossee",
+   "name": "FOSSEE DWSIM Flowsheeting Project: 42 completed student flowsheets",
+   "family": "dwsim-fossee",
+   "kind": "process-model",
+   "source_url": "https://dwsim.fossee.in/flowsheeting-project/completed-flowsheet",
+   "license": "CC BY-SA 4.0 (site footer); each flowsheet credits its contributor",
+   "attribution": "FOSSEE DWSIM Flowsheeting Project, IIT Bombay (credit each flowsheet's contributor)",
+   "local_path": "data/external/dwsim-fossee/zips",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py dwsim-fossee",
+   "real": false,
+   "style": "42 independent simulation flowsheets by different authors (models, not measured data)",
+   "exercises": [
+    5
+   ]
+  },
+  {
+   "id": "pronto-day2",
+   "name": "PRONTO multiphase flow facility, test day 2 (2017-09-07): normal, air-blockage and air-leakage runs",
+   "family": "pronto",
+   "kind": "historian",
+   "source_url": "https://zenodo.org/record/1341582",
+   "license": "CC BY 4.0 (Stief et al. 2019; data doi:10.5281/zenodo.1341583)",
+   "attribution": "A. Stief et al., PRONTO heterogeneous benchmark, doi:10.5281/zenodo.1341583",
+   "local_path": "data/external/pronto-more/PRONTO benchmark case study",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py pronto-more",
+   "real": true,
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "pronto-day4",
+   "name": "PRONTO multiphase flow facility, test day 4 (2017-09-12): normal and slugging runs",
+   "family": "pronto",
+   "kind": "historian",
+   "source_url": "https://zenodo.org/record/1341582",
+   "license": "CC BY 4.0 (Stief et al. 2019; data doi:10.5281/zenodo.1341583)",
+   "attribution": "A. Stief et al., PRONTO heterogeneous benchmark, doi:10.5281/zenodo.1341583",
+   "local_path": "data/external/pronto-more/PRONTO benchmark case study",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py pronto-more",
+   "real": true,
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "skab",
+   "name": "SKAB Skoltech Anomaly Benchmark: a water-pump test rig, one anomaly-free run and 34 labelled runs (valve1, valve2, other)",
+   "family": "skab",
+   "kind": "historian",
+   "source_url": "https://github.com/waico/SKAB/tree/b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+   "license": "GPL-3.0. Local use only: fetched by script into data/external/skab (gitignored), converted into a temporary folder when the matrix runs; never vendored, and no derived CSV, figure or sample of it is committed",
+   "attribution": "I. D. Katser, V. O. Kozitsin, Skoltech Anomaly Benchmark (SKAB), doi:10.34740/KAGGLE/DSV/1693952",
+   "local_path": "data/external/skab/data",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py skab",
+   "real": true,
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "hai-21.03",
+   "name": "HAI 21.03 industrial control testbed (boiler, turbine, water treatment): train1 normal, test1 and test4 with labelled attacks (79 tags, 1 s)",
+   "family": "hai",
+   "kind": "historian",
+   "source_url": "https://github.com/icsdataset/hai/tree/2a814cebc9a66b06c9e5cd545e2d72e65d383737",
+   "license": "CC BY-SA 4.0",
+   "attribution": "H.-K. Shin, W. Lee, J.-H. Yun, B.-G. Min, HAI dataset",
+   "local_path": "data/external/hai/hai-21.03",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py hai",
+   "real": true,
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "uci-hydraulic",
+   "name": "UCI condition monitoring of hydraulic systems: a hydraulic test rig run in repeated 60-s load cycles with graded cooler, valve, pump and accumulator conditions (17 sensors)",
+   "family": "uci-hydraulic",
+   "kind": "historian",
+   "source_url": "https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems",
+   "license": "CC BY 4.0",
+   "attribution": "N. Helwig, E. Pignanelli, A. Schutze, Condition monitoring of hydraulic systems, UCI Machine Learning Repository",
+   "local_path": "data/external/uci-hydraulic",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py uci-hydraulic",
+   "real": true,
+   "cyclic": "load cycles of 60 s (each historian row is one cycle's average)",
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "metropt3",
+   "name": "MetroPT-3: a metro train's air production unit (compressor), 7 analogue signals at about 10 s, with the maintenance report's 4 air-leak failures",
+   "family": "metropt",
+   "kind": "historian",
+   "source_url": "https://archive.ics.uci.edu/dataset/791/metropt+3+dataset",
+   "license": "CC BY 4.0",
+   "attribution": "B. Veloso, R. P. Ribeiro, J. Gama, P. M. Pereira, MetroPT-3 Dataset, UCI Machine Learning Repository",
+   "local_path": "data/external/metropt3/metropt3.zip",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py metropt3",
+   "real": true,
+   "cyclic": "compressor load/unload and air-dryer tower duty cycles",
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "battledim",
+   "name": "BattLeDIM 2018: L-Town water network SCADA (33 pressures, 3 flows, 1 tank level, 5 min) with 14 leaks starting in 2018 (simulated network, realistic demands)",
+   "family": "battledim",
+   "kind": "historian",
+   "source_url": "https://zenodo.org/records/4017659",
+   "license": "CC BY 4.0",
+   "attribution": "S. G. Vrachimis et al., BattLeDIM dataset (KIOS Research and Innovation Center of Excellence, University of Cyprus), Zenodo record 4017659",
+   "local_path": "data/external/battledim",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py battledim",
+   "real": false,
+   "cyclic": "daily water-demand cycle",
+   "exercises": [
+    6
+   ]
+  }
+ ],
+ "candidates": [
+  {
+   "name": "pyTEP TE multi-loop control structure",
+   "url": "https://github.com/ChristopherReinartz/pytep",
+   "license": "BSD 3-Clause",
+   "what": "an independent implementation of the TE control structure",
+   "fetch": "git clone at a pinned commit",
+   "would_exercise": "loop audit (row 4) with a loop list not read by this repository's own script"
+  },
+  {
+   "name": "Reinartz DTU TE reference data, multi-mode",
+   "url": "https://data.dtu.dk/articles/dataset/Tennessee_Eastman_Reference_Data_for_Fault-Detection_and_Decision_Support_Systems/13385936",
+   "license": "CC0 1.0",
+   "what": "TE runs in several operating modes",
+   "fetch": "python scripts/fetch_corpus.py dtu-te (checks the record; data skipped: 23-24 GB HDF5 per mode, needs h5py)",
+   "would_exercise": "historian bands (row 6) across mode changes, which the Braatz single-mode runs never test"
+  },
+  {
+   "name": "Rieth additional TE data",
+   "url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/6C3JR1",
+   "license": "public-domain dedication",
+   "what": "large TE fault simulation set with many runs per fault",
+   "fetch": "download by script",
+   "would_exercise": "historian bands (row 6): detection and false-alarm rates over many runs instead of one per fault"
+  },
+  {
+   "name": "pyDEXPI synthetic P&ID generator",
+   "url": "https://github.com/process-intelligence-research/pyDEXPI",
+   "license": "AGPL-3.0: fetch/generate by script, never vendor",
+   "what": "generates DEXPI P&IDs with loop groupings",
+   "fetch": "generate by script into a gitignored folder",
+   "would_exercise": "DEXPI route (row 7) and loop audit (row 4) beyond three hand-made sheets",
+   "tried_2026_10_29": "pyDEXPI 1.2.0 installed in a throwaway environment (owner approved) and 10 synthetic files generated (data/external/pydexpi/synthetic, gitignored, MANIFEST.json). Its DEXPI writer outputs equipment and nozzles only: piping, valves, instruments, tags and connections built in memory are silently dropped. Usable to test a reader on equipment at scale; not for piping, instruments, tags or loop audits."
+  },
+  {
+   "name": "Wikimedia Commons EN/ISO P&ID SVGs",
+   "url": "https://commons.wikimedia.org/wiki/Category:Piping_and_instrumentation_diagrams",
+   "license": "CC BY-SA 3.0 per file, check each",
+   "what": "hand-drawn and textbook-style P&IDs in several standards",
+   "fetch": "download per file by script after a per-file license check",
+   "would_exercise": "tracer and intake (rows 1, 3) on another drafting style; needs hand-made keys first"
+  },
+  {
+   "name": "Covestro PCS connections list (DEXPI C08)",
+   "url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.3/example%20pids/C08%20Two%20connected%20P%26IDs%20(Covestro)/C08V01",
+   "license": "CC BY 4.0",
+   "what": "an SPPID PCS list with 2 signal loops (a ratio controller and an interlock)",
+   "would_exercise": "loop audit (row 4) on a real tool's loop export (format test; staging adapter A3)"
+  },
+  {
+   "name": "HAI boiler physical graph (phy_boiler.json)",
+   "url": "https://github.com/icsdataset/hai",
+   "license": "CC BY-SA 4.0",
+   "what": "41 nodes, 67 links of a real testbed's process",
+   "would_exercise": "pipe topology (row 8) once the link codes are confirmed from the technical PDF (A6)"
+  },
+  {
+   "name": "BattLeDIM 2018 SCADA and L-TOWN network",
+   "url": "https://zenodo.org/records/4017659",
+   "license": "CC BY 4.0",
+   "what": "simulated water-network SCADA with 14 leak starts; a 905-pipe network",
+   "would_exercise": "graph functions at scale on the 905-pipe L-TOWN network (A11, A12); its 2018 SCADA is already the row-6 input battledim"
+  }
+ ],
+ "excluded": [
+  {
+   "name": "Digitize-PID Dataset-P&ID",
+   "reason": "no license found, likely duplicate of PID2Graph synthetic"
+  },
+  {
+   "name": "SynthPID",
+   "reason": "dataset license unclear, repo 404"
+  },
+  {
+   "name": "Roboflow P&ID sets",
+   "reason": "provenance unknown"
+  },
+  {
+   "name": "Ricker TE archive",
+   "reason": "no terms"
+  },
+  {
+   "name": "IWA BSM repo",
+   "reason": "no license; book CC BY-NC-ND"
+  },
+  {
+   "name": "SACAC industrial PID loop repository",
+   "reason": "no licence stated"
+  },
+  {
+   "name": "Hugging Face P&ID re-hosts",
+   "reason": "no licence or unknown provenance"
+  },
+  {
+   "name": "International Stiction DataBase",
+   "reason": "no public download found"
+  }
+ ],
+ "notes": [
+  "No clearly licensed real-scan P&ID set beyond OPEN100 was found. Every scan-quality input here is a synthetic degradation (scripts/degrade_scans.py) of a clean digital sheet."
+ ],
+ "needs_human_decision": [
+  {
+   "name": "Rieth et al. additional TE data (Harvard Dataverse doi:10.7910/DVN/6C3JR1)",
+   "blocker": "a terms dialog (\"by accessing or downloading ... you agree\") and RData format",
+   "size": "24.7 + 47.3 + 494 + 837 MB",
+   "value": "row 6: 500 runs per fault, so detection and false-alarm rates with confidence intervals (same TE family, so not independent)"
+  },
+  {
+   "name": "Cranfield three-phase flow facility (IEEE DataPort doi:10.21227/0b7j-q780)",
+   "blocker": "IEEE DataPort login; licence not confirmed on the page",
+   "size": "16 data sets",
+   "value": "row 6: the PRONTO rig in another campaign (3 normal, 13 faults)"
+  },
+  {
+   "name": "SWaT / WADI (iTrust, SUTD)",
+   "blocker": "request form and terms",
+   "size": "several GB",
+   "value": "rows 6 and 4: a real water-treatment testbed with PLC loops and attack labels"
+  },
+  {
+   "name": "Ricker multiloop TE model (MultiLoop_mode3.mdl inside pytep)",
+   "blocker": "licence decision: N. L. Ricker's file inside a BSD-3 repository that otherwise excludes his files",
+   "size": "0.4 MB (staged locally for inspection only)",
+   "value": "row 4: an independent TE control structure to audit the Braatz-based drawings against"
+  },
+  {
+   "name": "ASU PID_dataset beyond internal notes (Zenodo 8028570)",
+   "blocker": "CC BY 4.0 on the record, but the drawings are 'from industry and webscraping'; the depositor may not hold the rights",
+   "size": "18.8 MB staged of 6.7 GB",
+   "value": "rows 2 and 3 on 92 heterogeneous real rasters (symbol boxes only)"
+  }
+ ]
+}

@@ -1,0 +1,3448 @@
+{
+ "format": "statement-sample-1",
+ "statements_file": "statements.json",
+ "statements_sha256": "bf1e90aa40b382801de96eb3df0096523ade5152d8c124331d12d1f705f35372",
+ "graph": "examples/graph-export/sheet0_graph.json",
+ "seed": 1031,
+ "n": 75,
+ "floor": 15,
+ "strata_by": "layer",
+ "method": "stratified random sample; strata = relationship layer; every stratum gets min(15, its size), the rest is split in proportion to stratum size (largest remainder); within a stratum, random.Random('1031:<stratum>').sample over statements sorted by id. Small strata are over-sampled on purpose: use each stratum's weight (population / sampled) for a plant-wide estimate.",
+ "strata": [
+  {
+   "stratum": "item",
+   "type": null,
+   "rank": null,
+   "rank_label": "the items themselves: identity, attributes and other relations",
+   "population": 359,
+   "sampled": 15,
+   "weight": 23.9333
+  },
+  {
+   "stratum": "network",
+   "type": null,
+   "rank": null,
+   "rank_label": "network layer: a drawn line network and what is attached to it",
+   "population": 222,
+   "sampled": 15,
+   "weight": 14.8
+  },
+  {
+   "stratum": "network_pair",
+   "type": null,
+   "rank": null,
+   "rank_label": "pairwise link: two items on the same drawn line network (the tracer's links)",
+   "population": 345,
+   "sampled": 15,
+   "weight": 23.0
+  },
+  {
+   "stratum": "non_pipe",
+   "type": null,
+   "rank": null,
+   "rank_label": "drawn lines that are not pipe: instrument connections and taps, actuator stems, nozzle stubs",
+   "population": 34,
+   "sampled": 15,
+   "weight": 2.2667
+  },
+  {
+   "stratum": "pipe",
+   "type": null,
+   "rank": null,
+   "rank_label": "pipe layer: a pipe segment or pipe junction (what is piped directly to what)",
+   "population": 118,
+   "sampled": 15,
+   "weight": 7.8667
+  }
+ ],
+ "statements": [
+  {
+   "id": "st-15019dec2032",
+   "subject": "S0-IN006",
+   "predicate": "edge:contains",
+   "object": "S0-GN004",
+   "text": "RE 1402 is drawn attached to untagged general S0-GN004.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "RE 1402",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     302.3,
+     222.8,
+     317.9,
+     247.1
+    ],
+    "read_as": "RE 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [302, 223, 318, 247] (0-1000 scale), read as “RE 1402”",
+   "targets": [
+    [
+     "edge",
+     "E00009"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     302.3,
+     222.8,
+     317.9,
+     247.1
+    ],
+    "image": "evidence/s0_3b06df0c02.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-57f5e7aa1451",
+   "subject": "S0-OP007",
+   "predicate": "refers_to_drawing",
+   "object": "190-1",
+   "text": "Off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP007) continues on drawing 190-1.",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP007)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     686.9,
+     838.3,
+     710.2
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 687, 838, 710] (0-1000 scale), read as “HIGH PRESSURE STEAM DRAINS HPD PID 190-1”",
+   "targets": [
+    [
+     "claim",
+     "S0-OP007",
+     "refers_to_drawing"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     686.9,
+     838.3,
+     710.2
+    ],
+    "image": "evidence/s0_7c6b1908b0.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-751ce128f369",
+   "subject": "S0-VL019",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "The extraction attributes untagged valve S0-VL019 to MSS-XSS-140 (classed as a tank by the extraction) by tracing the lines.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL019",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     410.9,
+     471.0,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [462, 411, 471, 421] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00067"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     410.9,
+     471.0,
+     420.7
+    ],
+    "image": "evidence/s0_863ad2c606.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-91a1917d21e5",
+   "subject": "S0-OP006",
+   "predicate": "refers_to_drawing",
+   "object": "170-1",
+   "text": "Off-page connector “FWS TO STM BYPASS FWS PID 170-1” (S0-OP006) continues on drawing 170-1.",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "off-page connector “FWS TO STM BYPASS FWS PID 170-1” (S0-OP006)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     578.2,
+     838.3,
+     601.5
+    ],
+    "read_as": "FWS TO STM BYPASS FWS PID 170-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [767, 578, 838, 602] (0-1000 scale), read as “FWS TO STM BYPASS FWS PID 170-1”",
+   "targets": [
+    [
+     "claim",
+     "S0-OP006",
+     "refers_to_drawing"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     578.2,
+     838.3,
+     601.5
+    ],
+    "image": "evidence/s0_f13e9b7290.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-95a4efb73984",
+   "subject": "S0-IN034",
+   "predicate": "variable",
+   "object": "moisture",
+   "text": "MSBV 1407 is a valve in a moisture loop.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "MSBV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     639.3,
+     497.5,
+     655.6,
+     521.2
+    ],
+    "read_as": "MSBV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [639, 498, 656, 521] (0-1000 scale), read as “MSBV 1407”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN034",
+     "variable"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     639.3,
+     497.5,
+     655.6,
+     521.2
+    ],
+    "image": "evidence/s0_4b31ad7758.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-9a10dc0ab65a",
+   "subject": "S0-VL011",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged valve S0-VL011 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL011",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     485.0,
+     167.6,
+     491.5,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [485, 168, 492, 183] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-VL011"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     485.0,
+     167.6,
+     491.5,
+     183.3
+    ],
+    "image": "evidence/s0_e41bd22f26.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-9f75118b79e9",
+   "subject": "S0-IN016",
+   "predicate": "is_a",
+   "object": "final element (valve)",
+   "text": "PSV 1405 is classed as a final element (valve) by the extraction.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "PSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "read_as": "PSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [463, 142, 479, 166] (0-1000 scale), read as “PSV 1405”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN016",
+     "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "image": "evidence/s0_4e61673a80.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-a84bb174ee3a",
+   "subject": "S0-VL021",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged valve S0-VL021 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL021",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     596.6,
+     254.7,
+     603.1,
+     267.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [597, 255, 603, 268] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-VL021"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     596.6,
+     254.7,
+     603.1,
+     267.7
+    ],
+    "image": "evidence/s0_8f43a1b966.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ae8c6caca76c",
+   "subject": "S0-VL023",
+   "predicate": "edge:contains",
+   "object": "S0-TK001",
+   "text": "The extraction attributes untagged valve S0-VL023 to MSS-XSS-140 (classed as a tank by the extraction) by tracing the lines.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL023",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     668.0,
+     270.9,
+     676.1,
+     280.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [668, 271, 676, 281] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00072"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     668.0,
+     270.9,
+     676.1,
+     280.6
+    ],
+    "image": "evidence/s0_5dab465357.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b1d06a69113d",
+   "subject": "S0-VL004",
+   "predicate": "kind",
+   "object": "line_item",
+   "text": "Untagged valve S0-VL004 is an item drawn on a line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL004",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     373.1,
+     373.1,
+     381.7,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [373, 373, 382, 383] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-VL004"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     373.1,
+     373.1,
+     381.7,
+     382.8
+    ],
+    "image": "evidence/s0_3d125418d6.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b420cbb44a62",
+   "subject": "SYS-0",
+   "predicate": "edge:contains",
+   "object": "PLANT",
+   "text": "SYS-0 is part of the plant.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "SYS-0",
+   "system": "the plant",
+   "subject_kind": "system",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "E00001"
+    ]
+   ],
+   "evidence": {
+    "kind": "none",
+    "note": "no source of its own"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c83e32e1ae9c",
+   "subject": "S0-VL004",
+   "predicate": "is_a",
+   "object": "valve",
+   "text": "Untagged valve S0-VL004 is classed as a valve by the extraction.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL004",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     373.1,
+     373.1,
+     381.7,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [373, 373, 382, 383] (0-1000 scale)",
+   "targets": [
+    [
+     "claim",
+     "S0-VL004",
+     "class"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     373.1,
+     373.1,
+     381.7,
+     382.8
+    ],
+    "image": "evidence/s0_3d125418d6.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d8fffc8e97b3",
+   "subject": "S0-VL030",
+   "predicate": "is_a",
+   "object": "valve",
+   "text": "Untagged valve S0-VL030 is classed as a valve by the extraction.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL030",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     628.0,
+     564.2,
+     642.1,
+     576.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [628, 564, 642, 577] (0-1000 scale)",
+   "targets": [
+    [
+     "claim",
+     "S0-VL030",
+     "class"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     628.0,
+     564.2,
+     642.1,
+     576.6
+    ],
+    "image": "evidence/s0_05ac6d8eff.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-de587caca593",
+   "subject": "S0-IN012",
+   "predicate": "unit",
+   "object": "S0-TK001",
+   "text": "The extraction attributes TE 14089B to MSS-XSS-140 (classed as a tank by the extraction) by tracing the lines.",
+   "type": "attribute",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "item",
+   "layer": "item",
+   "group": "TE 14089B",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     370.4,
+     295.8,
+     386.1,
+     320.1
+    ],
+    "read_as": "TE 14089B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [370, 296, 386, 320] (0-1000 scale), read as “TE 14089B”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN012",
+     "unit"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     370.4,
+     295.8,
+     386.1,
+     320.1
+    ],
+    "image": "evidence/s0_b8a0d13379.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ed243c20ce24",
+   "subject": "S0-VL010",
+   "predicate": "is_a",
+   "object": "valve",
+   "text": "Untagged valve S0-VL010 is classed as a valve by the extraction.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "item",
+   "layer": "item",
+   "group": "untagged valve S0-VL010",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     464.5,
+     167.6,
+     471.0,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [464, 168, 471, 183] (0-1000 scale)",
+   "targets": [
+    [
+     "claim",
+     "S0-VL010",
+     "class"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     464.5,
+     167.6,
+     471.0,
+     183.3
+    ],
+    "image": "evidence/s0_3fbf7f8f7c.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-05abbf03bf03",
+   "subject": "S0-VL015",
+   "predicate": "edge:on_network",
+   "object": "S0-NET040",
+   "text": "Untagged valve S0-VL015 is attached to drawn line network S0-NET040.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "untagged valve S0-VL015",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     455.3,
+     342.3,
+     838.3,
+     770.2
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [455, 342, 838, 770] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00600"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     455.3,
+     342.3,
+     838.3,
+     770.2
+    ],
+    "image": "evidence/s0_4929b830f7.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-0c9f6978cee4",
+   "subject": "S0-GN002",
+   "predicate": "edge:on_network",
+   "object": "S0-NET002",
+   "text": "N1 is attached to drawn line network S0-NET002.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "N1",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     100.0,
+     402.8,
+     225.5,
+     559.3
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [100, 403, 226, 559] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00451"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     100.0,
+     402.8,
+     225.5,
+     559.3
+    ],
+    "image": "evidence/s0_203b2b1190.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-14b5b3c8bca0",
+   "subject": "S0-IN029",
+   "predicate": "edge:on_network",
+   "object": "S0-NET022",
+   "text": "TE 14092A is attached to drawn line network S0-NET022.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "TE 14092A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00538"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "image": "evidence/s0_fd56f5f378.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-2aa9cc9a13d2",
+   "subject": "S0-NET008",
+   "predicate": "kind",
+   "object": "line_network",
+   "text": "Line network S0-NET008 is one drawn line network: lines joined by bends, junctions or crossings with no item between, with 2 items attached; it holds no pipe, only 1 instrument line.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "network",
+   "layer": "network",
+   "group": "line network S0-NET008",
+   "system": "the plant",
+   "subject_kind": "line_network",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     301.7,
+     222.8,
+     318.5,
+     286.6
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [302, 223, 318, 287] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-NET008"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     301.7,
+     222.8,
+     318.5,
+     286.6
+    ],
+    "image": "evidence/s0_b875474906.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-4b21501ceb38",
+   "subject": "S0-JN-562-538",
+   "predicate": "edge:on_network",
+   "object": "S0-NET022",
+   "text": "Pipe tee S0-JN-562-538 is on drawn line network S0-NET022.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "pipe tee S0-JN-562-538",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00550"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "image": "evidence/s0_fd56f5f378.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-63368f172de5",
+   "subject": "S0-VL025",
+   "predicate": "edge:on_network",
+   "object": "S0-NET020",
+   "text": "Untagged valve S0-VL025 is attached to drawn line network S0-NET020.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "untagged valve S0-VL025",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     592.3,
+     373.1,
+     613.4,
+     383.9
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [592, 373, 613, 384] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00532"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     592.3,
+     373.1,
+     613.4,
+     383.9
+    ],
+    "image": "evidence/s0_39d488d19f.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-868f47d8e0ad",
+   "subject": "S0-IN015",
+   "predicate": "edge:on_network",
+   "object": "S0-NET028",
+   "text": "PSV 1404 is attached to drawn line network S0-NET028.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "PSV 1404",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     183.3
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [442, 142, 457, 183] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00571"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     183.3
+    ],
+    "image": "evidence/s0_949cd99b70.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-a0a060c46488",
+   "subject": "S0-JN-275-418",
+   "predicate": "edge:on_network",
+   "object": "S0-NET001",
+   "text": "Pipe tee S0-JN-275-418 is on drawn line network S0-NET001.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "pipe tee S0-JN-275-418",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     179.5,
+     347.7,
+     294.1,
+     458.5
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [180, 348, 294, 458] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00450"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     179.5,
+     347.7,
+     294.1,
+     458.5
+    ],
+    "image": "evidence/s0_a42782d8c6.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-bcf16ff1c189",
+   "subject": "S0-GN003",
+   "predicate": "edge:on_network",
+   "object": "S0-NET005",
+   "text": "Untagged general S0-GN003 is attached to drawn line network S0-NET005.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "untagged general S0-GN003",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     270.4,
+     347.7,
+     302.8,
+     383.9
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [270, 348, 303, 384] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00461"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     270.4,
+     347.7,
+     302.8,
+     383.9
+    ],
+    "image": "evidence/s0_a46d4d0194.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c26a10ddc4aa",
+   "subject": "S0-VL022",
+   "predicate": "edge:on_network",
+   "object": "S0-NET045",
+   "text": "Untagged valve S0-VL022 is attached to drawn line network S0-NET045.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "untagged valve S0-VL022",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     638.8,
+     270.9,
+     676.1,
+     280.6
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [639, 271, 676, 281] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00613"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     638.8,
+     270.9,
+     676.1,
+     280.6
+    ],
+    "image": "evidence/s0_243354db90.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c557fe3c5599",
+   "subject": "S0-GN002",
+   "predicate": "edge:on_network",
+   "object": "S0-NET003",
+   "text": "N1 is attached to drawn line network S0-NET003.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "N1",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     221.1,
+     433.1,
+     259.0,
+     569.1
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [221, 433, 259, 569] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00455"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     221.1,
+     433.1,
+     259.0,
+     569.1
+    ],
+    "image": "evidence/s0_99681d1bd9.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d1ce18dc33aa",
+   "subject": "S0-OP003",
+   "predicate": "edge:on_network",
+   "object": "S0-NET022",
+   "text": "Off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003) is attached to drawn line network S0-NET022.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003)",
+   "system": "SYS-0",
+   "subject_kind": "offpage_connector",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00540"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     233.0,
+     838.3,
+     673.4
+    ],
+    "image": "evidence/s0_fd56f5f378.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d5f581acded4",
+   "subject": "S0-VL029",
+   "predicate": "edge:on_network",
+   "object": "S0-NET047",
+   "text": "Untagged valve S0-VL029 is attached to drawn line network S0-NET047.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "untagged valve S0-VL029",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     628.0,
+     521.5,
+     642.1,
+     576.6
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [628, 522, 642, 577] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00617"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     628.0,
+     521.5,
+     642.1,
+     576.6
+    ],
+    "image": "evidence/s0_132acdfa5a.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-d630322a28ff",
+   "subject": "S0-JN-658-378",
+   "predicate": "edge:on_network",
+   "object": "S0-NET036",
+   "text": "Pipe tee S0-JN-658-378 is on drawn line network S0-NET036.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "pipe tee S0-JN-658-378",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     595.6,
+     343.4,
+     838.3,
+     449.3
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [596, 343, 838, 449] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00590"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     595.6,
+     343.4,
+     838.3,
+     449.3
+    ],
+    "image": "evidence/s0_7579db06b1.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f84870da8959",
+   "subject": "S0-IN016",
+   "predicate": "edge:on_network",
+   "object": "S0-NET029",
+   "text": "PSV 1405 is attached to drawn line network S0-NET029.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network",
+   "layer": "network",
+   "group": "PSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     183.3
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [463, 142, 479, 183] (0-1000 scale)",
+   "targets": [
+    [
+     "edge",
+     "E00573"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     183.3
+    ],
+    "image": "evidence/s0_b0504016d9.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-03d0af69ecb3",
+   "subject": "S0-VL010",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "Untagged valve S0-VL010 and untagged general S0-GN009 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged valve S0-VL010",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-180"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_3a6d772744.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-057cba247420",
+   "subject": "S0-IN029",
+   "predicate": "edge:connects",
+   "object": "S0-VL025",
+   "text": "TE 14092A and untagged valve S0-VL025 are on the same drawn line network (line network S0-NET022): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "TE 14092A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-293"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_75c93c890b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-2bebb750508d",
+   "subject": "S0-IN011",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "TE 14089A and untagged general S0-GN009 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "TE 14089A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-105"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_438579d480.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-358939be23ac",
+   "subject": "S0-IN025",
+   "predicate": "edge:connects",
+   "object": "S0-OP003",
+   "text": "TE 14091A and off-page connector “TBS PID 240-1 TURBINE SYSTEM” (S0-OP003) are on the same drawn line network (line network S0-NET022): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "TE 14091A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-253"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_5416cd9c29.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-3b915ab9986e",
+   "subject": "S0-GN005",
+   "predicate": "edge:connects",
+   "object": "S0-VL004",
+   "text": "T (S0-GN005) and untagged valve S0-VL004 are on the same drawn line network (line network S0-NET010): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "T (S0-GN005)",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-137"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_44be31c246.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-493c71a85540",
+   "subject": "S0-IN010",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "PT 14088 and untagged general S0-GN009 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "PT 14088",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-091"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_81637ae2e0.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-551b5540a061",
+   "subject": "S0-VL031",
+   "predicate": "edge:connects",
+   "object": "S0-VL032",
+   "text": "Untagged valve S0-VL031 and untagged valve S0-VL032 are on the same drawn line network (line network S0-NET022): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged valve S0-VL031",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-336"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_8b10d28ef4.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-55ae3d3adee3",
+   "subject": "S0-VL002",
+   "predicate": "edge:connects",
+   "object": "S0-VL007",
+   "text": "Untagged valve S0-VL002 and untagged valve S0-VL007 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged valve S0-VL002",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-109"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_4174d7ed88.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-67d361ff863b",
+   "subject": "S0-IN025",
+   "predicate": "edge:connects",
+   "object": "S0-VL031",
+   "text": "TE 14091A and untagged valve S0-VL031 are on the same drawn line network (line network S0-NET022): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "TE 14091A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-260"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_af39ebc1cc.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-7256dcce42fa",
+   "subject": "S0-IN009",
+   "predicate": "edge:connects",
+   "object": "S0-VL009",
+   "text": "PT 14087 and untagged valve S0-VL009 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "PT 14087",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-067"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_eb7d953bbc.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8d0dc063182a",
+   "subject": "S0-VL014",
+   "predicate": "edge:connects",
+   "object": "S0-GN009",
+   "text": "Untagged valve S0-VL014 and untagged general S0-GN009 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged valve S0-VL014",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-209"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_09a08b46b5.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ab73a698fd84",
+   "subject": "S0-GN012",
+   "predicate": "edge:connects",
+   "object": "S0-VL026",
+   "text": "T (S0-GN012) and untagged valve S0-VL026 are on the same drawn line network (line network S0-NET021): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "T (S0-GN012)",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-316"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_9c1bd59516.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ad7967956ad1",
+   "subject": "S0-VL009",
+   "predicate": "edge:connects",
+   "object": "S0-VL013",
+   "text": "Untagged valve S0-VL009 and untagged valve S0-VL013 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged valve S0-VL009",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-166"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_bf3b4f0800.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-af1b31bdc46c",
+   "subject": "S0-GN003",
+   "predicate": "edge:connects",
+   "object": "S0-IN004",
+   "text": "Untagged general S0-GN003 and TE 14084A are on the same drawn line network (line network S0-NET004): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "untagged general S0-GN003",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-266"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_185c914353.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-db552aa7a964",
+   "subject": "S0-IN007",
+   "predicate": "edge:connects",
+   "object": "S0-VL015",
+   "text": "PT 14085 and untagged valve S0-VL015 are on the same drawn line network (line network S0-NET007): lines, bends, junctions or crossings join them with no item between. This does not say a pipe runs directly from one to the other.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "network_pair",
+   "layer": "network_pair",
+   "group": "PT 14085",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "L0-041"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_e16bdd63c4.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-0b5eabacaeb8",
+   "subject": "S0-IN033",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-JN-611-535",
+   "text": "An instrument line, not a pipe, runs directly from TE 14093A to instrument tap S0-JN-611-535, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "TE 14093A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL020"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_e89def1325.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-192d97093355",
+   "subject": "S0-IN004",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-JN-274-318",
+   "text": "An instrument line, not a pipe, runs directly from TE 14084A to instrument tap S0-JN-274-318, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "TE 14084A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL004"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_2ca9c67aae.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-45a38ddc75ee",
+   "subject": "S0-JN-611-535",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Instrument tap S0-JN-611-535 is the point on the drawing where TE 14093A's instrument line meets a pipe, which carries on through it (an instrument tap, not a pipe tee).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "instrument tap S0-JN-611-535",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     605.5,
+     527.6,
+     615.7,
+     542.8
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [606, 528, 616, 543] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-611-535"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     605.5,
+     527.6,
+     615.7,
+     542.8
+    ],
+    "image": "evidence/s0_d84e1a8f40.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-5976c7b1c735",
+   "subject": "S0-JN-345-276",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Instrument tap S0-JN-345-276 is the point on the drawing where PT 14085's instrument line meets a pipe, which carries on through it (an instrument tap, not a pipe tee).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "instrument tap S0-JN-345-276",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     340.2,
+     268.5,
+     350.3,
+     283.7
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [340, 268, 350, 284] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-345-276"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     340.2,
+     268.5,
+     350.3,
+     283.7
+    ],
+    "image": "evidence/s0_149e0a71b9.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-7bac38ed1409",
+   "subject": "S0-IN025",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-JN-614-274",
+   "text": "An instrument line, not a pipe, runs directly from TE 14091A to instrument tap S0-JN-614-274, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "TE 14091A",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL016"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_f5fca73615.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8fe0923ede0e",
+   "subject": "S0-IN008",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-JN-366-276",
+   "text": "An instrument line, not a pipe, runs directly from PT 14086 to instrument tap S0-JN-366-276, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "PT 14086",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL006"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_d93627e8a2.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-946629f0c63a",
+   "subject": "S0-VL023",
+   "predicate": "edge:actuated_by",
+   "object": "S0-GN011",
+   "text": "M is the actuator drawn on untagged valve S0-VL023: the short line between them is its stem, not a pipe.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "untagged valve S0-VL023",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-AS002"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_6e42a889cc.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-a062faef8c6f",
+   "subject": "S0-JN-387-276",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Instrument tap S0-JN-387-276 is the point on the drawing where PT 14087's instrument line meets a pipe, which carries on through it (an instrument tap, not a pipe tee).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "instrument tap S0-JN-387-276",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     382.4,
+     268.5,
+     392.5,
+     283.7
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [382, 268, 392, 284] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-387-276"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     382.4,
+     268.5,
+     392.5,
+     283.7
+    ],
+    "image": "evidence/s0_f6906b69fe.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-a43150d0aecf",
+   "subject": "S0-IN010",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-JN-408-276",
+   "text": "An instrument line, not a pipe, runs directly from PT 14088 to instrument tap S0-JN-408-276, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "PT 14088",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL008"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_6d83b90d18.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b24e8cc624fa",
+   "subject": "S0-IN018",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-VL012",
+   "text": "An instrument line, not a pipe, runs directly from PSV 1407 to untagged valve S0-VL012, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "PSV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL013"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_f852c28e41.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-cf5434239ccb",
+   "subject": "S0-JN-587-318",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Instrument tap S0-JN-587-318 is the point on the drawing where TE 14092A's instrument line meets a pipe, which carries on through it (an instrument tap, not a pipe tee).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "instrument tap S0-JN-587-318",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     581.7,
+     310.5,
+     591.9,
+     325.6
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [582, 310, 592, 326] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-587-318"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     581.7,
+     310.5,
+     591.9,
+     325.6
+    ],
+    "image": "evidence/s0_e75cb4755f.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-dc456a55aab6",
+   "subject": "S0-IN015",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-VL009",
+   "text": "An instrument line, not a pipe, runs directly from PSV 1404 to untagged valve S0-VL009, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "PSV 1404",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL010"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_4d802c6433.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ecbda9f3d217",
+   "subject": "S0-IN021",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-GN007",
+   "text": "An instrument line, not a pipe, runs directly from RE 1403 to untagged general S0-GN007, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "RE 1403",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL003"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_c2dd58aff5.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f4b44f1f8d6e",
+   "subject": "S0-IN028",
+   "predicate": "edge:instrument_connection",
+   "object": "S0-VL023",
+   "text": "An instrument line, not a pipe, runs directly from MSV 1405 to untagged valve S0-VL023, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "MSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-IL018"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_04799fe2b4.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-fae6f6afc30a",
+   "subject": "S0-JN-342-307",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Instrument tap S0-JN-342-307 is the point on the drawing where TE 14089A's instrument line meets a pipe, which carries on through it (an instrument tap, not a pipe tee).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "non_pipe",
+   "layer": "non_pipe",
+   "group": "instrument tap S0-JN-342-307",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     337.2,
+     299.9,
+     347.3,
+     315.0
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [337, 300, 347, 315] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-342-307"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     337.2,
+     299.9,
+     347.3,
+     315.0
+    ],
+    "image": "evidence/s0_c71363e811.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-261feccf514d",
+   "subject": "S0-JN-414-378",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Pipe tee S0-JN-414-378 is a point on the drawing where 3 pipe arms meet (a pipe tee or branch).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-414-378",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     408.7,
+     370.9,
+     418.9,
+     386.0
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [409, 371, 419, 386] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-414-378"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     408.7,
+     370.9,
+     418.9,
+     386.0
+    ],
+    "image": "evidence/s0_c425f35ace.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-2e1141b6bafd",
+   "subject": "S0-JN-585-278",
+   "predicate": "edge:piped_to",
+   "object": "S0-JN-586-359",
+   "text": "A pipe runs directly from pipe tee S0-JN-585-278 to pipe tee S0-JN-586-359, with no pipe tee or other item between; the instrument tap of TE 14092A is on it.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-585-278",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS065"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_c16560d34b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-30094e633dc5",
+   "subject": "S0-JN-431-219",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Pipe tee S0-JN-431-219 is a point on the drawing where 3 pipe arms meet (a pipe tee or branch).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-431-219",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     426.4,
+     211.2,
+     436.5,
+     226.3
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [426, 211, 436, 226] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-431-219"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     426.4,
+     211.2,
+     436.5,
+     226.3
+    ],
+    "image": "evidence/s0_0131daac00.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-42ad21389872",
+   "subject": "S0-JN-431-219",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL007",
+   "text": "A pipe runs directly from pipe tee S0-JN-431-219 to untagged valve S0-VL007, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-431-219",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS038"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_8c4798231d.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-5b947c78d9e3",
+   "subject": "S0-JN-537-274",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL020",
+   "text": "A pipe runs directly from pipe tee S0-JN-537-274 to MSCV-XXX, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-537-274",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS056"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_89b2ed49fc.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8815ca4ccaab",
+   "subject": "S0-JN-561-276",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Pipe tee S0-JN-561-276 is a point on the drawing where 3 pipe arms meet (a pipe tee or branch).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-561-276",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     556.2,
+     268.8,
+     566.3,
+     283.9
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [556, 269, 566, 284] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-561-276"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     556.2,
+     268.8,
+     566.3,
+     283.9
+    ],
+    "image": "evidence/s0_4969d1a159.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8ed16504c07f",
+   "subject": "S0-JN-275-418",
+   "predicate": "kind",
+   "object": "junction",
+   "text": "Pipe tee S0-JN-275-418 is a point on the drawing where 3 pipe arms meet (a pipe tee or branch).",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-275-418",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     269.5,
+     410.4,
+     279.6,
+     425.5
+    ],
+    "read_as": null,
+    "run": "scripts/line_layers.py",
+    "model": null
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [270, 410, 280, 426] (0-1000 scale)",
+   "targets": [
+    [
+     "node",
+     "S0-JN-275-418"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     269.5,
+     410.4,
+     279.6,
+     425.5
+    ],
+    "image": "evidence/s0_90ce849e95.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ad096a4bfaf8",
+   "subject": "S0-JN-509-218",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL012",
+   "text": "A pipe runs directly from pipe tee S0-JN-509-218 to untagged valve S0-VL012, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-509-218",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS050"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_56208f773b.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-b7a7f3ed5aca",
+   "subject": "S0-JN-658-378",
+   "predicate": "edge:piped_to",
+   "object": "S0-OP004",
+   "text": "A pipe runs directly from pipe tee S0-JN-658-378 to off-page connector “HIGH PRESSURE STEAM DRAINS HPD PID 190-1” (S0-OP004), with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-658-378",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS077"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_cd08ff24c9.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c895f31b5124",
+   "subject": "S0-JN-163-538",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL001",
+   "text": "A pipe runs directly from pipe tee S0-JN-163-538 to untagged valve S0-VL001, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-163-538",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS025"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_d651494917.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-c9b2e1c2fcbd",
+   "subject": "S0-JN-586-378",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL025",
+   "text": "A pipe runs directly from pipe tee S0-JN-586-378 to untagged valve S0-VL025, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-586-378",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS069"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_9d4d96f701.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ca47dffad71a",
+   "subject": "S0-JN-275-418",
+   "predicate": "edge:piped_to",
+   "object": "S0-GN003",
+   "text": "A pipe runs directly from pipe tee S0-JN-275-418 to untagged general S0-GN003, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-275-418",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS004"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_9fdb4bb58a.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ec532bded1b0",
+   "subject": "S0-GN006",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL005",
+   "text": "A pipe runs directly from untagged general S0-GN006 to untagged valve S0-VL005, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "untagged general S0-GN006",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS009"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_a2a73715f9.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f31076b96acc",
+   "subject": "S0-VL027",
+   "predicate": "edge:piped_to",
+   "object": "S0-VL028",
+   "text": "A pipe runs directly from untagged valve S0-VL027 to untagged valve S0-VL028, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "untagged valve S0-VL027",
+   "system": "SYS-0",
+   "subject_kind": "line_item",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS088"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_0f25c08191.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ff75d8de2d47",
+   "subject": "S0-JN-586-378",
+   "predicate": "edge:piped_to",
+   "object": "S0-GN013",
+   "text": "A pipe runs directly from pipe tee S0-JN-586-378 to untagged general S0-GN013, with no junction or other item between.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "pipe",
+   "layer": "pipe",
+   "group": "pipe tee S0-JN-586-378",
+   "system": "the plant",
+   "subject_kind": "junction",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS018"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_abb2abf5ce.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  }
+ ]
+}

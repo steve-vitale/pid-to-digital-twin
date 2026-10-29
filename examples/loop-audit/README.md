@@ -1,5 +1,7 @@
 # Your own loop list: which loops does the drawing actually show?
 
+**Why it matters:** Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change.
+
 `scripts/loop_audit.py` takes a control-loop list (the kind a plant can export from its DCS or PLC configuration) and
 a drawing's answer key, and reports each loop as **drawn**, **partly drawn** (with what is missing) or **not drawn**.
 It is the drawing half of `scripts/te_control_loops.py`, made to work on any loop list instead of the Tennessee
@@ -23,7 +25,14 @@ column is ignored and named in the report. Lines starting with `#` are skipped.
 Tags match on printed text, ignoring case, spaces and hyphens (`FIC 101` on the sheet matches `FIC-101` in the list).
 Nothing else is normalised: strip DCS suffixes such as `.PV` or `/PID1` before exporting. A row with an empty
 required field, more fields than the header, a controller listed twice, or a controller that names itself as its
-own measurement or output stops the audit with that row's line number.
+own output stops the audit with that row's line number.
+
+A controller may name itself as its own measurement: that is a **combined instrument**, one bubble that measures and
+controls (DEXPI draws `PICSA 4712.02` this way, a sensor, controller, switch and alarm in one symbol). The measurement
+is then taken to be inside the controller symbol, so the measurement and signal-in checks pass on the controller
+symbol alone and no drawn signal line stands behind them. The report says so: those two table cells read
+`combined`, not `yes`, the per-check totals count the combined loops separately, and a note under the table names
+them. For such a loop only the controller, the output and the signal line controller -> output are really checked.
 
 [`te_loops.csv`](te_loops.csv) is the worked example: the 19 running Tennessee Eastman loops from
 `data/te_control_loops.json`, which `scripts/te_control_loops.py` reads out of the simulator's closed-loop code.
@@ -41,9 +50,10 @@ python scripts/loop_audit.py --loops examples/loop-audit/te_loops.csv --drawing 
 # 19 of 19 loops drawn, 0 partly drawn, 0 not drawn
 ```
 
-Each run writes `<out>.md` (a table, one row per loop) and `<out>.json` (the same, with every check). Both match
-[`out/te_loop_audit.md`](../../out/te_loop_audit.md), the existing audit: revision A drew no controller and no signal
-line, so 0 of 19; the current drawing (revision D) draws all 19.
+Each run writes `<out>.md` (a table, one row per loop) and `<out>.json` (the same, with every check); the committed
+copies are in [`results/`](results/). Both agree with the original, Tennessee Eastman-only audit: revision A drew no
+controller and no signal line, so 0 of 19 (journal entry 50); revision D draws all 19, which is what
+[`out/te_loop_audit.md`](../../out/te_loop_audit.md) holds today.
 
 Revision C is a useful in-between case:
 
@@ -93,4 +103,5 @@ python -m unittest scripts/test_loop_audit.py
 
 Reproduces 0/19 and 19/19, the revision C case, a removed signal line (partly drawn), a removed cross-sheet flag
 (partly drawn), a removed controller (not drawn, and its cascade's outer loop becomes partly drawn), a tags-only
-extracted model, and refused rows with their line numbers.
+extracted model, a combined instrument (its measurement and signal-in cells read `combined`, never `yes`), and
+refused rows with their line numbers.

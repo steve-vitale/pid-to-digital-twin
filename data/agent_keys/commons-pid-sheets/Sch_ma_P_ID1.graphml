@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="v_hv7">
+      <data key="d0">valve</data>
+      <data key="d1">212.0</data>
+      <data key="d2">274.0</data>
+      <data key="d3">140.0</data>
+      <data key="d4">206.0</data>
+    </node>
+    <node id="v_tv42a">
+      <data key="d0">valve</data>
+      <data key="d1">652.0</data>
+      <data key="d2">716.0</data>
+      <data key="d3">110.0</data>
+      <data key="d4">206.0</data>
+    </node>
+    <node id="red_top">
+      <data key="d0">general</data>
+      <data key="d1">1112.0</data>
+      <data key="d2">1174.0</data>
+      <data key="d3">160.0</data>
+      <data key="d4">200.0</data>
+    </node>
+    <node id="flex_left">
+      <data key="d0">general</data>
+      <data key="d1">103.0</data>
+      <data key="d2">143.0</data>
+      <data key="d3">1033.0</data>
+      <data key="d4">1156.0</data>
+    </node>
+    <node id="v_hv6">
+      <data key="d0">valve</data>
+      <data key="d1">77.0</data>
+      <data key="d2">140.0</data>
+      <data key="d3">1233.0</data>
+      <data key="d4">1300.0</data>
+    </node>
+    <node id="sq_left">
+      <data key="d0">general</data>
+      <data key="d1">92.0</data>
+      <data key="d2">154.0</data>
+      <data key="d3">1355.0</data>
+      <data key="d4">1418.0</data>
+    </node>
+    <node id="v_hv1">
+      <data key="d0">valve</data>
+      <data key="d1">65.0</data>
+      <data key="d2">129.0</data>
+      <data key="d3">1617.0</data>
+      <data key="d4">1684.0</data>
+    </node>
+    <node id="flex_bot">
+      <data key="d0">general</data>
+      <data key="d1">230.0</data>
+      <data key="d2">345.0</data>
+      <data key="d3">1640.0</data>
+      <data key="d4">1680.0</data>
+    </node>
+    <node id="v_hv2">
+      <data key="d0">valve</data>
+      <data key="d1">550.0</data>
+      <data key="d2">613.0</data>
+      <data key="d3">1617.0</data>
+      <data key="d4">1684.0</data>
+    </node>
+    <node id="v_tv42b">
+      <data key="d0">valve</data>
+      <data key="d1">815.0</data>
+      <data key="d2">878.0</data>
+      <data key="d3">1578.0</data>
+      <data key="d4">1684.0</data>
+    </node>
+    <node id="red_bot">
+      <data key="d0">general</data>
+      <data key="d1">1240.0</data>
+      <data key="d2">1301.0</data>
+      <data key="d3">1465.0</data>
+      <data key="d4">1499.0</data>
+    </node>
+    <node id="vessel">
+      <data key="d0">tank</data>
+      <data key="d1">1639.0</data>
+      <data key="d2">2276.0</data>
+      <data key="d3">319.0</data>
+      <data key="d4">1361.0</data>
+      <data key="d11">RESERVOIR DU HAUT</data>
+    </node>
+    <node id="v_lv41">
+      <data key="d0">valve</data>
+      <data key="d1">2339.0</data>
+      <data key="d2">2410.0</data>
+      <data key="d3">117.0</data>
+      <data key="d4">199.0</data>
+    </node>
+    <node id="fe15_el">
+      <data key="d0">general</data>
+      <data key="d1">2590.0</data>
+      <data key="d2">2656.0</data>
+      <data key="d3">49.0</data>
+      <data key="d4">96.0</data>
+    </node>
+    <node id="m_fe14">
+      <data key="d0">general</data>
+      <data key="d1">3169.0</data>
+      <data key="d2">3231.0</data>
+      <data key="d3">36.0</data>
+      <data key="d4">100.0</data>
+    </node>
+    <node id="fe16_el">
+      <data key="d0">general</data>
+      <data key="d1">2863.0</data>
+      <data key="d2">2931.0</data>
+      <data key="d3">521.0</data>
+      <data key="d4">567.0</data>
+    </node>
+    <node id="strainer">
+      <data key="d0">general</data>
+      <data key="d1">3053.0</data>
+      <data key="d2">3181.0</data>
+      <data key="d3">521.0</data>
+      <data key="d4">561.0</data>
+    </node>
+    <node id="offpage">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">2226.0</data>
+      <data key="d2">2776.0</data>
+      <data key="d3">1523.0</data>
+      <data key="d4">1625.0</data>
+      <data key="d11">2 32 EAU 5</data>
+    </node>
+    <node id="b_hv7">
+      <data key="d0">instrumentation</data>
+      <data key="d1">292.0</data>
+      <data key="d2">434.0</data>
+      <data key="d3">296.0</data>
+      <data key="d4">438.0</data>
+      <data key="d11">HV 7</data>
+    </node>
+    <node id="b_tv42a">
+      <data key="d0">instrumentation</data>
+      <data key="d1">631.0</data>
+      <data key="d2">774.0</data>
+      <data key="d3">264.0</data>
+      <data key="d4">407.0</data>
+      <data key="d11">TV 42</data>
+    </node>
+    <node id="b_lahh91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1264.0</data>
+      <data key="d2">1406.0</data>
+      <data key="d3">334.0</data>
+      <data key="d4">476.0</data>
+      <data key="d11">LAHH 91</data>
+    </node>
+    <node id="b_lsh91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1467.0</data>
+      <data key="d2">1613.0</data>
+      <data key="d3">347.0</data>
+      <data key="d4">492.0</data>
+      <data key="d11">LSH 91</data>
+    </node>
+    <node id="b_lah91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1263.0</data>
+      <data key="d2">1411.0</data>
+      <data key="d3">506.0</data>
+      <data key="d4">655.0</data>
+      <data key="d11">LAH 91</data>
+    </node>
+    <node id="b_ly91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1469.0</data>
+      <data key="d2">1619.0</data>
+      <data key="d3">536.0</data>
+      <data key="d4">686.0</data>
+      <data key="d11">LY 91</data>
+    </node>
+    <node id="b_hmy91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1280.0</data>
+      <data key="d2">1427.0</data>
+      <data key="d3">698.0</data>
+      <data key="d4">846.0</data>
+      <data key="d11">HMY 91</data>
+    </node>
+    <node id="b_hms91">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1474.0</data>
+      <data key="d2">1615.0</data>
+      <data key="d3">717.0</data>
+      <data key="d4">858.0</data>
+      <data key="d11">HMS 91</data>
+    </node>
+    <node id="b_tc42">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1118.0</data>
+      <data key="d2">1267.0</data>
+      <data key="d3">788.0</data>
+      <data key="d4">936.0</data>
+      <data key="d11">TC 42</data>
+    </node>
+    <node id="b_hv6">
+      <data key="d0">instrumentation</data>
+      <data key="d1">225.0</data>
+      <data key="d2">372.0</data>
+      <data key="d3">1150.0</data>
+      <data key="d4">1298.0</data>
+      <data key="d11">HV 6</data>
+    </node>
+    <node id="b_hv1">
+      <data key="d0">instrumentation</data>
+      <data key="d1">171.0</data>
+      <data key="d2">313.0</data>
+      <data key="d3">1402.0</data>
+      <data key="d4">1544.0</data>
+      <data key="d11">HV 1</data>
+    </node>
+    <node id="b_hv2">
+      <data key="d0">instrumentation</data>
+      <data key="d1">577.0</data>
+      <data key="d2">724.0</data>
+      <data key="d3">1395.0</data>
+      <data key="d4">1543.0</data>
+      <data key="d11">HV 2</data>
+    </node>
+    <node id="b_tv42b">
+      <data key="d0">instrumentation</data>
+      <data key="d1">817.0</data>
+      <data key="d2">960.0</data>
+      <data key="d3">1398.0</data>
+      <data key="d4">1542.0</data>
+      <data key="d11">TV 42</data>
+    </node>
+    <node id="b_tt42">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1480.0</data>
+      <data key="d2">1622.0</data>
+      <data key="d3">1482.0</data>
+      <data key="d4">1623.0</data>
+      <data key="d11">TT 42</data>
+    </node>
+    <node id="b_lt41">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1714.0</data>
+      <data key="d2">1859.0</data>
+      <data key="d3">1481.0</data>
+      <data key="d4">1626.0</data>
+      <data key="d11">LT 41</data>
+    </node>
+    <node id="b_lv41">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2349.0</data>
+      <data key="d2">2498.0</data>
+      <data key="d3">236.0</data>
+      <data key="d4">385.0</data>
+      <data key="d11">LV 41</data>
+    </node>
+    <node id="b_fe15">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2689.0</data>
+      <data key="d2">2836.0</data>
+      <data key="d3">177.0</data>
+      <data key="d4">324.0</data>
+      <data key="d11">FE 15</data>
+    </node>
+    <node id="b_fe16">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2984.0</data>
+      <data key="d2">3131.0</data>
+      <data key="d3">337.0</data>
+      <data key="d4">484.0</data>
+      <data key="d11">FE 16</data>
+    </node>
+    <node id="b_fe14">
+      <data key="d0">instrumentation</data>
+      <data key="d1">3113.0</data>
+      <data key="d2">3265.0</data>
+      <data key="d3">156.0</data>
+      <data key="d4">309.0</data>
+      <data key="d11">FE 14</data>
+    </node>
+    <node id="b_lc41">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2806.0</data>
+      <data key="d2">2952.0</data>
+      <data key="d3">1736.0</data>
+      <data key="d4">1882.0</data>
+      <data key="d11">LC 41</data>
+    </node>
+    <node id="b_lic41">
+      <data key="d0">instrumentation</data>
+      <data key="d1">3157.0</data>
+      <data key="d2">3306.0</data>
+      <data key="d3">1731.0</data>
+      <data key="d4">1882.0</data>
+      <data key="d11">LIC 41</data>
+    </node>
+    <node id="j_hms">
+      <data key="d0">crossing</data>
+      <data key="d1">1537.0</data>
+      <data key="d2">1545.0</data>
+      <data key="d3">866.0</data>
+      <data key="d4">874.0</data>
+    </node>
+    <edge source="vessel" target="red_top"><data key="d9">solid</data></edge>
+    <edge source="red_top" target="v_tv42a"><data key="d9">solid</data></edge>
+    <edge source="v_tv42a" target="v_hv7"><data key="d9">solid</data></edge>
+    <edge source="v_hv7" target="flex_left"><data key="d9">solid</data></edge>
+    <edge source="flex_left" target="v_hv6"><data key="d9">solid</data></edge>
+    <edge source="v_hv6" target="sq_left"><data key="d9">solid</data></edge>
+    <edge source="sq_left" target="v_hv1"><data key="d9">solid</data></edge>
+    <edge source="v_hv1" target="flex_bot"><data key="d9">solid</data></edge>
+    <edge source="flex_bot" target="v_hv2"><data key="d9">solid</data></edge>
+    <edge source="v_hv2" target="v_tv42b"><data key="d9">solid</data></edge>
+    <edge source="v_tv42b" target="red_bot"><data key="d9">solid</data></edge>
+    <edge source="red_bot" target="vessel"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="v_lv41"><data key="d9">solid</data></edge>
+    <edge source="v_lv41" target="fe16_el"><data key="d9">solid</data></edge>
+    <edge source="fe16_el" target="strainer"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="fe15_el"><data key="d9">solid</data></edge>
+    <edge source="fe15_el" target="m_fe14"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="offpage"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="b_lsh91"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="b_tt42"><data key="d9">solid</data></edge>
+    <edge source="vessel" target="b_lt41"><data key="d9">solid</data></edge>
+    <edge source="b_hv7" target="v_hv7"><data key="d9">solid</data></edge>
+    <edge source="b_hv6" target="v_hv6"><data key="d9">solid</data></edge>
+    <edge source="b_hv1" target="v_hv1"><data key="d9">solid</data></edge>
+    <edge source="b_hv2" target="v_hv2"><data key="d9">solid</data></edge>
+    <edge source="b_fe15" target="fe15_el"><data key="d9">solid</data></edge>
+    <edge source="b_fe14" target="m_fe14"><data key="d9">solid</data></edge>
+    <edge source="b_fe16" target="fe16_el"><data key="d9">solid</data></edge>
+    <edge source="b_lahh91" target="b_lah91"><data key="d9">solid</data></edge>
+    <edge source="b_lah91" target="b_hmy91"><data key="d9">solid</data></edge>
+    <edge source="b_lsh91" target="b_ly91"><data key="d9">solid</data></edge>
+    <edge source="b_ly91" target="b_hms91"><data key="d9">solid</data></edge>
+    <edge source="b_lahh91" target="b_lsh91"><data key="d9">solid</data></edge>
+    <edge source="b_tc42" target="b_tv42a"><data key="d9">non-solid</data></edge>
+    <edge source="b_tc42" target="b_tv42b"><data key="d9">non-solid</data></edge>
+    <edge source="b_tc42" target="j_hms"><data key="d9">non-solid</data></edge>
+    <edge source="j_hms" target="b_hms91"><data key="d9">non-solid</data></edge>
+    <edge source="j_hms" target="b_tt42"><data key="d9">non-solid</data></edge>
+    <edge source="b_lv41" target="b_lc41"><data key="d9">non-solid</data></edge>
+    <edge source="b_lt41" target="b_lc41"><data key="d9">non-solid</data></edge>
+    <edge source="b_lc41" target="b_lic41"><data key="d9">non-solid</data></edge>
+  </graph>
+</graphml>

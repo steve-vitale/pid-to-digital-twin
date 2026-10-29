@@ -125,6 +125,28 @@ def isa_parts(tag):
     return (m.group(1), m.group(2)) if m else (None, None)
 
 
+def plant_coded(letters, codes):
+    """(system code, matched stem) when an instrument's letter group starts with a system code seen on its own sheet,
+    else None. Such a tag is the plant's own naming, not ISA-5.1 function letters: MSBV / MSIV / MSV / MSCV on a main
+    steam (MSS) sheet are main steam valves, and reading their M as ISA "moisture" is wrong.
+
+    The evidence is the sheet's own: `codes` are its system code and the SYSTEM prefixes of its equipment tags
+    (infer_sheet_identity's system_code / system_codes_seen). A code matches as itself or, when it ends in S (the
+    usual "... System": MSS, RCS, FWS, CVCS) and is 3+ letters, without that S (MS, RC, FW, CVC). The stem must be 2+
+    letters. Limits: a sheet with no equipment tag of the SYS-TYPE-NUM form (and no sheet register) has no codes, so
+    plant tags on it are still read as ISA letters; a system code whose stem is also an ISA letter pair (a "PTS"
+    system would make every PT a plant tag) would hide real ISA variables; plant tags from a neighbouring system
+    whose code is not on this sheet are not caught."""
+    if not letters:
+        return None
+    for code in sorted(c for c in codes if c):
+        stems = [code] + ([code[:-1]] if len(code) >= 3 and code.endswith("S") else [])
+        for stem in stems:
+            if len(stem) >= 2 and letters.startswith(stem):
+                return code, stem
+    return None
+
+
 def tag_tokens(text):
     t = re.sub(r"(?<=[A-Z])-(?=[A-Z])", "", text.upper())  # BY-PASS -> BYPASS
     return {w for w in re.findall(r"[A-Z][A-Z0-9.&]*", t) if w not in STOP and len(w) > 1}
@@ -580,15 +602,25 @@ def build(tool, run_dir, sheet_list, images_dir, register, label, parent_rule="a
             # MOV / AOV / SOV / AORV are common plant shorthand for operated valves, not ISA measured variables
             # (ISA would read MOV's "M" as moisture). Don't guess a variable for them.
             operated_valve = bool(letters and re.search(r"OR?V$", letters))
-            kind = ("operated valve" if operated_valve else "final element (valve)" if letters and
-                    letters.endswith("V") else "measurement / control" if letters else None)
+            # A letter group led by a system code seen on this sheet (MS... on an MSS sheet) is a plant tag, not ISA
+            # letters (plant_coded): no measured variable; only its last letter is read (a ...V is still a valve).
+            sheet_codes = set(ident[first["sheet"]]["system_codes_seen"]) | {ident[first["sheet"]]["system_code"]}
+            pc = None if operated_valve else plant_coded(letters, sheet_codes)
+            kind = ("operated valve" if operated_valve else
+                    ("valve (plant-coded tag)" if letters.endswith("V") else None) if pc else
+                    "final element (valve)" if letters and letters.endswith("V") else
+                    "measurement / control" if letters else None)
+            isa_read = bool(letters and not operated_valve and not pc)
+            var_method = ("ISA-5.1 first letter" if isa_read else
+                          f"none: plant tag, its leading letters {pc[1]} match system code {pc[0]} seen on this "
+                          f"sheet, so not read as ISA-5.1 letters" if pc else None)
             instruments.append({**base, "unit": unit, "unit_method": umethod, "unit_hops": hops,
                                 "parent": pid, "parent_method": method,
                                 "parent_source": {"sheet": cand[0], "symbol": cand[1]} if cand else None, **extra,
                                 "system": f"SYS-{first['sheet']}", "isa_letters": letters, "loop": loop,
                                 "instrument_kind": kind,
-                                "variable": ISA_FIRST.get(letters[0]) if letters and not operated_valve else None,
-                                "variable_method": "ISA-5.1 first letter" if letters and not operated_valve else None,
+                                "variable": ISA_FIRST.get(letters[0]) if isa_read else None,
+                                "variable_method": var_method,
                                 "uom": "", "description": a["tag"] or "untagged instrument",
                                 "stream": None})
         elif a["role"] == "line_item":

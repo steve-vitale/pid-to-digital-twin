@@ -1,0 +1,26 @@
+{
+  "title": "Pump moved from throttling to a variable speed drive, with site constants",
+  "illustrative": true,
+  "description": "ILLUSTRATIVE: a centrifugal pump that was throttled by a discharge control valve now runs on a variable speed drive. kW before is a measured average; kW after is a range because the after-measurement month had two production rates. All numbers, including the site constants, are made up for this example.",
+  "changes": [
+    {
+      "type": "electricity",
+      "label": "Pump P-101 on a variable speed drive",
+      "kw_before": 75.0,
+      "kw_after": {"low": 45.0, "high": 50.0},
+      "hours_per_year": 8000,
+      "demand_kw_reduction": 25.0,
+      "demand_months": 12
+    }
+  ],
+  "site": {
+    "electricity_price_per_kwh": 0.092,
+    "demand_charge_per_kw_month": 14.5,
+    "grid_kg_co2e_per_kwh": 0.42
+  },
+  "site_notes": {
+    "electricity_price_per_kwh": "ILLUSTRATIVE energy charge from a made-up rate schedule",
+    "demand_charge_per_kw_month": "ILLUSTRATIVE demand charge from the same made-up rate schedule",
+    "grid_kg_co2e_per_kwh": "ILLUSTRATIVE subregion factor (look yours up in EPA Power Profiler)"
+  }
+}

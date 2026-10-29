@@ -1,0 +1,76 @@
+{
+  "about": "What to measure and which site constants an annual energy, cost and CO2e estimate needs, per question, and where each constant comes from. Public typical values are used only with --use-defaults and always labelled. See docs/IMPACT_ESTIMATE.md.",
+  "questions": [
+    {
+      "question_id": "E8",
+      "question": "Is there a steam trap population large enough to justify a trap survey program?",
+      "family": "energy",
+      "estimate_forms": [
+        "steam"
+      ],
+      "note": "Failed steam traps: steam lost per failed trap (lb/h, from the survey) x number failed, hours the steam is on, the energy per lb at those conditions, then fuel via boiler efficiency.",
+      "measure": [
+        {
+          "key": "steam_lb_h",
+          "what": "Steam flow saved or lost, lb/h: a steam flowmeter, or a survey estimate (for failed traps, the survey's orifice-based loss per trap; DOE Steam Tip Sheet #1 prints one such table)."
+        },
+        {
+          "key": "hours",
+          "what": "Operating hours per year the change applies: historian run status, the operating schedule, or maintenance records. Not 8,760 unless it really runs all year."
+        },
+        {
+          "key": "steam_conditions",
+          "what": "Steam pressure (psig) and temperature at the point of loss, and the feedwater or makeup water temperature: gauges, the historian, the deaerator."
+        },
+        {
+          "key": "boiler_fuel",
+          "what": "Which fuel the boiler or heater fires (the tool will not assume natural gas)."
+        }
+      ],
+      "constants": [
+        {
+          "key": "steam_energy_btu_per_lb",
+          "name": "Energy per lb of steam",
+          "unit": "Btu/lb",
+          "where": "Steam tables: enthalpy of the steam at its line pressure and temperature minus the enthalpy of the water that replaces it (feedwater, or makeup water if the condensate is not returned). DOE Steam Tip Sheet #15 Table 1 tabulates saturated steam at 150, 450 and 600 psig.",
+          "urls": [
+            "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/steam15_benchmark.pdf"
+          ],
+          "public_typical_value": "DOE Steam Tip Sheet #15 Table 1 (needs your steam pressure and feedwater temperature)"
+        },
+        {
+          "key": "boiler_efficiency",
+          "name": "Boiler (or heater) efficiency",
+          "unit": "fraction, fuel HHV in to useful heat out",
+          "where": "Your boiler's efficiency test (fuel-to-steam, input-output or heat-loss method), a combustion analyzer reading plus shell and blowdown losses, or the boiler design datasheet. For heat that displaces a different heater, that heater's efficiency.",
+          "urls": [
+            "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+            "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/steam15_benchmark.pdf"
+          ],
+          "public_typical_value": "EPA GHG Emission Factors Hub (2025) Table 7 assumption, 80% thermal efficiency"
+        },
+        {
+          "key": "fuel_price",
+          "name": "Fuel price",
+          "unit": "$/MMBtu (or $/therm, $/Mcf with heat content)",
+          "where": "Your gas bill or fuel supply contract: commodity plus transport/delivery per unit, at the margin (the price of the next unit you would not buy). For gas billed per Mcf or ccf, the bill's heat content (Btu factor) converts it to MMBtu.",
+          "urls": [
+            "https://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm",
+            "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+          ],
+          "public_typical_value": "EIA US natural gas industrial price (2025), natural gas only"
+        },
+        {
+          "key": "fuel_kg_co2e_per_mmbtu",
+          "name": "Fuel emission factor",
+          "unit": "kg CO2e/MMBtu (HHV)",
+          "where": "EPA GHG Emission Factors Hub, Table 1 Stationary Combustion: CO2, CH4 and N2O per MMBtu for your fuel, combined with the Hub's GWPs (AR5: CH4 28, N2O 265). If your supplier gives a measured carbon content or heat content, use it.",
+          "urls": [
+            "https://www.epa.gov/climateleadership/ghg-emission-factors-hub"
+          ],
+          "public_typical_value": "EPA GHG Emission Factors Hub (2025) Table 1"
+        }
+      ]
+    }
+  ]
+}

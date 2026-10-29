@@ -1,0 +1,6 @@
+# HAI boiler (P1, Emerson Ovation DCS) control-loop list, second leg. Agent-made first pass (Claude, 2026-10-29); NOT confirmed by a person.
+# Sources used: data/external/hai/hai_dataset_technical_details.pdf (PDF pages 8, 10, 43) and data/external/hai/graph/boiler/dcs_1001h.json (tag spelling only). Page numbers are PDF page indexes (printed page number = PDF page - 1).
+# Second leg of P1-PC (first leg, PCV01, is in loops.csv). The document shows one PID whose output goes to PCV01D directly and to PCV02D through a function block F(.). It does not say split range, and does not give the function's characteristic.
+# Data: HAI dataset by H.-K. Shin, W. Lee, J.-H. Yun, B.-G. Min (https://github.com/icsdataset/hai), CC BY-SA 4.0. This file is a derivative, CC BY-SA 4.0.
+controller,measurement,output,description
+P1-PC,PIT01,PCV02,Boiler pressure control second valve: same PID as PCV01 leg; PCV02D derived from the PCV01 command through a function block (PDF p.8 Fig. 4 and text; PDF p.10 Fig. 9 block 1001.21 to 1001.23; PDF p.43 attack chain affects PCV01 and PCV02; DCS sheet 1001)

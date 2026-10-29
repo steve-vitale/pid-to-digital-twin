@@ -1,0 +1,10 @@
+# HAI boiler (P1, Emerson Ovation DCS) control-loop list, first leg. Agent-made first pass (Claude, 2026-10-29); NOT confirmed by a person.
+# Sources used: data/external/hai/hai_dataset_technical_details.pdf (boiler control section, PDF pages 7-10; P1 tag list PDF pages 13-14; HAIEnd point list PDF pages 16-24; I/O attack tables PDF pages 26-29; case studies PDF page 43) and data/external/hai/graph/boiler/dcs_1001h.json, dcs_1002h.json (tag spelling only). Page numbers are PDF page indexes (printed page number = PDF page - 1).
+# Only loops the documentation states are listed. P1-TC (cascade, inner controller untagged) and P1-CC (on/off activation, tag mismatch TIT03 vs TWIT03) are left out: see resolution.json.
+# Controller tags: the DCS graphs carry no controller tag, so the controller column uses the document's loop names (P1-PC, P1-LC, P1-FC). Measurement and output use the node names printed in the DCS graphs (PIT01, PCV01, ...), which are the document's P1_ tags without the P1_ prefix and the D (command) suffix.
+# P1-PC drives two valves from one PID (PCV01D direct, PCV02D through a function block); per this repository's one-list-per-leg convention the PCV02 leg is in loops_leg2.csv. The documents do not call it split range.
+# Data: HAI dataset by H.-K. Shin, W. Lee, J.-H. Yun, B.-G. Min (https://github.com/icsdataset/hai), CC BY-SA 4.0. This file is a derivative, CC BY-SA 4.0.
+controller,measurement,output,description
+P1-PC,PIT01,PCV01,Boiler pressure control: PID on PIT01 vs operator setpoint B2016 drives PCV01D (PDF p.8 Fig. 4 and text; PDF p.26 attack table AP04/AP05 CV1 P1_PCV01D PV1 P1_PIT01; DCS sheet 1001)
+P1-LC,LIT01,LCV01,Return-tank level control: PID on LIT01 vs setpoint B3004 drives LCV01D; feed-forward of FC output FCV03D not listed as a loop (PDF p.8 Fig. 5 and text; PDF p.27 AP16/AP17; DCS sheet 1002)
+P1-FC,FT03,FCV03,Return-tank outflow control: PID on FT03 vs setpoint B3005 drives FCV03D (PDF p.8 Fig. 6 and text; PDF p.27 AP11/AP12; DCS sheet 1002)

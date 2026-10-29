@@ -33,6 +33,8 @@ def finish(acc):
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", default="first-try")
     ap.add_argument("--split", choices=["all", "dev", "holdout-a"], default="all",

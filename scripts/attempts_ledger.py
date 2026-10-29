@@ -198,6 +198,13 @@ def load():
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:  # print usage; never regenerate anything on a help request
+        print(__doc__)
+        return 0
+    unknown = [x for x in argv if x != "--check"]
+    if unknown:  # a typo such as --chek must not fall through to the write path
+        print(f"unrecognized argument(s): {' '.join(unknown)}\nusage: attempts_ledger.py [--check]", file=sys.stderr)
+        return 2
     led = load()
     bad = problems(led)
     text = render(led) if not bad else None

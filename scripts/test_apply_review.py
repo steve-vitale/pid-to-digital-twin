@@ -18,6 +18,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import generate  # noqa: E402
 import apply_review  # noqa: E402
 
+TWIN_ID = generate.TWIN_REVIEW_COLS.index("item_id")
+TWIN_WHY = generate.TWIN_REVIEW_COLS.index("why_check_this")
+
 results = []
 
 
@@ -62,11 +65,15 @@ def main():
             {"item_id": "LT-108", "OPS_confirm_or_correct": "correct"},         # correct without a value
             {"item_id": "LT-112", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "colour=red"},  # bad field
             {"item_id": "LT-115", "OPS_confirm_or_correct": "maybe"},           # bad decision
+            {"item_id": "FT-104", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "tag="},  # empty value
         ]
         p, rec = run(te, rows, cols, tmp)
         check("bad rows make the run exit non-zero", p.returncode == 1, p.returncode)
-        check("4 refusals (unknown item, missing value, bad field, bad decision)",
-              rec and len(rec["refused"]) == 4, rec and rec["refused"])
+        check("5 refusals (unknown item, missing value, bad field, bad decision, empty value)",
+              rec and len(rec["refused"]) == 5, rec and rec["refused"])
+        check("an empty correction value is refused, never applied as a blank",
+              rec and any(r["item"] == "FT-104" and "has no value" in r["reason"] for r in rec["refused"]),
+              rec and rec["refused"])
         check("5 decisions applied", rec and len(rec["applied"]) == 5, rec and [a["item"] for a in rec["applied"]])
         moc = {m["item"]: m["request"] for m in (rec or {}).get("needs_moc", [])}
         check("removing PT-107's published alarm is flagged for a change review", moc.get("PT-107") == "remove alarm", moc)
@@ -262,6 +269,37 @@ def main():
         check("ReviewStatus override carries the decision", '"value": "corrected"' in tags)
         pi = json.dumps(generate.twin_pi_rows(tm))
         check("rejected instrument left out of the PI AF sheet", inst not in pi or f'{inst} |' not in pi)
+
+        # A corrected placeholder tag is no longer a placeholder: the queue must not call the new tag one.
+        ph = next(x for g in ("units", "instruments", "line_items") for x in tm[g] if x["tag_status"] == "placeholder")
+        p, rec = run(tw, [{"item_id": ph["id"], "OPS_confirm_or_correct": "correct", "OPS_correct_value": "XV-4242"}],
+                     generate.TWIN_REVIEW_COLS, tmp)
+        tm = json.loads(tw.read_text(encoding="utf-8"))
+        fixed = next(x for g in ("units", "instruments", "line_items") for x in tm[g] if x["id"] == ph["id"])
+        row = next(r for r in generate.twin_review_rows(tm) if r[TWIN_ID] == ph["id"])
+        check("a corrected placeholder tag is marked reviewed, with the old status in the history",
+              fixed["tag"] == "XV-4242" and fixed["tag_status"] == "reviewed"
+              and fixed["ops_review"]["history"][-1]["changes"].get("tag_status") == ["placeholder", "reviewed"],
+              (fixed.get("tag_status"), fixed.get("ops_review")))
+        check("the regenerated queue no longer calls the corrected tag a placeholder",
+              "placeholder" not in row[TWIN_WHY], row[TWIN_WHY])
+        md = next((tmp / "rec").glob("2026-10-08-twin.md")).read_bytes()
+        check("the change record is written with LF line endings on every OS", b"\r\n" not in md)
+
+        # Files that can't be read are refused in plain words, not with a traceback.
+        def cli(*args):
+            return subprocess.run([sys.executable, str(ROOT / "scripts" / "apply_review.py"), *map(str, args),
+                                   "--reviewer", "T", "--record-dir", str(tmp / "rec2")], capture_output=True,
+                                  text=True, encoding="utf-8", env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+        header_only = tmp / "header.csv"
+        header_only.write_text(",".join(generate.TWIN_REVIEW_COLS) + "\n", encoding="utf-8")
+        p = cli(tw, header_only)
+        check("a header-only sheet is said to have no rows, not no item_id column",
+              p.returncode != 0 and "has no rows" in p.stderr and "no item_id column" not in p.stderr, p.stderr)
+        for args, missing in (((tmp / "nope.json", header_only), "nope.json"), ((tw, tmp / "nope.csv"), "nope.csv")):
+            p = cli(*args)
+            check(f"a missing {missing} is refused without a traceback",
+                  p.returncode == 2 and missing in p.stderr and "Traceback" not in p.stderr, p.stderr[-300:])
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     print("all passed" if all(results) else "FAILURES")

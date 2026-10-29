@@ -1,5 +1,7 @@
 # Test any P&ID digitization tool on your own sheets
 
+**Why it matters:** Vendors quote accuracy on their own test drawings. Scoring them on yours, with a deliberately wrong answer scored beside them, shows whether the number means anything.
+
 A vendor demo shows you their best drawing. This kit shows you what their tool does on yours, and it never shows
 that number alone: every report puts the vendor's score next to the score of answers whose quality is already known.
 

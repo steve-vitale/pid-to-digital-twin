@@ -1,5 +1,6 @@
 {
- "method": "band = mean +/- K population sd over the fit rows' good values (scripts/normal_bands.py method)",
+ "method_name": "drift",
+ "method": "gap = 10-sample average minus the 600-sample baseline one sample earlier (both exponentially weighted, starting as running averages of the export scored); band on the gap = its fit mean +/- max(K x its fit sd, 1% of the tag's fit mean), both scaled by the baseline's share of the fit mean, kept between 0.5 and 1; slow drift moves the baseline and is not flagged, a step or fast change is",
  "normal_csv": "te_normal_d00.csv",
  "time_column": "minutes",
  "time_kind": "number",
@@ -27,30 +28,30 @@
   "TT-121",
   "TT-122"
  ],
- "k": 6,
+ "k": 10,
  "k_selection": {
-  "rule": "smallest K in [3, 4, 5, 6] with worst-tag false-flag rate < 0.5% on held-out rows",
+  "rule": "smallest K in [10, 12, 15, 20] with the share of held-out rows with any tag flagged < 0.5%",
   "target_met": true,
   "by_k": {
-   "3": {
-    "worst_tag_rate": 0.1583,
-    "worst_tag": "FT-119",
-    "mean_tag_rate": 0.0181,
-    "any_tag_rate": 0.2375
+   "10": {
+    "worst_tag_rate": 0.0,
+    "worst_tag": "FT-101",
+    "mean_tag_rate": 0.0,
+    "any_tag_rate": 0.0
    },
-   "4": {
-    "worst_tag_rate": 0.0667,
-    "worst_tag": "TT-118",
-    "mean_tag_rate": 0.0061,
-    "any_tag_rate": 0.0792
+   "12": {
+    "worst_tag_rate": 0.0,
+    "worst_tag": "FT-101",
+    "mean_tag_rate": 0.0,
+    "any_tag_rate": 0.0
    },
-   "5": {
-    "worst_tag_rate": 0.0312,
-    "worst_tag": "TT-118",
-    "mean_tag_rate": 0.0022,
-    "any_tag_rate": 0.0396
+   "15": {
+    "worst_tag_rate": 0.0,
+    "worst_tag": "FT-101",
+    "mean_tag_rate": 0.0,
+    "any_tag_rate": 0.0
    },
-   "6": {
+   "20": {
     "worst_tag_rate": 0.0,
     "worst_tag": "FT-101",
     "mean_tag_rate": 0.0,
@@ -64,200 +65,266 @@
   "FT-101": {
    "mean": 0.250952,
    "sd": 0.02714,
-   "lo": 0.088114,
-   "hi": 0.41379,
+   "gap_mean": 0.000548,
+   "resid_sd": 0.012424,
+   "floor": 0.00251,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.124242,
+   "limited_by": "spread"
   },
   "FT-102": {
    "mean": 3663.367292,
    "sd": 35.756085,
-   "lo": 3448.830781,
-   "hi": 3877.903802,
+   "gap_mean": 0.393058,
+   "resid_sd": 9.808282,
+   "floor": 36.633673,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 98.082818,
+   "limited_by": "spread"
   },
   "FT-103": {
    "mean": 4507.608958,
    "sd": 40.183073,
-   "lo": 4266.510523,
-   "hi": 4748.707393,
+   "gap_mean": -1.041653,
+   "resid_sd": 14.696502,
+   "floor": 45.07609,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 146.965019,
+   "limited_by": "spread"
   },
   "FT-104": {
    "mean": 9.344086,
    "sd": 0.081407,
-   "lo": 8.855643,
-   "hi": 9.832529,
+   "gap_mean": -0.000974,
+   "resid_sd": 0.029546,
+   "floor": 0.093441,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.295456,
+   "limited_by": "spread"
   },
   "FT-105": {
    "mean": 26.908452,
    "sd": 0.195716,
-   "lo": 25.734159,
-   "hi": 28.082746,
+   "gap_mean": 0.006816,
+   "resid_sd": 0.045143,
+   "floor": 0.269085,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.451432,
+   "limited_by": "spread"
   },
   "FT-106": {
    "mean": 42.331469,
    "sd": 0.221322,
-   "lo": 41.003539,
-   "hi": 43.659399,
+   "gap_mean": 0.016141,
+   "resid_sd": 0.044583,
+   "floor": 0.423315,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.445833,
+   "limited_by": "spread"
   },
   "PT-107": {
    "mean": 2704.9075,
    "sd": 6.01171,
-   "lo": 2668.837243,
-   "hi": 2740.977757,
+   "gap_mean": -0.159476,
+   "resid_sd": 4.698517,
+   "floor": 27.049075,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 46.985169,
+   "limited_by": "spread"
   },
   "LT-108": {
    "mean": 74.992435,
    "sd": 0.524719,
-   "lo": 71.844122,
-   "hi": 78.140749,
+   "gap_mean": 0.009674,
+   "resid_sd": 0.141586,
+   "floor": 0.749924,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.415862,
+   "limited_by": "spread"
   },
   "TT-109": {
    "mean": 120.4,
    "sd": 0.019759,
-   "lo": 120.281446,
-   "hi": 120.518554,
+   "gap_mean": 0.0007,
+   "resid_sd": 0.003308,
+   "floor": 1.204,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.204,
+   "limited_by": "floor"
   },
   "FT-110": {
    "mean": 0.337083,
    "sd": 0.011545,
-   "lo": 0.26781,
-   "hi": 0.406355,
+   "gap_mean": 0.001112,
+   "resid_sd": 0.003893,
+   "floor": 0.003371,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.038932,
+   "limited_by": "spread"
   },
   "TT-111": {
    "mean": 80.10729,
    "sd": 0.210962,
-   "lo": 78.841516,
-   "hi": 81.373063,
+   "gap_mean": 0.002869,
+   "resid_sd": 0.120282,
+   "floor": 0.801073,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.202822,
+   "limited_by": "spread"
   },
   "LT-112": {
    "mean": 49.946925,
    "sd": 1.0705,
-   "lo": 43.523924,
-   "hi": 56.369926,
+   "gap_mean": -0.025963,
+   "resid_sd": 0.236443,
+   "floor": 0.499469,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 2.364429,
+   "limited_by": "spread"
   },
   "PT-113": {
    "mean": 2633.652292,
    "sd": 6.274651,
-   "lo": 2596.004386,
-   "hi": 2671.300197,
+   "gap_mean": -0.197153,
+   "resid_sd": 4.8547,
+   "floor": 26.336523,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 48.546997,
+   "limited_by": "spread"
   },
   "FT-114": {
    "mean": 25.17149,
    "sd": 1.038992,
-   "lo": 18.937538,
-   "hi": 31.405441,
+   "gap_mean": 0.029835,
+   "resid_sd": 0.193448,
+   "floor": 0.251715,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.934481,
+   "limited_by": "spread"
   },
   "LT-115": {
    "mean": 49.961542,
    "sd": 1.028757,
-   "lo": 43.788998,
-   "hi": 56.134085,
+   "gap_mean": 0.02402,
+   "resid_sd": 0.184896,
+   "floor": 0.499615,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.848959,
+   "limited_by": "spread"
   },
   "PT-116": {
    "mean": 3102.277083,
    "sd": 5.368909,
-   "lo": 3070.06363,
-   "hi": 3134.490537,
+   "gap_mean": 0.010944,
+   "resid_sd": 4.125749,
+   "floor": 31.022771,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 41.257492,
+   "limited_by": "spread"
   },
   "FT-117": {
    "mean": 22.903948,
    "sd": 0.610486,
-   "lo": 19.241029,
-   "hi": 26.566867,
+   "gap_mean": -0.004298,
+   "resid_sd": 0.123998,
+   "floor": 0.229039,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 1.239975,
+   "limited_by": "spread"
   },
   "TT-118": {
    "mean": 65.883263,
    "sd": 0.28625,
-   "lo": 64.165764,
-   "hi": 67.600761,
+   "gap_mean": 0.026493,
+   "resid_sd": 0.248056,
+   "floor": 0.658833,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 2.480556,
+   "limited_by": "spread"
   },
   "FT-119": {
    "mean": 234.439375,
    "sd": 6.603745,
-   "lo": 194.816903,
-   "hi": 274.061847,
+   "gap_mean": 0.711264,
+   "resid_sd": 5.644253,
+   "floor": 2.344394,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 56.442533,
+   "limited_by": "spread"
   },
   "JT-120": {
    "mean": 341.315875,
    "sd": 1.298747,
-   "lo": 333.523392,
-   "hi": 349.108358,
+   "gap_mean": -0.080146,
+   "resid_sd": 0.982963,
+   "floor": 3.413159,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 9.829627,
+   "limited_by": "spread"
   },
   "TT-121": {
    "mean": 94.600723,
    "sd": 0.131041,
-   "lo": 93.814475,
-   "hi": 95.386971,
+   "gap_mean": 0.000292,
+   "resid_sd": 0.043845,
+   "floor": 0.946007,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.946007,
+   "limited_by": "floor"
   },
   "TT-122": {
    "mean": 77.290929,
    "sd": 0.261763,
-   "lo": 75.720352,
-   "hi": 78.861506,
+   "gap_mean": -0.00627,
+   "resid_sd": 0.068077,
+   "floor": 0.772909,
    "fit_good": 480,
    "fit_bad": 0,
-   "constant_in_fit": false
+   "constant_in_fit": false,
+   "half_width": 0.772909,
+   "limited_by": "floor"
   }
  },
  "no_band": [],
@@ -270,9 +337,9 @@
   "rows": 960,
   "per_tag": {
    "FT-101": {
-    "first_outside_row": 160,
-    "first_outside_time": "480.0",
-    "flagged_samples": 800,
+    "first_outside_row": 166,
+    "first_outside_time": "498.0",
+    "flagged_samples": 483,
     "bad_samples": 0
    },
    "FT-102": {
@@ -282,15 +349,15 @@
     "bad_samples": 0
    },
    "FT-103": {
-    "first_outside_row": 254,
-    "first_outside_time": "762.0",
-    "flagged_samples": 703,
+    "first_outside_row": 257,
+    "first_outside_time": "771.0",
+    "flagged_samples": 323,
     "bad_samples": 0
    },
    "FT-104": {
     "first_outside_row": 195,
     "first_outside_time": "585.0",
-    "flagged_samples": 1,
+    "flagged_samples": 17,
     "bad_samples": 0
    },
    "FT-105": {
@@ -306,15 +373,15 @@
     "bad_samples": 0
    },
    "PT-107": {
-    "first_outside_row": 190,
-    "first_outside_time": "570.0",
-    "flagged_samples": 770,
+    "first_outside_row": 201,
+    "first_outside_time": "603.0",
+    "flagged_samples": 759,
     "bad_samples": 0
    },
    "LT-108": {
-    "first_outside_row": null,
-    "first_outside_time": null,
-    "flagged_samples": 0,
+    "first_outside_row": 238,
+    "first_outside_time": "714.0",
+    "flagged_samples": 7,
     "bad_samples": 0
    },
    "TT-109": {
@@ -324,15 +391,15 @@
     "bad_samples": 0
    },
    "FT-110": {
-    "first_outside_row": 212,
-    "first_outside_time": "636.0",
-    "flagged_samples": 746,
+    "first_outside_row": 213,
+    "first_outside_time": "639.0",
+    "flagged_samples": 596,
     "bad_samples": 0
    },
    "TT-111": {
-    "first_outside_row": 200,
-    "first_outside_time": "600.0",
-    "flagged_samples": 760,
+    "first_outside_row": 208,
+    "first_outside_time": "624.0",
+    "flagged_samples": 752,
     "bad_samples": 0
    },
    "LT-112": {
@@ -342,9 +409,9 @@
     "bad_samples": 0
    },
    "PT-113": {
-    "first_outside_row": 191,
-    "first_outside_time": "573.0",
-    "flagged_samples": 769,
+    "first_outside_row": 202,
+    "first_outside_time": "606.0",
+    "flagged_samples": 758,
     "bad_samples": 0
    },
    "FT-114": {
@@ -360,9 +427,9 @@
     "bad_samples": 0
    },
    "PT-116": {
-    "first_outside_row": 182,
-    "first_outside_time": "546.0",
-    "flagged_samples": 778,
+    "first_outside_row": 194,
+    "first_outside_time": "582.0",
+    "flagged_samples": 766,
     "bad_samples": 0
    },
    "FT-117": {
@@ -372,70 +439,60 @@
     "bad_samples": 0
    },
    "TT-118": {
-    "first_outside_row": 251,
-    "first_outside_time": "753.0",
-    "flagged_samples": 24,
+    "first_outside_row": null,
+    "first_outside_time": null,
+    "flagged_samples": 0,
     "bad_samples": 0
    },
    "FT-119": {
-    "first_outside_row": 212,
-    "first_outside_time": "636.0",
-    "flagged_samples": 748,
+    "first_outside_row": 235,
+    "first_outside_time": "705.0",
+    "flagged_samples": 627,
     "bad_samples": 0
    },
    "JT-120": {
-    "first_outside_row": 167,
-    "first_outside_time": "501.0",
-    "flagged_samples": 793,
+    "first_outside_row": 178,
+    "first_outside_time": "534.0",
+    "flagged_samples": 549,
     "bad_samples": 0
    },
    "TT-121": {
-    "first_outside_row": 226,
-    "first_outside_time": "678.0",
-    "flagged_samples": 732,
+    "first_outside_row": 246,
+    "first_outside_time": "738.0",
+    "flagged_samples": 33,
     "bad_samples": 0
    },
    "TT-122": {
-    "first_outside_row": 215,
-    "first_outside_time": "645.0",
-    "flagged_samples": 745,
+    "first_outside_row": 214,
+    "first_outside_time": "642.0",
+    "flagged_samples": 746,
     "bad_samples": 0
    }
   },
-  "flagged_samples_any_tag": 800,
+  "flagged_samples_any_tag": 794,
   "alarm_events_run3": 1,
   "fault": {
    "fault_start_row": 160,
    "fault_start_time": "480.0",
-   "first_flag_row": 160,
-   "first_flag_delay": 0.0,
-   "detection_run3_row": 160,
-   "detection_run3_delay": 0.0,
+   "first_flag_row": 166,
+   "first_flag_delay": 18.0,
+   "detection_run3_row": 166,
+   "detection_run3_delay": 18.0,
    "first_tags": [
     {
      "tag": "FT-101",
-     "row": 160,
-     "delay": 0.0
+     "row": 166,
+     "delay": 18.0
     },
     {
      "tag": "JT-120",
-     "row": 167,
-     "delay": 21.0
+     "row": 178,
+     "delay": 54.0
     },
     {
      "tag": "PT-116",
-     "row": 182,
-     "delay": 66.0
-    },
-    {
-     "tag": "PT-107",
-     "row": 190,
-     "delay": 90.0
-    },
-    {
-     "tag": "PT-113",
-     "row": 191,
-     "delay": 93.0
+     "row": 194,
+     "delay": 102.0
     },
     {
      "tag": "FT-104",
@@ -443,39 +500,49 @@
      "delay": 105.0
     },
     {
+     "tag": "PT-107",
+     "row": 201,
+     "delay": 123.0
+    },
+    {
+     "tag": "PT-113",
+     "row": 202,
+     "delay": 126.0
+    },
+    {
      "tag": "TT-111",
-     "row": 200,
-     "delay": 120.0
+     "row": 208,
+     "delay": 144.0
     },
     {
      "tag": "FT-110",
-     "row": 212,
-     "delay": 156.0
-    },
-    {
-     "tag": "FT-119",
-     "row": 212,
-     "delay": 156.0
+     "row": 213,
+     "delay": 159.0
     },
     {
      "tag": "TT-122",
-     "row": 215,
-     "delay": 165.0
+     "row": 214,
+     "delay": 162.0
+    },
+    {
+     "tag": "FT-119",
+     "row": 235,
+     "delay": 225.0
+    },
+    {
+     "tag": "LT-108",
+     "row": 238,
+     "delay": 234.0
     },
     {
      "tag": "TT-121",
-     "row": 226,
-     "delay": 198.0
-    },
-    {
-     "tag": "TT-118",
-     "row": 251,
-     "delay": 273.0
+     "row": 246,
+     "delay": 258.0
     },
     {
      "tag": "FT-103",
-     "row": 254,
-     "delay": 282.0
+     "row": 257,
+     "delay": 291.0
     }
    ],
    "false_alarms_before_fault": {
@@ -484,7 +551,7 @@
     "alarm_events_run3": 0,
     "tags": []
    },
-   "post_fault_detection_rate": 1.0
+   "post_fault_detection_rate": 0.9925
   },
   "csv": "te_fault6_d06.csv",
   "tags_missing": [],

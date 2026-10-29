@@ -1,0 +1,108 @@
+{
+ "about": "Provenance for the AGENT-MADE answer keys in this folder. Read data/agent_keys/README.md first.",
+ "input_id": "pronto-fig1",
+ "sheets": {
+  "fig1": {
+   "made_by": "agent-made, first pass (Claude Opus 5.5 coding agent, 2026-10-29); not reviewed by a person",
+   "image": "PRONTO technical report PDF, page index 4 (printed page 5), embedded image xref 91, extracted bytes unchanged (PNG 1782 x 1312)",
+   "image_sha256": "b8fc67ae3d9e9a72ab7ba01a8c6ecdc903bcfaf24f73baa5cb2bf14ac715b953",
+   "size_px": [
+    1782,
+    1312
+   ],
+   "license": "CC BY 4.0",
+   "source_page": "https://zenodo.org/record/1341582",
+   "attribution": "A. Stief et al., PRONTO heterogeneous benchmark, doi:10.5281/zenodo.1341583, technical report Figure 1 (process schematic), CC BY 4.0",
+   "key_license": "CC BY 4.0 (derivative of the figure; attribution as above)",
+   "image_extraction": {
+    "pdf": "data/external/pronto-more/PRONTO benchmark case study/Technical documents/Technical report/Multiphase flow facility case study technical report.pdf",
+    "pdf_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+    "page_index": 4,
+    "image_xref": 91,
+    "how": "PyMuPDF: doc.extract_image(91)['image'] written as-is (PNG); the sha256 of those bytes is image_sha256"
+   },
+   "counts": {
+    "symbols": 46,
+    "by_class": {
+     "general": 8,
+     "instrumentation": 18,
+     "pump": 2,
+     "tank": 6,
+     "valve": 12
+    },
+    "junctions": 20,
+    "edges": 78,
+    "edges_by_kind": {
+     "p_process": 52,
+     "i_instrument_connection": 18,
+     "s_signal": 8
+    }
+   },
+   "hard": [
+    "The figure is a schematic, not a full P&ID: controllers are not drawn as bubbles; the controller tag (FIC102, FIC101, FIC302, FIC301, PIC401, PIC501) is printed beside its valve, so each such valve carries the controller tag as its text; LVC502/LVC507 are valve tags.",
+    "In-line flowmeters (FT102, FT104, FT302, FT305, FT404, FT406), the ultrasonic sensor and the transparent pipeline section are keyed general; pressure taps B05-B20, PT*, LI* are keyed instrumentation with a kind-i edge to their tap point.",
+    "The drawing puts the mixing point at the top of the riser (j_mix joins the black mixed-flow line, the green air line and the blue water line); the mixed-flow loop through U39 and the horizontal pipeline is keyed as drawn.",
+    "Dashed control lines meter->valve run beside the pipe joining the same two symbols; in the graph they are one edge (the pipe); key.json also lists them in signal_edges.",
+    "The vertical line from PIC401 to FT404 crosses the riser-top line to the 2 phase separator with no join mark; keyed as a crossing (no junction)."
+   ],
+   "uncertain": [
+    {
+     "id": "ft* class",
+     "why": "in-line flowmeters keyed general; counting them as instrumentation would score differently"
+    },
+    {
+     "id": "b_li502-v_lvc502 signal",
+     "why": "the long dashed line from LI502 (3 phase separator) ends at LVC502 (coalescer outlet), as drawn"
+    },
+    {
+     "id": "outlet arrows",
+     "why": "line ends with arrows to atmosphere (V10, V11, PIC501, compressor drain) are not keyed as inlet/outlet"
+    }
+   ],
+   "consistency_check": {
+    "method": "same agent re-keyed, from fresh crops and without opening the key, every symbol whose centre lies in a seeded random 20% of a 5 x 4 cell grid (seed 20261029) and the links between those symbols; compared at IoU >= 0.5 with class. NOT independent: the same agent made the key and still had it in context.",
+    "cells": [
+     [
+      356,
+      984,
+      713,
+      1312
+     ],
+     [
+      713,
+      984,
+      1069,
+      1312
+     ],
+     [
+      1069,
+      656,
+      1426,
+      984
+     ],
+     [
+      1426,
+      328,
+      1782,
+      656
+     ]
+    ],
+    "symbols_in_cells_key": 3,
+    "symbols_in_cells_recheck": 3,
+    "symbol_agreement_f1_strict_classified": 1.0,
+    "links_in_cells_key": 1,
+    "links_in_cells_recheck": 1,
+    "links_agree": 1,
+    "link_agreement_f1": 1.0,
+    "disagreements": {
+     "symbols_only_in_key": [],
+     "symbols_only_in_recheck": [],
+     "class_mismatches": [],
+     "links_only_in_key": [],
+     "links_only_in_recheck": []
+    },
+    "note": "the seeded cells fall mostly on empty paper or the legend: only 3 symbols and 1 link were in them, so this check says little"
+   }
+  }
+ }
+}

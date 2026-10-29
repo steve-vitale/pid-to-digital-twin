@@ -42,7 +42,7 @@ Result: 38 pass, 5 informational, 0 fail, of 43 checks. Written by `node drafts/
 | D | controls_named | pass | 0 visible buttons or inputs without an accessible name |
 | C | unit_callouts_identify_bodies | pass | 36 states retain every expected unit label and its own on-body leader |
 | C | label_overlaps | pass | 36 page states (2 themes × 390 and 1440 px × 9 views): 0 with overlapping labels |
-| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 4.4%); 0 states over the limit |
+| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 3.9%); 0 states over the limit |
 | C | min_font_size | pass | smallest visible text 12 px (minimum 12 px) in every state |
 | C | contrast_wcag_aa | pass | lowest text contrast 6.41:1 over 4366 visible text runs (WCAG AA for normal text: 4.5:1) |
 | C | labels_inside_figure | pass | labels outside the figure: 0 states |

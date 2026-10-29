@@ -1,0 +1,85 @@
+{
+  "input": "hai-dcs-loops",
+  "made_by": "agent-made first pass (Claude, 2026-10-29); not confirmed by a person",
+  "license": "CC BY-SA 4.0; derivative, CC BY-SA 4.0",
+  "attribution": "H.-K. Shin, W. Lee, J.-H. Yun, B.-G. Min, HAI dataset (https://github.com/icsdataset/hai)",
+  "sources": [
+    "data/external/hai/hai_dataset_technical_details.pdf",
+    "data/external/hai/README.md (no loop detail; names P1 as the Emerson Ovation boiler process)",
+    "data/external/hai/graph/boiler/dcs_1001h.json, dcs_1002h.json, dcs_1003h.json, dcs_1020h.json",
+    "data/external/hai/graph/boiler/phy_boiler.json",
+    "scripts/corpus_adapters.py hai_dcs_candidates (called read-only)"
+  ],
+  "page_convention": "page = PDF page index (1-based). The printed page number in the PDF footer is one less.",
+  "status_meaning": {
+    "documented": "the PDF states this controller reads this measurement and moves this output; the row is in loops.csv or loops_leg2.csv",
+    "unresolved": "not put in a loop list; the reason says what the documents do and do not establish"
+  },
+  "controller_naming": "The DCS graphs have no controller tag and no block types. Controller names are the PDF's loop names (P1-PC, P1-LC, P1-FC, P1-TC, P1-CC). Measurement/output names are the DCS graph node names.",
+  "flagged_questions": {
+    "sheet_1001_PCV01_PCV02": {
+      "question": "sheet 1001 drives PCV01 and PCV02 from one block: split range or two loops?",
+      "answer": "One loop, one PID, two valves. Not two loops. Whether it is split range is not stated.",
+      "docs_say": [
+        "PDF p.8 (text + Fig. 4): P1-PC is one feedback loop for two pressure-control valves (PCV01D, PCV02D) holding PIT01 at setpoint B2016. The figure shows a single PID, saturation and rate limiter; the output goes to PCV01D directly and to PCV02D through a function block F(.).",
+        "PDF p.9-10 (text + Fig. 9): the same loop drawn as Ovation blocks; block 1001.21 emits DM-PCV01-D, which goes to 1001.22 (PCV01) and to 1001.23, which emits DM-PCV02-D to 1001.24 (PCV02). dcs_1001h.json has the same links.",
+        "PDF p.43 (case study, attack scenario AE05): manipulating DM-PCV01-D in 1001.21 also affects PCV01 and PCV02 data, i.e. PCV02 is derived from the PCV01 command.",
+        "PDF p.26 attack table: P1-PC lists only P1_PCV01D as its CV."
+      ],
+      "docs_do_not_say": "The words split range do not appear; the characteristic of F(.) (split range, ratio, offset, sequencing) is not given, nor its ranges.",
+      "how_listed": "P1-PC/PIT01/PCV01 in loops.csv and P1-PC/PIT01/PCV02 in loops_leg2.csv, following this repo's one-list-per-leg convention (bayer_loop_lists in scripts/corpus_matrix.py). This is a list-format choice, not a claim that the valves are split ranged."
+    },
+    "sheet_1003_TIT01_into_FT01_FT02": {
+      "question": "sheet 1003 joins TIT01 into the FT01/FT02 paths: cascade?",
+      "answer": "The PDF says P1-TC is a cascade (temperature outer loop, flow inner loop) with feed-forward on water flow. It does not name the inner flow controller, and it does not say whether FT02 is the inner loop's measurement or only the feed-forward input. FT01 is not part of the loop. Left unresolved; not in loops.csv.",
+      "docs_say": [
+        "PDF p.8 text: P1-TC is a feedback loop for two flow-control valves (FCV01D, FCV02D) holding TIT01 at setpoint B4022, using cascade control with feed-forward compensation to the flow controller (inner loop).",
+        "PDF p.9 Fig. 7: outer PID (B4022, TIT01) then saturation and rate limiter into a summing junction; FT02 through a function and rate limiter also enters that junction; the sum drives a second PID whose output goes to FCV01D directly and to FCV02D through a function F(.). The second PID has no separate measurement input drawn.",
+        "PDF p.27 attack table: P1-TC CV1 P1_FCV01D, PV1 P1_TIT01 (AP19/AP20). PDF p.27 AP22 and PDF p.29 AP45 give the P1-TC setpoint as P1_B4002, not B4022 as in Fig. 7.",
+        "PDF p.13 tag list: B4002 heat-exchanger outlet temperature setpoint; B4005 temperature PID control output; B400B water outflow rate setpoint (heating water tank, l/h); B4022 temperature demand for thermal power output control."
+      ],
+      "docs_do_not_say": "No tag for the inner (flow) controller; whether FT02 is the inner PV or a feed-forward; which of B4002/B4022 is the outer setpoint (the document gives both); that B400B is the inner setpoint (only suggested by its description and unit).",
+      "graph_observation_not_documentation": "In dcs_1003h.json FT01 reaches only the HMI (1003.19 -> 1003.20 -> 1003.21 -> HMI PV), so FT01 is display-only on this sheet. FT02 has two paths: 1003.4 -> 1003.5 -> 1003.26 (joins the TIT01 path from 1003.25) and 1003.6 -> 1003.8 (DM-FT02Z) -> 1003.11, which also takes HMI setpoint block 1003.10. The sheet has two HMI setpoints (1003.10, 1003.18) merging at 1003.30 before DM-FCV01-D; Fig. 7 shows one setpoint. The graph alone cannot say which block is a PID, a summer or a selector.",
+      "what_a_person_must_decide": "Either (a) one I/O-level row P1-TC,TIT01,FCV01 (+ FCV02 leg) as the attack table treats it, or (b) cascade rows: outer P1-TC,TIT01,<inner controller tag>, inner <tag>,FT02,FCV01 (+ FCV02 leg), which needs a name for the inner controller and confirmation that FT02 is its PV."
+    }
+  },
+  "loops": [
+    {"controller": "P1-PC", "measurement": "PIT01", "output": "PCV01", "status": "documented", "list": "loops.csv", "evidence": "PDF p.8 Fig. 4 and text: one PID holds PIT01 at B2016 by moving PCV01D; PDF p.26 attack table AP04/AP05 lists CV1 P1_PCV01D and PV1 P1_PIT01 for P1-PC; Fig. 9 (PDF p.10) and dcs_1001h.json carry PIT01 and PCV01."},
+    {"controller": "P1-PC", "measurement": "PIT01", "output": "PCV02", "status": "documented", "list": "loops_leg2.csv", "evidence": "PDF p.8 Fig. 4: same PID output reaches PCV02D through F(.); PDF p.10 Fig. 9: 1001.21 -> 1001.23 -> 1001.24 -> PCV02; PDF p.43: attack on DM-PCV01-D affects PCV02. Split range not stated."},
+    {"controller": "P1-LC", "measurement": "LIT01", "output": "LCV01", "status": "documented", "list": "loops.csv", "evidence": "PDF p.8 Fig. 5 and text: PID holds LIT01 at B3004 by moving LCV01D, with feed-forward of FC output FCV03D added after the PID; PDF p.27 AP16/AP17 lists CV1 P1_LCV01D, PV1 P1_LIT01."},
+    {"controller": "P1-FC", "measurement": "FT03", "output": "FCV03", "status": "documented", "list": "loops.csv", "evidence": "PDF p.8 Fig. 6 and text: PID holds FT03 at B3005 by moving FCV03D; PDF p.27 AP11/AP12 lists CV1 P1_FCV03D, PV1 P1_FT03."},
+    {"controller": "P1-TC", "measurement": "TIT01", "output": "FCV01 / FCV02 (via an untagged inner flow controller)", "status": "unresolved", "evidence": "PDF p.8 text and p.9 Fig. 7: cascade, outer on TIT01, inner flow PID drives FCV01D and (through F(.)) FCV02D; PDF p.27 AP19/AP20 CV1 P1_FCV01D, PV1 P1_TIT01.", "reason": "Cascade with no tag for the inner controller and no statement of the inner PV (FT02 may be PV or only feed-forward); setpoint given as B4022 (Fig. 7) and B4002 (attack table). See flagged_questions.sheet_1003_TIT01_into_FT01_FT02."},
+    {"controller": "P1-CC", "measurement": "TIT03 (graph: TWIT03?)", "output": "PP04", "status": "unresolved", "evidence": "PDF p.9 Fig. 8 and text: P1-CC drives cooling pump PP04 at setpoint PP04SP, activated when TIT03 (main water tank) is in its operating range; PDF p.27 AP23/AP24 and PDF p.29 AP46 list CV1 P1_PP04, PV1 P1_TIT03.", "reason": "Not a regulating loop on TIT03: the figure shows TIT03 only gating an activation switch while PP04 runs at a fixed setpoint. The DCS sheet 1020 has no node TIT03; it has TWIT03 (HAIEnd list PDF p.24: DM-TWIT-03 = temperature of main water tank TK01), while the same list maps DM-TIT02 to P1_TIT03 with a heating-tank description, so the tag correspondence is contradictory in the document. PP04 on sheet 1020 is fed by DM-PP04-AO/DM-PP04-D links, not a CO link, so hai_dcs_candidates finds no pair."},
+    {"controller": "P1-PC (PV2)", "measurement": "FIT01", "output": "PCV01", "status": "unresolved", "evidence": "PDF p.26 attack table AP03 lists PV2 P1_FIT01 for P1-PC.", "reason": "P1_FIT01 is not in the P1 tag list (PDF p.13-14) or the DCS graphs; probably a typo (for FT01?) in an attack-target table; an attack's second spoofed point, not stated as a loop measurement."}
+  ],
+  "candidate_pairs": [
+    {"sheet": "dcs_1001h", "controller": "P1-PC", "measurement": "PIT01", "output": "PCV01", "status": "documented", "evidence": "PDF p.8 Fig. 4; PDF p.26 AP04/AP05.", "list": "loops.csv"},
+    {"sheet": "dcs_1001h", "controller": "P1-PC", "measurement": "PIT01", "output": "PCV02", "status": "documented", "evidence": "PDF p.8 Fig. 4 (via F(.)); PDF p.10 Fig. 9; PDF p.43.", "list": "loops_leg2.csv"},
+    {"sheet": "dcs_1001h", "controller": "P1-PC", "measurement": "PP01", "output": "PCV01", "status": "unresolved", "evidence": "PDF p.10 Fig. 9: PP01A/PP01B run state (DM-PP01-R) enters 1001.10 -> 1001.11 -> 1001.17 in the P1-PC logic; PDF p.9 lists PP01A, PP01B among P1-PC I/O.", "reason": "Pump running state is a discrete input, not the loop measurement; the documents do not say what it does (likely a permissive/interlock or mode input). Not a loop."},
+    {"sheet": "dcs_1001h", "controller": "P1-PC", "measurement": "PP01", "output": "PCV02", "status": "unresolved", "evidence": "Same as PP01 -> PCV01 (PCV02 command is derived from the PCV01 command).", "reason": "Same as PP01 -> PCV01."},
+    {"sheet": "dcs_1002h", "controller": "P1-FC", "measurement": "FT03", "output": "FCV03", "status": "documented", "evidence": "PDF p.8 Fig. 6; PDF p.27 AP11/AP12.", "list": "loops.csv"},
+    {"sheet": "dcs_1002h", "controller": "P1-LC", "measurement": "LIT01", "output": "LCV01", "status": "documented", "evidence": "PDF p.8 Fig. 5; PDF p.27 AP16/AP17.", "list": "loops.csv"},
+    {"sheet": "dcs_1002h", "controller": "P1-LC", "measurement": "FT03", "output": "LCV01", "status": "unresolved", "evidence": "PDF p.8 text and Fig. 5: LC adds a feed-forward of the FC output (FCV03D) after its PID; in dcs_1002h.json the FT03 path reaches LCV01 through 1002.9 -> 1002.20 -> 1002.21. PDF p.29 AP42 lists FT03 as a second spoofed PV (PV2) of P1-LC.", "reason": "Documented as feed-forward (of the FC controller output, which is driven by FT03), not as a separate controller or as LC's measurement. loop_audit has no feed-forward row type."},
+    {"sheet": "dcs_1002h", "controller": "P1-FC", "measurement": "PP01", "output": "FCV03", "status": "unresolved", "evidence": "dcs_1002h.json: DM-PP01-R enters 1002.23 -> 1002.24 -> 1002.25 before DM-FCV03-D.", "reason": "Pump running state; role not documented (likely permissive). Not a loop."},
+    {"sheet": "dcs_1002h", "controller": "P1-LC", "measurement": "PP01", "output": "LCV01", "status": "unresolved", "evidence": "dcs_1002h.json: DM-PP01-R enters 1002.22 -> 1002.34 -> 1002.35 -> 1002.36 (DM-LCV01-D).", "reason": "Pump running state; role not documented (likely permissive). Not a loop."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC", "measurement": "TIT01", "output": "FCV01", "status": "unresolved", "evidence": "PDF p.8-9 Fig. 7; PDF p.27 AP19/AP20.", "reason": "Cascade: TIT01's controller moves the inner flow controller, which has no tag. See flagged_questions.sheet_1003_TIT01_into_FT01_FT02."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC", "measurement": "TIT01", "output": "FCV02", "status": "unresolved", "evidence": "PDF p.9 Fig. 7: FCV02D derived from the inner PID output through F(.); dcs_1003h.json 1003.31 -> 1003.33 (DM-FCV02-D) -> 1003.34 -> FCV02.", "reason": "Same cascade question, plus the second-leg question as for PCV02."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC inner (untagged)", "measurement": "FT02", "output": "FCV01", "status": "unresolved", "evidence": "PDF p.8 text mentions an inner flow controller and feed-forward on water flow; PDF p.9 Fig. 7 shows FT02 entering the summing junction before the inner PID.", "reason": "Not stated whether FT02 is the inner loop's PV or only a feed-forward; inner controller has no tag."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC inner (untagged)", "measurement": "FT02", "output": "FCV02", "status": "unresolved", "evidence": "As FT02 -> FCV01.", "reason": "As FT02 -> FCV01."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC", "measurement": "PP01", "output": "FCV01", "status": "unresolved", "evidence": "dcs_1003h.json: DM-PP01-R enters 1003.14/1003.15 into the FCV01 path.", "reason": "Pump running state; role not documented. Not a loop."},
+    {"sheet": "dcs_1003h", "controller": "P1-TC", "measurement": "PP01", "output": "FCV02", "status": "unresolved", "evidence": "As PP01 -> FCV01.", "reason": "As PP01 -> FCV01."}
+  ],
+  "sheets_without_candidates": {
+    "dcs_1004h": "Pump/heater/CIP sequence logic (PP01A/B, PP02, HT01, LSL01, TIT02); no CO link. The PDF describes no regulating loop for it.",
+    "dcs_1010h": "CIP sequence for the main tank (LSL01/LSH01, SOL01, SOL03); no CO link; sequence logic, not a loop.",
+    "dcs_1011h": "CIP sequence for the heating tank (LSL02/LSH02, SOL02, SOL04); no CO link; sequence logic, not a loop.",
+    "dcs_1020h": "P1-CC cooling control (TWIT03, LSH04, PP04, setpoint block 1020.12); see the P1-CC entry under loops."
+  },
+  "drawing_side": {
+    "can_build_loop_audit_key_from_phy_boiler": false,
+    "summary": "phy_boiler.json is a process (energy-flow) graph, not a P&ID. It has 41 equipment/sensor/valve nodes and 67 links, but no controller nodes and no signal lines, so a key.json built from it would have no controller symbol and no signal_edges, and every loop would come back not drawn. Signal edges could only be made by merging it with the DCS graphs through the DM- point names, and the loop list itself comes from the DCS sheets and PDF, so that audit would be circular.",
+    "what_it_does_give": "Node ids usable as printed text (PIT01, PCV01, PCV02, LIT01, LCV01, FT03, FCV03, TIT01, FT02, FCV01, FCV02, TWIT03, PP04 ...), a desc per node, and in_tags/out_tags naming the DCS points (e.g. PIT01 out DM-PIT01; PCV01 in DM-PCV01-D out DM-PCV01-Z). That supports at most a tags-present check, and a process-topology check (corpus row 8, pipe topology).",
+    "link_codes": "Each link has dynamics 1, 2 or 3 (45, 14 and 8 links). The PDF never states the numbers, but PDF p.47 Fig. 19 labels every edge Hydro&Thermo, Hydro or Thermo, and matching edges one by one gives 1 = Hydro&Thermo (equipment-to-equipment flow, grey), 2 = Hydro (to level/level-switch/pressure/flow sensors, blue), 3 = Thermo (to temperature sensors, heater -> TK02, HEX tube <-> shell, red). Checked examples: TK01->TWIT03 = 3 (red Thermo in Fig. 19), PCV01->PIT01 = 2 (blue Hydro), HT01->TK02 = 3, TK01->PP04 = 1. So the codes can be confirmed from the PDF figure by correspondence, not from a written legend.",
+    "defects_seen": "The node attributes type, device and dynamics are the same 41-entry tuple copied onto every node and are not aligned with node order (e.g. TIT01 would read Valve, PCV01 Pressure), so per-node types must not be read from them; use desc and the id prefix instead. FCV01's in_tags is P1_FCV01-D where every other node uses DM- names. PP01 in the DCS sheets is PP01A/PP01B here."
+  }
+}

@@ -185,8 +185,17 @@ def check(header, rows, ref=None, custom=None):
     units = ref["uom_sample"]["units"]
     report["uoms"] = {u: dict(uom_finding(u, units, custom), rows=c) for u, c in sorted(uoms.items())}
     for u, f in report["uoms"].items():
-        if f["status"] in ("spelling_differs", "not_in_vendor_sample"):
-            report["warnings"].append(f"UOM {u!r} ({f['rows']} rows): {f['status']}")
+        if f["status"] == "not_in_vendor_sample":
+            # A warning, not an error: the vendor list is a sample of AF's default UOM database, so a real unit can
+            # be missing from it. The check cannot tell 'furlongs' from a site unit it has no evidence for.
+            report["warnings"].append(
+                f"UOM {u!r} ({f['rows']} rows): not recognised: it is not in the vendor UOM sample, not a known "
+                "spelling of one, and not defined in custom_uoms.csv. The sample is only part of AF's default UOM "
+                "database, so check the site's UOM database, fix the unit, or define it as a custom UOM before import")
+        elif f["status"] == "spelling_differs":
+            report["warnings"].append(
+                f"UOM {u!r} ({f['rows']} rows): spelled differently from the vendor abbreviation "
+                f"{f['vendor_abbreviation']!r}; whether AF accepts this spelling is unknown")
     custom_used = sorted(u for u, f in report["uoms"].items() if f["status"] == "custom_defined")
     if custom_used:
         report["warnings"].append(f"units {custom_used} are defined in custom_uoms.csv: create them, or map them to "
@@ -210,6 +219,8 @@ def check(header, rows, ref=None, custom=None):
 
 
 def main(argv=None):
+    if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print arrows and units, don't crash
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("csv")
     ap.add_argument("--json", action="store_true", help="print the full JSON report")
@@ -231,7 +242,9 @@ def main(argv=None):
             print("ERROR  ", e)
         for w in report["warnings"]:
             print("WARN   ", w)
-        print("no errors" if not report["errors"] else f"{len(report['errors'])} errors")
+        n = len(report["warnings"])
+        warned = f", {n} warning{'s' if n != 1 else ''} to review" if n else ""
+        print(f"no errors{warned}" if not report["errors"] else f"{len(report['errors'])} errors{warned}")
     return 1 if report["errors"] else 0
 
 

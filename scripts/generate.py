@@ -122,6 +122,8 @@ def validate(model):
     problems += ["unit " + p for p in _filename_collisions(
         [u["id"] for u in model["units"] if _safe_filename(u["id"])], reserved=("overview",))]
     for u in model["units"]:
+        if not isinstance(u.get("name"), str) or not u["name"].strip():
+            problems.append(f"unit {u['id']}: missing name (a nonempty string; it is drawn and written into the exports)")
         if not _safe_filename(u["id"]):
             problems.append(f"unit {u['id']!r}: unsafe output filename")
         if u.get("type") not in SYMBOLS:
@@ -135,6 +137,13 @@ def validate(model):
     for t in {t for t in tags if tags.count(t) > 1}:
         problems.append(f"duplicate tag {t}")
     for item in model["instruments"] + model["final_elements"]:
+        for field in ("description", "uom"):
+            if not isinstance(item.get(field), str):
+                problems.append(f"{item['tag']}: missing {field} (a string; it names the tag and its engineering "
+                                "unit in the exports)")
+        if isinstance(item.get("description"), str) and not member_name(item["description"]):
+            problems.append(f"{item['tag']}: description {item['description']!r} has no letters or digits, so it "
+                            "would give an empty tag name in the exports")
         if item.get("unit") not in unit_ids:
             problems.append(f"{item['tag']}: unknown unit {item.get('unit')}")
         if item.get("stream") and item["stream"] not in stream_ids:
@@ -148,6 +157,15 @@ def validate(model):
         for end in (s.get("from"), s.get("to")):
             if end != "BL" and end not in unit_ids:
                 problems.append(f"stream {s['id']}: unknown endpoint {end}")
+    # Backstop: one Ignition UDT / PI AF element cannot hold two members with one name (import overwrites or fails).
+    for u in model["units"]:
+        items = [i for i in model["instruments"] + model["final_elements"]   # items_for order, tolerant of gaps
+                 if i.get("unit") == u["id"] and isinstance(i.get("description"), str) and isinstance(i.get("tag"), str)]
+        names = member_names(items)
+        for name in sorted({n for n in names if names.count(n) > 1}):
+            tags = ", ".join(i["tag"] for i, n in zip(items, names) if n == name)
+            problems.append(f"unit {u['id']}: duplicate member name {name} ({tags}); "
+                            "make the descriptions or tags differ in their letters or digits")
     return problems
 
 # ---------------------------------------------------------------- symbols (drawn around 0,0)
@@ -379,6 +397,15 @@ def member_name(desc):
     return re.sub(r"[^A-Za-z0-9]", "", desc.title())[:40]
 
 
+def member_names(items):
+    """Ignition UDT member / PI attribute names for one unit's items, in order. A name is the item's description cut
+    to 40 characters; where two items' names collide, each colliding item gets its tag appended, so a name that was
+    already unique never changes. validate() refuses any that still collide."""
+    base = [member_name(it["description"]) for it in items]
+    return [f'{b}_{re.sub(r"[^A-Za-z0-9]+", "_", it["tag"]).strip("_")}' if base.count(b) > 1 else b
+            for b, it in zip(base, items)]
+
+
 def seed_confidence(item):
     """Provenance passthrough (scripts/provenance.py): the seed outputs inherit the item's source check and review."""
     p = element(item)
@@ -386,22 +413,29 @@ def seed_confidence(item):
 
 
 def ignition_tags(model):
-    """Ignition 8.x tag JSON: one UDT type per equipment type + one instance per unit.
-    Members are OPC tags whose path is built from instance parameters. The asset exists and is
-    'ready to receive' a real equipment tag: set BasePath/OPCServer per instance on import."""
+    """Ignition 8.x tag JSON: one UDT type per unit, named by its equipment type, + one instance per unit. A second
+    unit of the same type has different instruments, so it gets its own type, named with its id (two types with one
+    name would collide on import). Members are OPC tags marked readOnly (monitoring only) whose path is built from
+    instance parameters: set BasePath/OPCServer per instance on import."""
     types, instances = [], []
+    used = set()
     for u in model["units"]:
         type_name = member_name(u["type"].replace("_", " "))
+        if type_name in used:
+            type_name = f"{type_name}_{member_name(u['id'])}"
+        used.add(type_name)
         members = []
-        for it in items_for(model, u["id"]):
+        unit_items = items_for(model, u["id"])
+        for it, name in zip(unit_items, member_names(unit_items)):
             idx = it.get("xmeas", it.get("xmv"))
             ref = f'{"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None else it.get("source", "model item")
             members.append({
-                "name": member_name(it["description"]),
+                "name": name,
                 "tagType": "AtomicTag",
                 "valueSource": "opc",
                 "dataType": "Float8",
                 "engUnit": it["uom"],
+                "readOnly": True,
                 "documentation": f'{it["tag"]} | {ref} | {it["description"]}'
                                  + seed_confidence(it),
                 "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
@@ -413,10 +447,12 @@ def ignition_tags(model):
                       "tags": members})
         instances.append({"name": u["id"], "tagType": "UdtInstance", "typeId": type_name,
                           "documentation": u["name"] + seed_confidence(u),
-                          "parameters": {"BasePath": {"dataType": "String", "value": f"ns=1;s=TE.{u['id']}"}}})
+                          "parameters": {"BasePath": {"dataType": "String",
+                                                      "value": f"ns=1;s={_point_prefix(model)}.{u['id']}"}}})
+    folder = "TE_Plant" if _model_id(model) == "te-process" else _model_id(model)
     return {"name": "", "tagType": "Provider", "tags": [
         {"name": "_types_", "tagType": "Folder", "tags": types},
-        {"name": "TE_Plant", "tagType": "Folder", "tags": instances},
+        {"name": folder, "tagType": "Folder", "tags": instances},
     ]}
 
 
@@ -442,8 +478,9 @@ def pi_af_rows(model):
     for u in model["units"]:
         rows.append(["x", root, u["id"], "Element", u["name"] + seed_confidence(u), member_name(u["type"].replace("_", " ")),
                      "", "", "", ""])
-        for it in items_for(model, u["id"]):
-            rows.append(["x", f"{root}\\{u['id']}", member_name(it["description"]), "Attribute",
+        unit_items = items_for(model, u["id"])
+        for it, name in zip(unit_items, member_names(unit_items)):
+            rows.append(["x", f"{root}\\{u['id']}", name, "Attribute",
                          f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", af_uom(it["uom"]), "PI Point",
                          f'\\\\%Server%\\{prefix}.{it["tag"]}.PV'])
     return rows
@@ -480,7 +517,8 @@ def review_rows(model):
         kind = "control valve / output" if is_final(it) else "measurement"
         idx = it.get("xmeas", it.get("xmv"))
         rows.append([it["tag"], kind, it["description"], unit_names[it["unit"]], it["uom"],
-                     f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None else it.get("source", ""),
+                     f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None
+                     else (it.get("source") or "NO SOURCE GIVEN"),
                      "seed", it.get("verification", {}).get("status", "unverified")] + ops_cols(it))
     return rows
 
@@ -1094,8 +1132,9 @@ def main():
     try:
         model = json.loads(model_path.read_text(encoding="utf-8"))
         if isinstance(model, dict) and isinstance(model.get("meta"), dict) and model["meta"].get("model_kind") == "extracted_twin":
-            written = export_twin(model, model_path.parent)
-            print(f"twin: wrote {', '.join(written)} next to {model_path}")
+            target = model_path.parent if out_dir == OUT else out_dir
+            written = export_twin(model, target)
+            print(f"twin: wrote {', '.join(written)} in {target}")
             return 0
         if isinstance(model, dict) and isinstance(model.get("units"), list) and isinstance(model.get("meta"), dict):
             model = _auto_layout(_mark_finals(model))
@@ -1112,6 +1151,11 @@ def main():
     print(f"wrote: {o}/svg ({len(model['units']) + 1} files), {o}/ignition/{tags_name}, "
           f"{o}/pi/ (PI Builder sheet v2, custom_uoms.csv, attribute_descriptions.csv, IMPORT_STEPS.txt; "
           f"not import-tested), {o}/ops_review_sheet.csv")
+    unsourced = [i["tag"] for i in model["instruments"] + model["final_elements"]
+                 if "xmeas" not in i and "xmv" not in i and not i.get("source")]
+    if unsourced:
+        print(f"warning: {len(unsourced)} item(s) cite no source ({', '.join(unsourced[:8])}); the review sheet marks "
+              f"them NO SOURCE GIVEN")
     print("structural validation: OK (not engineering or operations approval)")
     return 0
 

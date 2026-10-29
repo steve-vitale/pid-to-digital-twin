@@ -1,0 +1,22 @@
+﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
+x,,PressureVessel,ElementTemplate,Seed model unit type: pressure vessel,,,,,
+x,,Condenser,ElementTemplate,Seed model unit type: condenser,,,,,
+x,,Pump,ElementTemplate,Seed model unit type: pump,,,,,
+x,,HeatExchanger,ElementTemplate,Seed model unit type: heat exchanger,,,,,
+x,,bayer-residue-treater,Element,"Bayer CropScience methomyl residue treater (Institute, West Virginia), as described by the CSB",,,,,
+x,bayer-residue-treater,RT-1,Element,Residue treater | source check: unverified | ops review: unverified,PressureVessel,,,,
+x,bayer-residue-treater\RT-1,ResidueTreaterPressure,Attribute,,,Double,psig,PI Point,\\%Server%\bayer-residue-treater.PT-101.PV
+x,bayer-residue-treater\RT-1,ResidueTreaterLiquidLevel,Attribute,,,Double,%,PI Point,\\%Server%\bayer-residue-treater.LT-102.PV
+x,bayer-residue-treater\RT-1,ResidueTreaterTemperatureAsPlottedInFig1,Attribute,,,Double,C,PI Point,\\%Server%\bayer-residue-treater.TT-104.PV
+x,bayer-residue-treater\RT-1,SecondTemperatureMeasurementBulkLiquidOr,Attribute,,,Double,C,PI Point,\\%Server%\bayer-residue-treater.TT-105.PV
+x,bayer-residue-treater\RT-1,FeedControlValveFlasherBottoms,Attribute,,,Double,,PI Point,\\%Server%\bayer-residue-treater.FV-107.PV
+x,bayer-residue-treater\RT-1,DischargeControlValveToTheAlternateFuelT,Attribute,,,Double,,PI Point,\\%Server%\bayer-residue-treater.LV-102.PV
+x,bayer-residue-treater,E-1,Element,Vent condenser | source check: unverified | ops review: unverified,Condenser,,,,
+x,bayer-residue-treater,P-1,Element,Recirculation pump | source check: unverified | ops review: unverified,Pump,,,,
+x,bayer-residue-treater\P-1,RecirculationFlow,Attribute,,,Double,klb/h,PI Point,\\%Server%\bayer-residue-treater.FT-103.PV
+x,bayer-residue-treater,E-2,Element,Recirculation heater (steam) | source check: unverified | ops review: unverified,HeatExchanger,,,,
+x,bayer-residue-treater\E-2,IndicatedSteamFlowToTheHeater,Attribute,,,Double,klb/h,PI Point,\\%Server%\bayer-residue-treater.FT-106.PV
+x,bayer-residue-treater\E-2,RecirculationValveHeaterLeg,Attribute,,,Double,,PI Point,\\%Server%\bayer-residue-treater.TV-104A.PV
+x,bayer-residue-treater\E-2,SteamFlowValveToTheHeaterFig10Temperatur,Attribute,,,Double,,PI Point,\\%Server%\bayer-residue-treater.TV-104C.PV
+x,bayer-residue-treater,E-3,Element,Recirculation cooler (80 C water) | source check: unverified | ops review: unverified,HeatExchanger,,,,
+x,bayer-residue-treater\E-3,RecirculationValveCoolerLeg,Attribute,,,Double,,PI Point,\\%Server%\bayer-residue-treater.TV-104B.PV

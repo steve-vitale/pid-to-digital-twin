@@ -382,6 +382,10 @@ def isolation_points(model, dirs, equipment, external, area_links, recs):
     return pts
 
 
+LOTO_STATUS = ("DESIGN MOCKUP, NOT A PROCEDURE: unverified extraction; a valve the extraction missed is not listed; "
+               "isolation comes from the site's energy-control program and an authorized person")
+
+
 def main():
     model = json.loads(TWIN.read_text(encoding="utf-8"))
     dirs = json.loads(DIRS.read_text(encoding="utf-8"))
@@ -390,10 +394,11 @@ def main():
     (OUT / "plant_structure.json").write_text(json.dumps(doc, indent=1), encoding="utf-8")
     with (OUT / "loto_isolation_points.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["sheet", "id", "tag", "kind", "x0", "y0", "x1", "y1", "note"])
+        # The warning travels with every row: a spreadsheet filtered or copied out of this file must still say it.
+        w.writerow(["sheet", "id", "tag", "kind", "x0", "y0", "x1", "y1", "note", "status"])
         for p in sorted(doc["isolation_points"], key=lambda p: (int(p["sheet"]), p["kind"], p["id"])):
             w.writerow([p["sheet"], p["id"], p["tag"] or "", p["kind"], *[round(v, 1) for v in p["box_0_1000"]],
-                        p["note"]])
+                        p["note"], LOTO_STATUS])
     ul = Counter(u["direction"] for u in doc["unit_links"])
     al = Counter(e["direction"] for e in doc["area_links"])
     print("areas", len(doc["areas"]), "equipment", len(doc["equipment"]), "unit links", dict(ul),

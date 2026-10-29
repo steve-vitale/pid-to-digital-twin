@@ -38,10 +38,34 @@ Two packages are committed:
 |---|---|---|
 | `plant_model.json` | The asset model. Site → system (one per sheet) → equipment → line items → instruments, plus streams, off-page connectors and pairs, and per-item provenance (sheet, box, source run, model, confidence, status). It is a superset of `data/te_process_model.json`: `meta`, `units`, `streams`, `instruments` and `final_elements` keep their meaning, and `meta.model_kind = "extracted_twin"` tells the generator which path to take. | Your asset register, after review |
 | `review_queue.csv` | One row per item (symbols and connections), riskiest first. Columns `tier` (red / amber / green), `risk_score` and `why` come from the risk rating (see "Risk tiers" below). Same plain-language and `OPS_` columns as `out/ops_review_sheet.csv`, plus `rank`, `why_check_this` (the converter's own flags), `sheet`, `symbol`, location, `tag_status` and `how_attached`. | A spreadsheet, for the reviewer |
-| `ignition/tags.json` | Ignition 8 tag JSON, same shape as `out/ignition/te_tags.json`. UDT types per equipment class (`Equipment_Tank`, `Equipment_Pump`), per instrument type (`Instrument_PT`, `Instrument_TCV`, …) and per line-item class. Instances are foldered Site/System/Equipment, with an `_Unassigned` folder per system. | Ignition Designer → Tag Browser → Import Tags (JSON) |
+| `ignition/tags.json` | Ignition 8 tag JSON, same shape as `out/ignition/te_tags.json`. UDT types per equipment class (`Equipment_Tank`, `Equipment_Pump`), per instrument type (`Instrument_PT`, `Instrument_TCV`, …) and per line-item class. Instances are foldered Site/System/Equipment, with an `Unassigned` folder per system. See "Ignition tag paths and UDTs" below. | Ignition Designer → Tag Browser → Import Tags (JSON) |
 | `pi/pi_builder_af.csv` | PI Builder sheet (schema v2, same columns as `out/pi/pi_builder_af.csv`). Elements are Site / System / Equipment (plus `Unassigned`), with one PI Point attribute per instrument. Placeholder references are left unselected, so they are not published. **Not import-tested** | PI Builder (Excel add-in) → Publish, in the order in `pi/IMPORT_STEPS.txt` |
 | `pi/custom_uoms.csv`, `pi/attribute_descriptions.csv`, `pi/IMPORT_STEPS.txt`, `pi/reconciliation.json` | Unit definitions the site must create or map; attribute descriptions (kept out of the sheet); the publish order; the reconciliation record. See [PI_MAPPING.md](PI_MAPPING.md) | Read before publishing |
 | `svg/sheet_<n>.svg` | Each symbol drawn at its extracted box, each extracted connection as a straight line. Every symbol group carries `data-asset`, `data-tag`, `data-class`, `data-confidence`, `data-status` (and `data-parent` / `data-pair`). Low confidence shows red and dashed; placeholder tags show orange. | Ignition Perspective (Drawing / embedded SVG), bound by `data-asset` |
+
+### Ignition tag paths and UDTs
+
+A UDT (user-defined type) is Ignition's reusable tag template. `generate.py` (`twin_ignition`) writes:
+
+- **Tag paths** of the form `Site/<system>/<equipment>/<item>`. The system folder is named from the sheet (for
+  example `MSS_sheet_0`), the equipment folder is the equipment's tag (`MSS-XSS-140`), and each item is a UDT instance
+  inside it. Items with no connection path to equipment go in that system's `Unassigned` folder. Names are cleaned
+  to letters, digits, `_` and `-`, and made unique within their folder with a `_2`, `_3` suffix.
+- **Instance names** are the item's tag. An item with no tag read keeps its converter id, such as `S0-VL001` (sheet
+  0, valve 1), until a reviewer supplies the tag through the review sheet (`OPS_correct_value` = `tag=...`, applied
+  with `apply_review.py`) and the files are regenerated. The id is a key for this repository, not a plant tag.
+- **UDT types** are generated per group, not written as reusable templates: one per equipment class
+  (`Equipment_Tank`), one per instrument tag-letter group (`Instrument_PT`, `Instrument_FIT`, `Instrument_LIT`) and one
+  per line-item class. The 12-sheet twin has 37 types, because every letter group a drawing uses gets its own,
+  including plant-coded ones such as `Instrument_MSIV`. All instrument types have the same members (`PV`,
+  `ReviewStatus`) and parameters. To collapse them into your own templates by hand: pick or create one type (say an
+  analog-input UDT), change the `typeId` of the instances that should use it in `tags.json` (or in the Tag Browser
+  after import), then delete the unused types. Regenerating writes the generated types again, so do this on a copy
+  you keep.
+
+The PI sheet is an empty shell until an I/O list maps each point; placeholder references stay unselected so they are
+never published. The PI mapping step is `map_pi_points.py`, from reviewer-supplied PI references
+([PI_MAPPING.md](PI_MAPPING.md)).
 
 ## How the hierarchy is decided (and where it guesses)
 
@@ -96,7 +120,14 @@ Two packages are committed:
 - **Engineering units** are blank, and **data types** default to Float8 / Double. Switches and discrete signals
   need changing.
 - **The measured variable** comes from the ISA-5.1 first letter (T = temperature). Plant shorthand for operated
-  valves (`MOV`, `AOV`, `AORV`) gets no variable, because ISA would read MOV's M as "moisture".
+  valves (`MOV`, `AOV`, `AORV`) gets no variable, because ISA would read MOV's M as "moisture". Neither does a
+  plant-coded tag: a letter group that starts with a system code seen on its own sheet (the sheet's system code or
+  an equipment tag prefix; a code ending in S also matches without it, so MSS gives MS), such as `MSBV`, `MSIV` or
+  `MSV` on a main steam (MSS) sheet. Its `variable_method` says which code matched; only its last letter is read
+  (`instrument_kind` "valve (plant-coded tag)" for a ...V, none otherwise). Limits: a sheet with no
+  SYSTEM-TYPE-NUMBER equipment tag (and no sheet register) has no codes to match, so plant tags on it are still
+  read as ISA letters; a system code whose stem is also an ISA letter pair would hide real variables. On the OPEN100
+  extraction this changes 5 of 359 instruments, all on sheet 0 (`build_twin.plant_coded`).
 - **Asset ids** (`S2-VL004`) are converter keys, not plant tags. Placeholder tags on the drawing (`FCV XXX`,
   `MSCV-XXX`) are kept as written, flagged, and never filled in.
 - **Stream direction** is `unknown`. Extraction gives which items connect, not flow direction.
@@ -134,6 +165,69 @@ written. To get AF XML:
 1. Build one element by hand in PI System Explorer.
 2. Export it.
 3. Template the converter's output from that real export.
+
+## Loading and checking the platform files
+
+Two tools sit after `generate.py`: one checks a PI Builder sheet offline, the other pushes a tag file into an
+Ignition gateway. Neither approves anything; the review below still comes first.
+
+### Check a PI Builder sheet offline: `scripts/check_pi_export.py`
+
+```
+python scripts/check_pi_export.py out/pi/pi_builder_af.csv
+python scripts/check_pi_export.py out/twin/r2-tiles-trace/codex/pi/pi_builder_af.csv --json   # full report
+```
+
+It compares the sheet with the vendor conventions recorded in `data/pi_builder_reference.json` (each with its
+source and page). It is not a PI Builder import and cannot say a file will import.
+
+- **Errors** (exit 1) are internal inconsistencies only: duplicate rows (same Parent, Name and ObjectType), an
+  attribute whose Parent is not an element in the file, an element row carrying attribute fields, a PI Point
+  reference with no config string, a selected row whose point is a placeholder, an `ElementTemplate` with a Parent,
+  and a missing required column or an `ObjectType` the documented sheets don't show.
+- **Warnings** (exit 0) need a person: attribute types and units with no vendor evidence, units defined in the
+  `custom_uoms.csv` beside the sheet (the site creates or maps them), attributes with no unit, placeholder rows held
+  back, templates used before they are defined or not defined at all. A unit the check does not recognise
+  (`furlongs`) is a warning that says "not recognised", not an error: the vendor unit list is a sample of AF's
+  default UOM database, so absence from it is not proof.
+- Exit 2: the file can't be read.
+
+On the committed Tennessee Eastman sheet (output as printed, 2026-10-29):
+
+```
+OFFLINE CONVENTION CHECK ONLY; not a PI Builder import, not proof the file will import; NOT import-tested on a licensed PI system
+50 rows; object types {'ElementTemplate': 6, 'Element': 7, 'Attribute': 37}
+WARN    units ['kPa g', 'kg/h', 'kscmh', 'mol%'] are defined in custom_uoms.csv: create them, or map them to the site's own units, before publishing
+no errors, 1 warning to review
+```
+
+On the 12-sheet twin's sheet it reports 454 rows, no errors, and two warnings: 359 attributes have no unit, and
+358 placeholder point references are left unselected, so PI Builder will not publish them. More on the evidence and
+on what a plant with PI would run next: [PI_MAPPING.md](PI_MAPPING.md).
+
+### Push a tag file into Ignition: `scripts/ignition/import_tags.py`
+
+```
+python scripts/ignition/import_tags.py out/ignition/gateway/twin_provider.json --provider Twin
+```
+
+It sends one tag JSON file to the Ignition 8.3 REST API (`/data/api/v1/tags/import`, JSON, into the provider
+named by `--provider`). Pass `--provider Twin`: the committed Perspective screens bind to a provider of that name
+(it is also the default). `--collision` sets what happens to tags that already exist: `Overwrite` (default),
+`Abort`, `Rename`, `Ignore` or `MergeOverwrite`. It prints the gateway's status and reply, and exits 0 only when the
+call succeeds with no failed tags.
+
+The connection settings come from the environment (or a private file named by `IGNITION_ENV_FILE`), never from the
+repository: `IGNITION_URL` (default `https://localhost:8043`), `IGNITION_API_TOKEN` (an API key from Platform >
+Security > API Keys) and optionally `IGNITION_CA_FILE`. Without a CA file it skips certificate checks only for a
+gateway on `localhost`/`127.0.0.1` and refuses any other host (`scripts/ignition/gw.py`). A missing file or one that
+is not JSON is refused (exit 2) before any gateway is contacted.
+
+The tested path imports `twin_provider.json`, which `scripts/ignition/build_gateway.py --write-only` writes (the TE
+model plus this twin): see [IGNITION_QUICKSTART.md](IGNITION_QUICKSTART.md). A package's own `ignition/tags.json`
+has the same provider-level shape and goes through the same call, but importing it on its own this way has not been
+run here. Point it only at a disposable or development gateway, never a production one, until the review below is
+done; it was not run for this page.
 
 ## Risk tiers: where to spend review time
 

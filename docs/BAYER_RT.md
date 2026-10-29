@@ -39,8 +39,8 @@ record? It does not claim that better screens would have prevented the explosion
 neither we nor the data can show that.
 
 **How the incident is presented:** the casualties are stated once, factually, with the page (p. 1). Nobody is
-named. The replay ends at the failure time and says what happened there, without effects. The incident is never a
-post's hook; the lesson stays where the CSB put it, at the system level.
+named. The replay ends at the failure time and says what happened there, without effects. The incident is not used
+as a hook anywhere in this repository; the lesson stays where the CSB put it, at the system level.
 
 ## The process model: `data/bayer_rt/process_model.json`
 

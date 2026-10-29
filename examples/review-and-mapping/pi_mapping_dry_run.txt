@@ -1,0 +1,89 @@
+{
+  "valid": true,
+  "errors": [],
+  "mode": "partial",
+  "mappings_before": {},
+  "mappings_after": {
+    "S0-IN002": {
+      "archive": "EXAMPLE-ARCHIVE",
+      "point": "EX.FT1401.PV",
+      "value_type": "Double",
+      "uom": "kg/h",
+      "reviewed_by": "R1 (illustrative example)",
+      "review_note": "Illustrative only: a real point name comes from the plant's PI Data Archive"
+    },
+    "S0-IN004": {
+      "archive": "EXAMPLE-ARCHIVE",
+      "point": "EX.TE14084A.PV",
+      "value_type": "Double",
+      "uom": "degC",
+      "reviewed_by": "R1 (illustrative example)",
+      "review_note": "Illustrative only"
+    }
+  },
+  "mapping_changes": [
+    {
+      "asset_id": "S0-IN002",
+      "before": null,
+      "after": {
+        "archive": "EXAMPLE-ARCHIVE",
+        "point": "EX.FT1401.PV",
+        "value_type": "Double",
+        "uom": "kg/h",
+        "reviewed_by": "R1 (illustrative example)",
+        "review_note": "Illustrative only: a real point name comes from the plant's PI Data Archive"
+      },
+      "kind": "added"
+    },
+    {
+      "asset_id": "S0-IN004",
+      "before": null,
+      "after": {
+        "archive": "EXAMPLE-ARCHIVE",
+        "point": "EX.TE14084A.PV",
+        "value_type": "Double",
+        "uom": "degC",
+        "reviewed_by": "R1 (illustrative example)",
+        "review_note": "Illustrative only"
+      },
+      "kind": "added"
+    }
+  ],
+  "unmapped_asset_ids": [
+    "S0-IN001",
+    "S0-IN003",
+    "S0-IN005",
+    "S0-IN006",
+    "S0-IN007",
+    "S0-IN008",
+    "S0-IN009",
+    "S0-IN010",
+    "S0-IN011",
+    "S0-IN012",
+    "S0-IN013",
+    "S0-IN014",
+    "S0-IN015",
+    "S0-IN016",
+    "S0-IN017",
+    "S0-IN018",
+    "S0-IN019",
+    "S0-IN020",
+    "S0-IN021",
+    "S0-IN022",
+    "S0-IN023",
+    "S0-IN024",
+    "S0-IN025",
+    "S0-IN026",
+    "S0-IN027",
+    "S0-IN028",
+    "S0-IN029",
+    "S0-IN030",
+    "S0-IN031",
+    "S0-IN032",
+    "S0-IN033",
+    "S0-IN034",
+    "S0-IN035",
+    "S0-IN036"
+  ],
+  "dry_run": true
+}

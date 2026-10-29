@@ -41,7 +41,7 @@ def first_sentence(path, override=None):
     doc = " ".join(doc.split())
     if not doc:
         return ""
-    m = re.match(r"(.+?[.:!?])(\s|$)", doc)
+    m = re.match(r"(.+?[.!?])(\s|$)", doc)  # a colon introduces the rest of the sentence; it doesn't end it
     return (m.group(1) if m else doc)[:220]
 
 
@@ -78,7 +78,17 @@ def render(reg):
     return "\n".join(lines)
 
 
+USAGE = "usage: python scripts/script_index.py [--check]"
+
+
 def main(argv):
+    if "-h" in argv or "--help" in argv:  # print usage; never regenerate anything on a help request
+        print(__doc__)
+        return 0
+    unknown = [a for a in argv if a != "--check"]
+    if unknown:  # a typo such as --chek must not silently regenerate docs/SCRIPTS.md
+        print(f"{USAGE}\nscript_index.py: error: unrecognized argument(s): {' '.join(unknown)}", file=sys.stderr)
+        return 2
     reg = json.loads(REGISTRY.read_text(encoding="utf-8"))
     bad = problems(reg, discover())
     text = render(reg) if not bad else None

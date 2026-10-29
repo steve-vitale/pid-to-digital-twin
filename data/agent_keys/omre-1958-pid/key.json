@@ -1,0 +1,1249 @@
+{
+ "about": "AGENT-MADE answer keys (first pass), PID2Graph-style. See data/agent_keys/README.md.",
+ "sheets": {
+  "omre_q4": {
+   "size_px": [
+    2000,
+    1633
+   ],
+   "image": "data/external/wikimedia-pid/Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg cropped to x 2000-4000, y 1633-3266 (PIL crop box (2000, 1633, 4000, 3266)); key coordinates are in the crop's pixels; image_sha256 is of the full uncropped file",
+   "image_sha256": "c882b82993975cef78f37239e10f51ad99434b53186adcbf2fccb2f51ab12051",
+   "symbols": {
+    "t_dist": {
+     "class": "tank",
+     "box": [
+      393,
+      203,
+      681,
+      354
+     ],
+     "text": "78711"
+    },
+    "t_still": {
+     "class": "tank",
+     "box": [
+      914,
+      253,
+      1054,
+      469
+     ],
+     "text": "78521"
+    },
+    "t_feed": {
+     "class": "tank",
+     "box": [
+      59,
+      588,
+      354,
+      754
+     ],
+     "text": "78761"
+    },
+    "t_wht": {
+     "class": "tank",
+     "box": [
+      1220,
+      593,
+      1437,
+      701
+     ],
+     "text": "78751"
+    },
+    "t_wst": {
+     "class": "tank",
+     "box": [
+      83,
+      1076,
+      747,
+      1360
+     ],
+     "text": "78727"
+    },
+    "p_still": {
+     "class": "pump",
+     "box": [
+      527,
+      720,
+      600,
+      787
+     ],
+     "text": "78121"
+    },
+    "p_feed": {
+     "class": "pump",
+     "box": [
+      0,
+      829,
+      38,
+      904
+     ],
+     "text": "78141"
+    },
+    "p_vac": {
+     "class": "pump",
+     "box": [
+      1372,
+      1130,
+      1427,
+      1179
+     ],
+     "text": null
+    },
+    "g_trap": {
+     "class": "general",
+     "box": [
+      441,
+      37,
+      477,
+      129
+     ],
+     "text": "78 22"
+    },
+    "g_cond": {
+     "class": "general",
+     "box": [
+      575,
+      109,
+      638,
+      205
+     ],
+     "text": "78511"
+    },
+    "g_cooler": {
+     "class": "general",
+     "box": [
+      741,
+      493,
+      828,
+      603
+     ],
+     "text": "78221"
+    },
+    "g_heater": {
+     "class": "general",
+     "box": [
+      932,
+      463,
+      1030,
+      532
+     ],
+     "text": null
+    },
+    "g_orifice": {
+     "class": "general",
+     "box": [
+      58,
+      855,
+      73,
+      879
+     ],
+     "text": null
+    },
+    "g_tube1": {
+     "class": "general",
+     "box": [
+      1097,
+      1189,
+      1147,
+      1252
+     ],
+     "text": null
+    },
+    "g_tube2": {
+     "class": "general",
+     "box": [
+      1202,
+      1191,
+      1252,
+      1255
+     ],
+     "text": null
+    },
+    "g_tube3": {
+     "class": "general",
+     "box": [
+      1307,
+      1191,
+      1352,
+      1252
+     ],
+     "text": null
+    },
+    "g_coldtrap": {
+     "class": "general",
+     "box": [
+      1448,
+      1187,
+      1543,
+      1247
+     ],
+     "text": null
+    },
+    "v_cv_cw": {
+     "class": "valve",
+     "box": [
+      26,
+      70,
+      61,
+      150
+     ],
+     "text": null
+    },
+    "v_trap": {
+     "class": "valve",
+     "box": [
+      442,
+      0,
+      465,
+      24
+     ],
+     "text": null
+    },
+    "v_317": {
+     "class": "valve",
+     "box": [
+      181,
+      388,
+      204,
+      430
+     ],
+     "text": "1-4"
+    },
+    "v_25a": {
+     "class": "valve",
+     "box": [
+      343,
+      449,
+      384,
+      507
+     ],
+     "text": "2-5"
+    },
+    "v_feedbot": {
+     "class": "valve",
+     "box": [
+      127,
+      778,
+      187,
+      822
+     ],
+     "text": "2-5"
+    },
+    "v_check_fp": {
+     "class": "valve",
+     "box": [
+      37,
+      856,
+      53,
+      878
+     ],
+     "text": null
+    },
+    "v_future": {
+     "class": "valve",
+     "box": [
+      172,
+      852,
+      214,
+      882
+     ],
+     "text": null
+    },
+    "v_suct": {
+     "class": "valve",
+     "box": [
+      549,
+      675,
+      571,
+      708
+     ],
+     "text": null
+    },
+    "v_dis": {
+     "class": "valve",
+     "box": [
+      659,
+      701,
+      705,
+      744
+     ],
+     "text": "3/4-23"
+    },
+    "v_cw256": {
+     "class": "valve",
+     "box": [
+      674,
+      493,
+      716,
+      551
+     ],
+     "text": null
+    },
+    "v_cdrain": {
+     "class": "valve",
+     "box": [
+      744,
+      618,
+      762,
+      645
+     ],
+     "text": null
+    },
+    "v_203": {
+     "class": "valve",
+     "box": [
+      1219,
+      282,
+      1253,
+      311
+     ],
+     "text": null
+    },
+    "v_123a": {
+     "class": "valve",
+     "box": [
+      1264,
+      319,
+      1290,
+      359
+     ],
+     "text": "1-23"
+    },
+    "v_210": {
+     "class": "valve",
+     "box": [
+      1106,
+      522,
+      1138,
+      551
+     ],
+     "text": "2-5"
+    },
+    "v_14b": {
+     "class": "valve",
+     "box": [
+      1397,
+      490,
+      1439,
+      548
+     ],
+     "text": "1-4"
+    },
+    "v_stillout": {
+     "class": "valve",
+     "box": [
+      978,
+      761,
+      999,
+      799
+     ],
+     "text": "2-5"
+    },
+    "v_samp": {
+     "class": "valve",
+     "box": [
+      1181,
+      714,
+      1213,
+      741
+     ],
+     "text": "2-5"
+    },
+    "v_whtbot": {
+     "class": "valve",
+     "box": [
+      1249,
+      751,
+      1302,
+      798
+     ],
+     "text": "2-5"
+    },
+    "v_t1": {
+     "class": "valve",
+     "box": [
+      1132,
+      1153,
+      1151,
+      1188
+     ],
+     "text": null
+    },
+    "v_t2": {
+     "class": "valve",
+     "box": [
+      1239,
+      1162,
+      1261,
+      1198
+     ],
+     "text": null
+    },
+    "v_t3": {
+     "class": "valve",
+     "box": [
+      1336,
+      1158,
+      1355,
+      1193
+     ],
+     "text": null
+    },
+    "v_123b": {
+     "class": "valve",
+     "box": [
+      1036,
+      1270,
+      1063,
+      1292
+     ],
+     "text": "1-23"
+    },
+    "v_vp": {
+     "class": "valve",
+     "box": [
+      1428,
+      1146,
+      1446,
+      1164
+     ],
+     "text": null
+    },
+    "v_ct": {
+     "class": "valve",
+     "box": [
+      1526,
+      1160,
+      1549,
+      1196
+     ],
+     "text": null
+    },
+    "i_btic257v": {
+     "class": "instrumentation",
+     "box": [
+      90,
+      41,
+      136,
+      87
+     ],
+     "text": "BTIC 257V"
+    },
+    "i_e12": {
+     "class": "instrumentation",
+     "box": [
+      146,
+      55,
+      175,
+      84
+     ],
+     "text": "E12"
+    },
+    "i_b4": {
+     "class": "instrumentation",
+     "box": [
+      246,
+      0,
+      283,
+      28
+     ],
+     "text": "B4"
+    },
+    "i_ab": {
+     "class": "instrumentation",
+     "box": [
+      349,
+      5,
+      382,
+      38
+     ],
+     "text": "AB"
+    },
+    "i_btim305": {
+     "class": "instrumentation",
+     "box": [
+      374,
+      95,
+      418,
+      137
+     ],
+     "text": "BTIM 305"
+    },
+    "i_bhpa301": {
+     "class": "instrumentation",
+     "box": [
+      341,
+      157,
+      379,
+      195
+     ],
+     "text": "BHPA 301"
+    },
+    "i_bpi301": {
+     "class": "instrumentation",
+     "box": [
+      379,
+      157,
+      416,
+      195
+     ],
+     "text": "BPI 301"
+    },
+    "i_bli301": {
+     "class": "instrumentation",
+     "box": [
+      328,
+      249,
+      368,
+      291
+     ],
+     "text": "BLI 301"
+    },
+    "i_btim301": {
+     "class": "instrumentation",
+     "box": [
+      325,
+      297,
+      368,
+      339
+     ],
+     "text": "BTIM 301"
+    },
+    "i_b2": {
+     "class": "instrumentation",
+     "box": [
+      526,
+      121,
+      555,
+      150
+     ],
+     "text": "B2"
+    },
+    "i_btrm304": {
+     "class": "instrumentation",
+     "box": [
+      604,
+      17,
+      648,
+      63
+     ],
+     "text": "BTRM 304"
+    },
+    "i_bpi304": {
+     "class": "instrumentation",
+     "box": [
+      664,
+      21,
+      702,
+      63
+     ],
+     "text": "BPI 304"
+    },
+    "i_blank": {
+     "class": "instrumentation",
+     "box": [
+      733,
+      307,
+      770,
+      344
+     ],
+     "text": null
+    },
+    "i_sprc300": {
+     "class": "instrumentation",
+     "box": [
+      834,
+      297,
+      879,
+      343
+     ],
+     "text": "SPRC 300"
+    },
+    "i_bli300": {
+     "class": "instrumentation",
+     "box": [
+      1082,
+      317,
+      1122,
+      359
+     ],
+     "text": "BLI 300"
+    },
+    "i_btrc300": {
+     "class": "instrumentation",
+     "box": [
+      1082,
+      392,
+      1125,
+      437
+     ],
+     "text": "BTRC 300"
+    },
+    "i_bhpa253": {
+     "class": "instrumentation",
+     "box": [
+      80,
+      429,
+      118,
+      459
+     ],
+     "text": "BHPA 253"
+    },
+    "i_bpi253": {
+     "class": "instrumentation",
+     "box": [
+      118,
+      429,
+      158,
+      459
+     ],
+     "text": "BPI 253"
+    },
+    "i_lc256": {
+     "class": "instrumentation",
+     "box": [
+      673,
+      451,
+      712,
+      490
+     ],
+     "text": "LC 256"
+    },
+    "i_d5": {
+     "class": "instrumentation",
+     "box": [
+      871,
+      472,
+      906,
+      507
+     ],
+     "text": "D5"
+    },
+    "i_bli253": {
+     "class": "instrumentation",
+     "box": [
+      381,
+      602,
+      420,
+      643
+     ],
+     "text": "BLI 253"
+    },
+    "i_btim253": {
+     "class": "instrumentation",
+     "box": [
+      383,
+      693,
+      424,
+      737
+     ],
+     "text": "BTIM 253"
+    },
+    "i_bpi302": {
+     "class": "instrumentation",
+     "box": [
+      492,
+      639,
+      530,
+      679
+     ],
+     "text": "BPI 302"
+    },
+    "i_btrm303": {
+     "class": "instrumentation",
+     "box": [
+      811,
+      620,
+      855,
+      665
+     ],
+     "text": "BTRM 303"
+    },
+    "i_a4": {
+     "class": "instrumentation",
+     "box": [
+      618,
+      669,
+      659,
+      710
+     ],
+     "text": "A4"
+    },
+    "i_a2": {
+     "class": "instrumentation",
+     "box": [
+      793,
+      708,
+      830,
+      745
+     ],
+     "text": "A2"
+    },
+    "i_c3": {
+     "class": "instrumentation",
+     "box": [
+      472,
+      723,
+      512,
+      763
+     ],
+     "text": "C3"
+    },
+    "i_c2": {
+     "class": "instrumentation",
+     "box": [
+      670,
+      825,
+      703,
+      858
+     ],
+     "text": "C2"
+    },
+    "i_b6": {
+     "class": "instrumentation",
+     "box": [
+      711,
+      818,
+      744,
+      851
+     ],
+     "text": "B6"
+    },
+    "i_j4": {
+     "class": "instrumentation",
+     "box": [
+      100,
+      928,
+      141,
+      969
+     ],
+     "text": "J4"
+    },
+    "i_e11": {
+     "class": "instrumentation",
+     "box": [
+      1089,
+      607,
+      1124,
+      642
+     ],
+     "text": "E11"
+    },
+    "i_bhpa254": {
+     "class": "instrumentation",
+     "box": [
+      1351,
+      409,
+      1384,
+      448
+     ],
+     "text": "BHPA 254"
+    },
+    "i_bpi254": {
+     "class": "instrumentation",
+     "box": [
+      1351,
+      451,
+      1384,
+      499
+     ],
+     "text": "BPI 254"
+    },
+    "i_bli254": {
+     "class": "instrumentation",
+     "box": [
+      1142,
+      594,
+      1180,
+      632
+     ],
+     "text": "BLI 254"
+    },
+    "i_btim254": {
+     "class": "instrumentation",
+     "box": [
+      1139,
+      639,
+      1182,
+      680
+     ],
+     "text": "BTIM 254"
+    },
+    "i_b7a": {
+     "class": "instrumentation",
+     "box": [
+      1253,
+      1044,
+      1294,
+      1085
+     ],
+     "text": "B7"
+    },
+    "i_b7b": {
+     "class": "instrumentation",
+     "box": [
+      974,
+      1338,
+      1007,
+      1371
+     ],
+     "text": "B7"
+    },
+    "i_a5": {
+     "class": "instrumentation",
+     "box": [
+      1127,
+      1331,
+      1156,
+      1360
+     ],
+     "text": "A5"
+    },
+    "io_steamvent": {
+     "class": "inlet/outlet",
+     "box": [
+      739,
+      383,
+      756,
+      401
+     ],
+     "text": "STEAM TO ATMOSPHERE"
+    },
+    "io_326": {
+     "class": "inlet/outlet",
+     "box": [
+      779,
+      829,
+      798,
+      851
+     ],
+     "text": "FROM EQ 78641"
+    },
+    "io_future": {
+     "class": "inlet/outlet",
+     "box": [
+      247,
+      856,
+      261,
+      878
+     ],
+     "text": "FUTURE CONNECTION"
+    },
+    "io_port": {
+     "class": "inlet/outlet",
+     "box": [
+      1150,
+      717,
+      1165,
+      735
+     ],
+     "text": "SAMP. OR TO PORT CONT."
+    },
+    "io_cup": {
+     "class": "inlet/outlet",
+     "box": [
+      1648,
+      875,
+      1668,
+      902
+     ],
+     "text": null
+    },
+    "io_blower": {
+     "class": "inlet/outlet",
+     "box": [
+      1292,
+      997,
+      1328,
+      1019
+     ],
+     "text": "TO BLOWER"
+    }
+   },
+   "edges": [
+    [
+     "g_coldtrap",
+     "v_ct"
+    ],
+    [
+     "g_coldtrap",
+     "v_vp"
+    ],
+    [
+     "g_cond",
+     "j_218"
+    ],
+    [
+     "g_cond",
+     "j_btrm304"
+    ],
+    [
+     "g_cond",
+     "t_dist"
+    ],
+    [
+     "g_cooler",
+     "i_lc256"
+    ],
+    [
+     "g_cooler",
+     "io_steamvent"
+    ],
+    [
+     "g_cooler",
+     "j_303"
+    ],
+    [
+     "g_cooler",
+     "j_bpi304"
+    ],
+    [
+     "g_cooler",
+     "v_cdrain"
+    ],
+    [
+     "g_cooler",
+     "v_cw256"
+    ],
+    [
+     "g_orifice",
+     "i_j4"
+    ],
+    [
+     "g_orifice",
+     "j_fp1"
+    ],
+    [
+     "g_orifice",
+     "v_check_fp"
+    ],
+    [
+     "g_trap",
+     "i_btim305"
+    ],
+    [
+     "g_trap",
+     "j_trap"
+    ],
+    [
+     "g_trap",
+     "v_trap"
+    ],
+    [
+     "g_tube1",
+     "j_b1"
+    ],
+    [
+     "g_tube1",
+     "v_t1"
+    ],
+    [
+     "g_tube2",
+     "j_b2"
+    ],
+    [
+     "g_tube2",
+     "v_t2"
+    ],
+    [
+     "g_tube3",
+     "j_b2"
+    ],
+    [
+     "g_tube3",
+     "v_t3"
+    ],
+    [
+     "i_ab",
+     "v_trap"
+    ],
+    [
+     "i_b2",
+     "j_13"
+    ],
+    [
+     "i_bli253",
+     "t_feed"
+    ],
+    [
+     "i_bli254",
+     "t_wht"
+    ],
+    [
+     "i_bli300",
+     "t_still"
+    ],
+    [
+     "i_bli301",
+     "t_dist"
+    ],
+    [
+     "i_bpi253",
+     "j_bpi253"
+    ],
+    [
+     "i_bpi254",
+     "j_254"
+    ],
+    [
+     "i_bpi301",
+     "j_301"
+    ],
+    [
+     "i_bpi302",
+     "j_302"
+    ],
+    [
+     "i_bpi304",
+     "j_bpi304"
+    ],
+    [
+     "i_btim253",
+     "t_feed"
+    ],
+    [
+     "i_btim254",
+     "t_wht"
+    ],
+    [
+     "i_btim301",
+     "t_dist"
+    ],
+    [
+     "i_btrc300",
+     "t_still"
+    ],
+    [
+     "i_btrm303",
+     "j_303"
+    ],
+    [
+     "i_btrm304",
+     "j_btrm304"
+    ],
+    [
+     "i_sprc300",
+     "t_still"
+    ],
+    [
+     "io_326",
+     "j_326"
+    ],
+    [
+     "io_cup",
+     "j_319"
+    ],
+    [
+     "io_future",
+     "v_future"
+    ],
+    [
+     "io_port",
+     "v_samp"
+    ],
+    [
+     "j_13",
+     "j_trap"
+    ],
+    [
+     "j_213",
+     "t_wht"
+    ],
+    [
+     "j_213",
+     "v_123a"
+    ],
+    [
+     "j_213",
+     "v_210"
+    ],
+    [
+     "j_218",
+     "t_still"
+    ],
+    [
+     "j_218",
+     "v_ct"
+    ],
+    [
+     "j_219",
+     "j_326"
+    ],
+    [
+     "j_219",
+     "j_so"
+    ],
+    [
+     "j_219",
+     "v_123b"
+    ],
+    [
+     "j_254",
+     "t_wht"
+    ],
+    [
+     "j_254",
+     "v_14b"
+    ],
+    [
+     "j_301",
+     "j_trap"
+    ],
+    [
+     "j_301",
+     "t_dist"
+    ],
+    [
+     "j_302",
+     "t_dist"
+    ],
+    [
+     "j_302",
+     "v_suct"
+    ],
+    [
+     "j_303",
+     "v_dis"
+    ],
+    [
+     "j_318",
+     "j_319"
+    ],
+    [
+     "j_318",
+     "v_14b"
+    ],
+    [
+     "j_319",
+     "t_wst"
+    ],
+    [
+     "j_326",
+     "t_wst"
+    ],
+    [
+     "j_b1",
+     "j_b2"
+    ],
+    [
+     "j_b1",
+     "v_123b"
+    ],
+    [
+     "j_bpi253",
+     "t_feed"
+    ],
+    [
+     "j_bpi253",
+     "v_317"
+    ],
+    [
+     "j_bpi304",
+     "j_btrm304"
+    ],
+    [
+     "j_fp1",
+     "j_fp2"
+    ],
+    [
+     "j_fp2",
+     "v_feedbot"
+    ],
+    [
+     "j_fp2",
+     "v_future"
+    ],
+    [
+     "j_pump",
+     "p_still"
+    ],
+    [
+     "j_pump",
+     "v_dis"
+    ],
+    [
+     "j_pump",
+     "v_t1"
+    ],
+    [
+     "j_samp",
+     "t_wht"
+    ],
+    [
+     "j_samp",
+     "v_samp"
+    ],
+    [
+     "j_samp",
+     "v_whtbot"
+    ],
+    [
+     "j_so",
+     "v_stillout"
+    ],
+    [
+     "j_so",
+     "v_whtbot"
+    ],
+    [
+     "j_still",
+     "j_still2"
+    ],
+    [
+     "j_still",
+     "t_still"
+    ],
+    [
+     "j_still",
+     "v_stillout"
+    ],
+    [
+     "j_still2",
+     "v_210"
+    ],
+    [
+     "j_still2",
+     "v_t2"
+    ],
+    [
+     "p_feed",
+     "v_check_fp"
+    ],
+    [
+     "p_still",
+     "v_suct"
+    ],
+    [
+     "p_vac",
+     "v_vp"
+    ],
+    [
+     "t_dist",
+     "v_25a"
+    ],
+    [
+     "t_feed",
+     "v_25a"
+    ],
+    [
+     "t_feed",
+     "v_feedbot"
+    ],
+    [
+     "t_still",
+     "v_203"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "g_heater",
+     "i_sprc300"
+    ],
+    [
+     "i_lc256",
+     "v_cw256"
+    ]
+   ]
+  }
+ }
+}

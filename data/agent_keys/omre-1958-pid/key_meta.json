@@ -1,0 +1,151 @@
+{
+ "about": "Provenance for the AGENT-MADE answer keys in this folder. Read data/agent_keys/README.md first.",
+ "input_id": "omre-1958-pid",
+ "sheets": {
+  "omre_q4": {
+   "made_by": "agent-made, first pass (Claude Opus 5.5 coding agent, 2026-10-29); not reviewed by a person",
+   "image": "data/external/wikimedia-pid/Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg cropped to x 2000-4000, y 1633-3266 (PIL crop box (2000, 1633, 4000, 3266)); key coordinates are in the crop's pixels; image_sha256 is of the full uncropped file",
+   "image_sha256": "c882b82993975cef78f37239e10f51ad99434b53186adcbf2fccb2f51ab12051",
+   "size_px": [
+    2000,
+    1633
+   ],
+   "source_region_px": [
+    2000,
+    1633,
+    4000,
+    3266
+   ],
+   "license": "Public domain (US Government work; Commons file page)",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg",
+   "attribution": "US Atomic Energy Commission, OMRE P&ID (OSTI 4307822)",
+   "key_license": "no restriction from the source",
+   "counts": {
+    "symbols": 85,
+    "by_class": {
+     "general": 9,
+     "inlet/outlet": 6,
+     "instrumentation": 38,
+     "pump": 3,
+     "tank": 5,
+     "valve": 24
+    },
+    "junctions": 24,
+    "edges": 95,
+    "edges_by_kind": {
+     "p_process": 72,
+     "i_instrument_connection": 21,
+     "s_signal": 2
+    }
+   },
+   "hard": [
+    "Feed pump 78141 centre (x~2004) is only just inside the region edge x=2000; its box is clipped to x0=2000 and its suction side (check valve, inlet line) lies outside the region.",
+    "B4 circle centre y~1642 is just inside the top edge y=1633; box clipped to y0=1633. The still-vapor-trap top valve (v_trap) is likewise clipped at y=1633.",
+    "Circled letter+digit symbols (B2, B4, AB, A2, A4, A5, B6, B7 x2, C2, C3, D5, E11, E12, J4) are 'local mounted instr.' per the sheet legend; keyed as instrumentation per the brief as test points / sample points. Most have no drawn connecting line; only B2, AB and J4 are linked (i).",
+    "Boxed tags (BTIC/BHPA/BPI/BLI/BTIM/BTRM/BTRC/SPRC) are board-mounted instruments, keyed as instrumentation. Side-by-side BHPA+BPI pairs share one tap line drawn from the BPI box, so only the BPI box gets the i-edge.",
+    "Crossings vs joins: this sheet draws a crossing as a semicircular hop on one of the two lines; a plain T meeting with no hop is treated as a join. The long verticals x~2966 (216-1/2-P), x~3010 (217-1/2-P), x~3262, x~3480 and x~3533 hop over the 319-1-Q (y~2507) and 211-2-P (y~2547) horizontals.",
+    "Heavy double / solid+dashed lines are preheated process lines (legend: lines to be preheated to 500F); keyed as ordinary p edges along the solid pipe; the dashed tracer outlines (around 208-4-P/218-1/2-P and sample tube 2) are not edges.",
+    "The still bottom outlet at x~2988, y~2172 is drawn through the electric heater coil with heavy scan noise; read as a tee into a right-going branch that tees again at x~3008 (210-2-P right, 217-1/2-P down). These may be one tee in the drawing.",
+    "218-1/2-P is read as branching up off 208-4-P at x~2830 (vapour line), running right along y~1706, then down x~3530 to the cold-trap valve; the vertical x~3480 next to it is a separate line from above the region feeding sample tube 3 (no edge beyond the tube).",
+    "The vertical from the still cooler (207-3/4-P, x~2787) runs up to y~1706 and left to the condenser head; BTRM 304 and BPI 304 tap it. Treated as a process line condenser<->cooler.",
+    "The sample hood (thin outline enclosure) is not keyed as a symbol; its TO BLOWER nozzle is keyed as inlet/outlet with no edges.",
+    "The dash-dot control valve at x~2043, y~1743 belongs to 'lines and equipment appearing ref P&I dwgs' (cooling-water system); keyed as a valve but its lines leave the region, so no edges.",
+    "Line labels in ovals (208-4-P, 319-1-Q, ...) are not keyed; the short valve-spec ovals next to valves (2-5, 1-4, 1-23, 3/4-23) are recorded as the valve tag text where adjacent."
+   ],
+   "uncertain": [
+    {
+     "id": "g_orifice",
+     "why": "small '||' pair after the feed-pump check valve, pointed at by J4; could be a flange pair/union rather than a flow element"
+    },
+    {
+     "id": "i_blank",
+     "why": "empty circle with no text and no line near the steam vent; keyed as instrumentation"
+    },
+    {
+     "id": "g_heater",
+     "why": "electric heater coil around the still bottom keyed as a separate general symbol; no process edge to the still; SPRC 300 dashed line read as its control signal"
+    },
+    {
+     "id": "i_ab",
+     "why": "AB circle linked to the vapour-trap top valve via a short '1-4' line; it may be a separate line passing the valve"
+    },
+    {
+     "id": "j_still2",
+     "why": "possibly the same tee as j_still (noisy heater area)"
+    },
+    {
+     "id": "io_blower",
+     "why": "hood exhaust nozzle; not on any keyed line"
+    },
+    {
+     "id": "io_cup",
+     "why": "cup-shaped end below the 316/319 tee read as an open drain"
+    },
+    {
+     "id": "io_326",
+     "why": "hook end of 326-1-0 'from EQ 78641' read as an off-sheet connector symbol"
+    },
+    {
+     "id": "g_tube1",
+     "why": "sample tube boxes (tube1-3) include the U-tube and its leg caps; couplings under the valves are not keyed separately"
+    },
+    {
+     "id": "j_218",
+     "why": "the 218-1/2-P branch off 208-4-P is partly hidden under the preheat dashes"
+    }
+   ],
+   "not_keyed": [
+    "figure caption 'Fig. 9 Piping and Instrumentation Diagram', page number 39, OSTI ID stamp and handwritten '095-35'",
+    "line-label ovals and flow arrows; text labels such as GRAVITY FLOW, SAMPLING AREA",
+    "waste-storage-tank dip-stick nozzle (part of the tank)",
+    "sample hood enclosure outline and the long dash-dot area boundary at y~2600",
+    "line ends with no symbol (cooling H2O system inlet at x~2593, cooler drain below v_cdrain, vacuum-pump exhaust arrow)"
+   ],
+   "consistency_check": {
+    "method": "same agent re-keyed, from fresh crops and without opening the key, every symbol whose centre lies in a seeded random 20% of a 5 x 4 cell grid (seed 20261029) and the links between those symbols; compared at IoU >= 0.5 with class. NOT independent: the same agent made the key and still had it in context.",
+    "cells": [
+     [
+      2400,
+      2858,
+      2800,
+      3266
+     ],
+     [
+      2800,
+      2858,
+      3200,
+      3266
+     ],
+     [
+      3200,
+      2449,
+      3600,
+      2858
+     ],
+     [
+      3600,
+      2041,
+      4000,
+      2449
+     ]
+    ],
+    "symbols_in_cells_key": 13,
+    "symbols_in_cells_recheck": 13,
+    "symbol_agreement_f1_strict_classified": 1.0,
+    "links_in_cells_key": 8,
+    "links_in_cells_recheck": 8,
+    "links_agree": 8,
+    "link_agreement_f1": 1.0,
+    "disagreements": {
+     "symbols_only_in_key": [],
+     "symbols_only_in_recheck": [],
+     "class_mismatches": [],
+     "links_only_in_key": [],
+     "links_only_in_recheck": []
+    },
+    "note": "cells are in full-image pixels; two of the four cells hold no symbols, so the sample is 13 of 85 symbols"
+   },
+   "scope": "ONE QUADRANT ONLY (bottom-right of the sheet); the rest is not keyed, so score only on the crop"
+  }
+ }
+}

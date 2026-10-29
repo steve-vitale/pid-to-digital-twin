@@ -1,0 +1,344 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "name": "_types_",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "PressureVessel",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "ResidueTreaterPressure",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "psig",
+              "readOnly": true,
+              "documentation": "PT-101 | Fig 10 (Pressure Transmitter); Fig 11 | Residue treater pressure | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.PT-101"
+              }
+            },
+            {
+              "name": "ResidueTreaterLiquidLevel",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "%",
+              "readOnly": true,
+              "documentation": "LT-102 | Fig 10 (Level Transmitter); Fig 11; p. 28 | Residue treater liquid level | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LT-102"
+              }
+            },
+            {
+              "name": "ResidueTreaterTemperatureAsPlottedInFig1",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "C",
+              "readOnly": true,
+              "documentation": "TT-104 | Fig 10 (Temperature Transmitter); Fig 11 | Residue treater temperature (as plotted in Fig 11) | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TT-104"
+              }
+            },
+            {
+              "name": "SecondTemperatureMeasurementBulkLiquidOr",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "C",
+              "readOnly": true,
+              "documentation": "TT-105 | p. 28 (text only; not drawn in Fig 10) | Second temperature measurement (bulk liquid or recirculation loop; see TT-104) | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TT-105"
+              }
+            },
+            {
+              "name": "FeedControlValveFlasherBottoms",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "FV-107 | Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed) | Feed control valve (flasher bottoms) | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-107"
+              }
+            },
+            {
+              "name": "DischargeControlValveToTheAlternateFuelT",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "LV-102 | Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers) | Discharge control valve to the alternate fuel tank | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LV-102"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Condenser",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": []
+        },
+        {
+          "name": "Pump",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "RecirculationFlow",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "klb/h",
+              "readOnly": true,
+              "documentation": "FT-103 | Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11 | Recirculation flow | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FT-103"
+              }
+            }
+          ]
+        },
+        {
+          "name": "HeatExchanger",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "IndicatedSteamFlowToTheHeater",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "klb/h",
+              "readOnly": true,
+              "documentation": "FT-106 | Fig 19 (p. 72) | Indicated steam flow to the heater | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FT-106"
+              }
+            },
+            {
+              "name": "RecirculationValveHeaterLeg",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "TV-104A | Fig 10; p. 29; p. 39 footnote 29 | Recirculation valve, heater leg | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TV-104A"
+              }
+            },
+            {
+              "name": "SteamFlowValveToTheHeaterFig10Temperatur",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "TV-104C | Fig 10; p. 29 | Steam flow valve to the heater (Fig 10: Temperature Control Valve) | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TV-104C"
+              }
+            }
+          ]
+        },
+        {
+          "name": "HeatExchanger_E3",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "RecirculationValveCoolerLeg",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "TV-104B | Fig 10; p. 29; p. 39 footnote 29 | Recirculation valve, cooler leg | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.TV-104B"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bayer-residue-treater",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "RT-1",
+          "tagType": "UdtInstance",
+          "typeId": "PressureVessel",
+          "documentation": "Residue treater | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=bayer-residue-treater.RT-1"
+            }
+          }
+        },
+        {
+          "name": "E-1",
+          "tagType": "UdtInstance",
+          "typeId": "Condenser",
+          "documentation": "Vent condenser | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=bayer-residue-treater.E-1"
+            }
+          }
+        },
+        {
+          "name": "P-1",
+          "tagType": "UdtInstance",
+          "typeId": "Pump",
+          "documentation": "Recirculation pump | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=bayer-residue-treater.P-1"
+            }
+          }
+        },
+        {
+          "name": "E-2",
+          "tagType": "UdtInstance",
+          "typeId": "HeatExchanger",
+          "documentation": "Recirculation heater (steam) | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=bayer-residue-treater.E-2"
+            }
+          }
+        },
+        {
+          "name": "E-3",
+          "tagType": "UdtInstance",
+          "typeId": "HeatExchanger_E3",
+          "documentation": "Recirculation cooler (80 C water) | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=bayer-residue-treater.E-3"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

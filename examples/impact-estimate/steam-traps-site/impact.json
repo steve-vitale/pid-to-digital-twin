@@ -1,0 +1,148 @@
+{
+  "tool": "scripts/estimate_impact.py",
+  "spec": "examples/impact-estimate/steam_traps_site.json",
+  "title": "Failed steam traps repaired, with site constants",
+  "status": "first_draft_estimate",
+  "grade": "First draft on site constants: every constant is a site value, but the measured inputs are as entered and have not been checked against a representative period.",
+  "assumptions": [
+    "Failed steam traps on the 150 psig main: the steam rate entered holds for all 8,760 h/yr.",
+    "Failed steam traps on the 150 psig main: each pound of steam carries the stated energy from feedwater to steam, and the steam conditions do not change through the year.",
+    "Failed steam traps on the 150 psig main: boiler efficiency is constant at this load, and the fuel saved is priced at the margin.",
+    "Failed steam traps on the 150 psig main: Scope 1 covers combustion only (no upstream fuel supply); water, treatment chemicals and pumping are not costed.",
+    "Where a range is entered, the result carries both ends. That is the spread of what was entered, not a probability interval."
+  ],
+  "to_firm_up": [
+    "Confirm by measurement: Steam flow saved or lost, lb/h: a steam flowmeter, or a survey estimate (for failed traps, the survey's orifice-based loss per trap; DOE Steam Tip Sheet #1 prints one such table).",
+    "Confirm by measurement: Steam pressure (psig) and temperature at the point of loss, and the feedwater or makeup water temperature: gauges, the historian, the deaerator.",
+    "Confirm by measurement: Operating hours per year the change applies: historian run status, the operating schedule, or maintenance records. Not 8,760 unless it really runs all year.",
+    "After the change, measure the same quantities again at the same production rate: that before/after pair, not this estimate, is the saving."
+  ],
+  "illustrative": true,
+  "use_defaults": false,
+  "constants": {
+    "fuel_price_per_mmbtu": {
+      "value": 5.5,
+      "unit": "$/MMBtu",
+      "origin": "user",
+      "label": "site value: 0.55 $/therm / 0.1 MMBtu/therm (exact unit definition); ILLUSTRATIVE delivered gas price from a made-up gas bill"
+    },
+    "fuel_kg_co2e_per_mmbtu": {
+      "value": 53.11,
+      "unit": "kg CO2e/MMBtu",
+      "origin": "user",
+      "label": "site value: ILLUSTRATIVE, rounded from the EPA Hub natural gas factor"
+    },
+    "boiler_efficiency": {
+      "value": {
+        "low": 0.78,
+        "high": 0.82
+      },
+      "unit": "(fraction)",
+      "origin": "user",
+      "label": "site value: ILLUSTRATIVE range from a made-up boiler test"
+    }
+  },
+  "changes": [
+    {
+      "change": "Failed steam traps on the 150 psig main",
+      "type": "steam",
+      "increase": false,
+      "inputs": {
+        "steam_lb_per_h": {
+          "low": 150,
+          "high": 210
+        },
+        "hours_per_year": 8760,
+        "steam_pressure_psig": 150,
+        "feedwater_temp_F": 200
+      },
+      "steam_energy": {
+        "value": 1000,
+        "unit": "Btu/lb",
+        "origin": "user",
+        "label": "site value: ILLUSTRATIVE steam-table value (steam enthalpy minus feedwater enthalpy)"
+      },
+      "steps": [
+        {
+          "quantity": "Heat in the steam",
+          "formula": "lb/h x hours x Btu/lb / 1,000,000 Btu/MMBtu",
+          "substituted": "150 to 210 lb/h x 8,760 h/yr x 1,000 Btu/lb / 1,000,000",
+          "result": {
+            "low": 1314,
+            "high": 1839.6
+          },
+          "unit": "MMBtu/yr"
+        },
+        {
+          "quantity": "Fuel",
+          "formula": "useful heat / boiler efficiency",
+          "substituted": "1,314 to 1,839.6 MMBtu/yr / 0.78 to 0.82",
+          "result": {
+            "low": 1602.439,
+            "high": 2358.462
+          },
+          "unit": "MMBtu/yr"
+        },
+        {
+          "quantity": "Fuel cost",
+          "formula": "MMBtu/yr x fuel price",
+          "substituted": "1,602.44 to 2,358.46 MMBtu/yr x 5.5 $/MMBtu",
+          "result": {
+            "low": 8813.415,
+            "high": 12971.54
+          },
+          "unit": "$/yr"
+        },
+        {
+          "quantity": "CO2e (Scope 1, combustion)",
+          "formula": "MMBtu/yr x fuel emission factor",
+          "substituted": "1,602.44 to 2,358.46 MMBtu/yr x 53.11 kg CO2e/MMBtu",
+          "result": {
+            "low": 85105.54,
+            "high": 125257.9
+          },
+          "unit": "kg CO2e/yr"
+        }
+      ],
+      "result": {
+        "fuel_mmbtu": {
+          "low": 1602.439,
+          "high": 2358.462
+        },
+        "cost": {
+          "low": 8813.415,
+          "high": 12971.54
+        },
+        "co2e_kg": {
+          "low": 85105.54,
+          "high": 125257.9
+        }
+      }
+    }
+  ],
+  "totals": {
+    "electricity_kwh_per_year": 0.0,
+    "fuel_mmbtu_per_year": {
+      "low": 1602.439,
+      "high": 2358.462
+    },
+    "cost_per_year": {
+      "low": 8813.415,
+      "high": 12971.54
+    },
+    "co2e_scope2_location_based_kg_per_year": 0.0,
+    "co2e_scope1_kg_per_year": {
+      "low": 85105.54,
+      "high": 125257.9
+    },
+    "co2e_t_per_year": {
+      "low": 85.10554,
+      "high": 125.2579
+    }
+  },
+  "limits": [
+    "An estimate from the inputs shown, not a measured or verified saving. It is only as good as the measured kW, flow and hours; a before/after measurement at the same production rate is the proof.",
+    "Fuel CO2e is Scope 1 combustion only (no upstream). Steam and heat become fuel through the boiler efficiency given; water, treatment chemicals, maintenance and pumping are not costed.",
+    "No savings come from a drawing alone: every quantity here was measured or supplied by the user."
+  ]
+}

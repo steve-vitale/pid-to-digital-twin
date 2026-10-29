@@ -1,0 +1,479 @@
+{
+ "tool": "scripts/loop_audit.py",
+ "loops_file": "examples/loop-audit/te_loops.csv",
+ "drawing_file": "data/te_pid/rev-a/key.json",
+ "drawing_kind": "key",
+ "ignored_columns": [],
+ "signals_checked": true,
+ "totals": {
+  "loops": 19,
+  "drawn": 0,
+  "partly_drawn": 0,
+  "not_drawn": 19
+ },
+ "by_check": {
+  "controller": 0,
+  "measurement": 0,
+  "output": 0,
+  "signal_in": 0,
+  "signal_out": 0
+ },
+ "loops": [
+  {
+   "line": 3,
+   "controller": "FIC-102",
+   "measurement": "FT-102",
+   "output": "FV-102",
+   "description": "C1: D feed flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 4,
+   "controller": "FIC-103",
+   "measurement": "FT-103",
+   "output": "FV-103",
+   "description": "C2: E feed flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 5,
+   "controller": "FIC-101",
+   "measurement": "FT-101",
+   "output": "FV-101",
+   "description": "C3: A feed flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 6,
+   "controller": "FIC-104",
+   "measurement": "FT-104",
+   "output": "FV-104",
+   "description": "C4: A and C feed flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 7,
+   "controller": "FIC-105",
+   "measurement": "FT-105",
+   "output": "FV-105",
+   "description": "C5: Recycle flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 8,
+   "controller": "FIC-110",
+   "measurement": "FT-110",
+   "output": "FV-110",
+   "description": "C6: Purge rate",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 9,
+   "controller": "LIC-112",
+   "measurement": "LT-112",
+   "output": "LV-112",
+   "description": "C7: Separator level",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 10,
+   "controller": "LIC-115",
+   "measurement": "LT-115",
+   "output": "LV-115",
+   "description": "C8: Stripper level",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 11,
+   "controller": "FIC-119",
+   "measurement": "FT-119",
+   "output": "FV-119",
+   "description": "C9: Stripper steam flow",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 12,
+   "controller": "TIC-121",
+   "measurement": "TT-121",
+   "output": "TV-121",
+   "description": "C10: Reactor cooling water outlet temperature",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 13,
+   "controller": "FIC-117",
+   "measurement": "FT-117",
+   "output": "FV-117",
+   "description": "C11: Stripper underflow (product)",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 14,
+   "controller": "AIC-123A",
+   "measurement": "AT-123",
+   "output": "FIC-101",
+   "description": "C13: Reactor feed analyzer (components A-F); component A",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 15,
+   "controller": "AIC-123D",
+   "measurement": "AT-123",
+   "output": "FIC-102",
+   "description": "C14: Reactor feed analyzer (components A-F); component D",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 16,
+   "controller": "AIC-123E",
+   "measurement": "AT-123",
+   "output": "FIC-103",
+   "description": "C15: Reactor feed analyzer (components A-F); component E",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 17,
+   "controller": "TIC-118",
+   "measurement": "TT-118",
+   "output": "FIC-119",
+   "description": "C16: Stripper temperature",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 18,
+   "controller": "LIC-108",
+   "measurement": "LT-108",
+   "output": "FIC-104",
+   "description": "C17: Reactor level",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 19,
+   "controller": "TIC-109",
+   "measurement": "TT-109",
+   "output": "TIC-121",
+   "description": "C18: Reactor temperature",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 20,
+   "controller": "AIC-129",
+   "measurement": "AT-129",
+   "output": "FIC-110",
+   "description": "C19: Purge gas analyzer (components A-H); component B",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  },
+  {
+   "line": 21,
+   "controller": "AIC-137",
+   "measurement": "AT-137",
+   "output": "TIC-118",
+   "description": "C20: Product analyzer (components D-H); component E",
+   "status": "not_drawn",
+   "checks": {
+    "controller": false,
+    "measurement": false,
+    "output": false,
+    "signal_in": false,
+    "signal_out": false
+   },
+   "missing": [
+    "controller symbol",
+    "measurement symbol",
+    "output symbol",
+    "signal line measurement -> controller",
+    "signal line controller -> output"
+   ],
+   "sheets": [],
+   "hint": "no symbol carries this controller tag: check its spelling, and strip DCS suffixes such as .PV or .OUT from the loop list"
+  }
+ ]
+}

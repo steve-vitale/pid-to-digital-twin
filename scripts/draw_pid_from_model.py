@@ -519,7 +519,9 @@ class Sheet:
     def flag_text(self, f):
         if f.get("utility"):
             return f["utility"]
-        s = next(s for s in self.model["streams"] if s["id"] == f["stream"])
+        s = next((s for s in self.model["streams"] if s["id"] == f["stream"]), None)
+        if s is None:
+            raise ValueError(f"layout names stream {f['stream']}, which the model does not have")
         here = self.spec["id"]
         partner = [(sh, fl) for sh in self.layout["sheets"] if sh["id"] != here
                    for fl in sh["flags"].values() if fl.get("stream") == f["stream"]]
@@ -531,7 +533,10 @@ class Sheet:
         return ["BATTERY LIMIT", f.get("label", s["name"]).upper()]   # a layout label shortens a long name
 
     def unit(self, uid, u):
-        name = next(x for x in self.model["units"] if x["id"] == uid)["name"]
+        unit = next((x for x in self.model["units"] if x["id"] == uid), None)
+        if unit is None:
+            raise ValueError(f"layout places unit {uid}, which the model does not have (is the layout for this model?)")
+        name = unit["name"]
         c = self.c
         if u["shape"] in ("vertical_vessel", "column"):
             cx, top, bot, w, hd = u["cx"], u["top"], u["bottom"], u["w"], u["head"]
@@ -947,9 +952,45 @@ def sha_file(p):
     return hashlib.sha256(data).hexdigest()
 
 
+def _load(path, what):
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise ValueError(f"{what} file not found: {path}") from None
+    except (OSError, UnicodeDecodeError) as exc:
+        raise ValueError(f"cannot read the {what} file {path}: {exc}") from None
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{what} file {path} is not valid JSON: {exc}") from None
+
+
+def model_problems(model):
+    """Fields every drawing step reads, named per item, before anything is drawn."""
+    if not isinstance(model, dict):
+        return ["model must be a JSON object"]
+    problems = []
+    for key, fields in (("units", ("id", "name")), ("streams", ("id", "name", "from", "to"))):
+        rows = model.get(key)
+        if not isinstance(rows, list):
+            problems.append(f"model {key} must be a list")
+            continue
+        for n, row in enumerate(rows):
+            ident = row.get("id") if isinstance(row, dict) and isinstance(row.get("id"), str) else f"[{n}]"
+            for field in fields:
+                if not isinstance(row, dict) or not isinstance(row.get(field), str) or not row[field].strip():
+                    problems.append(f"{key[:-1]} {ident}: missing {field} (a nonempty string)")
+    for key in ("instruments", "final_elements", "manual_valves", "relief_devices", "controllers"):
+        for n, row in enumerate(model.get(key, [])):
+            if not isinstance(row, dict) or not isinstance(row.get("tag"), str) or not row["tag"].strip():
+                problems.append(f"{key}[{n}]: missing tag (a nonempty string)")
+    return problems
+
+
 def generate(model_path, layout_path, out_dir, write=True, register=None):
-    model = json.loads(Path(model_path).read_text(encoding="utf-8"))
-    layout = json.loads(Path(layout_path).read_text(encoding="utf-8"))
+    model = _load(model_path, "model")
+    layout = _load(layout_path, "layout")
+    problems = model_problems(model)
+    if problems:
+        raise ValueError("model is missing fields the drawing needs:\n  " + "\n  ".join(problems))
     items_by_tag = {}
     for key, kind in (("instruments", "instrument"), ("final_elements", "final_element"),
                       ("manual_valves", "manual_valve"), ("relief_devices", "relief_valve")):
@@ -1018,18 +1059,29 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="data/te_process_model.json")
-    ap.add_argument("--layout", default="data/te_pid_layout.json")
-    ap.add_argument("--out", default="data/te_pid")
-    ap.add_argument("--register", default="data/sheet_registers/te_generated.csv")
+    ap = argparse.ArgumentParser(
+        description="Draw P&ID sheets (PNG + SVG + answer keys) from a process model and a drafting layout.",
+        epilog="Relative paths resolve against the repository root, not the current directory; absolute paths are "
+               "used as given.")
+    ap.add_argument("--model", default="data/te_process_model.json", help="process model JSON (default: %(default)s)")
+    ap.add_argument("--layout", default="data/te_pid_layout.json", help="drafting layout JSON (default: %(default)s)")
+    ap.add_argument("--out", default="data/te_pid", help="output folder (default: %(default)s)")
+    ap.add_argument("--register",
+                    help="sheet register CSV to write (default: data/sheet_registers/te_generated.csv when drawing the "
+                         "default TE model, otherwise sheet_register.csv in the --out folder, so drawing another model "
+                         "can never overwrite the TE register)")
     ap.add_argument("--check", action="store_true", help="validate the layout against the model; write nothing")
     a = ap.parse_args()
+    register = a.register
+    if register is None and (ROOT / a.model).resolve() == (ROOT / "data/te_process_model.json").resolve():
+        register = "data/sheet_registers/te_generated.csv"
     try:
         sheets = generate(ROOT / a.model, ROOT / a.layout, ROOT / a.out, write=not a.check,
-                          register=ROOT / a.register)
+                          register=ROOT / register if register else None)
     except ValueError as e:
         sys.exit(f"refused: {e}")
+    except KeyError as e:  # a field the checks above do not cover yet: still a message, not a traceback
+        sys.exit(f"refused: the model or layout lacks a required field {e}; nothing was written")
     for sh in sheets:
         n = {}
         for v in sh.nodes.values():

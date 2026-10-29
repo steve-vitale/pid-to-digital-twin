@@ -1,0 +1,172 @@
+{
+  "tool": "scripts/estimate_impact.py",
+  "spec": "examples/impact-estimate/steam_traps_measured.json",
+  "title": "Failed steam traps repaired, measured inputs only",
+  "status": "first_draft_estimate",
+  "grade": "Screening grade: 4 of 4 constants are public typical values, not your site's; the measured inputs are as entered and have not been checked.",
+  "assumptions": [
+    "Your fuel price equals the public typical value used (5.048263 $/MMBtu). National or generic figures can differ a great deal from a single site's.",
+    "Your fuel emission factor equals the public typical value used (53.1145 kg CO2e/MMBtu). National or generic figures can differ a great deal from a single site's.",
+    "Your boiler efficiency equals the public typical value used (0.8 (fraction)). National or generic figures can differ a great deal from a single site's.",
+    "Failed steam traps on the 150 psig main: each pound of steam carries the public steam-table value used (1,028 Btu/lb), read at the pressure and feedwater temperature entered.",
+    "Failed steam traps on the 150 psig main: the steam rate entered holds for all 8,760 h/yr.",
+    "Failed steam traps on the 150 psig main: each pound of steam carries the stated energy from feedwater to steam, and the steam conditions do not change through the year.",
+    "Failed steam traps on the 150 psig main: boiler efficiency is constant at this load, and the fuel saved is priced at the margin.",
+    "Failed steam traps on the 150 psig main: Scope 1 covers combustion only (no upstream fuel supply); water, treatment chemicals and pumping are not costed.",
+    "Where a range is entered, the result carries both ends. That is the spread of what was entered, not a probability interval."
+  ],
+  "to_firm_up": [
+    "Replace the public fuel price. Your gas bill or fuel supply contract: commodity plus transport/delivery per unit, at the margin (the price of the next unit you would not buy). For gas billed per Mcf or ccf, the bill's heat content (Btu factor) converts it to MMBtu.",
+    "Replace the public fuel emission factor. EPA GHG Emission Factors Hub, Table 1 Stationary Combustion: CO2, CH4 and N2O per MMBtu for your fuel, combined with the Hub's GWPs (AR5: CH4 28, N2O 265). If your supplier gives a measured carbon content or heat content, use it.",
+    "Replace the public boiler efficiency. Your boiler's efficiency test (fuel-to-steam, input-output or heat-loss method), a combustion analyzer reading plus shell and blowdown losses, or the boiler design datasheet. For heat that displaces a different heater, that heater's efficiency.",
+    "Confirm the steam energy for Failed steam traps on the 150 psig main. Steam pressure (psig) and temperature at the point of loss, and the feedwater or makeup water temperature: gauges, the historian, the deaerator.",
+    "Confirm by measurement: Steam flow saved or lost, lb/h: a steam flowmeter, or a survey estimate (for failed traps, the survey's orifice-based loss per trap; DOE Steam Tip Sheet #1 prints one such table).",
+    "Confirm by measurement: Operating hours per year the change applies: historian run status, the operating schedule, or maintenance records. Not 8,760 unless it really runs all year.",
+    "After the change, measure the same quantities again at the same production rate: that before/after pair, not this estimate, is the saving."
+  ],
+  "illustrative": true,
+  "use_defaults": true,
+  "constants": {
+    "fuel_price_per_mmbtu": {
+      "value": 5.048263,
+      "unit": "$/MMBtu",
+      "origin": "public_default",
+      "label": "PUBLIC TYPICAL VALUE, replace with your own: 5.048263 $/MMBtu (US EIA natural gas industrial price, U.S., / EIA heat content, 2025)",
+      "source": "US EIA, Natural Gas Prices (annual), U.S., 'Industrial Price', 2025: 5.23 dollars per thousand cubic feet (page release date 9/30/2026); divided by the EIA 2025 US heat content of gas delivered to consumers (1,036 Btu/cf).",
+      "url": "https://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm",
+      "year": 2025,
+      "license": "Public domain (EIA: https://www.eia.gov/about/copyrights_reuse.php)",
+      "note": "EIA's industrial price covers only gas sold by local distribution companies: the same table gives 13.4% as the share of total industrial deliveries included in the 2025 price. Most industrial gas is bought from marketers under contracts, so your delivered price (commodity plus transport) may differ widely."
+    },
+    "fuel_kg_co2e_per_mmbtu": {
+      "value": 53.1145,
+      "unit": "kg CO2e/MMBtu",
+      "origin": "public_default",
+      "label": "PUBLIC TYPICAL VALUE, replace with your own: 53.1145 kg CO2e/MMBtu (US EPA GHG Emission Factors Hub, Table 1 Stationary Combustion, Natural gas (pipeline quality), 2025; kg CO2e = kg CO2 + (g CH4 x 28 + g N2O x 265) / 1000, AR5 GWPs)",
+      "source": "US EPA, GHG Emission Factors Hub (2025), Table 1 Stationary Combustion, row 'Natural Gas' (Last Modified: January 15, 2025). The Hub cites 40 CFR Part 98 Tables C-1 and C-2.",
+      "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+      "year": 2025,
+      "license": "Public domain (US federal government work)",
+      "note": "Combustion emissions only (the Hub: 'do not represent upstream emissions'). Higher heating value basis. The Hub page, fetched 2026-10-29, listed the 2025 edition as the latest."
+    },
+    "boiler_efficiency": {
+      "value": 0.8,
+      "unit": "(fraction)",
+      "origin": "public_default",
+      "label": "PUBLIC TYPICAL VALUE, replace with your own: 0.8 (fraction) (US EPA GHG Emission Factors Hub, Table 7 note, 2025)",
+      "source": "US EPA, GHG Emission Factors Hub (2025), Table 7 Steam and Heat, note: 'These factors assume natural gas fuel is used to generate steam or heat at 80 percent thermal efficiency.'",
+      "url": "https://www.epa.gov/system/files/other-files/2025-01/ghg-emission-factors-hub-2025.xlsx",
+      "year": 2025,
+      "license": "Public domain (US federal government work)",
+      "note": "An inventory assumption, not a measured boiler. DOE Steam Tip Sheet #15 Table 2 instead lists 85.7% COMBUSTION efficiency for natural gas, for boilers with economizers or air preheaters and 3% flue O2; combustion efficiency excludes shell and blowdown losses, so it is not the same quantity. Use your own boiler's tested fuel-to-steam efficiency."
+    }
+  },
+  "changes": [
+    {
+      "change": "Failed steam traps on the 150 psig main",
+      "type": "steam",
+      "increase": false,
+      "inputs": {
+        "steam_lb_per_h": {
+          "low": 150,
+          "high": 210
+        },
+        "hours_per_year": 8760,
+        "steam_pressure_psig": 150,
+        "feedwater_temp_F": 200
+      },
+      "steam_energy": {
+        "value": 1028,
+        "unit": "Btu/lb",
+        "origin": "public_default",
+        "label": "PUBLIC TYPICAL VALUE, replace with your own: 1,028 Btu/lb at 150 psig saturated, 200 F feedwater (table value; US DOE Steam Tip Sheet #15 Table 1, 2012)",
+        "source": "US DOE Advanced Manufacturing Office, Energy Tips: STEAM, Steam Tip Sheet #15 'Benchmark the Fuel Cost of Steam Generation', Table 1 'Energy Required to Produce One Pound of Saturated Steam, Btu' ('Calculated from steam tables based on the difference between the enthalpies of saturated steam and feedwater'). DOE/GO-102012-3391, January 2012.",
+        "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/steam15_benchmark.pdf",
+        "year": 2012,
+        "license": "Public domain (US federal government work)",
+        "note": "Saturated steam only. Superheated steam, steam lost at a pressure not tabulated, or makeup water colder or warmer than the feedwater temperature you name all need your own steam-table value."
+      },
+      "steps": [
+        {
+          "quantity": "Heat in the steam",
+          "formula": "lb/h x hours x Btu/lb / 1,000,000 Btu/MMBtu",
+          "substituted": "150 to 210 lb/h x 8,760 h/yr x 1,028 Btu/lb / 1,000,000",
+          "result": {
+            "low": 1350.792,
+            "high": 1891.109
+          },
+          "unit": "MMBtu/yr"
+        },
+        {
+          "quantity": "Fuel",
+          "formula": "useful heat / boiler efficiency",
+          "substituted": "1,350.79 to 1,891.11 MMBtu/yr / 0.8",
+          "result": {
+            "low": 1688.49,
+            "high": 2363.886
+          },
+          "unit": "MMBtu/yr"
+        },
+        {
+          "quantity": "Fuel cost",
+          "formula": "MMBtu/yr x fuel price",
+          "substituted": "1,688.49 to 2,363.89 MMBtu/yr x 5.048263 $/MMBtu",
+          "result": {
+            "low": 8523.942,
+            "high": 11933.52
+          },
+          "unit": "$/yr"
+        },
+        {
+          "quantity": "CO2e (Scope 1, combustion)",
+          "formula": "MMBtu/yr x fuel emission factor",
+          "substituted": "1,688.49 to 2,363.89 MMBtu/yr x 53.1145 kg CO2e/MMBtu",
+          "result": {
+            "low": 89683.3,
+            "high": 125556.6
+          },
+          "unit": "kg CO2e/yr"
+        }
+      ],
+      "result": {
+        "fuel_mmbtu": {
+          "low": 1688.49,
+          "high": 2363.886
+        },
+        "cost": {
+          "low": 8523.942,
+          "high": 11933.52
+        },
+        "co2e_kg": {
+          "low": 89683.3,
+          "high": 125556.6
+        }
+      }
+    }
+  ],
+  "totals": {
+    "electricity_kwh_per_year": 0.0,
+    "fuel_mmbtu_per_year": {
+      "low": 1688.49,
+      "high": 2363.886
+    },
+    "cost_per_year": {
+      "low": 8523.942,
+      "high": 11933.52
+    },
+    "co2e_scope2_location_based_kg_per_year": 0.0,
+    "co2e_scope1_kg_per_year": {
+      "low": 89683.3,
+      "high": 125556.6
+    },
+    "co2e_t_per_year": {
+      "low": 89.6833,
+      "high": 125.5566
+    }
+  },
+  "limits": [
+    "An estimate from the inputs shown, not a measured or verified saving. It is only as good as the measured kW, flow and hours; a before/after measurement at the same production rate is the proof.",
+    "Fuel CO2e is Scope 1 combustion only (no upstream). Steam and heat become fuel through the boiler efficiency given; water, treatment chemicals, maintenance and pumping are not costed.",
+    "No savings come from a drawing alone: every quantity here was measured or supplied by the user."
+  ]
+}

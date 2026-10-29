@@ -1,0 +1,20 @@
+{
+ "about": "What the PRONTO sources say about controller pairings, gathered 2026-10-29 by a coding agent (Claude) to see whether a row-4 loop list can be written for pronto-fig1. Result: NOT written. The DeltaV records give the measurement for the two air flow controllers only, no source names any controller's output element as a separate tag, and the figure prints the controller tag at the valve. A person must decide the output tags before a loop list exists. Data: A. Stief et al., PRONTO heterogeneous benchmark, doi:10.5281/zenodo.1341583, CC BY 4.0; this file is a derivative summary under CC BY 4.0.",
+ "sources": {
+  "report": {"path": "data/external/pronto-more/PRONTO benchmark case study/Technical documents/Technical report/Multiphase flow facility case study technical report.pdf", "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3", "used": "Table 2 (PDF page indexes 5-6), Table 13 (page index 19), Figure 1 (page index 4)"},
+  "deltav_event_log": {"path": "data/external/pronto/zip/C2 Air Leakage/Test5/Alarms and Events/0911Testday3_Alm_Evt.txt", "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961", "used": "Module and Module Description columns"},
+  "deltav_alarm_settings": {"path": "data/external/pronto/zip/Technical documents/Alarm settings in DeltaV.xlsx", "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0", "used": "tag list only (no pairings)"}
+ },
+ "controllers": [
+  {"controller": "FIC301", "measurement": "FT305", "output": null, "evidence": "DeltaV module description 'Air Flowrate Controller via FIR305 (High)'; report Table 2 lists FIC301 as inlet air flow controller 2", "status": "measurement documented, output tag not documented"},
+  {"controller": "FIC302", "measurement": "FT302", "output": null, "evidence": "DeltaV module description 'Air Flowrate Controller via FIR302 (Low)'; report Table 2 lists FIC302 as inlet air flow controller 1", "status": "measurement documented, output tag not documented"},
+  {"controller": "FIC102", "measurement": null, "output": null, "evidence": "DeltaV module description 'Water Flowrate Controller' (no measurement named); Table 2 lists FT102/104 as the input water flow", "status": "unresolved"},
+  {"controller": "FIC101", "measurement": null, "output": null, "evidence": "Table 2 only (inlet water flow controller 2)", "status": "unresolved"},
+  {"controller": "PIC401", "measurement": null, "output": null, "evidence": "Table 13: 2-phase separator pressure control valve opening / process value", "status": "unresolved (figure draws a dashed line from PT403 to the PIC401 valve; Table 13 names no transmitter)"},
+  {"controller": "PIC403", "measurement": null, "output": null, "evidence": "Table 13: 2-phase separator inlet valve; not drawn in Figure 1", "status": "unresolved"},
+  {"controller": "LIC402", "measurement": null, "output": null, "evidence": "Table 13: 2-phase separator liquid level control valve; not drawn in Figure 1", "status": "unresolved"},
+  {"controller": "PIC501", "measurement": null, "output": null, "evidence": "Table 2: air outlet valve 3-phase separator (%)", "status": "unresolved (figure draws a dashed line from PT501)"},
+  {"controller": "LVC502-SR", "measurement": null, "output": null, "evidence": "Table 2: water coalescer outlet valve (%)", "status": "unresolved (figure draws a dashed line from LI502, the 3-phase separator level, not LI503)"}
+ ],
+ "figure_vs_deltav": "Figure 1 prints 'FT305 FIC302' over the upper air leg and 'FT302 FIC301' under the lower leg, with dashed lines meter -> valve inside each leg, i.e. FT305 with FIC302 and FT302 with FIC301. The DeltaV module descriptions pair the other way (FIC301 via FIR305, FIC302 via FIR302). Either the figure's labels are swapped or FIR3xx are not the drawn FT3xx; a person should check before this pairing is used as a loop list. If the DeltaV pairing were audited against the agent key, both air loops would read as partly drawn."
+}

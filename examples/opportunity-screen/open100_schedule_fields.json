@@ -1,0 +1,624 @@
+{
+ "about": "The fields each OPEN100 sheet's equipment schedule (the strip along the bottom of the drawing) prints for each entry, and what is written in them. null = the field label is printed and the value is left blank; a string = what is printed (XXX is a placeholder). Rotating-style entries print CAPACITY, DISCHARGE, RPM, HP; vessel-style entries print OD, LENGTH, MATERIAL; the deaerator entries print design data with XXX placeholders. The OPEN100 drawings are template drawings, so every value field is blank or a placeholder. Use alongside data/open100_equipment_schedule.json (tags and services); the question engine merges the two.",
+ "method": "Read by eye from data/drawings/open100_<sheet>.jpg (bottom schedule strip, enlarged), 2026-10-29, for scripts/question_engine.py. One reader, unverified by a second person. Services are as printed (sheet 2 prints DEAREATOR; spelled DEAERATOR here only for the two deaerator heater entries, whose service line reads DEAERATOR). Sheet 3 also lists CND-HTR-160, which data/open100_equipment_schedule.json omits. Sheet 7 lists FWS-PU-170A/B with service LUBE OIL COOLER: printed that way on the drawing.",
+ "sheets": {
+  "0": [
+   {
+    "tag": "RCS-SG-100",
+    "service": "STEAM GENERATOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "MSS-XSS-140",
+    "service": "STEAM SUPERHEATER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "1": [
+   {
+    "tag": "ACC-AC-150",
+    "service": "AIR COOLED CONDENSER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACC-PU-151",
+    "service": "AIR COOLED CONDENSER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACC-PU-152",
+    "service": "AIR COOLED CONDENSER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACC-PU-153",
+    "service": "AIR COOLED CONDENSER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACC-SX-154",
+    "service": "SILENCER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "2": [
+   {
+    "tag": "CND-TK-160",
+    "service": "CONDENSATE STORAGE TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CND-HTR-161",
+    "service": "CONDENSATE HEATER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CND-PU-162",
+    "service": "CONDENSATE PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CND-PU-163",
+    "service": "CONDENSATE PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CND-PU-164",
+    "service": "CONDENSATE PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CND-TK-165",
+    "service": "DEAERATOR STORAGE TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CND-HTR-166",
+    "service": "DEAERATOR",
+    "fields": {
+     "INTERNAL": "XXX",
+     "EXTERNAL": "XXX",
+     "C.A.": "x/x\"",
+     "N.D.E. TESTING": "RT-1",
+     "CODE": "ASME SECTION VIII, DIV 1"
+    }
+   },
+   {
+    "tag": "CND-FLT-167",
+    "service": "CONDENSATE POLISHER UNIT",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "3": [
+   {
+    "tag": "CND-HTR-160",
+    "service": "DEAERATOR",
+    "fields": {
+     "INTERNAL": "XXX",
+     "EXTERNAL": "XXX",
+     "C.A.": "x/x\"",
+     "N.D.E. TESTING": "RT-1",
+     "CODE": "ASME SECTION VIII, DIV 1"
+    }
+   },
+   {
+    "tag": "CND-TK-165",
+    "service": "DEAERATOR STORAGE TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "FWS-HTR-170",
+    "service": "HP FEEDWATER HEATER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "FWS-PU-170A",
+    "service": "FEEDWATER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "FWS-PU-170B",
+    "service": "FEEDWATER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "4": [
+   {
+    "tag": "FWS-HTR-161",
+    "service": "HP FWS HEATER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CND-TK-165",
+    "service": "DEAERATOR STORAGE TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CND-HTR-166",
+    "service": "DEAERATOR",
+    "fields": {
+     "INTERNAL": "XXX",
+     "EXTERNAL": "XXX",
+     "C.A.": "x/x\"",
+     "N.D.E. TESTING": "RT-1",
+     "CODE": "ASME SECTION VIII, DIV 1"
+    }
+   },
+   {
+    "tag": "ESS-HTR-180",
+    "service": "DE SUPERHEATER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "5": [
+   {
+    "tag": "RCS-XR-100",
+    "service": "REACTOR VESSEL",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-SG-101",
+    "service": "STEAM GENERATOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RC-P102A",
+    "service": "REACTOR COOLANT PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RC-P102B",
+    "service": "REACTOR COOLANT PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "6": [
+   {
+    "tag": "RCS-V-103",
+    "service": "PRESSURIZER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-VE-104",
+    "service": "PRESSURE RELIEF TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "RCS-EX-105",
+    "service": "ELECTRIC HEATER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "7": [
+   {
+    "tag": "FWS-PU-170A",
+    "service": "LUBE OIL COOLER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "FWS-PU-170B",
+    "service": "LUBE OIL COOLER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACW-AXC-210",
+    "service": "AUX COOLING WATER COOLER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACW-PU-211A",
+    "service": "AUX COOLING WATER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACW-PU-211B",
+    "service": "AUX COOLING WATER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACW-PU-211C",
+    "service": "AUX COOLING WATER PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "ACW-TK-212",
+    "service": "AUX COOLING WATER TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   }
+  ],
+  "8": [
+   {
+    "tag": "CVCS-HX-111",
+    "service": "LETDOWN HEAT EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   }
+  ],
+  "9": [
+   {
+    "tag": "RCS-XR-100A",
+    "service": "FIRST ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-XR-100B",
+    "service": "SECOND ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-XR-100C",
+    "service": "THIRD ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-XR-100D",
+    "service": "FOURTH ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-XR-100E",
+    "service": "FIFTH ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RCS-XR-100F",
+    "service": "SIXTH ISSUE REACTOR",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ],
+  "10": [
+   {
+    "tag": "CVCS-HX-110",
+    "service": "REGEN HEAT EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-HX-111",
+    "service": "LETDOWN HEAT EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-FL-112A",
+    "service": "LETDOWN FILTER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-FL-112B",
+    "service": "LETDOWN FILTER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-AN-113A",
+    "service": "BORON ANALYZER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CVCS-AN-113B",
+    "service": "RADIATION ANALYZER",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CVCS-ION-114A",
+    "service": "ION EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-ION-114B",
+    "service": "ION EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "CVCS-PU-115",
+    "service": "POSITIVE DISPLACEMENT CHARGING PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CVCS-PU-116",
+    "service": "POSITIVE DISPLACEMENT CHARGING PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CVCS-PU-117",
+    "service": "POSITIVE DISPLACEMENT CHARGING PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "CVCS-VCT-118",
+    "service": "VOLUME CONTROL TANK",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   }
+  ],
+  "11": [
+   {
+    "tag": "RHR-HX-121A",
+    "service": "RHR HEAT EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "RHR-HX-121B",
+    "service": "RHR HEAT EXCHANGER",
+    "fields": {
+     "OD": null,
+     "LENGTH": null,
+     "MATERIAL": null
+    }
+   },
+   {
+    "tag": "RHR-PU-120A",
+    "service": "RHR PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   },
+   {
+    "tag": "RHR-PU-120B",
+    "service": "RHR PUMP",
+    "fields": {
+     "CAPACITY": null,
+     "DISCHARGE": null,
+     "RPM": null,
+     "HP": null
+    }
+   }
+  ]
+ }
+}

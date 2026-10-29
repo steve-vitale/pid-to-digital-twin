@@ -1,0 +1,3352 @@
+{
+ "about": "SHA-256 and byte pins for the files scripts/fetch_corpus.py downloads for the corpus sources added 2026-10-29 (dexpi-ttc-all, hai, skab, pronto-more, idaes-hda, dwsim-fossee, wikimedia-pid). Taken from the first download on 2026-10-29; a file that differs is refused, never saved. Paths are relative to the source's folder under data/external/.",
+ "dexpi-ttc-all": {
+  "LICENSE": {
+   "bytes": 18650,
+   "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+  },
+  "README.md": {
+   "bytes": 111,
+   "sha256": "dc2c88f2a54dccfb2209a9b5ef3212a223db8567d68319c866e55360315fe54f"
+  },
+  "dexpi 1.2/README.md": {
+   "bytes": 105,
+   "sha256": "6a4b2a5fc0adef0e0fd70f6f5ce57761e338d47ed62af7e46f7452d8540570c0"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX01.xml": {
+   "bytes": 1101404,
+   "sha256": "ab2b05cbb5b9911443a1714e4f98b38733f179279cbba7dcecd0efd79d21d049"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02-SAG.IM01.pdf": {
+   "bytes": 85862,
+   "sha256": "379081a3684879bdf4bbf5c874d4ced3723705111f5f25242681ef438e5b4eb6"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02-SAG.IM02.pdf": {
+   "bytes": 86928,
+   "sha256": "8377b1a68a699e6472d4397abd17608cc1665dd5bd86806e18060a95ac6d8a57"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 652821,
+   "sha256": "c4e512bd909ac6b9e8f5f8030cadd68c7495618e67ba2ca8030834d48f19f4ed"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02-VTT-IM01.svg": {
+   "bytes": 468937,
+   "sha256": "072e607a1b678b4dac41fb52cad8e159d584a1d46d2ffaf57ab7f78b8bf3a450"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02-VTT.IM01.png": {
+   "bytes": 78278,
+   "sha256": "06c14362db2fd27ae6ec381a5b82050357ec752dcbd10bb476badc44583b841d"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02.pdf": {
+   "bytes": 39929,
+   "sha256": "b39902ba6d7e63b3f3b50652d78bc0bc1e7e1ff04b476588234450f3405cca47"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02.png": {
+   "bytes": 230488,
+   "sha256": "6f8995e091b4acffd9cafb7e9db5e1bccacd7d311d10fdb8a2b82818ce89591d"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02.svg": {
+   "bytes": 140620,
+   "sha256": "ba2ece992155c13b66070bb4ac148c67da0a9e440d8762fc95e52e5723a61870"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX02.xml": {
+   "bytes": 1113350,
+   "sha256": "b8aa30ffa95bc6db59564df7d616826fc200345e0704c01ff95edc2009e48df7"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 662324,
+   "sha256": "7993e45b701e9785ba8c0baceb6690df8b9bc39f3c41c577112d340c53c82166"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX03.png": {
+   "bytes": 394576,
+   "sha256": "ecad13a079c6cbbb6cdc0d03b79c70aa5c422c180fe175b2f1b85b811d2fd06b"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX03.xml": {
+   "bytes": 1144988,
+   "sha256": "2595e3a147b8dd2a81fb3dc2119f89fb2c11c8f2096749bdc5c307ce01f5017a"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX03/C01V01-HEX.EX03-AUD.IM01.jpg": {
+   "bytes": 155798,
+   "sha256": "99b21f74b28b74b34f49c79bcbefceaffa33ac390b4e7a7aa50d2bf1e2ff1024"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-HEX.EX03/C01V01-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 325,
+   "sha256": "b682a0f36b231d0a83dcfadd2b4a54e1fe779dde8c884af051ae076b70dddc95"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-SAG.EX01.XML": {
+   "bytes": 1794223,
+   "sha256": "ad4f60041f24402a9a4c2bc9f819b13d74698adf4834ba730510eb3ccc8a0100"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-SAG.EX02.XML": {
+   "bytes": 1128057,
+   "sha256": "036511d902eea8ece08f12821fea50c1532c199dd5846d93dc78e318e78b8dd0"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01-SAG.EX02.pdf": {
+   "bytes": 102812,
+   "sha256": "c5d2eda06ad01eb5ba11f5c175bfd5717c1d50a3a7014fcc226cfbc088d45816"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/C01V01.pptx": {
+   "bytes": 1000268,
+   "sha256": "0fbedc1f3e92765cc946c906afc24fd1ea8404170d7f858a75fb4bf34325b791"
+  },
+  "dexpi 1.2/example pids/C01 the complete DEXPI PnID/readme.md": {
+   "bytes": 262,
+   "sha256": "7f701e3d64998c51425bd5a6c4cee56d3a86a83b900d1c227fcb443c4aa88971"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-AVV.EX01-AUD.IM01.png": {
+   "bytes": 132165,
+   "sha256": "bd96e8fbaf2012fcb5c2767600c1401d9c6cfeec979ef8f0c388eef880137b94"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-AVV.EX01-SAG.IM01.pdf": {
+   "bytes": 87820,
+   "sha256": "8c0e87473b41c30fe695a3c86c617cabff11eef09cd2e96bb1984ad1c59eb34f"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-AVV.EX01-VTT.IM01.png": {
+   "bytes": 119185,
+   "sha256": "c8308828b98b8bb4822000e53260bddc5e491a9c6ba57a5893afd02e310bb8ac"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-AVV.EX01.png": {
+   "bytes": 127305,
+   "sha256": "5e73747ffa91e27af5891d0c84fa04dca36fd548acd04a15b663864b4580166d"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-AVV.EX01.xml": {
+   "bytes": 552515,
+   "sha256": "ce5c38888bb9df92723d4522c20374c4981989f66b2d0f32cc0864ac3ab0382b"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 544811,
+   "sha256": "e57fb825f338dc6645de9bc858a68e5a8976510c6a68f605b11efeb2afa7c999"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-HEX.EX02.png": {
+   "bytes": 373518,
+   "sha256": "202a14aee155a28f3dc085831dcc9d4d48ef2a76281d8521e5b1ab51f2ed7b58"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-HEX.EX02.xml": {
+   "bytes": 973929,
+   "sha256": "a554395e59c0100e23a68e68f9e8bf78b9ec45efb317800b6d4baffeffbee232"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-ING.EX01-AUD.IM01.png": {
+   "bytes": 103207,
+   "sha256": "d2ad64d1925acf864c929105934cd6d05d6cabcf683c101e2e91627716eeb5b5"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-ING.EX01-SAG.IM01.pdf": {
+   "bytes": 85866,
+   "sha256": "7772129855f5c87401675ebdd3d7afc9371c91f991e136a839646f03c939b9d2"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-ING.EX01-VER.IM01.png": {
+   "bytes": 73511,
+   "sha256": "0334e842881bb5c1f8785e870dfbb4b198a7aebffe7195628bc72cf40ef72300"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-ING.EX01-VTT.IM01.png": {
+   "bytes": 46899,
+   "sha256": "682361cfd8af76cd21acae66586611f6556c7da960bf0218f5fa6783482b5806"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-ING.EX01.xml": {
+   "bytes": 715759,
+   "sha256": "6bdf06c26682a8f0a5ad6f62dc5cfc76a8472dc100d9cf758d6141c5b524ef54"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01-VER.EX01.xml": {
+   "bytes": 213414,
+   "sha256": "2b5e97a6565a6fcc1b8417e6520fa0c053b846a504ea00f1ba73115bdfff6aa6"
+  },
+  "dexpi 1.2/example pids/C02 DEXPI Example Complete E+P/C02V01.pptx": {
+   "bytes": 46513,
+   "sha256": "39d527207e148d325f26e11a4ebd52661bbb7d329ec36c27d7f216cf345de007"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-AVV.EX01-AUD.IM01.png": {
+   "bytes": 95078,
+   "sha256": "04ef5ac431fab94574e454c79d24ab21b53c2af9fe2777301312a4f37c2e1c6a"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-AVV.EX01-SAG.IM01.pdf": {
+   "bytes": 84106,
+   "sha256": "4ccd503516a0f09c9cdfe73049c5594240e9d34447786d27c1f6783e1cac11ae"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-AVV.EX01-VTT.IM01.png": {
+   "bytes": 28418,
+   "sha256": "3dba0dbd9f6b4dc016f46f71486576dfd3a5c09143406a4b5f0425af9cc2371d"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-AVV.EX01.png": {
+   "bytes": 105601,
+   "sha256": "30ff946a792c930cff2bf5e671cdc215461b6be1cc14d295b9dc0c542cae93a8"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-AVV.EX01.xml": {
+   "bytes": 274114,
+   "sha256": "ea84c564e9075324d1fc218ea6ff1e748332752105bb10e48fb75b008c9aa107"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 273745,
+   "sha256": "eba0bc180ea2a31f0ceb67e4a68c96b87f65133c9c9689989a49769330a1a43b"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-HEX.EX02.png": {
+   "bytes": 171463,
+   "sha256": "b105fb7fa95b45d988b683aa2fef18fd63562fd6fd5a28e63c45659639172794"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-HEX.EX02.xml": {
+   "bytes": 324422,
+   "sha256": "19b02271052a34cf53484919a844b0d2d2c603bc439dc2486a51025d2702ec43"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-ING.EX01-AUD.IM01.png": {
+   "bytes": 142345,
+   "sha256": "ba90528163a67e4aa1acbdaed0805d721e5f1ed10ad5d7f998c4619c788c4059"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-ING.EX01-SAG.IM01.pdf": {
+   "bytes": 82542,
+   "sha256": "403c177f08fd970e55aad09a5645ce6acc204dcf6de7e1e7464baabc633c9966"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-ING.EX01-VER.IM01.png": {
+   "bytes": 49645,
+   "sha256": "3fbb47388103543b318fdd6dd2055c1e657489fc1fb9b3733d71c2d25201c071"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-ING.EX01-VTT.IM01.png": {
+   "bytes": 29569,
+   "sha256": "0de46650c9d2eecece4b0effe03c4b2452ca5c914956936a348253e81b356ea4"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-ING.EX01.xml": {
+   "bytes": 344757,
+   "sha256": "bc0a766fd96908510029908d0072f0c18c2c5bc39767879030c7bb097ff0a9df"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-SAG.EX01-VTT.IM01.png": {
+   "bytes": 26077,
+   "sha256": "a6ff20ed5973bae3dcff90c2466126663c4a94cc274da002cbac6909fb0aaf7a"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-SAG.EX01.XML": {
+   "bytes": 227599,
+   "sha256": "9141fb98eed9b0b58a919baa8b52b1f507120918463fce834d830ff86ab53784"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01-SAG.EX01.pdf": {
+   "bytes": 81808,
+   "sha256": "cff0cfbd20977cfab3670e7fe5546ad6b1860bdef884e2a995f3b661cc4c1583"
+  },
+  "dexpi 1.2/example pids/C03 DEXPI Example Tank Displ Pump Pipe with Tee/C03V01.pptx": {
+   "bytes": 53310,
+   "sha256": "e680bf91a32723ba91a5d486624d75661e393c1bcb39a4f4cb4dba38ecaa17fb"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-AVV.EX01-SAG.IM01.pdf": {
+   "bytes": 83398,
+   "sha256": "54841b505aa269cce5462a53805332f711a64b38f76a78f49c13117304651e73"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-AVV.EX01.png": {
+   "bytes": 101453,
+   "sha256": "631c33673d8e2be9748dfc287901691a7d451f5b5f724f2f57c6812a96e18d5e"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-AVV.EX01.xml": {
+   "bytes": 175042,
+   "sha256": "3ec8cde4313885550d726015be94b234d967b79eec0bb3cab36ad282e7425a7e"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 109809,
+   "sha256": "9edc267044f30a5e5c2a0670cb90309c1d48b8695d9a3cd256433aa5b7bc67a5"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-HEX.EX02.png": {
+   "bytes": 139623,
+   "sha256": "59390eca5937aeb964be1a37386d9b3e71fd4cce4c39bc16f3ee79807ec7e1b1"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-HEX.EX02.xml": {
+   "bytes": 144705,
+   "sha256": "691aaf62b56ed0bf421e5e52b344fd3c7dd1f7253f87d856f6ee7e9ad8c7bb6c"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-ING.EX01-SAG.IM01.pdf": {
+   "bytes": 81143,
+   "sha256": "830cdab82542f30ee1bfc4fe4179286dcfd623576d9c2fe1af16c5dc7afa7ba0"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-ING.EX01-VER.IM01.png": {
+   "bytes": 48969,
+   "sha256": "f4099961a1e3cb0147901824604af4dbb6f82eeddfb75b4367f3f4e63ee31eac"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-ING.EX01-VTT.IM01.png": {
+   "bytes": 37255,
+   "sha256": "8e91764e03a88fbf46c1d8e2f39e226f49c400a38812143bde8cc6470c893d8e"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-ING.EX01.xml": {
+   "bytes": 173248,
+   "sha256": "990715f67fe9d2de5b737c39a8d4c9952412bc7d737a293e15b656dd25af3f15"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-SAG.EX01-SAG.IM01.pdf": {
+   "bytes": 81216,
+   "sha256": "fec99bd96c4bc791356a4592f8cbbe2ccfc943fcec1d7d6642993d4138b1f4dc"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-SAG.EX01.XML": {
+   "bytes": 109401,
+   "sha256": "2c3010ecd5862f567f178a9dccb5821272a4d9322098468e3489b69c59b9376f"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01-SAG.EX01.pdf": {
+   "bytes": 79420,
+   "sha256": "b7a215f955bb03550f2acf8ab4d166d19177748ddc5ebad9b9494a0897136fbd"
+  },
+  "dexpi 1.2/example pids/C04 DEXPI Example Pump Plate Heat Exchanger/C04V01.pptx": {
+   "bytes": 44308,
+   "sha256": "ec2259a370e23a71b0738139473d012ecc002fd7456c068cb0edeab3282dd264"
+  },
+  "dexpi 1.2/example pids/C05 Pump- Tank- and Control loop/C05V01-SAG.EX01-SAG.IM01.pdf": {
+   "bytes": 82712,
+   "sha256": "c2c003d1633ef5248806083b5130f5e5f243bcd62419751f90819a7f18a41bc4"
+  },
+  "dexpi 1.2/example pids/C05 Pump- Tank- and Control loop/C05V01-SAG.EX01.XML": {
+   "bytes": 195848,
+   "sha256": "016590b51bfc6cbfc5dc866f7c071d94d255dcc06c3348ad8414a1ca066e9b63"
+  },
+  "dexpi 1.2/example pids/C05 Pump- Tank- and Control loop/C05V01-SAG.EX01.pdf": {
+   "bytes": 82443,
+   "sha256": "d8173bfb6bcc6e44ae27f381c1c0dc96effc9b9eec42699cce69dff1bb1ebdc7"
+  },
+  "dexpi 1.2/example pids/C05 Pump- Tank- and Control loop/C05V01.pptx": {
+   "bytes": 134340,
+   "sha256": "424dad546b752ccb4d3c3cad21f5517f6499fc60e5bd49f5baa75570cbd4fdb7"
+  },
+  "dexpi 1.2/example pids/C05 Pump- Tank- and Control loop/readme.md": {
+   "bytes": 55,
+   "sha256": "761f92391bbfdfa99064ba1c7cedefe4f4c9641bcf719e932d2c78fb5306ebc6"
+  },
+  "dexpi 1.2/example pids/C06 Tank in PlantStructure/C06V01-VER.EX01.xml": {
+   "bytes": 3351,
+   "sha256": "c57482403cdb3c99a7e634f30bf9a11b68c0e6bf5dda1783c712200d712c5e91"
+  },
+  "dexpi 1.2/example pids/C06 Tank in PlantStructure/C06V01.pptx": {
+   "bytes": 89471,
+   "sha256": "304331b14f3da8b815c09d484c732db00d8145e7f59e376960adb33fec823430"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Drawing List.xlsm": {
+   "bytes": 45543,
+   "sha256": "d3fb7acdb3c8232dc2b27faa1872445afd4071bf5dfa4a8ef9460dd8242b4c3b"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Equipment List.xlsm": {
+   "bytes": 70620,
+   "sha256": "afdf56ceaf1b4c37753c3db64089474b591c7c2f4aad611d1d27e551cccc2756"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Instrument List.xlsm": {
+   "bytes": 60373,
+   "sha256": "b3efe5b9938846c667962a6129c8c2a11a95c9b8d314c5d6243c489d2fd1326f"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Line List.xls": {
+   "bytes": 216576,
+   "sha256": "ba8011d1ddc7ba420ea009a0cfb570e50fd50e87f513d041304c48e5f637d3a1"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV PCS Connections List.xlsm": {
+   "bytes": 249988,
+   "sha256": "76e3757103f9204558e86e9290e55c986b7f26a95dc26e2997d3e3f1e32fd44b"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV PCS List.xlsm": {
+   "bytes": 55103,
+   "sha256": "f63958913b4f02be5b587664701af81a9c94c706554160aefef4bc59a9098c6e"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Plant Items.xlsm": {
+   "bytes": 93735,
+   "sha256": "3c10e859211d84be36a6a4249bf981b6c60c33c91ae3f2b68450548fe8e4c2b3"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/COV Valve List.xlsm": {
+   "bytes": 63990,
+   "sha256": "382ac22ad1f5091f9a4764347c544b19e8afa11916b4c6bf24759797e1216cc9"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/UER-1234567.pdf": {
+   "bytes": 108975,
+   "sha256": "a573c517ceebb8a240f88322f2edbe69a70e1c33fb0f33f8515e6055c3db187c"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/UER-1234567_bw.pdf": {
+   "bytes": 108694,
+   "sha256": "c4184cab8538f728f1ab23787415ad90076582d50f8039509c384a2398bf8ccf"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/UER-2345678.pdf": {
+   "bytes": 69885,
+   "sha256": "d5deef9e41451f1c382f7ee169fac7fcb6a451139cdf31af7367fdcbf37bd9d8"
+  },
+  "dexpi 1.2/example pids/C08 example Covestro - two connected PIDs/UER-2345678_bw.pdf": {
+   "bytes": 69751,
+   "sha256": "a9bfe903a2a8ba07eea128190f6332239790d3246aaeef498b761a8c0e5ff622"
+  },
+  "dexpi 1.2/example pids/DEXPI Test cases DOC.pdf": {
+   "bytes": 572792,
+   "sha256": "d2f3517e5dfb8f5c79bc1c3187e5a7c25a0d74fc72b0c61596949ab6c2731975"
+  },
+  "dexpi 1.2/example pids/DEXPI Test cases DOC.pptx": {
+   "bytes": 3382377,
+   "sha256": "33408dd9b9918adea3000c2f0fabccaf9f165fb2473c1587495331bb3a9b2118"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01.V02.ING.EX01.xml": {
+   "bytes": 8073,
+   "sha256": "703761e1ee5a7f251d0caa0ef70817d16f457df90289d6364a02238c80a4eda9"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD-VTT.IM01.PNG": {
+   "bytes": 33777,
+   "sha256": "33f71d6069293318f72f9cd94843c25d68dab9ff8f6a6bc34c893b75aa309832"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01-SAG.IM01.png": {
+   "bytes": 281087,
+   "sha256": "bdd33f21c6b4703a9b74a3e3345ebcb7a5bd2c8bb1d5299fcdd1fa06e9ad6cee"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01-VTT.IM01.PNG": {
+   "bytes": 31581,
+   "sha256": "df4922d7beb7c82b95c2220f6632f3386ac28f2bf8f3feca5b413aa7e8c6a6dd"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01-VTT.IM01.txt": {
+   "bytes": 215,
+   "sha256": "be06476239dea878105e90c4896b7692b285390b49b058d9fb29cd0472fa9393"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01-VTT.IM02.PNG": {
+   "bytes": 53426,
+   "sha256": "d0e425312c110e9463b8b0c2bb51513447f0905d7c67a9a6de2e723df5059eb9"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01-XVT.IM01.png": {
+   "bytes": 294062,
+   "sha256": "efca82f803b34d58d2d60919f6042a8abcfeef67812af6d5582950274258bc52"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01.png": {
+   "bytes": 24548,
+   "sha256": "93e12592d5191d47a7529ccb9f976f3279362ae8f1deb95291a2d37a3fb4773d"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX01.xml": {
+   "bytes": 7614,
+   "sha256": "2d0ffd9aea9173d86ba356756de92ea998ff6659a93846f95ea9b72584a671f3"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX02-VTT.IM01.PNG": {
+   "bytes": 31782,
+   "sha256": "a5b0412438615697a78e913f0bc2cf9209de1843a5baa8843912bd06c87e3b93"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX02-XVT.IM01.png": {
+   "bytes": 298531,
+   "sha256": "ea73bc8886b594448f39c2d1eedfd0cfa50e29b0897373760982c6e3cc62169f"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX02.png": {
+   "bytes": 11526,
+   "sha256": "c11bfa87948fedb244075d4155db62e232d068d7e3b85de44baecc48104af813"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX02.xml": {
+   "bytes": 7618,
+   "sha256": "640459cb6d8bd0106b672267646d11d54ec5a4b8a830bee7422aa11976df2ec6"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX03-XVT.IM01.png": {
+   "bytes": 372597,
+   "sha256": "402ea4782233d81b7111f48055bd115ef37503ba2384aaed98cbe37752435d49"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX03.xml": {
+   "bytes": 6655,
+   "sha256": "648c062e64f1c2362f3c6baf4684085fce91d4ab90b8818ae757ee5e4c256b44"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AUD.EX04.xml": {
+   "bytes": 6339,
+   "sha256": "b228197f03eb396e4ed6b42b51d409f768e8147c849330cb608703e88fc5af0d"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX01-VTT.IM01.PNG": {
+   "bytes": 29501,
+   "sha256": "47598bdaf74b8cf137498b9393fe0136062fb9a78b60b6191f8b3f0c6aed5045"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX01-VTT.IM02.PNG": {
+   "bytes": 49742,
+   "sha256": "4fbea582bfcefac44d45c9d9e4a67cd94ff6c9ab621313800cf8a4916f14b261"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX01-XVT.IM01.png": {
+   "bytes": 349784,
+   "sha256": "3f6dda25ad81ce173ab62cae1f3ffaaaacae83e322b6b7fcdef84ddd8597133a"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX01.png": {
+   "bytes": 3790,
+   "sha256": "b54a4ad5a2d4a32c6479f2b3df1781425de981fe6ed32a39117efba20e4b8680"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX01.xml": {
+   "bytes": 15052,
+   "sha256": "59f0eeb8cec7ba6a55e404f601c759218b034b9b45cb772b5912d1cbe970c0e0"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX02-VTT.IM01.PNG": {
+   "bytes": 30046,
+   "sha256": "061c1ed09dfe5e9dfab9e2307b724b4067405f0f9992c379a5c2243583fa1e9f"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX02.xml": {
+   "bytes": 15107,
+   "sha256": "4b3e4fbef9911c14b748815a8d5085aa1cc01774ae0c72aabce259c0ecc9bd68"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX03-VER.IM01.html": {
+   "bytes": 2386,
+   "sha256": "4f4cac32b7a0264c9b0fe341654961fe19ae4f17e1af496b181b89d942e7ea90"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX03.png": {
+   "bytes": 152323,
+   "sha256": "0b9f1e537973a68ba0f5498e66d4382120158cdf4a2eaba1c17830cffd057b49"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX03.xml": {
+   "bytes": 245659,
+   "sha256": "3e0cd15f45baa2d53b95195a1a04e6c3b7e2c3881c4bf7677e03fcd01ce21085"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX04.png": {
+   "bytes": 76761,
+   "sha256": "370be48249975c469cbd6e06e79a0c2c197b38e7951c49619bc611255c18400d"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-AVV.EX04.xml": {
+   "bytes": 245494,
+   "sha256": "e59c0fd338520bd0e588ecc328be23e70ecfd79463100f45a8847f674f05f2a0"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 6076,
+   "sha256": "49924980301af00958e4b0fc36bdfedbee750e366da48640ba8078b589c6264e"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-HEX.EX02.png": {
+   "bytes": 114504,
+   "sha256": "b2d125a6261f5f660a4c679dd62e44f0e81f13965b8f07390f5c990013816fc0"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-HEX.EX02.xml": {
+   "bytes": 11456,
+   "sha256": "9e355733bf89769a33602143c48e2ad3d28a465ce4ecb04454521e32c09c91eb"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-HEX.EX03.xml": {
+   "bytes": 15654,
+   "sha256": "38d8564aa063e86973c29b51c44421e4d13b8de9934fa8b9541632859003d8cd"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX01-SAG.IM01.png": {
+   "bytes": 186453,
+   "sha256": "7b8ed69f6415d0667372ed0532dc7111251f169ccacbe38cbd63b0b1662e59a1"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX01-XVT.IM01.png": {
+   "bytes": 292980,
+   "sha256": "7d5dc41883eefc8374e6fd8a99f0aefca254d42a723da5dc9f776d2ef682449f"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX01.PDF": {
+   "bytes": 9073,
+   "sha256": "5e053fe4da30352a22534c8963671dd53c9d88f9ba33b17a966471eaa6616e96"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX01.png": {
+   "bytes": 36783,
+   "sha256": "4963611554c0a3f9f9549283219ee9172b9b1aab09761c5afd3df396cba3d326"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX01.xml": {
+   "bytes": 34662,
+   "sha256": "872416c02d10b2cfbd7f0014110858a46a6a5c19d11dc98e8e85a6f3194b8bf4"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ING.EX02.xml": {
+   "bytes": 34701,
+   "sha256": "4b55a93fe6bff4352ad9122d5b0caa5af46ad2dfd06c3d1f924896747812d323"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-ISSUES.txt": {
+   "bytes": 593,
+   "sha256": "1e8bb58719dd2d0e5a2f64d8a916220d670538465337c7fe1aeea56919a56242"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-SAG.EX01-XVT.IM01.png": {
+   "bytes": 430166,
+   "sha256": "8f7d8e9781fe827f5cb68efc740d0e154f7f4ee24ef4292c20452c4cc33ca8e9"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-SAG.EX01.png": {
+   "bytes": 30755,
+   "sha256": "b3e501c2c33375568ce5a32fef9caa9ac6b42c05d101c1782d5acf29a0e62177"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-SAG.EX01.xml": {
+   "bytes": 14109,
+   "sha256": "ecb5d5b14f3c288eb3d7accf194655c36dffa7d7477731ea400ae3b5f1630ee6"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-SAG.EX02.xml": {
+   "bytes": 14353,
+   "sha256": "e1d205ba0f3bdffb11ea03b64b205d83fff7d682f40394a3e587aa3be19f0dc5"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-VER.EX01.html": {
+   "bytes": 5093,
+   "sha256": "91f521b075173828925bcce15eb08666ce0bd4d7d66fcf555c3462deb30b6fb5"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01-VER.EX01.xml": {
+   "bytes": 6307,
+   "sha256": "0cde37aa8ff7660e8a5e9144dfb5b5d16943fc9495507119306e5bae466f0670"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01.pptx": {
+   "bytes": 75360,
+   "sha256": "d73e7325d6b012ce30f7ff271993c2780d41779d1e556548b0f2d96fdb63b110"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01_ING.EX02-VTT.IM01.PNG": {
+   "bytes": 41586,
+   "sha256": "2dc54997d365d8ee9836a16162439297fa34826f63634ee81c3fad9c473244c1"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01_ING.EX03-VTT.IM01.PNG": {
+   "bytes": 62770,
+   "sha256": "2ec50f14936e85c64fc24a551b7eef6d9846a7837e2205f42729860fecc6c108"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01_SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 61319,
+   "sha256": "ea60ddc4e89cbeb4a59b2e7dc587f4cac4536b2d92c059291ce88c4baba9c2a0"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V01_description.txt": {
+   "bytes": 78,
+   "sha256": "b13c35167e4660e80e2fa1d427f6ca1301666e0961babd970b7a4401ad74238f"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02-AUD.EX01.xml": {
+   "bytes": 6212,
+   "sha256": "0fec879df6ee72a2e0bd01069061f179e3168b6a53f637a6b7d09f9c81bd3ec2"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02-HEX.EX1.html": {
+   "bytes": 2741,
+   "sha256": "6c3f0cc251ddf094ededc8cc2c472d391d2b3dcaf01f2ba466197aa1b851863f"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02-HEX.EX1.xml": {
+   "bytes": 8073,
+   "sha256": "f47f23bba2107e722c0abda0798b11d1dfc846d0f63e5d4ca2c04b0607544977"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02-VER.EX01.html": {
+   "bytes": 2152,
+   "sha256": "840d4b4aa0898ba1bbfb025d8e8e88e48536e511a22371f8639419f9250fdd32"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02-VER.EX01.xml": {
+   "bytes": 536,
+   "sha256": "8b6e821069e445d8c796426af36b2ba75e61ece3f3544549402eaa41b4175fb4"
+  },
+  "dexpi 1.2/example pids/E01 Tank/E01V02.pptx": {
+   "bytes": 81003,
+   "sha256": "bf9cec35760cf53fed9bc7217fa69e2951708b69c641084792117a46ca27a974"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AUD.EX01.png": {
+   "bytes": 36512,
+   "sha256": "b7e1cd71d98adfb01737a6b3fe90e7ef57c204fc1a6bd3429bd6fb7d9019424f"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AUD.EX01.xml": {
+   "bytes": 22436,
+   "sha256": "c0632082db2e4a1168966c729d59ebfcb037e8e4935eb62b327e18696817fa4b"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AUD.EX02.xml": {
+   "bytes": 24549,
+   "sha256": "6747eeabe41e27e7df13e07e000cc941125bf935e1ce11b4ad7f340311765731"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX01-VTT.IM01.PNG": {
+   "bytes": 63414,
+   "sha256": "d99c3254f9ee14e734aa3383a3a6c578ae76d0f3f6f0d7d98145fd948c5b00f6"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX01-XVT.IM01.png": {
+   "bytes": 437924,
+   "sha256": "e5fc6c17a10ad1357d6e8d002b7d0812b351c5d2827cdb7ddfa264857d66b4a4"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX01.xml": {
+   "bytes": 19230,
+   "sha256": "f94222a43ecddb72a88b5196cc8fb0bc98f84c8d3608809c37b39afb0c3b3921"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX02-VER.IM01.html": {
+   "bytes": 6979,
+   "sha256": "07bcdf7b6b4c82d2d2e4e576c846b38bccb56005ad1bcd16cd823b24fc2a0f37"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX02.png": {
+   "bytes": 153348,
+   "sha256": "31714c8037ae4cb4b90d83772b7b52f749a047407c1cb3091ec03b8821986f69"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX02.xml": {
+   "bytes": 258297,
+   "sha256": "b73550ab7c7605a1174d50a34568567dc4c3cf8afc5a422a138b6bdca1276846"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX03.png": {
+   "bytes": 77714,
+   "sha256": "e511d16700198946bcaf073c42e0dec25a0a1e4788a704df652d8f382fe7bab9"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-AVV.EX03.xml": {
+   "bytes": 258174,
+   "sha256": "692df2e9c1b2fe0e759a53ea5d0c5504550bded656178dbe2c32a5c251c132a6"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-HEX.EX02-VER.IM01.html": {
+   "bytes": 19520,
+   "sha256": "08bb976b041c07f3027896cbfcbe06016c3e4341de47117ce54d91228f71d8da"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-HEX.EX02.png": {
+   "bytes": 119379,
+   "sha256": "31ed1ba35ad71f36160aa07a00810ee8622c836f3ffdd22cd3e44ff3c23c38bf"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-HEX.EX02.xml": {
+   "bytes": 55492,
+   "sha256": "fc461f3d32a47880c63bdc07f3f757a15f04977c39b6fd57fa4953003ef4369c"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX01-XVT.IM01.png": {
+   "bytes": 399509,
+   "sha256": "4ffa15a2868691810ea624b2467d2cb8e9f5e85a995c90bcca8286ec91704f0c"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX01.PDF": {
+   "bytes": 9498,
+   "sha256": "c1601b795ba1d0e9dda436c5c6ff27e286a6ed283ad61ead5dbf95fa68b17e12"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX01.png": {
+   "bytes": 37337,
+   "sha256": "1b44520d57db21be8113730230e685d690fd4834197be6350d85666a71fb7a79"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX01.xml": {
+   "bytes": 66163,
+   "sha256": "95c410be1293612b7ecb96b43c3a64baeed2756eea030c24cb76368cb0153408"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX02-AUD.IM01-VTT.IM01.png": {
+   "bytes": 26934,
+   "sha256": "74648d3e6365c3b85570ce5848ffbbfd3a3f3eb92217012f3bf40cbb85782fae"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX02-AUD.IM01-VTT.IM01.txt": {
+   "bytes": 129,
+   "sha256": "d2fe55ae509d7ea2831610292aeacabd784d7d853f30fa169b41168943888e75"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX02-AUD.IM01.png": {
+   "bytes": 3948,
+   "sha256": "7cee1cbc300dcd99a3194161ed43956db3ca498ecf2a0e896e5fbff654d149b1"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX02-AUD.IM01.xml": {
+   "bytes": 5209,
+   "sha256": "3bebe04e6d10ce0b79586f461b9fbbfd16f9303926f58c5efd607dcc4f819ac4"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX02-VTT.IM01.PNG": {
+   "bytes": 65807,
+   "sha256": "0b8426323b2dab99bd4013ff201dbd4b58b02a98146cc7432ea119efcad0649e"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ING.EX03-VTT.IM01.PNG": {
+   "bytes": 37952,
+   "sha256": "87740fccd06a833e3228cdb98b6726f23adefb6729cd9c547606e6ce2cfc8e78"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-ISSUES.txt": {
+   "bytes": 611,
+   "sha256": "61f0600a937fff351253ec8b60bf8187007c95f0acf9187b21111c0b82e4151b"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-SAG.EX01-AVV.IM01.png": {
+   "bytes": 159299,
+   "sha256": "da1404fb96aed45c6ed83ba2361be98edbd25946bef687347a15d11c92c42689"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 32532,
+   "sha256": "59c45cd149c0b5a8555fee47a553cb62b95c1b7bbc14864bb7341cb28f381f8a"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-SAG.EX01.xml": {
+   "bytes": 146107,
+   "sha256": "06963a1b05bef74de4d41e32d9cdd2494bd20e871a4a9d018f4bce64d0c6a9ed"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-SAG.EX02-VTT.IM01.PNG": {
+   "bytes": 35635,
+   "sha256": "546ade1a40963d1cd49727582fbe8b280e69f74bcbd1587c716f473b0574c137"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-SAG.EX02.xml": {
+   "bytes": 140554,
+   "sha256": "e8b7343c4ec7de4af4d4c0605a468e8a17f78c08d97e642018b1655fe9832e1c"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-VER.EX01.html": {
+   "bytes": 15996,
+   "sha256": "a4faa9f705d28bb23b42db61fd24627d4ac45cba2d50d2abaa96b41bcb010f4e"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01-VER.EX01.xml": {
+   "bytes": 17501,
+   "sha256": "63a9550449a9110510af369e6d0ee7de1c278130debcff3037b8e0780738180a"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01.pptx": {
+   "bytes": 85685,
+   "sha256": "962f4390deb91cda8fbda329c450a51c021281d7049adfe94b7f3a086ec75255"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V01_AUD-VTT.IM01.png": {
+   "bytes": 31627,
+   "sha256": "b8ca9d50c52afca09964fe2b0980069ee6729e09d4ed314abbacdbbc6531f78a"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02-AUD.EX01.xml": {
+   "bytes": 30373,
+   "sha256": "717d08ebe356b98fd7d120f27e810d0fcddf1c0e5bd91993c8648c14f0599016"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02-VER.EX01.html": {
+   "bytes": 10334,
+   "sha256": "0e37eab073f7e6480b81e0b6c1b62f202686a8a000f7d56b57a9faf98d8e9fc1"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02-VER.EX01.xml": {
+   "bytes": 4097,
+   "sha256": "21869cb3add0a6c6af72ce4d9cff6b11daed2c0e0f980d8577848361672c6a37"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02.HEX.EX1.html": {
+   "bytes": 16189,
+   "sha256": "7fded79849ab42d316b40e22e057f2088904aebe788cf24cbad59ad3e4bb32c4"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02.HEX.EX1.xml": {
+   "bytes": 45084,
+   "sha256": "b4a81ee39687df53dde80b6db09b7858e1a1ce6c8b6105f2003fa6226aaae6be"
+  },
+  "dexpi 1.2/example pids/E02 Tank with Nozzles/E02V02.pptx": {
+   "bytes": 92391,
+   "sha256": "7941b811378a7c749c78b042b153335d8a0def45d943c5ad01d7cd3024c209c5"
+  },
+  "dexpi 1.2/example pids/E02 Tank with nozzels/E02V01-HEX.EX04.xml": {
+   "bytes": 102799,
+   "sha256": "78e93615c9491b7ad123a2da7e414f7151d8d06030964f2a782d5d17b1a3335e"
+  },
+  "dexpi 1.2/example pids/E03 HeatExchanger With Nozzles/E03V01-HEX.EX02.xml": {
+   "bytes": 228456,
+   "sha256": "8f902d41110022958ac8d972b7c4d7d53107046eb1f5375adb42842122afb930"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 33766,
+   "sha256": "47cd1b9195632812b1109d6e34318e8ec7d98ab17d0d4681462b23b329c478d1"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AUD.EX01.png": {
+   "bytes": 32300,
+   "sha256": "25817690d365350d0b22d5c3061632c4af1023b146884406594889ce5f9309d3"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AUD.EX01.xml": {
+   "bytes": 10679,
+   "sha256": "6b0c0b5ee5af89c1ec3bf0ba2b77794a762c9792f451c362ac7af20aec2173ff"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AUD.EX02.xml": {
+   "bytes": 10613,
+   "sha256": "8d76ae8d023e267b1a1d1c28710f12b01beb35bbdcb241b775a2d970b6c923da"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AVV.EX01.png": {
+   "bytes": 76001,
+   "sha256": "7b2d90f2166132cba386f5a797038b34f6372a32b9a04411b55ef12b5b0bd25f"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-AVV.EX01.xml": {
+   "bytes": 249068,
+   "sha256": "682ac57a860f8f63ddb80a44f7f5e1bcf9730cd30cf976c2d9bfd4e06ec025f7"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-SAG.EX01.XML": {
+   "bytes": 18257,
+   "sha256": "c17e4a819df42c91c38d933a7b7fc48edd2a0ac5d1512e2dfad5884345e030ea"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-SAG.EX01.pdf": {
+   "bytes": 75966,
+   "sha256": "d28882dc626b62b2361f1dd3f135d14ece3b5a8c4f99d79a06969929dcd00772"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-VER.EX01.html": {
+   "bytes": 5733,
+   "sha256": "da0a2f5e772891a639c0f127e458e6b101be539de2bbd4bacad0b67840947ec1"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01-VER.EX01.xml": {
+   "bytes": 4155,
+   "sha256": "65719b203c8080e7eebf39fc135e06d5987acb5a23d60585cb7cc3da2e0aae3c"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V01.pptx": {
+   "bytes": 66990,
+   "sha256": "961f743e1f02188818fe792071d908119edbbcfdc0db7da49b81d9eb3b1c85ef"
+  },
+  "dexpi 1.2/example pids/E03 Pump With Nozzles/E03V02-AUD.EX01.xml": {
+   "bytes": 10403,
+   "sha256": "8621828064e69cf5b456500c3e5a61a03a1cce272f10f88e66ef0251ce687d26"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 32714,
+   "sha256": "1b994f161352eab699f757fd77785d069b57dbb6e27f76649a9026a43410e064"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AUD.EX01.png": {
+   "bytes": 41095,
+   "sha256": "5be3cfccaae1e683abadc41a2db6595f6661a013c1818d7b675e42ef6e3458b5"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AUD.EX01.xml": {
+   "bytes": 18434,
+   "sha256": "874ecd87fbbcbc825c977a7efc27835f70a8a8be33586016e4a97bc0b73a3321"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AUD.EX02.xml": {
+   "bytes": 14797,
+   "sha256": "bc505a539c0ca86aa93fb3d4e38318525a3ca04632441d3828cd9f444671581c"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AVV.EX01.png": {
+   "bytes": 67171,
+   "sha256": "21c27316da6cf7e8a62400cfe5cb8fe170135cca62f785e86a8bf200935659d5"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-AVV.EX01.xml": {
+   "bytes": 259187,
+   "sha256": "79af99c8c13e6dca485d194c405c652ad3c8bd0525053d5b1948592ce3bbe419"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-HEX.EX02.xml": {
+   "bytes": 86634,
+   "sha256": "689a4aa65c2d827864637fef879da24b92e156bdd3f9197a199b747dc1f607d5"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-SAG.EX01.XML": {
+   "bytes": 40883,
+   "sha256": "59a7796e030166f0a88563dacd3f30bca5d788856b5769819435e13924200b2b"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01-SAG.EX01.pdf": {
+   "bytes": 75331,
+   "sha256": "c5566f256af22e84d499cd4d6b9bae9c9aadd0c677f13979556e8a4e0d67a905"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V01.pptx": {
+   "bytes": 74612,
+   "sha256": "ff936e116f131537aebcd79de781099f14ac515959c2f7d9d922a103a45dce14"
+  },
+  "dexpi 1.2/example pids/E04 HeatExchanger With Nozzles/E04V02-AUD.EX01.xml": {
+   "bytes": 18305,
+   "sha256": "cbe31857f3256ae941821d535b22796629b280d5492dd924ef1dff4d2312af2c"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 38001,
+   "sha256": "eeec7e628bd7f2f92fa10013a39d3db18bb9d7618b8ab64f4d1441ec277665ab"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AUD.EX01.png": {
+   "bytes": 60473,
+   "sha256": "1e39ff3e775296b56d9048432cb669eb175229ac51396a13ac5787d657f5d0b6"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AUD.EX01.xml": {
+   "bytes": 27484,
+   "sha256": "48f112c1df95e01996701aa77e2d4b0e7e42bcfcd7dee585c68c6aa7f2ff548f"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AUD.EX02.xml": {
+   "bytes": 23836,
+   "sha256": "8be48542ec88690b6a76bfc111f65b2158d9b2f870df0fdee152f5bb388275d9"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AVV.EX01.png": {
+   "bytes": 66231,
+   "sha256": "9654a228ca387f64b13de6eea03832e2090e13743ab822f801dbdeb0b97b255d"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-AVV.EX01.xml": {
+   "bytes": 271272,
+   "sha256": "82e81b02cb4fac7da4518bf768ca22982437b212556ec4b5d7f87a3f5f8a8842"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-HEX.EX02.xml": {
+   "bytes": 132070,
+   "sha256": "a024c007faf8be10a1603629cb86cd07b21e5f729b80fbbd70546a024af3d225"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-SAG.EX01.XML": {
+   "bytes": 57806,
+   "sha256": "03d6a5d2767bab36227eb65fcec7d252f652ace750ab92a9ee5690cbce03a138"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-SAG.EX01.pdf": {
+   "bytes": 76557,
+   "sha256": "00ae4551cbaf2bb27eebd2c6dd326c08131f2cee210a117a67ea6ce2aedd6e7b"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01.pptx": {
+   "bytes": 96191,
+   "sha256": "54cf805188e74bb57ea18a5205def93b0ad41830477314e2c1403474101276f6"
+  },
+  "dexpi 1.2/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V02-AUD.EX01.xml": {
+   "bytes": 20287,
+   "sha256": "e1d3b6a23dca2423f4460777943b99077b6965e015507709ac93c3a21414f255"
+  },
+  "dexpi 1.2/example pids/E06 Pump%2C HeatExchanger%2C Nozzles Connected With PNS/E06V01-HEX.EX02.xml": {
+   "bytes": 146926,
+   "sha256": "c6ec565ae4cd3ad114956d70a451af90f75df2120a7c3689de819f0fcd9ada63"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AUD-VTT.IM01.txt": {
+   "bytes": 113,
+   "sha256": "a72a16c2a753769359a60ffb29368446d8eed6b332b7e68c1e364c809a021425"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 35245,
+   "sha256": "0072eabe746948947eab1e1d474907d3fa5e0a7e32d561b9d3a6f1e17f06c2ba"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AUD.EX01.png": {
+   "bytes": 51386,
+   "sha256": "65bbee79811514eb3e225e4c9a7d6a4cb0af0153dd27245dc66d186f01b69ed9"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AUD.EX01.xml": {
+   "bytes": 39141,
+   "sha256": "5899e2ca1c0a11bb09f11bdb6d2bd169953b38e1a791e1ba847f068dfe529036"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AVV.EX01.png": {
+   "bytes": 67958,
+   "sha256": "3f5329279055862151851eb03f33f334677c13a671763ce0d7832f6ee334c26e"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-AVV.EX01.xml": {
+   "bytes": 280739,
+   "sha256": "9f0f1d9dc6e1f1de413e2a1e0aa739e2854647114c9a19ce22e7b0a65bad212f"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-SAG.EX01.XML": {
+   "bytes": 74279,
+   "sha256": "3ec857677b5afc128f42b3586e8c5d34800cdaada9f744292eddb52c18f3c5d2"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-SAG.EX01.pdf": {
+   "bytes": 78752,
+   "sha256": "a10dc93324d6c916a3aaa4d2334e4c670475a0b9716cede89a70e4189aaf2dce"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01.pptx": {
+   "bytes": 87052,
+   "sha256": "63061c16b4ad125ee089368b84db2b5ce7091e4d497a2282f28609e82961670f"
+  },
+  "dexpi 1.2/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V02-AUD.EX01.xml": {
+   "bytes": 40041,
+   "sha256": "85526915b738dbefe075ffa9d55c592f89806c216bbab7d3bb6a5c7c4016c83d"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01-HEX.EX02.xml": {
+   "bytes": 85925,
+   "sha256": "ea0b79eb1798f579862f488c41f0b228e43ed10ba9738454c4838747eda903c6"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01-SAG.EX01.XML": {
+   "bytes": 80003,
+   "sha256": "1f1300cce8d8b6d5edb094294efb114b0c0d0446a9d599f493ee3c8f18f1961b"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01-SAG.EX01.pdf": {
+   "bytes": 77431,
+   "sha256": "3b770604e3c589b9d9d16c02e002ae2150b9449fe4413ceec7e68284cfeccaab"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01-VER.EX01.html": {
+   "bytes": 12371,
+   "sha256": "da8d1b4392edb9f3cadff7542a0f07252f211bc094d693490cd6b423dab95e3e"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01-VER.EX01.xml": {
+   "bytes": 5251,
+   "sha256": "d51f13d234457f37ec50abf6140d41f9243f8ed1f09614b8cc8a422b41a850f4"
+  },
+  "dexpi 1.2/example pids/E07 PressureVessel with ColumnSections/E07V01.pptx": {
+   "bytes": 96327,
+   "sha256": "a694e83c7bdda60396ea1df6fd63c348614dad13cb9fe3f635bb02fa174fdd48"
+  },
+  "dexpi 1.2/example pids/E08 ProcessColumn with ColumnSections/E08V01-SAG.EX01.XML": {
+   "bytes": 80099,
+   "sha256": "1f94fd5168c85737f2401c34fa3ab67dc07f8cdd696e376716449c200f230267"
+  },
+  "dexpi 1.2/example pids/E08 ProcessColumn with ColumnSections/E08V01-SAG.EX01.pdf": {
+   "bytes": 77691,
+   "sha256": "0bcecc7c3673bcac464fb37b3fa76f49e6fc832c23c2512be44e099ea45ff296"
+  },
+  "dexpi 1.2/example pids/E08 ProcessColumn with ColumnSections/E08V01.pptx": {
+   "bytes": 96304,
+   "sha256": "029510e06a632fec9526a9ca380b969b3ba12a5e175fd42e00030b9705a09274"
+  },
+  "dexpi 1.2/example pids/E09 Tank with equipment bar/E09V01-HEX.EX02.xml": {
+   "bytes": 158645,
+   "sha256": "8b48fa29c24c099e84a43ffdbecc1f353b8173784397d5e8cf7f828104b5479f"
+  },
+  "dexpi 1.2/example pids/E09 Tank with equipment bar/E09V01-SAG.EX01.XML": {
+   "bytes": 33671,
+   "sha256": "b783806404f88f5e5b68e15f723c7af65edac6c408ce9f651dade047fcd7ec8b"
+  },
+  "dexpi 1.2/example pids/E09 Tank with equipment bar/E09V01.pptx": {
+   "bytes": 64071,
+   "sha256": "6640de0a3bdf72e36c62d28e165a951770230fdbfa9455b4bc474a0ddcfe0da7"
+  },
+  "dexpi 1.2/example pids/E09 Tank with equipment bar/readme.md": {
+   "bytes": 27,
+   "sha256": "8f2a1a30043ba099a4ca1bf30971e3e6b171f8b09b18a4acf4c14cd4e96047c3"
+  },
+  "dexpi 1.2/example pids/E11 Heat Exchanger with Chambers and Equipment Bar/E11V01-SAG.EX01.XML": {
+   "bytes": 39199,
+   "sha256": "3526758236746e645ba68c3fade9e0aaa3a29c4821fbbc5e359b3f839f154a63"
+  },
+  "dexpi 1.2/example pids/E11 Heat Exchanger with Chambers and Equipment Bar/E11V01-SAG.EX01.pdf": {
+   "bytes": 75273,
+   "sha256": "abbd5eecee0e06719da74a41d3c49c0dd29cc13471066435f176c64f8c260c32"
+  },
+  "dexpi 1.2/example pids/E11 Heat Exchanger with Chambers and Equipment Bar/E11V01.pptx": {
+   "bytes": 74630,
+   "sha256": "ecaad3293b81e1c2d01b6386872e021a469042bca95b970bd1d21bda6573355c"
+  },
+  "dexpi 1.2/example pids/E12 Heat Exchanger with Chambers, Nozzles and Equipment Bar/E12V01-SAG.EX01.XML": {
+   "bytes": 44027,
+   "sha256": "12c8b9984a3adab965c208aafe9e0382e1005943944fc662a0d8987ebb0da59a"
+  },
+  "dexpi 1.2/example pids/E12 Heat Exchanger with Chambers, Nozzles and Equipment Bar/E12V01-SAG.EX01.pdf": {
+   "bytes": 75406,
+   "sha256": "087d7c37685edd630f405b3535a617c94525ab8ac106535fd492feae01bdc484"
+  },
+  "dexpi 1.2/example pids/E12 Heat Exchanger with Chambers, Nozzles and Equipment Bar/E12V01.pptx": {
+   "bytes": 75334,
+   "sha256": "cacb74428d35dbefd6978baafc8f950652b423fcd2916a5e2841853f025e3d02"
+  },
+  "dexpi 1.2/example pids/E13 Tank with Plant Structure Information/E13V01-SAG.EX01.XML": {
+   "bytes": 11520,
+   "sha256": "0acb231b2c7e3b35fc16c3f1df240a6d64c8ee18ff9d14fed3d55e6b2036ef9b"
+  },
+  "dexpi 1.2/example pids/E13 Tank with Plant Structure Information/E13V01-SAG.EX01.pdf": {
+   "bytes": 76212,
+   "sha256": "ff96f0e0d455e898c18675a3f9fd1eba18e571d5bd9f2d34c6ccdc1f8d4ba2be"
+  },
+  "dexpi 1.2/example pids/E13 Tank with Plant Structure Information/E13V01.pptx": {
+   "bytes": 94883,
+   "sha256": "2302e27aa0fa64062b6d4433a7df4bd850657fd976f470a78f73ea0c84a514f9"
+  },
+  "dexpi 1.2/example pids/E14 Tank with Standard Plant Structure Information/E14V01-VER.EX01.xml": {
+   "bytes": 3588,
+   "sha256": "8452c16b9f61cddbba5e94da7e2ee3469a0513957efb6cdda1536873cdb52628"
+  },
+  "dexpi 1.2/example pids/E14 Tank with Standard Plant Structure Information/E14V01.pptx": {
+   "bytes": 79059,
+   "sha256": "db742ab6310ae1a0c25ea0f5924c7ed923cc669a98a4886b0b1ee08415fbbb9d"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-AVV.EX01-VTT.IM01.PNG": {
+   "bytes": 23977,
+   "sha256": "0a0485dadb0d5f80d55cb03037a935fc618751a0ce911cfb5eba0ecdc5317a7e"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-AVV.EX01.png": {
+   "bytes": 67149,
+   "sha256": "6bb1d322a5e9d0cd29822d120315339e36837d3c9d11ba99511121117f97a9b5"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-AVV.EX01.xml": {
+   "bytes": 284128,
+   "sha256": "baf9f3dd7db1fceb03b0d88033de002c9b0c8c0c25073f8d329ec451f6671b70"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-AVV/I01V01-AVV.EX01-AUD.IM01.PNG": {
+   "bytes": 20114,
+   "sha256": "873fd3eb328b85e8d29e87c0b9a9d49359b4cc9427a3858b068aa58fc81cc704"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-AVV/I01V01-AVV.EX01-AUD.IM01.txt": {
+   "bytes": 212,
+   "sha256": "aec7143e2b9e44bf459483d0bcafc7770c8dc89027f8bf1ab9b4152bc2a0c786"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-DXI.EX01-VTT.IM01.png": {
+   "bytes": 20063,
+   "sha256": "5252602ceef381aaf89eb913601364f3810d071ca8bfcb3777b58b85a00a3f2e"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-DXI.EX01.png": {
+   "bytes": 159387,
+   "sha256": "faebaa99c6e4d7f6e077608c528d6d508257c5d29a8bc3111609c74c91562eb2"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-DXI.EX01.xml": {
+   "bytes": 31845,
+   "sha256": "48294577e6c9b1eff96d6433b4ea9129ec127304b2f015bae0fef92ff86cdf07"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-DXI/I01V01-DXI.EX01-AUD.IM01.PNG": {
+   "bytes": 16515,
+   "sha256": "02a0fd5a344f14c8a110a746377b36c0cf793010ac931169fb2dc059c7a1c081"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-DXI/I01V01-DXI.EX01-AUD.IM01.txt": {
+   "bytes": 26,
+   "sha256": "4672c27e1602789e00a6b979810da3c81597289355c0c0f6d6bef5dff0419398"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01-VTT.IM01.PNG": {
+   "bytes": 58414,
+   "sha256": "0da2bc0ab1208969eeaddd14197dea485e0b70e7fb45ad09ee2b03ecf5a1172c"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01-XVT.IM01.png": {
+   "bytes": 37223,
+   "sha256": "0c0c46d91f1f2fa72e91999cdf8f95198c90e4b0efa00ef4ccaaf809e6b667f3"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01-XVT.IM01.txt": {
+   "bytes": 9,
+   "sha256": "2c8874ee5663c00502b6a6a37444f87a5eb6cc92032c5f0f7e01a48acd0e9b85"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01.PDF": {
+   "bytes": 4243,
+   "sha256": "da59709eca92d33b6500500b82cbe6a9e0f552d5338f69bd848f3426ff91f975"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01.pdf": {
+   "bytes": 4243,
+   "sha256": "da59709eca92d33b6500500b82cbe6a9e0f552d5338f69bd848f3426ff91f975"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-ING.EX01.png": {
+   "bytes": 32183,
+   "sha256": "18fc6fb6312740f61a6dc2723f56c149c518ca89e03ce80afa960d23d67a4294"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG.EX01.png": {
+   "bytes": 157933,
+   "sha256": "6da28956018864806a6a6456ee8bc7f8911bed9873956a749b14bba9e76e432d"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG.EX01.xml": {
+   "bytes": 103109,
+   "sha256": "72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG.EX02.xml": {
+   "bytes": 57575,
+   "sha256": "3d5598581378e9ed6a2e5ac24aa4819832f8fb6ba7a955f2bb308746af60c5b4"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG/I01V01-SAG.EX01-AUD.IM01.PNG": {
+   "bytes": 3640,
+   "sha256": "82baa0289a9851188eff76e6a53c290db119aed6181cbffd36d24404c1fa8feb"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG/I01V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 604,
+   "sha256": "dbda3d1d933ab544b8af2045b3daddd1f1d30050a297c57c0d2d5d670959dc18"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG/I01V01-SAG.EX02-AUD.IM01.PNG": {
+   "bytes": 2793,
+   "sha256": "5d5f6dc5cfc87b58f2d923cf94f415b194674e8322d4738999d43bc006807656"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-SAG/I01V01-SAG.EX02-AUD.IM01.txt": {
+   "bytes": 350,
+   "sha256": "42087ee8003013281185432db35a7f75b602f82d4ae16653bbcba4a2e3e8851e"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-VER.EX01.html": {
+   "bytes": 22253,
+   "sha256": "2380ebc2b289a5e9459f894184a41bb7ad264b75f5f6a9c29aca94df7ea1e0d7"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-VER.EX01.xml": {
+   "bytes": 6144,
+   "sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01-VER/I01V01-VER.EX01-AUD.IM01.txt": {
+   "bytes": 268,
+   "sha256": "68bd8cbc96160356547665f7f5e544d06db15cb331f6f75b33aeda6a33ddc304"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01.pptx": {
+   "bytes": 44469,
+   "sha256": "56de94fa8a92cfcce9aaacfaf1e04fceebd06c7a77ad6815ed6339d662c724d7"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V01_AUD.EX01.xml": {
+   "bytes": 20935,
+   "sha256": "f7547bbed902378246264036e15893bff6e2e3aace68d14fdb1871d046558586"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-HEX.EX03-VER.IM01.html": {
+   "bytes": 37847,
+   "sha256": "961ee745fcf091df012d73455096b320a9c9577e960cc22bce19d60dc592d771"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-HEX.EX03.png": {
+   "bytes": 117440,
+   "sha256": "46539c8fa49a021105b54c2ed07f58dcd18d8c4fa4cf323f2b77f11c30dd2749"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-HEX.EX03.xml": {
+   "bytes": 50849,
+   "sha256": "9e59fde2164445ec116e84b5c298b6b389e4661205f4e7d0b5df2f99faeedeb3"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-ING.EX01.xml": {
+   "bytes": 40672,
+   "sha256": "2dbf402073c2ee22a10f93bdc32eceaf79a8bf2ca9faba02044f2b096b072421"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-ING/I01V02-ING.EX01-AUD.IM01.PNG": {
+   "bytes": 4896,
+   "sha256": "2883f9e8ce8e37c88dec5b0f1f70972e27cb6382afec2b1ce49f67292bac9df2"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-ING/I01V02-ING.EX01-AUD.IM01.txt": {
+   "bytes": 251,
+   "sha256": "50ab774eba33a15e465aa55e7c946b37c911b3c25499d21be9a14a59f20db1ea"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG.EX01.xml": {
+   "bytes": 103301,
+   "sha256": "9e3a3e0abc6b87f1020560e84c73e036184d5e289316e51965eeb657232cc6b6"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG.EX02-VTT.IM02.PNG": {
+   "bytes": 15160,
+   "sha256": "508e41610894968ea204a4c2fde97a90713fbfb4ab107568313f25109ed51524"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG.EX02-VTT.IM02.txt": {
+   "bytes": 290,
+   "sha256": "496ddd31a33148c15e3384224961504e8cf5d3ce9099869761337f855a8d4c30"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG.EX02.xml": {
+   "bytes": 103468,
+   "sha256": "b9cae0afe327785f073919ea672aad5ce8ee6792b8b15f03d41387edea65039b"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG.EX03.xml": {
+   "bytes": 104217,
+   "sha256": "0b48f4a5e59bafe4bdb51fedf0e963ee458320fed767e0bf033ebb5ed9d12ef6"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX01-AUD.IM01.PNG": {
+   "bytes": 3640,
+   "sha256": "82baa0289a9851188eff76e6a53c290db119aed6181cbffd36d24404c1fa8feb"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 604,
+   "sha256": "dbda3d1d933ab544b8af2045b3daddd1f1d30050a297c57c0d2d5d670959dc18"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX02-AUD.IM01.PNG": {
+   "bytes": 3640,
+   "sha256": "82baa0289a9851188eff76e6a53c290db119aed6181cbffd36d24404c1fa8feb"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX02-AUD.IM01.txt": {
+   "bytes": 545,
+   "sha256": "5dd99331f735e86dbea6e0193d97aed169e103249f5c8f31609646de30618c7d"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX03-AUD.IM01.PNG": {
+   "bytes": 2176,
+   "sha256": "6253ad13116941d8781a38c17b6eac931602c2855684678ad0d74cfd31f42f94"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02-SAG/I01V01-SAG.EX03-AUD.IM01.txt": {
+   "bytes": 561,
+   "sha256": "e1a22147068a11bef1ee6566e0063a2172189a243cef46795a01ce9a2ad45b29"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02.HEX.EX02.xml": {
+   "bytes": 41726,
+   "sha256": "b24ee17e1e0bb963fae78d8e0ee4f6e4d7004264201cdbb0b659ddb9d53232ac"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02.HEX.EX1.html": {
+   "bytes": 33909,
+   "sha256": "615cb67a80c7f20b07a008b4910d110fbf636c1b5bc45e9a8130f0e7236df1c3"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02.HEX.EX1.xml": {
+   "bytes": 46119,
+   "sha256": "ef21de40dba0bfe4ed8deed583a93a8e46b4567f50f6abb49fc3e5c237051c4c"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02.HEX/I01V02-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 24509,
+   "sha256": "aac99c5f26d435d49381020e133db3f08bac5e51ebc58eb9a413c28d08125c90"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02.HEX/I01V02.HEX.EX03-AUD.IM01.txt": {
+   "bytes": 72,
+   "sha256": "924779d3ad78ddbcd880da3518f38d63258269631bf86bcc3ed5b7220172299d"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02_AUD.EX01.xml": {
+   "bytes": 20112,
+   "sha256": "409847121d6edcc8911c3171d3b0be9af5aa9769c73bf3401c3398430f4830da"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02_SAG.EX02-VTT.IM01.PNG": {
+   "bytes": 49451,
+   "sha256": "f6f808777b83fd53ef2098043d0b8aa611a0c642b102dfe86dc8adf99996150e"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02_SAG.EX03-VTT.IM01.PNG": {
+   "bytes": 27382,
+   "sha256": "3f627543ef64bf0320076e3c768233d8cfd0cd5aee3d295865587757d9cddcb3"
+  },
+  "dexpi 1.2/example pids/I01 Measurement/I01V02_SAG.EX03-VTT.IM01.txt": {
+   "bytes": 127,
+   "sha256": "4ec1e876fc0c05fe68199248d5de81f0ddc47916c0c040c54637fd8e836ded77"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02.V01-ING.EX01-VER.IM01.png": {
+   "bytes": 31165,
+   "sha256": "b6f0471a9eb8f3dd5ea19a6da0cffaa91e6eb981a401dc95a0e5acb43b643384"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02.V01-ING.EX01.xml": {
+   "bytes": 39734,
+   "sha256": "8908bf38a5ec143c0743c66172154cd0f143b2c4ffbe93ca1ea2be2d51dda737"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02.V01-ING.EX02.xml": {
+   "bytes": 39736,
+   "sha256": "67f92951427025668d3f6a7c4a49d8cc72d7b407008cf3c9c3aa658593c54ff5"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-AVV.EX01-VTT.IM01.PNG": {
+   "bytes": 25766,
+   "sha256": "b627e8099c18f75d88f7b3361f9e223b96f4a9a2cbd933e16d98452091e8d950"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-AVV.EX01.png": {
+   "bytes": 67471,
+   "sha256": "e16411f2879c0200ffc8d7073a2c8fd96968b0bd3c815a880e98bcb3acaae155"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-AVV.EX01.xml": {
+   "bytes": 336231,
+   "sha256": "6c6a930b3eb1ecd28a501186ef837292ca20b9f112a17b0ff4fc1a3175e45116"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-HEX.EX02.xml": {
+   "bytes": 45503,
+   "sha256": "695a0faa59e27c194ccb39bbac1f599ec057aec83f1478f8832c38087f45bd1b"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 36709,
+   "sha256": "2fad57be1ea8d9ff44877a7bf225308e746d08310e81a8f88180a30c1ed9c04e"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-HEX.EX03.png": {
+   "bytes": 180238,
+   "sha256": "db2446f4c9350eeee9455da9f7c4a1911960eaf9dd33d7f3382e8e53c8dbd77e"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-HEX.EX03.xml": {
+   "bytes": 203601,
+   "sha256": "2d8fd8ac06aa928e62f48085dd3b866fbe9374ce87d781efa6a8a172f2d28509"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-HEX/I02V01-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 17730,
+   "sha256": "35330b865a5d0c32fba4e1a9a0f5c116cb172406b801078fe8b9156bfbf14736"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING.EX01-VER.IM01.zip": {
+   "bytes": 22771,
+   "sha256": "b616224d46f274dd1481868b36e959504d7f96d7140e6a4276e2f0aa68f55879"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING.EX01-VTT.IM01.PNG": {
+   "bytes": 24639,
+   "sha256": "a00e7ca6b851ba5df4868278d3efcd5d25028386b37182ea715b2d57af1268cc"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING.EX01.pdf": {
+   "bytes": 38664,
+   "sha256": "27e1f34856a85d8851ed77701b63d0107564b06b78f235722ab298e03c7fb2ea"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING/I02V01-ING.EX01-AUD.IM01.PNG": {
+   "bytes": 4150,
+   "sha256": "5ef75c1b966699dd8efdcbd9a98623abbc98bc1cbfef59e4b885f2ec990333cb"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING/I02V01-ING.EX01-AUD.IM01.txt": {
+   "bytes": 146,
+   "sha256": "cff3b6c382098346a4032a8d13b621c232ab5d4e5f47b247776595088d4d1bc8"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING/I02V01-ING.EX02-AUD.IM01.PNG": {
+   "bytes": 4150,
+   "sha256": "5ef75c1b966699dd8efdcbd9a98623abbc98bc1cbfef59e4b885f2ec990333cb"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-ING/I02V01-ING.EX02-AUD.IM01.txt": {
+   "bytes": 146,
+   "sha256": "cff3b6c382098346a4032a8d13b621c232ab5d4e5f47b247776595088d4d1bc8"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 29817,
+   "sha256": "b9e8e2c086bbb9a75e8a7952f6cd59e8443779c292cf0f189c6b82858f2dfb2f"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG.EX01-VTT.IM01.txt": {
+   "bytes": 92,
+   "sha256": "2ef59644f71cc907ade7a14c7c788521328d1f0ac8b1d346500f451c3f77f507"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG.EX01.jpg": {
+   "bytes": 26285,
+   "sha256": "bc44d21482463638c85402f5fe1dad181c25c26668baaf6c865b0fafa713dfeb"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG.EX01.xml": {
+   "bytes": 78781,
+   "sha256": "395597e0afd99799eb971997d72375177df55a195d57770fe2f86db25bb519eb"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG/I02V01-SAG.EX01-AUD.IM01.png": {
+   "bytes": 3923,
+   "sha256": "2376bd8150f7fc0aa23b57136c678cdde2321d7dad620b5c64444eb94043485f"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01-SAG/I02V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 85,
+   "sha256": "cfc9539238d00215b392f3961152489fea81debe19709f595e197203a63c436d"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01.pptx": {
+   "bytes": 59028,
+   "sha256": "db61f171127a1e1c9d5c5dad2a2cd9ef8223b4181beb559e9bc50cd9f8cd31fd"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V01_AUD.EX01.xml": {
+   "bytes": 26489,
+   "sha256": "5a9af4fc4f19cd97b465119f53a38a876782d89b7b8d2cdf5fb74b16052819c5"
+  },
+  "dexpi 1.2/example pids/I02 Control/I02V02_AUD.EX01.xml": {
+   "bytes": 28464,
+   "sha256": "153aeae4c4ab7d563a4c21ff3843185cb5394f3c6515777c1ed873c8ece09c16"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-AVV.EX01.png": {
+   "bytes": 69509,
+   "sha256": "4ea1e041a7bec28e9ddb39f5025868794a5fdd078e13014dfd047efe9b4c1588"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-AVV.EX01.xml": {
+   "bytes": 358381,
+   "sha256": "15bc144030c43ff4b6f705e85870c764bf0bcf01f3dd87d5748a1527f96cecde"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-AVV/I03V01-AVV.EX01-AUD.IM01.PNG": {
+   "bytes": 36374,
+   "sha256": "3cb79b6ba588b86953aef1658cdec8b38fb91dacffcd0bc32d7e287cd20faeaf"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX.EX02.xml": {
+   "bytes": 71935,
+   "sha256": "f55d59f5c31a3cb20ebd3eddd96755f5f2fa74fb4194ee11a5c798c2bf686411"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 69823,
+   "sha256": "3350942a25477859e48705c690c277c2be481102ff3b42993ce3ce8b9ef852a3"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX.EX03.png": {
+   "bytes": 185645,
+   "sha256": "442e8625fd6323cdb337d7e1ebd305dc2fda9ef4c9d6de4bf56c04fb4cf27e99"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX.EX03.xml": {
+   "bytes": 235783,
+   "sha256": "6e06715bdde1913533232739f97c00f8287b7657168f27fe6157e19c052e16fa"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX/I03V01-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 32390,
+   "sha256": "c79abb12b5467db9f6999b9601b06b76cf54debd8ec0de02c00c4e8a3a89ec2a"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-HEX/I03V01-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 36,
+   "sha256": "f89b9be708df137490047e2cb18612fe8613ae01af2d3a774ef0f4cb02addb26"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-ING.EX01.pdf": {
+   "bytes": 40588,
+   "sha256": "383b09b15b58bd81ec3c91e26b32cbccb91995dac1e7b8e3a28602f4a33884a7"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 24005,
+   "sha256": "8e8273e1826925a0c2a751ade019296fca2d8a8cccab6d79d88f04b612c26adf"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG.EX01-VTT.IM01.txt": {
+   "bytes": 392,
+   "sha256": "2c81978ed08246cb14a29f8400ad822ae5372c4b07e9ed5862d5bfe7a9966d85"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG.EX01.jpg": {
+   "bytes": 33024,
+   "sha256": "eb01d830d59dc34f24e6de7df9e3c51123b463f3e6a5605ee6cf80cf50641e53"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG.EX01.xml": {
+   "bytes": 114007,
+   "sha256": "11d48f506eeea32ed91981c40f9b6e1cb0491b7ca23494a34a321f2ef9ebaf5e"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG/I03V01-SAG.EX01-AUD.IM01.PNG": {
+   "bytes": 7196,
+   "sha256": "ea0c2b60ea456f5c5f61ef618107e181302325ef69e2103f7d1d18a60fc538e5"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01-SAG/I03V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01.pptx": {
+   "bytes": 54629,
+   "sha256": "c5afda0c5f2864dc31245616975638acfdb216400c29f438883a17517a5c7c1f"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V01_AUD.EX01.xml": {
+   "bytes": 36404,
+   "sha256": "7a1bbeea46678c56ad149d611a47d9cbbe8ac2f389bb885c5c8e4f2aea03ca72"
+  },
+  "dexpi 1.2/example pids/I03 Measurement and Control/I03V02_AUD.EX01.xml": {
+   "bytes": 37437,
+   "sha256": "bfddaf0b1b5b40f12d0c28ab57aef50e0010525a53d4c8bb5b81899d0520ba78"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX01-VER.IM01.png": {
+   "bytes": 49156,
+   "sha256": "1e0998ef22306d8bd350413adc56c63fa83114ecc5da910e93101321e8372cfe"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX01.xml": {
+   "bytes": 70165,
+   "sha256": "a78af35435c8fa56f40948f3e049f51345f3001023918ee3d96fed5621e74b90"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX02-VER.IM01.png": {
+   "bytes": 32030,
+   "sha256": "6ac042fdece71f2749c04349996f5f507bc21184de10d29de68fdf5e8b09e577"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX02-VER.IM01.zip": {
+   "bytes": 37061,
+   "sha256": "d0782c353f1daf2937ec49a395315de69f3f4403507de3a1662855383303369d"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX02.xml": {
+   "bytes": 99157,
+   "sha256": "89654e840b6f0de7d5dc43d80b609852491b4f8ae15c66b7355db0be76f5cb7d"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04.V01-ING.EX03.xml": {
+   "bytes": 99157,
+   "sha256": "cd3e8856acb07a4ac19f25c2d0ee77133c804e1c02088efd6eb46d15ad44bfe0"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX.EX04.xml": {
+   "bytes": 77538,
+   "sha256": "f374b149cad7be761d305c9a5a839bf7c55793373445aa24325a7b02d6f6d9ed"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX.EX05-VER.IM01.html": {
+   "bytes": 74478,
+   "sha256": "28e0dac326371a5e3ae26e0127b4747e9e6c42e87e2703aa3222021a0b0c5932"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX.EX05.png": {
+   "bytes": 180542,
+   "sha256": "0dc223b9e427eff4d17197e50c22d7c7c51abd89e8aa309b5d6ccb02709931db"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX.EX05.xml": {
+   "bytes": 240929,
+   "sha256": "4569007fe810c6fa5e10fc69cae8f981d3e5a6e1138ebba27072b7d639ba78e9"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX/I04V01-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 11784,
+   "sha256": "484831a7ddab187af72657b5e8aa5915ce16fa86cad45f4056b84cf2b4a4199b"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-HEX/I04V01-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 32,
+   "sha256": "163991df1b8a5051befd845afa84bd5c1a6e6b6aa7e903ec23fc809aafa5964c"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-ING.EX01.pdf": {
+   "bytes": 41903,
+   "sha256": "c56724024672de24e5c2a915a7ed5b1ec84922b95c835ff5e52e00cc07bfff4d"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-ING/I04V01-ING.EX02-AUD.IM01.PNG": {
+   "bytes": 11809,
+   "sha256": "5e87051e846ac276e7b2fccff50024c8ad76a14a8671844f9625b2f9d00bf5e1"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-ING/I04V01-ING.EX02-AUD.IM01.txt": {
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-SAG.EX01.jpg": {
+   "bytes": 23187,
+   "sha256": "73ec3ee7cca86719622fb83cbf55a67cf434b713045570abb75bd896b9ceb18e"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-SAG.EX01.xml": {
+   "bytes": 95224,
+   "sha256": "5d5c26eeed2f9a66aebfe9832b479d2becbdc66e35d4b9e2268eabb90e65a8e4"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-SAG/I04V01-SAG.EX01-AUD.IM01.PNG": {
+   "bytes": 9752,
+   "sha256": "247cf0389cc484deff803c4ceaa35c941bf9d16d0ccbc35019db470174b57f9f"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01-SAG/I04V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01.pptx": {
+   "bytes": 41545,
+   "sha256": "8f5fff41fe09c71cc52366de419c5045457064535edf165e1ed7ffd8164d8457"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V01_AUD.EX01.xml": {
+   "bytes": 42672,
+   "sha256": "067ef4bf8a85a2c7c0cab8f09e5f286bf2f7b092254eb233c9f3f53b0579419c"
+  },
+  "dexpi 1.2/example pids/I04 Measurement and Control/I04V02_AUD.EX01.xml": {
+   "bytes": 45089,
+   "sha256": "dc270b33f9674c010ea6bd9d8a066ec8ab831845416af92ed285d56ce5b04453"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01-SAG.EX01.pdf": {
+   "bytes": 23455,
+   "sha256": "4e81818fc4023bee367d402e538dab6cd156ba2a2ae283da4cab6d1b4412b499"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01-SAG.EX01.xml": {
+   "bytes": 256006,
+   "sha256": "771afdcb4c436df50968c6fbb45deb369594956689eb156e5b14e288861b8ab7"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01-SAG/I05V01-SA.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01-SAG/I05V01-SAG.EX01-AUD.IM01.PNG": {
+   "bytes": 20169,
+   "sha256": "8a0cc515de1279436b3b1cb2a4b79c8f531afd31f1b90fa05817441754142503"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01.pptx": {
+   "bytes": 65410,
+   "sha256": "736be244b0c17a99eb0a7b2028c34127ac5ede40b984da192625bf101b435041"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01_AUD.EX01.xml": {
+   "bytes": 65141,
+   "sha256": "5c0ec7537e3880c18e0de57edb9294d69a84e7b4e6172a43ccc861055e8b8c7d"
+  },
+  "dexpi 1.2/example pids/I05 Two flow indications and flow ratio control in CCR/I05V02_AUD.EX01.xml": {
+   "bytes": 45688,
+   "sha256": "0b8028c14e5de7443121447aa170bd33f1b4ca5a3f25a80584cc339118ba313c"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01-SAG.EX01.pdf": {
+   "bytes": 23293,
+   "sha256": "ca31cfac53ec8886126cbfdc0595a690b41b55405cd884163ca502706ec07141"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01-SAG.EX01.xml": {
+   "bytes": 192981,
+   "sha256": "009d7cdd4f515722f093e07d00f2649df512dec7eb3f206a3a29a6c746cf83b1"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01-SAG/I06V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01.pptx": {
+   "bytes": 62218,
+   "sha256": "07d7fd2ffceb25632a476dc58734ca093937cad036d31c38c9f1a96c14427fcb"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01_AUD.EX01.xml": {
+   "bytes": 50499,
+   "sha256": "94f419fd601d33ca35529e6a31fbfd11f28ece69f0b9469bb3b320e3cda7c13e"
+  },
+  "dexpi 1.2/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V02_AUD.EX01.xml": {
+   "bytes": 42109,
+   "sha256": "6fee0193680e47ed19cacf658feb4467af84fc9ce2726d537cc2bd49bb9c6908"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01-SAG.EX01.pdf": {
+   "bytes": 23056,
+   "sha256": "49329d21d3cef0ca35e9adf07ad94302623525d9c2836162498bee08bba68550"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01-SAG.EX01.xml": {
+   "bytes": 123691,
+   "sha256": "5dd15b98ace9f841963e6914e227bd5a7544e71ae656c206b1db5cc137bef5fa"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01-SAG/I07V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01.pptx": {
+   "bytes": 60594,
+   "sha256": "f52ea3df3630079b70159dd3670c10d3b4778d6e973c3fa85bd027cea25babf9"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01_AUD.EX01.xml": {
+   "bytes": 33752,
+   "sha256": "8b3492d6bc7c94252b32bf2f5b71edcc517b8df3c1f7c1a4ffaee80c1e414871"
+  },
+  "dexpi 1.2/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V02_AUD.EX01.xml": {
+   "bytes": 32019,
+   "sha256": "06f668de2ff098c5879cdfe351d4691075810bd82941397123a23628166dde73"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01-SAG.EX01.pdf": {
+   "bytes": 23176,
+   "sha256": "9acb74f6f5e38bd92f471fec8d8c52c8fc9bc16b0671131201966b3354cf2b9d"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01-SAG.EX01.xml": {
+   "bytes": 161107,
+   "sha256": "3fa238d1d4c43454d3e52625ac2bccf49b85b918076e22384410a929f2a3eff8"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01-SAG/I08V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01.pptx": {
+   "bytes": 62450,
+   "sha256": "c629bffd1f288a7a50a28fd774b797e33a8551c5e8df68d9242d9ec8c4e794bd"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01_AUD.EX01.xml": {
+   "bytes": 52037,
+   "sha256": "44a8ed280aef6cce7276575a44eb694af372cac7833a5ded22439aa9a5cf3b81"
+  },
+  "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V02_AUD.EX01.xml": {
+   "bytes": 37885,
+   "sha256": "6b5259fd63685eb1357fe4c05dd428c9748444f0c920e3ca517e9cedca7d651b"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01-SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 20829,
+   "sha256": "86d10e66a1296ea4eaa2c58494cc900348cff191f3c054b375e0c9c1e0f2133c"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01-SAG.EX01.pdf": {
+   "bytes": 22946,
+   "sha256": "436c8ecfef0cb0217dc917b00785d01f6184363bfde342d0ae0c2a0a34b4c11b"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01-SAG.EX01.xml": {
+   "bytes": 57953,
+   "sha256": "c1060702c2fcfebfb443356885850ff76fd001486dea59f7d238a9b57ee0b8ce"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01-SAG/I09V01-SAG-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01.pptx": {
+   "bytes": 40564,
+   "sha256": "defd58e93771982a056db1cd7bad972a0de758fb8fe0f85b98ede53b1daa629e"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V01_AUD.EX01.xml": {
+   "bytes": 20616,
+   "sha256": "aeb144665dfe776a057966229556ce6cf8e8149ff665e0720e662e40552e2473"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX.EX02.xml": {
+   "bytes": 26453,
+   "sha256": "fdd26e42f9639c3b5e61af8366539709fa0218ec5de897a30ca42d5c04793753"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX.EX03-VER.IM01.html": {
+   "bytes": 19423,
+   "sha256": "c0510771670e32e98ffbe5c360470cf8e714bd569b00f29e37b04654f9f656a1"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX.EX03.png": {
+   "bytes": 184011,
+   "sha256": "d216e2ece4c32aee27ddd6210ddb7df1598dc27d606c5a7310bd5c50cf2ed5b5"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX.EX03.xml": {
+   "bytes": 188139,
+   "sha256": "0e0d94ec020b4084751472f0fe1d71c58c860fe19ff33a09844355f24db37c51"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX/I01V02-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 17094,
+   "sha256": "3c25be084578962741bf8a94a48df1fb3ce58d65dbec283471e941cfd71a5042"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02-HEX/I09V02-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 32,
+   "sha256": "163991df1b8a5051befd845afa84bd5c1a6e6b6aa7e903ec23fc809aafa5964c"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02.HEX.EX1.html": {
+   "bytes": 12681,
+   "sha256": "7bfa500e4c781a105a2c618f80978d9f7e0fad5d168a4941704b90584d992d88"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02.HEX.EX1.xml": {
+   "bytes": 29746,
+   "sha256": "785c4228a0c83ee92aa2d5234805aeeddfe77134e61d488aa1d4956ad848779f"
+  },
+  "dexpi 1.2/example pids/I09 Measurement/I09V02_AUD.EX01.xml": {
+   "bytes": 20236,
+   "sha256": "75fad0cdb8f93da7e8f0082f69243a145f650ef0f603c7e35da17adc49550c34"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01-SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 20534,
+   "sha256": "2583d10ff2134e325f8d48cf782d016e397073e2456a33d28009b516acd3cae8"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01-SAG.EX01.pdf": {
+   "bytes": 22751,
+   "sha256": "16b8d9c0f9dd94347c6f66e74aaeac906b8195b92df6e8db300cbf07187814b0"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01-SAG.EX01.xml": {
+   "bytes": 59047,
+   "sha256": "9056157097e87dc232e094562c4f0ff3e02a6b4af87db27962593785e9a30cf1"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01-SAG/I10V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01.pptx": {
+   "bytes": 42666,
+   "sha256": "be5ad9dffb6ca12df0b7723a22754aeeb2a8ed772860003abe61acb763ff8951"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V01_AUD.EX01.xml": {
+   "bytes": 15721,
+   "sha256": "b09f1f696c815d96c760431322f15d95ff668ed657503e65c3224f740153be12"
+  },
+  "dexpi 1.2/example pids/I10 Measurement/I10V02_AUD.EX01.xml": {
+   "bytes": 14734,
+   "sha256": "46e9a03950521577eaf0ef513a593f86e5961faeaf6f0f72af1ffd65a11edcd5"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11.V01-ING.EX01-VER.IM01.png": {
+   "bytes": 30546,
+   "sha256": "594124542d3219747f7441ce8d4f5d107a04e203cfdb280559193a5c591f5f0b"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11.V01-ING.EX01.xml": {
+   "bytes": 41244,
+   "sha256": "6acea22d4f444a562172e573aa72212a7416af04b4fd3daa43d5050df6447eb0"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX.EX02.xml": {
+   "bytes": 37957,
+   "sha256": "adf650bb1760a5af13d46e3e5bd203360bf77bd12f2407b063325dc665b526b0"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 41785,
+   "sha256": "6bc4d57adf9a46fc56d566fcd001349ac7cf9c76cb4f376433db4916df6b8633"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX.EX03.png": {
+   "bytes": 178107,
+   "sha256": "ad1b91d8ec8b2ba86f70c1350ad90dafac30b1ab5d79f261aa5fe349c6bcd4ff"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX.EX03.xml": {
+   "bytes": 204381,
+   "sha256": "bca240740fab07e2a11bbc073e4c57cf837f28a6a94c29ea45f09c791b5fe945"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX/I11V01-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 32,
+   "sha256": "163991df1b8a5051befd845afa84bd5c1a6e6b6aa7e903ec23fc809aafa5964c"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-HEX/I11V01-HEX03.AUD.IM01.PNG": {
+   "bytes": 18536,
+   "sha256": "dbf0886b69b3a5de61cc4e2c0495079586cf9579e6df92836215b688a665fc29"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-ING.EX01-VER.IM01.zip": {
+   "bytes": 22113,
+   "sha256": "ca651a4fa0e584cde133faa449b94bd9d003fe8ae16a71e06051c12ab7ba56a7"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-SAG.EX01.pdf": {
+   "bytes": 22754,
+   "sha256": "7332b52a8e3e528983e02e23caf05d6c0794dcff12692fa7f68319be5230ff98"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-SAG.EX01.xml": {
+   "bytes": 88037,
+   "sha256": "fadab5cd577b065d55f05bf045b9598d16c0691e4c3049c07bf71bae65f0d0ef"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01-SAG/I11V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01.pptx": {
+   "bytes": 38876,
+   "sha256": "e13e6445def491693b71064dbcfe1e286d56e3fbc502b9cbd7373e0965da427d"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V01_AUD.EX01I.xml": {
+   "bytes": 26382,
+   "sha256": "c349f9b2949ce4735d0810450ce3561c37e07f373b250f25465bcd903d244745"
+  },
+  "dexpi 1.2/example pids/I11 Measurement/I11V02_AUD.EX01.xml": {
+   "bytes": 26768,
+   "sha256": "b059b89ccaec89f4d320bedc65af061d120aaea5a49ce00af823a51f8f0e6f11"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12.V01-ING.EX01-VER.IM01.png": {
+   "bytes": 30643,
+   "sha256": "177d836b43f7a060aaada2b732ad8079e67ac717a6feeb40e1a8da834361b6c0"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12.V01-ING.EX01.xml": {
+   "bytes": 46794,
+   "sha256": "c0be87a45fbec42b6c9036409faaf9b9b99f4a1b4c89840119de6e7ae3884879"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX.EX02.xml": {
+   "bytes": 48833,
+   "sha256": "4b3c172afbfa5ed54176669a1ac3a90f8567ac1d2351339d5c7000a9ddb3f0b5"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 43524,
+   "sha256": "7af7516b946f3b42b7cc009a98d4f9f177f9b50b4a75322f717e536fb3dd4b61"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX.EX03.png": {
+   "bytes": 178663,
+   "sha256": "30df397c7cf27316193c1d4dae06fd0599d3969c8a2be58be6922e6c69bc1648"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX.EX03.xml": {
+   "bytes": 207481,
+   "sha256": "426ce8ae0005dfa20a01343886e0888d525491ece573bfb7e10c7cd6cd28ef24"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX/I11V01-HEX.EX03-AUD.IM01.PNG": {
+   "bytes": 15054,
+   "sha256": "6cb7bd4cc7fca34719cd564a48904fa15da4a6e5fb5d8b7b7fe507a7d54e2383"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-HEX/I11V01-HEX.EX03-AUD.IM01.txt": {
+   "bytes": 32,
+   "sha256": "163991df1b8a5051befd845afa84bd5c1a6e6b6aa7e903ec23fc809aafa5964c"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-ING.EX01-VER.IM01.zip": {
+   "bytes": 24866,
+   "sha256": "d06b8dce2927cc6b17073c7ca4a25f7e3970b9a491357531781cd3d5e431a010"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-ING/I11V01-ING.EX01-AUD.IM01.txt": {
+   "bytes": 32,
+   "sha256": "163991df1b8a5051befd845afa84bd5c1a6e6b6aa7e903ec23fc809aafa5964c"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-SAG.EX01.pdf": {
+   "bytes": 22997,
+   "sha256": "202a510ab9fff6a3ceaa110aad1915c45da744104e91b62d091e587f2498b2d4"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-SAG.EX01.xml": {
+   "bytes": 79503,
+   "sha256": "410947946ebe6b29234591d3ea743ae1f04036a79e080bb69a2f0a664dc2e29f"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01-SAG/I11V01-SAG.EX01-AUD.IM01.txt": {
+   "bytes": 61,
+   "sha256": "e018c274edc753a49474f62bb7beb7b2c46446e91fa5f5c32b0e339350ef339c"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01.pptx": {
+   "bytes": 47300,
+   "sha256": "fa275ee3f11feadce8fa7bc4dd1d199f42f56e21e137680e8549a524b8102d21"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V01_AUD.EX01.xml": {
+   "bytes": 28320,
+   "sha256": "134a686d9957061f5228e72b86290094df8e3a65215db9e0f763f9f1f8795101"
+  },
+  "dexpi 1.2/example pids/I12 Control/I12V02_AUD.EX01.xml": {
+   "bytes": 28513,
+   "sha256": "4d06c79f054cdd1d06fef1d352a1aa1c59ef5c058d6d81032f3537565eb627f0"
+  },
+  "dexpi 1.2/example pids/I13 Measurement/I13V01.pptx": {
+   "bytes": 36864,
+   "sha256": "598db6ca456a12fc64cf8a7041ce609de78e4dcf23f4a92a78537e477321d818"
+  },
+  "dexpi 1.2/example pids/I14 Measurement/.gitkeep": {
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "dexpi 1.2/example pids/I14 Measurement/I14V01.pptx": {
+   "bytes": 40751,
+   "sha256": "8573cc4bcb5a11c222953acf546e5c83a60f2e9d414401f07f2920534e11d5b0"
+  },
+  "dexpi 1.2/example pids/I15 Measurement/.gitkeep": {
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "dexpi 1.2/example pids/I15 Measurement/I15V01.pptx": {
+   "bytes": 46702,
+   "sha256": "ef45568e94956550269b054e342b459086a1338d046cd83b94edc084e6e4a383"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 32831,
+   "sha256": "6732c3a4a9dbb865227046d9793a5db3c9a9f26b608e7e98bc9d200e219cc704"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AUD.EX01-VTT.IM01.txt": {
+   "bytes": 112,
+   "sha256": "c60fbac4471d4996e0afb1e36de3ecc1fa813c3bec164d8044dbcbd875e3c8eb"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AUD.EX01.png": {
+   "bytes": 63057,
+   "sha256": "c08648fe42dc801a8c32921fdf2c5f067f08d7679430b67d2f4cc9e72aa4eeba"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AUD.EX01.xml": {
+   "bytes": 25258,
+   "sha256": "f173ab8acb12c92d101fd6880be23370bacfff67318f437ce5f49bd735d63899"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX01-VER.IM01.html": {
+   "bytes": 24372,
+   "sha256": "1c7b55444cff48ea0914c25a7f7ae23a3b38746c7d2c05187d581e55cbd5f32d"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX01-VTT.IM01.png": {
+   "bytes": 27078,
+   "sha256": "1f3cc2550a3aae9fdbfd212631c5fe80671b3df3178e69f1c7f61481385e6da6"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX01.png": {
+   "bytes": 151683,
+   "sha256": "499e6bc7338d9a448b26a2af328c77b122688320c9572066cfd8512b92e4656a"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX01.xml": {
+   "bytes": 269637,
+   "sha256": "9a9963ba4f2f45740cfaf7783333d836d77a5ac63217f2411c1c42acaad8a287"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX02.png": {
+   "bytes": 105840,
+   "sha256": "8729c2b6cfbc1fe35d90bf08792e38258c1df406aa7f4bd6efa330321ef187d8"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-AVV.EX02.xml": {
+   "bytes": 269297,
+   "sha256": "d1ab9f2b9f24b852ece1e70fae2feaf8b8c7d37cbc2f6c1532e41805f8849c56"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-HEX.EX03-VER.IM01.html": {
+   "bytes": 44608,
+   "sha256": "85d8a89c09dbba99394ae921e1d3892d3a8f563be0ceb6613255999ba5cd2cf2"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-HEX.EX03.png": {
+   "bytes": 120590,
+   "sha256": "7b104d42a155e1de022ca49d473ff42deb7c5cbf1b30e1db2be91a16f9a6e289"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-HEX.EX03.xml": {
+   "bytes": 58278,
+   "sha256": "34b734a4b09714d0e2658fe089b5e253c34b9601510f06a00afa43d8e7bab04b"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX01.PDF": {
+   "bytes": 5320,
+   "sha256": "6c1191439d5d439d76ea565ebd80be04b09ea097b1dcbb92d468daba0cb5624b"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX01.png": {
+   "bytes": 31645,
+   "sha256": "92c54a07c8855d1498587bc88c49320533996586b988aed890952366a11e27df"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX01.xml": {
+   "bytes": 38699,
+   "sha256": "e62977b6b69c97d4f897dcc75ab4e10b72c1ed0e1098f34608d0b48633bbfbc5"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX02-AUD.EX01.xml": {
+   "bytes": 9073,
+   "sha256": "9d5ac6441248ac83ea864a3bf972af376e5b214bc7e1e2db84c496ea29375760"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX02-AUD.IM01.png": {
+   "bytes": 8698,
+   "sha256": "627c9b4f559408563a1b6f908eb84f5f95278e69bd191dcccbf075c1e760dff5"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX02-SAG.IM01.png": {
+   "bytes": 207881,
+   "sha256": "c3ea61d658b4ef33f1e47ac5d49c24fc48c211942d438674246609435d486882"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX02-VTT.IM01.png": {
+   "bytes": 54948,
+   "sha256": "9573126b4744913dd911cc14c7d4bc5029ed73ed7a8d62bfc1c07e89d8d059d3"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-ING.EX02.xml": {
+   "bytes": 38849,
+   "sha256": "f7e50a3e34afb0ac4f78021ba18666966baf6b07bb360a6991161ea29ea12a50"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-SAG.EX01-VTT.IM01.png": {
+   "bytes": 67370,
+   "sha256": "4d236768a6f6e3b2be00430b9f0daaee0630726f98d8e0ee5c96b777067116fb"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-SAG.EX01.xml": {
+   "bytes": 180527,
+   "sha256": "d32cad24cba11a9cfc2d05d644d5c155f2cd66dbaaed6857e921f87d57afe18c"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-SAG.EX02-AUD.EX01.xml": {
+   "bytes": 9864,
+   "sha256": "14c968777b0f01d16265f8a6ba3ccf9715538e89190daf17f0a349f35d7bfcc7"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-SAG.EX02-AUD.IM01.png": {
+   "bytes": 35126,
+   "sha256": "583c2a97a2f6bd2ef395a8e7b39dc1dbae7ba644d7ca6682ca84d227eb307782"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01-SAG.EX02.xml": {
+   "bytes": 190262,
+   "sha256": "d22a001ddbf02f68f2f16af2ab1985e8f4cfef1484f8947a1787798016dd5ec2"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V01.pptx": {
+   "bytes": 43679,
+   "sha256": "ad5c9944718e5b99c1840dcf94a3ae31fba760a285884a11876fc17e87542dde"
+  },
+  "dexpi 1.2/example pids/P01 Pipe FromTo Nozzles/P01V02-AUD.EX01.xml.xml": {
+   "bytes": 24472,
+   "sha256": "3397bca910a809a159b2eee6e7f31c660ee5765c0534a363a5cc8088d7f933b9"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/2RENAME/P02V01-INTERGRAPH_Post.xml": {
+   "bytes": 31792,
+   "sha256": "b34a0f9fbb07738468c26061bb612adb1433f7e3a2b7fb4554233ca1893d4ae2"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/2RENAME/P02V01-INTERGRAPH_Post_C.xml": {
+   "bytes": 31886,
+   "sha256": "5cff82f330422d98485a9d5893ef48e5522685031d19e56b2bc52c577e6ec517"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/2RENAME/P02V01_INGV02-AUDV01.xml": {
+   "bytes": 9074,
+   "sha256": "4dcc718f535e5588f5fb72ad289e0ab64fbde61286d945999bedcc4bcee39bc3"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P01V01.pptx": {
+   "bytes": 43679,
+   "sha256": "ad5c9944718e5b99c1840dcf94a3ae31fba760a285884a11876fc17e87542dde"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX01-VER.IM01.html": {
+   "bytes": 19845,
+   "sha256": "b93399a0a5c911554f3759c0374efe9a731674388b171c0f4dee658fc3a4ba63"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX01-VTT.IM01.png": {
+   "bytes": 21241,
+   "sha256": "ea9b578b2133077330b2fd093221b1c73faa5fb6c585c59743da9997d8d768c4"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX01.png": {
+   "bytes": 149723,
+   "sha256": "48affadea758f2d08f01fa246b37c586c3e91490b3075f0b6ab4549e894b09de"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX01.xml": {
+   "bytes": 262208,
+   "sha256": "59c89d9882b4af488b6766ce10da6c376c21e1ebf29bc89bd2dbd7996cf21575"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX02.png": {
+   "bytes": 91404,
+   "sha256": "ab71142ccecf4f6618c41f1fe983a9a6a1b784540b58bc4f53503481549880e4"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-AVV.EX02.xml": {
+   "bytes": 262104,
+   "sha256": "d0233ab2eef019c01744dcefa6669b1499a6debd343da9b3d7cc4597c489940c"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-ING.EX01-VTT.IM01.PNG": {
+   "bytes": 51232,
+   "sha256": "98dfc5f5f1dd2f1f4a1cee1f0f274d20e4bdf3b91458da83d773c52a6633cc83"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-ING.EX01.PDF": {
+   "bytes": 12668,
+   "sha256": "3c8ad2d51671e842e26cd79e4c30cad4bb6ddaa091247e9f99621db2dac2f1fe"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-ING.EX02-AUD.IN01.png": {
+   "bytes": 4210,
+   "sha256": "bbcdf8dd078b7e11321d400030dea6946f11f1c61b4a06672320296937906045"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-INTERGRAPH_Post.png": {
+   "bytes": 31136,
+   "sha256": "8cfb0a1cd211b9c07ddca9d328c8abab2261609b61c40c8bd3707b4472bf90a5"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-SAG.EX02-AUD.IM01.png": {
+   "bytes": 22015,
+   "sha256": "80cb0e6ef39e3dd0a8d41d5ef9aebe1fed56fc978fae67bbd1eeeeb90b429e6d"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-SAG.EX02-AUD.IM01.xml": {
+   "bytes": 9791,
+   "sha256": "5e15a0632b91e4a8e8d16e2e70dcd496f14506ccf6b0bc94d175c85d762c0a03"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01-SAG.EX02.xml": {
+   "bytes": 95383,
+   "sha256": "da02d5a052152140e8810d0e6802a706280fdc4d7e6536a28e34689f8fb5cb04"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01_SAG.EX01-SAG.IM01.png": {
+   "bytes": 207969,
+   "sha256": "edf65b395fc0e4a680684c978302f3b64e58585268d1cd2cb94a564a69417465"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01_SAG.EX01-VTT.IM01.PNG": {
+   "bytes": 65983,
+   "sha256": "796c11cc3523c8378ae14c77beb7b6b6cdd9940f2009c8a73e699514a14acad5"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V01_SAG.EX01.xml": {
+   "bytes": 95109,
+   "sha256": "82c55900279ab89ad733da6e1b934daa0591601d49127c9d72111aa3c06c3019"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V02-HEX.EX02-VER.IM01.html": {
+   "bytes": 37805,
+   "sha256": "75011ccb40090115c31b71ce3e97327657265eba64118452fac183f45f0beab5"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V02-HEX.EX02.png": {
+   "bytes": 117294,
+   "sha256": "805f7a6d3585648936ce62700d2be3cc26c0801e7430766017ed75b3d1deb56e"
+  },
+  "dexpi 1.2/example pids/P02 Pipe From OPC to Nozzle/P02V02-HEX.EX02.xml": {
+   "bytes": 43838,
+   "sha256": "9129a3ea3d03e105ba1e28cc975e26b212408f4c081e32ed4728d95d3d901ebc"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 35543,
+   "sha256": "96a7e5061775eec4f1eaa51de5762c3a839e027ffbf830ac4ef97962c46e3dbc"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-AUD.EX01.png": {
+   "bytes": 53990,
+   "sha256": "542664570e35ad1e8e564d87ff6a7af92f4dad1d2218a7fc4a883490060e35f3"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-AUD.EX01.xml": {
+   "bytes": 17931,
+   "sha256": "599146df68e1ac86b41b2d0903536d0ab6dd1ac12a62302647ae9725ed1f44ff"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-AVV.EX01.png": {
+   "bytes": 95707,
+   "sha256": "80ceff685e0b8a73e902e3958b04d95ffee3df5e823b3b2c83dedb846c222f16"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-AVV.EX01.xml": {
+   "bytes": 258907,
+   "sha256": "21f32f5b533af538deec3b7fa232cf74837a2cc15bb6a8e408bdb140b76a0dbe"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-SAG.EX01.XML": {
+   "bytes": 48613,
+   "sha256": "d1ddc2ea6275d27f2b606c745ceb55c9bff818f845a2b82657c296a7eacec3d4"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V01-SAG.EX01.pdf": {
+   "bytes": 77921,
+   "sha256": "c5fd76802352449346a050d3178eec69d4859453fe0bbfc637af53ac5883f22f"
+  },
+  "dexpi 1.2/example pids/P03 Pipe With Edge/P03V02-AUD.EX01.xml.xml": {
+   "bytes": 16965,
+   "sha256": "4cbe52fade690edc659d837b0ab51d5ca13b75909376705cc71221ff7448d634"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AUD.EX01-VTT.IM01.png": {
+   "bytes": 32959,
+   "sha256": "1221b79ead1d9c45d00074277a8efaee2e2c31d37bbd4511eaaaea8b146ca841"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AUD.EX01.png": {
+   "bytes": 52469,
+   "sha256": "0803dfaf311baf9547c001e410cec58126f4149945193a6706c25c017426d75d"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AUD.EX01.xml": {
+   "bytes": 25485,
+   "sha256": "79a4ff38c1558d836ce2d1b657854da069f823d7d277c219de30bbd43845f10b"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AVV.EX01-VER.IM01.html": {
+   "bytes": 48346,
+   "sha256": "2ee32742b6b0b2ff6165eccc1f4f37e322045cf39545ce96c4b64764df5b6af9"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AVV.EX01.png": {
+   "bytes": 146356,
+   "sha256": "f7d054dcaa8712383e61dc008181a83eba5c7c6f002c0ddc141d7908403c49a6"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AVV.EX01.xml": {
+   "bytes": 290916,
+   "sha256": "118c878ffbde14e26171ee8616debf485c45dd3c6468d08887440b810b3f3337"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AVV.EX02.png": {
+   "bytes": 101446,
+   "sha256": "5e12ec41396801a4e2a576cb45e240c00a6d0d9298500dd1276eac35a8d876d4"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-AVV.EX02.xml": {
+   "bytes": 290647,
+   "sha256": "5f14c57eac101dd42f779b7bf4303ffd8549fe881cbfa15bbd4bcf15d6a19e48"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-SAG.EX01.XML": {
+   "bytes": 58217,
+   "sha256": "283e5891004f74761572557fc51ed6a423054db929f51d6ea13bd4d834774807"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V01-SAG.EX01.pdf": {
+   "bytes": 78212,
+   "sha256": "8f2df621c05ce706d4f6317b2e76781de9fb73740f7e66f369795238c8d5eb65"
+  },
+  "dexpi 1.2/example pids/P04 Pipe With Intersection/P04V02-AUD.EX01.xml.xml": {
+   "bytes": 24042,
+   "sha256": "e2f83b4734a5148e334fd68c226a23bd0d7b2db10c7e8bbb193c636a9a549d22"
+  },
+  "dexpi 1.2/example pids/formalized_testcase_naming.txt": {
+   "bytes": 73,
+   "sha256": "ea88fe7f288fd29bce10f02dfe565a8a059ff5e7f7a4c167f64fd5b1ed63ed68"
+  },
+  "dexpi 1.2/example pids/readme.md": {
+   "bytes": 507,
+   "sha256": "d5c7c9b565cce5405d817f03f21ae16644b7989080f47448c128f808dc1dfdfd"
+  },
+  "dexpi 1.2/tools/crawler/java/BeltCrawler.java": {
+   "bytes": 5836,
+   "sha256": "0efed0d6867c110aa16075b098be3d43c70947c6dab9aeff3830cae30668e1a9"
+  },
+  "dexpi 1.2/tools/crawler/java/MatrixCrawler.java": {
+   "bytes": 7256,
+   "sha256": "a7309e2d1991b87f7a840e547901ecd397253132445291232b79a4bf90bce02c"
+  },
+  "dexpi 1.2/tools/crawler/java/readme.md": {
+   "bytes": 1376,
+   "sha256": "a3d062b8475b2ff024545bc122a3e694602bde14c835afc0dbc6e1b5a9328f3d"
+  },
+  "dexpi 1.2/tools/crawler/python/process.py": {
+   "bytes": 2717,
+   "sha256": "371a757ee65cb8ba15714e1058ae178ec76be75be33871593f9d7d91eeeb802b"
+  },
+  "dexpi 1.2/tools/crawler/python/readme.md": {
+   "bytes": 1513,
+   "sha256": "fb6d39ee693bd48642c7cc9e99c4e060c8cacbdaa13819e791f60ae0a94223bf"
+  },
+  "dexpi 1.2/tools/crawler/python/requirements.txt": {
+   "bytes": 19,
+   "sha256": "0621f1d6bab40de17fb468c613e348d50a3f93671d15a2da266b23d5b8bede7a"
+  },
+  "dexpi 1.2/tools/crawler/readme.md": {
+   "bytes": 288,
+   "sha256": "7121b61fa0862d079b9f6c3d830da0be0e844b4f14ef8473559d7e81c38361b0"
+  },
+  "dexpi 1.3/README.md": {
+   "bytes": 128,
+   "sha256": "492d3a49caa744287816cc13d2d0cba73b76b3dd6d1569ae315f26a8499b8e19"
+  },
+  "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.html": {
+   "bytes": 542684,
+   "sha256": "ee36651a88daa4ff615b797cbf2f7092c41208e6a6c30d582db698960b5207ea"
+  },
+  "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.svg": {
+   "bytes": 79543,
+   "sha256": "49696872639b2f99a9da72cd83adb0ae29e427c24c75ad374d33e3382e1db047"
+  },
+  "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.xml": {
+   "bytes": 445726,
+   "sha256": "a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c"
+  },
+  "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04.pptx": {
+   "bytes": 219106,
+   "sha256": "874322f7e7096c0ad79caba1b5faacfac43ce79cae49df0c4988cb2b24900572"
+  },
+  "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.html": {
+   "bytes": 7837962,
+   "sha256": "c11a56405a2dda09a910a77088d12e9f39aab34eee17014c8f8cb220d31f6b8f"
+  },
+  "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.svg": {
+   "bytes": 36988,
+   "sha256": "a2e5f4e740ab203213ca9e697956b3a10d7603ffe4d1239158e077cd4cc260a9"
+  },
+  "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.xml": {
+   "bytes": 157666,
+   "sha256": "dfe4323c18d018caa4b28ec789b3dbee21be73c6a07c7cbd0791ceebd322113b"
+  },
+  "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03.png": {
+   "bytes": 83323,
+   "sha256": "96fc53d12d1054b07b8ffacb13c397834bdb5c4bb2f7085f1e97078fceec28b2"
+  },
+  "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.html": {
+   "bytes": 3528173,
+   "sha256": "80a099253e0e83ae28e8090056d8959ced6d7821920b09c1d7a1ba40867389b5"
+  },
+  "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.svg": {
+   "bytes": 13397,
+   "sha256": "6c0dacb00362dba4261b6b752b3b9e73ad9ac952bb7d6fac068fe1a37540d18d"
+  },
+  "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.xml": {
+   "bytes": 68507,
+   "sha256": "a1c892f3bc21338c2546baf71e10abf11e3653b7cd6956b1a24bcfab0db88f14"
+  },
+  "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04.png": {
+   "bytes": 56022,
+   "sha256": "708036cea682f4bfe6a79b9d203df568f9681427fb8599f206bb9526a0768168"
+  },
+  "dexpi 1.3/example pids/C04 DEXPI Reference P&ID (Excerpt Centrifucal Pump and Plate Heat Exchanger)/C04V01.pptx": {
+   "bytes": 44308,
+   "sha256": "ec2259a370e23a71b0738139473d012ecc002fd7456c068cb0edeab3282dd264"
+  },
+  "dexpi 1.3/example pids/C05 Pump, Tank, Control loop/C05V01.pptx": {
+   "bytes": 134340,
+   "sha256": "424dad546b752ccb4d3c3cad21f5517f6499fc60e5bd49f5baa75570cbd4fdb7"
+  },
+  "dexpi 1.3/example pids/C05 Pump, Tank, Control loop/readme.md": {
+   "bytes": 55,
+   "sha256": "761f92391bbfdfa99064ba1c7cedefe4f4c9641bcf719e932d2c78fb5306ebc6"
+  },
+  "dexpi 1.3/example pids/C06 DEXPI Reference P&ID (Excerpt Tank and Displacement Pump)/C03V01.pptx": {
+   "bytes": 53310,
+   "sha256": "e680bf91a32723ba91a5d486624d75661e393c1bcb39a4f4cb4dba38ecaa17fb"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Drawing List.xlsm": {
+   "bytes": 45543,
+   "sha256": "d3fb7acdb3c8232dc2b27faa1872445afd4071bf5dfa4a8ef9460dd8242b4c3b"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Equipment List.xlsm": {
+   "bytes": 70620,
+   "sha256": "afdf56ceaf1b4c37753c3db64089474b591c7c2f4aad611d1d27e551cccc2756"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Instrument List.xlsm": {
+   "bytes": 60373,
+   "sha256": "b3efe5b9938846c667962a6129c8c2a11a95c9b8d314c5d6243c489d2fd1326f"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Line List.xls": {
+   "bytes": 216576,
+   "sha256": "ba8011d1ddc7ba420ea009a0cfb570e50fd50e87f513d041304c48e5f637d3a1"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV PCS Connections List.xlsm": {
+   "bytes": 249988,
+   "sha256": "76e3757103f9204558e86e9290e55c986b7f26a95dc26e2997d3e3f1e32fd44b"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV PCS List.xlsm": {
+   "bytes": 55103,
+   "sha256": "f63958913b4f02be5b587664701af81a9c94c706554160aefef4bc59a9098c6e"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Plant Items.xlsm": {
+   "bytes": 93735,
+   "sha256": "3c10e859211d84be36a6a4249bf981b6c60c33c91ae3f2b68450548fe8e4c2b3"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Valve List.xlsm": {
+   "bytes": 63990,
+   "sha256": "382ac22ad1f5091f9a4764347c544b19e8afa11916b4c6bf24759797e1216cc9"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-1234567.pdf": {
+   "bytes": 108975,
+   "sha256": "a573c517ceebb8a240f88322f2edbe69a70e1c33fb0f33f8515e6055c3db187c"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-1234567_bw.pdf": {
+   "bytes": 108694,
+   "sha256": "c4184cab8538f728f1ab23787415ad90076582d50f8039509c384a2398bf8ccf"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-2345678.pdf": {
+   "bytes": 69885,
+   "sha256": "d5deef9e41451f1c382f7ee169fac7fcb6a451139cdf31af7367fdcbf37bd9d8"
+  },
+  "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-2345678_bw.pdf": {
+   "bytes": 69751,
+   "sha256": "a9bfe903a2a8ba07eea128190f6332239790d3246aaeef498b761a8c0e5ff622"
+  },
+  "dexpi 1.3/example pids/E01 Tank/E01V02-VER.EX01.xml": {
+   "bytes": 4610,
+   "sha256": "654c73ecd3eff68940bf05f48436d8662652e4faa656c759fb24d458c0e9acfc"
+  },
+  "dexpi 1.3/example pids/E01 Tank/E01V02.pptx": {
+   "bytes": 81003,
+   "sha256": "bf9cec35760cf53fed9bc7217fa69e2951708b69c641084792117a46ca27a974"
+  },
+  "dexpi 1.3/example pids/E02 Tank with Nozzles/E02V02-VER.EX01.xml": {
+   "bytes": 12280,
+   "sha256": "8bdab30cfa079009975f04d93b087a881473259a6c2e54fab2aefa7003732be6"
+  },
+  "dexpi 1.3/example pids/E02 Tank with Nozzles/E02V02.pptx": {
+   "bytes": 92391,
+   "sha256": "7941b811378a7c749c78b042b153335d8a0def45d943c5ad01d7cd3024c209c5"
+  },
+  "dexpi 1.3/example pids/E03 Pump With Nozzles/E03V01-VER.EX01.xml": {
+   "bytes": 3113,
+   "sha256": "a26bda5dda7d3b8bd6b661a5c2f8803463f94027e97ff142bcd3a0f35b8e1357"
+  },
+  "dexpi 1.3/example pids/E03 Pump With Nozzles/E03V01.pptx": {
+   "bytes": 66990,
+   "sha256": "961f743e1f02188818fe792071d908119edbbcfdc0db7da49b81d9eb3b1c85ef"
+  },
+  "dexpi 1.3/example pids/E04 HeatExchanger With Nozzles/E04V01-VER.EX01.xml": {
+   "bytes": 2728,
+   "sha256": "f40f8618b0f9a4e169bf1c43e93eb14fc478d49cd8607d2aee5452662211dbca"
+  },
+  "dexpi 1.3/example pids/E04 HeatExchanger With Nozzles/E04V01.pptx": {
+   "bytes": 74612,
+   "sha256": "ff936e116f131537aebcd79de781099f14ac515959c2f7d9d922a103a45dce14"
+  },
+  "dexpi 1.3/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01-VER.EX01.xml": {
+   "bytes": 3978,
+   "sha256": "4e899b13e7eac2a12994c6e03ff8440e43f7c53297fae4cb9fbe26a93dc6e12c"
+  },
+  "dexpi 1.3/example pids/E05 Pump With Nozzles And HeatExchanger With Nozzles/E05V01.pptx": {
+   "bytes": 96191,
+   "sha256": "54cf805188e74bb57ea18a5205def93b0ad41830477314e2c1403474101276f6"
+  },
+  "dexpi 1.3/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01-VER.EX01.xml": {
+   "bytes": 6288,
+   "sha256": "2a6b4762cd1c85c9fcf329f885ca368769a84ebd5dbf5966c6a0781bb4038351"
+  },
+  "dexpi 1.3/example pids/E06 Pump, HeatExchanger, Nozzles Connected With PNS/E06V01.pptx": {
+   "bytes": 87052,
+   "sha256": "63061c16b4ad125ee089368b84db2b5ce7091e4d497a2282f28609e82961670f"
+  },
+  "dexpi 1.3/example pids/E07 PressureVessel with ColumnSections/E07V01-VER.EX01.xml": {
+   "bytes": 5175,
+   "sha256": "04ba63b74b4d90866e8de32e4b63d1fdba64699e699ef4a0fa018a14ffed77ac"
+  },
+  "dexpi 1.3/example pids/E07 PressureVessel with ColumnSections/E07V01.pptx": {
+   "bytes": 96327,
+   "sha256": "a694e83c7bdda60396ea1df6fd63c348614dad13cb9fe3f635bb02fa174fdd48"
+  },
+  "dexpi 1.3/example pids/E08 ProcessColumn with ColumnSections/E08V01-VER.EX01.xml": {
+   "bytes": 4263,
+   "sha256": "942d3e1e16308d926f861b0f7265a1fa8053f9d2c309615d17ef6646659d6d04"
+  },
+  "dexpi 1.3/example pids/E08 ProcessColumn with ColumnSections/E08V01.pptx": {
+   "bytes": 96304,
+   "sha256": "029510e06a632fec9526a9ca380b969b3ba12a5e175fd42e00030b9705a09274"
+  },
+  "dexpi 1.3/example pids/E09 Tank with equipment bar/E09V01-VER.EX01.xml": {
+   "bytes": 1367,
+   "sha256": "861ff607e401ed84f3c9e54fa3ed3985d878fa087c1d50125360573185007f66"
+  },
+  "dexpi 1.3/example pids/E09 Tank with equipment bar/E09V01.pptx": {
+   "bytes": 64071,
+   "sha256": "6640de0a3bdf72e36c62d28e165a951770230fdbfa9455b4bc474a0ddcfe0da7"
+  },
+  "dexpi 1.3/example pids/E11 Heat Exchanger with Chambers and Equipment Bar/E11V01-VER.EX01.xml": {
+   "bytes": 4650,
+   "sha256": "0636399a6eb1f6fc1062898de4f163ac9714864481f5b44ebf7fc1235e76850d"
+  },
+  "dexpi 1.3/example pids/E11 Heat Exchanger with Chambers and Equipment Bar/E11V01.pptx": {
+   "bytes": 74630,
+   "sha256": "ecaad3293b81e1c2d01b6386872e021a469042bca95b970bd1d21bda6573355c"
+  },
+  "dexpi 1.3/example pids/E12 Heat Exchanger with Chambers, Nozzles and Equipment Bar/E12V01-VER.EX01.xml": {
+   "bytes": 11286,
+   "sha256": "edbe65f609085d7d94b30c83e83a746515a85d813c325cf5508ad6e2c4bed3f6"
+  },
+  "dexpi 1.3/example pids/E12 Heat Exchanger with Chambers, Nozzles and Equipment Bar/E12V01.pptx": {
+   "bytes": 75334,
+   "sha256": "cacb74428d35dbefd6978baafc8f950652b423fcd2916a5e2841853f025e3d02"
+  },
+  "dexpi 1.3/example pids/E13 Tank with Plant Structure Information/E13V01-VER.EX01.xml": {
+   "bytes": 2924,
+   "sha256": "fde56b4547e3b00e46c7b3d82ba0a249b10824cff1f0661a4df6bfaceeefe03d"
+  },
+  "dexpi 1.3/example pids/E13 Tank with Plant Structure Information/E13V01.pptx": {
+   "bytes": 94883,
+   "sha256": "2302e27aa0fa64062b6d4433a7df4bd850657fd976f470a78f73ea0c84a514f9"
+  },
+  "dexpi 1.3/example pids/E14 Tank with Standard Plant Structure Information/E14V01-VER.EX01.xml": {
+   "bytes": 3588,
+   "sha256": "8452c16b9f61cddbba5e94da7e2ee3469a0513957efb6cdda1536873cdb52628"
+  },
+  "dexpi 1.3/example pids/E14 Tank with Standard Plant Structure Information/E14V01.pptx": {
+   "bytes": 79059,
+   "sha256": "db742ab6310ae1a0c25ea0f5924c7ed923cc669a98a4886b0b1ee08415fbbb9d"
+  },
+  "dexpi 1.3/example pids/I01 Measurement/I01V01-VER.EX01.xml": {
+   "bytes": 4918,
+   "sha256": "fa9a947c0967f0fb9312eb6793354056d4f6b96e6f11425e924a07169d9b9de2"
+  },
+  "dexpi 1.3/example pids/I01 Measurement/I01V01.pptx": {
+   "bytes": 44469,
+   "sha256": "56de94fa8a92cfcce9aaacfaf1e04fceebd06c7a77ad6815ed6339d662c724d7"
+  },
+  "dexpi 1.3/example pids/I02 Control/I02V01-VER.EX01.xml": {
+   "bytes": 5106,
+   "sha256": "b3b8c59b7005e44e57ec56b8df407fed4115ee6411988eed4ba040ea834c291d"
+  },
+  "dexpi 1.3/example pids/I02 Control/I02V01.pptx": {
+   "bytes": 59028,
+   "sha256": "db61f171127a1e1c9d5c5dad2a2cd9ef8223b4181beb559e9bc50cd9f8cd31fd"
+  },
+  "dexpi 1.3/example pids/I03 Measurement and Control/I03V01-VER.EX01.xml": {
+   "bytes": 7212,
+   "sha256": "850f7d12e880b5768622f26b97238e70bb7df4687f3451a359a76124e5358364"
+  },
+  "dexpi 1.3/example pids/I03 Measurement and Control/I03V01.pptx": {
+   "bytes": 54629,
+   "sha256": "c5afda0c5f2864dc31245616975638acfdb216400c29f438883a17517a5c7c1f"
+  },
+  "dexpi 1.3/example pids/I04 Measurement and Control/I04V01-VER.EX01.xml": {
+   "bytes": 7477,
+   "sha256": "91b301bad8f432feb5dfff46190830a9415c63fd9904485a700f9fda7dfc10b5"
+  },
+  "dexpi 1.3/example pids/I04 Measurement and Control/I04V01.pptx": {
+   "bytes": 41545,
+   "sha256": "8f5fff41fe09c71cc52366de419c5045457064535edf165e1ed7ffd8164d8457"
+  },
+  "dexpi 1.3/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01-VER.EX01.xml": {
+   "bytes": 12267,
+   "sha256": "19cd0e7aef5238af1021d32e24b4cd2e46dd92e960c62727324a19d5384cab76"
+  },
+  "dexpi 1.3/example pids/I05 Two flow indications and flow ratio control in CCR/I05V01.pptx": {
+   "bytes": 65410,
+   "sha256": "736be244b0c17a99eb0a7b2028c34127ac5ede40b984da192625bf101b435041"
+  },
+  "dexpi 1.3/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01-VER.EX01.xml": {
+   "bytes": 12311,
+   "sha256": "949b2bcf9bf42b7529171b3f5b3bdd722c5b324640b23ee6af4adc101f2cf79b"
+  },
+  "dexpi 1.3/example pids/I06 CCR flow indication and high alarm, flow control, control valve/I06V01.pptx": {
+   "bytes": 62218,
+   "sha256": "07d7fd2ffceb25632a476dc58734ca093937cad036d31c38c9f1a96c14427fcb"
+  },
+  "dexpi 1.3/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01-VER.EX01.xml": {
+   "bytes": 9990,
+   "sha256": "921f13ffe2f02f50e9b0569085b266eeddbe191244d16f40578fcf65912d5a78"
+  },
+  "dexpi 1.3/example pids/I07 Local and CCR pressure indic., alarm and safety switch/I07V01.pptx": {
+   "bytes": 60594,
+   "sha256": "f52ea3df3630079b70159dd3670c10d3b4778d6e973c3fa85bd027cea25babf9"
+  },
+  "dexpi 1.3/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01-VER.EX01.xml": {
+   "bytes": 13989,
+   "sha256": "f8eea1484780126434fe41cd940aa2685d9d1bd738fda0567ecd4a6e5fda1bac"
+  },
+  "dexpi 1.3/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01.pptx": {
+   "bytes": 62450,
+   "sha256": "c629bffd1f288a7a50a28fd774b797e33a8551c5e8df68d9242d9ec8c4e794bd"
+  },
+  "dexpi 1.3/example pids/I09 Measurement/I09V01-VER.EX01.xml": {
+   "bytes": 4134,
+   "sha256": "b2a4bbf0ea128f7f0a204ae2b2414b168afd103d4cf4a12f4796bef8a600716d"
+  },
+  "dexpi 1.3/example pids/I09 Measurement/I09V01.pptx": {
+   "bytes": 40564,
+   "sha256": "defd58e93771982a056db1cd7bad972a0de758fb8fe0f85b98ede53b1daa629e"
+  },
+  "dexpi 1.3/example pids/I10 Measurement/I10V01-VER.EX01.xml": {
+   "bytes": 3560,
+   "sha256": "3fe1c132d83b4f5d73e109117b2dcf4b37abebd861e1709a6a995548a5c74fd5"
+  },
+  "dexpi 1.3/example pids/I10 Measurement/I10V01.pptx": {
+   "bytes": 42666,
+   "sha256": "be5ad9dffb6ca12df0b7723a22754aeeb2a8ed772860003abe61acb763ff8951"
+  },
+  "dexpi 1.3/example pids/I11 Measurement/I11V01-VER.EX01.xml": {
+   "bytes": 4308,
+   "sha256": "4f3b10c9eafe82cfb5806f51ae12e0348a55c09eb171782e5542d34a9b3155a5"
+  },
+  "dexpi 1.3/example pids/I11 Measurement/I11V01.pptx": {
+   "bytes": 38876,
+   "sha256": "e13e6445def491693b71064dbcfe1e286d56e3fbc502b9cbd7373e0965da427d"
+  },
+  "dexpi 1.3/example pids/I12 Control/I12V01-VER.EX01.xml": {
+   "bytes": 5122,
+   "sha256": "e6b2cfae50a272d4ad2bf180c147a6f460c47d40f8739246789523d09b246024"
+  },
+  "dexpi 1.3/example pids/I12 Control/I12V01.pptx": {
+   "bytes": 47300,
+   "sha256": "fa275ee3f11feadce8fa7bc4dd1d199f42f56e21e137680e8549a524b8102d21"
+  },
+  "dexpi 1.3/example pids/I13 Measurement/I13V01-VER.EX01.xml": {
+   "bytes": 7321,
+   "sha256": "20310c5d3cd076de9afa818a59a9ce885e87b5597bea4024e0f64e12bb33da48"
+  },
+  "dexpi 1.3/example pids/I13 Measurement/I13V01.pptx": {
+   "bytes": 36864,
+   "sha256": "598db6ca456a12fc64cf8a7041ce609de78e4dcf23f4a92a78537e477321d818"
+  },
+  "dexpi 1.3/example pids/I14 Measurement/I14V01-VER.EX01.xml": {
+   "bytes": 5847,
+   "sha256": "5968128b25264d16a50f4a5b670af08edabb2b993207001c919a7b48bc7a1474"
+  },
+  "dexpi 1.3/example pids/I14 Measurement/I14V01.pptx": {
+   "bytes": 40751,
+   "sha256": "8573cc4bcb5a11c222953acf546e5c83a60f2e9d414401f07f2920534e11d5b0"
+  },
+  "dexpi 1.3/example pids/I15 Measurement/I15V01-VER.EX01.xml": {
+   "bytes": 6339,
+   "sha256": "d588226c734060b5d30dfa6a84ab5e296fa89b749bb41b35c9f9863a57aa2a05"
+  },
+  "dexpi 1.3/example pids/I15 Measurement/I15V01.pptx": {
+   "bytes": 46702,
+   "sha256": "ef45568e94956550269b054e342b459086a1338d046cd83b94edc084e6e4a383"
+  },
+  "dexpi 1.3/example pids/P01 Pipe FromTo Nozzles/P01V01-VER.EX01.xml": {
+   "bytes": 3684,
+   "sha256": "1c88ab8aec8ac9d721b454aa9dc1fe669e6efbea871a36e39beeb9a5fdac4076"
+  },
+  "dexpi 1.3/example pids/P01 Pipe FromTo Nozzles/P01V01.pptx": {
+   "bytes": 43679,
+   "sha256": "ad5c9944718e5b99c1840dcf94a3ae31fba760a285884a11876fc17e87542dde"
+  },
+  "dexpi 1.3/example pids/P02 Pipe From OPC to Nozzle/P02V01-VER.EX01.xml": {
+   "bytes": 4259,
+   "sha256": "6084e2bbaba4f018551f2db6744fba2976b95a15de172e6cf5f342df009f6611"
+  },
+  "dexpi 1.3/example pids/P02 Pipe From OPC to Nozzle/P02V01.pptx": {
+   "bytes": 43679,
+   "sha256": "ad5c9944718e5b99c1840dcf94a3ae31fba760a285884a11876fc17e87542dde"
+  },
+  "dexpi 1.3/example pids/P03 Pipe With Edge/P03V01-VER.EX01.xml": {
+   "bytes": 2903,
+   "sha256": "7c5b3ef54e709e5aada7c59599181e56bd64a36f32b9965ef823afa88f0ca52f"
+  },
+  "dexpi 1.3/example pids/P03 Pipe With Edge/P03V01.pdf": {
+   "bytes": 77921,
+   "sha256": "c5fd76802352449346a050d3178eec69d4859453fe0bbfc637af53ac5883f22f"
+  },
+  "dexpi 1.3/example pids/P04 Pipe With Intersection/P04V01-VER.EX01.xml": {
+   "bytes": 4651,
+   "sha256": "535a01b3433bdceb0128db8369178c156507ee3d3dbdd9786eae5c30d1c9b543"
+  },
+  "dexpi 1.3/example pids/P04 Pipe With Intersection/P04V01.pdf": {
+   "bytes": 78212,
+   "sha256": "8f2df621c05ce706d4f6317b2e76781de9fb73740f7e66f369795238c8d5eb65"
+  }
+ },
+ "hai": {
+  "graph/boiler/dcs_1001h.json": {
+   "bytes": 4426,
+   "sha256": "3cebccfed59f8f2da4fe90ea8b9055da64ace270133e8a8e281377ac37c7e602"
+  },
+  "graph/boiler/dcs_1001h.png": {
+   "bytes": 953326,
+   "sha256": "32c14825c6d4cfa52fde49ed11e1310db0c3c63151b2ce8085ccf2259e6cc259"
+  },
+  "graph/boiler/dcs_1002h.json": {
+   "bytes": 7341,
+   "sha256": "d3f060df16c97a5dbf18907199d7e75f61cc58587100fe76b9d4f8a6be354fd6"
+  },
+  "graph/boiler/dcs_1003h.json": {
+   "bytes": 6199,
+   "sha256": "c23f069441d6acfcd3201b224d56444699fb6f6de295f438dbdcee1f4f2c3939"
+  },
+  "graph/boiler/dcs_1004h.json": {
+   "bytes": 14859,
+   "sha256": "271be9f269d99ae546acd52df4104e0e322b36ac7052a4e66222735ea605114d"
+  },
+  "graph/boiler/dcs_1010h.json": {
+   "bytes": 10344,
+   "sha256": "ca7b6548807feda9f30692add784f744644e0f89a7b69c9130800b6615a8c1e9"
+  },
+  "graph/boiler/dcs_1011h.json": {
+   "bytes": 10378,
+   "sha256": "ca56538e33fe46be3582a98ef4ddf6267ccb6adc7a84a63c081278cc00800999"
+  },
+  "graph/boiler/dcs_1020h.json": {
+   "bytes": 4041,
+   "sha256": "fb46f76b5d6e75c5348156523fbf40e0fbd9259e08c9598fa7d422a3d6ac6b70"
+  },
+  "graph/boiler/phy_boiler.json": {
+   "bytes": 69621,
+   "sha256": "eca648d73c0444a35294608c2a1067256d7b32547257153226fece2de3febd07"
+  },
+  "graph/boiler/phy_boiler.png": {
+   "bytes": 813182,
+   "sha256": "c9ceda41640da5a7e92d09895ce1aed45bd01a27285c039a95a61fb20e3253a0"
+  },
+  "hai-21.03/test1.csv.gz": {
+   "bytes": 6149549,
+   "sha256": "532de41bed372206941609d05b763958f59abecfd63c8c123649f823452e445e"
+  },
+  "hai-21.03/test4.csv.gz": {
+   "bytes": 5602841,
+   "sha256": "51380fd28fd985b94a10cae3d8b80926becb3af9f233f2d3a38ab8be9482a482"
+  },
+  "hai-21.03/train1.csv.gz": {
+   "bytes": 30651421,
+   "sha256": "fdd0162315b32817ba665e2cc8990eb09c47c4edc29683a86b11dc9df062b3a9"
+  },
+  "hai_dataset_technical_details.pdf": {
+   "bytes": 2929375,
+   "sha256": "0668345c4e80331b918fe17c81f8f363b13bd22886831d286e761bc62b71a556"
+  },
+  "README.md": {
+   "bytes": 29819,
+   "sha256": "23192d8468c5afa925aa77939e49e5e16bd6f509604ca2e5751e07d6c5ccfcef"
+  }
+ },
+ "skab": {
+  "data/anomaly-free/anomaly-free.csv": {
+   "bytes": 814703,
+   "sha256": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6"
+  },
+  "data/other/1.csv": {
+   "bytes": 70326,
+   "sha256": "3beaf861bdfe9b4f4eff8e7567c1dd3f506fbd0ce667fc9399d04bd2dc70623d"
+  },
+  "data/other/10.csv": {
+   "bytes": 124516,
+   "sha256": "72683644f6f17689f619076a66a9ec02cbc0502bd669924c4c33951d1bdad9b0"
+  },
+  "data/other/11.csv": {
+   "bytes": 112720,
+   "sha256": "98a2fff3b6516205ae2e12f2dd30d7f08465fe4321a1bd5cf823396985ecb37b"
+  },
+  "data/other/12.csv": {
+   "bytes": 99534,
+   "sha256": "b0882efbcf2669223ae78bee61c9f10074a9b2375f0e86b8957ae5ce4aad1e72"
+  },
+  "data/other/13.csv": {
+   "bytes": 87634,
+   "sha256": "b3f1da02064d11234836a9fa1a2536bb0d3b6c6998ab60b0b71869b98e94d860"
+  },
+  "data/other/14.csv": {
+   "bytes": 85828,
+   "sha256": "c7f361e55397cc9efd4a76b6876111eda79b650d10aeb007342ca5972152eaef"
+  },
+  "data/other/2.csv": {
+   "bytes": 73661,
+   "sha256": "951c326bf36366fa7615b8f28d22f80b3878036069a690f42b3e223737a6a8d1"
+  },
+  "data/other/3.csv": {
+   "bytes": 107404,
+   "sha256": "f3c19a89f74f62a475c246b9263f161f7a734dd88304de803939cebaa55c7ebd"
+  },
+  "data/other/4.csv": {
+   "bytes": 112334,
+   "sha256": "56ca23f4eb61d1347d079eb9a35c60a59b8b64e160c00dd0c2ec69e0df0b2a4b"
+  },
+  "data/other/5.csv": {
+   "bytes": 108203,
+   "sha256": "7347b326df3a92c0810c69add0e5621939af7a1c1cb4755081d088e72d36920f"
+  },
+  "data/other/6.csv": {
+   "bytes": 107422,
+   "sha256": "eb8f05622a62c855040ea358b87be35fb1a4a3720ba0610569bab384db4b6e04"
+  },
+  "data/other/7.csv": {
+   "bytes": 102054,
+   "sha256": "1bee14f49bfc817ba2c335fb427baa71153d8f8ab52e72652f15f74e4b77daec"
+  },
+  "data/other/8.csv": {
+   "bytes": 107600,
+   "sha256": "12c138ed99c198e0a7ece886fe01bfd16bbdde206fad6c5d74322b6b9d6488d0"
+  },
+  "data/other/9.csv": {
+   "bytes": 108481,
+   "sha256": "11c4514b0bc706acff637fea6707ad9258ac878fe9dff3d0b11d2b618d94d8ea"
+  },
+  "data/README.md": {
+   "bytes": 2462,
+   "sha256": "5696f68f1ceb4db1a7616f1a27e3675c6a9b63b123c8cbbc5390a0faff58b39b"
+  },
+  "data/valve1/0.csv": {
+   "bytes": 110346,
+   "sha256": "16af3f71313a23dd33d9b7b8065d836d05c3f9257588881cc7fbe07c076d9dc8"
+  },
+  "data/valve1/1.csv": {
+   "bytes": 110330,
+   "sha256": "fe4493bf805baef4e6dfb864094275d8cc2ea80a16b3735e2752b18b6aefd812"
+  },
+  "data/valve1/10.csv": {
+   "bytes": 110623,
+   "sha256": "ee16be8e4b870c779491e3d1dc9e0ecbfaf29eb013e032abff7a33f2cbbfe2ad"
+  },
+  "data/valve1/11.csv": {
+   "bytes": 110166,
+   "sha256": "89660fae4ed5c918db014409bbbc29f498fd99c7e956fab2620d18dea700a973"
+  },
+  "data/valve1/12.csv": {
+   "bytes": 110061,
+   "sha256": "90adfa9bc86d4556e6a4ce734436fd5685af79c189cd9828f8df75a7f468ce07"
+  },
+  "data/valve1/13.csv": {
+   "bytes": 110455,
+   "sha256": "d6cb6a97437215d3066a87e1fcc5fa4e68017629c043c5315920e3cf1060841c"
+  },
+  "data/valve1/14.csv": {
+   "bytes": 110181,
+   "sha256": "5f0bb9bc33c5e6c259263e32e25915c4d24c82b0a94554d48808626da05c1d71"
+  },
+  "data/valve1/15.csv": {
+   "bytes": 111352,
+   "sha256": "75cc86ab25d7091eee024739fa06d048753480d5d7d1507077231cab4f1b7a7e"
+  },
+  "data/valve1/2.csv": {
+   "bytes": 103507,
+   "sha256": "90492413469261886c8896c327241448df5da73fd7739cabfec8dd82de3c0ce4"
+  },
+  "data/valve1/3.csv": {
+   "bytes": 110534,
+   "sha256": "cb6afea108eddfd8447307e405f86bbb764b8d8e9130d7849a46e1303e19b8b2"
+  },
+  "data/valve1/4.csv": {
+   "bytes": 105634,
+   "sha256": "983aed9dc09991a57911091373c580e1b86d06aa983cd51678f108fd8d709654"
+  },
+  "data/valve1/5.csv": {
+   "bytes": 111575,
+   "sha256": "78974991ec87b7f9b9b6b2944f4b525468a9beb36c59b06cd7650d9a15eca14a"
+  },
+  "data/valve1/6.csv": {
+   "bytes": 111676,
+   "sha256": "97469c0e0c9c0e0ee5d30794f1f36c6785df5816a112a8b16c59637e8c894685"
+  },
+  "data/valve1/7.csv": {
+   "bytes": 105941,
+   "sha256": "ca2c9c6d6fa302c642acec6fbedac495bd12fececeee0a755d45a54e340e0f30"
+  },
+  "data/valve1/8.csv": {
+   "bytes": 110305,
+   "sha256": "0c4afb92248b5b35b4c9d734a91ed8318346901f04579074903730569e60416c"
+  },
+  "data/valve1/9.csv": {
+   "bytes": 110586,
+   "sha256": "2aa1ae1b2ff505caecda24802b877dc686924bbbeeb7e7db4faa261efb5ed5bd"
+  },
+  "data/valve2/0.csv": {
+   "bytes": 109156,
+   "sha256": "a6670e7a68c7c6ba62c649bd9d350633e80db624578e9529f2b736ced5e32bde"
+  },
+  "data/valve2/1.csv": {
+   "bytes": 102680,
+   "sha256": "b35d27f664eb0851ab73e5eb06633404c7eeaf532edff7e40c68eb9379f2012b"
+  },
+  "data/valve2/2.csv": {
+   "bytes": 109005,
+   "sha256": "2c3005cf28b88db715b7f4694e826ff252cba4dbb1eba679b040961f80477e60"
+  },
+  "data/valve2/3.csv": {
+   "bytes": 96048,
+   "sha256": "86927555d5c523e587d41500bd5dee4e2468289ec1b988ac17755aeae697d7f8"
+  },
+  "LICENSE": {
+   "bytes": 35149,
+   "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  "README.md": {
+   "bytes": 10712,
+   "sha256": "238f1a345a8fccd67540f16bce10c26dbfd7912f196832d5c165f73b8779c222"
+  }
+ },
+ "idaes-hda": {
+  "idaes_examples/notebooks/docs/flowsheets/HDA flowsheet with distillation.json": {
+   "bytes": 29733,
+   "sha256": "aade2ba5b99b84348797aec949805e0ef130057c0d35a7dc9e71745281568e67"
+  },
+  "idaes_examples/notebooks/docs/flowsheets/HDA.json": {
+   "bytes": 39177,
+   "sha256": "92aaf6f55bc78b669c94872604d051e862afcfc4249dcea5236c813a6a9b3435"
+  },
+  "idaes_examples/notebooks/docs/flowsheets/Hydrodealkylation.json": {
+   "bytes": 39071,
+   "sha256": "ad2358eade7e7692887c40101fb7a2da7ba45208d3124718c33b52539437080e"
+  },
+  "idaes_examples/notebooks/docs/tut/core/HDA_flowsheet.png": {
+   "bytes": 85876,
+   "sha256": "cea45af152e62cc34bc6a2c34ba4ff505c2c940efee695f75f28b7e5096dc271"
+  },
+  "idaes_examples/notebooks/docs/tut/core/hda_flowsheet_solution.ipynb": {
+   "bytes": 80354,
+   "sha256": "91936921db05f52cb60dda380a3960f5921fb88e95e2bc62dafb160f8550ed65"
+  },
+  "idaes_examples/notebooks/docs/tut/core/HDA_solved.json": {
+   "bytes": 43484,
+   "sha256": "c0c7cfadb9edc1c19bda75e14bdb52a7941d241cb29dc9afaad88d00b576c501"
+  },
+  "LICENSE.md": {
+   "bytes": 2877,
+   "sha256": "4fdde00bd663a045a688899c7e6924bd3b747204518e75540273c97f4bc98fa0"
+  }
+ },
+ "pronto-more": {
+  "Pre-processed data/Aligned and labelled alarm and process data/Testday2_merged.csv": {
+   "bytes": 2964251,
+   "crc32": "fba5b000",
+   "sha256": "5396adc910560513f0413e5f2a9f1cb2cbd32d98b7fc1af8881847dd3c53be9d"
+  },
+  "Pre-processed data/Aligned and labelled alarm and process data/Testday4_merged.csv": {
+   "bytes": 2737013,
+   "crc32": "76a2964b",
+   "sha256": "9d24682206bcaa2952fa7d0a08c9628be692db5ebf9f69cb3c2d2a7e015f1e12"
+  },
+  "C1 Air Blockage/Test2/Process Data/0907Testday2.csv": {
+   "bytes": 6440042,
+   "crc32": "e908f67d",
+   "sha256": "3ec29fa2f83745e1934d251a5e98be52039fb06a34358b4d378c5dc4ffb4ba45"
+  },
+  "C0 Normal and Slugging conditions/Test10/Process Data/0912Testday4.csv": {
+   "bytes": 4920870,
+   "crc32": "93744c28",
+   "sha256": "c97fd28ea57dd99d6c2338061358a09a428e1ece17cf2b8fadee18376ed20a0f"
+  },
+  "C0 Normal and Slugging conditions/Test11/Process Data/0626Testday5.csv": {
+   "bytes": 1197062,
+   "crc32": "d8626a48",
+   "sha256": "7306e4911963e112cee20abc778d3c981c835c464ed04df71b22597c4b7e2fda"
+  },
+  "Pre-processed data/Aligned and labelled alarm and process data/alarmsfault07092017_proc.csv": {
+   "bytes": 23479,
+   "crc32": "73abea69",
+   "sha256": "8daeac7e999989c224a633829d2c76a75a455817bdec2bc81155f23d080ef3ba"
+  },
+  "Technical documents/Technical report/Multiphase flow facility case study technical report.pdf": {
+   "bytes": 1347505,
+   "crc32": "68e13f03",
+   "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3"
+  }
+ },
+ "dwsim-fossee": {
+  "zips/fs_1048.zip": {
+   "bytes": 495224,
+   "sha256": "40de9a8636a9c7495a45871348b07a672709c9e6d68fd61d7a6c03d3260ae2fb",
+   "project": 1048,
+   "flowsheet": {
+    "member": "Extractive_Distillation_For_Separation_Of_Acetonitrile_And_N-Propanol_Using_Nmp_As_Entrainer_By_Mr_Navin_Kumar/Flowsheet.dwxmz",
+    "bytes": 112812,
+    "sha256": "c69e165a8d9dd349c74a09e5b8fb4feec5700e300b9d5b7feab87ec0a36795b7"
+   }
+  },
+  "zips/fs_11.zip": {
+   "bytes": 337745,
+   "sha256": "c66d708de0f0879b0deedd8eb7b51487a9c2eeb797e7005279e174e64bc610b4",
+   "project": 11,
+   "flowsheet": {
+    "member": "Natural_Gas_Processing_Unit_By_Mr_Daniel_Wagner/Production_of_Natural_Gas.dwxml",
+    "bytes": 2607224,
+    "sha256": "569bf50aa32addae7f1e22f063e16b538e505d6a189e5c7b9273d2895dafd2fd"
+   }
+  },
+  "zips/fs_1104.zip": {
+   "bytes": 354106,
+   "sha256": "2651e0abcc9855a4ded041975b89e80f47dceebd7297b640a064339ae871a11b",
+   "project": 1104,
+   "flowsheet": {
+    "member": "Hydrogen_Production_From_Biogas_By_Mr_Kaleem_Ullah/Flowsheet.dwxmz",
+    "bytes": 163329,
+    "sha256": "f161953f9b467fa34a51cc88c1a64b0b814b63684550498ef9ce74f8cbb1beee"
+   }
+  },
+  "zips/fs_1117.zip": {
+   "bytes": 481153,
+   "sha256": "296799c0722963f1ea9ee1a81853346846b194dc06d4f20f1e95e4f0ba9a7473",
+   "project": 1117,
+   "flowsheet": {
+    "member": "Ethylene_Oxide_Production_From_Styrene_By_Mr_Paresh_Rathod/flowsheet.dwxmz",
+    "bytes": 307237,
+    "sha256": "4b0998783ea4197ff31c9ef779d5bb85bcc2039f49611bb34ae7cc51528c86dd"
+   }
+  },
+  "zips/fs_1118.zip": {
+   "bytes": 723899,
+   "sha256": "6af6e7a1dd88cf47433dd26c7093d6d94ee53ec109d062465cbd801ef188a586",
+   "project": 1118,
+   "flowsheet": {
+    "member": "Production_Of_Diethylene_Glycol_Using_Ethylene_As_Raw_Material_By_Mr_Parth_Manish_Dani/Diethylene_Glycol.dwxmz",
+    "bytes": 528676,
+    "sha256": "6a9ef23be07a0724c016846be38901550e44b432c5144c3b5c3f8bb315ae0cf0"
+   }
+  },
+  "zips/fs_1122.zip": {
+   "bytes": 858553,
+   "sha256": "9dcfe762e81254ec5f16a4235436008952cec3fa516ffa2fb8bde46327e44b90",
+   "project": 1122,
+   "flowsheet": {
+    "member": "Triple-Column_Extractive_Distillation_For_Separation_Of_Tetrahydrofuran,_Ethyl_Acetate_And_Water_By_Ms_Himisha_Tapadiya/Flowsheet.dwxmz",
+    "bytes": 157549,
+    "sha256": "5bcf902e2bcae38e14127201b598d0de47f4c81e87bcaa682719ad02f7cecf82"
+   }
+  },
+  "zips/fs_113.zip": {
+   "bytes": 337161,
+   "sha256": "db8c0e7864ae4f28d0e9b03a297b8c4a89eaf4c3dbc13708bcc4a9ae76b1e802",
+   "project": 113,
+   "flowsheet": {
+    "member": "Pressure_Swing_Distillation_Of_Isobutanol_And_N-Heptane_By_Mr_Pragneshsinh_Sindha/ISOBUTANOLFINAL.dwxmz",
+    "bytes": 164024,
+    "sha256": "7543f0229f25ec345a7ac5bf36c4065c61fdb21247514b55f2407050b2e990b0"
+   }
+  },
+  "zips/fs_1146.zip": {
+   "bytes": 352292,
+   "sha256": "ee7f34c35437b835b6d382e268af16800ac64f27108d933cb2b7ba3de90be90a",
+   "project": 1146,
+   "flowsheet": {
+    "member": "Simulation_And_Performance_Analysis_Of_An_Integrated_Co2_Capture_And_Compression_Process_Using_Mea_By_Mr_Poorab_Dhapa/Flowsheet.dwxmz",
+    "bytes": 140343,
+    "sha256": "e9d0b9222a1bb86f65768592a3a8f69c6b5cd68d3c93740eae4a93a07161aacd"
+   }
+  },
+  "zips/fs_153.zip": {
+   "bytes": 147890,
+   "sha256": "4058e5780b19ffb7f9516bdbc4282e3657ac63f873a51ed860da77d82f2375ee",
+   "project": 153,
+   "flowsheet": {
+    "member": "Production_Of_Ethylene_Oxide_By_Air_Oxidation_Process_By_Mr_Doshi_Varunkumar_Rahulbhai/EthyleneOxideFlowsheet.dwxmz",
+    "bytes": 126855,
+    "sha256": "cafbee6b3da7c7987194358c935a21d5acb18c8394a24fecd406beb6366cd9d4"
+   }
+  },
+  "zips/fs_165.zip": {
+   "bytes": 351425,
+   "sha256": "aa49690fbd55a09db9aa1204a2dd59cc8c48025ec99f1a26964c14d0fe0f6c91",
+   "project": 165,
+   "flowsheet": {
+    "member": "Cooling_Of_Benzene_And_Heating_Of_Methane_By_Circulation_Of_Water_By_Mr_D_Sasi_Kiran_&_S_V_Karthik/Cooling_Benzene_Heating_Methane.dwxmz",
+    "bytes": 35717,
+    "sha256": "35e617b22ff3f740f5f24417aa498194557fb58d0090368ef3c898ae0f9475cb"
+   }
+  },
+  "zips/fs_175.zip": {
+   "bytes": 158477,
+   "sha256": "591c2437f2edde4a7681b120a88fcb0580063dbeebb21c8ababe666d2583a620",
+   "project": 175,
+   "flowsheet": {
+    "member": "Production_Of_Nitric_Acid_By_Ammonia_Oxidation_Process_By_Mr_Doshi_Varunkumar_Rahulbhai/RevisedHNO3Flowsheet1.dwxmz",
+    "bytes": 98987,
+    "sha256": "e8fb5d479012b7684d4142ee17d3c017502ae7c8ef5e4e6a28f496d26830196f"
+   }
+  },
+  "zips/fs_20.zip": {
+   "bytes": 79094,
+   "sha256": "8f43f734fc830f6b3dda15b7348bd14440aed0a998316651aa3f00d8b4f87708",
+   "project": 20,
+   "flowsheet": {
+    "member": "Open_Cycle_Steam_Turbine_By_Mr_Rohan_Adhikari_S/open_cycle_steam_turbine.dwxmz",
+    "bytes": 19637,
+    "sha256": "41d5c7395cbb8c5d66b324cd7150cfb8c0ffec8c4d9ad31d50492a7ade60e940"
+   }
+  },
+  "zips/fs_200.zip": {
+   "bytes": 516818,
+   "sha256": "2c2359aa59a70e66e3930a9e684c78cad80388c00b10b545344758918090a088",
+   "project": 200,
+   "flowsheet": {
+    "member": "Production_Of_Ethyl_Chloride_From_Ethylene_Involving_Recycle_Stream_By_Ms_Manaswini_Gowtham_V,_Sneha._S_&_M_Sunaina_Poonacha/ECflowsheet.dwxml",
+    "bytes": 3376178,
+    "sha256": "caadb3d2583b5a39c14e123eeb621cd30811484dd1ad9b8af7fdff7d322dd40d"
+   }
+  },
+  "zips/fs_210.zip": {
+   "bytes": 192024,
+   "sha256": "b46654533d1db909188de3bd89139fc80d589a3edf53ea5434f8e056eaf8125a",
+   "project": 210,
+   "flowsheet": {
+    "member": "Production_Of_Dimethyl_Ether_Via_Dehydration_Of_Methanol_Using_Cooled_Reactor_By_Mr_Pragneshsinh_Sindha/DME1.dwxmz",
+    "bytes": 141775,
+    "sha256": "f3454c1d352459d074c470fe88eda870f95dd6553dc14bf2c0a4e19e93dbd350"
+   }
+  },
+  "zips/fs_220.zip": {
+   "bytes": 142005,
+   "sha256": "8a15f2b7c438e7f0dfc1146b34ac45941938c8d6ed8b688e0c18c23c35828f12",
+   "project": 220,
+   "flowsheet": {
+    "member": "Tert-Butanol_Dehydration_Via_Extractive_Distillation_Using_Glycerol_By_Mr_Sandeep_Kumar_Samanta/N.dwxmz",
+    "bytes": 87888,
+    "sha256": "150e34f8f3fa6dca0245c3caab364d19bec6a034fc5529bb537e12d9036f05ba"
+   }
+  },
+  "zips/fs_236.zip": {
+   "bytes": 321862,
+   "sha256": "c82be2cae06dbfac6d2d392fc53847a4e91523a4729cfe9eadad59e88abb5a17",
+   "project": 236,
+   "flowsheet": {
+    "member": "Drying_Of_Natural_Gas_Using_Teg_By_Mr_Pragneshsinh_Sindha/TEG.dwxmz",
+    "bytes": 169327,
+    "sha256": "fb2910e775b0ec2d264975e2e72b376b08ac8d36f7d3837e514ee1ee1cb6c974"
+   }
+  },
+  "zips/fs_270.zip": {
+   "bytes": 392869,
+   "sha256": "392c33e727cfb2ec97935ed304aca6a99812f1e398e306f4127691f233147215",
+   "project": 270,
+   "flowsheet": {
+    "member": "Extractive_Distillation_Of_Methanol_-_Dimethyl_Carbonate_Using_Phenol_By_Mr_Bloch_Sohil_Yusufbhai/DMC_Methanol_Phenol_backup.dwxmz",
+    "bytes": 126419,
+    "sha256": "f6d14546beb9ae6608807cb885ce407e4cabed7bb33dc0c28a1c8f3a9e5ae22f"
+   }
+  },
+  "zips/fs_29.zip": {
+   "bytes": 395104,
+   "sha256": "b7e00feb2600ce0b04bfc94a251ff8642a529e5d049d32f61bbc796846c4a929",
+   "project": 29,
+   "flowsheet": {
+    "member": "Production_Of_Ammonia_Through_Haber'S_Process._By_Mr_Indranil_Banerjee/Ammoniaproductionthroughhabersprocess.dwxmz",
+    "bytes": 47168,
+    "sha256": "b31104a926daf36512dee6efb106dd163c5eb2050d81159aa510dae89fd44097"
+   }
+  },
+  "zips/fs_305.zip": {
+   "bytes": 87516,
+   "sha256": "7ea2b404da869680536afe54a9c00a56bafb842e2d447b43ccf99138ade3117b",
+   "project": 305,
+   "flowsheet": {
+    "member": "Production_Of_Hydrogen_Using_Water_Gas_Shift_Reaction_By_Mr_Pavan_P_Nayak/WGSR.dwxmz",
+    "bytes": 58301,
+    "sha256": "981f08e0a866de3823706576c25a4fc4c87a222032adc14c76b8d653b0f60d79"
+   }
+  },
+  "zips/fs_332.zip": {
+   "bytes": 241757,
+   "sha256": "1c608f8e6f386fbee2d05e8dea03edd46163833952ea656f7fa762f60a225f38",
+   "project": 332,
+   "flowsheet": {
+    "member": "Synthesis_Of_Ammonia_Using_Natural_Gas_By_Steam_Reforming_By_Mr_Binayak_Sahu/ASGP_CoW2k18_160020109_modified.dwxmz",
+    "bytes": 157653,
+    "sha256": "705e71ee58598080617291a8ab1951b8350fc8da4d78963a83e5a3ca19ed0620"
+   }
+  },
+  "zips/fs_357.zip": {
+   "bytes": 314861,
+   "sha256": "5a64e1e8a63bcbd046d84832048f904e8d3efec1df81d1334c3d26bdec381a3b",
+   "project": 357,
+   "flowsheet": {
+    "member": "Extractive_Distillation_Of_Ethanol_And_Benzene_Using_P-Xylene_As_Solvent_By_Ms_Aditi_Jain/Extractive_Distillation_benzene_Ethanol.dwxmz",
+    "bytes": 188041,
+    "sha256": "b9600c0808a48862490e621239badaf6c047d178a01ca8eb33a0cbf397e67aea"
+   }
+  },
+  "zips/fs_374.zip": {
+   "bytes": 162347,
+   "sha256": "7cacd0410ec10b1f32b3600826dd26585e4c406c526e8eb4f10008ce59cd1bdb",
+   "project": 374,
+   "flowsheet": {
+    "member": "Separation_Of_Diisopropyl_Ether_And_Isopropanol_Using_Psd_With_Vapor_Recompression_By_Mr_Vikram_Uday/psdvrvikram.dwxmz",
+    "bytes": 121965,
+    "sha256": "0bff307d3bcda5d9e04b401a9aefaf1879da7c425d362dc75d16688b70918ceb"
+   }
+  },
+  "zips/fs_40.zip": {
+   "bytes": 779711,
+   "sha256": "a11cf7f16c0360dfeb671d46ae3d9fdf46ab31efeff3ee58af5b11155064bfb0",
+   "project": 40,
+   "flowsheet": {
+    "member": "Separation_Of_Natural_Gas_By_Mr_Priyam_Nayak/Natural_Gas_Separation.dwxmz",
+    "bytes": 501263,
+    "sha256": "09eb6db9a9d6eb98b961eebf23fb2cfd34303c2a1a3feaff96a64b3f47598343"
+   }
+  },
+  "zips/fs_405.zip": {
+   "bytes": 121243,
+   "sha256": "a21c05159d5e4d981a7627c4933e325faf507cb93b89faa366a29528f489f896",
+   "project": 405,
+   "flowsheet": {
+    "member": "Isobutyl_Alcohol_And_Isobutyl_Acetate_Separation_By_Psd_By_Mr_Milan_Moradiya,_Hitesh_Papaniya,_Anand_Bhadja/PSD.dwxmz",
+    "bytes": 90585,
+    "sha256": "7e803824ff4107abc51e3b29e9da9c65a9343613cf1f3f7e89d86bfbc4f24867"
+   }
+  },
+  "zips/fs_430.zip": {
+   "bytes": 422442,
+   "sha256": "8ae96a0c0903404e11b581699e5c09a09b328da1b736921cfbafdfeaa0e07f88",
+   "project": 430,
+   "flowsheet": {
+    "member": "Separation_Of_Pyridine_And_Water_Using_Pressure_Swing_Distillation_By_Mr_Rishav_Saraswat/PW_PSD.dwxmz",
+    "bytes": 82605,
+    "sha256": "a644ed074e14cf1abe489d134d4e70b005e2c25ade80987606daeb0f44230715"
+   }
+  },
+  "zips/fs_448.zip": {
+   "bytes": 389926,
+   "sha256": "d30bbee2ba7f5de8e48a0d74e73285bcd88e0af698df8ea781ef61f338b972db",
+   "project": 448,
+   "flowsheet": {
+    "member": "Extractive_Distillation_Of_Water_And_Chloroform_Using_Acetone_As_Solvent_By_Mr_Sandeep_Kumar_Samanta/ED_Flowsheet.dwxmz",
+    "bytes": 180901,
+    "sha256": "e94ef08ba4c8e137cf28262f9fa4335e5ccf08f5096a608f23d30e77a291bbf0"
+   }
+  },
+  "zips/fs_460.zip": {
+   "bytes": 737912,
+   "sha256": "f9d5469291778dd1e771d9439fd94ba4f4db3e8e387d872156a3a0179818db78",
+   "project": 460,
+   "flowsheet": {
+    "member": "Continuous_Homogenous_Azeotropic_Distillation_For_Ethyl_Acetate_n-Hexane_Separation_By_Mr_Eduardo_Pacheco_E_Silva/EtAc_Hexane_Final.dwxmz",
+    "bytes": 126432,
+    "sha256": "d79d79d52c37af6dc011887cc808dace4575cc6f75b2e4a11a85dd0e3d764b47"
+   }
+  },
+  "zips/fs_476.zip": {
+   "bytes": 303412,
+   "sha256": "55c41d5237eb862bc884651a90a274f3cbdafec8fdedad4d00df5bbfcab412f2",
+   "project": 476,
+   "flowsheet": {
+    "member": "Triple_Column_Extractive_Distillation_To_Separate_Methanol-Toluene-Water_Using_Deg_As_Entrainer_By_Mr_Charles_Spurgeon_S/ED_Flowsheet.dwxmz",
+    "bytes": 169788,
+    "sha256": "9b4f5116db15f0a635c098fa552601a57032982642e51cb5d0574a0e5be97a33"
+   }
+  },
+  "zips/fs_48.zip": {
+   "bytes": 182610,
+   "sha256": "24f7d7aee4c28e934907b983d475dd7d085b0e45f3ab6e8ec4a030687d3669dd",
+   "project": 48,
+   "flowsheet": {
+    "member": "Esterification_Of_Acetic_Acid_With_1-Butanol_To_N-Butyl_Acetate_By_Mr_Devesh_Sharma/Esterification.dwxmz",
+    "bytes": 85321,
+    "sha256": "5b48f8f9abf7546dd913e2cfb32d1740bed5a1c8e8709d37e651efff52e4289a"
+   }
+  },
+  "zips/fs_495.zip": {
+   "bytes": 731128,
+   "sha256": "465627c909e7e979a47862af97657eafe2f9b16d3deb3210d2fcaaa23a28da53",
+   "project": 495,
+   "flowsheet": {
+    "member": "Production_Of_Acrylonitrile_By_Propylene_Ammoxidation_By_Ms_Rakshitha_Gr/FLOWSHEET_DWSIM.dwxmz",
+    "bytes": 204115,
+    "sha256": "9b88aa32fd444d22b5b932b9d8901bfbd86c199c4494b313ddc0aa997bb33efa"
+   }
+  },
+  "zips/fs_530.zip": {
+   "bytes": 509292,
+   "sha256": "7b7f956dcdf0035eca150b664d73bfb77913a25f3408f8e33e31e40466621f74",
+   "project": 530,
+   "flowsheet": {
+    "member": "Triple_Column_Extraction_Distillation_To_Separate_Ethyl_Acetate,_Ethanol_And_Water_Using_Dimethyl_Sulfoxide_By_Mr_Charles_Spurgeon_S/Flowsheet.dwxmz",
+    "bytes": 196153,
+    "sha256": "4ebe69e076410037fc18dfdaddbbaa1b380c28535233fe5244afb9abfcfcde26"
+   }
+  },
+  "zips/fs_556.zip": {
+   "bytes": 528338,
+   "sha256": "bb07af91cc268c61d593dbc7154711395def9ac29f50c0efc6037b41922f7bd4",
+   "project": 556,
+   "flowsheet": {
+    "member": "Production_Of_Liquid_Carbon_Dioxide_From_2_Tph_Of_Raw_Gas_By_Ms_Madhangi_R/Flowsheet.dwxmz",
+    "bytes": 100984,
+    "sha256": "d0a69f480d279bc8175823f445e76982bdcf6ed6adf1884683952f28563a26eb"
+   }
+  },
+  "zips/fs_575.zip": {
+   "bytes": 791199,
+   "sha256": "02d054e2f98b85bafc00b50e458fc1c550b0e2cc3c3ab05b5c7ad971794cf1c5",
+   "project": 575,
+   "flowsheet": {
+    "member": "Distillation_Trains_For_Paraffin_Separation_By_Mr_Meet_Dave_&_Roshan_Hirani/MulticompnentDistillation.dwxmz",
+    "bytes": 406550,
+    "sha256": "ff3e46bddb0b17192a5fe0e6f4dfca395f39613228228a13af78716bdc16bfdc"
+   }
+  },
+  "zips/fs_602.zip": {
+   "bytes": 128945,
+   "sha256": "50f191c340ef56dc6703825a327bd54920910251c7453b5a07b809560e89094f",
+   "project": 602,
+   "flowsheet": {
+    "member": "Reactive_Distillation_Column_For_Cis-2-Pentene_Metathesis_By_Ms_Patel_Bharvi_Parulkumar/Flowsheet.dwxmz",
+    "bytes": 50503,
+    "sha256": "243351c7383bee3ee265582e4cce6116e2673014daee45756afba2b69c264dd3"
+   }
+  },
+  "zips/fs_64.zip": {
+   "bytes": 324994,
+   "sha256": "cf000637ca3271a785c71a4b13df00c553607186902e1141dfe00ed69044ce7c",
+   "project": 64,
+   "flowsheet": {
+    "member": "Production_Of_Ethylene_Glycol_By_Non-Catalytic_Liquid_Phase_Hydration_Of_Ethylene_Oxide_By_Mr_Tamtam_Sreeram/GLYCOL.dwxmz",
+    "bytes": 97487,
+    "sha256": "69b93b49ad03fda3041c32297d9c167511f1f83a34ee000145ab62bb448859fe"
+   }
+  },
+  "zips/fs_653.zip": {
+   "bytes": 412866,
+   "sha256": "1037e226485d4d8c100a03a4f54334f9df58538680f96501934c5ac3b3c5833a",
+   "project": 653,
+   "flowsheet": {
+    "member": "Pressure_Swing_Distillation_For_Thf_And_Ethanol_Separation_By_Ms_Aayushi_Gupta/Flowsheet.dwxmz",
+    "bytes": 128260,
+    "sha256": "32852c9dda28ea6b8a66ed3264315b87a219720fabbe1961c17d8f506cc5e685"
+   }
+  },
+  "zips/fs_681.zip": {
+   "bytes": 446050,
+   "sha256": "06b952191245a872b592b8dcc87ca2768800a02ce6cbee0b79fe6c3da0eefcad",
+   "project": 681,
+   "flowsheet": {
+    "member": "Production_Of_Methyl_Ethyl_Ketone_By_Mr_Samyabrata_Bhattacharjee/FLOWSHEET.dwxmz",
+    "bytes": 93525,
+    "sha256": "4badfae3e3daa44680643118c1d177f7baacb6f54934f55cd85205e8f900a4ba"
+   }
+  },
+  "zips/fs_746.zip": {
+   "bytes": 517002,
+   "sha256": "ed949779e6654078579d64648de0db9b89874230e05216a7edf4893dc55f3e60",
+   "project": 746,
+   "flowsheet": {
+    "member": "Hydration_Of_Ethylene_Oxide_To_Mono-Ethylene_Glycol_By_Ms_Yutika_Naik/Flowsheet.dwxmz",
+    "bytes": 356301,
+    "sha256": "85b2fe8b7cd4699e3f45c6989807599a6f0c70ab162d5a1fde24b068b6c22b72"
+   }
+  },
+  "zips/fs_776.zip": {
+   "bytes": 304272,
+   "sha256": "38b6958564ad2a1ca45291f8d4381328949e8371bb01cc8da2e3dbd381fca7c1",
+   "project": 776,
+   "flowsheet": {
+    "member": "Pressure-Swing_Distillation_For_Separation_Of_Maximum_Boiling_Azeotropic_System_Of_Water_And_Eda_By_Mr_B_Siddharth_And_Sharmistha_Lochan_Gupta/Flowsheet.dwxmz",
+    "bytes": 115382,
+    "sha256": "be6aaa026f9790ea7b3dc37e231db44ac0c710a165e247ff71f78ea21205e105"
+   }
+  },
+  "zips/fs_808.zip": {
+   "bytes": 506528,
+   "sha256": "b420b45f39e23df282a73e30b573342cfd0a75c7e56034158f945c2ffc044819",
+   "project": 808,
+   "flowsheet": {
+    "member": "Triple_Effect_Evaporation_Of_Saline_Solution_By_Ms_Yutika_Naik/Flowsheet.dwxmz",
+    "bytes": 75242,
+    "sha256": "ee7e17235101f8a223f98b9df4d89a9939f250f384c2fca36dcf6e05658d991f"
+   }
+  },
+  "zips/fs_848.zip": {
+   "bytes": 603780,
+   "sha256": "a02cfab96c47c2ab39527f68ea6ffd210775a7cf9ed8701f9405cd8516f5612d",
+   "project": 848,
+   "flowsheet": {
+    "member": "Extractive_Distillation_For_Recovery_Of_Diisopropyl_Ether_And_Isopropanol_From_Industrial_Wastewater_By_Ms_Gilda_Micaela_Chilan_Pincay/Flowsheet.dwxmz",
+    "bytes": 189384,
+    "sha256": "6a50959abf946ce106ea0b92895dae2b7c995b13f0841e5ceb2b2ff4c0302ccd"
+   }
+  },
+  "zips/fs_912.zip": {
+   "bytes": 342422,
+   "sha256": "b7dc140e8234c338f7175fc5e8b3907b01cea5c7a197858e4ed469c4d89188a7",
+   "project": 912,
+   "flowsheet": {
+    "member": "Extraction_Distillation_To_Separate_Ethyl_Acetate,_Ethanol,_And_Water_Using_Eg_By_Mr_Julián_Osorio_And_Alejandro_Morales/Flowsheet.dwxmz",
+    "bytes": 183982,
+    "sha256": "3f1af46fa64d337141b3120ca04ef0ba6409ab17bd929b6bca992c206e34403a"
+   }
+  }
+ },
+ "wikimedia-pid": {
+  "Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg": {
+   "bytes": 3367661,
+   "sha256": "c882b82993975cef78f37239e10f51ad99434b53186adcbf2fccb2f51ab12051",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Organic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AOrganic_Moderated_Reactor_Experiment_Piping_and_Instrumentation_Diagram.jpg",
+   "license": "Public domain",
+   "artist": "US Atomic Energy Commission"
+  },
+  "P_ID.JPG": {
+   "bytes": 254311,
+   "sha256": "d6cb339eeb240e6fac23f2f5ce1317a9b7acf6f0323f02b8da4930a1c5b35cba",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/P%26ID.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File%3AP%26ID.JPG",
+   "license": "CC BY-SA 3.0",
+   "artist": "Ub"
+  },
+  "Sch_ma_P_ID.jpg": {
+   "bytes": 801794,
+   "sha256": "5b24a05a0a45b0a43aa7d5b29cb224fda2deac0ff94567c9f63e537e533cf257",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Sch%C3%A9ma_P%26ID.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ASch%C3%A9ma_P%26ID.jpg",
+   "license": "CC BY-SA 3.0",
+   "artist": "Evinfo"
+  },
+  "Sch_ma_P_ID1.jpg": {
+   "bytes": 809655,
+   "sha256": "62fbe32d484551e2753d396457ff47ed75f961de6ab63d06297ba58687482b88",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sch%C3%A9ma_P%26ID1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ASch%C3%A9ma_P%26ID1.jpg",
+   "license": "CC BY-SA 3.0",
+   "artist": "Evinfo"
+  },
+  "RI_Sample_ISO.png": {
+   "bytes": 25248,
+   "sha256": "0cbc47c34fcdb624c7002b815d4e91f77e114c9d237bec1e1209f41f219910b1",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/RI_Sample_ISO.png",
+   "page": "https://commons.wikimedia.org/wiki/File%3ARI_Sample_ISO.png",
+   "license": "Public domain",
+   "artist": "Geichler"
+  },
+  "Pump_with_tank_pid_en.svg": {
+   "bytes": 58924,
+   "sha256": "ee186d73483f530ea38007d903c2dec6460fc88b8227f4b8631dbd0d722417be",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Pump_with_tank_pid_en.svg",
+   "page": "https://commons.wikimedia.org/wiki/File%3APump_with_tank_pid_en.svg",
+   "license": "CC BY-SA 3.0",
+   "artist": "Con-struct"
+  },
+  "Oil_field_flow_metering.svg": {
+   "bytes": 96107,
+   "sha256": "1d72c14e372e3caaa560e35864865c9e9c7fb3de782582cb5e67641ee92ae89c",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Oil_field_flow_metering.svg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AOil_field_flow_metering.svg",
+   "license": "CC BY 3.0",
+   "artist": "user:Oil&amp;GasIndustry"
+  }
+ },
+ "uci-hydraulic": {
+  "condition_monitoring_of_hydraulic_systems.zip": {
+   "bytes": 76601704,
+   "sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+   "url": "https://archive.ics.uci.edu/static/public/447/condition+monitoring+of+hydraulic+systems.zip",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  }
+ },
+ "metropt3": {
+  "metropt3.zip": {
+   "bytes": 218381995,
+   "sha256": "aab991a970e58210de853bb8078ce0e63abb4d9412fdc5c79792dae3d8e1721a",
+   "url": "https://archive.ics.uci.edu/static/public/791/metropt+3+dataset.zip",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  }
+ },
+ "battledim": {
+  "2018_SCADA_Pressures.csv": {
+   "bytes": 22593812,
+   "sha256": "7782d890a7195699be94ddc01cba392da7ca285908afff619065a9616e04dcae",
+   "url": "https://zenodo.org/records/4017659/files/2018_SCADA_Pressures.csv?download=1",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  },
+  "2018_SCADA_Flows.csv": {
+   "bytes": 4023420,
+   "sha256": "7f7e8625c9d92b083ee079a54cffb9ef803876de1e35017c1da0455968daf3ff",
+   "url": "https://zenodo.org/records/4017659/files/2018_SCADA_Flows.csv?download=1",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  },
+  "2018_SCADA_Levels.csv": {
+   "bytes": 2721000,
+   "sha256": "a1fc5f0229448a620b6220f4d079b3162a255b3070acdce448608fbfc760903c",
+   "url": "https://zenodo.org/records/4017659/files/2018_SCADA_Levels.csv?download=1",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  },
+  "dataset_configuration.yaml": {
+   "bytes": 3926,
+   "sha256": "23471d8989d82c66a4909816ea248f7588d8ccc910e142265a7ea48db940b6a0",
+   "url": "https://zenodo.org/records/4017659/files/dataset_configuration.yaml?download=1",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  },
+  "README.txt": {
+   "bytes": 5303,
+   "sha256": "e6a3e83bdf7f116c47c72640de6e4785fd3437b96428448adf9ca76f066f2226",
+   "url": "https://zenodo.org/records/4017659/files/README.txt?download=1",
+   "note": "staged 2026-10-29; URL not re-checked offline"
+  }
+ }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Failed steam traps repaired, measured inputs only",
+  "illustrative": true,
+  "description": "ILLUSTRATIVE: the same made-up trap survey with no site constants, to show --use-defaults. The steam pressure, feedwater temperature and boiler fuel are the plant's own facts and are still given; only the constants are left out.",
+  "fuel": "natural_gas",
+  "changes": [
+    {
+      "type": "steam",
+      "label": "Failed steam traps on the 150 psig main",
+      "steam_lb_per_h": {"low": 150, "high": 210},
+      "hours_per_year": 8760,
+      "steam_pressure_psig": 150,
+      "feedwater_temp_F": 200
+    }
+  ]
+}

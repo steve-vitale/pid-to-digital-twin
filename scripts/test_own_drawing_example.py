@@ -74,6 +74,19 @@ class WorkedExample(unittest.TestCase):
         self.assertEqual(page.count("<rect x="), sum(summary[k] for k in ("equipment", "instruments", "line_items",
                                                                           "offpage_connectors")))
 
+    def test_the_committed_report_is_what_the_readme_command_writes(self):
+        # README: `python scripts/deliverable_report.py my-bundle` writes my-bundle/REPORT.html; deliverable/REPORT.html
+        # must be exactly that, so the committed example can't drift from the script.
+        try:
+            import PIL  # noqa: F401  (the committed report embeds the drawing as Pillow's JPEG)
+        except ImportError:
+            self.skipTest("Pillow is not installed; without it the drawing is embedded as PNG")
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "deliverable_report.py"), str(self.out)],
+                           capture_output=True, text=True, timeout=300)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue((self.out / "REPORT.html").read_bytes() == (EXAMPLE / "deliverable" / "REPORT.html").read_bytes(),
+                        "examples/own-drawing/deliverable/REPORT.html is stale: regenerate it with the README's command")
+
     def test_the_extraction_is_the_recorded_run_of_this_sheet(self):
         record = json.loads((EXAMPLE / "extraction_sheet0.json").read_text(encoding="utf-8"))
         self.assertEqual((record["tool"], record["drawing"], record["label"]), ("codex", "0", "r2-tiles-trace"))

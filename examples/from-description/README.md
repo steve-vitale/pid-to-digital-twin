@@ -1,5 +1,7 @@
 # From a written description: process model, then P&ID and exports
 
+**Why it matters:** Many older units have no usable drawing but do have procedures and design notes. A model with a source on every item lets you build asset lists and screens for them anyway, and shows where the text and the plant disagree.
+
 When there's no usable drawing but there is a description (an operating procedure, a design basis, an
 investigation report, a PFD with notes), the route is: write a process model from it with a source on every item,
 check that model against something it wasn't written from, then generate the P&ID and the platform files from the
@@ -19,7 +21,14 @@ figure on every item. The fields the generators need:
 | `instruments` | `tag`, `unit`, `variable`, `uom`, `description` | ISA first letter must match `variable`; field devices are transmitters (FT, PT, LT, TT) |
 | `final_elements` | `tag`, `unit`, `description` | valves; `uom` optional and left blank if absent |
 
-Add a `source` to every item. Anything the description doesn't say stays out, or is marked as an assumption.
+Add a `source` to every item. An item with no source is not refused: it is still exported, `generate.py` prints a
+warning naming it, and the review sheet shows `NO SOURCE GIVEN` in its source column. Anything the description
+doesn't say stays out, or is marked as an assumption.
+
+Ignition member and PI attribute names come from `description` (letters and digits, cut at 40 characters). Two items
+on one unit whose names would come out the same get their tag appended (`..._TI_101`, `..._TI_102`); if they still
+collide, structural validation refuses the model and names both tags. A missing required field is refused with the
+item and field named (`unit RT-1: missing name`).
 
 ## 2. Check it against something it wasn't written from
 
@@ -44,7 +53,8 @@ and 5 valves, and passes structural validation (which is not engineering approva
 
 The drawing needs one more file the description can't supply: a drafting layout saying where each item goes on
 the sheet (`data/bayer_rt/pid_layout.json`). The generator draws only what the model holds and refuses a layout that
-drops, duplicates or invents an item.
+drops, duplicates or invents an item. Its relative paths resolve against the repository root, not the folder you run
+it from; a missing file or a layout made for another model is refused with a message.
 
 ```sh
 python scripts/draw_pid_from_model.py --model data/bayer_rt/process_model.json --layout data/bayer_rt/pid_layout.json --check

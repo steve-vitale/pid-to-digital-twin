@@ -1,0 +1,55 @@
+{
+ "model": "bundle/plant_model.json",
+ "reviewer": "R1 (illustrative example, not a real review)",
+ "date": "2026-10-29",
+ "applied": [
+  {
+   "item": "S0-VL020",
+   "kind": "line_items",
+   "decision": "corrected",
+   "changes": {
+    "tag": [
+     "MSCV-XXX",
+     "MSCV-1401"
+    ],
+    "tag_status": [
+     "placeholder",
+     "reviewed"
+    ]
+   },
+   "show_on_screen": null,
+   "alarm_priority": null,
+   "notes": "Illustrative only: the real tag would come from the plant's valve list."
+  },
+  {
+   "item": "S0-IN003",
+   "kind": "instruments",
+   "decision": "rejected",
+   "changes": {},
+   "show_on_screen": null,
+   "alarm_priority": null,
+   "notes": "Second read of FT 1401's bubble; not a separate instrument."
+  },
+  {
+   "item": "S0-IN002",
+   "kind": "instruments",
+   "decision": "confirmed",
+   "changes": {},
+   "show_on_screen": true,
+   "alarm_priority": null,
+   "notes": "One flow transmitter FT 1401 on this line."
+  },
+  {
+   "item": "S0-TK001",
+   "kind": "units",
+   "decision": "confirmed",
+   "changes": {},
+   "show_on_screen": true,
+   "alarm_priority": null,
+   "notes": "Matches the equipment schedule tag."
+  }
+ ],
+ "unchanged": 0,
+ "refused": [],
+ "needs_moc": []
+}

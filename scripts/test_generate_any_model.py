@@ -70,5 +70,117 @@ class AnyHandBuiltModel(unittest.TestCase):
         self.assertIs(generate._auto_layout(te), te)
 
 
+def two_temperatures(tag_a="TI-101", tag_b="TI-102"):
+    """Two instruments whose descriptions share their first 40 name characters (member names are cut at 40)."""
+    return {"meta": {"model_id": "member-names", "title": "Member name collision"},
+            "units": [{"id": "RT-1", "name": "Residue treater", "type": "pressure_vessel"}],
+            "streams": [{"id": "S1", "from": "BL", "to": "RT-1"}],
+            "instruments": [
+                {"tag": tag_a, "unit": "RT-1", "variable": "temperature", "uom": "degC", "source": "test",
+                 "description": "Residue treater temperature measured at the upper nozzle location A"},
+                {"tag": tag_b, "unit": "RT-1", "variable": "temperature", "uom": "degC", "source": "test",
+                 "description": "Residue treater temperature measured at the upper nozzle location B"}],
+            "final_elements": []}
+
+
+class FieldMessages(unittest.TestCase):
+    def test_a_missing_field_is_named_with_its_item(self):
+        for mutate, expected in ((lambda m: m["units"][0].pop("name"), "unit RT-1: missing name"),
+                                 (lambda m: m["instruments"][0].pop("description"), "TI-101: missing description"),
+                                 (lambda m: m["instruments"][1].pop("uom"), "TI-102: missing uom")):
+            with self.subTest(expected=expected), tempfile.TemporaryDirectory() as tmp:
+                model = two_temperatures()
+                mutate(model)
+                path = Path(tmp) / "model.json"
+                path.write_text(json.dumps(model), encoding="utf-8")
+                r = subprocess.run([sys.executable, str(ROOT / "scripts" / "generate.py"), str(path), "--out",
+                                    str(Path(tmp) / "out")], capture_output=True, text=True, timeout=120)
+                self.assertEqual(r.returncode, 1, r.stdout)
+                self.assertIn(expected, r.stderr)
+                self.assertNotIn("KeyError", r.stderr)
+
+
+class DrawRefusals(unittest.TestCase):
+    """scripts/draw_pid_from_model.py: bad inputs are refused with a message, never a traceback."""
+
+    def draw(self, *args):
+        return subprocess.run([sys.executable, str(ROOT / "scripts" / "draw_pid_from_model.py"), "--check", *args],
+                              capture_output=True, text=True, timeout=300)
+
+    def test_missing_files_are_refused(self):
+        for flag in ("--model", "--layout"):
+            with self.subTest(flag=flag):
+                r = self.draw(flag, "no/such/file.json")
+                self.assertNotEqual(r.returncode, 0)
+                self.assertIn("refused:", r.stderr)
+                self.assertIn("file.json", r.stderr)
+                self.assertNotIn("Traceback", r.stderr)
+
+    def test_drawing_another_model_never_overwrites_the_te_register(self):
+        te_register = ROOT / "data" / "sheet_registers" / "te_generated.csv"
+        before = te_register.read_bytes()
+        with tempfile.TemporaryDirectory() as tmp:
+            r = subprocess.run([sys.executable, str(ROOT / "scripts" / "draw_pid_from_model.py"),
+                                "--model", "data/bayer_rt/process_model.json", "--layout", "data/bayer_rt/pid_layout.json",
+                                "--out", tmp], capture_output=True, text=True, timeout=300)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue((Path(tmp) / "sheet_register.csv").exists())  # the register goes with the drawing
+        self.assertEqual(te_register.read_bytes(), before)  # the old default wrote Bayer rows into the TE register
+
+    def test_an_empty_description_is_refused(self):
+        model = json.loads(BAYER.read_text(encoding="utf-8"))
+        model["instruments"][0]["description"] = " -- "
+        problems = generate.validate(model)
+        self.assertTrue(any("no letters or digits" in p for p in problems), problems)
+
+    def test_a_unit_with_no_name_is_refused_by_field(self):
+        model = json.loads((ROOT / "data" / "te_process_model.json").read_text(encoding="utf-8"))
+        del model["units"][0]["name"]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "model.json"
+            path.write_text(json.dumps(model), encoding="utf-8")
+            r = self.draw("--model", str(path))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("refused:", r.stderr)
+        self.assertIn(f"unit {model['units'][0]['id']}: missing name", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+
+
+class MemberNames(unittest.TestCase):
+    """A UDT (Ignition) or AF element (PI) cannot hold two members with one name: the second would overwrite or
+    fail on import while structural validation said OK."""
+
+    def test_shared_40_char_prefix_gets_distinct_member_names(self):
+        model = generate._auto_layout(generate._mark_finals(two_temperatures()))
+        self.assertEqual(generate.validate(model), [])
+        udt = generate.ignition_tags(model)["tags"][0]["tags"][0]
+        names = [m["name"] for m in udt["tags"]]
+        self.assertEqual(len(set(names)), 2, names)
+        self.assertTrue(all("TI_101" in n or "TI_102" in n for n in names), names)
+        attrs = [r[2] for r in generate.pi_af_rows(model) if r[3] == "Attribute"]
+        self.assertEqual(attrs, names)   # PI attribute names match the Ignition member names
+
+    def test_names_without_a_collision_are_unchanged(self):
+        model = generate._auto_layout(generate._mark_finals(two_temperatures()))
+        model["instruments"][1]["description"] = "Residue treater pressure"
+        names = [m["name"] for m in generate.ignition_tags(model)["tags"][0]["tags"][0]["tags"]]
+        self.assertEqual(names, [generate.member_name(i["description"]) for i in model["instruments"]])
+
+    def test_validation_refuses_member_names_that_still_collide(self):
+        # Tags that differ only in punctuation give the same suffix: the backstop must refuse, not print OK.
+        model = generate._auto_layout(generate._mark_finals(two_temperatures("TI-101", "TI.101")))
+        problems = generate.validate(model)
+        self.assertTrue(any("duplicate member name" in p and "RT-1" in p for p in problems), problems)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "model.json"
+            path.write_text(json.dumps(two_temperatures("TI-101", "TI.101")), encoding="utf-8")
+            r = subprocess.run([sys.executable, str(ROOT / "scripts" / "generate.py"), str(path), "--out",
+                                str(Path(tmp) / "out")], capture_output=True, text=True, timeout=120)
+            self.assertEqual(r.returncode, 1, r.stdout)
+            self.assertIn("duplicate member name", r.stderr)
+            self.assertNotIn("structural validation: OK", r.stdout)
+            self.assertFalse((Path(tmp) / "out").exists())
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

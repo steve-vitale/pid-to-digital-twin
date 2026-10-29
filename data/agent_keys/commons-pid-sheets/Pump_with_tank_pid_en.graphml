@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="in_solvent">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">27.0</data>
+      <data key="d2">221.0</data>
+      <data key="d3">318.0</data>
+      <data key="d4">371.0</data>
+      <data key="d11">SOLVENT FROM UNIT 1</data>
+    </node>
+    <node id="tank_t001">
+      <data key="d0">tank</data>
+      <data key="d1">275.0</data>
+      <data key="d2">417.0</data>
+      <data key="d3">293.0</data>
+      <data key="d4">557.0</data>
+      <data key="d11">T001</data>
+    </node>
+    <node id="vent_n4">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">292.0</data>
+      <data key="d2">329.0</data>
+      <data key="d3">246.0</data>
+      <data key="d4">275.0</data>
+    </node>
+    <node id="b_l0011">
+      <data key="d0">instrumentation</data>
+      <data key="d1">336.0</data>
+      <data key="d2">443.0</data>
+      <data key="d3">194.0</data>
+      <data key="d4">244.0</data>
+      <data key="d11">L 0011</data>
+    </node>
+    <node id="b_l0012">
+      <data key="d0">instrumentation</data>
+      <data key="d1">123.0</data>
+      <data key="d2">232.0</data>
+      <data key="d3">496.0</data>
+      <data key="d4">546.0</data>
+      <data key="d11">L 0012</data>
+    </node>
+    <node id="v_psv">
+      <data key="d0">valve</data>
+      <data key="d1">602.0</data>
+      <data key="d2">633.0</data>
+      <data key="d3">438.0</data>
+      <data key="d4">488.0</data>
+      <data key="d11">PA: 6 barg</data>
+    </node>
+    <node id="motor">
+      <data key="d0">general</data>
+      <data key="d1">504.0</data>
+      <data key="d2">542.0</data>
+      <data key="d3">512.0</data>
+      <data key="d4">550.0</data>
+      <data key="d11">M</data>
+    </node>
+    <node id="p001">
+      <data key="d0">pump</data>
+      <data key="d1">496.0</data>
+      <data key="d2">550.0</data>
+      <data key="d3">567.0</data>
+      <data key="d4">617.0</data>
+      <data key="d11">P001</data>
+    </node>
+    <node id="v_drain">
+      <data key="d0">valve</data>
+      <data key="d1">333.0</data>
+      <data key="d2">357.0</data>
+      <data key="d3">618.0</data>
+      <data key="d4">660.0</data>
+    </node>
+    <node id="v_chk1">
+      <data key="d0">valve</data>
+      <data key="d1">377.0</data>
+      <data key="d2">417.0</data>
+      <data key="d3">582.0</data>
+      <data key="d4">604.0</data>
+    </node>
+    <node id="red1">
+      <data key="d0">general</data>
+      <data key="d1">442.0</data>
+      <data key="d2">488.0</data>
+      <data key="d3">582.0</data>
+      <data key="d4">602.0</data>
+      <data key="d11">100/50</data>
+    </node>
+    <node id="red2">
+      <data key="d0">general</data>
+      <data key="d1">554.0</data>
+      <data key="d2">604.0</data>
+      <data key="d3">582.0</data>
+      <data key="d4">602.0</data>
+      <data key="d11">100/50</data>
+    </node>
+    <node id="b_pi0013">
+      <data key="d0">instrumentation</data>
+      <data key="d1">646.0</data>
+      <data key="d2">752.0</data>
+      <data key="d3">478.0</data>
+      <data key="d4">531.0</data>
+      <data key="d11">PI 0013</data>
+    </node>
+    <node id="v_chk2">
+      <data key="d0">valve</data>
+      <data key="d1">712.0</data>
+      <data key="d2">754.0</data>
+      <data key="d3">582.0</data>
+      <data key="d4">604.0</data>
+    </node>
+    <node id="v_chk3">
+      <data key="d0">valve</data>
+      <data key="d1">777.0</data>
+      <data key="d2">817.0</data>
+      <data key="d3">582.0</data>
+      <data key="d4">604.0</data>
+    </node>
+    <node id="out_solvent">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">840.0</data>
+      <data key="d2">1036.0</data>
+      <data key="d3">567.0</data>
+      <data key="d4">619.0</data>
+      <data key="d11">SOLVENT TO UNIT 3</data>
+    </node>
+    <node id="j_n3">
+      <data key="d0">crossing</data>
+      <data key="d1">342.0</data>
+      <data key="d2">350.0</data>
+      <data key="d3">589.0</data>
+      <data key="d4">597.0</data>
+    </node>
+    <node id="j_dis">
+      <data key="d0">crossing</data>
+      <data key="d1">614.0</data>
+      <data key="d2">622.0</data>
+      <data key="d3">588.0</data>
+      <data key="d4">596.0</data>
+    </node>
+    <node id="j_pi">
+      <data key="d0">crossing</data>
+      <data key="d1">694.0</data>
+      <data key="d2">702.0</data>
+      <data key="d3">588.0</data>
+      <data key="d4">596.0</data>
+    </node>
+    <edge source="in_solvent" target="tank_t001"><data key="d9">solid</data></edge>
+    <edge source="tank_t001" target="vent_n4"><data key="d9">solid</data></edge>
+    <edge source="tank_t001" target="b_l0011"><data key="d9">solid</data></edge>
+    <edge source="tank_t001" target="b_l0012"><data key="d9">solid</data></edge>
+    <edge source="tank_t001" target="v_psv"><data key="d9">solid</data></edge>
+    <edge source="tank_t001" target="j_n3"><data key="d9">solid</data></edge>
+    <edge source="j_n3" target="v_drain"><data key="d9">solid</data></edge>
+    <edge source="j_n3" target="v_chk1"><data key="d9">solid</data></edge>
+    <edge source="v_chk1" target="red1"><data key="d9">solid</data></edge>
+    <edge source="red1" target="p001"><data key="d9">solid</data></edge>
+    <edge source="p001" target="red2"><data key="d9">solid</data></edge>
+    <edge source="red2" target="j_dis"><data key="d9">solid</data></edge>
+    <edge source="j_dis" target="v_psv"><data key="d9">solid</data></edge>
+    <edge source="j_dis" target="j_pi"><data key="d9">solid</data></edge>
+    <edge source="j_pi" target="b_pi0013"><data key="d9">solid</data></edge>
+    <edge source="j_pi" target="v_chk2"><data key="d9">solid</data></edge>
+    <edge source="v_chk2" target="v_chk3"><data key="d9">solid</data></edge>
+    <edge source="v_chk3" target="out_solvent"><data key="d9">solid</data></edge>
+    <edge source="p001" target="motor"><data key="d9">solid</data></edge>
+    <edge source="b_l0011" target="motor"><data key="d9">non-solid</data></edge>
+  </graph>
+</graphml>

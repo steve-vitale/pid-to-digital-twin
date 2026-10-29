@@ -1,0 +1,598 @@
+{
+ "symbols": [
+  {
+   "id": "FlowInPipeOffPageConnector-1",
+   "class": "inlet/outlet",
+   "tag": null,
+   "box": [
+    73.809,
+    506.703,
+    90.475,
+    530.27
+   ],
+   "confidence": null,
+   "dexpi_class": "FlowInPipeOffPageConnector"
+  },
+  {
+   "id": "GlobeValve-2",
+   "class": "valve",
+   "tag": null,
+   "box": [
+    378.453,
+    393.915,
+    383.453,
+    407.38
+   ],
+   "confidence": null,
+   "dexpi_class": "GlobeValve"
+  },
+  {
+   "id": "ButterflyValve-1",
+   "class": "valve",
+   "tag": "66KL21-80",
+   "box": [
+    459.406,
+    454.516,
+    464.406,
+    467.985
+   ],
+   "confidence": null,
+   "dexpi_class": "ButterflyValve"
+  },
+  {
+   "id": "SwingCheckValve-1",
+   "class": "valve",
+   "tag": "75SA21-80",
+   "box": [
+    477.381,
+    513.433,
+    488.094,
+    521.852
+   ],
+   "confidence": null,
+   "dexpi_class": "SwingCheckValve"
+  },
+  {
+   "id": "PipeReducer-1",
+   "class": "general",
+   "tag": "80/50",
+   "box": [
+    511.906,
+    514.949,
+    521.428,
+    522.019
+   ],
+   "confidence": null,
+   "dexpi_class": "PipeReducer"
+  },
+  {
+   "id": "BallValve-1",
+   "class": "valve",
+   "tag": "73KH12-50",
+   "box": [
+    545.238,
+    514.949,
+    554.763,
+    522.019
+   ],
+   "confidence": null,
+   "dexpi_class": "BallValve"
+  },
+  {
+   "id": "SpringLoadedGlobeSafetyValve-1",
+   "class": "valve",
+   "tag": "SV 104.01",
+   "box": [
+    638.094,
+    309.744,
+    645.238,
+    333.314
+   ],
+   "confidence": null,
+   "dexpi_class": "SpringLoadedGlobeSafetyValve"
+  },
+  {
+   "id": "BallValve-2",
+   "class": "valve",
+   "tag": "73KH12-25",
+   "box": [
+    628.453,
+    531.953,
+    633.453,
+    545.422
+   ],
+   "confidence": null,
+   "dexpi_class": "BallValve"
+  },
+  {
+   "id": "BallValve-3",
+   "class": "valve",
+   "tag": "73KH12-25",
+   "box": [
+    666.547,
+    491.551,
+    671.547,
+    505.02
+   ],
+   "confidence": null,
+   "dexpi_class": "BallValve"
+  },
+  {
+   "id": "BlindFlange-1",
+   "class": "general",
+   "tag": null,
+   "box": [
+    666.547,
+    485.325,
+    671.547,
+    492.395
+   ],
+   "confidence": null,
+   "dexpi_class": "BlindFlange"
+  },
+  {
+   "id": "BallValve-4",
+   "class": "valve",
+   "tag": "73KH12-50",
+   "box": [
+    683.334,
+    514.949,
+    692.856,
+    522.019
+   ],
+   "confidence": null,
+   "dexpi_class": "BallValve"
+  },
+  {
+   "id": "BallValve-5",
+   "class": "valve",
+   "tag": "73KH12-25",
+   "box": [
+    866.547,
+    491.551,
+    871.547,
+    505.02
+   ],
+   "confidence": null,
+   "dexpi_class": "BallValve"
+  },
+  {
+   "id": "BlindFlange-2",
+   "class": "general",
+   "tag": null,
+   "box": [
+    866.547,
+    485.325,
+    871.547,
+    492.395
+   ],
+   "confidence": null,
+   "dexpi_class": "BlindFlange"
+  },
+  {
+   "id": "FlowOutPipeOffPageConnector-1",
+   "class": "inlet/outlet",
+   "tag": null,
+   "box": [
+    900.0,
+    506.703,
+    916.666,
+    530.27
+   ],
+   "confidence": null,
+   "dexpi_class": "FlowOutPipeOffPageConnector"
+  },
+  {
+   "id": "GlobeValve-1",
+   "class": "valve",
+   "tag": "PV4712.02",
+   "box": [
+    767.738,
+    323.213,
+    772.738,
+    336.677
+   ],
+   "confidence": null,
+   "dexpi_class": "GlobeValve"
+  },
+  {
+   "id": "GlobeValve-3",
+   "class": "valve",
+   "tag": "TV4750.03",
+   "box": [
+    805.953,
+    376.911,
+    815.475,
+    383.981
+   ],
+   "confidence": null,
+   "dexpi_class": "GlobeValve"
+  },
+  {
+   "id": "ProcessInstrumentationFunction-1",
+   "class": "instrumentation",
+   "tag": "PI 4712.01",
+   "box": [
+    652.975,
+    431.79,
+    685.119,
+    457.044
+   ],
+   "confidence": null,
+   "dexpi_class": "ProcessInstrumentationFunction"
+  },
+  {
+   "id": "ProcessInstrumentationFunction-2",
+   "class": "instrumentation",
+   "tag": "PICSA 4712.02",
+   "box": [
+    852.975,
+    431.79,
+    885.119,
+    457.044
+   ],
+   "confidence": null,
+   "dexpi_class": "ProcessInstrumentationFunction"
+  },
+  {
+   "id": "ProcessInstrumentationFunction-3",
+   "class": "instrumentation",
+   "tag": "HS 4750.01",
+   "box": [
+    310.119,
+    388.025,
+    342.263,
+    413.274
+   ],
+   "confidence": null,
+   "dexpi_class": "ProcessInstrumentationFunction"
+  },
+  {
+   "id": "ProcessInstrumentationFunction-4",
+   "class": "instrumentation",
+   "tag": "TICSA 4750.03",
+   "box": [
+    469.644,
+    192.749,
+    501.784,
+    217.998
+   ],
+   "confidence": null,
+   "dexpi_class": "ProcessInstrumentationFunction"
+  },
+  {
+   "id": "PlateHeatExchanger-1",
+   "class": "tank",
+   "tag": "H1007",
+   "box": [
+    323.809,
+    440.208,
+    342.856,
+    526.063
+   ],
+   "confidence": null,
+   "dexpi_class": "PlateHeatExchanger"
+  },
+  {
+   "id": "TubularHeatExchanger-1",
+   "class": "tank",
+   "tag": "H1008",
+   "box": [
+    766.072,
+    425.899,
+    824.406,
+    449.465
+   ],
+   "confidence": null,
+   "dexpi_class": "TubularHeatExchanger"
+  },
+  {
+   "id": "CentrifugalPump-1",
+   "class": "pump",
+   "tag": "P4711",
+   "box": [
+    187.5,
+    500.809,
+    212.5,
+    536.16
+   ],
+   "confidence": null,
+   "dexpi_class": "CentrifugalPump"
+  },
+  {
+   "id": "ReciprocatingPump-1",
+   "class": "pump",
+   "tag": "P4712",
+   "box": [
+    585.119,
+    500.809,
+    610.119,
+    536.16
+   ],
+   "confidence": null,
+   "dexpi_class": "ReciprocatingPump"
+  },
+  {
+   "id": "Tank-1",
+   "class": "tank",
+   "tag": "T4750",
+   "box": [
+    426.191,
+    247.578,
+    497.619,
+    419.046
+   ],
+   "confidence": null,
+   "dexpi_class": "Tank"
+  }
+ ],
+ "connections": [
+  {
+   "from": "BallValve-1",
+   "to": "PipeReducer-1"
+  },
+  {
+   "from": "BallValve-1",
+   "to": "ReciprocatingPump-1"
+  },
+  {
+   "from": "BallValve-2",
+   "to": "BallValve-3"
+  },
+  {
+   "from": "BallValve-2",
+   "to": "BallValve-4"
+  },
+  {
+   "from": "BallValve-2",
+   "to": "ReciprocatingPump-1"
+  },
+  {
+   "from": "BallValve-2",
+   "to": "SpringLoadedGlobeSafetyValve-1"
+  },
+  {
+   "from": "BallValve-3",
+   "to": "BallValve-4"
+  },
+  {
+   "from": "BallValve-3",
+   "to": "BlindFlange-1"
+  },
+  {
+   "from": "BallValve-3",
+   "to": "ReciprocatingPump-1"
+  },
+  {
+   "from": "BallValve-3",
+   "to": "SpringLoadedGlobeSafetyValve-1"
+  },
+  {
+   "from": "BallValve-4",
+   "to": "BallValve-5"
+  },
+  {
+   "from": "BallValve-4",
+   "to": "FlowOutPipeOffPageConnector-1"
+  },
+  {
+   "from": "BallValve-4",
+   "to": "ReciprocatingPump-1"
+  },
+  {
+   "from": "BallValve-4",
+   "to": "SpringLoadedGlobeSafetyValve-1"
+  },
+  {
+   "from": "BallValve-4",
+   "to": "TubularHeatExchanger-1"
+  },
+  {
+   "from": "BallValve-5",
+   "to": "BlindFlange-2"
+  },
+  {
+   "from": "BallValve-5",
+   "to": "FlowOutPipeOffPageConnector-1"
+  },
+  {
+   "from": "BallValve-5",
+   "to": "TubularHeatExchanger-1"
+  },
+  {
+   "from": "BlindFlange-1",
+   "to": "ProcessInstrumentationFunction-1"
+  },
+  {
+   "from": "BlindFlange-2",
+   "to": "ProcessInstrumentationFunction-2"
+  },
+  {
+   "from": "ButterflyValve-1",
+   "to": "SwingCheckValve-1"
+  },
+  {
+   "from": "ButterflyValve-1",
+   "to": "Tank-1"
+  },
+  {
+   "from": "CentrifugalPump-1",
+   "to": "FlowInPipeOffPageConnector-1"
+  },
+  {
+   "from": "CentrifugalPump-1",
+   "to": "PlateHeatExchanger-1"
+  },
+  {
+   "from": "FlowOutPipeOffPageConnector-1",
+   "to": "TubularHeatExchanger-1"
+  },
+  {
+   "from": "GlobeValve-1",
+   "to": "ProcessInstrumentationFunction-2"
+  },
+  {
+   "from": "GlobeValve-1",
+   "to": "Tank-1"
+  },
+  {
+   "from": "GlobeValve-1",
+   "to": "TubularHeatExchanger-1"
+  },
+  {
+   "from": "GlobeValve-2",
+   "to": "PlateHeatExchanger-1"
+  },
+  {
+   "from": "GlobeValve-2",
+   "to": "ProcessInstrumentationFunction-3"
+  },
+  {
+   "from": "GlobeValve-2",
+   "to": "Tank-1"
+  },
+  {
+   "from": "GlobeValve-3",
+   "to": "ProcessInstrumentationFunction-4"
+  },
+  {
+   "from": "GlobeValve-3",
+   "to": "TubularHeatExchanger-1"
+  },
+  {
+   "from": "PipeReducer-1",
+   "to": "SwingCheckValve-1"
+  },
+  {
+   "from": "ProcessInstrumentationFunction-4",
+   "to": "Tank-1"
+  },
+  {
+   "from": "ReciprocatingPump-1",
+   "to": "SpringLoadedGlobeSafetyValve-1"
+  },
+  {
+   "from": "SpringLoadedGlobeSafetyValve-1",
+   "to": "Tank-1"
+  }
+ ],
+ "producer": {
+  "method": "converted from DEXPI XML, no model",
+  "tool": "dexpi_to_twin.py",
+  "model": null
+ },
+ "source": {
+  "sheet": "dexpi-c01",
+  "key_graphml_sha256": "f72a66b0132f2beb43e802335026043f5d48b317d051194d05882d3e970966e3",
+  "key_tags_sha256": "b97f1d7169c8d2c6144bda7c70b8a7efc6cb0668465073d75e72a8ca5cef1049",
+  "image_sha256": "69a14663282407f55794594d1c45f2ae2ec7ed1466566fc7af70bfb790fcfcea"
+ },
+ "conversion": {
+  "key_in": {
+   "nodes": 30,
+   "symbols_in_six_classes": 25,
+   "pass_through_nodes": 5,
+   "edges": 33,
+   "edges_between_symbols": 21,
+   "edges_touching_pass_through": 12,
+   "symbols_with_tag": 20
+  },
+  "out": {
+   "symbols": 25,
+   "tags": 20,
+   "connections": 37,
+   "connections_kept_as_drawn": 21,
+   "connections_added_by_collapsing_tees": 16,
+   "by_class": {
+    "general": 3,
+    "inlet/outlet": 2,
+    "instrumentation": 4,
+    "pump": 2,
+    "tank": 3,
+    "valve": 11
+   }
+  },
+  "dropped": {
+   "key_nodes": {
+    "connector (PipeTee): pass-through, links collapsed through it": 5
+   },
+   "edges_between_symbols_lost": [],
+   "boxes_clamped_to_page": []
+  },
+  "lossy_steps": [
+   "Classes collapsed to the six scored classes; the exact DEXPI class is kept only as dexpi_class, which the intake preserves in its source copy but does not use.",
+   "Tees are not symbols: each tee's neighbours are linked pairwise, so a junction becomes a clique of links.",
+   "Connections are undirected; DEXPI segment direction is discarded.",
+   "Tags are drawn label text only; untagged symbols stay untagged even when the XML has an identifier.",
+   "Line, size, fluid, design and fail-action attributes are not carried; the intake has no field for them.",
+   "confidence is null: nothing was estimated."
+  ],
+  "xml": {
+   "not_symbols": {
+    "connection point of an item: not a symbol": 148,
+    "pipe segment: survives only as undirected links (direction dropped)": 23,
+    "nozzle: folded into its equipment as a link endpoint": 19,
+    "pipe system: survives only as undirected links": 11,
+    "equipment internal (section, chamber, impeller...): not a separate symbol": 11,
+    "flow arrow: dropped": 8,
+    "actuator or valve reference: folded into the valve it operates": 6,
+    "signal or measuring line: survives only as an undirected link": 6,
+    "instrument loop grouping: dropped": 4,
+    "actuating system: its number label tags the valve; otherwise dropped": 3,
+    "signal-generating function (sensor element): dropped": 3,
+    "actuating function: dropped": 3,
+    "file metadata: not drawing content": 1,
+    "slope mark: dropped": 1,
+    "insulation mark: dropped": 1
+   },
+   "attributes_not_carried_on_kept_items": {
+    "NominalDiameterNumericalValueRepresentationAssignmentClass": 24,
+    "NominalDiameterRepresentationAssignmentClass": 24,
+    "NominalDiameterStandardSpecialization": 24,
+    "NominalDiameterTypeRepresentationAssignmentClass": 24,
+    "FluidCodeAssignmentClass": 19,
+    "PipingClassCodeAssignmentClass": 18,
+    "PipingComponentNumberAssignmentClass": 18,
+    "PipingComponentNameAssignmentClass": 7,
+    "TagNameAssignmentClass": 5,
+    "TagNamePrefixAssignmentClass": 5,
+    "TagNameSequenceNumberAssignmentClass": 5,
+    "SubTagNameAssignmentClass": 5,
+    "LowerLimitDesignPressure": 5,
+    "LowerLimitDesignTemperature": 5,
+    "UpperLimitDesignPressure": 5,
+    "UpperLimitDesignTemperature": 5,
+    "MaterialOfConstructionCodeAssignmentClass": 5,
+    "LocationSpecialization": 4,
+    "ProcessInstrumentationFunctionCategoryAssignmentClass": 4,
+    "ProcessInstrumentationFunctionNumberAssignmentClass": 4,
+    "ProcessInstrumentationFunctionsAssignmentClass": 4,
+    "ProcessSignalGeneratingFunctionNumberAssignmentClass": 3,
+    "ActuatingFunctionNumberAssignmentClass": 3,
+    "DesignHeatFlowRate": 2,
+    "DesignHeatTransferArea": 2,
+    "NominalDiameter": 2,
+    "DesignPressureHead": 2,
+    "DesignRotationalSpeed": 2,
+    "DesignShaftPower": 2,
+    "DesignVolumeFlowRate": 2,
+    "PositionNumberAssignmentClass": 1,
+    "SetPressureHigh": 1,
+    "InsulationThickness": 1,
+    "InsulationTypeAssignmentClass": 1,
+    "PlateHeight": 1,
+    "PlateWidth": 1,
+    "TubeLength": 1,
+    "TubeMaterialOfConstructionCodeAssignmentClass": 1,
+    "CylinderLength": 1,
+    "NominalCapacity(Volume)": 1
+   },
+   "identifiers_on_untagged_symbols": {
+    "GlobeValve-2": "C1 (PipingComponentNumberAssignmentClass)",
+    "BlindFlange-1": "C6 (PipingComponentNumberAssignmentClass)",
+    "BlindFlange-2": "C11 (PipingComponentNumberAssignmentClass)"
+   },
+   "directed_segments_made_undirected": 19
+  }
+ }
+}
