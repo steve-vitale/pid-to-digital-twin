@@ -46,8 +46,9 @@ These are the rules this project follows. Each one also applies at a plant.
 3. **Never let one number be the headline.** Report precision *and* recall, strict *and* rough, per class, and
    connectivity separately. A tool can raise one by sacrificing another, for example by reporting fewer symbols to
    raise precision.
-4. **Measure the noise before claiming a difference.** Every tool was run at least twice with the identical prompt
-   and images. In round 1, Claude and Codex moved about ±0.03 F1 between runs; first-try Gemini moved ±0.13. Round 5
+4. **Measure the noise before claiming a difference.** In round 1 every tool was run at least twice with the identical
+   prompt and images; rounds 2 and 4 were single runs (most tuning attempts were: see
+   [TRIED.md](TRIED.md)). In round 1, Claude and Codex moved about ±0.03 F1 between runs; first-try Gemini moved ±0.13. Round 5
    ran the declared method five times per tool on holdout A: review load moved with a standard deviation of 1.4
    (GPT) and 1.9 (Claude) points, more than the "about 1 point" round 2 assumed. A gap smaller than the run-to-run
    noise is a tie, not a ranking, and a gap bigger than the noise on six drawings can still be a tie across drawings

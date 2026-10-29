@@ -43,6 +43,7 @@ SOURCE_TESTS = (
     "scripts/test_evaluate_vendor.py",
     "scripts/test_generate_any_model.py",
     "scripts/test_script_index.py",
+    "scripts/test_attempts_ledger.py",
 )
 # These tests need cached data or third-party imports, even though none needs a gateway.
 FULL_ONLY_TESTS = (

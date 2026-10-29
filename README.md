@@ -29,6 +29,8 @@ tests how much of that AI can do, how to check its work honestly, and what a pla
 - **Check it yourself.** `python scripts/check_claims.py` compares every headline number here with the committed file
   it comes from (standard library only, under a minute). If you'd rather have your coding agent do it,
   [AGENTS.md](AGENTS.md) tells it what to run and which limits to report back. More: [REVIEWING.md](docs/REVIEWING.md).
+- **What was tried.** Every tuning attempt with its number and verdict (134 so far, most of them single runs), and
+  the 55 ideas not tried yet: [TRIED.md](docs/TRIED.md), generated from `data/attempts.json` and checked in CI.
 - **Using it on your own drawings.** [A runbook](examples/own-drawing/README.md) that runs offline from a clean clone on
   a public sheet, then the same steps for yours. Most of the repository is this project's research record;
   [which is which](#whats-a-tool-and-whats-a-record).

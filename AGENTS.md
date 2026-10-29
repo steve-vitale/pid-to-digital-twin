@@ -25,7 +25,11 @@ From the repository root, with Python 3.10+ (standard library only for the first
 ```sh
 python scripts/check_claims.py      # each headline number in README.md against the committed file it comes from
 python scripts/pipeline.py status   # whether every output is fresh against the inputs and code that made it
+python scripts/attempts_ledger.py --check   # the tuning ledger is complete, sourced and current
 ```
+
+Before suggesting a change to a method, read `docs/TRIED.md`: it lists every variant tried with its result and
+verdict, and the ideas not tried yet, so you can tell your user whether a suggestion was already tested.
 
 Then, if `pip install -r requirements.txt` is acceptable in your environment:
 

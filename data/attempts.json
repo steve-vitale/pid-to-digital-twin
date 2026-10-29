@@ -1,0 +1,2525 @@
+{
+  "about": "How this project tuned each function: what was tried, what happened, what was kept or rejected, and what has not been tried. Every entry cites the document it comes from; numbers are quoted as the sources state them. Dates are the journal's own where it gives one; where the text gives none (entries 1-21, the development sweeps), the date is the day the commit that recorded the work was made.",
+  "functions": {
+    "extraction": "Extraction: models reading symbols and tags",
+    "line_tracing": "Line tracing and connectivity (tracer, parent rule, flow direction, sheet stitching)",
+    "tiling": "Tiling",
+    "risk_ranking": "Risk ranking for review",
+    "scan_robustness": "Robustness to old scans",
+    "tag_reading": "Tag reading",
+    "scoring": "Scoring: the scorer and its controls",
+    "generated_pids": "Generated P&IDs drawn from a model (loops, stations, style)",
+    "te_model": "Tennessee Eastman model: source and topology verification, tag conventions",
+    "replay_and_bands": "Replay, normal bands and fault detection",
+    "ignition": "Ignition and PI outputs: build, verifier, acceptance, screens",
+    "real_unit": "The real unit (Bayer residue treater): model from text, Figure 10/11 checks, replay",
+    "tours_3d": "3D and browser tours",
+    "review_loop": "Review loop: operations corrections, mapping, outside review",
+    "intake_and_reuse": "Intake and reuse: runbook, DEXPI route, loop audit, CSV tools, vendor kit"
+  },
+  "attempts": [
+    {
+      "id": "A001",
+      "function": "extraction",
+      "date": "2026-10-07",
+      "change": "Round-1 first try: Claude, GPT (Codex) and Gemini read the 12 OPEN100 drawings whole-sheet with the first prompt (bare [x, y, x, y] box lists).",
+      "hypothesis": null,
+      "evidence": "Found + right class F1: Codex 0.87, Claude 0.85, Gemini 0.44; connections F1 0.56 / 0.43 / 0.15 (out/scorecard_first-try.md).",
+      "runs": "1 per tool",
+      "verdict": "superseded",
+      "why": "The first-try numbers stay the published headline, but prompt v2 replaced this prompt for every later run.",
+      "source": [
+        "docs/JOURNAL.md#8-define-done-well-first-then-guard-the-definition-from-the-people-chasing-it-us",
+        "docs/EVALUATION.md#4-round-1-results-12-real-open100-drawings",
+        "out/scorecard_first-try.md"
+      ]
+    },
+    {
+      "id": "A002",
+      "function": "extraction",
+      "date": "2026-10-07",
+      "change": "Ran the identical first prompt a second time on the same 12 drawings to measure run-to-run noise.",
+      "hypothesis": null,
+      "evidence": "Codex 0.87 -> 0.87, Claude 0.85 -> 0.85, Gemini 0.44 -> 0.57; Claude and Codex move about ±0.03 between runs, first-try Gemini ±0.13.",
+      "runs": "2 (first try + repeat)",
+      "verdict": "kept",
+      "why": "Measuring noise before claiming a difference became a standing rule, and the Gemini swing exposed its format problem.",
+      "source": [
+        "docs/JOURNAL.md#8-define-done-well-first-then-guard-the-definition-from-the-people-chasing-it-us",
+        "docs/EVALUATION.md#2-the-anti-goodhart-rules"
+      ]
+    },
+    {
+      "id": "A003",
+      "function": "extraction",
+      "date": "2026-10-07",
+      "change": "Prompt v2: named box fields (x_min, y_min, ...) instead of a bare [x, y, x, y] list.",
+      "hypothesis": "Gemini's gap was mostly an output-format problem (axis order), not vision.",
+      "evidence": "Gemini 0.44 -> 0.74 found + right class; Codex 0.87 -> 0.85, Claude 0.85 -> 0.85. On 5 of 12 drawings Gemini's boxes scored about 0 as delivered and 0.60-0.92 with the axes swapped back.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Format-only fix applied to every tool; it became the prompt for all later rounds. Written after seeing all 12 drawings, which bends the held-out rule (stated in EVALUATION.md rule 7).",
+      "source": [
+        "docs/JOURNAL.md#8-define-done-well-first-then-guard-the-definition-from-the-people-chasing-it-us",
+        "docs/EVALUATION.md#2-the-anti-goodhart-rules"
+      ]
+    },
+    {
+      "id": "A004",
+      "function": "extraction",
+      "date": "2026-10-07",
+      "change": "Gemma 4 31B (open weights, hosted API) as the offline stand-in: prompt v2, same 12 drawings, 30-minute client timeout.",
+      "hypothesis": null,
+      "evidence": "5 of 12 calls hit the 30-minute timeout and scored 0: found + right class F1 0.25, connections 0.02. On the 7 that completed, found F1 about 0.54 with precision 0.93.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "Kept as the honest first-try headline; the docs leave the offline choice to a site's own tuning and measurement.",
+      "source": [
+        "docs/JOURNAL.md#9-ask-the-offline-question-with-data-not-opinions",
+        "docs/EVALUATION.md#4-round-1-results-12-real-open100-drawings"
+      ]
+    },
+    {
+      "id": "A005",
+      "function": "extraction",
+      "date": "2026-10-07",
+      "change": "Gemma retry with a 90-minute timeout on the 5 timed-out drawings (labelled as a retry).",
+      "hypothesis": null,
+      "evidence": "Drawings 5 and 6 completed in about 4 minutes (F1 0.38 and 0.55); drawings 0, 9 and 10 timed out again, the same three both times. Across both attempts 9 of 12 completed, about 0.53 found F1 against about 0.90 for the frontier models.",
+      "runs": "1 retry",
+      "verdict": "inconclusive",
+      "why": "Consistent with the model or the hosted service stalling on certain images; which one cannot be told from outside.",
+      "source": [
+        "docs/JOURNAL.md#9-ask-the-offline-question-with-data-not-opinions",
+        "docs/EVALUATION.md#4-round-1-results-12-real-open100-drawings"
+      ]
+    },
+    {
+      "id": "A006",
+      "function": "extraction",
+      "date": "2026-10-10",
+      "change": "Applied the selected whole-sheet recipe (gpt-6.1-sol, original prompt) to two development sheets of a separate labelled collection, PID2Graph Synthetic, through native workers.",
+      "hypothesis": null,
+      "evidence": "Review load 47 / 108 = 43.52 per 100; located 42 / 43 symbols; source-class F1 0.424 micro; connections 44 TP / 45 predicted / 65 key. 24 corrections are source-class disagreements, 20 of them source `general`.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "Two development sheets identify gaps (label vocabulary, line semantics), not broad performance.",
+      "source": [
+        "docs/JOURNAL.md#24-try-a-separately-labeled-collection-before-claiming-a-general-method"
+      ]
+    },
+    {
+      "id": "A007",
+      "function": "extraction",
+      "date": "2026-10-11",
+      "change": "Prospective frozen trial: the unchanged whole-sheet recipe on the two never-opened Synthetic sheets 2 and 3, scored once after sealing.",
+      "hypothesis": null,
+      "evidence": "73 corrections / 158 key items = 46.20 per 100; 47 / 49 symbols located; rough source-class F1 0.625; connection P/R/F1 0.951 / 0.532 / 0.682.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "A transfer measurement with no tuning or repair; both sheets are now consumed, so a changed method needs new data.",
+      "source": [
+        "docs/JOURNAL.md#34-prospective-frozen-synthetic-23-transfer-check",
+        "docs/PID2GRAPH_RESERVED23_RESULTS.md"
+      ]
+    },
+    {
+      "id": "A008",
+      "function": "extraction",
+      "date": "2026-10-13",
+      "change": "Equipment schedules printed along the bottom of each OPEN100 sheet transcribed by Claude to supply equipment purposes.",
+      "hypothesis": null,
+      "evidence": "49 of the 74 purpose cards come from the schedules.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "The extraction never read the schedules; they say what each piece of equipment is for. Not checked by a second model.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support",
+        "docs/MODELS.md"
+      ]
+    },
+    {
+      "id": "A009",
+      "function": "extraction",
+      "date": "2026-10-13",
+      "change": "Round 5 replicates: five fresh runs of the declared method M3 per model on holdout A.",
+      "hypothesis": "How much does M3 move between runs, and is the GPT-Claude gap bigger than that?",
+      "evidence": "GPT 20.1 (runs 18.3-21.8 / bootstrap 14.2-28.0), Claude 29.8 (27.5-32.1 / 12.8-47.3); run SD 1.4 and 1.9 points against the ~1 point round 2 assumed. GPT minus Claude -9.8: runs interval -12.2 to -7.3, bootstrap -26.5 to +4.5, a tie by the pre-registered rule.",
+      "runs": "5 per model",
+      "verdict": "kept",
+      "why": "The five-run means replaced the round-2 single runs as the quoted holdout-A figures; the round-2 verdict stands because its ~30-point gain is far outside the noise.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review",
+        "docs/JOURNAL.md#49-bring-eight-lines-of-work-onto-one-branch-and-make-every-output-a-stage",
+        "out/replicates_r5_holdout-a.md"
+      ]
+    },
+    {
+      "id": "A010",
+      "function": "extraction",
+      "date": "2026-10-13",
+      "change": "Round 5: declared method M3 on five DEXPI example sheets from a different publisher (a third drafting style).",
+      "hypothesis": "Does M3 carry over to drawings from a different publisher?",
+      "evidence": "Review load GPT 95.4, Claude 61.8 against about 20-30 on holdout A, outside both tools' holdout-A bootstrap intervals. GPT bimodal on C01: nozzles reported in 3 of 5 runs (143.5-146.8) and not in 2 (32-34).",
+      "runs": "5 per model",
+      "verdict": "inconclusive",
+      "why": "The method does worse on this source, much of it key scope (nozzles); nothing was changed because a fix would be a new method needing unseen drawings.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review",
+        "out/replicates_r5_dexpi.md"
+      ]
+    },
+    {
+      "id": "A011",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Tracer first cut: split 4-arm crossings, band 0.15, no through-line handling or barrier.",
+      "hypothesis": null,
+      "evidence": "Oracle (answer-key boxes) review load 15.2 on dev.",
+      "runs": "1 (dev sweep)",
+      "verdict": "superseded",
+      "why": "Starting point for the variant sweep.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A012",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Join crossings (the key treats crossings as pass-through), band 0.15.",
+      "hypothesis": null,
+      "evidence": "Dev review load oracle 12.2 / Claude 34.3 / Codex 43.9 / Gemini 131.4.",
+      "runs": "1 (dev sweep)",
+      "verdict": "kept",
+      "why": "Joining crossings matches the key's definition; kept in the final defaults.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A013",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Band 0.05 x median symbol side (crossings joined).",
+      "hypothesis": null,
+      "evidence": "Oracle 9.8 / Claude 32.5 / Codex 36.6 / Gemini 120.3.",
+      "runs": "1 (dev sweep)",
+      "verdict": "kept",
+      "why": "Kept in the final defaults.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A014",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Wider band 0.3 / 0.5.",
+      "hypothesis": null,
+      "evidence": "Claude 39.5 / 51.6, Codex 45.8 / 60.1, Gemini 138.3 / 152.5 (oracle column 17.2 / 21.3 at 0.25 / 0.4 with crossings split).",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Worse for every tool.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A015",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "line_frac 0.3 / 0.6 / 1.0 with crossings joined.",
+      "hypothesis": null,
+      "evidence": "Oracle 9.8 in all three.",
+      "runs": "1 (dev sweep)",
+      "verdict": "inconclusive",
+      "why": "No effect.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A016",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Drop boxes that a straight line runs through (through-line boxes).",
+      "hypothesis": null,
+      "evidence": "Oracle 14.7 / Claude 36.5 / Codex 39.6 / Gemini 117.5.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Worse than keeping them.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A017",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Snap through-line boxes to the remaining ink.",
+      "hypothesis": null,
+      "evidence": "Oracle 9.8 / Claude 32.2 / Codex 36.1 / Gemini 117.1.",
+      "runs": "1 (dev sweep)",
+      "verdict": "kept",
+      "why": "Small gain; kept as through-line snap.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A018",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Missed-symbol barrier, size only, 0.3 x symbol side.",
+      "hypothesis": null,
+      "evidence": "Oracle 9.5 / Claude 34.3 / Codex 37.8 / Gemini 80.0.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "It blocks nozzles.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A019",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Missed-symbol barrier, size only, 0.5 / 0.8 x side.",
+      "hypothesis": null,
+      "evidence": "Oracle 9.7 / 8.4, Claude 30.7 / 30.8, Codex 34.6 / 34.7, Gemini 103.2 / 111.2.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Not adopted; the final barrier adds a stroke test at 0.3 side (the table gives no separate verdict).",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A020",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Missed-symbol barrier at 0.3 x side, only for blobs with < 60% orthogonal strokes (the final default).",
+      "hypothesis": null,
+      "evidence": "Oracle 9.6 / Claude 29.8 / Codex 34.4 / Gemini 87.6.",
+      "runs": "1 (dev sweep)",
+      "verdict": "kept",
+      "why": "Final tracer default.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A021",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Barrier variants: < 40% orthogonal; 0.2 side; compact blobs only; size cap 2 / 3 / 5 sides.",
+      "hypothesis": null,
+      "evidence": "< 40%: 8.3 / 30.9 / 34.5 / 100.5; 0.2 side: 9.9 / 30.3 / 34.4 / 87.6; compact only: 9.7 / 31.1 / 36.1 / 88.4; size cap: no effect.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "None beat the final barrier across tools; compact-only is marked rejected in the sweep table.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A022",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Final settings but split 4-arm crossings.",
+      "hypothesis": null,
+      "evidence": "Oracle 17.9 / Claude 45.8 / Codex 40.3 / Gemini 83.9.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Worse for the oracle, Claude and Codex.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A023",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Nearest-neighbour tree per network instead of linking all pairs.",
+      "hypothesis": null,
+      "evidence": "Oracle 45.5 / Claude 60.5 / Codex 62.3 / Gemini 81.5.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Best for Gemini only.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A024",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "All pairs only up to 6 / 12 symbols per network, else a tree.",
+      "hypothesis": null,
+      "evidence": "Oracle 39.5 / 36.3, Claude 55.6 / 52.3, Codex 58.5 / 55.3, Gemini 81.2 / 81.6.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Worse than all pairs for the oracle, Claude and Codex.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A025",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Final settings with band 0.1 / 0.2.",
+      "hypothesis": null,
+      "evidence": "Oracle 10.1 / 11.3, Claude 30.0 / 32.0, Codex 36.6 / 38.6, Gemini 89.7 / 93.4.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Slightly worse than band 0.05.",
+      "source": [
+        "out/trace_variants_dev.md"
+      ]
+    },
+    {
+      "id": "A026",
+      "function": "line_tracing",
+      "date": "2026-10-07",
+      "change": "Union: tracer links plus the model's own links.",
+      "hypothesis": null,
+      "evidence": "Claude 35.4-37.7, Codex 41.6-45.5, Gemini 97-103 against tracer-only 29.8 / 34.4 / 87.6.",
+      "runs": "1 (dev sweep)",
+      "verdict": "rejected",
+      "why": "Adding the model's links added false links faster than true ones.",
+      "source": [
+        "out/trace_variants_dev.md",
+        "out/scorecard_r2-trace-union_dev.md"
+      ]
+    },
+    {
+      "id": "A027",
+      "function": "line_tracing",
+      "date": "2026-10-08",
+      "change": "M2: tracer connections on the whole-sheet (M0) symbols.",
+      "hypothesis": "Connections were every model's weakest point; lines are geometry, which code does deterministically.",
+      "evidence": "Review load dev / holdout A / holdout B: Codex 34.4 / 28.7 / 16.2, Claude 29.8 / 36.0 / 28.2, Gemini 87.6 / 55.4 / 83.9.",
+      "runs": "1 per holdout",
+      "verdict": "rejected",
+      "why": "Lost to M3 on holdout A for every tool; for Codex it beat M3 on holdout B (16.2 vs 20.7), reported, not acted on.",
+      "source": [
+        "docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout",
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on"
+      ]
+    },
+    {
+      "id": "A028",
+      "function": "line_tracing",
+      "date": "2026-10-08",
+      "change": "M3: tracer connections on the tiled (M1) symbols; the declared method.",
+      "hypothesis": "Give geometry to deterministic code and keep the model for symbols and tags.",
+      "evidence": "Holdout A: Codex 48.8 -> 17.8, Claude 61.1 -> 32.4, Gemini 75.9 -> 40.2; holdout B: 67.0 -> 20.7, 76.6 -> 16.5, 92.7 -> 38.3. Codex connection recall 55% -> 88% at 89% precision.",
+      "runs": "1 per holdout per tool",
+      "verdict": "kept",
+      "why": "Lowest holdout-A review load for every tool and better than M0 on holdout B, so not style overfitting by the pre-registered rule. Later five-run means: GPT 20.1, Claude 29.8.",
+      "source": [
+        "docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout",
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "A029",
+      "function": "line_tracing",
+      "date": "2026-10-08",
+      "change": "Round-2 twin: instrument parent = asset sharing its traced pipe network (`linked`).",
+      "hypothesis": null,
+      "evidence": "Holdout A parent accuracy 87.0% (134/154) against round 1's 90.9% (140/154) and a position-only control of 85.7%; holdout B 70.8% (286/404).",
+      "runs": "1 per holdout",
+      "verdict": "superseded",
+      "why": "A better connection score made the twin's parent choice worse; replaced by the along-line rule, kept as the second opinion.",
+      "source": [
+        "docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout",
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on",
+        "docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized"
+      ]
+    },
+    {
+      "id": "A030",
+      "function": "line_tracing",
+      "date": "2026-10-08",
+      "change": "Round-3 parent rule: nearest non-instrument asset reached by following the drawn line (`along_line`).",
+      "hypothesis": "Choosing the parent by distance along the traced line fixes the round-2 regression.",
+      "evidence": "Dev 92.6%; holdout A 92.2% (142/154), beating both 87.0% and 90.9% (margin over round 1 is 2 instruments); holdout B 67.6% (273/404), worse than `linked`'s 70.8%.",
+      "runs": "1 per holdout",
+      "verdict": "kept",
+      "why": "Meets the pre-registered win on holdout A; fixed for this drafting style, not in general, so disagreements with `linked` go to review.",
+      "source": [
+        "docs/GOAL.md#goal-2-the-twins-parent-assignment-scored-once-per-holdout-codex-m3-symbols",
+        "docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized"
+      ]
+    },
+    {
+      "id": "A031",
+      "function": "line_tracing",
+      "date": "2026-10-11",
+      "change": "Legacy tracer replacing raw whole-sheet links on the exposed Synthetic sheets 2/3.",
+      "hypothesis": null,
+      "evidence": "True collapsed links 58 -> 48, false links 3 -> 5.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The tracer follows connected ink; dotted and dashed strokes are separate components.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "A032",
+      "function": "line_tracing",
+      "date": "2026-10-11",
+      "change": "Broad-close diagnostic: 15% symbol-side axis closing before the unchanged tracer.",
+      "hypothesis": null,
+      "evidence": "TP / false per Synthetic sheet 0-3: 38/6, 25/5, 73/0, 29/10. Disabling through-line snap did not change these counts.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "No repeated-dash evidence and more false joins.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "A033",
+      "function": "line_tracing",
+      "date": "2026-10-11",
+      "change": "Selective interior-only dash recovery at 15% gap / 30% dash, no guard, scored as a union with raw links.",
+      "hypothesis": null,
+      "evidence": "29/0, 25/1, 50/0, 28/7 (union diagnostic).",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Union values were not adopted as the traced headline.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "A034",
+      "function": "line_tracing",
+      "date": "2026-10-11",
+      "change": "Added symbol guard, fixed 25% gap / 50% dash, traced-only; then guarded attachment boxes.",
+      "hypothesis": null,
+      "evidence": "24/0, 19/0, 45/0, 21/7; with guarded attachment boxes 26/0, 19/0, 48/0, 22/7.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Intermediate steps toward the final development v2 geometry.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "A035",
+      "function": "line_tracing",
+      "date": "2026-10-11",
+      "change": "Development v2 tracer: repeated-dash recovery with qualified endpoint extension and guarded symbol barriers (opt-in stage).",
+      "hypothesis": null,
+      "evidence": "27/0, 19/0, 48/0, 23/7. Exposed sheets 2/3: 71 TP / 7 FP / 38 FN against raw 58/3/51; missed-plus-false corrections 54 -> 45, but sheets 1 and 3 regress against raw extraction.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "Sequential tuning on exposed development data; not a universal replacement or a prospective result.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "A036",
+      "function": "line_tracing",
+      "date": "2026-10-13",
+      "change": "Flow direction v1: an arrowhead orients every symbol behind it against every symbol ahead of it.",
+      "hypothesis": null,
+      "evidence": "380 conflicts, still 237 after instrument links were taken out.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "On a header with two outlets it says A flows to B and back; the conflicts showed the rule was wrong.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support",
+        "docs/OPEN100_STRUCTURAL.md"
+      ]
+    },
+    {
+      "id": "A037",
+      "function": "line_tracing",
+      "date": "2026-10-13",
+      "change": "Flow direction final: first-hand evidence (arrow or flag on the pipe between two symbols, no branch between) kept apart from across-a-branch evidence; pump ports; valve continuity.",
+      "hypothesis": null,
+      "evidence": "361 of 1,133 process links directed (32%), 101 conflicts shown without arrow. Arrowhead detection on held-out sheets 6-11: 83% precision, 77% recall of key arrow nodes. Blind spot check of 65 crops: neither GPT nor Claude disagreed with the code; arrowheads and flags agree on 70 of 70 shared links.",
+      "runs": "1 (blind check read by 2 models)",
+      "verdict": "kept",
+      "why": "Each link carries the lower end of the 95% interval for its source as confidence; two-thirds of process links stay undirected.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support",
+        "docs/OPEN100_STRUCTURAL.md"
+      ]
+    },
+    {
+      "id": "A038",
+      "function": "line_tracing",
+      "date": "2026-10-13",
+      "change": "Read drawing numbers written with en dashes (\"PID 110–1\") as numbers for off-page connector pairing.",
+      "hypothesis": null,
+      "evidence": "31 more connectors found their sheet: 38 sheet-to-sheet connections instead of 7.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "En dashes had defeated the twin's connector pairing.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support"
+      ]
+    },
+    {
+      "id": "A039",
+      "function": "line_tracing",
+      "date": "2026-10-13",
+      "change": "Diagnostic on DEXPI: the models' own links without tracing (M1) against M3.",
+      "hypothesis": null,
+      "evidence": "M1 review load GPT 79.3, Claude 65.0; with tracing 95.4 and 61.8.",
+      "runs": "5 per model",
+      "verdict": "inconclusive",
+      "why": "Tracing helped Claude a little and hurt GPT, mostly through the nozzle runs; labelled diagnostic.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "out/replicates_r5_dexpi_tiles_only_diagnostic.md"
+      ]
+    },
+    {
+      "id": "A040",
+      "function": "line_tracing",
+      "date": "2026-10-28",
+      "change": "Diagnostic: pad equipment boxes by 4 px (the outline width) before tracing revision C.",
+      "hypothesis": "Claude's higher L1/L2 load comes from tight vessel boxes letting the tracer follow the wall.",
+      "evidence": "Removes every extra Claude link: sheet 101 connections 0.93 -> 0.99, sheet 103 0.86 -> 1.00; no change for GPT.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "A method change; the published scores stay as measured until it is measured on every result it would touch.",
+      "source": [
+        "docs/JOURNAL.md#54-read-revision-c-back-with-the-same-method"
+      ]
+    },
+    {
+      "id": "A041",
+      "function": "tiling",
+      "date": "2026-10-07",
+      "change": "2x2 grid chosen by running the tile stitching on the answer key itself, not by sweeping grids against the score.",
+      "hypothesis": null,
+      "evidence": "A perfect model still loses ~10% of links at 2x2 seams.",
+      "runs": "1 (oracle on the keys)",
+      "verdict": "kept",
+      "why": "Choosing the grid from the key's own geometry avoids tuning the grid to the score.",
+      "source": [
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on"
+      ]
+    },
+    {
+      "id": "A042",
+      "function": "tiling",
+      "date": "2026-10-07",
+      "change": "M1: 2x2 overlapping tiles (15% overlap), seam-aware de-duplication, the model's own links only.",
+      "hypothesis": "Small symbols and tags get lost when a 3,000-pixel sheet is downscaled.",
+      "evidence": "Dev review load Claude 73.5 / Codex 46.3 / Gemini 76.1 (baseline 66.4 / 66.5 / 90.8); holdout A 54.9 / 31.7 / 68.0; holdout B 71.5 / 64.8 / 80.2. Tiling made Claude worse on dev and better on both holdouts.",
+      "runs": "1 per holdout (dev run twice)",
+      "verdict": "superseded",
+      "why": "Tiling is kept as the symbol source of M3; tiles-only connections lost to M3 on holdout A for every tool.",
+      "source": [
+        "docs/GOAL.md#results-round-2-scored-after-the-addendum-above-each-method-once-per-holdout",
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on"
+      ]
+    },
+    {
+      "id": "A043",
+      "function": "tiling",
+      "date": "2026-10-07",
+      "change": "Optional whole-sheet links added onto the tiled symbols (the `-ov` runs: the same model's whole-sheet answer contributes connections only).",
+      "hypothesis": null,
+      "evidence": "Dev review load Claude 72.8 / Codex 44.6 / Gemini 80.4, repeat 72.5 / 44.9 / 79.2, against tiles-only 73.5 / 46.3 / 76.1 and repeat 72.8 / 46.9 / 75.1.",
+      "runs": "2 (dev only)",
+      "verdict": "inconclusive",
+      "why": "Not part of the declared M1 or M3; the docs record no reason, and the differences are a few points either way.",
+      "source": [
+        "out/scorecard_r2-tiles-2x2-ov_dev.md",
+        "out/scorecard_r2-tiles-2x2-repeat-ov_dev.md"
+      ]
+    },
+    {
+      "id": "A044",
+      "function": "tiling",
+      "date": "2026-10-13",
+      "change": "Diagnostic: M1 (tiles only) run five times per model on holdout A.",
+      "hypothesis": null,
+      "evidence": "GPT 36.7 (round 2's single run: 31.7), Claude 53.0 (54.9).",
+      "runs": "5 per model",
+      "verdict": "inconclusive",
+      "why": "Labelled diagnostic, not pre-registered; nothing was changed.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above"
+      ]
+    },
+    {
+      "id": "A045",
+      "function": "risk_ranking",
+      "date": "2026-10-08",
+      "change": "Use the model's own confidence to rank items for review.",
+      "hypothesis": null,
+      "evidence": "Two of three models report 0.9-1.0 confidence for nearly everything; the fitted risk model gave self-confidence a weight of zero.",
+      "runs": "1 (fit on dev)",
+      "verdict": "rejected",
+      "why": "It ranks nothing; it remains only the baseline the risk rating must beat.",
+      "source": [
+        "docs/JOURNAL.md#12-round-3-setup-point-people-at-the-problems-fix-what-the-better-score-broke-spend-nothing-new",
+        "docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized",
+        "docs/TWIN_OUTPUTS.md"
+      ]
+    },
+    {
+      "id": "A046",
+      "function": "risk_ranking",
+      "date": "2026-10-08",
+      "change": "Risk rating from independent cross-checks (peer-model agreement, whole-sheet vs tiled self-agreement, on-a-line, tag form), one non-negative logistic regression each for symbols (10 signals) and links (7), fit on dev only.",
+      "hypothesis": "Independent evidence ranks errors better than self-reported confidence.",
+      "evidence": "Riskiest 20% held more errors than own-confidence ordering in 23 of 24 holdout comparisons, usually 2-4x; green precision 94-96% (A) and 97-100% (B); error rates rise green -> amber -> red everywhere. Fails for Codex M3 on holdout A: 40% vs 43%.",
+      "runs": "1 per holdout (no new model calls)",
+      "verdict": "kept",
+      "why": "Calibrated and useful except for the declared tool and method, where agreement punishes the model that is right alone.",
+      "source": [
+        "docs/GOAL.md#goal-1-the-confidence-marker-scored-once-per-holdout-all-methods-and-tools",
+        "docs/JOURNAL.md#13-round-3-results-a-review-queue-that-points-people-at-the-problems-and-a-fix-that-only-half-generalized",
+        "docs/TWIN_OUTPUTS.md"
+      ]
+    },
+    {
+      "id": "A047",
+      "function": "risk_ranking",
+      "date": "2026-10-08",
+      "change": "Candidate risk signals: placeholder tags, duplicate tags, the `general` class, network size.",
+      "hypothesis": null,
+      "evidence": "Each received a fitted weight of zero on the development sheets.",
+      "runs": "1 (fit on dev)",
+      "verdict": "rejected",
+      "why": "They did not help rank errors (placeholders are real symbols with an unassigned tag).",
+      "source": [
+        "docs/TWIN_OUTPUTS.md"
+      ]
+    },
+    {
+      "id": "A048",
+      "function": "risk_ranking",
+      "date": "2026-10-08",
+      "change": "Parent second opinion: build the twin with both parent rules and flag an instrument when `along_line` and `linked` pick different equipment.",
+      "hypothesis": null,
+      "evidence": "On dev this happened to about 1 instrument in 20, and the along-line choice was right in 16 of 18 such cases.",
+      "runs": "1 (dev)",
+      "verdict": "kept",
+      "why": "Turns a rule that only half-generalized into a review question instead of a silent choice.",
+      "source": [
+        "docs/GOAL.md#goal-2-the-twins-parent-assignment-scored-once-per-holdout-codex-m3-symbols",
+        "docs/TWIN_OUTPUTS.md"
+      ]
+    },
+    {
+      "id": "A049",
+      "function": "scan_robustness",
+      "date": "2026-10-08",
+      "change": "Round 4, L1 photocopy degradation of holdout A, declared M3 unchanged.",
+      "hypothesis": "Where does the method break as image quality drops: the models' reading or the code tracer?",
+      "evidence": "Review load GPT 17.8 -> 20.6, Claude 32.4 -> 29.7; connection F1 0.87 / 0.79.",
+      "runs": "1 per tool",
+      "verdict": "inconclusive",
+      "why": "No consistent change (small, opposite directions); measurement only, no decision rides on it.",
+      "source": [
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
+        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+      ]
+    },
+    {
+      "id": "A050",
+      "function": "scan_robustness",
+      "date": "2026-10-08",
+      "change": "Round 4, L2 old-scan degradation.",
+      "hypothesis": null,
+      "evidence": "Review load GPT 51.5, Claude 57.0; symbols rough F1 0.87 / 0.86; connection F1 0.51 / 0.45.",
+      "runs": "1 per tool",
+      "verdict": "inconclusive",
+      "why": "About 3x the clean review load; measurement only.",
+      "source": [
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
+        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+      ]
+    },
+    {
+      "id": "A051",
+      "function": "scan_robustness",
+      "date": "2026-10-08",
+      "change": "Round 4, L3 bad-scan degradation.",
+      "hypothesis": null,
+      "evidence": "Review load GPT 72.6, Claude 70.6; symbols 0.77 / 0.81; connections 0.22 / 0.19, below the models' own untraced links (0.36).",
+      "runs": "1 per tool",
+      "verdict": "inconclusive",
+      "why": "About 4x; the tracer is hurting at this level; measurement only.",
+      "source": [
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
+        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+      ]
+    },
+    {
+      "id": "A052",
+      "function": "scan_robustness",
+      "date": "2026-10-08",
+      "change": "Isolating comparison: L3 symbols, tracer run on the clean image.",
+      "hypothesis": null,
+      "evidence": "Review load GPT 60.7, Claude 47.9; connection F1 recovers to 0.53 / 0.63.",
+      "runs": "1 per tool",
+      "verdict": "inconclusive",
+      "why": "Localised the failure in the code tracer, not the models; nothing was tuned.",
+      "source": [
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
+        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+      ]
+    },
+    {
+      "id": "A053",
+      "function": "tag_reading",
+      "date": "2026-10-13",
+      "change": "First tag-text measurement: M3 on the three DEXPI XML sheets (33 labelled symbols) and the two list-keyed C08 sheets (145 identifiers).",
+      "hypothesis": null,
+      "evidence": "Strict: GPT 29 of 33 (0.879), Claude 28 of 33 (0.848), identical in all five runs; both 20 of 20 on C01. C08 lists: GPT 100%, Claude 99.4%. Lenient matching gave the same as strict.",
+      "runs": "5 per model",
+      "verdict": "inconclusive",
+      "why": "Clean vector drawings only; misses are vertical, multi-line and actuator-bubble labels. Says nothing about scans.",
+      "source": [
+        "docs/GOAL.md#tag-text-first-measurement-in-this-project",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "A054",
+      "function": "tag_reading",
+      "date": "2026-10-13",
+      "change": "TE revision A round trip, clean sheets: M3 on the generated house-style sheets.",
+      "hypothesis": null,
+      "evidence": "Both models read all 43 printed tags in every run; review load GPT 2.1, Claude 2.2 (2.1-2.6).",
+      "runs": "5 per model",
+      "verdict": "inconclusive",
+      "why": "A round trip on our own drawings: an upper bound, not real-plant accuracy.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back",
+        "docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman"
+      ]
+    },
+    {
+      "id": "A055",
+      "function": "tag_reading",
+      "date": "2026-10-13",
+      "change": "TE revision A round trip on degraded copies L1-L3.",
+      "hypothesis": null,
+      "evidence": "Tags read exactly at L2: GPT 56%, Claude 95%; at L3: GPT 14%, Claude 49%. Review load L3 16.9 / 17.3.",
+      "runs": "3 per model per level",
+      "verdict": "inconclusive",
+      "why": "Text fails before shapes; the models fail differently, no winner called.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back",
+        "docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman"
+      ]
+    },
+    {
+      "id": "A056",
+      "function": "tag_reading",
+      "date": "2026-10-28",
+      "change": "Revision C read-back (controllers, signal lines, valve stations) with the entry-44 protocol.",
+      "hypothesis": null,
+      "evidence": "Clean review load GPT 1.26, Claude 1.38, tags 100%. L2 tags 61% / 89%, L3 9% / 50%. GPT controller tags misread at L2: 51% against 34% for other tags.",
+      "runs": "5 clean + 3 per level per model",
+      "verdict": "inconclusive",
+      "why": "Smaller text inside the DCS symbol costs readability on poor copies; scores kept as measured.",
+      "source": [
+        "docs/JOURNAL.md#54-read-revision-c-back-with-the-same-method",
+        "docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman"
+      ]
+    },
+    {
+      "id": "A057",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "First scorer rule: a predicted box centre landing near the key box counts as a match.",
+      "hypothesis": null,
+      "evidence": "With every class deliberately wrong it still gave 15-32% credit.",
+      "runs": "1 (controls on 12 drawings)",
+      "verdict": "rejected",
+      "why": "Mislabelled valves landed in a neighbouring instrument's zone; small symbols sat inside tanks' boxes.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled",
+        "docs/EVALUATION.md#2-the-anti-goodhart-rules"
+      ]
+    },
+    {
+      "id": "A058",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "Tightened centre-distance rule.",
+      "hypothesis": null,
+      "evidence": "Wrong-class control still scored 3-20%.",
+      "runs": "1 (controls)",
+      "verdict": "rejected",
+      "why": "The rule itself was wrong, not the setting.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled"
+      ]
+    },
+    {
+      "id": "A059",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "IoU matching: strict IoU >= 0.5 and rough IoU >= 0.1, six asset classes only.",
+      "hypothesis": null,
+      "evidence": "The every-class-wrong control scores about 0.",
+      "runs": "1 (controls)",
+      "verdict": "kept",
+      "why": "Frozen scorer for all later rounds.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled",
+        "docs/JOURNAL.md#8-define-done-well-first-then-guard-the-definition-from-the-people-chasing-it-us"
+      ]
+    },
+    {
+      "id": "A060",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "The 'moved' negative control that also shrank every box to 1x1.",
+      "hypothesis": null,
+      "evidence": "It passed for the wrong reason: a 1x1 box can never overlap under IoU.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Fixed to keep box sizes.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled"
+      ]
+    },
+    {
+      "id": "A061",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "Half-sheet shift control on repetitive drawing 6.",
+      "hypothesis": null,
+      "evidence": "Strict score 0, rough score 8.8% (two identical pump details half a sheet apart).",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Kept as an honest chance floor for the rough score on repetitive sheets, documented rather than hidden.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled"
+      ]
+    },
+    {
+      "id": "A062",
+      "function": "scoring",
+      "date": "2026-10-07",
+      "change": "Score only the six asset classes; leave drawing plumbing unscored.",
+      "hypothesis": null,
+      "evidence": "The key has 10 classes; 2,408 line-bend points, 734 crossings, 451 arrows and 48 frames are excluded.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Plumbing matters to drawing, not to a twin.",
+      "source": [
+        "docs/JOURNAL.md#7-fix-the-scoring-rules-first-then-test-the-scorer-until-it-cant-be-fooled"
+      ]
+    },
+    {
+      "id": "A063",
+      "function": "scoring",
+      "date": "2026-10-08",
+      "change": "Primary score 'review load': corrections per 100 key items, written before round 2.",
+      "hypothesis": null,
+      "evidence": "Baseline M0 holdout A: Codex 48.8, Claude 61.1, Gemini 75.9.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Counts differences from the answer key, not timed reviewer corrections (entry 60 states this plainly).",
+      "source": [
+        "docs/GOAL.md#primary-score-review-load",
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A064",
+      "function": "scoring",
+      "date": "2026-10-13",
+      "change": "Report a bootstrap interval over drawings beside the runs-only interval, with bootstrap as the headline for model comparisons.",
+      "hypothesis": null,
+      "evidence": "Runs interval called GPT better on holdout A (-12.2 to -7.3); bootstrap -26.5 to +4.5 made it a tie.",
+      "runs": "5 per model",
+      "verdict": "kept",
+      "why": "Six drawings, not run noise, are the real limit.",
+      "source": [
+        "docs/GOAL.md#measures-and-statistics",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "A065",
+      "function": "scoring",
+      "date": "2026-10-13",
+      "change": "Replicate summary as first written: an interval of zero width counted as 'different'.",
+      "hypothesis": null,
+      "evidence": "Called the tag difference different, though every run had the same score.",
+      "runs": "5",
+      "verdict": "rejected",
+      "why": "Now reports 'no run-to-run variation' in that case, with a test.",
+      "source": [
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "A066",
+      "function": "scoring",
+      "date": "2026-10-13",
+      "change": "DEXPI key adapter checked by scoring the key against itself before any model ran.",
+      "hypothesis": null,
+      "evidence": "Found three problems: column sections counted as a second tank, zero-area flange/blind boxes, an area-prefix line joined to a tag; after the fixes the key scores zero corrections.",
+      "runs": "1 (oracle)",
+      "verdict": "kept",
+      "why": "Fixes recorded in the pre-registration before the first model call.",
+      "source": [
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review",
+        "docs/GOAL.md#conversion-scriptsadapt_dexpipy-rules-in-its-docstring"
+      ]
+    },
+    {
+      "id": "A067",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "README headline 'symbols F1 0.97, connections 0.89' from the single round-2 run.",
+      "hypothesis": null,
+      "evidence": "The five-run means are 0.93 and 0.87; check_claims.py found it on its first run.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Replaced by the five-run means; claims are now checked against result files in CI.",
+      "source": [
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "A068",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Scorer command line given a run record instead of a bare prediction.",
+      "hypothesis": null,
+      "evidence": "Scored the run record as zero; found by the timing run.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Now unwraps `prediction`, or refuses a file with no symbols.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A069",
+      "function": "generated_pids",
+      "date": "2026-10-13",
+      "change": "Revision A: TE model drawn as three sheets in the house style measured on OPEN100.",
+      "hypothesis": null,
+      "evidence": "32 of 36 style measurements inside the OPEN100 range; the tracer recovers exactly the key's links on all three sheets (after two generator fixes).",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Archived as evidence for the recorded runs; replaced by revisions B, C and D.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back",
+        "docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman"
+      ]
+    },
+    {
+      "id": "A070",
+      "function": "generated_pids",
+      "date": "2026-10-13",
+      "change": "First generator version: equipment box drawn to the centre of its outline; a bubble placed inside the reactor's box.",
+      "hypothesis": null,
+      "evidence": "The tracer-vs-key check failed on two sheets (the wall's outer edge joined three lines; the bubble hid its leader).",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Both were drawing bugs, fixed in the generator, not in the tracer.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back"
+      ]
+    },
+    {
+      "id": "A071",
+      "function": "generated_pids",
+      "date": "2026-10-28",
+      "change": "Revision B: draw the 19 control loops (controllers, dashed signal lines, continuation flags).",
+      "hypothesis": null,
+      "evidence": "Loop audit 0 of 19 -> 19 of 19; style fidelity 32 -> 30 of 36 (instrument share 0.55-0.61 above every OPEN100 sheet).",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Kept the loops; superseded as a drawing by revision C. The 19 of 19 is a regression check of the generator, not evidence a model can read loops.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number",
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A072",
+      "function": "generated_pids",
+      "date": "2026-10-28",
+      "change": "Put signal lines in the scored graph file.",
+      "hypothesis": null,
+      "evidence": "Failed the tracer check: 18 untraced links on sheet 101 alone.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Would have changed what the round-trip connection score means; signal lines live in key.json as signal_edges.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number"
+      ]
+    },
+    {
+      "id": "A073",
+      "function": "generated_pids",
+      "date": "2026-10-28",
+      "change": "Control valve stations with a 60 px bypass offset.",
+      "hypothesis": null,
+      "evidence": "Failed on paper before any code ran: feed-line bypasses ran through the flow controllers.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Offset became 45 px and the three feed lines moved apart.",
+      "source": [
+        "docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass"
+      ]
+    },
+    {
+      "id": "A074",
+      "function": "generated_pids",
+      "date": "2026-10-28",
+      "change": "Revision C: a station (two block valves and a bypass globe valve) around each inline control valve, as a declared drafting addition.",
+      "hypothesis": null,
+      "evidence": "Style fidelity 30 -> 35 of 36; tracer recovers every key link including bypasses; loop audit still 19 of 19.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "A drafting convention, labelled in the key; style measures resemblance to OPEN100, not engineering quality.",
+      "source": [
+        "docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass",
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A075",
+      "function": "generated_pids",
+      "date": "2026-10-29",
+      "change": "Automatic unit placement in flow order so generate.py takes any model in the schema.",
+      "hypothesis": null,
+      "evidence": "First layout put every unit off the right edge (a recycle loop inflated the column count); the second stacked them in one column (utility feeds counted as starts); TE outputs byte-identical after the fix.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Both failures were caught by looking at the render, not by a test.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A076",
+      "function": "te_model",
+      "date": "2026-10-06",
+      "change": "Source check of the seed model's names and units against teprob.f: first run.",
+      "hypothesis": null,
+      "evidence": "Flagged 'Separator temperature' as wrong because the source abbreviates it to 'Sep Temp'.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "A false alarm from the matcher.",
+      "source": [
+        "docs/JOURNAL.md#5-check-the-answer-key-against-a-source-with-a-checker-youve-tested"
+      ]
+    },
+    {
+      "id": "A077",
+      "function": "te_model",
+      "date": "2026-10-06",
+      "change": "First fix: an aggressive stop-word list.",
+      "hypothesis": null,
+      "evidence": "It threw away the very words being compared.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Replaced by abbreviation handling.",
+      "source": [
+        "docs/JOURNAL.md#5-check-the-answer-key-against-a-source-with-a-checker-youve-tested"
+      ]
+    },
+    {
+      "id": "A078",
+      "function": "te_model",
+      "date": "2026-10-06",
+      "change": "Abbreviation handling plus a small stop-word list, tested with three planted errors.",
+      "hypothesis": null,
+      "evidence": "Caught 3 of 3 planted errors; 36 of 37 items matched, 1 corrected (TI-122's name).",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "The checker was tested with known-bad input before its 'all clear' was trusted.",
+      "source": [
+        "docs/JOURNAL.md#5-check-the-answer-key-against-a-source-with-a-checker-youve-tested",
+        "out/te_source_check.md"
+      ]
+    },
+    {
+      "id": "A079",
+      "function": "te_model",
+      "date": "2026-10-13",
+      "change": "Topology check: read units, streams, directions and tag ownership from the simulator code.",
+      "hypothesis": null,
+      "evidence": "56 elements: 51 confirmed, 4 corrected (the purge S9 moved from K-101 to V-101 with its tags), 1 unresolvable (PI-116); 20 test checks including planted wrong models and edited simulator text.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Every row names the code line that decided it.",
+      "source": [
+        "docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source",
+        "out/te_topology_check.md"
+      ]
+    },
+    {
+      "id": "A080",
+      "function": "te_model",
+      "date": "2026-10-13",
+      "change": "Deciding rule for split evidence: code location plus a majority of documented names.",
+      "hypothesis": null,
+      "evidence": "Confirms TI-122 on the condenser and leaves PI-116 unresolved.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Written while looking at both cases, so it is not pre-registered.",
+      "source": [
+        "docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source"
+      ]
+    },
+    {
+      "id": "A081",
+      "function": "te_model",
+      "date": "2026-10-28",
+      "change": "Read controller identities from the comments in temain_mod.f.",
+      "hypothesis": null,
+      "evidence": "'Stripper Level Controller' sits on both the purge loop and the reactor cooling loop: comments were copied between subroutines.",
+      "runs": "1 (inspection)",
+      "verdict": "rejected",
+      "why": "Only the code lines are read.",
+      "source": [
+        "docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none"
+      ]
+    },
+    {
+      "id": "A082",
+      "function": "te_model",
+      "date": "2026-10-28",
+      "change": "Control loops read from the closed-loop code, checked against the recorded normal run.",
+      "hypothesis": null,
+      "evidence": "19 loops run; all 19 controlled variables within 0.34 SD of their coded setpoints, 17 within 0.07. Negative control (pairings rotated by one): 18 of 19 miss by more than 3 SD.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "The recorded run is an independent witness to the code.",
+      "source": [
+        "docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none",
+        "out/te_loop_audit.md"
+      ]
+    },
+    {
+      "id": "A083",
+      "function": "te_model",
+      "date": "2026-10-28",
+      "change": "Renumber control valves by the loop that moves them, from one mapping at the source.",
+      "hypothesis": null,
+      "evidence": "126 replacements in 16 files; HV-205 -> FV-105, TV-211 -> FV-117; all 11 valves had carried a different loop number from their measurement.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Outputs rebuilt by the pipeline; each renamed valve keeps former_tag.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number",
+        "docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none"
+      ]
+    },
+    {
+      "id": "A084",
+      "function": "te_model",
+      "date": "2026-10-28",
+      "change": "Keep indicator letters (FI, PI, ...) on transmitters that feed controllers.",
+      "hypothesis": null,
+      "evidence": "Rejected the FT rename in entry 51 because the I letters were the replay points' names.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Reversed in entry 61 after outside review: an indicator bubble feeding a controller is a convention error.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number",
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "A085",
+      "function": "te_model",
+      "date": "2026-10-29",
+      "change": "Revision D: retag the 25 TE measurement tags as transmitters (FT, PT, LT, TT, AT, JT).",
+      "hypothesis": null,
+      "evidence": "639 replacements in 49 files; four places selecting tags by prefix found (one by the 3D verifier, the rest by searching `startswith`); live check 36 of 36 and 16 of 16 as before.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "A text rename cannot see code that tests a prefix; the pipeline's missing input was also fixed.",
+      "source": [
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "A086",
+      "function": "replay_and_bands",
+      "date": "2026-10-08",
+      "change": "Normal bands at K = 3 standard deviations.",
+      "hypothesis": null,
+      "evidence": "Some value would be amber in 27% of normal samples.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Operators learn to ignore a band that is amber that often.",
+      "source": [
+        "docs/JOURNAL.md#21-screens-an-operator-could-use-and-which-model-made-which-call"
+      ]
+    },
+    {
+      "id": "A087",
+      "function": "replay_and_bands",
+      "date": "2026-10-08",
+      "change": "Normal bands: mean +/- K sd fit on the first half of the normal run, K chosen on the second half.",
+      "hypothesis": null,
+      "evidence": "K = 6 is the smallest width with under 0.5% false flags on every tag. Fault 6: the A feed leaves its band in the sample the fault starts; the pressure alarm comes 294 plant-minutes later; nothing flagged in the 8 hours before.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Fit, then tested on data the fit never saw; unchanged since.",
+      "source": [
+        "docs/JOURNAL.md#21-screens-an-operator-could-use-and-which-model-made-which-call"
+      ]
+    },
+    {
+      "id": "A088",
+      "function": "replay_and_bands",
+      "date": "2026-10-13",
+      "change": "Score the shipped bands on all 21 TE faults with a rule fixed before scoring (3 consecutive flagged samples).",
+      "hypothesis": null,
+      "evidence": "17 of 21 detected, median delay 48 min; 0 false alarms in 193 h of held-out normal data (95% upper bound about 0.37 a day). Misses faults 3, 9, 15 (named as expected misses) and 19.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "A detection claim needs a denominator and a false-alarm rate on unseen data.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm",
+        "docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults"
+      ]
+    },
+    {
+      "id": "A089",
+      "function": "replay_and_bands",
+      "date": "2026-10-13",
+      "change": "PCA T-squared baseline (12 components, 99% F threshold, same 3-sample rule).",
+      "hypothesis": null,
+      "evidence": "19 of 21 'detected', of which faults 3, 4 and 15 look like chance; median 84 min; 5 alarm events in 216 h, 1.04% of samples flagged.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Not adopted for the screens; counting chance detections out it finds 16 to the bands' 17, though it is faster on fault 10.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm",
+        "docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults"
+      ]
+    },
+    {
+      "id": "A090",
+      "function": "replay_and_bands",
+      "date": "2026-10-13",
+      "change": "Same K refit on d00.dat, scored against held-out d00_te.",
+      "hypothesis": null,
+      "evidence": "17 of 21, 48 min median, 0 of 4,320 flagged.",
+      "runs": "1",
+      "verdict": "inconclusive",
+      "why": "Agrees with the shipped bands.",
+      "source": [
+        "docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults"
+      ]
+    },
+    {
+      "id": "A091",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Bands and replay from a historian-style CSV export instead of the TE data files.",
+      "hypothesis": null,
+      "evidence": "Bands match the committed ones within rounding with the same fault-6 result; a blank or 'Bad' cell is served as Bad quality, never zero.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Proves the historian-CSV route runs from a clean clone.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A092",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Gateway verifier: nine checks, required to catch five deliberately planted faults first.",
+      "hypothesis": null,
+      "evidence": "Caught 5 of 5 planted faults; all nine checks pass.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Every check needs a case it must fail on.",
+      "source": [
+        "docs/JOURNAL.md#14-the-ignition-build-the-twin-in-a-real-gateway-judged-by-the-gateway",
+        "docs/IGNITION_BUILD.md"
+      ]
+    },
+    {
+      "id": "A093",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Verifier write test that wrote to a review field.",
+      "hypothesis": null,
+      "evidence": "Ignition stored the write as configuration, so the next fidelity check failed.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The probe now writes a tag outside the twin.",
+      "source": [
+        "docs/JOURNAL.md#14-the-ignition-build-the-twin-in-a-real-gateway-judged-by-the-gateway"
+      ]
+    },
+    {
+      "id": "A094",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Project zip storing each file's write time.",
+      "hypothesis": null,
+      "evidence": "Every rebuild looked like a configuration change; V9 failed on a build where nothing had changed.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Timestamps fixed; builds are byte-identical.",
+      "source": [
+        "docs/JOURNAL.md#19-making-it-shareable-one-command-a-30-second-demo-and-two-bugs-only-the-verifier-saw"
+      ]
+    },
+    {
+      "id": "A095",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Single tag import with no read-back.",
+      "hypothesis": null,
+      "evidence": "About one build in eight imported into a provider still starting up; V1 found 113 differences.",
+      "runs": "about 8 builds",
+      "verdict": "rejected",
+      "why": "The build now reads its import back, re-imports once if needed, and fails loudly.",
+      "source": [
+        "docs/JOURNAL.md#19-making-it-shareable-one-command-a-30-second-demo-and-two-bugs-only-the-verifier-saw"
+      ]
+    },
+    {
+      "id": "A096",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Docker demo fault switch by recreating the replay container.",
+      "hypothesis": null,
+      "evidence": "2 failures in the first 9 starts, both at the alarm step (OPC UA session rebuild usually ~25 s, once over 2 min).",
+      "runs": "9 starts",
+      "verdict": "rejected",
+      "why": "The replay now switches mode live from a control file; alarm at 26 s on every start since.",
+      "source": [
+        "docs/JOURNAL.md#20-a-one-click-demo-built-and-tested-without-being-able-to-run-docker"
+      ]
+    },
+    {
+      "id": "A097",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Full-size drawing images inside the views.",
+      "hypothesis": null,
+      "evidence": "5.2 MB of images exhausted the trial gateway's 1 GB heap (OutOfMemoryError).",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Screen-resolution drawings and small thumbnails brought it to 2.4 MB.",
+      "source": [
+        "docs/JOURNAL.md#21-screens-an-operator-could-use-and-which-model-made-which-call"
+      ]
+    },
+    {
+      "id": "A098",
+      "function": "ignition",
+      "date": "2026-10-08",
+      "change": "Trends drawn from interpolated history.",
+      "hypothesis": null,
+      "evidence": "Gaps in history drew as drops to zero.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Trends use raw points and skip bad quality.",
+      "source": [
+        "docs/JOURNAL.md#21-screens-an-operator-could-use-and-which-model-made-which-call"
+      ]
+    },
+    {
+      "id": "A099",
+      "function": "ignition",
+      "date": "2026-10-10",
+      "change": "Expanded overview carrying every instrument.",
+      "hypothesis": null,
+      "evidence": "The overview became too large; reduced to 21 essential readings with detail on unit pages.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Complete coverage does not require every value on the first screen.",
+      "source": [
+        "docs/JOURNAL.md#22-put-the-process-on-the-overview-then-make-the-unit-pages-earn-the-click"
+      ]
+    },
+    {
+      "id": "A100",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Perspective script transforms stored as unindented bodies (offline tests indented them before running).",
+      "hypothesis": null,
+      "evidence": "All 580 of 580 script transforms failed to parse in the real gateway.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Stored indented at one choke point; the offline harness now compiles code exactly as Perspective does.",
+      "source": [
+        "docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not"
+      ]
+    },
+    {
+      "id": "A101",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Numeric format transform for values with no data source.",
+      "hypothesis": null,
+      "evidence": "Printed the literal text `null` for 334 placeholders and SC-212.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Now 'not connected' (no source) and UNKNOWN (source, no Good data).",
+      "source": [
+        "docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not"
+      ]
+    },
+    {
+      "id": "A102",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Band indicator stretched to the shutdown limit.",
+      "hypothesis": null,
+      "evidence": "TI-109's normal band (120.28–120.52 °C) took 0.4% of the width.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "An alarm limit is drawn only within 10 band half-widths; a Claude-only display choice for operations to confirm.",
+      "source": [
+        "docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not"
+      ]
+    },
+    {
+      "id": "A103",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Header counting tags in alarm.",
+      "hypothesis": null,
+      "evidence": "Read 'Alarms: 1' while the table listed two active alarms.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Process alarms now count each configured alarm; header matched the table in 40 of 40 samples through the fault.",
+      "source": [
+        "docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not",
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "A104",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "'Data source lost' diagnostic alarm with setpoint 0 in AboveValue mode.",
+      "hypothesis": null,
+      "evidence": "Both diagnostics held active with a count of 0 (AboveValue is inclusive).",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Setpoint is now 0.5, with a test.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "A105",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Narrow 390 px overview (`/m`) instead of scrolling the 1600 px control-room layout.",
+      "hypothesis": null,
+      "evidence": "At 390 x 844: no horizontal scroll, alarms first, UNKNOWN and DATA SOURCE LOST shown.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Headless Chromium only; not tested on real phones.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "A106",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Overview mimic placing readings from a hard-coded per-unit list.",
+      "hypothesis": null,
+      "evidence": "After moving FI-110 in the model the tag path followed but the reading stayed beside the compressor; the propagation check fails on exactly that reading with the old placement.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The list still picks which readings show; the model decides where.",
+      "source": [
+        "docs/JOURNAL.md#45-start-from-the-data-assess-both-datasets-first-then-make-every-correction-travel"
+      ]
+    },
+    {
+      "id": "A107",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "Gateway ZIP stage hashed by raw bytes.",
+      "hypothesis": null,
+      "evidence": "On Linux CI the same members compressed to different bytes, so the stage was called stale.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "ZIPs are now hashed by their members.",
+      "source": [
+        "docs/JOURNAL.md#49-bring-eight-lines-of-work-onto-one-branch-and-make-every-output-a-stage"
+      ]
+    },
+    {
+      "id": "A108",
+      "function": "ignition",
+      "date": "2026-10-13",
+      "change": "PI Builder sheet v1 (`AttributeValueType` column, `degC`).",
+      "hypothesis": null,
+      "evidence": "Vendor-published material documents `AttributeType` and writes `°C`; four units have no vendor evidence; six element templates were named but never defined.",
+      "runs": "1 (offline check)",
+      "verdict": "superseded",
+      "why": "Sheet schema v2 fixes the exporter; still not import-tested.",
+      "source": [
+        "docs/JOURNAL.md#43-check-the-pi-files-against-what-aveva-publishes-and-get-ready-for-a-first-human-review"
+      ]
+    },
+    {
+      "id": "A109",
+      "function": "real_unit",
+      "date": "2026-10-28",
+      "change": "Digitize the report's Figure 11 trend, calibrated only on its ticks and gridlines, checked against 11 values stated in the text.",
+      "hypothesis": null,
+      "evidence": "6 of 11 checks passed first; two failures were own bugs (anti-aliased edge, wrong time window), three are real figure-vs-text disagreements (pressure about 25 vs 22 psig; temperature about 2 °C below near the end).",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Text values test the digitizer instead of tuning it.",
+      "source": [
+        "docs/JOURNAL.md#55-start-the-real-unit-a-sourced-model-and-a-checked-trend",
+        "docs/BAYER_RT.md"
+      ]
+    },
+    {
+      "id": "A110",
+      "function": "real_unit",
+      "date": "2026-10-28",
+      "change": "Residue treater model written from the report's text, compared with Figure 10.",
+      "hypothesis": null,
+      "evidence": "First run 10 of 21 (11 of 21 after one checker bug); corrected from the figure to 20 of 21.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Every topology error came from writing the model from prose; corrected items are noted.",
+      "source": [
+        "docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing",
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "A111",
+      "function": "real_unit",
+      "date": "2026-10-28",
+      "change": "First Bayer drawing layout with three line crossings.",
+      "hypothesis": null,
+      "evidence": "The tracer read each crossing as a junction.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Cooler water connections now end in flags; the tracer then read back exactly the key; drawing agrees with the figure on 15 of 15 lines.",
+      "source": [
+        "docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing"
+      ]
+    },
+    {
+      "id": "A112",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Level mask with no minimum component size.",
+      "hypothesis": null,
+      "evidence": "39 one-column spikes from the blue fringes of black text labels; the 11 text checks never sampled those minutes.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Components of at least 15 px, with a test against one-column spikes.",
+      "source": [
+        "docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks"
+      ]
+    },
+    {
+      "id": "A113",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Replay the trend through three interlocks and four limits as bounds, with 'cannot tell' between cited bounds.",
+      "hypothesis": null,
+      "evidence": "5 of 5 report statements agree, within two minutes where a time is given.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Not a blind test: the rules were written after seeing the digitized values.",
+      "source": [
+        "docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks",
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A114",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Overview page that passed every data and layout check.",
+      "hypothesis": null,
+      "evidence": "Mimic text about 6 px on desktop; no readable values on a phone.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Added a 'Values now' card, larger text and a check that mimic text is at least 11 px.",
+      "source": [
+        "docs/JOURNAL.md#58-an-overview-screen-for-the-unit"
+      ]
+    },
+    {
+      "id": "A115",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Show the critical decomposition temperature as a crossed limit in amber.",
+      "hypothesis": null,
+      "evidence": "It is also the normal operating temperature (p. 30), so normal operation would read as abnormal.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Marked informational and shown without colour.",
+      "source": [
+        "docs/JOURNAL.md#58-an-overview-screen-for-the-unit"
+      ]
+    },
+    {
+      "id": "A116",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Walk the report's timed events beside the replayed screen, every existing check under one event.",
+      "hypothesis": null,
+      "evidence": "13 of 16 checks agree; no report statement disagrees; the report times 3 of the replay's 20 state changes.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "The 17 untimed changes are listed rather than hidden.",
+      "source": [
+        "docs/JOURNAL.md#59-walk-the-reports-timeline-beside-the-screen"
+      ]
+    },
+    {
+      "id": "A117",
+      "function": "real_unit",
+      "date": "2026-10-29",
+      "change": "Bayer field instruments tagged as indicators (PI, LI, FI, TI).",
+      "hypothesis": null,
+      "evidence": "Retagged PT, LT, FT, TT; Figure 10 checks stay 20 of 21 and 15 of 15, walk-through 13 of 16.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Figure 10 calls them transmitters and two feed controllers.",
+      "source": [
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A118",
+      "function": "tours_3d",
+      "date": "2026-10-12",
+      "change": "First 3D tour prototype (legacy label layout).",
+      "hypothesis": null,
+      "evidence": "25 label overlaps, 166 labels under 20 px (smallest 4.6 px), 241 under 4.5:1 contrast, 105 hidden by geometry; two markers inside the reactor shell; two pipes ending 0.8 m off the stripper.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Buried markers and floating pipe ends were only found by geometry checks.",
+      "source": [
+        "docs/JOURNAL.md#40-check-the-3d-render-procedurally-then-make-it-an-orientation-tour-proof-of-concept"
+      ]
+    },
+    {
+      "id": "A119",
+      "function": "tours_3d",
+      "date": "2026-10-12",
+      "change": "Labels per still, fixed screen size on plates, greedy declutter, camera view chosen by raycast.",
+      "hypothesis": null,
+      "evidence": "All 16 checks passed on all 10 stills.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Replaced by the review redesign (entry 41).",
+      "source": [
+        "docs/JOURNAL.md#40-check-the-3d-render-procedurally-then-make-it-an-orientation-tour-proof-of-concept"
+      ]
+    },
+    {
+      "id": "A120",
+      "function": "tours_3d",
+      "date": "2026-10-12",
+      "change": "Crowding rule and grid-sampled occlusion added after a person saw E-101/K-101 run together.",
+      "hypothesis": null,
+      "evidence": "The case is now caught (crowded, 11 px text, contrast 2.9 and 3.2:1, a pipe hiding a third of K-101).",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Written after seeing the defect: shows it is caught now, not that it would have been found first.",
+      "source": [
+        "docs/JOURNAL.md#40-check-the-3d-render-procedurally-then-make-it-an-orientation-tour-proof-of-concept"
+      ]
+    },
+    {
+      "id": "A121",
+      "function": "tours_3d",
+      "date": "2026-10-12",
+      "change": "Review redesign: ten rules from one person looking at one still.",
+      "hypothesis": null,
+      "evidence": "All 17 checks passed on the five stills; the first prototype's layout measured the same way fails 3. Three pills measured 16.2 px and were enlarged; the threshold was not loosened.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "A person looking found more than the checks did.",
+      "source": [
+        "docs/JOURNAL.md#41-review-clean-up-the-3d-stills-before-rendering-any-more-video-proof-of-concept"
+      ]
+    },
+    {
+      "id": "A122",
+      "function": "tours_3d",
+      "date": "2026-10-12",
+      "change": "Purpose cards paraphrased by Claude from the published TE description.",
+      "hypothesis": null,
+      "evidence": "The text check found errors (purge placed at the compressor; stripper overhead missing from the feed header).",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Cards now read their sentence from data/te_unit_purposes.json, which cites simulator lines.",
+      "source": [
+        "docs/JOURNAL.md#41-review-clean-up-the-3d-stills-before-rendering-any-more-video-proof-of-concept",
+        "docs/JOURNAL.md#43-check-the-pi-files-against-what-aveva-publishes-and-get-ready-for-a-first-human-review"
+      ]
+    },
+    {
+      "id": "A123",
+      "function": "tours_3d",
+      "date": "2026-10-13",
+      "change": "Hazard citations from a keyword heuristic over public agency records.",
+      "hypothesis": null,
+      "evidence": "False positive (NTSB's Asiana 214 matched 'tower'); seven citations needed a correction; six EPA RMP links did not resolve; one link returned 404.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Kept as illustration with corrections; public incidents can illustrate site hazards, not rank them.",
+      "source": [
+        "docs/JOURNAL.md#40-check-the-3d-render-procedurally-then-make-it-an-orientation-tour-proof-of-concept",
+        "docs/JOURNAL.md#43-check-the-pi-files-against-what-aveva-publishes-and-get-ready-for-a-first-human-review"
+      ]
+    },
+    {
+      "id": "A124",
+      "function": "tours_3d",
+      "date": "2026-10-13",
+      "change": "Atkinson Hyperlegible font at the old label sizes.",
+      "hypothesis": null,
+      "evidence": "Labels drew at 14.9-16.6 px, under the 18 px minimum.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Sizes scaled by 1.25; minimum kept.",
+      "source": [
+        "docs/JOURNAL.md#49-bring-eight-lines-of-work-onto-one-branch-and-make-every-output-a-stage"
+      ]
+    },
+    {
+      "id": "A125",
+      "function": "review_loop",
+      "date": "2026-10-08",
+      "change": "First 'keep corrections' rule in apply_review.py.",
+      "hypothesis": null,
+      "evidence": "Re-applying a regenerated sheet was refused for asking for a correction value it did not need.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The round-trip test caught it.",
+      "source": [
+        "docs/JOURNAL.md#17-closing-the-loop-operations-corrections-and-real-data-points-flow-back-into-the-twin"
+      ]
+    },
+    {
+      "id": "A126",
+      "function": "review_loop",
+      "date": "2026-10-08",
+      "change": "First format check counting every line after an insertion as changed.",
+      "hypothesis": null,
+      "evidence": "Measured the wrong thing; caught by the test.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "Now compares a real diff.",
+      "source": [
+        "docs/JOURNAL.md#17-closing-the-loop-operations-corrections-and-real-data-points-flow-back-into-the-twin"
+      ]
+    },
+    {
+      "id": "A127",
+      "function": "review_loop",
+      "date": "2026-10-11",
+      "change": "Point mapper replacing all prior mappings on every run.",
+      "hypothesis": null,
+      "evidence": "Partial updates now preserve omitted mappings; dry run on sheet 0: 24 mapped, 2 unmatched, 1 FT 1401 ambiguity, 0 mapping changes; 25 export files byte-identical to the baseline.",
+      "runs": "1",
+      "verdict": "superseded",
+      "why": "Destructive replacement now needs --replace-all.",
+      "source": [
+        "docs/JOURNAL.md#29-give-readers-a-bounded-replication-path-with-or-without-the-author",
+        "docs/JOURNAL.md#30-harden-the-replication-path-before-wider-use"
+      ]
+    },
+    {
+      "id": "A128",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Two independent hostile reviews (a Claude panel and a Codex reviewer) before publication.",
+      "hypothesis": null,
+      "evidence": "Both found the counterfactual claim and the circular 19 of 19; each found items the other missed.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "One reviewer was rejected: the overlap was partial.",
+      "source": [
+        "docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does"
+      ]
+    },
+    {
+      "id": "A129",
+      "function": "intake_and_reuse",
+      "date": "2026-10-11",
+      "change": "Converter parent choice with hash-dependent traversal order.",
+      "hypothesis": null,
+      "evidence": "A forked instrument chain changed parent with Python's hash seed; with stable ordering all nine full models were identical under seed 1.",
+      "runs": "multiple hash seeds",
+      "verdict": "rejected",
+      "why": "Stable keys make the choice repeatable; this does not make the parent more correct.",
+      "source": [
+        "docs/JOURNAL.md#31-add-a-bounded-local-drawing-intake-path"
+      ]
+    },
+    {
+      "id": "A130",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "A fresh agent given a clean clone and an outside engineer's brief, working offline.",
+      "hypothesis": null,
+      "evidence": "Found four confirmed problems: no extraction to start from, a demo-only tool listed for your drawings, stale numbers in AGENTS.md, a passing test printing FAIL.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Drove the one-drawing runbook in examples/own-drawing/.",
+      "source": [
+        "docs/JOURNAL.md#62-give-a-strangers-agent-the-repository-and-see-what-it-can-do"
+      ]
+    },
+    {
+      "id": "A131",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Estimate of half a day to a day to a reviewed draft of one drawing.",
+      "hypothesis": null,
+      "evidence": "A timed run went PNG to review bundle in 88 s of commands (extraction 36 s, tracing 4 s, intake under 1 s) on sheet 8; review load 11.0 against the published 10.99.",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "The estimate priced in learning the repository, not the work; review time is still unmeasured.",
+      "source": [
+        "docs/JOURNAL.md#62-give-a-strangers-agent-the-repository-and-see-what-it-can-do",
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A132",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "DEXPI file to twin with no model (dexpi_to_twin.py).",
+      "hypothesis": null,
+      "evidence": "Lossless against the key on three public DEXPI sheets: zero corrections, F1 1.0.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Losses are listed: six-class collapse, tees, direction, attributes, hierarchy.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A133",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Loop audit from any controller,measurement,output CSV (loop_audit.py).",
+      "hypothesis": null,
+      "evidence": "0 of 19 on revision A and 19 of 19 on revision D, as the original audit; on revision C it reports 'partly drawn'.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "More precise than the original audit on revision C.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "A134",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Vendor evaluation kit: any tool's output scored beside a perfect, a wrong and an empty answer, refusing if the wrong answer scores above F1 0.10.",
+      "hypothesis": null,
+      "evidence": "On the round-5 runs it reproduces the published 20.1 exactly.",
+      "runs": "1",
+      "verdict": "kept",
+      "why": "Gives a plant the scorer controls along with the score.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    }
+  ],
+  "not_tried": [
+    {
+      "id": "N001",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "Ensemble: combine two models; agreements auto-accept, disagreements go to review.",
+      "why_not_yet": "Planned for round 2 and reported as not done, not dropped silently.",
+      "source": [
+        "docs/GOAL.md#addendum-before-any-holdout-run-the-declared-methods-and-decision-rule"
+      ]
+    },
+    {
+      "id": "N002",
+      "function": "extraction",
+      "status": "rejected-untested",
+      "idea": "Tune prompts to guess the annotators' habits on the catch-all `general` class (F1 0.11-0.45).",
+      "why_not_yet": "It would raise the score and do nothing for a digital twin.",
+      "source": [
+        "docs/JOURNAL.md#8-define-done-well-first-then-guard-the-definition-from-the-people-chasing-it-us",
+        "docs/EVALUATION.md#2-the-anti-goodhart-rules"
+      ]
+    },
+    {
+      "id": "N003",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "A prompt line about equipment nozzles.",
+      "why_not_yet": "A new method that would need new, unseen drawings.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "N004",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "Fine-tune an open-weight model on a site's own annotated sheets and re-measure.",
+      "why_not_yet": "Out of scope here; the docs describe it as how the gap usually narrows, to be measured with the same suite.",
+      "source": [
+        "docs/JOURNAL.md#9-ask-the-offline-question-with-data-not-opinions",
+        "docs/EVALUATION.md#4-round-1-results-12-real-open100-drawings"
+      ]
+    },
+    {
+      "id": "N005",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "Self-hosted open-model speed on a target GPU.",
+      "why_not_yet": "Only a hosted endpoint was used.",
+      "source": [
+        "docs/COSTS.md#5-what-is-not-measured-and-why"
+      ]
+    },
+    {
+      "id": "N006",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "Gemini in rounds 4 and 5 and the TE round trips.",
+      "why_not_yet": "Left out by the project owner's direction to keep metered spend flat; its earlier results stay as earlier runs.",
+      "source": [
+        "docs/GOAL.md#round-5-written-before-any-round-5-model-run-tag-text-on-new-public-drawings-and-replicate-runs",
+        "docs/MODELS.md"
+      ]
+    },
+    {
+      "id": "N007",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "More drawings for model comparisons.",
+      "why_not_yet": "The sample of drawings, not of runs, is still the limit on every comparison; no further public sets with usable keys were found.",
+      "source": [
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "N008",
+      "function": "extraction",
+      "status": "not-done",
+      "idea": "Prospective validation of a changed method on PID2Graph Synthetic.",
+      "why_not_yet": "Sheets 2 and 3 are consumed; it needs new data.",
+      "source": [
+        "docs/JOURNAL.md#34-prospective-frozen-synthetic-23-transfer-check"
+      ]
+    },
+    {
+      "id": "N009",
+      "function": "line_tracing",
+      "status": "not-done",
+      "idea": "Pad equipment boxes by the outline width before tracing, measured on every result it would touch.",
+      "why_not_yet": "Frozen method; a method change is not slipped into a measurement.",
+      "source": [
+        "docs/JOURNAL.md#54-read-revision-c-back-with-the-same-method"
+      ]
+    },
+    {
+      "id": "N010",
+      "function": "line_tracing",
+      "status": "not-done",
+      "idea": "Confirm that revision-A Claude L1/L2 loads (8.0 and 13.4) have the same tracer cause.",
+      "why_not_yet": "Those run records are not on this machine, so it is unverified.",
+      "source": [
+        "docs/JOURNAL.md#54-read-revision-c-back-with-the-same-method"
+      ]
+    },
+    {
+      "id": "N011",
+      "function": "line_tracing",
+      "status": "not-done",
+      "idea": "A tracer that ignores small stubs (nozzles) on equipment.",
+      "why_not_yet": "A new method that would need new drawings.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "N012",
+      "function": "line_tracing",
+      "status": "rejected-untested",
+      "idea": "Draw arrows on every link by guessing from layout (left to right, top to bottom).",
+      "why_not_yet": "It would look complete and teach people to trust arrows nobody drew.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support"
+      ]
+    },
+    {
+      "id": "N013",
+      "function": "line_tracing",
+      "status": "rejected-untested",
+      "idea": "Tank nozzle position, instrument links and check valves as flow-direction evidence.",
+      "why_not_yet": "Bottom inlets are common; instrument links carry signals; extraction has a single valve class.",
+      "source": [
+        "docs/JOURNAL.md#48-give-the-drawings-only-track-the-deliverables-it-can-support",
+        "docs/OPEN100_STRUCTURAL.md"
+      ]
+    },
+    {
+      "id": "N014",
+      "function": "line_tracing",
+      "status": "not-done",
+      "idea": "Promote development v2 dash recovery beyond an opt-in stage.",
+      "why_not_yet": "Needs qualified engineering review and new prospectively frozen data.",
+      "source": [
+        "docs/CONNECTIVITY_DEV_V2.md"
+      ]
+    },
+    {
+      "id": "N015",
+      "function": "line_tracing",
+      "status": "open-question",
+      "idea": "Stream order along a line.",
+      "why_not_yet": "The connection score counts every pair on a shared network and cannot see order; stated before round 2.",
+      "source": [
+        "docs/GOAL.md#addendum-before-any-holdout-run-the-declared-methods-and-decision-rule"
+      ]
+    },
+    {
+      "id": "N016",
+      "function": "tiling",
+      "status": "not-done",
+      "idea": "Other tile grids (the size-driven 'auto' grid) scored against the keys.",
+      "why_not_yet": "The 2x2 grid was chosen from the key's own seam losses, not by sweeping grids against the score.",
+      "source": [
+        "docs/JOURNAL.md#11-round-2-let-code-do-the-geometry-then-judge-it-on-drawings-nobody-tuned-on"
+      ]
+    },
+    {
+      "id": "N017",
+      "function": "risk_ranking",
+      "status": "not-done",
+      "idea": "Weight peer agreement by each peer's reliability, so a weaker model's miss counts for less.",
+      "why_not_yet": "Named as the direction for a next round; not done.",
+      "source": [
+        "docs/GOAL.md#goal-1-the-confidence-marker-scored-once-per-holdout-all-methods-and-tools"
+      ]
+    },
+    {
+      "id": "N018",
+      "function": "risk_ranking",
+      "status": "not-done",
+      "idea": "Calibrate confidence for a new domain (PID2Graph Synthetic, site drawings).",
+      "why_not_yet": "No OPEN100 calibration is applied to the new domain; the intake's inherited 0.75 highlighting rule is uncalibrated.",
+      "source": [
+        "docs/JOURNAL.md#24-try-a-separately-labeled-collection-before-claiming-a-general-method",
+        "docs/JOURNAL.md#31-add-a-bounded-local-drawing-intake-path"
+      ]
+    },
+    {
+      "id": "N019",
+      "function": "risk_ranking",
+      "status": "open-question",
+      "idea": "Seven streams disagree on their tier (queue says amber, model rollup 'n/a': 669 vs 676 amber).",
+      "why_not_yet": "Not fixed in entry 61.",
+      "source": [
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "N020",
+      "function": "scan_robustness",
+      "status": "not-done",
+      "idea": "Image clean-up before tracing, or tracing only above a quality threshold.",
+      "why_not_yet": "Either is a new method needing its own sealed test; nothing was tuned in round 4.",
+      "source": [
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
+        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+      ]
+    },
+    {
+      "id": "N021",
+      "function": "scan_robustness",
+      "status": "not-done",
+      "idea": "Skew, rotation, handwriting, stamps, torn edges and real archive scans.",
+      "why_not_yet": "Round 4 used synthetic degradations of digital drawings only.",
+      "source": [
+        "docs/EVALUATION.md#4a-later-rounds-at-a-glance"
+      ]
+    },
+    {
+      "id": "N022",
+      "function": "tag_reading",
+      "status": "not-done",
+      "idea": "Tag reading on real scans, handwriting or dense archives.",
+      "why_not_yet": "Only clean vector DEXPI sheets and generated TE sheets have tag truth here.",
+      "source": [
+        "docs/GOAL.md#tag-text-first-measurement-in-this-project"
+      ]
+    },
+    {
+      "id": "N023",
+      "function": "tag_reading",
+      "status": "not-done",
+      "idea": "Model read-back of revision D sheets.",
+      "why_not_yet": "Revision D changes only tag letters on sheets revision C's runs already read.",
+      "source": [
+        "docs/JOURNAL.md#61-tag-the-te-transmitters-as-transmitters-and-let-a-strangers-agent-check-the-readme"
+      ]
+    },
+    {
+      "id": "N024",
+      "function": "scoring",
+      "status": "rejected-untested",
+      "idea": "Learn a remap from source `general` to the model's specific classes from the answer key.",
+      "why_not_yet": "That rewrites the score after seeing the answer; a domain-reviewed mapping must be frozen and tested prospectively.",
+      "source": [
+        "docs/JOURNAL.md#24-try-a-separately-labeled-collection-before-claiming-a-general-method"
+      ]
+    },
+    {
+      "id": "N025",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "A key that counts nozzles as symbols.",
+      "why_not_yet": "Key scope was frozen before the runs; changing it is a new method needing new drawings.",
+      "source": [
+        "docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above",
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review"
+      ]
+    },
+    {
+      "id": "N026",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "Score solid vs non-solid (process vs signal) line types.",
+      "why_not_yet": "The scoring contract collapses edges into untyped adjacency; styles are preserved in a sidecar, not interpreted.",
+      "source": [
+        "docs/JOURNAL.md#24-try-a-separately-labeled-collection-before-claiming-a-general-method"
+      ]
+    },
+    {
+      "id": "N027",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "Automatic off-page pairing score.",
+      "why_not_yet": "The answer keys carry no text.",
+      "source": [
+        "docs/TWIN_OUTPUTS.md"
+      ]
+    },
+    {
+      "id": "N028",
+      "function": "generated_pids",
+      "status": "rejected-untested",
+      "idea": "Make build_twin.py turn a tagged in-line mixer into a unit.",
+      "why_not_yet": "It would tune the converter to the one drawing generated and change the OPEN100 twin; the diff reports it instead.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back"
+      ]
+    },
+    {
+      "id": "N029",
+      "function": "generated_pids",
+      "status": "rejected-untested",
+      "idea": "Add drains and vents the way valve stations were added.",
+      "why_not_yet": "Their places depend on routing and low and high points the model does not hold: decoration, not a convention.",
+      "source": [
+        "docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass"
+      ]
+    },
+    {
+      "id": "N030",
+      "function": "generated_pids",
+      "status": "rejected-untested",
+      "idea": "Draw the purge override from PI-113 as a signal line.",
+      "why_not_yet": "The code implements a latched trip; drawing it needs a selector symbol and a cause-and-effect note.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number"
+      ]
+    },
+    {
+      "id": "N031",
+      "function": "generated_pids",
+      "status": "not-done",
+      "idea": "Automatic drafting layout for drawings of arbitrary models.",
+      "why_not_yet": "The drawing still needs a hand-written drafting layout.",
+      "source": [
+        "docs/JOURNAL.md#63-prove-every-way-in-and-time-one"
+      ]
+    },
+    {
+      "id": "N032",
+      "function": "te_model",
+      "status": "open-question",
+      "idea": "PI-116's owning unit, the S7/S7b and S8/S8b splits, FI-105's segment, and every tap position, size and route.",
+      "why_not_yet": "The simulator does not record them; they need a process engineer.",
+      "source": [
+        "docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source"
+      ]
+    },
+    {
+      "id": "N033",
+      "function": "te_model",
+      "status": "not-done",
+      "idea": "Control engineer review of the 19 loops.",
+      "why_not_yet": "The audit grades the drawing against the code; it does not judge the control strategy.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number"
+      ]
+    },
+    {
+      "id": "N034",
+      "function": "replay_and_bands",
+      "status": "not-done",
+      "idea": "Bands per operating mode, with sensor faults and maintenance, and false alarms measured over weeks.",
+      "why_not_yet": "One simulated mode and one set of 21 runs.",
+      "source": [
+        "docs/EVALUATION.md#4b-fault-detection-with-the-normal-bands-tennessee-eastman-all-21-faults"
+      ]
+    },
+    {
+      "id": "N035",
+      "function": "replay_and_bands",
+      "status": "open-question",
+      "idea": "What a process alarm should do while its value is stale.",
+      "why_not_yet": "An operations decision, not a screen edit; Ignition's default holds the alarm.",
+      "source": [
+        "docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not",
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "N036",
+      "function": "ignition",
+      "status": "not-done",
+      "idea": "Import the extracted TE twin's tags into a gateway.",
+      "why_not_yet": "The disposable gateway was in use by another workstream at the time.",
+      "source": [
+        "docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back",
+        "docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman"
+      ]
+    },
+    {
+      "id": "N037",
+      "function": "ignition",
+      "status": "not-done",
+      "idea": "Licensed PI import and read-back.",
+      "why_not_yet": "No free PI route remains; checks stay offline against vendor-published material.",
+      "source": [
+        "docs/JOURNAL.md#43-check-the-pi-files-against-what-aveva-publishes-and-get-ready-for-a-first-human-review"
+      ]
+    },
+    {
+      "id": "N038",
+      "function": "ignition",
+      "status": "rejected-untested",
+      "idea": "Add an AF XML export validated against the schema.",
+      "why_not_yet": "The schema types the questioned fields as plain strings, so it would not have caught any finding.",
+      "source": [
+        "docs/JOURNAL.md#43-check-the-pi-files-against-what-aveva-publishes-and-get-ready-for-a-first-human-review"
+      ]
+    },
+    {
+      "id": "N039",
+      "function": "ignition",
+      "status": "not-done",
+      "idea": "Real phones and operator usability of the screens.",
+      "why_not_yet": "Headless Chromium only.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "N040",
+      "function": "ignition",
+      "status": "open-question",
+      "idea": "The diagnostic alarm's priority (Medium) and dark slate colour.",
+      "why_not_yet": "Claude-only choices that need operations.",
+      "source": [
+        "docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm"
+      ]
+    },
+    {
+      "id": "N041",
+      "function": "ignition",
+      "status": "not-done",
+      "idea": "A second model choosing each unit's key values; a second model reviewing the verifier.",
+      "why_not_yet": "Listed as where a second model would add most; not done.",
+      "source": [
+        "docs/MODELS.md"
+      ]
+    },
+    {
+      "id": "N042",
+      "function": "real_unit",
+      "status": "rejected-untested",
+      "idea": "Shift the Figure 11 pressure calibration by 3 psig to match the text.",
+      "why_not_yet": "Two labelled pressures on the axis agree with the figure as calibrated; moving it would hide a source disagreement.",
+      "source": [
+        "docs/JOURNAL.md#55-start-the-real-unit-a-sourced-model-and-a-checked-trend"
+      ]
+    },
+    {
+      "id": "N043",
+      "function": "real_unit",
+      "status": "rejected-untested",
+      "idea": "Pick interlock setpoints (for example 135 C or 50 psig).",
+      "why_not_yet": "It would make every state crisp and some wrong in ways nobody could see.",
+      "source": [
+        "docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks"
+      ]
+    },
+    {
+      "id": "N044",
+      "function": "real_unit",
+      "status": "rejected-untested",
+      "idea": "Add control valve stations to the Bayer drawing.",
+      "why_not_yet": "Figure 10 draws none and the report describes none.",
+      "source": [
+        "docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing"
+      ]
+    },
+    {
+      "id": "N045",
+      "function": "real_unit",
+      "status": "rejected-untested",
+      "idea": "Keep the crossings and teach the tracer to skip them.",
+      "why_not_yet": "It would change the tracer the TE scores were measured with.",
+      "source": [
+        "docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing"
+      ]
+    },
+    {
+      "id": "N046",
+      "function": "real_unit",
+      "status": "rejected-untested",
+      "idea": "A live Ignition screen for the Bayer replay first.",
+      "why_not_yet": "The replay is 519 points from a figure; a static page shows the same states with less to go wrong.",
+      "source": [
+        "docs/JOURNAL.md#58-an-overview-screen-for-the-unit"
+      ]
+    },
+    {
+      "id": "N047",
+      "function": "real_unit",
+      "status": "not-done",
+      "idea": "A blind test of the replay rules.",
+      "why_not_yet": "The rules were written after looking at the digitized values.",
+      "source": [
+        "docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks"
+      ]
+    },
+    {
+      "id": "N048",
+      "function": "tours_3d",
+      "status": "not-done",
+      "idea": "Video render of the tour.",
+      "why_not_yet": "The stills still need the owner's approval first.",
+      "source": [
+        "docs/JOURNAL.md#53-carry-the-october-15-tour-review-onto-the-renumbered-build"
+      ]
+    },
+    {
+      "id": "N049",
+      "function": "tours_3d",
+      "status": "not-done",
+      "idea": "OCR read-back of the current stills.",
+      "why_not_yet": "It still describes the old stills.",
+      "source": [
+        "docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number"
+      ]
+    },
+    {
+      "id": "N050",
+      "function": "tours_3d",
+      "status": "not-done",
+      "idea": "Essential-function animations and an interactive viewer from the GLB.",
+      "why_not_yet": "Animations deferred; the viewer waits for verified geometry and instrument locations.",
+      "source": [
+        "docs/JOURNAL.md#39-prototype-a-3d-tour-generated-from-the-same-contract-as-the-screens-proof-of-concept",
+        "docs/JOURNAL.md#41-review-clean-up-the-3d-stills-before-rendering-any-more-video-proof-of-concept"
+      ]
+    },
+    {
+      "id": "N051",
+      "function": "tours_3d",
+      "status": "not-done",
+      "idea": "Operator-written tour script and hazard emphasis from the site's PHA/HAZOP.",
+      "why_not_yet": "No operator or process-safety review has happened.",
+      "source": [
+        "docs/JOURNAL.md#40-check-the-3d-render-procedurally-then-make-it-an-orientation-tour-proof-of-concept"
+      ]
+    },
+    {
+      "id": "N052",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "A timed human review of one sheet (review kit, sheet 8, 88 rows).",
+      "why_not_yet": "No reviewer has timed anything; the minutes per correction in the cost case are assumed.",
+      "source": [
+        "docs/JOURNAL.md#46-more-drawings-with-tag-text-five-runs-per-model-and-a-kit-for-the-first-timed-review",
+        "docs/COSTS.md#5-what-is-not-measured-and-why"
+      ]
+    },
+    {
+      "id": "N053",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "An operations review of the model by someone with TE process knowledge.",
+      "why_not_yet": "Nobody with that knowledge has reviewed it.",
+      "source": [
+        "docs/JOURNAL.md#21-screens-an-operator-could-use-and-which-model-made-which-call"
+      ]
+    },
+    {
+      "id": "N054",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "A real-candidate recipe beside the offline preflight, an own-dataset handoff contract, and a domain warning beside the batch advice.",
+      "why_not_yet": "Cold-reader findings still open.",
+      "source": [
+        "docs/JOURNAL.md#37-take-a-cold-reader-documentation-review-seriously"
+      ]
+    },
+    {
+      "id": "N055",
+      "function": "intake_and_reuse",
+      "status": "rejected-untested",
+      "idea": "A general workflow engine, and timestamps instead of hashes for staleness.",
+      "why_not_yet": "More machinery than 13 stages need; a checkout changes timestamps.",
+      "source": [
+        "docs/JOURNAL.md#45-start-from-the-data-assess-both-datasets-first-then-make-every-correction-travel"
+      ]
+    }
+  ]
+}
