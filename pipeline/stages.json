@@ -1148,7 +1148,8 @@
    ],
    "code": [
     "scripts/te_live_check.py",
-    "scripts/ignition/te_sim_server.py"
+    "scripts/ignition/te_sim_server.py",
+    "scripts/ignition/te_failures.py"
    ],
    "outputs": [
     "out/te_pid/live_codex-clean-r1.json",
@@ -1799,7 +1800,8 @@
    "inputs": [],
    "code": [
     "scripts/ignition/te_sim_server.py",
-    "scripts/ignition/verify_gateway.py"
+    "scripts/ignition/verify_gateway.py",
+    "scripts/ignition/te_failures.py"
    ],
    "outputs": [],
    "evidence": [

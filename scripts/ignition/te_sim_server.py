@@ -15,6 +15,8 @@ Usage:
   --start N begins the replay at sample N.
   --control FILE switches the replay while running: write "fault6 236" or "normal 0" to the file. The server keeps
   running, so connected clients (Ignition) never lose their session. Used by the Docker demo's fault switch.
+  Lines after the run line inject single-instrument failures (freeze, fixed, drift, noise, bad, stale): see
+  te_failures.py. Removing a line clears that failure.
 """
 import argparse
 import asyncio
@@ -23,6 +25,7 @@ import logging
 from pathlib import Path
 
 from asyncua import Server, ua
+from te_failures import FailureError, Injector, parse
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "external" / "te-braatz"
@@ -57,6 +60,8 @@ async def main():
     runs = {name: load_rows(name) for name in RUNS}
     control = Path(args.control) if args.control else None
     last_control = None
+    injector = Injector()
+    last_run_line = None
 
     server = Server()
     await server.init()
@@ -81,14 +86,33 @@ async def main():
                 text = control.read_text().strip()
                 if text and text != last_control:
                     last_control = text
-                    parts = text.split()
+                    lines = text.splitlines()
+                    parts = lines[0].split()
                     if parts[0] in RUNS:
-                        current, rows = parts[0], runs[parts[0]]
-                        i = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 0
-                        print(f"switched to '{current}' at sample {i}", flush=True)
+                        # The run switches only when the run line itself changes, so editing the failure lines
+                        # below it never restarts the replay.
+                        if lines[0] != last_run_line:
+                            current, rows = parts[0], runs[parts[0]]
+                            i = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 0
+                            print(f"switched to '{current}' at sample {i}", flush=True)
+                        last_run_line, lines = lines[0], lines[1:]
+                    try:
+                        injector.set(parse(lines, set(nodes)))
+                        print("failures: " + (", ".join(f"{k} {t}" for t, (k, _) in injector.active.items()) or "none"),
+                              flush=True)
+                    except FailureError as e:
+                        print(f"control file refused, failures unchanged: {e}", flush=True)
             row = rows[i % len(rows)]
-            for node, col in nodes.values():
-                await node.write_value(ua.Variant(row[col], ua.VariantType.Double))
+            for tag, (node, col) in nodes.items():
+                action, value, good = injector.apply(tag, row[col])
+                if action == "skip":
+                    continue
+                if good:
+                    await node.write_value(ua.Variant(value, ua.VariantType.Double))
+                else:
+                    # The recorded value rides along only so the update is well formed; Bad quality says not to use it.
+                    await node.write_value(ua.DataValue(Value=ua.Variant(row[col], ua.VariantType.Double),
+                                                        StatusCode=ua.StatusCode(ua.StatusCodes.BadCommunicationError)))
             await sample.write_value(ua.Variant(i % len(rows), ua.VariantType.Int32))
             await run_name.write_value(ua.Variant(current, ua.VariantType.String))
             i += 1
