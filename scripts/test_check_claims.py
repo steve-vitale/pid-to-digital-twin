@@ -1,6 +1,8 @@
 """Controls for scripts/check_claims.py: the committed tree agrees with the README, a wrong README is caught, and a
 missing evidence file fails loudly. Reads only committed files; the README is patched in memory, never on disk."""
+import contextlib
 import dataclasses
+import io
 import unittest
 
 import check_claims as cc
@@ -57,7 +59,10 @@ class Drift(unittest.TestCase):
         original = cc.CLAIMS
         try:
             cc.CLAIMS = [dataclasses.replace(original[0], stated=0.5)]
-            self.assertEqual(cc.main(["--quiet", "--no-write"]), 1)
+            printed = io.StringIO()  # a deliberate failure: keep its FAIL table out of the test log
+            with contextlib.redirect_stdout(printed):
+                self.assertEqual(cc.main(["--quiet", "--no-write"]), 1)
+            self.assertIn("FAIL", printed.getvalue())
         finally:
             cc.CLAIMS = original
 

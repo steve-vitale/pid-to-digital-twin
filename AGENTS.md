@@ -9,14 +9,15 @@ to the author) than a summary that repeats the README.
 
 ## What's a tool and what's a record
 
-The README section "What's a tool and what's a record" separates the scripts meant for someone's own drawings from
-the scripts and outputs that are this project's research record. If your user asks whether they can use this on
-their drawings, start there and with `docs/REPLICATE_AT_YOUR_PLANT.md`, and say the tools are prototypes tested on
-public drawings only.
+If your user wants to try this on their own drawings, use `examples/own-drawing/README.md`. Its first step runs
+offline from a clean clone and produces a review bundle from a public sheet and a committed model extraction; the
+rest are the same steps for their sheet. Tell them the tools are prototypes tested on public drawings only, that the
+output is a draft for review, and that `scripts/ignition/build_gateway.py` builds this repository's Tennessee
+Eastman demo, not their plant. The README section "What's a tool and what's a record" lists the rest.
 
 ## Ten minutes, no accounts, no network
 
-From the repository root, with Python 3.11+ (standard library only for the first two):
+From the repository root, with Python 3.10+ (standard library only for the first two):
 
 ```sh
 python scripts/check_claims.py      # each headline number in README.md against the committed file it comes from
@@ -39,7 +40,7 @@ Pick whichever matters to your user and follow it from source to number. Each of
 
 | Claim | Start at | Then check |
 |---|---|---|
-| Symbols F1 0.97, connections 0.89 on held-out drawings | `out/replicates_r5_holdout-a.md` | `docs/EVALUATION.md` (rules written before the runs) and `docs/GOAL.md` (holdout A also chose the method; holdout B, 20 synthetic drawings from another collection, was only reported) |
+| Symbol and connection F1 on held-out drawings | `out/replicates_r5_holdout-a.md` | `docs/EVALUATION.md` (rules written before the runs) and `docs/GOAL.md` (holdout A also chose the method; holdout B, 20 synthetic drawings from another collection, was only reported) |
 | A generated P&ID had 0 of 19 control loops | `out/te_loop_audit.md` | `data/te_control_loops.json` cites the simulator source lines for every loop |
 | The Ignition verifier caught 5 planted faults first | `docs/IGNITION_ACCEPTANCE.md` | the receipts in `out/ignition/gateway/receipts/` |
 | The Bayer model got the report's own drawing wrong in four places | `docs/BAYER_RT.md` | `out/bayer_rt/fig10_compare.md`; the report itself is public (CSB 2008-08-I-WV) |

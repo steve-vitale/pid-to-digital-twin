@@ -29,8 +29,9 @@ tests how much of that AI can do, how to check its work honestly, and what a pla
 - **Check it yourself.** `python scripts/check_claims.py` compares every headline number here with the committed file
   it comes from (standard library only, under a minute). If you'd rather have your coding agent do it,
   [AGENTS.md](AGENTS.md) tells it what to run and which limits to report back. More: [REVIEWING.md](docs/REVIEWING.md).
-- **Using it on your own drawings.** A handful of the scripts are tools for that; the rest are this project's research
-  record. [Which is which](#whats-a-tool-and-whats-a-record).
+- **Using it on your own drawings.** [A runbook](examples/own-drawing/README.md) that runs offline from a clean clone on
+  a public sheet, then the same steps for yours. Most of the repository is this project's research record;
+  [which is which](#whats-a-tool-and-whats-a-record).
 
 ![Before and after: a crop of a public OPEN100 drawing, and the same crop with every extracted symbol boxed and coloured by review risk tier](docs/screenshots/before-after-sheet0.png)
 
@@ -566,21 +567,25 @@ it at a real site.
 Three kinds of thing live in this repository. Only the first is meant to be pointed at your own drawings.
 
 **Tools for your own drawings and systems.** Prototypes: tested on public drawings only, never on a plant's own.
-The order to use them in, with the inputs a plant has to supply, is [docs/REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
+Start with the runbook in [examples/own-drawing/](examples/own-drawing/README.md): it runs offline from a clean clone
+on a public sheet with a committed model extraction, then shows the same steps for your sheet. The longer guide, with
+the inputs a plant has to supply, is [docs/REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
 
 | Step | Scripts | Guide |
 |---|---|---|
-| Extract a drawing | `site_extraction_workflow.py` (one PNG, prepare / execute / collect), `import_site_drawing.py` (local intake check); for a batch, `run_extraction.py` then `trace_connections.py` | [SITE_EXTRACTION_WORKFLOW.md](docs/SITE_EXTRACTION_WORKFLOW.md) |
-| Build the asset model and exports | `build_twin.py` (risk-ranked review queue), `generate.py` (Ignition tags, PI AF sheet, SVG, review sheet) | [TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) |
+| Extract a drawing | `run_extraction.py` then `trace_connections.py` (the method behind the results; point `PID_SHEETS_DIR` at a folder with your PNG), or `site_extraction_workflow.py` (one PNG with a full audit trail, but a simpler recipe: no tiles, no tracing) | [the runbook](examples/own-drawing/README.md), [SITE_EXTRACTION_WORKFLOW.md](docs/SITE_EXTRACTION_WORKFLOW.md) |
+| Build the draft model and exports | `import_site_drawing.py` (one PNG plus its extraction to a review bundle: model, review sheet, Ignition tags, PI AF staging, SVG); `generate.py` regenerates exports after review | [the runbook](examples/own-drawing/README.md), [TWIN_OUTPUTS.md](docs/TWIN_OUTPUTS.md) |
 | Review and map to data | `apply_review.py`, `review_kit.py`, `map_points.py`, `map_pi_points.py`, `check_pi_export.py` | [REVIEW_LOOP.md](docs/REVIEW_LOOP.md), [PI_MAPPING.md](docs/PI_MAPPING.md) |
-| Load and verify in Ignition | `ignition/acceptance_preflight.py`, `ignition/build_gateway.py`, `ignition/verify_gateway.py`, `ignition/acceptance/` | [IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md), [IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md) |
-| Score an extraction against your own answer key | `score_pid2graph.py` (keys in the PID2Graph GraphML format), `scorecard.py` | [EVALUATION.md](docs/EVALUATION.md) |
+| Load into Ignition | Import the bundle's `ignition/tags.json` in Designer (Tag Browser, Import Tags) into a lab gateway. Not `build_gateway.py`: that builds this repository's Tennessee Eastman demo | [the runbook](examples/own-drawing/README.md#5-into-ignition) |
+| Score an extraction against your own answer key | `score_pid2graph.py` (keys in the PID2Graph GraphML format, labelled by hand for a few of your sheets) | [EVALUATION.md](docs/EVALUATION.md) |
 
 **Checks on this repository.** `check_claims.py`, `pipeline.py status` and `run_tests.py`. Nothing to configure;
 see [REVIEWING.md](docs/REVIEWING.md).
 
 **This project's research record.** Read it, or rerun it to reproduce a result; it isn't built for other inputs.
-- Scripts that produced one result each: the Tennessee Eastman work (`verify_te_*.py`, `te_*.py`,
+- Scripts that produced one result each: `build_twin.py` with its OPEN100-trained risk tiers, the Ignition demo
+  build and its verifier (`ignition/build_gateway.py`, `ignition/verify_gateway.py`, `ignition/acceptance/`), the
+  Tennessee Eastman work (`verify_te_*.py`, `te_*.py`,
   `draw_pid_from_model.py`, `retag_te_valves.py`, `normal_bands.py`, `fault_detection_eval.py`), the Bayer unit
   (`bayer_*.py`, `digitize_bayer_fig11.py`, `compare_bayer_fig10.py`), the evaluation rounds (`*.ps1`,
   `degrade_scans.py`, `score_tags.py`, `replicate_stats.py`, `adapt_dexpi.py`), the drawings-only OPEN100 work, the

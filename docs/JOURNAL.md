@@ -3181,3 +3181,41 @@ red, and both times the missing piece was a dependency the code had and the mani
 
 **At your plant:** when you retag, search the code for logic that keys on tag letters (alarm grouping, display
 filters, historian queries), not just for the tags themselves. A rename tool finds names; it can't find a rule.
+
+---
+
+## 62. Give a stranger's agent the repository and see what it can do
+
+**What:** 2026-10-29. A fresh agent with no context got a clean clone of public main and the brief of another
+engineer's coding agent: "can I use this on our own P&IDs to get a starting asset model into Ignition?" It worked
+offline, read the agent-facing files, ran what it could and reported where it got stuck. Its findings, checked
+against the files, drove this change: a runbook for one drawing, `examples/own-drawing/`, that runs end to end from
+a clean clone.
+
+**What it found (each confirmed before changing anything):**
+- **No extraction to start from.** The intake tool wanted "an existing extraction", and a clean clone has none
+  (model run records aren't committed). The agent had to hand-write one. The example now ships the recorded GPT
+  extraction of public sheet 0, made with the method behind the results, and a manifest pointing at the sheet
+  already in the repository: two commands give a 445-row review bundle with Ignition tags and PI staging files.
+- **A tool listed for your drawings that isn't one.** The README put `build_gateway.py` under "tools for your own
+  drawings"; it builds this repository's Tennessee Eastman demo. The Ignition step is now importing the bundle's
+  `ignition/tags.json` in Designer, and `build_gateway.py` is listed with the research record.
+- **Stale numbers in the file written for agents.** AGENTS.md still quoted the single-run F1 (0.97, 0.89) that
+  entry 61 corrected in the README; the claim checker only reads the README. AGENTS.md now names the claims without
+  numbers, so there is nothing there to drift. It also said Python 3.11+; the README and CI say 3.10+.
+- **Passing tests that print FAIL.** The claim checker's deliberate-failure control printed its table into the
+  log. It is now captured and asserted instead.
+
+**What the agent missed, and the runbook says:** the line tracer is not tied to the OPEN100 folder; `PID_SHEETS_DIR`
+points it at any folder of PNGs, and with no answer key present it reproduced the recorded 345 links on sheet 0
+exactly. It did get one thing right that the README had blurred: the one-sheet workflow
+(`site_extraction_workflow.py`) uses a simpler recipe than the results (whole sheet, no tiles, no tracer). The
+runbook names both routes and says which one the numbers measure.
+
+**Its verdict, kept as it said it:** the method, the file formats, the review and mapping loop and the checking
+habits generalize; the accuracy numbers, the tracer settings and the risk tiers (tuned on OPEN100) and everything
+that needs process data don't. About half a day to a day to a reviewed draft of one drawing, most of it review;
+days to weeks to a usable Ignition model with real bindings, most of it the plant's own engineering.
+
+**Lesson:** the author can't read their own repository cold. An agent that can is cheap, and it found in five
+minutes what a stranger would have found by giving up.
