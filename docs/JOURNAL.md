@@ -2962,3 +2962,42 @@ simplified one. Half of the first checks failed, all on connections.
 
 **At your plant:** the same split exists between operating procedures and the P&ID. Procedures say what a valve is
 for; the P&ID says what line it's on. Check one against the other, item by item, before trusting either.
+
+## 57. Replay the evening through the interlocks
+
+**What:** 2026-10-29. The digitized Figure 11 trend replayed through the residue treater model's three interlocks and
+four operating limits, column by column up to the failure, and checked against what the report says happened.
+Details: [BAYER_RT.md](BAYER_RT.md).
+
+**How:**
+- **Rules as cited data.** `data/bayer_rt/replay_rules.json` states each interlock and limit with the pages behind
+  it. The report publishes no interlock setpoints, so each rule carries the bounds the report supports, and a state
+  between them is "cannot tell".
+- **Bounds, not points.** Every value carries its column range widened by the digitizing error; a condition is met
+  or clear only when the whole bound is on one side.
+- **The report's account as the check:** five statements about the evening (pump start, flow loss, the
+  high-pressure alarm, the relief valve, the safe operating limit), each turned into a test of the derived states.
+
+**What it found:**
+- **A digitizer bug first.** The level series had 39 one-column spikes: the blue fringes of the figure's black text
+  labels, picked up because the level mask had no minimum component size. Fixed (components of at least 15 px, the
+  middle of the clean 10-20 px range), with a test against any one-column spike. The 11 text checks never sampled
+  those minutes, which is why they passed with the bug.
+- **5 of 5 statements agree,** within two minutes where the statement gives a time.
+- **The minimum-temperature condition was met for the first three and a half hours shown.** Had that interlock not
+  been bypassed (p. 69), it would have held the feed closed until about 21:25; the feed had been open since about
+  4 a.m. (p. 38).
+- **The figure shows two short flow starts after the pump started,** each falling back to zero, before flow was
+  established at about 18:25. The report doesn't mention them; the replay records them as the figure shows them.
+
+**Why:**
+- **Rejected: picking a setpoint.** 135 C or 50 psig would make every state crisp and some of them wrong in ways
+  nobody could see. "Cannot tell" between two cited bounds is the honest output.
+- **Not a blind test.** I wrote the rules after looking at the digitized values, so 5 of 5 shows the replay is
+  consistent with the report, not that it predicts it.
+
+**Lesson:** a downstream consumer is a test of its input. The replay read every column; the text checks read eleven.
+The bug sat in the minutes nobody sampled.
+
+**At your plant:** when you rebuild an event from a trend, publish the bounds and say when a state can't be told.
+A timeline that is crisp everywhere has usually guessed somewhere.

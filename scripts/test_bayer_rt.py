@@ -95,6 +95,64 @@ class Digitized(unittest.TestCase):
         self.assertNotIn("No explanation recorded yet", text)
 
 
+class TraceIntegrity(unittest.TestCase):
+    """No series may jump away and straight back in one column: that is stray pixels (text fringes), not process."""
+
+    def test_no_single_column_spikes_before_the_failure(self):
+        rows = [r for r in dg.load_rows() if r["time"] <= "22:33:00"]
+        for name in CAL["series"]:
+            v = [float(r[name]) for r in rows if r[name] != ""]
+            spikes = [i for i in range(1, len(v) - 1)
+                      if abs(v[i] - v[i - 1]) > 8 and abs(v[i] - v[i + 1]) > 8 and abs(v[i - 1] - v[i + 1]) < 8]
+            self.assertEqual(spikes, [], name)
+
+
+class Replay(unittest.TestCase):
+    """The trend run through the cited interlock and limit rules, and checked against the report's statements."""
+
+    @classmethod
+    def setUpClass(cls):
+        import bayer_replay as br
+        cls.br = br
+        cls.rules = json.loads(br.RULES.read_text(encoding="utf-8"))
+        cls.rows = br.derive(cls.rules)
+
+    def test_committed_outputs_are_current(self):
+        res = self.br.summarize(self.rules, self.rows)
+        self.assertEqual((ROOT / "out" / "bayer_rt" / "replay_states.md").read_text(encoding="utf-8"),
+                         self.br.render(self.rules, res))
+        self.assertEqual(self.br.REPLAY.read_text(encoding="utf-8"), self.br.write_csv(self.rules, self.rows))
+
+    def test_agrees_with_every_report_statement(self):
+        res = self.br.summarize(self.rules, self.rows)
+        self.assertEqual([c["id"] for c in res["checks"] if not c["ok"]], [])
+
+    def test_stops_at_the_failure(self):
+        self.assertLessEqual(self.rows[-1]["time"], "22:33:00")
+
+    def test_a_straddling_bound_is_never_called(self):
+        il1 = next(il for il in self.rules["interlocks"] if il["id"] == "IL-1")
+        row = {"TI-104_lo": 129.0, "TI-104_hi": 131.0}
+        self.assertEqual(self.br.interlock_state(il1, row), self.br.UNSURE)
+        row = {"TI-104_lo": 131.0, "TI-104_hi": 134.0}      # inside the gap where the setpoint lies
+        self.assertEqual(self.br.interlock_state(il1, row), self.br.UNSURE)
+
+    def test_every_rule_cites_the_report(self):
+        for il in self.rules["interlocks"]:
+            self.assertRegex(il["why_these_bounds"], r"p\. \d+")
+            self.assertIs(il["setpoint_published"], False)
+        for lim in self.rules["limits"]:
+            self.assertRegex(lim["source"], r"p\. \d+")
+
+    def test_catches_a_flow_loss_at_the_wrong_time(self):
+        rows = json.loads(json.dumps(self.rows))
+        for r in rows:                                   # pretend the flow held until 22:30
+            if "22:21:00" <= r["time"] < "22:30:00":
+                r["IL-3"] = self.br.CLEAR
+        k2 = next(s for s in self.rules["report_statements"] if s["id"] == "K2")
+        self.assertFalse(self.br.check(k2, rows)["ok"])
+
+
 class Figure10(unittest.TestCase):
     """The model and the generated drawing against the report's own drawing, and that the check can fail."""
 

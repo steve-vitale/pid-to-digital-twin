@@ -30,5 +30,7 @@
   "failure_label": [590, 15, 700, 95]
  },
  "min_component_px": 60,
+ "level_min_component_px": 15,
+ "_level_min_component_px": "The blue level mask also catches the coloured fringes of the figure's black text labels. Components under 10 px are those fringes; components over 20 px start to drop the level trace's broken steep segment. 15 is the middle of the clean range (scripts/digitize_bayer_fig11.py; journal entry 57).",
  "pixel_error": 2
 }

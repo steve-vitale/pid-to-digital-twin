@@ -93,6 +93,8 @@ def masks(img, c):
     black = _keep_large(black, c["min_component_px"])
     # The red trace's anti-aliased edges include brownish pixels; the flow trace itself is one connected line.
     brown = _keep_large(brown, c["min_component_px"])
+    # Black text labels have blue anti-aliased fringes; the level trace is the only large blue component.
+    blue = _keep_large(blue, c["level_min_component_px"])
     x0, x1 = c["plot_frame_x"]
     out = {"temperature_C": red, "pressure_psig": black, "level_pct": blue, "recirc_flow_klbh": brown}
     top, bottom = c["left_axis"]["y_at_160"], c["left_axis"]["y_at_0"]

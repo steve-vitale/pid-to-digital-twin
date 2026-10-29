@@ -15,11 +15,11 @@
   },
   "bayer.fig11": {
    "inputs": {
-    "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
-    "scripts/digitize_bayer_fig11.py": "b29ae827097fe074895a994e61a7c0d8937dab84ff589aed4508d82f1b156433"
+    "data/bayer_rt/fig11_calibration.json": "c12a0bb42f80f0b0d4ebc28e2b1aa8621c33d1dc8e3aba19ea0b6937c163fab4",
+    "scripts/digitize_bayer_fig11.py": "f500dd47bd098b955ff330e26190b1958423a3064a90b2ac504604a37632d27a"
    },
    "outputs": {
-    "data/bayer_rt/fig11_digitized.csv": "56f370b9209e4293350a670819e87cb9dd1d142e258f354481667d51aeff4aee",
+    "data/bayer_rt/fig11_digitized.csv": "efb7884ec0f2cb5c7369a00f480a946a798a196ff92abac0919f293ab1d9e9f8",
     "out/bayer_rt/fig11_check.md": "538830b8ced7f732a857e8df62bd23d74b4996068360ccd9777f171df0906f1e"
    }
   },
@@ -38,13 +38,27 @@
     "data/bayer_rt/pid/sheet_register.csv": "d049d9fe38d511cd48bca76c2dfe30eee498c03e9065dc579670ef2f2e2c7297"
    }
   },
+  "bayer.replay": {
+   "inputs": {
+    "data/bayer_rt/fig11_digitized.csv": "efb7884ec0f2cb5c7369a00f480a946a798a196ff92abac0919f293ab1d9e9f8",
+    "data/bayer_rt/replay_rules.json": "d29a69cf59325d357297becc8cab0c5c487b58741c348320a1f8f7de7a06bb2d",
+    "scripts/bayer_replay.py": "0efab18694a8d8ee2b2bfd93ce46041b166c528d0f76e26f47c5711d950f0c73",
+    "scripts/digitize_bayer_fig11.py": "f500dd47bd098b955ff330e26190b1958423a3064a90b2ac504604a37632d27a"
+   },
+   "outputs": {
+    "data/bayer_rt/replay.csv": "f0b1e4241e77b39560777aec8ff043205b6384d6730915b56c58532c085dd2d5",
+    "out/bayer_rt/replay_states.json": "4409497acbf88ae312f7dc77c61bfecad89b4c6c5a95f2aa5bc92e626a629068",
+    "out/bayer_rt/replay_states.md": "0d10ac20e6347d795543e280dabc39b8730628b949fb4500cf288dd942195a7e"
+   }
+  },
   "bayer.source": {
    "inputs": {},
    "outputs": {
     "data/bayer_rt/fig10_inventory.json": "adaff7442d40a4dd555ff720d78b44a0657bd8ff18fa7b47aac7b0e6e4e7ce11",
-    "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
+    "data/bayer_rt/fig11_calibration.json": "c12a0bb42f80f0b0d4ebc28e2b1aa8621c33d1dc8e3aba19ea0b6937c163fab4",
     "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
-    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab"
+    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "data/bayer_rt/replay_rules.json": "d29a69cf59325d357297becc8cab0c5c487b58741c348320a1f8f7de7a06bb2d"
    }
   },
   "dexpi.keys": {

@@ -2277,7 +2277,8 @@
     "data/bayer_rt/process_model.json",
     "data/bayer_rt/fig11_calibration.json",
     "data/bayer_rt/fig10_inventory.json",
-    "data/bayer_rt/pid_layout.json"
+    "data/bayer_rt/pid_layout.json",
+    "data/bayer_rt/replay_rules.json"
    ],
    "requires": [],
    "config": [],
@@ -2287,7 +2288,7 @@
    "title": "Bayer residue treater: process model, Figure 10 inventory, drafting layout and Figure 11 calibration, written from the CSB report",
    "kind": "source",
    "rebuild": "source",
-   "treatment": "Every unit, stream, instrument, valve, controller, interlock, limit and event cites the report's page or figure. The report gives no tag numbers for the residue treater, so every tag is assigned by this project and marked so. The calibration is read off Figure 11's own axes, gridlines and ticks only. The Figure 10 inventory records what that figure shows (equipment, transmitters, valves, lines), read from the figure alone; the drafting layout says only where things go on the generated sheet.",
+   "treatment": "Every unit, stream, instrument, valve, controller, interlock, limit and event cites the report's page or figure. The report gives no tag numbers for the residue treater, so every tag is assigned by this project and marked so. The calibration is read off Figure 11's own axes, gridlines and ticks only. The Figure 10 inventory records what that figure shows (equipment, transmitters, valves, lines), read from the figure alone; the drafting layout says only where things go on the generated sheet. The replay rules state each interlock and limit with the pages that bound it; where the report publishes no setpoint they give bounds, never a guessed value.",
    "edited_by": [
     "edit data/bayer_rt/*.json by hand, then python scripts/test_bayer_rt.py"
    ],
@@ -2414,6 +2415,43 @@
    "treatment": "Colour classification per series, gridlines and two annotation boxes removed, small black components dropped, median row per pixel column; time and values from the calibration. Then 11 checks against values the report states, never used to calibrate.",
    "carries": "one row per pixel column (about 32 s) with min/median/max per series and the pixel-error bound; 8 of 11 checks pass, the 3 disagreements explained",
    "checked_by": "the 11 text checks in out/bayer_rt/fig11_check.md; scripts/test_bayer_rt.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "bayer.source",
+    "bayer.fig11"
+   ],
+   "inputs": [
+    "data/bayer_rt/fig11_digitized.csv",
+    "data/bayer_rt/replay_rules.json"
+   ],
+   "code": [
+    "scripts/bayer_replay.py",
+    "scripts/digitize_bayer_fig11.py"
+   ],
+   "outputs": [
+    "data/bayer_rt/replay.csv",
+    "out/bayer_rt/replay_states.json",
+    "out/bayer_rt/replay_states.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.replay",
+   "dataset": "bayer",
+   "stage": 2,
+   "title": "The digitized trend replayed through the model's interlocks and limits, checked against the report's statements",
+   "kind": "check",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/bayer_replay.py"
+    ]
+   ],
+   "treatment": "Each column up to the failure at 22:33 gets a value and bounds per tag (column range widened by the digitizing error); each interlock condition and limit is met, clear or cannot tell, never called while the bound straddles the gap the report leaves. Then five statements in the report about the evening are tested against the derived states.",
+   "carries": "5 of 5 report statements agree (rules written after the trend was seen: a consistency check, not a blind test); no interlock setpoint is published, so each state is bounded, not exact",
+   "checked_by": "scripts/test_bayer_rt.py (current outputs, every rule cited, a straddling bound never called, a planted flow-loss time fails)"
   }
  ]
 }

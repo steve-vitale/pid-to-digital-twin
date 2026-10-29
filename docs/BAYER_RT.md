@@ -2,7 +2,8 @@
 
 **Status, 2026-10-28:** built: a sourced process model checked against the report's own drawing (Figure 10), a
 generated P&ID of the unit checked against the same figure, and a checked digitization of the published trend
-(Figure 11). Not built yet: the replay on operator screens and the walk-through.
+(Figure 11), replayed through the model's interlocks and limits and checked against the report's account of the
+evening. Not built yet: the overview screen and the walk-through.
 Why this unit: [REAL_UNIT_SELECTION.md](REAL_UNIT_SELECTION.md).
 
 On August 28, 2008, the residue treater in Bayer CropScience's methomyl unit in Institute, West Virginia, ruptured
@@ -124,18 +125,48 @@ pixels.
 - **Reuse:** the script fetches the report from csb.gov at run time and checks its hash. The figure is not stored in
   this repository; only the digitized values, each cited to it, are.
 
+**A digitizer bug, found by the replay (2026-10-29).** The level series had 39 single-column spikes (to about 15,
+24, 61, 91, 105 and 113 percent) between 18:38 and 21:58. They were the blue fringes of the figure's black text
+labels: the level mask was the one series without a minimum component size. Components under 10 px are those
+fringes and over 20 px start to drop the trace's broken steep segment, so the level mask now keeps components of at
+least 15 px (`level_min_component_px` in the calibration). The 11 text checks are unchanged (8 pass), because none of
+them falls in those minutes; a test now fails on any one-column spike in any series.
+
 The first run passed 6 of 11. Two of the failures were mine: the flow classifier picked up the red trace's
 anti-aliased edge, and one check used the wrong time window for the statement it tested. Those were fixed. The three
 remaining failures are recorded rather than calibrated away.
 
+## The evening replayed through the model: `scripts/bayer_replay.py`
+
+Each figure column up to the failure (17:59 to 22:33, 519 columns) gets a value and bounds per tag: its range in the
+figure, widened by the digitizing error. The model's three interlocks and four operating limits are then evaluated
+column by column from `data/bayer_rt/replay_rules.json`, where every rule cites the pages that bound it.
+
+- **The report publishes no interlock setpoints.** The rules use the bounds it supports instead: the minimum
+  temperature setpoint lies between about 130 and 135 C (pp. 30, 69); the maximum pressure setpoint between the
+  normal 25 psig and the 50 psig allowable pressure (pp. 28, 39); recirculation flow either plainly zero or plainly
+  established (p. 30). A state is *met* or *clear* only when the whole bound is on one side; otherwise *cannot tell*.
+  A test fails if a straddling bound is ever called.
+- **What the replay derives** (`out/bayer_rt/replay_states.md`): the minimum-temperature condition was met from the
+  start of the trend until 21:25, so that interlock, had it not been bypassed (p. 69), would have held the feed
+  closed for the first three and a half hours shown; the feed had been open since about 4 a.m. (p. 38). The
+  temperature was clear of it from 22:12. Recirculation flow was established from about 18:25, after two short
+  starts the report doesn't mention, and was zero again from 22:22. The pressure left its normal level at 22:15.
+- **Checked against the report's own account: 5 of 5 statements agree.** Pump start at 18:14 (no-flow ends
+  18:14:26), flow lost at 22:21 (no flow from 22:22:29), the pressure off its normal level before the 22:25 alarm
+  (22:15), the relief valve near 22:27 (pressure peaks 22:27:46 and falls), and the 155 C safe operating limit
+  never reached (highest 147.8 C). **This is a consistency check, not a blind test:** I wrote the rules after
+  looking at the digitized values.
+
+`data/bayer_rt/replay.csv` holds every column with values, bounds and states, ready for the overview screen.
+
 ## Next
 
-1. The digitized trend as a replay source for the existing replay server, with the operating limits as display
-   bands, and each interlock's state derived from the published values and the model, minute by minute.
-2. An overview screen of the unit generated from the model, the kind the operators asked for (p. 60), driven by
-   the replay.
-3. A walk-through page that puts the published timeline (pp. 38-40) next to the replayed overview. Every derived
+1. An overview screen of the unit generated from the model, the kind the operators asked for (p. 60), driven by
+   `data/bayer_rt/replay.csv`, with the limits as bands and each interlock's condition shown with its bounds.
+2. A walk-through page that puts the published timeline (pp. 38-40) next to the replayed overview. Every derived
    state either matches a statement in the report or goes on a list of disagreements.
 
 Run: `python scripts/compare_bayer_fig10.py`, `python scripts/digitize_bayer_fig11.py` (needs PyMuPDF),
+`python scripts/bayer_replay.py`,
 `python scripts/test_bayer_rt.py`; the drawing is regenerated by `python scripts/pipeline.py rebuild --from bayer.pid`.

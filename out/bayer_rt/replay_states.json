@@ -1,0 +1,230 @@
+{
+ "rows": 519,
+ "from": "17:59:07",
+ "to": "22:32:31",
+ "interlocks": {
+  "IL-1": [
+   {
+    "state": "no reading",
+    "from": "17:59:07",
+    "to": "17:59:07"
+   },
+   {
+    "state": "met",
+    "from": "17:59:39",
+    "to": "21:25:29"
+   },
+   {
+    "state": "cannot tell",
+    "from": "21:26:01",
+    "to": "22:11:24"
+   },
+   {
+    "state": "clear",
+    "from": "22:11:56",
+    "to": "22:32:31"
+   }
+  ],
+  "IL-2": [
+   {
+    "state": "clear",
+    "from": "17:59:07",
+    "to": "18:12:51"
+   },
+   {
+    "state": "cannot tell",
+    "from": "18:13:22",
+    "to": "18:17:04"
+   },
+   {
+    "state": "clear",
+    "from": "18:17:36",
+    "to": "18:49:16"
+   },
+   {
+    "state": "cannot tell",
+    "from": "18:49:47",
+    "to": "18:51:54"
+   },
+   {
+    "state": "clear",
+    "from": "18:52:26",
+    "to": "22:14:34"
+   },
+   {
+    "state": "cannot tell",
+    "from": "22:15:06",
+    "to": "22:32:31"
+   }
+  ],
+  "IL-3": [
+   {
+    "state": "no reading",
+    "from": "17:59:07",
+    "to": "17:59:07"
+   },
+   {
+    "state": "met",
+    "from": "18:00:11",
+    "to": "18:13:54"
+   },
+   {
+    "state": "cannot tell",
+    "from": "18:14:26",
+    "to": "18:16:01"
+   },
+   {
+    "state": "clear",
+    "from": "18:16:32",
+    "to": "18:16:32"
+   },
+   {
+    "state": "cannot tell",
+    "from": "18:17:04",
+    "to": "18:21:49"
+   },
+   {
+    "state": "met",
+    "from": "18:22:21",
+    "to": "18:23:24"
+   },
+   {
+    "state": "cannot tell",
+    "from": "18:23:56",
+    "to": "18:24:59"
+   },
+   {
+    "state": "clear",
+    "from": "18:25:31",
+    "to": "22:20:54"
+   },
+   {
+    "state": "cannot tell",
+    "from": "22:21:26",
+    "to": "22:21:58"
+   },
+   {
+    "state": "met",
+    "from": "22:22:29",
+    "to": "22:31:59"
+   },
+   {
+    "state": "cannot tell",
+    "from": "22:32:31",
+    "to": "22:32:31"
+   }
+  ]
+ },
+ "limits": {
+  "T-crit": [
+   {
+    "state": "no reading",
+    "from": "17:59:07",
+    "to": "17:59:07"
+   },
+   {
+    "state": "not crossed",
+    "from": "17:59:39",
+    "to": "22:00:51"
+   },
+   {
+    "state": "cannot tell",
+    "from": "22:01:23",
+    "to": "22:11:24"
+   },
+   {
+    "state": "crossed",
+    "from": "22:11:56",
+    "to": "22:32:31"
+   }
+  ],
+  "T-SOL": [
+   {
+    "state": "no reading",
+    "from": "17:59:07",
+    "to": "17:59:07"
+   },
+   {
+    "state": "not crossed",
+    "from": "17:59:39",
+    "to": "22:32:31"
+   }
+  ],
+  "P-MAWP": [
+   {
+    "state": "not crossed",
+    "from": "17:59:07",
+    "to": "22:31:59"
+   },
+   {
+    "state": "cannot tell",
+    "from": "22:32:31",
+    "to": "22:32:31"
+   }
+  ],
+  "L-fill": [
+   {
+    "state": "no reading",
+    "from": "17:59:07",
+    "to": "17:59:07"
+   },
+   {
+    "state": "cannot tell",
+    "from": "17:59:39",
+    "to": "18:37:07"
+   },
+   {
+    "state": "not crossed",
+    "from": "18:37:39",
+    "to": "22:32:31"
+   }
+  ]
+ },
+ "checks": [
+  {
+   "id": "K1",
+   "statement": "The outside operator started the recirculation pump at 6:14 p.m.",
+   "source": "p. 38",
+   "test": "IL-3 stops being 'met' (no flow) within 2 minutes of 18:14",
+   "got": "18:14:26",
+   "minutes_off": 0.4,
+   "ok": true
+  },
+  {
+   "id": "K2",
+   "statement": "At 10:21 p.m. ... the recirculation flow suddenly dropped to zero.",
+   "source": "p. 39",
+   "test": "IL-3 becomes 'met' (no flow) within 2 minutes of 22:21",
+   "got": "22:22:29",
+   "minutes_off": 1.5,
+   "ok": true
+  },
+  {
+   "id": "K3",
+   "statement": "At approximately 10:25 p.m., the residue treater high pressure alarm sounded ... the pressure was above the maximum operating pressure.",
+   "source": "p. 40",
+   "test": "IL-2 stops being 'clear' before 22:25 (the pressure has left its normal level by the alarm)",
+   "got": "22:15:06",
+   "ok": true
+  },
+  {
+   "id": "K4",
+   "statement": "Relief valve open, 44 psig, 22:27.",
+   "source": "Fig 11 label",
+   "test": "PI-101 stops rising within 1.5 minutes of 22:27 (its first local maximum after 22:20)",
+   "got": "22:27:46",
+   "value": 43.74,
+   "minutes_off": 0.8,
+   "ok": true
+  },
+  {
+   "id": "K5",
+   "statement": "The temperature was at 141 C, rapidly approaching 155 C, the safe operating limit.",
+   "source": "p. 39",
+   "test": "T-SOL (155 C) is never reached before the failure",
+   "got": "never (highest 147.79 C)",
+   "ok": true
+  }
+ ],
+ "checks_passed": 5
+}

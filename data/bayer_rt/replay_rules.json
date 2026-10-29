@@ -1,0 +1,56 @@
+{
+ "about": "How scripts/bayer_replay.py turns the digitized Figure 11 trend into the state of each interlock and operating limit, column by column. Every number cites the report. Where the report doesn't publish a setpoint, the rule uses the bounds the report does support and returns 'cannot tell' between them, never a guessed value. A value's bounds are its column range in the figure widened by the digitizing error, so a state is 'met' or 'clear' only when the whole bound is on one side.",
+ "source": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011)",
+ "series_tags": {"TI-104": "temperature_C", "PI-101": "pressure_psig", "LI-102": "level_pct", "FI-103": "recirc_flow_klbh"},
+ "replay_ends": {"time": "22:33:00", "why": "The vessel failed at 22:33 (Fig 11's dotted line; p. 40). The figure's traces after that line are not process values, and the replay stops there."},
+ "interlocks": [
+  {
+   "id": "IL-1",
+   "condition": "TI-104 below the minimum-temperature setpoint (feed valve held closed)",
+   "tag": "TI-104",
+   "met_if_below": 130,
+   "clear_if_at_or_above": 135,
+   "setpoint_published": false,
+   "why_these_bounds": "The setpoint isn't published. The contents were normally kept at about 135 C (p. 30); the heater could reach only about 130 C, and operators bypassed the interlock within 5-10 degrees of the operating temperature, after which reaction heat supplied 'the remaining few degrees needed to satisfy the minimum temperature interlock setpoint' (p. 69). So the setpoint lies between about 130 and 135 C.",
+   "as_operated": "bypassed on the night (p. 69); the feed valve had been opened by hand at about 4 a.m. (p. 38)"
+  },
+  {
+   "id": "IL-2",
+   "condition": "PI-101 at or above the maximum-pressure setpoint (feed valve held closed)",
+   "tag": "PI-101",
+   "met_if_at_or_above": 50,
+   "clear_if_below": 26,
+   "setpoint_published": false,
+   "why_these_bounds": "The setpoint isn't published. Feed was allowed at normal operating pressure, which Figure 11 shows steady at 25.0 psig (the text says 22, p. 39; out/bayer_rt/fig11_check.md), so the setpoint is above that; and it can be no higher than the vessel's maximum allowable operating pressure, 50 psig (p. 28). Between 26 and 50 psig the state can't be told.",
+   "as_operated": "not reported as bypassed"
+  },
+  {
+   "id": "IL-3",
+   "condition": "FI-103 recirculation flow not established (feed valve held closed)",
+   "tag": "FI-103",
+   "met_if_at_or_below": 1.0,
+   "clear_if_at_or_above": 9.0,
+   "setpoint_published": false,
+   "why_these_bounds": "The setpoint isn't published; the report says only that the interlock kept the feed valve closed 'until residue treater recirculation flow was established' (p. 30). 'Met' means no flow: the whole bound is at or below 1 klb/h, zero within the digitizing error (0.71). 'Clear' means flow is plainly established: at least half the evening's lowest steady flow (about 18 klb/h, Fig 11). Between, the state can't be told.",
+   "as_operated": "left bypassed by the computer programmers (p. 38)"
+  }
+ ],
+ "limits": [
+  {"id": "T-crit", "tag": "TI-104", "what": "Critical decomposition temperature (the normal operating temperature)", "at_or_above": 135, "source": "p. 30; p. 39"},
+  {"id": "T-SOL", "tag": "TI-104", "what": "Safe operating limit", "at_or_above": 155, "source": "p. 39"},
+  {"id": "P-MAWP", "tag": "PI-101", "what": "Maximum allowable operating pressure", "at_or_above": 50, "source": "p. 28"},
+  {"id": "L-fill", "tag": "LI-102", "what": "Minimum fill before starting the recirculation pump", "below": 30, "source": "p. 31"}
+ ],
+ "report_statements": [
+  {"id": "K1", "statement": "The outside operator started the recirculation pump at 6:14 p.m.", "source": "p. 38",
+   "test": "IL-3 stops being 'met' (no flow) within 2 minutes of 18:14", "rule": "IL-3", "from": "met", "first_after": "17:59:00", "expect": "18:14:00", "tolerance_min": 2},
+  {"id": "K2", "statement": "At 10:21 p.m. ... the recirculation flow suddenly dropped to zero.", "source": "p. 39",
+   "test": "IL-3 becomes 'met' (no flow) within 2 minutes of 22:21", "rule": "IL-3", "to": "met", "first_after": "20:00:00", "expect": "22:21:00", "tolerance_min": 2},
+  {"id": "K3", "statement": "At approximately 10:25 p.m., the residue treater high pressure alarm sounded ... the pressure was above the maximum operating pressure.", "source": "p. 40",
+   "test": "IL-2 stops being 'clear' before 22:25 (the pressure has left its normal level by the alarm)", "rule": "IL-2", "from": "clear", "first_after": "20:00:00", "before": "22:25:00"},
+  {"id": "K4", "statement": "Relief valve open, 44 psig, 22:27.", "source": "Fig 11 label",
+   "test": "PI-101 stops rising within 1.5 minutes of 22:27 (its first local maximum after 22:20)", "peak_of": "PI-101", "first_after": "22:20:00", "expect": "22:27:00", "tolerance_min": 1.5},
+  {"id": "K5", "statement": "The temperature was at 141 C, rapidly approaching 155 C, the safe operating limit.", "source": "p. 39",
+   "test": "T-SOL (155 C) is never reached before the failure", "limit": "T-SOL", "never": true}
+ ]
+}

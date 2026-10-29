@@ -66,6 +66,8 @@ SOURCE_FILES = (
     "out/bayer_rt/fig11_check.md", "scripts/digitize_bayer_fig11.py",
     "data/bayer_rt/fig10_inventory.json", "data/bayer_rt/pid/key.json", "out/bayer_rt/fig10_compare.md",
     "scripts/compare_bayer_fig10.py",
+    "data/bayer_rt/replay_rules.json", "data/bayer_rt/replay.csv", "out/bayer_rt/replay_states.md",
+    "scripts/bayer_replay.py",
     "data/te_tour_cards.json", "data/hazard_citations_prototype.json", "assets/fonts/AtkinsonHyperlegible-Regular.ttf",
     "drafts/3d-tour/label_boxes.json", "drafts/3d-tour/before/label_boxes.json",
     *(f"data/te_pid/{s}.{e}" for s in ("101", "102", "103") for e in ("png", "graphml")),
