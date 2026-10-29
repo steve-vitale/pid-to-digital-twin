@@ -4,8 +4,8 @@
     "title": "Tennessee Eastman Challenge Process",
     "source_document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
     "extraction_method": "hand-built seed model (Phase 0). Serves as the answer-key draft for scoring AI extraction in Phase 2",
-    "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv. Measurements are numbered 101-137 in XMEAS order; each control valve carries the loop number of the measurement its controller reads (data/te_control_loops.json), with its pre-2026-10-28 tag kept as former_tag. Controllers are listed under controllers.",
-    "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TI-122 description). Report: out/te_source_check.md. Units, streams, directions and tag ownership are checked separately; see topology_verification_note.",
+    "tag_convention": "ISA-5.1 letters + loop number. TE publishes XMEAS/XMV indices, not plant tags, so tag numbers are ASSIGNED by this project and the original index is kept as xmeas/xmv. Measurements are field transmitters (FT, PT, LT, TT, AT, JT) numbered 101-137 in XMEAS order; each control valve carries the loop number of the measurement its controller reads (data/te_control_loops.json). A renamed item keeps its previous tag as former_tag: valves renumbered 2026-10-28, transmitters retagged from indicator letters (FI, PI, ...) 2026-10-29. Controllers are listed under controllers.",
+    "verification_note": "Instruments and final elements were checked 2026-10-06 against the open TE source code (teprob.f) by scripts/verify_te_source.py: 36 confirmed, 1 corrected (TT-122 description). Report: out/te_source_check.md. Units, streams, directions and tag ownership are checked separately; see topology_verification_note.",
     "created": "2026-10-06",
     "topology_verification_note": "Units, streams, flow directions and tag ownership were checked 2026-10-13 against the simulator source (teprob.f, cross-checked with the revised TE code) by scripts/verify_te_topology.py: 51 confirmed, 4 corrected, 1 unresolvable. Report: out/te_topology_check.md. Physical tap positions, sizes and pipe routes are not in the source and remain unverified."
   },
@@ -358,7 +358,7 @@
   ],
   "instruments": [
     {
-      "tag": "FI-101",
+      "tag": "FT-101",
       "xmeas": 1,
       "unit": "U-100",
       "stream": "S1",
@@ -379,10 +379,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(1) = FTM(3)*0.359/35.3145; stream 1: BL -> U-100; documented as teprob.f 'A Feed', revised code 'Feed flow component A (stream 1)'"
-      }
+      },
+      "former_tag": "FI-101"
     },
     {
-      "tag": "FI-102",
+      "tag": "FT-102",
       "xmeas": 2,
       "unit": "U-100",
       "stream": "S2",
@@ -403,10 +404,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(2) = FTM(1)*XMWS(1)*0.454; stream 2: BL -> U-100; documented as teprob.f 'D Feed', revised code 'Feed flow component D (stream 2)'"
-      }
+      },
+      "former_tag": "FI-102"
     },
     {
-      "tag": "FI-103",
+      "tag": "FT-103",
       "xmeas": 3,
       "unit": "U-100",
       "stream": "S3",
@@ -427,10 +429,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(3) = FTM(2)*XMWS(2)*0.454; stream 3: BL -> U-100; documented as teprob.f 'E Feed', revised code 'Feed flow component E (stream 3)'"
-      }
+      },
+      "former_tag": "FI-103"
     },
     {
-      "tag": "FI-104",
+      "tag": "FT-104",
       "xmeas": 4,
       "unit": "C-101",
       "stream": "S4",
@@ -451,10 +454,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(4) = FTM(4)*0.359/35.3145; stream 4: BL -> C-101; documented as teprob.f 'A and C Feed', revised code 'Feed flow components A & C (stream 4)'"
-      }
+      },
+      "former_tag": "FI-104"
     },
     {
-      "tag": "FI-105",
+      "tag": "FT-105",
       "xmeas": 5,
       "unit": "K-101",
       "stream": "S8b",
@@ -478,10 +482,11 @@
         "caveats": [
           "which segment of stream 8 carries the tap is a model choice; the simulator has one flow FTM(9)"
         ]
-      }
+      },
+      "former_tag": "FI-105"
     },
     {
-      "tag": "FI-106",
+      "tag": "FT-106",
       "xmeas": 6,
       "unit": "R-101",
       "stream": "S6",
@@ -502,10 +507,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(6) = FTM(6)*0.359/35.3145; stream 6: U-100 -> R-101; documented as teprob.f 'Reactor Feed Rate', revised code 'Reactor feed (stream 6)'"
-      }
+      },
+      "former_tag": "FI-106"
     },
     {
-      "tag": "PI-107",
+      "tag": "PT-107",
       "xmeas": 7,
       "unit": "R-101",
       "variable": "pressure",
@@ -525,10 +531,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(7) = (PTR-760.0)/760.0*101.325; PTR is the reactor variable; documented as teprob.f 'Reactor Pressure', revised code 'Reactor pressure'"
-      }
+      },
+      "former_tag": "PI-107"
     },
     {
-      "tag": "LI-108",
+      "tag": "LT-108",
       "xmeas": 8,
       "unit": "R-101",
       "variable": "level",
@@ -548,10 +555,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(8) = (VLR-84.6)/666.7*100.0; VLR is the reactor variable; documented as teprob.f 'Reactor Level', revised code 'Reactor level'"
-      }
+      },
+      "former_tag": "LI-108"
     },
     {
-      "tag": "TI-109",
+      "tag": "TT-109",
       "xmeas": 9,
       "unit": "R-101",
       "variable": "temperature",
@@ -571,10 +579,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(9) = TCR; TCR is the reactor variable; documented as teprob.f 'Reactor Temperature', revised code 'Reactor temperature'"
-      }
+      },
+      "former_tag": "TI-109"
     },
     {
-      "tag": "FI-110",
+      "tag": "FT-110",
       "xmeas": 10,
       "unit": "V-101",
       "stream": "S9",
@@ -598,10 +607,11 @@
         "previous": {
           "unit": "K-101"
         }
-      }
+      },
+      "former_tag": "FI-110"
     },
     {
-      "tag": "TI-111",
+      "tag": "TT-111",
       "xmeas": 11,
       "unit": "V-101",
       "variable": "temperature",
@@ -621,10 +631,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(11) = TCS; TCS is the separator variable; documented as teprob.f 'Product Sep Temp', revised code 'Separator temperature'"
-      }
+      },
+      "former_tag": "TI-111"
     },
     {
-      "tag": "LI-112",
+      "tag": "LT-112",
       "xmeas": 12,
       "unit": "V-101",
       "variable": "level",
@@ -644,10 +655,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(12) = (VLS-27.5)/290.0*100.0; VLS is the separator variable; documented as teprob.f 'Product Sep Level', revised code 'Separator level'"
-      }
+      },
+      "former_tag": "LI-112"
     },
     {
-      "tag": "PI-113",
+      "tag": "PT-113",
       "xmeas": 13,
       "unit": "V-101",
       "variable": "pressure",
@@ -667,10 +679,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(13) = (PTS-760.0)/760.0*101.325; PTS is the separator variable; documented as teprob.f 'Prod Sep Pressure', revised code 'Separator pressure'"
-      }
+      },
+      "former_tag": "PI-113"
     },
     {
-      "tag": "FI-114",
+      "tag": "FT-114",
       "xmeas": 14,
       "unit": "V-101",
       "stream": "S10",
@@ -691,10 +704,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(14) = FTM(11)/DLS/35.3145; stream 10: V-101 -> C-101; documented as teprob.f 'Prod Sep Underflow', revised code 'Sperator underflow (liquid phase)'"
-      }
+      },
+      "former_tag": "FI-114"
     },
     {
-      "tag": "LI-115",
+      "tag": "LT-115",
       "xmeas": 15,
       "unit": "C-101",
       "variable": "level",
@@ -714,10 +728,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(15) = (VLC-78.25)/VTC*100.0; VLC is the stripper variable; documented as teprob.f 'Stripper Level', revised code 'Stripper level'"
-      }
+      },
+      "former_tag": "LI-115"
     },
     {
-      "tag": "PI-116",
+      "tag": "PT-116",
       "xmeas": 16,
       "unit": "C-101",
       "variable": "pressure",
@@ -740,10 +755,11 @@
         "caveats": [
           "the code computes it from the header but the documented name says stripper"
         ]
-      }
+      },
+      "former_tag": "PI-116"
     },
     {
-      "tag": "FI-117",
+      "tag": "FT-117",
       "xmeas": 17,
       "unit": "C-101",
       "stream": "S11",
@@ -764,10 +780,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(17) = FTM(13)/DLC/35.3145; stream 11: C-101 -> BL; documented as teprob.f 'Stripper Underflow', revised code 'Stripper underflow (stream 11)'"
-      }
+      },
+      "former_tag": "FI-117"
     },
     {
-      "tag": "TI-118",
+      "tag": "TT-118",
       "xmeas": 18,
       "unit": "C-101",
       "variable": "temperature",
@@ -787,10 +804,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(18) = TCC; TCC is the stripper variable; documented as teprob.f 'Stripper Temperature', revised code 'Stripper temperature'"
-      }
+      },
+      "former_tag": "TI-118"
     },
     {
-      "tag": "FI-119",
+      "tag": "FT-119",
       "xmeas": 19,
       "unit": "C-101",
       "variable": "flow",
@@ -813,10 +831,11 @@
         "caveats": [
           "computed from the unit's heat duty; there is no steam stream in the source or the model"
         ]
-      }
+      },
+      "former_tag": "FI-119"
     },
     {
-      "tag": "JI-120",
+      "tag": "JT-120",
       "xmeas": 20,
       "unit": "K-101",
       "variable": "power",
@@ -836,10 +855,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(20) = CPDH*0.29307D3; CPDH is the compressor work term; documented as teprob.f 'Compressor Work', revised code 'Compressor work'"
-      }
+      },
+      "former_tag": "JI-120"
     },
     {
-      "tag": "TI-121",
+      "tag": "TT-121",
       "xmeas": 21,
       "unit": "R-101",
       "variable": "temperature",
@@ -859,10 +879,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XMEAS(21) = TWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Outlet Temp', revised code 'Reactor cooling water outlet temperature', XMV(10) 'Reactor Cooling Water Flow', IDV(4) 'Reactor Cooling Water Inlet Temperature'"
-      }
+      },
+      "former_tag": "TI-121"
     },
     {
-      "tag": "TI-122",
+      "tag": "TT-122",
       "xmeas": 22,
       "unit": "E-101",
       "variable": "temperature",
@@ -889,10 +910,11 @@
           "documented names disagree (condenser x3, separator x1); the code locus and the majority agree on condenser"
         ],
         "resolved_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
-      }
+      },
+      "former_tag": "TI-122"
     },
     {
-      "tag": "AI-123",
+      "tag": "AT-123",
       "xmeas": "23-28",
       "unit": "R-101",
       "stream": "S6",
@@ -918,10 +940,11 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
-      }
+      },
+      "former_tag": "AI-123"
     },
     {
-      "tag": "AI-129",
+      "tag": "AT-129",
       "xmeas": "29-36",
       "unit": "V-101",
       "stream": "S9",
@@ -950,10 +973,11 @@
         "previous": {
           "unit": "K-101"
         }
-      }
+      },
+      "former_tag": "AI-129"
     },
     {
-      "tag": "AI-137",
+      "tag": "AT-137",
       "xmeas": "37-41",
       "unit": "C-101",
       "stream": "S11",
@@ -979,7 +1003,8 @@
         ],
         "checked_on": "2026-10-13",
         "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
-      }
+      },
+      "former_tag": "AI-137"
     }
   ],
   "final_elements": [
@@ -1277,7 +1302,7 @@
       "tag": "FIC-102",
       "loop": "C1",
       "unit": "U-100",
-      "measurement": "FI-102",
+      "measurement": "FT-102",
       "output": {
         "final_element": "FV-102"
       },
@@ -1298,7 +1323,7 @@
       "tag": "FIC-103",
       "loop": "C2",
       "unit": "U-100",
-      "measurement": "FI-103",
+      "measurement": "FT-103",
       "output": {
         "final_element": "FV-103"
       },
@@ -1319,7 +1344,7 @@
       "tag": "FIC-101",
       "loop": "C3",
       "unit": "U-100",
-      "measurement": "FI-101",
+      "measurement": "FT-101",
       "output": {
         "final_element": "FV-101"
       },
@@ -1340,7 +1365,7 @@
       "tag": "FIC-104",
       "loop": "C4",
       "unit": "C-101",
-      "measurement": "FI-104",
+      "measurement": "FT-104",
       "output": {
         "final_element": "FV-104"
       },
@@ -1361,7 +1386,7 @@
       "tag": "FIC-105",
       "loop": "C5",
       "unit": "K-101",
-      "measurement": "FI-105",
+      "measurement": "FT-105",
       "output": {
         "final_element": "FV-105"
       },
@@ -1382,7 +1407,7 @@
       "tag": "FIC-110",
       "loop": "C6",
       "unit": "V-101",
-      "measurement": "FI-110",
+      "measurement": "FT-110",
       "output": {
         "final_element": "FV-110"
       },
@@ -1403,7 +1428,7 @@
       "tag": "LIC-112",
       "loop": "C7",
       "unit": "V-101",
-      "measurement": "LI-112",
+      "measurement": "LT-112",
       "output": {
         "final_element": "LV-112"
       },
@@ -1424,7 +1449,7 @@
       "tag": "LIC-115",
       "loop": "C8",
       "unit": "C-101",
-      "measurement": "LI-115",
+      "measurement": "LT-115",
       "output": {
         "final_element": "LV-115"
       },
@@ -1445,7 +1470,7 @@
       "tag": "FIC-119",
       "loop": "C9",
       "unit": "C-101",
-      "measurement": "FI-119",
+      "measurement": "FT-119",
       "output": {
         "final_element": "FV-119"
       },
@@ -1466,7 +1491,7 @@
       "tag": "TIC-121",
       "loop": "C10",
       "unit": "R-101",
-      "measurement": "TI-121",
+      "measurement": "TT-121",
       "output": {
         "final_element": "TV-121"
       },
@@ -1487,7 +1512,7 @@
       "tag": "FIC-117",
       "loop": "C11",
       "unit": "C-101",
-      "measurement": "FI-117",
+      "measurement": "FT-117",
       "output": {
         "final_element": "FV-117"
       },
@@ -1508,7 +1533,7 @@
       "tag": "AIC-123A",
       "loop": "C13",
       "unit": "R-101",
-      "measurement": "AI-123",
+      "measurement": "AT-123",
       "component": "A",
       "output": {
         "setpoint_of": "FIC-101"
@@ -1530,7 +1555,7 @@
       "tag": "AIC-123D",
       "loop": "C14",
       "unit": "R-101",
-      "measurement": "AI-123",
+      "measurement": "AT-123",
       "component": "D",
       "output": {
         "setpoint_of": "FIC-102"
@@ -1552,7 +1577,7 @@
       "tag": "AIC-123E",
       "loop": "C15",
       "unit": "R-101",
-      "measurement": "AI-123",
+      "measurement": "AT-123",
       "component": "E",
       "output": {
         "setpoint_of": "FIC-103"
@@ -1574,7 +1599,7 @@
       "tag": "TIC-118",
       "loop": "C16",
       "unit": "C-101",
-      "measurement": "TI-118",
+      "measurement": "TT-118",
       "output": {
         "setpoint_of": "FIC-119"
       },
@@ -1595,7 +1620,7 @@
       "tag": "LIC-108",
       "loop": "C17",
       "unit": "R-101",
-      "measurement": "LI-108",
+      "measurement": "LT-108",
       "output": {
         "setpoint_of": "FIC-104"
       },
@@ -1616,7 +1641,7 @@
       "tag": "TIC-109",
       "loop": "C18",
       "unit": "R-101",
-      "measurement": "TI-109",
+      "measurement": "TT-109",
       "output": {
         "setpoint_of": "TIC-121"
       },
@@ -1637,7 +1662,7 @@
       "tag": "AIC-129",
       "loop": "C19",
       "unit": "V-101",
-      "measurement": "AI-129",
+      "measurement": "AT-129",
       "component": "B",
       "output": {
         "setpoint_of": "FIC-110"
@@ -1659,7 +1684,7 @@
       "tag": "AIC-137",
       "loop": "C20",
       "unit": "C-101",
-      "measurement": "AI-137",
+      "measurement": "AT-137",
       "component": "E",
       "output": {
         "setpoint_of": "TIC-118"

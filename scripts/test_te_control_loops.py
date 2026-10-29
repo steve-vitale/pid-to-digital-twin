@@ -41,11 +41,11 @@ class TableFromSource(unittest.TestCase):
     def test_pairings_come_from_code_not_comments(self):
         # temain_mod.f labels CONTRL6 and CONTRL10 "Stripper Level Controller"; the code says otherwise.
         self.assertEqual((self.loops["C6"]["measurement"]["tag"], self.loops["C6"]["output"]["tag"]),
-                         ("FI-110", "FV-110"))
+                         ("FT-110", "FV-110"))
         self.assertEqual((self.loops["C10"]["measurement"]["tag"], self.loops["C10"]["output"]["tag"]),
-                         ("TI-121", "TV-121"))
+                         ("TT-121", "TV-121"))
         self.assertEqual((self.loops["C11"]["measurement"]["tag"], self.loops["C11"]["output"]["tag"]),
-                         ("FI-117", "FV-117"))
+                         ("FT-117", "FV-117"))
 
     def test_cascades_name_their_inner_loop(self):
         inner = {i: lp["output"]["inner_loop"] for i, lp in self.loops.items() if lp["output"]["kind"] == "setpoint"}
@@ -73,7 +73,7 @@ class TableFromSource(unittest.TestCase):
     def test_purge_override_is_on_separator_pressure(self):
         trips = [(o["condition"], o["forces_output_to"]) for o in self.table["overrides"] if not o["only_after_trip"]]
         self.assertEqual(trips, [(">= 2950", 100.0), ("<= 2300", 0.0)])
-        self.assertEqual({o["tag"] for o in self.table["overrides"]}, {"PI-113"})
+        self.assertEqual({o["tag"] for o in self.table["overrides"]}, {"PT-113"})
 
     def test_wrong_checksum_refused(self):
         bad = Path(tcl.ROOT / "out" / "_tmp_temain.f")
@@ -108,17 +108,17 @@ class DataCheck(unittest.TestCase):
 
 
 class AuditControls(unittest.TestCase):
-    """A two-loop table with matching numbers: C1 (FI-102 -> FV-102) and cascade C14 (AI-123 -> C1)."""
+    """A two-loop table with matching numbers: C1 (FT-102 -> FV-102) and cascade C14 (AT-123 -> C1)."""
 
     def setUp(self):
         self.table = {"loops": [
-            {"id": "C1", "runs": True, "measurement": {"tag": "FI-102"},
+            {"id": "C1", "runs": True, "measurement": {"tag": "FT-102"},
              "output": {"kind": "final_element", "tag": "FV-102"}},
-            {"id": "C14", "runs": True, "measurement": {"tag": "AI-123"},
+            {"id": "C14", "runs": True, "measurement": {"tag": "AT-123"},
              "output": {"kind": "setpoint", "inner_loop": "C1"}},
         ]}
-        self.symbols = {"m": sym("FI 102"), "c": sym("FIC 102"), "v": sym("FV 102", "valve"),
-                        "a": sym("AI 123"), "ac": sym("AIC 123")}
+        self.symbols = {"m": sym("FT 102"), "c": sym("FIC 102"), "v": sym("FV 102", "valve"),
+                        "a": sym("AT 123"), "ac": sym("AIC 123")}
         self.signals = [("m", "c"), ("c", "v"), ("a", "ac"), ("ac", "c")]
 
     def score(self, symbols=None, edges=(), signals=None):
@@ -156,13 +156,13 @@ class AuditControls(unittest.TestCase):
         self.assertFalse(self.score(symbols=symbols)["C1"]["controller"])
 
     def test_indicator_printed_with_hyphen_or_space(self):
-        symbols = dict(self.symbols, m=sym("FI-102"))
+        symbols = dict(self.symbols, m=sym("FT-102"))
         self.assertTrue(self.score(symbols=symbols)["C1"]["measured"])
 
 
     def test_cross_sheet_loop_needs_both_flags(self):
         # C1's valve on another sheet: controller -> outbound flag here, inbound flag -> valve there.
-        here = {"m": sym("FI 102"), "c": sym("FIC 102"),
+        here = {"m": sym("FT 102"), "c": sym("FIC 102"),
                 "fo": dict(sym("SIG / TO FV 102", "inlet/outlet"), signal_to="FV-102")}
         there = {"fi": dict(sym("SIG / FROM FIC 102", "inlet/outlet"), signal_from="FIC-102"),
                  "v": sym("FV 102", "valve")}

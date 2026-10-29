@@ -256,13 +256,13 @@ def main():
     marker = {m['tag']: m for m in scene['markers']}
     check('SC-212 (no replay source) is not connected', not marker['SC-212']['connected'])
     check('only SC-212 is not connected', [m['tag'] for m in scene['markers'] if not m['connected']] == ['SC-212'])
-    check('an open discrepancy stays visible (PI-116, unresolvable in the source) and a resolved one does not (TI-122)',
-          marker['PI-116']['disputed'] and not marker['TI-122']['disputed'] and marker['TI-122']['unit'] == 'E-101')
+    check('an open discrepancy stays visible (PT-116, unresolvable in the source) and a resolved one does not (TT-122)',
+          marker['PT-116']['disputed'] and not marker['TT-122']['disputed'] and marker['TT-122']['unit'] == 'E-101')
     check('display-card associations are reused for placement',
-          marker['FI-106']['attach'] == ['stream', 'S6'] and marker['PI-107']['attach'] == ['unit', 'R-101'])
-    check('tags without a display card say so', marker['TI-121']['placement_basis'].startswith('seed model unit ownership only'))
-    check('stream tags sit at their owning unit end of the pipe', marker['FI-101']['attach'] == ['stream', 'S1'] and
-          math.dist(marker['FI-101']['position'][:2], next(p for p in scene['pipes'] if p['id'] == 'S1')['points'][-1][:2]) < 0.6)
+          marker['FT-106']['attach'] == ['stream', 'S6'] and marker['PT-107']['attach'] == ['unit', 'R-101'])
+    check('tags without a display card say so', marker['TT-121']['placement_basis'].startswith('seed model unit ownership only'))
+    check('stream tags sit at their owning unit end of the pipe', marker['FT-101']['attach'] == ['stream', 'S1'] and
+          math.dist(marker['FT-101']['position'][:2], next(p for p in scene['pipes'] if p['id'] == 'S1')['points'][-1][:2]) < 0.6)
     check('deterministic: same inputs give an identical scene', b3.build_scene(model, layout, bands, alarms) == scene)
 
     # Directions: only an explicit stream direction (verified against the simulator source, out/te_topology_check.md)
@@ -283,7 +283,7 @@ def main():
     # Drift between the model and the shared layout fails before anything is drawn.
     for name, mutate in [
         ('layout for another model', lambda m, l: l.update(model_id='other')),
-        ('layout card for an unknown tag', lambda m, l: l['units']['R-101']['cards'].update({'XX-999': copy.deepcopy(l['units']['R-101']['cards']['PI-107'])})),
+        ('layout card for an unknown tag', lambda m, l: l['units']['R-101']['cards'].update({'XX-999': copy.deepcopy(l['units']['R-101']['cards']['PT-107'])})),
         ('layout unit missing from model', lambda m, l: m['units'].pop(1)),
         ('unit without a finite 2D position', lambda m, l: m['units'][0]['layout'].update(x=float('nan'))),
     ]:
@@ -302,15 +302,15 @@ def main():
           odd['shape'] == 'box' and 'unknown kind' in odd['geometry_status'])
 
     # Replay states: synthetic rows only; nothing is inferred for missing or nonfinite values.
-    columns = {'PI-107': 0, 'FI-101': 1}
+    columns = {'PT-107': 0, 'FT-101': 1}
     rows = [[2700.0, 0.25], [2900.0, 0.0], [float('nan'), 0.25]]
-    states = b3.replay_states(['PI-107', 'FI-101', 'SC-212'], rows, columns, bands, alarms, [0, 1, 2, 9], 0)
-    check('in-band values are normal', states[0]['states'] == {'PI-107': 'normal', 'FI-101': 'normal', 'SC-212': 'not_connected'})
+    states = b3.replay_states(['PT-107', 'FT-101', 'SC-212'], rows, columns, bands, alarms, [0, 1, 2, 9], 0)
+    check('in-band values are normal', states[0]['states'] == {'PT-107': 'normal', 'FT-101': 'normal', 'SC-212': 'not_connected'})
     check('published setpoint makes alarm; out-of-band makes outside_band (a display aid, not an alarm)',
-          states[1]['states']['PI-107'] == 'alarm' and states[1]['states']['FI-101'] == 'outside_band')
-    check('nonfinite reading is unknown, never normal', states[2]['states']['PI-107'] == 'unknown')
+          states[1]['states']['PT-107'] == 'alarm' and states[1]['states']['FT-101'] == 'outside_band')
+    check('nonfinite reading is unknown, never normal', states[2]['states']['PT-107'] == 'unknown')
     check('missing sample is unknown for every connected tag',
-          states[3]['states']['PI-107'] == 'unknown' and states[3]['states']['SC-212'] == 'not_connected')
+          states[3]['states']['PT-107'] == 'unknown' and states[3]['states']['SC-212'] == 'not_connected')
     check('minutes are measured from the fault start (3 min per sample)', [s['minutes_after_fault'] for s in states] == [0, 3, 6, 27])
     replay = {'rows': [[0.0] * 52 for _ in range(3)], 'columns': {'SC-212': 0}}
     with_states = b3.build_scene(model, layout, bands, alarms, replay, [0, 1, 2], 1)
@@ -368,11 +368,11 @@ def main():
           not any(l['kind'] == 'emphasis' for l in toured['labels']))
 
     # Geometry regressions found by the render verifier (scripts/verify_3d_render.py).
-    check('no marker sits inside equipment (429d7a7 put FI-106 and AI-123 inside the reactor)',
+    check('no marker sits inside equipment (429d7a7 put FT-106 and AT-123 inside the reactor)',
           not any(v3.inside_any(m['position'], scene) for m in scene['markers']))
     legacy = b3.build_scene(model, layout, bands, alarms, legacy_markers=True)
     check('legacy placement still reproduces the inside-the-reactor defect (keeps the before/after honest)',
-          sorted(m['tag'] for m in legacy['markers'] if v3.inside_any(m['position'], legacy)) == ['AI-123', 'FI-106'])
+          sorted(m['tag'] for m in legacy['markers'] if v3.inside_any(m['position'], legacy)) == ['AT-123', 'FT-106'])
     rep_geo = v3.Report()
     v3.check_geometry(rep_geo, scene, model)
     check('pipe ends derived from geometry reproduce the stream topology (429d7a7 left S4/S11 off the stripper)',
@@ -399,14 +399,14 @@ def main():
                          only=[n for n in b3.tour_scene(scene, model, layout, bands, alarms, None, hazards,
                                                         purposes=purposes)['all_shot_names']])
     stops = {s['unit']: s for s in real['tour_script']['stops']}
-    lo, hi = ot.fmt(bands['PI-107']['lo']), ot.fmt(bands['PI-107']['hi'])
-    check('reactor narration quotes the PI-107 normal band and high alarm from the data files',
-          f"PI-107, pressure: normally {lo} to {hi} kPa g, with a high alarm at 2,895" in stops['R-101']['narration'])
+    lo, hi = ot.fmt(bands['PT-107']['lo']), ot.fmt(bands['PT-107']['hi'])
+    check('reactor narration quotes the PT-107 normal band and high alarm from the data files',
+          f"PT-107, pressure: normally {lo} to {hi} kPa g, with a high alarm at 2,895" in stops['R-101']['narration'])
     check('each stop narration is short (<= 70 words, about 20-30 s)', all(s['words'] <= 70 for s in stops.values()))
     reactor_shot = next(x for x in real['shots'] if x['name'] == '02_r-101_normal')
     fault_shots = [x for x in real['shots'] if x['name'].startswith(('20_', '21_', '22_'))]
-    check('normal stop: PI-107 pill shows the operating high alarm only, no shutdown limit',
-          'high alarm 2,895' in reactor_shot['bodies']['tag:PI-107'] and 'shutdown' not in json.dumps(reactor_shot['bodies']))
+    check('normal stop: PT-107 pill shows the operating high alarm only, no shutdown limit',
+          'high alarm 2,895' in reactor_shot['bodies']['tag:PT-107'] and 'shutdown' not in json.dumps(reactor_shot['bodies']))
     check('shutdown limits appear only on fault stills, never on normal stills',
           all('shutdown' not in json.dumps(x['bodies']) for x in real['shots'] if x not in fault_shots))
     crit = real['tour_script']['emphasis'].get('R-101', [])
@@ -455,16 +455,16 @@ def main():
     check('SRT cues never overlap, and the first one says the voice is synthetic',
           all(b[0] >= a[1] - 1e-6 for a, b in zip(spans, spans[1:])) and 'synthetic voice' in cues[0])
     check('spoken text spells out units and tag dashes',
-          ot.spoken('PI-107 is 2897 kPa g at +294 min, TV-121 37.7%') ==
-          'P I 107 is 2897 kilopascals gauge at plus 294 min, T V 121 37.7 percent')
-    prof = ot.fault_profile(['PI-107', 'FI-101'], {'rows': [[2700.0, 0.25], [2700.0, 0.0], [2900.0, 0.0]],
-                                                   'columns': {'PI-107': 0, 'FI-101': 1}}, bands, alarms, 0, 2)
+          ot.spoken('PT-107 is 2897 kPa g at +294 min, TV-121 37.7%') ==
+          'P T 107 is 2897 kilopascals gauge at plus 294 min, T V 121 37.7 percent')
+    prof = ot.fault_profile(['PT-107', 'FT-101'], {'rows': [[2700.0, 0.25], [2700.0, 0.0], [2900.0, 0.0]],
+                                                   'columns': {'PT-107': 0, 'FT-101': 1}}, bands, alarms, 0, 2)
     check('fault profile: first band exit and minutes come from the replay rows',
-          prof['FI-101']['first_off_sample'] == 1 and prof['FI-101']['minutes_after_fault'] == 3 and
-          prof['PI-107']['state_at_alarm'] == 'alarm')
+          prof['FT-101']['first_off_sample'] == 1 and prof['FT-101']['minutes_after_fault'] == 3 and
+          prof['PT-107']['state_at_alarm'] == 'alarm')
     emph = ot.emphasis(scene, alarms, prof)
     check('first-warning emphasis goes to the unit of the earliest band exit',
-          any(e['style'] == 'first_warning' and 'FI-101' in e['reason'] for e in emph.get('U-100', [])))
+          any(e['style'] == 'first_warning' and 'FT-101' in e['reason'] for e in emph.get('U-100', [])))
     leg = b3.tour_scene(legacy, model, layout, bands, alarms, None, hazards, label_mode='legacy')
     check('legacy mode shows every label in every still with the old cameras (before/after reproduction)',
           all(len(s['visible']) == len([x for x in leg['labels'] if x['kind'] != 'emphasis']) for s in leg['shots']) and

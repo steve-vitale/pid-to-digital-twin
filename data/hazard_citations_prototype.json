@@ -102,7 +102,7 @@
    "twin_units": [
     "R-101"
    ],
-   "twin_link": "Reactor pressure PI-107 and temperature TI-109 (published shutdown limits), cooling water valve TV-121, outlet TI-121",
+   "twin_link": "Reactor pressure PT-107 and temperature TT-109 (published shutdown limits), cooling water valve TV-121, outlet TT-121",
    "citations": [
     {
      "id": "csb-kuraray-pasadena",
@@ -164,13 +164,13 @@
      "caption": "Loss of cooling led to decomposition and fire at Arkema Crosby in 2017 (CSB)."
     }
    ],
-   "aptness_note": "Checked for a gas-phase exothermic reactor case: the 972-record corpus has none. Kuraray (a reactor taken above its pressure limit; the CSB asked for that limit to be made clear in operator training and the control interface) is the closest fit to the PI-107 alarm and leads; Bayer CropScience is kept, phrased generally, as a runaway-reaction example."
+   "aptness_note": "Checked for a gas-phase exothermic reactor case: the 972-record corpus has none. Kuraray (a reactor taken above its pressure limit; the CSB asked for that limit to be made clear in operator training and the control interface) is the closest fit to the PT-107 alarm and leads; Bayer CropScience is kept, phrased generally, as a runaway-reaction example."
   },
   "condenser": {
    "twin_units": [
     "E-101"
    ],
-   "twin_link": "Product condenser with cooling water valve FV-117 and outlet temperature TI-122 (ownership disputed)",
+   "twin_link": "Product condenser with cooling water valve FV-117 and outlet temperature TT-122 (ownership disputed)",
    "citations": [
     {
      "id": "csb-tesoro-anacortes",
@@ -243,7 +243,7 @@
    "twin_units": [
     "V-101"
    ],
-   "twin_link": "Vapor/liquid separator: level LI-112 and liquid valve LV-112 (liquid carryover into the recycle compressor), pressure PI-113",
+   "twin_link": "Vapor/liquid separator: level LT-112 and liquid valve LV-112 (liquid carryover into the recycle compressor), pressure PT-113",
    "citations": [
     {
      "id": "csb-cuisine-solutions",
@@ -300,7 +300,7 @@
    "twin_units": [
     "K-101"
    ],
-   "twin_link": "Recycle compressor: work JI-120, recycle valve FV-105, purge FV-110 and purge flow FI-110",
+   "twin_link": "Recycle compressor: work JT-120, recycle valve FV-105, purge FV-110 and purge flow FT-110",
    "note": "No CSB investigation in this corpus centres on a compressor; the three citations are EPA RMP accident records.",
    "citations": [
     {
@@ -360,7 +360,7 @@
    "twin_units": [
     "C-101"
    ],
-   "twin_link": "Product stripper: level LI-115 and product valve LV-115, steam FI-119 / FV-119, pressure PI-116",
+   "twin_link": "Product stripper: level LT-115 and product valve LV-115, steam FT-119 / FV-119, pressure PT-116",
    "citations": [
     {
      "id": "csb-bp-texas-city",
@@ -403,7 +403,7 @@
      "matched_terms": [
       "reboiler"
      ],
-     "hazard": "Heat went into a column reboiler that was isolated from its relief path; it ruptured. Two workers died and 167 were injured. The TE stripper is heated with steam (FI-119), so blocked-in heating is the shared mechanism.",
+     "hazard": "Heat went into a column reboiler that was isolated from its relief path; it ruptured. Two workers died and 167 were injured. The TE stripper is heated with steam (FT-119), so blocked-in heating is the shared mechanism.",
      "caption": "Heat into a blocked-in reboiler killed two at Williams Geismar in 2013 (CSB)."
     }
    ]

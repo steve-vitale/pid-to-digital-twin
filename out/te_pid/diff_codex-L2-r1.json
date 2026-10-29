@@ -62,10 +62,13 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-101",
+   "tag": "FT-101",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FI-101, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN002",
@@ -77,10 +80,13 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-102",
+   "tag": "FT-102",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FI-102, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN004",
@@ -92,10 +98,13 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-103",
+   "tag": "FT-103",
    "status": "found, fields differ",
    "problems": [
     "unit R-101 (model: U-100)"
+   ],
+   "notes": [
+    "read as FI-103, its revision-A tag"
    ],
    "extracted": {
     "id": "S101-IN006",
@@ -107,44 +116,47 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-104",
+   "tag": "FT-104",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "FI-105",
+   "tag": "FT-105",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "FI-106",
+   "tag": "FT-106",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "PI-107",
+   "tag": "PT-107",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "LI-108",
+   "tag": "LT-108",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "TI-109",
+   "tag": "TT-109",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "FI-110",
+   "tag": "FT-110",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "TI-111",
+   "tag": "TT-111",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TI-111, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN009",
     "tag": "TI 111",
@@ -155,9 +167,12 @@
   },
   {
    "kind": "instrument",
-   "tag": "LI-112",
+   "tag": "LT-112",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LI-112, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN010",
     "tag": "LI 112",
@@ -168,9 +183,12 @@
   },
   {
    "kind": "instrument",
-   "tag": "PI-113",
+   "tag": "PT-113",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as PI-113, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN011",
     "tag": "PI 113",
@@ -181,14 +199,17 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-114",
+   "tag": "FT-114",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "LI-115",
+   "tag": "LT-115",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as LI-115, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN003",
     "tag": "LI 115",
@@ -199,9 +220,12 @@
   },
   {
    "kind": "instrument",
-   "tag": "PI-116",
+   "tag": "PT-116",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as PI-116, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN001",
     "tag": "PI 116",
@@ -212,14 +236,17 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-117",
+   "tag": "FT-117",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "TI-118",
+   "tag": "TT-118",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TI-118, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN002",
     "tag": "TI 118",
@@ -230,19 +257,22 @@
   },
   {
    "kind": "instrument",
-   "tag": "FI-119",
+   "tag": "FT-119",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "JI-120",
+   "tag": "JT-120",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "TI-121",
+   "tag": "TT-121",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TI-121, its revision-A tag"
+   ],
    "extracted": {
     "id": "S101-IN014",
     "tag": "TI 121",
@@ -253,9 +283,12 @@
   },
   {
    "kind": "instrument",
-   "tag": "TI-122",
+   "tag": "TT-122",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as TI-122, its revision-A tag"
+   ],
    "extracted": {
     "id": "S102-IN001",
     "tag": "TI 122",
@@ -266,19 +299,22 @@
   },
   {
    "kind": "instrument",
-   "tag": "AI-123",
+   "tag": "AT-123",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "AI-129",
+   "tag": "AT-129",
    "status": "missing"
   },
   {
    "kind": "instrument",
-   "tag": "AI-137",
+   "tag": "AT-137",
    "status": "ok",
    "problems": [],
+   "notes": [
+    "read as AI-137, its revision-A tag"
+   ],
    "extracted": {
     "id": "S103-IN009",
     "tag": "AI 137",
@@ -559,22 +595,22 @@
  },
  "corrections": [
   "RECLASS U-100: extracted as line item 'general', the model has a feed_header unit",
-  "SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)",
-  "SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)",
-  "ADD FI-104 (A and C feed flow): tag not read on the drawings",
-  "ADD FI-105 (Recycle flow): tag not read on the drawings",
-  "ADD FI-106 (Reactor feed rate): tag not read on the drawings",
-  "ADD PI-107 (Reactor pressure): tag not read on the drawings",
-  "ADD LI-108 (Reactor level): tag not read on the drawings",
-  "ADD TI-109 (Reactor temperature): tag not read on the drawings",
-  "ADD FI-110 (Purge rate): tag not read on the drawings",
-  "ADD FI-114 (Separator underflow): tag not read on the drawings",
-  "ADD FI-117 (Stripper underflow (product)): tag not read on the drawings",
-  "ADD FI-119 (Stripper steam flow): tag not read on the drawings",
-  "ADD JI-120 (Compressor work): tag not read on the drawings",
-  "ADD AI-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings",
-  "ADD AI-129 (Purge gas analyzer (components A-H)): tag not read on the drawings",
+  "SET unit of FT-101: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FT-102: R-101 -> U-100 (converter rule: connection_path)",
+  "SET unit of FT-103: R-101 -> U-100 (converter rule: connection_path)",
+  "ADD FT-104 (A and C feed flow): tag not read on the drawings",
+  "ADD FT-105 (Recycle flow): tag not read on the drawings",
+  "ADD FT-106 (Reactor feed rate): tag not read on the drawings",
+  "ADD PT-107 (Reactor pressure): tag not read on the drawings",
+  "ADD LT-108 (Reactor level): tag not read on the drawings",
+  "ADD TT-109 (Reactor temperature): tag not read on the drawings",
+  "ADD FT-110 (Purge rate): tag not read on the drawings",
+  "ADD FT-114 (Separator underflow): tag not read on the drawings",
+  "ADD FT-117 (Stripper underflow (product)): tag not read on the drawings",
+  "ADD FT-119 (Stripper steam flow): tag not read on the drawings",
+  "ADD JT-120 (Compressor work): tag not read on the drawings",
+  "ADD AT-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings",
+  "ADD AT-129 (Purge gas analyzer (components A-H)): tag not read on the drawings",
   "SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)",
   "SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)",
   "ADD FV-101 (A feed flow valve): tag not read on the drawings",

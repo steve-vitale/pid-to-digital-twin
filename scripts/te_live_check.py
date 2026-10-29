@@ -4,7 +4,8 @@ This is the I/O-list step of the chain, done against the repo's own OPC UA repla
 te_sim_server.py, the Braatz group's recorded TE runs) instead of a plant historian. It starts the replay server on
 a private port, browses the points it serves, matches each extracted instrument tag to a point by tag only
 (upper-cased, separators dropped: "FI 101" = "FI-101"), reads every matched point twice a few samples apart, and
-reports which values moved. Nothing is written to the server (it refuses writes anyway) and no gateway is involved:
+reports which values moved. A tag read off an older drawing revision (the recorded runs read revision A) is matched
+through the model's `former_tag` and reported as such: the replay serves current tags. Nothing is written to the server (it refuses writes anyway) and no gateway is involved:
 importing the extracted twin's tags.json into Ignition is a separate step that was not repeated here.
 
 Needs the TE data (python scripts/fetch_te_data.py) and asyncua.
@@ -22,6 +23,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+MODEL = ROOT / "data" / "te_process_model.json"
 NS = "urn:pid-digital-twin:te-sim"
 
 
@@ -68,10 +70,17 @@ def main():
         server.terminate()
         server.wait(timeout=10)
     by_norm = {norm(p): p for p in first}
+    model = json.loads(MODEL.read_text(encoding="utf-8"))
+    renamed = {norm(i["former_tag"]): i["tag"] for i in model["instruments"] + model["final_elements"]
+               if i.get("former_tag")}
     rows = []
     for x in twin["instruments"]:
         point = by_norm.get(norm(x.get("tag")))
-        rows.append({"id": x["id"], "tag": x.get("tag"), "point": point,
+        via = None
+        if point is None and norm(x.get("tag")) in renamed:
+            via = renamed[norm(x.get("tag"))]
+            point = by_norm.get(norm(via))
+        rows.append({"id": x["id"], "tag": x.get("tag"), "point": point, "via_former_tag": via is not None and point is not None,
                      "first": first.get(point), "second": second.get(point),
                      "moved": point is not None and first[point] != second[point]})
     mapped = [r for r in rows if r["point"]]
@@ -87,12 +96,15 @@ def main():
     md = [f"# Live values for the extracted twin ({name})", "",
           f"`scripts/te_live_check.py` against the TE replay server (normal run), reads {a.wait:g} s apart.", "",
           f"- Extracted instrument symbols (bubbles, including valve tags): **{len(rows)}**",
-          f"- Matched by tag to a replay point: **{len(mapped)}**; value moved between reads: **{len(moved)}**",
+          f"- Matched by tag to a replay point: **{len(mapped)}** ({sum(r['via_former_tag'] for r in mapped)} through "
+          "the tag's earlier name, `former_tag`: the drawings were read before a retag); value moved between reads: "
+          f"**{len(moved)}**",
           f"- Replay points with no matching tag on the drawings: {', '.join(served_unmatched) or 'none'}", "",
           "| Extracted tag | Replay point | First read | Second read | Moved |", "|---|---|---|---|---|"]
     for r in rows:
         f = lambda v: "" if v is None else f"{v:.4g}"  # noqa: E731
-        md.append(f"| {r['tag']} | {r['point'] or '(no point)'} | {f(r['first'])} | {f(r['second'])} | "
+        pt = (r['point'] + (" (earlier name)" if r['via_former_tag'] else "")) if r['point'] else "(no point)"
+        md.append(f"| {r['tag']} | {pt} | {f(r['first'])} | {f(r['second'])} | "
                   f"{'yes' if r['moved'] else 'no'} |")
     md.append("")
     (out / f"live_{name}.md").write_text("\n".join(md), encoding="utf-8")

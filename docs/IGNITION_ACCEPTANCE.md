@@ -47,16 +47,16 @@ now hidden without Good data, also with a test. The run below is of the fixed co
 | Quality honesty (V4) | PASS: 76 fed values Good; SC-212 and 334 placeholders Bad; 0 false-good |
 | Liveness (V5), plausibility (V6) | PASS: 76 of 76 changed; 52 inside range |
 | Read-only (V7) | PASS: two writes to twin tags refused (BadUserAccessDenied) |
-| Alarm pipeline (V8), recorded fault 6 | PASS: A feed flagged first; PI-107 alarm active 0.5 s after crossing 2,895 kPa |
+| Alarm pipeline (V8), recorded fault 6 | PASS: A feed flagged first; PT-107 alarm active 0.5 s after crossing 2,895 kPa |
 | Direct load and reload of all 24 routes | PASS 24/24 |
 | Every navigation target clicked | PASS 284/284 (277 control-room targets plus 7 on `/m`); Back after each 284/284; Back/Forward chain 6/6; repeated clicks; 0 console errors |
 | **Data source lost: TE replay stopped** | PASS: 52 TE values went Uncertain, `ReplayValuesNotGood` read 52, the "Data source lost: TE replay" diagnostic alarm went active and every header read DATA SOURCE LOST |
 | **Data source recovered** | PASS: 52 Good again and the diagnostic alarm cleared within about 25 s of restarting the replay |
 | **Data source lost: OPEN100 demo points stopped** | PASS: 24 mapped values went Uncertain, the second diagnostic alarm fired, then cleared within about 25 s of restart |
 | **Header count = active alarms in the table** | PASS with a timing caveat: sampled every 3 s, 40/40 matches through the fault (0, 1, then 2 active process alarms) and 29/30 through a replay loss and recovery. The one mismatch, and one capture during the fault, came within about 2 s of an alarm changing state: the header's count polls every second, the table refreshes every two |
-| **Process alarm active when the data is lost** | Observed, unchanged: PI-107's high-pressure alarm stayed active on its last value while PI-107 read UNKNOWN and DATA SOURCE LOST was raised. Header and table agreed (1 process + 1 diagnostic = 2 active) |
+| **Process alarm active when the data is lost** | Observed, unchanged: PT-107's high-pressure alarm stayed active on its last value while PT-107 read UNKNOWN and DATA SOURCE LOST was raised. Header and table agreed (1 process + 1 diagnostic = 2 active) |
 | **390 px narrow overview (`/m`)** | PASS: 390 px wide with no horizontal scroll; alarm count, data source and active alarm list first, then the six units with their key values; UNKNOWN on grey with the replay stopped; DATA SOURCE LOST and the diagnostic alarm row at the top |
-| Fault replay on screen | PASS: amber values before the alarm, PI-107 red at the alarm, alarm table populated |
+| Fault replay on screen | PASS: amber values before the alarm, PT-107 red at the alarm, alarm table populated |
 | Desktop layout, 1600 × 930 | PASS; the control-room screens are unchanged in layout. At 390 px they still scroll in both directions |
 
 Screenshots: [narrow, normal](screenshots/native-narrow-m-normal.png),

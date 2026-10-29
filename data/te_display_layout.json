@@ -6,34 +6,34 @@
     "url": "https://sites.me.ucsb.edu/~ceweb/faculty/seborg/pdfs/Singhal_JPC.pdf",
     "scope": "Published control schematic supports coarse process regions only; not original plant P&ID or exact taps. Unit ownership, stream endpoints and directions are verified against the simulator source (out/te_topology_check.md); positions on screen remain approximate.",
     "discrepancies": [
-      "Resolved 2026-10-13: TI-122 is the condenser cooling-water outlet (same circuit as XMV 11; the source labels it 'separator' because the simulator books condenser duty in the separator energy balance). Stays on E-101.",
-      "Corrected 2026-10-13: the purge S9 leaves the separator vapour, not the compressor (purge flow is driven by separator pressure in teprob.f). S9, FI-110, FV-110 and AI-129 moved from K-101 to V-101.",
-      "Unresolvable in the source: PI-116 is documented as stripper pressure but computed from the feed-header pressure. Kept on C-101 and flagged."
+      "Resolved 2026-10-13: TT-122 is the condenser cooling-water outlet (same circuit as XMV 11; the source labels it 'separator' because the simulator books condenser duty in the separator energy balance). Stays on E-101.",
+      "Corrected 2026-10-13: the purge S9 leaves the separator vapour, not the compressor (purge flow is driven by separator pressure in teprob.f). S9, FT-110, FV-110 and AT-129 moved from K-101 to V-101.",
+      "Unresolvable in the source: PT-116 is documented as stripper pressure but computed from the feed-header pressure. Kept on C-101 and flagged."
     ]
   },
   "labels": {
-    "FI-101": "A feed flow",
-    "FI-102": "D feed flow",
-    "FI-103": "E feed flow",
-    "FI-104": "A + C feed flow",
-    "FI-105": "Recycle flow",
-    "FI-106": "Feed flow",
-    "PI-107": "Pressure",
-    "LI-108": "Level",
-    "TI-109": "Temperature",
-    "FI-110": "Purge flow",
-    "TI-111": "Temperature",
-    "LI-112": "Level",
-    "PI-113": "Pressure",
-    "FI-114": "Liquid flow",
-    "LI-115": "Level",
-    "PI-116": "Pressure (see note)",
-    "FI-117": "Product flow",
-    "TI-118": "Temperature",
-    "FI-119": "Steam flow",
-    "JI-120": "Compressor work",
-    "TI-121": "Cooling-water outlet T",
-    "TI-122": "Condenser CW outlet T",
+    "FT-101": "A feed flow",
+    "FT-102": "D feed flow",
+    "FT-103": "E feed flow",
+    "FT-104": "A + C feed flow",
+    "FT-105": "Recycle flow",
+    "FT-106": "Feed flow",
+    "PT-107": "Pressure",
+    "LT-108": "Level",
+    "TT-109": "Temperature",
+    "FT-110": "Purge flow",
+    "TT-111": "Temperature",
+    "LT-112": "Level",
+    "PT-113": "Pressure",
+    "FT-114": "Liquid flow",
+    "LT-115": "Level",
+    "PT-116": "Pressure (see note)",
+    "FT-117": "Product flow",
+    "TT-118": "Temperature",
+    "FT-119": "Steam flow",
+    "JT-120": "Compressor work",
+    "TT-121": "Cooling-water outlet T",
+    "TT-122": "Condenser CW outlet T",
     "FV-102": "D feed valve output",
     "FV-103": "E feed valve output",
     "FV-101": "A feed valve output",
@@ -67,7 +67,7 @@
         ]
       },
       "cards": {
-        "FI-106": {
+        "FT-106": {
           "box": [
             380,
             275
@@ -83,7 +83,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "PI-107": {
+        "PT-107": {
           "box": [
             460,
             175
@@ -99,7 +99,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "TI-109": {
+        "TT-109": {
           "box": [
             970,
             300
@@ -115,7 +115,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LI-108": {
+        "LT-108": {
           "box": [
             970,
             375
@@ -133,7 +133,7 @@
         }
       },
       "analyzer": {
-        "parent": "AI-123",
+        "parent": "AT-123",
         "x": 160,
         "y": 430,
         "anchor_x": 300,
@@ -145,12 +145,12 @@
         1030,
         475,
         [
-          "TI-121",
+          "TT-121",
           "TV-121"
         ]
       ],
       "kind": "reactor",
-      "level": "LI-108",
+      "level": "LT-108",
       "table_top": 720,
       "unavailable": [
         {
@@ -211,7 +211,7 @@
         ]
       },
       "cards": {
-        "FI-101": {
+        "FT-101": {
           "box": [
             160,
             180
@@ -243,7 +243,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-102": {
+        "FT-102": {
           "box": [
             160,
             280
@@ -275,7 +275,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-103": {
+        "FT-103": {
           "box": [
             160,
             380
@@ -307,7 +307,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-105": {
+        "FT-105": {
           "box": [
             1000,
             220
@@ -323,7 +323,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-106": {
+        "FT-106": {
           "box": [
             1220,
             305
@@ -343,7 +343,7 @@
       "level": null,
       "table_top": 720,
       "analyzer": {
-        "parent": "AI-123",
+        "parent": "AT-123",
         "x": 990,
         "y": 470,
         "anchor_x": 1150,
@@ -379,12 +379,12 @@
         850,
         475,
         [
-          "TI-122",
+          "TT-122",
           "FV-117"
         ]
       ],
       "notes": [
-        "TI-122 is the condenser cooling-water outlet temperature: same circuit as FV-117 (XMV 11). The source's 'separator' label reflects that the simulator books condenser duty in the separator energy balance."
+        "TT-122 is the condenser cooling-water outlet temperature: same circuit as FV-117 (XMV 11). The source's 'separator' label reflects that the simulator books condenser duty in the separator energy balance."
       ]
     },
     "V-101": {
@@ -418,7 +418,7 @@
         ]
       },
       "cards": {
-        "PI-113": {
+        "PT-113": {
           "box": [
             980,
             230
@@ -434,7 +434,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "TI-111": {
+        "TT-111": {
           "box": [
             470,
             385
@@ -450,7 +450,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LI-112": {
+        "LT-112": {
           "box": [
             980,
             360
@@ -466,7 +466,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-114": {
+        "FT-114": {
           "box": [
             1010,
             470
@@ -498,7 +498,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-110": {
+        "FT-110": {
           "box": [
             90,
             215
@@ -531,13 +531,13 @@
           }
         }
       },
-      "level": "LI-112",
+      "level": "LT-112",
       "table_top": 800,
       "notes": [
         "S9 purge leaves the separator vapour (corrected 2026-10-13 against the simulator source; it was drawn on the compressor). Exact tap position is not in the source."
       ],
       "analyzer": {
-        "parent": "AI-129",
+        "parent": "AT-129",
         "x": 40,
         "y": 470,
         "anchor_x": 80,
@@ -568,7 +568,7 @@
         ]
       },
       "cards": {
-        "FI-105": {
+        "FT-105": {
           "box": [
             370,
             235
@@ -584,7 +584,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "JI-120": {
+        "JT-120": {
           "box": [
             685,
             260
@@ -646,7 +646,7 @@
         ]
       },
       "cards": {
-        "PI-116": {
+        "PT-116": {
           "box": [
             970,
             180
@@ -662,7 +662,7 @@
             "evidence": "unit ownership unresolvable in the simulator source (see out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "TI-118": {
+        "TT-118": {
           "box": [
             440,
             325
@@ -678,7 +678,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "LI-115": {
+        "LT-115": {
           "box": [
             970,
             425
@@ -694,7 +694,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-104": {
+        "FT-104": {
           "box": [
             1030,
             290
@@ -726,7 +726,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-114": {
+        "FT-114": {
           "box": [
             100,
             200
@@ -758,7 +758,7 @@
             "evidence": "unit/stream verified against the simulator source (out/te_topology_check.md); position approximate from the published schematic"
           }
         },
-        "FI-117": {
+        "FT-117": {
           "box": [
             1010,
             510
@@ -791,10 +791,10 @@
           }
         }
       },
-      "level": "LI-115",
+      "level": "LT-115",
       "table_top": 830,
       "analyzer": {
-        "parent": "AI-137",
+        "parent": "AT-137",
         "x": 70,
         "y": 470,
         "anchor_x": 880,
@@ -807,7 +807,7 @@
         70,
         670,
         [
-          "FI-119",
+          "FT-119",
           "FV-119"
         ]
       ],
@@ -818,7 +818,7 @@
         ]
       },
       "notes": [
-        "PI-116 is documented as stripper pressure but the simulator computes it from the feed-header pressure. Ownership unresolved; flagged for a process expert."
+        "PT-116 is documented as stripper pressure but the simulator computes it from the feed-header pressure. Ownership unresolved; flagged for a process expert."
       ]
     }
   },

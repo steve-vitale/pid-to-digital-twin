@@ -228,14 +228,14 @@ Detection rate is the share of post-onset samples flagged, the per-sample measur
 - **Slow and random faults are late.** Fault 21 (stream 4 valve stuck) is flagged after 26.5 hours, faults 10, 18 and
   20 after 4 to 4.5 hours. K = 6 buys the zero false alarms with lateness.
 - Per fault, the first tags to leave their band are in the results file. They are what an operator would see turn
-  amber first, and they are mostly the obvious ones (FI-101 for the A feed loss, TI-109 and TV-210 for the reactor
+  amber first, and they are mostly the obvious ones (FT-101 for the A feed loss, TT-109 and TV-210 for the reactor
   cooling-water faults).
 
 **The PCA T² baseline is reimplemented, not cited.** Standardised on d00.dat, components kept by parallel analysis
 (12), 99% threshold from the F distribution, the same 3-sample rule. It "detects" 19, but its detections of faults
 3, 4 and 15 come at 18 to 34 hours with 2–8% of samples flagged, close to its own 1% normal flag rate: about 0.9
 chance alarm events are expected in a 40-hour window, so those three are probably chance. Counting them out, PCA T²
-detects 16, the bands 17. On fault 4 the difference is real: the bands catch it in 6 minutes through TI-109, PCA T²
+detects 16, the bands 17. On fault 4 the difference is real: the bands catch it in 6 minutes through TT-109, PCA T²
 does not. PCA T² is faster on fault 10 and catches more of faults 10 and 16 per sample. Published PCA results on
 this data set vary with the number of components, the threshold and the detection rule, so no literature numbers
 are quoted here; I could not verify a table's exact values from a primary source in this pass.
@@ -330,7 +330,7 @@ Means over runs, min–max in brackets where runs differed; 95% t-intervals are 
   held tags better (95%) but lost connections (0.91); whether its boxes or the tracer caused that was not isolated.
   In round 4 on OPEN100, connections collapsed at L2; GPT's held here until L3, on sparser and cleaner geometry.
 - **The dangerous misread is a real tag.** Claude at L3 read the three feed valves FV 203, FV 201 and FV 202 as FV 201,
-  FV 202 and FV 203 in one run, and TI 122 as TI 121 in another. Each is a real tag, so an I/O list would bind it to
+  FV 202 and FV 203 in one run, and TT 122 as TT 121 in another. Each is a real tag, so an I/O list would bind it to
   the wrong live point. A tag-only diff and the live check both pass these (all three valves "matched" and "moved",
   `out/te_pid/live_claude-L3-r1.md`); only comparing by position catches them. On a real plant that is what a
   walkdown or a loop check is for.
@@ -344,7 +344,7 @@ them appear even when the key itself is fed in as a perfect extraction (`diff_ke
 converter and the model's conventions, not from the reading:
 - the feed header U-100 is drawn as an in-line mixer, and `build_twin.py` treats in-line symbols as line items, not
   units;
-- so the six feed-line items (FI-101–103, FV-201–203) get the reactor as their owning unit instead of U-100;
+- so the six feed-line items (FT-101–103, FV-201–203) get the reactor as their owning unit instead of U-100;
 - two extra unit links (C-101–K-101, U-100–V-101) come from lines that meet at the feed header and at the compressor
   bypass. On the drawing they share pipe; the model's stream list doesn't join them.
 

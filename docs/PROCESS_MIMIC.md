@@ -21,13 +21,13 @@ the source model has no utility stream endpoints, so no utility piping or direct
 
 ## Deliberate Overview selection
 
-- Feed: FI-101/102/103 show all three feeds actually owned by U-100. FI-104 belongs to C-101/S4 and stays there.
-- Reactor: PI-107/TI-109 show constrained condition, LI-108 inventory, FI-106 throughput. TI-121/TV-121 cooling context is on detail. SC-212 is explicitly unavailable on detail.
-- Condenser: only TI-122 (cooling-water outlet) and FV-117 are mapped, the two tags the source assigns to it. No process pressure,
+- Feed: FT-101/102/103 show all three feeds actually owned by U-100. FT-104 belongs to C-101/S4 and stays there.
+- Reactor: PT-107/TT-109 show constrained condition, LT-108 inventory, FT-106 throughput. TT-121/TV-121 cooling context is on detail. SC-212 is explicitly unavailable on detail.
+- Condenser: only TT-122 (cooling-water outlet) and FV-117 are mapped, the two tags the source assigns to it. No process pressure,
   temperature or level is substituted for the missing condenser instrumentation.
-- Separator: PI-113/TI-111 condition, LI-112 inventory, FI-114 throughput, FI-110 purge; LV-112, FV-110 and the purge analyzer are on detail.
-- Compressor: FI-105 recycle, JI-120 work and FV-105 recorded output give recycle context.
-- Stripper: PI-116/TI-118 condition, LI-115 inventory, FI-117 product; FI-104 feed and FI-119 steam input are on detail.
+- Separator: PT-113/TT-111 condition, LT-112 inventory, FT-114 throughput, FT-110 purge; LV-112, FV-110 and the purge analyzer are on detail.
+- Compressor: FT-105 recycle, JT-120 work and FV-105 recorded output give recycle context.
+- Stripper: PT-116/TT-118 condition, LT-115 inventory, FT-117 product; FT-104 feed and FT-119 steam input are on detail.
 
 These are reviewable display choices, not validated operating envelopes or new safety limits. Detail screens
 include all modeled tags plus the separately represented, source-indexed analyzer components. See
@@ -49,8 +49,8 @@ existing raw-point / ignore-bad-quality configuration; no zero-filled gap is inv
 Unit ownership, stream endpoints and flow directions are verified against the simulator source
 (`out/te_topology_check.md`, journal entry 42); equipment geometry, tap positions and pipe routes are not, because
 the source has none. Stream arrows are static source-verified directions, not measured flow. Level percentages are
-not calculated vessel volumes. XMV outputs are not measured valve positions. TI-122 is the condenser cooling-water
-outlet temperature (the source's "separator" label reflects where the simulator books condenser duty). PI-116
+not calculated vessel volumes. XMV outputs are not measured valve positions. TT-122 is the condenser cooling-water
+outlet temperature (the source's "separator" label reflects where the simulator books condenser duty). PT-116
 ownership is unresolved in the source and is flagged on the stripper page. No responsive physics, closed-loop controls, new alarms or operator acceptance are implied.
 
 ## Generate and inspect locally
@@ -110,7 +110,7 @@ Unit pages now begin with compact annotated diagrams; full inventory/history are
 names and value/unit pairs are placed by mapped stream or approximate vessel region, with dashed association leaders.
 Analyzer components sit together by the mapped sample stream. Unmodeled utility endpoints and disputed ownership
 remain explicit. The original process model is unchanged. See journal entry 23 for the published schematic source.
-The purge and TI-122 discrepancies noted there were settled against the simulator source in journal entry 42.
+The purge and TT-122 discrepancies noted there were settled against the simulator source in journal entry 42.
 
 `data/te_display_layout.json` is additive presentation configuration. `unit_context(..., layout=...)` accepts another
 validated layout for the existing model shape. `scripts/display_contract.py` validates reference/evidence geometry;

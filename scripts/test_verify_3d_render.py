@@ -67,33 +67,33 @@ def main():
     check('committed exports: every check passes (37 tags 1:1 in Ignition, seed UDT, PI AF and Perspective)', fails == [])
     check('every scene tag has an Ignition path and a PI AF path in the tag map',
           all(r.get('ignition_gateway') and r.get('pi_af') for r in result['tag_map'].values()) and len(result['tag_map']) == 37)
-    check('PI path format is \\\\TE Plant\\<unit>|<attribute>', result['tag_map']['PI-107']['pi_af'] ==
-          '\\\\TE Plant\\R-101|ReactorPressure' and result['tag_map']['PI-107']['ignition_gateway'] == 'TE_Plant/R-101/PI-107')
+    check('PI path format is \\\\TE Plant\\<unit>|<attribute>', result['tag_map']['PT-107']['pi_af'] ==
+          '\\\\TE Plant\\R-101|ReactorPressure' and result['tag_map']['PT-107']['ignition_gateway'] == 'TE_Plant/R-101/PT-107')
     gone = copy.deepcopy(provider)
     r101 = next(f for f in next(t for t in gone['tags'] if t['name'] == 'TE_Plant')['tags'] if f['name'] == 'R-101')
-    r101['tags'] = [t for t in r101['tags'] if t['name'] != 'TI-109']
+    r101['tags'] = [t for t in r101['tags'] if t['name'] != 'TT-109']
     check('a tag missing from the Ignition import is reported', any('ignition_gateway' in f for f in failed_ids(provider=gone)[0]))
     moved = copy.deepcopy(provider)
     folders = {f['name']: f for f in next(t for t in moved['tags'] if t['name'] == 'TE_Plant')['tags']}
-    inst = next(t for t in folders['R-101']['tags'] if t['name'] == 'LI-108')
+    inst = next(t for t in folders['R-101']['tags'] if t['name'] == 'LT-108')
     folders['R-101']['tags'].remove(inst)
     folders['V-101']['tags'].append(inst)
     check('a tag under the wrong unit folder is reported', any('ignition_gateway' in f for f in failed_ids(provider=moved)[0]))
     uom = copy.deepcopy(provider)
-    pv = next(t for t in next(t for t in folders_of(uom)['R-101']['tags'] if t['name'] == 'PI-107')['tags'] if t['name'] == 'PV')
+    pv = next(t for t in next(t for t in folders_of(uom)['R-101']['tags'] if t['name'] == 'PT-107')['tags'] if t['name'] == 'PV')
     pv['engUnit'] = 'bar'
     check('a unit-of-measure mismatch is reported', any('ignition_gateway' in f for f in failed_ids(provider=uom)[0]))
     band = copy.deepcopy(provider)
-    next(t for t in folders_of(band)['R-101']['tags'] if t['name'] == 'PI-107')['parameters']['NormalHi']['value'] = 9999.0
+    next(t for t in folders_of(band)['R-101']['tags'] if t['name'] == 'PT-107')['parameters']['NormalHi']['value'] = 9999.0
     check('a band in the gateway that differs from the one colouring the 3D markers is reported',
           any('bands and alarm' in f for f in failed_ids(provider=band)[0]))
     check('a PI attribute pointing at another point is reported',
-          any('pi_af' in f for f in failed_ids(pi_csv=pi_csv.replace('TE.PI-107.PV', 'TE.PI-113.PV'))[0]))
+          any('pi_af' in f for f in failed_ids(pi_csv=pi_csv.replace('TE.PT-107.PV', 'TE.PT-113.PV'))[0]))
     check('an extra unexplained Ignition tag is reported', any('ignition_gateway' in f for f in failed_ids(
         provider=add_tag(provider, 'R-101', 'XI-999'))[0]))
-    check('an analyzer component channel (AI-123-B) is an explained extra, not a failure',
+    check('an analyzer component channel (AT-123-B) is an explained extra, not a failure',
           '16 extra explained' in next(c['summary'] for c in result['checks'] if c['id'].startswith('A ignition_gateway')))
-    no_view = {t: v for t, v in persp.items() if t != 'FI-101'}
+    no_view = {t: v for t, v in persp.items() if t != 'FT-101'}
     check('a tag not bound in any Perspective view is reported', any('perspective' in f for f in failed_ids(perspective=no_view)[0]))
 
     # B. geometry and flow.
@@ -109,7 +109,7 @@ def main():
           any('walk' in f for f in failed_ids(scene=shuffled)[0]))
     buried = copy.deepcopy(scene)
     reactor = next(e for e in buried['equipment'] if e['id'] == 'R-101')
-    next(m for m in buried['markers'] if m['tag'] == 'PI-107')['position'] = [reactor['position'][0], reactor['position'][1], 3.0]
+    next(m for m in buried['markers'] if m['tag'] == 'PT-107')['position'] = [reactor['position'][0], reactor['position'][1], 3.0]
     check('a marker inside equipment is reported', any('inside equipment' in f for f in failed_ids(scene=buried)[0]))
 
     # C. P&ID trace.

@@ -59,13 +59,13 @@ HISTORIAN = "TwinHistory"  # Ignition's built-in Core Historian: feeds the trend
 
 # Alarm setpoints come from published sources, never from the replay data.
 ALARMS = {
-    "PI-107": [
+    "PT-107": [
         {"name": "PressureHigh", "setpointA": 2895.0, "priority": "High",
          "source": "Downs & Vogel (1993), operating constraints: reactor pressure normal limit 2895 kPa"},
         {"name": "PressureShutdown", "setpointA": 3000.0, "priority": "Critical",
          "source": "teprob.f line 703: the simulator shuts down when XMEAS(7) > 3000 kPa"},
     ],
-    "TI-109": [
+    "TT-109": [
         {"name": "TemperatureShutdown", "setpointA": 175.0, "priority": "Critical",
          "source": "teprob.f line 706: the simulator shuts down when XMEAS(9) > 175 degC"},
     ],
@@ -128,7 +128,7 @@ def diagnostics(plant, site, tw_review):
             "documentation": f"How many of {len(sources[name])} {what} (OPC connection {conn}). Diagnostic, not "
                              "a process value.",
             "expression": not_good(sources[name]),
-            # Setpoint 0.5, not 0: Ignition's AboveValue is inclusive (PI-107's 3,000 kPa shutdown alarm fires at
+            # Setpoint 0.5, not 0: Ignition's AboveValue is inclusive (PT-107's 3,000 kPa shutdown alarm fires at
             # exactly 3,000.0), so a setpoint of 0 held the alarm active at a count of 0. Seen in the first native
             # import (journal entry 47). The count is an integer, so 0.5 means "at least one value".
             "alarms": [{"name": "DataSourceLost", "mode": "AboveValue", "setpointA": 0.5,
@@ -282,7 +282,7 @@ def te_tags(model):
     summary = [{"name": "OutOfNormal", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
                 "documentation": "How many fed TE values are outside their normal band", "expression": count(
                     "OutOfNormal", fed)},
-               # ACTIVE ALARMS, not tags in alarm: PI-107 carries two alarms, and the header once read "Alarms: 1"
+               # ACTIVE ALARMS, not tags in alarm: PT-107 carries two alarms, and the header once read "Alarms: 1"
                # while the alarm table listed both (journal entry 38). One term per configured process alarm.
                {"name": "AlarmsActive", "tagType": "AtomicTag", "valueSource": "expr", "dataType": "Int4",
                 "documentation": "How many process alarms are active (each configured alarm counts once; "

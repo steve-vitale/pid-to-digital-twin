@@ -22,12 +22,12 @@
    "measured": [
     {
      "what": "instruments and final elements checked against the simulator source (teprob.f)",
-     "value": "36 confirmed, 1 corrected (TI-122 description) of 37",
+     "value": "36 confirmed, 1 corrected (TT-122 description) of 37",
      "source": "out/te_source_check.md"
     },
     {
      "what": "units, streams, flow directions and tag ownership checked against the simulator source (teprob.f, cross-checked with the revised TE code)",
-     "value": "51 confirmed, 4 corrected, 1 unresolvable of 56 elements; the purge S9 with FI-110, FV-110 and AI-129 moved from K-101 to V-101; PI-116's owner unresolvable",
+     "value": "51 confirmed, 4 corrected, 1 unresolvable of 56 elements; the purge S9 with FT-110, FV-110 and AT-129 moved from K-101 to V-101; PT-116's owner unresolvable",
      "source": "out/te_topology_check.md"
     },
     {
@@ -604,6 +604,31 @@
   },
   {
    "poc": false,
+   "upstream": [],
+   "inputs": [],
+   "code": [],
+   "outputs": [
+    "data/te_pid/rev-c/*.png",
+    "data/te_pid/rev-c/*.svg",
+    "data/te_pid/rev-c/*.graphml",
+    "data/te_pid/rev-c/key.json",
+    "data/te_pid/rev-c/manifest.json"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "te.pid_rev_c",
+   "dataset": "te",
+   "stage": 1,
+   "title": "Generated TE sheets, revision C (archived): the sheets the revision C read-back runs read",
+   "kind": "source",
+   "rebuild": "source",
+   "treatment": "The three sheets and their keys exactly as scripts/draw_pid_from_model.py drew them on 2026-10-28 (19 control loops, valve stations, field transmitters still tagged FI/PI/LI/TI/AI/JI), archived on 2026-10-29 when revision D retagged the transmitters (journal entry 61). Byte-identical to the files te.pid_extract_revc and te.pid_roundtrip_revc hashed when they ran. Never regenerated: the current revision is te.pid.",
+   "edited_by": [],
+   "carries": "revision C: 19 of 19 control loops drawn; measurement tags are the pre-2026-10-29 indicator letters",
+   "checked_by": "pipeline lock hashes recorded by te.pid_extract_revc and te.pid_roundtrip_revc before the archive"
+  },
+  {
+   "poc": false,
    "upstream": [
     "te.pid",
     "open100.source"
@@ -769,10 +794,10 @@
   {
    "poc": false,
    "upstream": [
-    "te.pid"
+    "te.pid_rev_c"
    ],
    "inputs": [
-    "data/te_pid/*.png"
+    "data/te_pid/rev-c/*.png"
    ],
    "code": [
     "scripts/degrade_scans.py",
@@ -791,7 +816,7 @@
    "id": "te.pid_extract_revc",
    "dataset": "te",
    "stage": 2,
-   "title": "Extraction of the revision C sheets (recorded): the same frozen method and protocol as revision A, labels tec-*",
+   "title": "Extraction of the revision C sheets (recorded, data/te_pid/rev-c): the same frozen method and protocol as revision A, labels tec-*",
    "kind": "recorded",
    "rebuild": "recorded",
    "external_outputs": [
@@ -803,11 +828,11 @@
      "python",
      "scripts/degrade_scans.py",
      "--src",
-     "data/te_pid",
+     "data/te_pid/rev-c",
      "--drawings",
      "101,102,103",
      "--dest",
-     "data/te_pid/scan"
+     "data/te_pid/rev-c/scan"
     ],
     [
      "python",
@@ -836,7 +861,7 @@
      "te-clean-trace-r1"
     ]
    ],
-   "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude; run records are not committed",
+   "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude --sheets data/te_pid/rev-c; run records are not committed",
    "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
    "carries": "GPT and Claude: 42 sheet runs each, 0 failed tiles (2026-10-28 and 2026-10-29)",
    "checked_by": "the frozen scorer, through te.pid_roundtrip"
@@ -844,12 +869,12 @@
   {
    "poc": false,
    "upstream": [
-    "te.pid",
+    "te.pid_rev_c",
     "te.pid_extract_revc"
    ],
    "inputs": [
-    "data/te_pid/*.graphml",
-    "data/te_pid/key.json"
+    "data/te_pid/rev-c/*.graphml",
+    "data/te_pid/rev-c/key.json"
    ],
    "code": [
     "scripts/score_te_roundtrip.py",
@@ -872,7 +897,7 @@
      "python",
      "scripts/score_te_roundtrip.py",
      "--keys",
-     "data/te_pid",
+     "data/te_pid/rev-c",
      "--prefix",
      "tec",
      "--out",
@@ -1113,11 +1138,13 @@
   {
    "poc": false,
    "upstream": [
-    "te.pid_twins"
+    "te.pid_twins",
+    "te.source"
    ],
    "inputs": [
     "out/te_pid/twin/codex-clean-r1/plant_model.json",
-    "out/te_pid/twin/claude-L3-r1/plant_model.json"
+    "out/te_pid/twin/claude-L3-r1/plant_model.json",
+    "data/te_process_model.json"
    ],
    "code": [
     "scripts/te_live_check.py",
@@ -1720,7 +1747,9 @@
     "drafts/interactive-tour/audit/geometry.json",
     "drafts/interactive-tour/audit/report.json",
     "drafts/interactive-tour/audit/report.md",
-    "drafts/interactive-tour/shots/*.jpg"
+    "drafts/interactive-tour/shots/*.jpg",
+    "drafts/interactive-tour/page/te-tour.html",
+    "drafts/interactive-tour/page/te-tour-light.html"
    ],
    "command": [
     [
@@ -1740,6 +1769,11 @@
     [
      "node",
      "drafts/interactive-tour/verify.mjs"
+    ],
+    [
+     "python",
+     "-c",
+     "import shutil; [shutil.copyfile(f'out/interactive_tour/{n}', f'drafts/interactive-tour/page/{n}') for n in ('te-tour.html', 'te-tour-light.html')]"
     ]
    ],
    "requires": [

@@ -36,6 +36,7 @@ SOURCE_TESTS = (
     "scripts/test_run_tests.py",
     "scripts/test_pipeline.py",
     "scripts/test_bayer_rt.py",
+    "scripts/test_check_claims.py",
 )
 # These tests need cached data or third-party imports, even though none needs a gateway.
 FULL_ONLY_TESTS = (

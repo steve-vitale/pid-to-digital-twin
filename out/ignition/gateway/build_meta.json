@@ -5,7 +5,7 @@
  "sim_namespace": "urn:pid-digital-twin:te-sim",
  "twin_source": "out/twin/r2-tiles-trace/codex",
  "alarms": {
-  "PI-107": [
+  "PT-107": [
    {
     "name": "PressureHigh",
     "setpointA": 2895.0,
@@ -19,7 +19,7 @@
     "source": "teprob.f line 703: the simulator shuts down when XMEAS(7) > 3000 kPa"
    }
   ],
-  "TI-109": [
+  "TT-109": [
    {
     "name": "TemperatureShutdown",
     "setpointA": 175.0,
@@ -29,7 +29,7 @@
   ]
  },
  "te_ranges": {
-  "FI-101": {
+  "FT-101": {
    "low": 0.0,
    "high": 0.5,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -40,7 +40,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FI-101",
+    "tag": "FT-101",
     "xmeas": 1,
     "unit": "U-100",
     "stream": "S1",
@@ -61,10 +61,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(1) = FTM(3)*0.359/35.3145; stream 1: BL -> U-100; documented as teprob.f 'A Feed', revised code 'Feed flow component A (stream 1)'"
-    }
+    },
+    "former_tag": "FI-101"
    }
   },
-  "FI-102": {
+  "FT-102": {
    "low": 0.0,
    "high": 7323.003,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -75,7 +76,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FI-102",
+    "tag": "FT-102",
     "xmeas": 2,
     "unit": "U-100",
     "stream": "S2",
@@ -96,10 +97,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(2) = FTM(1)*XMWS(1)*0.454; stream 2: BL -> U-100; documented as teprob.f 'D Feed', revised code 'Feed flow component D (stream 2)'"
-    }
+    },
+    "former_tag": "FI-102"
    }
   },
-  "FI-103": {
+  "FT-103": {
    "low": 0.0,
    "high": 9021.933,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -110,7 +112,7 @@
    ],
    "unit": "U-100",
    "source_item": {
-    "tag": "FI-103",
+    "tag": "FT-103",
     "xmeas": 3,
     "unit": "U-100",
     "stream": "S3",
@@ -131,10 +133,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(3) = FTM(2)*XMWS(2)*0.454; stream 3: BL -> U-100; documented as teprob.f 'E Feed', revised code 'Feed flow component E (stream 3)'"
-    }
+    },
+    "former_tag": "FI-103"
    }
   },
-  "FI-104": {
+  "FT-104": {
    "low": 0.0,
    "high": 18.688,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -145,7 +148,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "FI-104",
+    "tag": "FT-104",
     "xmeas": 4,
     "unit": "C-101",
     "stream": "S4",
@@ -166,10 +169,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(4) = FTM(4)*0.359/35.3145; stream 4: BL -> C-101; documented as teprob.f 'A and C Feed', revised code 'Feed flow components A & C (stream 4)'"
-    }
+    },
+    "former_tag": "FI-104"
    }
   },
-  "FI-105": {
+  "FT-105": {
    "low": 0.0,
    "high": 53.804,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -180,7 +184,7 @@
    ],
    "unit": "K-101",
    "source_item": {
-    "tag": "FI-105",
+    "tag": "FT-105",
     "xmeas": 5,
     "unit": "K-101",
     "stream": "S8b",
@@ -204,10 +208,11 @@
      "caveats": [
       "which segment of stream 8 carries the tap is a model choice; the simulator has one flow FTM(9)"
      ]
-    }
+    },
+    "former_tag": "FI-105"
    }
   },
-  "FI-106": {
+  "FT-106": {
    "low": 0.0,
    "high": 84.655,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -218,7 +223,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "FI-106",
+    "tag": "FT-106",
     "xmeas": 6,
     "unit": "R-101",
     "stream": "S6",
@@ -239,10 +244,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(6) = FTM(6)*0.359/35.3145; stream 6: U-100 -> R-101; documented as teprob.f 'Reactor Feed Rate', revised code 'Reactor feed (stream 6)'"
-    }
+    },
+    "former_tag": "FI-106"
    }
   },
-  "PI-107": {
+  "PT-107": {
    "low": 0.0,
    "high": 5411.321,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -253,7 +259,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "PI-107",
+    "tag": "PT-107",
     "xmeas": 7,
     "unit": "R-101",
     "variable": "pressure",
@@ -273,10 +279,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(7) = (PTR-760.0)/760.0*101.325; PTR is the reactor variable; documented as teprob.f 'Reactor Pressure', revised code 'Reactor pressure'"
-    }
+    },
+    "former_tag": "PI-107"
    }
   },
-  "LI-108": {
+  "LT-108": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -287,7 +294,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "LI-108",
+    "tag": "LT-108",
     "xmeas": 8,
     "unit": "R-101",
     "variable": "level",
@@ -307,10 +314,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(8) = (VLR-84.6)/666.7*100.0; VLR is the reactor variable; documented as teprob.f 'Reactor Level', revised code 'Reactor level'"
-    }
+    },
+    "former_tag": "LI-108"
    }
   },
-  "TI-109": {
+  "TT-109": {
    "low": 0.0,
    "high": 240.8,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -321,7 +329,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "TI-109",
+    "tag": "TT-109",
     "xmeas": 9,
     "unit": "R-101",
     "variable": "temperature",
@@ -341,10 +349,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(9) = TCR; TCR is the reactor variable; documented as teprob.f 'Reactor Temperature', revised code 'Reactor temperature'"
-    }
+    },
+    "former_tag": "TI-109"
    }
   },
-  "FI-110": {
+  "FT-110": {
    "low": 0.0,
    "high": 0.674,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -355,7 +364,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "FI-110",
+    "tag": "FT-110",
     "xmeas": 10,
     "unit": "V-101",
     "stream": "S9",
@@ -379,10 +388,11 @@
      "previous": {
       "unit": "K-101"
      }
-    }
+    },
+    "former_tag": "FI-110"
    }
   },
-  "TI-111": {
+  "TT-111": {
    "low": 0.0,
    "high": 160.173,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -393,7 +403,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "TI-111",
+    "tag": "TT-111",
     "xmeas": 11,
     "unit": "V-101",
     "variable": "temperature",
@@ -413,10 +423,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(11) = TCS; TCS is the separator variable; documented as teprob.f 'Product Sep Temp', revised code 'Separator temperature'"
-    }
+    },
+    "former_tag": "TI-111"
    }
   },
-  "LI-112": {
+  "LT-112": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -427,7 +438,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "LI-112",
+    "tag": "LT-112",
     "xmeas": 12,
     "unit": "V-101",
     "variable": "level",
@@ -447,10 +458,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(12) = (VLS-27.5)/290.0*100.0; VLS is the separator variable; documented as teprob.f 'Product Sep Level', revised code 'Separator level'"
-    }
+    },
+    "former_tag": "LI-112"
    }
   },
-  "PI-113": {
+  "PT-113": {
    "low": 0.0,
    "high": 5268.839,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -461,7 +473,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "PI-113",
+    "tag": "PT-113",
     "xmeas": 13,
     "unit": "V-101",
     "variable": "pressure",
@@ -481,10 +493,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(13) = (PTS-760.0)/760.0*101.325; PTS is the separator variable; documented as teprob.f 'Prod Sep Pressure', revised code 'Separator pressure'"
-    }
+    },
+    "former_tag": "PI-113"
    }
   },
-  "FI-114": {
+  "FT-114": {
    "low": 0.0,
    "high": 50.373,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -495,7 +508,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "FI-114",
+    "tag": "FT-114",
     "xmeas": 14,
     "unit": "V-101",
     "stream": "S10",
@@ -516,10 +529,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(14) = FTM(11)/DLS/35.3145; stream 10: V-101 -> C-101; documented as teprob.f 'Prod Sep Underflow', revised code 'Sperator underflow (liquid phase)'"
-    }
+    },
+    "former_tag": "FI-114"
    }
   },
-  "LI-115": {
+  "LT-115": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -530,7 +544,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "LI-115",
+    "tag": "LT-115",
     "xmeas": 15,
     "unit": "C-101",
     "variable": "level",
@@ -550,10 +564,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(15) = (VLC-78.25)/VTC*100.0; VLC is the stripper variable; documented as teprob.f 'Stripper Level', revised code 'Stripper level'"
-    }
+    },
+    "former_tag": "LI-115"
    }
   },
-  "PI-116": {
+  "PT-116": {
    "low": 0.0,
    "high": 6205.769,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -564,7 +579,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "PI-116",
+    "tag": "PT-116",
     "xmeas": 16,
     "unit": "C-101",
     "variable": "pressure",
@@ -587,10 +602,11 @@
      "caveats": [
       "the code computes it from the header but the documented name says stripper"
      ]
-    }
+    },
+    "former_tag": "PI-116"
    }
   },
-  "FI-117": {
+  "FT-117": {
    "low": 0.0,
    "high": 45.814,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -601,7 +617,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "FI-117",
+    "tag": "FT-117",
     "xmeas": 17,
     "unit": "C-101",
     "stream": "S11",
@@ -622,10 +638,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(17) = FTM(13)/DLC/35.3145; stream 11: C-101 -> BL; documented as teprob.f 'Stripper Underflow', revised code 'Stripper underflow (stream 11)'"
-    }
+    },
+    "former_tag": "FI-117"
    }
   },
-  "TI-118": {
+  "TT-118": {
    "low": 0.0,
    "high": 131.706,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -636,7 +653,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "TI-118",
+    "tag": "TT-118",
     "xmeas": 18,
     "unit": "C-101",
     "variable": "temperature",
@@ -656,10 +673,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(18) = TCC; TCC is the stripper variable; documented as teprob.f 'Stripper Temperature', revised code 'Stripper temperature'"
-    }
+    },
+    "former_tag": "TI-118"
    }
   },
-  "FI-119": {
+  "FT-119": {
    "low": 0.0,
    "high": 468.035,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -670,7 +688,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "FI-119",
+    "tag": "FT-119",
     "xmeas": 19,
     "unit": "C-101",
     "variable": "flow",
@@ -693,10 +711,11 @@
      "caveats": [
       "computed from the unit's heat duty; there is no steam stream in the source or the model"
      ]
-    }
+    },
+    "former_tag": "FI-119"
    }
   },
-  "JI-120": {
+  "JT-120": {
    "low": 0.0,
    "high": 682.85,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -707,7 +726,7 @@
    ],
    "unit": "K-101",
    "source_item": {
-    "tag": "JI-120",
+    "tag": "JT-120",
     "xmeas": 20,
     "unit": "K-101",
     "variable": "power",
@@ -727,10 +746,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(20) = CPDH*0.29307D3; CPDH is the compressor work term; documented as teprob.f 'Compressor Work', revised code 'Compressor work'"
-    }
+    },
+    "former_tag": "JI-120"
    }
   },
-  "TI-121": {
+  "TT-121": {
    "low": 0.0,
    "high": 189.21,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -741,7 +761,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "TI-121",
+    "tag": "TT-121",
     "xmeas": 21,
     "unit": "R-101",
     "variable": "temperature",
@@ -761,10 +781,11 @@
      ],
      "checked_on": "2026-10-13",
      "evidence": "XMEAS(21) = TWR; QUR enters the reactor energy balance; documented as teprob.f 'Reactor Cooling Water Outlet Temp', revised code 'Reactor cooling water outlet temperature', XMV(10) 'Reactor Cooling Water Flow', IDV(4) 'Reactor Cooling Water Inlet Temperature'"
-    }
+    },
+    "former_tag": "TI-121"
    }
   },
-  "TI-122": {
+  "TT-122": {
    "low": 0.0,
    "high": 154.558,
    "source": "ASSUMED: 0 to 2x normal-run mean (d00), not a published span",
@@ -775,7 +796,7 @@
    ],
    "unit": "E-101",
    "source_item": {
-    "tag": "TI-122",
+    "tag": "TT-122",
     "xmeas": 22,
     "unit": "E-101",
     "variable": "temperature",
@@ -802,10 +823,11 @@
       "documented names disagree (condenser x3, separator x1); the code locus and the majority agree on condenser"
      ],
      "resolved_question": "Source names this the separator cooling water outlet, but cooling in TE is done by the condenser (XMV 11 is condenser cooling water). Which asset owns this tag? Left on E-101 pending operations review."
-    }
+    },
+    "former_tag": "TI-122"
    }
   },
-  "AI-123": {
+  "AT-123": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -816,7 +838,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123",
+    "tag": "AT-123",
     "xmeas": 23,
     "unit": "R-101",
     "stream": "S6",
@@ -843,13 +865,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "A",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 23"
    }
   },
-  "AI-123-B": {
+  "AT-123-B": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -860,7 +883,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123-B",
+    "tag": "AT-123-B",
     "xmeas": 24,
     "unit": "R-101",
     "stream": "S6",
@@ -887,13 +910,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "B",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 24"
    }
   },
-  "AI-123-C": {
+  "AT-123-C": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -904,7 +928,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123-C",
+    "tag": "AT-123-C",
     "xmeas": 25,
     "unit": "R-101",
     "stream": "S6",
@@ -931,13 +955,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "C",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 25"
    }
   },
-  "AI-123-D": {
+  "AT-123-D": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -948,7 +973,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123-D",
+    "tag": "AT-123-D",
     "xmeas": 26,
     "unit": "R-101",
     "stream": "S6",
@@ -975,13 +1000,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "D",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 26"
    }
   },
-  "AI-123-E": {
+  "AT-123-E": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -992,7 +1018,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123-E",
+    "tag": "AT-123-E",
     "xmeas": 27,
     "unit": "R-101",
     "stream": "S6",
@@ -1019,13 +1045,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "E",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 27"
    }
   },
-  "AI-123-F": {
+  "AT-123-F": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1036,7 +1063,7 @@
    ],
    "unit": "R-101",
    "source_item": {
-    "tag": "AI-123-F",
+    "tag": "AT-123-F",
     "xmeas": 28,
     "unit": "R-101",
     "stream": "S6",
@@ -1063,13 +1090,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(23...) = XST(i,7), the copy of FTM(6); stream 6: U-100 -> R-101"
     },
-    "analyzer_parent": "AI-123",
+    "former_tag": "AI-123",
+    "analyzer_parent": "AT-123",
     "component": "F",
     "source_range": "23-28",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 28"
    }
   },
-  "AI-129": {
+  "AT-129": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1080,7 +1108,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129",
+    "tag": "AT-129",
     "xmeas": 29,
     "unit": "V-101",
     "stream": "S9",
@@ -1110,13 +1138,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "A",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 29"
    }
   },
-  "AI-129-B": {
+  "AT-129-B": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1127,7 +1156,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-B",
+    "tag": "AT-129-B",
     "xmeas": 30,
     "unit": "V-101",
     "stream": "S9",
@@ -1157,13 +1186,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "B",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 30"
    }
   },
-  "AI-129-C": {
+  "AT-129-C": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1174,7 +1204,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-C",
+    "tag": "AT-129-C",
     "xmeas": 31,
     "unit": "V-101",
     "stream": "S9",
@@ -1204,13 +1234,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "C",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 31"
    }
   },
-  "AI-129-D": {
+  "AT-129-D": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1221,7 +1252,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-D",
+    "tag": "AT-129-D",
     "xmeas": 32,
     "unit": "V-101",
     "stream": "S9",
@@ -1251,13 +1282,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "D",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 32"
    }
   },
-  "AI-129-E": {
+  "AT-129-E": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1268,7 +1300,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-E",
+    "tag": "AT-129-E",
     "xmeas": 33,
     "unit": "V-101",
     "stream": "S9",
@@ -1298,13 +1330,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "E",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 33"
    }
   },
-  "AI-129-F": {
+  "AT-129-F": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1315,7 +1348,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-F",
+    "tag": "AT-129-F",
     "xmeas": 34,
     "unit": "V-101",
     "stream": "S9",
@@ -1345,13 +1378,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "F",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 34"
    }
   },
-  "AI-129-G": {
+  "AT-129-G": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1362,7 +1396,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-G",
+    "tag": "AT-129-G",
     "xmeas": 35,
     "unit": "V-101",
     "stream": "S9",
@@ -1392,13 +1426,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "G",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 35"
    }
   },
-  "AI-129-H": {
+  "AT-129-H": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1409,7 +1444,7 @@
    ],
    "unit": "V-101",
    "source_item": {
-    "tag": "AI-129-H",
+    "tag": "AT-129-H",
     "xmeas": 36,
     "unit": "V-101",
     "stream": "S9",
@@ -1439,13 +1474,14 @@
       "unit": "K-101"
      }
     },
-    "analyzer_parent": "AI-129",
+    "former_tag": "AI-129",
+    "analyzer_parent": "AT-129",
     "component": "H",
     "source_range": "29-36",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 36"
    }
   },
-  "AI-137": {
+  "AT-137": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1456,7 +1492,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "AI-137",
+    "tag": "AT-137",
     "xmeas": 37,
     "unit": "C-101",
     "stream": "S11",
@@ -1483,13 +1519,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
     },
-    "analyzer_parent": "AI-137",
+    "former_tag": "AI-137",
+    "analyzer_parent": "AT-137",
     "component": "D",
     "source_range": "37-41",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 37"
    }
   },
-  "AI-137-E": {
+  "AT-137-E": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1500,7 +1537,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "AI-137-E",
+    "tag": "AT-137-E",
     "xmeas": 38,
     "unit": "C-101",
     "stream": "S11",
@@ -1527,13 +1564,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
     },
-    "analyzer_parent": "AI-137",
+    "former_tag": "AI-137",
+    "analyzer_parent": "AT-137",
     "component": "E",
     "source_range": "37-41",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 38"
    }
   },
-  "AI-137-F": {
+  "AT-137-F": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1544,7 +1582,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "AI-137-F",
+    "tag": "AT-137-F",
     "xmeas": 39,
     "unit": "C-101",
     "stream": "S11",
@@ -1571,13 +1609,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
     },
-    "analyzer_parent": "AI-137",
+    "former_tag": "AI-137",
+    "analyzer_parent": "AT-137",
     "component": "F",
     "source_range": "37-41",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 39"
    }
   },
-  "AI-137-G": {
+  "AT-137-G": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1588,7 +1627,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "AI-137-G",
+    "tag": "AT-137-G",
     "xmeas": 40,
     "unit": "C-101",
     "stream": "S11",
@@ -1615,13 +1654,14 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
     },
-    "analyzer_parent": "AI-137",
+    "former_tag": "AI-137",
+    "analyzer_parent": "AT-137",
     "component": "G",
     "source_range": "37-41",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 40"
    }
   },
-  "AI-137-H": {
+  "AT-137-H": {
    "low": 0.0,
    "high": 100.0,
    "source": "physical: a percentage",
@@ -1632,7 +1672,7 @@
    ],
    "unit": "C-101",
    "source_item": {
-    "tag": "AI-137-H",
+    "tag": "AT-137-H",
     "xmeas": 41,
     "unit": "C-101",
     "stream": "S11",
@@ -1659,7 +1699,8 @@
      "checked_on": "2026-10-13",
      "evidence": "XCMP(37...) = XST(i,13); stream 11: C-101 -> BL"
     },
-    "analyzer_parent": "AI-137",
+    "former_tag": "AI-137",
+    "analyzer_parent": "AT-137",
     "component": "H",
     "source_range": "37-41",
     "channel_provenance": "Project-assigned component identifier; teprob.f XMEAS 41"
@@ -2101,47 +2142,47 @@
   "priority_set": [],
   "needs_moc": [],
   "status": {
-   "FI-101": "unverified",
-   "FI-102": "unverified",
-   "FI-103": "unverified",
-   "FI-104": "unverified",
-   "FI-105": "unverified",
-   "FI-106": "unverified",
-   "PI-107": "unverified",
-   "LI-108": "unverified",
-   "TI-109": "unverified",
-   "FI-110": "unverified",
-   "TI-111": "unverified",
-   "LI-112": "unverified",
-   "PI-113": "unverified",
-   "FI-114": "unverified",
-   "LI-115": "unverified",
-   "PI-116": "unverified",
-   "FI-117": "unverified",
-   "TI-118": "unverified",
-   "FI-119": "unverified",
-   "JI-120": "unverified",
-   "TI-121": "unverified",
-   "TI-122": "unverified",
-   "AI-123": "unverified",
-   "AI-123-B": "unverified",
-   "AI-123-C": "unverified",
-   "AI-123-D": "unverified",
-   "AI-123-E": "unverified",
-   "AI-123-F": "unverified",
-   "AI-129": "unverified",
-   "AI-129-B": "unverified",
-   "AI-129-C": "unverified",
-   "AI-129-D": "unverified",
-   "AI-129-E": "unverified",
-   "AI-129-F": "unverified",
-   "AI-129-G": "unverified",
-   "AI-129-H": "unverified",
-   "AI-137": "unverified",
-   "AI-137-E": "unverified",
-   "AI-137-F": "unverified",
-   "AI-137-G": "unverified",
-   "AI-137-H": "unverified",
+   "FT-101": "unverified",
+   "FT-102": "unverified",
+   "FT-103": "unverified",
+   "FT-104": "unverified",
+   "FT-105": "unverified",
+   "FT-106": "unverified",
+   "PT-107": "unverified",
+   "LT-108": "unverified",
+   "TT-109": "unverified",
+   "FT-110": "unverified",
+   "TT-111": "unverified",
+   "LT-112": "unverified",
+   "PT-113": "unverified",
+   "FT-114": "unverified",
+   "LT-115": "unverified",
+   "PT-116": "unverified",
+   "FT-117": "unverified",
+   "TT-118": "unverified",
+   "FT-119": "unverified",
+   "JT-120": "unverified",
+   "TT-121": "unverified",
+   "TT-122": "unverified",
+   "AT-123": "unverified",
+   "AT-123-B": "unverified",
+   "AT-123-C": "unverified",
+   "AT-123-D": "unverified",
+   "AT-123-E": "unverified",
+   "AT-123-F": "unverified",
+   "AT-129": "unverified",
+   "AT-129-B": "unverified",
+   "AT-129-C": "unverified",
+   "AT-129-D": "unverified",
+   "AT-129-E": "unverified",
+   "AT-129-F": "unverified",
+   "AT-129-G": "unverified",
+   "AT-129-H": "unverified",
+   "AT-137": "unverified",
+   "AT-137-E": "unverified",
+   "AT-137-F": "unverified",
+   "AT-137-G": "unverified",
+   "AT-137-H": "unverified",
    "FV-102": "unverified",
    "FV-103": "unverified",
    "FV-101": "unverified",

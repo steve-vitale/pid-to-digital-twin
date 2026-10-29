@@ -7,7 +7,7 @@ are project-assigned display/OPC identifiers, not original plant instrument tags
 """
 from copy import deepcopy
 
-ANALYZERS = {'AI-123': (23, 'ABCDEF'), 'AI-129': (29, 'ABCDEFGH'), 'AI-137': (37, 'DEFGH')}
+ANALYZERS = {'AT-123': (23, 'ABCDEF'), 'AT-129': (29, 'ABCDEFGH'), 'AT-137': (37, 'DEFGH')}
 
 
 def expanded_items(model):

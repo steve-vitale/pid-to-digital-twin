@@ -3,45 +3,45 @@
 `scripts/te_live_check.py` against the TE replay server (normal run), reads 5 s apart.
 
 - Extracted instrument symbols (bubbles, including valve tags): **37**
-- Matched by tag to a replay point: **36**; value moved between reads: **36**
-- Replay points with no matching tag on the drawings: AI-123-B, AI-123-C, AI-123-D, AI-123-E, AI-123-F, AI-129-B, AI-129-C, AI-129-D, AI-129-E, AI-129-F, AI-129-G, AI-129-H, AI-137-E, AI-137-F, AI-137-G, AI-137-H
+- Matched by tag to a replay point: **36** (36 through the tag's earlier name, `former_tag`: the drawings were read before a retag); value moved between reads: **36**
+- Replay points with no matching tag on the drawings: AT-123-B, AT-123-C, AT-123-D, AT-123-E, AT-123-F, AT-129-B, AT-129-C, AT-129-D, AT-129-E, AT-129-F, AT-129-G, AT-129-H, AT-137-E, AT-137-F, AT-137-G, AT-137-H
 
 | Extracted tag | Replay point | First read | Second read | Moved |
 |---|---|---|---|---|
-| FV 203 | FV-203 | 24.59 | 29.19 | yes |
-| FI 101 | FI-101 | 0.2511 | 0.3001 | yes |
-| FV 201 | FV-201 | 63.16 | 64.41 | yes |
-| FI 102 | FI-102 | 3658 | 3653 | yes |
-| FV 202 | FV-202 | 54.12 | 54.28 | yes |
-| FI 103 | FI-103 | 4498 | 4454 | yes |
+| FV 203 | FV-101 (earlier name) | 24.45 | 29.46 | yes |
+| FI 101 | FT-101 (earlier name) | 0.2456 | 0.2974 | yes |
+| FV 201 | FV-102 (earlier name) | 63.33 | 63.25 | yes |
+| FI 102 | FT-102 (earlier name) | 3698 | 3721 | yes |
+| FV 202 | FV-103 (earlier name) | 53.91 | 53.34 | yes |
+| FI 103 | FT-103 (earlier name) | 4537 | 4533 | yes |
 | SC 212 | (no point) |  |  | no |
-| PI 107 | PI-107 | 2707 | 2704 | yes |
-| LI 108 | LI-108 | 73.99 | 75.5 | yes |
-| TI 109 | TI-109 | 120.4 | 120.4 | yes |
-| FI 106 | FI-106 | 41.98 | 42.08 | yes |
-| AI 123 | AI-123 | 32.22 | 32.06 | yes |
-| TV 210 | TV-210 | 40.84 | 40.68 | yes |
-| TI 121 | TI-121 | 94.62 | 94.7 | yes |
-| TI 122 | TI-122 | 77.57 | 77.24 | yes |
-| TV 211 | TV-211 | 20.09 | 18.23 | yes |
-| FI 105 | FI-105 | 26.53 | 26.91 | yes |
-| JI 120 | JI-120 | 341.3 | 341.4 | yes |
-| HV 205 | HV-205 | 21.96 | 21.94 | yes |
-| FI 110 | FI-110 | 0.3366 | 0.3452 | yes |
-| AI 129 | AI-129 | 33.01 | 33.35 | yes |
-| FV 206 | FV-206 | 40.12 | 40.19 | yes |
-| TI 111 | TI-111 | 80.33 | 79.92 | yes |
-| LI 112 | LI-112 | 48.22 | 50.4 | yes |
-| PI 113 | PI-113 | 2636 | 2632 | yes |
-| FI 114 | FI-114 | 27.37 | 26.56 | yes |
-| LV 207 | LV-207 | 32.85 | 39.27 | yes |
-| FV 204 | FV-204 | 61.56 | 61.55 | yes |
-| FI 104 | FI-104 | 9.379 | 9.347 | yes |
-| PI 116 | PI-116 | 3105 | 3101 | yes |
-| TI 118 | TI-118 | 65.79 | 65.63 | yes |
-| LI 115 | LI-115 | 49.71 | 51.1 | yes |
-| FV 209 | FV-209 | 47.46 | 47.39 | yes |
-| FI 119 | FI-119 | 230.1 | 230.9 | yes |
-| FI 117 | FI-117 | 22.1 | 22.92 | yes |
-| AI 137 | AI-137 | 0.01787 | 0.03605 | yes |
-| LV 208 | LV-208 | 45.86 | 49.08 | yes |
+| PI 107 | PT-107 (earlier name) | 2705 | 2706 | yes |
+| LI 108 | LT-108 (earlier name) | 75.28 | 74.81 | yes |
+| TI 109 | TT-109 (earlier name) | 120.4 | 120.4 | yes |
+| FI 106 | FT-106 (earlier name) | 42.35 | 42.63 | yes |
+| AI 123 | AT-123 (earlier name) | 32.2 | 32.06 | yes |
+| TV 210 | TV-121 (earlier name) | 41.73 | 41.65 | yes |
+| TI 121 | TT-121 (earlier name) | 94.4 | 94.39 | yes |
+| TI 122 | TT-122 (earlier name) | 77.16 | 77.42 | yes |
+| TV 211 | FV-117 (earlier name) | 18.33 | 16.78 | yes |
+| FI 105 | FT-105 (earlier name) | 26.74 | 26.99 | yes |
+| JI 120 | JT-120 (earlier name) | 341.2 | 341.6 | yes |
+| HV 205 | FV-105 (earlier name) | 22.27 | 22.39 | yes |
+| FI 110 | FT-110 (earlier name) | 0.3252 | 0.3395 | yes |
+| AI 129 | AT-129 (earlier name) | 33.39 | 33.35 | yes |
+| FV 206 | FV-110 (earlier name) | 39.54 | 40.89 | yes |
+| TI 111 | TT-111 (earlier name) | 80.13 | 80.15 | yes |
+| LI 112 | LT-112 (earlier name) | 49.52 | 48.81 | yes |
+| PI 113 | PT-113 (earlier name) | 2634 | 2635 | yes |
+| FI 114 | FT-114 (earlier name) | 22.34 | 24.64 | yes |
+| LV 207 | LV-112 (earlier name) | 36.68 | 34.6 | yes |
+| FV 204 | FV-104 (earlier name) | 61.39 | 60.63 | yes |
+| FI 104 | FT-104 (earlier name) | 9.375 | 9.313 | yes |
+| PI 116 | PT-116 (earlier name) | 3104 | 3102 | yes |
+| TI 118 | TT-118 (earlier name) | 65.79 | 65.66 | yes |
+| LI 115 | LT-115 (earlier name) | 49.66 | 48.85 | yes |
+| FV 209 | FV-119 (earlier name) | 47.46 | 47.28 | yes |
+| FI 119 | FT-119 (earlier name) | 230.1 | 232.2 | yes |
+| FI 117 | FT-117 (earlier name) | 22.85 | 23.52 | yes |
+| AI 137 | AT-137 (earlier name) | 0.01787 | 0.03605 | yes |
+| LV 208 | LV-115 (earlier name) | 45.75 | 43.88 | yes |

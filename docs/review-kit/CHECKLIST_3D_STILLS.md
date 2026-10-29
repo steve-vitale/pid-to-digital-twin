@@ -14,13 +14,13 @@ View each still at 100 % on a normal monitor.
 1. **Every label readable** without zooming? Note any you had to zoom for.
 2. **1 versus I.** The earlier stills used a typeface in which the digit 1 and capital I look alike (OCR confused
    them; see the review notes). The current stills use Atkinson Hyperlegible, designed to tell them apart. Can you
-   tell `TI-109` from `TI-I09`, and LOTO tag `1` from `I`?
+   tell `TT-109` from `TI-I09`, and LOTO tag `1` from `I`?
 3. **Labels point at the right thing.** Each tag pill sits next to the marker it names, and each unit label next
    to its unit.
 4. **The draft status is visible:** the corner badge ("Prototype · placeholder geometry · recorded replay") and,
    on the LOTO still, "design mockup, not a procedure".
-5. **Numbers copied correctly.** On `02` and `21`, PI-107's high alarm reads 2,895 kPa g and the shutdown 3,000;
-   TI-109's shutdown reads 175. These match `out/ignition/gateway/build_meta.json`.
+5. **Numbers copied correctly.** On `02` and `21`, PT-107's high alarm reads 2,895 kPa g and the shutdown 3,000;
+   TT-109's shutdown reads 175. These match `out/ignition/gateway/build_meta.json`.
 6. **Would a newcomer understand what each still is for** from the still and its caption alone? Write what you
    think each one is saying.
 

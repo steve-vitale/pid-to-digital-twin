@@ -3,7 +3,7 @@ data, and score how much of that control a P&ID answer key actually draws.
 
 Why this exists: the generated TE sheets (journal entry 44) draw every transmitter and every valve, but no
 controller and no signal line. A practitioner looking at them sees indicators beside valves with unrelated
-numbers (FI-102 next to FV-201) and no way to tell what controls what. That is the difference between a PFD with
+numbers (revision A: FI-102 next to FV-201) and no way to tell what controls what. That is the difference between a PFD with
 bubbles on it and a P&ID. This script makes the gap measurable before anyone fixes it.
 
 Source of truth: temain_mod.f, the closed-loop simulation code in the Braatz group's TE archive
@@ -61,7 +61,7 @@ SOURCE_SHA256 = "31b83c17f8d52332d6f6fe46d9da3ee7131de2d018bb83945453350bf635c8b
 ARCHIVE = {"url": "https://web.mit.edu/braatzgroup/TE_process.zip", "member": "TE_process/temain_mod.f.txt"}
 MIRROR = "https://raw.githubusercontent.com/camaramm/tennessee-eastman-profBraatz/master/temain_mod.f"
 
-# Analyzer channels: which component each XMEAS index reports (teprob.f header; model analyzers AI-123/129/137).
+# Analyzer channels: which component each XMEAS index reports (teprob.f header; model analyzers AT-123/129/137).
 ANALYZER_COMPONENTS = {**{23 + i: c for i, c in enumerate("ABCDEF")},
                        **{29 + i: c for i, c in enumerate("ABCDEFGH")},
                        **{37 + i: c for i, c in enumerate("DEFGH")}}
@@ -262,7 +262,7 @@ def data_check(table, data_path=DATA):
 
 
 def _compact(text):
-    """Printed tag text as a lookup key: bubbles print 'FI 101' (letters over number), the model says FI-101."""
+    """Printed tag text as a lookup key: bubbles print 'FT 101' (letters over number), the model says FT-101."""
     return re.sub(r"[\s\-]", "", text or "").upper()
 
 

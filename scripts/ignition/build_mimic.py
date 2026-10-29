@@ -12,18 +12,18 @@ from build_hmi import (TRANSFORM_SIGNATURE, label, tag_binding, script_transform
 
 ROOT = Path(__file__).resolve().parents[2]
 TAGS = {
-    'U-100': ['FI-101', 'FI-102', 'FI-103'],
-    'R-101': ['PI-107', 'TI-109', 'LI-108', 'FI-106'],
-    'E-101': ['TI-122', 'FV-117'],
-    'V-101': ['PI-113', 'TI-111', 'LI-112', 'FI-114', 'FI-110'],
-    'K-101': ['FI-105', 'JI-120', 'FV-105'],
-    'C-101': ['PI-116', 'TI-118', 'LI-115', 'FI-117'],
+    'U-100': ['FT-101', 'FT-102', 'FT-103'],
+    'R-101': ['PT-107', 'TT-109', 'LT-108', 'FT-106'],
+    'E-101': ['TT-122', 'FV-117'],
+    'V-101': ['PT-113', 'TT-111', 'LT-112', 'FT-114', 'FT-110'],
+    'K-101': ['FT-105', 'JT-120', 'FV-105'],
+    'C-101': ['PT-116', 'TT-118', 'LT-115', 'FT-117'],
 }
 
 STREAMS = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S7b', 'S8', 'S8b', 'S9', 'S10', 'S11']
 VIEW_HEIGHT = 930
 KINDS = {'U-100': 'feed', 'R-101': 'reactor', 'E-101': 'condenser', 'V-101': 'separator', 'K-101': 'compressor', 'C-101': 'stripper'}
-LEVELS = {'R-101': 'LI-108', 'V-101': 'LI-112', 'C-101': 'LI-115'}
+LEVELS = {'R-101': 'LT-108', 'V-101': 'LT-112', 'C-101': 'LT-115'}
 
 
 def uri(svg):
@@ -140,7 +140,7 @@ def mimic(provider, model, hidden=frozenset()):
         eq['events'] = {'dom': {'onClick': {'type': 'nav', 'scope': 'C', 'config': {'page': '/unit/' + uid}}}}
         eq['props']['style'] = {'cursor': 'pointer'}
         kids.append(eq)
-        note = ('Fill = ' + level + ' measured %') if level else ('TI-122 = condenser CW outlet' if uid == 'E-101' else '')
+        note = ('Fill = ' + level + ' measured %') if level else ('TT-122 = condenser CW outlet' if uid == 'E-101' else '')
         kids.append(label('GraphicNote_' + uid, 1120 if uid == 'K-101' else x - 45, 170 if uid == 'K-101' else top + 151, 280, 20, note, {'fontSize': 12, 'textAlign': 'center', 'color': MUTED}))
     # Directions come from the model, where each one is verified against the simulator source.
     paths = {'S1': 'M15 389 H100', 'S2': 'M15 425 H100', 'S3': 'M15 461 H100',
@@ -179,7 +179,7 @@ def mimic(provider, model, hidden=frozenset()):
                               'props.style.color': tag_binding(base + '/State', [script('if not quality.isGood() or value is None:\n    return "#6b7280"\nreturn {1: "#8a5d00", 2: "#b91c1c"}.get(value, "#1f2937")')]),
                               'props.style.backgroundColor': quality_background(base + '/PV', 'transparent')}
             kids.append(c)
-    kids += [label('TopologyReview', 24, 765, 1552, 36, 'Topology verified against the simulator source: purge S9 corrected to leave the separator; TI-122 confirmed as condenser cooling-water outlet; PI-116 ownership unresolved in the source (computed from feed-header pressure).', {'fontSize': 12, 'color': '#624d25', 'backgroundColor': '#f1e9d9', 'padding': 8}),
+    kids += [label('TopologyReview', 24, 765, 1552, 36, 'Topology verified against the simulator source: purge S9 corrected to leave the separator; TT-122 confirmed as condenser cooling-water outlet; PT-116 ownership unresolved in the source (computed from feed-header pressure).', {'fontSize': 12, 'color': '#624d25', 'backgroundColor': '#f1e9d9', 'padding': 8}),
              label('ValveMeaning', 24, 811, 1552, 28, 'XMV readings are recorded output (%), not measured valve position. No controls or inferred flow animation. Full instrumentation and utility notes are on each unit page.', {'fontSize': 12, 'color': MUTED}),
              label('Legend', 24, 850, 1552, 30, 'Grey = normal; amber = outside existing normal band (not alarm); red = existing alarm. UNKNOWN on grey / hatching = no Good data from a configured source; dashed italic not connected = no data source. Level shape is not vessel volume.', {'fontSize': 12}),
              label('Scope', 24, 890, 1552, 24, 'Local prototype. Selection and layout need operator review. Hover a tag for its measurement name; select equipment to investigate boundaries, all readings and history.', {'fontSize': 12, 'color': MUTED})]

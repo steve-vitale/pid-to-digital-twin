@@ -36,7 +36,7 @@ You don't need Python, settings or keys. It's an extra option. If you'd rather n
        38). Either way it is honest about the data: no data source is connected to it yet.
 4. **See an alarm:** double-click **`fault-demo.bat`**. The replay jumps into the recorded fault 6 run (the A feed is
    lost): values that have left their normal range turn amber at once, and in about 30 seconds the reactor pressure
-   (PI-107) passes its alarm limit and turns red. **`normal-demo.bat`** switches back.
+   (PT-107) passes its alarm limit and turns red. **`normal-demo.bat`** switches back.
 5. **Stop:** double-click **`stop-demo.bat`**. Nothing is deleted, and `start-demo.bat` brings it back.
 
 ## Start it (Mac or Linux)

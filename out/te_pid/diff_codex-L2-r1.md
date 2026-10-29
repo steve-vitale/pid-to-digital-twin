@@ -7,22 +7,22 @@ Extracted twin: `out/te_pid/twin/codex-L2-r1/plant_model.json`. Verified model: 
 **47 reviewer corrections** to reach the verified model's structure:
 
 1. RECLASS U-100: extracted as line item 'general', the model has a feed_header unit
-1. SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)
-1. ADD FI-104 (A and C feed flow): tag not read on the drawings
-1. ADD FI-105 (Recycle flow): tag not read on the drawings
-1. ADD FI-106 (Reactor feed rate): tag not read on the drawings
-1. ADD PI-107 (Reactor pressure): tag not read on the drawings
-1. ADD LI-108 (Reactor level): tag not read on the drawings
-1. ADD TI-109 (Reactor temperature): tag not read on the drawings
-1. ADD FI-110 (Purge rate): tag not read on the drawings
-1. ADD FI-114 (Separator underflow): tag not read on the drawings
-1. ADD FI-117 (Stripper underflow (product)): tag not read on the drawings
-1. ADD FI-119 (Stripper steam flow): tag not read on the drawings
-1. ADD JI-120 (Compressor work): tag not read on the drawings
-1. ADD AI-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings
-1. ADD AI-129 (Purge gas analyzer (components A-H)): tag not read on the drawings
+1. SET unit of FT-101: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FT-102: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FT-103: R-101 -> U-100 (converter rule: connection_path)
+1. ADD FT-104 (A and C feed flow): tag not read on the drawings
+1. ADD FT-105 (Recycle flow): tag not read on the drawings
+1. ADD FT-106 (Reactor feed rate): tag not read on the drawings
+1. ADD PT-107 (Reactor pressure): tag not read on the drawings
+1. ADD LT-108 (Reactor level): tag not read on the drawings
+1. ADD TT-109 (Reactor temperature): tag not read on the drawings
+1. ADD FT-110 (Purge rate): tag not read on the drawings
+1. ADD FT-114 (Separator underflow): tag not read on the drawings
+1. ADD FT-117 (Stripper underflow (product)): tag not read on the drawings
+1. ADD FT-119 (Stripper steam flow): tag not read on the drawings
+1. ADD JT-120 (Compressor work): tag not read on the drawings
+1. ADD AT-123 (Reactor feed analyzer (components A-F)): tag not read on the drawings
+1. ADD AT-129 (Purge gas analyzer (components A-H)): tag not read on the drawings
 1. SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)
 1. ADD FV-101 (A feed flow valve): tag not read on the drawings
@@ -64,31 +64,31 @@ Extracted twin: `out/te_pid/twin/codex-L2-r1/plant_model.json`. Verified model: 
 | unit | V-101 | ok | extracted as equipment (tank) |
 | unit | K-101 | ok | extracted as equipment (pump) |
 | unit | C-101 | ok | extracted as equipment (tank) |
-| instrument | FI-101 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-102 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-103 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-104 | missing | not read |
-| instrument | FI-105 | missing | not read |
-| instrument | FI-106 | missing | not read |
-| instrument | PI-107 | missing | not read |
-| instrument | LI-108 | missing | not read |
-| instrument | TI-109 | missing | not read |
-| instrument | FI-110 | missing | not read |
-| instrument | TI-111 | ok |  |
-| instrument | LI-112 | ok |  |
-| instrument | PI-113 | ok |  |
-| instrument | FI-114 | missing | not read |
-| instrument | LI-115 | ok |  |
-| instrument | PI-116 | ok |  |
-| instrument | FI-117 | missing | not read |
-| instrument | TI-118 | ok |  |
-| instrument | FI-119 | missing | not read |
-| instrument | JI-120 | missing | not read |
-| instrument | TI-121 | ok |  |
-| instrument | TI-122 | ok |  |
-| instrument | AI-123 | missing | not read |
-| instrument | AI-129 | missing | not read |
-| instrument | AI-137 | ok |  |
+| instrument | FT-101 | found, fields differ | unit R-101 (model: U-100); read as FI-101, its revision-A tag |
+| instrument | FT-102 | found, fields differ | unit R-101 (model: U-100); read as FI-102, its revision-A tag |
+| instrument | FT-103 | found, fields differ | unit R-101 (model: U-100); read as FI-103, its revision-A tag |
+| instrument | FT-104 | missing | not read |
+| instrument | FT-105 | missing | not read |
+| instrument | FT-106 | missing | not read |
+| instrument | PT-107 | missing | not read |
+| instrument | LT-108 | missing | not read |
+| instrument | TT-109 | missing | not read |
+| instrument | FT-110 | missing | not read |
+| instrument | TT-111 | ok | read as TI-111, its revision-A tag |
+| instrument | LT-112 | ok | read as LI-112, its revision-A tag |
+| instrument | PT-113 | ok | read as PI-113, its revision-A tag |
+| instrument | FT-114 | missing | not read |
+| instrument | LT-115 | ok | read as LI-115, its revision-A tag |
+| instrument | PT-116 | ok | read as PI-116, its revision-A tag |
+| instrument | FT-117 | missing | not read |
+| instrument | TT-118 | ok | read as TI-118, its revision-A tag |
+| instrument | FT-119 | missing | not read |
+| instrument | JT-120 | missing | not read |
+| instrument | TT-121 | ok | read as TI-121, its revision-A tag |
+| instrument | TT-122 | ok | read as TI-122, its revision-A tag |
+| instrument | AT-123 | missing | not read |
+| instrument | AT-129 | missing | not read |
+| instrument | AT-137 | ok | read as AI-137, its revision-A tag |
 | final_element | FV-102 | found, fields differ | unit R-101 (model: U-100); read as FV-201, its revision-A tag |
 | final_element | FV-103 | found, fields differ | unit R-101 (model: U-100); read as FV-202, its revision-A tag |
 | final_element | FV-101 | missing | not read |

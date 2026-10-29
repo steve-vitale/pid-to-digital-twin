@@ -44,7 +44,7 @@ a stale output is not the thing you think you are reviewing.
 
 | Step | Look at | You can confirm (Track A) | Only an operations reviewer can decide (Track B) | If you correct something |
 |---|---|---|---|---|
-| **Stage 0: the model** | `data/te_process_model.json`, `out/te_source_check.md`, `out/te_topology_check.md` | each tag's description and units match the source-check report; the purge and its three tags sit on V-101 and PI-116 is still flagged unresolvable, as the topology report says | that a unit, stream or tag owner is right for the process | review sheet row → `apply_review.py` (dry run first), then `rebuild --from te.source` |
+| **Stage 0: the model** | `data/te_process_model.json`, `out/te_source_check.md`, `out/te_topology_check.md` | each tag's description and units match the source-check report; the purge and its three tags sit on V-101 and PT-116 is still flagged unresolvable, as the topology report says | that a unit, stream or tag owner is right for the process | review sheet row → `apply_review.py` (dry run first), then `rebuild --from te.source` |
 | Optional: re-run the source check | `python scripts/verify_te_source.py` (report only; downloads `teprob.f` if not cached) | the report is unchanged, or explain every difference | n/a | then `python scripts/pipeline.py record --stage te.source_check` |
 | **Stage 1: exports** | `out/ops_review_sheet.csv`, `out/ignition/te_tags.json`, `out/pi/pi_builder_af.csv` | every tag is present, under the unit the model says, and its documentation ends with the same source check and review status as the model | which values belong on a screen; alarm priorities | never here: go back to Stage 0 |
 | **Stage 2: mimic layout (proof of concept)** | `out/mimic/te_overview_layout.json`, the overview screenshots | each reading is drawn beside the unit that owns it in the model, and reads that unit's tag path | which 2–4 readings represent a unit | a display choice goes into the findings file; an ownership fix goes back to Stage 0 |
@@ -61,7 +61,7 @@ git diff --stat                          # the model, the regenerated outputs an
 ```
 
 Then open the corrected item in each output (the Ignition tags, the PI sheet, the review sheet, the mimic layout,
-the scene data) and check it moved. `scripts/test_pipeline.py` does exactly this on a temp copy with a test-fixture move (FI-105 from K-101 to V-101), if you
+the scene data) and check it moved. `scripts/test_pipeline.py` does exactly this on a temp copy with a test-fixture move (FT-105 from K-101 to V-101), if you
 want to see the expected result first.
 
 ## Walk 2: OPEN100

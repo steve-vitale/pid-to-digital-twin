@@ -3117,3 +3117,59 @@ it in minutes; the author, reading for flow, doesn't.
 **At your plant:** before a model, a drawing or a screen goes to the people who'll use it, give it to someone whose job
 is to find what's wrong with it, and fix what they find in the artifact, not in the cover note.
 
+
+---
+
+## 61. Tag the TE transmitters as transmitters, and let a stranger's agent check the README
+
+**What:** 2026-10-29. Every TE measurement is now a field transmitter (FT, PT, LT, TT, AT, JT) read by its
+controller: FT-101 feeds FIC-101. The generated sheets are revision D. Entry 51 rejected this rename; entry 60's
+reviewers made the case for it (an indicator bubble feeding a controller is the first comment a controls engineer
+leaves), and the Bayer drawing had already been retagged the same way. Separately, `scripts/check_claims.py` compares
+each headline number in the README with the committed file it comes from, and `AGENTS.md` tells a reader's coding
+agent to run it.
+
+**How:**
+- **The same tool, one more mapping.** `scripts/retag_te_valves.py` now takes `--mapping`;
+  `data/te_retag_2026-10-29.json` renames the 25 measurement tags (639 replacements in 49 source files). Instruments
+  now keep `former_tag` too, and an item renamed twice keeps the tag it had just before this rename (the valves keep
+  their revision-A numbers). Outputs were rebuilt by the pipeline, not edited.
+- **Revision C is archived.** Its sheets moved to `data/te_pid/rev-c/` (a new source stage, `te.pid_rev_c`),
+  byte-identical to what the revision C read-back stages hashed when they ran; those stages now point there, and
+  `run_te_roundtrip.py` takes `--sheets` so a future run names the revision it reads.
+- **Old evidence still joins.** The reviewer diffs keep their correction counts (9, 10, 11, 47, 54) through
+  `former_tag`. The live check now does the same: 36 of 36 and 16 of 16 extracted tags reach a moving replay point,
+  as before.
+
+**What it found:**
+- **The live check had been stale since entry 51 without saying so.** Its committed output still showed the old valve
+  numbers as replay points, because the stage didn't list the process model as an input: the replay server reads the
+  model, but the pipeline couldn't see that. It does now, and the check joins renamed tags explicitly.
+- **A text rename can't see code that tests a prefix.** Four places picked tags by their letters (level bands by
+  `LI-`, analyzers by `AI-`): after the rename they would have matched nothing and said nothing. The 3D render
+  verifier caught one (16 analyzer channels suddenly "unexplained"); a search for `startswith` found the rest. All
+  follow the new letters.
+- **The published tour pages were a hand copy.** `drafts/interactive-tour/page/` kept the old tags because the stage
+  wrote to `out/` and nothing copied it over. The copy is now a step of the stage, and the pages are its outputs.
+- **The README's headline F1 was one run's best metric.** "Symbols F1 0.97, connections 0.89" came from the single
+  round-2 run (symbols located, class ignored) and sat beside a five-run review load. The five-run means are 0.93
+  and 0.87; the README and the deliverables table now say those. The claim checker found it on its first run.
+- **7 streams disagree on their tier.** The review queue puts them in amber; the plant model's per-item rollup says
+  "n/a", so the pipeline's summary line reads 669 amber against the README's 676. The README matches the queue a
+  reviewer works from. Not fixed here.
+
+**Why:**
+- **A checker, not another document.** The reviewers' strongest findings were drift: numbers and screenshots that
+  stopped matching their sources. `check_claims.py` makes that a test (it runs in CI), and it's what a skeptical
+  reader's agent can run in under a minute without trusting the prose. Claims no result file holds are listed as
+  "prose only" instead of passing quietly (one: Figure 10's first run, 10 of 21).
+- **AGENTS.md asks for nothing on the author's behalf.** It lists the checks and the limits to report, and asks the
+  agent to tell its user what fails. A file that steered an agent's verdict would deserve to be ignored.
+- **Rejected:** keeping indicator letters for the replay points' names (entry 51's reason). The HMI shows whatever
+  the tag is called; there was no reason for the field device's tag to be wrong to keep a display name.
+
+**Lesson:** a pipeline is only as honest as its list of inputs. Two outputs went stale here without anything turning
+red, and both times the missing piece was a dependency the code had and the manifest didn't.
+
+**At your plant:** when you retag, search the code for logic that keys on tag letters (alarm grouping, display
+filters, historian queries), not just for the tags themselves. A rename tool finds names; it can't find a rule.

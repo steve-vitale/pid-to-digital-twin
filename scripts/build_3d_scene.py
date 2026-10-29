@@ -502,7 +502,7 @@ def build_scene(model, layout, bands=None, alarms=None, replay=None, samples=(),
                 pos = (p[0] + 0.35, p[1] - 0.35, p[2] + 0.9 + 0.65 * k)
             else:
                 # Beside the riser, on the side away from the unit's axis. (429d7a7 used a fixed (+0.35, -0.35)
-                # offset, which put FI-106 and AI-123 inside the reactor shell; the render verifier caught it.)
+                # offset, which put FT-106 and AT-123 inside the reactor shell; the render verifier caught it.)
                 p = pipe["points"][end]
                 e = equipment[item["unit"]]
                 ox, oy = p[0] - e["position"][0], p[1] - e["position"][1]
@@ -654,7 +654,7 @@ def key_tags(uid, markers, alarms, bands, limit=4):
     var = {m["tag"]: next((i for i, v in enumerate(VARIABLE_PRIORITY) if v in m["description"].lower() or
                            v == (m.get("variable") or "")), len(VARIABLE_PRIORITY)) for m in mine}
     insts = sorted((m for m in mine if m["kind"] == "instrument" and m not in alarmed),
-                   key=lambda m: (m["tag"].startswith("AI-"), var[m["tag"]], m["tag"]))
+                   key=lambda m: (m["tag"].startswith("AT-"), var[m["tag"]], m["tag"]))
     picked = alarmed[:2] + finals[:1]
     picked += [m for m in insts if m not in picked][:max(0, limit - len(picked))]
     return [m["tag"] for m in picked[:limit]]
@@ -770,7 +770,7 @@ def legacy_shots(scene):
         if r:
             shots.append({"name": "22_reactor_fault_alarm", "camera": r["legacy_camera"], "target": r["legacy_target"],
                           "state_index": 2, "visible": ids,
-                          "caption": cap("Fault 6 at the reactor: PI-107 above its 2895 kPa published limit", 2)})
+                          "caption": cap("Fault 6 at the reactor: PT-107 above its 2895 kPa published limit", 2)})
     return shots
 
 
@@ -818,7 +818,7 @@ def level_bands(scene, bands):
     out = []
     for m in scene["markers"]:
         e = next((x for x in scene["equipment"] if x["id"] == m["unit"]), None)
-        if not m["tag"].startswith("LI-") or m["tag"] not in bands or e is None or \
+        if not m["tag"].startswith("LT-") or m["tag"] not in bands or e is None or \
                 e["shape"] not in ("vertical_vessel", "column"):
             continue
         frac = max(0.0, min(1.0, bands[m["tag"]]["mean"] / 100.0)) if bands[m["tag"]].get("mean") is not None else 0.5

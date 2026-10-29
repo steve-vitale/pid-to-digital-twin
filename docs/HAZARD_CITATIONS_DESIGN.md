@@ -75,8 +75,8 @@ overpressure are real ways reactors hurt people. It does not say that the TE rea
 
 | | Source | In this prototype |
 |---|---|---|
-| **Shutdown limits** | Data: a unit carrying a published Critical (shutdown) limit, where the simulator trips the plant | R-101 (PI-107 > 3000 kPa g, TI-109 > 175 degC, from `build_meta.json`) |
-| **First warning** | Data: the unit whose tag leaves its normal band first in the recorded fault | U-100 (FI-101 and FV-101 at the fault-6 start) |
+| **Shutdown limits** | Data: a unit carrying a published Critical (shutdown) limit, where the simulator trips the plant | R-101 (PT-107 > 3000 kPa g, TT-109 > 175 degC, from `build_meta.json`) |
+| **First warning** | Data: the unit whose tag leaves its normal band first in the recorded fault | U-100 (FT-101 and FV-101 at the fault-6 start) |
 | **Why this matters** | Prototype citation file: public incidents matched to the equipment kind | One citation per stop, in the caption and narration |
 
 The public catalogue never makes a unit "highest risk" by itself. At a real plant, risk ranking comes from the
@@ -87,7 +87,7 @@ selection bias), so they explain why a hazard matters; they do not show how like
 
 - **Emphasis stops.** A ring on the ground around the unit (red for shutdown limits, amber for first warning)
   and a coloured label stating the reason and the numbers, e.g. "PUBLISHED SHUTDOWN LIMITS:
-  PI-107 > 3000 kPa g, TI-109 > 175 degC". The numbers come from data files.
+  PT-107 > 3000 kPa g, TT-109 > 175 degC". The numbers come from data files.
 - **Caption line** on each stop's still: "Why this matters: \<one line\> (\<agency\>)".
 - **Narration sentence** with the source: "Why this matters: \<hazard\>. Source: CSB, 2008." The full citation (title,
   URL, matched terms) is in `out/3d/te_scene.json` under `tour_script.stops[].citation`.
@@ -127,7 +127,7 @@ records**. The curated picks:
 search of the same 972 records for gas-phase, exothermic, temperature-excursion, polymerization and runaway cases
 found no gas-phase reactor incident. Bayer CropScience's vessel was a waste-treatment vessel, not a gas-phase reactor, so it no longer leads.
 Kuraray now leads: a reactor was taken above its pressure limit, and the CSB asked for that limit to be made clear in
-operator training and the control interface. That is the closest fit to the PI-107 high alarm the tour shows.
+operator training and the control interface. That is the closest fit to the PT-107 high alarm the tour shows.
 Bayer stays, phrased generally as an example of runaway exothermic reactions.
 
 What the run also showed:

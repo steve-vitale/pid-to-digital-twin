@@ -6,10 +6,13 @@ scripts/degrade_scans.py (same levels and seeding as round 4): 3 replicates per 
 
 Labels: runs/<prefix>-<cond>-tiles-r<n>/ (raw tile replies) and runs/<prefix>-<cond>-trace-r<n>/ (what is scored).
 The default prefix "tec" keeps revision C's runs apart from revision A's ("te"), which read different sheets.
+Revision C's sheets are archived in data/te_pid/rev-c (journal entry 61); its runs were made with --sheets
+data/te_pid/rev-c. A new revision needs its own --sheets and --prefix.
 A finished run is skipped, so the script can be re-run after an interruption. Model calls go through the Codex and
 Claude Code CLIs on their subscriptions; run_extraction.py records model, prompt hash, image hash and time per run.
 
-Usage: python scripts/run_te_roundtrip.py --tool codex|claude [--model M] [--prefix tec] [--conditions clean,L1,L2,L3]
+Usage: python scripts/run_te_roundtrip.py --tool codex|claude --sheets data/te_pid/rev-c [--model M] [--prefix tec]
+       [--conditions clean,L1,L2,L3]
 """
 import argparse
 import os
@@ -23,8 +26,8 @@ REPLICATES = {"clean": 5, "L1": 3, "L2": 3, "L3": 3}
 MODELS = {"codex": "gpt-6.1-sol", "claude": "claude-opus-5-5"}
 
 
-def sheet_dir(cond):
-    return "data/te_pid" if cond == "clean" else f"data/te_pid/scan-{cond}"
+def sheet_dir(cond, sheets):
+    return sheets if cond == "clean" else f"{sheets}/scan-{cond}"
 
 
 def done(label, tool):
@@ -37,14 +40,15 @@ def main():
     ap.add_argument("--tool", choices=list(MODELS), required=True)
     ap.add_argument("--model", default=None)
     ap.add_argument("--prefix", default="tec")
+    ap.add_argument("--sheets", required=True, help="the sheet directory the runs read, e.g. data/te_pid/rev-c")
     ap.add_argument("--conditions", default="clean,L1,L2,L3")
     a = ap.parse_args()
     model = a.model or MODELS[a.tool]
-    if not all((ROOT / sheet_dir(c) / "101.png").exists() for c in ("L1", "L2", "L3")):
-        subprocess.run([sys.executable, "scripts/degrade_scans.py", "--src", "data/te_pid", "--drawings", SHEETS,
-                        "--dest", "data/te_pid/scan"], cwd=ROOT, check=True)
+    if not all((ROOT / sheet_dir(c, a.sheets) / "101.png").exists() for c in ("L1", "L2", "L3")):
+        subprocess.run([sys.executable, "scripts/degrade_scans.py", "--src", a.sheets, "--drawings", SHEETS,
+                        "--dest", f"{a.sheets}/scan"], cwd=ROOT, check=True)
     for cond in a.conditions.split(","):
-        env = dict(os.environ, PID_SHEETS_DIR=sheet_dir(cond))
+        env = dict(os.environ, PID_SHEETS_DIR=sheet_dir(cond, a.sheets))
         for rep in range(1, REPLICATES[cond] + 1):
             tiles, trace = f"{a.prefix}-{cond}-tiles-r{rep}", f"{a.prefix}-{cond}-trace-r{rep}"
             if not done(tiles, a.tool):

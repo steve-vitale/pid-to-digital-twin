@@ -9,7 +9,7 @@ Two passes per still:
           "does the ID survive a whole-screen read with all the clutter around it?"
 
 Metric: character accuracy = 1 - Levenshtein(ocr, truth) / len(truth), after folding case,
-collapsing whitespace and removing line breaks. Tag/unit IDs (e.g. PI-107, R-101) are scored
+collapsing whitespace and removing line breaks. Tag/unit IDs (e.g. PT-107, R-101) are scored
 separately as exact matches, because an ID read wrong is worse than a word read wrong.
 
 OCR is a proxy for legibility, not proof: an engine can fail on text a person reads easily

@@ -15,7 +15,7 @@ Second source: the revised TE code by Bathelt, Ricker & Jelali (2015), temexd_mo
 archive. Its header documents the states, the 41 measurements and the stream names in plain words. It is used as a
 cross-check (holdup names, stream numbers, measurement names) and for one fact teprob.f does not state: the
 published numbers of the two streams that carry no instrument (5, stripper overhead; 7, reactor effluent). Without
-it, those streams are reported unresolvable and the TI-122 name vote has one witness fewer.
+it, those streams are reported unresolvable and the TT-122 name vote has one witness fewer.
 
 Each element gets one result:
   confirmed     the source agrees with the model

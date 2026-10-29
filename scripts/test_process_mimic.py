@@ -51,7 +51,7 @@ class MimicTests(unittest.TestCase):
                 self.assertEqual(event['type'], 'nav')
         text = json.dumps(self.v)
         self.assertIn('verified against the simulator source', text)
-        self.assertIn('PI-116 ownership unresolved', text)
+        self.assertIn('PT-116 ownership unresolved', text)
         self.assertNotIn('TOPOLOGY UNVERIFIED', text)
         self.assertIn('not measured valve position', text)
     def test_no_unmapped_agitator_binding(self):
@@ -84,9 +84,9 @@ class MimicTests(unittest.TestCase):
                         self.assertIn('UNKNOWN', svg)
                     if good and value in [-4, 130]: self.assertIn('off scale', svg)
     def test_hidden_tags(self):
-        v = m.mimic('Twin', MODEL, {'LI-108', 'FV-117', 'SC-212'})
+        v = m.mimic('Twin', MODEL, {'LT-108', 'FV-117', 'SC-212'})
         bindings = json.dumps([c.get('propConfig', {}) for c in v['root']['children']])
-        for tag in ['LI-108', 'FV-117', 'SC-212']: self.assertNotIn('/' + tag + '/', bindings)
+        for tag in ['LT-108', 'FV-117', 'SC-212']: self.assertNotIn('/' + tag + '/', bindings)
     def test_summary_quality_and_independent_bindings(self):
         for name in ['AlarmSummary', 'BandSummary']:
             c = next(c for c in self.v['root']['children'] if c['meta']['name'] == name)
@@ -209,11 +209,11 @@ class MimicTests(unittest.TestCase):
     def test_rejected_and_parent_hidden_do_not_bind_removed_tags(self):
         import build_hmi
         meta = json.loads((ROOT / 'out/ignition/gateway/build_meta.json').read_text())
-        rejected = {'PI-107', 'AI-123', 'AI-123-B', 'AI-123-C', 'AI-123-D', 'AI-123-E', 'AI-123-F'}
+        rejected = {'PT-107', 'AT-123', 'AT-123-B', 'AT-123-C', 'AT-123-D', 'AT-123-E', 'AT-123-F'}
         ranges = {k:v for k,v in meta['te_ranges'].items() if k not in rejected}
-        views,_ = build_hmi.te_views('Twin',ranges,meta['alarms'],{'AI-129'})
+        views,_ = build_hmi.te_views('Twin',ranges,meta['alarms'],{'AT-129'})
         bindings = json.dumps([c.get('propConfig',{}) for v in views.values() for c in v['root']['children']])
-        for tag in rejected | {'AI-129','AI-129-B','AI-129-C','AI-129-D','AI-129-E','AI-129-F','AI-129-G','AI-129-H'}:
+        for tag in rejected | {'AT-129','AT-129-B','AT-129-C','AT-129-D','AT-129-E','AT-129-F','AT-129-G','AT-129-H'}:
             self.assertNotIn('/'+tag+'/',bindings)
 
     def test_all_unit_spatial_measurements_and_associations(self):

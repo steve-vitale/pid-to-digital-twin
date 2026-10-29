@@ -164,7 +164,7 @@ def check_exports(rep, scene, model, provider=None, seed_tags=None, pi_csv=None,
     def compare(label, index, idx_units, fields, desc_ok=None):
         missing = sorted(t for t in markers if t not in index)
         extra = sorted(t for t in index if t not in markers)
-        explained = [t for t in extra if re.match(r"^(AI-\d+)-[A-Z]$", t) and t.rsplit("-", 1)[0] in markers]
+        explained = [t for t in extra if re.match(r"^(AT-\d+)-[A-Z]$", t) and t.rsplit("-", 1)[0] in markers]
         unexplained = [t for t in extra if t not in explained]
         bad = []
         for t, m in markers.items():
@@ -191,7 +191,7 @@ def check_exports(rep, scene, model, provider=None, seed_tags=None, pi_csv=None,
         compare("ignition_gateway", prov, prov_units, ("uom",),
                 lambda t, x: x["param_tag"] == t and (x["doc"].startswith(items[t]["description"] + " |") or (
                     # Analyzers: the gateway documents one tag per component ("<stem> | component A | ...").
-                    t.startswith("AI-") and x["doc"].startswith(re.sub(r"\s*\(.*?\)", "", items[t]["description"]) + " | component "))))
+                    t.startswith("AT-") and x["doc"].startswith(re.sub(r"\s*\(.*?\)", "", items[t]["description"]) + " | component "))))
         if bands is not None:
             diffs = []
             for t in markers:

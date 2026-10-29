@@ -4,7 +4,7 @@
   "status": "first-pass display layout, built to iterate on; not reviewed by operations",
   "generated_by": "scripts/export_mimic_layout.py (renders scripts/ignition/build_mimic.py offline)",
   "source": "data/te_process_model.json",
-  "source_sha256": "f8fb1ef85b27fe10b06b0f88582649fb96080ad57eb10aeb300cf9918bdc18ae",
+  "source_sha256": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
   "inherits": "each reading carries the provenance of its model item; positions are illustrative"
  },
  "units": [
@@ -65,13 +65,13 @@
  ],
  "readings": [
   {
-   "tag": "FI-101",
+   "tag": "FT-101",
    "drawn_beside": "U-100",
    "label_xy": [
     25,
     535
    ],
-   "reads": "[Twin]TE_Plant/U-100/FI-101/PV",
+   "reads": "[Twin]TE_Plant/U-100/FT-101/PV",
    "owner_in_model": "U-100",
    "provenance": {
     "source_check": "confirmed",
@@ -79,13 +79,13 @@
    }
   },
   {
-   "tag": "FI-102",
+   "tag": "FT-102",
    "drawn_beside": "U-100",
    "label_xy": [
     25,
     565
    ],
-   "reads": "[Twin]TE_Plant/U-100/FI-102/PV",
+   "reads": "[Twin]TE_Plant/U-100/FT-102/PV",
    "owner_in_model": "U-100",
    "provenance": {
     "source_check": "confirmed",
@@ -93,13 +93,13 @@
    }
   },
   {
-   "tag": "FI-103",
+   "tag": "FT-103",
    "drawn_beside": "U-100",
    "label_xy": [
     25,
     595
    ],
-   "reads": "[Twin]TE_Plant/U-100/FI-103/PV",
+   "reads": "[Twin]TE_Plant/U-100/FT-103/PV",
    "owner_in_model": "U-100",
    "provenance": {
     "source_check": "confirmed",
@@ -107,13 +107,13 @@
    }
   },
   {
-   "tag": "PI-107",
+   "tag": "PT-107",
    "drawn_beside": "R-101",
    "label_xy": [
     315,
     535
    ],
-   "reads": "[Twin]TE_Plant/R-101/PI-107/PV",
+   "reads": "[Twin]TE_Plant/R-101/PT-107/PV",
    "owner_in_model": "R-101",
    "provenance": {
     "source_check": "confirmed",
@@ -121,13 +121,13 @@
    }
   },
   {
-   "tag": "TI-109",
+   "tag": "TT-109",
    "drawn_beside": "R-101",
    "label_xy": [
     315,
     565
    ],
-   "reads": "[Twin]TE_Plant/R-101/TI-109/PV",
+   "reads": "[Twin]TE_Plant/R-101/TT-109/PV",
    "owner_in_model": "R-101",
    "provenance": {
     "source_check": "confirmed",
@@ -135,13 +135,13 @@
    }
   },
   {
-   "tag": "LI-108",
+   "tag": "LT-108",
    "drawn_beside": "R-101",
    "label_xy": [
     315,
     595
    ],
-   "reads": "[Twin]TE_Plant/R-101/LI-108/PV",
+   "reads": "[Twin]TE_Plant/R-101/LT-108/PV",
    "owner_in_model": "R-101",
    "provenance": {
     "source_check": "confirmed",
@@ -149,13 +149,13 @@
    }
   },
   {
-   "tag": "FI-106",
+   "tag": "FT-106",
    "drawn_beside": "R-101",
    "label_xy": [
     315,
     625
    ],
-   "reads": "[Twin]TE_Plant/R-101/FI-106/PV",
+   "reads": "[Twin]TE_Plant/R-101/FT-106/PV",
    "owner_in_model": "R-101",
    "provenance": {
     "source_check": "confirmed",
@@ -163,13 +163,13 @@
    }
   },
   {
-   "tag": "TI-122",
+   "tag": "TT-122",
    "drawn_beside": "E-101",
    "label_xy": [
     605,
     535
    ],
-   "reads": "[Twin]TE_Plant/E-101/TI-122/PV",
+   "reads": "[Twin]TE_Plant/E-101/TT-122/PV",
    "owner_in_model": "E-101",
    "provenance": {
     "source_check": "corrected",
@@ -191,13 +191,13 @@
    }
   },
   {
-   "tag": "PI-113",
+   "tag": "PT-113",
    "drawn_beside": "V-101",
    "label_xy": [
     895,
     535
    ],
-   "reads": "[Twin]TE_Plant/V-101/PI-113/PV",
+   "reads": "[Twin]TE_Plant/V-101/PT-113/PV",
    "owner_in_model": "V-101",
    "provenance": {
     "source_check": "confirmed",
@@ -205,13 +205,13 @@
    }
   },
   {
-   "tag": "TI-111",
+   "tag": "TT-111",
    "drawn_beside": "V-101",
    "label_xy": [
     895,
     565
    ],
-   "reads": "[Twin]TE_Plant/V-101/TI-111/PV",
+   "reads": "[Twin]TE_Plant/V-101/TT-111/PV",
    "owner_in_model": "V-101",
    "provenance": {
     "source_check": "confirmed",
@@ -219,13 +219,13 @@
    }
   },
   {
-   "tag": "LI-112",
+   "tag": "LT-112",
    "drawn_beside": "V-101",
    "label_xy": [
     895,
     595
    ],
-   "reads": "[Twin]TE_Plant/V-101/LI-112/PV",
+   "reads": "[Twin]TE_Plant/V-101/LT-112/PV",
    "owner_in_model": "V-101",
    "provenance": {
     "source_check": "confirmed",
@@ -233,13 +233,13 @@
    }
   },
   {
-   "tag": "FI-114",
+   "tag": "FT-114",
    "drawn_beside": "V-101",
    "label_xy": [
     895,
     625
    ],
-   "reads": "[Twin]TE_Plant/V-101/FI-114/PV",
+   "reads": "[Twin]TE_Plant/V-101/FT-114/PV",
    "owner_in_model": "V-101",
    "provenance": {
     "source_check": "confirmed",
@@ -247,13 +247,13 @@
    }
   },
   {
-   "tag": "FI-110",
+   "tag": "FT-110",
    "drawn_beside": "V-101",
    "label_xy": [
     895,
     655
    ],
-   "reads": "[Twin]TE_Plant/V-101/FI-110/PV",
+   "reads": "[Twin]TE_Plant/V-101/FT-110/PV",
    "owner_in_model": "V-101",
    "provenance": {
     "source_check": "confirmed",
@@ -261,13 +261,13 @@
    }
   },
   {
-   "tag": "FI-105",
+   "tag": "FT-105",
    "drawn_beside": "K-101",
    "label_xy": [
     1210,
     150
    ],
-   "reads": "[Twin]TE_Plant/K-101/FI-105/PV",
+   "reads": "[Twin]TE_Plant/K-101/FT-105/PV",
    "owner_in_model": "K-101",
    "provenance": {
     "source_check": "confirmed",
@@ -275,13 +275,13 @@
    }
   },
   {
-   "tag": "JI-120",
+   "tag": "JT-120",
    "drawn_beside": "K-101",
    "label_xy": [
     1210,
     180
    ],
-   "reads": "[Twin]TE_Plant/K-101/JI-120/PV",
+   "reads": "[Twin]TE_Plant/K-101/JT-120/PV",
    "owner_in_model": "K-101",
    "provenance": {
     "source_check": "confirmed",
@@ -303,13 +303,13 @@
    }
   },
   {
-   "tag": "PI-116",
+   "tag": "PT-116",
    "drawn_beside": "C-101",
    "label_xy": [
     1255,
     535
    ],
-   "reads": "[Twin]TE_Plant/C-101/PI-116/PV",
+   "reads": "[Twin]TE_Plant/C-101/PT-116/PV",
    "owner_in_model": "C-101",
    "provenance": {
     "source_check": "confirmed",
@@ -317,13 +317,13 @@
    }
   },
   {
-   "tag": "TI-118",
+   "tag": "TT-118",
    "drawn_beside": "C-101",
    "label_xy": [
     1255,
     565
    ],
-   "reads": "[Twin]TE_Plant/C-101/TI-118/PV",
+   "reads": "[Twin]TE_Plant/C-101/TT-118/PV",
    "owner_in_model": "C-101",
    "provenance": {
     "source_check": "confirmed",
@@ -331,13 +331,13 @@
    }
   },
   {
-   "tag": "LI-115",
+   "tag": "LT-115",
    "drawn_beside": "C-101",
    "label_xy": [
     1255,
     595
    ],
-   "reads": "[Twin]TE_Plant/C-101/LI-115/PV",
+   "reads": "[Twin]TE_Plant/C-101/LT-115/PV",
    "owner_in_model": "C-101",
    "provenance": {
     "source_check": "confirmed",
@@ -345,13 +345,13 @@
    }
   },
   {
-   "tag": "FI-117",
+   "tag": "FT-117",
    "drawn_beside": "C-101",
    "label_xy": [
     1255,
     625
    ],
-   "reads": "[Twin]TE_Plant/C-101/FI-117/PV",
+   "reads": "[Twin]TE_Plant/C-101/FT-117/PV",
    "owner_in_model": "C-101",
    "provenance": {
     "source_check": "confirmed",

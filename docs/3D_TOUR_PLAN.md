@@ -24,7 +24,7 @@ The prototype uses the **Tennessee Eastman (TE) seed model**, the same one the 2
 not use the OPEN100 extracted twin, whose stream directions are `unknown` and which has no units arranged as a
 process (see [Adapting it](#how-a-plant-would-adapt-it)).
 
-![Reactor stop after the review redesign: the reactor in full colour with other units ghosted, four tag pills on short leaders, PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines, a purpose card and a why-this-matters card, a corner badge and a two-line caption](../drafts/3d-tour/02_r-101_normal.jpg)
+![Reactor stop after the review redesign: the reactor in full colour with other units ghosted, four tag pills on short leaders, PT-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines, a purpose card and a why-this-matters card, a corner badge and a two-line caption](../drafts/3d-tour/02_r-101_normal.jpg)
 
 ## What a 3D tour adds for operators
 
@@ -67,7 +67,7 @@ TE source is a process description, not a plant. So in this prototype:
 | "Why this matters" citations | prototype keyword match against public incident records, curated by Claude | **Heuristic**; mechanism analogies, not a hazard analysis |
 | Tag colours | recorded TE replay (`d06_te.dat`, SHA-256 checked), committed normal bands, published alarm setpoints | Sourced data; **recorded replay, not live**; bands are display aids, not limits |
 | Agitator SC-212 | no replay source (XMV12 absent) | Shown black, "NOT CONNECTED", never animated |
-| TI-122, PI-116 | the topology check settled TI-122 on E-101 (same cooling-water circuit); PI-116's owner is unresolvable in the source | A tag is marked "owner disputed" only while the layout records an open discrepancy about it: PI-116 now, not TI-122 |
+| TT-122, PT-116 | the topology check settled TT-122 on E-101 (same cooling-water circuit); PT-116's owner is unresolvable in the source | A tag is marked "owner disputed" only while the layout records an open discrepancy about it: PT-116 now, not TT-122 |
 
 Every rendered frame carries a caption saying recorded replay, placeholder geometry and source-checked (not operations-reviewed) topology. The
 GLB carries the same statement as text on the ground plane. Renders hide that text: the caption already says it,
@@ -137,8 +137,8 @@ classification rules on synthetic rows (a nonfinite reading is never shown as no
 makes red). Turning the fault-6 stills into such a case is a small, worthwhile next step, because it would catch a
 band or alarm change silently altering the training material.
 
-At sample 258 (+294 minutes), 19 tags are outside their band and PI-107 is in alarm. Analyzer markers show the
-first component's channel only (AI-123 = component A); the screens show every component.
+At sample 258 (+294 minutes), 19 tags are outside their band and PT-107 is in alarm. Analyzer markers show the
+first component's channel only (AT-123 = component A); the screens show every component.
 
 ## The prototype
 
@@ -172,7 +172,7 @@ each piece exists, and design a lockout/tagout version. What changed:
 |---|---|
 | **Focus per stop** | The unit in focus is full colour; every other unit, pipe and valve is ghosted at 25% opacity. Each stop shows 2-4 key tags: tags with a published alarm, then the main final element, then instruments by variable. The remaining tags go to an optional "all tags" still. |
 | **One label system** | Small rounded pills on short leaders. They are placed outside the focus unit's projected silhouette, the cards and every marker, and never overlap each other. Text is 25 px em (tags) and 30 px (units) at 1080p. No all-caps text in the scene. |
-| **Limits** | Normal stops show the operating high alarm the Ignition screens use (PI-107 2,895 kPa g). Published shutdown limits (PI-107 3,000 kPa g, TI-109 175 °C) appear only on fault stills, labelled "shutdown". The fault narration states the distinction once. The red limits box is gone. |
+| **Limits** | Normal stops show the operating high alarm the Ignition screens use (PT-107 2,895 kPa g). Published shutdown limits (PT-107 3,000 kPa g, TT-109 175 °C) appear only on fault stills, labelled "shutdown". The fault narration states the distinction once. The red limits box is gone. |
 | **Pipes** | Orthogonal routes at two rack elevations (6.2 and 5.0 m) instead of one lane per stream stacked from 7 m. Bends are rounded. Each line is coloured by service: gas feed, reactor effluent, liquid product, recycle, purge, plus cooling water and steam. Flat chevrons point in the flow direction. Utilities show only when their unit is in focus, and on the flow still. |
 | **Equipment** | Vertical vessels with 2:1 heads, a skirt or legs, and nozzles where streams connect. A taller stripper column with platforms and a ladder. A shell-and-tube exchanger with a channel head and saddles. A centrifugal compressor (casing, volute) with a motor on a baseplate. A feed manifold with branch take-offs and control-valve symbols. Matte neutral materials with slight colour coding, a 2 m ground grid, soft shadows. Sizes are still placeholders. |
 | **Camera** | An elevated three-quarter overview, fitted exactly and re-centred. Each stop is at a 5 m eye height (mezzanine), fitted to the unit, its key tags and utilities with margins. The renderer picks, from six bearings, the first view that hides the fewest key markers. Video moves are eased (Bezier keys) along the flow path; designed, not rendered. |
@@ -190,9 +190,9 @@ placeholder.
 
 | Overview (elevated three-quarter) | Reactor stop (focus, purpose and why cards) |
 |---|---|
-| ![Overview: six units with unit labels on dark pills, pipes coloured by service with white flow chevrons, a ground grid, the corner badge and a two-line caption bar](../drafts/3d-tour/00_overview_normal.jpg) | ![Reactor stop at eye height: the reactor in full colour, other units ghosted, four tag pills on short leaders with PI-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines with a valve symbol, a purpose card top left and a Kuraray why-this-matters card top right](../drafts/3d-tour/02_r-101_normal.jpg) |
+| ![Overview: six units with unit labels on dark pills, pipes coloured by service with white flow chevrons, a ground grid, the corner badge and a two-line caption bar](../drafts/3d-tour/00_overview_normal.jpg) | ![Reactor stop at eye height: the reactor in full colour, other units ghosted, four tag pills on short leaders with PT-107 showing its 2,895 kPa g high alarm, glowing cooling-water lines with a valve symbol, a purpose card top left and a Kuraray why-this-matters card top right](../drafts/3d-tour/02_r-101_normal.jpg) |
 | **Fault 6 at the high alarm (+294 min)** | **Process flow by service** |
-| ![Fault overview: amber and red tag markers, PI-107 pill reading 2,897 kPa g with high alarm 2,895 and shutdown 3,000, TI-109 pill with shutdown 175, and a marker-state legend](../drafts/3d-tour/21_overview_fault_alarm.jpg) | ![Flow still: every stream in its service colour with chevrons, inferred cooling-water and steam stubs, and a legend card of seven services](../drafts/3d-tour/30_flow_legend.jpg) |
+| ![Fault overview: amber and red tag markers, PT-107 pill reading 2,897 kPa g with high alarm 2,895 and shutdown 3,000, TT-109 pill with shutdown 175, and a marker-state legend](../drafts/3d-tour/21_overview_fault_alarm.jpg) | ![Flow still: every stream in its service colour with chevrons, inferred cooling-water and steam stubs, and a legend card of seven services](../drafts/3d-tour/30_flow_legend.jpg) |
 
 Measured on the author's desktop (GTX 1060 6 GB, Eevee): the five review stills, with measurement, render in about
 25 seconds including Blender start-up. The portable Blender ZIP is about 400 MB, checksum verified against
@@ -212,7 +212,7 @@ exports and the label boxes Blender measured. It never contacts a gateway.
 
 Owning unit, unit of measure and description must agree. The normal bands and published setpoints used by the 3D
 markers and pills must equal the gateway tag parameters. The 16 extra analyzer component channels in Ignition
-(AI-123-B and so on) are reported as explained: the 3D marker shows only the first component. Stream membership is
+(AT-123-B and so on) are reported as explained: the 3D marker shows only the first component. Stream membership is
 checked against the contract only, because neither export carries a stream field.
 
 **B. Geometry and flow.**
@@ -266,7 +266,7 @@ under the same rules.
 | Text under 18 px at 1080p | 160 (smallest 4.6 px) | 0 (smallest 18.4 px) |
 | Contrast under 4.5:1 | 241 (lowest 1.13:1) | 0 (lowest 8.03:1) |
 | Pipe ends that do not touch their unit | 2 (S4, S11 at the stripper) | 0 |
-| Markers inside equipment | 2 (FI-106, AI-123 inside the reactor) | 0 |
+| Markers inside equipment | 2 (FT-106, AT-123 inside the reactor) | 0 |
 | Ignition / PI / Perspective 1:1 mapping | pass | pass |
 | Verifier result | 14 of 17 checks not failed | 17 of 17 |
 
@@ -290,7 +290,7 @@ drawing coverage, and the OCR read-back, not run)
 
 | Before: overview (old label rules) | Before: E-101 stop |
 |---|---|
-| ![Before: the overview with the old label rules at 1080p: tiny tag labels everywhere and unit labels crossed by pipes](../drafts/3d-tour/before/00_overview_normal.jpg) | ![Before: the E-101 stop with the old label rules: the K-101 label cut off at the right edge, labels crossed by pipes, and the TI-122 label running into the caption](../drafts/3d-tour/before/03_e-101_normal.jpg) |
+| ![Before: the overview with the old label rules at 1080p: tiny tag labels everywhere and unit labels crossed by pipes](../drafts/3d-tour/before/00_overview_normal.jpg) | ![Before: the E-101 stop with the old label rules: the K-101 label cut off at the right edge, labels crossed by pipes, and the TT-122 label running into the caption](../drafts/3d-tour/before/03_e-101_normal.jpg) |
 
 ## Orientation tour for operators
 
@@ -316,8 +316,8 @@ video render.
 Reactor stop, as generated now:
 
 > Stop 2: the reactor, R-101. The gas feeds react here to form the liquid products G and H, and the reactions give
-> off heat. Watch PI-107, pressure: normally 2,669 to 2,741 kPa g, with a high alarm at 2,895. Also TI-109,
-> temperature: normally 120.3 to 120.5 °C. In fault 6, its first sign was AI-123, 48 minutes after the fault started.
+> off heat. Watch PT-107, pressure: normally 2,669 to 2,741 kPa g, with a high alarm at 2,895. Also TT-109,
+> temperature: normally 120.3 to 120.5 °C. In fault 6, its first sign was AT-123, 48 minutes after the fault started.
 
 ### Essential-function animations (design, for the video; not built)
 
@@ -326,20 +326,20 @@ otherwise they are constant and labelled "illustrative":
 
 | Asset | Visual | Driven by |
 |---|---|---|
-| Reactor | Heat produced in the vessel, carried away by cooling water: a warm-to-cool gradient along the inferred CW return and supply | TV-121 valve output and TI-121 outlet temperature (replay); the gradient itself illustrative |
-| Condenser | Vapour in at the top, cooled stream out | FV-117 and TI-122 (owner settled on E-101 by the topology check) |
-| Separator | Phases splitting: vapour chevrons up and out to recycle, a liquid level band holding at the LI-112 value | LI-112, FI-114 (replay) |
-| Compressor | A pulsing arrow on the recycle line for the pressure boost | JI-120 compressor work, FI-105 recycle flow (replay) |
-| Stripper | Stripping gas and steam rising, product falling to the base | FI-119 steam flow, FI-117 product flow (replay) |
-| All lines | Chevron offset animated so the flow moves; speed ∝ the stream's recorded flow where it has a flow tag | FI-101…FI-117 (replay); untagged streams illustrative |
+| Reactor | Heat produced in the vessel, carried away by cooling water: a warm-to-cool gradient along the inferred CW return and supply | TV-121 valve output and TT-121 outlet temperature (replay); the gradient itself illustrative |
+| Condenser | Vapour in at the top, cooled stream out | FV-117 and TT-122 (owner settled on E-101 by the topology check) |
+| Separator | Phases splitting: vapour chevrons up and out to recycle, a liquid level band holding at the LT-112 value | LT-112, FT-114 (replay) |
+| Compressor | A pulsing arrow on the recycle line for the pressure boost | JT-120 compressor work, FT-105 recycle flow (replay) |
+| Stripper | Stripping gas and steam rising, product falling to the base | FT-119 steam flow, FT-117 product flow (replay) |
+| All lines | Chevron offset animated so the flow moves; speed ∝ the stream's recorded flow where it has a flow tag | FT-101…FT-117 (replay); untagged streams illustrative |
 
 ## Hazard emphasis
 
 Two kinds of emphasis come from data, and both now appear as compact annotations on the tag pills:
-- **Limits:** PI-107's operating high alarm at normal stops. The published shutdown limits on PI-107 and TI-109,
+- **Limits:** PT-107's operating high alarm at normal stops. The published shutdown limits on PT-107 and TT-109,
   the trip points of the simulator, appear only on fault stills.
 - **First warning:** the unit whose tags leave their band first in the recorded fault. In TE that is U-100, where
-  FI-101 and FV-101 leave at the fault start. It is in the narration and the data, with no box.
+  FT-101 and FV-101 leave at the fault start. It is in the narration and the data, with no box.
 
 A third element comes from a prototype: one **"Why this matters"** card per stop, citing a public incident. It is
 matched to the unit's equipment kind by a keyword heuristic over a public-incident

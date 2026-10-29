@@ -5,7 +5,7 @@ Data: the Braatz group's TE test runs (open license), 960 samples per run at 3 s
 XMEAS 1-41 and columns 42-52 are XMV 1-11 (XMV 12, agitator speed, is constant in this data set and isn't included).
 The replay runs faster than real time (default: one sample per second).
 
-Each model tag gets a node `TE/<tag>`, e.g. `TE/PI-107`. The node id is the string `ns=2;s=TE/<tag>`. Values are read-only
+Each model tag gets a node `TE/<tag>`, e.g. `TE/PT-107`. The node id is the string `ns=2;s=TE/<tag>`. Values are read-only
 from the client side: the server never accepts writes.
 
 Usage:

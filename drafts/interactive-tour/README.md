@@ -16,7 +16,7 @@ comes from `data/te_unit_purposes.json`, which cites the simulator lines it rest
 |---|---|
 | ![overview](shots/overview-1440-dark.jpg) | Overview, normal replay: six units in flow order, lines coloured by service |
 | ![reactor](shots/reactor-1440-light.jpg) | Reactor stop (light theme): agitator, cooling coil and liquid level in the cutaway, key tags with live values, purpose card with its `teprob.f` citations, Ignition and PI AF paths, the public-incident citation |
-| ![fault](shots/fault6-alarm-1440-dark.jpg) | Fault 6 at the first published alarm: sample 258 (+294 min), PI-107 2,897 kPa g above its 2,895 high alarm |
+| ![fault](shots/fault6-alarm-1440-dark.jpg) | Fault 6 at the first published alarm: sample 258 (+294 min), PT-107 2,897 kPa g above its 2,895 high alarm |
 | ![loto](shots/loto-all-feeds-and-motor-1440-dark.jpg) | Lockout/tagout design mockup: every feed block valve and the compressor motor isolated, all process flow stopped, the remaining energy sources listed |
 | ![phone](shots/overview-390-dark.jpg) | The same page at 390 px |
 

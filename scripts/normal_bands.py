@@ -7,7 +7,7 @@ What an operator gets: each value on the screens shows its normal band. A value 
   Check 1:  the second half of the normal run (480-959), which the fit never saw. How often is anything flagged when
             nothing is wrong? Every flag there is a false one.
   Check 2:  the fault-6 run (A feed loss, starts at sample 160). How long after the fault does the first flag appear,
-            and how much warning is that before the reactor pressure alarm (PI-107 > 2895 kPa)?
+            and how much warning is that before the reactor pressure alarm (PT-107 > 2895 kPa)?
 
 K is chosen on Check 1 only over the original 36 mapped scalar tags (the smallest K whose false-flag rate per tag
 is under 0.5%), preserving their calibration. Added analyzer channels use the same K and their actual rates are
@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "ignition"))
 DATA = ROOT / "data" / "external" / "te-braatz"
 OUT = ROOT / "out" / "ignition"
-FIT, FAULT_START, ALARM = 480, 160, ("PI-107", 2895.0)
+FIT, FAULT_START, ALARM = 480, 160, ("PT-107", 2895.0)
 KS = (3, 4, 5, 6)
 
 
@@ -94,7 +94,7 @@ def main(quiet=False):
     md += [f"| {kk} | {v[0]:.1%} ({v[3]}) | {v[1]:.2%} | {v[2]:.1%} |" for kk, v in table.items()]
     md += ["", f"K = {k} preserves calibration from the original 36 mapped scalar tags. The table reports all {len(cols)} channels; added analyzer components have not been used to retune legacy bands.",
            "", "**Fault 6 (A feed loss)**, which the choice of K never saw:", "",
-           f"- The fault starts at sample {FAULT_START}; the reactor pressure alarm (PI-107 > 2895 kPa) comes at "
+           f"- The fault starts at sample {FAULT_START}; the reactor pressure alarm (PT-107 > 2895 kPa) comes at "
            f"sample {alarm_at}, {(alarm_at - FAULT_START) * 3} minutes later.",
            f"- The first band flag comes at sample {order[0][1]} ({order[0][0]}), "
            f"{(order[0][1] - FAULT_START) * 3} minutes after the fault: **{lead} minutes of warning before the alarm**."

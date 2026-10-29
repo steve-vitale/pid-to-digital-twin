@@ -118,7 +118,7 @@ def fault_profile(tags, replay, bands, alarms, fault_start, alarm_sample):
     return out
 
 
-def first_alarm_sample(replay, alarms, fault_start, tag="PI-107"):
+def first_alarm_sample(replay, alarms, fault_start, tag="PT-107"):
     if not replay or tag not in replay["columns"]:
         return None
     col = replay["columns"][tag]
@@ -391,7 +391,7 @@ def build_tour(scene, model, layout, bands, alarms, replay, hazards, fault_start
     for i, (stop, sc) in enumerate(zip(scene["tour"], stops), 1):
         unit = stop["unit"]
         hl = sc["purpose"].get("highlight", [])
-        lvl = [t for t in sc["tags"] if t.startswith("LI-") and t in bands] if "level" in hl else []
+        lvl = [t for t in sc["tags"] if t.startswith("LT-") and t in bands] if "level" in hl else []
         ids = ["unit:" + unit] + ["tag:" + t for t in sc["key_tags"]]
         ov = [badge()]
         if purpose_card(sc["purpose"]):
@@ -419,12 +419,12 @@ def build_tour(scene, model, layout, bands, alarms, replay, hazards, fault_start
                           f"{len(early['outside_band'])} tags have left their normal band (amber); none is in alarm yet.",
                           state_index=sample_index["early"], visible=["unit:" + u for u in unit_ids], markers=all_tags,
                           overlays=[badge(), state_legend()]))
-        pi = states[sample_index["alarm"]].get("values", {}).get("PI-107")
-        op, _ = split_limits("PI-107", alarms)
-        alarm_ids = ["tag:" + t for t in sorted(set(al["alarm"]) | {t for t in ("PI-107", "TI-109") if t in marker})]
+        pi = states[sample_index["alarm"]].get("values", {}).get("PT-107")
+        op, _ = split_limits("PT-107", alarms)
+        alarm_ids = ["tag:" + t for t in sorted(set(al["alarm"]) | {t for t in ("PT-107", "TT-109") if t in marker})]
         shots.append(shot("21_overview_fault_alarm", overview, "Fault 6 (loss of A feed): +%d min" %
                           states[sample_index["alarm"]]["minutes_after_fault"],
-                          f"PI-107 reaches {fmt(pi)} kPa g, above its {fmt(max(op))} kPa g high alarm; "
+                          f"PT-107 reaches {fmt(pi)} kPa g, above its {fmt(max(op))} kPa g high alarm; "
                           f"{len(al['outside_band'])} tags are outside their normal band.",
                           state_index=sample_index["alarm"], visible=["unit:" + u for u in unit_ids] + alarm_ids,
                           bodies=bodies(sample_index["alarm"], alarm_ids, show_shutdown=True), markers=all_tags,
@@ -434,7 +434,7 @@ def build_tour(scene, model, layout, bands, alarms, replay, hazards, fault_start
             stop, sc = scene["tour"][reactor], stops[reactor]
             ids = ["unit:" + stop["unit"]] + ["tag:" + t for t in sc["key_tags"]]
             shots.append(shot("22_reactor_fault_alarm", stop, f"Fault 6 at the reactor: sample {alarm_sample}",
-                              "Values at the first sample above the PI-107 high alarm, with the published shutdown limits.",
+                              "Values at the first sample above the PT-107 high alarm, with the published shutdown limits.",
                               focus=stop["unit"], visible=ids, bodies=bodies(sample_index["alarm"], ids, True),
                               markers=sc["key_tags"], state_index=sample_index["alarm"], utilities="focus",
                               overlays=[badge(), state_legend()]))
@@ -480,9 +480,9 @@ def build_tour(scene, model, layout, bands, alarms, replay, hazards, fault_start
             f"Two hours in, {len(e['outside_band'])} tags have left their band, shown amber. The earliest were "
             f"{natural_list(first4)}. Nothing has reached an alarm yet.",
             *by["20_overview_fault_early"]["caption"].split("\n"))
-        op, sd = split_limits("PI-107", alarms)
+        op, sd = split_limits("PT-107", alarms)
         seg("fault_alarm", by["21_overview_fault_alarm"],
-            f"About five hours in, reactor pressure PI-107 crosses {fmt(max(op))} kilopascals: that is the high alarm "
+            f"About five hours in, reactor pressure PT-107 crosses {fmt(max(op))} kilopascals: that is the high alarm "
             f"the operator screens use. The {fmt(min(sd))} figure on its tag is different: it is the published limit "
             f"at which the simulator shuts down.", *by["21_overview_fault_alarm"]["caption"].split("\n"))
         if "22_reactor_fault_alarm" in by:

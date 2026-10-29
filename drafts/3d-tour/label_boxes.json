@@ -303,9 +303,9 @@
    "visible": [
     "unit:U-100",
     "tag:FV-101",
-    "tag:FI-101",
-    "tag:FI-102",
-    "tag:FI-103",
+    "tag:FT-101",
+    "tag:FT-102",
+    "tag:FT-103",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -387,21 +387,21 @@
      }
     },
     {
-     "id": "tag:FI-101",
+     "id": "tag:FT-101",
      "kind": "tag",
      "shown": true,
-     "text": "FI-101  A feed flow",
+     "text": "FT-101  A feed flow",
      "lines": 1,
      "text_box": [
-      442.4671268463135,
+      440.48998832702637,
       319.38504695892334,
-      666.5718841552734,
+      668.5491371154785,
       339.101665019989
      ],
      "plate_box": [
-      425.0836372375488,
+      423.1084728240967,
       309.6262264251709,
-      684.8032379150391,
+      686.7783164978027,
       349.3012475967407
      ],
      "in_front": true,
@@ -412,31 +412,31 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "FI-101",
+     "marker": "FT-101",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.025070050731301308,
+      "background": 0.024988405406475067,
       "text": 1.0,
-      "ratio": 13.986936065332785,
+      "ratio": 14.002164658769168,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
     {
-     "id": "tag:FI-102",
+     "id": "tag:FT-102",
      "kind": "tag",
      "shown": true,
-     "text": "FI-102  D feed flow",
+     "text": "FT-102  D feed flow",
      "lines": 1,
      "text_box": [
-      725.8214950561523,
+      725.3272247314453,
       318.75895500183105,
-      955.2536773681641,
+      958.7136268615723,
       338.4756374359131
      ],
      "plate_box": [
-      708.1417465209961,
+      707.647876739502,
       309.0007781982422,
-      973.1831359863281,
+      976.6395950317383,
       348.675799369812
      ],
      "in_front": true,
@@ -447,31 +447,31 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "FI-102",
+     "marker": "FT-102",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.028528887778520584,
+      "background": 0.025070050731301308,
       "text": 1.0,
-      "ratio": 13.370875733798417,
+      "ratio": 13.986936065332785,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
     {
-     "id": "tag:FI-103",
+     "id": "tag:FT-103",
      "kind": "tag",
      "shown": true,
-     "text": "FI-103  E feed flow",
+     "text": "FT-103  E feed flow",
      "lines": 1,
      "text_box": [
-      540.501880645752,
-      421.6798210144043,
-      767.7096748352051,
+      537.0419311523438,
+      421.67975664138794,
+      768.2039451599121,
       441.39643907546997
      ],
      "plate_box": [
-      523.0157661437988,
+      519.5593643188477,
       411.8140125274658,
-      785.8352279663086,
+      786.3289833068848,
       451.48903369903564
      ],
      "in_front": true,
@@ -482,12 +482,12 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "FI-103",
+     "marker": "FT-103",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.026230551302433014,
+      "background": 0.028212079778313637,
       "text": 1.0,
-      "ratio": 13.774005068312915,
+      "ratio": 13.425036170578093,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
@@ -601,15 +601,15 @@
     }
    ],
    "markers_px": {
-    "FI-101": [
+    "FT-101": [
      554.5,
      363.1
     ],
-    "FI-102": [
+    "FT-102": [
      680.0,
      374.2
     ],
-    "FI-103": [
+    "FT-103": [
      813.8,
      386.0
     ],
@@ -689,9 +689,9 @@
    "placement_cost": {
     "unit:U-100": 0.0,
     "tag:FV-101": 0.0,
-    "tag:FI-101": 0.0,
-    "tag:FI-102": 0.0,
-    "tag:FI-103": 0.0
+    "tag:FT-101": 0.0,
+    "tag:FT-102": 0.0,
+    "tag:FT-103": 0.0
    }
   },
   {
@@ -699,10 +699,10 @@
    "image": "02_r-101_normal.png",
    "visible": [
     "unit:R-101",
-    "tag:PI-107",
-    "tag:TI-109",
+    "tag:PT-107",
+    "tag:TT-109",
     "tag:TV-121",
-    "tag:TI-121",
+    "tag:TT-121",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -749,19 +749,19 @@
      }
     },
     {
-     "id": "tag:PI-107",
+     "id": "tag:PT-107",
      "kind": "tag",
      "shown": true,
-     "text": "PI-107  Pressure \u00b7 high alarm 2,895 kPa g",
+     "text": "PT-107  Pressure \u00b7 high alarm 2,895 kPa g",
      "lines": 1,
      "text_box": [
-      390.920934677124,
+      386.9666576385498,
       524.2109084129333,
       891.7448043823242,
       549.1175365447998
      ],
      "plate_box": [
-      372.5543689727783,
+      368.6041259765625,
       514.2379188537598,
       910.777702331543,
       559.0976071357727
@@ -774,7 +774,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "PI-107",
+     "marker": "PT-107",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.018405558541417122,
@@ -784,21 +784,21 @@
      }
     },
     {
-     "id": "tag:TI-109",
+     "id": "tag:TT-109",
      "kind": "tag",
      "shown": true,
-     "text": "TI-109  Temperature",
+     "text": "TT-109  Temperature",
      "lines": 1,
      "text_box": [
-      619.3224906921387,
+      615.3682136535645,
       641.1025536060333,
-      870.8028602600098,
+      870.8029174804688,
       664.1968238353729
      ],
      "plate_box": [
-      601.0791206359863,
+      597.129077911377,
       631.0073518753052,
-      889.5436477661133,
+      889.5437622070312,
       674.0565490722656
      ],
      "in_front": true,
@@ -809,7 +809,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-109",
+     "marker": "TT-109",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.018405558541417122,
@@ -854,21 +854,21 @@
      }
     },
     {
-     "id": "tag:TI-121",
+     "id": "tag:TT-121",
      "kind": "tag",
      "shown": true,
-     "text": "TI-121  Cooling-water outlet T",
+     "text": "TT-121  Cooling-water outlet T",
      "lines": 1,
      "text_box": [
       1174.4105529785156,
       640.7557439804077,
-      1531.369285583496,
+      1535.3233337402344,
       665.6624042987823
      ],
      "plate_box": [
-      1155.2247619628906,
-      630.6609284877777,
-      1549.7331619262695,
+      1155.2248764038086,
+      630.6608963012695,
+      1553.6836624145508,
       675.5206167697906
      ],
      "in_front": true,
@@ -879,7 +879,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-121",
+     "marker": "TT-121",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.018405558541417122,
@@ -998,15 +998,15 @@
     }
    ],
    "markers_px": {
-    "PI-107": [
+    "PT-107": [
      920.7,
      536.7
     ],
-    "TI-109": [
+    "TT-109": [
      991.4,
      652.6
     ],
-    "TI-121": [
+    "TT-121": [
      1050.2,
      653.2
     ],
@@ -1079,10 +1079,10 @@
    ],
    "placement_cost": {
     "unit:R-101": 0.0,
-    "tag:PI-107": 0.0,
-    "tag:TI-109": 0.0,
+    "tag:PT-107": 0.0,
+    "tag:TT-109": 0.0,
     "tag:TV-121": 0.0,
-    "tag:TI-121": 0.0
+    "tag:TT-121": 0.0
    }
   },
   {
@@ -1091,7 +1091,7 @@
    "visible": [
     "unit:E-101",
     "tag:FV-117",
-    "tag:TI-122",
+    "tag:TT-122",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -1173,19 +1173,19 @@
      }
     },
     {
-     "id": "tag:TI-122",
+     "id": "tag:TT-122",
      "kind": "tag",
      "shown": true,
-     "text": "TI-122  Condenser CW outlet T",
+     "text": "TT-122  Condenser CW outlet T",
      "lines": 1,
      "text_box": [
-      487.6837921142578,
-      626.4832484722137,
-      859.526309967041,
-      645.4859054088593
+      483.72928619384766,
+      626.4832162857056,
+      859.5258522033691,
+      645.4858732223511
      ],
      "plate_box": [
-      470.3954887390137,
+      466.4450740814209,
       616.4033353328705,
       877.4130821228027,
       655.3652000427246
@@ -1198,12 +1198,12 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-122",
+     "marker": "TT-122",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.026339957490563393,
+      "background": 0.026037639006972313,
       "text": 1.0,
-      "ratio": 13.754264929081126,
+      "ratio": 13.808950589637845,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
@@ -1317,7 +1317,7 @@
     }
    ],
    "markers_px": {
-    "TI-122": [
+    "TT-122": [
      1028.3,
      636.0
     ],
@@ -1379,7 +1379,7 @@
    "placement_cost": {
     "unit:E-101": 0.0,
     "tag:FV-117": 0.0,
-    "tag:TI-122": 0.0
+    "tag:TT-122": 0.0
    }
   },
   {
@@ -1388,9 +1388,9 @@
    "visible": [
     "unit:V-101",
     "tag:FV-110",
-    "tag:PI-113",
-    "tag:TI-111",
-    "tag:LI-112",
+    "tag:PT-113",
+    "tag:TT-111",
+    "tag:LT-112",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -1472,21 +1472,21 @@
      }
     },
     {
-     "id": "tag:PI-113",
+     "id": "tag:PT-113",
      "kind": "tag",
      "shown": true,
-     "text": "PI-113  Pressure",
+     "text": "PT-113  Pressure",
      "lines": 1,
      "text_box": [
       1108.6071395874023,
       525.2836203575134,
-      1302.3104095458984,
+      1306.2651443481445,
       544.2863094806671
      ],
      "plate_box": [
-      1090.6697845458984,
+      1090.6698989868164,
       515.3094720840454,
-      1319.7831344604492,
+      1323.7334060668945,
       554.2713367938995
      ],
      "in_front": true,
@@ -1497,31 +1497,31 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "PI-113",
+     "marker": "PT-113",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.027112139388918877,
+      "background": 0.024988405406475067,
       "text": 1.0,
-      "ratio": 13.616533120735676,
+      "ratio": 14.002164658769168,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
     {
-     "id": "tag:TI-111",
+     "id": "tag:TT-111",
      "kind": "tag",
      "shown": true,
-     "text": "TI-111  Temperature",
+     "text": "TT-111  Temperature",
      "lines": 1,
      "text_box": [
-      526.9147682189941,
+      522.9604911804199,
       631.9774532318115,
-      766.2577056884766,
-      654.7421658039093
+      766.2577629089355,
+      654.7421336174011
      ],
      "plate_box": [
-      508.83378982543945,
-      621.8917787075043,
-      785.0420951843262,
+      504.8836326599121,
+      621.8917465209961,
+      785.0421524047852,
       664.611804485321
      ],
      "in_front": true,
@@ -1532,7 +1532,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-111",
+     "marker": "TT-111",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.020187707617878914,
@@ -1542,21 +1542,21 @@
      }
     },
     {
-     "id": "tag:LI-112",
+     "id": "tag:LT-112",
      "kind": "tag",
      "shown": true,
-     "text": "LI-112  Level",
+     "text": "LT-112  Level",
      "lines": 1,
      "text_box": [
-      634.6584892272949,
+      630.7045555114746,
       715.7846188545227,
       784.0438270568848,
-      734.7872757911682
+      734.7873079776764
      ],
      "plate_box": [
-      617.2168350219727,
+      613.2665634155273,
       705.6113004684448,
-      802.009391784668,
+      802.0098495483398,
       744.573165178299
      ],
      "in_front": true,
@@ -1567,12 +1567,12 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "LI-112",
+     "marker": "LT-112",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.02111501805484295,
+      "background": 0.02104070782661438,
       "text": 1.0,
-      "ratio": 14.76481380051474,
+      "ratio": 14.78025813823089,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
@@ -1686,15 +1686,15 @@
     }
    ],
    "markers_px": {
-    "TI-111": [
+    "TT-111": [
      825.3,
      643.4
     ],
-    "LI-112": [
+    "LT-112": [
      896.4,
      725.3
     ],
-    "PI-113": [
+    "PT-113": [
      996.2,
      534.8
     ],
@@ -1798,9 +1798,9 @@
    "placement_cost": {
     "unit:V-101": 0.0,
     "tag:FV-110": 0.0,
-    "tag:PI-113": 0.0,
-    "tag:TI-111": 0.0,
-    "tag:LI-112": 0.0
+    "tag:PT-113": 0.0,
+    "tag:TT-111": 0.0,
+    "tag:LT-112": 0.0
    }
   },
   {
@@ -1809,8 +1809,8 @@
    "visible": [
     "unit:K-101",
     "tag:FV-105",
-    "tag:FI-105",
-    "tag:JI-120",
+    "tag:FT-105",
+    "tag:JT-120",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -1892,22 +1892,22 @@
      }
     },
     {
-     "id": "tag:FI-105",
+     "id": "tag:FT-105",
      "kind": "tag",
      "shown": true,
-     "text": "FI-105  Recycle flow",
+     "text": "FT-105  Recycle flow",
      "lines": 1,
      "text_box": [
-      490.4090881347656,
-      391.15400791168213,
-      733.35205078125,
-      414.9622392654419
+      487.9376220703125,
+      391.1540722846985,
+      734.835319519043,
+      414.96230363845825
      ],
      "plate_box": [
-      472.157506942749,
-      381.3200640678406,
-      752.3307037353516,
-      425.0824499130249
+      469.6892738342285,
+      381.32012844085693,
+      753.8124847412109,
+      425.0825786590576
      ],
      "in_front": true,
      "anchor_px": [
@@ -1917,7 +1917,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "FI-105",
+     "marker": "FT-105",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.024044062942266464,
@@ -1927,21 +1927,21 @@
      }
     },
     {
-     "id": "tag:JI-120",
+     "id": "tag:JT-120",
      "kind": "tag",
      "shown": true,
-     "text": "JI-120  Compressor work",
+     "text": "JT-120  Compressor work",
      "lines": 1,
      "text_box": [
-      745.4601860046387,
-      301.93596839904785,
-      1049.447135925293,
-      325.03023862838745
+      743.4828758239746,
+      301.9360327720642,
+      1051.424560546875,
+      325.0303030014038
      ],
      "plate_box": [
-      727.0851516723633,
-      292.19523668289185,
-      1067.9529190063477,
+      725.1096725463867,
+      292.1953010559082,
+      1069.9282836914062,
       335.244562625885
      ],
      "in_front": true,
@@ -1952,7 +1952,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "JI-120",
+     "marker": "JT-120",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.023043015971779823,
@@ -2071,11 +2071,11 @@
     }
    ],
    "markers_px": {
-    "FI-105": [
+    "FT-105": [
      674.0,
      461.1
     ],
-    "JI-120": [
+    "JT-120": [
      897.5,
      624.9
     ],
@@ -2191,8 +2191,8 @@
    "placement_cost": {
     "unit:K-101": 0.0,
     "tag:FV-105": 0.0,
-    "tag:FI-105": 0.0,
-    "tag:JI-120": 0.0
+    "tag:FT-105": 0.0,
+    "tag:JT-120": 0.0
    }
   },
   {
@@ -2201,9 +2201,9 @@
    "visible": [
     "unit:C-101",
     "tag:FV-104",
-    "tag:PI-116",
-    "tag:TI-118",
-    "tag:LI-115",
+    "tag:PT-116",
+    "tag:TT-118",
+    "tag:LT-115",
     "overlay:badge",
     "overlay:purpose",
     "overlay:why",
@@ -2285,21 +2285,21 @@
      }
     },
     {
-     "id": "tag:PI-116",
+     "id": "tag:PT-116",
      "kind": "tag",
      "shown": true,
-     "text": "PI-116  Pressure (see note) \u00b7 owner disputed",
+     "text": "PT-116  Pressure (see note) \u00b7 owner disputed",
      "lines": 1,
      "text_box": [
-      347.11352348327637,
+      343.15881729125977,
       401.29398107528687,
-      876.3597679138184,
+      876.3595962524414,
       425.34940481185913
      ],
      "plate_box": [
-      328.96265029907227,
+      325.01220703125,
       391.44935131073,
-      895.2388572692871,
+      895.2385139465332,
       435.4588007926941
      ],
      "in_front": true,
@@ -2310,7 +2310,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "PI-116",
+     "marker": "PT-116",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.016886280849575996,
@@ -2320,22 +2320,22 @@
      }
     },
     {
-     "id": "tag:TI-118",
+     "id": "tag:TT-118",
      "kind": "tag",
      "shown": true,
-     "text": "TI-118  Temperature",
+     "text": "TT-118  Temperature",
      "lines": 1,
      "text_box": [
-      649.4904327392578,
+      645.5362129211426,
       544.2652916908264,
-      894.6823883056641,
+      894.682502746582,
       567.3595297336578
      ],
      "plate_box": [
-      631.2155914306641,
+      627.2656631469727,
       534.2713165283203,
       913.3983993530273,
-      577.3204815387726
+      577.3204493522644
      ],
      "in_front": true,
      "anchor_px": [
@@ -2345,7 +2345,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-118",
+     "marker": "TT-118",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.016718799248337746,
@@ -2355,19 +2355,19 @@
      }
     },
     {
-     "id": "tag:LI-115",
+     "id": "tag:LT-115",
      "kind": "tag",
      "shown": true,
-     "text": "LI-115  Level",
+     "text": "LT-115  Level",
      "lines": 1,
      "text_box": [
-      753.5861778259277,
+      749.6319007873535,
       659.4771230220795,
-      903.9047241210938,
+      903.9047813415527,
       678.1502544879913
      ],
      "plate_box": [
-      736.0857582092285,
+      732.1355438232422,
       649.3627059459686,
       921.6796875,
       687.9954314231873
@@ -2380,7 +2380,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "LI-115",
+     "marker": "LT-115",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.017483171075582504,
@@ -2499,15 +2499,15 @@
     }
    ],
    "markers_px": {
-    "LI-115": [
+    "LT-115": [
      959.6,
      668.8
     ],
-    "PI-116": [
+    "PT-116": [
      967.6,
      413.3
     ],
-    "TI-118": [
+    "TT-118": [
      984.7,
      555.8
     ],
@@ -2653,9 +2653,9 @@
    "placement_cost": {
     "unit:C-101": 0.0,
     "tag:FV-104": 0.0,
-    "tag:PI-116": 0.0,
-    "tag:TI-118": 0.0,
-    "tag:LI-115": 0.0
+    "tag:PT-116": 0.0,
+    "tag:TT-118": 0.0,
+    "tag:LT-115": 0.0
    }
   },
   {
@@ -2956,103 +2956,103 @@
     }
    ],
    "markers_px": {
-    "FI-101": [
+    "FT-101": [
      535.5,
      346.9
     ],
-    "FI-102": [
+    "FT-102": [
      553.8,
      354.4
     ],
-    "FI-103": [
+    "FT-103": [
      572.4,
      362.1
     ],
-    "FI-104": [
+    "FT-104": [
      1281.4,
      659.0
     ],
-    "FI-105": [
+    "FT-105": [
      1097.7,
      488.8
     ],
-    "FI-106": [
+    "FT-106": [
      690.9,
      385.2
     ],
-    "PI-107": [
+    "PT-107": [
      665.7,
      394.5
     ],
-    "LI-108": [
+    "LT-108": [
      674.5,
      481.6
     ],
-    "TI-109": [
+    "TT-109": [
      685.1,
      466.9
     ],
-    "FI-110": [
+    "FT-110": [
      1044.5,
      609.0
     ],
-    "TI-111": [
+    "TT-111": [
      970.9,
      613.5
     ],
-    "LI-112": [
+    "LT-112": [
      990.1,
      650.8
     ],
-    "PI-113": [
+    "PT-113": [
      1025.7,
      602.4
     ],
-    "FI-114": [
+    "FT-114": [
      1074.8,
      574.2
     ],
-    "LI-115": [
+    "LT-115": [
      1238.6,
      664.0
     ],
-    "PI-116": [
+    "PT-116": [
      1276.1,
      447.6
     ],
-    "FI-117": [
+    "FT-117": [
      1341.7,
      629.0
     ],
-    "TI-118": [
+    "TT-118": [
      1274.2,
      591.0
     ],
-    "FI-119": [
+    "FT-119": [
      1304.8,
      653.9
     ],
-    "JI-120": [
+    "JT-120": [
      1133.4,
      524.6
     ],
-    "TI-121": [
+    "TT-121": [
      709.8,
      472.5
     ],
-    "TI-122": [
+    "TT-122": [
      923.9,
      483.1
     ],
-    "AI-123": [
+    "AT-123": [
      688.9,
      367.7
     ],
-    "AI-129": [
+    "AT-129": [
      1045.3,
      589.8
     ],
-    "AI-137": [
+    "AT-137": [
      1345.6,
      607.9
     ],
@@ -3125,8 +3125,8 @@
     "unit:V-101",
     "unit:K-101",
     "unit:C-101",
-    "tag:PI-107",
-    "tag:TI-109",
+    "tag:PT-107",
+    "tag:TT-109",
     "overlay:badge",
     "overlay:legend",
     "overlay:caption"
@@ -3333,21 +3333,21 @@
      }
     },
     {
-     "id": "tag:PI-107",
+     "id": "tag:PT-107",
      "kind": "tag",
      "shown": true,
-     "text": "PI-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
+     "text": "PT-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
      "lines": 1,
      "text_box": [
-      324.13021087646484,
+      322.15301513671875,
       186.90653800964355,
-      1007.3186874389648,
+      1009.295768737793,
       211.81316614151
      ],
      "plate_box": [
-      305.8333110809326,
+      303.85823249816895,
       177.2859263420105,
-      1026.2307357788086,
+      1028.2057571411133,
       222.14574337005615
      ],
      "in_front": true,
@@ -3358,7 +3358,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "PI-107",
+     "marker": "PT-107",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.023043015971779823,
@@ -3368,21 +3368,21 @@
      }
     },
     {
-     "id": "tag:TI-109",
+     "id": "tag:TT-109",
      "kind": "tag",
      "shown": true,
-     "text": "TI-109  120.4 \u00b0C \u00b7 shutdown 175",
+     "text": "TT-109  120.4 \u00b0C \u00b7 shutdown 175",
      "lines": 1,
      "text_box": [
-      493.59752655029297,
-      603.7256491184235,
-      876.5342903137207,
-      622.728306055069
+      491.6203308105469,
+      603.7256169319153,
+      878.5114288330078,
+      622.7282738685608
      ],
      "plate_box": [
-      476.30298614501953,
-      593.6694252490997,
-      894.4035530090332,
+      474.3280220031738,
+      593.6694574356079,
+      896.3785171508789,
       632.6314187049866
      ],
      "in_front": true,
@@ -3393,12 +3393,12 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-109",
+     "marker": "TT-109",
      "marker_occluded_by": null,
      "contrast": {
-      "background": 0.024988405406475067,
+      "background": 0.024044062942266464,
       "text": 1.0,
-      "ratio": 14.002164658769168,
+      "ratio": 14.180745332933776,
       "method": "median vs 97th/3rd percentile luminance in text box"
      }
     },
@@ -3460,13 +3460,13 @@
      "id": "overlay:caption",
      "kind": "overlay_caption",
      "shown": true,
-     "text": "Fault 6 (loss of A feed): +294 min\nPI-107 reaches 2,897 kPa g, above its 2,895 kPa g high alarm; 19 tags are outside their normal band.",
+     "text": "Fault 6 (loss of A feed): +294 min\nPT-107 reaches 2,897 kPa g, above its 2,895 kPa g high alarm; 19 tags are outside their normal band.",
      "lines": 2,
      "text_box": [
       33.9799690246582,
       992.1142244338989,
-      1200.4829406738281,
-      1046.0241834819317
+      1204.280776977539,
+      1046.027382016182
      ],
      "in_front": true,
      "plate_box": [
@@ -3485,103 +3485,103 @@
     }
    ],
    "markers_px": {
-    "FI-101": [
+    "FT-101": [
      535.5,
      346.9
     ],
-    "FI-102": [
+    "FT-102": [
      553.8,
      354.4
     ],
-    "FI-103": [
+    "FT-103": [
      572.4,
      362.1
     ],
-    "FI-104": [
+    "FT-104": [
      1281.4,
      659.0
     ],
-    "FI-105": [
+    "FT-105": [
      1097.7,
      488.8
     ],
-    "FI-106": [
+    "FT-106": [
      690.9,
      385.2
     ],
-    "PI-107": [
+    "PT-107": [
      665.7,
      394.5
     ],
-    "LI-108": [
+    "LT-108": [
      674.5,
      481.6
     ],
-    "TI-109": [
+    "TT-109": [
      685.1,
      466.9
     ],
-    "FI-110": [
+    "FT-110": [
      1044.5,
      609.0
     ],
-    "TI-111": [
+    "TT-111": [
      970.9,
      613.5
     ],
-    "LI-112": [
+    "LT-112": [
      990.1,
      650.8
     ],
-    "PI-113": [
+    "PT-113": [
      1025.7,
      602.4
     ],
-    "FI-114": [
+    "FT-114": [
      1074.8,
      574.2
     ],
-    "LI-115": [
+    "LT-115": [
      1238.6,
      664.0
     ],
-    "PI-116": [
+    "PT-116": [
      1276.1,
      447.6
     ],
-    "FI-117": [
+    "FT-117": [
      1341.7,
      629.0
     ],
-    "TI-118": [
+    "TT-118": [
      1274.2,
      591.0
     ],
-    "FI-119": [
+    "FT-119": [
      1304.8,
      653.9
     ],
-    "JI-120": [
+    "JT-120": [
      1133.4,
      524.6
     ],
-    "TI-121": [
+    "TT-121": [
      709.8,
      472.5
     ],
-    "TI-122": [
+    "TT-122": [
      923.9,
      483.1
     ],
-    "AI-123": [
+    "AT-123": [
      688.9,
      367.7
     ],
-    "AI-129": [
+    "AT-129": [
      1045.3,
      589.8
     ],
-    "AI-137": [
+    "AT-137": [
      1345.6,
      607.9
     ],
@@ -3642,8 +3642,8 @@
     "unit:V-101": 0.0,
     "unit:K-101": 0.0,
     "unit:C-101": 0.0,
-    "tag:PI-107": 0.0,
-    "tag:TI-109": 0.0
+    "tag:PT-107": 0.0,
+    "tag:TT-109": 0.0
    }
   },
   {
@@ -3651,10 +3651,10 @@
    "image": "22_reactor_fault_alarm.png",
    "visible": [
     "unit:R-101",
-    "tag:PI-107",
-    "tag:TI-109",
+    "tag:PT-107",
+    "tag:TT-109",
     "tag:TV-121",
-    "tag:TI-121",
+    "tag:TT-121",
     "overlay:badge",
     "overlay:legend",
     "overlay:caption"
@@ -3700,19 +3700,19 @@
      }
     },
     {
-     "id": "tag:PI-107",
+     "id": "tag:PT-107",
      "kind": "tag",
      "shown": true,
-     "text": "PI-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
+     "text": "PT-107  2,897 kPa g \u00b7 high alarm 2,895 \u00b7 shutdown 3,000",
      "lines": 1,
      "text_box": [
-      208.5560703277588,
+      204.6016788482666,
       524.2109084129333,
-      891.7449188232422,
+      891.7448043823242,
       549.1175365447998
      ],
      "plate_box": [
-      190.37997722625732,
+      186.42983436584473,
       514.2379188537598,
       910.777759552002,
       559.0976071357727
@@ -3725,7 +3725,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "PI-107",
+     "marker": "PT-107",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.018405558541417122,
@@ -3735,19 +3735,19 @@
      }
     },
     {
-     "id": "tag:TI-109",
+     "id": "tag:TT-109",
      "kind": "tag",
      "shown": true,
-     "text": "TI-109  120.4 \u00b0C \u00b7 shutdown 175",
+     "text": "TT-109  120.4 \u00b0C \u00b7 shutdown 175",
      "lines": 1,
      "text_box": [
-      496.0982894897461,
+      492.1440124511719,
       643.1483602523804,
-      879.034423828125,
+      879.034366607666,
       662.1509850025177
      ],
      "plate_box": [
-      478.8013458251953,
+      474.85118865966797,
       633.0510020256042,
       896.9008827209473,
       672.0128667354584
@@ -3760,7 +3760,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-109",
+     "marker": "TT-109",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.0201152004301548,
@@ -3805,22 +3805,22 @@
      }
     },
     {
-     "id": "tag:TI-121",
+     "id": "tag:TT-121",
      "kind": "tag",
      "shown": true,
-     "text": "TI-121  96.28 \u00b0C \u00b7 band 93.81\u201395.39",
+     "text": "TT-121  96.28 \u00b0C \u00b7 band 93.81\u201395.39",
      "lines": 1,
      "text_box": [
       1162.602767944336,
       643.7077617645264,
-      1594.9676513671875,
-      662.7104187011719
+      1598.9221572875977,
+      662.71045088768
      ],
      "plate_box": [
-      1144.6089935302734,
-      633.609824180603,
-      1612.085952758789,
-      672.5717210769653
+      1144.6091079711914,
+      633.6098563671112,
+      1616.0362243652344,
+      672.5717532634735
      ],
      "in_front": true,
      "anchor_px": [
@@ -3830,7 +3830,7 @@
      "anchor_on_screen": true,
      "label_occluded_fraction": 0.0,
      "label_occluded_by": null,
-     "marker": "TI-121",
+     "marker": "TT-121",
      "marker_occluded_by": null,
      "contrast": {
       "background": 0.0201152004301548,
@@ -3897,13 +3897,13 @@
      "id": "overlay:caption",
      "kind": "overlay_caption",
      "shown": true,
-     "text": "Fault 6 at the reactor: sample 258\nValues at the first sample above the PI-107 high alarm, with the published shutdown limits.",
+     "text": "Fault 6 at the reactor: sample 258\nValues at the first sample above the PT-107 high alarm, with the published shutdown limits.",
      "lines": 2,
      "text_box": [
       33.97322416305542,
-      993.0164605379105,
-      1084.9072265625,
-      1046.0103030502796
+      993.0195745825768,
+      1088.705177307129,
+      1046.0094259679317
      ],
      "in_front": true,
      "plate_box": [
@@ -3922,15 +3922,15 @@
     }
    ],
    "markers_px": {
-    "PI-107": [
+    "PT-107": [
      920.7,
      536.7
     ],
-    "TI-109": [
+    "TT-109": [
      991.4,
      652.6
     ],
-    "TI-121": [
+    "TT-121": [
      1050.2,
      653.2
     ],
@@ -4003,10 +4003,10 @@
    ],
    "placement_cost": {
     "unit:R-101": 0.0,
-    "tag:PI-107": 0.0,
-    "tag:TI-109": 0.0,
+    "tag:PT-107": 0.0,
+    "tag:TT-109": 0.0,
     "tag:TV-121": 0.0,
-    "tag:TI-121": 0.0
+    "tag:TT-121": 0.0
    }
   },
   {

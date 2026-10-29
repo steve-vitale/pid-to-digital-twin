@@ -1287,7 +1287,7 @@ const unitGeom = Object.fromEntries(Object.entries(UNIT_GEOM).map(([id, g]) => {
   return [id, { label: at(g.label), box: [Math.min(...xs), Math.min(...ys), Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)] }];
 }));
 const liquids = Object.fromEntries(Object.entries(WINDOW_LEVELS).map(([id, w]) => [id, w]));
-const levelTag = { "R-101": "LI-108", "V-101": "LI-112", "C-101": "LI-115" };
+const levelTag = { "R-101": "LT-108", "V-101": "LT-112", "C-101": "LT-115" };
 const lotoPoints = DATA.loto.points.map((p) => {
   let where;
   if (p.kind === "bl") where = POSTS[`BL-${p.target.stream}`].lock;

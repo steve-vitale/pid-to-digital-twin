@@ -56,11 +56,11 @@ house style (`te.pid`) and read back by the frozen extraction method: a round tr
 **What is verified, and how**
 
 - **Instruments and final elements (37):** each description and unit checked line by line against `teprob.f` by
-  `scripts/verify_te_source.py`: 36 confirmed, 1 corrected (TI-122's description). Report:
+  `scripts/verify_te_source.py`: 36 confirmed, 1 corrected (TT-122's description). Report:
   [`out/te_source_check.md`](../out/te_source_check.md).
 - **Units, streams, flow directions and tag ownership (56 elements):** read out of the same code's component balances,
   pressure-driven flow lines and measurement lines by `scripts/verify_te_topology.py`, cross-checked with the revised
-  TE code (Bathelt, Ricker & Jelali 2015): 51 confirmed, 4 corrected (the purge stream S9 and FI-110, FV-110, AI-129
+  TE code (Bathelt, Ricker & Jelali 2015): 51 confirmed, 4 corrected (the purge stream S9 and FT-110, FV-110, AT-129
   moved from the compressor K-101 to the separator V-101), 1 unresolvable. Report:
   [`out/te_topology_check.md`](../out/te_topology_check.md).
 - **Control loops (19 running):** read out of the closed-loop code `temain_mod.f` by `scripts/te_control_loops.py`
@@ -80,12 +80,12 @@ house style (`te.pid`) and read back by the frozen extraction method: a round tr
 
 **What is inferred or unknown**
 
-- **One element the source cannot settle:** PI-116 is documented as stripper pressure but computed from the
+- **One element the source cannot settle:** PT-116 is documented as stripper pressure but computed from the
   feed-header pressure. It stays on C-101, flagged. (When the topology check was merged, the model's fields changed
   and every stage below went stale until rebuilt, which is the point of this page.)
-- **Tag numbers are assigned by this project.** TE publishes indices (XMEAS 7), not plant tags (PI-107). The index is
+- **Tag numbers are assigned by this project.** TE publishes indices (XMEAS 7), not plant tags (PT-107). The index is
   kept on every item.
-- **TI-122's owner,** the open question from the first source check, is settled (E-101) and kept in the model as
+- **TT-122's owner,** the open question from the first source check, is settled (E-101) and kept in the model as
   `resolved_question`.
 - **Physical facts are in no source:** tap positions, vessel sizes, elevations, pipe routes. Anything 3D about them
   is placeholder.
@@ -96,9 +96,9 @@ house style (`te.pid`) and read back by the frozen extraction method: a round tr
 
 | Class | Count | Source check | Operations review | Notes |
 |---|---|---|---|---|
-| Instruments | 25 | 24 confirmed, 1 corrected (TI-122's description); FI-110 and AI-129 moved to V-101 | 0 of 25 | TI-122's owner resolved |
+| Instruments | 25 | 24 confirmed, 1 corrected (TT-122's description); FT-110 and AT-129 moved to V-101 | 0 of 25 | TT-122's owner resolved |
 | Final elements (valves, outputs) | 12 | 12 confirmed; FV-110 moved to V-101 | 0 of 12 | XMV is the recorded controller output, not a measured valve position |
-| Units | 6 | 6 confirmed | 0 of 6 | PI-116's owner (C-101) unresolvable in the source |
+| Units | 6 | 6 confirmed | 0 of 6 | PT-116's owner (C-101) unresolvable in the source |
 | Streams | 13 | 12 confirmed, 1 corrected (S9, the purge) | 0 of 13 | directions from the pressure-driven flow lines |
 
 ### Pipeline

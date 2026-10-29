@@ -71,7 +71,7 @@ def main():
     lives = []
     for i, p in enumerate(live):
         lives.append(frame(Image.open(p), "3. Live replay of the Tennessee Eastman plant, fault 6: loss of A feed",
-                           "Reactor pressure (PI-107) crosses its 2,895 kPa limit; the label turns red from the "
+                           "Reactor pressure (PT-107) crosses its 2,895 kPa limit; the label turns red from the "
                            "gateway's own alarm."))
     H = max(x.height for x in [ba, sheet] + lives)
     title = card("P&ID  →  digital twin in Ignition",

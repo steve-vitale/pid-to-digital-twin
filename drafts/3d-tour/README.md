@@ -10,7 +10,7 @@ The stills were re-rendered on 2026-10-28, after the control valves were renumbe
 with the review corrections of 2026-10-15 re-applied (V-101 and K-101 callouts, the overhead rack corridor, the
 header bore and an illustrative compressor impeller) (`python scripts/pipeline.py rebuild --from te.tour`, with
 `BLENDER_EXE` set; Blender 5.2.2, stills only, no video). They show the source-checked topology (the purge leaves
-from the separator V-101, with FI-110, FV-110 and AI-129) and the Atkinson Hyperlegible label font. The OCR
+from the separator V-101, with FT-110, FV-110 and AT-129) and the Atkinson Hyperlegible label font. The OCR
 read-back files (`label_truth.json`, `ocr_readback.json`) still describe the 2026-10-13 stills and their
 revision-A tags; they were not re-run. Twelve stills were rendered and measured; eight review JPEGs are committed.
 The render verifier failed none of its 17 checks on

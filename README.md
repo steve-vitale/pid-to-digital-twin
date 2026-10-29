@@ -3,16 +3,18 @@
 [![tests](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml/badge.svg)](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml)
 
 AI vision models read the symbols and tags on piping and instrumentation diagrams (P&IDs), code traces the lines,
-and the result becomes a tagged asset model for Ignition and a PI AF structure. Every step is scored against public
-third-party answer keys, and the scoring rules were committed before any model ran (the one rule I later bent is
+and the result becomes a tagged asset model for Ignition and a PI AF structure. Extraction from real drawings is
+scored against public third-party answer keys (the generated drawings and the real unit use checks this project
+wrote, and say so), and the scoring rules were committed before any model ran (the one rule I later bent is
 logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
 
 The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand. This project
 tests how much of that AI can do, how to check its work honestly, and what a plant would need to use it safely.
 
 **In two minutes:**
-- **Reading real drawings.** On public drawings held out from tuning, symbols are found with F1 0.97 and connections
-  0.89, leaving about 20 differences from the answer key per 100 items for a person to check. The 2,886 extracted
+- **Reading real drawings.** On six held-out public drawings (they also chose between methods), symbols are found
+  with F1 0.93 and connections 0.87 over five runs, leaving about 20 differences from the answer key per 100 items
+  for a person to check. The 2,886 extracted
   items arrive ranked by risk: 377 to check first. [Results](#results-held-out-drawings-and-how-they-were-used)
 - **Drawing what matters.** A P&ID generated from a verified model had every instrument and no control loops: 0 of
   19. The loops were read out of the simulator's own code and drawn. [Journal 50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none)
@@ -24,6 +26,9 @@ tests how much of that AI can do, how to check its work honestly, and what a pla
 - **Not done:** no reviewer has been timed, no operator has reviewed the screens, nothing is imported into a PI
   System, and no plant's own data was used. Coding agents wrote most of the code; I set the tests first and logged
   where they and I were wrong ([how it was built](#how-it-was-built)).
+- **Check it yourself.** `python scripts/check_claims.py` compares every headline number here with the committed file
+  it comes from (standard library only, under a minute). If you'd rather have your coding agent do it,
+  [AGENTS.md](AGENTS.md) tells it what to run and which limits to report back. More: [REVIEWING.md](docs/REVIEWING.md).
 
 ![Before and after: a crop of a public OPEN100 drawing, and the same crop with every extracted symbol boxed and coloured by review risk tier](docs/screenshots/before-after-sheet0.png)
 
@@ -34,8 +39,8 @@ public DEXPI sheets used only to score tag reading), and each
 starts with an assessment before anything is built: where the data came from, what has been checked against an
 independent source, and what is inferred. **Every output inherits its inputs' confidence; nothing downstream upgrades
 it.** The live replay, the mimics, the 3D tours and the LOTO views are **proof-of-concept outputs, built to iterate
-on**, and are labelled that way in their own files. One manifest lists all 51 stages of the pipeline;
-`python scripts/pipeline.py status` shows which outputs are stale after a correction (all 51 are fresh in this commit;
+on**, and are labelled that way in their own files. One manifest lists all 52 stages of the pipeline;
+`python scripts/pipeline.py status` shows which outputs are stale after a correction (all 52 are fresh in this commit;
 the live replay and the native acceptance run are recorded by hand because they need a running Ignition gateway), and
 `rebuild --from <stage>` carries a correction forward. Per-element confidence: `python scripts/pipeline.py
 confidence`. Stage by stage: [docs/DATA_LINEAGE.md](docs/DATA_LINEAGE.md).
@@ -54,7 +59,7 @@ a 3D orientation tour and a LOTO isolation view on the real drawing.
 <!-- deliverables-matrix:start -->
 | Deliverable | TE: process knowledge, no original drawing | OPEN100: drawings, no process data |
 |---|---|---|
-| Asset model (equipment, instruments, connections, hierarchy) | **Done**: transcribed from the published process; every tag checked against the simulator source (36 confirmed, 1 corrected) and every unit, stream, direction and tag owner against its balances and flow lines (51 confirmed, 4 corrected, 1 unresolvable of 56); 0 items reviewed by operations ([te_topology_check.md](out/te_topology_check.md), [te_source_check.md](out/te_source_check.md)) | **Done**: extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on the sealed drawings symbols found F1 0.97, connections 0.89, review load 20.1 per 100 (mean of five round-5 runs; the earlier single round-2 run scored 17.8) ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv), [replicates_r5_holdout-a.md](out/replicates_r5_holdout-a.md)) |
+| Asset model (equipment, instruments, connections, hierarchy) | **Done**: transcribed from the published process; every tag checked against the simulator source (36 confirmed, 1 corrected) and every unit, stream, direction and tag owner against its balances and flow lines (51 confirmed, 4 corrected, 1 unresolvable of 56); 0 items reviewed by operations ([te_topology_check.md](out/te_topology_check.md), [te_source_check.md](out/te_source_check.md)) | **Done**: extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on six held-out drawings (which also chose the method) symbols found F1 0.93, connections 0.87, review load 20.1 per 100, all means of five round-5 runs (the earlier single round-2 run scored 17.8) ([review_queue.csv](out/twin/r2-tiles-trace/codex/review_queue.csv), [replicates_r5_holdout-a.md](out/replicates_r5_holdout-a.md)) |
 | Tag text read from drawings | **Done**: a round trip on the generated sheets: every tag read on clean sheets by both models, 14% (GPT) and 49% (Claude) at the worst scan level; an upper bound for clean house-style drawings, not real-plant accuracy ([roundtrip_scores.md](out/te_pid/roundtrip_scores.md)) | **Not possible**: the public answer keys carry no text, so tag reading cannot be scored here; on three DEXPI example sheets with labelled symbols (round 5) GPT read 29 of 33 tags exactly and Claude 28, and on two more both found 99-100% of 145 identifiers from the published tag lists |
 | Ignition tags and PI AF asset structure | **Done**: loaded into a lab gateway; the PI Builder sheet (schema v2) is checked offline against the vendor-published conventions, not imported into a PI System ([te_tags.json](out/ignition/te_tags.json), [pi](out/pi)) | **Done**: same; instrument tags are placeholders until an I/O list maps them, and placeholder PI rows are left unselected ([tags.json](out/twin/r2-tiles-trace/codex/ignition/tags.json), [pi](out/twin/r2-tiles-trace/codex/pi)) |
 | Original drawing on screen with each instrument's value | **Not done yet**: no original TE drawing exists; a P&ID is now generated from the model in the OPEN100 style (three sheets, not a drawing of record), but it is not a screen background yet ([101.png](data/te_pid/101.png), [style_fidelity.md](out/te_pid/style_fidelity.md)) | **Done**: 12 drawing screens, checked in a lab gateway; every unmapped value reads 'not connected' ([native-sheet0-not-connected.png](docs/screenshots/native-sheet0-not-connected.png)) |
@@ -399,7 +404,7 @@ Claude and haven't been reviewed by operations.
 
 | Plant overview, normal | Fault 6 at the alarm | An extracted drawing, live |
 |---|---|---|
-| ![Current plant overview in normal replay: grey values beside each unit on the process flow](docs/screenshots/native-revB-overview-normal.png) | ![Current plant overview at the pressure alarm: values outside their normal band amber, reactor pressure PI-107 red past its 2,895 kPa alarm](docs/screenshots/native-revB-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments and "not connected" on the rest](docs/screenshots/native-sheet0-not-connected.png) |
+| ![Current plant overview in normal replay: grey values beside each unit on the process flow](docs/screenshots/native-revB-overview-normal.png) | ![Current plant overview at the pressure alarm: values outside their normal band amber, reactor pressure PT-107 red past its 2,895 kPa alarm](docs/screenshots/native-revB-overview-fault-alarm.png) | ![The original OPEN100 sheet 0, greyed, with live values beside mapped instruments and "not connected" on the rest](docs/screenshots/native-sheet0-not-connected.png) |
 
 The two overview screenshots are from the revision B build in the local disposable gateway (normal: the 2026-10-28 acceptance run; fault: captured 2026-10-29 from the same build); the extracted-drawing screenshot is from the 2026-10-13 run.
 
@@ -643,8 +648,8 @@ it at a real site.
 | Demo animation and before/after image | Done ([docs/demo.gif](docs/demo.gif)); a narrated video isn't made |
 | Twin converter: extracted sheets to hierarchy, Ignition tags, PI Builder sheet, SVG overlays, review queue (`scripts/build_twin.py`) | Done |
 | PI AF: asset structure as a PI Builder sheet (schema v2); not imported into a PI System, by decision (below) | Scoped: checked offline against the vendor-published conventions (`check_pi_export.py`), not import-tested |
-| Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PI-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
-| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 51 stages, all fresh; the live replay and the native acceptance run need a gateway and are recorded by hand ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
+| Tennessee Eastman topology against the simulator source | Done: 51 confirmed, 4 corrected (purge stream and its three tags), 1 unresolvable (PT-116) ([journal entry 42](docs/JOURNAL.md#42-verify-the-te-topology-against-the-simulator-source)) |
+| Data lineage: every output a stage in one manifest, with a freshness check and a confidence rollup | Done: 52 stages, all fresh; the live replay and the native acceptance run need a gateway and are recorded by hand ([DATA_LINEAGE.md](docs/DATA_LINEAGE.md)) |
 | One plant end to end: TE P&ID generated in the OPEN100 style and read back | Done: a round trip on our own drawings, so an upper bound (clean sheets 2.1 and 2.2 per 100, every tag read), not real-plant accuracy ([journal entry 44](docs/JOURNAL.md#44-one-plant-end-to-end-draw-the-te-model-in-the-house-style-and-read-it-back)); measured on revision A |
 | Control loops on the generated P&ID, from the simulator's closed-loop code | Done: revision A drew 0 of 19 loops; the generator now draws all 19 and the audit fails if one goes missing (it reads the answer key, not the image); data-checked against the recorded run; revision B passed native gateway acceptance; revision C read back by both models, every tag read on clean sheets (journal entry 54; [journal entry 51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)) |
 | A real unit from the public record: the Bayer CropScience residue treater (CSB report) | Done (proof of concept): process model citing the report for every item (tags assigned by this project), corrected against the report's Figure 10 (20 of 21 checks; first run 10 of 21); generated P&ID with controllers and interlocks, all 15 of the figure's lines agree; Figure 11's DCS trend digitized, 8 of 11 checks against the report's text agree and the 3 disagreements are written up; the trend replayed through the model's interlocks and limits, five limited consistency checks against the report's account of the evening agree (two use proxies; rules written after seeing the data) ([BAYER_RT.md](docs/BAYER_RT.md), journal entries [56](docs/JOURNAL.md#56-draw-the-real-unit-and-check-it-against-the-reports-own-drawing) and [57](docs/JOURNAL.md#57-replay-the-evening-through-the-interlocks)); a generated overview screen replays it, proof of concept, every row checked against the replay file ([drafts/bayer-overview](drafts/bayer-overview/verification.md), [journal entry 58](docs/JOURNAL.md#58-an-overview-screen-for-the-unit)); the report's six timed events walked through beside it, 13 of 16 checks agree and the 3 that don't are the figure-against-text disagreements ([journal entry 59](docs/JOURNAL.md#59-walk-the-reports-timeline-beside-the-screen)) |

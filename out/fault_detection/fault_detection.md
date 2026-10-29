@@ -22,27 +22,27 @@ Zero false alarms is a measurement on 193 plant hours, not a guarantee: the 95% 
 
 | Fault | Disturbance (Downs & Vogel 1993) | Detected | Delay | First single flag | Detection rate | First tags to leave their band (minutes after onset) | Refit bands | PCA T² |
 |---|---|---|---|---|---|---|---|---|
-| 1 | A/C feed ratio, B composition constant (step) | yes | 18 min | 18 | 99.2% | PI-116 (18), JI-120 (21), AI-123-C (24) | yes, 18 min, 99% | yes, 18 min, 99% |
-| 2 | B composition, A/C ratio constant (step) | yes | 48 min | 48 | 98.0% | AI-129-B (48), FV-110 (51), FI-110 (54) | yes, 48 min, 98% | yes, 42 min, 98% |
+| 1 | A/C feed ratio, B composition constant (step) | yes | 18 min | 18 | 99.2% | PT-116 (18), JT-120 (21), AT-123-C (24) | yes, 18 min, 99% | yes, 18 min, 99% |
+| 2 | B composition, A/C ratio constant (step) | yes | 48 min | 48 | 98.0% | AT-129-B (48), FV-110 (51), FT-110 (54) | yes, 48 min, 98% | yes, 42 min, 98% |
 | 3 (expected hard) | D feed temperature (step) | **no** | - | - | 0.0% | none | no, 0% | yes, 1068 min, 2% |
-| 4 | Reactor cooling water inlet temperature (step) | yes | 6 min | 0 | 83.0% | TI-109 (0), TV-121 (0) | yes, 6 min, 89% | yes, 1068 min, 8% |
-| 5 | Condenser cooling water inlet temperature (step) | yes | 0 min | 0 | 20.6% | TI-122 (0), TI-111 (3), FI-104 (39) | yes, 0 min, 21% | yes, 0 min, 25% |
-| 6 | A feed loss (step) | yes | 0 min | 0 | 100.0% | FI-101 (0), FV-101 (0), JI-120 (21) | yes, 0 min, 100% | yes, 18 min, 99% |
-| 7 | C header pressure loss, reduced availability (step) | yes | 0 min | 0 | 100.0% | FI-104 (0), PI-116 (3), TI-121 (3) | yes, 0 min, 100% | yes, 0 min, 96% |
-| 8 | A, B, C feed composition (random variation) | yes | 69 min | 69 | 94.5% | JI-120 (69), FV-105 (75), PI-116 (78) | yes, 66 min, 95% | yes, 66 min, 97% |
+| 4 | Reactor cooling water inlet temperature (step) | yes | 6 min | 0 | 83.0% | TT-109 (0), TV-121 (0) | yes, 6 min, 89% | yes, 1068 min, 8% |
+| 5 | Condenser cooling water inlet temperature (step) | yes | 0 min | 0 | 20.6% | TT-122 (0), TT-111 (3), FT-104 (39) | yes, 0 min, 21% | yes, 0 min, 25% |
+| 6 | A feed loss (step) | yes | 0 min | 0 | 100.0% | FT-101 (0), FV-101 (0), JT-120 (21) | yes, 0 min, 100% | yes, 18 min, 99% |
+| 7 | C header pressure loss, reduced availability (step) | yes | 0 min | 0 | 100.0% | FT-104 (0), PT-116 (3), TT-121 (3) | yes, 0 min, 100% | yes, 0 min, 96% |
+| 8 | A, B, C feed composition (random variation) | yes | 69 min | 69 | 94.5% | JT-120 (69), FV-105 (75), PT-116 (78) | yes, 66 min, 95% | yes, 66 min, 97% |
 | 9 (expected hard) | D feed temperature (random variation) | **no** | - | - | 0.0% | none | no, 0% | no, 2% |
-| 10 | C feed temperature (random variation) | yes | 264 min | 264 | 26.4% | FI-119 (264), FV-119 (267), TI-118 (285) | yes, 291 min, 24% | yes, 171 min, 42% |
-| 11 | Reactor cooling water inlet temperature (random variation) | yes | 30 min | 18 | 49.4% | TI-109 (18), TV-121 (18) | yes, 30 min, 51% | yes, 33 min, 28% |
-| 12 | Condenser cooling water inlet temperature (random variation) | yes | 21 min | 6 | 95.6% | TI-122 (6), TI-111 (9), TI-121 (24) | yes, 6 min, 96% | yes, 6 min, 98% |
-| 13 | Reaction kinetics (slow drift) | yes | 144 min | 144 | 93.6% | PI-116 (144), PI-107 (147), PI-113 (150) | yes, 141 min, 93% | yes, 144 min, 94% |
-| 14 | Reactor cooling water valve (sticking) | yes | 3 min | 3 | 99.9% | TI-109 (3), TV-121 (3), TI-121 (6) | yes, 3 min, 100% | yes, 9 min, 92% |
+| 10 | C feed temperature (random variation) | yes | 264 min | 264 | 26.4% | FT-119 (264), FV-119 (267), TT-118 (285) | yes, 291 min, 24% | yes, 171 min, 42% |
+| 11 | Reactor cooling water inlet temperature (random variation) | yes | 30 min | 18 | 49.4% | TT-109 (18), TV-121 (18) | yes, 30 min, 51% | yes, 33 min, 28% |
+| 12 | Condenser cooling water inlet temperature (random variation) | yes | 21 min | 6 | 95.6% | TT-122 (6), TT-111 (9), TT-121 (24) | yes, 6 min, 96% | yes, 6 min, 98% |
+| 13 | Reaction kinetics (slow drift) | yes | 144 min | 144 | 93.6% | PT-116 (144), PT-107 (147), PT-113 (150) | yes, 141 min, 93% | yes, 144 min, 94% |
+| 14 | Reactor cooling water valve (sticking) | yes | 3 min | 3 | 99.9% | TT-109 (3), TV-121 (3), TT-121 (6) | yes, 3 min, 100% | yes, 9 min, 92% |
 | 15 (expected hard) | Condenser cooling water valve (sticking) | **no** | - | - | 0.0% | none | no, 0% | yes, 2016 min, 5% |
-| 16 | Unknown | yes | 102 min | 102 | 16.4% | FI-119 (102), TI-118 (597), FV-119 (855) | yes, 588 min, 11% | yes, 921 min, 23% |
-| 17 | Unknown | yes | 69 min | 69 | 83.2% | TI-121 (69), TV-121 (105), TI-109 (138) | yes, 69 min, 84% | yes, 84 min, 77% |
-| 18 | Unknown | yes | 261 min | 261 | 89.1% | TI-122 (261), TI-111 (276), PI-116 (306) | yes, 261 min, 89% | yes, 264 min, 89% |
-| 19 | Unknown | **no** | - | 1536 | 0.2% | FI-105 (1536) | no, 0% | no, 1% |
-| 20 | Unknown | yes | 255 min | 243 | 33.0% | FV-105 (243), JI-120 (264), PI-113 (264) | yes, 252 min, 36% | yes, 255 min, 36% |
-| 21 | Stream 4 valve fixed at steady-state position | yes | 1593 min | 1593 | 30.2% | FI-119 (1593), LI-108 (1623), FV-119 (1668) | yes, 1827 min, 22% | yes, 1563 min, 33% |
+| 16 | Unknown | yes | 102 min | 102 | 16.4% | FT-119 (102), TT-118 (597), FV-119 (855) | yes, 588 min, 11% | yes, 921 min, 23% |
+| 17 | Unknown | yes | 69 min | 69 | 83.2% | TT-121 (69), TV-121 (105), TT-109 (138) | yes, 69 min, 84% | yes, 84 min, 77% |
+| 18 | Unknown | yes | 261 min | 261 | 89.1% | TT-122 (261), TT-111 (276), PT-116 (306) | yes, 261 min, 89% | yes, 264 min, 89% |
+| 19 | Unknown | **no** | - | 1536 | 0.2% | FT-105 (1536) | no, 0% | no, 1% |
+| 20 | Unknown | yes | 255 min | 243 | 33.0% | FV-105 (243), JT-120 (264), PT-113 (264) | yes, 252 min, 36% | yes, 255 min, 36% |
+| 21 | Stream 4 valve fixed at steady-state position | yes | 1593 min | 1593 | 30.2% | FT-119 (1593), LT-108 (1623), FV-119 (1668) | yes, 1827 min, 22% | yes, 1563 min, 33% |
 
 Missed by the shipped bands: 3, 9, 15, 19. Missed by PCA T²: 9, 19.
 

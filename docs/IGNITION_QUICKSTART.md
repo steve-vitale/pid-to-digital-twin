@@ -94,8 +94,8 @@ tested through the scripted build, not by hand.
 ```
 python scripts/ignition/te_sim_server.py --run fault6 --start 240
 ```
-Within about 20–30 seconds, reactor pressure (PI-107) passes 2,895 kPa and turns red on every screen. A-feed flow
-(FI-101) drops to zero, because fault 6 is the loss of A feed. To see the early warning instead, start at the fault
+Within about 20–30 seconds, reactor pressure (PT-107) passes 2,895 kPa and turns red on every screen. A-feed flow
+(FT-101) drops to zero, because fault 6 is the loss of A feed. To see the early warning instead, start at the fault
 itself (`--start 160`): the A feed turns amber at once, and the pressure alarm follows about 100 seconds later.
 
 | Normal | Fault 6, at the alarm | An extracted drawing |

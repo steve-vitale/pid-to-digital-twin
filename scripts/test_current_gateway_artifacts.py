@@ -94,7 +94,7 @@ class CurrentGatewayContract(unittest.TestCase):
             compile(bv.build_hmi.TRANSFORM_SIGNATURE + '\nreturn value\n', '<perspective transform>', 'exec')
 
     def test_every_band_indicator_shows_its_band(self):
-        # TI-109's real 0.24 degC band was drawn on a span stretched to its 175 degC alarm: a sub-pixel sliver that
+        # TT-109's real 0.24 degC band was drawn on a span stretched to its 175 degC alarm: a sub-pixel sliver that
         # read as missing data (journal entry 38). Every indicator must give its band a visible share of its span.
         shares = {}
         for name, view in self.held.views.items():
@@ -145,7 +145,7 @@ class CurrentGatewayContract(unittest.TestCase):
         return {t['name']: t for t in next(u for u in plant['tags'] if u['name'] == '_Summary')['tags']}
 
     def test_alarm_count_counts_alarms_not_tags(self):
-        # Journal 38: the header read "Alarms: 1" while the table listed PI-107's two active alarms.
+        # Journal 38: the header read "Alarms: 1" while the table listed PT-107's two active alarms.
         s = self.summary()['AlarmsActive']
         want = [(f'[Twin]TE_Plant/{self.meta["te_ranges"][t]["unit"]}/{t}/PV', a['name'])
                 for t, alarms in bg.ALARMS.items() for a in alarms]
@@ -220,7 +220,7 @@ class CurrentGatewayContract(unittest.TestCase):
                     continue
                 if (b.get('type') == 'tag' and b['config']['tagPath'].endswith('/PV') and 'UNKNOWN' in code
                         and c['type'] == 'ia.display.label'):
-                    # Two schematic labels keep their alarm-colour binding instead (PI-107, TI-109): a label has
+                    # Two schematic labels keep their alarm-colour binding instead (PT-107, TT-109): a label has
                     # one background binding, and alarm red wins there. Recorded as a known gap.
                     if name == 'TE/Schematic' and c['meta']['name'] in bg.ALARMS:
                         continue
@@ -349,7 +349,7 @@ class CurrentGatewayContract(unittest.TestCase):
 
     def test_missing_expanded_channel_fails(self):
         for folder in self.held.folder('TE_Plant')['tags']:
-            folder['tags'] = [i for i in folder['tags'] if i['name'] != 'AI-123-B']
+            folder['tags'] = [i for i in folder['tags'] if i['name'] != 'AT-123-B']
         self.assertFalse(vg.v2(self.held, self.te, self.tw)['passed'])
 
     def test_invented_callout_pv_or_mapping_fails(self):
@@ -376,7 +376,7 @@ class CurrentGatewayContract(unittest.TestCase):
 
     def test_missing_required_binding_fails(self):
         view = self.held.views['TE/Unit_R-101']
-        item = next(c for c in walk(view['root']) if c.get('meta', {}).get('name') == 'AI-123-B')
+        item = next(c for c in walk(view['root']) if c.get('meta', {}).get('name') == 'AT-123-B')
         item['propConfig'].pop('props.text')
         self.assertFalse(vg.v3(self.held, TWIN)['passed'])
 

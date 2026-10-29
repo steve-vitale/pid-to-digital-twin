@@ -61,7 +61,7 @@ def main():
             raise SystemExit("a data server stopped at startup (is port 4841 or 4842 already in use?)")
     print(f"""
 The twin is live. Open:
-  {URL}/data/perspective/client/PIDTwin            Tennessee Eastman overview{' (fault 6: watch PI-107 turn red in ~25 s)' if a.fault else ''}
+  {URL}/data/perspective/client/PIDTwin            Tennessee Eastman overview{' (fault 6: watch PT-107 turn red in ~25 s)' if a.fault else ''}
   {URL}/data/perspective/client/PIDTwin/open100/0  extracted sheet 0: 24 mapped points live, the rest not connected
   {URL}/data/perspective/client/PIDTwin/open100/N  sheets 1-11
 Ctrl+C stops the data servers.""", flush=True)

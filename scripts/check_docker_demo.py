@@ -91,7 +91,7 @@ def main():
             time.sleep(2)
         page.screenshot(path=shots / "3-fault6.png")
         pi = page.locator(LABELS).nth(7).inner_text() if page.locator(LABELS).count() > 7 else "?"
-        print(f"fault 6: {red} red label(s) after {time.time() - t0:.0f} s (PI-107 shows {pi!r}) -> "
+        print(f"fault 6: {red} red label(s) after {time.time() - t0:.0f} s (PT-107 shows {pi!r}) -> "
               f"{'PASS' if red else 'FAIL'}")
         if not red:
             failures.append("fault alarm")

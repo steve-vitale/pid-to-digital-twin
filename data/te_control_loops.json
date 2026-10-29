@@ -29,7 +29,7 @@
     "xmeas": 2,
     "span": 5811.0,
     "line": 501,
-    "tag": "FI-102",
+    "tag": "FT-102",
     "description": "D feed flow",
     "unit": "U-100"
    },
@@ -59,7 +59,7 @@
     "xmeas": 3,
     "span": 8354.0,
     "line": 542,
-    "tag": "FI-103",
+    "tag": "FT-103",
     "description": "E feed flow",
     "unit": "U-100"
    },
@@ -89,7 +89,7 @@
     "xmeas": 1,
     "span": 1.017,
     "line": 583,
-    "tag": "FI-101",
+    "tag": "FT-101",
     "description": "A feed flow",
     "unit": "U-100"
    },
@@ -119,7 +119,7 @@
     "xmeas": 4,
     "span": 15.25,
     "line": 624,
-    "tag": "FI-104",
+    "tag": "FT-104",
     "description": "A and C feed flow",
     "unit": "C-101"
    },
@@ -149,7 +149,7 @@
     "xmeas": 5,
     "span": 53.0,
     "line": 665,
-    "tag": "FI-105",
+    "tag": "FT-105",
     "description": "Recycle flow",
     "unit": "K-101"
    },
@@ -179,7 +179,7 @@
     "xmeas": 10,
     "span": 1.0,
     "line": 735,
-    "tag": "FI-110",
+    "tag": "FT-110",
     "description": "Purge rate",
     "unit": "V-101"
    },
@@ -209,7 +209,7 @@
     "xmeas": 12,
     "span": 70.0,
     "line": 784,
-    "tag": "LI-112",
+    "tag": "LT-112",
     "description": "Separator level",
     "unit": "V-101"
    },
@@ -239,7 +239,7 @@
     "xmeas": 15,
     "span": 70.0,
     "line": 825,
-    "tag": "LI-115",
+    "tag": "LT-115",
     "description": "Stripper level",
     "unit": "C-101"
    },
@@ -269,7 +269,7 @@
     "xmeas": 19,
     "span": 460.0,
     "line": 866,
-    "tag": "FI-119",
+    "tag": "FT-119",
     "description": "Stripper steam flow",
     "unit": "C-101"
    },
@@ -299,7 +299,7 @@
     "xmeas": 21,
     "span": 150.0,
     "line": 907,
-    "tag": "TI-121",
+    "tag": "TT-121",
     "description": "Reactor cooling water outlet temperature",
     "unit": "R-101"
    },
@@ -329,7 +329,7 @@
     "xmeas": 17,
     "span": 46.0,
     "line": 948,
-    "tag": "FI-117",
+    "tag": "FT-117",
     "description": "Stripper underflow (product)",
     "unit": "C-101"
    },
@@ -359,7 +359,7 @@
     "xmeas": 23,
     "span": 100.0,
     "line": 989,
-    "tag": "AI-123",
+    "tag": "AT-123",
     "description": "Reactor feed analyzer (components A-F)",
     "unit": "R-101",
     "component": "A"
@@ -390,7 +390,7 @@
     "xmeas": 26,
     "span": 100.0,
     "line": 1030,
-    "tag": "AI-123",
+    "tag": "AT-123",
     "description": "Reactor feed analyzer (components A-F)",
     "unit": "R-101",
     "component": "D"
@@ -421,7 +421,7 @@
     "xmeas": 27,
     "span": 100.0,
     "line": 1071,
-    "tag": "AI-123",
+    "tag": "AT-123",
     "description": "Reactor feed analyzer (components A-F)",
     "unit": "R-101",
     "component": "E"
@@ -452,7 +452,7 @@
     "xmeas": 18,
     "span": 130.0,
     "line": 1112,
-    "tag": "TI-118",
+    "tag": "TT-118",
     "description": "Stripper temperature",
     "unit": "C-101"
    },
@@ -482,7 +482,7 @@
     "xmeas": 8,
     "span": 50.0,
     "line": 1153,
-    "tag": "LI-108",
+    "tag": "LT-108",
     "description": "Reactor level",
     "unit": "R-101"
    },
@@ -512,7 +512,7 @@
     "xmeas": 9,
     "span": 150.0,
     "line": 1194,
-    "tag": "TI-109",
+    "tag": "TT-109",
     "description": "Reactor temperature",
     "unit": "R-101"
    },
@@ -542,7 +542,7 @@
     "xmeas": 30,
     "span": 26.0,
     "line": 1235,
-    "tag": "AI-129",
+    "tag": "AT-129",
     "description": "Purge gas analyzer (components A-H)",
     "unit": "V-101",
     "component": "B"
@@ -573,7 +573,7 @@
     "xmeas": 38,
     "span": 1.6,
     "line": 1278,
-    "tag": "AI-137",
+    "tag": "AT-137",
     "description": "Product analyzer (components D-H)",
     "unit": "C-101",
     "component": "E"
@@ -604,7 +604,7 @@
     "xmeas": 13,
     "span": null,
     "line": 1319,
-    "tag": "PI-113",
+    "tag": "PT-113",
     "description": "Separator pressure",
     "unit": "V-101"
    },
@@ -633,7 +633,7 @@
    "only_after_trip": null,
    "forces_output_to": 100.0,
    "line": 710,
-   "tag": "PI-113"
+   "tag": "PT-113"
   },
   {
    "controller": "CONTRL6",
@@ -642,7 +642,7 @@
    "only_after_trip": 1,
    "forces_output_to": 100.0,
    "line": 713,
-   "tag": "PI-113"
+   "tag": "PT-113"
   },
   {
    "controller": "CONTRL6",
@@ -651,7 +651,7 @@
    "only_after_trip": 1,
    "forces_output_to": 40.06,
    "line": 715,
-   "tag": "PI-113"
+   "tag": "PT-113"
   },
   {
    "controller": "CONTRL6",
@@ -660,7 +660,7 @@
    "only_after_trip": null,
    "forces_output_to": 0.0,
    "line": 720,
-   "tag": "PI-113"
+   "tag": "PT-113"
   },
   {
    "controller": "CONTRL6",
@@ -669,7 +669,7 @@
    "only_after_trip": 2,
    "forces_output_to": 0.0,
    "line": 723,
-   "tag": "PI-113"
+   "tag": "PT-113"
   },
   {
    "controller": "CONTRL6",
@@ -678,7 +678,7 @@
    "only_after_trip": 2,
    "forces_output_to": 40.06,
    "line": 725,
-   "tag": "PI-113"
+   "tag": "PT-113"
   }
  ]
 }

@@ -54,12 +54,12 @@ W, HEAD = 1600, 56
 # a shutdown limit exists), at most four. Not reviewed by operations.
 UNIT_ORDER = ["U-100", "R-101", "E-101", "V-101", "K-101", "C-101"]
 KEY_VALUES = {
-    "U-100": ["FI-101", "FI-102", "FI-103"],
-    "R-101": ["PI-107", "TI-109", "LI-108", "TI-121"],
-    "E-101": ["TI-122", "FV-117"],
-    "V-101": ["PI-113", "TI-111", "LI-112", "FI-114"],
-    "K-101": ["FI-105", "JI-120", "FV-105"],
-    "C-101": ["PI-116", "TI-118", "LI-115", "FI-117"],
+    "U-100": ["FT-101", "FT-102", "FT-103"],
+    "R-101": ["PT-107", "TT-109", "LT-108", "TT-121"],
+    "E-101": ["TT-122", "FV-117"],
+    "V-101": ["PT-113", "TT-111", "LT-112", "FT-114"],
+    "K-101": ["FT-105", "JT-120", "FV-105"],
+    "C-101": ["PT-116", "TT-118", "LT-115", "FT-117"],
 }
 DISPLAY_SPAN = 2.5  # indicator and trend span = the normal band widened 2.5x about its centre (plus nearby alarm limits)
 
@@ -177,7 +177,7 @@ def shown_limits(band, limits):
 def span(band, limits):
     mid, half = (band[0] + band[1]) / 2, (band[1] - band[0]) / 2 or 1.0
     lo, hi = mid - DISPLAY_SPAN * half, mid + DISPLAY_SPAN * half
-    # A far limit would shrink the band to a sliver that reads as missing data: TI-109's real band is 0.24 degC
+    # A far limit would shrink the band to a sliver that reads as missing data: TT-109's real band is 0.24 degC
     # wide, its alarm 175 degC (journal entry 38). Such a limit stays in the "Normal band" text and in State colour.
     for v in shown_limits(band, limits):
         hi = max(hi, v + 0.05 * (v - lo))
@@ -206,7 +206,7 @@ def indicator(name, x, y, w, h, base, band, limits):
 
 def trend(name, x, y, w, h, base, band, minutes):
     # Scaled to the normal band, not to the alarm limits: a far-off shutdown limit would flatten the trend into a line
-    # (TI-109's 175 degC against a 0.24 degC band). The indicator shows only nearby limits, for the same reason.
+    # (TT-109's 175 degC against a 0.24 degC band). The indicator shows only nearby limits, for the same reason.
     lo, hi = span(band, [])
     no_marker = {"shape": "circle", "size": 0, "stroke": {"color": "", "width": 0, "opacity": 0, "dashArray": ""},
                  "fill": {"color": "", "opacity": 0}, "style": {"classes": ""}}
@@ -260,7 +260,7 @@ def header(provider, title, active):
 
 def summary_boxes(provider, places, size=12, height=26, y=17):
     """The three summary boxes, shared by every header and the narrow overview. "Process alarms" counts active
-    alarms (PI-107's two alarms count twice), not tags in alarm. The data-source box shows the diagnostic alarm
+    alarms (PT-107's two alarms count twice), not tags in alarm. The data-source box shows the diagnostic alarm
     state: when the replay stops it is the one indication that changes besides every value turning UNKNOWN."""
     s = f"[{provider}]TE_Plant/_Summary/"
     spec = {'AlarmSummary': ('AlarmsActive', 'Process alarms', '#b91c1c'),

@@ -52,16 +52,16 @@ def main():
         before = te.read_text(encoding="utf-8")
         cols = generate.REVIEW_COLS
         rows = [
-            {"item_id": "FI-101", "OPS_confirm_or_correct": "confirm", "OPS_show_on_operator_screen_Y_N": "Y"},
-            {"item_id": "TI-122", "OPS_confirm_or_correct": "correct",
+            {"item_id": "FT-101", "OPS_confirm_or_correct": "confirm", "OPS_show_on_operator_screen_Y_N": "Y"},
+            {"item_id": "TT-122", "OPS_confirm_or_correct": "correct",
              "OPS_correct_value": "description=Separator cooling water outlet temperature", "OPS_notes": "per teprob.f"},
-            {"item_id": "PI-107", "OPS_alarm_priority_H_M_L_none": "none"},     # remove a published alarm: MOC
-            {"item_id": "FI-102", "OPS_alarm_priority_H_M_L_none": "H"},        # new alarm, no setpoint: MOC
-            {"item_id": "TI-109", "OPS_alarm_priority_H_M_L_none": "M"},        # priority of a published alarm: applied
+            {"item_id": "PT-107", "OPS_alarm_priority_H_M_L_none": "none"},     # remove a published alarm: MOC
+            {"item_id": "FT-102", "OPS_alarm_priority_H_M_L_none": "H"},        # new alarm, no setpoint: MOC
+            {"item_id": "TT-109", "OPS_alarm_priority_H_M_L_none": "M"},        # priority of a published alarm: applied
             {"item_id": "XX-999", "OPS_confirm_or_correct": "confirm"},         # no such item
-            {"item_id": "LI-108", "OPS_confirm_or_correct": "correct"},         # correct without a value
-            {"item_id": "LI-112", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "colour=red"},  # bad field
-            {"item_id": "LI-115", "OPS_confirm_or_correct": "maybe"},           # bad decision
+            {"item_id": "LT-108", "OPS_confirm_or_correct": "correct"},         # correct without a value
+            {"item_id": "LT-112", "OPS_confirm_or_correct": "correct", "OPS_correct_value": "colour=red"},  # bad field
+            {"item_id": "LT-115", "OPS_confirm_or_correct": "maybe"},           # bad decision
         ]
         p, rec = run(te, rows, cols, tmp)
         check("bad rows make the run exit non-zero", p.returncode == 1, p.returncode)
@@ -69,11 +69,11 @@ def main():
               rec and len(rec["refused"]) == 4, rec and rec["refused"])
         check("5 decisions applied", rec and len(rec["applied"]) == 5, rec and [a["item"] for a in rec["applied"]])
         moc = {m["item"]: m["request"] for m in (rec or {}).get("needs_moc", [])}
-        check("removing PI-107's published alarm is flagged for a change review", moc.get("PI-107") == "remove alarm", moc)
-        check("a new alarm on FI-102 (no setpoint) is flagged, not created", moc.get("FI-102", "").startswith("new"), moc)
-        check("TI-109 priority change (published alarm) is not flagged", "TI-109" not in moc, moc)
+        check("removing PT-107's published alarm is flagged for a change review", moc.get("PT-107") == "remove alarm", moc)
+        check("a new alarm on FT-102 (no setpoint) is flagged, not created", moc.get("FT-102", "").startswith("new"), moc)
+        check("TT-109 priority change (published alarm) is not flagged", "TT-109" not in moc, moc)
         m = json.loads(te.read_text(encoding="utf-8"))
-        ti = next(i for i in m["instruments"] if i["tag"] == "TI-122")
+        ti = next(i for i in m["instruments"] if i["tag"] == "TT-122")
         check("correction applied, old value kept in history",
               ti["description"] == "Separator cooling water outlet temperature"
               and ti["ops_review"]["history"][-1]["changes"]["description"][0] != ti["description"], ti.get("ops_review"))
@@ -88,14 +88,14 @@ def main():
               len(real) == 1 and "description" in real[0], real[:5])
 
         # Re-apply the good rows: nothing changes.
-        good = [r for r in rows if r["item_id"] in ("FI-101", "TI-122", "PI-107", "FI-102", "TI-109")]
+        good = [r for r in rows if r["item_id"] in ("FT-101", "TT-122", "PT-107", "FT-102", "TT-109")]
         p, rec = run(te, good, cols, tmp)
         check("re-applying the same decisions changes nothing", rec and not rec["applied"] and rec["unchanged"] == 5,
               rec and rec["applied"])
 
         # Round trip: the regenerated sheet prints the decisions back; applying it changes nothing.
         regen = [dict(zip(cols, r)) for r in generate.review_rows(m)]
-        r101 = next(r for r in regen if r["item_id"] == "FI-101")
+        r101 = next(r for r in regen if r["item_id"] == "FT-101")
         check("regenerated sheet is pre-filled", r101["OPS_confirm_or_correct"] == "confirm"
               and r101["OPS_show_on_operator_screen_Y_N"] == "Y", r101)
         p, rec = run(te, regen, cols, tmp)

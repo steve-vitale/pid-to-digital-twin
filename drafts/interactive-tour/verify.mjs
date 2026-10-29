@@ -308,7 +308,7 @@ try {
         const cover = await page.evaluate("window.__tour.labelCover()");
         const small = r.texts.filter((t) => t.size < 12);
         const low = r.texts.filter((t) => t.contrast < 4.5);
-        // Jump-to-alarm intentionally focuses the reactor containing PI-107.
+        // Jump-to-alarm intentionally focuses the reactor containing PT-107.
         const expectedUnits = view.id.startsWith("focus-") ? [view.id.slice(6)] : view.id === "fault6-alarm" ? ["R-101"] : data.tour_order;
         const missingUnits = expectedUnits.filter((id) => !r.unitLabels.includes(id) || !r.unitLeaders.includes(id));
         legibility.push({ theme, width: w, view: view.id, texts: r.texts.length, pills: r.pills, min_font: Math.min(...r.texts.map((t) => t.size)), min_contrast: +Math.min(...r.texts.map((t) => t.contrast)).toFixed(2), overlaps: r.overlaps, outside: r.outside, dropped: r.dropped, missing_units: missingUnits, small: small.map((t) => `${t.text} (${t.size}px)`), cover: cover.filter((c) => c.cover > 0.1).map((c) => `${c.id} ${(c.cover * 100).toFixed(0)}%`), max_cover: Math.max(0, ...cover.map((c) => c.cover)), low: low.map((t) => `${t.text} (${t.contrast.toFixed(2)}:1)`), hscroll: r.scrollX });
@@ -327,16 +327,16 @@ try {
   const page = await openPage(browser.port, { width: 1440, height: 1000 });
   await page.goto(pathToFileURL(join(OUT, "te-tour.html")).href);
   const raw6 = rawReplay("d06_te.dat");
-  const pi107 = model.instruments.find((i) => i.tag === "PI-107");
-  const setpoints = json("out/ignition/gateway/build_meta.json").alarms["PI-107"].map((a) => a.setpointA);
+  const pi107 = model.instruments.find((i) => i.tag === "PT-107");
+  const setpoints = json("out/ignition/gateway/build_meta.json").alarms["PT-107"].map((a) => a.setpointA);
   const firstRaw = raw6.findIndex((r) => setpoints.some((s) => r[columnOf(pi107)] > s));
   await page.evaluate("document.querySelector('[data-jump-alarm]').click()");
   await page.sleep(900);
-  const at = await page.evaluate(`({ state: window.__tour.state(), alarms: [...document.querySelectorAll('[data-alarm-tag]')].map((p) => p.dataset.alarmTag), ring: document.querySelector('[data-ring="PI-107"]').closest('.tour-marker').dataset.state, pill: document.querySelector('[data-label="tag:PI-107"]')?.textContent, pillState: document.querySelector('[data-label="tag:PI-107"]')?.dataset.state, readout: document.querySelector('[data-readout]').textContent })`);
-  const shownValue = Number((at.pill || "").match(/PI-107 ([\d,.]+)/)?.[1]?.replace(/,/g, ""));
+  const at = await page.evaluate(`({ state: window.__tour.state(), alarms: [...document.querySelectorAll('[data-alarm-tag]')].map((p) => p.dataset.alarmTag), ring: document.querySelector('[data-ring="PT-107"]').closest('.tour-marker').dataset.state, pill: document.querySelector('[data-label="tag:PT-107"]')?.textContent, pillState: document.querySelector('[data-label="tag:PT-107"]')?.dataset.state, readout: document.querySelector('[data-readout]').textContent })`);
+  const shownValue = Number((at.pill || "").match(/PT-107 ([\d,.]+)/)?.[1]?.replace(/,/g, ""));
   const rawValue = raw6[firstRaw][columnOf(pi107)];
-  add("D", "fault6_alarm_shown", at.state.run === "fault6" && at.state.sample === firstRaw && at.alarms.includes("PI-107") && at.ring === "alarm" && at.pillState === "alarm" && Math.abs(shownValue - rawValue) < 0.5,
-    `the raw d06_te.dat first crosses a published PI-107 setpoint at sample ${firstRaw} (+${(firstRaw - 160) * 3} min after the fault starts; ${rawValue} > ${setpoints[0]} kPa g); "Jump to the first alarm" lands on sample ${at.state.sample}, the alarm list shows ${at.alarms.join(", ") || "nothing"}, the marker ring is "${at.ring}", the pill reads "${at.pill}"`);
+  add("D", "fault6_alarm_shown", at.state.run === "fault6" && at.state.sample === firstRaw && at.alarms.includes("PT-107") && at.ring === "alarm" && at.pillState === "alarm" && Math.abs(shownValue - rawValue) < 0.5,
+    `the raw d06_te.dat first crosses a published PT-107 setpoint at sample ${firstRaw} (+${(firstRaw - 160) * 3} min after the fault starts; ${rawValue} > ${setpoints[0]} kPa g); "Jump to the first alarm" lands on sample ${at.state.sample}, the alarm list shows ${at.alarms.join(", ") || "nothing"}, the marker ring is "${at.ring}", the pill reads "${at.pill}"`);
   await page.evaluate(`(() => { const s = document.querySelector('[data-scrub]'); s.value = ${firstRaw - 1}; s.dispatchEvent(new Event('input')); })()`);
   await page.sleep(300);
   const before = await page.evaluate("[...document.querySelectorAll('[data-alarm-tag]')].length");

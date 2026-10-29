@@ -454,24 +454,24 @@ async def wait_fed(c, ns, path, seconds=120):
 
 
 async def v8(c, ns, sim):
-    pv, aa = f"[{P}]TE_Plant/R-101/PI-107/PV", f"[{P}]TE_Plant/R-101/PI-107/AlarmActive"
-    other = f"[{P}]TE_Plant/R-101/TI-109/AlarmActive"
+    pv, aa = f"[{P}]TE_Plant/R-101/PT-107/PV", f"[{P}]TE_Plant/R-101/PT-107/AlarmActive"
+    other = f"[{P}]TE_Plant/R-101/TT-109/AlarmActive"
     fails, log = [], []
     r = await read_many(c, ns, [pv, aa, other])
     log.append(f"normal: PV {r[pv].Value.Value} {r[pv].StatusCode.name}, AlarmActive {r[aa].Value.Value} "
-               f"{r[aa].StatusCode.name}, TI-109 AlarmActive {r[other].Value.Value}")
+               f"{r[aa].StatusCode.name}, TT-109 AlarmActive {r[other].Value.Value}")
     for p in (aa, other):
         if not r[p].StatusCode.is_good():
             fails.append(f"normal: {p} reads {r[p].StatusCode.name}; a broken alarm signal can't count as 'no alarm'")
         elif r[p].Value.Value:
             fails.append(f"normal: {p} active during normal operation")
     # The screens' colours come from State (0 normal, 1 outside the normal band, 2 alarm) and the summary count.
-    # Normal running must flag nothing; fault 6 (A feed lost) must flag the A feed, and PI-107 must turn to 2.
-    count, feed, feed_state, pstate = (f"[{P}]TE_Plant/_Summary/OutOfNormal", f"[{P}]TE_Plant/U-100/FI-101/OutOfNormal",
-                                       f"[{P}]TE_Plant/U-100/FI-101/State", f"[{P}]TE_Plant/R-101/PI-107/State")
+    # Normal running must flag nothing; fault 6 (A feed lost) must flag the A feed, and PT-107 must turn to 2.
+    count, feed, feed_state, pstate = (f"[{P}]TE_Plant/_Summary/OutOfNormal", f"[{P}]TE_Plant/U-100/FT-101/OutOfNormal",
+                                       f"[{P}]TE_Plant/U-100/FT-101/State", f"[{P}]TE_Plant/R-101/PT-107/State")
     r = await read_many(c, ns, [count, feed_state, pstate])
     log.append(f"normal: values outside their band {r[count].Value.Value} ({r[count].StatusCode.name}), "
-               f"FI-101 State {r[feed_state].Value.Value}, PI-107 State {r[pstate].Value.Value}")
+               f"FT-101 State {r[feed_state].Value.Value}, PT-107 State {r[pstate].Value.Value}")
     if not r[count].StatusCode.is_good() or r[count].Value.Value != 0:
         fails.append(f"normal: {r[count].Value.Value} values flagged outside their normal band "
                      f"({r[count].StatusCode.name}); the bands were chosen to flag nothing in normal running")
@@ -486,7 +486,7 @@ async def v8(c, ns, sim):
     log.append(f"fault: A feed flagged {r[feed].Value.Value} (State {r[feed_state].Value.Value}), "
                f"{r[count].Value.Value} values outside their band, before the pressure alarm")
     if not (r[feed].StatusCode.is_good() and r[feed].Value.Value and r[feed_state].Value.Value == 1):
-        fails.append("fault: the lost A feed (FI-101) is not flagged outside its normal band")
+        fails.append("fault: the lost A feed (FT-101) is not flagged outside its normal band")
     crossed = active = None
     t0 = time.time()
     peak = 0.0
@@ -495,26 +495,26 @@ async def v8(c, ns, sim):
         v = r[pv].Value.Value if r[pv].StatusCode.is_good() else None
         if v is not None:
             peak = max(peak, v)
-            if crossed is None and v > bg.ALARMS["PI-107"][0]["setpointA"]:
+            if crossed is None and v > bg.ALARMS["PT-107"][0]["setpointA"]:
                 crossed = time.time()
-                log.append(f"fault: PV crossed {bg.ALARMS['PI-107'][0]['setpointA']} at {v}")
+                log.append(f"fault: PV crossed {bg.ALARMS['PT-107'][0]['setpointA']} at {v}")
         if r[aa].StatusCode.is_good() and r[aa].Value.Value:
             active = time.time()
             log.append(f"fault: AlarmActive True, PV {v}")
         await asyncio.sleep(0.5)
     await asyncio.sleep(1)
     r = await read_many(c, ns, [other, pstate])
-    log.append(f"fault: PI-107 State {r[pstate].Value.Value} (2 = alarm colour on the screens)")
+    log.append(f"fault: PT-107 State {r[pstate].Value.Value} (2 = alarm colour on the screens)")
     if active is not None and r[pstate].Value.Value != 2:
-        fails.append(f"fault: PI-107 alarm active but its State is {r[pstate].Value.Value}, so screens would not show red")
+        fails.append(f"fault: PT-107 alarm active but its State is {r[pstate].Value.Value}, so screens would not show red")
     if crossed is None:
         fails.append(f"fault: PV never crossed the setpoint (peak {peak})")
     if active is None:
-        fails.append("fault: PI-107 alarm never went active")
+        fails.append("fault: PT-107 alarm never went active")
     elif crossed is not None and active - crossed > 10:
         fails.append(f"fault: alarm went active {active - crossed:.1f}s after the crossing (limit 10s)")
     if r[other].Value.Value:
-        fails.append("fault: TI-109 alarm active, but reactor temperature never reaches 175 degC in this run")
+        fails.append("fault: TT-109 alarm active, but reactor temperature never reaches 175 degC in this run")
     delay = round(active - crossed, 1) if active and crossed else None
     return result("V8", "Alarm pipeline", "Alarms are configured on the tag and proven, not assumed", not fails,
                   {"log": log, "pv_peak_kPa": peak, "alarm_delay_s": delay}, fails,
@@ -709,9 +709,9 @@ async def controls(g):
 
     # 2. a twin instrument with no tag (the model gains an item the gateway never got)
     te_model = json.loads(bg.MODEL.read_text(encoding="utf-8"))
-    te_model["instruments"].append({"tag": "PI-999", "unit": "R-101", "uom": "kPa g", "description": "planted",
+    te_model["instruments"].append({"tag": "PT-999", "unit": "R-101", "uom": "kPa g", "description": "planted",
                                     "xmeas": 7})
-    await run("twin instrument PI-999 with no tag", "V2", lambda: None, te_override=te_model)
+    await run("twin instrument PT-999 with no tag", "V2", lambda: None, te_override=te_model)
 
     # 3. a screen binding pointing at a misspelled tag path
     v3v = json.loads(json.dumps(views["TE/Overview"]))
@@ -731,9 +731,9 @@ async def controls(g):
 
     # 5. a twin tag left writable
     d5 = json.loads(json.dumps(doc))
-    inst = find_inst(d5, "TE_Plant", lambda t: t["name"] == "FI-101")
+    inst = find_inst(d5, "TE_Plant", lambda t: t["name"] == "FT-101")
     inst["tags"][0]["readOnly"] = False
-    await run("TE_Plant FI-101 PV left writable", "V7", lambda: import_doc(g, d5))
+    await run("TE_Plant FT-101 PV left writable", "V7", lambda: import_doc(g, d5))
     return out
 
 

@@ -7,9 +7,9 @@ Extracted twin: `out/te_pid/twin/key/plant_model.json`. Verified model: `data/te
 **9 reviewer corrections** to reach the verified model's structure:
 
 1. RECLASS U-100: extracted as line item 'general', the model has a feed_header unit
-1. SET unit of FI-101: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FI-102: R-101 -> U-100 (converter rule: connection_path)
-1. SET unit of FI-103: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FT-101: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FT-102: R-101 -> U-100 (converter rule: connection_path)
+1. SET unit of FT-103: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FV-102: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FV-103: R-101 -> U-100 (converter rule: connection_path)
 1. SET unit of FV-101: R-101 -> U-100 (converter rule: connection_path)
@@ -26,31 +26,31 @@ Extracted twin: `out/te_pid/twin/key/plant_model.json`. Verified model: `data/te
 | unit | V-101 | ok | extracted as equipment (tank) |
 | unit | K-101 | ok | extracted as equipment (pump) |
 | unit | C-101 | ok | extracted as equipment (tank) |
-| instrument | FI-101 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-102 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-103 | found, fields differ | unit R-101 (model: U-100) |
-| instrument | FI-104 | ok |  |
-| instrument | FI-105 | ok |  |
-| instrument | FI-106 | ok |  |
-| instrument | PI-107 | ok |  |
-| instrument | LI-108 | ok |  |
-| instrument | TI-109 | ok |  |
-| instrument | FI-110 | ok |  |
-| instrument | TI-111 | ok |  |
-| instrument | LI-112 | ok |  |
-| instrument | PI-113 | ok |  |
-| instrument | FI-114 | ok |  |
-| instrument | LI-115 | ok |  |
-| instrument | PI-116 | ok |  |
-| instrument | FI-117 | ok |  |
-| instrument | TI-118 | ok |  |
-| instrument | FI-119 | ok |  |
-| instrument | JI-120 | ok |  |
-| instrument | TI-121 | ok |  |
-| instrument | TI-122 | ok |  |
-| instrument | AI-123 | ok |  |
-| instrument | AI-129 | ok |  |
-| instrument | AI-137 | ok |  |
+| instrument | FT-101 | found, fields differ | unit R-101 (model: U-100); read as FI-101, its revision-A tag |
+| instrument | FT-102 | found, fields differ | unit R-101 (model: U-100); read as FI-102, its revision-A tag |
+| instrument | FT-103 | found, fields differ | unit R-101 (model: U-100); read as FI-103, its revision-A tag |
+| instrument | FT-104 | ok | read as FI-104, its revision-A tag |
+| instrument | FT-105 | ok | read as FI-105, its revision-A tag |
+| instrument | FT-106 | ok | read as FI-106, its revision-A tag |
+| instrument | PT-107 | ok | read as PI-107, its revision-A tag |
+| instrument | LT-108 | ok | read as LI-108, its revision-A tag |
+| instrument | TT-109 | ok | read as TI-109, its revision-A tag |
+| instrument | FT-110 | ok | read as FI-110, its revision-A tag |
+| instrument | TT-111 | ok | read as TI-111, its revision-A tag |
+| instrument | LT-112 | ok | read as LI-112, its revision-A tag |
+| instrument | PT-113 | ok | read as PI-113, its revision-A tag |
+| instrument | FT-114 | ok | read as FI-114, its revision-A tag |
+| instrument | LT-115 | ok | read as LI-115, its revision-A tag |
+| instrument | PT-116 | ok | read as PI-116, its revision-A tag |
+| instrument | FT-117 | ok | read as FI-117, its revision-A tag |
+| instrument | TT-118 | ok | read as TI-118, its revision-A tag |
+| instrument | FT-119 | ok | read as FI-119, its revision-A tag |
+| instrument | JT-120 | ok | read as JI-120, its revision-A tag |
+| instrument | TT-121 | ok | read as TI-121, its revision-A tag |
+| instrument | TT-122 | ok | read as TI-122, its revision-A tag |
+| instrument | AT-123 | ok | read as AI-123, its revision-A tag |
+| instrument | AT-129 | ok | read as AI-129, its revision-A tag |
+| instrument | AT-137 | ok | read as AI-137, its revision-A tag |
 | final_element | FV-102 | found, fields differ | unit R-101 (model: U-100); read as FV-201, its revision-A tag |
 | final_element | FV-103 | found, fields differ | unit R-101 (model: U-100); read as FV-202, its revision-A tag |
 | final_element | FV-101 | found, fields differ | unit R-101 (model: U-100); read as FV-203, its revision-A tag |

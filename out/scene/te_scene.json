@@ -4,7 +4,7 @@
   "status": "built to iterate on; not a validated deliverable and not reviewed by operations",
   "generated_by": "scripts/build_scene_data.py",
   "source": "data/te_process_model.json",
-  "source_sha256": "f8fb1ef85b27fe10b06b0f88582649fb96080ad57eb10aeb300cf9918bdc18ae",
+  "source_sha256": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
   "inherits": "every element carries the provenance of the model item it came from; geometry adds none",
   "geometry": "positions are the model's 2D layout scaled to metres; sizes, elevations and routes are placeholders",
   "loto": "candidates are inferred from the model; this is not a LOTO procedure (OSHA 1910.147)"
@@ -31,7 +31,7 @@
    },
    "tags": [
     {
-     "tag": "AI-137",
+     "tag": "AT-137",
      "description": "Product analyzer (components D-H)",
      "uom": "mol%",
      "kind": "measurement",
@@ -42,7 +42,7 @@
      }
     },
     {
-     "tag": "FI-104",
+     "tag": "FT-104",
      "description": "A and C feed flow",
      "uom": "kscmh",
      "kind": "measurement",
@@ -53,7 +53,7 @@
      }
     },
     {
-     "tag": "FI-117",
+     "tag": "FT-117",
      "description": "Stripper underflow (product)",
      "uom": "m3/h",
      "kind": "measurement",
@@ -64,7 +64,7 @@
      }
     },
     {
-     "tag": "FI-119",
+     "tag": "FT-119",
      "description": "Stripper steam flow",
      "uom": "kg/h",
      "kind": "measurement",
@@ -97,7 +97,7 @@
      }
     },
     {
-     "tag": "LI-115",
+     "tag": "LT-115",
      "description": "Stripper level",
      "uom": "%",
      "kind": "measurement",
@@ -119,7 +119,7 @@
      }
     },
     {
-     "tag": "PI-116",
+     "tag": "PT-116",
      "description": "Stripper pressure",
      "uom": "kPa g",
      "kind": "measurement",
@@ -130,7 +130,7 @@
      }
     },
     {
-     "tag": "TI-118",
+     "tag": "TT-118",
      "description": "Stripper temperature",
      "uom": "degC",
      "kind": "measurement",
@@ -174,7 +174,7 @@
      }
     },
     {
-     "tag": "TI-122",
+     "tag": "TT-122",
      "description": "Separator Cooling Water Outlet Temp",
      "uom": "degC",
      "kind": "measurement",
@@ -207,7 +207,7 @@
    },
    "tags": [
     {
-     "tag": "FI-105",
+     "tag": "FT-105",
      "description": "Recycle flow",
      "uom": "kscmh",
      "kind": "measurement",
@@ -229,7 +229,7 @@
      }
     },
     {
-     "tag": "JI-120",
+     "tag": "JT-120",
      "description": "Compressor work",
      "uom": "kW",
      "kind": "measurement",
@@ -262,7 +262,7 @@
    },
    "tags": [
     {
-     "tag": "AI-123",
+     "tag": "AT-123",
      "description": "Reactor feed analyzer (components A-F)",
      "uom": "mol%",
      "kind": "measurement",
@@ -273,7 +273,7 @@
      }
     },
     {
-     "tag": "FI-106",
+     "tag": "FT-106",
      "description": "Reactor feed rate",
      "uom": "kscmh",
      "kind": "measurement",
@@ -284,7 +284,7 @@
      }
     },
     {
-     "tag": "LI-108",
+     "tag": "LT-108",
      "description": "Reactor level",
      "uom": "%",
      "kind": "measurement",
@@ -295,7 +295,7 @@
      }
     },
     {
-     "tag": "PI-107",
+     "tag": "PT-107",
      "description": "Reactor pressure",
      "uom": "kPa g",
      "kind": "measurement",
@@ -317,7 +317,7 @@
      }
     },
     {
-     "tag": "TI-109",
+     "tag": "TT-109",
      "description": "Reactor temperature",
      "uom": "degC",
      "kind": "measurement",
@@ -328,7 +328,7 @@
      }
     },
     {
-     "tag": "TI-121",
+     "tag": "TT-121",
      "description": "Reactor cooling water outlet temperature",
      "uom": "degC",
      "kind": "measurement",
@@ -372,7 +372,7 @@
    },
    "tags": [
     {
-     "tag": "FI-101",
+     "tag": "FT-101",
      "description": "A feed flow",
      "uom": "kscmh",
      "kind": "measurement",
@@ -383,7 +383,7 @@
      }
     },
     {
-     "tag": "FI-102",
+     "tag": "FT-102",
      "description": "D feed flow",
      "uom": "kg/h",
      "kind": "measurement",
@@ -394,7 +394,7 @@
      }
     },
     {
-     "tag": "FI-103",
+     "tag": "FT-103",
      "description": "E feed flow",
      "uom": "kg/h",
      "kind": "measurement",
@@ -460,7 +460,7 @@
    },
    "tags": [
     {
-     "tag": "AI-129",
+     "tag": "AT-129",
      "description": "Purge gas analyzer (components A-H)",
      "uom": "mol%",
      "kind": "measurement",
@@ -471,7 +471,7 @@
      }
     },
     {
-     "tag": "FI-110",
+     "tag": "FT-110",
      "description": "Purge rate",
      "uom": "kscmh",
      "kind": "measurement",
@@ -482,7 +482,7 @@
      }
     },
     {
-     "tag": "FI-114",
+     "tag": "FT-114",
      "description": "Separator underflow",
      "uom": "m3/h",
      "kind": "measurement",
@@ -504,7 +504,7 @@
      }
     },
     {
-     "tag": "LI-112",
+     "tag": "LT-112",
      "description": "Separator level",
      "uom": "%",
      "kind": "measurement",
@@ -526,7 +526,7 @@
      }
     },
     {
-     "tag": "PI-113",
+     "tag": "PT-113",
      "description": "Separator pressure",
      "uom": "kPa g",
      "kind": "measurement",
@@ -537,7 +537,7 @@
      }
     },
     {
-     "tag": "TI-111",
+     "tag": "TT-111",
      "description": "Separator temperature",
      "uom": "degC",
      "kind": "measurement",
@@ -559,7 +559,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-101",
+    "FT-101",
     "FV-101"
    ],
    "provenance": {
@@ -575,7 +575,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-102",
+    "FT-102",
     "FV-102"
    ],
    "provenance": {
@@ -591,7 +591,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-103",
+    "FT-103",
     "FV-103"
    ],
    "provenance": {
@@ -607,7 +607,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-104",
+    "FT-104",
     "FV-104"
    ],
    "provenance": {
@@ -636,8 +636,8 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "AI-123",
-    "FI-106"
+    "AT-123",
+    "FT-106"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -691,7 +691,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-105"
+    "FT-105"
    ],
    "provenance": {
     "source_check": "confirmed",
@@ -706,8 +706,8 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "AI-129",
-    "FI-110",
+    "AT-129",
+    "FT-110",
     "FV-110"
    ],
    "provenance": {
@@ -723,7 +723,7 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "FI-114",
+    "FT-114",
     "LV-112"
    ],
    "provenance": {
@@ -739,8 +739,8 @@
    "direction": "forward",
    "route": "placeholder: straight run between unit positions",
    "tags_on_stream": [
-    "AI-137",
-    "FI-117",
+    "AT-137",
+    "FT-117",
     "LV-115"
    ],
    "provenance": {

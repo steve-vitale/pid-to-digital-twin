@@ -138,21 +138,21 @@ def main():
     out = next(m for m in summary['tags'] if m['name'] == 'OutOfNormal')['expression']
     assert out.count('/OutOfNormal}') == 52 and 'SC-212' not in out
     alarm = next(m for m in summary['tags'] if m['name'] == 'AlarmsActive')
-    # One isAlarmActive term per configured alarm (PI-107 has two), not one per tag in alarm.
+    # One isAlarmActive term per configured alarm (PT-107 has two), not one per tag in alarm.
     assert alarm['expression'].count('isAlarmActive(') == sum(len(a) for a in ALARMS.values()) == 3
     assert '"PressureHigh"' in alarm['expression'] and '"PressureShutdown"' in alarm['expression']
     assert alarm['executionMode'] == 'FixedRate'  # it references no tag, so it must poll
-    assert not any(tag in alarm['expression'] for tag in columns if tag.startswith('AI-'))
+    assert not any(tag in alarm['expression'] for tag in columns if tag.startswith('AT-'))
     # Operations decisions on a parent must propagate to every derived component.
     modified = copy.deepcopy(model)
-    parent = next(i for i in modified['instruments'] if i['tag'] == 'AI-123')
+    parent = next(i for i in modified['instruments'] if i['tag'] == 'AT-123')
     parent['ops_review'] = {'status': 'rejected'}
     _, _, rejected_ranges, rejected = te_tags(modified)
-    assert not any(t.startswith('AI-123') for t in rejected_ranges)
-    assert len([t for t in rejected['rejected'] if t.startswith('AI-123')]) == 6
+    assert not any(t.startswith('AT-123') for t in rejected_ranges)
+    assert len([t for t in rejected['rejected'] if t.startswith('AT-123')]) == 6
     parent['ops_review'] = {'show_on_screen': False}
     _, _, _, hidden = te_tags(modified)
-    assert len([t for t in hidden['hidden'] if t.startswith('AI-123')]) == 6
+    assert len([t for t in hidden['hidden'] if t.startswith('AT-123')]) == 6
     print('PASS: 52 unique recorded channels + SC-212 unmapped; original paths, analyzer provenance, history/read-only/quality configuration, unchanged alarms, parent review inheritance; isolated Docker COPY payload imports and replay mapping')
 
 

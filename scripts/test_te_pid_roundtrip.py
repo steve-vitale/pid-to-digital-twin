@@ -48,8 +48,8 @@ class GeneratorTests(unittest.TestCase):
     def test_layout_that_drops_an_item_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
             def drop(layout):
-                del layout["sheets"][0]["units"]["R-101"]["mount"]["PI-107"]
-            with self.assertRaisesRegex(ValueError, "PI-107: drawn 0 times"):
+                del layout["sheets"][0]["units"]["R-101"]["mount"]["PT-107"]
+            with self.assertRaisesRegex(ValueError, "PT-107: drawn 0 times"):
                 draw.generate(MODEL, write_layout(tmp, drop), None, write=False)
 
     def test_layout_cannot_invent_a_tag(self):
@@ -62,8 +62,8 @@ class GeneratorTests(unittest.TestCase):
     def test_layout_cannot_draw_an_item_twice(self):
         with tempfile.TemporaryDirectory() as tmp:
             def twice(layout):
-                layout["sheets"][2]["units"]["C-101"]["mount"]["PI-107"] = [1610, 1100]
-            with self.assertRaisesRegex(ValueError, "PI-107: drawn 2 times"):
+                layout["sheets"][2]["units"]["C-101"]["mount"]["PT-107"] = [1610, 1100]
+            with self.assertRaisesRegex(ValueError, "PT-107: drawn 2 times"):
                 draw.generate(MODEL, write_layout(tmp, twice), None, write=False)
 
     def test_a_missing_signal_is_refused(self):
@@ -76,19 +76,19 @@ class GeneratorTests(unittest.TestCase):
 
     def test_a_signal_the_model_does_not_have_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
-            def invent(layout):  # TI-109 does not feed the level controller
-                layout["sheets"][0]["signals"].append({"from": "TI-109", "to": "LIC-108",
+            def invent(layout):  # TT-109 does not feed the level controller
+                layout["sheets"][0]["signals"].append({"from": "TT-109", "to": "LIC-108",
                                                        "via": [[2100, 1140], [2100, 1030]]})
-            with self.assertRaisesRegex(ValueError, "signal TI-109 -> LIC-108 is not in the model"):
+            with self.assertRaisesRegex(ValueError, "signal TT-109 -> LIC-108 is not in the model"):
                 draw.generate(MODEL, write_layout(tmp, invent), None, write=False)
 
     def test_a_signal_through_a_symbol_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
-            def through(layout):  # into FIC-101 from below, along y=250: straight through FI-101's bubble
+            def through(layout):  # into FIC-101 from below, along y=250: straight through FT-101's bubble
                 for s in layout["sheets"][0]["signals"]:
                     if (s["from"], s["to"]) == ("AIC-123A", "FIC-101"):
                         s["via"] = [[1250, 250], [915, 250]]
-            with self.assertRaisesRegex(ValueError, "AIC-123A -> FIC-101: .* runs through FI 101"):
+            with self.assertRaisesRegex(ValueError, "AIC-123A -> FIC-101: .* runs through FT 101"):
                 draw.generate(MODEL, write_layout(tmp, through), None, write=False)
 
     def test_every_inline_control_valve_gets_one_station(self):
@@ -105,10 +105,10 @@ class GeneratorTests(unittest.TestCase):
 
     def test_a_station_without_room_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
-            def crowd(layout):  # FI-101 placed 40 px from its valve, inside the station
+            def crowd(layout):  # FT-101 placed 40 px from its valve, inside the station
                 for r in layout["sheets"][0]["routes"]:
                     if r["id"] == "S1":
-                        r["place"] = {"FI-101": [900, 330]}
+                        r["place"] = {"FT-101": [900, 330]}
             with self.assertRaisesRegex(ValueError, "sit inside FV-101's valve station"):
                 draw.generate(MODEL, write_layout(tmp, crowd), None, write=False)
 
@@ -226,9 +226,9 @@ class RoundTripScorerTests(unittest.TestCase):
             "connections": [{"from": a, "to": b} for a, b in map(tuple, sc.asset_links(nodes, adj))]}}
 
     def test_tag_normalization(self):
-        self.assertEqual(rt.norm("FI-101"), rt.norm("fi 101"))
+        self.assertEqual(rt.norm("FT-101"), rt.norm("ft 101"))
         self.assertEqual(rt.norm("FI\n101"), "FI101")
-        self.assertNotEqual(rt.norm("FI-101"), rt.norm("FI-107"))
+        self.assertNotEqual(rt.norm("FT-101"), rt.norm("FT-107"))
 
     def test_perfect_reader_scores_perfectly(self):
         s, tags, refs = rt.score_sheet("101", self.perfect("101"), self.key)
@@ -239,15 +239,15 @@ class RoundTripScorerTests(unittest.TestCase):
     def test_a_misread_tag_and_a_missing_symbol_both_count_against_tag_reading(self):
         rec = self.perfect("101")
         syms = rec["prediction"]["symbols"]
-        misread = next(s for s in syms if s["tag"] == "FI 101")
+        misread = next(s for s in syms if s["tag"] == "FT 101")
         misread["tag"] = "FI 107"
-        dropped = next(s for s in syms if s["tag"] == "PI 107")
+        dropped = next(s for s in syms if s["tag"] == "PT 107")
         syms.remove(dropped)
         _, tags, _ = rt.score_sheet("101", rec, self.key)
         bad = {t["printed"]: t for t in tags if not t["read"]}
-        self.assertEqual(set(bad), {"FI 101", "PI 107"})
-        self.assertTrue(bad["FI 101"]["found"])
-        self.assertFalse(bad["PI 107"]["found"])
+        self.assertEqual(set(bad), {"FT 101", "PT 107"})
+        self.assertTrue(bad["FT 101"]["found"])
+        self.assertFalse(bad["PT 107"]["found"])
 
     def test_missing_run_counts_as_zero_output(self):
         r = rt.run_scores("te-does-not-exist", "nobody", self.key)
@@ -266,9 +266,9 @@ class DiffTests(unittest.TestCase):
         u = lambda i, tag, cls="tank": {"id": i, "tag": tag, "class": cls}  # noqa: E731
         t = {"units": [u("T1", "R-101"), u("T2", "E-101")],
                 "line_items": [], "offpage_connectors": [], "offpage_pairs": [],
-                "instruments": [{"id": "I1", "tag": "PI 107", "unit": "T1", "instrument_kind": "measurement / control",
+                "instruments": [{"id": "I1", "tag": "PT 107", "unit": "T1", "instrument_kind": "measurement / control",
                                  "variable": "pressure", "unit_method": "connection_path"},
-                                {"id": "I2", "tag": "TI 109", "unit": "T2", "instrument_kind": "measurement / control",
+                                {"id": "I2", "tag": "TT 109", "unit": "T2", "instrument_kind": "measurement / control",
                                  "variable": "temperature", "unit_method": "connection_path"},
                                 {"id": "I3", "tag": "XI 999", "unit": "T1", "instrument_kind": "measurement / control",
                                  "variable": None, "unit_method": "connection_path"}],
@@ -280,26 +280,26 @@ class DiffTests(unittest.TestCase):
     def verified(self):
         return {"units": [{"id": "R-101", "name": "Reactor", "type": "reactor"},
                           {"id": "E-101", "name": "Condenser", "type": "condenser"}],
-                "instruments": [{"tag": "PI-107", "unit": "R-101", "variable": "pressure", "description": "p"},
-                                {"tag": "TI-109", "unit": "R-101", "variable": "temperature", "description": "t"},
-                                {"tag": "LI-108", "unit": "R-101", "variable": "level", "description": "l"}],
+                "instruments": [{"tag": "PT-107", "unit": "R-101", "variable": "pressure", "description": "p"},
+                                {"tag": "TT-109", "unit": "R-101", "variable": "temperature", "description": "t"},
+                                {"tag": "LT-108", "unit": "R-101", "variable": "level", "description": "l"}],
                 "final_elements": [], "streams": [{"from": "R-101", "to": "E-101"}]}
 
     def test_reviewer_corrections(self):
         d = tdiff.diff(self.twin(), self.verified())
         c = "\n".join(d["corrections"])
-        self.assertIn("ADD LI-108", c)
-        self.assertIn("SET unit of TI-109: E-101 -> R-101", c)
+        self.assertIn("ADD LT-108", c)
+        self.assertIn("SET unit of TT-109: E-101 -> R-101", c)
         self.assertIn("DELETE or explain I3 'XI 999'", c)
-        self.assertNotIn("PI-107", c)
+        self.assertNotIn("PT-107", c)
         self.assertEqual(d["topology"]["matched"], 1)
 
     def test_analysis_is_the_same_variable_as_composition(self):
         twin, ver = self.twin(), self.verified()
-        twin["instruments"][0].update(tag="AI 123", variable="analysis")
-        ver["instruments"][0].update(tag="AI-123", variable="composition")
+        twin["instruments"][0].update(tag="AT 123", variable="analysis")
+        ver["instruments"][0].update(tag="AT-123", variable="composition")
         rows = {r["tag"]: r for r in tdiff.diff(twin, ver)["rows"]}
-        self.assertEqual(rows["AI-123"]["status"], "ok")
+        self.assertEqual(rows["AT-123"]["status"], "ok")
 
     def test_diff_does_not_mutate_inputs(self):
         twin, ver = self.twin(), self.verified()

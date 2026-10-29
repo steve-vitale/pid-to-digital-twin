@@ -21,7 +21,7 @@ Write findings in a plain notes file, one line per finding: screen, what you saw
 2. **Units.** Every number has a unit next to it, or in its row heading.
 3. **State is never ambiguous.** For each value, can you tell whether it is normal, outside its band, in alarm or
    not connected, without being told? "Not connected" must never look like a real value or like an alarm.
-4. **Transcription.** Pick the reactor pressure (PI-107) and reactor temperature (TI-109). Does the alarm number
+4. **Transcription.** Pick the reactor pressure (PT-107) and reactor temperature (TT-109). Does the alarm number
    on screen equal the setpoint in `build_meta.json`? This checks copying, not whether the limit is right.
 5. **Fault story.** Switch to fault 6. Without reading the docs, can you say which unit went wrong first and
    what is in alarm? Write down what you would have guessed.

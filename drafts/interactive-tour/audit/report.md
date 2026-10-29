@@ -13,7 +13,7 @@ Result: 38 pass, 5 informational, 0 fail, of 43 checks. Written by `node drafts/
 | A | tags_in_ignition_and_pi | pass | 37 tags drawn as markers; 37 found in the Ignition gateway tag import, 37 in the PI AF staging sheet; the paths on each purpose card equal the exports' |
 | A | model_items_not_shown | info | reverse direction: 37 of 37 model tags shown; Ignition has 53 tag instances (16 not shown), PI AF 37 attributes (0 not shown) |
 | A | valve_symbols | pass | 10 of 10 final elements that sit on a drawn line have a valve symbol on it |
-| A | alarm_limits_from_gateway | pass | alarm setpoints on the page equal out/ignition/gateway/build_meta.json for all 37 tags (PI-107, TI-109 carry published setpoints) |
+| A | alarm_limits_from_gateway | pass | alarm setpoints on the page equal out/ignition/gateway/build_meta.json for all 37 tags (PT-107, TT-109 carry published setpoints) |
 | A | replay_values_from_file | pass | 69120 replay values on the page compared with the raw Braatz files; 0 differ beyond six significant figures |
 | A | not_connected_tags | info | tags with no replay source, shown as not connected and never animated: SC-212 |
 | B | kit_clearance | pass | clearance: 0 |
@@ -31,7 +31,7 @@ Result: 38 pass, 5 informational, 0 fail, of 43 checks. Written by `node drafts/
 | B | kit_items_without_shape | pass | items without shape: 0 |
 | B | kit_allowed_pairs | info | explicitly excused depth pairs (a valve body against chunks of its own pipe, which meet it face to end cap): 0 |
 | B | kit_audit | pass | anatomy kit audit over 622 drawn items, 28 tube runs, 330 solids: 0 problems |
-| D | fault6_alarm_shown | pass | the raw d06_te.dat first crosses a published PI-107 setpoint at sample 258 (+294 min after the fault starts; 2897.3 > 2895 kPa g); "Jump to the first alarm" lands on sample 258, the alarm list shows PI-107, the marker ring is "alarm", the pill reads "PI-107 2,897 kPa g · high alarm 2,895" |
+| D | fault6_alarm_shown | pass | the raw d06_te.dat first crosses a published PT-107 setpoint at sample 258 (+294 min after the fault starts; 2897.3 > 2895 kPa g); "Jump to the first alarm" lands on sample 258, the alarm list shows PT-107, the marker ring is "alarm", the pill reads "PT-107 2,897 kPa g · high alarm 2,895" |
 | D | no_alarm_one_sample_before | pass | one sample earlier (257) the page shows 0 alarms |
 | D | pulses_move_forward | pass | 18 of 18 lines' pulses advance from the line's start (its model 'from' end) toward its end in 0.8 s |
 | D | arrows_point_downstream | pass | 65 of 65 chevrons point along their line's path direction |
@@ -42,7 +42,7 @@ Result: 38 pass, 5 informational, 0 fail, of 43 checks. Written by `node drafts/
 | D | controls_named | pass | 0 visible buttons or inputs without an accessible name |
 | C | unit_callouts_identify_bodies | pass | 36 states retain every expected unit label and its own on-body leader |
 | C | label_overlaps | pass | 36 page states (2 themes × 390 and 1440 px × 9 views): 0 with overlapping labels |
-| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 2.8%); 0 states over the limit |
+| C | labels_off_geometry | pass | no label covers more than 10% of its box with drawn, undimmed pipes or machines (largest share 6.5%); 0 states over the limit |
 | C | min_font_size | pass | smallest visible text 12 px (minimum 12 px) in every state |
 | C | contrast_wcag_aa | pass | lowest text contrast 6.41:1 over 4366 visible text runs (WCAG AA for normal text: 4.5:1) |
 | C | labels_inside_figure | pass | labels outside the figure: 0 states |
@@ -57,7 +57,7 @@ Groups: A topology and tags against the raw model, P&ID key, Ignition and PI AF 
 **model_items_not_shown**
 
 - model tags not shown: none
-- Ignition instances not shown: AI-123-B, AI-123-C, AI-123-D, AI-123-E, AI-123-F, AI-129-B, AI-129-C, AI-129-D, AI-129-E, AI-129-F, AI-129-G, AI-129-H, AI-137-E, AI-137-F, AI-137-G, AI-137-H
+- Ignition instances not shown: AT-123-B, AT-123-C, AT-123-D, AT-123-E, AT-123-F, AT-129-B, AT-129-C, AT-129-D, AT-129-E, AT-129-F, AT-129-G, AT-129-H, AT-137-E, AT-137-F, AT-137-G, AT-137-H
 - PI AF attributes not shown: none
 
 ## Review stills

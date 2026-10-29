@@ -79,11 +79,11 @@ class CommittedModelMatchesSource(unittest.TestCase):
         result = run()
         self.assertEqual(vt.totals(result), {"confirmed": 51, "corrected": 4, "unresolvable": 1})
         r = rows(result)
-        for ident in ("S9", "FI-110", "FV-110", "AI-129"):
+        for ident in ("S9", "FT-110", "FV-110", "AT-129"):
             self.assertEqual(r[ident][0], "corrected", ident)
             self.assertIsNone(r[ident][1], ident + " still needs a fix: rerun verify_te_topology.py --write")
-        self.assertEqual(r["PI-116"][0], "unresolvable")
-        self.assertEqual(r["TI-122"][0], "confirmed")
+        self.assertEqual(r["PT-116"][0], "unresolvable")
+        self.assertEqual(r["TT-122"][0], "confirmed")
         self.assertEqual(r["E-101"][0], "confirmed")
 
     def test_no_pending_fixes_and_recorded_results(self):
@@ -96,11 +96,11 @@ class CommittedModelMatchesSource(unittest.TestCase):
             self.assertEqual(s.get("direction"), "forward", s["id"])
         s9 = next(s for s in MODEL["streams"] if s["id"] == "S9")
         self.assertEqual((s9["from"], s9["verification"]["previous"]), ("V-101", {"from": "K-101"}))
-        ti122 = next(i for i in MODEL["instruments"] if i["tag"] == "TI-122")
+        ti122 = next(i for i in MODEL["instruments"] if i["tag"] == "TT-122")
         self.assertEqual(ti122["unit"], "E-101")
         self.assertNotIn("open_question", ti122)
         self.assertIn("resolved_question", ti122["topology_verification"])
-        pi116 = next(i for i in MODEL["instruments"] if i["tag"] == "PI-116")
+        pi116 = next(i for i in MODEL["instruments"] if i["tag"] == "PT-116")
         self.assertEqual(pi116["topology_verification"]["status"], "unresolvable")
 
     def test_rerun_is_stable(self):
@@ -123,22 +123,22 @@ class CatchesWrongModels(unittest.TestCase):
 
     def test_purge_back_on_compressor(self):
         m = edit(MODEL, "streams", "S9", **{"from": "K-101"})
-        m = edit(m, "instruments", "FI-110", unit="K-101")
+        m = edit(m, "instruments", "FT-110", unit="K-101")
         r = rows(run(m))
         self.assertEqual(r["S9"][:2], ("corrected", {"from": "V-101"}))
-        self.assertEqual(r["FI-110"][:2], ("corrected", {"unit": "V-101"}))
+        self.assertEqual(r["FT-110"][:2], ("corrected", {"unit": "V-101"}))
 
     def test_unit_tag_on_wrong_unit(self):
-        r = rows(run(edit(MODEL, "instruments", "PI-107", unit="V-101")))
-        self.assertEqual(r["PI-107"][:2], ("corrected", {"unit": "R-101"}))
+        r = rows(run(edit(MODEL, "instruments", "PT-107", unit="V-101")))
+        self.assertEqual(r["PT-107"][:2], ("corrected", {"unit": "R-101"}))
 
     def test_valve_on_wrong_unit(self):
         r = rows(run(edit(MODEL, "final_elements", "TV-121", unit="C-101")))
         self.assertEqual(r["TV-121"][:2], ("corrected", {"unit": "R-101"}))
 
     def test_wrong_stream_on_instrument(self):
-        r = rows(run(edit(MODEL, "instruments", "FI-114", stream="S11")))
-        self.assertEqual(r["FI-114"][0], "unresolvable")
+        r = rows(run(edit(MODEL, "instruments", "FT-114", stream="S11")))
+        self.assertEqual(r["FT-114"][0], "unresolvable")
 
 
 class ReadsTheCodeNotATable(unittest.TestCase):
@@ -149,7 +149,7 @@ class ReadsTheCodeNotATable(unittest.TestCase):
         self.assertNotEqual(text, TEPROB)
         r = rows(run(teprob=text))
         self.assertEqual(r["E-101"][0], "unresolvable")
-        self.assertNotEqual(r["TI-122"][:2], ("confirmed", None))
+        self.assertNotEqual(r["TT-122"][:2], ("confirmed", None))
 
     def test_purge_direction_reversed(self):
         text = TEPROB.replace("DLP=PTS-760.0", "DLP=760.0-PTS")
@@ -171,8 +171,8 @@ class ReadsTheCodeNotATable(unittest.TestCase):
         r = rows(run(revised=None))
         for ident in ("S5", "S7", "S7b"):
             self.assertEqual(r[ident][0], "unresolvable", ident)
-        self.assertEqual(r["TI-122"][0], "confirmed")  # still 2 condenser names vs 1 separator in teprob.f alone
-        self.assertEqual(r["PI-116"][0], "unresolvable")
+        self.assertEqual(r["TT-122"][0], "confirmed")  # still 2 condenser names vs 1 separator in teprob.f alone
+        self.assertEqual(r["PT-116"][0], "unresolvable")
         self.assertEqual(r["S9"][0], "corrected")
 
     @NEEDS_REVISED
