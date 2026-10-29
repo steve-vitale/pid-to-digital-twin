@@ -3106,8 +3106,10 @@ hiring manager and the general snark. Every finding was checked against the file
 - **Rejected: one reviewer.** The two overlapped on the biggest points (the counterfactual, the circular 19 of 19) and
   each found things the other didn't: the Claude panel the transmitter tags and stale screenshots, the Codex reviewer
   the non-causal footnote and the holdout-selection history.
-- **Not yet done:** the README's Ignition screenshots predate the valve renumbering and still show two retired tags;
-  they need a fresh capture from a gateway.
+- **Stale screenshots.** The README's two overview screenshots predated the valve renumbering and showed two
+  retired tags (HV-205, TV-211). They are replaced by revision B captures from the local test gateway: the normal
+  overview from the 2026-10-28 acceptance run, and the fault-6 overview captured 2026-10-29 from the same build, with
+  reactor pressure past its alarm. The old images stay for the documents that describe the 2026-10-13 run.
 
 **Lesson:** the same document can state a rule and break it a hundred lines later. A reader looking for the break finds
 it in minutes; the author, reading for flow, doesn't.
