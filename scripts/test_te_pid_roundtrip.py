@@ -153,6 +153,65 @@ class GeneratorTests(unittest.TestCase):
             self.assertEqual(traced, key_links, sheet)
 
 
+class BayerSheetTests(unittest.TestCase):
+    """The same generator drawing a real unit from the CSB report: hand valves, relief valves, a split-range
+    controller and interlocks, all from the model."""
+    B_MODEL = ROOT / "data" / "bayer_rt" / "process_model.json"
+    B_LAYOUT = ROOT / "data" / "bayer_rt" / "pid_layout.json"
+    B_DIR = ROOT / "data" / "bayer_rt" / "pid"
+
+    def mutated(self, tmp, mutate):
+        layout = json.loads(self.B_LAYOUT.read_text(encoding="utf-8"))
+        mutate(layout["sheets"][0])
+        p = Path(tmp) / "layout.json"
+        p.write_text(json.dumps(layout), encoding="utf-8")
+        return p
+
+    def test_regenerated_key_matches_the_committed_key(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            draw.generate(self.B_MODEL, self.B_LAYOUT, Path(tmp))
+            self.assertEqual((Path(tmp) / "RT1.graphml").read_bytes(), (self.B_DIR / "RT1.graphml").read_bytes())
+            k_new = json.loads((Path(tmp) / "key.json").read_text(encoding="utf-8"))
+            k_old = json.loads((self.B_DIR / "key.json").read_text(encoding="utf-8"))
+            self.assertEqual(k_new["sheets"], k_old["sheets"])
+
+    def test_every_hand_valve_relief_valve_and_interlock_is_drawn_once(self):
+        sheets = draw.generate(self.B_MODEL, self.B_LAYOUT, None, write=False)
+        model = json.loads(self.B_MODEL.read_text(encoding="utf-8"))
+        kinds = {}
+        for n in sheets[0].nodes.values():
+            if n.get("model_ref"):
+                kinds.setdefault(n["model_kind"], []).append(n["model_ref"])
+        self.assertEqual(sorted(kinds["manual_valve"]), sorted(v["tag"] for v in model["manual_valves"]))
+        self.assertEqual(sorted(kinds["interlock"]), sorted(il["id"] for il in model["interlocks"]))
+        # a relief valve is a valve plus its tag bubble
+        self.assertEqual(sorted(kinds["relief_valve"]), sorted(2 * [r["tag"] for r in model["relief_devices"]]))
+
+    def test_a_layout_without_an_interlock_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def drop(sh):
+                del sh["interlocks"]["IL-2"]
+                sh["signals"] = [s for s in sh["signals"] if "IL-2" not in (s["from"], s["to"])]
+            with self.assertRaisesRegex(ValueError, "IL-2: drawn 0 times"):
+                draw.generate(self.B_MODEL, self.mutated(tmp, drop), None, write=False)
+
+    def test_every_split_range_output_needs_its_signal(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            def drop(sh):
+                sh["signals"] = [s for s in sh["signals"] if (s["from"], s["to"]) != ("TIC-104", "TV-104C")]
+            with self.assertRaisesRegex(ValueError, "signal TIC-104 -> TV-104C: drawn 0 times"):
+                draw.generate(self.B_MODEL, self.mutated(tmp, drop), None, write=False)
+
+    def test_the_line_tracer_independently_recovers_every_key_link(self):
+        png = self.B_DIR / "RT1.png"
+        w, h = sc.png_size(png)
+        nodes, adj = sc.load_key(self.B_DIR / "RT1.graphml", w, h)
+        syms = [{"id": k, "class": v["class"], "box": v["box"]} for k, v in nodes.items() if v["class"] in sc.SCORED]
+        key_links = {frozenset(x) for x in sc.asset_links(nodes, adj)}
+        traced = {frozenset((c["from"], c["to"])) for c in tc.trace(png, syms)}
+        self.assertEqual(traced, key_links)
+
+
 class RoundTripScorerTests(unittest.TestCase):
     def setUp(self):
         self.key = json.loads((COMMITTED / "key.json").read_text(encoding="utf-8"))

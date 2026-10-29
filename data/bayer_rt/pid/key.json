@@ -1,0 +1,967 @@
+{
+ "about": "Answer key emitted by scripts/draw_pid_from_model.py from the same model that drew the sheets. Scoring against it is a ROUND TRIP: it measures how faithfully a reader recovers our own clean house-style drawing, not real-plant accuracy.",
+ "model": "data/bayer_rt/process_model.json",
+ "sheets": {
+  "RT1": {
+   "drawing": "RT-101",
+   "system": "RT",
+   "title": "RESIDUE TREATER",
+   "size_px": [
+    3200,
+    2130
+   ],
+   "symbols": {
+    "tank1": {
+     "class": "tank",
+     "box": [
+      1118.0,
+      698.0,
+      1482.0,
+      1402.0
+     ],
+     "text": "RT-1",
+     "model_ref": "unit:RT-1",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "tank2": {
+     "class": "tank",
+     "box": [
+      1238.0,
+      298.0,
+      1362.0,
+      502.0
+     ],
+     "text": "E-1",
+     "model_ref": "unit:E-1",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "pump1": {
+     "class": "pump",
+     "box": [
+      1653.0,
+      1553.0,
+      1747.0,
+      1647.0
+     ],
+     "text": "P-1",
+     "model_ref": "unit:P-1",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "tank3": {
+     "class": "tank",
+     "box": [
+      2148.0,
+      1003.0,
+      2452.0,
+      1097.0
+     ],
+     "text": "E-3",
+     "model_ref": "unit:E-3",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "tank4": {
+     "class": "tank",
+     "box": [
+      2148.0,
+      1303.0,
+      2452.0,
+      1397.0
+     ],
+     "text": "E-2",
+     "model_ref": "unit:E-2",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "inlet_outlet1": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      925.0,
+      350,
+      975.0
+     ],
+     "text": "BATTERY LIMIT / FROM FLASHER BOTTOMS",
+     "model_ref": "stream:S1",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet2": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      1575.0,
+      350,
+      1625.0
+     ],
+     "text": "BATTERY LIMIT / FROM SOLVENT TANK",
+     "model_ref": "stream:S2",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet3": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      395.0,
+      350,
+      445.0
+     ],
+     "text": "BATTERY LIMIT / TO PROCESS VENT",
+     "model_ref": "stream:S8",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet4": {
+     "class": "inlet/outlet",
+     "box": [
+      2300,
+      535.0,
+      2530,
+      585.0
+     ],
+     "text": "BATTERY LIMIT / TO VENT HEADER",
+     "model_ref": "stream:S9",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet5": {
+     "class": "inlet/outlet",
+     "box": [
+      2300,
+      695.0,
+      2530,
+      745.0
+     ],
+     "text": "BATTERY LIMIT / TO AUX FUEL TANK",
+     "model_ref": "stream:S6",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet6": {
+     "class": "inlet/outlet",
+     "box": [
+      2440,
+      1135.0,
+      2670,
+      1185.0
+     ],
+     "text": "BATTERY LIMIT / COOLING WATER RETURN",
+     "model_ref": "stream:U4",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet7": {
+     "class": "inlet/outlet",
+     "box": [
+      2260,
+      1205.0,
+      2490,
+      1255.0
+     ],
+     "text": "BATTERY LIMIT / COOLING WATER SUPPLY",
+     "model_ref": "stream:U2",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet8": {
+     "class": "inlet/outlet",
+     "box": [
+      2480,
+      1435.0,
+      2710,
+      1485.0
+     ],
+     "text": "BATTERY LIMIT / STEAM OUTLET",
+     "model_ref": "stream:U3",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet9": {
+     "class": "inlet/outlet",
+     "box": [
+      2480,
+      1675.0,
+      2710,
+      1725.0
+     ],
+     "text": "BATTERY LIMIT / STEAM SUPPLY",
+     "model_ref": "stream:U1",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "valve1": {
+     "class": "valve",
+     "box": [
+      687,
+      924,
+      713,
+      959
+     ],
+     "text": null,
+     "model_ref": "FV-107",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation1": {
+     "class": "instrumentation",
+     "box": [
+      675,
+      845,
+      725,
+      895
+     ],
+     "text": "FV 107",
+     "model_ref": "FV-107",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "valve2": {
+     "class": "valve",
+     "box": [
+      1391,
+      627,
+      1441,
+      653
+     ],
+     "text": null,
+     "model_ref": "PSV-101",
+     "model_kind": "relief_valve",
+     "drafting_addition": false
+    },
+    "instrumentation2": {
+     "class": "instrumentation",
+     "box": [
+      1455,
+      615,
+      1505,
+      665
+     ],
+     "text": "PSV 101",
+     "model_ref": "PSV-101",
+     "model_kind": "relief_valve",
+     "drafting_addition": false
+    },
+    "valve3": {
+     "class": "valve",
+     "box": [
+      1259,
+      217,
+      1309,
+      243
+     ],
+     "text": null,
+     "model_ref": "PSV-102",
+     "model_kind": "relief_valve",
+     "drafting_addition": false
+    },
+    "instrumentation3": {
+     "class": "instrumentation",
+     "box": [
+      1195,
+      205,
+      1245,
+      255
+     ],
+     "text": "PSV 102",
+     "model_ref": "PSV-102",
+     "model_kind": "relief_valve",
+     "drafting_addition": false
+    },
+    "valve4": {
+     "class": "valve",
+     "box": [
+      1291,
+      1487,
+      1309,
+      1513
+     ],
+     "text": "HV 110",
+     "model_ref": "HV-110",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "valve5": {
+     "class": "valve",
+     "box": [
+      787,
+      1591,
+      813,
+      1609
+     ],
+     "text": "HV 109",
+     "model_ref": "HV-109",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "valve6": {
+     "class": "valve",
+     "box": [
+      2037,
+      1324,
+      2063,
+      1359
+     ],
+     "text": null,
+     "model_ref": "TV-104A",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation4": {
+     "class": "instrumentation",
+     "box": [
+      2025,
+      1245,
+      2075,
+      1295
+     ],
+     "text": "TV 104A",
+     "model_ref": "TV-104A",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "valve7": {
+     "class": "valve",
+     "box": [
+      2037,
+      1024,
+      2063,
+      1059
+     ],
+     "text": null,
+     "model_ref": "TV-104B",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation5": {
+     "class": "instrumentation",
+     "box": [
+      2025,
+      945,
+      2075,
+      995
+     ],
+     "text": "TV 104B",
+     "model_ref": "TV-104B",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation6": {
+     "class": "instrumentation",
+     "box": [
+      1675,
+      745,
+      1725,
+      795
+     ],
+     "text": "FI 103",
+     "model_ref": "FI-103",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "valve8": {
+     "class": "valve",
+     "box": [
+      2137,
+      694,
+      2163,
+      729
+     ],
+     "text": null,
+     "model_ref": "LV-102",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation7": {
+     "class": "instrumentation",
+     "box": [
+      2125,
+      615,
+      2175,
+      665
+     ],
+     "text": "LV 102",
+     "model_ref": "LV-102",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "valve9": {
+     "class": "valve",
+     "box": [
+      2417,
+      1691,
+      2443,
+      1709
+     ],
+     "text": "HV 108",
+     "model_ref": "HV-108",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "instrumentation8": {
+     "class": "instrumentation",
+     "box": [
+      2315,
+      1595,
+      2365,
+      1645
+     ],
+     "text": "FI 106",
+     "model_ref": "FI-106",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "valve10": {
+     "class": "valve",
+     "box": [
+      2224,
+      1477,
+      2259,
+      1503
+     ],
+     "text": null,
+     "model_ref": "TV-104C",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation9": {
+     "class": "instrumentation",
+     "box": [
+      2145,
+      1465,
+      2195,
+      1515
+     ],
+     "text": "TV 104C",
+     "model_ref": "TV-104C",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "valve11": {
+     "class": "valve",
+     "box": [
+      2427,
+      1451,
+      2453,
+      1469
+     ],
+     "text": "HV 111",
+     "model_ref": "HV-111",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "valve12": {
+     "class": "valve",
+     "box": [
+      2191,
+      1157,
+      2209,
+      1183
+     ],
+     "text": "HV 112",
+     "model_ref": "HV-112",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "valve13": {
+     "class": "valve",
+     "box": [
+      2391,
+      1115,
+      2409,
+      1141
+     ],
+     "text": "HV 113",
+     "model_ref": "HV-113",
+     "model_kind": "manual_valve",
+     "drafting_addition": false
+    },
+    "instrumentation10": {
+     "class": "instrumentation",
+     "box": [
+      1195,
+      595,
+      1245,
+      645
+     ],
+     "text": "PI 101",
+     "model_ref": "PI-101",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "instrumentation11": {
+     "class": "instrumentation",
+     "box": [
+      1015,
+      1125,
+      1065,
+      1175
+     ],
+     "text": "LI 102",
+     "model_ref": "LI-102",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "instrumentation12": {
+     "class": "instrumentation",
+     "box": [
+      1535,
+      1245,
+      1585,
+      1295
+     ],
+     "text": "TI 104",
+     "model_ref": "TI-104",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "instrumentation13": {
+     "class": "instrumentation",
+     "box": [
+      1535,
+      1125,
+      1585,
+      1175
+     ],
+     "text": "TI 105",
+     "model_ref": "TI-105",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "instrumentation14": {
+     "class": "instrumentation",
+     "box": [
+      875,
+      1125,
+      925,
+      1175
+     ],
+     "text": "LIC 102",
+     "model_ref": "LIC-102",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "LIC-102"
+    },
+    "instrumentation15": {
+     "class": "instrumentation",
+     "box": [
+      1735,
+      1245,
+      1785,
+      1295
+     ],
+     "text": "TIC 104",
+     "model_ref": "TIC-104",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "TIC-104"
+    },
+    "instrumentation16": {
+     "class": "instrumentation",
+     "box": [
+      529,
+      839,
+      591,
+      901
+     ],
+     "text": "I 1",
+     "model_ref": "IL-1",
+     "model_kind": "interlock",
+     "drafting_addition": false,
+     "interlock_class": "safety"
+    },
+    "instrumentation17": {
+     "class": "instrumentation",
+     "box": [
+      669,
+      589,
+      731,
+      651
+     ],
+     "text": "I 2",
+     "model_ref": "IL-2",
+     "model_kind": "interlock",
+     "drafting_addition": false,
+     "interlock_class": "safety"
+    },
+    "instrumentation18": {
+     "class": "instrumentation",
+     "box": [
+      809,
+      839,
+      871,
+      901
+     ],
+     "text": "I 3",
+     "model_ref": "IL-3",
+     "model_kind": "interlock",
+     "drafting_addition": false,
+     "interlock_class": "operating"
+    }
+   },
+   "edges": [
+    [
+     "connector1",
+     "instrumentation1"
+    ],
+    [
+     "connector1",
+     "valve1"
+    ],
+    [
+     "connector10",
+     "instrumentation12"
+    ],
+    [
+     "connector10",
+     "tank1"
+    ],
+    [
+     "connector11",
+     "instrumentation13"
+    ],
+    [
+     "connector11",
+     "tank1"
+    ],
+    [
+     "connector12",
+     "inlet_outlet1"
+    ],
+    [
+     "connector12",
+     "valve1"
+    ],
+    [
+     "connector13",
+     "tank1"
+    ],
+    [
+     "connector13",
+     "valve1"
+    ],
+    [
+     "connector14",
+     "tank1"
+    ],
+    [
+     "connector14",
+     "tank2"
+    ],
+    [
+     "connector15",
+     "inlet_outlet3"
+    ],
+    [
+     "connector15",
+     "tank2"
+    ],
+    [
+     "connector16",
+     "tank1"
+    ],
+    [
+     "connector16",
+     "valve2"
+    ],
+    [
+     "connector17",
+     "inlet_outlet4"
+    ],
+    [
+     "connector17",
+     "valve2"
+    ],
+    [
+     "connector17",
+     "valve3"
+    ],
+    [
+     "connector18",
+     "tank2"
+    ],
+    [
+     "connector18",
+     "valve3"
+    ],
+    [
+     "connector19",
+     "tank1"
+    ],
+    [
+     "connector19",
+     "valve4"
+    ],
+    [
+     "connector2",
+     "instrumentation2"
+    ],
+    [
+     "connector2",
+     "valve2"
+    ],
+    [
+     "connector20",
+     "pump1"
+    ],
+    [
+     "connector20",
+     "valve4"
+    ],
+    [
+     "connector20",
+     "valve5"
+    ],
+    [
+     "connector21",
+     "inlet_outlet2"
+    ],
+    [
+     "connector21",
+     "valve5"
+    ],
+    [
+     "connector22",
+     "pump1"
+    ],
+    [
+     "connector22",
+     "valve6"
+    ],
+    [
+     "connector22",
+     "valve7"
+    ],
+    [
+     "connector23",
+     "tank4"
+    ],
+    [
+     "connector23",
+     "valve6"
+    ],
+    [
+     "connector24",
+     "tank3"
+    ],
+    [
+     "connector24",
+     "valve7"
+    ],
+    [
+     "connector25",
+     "instrumentation6"
+    ],
+    [
+     "connector25",
+     "tank1"
+    ],
+    [
+     "connector25",
+     "tank3"
+    ],
+    [
+     "connector25",
+     "tank4"
+    ],
+    [
+     "connector25",
+     "valve8"
+    ],
+    [
+     "connector26",
+     "inlet_outlet5"
+    ],
+    [
+     "connector26",
+     "valve8"
+    ],
+    [
+     "connector27",
+     "inlet_outlet9"
+    ],
+    [
+     "connector27",
+     "valve9"
+    ],
+    [
+     "connector28",
+     "instrumentation8"
+    ],
+    [
+     "connector28",
+     "valve10"
+    ],
+    [
+     "connector28",
+     "valve9"
+    ],
+    [
+     "connector29",
+     "tank4"
+    ],
+    [
+     "connector29",
+     "valve10"
+    ],
+    [
+     "connector3",
+     "instrumentation3"
+    ],
+    [
+     "connector3",
+     "valve3"
+    ],
+    [
+     "connector30",
+     "tank4"
+    ],
+    [
+     "connector30",
+     "valve11"
+    ],
+    [
+     "connector31",
+     "inlet_outlet8"
+    ],
+    [
+     "connector31",
+     "valve11"
+    ],
+    [
+     "connector32",
+     "inlet_outlet7"
+    ],
+    [
+     "connector32",
+     "valve12"
+    ],
+    [
+     "connector33",
+     "tank3"
+    ],
+    [
+     "connector33",
+     "valve12"
+    ],
+    [
+     "connector34",
+     "tank3"
+    ],
+    [
+     "connector34",
+     "valve13"
+    ],
+    [
+     "connector35",
+     "inlet_outlet6"
+    ],
+    [
+     "connector35",
+     "valve13"
+    ],
+    [
+     "connector4",
+     "instrumentation4"
+    ],
+    [
+     "connector4",
+     "valve6"
+    ],
+    [
+     "connector5",
+     "instrumentation5"
+    ],
+    [
+     "connector5",
+     "valve7"
+    ],
+    [
+     "connector6",
+     "instrumentation7"
+    ],
+    [
+     "connector6",
+     "valve8"
+    ],
+    [
+     "connector7",
+     "instrumentation9"
+    ],
+    [
+     "connector7",
+     "valve10"
+    ],
+    [
+     "connector8",
+     "instrumentation10"
+    ],
+    [
+     "connector8",
+     "tank1"
+    ],
+    [
+     "connector9",
+     "instrumentation11"
+    ],
+    [
+     "connector9",
+     "tank1"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "instrumentation10",
+     "instrumentation17"
+    ],
+    [
+     "instrumentation11",
+     "instrumentation14"
+    ],
+    [
+     "instrumentation12",
+     "instrumentation15"
+    ],
+    [
+     "instrumentation12",
+     "instrumentation16"
+    ],
+    [
+     "instrumentation14",
+     "instrumentation7"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation4"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation5"
+    ],
+    [
+     "instrumentation15",
+     "instrumentation9"
+    ],
+    [
+     "instrumentation16",
+     "instrumentation1"
+    ],
+    [
+     "instrumentation17",
+     "instrumentation1"
+    ],
+    [
+     "instrumentation18",
+     "instrumentation1"
+    ],
+    [
+     "instrumentation6",
+     "instrumentation18"
+    ]
+   ]
+  }
+ }
+}

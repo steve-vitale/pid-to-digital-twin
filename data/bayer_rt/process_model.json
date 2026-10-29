@@ -4,10 +4,11 @@
     "title": "Bayer CropScience methomyl residue treater (Institute, West Virginia), as described by the CSB",
     "source_document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
     "page_convention": "p. = the report's printed page number; Fig = the report's figure number.",
-    "tag_convention": "The report names instrument types but no instrument or valve tag numbers for the residue treater, so every tag here is ASSIGNED by this project (ISA-5.1 letters, loop numbers 101-110) and marked assigned_tag: true. Equipment identifiers RT-1, E-1, E-2, E-3, P-1 are assigned the same way. Nothing here is the plant's own numbering.",
+    "tag_convention": "The report names instrument types but no instrument or valve tag numbers for the residue treater, so every tag here is ASSIGNED by this project (ISA-5.1 letters, loop numbers 101-113) and marked assigned_tag: true. Equipment identifiers RT-1, E-1, E-2, E-3, P-1 are assigned the same way. Nothing here is the plant's own numbering.",
     "scope": "The residue treater and its recirculation, heating, cooling, vent and discharge systems as drawn in Fig 10 (p. 29) and described on pp. 27-32 and 38-40. Upstream (methomyl synthesis, flashers) and downstream (alternate fuel tank, flare) are battery limits.",
     "not_a_drawing_of_record": "Built from a public investigation report to show the method. Not the plant's design, not reviewed by anyone who operated it.",
-    "created": "2026-10-28"
+    "created": "2026-10-28",
+    "checked_against_figure": "scripts/compare_bayer_fig10.py compares this model with Figure 10 (p. 29) as recorded in data/bayer_rt/fig10_inventory.json; results in out/bayer_rt/fig10_compare.md."
   },
   "units": [
     {
@@ -82,26 +83,35 @@
     },
     {
       "id": "S4",
-      "name": "Recirculation through the heater",
+      "name": "Recirculation to the heater",
       "from": "P-1",
-      "to": "RT-1",
-      "via": "E-2",
+      "to": "E-2",
       "source": "Fig 10; p. 29"
     },
     {
       "id": "S5",
-      "name": "Recirculation through the cooler",
+      "name": "Recirculation to the cooler",
       "from": "P-1",
-      "to": "RT-1",
-      "via": "E-3",
+      "to": "E-3",
       "source": "Fig 10; p. 29"
+    },
+    {
+      "id": "S10",
+      "name": "Recirculation return to the residue treater (heater and cooler outlets joined)",
+      "from": "E-2",
+      "joins_from": [
+        "E-3"
+      ],
+      "to": "RT-1",
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
     },
     {
       "id": "S6",
       "name": "Discharge to the auxiliary (alternate) fuel tank",
-      "from": "RT-1",
+      "from": "P-1",
       "to": "BL",
-      "source": "Fig 10; p. 32"
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32",
+      "branches_from": "S10"
     },
     {
       "id": "S7",
@@ -125,8 +135,15 @@
       "source": "Fig 10"
     },
     {
+      "id": "S11",
+      "name": "Condenser relief to the vent header (joins S9)",
+      "from": "E-1",
+      "to": "BL",
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+    },
+    {
       "id": "U1",
-      "name": "Steam to the heater",
+      "name": "Steam supply to the heater",
       "from": "BL",
       "to": "E-2",
       "utility": true,
@@ -134,11 +151,27 @@
     },
     {
       "id": "U2",
-      "name": "Cooling water (80 C) through the cooler",
+      "name": "Cooling water (80 C) supply to the cooler",
       "from": "BL",
       "to": "E-3",
       "utility": true,
       "source": "Fig 10; p. 29"
+    },
+    {
+      "id": "U3",
+      "name": "Heater steam outlet (condensate)",
+      "from": "E-2",
+      "to": "BL",
+      "utility": true,
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
+    },
+    {
+      "id": "U4",
+      "name": "Cooling water return from the cooler",
+      "from": "E-3",
+      "to": "BL",
+      "utility": true,
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
     }
   ],
   "instruments": [
@@ -166,12 +199,12 @@
       "tag": "FI-103",
       "assigned_tag": true,
       "unit": "P-1",
-      "stream": "S3",
+      "stream": "S10",
       "variable": "flow",
       "uom": "klb/h",
       "description": "Recirculation flow",
       "fig11_series": "recirc_flow_klbh",
-      "source": "Fig 10 (Flow Transmitter); Fig 11"
+      "source": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
     },
     {
       "tag": "TI-104",
@@ -269,6 +302,27 @@
       "stream": "S3",
       "description": "Vessel bottom valve",
       "source": "Fig 10"
+    },
+    {
+      "tag": "HV-111",
+      "assigned_tag": true,
+      "stream": "U3",
+      "description": "Heater steam outlet valve",
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+    },
+    {
+      "tag": "HV-112",
+      "assigned_tag": true,
+      "stream": "U2",
+      "description": "Cooling water supply valve",
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+    },
+    {
+      "tag": "HV-113",
+      "assigned_tag": true,
+      "stream": "U4",
+      "description": "Cooling water return valve",
+      "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
     }
   ],
   "relief_devices": [
@@ -289,7 +343,8 @@
       "assigned_tag": true,
       "unit": "E-1",
       "description": "Vent condenser relief valve",
-      "source": "Fig 10"
+      "source": "Fig 10",
+      "stream": "S11"
     }
   ],
   "controllers": [
@@ -336,7 +391,10 @@
       "effect": "FV-107 held closed",
       "bypass": "password-protected",
       "as_found": "bypassed on the night of the incident, based on experience with the heater (p. 69)",
-      "source": "p. 30; p. 69"
+      "source": "p. 30; p. 69",
+      "measurement": "TI-104",
+      "final_element": "FV-107",
+      "drawn_in_source_figure": false
     },
     {
       "id": "IL-2",
@@ -344,14 +402,21 @@
       "cause": "PI-101 at or above the maximum pressure setpoint",
       "effect": "FV-107 held closed",
       "bypass": "password-protected",
-      "source": "p. 30"
+      "source": "p. 30",
+      "measurement": "PI-101",
+      "final_element": "FV-107",
+      "drawn_in_source_figure": false
     },
     {
       "id": "IL-3",
       "class": "operating",
       "cause": "FI-103 recirculation flow not established",
       "effect": "FV-107 held closed",
-      "source": "p. 30"
+      "source": "p. 30; p. 38",
+      "as_found": "left bypassed by the computer programmers (p. 38)",
+      "measurement": "FI-103",
+      "final_element": "FV-107",
+      "drawn_in_source_figure": false
     }
   ],
   "limits": [

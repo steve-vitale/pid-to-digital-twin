@@ -1,0 +1,249 @@
+{
+ "rows": [
+  {
+   "what": "unit Residue Treater",
+   "figure": "residue_treater",
+   "model": "RT-1",
+   "ok": true
+  },
+  {
+   "what": "unit Vent Condenser",
+   "figure": "vent_condenser",
+   "model": "E-1",
+   "ok": true
+  },
+  {
+   "what": "unit Recirculation Pump",
+   "figure": "recirc_pump",
+   "model": "P-1",
+   "ok": true
+  },
+  {
+   "what": "unit heater",
+   "figure": "heater",
+   "model": "E-2",
+   "ok": true
+  },
+  {
+   "what": "unit cooler",
+   "figure": "cooler",
+   "model": "E-3",
+   "ok": true
+  },
+  {
+   "what": "line L1",
+   "figure": "flasher_bottoms -> residue_treater: {'control_valve': 1}",
+   "model": "S1 BL -> RT-1: {'control_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L2",
+   "figure": "solvent_tank -> recirc_pump: {'manual_valve': 1}",
+   "model": "S2 BL -> P-1: {'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L3",
+   "figure": "residue_treater -> recirc_pump: {'manual_valve': 1}",
+   "model": "S3 RT-1 -> P-1: {'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L4",
+   "figure": "recirc_pump -> heater: {'control_valve': 1}",
+   "model": "S4 P-1 -> E-2: {'control_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L5",
+   "figure": "recirc_pump -> cooler: {'control_valve': 1}",
+   "model": "S5 P-1 -> E-3: {'control_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L6",
+   "figure": "['heater', 'cooler'] -> residue_treater: {'flow_transmitter': 1}",
+   "model": "S10 E-2 -> RT-1: {'flow_transmitter': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L7",
+   "figure": "L6 -> aux_fuel_tank: {'control_valve': 1}",
+   "model": "S6 P-1 -> BL: {'control_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L8",
+   "figure": "residue_treater -> vent_condenser: {}",
+   "model": "S7 RT-1 -> E-1: {}",
+   "ok": true
+  },
+  {
+   "what": "line L9",
+   "figure": "vent_condenser -> process_vent: {}",
+   "model": "S8 E-1 -> BL: {}",
+   "ok": true
+  },
+  {
+   "what": "line L10",
+   "figure": "residue_treater -> vent_header: {'relief_valve': 1}",
+   "model": "S9 RT-1 -> BL: {'relief_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L11",
+   "figure": "vent_condenser -> vent_header: {'relief_valve': 1}",
+   "model": "S11 E-1 -> BL: {'relief_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L12",
+   "figure": "steam_in -> heater: {'control_valve': 1, 'manual_valve': 1}",
+   "model": "U1 BL -> E-2: {'control_valve': 1, 'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L13",
+   "figure": "heater -> steam_out: {'manual_valve': 1}",
+   "model": "U3 E-2 -> BL: {'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L14",
+   "figure": "water_in -> cooler: {'manual_valve': 1}",
+   "model": "U2 BL -> E-3: {'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "line L15",
+   "figure": "cooler -> water_out: {'manual_valve': 1}",
+   "model": "U4 E-3 -> BL: {'manual_valve': 1}",
+   "ok": true
+  },
+  {
+   "what": "mounted on residue_treater",
+   "figure": {
+    "level_transmitter": 1,
+    "nozzle": 1,
+    "pressure_transmitter": 1,
+    "temperature_transmitter": 1
+   },
+   "model": "RT-1: {'level_transmitter': 1, 'pressure_transmitter': 1, 'temperature_transmitter': 1}",
+   "ok": false
+  }
+ ],
+ "passed": 20,
+ "total": 21,
+ "differences": [
+  "Mounted on residue_treater: the figure shows {'nozzle': 1} that the model doesn't have."
+ ],
+ "model_items_not_in_figure": [
+  {
+   "tag": "TI-105",
+   "type": "temperature_transmitter",
+   "declared_not_shown": true
+  },
+  {
+   "tag": "FI-106",
+   "type": "flow_transmitter",
+   "declared_not_shown": true
+  }
+ ],
+ "drawing": {
+  "rows": [
+   {
+    "what": "line L1",
+    "figure": "flasher_bottoms -> residue_treater: {'control_valve': 1}",
+    "drawing": "{'control_valve': 1} (FV-107)",
+    "ok": true
+   },
+   {
+    "what": "line L2",
+    "figure": "solvent_tank -> recirc_pump: {'manual_valve': 1}",
+    "drawing": "{'manual_valve': 1} (HV-109)",
+    "ok": true
+   },
+   {
+    "what": "line L3",
+    "figure": "residue_treater -> recirc_pump: {'manual_valve': 1}",
+    "drawing": "{'manual_valve': 1} (HV-110)",
+    "ok": true
+   },
+   {
+    "what": "line L4",
+    "figure": "recirc_pump -> heater: {'control_valve': 1}",
+    "drawing": "{'control_valve': 1} (TV-104A)",
+    "ok": true
+   },
+   {
+    "what": "line L5",
+    "figure": "recirc_pump -> cooler: {'control_valve': 1}",
+    "drawing": "{'control_valve': 1} (TV-104B)",
+    "ok": true
+   },
+   {
+    "what": "line L6",
+    "figure": "['heater', 'cooler'] -> residue_treater: {'flow_transmitter': 1}",
+    "drawing": "{'flow_transmitter': 1} (FI-103)",
+    "ok": true
+   },
+   {
+    "what": "line L7",
+    "figure": "L6 -> aux_fuel_tank: {'control_valve': 1}",
+    "drawing": "{'control_valve': 1} (LV-102)",
+    "ok": true
+   },
+   {
+    "what": "line L8",
+    "figure": "residue_treater -> vent_condenser: {}",
+    "drawing": "{} (nothing)",
+    "ok": true
+   },
+   {
+    "what": "line L9",
+    "figure": "vent_condenser -> process_vent: {}",
+    "drawing": "{} (nothing)",
+    "ok": true
+   },
+   {
+    "what": "line L10",
+    "figure": "residue_treater -> vent_header: {'relief_valve': 1}",
+    "drawing": "{'relief_valve': 1} (PSV-101)",
+    "ok": true
+   },
+   {
+    "what": "line L11",
+    "figure": "vent_condenser -> vent_header: {'relief_valve': 1}",
+    "drawing": "{'relief_valve': 1} (PSV-102)",
+    "ok": true
+   },
+   {
+    "what": "line L12",
+    "figure": "steam_in -> heater: {'control_valve': 1, 'manual_valve': 1}",
+    "drawing": "{'control_valve': 1, 'manual_valve': 1} (HV-108, TV-104C)",
+    "ok": true
+   },
+   {
+    "what": "line L13",
+    "figure": "heater -> steam_out: {'manual_valve': 1}",
+    "drawing": "{'manual_valve': 1} (HV-111)",
+    "ok": true
+   },
+   {
+    "what": "line L14",
+    "figure": "water_in -> cooler: {'manual_valve': 1}",
+    "drawing": "{'manual_valve': 1} (HV-112)",
+    "ok": true
+   },
+   {
+    "what": "line L15",
+    "figure": "cooler -> water_out: {'manual_valve': 1}",
+    "drawing": "{'manual_valve': 1} (HV-113)",
+    "ok": true
+   }
+  ],
+  "passed": 15,
+  "total": 15,
+  "differences": []
+ }
+}

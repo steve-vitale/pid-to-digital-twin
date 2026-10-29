@@ -1,0 +1,288 @@
+{
+ "about": "What Figure 10 of the CSB Bayer report (p. 29, 'Residue treater piping system layout') shows, written down by reading the figure, independently of data/bayer_rt/process_model.json. Used by scripts/compare_bayer_fig10.py to check the model (and the drawing generated from it) against a drawing someone else made. The figure itself is not stored here; read it in the report. Ids are this file's own; 'label' is the figure's printed text where it has one. The figure is a simplified layout, not a P&ID: it has no tag numbers, no line numbers and no controllers, so it checks equipment, instrument types, valves and connections only. Each line's 'model_stream' is the reader's claim of which model stream it is; scripts/compare_bayer_fig10.py checks that claim against the stream's endpoints and the items on it, so a wrong claim fails.",
+ "source": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011), Figure 10, p. 29",
+ "units": [
+  {
+   "id": "residue_treater",
+   "label": "Residue Treater",
+   "model": "RT-1"
+  },
+  {
+   "id": "vent_condenser",
+   "label": "Vent Condenser",
+   "model": "E-1"
+  },
+  {
+   "id": "recirc_pump",
+   "label": "Recirculation Pump",
+   "model": "P-1"
+  },
+  {
+   "id": "heater",
+   "label": null,
+   "note": "exchanger on the red (steam) lines",
+   "model": "E-2"
+  },
+  {
+   "id": "cooler",
+   "label": null,
+   "note": "exchanger on the blue (water) lines",
+   "model": "E-3"
+  }
+ ],
+ "terminals": [
+  {
+   "id": "flasher_bottoms",
+   "label": "Methomyl-Solvent Liquid From Flasher Bottoms"
+  },
+  {
+   "id": "solvent_tank",
+   "label": "From Solvent Tank"
+  },
+  {
+   "id": "process_vent",
+   "label": "To Process Vent"
+  },
+  {
+   "id": "vent_header",
+   "label": "To Vent Header"
+  },
+  {
+   "id": "aux_fuel_tank",
+   "label": "To Auxiliary Fuel Tank"
+  },
+  {
+   "id": "water_in",
+   "label": "Water",
+   "note": "lower blue line, arrow into the figure"
+  },
+  {
+   "id": "water_out",
+   "label": "Water",
+   "note": "upper blue line, arrow out of the figure"
+  },
+  {
+   "id": "steam_in",
+   "label": "Steam",
+   "note": "lower red line, arrow into the figure"
+  },
+  {
+   "id": "steam_out",
+   "label": null,
+   "note": "upper red line from the heater, arrow out of the figure; not labelled (condensate or steam outlet)"
+  }
+ ],
+ "lines": [
+  {
+   "id": "L1",
+   "from": "flasher_bottoms",
+   "to": "residue_treater",
+   "items": [
+    {
+     "type": "control_valve",
+     "label": "Feed Control Valve"
+    }
+   ],
+   "model_stream": "S1"
+  },
+  {
+   "id": "L2",
+   "from": "solvent_tank",
+   "to": "recirc_pump",
+   "items": [
+    {
+     "type": "manual_valve",
+     "note": "filled valve with a handwheel"
+    }
+   ],
+   "note": "joins L3 before the pump suction",
+   "model_stream": "S2"
+  },
+  {
+   "id": "L3",
+   "from": "residue_treater",
+   "to": "recirc_pump",
+   "items": [
+    {
+     "type": "manual_valve",
+     "note": "vessel bottom valve"
+    }
+   ],
+   "model_stream": "S3"
+  },
+  {
+   "id": "L4",
+   "from": "recirc_pump",
+   "to": "heater",
+   "items": [
+    {
+     "type": "control_valve",
+     "note": "unlabelled, with actuator"
+    }
+   ],
+   "model_stream": "S4"
+  },
+  {
+   "id": "L5",
+   "from": "recirc_pump",
+   "to": "cooler",
+   "items": [
+    {
+     "type": "control_valve",
+     "note": "unlabelled, with actuator"
+    }
+   ],
+   "model_stream": "S5"
+  },
+  {
+   "id": "L6",
+   "from": [
+    "heater",
+    "cooler"
+   ],
+   "to": "residue_treater",
+   "items": [
+    {
+     "type": "flow_transmitter",
+     "label": "Flow Transmitter"
+    }
+   ],
+   "note": "the heater and cooler outlets join one return line that enters the vessel's upper side; the flow transmitter is on this return line near the vessel",
+   "model_stream": "S10"
+  },
+  {
+   "id": "L7",
+   "from": "L6",
+   "to": "aux_fuel_tank",
+   "items": [
+    {
+     "type": "control_valve",
+     "label": "Discharge Control Valve"
+    }
+   ],
+   "note": "branches off the return line L6, not off the vessel",
+   "model_stream": "S6"
+  },
+  {
+   "id": "L8",
+   "from": "residue_treater",
+   "to": "vent_condenser",
+   "items": [],
+   "model_stream": "S7"
+  },
+  {
+   "id": "L9",
+   "from": "vent_condenser",
+   "to": "process_vent",
+   "items": [],
+   "model_stream": "S8"
+  },
+  {
+   "id": "L10",
+   "from": "residue_treater",
+   "to": "vent_header",
+   "items": [
+    {
+     "type": "relief_valve",
+     "note": "on the vessel head"
+    }
+   ],
+   "model_stream": "S9"
+  },
+  {
+   "id": "L11",
+   "from": "vent_condenser",
+   "to": "vent_header",
+   "items": [
+    {
+     "type": "relief_valve",
+     "note": "on top of the condenser"
+    }
+   ],
+   "note": "joins L10's outlet line",
+   "model_stream": "S11"
+  },
+  {
+   "id": "L12",
+   "from": "steam_in",
+   "to": "heater",
+   "items": [
+    {
+     "type": "manual_valve"
+    },
+    {
+     "type": "control_valve",
+     "label": "Temperature Control Valve"
+    }
+   ],
+   "note": "manual valve upstream of the control valve",
+   "model_stream": "U1"
+  },
+  {
+   "id": "L13",
+   "from": "heater",
+   "to": "steam_out",
+   "items": [
+    {
+     "type": "manual_valve",
+     "note": "drawn shaded grey; the figure does not say why"
+    }
+   ],
+   "model_stream": "U3"
+  },
+  {
+   "id": "L14",
+   "from": "water_in",
+   "to": "cooler",
+   "items": [
+    {
+     "type": "manual_valve"
+    }
+   ],
+   "model_stream": "U2"
+  },
+  {
+   "id": "L15",
+   "from": "cooler",
+   "to": "water_out",
+   "items": [
+    {
+     "type": "manual_valve"
+    }
+   ],
+   "model_stream": "U4"
+  }
+ ],
+ "unit_mounted": [
+  {
+   "unit": "residue_treater",
+   "type": "pressure_transmitter",
+   "label": "Pressure Transmitter",
+   "note": "on the head"
+  },
+  {
+   "unit": "residue_treater",
+   "type": "level_transmitter",
+   "label": "Level Transmitter",
+   "note": "lower left side"
+  },
+  {
+   "unit": "residue_treater",
+   "type": "temperature_transmitter",
+   "label": "Temperature Transmitter",
+   "note": "lower right side"
+  },
+  {
+   "unit": "residue_treater",
+   "type": "nozzle",
+   "note": "blind-flanged nozzle on the left side; purpose not stated"
+  }
+ ],
+ "not_shown": [
+  "controllers",
+  "interlocks",
+  "tag numbers",
+  "line numbers",
+  "signal lines to a control system (each transmitter and control valve has a short dotted signal stub that ends unconnected)"
+ ]
+}

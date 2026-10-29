@@ -64,6 +64,8 @@ SOURCE_FILES = (
     "data/te_pid_layout.json", "data/te_pid/key.json",
     "data/bayer_rt/process_model.json", "data/bayer_rt/fig11_calibration.json", "data/bayer_rt/fig11_digitized.csv",
     "out/bayer_rt/fig11_check.md", "scripts/digitize_bayer_fig11.py",
+    "data/bayer_rt/fig10_inventory.json", "data/bayer_rt/pid/key.json", "out/bayer_rt/fig10_compare.md",
+    "scripts/compare_bayer_fig10.py",
     "data/te_tour_cards.json", "data/hazard_citations_prototype.json", "assets/fonts/AtkinsonHyperlegible-Regular.ttf",
     "drafts/3d-tour/label_boxes.json", "drafts/3d-tour/before/label_boxes.json",
     *(f"data/te_pid/{s}.{e}" for s in ("101", "102", "103") for e in ("png", "graphml")),
@@ -78,7 +80,8 @@ SOURCE_FILES = (
 FULL_FILES = ("out/ignition/gateway/PIDTwin.zip", "data/te_control_loops.json", f"{TWIN}/ignition/tags.json",
               "out/open100_structural/flow_direction.json", "out/open100_structural/plant_structure.json",
               "out/open100_structural/mimic/views.json", "data/open100_direction_confidence.json",
-              "data/open100_equipment_schedule.json", "docs/deliverables_matrix.json")
+              "data/open100_equipment_schedule.json", "docs/deliverables_matrix.json",
+              "data/bayer_rt/pid_layout.json", "data/bayer_rt/pid/RT1.png", "data/bayer_rt/pid/RT1.graphml")
 
 
 def prerequisites(root, source_only):

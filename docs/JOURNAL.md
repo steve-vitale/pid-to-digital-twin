@@ -2901,3 +2901,48 @@ one silently is how a replay gains false precision.
 **At your plant:** historian exports carry tag names and units, but screenshots of trends in incident reports,
 shift logs and old studies don't. When you digitize them, calibrate on the axes, test against every number written
 down elsewhere, and keep the error with every value.
+
+## 56. Draw the real unit and check it against the report's own drawing
+
+**What:** 2026-10-28. The residue treater model was checked against the CSB report's Figure 10, a piping layout drawn
+by someone else, then drawn by the same generator as the Tennessee Eastman sheets and checked against that figure
+again. Details: [BAYER_RT.md](BAYER_RT.md).
+
+**How:**
+- **The figure, written down first.** `data/bayer_rt/fig10_inventory.json` records every unit, terminal, line and
+  item Figure 10 shows, read from the figure alone. The figure has no tags, so `scripts/compare_bayer_fig10.py`
+  checks at the level it is drawn: each line's two ends, and the types and numbers of items on it.
+- **The generator grew to fit a real unit:** the model's hand valves and relief valves, a split-range controller
+  with three outputs, and interlocks as ISA diamonds with their signal lines, all refused if dropped or duplicated.
+  The TE sheets came out byte-identical.
+- **The drawing checked twice:** every figure line traced end to end through the drawn sheet's answer key, and the
+  pixel line tracer run on the sheet to confirm it reads back exactly the key's connections.
+
+**What it found:**
+- **The model, written from the text, got the figure wrong in four places** (first run 10 of 21; 11 of 21 after one
+  bug in my checker): the flow transmitter on the wrong line, the discharge off the vessel instead of off the
+  return, the two exchanger outlets returning separately, and the utility outlets and the condenser relief line
+  missing. All corrected from the figure, each noted on the item: 20 of 21. The one left is a nozzle whose purpose
+  the report doesn't state.
+- **The drawing agrees with the figure on 15 of 15 lines.**
+- **The first layout had three line crossings, and the tracer read each as a junction.** The two parallel exchanger
+  legs make the loop non-planar with every terminal at the sheet edge, so the cooler's water connections now end
+  in flags beside the exchanger. The tracer then read back exactly the key.
+- **The report gives the project a real tie to the incident**, in its own findings: a new control system,
+  operators not trained on it, overview screens they asked for that weren't ready for the startup (p. 60), control
+  logic not checked before the restart (pp. 35, 38, 39), and a steam flow indication that was wrong (p. 71). That is
+  the motivation the series uses, cited by page. The casualties are stated once and nobody is named.
+
+**Why:**
+- **Text describes, drawings connect.** The report's prose says what each item does; only the figure says where it
+  sits. Every topology error came from writing the model from prose.
+- **Rejected:** adding control valve stations to match the TE sheets. Figure 10 draws none and the report doesn't
+  describe any; adding them would be drafting the record doesn't support.
+- **Rejected:** keeping the crossings and teaching the tracer to skip them. That would change the tracer the TE
+  scores were measured with, and a model reading the sheet would still misread them.
+
+**Lesson:** check a model built from a narrative against any drawing of the same thing before using it, even a
+simplified one. Half of the first checks failed, all on connections.
+
+**At your plant:** the same split exists between operating procedures and the P&ID. Procedures say what a valve is
+for; the P&ID says what line it's on. Check one against the other, item by item, before trusting either.

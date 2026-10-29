@@ -95,5 +95,72 @@ class Digitized(unittest.TestCase):
         self.assertNotIn("No explanation recorded yet", text)
 
 
+class Figure10(unittest.TestCase):
+    """The model and the generated drawing against the report's own drawing, and that the check can fail."""
+
+    @classmethod
+    def setUpClass(cls):
+        import compare_bayer_fig10 as cf
+        cls.cf = cf
+        cls.fig = json.loads(cf.FIG.read_text(encoding="utf-8"))
+        cls.key = json.loads((ROOT / "data" / "bayer_rt" / "pid" / "key.json").read_text(encoding="utf-8"))
+
+    def model(self):
+        return json.loads(json.dumps(MODEL))
+
+    def test_committed_comparison_is_current(self):
+        res = self.cf.compare(self.fig, MODEL)
+        res["drawing"] = self.cf.compare_drawing(self.fig, MODEL, self.key)
+        self.assertEqual((ROOT / "out" / "bayer_rt" / "fig10_compare.md").read_text(encoding="utf-8"),
+                         self.cf.render(res))
+
+    def test_model_differs_only_by_the_unexplained_nozzle(self):
+        res = self.cf.compare(self.fig, MODEL)
+        self.assertEqual((res["passed"], res["total"]), (20, 21))
+        self.assertEqual(len(res["differences"]), 1)
+        self.assertIn("nozzle", res["differences"][0])
+
+    def test_every_figure_line_is_drawn(self):
+        res = self.cf.compare_drawing(self.fig, MODEL, self.key)
+        self.assertEqual((res["passed"], res["total"]), (15, 15), res["differences"])
+
+    def test_catches_a_transmitter_on_the_wrong_line(self):
+        m = self.model()
+        next(i for i in m["instruments"] if i["tag"] == "FI-103")["stream"] = "S3"   # the first, wrong reading
+        diffs = " ".join(self.cf.compare(self.fig, m)["differences"])
+        self.assertIn("Line L3 / S3", diffs)
+        self.assertIn("Line L6 / S10", diffs)
+
+    def test_catches_a_branch_taken_from_the_wrong_place(self):
+        m = self.model()
+        s6 = next(s for s in m["streams"] if s["id"] == "S6")
+        s6.pop("branches_from")
+        s6["from"] = "RT-1"
+        self.assertTrue(any(d.startswith("Line L7:") for d in self.cf.compare(self.fig, m)["differences"]))
+
+    def test_catches_a_cut_line_in_the_drawing(self):
+        k = json.loads(json.dumps(self.key))
+        sh = k["sheets"]["RT1"]
+        psv = next(n for n, v in sh["symbols"].items() if v.get("model_ref") == "PSV-101" and v["class"] == "valve")
+        sh["edges"] = [e for e in sh["edges"] if psv not in e]
+        res = self.cf.compare_drawing(self.fig, MODEL, k)
+        self.assertIn("Line L10: no drawn line joins residue_treater and vent_header.", res["differences"])
+
+    def test_catches_a_wrong_valve_type_in_the_drawing(self):
+        k = json.loads(json.dumps(self.key))
+        lv = next(v for v in k["sheets"]["RT1"]["symbols"].values()
+                  if v.get("model_ref") == "LV-102" and v["class"] == "valve")
+        lv["model_kind"] = "manual_valve"
+        res = self.cf.compare_drawing(self.fig, MODEL, k)
+        self.assertTrue(any(d.startswith("Line L7:") for d in res["differences"]))
+
+    def test_interlocks_name_their_measurement_and_valve(self):
+        known = {it["tag"] for k in ("instruments", "final_elements") for it in MODEL[k]}
+        for il in MODEL["interlocks"]:
+            self.assertIn(il["measurement"], known)
+            self.assertIn(il["measurement"], il["cause"])
+            self.assertEqual(il["final_element"], "FV-107")
+
+
 if __name__ == "__main__":
     unittest.main()

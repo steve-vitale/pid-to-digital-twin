@@ -200,6 +200,18 @@ def zone(x, y):
     return f"{row}-{col}"
 
 
+def outputs(c):
+    """What a controller moves: one final element, a split range of several, or an inner controller."""
+    out = c["output"]
+    if "split_range" in out:
+        return list(out["split_range"])
+    return [next(iter(out.values()))]
+
+
+def loop_of(c):
+    return c.get("loop", c["tag"])
+
+
 def split_tag(tag):
     letters, _, num = tag.partition("-")
     return letters, num
@@ -275,7 +287,7 @@ class Sheet:
             raise ValueError(f"sheet {self.spec['id']} signal flag {fid}: needs exactly one partner flag for loop "
                              f"{f['loop']} on another sheet, found {len(partner)}")
         sh, fl = partner[0]
-        far = next(iter(ctrl["output"].values())) if f["role"] == "out" else ctrl["tag"]
+        far = outputs(ctrl)[0] if f["role"] == "out" else ctrl["tag"]
         lines = [f"SIG PID {sh['drawing']} ({zone(*fl['at'])})",
                  f"{'TO' if f['role'] == 'out' else 'FROM'} " + " ".join(split_tag(far))]
         x, y = f["at"]
@@ -350,17 +362,30 @@ class Sheet:
                         raise ValueError(f"sheet {self.spec['id']} signal {sig['from']} -> {sig['to']}: segment "
                                          f"{a} -> {b} runs through {self.nodes[nid]['text'] or nid}")
 
-    def valve(self, p, orient, tag, side, drafting):
+    def spring(self, x, y, toward):
+        """A relief valve's spring: a zigzag on the stem, pointing away from the line (dx, dy = toward)."""
+        dx, dy = toward
+        pts = [(x + dx * k * 5 + (dy * (6 if k % 2 else -6) if k not in (0, 5) else 0),
+                y + dy * k * 5 + (dx * (6 if k % 2 else -6) if k not in (0, 5) else 0)) for k in range(6)]
+        self.c.line(pts, THIN_W)
+
+    def valve(self, p, orient, tag, side, drafting, kind="final_element"):
+        """A control valve (dome actuator) or, for kind relief_valve, a relief valve (spring), with its tag bubble."""
         x, y = p
         s = -1 if side in ("down", "right") else 1
+        relief = kind == "relief_valve"
         if orient == "h":
             self.c.polygon([(x - VALVE_HALF, y - VALVE_H), (x, y), (x - VALVE_HALF, y + VALVE_H)], THIN_W, "white")
             self.c.polygon([(x + VALVE_HALF, y - VALVE_H), (x, y), (x + VALVE_HALF, y + VALVE_H)], THIN_W, "white")
             top = y - s * ACT_STEM
             self.c.line([(x, y), (x, top)], THIN_W)
-            box = (x - ACT_R, top - ACT_R, x + ACT_R, top + ACT_R)
-            self.c.arc(box, 180, 360, THIN_W) if s == 1 else self.c.arc(box, 0, 180, THIN_W)
-            self.c.line([(x - ACT_R, top), (x + ACT_R, top)], THIN_W)
+            if relief:
+                self.spring(x, top, (0, -s))
+                top -= s * (25 - ACT_R)
+            else:
+                box = (x - ACT_R, top - ACT_R, x + ACT_R, top + ACT_R)
+                self.c.arc(box, 180, 360, THIN_W) if s == 1 else self.c.arc(box, 0, 180, THIN_W)
+                self.c.line([(x - ACT_R, top), (x + ACT_R, top)], THIN_W)
             vbox = (x - VALVE_HALF, min(y - VALVE_H, top - s * ACT_R), x + VALVE_HALF, max(y + VALVE_H, top - s * ACT_R))
             far = top - s * ACT_R
             bc = (x, y - s * TAP_OFFSET)
@@ -370,16 +395,20 @@ class Sheet:
             self.c.polygon([(x - VALVE_H, y + VALVE_HALF), (x, y), (x + VALVE_H, y + VALVE_HALF)], THIN_W, "white")
             left = x - s * ACT_STEM
             self.c.line([(x, y), (left, y)], THIN_W)
-            box = (left - ACT_R, y - ACT_R, left + ACT_R, y + ACT_R)
-            self.c.arc(box, 90, 270, THIN_W) if s == 1 else self.c.arc(box, 270, 450, THIN_W)
-            self.c.line([(left, y - ACT_R), (left, y + ACT_R)], THIN_W)
+            if relief:
+                self.spring(left, y, (-s, 0))
+                left -= s * (25 - ACT_R)
+            else:
+                box = (left - ACT_R, y - ACT_R, left + ACT_R, y + ACT_R)
+                self.c.arc(box, 90, 270, THIN_W) if s == 1 else self.c.arc(box, 270, 450, THIN_W)
+                self.c.line([(left, y - ACT_R), (left, y + ACT_R)], THIN_W)
             far = left - s * ACT_R
             vbox = (min(x - VALVE_H, far), y - VALVE_HALF, max(x + VALVE_H, far), y + VALVE_HALF)
             bc = (x - s * TAP_OFFSET, y)
             lead = [(far, y), (bc[0] + s * BUBBLE_R, y)]
-        vid = self.node("valve", vbox, None, tag, drafting, kind="final_element")
+        vid = self.node("valve", vbox, None, tag, drafting, kind=kind)
         self.c.line(lead, THIN_W)
-        bid = self.bubble(*bc, tag, "final_element")
+        bid = self.bubble(*bc, tag, kind)
         self.link_group([vid, bid], lead[0])
         return vid
 
@@ -398,6 +427,31 @@ class Sheet:
             self.d_dot(x, y)
         return self.node("valve", box, None, None, drafting=True,
                          kind="bypass_valve" if globe else "block_valve")
+
+    def tagged_manual_valve(self, p, orient, tag):
+        """A hand valve the model holds (not a drafting addition): the block valve symbol with its tag beside it."""
+        nid = self.manual_valve(p, orient)
+        n = self.nodes[nid]
+        n.update(model_ref=tag, model_kind="manual_valve", drafting_addition=False, text=" ".join(split_tag(tag)))
+        x, y = p
+        if orient == "h":
+            self.c.text(x, y - VALVE_H - 14, tag, SMALL)
+        else:
+            self.c.text(x + VALVE_H + 8, y, tag, SMALL, anchor="lm")
+        self.tag_node[tag] = nid
+        return nid
+
+    def interlock(self, il, at):
+        """An interlock (ISA-5.1): a diamond with I and its number, joined by signal lines like a controller."""
+        cx, cy = at
+        r = BUBBLE_R + 6
+        self.c.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], THIN_W, "white")
+        self.c.text(cx, cy - 9, "I", TEXT)
+        self.c.text(cx, cy + 10, il["id"].split("-")[-1], SMALL)
+        nid = self.node("instrumentation", (cx - r, cy - r, cx + r, cy + r), f"I {il['id'].split('-')[-1]}",
+                        il["id"], kind="interlock", extra={"interlock_class": il.get("class")})
+        self.centers[il["id"]], self.tag_node[il["id"]] = (cx, cy, r * 0.7), nid
+        return nid
 
     def d_dot(self, x, y, r=4):
         self.c.d.ellipse((x - r, y - r, x + r, y + r), fill=0)
@@ -474,7 +528,7 @@ class Sheet:
             # The zone points at where the line continues on the other sheet (OPEN100 convention).
             zx = fl["at"][0] + (FLAG_W if fl["dir"] == "right" and fl["at"][0] < self.w / 2 else 0)
             return [f"{sh['system']} PID {sh['drawing']} ({zone(zx, fl['at'][1])})", s["name"].upper()]
-        return ["BATTERY LIMIT", s["name"].upper()]
+        return ["BATTERY LIMIT", f.get("label", s["name"]).upper()]   # a layout label shortens a long name
 
     def unit(self, uid, u):
         name = next(x for x in self.model["units"] if x["id"] == uid)["name"]
@@ -522,6 +576,15 @@ class Sheet:
             c.line([(x - k, y - k), (x + k, y - r * 0.38)], THIN_W)
             c.line([(x - k, y + k), (x + k, y + r * 0.38)], THIN_W)
             c.text(x, y + 205, uid, EQ_TEXT, underline=True)
+            box = (x - r, y - r, x + r, y + r)
+            cls = "pump"
+        elif u["shape"] == "pump":
+            (x, y), r = u["at"], u["r"]
+            c.circle(x, y, r, EQUIP_W)
+            c.line([(x, y - r), (x + r, y - r)], EQUIP_W)                  # tangential discharge
+            c.polygon([(x - r * 0.7, y + r * 0.7), (x + r * 0.7, y + r * 0.7), (x + r, y + r + 14),
+                       (x - r, y + r + 14)], THIN_W, "white")                # base
+            c.text(x, y + r + 50, uid, EQ_TEXT, underline=True)
             box = (x - r, y - r, x + r, y + r)
             cls = "pump"
         elif u["shape"] == "mixer":
@@ -590,7 +653,7 @@ class Sheet:
         sheet_units = set(spec["units"])
         for r in spec["routes"]:
             if r.get("stream"):
-                tags = [t for t, it in items_by_tag.items() if it.get("stream") == r["stream"] and it["unit"] in sheet_units]
+                tags = [t for t, it in items_by_tag.items() if it.get("stream") == r["stream"] and it.get("unit") in sheet_units | {None}]
                 drawn.setdefault(f"stream:{r['stream']}", []).append(spec["id"])
             else:
                 tags = list(r.get("items", []))
@@ -610,7 +673,11 @@ class Sheet:
             for tag, p, orient, t in rr["placed"]:
                 it = items_by_tag[tag]
                 s = side if orient == "h" else ("right" if side == "down" else "left")
-                if "xmv" in it:
+                if it["_kind"] == "manual_valve":
+                    rr["valves"].append((t, self.tagged_manual_valve(p, orient, tag)))
+                elif it["_kind"] == "relief_valve":
+                    rr["valves"].append((t, self.valve(p, orient, tag, s, False, kind="relief_valve")))
+                elif it["_kind"] == "final_element":
                     rr["valves"].append((t, self.valve(p, orient, tag, s, not r.get("stream"))))
                     if stations:
                         rid, brr = self.station(r, rr, t, tag, orient, s, others)
@@ -630,7 +697,7 @@ class Sheet:
                 it = items_by_tag[tag]
                 lead = self.mount_leader(uid, bc)
                 c.line(lead, THIN_W)
-                kind = "final_element" if "xmv" in it else "instrument"
+                kind = it["_kind"]
                 bid = self.bubble(*bc, tag, kind)
                 self.link_group([bid, unit_nodes[uid]], lead[1])
                 drawn.setdefault(tag, []).append(spec["id"])
@@ -638,9 +705,15 @@ class Sheet:
         for tag, at in spec.get("controllers", {}).items():
             if tag not in self.ctrl_by_tag:
                 raise ValueError(f"sheet {spec['id']}: controller {tag} is not in the model")
-            self.controller(tag, at, self.ctrl_by_tag[tag]["loop"])
+            self.controller(tag, at, loop_of(self.ctrl_by_tag[tag]))
             drawn.setdefault(tag, []).append(spec["id"])
-        by_loop = {c["loop"]: c for c in self.ctrl_by_tag.values()}
+        il_by_id = {il["id"]: il for il in self.model.get("interlocks", []) if il.get("measurement")}
+        for iid, at in spec.get("interlocks", {}).items():
+            if iid not in il_by_id:
+                raise ValueError(f"sheet {spec['id']}: interlock {iid} is not in the model (with a measurement)")
+            self.interlock(il_by_id[iid], at)
+            drawn.setdefault(iid, []).append(spec["id"])
+        by_loop = {loop_of(c): c for c in self.ctrl_by_tag.values()}
         for fid, f in spec.get("signal_flags", {}).items():
             self.signal_flag(fid, f, by_loop[f["loop"]])
         for sig in spec.get("signals", []):
@@ -665,9 +738,9 @@ class Sheet:
         auto = [t for t in tags if t not in explicit]
         if auto:
             # Owner end: measurements sit next to the unit that owns them, the valve beyond them (house rule).
-            owner = {items_by_tag[t]["unit"] for t in auto}
+            owner = {items_by_tag[t].get("unit") for t in auto}
             from_owner = r["from"].get("unit") in owner
-            order = sorted(auto, key=lambda t: "xmv" in items_by_tag[t])
+            order = sorted(auto, key=lambda t: items_by_tag[t]["_kind"] != "instrument")
             for k, tag in enumerate(order):
                 d = 130 + 110 * k
                 t = d if from_owner else L - d
@@ -686,7 +759,7 @@ class Sheet:
         for frac in (0.5, 0.3, 0.7, 0.2, 0.8):
             x = a[0] + (b[0] - a[0]) * frac
             if all(abs(x - p[0]) > 150 for (_, p, _, _) in rr["placed"]):
-                self.c.text(x, a[1] + dy, f"SIZE-TE-{r['stream'].upper()}-SPEC-X", SMALL)
+                self.c.text(x, a[1] + dy, f"{self.layout.get('line_label_prefix', 'SIZE-TE')}-{r['stream'].upper()}-SPEC-X", SMALL)
                 return
 
     def connect(self, routes, unit_nodes, flag_nodes):
@@ -829,20 +902,24 @@ class Sheet:
         return "\n".join(out)
 
 
-def signal_problems(sheets, ctrl_by_tag):
+def signal_problems(sheets, ctrl_by_tag, interlocks=()):
     """Every signal the model implies drawn exactly once (a cross-sheet one as two halves), and nothing else."""
     want = {}
     for c in ctrl_by_tag.values():
         want[(c["measurement"], c["tag"])] = 0
-        want[(c["tag"], next(iter(c["output"].values())))] = 0
-    by_loop = {c["loop"]: c for c in ctrl_by_tag.values()}
+        for o in outputs(c):
+            want[(c["tag"], o)] = 0
+    for il in interlocks:
+        want[(il["measurement"], il["id"])] = 0
+        want[(il["id"], il["final_element"])] = 0
+    by_loop = {loop_of(c): c for c in ctrl_by_tag.values()}
     halves, problems = {}, []
     for sh in sheets:
         flags = {nid: n for nid, n in sh.nodes.items() if n.get("model_kind") == "signal_flag"}
         for a, b in sh.signal_edges:
             if a in flags or b in flags:
                 c = by_loop[(flags.get(a) or flags.get(b))["loop"]]
-                pair = (c["tag"], next(iter(c["output"].values())))
+                pair = (c["tag"], outputs(c)[0])
                 halves.setdefault(pair, []).append("in" if a in flags else "out")
                 continue
             pair = (sh.nodes[a]["model_ref"], sh.nodes[b]["model_ref"])
@@ -873,8 +950,13 @@ def sha_file(p):
 def generate(model_path, layout_path, out_dir, write=True, register=None):
     model = json.loads(Path(model_path).read_text(encoding="utf-8"))
     layout = json.loads(Path(layout_path).read_text(encoding="utf-8"))
-    items_by_tag = {i["tag"]: i for i in model["instruments"] + model["final_elements"]}
+    items_by_tag = {}
+    for key, kind in (("instruments", "instrument"), ("final_elements", "final_element"),
+                      ("manual_valves", "manual_valve"), ("relief_devices", "relief_valve")):
+        for i in model.get(key, []):
+            items_by_tag[i["tag"]] = dict(i, _kind=kind)
     ctrl_by_tag = {c["tag"]: c for c in model.get("controllers", [])}
+    interlocks = [il for il in model.get("interlocks", []) if il.get("measurement")]
     drawn, sheets = {}, []
     for spec in layout["sheets"]:
         sh = Sheet(spec, model, layout, None)
@@ -883,11 +965,11 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
         sheets.append(sh)
     # Completeness: every model unit, item and stream drawn; items exactly once.
     problems = []
-    for tag in list(items_by_tag) + list(ctrl_by_tag):
+    for tag in list(items_by_tag) + list(ctrl_by_tag) + [il["id"] for il in interlocks]:
         n = len(drawn.get(tag, []))
         if n != 1:
             problems.append(f"{tag}: drawn {n} times (must be exactly once)")
-    problems += signal_problems(sheets, ctrl_by_tag)
+    problems += signal_problems(sheets, ctrl_by_tag, interlocks)
     for u in model["units"]:
         if len(drawn.get(f"unit:{u['id']}", [])) != 1:
             problems.append(f"unit {u['id']}: drawn {len(drawn.get('unit:' + u['id'], []))} times")
@@ -925,7 +1007,8 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
     manifest["files"]["key.json"] = sha_file(out_dir / "key.json")
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     reg = Path(register) if register else out_dir / "sheet_register.csv"
-    reg.write_text("# Drawing register for the generated Tennessee Eastman sheets (scripts/draw_pid_from_model.py).\n"
+    reg.write_text(layout.get("register_header", "# Drawing register for the generated Tennessee Eastman sheets "
+                                                 "(scripts/draw_pid_from_model.py).") + "\n"
                    "# Read from each sheet's title block, as a plant would supply from its drawing index.\n"
                    "sheet,drawing_number,system_code,system_name\n"
                    + "".join(f"{s['id']},{s['drawing']},{s['system']},\"{s['title'].title()}\"\n"
@@ -939,11 +1022,12 @@ def main():
     ap.add_argument("--model", default="data/te_process_model.json")
     ap.add_argument("--layout", default="data/te_pid_layout.json")
     ap.add_argument("--out", default="data/te_pid")
+    ap.add_argument("--register", default="data/sheet_registers/te_generated.csv")
     ap.add_argument("--check", action="store_true", help="validate the layout against the model; write nothing")
     a = ap.parse_args()
     try:
         sheets = generate(ROOT / a.model, ROOT / a.layout, ROOT / a.out, write=not a.check,
-                          register=ROOT / "data" / "sheet_registers" / "te_generated.csv")
+                          register=ROOT / a.register)
     except ValueError as e:
         sys.exit(f"refused: {e}")
     for sh in sheets:

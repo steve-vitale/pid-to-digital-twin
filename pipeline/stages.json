@@ -2275,22 +2275,111 @@
    "code": [],
    "outputs": [
     "data/bayer_rt/process_model.json",
-    "data/bayer_rt/fig11_calibration.json"
+    "data/bayer_rt/fig11_calibration.json",
+    "data/bayer_rt/fig10_inventory.json",
+    "data/bayer_rt/pid_layout.json"
    ],
    "requires": [],
    "config": [],
    "id": "bayer.source",
    "dataset": "bayer",
    "stage": 0,
-   "title": "Bayer residue treater: process model and Figure 11 calibration, written from the CSB report",
+   "title": "Bayer residue treater: process model, Figure 10 inventory, drafting layout and Figure 11 calibration, written from the CSB report",
    "kind": "source",
    "rebuild": "source",
-   "treatment": "Every unit, stream, instrument, valve, controller, interlock, limit and event cites the report's page or figure. The report gives no tag numbers for the residue treater, so every tag is assigned by this project and marked so. The calibration is read off Figure 11's own axes, gridlines and ticks only.",
+   "treatment": "Every unit, stream, instrument, valve, controller, interlock, limit and event cites the report's page or figure. The report gives no tag numbers for the residue treater, so every tag is assigned by this project and marked so. The calibration is read off Figure 11's own axes, gridlines and ticks only. The Figure 10 inventory records what that figure shows (equipment, transmitters, valves, lines), read from the figure alone; the drafting layout says only where things go on the generated sheet.",
    "edited_by": [
     "edit data/bayer_rt/*.json by hand, then python scripts/test_bayer_rt.py"
    ],
    "carries": "a page or figure citation per item; assigned_tag on every tag; open questions (which temperature Fig 11 plots)",
    "checked_by": "scripts/test_bayer_rt.py (citations, assigned tags, references between items)"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "bayer.source"
+   ],
+   "inputs": [
+    "data/bayer_rt/process_model.json"
+   ],
+   "code": [
+    "scripts/draw_pid_from_model.py"
+   ],
+   "outputs": [
+    "data/bayer_rt/pid/RT1.png",
+    "data/bayer_rt/pid/RT1.svg",
+    "data/bayer_rt/pid/RT1.graphml",
+    "data/bayer_rt/pid/key.json",
+    "data/bayer_rt/pid/manifest.json",
+    "data/bayer_rt/pid/sheet_register.csv"
+   ],
+   "requires": [],
+   "config": [
+    "data/bayer_rt/pid_layout.json"
+   ],
+   "id": "bayer.pid",
+   "dataset": "bayer",
+   "stage": 1,
+   "title": "Generated P&ID of the residue treater: the model drawn in the house style, with controllers and interlocks",
+   "kind": "generated",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/draw_pid_from_model.py",
+     "--model",
+     "data/bayer_rt/process_model.json",
+     "--layout",
+     "data/bayer_rt/pid_layout.json",
+     "--out",
+     "data/bayer_rt/pid",
+     "--register",
+     "data/bayer_rt/pid/sheet_register.csv"
+    ]
+   ],
+   "requires_modules": [
+    "PIL"
+   ],
+   "requires_note": "Pillow (PNG bytes can differ between Pillow versions; the manifest records the version)",
+   "treatment": "The same generator as the TE sheets. Draws only what the model holds: every instrument, control valve, hand valve, relief valve, controller and interlock exactly once, with every signal the model implies; refuses a layout that drops or duplicates one. No control valve stations: Figure 10 draws none.",
+   "carries": "assigned tags only (the report gives none); an answer key in the PID2Graph schema",
+   "checked_by": "scripts/compare_bayer_fig10.py (the drawn lines against Figure 10); scripts/test_bayer_rt.py"
+  },
+  {
+   "poc": false,
+   "upstream": [
+    "bayer.source",
+    "bayer.pid"
+   ],
+   "inputs": [
+    "data/bayer_rt/fig10_inventory.json",
+    "data/bayer_rt/process_model.json",
+    "data/bayer_rt/pid/key.json"
+   ],
+   "code": [
+    "scripts/compare_bayer_fig10.py"
+   ],
+   "outputs": [
+    "out/bayer_rt/fig10_compare.json",
+    "out/bayer_rt/fig10_compare.md"
+   ],
+   "requires": [],
+   "config": [],
+   "id": "bayer.fig10",
+   "dataset": "bayer",
+   "stage": 1,
+   "title": "The model and the generated drawing against the report's Figure 10",
+   "kind": "check",
+   "rebuild": "auto",
+   "command": [
+    [
+     "python",
+     "scripts/compare_bayer_fig10.py"
+    ]
+   ],
+   "treatment": "Figure 10 has no tags, so the check is at the level it is drawn: every figure unit is a model unit; every figure line is a model stream with the same ends and the same types and numbers of items; then every figure line is traced through the drawn sheet's answer key, end to end, counting what is drawn on it.",
+   "carries": "model 20 of 21 (the one difference: a blind-flanged nozzle whose purpose the report doesn't state); drawing 15 of 15 lines",
+   "checked_by": "scripts/test_bayer_rt.py (planted faults: a moved transmitter, a cut line, a swapped valve type)"
   },
   {
    "poc": false,

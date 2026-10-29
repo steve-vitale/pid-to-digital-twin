@@ -1,6 +1,18 @@
 {
  "about": "Hashes (sha256, CRLF normalised to LF) of each stage's inputs, code, config and outputs when scripts/pipeline.py last built or accepted it. Written by the orchestrator; do not edit by hand.",
  "stages": {
+  "bayer.fig10": {
+   "inputs": {
+    "data/bayer_rt/fig10_inventory.json": "adaff7442d40a4dd555ff720d78b44a0657bd8ff18fa7b47aac7b0e6e4e7ce11",
+    "data/bayer_rt/pid/key.json": "473c7dd74c8bc3e2f4262bffc85212d9326c094c124d910bebfc4160d3a53a5b",
+    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "scripts/compare_bayer_fig10.py": "4f68edd90deeac5ea1e8480e1069666a18eefd1d2f3f7a99f48bf7c137f0cb7c"
+   },
+   "outputs": {
+    "out/bayer_rt/fig10_compare.json": "8d198db78a9abfc5350df39b4b3a24a284d5bed2f76d985a4ec917bbc6859e33",
+    "out/bayer_rt/fig10_compare.md": "5e5dcb642e0972fe2d92b05e3ab938d5d3dd14d5dd230e8d574606ef400366c0"
+   }
+  },
   "bayer.fig11": {
    "inputs": {
     "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
@@ -11,11 +23,28 @@
     "out/bayer_rt/fig11_check.md": "538830b8ced7f732a857e8df62bd23d74b4996068360ccd9777f171df0906f1e"
    }
   },
+  "bayer.pid": {
+   "inputs": {
+    "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
+    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab",
+    "scripts/draw_pid_from_model.py": "6b2575236028dd470a6c8047189d7d0a80712fabce40a4c2d8800dfa99e4d1f8"
+   },
+   "outputs": {
+    "data/bayer_rt/pid/RT1.graphml": "4104b254627f5c3f0b830c4395dbe02c310f578758ca0d3521c677131e415bfd",
+    "data/bayer_rt/pid/RT1.png": "31e018e3c5b65b4a913639a02e63970bbfef9ae4830309b100562e63726fd2ac",
+    "data/bayer_rt/pid/RT1.svg": "839f2708d5aae6fc75e01df7f497b4d2e5f319ac25e994faede70d2047099f3e",
+    "data/bayer_rt/pid/key.json": "473c7dd74c8bc3e2f4262bffc85212d9326c094c124d910bebfc4160d3a53a5b",
+    "data/bayer_rt/pid/manifest.json": "e5e6cfeb7e82bd984e360e8d75b2e016940a76d1327583dec78e46251c02f36b",
+    "data/bayer_rt/pid/sheet_register.csv": "d049d9fe38d511cd48bca76c2dfe30eee498c03e9065dc579670ef2f2e2c7297"
+   }
+  },
   "bayer.source": {
    "inputs": {},
    "outputs": {
+    "data/bayer_rt/fig10_inventory.json": "adaff7442d40a4dd555ff720d78b44a0657bd8ff18fa7b47aac7b0e6e4e7ce11",
     "data/bayer_rt/fig11_calibration.json": "f1f431dbff0f820930d584f5de6b300b141f7f56bc76d1845699ead0f8a10065",
-    "data/bayer_rt/process_model.json": "5cb6f711523eb45826db7d87df0be6d0524861fe250f47b3e91c4bff923ad675"
+    "data/bayer_rt/pid_layout.json": "f549ec4c3e3649d8ce12b2619ebf7273daa4be30269fa0a7543b106c8562dbe0",
+    "data/bayer_rt/process_model.json": "c58f5c104005a69717c26c47e034a35ec6493fb369374302f5ad778f00d698ab"
    }
   },
   "dexpi.keys": {
@@ -513,37 +542,37 @@
    },
    "outputs": {
     "drafts/interactive-tour/audit/geometry.json": "4f67243575286678fbaa25e0521881c3ca7e2342b870790b7622e70176d6f5cc",
-    "drafts/interactive-tour/audit/report.json": "d25ecf8242c73d6eeaee6a697e525682dbc719519c21a3893aa989db6f02ef75",
-    "drafts/interactive-tour/audit/report.md": "fd5216fa4bcf9c00ef967763eeedb3236a74f15d1ec3a868179537cf39834a75",
-    "drafts/interactive-tour/shots/compressor-1440-dark.jpg": "c6b08457628e5043e473f372bad0168a178ecb47191d9276a2466f88f919b7e6",
-    "drafts/interactive-tour/shots/compressor-1440-light.jpg": "d996134fcac31d49260b4a807e7dca1ce6397a17b217c21869972e724c689a00",
-    "drafts/interactive-tour/shots/compressor-390-dark.jpg": "4750624140c6d2e548be6c27664f635649dc270aac07d62f38ba5e237dd029a7",
-    "drafts/interactive-tour/shots/compressor-390-light.jpg": "8b54ed9e637c25c6eaff3cc6358a6b404bbfc0bc78ce72de93f7cc94d60edc96",
-    "drafts/interactive-tour/shots/fault6-alarm-1440-dark.jpg": "cc6bd780dce8e759a0eb59a451a132fa1f470f9039b9870eb0756083da92109c",
-    "drafts/interactive-tour/shots/fault6-alarm-1440-light.jpg": "a038fd31484e885ce03da1843f6cec20f8c333636feb4312baee30dda308e1d1",
-    "drafts/interactive-tour/shots/fault6-alarm-390-dark.jpg": "bf0f59806ea4a4f6b05e7d08c4c0e53ad3a4b51b2274007de135ab2f673f1643",
-    "drafts/interactive-tour/shots/fault6-alarm-390-light.jpg": "c9077735f3d1cc89af23f7fbc0276fd4d75f4eb2a39dcbdd7f05683c1b902b9f",
-    "drafts/interactive-tour/shots/header-1440-dark.jpg": "4d19cb91e1722c1f1d9652bc1c37d5ccdde5964deedcc0afd85b8b16da51506a",
-    "drafts/interactive-tour/shots/header-1440-light.jpg": "3081806b2d7b5e97afb915e6c85b69d0387025a54a41e47af99a860cd791ea70",
-    "drafts/interactive-tour/shots/header-390-dark.jpg": "a7d191bc1fd007fb51ae8f6d58086bbe7bc9cacc4a3c02828fa07fb5e2d16159",
-    "drafts/interactive-tour/shots/header-390-light.jpg": "3dd344a3e45f91becbc6fd08b2d3461553e2cb17fd04e99900851063c595beb8",
-    "drafts/interactive-tour/shots/loto-all-feeds-and-motor-1440-dark.jpg": "d31c1ac665a44a37cbbdbcfc745330293b08e7bbfe4dd254a21e358fbe35be7f",
-    "drafts/interactive-tour/shots/loto-mockup-1440-dark.jpg": "d76d44dd8dae64cfb3f26726e313126a6c37bcf8cf0ef2c242946fa94afbc857",
-    "drafts/interactive-tour/shots/loto-mockup-1440-light.jpg": "160045d28f9d6ff9bb990a59b06dcc4606bed427ab8482a9d58072e8799afcac",
-    "drafts/interactive-tour/shots/loto-mockup-390-dark.jpg": "0debdbd85707d50657f37f6546737f6f7d679cebee8bfb97e212cbfc5ebb285c",
-    "drafts/interactive-tour/shots/loto-mockup-390-light.jpg": "f76286c1548fc54024e815a390001f7e9bc5be75d45f980596dfb8dc4a2a8c48",
-    "drafts/interactive-tour/shots/overview-1440-dark.jpg": "2fec33ae495041b91feadb93d9cc62827efc8037fb7b3c67f972adbe33601d58",
-    "drafts/interactive-tour/shots/overview-1440-light.jpg": "57df22057fd09b397c16a1f0c6df82853f4c0385da0e2b1b675e76286c736c6e",
-    "drafts/interactive-tour/shots/overview-390-dark.jpg": "180d57f6606a132e68f6994257e4e3527ec76a462a511abb4ed272a83c551604",
-    "drafts/interactive-tour/shots/overview-390-light.jpg": "2f9990c29f9fba1e10bf62c55efc079838f63a87166f80171f87fe71cebc1bd5",
-    "drafts/interactive-tour/shots/reactor-1440-dark.jpg": "7a88b744c1bbe249341cf0937677071eb3e6d90ba05a49d210ddf68a6dbe9261",
-    "drafts/interactive-tour/shots/reactor-1440-light.jpg": "70708b8dfe7e3cd9b2c7d075f817322d95062842fcac5eaba0bb932ddf7a48d0",
-    "drafts/interactive-tour/shots/reactor-390-dark.jpg": "436fb16dd09dffeed098c156d30dcc3e72c7f4177308ef9786cefd9862c432e7",
-    "drafts/interactive-tour/shots/reactor-390-light.jpg": "b7625983fbcf859093d7e73b8039297c07a07b5d9c75d31d1334ed29815c873d",
-    "drafts/interactive-tour/shots/separator-1440-dark.jpg": "05fe4a443335d1c5130abb39785e4c951de6a4dcc9f14217835b8b81177494da",
-    "drafts/interactive-tour/shots/separator-1440-light.jpg": "c5eb3ffd9ca9733df87b39ea4d7d3a90965eb05b16d3c524dd9e2071d467bbe3",
-    "drafts/interactive-tour/shots/separator-390-dark.jpg": "d44290fc825f96218af411530f4788927c5b5981b42f2d276bedbccaf99afe50",
-    "drafts/interactive-tour/shots/separator-390-light.jpg": "defc2166319ce106903c739bae6f30599cf575695baa2ee8150bac449df6bac3"
+    "drafts/interactive-tour/audit/report.json": "9e9872c9daa877615196d3b494ed9f86c095d0fce5fc77e7338e41fec32ccbe1",
+    "drafts/interactive-tour/audit/report.md": "bf103a04cb96b28d7a33c28dffa0bd4489cac7cb206dd8b22fd038c55170120a",
+    "drafts/interactive-tour/shots/compressor-1440-dark.jpg": "b1a3301a12e48f622e49ae0f7e4ee6eabde3bc6b672982b4e2bef38ee2d2776e",
+    "drafts/interactive-tour/shots/compressor-1440-light.jpg": "53ad6b698402747596f9181a827e86ea327e1579ad62fe7aead14a35a625d7be",
+    "drafts/interactive-tour/shots/compressor-390-dark.jpg": "678c86caa6bca92e87159edc7b56f158f6ea1301506fa478bcd6af58ce002ca3",
+    "drafts/interactive-tour/shots/compressor-390-light.jpg": "4f7cc42edf8c3f1a2eb20ab69a6233a3ee49f0ef2e69028f12482aa36059146a",
+    "drafts/interactive-tour/shots/fault6-alarm-1440-dark.jpg": "f026ebbe673b6abbe12053603ef11e8d24a597b730a2a384e91f60926fa79722",
+    "drafts/interactive-tour/shots/fault6-alarm-1440-light.jpg": "11a9c44fc72ee59782e261ec7af64eca262a900195c446c566f64eb97bbf4d6f",
+    "drafts/interactive-tour/shots/fault6-alarm-390-dark.jpg": "90168a1f64dceae7e762cabb47e79c41f23ec5154bcb5a37179c7fe8596821c2",
+    "drafts/interactive-tour/shots/fault6-alarm-390-light.jpg": "32b3f77a5afd8fc123c374c8416b092a9644721f772a08db3d2390b4078f66bc",
+    "drafts/interactive-tour/shots/header-1440-dark.jpg": "32470f5f7db4a0fff0f319c9e6ce95d86606b1c61711af2bcc5c66af9d737c63",
+    "drafts/interactive-tour/shots/header-1440-light.jpg": "5b10139c6c3fee910ed3ebdc1a2ac932fcf79fa4e3cba3ab514c823bdb54d4a6",
+    "drafts/interactive-tour/shots/header-390-dark.jpg": "f8c055779c07ad2d9216efbc53ea24e83c0cfb58f63472443aa1a5ac8eab8ffe",
+    "drafts/interactive-tour/shots/header-390-light.jpg": "1a4310d628b484cdcea26041a5fd94cab1e1883dcdb278cb857198aeed8cfe5e",
+    "drafts/interactive-tour/shots/loto-all-feeds-and-motor-1440-dark.jpg": "2eede9c9c3727276374244056f29379605229dc64cf1bdd8f135196e76445ae8",
+    "drafts/interactive-tour/shots/loto-mockup-1440-dark.jpg": "cc16f6fb73ba2c899b121eda4baca6f9f4b7e288da420ea25c3a4a46b0c0a1b2",
+    "drafts/interactive-tour/shots/loto-mockup-1440-light.jpg": "cbef30f90ec26f19aba4451781b8a8b7c0c5177140299139db7850c3b28d7bbc",
+    "drafts/interactive-tour/shots/loto-mockup-390-dark.jpg": "0e6abfbc2abc22bf2eda08b30cc15e398eaa237ad98f111dd75b628cedaaceac",
+    "drafts/interactive-tour/shots/loto-mockup-390-light.jpg": "adb01ab2e26e25adb52cc679ec11aeca2781a74306063873cd17b20932afa2f8",
+    "drafts/interactive-tour/shots/overview-1440-dark.jpg": "2ad5a896965f1ff3ee73e3fb9bff3cb9ac1a14ef252affbd4462ff3020fb3150",
+    "drafts/interactive-tour/shots/overview-1440-light.jpg": "32104d1aa5b1798a430925e9b6ccf5134748fafb592e9978c0fe9edb14137f63",
+    "drafts/interactive-tour/shots/overview-390-dark.jpg": "5828ffc125fe0359387edfd5490db060ab3c4e8ca4708088081980bbf418eb30",
+    "drafts/interactive-tour/shots/overview-390-light.jpg": "11abc3fcf67fcc07ec5c5e109171f91927a8bc9d60eb8c9ad0bd7009f11384ec",
+    "drafts/interactive-tour/shots/reactor-1440-dark.jpg": "cb88afbcf52527b1cb33fe3a494566917ad0dcd55e7669bc73265412dec0b625",
+    "drafts/interactive-tour/shots/reactor-1440-light.jpg": "6c3e012e3febf7ad18cce4a8f21bf6d4dac52b127a9a73be86116e2a21708227",
+    "drafts/interactive-tour/shots/reactor-390-dark.jpg": "1306a6a0ffbcbd38aefa0baeb4064c28d91b761c4c7ab5eb6f8ca4e5571a23be",
+    "drafts/interactive-tour/shots/reactor-390-light.jpg": "e538a1531ec465222e702b33010ee43d5f19d4c894fb21f981b88443c623e056",
+    "drafts/interactive-tour/shots/separator-1440-dark.jpg": "9750c7ae4a78d61acd776632fcaf32cf7c0a674e629c7a34c4c2da31d7486ac2",
+    "drafts/interactive-tour/shots/separator-1440-light.jpg": "27489c50d273c7ab0fff096ce548fb93c3da46c34b90b086d97e4312755debad",
+    "drafts/interactive-tour/shots/separator-390-dark.jpg": "e096a975c4a7382ab455b38b2f10a6203ac7ef10a1b79bb20739df8ff18ef5d6",
+    "drafts/interactive-tour/shots/separator-390-light.jpg": "39f9d5b448c2e76fa08e70050c75dc124ff21abfdd8682ea03ce6ecfb67f55bd"
    }
   },
   "te.mimic": {
@@ -564,7 +593,7 @@
    "inputs": {
     "data/te_pid_layout.json": "842067f130c77cf15731d4787b406584fc04f99482fce7f81f8446e04124e993",
     "data/te_process_model.json": "f8fb1ef85b27fe10b06b0f88582649fb96080ad57eb10aeb300cf9918bdc18ae",
-    "scripts/draw_pid_from_model.py": "7c9f817e0650cc0944212937a0e2e2da353c8783e7c336834577472ba08de008"
+    "scripts/draw_pid_from_model.py": "6b2575236028dd470a6c8047189d7d0a80712fabce40a4c2d8800dfa99e4d1f8"
    },
    "outputs": {
     "data/sheet_registers/te_generated.csv": "61816a0cc39a56e7dbbd998909aceb7ea1173a1492b4c6029d92d65259170e48",
@@ -578,7 +607,7 @@
     "data/te_pid/103.png": "0d3564b813243824103b5d05ea6b9086c971882aecd11d57c4da3a51d3c79c45",
     "data/te_pid/103.svg": "5ffa9dfc1c542509f23b5d8a31f87327ef8f2d42355136d63001875eb75fc13d",
     "data/te_pid/key.json": "7469921cacda3adbfce3e53424a4b767d78fedfdc459d45abd6a578967efb97e",
-    "data/te_pid/manifest.json": "ca789b4007d7bd599b884170c5832bfddcf757b3a08b41def829a4b543379678"
+    "data/te_pid/manifest.json": "4d42fb90e922a82c040f290b9325669f8aa9e9efd41a8ca64f4d2b96d3141728"
    }
   },
   "te.pid_diff": {
