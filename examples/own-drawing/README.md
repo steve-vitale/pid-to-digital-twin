@@ -29,6 +29,15 @@ python -S scripts/import_site_drawing.py --manifest examples/own-drawing/manifes
 | `pi/` | PI AF staging sheets and the steps a PI site would still have to run |
 | `READ_ME.txt` | What the bundle has not established |
 
+To turn the bundle into the one-page report a client reads first (the drawing with every extracted item boxed,
+what to check first and why, the hierarchy, next steps and limits):
+
+```sh
+python scripts/deliverable_report.py my-bundle
+```
+
+[`deliverable/REPORT.html`](deliverable/REPORT.html) is that report for this example.
+
 The `tier` column in `review_queue.csv` is empty on purpose. The risk tiers in the main results come from a model
 trained on OPEN100; it isn't applied to a drawing it wasn't trained on.
 
@@ -41,8 +50,10 @@ whether you're allowed to send it to a hosted model at all.
 
 Pick one route. Both write a file `import_site_drawing.py` accepts.
 
-**A. The method behind this repository's results** (tiles, then the code line tracer). Put the PNG in a folder of
-its own, named for the sheet (say `mysheets/0.png`), and point the scripts at it:
+**A. The method behind this repository's results** (tiles, then the code line tracer). Install
+`requirements.txt` first (both commands need it: tiling uses Pillow, tracing uses OpenCV). Put the PNG in a folder of
+its own and point the scripts at it. `--drawings` is the PNG's file name without `.png`, so `mysheets/0.png` is
+`--drawings 0`; rename yours or change both commands.
 
 ```sh
 PID_SHEETS_DIR=mysheets python scripts/run_extraction.py --tool codex --drawings 0 --prompt extraction/prompt_v2.md --tiles 2x2 --overlap 0.15 --label mine-tiles
@@ -50,7 +61,13 @@ PID_SHEETS_DIR=mysheets python scripts/trace_connections.py --src-label mine-til
 ```
 
 The result is `runs/mine-trace/codex/0.json` (a run record). The first command sends the image to a hosted model
-through its CLI (`--tool claude` and `--tool gemini` also exist); the second runs locally and needs `requirements.txt`.
+through its CLI (`--tool claude` and `--tool gemini` also exist; `codex` and `claude` run on a subscription, so the
+record shows token counts per tile but no cost); the second runs locally in about two seconds.
+
+**Measured:** an agent following this route on OPEN100 sheet 8, a drawing it was handed as its own, went from PNG
+to review bundle in 88 seconds of commands (extraction 36 s, tracing 4 s, intake under 1 s) plus about half a
+minute of reading. Scored afterwards against that sheet's answer key, it matched the published mean for that sheet
+(review load 11.0 per 100 against 10.99; journal entry 63). Reviewing the bundle is the part nobody has timed.
 The tracer's settings were tuned on six OPEN100 sheets, so expect it to do worse on faded scans and very different
 drafting styles ([results](../../README.md#results-held-out-drawings-and-how-they-were-used)).
 
@@ -64,8 +81,13 @@ Or write the extraction yourself, by any means, in the contract at the top of `e
 
 ## 3. The draft model
 
-Copy `manifest.json`, change `drawing_id`, `revision`, `image`, `extraction`, `extraction_format` (`run-record` for
-route A, `prediction` for your own file) and `producer`, then run the two commands from step 0 on it.
+Copy `manifest.json` next to your PNG (say `mysheets/manifest.json`). Paths in it are relative to the manifest
+itself, so for route A: `"image": "0.png"`, `"extraction": "../runs/mine-trace/codex/0.json"`,
+`"extraction_format": "run-record"` (`"prediction"` for a file you wrote yourself). Set `drawing_id` and `revision`
+to your drawing's, and `producer` to how the extraction was made (`model` is the run record's `model` field). Then
+run the two commands from step 0 with `--manifest mysheets/manifest.json` and a new `--out` folder (it must not
+exist yet, so don't reuse `my-bundle` from the example). The bundle always calls the sheet `0` (`svg/sheet_0.svg`,
+`source/0.png`); your drawing number lives in the manifest and in `intake_manifest.json`.
 
 ## 4. Review, then map to real signals
 
@@ -90,4 +112,6 @@ extracted twin onto it.
 - **Doesn't:** the accuracy numbers (measured on public drawings, not yours), the tracer settings and risk tiers
   (tuned on OPEN100), and everything that needs process data: values, normal bands, alarms, flow direction.
 - **To measure accuracy on your own drawings** you need answer keys for a few sheets in the PID2Graph GraphML format,
-  labelled by hand, and then `score_pid2graph.py`. That's real work, and it's the only way to know.
+  labelled by hand. Then `python scripts/score_pid2graph.py <sheet>.graphml runs/mine-trace/codex/0.json --png
+  <sheet>.png` scores one run; [examples/vendor-evaluation](../vendor-evaluation/README.md) scores several runs (or a
+  vendor's output) with the controls beside them. That's real work, and it's the only way to know.

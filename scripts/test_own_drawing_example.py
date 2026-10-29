@@ -60,6 +60,20 @@ class WorkedExample(unittest.TestCase):
         with open(self.out / "review_queue.csv", encoding="utf-8-sig", newline="") as f:
             self.assertEqual({r["tier"] for r in csv.DictReader(f)}, {""})
 
+    def test_the_client_report_builds_from_the_bundle_and_quotes_its_counts(self):
+        out = Path(self.tmp.name) / "REPORT.html"
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "deliverable_report.py"), str(self.out),
+                            "--out", str(out)], capture_output=True, text=True, timeout=300)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        page = out.read_text(encoding="utf-8")
+        summary = json.loads(self.build.stdout)["summary"]
+        self.assertIn(f"<b>{summary['instruments']:,}</b><span>instruments", page)
+        self.assertIn(f"<b>{summary['streams_extracted']:,}</b><span>links between items", page)
+        self.assertIn("Draft, unverified.", page)
+        self.assertIn("2x2 tiles", page)  # the producer is named, not "not stated"
+        self.assertEqual(page.count("<rect x="), sum(summary[k] for k in ("equipment", "instruments", "line_items",
+                                                                          "offpage_connectors")))
+
     def test_the_extraction_is_the_recorded_run_of_this_sheet(self):
         record = json.loads((EXAMPLE / "extraction_sheet0.json").read_text(encoding="utf-8"))
         self.assertEqual((record["tool"], record["drawing"], record["label"]), ("codex", "0", "r2-tiles-trace"))

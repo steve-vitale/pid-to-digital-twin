@@ -21,6 +21,7 @@ SOURCE_TESTS = (
     "scripts/test_scorer_controls.py",
     "scripts/test_pid2graph_synthetic_adapter.py",
     "scripts/test_dexpi_adapter.py",
+    "scripts/test_dexpi_to_twin.py",
     "scripts/test_score_tags.py",
     "scripts/test_replicate_stats.py",
     "scripts/test_review_kit.py",
@@ -38,9 +39,14 @@ SOURCE_TESTS = (
     "scripts/test_bayer_rt.py",
     "scripts/test_check_claims.py",
     "scripts/test_own_drawing_example.py",
+    "scripts/test_loop_audit.py",
+    "scripts/test_evaluate_vendor.py",
+    "scripts/test_generate_any_model.py",
+    "scripts/test_script_index.py",
 )
 # These tests need cached data or third-party imports, even though none needs a gateway.
 FULL_ONLY_TESTS = (
+    "scripts/test_csv_tools.py",
     "scripts/test_te_channels.py",
     "scripts/test_along_line.py",
     "scripts/test_trace_connections_v2.py",
@@ -63,7 +69,8 @@ SOURCE_FILES = (
     "data/te_process_model.json", "data/te_display_layout.json", "data/te_unit_purposes.json",
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json", "data/dataset_adapters/dexpi_examples.json",
-    "data/te_pid_layout.json", "data/te_pid/key.json",
+    "data/te_pid_layout.json", "data/te_pid/key.json", "data/te_pid/rev-a/key.json", "data/te_pid/rev-c/key.json",
+    "data/te_control_loops.json", "examples/loop-audit/te_loops.csv", "data/script_index.json",
     "data/bayer_rt/process_model.json", "data/bayer_rt/fig11_calibration.json", "data/bayer_rt/fig11_digitized.csv",
     "out/bayer_rt/fig11_check.md", "scripts/digitize_bayer_fig11.py",
     "data/bayer_rt/fig10_inventory.json", "data/bayer_rt/pid/key.json", "out/bayer_rt/fig10_compare.md",

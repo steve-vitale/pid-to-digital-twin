@@ -1,12 +1,16 @@
 """Process model -> SVG graphics + Ignition tag JSON + PI AF sheet + Operations review sheet.
 
 Two kinds of model are accepted:
-  - a hand-built process model (data/te_process_model.json): outputs go to out/ as before;
+  - a hand-built process model (data/te_process_model.json, or any model in the same schema, such as
+    data/bayer_rt/process_model.json): outputs go to out/ as before, or to --out DIR. A unit without a screen
+    position is placed automatically in flow order (display only, never topology); valves are the model's
+    final_elements;
   - an extracted twin (meta.model_kind == "extracted_twin", written by scripts/build_twin.py): outputs go next to
     the model file (review_queue.csv, ignition/tags.json, pi/pi_builder_af.csv, svg/sheet_<n>.svg).
 
-Stdlib only. Usage:  python scripts/generate.py [path/to/model.json]
+Stdlib only. Usage:  python scripts/generate.py [path/to/model.json] [--out DIR]
 """
+import copy
 import csv
 import hashlib
 import json
@@ -175,8 +179,74 @@ def sym_feed_header():
     return ('<rect class="eq" x="-14" y="-70" width="28" height="140" rx="4"/>'
             '<text class="ts" x="0" y="4" text-anchor="middle" transform="rotate(-90)">MIX</text>'), 70
 
+def sym_vessel():
+    return '<rect class="eq" x="-35" y="-60" width="70" height="120" rx="30"/>', 60
+
+def sym_pump():
+    return ('<circle class="eq" r="26"/>'
+            '<path class="ln" d="M0 -26 L26 -26 M-18 22 L-26 34 L26 34 L18 22"/>'), 34
+
 SYMBOLS = {"reactor": sym_reactor, "condenser": sym_condenser, "separator": sym_separator,
-           "compressor": sym_compressor, "stripper": sym_stripper, "feed_header": sym_feed_header}
+           "compressor": sym_compressor, "stripper": sym_stripper, "feed_header": sym_feed_header,
+           "pressure_vessel": sym_vessel, "vessel": sym_vessel, "tank": sym_vessel, "pump": sym_pump,
+           "heat_exchanger": sym_condenser}
+
+
+def is_final(item):
+    """A valve or other final element: TE marks them by simulator index (xmv); any other model lists them under
+    final_elements, which _mark_finals() records on a copy."""
+    return "xmv" in item or bool(item.get("_final"))
+
+
+def _mark_finals(model):
+    model = copy.deepcopy(model)
+    for fe in model.get("final_elements", []):
+        if "xmv" not in fe:
+            fe["_final"] = True
+            fe.setdefault("uom", "")  # a valve's unit is left blank, not assumed to be %
+    return model
+
+
+def _auto_layout(model):
+    """Units without a screen position get one, in flow order from the battery limit: display only."""
+    if all(isinstance(u.get("layout"), dict) for u in model.get("units", [])):
+        return model
+    model = copy.deepcopy(model)
+    ids = [u["id"] for u in model["units"]]
+    # Column = how many streams from the main feed a unit is first reached (breadth first), so a recycle loop
+    # can't push units off the page. The main feed is the model's first stream from the battery limit; utility
+    # and fill streams don't start new columns. Units nothing reaches go in the first column.
+    feeds = [s["to"] for s in model["streams"] if s.get("from") == "BL" and s.get("to") in ids][:1]
+    rank, frontier = {}, feeds
+    depth = 0
+    while frontier:
+        nxt = []
+        for uid in frontier:
+            if uid not in rank:
+                rank[uid] = depth
+                nxt += [s["to"] for s in model["streams"] if s.get("from") == uid and s.get("to") in ids]
+        frontier, depth = nxt, depth + 1
+    rank = {i: rank.get(i, 0) for i in ids}
+    seen = {}
+    for u in model["units"]:
+        if not isinstance(u.get("layout"), dict):
+            r = rank[u["id"]]
+            k = seen.setdefault(r, 0)
+            seen[r] += 1
+            u["layout"] = {"x": 160 + 420 * r, "y": 230 + 260 * k, "auto": True}
+    return model
+
+
+def _model_id(model):
+    return model["meta"].get("model_id", "te-process")
+
+
+def _pi_root(model):
+    return "TE Plant" if _model_id(model) == "te-process" else _model_id(model)
+
+
+def _point_prefix(model):
+    return "TE" if _model_id(model) == "te-process" else _model_id(model)
 
 
 def bubble(item, x, y):
@@ -185,7 +255,7 @@ def bubble(item, x, y):
     attrs = (f'id={quoteattr(item["tag"])} data-tag={quoteattr(item["tag"])} data-unit={quoteattr(item["unit"])} '
              f'data-uom={quoteattr(item["uom"])}')
     title = f'<title>{escape(item["tag"])}: {escape(item["description"])}</title>'
-    if "xmv" in item:  # final element: bowtie valve + actuator + tag label
+    if is_final(item):  # final element: bowtie valve + actuator + tag label
         body = ('<path class="inst" d="M-14 -8 L14 8 L14 -8 L-14 8 Z"/>'
                 '<line class="inst" x1="0" y1="0" x2="0" y2="-16"/>'
                 '<path class="inst" d="M-9 -16 A9 9 0 0 1 9 -16 Z"/>'
@@ -250,8 +320,25 @@ GRID_OVERRIDES = {"U-100": (110, 445, 3), "K-101": (430, 70, 6)}
 def overview_svg(model):
     W, H = 1250, 760
     pipes, labels = [], []
+    auto = any(u["layout"].get("auto") for u in model["units"])
+    if auto:  # fit the canvas to the placed units
+        W = max(W, max(u["layout"]["x"] for u in model["units"]) + 260)
+        H = max(H, max(u["layout"]["y"] for u in model["units"]) + 320)
+    pos = {u["id"]: (u["layout"]["x"], u["layout"]["y"]) for u in model["units"]}
+    stubs = {}
     for s in model["streams"]:
-        pts = ROUTES.get(s["id"])
+        pts = None if auto else ROUTES.get(s["id"])
+        if auto:  # a straight logical link between auto-placed units, not a pipe route; boundary stubs fan out
+            a, b = pos.get(s.get("from")), pos.get(s.get("to"))
+            if a is None and b is not None:
+                k = stubs[s["to"]] = stubs.get(s["to"], -1) + 1
+                b = (b[0], b[1] + 30 * k)
+                a = (b[0] - 120, b[1])
+            if b is None and a is not None:
+                k = stubs[s["from"]] = stubs.get(s["from"], -1) + 1
+                a = (a[0], a[1] + 30 * k)
+                b = (a[0] + 120, a[1] + 40 * k)
+            pts = [a, b] if a and b else None
         if not pts:
             continue
         d = " ".join(f"{x},{y}" for x, y in pts)
@@ -265,13 +352,16 @@ def overview_svg(model):
         cx = u["layout"]["x"]
         grid_top = u["layout"]["y"] + half_h + (70 if u["type"] == "separator" else 45)
         per_row = 5
-        if u["id"] in GRID_OVERRIDES:
+        if u["id"] in GRID_OVERRIDES and not auto:
             cx, grid_top, per_row = GRID_OVERRIDES[u["id"]]
+        if auto:  # beside the unit, clear of the links drawn through its centre
+            cx, grid_top, per_row = u["layout"]["x"] + 165, u["layout"]["y"] - 120, 3
         units.append(g + instrument_grid(items_for(model, u["id"]), cx, grid_top, per_row))
     title = f'{model["meta"]["title"]}: overview (generated)'
     head = f'<text class="t" x="10" y="20">{escape(title)}</text>'
     foot = (f'<text class="ts" x="10" y="{H - 10}">Source: {escape(model["meta"]["source_document"][:110])}… '
-            f'Tags assigned by project; see model meta.</text>')
+            f'Tags assigned by project; see model meta.'
+            f'{" Positions placed in flow order; links are logical, not pipe routes." if auto else ""}</text>')
     return svg_doc(W, H, head + "".join(pipes) + "".join(labels) + "".join(units) + foot, title)
 
 
@@ -305,13 +395,14 @@ def ignition_tags(model):
         members = []
         for it in items_for(model, u["id"]):
             idx = it.get("xmeas", it.get("xmv"))
+            ref = f'{"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None else it.get("source", "model item")
             members.append({
                 "name": member_name(it["description"]),
                 "tagType": "AtomicTag",
                 "valueSource": "opc",
                 "dataType": "Float8",
                 "engUnit": it["uom"],
-                "documentation": f'{it["tag"]} | {"XMV" if "xmv" in it else "XMEAS"} {idx} | {it["description"]}'
+                "documentation": f'{it["tag"]} | {ref} | {it["description"]}'
                                  + seed_confidence(it),
                 "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
                 "opcItemPath": {"bindType": "parameter", "binding": "{BasePath}." + it["tag"]},
@@ -340,7 +431,7 @@ def pi_af_rows(model):
     if any("pi_point" in x for group in ("units", "instruments", "final_elements", "streams")
            for x in model.get(group, [])):
         raise ValueError("Reviewed pi_point mappings are supported only for extracted_twin models")
-    root = "TE Plant"
+    root, prefix = _pi_root(model), _point_prefix(model)
     # Element templates first, so an empty AF database gets them before any element refers to one.
     templates = {}
     for u in model["units"]:
@@ -354,7 +445,7 @@ def pi_af_rows(model):
         for it in items_for(model, u["id"]):
             rows.append(["x", f"{root}\\{u['id']}", member_name(it["description"]), "Attribute",
                          f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", af_uom(it["uom"]), "PI Point",
-                         f'\\\\%Server%\\TE.{it["tag"]}.PV'])
+                         f'\\\\%Server%\\{prefix}.{it["tag"]}.PV'])
     return rows
 
 
@@ -384,11 +475,12 @@ def review_rows(model):
     rows = []
     for u in model["units"]:
         rows.append([u["id"], "equipment", u["name"], "", "", u.get("source", ""), "seed",
-                     u["verification"]["status"]] + ops_cols(u))
+                     u.get("verification", {}).get("status", "unverified")] + ops_cols(u))
     for it in model["instruments"] + model["final_elements"]:
-        kind = "control valve / output" if "xmv" in it else "measurement"
+        kind = "control valve / output" if is_final(it) else "measurement"
+        idx = it.get("xmeas", it.get("xmv"))
         rows.append([it["tag"], kind, it["description"], unit_names[it["unit"]], it["uom"],
-                     f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {it.get("xmeas", it.get("xmv"))}',
+                     f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None else it.get("source", ""),
                      "seed", it.get("verification", {}).get("status", "unverified")] + ops_cols(it))
     return rows
 
@@ -971,7 +1063,8 @@ def export_seed(model, out_dir):
     def render():
         bundle = {"svg/overview.svg": overview_svg(model)}
         bundle.update({f"svg/{portable_filename(u['id'])}.svg": unit_svg(model, u) for u in model["units"]})
-        bundle["ignition/te_tags.json"] = json.dumps(ignition_tags(model), indent=2)
+        tags_name = "te_tags.json" if _model_id(model) == "te-process" else "tags.json"
+        bundle[f"ignition/{tags_name}"] = json.dumps(ignition_tags(model), indent=2)
         bundle.update(pi_bundle(pi_af_rows(model)))
         bundle["ops_review_sheet.csv"] = _csv_text(REVIEW_COLS, review_rows(model))
         return bundle
@@ -988,14 +1081,25 @@ def write_csv(path, header, rows):
 
 
 def main():
-    model_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_MODEL
+    args = sys.argv[1:]
+    out_dir = OUT
+    if "--out" in args:
+        i = args.index("--out")
+        if i + 1 >= len(args):
+            print("--out needs a directory", file=sys.stderr)
+            return 2
+        out_dir = Path(args[i + 1])
+        del args[i:i + 2]
+    model_path = Path(args[0]) if args else DEFAULT_MODEL
     try:
         model = json.loads(model_path.read_text(encoding="utf-8"))
         if isinstance(model, dict) and isinstance(model.get("meta"), dict) and model["meta"].get("model_kind") == "extracted_twin":
             written = export_twin(model, model_path.parent)
             print(f"twin: wrote {', '.join(written)} next to {model_path}")
             return 0
-        export_seed(model, OUT)
+        if isinstance(model, dict) and isinstance(model.get("units"), list) and isinstance(model.get("meta"), dict):
+            model = _auto_layout(_mark_finals(model))
+        export_seed(model, out_dir)
     except (ModelValidationError, OSError, ValueError) as exc:
         print(f"Generation failed for {model_path}: {exc}", file=sys.stderr)
         return 1
@@ -1003,9 +1107,11 @@ def main():
     n_inst, n_fe = len(model["instruments"]), len(model["final_elements"])
     print(f"model: {len(model['units'])} units, {len(model['streams'])} streams, "
           f"{n_inst} instruments, {n_fe} final elements")
-    print(f"wrote: out/svg ({len(model['units']) + 1} files), out/ignition/te_tags.json, "
-          f"out/pi/ (PI Builder sheet v2, custom_uoms.csv, attribute_descriptions.csv, IMPORT_STEPS.txt; "
-          f"not import-tested), out/ops_review_sheet.csv")
+    o = "out" if out_dir == OUT else str(out_dir)
+    tags_name = "te_tags.json" if _model_id(model) == "te-process" else "tags.json"
+    print(f"wrote: {o}/svg ({len(model['units']) + 1} files), {o}/ignition/{tags_name}, "
+          f"{o}/pi/ (PI Builder sheet v2, custom_uoms.csv, attribute_descriptions.csv, IMPORT_STEPS.txt; "
+          f"not import-tested), {o}/ops_review_sheet.csv")
     print("structural validation: OK (not engineering or operations approval)")
     return 0
 

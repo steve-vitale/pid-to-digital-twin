@@ -1,0 +1,21 @@
+# Tennessee Eastman running control loops (the 19 with runs=true in data/te_control_loops.json, read from temain_mod.f by scripts/te_control_loops.py). A cascade output names the inner loop controller. Lines starting with # are skipped.
+controller,measurement,output,description
+FIC-102,FT-102,FV-102,C1: D feed flow
+FIC-103,FT-103,FV-103,C2: E feed flow
+FIC-101,FT-101,FV-101,C3: A feed flow
+FIC-104,FT-104,FV-104,C4: A and C feed flow
+FIC-105,FT-105,FV-105,C5: Recycle flow
+FIC-110,FT-110,FV-110,C6: Purge rate
+LIC-112,LT-112,LV-112,C7: Separator level
+LIC-115,LT-115,LV-115,C8: Stripper level
+FIC-119,FT-119,FV-119,C9: Stripper steam flow
+TIC-121,TT-121,TV-121,C10: Reactor cooling water outlet temperature
+FIC-117,FT-117,FV-117,C11: Stripper underflow (product)
+AIC-123A,AT-123,FIC-101,C13: Reactor feed analyzer (components A-F); component A
+AIC-123D,AT-123,FIC-102,C14: Reactor feed analyzer (components A-F); component D
+AIC-123E,AT-123,FIC-103,C15: Reactor feed analyzer (components A-F); component E
+TIC-118,TT-118,FIC-119,C16: Stripper temperature
+LIC-108,LT-108,FIC-104,C17: Reactor level
+TIC-109,TT-109,TIC-121,C18: Reactor temperature
+AIC-129,AT-129,FIC-110,C19: Purge gas analyzer (components A-H); component B
+AIC-137,AT-137,TIC-118,C20: Product analyzer (components D-H); component E

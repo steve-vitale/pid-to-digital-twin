@@ -3219,3 +3219,61 @@ days to weeks to a usable Ignition model with real bindings, most of it the plan
 
 **Lesson:** the author can't read their own repository cold. An agent that can is cheap, and it found in five
 minutes what a stranger would have found by giving up.
+
+---
+
+## 63. Prove every way in, and time one
+
+**What:** 2026-10-29. The README said the project starts "wherever you are", and only the drawing-image route had
+a runnable path. Each other way in the code implied was built out or proven, with a runnable example under
+`examples/`, a test, and a row in the README's "Start wherever you are" table. A fresh agent then timed the
+drawing route on a sheet it was handed as its own, and a client-facing report was added as the example deliverable.
+
+**What each one showed:**
+- **Timing (one model call, approved):** PNG to review bundle in 88 seconds of commands (extraction 36 s, tracing
+  4 s, intake under 1 s) on OPEN100 sheet 8, everything first time. Scored afterwards against the sheet's key it
+  matched the published mean for that sheet (review load 11.0 against 10.99). The earlier estimate of half a day to
+  a day was mine and was wrong: it priced in a stranger learning the repository, not the work. Review time is still
+  unmeasured.
+- **DEXPI file to twin, no model at all** (`dexpi_to_twin.py`, `examples/from-dexpi`): lossless against the key on
+  three public DEXPI sheets (zero corrections, F1 1.0). What it loses is listed: six-class collapse, tees, direction,
+  attributes, hierarchy. A drawn label isn't a governed tag: one sheet labels five manual valves with pipe-spec codes,
+  and the bundle flags them as duplicates.
+- **Written description to exports** (`examples/from-description`): `generate.py` only accepted Tennessee Eastman's
+  symbols and hand-placed positions, and treated a valve as a valve only if it had a simulator index. It now takes
+  any model in the same schema: more symbol types, valves from `final_elements`, units placed automatically in flow
+  order (labelled as such), `--out`. The TE outputs are byte-identical. The first automatic layout put every unit
+  off the right edge (a recycle loop inflated the column count) and the second stacked them in one column (utility
+  feeds counted as starting points); both were caught by looking at the render, not by a test. The drawing itself
+  still needs a hand-written drafting layout, and the guide says so.
+- **Loop list to loop audit** (`loop_audit.py`): any `controller,measurement,output` CSV against a drawing key gives
+  0 of 19 on revision A and 19 of 19 on revision D, as the original audit does. On revision C it is more precise:
+  the controllers were drawn but read indicators, not the listed transmitters, so it says "partly drawn" instead of
+  "not drawn".
+- **Historian CSV** (`csv_normal_bands.py`, `csv_replay_server.py`): the bands from a CSV export of the TE runs
+  match the committed bands within rounding and give the same fault-6 result; a blank or "Bad" cell is served as
+  Bad quality, never zero.
+- **Vendor evaluation** (`evaluate_vendor.py`): any tool's output scored with a perfect, a deliberately wrong and an
+  empty answer beside it, refusing to report if the wrong answer scores above F1 0.10. On the round-5 runs it
+  reproduces the published 20.1 exactly.
+
+**Bugs the timing run found:** the scorer's command line scored a run record as zero instead of reading its
+`prediction` (it now unwraps it, or refuses a file with no symbols); the runbook didn't say where the manifest goes,
+that `--drawings` is the file name, that both commands need the requirements, or that the example's output folder
+can't be reused. All fixed.
+
+**Labels:** `data/script_index.json` gives every script a kind (tool, check, support, research record) and each
+tool a guide; `docs/SCRIPTS.md` is generated from it and the scripts' own docstrings, and a test fails if a script
+is missing, gone, or a tool has no guide: 20 tools, 6 checks, 8 support modules, 76 research scripts.
+
+**The deliverable:** `deliverable_report.py` turns a bundle into the page a client reads first: the drawing with
+every extracted item boxed, the 46 of 445 rows to check first and why, the hierarchy, next steps and limits
+(`examples/own-drawing/deliverable/REPORT.html`).
+
+**One near miss:** re-running the recorded round-trip scoring to show the scorer change didn't move it emptied the
+revision A tables, because those run records aren't in this checkout. Restored from git; the stages whose runs
+aren't local were recorded on the strength of the diff (the scoring function is unchanged; only the command line
+moved), and that is what this sentence says.
+
+**Lesson:** "it supports X" means nothing until X runs from a clean clone. Every one of the six ways in needed new
+code or a fix before it ran on someone else's input, and the one I estimated, I estimated wrong.

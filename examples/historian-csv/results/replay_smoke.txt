@@ -1,0 +1,7 @@
+$ python scripts/csv_replay_server.py --csv examples/historian-csv/with_gaps.csv --port 4871 --host 127.0.0.1 --rate 2 --start 4
+client: namespace urn:pid-digital-twin:csv-replay is ns=2; reading ns=2;s=CSV/_sample, ns=2;s=CSV/_time, ns=2;s=CSV/FT-101, ns=2;s=CSV/PT-107, ns=2;s=CSV/TT-109, ns=2;s=CSV/JT-120
+read 1: _sample=4 [Good]; _time='12' [Good]; FT-101=0.24563 [Good]; PT-107=None [BadNoData]; TT-109=None [BadNoData]; JT-120=341.24 [Good]
+read 2: _sample=5 [Good]; _time='15' [Good]; FT-101=0.24759 [Good]; PT-107=2704.0 [Good]; TT-109=120.4 [Good]; JT-120=341.51 [Good]
+write to CSV/FT-101: refused (BadUserAccessDenied)
+server log: CSV replay 'with_gaps.csv' on opc.tcp://localhost:4871/csv-replay, ns=2, folder CSV, 22 tags, 20 rows (4 bad cells) at 2.0s
+server stopped (exit 1; process tree killed)

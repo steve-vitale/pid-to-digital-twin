@@ -270,7 +270,7 @@ CLAIMS = [
           lambda: revc_clean_load("codex"), [REVC], 2, te=True),
     Claim("R-revC-claude", "revision C clean read-back review load 1.38 (Claude)", ["1.26 · 1.38"], 1.38,
           lambda: revc_clean_load("claude"), [REVC], 2, te=True),
-    Claim("L-loops", "19 control loops running in the simulator code", ["19 of 19 on revision B"], 19,
+    Claim("L-loops", "19 control loops running in the simulator code", ["19 of 19 on revision D"], 19,
           running_loops, [LOOPS], te=True),
 ]
 

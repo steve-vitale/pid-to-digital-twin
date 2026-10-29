@@ -114,7 +114,7 @@
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
     "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
     "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
     "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
    },
@@ -238,7 +238,7 @@
   "open100.exports": {
    "inputs": {
     "out/twin/r2-tiles-trace/codex/plant_model.json": "741a55425faa16bd2a3acb6b9e0ac279b851300d26762c8e90c28544cecca7ea",
-    "scripts/generate.py": "47c3fe7625126c5e486de29368f6003322f3821058d624da3980bba91a97887a",
+    "scripts/generate.py": "dc7a504dc28688daa55add8e06da386849517e7fe8ea064914e825a973ad3111",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
@@ -355,7 +355,7 @@
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
     "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
     "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
    },
    "outputs": {
@@ -429,7 +429,7 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/7.graphml": "6d4fd53dc56ea0180b8ad268e4889e1e6b85cee316e68496e80e78836eda92e3",
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.graphml": "491274bfebe16e38ea8e6ba83ae57f2246e7bf6cc6d2e0ac23df4dfcde841c99",
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.graphml": "b187afadfa6382cb0c08046c78fbea8a010999ca4c6e02118f275251588dc309",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/scorecard.py": "42c66ff4757ec913904d222e413953be6eef3f86e25f84105f48f91ad0b9db81"
    },
    "outputs": {
@@ -528,7 +528,7 @@
   "te.exports": {
    "inputs": {
     "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
-    "scripts/generate.py": "47c3fe7625126c5e486de29368f6003322f3821058d624da3980bba91a97887a",
+    "scripts/generate.py": "dc7a504dc28688daa55add8e06da386849517e7fe8ea064914e825a973ad3111",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
@@ -596,39 +596,39 @@
    },
    "outputs": {
     "drafts/interactive-tour/audit/geometry.json": "4f67243575286678fbaa25e0521881c3ca7e2342b870790b7622e70176d6f5cc",
-    "drafts/interactive-tour/audit/report.json": "5fafa167e41b5a91fa962b7bbb92cee7b6b184483462be43752276e9483bbfab",
-    "drafts/interactive-tour/audit/report.md": "4e6dd2ec93e73e1dfc57a6045d25e2f1c853c30d2cd4450fc602455e4fbeed08",
+    "drafts/interactive-tour/audit/report.json": "8a40614f1affd7b7596123f396beaf60bcea4880745c712daaa849afc4268329",
+    "drafts/interactive-tour/audit/report.md": "a27430e951c7a4fc2cd410cf506da5fdfdab37107dad7a8db14be10f5aeef168",
     "drafts/interactive-tour/page/te-tour-light.html": "e4fb1fe5e1d6aeaf4206af83f363a898848f4ea77cbbd9287285fe226c574415",
     "drafts/interactive-tour/page/te-tour.html": "df4188c447b251cb5f2062974804425e3f66ff0dc7e3cd1ba4bd2089a7f43ba9",
-    "drafts/interactive-tour/shots/compressor-1440-dark.jpg": "87babf85bc66f7e90fbf19fefe24e321b127386cad606e2bfc91ddd1015d7b73",
-    "drafts/interactive-tour/shots/compressor-1440-light.jpg": "3333f0892c0e7cbc0d29a78e03f0147d03d689a4c72f3c8334a684fd0eb05fb5",
-    "drafts/interactive-tour/shots/compressor-390-dark.jpg": "60301c202899c0ffc2c49188e3b135253fc1b380bee8e5ac9a26aac74939d14e",
-    "drafts/interactive-tour/shots/compressor-390-light.jpg": "bb5015f7325ff0edb15fd0bbacad69706197d0b928a034594903465d972dc45d",
-    "drafts/interactive-tour/shots/fault6-alarm-1440-dark.jpg": "a38306e8829312febac94de1e7c1b24ff115dbb82c80dfd1cff268e6c9fe44ca",
-    "drafts/interactive-tour/shots/fault6-alarm-1440-light.jpg": "87d0ec8718870a7a96ea63c817f439e86ca67ba196e7080b5c9159ce4ef89df0",
-    "drafts/interactive-tour/shots/fault6-alarm-390-dark.jpg": "0ab7ecf7f62e6668c5f9d3f01d71b47389f91d6aa3daec006cf109bd35e56246",
-    "drafts/interactive-tour/shots/fault6-alarm-390-light.jpg": "3f5826e4501cda2adeca0bee1021958e942bb9ab571480b08e2f6bf66384cfb6",
-    "drafts/interactive-tour/shots/header-1440-dark.jpg": "80e6d7bdb2c62c9ae298365573166badd21d73d6520798f00717724c8fa6a42b",
-    "drafts/interactive-tour/shots/header-1440-light.jpg": "c4ce7928614cc17462571b80d49d420e4a231ce120dab94df0928eae41b77a45",
-    "drafts/interactive-tour/shots/header-390-dark.jpg": "424c59824b4b049126fd9f8a5f63b90c33e52abf0d9e9453b7567680e828b8b0",
-    "drafts/interactive-tour/shots/header-390-light.jpg": "72037986499f95e5429c436c802d249bc29b4fc758f8184f76ba88d4abd4c336",
-    "drafts/interactive-tour/shots/loto-all-feeds-and-motor-1440-dark.jpg": "0148a3b30b88e77af77f69f68a0afe2e1397b8c7f25a21c934d1deb05a3a9a4d",
-    "drafts/interactive-tour/shots/loto-mockup-1440-dark.jpg": "39a96c3ab4c7cc3b45ad264e32df07aad6e69935512f55cac8c36064c33725a1",
-    "drafts/interactive-tour/shots/loto-mockup-1440-light.jpg": "d411223465c17d39d20d4273cc9190accc2661851ab886e75b1a313eae08a932",
-    "drafts/interactive-tour/shots/loto-mockup-390-dark.jpg": "f9e374047481db4700348733a96f9e708d59e81d5aa2fa1a8a57f820a783bd2f",
-    "drafts/interactive-tour/shots/loto-mockup-390-light.jpg": "7120b0f7a3386655fcefde82d30e2b801417a81870fef1f9e5577367edd8edd6",
-    "drafts/interactive-tour/shots/overview-1440-dark.jpg": "5248ad9f914ec8c02a768a7d4852562bd8e8c5b48d2af558d4c81b2b45238c02",
-    "drafts/interactive-tour/shots/overview-1440-light.jpg": "0ff261bd833e03d74c71a32979e0a6ea92f4698a2c6de406905c8fa3d5ed54eb",
-    "drafts/interactive-tour/shots/overview-390-dark.jpg": "a81e329430b56821c1861f53c5046f94565e384001ec8c09294f49eff9acf29b",
-    "drafts/interactive-tour/shots/overview-390-light.jpg": "4be60cbf3c36f60091982d363399b81ebbd768a0f03607c101b8c1b51bc651ba",
-    "drafts/interactive-tour/shots/reactor-1440-dark.jpg": "746bb91fcd81b0a134e67b02ab6142c8db9d73af878cf8d7f74a80d91ea9903f",
-    "drafts/interactive-tour/shots/reactor-1440-light.jpg": "088797aaaaf4573f6a7a44a2deda9011a174a3ed2f78931a4b3f17a951ef2aa8",
-    "drafts/interactive-tour/shots/reactor-390-dark.jpg": "976da8975fb963e11ca0325c3fad6f35e866886cd8e6bbcd547cdfb927c3f9ef",
-    "drafts/interactive-tour/shots/reactor-390-light.jpg": "10f85f585d2983670c9e9321fb9141dd21ff47ff15e5119472ffaa87e84fea0c",
-    "drafts/interactive-tour/shots/separator-1440-dark.jpg": "e333ee50c6c246f1c243773f58d3c0c6935e8a3d6e204bbff0f7ea729e5f7bb8",
-    "drafts/interactive-tour/shots/separator-1440-light.jpg": "d3d87a25109eb0cde5c14a29645a3eacaa133ca5fd59dd3515dca74235d402be",
-    "drafts/interactive-tour/shots/separator-390-dark.jpg": "00ec618a30aee8137768b4afa6f346c165a711b4afafd9209e9d83eced81aa86",
-    "drafts/interactive-tour/shots/separator-390-light.jpg": "a555141a8271e616973f2a6fb0cdd10917ac2112aba386eb62cb2074723ce482"
+    "drafts/interactive-tour/shots/compressor-1440-dark.jpg": "86435ba2eb20170f0ab3ad3aa38e1c9ebef3f194e45d7fd23e8304702d894781",
+    "drafts/interactive-tour/shots/compressor-1440-light.jpg": "c3176561db595b2923ce80264dfad23193ef8402de431ade2364d358dab0bf6f",
+    "drafts/interactive-tour/shots/compressor-390-dark.jpg": "357a41aac13df794abea4bc85c3d840f98431467327bfa958a0419eaa31f0104",
+    "drafts/interactive-tour/shots/compressor-390-light.jpg": "3590cac6f143726082fb20bb497de33aaa88a4900d279178f996bfa4dddbdd51",
+    "drafts/interactive-tour/shots/fault6-alarm-1440-dark.jpg": "0065b99e6ecdb018b229a93d91c06833f7f042e1c07742bd6601f504128e5f67",
+    "drafts/interactive-tour/shots/fault6-alarm-1440-light.jpg": "126c792cc64c80d5037e794aad2af8bc1e8c4c117f10ce48d78a7d63fa66aea5",
+    "drafts/interactive-tour/shots/fault6-alarm-390-dark.jpg": "f34362dbd21d1f654e1d94c985bda5fb360313b4e31cadffb5a31e97adc88cfd",
+    "drafts/interactive-tour/shots/fault6-alarm-390-light.jpg": "b6e997b348032b18d69cbe20997e27f73947dbc5d68c2af5f9162bd381e82e45",
+    "drafts/interactive-tour/shots/header-1440-dark.jpg": "1133482ba62165771b8f937176cf06019dcc2b30b997685fd9e56f13678a0192",
+    "drafts/interactive-tour/shots/header-1440-light.jpg": "e7ecea86324035794681758138fe44e3add7e6325560f524d4ed4736b34818a7",
+    "drafts/interactive-tour/shots/header-390-dark.jpg": "f45475f138a06e8552cf7b2a6b6e056c5e8e428014f59b74ad149010e8a1a9a9",
+    "drafts/interactive-tour/shots/header-390-light.jpg": "1b27965ecc9ed0a85daa67bef14882a0b06fcadac950c8241b9a3196f127dd96",
+    "drafts/interactive-tour/shots/loto-all-feeds-and-motor-1440-dark.jpg": "13657aafc2cdd7dd9cf510c5033aae99e92456f05e5d5006d50a6ae8ec5097fc",
+    "drafts/interactive-tour/shots/loto-mockup-1440-dark.jpg": "8c1f8c244ee85fb817b63cc629ba5e2f41f71a4ac188f455641cd76bcec575c8",
+    "drafts/interactive-tour/shots/loto-mockup-1440-light.jpg": "222857414ef1ab55b0397e5053ff5a5957e49f2748b505bbd0731f3340195db5",
+    "drafts/interactive-tour/shots/loto-mockup-390-dark.jpg": "c15748214ca5080fbad86b433552a30971d212fd69bc96ec1e15fd3a03a7c3d1",
+    "drafts/interactive-tour/shots/loto-mockup-390-light.jpg": "a4fae6590937dc3b4f2feebaecd2bf024e762f12c79ea1bc4cd4e7364cc9fb13",
+    "drafts/interactive-tour/shots/overview-1440-dark.jpg": "5caa06c58e26bafbe05d08015010e192324dfdfff6481d3a15f211412e67eef8",
+    "drafts/interactive-tour/shots/overview-1440-light.jpg": "5a448ca4cb899ffc8eacbc9a83b965c2f9c805bac7bba517a7a6bf51598c5c6f",
+    "drafts/interactive-tour/shots/overview-390-dark.jpg": "ef098de40fc74d2118a9fad2f052229433e7ad56ff268f90db41509089631255",
+    "drafts/interactive-tour/shots/overview-390-light.jpg": "9bdc17bfa19833051079005c37ec147af32744303fc2a5c1a6ef3b2fb4ef42ce",
+    "drafts/interactive-tour/shots/reactor-1440-dark.jpg": "c61eb51522604f47fb2521a849de82ec52a13bbd6f3bbf585cddf15d5ea45d4d",
+    "drafts/interactive-tour/shots/reactor-1440-light.jpg": "a59cb4258da31ea89fcd9a3c9a1a9aa0c359de5f19f2d1eac86beedc20da2ecf",
+    "drafts/interactive-tour/shots/reactor-390-dark.jpg": "8bf18292d3bd571f09c7e4f28c11db75fe57b91525e620aab226656c3f6dff8a",
+    "drafts/interactive-tour/shots/reactor-390-light.jpg": "7afef7d493bc1817b2ea5d016bdfc1f6d1a70f42fcafe7e082dfb43c60460926",
+    "drafts/interactive-tour/shots/separator-1440-dark.jpg": "78c17a1b5a4503b9ec2b26b7992999729980e40ddc4489a16270f4bb7dabbc76",
+    "drafts/interactive-tour/shots/separator-1440-light.jpg": "d440652e9eac591f61b1586a6a98093abf7334088b575452e906bb8f22df4ff4",
+    "drafts/interactive-tour/shots/separator-390-dark.jpg": "a246b277c104fef9ce21f8d914043de84fb5799b568ff0301bb6471fc95c884b",
+    "drafts/interactive-tour/shots/separator-390-light.jpg": "37e623aad3295772f868d2a0662c7c113611973f2a04aa97b00165c26164ad7e"
    }
   },
   "te.mimic": {
@@ -696,7 +696,7 @@
     "out/te_pid/twin/codex-L2-r1/plant_model.json": "8afabf77af914ab9cf3598c88d100aef7bd8d8b58264d4c6637baf42cd5bcbb2",
     "out/te_pid/twin/codex-clean-r1/plant_model.json": "593dee86694b5ce6156bf4dc0fbc209b583a10899e78569212a26e5e4c77ca00",
     "out/te_pid/twin/key/plant_model.json": "df13f2a37c385983e368934af7049b9e9a4e57f7c3b03fdee3d2d25a520e8fcd",
-    "scripts/generate.py": "47c3fe7625126c5e486de29368f6003322f3821058d624da3980bba91a97887a",
+    "scripts/generate.py": "dc7a504dc28688daa55add8e06da386849517e7fe8ea064914e825a973ad3111",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "df9ad5e4c433e9fe377365413754f7b5cf026a9b84e323b095c152aa0fbe95c0"
    },
@@ -837,7 +837,7 @@
     "data/te_pid/rev-a/102.graphml": "9ef8323e4f5a9114709eec3fd7b5e0f6089c2c4ecbf9749130c352cf089bf22d",
     "data/te_pid/rev-a/103.graphml": "e44ac706b1585fe9e20cd1ac2aaa28aa7abb3716d1ab2cbc1d888989edf537ca",
     "data/te_pid/rev-a/key.json": "d2171dddf09fd5034e99bb7a543c6c89743a92deeef256518816d5d879126341",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/score_te_roundtrip.py": "1e2da75bc241255668ab6a6c71eb40fd23ef8726fad8cf3db3e7544dd9cc30c9"
    },
    "outputs": {
@@ -851,12 +851,12 @@
     "data/te_pid/rev-c/102.graphml": "86ec9008f349f4f0ceec58c97b2e479b415e5f0cf51bb50d31265052411d8779",
     "data/te_pid/rev-c/103.graphml": "90b0ee1ebb42828a48d9f92ea0f89dfe2569165ac7a08a1e2cde76d05ba63f77",
     "data/te_pid/rev-c/key.json": "7469921cacda3adbfce3e53424a4b767d78fedfdc459d45abd6a578967efb97e",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/score_te_roundtrip.py": "1e2da75bc241255668ab6a6c71eb40fd23ef8726fad8cf3db3e7544dd9cc30c9"
    },
    "outputs": {
     "out/te_pid/roundtrip_scores_revC.json": "239ddeb379968b6d3e87bfc2d323937de26f69a4b7b2a3e4915301369d341eeb",
-    "out/te_pid/roundtrip_scores_revC.md": "f76fab78c5372f849a7f693cea4935b31c77ea58893b1c24377a270074c7a147"
+    "out/te_pid/roundtrip_scores_revC.md": "2ece7b2cc9a88a55b491f5d2cd5937af8e8a43b310dfe9ea270e9ba89281ad71"
    }
   },
   "te.pid_style": {
@@ -891,7 +891,7 @@
     "data/te_pid/102.png": "6e22656a90f0318a76e6bae4f1e0e7bcc5dcea994ba5e07d01cae3e07d5113b9",
     "data/te_pid/103.graphml": "3f6c033e548d9a9d0e64b8145ba62a87529adf2f4efdb74783d68cdb73e96600",
     "data/te_pid/103.png": "1f0f842c25cb1262ccc5d8786f862c2b0a36f8b2e36691047f0c5818faa891fd",
-    "scripts/score_pid2graph.py": "5c4a8be9fc99ac0eaf855eb352e47fc04414ab10aa53bc44c451121b97602365",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/style_fidelity.py": "5e5207537b5c196e33ead24944ea86eb96dfb880d0b0d915fda5d8ea58a9b2f7"
    },
    "outputs": {
@@ -988,12 +988,12 @@
    "outputs": {
     "drafts/3d-tour/00_overview_normal.jpg": "7412ca3323d9f2bb95926db768ed04efaf8750f876dd53f384e87bc236b0928d",
     "drafts/3d-tour/01_u-100_normal.jpg": "8d323d4ba7ff7431a5d2e2abd5a59a0725c191006363d34f354e515e39afbe4c",
-    "drafts/3d-tour/02_r-101_normal.jpg": "3e779044936e7ee4c5f16f3e77a44aa2be58becb8ed7759ca07a925b7b77cb9b",
-    "drafts/3d-tour/04_v-101_normal.jpg": "a20d28574a233b3db2f67012d3e23fac62d4b6188fe45015826698cf36db5dd5",
-    "drafts/3d-tour/05_k-101_normal.jpg": "bf18c5226a178696b7a9ce4b94c477112de8bcb7b4260f8556f231f1a889b3e6",
-    "drafts/3d-tour/21_overview_fault_alarm.jpg": "d8bd352f38150b061c623678025ab67a3a71c1bcfd25dde24acf91e1a97c8749",
+    "drafts/3d-tour/02_r-101_normal.jpg": "ae44a5fc52442fb29926bc7ee253a1a59429419ce5790aa49966166a08c75bdf",
+    "drafts/3d-tour/04_v-101_normal.jpg": "7fdd647ddf700e883a1ab051c1bc71919cce53f480bf37eeb1a68be3378ac7f9",
+    "drafts/3d-tour/05_k-101_normal.jpg": "a569ae08c01b94ba0c7acb4cbca7c4c7c8e8a136e82bf88253887ba7b643fc2d",
+    "drafts/3d-tour/21_overview_fault_alarm.jpg": "87c4f73b8d3f2e0a8eeaf420bd26cfbed311f0ff9b86ad54b527b44bea4673ab",
     "drafts/3d-tour/30_flow_legend.jpg": "c4eb5c93325ad6354676c0c295ed4886a1b1ee48135b80267eb2854b16bf674c",
-    "drafts/3d-tour/40_loto_mockup.jpg": "28aa55de8ba5a425a87648ce5aad1b17b0b22a9544296de87f85f59884fb4983",
+    "drafts/3d-tour/40_loto_mockup.jpg": "717321b17d708113e572b09062dfa0e5bfac3ba30ea824da50b1f920f12010e1",
     "drafts/3d-tour/before/00_overview_normal.jpg": "13017c6b44c7c1603f0df9c564c718c93565ed78e52b0af054cc9a4fac6a356c",
     "drafts/3d-tour/before/03_e-101_normal.jpg": "f83b4608cb26ee2783e7e827a84d72828a0050c884d55e8f986d1f6e5d97c3f2",
     "drafts/3d-tour/before/label_boxes.json": "2329e7a8d9a9f8bb0464e997a4b7768aef7ea684b33420c3c58355834d13a446",

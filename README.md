@@ -167,11 +167,20 @@ flowchart LR
 
 ## Start wherever you are
 
-| Your plant has | Path | Shown here on |
+Each row has a runnable example that works offline from a clean clone (the drawing row's model call is optional:
+a recorded extraction is committed). Every output is a draft for review.
+
+| You have | What you get | Run it |
 |---|---|---|
-| **P&IDs** (scans, PDFs) | Extract them: AI reads symbols and tags, code traces lines, people review a risk-ranked queue | 12 real OPEN100 sheets (results above) |
-| **Process knowledge but no usable drawings** (instrument index, historian tags, a simulator) | Build a model, **generate** P&IDs in your house style from it (`scripts/draw_pid_from_model.py`), then extract and review them like scans | Tennessee Eastman, drawn in the OPEN100 style |
-| **Either** | One reviewed model feeds Ignition, PI AF and the [3D tour (proof of concept)](drafts/3d-tour/README.md) | Both |
+| **A P&ID image** | A draft asset model, review sheet, Ignition tags, PI AF staging and a [client report](examples/own-drawing/deliverable/REPORT.html). Measured: 88 s from PNG to bundle on a drawing the agent hadn't seen, matching published accuracy for that sheet | [examples/own-drawing](examples/own-drawing/README.md) |
+| **A DEXPI P&ID file** (the ISO 15926 exchange format) | The same bundle with no model reading at all: tags and links come straight from the file (lossless against its key on three public sheets) | [examples/from-dexpi](examples/from-dexpi/README.md) |
+| **A written description** (procedure, design basis, report) | A cited process model, then Ignition, PI and SVG exports from it, and a P&ID once someone writes a drafting layout | [examples/from-description](examples/from-description/README.md) |
+| **A DCS/PLC loop list** (controller, measurement, output) | Which control loops a drawing shows, partly shows or misses | [examples/loop-audit](examples/loop-audit/README.md) |
+| **Historian exports** (CSV) | Normal bands learned from normal running, scored against an upset, and an OPC UA replay of the CSV to test screens against | [examples/historian-csv](examples/historian-csv/README.md) |
+| **A few hand-labelled sheets** | A score for any digitization tool or vendor, always beside a perfect, a deliberately wrong and an empty answer, so a fooled scorer can't pass | [examples/vendor-evaluation](examples/vendor-evaluation/README.md) |
+
+Every script is listed with what it's for in [docs/SCRIPTS.md](docs/SCRIPTS.md); only those marked as tools are
+built for other inputs. The longer path for a real pilot is [REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
 
 A generated drawing is **not a drawing of record** until engineering walks it down and accepts it under management
 of change. How to capture your own title block and symbol library, and the governance rules:
@@ -195,7 +204,7 @@ against an OPEN100 minimum of 40. Drains and vents are still not drawn
 numbers didn't match the loops that move them: a PFD with bubbles on it. The loops are now read out of the
 simulator's closed-loop code (19 running: 11 move a valve, 8 move another loop's setpoint), checked against the
 recorded data (every controlled variable within 0.34 SD of its coded setpoint), drawn as DCS functions with dashed
-signal lines, and scored by `scripts/te_control_loops.py`: **0 of 19 loops on revision A, 19 of 19 on revision B**,
+signal lines, and scored by `scripts/te_control_loops.py`: **0 of 19 loops on revision A, 19 of 19 on revision D** (the current sheets),
 with every valve carrying its loop's number ([te_loop_audit.md](out/te_loop_audit.md), journal entries
 [50](docs/JOURNAL.md#50-find-the-control-loops-before-drawing-them-the-generated-pid-draws-none) and
 [51](docs/JOURNAL.md#51-draw-the-control-loops-and-give-each-valve-its-loops-number)). The audit grades the

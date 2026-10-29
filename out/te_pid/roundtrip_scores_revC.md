@@ -1,6 +1,6 @@
 # Round trip on the generated Tennessee Eastman sheets
 
-Sheets and keys: `data/te_pid`; runs `tec-*`.
+Sheets and keys: `data/te_pid/rev-c`; runs `tec-*`.
 
 **A round trip, not real-plant accuracy.** The three sheets were generated from the verified TE model and the answer keys come from the same model, so these numbers measure how faithfully the frozen method (2×2 tiles, prompt v2, code line tracer; nothing re-tuned) reads clean drawings in the learned house style. They are an upper bound and are not comparable with the OPEN100 results.
 

@@ -98,9 +98,11 @@ class GenerationValidationTests(unittest.TestCase):
 
     def test_render_errors_before_any_writes(self):
         # These fail in later renderers, after SVGs could already have been overwritten previously.
+        # A unit with no name fails in the SVG renderer. (A missing verification no longer does: it now reads as
+        # "unverified", the conservative default, so any hand-built model in the same schema can export.)
         model = copy.deepcopy(self.seed)
-        del model["units"][0]["verification"]
-        self.assert_blocked(model, generate.export_seed, "verification")
+        del model["units"][0]["name"]
+        self.assert_blocked(model, generate.export_seed, "name")
         model = copy.deepcopy(self.twin)
         del model["instruments"][0]["parent_method"]
         self.assert_blocked(model, generate.export_twin, "parent_method")

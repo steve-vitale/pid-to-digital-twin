@@ -178,8 +178,19 @@ def review_load(rough, conn):
             "key_items": key_items, **corrections}
 
 
+def load_prediction(path):
+    """A bare prediction ({symbols, connections}) or a run record that holds one under "prediction". Anything else is
+    refused: scoring a file with no symbols would silently report zero (the scoring rules above are unchanged)."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if isinstance(data, dict) and "symbols" not in data and isinstance(data.get("prediction"), dict):
+        data = data["prediction"]
+    if not isinstance(data, dict) or not isinstance(data.get("symbols"), list):
+        sys.exit(f"{path}: no 'symbols' list (neither a prediction nor a run record holding one); nothing scored")
+    return data
+
+
 if __name__ == "__main__":
     graphml, pred_path = sys.argv[1], sys.argv[2]
     png = sys.argv[sys.argv.index("--png") + 1] if "--png" in sys.argv else str(Path(graphml).with_suffix(".png"))
-    print(json.dumps(score(graphml, json.loads(Path(pred_path).read_text(encoding="utf-8")), png), indent=1))
+    print(json.dumps(score(graphml, load_prediction(pred_path), png), indent=1))
 

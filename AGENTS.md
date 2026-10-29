@@ -13,7 +13,10 @@ If your user wants to try this on their own drawings, use `examples/own-drawing/
 offline from a clean clone and produces a review bundle from a public sheet and a committed model extraction; the
 rest are the same steps for their sheet. Tell them the tools are prototypes tested on public drawings only, that the
 output is a draft for review, and that `scripts/ignition/build_gateway.py` builds this repository's Tennessee
-Eastman demo, not their plant. The README section "What's a tool and what's a record" lists the rest.
+Eastman demo, not their plant. If they start from something other than a drawing image (a DEXPI file, a written
+description, a DCS loop list, historian CSVs, or hand-labelled sheets to test a vendor), the README table "Start
+wherever you are" has a runnable example for each. `docs/SCRIPTS.md` says what every script is for; only the ones
+marked as tools are built for other inputs.
 
 ## Ten minutes, no accounts, no network
 
