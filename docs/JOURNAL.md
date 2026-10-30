@@ -4793,3 +4793,27 @@ are retained in release evidence; regenerated controls, per-case counts, metrics
 Only code/cohort/group identifiers and their ordering change. This repair adds no model run, case, source key,
 held-out result or new task coverage. The initial failed release and its earlier review remain in history;
 portability review and final CI are recorded separately.
+
+## 101. Follow one asset through the connected toolkit
+
+A high-level connection map can still leave a reader unsure what happens to one actual asset. The new P-1
+walkthrough follows the existing authored water-utility source through its model records, draft sheet, generated
+question E1@P-1 and graph, then explains the first evidence packet and receiving-owner gap. It links the actual
+files rather than substituting a presentation mockup for a working output.
+
+A fresh prepare/check/build run reproduced the committed model, graph, questions and drawing. A direct
+in-process snapshot-class read returned P-1 and E1@P-1; that is data-path evidence, not a new MCP protocol or
+Copilot deployment test. The five evidence requests remain not_on_drawing. No operating history, pump curve,
+measured benefit or accepted handoff is supplied. The question engine finds a pattern in the authored model;
+it does not establish that a speed drive is absent, that the pump wastes energy, or that a change is justified.
+
+This is a navigation and explanation improvement over an existing authored fixture, not a new public source
+family, independently keyed interpretation benchmark or new corpus result. The structure/quotation/layout
+checks still need engineering review. Ongoing ownership, governing revisions, access and decisions remain the
+company system responsibility. No tool contract, scoring rule, registered output or matrix cell changes.
+
+A fresh independent coding-agent reader, taking a plant-engineer arrival perspective, reproduced all three
+workflow commands, checked six in-process snapshot methods and compared seven selected outputs byte for byte.
+The reader checked the linked files and rendered drawing/graphic, with no factual blocker. The suggested arrival
+improvement was a direct walkthrough link in the accompanying caption. This is a narrow documentation/data-path
+review, not human engineering approval, a new protocol test or a renewed review of every feature.

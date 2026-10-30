@@ -3467,6 +3467,22 @@
         "scripts/test_benchmark.py",
         "benchmarks/README.md"
       ]
+    },
+    {
+      "id": "A234",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Connect a one-pump walkthrough to the actual description, model, draft drawing, generated question, graph and first-question handoff.",
+      "hypothesis": "A reader can explain what the connected toolkit contributes by following one asset and one unresolved question through actual output files, while distinguishing structure checks from engineering truth and an evidence request from a saving or approved change.",
+      "evidence": "Re-ran prepare/check/build on the existing authored water-utility fixture. Fresh model, graph, questions and drawing match the committed example; P-1 and E1@P-1 retain identities in snapshot-class readback. Five missing-evidence requests stay not_on_drawing. Linked walkthrough keeps actual drive/configuration, operating data, receiving owner, handoff acceptance and benefit unresolved.",
+      "runs": "3offline workflow CLIs and direct in-process snapshot-class readback. Existing authored development fixture only; no new sourcefamily/modelrun/interpretationaccuracy/operatingdata or MCP protocol acceptance.",
+      "verdict": "kept",
+      "why": "Makes the existing connection concrete without presenting a polished drawing as an approved plant model or an energy question as a measured opportunity.",
+      "source": [
+        "docs/JOURNAL.md#101-follow-one-asset-through-the-connected-toolkit",
+        "examples/from-description/assisted/PUMP_WALKTHROUGH.md",
+        "examples/from-description/README.md"
+      ]
     }
   ],
   "not_tried": [

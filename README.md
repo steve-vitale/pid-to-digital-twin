@@ -118,6 +118,8 @@ drafts of the docs. The [build journal](docs/JOURNAL.md) logs where they and I w
 
 **Start here:**
 
+- *See the pieces connect:* [follow pump P-1 through the actual files](examples/from-description/assisted/PUMP_WALKTHROUGH.md),
+  from its illustrative source to the draft drawing, investigation question and unresolved evidence/owner needs.
 - *Plant engineers:* [your own drawing](examples/own-drawing/README.md) · [at your plant](docs/AT_YOUR_PLANT.md) ·
   [costs and review time](docs/COSTS.md) · [keep the answers and context current](examples/context-register/README.md)
 - *Engineers starting a transformation pilot:* [one problem, one decision, one evidence pack](examples/first-pilot/README.md)
