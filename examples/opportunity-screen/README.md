@@ -158,6 +158,11 @@ food site and each unmetered valve under its own finding. Its order (most sites 
 
 ## Triggers tightened while checking
 
+For the next iteration after a model review, see the [review-refresh example](review-refresh/README.md). It applies
+fictional decisions to the existing synthetic food model, then checks that rejected items stop triggering or
+suppressing questions. Repeated review is idempotent; explicit reconfirmation restores the questions while retaining
+history. This adds software evidence, not another plant or a new accuracy score.
+
 Each of these fired wrongly on a first run and was fixed; the test keeps them quiet:
 
 - **Food example, 2026-10-29:** E19 and E23 fired on the refrigerated compressed air dryer AD-502 (its name says

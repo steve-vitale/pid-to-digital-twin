@@ -20,6 +20,21 @@ python -S scripts/question_engine.py --rollup out/screen-site-a --rollup out/scr
 
 Stdlib only, offline, no model calls. Without `--out` it prints the screen.
 
+## Refresh after reviewing the model
+
+Apply your decisions with `apply_review.py`, then run the screen again with the same loop list, schedules and
+question selection. Explicit `ops_review.status = rejected` records are excluded from triggers, evidence,
+data-request locations, required model kinds and relationships. Rejected records and history stay in the model;
+the screen lists the recorded rejections. Non-rejected children remain eligible without references to rejected
+units, parents or streams. No replacement ownership or recursive rejection is inferred. A supplemental loop list
+cannot silently reinstate a rejected controller; live duplicate tags remain eligible and require review.
+
+Missing/unverified review stays eligible and does not mean approval. Malformed review metadata is refused before
+output writes. The [offline worked refresh](../examples/opportunity-screen/review-refresh/README.md) follows three
+fictional decisions through the actual CLIs, checks changed questions, repeats the review and explicitly reinstates
+the items. It uses invented equipment and establishes software behavior only. If you maintain answered questions,
+[refresh the retained context register](CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers) against the new model and screen.
+
 ## What it is, and what it is not
 
 A solo plant engineer rarely has time for an energy audit, but usually has the drawings. Most of the first audit
@@ -96,6 +111,8 @@ and why (exit code 2), never a traceback or an empty "found nothing" screen.
   titles, IAC/ITAC code), `limits` and `status: "asked"`. It also lists the questions that found nothing
   (`did_not_fire`), the ones that could not be checked (`not_checked`) and the equipment left out of the screen
   (`left_out`). `python -S scripts/graph_export.py MODEL --questions questions.json` attaches it to the twin graph.
+  When applicable, `review_exclusions` records explicit model rejections and `loop_rows_rejected` names supplemental
+  controller rows excluded by those decisions. Empty fields are omitted, preserving older unreviewed examples.
 - `screen.md`: the same, grouped by family, readable on its own, with a "how to read this" note at the top and the
   cited sources with their licenses at the bottom.
 

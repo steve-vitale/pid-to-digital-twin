@@ -3,9 +3,11 @@ the committed opportunity-screen examples regenerate exactly, known findings app
 quiet, the three evidence states come out right, and no output carries a currency symbol or a computed figure.
 Stdlib only."""
 import io
+import copy
 import json
 import re
 import sys
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -636,6 +638,191 @@ class ReviewFixes(unittest.TestCase):
         self.assertGreater(text.count("mapped data point"), 0)
         self.assertEqual(text.count("mapped data point"), text.count("SYNTHETIC mapped data point"))
         self.assertIn("synthetic demo point", text)
+
+
+class ReviewRefresh(unittest.TestCase):
+    """Fictional review controls, not a review of any plant's engineering facts."""
+
+    def load_model(self, source, loops=None):
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        path = Path(folder.name) / "model.json"
+        path.write_text(json.dumps(source), encoding="utf-8")
+        loop_path = None
+        if loops:
+            loop_path = path.with_suffix(".csv")
+            loop_path.write_text(loops, encoding="utf-8")
+        before = path.read_bytes()
+        model = qe.Model(path, loop_path)
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(model.m, source)
+        return model
+
+    def food(self):
+        return json.loads((EX / "food_plant_model.json").read_text(encoding="utf-8"))
+
+    def test_actual_cli_review_refresh_and_reconfirmation_packet(self):
+        p = subprocess.run([sys.executable, "-S", str(EX / "review-refresh" / "demonstrate.py")], cwd=ROOT,
+                           capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_each_supported_hand_collection_excludes_rejected_record(self):
+        records = {"units": {"id": "P-1", "type": "pump"},
+                   "streams": {"id": "S1", "from": "P-1", "to": "BL", "name": "Cooling water", "utility": True},
+                   "instruments": {"tag": "FT-1", "unit": "P-1"},
+                   "final_elements": {"tag": "FV-1", "unit": "P-1"},
+                   "manual_valves": {"tag": "HV-1", "unit": "P-1"},
+                   "relief_devices": {"tag": "PSV-1", "unit": "P-1"},
+                   "controllers": {"tag": "FIC-1", "measurement": "FT-1", "output": {"final_element": "FV-1"}},
+                   "interlocks": {"id": "I-1", "measurement": "FT-1", "final_element": "FV-1"}}
+        for section, record in records.items():
+            with self.subTest(section=section):
+                source = {sec: [copy.deepcopy(r)] for sec, r in records.items()}
+                source[section][0]["ops_review"] = {"status": "rejected", "notes": "Fictional control"}
+                model = self.load_model(source)
+                key = record.get("id") or record.get("tag")
+                normalized_key = "stream:" + key if section == "streams" else key
+                self.assertNotIn(normalized_key, model.by_id)
+                self.assertEqual([r["id"] for r in model.review_exclusions], [key])
+
+    def test_missing_and_nonrejected_reviews_remain_eligible(self):
+        base = self.food()
+        expected = qe.screen(self.load_model(base), CAT)[0]
+        for status in (None, "unverified", "confirmed", "corrected"):
+            with self.subTest(status=status):
+                source = copy.deepcopy(base)
+                source["instruments"][1]["ops_review"] = None if status is None else {"status": status}
+                model = self.load_model(source)
+                self.assertIn("JT-201", model.by_id)
+                self.assertEqual(qe.screen(model, CAT)[0], expected)
+
+    def test_rejected_anchor_cannot_supply_evidence_or_data_locations(self):
+        source = self.food()
+        source["instruments"][0]["ops_review"] = {"status": "rejected"}
+        found = qe.screen(self.load_model(source), CAT)[0]
+        content = json.dumps(found)
+        self.assertNotIn("PT-201", content)
+        self.assertTrue(any(f["question_id"] == "C2" for f in found))
+
+    def test_rejected_unit_does_not_reject_or_group_its_children(self):
+        source = self.food()
+        source["units"][0]["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source)
+        self.assertNotIn("K-201", model.by_id)
+        self.assertIn("PT-201", model.by_id)
+        self.assertIsNone(model.by_id["PT-201"].get("unit"))
+        self.assertIsNone(model.by_id["stream:R1"].get("dst"))
+        self.assertNotIn('"id": "K-201"', json.dumps(qe.screen(model, CAT)[0]))
+
+    def test_rejected_stream_no_longer_links_heat_recovery(self):
+        source = self.food()
+        next(s for s in source["streams"] if s["id"] == "S3")["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source)
+        found = {f["id"] for f in qe.screen(model, CAT)[0]}
+        self.assertTrue({"E31@F-303", "H6@F-303"} <= found)
+        self.assertIn("HX-303", model.by_id)
+
+    def twin(self):
+        return {"meta": {"model_kind": "extracted_twin"},
+                "units": [{"id": "P", "tag": "P-1", "name": "Pump", "class": "pump", "sheets": [0]}],
+                "line_items": [{"id": "L", "class": "line", "unit": "P"}],
+                "instruments": [{"id": "FT", "tag": "FT-1", "parent": "L", "unit": "P"}],
+                "streams": [{"id": "s", "from": "P", "to": "L"}]}
+
+    def test_twin_rejected_parent_is_not_a_path_but_child_survives(self):
+        source = self.twin()
+        source["line_items"][0]["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source)
+        self.assertIn("FT", model.by_id)
+        self.assertIsNone(model.by_id["FT"].get("parent"))
+        self.assertNotIn("L", model.near("P", 5, "0"))
+        self.assertNotIn("FT", model.near("P", 5, "0"))
+
+    def test_twin_rejected_edge_is_not_a_path(self):
+        source = self.twin()
+        source["streams"][0]["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source)
+        self.assertNotIn("L", model.near("P", 5, "0"))
+        self.assertIn("FT", model.near("L", 5, "0"))
+
+    def test_twin_rejected_instrument_and_connector_are_excluded(self):
+        source = self.twin()
+        source["instruments"][0]["ops_review"] = {"status": "rejected"}
+        source["offpage_connectors"] = [{"id": "O", "text": "Steam", "ops_review": {"status": "rejected"}}]
+        model = self.load_model(source)
+        self.assertNotIn("FT", model.by_id)
+        self.assertNotIn("O", model.by_id)
+
+    def test_rejected_controller_does_not_satisfy_needs_model(self):
+        source = self.food()
+        for c in source["controllers"]:
+            c["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source)
+        found, nc, *_ = qe.screen(model, CAT, ["C2"])
+        self.assertFalse(found)
+        self.assertEqual([n["question_id"] for n in nc], ["C2"])
+
+    def test_loop_list_cannot_reinstate_rejected_hand_controller(self):
+        source = self.food()
+        source["controllers"][0]["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source, "controller,measurement,output\nPIC-202,PT-202,SC-203\n")
+        self.assertNotIn("PIC-202", model.by_id)
+        self.assertEqual(model.loop_rejected, ["PIC-202"])
+        c2 = next(f for f in qe.screen(model, CAT)[0] if f["id"] == "C2@model")
+        self.assertIn("PT-202", {a["id"] for a in c2["assets"]})
+
+    def test_loop_list_cannot_reinstate_rejected_twin_bubble(self):
+        source = self.twin()
+        source["instruments"].append({"id": "FIC", "tag": "FIC-1", "ops_review": {"status": "rejected"}})
+        model = self.load_model(source, "controller,measurement,output\nFIC-1,FT-1,FV-1\n")
+        self.assertNotIn("FIC-1", model.by_id)
+        self.assertEqual(model.loop_rejected, ["FIC-1"])
+
+    def test_loop_list_cannot_reclassify_other_rejected_assets_as_controllers(self):
+        source = self.food()
+        source["final_elements"][0]["ops_review"] = {"status": "rejected"}
+        model = self.load_model(source, "controller,measurement,output\nsc_203,JT-201,TV-303\n")
+        self.assertNotIn("sc_203", model.by_id)
+        self.assertNotIn("SC-203", model.by_id)
+        self.assertEqual(model.loop_rejected, ["sc_203"])
+        c2 = next(f for f in qe.screen(model, CAT)[0] if f["id"] == "C2@model")
+        self.assertIn("JT-201", {a["id"] for a in c2["assets"]})
+
+    def test_live_duplicate_tag_is_not_blanket_rejected(self):
+        source = self.twin()
+        source["instruments"].extend([{"id": "bad", "tag": "FIC-1", "ops_review": {"status": "rejected"}},
+                                       {"id": "live", "tag": "FIC-1"}])
+        model = self.load_model(source, "controller,measurement,output\nFIC-1,FT-1,FV-1\n")
+        self.assertIn("live", model.by_id)
+        self.assertIn("FIC-1", model.by_id)
+        self.assertEqual(model.loop_rejected, [])
+
+    def test_ordinary_unresolved_references_are_retained(self):
+        source = self.twin()
+        source["instruments"][0].update(unit="unresolved-unit", parent="unresolved-parent")
+        model = self.load_model(source)
+        self.assertEqual(model.by_id["FT"]["unit"], "unresolved-unit")
+        self.assertEqual(model.by_id["FT"]["parent"], "unresolved-parent")
+
+    def test_malformed_reviews_refuse_before_output_changes(self):
+        for review in ([], "rejected", {"status": "reject"}, {"status": []}, {"by": 2}, {"on": []}, {"notes": {}}):
+            with self.subTest(review=review), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                path = base / "model.json"
+                source = self.food()
+                source["instruments"][0]["ops_review"] = review
+                path.write_text(json.dumps(source), encoding="utf-8")
+                (base / "questions.json").write_text("existing packet", encoding="utf-8")
+                (base / "screen.md").write_text("existing report", encoding="utf-8")
+                prior = {p.name: p.read_bytes() for p in base.iterdir()}
+                err, old = io.StringIO(), sys.stderr
+                sys.stderr = err
+                try:
+                    self.assertEqual(qe.main(["--model", str(path), "--out", str(base)]), 2)
+                finally:
+                    sys.stderr = old
+                self.assertIn("ops_review", err.getvalue())
+                self.assertEqual({p.name: p.read_bytes() for p in base.iterdir()}, prior)
 
 
 if __name__ == "__main__":

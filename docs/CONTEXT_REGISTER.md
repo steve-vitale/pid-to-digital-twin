@@ -192,6 +192,12 @@ identities outside the question's asset set; the historical snapshot does not cl
 
 Refresh currentness without submitting answers:
 
+If the new screen no longer contains a finding, first preserve the previous packet and source manifest. In the
+**current** manifest, remove that absent finding ID from each locator's `questions` list; an empty list withdraws
+the binding without deleting the source document. Keep bindings for findings still present. The loader refuses
+unknown finding IDs, so the old manifest cannot be applied unchanged to a smaller screen. Then run the refresh
+below with the existing register. Do not delete its historical decisions or reuse old answer rows as new reviews.
+
 ```sh
 python -S scripts/context_register.py apply --model plant_model.json --questions questions.json --sources sources.json --register context/context.json --out context
 ```

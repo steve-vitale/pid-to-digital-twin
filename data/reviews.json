@@ -3002,6 +3002,307 @@
     "public-example.actual.json": "c3f9c317aec4b9b5dfe3f9cdf1461a08c376f0f15fcff0eb0a5a3c0b099215d4"
    },
    "limits": "Independent coding-agent software review only. No new whole-repository suite run or current CI run is claimed by this reviewer. The separately planned full local/CI runs must report their own actual omissions; this receipt does not predict their totals. The historical CI observation is a minimum visible count, not an exhaustive total. The runner parses conventional unittest summaries and explicit child notices; it cannot prove that arbitrary programs attempted all intended checks or truthfully reported them. Case totals and notice counts have different units and must not be summed. The oracle positive checks key self-agreement, and the renderer check proves byte reproducibility on these existing pinned inputs; neither establishes source completeness, drawing extraction accuracy, current plant truth, human review benefit, native runtime/import acceptance or customer adoption. No network, download, package installation, original-source change or live organizational write was performed in this review."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Independent Codex agent (read-only maintenance review, baseline reproductions and adversarial actual-CLI controls)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF. Explicit raw-byte baseline/proof hashes below are not normalized.",
+   "registered_output_count": 13,
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+    "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+    "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/opportunity-screen/open100/screen.md": "cbb7c60a1b08a1e2b48b61a5982399490338fc5078fadb4ad1d3fcd35d427cb5",
+    "examples/opportunity-screen/open100/questions.json": "4f84ad100e1bba2dda4f7bd362b168e519421ed8ea39642022e41c2c23e854ad",
+    "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+    "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7"
+   },
+   "supporting_files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4",
+    "data/questions.json": "5ec917900a7bde7390748bf667c18dbff499f11b8edb2888b9c7f98647a1b355",
+    "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
+    "docs/CONTEXT_REGISTER.md": "f2538f632151a1bcd235804add2ac9cd4a423e9c05281d7cfb6459ea8c118876",
+    "docs/GOAL.md": "7d0a46fc9fad6bd0cf6da40c0845f363f58a11b64e8ffde220beff132775b7e7",
+    "docs/OPPORTUNITY_SCREEN.md": "e034dfd2e4d3f6cfaa77d93243c688da41394f97524769064a86f6d3cf1bfd60",
+    "docs/REVIEW_LOOP.md": "3d49184f251563d8f0f1074dca72ad4fea35fd61e759de0be4f89754426daea1",
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "examples/opportunity-screen/README.md": "eba63385c3c36f7206e811bf2d80d44270060d67b069c3d9f865ad014c5eeef5",
+    "examples/opportunity-screen/food_plant_model.json": "c703129813cb7ac342c5c140a8601bc947e047006d93033bd1fb1714f87cd9c1",
+    "examples/opportunity-screen/open100_schedule_fields.json": "9b0b3fce95428ceb4b5e83100516553aec6fc128e81e34df2777791bd2bce9dc",
+    "examples/opportunity-screen/review-refresh/README.md": "8fc37a1a663bc3d87b71a350ec143368e6b4adccb308df165221b1f1fde8b4e3",
+    "examples/opportunity-screen/review-refresh/demonstrate.py": "0fea35e6e4fd6517787e9051fa2a5e715f3903882751d109d23589a02f276f33",
+    "examples/opportunity-screen/review-refresh/reconfirmations.csv": "7e2c34cf878a61ff43e0fbb736c8eb57616466088b4601f7d45f90abc3656d34",
+    "examples/opportunity-screen/review-refresh/rejections.csv": "2e1ee81407d0acb233f5a564da1beae3385e88c074f7b1db8ac9b0c876fd4f70",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/generate.py": "38639f82898923c6668988e2557de2db267bfda5a38f65cd194c36d745b5fcb3",
+    "scripts/question_engine.py": "75d2f63536748155a32b9132a93da362445ca4117111f9018bc7add5061a0ddf",
+    "scripts/test_question_engine.py": "37e2fc28bb2cc2e748072e64aa4e4f00eacf32db0eba3094131adcac7e83700e"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Ongoing-use paragraph beginning When a model review rejects an item, ending before When several teams depend on it",
+     "normalized_utf8_sha256": "087c46e54640880bf44a9b9b941a68ef7157825477bad017f559a7a073ab5ce0",
+     "scope": "Generated feature-table text elsewhere in README is excluded from this section binding."
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "Question screening ignored explicit ops_review rejections. Actual fictional rejection of JT-201, SC-203 and HX-303 left the synthetic food screen unchanged and let rejected records continue suppressing collection questions.",
+     "resolution": "Independently reproduced the exact c4427cd baseline with actual apply_review.apply and CLI screening. Final code builds a separate active view while retaining raw model/history, reports explicit exclusions, detaches direct references to rejected owners/parents/streams, and removes rejected evidence from anchors, required kinds and relationship paths. Three named findings reopen and K-201 joins the existing C12@model trigger set."
+    },
+    {
+     "issue": "The first candidate guarded loop-list resurrection only for controller/instrument collections. A real apply_review rejection of final_element SC-203 could be undone by a supplemental SC-203 controller row, falsely treating JT-201 as read and removing it from C2.",
+     "resolution": "The author extended the identity guard across all excluded records, covering recorded IDs and tags with the existing normalization and retaining live duplicate identities. Independently reran the actual CLI reproduction and additional normalized unit/stream controls: rejected rows are reported, and the active measurements stay in the unread-measurement question."
+    }
+   ],
+   "resolution": "No open finding in this bounded question-screen maintenance scope. The exact 13 registered outputs are bound here. All ten prior outputs retain their earlier reviewed hashes and reproduce byte-for-byte through current CLI commands; the three new expected outputs pass the actual apply-review, refresh, idempotence and explicit-reconfirmation workflow. The separately confirmed pre-existing seed-export exclusion gap is recorded below as not fixed. This is software maintenance on existing source families and invented food equipment, not new engineering or adoption evidence.",
+   "checks": [
+    "Independently saved and ran the exact c4427cd question_engine.py baseline. Actual apply_review.apply accepted three fictional rejections on a copied, already explicitly synthetic food model. Default screening stayed at 24 findings with identical IDs. Omitting only those three records as a diagnostic control produced 27 findings, reopening E29@K-203, E31@F-303 and H6@F-303.",
+    "Corrected the initial proof assumption before evaluating the repair: C12 is model-grouped, so its real identity is C12@model. Baseline rejection leaves its trigger set at K-202/K-203; the repaired default screen adds K-201 to that existing finding. C12@K-201 does not exist. Counts and anchors, rather than an impossible per-unit ID, were checked.",
+    "37 independent controls pass against the exact final question-engine hash below. Actual CLI findings verify the default food changes, reported rejection provenance, stdout without --out, rejected hand-stream links, rejected equipment anchors, live-child grouping, and preservation of original source/model bytes in the tested separate-output workflows.",
+    "Independent illustrative extracted-model controls verify that a rejected intermediate node, rejected stream and rejected parent cannot carry the pump-to-valve traversal; the independently eligible downstream valve survives. Children lose only direct references to explicitly rejected owners/parents/streams. Ordinary unresolved references retain their supplied identities. No replacement ownership or recursive review status is inferred.",
+    "Normalized rejected twin controller rows, the independently discovered rejected final-element row, and normalized rejected unit/stream identities are excluded from supplemental loop import and listed in the report. Their active measurements remain unread where appropriate. A live duplicate tag remains independently eligible without reinstating the rejected raw record or resolving the tag ambiguity.",
+    "Missing, unverified, confirmed and corrected current review states preserve the original eligible question population and content. Rejected controllers do not satisfy C2 needs_model. Ten malformed current-review field controls refuse with exit 2 before any known input, existing report or other disposable-workspace byte changes.",
+    "Independently ran all 51 final question-engine tests: pass. Independently ran the public review-refresh demonstration through its actual apply_review.py and question_engine.py child CLIs: all three expected files match; the three new finding IDs and C12 model assets are correct; repeated review changes no model bytes; explicit later reconfirmation restores the original questions while retaining intermediate rejected history; the original public model is unchanged.",
+    "Independently regenerated all ten earlier registered outputs through actual current CLI commands: TE with its loop list, Bayer, OPEN100 with both schedules, food and the food/Bayer rollup. All normalized output bytes match. No historical population, benchmark criterion or result table was rewritten by this review.",
+    "Read final opportunity-screen, review-loop, worked-example, context-refresh and README workflow instructions against current behavior. The generator comparison is specifically the extracted-twin export policy: non-rejected children remain independently eligible. No seed-generator filtering change or food platform-export round trip was performed or claimed.",
+    "The context-register clarification correctly requires preserving the old packet/manifest, withdrawing absent finding IDs only from current locator.questions bindings, then refreshing with the existing --register and no new answer submission. Empty bindings are accepted while unknown current question IDs refuse. A separately attributed cold-reader actual-CLI proof confirms this unchanged context-loader behavior; it is not presented as a context implementation change.",
+    "The question catalog is byte-identical after LF normalization to c4427cd, and the original synthetic food model retains its tested raw-byte hash. Earlier source/quotation review scope is preserved below. This maintenance adds no original public source, new extraction score, authenticated review or plant fact."
+   ],
+   "out_of_scope_findings": [
+    {
+     "tracking": "N064 in docs/TRIED.md",
+     "status": "confirmed pre-existing; not fixed in this maintenance increment",
+     "issue": "The universal downstream wording in the review guide overstated seed-model rejection handling. After actual fictional rejection of TE U-100 and FT-101, pure generate.ignition_tags and generate.pi_af_rows still emit both rejected records; PI rows remain selected with x. Their documentation does annotate the rejection, so output bytes change but records are not excluded.",
+     "evidence": {
+      "unit_rejected": "U-100",
+      "instrument_rejected": "FT-101",
+      "rejected_unit_still_in_ignition": true,
+      "rejected_instrument_still_in_ignition": true,
+      "rejected_unit_still_in_pi_rows": true,
+      "rejected_instrument_still_in_pi_rows": true,
+      "public_source_bytes_unchanged": true,
+      "source_raw_sha256": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b"
+     },
+     "resolution": "Documentation scopes exclusion/_Unassigned behavior to extracted-twin generation and explicitly identifies the seed-model limitation. No generator code, gateway or platform import was changed or exercised."
+    }
+   ],
+   "baseline_evidence": {
+    "commit": "c4427cd",
+    "question_engine_raw_sha256": "d66e95619d4aa70a98b687e6ff01c3ed57964c9c3f17446e04dabce4938c7327",
+    "food_source_raw_sha256": "c703129813cb7ac342c5c140a8601bc947e047006d93033bd1fb1714f87cd9c1",
+    "food_findings_before_after_rejected_after_records_omitted_control": [
+     24,
+     24,
+     27
+    ],
+    "three_findings_still_suppressed_before_repair": [
+     "E29@K-203",
+     "E31@F-303",
+     "H6@F-303"
+    ],
+    "c12_identity": "C12@model",
+    "c12_trigger_anchors_before_and_after_rejection": [
+     "K-202",
+     "K-203"
+    ],
+    "c12_trigger_anchors_after_repair": [
+     "K-201",
+     "K-202",
+     "K-203"
+    ],
+    "additional_failures_reproduced": "Rejected anchors, rejected hand-stream heat-recovery links, rejected twin node/stream traversal, rejected parent grouping, and normalized supplemental controller resurrection.",
+    "scope": "Actual apply_review.apply plus actual baseline CLI on the already explicit synthetic food fixture and labelled illustrative twin controls. No real plant, person or acceptance is implied."
+   },
+   "independent_controls": [
+    {
+     "check": "three actual reviewed food rejections reopen three named questions",
+     "pass": true
+    },
+    {
+     "check": "C12 retains model-wide identity and gains K-201 as trigger",
+     "pass": true
+    },
+    {
+     "check": "rejected items are absent from every current finding asset/evidence identity",
+     "pass": true
+    },
+    {
+     "check": "report explicitly retains recorded rejection identities and provenance",
+     "pass": true
+    },
+    {
+     "check": "stdout route also shows review exclusions and reopened questions without writing packet files",
+     "pass": true
+    },
+    {
+     "check": "actual rejected hand stream no longer suppresses exhaust questions",
+     "pass": true
+    },
+    {
+     "check": "rejected equipment cannot anchor or label a live-child finding",
+     "pass": true
+    },
+    {
+     "check": "non-rejected children remain eligible with rejected unit references detached only in active view",
+     "pass": true
+    },
+    {
+     "check": "live-child utility questions survive as separate unassigned subjects",
+     "pass": true
+    },
+    {
+     "check": "twin-bridge-rejected cannot carry pump-to-valve traversal",
+     "pass": true
+    },
+    {
+     "check": "twin-bridge-rejected retains independently eligible downstream valve",
+     "pass": true
+    },
+    {
+     "check": "twin-edge-rejected cannot carry pump-to-valve traversal",
+     "pass": true
+    },
+    {
+     "check": "twin-edge-rejected retains independently eligible downstream valve",
+     "pass": true
+    },
+    {
+     "check": "rejected twin parent detaches rather than rejects its child and cannot supply a path",
+     "pass": true
+    },
+    {
+     "check": "normalized rejected twin controller is not recreated by loop row",
+     "pass": true
+    },
+    {
+     "check": "active measurement remains an unread-measurement anchor after rejected loop exclusion",
+     "pass": true
+    },
+    {
+     "check": "independently found cross-collection final-element resurrection now refuses the loop identity",
+     "pass": true
+    },
+    {
+     "check": "loop exclusion covers normalized rejected asset-id",
+     "pass": true
+    },
+    {
+     "check": "loop exclusion covers normalized rejected stream-id",
+     "pass": true
+    },
+    {
+     "check": "live duplicate stays independently eligible without reinstating rejected raw record",
+     "pass": true
+    },
+    {
+     "check": "ordinary unresolved references retain their exact supplied identities",
+     "pass": true
+    },
+    {
+     "check": "missing/non-rejected review None preserves current question population and content",
+     "pass": true
+    },
+    {
+     "check": "missing/non-rejected review unverified preserves current question population and content",
+     "pass": true
+    },
+    {
+     "check": "missing/non-rejected review confirmed preserves current question population and content",
+     "pass": true
+    },
+    {
+     "check": "missing/non-rejected review corrected preserves current question population and content",
+     "pass": true
+    },
+    {
+     "check": "rejected controllers do not satisfy the C2 required-model-kind gate",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 0 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 1 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 2 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 3 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 4 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 5 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 6 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 7 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 8 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "malformed reviewed fields 9 refuse before any known byte changes",
+     "pass": true
+    },
+    {
+     "check": "original public synthetic food source bytes are unchanged",
+     "pass": true
+    }
+   ],
+   "prior_review_scope": {
+    "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+    "date": "2026-10-29",
+    "registered_outputs_unchanged": 10,
+    "preserved_resolution": "All 35 question-engine tests pass including exact reproduction of four screens and rollup. Food findings 24, Bayer 12; rollup 36 findings across 24 questions. New-question anti-triggers, quantity-specific data requests and evidence states tested. Downloaded S25/S27/S28 hashes equal catalog pins and verified quotations; S26 direct download 403, official web PDF text confirms all used dryer/fryer/control quotations. No real food-plant validation.",
+    "limits": "The preserved source/quotation checks remain attributed to that earlier review. This reviewer did not repeat its external PDF/quotation verification or turn it into an independent new source-family, real-food-plant, timed-review or accuracy result."
+   },
+   "separate_cold_reader_evidence": {
+    "role": "AI cold-reader workflow verification; not human adoption or engineering sign-off",
+    "proof_raw_sha256": "3475a694a401431e60964d4d66c9ea98de51232ca8e1f56436baaf6246f82d08",
+    "scope": "Read a separate AI cold-reader proof of actual context-refresh CLI results. This reviewer read the final instructions and loader code; those CLI calls are attributed to that other reviewer. Its older document-hash list is not carried as current binding after wording changes.",
+    "removed_finding": "E18@model",
+    "unchanged_manifest_refused": true,
+    "withdrawn_current_binding_refresh_succeeded": true,
+    "old_decisions_retained_exactly": true,
+    "old_answer_freshness": "stale"
+   },
+   "proof_artifact_raw_sha256": {
+    "reproduce_baseline.py": "b9e6f845eb3cc2663c2084d72c5dc66364dfe0332eb63a07b9b37cc3a92d3c2e",
+    "baseline-evidence.json": "8e193dcf71003f913c10f48c0137ff079fd6fe42c6524e399677b91bf243aeb4",
+    "review_final.py": "4b4d5f123f4a20165609a84745c2c71d1d5c186472392bf042663f69656940e5",
+    "final-controls.json": "92e69832fede49633657934a8d527b09031ea18d0cc8870b35c22a1f01cacb91",
+    "old10-reproduction.json": "8e8d08d0b7cd3b0fe337b1bf50ad18df8a558509c8c4a0ecdfd274d036a940a4",
+    "seed-export-boundary-proof.json": "8497025c8bb33bced21c3dbb5b95ddf0321c95d54965e0c961667b02daa33cd5"
+   },
+   "limits": "Independent coding-agent software review only, using copied synthetic food records and labelled illustrative extracted-model controls. No person reviewed a real plant; local recorded names/statuses do not authenticate a reviewer, establish source authority or confer organizational approval. Reconfirmation is an explicit fictional control, not proof of plant truth. The active screen does not rebuild extraction attachment logic or recursively reject children, and live duplicate tags still require engineering identity review. Only current review status/display fields used by screening are validated; this is not a signed-history or general governance validator. No seed-generator behavior, context-register implementation, external quotation/source review, complete repository suite, new CI run, 94-cell matrix run, model extraction, native platform import, network write or customer/adoption result is claimed by this review."
   }
  ]
 }

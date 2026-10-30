@@ -3706,3 +3706,57 @@ the complete-suite message. No optional-cache skip was reported locally. CI and 
 reports. All 17 feature entries have current independent output receipts; this increment binds the two repo-checks
 outputs, 18 supporting files and the reviewed README section. The 94-cell matrix and its tool hashes remain unchanged,
 all 52 pipeline stages are fresh, and the claim check still has 41 numeric matches, one prose-only entry and no failures.
+
+## 71. Carry explicit model rejections into the next question screen
+
+**What:** 2026-10-30. Following the review-to-question workflow found that the question engine ignored
+`ops_review`. Applying three fictional rejections to the existing synthetic food model left the rejected power
+meter, speed drive and heat-recovery unit suppressing questions. The independent baseline reproduction kept all
+24 findings unchanged; removing only those three records as a diagnostic control produced 27. K-201 also remained
+absent from the existing model-wide C12 question. These are software controls on invented equipment, not a new
+plant, human review, corpus family or accuracy measurement.
+
+The engine now builds a separate active projection. Explicitly rejected records cannot trigger or suppress a
+question, supply evidence or collection locations, satisfy required model kinds, or carry a relationship path.
+Source bytes, rejected records and review history are retained. Non-rejected children remain eligible without a
+rejected owning unit, parent or stream; no replacement is inferred. Ordinary unresolved references retain their
+previous behavior. Missing/unverified review remains eligible and is not approval. Malformed review metadata
+refuses before output writes. JSON and Markdown report the recorded exclusions; empty extra fields are omitted
+so the earlier unreviewed screens and roll-up reproduce unchanged.
+
+The [offline refresh example](../examples/opportunity-screen/review-refresh/README.md) uses the actual review and
+screen CLIs on a temporary model copy. Rejecting JT-201 adds K-201 to C12's triggers; rejecting SC-203 opens E29 at
+K-203; rejecting HX-303 opens E31 and H6 at F-303. It checks the three new finding IDs and C12 membership separately,
+repeated-review byte stability, explicit reconfirmation restoring the questions, retained history and unchanged
+source bytes. Its committed screen selects only those four question types. The original full food screen and all
+other historical outputs retain their original population and evidence scope.
+
+Independent review caught a bypass in the first repair: a supplemental loop row could recreate a rejected drive
+as a controller and silence a live measurement question. The guard now checks rejected IDs and tags across model
+sections, after accounting for live duplicate identities. A supplemental row does not override rejection. This is
+not identity reconciliation: a live duplicate remains eligible and needs an engineer's review. The registered
+question-engine script currently passes 51 tests, including the actual CLI packet and the new bypass regression.
+
+A fresh cold reader found an additional documentation trap: when a finding disappears, its old source-manifest
+binding is refused as an unknown question. The maintenance guides now say to preserve the previous packet and
+manifest, withdraw absent IDs from the current locator bindings, then refresh with the existing register and no
+old answer resubmission. Independent actual CLI checks on a temporary Bayer packet verify the refusal preserves
+all bytes, the corrected refresh retains the original decision and ownership history exactly, and the removed
+question is marked absent with its earlier answer stale. The pinned raw source remains unchanged.
+
+The existing 94-cell matrix does not exercise the question engine, so this change makes no matrix generalization
+claim and changes no cell, tool hash or criterion. All 52 pipeline stages remain fresh. Engineer adoption,
+review effort and operational value remain unmeasured; the actual first-pilot observation is still open.
+
+Final independent review passed 37 adversarial controls and all 51 registered question-engine cases, independently
+reproduced the ten older outputs and the three new packet files, and bound those exact outputs plus the supporting
+code and instructions. The local full runner passed all 58 scripts with two Windows symlink unittest cases skipped,
+two platform notices explaining those same cases and no additional skipped-check notices. It correctly withholds
+a complete-suite claim. CI and optional-source environments require their own coverage report.
+
+**Separate export gap retained as N064.** The independent scope check applied fictional rejections of U-100 and
+FT-101 to a copy of the TE model. The legacy seed Ignition exporter still emits that unit instance and instrument
+tag, and the PI exporter still selects its element and attribute rows. Their descriptions carry the rejected
+review annotation; exclusion is missing. The review-loop guide now limits its export-filtering claim to extracted
+twins and states the legacy limitation. No gateway, import or source-model change occurred. The question repair
+does not fix those exporters; they are the next concrete maintenance issue, with historical outputs preserved.

@@ -264,9 +264,9 @@ Status: **proven**
 
 - **Tools:** `question_engine.py`
 - **How to use it:** [OPPORTUNITY_SCREEN.md](../docs/OPPORTUNITY_SCREEN.md)
-- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json)
+- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json), [`expected.json`](../examples/opportunity-screen/review-refresh/expected/expected.json), [`questions.json`](../examples/opportunity-screen/review-refresh/expected/questions.json), [`screen.md`](../examples/opportunity-screen/review-refresh/expected/screen.md)
 - **Tests:** `test_question_engine.py`
-- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (read-only maintenance review, baseline reproductions and adversarial actual-CLI controls), 2026-10-30: pass
 
 <a id="impact-estimate"></a>
 ### First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up

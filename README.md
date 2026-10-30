@@ -252,6 +252,10 @@ Use the local toolkit to establish a bounded, reviewable engineering packet and 
 are incomplete. Keep the original source pack, stable asset IDs, mappings, answers, ownership history, unresolved
 questions and pilot outcome together. An engineer should be able to inspect that packet without an account.
 
+When a model review rejects an item, [refresh the question screen](examples/opportunity-screen/review-refresh/README.md)
+so that item stops supplying evidence or hiding a collection need. Refresh the retained context register against
+the revised model and questions; previous decisions remain visible even when their question no longer applies.
+
 When several teams depend on it, the ongoing work includes deciding which revisions govern, reconciling identities
 across systems, assigning accountable owners, controlling access, reviewing changes and retaining decisions across
 projects. Those responsibilities belong in the organization's working processes and systems. The local register

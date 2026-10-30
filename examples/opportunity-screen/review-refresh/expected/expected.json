@@ -1,0 +1,36 @@
+{
+  "scope": "Software controls on the existing synthetic food model and fictional review; no real plant or human review.",
+  "questions_run": [
+    "C12",
+    "E29",
+    "E31",
+    "H6"
+  ],
+  "new_findings": [
+    "E29@K-203",
+    "E31@F-303",
+    "H6@F-303"
+  ],
+  "C12_model_assets_before": [
+    "K-202",
+    "K-203",
+    "PT-202"
+  ],
+  "C12_model_assets_after": [
+    "K-201",
+    "K-202",
+    "K-203",
+    "PT-201",
+    "PT-202"
+  ],
+  "excluded_items": [
+    "HX-303",
+    "JT-201",
+    "SC-203"
+  ],
+  "repeated_review_unchanged": true,
+  "explicit_reconfirmation_restores_questions": true,
+  "review_history_retained": true,
+  "source_fixture_unchanged": true,
+  "source_model_semantic_sha256": "5124256e5faef2002398a8647444e0f8927c57f2fe0e049a8e38e56a38be2d72"
+}

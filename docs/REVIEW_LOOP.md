@@ -64,7 +64,7 @@ python scripts/generate.py                                  # or: generate.py <t
   exactly the review. A dated change record goes to `out/review/`.
 - **Re-applying the same sheet changes nothing.** The regenerated sheet prints earlier decisions back into the
   `OPS_` columns, so a reviewer can stop and resume.
-- **Downstream:**
+- **Downstream, for an extracted twin:**
   - rejected items leave the Ignition tags, the PI AF sheet and the SVGs (items under rejected equipment move to
     `_Unassigned`);
   - each Ignition instance's `ReviewStatus` tag carries the decision, and the verifier checks it matches (V2);
@@ -72,6 +72,20 @@ python scripts/generate.py                                  # or: generate.py <t
     with `review: <status> | risk tier: <tier>`, so the decision and the remaining uncertainty show where the
     tag is used;
   - "don't show" items get no screen label.
+
+The legacy hand-built process-model Ignition and PI exporters currently retain rejected units and instruments,
+with review annotations. Rejection filtering in those two exporters remains an open maintenance gap (N064 in
+[the ledger](TRIED.md)). The question-screen behavior below applies to both model formats; it does not establish
+that the legacy platform exports honor those decisions.
+
+If you used the question engine, rerun it with the updated model and the same supplemental inputs and selection.
+Rejected items also leave question triggers, evidence and relationships; non-rejected children remain eligible
+without a rejected owner, parent or stream. The screen lists the recorded rejections and does not let a
+supplemental loop list reinstate a rejected controller. The [worked refresh](../examples/opportunity-screen/review-refresh/README.md)
+checks this sequence on fictional decisions, including explicit reinstatement and retained history. Refresh an
+existing context register with its current `--register` so earlier decisions remain visible. Preserve the old
+packet and manifest first; withdraw absent finding IDs from the current manifest's locator bindings before
+refreshing, as the [context revision guide](CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers) explains.
 
 An existing OPC `data_point` or reviewed PI `pi_point` blocks a scoped valve-callout
 conversion before any fields or review history change. Changing or removing that

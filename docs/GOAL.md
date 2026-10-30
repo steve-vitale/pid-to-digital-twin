@@ -650,3 +650,28 @@ checks but skipped two Windows symlink controls. Those environments have differe
 5. Review the frozen reporting change independently and run the registered suite locally and in CI. Report each
    environment's actual omissions. No new extraction score, plant acceptance, customer benefit or exhaustive
    proof that arbitrary test programs cannot hide work is implied.
+
+### Maintenance acceptance: carry model rejections into subsequent questions
+
+2026-10-30, before repair. The engine currently ignores `ops_review`. On the existing synthetic food model,
+applying explicitly fictional rejections of the power meter JT-201, speed drive SC-203 and heat-recovery unit
+HX-303 leaves E29 at K-203 and E31/H6 at F-303 quiet, and still omits K-201 from the existing model-wide C12
+metering question. A rejected item must not
+continue to supply evidence that suppresses the next question. This is a software control on invented equipment,
+not a new corpus, correction to a real plant, human review or energy finding.
+
+1. Explicit `ops_review.status = rejected` records cannot trigger or suppress a question, provide evidence or
+   data-request locations, satisfy a required model kind, or carry a relationship/traversal path. Apply this to
+   both accepted model formats. Missing/unverified review remains eligible and is not implied to be approved.
+2. Keep source model bytes, rejected records and their review history intact. List excluded records and their
+   recorded decisions in generated screens. Retain non-rejected children independently; remove their reliance
+   on explicitly rejected owning units, parents or streams without inventing a replacement or recursively
+   rejecting them. Do not alter ordinary unresolved references or historical unreviewed example outputs.
+3. A supplemental loop list must not silently recreate a controller explicitly rejected in the model. Preserve
+   tag ambiguity where a live duplicate remains. Refuse malformed review metadata before writing a screen.
+4. Demonstrate the actual apply-review-to-question CLI path and named changes on the existing illustrative
+   food model, including idempotent review and a later explicit reconfirmation. Include positive controls and
+   extracted-model relationship controls. Old examples retain their original populations and result files.
+5. Independently reproduce the baseline failure, review the frozen change and exact new packet, run affected
+   generalization cells with unchanged criteria and report actual local/CI test omissions. This establishes
+   maintenance behavior only; no authenticated review, source authority, plant truth or adoption is inferred.

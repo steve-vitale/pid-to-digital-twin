@@ -2969,6 +2969,23 @@
         "examples/test-coverage/README.md",
         "docs/REVIEWING.md"
       ]
+    },
+    {
+      "id": "A204",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Carry explicit model rejections into the question engine through an active projection, retain source/history, report exclusions and prevent supplemental loop rows recreating rejected identities.",
+      "hypothesis": "A reviewed model must not keep using rejected items to trigger or suppress subsequent investigation questions.",
+      "evidence": "On the existing synthetic food model, fictional rejections of JT-201, SC-203 and HX-303 previously left all 24 findings unchanged; independent record-removal control gives 27 and adds K-201 to the existing C12 group. The actual CLI example now opens the three named findings, expands C12, preserves repeat-review bytes and history, and restores questions after explicit reconfirmation. Independent review exposed and the repair closes a rejected-drive loop-row resurrection bypass. Root question-engine tests pass 51 cases; four older screens and the roll-up reproduce unchanged. A cold-reader actual CLI check verifies source-binding withdrawal before refreshing a retained context register after a finding disappears.",
+      "runs": "Deterministic software controls on existing public/synthetic fixtures; no new plant, extraction run or human review",
+      "verdict": "kept",
+      "why": "Makes a supplied engineering correction affect the next collection plan without erasing the model or recursively rejecting its children. No matrix criterion, result or historical population changes; adoption and operational value remain unmeasured.",
+      "source": [
+        "docs/JOURNAL.md#71-carry-explicit-model-rejections-into-the-next-question-screen",
+        "examples/opportunity-screen/review-refresh/README.md",
+        "docs/OPPORTUNITY_SCREEN.md",
+        "docs/CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers"
+      ]
     }
   ],
   "not_tried": [
@@ -3617,6 +3634,17 @@
       "source": [
         "docs/CONTEXT_LIFECYCLE.md",
         "docs/JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context"
+      ]
+    },
+    {
+      "id": "N064",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "Make the legacy hand-built process-model Ignition and PI exporters honor explicit item rejections while retaining independently eligible children and original model history.",
+      "why_not_yet": "Independent actual pure-output check on a copied TE model: apply_review accepts fictional rejection of U-100 and FT-101, but ignition_tags still emits the unit instance and AFeedFlow tag and pi_af_rows still selects the element and instrument attribute. Review annotations change, exclusion is missing. This question-screen increment does not change those exporters; the guide now states that boundary. No gateway or native import was attempted.",
+      "source": [
+        "docs/JOURNAL.md#71-carry-explicit-model-rejections-into-the-next-question-screen",
+        "docs/REVIEW_LOOP.md"
       ]
     }
   ]

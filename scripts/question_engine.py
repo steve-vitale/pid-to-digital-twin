@@ -24,6 +24,8 @@ it lives instead (nameplate, historian tag if one is mapped, control system conf
 Accepts a hand-built process model (data/te_process_model.json, data/bayer_rt/process_model.json) or an extracted
 twin (plant_model.json). --loops adds controllers from a loop list CSV (controller,measurement,output,...);
 --schedule adds equipment schedule entries (tag + service per sheet; optional printed fields, null = blank).
+Explicit ops_review rejections are excluded from screening and reported; the source model and history are not
+edited. Other items remain eligible, with references to rejected owners/parents/streams removed for this screen.
 
 Writes questions.json (the graph-export questions shape: scripts/graph_export.py --questions accepts it) and
 screen.md (grouped by family, readable on its own).
@@ -203,6 +205,16 @@ def check_shapes(m, path):
                                    f"{json.dumps(sr)[:40]}")
             if "facts" in r and r["facts"] is not None and not isinstance(r["facts"], dict):
                 bad.append(f"{where}.facts must be an object of named values, not {type(r['facts']).__name__}")
+            review = r.get("ops_review")
+            if review is not None:
+                if not isinstance(review, dict):
+                    bad.append(f"{where}.ops_review must be an object")
+                else:
+                    if review.get("status", "unverified") not in ("unverified", "confirmed", "corrected", "rejected"):
+                        bad.append(f"{where}.ops_review.status must be unverified, confirmed, corrected or rejected")
+                    for field in ("by", "on", "notes"):
+                        if review.get(field) is not None and not isinstance(review[field], str):
+                            bad.append(f"{where}.ops_review.{field} must be text")
             key = r.get("id") if sec == "units" else None
             if isinstance(key, str):
                 if key in seen:
@@ -211,6 +223,37 @@ def check_shapes(m, path):
     if bad:
         raise InputError(f"can't read {shown_path(path)}: " + "; ".join(bad[:8])
                          + (f"; and {len(bad) - 8} more" if len(bad) > 8 else ""))
+
+
+def screening_model(m):
+    """A disposable active projection, not an edit or a recursive rejection of the source model."""
+    rejected = [(sec, r) for sec in SECTIONS for r in m.get(sec, [])
+                if (r.get("ops_review") or {}).get("status") == "rejected"]
+    units = {r["id"] for sec, r in rejected if sec == "units"}
+    assets = {r.get("id") or r.get("tag") for sec, r in rejected if sec != "streams"}
+    streams = {r["id"] for sec, r in rejected if sec == "streams"}
+    active = dict(m)
+    for sec in SECTIONS:
+        if sec not in m:
+            continue
+        active[sec] = []
+        for r in m[sec]:
+            if (r.get("ops_review") or {}).get("status") == "rejected":
+                continue
+            it = dict(r)
+            for field, removed in (("unit", units), ("parent", assets), ("stream", streams)):
+                if it.get(field) in removed:
+                    it[field] = None
+            if sec == "streams":
+                for field in ("from", "to"):
+                    if it.get(field) in assets:
+                        it[field] = None
+            active[sec].append(it)
+    exclusions = [{"id": r.get("id") or r.get("tag"), "tag": r.get("tag"),
+                   "field": f"{sec}[{r.get('id') or r.get('tag')}]",
+                   "review": {k: v for k, v in r["ops_review"].items() if k in ("status", "by", "on", "notes")}}
+                  for sec, r in rejected]
+    return active, exclusions
 
 
 def from_hand(m):
@@ -358,8 +401,9 @@ class Model:
                              "(plant_model.json)")
         check_shapes(self.m, path)
         try:
+            self.active_m, self.review_exclusions = screening_model(self.m)
             self.schedule = load_schedule(schedule_paths)
-            self.items = from_twin(self.m, self.schedule) if self.twin else from_hand(self.m)
+            self.items = from_twin(self.active_m, self.schedule) if self.twin else from_hand(self.active_m)
         except (KeyError, TypeError, AttributeError, ValueError) as e:
             # A record inside the model or schedule is missing a field or has the wrong shape: refuse and name it,
             # rather than crash or screen a model that was only partly read.
@@ -371,11 +415,21 @@ class Model:
                                "schedule entry a tag")
         self.loop_source = None
         self.loop_unmatched = []
+        self.loop_rejected = []
         if loops:
             self.loop_source = shown_path(loops)
             have = {norm_tag(i["tag"]) for i in self.items if i["kind"] == "controller"}
             known = {norm_tag(i["tag"]) for i in self.items if i.get("tag")}
             rows = load_loops(loops)
+            # A supplemental list cannot undo an explicit model rejection. A live duplicate controller tag
+            # still represents a separate eligible record; do not reject every occurrence of that tag.
+            live_identities = {norm_tag(value) for it in self.items for value in (it["id"], it.get("tag")) if value}
+            rejected_identities = {norm_tag(value) for it in self.review_exclusions
+                                   for value in (it["id"], it.get("tag")) if value} - live_identities
+            # A loop row could otherwise recreate any rejected record as a controller, including a drive or
+            # other final element. Apply the identity guard across sections, not just controller bubbles.
+            self.loop_rejected = [r["controller"] for r in rows if norm_tag(r["controller"]) in rejected_identities]
+            rows = [r for r in rows if norm_tag(r["controller"]) not in rejected_identities]
             # A loop list naming none of the model's tags is the wrong list or a typo: screening with it would
             # report every instrument as unread by any controller, so refuse it instead of answering confidently.
             self.loop_unmatched = [r["controller"] for r in rows
@@ -406,9 +460,10 @@ class Model:
     def adj(self):
         if self._adj is None:
             a = defaultdict(set)
-            for s in self.m.get("streams", []):
-                a[s["from"]].add(s["to"])
-                a[s["to"]].add(s["from"])
+            for s in self.active_m.get("streams", []):
+                if s.get("from") and s.get("to"):
+                    a[s["from"]].add(s["to"])
+                    a[s["to"]].add(s["from"])
             for i in self.items:
                 if i.get("parent"):
                     a[i["parent"]].add(i["id"])
@@ -514,7 +569,7 @@ def related(model, anchor, cand, clause):
             return False
         streams = model.linked_streams(u)
         if cand["kind"] == "equipment":
-            return any({s.get("from"), s.get("to")} >= {u, cand["id"]} for s in model.m.get("streams", []))
+            return any({s.get("from"), s.get("to")} >= {u, cand["id"]} for s in model.active_m.get("streams", []))
         return cand.get("stream") in streams
     if rel in ("discharge_side", "near"):
         if model.twin:
@@ -823,10 +878,19 @@ def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=Non
            "counts": {"findings": len(found), "by_family": dict(sorted(count_by(found, "family").items()))},
            "questions": found, "not_checked": not_checked, "did_not_fire": quiet,
            "left_out": {k: sorted(set(v)) for k, v in sorted(excl.items())}}
+    add_review_exclusions(model, doc)
     (out / "questions.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
                                         newline="\n")
     (out / "screen.md").write_text(render_md(model, catalog, doc), encoding="utf-8", newline="\n")
     return doc
+
+
+def add_review_exclusions(model, doc):
+    # Omit empty fields to retain historical unreviewed packets byte for byte.
+    if model.review_exclusions:
+        doc["review_exclusions"] = model.review_exclusions
+    if model.loop_rejected:
+        doc["loop_rows_rejected"] = model.loop_rejected
 
 
 def count_by(found, key):
@@ -846,6 +910,20 @@ def render_md(model, catalog, doc):
     if doc.get("loop_rows_unmatched"):
         L += [f"**Loop list rows naming no tag in the model** (not used to judge what is read or driven): "
               f"{', '.join(doc['loop_rows_unmatched'])}.", ""]
+    if doc.get("review_exclusions"):
+        L += ["## Rejected model items excluded", "",
+              "These recorded rejections are excluded from triggers, evidence and relationships. The source model "
+              "and its history are retained. Non-rejected children remain eligible without a rejected owner, "
+              "parent or stream; no replacement is inferred. Other items remain unverified unless separately "
+              "reviewed. Recorded names and decisions do not authenticate a reviewer or establish plant truth.", ""]
+        for item in doc["review_exclusions"]:
+            review = item["review"]
+            L.append(f"- `{item['field']}`: {review['status']}; recorded by {review.get('by') or 'unknown'}, "
+                     f"on {review.get('on') or 'unknown'}. {review.get('notes') or ''}".rstrip())
+        L.append("")
+    if doc.get("loop_rows_rejected"):
+        L += ["**Loop rows excluded because their controller is explicitly rejected in the model:** "
+              + ", ".join(doc["loop_rows_rejected"]) + ". The supplemental list does not reinstate them.", ""]
     L += [HOW_TO_READ, "",
          "| Family | Findings |", "|---|---|"]
     fams = catalog["families"]
@@ -1111,6 +1189,7 @@ def main(argv=None):
                "questions": found, "not_checked": nc,
                "did_not_fire": quiet, "left_out": {k: sorted(set(v)) for k, v in excl.items()},
                "counts": {"findings": len(found), "by_family": dict(count_by(found, "family"))}}
+        add_review_exclusions(model, doc)
         sys.stdout.reconfigure(encoding="utf-8")
         print(render_md(model, catalog, doc))
     return 0
