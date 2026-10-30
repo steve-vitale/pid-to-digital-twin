@@ -25,6 +25,10 @@ The first writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.report
   must be a render of the whole drawing; this needs the drawing geometry in the XML). On C01 its symbols and
   connections are the same as in `examples/from-dexpi/c01/dexpi-c01.prediction.json` (25 symbols, 37 connections);
   the `producer` and `source` blocks differ, because they name this tool and the input file hashes.
+  The output also retains an exact `<sheet-id>.source.png`; the manifest references its local filename. Transfer
+  that image, prediction and manifest together to run intake after moving the folder. Keep the XML original and
+  attribution with the wider source packet. An identical retained image is reused; a conflicting image or changed
+  image hash is refused before generated reports are replaced. Use a new folder for a different drawing revision.
 - `--compare-key DIR`: compare against an answer key `scripts/adapt_dexpi.py build` wrote for the same sheet id.
 - `--attribution TEXT`: carried in `meta.attribution`.
 

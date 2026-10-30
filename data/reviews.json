@@ -5226,6 +5226,194 @@
     "matrix-execution/scratch-GENERALIZATION.md": "f0fa451c4db2b77104d50f036ad911032316ed5b88cb5923579da7bf387aa86c",
     "raw-proof-check-results.json": "79b96dc9e91a77189330435143f8bd69f93bef8c80dc7513b34505cade0b7a72"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex matrix compatibility evidence/hash reviewer",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "files": {
+    "docs/GENERALIZATION.md": "e479e067d7add9108644872cdbadaa9df64dd8b4a25d8dffd2f4d65c9874f90e",
+    "out/generalization/matrix.json": "06cf636b89d91bedc9b74252ee8695c13583ecd3176677625af57ee57024e8f9",
+    "data/corpus.json": "a9adbe1d5b48468d615f2fa258aafe46c1134f54371b66cd2485d197305ce322"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/features.json": "edf60847bcc38498b81d11e36dc2607889bff0354d35446dd0969ba3db2a1df6",
+    "examples/loop-audit/covestro/README.md": "1049c13c727a4f5123484fba8fa48138871dcc012da496e505f8022b154bf64e",
+    "examples/loop-audit/covestro/ACCEPTANCE.md": "c969139a5114dded3b977d8c9d33db2e1f357e86095291233d871cc51e64b193",
+    "examples/loop-audit/covestro/connections.csv": "5a2effe0b64de07c6f2a4523d8184bb02e03a1700e40b0795c9d181b5b81d199",
+    "examples/loop-audit/covestro/check_sources.py": "11b9a26a20a9d4bfd153ce4ec30558fe349417c2aa6ba3918c5f24317b3b32bf",
+    "docs/CORPUS_FETCH.md": "81c895a6926e567091f06d0b3b6594e3db539e60735884e1fab7eaa701096241",
+    "examples/loop-audit/README.md": "1f4dd4fa49d40ac70d6276d043bd280b7b7129f5cec887a343452d49c17492ab",
+    "data/corpus_pins.json": "e802a93e20a94a8a8284be0c6614fcfc59646494b83e9655443ac1659b9a6617",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/loop_audit.py": "d2f441f08d6b80dc9640ef62e593a0273411795ceab7f491d817198397a58fe0",
+    "examples/first-pilot/README.md": "320592455e6a627546c616c544dfabd83cd9c30c26b3217361563dbb6fc2ae6e",
+    "examples/first-pilot/pilot-brief.md": "489f9c5af2318369baa6481cf5d9d3a1e5c664111cf4a248bed50169f37b6a09",
+    "scripts/csv_normal_bands.py": "af2fdf402128b024ff62b16a086a718beda14dfd12954dd88c3778ba573a6e40",
+    "scripts/csv_replay_server.py": "e3abd78c439af569e3ee01b1c4a5095a0b6ddf72391de3656186c48bd25f4130",
+    "scripts/test_csv_tools.py": "9cde9eda1e5264382d8e464472bc71c456991e8554aeeaa5967a87c363f80dc0",
+    "examples/historian-csv/README.md": "a7f42feea8e938b2010cf5a70dbdcabc6a4075f4665d6bac497cc280bbf3635a",
+    "scripts/dexpi_to_twin.py": "f7ed3e07539eb3fb281062ea30df36764c98974a0819d852bf02cd03bb83a7c6",
+    "scripts/dexpi_reader.py": "e637a1a9e097289174736736503c9a5db6ec123c224c126157f7ed26ce63f4e7",
+    "scripts/test_dexpi_to_twin.py": "1629716896d2fdfca1aa4e73d47c047a9e29880159b576f413f6b0e9d69b0b5f",
+    "examples/from-dexpi/README.md": "6ccb42e6908ed4425daf8f6747f5b28fb41868b6d063e0fcd64e3946789e543e",
+    "examples/from-dexpi-xml/README.md": "aa02dae77cb713060255ac5b263475ed84452432f258a9309489059898835122"
+   },
+   "file_hash_method": "Repository files: SHA256 with CRLF normalized to LF. Private proof/log/immutable snapshot files: exact raw bytes.",
+   "findings": [],
+   "resolution": "The maintainer actually executed all 27 cells transitively binding the changed DEXPI staging files. All 94 cell objects were compared: 67 untouched cells are exact; the executed cells retain all criteria, engineering metrics/details, reasons and verdicts after isolating cell/top-level execution metadata, 21 nested per-sheet runtimes, current code hashes and two identical-text citation relocations. The matrix is maintenance compatibility evidence on already inspected sources, not a new extraction, primary-source or held-out accuracy experiment.",
+   "checks": [
+    "Verified immutable baseline against the public baseline commit and final public matrix/doc byte identity against completed scratch outputs. Verified all four row command completions and exact source selections against transitive baseline dependencies; actual execution belongs to the maintainer.",
+    "Compared all 94 cell objects. All 67 untouched cells are exact. Executed-cell engineering content is exact after isolating ran_at/seconds, current code hashes, exactly 21 detail.sheets.<sheet>.seconds changes in the row-1 vendor tracing cell and two identical-text citation relocations. All 22 nested sheets and every other nested field are retained. Global totals remain 63 pass, 23 fail, 8 n/a. Recomputed all 732 recorded current file hashes and independently ran the read-only matrix --check.",
+    "Parsed old/current code without importing it: only retained-image/output staging/main definitions change in the converter and run() staging in the reader. Other conversion and XML-reading definitions have exact ASTs. Matrix/corpus, adapter, scorer, line-layer and tracer sources are baseline-identical; no criterion or algorithm is retuned.",
+    "Retained the earlier matrix/source, development reuse, failed/n/a, historically held-out and seed/CSV maintenance scopes through the archived prior accepted record. Its data/features support renewal is only the five context-register presentation fields in the already committed baseline; no code, output list, test list or matrix metadata changes.",
+    "Verified the separately archived independent functional proof and all nine named immutable baseline/frozen/harness/control files against raw digests; current code/test/guide bindings match. Its 72 actual CLIs, 226 passing checks and 12 actual C:/D: portability cases belong to the controls reader and are not matrix accuracy scores. Its two real symlink attempts were OS-denied with WinError 1314, not passes. This reviewer executed no cells/tests/source conversions; only the read-only matrix --check.",
+    "The root initial private acceptance check omitted nested per-sheet runtimes and stopped before publication. Independently verified the final exact 21 timing-only exceptions and every remaining object field; no benchmark rule or engineering result was relaxed.",
+    "All outputs remain prototype engineering drafts and source-derived compatibility records for an on-ramp/company handoff. No site truth, live connectivity, governing-document selection, human approval, customer adoption or replacement company governance capability is certified."
+   ],
+   "execution_attribution": {
+    "maintainer_rows": [
+     {
+      "row": 1,
+      "inputs": [
+       "dexpi-1.2-vendor-renders"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 173.4,
+      "log_sha256_raw": "b833c11f4befc1e7593ae4de18ee9a0cd13bc9c476ef098928e0fec216734246"
+     },
+     {
+      "row": 4,
+      "inputs": [
+       "dexpi",
+       "dexpi-1.3-small-cases",
+       "dexpi-1.2-reference",
+       "dexpi-1.2-sppid",
+       "dexpi-1.2-comos",
+       "dexpi-1.2-aveva",
+       "dexpi-1.2-autocad"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.4,
+      "log_sha256_raw": "143e92ce513f816c60e38e0d9a2731dd7554408cf25aed2da8816cf38e12a018"
+     },
+     {
+      "row": 7,
+      "inputs": [
+       "dexpi",
+       "dexpi-1.3-small-cases",
+       "dexpi-1.2-reference",
+       "dexpi-1.2-sppid",
+       "dexpi-1.2-comos",
+       "dexpi-1.2-aveva",
+       "dexpi-1.2-autocad",
+       "dexpi-1.2-cross-vendor"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.8,
+      "log_sha256_raw": "07d0b0f0e45dc6c259a066767c181e9fd941f486e3179470b7e92490851df166"
+     },
+     {
+      "row": 8,
+      "inputs": [
+       "open100-dev",
+       "open100-holdout",
+       "dexpi",
+       "te-rev-a",
+       "te-rev-c",
+       "te-rev-d",
+       "bayer-rt1",
+       "dexpi-1.2-vendor-renders",
+       "omre-1958-pid",
+       "commons-pid-sheets",
+       "pronto-fig1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 243.3,
+      "log_sha256_raw": "ae2d02c9ef3f738ea680eddf0f8a40bd019aa5bbd6be5569840b0e162d717b47"
+     }
+    ],
+    "maintainer_cells": 27,
+    "this_reviewer_cells": 0,
+    "this_reviewer_tests_or_source_runs": 0,
+    "matrix_check_exit": 0
+   },
+   "functional_evidence": {
+    "proof_sha256_raw": "117f418ba71cac3f8cf464fd7a6cdf5027723c493cf4bac5fa976fa833f41b01",
+    "reviewer": "Independent AI controls_reader persona; software development portability review, not human engineering review",
+    "scope": "Existing configured-key DEXPI converter and own-XML --png route, exact image retention, Windows same/cross-volume folder portability, intake, unchanged prediction/model behavior and bounded refusal preflight. No source correctness,benchmark,matrix-score or adoption re-review.",
+    "actual_CLIs": 72,
+    "passing_checks": 226,
+    "portability_cases": 12,
+    "OS_denied_symlink_cases": 2,
+    "skip_code": 1314,
+    "executions_not_repeated_by_matrix_reviewer": true
+   },
+   "prior_review_scope": {
+    "archive_sha256_raw": "81a49ebd3cbb9c83920d042839de116690bfc4b2bcdc177dcda756fa4d050319",
+    "prior_limits": [
+     "Narrow independent evidence/diff/hash/AST and N057 bookkeeping review only. Functional CLI checks belong to their independent controls proof; the ten matrix executions belong to the maintainer log. This reviewer ran only the read-only matrix --check, not cells, tests, replay listeners or source/detector executions.",
+     "All sources were already inspected before this maintenance run. Existing development reuse, method selection, failed/n/a cases and historically held-out same-network limitations remain. No new untouched holdout, source family, detector tuning, metric gain or broad accuracy/generalization claim is established.",
+     "The input validator compares parsed instants and preserves data association; it does not verify clock accuracy, uniform sampling, source authority or anomaly meaning. Irregular increasing intervals remain accepted and detector windows still count rows; no sorting, deduplication or resampling is implied.",
+     "No plant/customer data, network source fetch, human engineering approval, adoption measurement, causal effectiveness, native gateway/PI import, live listener or equipment operation is certified. The toolkit is an on-ramp and handoff, not a company governance system.",
+     "The parent reports the separate full local run ended 56/58: two unchanged DEXPI relative-image cross-drive failures; isolated same-drive retries pass. This receipt does not independently reexecute or certify those tests, unrelated portability, or a clean full-suite pass. Generated README/FEATURES and unrelated journal/attempt metadata are excluded; only N057 and its rendered completed line are bound.",
+     "Public TE input files already use CRLF working bytes versus LF Git blobs. The functional proof records both raw and LF hashes and used exact checkout bytes in old/final runs; no raw checkout/blob equality is claimed."
+    ],
+    "prior_output_hashes": {
+     "docs/GENERALIZATION.md": "f0fa451c4db2b77104d50f036ad911032316ed5b88cb5923579da7bf387aa86c",
+     "out/generalization/matrix.json": "50e99d2b9cfed937f5685d5b22c30efed5c126feaf16d142cd54ddf9dc487000",
+     "data/corpus.json": "a9adbe1d5b48468d615f2fa258aafe46c1134f54371b66cd2485d197305ce322"
+    },
+    "preserved": "Historical substantive/source audits and preceding maintenance reviews retain their original scope, development/holdout qualifications and limits; none is relabelled fresh here."
+   },
+   "inherited_support_renewals": {
+    "data/features.json": {
+     "before": "558895ddcf628368c7835e567e7791a812a27d1ff15619aa82744fb9f6f73e6d",
+     "after": "edf60847bcc38498b81d11e36dc2607889bff0354d35446dd0969ba3db2a1df6"
+    }
+   },
+   "limits": [
+    "One-feature matrix evidence/hash/AST review only. All 27 cell executions are attributed to the maintainer logs; independent functional controls remain attributed to their proof. No cells/tests/source conversions were executed by this reviewer.",
+    "Inputs and criteria are unchanged and already inspected. All prior development reuse, method selection, 23 failed/8 n/a cells and historically held-out same-network qualifications remain. No new holdout, accuracy/generalization gain, source family or method tuning is claimed.",
+    "No plant/customer data, native imports, network/source fetch, live adapter, human/site approval, operation, measured benefit or adoption is certified. A movable local intake folder does not make source records governing plant truth or the toolkit a company governance substitute.",
+    "The independent functional proof has two WinError 1314 real-symlink skips. Source-read refusal branches are not relabelled executed passes; this matrix review does not erase those OS limits.",
+    "This receipt certifies neither the separately running full suite nor unrelated portability. Generated README/FEATURES tables and whole evolving JOURNAL/TRIED files are excluded from current bindings."
+   ],
+   "private_proof_hash_method": "SHA256 over exact raw bytes; no newline normalization.",
+   "private_proof_hashes": {
+    "execution/baseline-matrix.json": "50e99d2b9cfed937f5685d5b22c30efed5c126feaf16d142cd54ddf9dc487000",
+    "execution/final-scratch-matrix.json": "06cf636b89d91bedc9b74252ee8695c13583ecd3176677625af57ee57024e8f9",
+    "execution/final-scratch-GENERALIZATION.md": "e479e067d7add9108644872cdbadaa9df64dd8b4a25d8dffd2f4d65c9874f90e",
+    "execution/matrix-commands.json": "764564afcd54489175c29c4e2cf7e0e450eaa8a71b2df6d8e7a3216045e1e3af",
+    "execution/run_affected_matrix.py": "d3f365078b3d5ed0377a3d8668357dd98501b28712d40cbac3ca8fc912f762ce",
+    "execution/accept_matrix.py": "a6595dfec7f93b56525812ccafd45dbd607197075ff889c22e9d008605b6222b",
+    "execution/matrix-compatibility-proof.json": "64b362a755afd777e4cbd261477e5e1bf86dc57abe9a65efbe09ad6b9d4abfa3",
+    "execution/matrix-row-1.log": "b833c11f4befc1e7593ae4de18ee9a0cd13bc9c476ef098928e0fec216734246",
+    "execution/matrix-row-4.log": "143e92ce513f816c60e38e0d9a2731dd7554408cf25aed2da8816cf38e12a018",
+    "execution/matrix-row-7.log": "07d0b0f0e45dc6c259a066767c181e9fd941f486e3179470b7e92490851df166",
+    "execution/matrix-row-8.log": "ae2d02c9ef3f738ea680eddf0f8a40bd019aa5bbd6be5569840b0e162d717b47",
+    "prior-accepted-matrix-record.json": "81a49ebd3cbb9c83920d042839de116690bfc4b2bcdc177dcda756fa4d050319",
+    "functional/final-review.json": "117f418ba71cac3f8cf464fd7a6cdf5027723c493cf4bac5fa976fa833f41b01",
+    "prepare_proposal.py": "2d42f074c02cbc7e8d11b7b4fb53a0937816c8207489be53363ab36266d37fd7",
+    "final-inputs.json": "55a8e3dd11f08e700f582b1f9f1eb3778f2969f622e4a006aadbeee1fbf28efb",
+    "functional/baseline/freeze.json": "fb258ac79a6eac4e4efd1a9dd7287941b0fc58b7befe83cefef4a86cee00c980",
+    "functional/baseline/dexpi_to_twin.py": "60e23aa837a1c0c940ac4a4b833ba2c02e54045c42f1381dafc7b83f06fb68db",
+    "functional/baseline/dexpi_reader.py": "4df35b3756356349f229bd4d8c67f7215606eb096733203e744c3e5966843e96",
+    "functional/final-frozen/freeze.json": "11942875dd07dcda9f03336e6fb91e8ba8383546c12312d544d48373401e2e16",
+    "functional/final-frozen/dexpi_to_twin.py": "1037280e98cb8da6b3d1d5ca0072cd0a287132a09112b42abce523942fa8fac7",
+    "functional/final-frozen/dexpi_reader.py": "e637a1a9e097289174736736503c9a5db6ec123c224c126157f7ed26ce63f4e7",
+    "functional/final-frozen/test_dexpi_to_twin.py": "1629716896d2fdfca1aa4e73d47c047a9e29880159b576f413f6b0e9d69b0b5f",
+    "functional/review_final.py": "4a65e7bfa8c88ad3742352f9c8439a4056030ab936201c9d2b93080e0804f6b3",
+    "functional/final-controls.json": "fdadae21bb8b419a61ad1a473baf020e541ef3a37946cdd7c250c63f4a9696db",
+    "raw-proof-check-results.json": "2f6dc2d5a8f5147dd5fc83d58f2bfb73597c868632d612f2898c6434605f7435"
+   }
   }
  ]
 }

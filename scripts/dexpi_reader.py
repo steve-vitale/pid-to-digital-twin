@@ -21,7 +21,8 @@ that file directly with the standard library and writes, into --out:
                      valves and PipeTee junctions; see scripts/line_layers.py) and the line networks it implies.
   <id>.report.json   what was read, kept, folded, dropped and why, with counts; also printed
   <id>.report.md     the printed report as text
-  with --png (a render of the whole drawing extent): <id>.prediction.json + <id>.intake-manifest.json for
+  with --png (a render of the whole drawing extent): <id>.prediction.json + <id>.intake-manifest.json and an exact
+                     <id>.source.png copy, referenced by filename so the intake folder can move; for
                      scripts/import_site_drawing.py, built with the same rules as dexpi_to_twin.py (needs the
                      drawing geometry; imports adapt_dexpi.py, dexpi_to_twin.py and score_pid2graph.py)
 
@@ -1491,30 +1492,41 @@ def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet
         if "skipped" not in rep["comparison"]:
             rep["comparison"]["key_item_attributes"] = reader.key_attribute_coverage(rep["comparison"].pop("_key_ids"))
     out = Path(out)
-    out.mkdir(parents=True, exist_ok=True)
     sid = reader.sheet_id
-    written = []
-    for name, obj in ((f"{sid}.model.json", model), (f"{sid}.report.json", rep)):
-        (out / name).write_text(json.dumps(obj, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
-        written.append(out / name)
-    text = report_text(rep)
-    (out / f"{sid}.report.md").write_text(text, encoding="utf-8", newline="\n")
-    written.append(out / f"{sid}.report.md")
+    pred = None
     if png:
-        pred, prep = prediction(xml, png, sid, model["meta"]["title"])
-        pp = out / f"{sid}.prediction.json"
-        pp.write_text(json.dumps(pred, indent=1, allow_nan=False) + "\n", encoding="utf-8")
-        import os
+        import dexpi_to_twin as D
         try:
-            image = Path(os.path.relpath(Path(png).resolve(), out.resolve())).as_posix()
-        except ValueError:
-            image = Path(png).resolve().as_posix()
+            image = D.intake_image_name(sid)
+            pred, _ = prediction(xml, png, sid, model["meta"]["title"])
+        except (ValueError, OSError) as exc:
+            raise DexpiError(str(exc)) from exc
+    pending = {}
+    for name, obj in ((f"{sid}.model.json", model), (f"{sid}.report.json", rep)):
+        pending[name] = json.dumps(obj, indent=1, ensure_ascii=False) + "\n"
+    text = report_text(rep)
+    pending[f"{sid}.report.md"] = text
+    if pred is not None:
+        pp = out / f"{sid}.prediction.json"
+        pending[pp.name] = json.dumps(pred, indent=1, allow_nan=False) + "\n"
         man = {"schema_version": "site-drawing-intake-1", "drawing_id": sid, "revision": "as exported", "page": 1,
                "image": image, "extraction": pp.name, "extraction_format": "prediction", "producer": PRODUCER,
                "drawing_number": Path(xml).stem, "system_name": model["meta"]["title"][:200]}
-        mp = out / f"{sid}.intake-manifest.json"
-        mp.write_text(json.dumps(man, indent=1) + "\n", encoding="utf-8")
-        written += [pp, mp]
+        pending[f"{sid}.intake-manifest.json"] = json.dumps(man, indent=1) + "\n"
+    sources = {Path(xml).resolve()} | ({Path(png).resolve()} if png else set())
+    if any((out / name).resolve() in sources for name in pending):
+        raise DexpiError("generated output overlaps a source; use a new output folder")
+    if pred is not None:
+        try:
+            D.retain_intake_image(png, out, sid, pred["source"]["image_sha256"])
+        except (ValueError, OSError) as exc:
+            raise DexpiError(str(exc)) from exc
+    out.mkdir(parents=True, exist_ok=True)
+    written = []
+    for name, content in pending.items():
+        (out / name).write_text(content, encoding="utf-8", newline="\n")
+        written.append(out / name)
+    if pred is not None:
         rep["prediction"] = {"symbols": len(pred["symbols"]), "connections": len(pred["connections"])}
     if not quiet:
         sys.stdout.write(text)

@@ -47,11 +47,21 @@ python -S scripts/dexpi_to_twin.py --sheet dexpi-c01
 python -S scripts/import_site_drawing.py --manifest data/external/dexpi/twin/dexpi-c01.intake-manifest.json --out my-bundle
 ```
 
-The first writes `dexpi-c01.prediction.json` (the intake contract from `extraction/prompt_v2.md`) and
-`dexpi-c01.intake-manifest.json` into `data/external/dexpi/twin/`, and prints every lossy step. The manifest names
+The first writes `dexpi-c01.prediction.json` (the intake contract from `extraction/prompt_v2.md`),
+`dexpi-c01.intake-manifest.json` and a byte-identical `dexpi-c01.source.png` into `data/external/dexpi/twin/`,
+and prints every lossy step. The manifest names
 the producer as `{"method": "converted from DEXPI XML, no model", "tool": "dexpi_to_twin.py", "model": null}`.
 The second is the unchanged intake; `my-bundle/` must not exist yet. `--intake my-bundle` on the first command does
 both in one go.
+
+Keep these three files together when handing the intake to another engineer. The manifest uses local filenames,
+so the folder can move to another drive or computer before running the second command. Existing identical source
+copies are reused; a different image at that filename is refused before the prediction or manifest is replaced.
+Use a new output folder for a changed drawing. The image hash must still match the prediction; no image conversion
+or automatic revision choice occurs. Keep the original CAD XML and its attribution with the wider source packet.
+
+The committed `c01/` files record an earlier conversion. Its manifest refers to the pinned local image cache;
+run the commands above to produce the current intake folder with its retained image.
 
 For `dexpi-c01` (DEXPI reference P&ID, example C01) on this commit:
 

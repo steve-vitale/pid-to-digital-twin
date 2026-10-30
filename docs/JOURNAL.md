@@ -4143,3 +4143,46 @@ Only five descriptive feature fields change; tools, tests, example outputs, othe
 remain exact. Catalog generation and a separate AI engineer reader check the wording. This is documentation
 clarity, not a feature-output review renewal, implemented connector, human adoption result or new operational
 capability. A first useful investigation should make the need for retained company context concrete.
+
+
+## 82. Keep the drawing with its DEXPI intake
+
+The previous full run exposed a practical handoff failure: the public DEXPI converter could not form a relative
+image path between Windows drives. An actual C01 CLI left a prediction and no manifest. The direct XML reader
+avoided that exception by recording an absolute image path, but its intake still depended on the original
+engineer's file location. Both observations are from local public-source staging, not a site import.
+
+Both routes now retain an exact `<sheet-id>.source.png` beside the prediction and manifest, which reference local
+filenames. An engineer can transfer those three files together before running the existing intake. The PNG hash
+must match the prediction. An identical retained file is reused; a conflicting file, retained-image symlink or
+generated-output/source overlap refuses before replacing generated reports. Use a fresh folder for a changed
+drawing. The original XML and attribution remain part of the wider source packet; they are not automatically
+copied by this image fix. This is single-writer local staging, not atomic publication of multiple files.
+
+The direct reader prepares its PNG prediction before writing model/report files, so an image refusal no longer
+leaves those reports replaced first. Model reading, conversion rules and score criteria are outside this change.
+The committed C01 manifest remains an explicitly labelled historical cache-path record; current commands create
+the retained-image intake. No original cache record or committed example result is rewritten to improve a score.
+
+Focused controls pass 15 intake tests with one explicit OS symlink-permission skip and all 34 XML-reader tests.
+The first matrix unit check correctly reports the 27 dependent cells as stale; its previous cross-drive exception
+is absent. All 27 cells are then actually rerun under the existing criteria. Engineering metrics, details and
+verdicts are unchanged; the other 67 complete records remain exact. Execution metadata includes 21 per-sheet
+runtimes, and two citations move to identical text at new line numbers. Root's first private comparison omitted
+the nested runtimes and stopped before publication; the corrected check isolates those exact fields. A separate
+matrix reviewer verifies all 94 records and 732 current file hashes, retaining the original 63 pass, 23 fail and
+eight n/a verdicts. These sources were already inspected; this supplies no new held-out or generalization result.
+
+An independent controls reader runs 72 actual CLIs and 226 checks across 12 same/cross-drive cases on C01-C03 and
+both routes. Relocated intake succeeds while each supplied original image path is unavailable. Source bytes,
+prediction objects and XML model/report bytes remain unchanged. The direct reader's prediction text now uses LF
+newlines; this formatting difference is kept separate from semantic equality. Two actual symlink controls are
+explicitly skipped because Windows denies link creation. Another AI reader checks the transfer instructions.
+Neither review supplies human approval, source-engineering correctness or measured adoption.
+
+The full local run with temporary files on a different drive now passes all 58 scripts, including both previously
+failing DEXPI/matrix scripts. It reports three unittest skips and two platform notices; notices do not add to the
+skip count. The original failed run remains in the earlier chronology record. CI reports its own exact-commit
+coverage and omissions. Only the matrix output review is renewed; existing feature/source review scopes remain.
+The transfer mechanism prepares a first engineering packet for company handoff and adds no organizational
+governance service or ready receiving-system connector.

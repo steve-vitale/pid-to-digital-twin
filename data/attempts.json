@@ -3150,6 +3150,23 @@
         "examples/context-register/README.md",
         "docs/FEATURES.md#prepare-a-first-engineering-evidence-and-decision-packet"
       ]
+    },
+    {
+      "id": "A215",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Retain the original drawing beside both DEXPI intake manifests with a portable local filename.",
+      "hypothesis": "An engineer should be able to move the three-file intake between drives or computers without depending on the original drawing location or overwriting a conflicting retained source.",
+      "evidence": "Actual old C01 converter CLI fails across Windows drives after writing only prediction; the old direct XML route instead leaves an absolute image dependency. Focused15intake tests/1OSskip and34XML tests pass; independent72actualCLIs/226checks cover12C-Dcases, relocation/intake, fidelity, reuse/refusal and unchanged prediction/model semantics, with2explicit OS symlink skips. All27affected matrix cells rerun with unchanged engineering metrics/verdicts;67other complete cells exact. Full localD:TEMP58/58 scripts,3unittest skips/2platform notices; CI coverage separately recorded. Journal82 retains timing/citation changes and historical/development limits.",
+      "runs": "Deterministic staging controls and compatibility runs on previously inspected public records; no new source family, extraction benchmark, held-out result or operational experiment",
+      "verdict": "kept",
+      "why": "Makes the starting evidence packet transferable while retaining original bytes and explicit revision choice. No company governance, hosted connector, authenticated approval or adoption result is added.",
+      "source": [
+        "docs/JOURNAL.md#82-keep-the-drawing-with-its-dexpi-intake",
+        "examples/from-dexpi/README.md",
+        "examples/from-dexpi-xml/README.md",
+        "scripts/test_dexpi_to_twin.py"
+      ]
     }
   ],
   "not_tried": [

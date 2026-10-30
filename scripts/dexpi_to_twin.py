@@ -12,6 +12,7 @@ what the key never carried. Output, by default in the gitignored data/external/d
                              (extraction/prompt_v2.md), plus a "conversion" block saying what was dropped and why
   <id>.intake-manifest.json  site-drawing-intake-1 manifest, producer {method: "converted from DEXPI XML, no model",
                              tool: "dexpi_to_twin.py", model: null}
+  <id>.source.png            byte-identical source image, referenced by filename so the intake folder can move
 
 What it does:
   symbols      every key node in the six classes, unchanged: DEXPI ID as symbol id, class as adapt_dexpi assigned it,
@@ -37,8 +38,9 @@ What it does NOT do (each lossy step is printed and written into the prediction'
   - It makes no claim about extraction accuracy: this is the zero-model ceiling, not a test of reading drawings.
 """
 import argparse
+import hashlib
 import json
-import os
+import re
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -189,18 +191,58 @@ def convert(sheet_id, sheets_dir=None, xml_path=None):
     return prediction, report
 
 
+def intake_image_name(sheet_id):
+    """A local filename for the retained drawing, also valid as an intake drawing ID."""
+    if not isinstance(sheet_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}", sheet_id):
+        raise ValueError("intake sheet ID must be 1-128 letters, digits, dots, underscores or hyphens, starting with a letter or digit")
+    return f"{sheet_id}.source.png"
+
+
+def retain_intake_image(png_path, out_dir, sheet_id, expected_sha256):
+    """Retain exact source bytes beside the manifest; reuse identical files, never replace a conflict.
+
+    This is a local, single-writer staging operation, not an atomic multi-file publication.
+    """
+    name = intake_image_name(sheet_id)
+    source = Path(png_path)
+    if not source.is_file():
+        raise ValueError(f"{source.name}: source image is not a regular file")
+    with source.open("rb") as stream:
+        data = stream.read(100 * 1024 * 1024 + 1)
+    if len(data) > 100 * 1024 * 1024:
+        raise ValueError(f"{source.name}: source image exceeds the intake's 100 MiB limit")
+    if hashlib.sha256(data).hexdigest() != expected_sha256:
+        raise ValueError(f"{source.name}: source image changed since prediction; regenerate from the intended source")
+    destination = Path(out_dir) / name
+    if destination.is_symlink():
+        raise ValueError(f"{name}: retained image must not be a symbolic link")
+    if destination.exists():
+        if not destination.is_file() or A.sha(destination) != expected_sha256:
+            raise ValueError(f"{name}: retained image conflicts with this source; use a new output folder")
+        return name
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    # Exclusive creation refuses a concurrent destination rather than overwriting it.
+    with destination.open("xb") as stream:
+        stream.write(data)
+    return name
+
+
 def write_outputs(sheet_id, prediction, out_dir, cfg, spec, png_path):
     out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
     pred_path = out_dir / f"{sheet_id}.prediction.json"
-    pred_path.write_text(json.dumps(prediction, indent=1, allow_nan=False) + "\n", encoding="utf-8")
+    man_path = out_dir / f"{sheet_id}.intake-manifest.json"
+    if Path(png_path).resolve() in {pred_path.resolve(), man_path.resolve()}:
+        raise ValueError("generated output overlaps the source image; use a new output folder")
+    pred_text = json.dumps(prediction, indent=1, allow_nan=False) + "\n"
     manifest = {"schema_version": "site-drawing-intake-1", "drawing_id": sheet_id, "revision": "public",
-                "page": 1, "image": Path(os.path.relpath(png_path, out_dir)).as_posix(),
+                "page": 1, "image": intake_image_name(sheet_id),
                 "extraction": pred_path.name, "extraction_format": "prediction", "producer": PRODUCER,
                 "drawing_number": Path(spec["xml"]).stem,
                 "system_name": f"Public example: {spec['title']} ({cfg['license']}, DEXPI TrainingTestCases)"}
-    man_path = out_dir / f"{sheet_id}.intake-manifest.json"
-    man_path.write_text(json.dumps(manifest, indent=1) + "\n", encoding="utf-8")
+    man_text = json.dumps(manifest, indent=1) + "\n"
+    retain_intake_image(png_path, out_dir, sheet_id, prediction["source"]["image_sha256"])
+    pred_path.write_text(pred_text, encoding="utf-8")
+    man_path.write_text(man_text, encoding="utf-8")
     return pred_path, man_path
 
 
@@ -241,7 +283,11 @@ def main(argv=None):
     cfg, spec = sheet_spec(a.sheet)
     prediction, report = convert(a.sheet, a.sheets_dir, A.local_path(spec["xml"]))
     png = key_paths(a.sheet, a.sheets_dir)["png"]
-    pred_path, man_path = write_outputs(a.sheet, prediction, a.out_dir, cfg, spec, png)
+    try:
+        pred_path, man_path = write_outputs(a.sheet, prediction, a.out_dir, cfg, spec, png)
+    except (ValueError, OSError) as exc:
+        print(f"refused: {exc}", file=sys.stderr)
+        return 2
     print_report(a.sheet, report)
     print(f"wrote {pred_path}\nwrote {man_path}")
     if a.intake:

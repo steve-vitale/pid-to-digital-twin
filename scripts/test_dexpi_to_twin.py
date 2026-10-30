@@ -7,11 +7,15 @@ key edge between two such symbols must survive, every dropped node must be repor
 Without the cache those checks are skipped with a message, never failed. Nothing here measures extraction accuracy.
 """
 import json
+import copy
+import hashlib
+import shutil
 import struct
 import tempfile
 import unittest
 import zlib
 from pathlib import Path
+from unittest import mock
 
 import adapt_dexpi as A
 import dexpi_to_twin as D
@@ -158,6 +162,118 @@ class BuiltSheets(unittest.TestCase):
                     _, tags = bundle_tags(result["output"])
                     self.assertEqual({k: tags[k] for k in kept}, {k: key_tags.get(k) for k in kept})
                     self.assertEqual(result["summary"]["streams_extracted"], len(links))
+
+
+class PortableStaging(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.source = self.root / "originals"
+        self.source.mkdir()
+        self.sid = write_key(self.source)
+        self.image = self.source / f"{self.sid}.png"
+        self.pred, _ = D.convert(self.sid, self.source)
+        self.out = self.root / "staging"
+
+    def write(self, out=None, pred=None):
+        return D.write_outputs(self.sid, pred or self.pred, out or self.out,
+                               {"license": "CC-BY-4.0"}, {"xml": "T01.xml", "title": "synthetic"}, self.image)
+
+    def snapshot(self, folder):
+        return {str(p.relative_to(folder)): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
+
+    def test_packet_moves_without_original_image_and_imports(self):
+        self.write()
+        original = self.image.read_bytes()
+        first = self.snapshot(self.out)
+        self.write()  # identical reuse
+        self.assertEqual(first, self.snapshot(self.out))
+        moved = self.root / "recipient" / "packet"
+        shutil.copytree(self.out, moved)
+        self.image.rename(self.image.with_suffix(".hidden"))
+        manifest = moved / f"{self.sid}.intake-manifest.json"
+        content = json.loads(manifest.read_text())
+        self.assertEqual(content["image"], f"{self.sid}.source.png")
+        self.assertEqual((moved / content["image"]).read_bytes(), original)
+        result = I.import_drawing(manifest, self.root / "received-bundle")
+        self.assertEqual(result["summary"]["streams_extracted"], len(self.pred["connections"]))
+        self.assertEqual((Path(result["output"]) / "source/0.png").read_bytes(), original)
+
+    def test_conflicting_retained_image_refuses_before_report_replacement(self):
+        self.write()
+        (self.out / f"{self.sid}.source.png").write_bytes(b"another drawing")
+        before = self.snapshot(self.out)
+        with self.assertRaisesRegex(ValueError, "retained image conflicts"):
+            self.write()
+        self.assertEqual(before, self.snapshot(self.out))
+        self.assertEqual(hashlib.sha256(self.image.read_bytes()).hexdigest(), self.pred["source"]["image_sha256"])
+
+    def test_source_hash_change_and_unsafe_id_refuse_before_output(self):
+        changed = copy.deepcopy(self.pred)
+        changed["source"]["image_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "changed since prediction"):
+            self.write(pred=changed)
+        self.assertFalse(self.out.exists())
+        for sid in ("../escape", "/absolute", "two/names", "..", " space", "x" * 129):
+            with self.subTest(sid=sid), self.assertRaisesRegex(ValueError, "sheet ID"):
+                D.retain_intake_image(self.image, self.out, sid, self.pred["source"]["image_sha256"])
+        self.assertFalse(self.out.exists())
+
+    def test_nonregular_retained_path_refuses(self):
+        self.out.mkdir()
+        destination = self.out / f"{self.sid}.source.png"
+        destination.mkdir()
+        with self.assertRaisesRegex(ValueError, "retained image conflicts"):
+            self.write()
+    def test_retained_image_link_refuses(self):
+        self.out.mkdir()
+        destination = self.out / f"{self.sid}.source.png"
+        try:
+            destination.symlink_to(self.image)
+        except OSError as exc:
+            self.skipTest(f"OS symlink permission unavailable: {exc}")
+        with self.assertRaisesRegex(ValueError, "symbolic link"):
+            self.write()
+        self.assertEqual(self.image.read_bytes(), png(200, 100))
+
+    def test_generated_output_cannot_replace_original_source(self):
+        image = self.source / f"{self.sid}.prediction.json"
+        image.write_bytes(self.image.read_bytes())
+        before = self.snapshot(self.source)
+        with self.assertRaisesRegex(ValueError, "overlaps the source image"):
+            D.write_outputs(self.sid, self.pred, self.source, {"license": "test"},
+                            {"xml": "T01.xml", "title": "synthetic"}, image)
+        self.assertEqual(before, self.snapshot(self.source))
+        import dexpi_reader as R
+        xml = self.source / f"{self.sid}.model.json"
+        xml.write_text('<PlantModel><Equipment ID="P1" ComponentClass="CentrifugalPump"/></PlantModel>')
+        before = self.snapshot(self.source)
+        with mock.patch.object(R, "prediction", return_value=(self.pred, {})):
+            with self.assertRaisesRegex(R.DexpiError, "overlaps a source"):
+                R.run(xml, self.source, self.sid, png=self.image, quiet=True)
+        self.assertEqual(before, self.snapshot(self.source))
+
+    def test_direct_xml_writer_retains_image_and_refuses_conflict_before_any_report(self):
+        import dexpi_reader as R
+        xml = self.source / "unit.xml"
+        xml.write_text('<PlantModel><Equipment ID="P1" ComponentClass="CentrifugalPump"/></PlantModel>')
+        # Isolate writer behavior from geometry; cached-sheet/independent CLIs exercise real prediction conversion.
+        with mock.patch.object(R, "prediction", return_value=(self.pred, {})):
+            R.run(xml, self.out, self.sid, png=self.image, quiet=True)
+            baseline = self.snapshot(self.out)
+            self.assertEqual(json.loads((self.out / f"{self.sid}.intake-manifest.json").read_text())["image"],
+                             f"{self.sid}.source.png")
+            R.run(xml, self.out, self.sid, png=self.image, quiet=True)
+            self.assertEqual(baseline, self.snapshot(self.out))
+            (self.out / f"{self.sid}.source.png").write_bytes(b"retain conflict")
+            before = self.snapshot(self.out)
+            with self.assertRaisesRegex(R.DexpiError, "retained image conflicts"):
+                R.run(xml, self.out, self.sid, png=self.image, quiet=True)
+            self.assertEqual(before, self.snapshot(self.out))
+            with self.assertRaisesRegex(R.DexpiError, "sheet ID"):
+                R.run(xml, self.root / "new", "../escape", png=self.image, quiet=True)
+            self.assertFalse((self.root / "new").exists())
 
 
 if __name__ == "__main__":
