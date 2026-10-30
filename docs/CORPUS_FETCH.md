@@ -1,7 +1,9 @@
 # Fetching more public historian data
 
-**Why it matters:** tools tested on one dataset can fail quietly on the next. The historian tools here were built and
-checked on the Braatz Tennessee Eastman runs only; these sources test them on data they were not built on.
+**Why it matters:** tools tested on one dataset can fail quietly on the next. The historian tools began with the
+Braatz Tennessee Eastman runs; later methods were developed and evaluated on other listed sources too. Read the
+[generalization results](GENERALIZATION.md) and [experiment history](TRIED.md) for each method's development and
+held-out evidence. Being listed or fetched here does not make a source an unseen validation set.
 
 `scripts/fetch_corpus.py SOURCE [--max-mb N]` downloads a pinned subset of one public source into
 `data/external/<source>/` (gitignored, never committed) and writes `FETCH_RECEIPT.json` there: what was fetched, bytes,
@@ -223,8 +225,13 @@ question; the size and value are what was known on 2026-10-29.
 | Rieth et al. additional TE data, Harvard Dataverse doi:10.7910/DVN/6C3JR1 | a terms dialog ("by accessing or downloading ... you agree"); RData format | 24.7 + 47.3 + 494 + 837 MB | row 6: 500 runs per fault, so detection and false-alarm rates with confidence intervals (same TE family, not independent) |
 | Cranfield three-phase flow facility, IEEE DataPort doi:10.21227/0b7j-q780 | IEEE DataPort login; licence not confirmed on the page | 16 data sets | row 6: the PRONTO rig in another campaign (3 normal, 13 faults) |
 | SWaT / WADI (iTrust, SUTD) | request form and terms | several GB | rows 6 and 4: a real water-treatment testbed with PLC loops and attack labels |
-| Ricker multiloop TE model (MultiLoop_mode3.mdl inside pytep) | licence decision: N. L. Ricker's file inside a BSD-3 repository that otherwise excludes his files | 0.4 MB (staged for inspection only) | row 4: an independent TE control structure to audit the Braatz-based drawings against |
+| [Ricker-attributed multiloop TE model inside pyTEP](https://github.com/ccreinartz11/pytep/tree/7caf477b049a488f819e80802ed4fef85e6a435b) | Root BSD-3-Clause notice credits DTU; applicability to the Ricker-attributed model remains unresolved here. No explicit exclusion was found in the inspected license, READMEs or model; no legal conclusion is made. | 0.4 MB (staged for inspection only) | A different published TE control configuration, not an independent process family. A comparison needs the scheme/mode, reviewed source-identity mapping and the limits of the simple-loop representation. |
 | ASU PID_dataset (Zenodo 8028570) beyond internal notes | CC BY 4.0 on the record, but the drawings are "from industry and webscraping": the depositor may not hold the rights | 18.8 MB staged of 6.7 GB | rows 2 and 3 on 92 heterogeneous real rasters (symbol boxes only) |
+
+The pyTEP provenance row was rechecked on 2026-10-30 at the linked commit. Its root notice and simulator README
+are linked in the [corpus candidate table](GENERALIZATION.md#public-sources-not-yet-added). The previous unsupported
+claim of an explicit file exclusion is removed; the existing unresolved review remains. No simulator run,
+derived loop list, benchmark input or new independent-family evidence was added.
 
 Hand keys are a separate human job, not a decision. The OMRE 1958 scan (one quadrant), five Commons sheets and PRONTO's
 Figure 1 now have agent-made first-pass keys (`data/agent_keys/`, kind `agent-keyed-sheets` in `data/corpus.json`):

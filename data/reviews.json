@@ -5805,6 +5805,145 @@
     "independent-software-proof-final/prior-accepted-historian-review.json": "9baac358ded2f2470a6109c7b4cf8f835174abc334501f82c5b31a4f77572d6f",
     "first-run-runner-LF-recovered.py": "0fab942c4eb8c2e02f6a0e2c4dc20bd66012c4c657648764eff12f4200518fff"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent: bounded pyTEP source-provenance and matrix metadata review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 3,
+   "file_hash_method": "Repository bindings use SHA256 after CRLF to LF normalization. Private evidence uses exact raw SHA256. Cached source identity is also checked against immutable upstream Git blob IDs.",
+   "files": {
+    "docs/GENERALIZATION.md": "cd5751ffc7594c03f3d1218cf0c63c8a1a36895885a6591b10b8720f3b848b1c",
+    "out/generalization/matrix.json": "06cf636b89d91bedc9b74252ee8695c13583ecd3176677625af57ee57024e8f9",
+    "data/corpus.json": "1f74f2320cdc44b048ad34a687a446c729fed69a4449558d2b0dbfede8c27535"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "docs/CORPUS_FETCH.md": "d399ea276084aea54171f8c375e9fce3001d870244e2abb5448c0f616918bb8c"
+   },
+   "findings": [],
+   "resolution": "Renews only the corpus candidate/rights-gate metadata and its single rendered candidate row. The matrix JSON, all 94 complete cell objects, 42 declared inputs and 732 recorded tool hashes remain unchanged. Corrected source-fetch guidance retains the pre-existing unresolved file-level review. Historical substantive matrix/source/execution scope is inherited, not reproduced or broadened.",
+   "checks": [
+    "Independently read the pinned root LICENSE, README, simulator README and model metadata, then verified all four local raw Git-object hashes against read-only connected GitHub results at commit 7caf477b049a488f819e80802ed4fef85e6a435b. Canonical repository metadata identifies ccreinartz11/pytep. No source cache file was written; all cached source bytes remain unchanged.",
+    "The root notice says BSD3-Clause and credits DTU 2021. The main README describes a Python simulation API and says it uses MultiLoop_mode3/TElib. The simulator README attributes the multiloop strategy to Ricker 1996, describes mode 1 without override loops and mode 3 with an added recycle/separator-coolant override. Model metadata records creator ricker and a later modification. These support a wrapper using a Ricker-attributed TE configuration, not an independently implemented control structure or independent plant family.",
+    "No explicit Ricker-file exclusion was found in the inspected root notice, two READMEs or model. This bounded absence check neither establishes file-level applicability of the root notice nor resolves rights. The existing needs_human_decision item remains; unsupported exclusion wording is replaced with the actual unresolved evidence. The separately excluded Ricker archive record is unchanged and was not re-audited.",
+    "Corpus comparison against the immutable baseline permits only one existing candidate record and its existing human-decision blocker/value. Every other object and all 42 complete input objects remain exact. The rendered page changes only the candidate metadata row; all prior matrix/results/source tables and execution text remain exact. The source-fetch guide also corrects its stale TE-only opening: A163/A171/A183/A184 document development on other sources and specific later held-out roles. This is a saved-record wording check, not a rerun. Its other human-decision entries remain unchanged.",
+    "Current matrix JSON is raw-byte identical to baseline. Compared all 94 complete cell objects, including metrics/details/statuses/timestamps/durations/reasons, with no exceptions. Historical 63 pass/23 fail/8 n-a totals and all 732 tool fingerprints are unchanged/current. Independently executed corpus_matrix.py --check after final rendering: exit0; no cell, simulator, model or test was executed.",
+    "Current narrow supports are only the unchanged matrix runner/test source and corrected source-fetch guide. Prior broad guide/feature/source support bindings remain historical and are not silently renewed here. No loop list, adapter, public case, score, independent source family, installation, operating action or company governance functionality is added."
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent: narrow question-packet manifest binding review",
+    "date": "2026-10-30",
+    "archived_record_sha256_raw": "9553c3dc90bc47ed1cf8568114df045c62b060305ef3e703e2d428843470eab4",
+    "prior_output_bindings": {
+     "docs/GENERALIZATION.md": "e479e067d7add9108644872cdbadaa9df64dd8b4a25d8dffd2f4d65c9874f90e",
+     "out/generalization/matrix.json": "06cf636b89d91bedc9b74252ee8695c13583ecd3176677625af57ee57024e8f9",
+     "data/corpus.json": "91b3f6e3b461b3aed74ed5b4038e497cbe091f597562565c22f388cf3fe87e46"
+    },
+    "unchanged_output": "out/generalization/matrix.json",
+    "metadata_changed_outputs": [
+     "data/corpus.json",
+     "docs/GENERALIZATION.md"
+    ],
+    "scope": "Prior substantive matrix, source, engineering-method and actual execution evidence remains historical and attributed through the accepted record. This receipt is a metadata correction only, not a new 27/54/94-cell run or fresh held-out accuracy review.",
+    "historical_supports_not_renewed": [
+     "examples/context-register/metropt3/README.md",
+     "examples/context-register/metropt3/originals.json",
+     "examples/context-register/metropt3/sources.json",
+     "NOTICE.md",
+     "data/features.json",
+     "examples/loop-audit/covestro/README.md",
+     "examples/loop-audit/covestro/ACCEPTANCE.md",
+     "examples/loop-audit/covestro/connections.csv",
+     "examples/loop-audit/covestro/check_sources.py",
+     "examples/loop-audit/README.md",
+     "data/corpus_pins.json",
+     "scripts/fetch_corpus.py",
+     "scripts/loop_audit.py",
+     "examples/first-pilot/pilot-brief.md",
+     "scripts/csv_normal_bands.py",
+     "scripts/csv_replay_server.py",
+     "scripts/test_csv_tools.py",
+     "examples/historian-csv/README.md",
+     "scripts/dexpi_to_twin.py",
+     "scripts/dexpi_reader.py",
+     "scripts/test_dexpi_to_twin.py",
+     "examples/from-dexpi/README.md",
+     "examples/from-dexpi-xml/README.md"
+    ]
+   },
+   "source_evidence": {
+    "commit": "7caf477b049a488f819e80802ed4fef85e6a435b",
+    "canonical_repository": "https://github.com/ccreinartz11/pytep",
+    "files": [
+     {
+      "file": "LICENSE",
+      "bytes": 1511,
+      "sha256_raw": "8db6cdaec7961dcc3d14f22c7887ddfef57f260c50df47e8b140fa2987670b4f",
+      "git_blob_sha1_raw": "910559f1ea52908d5913791f693236f5d6d40d9f",
+      "remote_git_blob_sha1": "910559f1ea52908d5913791f693236f5d6d40d9f",
+      "remote_blob_match": true,
+      "remote_url": "https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/LICENSE",
+      "remote_full_text_raw_match": true
+     },
+     {
+      "file": "README.rst",
+      "bytes": 7078,
+      "sha256_raw": "41dd61b5ff6aadd0fa23163fe3dc7cd56a789f2c57bd475919c8262c3ffa60a2",
+      "git_blob_sha1_raw": "1852ef30a749f511f2165079343bd0cef716adc2",
+      "remote_git_blob_sha1": "1852ef30a749f511f2165079343bd0cef716adc2",
+      "remote_blob_match": true,
+      "remote_url": "https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/README.rst",
+      "remote_full_text_raw_match": false
+     },
+     {
+      "file": "pytep/simulator/README.txt",
+      "bytes": 5462,
+      "sha256_raw": "d10bb57afba34710b286000fb7eb40674d508219299b89aed9cb85d3085effad",
+      "git_blob_sha1_raw": "4653d3fa00db27519b8e833c4b60772c190ee29b",
+      "remote_git_blob_sha1": "4653d3fa00db27519b8e833c4b60772c190ee29b",
+      "remote_blob_match": true,
+      "remote_url": "https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/pytep/simulator/README.txt",
+      "remote_full_text_raw_match": true
+     },
+     {
+      "file": "pytep/simulator/MultiLoop_mode3.mdl",
+      "bytes": 336808,
+      "sha256_raw": "96aa1959b5864285bedf46927765fba23f4a0c7338a348820cd966a483956eb3",
+      "git_blob_sha1_raw": "87df649b7b8cca77bbed70d026d6d39a78912bad",
+      "remote_git_blob_sha1": "87df649b7b8cca77bbed70d026d6d39a78912bad",
+      "remote_blob_match": true,
+      "remote_url": "https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/pytep/simulator/MultiLoop_mode3.mdl"
+     }
+    ],
+    "locators": {
+     "LICENSE": "lines 1-3 and full root notice",
+     "README.rst": "lines 11-19 and 166-169",
+     "pytep/simulator/README.txt": "lines 28-49; mode 1/mode3 descriptions",
+     "pytep/simulator/MultiLoop_mode3.mdl": "lines 785-792; creator and modification metadata"
+    },
+    "decoded_response_limit": "The connector-decoded main README rendering changes three installation punctuation characters compared with raw cached text; exact pinned Git blob identity matches. Relevant cited ASCII provenance passages are unchanged. No raw-text equality claim is made for that decoded rendering."
+   },
+   "limits": [
+    "Source wording/provenance evidence only, not legal advice or a resolved licensing disposition. No complete upstream history/standalone Ricker archive audit was performed.",
+    "A documented configuration difference is not proof of loop correctness, completeness, comparability or an alternative plant. Scheme/mode and reviewed identity mapping are prerequisites to a meaningful comparison; no new loop list or simulation was built.",
+    "No new generalization/held-out score, source family, matrix cell execution, test/model call, native/live/server action, accepted company handoff or human adoption evidence. The toolkit remains an investigation on-ramp.",
+    "Whole evolving journals/attempt ledger/TRIED, generated README/FEATURES tables and unrelated prior CAD/description/historian guide hashes are excluded from current bindings."
+   ],
+   "private_proof_hash_method": "SHA256 over exact raw bytes, no newline normalization.",
+   "private_proof_hashes": {
+    "final-metadata-proof.json": "add2a4bb01292c25f19f293afa8ee47b065c77d8be50f186ad948aa0a142cecf",
+    "pinned-source-and-baseline-proof.json": "3c196d3bbce1c083b3550de3076adc4ef2fc6859dd9720722b601bfb9215b4b9",
+    "github-pinned-source-reads.json": "68a215e2d181d711b81d9793b8139db8787ac60670794eea58ca8ca94644ff70",
+    "cached-originals-manifest-before.json": "304a866b0ff8461b49bbaa0265aa94befafe524731d964a44c0838ab629340b1",
+    "method-role-excerpts.json": "7636a5c547afbd32c5b9607458e0923496ef724ed3060549344bc16b1ee5960f",
+    "final-static-check.json": "0db69912b744272a8520ed645926fde1a7d8c44feb1d4f4c706147b13226eaf1",
+    "prior-accepted-matrix-review.json": "9553c3dc90bc47ed1cf8568114df045c62b060305ef3e703e2d428843470eab4",
+    "check_pinned_provenance.py": "7bf0ee229c23682a891487cf27cbf41e1fccb176ae5dddd883b96b1092d661d4",
+    "prepare_metadata_review.py": "3daffd43729ff4af259cf21091a9baa8ac06d3cf6861ee5c995cc217a23b808a"
+   }
   }
  ]
 }

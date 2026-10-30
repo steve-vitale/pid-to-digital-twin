@@ -4378,3 +4378,37 @@ screens the committed C01 model. These checks do not repeat the historical prima
 or whole-feature audits. No matrix result, corpus input, generated screen or criterion is changed, and no source
 meaning, current plant truth, review-time saving or company round trip is newly established. N062/N063 remain
 unproven.
+
+
+## 88. Reconcile a corpus candidate before calling it independent evidence
+
+The previous goal turn published both CAD question routes. This pass returns to the corpus backlog rather than
+inventing another onboarding feature. Its pyTEP candidate calls the package a BSD-licensed independent control
+implementation, while a separate registry entry already leaves the Ricker multiloop model's file-level terms
+unresolved. A repository label and a separately published implementation are insufficient provenance for the
+planned comparison.
+
+The inspected source pin is `7caf477b049a488f819e80802ed4fef85e6a435b`, already retained in the ignored inspection
+cache. The old repository URL redirects to `ccreinartz11/pytep`; the registry now links the exact commit. Its root
+notice credits DTU under BSD-3-Clause. The simulator README attributes its multiloop strategy to Ricker's 1996
+work and distinguishes mode 1 from mode 3's additional override. The model records creator `ricker`. These facts
+support describing a Python wrapper using a Ricker-attributed TE configuration, not a newly independent process
+family or proof that its control scheme should match the Braatz-based drawings.
+
+No explicit Ricker-file exclusion was found in the inspected license, READMEs or model. The previous registry
+phrase asserting such an exclusion had no source citation, so it is replaced with the actual evidence and the
+existing unresolved file-level review. This is not a legal conclusion or resolution of that review. It neither
+declares the model unusable nor treats the root notice as sufficient to settle its applicability.
+
+One candidate and its corresponding unresolved record change. The generalization page is rendered from the
+unchanged matrix; no cell is dispatched and no loop list, new input, benchmark score or derived model is made.
+The fetch guide's matching row is reconciled too. Its stale opening no longer calls all added datasets unseen:
+later methods used several in development, and the guide now points to their per-method experiment history.
+Exact raw cache Git-blob identities match the pinned GitHub objects; SHA-256 fingerprints are retained separately.
+Connected source text is used for reading, not as a substitute for raw-byte identity. The original cache remains
+unchanged. A separate review checks this provenance correction and renews only the matrix feature's changed
+metadata bindings, inheriting earlier substantive/source/execution scopes with their limits.
+
+The next corpus experiment must still choose an applicable source, define its control scheme and operating
+scope, map its identities and retain what the comparison cannot represent. This correction adds no toolkit
+governance service, receiving adapter, new independent-family result, human adoption or operational benefit.

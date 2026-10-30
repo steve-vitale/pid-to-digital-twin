@@ -3251,6 +3251,22 @@
         "examples/from-dexpi-xml/README.md#from-the-model-to-one-question",
         "examples/from-dexpi/README.md#from-the-bundle-to-one-useful-question"
       ]
+    },
+    {
+      "id": "A221",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Reconcile the pyTEP corpus candidate with pinned source ancestry and its unresolved file-level-terms record, and correct stale source-role wording in the fetch guide.",
+      "hypothesis": "A separately published package is not sufficient evidence of an independent control implementation or process family, and a root license label must not silently contradict an existing unresolved source record.",
+      "evidence": "Pinned7caf477b sources identify a DTU BSD3 root notice, a Ricker-attributed multiloop strategy and distinct mode1/mode3 behavior. Exact raw local Gitblob identities match pinned remote objects; originals unchanged. No explicit Ricker-file exclusion found in inspected license/READMEs/model, so unsupported exclusion wording is removed while the existing unresolved review remains. One candidate plus its corresponding gate, generated candidate row and current fetch-guide row are reconciled. The fetch opening now points to per-method development/held-out roles rather than calling all additions unseen. MatrixJSON/cells/toolhashes/criteria/execution remain unchanged; no looplist, newinput or score generated.",
+      "runs": "Read-only source/provenance and metadata-diff checks; current matrix page rendered without dispatch. No MATLAB, model call, extraction, simulation, matrix-cell execution or legal determination.",
+      "verdict": "kept",
+      "why": "Keeps future corpus selection tied to source scope, control scheme/mode and reviewed identity mapping. Does not count the wrapper as a new independent process family, settle file-level rights, add local governance or claim engineer adoption.",
+      "source": [
+        "docs/JOURNAL.md#88-reconcile-a-corpus-candidate-before-calling-it-independent-evidence",
+        "docs/GENERALIZATION.md#public-sources-not-yet-added",
+        "docs/CORPUS_FETCH.md#needs-a-human-decision"
+      ]
     }
   ],
   "not_tried": [

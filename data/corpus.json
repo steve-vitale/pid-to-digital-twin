@@ -907,12 +907,12 @@
  ],
  "candidates": [
   {
-   "name": "pyTEP TE multi-loop control structure",
-   "url": "https://github.com/ChristopherReinartz/pytep",
-   "license": "BSD 3-Clause",
-   "what": "an independent implementation of the TE control structure",
-   "fetch": "git clone at a pinned commit",
-   "would_exercise": "loop audit (row 4) with a loop list not read by this repository's own script"
+   "name": "pyTEP wrapper and Ricker-attributed TE multiloop model",
+   "url": "https://github.com/ccreinartz11/pytep/tree/7caf477b049a488f819e80802ed4fef85e6a435b",
+   "license": "Root BSD-3-Clause notice (DTU); applicability to the Ricker-attributed model remains unresolved here. [Root notice](https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/LICENSE), [simulator notes](https://github.com/ccreinartz11/pytep/blob/7caf477b049a488f819e80802ed4fef85e6a435b/pytep/simulator/README.txt).",
+   "what": "Python wrapper using a Ricker-attributed TE Simulink control configuration; same TE process family. Provenance rechecked 2026-10-30.",
+   "fetch": "Inspection-only cache at commit 7caf477b049a488f819e80802ed4fef85e6a435b; not a matrix input. File-level terms and configuration/identity mapping remain unresolved.",
+   "would_exercise": "Potential loop/source comparison (row 4) after terms, scheme/mode and identity mapping are resolved; no score or new independent process family is established."
   },
   {
    "name": "Reinartz DTU TE reference data, multi-mode",
@@ -1028,9 +1028,9 @@
   },
   {
    "name": "Ricker multiloop TE model (MultiLoop_mode3.mdl inside pytep)",
-   "blocker": "licence decision: N. L. Ricker's file inside a BSD-3 repository that otherwise excludes his files",
+   "blocker": "Root BSD-3-Clause notice credits DTU; applicability to the Ricker-attributed model remains unresolved in this registry. No explicit exclusion was found in the inspected root license, READMEs or model. The existing unresolved review is retained; no legal conclusion is made.",
    "size": "0.4 MB (staged locally for inspection only)",
-   "value": "row 4: an independent TE control structure to audit the Braatz-based drawings against"
+   "value": "A different published TE control configuration, not an independent process family. A comparison needs the scheme/mode, reviewed source-identity mapping and the limits of the simple-loop representation."
   },
   {
    "name": "ASU PID_dataset beyond internal notes (Zenodo 8028570)",
