@@ -3219,6 +3219,22 @@
         "examples/historian-csv/baseline-context/expected/results.md",
         "examples/historian-csv/baseline-context/first-question.md"
       ]
+    },
+    {
+      "id": "A219",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Connect the written-description entry route to an existing first-question and company-handoff workflow before optional platform or drawing generation.",
+      "hypothesis": "An engineer starting with procedures or design notes should be able to investigate one question without first authoring a drafting layout, generating a P&ID or importing platform files.",
+      "evidence": "The prior entry guide ends with platform exports and a hand-authored P&ID, with no local question/brief bridge. An independent AI engineering-reader pass identifies that route omission, not a missing tool capability or an absolute block through the root README. The existing offline stdlib full Bayer screen produces12findings; its complete E18@model object equals the committed one-question example. The revised guide links source-only clarification without a model, the existing question CLI, plain brief, partial-answer example and company handoff. No source model, catalog, code, output or criterion changes.",
+      "runs": "Actual offline CLI route checks and local navigation checks; no model call, new source/extraction/benchmark run, measured review-time or human adoption experiment.",
+      "verdict": "kept",
+      "why": "Makes the existing on-ramp coherent for a written-description starting point. Drafting/platform outputs become optional for the first packet, while ongoing shared ownership and decisions belong in the company home. N062/N063 remain unproven; no new governance or connector is implemented.",
+      "source": [
+        "docs/JOURNAL.md#86-take-a-written-description-to-one-question-before-drafting",
+        "examples/from-description/README.md#use-the-model-for-one-engineering-question",
+        "examples/first-pilot/README.md#after-the-first-packet"
+      ]
     }
   ],
   "not_tried": [

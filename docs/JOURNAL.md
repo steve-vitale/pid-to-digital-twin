@@ -4321,3 +4321,27 @@ unknown. It creates no automated baseline selector, local governance service or 
 source, methods, software and wording checks retain their separate scopes; repetition and CI coverage are
 reported separately from any human outcome. N056 remains open for qualified longer multi-day data; N062/N063
 remain unproven.
+
+
+## 86. Take a written description to one question before drafting
+
+The previous goal turn published the fixed baseline-context investigation; that is completed progress, not a
+reason to add another toolkit feature. The next reader pass looks for a consequential obstacle in the existing
+on-ramp. The written-description guide has one: it takes an engineer from a sourced model into platform files
+and a manually authored drawing layout, then ends without showing the first-question and company-handoff route.
+The root guide already explains that route, so this is an entry-guide omission rather than a missing capability
+or proof that a real engineer was blocked.
+
+The revised guide puts the existing offline question engine before optional outputs. An actual full screen on
+its exact committed Bayer model produces 12 findings; its complete `E18@model` object matches the existing
+single-question example. The engineer can take one finding's exact ID, asset references and missing-evidence
+requests into the plain brief, retain source revisions and qualified answers, and identify a company recipient.
+A source-text clarification can begin without any model. No new drawing, drafting layout, platform import or
+model call is needed for this first investigation.
+
+The existing partial-answer example remains an optional worked illustration, not a required local register.
+Unknown ownership and acceptance stay visible. Shared maintenance, decisions and history belong in the company's
+home as the work grows. This change adds no governance application, adapter, document synchronization or company
+round trip. It neither re-audits the historical report/model nor changes the catalog, tools, committed screens,
+matrix or accuracy claims. AI reader/CLI checks establish a runnable route, not human adoption or benefit;
+N062/N063 remain unproven.

@@ -1,12 +1,18 @@
-# From a written description: process model, then P&ID and exports
+# From a written description: sourced model, questions and optional outputs
 
 **Why it matters:** A unit may have procedures and design notes but no usable drawing. A model with a source on every item supports draft asset lists, logical SVGs and platform staging. It makes the interpretation checkable; agreement with the actual plant still needs independent evidence and engineering review.
 
 When there's no usable drawing but there is a description (an operating procedure, a design basis, an
-investigation report, a PFD with notes), the route is: write a process model from it with a source on every item,
-check that model against something it wasn't written from, then generate the P&ID and the platform files from the
-model. This repository did it twice: the Tennessee Eastman process from its published paper and simulator code, and
-the Bayer CropScience residue treater from the CSB's investigation report. The commands below use the Bayer model.
+investigation report, a PFD with notes), write a process model with a source on every item and check it against
+something it wasn't written from. Use that model for a first engineering question or generate the draft outputs
+the work needs. This repository built two such models: the Tennessee Eastman process from its published paper
+and simulator code, and the Bayer CropScience residue treater from the CSB's investigation report. The commands
+below use the Bayer model.
+
+Begin with one useful question and an intended recipient. If the question only needs a clarification of the
+source text, use the [plain question brief](../first-pilot/pilot-brief.md) without creating a model. Build a model
+when the investigation needs asset identities or relationships. A first evidence packet does not require a new
+drawing or platform import.
 
 ## 1. Write the model, citing every item
 
@@ -38,6 +44,30 @@ figure wrong in four places (10 of 21 checks at first; 20 of 21 after correcting
 `scripts/compare_bayer_fig10.py`, [BAYER_RT.md](../../docs/BAYER_RT.md). For your unit the second source might be an
 old drawing, a walkdown, the DCS configuration ([loop list check](../loop-audit/README.md)) or the I/O list.
 
+## Use the model for one engineering question
+
+The existing question engine reads this process-model format directly, offline and with the standard library:
+
+```sh
+python -S scripts/question_engine.py --model data/bayer_rt/process_model.json --out out/from-description-question
+```
+
+Open `out/from-description-question/screen.md`. For your model, replace the `--model` path and choose a separate
+output folder. Check a relevant finding against its cited model fields and original source before using its
+collection requests. The model is still a draft; a screen does not establish an opportunity, current plant
+conditions, savings or permission to change equipment. No findings means no catalog pattern fired on the supplied
+model, not that the unit has no useful questions.
+
+Choose one question with the intended engineering recipient. Copy its exact finding ID, asset references and
+missing-evidence requests into a private copy of the [plain brief](../first-pilot/pilot-brief.md). Keep the source
+revision and exact locations, what they support, competing evidence and the next owner together. The existing
+[Bayer E18 example](../context-register/bayer/README.md) shows a generated question with a qualified partial answer;
+its local register is optional. No drawing layout, extra model call or platform connection is needed for this step.
+
+Follow the [first-question guide](../first-pilot/README.md) for source review and company handoff. Leave unknown
+ownership and acceptance visible. As the work becomes shared, the company needs a maintained home for the evidence,
+decisions and history. Continue below when the investigation actually needs generated platform files or a drawing.
+
 ## 3. Platform files straight from the model
 
 ```sh
@@ -50,7 +80,7 @@ Units with no screen position are placed automatically in flow order from the ma
 links between them are logical, not pipe routes. On the Bayer model it writes 5 units, 15 streams, 6 instruments
 and 5 valves, and passes structural validation (which is not engineering approval).
 
-## 4. A P&ID from the model
+## 4. A P&ID from the model, when needed
 
 The drawing needs a manually authored drafting layout (`data/bayer_rt/pid_layout.json`). It places modeled items;
 validation refuses missing, duplicated or unknown model references. A layout can also declare drafting additions,
