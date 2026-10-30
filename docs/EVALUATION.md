@@ -436,3 +436,46 @@ Neither reproduces the paper's metric, so their scores are not directly comparab
 **Not yet measured:** the pipe layer against truth with a model's own symbols (row 8 and the OPEN100 rows use the
 key's symbols), on scans, and in a reviewed sample of the current version. The holdout and reserved Comos/AVEVA subsets above are the pipe-layer checks on drawings the latest rules were
 not tuned on; both had been scored as baselines, and OPEN100 is only partly blind overall.
+
+## 8. Description-to-P&ID evaluation gap
+
+The [written-description route](../examples/from-description/README.md) requires a sourced process model and an
+authored drafting layout. The current generalization matrix has no end-to-end description-to-P&ID accuracy row.
+Row 5 tests platform exports; rows 4 and 8 test their loop and tracing contracts on existing drawings. Generator
+regressions also test model/layout consistency and the committed images against their keys. These are useful
+checks of particular steps, not a measurement of interpretation accuracy on a new description.
+
+The Bayer worked example illustrates the distinction: the text-derived model initially had four substantive
+errors when checked against the report's figure. Corrections bring its model comparison to 20/21, and the drawing's
+generated routing key agrees with 15/15 reference lines. Those are corrected development results. They do not
+estimate first-attempt performance or drawing quality on unfamiliar source material.
+
+The following is a plan for the missing evaluation, not a completed experiment or an additional matrix score:
+
+1. **Freeze the task and source boundary.** Record the exact narrative revision, permitted supporting records,
+   processing tools and supplied conventions before authoring the model. Distinguish narrative-only tasks from
+   tasks where an existing drawing or flowsheet is available. If that drawing is used to author or correct the
+   submission, label the result development or corrected; do not call it an unseen-description trial.
+2. **Prepare independent source truth.** Identify the equipment, connections, controls and limits that the allowed
+   records actually support, with locators and explicitly unresolved facts. A source can itself be incomplete or
+   conflicting; the answer key must retain that uncertainty. Have a separate reviewer check the inventory and
+   resolve disagreements without silently adding missing engineering design.
+3. **Keep interpretation separate from drafting.** Freeze the submitted model before layout work. Count supported
+   claims found, supported claims missed, unsupported claims introduced and unresolved facts incorrectly asserted
+   as settled. Show the counts by engineering category. Then freeze the layout, including every declared drafting
+   addition and opt-out reason. Keep corrections and their causes distinct from the initial submission.
+4. **Check the actual output.** Check model-reference coverage, pipe versus signal meaning, continuation identity
+   and control-loop completeness. Inspect rendered sheets for wrong joins, gaps, obscured symbols, crossed labels
+   and unreadable text. Known-box tracing checks one geometry layer; it does not test symbol recognition or
+   replace qualified drawing review. Report routing-key checks and image checks separately.
+5. **Prove that the assessment can fail.** Include deliberate missing equipment, an unsupported control claim, a
+   wrong connection and a missing signal. Include a fact the description leaves unknown. Record what each check
+   catches and what it misses before relying on the resulting score.
+6. **Report the actual sample and effort.** Keep development, corrected examples and genuinely held-out sources
+   separate. Report each source family and all failures. Time review only when someone actually performs it;
+   counts of discrepancies are not hours saved. No composite success rate should hide an unsupported safety or
+   control claim behind good symbol coverage.
+
+No new interpretation run, independent source inventory, rendered-drawing review or timed engineer trial is
+claimed by this plan. It does not authorize changes to existing scorer criteria, the generated answer keys or
+the historical matrix results.

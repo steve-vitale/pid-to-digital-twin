@@ -4618,3 +4618,27 @@ access and process-data interfaces. Canonical OKF 0.2 and Google's October 22 an
 direction; no OKF exporter or Google import is implemented or validated here. No MCP server, live connector,
 company governance application, compliance certification or measured adoption benefit is claimed. These are
 next-step integration instructions and boundaries for the on-ramp, not additional shipped features or corpus runs.
+
+## 95. Separate description interpretation from drawing generation
+
+A reader asks how well a process description becomes a P&ID and whether that result is in the matrix. The matrix
+does not measure that complete transformation. Row 5 calls the platform exporter on already structured models;
+rows 4 and 8 check loops and known-box tracing on existing drawings. The description guide now maps each claim
+to its actual evidence and distinguishes the authored model, authored layout, generated key and rendered image.
+
+The Bayer model's four initial errors, subsequent 20/21 reference comparison and remaining nozzle difference
+stay visible. Its 15/15 drawing-line comparison reads the generated routing key. Separate TE/Bayer regression
+controls trace the committed PNGs with supplied symbol boxes and compare recovered links with their keys. Those
+checks establish different things; neither estimates interpretation accuracy on unfamiliar descriptions or
+operator acceptance. The test source contains 18 generator/Bayer controls, five scorer controls and three model
+diff controls, not 26 tests of prose-to-P&ID accuracy.
+
+Evaluation section 8 states the missing experiment: freeze allowed source material and independent facts, retain
+unknowns and conflicts, freeze interpretation before drafting, assess actual rendered output, exercise deliberate
+errors, and report initial submissions separately from corrections. It is a prospective plan, with no new score,
+new held-out source or measured review-time claim.
+
+An independent reader checks the two revised documents against their source contracts and saved results. All
+112 registered example outputs, matrix criteria, cells and existing whole-feature reviews remain unchanged. This
+is a documentation and evaluation-scope correction; no generator, model, layout or answer key is changed and no
+new model call or matrix execution is claimed.

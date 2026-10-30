@@ -26,7 +26,7 @@ Read this before tuning anything: if a variant is listed as rejected, the number
 | [Robustness to old scans](#robustness-to-old-scans) | 11 | 3 | 3 | 1 | 4 | 10 | 1 |
 | [Tag reading](#tag-reading) | 4 | 0 | 0 | 0 | 4 | 0 | 2 |
 | [Scoring: the scorer and its controls](#scoring-the-scorer-and-its-controls) | 21 | 13 | 6 | 0 | 2 | 17 | 5 |
-| [Generated P&IDs drawn from a model (loops, stations, style)](#generated-pids-drawn-from-a-model-loops-stations-style) | 7 | 2 | 3 | 2 | 0 | 7 | 4 |
+| [Generated P&IDs drawn from a model (loops, stations, style)](#generated-pids-drawn-from-a-model-loops-stations-style) | 8 | 3 | 3 | 2 | 0 | 7 | 4 |
 | [Tennessee Eastman model: source and topology verification, tag conventions](#tennessee-eastman-model-source-and-topology-verification-tag-conventions) | 10 | 6 | 3 | 1 | 0 | 10 | 2 |
 | [Replay, normal bands and fault detection](#replay-normal-bands-and-fault-detection) | 24 | 11 | 11 | 1 | 1 | 11 | 3 |
 | [Ignition and PI outputs: build, verifier, acceptance, screens](#ignition-and-pi-outputs-build-verifier-acceptance-screens) | 17 | 2 | 14 | 1 | 0 | 15 | 6 |
@@ -34,7 +34,7 @@ Read this before tuning anything: if a variant is listed as rejected, the number
 | [3D and browser tours](#3d-and-browser-tours) | 7 | 3 | 2 | 2 | 0 | 7 | 4 |
 | [Review loop: operations corrections, mapping, outside review](#review-loop-operations-corrections-mapping-outside-review) | 17 | 13 | 2 | 1 | 1 | 6 | 4 |
 | [Intake and reuse: runbook, DEXPI route, loop audit, CSV tools, vendor kit](#intake-and-reuse-runbook-dexpi-route-loop-audit-csv-tools-vendor-kit) | 33 | 29 | 2 | 0 | 2 | 13 | 2 |
-| **All** | **227** | **115** | **69** | **17** | **26** | **161** | **60** |
+| **All** | **228** | **116** | **69** | **17** | **26** | **161** | **60** |
 
 ## Extraction: models reading symbols and tags
 
@@ -259,6 +259,7 @@ Function id `generated_pids`.
 | A073 | 2026-10-28 | Control valve stations with a 60 px bypass offset. | Failed on paper before any code ran: feed-line bypasses ran through the flow controllers. | 1 **(single run)** | **rejected** | Offset became 45 px and the three feed lines moved apart. | [journal 52](../docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass) |
 | A074 | 2026-10-28 | Revision C: a station (two block valves and a bypass globe valve) around each inline control valve, as a declared drafting addition. | Style fidelity 30 -> 35 of 36; tracer recovers every key link including bypasses; loop audit still 19 of 19. | 1 **(single run)** | **kept** | A drafting convention, labelled in the key; style measures resemblance to OPEN100, not engineering quality. | [journal 52](../docs/JOURNAL.md#52-put-each-control-valve-in-a-station-block-valves-and-a-bypass), [journal 60](../docs/JOURNAL.md#60-let-two-hostile-reviewers-read-it-before-anyone-else-does) |
 | A075 | 2026-10-29 | Automatic unit placement in flow order so generate.py takes any model in the schema. | First layout put every unit off the right edge (a recycle loop inflated the column count); the second stacked them in one column (utility feeds counted as starts); TE outputs byte-identical after the fix. | 1 **(single run)** | **kept** | Both failures were caught by looking at the render, not by a test. | [journal 63](../docs/JOURNAL.md#63-prove-every-way-in-and-time-one) |
+| A228 | 2026-10-30 | Separate description interpretation, authored drafting, routing-key checks, committed-image geometry and platform-export evidence. *Hypothesis:* Engineers should be able to tell what the current generator and matrix prove before treating a worked example as reliable prose-to-P&ID conversion. | The description guide adds a stage-by-stage evidence table. EVALUATION§8 records the unperformed end-to-end experiment and prospective source/interpretation/layout/render/control/effort requirements. Bayer20/21correctedmodel and15/15routingkey results remain development evidence; committed-image tracing with known boxes is a separate regression. Row5 runs generate.pyplatformexports; rows4/8checkloops/tracing on existingdrawings. | Documentation/source-contract review only. Independent reader verifies2documents,26existingtestmethods byscope(18generator/Bayer,5scorer,3diff),savedresultsand23supportbindings; all112registeredoutputsunchanged. No new test/cell/model execution, prospective score, independent source inventory, timed engineer trial or renewed whole-feature review. | **kept** | Makes a consequential coverage gap visible and specifies what stronger evidence would require without changing historical criteria, drawings or results. | [journal 95](../docs/JOURNAL.md#95-separate-description-interpretation-from-drawing-generation), [README.md: What has actually been evaluated](../examples/from-description/README.md#what-has-actually-been-evaluated), [EVALUATION.md: 8. Description-to-P&ID evaluation gap](../docs/EVALUATION.md#8-description-to-pid-evaluation-gap) |
 
 **Not tried yet**
 

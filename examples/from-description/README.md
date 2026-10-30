@@ -104,6 +104,25 @@ back and scored. Run on the committed inputs it reproduces `data/bayer_rt/pid/RT
 additions affect the depicted drawing and its key; they do not update the source model or prove installed
 configuration. Someone must check both the placements and additions. The platform files in step 3 don't need a layout.
 
+## What has actually been evaluated
+
+There is no end-to-end accuracy score for turning an unfamiliar process description into a correct P&ID.
+The two worked examples use authored models and layouts. Keep the evidence for each step separate:
+
+| Step | Available evidence | What remains unmeasured |
+|---|---|---|
+| Description → sourced process model | The Bayer model was checked against the report's Figure 10. Its initial text interpretation had four substantive errors; after corrections, 20 of 21 model checks agree. The remaining difference is reported. | Accuracy on new descriptions; missing facts or invented assumptions that a source comparison has not caught. |
+| Model + authored layout → P&ID | The Bayer drawing's generated routing key agrees with all 15 reference lines. Generator regression controls reject missing, duplicate or invented model references and missing or invalid signals. | Automatic drafting layout, general drawing readability, and acceptance by a site engineer or operator. The 15-line check reads generated routing data, not the rendered image. |
+| Rendered drawing → recoverable geometry | Separate regression tests trace the committed TE and Bayer images with known symbol boxes and compare the recovered links with their keys. | Finding the symbols from pixels, reading every label, or proving that the source model describes the plant correctly. |
+| Model → platform exports | Matrix **row 5** runs `generate.py --out` on the listed inputs. It checks export behavior; the external flowsheets extend unit/stream coverage. | This row does not execute the P&ID drawing generator or score prose interpretation or drafting quality. |
+| Existing drawing → loops and pipe layer | Matrix **rows 4 and 8** check their stated loop and tracing criteria, including generated TE and Bayer examples. | The generated examples use this project's models and keys. Those passes are consistency checks, not independent accuracy on unfamiliar descriptions. |
+
+See the [Bayer comparison](../../docs/BAYER_RT.md),
+[generator regression controls](../../scripts/test_te_pid_roundtrip.py), and the
+[matrix's exact criteria](../../docs/GENERALIZATION.md). A description-to-P&ID evaluation needs separately frozen
+source facts, allowed assumptions, model and layout submissions, and checks of the actual rendered drawing.
+The [evaluation plan](../../docs/EVALUATION.md#8-description-to-pid-evaluation-gap) explains that missing measurement.
+
 ## What this route can't give you
 
 A model written from text is only as good as the text. Every item stays unverified until someone who knows the
