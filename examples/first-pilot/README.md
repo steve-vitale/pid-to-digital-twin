@@ -12,6 +12,10 @@ For a filled source-only example, read the [Covestro first-question brief](../lo
 It shows exact source citations, a qualified partial explanation and missing evidence in one handoff document.
 The main behavior question stays unresolved, with no assigned recipient, accepted handoff or trial result.
 
+For manufacturing configurations and logs, the [NIST first-question brief](../context-register/nist-smstestbed/first-question.md)
+asks which deployed configuration explains an archived signal. It preserves a published identifier-meaning change
+and requests the missing deployment/mapping evidence without requiring a model or local register.
+
 For a generated question, the [Millard refrigeration brief](../opportunity-screen/millard/first-question.md)
 starts with an actual E30 screen on a deliberately small report-based model. It separates the energy collection
 request from a manually authored controls-record question and keeps both unresolved. No context register is needed.

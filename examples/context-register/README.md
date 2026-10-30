@@ -19,17 +19,20 @@ There are five examples:
 - **[Question-engine bridge](bayer/README.md):** the real E18 screen joins to a proposed partial answer from a
   public operating narrative. Its original collection prompts, decision rule and limits remain visible; the
   historical source does not settle actual duty overlap or savings.
-- **[NIST manufacturing testbed](nist-smstestbed/README.md):** two original device configurations and an archived
-  operating log share a machine UUID while reusing a signal ID for different meanings across revisions. The packet
-  keeps the meanings revision-scoped and the deployed configuration unknown. This is a new public source family
-  for the context workflow, examined as development evidence rather than a held-out score.
+- **[NIST manufacturing testbed](nist-smstestbed/README.md):** two original device configurations publish the same
+  machine UUID while reusing a signal ID for different meanings across revisions. The associated Hurco04 archive
+  log does not identify its deployed configuration. The packet keeps the meanings revision-scoped and deployment
+  unresolved. This source family is examined as development evidence rather than a held-out score.
+  Start with its [plain configuration question](nist-smstestbed/first-question.md) before the optional register setup.
 - **[MetroPT-3 maintenance evidence](metropt3/README.md):** reported failures, maintenance notes and the actual
   released measurement CSV stay distinct. The packet preserves duplicate event numbers, a date ambiguity,
   acquisition/release scope differences and a column-order trap, with explicit requests for execution records
   and comparable observations. It extends context coverage on an existing historian family; no successful
   repair, root cause, current asset identity or new anomaly result is inferred.
 
-For your own work, start with a draft model/graph and question list from the existing tools. Keep stable asset
+For a first document question, the [plain brief](../first-pilot/README.md) is enough; no model or register is needed.
+If you choose the optional local register route, start with a draft model/graph and question list from the existing
+tools. Keep stable asset
 identities, register the supporting document revisions and exact locations, assign owners, and fill the answer CSV.
 A second independently sourced answer stays separate. The tool compares only explicitly named claim slots and
 canonical values; an engineer decides whether documents disagree and which one governs.

@@ -8,6 +8,12 @@ The two configurations both publish machine name `Hurco04` and UUID `mtc_adapter
 
 The log has actual recorded spindle/feed values and explicit missing-state controls. `UNAVAILABLE`, numeric zero and a single blank program-name space remain different values. Its filename is not the boundary of all timestamps inside it. A recorded `READY` status and later missing status do not establish a named production job or complete operating-state coverage. The log does not identify the deployed configuration revision; that question remains open.
 
+## Start with one source question
+
+The [plain first-question brief](first-question.md) asks which deployed configuration and adapter mapping explain
+the selected archive. It keeps the revision-scoped signal meanings, partial answer, missing records and intended
+recipient together. No asset model, generated question or context register is needed for that first handoff.
+
 From the repository root, fetch the four pinned originals once:
 
 ```sh
@@ -16,7 +22,22 @@ python -S examples/context-register/nist-smstestbed/fetch_sources.py --max-mb 1
 
 The packet-local `fetch.json` registry calls the existing public pinned-file fetcher as a library and checks byte counts and SHA-256. It changes no global matrix fetch registry and adds no HTTP implementation. It requires no account or agreement. The live VDS endpoints were unavailable during discovery; this example uses the immutable official archive and makes no live-service claim. Missing cached originals cause a clear failure; the derived key is not substituted for them.
 
-Then run offline with Python's standard library:
+Check the originals offline before interpreting them:
+
+```sh
+python -S examples/context-register/nist-smstestbed/verify_sources.py
+```
+
+That command checks original bytes and the existing explicit XML/raw-record expectations. It does not establish
+the deployed configuration or approve a mapping. Read the cited lines, retain the originals and source manifest
+with the brief, and ask the intended owner for the missing deployment record. Carry the draft into the company's
+shared context and decision system as others contribute. The [first-question guide](../../first-pilot/README.md)
+explains the recipient, evidence and handoff fields; unassigned ownership stays **needs owner**.
+
+## Optional: reproduce the local context example
+
+The commands below exercise the existing model/register example and its dependency checks. The plain first
+question and company handoff above do not require this local setup. Run offline with Python's standard library:
 
 ```sh
 python -S scripts/context_register.py prepare --model examples/context-register/nist-smstestbed/model.json --questions examples/context-register/nist-smstestbed/questions.json --sources examples/context-register/nist-smstestbed/sources.json --source-root data/external/nist-smstestbed --out examples/context-register/nist-smstestbed/run
@@ -51,6 +72,8 @@ Read `run/context.md` for the questions, answers, missing data and exact evidenc
 The development run on 2026-10-29 matched those checks: all four original hashes and ten parsed primary-check groups passed. The register had five partial questions, three requiring data and no disputed questions. All eight needed an owner and all ten decisions remained proposals. Synthetic source changes produced exactly the 3/3/4/0 stale-answer counts above, preserved decision history and passed both rejection controls. The readable report also matches the committed expected record. These are development consistency results; independent original-source review is a separate check.
 
 Freshness `current` means the present inputs match a decision's evidence snapshot. Exact restoration of an old source and revision can match that snapshot again. The tool captures no intervening changes between refreshes. Historical judgments remain dated records. This packet establishes no current machine condition, human ownership, approval, production truth, complete deployment history or measured review-time benefit.
+
+## Source and attribution
 
 The [official NIST SMS Test Bed page](https://www.nist.gov/laboratories/tools-instruments/smart-manufacturing-systems-sms-test-bed) describes the facility and its data services. Source bytes come from the [official usnistgov/smstestbed repository](https://github.com/usnistgov/smstestbed); `sources.json` and `source_key.json` contain immutable source URLs, revisions, hashes and exact physical-line/XML locators. The source key is a derived transcription, not an independent source or replacement for the originals.
 

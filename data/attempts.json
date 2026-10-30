@@ -3300,6 +3300,23 @@
         "examples/first-pilot/pilot-brief.md",
         "scripts/test_question_engine.py"
       ]
+    },
+    {
+      "id": "A224",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Take the existing NIST manufacturing configurations and archive to a plain first-question brief before optional model/register setup, and correct the index UUID-join wording.",
+      "hypothesis": "An engineer starting with configuration revisions and recorded observations should be able to request the missing interpretation/deployment evidence without constructing a local context application.",
+      "evidence": "Fresh controls/early-career reader identifies the missing plain-brief/recipient route. New manual SMS-CONFIG-FIRST brief retains exact source IDs/revisions/hashes/locators, two revision-scoped path_7 meanings and literal runtime row46. Only the two XML records carry the shared UUID; the complete363-record raw log does not, and the old index implication is corrected. Root4connected pinned upstream reads match all121831cached UTF8 bytes exactly; existing source verifier passes4pins/10primary groups, with row46 checked directly. First-pilot/context indexes and the NIST guide now lead to a company owner before optional register commands. Models, questions, answers, original files and registered outputs remain unchanged.",
+      "runs": "Read-only original-source checks, existing first-route source CLI checks and a separate frozen reader/source review. Documentation development on an existing source family; no full local-suite, model call, native action, new global input/family/matrix cell or held-out result.",
+      "verdict": "kept",
+      "why": "Extends the practical first-packet route to discrete-manufacturing records while preserving unknown deployment, ownership, governing authority, acceptance and benefit. Company context is the destination; no local governance, schema, adapter or history-service expansion.",
+      "source": [
+        "docs/JOURNAL.md#91-start-a-manufacturing-records-question-before-the-local-register",
+        "examples/context-register/nist-smstestbed/first-question.md",
+        "examples/context-register/nist-smstestbed/README.md#start-with-one-source-question",
+        "examples/first-pilot/README.md"
+      ]
     }
   ],
   "not_tried": [

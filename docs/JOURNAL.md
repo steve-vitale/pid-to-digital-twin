@@ -4486,3 +4486,40 @@ bytes; that comparison was corrected, its failed attempt retained, and the repea
 
 The filled Millard brief demonstrates catalog retention with a pinned catalog revision and hash of its committed
 LF bytes. This is a catalog citation check, not a new audit of the original incident report or current plant state.
+
+
+## 91. Start a manufacturing-records question before the local register
+
+The catalog-provenance correction is published before this pass. A fresh controls/early-career reader follows
+the existing NIST SMS packet and finds a route gap: fetch leads into model/register preparation and application,
+without showing the plain source-question and recipient brief already supported by the pilot guide. That
+overstates the setup needed to begin an engineering investigation from configurations and a log.
+
+The NIST guide now starts with a plain manual question: which deployed device configuration and adapter mapping
+interpret the selected archive, and what links that revision to the recording time? It uses the existing original
+files and source manifest, requires no model, question catalog or register, and asks a controls/configuration or
+manufacturing-data owner for the missing records. The register reproduction and history checks stay optional.
+The first-pilot and context-example indexes expose the same route and company handoff.
+
+The worked brief preserves the two published meanings of `Hurco04-path_7` under their configuration revisions.
+The machine UUID joins the two XML device records; it is absent from the archived log. The independent reader
+caught the index's older wording implying that all three records share that UUID, and the index now makes the
+distinction explicit. The raw runtime-named row at physical line 46 retains its timestamp and literal zero. Its
+name alone does not supply a deployed revision, verified DataItem mapping, units, production result or current
+machine condition. The complete supplied log has 363 three-field records and identifies no deployed configuration.
+
+Four connected reads of the pinned upstream files match the cached UTF-8 bytes exactly: 121,831 bytes across
+two configurations, the raw archive and the reuse notice. The existing source verifier checks all four pins and
+ten explicit original-source groups; the new line-46 citation is checked directly against the original too.
+The new brief is AI-authored development documentation selected after these source facts were inspected, not a
+held-out result, new source family or added generalization cell. Original files, model, questions, answers and
+registered outputs stay unchanged. Existing whole-feature reviews are not renewed by this documentation pass.
+
+A separate reader re-reads the cited XML and complete raw archive, checks the four final documents and their
+29 local links, and closes both the route gap and UUID wording finding. That reader runs no feature CLI; the
+root separately exercises the existing cached fetch and source-verifier commands. No prepare/apply/history or
+full local test-suite rerun is claimed for these prose changes.
+
+Ownership, acceptance, governing authority and deployment remain unresolved. The first packet goes to the
+company's shared context and decision system as participation grows; this adds no local governance, adapter,
+history service or operating-value claim.
