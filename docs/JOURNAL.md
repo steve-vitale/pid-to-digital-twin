@@ -3493,3 +3493,36 @@ include 32 register tests and three example tests. The claim check still reports
 claim and no failures; the existing 52 pipeline stages remain fresh. All 17 feature entries now have a current
 passing independent agent review of their exact registered example outputs. The new receipt also records the
 primary-source checks and remaining limits; it is not human adoption or an operational acceptance record.
+
+## 67. Explain the engineering foundation and each piece's job
+
+**What:** 2026-10-29. Reframe the README around engineering context an organization can inspect, maintain and
+own. A drawing is one view into the assets, relationships, evidence, open questions and decisions. Future
+manufacturing applications are the intended use of that foundation; the present evidence remains the prototype's
+public-source software checks and recorded lab demonstrations.
+
+The entry page now explains nine contributions: intake; the asset/relationship model; source review, loop checks
+and signal mapping; the question engine; historian analysis and impact estimates; retained context; a bounded
+pilot; portable handoff and staging; and reproducibility/change checks. Each contribution links to a runnable
+route or its guide. The diagram shows the engineering investigation and its source refresh, with controls records
+and recorded data joining the review route. The prose makes clear that a written description needs an authored
+model and that historian CSV analysis can be used on its own.
+
+**The organizational transition has a boundary.** The local tools can supply a complete, inspectable packet.
+Ongoing shared use adds source authority, identity reconciliation, access, accountable review and decisions across
+projects. The README names those responsibilities and the neutral handoff requirements without claiming a hosted
+service, authenticated approval, automatic monitoring or an available downstream adapter. No product-specific
+commercial material is included in the public repository.
+
+**Reader review changed the copy.** A fresh young-engineer/controls/manager reading removed an unsupported claim
+about what most digital-twin projects do first. It also caught wording that could make every input route sound
+like a model builder; the final text separates controls and historian analyses from model creation. The old
+diagram could imply that an arbitrary drawing bundle produces working screens and inherits the demo's gateway
+acceptance. Its replacement and the platform section now keep that lab evidence with its actual demonstration.
+The young-engineer and independent technical readers checked the final framing against the guides; 26 links in
+the revised material resolve, including the renamed platform-section anchor.
+
+This is documentation work. The claim check still reports 41 numeric matches, one prose-only claim and no
+failures. No model, method, benchmark, runtime receipt or tool implementation changed. The legacy statement-review
+revision-binding limitation remains documented; this edit does not fix it or upgrade historical approvals. No
+LinkedIn post, real-site pilot, measured adoption or downstream import was performed.

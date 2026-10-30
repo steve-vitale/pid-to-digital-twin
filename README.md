@@ -2,18 +2,64 @@
 
 [![tests](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml/badge.svg)](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml)
 
-AI vision models read the symbols and tags on piping and instrumentation diagrams (P&IDs), code traces the lines,
-and the result is a draft asset model plus import files for Ignition (an HMI/SCADA platform) and PI AF (the PI
-historian's asset tree), whose data points stay placeholders
-until someone maps them from an I/O list. Extraction from real drawings is
-scored against public third-party answer keys (the generated drawings and the real unit use checks this project
-wrote, and say so), and the scoring rules were committed before any model ran (the one rule I later bent is
-logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
+**From engineering records to knowledge the organization can own.**
 
-The first step of most digital twin projects is someone redrawing P&IDs and typing tag lists by hand. This project
-tests how much of that AI can do, how to check its work honestly, and what a plant would need to use it safely.
+The aim is an engineering foundation for future manufacturing tools: a shared understanding of the plant that
+people can inspect, improve and maintain. Equipment identities and connections are part of it. So are the
+documents supporting an answer, its operating context, the questions still unresolved, and the people responsible
+for the next decision. A drawing becomes one view into that larger body of engineering knowledge.
 
-**If you work at a plant:**
+This repository develops that foundation through local, reviewable workflows. Drawings and supported CAD exports
+can seed a draft asset model; a written description can support one an engineer authors. Controls records and
+historian CSVs have their own checks and analyses. Linking their findings to assets requires reviewed identity
+mapping. Check the model's claims where a model is used, investigate useful questions and retain the answers
+with their evidence. The intended result is a portable engineering packet that another person can understand
+and continue, and that future applications can build on.
+
+These are prototype tools tested on public inputs. The software examples do not establish an organization's
+source authority, an engineer's approval or measured operational value. The [first-pilot brief](examples/first-pilot/README.md)
+connects the tools to one real decision, with a sponsor, baseline, observation and accountable recipient.
+
+P&ID extraction was the first tested entry point: AI vision models read symbols and tags on piping and
+instrumentation diagrams, code traces the lines, and a builder produces a draft asset model and platform staging
+files. Extraction from real drawings is scored against public third-party answer keys; the generated drawings
+and the reconstructed real unit use checks this project wrote, and say so. Scoring rules were committed before
+the model runs (the one rule I later bent is logged in [EVALUATION.md](docs/EVALUATION.md), rule 7).
+
+## How each piece contributes
+
+The common thread is an engineering decision and the evidence needed to maintain it. The steps include people's
+work as well as scripts; running a command does not complete an engineering review.
+
+```mermaid
+flowchart LR
+    A[Drawings, CAD and descriptions] --> B[Draft asset model]
+    B --> C[Review and reconcile]
+    R[Controls records and recorded data] --> C
+    C --> D[Questions and evidence collection]
+    D --> E[Retained answers and owners]
+    E --> F[Pilot decision and handoff]
+    A -->|Released revision, then refresh| E
+```
+
+| Piece | What it contributes | Where to start |
+|---|---|---|
+| **Document and drawing intake** | Establish an initial asset structure from the records available. Keep source references and reported omissions so the next engineer can check the interpretation. | [Drawing](examples/own-drawing/README.md), [DEXPI XML](examples/from-dexpi-xml/README.md), [written description](examples/from-description/README.md) |
+| **A model with stable identities and typed relationships** | Connect equipment, instruments and controls in a reusable structure. Keep a direct pipe connection distinct from membership of the same line network. An identifier still needs reconciliation with the site's identifiers. | [Graph contract](docs/GRAPH_EXPORT.md) |
+| **Source review, loop checks and signal mapping** | Check what a source actually says, compare drawn loops with controls records, and map instruments to supplied signal addresses. A source match and current plant truth remain separate verdicts. | [Statement review](docs/STATEMENT_REVIEW.md), [loop audit](examples/loop-audit/README.md), [mapping](examples/review-and-mapping/README.md) |
+| **The question engine** | Turn the model into specific energy and controls investigations: why a question applies, which assets it concerns, what evidence to collect and how that evidence could settle it. A finding remains a question. | [Screening guide](docs/OPPORTUNITY_SCREEN.md), [a generated question and partial answer](examples/context-register/bayer/README.md) |
+| **Historian tools and impact estimates** | Examine supplied operating history, replay recorded data, and turn a measured change into a first-draft energy, cost and emissions estimate. Retain false alarms, assumptions and missing measurements. | [Historian CSVs](examples/historian-csv/README.md), [impact estimates](docs/IMPACT_ESTIMATE.md) |
+| **The context register** | Keep answers, owners, competing evidence and dated decisions together. Refresh against released source revisions to reopen affected answers while retaining the earlier reasoning. It runs locally and does not monitor documents or authenticate people. | [Offline and public-source examples](examples/context-register/README.md), [maintenance guide](docs/CONTEXT_REGISTER.md) |
+| **A bounded engineering pilot** | Choose one useful decision with its sponsor and intended user. Record the baseline, observation, resource use and outcome before expanding; a supported decision to stop is useful evidence too. | [Pilot guide and brief](examples/first-pilot/README.md) |
+| **Portable handoff and platform staging** | Carry the model, source manifest, context history and open questions to the next engineer or system. Ignition and PI exports supply asset/tag structure; signal values stay placeholders until mapped. Receiving systems require an explicit adapter and acceptance check. | [Versioned handoff](docs/CONTEXT_REGISTER.md#versioned-handoff-and-limits), [platform outputs](docs/TWIN_OUTPUTS.md) |
+| **Reproducibility and change checks** | Make the foundation inspectable: compare claims with committed results, re-score saved predictions, report stale generated outputs, and show where tools fail on other public inputs. These checks support review without conferring plant authority. | [Checks](AGENTS.md), [lineage](docs/DATA_LINEAGE.md), [generalization](docs/GENERALIZATION.md) |
+
+Maintenance, energy improvement, controlled change and future AI applications need different interfaces. The
+purpose here is to let them build on engineering context whose identities, evidence and limits can travel with it.
+The [full feature table](#start-wherever-you-are) below lists the runnable entry points and their exact example evidence.
+
+**Try the P&ID entry point:**
+
 - **You put in** one P&ID as a PNG. For a PDF or a scanned PDF, convert each page first (`pip install pymupdf`):
   `python -c "import pymupdf,sys; d=pymupdf.open(sys.argv[1]); [p.get_pixmap(dpi=200).save(f'{sys.argv[2]}/{i}.png') for i,p in enumerate(d)]" drawing.pdf mysheets`
   writes `mysheets/0.png`, `1.png` and so on (the folder must exist).
@@ -31,6 +77,7 @@ calls and checked the results. AI coding agents (Claude Code, and later Codex) w
 drafts of the docs. The [build journal](docs/JOURNAL.md) logs where they and I were wrong.
 
 **Start here:**
+
 - *Plant engineers:* [your own drawing](examples/own-drawing/README.md) · [at your plant](docs/AT_YOUR_PLANT.md) ·
   [costs and review time](docs/COSTS.md) · [keep the answers and context current](examples/context-register/README.md)
 - *Engineers starting a transformation pilot:* [one problem, one decision, one evidence pack](examples/first-pilot/README.md)
@@ -44,7 +91,13 @@ drafts of the docs. The [build journal](docs/JOURNAL.md) logs where they and I w
 - *Researchers:* [evaluation rules and layers](docs/EVALUATION.md) · [where each tool holds and breaks](docs/GENERALIZATION.md) ·
   [what already exists, and what this adds](docs/PRIOR_ART.md)
 
-**In two minutes:**
+**What has been checked:**
+
+- **Keeping questions and answers together.** An actual generated question retains its source-backed partial
+  answer and original collection requests. A linked PRONTO packet keeps disagreements between the public records
+  unresolved; disposable source revisions reopen dependent answers without discarding history. These are software
+  examples and independent agent checks, with no human approval or measured adoption. [Context examples](examples/context-register/README.md),
+  [journal 66](docs/JOURNAL.md#66-keep-the-questions-answers-and-next-owner-together)
 - **Reading real drawings.** On six drawings held out from tuning (a same-plant validation split that also chose
   the method), symbols are found with F1 0.93 and network connections 0.87 over five runs (F1 runs 0 to 1 and combines
   items missed with items wrongly added; 1 is perfect), leaving about 20 differences from
@@ -193,16 +246,28 @@ The scans are synthetic degradations, not real archive scans. Details: [GOAL.md,
   real archives remain untested for tags. Every caveat: [GOAL.md, round 5](docs/GOAL.md#round-5-results-scored-after-the-pre-registration-above).
 - **Review time is still unmeasured.** A timing kit for one sheet: [`out/review_kit/sheet-8/`](out/review_kit/sheet-8/README.md).
 
-## How it works
+## From one engineer's pilot to ongoing organizational use
 
-```mermaid
-flowchart LR
-    A[P&ID image] --> B[AI models<br/>symbols and tags, 2x2 tiles]
-    B --> C[Code line tracer<br/>connections]
-    C --> D[Twin builder<br/>hierarchy, risk-tiered review queue]
-    D --> E[Ignition tags and Perspective screens<br/>PI AF sheet, SVG overlays]
-    E --> F[Gateway verifier<br/>must catch planted faults first]
-```
+Use the local toolkit to establish a bounded, reviewable engineering packet and learn where the starting records
+are incomplete. Keep the original source pack, stable asset IDs, mappings, answers, ownership history, unresolved
+questions and pilot outcome together. An engineer should be able to inspect that packet without an account.
+
+When several teams depend on it, the ongoing work includes deciding which revisions govern, reconciling identities
+across systems, assigning accountable owners, controlling access, reviewing changes and retaining decisions across
+projects. Those responsibilities belong in the organization's working processes and systems. The local register
+records supplied identities and compares evidence when run; it does not provide a shared service, authenticated
+approvals, automatic monitoring or live synchronization.
+
+The [handoff contract](docs/CONTEXT_REGISTER.md#versioned-handoff-and-limits) preserves the starting point for that
+transition. A receiving system must retain source revisions and locations, relationship meanings, unknown and
+disputed states, and review history. Its adapter needs a staged import and readback check before anyone claims
+compatibility. No downstream live integration of the context register has been verified here.
+
+## The platform demonstration and its acceptance boundary
+
+The reusable drawing route produces a draft model, review material, Ignition tags and PI staging. Working screens
+and native gateway acceptance below belong to the repository's Tennessee Eastman demonstration and recorded lab
+checks. Generating a new bundle does not repeat those runtime checks for a site's own unit.
 
 | Platform | What's verified |
 |---|---|
@@ -376,7 +441,7 @@ committed before any method was tested.
 
 ## Try it in Ignition
 
-The current project's native acceptance runs are summarised [above](#how-it-works) and written up, with which files
+The current project's native acceptance runs are summarised [above](#the-platform-demonstration-and-its-acceptance-boundary) and written up, with which files
 belong together, in [docs/IGNITION_ACCEPTANCE.md](docs/IGNITION_ACCEPTANCE.md). Each gateway run found bugs no
 offline check had caught; all were fixed with regression tests ([journal entry 38](docs/JOURNAL.md#38-import-the-current-project-into-a-real-gateway-and-watch-what-the-offline-checks-could-not),
 [entry 47](docs/JOURNAL.md#47-count-what-the-bands-detect-and-make-lost-data-an-alarm)). That is a lab result on
