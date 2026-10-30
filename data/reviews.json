@@ -5021,6 +5021,211 @@
     "review_current.py": "89837b248edea976d11596bd781cd94b705d86690e31c0a55fe6c8c8564a76c9",
     "raw-proof-check-results.json": "8e98d359f61e81b8b4148f7ca120d85b9f226d470c40ef5f017f937abbad5f2b"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex evidence/hash review of maintainer compatibility rerun; functional controls separately attributed",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF. Named private evidence, immutable matrix and execution-log hashes use exact raw bytes. N057 metadata uses the explicitly declared canonical JSON method.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "f0fa451c4db2b77104d50f036ad911032316ed5b88cb5923579da7bf387aa86c",
+    "out/generalization/matrix.json": "50e99d2b9cfed937f5685d5b22c30efed5c126feaf16d142cd54ddf9dc487000",
+    "data/corpus.json": "a9adbe1d5b48468d615f2fa258aafe46c1134f54371b66cd2485d197305ce322"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/features.json": "558895ddcf628368c7835e567e7791a812a27d1ff15619aa82744fb9f6f73e6d",
+    "examples/loop-audit/covestro/README.md": "1049c13c727a4f5123484fba8fa48138871dcc012da496e505f8022b154bf64e",
+    "examples/loop-audit/covestro/ACCEPTANCE.md": "c969139a5114dded3b977d8c9d33db2e1f357e86095291233d871cc51e64b193",
+    "examples/loop-audit/covestro/connections.csv": "5a2effe0b64de07c6f2a4523d8184bb02e03a1700e40b0795c9d181b5b81d199",
+    "examples/loop-audit/covestro/check_sources.py": "11b9a26a20a9d4bfd153ce4ec30558fe349417c2aa6ba3918c5f24317b3b32bf",
+    "docs/CORPUS_FETCH.md": "81c895a6926e567091f06d0b3b6594e3db539e60735884e1fab7eaa701096241",
+    "examples/loop-audit/README.md": "1f4dd4fa49d40ac70d6276d043bd280b7b7129f5cec887a343452d49c17492ab",
+    "data/corpus_pins.json": "e802a93e20a94a8a8284be0c6614fcfc59646494b83e9655443ac1659b9a6617",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/loop_audit.py": "d2f441f08d6b80dc9640ef62e593a0273411795ceab7f491d817198397a58fe0",
+    "examples/first-pilot/README.md": "320592455e6a627546c616c544dfabd83cd9c30c26b3217361563dbb6fc2ae6e",
+    "examples/first-pilot/pilot-brief.md": "489f9c5af2318369baa6481cf5d9d3a1e5c664111cf4a248bed50169f37b6a09",
+    "scripts/csv_normal_bands.py": "af2fdf402128b024ff62b16a086a718beda14dfd12954dd88c3778ba573a6e40",
+    "scripts/csv_replay_server.py": "e3abd78c439af569e3ee01b1c4a5095a0b6ddf72391de3656186c48bd25f4130",
+    "scripts/test_csv_tools.py": "9cde9eda1e5264382d8e464472bc71c456991e8554aeeaa5967a87c363f80dc0",
+    "examples/historian-csv/README.md": "a7f42feea8e938b2010cf5a70dbdcabc6a4075f4665d6bac497cc280bbf3635a"
+   },
+   "reviewed_sections": [
+    {
+     "file": "docs/TRIED.md",
+     "section": "Completed N057 idea line",
+     "normalization": "Exact complete line starting '- N057 *done*:', followed by one LF. Other attempt/journal metadata is excluded.",
+     "normalized_utf8_sha256": "d0375ba2d6f1548131a0732d230882698d134145591a2e71d9486b0852f2fe7d"
+    }
+   ],
+   "reviewed_metadata_records": [
+    {
+     "file": "data/attempts.json",
+     "record_id": "N057",
+     "canonical_json_sha256": "6fe798368f9c6fe1884de6485392597ff5be7ec7e9e9686909f37c3e38719da3",
+     "normalization": "SHA-256 of sorted-key compact UTF-8 JSON for the complete not_tried record id N057; no newline appended.",
+     "all_other_not_tried_records_unchanged": true,
+     "other_not_tried_records_canonical_json_sha256": "43d78b793c16b8453560b761957abe86de71a877e9e3dc3c0ec814adece03923"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in this one-feature compatibility closeout. The maintainer actually reran all ten affected row-6 cells through the current matrix CLI. Every metric/detail/status/value/reason is unchanged, all other 84 complete cells are exact copies, and all 732 current file bindings pass. Changes are execution metadata, the current CSV reader hash and one identical-text citation relocation. Detector/report constants and replay executable AST are unchanged. N057 is corrected to already tried/implemented with its remaining failures explicit. This is maintenance compatibility evidence, not a new detector, source audit or fresh held-out accuracy result.",
+   "checks": [
+    "Verified immutable raw functional proof and all ten named baseline/frozen/harness/control evidence files. The separate independent leaf contains 52 actual CLI run records and 261 passing checks, including 22 shared-loader order refusals. Frozen/current reader, replay, test and guide hashes match; the prior TE JSON/Markdown result bindings remain unchanged. These are the controls reader executions, not new executions by this evidence reviewer.",
+    "Independently compared executable AST against immutable baseline: detector/report/constant AST outside read_historian_csv and its new record helper is exact; replay executable AST is exact after excluding module docstrings. The fix concerns strictly increasing parsed instants and physical data-record spans, not detector algorithms, calibration or replay pacing.",
+    "Verified original baseline matrix bytes equal the public baseline and the immutable 7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069 snapshot. Verified current public matrix and GENERALIZATION page are exact byte copies of the completed scratch outputs. Read the acceptance script without executing its publication branch.",
+    "Independently compared all 94 keyed cells. The 84 outside row 6 are exact complete objects. In the ten row-6 cells, only ran_at/seconds and scripts/csv_normal_bands.py hash change, plus TE published citation README line 129 to 141 with exactly identical cited text. After isolating those allowed changes every object, including every detail/metric/verdict, matches. Global pass/fail/n/a totals remain 63/23/8.",
+    "Read the actual maintainer completion log: all ten expected source IDs appear with matching verdicts and a completed matrix/doc write at 439.1 seconds. Global matrix ran_at, rows_run_this_time and summed-cell seconds also update; no other top-level field changes. This attributes actual execution to the maintainer log rather than substituting new hashes for execution.",
+    "Recomputed all 732 current file bindings and independently ran corpus_matrix --check successfully. Corpus inputs/candidates and matrix runner/criteria remain unchanged. This review executed zero matrix cells and does not relabel historically held-out source populations as a new untouched test.",
+    "Checked N057 against the unchanged A163/A171 attempt records and current identical detector AST. Its done status means rolling fast-versus-slow drift was already tried/implemented. Its rationale explicitly retains published false-alarm, missed-event and cross-source limitations and claims no new detector. Every other not_tried record is exact baseline; only the N057 record/completed line is bound here, leaving unrelated journal/new-attempt updates outside scope.",
+    "Renewed four inherited support bindings that predate this maintenance baseline: feature metadata, Covestro README and first-pilot guide/template. Their current bytes equal HEAD; the read intervening changes are OPC source/address qualifications and source-question/needs-owner handoff prose. Their earlier substantive/source review scope is historical; no other feature is renewed by this matrix receipt.",
+    "Retained earlier substantive/source, Covestro candidate and seed-refresh limitations through the archived prior review record. Existing historian examples/source ownership, human/site approval, clock/cadence truth, native imports and operational value are not revalidated. The local toolkit remains a starter and company-handoff workbench, not organizational authority or a governance substitute."
+   ],
+   "execution_attribution": {
+    "maintainer_completed_matrix_cells": 10,
+    "maintainer_elapsed_seconds": 439.1,
+    "affected_cells": [
+     [
+      6,
+      "te-braatz-runs"
+     ],
+     [
+      6,
+      "pronto-day3"
+     ],
+     [
+      6,
+      "pronto-day2"
+     ],
+     [
+      6,
+      "pronto-day4"
+     ],
+     [
+      6,
+      "skab"
+     ],
+     [
+      6,
+      "hai-21.03"
+     ],
+     [
+      6,
+      "uci-hydraulic"
+     ],
+     [
+      6,
+      "metropt3"
+     ],
+     [
+      6,
+      "battledim"
+     ],
+     [
+      6,
+      "battledim-2019"
+     ]
+    ],
+    "completed_log_sha256_raw": "6f0d79e531283f0e1e5229901ad2e2446595f8860d23dafc4585c068998567ae",
+    "scratch_matrix_sha256_raw": "50e99d2b9cfed937f5685d5b22c30efed5c126feaf16d142cd54ddf9dc487000",
+    "root_compatibility_proof_sha256_raw": "c1682bac880e6dcad493f9cc344b086a9d392149ceceafbd92ec0c11b9a4804d",
+    "matrix_cells_rerun_by_this_reviewer": 0,
+    "scope": "Previously inspected sources and unchanged criteria; actual maintainer compatibility execution, independently reviewed, not a new source or held-out accuracy experiment."
+   },
+   "functional_evidence": {
+    "reviewer": "Independent AI controls_reader persona; fictional software-control validation, not human engineering approval",
+    "final_proof_sha256_raw": "c905ff400d2053a7ce5d2c3629796a6a7ca337dd708cf9f0a433cda0e67cf86a",
+    "actual_CLI_commands": 52,
+    "assertions": 261,
+    "all_pass": true,
+    "scope": "Shared historian CSV strictly-increasing-time input validation and physical data-record diagnostics, preserving values/row associations and existing detector/replay behavior. No matrix/corpus-score re-review or algorithm tuning.",
+    "not_reexecuted_by_matrix_reviewer": true
+   },
+   "control_results": {
+    "complete_cells_compared": 94,
+    "affected_cells_executed_by_maintainer": 10,
+    "unaffected_cells_exact": 84,
+    "current_hash_bindings_verified": 732,
+    "matrix_cells_executed_by_this_reviewer": 0,
+    "source_audits_or_tests_executed_by_this_reviewer": 0,
+    "read_only_matrix_check_exit": 0,
+    "all_other_not_tried_records_unchanged": true
+   },
+   "prior_review_scope": {
+    "prior_accepted_output_hashes": {
+     "docs/GENERALIZATION.md": "5f532353fee96585a2db9c94b03833a4c61c79d0a74f8bbc915c36150e7a66d3",
+     "out/generalization/matrix.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+     "data/corpus.json": "a9adbe1d5b48468d615f2fa258aafe46c1134f54371b66cd2485d197305ce322"
+    },
+    "archived_record_sha256_raw": "0e1e76bf7a26445bdb660ad93889d2c76d8719d8e31d92f38128c4715fe57047",
+    "archive_method": "Exact prior review object retained as a JSON value and privately serialized; digest identifies that archival copy, not original submission byte formatting.",
+    "prior_limits": [
+     "Narrow independent coding-agent metadata, claim-scope and hash review only. No new matrix-cell execution, original-workbook field audit, drawing interpretation, old TE reproduction, model extraction, loop-audit run, native import, paid call, fetch or app/plant write was performed by this reviewer.",
+     "The source/controls reader independently owns the two-workbook/all-field audit and historical loop reproductions. This receipt does not make those checks fresh matrix executions or validate the control strategy.",
+     "Seven engineering-tool connection records are not two verified simple loops. No signal direction, cause-and-effect, current installed configuration, setpoint, completed investigation, actual owner/approval, measured engineering effort, operational benefit or adoption is inferred.",
+     "Historical source-license attribution is retained from the pinned public collection and existing metadata; no new online legal/licensing adjudication is claimed. Whole-source original checks remain separately attributed.",
+     "Existing failures, n/a cells, development reuse, answer-key qualifications and prior matrix limitations remain. The intake creates no new global source family, criterion, benchmark pass, held-out/generalization or accuracy claim.",
+     "Generated README/FEATURES tables, journal and attempts metadata are excluded. No other feature verdict is renewed by this receipt."
+    ],
+    "preserved": "Earlier substantive 94-cell/source audits, seed refresh 54-selected-cell/47-dependency execution and later candidate/metadata renewals retain their historical scope and limitations. No old source audit, accuracy or generalization claim is freshly re-established here."
+   },
+   "inherited_support_binding_renewals": {
+    "data/features.json": {
+     "prior": "cf65cb2f5187a5cbabf655f8aa8226ceaea890fc3121f57965b60b45b22a57ee",
+     "current": "558895ddcf628368c7835e567e7791a812a27d1ff15619aa82744fb9f6f73e6d"
+    },
+    "examples/loop-audit/covestro/README.md": {
+     "prior": "131212dee29965aac49d86a675f98db2ac1b340a972ab4a5b35b646ed0dee5d6",
+     "current": "1049c13c727a4f5123484fba8fa48138871dcc012da496e505f8022b154bf64e"
+    },
+    "examples/first-pilot/README.md": {
+     "prior": "bcdd13a5e78e97ce511e18362f001050a6a229a804de6345ffddc29c2fc85268",
+     "current": "320592455e6a627546c616c544dfabd83cd9c30c26b3217361563dbb6fc2ae6e"
+    },
+    "examples/first-pilot/pilot-brief.md": {
+     "prior": "7fb01ad86e776cb16301451a3d1e8d3ab3533b2b22301c12b1d7aa7549306b4d",
+     "current": "489f9c5af2318369baa6481cf5d9d3a1e5c664111cf4a248bed50169f37b6a09"
+    }
+   },
+   "limits": [
+    "Narrow independent evidence/diff/hash/AST and N057 bookkeeping review only. Functional CLI checks belong to their independent controls proof; the ten matrix executions belong to the maintainer log. This reviewer ran only the read-only matrix --check, not cells, tests, replay listeners or source/detector executions.",
+    "All sources were already inspected before this maintenance run. Existing development reuse, method selection, failed/n/a cases and historically held-out same-network limitations remain. No new untouched holdout, source family, detector tuning, metric gain or broad accuracy/generalization claim is established.",
+    "The input validator compares parsed instants and preserves data association; it does not verify clock accuracy, uniform sampling, source authority or anomaly meaning. Irregular increasing intervals remain accepted and detector windows still count rows; no sorting, deduplication or resampling is implied.",
+    "No plant/customer data, network source fetch, human engineering approval, adoption measurement, causal effectiveness, native gateway/PI import, live listener or equipment operation is certified. The toolkit is an on-ramp and handoff, not a company governance system.",
+    "The parent reports the separate full local run ended 56/58: two unchanged DEXPI relative-image cross-drive failures; isolated same-drive retries pass. This receipt does not independently reexecute or certify those tests, unrelated portability, or a clean full-suite pass. Generated README/FEATURES and unrelated journal/attempt metadata are excluded; only N057 and its rendered completed line are bound.",
+    "Public TE input files already use CRLF working bytes versus LF Git blobs. The functional proof records both raw and LF hashes and used exact checkout bytes in old/final runs; no raw checkout/blob equality is claimed."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without line-ending normalization.",
+   "private_proof_hashes": {
+    "functional/final-review.json": "c905ff400d2053a7ce5d2c3629796a6a7ca337dd708cf9f0a433cda0e67cf86a",
+    "prior-generalization-matrix-record.json": "0e1e76bf7a26445bdb660ad93889d2c76d8719d8e31d92f38128c4715fe57047",
+    "prepare_proposal.py": "240eee1a3a3599ec29b5af4d466b0273d755b448ee3624f2bf37a71f272add0d",
+    "functional/baseline/freeze.json": "48d6640b76628198b43502eb78d54bacb4c51580782d985a94ca52d2921ddb4b",
+    "functional/baseline/csv_normal_bands.py": "f4e15a259356108a0b884a311f14d5991c08c167008a61c779885b8acaab8b53",
+    "functional/baseline/csv_replay_server.py": "a5096be2d9bea08fca2706721025d686850eb3f8d6d823efdf99509703e39834",
+    "functional/baseline-observations.json": "7bf3fccf47330e84e70a03bd14e43a6a34e01631c85e68b42bb1545ec878a3b4",
+    "functional/baseline-review.json": "db482b9a1a099e3882e97db782833234bb8b768ef0aabd824587081159878e69",
+    "functional/final-frozen/freeze.json": "438c7208b77941f32988b19abb46d3cb223243ddda6c55ad56598979dc37ef88",
+    "functional/final-frozen/csv_normal_bands.py": "af2fdf402128b024ff62b16a086a718beda14dfd12954dd88c3778ba573a6e40",
+    "functional/final-frozen/csv_replay_server.py": "e3abd78c439af569e3ee01b1c4a5095a0b6ddf72391de3656186c48bd25f4130",
+    "functional/review_final.py": "8a66773470043b9ad3587fa8a324878ec67899913a5ad9744eae7d5ea1344c23",
+    "functional/final-controls.json": "f53464b2c2889f3d6466d68f2ee4346c82a239cd8ebf0b82e4e2da5a6dc950ac",
+    "matrix-execution/baseline-matrix-immutable.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+    "matrix-execution/matrix-run.log": "6f0d79e531283f0e1e5229901ad2e2446595f8860d23dafc4585c068998567ae",
+    "matrix-execution/matrix-compatibility-proof.json": "c1682bac880e6dcad493f9cc344b086a9d392149ceceafbd92ec0c11b9a4804d",
+    "matrix-execution/accept_matrix.py": "23e3fe368cf693f4919179b83ab0c8d64e894a40a768f2236d5db983a269ce28",
+    "matrix-execution/scratch-matrix.json": "50e99d2b9cfed937f5685d5b22c30efed5c126feaf16d142cd54ddf9dc487000",
+    "matrix-execution/scratch-GENERALIZATION.md": "f0fa451c4db2b77104d50f036ad911032316ed5b88cb5923579da7bf387aa86c",
+    "raw-proof-check-results.json": "79b96dc9e91a77189330435143f8bd69f93bef8c80dc7513b34505cade0b7a72"
+   }
   }
  ]
 }

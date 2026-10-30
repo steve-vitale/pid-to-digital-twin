@@ -3118,6 +3118,22 @@
         "examples/loop-audit/covestro/first-question.md",
         "examples/first-pilot/README.md"
       ]
+    },
+    {
+      "id": "A213",
+      "function": "replay_and_bands",
+      "date": "2026-10-30",
+      "change": "Require chronological historian CSV samples and cite physical data-record spans before analysis or replay.",
+      "hypothesis": "Descending, reordered or duplicate time/index values should refuse before producing misleading event timing or starting replay, while valid uneven intervals retain their exact behavior.",
+      "evidence": "Actual old CLIs accept invalid order and write negative delays (-3 in root fixtures, -80 independently); skipped/multiline records also mislocate a physical-line-6 error as line3. Final36CSV tests pass; independent reader52actualCLIs/261checks cover parsed UTC instants, physical spans, bad quality, row/text preservation and no-write/no-server refusal. Old/current valid reports and committed TE JSON/Markdown byte-match; detector functions/constants and replay implementation unchanged. Ten affected historian matrix cells rerun under existing criteria, with full-suite/CI results and coverage recorded separately. N057 corrected from untried to already implemented under A163/A171; no new detector tuning.",
+      "runs": "Deterministic input-correctness controls and compatibility reruns on previously inspected sources; no new source family, held-out score or operational evidence",
+      "verdict": "kept",
+      "why": "Rejects an unsupported timeline before it becomes an engineering finding, while preserving originals, explicit preparation and the on-ramp/company-handoff boundary. Does not establish clock accuracy, uniform sampling, anomaly validity, adoption or site authority.",
+      "source": [
+        "docs/JOURNAL.md#80-refuse-a-historian-timeline-that-runs-backward",
+        "examples/historian-csv/README.md",
+        "scripts/test_csv_tools.py"
+      ]
     }
   ],
   "not_tried": [
@@ -3697,11 +3713,13 @@
     {
       "id": "N057",
       "function": "replay_and_bands",
-      "status": "not-done",
+      "status": "done",
       "idea": "Drift-tolerant bands: rolling or rate-of-change limits instead of fixed mean plus K standard deviations",
-      "why_not_yet": "Found 2026-10-29 that fixed bands flag slow drift; not yet tried",
+      "why_not_yet": "Already tried and implemented: A163 and A171 developed/froze the rolling fast-versus-slow drift method, followed by A183/A184 cyclic/auto development. Corrected this stale marker on 2026-10-30; no new detector is claimed. Published false-alarm, missed-event and cross-source limitations remain.",
       "source": [
-        "docs/GENERALIZATION.md"
+        "docs/GENERALIZATION.md",
+        "examples/historian-csv/README.md",
+        "docs/JOURNAL.md#80-refuse-a-historian-timeline-that-runs-backward"
       ]
     },
     {

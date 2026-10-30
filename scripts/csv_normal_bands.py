@@ -52,7 +52,7 @@ Three methods (--method), and a default that picks one. Each fits on the first F
 CSV format (what a historian export usually looks like; comma-separated, '.' as the decimal point):
   - Row 1 is a header: the first cell names the time column, the rest are tag names (non-empty, unique, not numbers).
   - First column: a timestamp (ISO 8601, e.g. 2026-10-01 08:00:00 or 2026-10-01T08:00:00Z) or a numeric sample
-    index / elapsed time. It must be filled on every row.
+    index / elapsed time. It must be filled on every row and strictly increase (oldest first, no duplicate instants).
   - Other columns: numbers. A blank or non-numeric cell (e.g. "Bad", "I/O Timeout", "nan") is a BAD sample for that
     tag: it is left out of the fit and is never flagged. It is never replaced by a number.
 
@@ -139,52 +139,76 @@ def parse_value(text):
     return v if math.isfinite(v) else None
 
 
+def _historian_records(stream):
+    """Nonempty CSV records and their physical spans; quoted newlines count as lines."""
+    reader = csv.reader(stream)
+    start = 1
+    for row in reader:
+        end = reader.line_num
+        location = f"line {start}" if start == end else f"lines {start}-{end}"
+        start = end + 1
+        if any(c.strip() for c in row):
+            yield location, row
+
+
 def read_historian_csv(path, with_text=False):
     """Returns (time_name, tags, times, rows), plus the first-column texts if with_text. rows[i][j] is a float or None
-    (bad). Raises CsvFormatError."""
+    (bad). Times must strictly increase as parsed; no sorting, deduplication or resampling.
+    Raises CsvFormatError with physical source locations."""
     path = Path(path)
     with path.open(newline="", encoding="utf-8-sig") as f:
-        lines = [r for r in csv.reader(f) if any(c.strip() for c in r)]
-    if not lines:
-        raise CsvFormatError(f"{path.name}: empty file; expected a header row then data rows")
-    header = [h.strip() for h in lines[0]]
-    if len(header) < 2:
-        raise CsvFormatError(f"{path.name}: header has {len(header)} column(s); expected a time/index column "
-                             "followed by at least one tag column")
-    tags = header[1:]
-    problems = []
-    for j, t in enumerate(tags, start=2):
-        if not t:
-            problems.append(f"column {j} has an empty tag name")
-        elif _is_number(t):
-            problems.append(f"column {j} header '{t}' is a number (is the header row missing?)")
-    dupes = sorted({t for t in tags if t and tags.count(t) > 1})
-    if dupes:
-        problems.append("duplicate tag names: " + ", ".join(dupes))
-    if problems:
-        raise CsvFormatError(f"{path.name}: malformed header: " + "; ".join(problems) +
-                             ". Row 1 must be: <time column name>,<tag 1>,<tag 2>,...")
-    if len(lines) < 2:
-        raise CsvFormatError(f"{path.name}: header only, no data rows")
-    times, rows, kind = [], [], None
-    for n, r in enumerate(lines[1:], start=2):
-        if len(r) != len(header):
-            raise CsvFormatError(f"{path.name}: line {n} has {len(r)} cells, the header has {len(header)}")
+        records = _historian_records(f)
         try:
-            t = parse_time(r[0])
-        except ValueError:
-            raise CsvFormatError(f"{path.name}: line {n}: first column '{r[0]}' is neither a number nor an ISO 8601 "
-                                 "timestamp (numeric times must be finite)") from None
-        k = (type(t), getattr(t, "tzinfo", None) is not None)
-        if kind is None:
-            kind = k
-        elif k != kind:
-            raise CsvFormatError(f"{path.name}: line {n}: first column mixes timestamps and numbers, or timestamps "
-                                 "with and without a time zone")
-        times.append(t)
-        rows.append([parse_value(c) for c in r[1:]])
+            _, raw_header = next(records)
+        except StopIteration:
+            raise CsvFormatError(f"{path.name}: empty file; expected a header row then data rows") from None
+        header = [h.strip() for h in raw_header]
+        if len(header) < 2:
+            raise CsvFormatError(f"{path.name}: header has {len(header)} column(s); expected a time/index column "
+                                 "followed by at least one tag column")
+        tags = header[1:]
+        problems = []
+        for j, t in enumerate(tags, start=2):
+            if not t:
+                problems.append(f"column {j} has an empty tag name")
+            elif _is_number(t):
+                problems.append(f"column {j} header '{t}' is a number (is the header row missing?)")
+        dupes = sorted({t for t in tags if t and tags.count(t) > 1})
+        if dupes:
+            problems.append("duplicate tag names: " + ", ".join(dupes))
+        if problems:
+            raise CsvFormatError(f"{path.name}: malformed header: " + "; ".join(problems) +
+                                 ". Row 1 must be: <time column name>,<tag 1>,<tag 2>,...")
+        times, rows, texts, kind = [], [], [], None
+        previous_location = previous_text = None
+        for location, r in records:
+            if len(r) != len(header):
+                raise CsvFormatError(f"{path.name}: {location} has {len(r)} cells, the header has {len(header)}")
+            try:
+                t = parse_time(r[0])
+            except ValueError:
+                raise CsvFormatError(f"{path.name}: {location}: first column '{r[0]}' is neither a number nor an ISO 8601 "
+                                     "timestamp (numeric times must be finite)") from None
+            k = (type(t), getattr(t, "tzinfo", None) is not None)
+            if kind is None:
+                kind = k
+            elif k != kind:
+                raise CsvFormatError(f"{path.name}: {location}: first column mixes timestamps and numbers, or timestamps "
+                                     "with and without a time zone")
+            text = r[0].strip()
+            if times and t <= times[-1]:
+                raise CsvFormatError(f"{path.name}: {location}: time/index must be strictly increasing "
+                                     f"(oldest first, no duplicate instants); {text!r} is not after "
+                                     f"{previous_text!r} at {previous_location}")
+            times.append(t)
+            rows.append([parse_value(c) for c in r[1:]])
+            if with_text:
+                texts.append(text)
+            previous_location, previous_text = location, text
+        if not rows:
+            raise CsvFormatError(f"{path.name}: header only, no data rows")
     if with_text:
-        return header[0], tags, times, rows, [r[0].strip() for r in lines[1:]]
+        return header[0], tags, times, rows, texts
     return header[0], tags, times, rows
 
 

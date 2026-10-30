@@ -1,13 +1,9 @@
 {
  "about": "Generalization matrix written by scripts/corpus_matrix.py; rendered as docs/GENERALIZATION.md.",
- "ran_at": "2026-10-30 06:29 UTC",
- "seconds": 1482.7,
+ "ran_at": "2026-10-30 12:07 UTC",
+ "seconds": 1501.7,
  "rows_run_this_time": [
-  3,
-  4,
-  5,
-  7,
-  8
+  6
  ],
  "tracer_pass_f1": 0.88,
  "pipe_pass_f1": 0.88,
@@ -4748,16 +4744,16 @@
     },
     {
      "file": "examples/historian-csv/README.md",
-     "line": 129,
+     "line": 141,
      "says": "fault 6 (drift): detection at 18 minutes, 0 of the 160 pre-fault samples flagged",
      "ours": "fault 6 (drift): detection at 18.0 minutes, 0 of 160 pre-fault samples flagged",
      "agrees": true
     }
    ],
-   "seconds": 2.9,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 4.9,
+   "ran_at": "2026-10-30 12:00 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a"
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024"
    }
   },
   {
@@ -4796,10 +4792,10 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-30 12:00 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a"
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024"
    }
   },
   {
@@ -4868,12 +4864,12 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 1.6,
+   "ran_at": "2026-10-30 12:00 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
@@ -4943,12 +4939,12 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 0.9,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 1.6,
+   "ran_at": "2026-10-30 12:00 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
@@ -6196,12 +6192,12 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 15.0,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 22.9,
+   "ran_at": "2026-10-30 12:00 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
@@ -6352,12 +6348,12 @@
    },
    "published": [],
    "note": "`k_target_met` is false on 2 of 2 runs (test1, test4): K=20 (the largest K the tool tries) did not bring held-out normal flags under the tool's 0.5% target, so the bands ran with a K that misses the tool's own selection rule; the verdict uses the row's criterion, which does not include that target",
-   "seconds": 318.3,
-   "ran_at": "2026-10-30 01:35 UTC",
+   "seconds": 338.1,
+   "ran_at": "2026-10-30 12:01 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
@@ -6447,10 +6443,10 @@
     "earlier_drift_split": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result"
    },
    "published": [],
-   "seconds": 23.8,
-   "ran_at": "2026-10-30 01:41 UTC",
+   "seconds": 23.5,
+   "ran_at": "2026-10-30 12:06 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
@@ -6552,10 +6548,10 @@
    },
    "published": [],
    "note": "`k_target_met` is false on 4 of 4 runs (failure1, failure2, failure3, failure4): K=20 (the largest K the tool tries) did not bring held-out normal flags under the tool's 0.5% target, so the bands ran with a K that misses the tool's own selection rule; the verdict uses the row's criterion, which does not include that target",
-   "seconds": 16.5,
-   "ran_at": "2026-10-30 01:41 UTC",
+   "seconds": 13.4,
+   "ran_at": "2026-10-30 12:07 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
@@ -6838,10 +6834,10 @@
     "earlier_drift_split": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result"
    },
    "published": [],
-   "seconds": 11.2,
-   "ran_at": "2026-10-30 01:41 UTC",
+   "seconds": 8.9,
+   "ran_at": "2026-10-30 12:07 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
@@ -7237,10 +7233,10 @@
     "adapter": "scripts/historian_adapters.py"
    },
    "published": [],
-   "seconds": 30.0,
-   "ran_at": "2026-10-30 01:42 UTC",
+   "seconds": 23.5,
+   "ran_at": "2026-10-30 12:07 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/csv_normal_bands.py": "sha256:af2fdf402128b024",
     "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },

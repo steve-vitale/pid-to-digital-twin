@@ -4080,3 +4080,47 @@ claims and raw fingerprints against the original records. Neither is engineering
 measured benefit. The next company home supplies ongoing access, ownership and decision history; no application,
 schema, connector or new company workflow is added. Existing scripts, data, registered outputs, matrix results
 and not-tried items are unchanged. No feature-output verdict or generalization result is renewed by this example.
+
+## 80. Refuse a historian timeline that runs backward
+
+The CSV reader checked time syntax and type, but not chronological order. Actual CLI probes accepted descending
+and reordered exports and wrote negative detection delays: minus 3 in root's small fixtures and minus 80 in an
+independent reader's example. A first-at-or-after timestamp lookup also selected the wrong row in file order.
+Duplicate instants were accepted. The replay loader shared the same behavior. Separately, skipping blank CSV
+records before counting rows made a physical-line-6 error appear as line 3.
+
+The shared reader now requires strictly increasing parsed time/index values, with no duplicate instants. It
+does not sort, deduplicate, aggregate or resample. Timestamp comparison uses the parsed instants, so different
+UTC-offset strings for the same instant are duplicates; uneven increasing intervals and original value/text
+associations remain supported. Record parsing retains physical spans through blank lines and quoted multiline
+records. Data errors locate the offending record; an ordering error also cites the previous one. Existing generic
+header-format guidance remains separate. Invalid normal or scored CSVs refuse before report creation or replacement,
+and replay refuses before constructing its server.
+
+Keep the raw export, prepare a separate chronological copy and record how duplicate records were reconciled with
+their source meaning. Passing the check establishes neither clock accuracy nor uniform sampling. Detector windows
+still count rows, and replay still advances at its explicit rate. Every existing detector function and constant
+outside the reader is unchanged by AST comparison; replay implementation is unchanged below its module docstring.
+This is input correctness, not a new anomaly method or a company context-management feature.
+
+The 36 existing and added CSV tests pass, including sixteen band-CLI refusal cases, four replay-CLI refusals and
+constructor tripwires. A separate controls reader executes 52 CLIs and 261 checks across order, offset, source-span,
+bad-quality, valid-input and no-write cases; another reader checks the engineer's repair instructions. Old/current
+valid reports agree byte-for-byte, including the committed TE default JSON and Markdown. Root's first Markdown
+comparison omitted the guide's units option and differed only in that label; the corrected documented command
+reproduces both outputs. The failed probe is retained separately rather than presented as a product failure.
+
+The affected ten historian matrix cells are rerun against their existing inputs and criteria. All per-run metrics
+and verdicts are unchanged; the other 84 cell records remain exact. This is compatibility evidence on previously
+inspected sources, not another held-out experiment. Existing detector limitations and failed cells remain visible.
+
+The full local run uses D: for temporary files to avoid C: disk pressure and completes 56 of 58 scripts, with two
+unittest skips and two corresponding platform notices. Both failures expose the unchanged DEXPI image-path code's
+inability to make relative links from C: sources to D: outputs. With only the temporary-file volume changed back
+to C:, the two failed scripts pass all eight and 28 tests respectively. The original full-run failures remain
+recorded; this chronology fix does not repair that separate cross-volume limitation. CI has its own exact-commit
+result and omissions rather than inheriting a passing label from these focused retries.
+
+A stale ledger marker is corrected too: N057's rolling/drift idea was already tried and implemented in A163/A171, with later cyclic
+development in A183/A184. Marking that idea done does not claim the remaining false-alarm and detection gaps are
+solved. No other not-tried item, source family, original record, scoring criterion or operational authority changes.

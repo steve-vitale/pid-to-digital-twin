@@ -8,6 +8,8 @@ CSV shape (the same reader as scripts/csv_normal_bands.py): row 1 is a header (t
 names); the first column is a timestamp or a sample index; every other column is a numeric tag. A blank or non-numeric
 cell ("", "Bad", "I/O Timeout", "nan") is served as that tag's value for that step with status BadNoData and a null
 value, never as a made-up number. A malformed header is refused with a message that says what is wrong.
+Parsed time/index values must strictly increase; descending, reordered or duplicate instants are refused before
+the server is initialized. Errors locate the physical CSV record, including blank and quoted multiline records.
 
 Nodes (same conventions as scripts/ignition/te_sim_server.py): one read-only Double node per tag column, node id
 `ns=<idx>;s=<Folder>/<column>` (e.g. `ns=2;s=CSV/PT-107`; ns is 2 on a fresh server), plus `<Folder>/_sample`

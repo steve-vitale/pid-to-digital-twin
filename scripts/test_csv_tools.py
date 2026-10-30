@@ -12,9 +12,11 @@ import json
 import math
 import random
 import socket
+import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -174,6 +176,79 @@ class BandsTest(unittest.TestCase):
         p = write_csv(self.d / "z.csv", ["t", "A"], [["2026-10-01T08:00:00Z", 1.0], ["2026-10-01T08:01:00", 1.0]])
         with self.assertRaisesRegex(cnb.CsvFormatError, "line 3: .*time zone"):
             cnb.read_historian_csv(p)
+
+    def test_nonincreasing_times_are_refused(self):
+        cases = ([2, 1], [0, 2, 1], [0, 0], [0, "0.0"],
+                 ["2026-10-01T08:00:01", "2026-10-01T08:00:00"],
+                 ["2026-10-01T08:00:00Z", "2026-10-01T08:00:00+00:00"],
+                 ["2026-10-01T08:00:00Z", "2026-10-01T09:00:00+01:00"],
+                 ["2026-10-01T08:00:00Z", "2026-10-01T08:30:00+01:00"])
+        for times in cases:
+            with self.subTest(times):
+                p = write_csv(self.d / "order.csv", ["time", "A"], [[t, i] for i, t in enumerate(times)])
+                before = p.read_bytes()
+                with self.assertRaisesRegex(cnb.CsvFormatError, "time/index must be strictly increasing") as e:
+                    cnb.read_historian_csv(p, with_text=True)
+                self.assertIn("at line", str(e.exception))
+                self.assertEqual(p.read_bytes(), before)
+
+    def test_order_uses_parsed_instants_and_preserves_uneven_samples(self):
+        texts = ["2026-10-01T09:00:00+01:00", "2026-10-01T08:30:00Z", "2026-10-01T10:45:00+01:00"]
+        p = write_csv(self.d / "offsets.csv", ["time", "A"], [[t, v] for t, v in zip(texts, [2, "Bad", 4])])
+        _, tags, times, rows, read_texts = cnb.read_historian_csv(p, with_text=True)
+        self.assertEqual((tags, rows, read_texts), (["A"], [[2.0], [None], [4.0]], texts))
+        self.assertEqual(cnb.elapsed(times, 0, 1), 1800)
+        self.assertEqual(cnb.elapsed(times, 1, 2), 4500)
+        normal = write_csv(self.d / "normal.csv", ["time", "A"], [[i, 0] for i in range(80)])
+        score = write_csv(self.d / "uneven.csv", ["time", "A"],
+                          [[t, 0 if i < 3 else 10] for i, t in enumerate([0, 1, 2.5, 7, 10, 12])])
+        f = cnb.run(normal, score, fault_start="2.5", method="level")["scored"]["fault"]
+        self.assertEqual((f["fault_start_row"], f["first_flag_row"], f["detection_run3_row"]), (2, 3, 3))
+        self.assertEqual((f["first_flag_delay"], f["detection_run3_delay"]), (4.5, 4.5))
+
+    def test_error_locations_are_physical_csv_record_spans(self):
+        p = self.d / "physical.csv"
+        # Header at 2-3, first data record at 5-6, next data record at 8-9.
+        p.write_text('\n time,"A\nB"\n\n0,"Bad\nvalue"\n\n-1,"also\nbad"\n', encoding="utf-8")
+        with self.assertRaisesRegex(cnb.CsvFormatError, "lines 8-9:.*strictly increasing.*at lines 5-6"):
+            cnb.read_historian_csv(p)
+        # Other existing data errors must also locate the physical record after skipped/multiline rows.
+        for row, message in (("yesterday,2", "line 6:.*neither a number"),
+                             ("1,2,3", "line 6 has 3 cells"),
+                             ("2026-10-01T08:00:00,2", "line 6:.*mixes timestamps and numbers")):
+            with self.subTest(row):
+                p.write_text('time,A\n\n0,"Bad\nvalue"\n\n' + row + '\n', encoding="utf-8")
+                with self.assertRaisesRegex(cnb.CsvFormatError, message):
+                    cnb.read_historian_csv(p)
+
+    def test_band_cli_refuses_bad_order_before_any_output_write(self):
+        normal = write_csv(self.d / "normal.csv", ["time", "A"], [[i, 0] for i in range(80)])
+        bad = write_csv(self.d / "bad.csv", ["time", "A"], [[0, 0], [100, 0], [20, 10], [30, 10], [40, 10]])
+        originals = {p: p.read_bytes() for p in (normal, bad)}
+        for method in cnb.METHODS:
+            for role in ("normal", "score"):
+                for existing in (False, True):
+                    with self.subTest(method=method, role=role, existing=existing):
+                        out = self.d / f"{method}-{role}-{existing}"
+                        before = {}
+                        if existing:
+                            out.mkdir()
+                            before = {"csv_normal_bands.json": b"previous JSON", "csv_normal_bands.md": b"previous report",
+                                      "authored-note.txt": b"retain this note"}
+                            for name, data in before.items():
+                                (out / name).write_bytes(data)
+                        args = [sys.executable, "-S", str(ROOT / "scripts/csv_normal_bands.py"),
+                                "--normal", str(bad if role == "normal" else normal), "--score", str(bad),
+                                "--fault-start", "20.0", "--method", method, "--out", str(out)]
+                        r = subprocess.run(args, capture_output=True, text=True, encoding="utf-8", timeout=30)
+                        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+                        self.assertIn("strictly increasing", r.stderr)
+                        self.assertIn("line 4", r.stderr)
+                        self.assertNotIn("Traceback", r.stderr)
+                        self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()} if out.exists() else {}, before)
+                        if not existing:
+                            self.assertFalse(out.exists())
+        self.assertTrue(all(p.read_bytes() == data for p, data in originals.items()))
 
     def test_bad_fault_start_says_which_formats_are_accepted(self):
         normal = write_csv(self.d / "n.csv", ["sample", "A", "B"], synthetic())
@@ -590,6 +665,28 @@ class ReplayServerTest(unittest.TestCase):
             p = write_csv(Path(d) / "r.csv", ["t", "_sample"], [[0, 1.0]])
             with self.assertRaisesRegex(cnb.CsvFormatError, "reserved"):
                 srv.load(p)
+
+    def test_nonincreasing_times_refused_before_replay_server_initialization(self):
+        import csv_replay_server as srv
+        with tempfile.TemporaryDirectory() as d:
+            for times in ([2, 1], [0, 0], [0, 3, 2],
+                          ["2026-10-01T08:00:00Z", "2026-10-01T09:00:00+01:00"]):
+                with self.subTest(times):
+                    p = write_csv(Path(d) / "bad.csv", ["time", "A"], [[t, i] for i, t in enumerate(times)])
+                    before = p.read_bytes()
+                    args = srv.parse_args(["--csv", str(p), "--host", "127.0.0.1", "--port", str(free_port())])
+                    with mock.patch.object(srv, "Server") as constructor:
+                        with self.assertRaisesRegex(cnb.CsvFormatError, "strictly increasing"):
+                            asyncio.run(srv.serve(args))
+                        constructor.assert_not_called()
+                    result = subprocess.run([sys.executable, str(ROOT / "scripts/csv_replay_server.py"),
+                                             "--csv", str(p), "--host", "127.0.0.1", "--port", str(args.port)],
+                                            capture_output=True, text=True, encoding="utf-8", timeout=10)
+                    self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                    self.assertIn("strictly increasing", result.stderr)
+                    self.assertNotIn("Traceback", result.stderr)
+                    self.assertNotIn("CSV replay", result.stdout)
+                    self.assertEqual(p.read_bytes(), before)
 
 
 if __name__ == "__main__":

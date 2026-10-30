@@ -59,6 +59,18 @@ minutes,FT-101,FT-102,...        <- header: time/index column name, then tag nam
 Comma-separated, with `.` as the decimal point. A malformed header (missing, duplicate or empty tag names), a row with the wrong number of cells, or a first-column
 value that is neither a number nor a timestamp is refused with a message naming the line.
 
+**Time order matters.** In both normal and scored exports, parsed times must strictly increase: oldest first,
+with no duplicate instants. This also applies to replay and is checked before the server is initialized.
+An out-of-order record can otherwise select the wrong fault-start row or produce a negative detection delay.
+The error identifies the current and previous physical CSV records, including skipped blank lines and quoted
+multiline records. Two timestamp strings with different offsets can represent the same instant and are duplicates.
+
+Prepare a separate chronological copy and reconcile duplicate records using the export's source meaning; keep
+the original and record that preparation with the evidence packet. The tools do not sort, drop duplicates,
+aggregate or resample for you. Uneven but strictly increasing intervals remain supported. Passing this check
+does not verify clock accuracy or a uniform sample interval: drift/cyclic windows still count rows, and replay
+still uses `--rate` rather than the spacing between recorded times.
+
 ## Files
 
 | File | What it is |
