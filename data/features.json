@@ -1,8 +1,8 @@
 {
- "about": "Every user-facing feature of this repository, grouped by what it does, with the evidence that it works: the tools it uses, a guide, committed example outputs, the tests that pin them, and independent reviews of those exact outputs (data/reviews.json). A feature is 'proven' only when all of these exist and a passing review's recorded file hashes still match the outputs; otherwise its gaps are listed. docs/FEATURES.md is generated from this file by scripts/feature_catalog.py, which CI checks.",
+ "about": "Every user-facing feature of this repository, grouped by what it does, with the evidence that it works: the tools it uses, a guide, committed example outputs, the tests that pin them, and independent reviews of those exact outputs (data/reviews.json). The public label is 'reviewed example' when all of these exist and a passing review's recorded file hashes still match the outputs; otherwise its evidence gaps are listed. This does not establish a complete automated route, compatibility across all formats or plant acceptance. docs/FEATURES.md is generated from this file by scripts/feature_catalog.py, which CI checks.",
  "categories": {
   "extract": "Read a drawing or a structured file into a draft asset model",
-  "model": "Build a process model from a description, and drawings and exports from a model",
+  "model": "Generate drawings and exports from an authored process model",
   "export": "Hand the model to other systems",
   "check": "Check a drawing, a tool or this repository against something independent",
   "operate": "Work with live or historical process data, and review the model",
@@ -103,7 +103,7 @@
   {
    "id": "description-to-model",
    "category": "model",
-   "title": "A written description to a cited model, its exports and a P&ID",
+   "title": "An authored process model to draft exports and P&ID sheets",
    "tools": [
     "scripts/generate.py",
     "scripts/draw_pid_from_model.py"
@@ -121,10 +121,10 @@
     "scripts/test_generate_any_model.py",
     "scripts/test_bayer_rt.py"
    ],
-   "job": "Build a model of a unit that has no usable drawing",
-   "you_need": "A written description (procedure, design basis, report); someone to cite every item",
-   "time": "Writing the model is the work; exports take seconds",
-   "you_get": "Draft review sheet, logical SVGs and Ignition/PI staging from a sourced model; a P&ID also needs an authored layout and drawing dependencies",
+   "job": "Generate drawings and exports from a sourced process model",
+   "you_need": "A sourced process-model JSON, authored by an engineer or approved assistant from the description; detailed P&ID output also needs an authored drafting layout",
+   "time": "Model/layout authoring and engineering review are required; their time is unmeasured",
+   "you_get": "Logical SVGs, a review sheet and Ignition/PI staging from model JSON; a separate renderer creates detailed draft P&IDs from model plus layout. No packaged raw-description interpreter or automatic detailed layout",
    "why": "A source-cited draft makes an engineer's interpretation of procedures and design notes checkable. Agreement with the actual plant still needs independent records or field evidence and engineering review."
   },
   {

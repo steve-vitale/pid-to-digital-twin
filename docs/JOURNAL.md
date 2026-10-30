@@ -4674,3 +4674,33 @@ allows no cross-boundary ports stays disconnected, using only a separately appro
 This adds an access layer to the engineering on-ramp. Existing company systems still own source authority,
 permissions, continuing decisions and execution. No new matrix cell, unfamiliar-description generation score,
 native import or measured operational benefit is claimed.
+
+## 97. Separate the workflow connection map from example evidence
+
+The user expects the hub-and-spoke matrix to explain what the toolkit actually connects. The front page instead
+combines a conceptual workflow diagram, feature examples labelled proven, and a corpus matrix of eight selected
+workflows. Those answer different questions. In particular, the written-description feature names an entire
+route while its two registered commands require model JSON and a drafting layout that already exist.
+
+Actual local command probes confirm that raw narrative is refused by the export and P&ID commands. A portable
+graph is refused by the platform exporter and question engine. Positive controls export the existing authored
+Bayer model and validate its authored layout. This is an input-boundary check, not a new interpretation score
+or corpus experiment. Original model, layout, graph and generated example bytes remain unchanged.
+
+The README now has a current connection map: assisted description authoring, supported drawing/XML readers,
+working-model inputs, the detailed P&ID renderer, one-way graph export, graph-based review/context/MCP tools,
+separate measurements, local corrections and the later company-system handoff. Missing raw-text intake,
+automatic detailed layout, general graph-to-model conversion and company integration are visible at the relevant
+arrows. The authored-layout requirement is distinct from the automatic logical SVG placement in generate.py.
+
+Feature tables now say reviewed example rather than proven. Review selection and recorded output hashes keep
+their existing rules; the wording does not imply an automated complete route, universal format compatibility or
+plant acceptance. The description feature is named for its actual model-input commands. No review is upgraded,
+no source score changes, and no new converter, agent service or shared company hub is claimed by this correction.
+The catalog's general review description also drops a universal blind-review claim: the retained records state
+their own scopes, including iterative corrective reviews. No historical record is rewritten.
+
+Completing the description route remains implementation work: a company-approved assistant authoring flow must
+preserve source locations, unknowns and assumptions, produce valid model/layout inputs, render them, and return
+useful validation feedback for review. Its end-to-end evaluation still needs the separate source and rendered
+output checks described in evaluation section 8. A documentation caveat does not complete that missing workflow.

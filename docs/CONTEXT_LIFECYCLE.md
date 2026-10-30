@@ -77,6 +77,8 @@ unsupported relationships or review states inside a flat asset list and call the
 
 | Tool or route | Current input | Output and integration boundary |
 |---|---|---|
+| Description authoring | Source text and an engineer or approved assistant | An authored, source-cited process model. No supplied raw-text interpreter packages this step. See the [current connection map](../README.md#what-connects-today-the-hub-and-spokes). |
+| `draw_pid_from_model.py` | Process-model fields plus an authored drafting-layout JSON | Detailed draft PNG/SVG P&ID sheets and a key. No automatic detailed layout or general graph/extracted-twin conversion into this drawing contract. |
 | `generate.py` | This repository's process-model JSON or extracted-twin JSON | Platform staging and the outputs supported by that model kind. A `twin-graph-1` file is not a direct generator input. Signal mapping and native acceptance remain separate steps. |
 | `question_engine.py` | Process-model or extracted-twin JSON; optional loop list and equipment schedules | Questions, asset references and collection requests. Findings propose investigations; they do not mutate the model or establish savings. |
 | `graph_export.py` | Process-model or extracted-twin JSON, with optional questions/review records | `twin-graph-1`, including the source/status information represented by the input. It is an export, with no general graph-to-process-model inverse. |

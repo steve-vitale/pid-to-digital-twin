@@ -1,5 +1,11 @@
 # From a written description: sourced model, questions and optional outputs
 
+**Current status: an assisted workflow, not a raw-text generator command.** An engineer or approved assistant
+authors the source-cited model and drafting layout; the supplied commands validate and render those inputs.
+There is no packaged description interpreter or automatic detailed drafting layout. Those are missing workflow
+steps, not functions demonstrated by the corpus matrix. The [connection map](../../README.md#what-connects-today-the-hub-and-spokes)
+shows this route alongside the other tools.
+
 **Why it matters:** A unit may have procedures and design notes but no usable drawing. A model with a source on every item supports draft asset lists, logical SVGs and platform staging. It makes the interpretation checkable; agreement with the actual plant still needs independent evidence and engineering review.
 
 When there's no usable drawing but there is a description (an operating procedure, a design basis, an

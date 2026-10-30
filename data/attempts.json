@@ -3401,6 +3401,23 @@
         "docs/JOURNAL.md#96-add-bounded-read-only-access-to-a-first-engineering-snapshot",
         "examples/internal-mcp/README.md"
       ]
+    },
+    {
+      "id": "A230",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Expose actual hub-and-spoke connections, assisted authoring and missing adapters; label catalog evidence reviewed example.",
+      "hypothesis": "A reader should be able to distinguish an available command from an authored step or proposed integration without inferring end-to-end automation from a reviewed output.",
+      "evidence": "README connection map separates process-model/extracted-twin inputs, detailed drawing with authored layout, one-way graph export, graph tools and separate measurements. Actual local CLI probes refuse raw narrative and unsupported graph inputs; authored Bayer model/layout positive controls pass. Description feature names its actual model-input renderer/exporter. Catalog review-state and output-binding semantics are unchanged.",
+      "runs": "Documentation and input-boundary controls, no model calls or new corpus cells. No packaged description interpreter, auto-layout, graph inverse, shared hub or company integration is implemented by this change.",
+      "verdict": "kept",
+      "why": "Makes the incomplete connections visible and preserves the description route as required implementation work, rather than treating a caveat as completion.",
+      "source": [
+        "docs/JOURNAL.md#97-separate-the-workflow-connection-map-from-example-evidence",
+        "README.md#what-connects-today-the-hub-and-spokes",
+        "examples/from-description/README.md",
+        "docs/CONTEXT_LIFECYCLE.md#use-explicit-projections-for-the-existing-tools"
+      ]
     }
   ],
   "not_tried": [
