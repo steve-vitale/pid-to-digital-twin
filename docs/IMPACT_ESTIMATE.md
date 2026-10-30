@@ -15,6 +15,10 @@ python -S scripts/estimate_impact.py --estimate my_spec.json --use-defaults --ou
 Stdlib only, offline. Worked examples, with a hand check of every number:
 [`examples/impact-estimate/`](../examples/impact-estimate/README.md).
 
+Before writing either report file, the CLI refuses paths that alias its active inputs or each other, including
+directory links and existing hardlinks. Estimate mode protects the spec and constants file; needs mode protects
+the question catalog. Use a separate output folder and keep the inputs stable while the command runs.
+
 ## What it does, and what it will not do
 
 - It computes from **your** measurements. kW, kWh, hours, lb/h, Btu/h, MMBtu, the fuel the boiler burns, and the

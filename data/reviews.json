@@ -7379,6 +7379,65 @@
     "pipeline.log": "8f9f78caee94c24dc4d930b8e44c339105d4d278d88af01721ce689bbc35b900",
     "script-index.log": "528ccc1d8b4b141a46ece2c9bd2647c01a16a27c4c673719587f5b9736a0508e"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex coding agent: bounded source-preservation dependency refresh review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 3,
+   "file_hash_method": "SHA256 after CRLF-to-LF byte normalization, matching feature_catalog. Private original/reproduction proof hashes are exact raw SHA256.",
+   "files": {
+    "docs/GENERALIZATION.md": "4b6d74c202e1a98f7fe732fd41406b07cd384fc3a3e76d23bafaba3dd8c4d42e",
+    "out/generalization/matrix.json": "efc09f7ebb9f25e1404e8a4a96accdea6f0f671c3102e393782641b85db31498",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "afeba23897d26b22aafc7be05cc3f27f7e2dc18999297ea608dc84c3d8e50134",
+    "scripts/test_corpus_matrix.py": "8fd0f15410e56ef6711951dbf1147cd74ce9aa646a4cbded447f1025e43139ba",
+    "scripts/csv_normal_bands.py": "88baa8aa94fd29002956843a947a5e7bb2d428b09fc57af002c554c399099f6e",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939"
+   },
+   "inherited_scope": {
+    "reviewer": "Independent Codex coding agent: bounded MGPI source, software, render and arrival follow-up",
+    "date": "2026-10-30",
+    "prior_registered_output_count": 3,
+    "unchanged_registered_output_bindings": {
+     "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+    },
+    "complete_unselected_cell_objects_retained": 85,
+    "scope": "Only the prior reviews stated source/method/held-out and acceptance limits are inherited. This reviewer verified 85 complete unselected objects are unchanged, without repeating their source or model evaluations."
+   },
+   "scope": "Bounded refresh of the ten row-6 historian cells whose imported CSV implementation/helper changed. The maintainer actually reran row 6; this reviewer independently compared all 95 typed cell objects, verified current code fingerprints and checked rendering/freshness/tests. This is not a fresh unfiltered matrix execution or a new detector result.",
+   "findings": [],
+   "resolved_findings": [
+    {
+     "severity": "minor",
+     "issue": "The first row-6 TE run read the historian README before its four-line preservation paragraph was inserted, leaving a blank-line citation at146. Tool-only freshness did not detect that documentation change.",
+     "resolution": "The maintainer actually reran the TE cell against the final README; reviewer checked the refreshed statement points to the real line150 and all substantive TE scores remain identical."
+    }
+   ],
+   "checks": [
+    "All 85 unselected complete cell objects are exactly identical to commit 9799dbedb5715f73984b17f3bcf23ca0b3f4aff8.",
+    "All ten refreshed row-6 cells retain exact substantive measurements, verdicts, reasons, details, criteria and published statements. Changes are run time/date, required tool fingerprints including output_paths.py, and one four-line README citation offset.",
+    "Every recorded tool fingerprint in the ten refreshed cells matches the current normalized source, including the new helper. Current corpus_matrix --check passes.",
+    "All corpus-matrix regression tests pass in an independent invocation; exact test coverage is retained in the private log.",
+    "All previous red cells and development/held-out qualifications remain. CSV source preservation was separately adversarial-tested through actual CLI paths; unchanged detector metrics do not measure that preservation guard or establish new engineering correctness."
+   ],
+   "limits": [
+    "Independent coding-agent software/artifact review, not human engineering approval or a plant operating assessment.",
+    "No complete matrix rerun by this reviewer, new model call, source-family generalization result, timed benefit or company acceptance.",
+    "Prior source/model/score reviews retain their original bounded scope; unchanged cells are not freshly accepted for broader claims."
+   ],
+   "private_proofs": {
+    "matrix-before.json": "e99332b996588a6b3021deffa28ffb79f411c04821e8bb126f6e37478ebfcfdc",
+    "matrix-ten-cells-execution.json": "980c10eba17756e1412d4ef478fe182f8d5f0e1d92bc8123537495d91e9a4fc0",
+    "matrix-te-citation-execution.json": "bd0982383bde7813b6ae26d4c0c9dc629d29b0e87723393783f1ccc9971967ce",
+    "matrix-comparison-final.json": "ed1eaa56cb224c97bfc12c5464191e33ed6475abb42c25f85c26b4905da1e627",
+    "matrix-check-final.log": "64aba14439f1cb0d0dfe1b99272bbd868f471dc29512b35641f0b1dfd2d0637f",
+    "matrix-tests-final.log": "808400166720cd014c21f524ac2981853a74913529f4596e1e071adacbd598ad",
+    "repair-review-final.json": "157994ea5b392dfc3cfd1cb362fa0efa6949f39c4867a431a65c10fe4ca42000"
+   }
   }
  ]
 }

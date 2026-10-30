@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -42,6 +43,33 @@ def hand_built(**sections):
 
 
 class GraphExport(unittest.TestCase):
+    def test_cli_preserves_every_consumed_input_on_output_collision(self):
+        for source in ("model", "questions", "review"):
+            with self.subTest(source=source), tempfile.TemporaryDirectory() as d:
+                folder = Path(d)
+                model, questions, review = (folder / name for name in ("model.json", "questions.json", "review.json"))
+                model.write_text(json.dumps(hand_built()), encoding="utf-8")
+                questions.write_text('{"questions": []}', encoding="utf-8")
+                review.write_text('{"applied": []}', encoding="utf-8")
+                # Keep only the actual review in the review glob.
+                reviews = folder / "reviews"
+                reviews.mkdir()
+                review = review.rename(reviews / review.name)
+                paths = {"model": model, "questions": questions, "review": review}
+                before = {p: p.read_bytes() for p in paths.values()}
+                code, text = run_cli(model, "--questions", questions, "--reviews", reviews, "--out", paths[source])
+                self.assertEqual(code, 1, text)
+                self.assertIn("output aliases an input", text)
+                self.assertEqual(before, {p: p.read_bytes() for p in paths.values()})
+
+    def test_check_mode_does_not_write_even_with_an_output_argument(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = Path(d) / "untouched.json"
+            out.write_bytes(b"keep this")
+            code, text = run_cli("--check", EX / "bayer_graph.json", "--out", out)
+            self.assertEqual(code, 0, text)
+            self.assertEqual(out.read_bytes(), b"keep this")
+
     def test_validator_rejects_bad_ids_statuses_and_dangling_stream_refs(self):
         graph = json.loads((EX / "bayer_graph.json").read_text(encoding="utf-8"))
         self.assertEqual(gx.problems(graph), [])
@@ -448,6 +476,80 @@ class GraphExport(unittest.TestCase):
             run = subprocess.run([sys.executable, "-S", "-c", code], cwd=ROOT, capture_output=True, text=True,
                                  encoding="utf-8", check=True)
             self.assertEqual(run.stdout, shown)
+
+
+class OutputPaths(unittest.TestCase):
+    def test_spelling_hardlinks_and_sibling_aliases(self):
+        from output_paths import protect_outputs
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            source = folder / "source.json"
+            source.write_bytes(b"original")
+            sub = folder / "sub"
+            sub.mkdir()
+            for target in (source, sub / ".." / source.name):
+                with self.assertRaisesRegex(ValueError, "output aliases an input"):
+                    protect_outputs([target], [source])
+            linked = folder / "hardlink.json"
+            linked.hardlink_to(source)
+            with self.assertRaisesRegex(ValueError, "output aliases an input"):
+                protect_outputs([linked], [source])
+            with self.assertRaisesRegex(ValueError, "files alias each other"):
+                protect_outputs([source, linked], [])
+            self.assertEqual(source.read_bytes(), b"original")
+
+    def test_symlink_aliases(self):
+        from output_paths import protect_outputs
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            source = folder / "source.json"
+            source.write_bytes(b"original")
+            linked = folder / "link.json"
+            try:
+                linked.symlink_to(source)
+            except (OSError, NotImplementedError) as exc:
+                self.skipTest(f"file symlinks unavailable: {exc}")
+            with self.assertRaisesRegex(ValueError, "output aliases an input"):
+                protect_outputs([linked], [source])
+            parent_link = folder / "dir-link"
+            parent_link.symlink_to(folder, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "output aliases an input"):
+                protect_outputs([parent_link / source.name], [source])
+            self.assertEqual(source.read_bytes(), b"original")
+
+    def test_native_case_alias(self):
+        from output_paths import protect_outputs
+        with tempfile.TemporaryDirectory() as d:
+            source = Path(d) / "source.json"
+            source.write_bytes(b"original")
+            alias = source.with_name("SOURCE.JSON")
+            if not alias.exists():
+                self.skipTest("filesystem has case-sensitive names")
+            with self.assertRaisesRegex(ValueError, "output aliases an input"):
+                protect_outputs([alias], [source])
+            self.assertEqual(source.read_bytes(), b"original")
+
+    def test_all_destinations_checked_without_creating_anything(self):
+        from output_paths import protect_outputs
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            blocked = folder / "blocked"
+            blocked.write_bytes(b"not a directory")
+            fresh = folder / "new" / "output.json"
+            for bad in (folder, blocked / "child.json"):
+                # POSIX can raise ENOTDIR during stat before the explicit parent-kind check.
+                with self.assertRaisesRegex(ValueError, "not a (regular file|directory)|cannot check output paths"):
+                    protect_outputs([fresh, bad], [])
+                self.assertFalse(fresh.parent.exists())
+            protect_outputs([fresh], [blocked])
+            self.assertFalse(fresh.parent.exists())
+            self.assertEqual(blocked.read_bytes(), b"not a directory")
+
+    def test_filesystem_check_errors_refuse(self):
+        from output_paths import protect_outputs
+        with mock.patch.object(Path, "resolve", side_effect=PermissionError("cannot inspect")):
+            with self.assertRaisesRegex(ValueError, "cannot check output paths"):
+                protect_outputs(["out.json"], ["source.json"])
 
 
 if __name__ == "__main__":

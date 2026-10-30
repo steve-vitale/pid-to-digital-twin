@@ -7,8 +7,11 @@ OPEN100 sheet 0).
 
 **Current preservation gaps:** for extracted items with several provenance appearances, the exporter uses the
 first appearance's locator; it does not retain the complete provenance list or report that loss. Keep the source
-model and original records alongside the graph. Also select an output file distinct from every input: the CLI
-currently permits replacing its input with the exported graph. See the [audited defects](STATUS.md#known-defects).
+model and original records alongside the graph. See the [audited defects](STATUS.md#known-defects).
+
+The CLI refuses an output that aliases the input model, question file or any consumed `--reviews/*.json`
+record, including resolved directory links and existing hardlinks. Choose a separate output path. This local
+preflight does not lock files against concurrent changes.
 
 ```sh
 python scripts/graph_export.py data/te_process_model.json --out te_graph.json

@@ -34,6 +34,10 @@ historian-style CSV, so a plant can try them on its own export:
 
 Both are stdlib plus `asyncua` (for the server only). Nothing here uses a model.
 
+The band CLI checks both report destinations before writing: neither may alias the normal CSV, the scoring CSV
+or the other report, including through directory links or existing hardlinks. Use a separate output folder and
+keep the files stable during the run; this local preflight does not lock them against concurrent changes.
+
 ## Which method to use
 
 | Your data | Use | Why |

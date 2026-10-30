@@ -1,7 +1,7 @@
 # State of the toolkit
 
-Audit date: 2026-10-30. Functional baseline: `e8277779f7a30f526740a58af9bdb5088555fa4d`.
-The accompanying documentation reorganization does not complete the integrations below.
+Audit date: 2026-10-30. Original functional baseline: `e8277779f7a30f526740a58af9bdb5088555fa4d`.
+The source-output collision repair below follows that audit; company integrations remain incomplete.
 
 **This is a collection of working local prototypes and research demonstrations, with a partially connected user
 workflow. It is not a turnkey document-to-digital-twin product or a company context service.** The strongest
@@ -9,7 +9,7 @@ starting use is one source-backed engineering investigation. Most utilities have
 unfinished work is concentrated in evidence preservation, conversion between formats, semantic evaluation and
 company integration. There are also reproducible defects, listed first.
 
-The [script registry](SCRIPTS.md) distinguishes 31 scripts classified as tools, 12 repository checks, ten support modules and
+The [script registry](SCRIPTS.md) distinguishes 31 scripts classified as tools, 12 repository checks, eleven support modules and
 76 research scripts. Research scripts reproduce this project's demonstrations; their presence is not evidence
 that the same output is available for arbitrary company inputs. Test scripts are listed separately by the runner.
 
@@ -17,12 +17,17 @@ that the same output is available for arbitrary company inputs. Test scripts are
 
 | Finding | Observed behavior | Current boundary and next repair |
 |---|---|---|
-| **Input files can be overwritten by outputs** | On disposable copies, `graph_export.py` accepts the input model as its output path; `estimate_impact.py` overwrites an input spec named `impact.json` in its output folder; `csv_normal_bands.py` overwrites an input occupying `csv_normal_bands.json`. Each exits successfully after replacing the input. | Keep immutable source copies and use distinct output locations. Add refusal before any write, including input/output aliases. Same-path cases were reproduced; other filesystem aliases have not been audited. |
 | **The graph loses additional source locators** | `graph_export.source_of` selects the first provenance appearance. Seven items in the full OPEN100 model have multiple appearances; the graph retains their sheet list but loses later appearances' source locators without reporting the loss. | Keep the source model and original records with the graph. Preserve all appearances or explicitly report losses before treating the graph as an evidence archive. |
 | **Vendor report prose overstates what scores establish** | The historical generated report calls review-load counts equivalent work and overlapping run ranges a tie. Neither labor savings nor equivalence follows from those values. | The user guide is corrected. The report generator and historical report still need a separately checked wording repair. Scores and statistical methods have not been changed in this audit. |
 
-These are open findings, not repaired features. The first two are higher priority than adding outputs or more
-corpus cases. Sources and evidence must survive a round trip before the package can support continuing ownership.
+These findings remain open. Preserving source locators is higher priority than adding outputs or more corpus
+cases. Sources and evidence must survive a round trip before the package can support continuing ownership.
+
+**Repaired source-output collisions:** graph export, impact estimation and CSV-band generation now check all
+their active input paths and every output before creating directories or writing files. Exact/resolved names,
+native case aliases, directory links and existing hardlink identities are checked; aliased sibling outputs also
+refuse. Regression tests verify unchanged source and companion bytes. This is a preflight for stable local files,
+not a concurrent-writer lock or a transactional guarantee for later I/O failures. See [JOURNAL §105](JOURNAL.md#105-refuse-source-output-collisions-before-publication).
 
 ## What exists, and what remains manual
 
@@ -36,16 +41,16 @@ files, not product readiness, source completeness, usefulness or plant acceptanc
 | [Converted-key DEXPI route](FEATURES.md#dexpi-to-bundle) | Converts the supported adapted DEXPI key/sheet representation. | Bound to that adapter contract; not an arbitrary CAD/XML importer. |
 | [Direct DEXPI XML reader](FEATURES.md#dexpi-xml-to-model) | Reads supported XML and reports omissions and unresolved placement. | Coverage varies by exporter. A parsed model may still be ineligible for downstream questions; C03 demonstrates this boundary. |
 | [Model drawing/export](FEATURES.md#description-to-model) | Generates outputs from authored process-model JSON; detailed P&IDs use an authored layout. | No automatic description interpretation or detailed layout. Drafting style adaptation is separate work. |
-| [Portable graph](FEATURES.md#graph-export) | Exports supported identities, relationships and claims; line-layer tools distinguish selected connection meanings. | One-way conversion, incomplete multi-appearance provenance and the overwrite defect above. No generic inverse into a generator model. |
+| [Portable graph](FEATURES.md#graph-export) | Exports supported identities, relationships and claims; line-layer tools distinguish selected connection meanings. | One-way conversion and incomplete multi-appearance provenance. No generic inverse into a generator model. |
 | [Platform staging](FEATURES.md#platform-exports) | Generates Ignition tags and PI AF staging; offline checks inspect conventions. | Reviewed signal mapping, real import/readback and plant acceptance. PI has never been imported here. The gateway demo builder is TE-specific. |
 | [Loop audit](FEATURES.md#loop-audit) | Compares supplied loop records against supported drawings/models. | Loop truth must be supplied; matching an inventory does not verify wiring, settings or installed safeguards. |
 | [Vendor evaluation](FEATURES.md#vendor-evaluation) | Scores saved drawing answers with planted controls and per-sheet results. | Limited ontology and graph layer; no review-time study. Report interpretation defects are listed above. |
 | [Repository checks](FEATURES.md#repo-checks) | Checks claims, configured freshness, registries and test results. | Repository-specific, not engineering truth. Test exits can contain omissions; inspect the actual coverage summary. |
-| [Historian CSV tools](FEATURES.md#historian-csv) | Analyze recorded CSVs; a separate server can replay rows. | Qualified operating baseline, site metadata/mapping and live data access. Replay is not a historian connector or process simulator. Input collision defect remains. |
+| [Historian CSV tools](FEATURES.md#historian-csv) | Analyze recorded CSVs; a separate server can replay rows. | Qualified operating baseline, site metadata/mapping and live data access. Replay is not a historian connector or process simulator. |
 | [Review and point mapping](FEATURES.md#review-and-mapping) | Applies supported supplied decisions; separate commands stage OPC and PI mappings. | Human identity/source review, native signal checks and explicit regeneration. Valid review rows can persist when another row refuses. |
 | [Generalization matrix](FEATURES.md#generalization-matrix) | Runs eight selected workflows on registered public inputs and retains failures. | Does not evaluate every feature or complete journey. New sources need explicit applicability, adapters and independently reviewed truth. |
 | [Question engine](FEATURES.md#opportunity-screen) | Screens supported models with catalog rules and emits investigations and evidence requests. | No broad usefulness/coverage benchmark or natural-language answering. The MGPI case produces zero findings. Missing model data does not prove missing plant safeguards. |
-| [Impact estimate](FEATURES.md#impact-estimate) | Calculates a draft result from supplied measurements and constants, refusing required omissions. | No measurement collection, causal result or site decision. Input collision defect remains. |
+| [Impact estimate](FEATURES.md#impact-estimate) | Calculates a draft result from supplied measurements and constants, refusing required omissions. | No measurement collection, causal result or site decision. |
 | [Statement review](FEATURES.md#statement-review) | Renders and samples graph claims, scores supplied verdicts and records bound review events. | A person supplies source/plant judgments. A blank review correctly has no error rate. Verdicts do not correct the working model's values. |
 | [Context register](FEATURES.md#context-register) | Local files retain supplied answers, disputes and ownership history; explicit refresh checks source revisions. | No automatic source watcher, shared authentication or company acceptance. Answers do not update the generator model. |
 | [Snapshot MCP](FEATURES.md#snapshot-mcp) | Read-only access to one selected startup snapshot; SDK/stdio/loopback checks exist. | No live process connector, analysis execution, shared company authentication or verified Copilot tenant. |
@@ -85,8 +90,8 @@ are external responsibilities by design, not a proposed replacement application 
 
 ## Recommended order of work
 
-1. **Protect evidence.** Repair input/output collisions and multi-appearance provenance; add regression cases
-   that fail on the current behavior and verify the unchanged baseline.
+1. **Protect evidence.** Preserve multi-appearance provenance; retain the source-output collision regression
+   controls and verify the unchanged baseline.
 2. **Finish one bounded investigation journey.** Specify the supported files, human decisions and acceptance
    checks. Measure whether an engineer can complete it and whether the resulting packet helps its recipient.
 3. **Evaluate semantics.** Add independent source/claim keys and useful/unacceptable question rubrics before

@@ -16,6 +16,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from output_paths import protect_outputs
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "twin-graph-1"
@@ -609,7 +610,12 @@ def main(argv=None):
     if not a.model:
         ap.error("give a model, or --check GRAPH")
     try:
+        sources = [a.model, a.questions]
+        if a.reviews:
+            sources.extend(sorted(Path(a.reviews).glob("*.json")))
         g = build(a.model, a.reviews, a.questions)
+        if a.out:
+            protect_outputs([a.out], sources)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f"{a.model}: can't export ({exc})", file=sys.stderr)
         return 1
@@ -623,7 +629,11 @@ def main(argv=None):
         return 1
     text = json.dumps(g, indent=1, ensure_ascii=False) + "\n"
     if a.out:
-        Path(a.out).write_text(text, encoding="utf-8", newline="\n")
+        try:
+            Path(a.out).write_text(text, encoding="utf-8", newline="\n")
+        except OSError as exc:
+            print(f"can't write graph ({exc})", file=sys.stderr)
+            return 1
     print(json.dumps(g["counts"]) + (f" -> {a.out}" if a.out else ""))
     return 0
 

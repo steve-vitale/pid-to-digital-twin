@@ -358,7 +358,7 @@ Example review: **reviewed example**
 
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex coding agent: bounded MGPI source, software, render and arrival follow-up, 2026-10-30: pass
+- **Independent review:** Independent Codex coding agent: bounded source-preservation dependency refresh review, 2026-10-30: pass
 
 </details>
 

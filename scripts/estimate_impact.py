@@ -26,6 +26,7 @@ import math
 import re
 import sys
 from pathlib import Path
+from output_paths import protect_outputs
 
 ROOT = Path(__file__).resolve().parent.parent
 CONSTANTS = ROOT / "data" / "impact_constants.json"
@@ -1221,10 +1222,17 @@ def main(argv=None):
         return 2
     if a.out:
         out = Path(a.out)
-        out.mkdir(parents=True, exist_ok=True)
-        (out / f"{stem}.md").write_text(md, encoding="utf-8", newline="\n")
-        (out / f"{stem}.json").write_text(json.dumps(js, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
-                                          newline="\n")
+        try:
+            targets = [out / f"{stem}.md", out / f"{stem}.json"]
+            sources = [a.catalog] if a.needs else [a.estimate, a.constants]
+            protect_outputs(targets, sources)
+            serialized = json.dumps(js, indent=2, ensure_ascii=False) + "\n"
+            out.mkdir(parents=True, exist_ok=True)
+            targets[0].write_text(md, encoding="utf-8", newline="\n")
+            targets[1].write_text(serialized, encoding="utf-8", newline="\n")
+        except (ValueError, OSError) as exc:
+            sys.stderr.write(f"ERROR: {exc}\n")
+            return 2
         print(f"wrote {(out / (stem + '.md')).as_posix()} and {stem}.json")
     else:
         sys.stdout.write(md)

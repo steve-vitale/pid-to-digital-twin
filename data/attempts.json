@@ -3532,6 +3532,24 @@
         "docs/WORKFLOWS.md",
         "docs/RESULTS.md"
       ]
+    },
+    {
+      "id": "A238",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Refuse source-output and sibling-output aliases before graph export, impact estimation or CSV-band publication writes files.",
+      "hypothesis": "One complete publication preflight can preserve every consumed input while leaving ordinary generated result bytes unchanged.",
+      "evidence": "Regression tests verify unchanged source/companion bytes. Independent actual CLI probes expanded the original same-path defects to all active primary and auxiliary inputs, default constants/catalogs, relative/native-case names, hardlinks and directory junctions. Original vulnerable runs are retained privately. Repaired refusals precede mkdir/write; ordinary graph profiles, estimates, needs reports and all four CSV methods retain original output bytes.",
+      "runs": "Offline disposable-copy probes and three targeted test scripts. Windows file symlinks unavailable locally; supported-platform regression coverage retained. No model call, plant action or company acceptance.",
+      "verdict": "kept",
+      "why": "Repairs N066 without changing engineering calculations or claiming transactional publication/concurrent-writer locking. N067 provenance loss and N068 vendor interpretation remain open.",
+      "source": [
+        "docs/JOURNAL.md#105-refuse-source-output-collisions-before-publication",
+        "docs/STATUS.md",
+        "docs/GRAPH_EXPORT.md",
+        "docs/IMPACT_ESTIMATE.md",
+        "examples/historian-csv/README.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4215,12 +4233,13 @@
     {
       "id": "N066",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Refuse output paths that alias any input before graph export, impact estimation or CSV-band generation writes a file.",
-      "why_not_yet": "The state audit reproduced three successful source overwrites on disposable copies: graph model as its own --out; impact input named impact.json in the output folder; CSV input occupying csv_normal_bands.json. This audit discloses the defects without claiming a repair. Future controls must preserve original bytes and cover exact/resolved/file-identity aliases and all input sources.",
+      "why_not_yet": "Completed 2026-10-30: all active input files and sibling outputs are checked before any mkdir/write. Regression and independent actual-CLI controls preserve source and companion bytes for exact/resolved/native-case, hardlink and directory-junction aliases. Ordinary outputs remain byte-identical. This is a stable-local-files preflight, not transactional publication or a concurrent-writer lock; local Windows file-symlink controls are explicitly skipped where unavailable.",
       "source": [
         "docs/STATUS.md#known-defects",
-        "docs/JOURNAL.md#104-audit-the-whole-toolkit-before-adding-more"
+        "docs/JOURNAL.md#104-audit-the-whole-toolkit-before-adding-more",
+        "docs/JOURNAL.md#105-refuse-source-output-collisions-before-publication"
       ]
     },
     {

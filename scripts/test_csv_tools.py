@@ -90,6 +90,40 @@ def daily(start_day, days, step_at=None, step=0.0, spike_at=None):
 
 
 class BandsTest(unittest.TestCase):
+    def test_both_csv_inputs_and_both_report_names_are_protected(self):
+        for role in ("normal", "score"):
+            for extension in ("md", "json"):
+                with self.subTest(role=role, extension=extension):
+                    out = self.d / f"{role}-{extension}"
+                    out.mkdir()
+                    normal = write_csv(out / "normal.csv", ["sample", "A", "B"], synthetic())
+                    score = write_csv(out / "score.csv", ["sample", "A", "B"], synthetic(step_at=120))
+                    source = normal if role == "normal" else score
+                    target = out / f"csv_normal_bands.{extension}"
+                    target.hardlink_to(source)
+                    companion = out / f"csv_normal_bands.{'md' if extension == 'json' else 'json'}"
+                    companion.write_bytes(b"keep companion")
+                    before = {p: p.read_bytes() for p in (normal, score, target, companion)}
+                    with self.assertRaisesRegex(SystemExit, "output aliases an input"):
+                        cnb.main(["--normal", str(normal), "--score", str(score), "--out", str(out)])
+                    self.assertEqual(before, {p: p.read_bytes() for p in before})
+
+    def test_exact_csv_collision_and_sibling_aliases_are_refused(self):
+        normal = write_csv(self.d / "csv_normal_bands.json", ["sample", "A", "B"], synthetic())
+        before = normal.read_bytes()
+        with self.assertRaisesRegex(SystemExit, "output aliases an input"):
+            cnb.main(["--normal", str(normal), "--out", str(self.d)])
+        self.assertEqual(normal.read_bytes(), before)
+        self.assertFalse((self.d / "csv_normal_bands.md").exists())
+        out = self.d / "out"
+        out.mkdir()
+        md = out / "csv_normal_bands.md"
+        md.write_bytes(b"retain outputs")
+        (out / "csv_normal_bands.json").hardlink_to(md)
+        with self.assertRaisesRegex(SystemExit, "files alias each other"):
+            cnb.main(["--normal", str(normal), "--out", str(out)])
+        self.assertEqual(md.read_bytes(), b"retain outputs")
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.d = Path(self.tmp.name)

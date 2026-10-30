@@ -79,6 +79,7 @@ import statistics
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
+from output_paths import protect_outputs
 
 KS = (3, 4, 5, 6)
 TARGET = 0.005  # worst-tag false-flag rate on held-out normal data, as in normal_bands.py
@@ -852,11 +853,16 @@ def main(argv=None):
     except ValueError:
         raise SystemExit("error: computed result contains a nonfinite value; check sample times and magnitudes") from None
     out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    # LF on every OS, so the committed example regenerates byte for byte on Windows too
-    (out / "csv_normal_bands.json").write_text(serialized, encoding="utf-8", newline="\n")
     md = markdown(r, units)
-    (out / "csv_normal_bands.md").write_text(md, encoding="utf-8", newline="\n")
+    try:
+        targets = [out / "csv_normal_bands.json", out / "csv_normal_bands.md"]
+        protect_outputs(targets, [a.normal, a.score])
+        out.mkdir(parents=True, exist_ok=True)
+        # LF on every OS, so the committed example regenerates byte for byte on Windows too
+        targets[0].write_text(serialized, encoding="utf-8", newline="\n")
+        targets[1].write_text(md, encoding="utf-8", newline="\n")
+    except (ValueError, OSError) as exc:
+        raise SystemExit(f"error: {exc}") from None
     print(md)
     return r
 

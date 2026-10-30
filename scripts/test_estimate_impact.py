@@ -638,5 +638,57 @@ class Examples(unittest.TestCase):
         close(t["co2e_scope1_kg_per_year"], lo * 53.1145, hi * 53.1145)
 
 
+class OutputPreservation(unittest.TestCase):
+    def test_all_active_inputs_and_both_outputs_are_protected_before_any_write(self):
+        for mode, role, stem in (("estimate", "spec", "impact"), ("estimate", "constants", "impact"),
+                                 ("needs", "catalog", "needs")):
+            for extension in ("md", "json"):
+                with self.subTest(mode=mode, role=role, extension=extension), tempfile.TemporaryDirectory() as d:
+                    folder = Path(d)
+                    spec, constants, catalog = (folder / name for name in ("spec.json", "constants.json", "catalog.json"))
+                    spec.write_bytes((EX / "pump_vfd_site.json").read_bytes())
+                    constants.write_bytes(ei.CONSTANTS.read_bytes())
+                    catalog.write_bytes(ei.CATALOG.read_bytes())
+                    source = {"spec": spec, "constants": constants, "catalog": catalog}[role]
+                    out = folder / "out"
+                    out.mkdir()
+                    target = out / f"{stem}.{extension}"
+                    target.hardlink_to(source)
+                    companion = out / f"{stem}.{'json' if extension == 'md' else 'md'}"
+                    companion.write_bytes(b"retain companion too")
+                    before = {p: p.read_bytes() for p in (spec, constants, catalog, target, companion)}
+                    args = (["--estimate", str(spec), "--constants", str(constants)] if mode == "estimate" else
+                            ["--needs", "all", "--catalog", str(catalog)])
+                    err = io.StringIO()
+                    with redirect_stdout(io.StringIO()), redirect_stderr(err):
+                        code = ei.main(args + ["--out", str(out)])
+                    self.assertEqual(code, 2, err.getvalue())
+                    self.assertIn("output aliases an input", err.getvalue())
+                    self.assertEqual(before, {p: p.read_bytes() for p in before})
+
+    def test_exact_spec_collision_and_aliased_outputs_refuse(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            spec = folder / "impact.json"
+            spec.write_bytes((EX / "pump_vfd_site.json").read_bytes())
+            before = spec.read_bytes()
+            with redirect_stderr(io.StringIO()), redirect_stdout(io.StringIO()):
+                code = ei.main(["--estimate", str(spec), "--out", str(folder)])
+            self.assertEqual(code, 2)
+            self.assertEqual(spec.read_bytes(), before)
+            self.assertFalse((folder / "impact.md").exists())
+            out = folder / "out"
+            out.mkdir()
+            md = out / "impact.md"
+            md.write_bytes(b"retain both")
+            (out / "impact.json").hardlink_to(md)
+            err = io.StringIO()
+            with redirect_stderr(err), redirect_stdout(io.StringIO()):
+                code = ei.main(["--estimate", str(spec), "--out", str(out)])
+            self.assertEqual(code, 2)
+            self.assertIn("files alias each other", err.getvalue())
+            self.assertEqual(md.read_bytes(), b"retain both")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
