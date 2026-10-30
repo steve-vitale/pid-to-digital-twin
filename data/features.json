@@ -289,7 +289,7 @@
   {
    "id": "review-and-mapping",
    "category": "operate",
-   "title": "Reviewer decisions back into the model, and instruments mapped to real signals",
+   "title": "Reviewer decisions back into the model, and instruments mapped to supplied addresses",
    "tools": [
     "scripts/apply_review.py",
     "scripts/review_kit.py",
@@ -313,11 +313,11 @@
     "scripts/test_review_kit.py",
     "scripts/test_deliverable_report.py"
    ],
-   "job": "Feed operators' review decisions back into the model, and connect instruments to real signals",
+   "job": "Apply review decisions and assign supplied OPC or PI addresses",
    "you_need": "A filled review sheet; the plant's I/O list",
    "time": "Seconds per apply; the review itself is people's time",
-   "you_get": "An updated model with a dated change record, and instruments mapped to OPC or PI addresses",
-   "why": "A model is only useful once someone who knows the unit has checked it and its instruments point at real signals. This records who decided what and when, so every change can be traced."
+   "you_get": "An updated draft model and dated review record; OPC assignments retain CSV fingerprints and physical line spans, while PI keeps its separate reviewed-point contract",
+   "why": "Source-referenced corrections and addresses make a draft easier to check and hand off. Source records and address assignments do not establish plant truth, connectivity or signal identity."
   },
   {
    "id": "generalization-matrix",

@@ -1,6 +1,8 @@
-# Review decisions back into the model, and instruments mapped to signals
+# Review decisions back into the model, and instruments mapped to supplied addresses
 
-**Why it matters:** A model is only useful once someone who knows the unit has checked it and its instruments point at real signals. This records who decided what and when, so every change can be traced.
+**Why it matters:** Reviewed corrections and source-referenced addresses make a draft easier to check and hand
+off. Review records retain attributed decisions; OPC mapping fingerprints locate the supplied I/O records.
+Signal identity and connectivity still need separate verification.
 
 A worked example on the sheet-0 bundle from [own-drawing](../own-drawing/README.md). **The review here is an
 illustration, not a real review:** the reviewer is labelled "R1 (illustrative example, not a real review)", and the
@@ -48,6 +50,31 @@ refusals: fix the sheet and apply it again, which leaves the rows already applie
 addresses into the model; regenerate the exports afterwards with `generate.py`.
 
 For PI, a reviewer supplies the archive, point, type and unit for each instrument (the last command above).
+
+## Keep the source with each OPC assignment
+
+The OPC mapper reads the I/O CSV once and records its basename, raw byte count and SHA-256 in the report's
+`io_list_evidence`. Each assigned `data_point` retains `source_sha256` and `source_lines: [start, end]` beside
+its address and readable `source` label. Lines are 1-based physical CSV lines, including the header; a quoted
+multiline record can span several lines. These are text-file locations, not Excel's displayed record numbers.
+Blank lines between records do not shift the citations onto the wrong data.
+
+Keep the exact original CSV with the packet. Its fingerprint includes any BOM, line endings and unused columns.
+Changing only a description or newline convention can therefore produce a provenance-only mapping change even
+when the address stays the same. Review that diff; a fresh fingerprint does not establish an authoritative
+revision or correct signal. Repeating the same input is unchanged. A partial update preserves both the address
+and earlier source evidence of omitted mappings. Older mappings without a fingerprint remain as supplied until
+explicitly reassigned; their evidence is not reconstructed automatically.
+
+Dry-run prints the proposed model snapshots without writing them. A successful apply writes the current model
+and replaces its same-name mapping reports under `out/mapping/`; archive the reviewed plan and originals with
+the investigation or company record if they need to survive later runs. This is source traceability for a
+specialist tool, not a company decision-history service. The PI mapper keeps its separate existing contract.
+
+The [mapping tests](../../scripts/test_map_points.py) include an explicitly illustrative CRLF CSV with a blank
+line and a quoted newline: its two records occupy lines 3–4 and 6. They verify exact fingerprints, locators,
+source-only revisions, repeat apply, retained older evidence and refusal without writes. These are software
+checks, not a new plant dataset, accuracy result or signal-identity test.
 
 ## What it doesn't show
 

@@ -12,6 +12,8 @@ examples/review-and-mapping/** -text
 examples/own-drawing/deliverable/** -text
 # The intake hashes this original extraction's raw bytes into its model and graph.
 examples/own-drawing/extraction_sheet0.json -text
+# The mapping report fingerprints this synthetic CSV's raw bytes; pin the fixture across operating systems.
+data/io_lists/open100_sheet0_demo.csv text eol=lf
 
 # Committed predictions (scripts/rescore.py writes them with LF); keep their bytes identical on every OS.
 predictions/** text eol=lf

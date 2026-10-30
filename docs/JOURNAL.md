@@ -4015,3 +4015,40 @@ These are documentation walkthroughs and manual checks, not tests of an automate
 human adoption study. No new feature, corpus result, schema, integration or operational outcome is claimed.
 Existing benchmark results and matrix cells remain unchanged. The proof of actual engineer use still needs a
 real participant and observations; this repair only removes an unnecessary prerequisite for starting.
+
+## 78. Keep the original I/O record behind an address assignment
+
+The address mapper labelled parsed records as CSV rows. A blank line before a quoted multiline record made
+those references wrong: records occupying physical lines 3–4 and 6 appeared as rows 2 and 3. The model also
+retained no fingerprint of the supplied file. An engineer could inspect an assigned address without being able
+to identify the exact original record from that assignment alone. The docstring's promise of live points and
+the worklist's inference about what exists in the plant also exceeded what local address assignment proves.
+
+The CLI now reads one raw CSV snapshot, fingerprints those exact bytes and records each parsed record's physical
+line span. Assigned OPC mappings carry that fingerprint and span; the plan shows the filename, byte count and
+digest. Blank lines, quoted newlines, UTF-8 BOMs and line-ending differences remain part of the source identity.
+CSV columns cannot override the computed locator or fingerprint. Direct dictionary callers without source
+metadata get explicitly logical row references, without an invented file hash or physical locator.
+
+Matching, partial updates, explicit replacement and refusal policies stay the same. Repeating an identical
+application is byte-stable. A prose-only source revision changes provenance without changing the address;
+omitted mappings retain their previous evidence in partial mode. Legacy mappings do not acquire reconstructed
+evidence. The exact synthetic fixture is pinned to LF in Git so its raw fingerprint reproduces across clones.
+PI keeps its separate contract. Generated OPC addresses are unchanged, while the graph retains the new metadata.
+
+The worked example explains what to retain with the investigation: the original I/O file and the reviewed plan.
+Reports at the same name are still overwritten on apply, so they are current snapshots rather than a company
+decision-history service. Fingerprints establish source identity, not authority, valid signal syntax, connection,
+units, scaling or current plant truth. Unmatched records require reconciling both sources. The toolkit prepares
+a checkable packet for the company's shared context system; it does not take over that system's responsibility.
+
+The mapper's 26 tests pass. An independent AI controls reader runs 47 actual CLI commands and 166 adversarial
+checks, including apply/repeat, source revisions, partial preservation, scoped replacement, atomic refusals,
+newline/BOM variants, metadata spoofing and downstream generation/graph retention. Its three-step mapping
+example reproduces the new report byte-for-byte with unchanged counts: 25 assignments, 10 model items absent
+from this input, two unmatched source records and zero ambiguous rows. A separate AI reader checks the source
+handoff and independently exercises dry-run revisions and locators; its apply/overwrite assessment is source-read
+only. Root runs all seven worked-example commands; only the mapping report changes among registered outputs.
+These are software and AI reader checks on existing public/synthetic inputs, not new corpus accuracy, receiving-
+system acceptance, signal verification, human adoption or measured operational value. Matrix results remain
+unchanged. Full-suite and CI logs retain their actual omissions separately.

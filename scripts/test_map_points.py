@@ -2,6 +2,7 @@
 import contextlib
 import copy
 import csv
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -267,6 +268,133 @@ class MappingTests(unittest.TestCase):
             text = (root / 'plan.md').read_bytes()
             self.assertNotIn(b'\r\n', text)
             self.assertTrue(text.endswith(b'}\n') and not text.endswith(b'\n\n'), text[-20:])
+
+    def source_csv(self):
+        return (b'tag,server,base_path,point,description\r\n\r\n'
+                b'FT-1,OPC,ns=1;s=plant,F1,"first line\r\nsecond line"\r\n\r\n'
+                b'PT-2,OPC,ns=1;s=plant,P2,plain\r\n')
+
+    def source_cli(self, root, model_path, csv_path, *args):
+        output = io.StringIO()
+        code = 0
+        with patch.object(map_points, 'ROOT', root), patch.object(sys, 'argv',
+                ['map_points', str(model_path), str(csv_path), '--json', *args]), contextlib.redirect_stdout(output):
+            try:
+                map_points.main()
+            except SystemExit as exc:
+                code = exc.code
+        return code, json.loads(output.getvalue())
+
+    def test_cli_retains_exact_raw_hash_and_physical_spans_for_newline_variants(self):
+        for newline in (b'\r\n', b'\n', b'\r'):
+            for bom in (b'', b'\xef\xbb\xbf'):
+                with self.subTest(newline=newline, bom=bom), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    model_path, csv_path = root/'model.json', root/'io.csv'
+                    model_path.write_text(json.dumps(self.model), encoding='utf-8')
+                    original = model_path.read_bytes()
+                    raw = bom + self.source_csv().replace(b'\r\n', newline)
+                    csv_path.write_bytes(raw)
+                    code, report = self.source_cli(root, model_path, csv_path, '--dry-run')
+                    self.assertEqual(code, 0)
+                    digest = hashlib.sha256(raw).hexdigest()
+                    self.assertEqual(report['io_list_evidence'], {'file': 'io.csv', 'bytes': len(raw), 'sha256': digest})
+                    self.assertEqual([(r['row'], r['row_end']) for r in report['mapped']], [(3, 4), (6, 6)])
+                    for key, span in [('a', [3, 4]), ('b', [6, 6])]:
+                        self.assertEqual(report['mappings_after'][key]['source_lines'], span)
+                        self.assertEqual(report['mappings_after'][key]['source_sha256'], digest)
+                    self.assertEqual(report['mappings_after']['a']['source'], 'io.csv lines 3-4')
+                    self.assertEqual(report['mappings_after']['b']['source'], 'io.csv line 6')
+                    self.assertEqual(model_path.read_bytes(), original)
+                    self.assertEqual(csv_path.read_bytes(), raw)
+                    self.assertFalse((root/'out').exists())
+                    self.assertNotIn(str(root), json.dumps(report['io_list_evidence']))
+
+    def test_source_revision_is_visible_without_remapping_or_relabelling_omitted_records(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model_path, csv_path = root/'model.json', root/'io.csv'
+            self.model['instruments'][2]['data_point'].update(source='older.csv line 9', source_sha256='a'*64, source_lines=[9, 9])
+            model_path.write_text(json.dumps(self.model, indent=2)+'\n', encoding='utf-8')
+            raw = self.source_csv()
+            csv_path.write_bytes(raw)
+            self.assertEqual(self.source_cli(root, model_path, csv_path)[0], 0)
+            first = model_path.read_bytes()
+            self.assertEqual(self.source_cli(root, model_path, csv_path)[1]['mapping_changes'], [])
+            self.assertEqual(model_path.read_bytes(), first)
+            csv_path.write_bytes(raw.replace(b'plain', b'revised source prose'))
+            _, plan = self.source_cli(root, model_path, csv_path, '--dry-run')
+            self.assertEqual(model_path.read_bytes(), first)
+            self.assertEqual([c['asset'] for c in plan['mapping_changes']], ['a', 'b'])
+            for change in plan['mapping_changes']:
+                self.assertNotEqual(change['before']['source_sha256'], change['after']['source_sha256'])
+                for field in ('server', 'base_path', 'point'):
+                    self.assertEqual(change['before'][field], change['after'][field])
+            csv_path.write_bytes(b'tag,server,base_path,point\nFT-1,OPC,ns=1;s=plant,F1\n')
+            self.assertEqual(self.source_cli(root, model_path, csv_path)[0], 0)
+            final = json.loads(model_path.read_text(encoding='utf-8'))
+            previous = json.loads(first)
+            self.assertEqual(final['instruments'][1:], previous['instruments'][1:])
+            self.assertEqual(final['instruments'][0]['data_point']['source_lines'], [2, 2])
+
+    def test_duplicate_refusal_cites_both_actual_spans_and_writes_nothing(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model_path, csv_path = root/'model.json', root/'io.csv'
+            model_path.write_text(json.dumps(self.model), encoding='utf-8')
+            original = model_path.read_bytes()
+            csv_path.write_bytes(self.source_csv().replace(b'PT-2', b'FT-1'))
+            code, report = self.source_cli(root, model_path, csv_path)
+            self.assertEqual(code, 1)
+            self.assertEqual((report['errors'][0]['row'], report['errors'][0]['row_end']), (6, 6))
+            self.assertIn('first assigned on lines 3-4', report['errors'][0]['reason'])
+            self.assertEqual(report['mappings_before'], report['mappings_after'])
+            self.assertEqual(model_path.read_bytes(), original)
+            self.assertFalse((root/'out').exists())
+
+    def test_csv_columns_cannot_supply_hashes_or_locations(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model_path, csv_path = root/'model.json', root/'io.csv'
+            model_path.write_text(json.dumps(self.model), encoding='utf-8')
+            raw = b'tag,server,base_path,point,source_sha256,source_lines,row,row_end\nFT-1,OPC,path,P,FORGED,"[999,999]",999,999\n'
+            csv_path.write_bytes(raw)
+            code, report = self.source_cli(root, model_path, csv_path, '--dry-run')
+            self.assertEqual(code, 0)
+            mapping = report['mappings_after']['a']
+            self.assertEqual(mapping['source_lines'], [2, 2])
+            self.assertEqual(mapping['source_sha256'], hashlib.sha256(raw).hexdigest())
+            self.assertEqual((report['mapped'][0]['row'], report['mapped'][0]['row_end']), (2, 2))
+
+    def test_unresolved_worklists_use_actual_lines(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model_path, csv_path = root/'model.json', root/'io.csv'
+            self.model['instruments'].append(instrument('duplicate', 'FT 1'))
+            model_path.write_text(json.dumps(self.model), encoding='utf-8')
+            csv_path.write_bytes(self.source_csv().replace(b'PT-2', b'UNKNOWN'))
+            code, report = self.source_cli(root, model_path, csv_path, '--dry-run')
+            self.assertEqual(code, 0)
+            self.assertEqual((report['ambiguous'][0]['row'], report['ambiguous'][0]['row_end']), (3, 4))
+            self.assertEqual((report['not_on_drawing'][0]['row'], report['not_on_drawing'][0]['row_end']), (6, 6))
+            self.assertEqual(report['mappings_before'], report['mappings_after'])
+
+    def test_source_snapshot_is_read_once_before_decoding(self):
+        raw = b'\xef\xbb\xbf' + self.source_csv()
+        with patch.object(Path, 'read_bytes', return_value=raw) as read:
+            _, records, spans, evidence = map_points.read_io_list(Path('io.csv'))
+        read.assert_called_once()
+        self.assertEqual([r['tag'] for r in records], ['FT-1', 'PT-2'])
+        self.assertEqual(spans, [(3, 4), (6, 6)])
+        self.assertEqual(evidence['sha256'], hashlib.sha256(raw).hexdigest())
+
+    def test_direct_dict_planner_does_not_invent_file_provenance(self):
+        updated, report = self.plan([row()])
+        mapping = updated['instruments'][0]['data_point']
+        self.assertNotIn('source_sha256', mapping)
+        self.assertNotIn('source_lines', mapping)
+        self.assertIn('no file locator', mapping['source'])
+        self.assertIn('logical rows', report['row_locator_kind'])
 
 
 if __name__ == '__main__':

@@ -3086,6 +3086,22 @@
         "examples/first-pilot/README.md",
         "examples/first-pilot/pilot-brief.md"
       ]
+    },
+    {
+      "id": "A211",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Retain the exact raw I/O source fingerprint and physical CSV line spans behind assigned OPC addresses.",
+      "hypothesis": "A starter evidence packet should let the next engineer find the supplied address record without treating address assignment as verified signal identity or company governance.",
+      "evidence": "Original mapper mislabels physical lines 3-4 and 6 as rows 2 and 3. Final 26 mapper tests pass. Independent AI controls reader runs 47 actual CLIs and 166 adversarial checks, including update/refusal policies, source revisions, newline/BOM variants, spoofed metadata and downstream retention. Three-step mapping example byte-reproduces with counts 25/10/2/0 unchanged; root executes all seven guide commands, with only one registered report changed. Separate AI reader verifies source-handoff wording and dry-run provenance/revision behavior; apply is source-read only. Existing matrix unchanged.",
+      "runs": "Deterministic source-locator and software checks on existing synthetic/public inputs; no new source family, held-out score, native import or human adoption study",
+      "verdict": "kept",
+      "why": "Makes a bounded investigation more portable and inspectable. Original CSV and reviewed plan still need retention in the company context home; current report snapshots are not a decision-history service and supplied addresses are not verified plant signals.",
+      "source": [
+        "docs/JOURNAL.md#78-keep-the-original-io-record-behind-an-address-assignment",
+        "examples/review-and-mapping/README.md",
+        "docs/REVIEW_LOOP.md"
+      ]
     }
   ],
   "not_tried": [

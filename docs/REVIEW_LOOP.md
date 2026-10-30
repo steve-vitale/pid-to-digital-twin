@@ -1,11 +1,11 @@
 # Closing the loop: operations review and real data points
 
-The extraction gives a draft. Two things turn a draft into a twin a plant can run on:
-1. the people who run the unit correct it;
-2. each instrument gets the address where its live value comes from.
+The extraction gives a draft. Engineering review supplies corrections, and an I/O list supplies candidate signal
+addresses. The local tools retain those inputs for checking and handoff. Neither address assignment nor a source
+match establishes operational readiness.
 
 Both are files that operations and controls people already know: a review spreadsheet and an I/O list. Both flow
-back into the twin through code, with a record of who decided what.
+back into the draft through code, with attributed review records and source-referenced address assignments.
 
 ```
 review sheet (spreadsheet) ──► apply_review.py ──► asset model ──► generate.py ──► Ignition / PI AF / screens
@@ -13,6 +13,9 @@ I/O list (spreadsheet)     ──► map_points.py   ──►      │         
                                                   change records                 build_gateway.py
                                                   (out/review, out/mapping)      verify_gateway.py
 ```
+
+The gateway scripts in this diagram build and check this repository's demo. A different plant needs its own
+receiving-system adaptation and acceptance; generic file generation does not perform that work.
 
 ## 1. The operations review
 
@@ -131,10 +134,19 @@ python scripts/generate.py out/twin/r2-tiles-trace/codex/plant_model.json
 
 | List | What it usually means at a site |
 |---|---|
-| Mapped | The instrument now has a live data address |
+| Mapped | A supplied address is assigned in the local model; the signal has not been verified |
 | On the drawing, not in the I/O list | Spare, demolished, a local gauge with no signal, or a missing I/O row |
-| In the I/O list, not on the drawing | **The drawing may be out of date.** The plant has a point the drawing doesn't show |
+| In the I/O list, not on the drawing | The supplied I/O row has no matching model item; reconcile identities and revisions in both sources |
 | Ambiguous | The same tag on two drawing items; a person decides, then pins it with `asset_id` |
+
+**Retain the mapping source.** Each new OPC assignment includes the raw CSV's `source_sha256` and
+`source_lines: [start, end]`. The report's `io_list_evidence` holds its basename, byte count and fingerprint.
+These are physical CSV lines, not spreadsheet record numbers; quoted newlines and intervening blank lines are
+counted correctly. Raw fingerprints distinguish BOM, line-ending and prose-only revisions too. Such a revision
+can change provenance without changing an address. Inspect that diff and keep the original CSV and approved plan
+with the packet. Partial updates retain omitted mappings' earlier evidence; an old address is not silently given
+the new file's fingerprint. Mapping reports are current snapshots and same-name reports are replaced on apply.
+Hashes locate supplied bytes; they do not prove revision authority, source accuracy, connectivity or plant truth.
 
 **The demo.** OPEN100 has no plant behind it, so `data/io_lists/open100_sheet0_demo.csv` is a synthetic I/O list,
 labeled as such. On sheet 0 it maps 24 instruments, with three different spellings of the tag style, and finds 2
@@ -148,5 +160,7 @@ The historical runtime receipt showed 24 mapped tags Good and 335 placeholders B
 ## Status
 
 - **Review loop:** tested on copies of both models (`scripts/test_apply_review.py`, in CI).
-- **Point mapping:** proven in a running gateway (receipt `out/ignition/gateway/receipts/20261008T175223Z.md`).
+- **Point mapping:** offline assignment/provenance checks run in the current suite. The historical synthetic
+  gateway demonstration is recorded in `out/ignition/gateway/receipts/20261008T175223Z.md`; it does not validate
+  an arbitrary site's address or the new source metadata through a native import.
 - **Not done yet:** the Tennessee Eastman operations review itself. A review only means something from someone who knows the process and is looking at the drawings; a sign-off without that would be a rubber stamp, so none has been recorded.

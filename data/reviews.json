@@ -4862,6 +4862,165 @@
     "matrix-check-proof.json": "706ebaeb578a9b2c8aaccdeb16fcb0e905448729dd029c93bf020cd5c354640d",
     "covestro-matrix-binding-proof.json": "0d36681fcdda7be112e99fceb635755f0707ba9211a5d61e63f9f62eb123d31c"
    }
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "Independent AI controls_reader and AI first-engineer/manager reader; separate Codex evidence/hash closeout",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Public repository file bindings are SHA-256 with CRLF normalized to LF, matching the review catalog. CSV source fingerprints and all named private-proof hashes are exact raw-byte SHA-256. Review-file normalization does not normalize mapper inputs.",
+   "registered_output_count": 7,
+   "files": {
+    "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+    "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+    "examples/review-and-mapping/mapping_dry_run.md": "0a1055bd00dba08fadd5544b37dabec4009a04004925a26e63e991d49dee9205",
+    "examples/review-and-mapping/graph_after_review.json": "bb24f58a94cb5341a2dfd831a0e3451dca66142691d0bd2db1407355b4ac741c",
+    "examples/review-and-mapping/REPORT_after_review.html": "33e641c1c5b7d718034671829b0575b927848d1d947636c1c94d3e08775b3b88",
+    "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+    "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d"
+   },
+   "supporting_files": {
+    ".gitattributes": "f3ee8f1bb5e3bf3b7b28985396169fb0d81b971fe68db6580c59e25e693d5e43",
+    "data/features.json": "558895ddcf628368c7835e567e7791a812a27d1ff15619aa82744fb9f6f73e6d",
+    "docs/REVIEW_LOOP.md": "c474ba3e5bc2542adc83f1d07a3dd207da2a098ae290ca3e444c9015c98e5c78",
+    "docs/SCRIPTS.md": "5deee8824dcb706f31496747a2153e7e5f1ee74ecdeba73ef51ef24ed15c88e3",
+    "examples/review-and-mapping/README.md": "3857b43387f40154e3a0039af68a35fca37ecb4911cba7c8a2635dbc72aebf40",
+    "scripts/map_points.py": "4f71060867f1e21bd69e1a7bb6ef3655f41b3fc4733771078204b8a9069929b9",
+    "scripts/test_map_points.py": "7877077d7c0ca21816e8386425e2d53a29dbaaf54b3df32aef39be4a2243a1c6",
+    "data/io_lists/open100_sheet0_demo.csv": "8cf3457547537d7113cc52f6c5ef44b70d668d08295afc7bca7cec95a6aec857",
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "examples/own-drawing/manifest.json": "fb92b0ad0194687c1872cc35c06bdc5aea4b1382e87a5e7218072758e707f0df",
+    "examples/own-drawing/extraction_sheet0.json": "fbb9c92c322c0b4dd8e5a48482b0dc13c52a3144f92c3c77c5f2d4a308d571de",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/map_pi_points.py": "39caad8b1e5c24a8c74d6e692dbeb3dd5dcb1e3e479a7ca247d3355c1598080b"
+   },
+   "findings": [],
+   "resolution": "No unresolved substantive finding in the bounded OPC mapping-source repair. Current assignments and plans retain the exact original CSV fingerprint and physical line spans while preserving the address matcher, partial/replacement and refusal contracts. Independent controls evidence records 47 actual CLI commands and 166 passing assertions; the manager reader records nine private commands plus two final dry-run report checks, with apply/overwrite source-read only by that reader. Only mapping_dry_run.md changes among seven registered outputs. Six other outputs and their historical PI, review-kit, review, human/native limits are retained rather than relabeled as newly reproduced.",
+   "resolved_findings": [
+    {
+     "id": "MPS-01",
+     "locators": [
+      "scripts/map_points.py:57-80",
+      "scripts/map_points.py:125-169",
+      "scripts/map_points.py:246-254"
+     ],
+     "resolution": "CSV physical spans replace misleading enumerate labels and propagate through assignments/worklists/errors; source metadata is outside row dictionaries."
+    },
+    {
+     "id": "MPS-02",
+     "locators": [
+      "scripts/map_points.py:63-80",
+      "scripts/map_points.py:163-166",
+      "scripts/map_points.py:212-232"
+     ],
+     "resolution": "CLI fingerprints and parses the same read snapshot. Report retains basename/bytes/digest; assigned data_point retains digest/lines. Partial omission retains previous evidence."
+    },
+    {
+     "id": "MPS-03",
+     "locators": [
+      "scripts/map_points.py:1-27",
+      "docs/REVIEW_LOOP.md:1-19",
+      "docs/REVIEW_LOOP.md:134-166",
+      "examples/review-and-mapping/README.md:1-8",
+      "examples/review-and-mapping/README.md:54-80",
+      "README.md:79-80",
+      "data/features.json review-and-mapping"
+     ],
+     "resolution": "Current copy describes supplied address assignment and traceable source records. Source match/fingerprint is explicitly separate from authority, plant truth, signal identity and connectivity. Unmatched source rows are reconciliation work, not proof of plant points."
+    }
+   ],
+   "checks": [
+    "Verified exact raw hashes of the immutable original baseline and final controls proofs, every named controls leaf/harness proof, the manager final proof and its nine-command predecessor. Baseline mapper hash matches the original public baseline; current mapper/test/support hashes match the final independent proof. No executable proof or application command was run by this closeout.",
+    "Verified the controls leaf contains 44 actual CLI run records and 166 passing assertions, plus three actual golden-example run records whose mapping stdout matches the changed committed report. Current controls bind the same final mapper hash and the original immutable baseline. These are the separate independent controls reader executions, not new closeout executions.",
+    "The controls cover physical spans through blank/multiline/BOM/CR/LF records, raw source-only changes, metadata-column spoofing, mapped/unmatched/ambiguous/blocked worklists, duplicates and malformed inputs, partial/replacement behavior, actual apply, repetition and refusal-byte preservation. Ordinary dict planner callers retain logical row labels and do not receive invented file hashes or physical spans.",
+    "Verified manager nine-command and two-current-dry-run proof attribution on the same final code. The manager independently observed exact report reproduction, 25 mapped/10 missing input/2 unmatched/0 ambiguous, physical locators and source-only changes. The manager did not execute CLI apply/overwrite; that branch was source-read and is not presented as its runtime test.",
+    "Verified all seven registered output hashes. Only examples/review-and-mapping/mapping_dry_run.md changes; the other six are also raw-byte-identical to baseline. The synthetic source CSV remains exact baseline bytes. Its fixture-specific LF attribute supports reproducible raw fingerprints and does not normalize arbitrary input CSVs.",
+    "Reviewed the final source-retention and report-lifetime paragraphs. A successful local apply replaces current model/report snapshots; an engineer must archive originals and reviewed plans with the investigation or company record when they need history. Source fingerprints and supplied addresses establish neither authority nor plant truth, OPC validity, connectivity, unit/scaling consistency or signal identity. Unmatched records require reconciliation rather than proving a physical plant point.",
+    "Kept the exact separately executed downstream scope: graph export retained source_sha256/source_lines claims; generation preserved model bytes and address outputs when only provenance fields differed. This is limited offline retention on a fictional address, not native gateway/PI acceptance or a general downstream contract.",
+    "Excluded whole README.md and docs/FEATURES.md bindings because their captured generated-status snapshots predate receipt/catalog regeneration. Current feature wording is bound through data/features.json and its checked review-and-mapping canonical claim hash. No other feature or matrix verdict is renewed; a separately running full suite is not claimed complete by this receipt."
+   ],
+   "independent_controls_evidence": {
+    "reviewer": "Independent AI controls_reader persona; fictional software-controls audit, not human engineering review",
+    "final_proof_sha256_raw": "1e20ff55eece35a5e82231adf36d8c3ac09734bf656ba9c2e0cee573145fc1d3",
+    "baseline_proof_sha256_raw": "0e6e32264f807d21834b7410a8ca22572debccd3ccc4b4e13015ab1b63cb0b22",
+    "current_adversarial_cli_commands": 44,
+    "golden_example_cli_commands": 3,
+    "total_current_cli_commands": 47,
+    "assertions": 166,
+    "all_passed": true,
+    "actual_current_controls_sha256_raw": "58c202c5c936ec3b1b993eea73767d272262e76fbb1b3a39a5fa4cbab1477d42",
+    "actual_golden_controls_sha256_raw": "0412e4e22fcf507f1bc933a39de7df36457664400af7437530f13d095df1c14d",
+    "current_mapper_sha256_raw": "4f71060867f1e21bd69e1a7bb6ef3655f41b3fc4733771078204b8a9069929b9",
+    "scope": "Fictional software/source-reference controls, actual local apply/refusal and limited offline downstream retention. No human/site or native/runtime verification."
+   },
+   "manager_reader_evidence": {
+    "review_kind": "AI first-engineer/source-handoff reader exercise, not adoption, native signal testing or engineering sign-off",
+    "final_proof_sha256_raw": "f16308790b7799062e12550c494e80477b5f10691344f0799742ffea6b3b6756",
+    "prior_actual_checks_sha256_raw": "551e059f53ff715eefdff41a6c5994353cef42fcc4b9a64ac29d008a30f66045",
+    "private_commands": 9,
+    "final_dry_run_reports": 2,
+    "apply_overwrite_validation": "source-read only by this reader",
+    "remaining_consequential_issues": [],
+    "scope": "AI first-engineer/source-handoff reader exercise, not human adoption, independent source authority, live signal testing or engineering sign-off."
+   },
+   "prior_review_scope": {
+    "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+    "date": "2026-10-29",
+    "resolution": "README workflow reproduced byte-for-byte by test_deliverable_report, apply_review custom checks, 19 map_points, 15 PI mapping, 8 review-kit tests pass. Illustrative decisions, invented corrected tag, synthetic I/O and unrun timer clearly labelled. Actual model remains unchanged on dry-run. Final README reproduction and all 55 custom apply_review checks pass. REVIEW_LOOP explicitly warns valid rows apply even when refused rows cause exit 1, calls for dry-run and record/model-diff inspection; this matches the tested behavior.",
+    "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer.",
+    "archived_record_sha256_raw": "b4b3d252db4f685c8ebf5507d35d836a63d0c0ab8af396c8ea19de6f4bfeb61d",
+    "archive_method": "Exact prior public review object retained as a JSON value and privately serialized. Hash identifies the archived record copy, not original submission formatting.",
+    "unchanged_outputs": {
+     "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+     "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+     "examples/review-and-mapping/graph_after_review.json": "bb24f58a94cb5341a2dfd831a0e3451dca66142691d0bd2db1407355b4ac741c",
+     "examples/review-and-mapping/REPORT_after_review.html": "33e641c1c5b7d718034671829b0575b927848d1d947636c1c94d3e08775b3b88",
+     "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+     "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d"
+    },
+    "preserved": "Earlier six-output artifact, review application, PI mapping and review-kit validations retain their original scope. Current golden reproduction only reruns the three-command mapping path. Historical human/native/runtime gaps are not renewed or filled."
+   },
+   "control_results": {
+    "registered_outputs": 7,
+    "registered_outputs_changed": 1,
+    "registered_outputs_retained_from_prior_scope": 6,
+    "source_controls_actual_CLIs": 47,
+    "source_controls_assertions": 166,
+    "manager_private_commands": 9,
+    "manager_final_dry_runs": 2,
+    "new_execution_by_evidence_closeout": 0,
+    "native_imports": 0,
+    "matrix_cell_runs": 0
+   },
+   "feature_claims_canonical_json_sha256": "08c064b984b5118768165bdc5526ee18f0065dd7dff0fc162d8c6d6d94631774",
+   "feature_claims_hash_method": "SHA-256 of sorted-key compact UTF-8 JSON for the id/title/job/you_need/time/you_get/why claim object captured in the manager proof.",
+   "excluded_whole_file_bindings": {
+    "README.md": "Captured generated-table/status snapshot is historical, not a current whole-file binding.",
+    "docs/FEATURES.md": "Captured generated-table/status snapshot is historical, not a current whole-file binding."
+   },
+   "limits": [
+    "This is a bounded OPC source-reference repair and one-feature review. No new dataset/source family, engineering accuracy metric, benchmark, method tuning, matrix renewal, governance service or operational benefit evidence.",
+    "The synthetic example and fictional adversarial addresses are software fixtures. Exact source bytes and physical spans do not establish document authority, installed identity, valid OPC syntax, connectivity, units, scaling or correct signal meaning; those remain engineering checks.",
+    "PI mapping keeps its separate existing reviewed-point contract. The new OPC fields do not imply PI source binding or renew prior PI/native/human approvals. No live gateway, PI import, plant/customer data or equipment operation is claimed.",
+    "The local tool is an on-ramp/source-traceability workbench. Retain original CSVs, reviewed plans and the next recipient with the company investigation/decision record; current mapping reports are overwritten snapshots, not a company decision-history or approval system.",
+    "Model/report writes retain the existing filesystem contract. This evidence does not establish a crash-safe multi-file transaction, concurrent-writer lock or live synchronization service.",
+    "The controls and manager executions are attributed to their immutable proofs. This separate closeout only read/hashed evidence and current files; it reran no mapper, test, source or downstream command. A separately running full suite has its own result and is not certified here.",
+    "The previous review limits remain: no repeated commercial model extraction, full historian corpus, real-plant validation, timed human review or native gateway/PI import. Older unrelated example outputs are hash-preserved, not newly reproduced."
+   ],
+   "private_proof_hash_method": "Exact raw SHA-256 for every named private evidence file; no line-ending normalization.",
+   "private_proof_hashes": {
+    "controls-final-review.json": "1e20ff55eece35a5e82231adf36d8c3ac09734bf656ba9c2e0cee573145fc1d3",
+    "baseline-proof.json": "0e6e32264f807d21834b7410a8ca22572debccd3ccc4b4e13015ab1b63cb0b22",
+    "pid-opc-source-reader-final-proof-20261030.json": "f16308790b7799062e12550c494e80477b5f10691344f0799742ffea6b3b6756",
+    "pid-opc-source-reader-proof-20261030.json": "551e059f53ff715eefdff41a6c5994353cef42fcc4b9a64ac29d008a30f66045",
+    "prior-review-and-mapping-record.json": "b4b3d252db4f685c8ebf5507d35d836a63d0c0ab8af396c8ea19de6f4bfeb61d",
+    "actual-current-controls.json": "58c202c5c936ec3b1b993eea73767d272262e76fbb1b3a39a5fa4cbab1477d42",
+    "actual-golden-controls.json": "0412e4e22fcf507f1bc933a39de7df36457664400af7437530f13d095df1c14d",
+    "review_current.py": "89837b248edea976d11596bd781cd94b705d86690e31c0a55fe6c8c8564a76c9",
+    "raw-proof-check-results.json": "8e98d359f61e81b8b4148f7ca120d85b9f226d470c40ef5f017f937abbad5f2b"
+   }
   }
  ]
 }
