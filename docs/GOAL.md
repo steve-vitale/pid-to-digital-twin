@@ -595,3 +595,33 @@ The resulting [current sheet-0 packet](../examples/statement-review/bound-sheet0
 receipt in `data/reviews.json` and [journal 68](JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context)
 record this maintenance increment. The [organizational lifecycle](CONTEXT_LIFECYCLE.md) sets the next integration
 acceptance target; local binding controls do not establish that a live hub or ongoing document synchronization exists.
+
+### Maintenance acceptance: retain unplaced asset semantics and context history
+
+2026-10-29. Development repairs to inspected failures, not a new blind benchmark. Existing DEXPI dialect repairs
+already read the control functions that the original reader missed. Do not retune the remaining IEC-category
+truth-definition issue or change the matrix's pre-registered pass criteria.
+
+1. A known `unplaced` item's recorded `kind` survives graph export when the graph contract supports that kind.
+   An instrument remains an instrument and a final element remains a final element. Unknown/legacy kinds retain
+   an explicit fallback; no owning unit, plant verification or physical connection is invented.
+2. A controller's explicit `measurement_unplaced` or `output_unplaced` reference becomes the corresponding typed
+   control relationship when the target is a represented, appropriate asset. Keep the original reference claim,
+   source and placement uncertainty. Missing or incompatible targets must not become guessed edges or disappear.
+3. Check the changed projection against original XML and the reader model on concrete public exports, including
+   Comos I04V01 FIC-04 / FV-04. Broader cached-file checks retain refusals and report scope/counts; these files
+   have already been inspected and are development evidence. Existing graph examples must still reproduce.
+4. Refreshing into a folder containing nonempty context decision/ownership history without `--register` refuses
+   before writes. Initial prepare-to-first-apply with an empty history remains supported.
+5. A destination register's retained histories may not be discarded by supplying an older or divergent register.
+   Preserve every prior record unchanged and in order, or refuse before writes and use a separate output folder.
+   There is no automatic branch merge, reset bypass or inferred authority.
+6. Validate known destination/input conflicts before writing any output. Refusal preserves the existing register,
+   readable reports and base/source inputs. Explicit current-register refresh and idempotent repetition still work;
+   actual source changes still reopen only their dependent answers while retaining history.
+7. Demonstrate history preservation/refusal through the actual CLI on the public NIST packet and with focused
+   illustrative controls for ownership and divergent branches. No source original is edited; historical examples,
+   review verdicts and scoring criteria remain records of their original runs.
+8. Independently review the frozen code and exact new examples, rerun affected matrix cells with their original
+   criteria/tool hashes, and run the appropriate registered tests. These are local software/source checks, not
+   adoption, authenticated approval, concurrent-service guarantees or an incumbent integration.

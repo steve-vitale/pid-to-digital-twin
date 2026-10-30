@@ -92,6 +92,13 @@ class GraphExport(unittest.TestCase):
             fresh = json.dumps(gx.build(ROOT / model), indent=1, ensure_ascii=False) + "\n"
             self.assertEqual(fresh, (EX / out).read_text(encoding="utf-8"), out)
 
+    def test_actual_unplaced_dexpi_packet_runs_offline_with_stdlib(self):
+        result = subprocess.run([sys.executable, "-S", str(EX / "unplaced-dexpi/check_packet.py")],
+                                cwd=ROOT, capture_output=True, encoding="utf-8", timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("2 complete derived models", result.stdout)
+        self.assertIn("NOT CHECKED: original XML", result.stdout)
+
     def test_every_example_validates_and_has_no_local_path(self):
         for f in sorted(EX.glob("*.json")):
             g = json.loads(f.read_text(encoding="utf-8"))
@@ -149,6 +156,63 @@ class GraphExport(unittest.TestCase):
         c = gx.claims(item, "the model's document")[0]
         self.assertEqual(c["source"]["kind"], "model")
         self.assertIn("no source of its own", c["source"]["note"])
+
+    def test_unplaced_roles_and_control_paths_survive_without_inventing_units(self):
+        c = {"tag": "FIC-04", "measurement_unplaced": "FT-04", "output_unplaced": ["FV-04", "FV-05"],
+             "source": "XML InformationFlow-1; interpreted by reader", "verification": {"status": "unverified"}}
+        unplaced = [{"tag": tag, "kind": kind, "unit": None, "unit_basis": "no reachable equipment",
+                     "source": "XML " + tag} for tag, kind in
+                    (("FT-04", "instrument"), ("FV-04", "final_element"), ("FV-05", "final_element"),
+                     ("HV-1", "manual_valve"), ("PSV-1", "relief_device"), ("UNK-1", "future_role"))]
+        g = build_from(hand_built(controllers=[c], unplaced=unplaced))
+        self.assertEqual(gx.problems(g), [])
+        nodes = {n["id"]: n for n in g["nodes"]}
+        for item in unplaced:
+            nd = nodes[item["tag"]]
+            self.assertEqual(nd["kind"], "line_item" if item["tag"] == "UNK-1" else item["kind"])
+            self.assertEqual(nd["placement"], item["unit_basis"])
+            self.assertEqual(nd["status"], "unverified")
+            self.assertEqual({a["name"]: a["value"] for a in nd["attributes"]}["kind"], item["kind"])
+        self.assertEqual([(e["type"], e["from"], e["to"]) for e in g["edges"]],
+                         [("controls", "FT-04", "FIC-04"), ("controls", "FIC-04", "FV-04"),
+                          ("controls", "FIC-04", "FV-05")])
+        for e in g["edges"]:
+            self.assertEqual(e["status"], "unverified")
+            self.assertEqual(e["source"]["document"], c["source"])
+        attrs = {a["name"]: a["value"] for a in nodes["FIC-04"]["attributes"]}
+        self.assertEqual(attrs["measurement_unplaced"], "FT-04")
+        self.assertEqual(attrs["output_unplaced"], ["FV-04", "FV-05"])
+        # Scalar output and duplicate references agree with the same typed path, without parallel duplicates.
+        c["output_unplaced"] = "FV-04"
+        c["measurement_unplaced"] = ["FT-04", "FT-04"]
+        g = build_from(hand_built(controllers=[c], unplaced=unplaced))
+        self.assertEqual(len(g["edges"]), 2)
+
+    def test_unplaced_reference_errors_refuse_before_overwriting_graph(self):
+        for target in ("MISSING", "HV-1", ["FV-1", "MISSING"], ["FV-1", None], {"tag": "FV-1"}, 1):
+            m = hand_built(controllers=[{"tag": "FIC-1", "output_unplaced": target}],
+                           unplaced=[{"tag": "FV-1", "kind": "final_element"},
+                                     {"tag": "HV-1", "kind": "manual_valve"}])
+            with tempfile.TemporaryDirectory() as folder:
+                inp, out = Path(folder) / "model.json", Path(folder) / "graph.json"
+                inp.write_text(json.dumps(m), encoding="utf-8")
+                out.write_bytes(b"existing graph must survive")
+                before = {p.name: p.read_bytes() for p in Path(folder).iterdir()}
+                code, text = run_cli(inp, "--out", out)
+                self.assertEqual(code, 1, text)
+                self.assertIn("output_unplaced", text)
+                self.assertEqual({p.name: p.read_bytes() for p in Path(folder).iterdir()}, before)
+        # A valve cannot be silently reinterpreted as the controller's measurement.
+        with self.assertRaisesRegex(ValueError, "measurement_unplaced.*instrument"):
+            build_from(hand_built(controllers=[{"tag": "FIC-1", "measurement_unplaced": "FV-1"}],
+                                  unplaced=[{"tag": "FV-1", "kind": "final_element"}]))
+
+    def test_explicit_unknown_unplaced_role_is_not_inferred_from_legacy_class(self):
+        m = hand_built(unplaced=[{"tag": "X", "kind": "unknown", "dexpi_class": "OperatedValve"},
+                                {"tag": "Y", "actuated": True}])
+        nodes = {n["id"]: n for n in build_from(m)["nodes"]}
+        self.assertEqual(nodes["X"]["kind"], "line_item")
+        self.assertEqual(nodes["Y"]["kind"], "final_element")
 
     def test_extracted_example_keeps_drawing_provenance(self):
         g = json.loads((EX / "sheet0_graph.json").read_text(encoding="utf-8"))

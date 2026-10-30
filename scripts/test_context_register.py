@@ -69,6 +69,10 @@ class ContextRegister(unittest.TestCase):
     def read(self, name="bundle/context.json"):
         return json.loads((self.root / name).read_text(encoding="utf-8"))
 
+    def all_bytes(self):
+        return {p.relative_to(self.root).as_posix(): p.read_bytes()
+                for p in self.root.rglob("*") if p.is_file()}
+
     def prepared(self):
         self.invoke("prepare")
 
@@ -122,6 +126,160 @@ class ContextRegister(unittest.TestCase):
         self.apply()
         self.assertEqual(before, {p.name: p.read_bytes() for p in (self.root / "bundle").iterdir()})
         self.assertEqual(len(self.read()["decisions"]), 1)
+
+    def test_first_apply_without_register_can_fill_prepared_empty_history(self):
+        self.prepared()
+        self.answers(self.row())
+        before_inputs = {name: (self.root / name).read_bytes() for name in (
+            "model.json", "questions.json", "sources.json", "manual.txt", "schedule.txt", "filled.csv")}
+        self.invoke("apply", answers="filled.csv")
+        doc = self.read()
+        self.assertEqual(len(doc["decisions"]), 1)
+        self.assertEqual(len(doc["ownership_history"]), 1)
+        self.assertEqual(self.state(doc)["state"], "answered")
+        self.assertEqual(before_inputs, {name: (self.root / name).read_bytes() for name in before_inputs})
+
+    def test_nonempty_destination_requires_register_even_for_identical_answers(self):
+        self.prepared()
+        self.answers(self.row())
+        self.apply()
+        for command, answers in (("apply", None), ("apply", "filled.csv"), ("prepare", None)):
+            with self.subTest(command=command, answers=answers):
+                before = self.all_bytes()
+                _, error = self.invoke(command, answers=answers, expected=2)
+                self.assertIn("--register", error)
+                self.assertIn("current destination context.json", error)
+                self.assertIn("new output directory", error)
+                self.assertEqual(before, self.all_bytes())
+
+    def test_ownership_only_destination_requires_register_before_any_write(self):
+        self.prepared()
+        row = {c: "" for c in cr.COLUMNS}
+        row.update(question_id="Q1@P-1", owner="example-owner", assigned_by="example-coordinator",
+                   assigned_on="2026-10-29")
+        self.answers(row)
+        self.assertEqual(self.apply()["decisions"], [])
+        before = self.all_bytes()
+        _, error = self.invoke("apply", expected=2)
+        self.assertIn("retained history", error)
+        self.assertEqual(before, self.all_bytes())
+
+    def test_older_register_cannot_remove_newer_destination_decisions(self):
+        self.prepared()
+        self.answers(self.row())
+        self.write("older.json", self.apply())
+        self.answers(self.row(value="55 kPa", note="ILLUSTRATIVE later correction."))
+        self.assertEqual(len(self.apply()["decisions"]), 2)
+        before = self.all_bytes()
+        _, error = self.invoke("apply", register="older.json", expected=2)
+        self.assertIn("decisions", error)
+        self.assertIn("unchanged ordered history prefix", error)
+        self.assertIn("new output directory", error)
+        self.assertEqual(before, self.all_bytes())
+
+    def test_older_register_cannot_remove_newer_ownership_only_history(self):
+        self.prepared()
+        row = {c: "" for c in cr.COLUMNS}
+        row.update(question_id="Q1@P-1", owner="example-owner", assigned_by="example-coordinator",
+                   assigned_on="2026-10-29")
+        self.answers(row)
+        self.write("older.json", self.apply())
+        row["owner"] = "next-example-owner"
+        self.answers(row)
+        doc = self.apply()
+        self.assertEqual(doc["decisions"], [])
+        self.assertEqual(len(doc["ownership_history"]), 2)
+        before = self.all_bytes()
+        _, error = self.invoke("apply", register="older.json", expected=2)
+        self.assertIn("ownership_history", error)
+        self.assertEqual(before, self.all_bytes())
+
+    def test_divergent_decision_branch_cannot_replace_destination(self):
+        self.prepared()
+        self.answers(self.row())
+        divergent = self.apply()
+        rec = divergent["decisions"][0]
+        rec.update(value="99 kPa", note="ILLUSTRATIVE independently edited branch.")
+        rec["id"] = cr.record_id(rec, "d-")
+        cr.validate_register(divergent)
+        self.write("divergent.json", divergent)
+        before = self.all_bytes()
+        _, error = self.invoke("apply", register="divergent.json", expected=2)
+        self.assertIn("decisions", error)
+        self.assertIn("not merged or reset", error)
+        self.assertEqual(before, self.all_bytes())
+
+    def test_matching_decisions_do_not_allow_divergent_ownership(self):
+        self.prepared()
+        self.answers(self.row())
+        divergent = self.apply()
+        rec = divergent["ownership_history"][0]
+        rec["owner"] = "other-example-owner"
+        rec["id"] = cr.record_id(rec, "o-")
+        cr.validate_register(divergent)
+        self.write("divergent.json", divergent)
+        before = self.all_bytes()
+        _, error = self.invoke("apply", register="divergent.json", expected=2)
+        self.assertIn("ownership_history", error)
+        self.assertEqual(before, self.all_bytes())
+
+    def test_independent_history_records_must_retain_their_order(self):
+        baseline = self.two_accepted()
+        for field in ("decisions", "ownership_history"):
+            with self.subTest(field=field):
+                reordered = copy.deepcopy(baseline)
+                reordered[field].reverse()
+                cr.validate_register(reordered)  # Independent question chains remain structurally valid.
+                self.write("reordered.json", reordered)
+                before = self.all_bytes()
+                _, error = self.invoke("apply", register="reordered.json", expected=2)
+                self.assertIn(field, error)
+                self.assertEqual(before, self.all_bytes())
+
+    def test_invalid_or_foreign_destination_is_never_overwritten(self):
+        self.prepared()
+        self.answers(self.row())
+        baseline = self.apply()
+        self.write("valid.json", baseline)
+        malformed = copy.deepcopy(baseline)
+        rec = malformed["decisions"][0]
+        rec["reviewer"] = []
+        rec["id"] = cr.record_id(rec, "d-")
+        cases = ("not JSON\n", "[]\n", '{"schema":"different-document"}\n',
+                 '{"schema":"context-register-1","decisions":[],"decisions":[],"ownership_history":[]}\n',
+                 json.dumps(malformed))
+        for content in cases:
+            for supplied in (None, "valid.json"):
+                with self.subTest(content=content[:80], supplied=supplied):
+                    (self.root / "bundle/context.json").write_text(content, encoding="utf-8")
+                    before = self.all_bytes()
+                    _, error = self.invoke("apply", register=supplied, expected=2)
+                    self.assertIn("existing destination context.json is invalid", error)
+                    self.assertEqual(before, self.all_bytes())
+
+    def test_newer_register_can_extend_destination_without_merging(self):
+        self.prepared()
+        self.answers(self.row())
+        old = self.apply()
+        self.answers(self.row(value="55 kPa"))
+        self.invoke("apply", out="advanced", register="bundle/context.json", answers="filled.csv")
+        newer = self.read("advanced/context.json")
+        self.assertEqual(newer["decisions"][:len(old["decisions"])], old["decisions"])
+        self.invoke("apply", register="advanced/context.json")
+        self.assertEqual(self.read(), newer)
+        before = self.all_bytes()
+        self.refresh()
+        self.assertEqual(before, self.all_bytes())
+
+    def test_editable_caches_and_json_format_do_not_count_as_history_changes(self):
+        baseline = self.two_accepted()
+        self.write("retained.json", baseline)
+        cached = copy.deepcopy(baseline)
+        cached["current"] = {"old-cache": {"state": "unanswered"}}
+        cached["sources"] = []
+        (self.root / "bundle/context.json").write_text(json.dumps(cached, sort_keys=True), encoding="utf-8")
+        self.invoke("apply", register="retained.json")
+        self.assertEqual(self.read(), baseline)
 
     def test_separate_roles_can_have_same_person_and_ownership_is_explicit(self):
         self.prepared()

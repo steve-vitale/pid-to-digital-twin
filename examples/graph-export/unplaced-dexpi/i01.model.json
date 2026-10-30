@@ -1,0 +1,1850 @@
+{
+ "meta": {
+  "model_id": "I01V01-SAG.EX01",
+  "title": "DEXPI XML I01V01-SAG.EX01.xml",
+  "source_document": "DEXPI XML file I01V01-SAG.EX01.xml, SHA-256 72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985",
+  "model_kind": "dexpi_import",
+  "converted_by": "scripts/dexpi_reader.py (no model; every item cites its XML element ID)",
+  "dexpi_file": {
+   "SchemaVersion": "4.0.1",
+   "OriginatingSystem": "Comos",
+   "Date": "2016-09-01",
+   "Time": "13:38:17",
+   "Is3D": "no",
+   "Units": "mm",
+   "Discipline": "PID"
+  },
+  "drawing": {},
+  "plant_structure": [],
+  "not_a_drawing_of_record": "Converted from an exported file. Nothing here is verified by anyone; units of instruments and valves are inferred through the piping (unit_basis).",
+  "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0"
+ },
+ "units": [
+  {
+   "id": "T100",
+   "name": "Tank",
+   "type": "tank",
+   "type_basis": "exact",
+   "dexpi_class": "Tank",
+   "dexpi_id": "XMP_1",
+   "id_basis": "TagName XML attribute",
+   "source": "DEXPI XML XMP_1 (Tank)",
+   "SystemUID": {
+    "value": "A3SRIN9FKD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute SystemUID"
+   },
+   "Description": {
+    "value": "Tank",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute Description"
+   },
+   "Name": {
+    "value": "T100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute Name"
+   },
+   "FullName": {
+    "value": "=A10.A10.A15T100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute FullName"
+   },
+   "Label": {
+    "value": "T100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute Label"
+   },
+   "FullLabel": {
+    "value": "=A10.A10.A15T100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute FullLabel"
+   },
+   "AliasFullLabel": {
+    "value": "=A10.A10.A15T100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute AliasFullLabel"
+   },
+   "PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA10§>08PT100",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute PathFullName"
+   },
+   "ComosClass": {
+    "value": "P",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComosClass"
+   },
+   "ComosDetailClass": {
+    "value": "A",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComosDetailClass"
+   },
+   "ComosRIClass": {
+    "value": "S",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComosRIClass"
+   },
+   "CylinderLength": {
+    "value": "8",
+    "uom": "Metre",
+    "source": "DEXPI XML XMP_1 GenericAttribute CylinderLength"
+   },
+   "NominalDiameter": {
+    "value": "2",
+    "uom": "Metre",
+    "source": "DEXPI XML XMP_1 GenericAttribute NominalDiameter"
+   },
+   "SymbolRegistrationNumberAssignmentClass": {
+    "value": "ISO10628-X2062A-A01",
+    "source": "DEXPI XML XMP_1 GenericAttribute SymbolRegistrationNumberAssignmentClass"
+   },
+   "TagNamePrefixAssignmentClass": {
+    "value": "T",
+    "source": "DEXPI XML XMP_1 GenericAttribute TagNamePrefixAssignmentClass"
+   },
+   "TagNameSequenceNumberAssignmentClass": {
+    "value": "100",
+    "source": "DEXPI XML XMP_1 GenericAttribute TagNameSequenceNumberAssignmentClass"
+   },
+   "RDL - ID": {
+    "value": "RDS445139",
+    "source": "DEXPI XML XMP_1 GenericAttribute RDL - ID"
+   },
+   "RDL - URI": {
+    "value": "http://data.posccaesar.org/rdl/RDS445139",
+    "source": "DEXPI XML XMP_1 GenericAttribute RDL - URI"
+   },
+   "ComponentClass": {
+    "value": "Tank",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComponentClass"
+   },
+   "Allow multiple placement": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_1 GenericAttribute Allow multiple placement"
+   },
+   "Graphical connector mapping": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_1 GenericAttribute Graphical connector mapping"
+   },
+   "Pipe cut mode": {
+    "value": "Pipe separative",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_1 GenericAttribute Pipe cut mode"
+   },
+   "Agitator": {
+    "value": "No agitator",
+    "attribute_set": "Accessories",
+    "source": "DEXPI XML XMP_1 GenericAttribute Agitator"
+   },
+   "Labeling": {
+    "value": "No labeling",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_1 GenericAttribute Labeling"
+   },
+   "Sandbox ID": {
+    "value": "RDS445139",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute Sandbox ID"
+   },
+   "Sandbox URI": {
+    "value": "http://data.posccaesar.org/rdl/RDS445139",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute Sandbox URI"
+   },
+   "Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute Only export following attributes"
+   },
+   "ComponentClass#2": {
+    "value": "Tank",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComponentClass"
+   },
+   "ComponentName": {
+    "value": "@30|M00|A50|A10|A10|A10|A10|A70",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute ComponentName"
+   },
+   "XML class": {
+    "value": "Equipment",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute XML class"
+   },
+   "TagName": {
+    "value": "T100",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute TagName"
+   },
+   "Link to mapping table": {
+    "value": "Y40M22N00001A09",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_1 GenericAttribute Link to mapping table"
+   },
+   "XMP_3:dexpi_class": {
+    "value": "Nozzle",
+    "source": "DEXPI XML XMP_3 <Nozzle>"
+   },
+   "XMP_3:SystemUID": {
+    "value": "A3SRIN9IKD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute SystemUID"
+   },
+   "XMP_3:Description": {
+    "value": "Nozzle, straight",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute Description"
+   },
+   "XMP_3:Name": {
+    "value": "N01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute Name"
+   },
+   "XMP_3:FullName": {
+    "value": "=A10.A10.A15T100N01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute FullName"
+   },
+   "XMP_3:Label": {
+    "value": "N01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute Label"
+   },
+   "XMP_3:FullLabel": {
+    "value": "=A10.A10.A15T100N01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute FullLabel"
+   },
+   "XMP_3:AliasFullLabel": {
+    "value": "=A10.A10.A15T100N01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute AliasFullLabel"
+   },
+   "XMP_3:PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA10§>08PT100§>08EN01",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute PathFullName"
+   },
+   "XMP_3:ComosClass": {
+    "value": "E",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute ComosClass"
+   },
+   "XMP_3:ComosDetailClass": {
+    "value": "<",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute ComosDetailClass"
+   },
+   "XMP_3:ComosRIClass": {
+    "value": "S",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_3 GenericAttribute ComosRIClass"
+   },
+   "XMP_3:RDL - ID": {
+    "value": "RDS415214",
+    "source": "DEXPI XML XMP_3 GenericAttribute RDL - ID"
+   },
+   "XMP_3:RDL - URI": {
+    "value": "http://posccaesar.org/rdl/RDS415214",
+    "source": "DEXPI XML XMP_3 GenericAttribute RDL - URI"
+   },
+   "XMP_3:ComponentClass": {
+    "value": "Nozzle",
+    "source": "DEXPI XML XMP_3 GenericAttribute ComponentClass"
+   },
+   "XMP_3:Allow multiple placement": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Allow multiple placement"
+   },
+   "XMP_3:Graphical connector mapping": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Graphical connector mapping"
+   },
+   "XMP_3:Sort parallel to the disconnected pipe segment": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Sort parallel to the disconnected pipe segment"
+   },
+   "XMP_3:VSUI attributes": {
+    "value": "@N;@L;@D;Y00T00135.Y00A00744;Y00T00135.Y00A00746;Y00T00135.Y00A00052;Y00T00039.Y00A00176;Y00T00039.Y00A00186",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute VSUI attributes"
+   },
+   "XMP_3:Top node of pipe structure": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Top node of pipe structure"
+   },
+   "XMP_3:Labeling": {
+    "value": "Position designation only",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_3 GenericAttribute Labeling"
+   },
+   "XMP_3:Version of standard": {
+    "value": "EN ISO 10628-2:2000",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_3 GenericAttribute Version of standard"
+   },
+   "XMP_3:Medium": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Medium"
+   },
+   "XMP_3:AggregateState": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute AggregateState"
+   },
+   "XMP_3:Abrasive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Abrasive"
+   },
+   "XMP_3:Corrosive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_3 GenericAttribute Corrosive"
+   },
+   "XMP_3:Display in equipment bar": {
+    "value": "1",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Display in equipment bar"
+   },
+   "XMP_3:Type of view": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view"
+   },
+   "XMP_3:Type of view2": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view2"
+   },
+   "XMP_3:Type of view3": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view3"
+   },
+   "XMP_3:Type of view4": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view4"
+   },
+   "XMP_3:Type of view5": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view5"
+   },
+   "XMP_3:Type of view6": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view6"
+   },
+   "XMP_3:Type of view7": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view7"
+   },
+   "XMP_3:Type of view8": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view8"
+   },
+   "XMP_3:Type of view9": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view9"
+   },
+   "XMP_3:Type of view10": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view10"
+   },
+   "XMP_3:Type of view11": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view11"
+   },
+   "XMP_3:Type of view12": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view12"
+   },
+   "XMP_3:Type of view13": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view13"
+   },
+   "XMP_3:Type of view14": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view14"
+   },
+   "XMP_3:Type of view15": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view15"
+   },
+   "XMP_3:Type of view16": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view16"
+   },
+   "XMP_3:Type of view17": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view17"
+   },
+   "XMP_3:Type of view18": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view18"
+   },
+   "XMP_3:Type of view19": {
+    "value": "Default",
+    "attribute_set": "Equipmentlist",
+    "source": "DEXPI XML XMP_3 GenericAttribute Type of view19"
+   },
+   "XMP_3:Sandbox ID": {
+    "value": "RDS415214",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute Sandbox ID"
+   },
+   "XMP_3:RDL - URI#2": {
+    "value": "http://posccaesar.org/rdl/RDS415214",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute RDL - URI"
+   },
+   "XMP_3:Registration number": {
+    "value": "X8160",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute Registration number"
+   },
+   "XMP_3:Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute Only export following attributes"
+   },
+   "XMP_3:Component class": {
+    "value": "Nozzle",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute Component class"
+   },
+   "XMP_3:ComponentName": {
+    "value": "X8160",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute ComponentName"
+   },
+   "XMP_3:XML class": {
+    "value": "Nozzle",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute XML class"
+   },
+   "XMP_3:TagName": {
+    "value": "N01",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute TagName"
+   },
+   "XMP_3:Link to mapping table": {
+    "value": "Y40M22N00001A44",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_3 GenericAttribute Link to mapping table"
+   }
+  }
+ ],
+ "streams": [
+  {
+   "id": "XMP_23",
+   "name": "Line XMP_23: T100 to BL",
+   "from": "T100",
+   "to": "BL",
+   "dexpi_id": "XMP_23",
+   "dexpi_class": "PipingNetworkSystem",
+   "source": "DEXPI XML XMP_23 (PipingNetworkSystem), segments XMP_20",
+   "from_item": "XMP_3",
+   "to_item": "XMP_12",
+   "to_end": "closed end at XMP_12: the line stops here; BL stands in because a stream needs two ends",
+   "SystemUID": {
+    "value": "A3SRIXKKKD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute SystemUID"
+   },
+   "Description": {
+    "value": "Pipe",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute Description"
+   },
+   "Name": {
+    "value": "Q002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute Name"
+   },
+   "FullName": {
+    "value": "=A10.A10.A15.Q002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute FullName"
+   },
+   "Label": {
+    "value": "Q002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute Label"
+   },
+   "FullLabel": {
+    "value": "=A10.A10.A15.Q002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute FullLabel"
+   },
+   "AliasFullLabel": {
+    "value": "=A10.A10.A15.Q002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute AliasFullLabel"
+   },
+   "PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA40§>08PQ002",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute PathFullName"
+   },
+   "ComosClass": {
+    "value": "P",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute ComosClass"
+   },
+   "ComosRIClass": {
+    "value": "S",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_23 GenericAttribute ComosRIClass"
+   },
+   "RDL - ID": {
+    "value": "RDS270359",
+    "source": "DEXPI XML XMP_23 GenericAttribute RDL - ID"
+   },
+   "RDL - URI": {
+    "value": "http://data.posccaesar.org/rdl/RDS270359",
+    "source": "DEXPI XML XMP_23 GenericAttribute RDL - URI"
+   },
+   "ComponentClass": {
+    "value": "PipingNetworkSystem",
+    "source": "DEXPI XML XMP_23 GenericAttribute ComponentClass"
+   },
+   "Graphical connector mapping": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Graphical connector mapping"
+   },
+   "Top node of pipe structure": {
+    "value": "Yes",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Top node of pipe structure"
+   },
+   "Link to base object T-piece": {
+    "value": "A10",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link to base object T-piece"
+   },
+   "Autodelete": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Autodelete"
+   },
+   "3D direction tolerance (Epsilon)": {
+    "value": "0.0000001",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute 3D direction tolerance (Epsilon)"
+   },
+   "3D length tolerance": {
+    "value": "0.1",
+    "uom": "Millimetre",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute 3D length tolerance"
+   },
+   "Medium": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Medium"
+   },
+   "AggregateState": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute AggregateState"
+   },
+   "Abrasive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Abrasive"
+   },
+   "Corrosive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_23 GenericAttribute Corrosive"
+   },
+   "Sandbox ID": {
+    "value": "RDS270359",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute Sandbox ID"
+   },
+   "RDL - URI#2": {
+    "value": "http://data.posccaesar.org/rdl/RDS270359",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute RDL - URI"
+   },
+   "Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute Only export following attributes"
+   },
+   "ComponentClass#2": {
+    "value": "PipingNetworkSystem",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute ComponentClass"
+   },
+   "ComponentName": {
+    "value": "@30|M00|A50|A10|A40|A10|A10",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute ComponentName"
+   },
+   "XML class": {
+    "value": "PipingNetworkSystem",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute XML class"
+   },
+   "TagName": {
+    "value": "Q002",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute TagName"
+   },
+   "Link to mapping table": {
+    "value": "Y40M22N00001A12",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link to mapping table"
+   },
+   "Display in piping bar": {
+    "value": "1",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Display in piping bar"
+   },
+   "Field 4": {
+    "value": "None",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 4"
+   },
+   "Field 5": {
+    "value": "/  /  m³/h",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 5"
+   },
+   "Field 6": {
+    "value": "/  /  °C",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 6"
+   },
+   "Field 7": {
+    "value": "/  /  bar",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 7"
+   },
+   "Field 8": {
+    "value": "/  °C",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 8"
+   },
+   "Field 9": {
+    "value": "/  bar",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 9"
+   },
+   "Field 12": {
+    "value": "mm",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 12"
+   },
+   "Field 13": {
+    "value": "mm",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 13"
+   },
+   "Field 16": {
+    "value": "kg",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 16"
+   },
+   "Field 17": {
+    "value": "kg",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Field 17"
+   },
+   "Type of view": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view"
+   },
+   "Type of view2": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view2"
+   },
+   "Type of view3": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view3"
+   },
+   "Type of view4": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view4"
+   },
+   "Type of view5": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view5"
+   },
+   "Type of view6": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view6"
+   },
+   "Type of view7": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view7"
+   },
+   "Type of view8": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view8"
+   },
+   "Type of view9": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view9"
+   },
+   "Type of view10": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view10"
+   },
+   "Type of view11": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view11"
+   },
+   "Type of view12": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view12"
+   },
+   "Type of view13": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view13"
+   },
+   "Type of view14": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view14"
+   },
+   "Type of view15": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view15"
+   },
+   "Type of view16": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view16"
+   },
+   "Type of view17": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view17"
+   },
+   "Type of view18": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view18"
+   },
+   "Type of view19": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Type of view19"
+   },
+   "Link": {
+    "value": "Nominal size (ND)",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link"
+   },
+   "Link2": {
+    "value": "Nominal pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link2"
+   },
+   "Link3": {
+    "value": "Pipe spec",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link3"
+   },
+   "Link4": {
+    "value": "Medium",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link4"
+   },
+   "Link5": {
+    "value": "Volume flow",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link5"
+   },
+   "Link6": {
+    "value": "Operating temp.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link6"
+   },
+   "Link7": {
+    "value": "Operating pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link7"
+   },
+   "Link8": {
+    "value": "Design temp.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link8"
+   },
+   "Link9": {
+    "value": "Design pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link9"
+   },
+   "Link10": {
+    "value": "Main constr. material",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link10"
+   },
+   "Link11": {
+    "value": "Insulation",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link11"
+   },
+   "Link12": {
+    "value": "Wall thickness",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link12"
+   },
+   "Link13": {
+    "value": "Outside diameter",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link13"
+   },
+   "Link14": {
+    "value": "Cooling/heating facility",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link14"
+   },
+   "Link15": {
+    "value": "Weight in filled condition",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link15"
+   },
+   "Link16": {
+    "value": "Empty weight",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link16"
+   },
+   "Link17": {
+    "value": "Isometric no.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link17"
+   },
+   "Link18": {
+    "value": "Lifecycle status",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_23 GenericAttribute Link18"
+   },
+   "XMP_20:dexpi_class": {
+    "value": "PipingNetworkSegment",
+    "source": "DEXPI XML XMP_20 <PipingNetworkSegment>"
+   },
+   "XMP_20:SystemUID": {
+    "value": "A3SRIXKLKD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute SystemUID"
+   },
+   "XMP_20:Description": {
+    "value": "Pipe section",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute Description"
+   },
+   "XMP_20:Name": {
+    "value": "001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute Name"
+   },
+   "XMP_20:FullName": {
+    "value": "=A10.A10.A15.Q002.001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute FullName"
+   },
+   "XMP_20:Label": {
+    "value": "001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute Label"
+   },
+   "XMP_20:FullLabel": {
+    "value": "=A10.A10.A15.Q002.001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute FullLabel"
+   },
+   "XMP_20:AliasFullLabel": {
+    "value": "=A10.A10.A15.Q002.001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute AliasFullLabel"
+   },
+   "XMP_20:PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA40§>08PQ002§>08P001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute PathFullName"
+   },
+   "XMP_20:ComosClass": {
+    "value": "P",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComosClass"
+   },
+   "XMP_20:ComosDetailClass": {
+    "value": "Q",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComosDetailClass"
+   },
+   "XMP_20:ComosRIClass": {
+    "value": "P",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComosRIClass"
+   },
+   "XMP_20:RDL - ID": {
+    "value": "RDS267704",
+    "source": "DEXPI XML XMP_20 GenericAttribute RDL - ID"
+   },
+   "XMP_20:RDL - URI": {
+    "value": "http://data.posccaesar.org/rdl/RDS267704",
+    "source": "DEXPI XML XMP_20 GenericAttribute RDL - URI"
+   },
+   "XMP_20:ComponentClass": {
+    "value": "PipingNetworkSegment",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComponentClass"
+   },
+   "XMP_20:Unit system": {
+    "value": "Metric",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Unit system"
+   },
+   "XMP_20:Graphical connector mapping": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Graphical connector mapping"
+   },
+   "XMP_20:To equipment": {
+    "value": "DI1",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute To equipment"
+   },
+   "XMP_20:From equipment": {
+    "value": "DI1",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute From equipment"
+   },
+   "XMP_20:VSUI attributes": {
+    "value": "@N;@L;@D;Y00T00041.Y00A01036;Y00T00041.Y00A01677;Y00T00041.Y00A01182;Y00T00041.Y00A01143;Y00T00041.Y00A01157;Y00T00135.Y00A00744;Y00T00135.Y00A00746;Y00T00135.Y00A00052;Y00T00039.Y00A00176;Y00T00039.Y00A00186;Y00T00039.Y00A00679",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute VSUI attributes"
+   },
+   "XMP_20:Autodelete": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Autodelete"
+   },
+   "XMP_20:Layer": {
+    "value": "10",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_20 GenericAttribute Layer"
+   },
+   "XMP_20:Line width": {
+    "value": "0.25",
+    "uom": "Millimetre",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_20 GenericAttribute Line width"
+   },
+   "XMP_20:Medium": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Medium"
+   },
+   "XMP_20:AggregateState": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute AggregateState"
+   },
+   "XMP_20:Abrasive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Abrasive"
+   },
+   "XMP_20:Corrosive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_20 GenericAttribute Corrosive"
+   },
+   "XMP_20:Sandbox ID": {
+    "value": "RDS267704",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute Sandbox ID"
+   },
+   "XMP_20:RDL - URI#2": {
+    "value": "http://data.posccaesar.org/rdl/RDS267704",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute RDL - URI"
+   },
+   "XMP_20:Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute Only export following attributes"
+   },
+   "XMP_20:ComponentClass#2": {
+    "value": "PipingNetworkSegment",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComponentClass"
+   },
+   "XMP_20:ComponentName": {
+    "value": "@30|M00|A50|A10|A40|A10|A10!A10",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute ComponentName"
+   },
+   "XMP_20:XML class": {
+    "value": "PipingNetworkSegment",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute XML class"
+   },
+   "XMP_20:TagName": {
+    "value": "001",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute TagName"
+   },
+   "XMP_20:Link to mapping table": {
+    "value": "Y40M22N00001A12",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link to mapping table"
+   },
+   "XMP_20:Flange standard": {
+    "value": "-999",
+    "attribute_set": "IDFimport",
+    "source": "DEXPI XML XMP_20 GenericAttribute Flange standard"
+   },
+   "XMP_20:Contact face": {
+    "value": "-999",
+    "attribute_set": "IDFimport",
+    "source": "DEXPI XML XMP_20 GenericAttribute Contact face"
+   },
+   "XMP_20:Nominal pressure": {
+    "value": "-999",
+    "attribute_set": "IDFimport",
+    "source": "DEXPI XML XMP_20 GenericAttribute Nominal pressure"
+   },
+   "XMP_20:Display in piping bar": {
+    "value": "1",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Display in piping bar"
+   },
+   "XMP_20:Field 4": {
+    "value": "None",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 4"
+   },
+   "XMP_20:Field 5": {
+    "value": "/  /  m³/h",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 5"
+   },
+   "XMP_20:Field 6": {
+    "value": "/  /  °C",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 6"
+   },
+   "XMP_20:Field 7": {
+    "value": "/  /  bar",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 7"
+   },
+   "XMP_20:Field 8": {
+    "value": "/  °C",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 8"
+   },
+   "XMP_20:Field 9": {
+    "value": "/  bar",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 9"
+   },
+   "XMP_20:Field 12": {
+    "value": "mm",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 12"
+   },
+   "XMP_20:Field 13": {
+    "value": "mm",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 13"
+   },
+   "XMP_20:Field 16": {
+    "value": "kg",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 16"
+   },
+   "XMP_20:Field 17": {
+    "value": "kg",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Field 17"
+   },
+   "XMP_20:Type of view": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view"
+   },
+   "XMP_20:Type of view2": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view2"
+   },
+   "XMP_20:Type of view3": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view3"
+   },
+   "XMP_20:Type of view4": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view4"
+   },
+   "XMP_20:Type of view5": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view5"
+   },
+   "XMP_20:Type of view6": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view6"
+   },
+   "XMP_20:Type of view7": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view7"
+   },
+   "XMP_20:Type of view8": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view8"
+   },
+   "XMP_20:Type of view9": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view9"
+   },
+   "XMP_20:Type of view10": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view10"
+   },
+   "XMP_20:Type of view11": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view11"
+   },
+   "XMP_20:Type of view12": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view12"
+   },
+   "XMP_20:Type of view13": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view13"
+   },
+   "XMP_20:Type of view14": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view14"
+   },
+   "XMP_20:Type of view15": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view15"
+   },
+   "XMP_20:Type of view16": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view16"
+   },
+   "XMP_20:Type of view17": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view17"
+   },
+   "XMP_20:Type of view18": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view18"
+   },
+   "XMP_20:Type of view19": {
+    "value": "Default",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Type of view19"
+   },
+   "XMP_20:Link": {
+    "value": "Nominal size (ND)",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link"
+   },
+   "XMP_20:Link2": {
+    "value": "Nominal pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link2"
+   },
+   "XMP_20:Link3": {
+    "value": "Pipe spec",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link3"
+   },
+   "XMP_20:Link4": {
+    "value": "Medium",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link4"
+   },
+   "XMP_20:Link5": {
+    "value": "Volume flow",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link5"
+   },
+   "XMP_20:Link6": {
+    "value": "Operating temp.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link6"
+   },
+   "XMP_20:Link7": {
+    "value": "Operating pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link7"
+   },
+   "XMP_20:Link8": {
+    "value": "Design temp.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link8"
+   },
+   "XMP_20:Link9": {
+    "value": "Design pressure",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link9"
+   },
+   "XMP_20:Link10": {
+    "value": "Main constr. material",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link10"
+   },
+   "XMP_20:Link11": {
+    "value": "Insulation",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link11"
+   },
+   "XMP_20:Link12": {
+    "value": "Wall thickness",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link12"
+   },
+   "XMP_20:Link13": {
+    "value": "Outside diameter",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link13"
+   },
+   "XMP_20:Link14": {
+    "value": "Cooling/heating facility",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link14"
+   },
+   "XMP_20:Link15": {
+    "value": "Weight in filled condition",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link15"
+   },
+   "XMP_20:Link16": {
+    "value": "Empty weight",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link16"
+   },
+   "XMP_20:Link17": {
+    "value": "Isometric no.",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link17"
+   },
+   "XMP_20:Link18": {
+    "value": "Lifecycle status",
+    "attribute_set": "Pipinglinelist",
+    "source": "DEXPI XML XMP_20 GenericAttribute Link18"
+   },
+   "XMP_12:dexpi_class": {
+    "value": "BlindFlange",
+    "source": "DEXPI XML XMP_12 <PipingComponent>"
+   },
+   "XMP_12:SystemUID": {
+    "value": "A3SRIVL2KD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute SystemUID"
+   },
+   "XMP_12:Description": {
+    "value": "Flange pair",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute Description"
+   },
+   "XMP_12:Name": {
+    "value": "R001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute Name"
+   },
+   "XMP_12:FullName": {
+    "value": "=A10.A10.A15.Q002.001R001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute FullName"
+   },
+   "XMP_12:Label": {
+    "value": "R001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute Label"
+   },
+   "XMP_12:FullLabel": {
+    "value": "=A10.A10.A15.Q002.001R001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute FullLabel"
+   },
+   "XMP_12:AliasFullLabel": {
+    "value": "=A10.A10.A15.Q002.001R001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute AliasFullLabel"
+   },
+   "XMP_12:PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA40§>08PQ002§>08P001§>08DR001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute PathFullName"
+   },
+   "XMP_12:ComosClass": {
+    "value": "D",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute ComosClass"
+   },
+   "XMP_12:ComosDetailClass": {
+    "value": "A",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute ComosDetailClass"
+   },
+   "XMP_12:ComosRIClass": {
+    "value": "S",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_12 GenericAttribute ComosRIClass"
+   },
+   "XMP_12:Function code": {
+    "value": "Without function code",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Function code"
+   },
+   "XMP_12:Allow multiple placement": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Allow multiple placement"
+   },
+   "XMP_12:Graphical connector mapping": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Graphical connector mapping"
+   },
+   "XMP_12:Pipe cut mode": {
+    "value": "Section separative",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Pipe cut mode"
+   },
+   "XMP_12:Sort parallel to the disconnected pipe segment": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Sort parallel to the disconnected pipe segment"
+   },
+   "XMP_12:Top node of pipe structure": {
+    "value": "0",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Top node of pipe structure"
+   },
+   "XMP_12:Labeling": {
+    "value": "Position designation only",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_12 GenericAttribute Labeling"
+   },
+   "XMP_12:Layer": {
+    "value": "10",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_12 GenericAttribute Layer"
+   },
+   "XMP_12:Version of standard": {
+    "value": "EN ISO 10628-2:2000",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_12 GenericAttribute Version of standard"
+   },
+   "XMP_12:Medium": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Medium"
+   },
+   "XMP_12:AggregateState": {
+    "value": "None",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute AggregateState"
+   },
+   "XMP_12:Abrasive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Abrasive"
+   },
+   "XMP_12:Corrosive": {
+    "value": "No",
+    "attribute_set": "Processdata",
+    "source": "DEXPI XML XMP_12 GenericAttribute Corrosive"
+   },
+   "XMP_12:Sandbox ID": {
+    "value": "RDS414719",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute Sandbox ID"
+   },
+   "XMP_12:RDL - URI": {
+    "value": "http://data.posccaesar.org/rdl/RDS414719",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute RDL - URI"
+   },
+   "XMP_12:Registration number": {
+    "value": "511",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute Registration number"
+   },
+   "XMP_12:Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute Only export following attributes"
+   },
+   "XMP_12:Component class": {
+    "value": "BlindFlange",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute Component class"
+   },
+   "XMP_12:ComponentName": {
+    "value": "511",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute ComponentName"
+   },
+   "XMP_12:XML class": {
+    "value": "PipingComponent",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute XML class"
+   },
+   "XMP_12:TagName": {
+    "value": "R001",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute TagName"
+   },
+   "XMP_12:Link to mapping table": {
+    "value": "Y40M22N00001A15",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_12 GenericAttribute Link to mapping table"
+   }
+  }
+ ],
+ "instruments": [],
+ "final_elements": [],
+ "controllers": [],
+ "manual_valves": [],
+ "relief_devices": [],
+ "unplaced": [
+  {
+   "tag": "XMP_6",
+   "unit": null,
+   "variable": "unknown",
+   "uom": "",
+   "description": "XMP_6: unknown",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "dexpi_id": "XMP_6",
+   "tag_basis": "XML ID (no unique identifier in the file)",
+   "unit_basis": "no sensor location in the file",
+   "source": "DEXPI XML XMP_6 (ProcessInstrumentationFunction)",
+   "SystemUID": {
+    "value": "A3SRITAUKD",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute SystemUID"
+   },
+   "Description": {
+    "value": "Level",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute Description"
+   },
+   "Name": {
+    "value": "001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute Name"
+   },
+   "FullName": {
+    "value": "=A10.A10.A15.01.001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute FullName"
+   },
+   "Label": {
+    "value": "LI",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute Label"
+   },
+   "FullLabel": {
+    "value": "=A10.A10.A15.01.LI",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute FullLabel"
+   },
+   "AliasFullLabel": {
+    "value": "=A10.A10.A15.01.LI",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute AliasFullLabel"
+   },
+   "PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA50§>08P01§>08F001",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute PathFullName"
+   },
+   "ComosClass": {
+    "value": "F",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute ComosClass"
+   },
+   "ComosDetailClass": {
+    "value": "W",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute ComosDetailClass"
+   },
+   "ComosRIClass": {
+    "value": "I",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_6 GenericAttribute ComosRIClass"
+   },
+   "ProcessInstrumentationFunctionNumberAssignmentClass": {
+    "value": "LI",
+    "attribute_set": "DEXPI",
+    "source": "DEXPI XML XMP_6 GenericAttribute ProcessInstrumentationFunctionNumberAssignmentClass"
+   },
+   "Group label": {
+    "value": "0101_LI",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Group label"
+   },
+   "VSUI attributes": {
+    "value": "@N;@L;@D;Y00T00007.Y00A03643;Y00T00007.Y00A03642;Y00T00007.Y00A03310;Y00T00007.Y00A03305;Y00T00007.Y00A00448;Y00T00007.Y00A00305;Y00T00007.Y00A02202",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_6 GenericAttribute VSUI attributes"
+   },
+   "Link to position": {
+    "value": "@30|M00|A25|A10|L",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Link to position"
+   },
+   "Link to component": {
+    "value": "Nozzle, straight",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Link to component"
+   },
+   "Autodelete for not-connected connectors": {
+    "value": "1",
+    "attribute_set": "Systemdata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Autodelete for not-connected connectors"
+   },
+   "Measuring value": {
+    "value": "L - Level",
+    "attribute_set": "Functiondata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Measuring value"
+   },
+   "Complete function": {
+    "value": "LI",
+    "attribute_set": "Functiondata",
+    "source": "DEXPI XML XMP_6 GenericAttribute Complete function"
+   },
+   "Labeling": {
+    "value": "No labeling",
+    "attribute_set": "Graphicaloptions",
+    "source": "DEXPI XML XMP_6 GenericAttribute Labeling"
+   },
+   "Medium": {
+    "value": "None",
+    "attribute_set": "Processdata1",
+    "source": "DEXPI XML XMP_6 GenericAttribute Medium"
+   },
+   "Aggregate state": {
+    "value": "None",
+    "attribute_set": "Processdata1",
+    "source": "DEXPI XML XMP_6 GenericAttribute Aggregate state"
+   },
+   "Abrasive": {
+    "value": "No",
+    "attribute_set": "Processdata1",
+    "source": "DEXPI XML XMP_6 GenericAttribute Abrasive"
+   },
+   "Corrosive": {
+    "value": "No",
+    "attribute_set": "Processdata1",
+    "source": "DEXPI XML XMP_6 GenericAttribute Corrosive"
+   },
+   "Medium#2": {
+    "value": "None",
+    "attribute_set": "Processdata2",
+    "source": "DEXPI XML XMP_6 GenericAttribute Medium"
+   },
+   "Aggregate state#2": {
+    "value": "None",
+    "attribute_set": "Processdata2",
+    "source": "DEXPI XML XMP_6 GenericAttribute Aggregate state"
+   },
+   "Abrasive#2": {
+    "value": "No",
+    "attribute_set": "Processdata2",
+    "source": "DEXPI XML XMP_6 GenericAttribute Abrasive"
+   },
+   "Corrosive#2": {
+    "value": "No",
+    "attribute_set": "Processdata2",
+    "source": "DEXPI XML XMP_6 GenericAttribute Corrosive"
+   },
+   "Merge active": {
+    "value": "1",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Merge active"
+   },
+   "Apply unit-/location pointer": {
+    "value": "No",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Apply unit-/location pointer"
+   },
+   "Replace": {
+    "value": "Also apply empty properties",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Replace"
+   },
+   "Mix behavior": {
+    "value": "Recursive merging",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Mix behavior"
+   },
+   "Priority": {
+    "value": "Target",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Priority"
+   },
+   "Behavior of connectors": {
+    "value": "Standard procedure",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Behavior of connectors"
+   },
+   "Behavior of subobjects": {
+    "value": "Mix subobjects",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Behavior of subobjects"
+   },
+   "Priority2": {
+    "value": "Target",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Priority2"
+   },
+   "Behavior for name/label": {
+    "value": "Take from object with priority",
+    "attribute_set": "Merge",
+    "source": "DEXPI XML XMP_6 GenericAttribute Behavior for name/label"
+   },
+   "IP 1 (solids)": {
+    "value": "Not protected",
+    "attribute_set": "Safetyrequirements",
+    "source": "DEXPI XML XMP_6 GenericAttribute IP 1 (solids)"
+   },
+   "IP-code": {
+    "value": "IP00",
+    "attribute_set": "Safetyrequirements",
+    "source": "DEXPI XML XMP_6 GenericAttribute IP-code"
+   },
+   "IP 2 (liquids)": {
+    "value": "Not protected",
+    "attribute_set": "Safetyrequirements",
+    "source": "DEXPI XML XMP_6 GenericAttribute IP 2 (liquids)"
+   },
+   "Sandbox ID": {
+    "value": "ProcessInstrumentationFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute Sandbox ID"
+   },
+   "Sandbox URI": {
+    "value": "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute Sandbox URI"
+   },
+   "Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute Only export following attributes"
+   },
+   "ComponentClass": {
+    "value": "ProcessInstrumentationFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute ComponentClass"
+   },
+   "ComponentName": {
+    "value": "@30|M00|A60|A10|A10|L",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute ComponentName"
+   },
+   "XML class": {
+    "value": "ProcessInstrumentationFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute XML class"
+   },
+   "TagName": {
+    "value": "LI",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute TagName"
+   },
+   "Link to mapping table": {
+    "value": "Y40M22N00001A45",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_6 GenericAttribute Link to mapping table"
+   },
+   "Zone": {
+    "value": "No value",
+    "attribute_set": "Serviceconditions",
+    "source": "DEXPI XML XMP_6 GenericAttribute Zone"
+   },
+   "Zone2": {
+    "value": "No value",
+    "attribute_set": "Serviceconditions",
+    "source": "DEXPI XML XMP_6 GenericAttribute Zone2"
+   },
+   "XMP_18:dexpi_class": {
+    "value": "ProcessSignalGeneratingFunction",
+    "source": "DEXPI XML XMP_18 <InformationFlow>"
+   },
+   "XMP_18:SystemUID": {
+    "value": "A3SS1F12QR",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute SystemUID"
+   },
+   "XMP_18:Description": {
+    "value": "ProcessSignalGeneratingFunction",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute Description"
+   },
+   "XMP_18:Name": {
+    "value": "A10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute Name"
+   },
+   "XMP_18:FullName": {
+    "value": "=A10.A10.A15.01.001A10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute FullName"
+   },
+   "XMP_18:Label": {
+    "value": "A10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute Label"
+   },
+   "XMP_18:FullLabel": {
+    "value": "=A10.A10.A15.01.LIA10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute FullLabel"
+   },
+   "XMP_18:AliasFullLabel": {
+    "value": "=A10.A10.A15.01.LIA10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute AliasFullLabel"
+   },
+   "XMP_18:PathFullName": {
+    "value": "08UA10§>08UA10§>08UA15§>08UA50§>08P01§>08F001§>08EA10",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute PathFullName"
+   },
+   "XMP_18:ComosClass": {
+    "value": "E",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute ComosClass"
+   },
+   "XMP_18:ComosRIClass": {
+    "value": "S",
+    "attribute_set": "ComosProperties",
+    "source": "DEXPI XML XMP_18 GenericAttribute ComosRIClass"
+   },
+   "XMP_18:SignalProcessControlFunctionsAssignmentClass": {
+    "value": "LT01",
+    "attribute_set": "DEXPI",
+    "source": "DEXPI XML XMP_18 GenericAttribute SignalProcessControlFunctionsAssignmentClass"
+   },
+   "XMP_18:Sandbox ID": {
+    "value": "ProcessSignalGeneratingFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute Sandbox ID"
+   },
+   "XMP_18:Sandbox URI": {
+    "value": "http://sandbox.dexpi.org/rdl/ProcessSignalGeneratingFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute Sandbox URI"
+   },
+   "XMP_18:Only export following attributes": {
+    "value": "0",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute Only export following attributes"
+   },
+   "XMP_18:ComponentClass": {
+    "value": "ProcessSignalGeneratingFunction",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute ComponentClass"
+   },
+   "XMP_18:ComponentName": {
+    "value": "@30|M00|A60|A10|A10|L!A10",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute ComponentName"
+   },
+   "XMP_18:XML class": {
+    "value": "InformationFlow",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute XML class"
+   },
+   "XMP_18:TagName": {
+    "value": "A10",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute TagName"
+   },
+   "XMP_18:Link to mapping table": {
+    "value": "Y40M22N00001A45",
+    "attribute_set": "Proteus",
+    "source": "DEXPI XML XMP_18 GenericAttribute Link to mapping table"
+   },
+   "unplaced_reason": "instruments need a unit; no sensor location in the file",
+   "kind": "instrument"
+  }
+ ],
+ "line_layers": {
+  "schema": "line-layers-2",
+  "method": "scripts/dexpi_reader.py from the XML's piping topology",
+  "definitions": {
+   "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between; or two items drawn against each other with nothing between (touching: no line is drawn, so the segment is on no line network unless both ends already share one)",
+   "junction": "a point where three or more drawn line arms meet. junction_kind says which: pipe_tee (three or more pipe arms: a tee or branch), instrument_tap (an instrument line meets a pipe that carries on through it: the tap sits on the pipe segment named by on_segment and does not split it), marked_crossing (a 4-arm crossing the drawing marks connected with a dot), instrument_line_junction (instrument lines meeting away from a pipe)",
+   "instrument_connection": "a drawn line that joins an instrument (its bubble) to a pipe at a tap, to an item, or to another instrument line: a leader, impulse or signal line, not a process pipe",
+   "actuated_by": "a valve and the actuator drawn stacked on it (a small symbol beside the valve box, joined only by a short stem): the stem is part of the valve, not a pipe",
+   "nozzle_of": "a nozzle mark (N1, N2...) and the vessel it sits on: the short stub between them is part of the vessel, not a pipe",
+   "line_network": "drawn lines that touch one another outside the item boxes, through bends, junctions or crossings, as the tracer joins them (its network). Lines that meet only at an item's edge can be joined: such a network names that item in joined_only_at",
+   "network_pair": "the tracer's pairwise link: both items are on the same line network (not pipe adjacency)"
+  },
+  "networks": [],
+  "junctions": [],
+  "segments": [],
+  "tees_passed_through": 0,
+  "note": "pipe items only: units (through their nozzles), valves and the battery limit (off-page connectors and open ends). Instruments are joined to the piping by measuring lines, which are not pipes; their place is in sits_on and measures."
+ }
+}

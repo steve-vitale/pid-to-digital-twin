@@ -2105,6 +2105,634 @@
     "scope": "Preserve that earlier review and its reported cell/verdict/hash/reproduction checks at their original scope. This receipt does not independently repeat those 94-cell validations or broaden their source-family, held-out, key-provenance or tool-coverage claims."
    },
    "limits": "Independent coding-agent metadata review only. No 94-cell rerun or fresh matrix performance/transfer result is claimed. Existing failed cells, n/a cases, development reuse, generated/agent-made or derived keys, partially blind baselines and other prior matrix limitations remain. The context packets have separate software/source checks and do not add matrix passes or establish human/site approval, deployment truth, engineering review time, live-service availability or organizational integration. Source notices were compared for consistency, not legally adjudicated."
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "Independent Codex agent (read-only maintenance review, original XML checks and adversarial CLI controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF; primary original-document hashes below bind raw bytes without normalization.",
+   "registered_output_count": 9,
+   "files": {
+    "examples/graph-export/bayer_graph.json": "424f95f1891a6293930b31727b5adb3447bd496ef0ff4d85df0b33a78b125659",
+    "examples/graph-export/sheet0_graph.json": "d1c1b751b204c4291e2ea58f6c2782c4a0493daa3f26969607e489bb9cfc4b2f",
+    "examples/graph-export/sheet0_graph_core.json": "c1560f253a8879e674ed77729be66fb4cc26bb5cbe51364bbfc012e99ee4cd34",
+    "examples/graph-export/te_graph.json": "a55c1eb0a677f698258da8b1aa1e272467b56d7af8f26e7db5ec5bf3753ec2de",
+    "examples/graph-export/unplaced-dexpi/i01.graph.json": "416d918998d7e898f0ee9c452a3b32bdd6e3258078c3f46ddea14c112bfe3092",
+    "examples/graph-export/unplaced-dexpi/i01.model.json": "4c7820115e4c3a08df900154565a8db54a72684b302e645407cf1f6881dbd28f",
+    "examples/graph-export/unplaced-dexpi/i04.graph.json": "25b231520028f4004bc56c9ef32bd7fc91be46ca5ac8d9fe731804d65bb62f94",
+    "examples/graph-export/unplaced-dexpi/i04.model.json": "d45563c5804f465ac8fb557c4180cc9eca5577cce5d5a2074078fde357962746",
+    "examples/graph-export/unplaced-dexpi/source_key.json": "35036f712486f92fa8b782a92f3bfe573a423060d6b17f6b8a6c497af6f695b4"
+   },
+   "supporting_files": {
+    "data/corpus_pins.json": "e802a93e20a94a8a8284be0c6614fcfc59646494b83e9655443ac1659b9a6617",
+    "docs/GOAL.md": "06f7773e9dfef3e1b090e5d4a65627fa76d86233e5b7474505d07704ac905b9f",
+    "docs/GRAPH_EXPORT.md": "5bf56a945fc85e818310e16fd0d521af275029f77994285bd45c8640f98917d5",
+    "examples/graph-export/unplaced-dexpi/.gitignore": "6aefc578c7faeccbe134016aaf69d92eddb546619600dfce60a452ab0b68be0c",
+    "examples/graph-export/unplaced-dexpi/ACCEPTANCE.md": "ed73b70b7ed072c4ed04457f61dc703fdbedc84d762252069ded6fd827dfa03c",
+    "examples/graph-export/unplaced-dexpi/README.md": "eb0e44e38565ec34d278171e40b94686a96167af940543da561c87eaa975ef4a",
+    "examples/graph-export/unplaced-dexpi/audit_corpus.py": "c7634b46b70a5f61b0f88e5df517cdd99c3d83f9280f355e1581a0b06273e41b",
+    "examples/graph-export/unplaced-dexpi/check_packet.py": "29cca37e363e76237710ddb6dba934e9f66fd7906888293dc923bfa69816fb79",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/dexpi_reader.py": "4df35b3756356349f229bd4d8c67f7215606eb096733203e744c3e5966843e96",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/line_layers.py": "ebd9766c44b86813f63b2fea06b2896add18abb1c8f56b3218b41788eb492bd4",
+    "scripts/statements.py": "007736a10a7fde22f1745117daa2f693a9fed5cb913bccf7d1169ba1ed71286c",
+    "scripts/test_graph_export.py": "cc7ced35b20f9c35faaa52d7ffd4f9b38f35fb47627a1e9e6ea759e676d7f89a"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "Actual DEXPI reader models recorded known unplaced instruments/final elements and controller references, but graph export downgraded the roles to line items and retained references only as attributes, without typed control edges.",
+     "resolution": "Known supported roles now survive separately from unresolved equipment placement. Explicit reader measurement/output references become sourced typed controls edges; their original claims remain. Nonempty malformed, missing, ambiguous or wrong-role references refuse before output writes. Explicit unknown-role and legacy absent-role behavior remain documented and tested."
+    }
+   ],
+   "resolution": "No open finding in this bounded maintenance scope. The four prior registered graphs retain their exact earlier reviewed hashes. Both new complete source-derived models and expected graphs reproduce, and the exact nine registered outputs are bound here. The repair retains reader meaning; it does not resolve equipment placement or change benchmark criteria.",
+   "checks": [
+    "Independently reproduced the pre-repair failure on original Comos I04 FIC-04/FV-04 and Comos I01 instrument records, following XML to reader model to graph and readable statement. The old graph kept source claims but lost typed meaning; graph validation alone did not catch this semantic loss.",
+    "50 independent external-scratch CLI controls pass on the exact final graph_export.py hash below. Four actual Comos/PIDToolbox originals are read into fresh models and exported through full/core profiles. Supported roles, recorded source and status, original reference claims and placement reasons remain; no unit attachment or physical truth is invented and all originals/models remain unchanged.",
+    "Independent illustrative controls verify scalar/list/split-range reference orientation and deduplication, supported manual/relief roles without invented attachments, explicit unknown role remaining generic, and absent-role legacy fallback. These planted cases are software controls, not primary-source observations.",
+    "Missing targets, wrong-role measurement/output targets, mixed valid/dangling lists, object-valued references, malformed list members and ambiguous duplicate targets refuse through the actual CLI before any known input/output byte changes. None, empty string and empty list optional references remain accepted.",
+    "Independently ran all 31 final graph-export tests: pass. Both new graphs also reproduce byte-for-byte through the documented actual CLI from their committed complete models: i04 has 6 nodes, 9 edges and 83 claims; i01 has 4 nodes, 2 edges and 730 claims.",
+    "The frozen public check_packet.py passes both offline conversion/refusal controls and --verify-originals. Independent ElementTree checks separately confirm the original PIDToolbox I04 actuator/valve/sensor/measurement/signal association chain and Comos I01 unlocated instrumentation; complete Reader regeneration equals both committed models, with exact original and LICENSE raw hashes.",
+    "Independently reran the frozen audit_corpus.py against all 220 existing pinned XML files, directing disposable work outside the repository. All raw pins match. It reads 214 models and independently confirms the same six duplicate-ID refusals. Among 88 unplaced items in 56 models, the transparent historical-role-rule counterfactual downgrades 87; 44 explicit references lacked controls edges. Current graphs have zero role mismatch, missing controls or graph errors.",
+    "The larger diagnostic is a rerun on seen data with an explicit old-rule counterfactual, not a new extractor run or held-out benchmark. Source/placement caveats and the unchanged matrix acceptance criteria are clear in the final guide, source key, acceptance record and runbook.",
+    "Compared the four older registered graph hashes against the latest prior independent passing receipt: all four are unchanged. The independent actual Comos control also preserves the IDs and content of all previously represented edges; new control edges append without renumbering them."
+   ],
+   "primary_sources": [
+    {
+     "id": "i04",
+     "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.3/example%20pids/I04%20Measurement%20and%20Control/I04V01-VER.EX01.xml",
+     "raw_sha256": "91b301bad8f432feb5dfff46190830a9415c63fd9904485a700f9fda7dfc10b5",
+     "bytes": 7477,
+     "check": "Independently read original XML IDs, classes, associations and exact physical locators; independently regenerated the complete reader model and compared it with the committed model. The source checker also passes."
+    },
+    {
+     "id": "i01",
+     "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2/example%20pids/I01%20Measurement/I01V01-SAG.EX01.xml",
+     "raw_sha256": "72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985",
+     "bytes": 103109,
+     "check": "Independently read original XML IDs, classes, associations and exact physical locators; independently regenerated the complete reader model and compared it with the committed model. The source checker also passes."
+    },
+    {
+     "id": "DEXPI-TrainingTestCases-LICENSE",
+     "raw_sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+     "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/LICENSE",
+     "check": "Read the original notice and verified its raw-byte pin; this is not a legal opinion."
+    },
+    {
+     "id": "I04V01-SAG.EX01.xml",
+     "raw_sha256": "5d5c26eeed2f9a66aebfe9832b479d2becbdc66e35d4b9e2268eabb90e65a8e4",
+     "check": "Additional actual Comos/PIDToolbox source used for independent reader-to-CLI full/core controls; original bytes unchanged."
+    },
+    {
+     "id": "C03V04-VER.EX02.xml",
+     "raw_sha256": "a1c892f3bc21338c2546baf71e10abf11e3653b7cd6956b1a24bcfab0db88f14",
+     "check": "Additional actual Comos/PIDToolbox source used for independent reader-to-CLI full/core controls; original bytes unchanged."
+    }
+   ],
+   "independent_maintenance_controls": [
+    {
+     "check": "comos-flow full retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "comos-flow full no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "comos-flow full validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "comos-flow full retains explicit output claim and sourced control interpretation",
+     "pass": true
+    },
+    {
+     "check": "comos-flow full statement presents known valve role",
+     "pass": true
+    },
+    {
+     "check": "comos-flow core retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "comos-flow core no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "comos-flow core validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "comos-flow core retains explicit output claim and sourced control interpretation",
+     "pass": true
+    },
+    {
+     "check": "comos-flow core statement presents known valve role",
+     "pass": true
+    },
+    {
+     "check": "comos-flow raw original unchanged",
+     "pass": true
+    },
+    {
+     "check": "comos-level full retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "comos-level full no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "comos-level full validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "comos-level core retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "comos-level core no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "comos-level core validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "comos-level raw original unchanged",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox full retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox full no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox full validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox core retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox core no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox core validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox raw original unchanged",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow full retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow full no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow full validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow full retains explicit output claim and sourced control interpretation",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow full statement presents known valve role",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow core retains known role and unresolved placement",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow core no invented unit attachment",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow core validates and preserves source model bytes",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow core retains explicit output claim and sourced control interpretation",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow core statement presents known valve role",
+     "pass": true
+    },
+    {
+     "check": "pidtoolbox-flow raw original unchanged",
+     "pass": true
+    },
+    {
+     "check": "illustrative split-range references deduplicate and orient to recorded roles",
+     "pass": true
+    },
+    {
+     "check": "illustrative manual and relief roles preserved without invented attachments",
+     "pass": true
+    },
+    {
+     "check": "explicit unknown role stays generic and legacy absent role remains compatible",
+     "pass": true
+    },
+    {
+     "check": "missing output refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "incompatible output instrument refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "incompatible measurement valve refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "mixed valid and dangling output list refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "invalid output object refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "invalid measurement list member refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "ambiguous duplicate target refuses before changing any known bytes",
+     "pass": true
+    },
+    {
+     "check": "empty optional references NoneType remain accepted",
+     "pass": true
+    },
+    {
+     "check": "empty optional references str remain accepted",
+     "pass": true
+    },
+    {
+     "check": "empty optional references list remain accepted",
+     "pass": true
+    },
+    {
+     "check": "actual Comos existing edge IDs/content preserved",
+     "pass": true
+    }
+   ],
+   "seen_corpus_diagnostic": {
+    "scope": "seen-data diagnostic; retention of reader interpretation, not independent engineering truth",
+    "files": 220,
+    "models": 214,
+    "unplaced_items": 88,
+    "files_with_unplaced": 56,
+    "historical_role_downgrades": 87,
+    "historical_missing_controls": 44,
+    "current_role_mismatches": [],
+    "current_missing_controls": [],
+    "graph_errors": []
+   },
+   "confirmed_duplicate_id_refusals": [
+    {
+     "file": "dexpi 1.2/example pids/I02 Control/I02V01_AUD.EX01.xml",
+     "duplicate_ids": [
+      "XMP_002"
+     ]
+    },
+    {
+     "file": "dexpi 1.2/example pids/I03 Measurement and Control/I03V01_AUD.EX01.xml",
+     "duplicate_ids": [
+      "XMP_003"
+     ]
+    },
+    {
+     "file": "dexpi 1.2/example pids/I04 Measurement and Control/I04V01_AUD.EX01.xml",
+     "duplicate_ids": [
+      "XMP_004"
+     ]
+    },
+    {
+     "file": "dexpi 1.2/example pids/I08 Local pressure indication, CCR pressure indication, alarms and switches/I08V01_AUD.EX01.xml",
+     "duplicate_ids": [
+      "XMP_21063",
+      "XMP_21075"
+     ]
+    },
+    {
+     "file": "dexpi 1.2/example pids/I11 Measurement/I11V01_AUD.EX01I.xml",
+     "duplicate_ids": [
+      "XMP_1111"
+     ]
+    },
+    {
+     "file": "dexpi 1.2/example pids/I12 Control/I12V01_AUD.EX01.xml",
+     "duplicate_ids": [
+      "XMP_012"
+     ]
+    }
+   ],
+   "prior_review": {
+    "registered_outputs_unchanged": 4,
+    "scope": "Earlier graph-output review scope is preserved. This receipt independently reviews the role/reference maintenance increment and its new examples, rather than claiming a fresh engineering validation of the older models."
+   },
+   "limits": "Independent coding-agent review only. The XML, reader models and graphs are development evidence from already inspected public exports, not plant truth, physical-direction confirmation, resolved equipment placement, human approval, timed adoption evidence or a new held-out accuracy result. Retaining a reader interpretation does not prove it correct. The six duplicate-ID originals still refuse. This review changes no IEC-category truth definition or generalization-matrix criterion, and does not rerun or re-score the 94 matrix cells. No live organizational connector, importer, network write or site operation was exercised. License text was read; legal reuse rights were not adjudicated."
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (read-only maintenance review, original-source checks and adversarial CLI controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF; primary original-document hashes below bind raw bytes without normalization.",
+   "registered_output_count": 17,
+   "files": {
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3"
+   },
+   "supporting_files": {
+    ".gitattributes": "f23d4b46738f4706cf1f875e7fe49d8e743260152236fd4ebc59b03afee574da",
+    "docs/CONTEXT_LIFECYCLE.md": "084dae03bebb7584683cfa6e1ff22a3f5a0a5ea52c6ae339f9e390d876c6c86f",
+    "docs/CONTEXT_REGISTER.md": "3dd71a8d75fbf1df3d7cefa208db31a445fc691d20d888eb13c68acf46cf64ab",
+    "docs/GOAL.md": "06f7773e9dfef3e1b090e5d4a65627fa76d86233e5b7474505d07704ac905b9f",
+    "examples/context-register/README.md": "7d77d67ae4defba83a0712541272d466941a9e8d1f97df10e5536c4efbb94be3",
+    "examples/context-register/bayer/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/bayer/README.md": "f43650b0fa0f4f285b4c7e13d916f6d5a59a1c3c9f29883bb735d61fb3ec72bc",
+    "examples/context-register/bayer/expected/enriched_graph.json": "f7f8a08bb74bbad9521664678ed9dc2eb5e043418f7bac6c22b4c195c682e648",
+    "examples/context-register/bayer/expected/enriched_questions.json": "d44b9477f727a25962d038cbf270593a3b9464c9bfe579824f7174c13a114bd7",
+    "examples/context-register/bayer/proposed_answer.csv": "c627ab68ce98d5add2ac5ac84384ccd4be0699cf5cee3e5d98311b675886092c",
+    "examples/context-register/bayer/screen/screen.md": "92a79cb3e532e0750398f4f54730c4bea95470aef989bd9b2b07476cd6bcf3a1",
+    "examples/context-register/bayer/source_key.json": "bab7d493a934ae8ab41bf5e5ae3f73ab26e475a6ded6895f77019f51c28dd747",
+    "examples/context-register/bayer/sources.json": "3c39b3a2da11e9ab7346ef2b7f7fc6242a02b5631552f21a4dfdd71d017d1767",
+    "examples/context-register/illustrative/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/illustrative/README.md": "e2b92c88a596e120045337f5618e7cde20a250ffdbddaa751fa2490666f11e70",
+    "examples/context-register/illustrative/basis.txt": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+    "examples/context-register/illustrative/filled_answers.csv": "10d3df5f512bad4d7ba975f354205b14e66ccd0f550d72659121fc55415d54cf",
+    "examples/context-register/illustrative/later-note.txt": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+    "examples/context-register/illustrative/model.json": "72619283ecc3c97154d548850d06688463e6f2de05eb8cf53f3c278c9f2fa1dc",
+    "examples/context-register/illustrative/questions.json": "6b883257ddc4d420c10077bdf0998e7a98e1c34465cf902432f464caf01dbd76",
+    "examples/context-register/illustrative/service-sheet.txt": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+    "examples/context-register/illustrative/sources.json": "1137a61d46098763bdd5486ce2b0efcb0b6838721306be233dd8c9b6b9459e86",
+    "examples/context-register/nist-smstestbed/.gitignore": "6aefc578c7faeccbe134016aaf69d92eddb546619600dfce60a452ab0b68be0c",
+    "examples/context-register/nist-smstestbed/ACCEPTANCE.md": "e677a3cf583a5421fe221ca42664444c6a14b584ab6f20042182c0286cb8c521",
+    "examples/context-register/nist-smstestbed/README.md": "52fc7c8c86faabc0ad696fdc73e56ef8eaa889d6332b9f64ef0e16430d068ad5",
+    "examples/context-register/nist-smstestbed/check_history.py": "81a7452c3898aa92678132299aa1aabddb03f60cd9ea9f7b3cdd1b728e112fed",
+    "examples/context-register/nist-smstestbed/check_packet.py": "763fadcb54743312a5cf031b6910afa1e2c6015291174135bf9f7bf39e7a6ba9",
+    "examples/context-register/nist-smstestbed/fetch_sources.py": "a2880da66f2360eb4e202573f03365eee364f717a52dc5922b717709e8745d41",
+    "examples/context-register/nist-smstestbed/model.json": "5b6fffc6c7ad3e781a1cee957dc2b15494bca847275b1cda4d84061d6b579902",
+    "examples/context-register/nist-smstestbed/questions.json": "7758130f02b0d4b8b1ecfeb4ce685b07e9046d151ae214e330964b48d6fbc6f9",
+    "examples/context-register/nist-smstestbed/verify_sources.py": "9573b9844907e93fe20960893fe348efc8c843300ce3263c38dd3def22e089df",
+    "examples/context-register/pronto/.gitignore": "b7db0191fd3d5aafda7255244750e17e2ba9f911dee89ca6c4ae2ed270f82130",
+    "examples/context-register/pronto/ACCEPTANCE.md": "3af098c64e0e4f82583fab97526d3f4e1db2b58387697c696785009b025fd536",
+    "examples/context-register/pronto/README.md": "00372fcb4e1018cfb6169179b9b9746c57bb2eeaf8a73d0a5ccd6e8f98b27748",
+    "examples/context-register/pronto/check_packet.py": "9b49909aeb83fb5df78287ef0044a59f02efb069f19d9a2dd20ee8a793d46575",
+    "examples/context-register/pronto/model.json": "d013645ba6c4cc0d935117c5d845459de3c9ec2d2cc92b50d78662e0aac4f58f",
+    "examples/context-register/pronto/questions.json": "fd19f05fcba3b3ef763838b6a2237e35fb6a4de701fca448ac05c6f2c0db3b41",
+    "examples/context-register/pronto/verify_sources.py": "75e8274bada91d1756daf874dac8f20175699b1e8741827a6801b6f5612844fc",
+    "examples/first-pilot/README.md": "94f5d00461c3425a944d4386b1f5cd81d0da5e83ecd2298872f534214866a1b0",
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/question_engine.py": "d66e95619d4aa70a98b687e6ff01c3ed57964c9c3f17446e04dabce4938c7327",
+    "scripts/run_tests.py": "0e67ee05ab0422463ad88342e74bdc111dfeba826a81e6ec0142fcbdd3ef70e9",
+    "scripts/test_context_examples.py": "d7a9fe3e9a638760b0312fd4a253803c70ca4eb179f237393822a89cc1adb6b9",
+    "scripts/test_context_register.py": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "scripts/test_graph_export.py": "cc7ced35b20f9c35faaa52d7ffd4f9b38f35fb47627a1e9e6ea759e676d7f89a"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "An alternate register filename colliding with context.md could be overwritten by the report.",
+     "resolution": "The independent CLI reproduction now refuses before any write while normal context.json refresh remains available."
+    },
+    {
+     "issue": "A hardlink from an output to a supporting source could overwrite the source bytes.",
+     "resolution": "File-identity collision checks now refuse the independent NTFS-hardlink reproduction before any write."
+    },
+    {
+     "issue": "Correctly rehashed malformed ownership IDs and malformed asset snapshots were accepted.",
+     "resolution": "Both independent malformed-history reproductions now return clear input errors and create no outputs; history structure and bindings are validated as well as hashes."
+    },
+    {
+     "issue": "Whitespace trimming could bind a question to an ID different from the preserved graph node ID.",
+     "resolution": "The independent exact-identity reproduction now refuses before writes; surrounding whitespace in identities is rejected."
+    },
+    {
+     "issue": "The PRONTO expected report was stale after collection prompts were added to rendering.",
+     "resolution": "The final report now reproduces byte-for-byte. Structured requested fields and location descriptions are readable, and decisions and JSON remain unchanged."
+    },
+    {
+     "issue": "Refreshing a populated destination without --register, or with an older or divergent valid register, could silently discard decision or ownership history.",
+     "resolution": "Independently reproduced the ownership-only reset through the pre-repair CLI. Final apply and prepare validate the existing destination, require explicit preserved history when either history is nonempty, and require both existing histories to remain unchanged ordered prefixes. Omitted, older, divergent, reordered, malformed and foreign histories now refuse before writes. Current-register same-path refresh and deliberate forks in a new directory remain available."
+    }
+   ],
+   "resolution": "No open finding in this maintenance scope. The 16 prior registered outputs have exactly the same normalized-LF hashes as the previous independent receipt; its original-source review and stated limits are preserved, not presented as a new accuracy or adoption study. The added seventeenth output is the freshly reproduced NIST CLI history-control record. Retained decision and ownership histories cannot be silently discarded through omitted, older or divergent --register input. The frozen implementation and the exact 17 registered outputs are bound below.",
+   "checks": [
+    "Final frozen code: independently ran 43 context-register controls, 3 context-example integration tests and 31 graph-export tests; all pass. The independent 26-control CLI harness binds the exact final context_register.py hash below.",
+    "26 independent external-scratch CLI history controls pass. They cover apply/prepare without --register; identical-answer resubmission; ownership-only history; older and divergent decision and ownership branches; structurally valid reordered histories; malformed/foreign destination registers; and a hardlinked destination. Every refusal preserves all known input and output bytes in the entire disposable workspace.",
+    "Positive CLI controls pass: explicit same-path current refresh and identical-answer reruns are byte-identical; a valid extension retains the exact old prefixes; initial empty prepare-to-first-apply needs no flag; a deliberate older-history fork into a separate fresh directory remains supported. JSON formatting and editable current caches do not control history acceptance; actual inputs rebuild current state.",
+    "A copied actual source revision retains all history and stales only the dependent answer; its old CSV still refuses. The history repair does not change selective-dependency or exact-snapshot-reversion semantics.",
+    "Freshly ran the final public NIST check_history.py against all four actual pinned originals. Its JSON is byte-identical to expected_history_checks.json: 10 initial proposals, 11 decisions after a labelled synthetic note extension, omitted/resubmitted/older-history refusal, unchanged workspace bytes, byte-idempotent current refresh and a separate older-history fork. No original bytes changed and no human sign-off is inferred.",
+    "Compared every prior registered output hash with the earlier independent receipt: all 16 are unchanged. Freshly rehashed all nine original PRONTO, CSB and NIST source files; all raw bytes still match their pinned manifests. The prior independent content checks below remain scoped to those exact originals.",
+    "Read the final context guide, NIST runbook, maintenance acceptance and organizational lifecycle against current behavior. The instructions require explicit current-register refresh after the first apply, explain intentional forks and no automatic merge, and distinguish local provenance from authenticated organizational authority. The execution-elsewhere section permits authority by record type and explicitly identifies the unimplemented connector/reconciliation return path.",
+    "Earlier independently completed, unchanged evidence scope: 15 independent CLI lifecycle/safety/portability controls pass: explicit accepted responses; byte-identical reruns; selective source-only staleness; old CSV refusal; exact snapshot reversion; claim conflict and explicit rejection; direct, alternate-register and hardlink collision refusal; unknown/duplicate references; and preservation of deliberately entered engineer text.",
+    "Earlier independently completed, unchanged evidence scope: 7 independent role/date/state boundary controls pass: reviewer does not become owner; invalid calendar dates refuse; assignment actor/date is explicit; accepted answered and plant truth require source match; accepted partial mismatch remains visible; an outstanding data request keeps the question open and unmentioned ownership persists.",
+    "Earlier independently completed, unchanged evidence scope: Two correctly rehashed malformed-history controls and one whitespace-identity control independently refuse before output creation.",
+    "Earlier independently completed, unchanged evidence scope: 12 independent PRONTO controls pass using disposable exact copies of the originals: 22 proposals, 21 questions, 18 partial, 2 needs_data, 1 disputed; no inferred owner, reviewer, approval or plant truth; disabled-limit controls and FT302/FIR305 disagreement retained; synthetic report/alarm revisions stale exactly 6/7 dependent decisions while retaining history; old CSV and unknown/ambiguous identities refuse.",
+    "Earlier independently completed, unchanged evidence scope: All 22 PRONTO source facts match independent primary-source readers: bundled openpyxl for cells/dates/times, CSV TSV parsing for physical records, pypdf for text, and a separately rendered full-page visual inspection for Figure 1. Four original hashes match. Missing-original verification reports unavailable rather than passed.",
+    "Earlier independently completed, unchanged evidence scope: Fresh question_engine generation reproduces both Bayer E18 screen files byte-for-byte. Applying its actual 6 asset/stream references, original CSB bytes and proposed partial response reproduces all 4 expected context files byte-for-byte. Three collection prompts, item/how/where, decision rule and limits remain visible and unchanged in enriched JSON; owner/reviewer and plant truth remain unknown.",
+    "Earlier independently completed, unchanged evidence scope: Final PRONTO context.md reproduces byte-for-byte from the preserved 22 decisions. All structured request.fields and location kind/description text are visible; no per-request completion tracking or automatic clearing is claimed. The full register JSON is unchanged by report polishing.",
+    "Earlier independently completed, unchanged evidence scope: Illustrative, PRONTO and Bayer enriched graphs each pass graph_export --check with 0 problems. Original public files remain ignored. Selected new public docs, fixtures and tool/test files contain no private product names, local user paths or email addresses.",
+    "Earlier independently completed, unchanged evidence scope: NIST: independently read the two original XML configurations, exact archived raw lines and original reuse notice, then checked all four raw-byte hashes and all 10 source-fact groups. Both configurations share machine UUID mtc_adapter008; reused DataItem ID Hurco04-path_7 changes meaning across versions. The archive contains unavailable, zero and a blank program-name value; the deployed XML revision, completed operation and current production state remain unknown.",
+    "Earlier independently completed, unchanged evidence scope: NIST: 20 independent external-scratch controls passed. Actual copied originals prepare and apply 10 proposals across 8 questions as 5 partial and 3 needs_data, with no assigned owner, accepted review or plant fact inferred. The readable report reproduces byte-for-byte. Synthetic source revisions reopen exactly 3 old-config, 3 later-config, 4 raw-log and 0 notice-dependent decisions, preserve all 10 historical decisions, and reject old CSV bindings for changed sources before outputs. Each of four wrong raw hashes and an unregistered reused signal used as an asset are refused before outputs.",
+    "Earlier independently completed, unchanged evidence scope: NIST source verifier and packet checker passed again against the final files. The verifier reads original records and explicit expected values, without reading source_key.json or the proposed answers. Missing originals are reported as unavailable. The packet-local fetch wrapper reuses the existing pinned fetch library; the global fetcher is unchanged.",
+    "Earlier independently completed, unchanged evidence scope: Architecture documentation reviewed against current input formats and tool behavior. The central organizational authority, versioned snapshots and generator return path are explicitly a future integration target. Source originals, generated views and author-owned documents have separate update policies. Local names/accepted fields are provenance, not authenticated organizational approval; no hosted connector, live sync or organizational round-trip is claimed.",
+    "Earlier independently completed, unchanged evidence scope: Eight additional missing-original controls pass on external copies: omitting each of the four NIST originals makes the source verifier exit 2 with that exact unavailable file, zero primary groups and no failures falsely reported as a pass; the corresponding context prepare refuses before creating any output folder. These supplement the 20 lifecycle controls above."
+   ],
+   "primary_sources": [
+    {
+     "id": "PRONTO-REPORT",
+     "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-ALARMS",
+     "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-OPS",
+     "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-EVENTS-D3",
+     "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "CSB-2008-08-I-WV",
+     "raw_sha256": "6b4c944c7c5c8b5537c32e86d247064c164fe50c15d08ea64083975e574cf619",
+     "check": "Matched original local bytes and independently read PDF page 37, printed page 29, temperature-control narrative above Figure 10. Only the proposed intended-sequence interpretation was checked."
+    },
+    {
+     "id": "SMS-DEV-2016",
+     "raw_sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-DEV-2017",
+     "raw_sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-RAW-20170217",
+     "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-NOTICE",
+     "raw_sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    }
+   ],
+   "limits": "Independent coding-agent review only. No human/site sign-off, engineer timing, walkdown, live-signal validation, safe-operation certification, savings measurement or native-system import is established. The source checks establish selected published transcriptions and the Bayer cited narrative, not current plant truth or comprehensive revalidation of historical models. PRONTO and Bayer reuse existing source families. Currentness means an exact snapshot match when the tool is run; there is no watcher, permanent invalidation or automatic expiry. Reviewer and owner identities are unauthenticated user entries. History hashes are integrity controls, not signatures. NIST is a new public source family for this context packet, outside the existing eight-workflow matrix. Its acceptance criteria were declared after the two configurations and raw log had been examined; it is development evidence, not a prospective held-out transfer result. No live testbed, Git commit-date verification, governing configuration, production-state truth or broad manufacturing transfer accuracy is established. Notice text was read; this review is not a legal determination of reuse rights. This maintenance review does not establish a concurrent-writer lock, atomic multi-file transaction, authenticated history, automatic merge or preservation after deliberate external deletion/replacement. The guard checks a valid existing destination at command time. Raw sources, records and outputs were used only offline; no live organizational integration or network write was performed.",
+   "prior_review": {
+    "registered_outputs_unchanged": 16,
+    "receipt_raw_sha256": "03fdffe28244230648c0086da9e31d4c0131fbcb1cd413c7b01994f40b39a6cf",
+    "scope": "The previous source-content, lifecycle, collision, malformed-history, identity and rendering checks remain attributed to their original independent review; new history controls are listed separately."
+   },
+   "independent_maintenance_controls": [
+    {
+     "check": "omit register on apply",
+     "pass": true
+    },
+    {
+     "check": "omit register with same answers",
+     "pass": true
+    },
+    {
+     "check": "omit register on prepare",
+     "pass": true
+    },
+    {
+     "check": "omit register with ownership-only history",
+     "pass": true
+    },
+    {
+     "check": "older ownership-only register",
+     "pass": true
+    },
+    {
+     "check": "older decisions refused",
+     "pass": true
+    },
+    {
+     "check": "divergent decision branch refused",
+     "pass": true
+    },
+    {
+     "check": "older owner history with same decisions refused",
+     "pass": true
+    },
+    {
+     "check": "divergent owner branch with same decisions refused",
+     "pass": true
+    },
+    {
+     "check": "reordered decision input independently valid in fresh folder",
+     "pass": true
+    },
+    {
+     "check": "reordered retained decisions refused",
+     "pass": true
+    },
+    {
+     "check": "reordered owner input independently valid in fresh folder",
+     "pass": true
+    },
+    {
+     "check": "reordered retained ownership refused",
+     "pass": true
+    },
+    {
+     "check": "invalid destination history",
+     "pass": true
+    },
+    {
+     "check": "foreign destination schema",
+     "pass": true
+    },
+    {
+     "check": "malformed destination JSON",
+     "pass": true
+    },
+    {
+     "check": "explicit same-path refresh byte-identical",
+     "pass": true
+    },
+    {
+     "check": "same-path identical answer rerun byte-identical",
+     "pass": true
+    },
+    {
+     "check": "valid extension allowed and preserves exact prefix",
+     "pass": true
+    },
+    {
+     "check": "initial empty prepare to first apply without flag allowed",
+     "pass": true
+    },
+    {
+     "check": "older history allowed in separate fresh output folder",
+     "pass": true
+    },
+    {
+     "check": "mutable cache ignored and rebuilt from actual inputs",
+     "pass": true
+    },
+    {
+     "check": "JSON formatting changes do not change retained history",
+     "pass": true
+    },
+    {
+     "check": "source refresh keeps all history and only one dependent answer stale",
+     "pass": true
+    },
+    {
+     "check": "old answer CSV after source revision still refuses",
+     "pass": true
+    },
+    {
+     "check": "hardlinked destination history omitted flag refuses",
+     "pass": true
+    }
+   ]
   }
  ]
 }

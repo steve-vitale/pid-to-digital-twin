@@ -136,8 +136,18 @@ claim slots for different aspects of a question. Canonicalization is an engineer
 python -S scripts/context_register.py apply --model plant_model.json --questions questions.json --sources sources.json --answers context/answers.csv --register context/context.json --out context
 ```
 
-The existing register is explicit: omitting `--register` starts a new register. Keeping the register is how answers
-survive reruns. Identical input and identical decisions produce identical files without duplicate history entries.
+The existing register is explicit. A new output directory, or a prepared directory whose register has no decision
+or ownership history, can start without `--register`. Once either history exists at the destination, omitting
+`--register` refuses before writing. Pass its current `context.json` as above. An invalid existing destination
+register also refuses rather than being replaced.
+
+If the destination already holds history, every retained decision and ownership record must be an unchanged,
+ordered prefix of the computed result. An older or divergent register cannot silently replace later work.
+Use the destination's current register to continue, or a fresh output directory for an intentional fork. There is
+no automatic merge or reset option. These checks protect known files during a single local invocation; they are
+not locking, atomic publication or protection against concurrent writers. Keep backups and coordinate edits.
+
+Identical input and identical decisions produce identical files without duplicate history entries.
 Reusing an `answer_id` explicitly revises that answer; the previous record and its evidence remain in history. Use
 a different id for another source's independent answer. To resolve a dispute, an engineer can explicitly revise or
 reject the unsupported answer; rejection remains visible in the history. Unmentioned answers and owners persist.
@@ -206,7 +216,13 @@ python -S scripts/context_register.py prepare --model plant_model.json --questio
 ```
 
 The owner checks the current source, copies its fresh fingerprint, and explicitly records the response and decision
-again. Apply using the preserved register. `prepare` refuses to overwrite an existing `answers.csv` so a refresh
+again. Apply the new sheet using the preserved current register:
+
+```sh
+python -S scripts/context_register.py apply --model plant_model.json --questions questions.json --sources sources.json --answers context-review-B/answers.csv --register context/context.json --out context
+```
+
+`prepare` refuses to overwrite an existing `answers.csv` so a refresh
 cannot silently erase an engineer's work. **Current** means the evidence matches the recorded snapshot. Exact
 evidence reversion matches its previous snapshot again, as an explicit software control verifies. There is no source
 watcher, expiry, record of every intervening change, irreversible approval revocation or formal change-control state

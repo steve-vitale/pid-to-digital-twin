@@ -2921,6 +2921,38 @@
         "examples/context-register/nist-smstestbed/ACCEPTANCE.md",
         "examples/context-register/nist-smstestbed/README.md"
       ]
+    },
+    {
+      "id": "A201",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "Preserve explicit unplaced asset roles and already-recorded controller measurement/output references in graph export, with original claims and uncertainty retained.",
+      "hypothesis": "Unknown ownership should not erase a known engineering role or a supported explicit controller relationship.",
+      "evidence": "On 220 inspected cached DEXPI XMLs, 214 models and six known duplicate-ID refusals: 87 of 88 unplaced items previously became generic line items (52 instruments, 35 final elements). After repair all declared roles and all 44 unplaced controller endpoints across 33 files are represented, with no new export failure. Two complete actual-source reader-model/graph fixtures reproduce offline; optional original checks verify pinned XML locators. Missing, ambiguous, incompatible and malformed references refuse before writes.",
+      "runs": "Deterministic seen-corpus diagnostic and synthetic regression controls; not a blind extraction or placement benchmark",
+      "verdict": "kept",
+      "why": "Restores queryable meaning already retained by the reader without assigning a unit or verifying physical signal direction. Existing matrix criteria and scores remain unchanged.",
+      "source": [
+        "docs/JOURNAL.md#69-preserve-known-engineering-meaning-and-retained-review-history",
+        "examples/graph-export/unplaced-dexpi/README.md",
+        "docs/GRAPH_EXPORT.md"
+      ]
+    },
+    {
+      "id": "A202",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Refuse local context refreshes that omit the existing register or discard or diverge from retained decision/ownership history.",
+      "hypothesis": "A refresh must continue retained immutable history or explicitly fork into a new output directory.",
+      "evidence": "Actual NIST-original CLI reproductions before repair silently replaced ten decisions with zero when --register was omitted, and eleven with ten when an older register was supplied. After repair both refuse with every workspace file unchanged; a current-register refresh is byte-idempotent and a fresh-directory fork works. Core controls also cover ownership-only histories, divergent histories, invalid destinations and an initial empty-history prepared folder.",
+      "runs": "Deterministic public-original CLI development controls and core synthetic regressions",
+      "verdict": "kept",
+      "why": "Protects retained engineering work during a local invocation. No automatic merge/reset, authenticated authority, locking or atomic multi-file publication is claimed.",
+      "source": [
+        "docs/JOURNAL.md#69-preserve-known-engineering-meaning-and-retained-review-history",
+        "examples/context-register/nist-smstestbed/expected_history_checks.json",
+        "docs/CONTEXT_REGISTER.md"
+      ]
     }
   ],
   "not_tried": [

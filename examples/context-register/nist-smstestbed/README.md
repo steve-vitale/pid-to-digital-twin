@@ -27,6 +27,23 @@ python -S examples/context-register/nist-smstestbed/check_packet.py
 
 `prepare` refuses to overwrite an existing prepared CSV; choose another output folder to prepare a fresh revision. The supplied proposal CSV is an illustrative record bound to these exact inputs. No human filled it in. All owner, assigner, reviewer and review-date fields are blank, every decision is proposed, and every plant-truth verdict is unknown.
 
+The first apply above follows an empty prepared register. Subsequent applies into `run` must include
+`--register examples/context-register/nist-smstestbed/run/context.json`. The tool refuses to replace retained
+decision or ownership history with a missing, older or divergent register. Use a new directory for a deliberate
+fork; it does not merge histories.
+
+The separate history regression check uses these actual pinned originals and disposable working folders:
+
+```sh
+python -S examples/context-register/nist-smstestbed/check_history.py
+```
+
+[expected_history_checks.json](expected_history_checks.json) records the development result: ten initial proposals,
+an eleven-decision synthetic note revision, refusal of omitted or older registers with all working files unchanged,
+byte-identical refresh using the current register, and an explicitly separate older-history fork. The original
+sources remain unchanged. This checks local software preservation, not authenticated approval, concurrent writers
+or organizational adoption.
+
 Read `run/context.md` for the questions, answers, missing data and exact evidence bindings; `run/context.json` retains the decisions and evidence snapshots. `run/enriched_questions.json` and `run/enriched_graph.json` carry the same machine identity and contexts. [expected_context.md](expected_context.md) records the expected readable development report for the pinned inputs. The original identity model is unchanged.
 
 `verify_sources.py` parses the original XML and raw records using explicit primary-source expectations; it never reads the generated answer CSV or derived key. `check_packet.py` checks the ten bindings, machine join, revision-scoped meanings and missing-state controls. It copies and revises each actual source in turn: the expected stale-answer counts are three for the older configuration, three for the later one, four for the raw log and zero for an unrelated reuse-notice change. It also checks that history survives and that a mismatched raw hash or an unregistered reused signal-as-asset is rejected. Synthetic copies stay under ignored `.work/`; the original files are unchanged.

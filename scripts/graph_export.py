@@ -25,6 +25,8 @@ EDGE_TYPES = ("contains", "connects", "measures", "controls", "acts_on", "sets_p
 NODE_KINDS = ("plant", "system", "equipment", "instrument", "final_element", "controller", "line_item",
               "offpage_connector", "boundary", "manual_valve", "relief_device", "interlock", "limit", "junction",
               "line_network")
+UNPLACED_KINDS = ("equipment", "instrument", "final_element", "controller", "line_item", "offpage_connector",
+                  "manual_valve", "relief_device")
 # What a `connects` edge means, by where it came from (the edge's `layer`). Extracted drawings: the tracer's pairwise
 # link, network co-membership (both ends on one drawn line network, the answer key's definition), NOT pipe adjacency.
 # Hand-built models: a process stream recorded from one end to the other (pipe-level). Cross-sheet pairs: two
@@ -214,7 +216,12 @@ def from_hand_built(m):
     for it in m.get("unplaced", []):
         # An item no unit could be found for (e.g. a valve on a line between two off-page connectors) is still part
         # of the plant: it becomes a node with no containing unit, and says why, instead of being left out.
-        kind = "final_element" if "Operated" in str(it.get("dexpi_class", "")) or it.get("actuated") else "line_item"
+        kind = it.get("kind")
+        if kind not in UNPLACED_KINDS:
+            # Older reader models have no explicit role. Keep their existing valve rule, but do not reinterpret
+            # an explicitly unknown role. The original kind/class remain sourced attribute claims either way.
+            kind = ("final_element" if not it.get("kind") and
+                    ("Operated" in str(it.get("dexpi_class", "")) or it.get("actuated")) else "line_item")
         nd = node(it["tag"], kind, it, src)
         nd["placement"] = it.get("unit_basis") or "no owning unit recorded in the model"
         nodes.append(nd)
@@ -226,6 +233,33 @@ def from_hand_built(m):
         if lim.get("tag"):
             edges.append(("applies_to", lid, lim["tag"], lim))
     return nodes, edges, src
+
+
+def append_unplaced_controls(m, nodes, edges):
+    # A missing owning unit does not erase an already-recorded measurement/output relationship. Append these
+    # after existing edges so unrelated edge IDs stay stable. Keep the *_unplaced claims too: they explain the
+    # reader's unresolved placement and interpretation, not an independently verified physical signal direction.
+    by_id = {}
+    for nd in nodes:
+        by_id.setdefault(nd["id"], []).append(nd)
+    linked = {(typ, a, b) for typ, a, b, _ in edges}
+    for c in m.get("controllers", []):
+        for field, role in (("measurement_unplaced", "instrument"), ("output_unplaced", "final_element")):
+            refs = c.get(field)
+            if refs is None or refs == "" or refs == []:
+                continue
+            refs = [refs] if isinstance(refs, str) else refs
+            if not isinstance(refs, list) or not all(isinstance(t, str) and t for t in refs):
+                raise ValueError(f"controller {c['tag']}: {field} must name a tag or a list of tags")
+            for target in refs:
+                candidates = by_id.get(target, [])
+                if len(candidates) != 1 or candidates[0]["kind"] != role:
+                    raise ValueError(f"controller {c['tag']}: {field} target {target!r} must identify one {role} "
+                                     "node; original reference is retained in the model; resolve it before export")
+                a, b = (target, c["tag"]) if field == "measurement_unplaced" else (c["tag"], target)
+                if ("controls", a, b) not in linked:
+                    edges.append(("controls", a, b, c))
+                    linked.add(("controls", a, b))
 
 
 def from_extracted(m):
@@ -349,6 +383,8 @@ def build(model_path, reviews=None, questions=None):
     layer_nodes, layer_edges = from_line_layers(m, src)
     nodes += layer_nodes
     raw_edges += layer_edges
+    if not extracted:
+        append_unplaced_controls(m, nodes, raw_edges)
     pair_net = network_of_pairs(m) if extracted else {}
     edges = []
     for n, (typ, a, b, item) in enumerate(raw_edges, 1):

@@ -140,7 +140,12 @@
     "examples/graph-export/te_graph.json",
     "examples/graph-export/bayer_graph.json",
     "examples/graph-export/sheet0_graph.json",
-    "examples/graph-export/sheet0_graph_core.json"
+    "examples/graph-export/sheet0_graph_core.json",
+    "examples/graph-export/unplaced-dexpi/source_key.json",
+    "examples/graph-export/unplaced-dexpi/i04.model.json",
+    "examples/graph-export/unplaced-dexpi/i04.graph.json",
+    "examples/graph-export/unplaced-dexpi/i01.model.json",
+    "examples/graph-export/unplaced-dexpi/i01.graph.json"
    ],
    "tests": [
     "scripts/test_graph_export.py",
@@ -441,7 +446,8 @@
     "examples/context-register/nist-smstestbed/source_key.json",
     "examples/context-register/nist-smstestbed/proposed_answers.csv",
     "examples/context-register/nist-smstestbed/expected_context.md",
-    "examples/context-register/nist-smstestbed/fetch.json"
+    "examples/context-register/nist-smstestbed/fetch.json",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json"
    ],
    "tests": [
     "scripts/test_context_register.py",

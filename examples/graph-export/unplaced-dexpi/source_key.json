@@ -1,0 +1,290 @@
+{
+  "schema": "unplaced-dexpi-evidence-1",
+  "seen_data_diagnostic": true,
+  "originals_redistributed": false,
+  "source_commit": "a23d61e2e089eb2ca464cd552f9ae580a2785963",
+  "fetch": "python scripts/fetch_corpus.py dexpi-ttc-all",
+  "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository (DEXPI initiative and contributing members), CC BY 4.0",
+  "changes": "Deterministically converted exported XML to complete reader models; exported models to typed graphs; selected exact primary locators and assertions. No plant verification or human approval. Derived models, graphs and source-key material: CC BY 4.0. Packet checker code: repository MIT license.",
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/LICENSE",
+    "cache_path": "data/external/dexpi-ttc-all/extracted/TrainingTestCases-a23d61e2e089eb2ca464cd552f9ae580a2785963-a23d61e2e089eb2ca464cd552f9ae580a2785963/LICENSE",
+    "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+  },
+  "cases": [
+    {
+      "id": "i04",
+      "model": "i04.model.json",
+      "graph": "i04.graph.json",
+      "xml_assertions": [
+        {
+          "id": "ActuatingSystem-1",
+          "tag": "ActuatingSystem",
+          "line": 6,
+          "attributes": {
+            "ComponentClass": "ActuatingSystem"
+          },
+          "associations": [
+            [
+              "fulfills",
+              "ActuatingFunction-1"
+            ]
+          ],
+          "generic_attributes": {}
+        },
+        {
+          "id": "OperatedValveReference-1",
+          "tag": "ActuatingSystemComponent",
+          "line": 16,
+          "attributes": {
+            "ComponentClass": "OperatedValveReference"
+          },
+          "associations": [
+            [
+              "refers to",
+              "GlobeValve-1"
+            ]
+          ],
+          "generic_attributes": {}
+        },
+        {
+          "id": "GlobeValve-1",
+          "tag": "PipingComponent",
+          "line": 29,
+          "attributes": {
+            "ComponentClass": "GlobeValve",
+            "ComponentClassURI": "http://data.posccaesar.org/rdl/RDS416204"
+          },
+          "associations": [
+            [
+              "is referenced by",
+              "OperatedValveReference-1"
+            ]
+          ],
+          "generic_attributes": {
+            "PipingComponentNumberAssignmentClass": "FV 04"
+          }
+        },
+        {
+          "id": "FlowMeasuringElement-1",
+          "tag": "PipingComponent",
+          "line": 46,
+          "attributes": {
+            "ComponentClass": "FlowMeasuringElement"
+          },
+          "associations": [
+            [
+              "is the location of",
+              "ProcessSignalGeneratingFunction-1"
+            ]
+          ],
+          "generic_attributes": {
+            "PipingComponentNumberAssignmentClass": "FE 04"
+          }
+        },
+        {
+          "id": "ProcessInstrumentationFunction-1",
+          "tag": "ProcessInstrumentationFunction",
+          "line": 60,
+          "attributes": {
+            "ComponentClass": "ProcessInstrumentationFunction"
+          },
+          "associations": [
+            [
+              "is a part of",
+              "InstrumentationLoopFunction-1"
+            ],
+            [
+              "is logical end of",
+              "MeasuringLineFunction-1"
+            ],
+            [
+              "is logical start of",
+              "SignalLineFunction-1"
+            ]
+          ],
+          "generic_attributes": {
+            "ProcessInstrumentationFunctionCategoryAssignmentClass": "F",
+            "ProcessInstrumentationFunctionNumberAssignmentClass": "04",
+            "ProcessInstrumentationFunctionsAssignmentClass": "IC"
+          }
+        },
+        {
+          "id": "ActuatingFunction-1",
+          "tag": "ActuatingFunction",
+          "line": 70,
+          "attributes": {
+            "ComponentClass": "ActuatingFunction"
+          },
+          "associations": [
+            [
+              "is fulfilled by",
+              "ActuatingSystem-1"
+            ],
+            [
+              "is logical end of",
+              "SignalLineFunction-1"
+            ]
+          ],
+          "generic_attributes": {}
+        },
+        {
+          "id": "ProcessSignalGeneratingFunction-1",
+          "tag": "ProcessSignalGeneratingFunction",
+          "line": 74,
+          "attributes": {
+            "ComponentClass": "ProcessSignalGeneratingFunction"
+          },
+          "associations": [
+            [
+              "is located in",
+              "FlowMeasuringElement-1"
+            ],
+            [
+              "is logical start of",
+              "MeasuringLineFunction-1"
+            ]
+          ],
+          "generic_attributes": {}
+        },
+        {
+          "id": "MeasuringLineFunction-1",
+          "tag": "InformationFlow",
+          "line": 78,
+          "attributes": {
+            "ComponentClass": "MeasuringLineFunction"
+          },
+          "associations": [
+            [
+              "has logical start",
+              "ProcessSignalGeneratingFunction-1"
+            ],
+            [
+              "has logical end",
+              "ProcessInstrumentationFunction-1"
+            ]
+          ],
+          "generic_attributes": {}
+        },
+        {
+          "id": "SignalLineFunction-1",
+          "tag": "InformationFlow",
+          "line": 82,
+          "attributes": {
+            "ComponentClass": "SignalLineFunction"
+          },
+          "associations": [
+            [
+              "has logical start",
+              "ProcessInstrumentationFunction-1"
+            ],
+            [
+              "has logical end",
+              "ActuatingFunction-1"
+            ]
+          ],
+          "generic_attributes": {}
+        }
+      ],
+      "expected": {
+        "unplaced": {
+          "FT-04": {
+            "kind": "instrument",
+            "dexpi_id": "ProcessSignalGeneratingFunction-1",
+            "unit": null,
+            "variable": "flow",
+            "unit_basis": "no unit reachable through the piping from FlowMeasuringElement-1"
+          },
+          "FV-04": {
+            "kind": "final_element",
+            "dexpi_id": "GlobeValve-1",
+            "unit": null,
+            "unit_basis": "no unit reachable through the piping from GlobeValve-1"
+          }
+        },
+        "controls": [
+          [
+            "FT-04",
+            "FIC-04"
+          ],
+          [
+            "FIC-04",
+            "FV-04"
+          ]
+        ],
+        "controller_fields": {
+          "FIC-04": {
+            "measurement_unplaced": "FT-04",
+            "output_unplaced": "FV-04"
+          }
+        },
+        "identity_phrases": {
+          "FT-04": "is an instrument",
+          "FV-04": "is a final control element"
+        }
+      },
+      "original": {
+        "cache_path": "data/external/dexpi-ttc-all/extracted/TrainingTestCases-a23d61e2e089eb2ca464cd552f9ae580a2785963-a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi 1.3/example pids/I04 Measurement and Control/I04V01-VER.EX01.xml",
+        "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.3/example%20pids/I04%20Measurement%20and%20Control/I04V01-VER.EX01.xml",
+        "bytes": 7477,
+        "sha256": "91b301bad8f432feb5dfff46190830a9415c63fd9904485a700f9fda7dfc10b5"
+      }
+    },
+    {
+      "id": "i01",
+      "model": "i01.model.json",
+      "graph": "i01.graph.json",
+      "xml_assertions": [
+        {
+          "id": "XMP_6",
+          "tag": "ProcessInstrumentationFunction",
+          "line": 1149,
+          "attributes": {
+            "ComponentClass": "ProcessInstrumentationFunction",
+            "TagName": "LI"
+          },
+          "associations": [],
+          "generic_attributes": {
+            "ProcessInstrumentationFunctionNumberAssignmentClass": "LI"
+          }
+        },
+        {
+          "id": "XMP_18",
+          "tag": "InformationFlow",
+          "line": 1282,
+          "attributes": {
+            "ComponentClass": "ProcessSignalGeneratingFunction",
+            "TagName": "A10"
+          },
+          "associations": [],
+          "generic_attributes": {
+            "SignalProcessControlFunctionsAssignmentClass": "LT01"
+          }
+        }
+      ],
+      "expected": {
+        "unplaced": {
+          "XMP_6": {
+            "kind": "instrument",
+            "dexpi_id": "XMP_6",
+            "unit": null,
+            "variable": "unknown",
+            "unit_basis": "no sensor location in the file"
+          }
+        },
+        "controls": [],
+        "identity_phrases": {
+          "XMP_6": "is an instrument"
+        }
+      },
+      "original": {
+        "cache_path": "data/external/dexpi-ttc-all/extracted/TrainingTestCases-a23d61e2e089eb2ca464cd552f9ae580a2785963-a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi 1.2/example pids/I01 Measurement/I01V01-SAG.EX01.xml",
+        "source_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2/example%20pids/I01%20Measurement/I01V01-SAG.EX01.xml",
+        "bytes": 103109,
+        "sha256": "72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985"
+      }
+    }
+  ]
+}

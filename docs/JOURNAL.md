@@ -3604,3 +3604,57 @@ All 17 feature entries have current independent review receipts for their exact 
 matrix receipt checks only the added context registry and preserves prior result/review scope; no 94-cell rerun
 is claimed. The claim check still has 41 numeric matches, one prose-only claim and no failures, and all 52 pipeline
 stages remain fresh. These are offline software checks, with no new operational acceptance or measured adoption.
+
+## 69. Preserve known engineering meaning and retained review history
+
+**What:** 2026-10-29. Two maintenance failures found while following the document-to-maintained-context route:
+known unplaced instruments and valves lost their semantic roles at graph export, and a context refresh could
+silently replace retained history. The prospective checks are in [GOAL.md](GOAL.md#maintenance-acceptance-retain-unplaced-asset-semantics-and-context-history).
+These are development repairs to inspected examples, not new blind extraction results.
+
+The DEXPI reader already retained these items and their source claims. The exporter ignored an explicit
+`unplaced.kind`, usually calling the node a generic line item. The original role and controller reference survived
+as attributes, but asset queries and plain statements used the wrong role and the known control path was not
+traversable. The [actual-source example](../examples/graph-export/unplaced-dexpi/README.md) follows a public
+PID Toolbox flow loop and a Comos unplaced instrument through reader model, graph and statements. Placement stays
+unresolved. A controller's interpreted output relationship is not a fresh verification of physical signal direction.
+
+An in-memory diagnostic over all 220 already-inspected cached XMLs produced 214 reader models and the same six
+known duplicate-ID refusals. Before the repair, 87 of 88 unplaced items lost their declared role: 52 instruments
+and 35 final elements, in 55 files across four exporters. Forty-four recorded unplaced control endpoints across
+33 files had no corresponding control edge. After the repair, all declared roles and those 44 relationships are
+represented, with no new export failure. The exporter adds no unit, physical location or plant-truth verdict.
+Original reference claims, source and uncertainty remain. Missing, ambiguous, incompatible or malformed nonempty
+references refuse before output writes. Unknown explicit roles retain a generic fallback and their original claim.
+
+No parser, matrix criterion or historical score changed. The existing matrix tool-hash check remains current:
+graph export is not an exercised dependency of its current cells. Its 94 cells therefore retain their recorded
+63 pass, 23 fail and eight n/a results; no new matrix run or placement pass is claimed. In particular, a retained
+unplaced item is still unplaced.
+
+**History needs an explicit continuation.** A real CLI reproduction using the pinned NIST originals first saved ten
+proposals, then silently erased them when refreshed without `--register`. A second reproduction replaced an
+eleven-decision history with an older ten-decision register. The new guard validates the destination and requires
+an explicit register once either decision or ownership history exists. Every retained history must remain an
+unchanged ordered prefix of the computed result. Older, divergent or invalid destinations refuse before any write;
+a deliberate fork needs a fresh directory. Initial apply into an empty prepared register still works.
+
+The [NIST history check](../examples/context-register/nist-smstestbed/check_history.py) exercises the actual CLI
+and originals in disposable folders: omitted-register and older-register refusals preserve all working files,
+current-register refresh is byte-idempotent, and an explicitly separate older-history fork works. A synthetic note
+revision creates the eleventh proposal; it does not invent a human review. The original documents and historical
+packet report remain unchanged. Ownership-only and divergent-history controls belong to the core regression suite.
+The guide explains recovery and the difference between continuing and forking.
+
+These guards concern a single local invocation. They add no automatic merge, authenticated authority, concurrent
+writer lock, atomic multi-file publication or live integration. Independent review passed 50 graph and 26 history
+adversarial controls, the original-source checks and all 31 graph, 43 context and three existing example tests.
+The exact nine graph and 17 context outputs have current hash-bound receipts, with the earlier outputs unchanged
+and their prior review scope preserved. All 17 feature entries have current software evidence. The full local
+suite passed 58 registered scripts with two Windows symlink subcases skipped; Linux CI must check those.
+
+A cold reader clarified drawn connection direction versus logical control roles, and added the exact second-revision
+apply command using the retained current register. The neutral lifecycle guide now also explains how existing
+systems can retain execution/release authority while reviewed context supports investigation. Outcome learning
+requires attributed execution and observations to return. No incumbent connector is supplied. Software preservation
+and clearer responsibilities do not establish engineer adoption, review time saved or a successful operational decision.

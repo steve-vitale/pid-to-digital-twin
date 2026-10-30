@@ -621,6 +621,28 @@ def outputs(graph, qdoc, register, choices, prepare=False):
     return files
 
 
+def preserve_destination_history(destination, register, supplied_register):
+    """A local refresh may extend retained history, never silently replace or merge it."""
+    if not destination.exists() and not destination.is_symlink():
+        return
+    guidance = ("use --register pointing to the current destination context.json "
+                "or choose a new output directory")
+    try:
+        existing = read_json(destination, "destination register")
+        validate_register(existing)
+    except InputError as exc:
+        raise InputError(f"existing destination context.json is invalid: {exc}; "
+                         "choose a new output directory and preserve the existing file") from exc
+    histories = ("decisions", "ownership_history")
+    if not supplied_register and any(existing[field] for field in histories):
+        raise InputError(f"existing destination has retained history; {guidance}")
+    for field in histories:
+        retained = existing[field]
+        if register[field][:len(retained)] != retained:
+            raise InputError(f"existing destination {field} must remain an unchanged ordered history prefix; "
+                             f"{guidance}. Older or divergent histories are not merged or reset")
+
+
 def run(args):
     graph, qdoc, questions = load_inputs(args.model, args.questions)
     sources, choices, source_paths = load_sources(args.sources, questions, args.source_root)
@@ -630,6 +652,7 @@ def run(args):
     register = reconcile(register, questions, sources, choices, rows)
     files = outputs(graph, qdoc, register, choices, args.command == "prepare")
     folder = Path(args.out)
+    preserve_destination_history(folder / "context.json", register, args.register)
     if args.command == "prepare" and (folder / "answers.csv").exists():
         raise InputError("prepare would overwrite answers.csv; choose a new folder to refresh evidence")
     inputs = [Path(p) for p in (args.model, args.questions, args.sources, getattr(args, "answers", None)) if p]
@@ -672,7 +695,7 @@ def main(argv=None):
         for flag in ("model", "questions", "sources", "out"):
             sub.add_argument("--" + flag, required=True)
         sub.add_argument("--source-root", help="local root containing manifest document paths; default manifest folder")
-        sub.add_argument("--register", help="existing context.json; omission starts a new register")
+        sub.add_argument("--register", help="existing context.json; required to retain nonempty destination history")
         if command == "apply":
             sub.add_argument("--answers", help="filled prepared CSV; omit to refresh staleness only")
     args = parser.parse_args(argv)

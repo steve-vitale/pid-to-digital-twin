@@ -28,6 +28,27 @@ receiving system's approval a separate, authorized decision.
 Single authority also permits uncertainty. Competing claims, unknown plant truth and unanswered questions belong
 in the record. A central location does not make a claim correct or justify selecting one value without review.
 
+## When execution stays in the existing system
+
+An organization can keep work orders, change approvals, releases and execution in its existing systems. Assign
+authority by record type: the system owning a work order owns its status and completion; the controlled document
+system owns the released revision. A reviewed-context record can link and interpret those records without
+becoming a second approval queue. Preserve the original identity, revision, scope and access restrictions on each
+reference. A copied status or local `accepted` field cannot authorize work in the owning system.
+
+Start with a recurring engineering job, such as assembling the evidence for a proposed modification or checking
+which answers a revised manual reopens. Source-backed answers, conflicting claims and missing-data questions can
+help before anything is executed. The examples here exercise local parts of that investigation; their practical
+value still needs a site pilot. Importing more documents alone is not an outcome.
+
+Learning whether a change worked requires a further return path: the attributed decision, what was actually
+executed, the resulting configuration, observations and effectiveness review. Those records may come from the
+existing execution system. A generated recommendation, a completed task flag or improved document coverage
+alone does not establish a successful operational outcome. Keep observations separate from causal conclusions.
+Without that return path, the maintained context can improve its evidence and consistency but cannot establish
+which interventions worked. The repository implements no incumbent connector or reliable delivery/reconciliation
+service. Any such integration needs its own permission, identity, replay and readback acceptance checks.
+
 ## Different documents need different update rules
 
 | Document class | What the central record tracks | What happens on change |

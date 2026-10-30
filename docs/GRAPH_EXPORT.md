@@ -11,6 +11,27 @@ python scripts/graph_export.py my-bundle/plant_model.json --reviews out/review -
 python scripts/graph_export.py --check te_graph.json
 ```
 
+## Keep known roles when placement is unknown
+
+An item can have a known role without a known owning unit. The exporter keeps an explicit `unplaced.kind` for
+equipment, instruments, final elements, controllers, line items, off-page connectors, manual valves and relief
+devices. It retains the placement reason, original role/class claims, citations and existing review status. It
+does not assign a unit, a physical location or plant truth. An unsupported explicit role becomes a generic
+`line_item`; the original role remains an attribute. Older models without an explicit role retain the existing
+`OperatedValve`/`actuated` final-element fallback.
+
+For a controller, an explicit `measurement_unplaced` reference becomes a `controls` edge from the represented
+instrument to the controller; `output_unplaced` becomes a `controls` edge to each represented final element.
+Both fields accept one tag or a list of tags. The original reference claims remain on the controller. The edge
+inherits the controller record's source and status: it projects the reader's interpretation, including its
+caveats, and does not independently verify physical signal direction. A nonempty malformed reference, a missing
+or ambiguous target, or an incompatible target role refuses the export before writing the output file. Resolve
+the source/model reference explicitly; the exporter does not guess an alias or reinterpret a manual valve.
+
+The [unplaced DEXPI example](../examples/graph-export/unplaced-dexpi/README.md) follows actual public XML through
+the reader and export. Its software checks show retained meaning, not better extraction accuracy or resolved
+placement. The original generalization-matrix criteria and failed placement cells remain unchanged.
+
 `examples/graph-export/sheet0_graph.json` is the extracted OPEN100 sheet 0, with its line layers (below):
 
 ```sh
@@ -267,8 +288,10 @@ candidate alternatives a reviewer may also need.
 
 ## What it does not do
 
-It infers nothing. An item with no recorded status is exported as `unverified`; a link with no drawn direction
-stays undirected. Units, ranges and point addresses are exported only when the model holds them. `--check`
+It infers nothing. An item with no recorded status is exported as `unverified`; a drawn process connection with
+no recorded direction keeps its direction unknown. A `controls` edge's from/to expresses the recorded
+measurement/controller/output roles; it does not verify physical signal direction. Units, ranges and point
+addresses are exported only when the model holds them. `--check`
 validates the structure (known kinds, statuses and edge types, unique ids, every edge end a node, every claim
 sourced and a plain value; a `piped_to` end is an item or a junction; `on_network` ends at a `line_network`; every
 junction is on exactly one network and has a `piped_to` edge; a `connects` edge's `layer` is known and the `network`
