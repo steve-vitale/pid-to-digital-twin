@@ -3980,3 +3980,38 @@ and revision-D Markdown and JSON reports byte-for-byte. The catalog now says sup
 than claiming knowledge of what a DCS currently runs. Matrix cells, tool hashes and recorded extraction results are
 unchanged; its page is re-rendered only for the corrected candidate description. These are software and AI source-reader
 checks, not engineering approval, measured adoption or operational benefit.
+
+## 77. Let a first source question precede a measured pilot
+
+Two reader perspectives found the same first-use mismatch. The drawing guide and Covestro intake invited one
+useful question, including a manually authored document clarification with no asset model. Their linked brief
+still assumed an operational trial: sponsor/operator, baseline, observation and comparable conditions looked
+necessary for any packet. Missing fields could stay unknown, but the desk-based source question had no clear
+way to record its result and next recipient without appearing to be an incomplete trial.
+
+The same plain brief now starts with a source investigation: question, complete generated finding ID or labelled
+manual reference, exact source identities/locators, evidence, missing records, qualified disposition, reviewer/date
+and next recipient. Model/context references apply only where used. Unknown ownership or recipient acceptance
+keeps the handoff marked needs owner. A source answer does not establish current installed state, governing
+authority, operating permission or measured benefit. With no trial, the brief explicitly records trial not run
+and benefit not measured instead of inventing a baseline.
+
+If the team chooses a measured pilot, the extension retains the actual comparison, pretrial threshold, resource
+and stop conditions, applicable authority and participants, baseline and observation, comparable conditions,
+dated decision, fallback and receiving owner. A source disposition cannot satisfy that completion check. The real
+site-pilot need N062 remains open. The context register is optional and still requires its supported model/graph
+and question identities; a plain document question needs neither a fabricated model nor a new storage service.
+The README, drawing bridge and lifecycle introduction use the same source-question-to-company-handoff path.
+
+One independent AI reader filled three private copies: the Covestro manual source question with no model or
+trial; the existing generated Bayer E18@model with all six asset references, its proposed partial answer and
+three outstanding collection requests; and an explicitly illustrative planned pilot without observations.
+The source drafts retain unknown owners and acceptance, and the illustrative trial remains insufficient evidence.
+A second AI reader checked the authority/identity boundaries and fifteen relevant links/anchors. Neither
+performed new runtime, plant or primary-source runs. Root checks retain sixteen existing pilot-field/completion
+phrases and verify that runtime scripts, schemas and example outputs are unchanged.
+
+These are documentation walkthroughs and manual checks, not tests of an automated completion validator or a
+human adoption study. No new feature, corpus result, schema, integration or operational outcome is claimed.
+Existing benchmark results and matrix cells remain unchanged. The proof of actual engineer use still needs a
+real participant and observations; this repair only removes an unnecessary prerequisite for starting.

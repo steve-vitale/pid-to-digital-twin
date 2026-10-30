@@ -81,8 +81,9 @@ opportunity, a savings estimate or permission to change equipment.
 In screening decision rules, closing a question means concluding the investigation, never closing or operating equipment.
 
 Choose one relevant question with an engineering counterpart. Copy its exact finding ID, asset references and
-data requests into a private copy of the [pilot brief](../first-pilot/pilot-brief.md). Decide what evidence and
-baseline would support the next decision; leave missing information unknown. The [pilot guide](../first-pilot/README.md)
+data requests into a private copy of the [question and pilot brief](../first-pilot/pilot-brief.md). Start with the
+source investigation; define a baseline and comparison if the team chooses a measured trial. Leave missing
+information unknown. The [guide](../first-pilot/README.md)
 explains that first investigation and the subsequent handoff into a shared company home for context and decisions.
 This step uses existing tools; it does not create a shared system or connect to plant operations.
 

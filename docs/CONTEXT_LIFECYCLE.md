@@ -3,7 +3,8 @@
 The toolkit's role is to help an engineer start this process on one problem and produce a portable evidence and
 decision packet. The shared company system becomes the place to maintain organizational context as participation
 and responsibility grow. The local examples demonstrate the handoff requirements; they are not a company-wide
-governance application. Start with [one pilot](../examples/first-pilot/README.md), then establish that shared home.
+governance application. Start with [one source question or bounded pilot](../examples/first-pilot/README.md), then
+establish that shared home.
 
 The intended organizational pattern is a central record of reviewed engineering context, with specialized tools
 working from versioned snapshots. That record holds asset identities, sourced claims, unresolved questions,

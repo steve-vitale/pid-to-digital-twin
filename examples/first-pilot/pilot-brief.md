@@ -1,24 +1,65 @@
-# Engineering pilot decision brief
+# First engineering question and optional pilot
 
-Status: **Draft - not approved or completed**
+Work type: **Initial source investigation** / **Measured pilot** (choose one)
 
-Fill this copy with the responsible people. Keep unknowns explicit. No value below is a measured result or an
-authorization until the named person records it with evidence and a date.
+Status: **Draft - no reviewed outcome recorded**
 
-## One problem and one decision
+Keep unknowns explicit. Start with the question, evidence and handoff sections. Complete the pilot extension only
+when planning or running a measured trial. This is a plain working document; it does not validate or approve work.
 
-- Operational problem and intended user: **Unknown**
+## One problem and one question
+
+- Problem and intended user or recipient: **Unknown**
+- Question and decision it could inform: **Unknown**
+- Scope and excluded work: **Unknown**
+- Question reference: **Unknown** (complete generated finding ID, or a labelled local reference for a manual question)
+- Source identities and relevant asset IDs: **Unknown** (use exact supplied identities; model IDs only where a model is used)
+- Investigator / evidence owner: **Unassigned**
+- Document or engineering owner to ask: **Unassigned**
+
+## Evidence collection and open questions
+
+| Question or data request | Source ID, revision, hash and exact locator / collection method | Responsible person | Due date | State / evidence reference |
+|---|---|---|---|---|
+| Unknown | Unknown | Unassigned | Not set | Open |
+
+Original-source location and any source manifest: **Not recorded**
+
+Model / context-register reference, if used: **Not used / not recorded**
+
+- What the cited records support: **Not reviewed**
+- Missing records, competing evidence and assumptions: **Unknown**
+- Source-review disposition: **Open** (open / partial answer / answered from cited sources)
+- Qualified answer, evidence references and limits: **Not recorded**
+- Reviewer and date: **Not recorded**
+- Governing document/revision and accountable authority: **Unknown**
+- Current installed-state evidence and reviewer/date: **Unknown; not established by a source match**
+
+## Next step and handoff
+
+- Next action and evidence still needed: **Not assigned**
+- Receiving owner: **Unassigned - needs owner**
+- Next review date or source revision that should reopen the question: **Not set**
+- Packet location and exact source/model/context versions handed over, where used: **Not recorded**
+- Handoff accepted by recipient and date: **Not recorded**
+
+For a source investigation, retain the reviewed answer or unresolved disposition, its evidence and limits,
+reviewer/date, next action and receiving owner. If ownership or acceptance is missing, the packet remains a draft
+handoff with **needs owner** visible. A source answer is not a completed pilot, measured benefit or operating approval.
+
+## Pilot extension: fill only for a measured trial
+
+For a source-only investigation record **Trial not run; benefit not measured** here. Do not invent a baseline or
+trial observation to complete the source packet. If choosing a pilot, fill the following fields before the trial
+where indicated and retain the actual observations afterward.
+
 - Decision the pilot will inform: **Unknown**
-- Scope: one unit/equipment/workflow, included and excluded work: **Unknown**
-- Selected question ID and exact asset IDs: **Unknown**
 - Sponsor / responsible decision-maker: **Unassigned**
-- Operator or maintenance participant: **Unassigned**
-- Evidence owner and pilot coordinator: **Unassigned**
+- Operator or maintenance participant, where applicable: **Unassigned / not determined**
+- Pilot coordinator and evidence owner: **Unassigned**
 - What the site has authorized, by whom and on what date: **Not recorded**
 
-## Baseline, observation and decision rule
-
-| Required field | Record before the trial | Record after the trial |
+| Required field for a pilot | Record before the trial | Record after the trial |
 |---|---|---|
 | Metric and units | Unknown | Use the same definition |
 | Collection window and operating conditions | Unknown | Unknown |
@@ -31,30 +72,14 @@ authorization until the named person records it with evidence and a date.
 - Time/resource limit: **Unknown**
 - Stop conditions and person to contact: **Unknown**
 - What would make the comparison invalid: **Unknown**
+- Walkdown / signal validation / site acceptance needed for this scope: **Not determined**
 - Decision review date: **Not set**
-
-## Evidence collection and open questions
-
-| Question or data request | Source / collection method | Responsible person | Due date | State / evidence reference |
-|---|---|---|---|---|
-| Unknown | Unknown | Unassigned | Not set | Open |
-
-Context register and source-manifest reference: **Not recorded**
-
-Conflicting evidence, assumptions and governing-document decision: **Unresolved**
-
-Walkdown / signal validation / site acceptance needed for this scope: **Not determined**
-
-## Decision and handoff
-
-- Outcome: **Not decided** (continue / change scope / stop / insufficient evidence)
+- Pilot outcome: **Not decided** (continue / change scope / stop / insufficient evidence)
 - Baseline-to-observation comparison and limits: **Not recorded**
 - Reason, evidence references and unsuccessful attempts retained: **Not recorded**
 - Decision-maker and date: **Not recorded**
-- Next action, receiving owner and next review date: **Not assigned**
-- Source/model/context versions handed over, and where the packet is kept: **Not recorded**
 
-Completion check: baseline present, observation present, comparable scope/conditions reviewed, responsible
+Pilot completion check: baseline present, observation present, comparable scope/conditions reviewed, responsible
 decision-maker and dated outcome recorded, evidence and fallback retained, receiving owner named. If any required
-part is missing, keep the pilot open or record insufficient evidence. This checklist is manual; the template
-does not validate completion or provide approval.
+part is missing, keep the pilot open or record insufficient evidence. The source-investigation disposition does
+not satisfy this pilot check. Both checks are manual and provide no authorization.

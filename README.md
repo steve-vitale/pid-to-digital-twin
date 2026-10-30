@@ -16,8 +16,9 @@ with their evidence. The first result is a portable engineering packet that anot
 and continue: what the records say, what remains unknown and what evidence the next decision needs.
 
 These are prototype tools tested on public inputs. The software examples do not establish an organization's
-source authority, an engineer's approval or measured operational value. The [first-pilot brief](examples/first-pilot/README.md)
-connects the tools to one real decision, with a sponsor, baseline, observation and accountable recipient.
+source authority, an engineer's approval or measured operational value. The [question and pilot brief](examples/first-pilot/README.md)
+starts with a source investigation and recipient. A measured pilot adds its sponsor, baseline, observations and
+dated decision.
 
 ## From a first packet to company context
 
@@ -50,7 +51,7 @@ flowchart LR
     R[Controls records and recorded data] --> C
     C --> D[Questions and evidence collection]
     D --> E[Retained answers and owners]
-    E --> F[Pilot decision and handoff]
+    E --> F[Decision and company handoff]
     A -->|Released revision, then refresh| E
 ```
 

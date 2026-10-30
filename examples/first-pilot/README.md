@@ -1,12 +1,39 @@
-# Choose one useful engineering pilot
+# Start with one engineering question, then decide whether to pilot
 
-The question engine finds technically relevant things to investigate. It does not choose the company's priority,
-authorize a trial or demonstrate value. Start with one operational problem, one intended user and one decision
-the pilot will inform. A supported decision to stop can be a useful outcome.
+Start with one useful question and the records needed to answer it. The question engine can suggest investigations
+from a supported model; a manually authored question about existing documents is equally valid. The engine does
+not choose the company's priority, authorize a trial or demonstrate value.
 
-Copy [pilot-brief.md](pilot-brief.md) into the team's working documents and fill it with the sponsor, operator
-and evidence owner. It is an editable decision record, not another application or an automatically validated plan.
-Missing information stays unknown. The blank template contains no actual approval, threshold or achieved result.
+Copy [pilot-brief.md](pilot-brief.md) into the team's working documents. Begin with its source-investigation
+sections. Extend the same brief if the team later chooses a measured pilot. Missing information stays unknown;
+the template neither validates completion nor supplies an approval, threshold or achieved result.
+
+## First, investigate the existing sources
+
+Record the question, intended recipient, source identities/revisions and exact locations, what they support and
+what evidence is missing. For a generated question, copy its complete finding ID and exact asset IDs from
+`questions.json` (for example `E18@model`, not just catalog rule `E18`). For a manual question, use a labelled local
+reference and the source's full identities. No asset model or generated ID is required for a document clarification.
+
+Read the cited records and ask the document or engineering owner for the missing evidence. Record a qualified
+answer, partial answer or unresolved question with the evidence and review date. If no recipient has agreed to
+take it, keep the handoff marked **needs owner**. An assembled draft can still be useful while that remains open.
+The [Covestro intake](../loop-audit/covestro/README.md) shows such a question with its missing records and owner
+explicitly unknown. It supplies no completed investigation or site assignment.
+
+A source investigation can conclude with an explanation of what the cited revision says. It does not establish
+the current installed state, choose the governing document or authorize equipment work. Mark the trial fields
+**not run / benefit not measured** when no trial occurred. A trial baseline and an operator participant are not
+prerequisites for this desk-based first packet; actual access and work must still fit the organization's rules.
+
+The plain brief and originals are enough to start. The optional [context register](../../docs/CONTEXT_REGISTER.md)
+can retain answers and revision dependencies when a supported model/graph, question document and exact asset
+references are available. Do not invent a model merely to store a source question.
+
+## If the team chooses a measured pilot
+
+Name the sponsor, intended user, evidence owner and applicable operational participants. The pilot should answer
+one decision under a defined comparison. A supported decision to stop is a useful outcome too.
 
 1. **Pick the decision.** For example, decide whether assembling a reviewed asset pack for one piece of equipment
    is less work than the current manual approach, or whether a pump merits a detailed drive study. Name the
@@ -17,10 +44,10 @@ Missing information stays unknown. The blank template contains no actual approva
 3. **Set the comparison before the trial.** Name the metric, units, baseline window, operating conditions and
    source. The site chooses a success threshold, resource limit and stop conditions. For drawing work, reuse the
    existing [timed-review protocol](../../docs/REVIEW_EFFORT_PROTOCOL.md). An assumed time saving is not a baseline.
-4. **Collect and review.** Reuse the screen's `data_requests` for where and how to collect evidence. Assign the
-   people doing the walkdown, trend export and interpretation. Use the [context register](../../docs/CONTEXT_REGISTER.md)
-   to retain answers, ownership, competing evidence and review dates. It does not automatically complete each
-   collection request or assign site authority.
+4. **Collect and review.** Reuse the screen's `data_requests` when present, or the manual question's collection
+   plan. Assign the people doing the walkdown, trend export and interpretation. Retain answers, ownership,
+   competing evidence and review dates in the brief or a compatible context register. Recording a request does
+   not complete it or assign site authority.
 5. **Record the result and next owner.** Compare the observation with the baseline under comparable conditions,
    retain unsuccessful attempts and manual fallback, then record continue, change scope, stop or insufficient
    evidence. Name who receives the packet and when it will be reviewed again.
@@ -30,10 +57,11 @@ Record **insufficient evidence** and the collection action that remains. A sourc
 approved pilot or a measured benefit. A person at the site decides which documents govern, whether an operational
 change is permitted, and what site acceptance is required.
 
-Keep the brief, source manifest, context history, reviewed model and observations together. A second engineer
-should be able to reconstruct the decision from that packet. On a later source revision, refresh the context
-register and revisit dependent conclusions. Transfer its stable IDs, evidence, unfinished states and history
-through a reviewed adapter when another team or system takes over.
+Keep the brief, original sources and any source manifest, context history, reviewed model and observations
+together. A second engineer should be able to reconstruct the decision from that packet. On a later source
+revision, refresh the context register where used, or review the brief against the new source, and revisit
+dependent conclusions. Transfer the packet's IDs, evidence, unfinished states and history through a reviewed
+adapter when another team or system takes over.
 
 When review identifies a model error, the existing [local correction route](../../docs/REVIEW_LOOP.md) applies an
 engineer-filled `OPS_` sheet to a supported working model, retains old values and then regenerates outputs. Preview
@@ -45,7 +73,8 @@ an integration target.
 
 ## After the first packet
 
-The pilot should leave one useful engineering result and an understandable record of how the team reached it.
+The source investigation or pilot should leave one useful engineering result and an understandable record of how
+the team reached it.
 It also makes the next organizational need concrete: someone else must be able to find the evidence, understand
 the decision and know who maintains it when the documents or equipment change.
 
