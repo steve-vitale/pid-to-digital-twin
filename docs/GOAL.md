@@ -675,3 +675,33 @@ not a new corpus, correction to a real plant, human review or energy finding.
 5. Independently reproduce the baseline failure, review the frozen change and exact new packet, run affected
    generalization cells with unchanged criteria and report actual local/CI test omissions. This establishes
    maintenance behavior only; no authenticated review, source authority, plant truth or adoption is inferred.
+
+### Maintenance acceptance: make a reviewed seed bundle consistent
+
+2026-10-30, before implementation. N064's actual copied-TE control rejects U-100 and FT-101, yet the seed
+Ignition/PI exporters retain them. Independent full-CLI checks also find both in the generated SVGs. Removing a
+unit from a subsequent valid source leaves its old SVG in the output directory. These are fictional software
+controls, not plant changes. Repair the maintained bundle rather than one isolated export.
+
+1. Explicitly rejected seed units, instruments and final elements leave Ignition, PI and SVG outputs while all
+   source records, review decisions and history remain intact in the source and review CSV. Rejected streams and
+   streams incident to rejected units must not remain drawn as established connections. Keep their reasons visible.
+2. Non-rejected children of a rejected unit remain represented with unknown ownership in a clearly marked
+   transport/display container. Preserve their original OPC server/item address claim and PI point identity;
+   do not derive a new source address from the new display parent. Report old and new display paths explicitly.
+3. Calculate existing UDT and member/attribute names against the full source before filtering, so rejecting a
+   naming competitor cannot rename or remap a surviving item. Validate any new unassigned-name collisions before
+   writing. Missing/unverified review stays eligible; malformed review metadata refuses before writes.
+4. Refresh a dedicated generated-output directory coherently. Retire obsolete managed SVGs after successful
+   render/preflight, including when a unit disappears from the source. Preserve unrelated and manually edited
+   files; if safe ownership cannot be established, refuse before writes and explain how to use a fresh directory.
+   A small generated-file inventory may identify managed files; it is not an authority or source-of-truth service.
+5. Existing unreviewed artifact contents reproduce unchanged, with any new inventory/diagnostic file identified
+   as an addition. Render all artifacts and validate known conflicts before overwriting or deleting any file.
+   Reconfirmation regenerates eligible assets while retaining the prior review history.
+6. Demonstrate the actual review/generation/refresh CLI path on disposable public-source model copies. Include
+   rejection, retained children, stable names/addresses, stale-output removal, reinstatement and refusal controls.
+   Preserve committed historical model populations and scores; no native import or gateway action is authorized.
+7. Independently review the frozen implementation and exact example files, rerun affected matrix cells with the
+   existing criteria and refresh pipeline evidence only after executing/checking its outputs. Report actual local
+   and CI omissions. No new source family, human review, operations approval or adoption result is implied.

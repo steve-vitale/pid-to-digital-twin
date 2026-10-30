@@ -9,6 +9,9 @@ Two kinds of model are accepted:
     the model file (review_queue.csv, ignition/tags.json, pi/pi_builder_af.csv, svg/sheet_<n>.svg).
 
 Stdlib only. Usage:  python scripts/generate.py [path/to/model.json] [--out DIR]
+Seed exports retain the complete review sheet while excluding rejected items from platform files/SVGs. Surviving
+children of rejected units are explicitly unassigned with original source-address claims preserved. A generated
+inventory protects local refresh from stale files and manual edits; see examples/review-and-mapping/seed-refresh/.
 """
 import copy
 import csv
@@ -18,6 +21,7 @@ import io
 import math
 import os
 import re
+import stat
 import sys
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
@@ -47,7 +51,7 @@ class ModelValidationError(ValueError):
     """The model cannot be exported; no output has been changed."""
 
 
-def _shape_problems(model, collections):
+def _shape_problems(model, collections, review_fields=False):
     """Check container/identity shape before reference checks; do not fill unknowns."""
     if not isinstance(model, dict):
         return ["model must be an object"]
@@ -71,6 +75,16 @@ def _shape_problems(model, collections):
                 problems.append(f"duplicate {key} {identity} {value}")
             else:
                 seen.add(value)
+            review = item.get("ops_review") if review_fields else None
+            if review is not None:
+                if not isinstance(review, dict):
+                    problems.append(f"{key}[{n}].ops_review must be an object")
+                else:
+                    if review.get("status", "unverified") not in ("unverified", "confirmed", "corrected", "rejected"):
+                        problems.append(f"{key}[{n}].ops_review.status is unknown")
+                    for field in ("by", "on", "notes"):
+                        if review.get(field) is not None and not isinstance(review[field], str):
+                            problems.append(f"{key}[{n}].ops_review.{field} must be text")
     return problems
 
 
@@ -116,7 +130,7 @@ def _finite(value):
 def validate(model):
     """Structural checks. Every failure is a review item, not a silent fix."""
     problems = _shape_problems(model, {"units": "id", "streams": "id",
-                                       "instruments": "tag", "final_elements": "tag"})
+                                       "instruments": "tag", "final_elements": "tag"}, review_fields=True)
     if problems:
         return problems
     problems += ["unit " + p for p in _filename_collisions(
@@ -336,6 +350,7 @@ GRID_OVERRIDES = {"U-100": (110, 445, 3), "K-101": (430, 70, 6)}
 
 
 def overview_svg(model):
+    model = seed_svg_model(model)
     W, H = 1250, 760
     pipes, labels = [], []
     auto = any(u["layout"].get("auto") for u in model["units"])
@@ -384,7 +399,9 @@ def overview_svg(model):
 
 
 def unit_svg(model, unit):
-    items = items_for(model, unit["id"])
+    if ops_status(unit) == "rejected":
+        raise ModelValidationError(f"unit {unit['id']} is explicitly rejected; no unit SVG rendered")
+    items = [i for i in items_for(model, unit["id"]) if ops_status(i) != "rejected"]
     rows = (len(items) + 4) // 5
     g, half_h = unit_group(unit, 150, 140 if unit["type"] != "stripper" else 150)
     top = 140 + half_h + 50
@@ -412,35 +429,90 @@ def seed_confidence(item):
     return f' | source check: {p["source_check"]} | ops review: {p["ops_review"]}'
 
 
+def seed_names(model):
+    """Allocate against the full source, before exclusions can remove a naming competitor."""
+    types, members, used = {}, {}, set()
+    for unit in model["units"]:
+        name = member_name(unit["type"].replace("_", " "))
+        if name in used:
+            name = f"{name}_{member_name(unit['id'])}"
+        used.add(name)
+        types[unit["id"]] = name
+        items = items_for(model, unit["id"])
+        members.update({it["tag"]: n for it, n in zip(items, member_names(items))})
+    # Every possible orphan receives its own tag suffix, even before it becomes an orphan.
+    orphan_names = {tag: name + "__" + re.sub(r"[^A-Za-z0-9]+", "_", tag).strip("_")
+                    for tag, name in members.items()}
+    collisions = {name for name in orphan_names.values() if list(orphan_names.values()).count(name) > 1}
+    for tag, name in list(orphan_names.items()):
+        if name in collisions:
+            orphan_names[tag] = name + "_" + hashlib.sha256(tag.encode()).hexdigest()[:8]
+    if len(set(orphan_names.values())) != len(orphan_names):
+        raise ModelValidationError("Unassigned member names collide; no exports changed")
+    return types, members, orphan_names
+
+
+def seed_orphans(model):
+    live = {u["id"] for u in model["units"] if ops_status(u) != "rejected"}
+    items = [i for i in model["instruments"] + model["final_elements"]
+             if ops_status(i) != "rejected" and i["unit"] not in live]
+    if items and any(u["id"].casefold() == "_unassigned" for u in model["units"]):
+        raise ModelValidationError("_Unassigned is reserved for unknown ownership when children survive a rejection")
+    return items
+
+
+def seed_svg_model(model):
+    view = dict(model)
+    view["units"] = [u for u in model["units"] if ops_status(u) != "rejected"]
+    live = {u["id"] for u in view["units"]}
+    for section in ("instruments", "final_elements"):
+        view[section] = [i for i in model[section] if ops_status(i) != "rejected" and i["unit"] in live]
+    view["streams"] = [s for s in model["streams"] if ops_status(s) != "rejected"
+                       and all(s[e] == "BL" or s[e] in live for e in ("from", "to"))]
+    return view
+
+
+def seed_unassigned_svg(model):
+    items = seed_orphans(model)
+    body = '<text class="t" x="20" y="30">Unassigned: owning unit rejected</text>'
+    body += '<text class="ts" x="20" y="52">Display container only. No replacement owner or connection is inferred.</text>'
+    for n, original in enumerate(items):
+        item = dict(original, unit="")
+        y = 100 + n * 85
+        body += bubble(item, 75, y)
+        body += (f'<text class="ts" x="115" y="{y}">{escape(item["tag"])}: '
+                 f'previous declared owner {escape(original["unit"])}, now unknown</text>')
+    return svg_doc(780, 100 + len(items) * 85, body, "Unassigned readings: ownership requires review")
+
+
+def seed_atomic_tag(model, item, name, orphan=False):
+    idx = item.get("xmeas", item.get("xmv"))
+    ref = f'{"XMV" if "xmv" in item else "XMEAS"} {idx}' if idx is not None else item.get("source", "model item")
+    node = {"name": name, "tagType": "AtomicTag", "valueSource": "opc", "dataType": "Float8",
+            "engUnit": item["uom"], "readOnly": True,
+            "documentation": f'{item["tag"]} | {ref} | {item["description"]}' + seed_confidence(item),
+            "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
+            "opcItemPath": {"bindType": "parameter", "binding": "{BasePath}." + item["tag"]}}
+    if orphan:
+        node["opcServer"] = "Ignition OPC UA Server"
+        node["opcItemPath"] = f"ns=1;s={_point_prefix(model)}.{item['unit']}.{item['tag']}"
+        node["documentation"] += f" | owning unit unknown; previous declared owner {item['unit']} rejected; source address claim retained"
+    return node
+
+
 def ignition_tags(model):
     """Ignition 8.x tag JSON: one UDT type per unit, named by its equipment type, + one instance per unit. A second
     unit of the same type has different instruments, so it gets its own type, named with its id (two types with one
     name would collide on import). Members are OPC tags marked readOnly (monitoring only) whose path is built from
     instance parameters: set BasePath/OPCServer per instance on import."""
     types, instances = [], []
-    used = set()
+    type_names, names, orphan_names = seed_names(model)
     for u in model["units"]:
-        type_name = member_name(u["type"].replace("_", " "))
-        if type_name in used:
-            type_name = f"{type_name}_{member_name(u['id'])}"
-        used.add(type_name)
-        members = []
-        unit_items = items_for(model, u["id"])
-        for it, name in zip(unit_items, member_names(unit_items)):
-            idx = it.get("xmeas", it.get("xmv"))
-            ref = f'{"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None else it.get("source", "model item")
-            members.append({
-                "name": name,
-                "tagType": "AtomicTag",
-                "valueSource": "opc",
-                "dataType": "Float8",
-                "engUnit": it["uom"],
-                "readOnly": True,
-                "documentation": f'{it["tag"]} | {ref} | {it["description"]}'
-                                 + seed_confidence(it),
-                "opcServer": {"bindType": "parameter", "binding": "{OPCServer}"},
-                "opcItemPath": {"bindType": "parameter", "binding": "{BasePath}." + it["tag"]},
-            })
+        if ops_status(u) == "rejected":
+            continue
+        type_name = type_names[u["id"]]
+        members = [seed_atomic_tag(model, it, names[it["tag"]]) for it in items_for(model, u["id"])
+                   if ops_status(it) != "rejected"]
         types.append({"name": type_name, "tagType": "UdtType",
                       "parameters": {"BasePath": {"dataType": "String", "value": ""},
                                      "OPCServer": {"dataType": "String", "value": "Ignition OPC UA Server"}},
@@ -450,6 +522,11 @@ def ignition_tags(model):
                           "parameters": {"BasePath": {"dataType": "String",
                                                       "value": f"ns=1;s={_point_prefix(model)}.{u['id']}"}}})
     folder = "TE_Plant" if _model_id(model) == "te-process" else _model_id(model)
+    orphans = seed_orphans(model)
+    if orphans:
+        instances.append({"name": "_Unassigned", "tagType": "Folder",
+                          "documentation": "Display container: owning units rejected; no replacement ownership inferred. Original source address claims retained.",
+                          "tags": [seed_atomic_tag(model, it, orphan_names[it["tag"]], True) for it in orphans]})
     return {"name": "", "tagType": "Provider", "tags": [
         {"name": "_types_", "tagType": "Folder", "tags": types},
         {"name": folder, "tagType": "Folder", "tags": instances},
@@ -468,21 +545,36 @@ def pi_af_rows(model):
            for x in model.get(group, [])):
         raise ValueError("Reviewed pi_point mappings are supported only for extracted_twin models")
     root, prefix = _pi_root(model), _point_prefix(model)
+    _, names, orphan_names = seed_names(model)
     # Element templates first, so an empty AF database gets them before any element refers to one.
     templates = {}
     for u in model["units"]:
+        if ops_status(u) == "rejected":
+            continue
         templates.setdefault(member_name(u["type"].replace("_", " ")), u["type"].replace("_", " "))
     rows = [["x", "", t, "ElementTemplate", f"Seed model unit type: {kind}", "", "", "", "", ""]
             for t, kind in templates.items()]
     rows.append(["x", "", root, "Element", model["meta"]["title"], "", "", "", "", ""])
     for u in model["units"]:
+        if ops_status(u) == "rejected":
+            continue
         rows.append(["x", root, u["id"], "Element", u["name"] + seed_confidence(u), member_name(u["type"].replace("_", " ")),
                      "", "", "", ""])
         unit_items = items_for(model, u["id"])
-        for it, name in zip(unit_items, member_names(unit_items)):
+        for it in unit_items:
+            if ops_status(it) == "rejected":
+                continue
+            name = names[it["tag"]]
             rows.append(["x", f"{root}\\{u['id']}", name, "Attribute",
                          f'{it["tag"]}: {it["description"]}{seed_confidence(it)}', "", "Double", af_uom(it["uom"]), "PI Point",
                          f'\\\\%Server%\\{prefix}.{it["tag"]}.PV'])
+    orphans = seed_orphans(model)
+    if orphans:
+        rows.append(["x", root, "_Unassigned", "Element", "Display container: owning units rejected; ownership unknown", "", "", "", "", ""])
+        for it in orphans:
+            rows.append(["x", f"{root}\\_Unassigned", orphan_names[it["tag"]], "Attribute",
+                         f'{it["tag"]}: {it["description"]}{seed_confidence(it)} | previous declared owner {it["unit"]} rejected; ownership unknown',
+                         "", "Double", af_uom(it["uom"]), "PI Point", f'\\\\%Server%\\{prefix}.{it["tag"]}.PV'])
     return rows
 
 
@@ -520,6 +612,13 @@ def review_rows(model):
                      f'D&V 1993 {"XMV" if "xmv" in it else "XMEAS"} {idx}' if idx is not None
                      else (it.get("source") or "NO SOURCE GIVEN"),
                      "seed", it.get("verification", {}).get("status", "unverified")] + ops_cols(it))
+    # Historically the seed sheet omitted streams. Retain supplied stream decisions without rewriting the
+    # unreviewed historical sheet's population; once reviewed, the stream remains available for the next review.
+    for stream in model["streams"]:
+        if stream.get("ops_review"):
+            rows.append([stream["id"], "stream", stream["name"], f"{stream['from']} -> {stream['to']}", "",
+                         stream.get("source", ""), "seed", stream.get("verification", {}).get("status", "unverified")]
+                        + ops_cols(stream))
     return rows
 
 # ---------------------------------------------------------------- extracted twin (scripts/build_twin.py output)
@@ -1105,6 +1204,146 @@ def pi_bundle(rows):
             "pi/attribute_descriptions.csv": descriptions_text(rows), "pi/IMPORT_STEPS.txt": import_steps_text(rows)}
 
 
+def seed_projection(model):
+    """Explain exclusions and display relocations without modifying engineering or source-address claims."""
+    _, names, orphan_names = seed_names(model)
+    live = {u["id"] for u in model["units"] if ops_status(u) != "rejected"}
+    exclusions = []
+    for section in ("units", "instruments", "final_elements", "streams"):
+        for item in model[section]:
+            rejected = ops_status(item) == "rejected"
+            ends = [item[e] for e in ("from", "to") if item[e] != "BL" and item[e] not in live] if section == "streams" else []
+            if rejected or ends:
+                exclusions.append({"section": section, "id": item.get("id") or item.get("tag"),
+                                   "reason": "explicit rejection" if rejected else "endpoint unit rejected",
+                                   "rejected_endpoints": ends,
+                                   "review": {k: v for k, v in (item.get("ops_review") or {}).items()
+                                              if k in ("status", "by", "on", "notes")}})
+    folder = "TE_Plant" if _model_id(model) == "te-process" else _model_id(model)
+    relocated = []
+    for item in seed_orphans(model):
+        tag, owner = item["tag"], item["unit"]
+        relocated.append({"tag": tag, "previous_declared_owner": owner, "owning_unit": None,
+                          "old_ignition_path": f"{folder}/{owner}/{names[tag]}",
+                          "new_ignition_path": f"{folder}/_Unassigned/{orphan_names[tag]}",
+                          "opc_server_claim": "Ignition OPC UA Server",
+                          "opc_item_path_claim": f"ns=1;s={_point_prefix(model)}.{owner}.{tag}",
+                          "old_pi_element": f"{_pi_root(model)}\\{owner}", "old_pi_attribute": names[tag],
+                          "new_pi_element": f"{_pi_root(model)}\\_Unassigned", "new_pi_attribute": orphan_names[tag],
+                          "pi_point_claim": f"\\\\%Server%\\{_point_prefix(model)}.{tag}.PV",
+                          "svg": "svg/_Unassigned.svg"})
+    return {"schema": "seed-review-projection-1", "model_id": _model_id(model),
+            "note": "Draft projection of recorded review decisions, not authenticated approval or plant truth. "
+                    "_Unassigned is a display/transport container, not an engineering owner. Address claims are "
+                    "preserved from the seed model convention; deployment-specific overrides are not present in this model.",
+            "excluded": exclusions, "relocated": relocated}
+
+
+def _seed_managed_name(name):
+    fixed = {"ignition/te_tags.json", "ignition/tags.json", "ops_review_sheet.csv", "seed_review_projection.json",
+             "pi/pi_builder_af.csv", "pi/custom_uoms.csv", "pi/attribute_descriptions.csv", "pi/IMPORT_STEPS.txt"}
+    if name in fixed:
+        return True
+    if not isinstance(name, str) or not name.startswith("svg/"):
+        return False
+    leaf = name[4:]
+    return leaf.endswith(".svg") and _safe_filename(leaf) and portable_filename(leaf) == leaf
+
+
+def seed_content_hash(content):
+    """All seed artifacts are UTF-8 text. Match the repository's CRLF/LF portability convention."""
+    if isinstance(content, str):
+        content = content.encode("utf-8")
+    return hashlib.sha256(content.replace(b"\r\n", b"\n")).hexdigest()
+
+
+def _seed_path_preflight(path, directory=False):
+    """Check known file/ancestor conflicts, reparse aliases and hard links before publishing any artifact."""
+    path = Path(path).absolute()
+    for n, target in enumerate((path, *path.parents)):
+        try:
+            info = target.lstat()
+        except FileNotFoundError:
+            continue
+        except OSError as exc:
+            raise ModelValidationError("Cannot inspect managed output path; no exports changed") from exc
+        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
+            raise ModelValidationError("Managed output path contains a symlink or reparse alias; no exports changed")
+        want_directory = directory or n > 0
+        if want_directory and not stat.S_ISDIR(info.st_mode):
+            raise ModelValidationError("Managed output parent must be a directory; no exports changed")
+        if not want_directory:
+            if not stat.S_ISREG(info.st_mode):
+                raise ModelValidationError("Managed output must be a regular file; no exports changed")
+            if info.st_nlink > 1:
+                raise ModelValidationError("Managed output is hard-linked to another path; no exports changed")
+
+
+def _seed_preflight(out_dir, model, bundle, source_path=None):
+    """Retire only inventory-owned, unchanged artifacts. No silent overwrite of edits in a managed bundle."""
+    out_dir = Path(out_dir)
+    manifest = out_dir / "seed_export_manifest.json"
+    _seed_path_preflight(manifest)
+    previous = {}
+    if manifest.is_symlink():
+        raise ModelValidationError("Seed export inventory must not be a symlink; no exports changed")
+    if manifest.exists():
+        try:
+            prior = json.loads(manifest.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ModelValidationError("Cannot read seed export inventory; preserve the folder and use a fresh output directory") from exc
+        if (not isinstance(prior, dict) or prior.get("schema") != "seed-export-manifest-1"
+                or prior.get("model_id") != _model_id(model) or not isinstance(prior.get("files"), dict)):
+            raise ModelValidationError("Seed export inventory schema/model identity mismatch; use a fresh output directory")
+        previous = prior["files"]
+        if any(not _seed_managed_name(name) or not isinstance(h, str) or not re.fullmatch(r"[0-9a-f]{64}", h)
+               for name, h in previous.items()):
+            raise ModelValidationError("Invalid seed export inventory file entry; no exports changed")
+    if source_path is not None:
+        source = Path(source_path).resolve()
+        for name in set(previous) | set(bundle) | {"seed_export_manifest.json"}:
+            target = out_dir / name
+            if target.resolve() == source or (target.exists() and source.exists() and os.path.samefile(target, source)):
+                raise ModelValidationError("Source model collides with a managed output or retirement target; no exports changed")
+    spelling, identities = {}, {}
+    for name in set(previous) | set(bundle):
+        target = out_dir / name
+        _seed_path_preflight(target)
+        # A differently spelt retirement path must never alias a file in the new bundle. This also rejects
+        # portable case collisions on case-sensitive hosts; inode identity catches native alternate names.
+        key = name.casefold()
+        if key in spelling and spelling[key] != name:
+            raise ModelValidationError("Managed output names alias one another; no exports changed")
+        spelling[key] = name
+        if any(p.is_symlink() for p in (target, target.parent)):
+            raise ModelValidationError(f"Managed output {name} is a symlink; no exports changed")
+        if target.exists():
+            if not target.is_file():
+                raise ModelValidationError(f"Managed output {name} is not a file; no exports changed")
+            info = target.stat()
+            identity = (info.st_dev, info.st_ino)
+            if info.st_ino and identity in identities and identities[identity] != name:
+                raise ModelValidationError("Managed output paths identify the same file; no exports changed")
+            identities[identity] = name
+            actual = seed_content_hash(target.read_bytes())
+            expected = previous.get(name)
+            # Bootstrap a legacy folder only when every known file already equals the newly rendered file.
+            if expected is None and name in bundle:
+                expected = seed_content_hash(bundle[name])
+            if actual != expected:
+                raise ModelValidationError(f"Managed output {name} differs from its inventory (or has no matching legacy baseline); "
+                                           "preserve edits and use a fresh output directory; no exports changed")
+    candidates = {p.relative_to(out_dir).as_posix() for p in (out_dir / "svg").glob("*.svg")}
+    candidates |= {name for name in ("ignition/tags.json", "ignition/te_tags.json") if (out_dir / name).exists()}
+    if candidates - set(previous) - set(bundle):
+        raise ModelValidationError("Unmanaged SVG/tag exports found; preserve them and use a fresh output directory; no exports changed")
+    inventory = {"schema": "seed-export-manifest-1", "model_id": _model_id(model),
+                 "note": "Generated-file inventory for local refresh only; not authenticated provenance, authority or an atomic transaction.",
+                 "hash_method": "SHA-256 of UTF-8 file content with CRLF normalized to LF",
+                 "files": {name: seed_content_hash(content) for name, content in sorted(bundle.items())}}
+    return sorted(set(previous) - set(bundle)), json.dumps(inventory, indent=2) + "\n"
+
+
 def export_twin(model, out_dir, images_dir=None):
     """Write a structurally valid, fully rendered bundle; invalid models raise before writes.
 
@@ -1135,17 +1374,28 @@ def export_twin(model, out_dir, images_dir=None):
             f"svg/sheet_*.svg ({len(model['systems'])})"]
 
 
-def export_seed(model, out_dir):
+def export_seed(model, out_dir, source_path=None):
     """Validate/render the seed bundle before any output is created or overwritten."""
     def render():
         bundle = {"svg/overview.svg": overview_svg(model)}
-        bundle.update({f"svg/{portable_filename(u['id'])}.svg": unit_svg(model, u) for u in model["units"]})
+        bundle.update({f"svg/{portable_filename(u['id'])}.svg": unit_svg(model, u) for u in model["units"]
+                       if ops_status(u) != "rejected"})
+        if seed_orphans(model):
+            bundle["svg/_Unassigned.svg"] = seed_unassigned_svg(model)
         tags_name = "te_tags.json" if _model_id(model) == "te-process" else "tags.json"
         bundle[f"ignition/{tags_name}"] = json.dumps(ignition_tags(model), indent=2)
         bundle.update(pi_bundle(pi_af_rows(model)))
         bundle["ops_review_sheet.csv"] = _csv_text(REVIEW_COLS, review_rows(model))
+        bundle["seed_review_projection.json"] = json.dumps(seed_projection(model), indent=2) + "\n"
         return bundle
-    _write_bundle(out_dir, _prepare(model, validate, render))
+    bundle = _prepare(model, validate, render)
+    obsolete, inventory = _seed_preflight(out_dir, model, bundle, source_path)
+    _write_bundle(out_dir, bundle)
+    for name in obsolete:
+        target = Path(out_dir) / name
+        if target.exists():
+            target.unlink()
+    _write_bundle(out_dir, {"seed_export_manifest.json": inventory})
 
 # ---------------------------------------------------------------- main
 
@@ -1177,7 +1427,7 @@ def main():
             return 0
         if isinstance(model, dict) and isinstance(model.get("units"), list) and isinstance(model.get("meta"), dict):
             model = _auto_layout(_mark_finals(model))
-        export_seed(model, out_dir)
+        export_seed(model, out_dir, source_path=model_path)
     except (ModelValidationError, OSError, ValueError) as exc:
         print(f"Generation failed for {model_path}: {exc}", file=sys.stderr)
         return 1
@@ -1187,9 +1437,12 @@ def main():
           f"{n_inst} instruments, {n_fe} final elements")
     o = "out" if out_dir == OUT else str(out_dir)
     tags_name = "te_tags.json" if _model_id(model) == "te-process" else "tags.json"
-    print(f"wrote: {o}/svg ({len(model['units']) + 1} files), {o}/ignition/{tags_name}, "
+    svg_count = 1 + sum(ops_status(u) != "rejected" for u in model["units"]) + bool(seed_orphans(model))
+    print(f"wrote: {o}/svg ({svg_count} files), {o}/ignition/{tags_name}, "
           f"{o}/pi/ (PI Builder sheet v2, custom_uoms.csv, attribute_descriptions.csv, IMPORT_STEPS.txt; "
           f"not import-tested), {o}/ops_review_sheet.csv")
+    print(f"review changes and relocations: {o}/seed_review_projection.json; "
+          f"generated-file inventory: {o}/seed_export_manifest.json")
     unsourced = [i["tag"] for i in model["instruments"] + model["final_elements"]
                  if "xmeas" not in i and "xmv" not in i and not i.get("source")]
     if unsourced:

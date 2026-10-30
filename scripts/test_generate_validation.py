@@ -3,6 +3,7 @@ import copy
 import csv
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -242,6 +243,248 @@ class GenerationValidationTests(unittest.TestCase):
                 path.write_text(json.dumps(model), encoding="utf-8")
                 with patch.object(sys, "argv", ["generate.py", str(path)]), patch.object(generate, "OUT", Path(tmp) / "seed"):
                     self.assertEqual(generate.main(), 0)
+
+
+class SeedReviewRefreshTests(unittest.TestCase):
+    """Fictional maintenance controls; no platform or plant acceptance."""
+
+    def setUp(self):
+        self.model = json.loads((ROOT / "data/te_process_model.json").read_text(encoding="utf-8"))
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.out = Path(self.tmp.name) / "output"
+
+    def reject(self, section, identity):
+        item = next(r for r in self.model[section] if (r.get("id") or r.get("tag")) == identity)
+        item["ops_review"] = {"status": "rejected", "by": "Illustrative control", "on": "2026-10-30",
+                              "history": [{"status": "unverified"}]}
+
+    def export(self):
+        original = copy.deepcopy(self.model)
+        generate.export_seed(self.model, self.out)
+        self.assertEqual(self.model, original)
+
+    def blocked(self, message):
+        before = snapshot(self.out)
+        with self.assertRaisesRegex(generate.ModelValidationError, message):
+            self.export()
+        self.assertEqual(snapshot(self.out), before)
+
+    def test_actual_review_generation_and_reconfirmation_cli_packet(self):
+        path = ROOT / "examples/review-and-mapping/seed-refresh/demonstrate.py"
+        p = subprocess.run([sys.executable, "-S", str(path)], cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_name_allocations_do_not_change_after_rejecting_competitors(self):
+        self.model = {"meta": {"model_id": "illustrative-pumps", "title": "Invented pumps",
+                               "source_document": "ILLUSTRATIVE test fixture"},
+                      "units": [{"id": "P-1", "name": "First pump", "type": "pump", "layout": {"x": 150, "y": 150}},
+                                {"id": "P-2", "name": "Second pump", "type": "pump", "layout": {"x": 550, "y": 150}}],
+                      "streams": [], "final_elements": [],
+                      "instruments": [{"tag": f"TT-{n}", "unit": "P-2", "uom": "degC", "variable": "temperature",
+                                       "description": "A very long identical description before suffix " + str(n)}
+                                      for n in (101, 102)]}
+        types, names, _ = generate.seed_names(self.model)
+        self.assertEqual(types["P-2"], "Pump_P2")
+        self.assertTrue(names["TT-102"].endswith("_TT_102"))
+        self.reject("units", "P-1")
+        self.reject("instruments", "TT-101")
+        tags = generate.ignition_tags(self.model)
+        self.assertEqual(tags["tags"][1]["tags"][0]["typeId"], types["P-2"])
+        self.assertEqual(tags["tags"][0]["tags"][0]["tags"][0]["name"], names["TT-102"])
+        pi = generate.pi_af_rows(self.model)
+        self.assertEqual(next(r[2] for r in pi if r[3] == "Attribute"), names["TT-102"])
+
+    def test_all_units_rejected_retains_every_independently_eligible_signal(self):
+        for u in self.model["units"]:
+            self.reject("units", u["id"])
+        self.export()
+        tags = json.loads((self.out / "ignition/te_tags.json").read_text())
+        self.assertEqual(tags["tags"][0]["tags"], [])
+        container = tags["tags"][1]["tags"][0]
+        self.assertEqual((container["name"], container["tagType"]), ("_Unassigned", "Folder"))
+        self.assertEqual(len(container["tags"]), 37)
+        self.assertTrue(all(isinstance(t["opcItemPath"], str) and t["readOnly"] for t in container["tags"]))
+        self.assertEqual(len(list((self.out / "svg").glob("*.svg"))), 2)
+        self.assertFalse(json.loads((self.out / "seed_review_projection.json").read_text())["relocated"][0]["owning_unit"])
+
+    def test_two_rejected_owners_keep_distinct_source_addresses(self):
+        self.reject("units", "U-100")
+        self.reject("units", "R-101")
+        self.export()
+        projection = json.loads((self.out / "seed_review_projection.json").read_text())
+        owners = {r["previous_declared_owner"] for r in projection["relocated"]}
+        self.assertEqual(owners, {"U-100", "R-101"})
+        for r in projection["relocated"]:
+            self.assertEqual(r["opc_item_path_claim"], f"ns=1;s=TE.{r['previous_declared_owner']}.{r['tag']}")
+            self.assertEqual(r["pi_point_claim"], f"\\\\%Server%\\TE.{r['tag']}.PV")
+
+    def test_removed_source_unit_retires_only_its_managed_svg(self):
+        self.export()
+        (self.out / "my-notes.md").write_text("authored notes")
+        self.model["units"] = [u for u in self.model["units"] if u["id"] != "U-100"]
+        for sec in ("instruments", "final_elements"):
+            self.model[sec] = [i for i in self.model[sec] if i["unit"] != "U-100"]
+        self.model["streams"] = [s for s in self.model["streams"] if "U-100" not in (s["from"], s["to"])]
+        remaining = {s["id"] for s in self.model["streams"]}
+        for sec in ("instruments", "final_elements"):
+            for item in self.model[sec]:
+                if item.get("stream") and item["stream"] not in remaining:
+                    item.pop("stream")  # Explicit fictional source revision, not inferred by the exporter.
+        self.export()
+        self.assertFalse((self.out / "svg/U-100.svg").exists())
+        self.assertEqual(len(list((self.out / "svg").glob("*.svg"))), 6)
+        self.assertEqual((self.out / "my-notes.md").read_text(), "authored notes")
+
+    def test_missing_and_nonrejected_review_stays_eligible(self):
+        baseline = generate.ignition_tags(self.model)
+        for state in (None, {}, {"status": "unverified"}, {"status": "confirmed"}, {"status": "corrected"}):
+            with self.subTest(state=state):
+                self.model["units"][0]["ops_review"] = state
+                current = generate.ignition_tags(self.model)
+                self.assertEqual([n["name"] for n in current["tags"][1]["tags"]],
+                                 [n["name"] for n in baseline["tags"][1]["tags"]])
+
+    def test_malformed_seed_review_refuses_before_writing(self):
+        self.export()
+        for value in ([], "rejected", {"status": "reject"}, {"status": []}, {"by": 2}, {"notes": []}):
+            with self.subTest(value=value):
+                self.model["units"][0]["ops_review"] = value
+                self.blocked("ops_review")
+
+    def test_modified_stale_svg_is_not_deleted(self):
+        self.export()
+        self.reject("units", "U-100")
+        (self.out / "svg/U-100.svg").write_text("manually authored annotation")
+        self.blocked("differs from its inventory")
+
+    def test_modified_existing_pi_file_is_not_overwritten(self):
+        self.export()
+        (self.out / "pi/pi_builder_af.csv").write_text("manually authored PI change")
+        self.blocked("differs from its inventory")
+
+    def test_foreign_svg_without_inventory_is_preserved_and_refused(self):
+        self.out.mkdir()
+        (self.out / "svg").mkdir()
+        (self.out / "svg/author.svg").write_text("author's diagram")
+        self.blocked("Unmanaged SVG")
+
+    def test_inventory_rejects_escape_paths_or_other_model_identity(self):
+        self.export()
+        path = self.out / "seed_export_manifest.json"
+        original = json.loads(path.read_text())
+        for mutate in (lambda m: m.update(model_id="another-model"),
+                       lambda m: m["files"].update({"../input.json": "0" * 64}),
+                       lambda m: m["files"].update({"svg/../../input.svg": "0" * 64}),
+                       lambda m: m["files"].update({"notes.md": "0" * 64})):
+            value = copy.deepcopy(original)
+            mutate(value)
+            path.write_text(json.dumps(value))
+            self.blocked("inventory")
+
+    def test_matching_legacy_bundle_bootstraps_inventory(self):
+        self.export()
+        (self.out / "seed_export_manifest.json").unlink()
+        (self.out / "seed_review_projection.json").unlink()
+        before = snapshot(self.out)
+        self.export()
+        self.assertTrue(all(snapshot(self.out)[name] == data for name, data in before.items()))
+        self.assertTrue((self.out / "seed_export_manifest.json").exists())
+
+    def test_crlf_checkout_of_managed_text_can_refresh(self):
+        self.export()
+        for path in self.out.rglob("*"):
+            if path.is_file():
+                path.write_bytes(path.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n"))
+        self.reject("instruments", "FT-101")
+        self.export()
+        self.assertNotIn("FT-101 |", (self.out / "ignition/te_tags.json").read_text())
+
+    def test_changed_legacy_bundle_needs_fresh_directory(self):
+        self.export()
+        (self.out / "seed_export_manifest.json").unlink()
+        self.reject("units", "U-100")
+        self.blocked("legacy baseline|Unmanaged")
+
+    def test_unassigned_container_collision_refuses_before_changes(self):
+        self.export()
+        self.model["units"][1]["id"] = "_Unassigned"
+        for sec in ("instruments", "final_elements"):
+            for i in self.model[sec]:
+                if i["unit"] == "R-101":
+                    i["unit"] = "_Unassigned"
+        for stream in self.model["streams"]:
+            for field in ("from", "to"):
+                if stream[field] == "R-101":
+                    stream[field] = "_Unassigned"
+        self.reject("units", "U-100")
+        self.blocked("_Unassigned is reserved")
+
+    def test_hardlinked_managed_artifact_or_inventory_refuses(self):
+        self.export()
+        for name in ("ignition/te_tags.json", "seed_export_manifest.json"):
+            with self.subTest(name=name):
+                backup = Path(self.tmp.name) / "unrelated-backup.json"
+                os.link(self.out / name, backup)
+                before = backup.read_bytes()
+                self.reject("instruments", "FT-101")
+                self.blocked("hard-linked")
+                self.assertEqual(backup.read_bytes(), before)
+                backup.unlink()
+
+    def test_known_parent_file_conflict_refuses_before_any_output(self):
+        self.out.mkdir()
+        (self.out / "pi").write_text("an unrelated ordinary file")
+        self.blocked("directory|inspect")
+
+    def test_root_or_ancestor_directory_alias_refuses(self):
+        # Actual Windows junction or POSIX directory symlink, with both ends inside the disposable workspace.
+        self.export()
+        for ancestor in (False, True):
+            with self.subTest(ancestor=ancestor):
+                link = Path(self.tmp.name) / ("ancestor-alias" if ancestor else "root-alias")
+                if os.name == "nt":
+                    p = subprocess.run(["cmd", "/c", "mklink", "/J", str(link), str(self.out)],
+                                       capture_output=True, text=True)
+                    self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+                else:
+                    os.symlink(self.out, link, target_is_directory=True)
+                before = snapshot(self.out)
+                target = link / "fresh-child" if ancestor else link
+                with self.assertRaisesRegex(generate.ModelValidationError, "symlink|reparse"):
+                    generate.export_seed(self.model, target)
+                self.assertEqual(snapshot(self.out), before)
+
+    def test_actual_cli_source_model_cannot_be_overwritten_by_inventory_or_report(self):
+        self.export()
+        for name in ("seed_review_projection.json", "seed_export_manifest.json"):
+            with self.subTest(name=name):
+                path = self.out / name
+                old = path.read_bytes()
+                value = {**self.model, **json.loads(old)}
+                path.write_text(json.dumps(value))
+                before = snapshot(self.out)
+                p = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/generate.py"), str(path),
+                                    "--out", str(self.out)], capture_output=True, text=True)
+                self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+                self.assertIn("Source model collides", p.stderr)
+                self.assertEqual(snapshot(self.out), before)
+                self.assertEqual(len(json.loads(path.read_text())["units"]), 6)
+                path.write_bytes(old)
+
+    def test_inventory_case_alias_cannot_retire_a_live_file(self):
+        self.export()
+        path = self.out / "seed_export_manifest.json"
+        original = json.loads(path.read_text())
+        for duplicate in (False, True):
+            with self.subTest(duplicate=duplicate):
+                inventory = copy.deepcopy(original)
+                inventory["files"]["svg/u-100.svg"] = inventory["files"]["svg/U-100.svg"]
+                if not duplicate:
+                    del inventory["files"]["svg/U-100.svg"]
+                path.write_text(json.dumps(inventory))
+                self.blocked("alias|same file")
+                self.assertTrue((self.out / "svg/U-100.svg").exists())
 
 
 if __name__ == "__main__":

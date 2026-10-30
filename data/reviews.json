@@ -3303,6 +3303,248 @@
     "seed-export-boundary-proof.json": "8497025c8bb33bced21c3dbb5b95ddf0321c95d54965e0c961667b02daa33cd5"
    },
    "limits": "Independent coding-agent software review only, using copied synthetic food records and labelled illustrative extracted-model controls. No person reviewed a real plant; local recorded names/statuses do not authenticate a reviewer, establish source authority or confer organizational approval. Reconfirmation is an explicit fictional control, not proof of plant truth. The active screen does not rebuild extraction attachment logic or recursively reject children, and live duplicate tags still require engineering identity review. Only current review status/display fields used by screening are validated; this is not a signed-history or general governance validator. No seed-generator behavior, context-register implementation, external quotation/source review, complete repository suite, new CI run, 94-cell matrix run, model extraction, native platform import, network write or customer/adoption result is claimed by this review."
+  },
+  {
+   "feature": "platform-exports",
+   "reviewer": "Independent Codex agent (read-only maintenance review, actual CLI baseline and adversarial filesystem controls)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over bytes with CRLF normalized to LF. The seed inventory uses this same text convention.",
+   "registered_output_count": 7,
+   "files": {
+    "out/ignition/te_tags.json": "fbfcab3b38b901cf88284ec3540c04a1542b73bee1318d0c9e429dcfb2621ad4",
+    "out/pi/pi_builder_af.csv": "ba2379b28ab5fae73c7e940496ab4ba5ef6899501eeaee6cb2d39193929db5d8",
+    "out/seed_export_manifest.json": "ca77d68584cff5cc2ced7bcac741ffb18896ea5155bd4cfc76c6a4918cde7d83",
+    "out/seed_review_projection.json": "99cda24f192d2a49885a2362045a369b0b36f37b31757deb6c38f2aa2fcb1d31",
+    "examples/review-and-mapping/seed-refresh/expected/expected.json": "fd6703880f0da8c5d551eb56aa6ce38697467fed1c7c458fe74fc479b82dec08",
+    "examples/review-and-mapping/seed-refresh/expected/seed_review_projection.json": "c3642a8be17313ed9058a5a6fd84b36bcb5db1b7cfac7037916dac3a6adc3200",
+    "examples/review-and-mapping/seed-refresh/expected/_Unassigned.svg": "e988bab303ec130b7fe8b21e6ea1ddbc7dbbd9c2b45e3cb7bcefee7b222f3daa"
+   },
+   "supporting_files": {
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/test_generate_validation.py": "1a390faa439a5f30523f88eac66975e8fad008929d04441606f788fc7798d496",
+    "scripts/test_generate_any_model.py": "4b4961276689424c14f7ff997ebf5ca607fa1a4cf306d1e0bc459d84050484ec",
+    "scripts/test_check_pi_export.py": "78c844495fd9d66c8cabea6f2760933d43a897008e86cb2075b1e4694276c423",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/check_pi_export.py": "ff7cc6606f60ebf2aa721305811e688ef97beccb47a89daa09fc9d00cd8f3853",
+    "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "out/twin/round1-v2-named-fields/claude/plant_model.json": "94861ea498c5bfd9431ec9080961015f2f1c719ec4aba8ad164253c3e91c4a1b",
+    "docs/GOAL.md": "c413186cce196c4eaba4c4aa71a549655795eb3e7d220d7e0262496e602baf43",
+    "docs/REVIEW_LOOP.md": "9bef33e29bc9212112c2bf0a89f0b6aecfb1d20b86aef6fe0df4eb024bbb67d2",
+    "docs/TWIN_OUTPUTS.md": "74a5844df69b06df51cd8f1cafa7de39c18d10aac290b935654d0da55f2695af",
+    "examples/review-and-mapping/README.md": "9701bcc91a56a3f5a8ccfeb3c5bb021e273293bf673f5bc58ebe2951cf378d71",
+    "examples/review-and-mapping/seed-refresh/README.md": "27a3e4838beae36c3e27457b2326054a2261edd24089e94a38ba8d9ae7060853",
+    "examples/review-and-mapping/seed-refresh/demonstrate.py": "87ceb337dc3b50c9407a18d0dbae4d4187ecac7a8f776bfa5ce1f572d125f97b",
+    "examples/review-and-mapping/seed-refresh/reject.csv": "f605395944a8f350753950cbb30eab9f66865160069f1ba0225d7968c13643b2",
+    "examples/review-and-mapping/seed-refresh/reconfirm.csv": "33a260c26bbce97591fd284a382a65e6b38a61c1184acd38f97ea5699f899ea5",
+    "pipeline/stages.json": "79d559ec32cc29243fd077c29b66472334f8ac1a4dcee8634f2bd19f718829bd",
+    "data/features.json": "0afaba659f877f9cc6896ced44d10e8d3b3f09b81159446e8d6e9eb3a5eafdc1",
+    "scripts/test_deliverable_report.py": "c4671edafb39c6d8d32aa7910653f2843344ba04df43802f5c90d4caad14c3ed"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "The df21590 seed route retained explicitly rejected unit and instrument records in Ignition, PI and SVG outputs and left a removed unit SVG in a refreshed folder.",
+     "resolution": "Independently reproduced the actual baseline CLI. Final generation excludes explicit unit, instrument, final-element and stream rejections, drops streams incident to rejected units, retains independently eligible signals under an ownership-unknown container, and retires unchanged obsolete inventory-owned SVGs."
+    },
+    {
+     "issue": "Early refresh overwrote a hard-linked unrelated backup, partially changed outputs before discovering a file used as a directory parent, and wrote through a Windows root junction.",
+     "resolution": "The final path preflight checks known files and every ancestor, refuses hard links and reparse aliases, and preserves every disposable fixture byte in actual CLI controls, including root and ancestor junctions."
+    },
+    {
+     "issue": "A structurally valid source model placed at the generated manifest or projection path could be overwritten by that output.",
+     "resolution": "Actual CLI preflight now protects the known source path against current and retired managed outputs. Both exact-path controls refuse without changing any source, inventory or other fixture byte."
+    },
+    {
+     "issue": "An inventory key differing only in case from a current Windows output let refresh write the current SVG and then delete it as obsolete while returning success. Both a single replaced key and duplicate keys reproduced this.",
+     "resolution": "The final inventory/output identity guard refuses both cases before writes; independently rerun controls preserve all fixture bytes and leave legitimate source removal and retirement working."
+    },
+    {
+     "issue": "The broadened downstream documentation accidentally described extracted-twin ReviewStatus/V2 and screen-label behavior as universal seed behavior.",
+     "resolution": "The final review guide explicitly scopes those clauses to extracted twins. Seed rejection, unknown ownership, address-claim preservation and local refresh behavior have separate concrete instructions and limitations."
+    }
+   ],
+   "resolution": "No open finding in this bounded seed-bundle maintenance scope. The seven registered outputs and exact supporting files are bound here. Thirteen historical unreviewed artifacts reproduce with unchanged text contents; the two sidecars are additions. This is software evidence on copied public-source simulation/extraction models and explicitly illustrative decisions, not authenticated engineering review, a native import or plant validation.",
+   "checks": [
+    "Saved and executed exact df21590 generate.py in a separate child process. A copied TE model with actual apply_review rejections of U-100 and FT-101 retained both in platform and SVG files. A subsequent valid source revision removing U-100 left its SVG stale. The final code fixes both observable failures.",
+    "All 44 independent actual-child-process controls pass against the bound final code. Individual unit, instrument, final-element and stream cases verify real JSON, PI CSV and parsed SVG outputs rather than only the projection report. Rejected decisions remain on the regenerated review sheet; raw source records and histories remain unchanged by generation.",
+    "Rejecting all six TE units retains all 37 independently eligible signals with unknown ownership, removes established stream links, and emits only the overview and unassigned SVGs. No replacement owner, battery limit or connection is inferred.",
+    "Independently parsed generic-model Ignition UDT definitions, resolved their parameter claims, and parsed PI point config strings. Surviving UDT/member names, OPC server/item, units, read-only flags and PI points remain stable after rejecting naming competitors. Two rejected owners whose tags sanitize to the same suffix retain distinct names and original addresses in the shared unassigned container. Raw models remain unchanged.",
+    "The actual existing non-TE Bayer hand-built model also passes a fictional three-rejection refresh through the CLI with automatic layout. Five independently eligible children relocate with unknown ownership; all surviving OPC server/item, engineering-unit/read-only and PI point claims remain unchanged, including valves with no engineering unit supplied in the original model. The original public model is unchanged.",
+    "Actual source removal retires only the unchanged managed unit SVG; reintroduction recreates it. An authored notes file and nested authored JSON stay byte-identical. Missing, empty, unverified, confirmed and corrected review states stay eligible across all four record roles.",
+    "Six malformed review controls, three manually edited managed-file controls, eight malformed inventory controls, two unmanaged-export controls, two exact source/output collisions, three hard-link controls, parent-file and actual Windows root/ancestor junction controls, two case-alias inventory controls and the reserved unassigned-container collision all refuse before any disposable fixture input or output byte changes.",
+    "Matching legacy artifacts adopt the inventory without modifying old bytes. A reviewed legacy bundle without an inventory refuses an unsafe in-place refresh, while the same reviewed source generates correctly into a fresh output directory. CRLF conversion of all managed UTF-8 artifacts and inventory permits exact refresh and subsequent rejection refresh under the declared LF-normalized hashes.",
+    "The committed seed-refresh example passes through actual apply_review.py and generate.py child CLIs. All three expected files match; surviving signal address claims remain unchanged; repetition is idempotent; a manually edited SVG refuses without writes; explicit reconfirmation restores old display paths, addresses and unit SVG while retiring the unassigned SVG and retaining intervening history.",
+    "Independently ran the final 30 generation-validation, 15 any-model and 15 PI-export unit tests; all pass. The actual public demonstration and independent generic naming/address script were rerun against the same final generator hash.",
+    "Compared current unreviewed output with an independently executed df21590 bundle and all thirteen historical committed artifacts. Their LF-normalized contents are identical. Both previously reviewed registered platform files retain their earlier hashes. The new inventory accurately hashes fourteen managed artifacts, and the new unreviewed projection contains no exclusions or relocations.",
+    "Executed the actual extracted-twin route on a copied existing six-sheet model with baseline and final CLIs. All thirteen produced artifacts match after LF normalization; no seed-only sidecars are added. This is compatibility evidence, not a new assertion that extracted twins have the seed inventory policy.",
+    "Read the final prospective acceptance, seed maintenance, review-loop and twin-output guides against code and example behavior. The te.exports stage declares the two added seed outputs and the existing exact generation command; broader affected matrix/pipeline execution is separately recorded by the maintainer and is not claimed as independently rerun here.",
+    "Narrow follow-up after the full local runner exposed an existing parent-example test treating the newly independent seed-refresh child as parent-generated outputs: inspected the two-line test-only scope correction, then independently ran all seven deliverable-report cases and the actual seed-refresh demonstration; both pass. The exact historical parent expected-output set is preserved and every other parent file remains subject to the existing produced-versus-committed equality check. Only the first relative path component seed-refresh is excluded; its actual CLI demonstration remains exercised by generation-validation. Generator code and all seven registered output hashes are unchanged. The earlier 44-control run is preserved, not claimed as repeated."
+   ],
+   "baseline_evidence": {
+    "baseline": "df21590",
+    "baseline_code_sha256_lf": "38639f82898923c6668988e2557de2db267bfda5a38f65cd194c36d745b5fcb3",
+    "rejected_unit_and_meter_retained": true,
+    "removed_unit_svg_stale": true
+   },
+   "control_results": {
+    "independent_actual_cli_controls": 44,
+    "independent_actual_cli_failures": 0,
+    "unit_tests": {
+     "generation_validation": 30,
+     "any_model": 15,
+     "pi_export": 15
+    },
+    "generic_identity_address_controls": {
+     "surviving_udt_name_stable": true,
+     "surviving_member_name_stable": true,
+     "all_surviving_server_opc_uom_readonly_claims_stable": true,
+     "all_surviving_pi_point_claims_stable": true,
+     "rejected_records_absent": true,
+     "two_owner_safe_suffix_collision_disambiguated": true,
+     "all_orphan_source_addresses_stable": true,
+     "source_models_preserved": true
+    },
+    "historical_unreviewed_artifacts_reproduced": 13,
+    "unchanged_extracted_twin_artifacts": 13,
+    "actual_committed_inventory_files_checked": 14,
+    "followup_deliverable_report_tests": 7
+   },
+   "prior_review_scope": {
+    "unchanged_registered_outputs": [
+     "out/ignition/te_tags.json",
+     "out/pi/pi_builder_af.csv"
+    ],
+    "note": "Earlier source/format and native-platform limitations remain in force. This maintenance does not repeat earlier original-source interpretation, commercial extraction, full-corpus accuracy work, gateway acceptance or PI import. The old registered outputs retain their reviewed hashes."
+   },
+   "limits": [
+    "Independent coding-agent software review only. Decisions and reviewer labels in these controls are illustrative. No human/site review, live operations, deployment, gateway or PI import, adoption result or engineering approval is established.",
+    "Source addresses are claims generated by the seed model convention. Preserving them does not prove a point exists or retain deployment overrides absent from the model. Orphan display-path changes still require target-side review.",
+    "The inventory is local and editable, not authenticated provenance or an organizational authority. No concurrent-writer lock, crash-safe multi-file transaction or permanent invalidation is claimed.",
+    "Source-file collision protection is exercised through the CLI, which supplies its actual model path. Object API calls without source_path have no input-file identity to protect.",
+    "Actual Windows junctions and hard links were exercised. GetShortPathNameW returned the original long SVG name on this host, so a distinct 8.3 short-path alias could not be exercised. No POSIX-host execution is claimed.",
+    "Full repository suite, current CI, the 47 affected matrix cells, pipeline aggregate freshness and unrelated exports/tools are outside this independent maintenance run. They require their own executed evidence."
+   ],
+   "private_proof_hashes": {
+    "final_probe.py": "df4261033f841cf8062dec5c2b1984723486435104c3d7d1f4ff32bb21964c60",
+    "final-controls.json": "a530f8587774ff31e9117bc4e932b0c7f68508ea50f69ade47fe82b1f42e9920",
+    "final_tests.py": "7847989520dc23bf784b4e39fb499e8022e0a401c7e98560c358ec41b036aba6",
+    "final-tests.json": "16dd0dc6724fdd866a2b7c12ad199153b12e255f3558c0cd72b8787fd2c1fb2f",
+    "check_identity.py": "1f506bc5a3fa46e209408bbf1f62aa84365dae3cd40598b91537081205a210b0",
+    "identity-controls.json": "e00df7dbeae879cc51a5dddb331857569e7e0e134f0f336361309e128800d2d3",
+    "early_probe.py": "75e225c753a986568925fd93fad6c35eefe747528a8f5b6741dbc9b30e84199c",
+    "early-refresh-controls-before.json": "a0061bcacbe0eaf4ba217b4ca10e994ddf0f51cce29c9e737dd36853f87e341e",
+    "case-alias-controls-before.json": "fa1a9f7d7a0d3a0f68167623128155e5c85b71abd547b66720b82ffb0ad72df7",
+    "deliverable_followup.py": "7eabea422053eb370cfb4cadef52c759a68f30063c2e17d981153a0b3d8ac30d",
+    "deliverable-followup-proof.json": "406f144c74c7edc13617ae5adbd6ac5649de77ce46157d9c2c71cf44fb782079"
+   },
+   "followup": {
+    "date": "2026-10-30",
+    "scope": "Test-only parent/sub-example enumeration correction",
+    "previous_receipt_sha256_raw": "a5fec3ea0889079f84aa6428525bc52b25bc61a9c7e8c1c78384cde50563cd43",
+    "generator_unchanged": true,
+    "deliverable_report_tests": 7,
+    "seed_demonstration_repeated": true,
+    "prior_independent_44_controls": "Preserved on the identical generator hash; not rerun for this test-only change.",
+    "parent_expected_output_count_preserved": 6,
+    "seed_sub_example_file_count_excluded": 7
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent (narrow read-only maintenance diff, dependency hashes and completed run-log review)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over bytes with CRLF normalized to LF. Recorded cell tool hashes use the existing first sixteen hex characters of that digest.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "baf4c7e96b0d1b09ed33e7cafdaf7ed7e5624efa31d5a773299efba0cdecc4e2",
+    "out/generalization/matrix.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+    "data/corpus.json": "84996684be832a2ab0767b6c64be30ef80c7fcc2947284d46d467528b16ee9f0"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "examples/from-dexpi/README.md": "39c9ea26447b23582f542efa9e20e5b84a63543e930e89cc5df4e1a13c8270dc",
+    "data/features.json": "0afaba659f877f9cc6896ced44d10e8d3b3f09b81159446e8d6e9eb3a5eafdc1"
+   },
+   "findings": [],
+   "resolution": "No open finding in this narrow matrix refresh. All 94 cell identities, criteria and verdicts are unchanged from the stated baseline. Recorded engineering/scoring results are unchanged. The only non-execution changes are two additional generated-file counts per seed bundle and two accurate source-line citation offsets. Completed maintainer logs cover 54 selected cells, including every one of the 47 cells whose tool closure includes generate.py; the other 40 cell records remain exactly unchanged. This receipt preserves the prior substantive matrix/source review and adds no accuracy or generalization claim.",
+   "checks": [
+    "Compared final corpus registration and corpus_matrix.py with the exact baseline commit: unchanged. All 42 declared inputs, the 94 row/input cell memberships, both 0.88 scoring thresholds and the existing runner criteria remain unchanged. The separate three-entry context_packets registry also remains unchanged and does not add matrix cells.",
+    "Compared every cell recursively against the baseline, excluding only recorded execution times and tool hashes. All statuses, reasons, scores, truth/prediction counts, model quantities, corrections, refusal classifications, published-text values and held-out/development/generated/agent-key labels remain unchanged.",
+    "Checked the only 50 non-execution leaf changes explicitly:45 numeric generated-file counts rise by exactly 2 (TE, Bayer, IDAES and 42 DWSIM flowsheets), three corresponding summary strings reflect those added seed sidecars, and two DEXPI source-line offsets point to the same claims in the current guide. No file-count increase is treated as improved accuracy or a new input.",
+    "Independently derived 47 generate.py dependency cells from the unchanged declared tool closure. Every affected cell is included in the serialized selected commands. Exactly 47 recorded hashes change, each for generate.py and each to the bound final seed-review code; no dependency list or other recorded tool hash changes.",
+    "Recomputed every recorded tool/input-key hash for all 94 cells against actual current bytes. All bindings match. All 40 unselected cells, including their complete timing and hash metadata, remain exactly equal to the baseline.",
+    "Read the maintainer runner and both completed logs. It executes the vendor-render row 1 cell first, then rows 3, 4, 5, 7, 8 sequentially. Each selected cell appears exactly once with its final recorded status and value; the two logs contain 1 and 53 cell lines and their final write-completion footers. Expected red cells remain red; no new crash, missing-data or missing-dependency result is substituted.",
+    "Independently ran corpus_matrix.py --check after completion: the generated page exactly matches matrix.json and corpus.json, and every cell tool hash is current. The separate seed software receipt is attributed below rather than presented as another matrix accuracy experiment."
+   ],
+   "baseline": {
+    "commit": "df21590a1688ddaf8ae9a4b77a4be3fed6be54d6",
+    "prior_accepted_output_hashes": {
+     "docs/GENERALIZATION.md": "baae8555373556a97569e18a284b30bc3cd3e4cc2b32e18160e6eaad7e3f4e9f",
+     "out/generalization/matrix.json": "30ca81a45f33a4cc9cbb1151308e02a7100e1636d957c5c0a2e86f47d69a0a20",
+     "data/corpus.json": "84996684be832a2ab0767b6c64be30ef80c7fcc2947284d46d467528b16ee9f0"
+    }
+   },
+   "counts": {
+    "cells": 94,
+    "registered_inputs": 42,
+    "used_input_ids": 40,
+    "selected_executed_cells": 54,
+    "generate_dependency_cells": 47,
+    "retained_cells_exactly_unchanged": 40,
+    "recorded_tool_hash_bindings": 732,
+    "statuses_before": {
+     "pass": 63,
+     "fail": 23,
+     "n/a": 8
+    },
+    "statuses_after": {
+     "pass": 63,
+     "fail": 23,
+     "n/a": 8
+    }
+   },
+   "maintainer_run_log_evidence": [
+    {
+     "name": "seed-refresh-matrix-final-row1.log",
+     "sha256_lf": "dff6fcb720c2ebbced3228f3e33f23dc17025a688810623aa5646eeab2c14f59",
+     "cell_lines": 1,
+     "completion_footer": "wrote out/generalization/matrix.json and docs/GENERALIZATION.md (237.2 s)"
+    },
+    {
+     "name": "seed-refresh-matrix-final-rest.log",
+     "sha256_lf": "d47bc02517c4c0b81fa3d2cf221421a13a8be8b0f79c5f5ee22e6e6836bc8033",
+     "cell_lines": 53,
+     "completion_footer": "wrote out/generalization/matrix.json and docs/GENERALIZATION.md (320.5 s)"
+    }
+   ],
+   "separate_seed_software_review": {
+    "feature": "platform-exports",
+    "receipt_sha256_raw": "a5fec3ea0889079f84aa6428525bc52b25bc61a9c7e8c1c78384cde50563cd43",
+    "scope": "Separate independent bounded software acceptance: 44 actual CLI controls, 30 generation-validation tests, 15 generic-model tests and 15 PI-export tests. No native import or plant approval. These controls are not new matrix inputs or accuracy cells."
+   },
+   "prior_review_scope": {
+    "preserved": "The earlier substantive 94-cell/source review and the later narrow context-registry review retain their original scope and limitations.",
+    "not_repeated": "No independent 54-cell or 94-cell execution, original-source/key verification, fresh AST dependency audit, pixel-level tracing reproduction or historian-adapter experiment was performed for this narrow receipt.",
+    "unchanged_limits": "Eight selected workflows, existing failures/n/a, generated and agent-made keys, key-only scan duplicates, development reuse, changed derived truth, separate scorer fixes and partially blind baselines remain disclosed. No new independent source family or held-out result is added."
+   },
+   "limits": [
+    "Independent coding-agent diff/hash/log review. Execution of the selected cells is evidenced by maintainer-produced completed logs and current artifacts; it was not independently repeated by this reviewer.",
+    "No new accuracy, generalization, native-platform import, human review time, adoption, organizational integration, engineering approval or plant-truth claim is established.",
+    "Complete repository-suite and CI outcomes are outside this narrow receipt. Existing substantive source and matrix limitations are preserved."
+   ],
+   "private_proof_hashes": {
+    "matrix_change_probe.py": "2a24e4263b5c879d66a05631b41ce335fd2c2c274ac531cf41cbe66e3b1c3077",
+    "matrix-change-proof.json": "9d4788eef2865b21a7fddbb65db9ffbf7081a50b792073faa74bee84b19575e6"
+   },
+   "maintainer_runner_sha256_lf": "677a7708edd06fbefd6dea1245c20ffd7d3f0297fb54147db884e6661a0f6b6f"
   }
  ]
 }

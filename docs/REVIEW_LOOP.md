@@ -64,19 +64,22 @@ python scripts/generate.py                                  # or: generate.py <t
   exactly the review. A dated change record goes to `out/review/`.
 - **Re-applying the same sheet changes nothing.** The regenerated sheet prints earlier decisions back into the
   `OPS_` columns, so a reviewer can stop and resume.
-- **Downstream, for an extracted twin:**
+- **Downstream:**
   - rejected items leave the Ignition tags, the PI AF sheet and the SVGs (items under rejected equipment move to
     `_Unassigned`);
-  - each Ignition instance's `ReviewStatus` tag carries the decision, and the verifier checks it matches (V2);
+  - in an extracted twin, each Ignition instance's `ReviewStatus` tag carries the decision, and the verifier checks it matches (V2);
   - in an extracted twin, each Ignition instance's `documentation` and each PI element/attribute description end
     with `review: <status> | risk tier: <tier>`, so the decision and the remaining uncertainty show where the
     tag is used;
-  - "don't show" items get no screen label.
+  - in extracted-twin SVGs, "don't show" items get no screen label.
 
-The legacy hand-built process-model Ignition and PI exporters currently retain rejected units and instruments,
-with review annotations. Rejection filtering in those two exporters remains an open maintenance gap (N064 in
-[the ledger](TRIED.md)). The question-screen behavior below applies to both model formats; it does not establish
-that the legacy platform exports honor those decisions.
+For hand-built process models, eligible children of rejected equipment use an explicit `_Unassigned` display
+container. Their original OPC server/item and PI point claims are preserved, while their displayed/exported paths
+change. `seed_review_projection.json` lists the exclusions and old/new paths. The complete source and review sheet
+remain available. Reviewed seed streams are retained in that sheet; unreviewed streams retain its historical scope.
+The generated-file inventory retires unchanged obsolete artifacts and refuses manual edits or known conflicts
+before writes. The [worked seed refresh](../examples/review-and-mapping/seed-refresh/README.md) explains dedicated
+output folders, legacy migration and exact limits. This is local generation behavior, not native platform acceptance.
 
 If you used the question engine, rerun it with the updated model and the same supplemental inputs and selection.
 Rejected items also leave question triggers, evidence and relationships; non-rejected children remain eligible

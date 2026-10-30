@@ -138,7 +138,7 @@ class ClientReport(unittest.TestCase):
 
 
 class ReviewAndMappingReadme(unittest.TestCase):
-    """Running the README's commands reproduces every committed output byte for byte."""
+    """The parent README reproduces its outputs; the seed sub-example has its own CLI control."""
 
     def test_the_readme_commands_reproduce_the_committed_outputs(self):
         text = (EXAMPLE / "README.md").read_text(encoding="utf-8")
@@ -162,6 +162,7 @@ class ReviewAndMappingReadme(unittest.TestCase):
                 if p.is_file():
                     produced.setdefault(p.relative_to(out).as_posix(), p)
             committed = sorted(p.relative_to(EXAMPLE).as_posix() for p in EXAMPLE.rglob("*") if p.is_file()
+                               and p.relative_to(EXAMPLE).parts[0] != "seed-refresh"
                                and p.name not in ("README.md", "reviewed_sheet0.csv", "reviewed_pi_sheet0.csv"))
             self.assertEqual(sorted(produced), committed)
             for name in committed:

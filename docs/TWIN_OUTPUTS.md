@@ -27,6 +27,11 @@ step 5.
 `python scripts/generate.py out/twin/<label>/<tool>/plant_model.json` rebuilds the platform files from an edited
 model. Run with no argument, it produces the Tennessee Eastman outputs. Both paths validate and render the entire bundle before touching existing exports; malformed models fail nonzero without export changes. This structural gate does not approve inferred semantics or operational use. Writes are not a multi-file atomic transaction, so a filesystem failure can still leave partial output.
 
+For the **hand-built process-model route**, the [seed refresh guide](../examples/review-and-mapping/seed-refresh/README.md)
+shows how explicit rejections affect all seed SVG/platform files, how eligible children keep their address claims
+with ownership unknown, and how the projection report and generated-file inventory support later revisions.
+The two added JSON files belong to seed bundles; extracted twins retain the files and route described below.
+
 Two packages are committed:
 - `out/twin/round1-v2-named-fields/claude/`: a small round-1 example (Claude, sheets 0–5);
 - `out/twin/r2-tiles-trace/codex/`: the full 12-sheet twin from the declared method. This is the one loaded into

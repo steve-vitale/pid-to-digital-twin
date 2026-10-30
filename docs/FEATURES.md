@@ -141,9 +141,9 @@ Status: **proven**
 
 - **Tools:** `generate.py`, `check_pi_export.py`, `ignition/import_tags.py`
 - **How to use it:** [TWIN_OUTPUTS.md](../docs/TWIN_OUTPUTS.md)
-- **Example outputs:** [`te_tags.json`](../out/ignition/te_tags.json), [`pi_builder_af.csv`](../out/pi/pi_builder_af.csv)
+- **Example outputs:** [`te_tags.json`](../out/ignition/te_tags.json), [`pi_builder_af.csv`](../out/pi/pi_builder_af.csv), [`seed_export_manifest.json`](../out/seed_export_manifest.json), [`seed_review_projection.json`](../out/seed_review_projection.json), [`expected.json`](../examples/review-and-mapping/seed-refresh/expected/expected.json), [`seed_review_projection.json`](../examples/review-and-mapping/seed-refresh/expected/seed_review_projection.json), [`_Unassigned.svg`](../examples/review-and-mapping/seed-refresh/expected/_Unassigned.svg)
 - **Tests:** `test_generate_validation.py`, `test_check_pi_export.py`
-- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (read-only maintenance review, actual CLI baseline and adversarial filesystem controls), 2026-10-30: pass
 
 ## Check: Check a drawing, a tool or this repository against something independent
 
@@ -197,7 +197,7 @@ Status: **proven**
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex agent (narrow read-only context-registry change review), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (narrow read-only maintenance diff, dependency hashes and completed run-log review), 2026-10-30: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source

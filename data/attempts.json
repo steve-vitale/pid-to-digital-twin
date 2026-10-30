@@ -40,7 +40,7 @@
       "date": "2026-10-07",
       "change": "Ran the identical first prompt a second time on the same 12 drawings to measure run-to-run noise.",
       "hypothesis": null,
-      "evidence": "Codex 0.87 -> 0.87, Claude 0.85 -> 0.85, Gemini 0.44 -> 0.57; Claude and Codex move about ±0.03 between runs, first-try Gemini ±0.13.",
+      "evidence": "Codex 0.87 -> 0.87, Claude 0.85 -> 0.85, Gemini 0.44 -> 0.57; Claude and Codex move about Â±0.03 between runs, first-try Gemini Â±0.13.",
       "runs": "2 (first try + repeat)",
       "verdict": "kept",
       "why": "Measuring noise before claiming a difference became a standing rule, and the Gemini swing exposed its format problem.",
@@ -562,7 +562,7 @@
       "id": "A038",
       "function": "line_tracing",
       "date": "2026-10-13",
-      "change": "Read drawing numbers written with en dashes (\"PID 110–1\") as numbers for off-page connector pairing.",
+      "change": "Read drawing numbers written with en dashes (\"PID 110â€“1\") as numbers for off-page connector pairing.",
       "hypothesis": null,
       "evidence": "31 more connectors found their sheet: 38 sheet-to-sheet connections instead of 7.",
       "runs": "1",
@@ -1492,7 +1492,7 @@
       "date": "2026-10-13",
       "change": "Band indicator stretched to the shutdown limit.",
       "hypothesis": null,
-      "evidence": "TI-109's normal band (120.28–120.52 °C) took 0.4% of the width.",
+      "evidence": "TI-109's normal band (120.28â€“120.52 Â°C) took 0.4% of the width.",
       "runs": "1",
       "verdict": "rejected",
       "why": "An alarm limit is drawn only within 10 band half-widths; a Claude-only display choice for operations to confirm.",
@@ -1577,7 +1577,7 @@
       "date": "2026-10-13",
       "change": "PI Builder sheet v1 (`AttributeValueType` column, `degC`).",
       "hypothesis": null,
-      "evidence": "Vendor-published material documents `AttributeType` and writes `°C`; four units have no vendor evidence; six element templates were named but never defined.",
+      "evidence": "Vendor-published material documents `AttributeType` and writes `Â°C`; four units have no vendor evidence; six element templates were named but never defined.",
       "runs": "1 (offline check)",
       "verdict": "superseded",
       "why": "Sheet schema v2 fixes the exporter; still not import-tested.",
@@ -1591,7 +1591,7 @@
       "date": "2026-10-28",
       "change": "Digitize the report's Figure 11 trend, calibrated only on its ticks and gridlines, checked against 11 values stated in the text.",
       "hypothesis": null,
-      "evidence": "6 of 11 checks passed first; two failures were own bugs (anti-aliased edge, wrong time window), three are real figure-vs-text disagreements (pressure about 25 vs 22 psig; temperature about 2 °C below near the end).",
+      "evidence": "6 of 11 checks passed first; two failures were own bugs (anti-aliased edge, wrong time window), three are real figure-vs-text disagreements (pressure about 25 vs 22 psig; temperature about 2 Â°C below near the end).",
       "runs": "1",
       "verdict": "kept",
       "why": "Text values test the digitizer instead of tuning it.",
@@ -2986,6 +2986,23 @@
         "docs/OPPORTUNITY_SCREEN.md",
         "docs/CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers"
       ]
+    },
+    {
+      "id": "A205",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Make seed SVG, Ignition and PI refresh honor explicit review rejections, preserve eligible child source-address claims under unknown ownership, and retire only unchanged inventoried obsolete artifacts.",
+      "hypothesis": "A supplied review decision must reach every supported seed bundle output without silently remapping signals, erasing review history or leaving old rejected-unit SVGs behind.",
+      "evidence": "Independent actual CLI baseline confirms rejected records and obsolete unit SVGs survive. Final repair passes 44 independent actual-CLI controls, 30 generator-validation cases, 15 any-model cases and 15 PI-export cases. Public offline review/refresh/reconfirm example verifies unchanged 13 prior artifact contents, original source bytes, retained history, stable surviving addresses and refusal after manual editing. Independent checks exposed and the repair closes hard-link, parent conflict, junction, source/inventory collision and case-alias cleanup defects. No distinct Windows short-name alias was available for an actual control.",
+      "runs": "Deterministic software controls on copied public simulation and illustrative generic models; no new plant or model extraction",
+      "verdict": "kept",
+      "why": "Makes the next supported generated bundle consistent with the recorded review, while leaving rejected source records and history available. An inventory supports local refresh; no atomic publication, authenticated approval, native import or customer value is claimed.",
+      "source": [
+        "docs/JOURNAL.md#72-make-a-reviewed-seed-bundle-consistent-across-its-outputs",
+        "docs/GOAL.md#maintenance-acceptance-make-a-reviewed-seed-bundle-consistent",
+        "examples/review-and-mapping/seed-refresh/README.md",
+        "docs/REVIEW_LOOP.md"
+      ]
     }
   ],
   "not_tried": [
@@ -3639,12 +3656,13 @@
     {
       "id": "N064",
       "function": "review_loop",
-      "status": "not-done",
+      "status": "done",
       "idea": "Make the legacy hand-built process-model Ignition and PI exporters honor explicit item rejections while retaining independently eligible children and original model history.",
-      "why_not_yet": "Independent actual pure-output check on a copied TE model: apply_review accepts fictional rejection of U-100 and FT-101, but ignition_tags still emits the unit instance and AFeedFlow tag and pi_af_rows still selects the element and instrument attribute. Review annotations change, exclusion is missing. This question-screen increment does not change those exporters; the guide now states that boundary. No gateway or native import was attempted.",
+      "why_not_yet": "Completed 2026-10-30 for the seed SVG/platform bundle: explicit rejections excluded, eligible children retained with unknown ownership and unchanged address claims, full model/history retained, and obsolete inventoried files retired. Independent actual CLI refresh/reconfirm/refusal and identity controls passed. No native import or separate gateway/mimic/3D regeneration is claimed.",
       "source": [
         "docs/JOURNAL.md#71-carry-explicit-model-rejections-into-the-next-question-screen",
-        "docs/REVIEW_LOOP.md"
+        "docs/REVIEW_LOOP.md",
+        "docs/JOURNAL.md#72-make-a-reviewed-seed-bundle-consistent-across-its-outputs"
       ]
     }
   ]

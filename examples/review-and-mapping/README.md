@@ -9,6 +9,10 @@ The I/O list is the repository's synthetic demo list.
 
 ## What's here
 
+For a hand-built process model, the [seed refresh example](seed-refresh/README.md) carries fictional review
+decisions through the next SVG, Ignition and PI bundle, including unknown ownership, unchanged address claims,
+obsolete generated files and explicit reinstatement. The sheet-0 example below remains an extracted-twin example.
+
 | File | Made by | What it shows |
 |---|---|---|
 | `reviewed_sheet0.csv` | a reviewer, filling the `OPS_` columns of `review_queue.csv` | 4 decisions: 2 confirmed, 1 rejected (a second read of the same bubble), 1 corrected (a placeholder tag) |

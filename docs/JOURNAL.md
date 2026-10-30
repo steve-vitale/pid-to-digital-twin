@@ -3760,3 +3760,62 @@ tag, and the PI exporter still selects its element and attribute rows. Their des
 review annotation; exclusion is missing. The review-loop guide now limits its export-filtering claim to extracted
 twins and states the legacy limitation. No gateway, import or source-model change occurred. The question repair
 does not fix those exporters; they are the next concrete maintenance issue, with historical outputs preserved.
+
+## 72. Make a reviewed seed bundle consistent across its outputs
+
+**What:** 2026-10-30. N064 was more than a missing tag filter. An independent actual-CLI reproduction on a
+temporary Tennessee Eastman model confirmed that rejected equipment and signals survived in Ignition, PI and
+SVG outputs. Removing a unit from the source also left its old SVG in the output folder. These are software
+maintenance defects on a simulation fixture, not plant discrepancies. Acceptance was written in `GOAL.md` before
+the repair.
+
+The seed generator now excludes explicitly rejected units, instruments, final elements and drawn streams.
+Streams incident to rejected equipment also leave the overview, without inventing replacement connections.
+Independently eligible children remain under an explicit `_Unassigned` display container: their original OPC
+server/item and PI point claims stay unchanged, while exported/display paths change. Names are allocated from
+the complete source before filtering, so rejecting a naming competitor cannot rename a surviving signal.
+The complete model and its review history remain untouched. Reviewed seed streams now remain in the review CSV;
+unreviewed streams retain the historical sheet's scope.
+
+`seed_review_projection.json` explains each exclusion and old/new child path. `seed_export_manifest.json` records
+the generated artifacts and their CRLF/LF-normalized content hashes. Later refresh checks those files, renders
+the next bundle and retires unchanged obsolete managed files. It refuses manual edits, untracked artifact files,
+invalid inventory ownership, known file/parent conflicts and source-model output collisions before writing.
+Unrelated non-artifact notes remain untouched. Legacy folders need matching contents or migration to a fresh
+dedicated output directory. The inventory is not signed provenance, organizational approval, a concurrent-writer
+lock or an atomic filesystem transaction.
+
+Independent adversarial review found four gaps in the first implementation: a hard-linked output could rewrite
+an unrelated backup; a parent-path file conflict failed after earlier writes; Windows junctions allowed writes
+through an alias; and a model stored at the inventory path could be overwritten. A final Windows control found
+that a case-only inventory alias could retire a still-needed unit SVG. Preflight now refuses these cases before
+any known fixture byte changes, including conflicting inventory spellings and existing native file aliases.
+A distinct Windows short-name alias was unavailable on the host and is not claimed as exercised.
+
+The final independent review passes 44 actual-CLI controls, the public three-file demonstration, all 30 generator
+validation cases, 15 any-model cases and 15 PI-export cases. Separate identity controls check duplicate unit types,
+colliding member descriptions and orphan names across two owners; surviving address, unit and read-only claims
+are compared against the baseline. These are independent coding-agent software checks, not a person's engineering
+review or a native platform import.
+
+The [offline worked refresh](../examples/review-and-mapping/seed-refresh/README.md) uses four fictional review
+decisions, checks all 13 earlier unreviewed artifact contents unchanged, repeats without changes, refuses a
+manual SVG edit, then explicitly reconfirms the records. Original paths return, the obsolete unassigned SVG
+is retired and intervening decisions remain in history. A separate cold reader executed the instructions.
+The guide explains source-address claims versus deployment overrides, dedicated output ownership and migration.
+
+This repair covers seed SVG/platform generation. Extracted twins retain their existing route, and the separate
+gateway demo, P&ID drafting, mimic and 3D tools are outside this change. It supplies no live organizational
+adapter, incumbent approval receipt, human adoption measurement or operational outcome.
+
+The final corpus refresh executes 54 cells covering all 47 that depend on the changed generator; the other
+40 cells retain their earlier records. Pass/fail criteria and the 63 pass / 23 fail / 8 not-applicable results
+remain unchanged. Seed-generated file counts rise by two for the added sidecars, including the per-model DWSIM
+counts; these are output-accounting changes, not accuracy gains. The three affected pipeline stages were rebuilt
+through their actual declared commands, with no change to existing output contents; all 52 stages are fresh.
+
+The first full-suite run passed 57 of 58 scripts. Its single failure was the older parent review-and-mapping
+example's test counting the new independent seed example as parent-generated output. That comparison now excludes
+only the named sub-example, whose actual CLI packet is already exercised by the registered generator tests.
+The parent's seven cases pass, retaining exact comparison of its own generated files and rejection of unexpected
+parent artifacts. No generator, matrix method or expected historical output was changed to resolve this failure.

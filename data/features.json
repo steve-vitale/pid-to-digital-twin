@@ -169,7 +169,12 @@
    "guide": "docs/TWIN_OUTPUTS.md",
    "example_outputs": [
     "out/ignition/te_tags.json",
-    "out/pi/pi_builder_af.csv"
+    "out/pi/pi_builder_af.csv",
+    "out/seed_export_manifest.json",
+    "out/seed_review_projection.json",
+    "examples/review-and-mapping/seed-refresh/expected/expected.json",
+    "examples/review-and-mapping/seed-refresh/expected/seed_review_projection.json",
+    "examples/review-and-mapping/seed-refresh/expected/_Unassigned.svg"
    ],
    "tests": [
     "scripts/test_generate_validation.py",

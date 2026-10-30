@@ -1,0 +1,186 @@
+{
+  "schema": "seed-review-projection-1",
+  "model_id": "te-process",
+  "note": "Draft projection of recorded review decisions, not authenticated approval or plant truth. _Unassigned is a display/transport container, not an engineering owner. Address claims are preserved from the seed model convention; deployment-specific overrides are not present in this model.",
+  "excluded": [
+    {
+      "section": "units",
+      "id": "U-100",
+      "reason": "explicit rejection",
+      "rejected_endpoints": [],
+      "review": {
+        "status": "rejected",
+        "notes": "ILLUSTRATIVE software control: pretend this unit was a false positive.",
+        "by": "Illustrative software control, not a plant review",
+        "on": "2026-10-30"
+      }
+    },
+    {
+      "section": "instruments",
+      "id": "FT-101",
+      "reason": "explicit rejection",
+      "rejected_endpoints": [],
+      "review": {
+        "status": "rejected",
+        "notes": "ILLUSTRATIVE software control: pretend this instrument was a false positive.",
+        "by": "Illustrative software control, not a plant review",
+        "on": "2026-10-30"
+      }
+    },
+    {
+      "section": "final_elements",
+      "id": "FV-119",
+      "reason": "explicit rejection",
+      "rejected_endpoints": [],
+      "review": {
+        "status": "rejected",
+        "notes": "ILLUSTRATIVE software control: pretend this final element was a false positive.",
+        "by": "Illustrative software control, not a plant review",
+        "on": "2026-10-30"
+      }
+    },
+    {
+      "section": "streams",
+      "id": "S1",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S2",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S3",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S5",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S6",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S8b",
+      "reason": "endpoint unit rejected",
+      "rejected_endpoints": [
+        "U-100"
+      ],
+      "review": {}
+    },
+    {
+      "section": "streams",
+      "id": "S9",
+      "reason": "explicit rejection",
+      "rejected_endpoints": [],
+      "review": {
+        "status": "rejected",
+        "notes": "ILLUSTRATIVE software control: pretend this stream was a false positive.",
+        "by": "Illustrative software control, not a plant review",
+        "on": "2026-10-30"
+      }
+    }
+  ],
+  "relocated": [
+    {
+      "tag": "FT-102",
+      "previous_declared_owner": "U-100",
+      "owning_unit": null,
+      "old_ignition_path": "TE_Plant/U-100/DFeedFlow",
+      "new_ignition_path": "TE_Plant/_Unassigned/DFeedFlow__FT_102",
+      "opc_server_claim": "Ignition OPC UA Server",
+      "opc_item_path_claim": "ns=1;s=TE.U-100.FT-102",
+      "old_pi_element": "TE Plant\\U-100",
+      "old_pi_attribute": "DFeedFlow",
+      "new_pi_element": "TE Plant\\_Unassigned",
+      "new_pi_attribute": "DFeedFlow__FT_102",
+      "pi_point_claim": "\\\\%Server%\\TE.FT-102.PV",
+      "svg": "svg/_Unassigned.svg"
+    },
+    {
+      "tag": "FT-103",
+      "previous_declared_owner": "U-100",
+      "owning_unit": null,
+      "old_ignition_path": "TE_Plant/U-100/EFeedFlow",
+      "new_ignition_path": "TE_Plant/_Unassigned/EFeedFlow__FT_103",
+      "opc_server_claim": "Ignition OPC UA Server",
+      "opc_item_path_claim": "ns=1;s=TE.U-100.FT-103",
+      "old_pi_element": "TE Plant\\U-100",
+      "old_pi_attribute": "EFeedFlow",
+      "new_pi_element": "TE Plant\\_Unassigned",
+      "new_pi_attribute": "EFeedFlow__FT_103",
+      "pi_point_claim": "\\\\%Server%\\TE.FT-103.PV",
+      "svg": "svg/_Unassigned.svg"
+    },
+    {
+      "tag": "FV-102",
+      "previous_declared_owner": "U-100",
+      "owning_unit": null,
+      "old_ignition_path": "TE_Plant/U-100/DFeedFlowValve",
+      "new_ignition_path": "TE_Plant/_Unassigned/DFeedFlowValve__FV_102",
+      "opc_server_claim": "Ignition OPC UA Server",
+      "opc_item_path_claim": "ns=1;s=TE.U-100.FV-102",
+      "old_pi_element": "TE Plant\\U-100",
+      "old_pi_attribute": "DFeedFlowValve",
+      "new_pi_element": "TE Plant\\_Unassigned",
+      "new_pi_attribute": "DFeedFlowValve__FV_102",
+      "pi_point_claim": "\\\\%Server%\\TE.FV-102.PV",
+      "svg": "svg/_Unassigned.svg"
+    },
+    {
+      "tag": "FV-103",
+      "previous_declared_owner": "U-100",
+      "owning_unit": null,
+      "old_ignition_path": "TE_Plant/U-100/EFeedFlowValve",
+      "new_ignition_path": "TE_Plant/_Unassigned/EFeedFlowValve__FV_103",
+      "opc_server_claim": "Ignition OPC UA Server",
+      "opc_item_path_claim": "ns=1;s=TE.U-100.FV-103",
+      "old_pi_element": "TE Plant\\U-100",
+      "old_pi_attribute": "EFeedFlowValve",
+      "new_pi_element": "TE Plant\\_Unassigned",
+      "new_pi_attribute": "EFeedFlowValve__FV_103",
+      "pi_point_claim": "\\\\%Server%\\TE.FV-103.PV",
+      "svg": "svg/_Unassigned.svg"
+    },
+    {
+      "tag": "FV-101",
+      "previous_declared_owner": "U-100",
+      "owning_unit": null,
+      "old_ignition_path": "TE_Plant/U-100/AFeedFlowValve",
+      "new_ignition_path": "TE_Plant/_Unassigned/AFeedFlowValve__FV_101",
+      "opc_server_claim": "Ignition OPC UA Server",
+      "opc_item_path_claim": "ns=1;s=TE.U-100.FV-101",
+      "old_pi_element": "TE Plant\\U-100",
+      "old_pi_attribute": "AFeedFlowValve",
+      "new_pi_element": "TE Plant\\_Unassigned",
+      "new_pi_attribute": "AFeedFlowValve__FV_101",
+      "pi_point_claim": "\\\\%Server%\\TE.FV-101.PV",
+      "svg": "svg/_Unassigned.svg"
+    }
+  ]
+}
