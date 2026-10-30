@@ -1,0 +1,49 @@
+{
+  "snapshot_sha256": "6e7c1bdbfd8892f476566c5076d93a648dc7b768bd13504d6b6cf76ee2fa3725",
+  "loaded_at": "2026-10-30T17:50:01.207865+00:00",
+  "data_mode": "supplied_snapshot",
+  "live": false,
+  "source_acquisition_time": null,
+  "limits": [
+    "Snapshot load time is not source acquisition time.",
+    "Claims retain supplied status; this service does not verify them.",
+    "Sources are references only; no document or URL is fetched."
+  ],
+  "result": {
+    "id": "P-1",
+    "kind": "equipment",
+    "tag": "P-1",
+    "name": "Recirculation pump",
+    "aliases": [],
+    "status": "unverified",
+    "attributes": [
+      {
+        "name": "assigned_tag",
+        "value": true,
+        "status": "unverified",
+        "source": {
+          "kind": "document",
+          "document": "Fig 10; p. 31, p. 38"
+        }
+      },
+      {
+        "name": "name",
+        "value": "Recirculation pump",
+        "status": "unverified",
+        "source": {
+          "kind": "document",
+          "document": "Fig 10; p. 31, p. 38"
+        }
+      },
+      {
+        "name": "type",
+        "value": "pump",
+        "status": "unverified",
+        "source": {
+          "kind": "document",
+          "document": "Fig 10; p. 31, p. 38"
+        }
+      }
+    ]
+  }
+}

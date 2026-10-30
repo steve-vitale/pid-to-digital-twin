@@ -6327,6 +6327,98 @@
     "cache-and-connectivity-final-review.json": "26ce0eab47022058be28616193dee338cb6e8fc7616b83b718cc4d96a2e14f75",
     "finalization-harness-guard-correction.json": "7ebf34c0bed992191f82fded495a7c6045fb636c333c9ae749c656dc006a6a02"
    }
+  },
+  {
+   "feature": "snapshot-mcp",
+   "reviewer": "Independent Codex agent: bounded snapshot MCP software, source-binding and local protocol review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 1,
+   "file_hash_method": "Repository text bindings use SHA256 after CRLF to LF normalization; private proofs use exact raw SHA256. Static bindings, source-record comparisons and actual executions are distinguished.",
+   "files": {
+    "examples/internal-mcp/sample_asset.json": "ffb2dc447bd8a92de3b9d882f104710ca38eb83a8ff72942e6b863e6066c03a0"
+   },
+   "supporting_files": {
+    "scripts/serve_snapshot.py": "f333a4e328583711d71cfb13446d4c7910f65cf6bcbd3172e5cc5c0df30aedfd",
+    "scripts/check_snapshot_mcp.py": "a4ab9c373e359bcfa229f9776d63d1a50c671042abdfaa0887e3068b14d52221",
+    "scripts/test_snapshot_packet.py": "ca4f0393b3b08a8da526635b56281032b56085fe7412372331ba5b42987ec952",
+    "requirements-mcp.txt": "5d6679369dad83b8981b6593e12c4e2f6567d7d5cf258c1ac7186fe17e7ca674",
+    ".github/workflows/tests.yml": "5a66e41b5963eb0fc1ecb959d3b442ae511923df95b7df18eec7810cc33d0b72",
+    "scripts/run_tests.py": "71421799b98a1021b987cc1c23e57cc4b8106bd711bd4f5c822074f49f82b651",
+    "data/features.json": "70bb415f0ef6a8c596a9bf58d4d06e34e05508fd6e42c41af630afa4e433f039",
+    "data/script_index.json": "c57ea8f46edb1fd0cd57c63346cb6e9a08ce12cb2a19f57fd833b3ce120e3af9",
+    "examples/internal-mcp/README.md": "0d8af2be8afc8ae7ac8bfc292bc1ebb0ba9f6b8570664773c00cb79b6872256a",
+    "docs/INTERNAL_CONNECTIVITY.md": "0af89ebbf9b77dbd6b4c074e67b9f1335567bb38c7968fccc2fc975d40a2e4cb",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/graph-export/bayer_graph.json": "424f95f1891a6293930b31727b5adb3447bd496ef0ff4d85df0b33a78b125659"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "id": "MCP-R1",
+     "finding": "Private prototype bounded only application JSON; SDK text duplication and escaping exceeded the stated result limit.",
+     "resolution": "Prebuilt tool results and a separate encoded resource guard now include duplication/escaping and reserve 4096 bytes for pinned SDK metadata inside the 2 MiB cap. Original oversized examples refuse; accepted near-bound and Unicode/escaped values remain exact."
+    },
+    {
+     "id": "MCP-P1",
+     "finding": "Public checker had an unnecessary sample writer capable of replacing a source path.",
+     "resolution": "The writer was removed completely after static inspection. No overwrite reproduction was run. An actual no-SDK invocation with the removed flag now refuses at argument parsing and preserves the existing disposable target."
+    },
+    {
+     "id": "MCP-P2",
+     "finding": "Initial guide confused the committed plain graph with the generated graph containing questions used for the recorded response.",
+     "resolution": "Final guide names the model and question inputs, UTF-8/LF/indent/final-newline serialization, distinct plain graph and correct sampled snapshot identity."
+    }
+   ],
+   "checks": [
+    "Public serve_snapshot executable AST is identical to independently reviewed private candidate b07aa6c5; only its module docstring changes. Startup validation, opaque identifiers, sourced claims, supplied statuses, typed directed relations, snapshot immutability and explicit unserved-event count retain their bounded review scope.",
+    "Independent private controls found the original result-size defect and verified its repair through 148 actual in-memory MCP requests under negotiated 2026-07-28 and 2025-11-25 modes. The 487 assertions include repeated per-call size/digest/page checks, not 487 distinct test families. Six uneven traversals recover all 123 matching assets, 125 typed relations for the selected asset and 127 matching questions exactly once. Fourteen size cases test original overflows, near-bound ASCII, escaped and UTF-8 data, controlled errors and session survival. No bind/connect/DNS event occurred during those in-memory interactions.",
+    "Independently executed final public test_snapshot_packet with Python -S: eight standard-library tests pass. Then executed final public check_snapshot_mcp in the existing optional SDK environment: in-memory, stdio and loopback HTTP under both modes pass, plus complete synthetic pages and serialized-result size controls. No package installation, external service, model API or company data was used. The temporary loopback server is terminated by the checker; no firewall configuration changes occur.",
+    "Independently reconstructing the sampled graph from the committed Bayer model plus question file using the documented canonical serialization yields SHA256 6e7c1bdbfd8892f476566c5076d93a648dc7b768bd13504d6b6cf76ee2fa3725. The full recorded P-1 record matches that graph exactly, retains unverified status and references, reports live false and unknown acquisition time. Its historical load timestamp is not used as source freshness or an acceptance event. The current checker compares the recorded payload with fresh SDK output except loaded_at.",
+    "The standalone committed Bayer graph has no attached questions and a different raw digest. The guide now distinguishes it from the generated-with-questions check/sample. Source references are returned as data, not fetched. Existing source interpretation and original-document judgments are inherited, not re-audited or upgraded to plant truth.",
+    "Documentation accurately separates the local developer starter from the default approved-Copilot/manual-document route. Anonymous loopback is not a shared company service, local stdio is not a cloud endpoint, and no allowed OT transfer means no process-data access. Existing one-way replication and approved cross-zone architectures remain separate work. Absolute approved client paths and client-specific configuration are explained.",
+    "Optional requirements pin mcp 2.3.0. The dedicated CI job installs that file and invokes the public checker; the base runner separately includes the standard-library packet tests. This is a reviewed CI declaration, not a claim that the pending Linux job has run. Both installed SDK metadata and actual local negotiation support the tested SDK/protocol scope.",
+    "Only one feature/output is added. All 17 previous feature definitions and 112 previously registered output hashes remain exact. No old feature, matrix cell, criterion, method accuracy, native receipt or primary-source review is renewed by this record. Generated feature tables and evolving journals/attempt ledgers are excluded."
+   ],
+   "actual_validation": {
+    "private_independent_mcp_requests": 148,
+    "private_assertions": 487,
+    "public_standard_library_tests": 8,
+    "public_optional_checker_exit": 0,
+    "public_protocol_contexts": [
+     "in-memory-auto",
+     "in-memory-legacy",
+     "stdio-auto",
+     "stdio-legacy",
+     "loopback-http-auto",
+     "loopback-http-legacy"
+    ],
+    "public_paging_modes": 2,
+    "public_serialized_result_size_cases": 12,
+    "removed_writer_cli_exit": 2,
+    "prior_registered_outputs_unchanged": 112
+   },
+   "limits": [
+    "Local supplied-snapshot access only. No shared authorization, SSO, revocation integration, hosted company deployment, Copilot channel, historian connector, OT boundary crossing, native import, operator review or operational benefit was demonstrated.",
+    "The company retains ongoing authoritative context, permissions, ownership, decisions and history. Tool output does not accept a decision, verify physical identity or execute an operating change.",
+    "The 2 MiB guarantee concerns successful application/result data under the pinned SDK and its metadata allowance. Arbitrary incoming requests, outer request IDs/framing, framework errors, future SDK behavior, concurrency and broader denial-of-service protection are outside this scope.",
+    "Supplied source/status/review metadata is preserved rather than authenticated. Source documents and event records are not retrieved; review events are counted but not served. No new primary engineering-source audit or plant truth claim is made.",
+    "Local Windows evidence and reviewed CI configuration do not certify every MCP client, remote network environment or future Linux CI outcome. Other feature reviews retain their historical scopes."
+   ],
+   "private_proof_hash_method": "Exact raw SHA256, with no newline normalization.",
+   "private_proof_hashes": {
+    "final-independent-review.json": "b4cd2b20788706c2be87adaacfd94544b48ad005262be4af5091690abdaf5c22",
+    "final-narrow-controls.json": "1e50771ceef16812984c87783919c6ff82aec72f3f2b64b803d9641594ba86cc",
+    "actual-public-executions.json": "1c7ae6e1ea315fe8f233a078cc3a020e727f14bafca5f0745885cc247fc762f0",
+    "public-binding-proof.json": "0798c4a015fbac55d05a347ccb1ab0cd42abc585932f9c72627e53c8cbd60b4e",
+    "case-0.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "case-0.stderr": "016a62bfc9d4e88f04024c2c4f09071927ead01187e24d6f8fd68a756664229b",
+    "case-1.stdout": "6eae6fb80e9c60c60ef5843d9f13e652ef796a52c0e7c974cfe4d843c9d0c372",
+    "case-1.stderr": "8847f992f405047fce7a2a5c5d49a5fcc1548b5810b5cb716f3ca9110156b266",
+    "removed-writer.stderr": "9fed9f59ddda55c8b32f11a01f8681484fac13d9e9b58149526b18896843cd76"
+   }
   }
  ]
 }

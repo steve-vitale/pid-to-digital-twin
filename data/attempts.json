@@ -3386,6 +3386,21 @@
         "examples/from-description/README.md#what-has-actually-been-evaluated",
         "docs/EVALUATION.md#8-description-to-pid-evaluation-gap"
       ]
+    },
+    {
+      "id": "A229",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Optional bounded read-only MCP over a selected graph snapshot",
+      "hypothesis": "A small company-approved packet can be queried through a standard assistant interface without adding a local governance application or requiring process-data connectivity.",
+      "evidence": "Six tools plus summary resource; actual SDK in-memory, stdio and loopback HTTP checks in two protocol modes. Stable paging preserves complete assets, typed relations and questions. Independent review caught duplicated/escaped result-size overflow; corrected serialized successful-result guard tested with accept/refuse controls. No company deployment, source fetching or process-data connector.",
+      "runs": "Deterministic public-example and synthetic controls, no model calls. Actual local SDK in-memory, stdio and loopback HTTP clients in two protocol modes; no live company tenant, Copilot channel, process-data connector or OT network.",
+      "verdict": "kept",
+      "why": "Makes the requested internal access layer concrete while retaining source-status boundaries and leaving continuing authority and decisions in the company system.",
+      "source": [
+        "docs/JOURNAL.md#96-add-bounded-read-only-access-to-a-first-engineering-snapshot",
+        "examples/internal-mcp/README.md"
+      ]
     }
   ],
   "not_tried": [

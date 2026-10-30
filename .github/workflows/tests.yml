@@ -25,3 +25,14 @@ jobs:
       # All tests run offline after setup; OPEN100 drawings/keys are committed.
       - name: Run full cached-data suite
         run: python scripts/run_tests.py --full
+  snapshot-mcp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install optional pinned MCP SDK
+        run: pip install -r requirements-mcp.txt
+      - name: Check public snapshot over local SDK, stdio and loopback HTTP
+        run: python scripts/check_snapshot_mcp.py

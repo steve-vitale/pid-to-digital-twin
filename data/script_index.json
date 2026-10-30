@@ -7,6 +7,8 @@
   "research": "This project's research record: reproduces one result, not built for other inputs"
  },
  "scripts": {
+  "scripts/serve_snapshot.py": {"kind": "tool", "guide": "examples/internal-mcp/README.md"},
+  "scripts/check_snapshot_mcp.py": {"kind": "check", "guide": "examples/internal-mcp/README.md"},
   "scripts/run_extraction.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
   "scripts/trace_connections.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
   "scripts/scan_cleanup.py": {"kind": "tool", "guide": "docs/GRAPH_EXPORT.md"},

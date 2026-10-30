@@ -25,6 +25,7 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [Turn a change I measured into an annual energy, cost and greenhouse-gas figure](../docs/IMPACT_ESTIMATE.md) | A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it. | What you measured (kW before and after, steam lb/h, fuel saved, hours) and your tariff, gas price, emission factors and boiler efficiency, or labelled public typical values | Minutes | A first-draft estimate, marked as one: annual kWh or MMBtu, cost and CO2e with the formula and source of every constant, the assumptions it rests on, and the data to collect (and where) to replace each one; or, per question, what to measure and where each constant comes from | proven |
 | [Measure how often the model's statements match their sources, and let an operator check a unit in plain English](../docs/STATEMENT_REVIEW.md) | "Does this look right?" has no answer you can track. A sampled review of plain sentences against their sources gives an error rate for each kind of statement, and keeps 'matches the drawing' apart from 'true in the plant', which only someone who knows the unit can say. | A graph export (twin-graph-1), plus the sheet image or report PDF its sources cite | Seconds to render; review time per statement not yet measured | A stratified sample of plain sentences, each beside its drawing crop or report page, with two separate verdict columns; an error rate with a 95% interval; and the verdicts written back into the graph as dated events | proven |
 | [Build a first evidence and decision packet for company handoff](../docs/CONTEXT_REGISTER.md) | A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination. | A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers | Local packet preparation; engineering review time has not been measured | A local context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for handoff. The receiving company system supplies shared access and ongoing governance | proven |
+| [Let an approved local assistant retrieve assets, relations and questions from one cleared packet](../examples/internal-mcp/README.md) | A sourced engineering packet becomes reusable through a standard assistant interface while the company keeps authority over its records and decisions. | An approved IT developer environment, optional pinned MCP SDK, and a selected twin-graph-1 JSON snapshot; shared authentication and Copilot reachability require separate work | Local developer setup; company deployment and engineering review time unmeasured | Six read-only snapshot tools and a summary resource, with source claims, statuses, fingerprints and bounded paging. Public-example SDK/stdio/loopback tests; no source fetching, process-data connector or shared company deployment | proven |
 
 ## By category
 
@@ -37,6 +38,7 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [The one-page report a client reads first](#client-report) | export | **proven** |
 | [The model as an open graph of sourced claims](#graph-export) | export | **proven** |
 | [Ignition tags and PI AF staging from a model](#platform-exports) | export | **proven** |
+| [Read a selected graph snapshot through bounded internal MCP tools](#snapshot-mcp) | export | **proven** |
 | [A supplied loop list checked against a drawing key or model](#loop-audit) | check | **proven** |
 | [Any digitization tool scored beside perfect, wrong and empty answers](#vendor-evaluation) | check | **proven** |
 | [Checks a stranger (or their agent) can run on this repository](#repo-checks) | check | **proven** |
@@ -144,6 +146,19 @@ Status: **proven**
 - **Example outputs:** [`te_tags.json`](../out/ignition/te_tags.json), [`pi_builder_af.csv`](../out/pi/pi_builder_af.csv), [`seed_export_manifest.json`](../out/seed_export_manifest.json), [`seed_review_projection.json`](../out/seed_review_projection.json), [`expected.json`](../examples/review-and-mapping/seed-refresh/expected/expected.json), [`seed_review_projection.json`](../examples/review-and-mapping/seed-refresh/expected/seed_review_projection.json), [`_Unassigned.svg`](../examples/review-and-mapping/seed-refresh/expected/_Unassigned.svg)
 - **Tests:** `test_generate_validation.py`, `test_check_pi_export.py`
 - **Independent review:** Independent Codex agent (read-only maintenance review, actual CLI baseline and adversarial filesystem controls), 2026-10-30: pass
+
+<a id="snapshot-mcp"></a>
+### Read a selected graph snapshot through bounded internal MCP tools
+
+Status: **proven**
+
+**Why it matters:** A sourced engineering packet becomes reusable through a standard assistant interface while the company keeps authority over its records and decisions.
+
+- **Tools:** `serve_snapshot.py`
+- **How to use it:** [README.md](../examples/internal-mcp/README.md)
+- **Example outputs:** [`sample_asset.json`](../examples/internal-mcp/sample_asset.json)
+- **Tests:** `test_snapshot_packet.py`, `check_snapshot_mcp.py`
+- **Independent review:** Independent Codex agent: bounded snapshot MCP software, source-binding and local protocol review, 2026-10-30: pass
 
 ## Check: Check a drawing, a tool or this repository against something independent
 

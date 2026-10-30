@@ -4642,3 +4642,35 @@ An independent reader checks the two revised documents against their source cont
 112 registered example outputs, matrix criteria, cells and existing whole-feature reviews remain unchanged. This
 is a documentation and evaluation-scope correction; no generator, model, layout or answer key is changed and no
 new model call or matrix execution is claimed.
+
+## 96. Add bounded read-only access to a first engineering snapshot
+
+An optional MCP server now reads one selected twin-graph-1 file at startup and serves six tools plus a summary
+resource. Assets retain their full sourced claims and statuses; relationships retain types and direction;
+existing questions retain their evidence requests. Search, relation and question lists have stable offset
+pages tied to the same input SHA-256. There is no source fetching, process-data connector, decision acceptance
+or write tool. Review events are counted in the summary but are not served by this initial interface.
+
+The official Python SDK is pinned separately so the base toolkit and Copilot reader path need no additional
+dependency. Actual SDK checks exercise in-memory, stdio and loopback Streamable HTTP clients in two negotiated
+protocol modes, compare the full public example asset/relations/questions, and confirm sessions survive expected
+errors. Larger synthetic packets exercise complete traversal beyond each per-call limit. The base suite adds
+stdlib packet controls; the optional CI job runs the maintained SDK/transport checks separately.
+
+Independent private review found that a limit on the application JSON alone missed the SDK's duplicated text
+and structured content, with escaping enlarging resource results too. The server now constructs and measures
+the serialized successful MCP result, including both copies and escaping, with an allowance for pinned SDK
+metadata. Actual oversized ASCII and escape-heavy results refuse; accepted Unicode and near-bound results
+retain their content. The bound excludes arbitrary outer JSON-RPC request IDs, framing and framework errors.
+The original finding, source snapshot and corrected-code review are retained privately; this was a real defect,
+not a hypothetical guard. Inputs remain capped at 32 MiB and successful result data at 2 MiB.
+
+Stdio opens no listening port. The optional HTTP listener is fixed to loopback and has no company authentication.
+The guide describes it as a developer starter, not a shared service or an endpoint cloud Copilot can reach.
+Company access control, published Copilot channels, historian integration and OT network architecture need
+separate implementation and acceptance. No firewall, tunnel, tenant or company data is configured. A site that
+allows no cross-boundary ports stays disconnected, using only a separately approved released snapshot if allowed.
+
+This adds an access layer to the engineering on-ramp. Existing company systems still own source authority,
+permissions, continuing decisions and execution. No new matrix cell, unfamiliar-description generation score,
+native import or measured operational benefit is claimed.

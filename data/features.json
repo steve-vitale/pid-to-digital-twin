@@ -479,6 +479,27 @@
    "you_need": "A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers",
    "time": "Local packet preparation; engineering review time has not been measured",
    "you_get": "A local context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for handoff. The receiving company system supplies shared access and ongoing governance"
+  },
+  {
+   "id": "snapshot-mcp",
+   "category": "export",
+   "title": "Read a selected graph snapshot through bounded internal MCP tools",
+   "tools": [
+    "scripts/serve_snapshot.py"
+   ],
+   "guide": "examples/internal-mcp/README.md",
+   "example_outputs": [
+    "examples/internal-mcp/sample_asset.json"
+   ],
+   "tests": [
+    "scripts/test_snapshot_packet.py",
+    "scripts/check_snapshot_mcp.py"
+   ],
+   "job": "Let an approved local assistant retrieve assets, relations and questions from one cleared packet",
+   "why": "A sourced engineering packet becomes reusable through a standard assistant interface while the company keeps authority over its records and decisions.",
+   "you_need": "An approved IT developer environment, optional pinned MCP SDK, and a selected twin-graph-1 JSON snapshot; shared authentication and Copilot reachability require separate work",
+   "time": "Local developer setup; company deployment and engineering review time unmeasured",
+   "you_get": "Six read-only snapshot tools and a summary resource, with source claims, statuses, fingerprints and bounded paging. Public-example SDK/stdio/loopback tests; no source fetching, process-data connector or shared company deployment"
   }
  ]
 }

@@ -48,6 +48,7 @@ SOURCE_TESTS = (
     "scripts/test_script_index.py",
     "scripts/test_attempts_ledger.py",
     "scripts/test_graph_export.py",
+    "scripts/test_snapshot_packet.py",
     "scripts/test_feature_catalog.py",
     "scripts/test_corpus_matrix.py",
     "scripts/test_question_engine.py",

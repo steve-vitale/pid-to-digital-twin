@@ -6,9 +6,10 @@ company-approved Microsoft 365 Copilot experience and approved document location
 Context Protocol (MCP) server is a later, optional access layer. The company still needs a system that retains
 source authority, ownership, decisions and history as people and projects change.
 
-This page is a proposed integration sequence, checked against the primary specifications linked below. It is
-not a runnable server tutorial or a tested company deployment. The toolkit currently supplies local files and
-specialist commands; it has no MCP server, authenticated shared service or receiving-system adapter.
+This page is an integration sequence, checked against the primary specifications linked below. The optional
+[snapshot MCP starter](../examples/internal-mcp/README.md) is runnable over local stdio or loopback Streamable
+HTTP and tested with public data. Company deployment, shared authentication, receiving-system adapters and
+process-data connections remain proposed integration work.
 
 ## Default path: Copilot within a strict company boundary
 
@@ -163,16 +164,17 @@ promising an internal-only service will work with a cloud-hosted client; do not 
 as a workaround. Verify tools, resource handling and end-user authorization in the actual published Copilot
 channel, not only a developer test client. No such end-to-end Copilot test has been performed here.
 
-An IT developer can first test a read-only server over a synthetic packet with a maintained MCP SDK and a test
-client. A local stdio experiment is useful for server development, where allowed. Check that the server lists and
-retrieves the expected resources, returns the correct source revision and refuses a source outside the selected
-packet. This development experiment is separate from the default Copilot-only reader path and a shared deployment.
+An IT developer can first run the [snapshot starter](../examples/internal-mcp/README.md) over the public example
+or a cleared graph packet with the pinned MCP SDK and a test client. It exposes six bounded tools for snapshot
+identity, asset search/readback, typed relations and existing questions, plus a summary resource. It reads the
+selected file once; sources are returned as references and are not fetched. Its local transport tests are
+separate from the default Copilot-only reader path and a company shared deployment.
 
-A small proposed interface could provide `search_sources`, `get_source`, `get_asset`, `get_question` and
-`get_history_window`. These names are design examples, not callable tools in this repository. Return source
-identity, revision or content fingerprint, retrieval time, evidence location and unresolved mappings with each
-result. Keep history queries bounded by approved points, dates and result size. Do not offer arbitrary SQL,
-filesystem paths or user-supplied fetch URLs as a shortcut to these operations.
+Future source-document and process-data connectors could add `search_sources`, `get_source` and
+`get_history_window`; those operations are not implemented. They should return source identity, revision or
+content fingerprint, retrieval time, evidence location and unresolved mappings with each result. Keep history
+queries bounded by approved points, dates and result size. Do not offer arbitrary SQL, filesystem paths or
+user-supplied fetch URLs as a shortcut to these operations.
 
 For a shared service, the company chooses a host, service owner and approved assistant clients. A central MCP
 endpoint can route to several existing systems; it need not copy them all into one database. Follow the MCP
