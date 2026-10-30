@@ -8,17 +8,22 @@ settles the question. Run every question and you get a draft energy and controls
 get the answer to "what do I need to collect, and from where, to answer this?". Examples, with a hand check of every
 finding: [`examples/opportunity-screen/`](../examples/opportunity-screen/README.md).
 
+Decision rules describe which investigations to pursue or conclude. In this screening language, "close it" means
+close the investigation, never operate or close equipment. Findings do not authorize operational changes.
+
 ```sh
 python -S scripts/question_engine.py --list
 python -S scripts/question_engine.py --model data/te_process_model.json --loops examples/loop-audit/te_loops.csv --out out/screen-te
 python -S scripts/question_engine.py --model data/bayer_rt/process_model.json --question E1 --question H4
-python -S scripts/question_engine.py --model my-bundle/plant_model.json \
-    --schedule data/open100_equipment_schedule.json \
-    --schedule examples/opportunity-screen/open100_schedule_fields.json --out out/screen-site
+python -S scripts/question_engine.py --model my-bundle/plant_model.json --out out/screen-site
 python -S scripts/question_engine.py --rollup out/screen-site-a --rollup out/screen-site-b --out out/rollup
 ```
 
 Stdlib only, offline, no model calls. Without `--out` it prints the screen.
+
+For your own model, add `--schedule` only for your corresponding records after checking their sheet/asset
+identities and scope. The committed OPEN100 schedules describe that public source, not arbitrary site equipment.
+Its complete scheduled example is in the [worked-example commands](../examples/opportunity-screen/README.md).
 
 ## Refresh after reviewing the model
 

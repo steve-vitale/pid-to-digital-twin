@@ -4068,6 +4068,666 @@
     "context-register-portability-review-prior.json": "280f9a2f693f3c31cc9debd7b08aec7b4f62d4f6a8e9be0529b2c7b997678f9b",
     "onramp-binding-proof.json": "e6cdf9d6c11a92c106bcb81f5caf08e1977e425335d8077840807a3bcbdf55c3"
    }
+  },
+  {
+   "feature": "drawing-to-bundle",
+   "reviewer": "Independent Codex agent (narrow read-only starter prose/source renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 2,
+   "files": {
+    "examples/own-drawing/extraction_sheet0.json": "fbb9c92c322c0b4dd8e5a48482b0dc13c52a3144f92c3c77c5f2d4a308d571de",
+    "examples/own-drawing/manifest.json": "fb92b0ad0194687c1872cc35c06bdc5aea4b1382e87a5e7218072758e707f0df"
+   },
+   "supporting_files": {
+    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2",
+    "scripts/scan_cleanup.py": "5f3e277434681caee52bd05b8ed7e3702ad87c4467ed367346b7bdf4839aafcc",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "scripts/site_extraction_workflow.py": "8495fd10d760871ef11d3c28f9a034f3fefd4a0a92084f7647fa55e783d55c1b",
+    "scripts/build_twin.py": "8e9a5e26b9938a8adcca9590e03c3dde8c63af38aba09f6cf1aeafe6c4b0ded7",
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/question_engine.py": "75d2f63536748155a32b9132a93da362445ca4117111f9018bc7add5061a0ddf",
+    "scripts/deliverable_report.py": "ec2f910d6b752cf571283dda715eb0d9bbf9aedffd1bf3c9329b6dd61f6819b2",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "examples/own-drawing/README.md": "7c77af32a490c949acab13b6d75e447083cfccd7f404dd92a79dfc053f151f96",
+    "docs/AT_YOUR_PLANT.md": "3ba7d50f7c6fde8083cfa7a0cfa67c3c73bec6538c47e94544ab119227ff85ca",
+    "examples/first-pilot/README.md": "bcdd13a5e78e97ce511e18362f001050a6a229a804de6345ffddc29c2fc85268",
+    "examples/first-pilot/pilot-brief.md": "7fb01ad86e776cb16301451a3d1e8d3ab3533b2b22301c12b1d7aa7549306b4d",
+    "data/features.json": "0eb4a87889ed87363e04a9098e12887242d48d27c84cfa2eb47f6951382c5e06"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Complete drafting adaptation and generated-drawing paragraph",
+     "normalization": "Read UTF-8 with universal LF newlines. Let start=text.index('Only scripts marked as tools in') and end=text.index('\\n\\n', start); hash text[start:end]+'\\n'. This is the complete paragraph, with one final LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "e4c6a6f8a7ba8e1e01f64b3f72f2d145e158d8d8022d2fdf7cca338778b6d3f2"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in the bounded starter corrections. The revised instructions match existing entry points and static/draft output boundaries. All registered outputs and tool code retain baseline hashes; prior substantive artifact and source review scopes are preserved rather than rerun.",
+   "checks": [
+    "Read the final own-drawing, description-model and at-plant guide corrections and the README drafting-adaptation paragraph. The no-package worked example is separated from fresh paid/model extraction; a first question and private pilot brief precede broader evaluation or deployment.",
+    "Checked the corresponding actual source entry points and data contracts. Existing question_engine --model/--out and its report fields support the documented model-to-question path. Export-only outputs, required drawing dependencies, path semantics and drafting additions are qualified as described in the attached private binding proof.",
+    "Verified the feature registered outputs remain at accepted normalized hashes and baseline bytes/content, except the separately reviewed three H1 rule strings in the opportunity-screen JSON/Markdown outputs. All declared tool files match baseline. No output was regenerated or original-source model audit repeated by this reviewer.",
+    "Compared the entire feature registry as parsed objects against baseline. Only description-to-model why and you_get change. They now describe checkable interpretation, logical SVGs and staging without claiming actual plant agreement, generic native screens or automatic drafting.",
+    "The revised guide uses the existing recorded extraction and exposes the existing question CLI, with exact finding/assets/requests carried into a private pilot brief. It tells the engineer to check unreviewed asset references before collection and does not treat a finding as established opportunity, savings or permission.",
+    "The at-plant guide now distinguishes development sheets 0-5 and method-selecting validation 6-11, direct supported models versus optional drawing round trips, and reusable intake versus research-only visuals. Larger annotation studies and local hosting are separate optional work."
+   ],
+   "prior_review_scope": {
+    "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+    "date": "2026-10-29",
+    "resolution": "Re-ran import_site_drawing check-only and import through guide tests; 7 own-drawing, 18 intake, 10 scan-cleanup tests passed. Recorded model extraction was not rerun; guide limitations are explicit. Final 18 intake tests and 7 own-drawing tests pass. Revised own-drawing guide accurately says omitted items require a corrected extraction copy, new intake bundle, and manual decision reconciliation by source symbol ID; reusable generic intake is distinguished from OPEN100 research visualizations.",
+    "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer.",
+    "archived_record_sha256_raw": "74c429fc5891d515817de8aa148870172410cebd870fe7f8a1203069396945da",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 2,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-drawing-to-bundle-review-record.json": "74c429fc5891d515817de8aa148870172410cebd870fe7f8a1203069396945da",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027"
+   },
+   "resolved_findings": [
+    {
+     "issue": "The at-plant guide retained a categorical claim that intelligent CAD export is more accurate and cheaper. No universal site comparison supports that wording.",
+     "resolution": "Final prose names supported structured exports, says they avoid rereading available structure from pixels and preserves interpretation, dropped-record, uncertain-placement and adapter review."
+    }
+   ],
+   "attributed_reader_execution": {
+    "kind": "Separate AI reader actual software path, not this reviewer rerunning it and not timed human adoption. The initial run returned earlier H1 wording; latest copy is verified by exact diff and separately attributed source/control proof.",
+    "commands_passed": 4,
+    "question_ids": [
+     "H1@S0-OP005",
+     "C1@S0-OP001",
+     "C3@model"
+    ],
+    "actual_cli_proof_sha256_raw": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "earlier_final_document_proof_sha256_raw": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "source_wording_followup_proof_sha256_raw": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "code_bindings_current": true,
+    "old_guide_bindings_not_claimed_current": true
+   },
+   "attributed_source_review": {
+    "kind": "Separate AI controls/source reader, not a fresh primary-source/model audit by this reviewer.",
+    "proof_sha256_raw": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "closed_findings": 9,
+    "source_script_hashes_current": true,
+    "scope": "Actual earlier Bayer export, no-Pillow refusal, TE drafting-addition and final three-finding bridge checks remain attributed to this proof. The current own-drawing/OPPORTUNITY_SCREEN last wording was reread directly here; earlier proof own-drawing hashes predate the last explanatory sentence. No plant truth, human adoption or new benchmark inference."
+   }
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "Independent Codex agent (narrow read-only starter prose/source renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 1,
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "f88c1ffae19394035127612751b79d7527664a7802c36f35a0e9cb70d0c5872e"
+   },
+   "supporting_files": {
+    "scripts/deliverable_report.py": "ec2f910d6b752cf571283dda715eb0d9bbf9aedffd1bf3c9329b6dd61f6819b2",
+    "scripts/question_engine.py": "75d2f63536748155a32b9132a93da362445ca4117111f9018bc7add5061a0ddf",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "examples/own-drawing/README.md": "7c77af32a490c949acab13b6d75e447083cfccd7f404dd92a79dfc053f151f96",
+    "docs/AT_YOUR_PLANT.md": "3ba7d50f7c6fde8083cfa7a0cfa67c3c73bec6538c47e94544ab119227ff85ca",
+    "examples/first-pilot/README.md": "bcdd13a5e78e97ce511e18362f001050a6a229a804de6345ffddc29c2fc85268",
+    "examples/first-pilot/pilot-brief.md": "7fb01ad86e776cb16301451a3d1e8d3ab3533b2b22301c12b1d7aa7549306b4d",
+    "data/features.json": "0eb4a87889ed87363e04a9098e12887242d48d27c84cfa2eb47f6951382c5e06"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Complete drafting adaptation and generated-drawing paragraph",
+     "normalization": "Read UTF-8 with universal LF newlines. Let start=text.index('Only scripts marked as tools in') and end=text.index('\\n\\n', start); hash text[start:end]+'\\n'. This is the complete paragraph, with one final LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "e4c6a6f8a7ba8e1e01f64b3f72f2d145e158d8d8022d2fdf7cca338778b6d3f2"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in the bounded starter corrections. The revised instructions match existing entry points and static/draft output boundaries. All registered outputs and tool code retain baseline hashes; prior substantive artifact and source review scopes are preserved rather than rerun.",
+   "checks": [
+    "Read the final own-drawing, description-model and at-plant guide corrections and the README drafting-adaptation paragraph. The no-package worked example is separated from fresh paid/model extraction; a first question and private pilot brief precede broader evaluation or deployment.",
+    "Checked the corresponding actual source entry points and data contracts. Existing question_engine --model/--out and its report fields support the documented model-to-question path. Export-only outputs, required drawing dependencies, path semantics and drafting additions are qualified as described in the attached private binding proof.",
+    "Verified the feature registered outputs remain at accepted normalized hashes and baseline bytes/content, except the separately reviewed three H1 rule strings in the opportunity-screen JSON/Markdown outputs. All declared tool files match baseline. No output was regenerated or original-source model audit repeated by this reviewer.",
+    "Compared the entire feature registry as parsed objects against baseline. Only description-to-model why and you_get change. They now describe checkable interpretation, logical SVGs and staging without claiming actual plant agreement, generic native screens or automatic drafting.",
+    "The existing client report remains the same static review HTML. The new next step screens the associated draft model; it does not turn the report into an operational dashboard or infer additional approval. Historical exact reproduction, stale-queue refusal and decided-item tests retain their original scope."
+   ],
+   "prior_review_scope": {
+    "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+    "date": "2026-10-29",
+    "resolution": "7 deliverable-report tests and 7 own-drawing tests pass. Exact committed REPORT reproduction, stale or edited generated queue columns refused, decided items correctly leave to-check list. Final regenerated reports reproduce exactly through 7 deliverable-report and 7 own-drawing tests; both HTML reports now state unverified undirected logical links and no established direct pipe adjacency.",
+    "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer.",
+    "archived_record_sha256_raw": "f9da708ea7536e6a68ea7b82d49c238254844cb4a8d65d0973fc7cf4dc209cb7",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 1,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-client-report-review-record.json": "f9da708ea7536e6a68ea7b82d49c238254844cb4a8d65d0973fc7cf4dc209cb7",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027"
+   },
+   "resolved_findings": [
+    {
+     "issue": "The at-plant guide retained a categorical claim that intelligent CAD export is more accurate and cheaper. No universal site comparison supports that wording.",
+     "resolution": "Final prose names supported structured exports, says they avoid rereading available structure from pixels and preserves interpretation, dropped-record, uncertain-placement and adapter review."
+    }
+   ],
+   "attributed_reader_execution": {
+    "kind": "Separate AI reader actual software path, not this reviewer rerunning it and not timed human adoption. The initial run returned earlier H1 wording; latest copy is verified by exact diff and separately attributed source/control proof.",
+    "commands_passed": 4,
+    "question_ids": [
+     "H1@S0-OP005",
+     "C1@S0-OP001",
+     "C3@model"
+    ],
+    "actual_cli_proof_sha256_raw": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "earlier_final_document_proof_sha256_raw": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "source_wording_followup_proof_sha256_raw": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "code_bindings_current": true,
+    "old_guide_bindings_not_claimed_current": true
+   },
+   "attributed_source_review": {
+    "kind": "Separate AI controls/source reader, not a fresh primary-source/model audit by this reviewer.",
+    "proof_sha256_raw": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "closed_findings": 9,
+    "source_script_hashes_current": true,
+    "scope": "Actual earlier Bayer export, no-Pillow refusal, TE drafting-addition and final three-finding bridge checks remain attributed to this proof. The current own-drawing/OPPORTUNITY_SCREEN last wording was reread directly here; earlier proof own-drawing hashes predate the last explanatory sentence. No plant truth, human adoption or new benchmark inference."
+   }
+  },
+  {
+   "feature": "description-to-model",
+   "reviewer": "Independent Codex agent (narrow read-only starter prose/source renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 6,
+   "files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
+    "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
+    "examples/from-description/bayer-exports/svg/overview.svg": "458bbe10ab573b1a89396f6e863e55f65450bfb2797b63522845972b2fa10bf9",
+    "examples/from-description/bayer-exports/ignition/tags.json": "cf6a54374d27803d03e6e6a34b196878a05ecd1e2692420d3d3f36d82058a990",
+    "examples/from-description/bayer-exports/ops_review_sheet.csv": "57f5ed44024db6dce61aa781a5564beb2dc65a0f2aefb555fe19c76dd0c1685a"
+   },
+   "supporting_files": {
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/style_fidelity.py": "5e5207537b5c196e33ead24944ea86eb96dfb880d0b0d915fda5d8ea58a9b2f7",
+    "data/bayer_rt/pid_layout.json": "f293228373d0e4cf8aa2593dc5439aa9daea5b160ab2f639cf399fa7a8f4a3ba",
+    "examples/from-description/README.md": "7a276688060f80dfa0fce4b5d3b0b57f78dcabb69a6a36d6acf89b25719dbdeb",
+    "docs/AT_YOUR_PLANT.md": "3ba7d50f7c6fde8083cfa7a0cfa67c3c73bec6538c47e94544ab119227ff85ca",
+    "requirements.txt": "a7e58f9cdc7b395e162ab27f61b2eac1ff74abcd6c495c3abcea55237268bdbf",
+    "data/features.json": "0eb4a87889ed87363e04a9098e12887242d48d27c84cfa2eb47f6951382c5e06"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Complete drafting adaptation and generated-drawing paragraph",
+     "normalization": "Read UTF-8 with universal LF newlines. Let start=text.index('Only scripts marked as tools in') and end=text.index('\\n\\n', start); hash text[start:end]+'\\n'. This is the complete paragraph, with one final LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "e4c6a6f8a7ba8e1e01f64b3f72f2d145e158d8d8022d2fdf7cca338778b6d3f2"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in the bounded starter corrections. The revised instructions match existing entry points and static/draft output boundaries. All registered outputs and tool code retain baseline hashes; prior substantive artifact and source review scopes are preserved rather than rerun.",
+   "checks": [
+    "Read the final own-drawing, description-model and at-plant guide corrections and the README drafting-adaptation paragraph. The no-package worked example is separated from fresh paid/model extraction; a first question and private pilot brief precede broader evaluation or deployment.",
+    "Checked the corresponding actual source entry points and data contracts. Existing question_engine --model/--out and its report fields support the documented model-to-question path. Export-only outputs, required drawing dependencies, path semantics and drafting additions are qualified as described in the attached private binding proof.",
+    "Verified the feature registered outputs remain at accepted normalized hashes and baseline bytes/content, except the separately reviewed three H1 rule strings in the opportunity-screen JSON/Markdown outputs. All declared tool files match baseline. No output was regenerated or original-source model audit repeated by this reviewer.",
+    "Compared the entire feature registry as parsed objects against baseline. Only description-to-model why and you_get change. They now describe checkable interpretation, logical SVGs and staging without claiming actual plant agreement, generic native screens or automatic drafting.",
+    "The model route now describes review CSV, static logical SVGs and Ignition/PI staging. It does not promise generic live/native mimics, 3D, alarms or replay. A generated drawing is optional and requires authored layout and Pillow even for --check.",
+    "Read source paths and layout/key behavior directly: ROOT-relative CLI paths, marked utility/station additions and same-model emitted key are distinguished from source model contents and installed equipment. Bayer station disabling is in its existing layout. Neither model source citations nor drawing round trips establish actual plant truth.",
+    "Read generate.review_rows and its missing-source warning comprehension. The final guide correctly limits the warning/NO SOURCE GIVEN marker to instruments/final elements without simulator-channel references; equipment source can be blank and streams are not completely audited by that sheet."
+   ],
+   "prior_review_scope": {
+    "reviewer": "independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run)",
+    "date": "2026-10-29",
+    "resolution": "All earlier findings verified fixed; outputs byte-identical.",
+    "limits": [],
+    "archived_record_sha256_raw": "1b0073860fedc5823776261d63cc44c9d1b58f279078d232eb6056747f28b958",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 6,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-description-to-model-review-record.json": "1b0073860fedc5823776261d63cc44c9d1b58f279078d232eb6056747f28b958",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027"
+   },
+   "resolved_findings": [
+    {
+     "issue": "The at-plant guide retained a categorical claim that intelligent CAD export is more accurate and cheaper. No universal site comparison supports that wording.",
+     "resolution": "Final prose names supported structured exports, says they avoid rereading available structure from pixels and preserves interpretation, dropped-record, uncertain-placement and adapter review."
+    }
+   ],
+   "attributed_reader_execution": {
+    "kind": "Separate AI reader actual software path, not this reviewer rerunning it and not timed human adoption. The initial run returned earlier H1 wording; latest copy is verified by exact diff and separately attributed source/control proof.",
+    "commands_passed": 4,
+    "question_ids": [
+     "H1@S0-OP005",
+     "C1@S0-OP001",
+     "C3@model"
+    ],
+    "actual_cli_proof_sha256_raw": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "earlier_final_document_proof_sha256_raw": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "source_wording_followup_proof_sha256_raw": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "code_bindings_current": true,
+    "old_guide_bindings_not_claimed_current": true
+   },
+   "attributed_source_review": {
+    "kind": "Separate AI controls/source reader, not a fresh primary-source/model audit by this reviewer.",
+    "proof_sha256_raw": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "closed_findings": 9,
+    "source_script_hashes_current": true,
+    "scope": "Actual earlier Bayer export, no-Pillow refusal, TE drafting-addition and final three-finding bridge checks remain attributed to this proof. The current own-drawing/OPPORTUNITY_SCREEN last wording was reread directly here; earlier proof own-drawing hashes predate the last explanatory sentence. No plant truth, human adoption or new benchmark inference."
+   }
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (narrow description-metadata support renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 23,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "examples/context-register/metropt3/source_key.json": "51d72abe7f1fdccc20e10d053042151603ce793b6d93bd4c2b946864707f862b",
+    "examples/context-register/metropt3/proposed_answers.csv": "b56b2612e6b143848f78531598eabd46a4910f97ee25d1e0c7aa89f3a19826b3",
+    "examples/context-register/metropt3/expected/context.json": "d21f2b87bb808ff8562a64fe97bfeead25ba3f56bfe3dda629efa2249cdc7ce4",
+    "examples/context-register/metropt3/expected/context.md": "d0a535b0e915aab3cb5ae57c7822917749d6733eead2f64e38bad2a2bb0dee37"
+   },
+   "supporting_files": {
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/test_context_register.py": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "scripts/test_context_examples.py": "3b1eddd695d8a658a8e1bc1d6a54d5ceb1c5be2a408cbbc41ff4a6952c4eb726",
+    "examples/context-register/metropt3/model.json": "53d91f25a49c45a62c0ee5fdbb93a6ecdf70b9b05ebaaae7f5e0a50fa2e06141",
+    "examples/context-register/metropt3/questions.json": "cb64e7207396bf13432e4c8762554e5c7a927de870367877b1e610231e112209",
+    "examples/context-register/metropt3/prepare_sources.py": "3ca5b0aed1bccae16517e004f4d27bc131fcfd09a71dd1f859dde6eb9b6d0dc6",
+    "examples/context-register/metropt3/verify_sources.py": "3686dbb94ad8a004248315f5bd77ec71d76b6eb906b504378b1fbcc4b04b46a7",
+    "examples/context-register/metropt3/check_packet.py": "9f05791331ff38ac984add069b28c96288f99526cf7deae5b3b534f615445003",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/ACCEPTANCE.md": "4c5ed61138f545328422ce30826980d5976043a8f3a869704b4a93c13c4f131d",
+    "examples/context-register/metropt3/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "docs/CONTEXT_REGISTER.md": "bd5ff4becec31c2b8d983c5a9ee82a3a635717d5b0ff04f26efd85066e4eed59",
+    "docs/CONTEXT_LIFECYCLE.md": "ccd5254234551fd77f55c10d849e2ee1f559b8cb41633a1f9da02b3c6d390de3",
+    "examples/context-register/README.md": "7bf7fa34ea6c2edc880aabb9df9317675e46e27c81a00d033c79b3015ebb4e5f",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4",
+    "data/features.json": "0eb4a87889ed87363e04a9098e12887242d48d27c84cfa2eb47f6951382c5e06",
+    "requirements-render.txt": "76259e1cd656bc788de8a71e6fa731d9779066c5abbf24008db0f8c9138c8e82",
+    ".gitignore": "c9514ece3ce68e2a40ae27449270bd93283575ca51e3e9cd87a8e055669719be",
+    "examples/first-pilot/README.md": "bcdd13a5e78e97ce511e18362f001050a6a229a804de6345ffddc29c2fc85268"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Starter introduction and From a first packet to company context transition",
+     "normalization": "Read UTF-8 with universal LF newlines. Exact text[text.index('**Turn starting documents'):text.index('## How each piece contributes')]. Preserve every trailing newline; do not strip or append. The heading is excluded.",
+     "normalized_utf8_sha256": "a0774a643d9034b690c149c96a4c150020fb97e98897e752b307cb5dbd1889d9"
+    },
+    {
+     "file": "README.md",
+     "section": "Single Maintenance and reliability navigation bullet",
+     "normalization": "Exact complete UTF-8 line, followed by one LF; generated feature-table text elsewhere is excluded.",
+     "normalized_utf8_sha256": "0c9e5e3ed5956c308560152308c0a921706c8f2239c247f92bef81cbb03df6b3"
+    },
+    {
+     "file": "README.md",
+     "section": "Manual How each piece contributes evidence and decision packet row",
+     "normalization": "Exact complete line beginning '| **An evidence and decision packet**', followed by one LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "2c7c7e1bcb3ebcffc3b790238d3ca788f393f52e445e519da4e66c2c16628896"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding. This is a support-hash renewal for an unrelated two-field description correction; feature code, schemas, outputs and substantive review scope are unchanged.",
+   "checks": [
+    "Compared every registered output and prior support binding with the accepted record. All outputs and supports retain their exact accepted normalized hashes except data/features.json.",
+    "Compared the entire feature registry against baseline: only description-to-model why and you_get change. The context-register feature object, its output list, tools and all other metadata are unchanged.",
+    "All 23 outputs and 20 of 21 supports are unchanged. The three previously bound README starter/manual-row/maintenance sections are unchanged. Only the unrelated descriptive registry metadata requires the renewed support hash; the one-locator-per-answer public core/schema/history scope is unchanged."
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent (narrow read-only onboarding and company-handoff prose review)",
+    "date": "2026-10-30",
+    "resolution": "No open finding in the five-document on-ramp clarification. The public toolkit begins with one useful engineering evidence and decision packet. A shared company system supplies maintained organizational context, responsibility, access and review; operational execution may remain in existing systems. The receiving adapter and round trip still need implementation and validation. All 23 registered outputs, public core, tests, schemas and feature/corpus registry retain the accepted baseline; this receipt rebinds prose only.",
+    "limits": [
+     "Independent coding-agent prose and binding review only. No tests, original-source audits, source-copy CLI controls, matrix cells, native imports, customer/plant work or hosted integration were newly executed.",
+     "The shared company home and released-snapshot return path describe an intended handoff. The toolkit supplies local files, not a shared governance service, authenticated organizational approval, live connector or validated receiving-system round trip.",
+     "No measured adoption, engineering review timing, operational benefit, causal effectiveness or human/site approval follows from these examples or this review. Existing primary-source, development and software-scope limits remain attributed to their accepted records.",
+     "The public release retains the existing one-source-locator-per-answer contract. Only changed onboarding prose is reviewed here; privately shelved prototypes and their control counts are excluded from public capability and validation claims.",
+     "Repository bindings use the declared LF convention. Generated README feature tables, journal and attempts metadata are not bound by this narrow prose receipt. No matrix support changed and no renewed matrix verdict is issued."
+    ],
+    "archived_record_sha256_raw": "158b05e496e5d006a3603aa753a31e3d5b3dd6b3af230cf5c1611384e8010063",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 23,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-context-register-review-record.json": "158b05e496e5d006a3603aa753a31e3d5b3dd6b3af230cf5c1611384e8010063",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027"
+   },
+   "attributed_primary_source_review": {
+    "reviewer": "Independent AI controls_reader persona",
+    "kind": "Primary-source software-development packet review; not human engineering or operations review",
+    "outcome": "pass_12_source_facts_and_locators; caught_cross_source_scope_issue_resolved",
+    "proof_sha256_raw": "cc27c4a61c2c8be72d0a10fe191f352983cd9b0150226bd2e347220728294a2a",
+    "fact_and_locator_checks": 12,
+    "packet_bindings_current": true,
+    "scope": "Separate independent controls-reader audit: all three complete original PDF pages visually inspected and the full CSV streamed. It caught and resolved four cross-document statements in single-source proposals. This reviewer checked its exact final packet bindings and ran source-verifier CLIs; the visual original-page audit is attributed to that reviewer, not claimed as repeated here.",
+    "limits": [
+     "Development facts seen before acceptance; not held out or a new source family.",
+     "No human/engineering approval, work-order execution verification, live system, model extraction, customer data or native import.",
+     "No fresh verification of online license/DOI metadata; local original bytes and source content were checked.",
+     "No software lifecycle verdict from this audit; software reviewer is separate.",
+     "No uniform cadence, timezone, downsampling explanation, unique mode, causal improvement or present asset state established."
+    ]
+   },
+   "prior_software_review": {
+    "receipt_sha256_raw": "280f9a2f693f3c31cc9debd7b08aec7b4f62d4f6a8e9be0529b2c7b997678f9b",
+    "scope": "The accepted baseline retains its historical core/history, source/CLI, publication and portability evidence. Historical 43 core cases and six source-example tests are not attributed as rerun for this prose receipt. The earlier 33 source/CLI controls and focused eight publication cases retain their original code hashes and scope.",
+    "public_core_sha256_lf": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "public_core_test_sha256_lf": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "public_example_test_sha256_lf": "3b1eddd695d8a658a8e1bc1d6a54d5ceb1c5be2a408cbbc41ff4a6952c4eb726",
+    "historical_core_case_count": 43,
+    "historical_source_example_test_count": 6,
+    "rerun_in_this_review": false
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent (narrow description-metadata support renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "baf4c7e96b0d1b09ed33e7cafdaf7ed7e5624efa31d5a773299efba0cdecc4e2",
+    "out/generalization/matrix.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/features.json": "0eb4a87889ed87363e04a9098e12887242d48d27c84cfa2eb47f6951382c5e06"
+   },
+   "reviewed_sections": [],
+   "findings": [],
+   "resolution": "No open finding. This is a support-hash renewal for an unrelated two-field description correction; feature code, schemas, outputs and substantive review scope are unchanged.",
+   "checks": [
+    "Compared every registered output and prior support binding with the accepted record. All outputs and supports retain their exact accepted normalized hashes except data/features.json.",
+    "Compared the entire feature registry against baseline: only description-to-model why and you_get change. The generalization-matrix feature object, its output list, tools and all other metadata are unchanged.",
+    "All three registered outputs, six of seven supports, 42 inputs and all 94 complete cell records are unchanged. Independently ran only corpus_matrix --check: exit 0, every cell tool hash current, 732 recorded bindings. Zero matrix cells were executed. Earlier substantive/source and seed-refresh scopes remain historical."
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent (narrow read-only context-packet registry-extension review)",
+    "date": "2026-10-30",
+    "resolution": "The only corpus object change is one appended context_packets entry for MetroPT maintenance context. Every other corpus key, all 42 matrix inputs, earlier context packets, matrix runner/criteria, all 94 complete cell records and the generated generalization page remain unchanged. All 732 recorded hashes match actual current files and corpus_matrix --check passes. No matrix cells were rerun for this narrow metadata review; the prior substantive/source and seed-refresh scopes are preserved.",
+    "limits": "Independent coding-agent metadata/hash review only. No new 54-cell or 94-cell execution, primary-source audit, accuracy/generalization result, human review, engineering approval, native import, causal effectiveness or adoption evidence is established. Existing failures/n/a, development reuse, generated/agent-made keys and other prior matrix limits remain.",
+    "archived_record_sha256_raw": "2b1efeeae4cc87a4cc99fc65e07750b0e5299474737c98bf67582b8fd5e6ea3c",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 3,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0,
+    "read_only_matrix_check_returncode": 0
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-generalization-matrix-review-record.json": "2b1efeeae4cc87a4cc99fc65e07750b0e5299474737c98bf67582b8fd5e6ea3c",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "matrix-check.json": "7136480858e3b70b2e0d4c20d15d7379a0b469938145aca441e97d3e5510f5a9"
+   }
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Independent Codex agent (narrow read-only starter prose/source renewal)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository bindings use SHA-256 with CRLF normalized to LF, matching the feature catalog. Named private proof hashes use exact raw bytes.",
+   "registered_output_count": 13,
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+    "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+    "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/opportunity-screen/open100/screen.md": "1c8914cd0aff439ed0e296cf50d7d4b6cea64be23560a04dc5cdb710ccdea6f1",
+    "examples/opportunity-screen/open100/questions.json": "e35dc35e40c510820af49a079f7beee10427d55d71f6a483d80da50076f75c9e",
+    "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+    "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7"
+   },
+   "supporting_files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
+    "docs/CONTEXT_REGISTER.md": "bd5ff4becec31c2b8d983c5a9ee82a3a635717d5b0ff04f26efd85066e4eed59",
+    "docs/GOAL.md": "c413186cce196c4eaba4c4aa71a549655795eb3e7d220d7e0262496e602baf43",
+    "docs/OPPORTUNITY_SCREEN.md": "8870f9b2748d82a748c9fb4679de7a872e2b60839289a7b8b3b81b06ea679b4f",
+    "docs/REVIEW_LOOP.md": "9bef33e29bc9212112c2bf0a89f0b6aecfb1d20b86aef6fe0df4eb024bbb67d2",
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "examples/opportunity-screen/README.md": "eba63385c3c36f7206e811bf2d80d44270060d67b069c3d9f865ad014c5eeef5",
+    "examples/opportunity-screen/food_plant_model.json": "c703129813cb7ac342c5c140a8601bc947e047006d93033bd1fb1714f87cd9c1",
+    "examples/opportunity-screen/open100_schedule_fields.json": "9b0b3fce95428ceb4b5e83100516553aec6fc128e81e34df2777791bd2bce9dc",
+    "examples/opportunity-screen/review-refresh/README.md": "8fc37a1a663bc3d87b71a350ec143368e6b4adccb308df165221b1f1fde8b4e3",
+    "examples/opportunity-screen/review-refresh/demonstrate.py": "0fea35e6e4fd6517787e9051fa2a5e715f3903882751d109d23589a02f276f33",
+    "examples/opportunity-screen/review-refresh/reconfirmations.csv": "7e2c34cf878a61ff43e0fbb736c8eb57616466088b4601f7d45f90abc3656d34",
+    "examples/opportunity-screen/review-refresh/rejections.csv": "2e1ee81407d0acb233f5a564da1beae3385e88c074f7b1db8ac9b0c876fd4f70",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/question_engine.py": "75d2f63536748155a32b9132a93da362445ca4117111f9018bc7add5061a0ddf",
+    "scripts/test_question_engine.py": "37e2fc28bb2cc2e748072e64aa4e4f00eacf32db0eba3094131adcac7e83700e",
+    "examples/own-drawing/README.md": "7c77af32a490c949acab13b6d75e447083cfccd7f404dd92a79dfc053f151f96",
+    "docs/AT_YOUR_PLANT.md": "3ba7d50f7c6fde8083cfa7a0cfa67c3c73bec6538c47e94544ab119227ff85ca"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Ongoing-use paragraph beginning When a model review rejects an item, ending before When several teams depend on it",
+     "normalized_utf8_sha256": "087c46e54640880bf44a9b9b941a68ef7157825477bad017f559a7a073ab5ce0",
+     "scope": "Generated feature-table text elsewhere in README is excluded from this section binding."
+    },
+    {
+     "file": "README.md",
+     "section": "Complete drafting adaptation and generated-drawing paragraph",
+     "normalization": "Read UTF-8 with universal LF newlines. Let start=text.index('Only scripts marked as tools in') and end=text.index('\\n\\n', start); hash text[start:end]+'\\n'. This is the complete paragraph, with one final LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "e4c6a6f8a7ba8e1e01f64b3f72f2d145e158d8d8022d2fdf7cca338778b6d3f2"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in the H1 screening-copy clarification. Only three decision-rule strings in the two OPEN100 outputs change; the other 11 registered outputs, catalog triggers/thresholds and question/test code are unchanged. This establishes clearer copy, not an engineering-rule or benchmark change; prior substantive/source review scope is preserved.",
+   "checks": [
+    "Read the final own-drawing, description-model and at-plant guide corrections and the README drafting-adaptation paragraph. The no-package worked example is separated from fresh paid/model extraction; a first question and private pilot brief precede broader evaluation or deployment.",
+    "Checked the corresponding actual source entry points and data contracts. Existing question_engine --model/--out and its report fields support the documented model-to-question path. Export-only outputs, required drawing dependencies, path semantics and drafting additions are qualified as described in the attached private binding proof.",
+    "Verified the feature registered outputs remain at accepted normalized hashes and baseline bytes/content, except the separately reviewed three H1 rule strings in the opportunity-screen JSON/Markdown outputs. All declared tool files match baseline. No output was regenerated or original-source model audit repeated by this reviewer.",
+    "Compared the entire feature registry as parsed objects against baseline. Only description-to-model why and you_get change. They now describe checkable interpretation, logical SVGs and staging without claiming actual plant agreement, generic native screens or automatic drafting.",
+    "Compared the complete catalog JSON against baseline after removing only H1.decision_rule from each version. Every other value is identical, including applies_when, thresholds, data requests, limits, source quotations and source references. The replacement explicitly closes a screening investigation and denies an operating instruction.",
+    "Compared complete OPEN100 output JSON: only decision_rule on H1@S4-TK001, H1@S0-OP005 and H1@S1-OP002 changes. All other fields and the 29-finding count match. Complete Markdown equals baseline after exactly those three phrase replacements. All other 11 registered outputs and question-engine/test code retain prior hashes.",
+    "Read the final screening-guide changes. The generic own-model CLI no longer attaches committed OPEN100 schedules to arbitrary input. Added schedules require corresponding reviewed identities/scope; closing a question means ending an investigation and never operating equipment. The own-drawing guide repeats that boundary.",
+    "The old opportunity receipt also predates already reviewed on-ramp/seed-maintenance support revisions in CONTEXT_REGISTER.md, GOAL.md, REVIEW_LOOP.md and generate.py. They are unchanged at the current baseline; their support hashes are renewed with the prior documentation/seed review scopes retained, not attributed as new question controls or source audits."
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent (read-only maintenance review, baseline reproductions and adversarial actual-CLI controls)",
+    "date": "2026-10-30",
+    "resolution": "No open finding in this bounded question-screen maintenance scope. The exact 13 registered outputs are bound here. All ten prior outputs retain their earlier reviewed hashes and reproduce byte-for-byte through current CLI commands; the three new expected outputs pass the actual apply-review, refresh, idempotence and explicit-reconfirmation workflow. The separately confirmed pre-existing seed-export exclusion gap is recorded below as not fixed. This is software maintenance on existing source families and invented food equipment, not new engineering or adoption evidence.",
+    "limits": "Independent coding-agent software review only, using copied synthetic food records and labelled illustrative extracted-model controls. No person reviewed a real plant; local recorded names/statuses do not authenticate a reviewer, establish source authority or confer organizational approval. Reconfirmation is an explicit fictional control, not proof of plant truth. The active screen does not rebuild extraction attachment logic or recursively reject children, and live duplicate tags still require engineering identity review. Only current review status/display fields used by screening are validated; this is not a signed-history or general governance validator. No seed-generator behavior, context-register implementation, external quotation/source review, complete repository suite, new CI run, 94-cell matrix run, model extraction, native platform import, network write or customer/adoption result is claimed by this review.",
+    "archived_record_sha256_raw": "a1919c0d6d76fe3bdeefb9426dbef4ddd2944f169b867a0ff2dcf40139847a19",
+    "archival_method": "Exact prior data/reviews.json object retained as a JSON value and serialized into the named private record. This is an archival-copy hash, not a claim about the original submission byte formatting.",
+    "scope": "All earlier original-source, artifact reproduction, adversarial controls and test executions retain their prior attribution. None is claimed as rerun for this renewal."
+   },
+   "control_results": {
+    "registered_outputs_unchanged": 11,
+    "new_tests_or_workflow_runs_by_this_reviewer": 0,
+    "primary_source_model_audits_by_this_reviewer": 0,
+    "matrix_cells_executed": 0,
+    "registered_outputs_with_copy_change": 2,
+    "decision_rule_strings_changed": 3,
+    "total_findings_unchanged": 29
+   },
+   "limits": [
+    "Narrow independent coding-agent documentation/source-capability and hash renewal. No new extraction, workflow/test execution, original-source model/figure audit, native import, matrix-cell run, customer/plant work or measured human adoption is claimed.",
+    "Prior substantive reviews, failures, development/validation reuse, source qualifications and tests retain their historical scope. This review does not convert historical controls into fresh executions.",
+    "The four actual starter subprocesses and three question IDs are attributed to a separate AI reader proof on unchanged code. This reviewer inspected its exact raw proof and current code bindings and reread final prose; it did not rerun those commands. Earlier reader own-drawing/from-description document hashes predate final clarifications, and the earlier run returned the old H1 wording. The exact new H1 diff and final guide text were checked directly here; the old output or guide hashes are not relabeled as current.",
+    "Generated files are drafts. Local sources/claims require engineering review, identity reconciliation and separate organizational authority. The company-system adapter, generic native screens/3D and local-inference deployment are not implemented by these starter corrections.",
+    "Repository hashes use the feature-catalog LF-normalized convention, including its binary-file convention. The Bayer PNG was also compared as exact raw bytes to baseline and is unchanged. Named private-proof hashes are exact raw hashes.",
+    "Generated README feature-table text, journal and attempts metadata are excluded. No new architecture, schema, tool, source family, accuracy score, engineering approval or benefit claim is established."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw bytes of each named private file, without normalization.",
+   "private_proof_hashes": {
+    "prior-opportunity-screen-review-record.json": "a1919c0d6d76fe3bdeefb9426dbef4ddd2944f169b867a0ff2dcf40139847a19",
+    "starter-binding-proof.json": "7ea759cebafdecb08e763c391a1916195eb0f5314b89c141cfa5a57191053a2b",
+    "pid-starter-question-journey-reader-proof-20261030.json": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "pid-starter-docs-final-reader-proof-20261030.json": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "pid-starter-docs-source-wording-followup-20261030.json": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "final-starter-source-review.json": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "starter-h1-copy-proof.json": "dbecbd226c0c870150ec392b5794dd05a7568a668255b442d64cbeb0cc22737d"
+   },
+   "resolved_findings": [
+    {
+     "issue": "The at-plant guide retained a categorical claim that intelligent CAD export is more accurate and cheaper. No universal site comparison supports that wording.",
+     "resolution": "Final prose names supported structured exports, says they avoid rereading available structure from pixels and preserves interpretation, dropped-record, uncertain-placement and adapter review."
+    }
+   ],
+   "attributed_reader_execution": {
+    "kind": "Separate AI reader actual software path, not this reviewer rerunning it and not timed human adoption. The initial run returned earlier H1 wording; latest copy is verified by exact diff and separately attributed source/control proof.",
+    "commands_passed": 4,
+    "question_ids": [
+     "H1@S0-OP005",
+     "C1@S0-OP001",
+     "C3@model"
+    ],
+    "actual_cli_proof_sha256_raw": "c3cd4b1cedcf502ec8ebcfd81d690463cb2fdc1e5af6870ba6aa14cf10aa2e4f",
+    "earlier_final_document_proof_sha256_raw": "da74334e9eae14f9af4352d0601fb321a0e726eb24c29654eaed4589e673ef1e",
+    "source_wording_followup_proof_sha256_raw": "5bb7ea63e1f933ec1c8ffbb71186217f66a9417cf2d3384c47817b1f47028213",
+    "code_bindings_current": true,
+    "old_guide_bindings_not_claimed_current": true
+   },
+   "attributed_source_review": {
+    "kind": "Separate AI controls/source reader, not a fresh primary-source/model audit by this reviewer.",
+    "proof_sha256_raw": "a1daa3845273d5f4c066e9bd37d4782d1fa2837481b345eb8e491ec42a648027",
+    "closed_findings": 9,
+    "source_script_hashes_current": true,
+    "scope": "Actual earlier Bayer export, no-Pillow refusal, TE drafting-addition and final three-finding bridge checks remain attributed to this proof. The current own-drawing/OPPORTUNITY_SCREEN last wording was reread directly here; earlier proof own-drawing hashes predate the last explanatory sentence. No plant truth, human adoption or new benchmark inference."
+   }
   }
  ]
 }

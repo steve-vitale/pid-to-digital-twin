@@ -1,8 +1,9 @@
 # Doing this at your plant
 
-This repo uses public, unusually clean data. Your drawings won't be. This guide covers what changes when you apply
-the approach to your own site: how to prepare, how to get real savings from an imperfect result, and what to protect
-in a production environment. It grows as the project does. Each journal entry also ends with an "At your plant" note.
+Start with one engineering problem and the records available for it. This toolkit helps produce a draft that a
+person can inspect and use to plan the next evidence request. Its public examples do not establish accuracy,
+review effort or savings at your site. Try the [offline drawing example](../examples/own-drawing/README.md#0-the-worked-example-offline-about-a-minute)
+first; it needs only Python, with no accounts, downloads or model calls.
 
 > **Short version:** treat the AI output as a *draft that people check*, not an automated result. Measure the
 > draft-plus-review time against your manual baseline. Keep everything read-only and out of the control network until
@@ -12,31 +13,27 @@ in a production environment. It grows as the project does. Each journal entry al
 
 ## Start wherever you are
 
-A plant doesn't need good drawings to start. There are three ways in, and they end in the same place:
+A plant doesn't need good drawings to start. Choose the route matching your records; each has its own outputs
+and review needs:
 
 | Where you are | What you do | Shown here on |
 |---|---|---|
-| **(a) You have P&IDs**, scanned or PDF | Extract them: AI reads symbols and tags in tiles, code traces the lines, people review the risk-ranked queue | 12 real OPEN100 sheets (the sealed-holdout results) |
-| **(b) You have process knowledge but no usable drawings:** an instrument index, a historian tag list, a DCS export, a simulator | Build or collect a process model, then **generate** drawings in your house style from it (`scripts/draw_pid_from_model.py`), and put them through the same extraction and review as scanned sheets | Tennessee Eastman: the verified model, drawn as 3 sheets in the OPEN100 style |
-| **(c) Either way** | One reviewed model feeds Ignition tags and screens, the PI AF structure and the 3D orientation tour | Both tracks (the 3D tour is a draft: [drafts/3d-tour](../drafts/3d-tour/README.md)) |
+| **A drawing image** | Use the [own-drawing intake](../examples/own-drawing/README.md) to turn a supplied extraction into a draft model, review queue, logical SVG and tag/PI staging. A new extraction needs a separately authorized model run. | OPEN100 has 12 sheets: 0–5 were development, 6–11 were validation and also helped select the method. They are not 12 sealed holdouts; see [the scoring record](GOAL.md). |
+| **Supported DEXPI XML** | Use the [structured CAD route](../examples/from-dexpi-xml/README.md), then inspect identity, roles and placement uncertainty. | Public DEXPI examples, with failures and unplaced items reported in the [matrix](GENERALIZATION.md). |
+| **A written description or process knowledge** | Author a sourced model and cross-check it. Use it directly for [asset/platform drafts](../examples/from-description/README.md) or the [question engine](OPPORTUNITY_SCREEN.md); a generated drawing and image round trip are optional. | Tennessee Eastman and the Bayer historical reconstruction. Authoring a model does not verify the actual plant. |
+| **A loop list or historian CSV** | Use the [loop-list comparison](../examples/loop-audit/README.md) or [recorded-data tools](../examples/historian-csv/README.md). Reconcile identities before linking their results to a model. | Supplied-format examples; these lists do not automatically become a complete process model. |
 
-Path (b) is more than a workaround. Generated sheets give people something to walk down and mark up, they make the
-gaps in your lists visible (an instrument with no unit, a stream with no line), and they carry a key, so you can
-measure your extraction method on your own house style before you trust it on your scans. The Tennessee Eastman
-round trip in [EVALUATION.md](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman) is that measurement for this
-repo.
+An authored model can support a first question without generating a drawing or paying to extract that drawing
+again. Generated sheets are useful when a drawing itself is the intended draft deliverable. Their emitted answer
+keys come from the model and layout, so reading them back tests clean generated drawings rather than real-plant
+accuracy. The Tennessee Eastman [round trip](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman) is that experiment.
 
-**Capturing your own house style** (what the generator needs; one afternoon with a drafter):
-- **Title block and border:** zone grid, the boxes and their labels, drawing-number format, revision field, the
-  "not for construction" note. Copy them from a current sheet.
-- **Symbol library:** the shapes your sheets actually use for vessels, columns, exchangers, pumps and compressors,
-  control and manual valves, instrument bubbles (field, panel, shared display) and off-page flags, with their sizes
-  relative to the sheet. `scripts/style_fidelity.py` measures these on a set of sheets, so measure 5–10 of yours
-  first and draw to those numbers.
-- **Text and line conventions:** tag format (letters and loop number, separator), line-number format, line weights
-  for process and signal lines, flow arrows, how off-page flags name the other sheet and its grid zone.
-- **Sheet split:** which units go on which sheet, from your drawing index. That is the layout file
-  (`data/te_pid_layout.json` here); the content comes from your model, never from the layout.
+**Adapting a drafting style is separate work.** The drawing generator uses the OPEN100 style and a manually
+authored layout; it is not a general house-style importer. `scripts/style_fidelity.py` records the project's
+TE/OPEN100 comparison, not a reusable command for measuring arbitrary site sheets. Adapting title blocks,
+symbols, line conventions and sheet splits needs drafting/code work and review; no effort estimate was measured.
+Inspect layout-declared drafting additions, including utility symbols and control-valve stations, separately
+from model content. They are marked in the emitted key and are not evidence of installed equipment.
 
 **Governance: a generated drawing is not a drawing of record.** It shows what your lists say, not what is in the
 field. Until engineering has walked it down and accepted it under your management of change (and, for covered
@@ -54,8 +51,8 @@ the [deliverables matrix](DELIVERABLES.md).
 | What you have | What you can build now | What has to wait |
 |---|---|---|
 | **Drawings, no historian access** | The reusable intake produces a draft asset model and tag list, placeholder Ignition tags and PI AF staging, a logical SVG and a review report. Flow direction, sheet stitching, mimics, 3D tours and isolation mockups were demonstrated on OPEN100 and require adaptation for your drawings | Values, normal bands, alarms, replay. Every value remains a placeholder until an I/O list or historian mapping arrives; the research visualizations have no generic own-drawing build command |
-| **Process knowledge, no usable drawings** | A model built by hand from the process description or control narrative; a mimic with values; normal bands and early warning; alarms from your setpoints; replay of recorded data | Drawing screens, and the topology and isolation points that only a drawing shows. Hand-built topology is a guess until someone checks it against the drawings |
-| **Both** | Everything above, plus the cross-check between them: each place the drawing and the data disagree is an extraction error or a real documentation gap | |
+| **Process knowledge, no usable drawings** | A sourced model authored from the description, logical SVGs, review sheet, tag/PI staging and model-based questions. A P&ID draft also needs an authored layout and drawing dependencies | Native mimics, 3D, alarms and replay need separate adaptation, mappings, configuration and suitable data. The TE demos do not supply these generically for your model. Check authored topology against independent records or field evidence |
+| **Both** | Cross-check scoped identities, relationships and observations across the records, then plan the missing evidence | A difference may reflect extraction error, identity/revision mismatch, different operating conditions or a documentation gap. Review its cause before using it to support a decision |
 
 So a drawings-only pilot can start with the draft model, review report and asset-framework staging, and add values
 when data access comes through. The OPEN100 mimic, tour and isolation mockup are research examples to adapt, not
@@ -66,19 +63,19 @@ deliverables the own-drawing intake already builds. In practice:
 - **Read the equipment schedules.** Many drawings print what each piece of equipment is for along the bottom of the
   sheet. It is the best source for purpose cards and is easy to miss: the extraction here never read it.
 - **Treat the isolation view as a review aid.** A list of block valves, motor-operated valves, motor-driven
-  equipment and boundary lines, each pointing at its place on the drawing, speeds up writing or checking an
-  energy-control procedure. It is not the procedure, and a valve the extraction missed is missing from it.
+  equipment and boundary lines, each pointing at its place on the drawing, may help a qualified reviewer inspect
+  the draft. No procedure-writing effort or isolation adequacy was measured. It is not the procedure, and a valve
+  the extraction missed is missing from it.
 
 ---
 
 ## 1. Before you start: decide what you're actually converting
 
 **Check whether you need vision at all.**
-- **Intelligent P&IDs:** if your drawings were made in a data-centric tool (AVEVA Diagrams, Hexagon Smart P&ID,
-  AutoCAD Plant 3D, and similar), the equipment, instruments and connections already exist as data. Export that and
-  skip image extraction for those sheets. It's more accurate and cheaper.
-- **Image-only drawings:** reading images is for scanned, PDF-only, or legacy drawings, which most older sites have
-  plenty of.
+- **Structured CAD records:** if a supported structured export is available, start with the
+  [DEXPI reader](../examples/from-dexpi-xml/README.md). It avoids rereading available structure from pixels, but its
+  interpretation, dropped records and uncertain placement still need review. Other formats need an appropriate adapter.
+- **Image-only drawings:** use image extraction for scanned, PDF-only or legacy records without a supported structured export.
 
 **Gather the other lists that describe the same plant:**
 - **Instrument index / tag list:** from your DCS or PLC export.
@@ -86,15 +83,19 @@ deliverables the own-drawing intake already builds. In practice:
 - **Maintenance asset register:** e.g. SAP PM or Maximo equipment records.
 - **Loop sheets and the cause-and-effect matrix**, where they exist.
 
-These are your free cross-checks. Much of the value comes from the *disagreements* between the drawing and these
-lists. Each disagreement is either an extraction error or a real documentation gap, and both are worth knowing.
+These are potential cross-checks. Reconcile record identities, revisions and scope before deciding whether an
+apparent disagreement is an extraction error or a documentation gap.
 
 **Pick a pilot, not a plant:**
-- **Scope:** one unit or area, about 10–20 sheets.
+- **Scope:** one useful question about one asset or workflow; for the drawing route, try one representative sheet
+  first. Expand the sample only when the initial result and review effort justify a broader evaluation.
 - **Choice of unit:** one where an operator or technician will spend an hour reviewing.
 - **Priority:** start where the twin would pay off first, such as bad-actor equipment or a unit with frequent upsets.
 
 ## 2. Build your own answer key first (small, but real)
+
+This section is for evaluating extraction quality beyond the first worked example. It is not required to try
+the committed offline packet or ask an initial model-based question.
 
 - **Hand-annotate 3–5 representative sheets** in the same output format the AI will produce:
   - equipment
@@ -124,12 +125,14 @@ Real drawing sets have problems the public datasets don't. Deal with these befor
 | **Duplicates and retired equipment** | Expect tags that appear on two sheets, and equipment that was removed but never erased. Flag these; don't silently merge them. |
 | **Handwriting and stamps** | Handwritten tags and stamped notes are the least reliable reads. Route them to review by default. |
 
-## 4. Get serious savings from an imperfect result
+## 4. Measure whether a draft helps
 
-You don't need perfect extraction to save a lot of time. You need a draft that's fast to check.
+The useful hypothesis is that a draft plus review needs less effort than manual capture at acceptable quality.
+No person's review has been timed here. Use the [review-effort protocol](REVIEW_EFFORT_PROTOCOL.md) if you want to
+test that claim; count both effort and remaining errors.
 
-- **Review is faster than creation.** Confirming or correcting a pre-filled row takes much less time than typing it
-  from scratch. Measure both rather than assuming.
+- **Compare review with manual capture.** A pre-filled row may help or may take longer to correct. Measure both
+  under comparable conditions rather than assuming a saving.
 - **Route by confidence and by cross-checks.**
   - Items that pass the deterministic checks (tag format valid, tag found in the DCS/historian list, units match)
     go into a quick-confirm batch.
@@ -141,14 +144,15 @@ You don't need perfect extraction to save a lot of time. You need a draft that's
   - Graphics and line connectivity are a bonus on top.
 - **Count what review catches.** Track corrections by type: missed item, wrong tag, wrong equipment, wrong
   connection. This tells you where the model is weak and whether a prompt change actually helped.
-- **Report honestly:** time per sheet (manual vs draft-plus-review), accuracy after review, and what still needed a
-  person. An honest "60% faster, with review" convinces a plant manager more than an unverified "95% accurate".
+- **Report the observed result:** effort for manual and draft-plus-review workflows, residual errors and what still
+  needed a person. Retain an unsuccessful trial or insufficient evidence; neither is a measured saving.
 
 ## 5. Safety and security in a production environment
 
 **Safety**
 - **The drawing of record doesn't change.**
-  - P&IDs are process safety information, and under OSHA PSM they're managed through Management of Change.
+  - For processes covered by OSHA PSM, P&IDs are part of process safety information; applicable changes require
+    the site's update and change procedures. See [29 CFR 1910.119(d)(3) and (l)](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119).
   - A twin built from them is a *derived* view, not the record. Mark generated graphics and asset models as
     derived/not for construction.
   - When a drawing changes through MOC, rebuild or re-check the twin. Never update the twin in place of the drawing.
@@ -193,58 +197,36 @@ You don't need perfect extraction to save a lot of time. You need a draft that's
 
 ---
 
-## 6. Running an open-weight model in-house (including air-gapped)
+## 6. If documents must remain in-house
 
-If drawings can't leave your network, or policy forbids a third party seeing them, you can run an
-**open-weight** vision model on your own hardware. The weights are a file you download once, then run with no
-internet connection. This project tests one: **Gemma 4 31B**. It's run through an API here for convenience, but
-those are the same weights you could install offline, so its score shows roughly what a self-hosted model of that
-size achieves on this task (see `docs/EVALUATION.md`).
+The first committed drawing example runs locally without calling a model. Creating a fresh extraction is a
+separate step. The supplied extraction adapters call model CLIs or a hosted API; this repository does not supply
+an evaluated local inference deployment or an air-gap acceptance test.
 
-**What it takes:**
+The recorded Gemma runs used Google's hosted API. Their completion rates, latency and accuracy are observations
+of that hosted setup, not measurements of a local GPU, quantized weights or a disconnected deployment. See the
+[recorded evaluation](EVALUATION.md#4-round-1-results-12-real-open100-drawings) and the `run_gemini` adapter in
+[`scripts/run_extraction.py`](../scripts/run_extraction.py). Do not size hardware or assume local throughput from
+those results.
 
-| Piece | What it involves | Rough cost (Oct 2026, verify before buying) |
-|---|---|---|
-| **Model** | An open-weight vision-language model in the ~30B class, e.g. Gemma, Qwen-VL or Llama vision families. Check the license (some restrict use or require attribution) and pick one that scores well on *your* sheets | Free to download; license review is staff time |
-| **Hardware: pilot** | One workstation with a single high-memory GPU. A ~30B model at reduced precision (quantized) fits in 24–48 GB of GPU memory; 96 GB leaves room for large drawings and for tuning | One 96 GB workstation GPU is about **$14k–$18k** today ([Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/nvidia-doubles-rtx-pro-6000-blackwells-msrp-to-a-staggering-usd16-000-96gb-card-started-pre-orders-below-usd8-000-last-year), [Thunder Compute](https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing)). Whole workstation **~$20k–$30k** |
-| **Hardware: production** | Datacenter GPUs for larger models, more users, or faster turnaround | One H100 80 GB is **$25k–$40k** ([IntuitionLabs](https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide), [CloudZero](https://www.cloudzero.com/blog/h100-gpu-cost/)). Multi-GPU servers run well into six figures |
-| **Inference software** | An open-source model server (e.g. vLLM, llama.cpp, Ollama), pinned to a vetted version | Free; setup and patching are staff time |
-| **Tuning (optional)** | LoRA fine-tuning (a light, cheap form of tuning) on your own annotated sheets so the model learns your symbols, tag format and drafting style. One 96 GB GPU can do this for a ~30B model | Compute is minor. **Annotation is the real cost**: e.g. 200 sheets at 1–2 engineer-hours each is 200–400 hours |
-| **People** | An engineer comfortable with ML tooling to set up and evaluate (weeks, part-time), plus IT/OT security review | The largest line item for most sites |
+If site policy requires local extraction, ask the responsible IT/security and engineering owners to select and
+evaluate a permitted deployment on representative records. Check license, provenance, actual data egress and
+resource use for that configuration. Keep the original records and compare its reviewed output with the manual
+baseline. Local hosting does not establish engineering correctness or permission to deploy operational outputs.
 
-**Rough totals (my estimates, not quotes):**
-- **Pilot:** about $20k–$30k hardware plus a few hundred staff hours.
-- **Site program with tuning:** low six figures all-in, most of it people and annotation.
-
-Run either against what the
-manual baseline costs (section 2). Throughput is usually fine for a digitization project. Even at a few minutes per
-sheet on one GPU, a thousand-sheet backlog is days of unattended runtime, not months.
-
-**Governance for an air-gapped model.** Treat the model like any other piece of software entering the plant:
-- **Provenance:**
-  - download weights only from the publisher's official source;
-  - verify published checksums or signatures;
-  - scan the files;
-  - record exactly which file version is installed.
-- **Change control:** a new model version, a new prompt, or a new fine-tune is a change. Re-run the same
-  evaluation suite (with controls and the held-out set, see `docs/EVALUATION.md`) before it replaces the old one,
-  and keep the scorecards. That's an MOC-style record for the AI tooling itself.
-- **No hidden connections:** confirm the inference software makes no outbound calls (telemetry, update checks).
-  On a true air gap, physically and on the firewall.
-- **Same safety rules as section 5:** read-only, derived from the drawing of record, reviewed by people before use.
-  Running the model locally removes the data-egress question. It doesn't remove the review step.
-- **Audit:** log which sheet went in, which model version and prompt produced what, and who approved the reviewed
-  result.
-
-**Choosing between cloud and local is a trade-off, not a rule.** Frontier cloud models scored higher in this
-project. A local model may score lower but keep every drawing in-house. Measure both on *your* sheets with the
-same evaluation, then decide with your security and data-governance owners, not from a vendor slide.
+No hardware purchase or model tuning is needed to try the starter packet. Local hosting, procurement and a
+larger annotation study are separate work, justified by the first trial and the site's requirements.
 
 ---
 
 Measured costs from this project, and a worked sizing for 1,000 sheets: [COSTS.md](COSTS.md).
 
 ## Keep the context current after the first bundle
+
+The first bundle is a starting point. When more people or projects rely on its information and decisions,
+establish a shared company home with the appropriate ownership, history and access rules. The toolkit's local
+examples demonstrate what needs to travel; [after the first pilot](../examples/first-pilot/README.md#after-the-first-packet)
+describes the intended organizational handoff.
 
 Keep the drawings and source documents, the reviewed model, the signal mappings, and the reasons behind the
 engineering decisions together. Give unresolved questions an accountable owner. A drawing conversion alone does

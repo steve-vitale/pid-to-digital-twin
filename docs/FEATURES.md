@@ -12,7 +12,7 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [Show someone what came out of a drawing, and what still needs checking](../examples/own-drawing/README.md) | Whoever approves the work needs one page that says what was found and what is still unchecked, without opening a spreadsheet of 445 rows. | A review bundle from the step above | Under a second | One page: the drawing with every item boxed, what is still to check first and why, what a person has already decided (shown with the decision and left out of the to-check list), next steps, limits. Refuses if any generated column of the review sheet doesn't match what the model gives now; the reviewer's OPS_ entries aren't checked, so decisions not yet applied with apply_review.py don't appear | proven |
 | [Use a DEXPI file my CAD tool already exports](../examples/from-dexpi/README.md) | A CAD export already represents symbols and connections as data. Reading supported DEXPI content directly avoids a visual model-reading step; conversion limits and omissions still need review. | One of the three public DEXPI example sheets, prepared once by adapt_dexpi.py (downloads them; needs PyMuPDF). For your own DEXPI XML, use the DEXPI reader instead | Seconds once the sheets are prepared | The same bundle with no model reading: tags are the drawn label text, and links are the drawn connections, undirected, with each pipe tee expanded into pairwise links | proven |
 | [Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits](../examples/from-dexpi-xml/README.md) | A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations, and reports what it folds, cannot place or drops. | A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle | Seconds per sheet | A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why | proven |
-| [Build a model of a unit that has no usable drawing](../examples/from-description/README.md) | Many older units have no usable drawing but do have procedures and design notes. A model with a source on every item lets you build asset lists and screens for them anyway, and shows where the text and the plant disagree. | A written description (procedure, design basis, report); someone to cite every item | Writing the model is the work; exports take seconds | Ignition tags, PI staging and overview screens from the model; a P&ID once a drafting layout is written | proven |
+| [Build a model of a unit that has no usable drawing](../examples/from-description/README.md) | A source-cited draft makes an engineer's interpretation of procedures and design notes checkable. Agreement with the actual plant still needs independent records or field evidence and engineering review. | A written description (procedure, design basis, report); someone to cite every item | Writing the model is the work; exports take seconds | Draft review sheet, logical SVGs and Ignition/PI staging from a sourced model; a P&ID also needs an authored layout and drawing dependencies | proven |
 | [Load the model into an asset register, graph database or change system](../docs/GRAPH_EXPORT.md) | A plant model is a web of relationships: this transmitter measures that line, this controller moves that valve. Kept as a graph, it answers questions a flat tag list can't, like what a valve's failure affects or which instruments nobody has checked, and other systems can load it without retyping. | Any model this repository produces | Seconds | One open JSON graph: assets, typed links in three layers (pipe segments and tees, line networks, and network pairs), every attribute with its source and status; plus a smaller core profile (identity, settings, impact relations and sources) for loading into another system, with everything it leaves out counted | proven |
 | [Get the model into Ignition and PI](../docs/TWIN_OUTPUTS.md) | Generating the Ignition tag structure and PI asset staging from one model keeps them consistent with each other and avoids repeated manual entry. Native import still needs a lab check. | A reviewed model | Seconds to generate; import is a manual step in a lab gateway | Ignition tag import with UDTs, PI Builder staging sheets; values are placeholders until mapped | proven |
 | [Check whether a drawing shows the control loops the DCS actually runs](../examples/loop-audit/README.md) | Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change. | A loop list exported from the DCS or PLC configuration (controller, measurement, output) | Seconds | Each loop drawn, partly drawn (and what's missing) or not drawn | proven |
@@ -61,7 +61,7 @@ Status: **proven**
 - **How to use it:** [README.md](../examples/own-drawing/README.md)
 - **Example outputs:** [`extraction_sheet0.json`](../examples/own-drawing/extraction_sheet0.json), [`manifest.json`](../examples/own-drawing/manifest.json)
 - **Tests:** `test_own_drawing_example.py`, `test_scan_cleanup.py`, `test_site_drawing_intake.py`
-- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (narrow read-only starter prose/source renewal), 2026-10-30: pass
 
 <a id="dexpi-to-bundle"></a>
 ### A DEXPI P&ID file to the same bundle, with no model reading
@@ -96,13 +96,13 @@ Status: **proven**
 
 Status: **proven**
 
-**Why it matters:** Many older units have no usable drawing but do have procedures and design notes. A model with a source on every item lets you build asset lists and screens for them anyway, and shows where the text and the plant disagree.
+**Why it matters:** A source-cited draft makes an engineer's interpretation of procedures and design notes checkable. Agreement with the actual plant still needs independent records or field evidence and engineering review.
 
 - **Tools:** `generate.py`, `draw_pid_from_model.py`
 - **How to use it:** [README.md](../examples/from-description/README.md)
 - **Example outputs:** [`process_model.json`](../data/bayer_rt/process_model.json), [`RT1.png`](../data/bayer_rt/pid/RT1.png), [`key.json`](../data/bayer_rt/pid/key.json), [`overview.svg`](../examples/from-description/bayer-exports/svg/overview.svg), [`tags.json`](../examples/from-description/bayer-exports/ignition/tags.json), [`ops_review_sheet.csv`](../examples/from-description/bayer-exports/ops_review_sheet.csv)
 - **Tests:** `test_generate_any_model.py`, `test_bayer_rt.py`
-- **Independent review:** independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run), 2026-10-29: pass (1 finding(s); All earlier findings verified fixed; outputs byte-identical.)
+- **Independent review:** Independent Codex agent (narrow read-only starter prose/source renewal), 2026-10-30: pass
 
 ## Export: Hand the model to other systems
 
@@ -117,7 +117,7 @@ Status: **proven**
 - **How to use it:** [README.md](../examples/own-drawing/README.md)
 - **Example outputs:** [`REPORT.html`](../examples/own-drawing/deliverable/REPORT.html)
 - **Tests:** `test_own_drawing_example.py`, `test_deliverable_report.py`
-- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (narrow read-only starter prose/source renewal), 2026-10-30: pass
 
 <a id="graph-export"></a>
 ### The model as an open graph of sourced claims
@@ -197,7 +197,7 @@ Status: **proven**
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex agent (narrow read-only context-packet registry-extension review), 2026-10-30: pass
+- **Independent review:** Independent Codex agent (narrow description-metadata support renewal), 2026-10-30: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source
@@ -251,7 +251,7 @@ Status: **proven**
 - **How to use it:** [CONTEXT_REGISTER.md](../docs/CONTEXT_REGISTER.md)
 - **Example outputs:** [`context.json`](../examples/context-register/illustrative/expected/context.json), [`context.md`](../examples/context-register/illustrative/expected/context.md), [`enriched_graph.json`](../examples/context-register/illustrative/expected/enriched_graph.json), [`enriched_questions.json`](../examples/context-register/illustrative/expected/enriched_questions.json), [`source_key.json`](../examples/context-register/pronto/source_key.json), [`sources.json`](../examples/context-register/pronto/sources.json), [`proposed_answers.csv`](../examples/context-register/pronto/proposed_answers.csv), [`context.md`](../examples/context-register/pronto/expected/context.md), [`questions.json`](../examples/context-register/bayer/screen/questions.json), [`context.md`](../examples/context-register/bayer/expected/context.md), [`context.json`](../examples/context-register/bayer/expected/context.json), [`sources.json`](../examples/context-register/nist-smstestbed/sources.json), [`source_key.json`](../examples/context-register/nist-smstestbed/source_key.json), [`proposed_answers.csv`](../examples/context-register/nist-smstestbed/proposed_answers.csv), [`expected_context.md`](../examples/context-register/nist-smstestbed/expected_context.md), [`fetch.json`](../examples/context-register/nist-smstestbed/fetch.json), [`expected_history_checks.json`](../examples/context-register/nist-smstestbed/expected_history_checks.json), [`originals.json`](../examples/context-register/metropt3/originals.json), [`sources.json`](../examples/context-register/metropt3/sources.json), [`source_key.json`](../examples/context-register/metropt3/source_key.json), [`proposed_answers.csv`](../examples/context-register/metropt3/proposed_answers.csv), [`context.json`](../examples/context-register/metropt3/expected/context.json), [`context.md`](../examples/context-register/metropt3/expected/context.md)
 - **Tests:** `test_context_register.py`, `test_context_examples.py`
-- **Independent review:** Independent Codex agent (narrow read-only onboarding and company-handoff prose review), 2026-10-30: pass
+- **Independent review:** Independent Codex agent (narrow description-metadata support renewal), 2026-10-30: pass
 
 ## Screen: Find questions worth asking and the data needed to answer them
 
@@ -266,7 +266,7 @@ Status: **proven**
 - **How to use it:** [OPPORTUNITY_SCREEN.md](../docs/OPPORTUNITY_SCREEN.md)
 - **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json), [`expected.json`](../examples/opportunity-screen/review-refresh/expected/expected.json), [`questions.json`](../examples/opportunity-screen/review-refresh/expected/questions.json), [`screen.md`](../examples/opportunity-screen/review-refresh/expected/screen.md)
 - **Tests:** `test_question_engine.py`
-- **Independent review:** Independent Codex agent (read-only maintenance review, baseline reproductions and adversarial actual-CLI controls), 2026-10-30: pass
+- **Independent review:** Independent Codex agent (narrow read-only starter prose/source renewal), 2026-10-30: pass
 
 <a id="impact-estimate"></a>
 ### First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up

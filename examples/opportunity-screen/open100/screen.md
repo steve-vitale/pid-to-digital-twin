@@ -410,7 +410,7 @@ IAC/ITAC recommendation code: 2.41xx (category only) (IAC/ITAC browse page: moto
 - Station rating [blank on drawing]. Where: the blank CAPACITY field on the sheet 4 equipment schedule, entry ESS-HTR-180; then the vendor datasheet: station or desuperheater datasheet. How: Copy rated flow.
 - When the station is used [not on drawing]. Where: site records: operating procedures: startup, trip, normal duty. How: Mark the station startup-only, trip-only or normal duty.
 
-**How it is decided:** If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
+**How it is decided:** If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
 
 **What the source says (S6):** Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has "constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi." No source found with a number for desuperheater or bypass stations themselves.
 
@@ -434,7 +434,7 @@ IAC/ITAC recommendation code: 2.41xx (category only) (IAC/ITAC browse page: moto
 - Station rating [not on drawing]. Where: the vendor datasheet: station or desuperheater datasheet. How: Copy rated flow.
 - When the station is used [not on drawing]. Where: site records: operating procedures: startup, trip, normal duty. How: Mark the station startup-only, trip-only or normal duty.
 
-**How it is decided:** If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
+**How it is decided:** If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
 
 **What the source says (S6):** Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has "constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi." No source found with a number for desuperheater or bypass stations themselves.
 
@@ -455,7 +455,7 @@ IAC/ITAC recommendation code: 2.41xx (category only) (IAC/ITAC browse page: moto
 - Station rating [not on drawing]. Where: the vendor datasheet: station or desuperheater datasheet. How: Copy rated flow.
 - When the station is used [not on drawing]. Where: site records: operating procedures: startup, trip, normal duty. How: Mark the station startup-only, trip-only or normal duty.
 
-**How it is decided:** If the station passes steam only at startup or trips, close it. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
+**How it is decided:** If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.
 
 **What the source says (S6):** Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has "constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi." No source found with a number for desuperheater or bypass stations themselves.
 

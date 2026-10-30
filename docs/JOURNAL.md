@@ -3904,3 +3904,44 @@ released context and return findings for review. No ready receiving-system adapt
 This increment changes documentation only: existing scripts, schemas, source packets, outputs and matrix results
 remain unchanged. Further feature work should earn its place by helping an engineer start or demonstrate the
 handoff, rather than recreating the company system inside this repository.
+
+## 75. Make the first useful investigation easy to reach
+
+A fresh local clone produced the public sheet-0 draft bundle, readable report and question screen using four
+standard-library commands, without installing packages or calling a model. An independent reader ran the same
+path. The screen contains three investigation prompts; its asset references still need checking against the
+drawing. This is a demonstration on an existing development sheet, not a new extraction or transfer score, a
+timed human review or measured adoption.
+
+The own-drawing runbook now makes that existing path visible: skip dependency installation for the offline
+example, create the draft, read the report, screen the model, then choose one relevant question with an engineering
+counterpart. Copy its finding ID, asset references and collection requests into the existing private pilot brief.
+The next step remains a shared company home for the context and decisions, not additional local governance code.
+
+Two independent readers exposed consequential gaps in the old starter advice. The plant guide called all twelve
+OPEN100 sheets sealed holdouts although six were development and six validation, with validation also used for
+method selection. It routed authored models through optional drawing generation and paid re-extraction, implied
+generic native screens/3D/replay from those models, and asserted review-time savings that nobody measured. It now
+separates supported starting routes and static staging from research demos, begins with one question or sheet,
+and makes larger annotation studies optional. Hosted Gemma results no longer support local hardware/throughput
+advice in this guide. The OSHA reference is qualified to covered processes and linked to the official rule.
+
+The description route now states that drawing checks need Pillow and that layouts can depict explicitly marked
+drafting additions. It also narrows the missing-source warning promise to what the exporter actually checks:
+signals without simulator references, rather than every item or stream. Engineering must inspect the source
+coverage itself. Structured CAD avoids rereading pixels; no universal site accuracy or cost advantage is claimed.
+
+The actual first question screen surfaced an ambiguous H1 sentence, "close it", which could read as an equipment
+instruction. The catalog now explicitly closes the screening investigation and says not to operate the station.
+Only that decision-rule wording changes in three existing OPEN100 findings; all other JSON fields, triggers,
+thresholds and the 29-finding population remain unchanged. The other worked screens and roll-up reproduce; all
+51 question-engine controls pass. The comparison helper initially replaced the same generic phrase in other
+questions as well; limiting its expected replacement to the exact H1 sentence corrected that helper assertion,
+without changing product behavior. The screen guide also explains that closing a screening question never means
+operating equipment and stops offering public OPEN100 schedules as inputs to an arbitrary site's model.
+
+Nine source/reader findings are resolved with code inspection and bounded actual CLI evidence. These are AI
+reader and software checks, not engineering approval. The change adds no application feature, schema, public
+source family or extraction result. Existing matrix results and their tool hashes remain unchanged, with no
+matrix-cell rerun; all 52 configured pipeline stages remain fresh. Local verification targets the exercised
+starter commands, exact catalog/output diff and existing question tests. CI must report its own actual coverage.

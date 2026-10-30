@@ -14,14 +14,16 @@ screens. Those need your process knowledge, your I/O list and a person's review.
 1. Install Python 3.10 or newer from python.org. In the installer, tick "Add python.exe to PATH".
 2. Get the repository. With git: `git clone https://github.com/steve-vitale/pid-to-digital-twin`. Without git:
    on the repository page choose Code, then Download ZIP, and unzip it.
-3. Open PowerShell in the repository folder and run:
+3. Open PowerShell in the repository folder. For the offline worked example in step 0, use the installed
+   `python` directly; no environment setup or package installation is needed. For a new model extraction in
+   step 2, create an environment and install the additional dependencies:
 
    ```powershell
    python -m venv .venv
    .venv\Scripts\pip install -r requirements.txt
    ```
 
-4. Use `.venv\Scripts\python` wherever the commands below say `python`. PowerShell sets environment variables on a
+4. If you created that environment, use `.venv\Scripts\python` wherever the commands below say `python`. PowerShell sets environment variables on a
    line of their own: instead of `PID_SHEETS_DIR=mysheets python ...`, run `$env:PID_SHEETS_DIR = "mysheets"` once,
    then the command without the prefix.
 
@@ -33,7 +35,8 @@ skips that by using a recorded extraction.
 
 `manifest.json` here points at PID2Graph OPEN100 sheet 0 (a public drawing, CC BY-SA 4.0, already in the repository)
 and at `extraction_sheet0.json`, the recorded GPT extraction of that sheet made with this repository's method
-(2x2 tiles with `extraction/prompt_v2.md`, then the code line tracer). From the repository root:
+(2x2 tiles with `extraction/prompt_v2.md`, then the code line tracer). Sheet 0 belongs to the development set;
+this is a runnable demonstration, not a new held-out accuracy result. From the repository root:
 
 ```sh
 python -S scripts/import_site_drawing.py --manifest examples/own-drawing/manifest.json --out my-bundle --check-only
@@ -62,6 +65,26 @@ python scripts/deliverable_report.py my-bundle
 
 The `tier` column in `review_queue.csv` is empty on purpose. The risk tiers in the main results come from a model
 trained on OPEN100; it isn't applied to a drawing it wasn't trained on.
+
+### From the bundle to one useful question
+
+The existing question engine can screen this draft model without another extraction or extra packages:
+
+```sh
+python -S scripts/question_engine.py --model my-bundle/plant_model.json --out my-questions
+```
+
+Open `my-questions/screen.md`. Each finding names its model evidence and assets, what to collect and how that
+evidence could settle the question. Check those asset references against the drawing before using the collection
+plan: this model is still an unreviewed extraction. A finding is an investigation prompt, not an established
+opportunity, a savings estimate or permission to change equipment.
+In screening decision rules, closing a question means concluding the investigation, never closing or operating equipment.
+
+Choose one relevant question with an engineering counterpart. Copy its exact finding ID, asset references and
+data requests into a private copy of the [pilot brief](../first-pilot/pilot-brief.md). Decide what evidence and
+baseline would support the next decision; leave missing information unknown. The [pilot guide](../first-pilot/README.md)
+explains that first investigation and the subsequent handoff into a shared company home for context and decisions.
+This step uses existing tools; it does not create a shared system or connect to plant operations.
 
 ## 1. Your sheet as a PNG
 
