@@ -197,7 +197,7 @@ Status: **proven**
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex agent (read-only source review, independent reproductions and adversarial controls), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (narrow read-only context-registry change review), 2026-10-29: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source
@@ -208,9 +208,9 @@ Status: **proven**
 
 - **Tools:** `statements.py`
 - **How to use it:** [STATEMENT_REVIEW.md](../docs/STATEMENT_REVIEW.md)
-- **Example outputs:** [`statements.json`](../examples/statement-review/bayer/statements.json), [`sample_60.csv`](../examples/statement-review/bayer/sample_60.csv), [`statements.json`](../examples/statement-review/sheet0/statements.json), [`sample_60.csv`](../examples/statement-review/sheet0/sample_60.csv), [`sample_layers.csv`](../examples/statement-review/sheet0/sample_layers.csv), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29-layers/score.txt), [`sample_layers_r2.csv`](../examples/statement-review/sheet0/sample_layers_r2.csv), [`score.txt`](../examples/statement-review/bayer/review-2026-10-29/score.txt), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29/score.txt), [`score_strict_adjacency.txt`](../examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt)
-- **Tests:** `test_statements.py`
-- **Independent review:** independent Codex agent (fresh context, read-only review; author fixes independently reproduced), 2026-10-29: pass (3 finding(s); All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.)
+- **Example outputs:** [`statements.json`](../examples/statement-review/bayer/statements.json), [`sample_60.csv`](../examples/statement-review/bayer/sample_60.csv), [`statements.json`](../examples/statement-review/sheet0/statements.json), [`sample_60.csv`](../examples/statement-review/sheet0/sample_60.csv), [`sample_layers.csv`](../examples/statement-review/sheet0/sample_layers.csv), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29-layers/score.txt), [`sample_layers_r2.csv`](../examples/statement-review/sheet0/sample_layers_r2.csv), [`score.txt`](../examples/statement-review/bayer/review-2026-10-29/score.txt), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29/score.txt), [`score_strict_adjacency.txt`](../examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt), [`sample.json`](../examples/statement-review/bound-sheet0/sample.json), [`sample.csv`](../examples/statement-review/bound-sheet0/sample.csv), [`sample.html`](../examples/statement-review/bound-sheet0/sample.html), [`illustrative_review.csv`](../examples/statement-review/bound-sheet0/illustrative_review.csv), [`apply_summary.json`](../examples/statement-review/bound-sheet0/apply_summary.json)
+- **Tests:** `test_statements.py`, `test_bound_statement_example.py`
+- **Independent review:** Independent Codex agent (read-only implementation, source-binding and public packet review), 2026-10-29: pass
 
 ## Operate: Work with live or historical process data, and review the model
 
@@ -249,7 +249,7 @@ Status: **proven**
 
 - **Tools:** `context_register.py`
 - **How to use it:** [CONTEXT_REGISTER.md](../docs/CONTEXT_REGISTER.md)
-- **Example outputs:** [`context.json`](../examples/context-register/illustrative/expected/context.json), [`context.md`](../examples/context-register/illustrative/expected/context.md), [`enriched_graph.json`](../examples/context-register/illustrative/expected/enriched_graph.json), [`enriched_questions.json`](../examples/context-register/illustrative/expected/enriched_questions.json), [`source_key.json`](../examples/context-register/pronto/source_key.json), [`sources.json`](../examples/context-register/pronto/sources.json), [`proposed_answers.csv`](../examples/context-register/pronto/proposed_answers.csv), [`context.md`](../examples/context-register/pronto/expected/context.md), [`questions.json`](../examples/context-register/bayer/screen/questions.json), [`context.md`](../examples/context-register/bayer/expected/context.md), [`context.json`](../examples/context-register/bayer/expected/context.json)
+- **Example outputs:** [`context.json`](../examples/context-register/illustrative/expected/context.json), [`context.md`](../examples/context-register/illustrative/expected/context.md), [`enriched_graph.json`](../examples/context-register/illustrative/expected/enriched_graph.json), [`enriched_questions.json`](../examples/context-register/illustrative/expected/enriched_questions.json), [`source_key.json`](../examples/context-register/pronto/source_key.json), [`sources.json`](../examples/context-register/pronto/sources.json), [`proposed_answers.csv`](../examples/context-register/pronto/proposed_answers.csv), [`context.md`](../examples/context-register/pronto/expected/context.md), [`questions.json`](../examples/context-register/bayer/screen/questions.json), [`context.md`](../examples/context-register/bayer/expected/context.md), [`context.json`](../examples/context-register/bayer/expected/context.json), [`sources.json`](../examples/context-register/nist-smstestbed/sources.json), [`source_key.json`](../examples/context-register/nist-smstestbed/source_key.json), [`proposed_answers.csv`](../examples/context-register/nist-smstestbed/proposed_answers.csv), [`expected_context.md`](../examples/context-register/nist-smstestbed/expected_context.md), [`fetch.json`](../examples/context-register/nist-smstestbed/fetch.json)
 - **Tests:** `test_context_register.py`, `test_context_examples.py`
 - **Independent review:** Independent Codex agent (read-only review, primary-source checks and adversarial CLI controls), 2026-10-29: pass
 

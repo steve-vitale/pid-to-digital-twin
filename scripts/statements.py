@@ -4,7 +4,8 @@
     python scripts/statements.py sample DIR/statements.json --n 60 --seed 7 --out DIR/sample.json
     python scripts/statements.py sample DIR/statements.json --n 60 --seed 7 --strata layer --floor 15 --out DIR/s.json
     python scripts/statements.py score REVIEWED_SHEET.csv [--sample DIR/sample.json]
-    python scripts/statements.py apply GRAPH.json REVIEWED_SHEET.csv --reviewer NAME [--date D] --out GRAPH_OUT.json
+    python scripts/statements.py apply GRAPH.json REVIEWED_SHEET.csv --reviewer NAME [--date D] \
+        [--image SHEET=PNG ...] [--document PDF] [--model MODEL.json] --out GRAPH_OUT.json
 
 Every node, attribute claim and edge of a twin-graph-1 file (scripts/graph_export.py) becomes one sentence such as
 "FT 1401 measures flow" or "PSV-101 protects the residue treater RT-1", with a stable id, the source it cites, the
@@ -14,6 +15,12 @@ error rates are reported per layer, never blended). Two verdicts are kept apart 
 (anyone can check) and TRUE IN THE PLANT (only an operator, a walkdown or live data can say, and only for a statement
 that matched its source). Guide: docs/STATEMENT_REVIEW.md. Stdlib; Pillow for drawing crops; PyMuPDF or pdftotext,
 when present, to quote report pages (otherwise only the page is given). No model calls.
+
+New review fingerprints bind the full canonical graph, actual machine-check model content and every supplied
+original file's raw bytes. Apply needs the same source options and current files. Even an unrelated graph status
+or event change reopens the whole packet. Graph/model-only coverage is explicit when no originals were supplied.
+Historical unbound sheets remain scoreable and sampleable, but cannot be applied or upgraded by sampling. Hashes
+are content bindings, not authenticated approvals or source verification.
 """
 import argparse
 import csv
@@ -27,6 +34,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from collections import Counter, OrderedDict
 from pathlib import Path
 
@@ -34,7 +42,8 @@ ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "twin-graph-1"
 FORMAT = "statements-1"
 SHEET_COLUMNS = ("statement_id", "group", "stratum", "layer", "text", "source", "source_match", "plant_truth",
-                 "reviewer", "note")
+                 "reviewer", "note", "review_fingerprint")
+BINDING_FORMAT = "statement-review-binding-1"
 # Which relationship layer a statement belongs to. Error rates are reported per layer and never blended: a pipe
 # adjacency, a network membership and a pairwise "same network" link are different facts with different error rates.
 LAYERS = {"pipe": "pipe layer: a pipe segment or pipe junction (what is piped directly to what)",
@@ -117,10 +126,97 @@ def blank(v):
     return v is None or v == "" or v == [] or v == {}
 
 
+def canonical_hash(value):
+    """JSON content binding: formatting and line endings do not change graph/model identity."""
+    encoded = json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
+
+
+def read_json_content(path):
+    def unique(pairs):
+        out = {}
+        for key, value in pairs:
+            if key in out:
+                raise ValueError("duplicate JSON object key")
+            out[key] = value
+        return out
+    return json.loads(Path(path).read_text(encoding="utf-8-sig"), object_pairs_hook=unique,
+                      parse_constant=lambda value: (_ for _ in ()).throw(ValueError("non-finite JSON value")))
+
+
+def protect_output(path, inputs):
+    """An output name must not alias any input, including through symlinks or filesystem hardlinks."""
+    protect_outputs([path], inputs)
+
+
+def protect_outputs(paths, inputs):
+    # pathlib.samefile compares stat's device/inode pair. Cache those identities and resolved native Paths once,
+    # then use sets: hundreds of crops must not cause hundreds of thousands of Windows filesystem round trips.
+    cache, identities = {}, {}
+
+    def describe(path):
+        path = Path(path)
+        if path not in cache:
+            resolved = path.resolve()
+            if resolved not in identities:
+                try:
+                    info = resolved.stat()
+                except FileNotFoundError:
+                    identity = None
+                else:
+                    if not info.st_ino:
+                        raise ValueError("filesystem does not expose a reliable file identity for collision checks")
+                    identity = (info.st_dev, info.st_ino)
+                identities[resolved] = identity
+            cache[path] = resolved, identities[resolved]
+        return cache[path]
+
+    input_names, input_ids = set(), set()
+    for source in inputs:
+        name, identity = describe(source)
+        input_names.add(name)
+        if identity is not None:
+            input_ids.add(identity)
+    output_names, output_ids = set(), set()
+    for path in paths:
+        name, identity = describe(path)
+        if name in input_names or identity is not None and identity in input_ids:
+            raise ValueError("output aliases an input graph, review sheet, model or original source file")
+        if name in output_names or identity is not None and identity in output_ids:
+            raise ValueError("generated output files alias each other")
+        output_names.add(name)
+        if identity is not None:
+            output_ids.add(identity)
+
+
+def publish_render(staged, out, inputs):
+    """Discover every generated crop/figure before the first destination write, then preflight the whole plan."""
+    files = sorted(path for path in staged.rglob("*") if path.is_file())
+    targets = [out / path.relative_to(staged) for path in files]
+    protect_outputs(targets, inputs)
+    for source, target in zip(files, targets):
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+
+
+def evidence_refs(statements):
+    refs = set()
+    for st in statements:
+        evidence = st.get("evidence") or {}
+        if not isinstance(evidence, dict) or not isinstance(evidence.get("figure_images", []), list):
+            raise ValueError("sample evidence must name image files in an object with a figure_images list")
+        for rel in ([evidence["image"]] if evidence.get("image") else []) + evidence.get("figure_images", []):
+            if (not isinstance(rel, str) or not rel or Path(rel).anchor or re.match(r"^[A-Za-z]:", rel)
+                    or rel.startswith(("/", "\\")) or ".." in Path(rel).parts):
+                raise ValueError("sample evidence references must be relative paths within the source packet")
+            refs.add(Path(rel))
+    return sorted(refs)
+
+
 def load_graph(path):
     p = Path(path)
     try:
-        g = json.loads(p.read_text(encoding="utf-8"))
+        g = read_json_content(p)
     except (OSError, ValueError) as exc:
         raise ValueError(f"{p.name} is not a {SCHEMA} graph: can't read it as JSON ({exc})")
     if not isinstance(g, dict) or g.get("schema") != SCHEMA or not isinstance(g.get("nodes"), list):
@@ -719,6 +815,10 @@ def parse_images(pairs):
         if "=" not in p:
             raise ValueError(f"--image wants SHEET=PNG, got {p!r}")
         k, v = p.split("=", 1)
+        if not k or k != k.strip() or k in imgs:
+            raise ValueError("--image needs distinct, nonempty exact sheet ids without surrounding whitespace")
+        if not v or not Path(v).is_file():
+            raise ValueError(f"image for sheet {k!r} is missing or is not a file")
         imgs[k] = Path(v)
     return imgs
 
@@ -981,10 +1081,55 @@ def find_model(g, model_arg=None):
     else:
         sm = g.get("source_model") or ""
         p = ROOT / sm if sm else None
+    if model_arg and (not p.is_file() or g.get("model_kind") != "hand_built"):
+        raise ValueError("--model must name an available machine-check model for a hand_built graph")
     if g.get("model_kind") != "hand_built" or not p or not p.is_file():
         return None, None
-    return json.loads(p.read_text(encoding="utf-8")), (p.resolve().relative_to(ROOT).as_posix()
-                                                         if p.resolve().is_relative_to(ROOT) else p.name)
+    model = read_json_content(p)
+    if not isinstance(model, dict):
+        raise ValueError("the machine-check model must be a JSON object")
+    return model, (p.resolve().relative_to(ROOT).as_posix() if p.resolve().is_relative_to(ROOT) else p.name)
+
+
+def review_packet(g, images=None, document=None, model_arg=None):
+    """Bind actual supplied bytes and canonical full graph/model content. No local paths enter the basis."""
+    images = images or {}
+    if any(not isinstance(sheet, str) or not sheet or sheet != sheet.strip() for sheet in images):
+        raise ValueError("image bindings need nonempty exact sheet ids")
+    originals, image_hashes = [], []
+    for sheet, path in sorted(images.items()):
+        path = Path(path)
+        if not path.is_file():
+            raise ValueError(f"image for sheet {sheet!r} is missing or is not a file")
+        image_hashes.append({"sheet": sheet, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+        originals.append(path)
+    document_hash = None
+    if document:
+        path = Path(document)
+        if not path.is_file():
+            raise ValueError("supplied document is missing or is not a file")
+        document_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+        originals.append(path)
+    model, model_name = find_model(g, model_arg)
+    if model is not None:
+        originals.append(Path(model_arg) if model_arg else ROOT / g["source_model"])
+    basis = {"schema": BINDING_FORMAT, "graph_sha256": canonical_hash(g),
+             "machine_model_sha256": canonical_hash(model) if model is not None else None,
+             "images": image_hashes, "document_sha256": document_hash,
+             "coverage": "supplied-original-files" if image_hashes or document_hash else "graph/model-only"}
+    return basis, model, model_name, originals
+
+
+def review_fingerprint(statement, basis):
+    # Sampling stratum is deliberately absent: --strata layer changes allocation, not the reviewed claim.
+    payload = {key: statement[key] for key in ("id", "subject", "predicate", "object", "text", "source",
+                                              "source_pointer", "targets", "layer")}
+    return canonical_hash({"basis": basis, "statement": payload})
+
+
+def bind_statements(statements, basis):
+    for statement in statements:
+        statement["review_fingerprint"] = review_fingerprint(statement, basis)
 
 
 def model_item(m, kind, nid):
@@ -1151,7 +1296,7 @@ document.getElementById('dl').addEventListener('click',()=>{
  const who=document.getElementById('who').value;const cols=%s;
  const lines=[cols.join(',')];rows.forEach(r=>{const d=r.dataset;
  lines.push([d.id,d.group,d.stratum,d.layer,d.text,d.source,r.querySelector('.sm').value,r.querySelector('.pt').value,
- who,r.querySelector('.nt').value].map(q).join(','));});
+ who,r.querySelector('.nt').value,d.reviewFingerprint].map(q).join(','));});
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\\n')+'\\n'],{type:'text/csv'}));
  a.download='review_sheet_reviewed.csv';a.click();});
 """
@@ -1182,7 +1327,15 @@ def evidence_html(ev, prefix):
     return "".join(parts)
 
 
-def html_page(title, statements, prefix="", intro=""):
+def html_page(title, statements, prefix="", intro="", review_basis=None):
+    if review_basis:
+        supplied = (["report PDF"] if review_basis["document_sha256"] else []) + [
+            "image for sheet " + x["sheet"] for x in review_basis["images"]]
+        coverage = ("Supplied original file bytes bound: " + ", ".join(supplied) + "." if supplied else
+                    "Graph/model-only coverage: no original document or drawing image bytes were supplied.")
+        intro += ("<p>" + html.escape(coverage) + " The full graph and available machine-check model are bound "
+                  "conservatively; any content change needs a new review. Hashes are not signatures or source "
+                  "verification.</p>")
     groups = OrderedDict()
     for st in sorted(statements, key=lambda s: (s.get("system") or "", s["group"], s["rank"], s["text"])):
         groups.setdefault((st.get("system") or "", st["group"]), []).append(st)
@@ -1203,7 +1356,8 @@ def html_page(title, statements, prefix="", intro=""):
                        f"(<code>{html.escape(', '.join(mc.get('fields', [])))}</code>); proves only that the export "
                        f"is faithful to the model</div>")
             d = {"id": st["id"], "group": f"{system} \u203a {group}" if system else group, "stratum": st["stratum"],
-                 "layer": st.get("layer", ""), "text": st["text"], "source": st["source_pointer"]}
+                 "layer": st.get("layer", ""), "text": st["text"], "source": st["source_pointer"],
+                 "review-fingerprint": st.get("review_fingerprint", "")}
             attrs = " ".join(f"data-{k}='{html.escape(str(v), quote=True)}'" for k, v in d.items())
             body.append(
                 f"<div class='st' {attrs}><div><div class='text'>{html.escape(st['text'])}</div>"
@@ -1227,7 +1381,7 @@ def write_sheet(path, statements):
         for st in statements:
             grp = f"{st['system']} \u203a {st['group']}" if st.get("system") else st["group"]
             w.writerow([st["id"], grp, st["stratum"], st.get("layer", ""), st["text"], st["source_pointer"], "", "",
-                        "", ""])
+                        "", "", st.get("review_fingerprint", "")])
 
 
 def summary(statements):
@@ -1246,27 +1400,34 @@ def summary(statements):
 def cmd_render(a):
     g = load_graph(a.graph)
     statements, skipped, gr = build(g)
+    images = parse_images(a.image)
+    basis, m, mname, original_inputs = review_packet(g, images, a.document, a.model)
+    bind_statements(statements, basis)
     out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    crops = Crops(parse_images(a.image), out)
-    report = Report(a.document, out)
-    add_evidence(statements, gr, crops, report)
-    m, mname = find_model(g, a.model)
-    machine_check(statements, g, m, mname)
-    gp = Path(a.graph).resolve()
-    doc = {"format": FORMAT, "graph": gp.relative_to(ROOT).as_posix() if gp.is_relative_to(ROOT) else gp.name,
-           "graph_sha256": hashlib.sha256(gp.read_bytes()).hexdigest(), "title": g.get("title"),
-           "verdicts": {"source_match": list(SOURCE_VERDICTS), "plant_truth": list(PLANT_VERDICTS),
-                        "rule": "plant_truth only for a statement whose source_match is 'match'"},
-           "ranks": {str(k): v for k, v in RANKS.items()},
-           "report_reader": report.reader, "summary": summary(statements), "skipped": skipped,
-           "statements": statements}
-    (out / "statements.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
-                                         newline="\n")
-    write_sheet(out / "review_sheet.csv", statements)
-    if not a.no_html:
-        (out / "review.html").write_text(html_page(f"Statement review: {g.get('title') or doc['graph']}",
-                                                   statements), encoding="utf-8", newline="\n")
+    # Crop and figure names are dynamic. Stage the complete packet so known alias collisions cannot leave a
+    # partial destination packet or overwrite the original bytes used for its review basis.
+    with tempfile.TemporaryDirectory(prefix="statement-render-") as directory:
+        staged = Path(directory)
+        crops = Crops(images, staged)
+        report = Report(a.document, staged)
+        add_evidence(statements, gr, crops, report)
+        machine_check(statements, g, m, mname)
+        gp = Path(a.graph).resolve()
+        doc = {"format": FORMAT, "graph": gp.relative_to(ROOT).as_posix() if gp.is_relative_to(ROOT) else gp.name,
+               "graph_sha256": basis["graph_sha256"], "graph_hash_kind": "canonical-json", "review_basis": basis,
+               "title": g.get("title"),
+               "verdicts": {"source_match": list(SOURCE_VERDICTS), "plant_truth": list(PLANT_VERDICTS),
+                            "rule": "plant_truth only for a statement whose source_match is 'match'"},
+               "ranks": {str(k): v for k, v in RANKS.items()},
+               "report_reader": report.reader, "summary": summary(statements), "skipped": skipped,
+               "statements": statements}
+        (staged / "statements.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n",
+                                               encoding="utf-8", newline="\n")
+        write_sheet(staged / "review_sheet.csv", statements)
+        if not a.no_html:
+            (staged / "review.html").write_text(html_page(f"Statement review: {g.get('title') or doc['graph']}",
+                                                        statements, review_basis=basis), encoding="utf-8", newline="\n")
+        publish_render(staged, out, [a.graph] + original_inputs)
     print(json.dumps(doc["summary"]))
     return 0
 
@@ -1336,6 +1497,17 @@ def cmd_sample(a):
         pool = [dict(x, stratum=x["layer"]) for x in pool]
     picked, strata = draw_sample(pool, a.n, a.seed, a.floor)
     out = Path(a.out)
+    all_evidence = evidence_refs(doc["statements"])
+    copies, missing = {}, 0
+    if sp.parent.resolve() != out.parent.resolve():
+        for rel in evidence_refs(picked):
+            src, dst = sp.parent / rel, out.parent / rel
+            if src.exists():
+                copies[dst] = src
+            elif not dst.exists():
+                missing += 1
+    protect_outputs([out, out.with_suffix(".csv"), out.with_suffix(".html"), *copies],
+                    [sp] + [sp.parent / rel for rel in all_evidence])
     out.parent.mkdir(parents=True, exist_ok=True)
     s = {"format": "statement-sample-1", "statements_file": sp.name,
          "statements_sha256": hashlib.sha256(sp.read_bytes()).hexdigest(), "graph": doc.get("graph"),
@@ -1349,20 +1521,14 @@ def cmd_sample(a):
                     f"sorted by id. Small strata are over-sampled on purpose: use each stratum's weight "
                     f"(population / sampled) for a plant-wide estimate."),
          "strata": strata, "statements": sorted(picked, key=lambda x: (x["stratum"], x["id"]))}
+    if "review_basis" in doc:
+        s["review_basis"] = doc["review_basis"]
     out.write_text(json.dumps(s, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     write_sheet(out.with_suffix(".csv"), s["statements"])
     # The sample's page is self-contained: the evidence images it shows are copied next to it.
-    missing = 0
-    if sp.parent.resolve() != out.parent.resolve():
-        for st in s["statements"]:
-            ev = st.get("evidence") or {}
-            for rel in ([ev["image"]] if ev.get("image") else []) + ev.get("figure_images", []):
-                src, dst = sp.parent / rel, out.parent / rel
-                if src.exists():
-                    dst.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copyfile(src, dst)
-                elif not dst.exists():
-                    missing += 1
+    for dst, src in copies.items():
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(src, dst)
     if missing:
         print(f"note: {missing} evidence image(s) named in {sp.name} were not found beside it", file=sys.stderr)
     prefix = ""
@@ -1370,7 +1536,8 @@ def cmd_sample(a):
              f"(seed {a.seed}). Strata: " + ", ".join(f"{x['stratum']} ({x['rank_label']}) {x['sampled']}/"
                                                       f"{x['population']}" for x in strata) + "</p>")
     out.with_suffix(".html").write_text(html_page(f"Statement review sample: {doc.get('title') or doc.get('graph')}",
-                                                  s["statements"], prefix, intro), encoding="utf-8", newline="\n")
+                                                  s["statements"], prefix, intro, doc.get("review_basis")),
+                                        encoding="utf-8", newline="\n")
     print(f"{len(picked)} statements, seed {a.seed}, {len(strata)} strata -> {out}, "
           f"{out.with_suffix('.csv').name}, {out.with_suffix('.html').name}")
     for x in strata:
@@ -1390,16 +1557,24 @@ def wilson(k, n, z=Z95):
     return (max(0.0, c - h), min(1.0, c + h))
 
 
-def read_sheet(path):
+def read_sheet(path, strict=False):
     with open(path, encoding="utf-8-sig", newline="") as f:
-        rows = list(csv.DictReader(f))
+        reader = csv.DictReader(f)
+        header = reader.fieldnames or []
+        rows = list(reader)
     if not rows and not Path(path).read_text(encoding="utf-8-sig").strip():
         raise ValueError(f"{Path(path).name} is empty")
     need = {"statement_id", "source_match", "plant_truth"}
-    with open(path, encoding="utf-8-sig", newline="") as f:
-        header = next(csv.reader(f), [])
     if not need <= set(header):
         raise ValueError(f"{Path(path).name} is not a review sheet: it needs columns {sorted(need)}")
+    if strict:
+        if not all(header) or len(set(header)) != len(header):
+            raise ValueError("ambiguous review sheet: column names must be distinct and nonempty")
+        if not set(SHEET_COLUMNS) <= set(header):
+            raise ValueError("unbound legacy review sheet: current read-only columns and review_fingerprint required; "
+                             "historical sheets remain scoreable")
+        if any(None in row or any(value is None for value in row.values()) for row in rows):
+            raise ValueError("malformed review sheet: row width disagrees with its header")
     return rows
 
 
@@ -1524,11 +1699,50 @@ def new_status(sm, pt):
     return None
 
 
-def apply(g, rows, reviewer=None, date=None, record=None):
+def binding_preflight(statements, rows, basis):
+    """Every reviewed row must be bound before any verdict is applied, including otherwise invalid verdict rows."""
+    by_id = {st["id"]: st for st in statements}
+    seen = set()
+    for row in rows:
+        if not (row.get("source_match") or "").strip() and not (row.get("plant_truth") or "").strip():
+            continue
+        ident = row.get("statement_id") or ""
+        if ident not in by_id:
+            raise ValueError("review binding failed: reviewed statement is absent from the current graph")
+        if ident in seen:
+            raise ValueError("review binding failed: repeated reviewed statement id")
+        seen.add(ident)
+        st = by_id[ident]
+        if not row.get("review_fingerprint"):
+            raise ValueError("unbound legacy review: render and review a new packet; old reviews remain scoreable")
+        if row["review_fingerprint"] != review_fingerprint(st, basis):
+            raise ValueError("stale review fingerprint: graph, model, original source bytes or statement changed; "
+                             "render and review a new packet")
+        for field, expected in (("text", st["text"]), ("source", st["source_pointer"]), ("layer", st["layer"])):
+            if row.get(field) != expected:
+                raise ValueError(f"review binding failed: read-only {field} was edited")
+        group = f"{st['system']} \u203a {st['group']}" if st.get("system") else st["group"]
+        if row.get("group") != group or row.get("stratum") not in (st["stratum"], st["layer"]):
+            raise ValueError("review binding failed: read-only group or sampling stratum was edited")
+
+
+def apply(g, rows, reviewer=None, date=None, record=None, images=None, document=None, model=None):
+    """Programmatic apply has the same compulsory current-file binding preflight as the CLI."""
+    basis, _, _, _ = review_packet(g, images, document, model)
+    return _apply_bound(g, rows, basis, reviewer, date, record)
+
+
+def _apply_bound(g, rows, basis, reviewer=None, date=None, record=None):
     """Write verdicts onto the graph's claims, nodes and edges as checks + statuses, plus one event per verdict.
     Values are never touched. Returns (graph, applied, refused)."""
+    date = date or datetime.date.today().isoformat()
+    if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+        raise ValueError("review date must be YYYY-MM-DD")
+    datetime.date.fromisoformat(date)
+    rows = list(rows)
     g = json.loads(json.dumps(g))
     statements, _, gr = build(g)
+    binding_preflight(statements, rows, basis)
     by_id = {s["id"]: s for s in statements}
     nodes = {n["id"]: n for n in g["nodes"]}
     edges = {e["id"]: e for e in g["edges"]}
@@ -1555,7 +1769,9 @@ def apply(g, rows, reviewer=None, date=None, record=None):
             continue
         st = by_id[i]
         status = new_status(sm, pt)
-        check = {"statement": i, "source_match": sm, "plant_truth": pt or None, "by": who, "on": date}
+        check = {"statement": i, "source_match": sm, "plant_truth": pt or None, "by": who, "on": date,
+                 "note": r.get("note") or "",
+                 "review_fingerprint": r["review_fingerprint"], "review_basis": basis}
         for t in st["targets"]:
             if t[0] == "claim":
                 obj = next(a for a in nodes[t[1]]["attributes"] if a["name"] == t[2])
@@ -1569,7 +1785,8 @@ def apply(g, rows, reviewer=None, date=None, record=None):
         g.setdefault("events", []).append(
             {"type": "statement_review", "item": st["targets"][0][1], "statement": i, "text": st["text"],
              "source_match": sm, "plant_truth": pt or None, "status_set": status, "by": who, "on": date,
-             "record": record})
+             "record": record, "note": r.get("note") or "", "review_fingerprint": r["review_fingerprint"],
+             "review_basis": basis})
         applied.append(i)
     g.setdefault("counts", {})["events"] = len(g.get("events", []))
     return g, applied, refused
@@ -1578,12 +1795,14 @@ def apply(g, rows, reviewer=None, date=None, record=None):
 def cmd_apply(a):
     try:
         g = load_graph(a.graph)
-        rows = read_sheet(a.sheet)
+        rows = read_sheet(a.sheet, strict=True)
+        basis, _, _, originals = review_packet(g, parse_images(a.image), a.document, a.model)
+        protect_output(a.out, [a.graph, a.sheet] + originals)
     except (OSError, ValueError) as exc:
         print(f"can't apply: {exc}", file=sys.stderr)
         return 2
     date = a.date or datetime.date.today().isoformat()
-    out, applied, refused = apply(g, rows, a.reviewer, date, Path(a.sheet).name)
+    out, applied, refused = _apply_bound(g, rows, basis, a.reviewer, date, Path(a.sheet).name)
     sys.path.insert(0, str(ROOT / "scripts"))
     import graph_export
     bad = graph_export.problems(out)
@@ -1627,11 +1846,14 @@ def main(argv=None):
     p.add_argument("sheet")
     p.add_argument("--reviewer", help="used for rows with an empty reviewer column")
     p.add_argument("--date", help="date of the review (default today)")
+    p.add_argument("--image", action="append", metavar="SHEET=PNG", help="same original images supplied at render")
+    p.add_argument("--document", metavar="PDF", help="same original document supplied at render")
+    p.add_argument("--model", help="same actual machine-check model used at render")
     p.add_argument("--out", required=True)
     a = ap.parse_args(argv)
     try:
         return {"render": cmd_render, "sample": cmd_sample, "score": cmd_score, "apply": cmd_apply}[a.cmd](a)
-    except ValueError as exc:
+    except (OSError, ValueError) as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 2
 

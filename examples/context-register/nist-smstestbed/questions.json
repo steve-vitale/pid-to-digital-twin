@@ -1,0 +1,204 @@
+{
+  "schema": "opportunity-questions-1",
+  "source_model": "examples/context-register/nist-smstestbed/model.json",
+  "note": "Source-specific historical engineering context questions, AI-authored development example.",
+  "counts": {
+    "findings": 8
+  },
+  "questions": [
+    {
+      "id": "SMS-IDENTITY@mtc_adapter008",
+      "question_id": "SMS-IDENTITY",
+      "family": "engineering_context",
+      "question": "Which published machine identity joins the two device configurations?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-REUSED-ID@mtc_adapter008",
+      "question_id": "SMS-REUSED-ID",
+      "family": "engineering_context",
+      "question": "What does Hurco04-path_7 mean in each configuration revision?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-SPINDLE-DEFINITION@mtc_adapter008",
+      "question_id": "SMS-SPINDLE-DEFINITION",
+      "family": "engineering_context",
+      "question": "How does the later configuration define the spindle-speed field?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-RAW-SPINDLE@mtc_adapter008",
+      "question_id": "SMS-RAW-SPINDLE",
+      "family": "engineering_context",
+      "question": "Which spindle-speed value is actually recorded at the selected timestamp?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-UNAVAILABLE@mtc_adapter008",
+      "question_id": "SMS-UNAVAILABLE",
+      "family": "engineering_context",
+      "question": "How should unavailable and zero observations stay distinct?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-EXECUTION-GAPS@mtc_adapter008",
+      "question_id": "SMS-EXECUTION-GAPS",
+      "family": "engineering_context",
+      "question": "Do these raw records establish a named job and complete execution-state coverage?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "mtc_adapter008",
+          "fields": [
+            "Obtain the collection completeness policy and a controlled job/execution record before asserting production status or a named job."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Applicable configuration, deployment or collection record."
+            }
+          ],
+          "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+        }
+      ],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-DEPLOYED-REVISION@mtc_adapter008",
+      "question_id": "SMS-DEPLOYED-REVISION",
+      "family": "engineering_context",
+      "question": "Which configuration revision was deployed during the recorded capture?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "mtc_adapter008",
+          "fields": [
+            "Request the configuration and adapter deployment record applicable to the 2017-02-17 capture; a later Git commit date does not supply a deployment date."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Applicable configuration, deployment or collection record."
+            }
+          ],
+          "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+        }
+      ],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    },
+    {
+      "id": "SMS-OLD-FEED-SEMANTICS@mtc_adapter008",
+      "question_id": "SMS-OLD-FEED-SEMANTICS",
+      "family": "engineering_context",
+      "question": "Which feed-rate semantic uncertainty remains in the older configuration?",
+      "about": "Hurco04 (UUID mtc_adapter008)",
+      "assets": [
+        {
+          "id": "mtc_adapter008",
+          "tag": "Hurco04"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "mtc_adapter008",
+          "fields": [
+            "Confirm the actual-versus-commanded measurement semantics from an applicable controlled adapter/configuration record; no person is assigned by this example."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Applicable configuration, deployment or collection record."
+            }
+          ],
+          "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+        }
+      ],
+      "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+      "typical_benefit": null,
+      "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval.",
+      "status": "asked"
+    }
+  ]
+}

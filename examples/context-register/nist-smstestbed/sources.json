@@ -1,0 +1,133 @@
+{
+  "schema": "context-sources-1",
+  "about": "Actual original files resolved with --source-root data/external/nist-smstestbed; notice is ancillary and bound to no engineering answer.",
+  "documents": [
+    {
+      "path": "2016/Devices.xml",
+      "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "title": "NIST SMS device configuration, 2016-10-06 commit",
+      "id": "SMS-DEV-2016",
+      "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "bytes": 61363,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n01",
+          "locator": "Physical lines 691-692; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n03",
+          "locator": "Physical line 724; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n10",
+          "locator": "Physical line 727; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_10'] and its trailing Actual? XML comment",
+          "questions": [
+            "SMS-OLD-FEED-SEMANTICS@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "2017/Devices.xml",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS later device configuration; last changed 2017-07-11",
+      "id": "SMS-DEV-2017",
+      "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "bytes": 39450,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/mtconnect/agent/Devices.xml",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n02",
+          "locator": "Physical lines 463-464; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n04",
+          "locator": "Physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n05",
+          "locator": "Physical lines 473-475; Device[@id='Hurco04']//DataItem[@id='Hurco04-C_1'] attributes and Source",
+          "questions": [
+            "SMS-SPINDLE-DEFINITION@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "raw/Hurco04-20170217-20170218.txt",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS archived Hurco04 raw operating log",
+      "id": "SMS-RAW-20170217",
+      "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "bytes": 17314,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/raw/Hurco04/Hurco04-20170217-20170218.txt",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n06",
+          "locator": "Physical line 81; pipe-delimited timestamp, item name and value; source path raw/Hurco04/Hurco04-20170217-20170218.txt",
+          "questions": [
+            "SMS-RAW-SPINDLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n07",
+          "locator": "Physical lines 3 and 34; Spindle_Speed records at 2017-02-14T16:12:54.968217Z and 2017-02-17T09:18:51.4531250Z",
+          "questions": [
+            "SMS-UNAVAILABLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n08",
+          "locator": "Physical lines 37, 45 and 359; Program_Name_Running and Program_Status records",
+          "questions": [
+            "SMS-EXECUTION-GAPS@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n09",
+          "locator": "Whole 363-line archived raw file; three pipe-delimited fields per line; exact example at physical line 81",
+          "questions": [
+            "SMS-DEPLOYED-REVISION@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS repository description and reuse notice",
+      "id": "SMS-NOTICE",
+      "sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+      "bytes": 3704,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "reuse-notice",
+          "locator": "README physical lines 28-46, Use of NIST Information and Software Disclaimer",
+          "questions": []
+        }
+      ]
+    }
+  ]
+}

@@ -3526,3 +3526,81 @@ This is documentation work. The claim check still reports 41 numeric matches, on
 failures. No model, method, benchmark, runtime receipt or tool implementation changed. The legacy statement-review
 revision-binding limitation remains documented; this edit does not fix it or upgrade historical approvals. No
 LinkedIn post, real-site pilot, measured adoption or downstream import was performed.
+
+## 68. Make source changes and generated outputs fit one reviewed context
+
+**What:** 2026-10-29. Define the organizational lifecycle, close the legacy statement-review evidence-binding gap,
+and add a manufacturing source family to the context examples. The intended authority is one central reviewed
+context. Specialized tools consume versioned snapshots and return draft outputs, questions and proposed changes
+through engineering review. The [lifecycle guide](CONTEXT_LIFECYCLE.md) specifies that contract and distinguishes
+the implemented local tools from an organizational service that remains to be built and accepted.
+
+**Documents need different maintenance rules.** Original records keep their bytes, revisions, owners and controlled
+references. Generated views keep their source snapshot, recipe, dependencies and release state. Authored documents
+need explicitly managed sections, proposed differences and reconciliation of manual or concurrent edits. Incoming
+evidence should be visible while review is pending. Local CSV acceptance is provenance, not authenticated authority
+in a receiving organization. No document watcher, managed-section merger or live organizational integration was added.
+
+Actual input shapes matter. `generate.py` and `question_engine.py` consume process-model or extracted-twin JSON;
+the graph is not their general input. Graph export has no general inverse, and the context sidecar does not update
+the original generator model. The guide therefore requires declared projections, loss reports and readback checks.
+It sets an acceptance target for one source-backed change through a hub, one generator, reviewed release and the
+next revision, including rejection, concurrent edits, interruption and rollback. That organizational-context round
+trip has not been performed. An asset-count match would not establish that claims and history survived it.
+
+**Close an actual unsafe reuse path.** The independent pre-change reproduction kept a statement's semantic ID and
+text unchanged while moving its source from one document revision/page to another. The old CSV applied successfully.
+New packets and browser downloads now bind the complete canonical graph, actual machine-check model, supplied
+original image/report bytes and exact statement/source/target/layer details. Apply rereads those files and refuses
+any reviewed row with a stale, missing or edited binding before writing output. Sampling preserves bindings;
+sampling a legacy packet does not manufacture them. Historical samples and scores remain unchanged and scoreable,
+but their unbound verdicts cannot be applied to today's graph. Notes now travel verbatim with checks and events.
+
+Independent adversarial review found two additional clobber cases: sampling onto its own full packet, and a source
+image named as a generated crop. Both now refuse without changing input or destination bytes. Render stages its
+dynamic crops before collision preflight, including hardlink/symlink aliases. A first collision implementation was
+quadratic in file count and made the actual full drawing run impractical on Windows. It now scans paths and file
+identities once; a 600-target regression control preserves that bound. Ordinary filesystem failures can still
+interrupt publication, so prior records and backups remain necessary.
+
+The [bound sheet-0 packet](../examples/statement-review/bound-sheet0/README.md) retains a new 12-statement sample
+over five relationship layers, the original drawing crops, and one explicitly fictional `unclear` verdict. Three
+standard-library integration controls exercise actual CLI application, note/value preservation, and refusal after
+copied source or graph changes. This is evidence of software behavior, not another accuracy review. Whole-graph
+binding is intentionally conservative: unrelated assets, statuses and events reopen the packet. The context
+register's separate selective dependencies are unchanged. Hashes are not signatures; exact restoration can match
+an old snapshot, and neither tool monitors intervening changes or authenticates a reviewer.
+
+**A different source family exposes a real revision problem.** The new
+[NIST SMS Test Bed packet](../examples/context-register/nist-smstestbed/README.md) fetches two published device
+configurations, an archived raw operating log and the upstream reuse notice. All four are pinned by immutable
+revision, raw hash and byte count, with no originals redistributed. The same machine UUID links the configurations,
+but a reused data-item ID changes meaning from tool number to accumulated program time. Observations stay scoped
+to each revision. The raw log does not prove which configuration was deployed, so that question stays open.
+`UNAVAILABLE`, numeric zero and a single blank program-name space remain distinct. No job or live machine condition
+is inferred.
+
+Discovery inspected these facts before packet acceptance criteria were written: this is a development example,
+not held-out generalization. Ten proposed answers over eight questions produce five partial and three needs-data
+states; all questions need an owner and plant truth remains unknown. Copied older-config, later-config, raw-log and
+unrelated-notice changes stale exactly 3/3/4/0 answers while preserving history. Independent review checked ten
+primary XML/raw fact groups, original hashes, lifecycle/refusal controls and missing-original failures. The derived
+key is never substituted for unavailable original bytes.
+
+The three multi-document context packets are listed separately in `data/corpus.json`. The eight-workflow matrix
+still has its existing 94 cells; the new packet is not counted as another extraction benchmark. Its packet-local
+registry reuses the pinned-file fetcher without changing existing matrix recipe hashes. Prototype source checks,
+independent agent review and a clear integration contract do not establish human adoption, review-time savings or
+an organization's continuing document-management outcome.
+
+A young-engineer/engineering-manager reader pass also caught a missing connection to the already implemented
+`apply_review.py` model-correction route. The lifecycle table and pilot guide now explain that limited local
+return path, its in-place/partial-row behavior and the separate organizational approval needed on transfer.
+The README's older class-wide "public drawings only" wording now distinguishes drawing validation from the
+other public-record workflows. These edits make existing capabilities discoverable; they add no hub adapter.
+
+All 58 registered test scripts passed locally; two Windows symlink subcases were skipped and remain for Linux CI.
+All 17 feature entries have current independent review receipts for their exact registered outputs. The narrow
+matrix receipt checks only the added context registry and preserves prior result/review scope; no 94-cell rerun
+is claimed. The claim check still has 41 numeric matches, one prose-only claim and no failures, and all 52 pipeline
+stages remain fresh. These are offline software checks, with no new operational acceptance or measured adoption.

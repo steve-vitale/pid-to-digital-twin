@@ -560,3 +560,38 @@ subject, predicate and value stay the same. That command's limitation is now vis
 After this increment, use another fresh reader pass and the observed failures to choose the next workflow or
 corpus extension. Actual ownership assignments, governing-document decisions, walkdowns, live-signal validation
 and review time require people at a site; this goal does not treat software fixtures as those results.
+
+### Next maintenance check: bind statement reviews to their evidence
+
+Prospective acceptance criteria, 2026-10-29, before the implementation is evaluated. The documented legacy
+statement-review CSV can match a semantic statement ID after its cited evidence changes. Close that path while
+retaining the historical samples and their scores as records of what was reviewed at the time.
+
+1. Newly rendered statements, CSV sheets and browser downloads carry a per-statement fingerprint. It binds the
+   canonical full graph snapshot, canonical machine-check model content when available, actual raw bytes of every
+   supplied drawing/report file, and the statement's wording, source pointer, targets and relationship layer.
+2. Sampling preserves that binding, including when sampling by relationship layer. Sampling an old unbound file
+   must not create a new evidence-bound approval for it. Historical scoring remains available without importing
+   old verdicts into current evidence.
+3. Applying verdicts reads current evidence bytes through the same explicit input options. A changed or missing
+   input, missing binding, edited statement text/source/layer or stale fingerprint refuses before output writes.
+   One invalid binding must not let other rows silently persist. There is no legacy bypass or automatic rebinding.
+4. All supplied files are checked before rendering output. Ambiguous sheet identities fail. Applying must not
+   overwrite its graph, sheet, model or source documents through direct paths, symlinks or hard links.
+5. Successful output retains the fingerprint and evidence basis with each dated review. The graph's engineering
+   values remain unchanged and source interpretation remains separate from plant truth. Generated provenance must
+   not introduce local absolute paths or infer authenticated organizational authority.
+6. Whole-packet invalidation is explicit: any graph snapshot change, including an unrelated asset or review state,
+   requires a new render. Canonical JSON formatting changes alone do not. Source images/reports bind raw bytes.
+   The separate context register retains its existing selective-dependency workflow.
+7. Clearly identify graph/model-only coverage when no original drawing/report was supplied. Neither fingerprints
+   nor retained history prove that a source is authoritative, its passage supports a claim or a reviewer is
+   authenticated. No watcher, downstream synchronization or automatic approval is implied.
+8. Demonstrate the new round trip on a current public graph and supplied original drawing, with copied-input
+   revision controls and fresh independent review. Preserve earlier reviewed samples rather than redrawing them
+   and changing the historical population. This is software evidence, not a timed human or operational review.
+
+The resulting [current sheet-0 packet](../examples/statement-review/bound-sheet0/README.md), independent review
+receipt in `data/reviews.json` and [journal 68](JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context)
+record this maintenance increment. The [organizational lifecycle](CONTEXT_LIFECYCLE.md) sets the next integration
+acceptance target; local binding controls do not establish that a live hub or ongoing document synchronization exists.

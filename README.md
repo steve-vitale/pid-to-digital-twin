@@ -263,6 +263,11 @@ transition. A receiving system must retain source revisions and locations, relat
 disputed states, and review history. Its adapter needs a staged import and readback check before anyone claims
 compatibility. No downstream live integration of the context register has been verified here.
 
+For the intended closed loop—one reviewed context, versioned generator inputs, draft outputs and proposed changes
+returned for review—see [the context lifecycle](docs/CONTEXT_LIFECYCLE.md). It separates original records, generated
+views and authored documents, lists the formats each tool actually reads, and defines what a future integration
+must demonstrate before claiming to keep a company's documents synchronized.
+
 ## The platform demonstration and its acceptance boundary
 
 The reusable drawing route produces a draft model, review material, Ignition tags and PI staging. Working screens
@@ -557,9 +562,10 @@ it at a real site.
 
 ## What's a tool and what's a record
 
-Three kinds of thing live in this repository. Only the first is meant to be pointed at your own drawings.
+Three kinds of thing live in this repository. Only the first is designed for other inputs.
 
-**Tools for your own drawings and systems.** Prototypes: tested on public drawings only, never on a plant's own.
+**Tools for your own drawings and systems.** Prototypes exercised on public inputs by workflow. The drawing route
+has not been validated on a plant's own drawings; organizational adoption and operational benefit remain unmeasured.
 Start with [the runbook](examples/own-drawing/README.md); the inputs a plant has to supply are in
 [REPLICATE_AT_YOUR_PLANT.md](docs/REPLICATE_AT_YOUR_PLANT.md).
 

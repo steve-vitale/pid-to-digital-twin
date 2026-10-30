@@ -189,7 +189,11 @@ it prints one rate per layer and no blended one. What the pipe layer gets right 
 
 ## How an operator uses the sheet
 
-1. Open `sample_60.html` (or the full `review.html`). Statements are grouped by asset, each with its evidence beside
+For a new review, first render a current packet and sample from it. The committed `sample_60.*` and layered
+samples below are historical records; their original scores remain reproducible, but their unbound CSVs cannot
+be applied to today's graph. Keep their historical populations unchanged.
+
+1. Open the newly generated `sample_current.html` (or full `review.html`). Statements are grouped by asset, each with its evidence beside
    it: the crop of the drawing box, or the cited report page and the line that best matches.
 2. **Column 1, matches its source:** look only at the evidence. `match` if the box or page says this, `mismatch` if
    it says something else or nothing, `unclear` if you can't tell (and why, in the note: a misleading sentence, an
@@ -197,32 +201,42 @@ it prints one rate per layer and no blended one. What the pipe layer gets right 
 3. **Column 2, true in the plant:** only after a `match`, and only if you know the unit or can walk down to it:
    `confirmed`, `wrong` (it matches the drawing, but the plant is different: the drawing needs a change), or
    `unknown`. The page keeps this locked until column 1 says `match`.
-4. Put your name in Reviewer and press "Download the review sheet". Or fill `sample_60.csv` in a spreadsheet.
+4. Put your name in Reviewer and press "Download the review sheet". Or fill the newly generated CSV in a spreadsheet.
 5. Score it, and if wanted write it back to the graph (statuses and dated events; values never change):
 
 ```sh
-python scripts/statements.py score reviewed_sample_60.csv --sample examples/statement-review/bayer/sample_60.json
-python scripts/statements.py apply examples/graph-export/bayer_graph.json reviewed_sample_60.csv --date 2026-11-02 --out bayer_graph_reviewed.json
+python scripts/statements.py render examples/graph-export/bayer_graph.json --document data/external/csb/Bayer_Report_Final.pdf --out my-current-review
+python scripts/statements.py sample my-current-review/statements.json --n 60 --seed 1032 --out my-current-review/sample_current.json
+# Review my-current-review/sample_current.html, then save its downloaded sheet as reviewed_current.csv.
+python scripts/statements.py score reviewed_current.csv --sample my-current-review/sample_current.json
+python scripts/statements.py apply examples/graph-export/bayer_graph.json reviewed_current.csv --document data/external/csb/Bayer_Report_Final.pdf --date 2026-11-02 --out bayer_graph_reviewed.json
 ```
 
-**Current revision limit:** statement IDs identify subject, predicate and value; they do not identify the cited
-document revision or its evidence. `apply` does not compare the rendered graph hash with today's graph. An old
-verdict can therefore be accepted after its source changed, if the statement's content stayed the same. Keep each
-review with an immutable copy of the graph and source documents, and re-render and review after source changes;
-do not carry old verdicts into a revised evidence set. Evidence-bound carry-over is an open workflow gap.
+**New reviews bind their evidence.** A new packet, sampled sheet and browser download retain `review_fingerprint`
+over the complete graph snapshot, the actual machine-check model, supplied original image/report bytes and exact
+statement details. Apply needs the same source options and refuses a missing/stale binding before output writes.
+An unchanged semantic statement ID is insufficient. This route conservatively reopens the whole packet after any
+graph change, including review statuses/events; it does not authenticate a person or automatically monitor sources.
+The [guide](../../docs/STATEMENT_REVIEW.md#evidence-binding-and-incoming-revisions) explains coverage, historical
+scores, partial invalid-verdict handling and the separate selective context-answer workflow.
+
+For a small current packet with original drawing crops, see the
+[bound sheet-0 exercise](bound-sheet0/README.md). Its single fictional verdict demonstrates software behavior;
+it is not part of the historical accuracy reviews below.
 
 ## Reproduce it
 
 ```sh
 python scripts/statements.py render examples/graph-export/sheet0_graph.json --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --out my-sheet0
 python scripts/statements.py sample my-sheet0/statements.json --n 75 --seed 1031 --strata layer --floor 15 --out my-sheet0/sample_layers_r2.json
-python scripts/statements.py render examples/graph-export/bayer_graph.json --document data/external/csb/Bayer_Report_Final.pdf --out examples/statement-review/bayer
-python scripts/statements.py sample examples/statement-review/bayer/statements.json --n 60 --seed 1029 --out my-bayer-sample/sample_60.json
+python scripts/statements.py render examples/graph-export/bayer_graph.json --document data/external/csb/Bayer_Report_Final.pdf --out my-bayer-current
+python scripts/statements.py sample my-bayer-current/statements.json --n 60 --seed 1029 --out my-bayer-sample/sample_60.json
 ```
 
 `bayer/sample_60.*` is not drawn again either: it was drawn with seed 1029 from the 208 Bayer statements before the model's 7 notes about itself became statements (215 now), so the command above draws a different sample into a scratch folder. All 60 of its statements are still in today's file, unchanged, and the review's scores stand.
 
-`sheet0/statements.json` and `review_sheet.csv` are copied from `my-sheet0/`. `sheet0/sample_60.*` is not drawn again:
+`sheet0/statements.json` and `review_sheet.csv` were originally copied from `my-sheet0/`; keep them as historical
+records rather than replacing them with the newly bound render. `sheet0/sample_60.*` is not drawn again:
 it was drawn with seed 1029 from the 704 statements of the version before the line layers (the statements whose layer
 is `item` or `network_pair` today; drawing them again gave the same sample until the r2 fixes withdrew one of its
 statements, MSBV 1407's kind), and it stays as the sample the 2026-10-29 review measured. `sheet0/sample_layers.*` (seed 1030) is not drawn again either:

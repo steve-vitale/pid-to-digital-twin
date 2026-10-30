@@ -6,11 +6,15 @@ import copy
 import csv
 import io
 import json
+import os
+import re
 import sys
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from html.parser import HTMLParser
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -425,11 +429,17 @@ class Statements(unittest.TestCase):
                 {"statement_id": psv["id"], "source_match": "match", "plant_truth": "confirmed", "reviewer": ""},
                 {"statement_id": uom["id"], "source_match": "match", "plant_truth": "", "reviewer": "R2"},
                 {"statement_id": by["PT-101 is an instrument."]["id"], "source_match": "unclear",
-                 "plant_truth": "confirmed", "reviewer": "R1"},
-                {"statement_id": "st-000000000000", "source_match": "match", "plant_truth": "", "reviewer": "R1"}]
+                 "plant_truth": "confirmed", "reviewer": "R1"}]
+        basis = stm.review_packet(g)[0]
+        by_id = {st["id"]: st for st in sts}
+        for row in rows:
+            st = by_id[row["statement_id"]]
+            row.update(text=st["text"], source=st["source_pointer"], layer=st["layer"], stratum=st["stratum"],
+                       group=f"{st['system']} \u203a {st['group']}" if st.get("system") else st["group"],
+                       review_fingerprint=stm.review_fingerprint(st, basis))
         out, applied, refused = stm.apply(g, rows, reviewer="R9", date="2026-10-29", record="sheet.csv")
         self.assertEqual(len(applied), 3)
-        self.assertEqual(len(refused), 2)
+        self.assertEqual(len(refused), 1)
         self.assertEqual(gx.problems(out), [])
         before = {(n["id"], c["name"]): c["value"] for n in g["nodes"] for c in n["attributes"]}
         after = {(n["id"], c["name"]): c["value"] for n in out["nodes"] for c in n["attributes"]}
@@ -533,6 +543,449 @@ class Statements(unittest.TestCase):
                 for x in s["statements"]:
                     for rel in ([x["evidence"]["image"]] if x["evidence"].get("image") else []):
                         self.assertTrue((d / rel).exists(), rel)
+
+
+class ReviewBinding(unittest.TestCase):
+    """Synthetic source-byte controls; no fixture verdict claims an actual human or plant check."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.g = graph("bayer_graph.json")
+        self.g["source_model"] = ""  # Explicit model selection is tested independently of checkout layout.
+        self.gpath = self.root / "graph.json"
+        self.write_graph()
+        self.model = json.loads((ROOT / "data/bayer_rt/process_model.json").read_text(encoding="utf-8"))
+        self.mpath = self.root / "model.json"
+        self.mpath.write_text(json.dumps(self.model), encoding="utf-8")
+        self.pdf = self.root / "source.pdf"
+        self.image = self.root / "sheet.png"
+        # These unused supplied originals exercise byte binding, not PDF extraction or crop correctness.
+        self.pdf.write_bytes(b"ILLUSTRATIVE PDF-byte binding control\n")
+        self.image.write_bytes(b"ILLUSTRATIVE image-byte binding control\n")
+        self.packet = self.root / "packet"
+        self.sheet = self.root / "filled.csv"
+        self.output = self.root / "reviewed.json"
+
+    def write_graph(self, graph_value=None):
+        if graph_value is not None:
+            self.g = graph_value
+        self.gpath.write_text(json.dumps(self.g, indent=2) + "\n", encoding="utf-8")
+
+    def call(self, argv, expected=0):
+        stdout, stderr = io.StringIO(), io.StringIO()
+        # Optional PDF/image libraries are deliberately outside this standard-library test.
+        with patch.object(stm.Report, "_read", return_value=(None, None)), redirect_stdout(stdout), redirect_stderr(stderr):
+            code = stm.main([str(x) for x in argv])
+        self.assertEqual(code, expected, stderr.getvalue() + stdout.getvalue())
+        return stdout.getvalue(), stderr.getvalue()
+
+    def flags(self):
+        return ["--document", self.pdf, "--image", "0=" + str(self.image), "--model", self.mpath]
+
+    def render(self, flags=()):
+        self.call(["render", self.gpath, *flags, "--out", self.packet])
+        return json.loads((self.packet / "statements.json").read_text(encoding="utf-8"))
+
+    def rows(self, path=None):
+        with Path(path or self.packet / "review_sheet.csv").open(encoding="utf-8", newline="") as f:
+            return list(csv.DictReader(f))
+
+    def fill(self, rows=None):
+        rows = copy.deepcopy(rows or self.rows()[:1])
+        for row in rows:
+            row.update(source_match="match", plant_truth="unknown", reviewer="illustrative-reviewer")
+        with self.sheet.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=stm.SHEET_COLUMNS, lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(rows)
+        return rows
+
+    def apply_cli(self, flags=(), expected=0, out=None):
+        return self.call(["apply", self.gpath, self.sheet, "--date", "2026-10-29", *flags,
+                          "--out", out or self.output], expected)
+
+    def test_bound_render_sample_apply_and_html_download_keep_fingerprint(self):
+        doc = self.render(self.flags())
+        self.assertEqual(doc["review_basis"]["schema"], "statement-review-binding-1")
+        self.assertEqual(doc["review_basis"]["coverage"], "supplied-original-files")
+        self.assertEqual(len(doc["statements"]), len(stm.build(self.g)[0]))
+        self.assertTrue(all(re.fullmatch(r"[0-9a-f]{64}", st["review_fingerprint"]) for st in doc["statements"]))
+        sample = self.root / "sample.json"
+        self.call(["sample", self.packet / "statements.json", "--n", "8", "--seed", "5", "--strata", "layer",
+                   "--out", sample])
+        sampled = json.loads(sample.read_text(encoding="utf-8"))
+        self.assertEqual(sampled["review_basis"], doc["review_basis"])
+        original = {st["id"]: st["review_fingerprint"] for st in doc["statements"]}
+        self.assertTrue(all(st["review_fingerprint"] == original[st["id"]] for st in sampled["statements"]))
+        rows = self.fill(self.rows(sample.with_suffix(".csv")))
+        self.apply_cli(self.flags())
+        reviewed = json.loads(self.output.read_text(encoding="utf-8"))
+        events = [e for e in reviewed["events"] if e["type"] == "statement_review"]
+        self.assertEqual(len(events), 8)
+        self.assertTrue(all(e["review_basis"] == doc["review_basis"] and e["on"] == "2026-10-29" for e in events))
+        self.assertEqual({e["review_fingerprint"] for e in events}, {r["review_fingerprint"] for r in rows})
+        targets = reviewed["nodes"] + reviewed["edges"] + [a for n in reviewed["nodes"] for a in n["attributes"]]
+        checks = [check for target in targets for check in target.get("checks", [])]
+        self.assertTrue(checks)
+        self.assertTrue(all(check["review_basis"] == doc["review_basis"] and check["on"] == "2026-10-29"
+                            and check["review_fingerprint"] in original.values() for check in checks))
+        self.assertEqual([(n["id"], [(a["name"], a["value"]) for a in n["attributes"]]) for n in reviewed["nodes"]],
+                         [(n["id"], [(a["name"], a["value"]) for a in n["attributes"]]) for n in self.g["nodes"]])
+        self.assertEqual(reviewed["counts"]["nodes"], self.g["counts"]["nodes"])
+        self.assertEqual(reviewed["counts"]["edges"], self.g["counts"]["edges"])
+
+        class Cards(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.cards = []
+            def handle_starttag(self, tag, attrs):
+                data = dict(attrs)
+                if data.get("class") == "st":
+                    self.cards.append(data)
+        page = sample.with_suffix(".html").read_text(encoding="utf-8")
+        parser = Cards()
+        parser.feed(page)
+        self.assertEqual(len(parser.cards), 8)
+        columns = json.loads(re.search(r"const cols=(\[.*?\]);", page)[1])
+        self.assertEqual(columns, list(stm.SHEET_COLUMNS))
+        self.assertIn("d.reviewFingerprint", page)
+        card = parser.cards[0]
+        row = {c: "" for c in stm.SHEET_COLUMNS}
+        for column in ("group", "stratum", "layer", "text", "source"):
+            row[column] = card["data-" + column]
+        row.update(statement_id=card["data-id"], review_fingerprint=card["data-review-fingerprint"])
+        self.fill([row])
+        self.apply_cli(self.flags(), out=self.root / "from-html.json")
+
+    def test_same_statement_id_with_changed_source_pointer_is_stale(self):
+        self.render()
+        row = self.fill()[0]
+        before_id = row["statement_id"]
+        self.g["nodes"][0]["attributes"][0]["source"]["document"] = "ILLUSTRATIVE different source, p. 99"
+        self.write_graph()
+        current = {st["id"]: st for st in stm.build(self.g)[0]}
+        self.assertIn(before_id, current)
+        self.assertNotEqual(current[before_id]["source_pointer"], row["source"])
+        _, error = self.apply_cli(expected=2)
+        self.assertIn("stale review fingerprint", error)
+        self.assertFalse(self.output.exists())
+
+    def test_unclear_review_reason_survives_in_checks_and_event(self):
+        self.render()
+        rows = self.fill()
+        note = 'ILLUSTRATIVE reason: source page is ambiguous; confirm the unit.\nKeep this qualification with the verdict.'
+        rows[0].update(source_match="unclear", plant_truth="", note=note)
+        with self.sheet.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=stm.SHEET_COLUMNS)
+            writer.writeheader()
+            writer.writerows(rows)
+        self.apply_cli()
+        reviewed = json.loads(self.output.read_text(encoding="utf-8"))
+        event = next(e for e in reviewed["events"] if e["type"] == "statement_review")
+        self.assertEqual(event["note"], note)
+        self.assertEqual(event["source_match"], "unclear")
+        targets = reviewed["nodes"] + reviewed["edges"] + [a for n in reviewed["nodes"] for a in n["attributes"]]
+        checks = [check for target in targets for check in target.get("checks", [])]
+        self.assertTrue(checks)
+        self.assertTrue(all(check["note"] == note and check["source_match"] == "unclear" for check in checks))
+        self.assertEqual([(n["id"], [(a["name"], a["value"]) for a in n["attributes"]]) for n in reviewed["nodes"]],
+                         [(n["id"], [(a["name"], a["value"]) for a in n["attributes"]]) for n in self.g["nodes"]])
+
+    def test_each_actual_original_file_byte_change_is_stale(self):
+        self.render(self.flags())
+        self.fill()
+        for path in (self.pdf, self.image):
+            with self.subTest(source=path.name):
+                original = path.read_bytes()
+                path.write_bytes(original + b"ILLUSTRATIVE revised byte\n")
+                _, error = self.apply_cli(self.flags(), expected=2)
+                self.assertIn("stale review fingerprint", error)
+                self.assertFalse(self.output.exists())
+                path.write_bytes(original)
+
+    def test_omitted_original_flags_do_not_reuse_old_source_approval(self):
+        self.render(self.flags())
+        self.fill()
+        for flags in (["--model", self.mpath], ["--model", self.mpath, "--document", self.pdf],
+                      ["--model", self.mpath, "--image", "0=" + str(self.image)]):
+            with self.subTest(flags=flags):
+                _, error = self.apply_cli(flags, expected=2)
+                self.assertIn("stale review fingerprint", error)
+                self.assertFalse(self.output.exists())
+
+    def test_missing_supplied_files_refused_before_render_or_apply_outputs(self):
+        for kind, flags in (("document", ["--document", self.root / "missing.pdf"]),
+                            ("image", ["--image", "0=" + str(self.root / "missing.png")]),
+                            ("model", ["--model", self.root / "missing.json"])):
+            with self.subTest(kind=kind):
+                self.call(["render", self.gpath, *flags, "--out", self.packet], expected=2)
+                self.assertFalse(self.packet.exists())
+        self.render(self.flags())
+        self.fill()
+        for path in (self.pdf, self.image, self.mpath):
+            with self.subTest(kind=path.name):
+                original = path.read_bytes()
+                path.unlink()
+                self.apply_cli(self.flags(), expected=2)
+                self.assertFalse(self.output.exists())
+                path.write_bytes(original)
+
+    def test_duplicate_and_whitespace_image_sheet_ids_refused_before_render(self):
+        for flags in (["--image", "0=" + str(self.image), "--image", "0=" + str(self.image)],
+                      ["--image", "=" + str(self.image)], ["--image", "0 =" + str(self.image)]):
+            with self.subTest(flags=flags):
+                self.call(["render", self.gpath, *flags, "--out", self.packet], expected=2)
+                self.assertFalse(self.packet.exists())
+
+    def test_whole_graph_changes_including_status_and_events_reopen_packet(self):
+        self.render()
+        self.fill()
+        original = copy.deepcopy(self.g)
+        for mutation in ("unrelated", "status", "event"):
+            with self.subTest(mutation=mutation):
+                self.g = copy.deepcopy(original)
+                if mutation == "unrelated":
+                    self.g["unrelated_bookkeeping"] = "ILLUSTRATIVE new graph context"
+                elif mutation == "status":
+                    self.g["nodes"][-1]["status"] = "confirmed"
+                else:
+                    self.g["events"].append({"type": "illustrative change event"})
+                self.write_graph()
+                self.apply_cli(expected=2)
+                self.assertFalse(self.output.exists())
+
+    def test_canonical_graph_and_machine_model_ignore_json_format_and_eol(self):
+        self.render(self.flags())
+        self.fill()
+        self.gpath.write_bytes(json.dumps(self.g, ensure_ascii=False, sort_keys=True).replace("\n", "\r\n").encode("utf-8"))
+        self.mpath.write_bytes(json.dumps(self.model, indent=4, sort_keys=True).replace("\n", "\r\n").encode("utf-8"))
+        self.apply_cli(self.flags())
+        original = self.output.read_bytes()
+        self.model["meta"]["illustrative_revision"] = "B"
+        self.mpath.write_text(json.dumps(self.model), encoding="utf-8")
+        self.apply_cli(self.flags(), expected=2)
+        self.assertEqual(original, self.output.read_bytes())
+
+    def test_readonly_text_source_layer_edits_refuse_even_with_original_fingerprint(self):
+        self.render()
+        good = self.rows()[:1]
+        for field in ("text", "source", "layer", "group", "stratum"):
+            with self.subTest(field=field):
+                edited = copy.deepcopy(good)
+                edited[0][field] += " edited"
+                self.fill(edited)
+                _, error = self.apply_cli(expected=2)
+                self.assertIn("read-only", error)
+                self.assertFalse(self.output.exists())
+
+    def test_binding_preflight_is_atomic_for_mixed_valid_and_unbound_rows(self):
+        self.render()
+        rows = self.rows()[:2]
+        rows[1]["review_fingerprint"] = ""
+        self.fill(rows)
+        sentinel = b"ILLUSTRATIVE preexisting output\n"
+        self.output.write_bytes(sentinel)
+        self.apply_cli(expected=2)
+        self.assertEqual(sentinel, self.output.read_bytes())
+        rows[1]["review_fingerprint"] = rows[0]["review_fingerprint"]
+        self.fill(rows)
+        self.apply_cli(expected=2)
+        self.assertEqual(sentinel, self.output.read_bytes())
+
+    def test_unknown_reviewed_statement_and_repeated_rows_fail_atomically(self):
+        self.render()
+        rows = self.rows()[:2]
+        rows[1]["statement_id"] = "st-not-present"
+        self.fill(rows)
+        self.apply_cli(expected=2)
+        self.assertFalse(self.output.exists())
+        self.fill([rows[0], rows[0]])
+        self.apply_cli(expected=2)
+        self.assertFalse(self.output.exists())
+
+    def test_previously_reviewed_output_is_a_new_graph_snapshot(self):
+        self.render(self.flags())
+        self.fill()
+        self.apply_cli(self.flags())
+        reviewed = self.output.read_bytes()
+        second = self.root / "second-review.json"
+        self.call(["apply", self.output, self.sheet, *self.flags(), "--out", second], expected=2)
+        self.assertFalse(second.exists())
+        self.assertEqual(reviewed, self.output.read_bytes())
+
+    def test_duplicate_headers_and_wrong_width_cannot_hide_readonly_edits(self):
+        self.render()
+        self.fill()
+        with self.sheet.open(encoding="utf-8", newline="") as f:
+            rows = list(csv.reader(f))
+        with self.sheet.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(rows[0] + ["source"])
+            writer.writerow(rows[1] + [rows[1][rows[0].index("source")]])
+        self.apply_cli(expected=2)
+        self.assertFalse(self.output.exists())
+        with self.sheet.open("w", encoding="utf-8", newline="") as f:
+            csv.writer(f).writerows([rows[0], rows[1] + ["extra hidden value"]])
+        self.apply_cli(expected=2)
+        self.assertFalse(self.output.exists())
+
+    def test_legacy_score_and_sampling_work_but_never_mint_binding(self):
+        self.render()
+        doc = json.loads((self.packet / "statements.json").read_text(encoding="utf-8"))
+        del doc["review_basis"]
+        for st in doc["statements"]:
+            del st["review_fingerprint"]
+        legacy = self.root / "historical-statements.json"
+        legacy.write_text(json.dumps(doc), encoding="utf-8")
+        sample = self.root / "historical-sample.json"
+        self.call(["sample", legacy, "--n", "4", "--out", sample])
+        sampled = json.loads(sample.read_text(encoding="utf-8"))
+        self.assertNotIn("review_basis", sampled)
+        self.assertTrue(all("review_fingerprint" not in st for st in sampled["statements"]))
+        rows = self.fill(self.rows(sample.with_suffix(".csv")))
+        self.assertTrue(all(r["review_fingerprint"] == "" for r in rows))
+        self.call(["score", self.sheet, "--sample", sample, "--json"])
+        _, error = self.apply_cli(expected=2)
+        self.assertIn("unbound legacy review", error)
+        self.assertFalse(self.output.exists())
+
+    def test_apply_outputs_cannot_alias_any_input_including_hardlinks_and_symlinks(self):
+        self.render(self.flags())
+        self.fill()
+        for source in (self.gpath, self.sheet, self.mpath, self.pdf, self.image):
+            with self.subTest(source=source.name):
+                original = source.read_bytes()
+                self.apply_cli(self.flags(), expected=2, out=source)
+                self.assertEqual(original, source.read_bytes())
+        for kind in ("hardlink", "symlink"):
+            with self.subTest(kind=kind):
+                alias = self.root / (kind + ".json")
+                try:
+                    if kind == "hardlink":
+                        os.link(self.pdf, alias)
+                    else:
+                        alias.symlink_to(self.gpath)
+                except (OSError, NotImplementedError):
+                    continue  # Symlink creation can be disabled on Windows; hardlinks are separately exercised.
+                source = self.pdf if kind == "hardlink" else self.gpath
+                original = source.read_bytes()
+                self.apply_cli(self.flags(), expected=2, out=alias)
+                self.assertEqual(original, source.read_bytes())
+
+    def test_sample_cannot_overwrite_packet_or_alias_packet_through_links(self):
+        self.render()
+        source = self.packet / "statements.json"
+        before = {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
+        self.call(["sample", source, "--n", "1", "--out", source], expected=2)
+        self.assertEqual(before, {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob("*") if p.is_file()})
+        for kind in ("hardlink", "symlink"):
+            with self.subTest(kind=kind):
+                alias = self.root / ("sample-" + kind + ".json")
+                try:
+                    os.link(source, alias) if kind == "hardlink" else alias.symlink_to(source)
+                except (OSError, NotImplementedError):
+                    continue
+                original = source.read_bytes()
+                self.call(["sample", source, "--n", "1", "--out", alias], expected=2)
+                self.assertEqual(original, source.read_bytes())
+                self.assertFalse(alias.with_suffix(".csv").exists())
+                self.assertFalse(alias.with_suffix(".html").exists())
+
+    def test_sample_preflights_all_evidence_and_output_aliases_before_any_write(self):
+        self.render()
+        source = self.packet / "statements.json"
+        doc = json.loads(source.read_text(encoding="utf-8"))
+        evidence = self.packet / "prior.csv"
+        evidence.write_bytes(b"ILLUSTRATIVE original evidence bytes\n")
+        doc["statements"][0]["evidence"]["image"] = "prior.csv"
+        source.write_text(json.dumps(doc), encoding="utf-8")
+        original_source, original_evidence = source.read_bytes(), evidence.read_bytes()
+        target = self.packet / "prior.json"
+        self.call(["sample", source, "--n", "1", "--out", target], expected=2)
+        self.assertFalse(target.exists())
+        self.assertFalse(target.with_suffix(".html").exists())
+        self.assertEqual(original_source, source.read_bytes())
+        self.assertEqual(original_evidence, evidence.read_bytes())
+        other = self.root / "sample-output"
+        other.mkdir()
+        linked = other / "prior.csv"
+        os.link(evidence, linked)
+        self.call(["sample", source, "--n", str(len(doc["statements"])), "--out", other / "sample.json"], expected=2)
+        self.assertEqual([linked], list(other.iterdir()))
+        self.assertEqual(original_evidence, evidence.read_bytes())
+        # A non-JSON output suffix must not let generated JSON/CSV/HTML overwrite one another.
+        self.call(["sample", source, "--n", "1", "--out", self.root / "overlap.csv"], expected=2)
+        self.assertFalse((self.root / "overlap.csv").exists())
+
+    def test_render_dynamic_evidence_cannot_overwrite_or_alias_supplied_original(self):
+        self.g["nodes"][0]["attributes"][0]["source"] = {
+            "kind": "drawing", "sheet": "draw", "box_0_1000": [100, 100, 400, 400]}
+        self.write_graph()
+        relative = Path("evidence/deterministic-crop.jpg")
+
+        def generated_crop(crops, sheet, boxes):
+            # Stand in for optional Pillow here; independent CLI review also exercises actual PNG->JPEG crops.
+            path = crops.out / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"ILLUSTRATIVE generated JPEG bytes differ from the original\n")
+            return relative.as_posix()
+
+        for kind in ("same-path", "hardlink", "symlink"):
+            with self.subTest(kind=kind):
+                folder = self.root / ("render-" + kind)
+                target = folder / relative
+                target.parent.mkdir(parents=True)
+                source = target if kind == "same-path" else self.root / (kind + "-original.png")
+                source.write_bytes(b"ILLUSTRATIVE original PNG bytes\n")
+                if kind != "same-path":
+                    try:
+                        os.link(source, target) if kind == "hardlink" else target.symlink_to(source)
+                    except (OSError, NotImplementedError):
+                        continue
+                original = source.read_bytes()
+                before = {p.relative_to(folder): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
+                with patch.object(stm.Crops, "crop", generated_crop):
+                    self.call(["render", self.gpath, "--image", "draw=" + str(source), "--out", folder], expected=2)
+                self.assertEqual(original, source.read_bytes())
+                self.assertEqual(before, {p.relative_to(folder): p.read_bytes() for p in folder.rglob("*") if p.is_file()})
+
+    def test_binding_is_portable_and_graph_only_coverage_is_explicit(self):
+        doc = self.render()
+        self.assertEqual(doc["review_basis"]["coverage"], "graph/model-only")
+        self.assertIsNone(doc["review_basis"]["document_sha256"])
+        self.assertIsNone(doc["review_basis"]["machine_model_sha256"])
+        self.assertEqual(doc["review_basis"]["images"], [])
+        self.assertIn("Graph/model-only coverage", (self.packet / "review.html").read_text(encoding="utf-8"))
+        self.render(self.flags())
+        self.fill()
+        self.apply_cli(self.flags())
+        for path in (self.packet / "statements.json", self.packet / "review.html", self.output):
+            self.assertNotIn(str(self.root), path.read_text(encoding="utf-8"))
+            self.assertNotIn(self.root.as_posix(), path.read_text(encoding="utf-8"))
+
+    def test_large_output_plan_resolves_paths_once_and_retains_hardlink_identity_checks(self):
+        sources = []
+        for number in range(10):
+            source = self.root / f"source-{number}.bin"
+            source.write_bytes(b"ILLUSTRATIVE source identity control\n")
+            sources.append(source)
+        targets = [self.root / f"crop-{number}.jpg" for number in range(600)]
+        original_resolve = Path.resolve
+        with patch.object(Path, "resolve", autospec=True, side_effect=original_resolve) as resolved:
+            stm.protect_outputs(targets, sources)
+        self.assertLessEqual(resolved.call_count, len(targets) + len(sources))
+        alias = self.root / "hardlinked-final-crop.jpg"
+        os.link(sources[-1], alias)
+        with self.assertRaisesRegex(ValueError, "aliases an input"):
+            stm.protect_outputs(targets + [alias], sources)
+        existing = self.root / "existing-output.jpg"
+        existing.write_bytes(b"ILLUSTRATIVE output identity control\n")
+        output_alias = self.root / "output-alias.jpg"
+        os.link(existing, output_alias)
+        with self.assertRaisesRegex(ValueError, "output files alias"):
+            stm.protect_outputs(targets + [existing, output_alias], sources)
 
 
 if __name__ == "__main__":

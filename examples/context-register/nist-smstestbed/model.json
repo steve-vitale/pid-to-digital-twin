@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "model_id": "nist-sms-context-packet",
+    "title": "NIST SMS Hurco04 historical context packet (AI-authored identity draft)",
+    "created": "2026-10-29",
+    "source_document": "NIST SMS official device configurations, as pinned in sources.json",
+    "limits": "Identity-only draft, no current machine state, signal aliases, human ownership or deployment facts inferred."
+  },
+  "units": [
+    {
+      "id": "mtc_adapter008",
+      "tag": "Hurco04",
+      "name": "Hurco VMX 24 #4",
+      "type": "machine_tool",
+      "manufacturer": "Hurco",
+      "model": "VMX24",
+      "source": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+    }
+  ],
+  "streams": [],
+  "instruments": [],
+  "controllers": [],
+  "manual_valves": []
+}

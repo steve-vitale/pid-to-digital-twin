@@ -2889,6 +2889,38 @@
         "examples/context-register/bayer/README.md",
         "examples/first-pilot/README.md"
       ]
+    },
+    {
+      "id": "A199",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Bind new statement review packets and CSV/browser downloads to canonical graph/model content, supplied original source bytes and exact statement details; retain notes and refuse aliased outputs.",
+      "hypothesis": "A stable semantic statement ID must not let an earlier review approve a different evidence snapshot.",
+      "evidence": "The pre-change independent reproduction applied an old CSV after its source revision/page changed. The repaired code passes 41 statement controls and 38 independent adversarial CLI controls. A current public sheet-0 packet has 12 statements over five layers and one fictional unclear verdict; three CLI integration tests apply it, preserve values/note/provenance and refuse copied source/graph changes. Independent clobber findings now refuse unchanged; collision preflight is linear in filesystem lookups after the full drawing run exposed a quadratic slowdown.",
+      "runs": "Deterministic development controls and independent agent reproduction; no accuracy rerun or human review",
+      "verdict": "kept",
+      "why": "Closes stale evidence reuse without redrawing historical scored samples. Whole-graph binding is conservative, historical unbound scoring stays available, exact source reversion may match again, and identities are not authenticated.",
+      "source": [
+        "docs/JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context",
+        "docs/STATEMENT_REVIEW.md",
+        "examples/statement-review/bound-sheet0/README.md"
+      ]
+    },
+    {
+      "id": "A200",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Add a separate NIST manufacturing context packet with two actual device-configuration revisions, archived raw operating records and the original reuse notice.",
+      "hypothesis": "Source-bound context can keep revision-dependent signal meanings and missing data explicit across a new source family without inventing plant truth or deployment history.",
+      "evidence": "Four pinned originals total 121831 bytes. Ten proposals over eight questions yield five partial and three needs_data states, all needing an owner and all plant truth unknown. Copied old/later configuration, raw log and unrelated notice changes stale exactly 3/3/4/0 dependent answers with history retained. Independent checks cover ten XML/raw primary-fact groups, exact hashes, lifecycle/refusal and missing-original controls. The actual reused signal ID is scoped by revision; deployment remains unresolved.",
+      "runs": "One inspected development packet with synthetic copied-input revision controls; not held out",
+      "verdict": "kept",
+      "why": "Extends context maintenance beyond the prior source families and tests a real published identifier-meaning change. It adds no extraction-matrix cell, live-service acceptance, timed review or operational benefit claim.",
+      "source": [
+        "docs/JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context",
+        "examples/context-register/nist-smstestbed/ACCEPTANCE.md",
+        "examples/context-register/nist-smstestbed/README.md"
+      ]
     }
   ],
   "not_tried": [
@@ -3526,6 +3558,17 @@
       "source": [
         "docs/JOURNAL.md#66-keep-the-questions-answers-and-next-owner-together",
         "examples/first-pilot/README.md"
+      ]
+    },
+    {
+      "id": "N063",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "Verify one authorized organizational-context import, readback, versioned snapshot projection and generation-return loop, then process a subsequent source change without losing history or concurrent document edits.",
+      "why_not_yet": "The public tools have actual format boundaries and no live organizational snapshot exporter or accepted adapter. A generic lifecycle contract and local source-binding examples cannot prove the receiving system preserves engineering context or manages ongoing releases.",
+      "source": [
+        "docs/CONTEXT_LIFECYCLE.md",
+        "docs/JOURNAL.md#68-make-source-changes-and-generated-outputs-fit-one-reviewed-context"
       ]
     }
   ]

@@ -223,6 +223,12 @@ history, verify the schema, show unknown/disputed/stale states and keep source-m
 Ownership history carries explicit assigner and assignment date; decision history carries explicit reviewer and
 review date. A receiving system must not replace either with an inferred identity or a file modification time.
 
+For an organization using a central authority, this local register is a workbench and return packet. Its
+user-entered acceptance/ownership fields do not become authenticated organizational approval on import. Preserve
+the local history, reconcile identities and stage changes through the receiving authority. The
+[context lifecycle](CONTEXT_LIFECYCLE.md) explains the versioned snapshot and generation-return pattern, including
+the different update rules for original records, generated views and authored documents.
+
 Export `context.json`, the enriched graph and questions, and the source pack under the receiving organization's
 document controls. Manifest roots and local file paths are not automatically embedded in exports. Intentionally
 entered names, role identifiers and prose are preserved; choose what is appropriate to share. There is no live

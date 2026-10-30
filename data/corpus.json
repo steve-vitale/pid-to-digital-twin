@@ -1,5 +1,37 @@
 {
  "about": "Every public input the generalization matrix (scripts/corpus_matrix.py, docs/GENERALIZATION.md) runs the repository's tools against, plus public sources not yet added. local_path is relative to the repository root. committed=true means a clean clone has it; otherwise fetch is the command that builds or downloads it, and the matrix marks the cells 'needs data: <fetch>' until it is run. 'exercises' names the matrix rows the input feeds (1 tracer, 2 scorer controls, 3 intake + report, 4 loop audit, 5 exports, 6 historian bands, 7 DEXPI route, 8 pipe layer). Licenses of inputs are as stated in NOTICE.md; candidate licenses are copied from a license check done 2026-10-29 and are not legal advice. Inputs of kind needs_key (a sheet without a machine-readable key) or needs_confirmation (a pairing a person must confirm) get an n/a cell with the reason in 'not_scored' and are never scored. 'attribution' is the credit line to give when reusing the source; 'real' says whether the data were measured or drawn by people outside this repository (true) or simulated/synthetic (false).",
+ "context_packets": [
+  {
+   "id": "pronto-linked-context",
+   "family": "pronto",
+   "guide": "examples/context-register/pronto/README.md",
+   "sources": "examples/context-register/pronto/sources.json",
+   "source_key": "examples/context-register/pronto/source_key.json",
+   "fetch": "python scripts/fetch_corpus.py pronto; python scripts/fetch_corpus.py pronto-more",
+   "check": "python -S examples/context-register/pronto/check_packet.py",
+   "evidence_role": "Development linked-document workflow on existing public originals; separate from the eight-workflow matrix. Proposals are AI-authored, not human sign-off."
+  },
+  {
+   "id": "bayer-e18-context",
+   "family": "csb-bayer",
+   "guide": "examples/context-register/bayer/README.md",
+   "sources": "examples/context-register/bayer/sources.json",
+   "source_key": "examples/context-register/bayer/source_key.json",
+   "fetch": "python scripts/digitize_bayer_fig11.py fetch",
+   "check": "python -S scripts/test_context_examples.py",
+   "evidence_role": "Actual question-engine E18 bridge with a proposed partial answer from the original public narrative. Offline example tests do not reread the separately fetched PDF; the independent source review did."
+  },
+  {
+   "id": "nist-sms-linked-context",
+   "family": "nist-smstestbed",
+   "guide": "examples/context-register/nist-smstestbed/README.md",
+   "sources": "examples/context-register/nist-smstestbed/sources.json",
+   "source_key": "examples/context-register/nist-smstestbed/source_key.json",
+   "fetch": "python -S examples/context-register/nist-smstestbed/fetch_sources.py --max-mb 1",
+   "check": "python -S examples/context-register/nist-smstestbed/check_packet.py",
+   "evidence_role": "New public manufacturing source family for the context workflow: two original configurations and an archived raw log, with a fourth notice file. Discovery facts were seen; this is development evidence outside the eight-workflow matrix, not a held-out transfer score. No human approval or deployed-configuration truth is inferred."
+  }
+ ],
  "inputs": [
   {
    "id": "open100-dev",

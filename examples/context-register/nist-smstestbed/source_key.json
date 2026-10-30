@@ -1,0 +1,453 @@
+{
+  "schema": "nist-sms-context-source-key-1",
+  "source_family": "nist-smstestbed",
+  "evidence_role": "Development source transcriptions; discovery facts were seen before the prospective packet checks.",
+  "limitations": [
+    "AI-authored drafts, no human sign-off or operational plant-truth confirmation.",
+    "Machine UUID joins the two published configurations. DataItem IDs and names are document-revision scoped.",
+    "Raw path and signal names associate the archive with Hurco04; the raw records do not identify a deployed configuration revision.",
+    "Different configuration versions are different observations, not automatic simultaneous contradictions."
+  ],
+  "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+  "license_url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md",
+  "documents": [
+    {
+      "path": "2016/Devices.xml",
+      "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "title": "NIST SMS device configuration, 2016-10-06 commit",
+      "id": "SMS-DEV-2016",
+      "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "bytes": 61363,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n01",
+          "locator": "Physical lines 691-692; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n03",
+          "locator": "Physical line 724; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n10",
+          "locator": "Physical line 727; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_10'] and its trailing Actual? XML comment",
+          "questions": [
+            "SMS-OLD-FEED-SEMANTICS@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "2017/Devices.xml",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS later device configuration; last changed 2017-07-11",
+      "id": "SMS-DEV-2017",
+      "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "bytes": 39450,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/mtconnect/agent/Devices.xml",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n02",
+          "locator": "Physical lines 463-464; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n04",
+          "locator": "Physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n05",
+          "locator": "Physical lines 473-475; Device[@id='Hurco04']//DataItem[@id='Hurco04-C_1'] attributes and Source",
+          "questions": [
+            "SMS-SPINDLE-DEFINITION@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "raw/Hurco04-20170217-20170218.txt",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS archived Hurco04 raw operating log",
+      "id": "SMS-RAW-20170217",
+      "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "bytes": 17314,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/raw/Hurco04/Hurco04-20170217-20170218.txt",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "n06",
+          "locator": "Physical line 81; pipe-delimited timestamp, item name and value; source path raw/Hurco04/Hurco04-20170217-20170218.txt",
+          "questions": [
+            "SMS-RAW-SPINDLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n07",
+          "locator": "Physical lines 3 and 34; Spindle_Speed records at 2017-02-14T16:12:54.968217Z and 2017-02-17T09:18:51.4531250Z",
+          "questions": [
+            "SMS-UNAVAILABLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n08",
+          "locator": "Physical lines 37, 45 and 359; Program_Name_Running and Program_Status records",
+          "questions": [
+            "SMS-EXECUTION-GAPS@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n09",
+          "locator": "Whole 363-line archived raw file; three pipe-delimited fields per line; exact example at physical line 81",
+          "questions": [
+            "SMS-DEPLOYED-REVISION@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "title": "NIST SMS repository description and reuse notice",
+      "id": "SMS-NOTICE",
+      "sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+      "bytes": 3704,
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository.",
+      "locators": [
+        {
+          "id": "reuse-notice",
+          "locator": "README physical lines 28-46, Use of NIST Information and Software Disclaimer",
+          "questions": []
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "N01",
+      "question_id": "SMS-IDENTITY@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2016",
+      "document_revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "raw_sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "locator_id": "n01",
+      "locator": "Physical lines 691-692; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+      "answer": "The 2016 configuration identifies device Hurco04 with UUID mtc_adapter008 and description Hurco VMX 24 #4, manufacturer Hurco, model VMX24. This is the published configuration identity.",
+      "claim_key": "machine.identity.at-2016-config",
+      "value": "Hurco04; mtc_adapter008; Hurco; VMX24",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "xml_device",
+          "id": "Hurco04",
+          "attributes": {
+            "name": "Hurco04",
+            "uuid": "mtc_adapter008",
+            "id": "Hurco04"
+          },
+          "description_attributes": {
+            "model": "VMX24",
+            "manufacturer": "Hurco"
+          }
+        }
+      ]
+    },
+    {
+      "id": "N02",
+      "question_id": "SMS-IDENTITY@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2017",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "locator_id": "n02",
+      "locator": "Physical lines 463-464; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+      "answer": "The later configuration also identifies Hurco04 with UUID mtc_adapter008, manufacturer Hurco and model VMX24. Matching published identities support a document join; they do not prove which configuration was deployed during the archived recording.",
+      "claim_key": "machine.identity.at-later-config",
+      "value": "Hurco04; mtc_adapter008; Hurco; VMX24",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "xml_device",
+          "id": "Hurco04",
+          "attributes": {
+            "name": "Hurco04",
+            "uuid": "mtc_adapter008",
+            "id": "Hurco04"
+          },
+          "description_attributes": {
+            "model": "VMX24",
+            "manufacturer": "Hurco"
+          }
+        }
+      ]
+    },
+    {
+      "id": "N03",
+      "question_id": "SMS-REUSED-ID@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2016",
+      "document_revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "raw_sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "locator_id": "n03",
+      "locator": "Physical line 724; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+      "answer": "In the 2016 document, Hurco04-path_7 is named current_tool and has type TOOL_NUMBER in category EVENT. This meaning is scoped to this configuration revision.",
+      "claim_key": "Hurco04-path_7.meaning.at-2016-config",
+      "value": "current_tool; TOOL_NUMBER; EVENT",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "xml_data_item",
+          "device": "Hurco04",
+          "id": "Hurco04-path_7",
+          "attributes": {
+            "name": "current_tool",
+            "type": "TOOL_NUMBER",
+            "category": "EVENT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "N04",
+      "question_id": "SMS-REUSED-ID@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2017",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "locator_id": "n04",
+      "locator": "Physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+      "answer": "In the later document, Hurco04-path_7 is named Program_Runtime_Seconds, type ACCUMULATED_TIME, category SAMPLE, unit SECOND. Reusing the ID across revisions does not make tool number and elapsed runtime equivalent signals.",
+      "claim_key": "Hurco04-path_7.meaning.at-later-config",
+      "value": "Program_Runtime_Seconds; ACCUMULATED_TIME; SAMPLE; SECOND",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "xml_data_item",
+          "device": "Hurco04",
+          "id": "Hurco04-path_7",
+          "attributes": {
+            "name": "Program_Runtime_Seconds",
+            "type": "ACCUMULATED_TIME",
+            "category": "SAMPLE",
+            "units": "SECOND"
+          }
+        }
+      ]
+    },
+    {
+      "id": "N05",
+      "question_id": "SMS-SPINDLE-DEFINITION@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2017",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "locator_id": "n05",
+      "locator": "Physical lines 473-475; Device[@id='Hurco04']//DataItem[@id='Hurco04-C_1'] attributes and Source",
+      "answer": "The later document names Hurco04-C_1 Spindle_Speed, type ROTARY_VELOCITY, subtype ACTUAL, with units REVOLUTION/MINUTE and Source spindle_speed. This supplies this document revision's measurement definition.",
+      "claim_key": "Hurco04-C_1.definition.at-later-config",
+      "value": "Spindle_Speed; ROTARY_VELOCITY; ACTUAL; REVOLUTION/MINUTE",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "xml_data_item",
+          "device": "Hurco04",
+          "id": "Hurco04-C_1",
+          "attributes": {
+            "name": "Spindle_Speed",
+            "type": "ROTARY_VELOCITY",
+            "subType": "ACTUAL",
+            "units": "REVOLUTION/MINUTE"
+          },
+          "source": "spindle_speed"
+        }
+      ]
+    },
+    {
+      "id": "N06",
+      "question_id": "SMS-RAW-SPINDLE@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-RAW-20170217",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "locator_id": "n06",
+      "locator": "Physical line 81; pipe-delimited timestamp, item name and value; source path raw/Hurco04/Hurco04-20170217-20170218.txt",
+      "answer": "The archived Hurco04 file records 2017-02-17T09:26:08.0468750Z | Spindle_Speed | 1000.000000. The raw record supplies no unit or deployed configuration revision; those remain separate source questions.",
+      "claim_key": "raw.Spindle_Speed.at-20170217T092608",
+      "value": "1000.000000",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "raw_line",
+          "line": 81,
+          "fields": [
+            "2017-02-17T09:26:08.0468750Z",
+            "Spindle_Speed",
+            "1000.000000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N07",
+      "question_id": "SMS-UNAVAILABLE@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-RAW-20170217",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "locator_id": "n07",
+      "locator": "Physical lines 3 and 34; Spindle_Speed records at 2017-02-14T16:12:54.968217Z and 2017-02-17T09:18:51.4531250Z",
+      "answer": "Line 3 records Spindle_Speed as UNAVAILABLE. Line 34 records a numeric 0 at a different timestamp. Preserve both values and their times; the unavailable observation cannot be replaced with zero. The filename date range also does not bound every timestamp in this file.",
+      "claim_key": "raw.Spindle_Speed.unavailable-versus-zero",
+      "value": "UNAVAILABLE at 2017-02-14T16:12:54.968217Z; 0 at 2017-02-17T09:18:51.4531250Z",
+      "answer_state": "answered",
+      "data_request": "",
+      "checks": [
+        {
+          "kind": "raw_line",
+          "line": 3,
+          "fields": [
+            "2017-02-14T16:12:54.968217Z",
+            "Spindle_Speed",
+            "UNAVAILABLE"
+          ]
+        },
+        {
+          "kind": "raw_line",
+          "line": 34,
+          "fields": [
+            "2017-02-17T09:18:51.4531250Z",
+            "Spindle_Speed",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N08",
+      "question_id": "SMS-EXECUTION-GAPS@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-RAW-20170217",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "locator_id": "n08",
+      "locator": "Physical lines 37, 45 and 359; Program_Name_Running and Program_Status records",
+      "answer": "At 09:18:51.4531250Z the running-program field is a single blank space and Program_Status is READY. At 09:40:46.755688Z Program_Status is UNAVAILABLE. These sparse records do not establish a named production job or uninterrupted execution-state coverage.",
+      "claim_key": "raw.program-status.recorded-evidence",
+      "value": "blank running name; READY; later UNAVAILABLE",
+      "answer_state": "needs_data",
+      "data_request": "Obtain the collection completeness policy and a controlled job/execution record before asserting production status or a named job.",
+      "checks": [
+        {
+          "kind": "raw_line",
+          "line": 37,
+          "fields": [
+            "2017-02-17T09:18:51.4531250Z",
+            "Program_Name_Running",
+            " "
+          ]
+        },
+        {
+          "kind": "raw_line",
+          "line": 45,
+          "fields": [
+            "2017-02-17T09:18:51.4531250Z",
+            "Program_Status",
+            "READY"
+          ]
+        },
+        {
+          "kind": "raw_line",
+          "line": 359,
+          "fields": [
+            "2017-02-17T09:40:46.755688Z",
+            "Program_Status",
+            "UNAVAILABLE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N09",
+      "question_id": "SMS-DEPLOYED-REVISION@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-RAW-20170217",
+      "document_revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "locator_id": "n09",
+      "locator": "Whole 363-line archived raw file; three pipe-delimited fields per line; exact example at physical line 81",
+      "answer": "This raw file contains timestamp, item name and value records. It contains no UUID or deployed configuration revision. Its Hurco04 path and signal names provide a bounded document association, while the configuration active at capture remains unknown.",
+      "claim_key": "capture.deployed-configuration-revision",
+      "value": "unknown",
+      "answer_state": "needs_data",
+      "data_request": "Request the configuration and adapter deployment record applicable to the 2017-02-17 capture; a later Git commit date does not supply a deployment date.",
+      "checks": [
+        {
+          "kind": "raw_structure",
+          "lines": 363,
+          "fields_per_line": 3,
+          "absent_literals": [
+            "mtc_adapter008",
+            "configuration_revision",
+            "Devices.xml"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N10",
+      "question_id": "SMS-OLD-FEED-SEMANTICS@mtc_adapter008",
+      "asset_id": "mtc_adapter008",
+      "document_id": "SMS-DEV-2016",
+      "document_revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "raw_sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "locator_id": "n10",
+      "locator": "Physical line 727; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_10'] and its trailing Actual? XML comment",
+      "answer": "The 2016 feed_rate data item is typed PATH_FEEDRATE with subtype ACTUAL and units MILLIMETER/SECOND, but the same source line retains an Actual? comment. The packet preserves that author uncertainty and does not assign an owner from a comment.",
+      "claim_key": "Hurco04-path_10.uncertainty.at-2016-config",
+      "value": "source comment Actual?",
+      "answer_state": "needs_data",
+      "data_request": "Confirm the actual-versus-commanded measurement semantics from an applicable controlled adapter/configuration record; no person is assigned by this example.",
+      "checks": [
+        {
+          "kind": "xml_data_item",
+          "device": "Hurco04",
+          "id": "Hurco04-path_10",
+          "attributes": {
+            "name": "feed_rate",
+            "type": "PATH_FEEDRATE",
+            "subType": "ACTUAL",
+            "units": "MILLIMETER/SECOND"
+          }
+        },
+        {
+          "kind": "physical_line_contains",
+          "line": 727,
+          "contains": "<!-- Actual? -->"
+        }
+      ]
+    }
+  ]
+}

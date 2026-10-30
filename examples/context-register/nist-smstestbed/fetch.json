@@ -1,0 +1,39 @@
+{
+  "FILE_SOURCES_entry": {
+    "nist-smstestbed": {
+      "name": "NIST Smart Manufacturing Systems Test Bed: Hurco04 device configuration history and archived raw operating log",
+      "license": "NIST public-information reuse notice, copyright-marked material excepted; preserve the upstream notice",
+      "license_url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md",
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems (SMS) Test Bed, official usnistgov/smstestbed repository. Preserve the upstream README notices and identify any changes.",
+      "landing_url": "https://www.nist.gov/laboratories/tools-instruments/smart-manufacturing-systems-sms-test-bed",
+      "api_url": "https://api.github.com/repos/usnistgov/smstestbed",
+      "kind": "pinned-files",
+      "url": "{url}",
+      "skipped": "All other machines and dates, replay adapter scenarios, technical data packages, and live VDS endpoints. No live service availability is claimed."
+    }
+  },
+  "pins_entry": {
+    "nist-smstestbed": {
+      "2016/Devices.xml": {
+        "bytes": 61363,
+        "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+        "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml"
+      },
+      "2017/Devices.xml": {
+        "bytes": 39450,
+        "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+        "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/mtconnect/agent/Devices.xml"
+      },
+      "raw/Hurco04-20170217-20170218.txt": {
+        "bytes": 17314,
+        "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+        "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/raw/Hurco04/Hurco04-20170217-20170218.txt"
+      },
+      "README.md": {
+        "bytes": 3704,
+        "sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+        "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md"
+      }
+    }
+  }
+}

@@ -19,6 +19,9 @@ Impact Center) is shared under **CC BY-SA 4.0**, as that license requires. This 
 - `data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L1` to `scan-L3`: degraded "old scan" copies
   of six drawings (`scripts/degrade_scans.py`), with their answer keys;
 - `docs/screenshots/te-pid-style-side-by-side.png`, whose left half is a crop of OPEN100 sheet 6.
+- `examples/statement-review/bound-sheet0/`: statements and drawing crops from OPEN100 sheet 0, with cropping,
+  JPEG conversion and an explicitly fictional review exercise. Credit to the PID2Graph authors Jan Marius
+  Stürmer, Marius Graumann and Tobias Koch, and to the Energy Impact Center for the OPEN100 design.
 
 The **generated Tennessee Eastman P&ID sheets** in `data/te_pid/` (images, SVG, answer keys) are drawn by this
 repo's code from this repo's own process model, so they are MIT licensed like the code. Their drafting style

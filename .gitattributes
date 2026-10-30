@@ -17,3 +17,7 @@ examples/own-drawing/extraction_sheet0.json -text
 predictions/** text eol=lf
 # Context source bytes and decision snapshots must reproduce across operating systems.
 examples/context-register/** text eol=lf
+# The current statement review example binds canonical JSON and hashes its generated packet bytes.
+examples/statement-review/bound-sheet0/*.json text eol=lf
+examples/statement-review/bound-sheet0/*.csv text eol=lf
+examples/statement-review/bound-sheet0/*.html text eol=lf

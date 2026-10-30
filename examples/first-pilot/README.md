@@ -35,5 +35,13 @@ should be able to reconstruct the decision from that packet. On a later source r
 register and revisit dependent conclusions. Transfer its stable IDs, evidence, unfinished states and history
 through a reviewed adapter when another team or system takes over.
 
+When review identifies a model error, the existing [local correction route](../../docs/REVIEW_LOOP.md) applies an
+engineer-filled `OPS_` sheet to a supported working model, retains old values and then regenerates outputs. Preview
+with `--dry-run`, preserve the base and inspect the resulting diff; valid rows can persist even if other rows
+refuse. A context answer alone does not edit the generator model. For ongoing organizational use, follow the
+[context lifecycle](../../docs/CONTEXT_LIFECYCLE.md): stage the correction for the central authority, then generate
+from its released snapshot. The organizational snapshot adapter and automated document update service remain
+an integration target.
+
 This workflow has software examples and AI reader review; no engineer's adoption or operational benefit has been
 measured with it. Use that first site pilot to learn whether the package helps, including a result that it does not.

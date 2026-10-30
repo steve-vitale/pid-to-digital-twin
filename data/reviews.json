@@ -1798,6 +1798,313 @@
     }
    ],
    "limits": "Independent coding-agent review only. No human/site sign-off, engineer timing, walkdown, live-signal validation, safe-operation certification, savings measurement or native-system import is established. The source checks establish selected published transcriptions and the Bayer cited narrative, not current plant truth or comprehensive revalidation of historical models. PRONTO and Bayer reuse existing source families. Currentness means an exact snapshot match when the tool is run; there is no watcher, permanent invalidation or automatic expiry. Reviewer and owner identities are unauthenticated user entries. History hashes are integrity controls, not signatures."
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (read-only review, primary-source checks and adversarial CLI controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF; primary original-document hashes below bind raw bytes without normalization.",
+   "registered_output_count": 16,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6"
+   },
+   "supporting_files": {
+    ".gitattributes": "f23d4b46738f4706cf1f875e7fe49d8e743260152236fd4ebc59b03afee574da",
+    "docs/CONTEXT_LIFECYCLE.md": "d7eae8b585acae759169ee9d89b74a37d891bdf755c47b97591cfad0c37641b4",
+    "docs/CONTEXT_REGISTER.md": "7c11b4a3040247b461b5ebb40aa67dd47591d4c21eb309a4d04573e92018087c",
+    "docs/GOAL.md": "f1667afb27316775aea10a6a898704bf4811cfe77ada331a93b5502df99a32ed",
+    "examples/context-register/README.md": "7d77d67ae4defba83a0712541272d466941a9e8d1f97df10e5536c4efbb94be3",
+    "examples/context-register/bayer/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/bayer/README.md": "f43650b0fa0f4f285b4c7e13d916f6d5a59a1c3c9f29883bb735d61fb3ec72bc",
+    "examples/context-register/bayer/expected/enriched_graph.json": "f7f8a08bb74bbad9521664678ed9dc2eb5e043418f7bac6c22b4c195c682e648",
+    "examples/context-register/bayer/expected/enriched_questions.json": "d44b9477f727a25962d038cbf270593a3b9464c9bfe579824f7174c13a114bd7",
+    "examples/context-register/bayer/proposed_answer.csv": "c627ab68ce98d5add2ac5ac84384ccd4be0699cf5cee3e5d98311b675886092c",
+    "examples/context-register/bayer/screen/screen.md": "92a79cb3e532e0750398f4f54730c4bea95470aef989bd9b2b07476cd6bcf3a1",
+    "examples/context-register/bayer/source_key.json": "bab7d493a934ae8ab41bf5e5ae3f73ab26e475a6ded6895f77019f51c28dd747",
+    "examples/context-register/bayer/sources.json": "3c39b3a2da11e9ab7346ef2b7f7fc6242a02b5631552f21a4dfdd71d017d1767",
+    "examples/context-register/illustrative/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/illustrative/README.md": "e2b92c88a596e120045337f5618e7cde20a250ffdbddaa751fa2490666f11e70",
+    "examples/context-register/illustrative/basis.txt": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+    "examples/context-register/illustrative/filled_answers.csv": "10d3df5f512bad4d7ba975f354205b14e66ccd0f550d72659121fc55415d54cf",
+    "examples/context-register/illustrative/later-note.txt": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+    "examples/context-register/illustrative/model.json": "72619283ecc3c97154d548850d06688463e6f2de05eb8cf53f3c278c9f2fa1dc",
+    "examples/context-register/illustrative/questions.json": "6b883257ddc4d420c10077bdf0998e7a98e1c34465cf902432f464caf01dbd76",
+    "examples/context-register/illustrative/service-sheet.txt": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+    "examples/context-register/illustrative/sources.json": "1137a61d46098763bdd5486ce2b0efcb0b6838721306be233dd8c9b6b9459e86",
+    "examples/context-register/nist-smstestbed/.gitignore": "6aefc578c7faeccbe134016aaf69d92eddb546619600dfce60a452ab0b68be0c",
+    "examples/context-register/nist-smstestbed/ACCEPTANCE.md": "e677a3cf583a5421fe221ca42664444c6a14b584ab6f20042182c0286cb8c521",
+    "examples/context-register/nist-smstestbed/README.md": "6466a69b412a9927826038d55d5b59a6ab8d4e44be986bb1092f460f26d34d81",
+    "examples/context-register/nist-smstestbed/check_packet.py": "763fadcb54743312a5cf031b6910afa1e2c6015291174135bf9f7bf39e7a6ba9",
+    "examples/context-register/nist-smstestbed/fetch_sources.py": "a2880da66f2360eb4e202573f03365eee364f717a52dc5922b717709e8745d41",
+    "examples/context-register/nist-smstestbed/model.json": "5b6fffc6c7ad3e781a1cee957dc2b15494bca847275b1cda4d84061d6b579902",
+    "examples/context-register/nist-smstestbed/questions.json": "7758130f02b0d4b8b1ecfeb4ce685b07e9046d151ae214e330964b48d6fbc6f9",
+    "examples/context-register/nist-smstestbed/verify_sources.py": "9573b9844907e93fe20960893fe348efc8c843300ce3263c38dd3def22e089df",
+    "examples/context-register/pronto/.gitignore": "b7db0191fd3d5aafda7255244750e17e2ba9f911dee89ca6c4ae2ed270f82130",
+    "examples/context-register/pronto/ACCEPTANCE.md": "3af098c64e0e4f82583fab97526d3f4e1db2b58387697c696785009b025fd536",
+    "examples/context-register/pronto/README.md": "00372fcb4e1018cfb6169179b9b9746c57bb2eeaf8a73d0a5ccd6e8f98b27748",
+    "examples/context-register/pronto/check_packet.py": "9b49909aeb83fb5df78287ef0044a59f02efb069f19d9a2dd20ee8a793d46575",
+    "examples/context-register/pronto/model.json": "d013645ba6c4cc0d935117c5d845459de3c9ec2d2cc92b50d78662e0aac4f58f",
+    "examples/context-register/pronto/questions.json": "fd19f05fcba3b3ef763838b6a2237e35fb6a4de701fca448ac05c6f2c0db3b41",
+    "examples/context-register/pronto/verify_sources.py": "75e8274bada91d1756daf874dac8f20175699b1e8741827a6801b6f5612844fc",
+    "examples/first-pilot/README.md": "94f5d00461c3425a944d4386b1f5cd81d0da5e83ecd2298872f534214866a1b0",
+    "scripts/context_register.py": "48c70e403a03112731aabc4ffc526e5d6b80e45d93b3a205cd7809ee6fce012b",
+    "scripts/graph_export.py": "ed1618a1305dffd5accbde544beaf2f230dc200b5f57f25988df36db9e5f1c02",
+    "scripts/question_engine.py": "d66e95619d4aa70a98b687e6ff01c3ed57964c9c3f17446e04dabce4938c7327",
+    "scripts/run_tests.py": "0e67ee05ab0422463ad88342e74bdc111dfeba826a81e6ec0142fcbdd3ef70e9",
+    "scripts/test_context_examples.py": "d7a9fe3e9a638760b0312fd4a253803c70ca4eb179f237393822a89cc1adb6b9",
+    "scripts/test_context_register.py": "62155e4a31362a564d112e968568769c3c4fefbed9e0a44b4c2dc4e99c741872"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "An alternate register filename colliding with context.md could be overwritten by the report.",
+     "resolution": "The independent CLI reproduction now refuses before any write while normal context.json refresh remains available."
+    },
+    {
+     "issue": "A hardlink from an output to a supporting source could overwrite the source bytes.",
+     "resolution": "File-identity collision checks now refuse the independent NTFS-hardlink reproduction before any write."
+    },
+    {
+     "issue": "Correctly rehashed malformed ownership IDs and malformed asset snapshots were accepted.",
+     "resolution": "Both independent malformed-history reproductions now return clear input errors and create no outputs; history structure and bindings are validated as well as hashes."
+    },
+    {
+     "issue": "Whitespace trimming could bind a question to an ID different from the preserved graph node ID.",
+     "resolution": "The independent exact-identity reproduction now refuses before writes; surrounding whitespace in identities is rejected."
+    },
+    {
+     "issue": "The PRONTO expected report was stale after collection prompts were added to rendering.",
+     "resolution": "The final report now reproduces byte-for-byte. Structured requested fields and location descriptions are readable, and decisions and JSON remain unchanged."
+    }
+   ],
+   "resolution": "All earlier context-register findings were fixed and independently rechecked. The original 11 registered outputs are unchanged from the earlier frozen review; this receipt also binds the five NIST outputs, for 16 exact registered outputs. The NIST packet preserves revision-scoped meanings and deployment uncertainty; local review provenance remains distinct from organizational acceptance.",
+   "checks": [
+    "32 context-register controls and 3 example integration tests pass on the final code. The illustrative runbook reproduces all 4 committed expected outputs without changing sources or model statuses.",
+    "15 independent CLI lifecycle/safety/portability controls pass: explicit accepted responses; byte-identical reruns; selective source-only staleness; old CSV refusal; exact snapshot reversion; claim conflict and explicit rejection; direct, alternate-register and hardlink collision refusal; unknown/duplicate references; and preservation of deliberately entered engineer text.",
+    "7 independent role/date/state boundary controls pass: reviewer does not become owner; invalid calendar dates refuse; assignment actor/date is explicit; accepted answered and plant truth require source match; accepted partial mismatch remains visible; an outstanding data request keeps the question open and unmentioned ownership persists.",
+    "Two correctly rehashed malformed-history controls and one whitespace-identity control independently refuse before output creation.",
+    "12 independent PRONTO controls pass using disposable exact copies of the originals: 22 proposals, 21 questions, 18 partial, 2 needs_data, 1 disputed; no inferred owner, reviewer, approval or plant truth; disabled-limit controls and FT302/FIR305 disagreement retained; synthetic report/alarm revisions stale exactly 6/7 dependent decisions while retaining history; old CSV and unknown/ambiguous identities refuse.",
+    "All 22 PRONTO source facts match independent primary-source readers: bundled openpyxl for cells/dates/times, CSV TSV parsing for physical records, pypdf for text, and a separately rendered full-page visual inspection for Figure 1. Four original hashes match. Missing-original verification reports unavailable rather than passed.",
+    "Fresh question_engine generation reproduces both Bayer E18 screen files byte-for-byte. Applying its actual 6 asset/stream references, original CSB bytes and proposed partial response reproduces all 4 expected context files byte-for-byte. Three collection prompts, item/how/where, decision rule and limits remain visible and unchanged in enriched JSON; owner/reviewer and plant truth remain unknown.",
+    "Final PRONTO context.md reproduces byte-for-byte from the preserved 22 decisions. All structured request.fields and location kind/description text are visible; no per-request completion tracking or automatic clearing is claimed. The full register JSON is unchanged by report polishing.",
+    "Illustrative, PRONTO and Bayer enriched graphs each pass graph_export --check with 0 problems. Original public files remain ignored. Selected new public docs, fixtures and tool/test files contain no private product names, local user paths or email addresses.",
+    "NIST: independently read the two original XML configurations, exact archived raw lines and original reuse notice, then checked all four raw-byte hashes and all 10 source-fact groups. Both configurations share machine UUID mtc_adapter008; reused DataItem ID Hurco04-path_7 changes meaning across versions. The archive contains unavailable, zero and a blank program-name value; the deployed XML revision, completed operation and current production state remain unknown.",
+    "NIST: 20 independent external-scratch controls passed. Actual copied originals prepare and apply 10 proposals across 8 questions as 5 partial and 3 needs_data, with no assigned owner, accepted review or plant fact inferred. The readable report reproduces byte-for-byte. Synthetic source revisions reopen exactly 3 old-config, 3 later-config, 4 raw-log and 0 notice-dependent decisions, preserve all 10 historical decisions, and reject old CSV bindings for changed sources before outputs. Each of four wrong raw hashes and an unregistered reused signal used as an asset are refused before outputs.",
+    "NIST source verifier and packet checker passed again against the final files. The verifier reads original records and explicit expected values, without reading source_key.json or the proposed answers. Missing originals are reported as unavailable. The packet-local fetch wrapper reuses the existing pinned fetch library; the global fetcher is unchanged.",
+    "Architecture documentation reviewed against current input formats and tool behavior. The central organizational authority, versioned snapshots and generator return path are explicitly a future integration target. Source originals, generated views and author-owned documents have separate update policies. Local names/accepted fields are provenance, not authenticated organizational approval; no hosted connector, live sync or organizational round-trip is claimed.",
+    "Eight additional missing-original controls pass on external copies: omitting each of the four NIST originals makes the source verifier exit 2 with that exact unavailable file, zero primary groups and no failures falsely reported as a pass; the corresponding context prepare refuses before creating any output folder. These supplement the 20 lifecycle controls above.",
+    "Final documentation/registration-only refresh reviewed: .gitattributes adds LF protection for the bound statement fixture; run_tests.py registers its three passing offline controls; GOAL links the completed maintenance record; lifecycle and pilot docs explicitly describe the existing in-place, partially applicable apply_review correction route. Context code and all 16 registered context outputs are unchanged."
+   ],
+   "primary_sources": [
+    {
+     "id": "PRONTO-REPORT",
+     "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-ALARMS",
+     "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-OPS",
+     "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-EVENTS-D3",
+     "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "CSB-2008-08-I-WV",
+     "raw_sha256": "6b4c944c7c5c8b5537c32e86d247064c164fe50c15d08ea64083975e574cf619",
+     "check": "Matched original local bytes and independently read PDF page 37, printed page 29, temperature-control narrative above Figure 10. Only the proposed intended-sequence interpretation was checked."
+    },
+    {
+     "id": "SMS-DEV-2016",
+     "raw_sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-DEV-2017",
+     "raw_sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-RAW-20170217",
+     "raw_sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    },
+    {
+     "id": "SMS-NOTICE",
+     "raw_sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+     "check": "Independently read the original XML/raw/notice content and exact cited locators; raw bytes match the pinned manifest. NIST source facts are development checks after source discovery, not held-out validation."
+    }
+   ],
+   "limits": "Independent coding-agent review only. No human/site sign-off, engineer timing, walkdown, live-signal validation, safe-operation certification, savings measurement or native-system import is established. The source checks establish selected published transcriptions and the Bayer cited narrative, not current plant truth or comprehensive revalidation of historical models. PRONTO and Bayer reuse existing source families. Currentness means an exact snapshot match when the tool is run; there is no watcher, permanent invalidation or automatic expiry. Reviewer and owner identities are unauthenticated user entries. History hashes are integrity controls, not signatures. NIST is a new public source family for this context packet, outside the existing eight-workflow matrix. Its acceptance criteria were declared after the two configurations and raw log had been examined; it is development evidence, not a prospective held-out transfer result. No live testbed, Git commit-date verification, governing configuration, production-state truth or broad manufacturing transfer accuracy is established. Notice text was read; this review is not a legal determination of reuse rights."
+  },
+  {
+   "feature": "statement-review",
+   "reviewer": "Independent Codex agent (read-only implementation, source-binding and public packet review)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over bytes with CRLF normalized to LF, matching the feature catalog. All 12 JPEG supporting hashes also equal their raw-byte hashes. Original-source and pre-change implementation hashes below bind raw bytes.",
+   "registered_output_count": 15,
+   "files": {
+    "examples/statement-review/bayer/statements.json": "ee24e35976010a19eec7ba7b4a1af5186665021309a68950dfb88aa377cecde9",
+    "examples/statement-review/bayer/sample_60.csv": "639359a89637c435b55ef4a9d8b0500047ba77bacc9a62937deb53f3a4600be7",
+    "examples/statement-review/sheet0/statements.json": "a82146a8ba04854bd59aebb340dd4ba911ddfec4dfb3e84bad53c5010b2c6bd5",
+    "examples/statement-review/sheet0/sample_60.csv": "e83a6affbd920e8e15f9f6b52f5ab7adb4dd8b0cf3bf90116c72c26c1cdbd354",
+    "examples/statement-review/sheet0/sample_layers.csv": "56d42a3d28906013fbb99e325ff2b355f94f8425876fbc57791db1e3dd05c483",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt": "fade0763048e916461ee40c31f1359275c5969785593483cc60fe48302e726d6",
+    "examples/statement-review/sheet0/sample_layers_r2.csv": "67d05a9a3fda5b3f9016166c70806a795db94bd863fbca37a59ed63c789b6ac3",
+    "examples/statement-review/bayer/review-2026-10-29/score.txt": "c6e358d0f360b1ae9fea830dd832425b7d8cbdb32a95bd45f059a3d3a337069a",
+    "examples/statement-review/sheet0/review-2026-10-29/score.txt": "9fec66f7c2caa1ddd09daedf2d911ddbb66fff89034e1dcf1706db45931922dd",
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt": "350e00f66f01f8052909ae49fca6b6bdd197de866b4f4b94095601391fe0f4a2",
+    "examples/statement-review/bound-sheet0/sample.json": "7ff1ff9fef48bb1e2dbe7ca3bfb578ed2194e88c117fce0273c23dd74a76db67",
+    "examples/statement-review/bound-sheet0/sample.csv": "0a60569eab68627de209359ccac9904c2c6c870d8c8b40ec3913a8cd7ff0b046",
+    "examples/statement-review/bound-sheet0/sample.html": "6a9c5a6403fbb045373883259e3678f767e197d2f783a08ac9f93c04333a438f",
+    "examples/statement-review/bound-sheet0/illustrative_review.csv": "84f0f654823cee94a79d0c8585b001e8906e50c73000ab8aaffb953649c17f60",
+    "examples/statement-review/bound-sheet0/apply_summary.json": "c135ea894cd64c79ffa476d4b89cdbaec417ee4b4e42d4246018165feb37796e"
+   },
+   "supporting_files": {
+    ".gitattributes": "f23d4b46738f4706cf1f875e7fe49d8e743260152236fd4ebc59b03afee574da",
+    "NOTICE.md": "f2c45a613698625c29c0c61e2131325d084f5dcb2a10db947e42cf2b26118b8e",
+    "docs/CONTEXT_LIFECYCLE.md": "d7eae8b585acae759169ee9d89b74a37d891bdf755c47b97591cfad0c37641b4",
+    "docs/GOAL.md": "f1667afb27316775aea10a6a898704bf4811cfe77ada331a93b5502df99a32ed",
+    "docs/REVIEW_LOOP.md": "62b70bfca8b4fd31753d1b979d9b8e007ce176c25ab5e33baff503f4f68f4306",
+    "docs/STATEMENT_REVIEW.md": "15dc932be50205dc36b97a9cffc17b5c40f5b55a19f0a61a9940e11ddd788a24",
+    "examples/first-pilot/README.md": "94f5d00461c3425a944d4386b1f5cd81d0da5e83ecd2298872f534214866a1b0",
+    "examples/graph-export/sheet0_graph.json": "d1c1b751b204c4291e2ea58f6c2782c4a0493daa3f26969607e489bb9cfc4b2f",
+    "examples/statement-review/README.md": "c3b1961fac6c5f89e8f187411555514f99ef663d564eaad3d15f3e3f2acdbdd6",
+    "examples/statement-review/bayer/review-2026-10-29/reviewed_sample_60.csv": "8030a61e302f3c1e040b61527c41aae44fbe8eeda338ff54b01f81642417531e",
+    "examples/statement-review/bayer/sample_60.json": "e9d3a6a62cfe35d102a696d7a308078c03f2705efe3a445352e376130deabd1f",
+    "examples/statement-review/bound-sheet0/.gitignore": "ec439a9a9910a57da38141f9a12d9183ee1abfed1ea58fa97d7d31423ec53da0",
+    "examples/statement-review/bound-sheet0/README.md": "3444a89f4bcca409dc9ddc182b0c013305cdd507f33f8016353e1bd115c3c8eb",
+    "examples/statement-review/bound-sheet0/evidence/s0_10fbfe8f6a.jpg": "c44e6c9408500fe0073d707b51a052e5343c240cc8c6a249479d3ed11e64cb22",
+    "examples/statement-review/bound-sheet0/evidence/s0_45fd43556b.jpg": "600ec2de8185534f9a1e2cdc7d070370689ea4724016152389bef192a7905913",
+    "examples/statement-review/bound-sheet0/evidence/s0_5cc1a6e218.jpg": "b00740fac1506b356830e9d7c1d27eb40a891b12b5233032680b5f25d81a0324",
+    "examples/statement-review/bound-sheet0/evidence/s0_5dc0f2a17e.jpg": "a71c9a13e0f6ecb9a41999af0e97637eef66aacdeb7a7fd0d368b4a687810ca8",
+    "examples/statement-review/bound-sheet0/evidence/s0_60f22c225b.jpg": "65a43b1947f9691ff2e3f0009a36e7c993608842e8abcba1053c0fe252a7e395",
+    "examples/statement-review/bound-sheet0/evidence/s0_6370c2ce2c.jpg": "e194e46274a6b4d1d01ccceb02bc36b525bc2f17afeedb1154dff6c798c27959",
+    "examples/statement-review/bound-sheet0/evidence/s0_806ac4da57.jpg": "d3a754930261af60c190c04c079c2d638bb30ea5e51fd7089f494e51cf7e4312",
+    "examples/statement-review/bound-sheet0/evidence/s0_96f80b00ba.jpg": "01f9fc7c45916a2d7695456d565359deaa354d81c35c2d492ae7202cfbe3dc3c",
+    "examples/statement-review/bound-sheet0/evidence/s0_9b44322a23.jpg": "59f3aa6b9fe26b6696a5e725ebe1577bf40013703af1b584236ec4b709c12675",
+    "examples/statement-review/bound-sheet0/evidence/s0_c71363e811.jpg": "b06b934fe7b16ec2a10da6725738d14d838c97092b5f9b1c4d34081e399818bc",
+    "examples/statement-review/bound-sheet0/evidence/s0_e0d2fbf4f4.jpg": "3de7b6d83e3d9c50268fc0e9f73a08f0575ab312e782fa5d9d239950bbb9b2f5",
+    "examples/statement-review/bound-sheet0/evidence/s0_fd56f5f378.jpg": "cfc1ada7e9d80a786389dd940867591a4592fa850b637ecda9873c4db0300963",
+    "examples/statement-review/sheet0/review-2026-10-29-layers-r2/reviewed_sample_layers_r2.csv": "f3945c3958b76f55db245f40a9d82875f7de16c30ad1dfb79e774f571473124a",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/reviewed_sample_layers.csv": "9f7e6c5d8f8cbc044b4a9c3009d84ad307a400bb9d052c305eae6b67441a708e",
+    "examples/statement-review/sheet0/review-2026-10-29/reviewed_sample_60.csv": "8f96de4b5d2f821d49761567dcc110e0c0c73a1b084ee1d385f04eece5dac4a3",
+    "examples/statement-review/sheet0/review-2026-10-29/reviewed_sample_60_strict_adjacency.csv": "e8700ba913a17d981c2fe7213db330368f90557c670c365020def42c82185f2f",
+    "examples/statement-review/sheet0/sample_60.json": "d424498e81a7ff6323ed3cb948fd26a205a4197d7205793fac338ef2d2fb9cd8",
+    "examples/statement-review/sheet0/sample_layers.json": "9a42ee81b84dc2a6b2cd9448256717de7d19e8efef52af3a687bcc86517e711b",
+    "examples/statement-review/sheet0/sample_layers_r2.json": "68fe980d137a401ecee7034c0767b95df6a1328feb886aefc4b32faec264315c",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/graph_export.py": "ed1618a1305dffd5accbde544beaf2f230dc200b5f57f25988df36db9e5f1c02",
+    "scripts/run_tests.py": "0e67ee05ab0422463ad88342e74bdc111dfeba826a81e6ec0142fcbdd3ef70e9",
+    "scripts/statements.py": "007736a10a7fde22f1745117daa2f693a9fed5cb913bccf7d1169ba1ed71286c",
+    "scripts/test_bound_statement_example.py": "be3c73374b37853f9028d35cf12d8810d044cb6a16da6055b68ce28ebb3bfa6f",
+    "scripts/test_statements.py": "597907cf2c48d714b298b9ca9aeedfc481bdc06d0d5bd9cdf5fa0edce9495726"
+   },
+   "findings": [],
+   "resolved_findings": [
+    "Before edits, independently reproduced the legacy gap: changing only a source pointer from revision A/page 1 to revision B/page 2 retained statement st-4ba9bf759a5d and the old source-match verdict applied successfully. The frozen implementation now binds the whole canonical graph/model, supplied original bytes and exact statement payload; this same change refuses before writing output.",
+    "Sampling could replace its own full statements.json input with a reduced sample when --out named that file. The final fresh-scratch executable control refuses with exit 2 and preserves the complete input.",
+    "Rendering could overwrite a supplied original image when its path was the deterministic output crop path, after the basis had hashed the prior bytes. The final fresh-scratch control uses an actual PNG and Pillow crop; staged complete-target preflight refuses before destination writes and preserves the original bytes.",
+    "The reproduction guide still rendered a current Bayer packet into its committed historical folder. The final guide now uses a separate current working folder, preserving the historical packet and sampled populations."
+   ],
+   "resolution": "No open finding remains in this scope. The exact 15 registered outputs are bound above: all 10 historical outputs match their prior recorded hashes, and five new outputs demonstrate the current bound software path without asserting a new engineering assessment. The final optimized implementation and 12 supporting crops are separately hashed.",
+   "checks": [
+    "Final optimized core: all 38 independent CLI controls passed in a fresh external scratch folder. Positive controls apply unchanged actual inputs, tolerate canonical JSON formatting/key-order changes and relocated identical files, and preserve fingerprints through layer sampling and generated HTML.",
+    "Independent refusal controls change only the source pointer, an unrelated graph node, review status, actual machine-check model content, PDF raw bytes, image raw bytes or exact image sheet ID. Omitting source flags, missing a declared original, duplicate sheet IDs, edited CSV read-only text/source/layer/group/stratum, mixed good/bad bindings, repeated reviewed IDs, unbound legacy sheets, duplicate headers and wrong row widths all refuse before output writes.",
+    "Independent known-file protection controls cover graph, review sheet, machine-check model, PDF, image and a real NTFS hardlink. The sample self-input and dynamic crop/original collision repros now refuse with unchanged source bytes. Read the final linear resolved-path/device-inode set scan; its 600-output guard is included in the passing core tests.",
+    "Ran the exact final scripts/test_statements.py: 41 tests pass. Ran scripts/test_bound_statement_example.py with standard-library-only -S: all 3 public fixture CLI tests pass. This review does not claim a complete repository-suite rerun.",
+    "Fourteen independent public-packet controls passed. A fresh full render from the actual current sheet-0 graph and original public PNG, followed by the documented 12-row seed-1032 layer/floor-2 sample, reproduces sample.json, sample.csv, sample.html and every one of the 12 crop JPEGs byte-for-byte.",
+    "Applying the committed illustrative CSV applies exactly one unclear source verdict with blank plant truth. Its actual canonical output hash equals apply_summary.json. A complete input/output JSON difference has only counts/events, one new event and nodes/78/checks; all engineering values and statuses are unchanged. The actual applied graph passes graph_export --check. The explicit fictional note, date, fingerprint and basis remain in the check/event.",
+    "The same public CSV refuses before output after copied original bytes change, after the graph snapshot changes, or when the original-image option is omitted. The actual committed graph, original drawing and illustrative CSV retain their input bytes. A separate note control preserves a multiline unclear reason and surrounding whitespace verbatim in its target check and event.",
+    "Compared final vs preserved pre-edit scoring on all five historical reviewed CSVs, each with its committed original sample and --json. Every complete score stdout matches exactly, including the strict-adjacency and both layer samples. This checks scoring compatibility, not the correctness of the earlier reviewer judgments.",
+    "Reviewed guides and lifecycle against code: full-graph invalidation is conservative, raw files bind only when actually supplied, graph/model-only coverage is explicit, exact content restoration may match again, names/hashes are unauthenticated, and no watcher/live organizational adapter is claimed. Binding errors are whole-packet refusal; the separately documented invalid-verdict path may apply other valid bound rows and return exit 1.",
+    "Reviewed the organizational return path and current local correction route: apply_review.py can update a supported working model in place with whitelisted corrections, retain history and partially persist valid rows; context answers alone do not edit the generator model. Original records, generated views and authored sections retain separate future integration policies. The organizational hub/snapshot adapter, authenticated acceptance and managed-section service are explicitly unimplemented.",
+    "Reviewed the new LF attributes and test-runner registration: bound JSON/CSV/HTML retain LF across checkout, and the three public-fixture controls are registered in the offline suite. Read the proof attribution/NOTICE and preserved historical scope; this review does not make a legal license determination."
+   ],
+   "primary_sources": [
+    {
+     "id": "PID2GRAPH-OPEN100-0",
+     "raw_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "check": "Actual local original bytes used for the independent full render and copied-source revision/refusal control. All 12 derived crops reproduce exactly. No new claim of source-match accuracy or current plant truth is made."
+    }
+   ],
+   "legacy_implementation_raw_sha256": "9f9d67ce762fec718500f5f2aecd1a56633f43b5f9e549e8488f5fa0449eadfc",
+   "limits": "Independent coding-agent software review only. No human or site sign-off, authenticated reviewer, governing-source determination, timed engineering benefit, native import, live-signal validation, plant-truth confirmation or operational certification is established. The public filled row is fictional and unclear, not a fresh accuracy measurement. Historical scores/populations are preserved and compatibility checked; earlier accuracy judgments are not comprehensively revalidated here. Fingerprints are reproducible integrity checks, not signatures, permanent revocation or proof that every appropriate source was supplied. Whole-graph changes deliberately require a fresh render. Exact reversion can match again; intervening changes are not monitored. Partial application remains possible for non-binding invalid verdict rows as documented. No hosted organizational integration or automatic authored-document merge has been implemented."
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent (narrow read-only context-registry change review)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF, matching the feature catalog.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "baae8555373556a97569e18a284b30bc3cd3e4cc2b32e18160e6eaad7e3f4e9f",
+    "out/generalization/matrix.json": "30ca81a45f33a4cc9cbb1151308e02a7100e1636d957c5c0a2e86f47d69a0a20",
+    "data/corpus.json": "84996684be832a2ab0767b6c64be30ef80c7fcc2947284d46d467528b16ee9f0"
+   },
+   "supporting_files": {
+    "examples/context-register/bayer/README.md": "f43650b0fa0f4f285b4c7e13d916f6d5a59a1c3c9f29883bb735d61fb3ec72bc",
+    "examples/context-register/bayer/source_key.json": "bab7d493a934ae8ab41bf5e5ae3f73ab26e475a6ded6895f77019f51c28dd747",
+    "examples/context-register/bayer/sources.json": "3c39b3a2da11e9ab7346ef2b7f7fc6242a02b5631552f21a4dfdd71d017d1767",
+    "examples/context-register/nist-smstestbed/ACCEPTANCE.md": "e677a3cf583a5421fe221ca42664444c6a14b584ab6f20042182c0286cb8c521",
+    "examples/context-register/nist-smstestbed/README.md": "6466a69b412a9927826038d55d5b59a6ab8d4e44be986bb1092f460f26d34d81",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/fetch_sources.py": "a2880da66f2360eb4e202573f03365eee364f717a52dc5922b717709e8745d41",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/pronto/README.md": "00372fcb4e1018cfb6169179b9b9746c57bb2eeaf8a73d0a5ccd6e8f98b27748",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/digitize_bayer_fig11.py": "fbcb07f8b26b47f6545121724f6ce511916e95358287901f0e7fdc76c729f521",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b"
+   },
+   "findings": [],
+   "resolution": "The only corpus.json change from the previously reviewed HEAD is a separate 32-line context_packets registry with three entries. All 42 matrix inputs are unchanged. docs/GENERALIZATION.md and out/generalization/matrix.json still match their prior review hashes, preserving the existing 94-cell evidence and limitations. The current corpus_matrix --check passes. This is a narrow metadata/scope review; the 94 cells were not rerun.",
+   "checks": [
+    "Parsed old HEAD and current corpus.json independently: deleting only context_packets makes their complete remaining JSON exactly equal. The prior receipt corpus hash equals HEAD; no matrix input, candidate, exclusion, note or human-decision entry changed.",
+    "Both recorded matrix outputs retain exactly the prior receipt hashes. The matrix still has rows 1 through 8 and 94 cells: 63 pass, 23 fail and 8 n/a. None of the three new packet IDs is a matrix input or cell. The existing corpus_matrix.py source is unchanged from HEAD and reads corpus[inputs] for matrix membership.",
+    "Ran python scripts/corpus_matrix.py --check against the exact current files: the readable matrix agrees with its JSON and every cell tool-hash binding is current. No extraction, scoring, tracing, historian analysis or other matrix cell execution was performed in this review.",
+    "All three entries point to existing packet guides, source manifests and source keys. PRONTO retains its existing pronto/pronto-more pinned fetch commands; Bayer retains the existing verified-PDF fetch command and explicitly states the offline tests do not reread that PDF. NIST uses the packet-local existing-fetcher wrapper with --max-mb 1, not a new global matrix source or HTTP implementation.",
+    "NIST manifest and local fetch pins agree exactly on paths, immutable source URLs, byte counts and SHA-256 for the two configurations, raw log and fourth upstream README notice. Its guide preserves the notice/credit distinction, does not assign a blanket public-domain/SPDX license, and states originals stay in the ignored cache. No network fetch was needed or performed.",
+    "The evidence_role fields preserve scope: PRONTO/Bayer are development reuse or a proposed partial-answer bridge; NIST is a new public source family for the context workflow only, after discovery of the source facts, explicitly outside the eight-workflow matrix and not a held-out transfer score. No human approval or deployed configuration truth is inferred. The separate context-register review contains original-source and software-lifecycle checks."
+   ],
+   "preserved_prior_review": {
+    "reviewer": "Independent Codex agent (read-only source review, independent reproductions and adversarial controls)",
+    "date": "2026-10-29",
+    "files": {
+     "docs/GENERALIZATION.md": "baae8555373556a97569e18a284b30bc3cd3e4cc2b32e18160e6eaad7e3f4e9f",
+     "out/generalization/matrix.json": "30ca81a45f33a4cc9cbb1151308e02a7100e1636d957c5c0a2e86f47d69a0a20",
+     "data/corpus.json": "48bbeb09a052c1574246608f9bea14d0d48d8e42a10c5be7ad57183539642b87"
+    },
+    "scope": "Preserve that earlier review and its reported cell/verdict/hash/reproduction checks at their original scope. This receipt does not independently repeat those 94-cell validations or broaden their source-family, held-out, key-provenance or tool-coverage claims."
+   },
+   "limits": "Independent coding-agent metadata review only. No 94-cell rerun or fresh matrix performance/transfer result is claimed. Existing failed cells, n/a cases, development reuse, generated/agent-made or derived keys, partially blind baselines and other prior matrix limitations remain. The context packets have separate software/source checks and do not add matrix passes or establish human/site approval, deployment truth, engineering review time, live-service availability or organizational integration. Source notices were compared for consistency, not legally adjudicated."
   }
  ]
 }

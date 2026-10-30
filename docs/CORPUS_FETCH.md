@@ -183,6 +183,30 @@ python scripts/fetch_corpus.py wikimedia-pid
 Staged locally but not integrated (data in `data/external/`, not yet a fetch source): the HAI boiler physical graph and
 the Covestro PCS list. They are listed as candidates in `data/corpus.json`.
 
+## Linked engineering-context packets
+
+`data/corpus.json` lists these separately under `context_packets`. They exercise the source-bound context workflow,
+not the eight selected workflows in the generalization matrix; they do not add pass/fail cells to that matrix.
+PRONTO and Bayer use existing source families. The new
+[NIST SMS packet](../examples/context-register/nist-smstestbed/README.md) adds a different public manufacturing
+family: two published device configurations and an archived machine log. All are development cases with
+AI-authored proposals, explicit unknowns and separate independent source checks.
+
+```sh
+python -S examples/context-register/nist-smstestbed/fetch_sources.py --max-mb 1
+```
+
+The packet-local `fetch.json` pins four small originals (121,831 bytes), including the upstream reuse notice, at
+immutable official repository URLs. Its wrapper uses `fetch_corpus.py`'s existing byte/hash-checked fetcher as a
+library. It does not add a second HTTP implementation or change the matrix's global fetch source list. Matching
+cached files require no network. Original bytes remain in ignored `data/external/nist-smstestbed/`.
+
+Read the packet's source notice and attribution: it assigns no blanket SPDX/public-domain label and does not
+redistribute the originals. The later configuration reuses an older data-item ID for a different meaning, while
+the raw recording does not establish which configuration was deployed. The example preserves those distinctions
+rather than treating a matched identifier as settled context. Prepare/apply, original-source checks and the
+copied-source revision controls are in its README.
+
 ## Needs a human decision
 
 Nothing below was downloaded by a script here. Each needs a person to accept terms, log in, or decide a licence

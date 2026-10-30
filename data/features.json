@@ -400,10 +400,16 @@
     "examples/statement-review/sheet0/sample_layers_r2.csv",
     "examples/statement-review/bayer/review-2026-10-29/score.txt",
     "examples/statement-review/sheet0/review-2026-10-29/score.txt",
-    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt"
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt",
+    "examples/statement-review/bound-sheet0/sample.json",
+    "examples/statement-review/bound-sheet0/sample.csv",
+    "examples/statement-review/bound-sheet0/sample.html",
+    "examples/statement-review/bound-sheet0/illustrative_review.csv",
+    "examples/statement-review/bound-sheet0/apply_summary.json"
    ],
    "tests": [
-    "scripts/test_statements.py"
+    "scripts/test_statements.py",
+    "scripts/test_bound_statement_example.py"
    ],
    "job": "Measure how often the model's statements match their sources, and let an operator check a unit in plain English",
    "why": "\"Does this look right?\" has no answer you can track. A sampled review of plain sentences against their sources gives an error rate for each kind of statement, and keeps 'matches the drawing' apart from 'true in the plant', which only someone who knows the unit can say.",
@@ -430,7 +436,12 @@
     "examples/context-register/pronto/expected/context.md",
     "examples/context-register/bayer/screen/questions.json",
     "examples/context-register/bayer/expected/context.md",
-    "examples/context-register/bayer/expected/context.json"
+    "examples/context-register/bayer/expected/context.json",
+    "examples/context-register/nist-smstestbed/sources.json",
+    "examples/context-register/nist-smstestbed/source_key.json",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv",
+    "examples/context-register/nist-smstestbed/expected_context.md",
+    "examples/context-register/nist-smstestbed/fetch.json"
    ],
    "tests": [
     "scripts/test_context_register.py",

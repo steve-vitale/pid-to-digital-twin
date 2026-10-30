@@ -18,14 +18,21 @@ verdict on a statement that did not match; `apply` refuses one.
 
 ```sh
 python scripts/statements.py render examples/graph-export/bayer_graph.json --document data/external/csb/Bayer_Report_Final.pdf --out my-review
-python scripts/statements.py render examples/graph-export/sheet0_graph.json --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --out my-review
 python scripts/statements.py sample my-review/statements.json --n 60 --seed 1029 --out my-review/sample_60.json
 python scripts/statements.py sample my-review/statements.json --n 60 --seed 1030 --strata layer --floor 15 --out my-review/sample_layers.json
 python scripts/statements.py score reviewed_sample_60.csv --sample my-review/sample_60.json
-python scripts/statements.py apply examples/graph-export/bayer_graph.json reviewed_sample_60.csv --reviewer "R1" --date 2026-11-02 --out bayer_graph_reviewed.json
+python scripts/statements.py apply examples/graph-export/bayer_graph.json reviewed_sample_60.csv --document data/external/csb/Bayer_Report_Final.pdf --reviewer "R1" --date 2026-11-02 --out bayer_graph_reviewed.json
 ```
 
-Worked pilot, not yet reviewed: [`examples/statement-review/`](../examples/statement-review/README.md).
+For the drawing route, render into a separate folder with its original image, then sample that folder's packet:
+
+```sh
+python scripts/statements.py render examples/graph-export/sheet0_graph.json --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --out my-sheet-review
+```
+
+Supply the same `--image` option when applying its reviewed CSV. A filled CSV comes from a person using the new
+page or sheet; the commands above do not perform that review. Historical review records:
+[`examples/statement-review/`](../examples/statement-review/README.md).
 
 ## What `render` makes
 
@@ -43,6 +50,7 @@ saying how to make one. Each node, each attribute claim and each edge becomes on
 | `evidence` | Drawing source: a JPEG crop of the box with margin, outlined, under `evidence/`. Document source: the cited printed pages and figures, the PDF page each is on, the figure page rendered as a small JPEG, and the line on the cited page that best matches the statement's words. Model-only source: says so; for a traced line on a drawing it also crops both ends (red, blue) so the reviewer can follow the line |
 | `machine_check` | Hand-built models only: is the statement exactly what the model's own field holds (`units[RT-1].mawp_psig`)? See below |
 | `targets` | Which claim(s), node or edge the statement stands for; `apply` writes the verdict there |
+| `review_fingerprint` | SHA-256 over this exact statement's wording, source/pointer, targets and layer, plus the packet's evidence basis. Sampling keeps it unchanged. It is separate from the semantic `id`. |
 
 Each layer has its own wording: "A pipe runs directly from X to Y, with no junction or other item between" (or "A
 line is drawn directly ..." when an end is an instrument); "X and Y are on the same drawn line network (S0-NET003):
@@ -51,7 +59,7 @@ to the other"; "X is attached to drawn line network S0-NET003"; "Junction S0-JN-
 drawing where 3 line arms meet".
 
 It also writes `review_sheet.csv` (`statement_id, group, stratum, layer, text, source, source_match, plant_truth,
-reviewer, note`, verdicts empty) and `review.html` (`--no-html` skips it for a very large graph). Fields that are
+reviewer, note, review_fingerprint`, verdicts empty) and `review.html` (`--no-html` skips it for a very large graph). Fields that are
 bookkeeping rather than statements about the plant (`extraction_confidence`, `*_method`, hashes, layout, ids, tag
 status, nearest-neighbour working) are skipped and **counted** under `skipped` in statements.json, as are claims that
 would only repeat the tag or another statement, so nothing disappears silently.
@@ -82,11 +90,50 @@ also gives the error rate weighted back to the whole population within each laye
 purpose). TRUE IN
 THE PLANT is tallied separately, only over statements that matched.
 
-`apply` writes each verdict onto its targets as a `checks` entry (`statement, source_match, plant_truth, by, on`) and
+`apply` writes each verdict onto its targets as a `checks` entry (`statement, source_match, plant_truth, by, on, note`,
+plus `review_fingerprint` and `review_basis`) and
 one `statement_review` event, and sets a status: `mismatch` -> `rejected`; `match` + plant `confirmed` -> `confirmed`;
 `match` + plant `wrong` -> `rejected`; a source match alone leaves the status as it was (it says nothing about the
 plant). **It never changes a value.** Rows it can't apply (unknown statement, bad verdict, plant verdict without a
-match, no reviewer) are listed and the run exits 1; the output still validates with `graph_export.py --check`.
+match, no reviewer) are listed and the run exits 1; valid bound rows can still be applied in that case. Inspect
+the reported counts and output rather than assuming exit 1 means nothing happened. The output still validates
+with `graph_export.py --check`. Binding failures follow the stricter rule below: no output is written.
+
+## Evidence binding and incoming revisions
+
+New packets record `review_basis` with schema `statement-review-binding-1`. The basis binds the complete graph
+snapshot and the actual machine-check model as canonical JSON content, plus SHA-256 of every supplied image's
+raw bytes (keyed by its exact sheet ID) and the supplied report's raw bytes. Graph/model formatting and line-ending
+changes alone do not alter their canonical hashes. Images and reports bind exact bytes. Source file paths are
+not copied into this basis. `graph_sha256` in a new statements packet is explicitly labelled `canonical-json`;
+older records used a raw-file hash and remain historical records.
+
+The per-statement fingerprint also binds the exact displayed statement, its source reference, targets and layer.
+Apply reads the current files using the same `--image`, `--document` and, where specified, `--model` options. A
+missing file, omitted source option, edited read-only text/source/layer, duplicate reviewed ID, unbound historical
+sheet or mismatched fingerprint refuses before output writes. One invalid binding refuses the packet; it does
+not apply the other rows. Sample allocation can change the stratum without changing the engineering claim or its
+binding. The browser's CSV download carries the same fingerprint as the prepared sheet.
+
+This route deliberately binds the **whole graph snapshot**. An unrelated asset change, a status change or added
+review events requires a new render. After applying a review, the output is a new snapshot; the old CSV cannot
+be applied to that changed output. For selective answer dependencies and retained revisions, use the separate
+[context register](CONTEXT_REGISTER.md). Neither tool imports an old unbound approval as a current one.
+
+The page labels **graph/model-only** coverage if no original image or report was supplied. In that mode a binding
+cannot detect a change to an external document it never read. Even with supplied files, the hashes do not prove
+that they are the correct governing sources or that every cited source is present. The person preparing the
+review must supply the appropriate originals and inspect its coverage.
+
+These are snapshot consistency checks, not signatures, authenticated identities or permanent revocation. A
+person with write access can forge a new sheet and hashes. Exact restoration of old content can match its former
+binding again, and intervening changes between runs are not observed. Keep the original packet and prior graphs
+under the organization's document controls. Render/sample/apply output locations must preserve their inputs;
+use separate working folders for sources and generated review material.
+
+The [current sheet-0 exercise](../examples/statement-review/bound-sheet0/README.md) retains a newly bound public
+drawing sample and one explicitly fictional `unclear` verdict. Its offline CLI controls demonstrate application,
+note preservation and refusal after copied source/graph changes. It is separate from the historical scored reviews.
 
 ## The machine check, and what it does not prove
 
@@ -99,11 +146,9 @@ extraction (sheet 0) has no structured source in the repository to compare again
 
 ## Limits
 
-- Legacy `apply` joins verdicts by statement ID (subject, predicate and value), without verifying the cited document
-  revision or the render's graph hash. Keep its review with immutable source/graph copies and re-review after
-  evidence changes; an old CSV must not be carried into a changed source pack. The separate
-  [context-answer register](CONTEXT_REGISTER.md) binds answers to source bytes and revisions. It does not migrate
-  or validate legacy statement approvals.
+- Committed legacy samples and their earlier scores stay available as historical evidence. They do not carry
+  current review bindings and cannot be applied by the new command. Render from the current graph and originals,
+  then review the new sheet; do not paste old verdicts or manufacture fingerprints to bypass that review.
 - The sentence is a rendering of the claim, not the claim. A template can mislead; when a reviewer finds the sentence
   wrong but the underlying claim right, mark `unclear` and say so in the note, so template errors and data errors are
   counted apart. Known weak spots are listed in the pilot README.
