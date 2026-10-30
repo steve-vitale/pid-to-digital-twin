@@ -3134,6 +3134,22 @@
         "examples/historian-csv/README.md",
         "scripts/test_csv_tools.py"
       ]
+    },
+    {
+      "id": "A214",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Describe the local context workflow as a first evidence and decision packet for company handoff.",
+      "hypothesis": "The feature catalog and local refresh instructions should carry the same starter-to-company-home boundary already stated in the README introduction and pilot guide.",
+      "evidence": "Only five descriptive fields of the context-register feature change; every other feature object, tool, test and example-output list remains exact. Generated README/FEATURES and the example guide explain local packet preparation, company ownership and the unbuilt receiving adapter. Independent AI engineer reader judgment is scoped to wording; output reviews and benchmark evidence are not renewed.",
+      "runs": "Documentation and generated-catalog checks only; no source, corpus-cell, detector, model or operational experiment",
+      "verdict": "kept",
+      "why": "Makes the useful starting result and organizational next step clear without expanding local governance or promising a connector. Actual engineer adoption and an authorized receiving-system round trip remain unproven.",
+      "source": [
+        "docs/JOURNAL.md#81-make-company-handoff-clear-in-the-feature-catalog",
+        "examples/context-register/README.md",
+        "docs/FEATURES.md#prepare-a-first-engineering-evidence-and-decision-packet"
+      ]
     }
   ],
   "not_tried": [

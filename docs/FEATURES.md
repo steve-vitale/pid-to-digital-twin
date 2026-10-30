@@ -24,7 +24,7 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [Find energy, heat-grade and control questions worth asking about my unit, and what data answers each](../docs/OPPORTUNITY_SCREEN.md) | Many energy and controls questions can be spotted on a P&ID before anyone collects data: a throttled pump, high-pressure steam let down for a low-temperature job, heat dumped to cooling water, a loop with no controller. A solo engineer rarely has time to look. This lists the questions with the evidence by tag and exactly what to collect, and where, to settle each one, without inventing a savings number. | A process model or extracted drawing set; optionally the plant's loop list and equipment schedules | Seconds | Per question and asset: the evidence by tag, what to collect and where (down to a blank field on a named schedule), how the data decides it, and what public sources say is typical. A screen, not an audit | proven |
 | [Turn a change I measured into an annual energy, cost and greenhouse-gas figure](../docs/IMPACT_ESTIMATE.md) | A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it. | What you measured (kW before and after, steam lb/h, fuel saved, hours) and your tariff, gas price, emission factors and boiler efficiency, or labelled public typical values | Minutes | A first-draft estimate, marked as one: annual kWh or MMBtu, cost and CO2e with the formula and source of every constant, the assumptions it rests on, and the data to collect (and where) to replace each one; or, per question, what to measure and where each constant comes from | proven |
 | [Measure how often the model's statements match their sources, and let an operator check a unit in plain English](../docs/STATEMENT_REVIEW.md) | "Does this look right?" has no answer you can track. A sampled review of plain sentences against their sources gives an error rate for each kind of statement, and keeps 'matches the drawing' apart from 'true in the plant', which only someone who knows the unit can say. | A graph export (twin-graph-1), plus the sheet image or report PDF its sources cite | Seconds to render; review time per statement not yet measured | A stratified sample of plain sentences, each beside its drawing crop or report page, with two separate verdict columns; an error rate with a 95% interval; and the verdicts written back into the graph as dated events | proven |
-| [Turn a set of starting documents and questions into context the team can maintain and own](../docs/CONTEXT_REGISTER.md) | Answers and their reasons get lost between drawings, spreadsheets and people. A persistent register keeps responsibility, competing evidence and the need for a new review beside each question. | A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers | Local workflow; engineering review time has not been measured | A readable context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for a reviewed handoff | proven |
+| [Build a first evidence and decision packet for company handoff](../docs/CONTEXT_REGISTER.md) | A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination. | A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers | Local packet preparation; engineering review time has not been measured | A local context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for handoff. The receiving company system supplies shared access and ongoing governance | proven |
 
 ## By category
 
@@ -44,7 +44,7 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [Every output as plain statements, checked against its source](#statement-review) | check | **proven** |
 | [Normal bands and an OPC UA replay from historian CSV exports](#historian-csv) | operate | **proven** |
 | [Reviewer decisions back into the model, and instruments mapped to supplied addresses](#review-and-mapping) | operate | **proven** |
-| [Keep engineering answers, ownership and evidence current](#context-register) | operate | **proven** |
+| [Prepare a first engineering evidence and decision packet](#context-register) | operate | **proven** |
 | [Energy, heat-grade and controls questions worth asking of a drawing, and the data to answer them](#opportunity-screen) | screen | **proven** |
 | [First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up](#impact-estimate) | screen | **proven** |
 
@@ -241,11 +241,11 @@ Status: **proven**
 - **Independent review:** Independent AI controls_reader and AI first-engineer/manager reader; separate Codex evidence/hash closeout, 2026-10-30: pass
 
 <a id="context-register"></a>
-### Keep engineering answers, ownership and evidence current
+### Prepare a first engineering evidence and decision packet
 
 Status: **proven**
 
-**Why it matters:** Answers and their reasons get lost between drawings, spreadsheets and people. A persistent register keeps responsibility, competing evidence and the need for a new review beside each question.
+**Why it matters:** A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination.
 
 - **Tools:** `context_register.py`
 - **How to use it:** [CONTEXT_REGISTER.md](../docs/CONTEXT_REGISTER.md)

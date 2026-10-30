@@ -436,7 +436,7 @@
   {
    "id": "context-register",
    "category": "operate",
-   "title": "Keep engineering answers, ownership and evidence current",
+   "title": "Prepare a first engineering evidence and decision packet",
    "tools": [
     "scripts/context_register.py"
    ],
@@ -470,11 +470,11 @@
     "scripts/test_context_register.py",
     "scripts/test_context_examples.py"
    ],
-   "job": "Turn a set of starting documents and questions into context the team can maintain and own",
-   "why": "Answers and their reasons get lost between drawings, spreadsheets and people. A persistent register keeps responsibility, competing evidence and the need for a new review beside each question.",
+   "job": "Build a first evidence and decision packet for company handoff",
+   "why": "A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination.",
    "you_need": "A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers",
-   "time": "Local workflow; engineering review time has not been measured",
-   "you_get": "A readable context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for a reviewed handoff"
+   "time": "Local packet preparation; engineering review time has not been measured",
+   "you_get": "A local context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for handoff. The receiving company system supplies shared access and ongoing governance"
   }
  ]
 }

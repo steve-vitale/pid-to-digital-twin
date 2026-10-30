@@ -34,9 +34,11 @@ identities, register the supporting document revisions and exact locations, assi
 A second independently sourced answer stays separate. The tool compares only explicitly named claim slots and
 canonical values; an engineer decides whether documents disagree and which one governs.
 
-At each document release or engineering change, rerun the register against the current files. Read the questions
-that need an owner, more data or a new review. Keep the JSON sidecar with the source pack so the next engineer
-inherits the reasons and earlier decisions. The [full guide](../../docs/CONTEXT_REGISTER.md) gives the commands,
+While preparing the local packet, explicitly refresh the register when a source or model changes. Read the
+questions that need an owner, more data or a new review. Keep the JSON sidecar with the source pack so the next
+engineer inherits the reasons and earlier decisions. Once teams depend on that context, the shared company system
+should retain the ongoing record; use the specialist tools against its released snapshots and return findings for
+review. The [full guide](../../docs/CONTEXT_REGISTER.md) gives the commands,
 schema, review requirements, conservative document-level staleness, exact-reversion behavior and export limits.
 
 The portable output can be transferred to another engineering or change-management system through an explicit

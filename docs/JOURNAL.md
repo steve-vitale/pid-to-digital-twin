@@ -4124,3 +4124,22 @@ result and omissions rather than inheriting a passing label from these focused r
 A stale ledger marker is corrected too: N057's rolling/drift idea was already tried and implemented in A163/A171, with later cyclic
 development in A183/A184. Marking that idea done does not claim the remaining false-alarm and detection gaps are
 solved. No other not-tried item, source family, original record, scoring criterion or operational authority changes.
+
+
+## 81. Make company handoff clear in the feature catalog
+
+The README introduction describes a first engineering packet followed by a shared company home, but the
+context-register feature still promised context the team could "maintain and own" and described a persistent
+register without that next step. The example's recurring-refresh instruction could reinforce the impression
+that local files were the intended long-term organizational system.
+
+The feature now describes preparing a first evidence and decision packet for company handoff. Its result still
+names the actual local report, dated records, open questions and portable JSON; the receiving company system
+supplies shared access and ongoing governance. The example limits local refresh to packet preparation and
+describes later tool use against released company snapshots, with its existing explicit-adapter and no-live-sync
+limits retained. The question engine's investigative role and the document-only first-question path remain.
+
+Only five descriptive feature fields change; tools, tests, example outputs, other features and corpus records
+remain exact. Catalog generation and a separate AI engineer reader check the wording. This is documentation
+clarity, not a feature-output review renewal, implemented connector, human adoption result or new operational
+capability. A first useful investigation should make the need for retained company context concrete.
