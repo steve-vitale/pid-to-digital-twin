@@ -4868,3 +4868,48 @@ rerun with the existing row/input selectors; the other 47 complete cell records 
 has 64 passes, 23 failures and eight not-applicable cells. Its additional pass is the MGPI export-plumbing cell,
 not an interpretation result. The headline and claim checker's expected count move from 63 to 64 together;
 existing drift controls still reject changed results. Historical red cells and evaluation criteria remain.
+
+## 104. Audit the whole toolkit before adding more
+
+The README had become a product introduction, tutorial, feature catalog, research paper, demo gallery and
+history at once: 11,264 words. A generated catalog copied twenty wide rows into it on every regeneration.
+The user asked for a deep rethink and a whole-toolkit state audit rather than another appended explanation.
+
+Two independent coding agents inspected all twenty catalog features against source, CLI contracts, guides and
+tests, with representative offline chains on public/fictional data. Most components are implemented local
+prototypes. The integrated company journey is partial/manual: interpretation and drafting, incompatible formats,
+source/signal review, native acceptance and receiving-system adapters remain separate. Shared company authority
+and execution are external responsibilities by design. Reviewed example files do not imply product readiness.
+
+Disposable-copy probes found concrete source-preservation defects: graph export can replace its source model,
+impact estimation can replace a spec named impact.json in its output folder, and CSV-band generation can replace
+an input occupying csv_normal_bands.json. Seven multi-appearance OPEN100 items also lose later provenance locators
+in graph export. These remain open, with retained private before/after proof and prioritized N066/N067 records.
+The vendor report's labor and overlapping-range claims are interpretation defects (N068); its guide is qualified,
+but neither report generator nor metric was silently changed. The current-state report distinguishes these bugs
+from missing validation, manual inputs, demonstration-specific outputs and planned integration.
+
+The README now introduces one question and routes the reader in about 700 words. docs/README.md owns navigation;
+WORKFLOWS.md owns actual format contracts; STATUS.md owns delivery gaps; RESULTS.md owns numerical research
+evidence. The feature catalog is a narrower reference, with file/test details folded and 'Example review' labels.
+Its generator owns only that reference. Plant/pilot/lifecycle pages no longer duplicate the catalog or main route
+tables. MCP status errors and a stale observations-option description are corrected. Historical experiment records
+and the benchmark-pinned description guide remain intact. Contribution guidance defines these page responsibilities.
+
+All forty-two original claim definitions, precision/criteria and derivation expressions remain unchanged. Each
+now names its publication, and receipts state that source. A claim cannot be satisfied by a matching phrase in
+an unrelated page. The fourteen claim tests and five catalog tests pass; the latter includes a real regeneration
+that must leave README bytes unchanged. During migration, missing phrases were caught before their destination
+was completed. Independent comparison confirms the same forty-one file-backed matches and one prose-only claim.
+
+The deliverables generator now labels its table as TE/OPEN100 demonstration evidence. The existing structural
+check was actually rerun through the orchestrator; its first new navigation assertion mishandled capitalization,
+was corrected and passed. No research model, scoring threshold, prediction, answer key or benchmark result was
+changed. The audit re-scores thirty saved tables (seven historical-format adjustments) and retains five missing-
+prediction gaps. It checks matrix freshness rather than claiming a new whole-matrix run.
+
+Independent arrival retesting caught and corrected a new map error: direct DEXPI XML yields a process model,
+while the converted-key adapter yields an extracted twin. The canonical table now also states context-register
+support for extracted twins and the shipped snapshot-only MCP input. A Copilot-only reader can start with a plain
+brief; local software is an optional route. This remains coding-agent review, not measured human usability,
+engineering acceptance or operational benefit. Next work should protect evidence before expanding the package.

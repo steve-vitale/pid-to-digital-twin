@@ -4,12 +4,12 @@ Three ways in, depending on how much time you have. None of them needs an accoun
 
 ## Two minutes: read
 
-The "In two minutes" list at the top of the [README](../README.md), including its "Not done" line.
+Read [the project status](STATUS.md) for implementation gaps and [results and limits](RESULTS.md) for research evidence.
 
 ## Ten minutes: have your coding agent check it
 
 Point Codex, Claude Code, Cursor or any other coding agent at a clone of this repository and ask it whether the
-README's numbers hold up. [AGENTS.md](../AGENTS.md) at the root tells it which checks to run and which limits to
+published numbers hold up. [AGENTS.md](../AGENTS.md) at the root tells it which checks to run and which limits to
 report back. Or run them yourself:
 
 ```sh

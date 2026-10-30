@@ -23,7 +23,7 @@ marked as tools are built for other inputs.
 From the repository root, with Python 3.10+ (standard library only for the first two):
 
 ```sh
-python scripts/check_claims.py      # each headline number in README.md against the committed file it comes from
+python scripts/check_claims.py      # each registered claim in docs/RESULTS.md against its committed evidence
 python scripts/pipeline.py status   # whether every output is fresh against the inputs and code that made it
 python scripts/attempts_ledger.py --check   # the tuning ledger is complete, sourced and current
 python scripts/feature_catalog.py --check   # every feature, its evidence and its independent review status
@@ -45,9 +45,9 @@ Then, if `pip install -r requirements.txt` is acceptable in your environment:
 python scripts/run_tests.py         # the same suite CI runs
 ```
 
-`check_claims.py` prints one row per claim: what the README says, what the evidence file says, the file, and
-whether they agree. It checks that the README's numbers match the committed results files. It does not re-run
-models or re-score predictions, so a pass means "the README matches the results files", not "the results were
+`check_claims.py` prints one row per claim: its named publication, stated value, evidence value and evidence file.
+It checks that each registered claim in `docs/RESULTS.md` matches the committed results files. It does not re-run
+models or re-score predictions, so a pass means "the published claims match the results files", not "the results were
 reproduced"; tell your user which one you checked. `python scripts/rescore.py --check` is the second step: it
   re-scores the committed predictions and diffs the regenerated tables against those results files (five earlier
 diagnostic tables still lack predictions; see below). Claims marked "prose only" rest on narrative in the journal, not on a result file; say so if

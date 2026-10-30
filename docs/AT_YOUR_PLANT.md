@@ -2,8 +2,9 @@
 
 Start with one engineering problem and the records available for it. This toolkit helps produce a draft that a
 person can inspect and use to plan the next evidence request. Its public examples do not establish accuracy,
-review effort or savings at your site. Try the [offline drawing example](../examples/own-drawing/README.md#0-the-worked-example-offline-about-a-minute)
-first; it needs only Python, with no accounts, downloads or model calls.
+review effort or savings at your site. The [first-question brief](../examples/first-pilot/README.md) starts with
+approved documents and needs no local software. For a drawing pilot, the [offline drawing example](../examples/own-drawing/README.md#0-the-worked-example-offline-about-a-minute)
+uses Python, with no accounts, downloads or model calls.
 
 > **Short version:** treat the AI output as a *draft that people check*, not an automated result. Measure the
 > draft-plus-review time against your manual baseline. Keep everything read-only and out of the control network until
@@ -11,63 +12,19 @@ first; it needs only Python, with no accounts, downloads or model calls.
 
 ---
 
-## Start wherever you are
+## Choose a route before planning the pilot
 
-A plant doesn't need good drawings to start. Choose the route matching your records; each has its own outputs
-and review needs:
+Use the [input selector](../README.md#start-wherever-you-are) and [format contracts](WORKFLOWS.md) rather than
+assuming every route produces the same outputs. The [first-question brief](../examples/first-pilot/README.md)
+works with approved documents and Copilot or manual review, without a local model or custom agent.
 
-| Where you are | What you do | Shown here on |
-|---|---|---|
-| **A drawing image** | Use the [own-drawing intake](../examples/own-drawing/README.md) to turn a supplied extraction into a draft model, review queue, logical SVG and tag/PI staging. A new extraction needs a separately authorized model run. | OPEN100 has 12 sheets: 0–5 were development, 6–11 were validation and also helped select the method. They are not 12 sealed holdouts; see [the scoring record](GOAL.md). |
-| **Supported DEXPI XML** | Use the [structured CAD route](../examples/from-dexpi-xml/README.md), then inspect identity, roles and placement uncertainty. | Public DEXPI examples, with failures and unplaced items reported in the [matrix](GENERALIZATION.md). |
-| **A written description or process knowledge** | Author a sourced model and cross-check it. Use it directly for [asset/platform drafts](../examples/from-description/README.md) or the [question engine](OPPORTUNITY_SCREEN.md); a generated drawing and image round trip are optional. | Tennessee Eastman and the Bayer historical reconstruction. Authoring a model does not verify the actual plant. |
-| **A loop list or historian CSV** | Use the [loop-list comparison](../examples/loop-audit/README.md) or [recorded-data tools](../examples/historian-csv/README.md). Reconcile identities before linking their results to a model. | Supplied-format examples; these lists do not automatically become a complete process model. |
+The [TE/OPEN100 deliverables comparison](DELIVERABLES.md) describes research demonstrations. Mimics, tours and
+isolation mockups are not generic outputs of the own-drawing intake. A draft P&ID needs an authored model and
+layout; adapting house symbols, title blocks or sheet conventions requires separate drafting/code work.
 
-An authored model can support a first question without generating a drawing or paying to extract that drawing
-again. Generated sheets are useful when a drawing itself is the intended draft deliverable. Their emitted answer
-keys come from the model and layout, so reading them back tests clean generated drawings rather than real-plant
-accuracy. The Tennessee Eastman [round trip](EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman) is that experiment.
-
-**Adapting a drafting style is separate work.** The drawing generator uses the OPEN100 style and a manually
-authored layout; it is not a general house-style importer. `scripts/style_fidelity.py` records the project's
-TE/OPEN100 comparison, not a reusable command for measuring arbitrary site sheets. Adapting title blocks,
-symbols, line conventions and sheet splits needs drafting/code work and review; no effort estimate was measured.
-Inspect layout-declared drafting additions, including utility symbols and control-valve stations, separately
-from model content. They are marked in the emitted key and are not evidence of installed equipment.
-
-**Governance: a generated drawing is not a drawing of record.** It shows what your lists say, not what is in the
-field. Until engineering has walked it down and accepted it under your management of change (and, for covered
-processes, your PSM process safety information procedure), label it as a draft, keep it out of your document
-control system's issued set, and don't let anyone operate, isolate or permit from it. The generated sheets here say
-so in their title block.
-
-## What you can do with only drawings, only process knowledge, or both
-
-You may not have everything at once. Drawings are often easier to get than historian access, and the reverse
-happens too. This repo has one of each: the OPEN100 track has 12 real drawings and no process data, and the
-Tennessee Eastman track has process knowledge (a model and recorded data) and no drawing. What each supports is in
-the [deliverables matrix](DELIVERABLES.md).
-
-| What you have | What you can build now | What has to wait |
-|---|---|---|
-| **Drawings, no historian access** | The reusable intake produces a draft asset model and tag list, placeholder Ignition tags and PI AF staging, a logical SVG and a review report. Flow direction, sheet stitching, mimics, 3D tours and isolation mockups were demonstrated on OPEN100 and require adaptation for your drawings | Values, normal bands, alarms, replay. Every value remains a placeholder until an I/O list or historian mapping arrives; the research visualizations have no generic own-drawing build command |
-| **Process knowledge, no usable drawings** | A sourced model authored from the description, logical SVGs, review sheet, tag/PI staging and model-based questions. A P&ID draft also needs an authored layout and drawing dependencies | Native mimics, 3D, alarms and replay need separate adaptation, mappings, configuration and suitable data. The TE demos do not supply these generically for your model. Check authored topology against independent records or field evidence |
-| **Both** | Cross-check scoped identities, relationships and observations across the records, then plan the missing evidence | A difference may reflect extraction error, identity/revision mismatch, different operating conditions or a documentation gap. Review its cause before using it to support a decision |
-
-So a drawings-only pilot can start with the draft model, review report and asset-framework staging, and add values
-when data access comes through. The OPEN100 mimic, tour and isolation mockup are research examples to adapt, not
-deliverables the own-drawing intake already builds. In practice:
-- **Ask what the drawing actually shows.** Flow arrows, off-page flags and pump symbols give direction on part of
-  the plant only. On these 12 sheets, a third of the process links. Keep the rest undirected and visibly so: a
-  screen that guesses directions teaches people to trust arrows that were never drawn.
-- **Read the equipment schedules.** Many drawings print what each piece of equipment is for along the bottom of the
-  sheet. It is the best source for purpose cards and is easy to miss: the extraction here never read it.
-- **Treat the isolation view as a review aid.** A list of block valves, motor-operated valves, motor-driven
-  equipment and boundary lines, each pointing at its place on the drawing, may help a qualified reviewer inspect
-  the draft. No procedure-writing effort or isolation adequacy was measured. It is not the procedure, and a valve
-  the extraction missed is missing from it.
-
----
+A generated drawing is a draft for review, not a drawing of record or an operating/isolation procedure.
+Check source-backed content and proposed drafting additions separately. The site's engineering, document-control
+and applicable change processes govern acceptance. The steps below help evaluate a bounded pilot at your site.
 
 ## 1. Before you start: decide what you're actually converting
 

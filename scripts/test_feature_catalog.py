@@ -1,9 +1,11 @@
-"""The feature catalog: the registry is consistent, docs/FEATURES.md and the README's use matrix are current, every tool
+"""The feature catalog: the registry is consistent, the feature reference is current without rewriting the README, every tool
 belongs to a feature, and a review stops counting when the output it reviewed changes. Stdlib only."""
 import copy
 import subprocess
 import sys
 import unittest
+import tempfile
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -12,10 +14,19 @@ import feature_catalog as fc  # noqa: E402
 
 
 class Catalog(unittest.TestCase):
-    def test_catalog_and_readme_are_current(self):
+    def test_catalog_is_current(self):
         r = subprocess.run([sys.executable, str(ROOT / "scripts" / "feature_catalog.py"), "--check"],
                            capture_output=True, text=True, timeout=120)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
+    def test_regeneration_owns_only_the_feature_reference(self):
+        # A full registry regeneration must not reinsert its catalog into the public front door.
+        readme = ROOT / "README.md"
+        before = readme.read_bytes()
+        with tempfile.TemporaryDirectory() as tmp, patch.object(fc, "OUT", Path(tmp) / "FEATURES.md"):
+            self.assertEqual(fc.main([]), 0)
+            self.assertTrue(fc.OUT.is_file())
+            self.assertEqual(readme.read_bytes(), before)
 
     def test_a_tool_without_a_feature_is_refused(self):
         feats, reviews, tools = fc.load()

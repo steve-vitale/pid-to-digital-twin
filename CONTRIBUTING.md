@@ -110,3 +110,13 @@ The PR should state which cases were inspected during development, what changed 
 what regressed, and what remains unmeasured. Maintainers review source/key quality and the method before merging.
 CI checks saved evidence offline; it does not purchase model runs, verify provider identity, approve engineering
 designs or validate a plant. No single case is sufficient to claim generality.
+
+## Keep the documentation navigable
+
+The README introduces the package and routes readers to one first task. Do not append each new feature, case,
+result or status there. [docs/README.md](docs/README.md) is the documentation index; [WORKFLOWS](docs/WORKFLOWS.md)
+owns format connections, [STATUS](docs/STATUS.md) owns current implementation gaps, and [RESULTS](docs/RESULTS.md)
+owns the registered research claims. Put commands in the guide that owns the task. Feature/script catalogs are
+generated references; update their registries or generators rather than copying their tables into other pages.
+Keep dated plans and experiment history as records. Update a canonical statement instead of adding a second
+competing explanation, and check its inbound links and source/evidence bindings after a move.

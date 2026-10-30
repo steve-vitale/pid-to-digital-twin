@@ -7298,6 +7298,87 @@
      "resolution": "All 48 affected cells were actually rerun through existing CLI filters. Exact 47-cell retention and unchanged substantive measurements were independently checked; current freshness passes."
     }
    ]
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "Independent Codex coding agent: bounded documentation architecture, claim-preservation and functional-state audit A",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 2,
+   "file_hash_method": "SHA256 after CRLF-to-LF byte normalization, matching feature_catalog. Exact raw comparisons separately used for frozen recipe files and independently regenerated claim receipts.",
+   "files": {
+    "out/claims_check.md": "dfb114b5097655f7005c45401a58bfa424e3d00f39f4fc8343d534d46eacdb1f",
+    "examples/test-coverage/expected.json": "c3f9c317aec4b9b5dfe3f9cdf1461a08c376f0f15fcff0eb0a5a3c0b099215d4"
+   },
+   "supporting_files": {
+    "out/claims_check.json": "6984be6f9434ad4412152f2ba0f1defb3df088159492c30c0667eb4714598f25",
+    "scripts/check_claims.py": "7d28749d8561b2f2e83e16b5001e2f8d66ad4dcb034aaca3702d69c1a6cd1bf4",
+    "scripts/test_check_claims.py": "738216837d57cb5c834726d66711fcafadedaa40a0cffa75f7ee83ba50c9c8de",
+    "scripts/feature_catalog.py": "37a280f44143e7e3659df06eac5d4d7e5c7ef7553950cfb1c8e265119a6752a7",
+    "scripts/test_feature_catalog.py": "248c9148d189797ec7fe3c64b8d856d023987c0fb8373229bbe956d71caa73a2",
+    "scripts/deliverables_matrix.py": "8b283a7c5c9643f3c2bfe721755dc85c6ffb9765e41f96572b40792063889496",
+    "scripts/test_open100_structural.py": "866b8d0fde367714c3a965f70d81e3d2d51bfd70d7a0b26f63971450e277461d",
+    "README.md": "5c5cab8eb00cca938bcb4cb6647d43348c731c4983ab2f661f151923b35c0848",
+    "docs/README.md": "4e29f18805bf296a073da0930ed8c7ba1cc6035ac07d1194d3043eccea3796ce",
+    "docs/WORKFLOWS.md": "6d670d52e998c44c74a87fd3bac2b199656531fdf118ac13ebd919ef02eaa04a",
+    "docs/RESULTS.md": "856f42369adaca81b8613d2b49bfe43b84a898e311ff7c516b9fcf9109a88c4d",
+    "docs/STATUS.md": "4beb88c8004cd2bfb1580ce2165f340a0da9b04aede760b625ab8bdc44f71e76",
+    "docs/REVIEWING.md": "33849cd6b898ce0485b3a0947399e23e97dca23e5984b6f455f02dce45305db3",
+    "docs/DELIVERABLES.md": "04fcf6152b88595be4b92a1905ee94910b12110e031f576bf6ec169b9566d672",
+    "docs/SCRIPTS.md": "c01df86f6b5ecdeb5471cbabaf74895d869274bff9069bff9c2dd9a8337c46e0",
+    "docs/GRAPH_EXPORT.md": "0b929437d30667662e99777af341f365c476d7a22ac1ddc62ace3e51d2cbf646",
+    "CONTRIBUTING.md": "78a8b64a629bdf0935cda244d69824baaeba316c12a06d031cfd43cb13536ccc",
+    "AGENTS.md": "75a740f8fb7b95e42513d62019ee6ac0d6fd5c08a28db3e1179157fd228330b9",
+    "data/attempts.json": "c26bd981c2e7c2f75848dd5b950fedd1f75b1844b7294ad336f77afbf77922ca",
+    "docs/TRIED.md": "ee141b422dc8780653a3595b133328dbbcc3b4ef532ce105c7afdd1819cb3c21",
+    "docs/JOURNAL.md": "026ef7f69a69c90d6dd3dc9e70d7ba0a5f8bc577e4322c6ebf1f54cd545d75c5"
+   },
+   "inherited_scope": {
+    "reviewer": "Independent Codex coding agent: bounded MGPI source, software, render and arrival follow-up",
+    "date": "2026-10-30",
+    "prior_registered_output_count": 2,
+    "unchanged_registered_output_bindings": {
+     "examples/test-coverage/expected.json": "c3f9c317aec4b9b5dfe3f9cdf1461a08c376f0f15fcff0eb0a5a3c0b099215d4"
+    },
+    "scope": "This unchanged expected test-coverage output retains only the previous review scope and limits. Its hash was checked; unrelated runner/cache/setup acceptance was not repeated or expanded."
+   },
+   "scope": "Bounded review of the new explicit publication bindings and regenerated claims receipt, catalog regeneration ownership, canonical documentation navigation and accurate disclosure of audit-A functional limitations. Only the changed claims receipt is newly substantively reviewed; the other registered output is inherited unchanged.",
+   "findings": [],
+   "checks": [
+    "Compared all 42 original Claim metadata records and derive-expression ASTs with a private freeze from functional baseline e8277779f7a30f526740a58af9bdb5088555fa4d. Definitions, evidence files, stated values, precision, criteria, prose-only flags and derivations are identical; publication location is the explicit addition.",
+    "All 42 actual derived values/statuses/details match the frozen baseline: 41 file-backed matches, one prose-only first Bayer comparison, zero failures. Each claim now checks only its named docs/RESULTS.md publication; an unrelated page cannot satisfy a missing phrase.",
+    "Independently regenerated both claim receipts to private paths. Their exact raw bytes match public out/claims_check.md and out/claims_check.json. The public receipt identifies publication paths and the publication-claims-1 schema.",
+    "Executed all 14 claim tests and five catalog tests successfully. Mutated publication text, missing publication, unrelated-document phrase, changed numeric evidence and missing evidence controls retain refusal. Real catalog regeneration to a private output leaves README bytes unchanged.",
+    "Checked canonical navigation and compatibility headings, including ordinary local links in changed/new Markdown and historical ledger references. Documentation separates the short overview, input contracts, implementation status, scoped research results, generated references and history.",
+    "Checked all 196 registered example paths against the baseline: only out/claims_check.md changed. Data/features.json and the six saved benchmark reports are unchanged; all five recipe source files retain exact raw hashes. No score, threshold, model answer, key or benchmark identity was relabelled.",
+    "Repository catalog, script-index, ledger, deliverables, corpus freshness, six-report benchmark registry and pipeline status checks pass. The matrix was not wholly rerun and no new model extraction was executed by this review.",
+    "Functional audit A read the first ten catalog capabilities and ran 23 safe representative offline commands on public/fictional fixtures, plus disposable-copy graph probes. STATUS correctly distinguishes working utilities, manual and demo-bound paths, missing interoperability and confirmed open defects. These observations do not renew those feature reviews."
+   ],
+   "known_open_functional_findings": [
+    "N066 input/output source collisions remain unrepaired; audit A reproduced graph export overwriting a disposable input model.",
+    "N067 alternate extraction provenance loss remains unrepaired; seven genuine multi-appearance model items retain only the first locator in full graph export.",
+    "N068 vendor report-generator labor and interval-overlap wording remains unrepaired; the user guide now qualifies those interpretations."
+   ],
+   "limits": [
+    "Coding-agent review, not human engineering approval, company acceptance, source-author certification, installed-state evidence or measured usability/benefit.",
+    "No new full 61-script suite, commercial model trial, external source download, gateway/PI import, company connector, firewall or live plant operation was performed by this review.",
+    "Only the changed receipt/new checker-and-documentation scope and explicitly inherited matching output are covered. No renewal of all other 195 registered paths or resolution of functional defects is claimed.",
+    "README can be bound as a whole static support file because catalog generation no longer owns any part of it. Generated docs/FEATURES.md is deliberately omitted to avoid a review-row regeneration cycle."
+   ],
+   "private_proofs": {
+    "benchmarks.log": "cbf2ead43d339e89454c608f8d2f9d43ac39f3fd715571d74f0e0fe2eff8b5ef",
+    "catalog-tests.log": "cb16fc1c07bf36a85f1d149c8b4b8d99c0e4158a62f1b6d9eaef91996a34a6d4",
+    "catalog.log": "14111d1e0933adc0b030b1b8f27f733004d2405a4bf7441e7052448701a56ce0",
+    "claims-render.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "claims-tests.log": "e3d3fe2d28248a32af988130c415e52b012aa745ea7b45acc0b89c89dcc45f4c",
+    "claims_check.json": "78174276fb5b6fae54a4b1b8f548e408ff2fedbac9beaa69f3d29d0b3f88150f",
+    "claims_check.md": "5689240ef5c8e19cf2e07ff80e672e19975d732edeb8d8627afdfbdf404ae897",
+    "corpus.log": "ed166fc7e8f45d2ea73a65c37f21cabc8d700918bf0e0e9556eadc55150ea6d1",
+    "deliverables.log": "5d07e4128f247c0f33f3341d50d9c7020bf8ae3f108fc7d76e0a096f44613021",
+    "ledger.log": "6a9abf226164703ff6bc691d209527e852cf42350fb204ea0b5843462aa94a44",
+    "pipeline.log": "8f9f78caee94c24dc4d930b8e44c339105d4d278d88af01721ce689bbc35b900",
+    "script-index.log": "528ccc1d8b4b141a46ece2c9bd2647c01a16a27c4c673719587f5b9736a0508e"
+   }
   }
  ]
 }

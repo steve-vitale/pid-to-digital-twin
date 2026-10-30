@@ -5,6 +5,11 @@ a graph database or a change-management system can load without knowing this rep
 [`examples/graph-export/`](../examples/graph-export/) (the Tennessee Eastman model, the Bayer model and the extracted
 OPEN100 sheet 0).
 
+**Current preservation gaps:** for extracted items with several provenance appearances, the exporter uses the
+first appearance's locator; it does not retain the complete provenance list or report that loss. Keep the source
+model and original records alongside the graph. Also select an output file distinct from every input: the CLI
+currently permits replacing its input with the exported graph. See the [audited defects](STATUS.md#known-defects).
+
 ```sh
 python scripts/graph_export.py data/te_process_model.json --out te_graph.json
 python scripts/graph_export.py my-bundle/plant_model.json --reviews out/review --out my_graph.json

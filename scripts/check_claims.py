@@ -1,16 +1,16 @@
-"""Check that the headline numbers in README.md still match the committed result files.
+"""Check published research numbers against the committed result files.
 
 python scripts/check_claims.py            # table to stdout; writes out/claims_check.md and out/claims_check.json
 python scripts/check_claims.py --quiet    # print only the claims that fail
 python scripts/check_claims.py --no-write # do not write the out/ files
 
-Each claim is one number the README states. For each, this
-- confirms the README still contains the phrase that states it (so editing the README is noticed);
+Each claim names its publication (currently docs/RESULTS.md). For each, this
+- confirms that specific file still contains its phrase (an unrelated document cannot satisfy it);
 - derives the number again from committed files, from the raw per-run or per-item data where the file has it
   (the mean of the five replicates, the rows of a CSV counted by tier), otherwise from the summary field;
-- compares the two at the precision the README uses.
+- compares the two at the precision the publication uses.
 
-Statuses: ok (README and evidence agree), FAIL (they disagree, the README phrase is gone, or an evidence file is
+Statuses: ok (publication and evidence agree), FAIL (they disagree, the publication phrase is gone, or a named file is
 missing or unreadable), prose only (no committed result file holds the number; the claim rests on narrative in a
 document, which is named). Exit code 1 if any claim fails. "prose only" is not a failure, so a reader can see
 which claims rest on narrative.
@@ -27,7 +27,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-README = ROOT / "README.md"
+PUBLICATION = "docs/RESULTS.md"
 OUT_MD = ROOT / "out" / "claims_check.md"
 OUT_JSON = ROOT / "out" / "claims_check.json"
 
@@ -210,15 +210,16 @@ def prose_in_doc(rel, pattern):
 @dataclass
 class Claim:
     id: str
-    phrase: str             # the README claim, short
-    needles: list           # strings that must all appear in README (whitespace-normalised)
-    stated: object          # the value as the README writes it
+    phrase: str             # the published claim, short
+    needles: list           # strings that must all appear in its publication (whitespace-normalised)
+    stated: object          # the value as the publication writes it
     derive: object          # function () -> value from committed files
     files: list             # evidence files (shown in the table)
-    decimals: int = 0       # precision the README uses; the evidence is rounded to it before comparing
+    decimals: int = 0       # publication precision; the evidence is rounded to it before comparing
     prose: bool = False     # True: no result file holds the number; evidence is a document's prose
     te: bool = False        # Tennessee Eastman output that another process may be rebuilding
     note: str = field(default="")
+    publication: str = PUBLICATION
 
 
 CLAIMS = [
@@ -322,11 +323,15 @@ def show(value):
     return "-" if value is None else str(value)
 
 
-def check(claim, readme):
-    """Run one claim. readme is the normalised README text."""
-    result = {"id": claim.id, "phrase": claim.phrase, "readme_says": show(claim.stated),
+def check(claim, publication):
+    """Run one claim against only its named publication, already whitespace-normalised."""
+    result = {"id": claim.id, "phrase": claim.phrase, "published_says": show(claim.stated),
+              "publication": claim.publication,
               "evidence_says": "-", "files": ", ".join(claim.files), "te": claim.te, "note": claim.note}
-    missing = [n for n in claim.needles if normalise(n) not in readme]
+    if publication is None:
+        result.update(status="FAIL", detail=f"missing or unreadable publication: {claim.publication}")
+        return result
+    missing = [n for n in claim.needles if normalise(n) not in publication]
     try:
         value = claim.derive()
     except EvidenceError as error:
@@ -343,9 +348,9 @@ def check(claim, readme):
         shown = round(value, claim.decimals) if claim.decimals else int(round(value))
     result["evidence_says"] = show(shown)
     if missing:
-        result.update(status="FAIL", detail="README no longer contains: " + "; ".join(missing))
+        result.update(status="FAIL", detail=claim.publication + " no longer contains: " + "; ".join(missing))
     elif shown != claim.stated:
-        result.update(status="FAIL", detail=f"README says {show(claim.stated)}, evidence says {show(shown)}")
+        result.update(status="FAIL", detail=f"{claim.publication} says {show(claim.stated)}, evidence says {show(shown)}")
     elif claim.prose:
         result.update(status="prose only", detail="matches the document's prose; no result file holds it")
     else:
@@ -353,21 +358,27 @@ def check(claim, readme):
     return result
 
 
-def run(claims=None, readme_text=None):
-    """Check every claim. readme_text lets a test patch the README in memory."""
-    if readme_text is None:
-        readme_text = README.read_text(encoding="utf-8")
-    readme = normalise(readme_text)
-    return [check(c, readme) for c in (CLAIMS if claims is None else claims)]
+def run(claims=None, publications=None):
+    """Check named sources independently. Tests may supply a path-to-text map, never a merged corpus."""
+    selected = CLAIMS if claims is None else claims
+    if publications is None:
+        publications = {}
+        for path in {c.publication for c in selected}:
+            try:
+                publications[path] = (ROOT / path).read_text(encoding="utf-8")
+            except (OSError, UnicodeError):
+                publications[path] = None
+    return [check(c, normalise(publications[c.publication]) if publications.get(c.publication) is not None
+                  else None) for c in selected]
 
 
 def table(results, only_failures=False):
-    lines = ["| claim | README says | evidence says | file | ok |", "|---|---|---|---|---|"]
+    lines = ["| claim | publication | stated | evidence | evidence file | ok |", "|---|---|---|---|---|---|"]
     for r in results:
         if only_failures and r["status"] != "FAIL":
             continue
         mark = {"ok": "ok", "FAIL": "**FAIL**", "prose only": "prose only"}[r["status"]]
-        lines.append(f"| {r['phrase']} | {r['readme_says']} | {r['evidence_says']} | {r['files']} | {mark} |")
+        lines.append(f"| {r['phrase']} | {r['publication']} | {r['published_says']} | {r['evidence_says']} | {r['files']} | {mark} |")
     return "\n".join(lines)
 
 
@@ -392,14 +403,14 @@ def main(argv=None):
     summary = (f"{len(results) - len(failed) - len(prose)} ok, {len(prose)} prose only, {len(failed)} FAIL "
                f"of {len(results)} claims")
     if not args.no_write:
-        body = ["# README claims against committed evidence", "", "Generated by `scripts/check_claims.py`. "
-                "Each README number is derived again from the files named; \"prose only\" means no committed "
+        body = ["# Published claims against committed evidence", "", "Generated by `scripts/check_claims.py`. "
+                "Each registered claim names its publication and is derived again from the evidence files; \"prose only\" means no committed "
                 "result file holds it.", "", table(results), "", f"**{summary}**"]
         if details(results):
             body += ["", "Notes:", details(results)]
         OUT_MD.parent.mkdir(exist_ok=True)
         OUT_MD.write_text("\n".join(body) + "\n", encoding="utf-8")
-        OUT_JSON.write_text(json.dumps({"summary": summary, "claims": results}, indent=2) + "\n", encoding="utf-8")
+        OUT_JSON.write_text(json.dumps({"schema": "publication-claims-1", "summary": summary, "claims": results}, indent=2) + "\n", encoding="utf-8")
     if args.quiet:
         if failed:
             print(table(results, True))

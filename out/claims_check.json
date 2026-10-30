@@ -1,10 +1,12 @@
 {
+  "schema": "publication-claims-1",
   "summary": "41 ok, 1 prose only, 0 FAIL of 42 claims",
   "claims": [
     {
       "id": "M-workflows",
       "phrase": "eight selected workflows in the corpus matrix",
-      "readme_says": "8",
+      "published_says": "8",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "8",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -15,7 +17,8 @@
     {
       "id": "M-pass",
       "phrase": "64 corpus cells pass",
-      "readme_says": "64",
+      "published_says": "64",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "64",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -26,7 +29,8 @@
     {
       "id": "M-fail",
       "phrase": "23 corpus cells fail",
-      "readme_says": "23",
+      "published_says": "23",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "23",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -37,7 +41,8 @@
     {
       "id": "M-na",
       "phrase": "8 corpus cells are not applicable",
-      "readme_says": "8",
+      "published_says": "8",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "8",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -48,7 +53,8 @@
     {
       "id": "M-open100-pipe",
       "phrase": "OPEN100 validation pipe F1 0.912",
-      "readme_says": "0.912",
+      "published_says": "0.912",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "0.912",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -59,7 +65,8 @@
     {
       "id": "M-vendor-pipe",
       "phrase": "mixed vendor-render pool pipe F1 0.776",
-      "readme_says": "0.776",
+      "published_says": "0.776",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "0.776",
       "files": "out/generalization/matrix.json",
       "te": false,
@@ -70,7 +77,8 @@
     {
       "id": "A-symbols-f1",
       "phrase": "symbols F1 0.93 on held-out drawings, mean of five round-5 runs (GPT)",
-      "readme_says": "0.93",
+      "published_says": "0.93",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "0.93",
       "files": "out/replicates_r5_holdout-a.json",
       "te": false,
@@ -81,7 +89,8 @@
     {
       "id": "A-connections-f1",
       "phrase": "connections F1 0.87, mean of five round-5 runs (GPT)",
-      "readme_says": "0.87",
+      "published_says": "0.87",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "0.87",
       "files": "out/replicates_r5_holdout-a.json",
       "te": false,
@@ -92,7 +101,8 @@
     {
       "id": "A-gpt-load-r5",
       "phrase": "GPT review load 20.1 per 100, mean of five round-5 runs",
-      "readme_says": "20.1",
+      "published_says": "20.1",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "20.1",
       "files": "out/replicates_r5_holdout-a.json",
       "te": false,
@@ -103,7 +113,8 @@
     {
       "id": "A-claude-load-r5",
       "phrase": "Claude review load 29.8 per 100, mean of five round-5 runs",
-      "readme_says": "29.8",
+      "published_says": "29.8",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "29.8",
       "files": "out/replicates_r5_holdout-a.json",
       "te": false,
@@ -114,7 +125,8 @@
     {
       "id": "A-gpt-load-r2",
       "phrase": "earlier single round-2 run, GPT review load 17.8",
-      "readme_says": "17.8",
+      "published_says": "17.8",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "17.8",
       "files": "out/scorecard_r2-tiles-trace_holdout-a.json",
       "te": false,
@@ -125,7 +137,8 @@
     {
       "id": "Q-items",
       "phrase": "2,886 extracted OPEN100 items",
-      "readme_says": "2886",
+      "published_says": "2886",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "2886",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
@@ -136,7 +149,8 @@
     {
       "id": "Q-green",
       "phrase": "1,811 green items",
-      "readme_says": "1811",
+      "published_says": "1811",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1811",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
@@ -147,7 +161,8 @@
     {
       "id": "Q-amber",
       "phrase": "698 amber items",
-      "readme_says": "698",
+      "published_says": "698",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "698",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
@@ -158,7 +173,8 @@
     {
       "id": "Q-red",
       "phrase": "377 red items",
-      "readme_says": "377",
+      "published_says": "377",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "377",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
@@ -169,7 +185,8 @@
     {
       "id": "F-directed",
       "phrase": "flow direction on 361 process links",
-      "readme_says": "361",
+      "published_says": "361",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "361",
       "files": "out/open100_structural/flow_direction.json",
       "te": false,
@@ -180,7 +197,8 @@
     {
       "id": "F-process-links",
       "phrase": "of 1,133 process links",
-      "readme_says": "1133",
+      "published_says": "1133",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1133",
       "files": "out/open100_structural/flow_direction.json",
       "te": false,
@@ -191,7 +209,8 @@
     {
       "id": "F-sheet-links",
       "phrase": "38 sheet-to-sheet connections",
-      "readme_says": "38",
+      "published_says": "38",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "38",
       "files": "out/open100_structural/plant_structure.json",
       "te": false,
@@ -202,7 +221,8 @@
     {
       "id": "F-sheet-links-directed",
       "phrase": "36 of them with a direction",
-      "readme_says": "36",
+      "published_says": "36",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "36",
       "files": "out/open100_structural/plant_structure.json",
       "te": false,
@@ -213,7 +233,8 @@
     {
       "id": "D-gpt-tags",
       "phrase": "DEXPI tags read exactly: GPT 29 of 33",
-      "readme_says": "29",
+      "published_says": "29",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "29",
       "files": "out/replicates_r5_dexpi.json",
       "te": false,
@@ -224,7 +245,8 @@
     {
       "id": "D-claude-tags",
       "phrase": "DEXPI tags read exactly: Claude 28 of 33",
-      "readme_says": "28",
+      "published_says": "28",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "28",
       "files": "out/replicates_r5_dexpi.json",
       "te": false,
@@ -235,7 +257,8 @@
     {
       "id": "X-detected",
       "phrase": "17 of 21 faults flagged",
-      "readme_says": "17",
+      "published_says": "17",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "17",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -246,7 +269,8 @@
     {
       "id": "X-of",
       "phrase": "of all 21 published faults",
-      "readme_says": "21",
+      "published_says": "21",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "21",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -257,7 +281,8 @@
     {
       "id": "X-false-alarms",
       "phrase": "0 false alarms",
-      "readme_says": "0",
+      "published_says": "0",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "0",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -268,7 +293,8 @@
     {
       "id": "X-hours",
       "phrase": "in 193 h of normal running",
-      "readme_says": "193",
+      "published_says": "193",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "193",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -279,7 +305,8 @@
     {
       "id": "X-misses",
       "phrase": "misses faults 3, 9, 15 and 19",
-      "readme_says": "3, 9, 15, 19",
+      "published_says": "3, 9, 15, 19",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "3, 9, 15, 19",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -290,7 +317,8 @@
     {
       "id": "X-median",
       "phrase": "median 48 min after onset",
-      "readme_says": "48",
+      "published_says": "48",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "48",
       "files": "out/fault_detection/fault_detection.json",
       "te": false,
@@ -301,7 +329,8 @@
     {
       "id": "T-source-confirmed",
       "phrase": "TE source check: 36 confirmed",
-      "readme_says": "36",
+      "published_says": "36",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "36",
       "files": "out/te_source_check.md",
       "te": true,
@@ -312,7 +341,8 @@
     {
       "id": "T-source-corrected",
       "phrase": "TE source check: 1 corrected",
-      "readme_says": "1",
+      "published_says": "1",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1",
       "files": "out/te_source_check.md",
       "te": true,
@@ -323,7 +353,8 @@
     {
       "id": "T-topology-confirmed",
       "phrase": "TE topology: 51 confirmed",
-      "readme_says": "51",
+      "published_says": "51",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "51",
       "files": "out/te_topology_check.md",
       "te": true,
@@ -334,7 +365,8 @@
     {
       "id": "T-topology-corrected",
       "phrase": "TE topology: 4 corrected",
-      "readme_says": "4",
+      "published_says": "4",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "4",
       "files": "out/te_topology_check.md",
       "te": true,
@@ -345,7 +377,8 @@
     {
       "id": "T-topology-unresolvable",
       "phrase": "TE topology: 1 unresolvable",
-      "readme_says": "1",
+      "published_says": "1",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1",
       "files": "out/te_topology_check.md",
       "te": true,
@@ -356,7 +389,8 @@
     {
       "id": "B-fig10-first",
       "phrase": "Figure 10 comparison: 10 of 21 agreed at first",
-      "readme_says": "10",
+      "published_says": "10",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "10",
       "files": "docs/BAYER_RT.md",
       "te": false,
@@ -367,7 +401,8 @@
     {
       "id": "B-fig10-corrected",
       "phrase": "Figure 10 comparison: 20 of 21 corrected",
-      "readme_says": "20",
+      "published_says": "20",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "20",
       "files": "out/bayer_rt/fig10_compare.json",
       "te": false,
@@ -378,7 +413,8 @@
     {
       "id": "B-fig10-total",
       "phrase": "Figure 10 comparison: of 21 checks",
-      "readme_says": "21",
+      "published_says": "21",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "21",
       "files": "out/bayer_rt/fig10_compare.json",
       "te": false,
@@ -389,7 +425,8 @@
     {
       "id": "B-fig11-agree",
       "phrase": "Figure 11: 8 of 11 checks agree",
-      "readme_says": "8",
+      "published_says": "8",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "8",
       "files": "out/bayer_rt/fig11_check.json",
       "te": false,
@@ -400,7 +437,8 @@
     {
       "id": "B-fig11-total",
       "phrase": "Figure 11: of 11 checks",
-      "readme_says": "11",
+      "published_says": "11",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "11",
       "files": "out/bayer_rt/fig11_check.json",
       "te": false,
@@ -411,7 +449,8 @@
     {
       "id": "B-walk-agree",
       "phrase": "walkthrough: 13 of 16 checks agree",
-      "readme_says": "13",
+      "published_says": "13",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "13",
       "files": "out/bayer_rt/walkthrough.json",
       "te": false,
@@ -422,7 +461,8 @@
     {
       "id": "B-walk-total",
       "phrase": "walkthrough: of 16 checks",
-      "readme_says": "16",
+      "published_says": "16",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "16",
       "files": "out/bayer_rt/walkthrough.json",
       "te": false,
@@ -433,7 +473,8 @@
     {
       "id": "R-revC-gpt",
       "phrase": "revision C clean read-back review load 1.26 (GPT)",
-      "readme_says": "1.26",
+      "published_says": "1.26",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1.26",
       "files": "out/te_pid/roundtrip_scores_revC.json",
       "te": true,
@@ -444,7 +485,8 @@
     {
       "id": "R-revC-claude",
       "phrase": "revision C clean read-back review load 1.38 (Claude)",
-      "readme_says": "1.38",
+      "published_says": "1.38",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "1.38",
       "files": "out/te_pid/roundtrip_scores_revC.json",
       "te": true,
@@ -455,7 +497,8 @@
     {
       "id": "L-loops",
       "phrase": "19 control loops running in the simulator code",
-      "readme_says": "19",
+      "published_says": "19",
+      "publication": "docs/RESULTS.md",
       "evidence_says": "19",
       "files": "data/te_control_loops.json",
       "te": true,

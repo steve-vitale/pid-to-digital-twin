@@ -1,4 +1,7 @@
-# Replicate the approach at your plant
+# Reproduce the demonstrations, then evaluate a site pilot
+
+This is the advanced public-data reproduction and adaptation guide. For a first document question, use the
+[first-question brief](../examples/first-pilot/README.md); for site planning, use [AT_YOUR_PLANT.md](AT_YOUR_PLANT.md).
 
 Start with public data on a separate learning copy. Then decide whether a small, reviewed pilot on your own drawings is worthwhile. You can follow the learning path yourself; help from the repository author is optional. A site pilot still needs qualified plant engineering and operations reviewers. Neither path establishes a production-ready twin.
 
@@ -11,14 +14,14 @@ Start with public data on a separate learning copy. Then decide whether a small,
 **Version matters.** Use the guide and scripts from the same checkout and record its commit (`git rev-parse HEAD`).
 Parts of the guide began as development snapshots later published as one sanitized commit, so the short commit
 IDs in journal entries 30–32 are not in this repository's history. Historical screenshots, gateway receipts and
-the Docker backup do not validate current exports. A 2026-10-13 candidate passed native Ignition acceptance in a
-disposable lab gateway, including data-source loss and a 390 px `/m` overview (the control-room screens stay
-1600 px); those receipts apply to that candidate. See the [native acceptance page](IGNITION_ACCEPTANCE.md).
+the Docker backup do not validate current exports. Native lab receipts apply to their exact candidate and
+environment. See the [acceptance record](IGNITION_ACCEPTANCE.md) for the dated revisions, including the latest
+recorded candidate; the advanced commands here do not repeat native acceptance.
 PI import has **not** been run.
 
 ## 2. Learn without customer drawings or a gateway
 
-The README specifies Python 3.10+; verify the chosen Python and pinned dependencies together rather than assuming every version is tested. Use a disposable checkout. Commands below run from its root; shell examples use bash. Keep `PID2GRAPH_SET` unset for the OPEN100 examples. Dependencies are pinned in [requirements.txt](../requirements.txt); installing them requires package access. Use an approved environment and install process. No model account is needed for this first stage.
+The software examples require Python 3.10+; verify the chosen Python and pinned dependencies together rather than assuming every version is tested. Use a disposable checkout. Commands below run from its root; shell examples use bash. Keep `PID2GRAPH_SET` unset for the OPEN100 examples. Dependencies are pinned in [requirements.txt](../requirements.txt); installing them requires package access. Use an approved environment and install process. No model account is needed for this first stage.
 
 ### A. Manual seed model → generated files
 
@@ -212,7 +215,7 @@ receipts remain historical even where output bytes are unchanged.
 
 `--require-native` always returns nonzero: invalid/missing inputs return 2; a valid offline-only package returns 3
 with native acceptance **NOT RUN**. The 2026-10-13 native run used the separate harness in
-`scripts/ignition/acceptance/` and is recorded in its own receipt. Future `--observations` input must be a
+`scripts/ignition/acceptance/` and is recorded in its own receipt. When supplying `--observations`, use a
 root-relative local JSON file matching the exact candidate identity; synthetic fixtures and supplied native-capture
 claims remain clearly separated. Offline sample checks cover expected paths and quality: only the 52 recorded TE
 and 24 mapped OPEN100 paths require Good finite values and advancing/fresh source timestamps. SC-212 must remain
@@ -241,3 +244,17 @@ For a self-guided pilot, nominate the owners above, follow the public learning p
 If engineering assistance is useful, a bounded scope could cover input readiness, one site adapter, sample labeling/evaluation, review facilitation, a target-system draft export, and an acceptance handoff. Agree responsibilities, data access, deliverables and exclusions before sharing material. This describes possible work, not a promise of availability, services, pricing or production approval.
 
 Code is MIT; PID2Graph/OPEN100-derived data and outputs have separate CC BY-SA obligations; TE sources/data have their own terms. Read [NOTICE.md](../NOTICE.md) and [LICENSE](../LICENSE), preserve attribution, and check rights before redistributing derived packages. Repository licensing does not grant rights to customer drawings, proprietary symbols or vendor software. Model subscriptions, API charges and platform licenses are separate costs; see [Costs](COSTS.md).
+
+## Environment variables
+
+| Variable | Used by | What |
+|---|---|---|
+| `GEMINI_API_KEY` or `GEMINI_KEY_ENV_FILE` | `run_extraction.py --tool gemini` | The key, or a path to a private `.env` file holding it |
+| `PID2GRAPH_SET` | extraction, scoring, twin scripts | `Dataset PID` selects the holdout-B set; the default is OPEN100 |
+| `PID_SHEETS_DIR` (or `PID_DATA_DIR`, the same setting) | extraction, tracer, scoring, twin scripts | Any folder of `<sheet>.png` + `<sheet>.graphml`, absolute or relative to the repo (e.g. `data/te_pid`, or `data/external/dexpi/sheets` from `adapt_dexpi.py`); overrides `PID2GRAPH_SET` |
+| `IGNITION_ENV_FILE` | `scripts/ignition/*` | A private file of the variables below, as `KEY=VALUE` lines |
+| `IGNITION_URL`, `IGNITION_API_TOKEN`, `IGNITION_CA_FILE` | `scripts/ignition/gw.py` | Gateway HTTPS address, API key, and the CA that signed the gateway's certificate |
+| `IGNITION_BACKUP_DIR`, `IGNITION_SECRETS_DIR` | `build_gateway.py`, `verify_gateway.py`, `ua_client.py` | Private folders for gateway backups, the OPC UA client certificate and the verifier's OPC UA login |
+| `IGNITION_UA_URL` | `ua_client.py` | The gateway's OPC UA server (default `opc.tcp://localhost:62541`) |
+
+Keep every one of these outside the repo.

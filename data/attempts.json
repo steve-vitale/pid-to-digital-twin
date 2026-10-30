@@ -40,7 +40,7 @@
       "date": "2026-10-07",
       "change": "Ran the identical first prompt a second time on the same 12 drawings to measure run-to-run noise.",
       "hypothesis": null,
-      "evidence": "Codex 0.87 -> 0.87, Claude 0.85 -> 0.85, Gemini 0.44 -> 0.57; Claude and Codex move about Â±0.03 between runs, first-try Gemini Â±0.13.",
+      "evidence": "Codex 0.87 -> 0.87, Claude 0.85 -> 0.85, Gemini 0.44 -> 0.57; Claude and Codex move about \u00c2\u00b10.03 between runs, first-try Gemini \u00c2\u00b10.13.",
       "runs": "2 (first try + repeat)",
       "verdict": "kept",
       "why": "Measuring noise before claiming a difference became a standing rule, and the Gemini swing exposed its format problem.",
@@ -562,7 +562,7 @@
       "id": "A038",
       "function": "line_tracing",
       "date": "2026-10-13",
-      "change": "Read drawing numbers written with en dashes (\"PID 110â€“1\") as numbers for off-page connector pairing.",
+      "change": "Read drawing numbers written with en dashes (\"PID 110\u00e2\u20ac\u201c1\") as numbers for off-page connector pairing.",
       "hypothesis": null,
       "evidence": "31 more connectors found their sheet: 38 sheet-to-sheet connections instead of 7.",
       "runs": "1",
@@ -1492,7 +1492,7 @@
       "date": "2026-10-13",
       "change": "Band indicator stretched to the shutdown limit.",
       "hypothesis": null,
-      "evidence": "TI-109's normal band (120.28â€“120.52 Â°C) took 0.4% of the width.",
+      "evidence": "TI-109's normal band (120.28\u00e2\u20ac\u201c120.52 \u00c2\u00b0C) took 0.4% of the width.",
       "runs": "1",
       "verdict": "rejected",
       "why": "An alarm limit is drawn only within 10 band half-widths; a Claude-only display choice for operations to confirm.",
@@ -1577,7 +1577,7 @@
       "date": "2026-10-13",
       "change": "PI Builder sheet v1 (`AttributeValueType` column, `degC`).",
       "hypothesis": null,
-      "evidence": "Vendor-published material documents `AttributeType` and writes `Â°C`; four units have no vendor evidence; six element templates were named but never defined.",
+      "evidence": "Vendor-published material documents `AttributeType` and writes `\u00c2\u00b0C`; four units have no vendor evidence; six element templates were named but never defined.",
       "runs": "1 (offline check)",
       "verdict": "superseded",
       "why": "Sheet schema v2 fixes the exporter; still not import-tested.",
@@ -1591,7 +1591,7 @@
       "date": "2026-10-28",
       "change": "Digitize the report's Figure 11 trend, calibrated only on its ticks and gridlines, checked against 11 values stated in the text.",
       "hypothesis": null,
-      "evidence": "6 of 11 checks passed first; two failures were own bugs (anti-aliased edge, wrong time window), three are real figure-vs-text disagreements (pressure about 25 vs 22 psig; temperature about 2 Â°C below near the end).",
+      "evidence": "6 of 11 checks passed first; two failures were own bugs (anti-aliased edge, wrong time window), three are real figure-vs-text disagreements (pressure about 25 vs 22 psig; temperature about 2 \u00c2\u00b0C below near the end).",
       "runs": "1",
       "verdict": "kept",
       "why": "Text values test the digitizer instead of tuning it.",
@@ -3377,7 +3377,7 @@
       "date": "2026-10-30",
       "change": "Separate description interpretation, authored drafting, routing-key checks, committed-image geometry and platform-export evidence.",
       "hypothesis": "Engineers should be able to tell what the current generator and matrix prove before treating a worked example as reliable prose-to-P&ID conversion.",
-      "evidence": "The description guide adds a stage-by-stage evidence table. EVALUATION§8 records the unperformed end-to-end experiment and prospective source/interpretation/layout/render/control/effort requirements. Bayer20/21correctedmodel and15/15routingkey results remain development evidence; committed-image tracing with known boxes is a separate regression. Row5 runs generate.pyplatformexports; rows4/8checkloops/tracing on existingdrawings.",
+      "evidence": "The description guide adds a stage-by-stage evidence table. EVALUATION\u00a78 records the unperformed end-to-end experiment and prospective source/interpretation/layout/render/control/effort requirements. Bayer20/21correctedmodel and15/15routingkey results remain development evidence; committed-image tracing with known boxes is a separate regression. Row5 runs generate.pyplatformexports; rows4/8checkloops/tracing on existingdrawings.",
       "runs": "Documentation/source-contract review only. Independent reader verifies2documents,26existingtestmethods byscope(18generator/Bayer,5scorer,3diff),savedresultsand23supportbindings; all112registeredoutputsunchanged. No new test/cell/model execution, prospective score, independent source inventory, timed engineer trial or renewed whole-feature review.",
       "verdict": "kept",
       "why": "Makes a consequential coverage gap visible and specifies what stronger evidence would require without changing historical criteria, drawings or results.",
@@ -3514,6 +3514,23 @@
         "docs/JOURNAL.md#103-let-a-new-corpus-case-expose-an-exporter-assumption",
         "scripts/test_generate_any_model.py",
         "scripts/test_description_workflow.py"
+      ]
+    },
+    {
+      "id": "A237",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Audit toolkit delivery state and reorganize documentation around a small first task, canonical contracts, current gaps and separate research evidence.",
+      "hypothesis": "A readable front door and explicit page ownership can expose partial integration without hiding working utilities or weakening the published evidence.",
+      "evidence": "Two independent coding agents inspected all 20 catalog features and exercised representative offline chains. Disposable-copy probes exposed three input/output overwrite cases and missing alternate graph provenance. Those defects remain open in STATUS. README falls from 11264 words to about 700; task, format, status and research pages have separate jobs. All 42 original claim definitions/derivations and actual results remain identical under explicit publication bindings. Frozen recipes and all six benchmark reports remain unchanged. Catalog generation no longer writes README.",
+      "runs": "Offline source/function audit, source-copy defect reproductions, publication and generator controls, independent reader retest. No new model trial, live company/plant action, human usability study or operational benefit.",
+      "verdict": "kept",
+      "why": "Replaces append-only navigation with a bounded journey and makes working code, manual dependencies, demo-only outputs, external responsibilities and actual defects distinguishable.",
+      "source": [
+        "docs/JOURNAL.md#104-audit-the-whole-toolkit-before-adding-more",
+        "docs/STATUS.md",
+        "docs/WORKFLOWS.md",
+        "docs/RESULTS.md"
       ]
     }
   ],
@@ -4193,6 +4210,39 @@
       "source": [
         "examples/from-description/mgpi/README.md",
         "docs/JOURNAL.md#102-separate-a-source-clarification-from-a-model-improvement"
+      ]
+    },
+    {
+      "id": "N066",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Refuse output paths that alias any input before graph export, impact estimation or CSV-band generation writes a file.",
+      "why_not_yet": "The state audit reproduced three successful source overwrites on disposable copies: graph model as its own --out; impact input named impact.json in the output folder; CSV input occupying csv_normal_bands.json. This audit discloses the defects without claiming a repair. Future controls must preserve original bytes and cover exact/resolved/file-identity aliases and all input sources.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "docs/JOURNAL.md#104-audit-the-whole-toolkit-before-adding-more"
+      ]
+    },
+    {
+      "id": "N067",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Preserve every extracted-model provenance appearance in graph export, or report each unsupported source locator as a declared loss.",
+      "why_not_yet": "The state audit found seven actual OPEN100 items with several source appearances. source_of selects the first and claims omits the provenance list; later locators disappear without a not_exported count. The original model must remain alongside the graph. A multi-source regression and reviewed export change are still required.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "docs/GRAPH_EXPORT.md"
+      ]
+    },
+    {
+      "id": "N068",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "Repair the vendor-report generator language that treats counted differences as manual work and overlapping run ranges as a tie, while retaining metric definitions and historical evidence.",
+      "why_not_yet": "The user guide now qualifies review load as counted differences with no measured labor saving. The generated report and its template still contain the old interpretations. Their separately checked wording repair should preserve all numerical results and make any changed code/cohort identities explicit.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "examples/vendor-evaluation/README.md"
       ]
     }
   ]

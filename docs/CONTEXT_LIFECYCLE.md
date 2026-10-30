@@ -71,23 +71,10 @@ snapshot still contains open engineering questions.
 
 ## Use explicit projections for the existing tools
 
-The tools do not all read the same format. The hub-to-tool adapter must produce the actual supported input and
-report anything it cannot represent. Retain the full source snapshot alongside that projection. Do not hide
-unsupported relationships or review states inside a flat asset list and call the result a complete transfer.
-
-| Tool or route | Current input | Output and integration boundary |
-|---|---|---|
-| `description_workflow.py` | UTF-8 text for `prepare`; an engineer/approved assistant's model+layout+quotation JSON for `check` and `build` | Numbered source packet, answer contract and validation feedback, then detailed draft sheets, questions, graph and staging in one review bundle. Interpretation/layout remain authored; no model API, automatic detailed layout or tested Copilot tenant. See the [connected example](../examples/from-description/README.md#try-the-connected-route-offline). |
-| `draw_pid_from_model.py` | Process-model fields plus an authored drafting-layout JSON | Detailed draft PNG/SVG P&ID sheets and a key. No automatic detailed layout or general graph/extracted-twin conversion into this drawing contract. |
-| `generate.py` | This repository's process-model JSON or extracted-twin JSON | Platform staging and the outputs supported by that model kind. A `twin-graph-1` file is not a direct generator input. Signal mapping and native acceptance remain separate steps. |
-| `question_engine.py` | Process-model or extracted-twin JSON; optional loop list and equipment schedules | Questions, asset references and collection requests. Findings propose investigations; they do not mutate the model or establish savings. |
-| `graph_export.py` | Process-model or extracted-twin JSON, with optional questions/review records | `twin-graph-1`, including the source/status information represented by the input. It is an export, with no general graph-to-process-model inverse. |
-| `apply_review.py`, then `generate.py` | A supported working model and its engineer-filled `OPS_` review sheet | The existing [local model-correction route](REVIEW_LOOP.md): preview with `--dry-run`, apply whitelisted corrections with old values and review history, then regenerate. Apply updates that working model in place; valid rows may persist when other rows refuse. Preserve the base and inspect its diff/change record. A hub integration must stage the resulting changes under its authority rather than treating local CSV entries as organizational acceptance. |
-| `statements.py` | `twin-graph-1`, with supplied source images/report and optional machine-check model | Statements, samples and review material. Applied reviews change statuses and add review events; they do not change engineering values or authenticate the reviewer. See the current [binding and application rules](STATEMENT_REVIEW.md). |
-| `context_register.py` | Process model or graph, questions and a manifest of actual local source documents | `context-register-1` and enriched graph/questions. Treat local answers and ownership history as a review packet when transferring into an organizational authority. It does not update the original process model. |
-| Historian CSV tools | Recorded data in the documented CSV shape | Analysis and replay of the supplied history. Joining channels to canonical plant assets is a separate mapping task; an unusual trend is not a validated diagnosis. |
-| `estimate_impact.py` | A strict JSON specification containing measurements and site constants, or explicitly requested public defaults | A first-draft calculation with assumptions and source notes. The model alone does not supply the measurements; generator provenance belongs in a sidecar rather than unrecognized calculation fields. |
-| `pipeline.py` | The repository's declared stages, inputs, code and configuration | Freshness and rebuilds for its configured research demonstrations. An organization's own recipes and service orchestration need an explicit implementation; the existing stage list is not a universal plant integration. |
+Use the [supported workflows and format contracts](WORKFLOWS.md#tool-input-and-output-contracts) for the
+exact inputs each existing tool accepts. That page is the implementation map; this page describes the intended
+company responsibility and return path. An adapter must report information it cannot represent and retain the
+full source snapshot alongside any projection.
 
 In particular, a receiving asset registry's import format may retain only a subset of the graph. Identity,
 relationship layers, per-claim evidence, unresolved questions and decision history need declared mappings and

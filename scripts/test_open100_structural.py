@@ -261,9 +261,9 @@ def matrix():
           m and int(m.group(1)) == len(sdoc["area_links"])
           and int(m.group(2)) == sum(e["direction"] in ("a_to_b", "b_to_a") for e in sdoc["area_links"]), note)
     plant = (ROOT / "docs" / "AT_YOUR_PLANT.md").read_text(encoding="utf-8")
-    check("AT_YOUR_PLANT says what drawings without historian access still give",
-          "What you can do with only drawings, only process knowledge, or both" in plant
-          and all(w in plant for w in ("asset", "mimic", "tour", "isolation")))
+    check("plant guide routes to canonical workflows and distinguishes demo-only outputs",
+          "](WORKFLOWS.md)" in plant and "](DELIVERABLES.md)" in plant
+          and all(w in plant.lower() for w in ("mimic", "tour", "isolation", "not generic")))
 
 
 def main():

@@ -79,8 +79,10 @@ That gives review load 7.4, symbol F1 0.970, connection F1 0.960, beside a perfe
 | Every box moved half a sheet | 136.2 | 0.006 | 0.000 | 0.000 |
 | Empty answer | 100.0 | 0.000 | 0.000 | 0.000 |
 
-- The method removes about four fifths of the hand work on these sheets, and the controls show the scorer would
-  have caught a wrong answer: neither wrong answer earned more than 0.006 symbol F1 overall.
+- The method leaves 20.1 counted differences per 100 key items on these sheets. No reviewer time was measured;
+  this is not a labor-saving estimate. The controls reject the planted wrong answers: neither earned more than
+  0.006 symbol F1 overall. The historical generated report's labor and overlapping-range wording has a
+  [known interpretation defect](../../docs/STATUS.md#known-defects), retained for correction in its generator.
 - **Sheet 6 is the bad sheet the average hides.** Its review load is 38.7 (34.4-44.8 over the runs), about twice
   any other sheet's, and its connection F1 is 0.685 against 0.87-0.92 elsewhere. It is also the only sheet where
   the wrong answers earn any credit (symbol F1 0.011 with every class wrong, 0.033 with every box moved). For the

@@ -1,34 +1,35 @@
-"""Controls for scripts/check_claims.py: the committed tree agrees with the README, a wrong README is caught, and a
-missing evidence file fails loudly. Reads only committed files; the README is patched in memory, never on disk."""
+"""Controls for scripts/check_claims.py: the committed tree agrees with the named publication, a changed publication is caught, and a
+missing evidence file fails loudly. Reads only committed files; the publication is patched in memory, never on disk."""
 import contextlib
 import copy
 import dataclasses
 import io
+import tempfile
 import unittest
 from unittest.mock import patch
 
 import check_claims as cc
 
 
-def readme():
-    return cc.README.read_text(encoding="utf-8")
+def publication():
+    return {cc.PUBLICATION: (cc.ROOT / cc.PUBLICATION).read_text(encoding="utf-8")}
 
 
 class CommittedTree(unittest.TestCase):
     def test_every_non_te_claim_passes(self):
-        bad = [r for r in cc.run(readme_text=readme()) if not r["te"] and r["status"] == "FAIL"]
+        bad = [r for r in cc.run(publications=publication()) if not r["te"] and r["status"] == "FAIL"]
         self.assertEqual(bad, [], [(r["id"], r["detail"]) for r in bad])
 
     def test_te_claims_run_and_say_why_when_they_fail(self):
         # TE outputs can be mid-rebuild, so a disagreement is reported here rather than failing the suite.
-        for r in cc.run(readme_text=readme()):
+        for r in cc.run(publications=publication()):
             if r["te"]:
                 self.assertIn(r["status"], ("ok", "FAIL"))
                 if r["status"] == "FAIL":
                     print(f"NOTE TE claim {r['id']}: {r['detail']}")
 
     def test_only_the_figure_10_first_run_is_prose_only(self):
-        prose = [r["id"] for r in cc.run(readme_text=readme()) if r["status"] == "prose only"]
+        prose = [r["id"] for r in cc.run(publications=publication()) if r["status"] == "prose only"]
         self.assertEqual(prose, ["B-fig10-first"])
 
     def test_claim_ids_are_unique(self):
@@ -37,6 +38,23 @@ class CommittedTree(unittest.TestCase):
 
 
 class Drift(unittest.TestCase):
+    def test_only_the_named_publication_can_satisfy_a_claim(self):
+        claim = dataclasses.replace(cc.CLAIMS[0], needles=["a supported claim"], stated=1,
+                                    derive=lambda: 1, publication="primary.md")
+        with tempfile.TemporaryDirectory() as folder, patch.object(cc, "ROOT", cc.Path(folder)):
+            primary = cc.ROOT / "primary.md"
+            primary.write_text("claim removed", encoding="utf-8")
+            (cc.ROOT / "unrelated.md").write_text("a supported claim", encoding="utf-8")
+            result = cc.run([claim])[0]
+            self.assertEqual(result["status"], "FAIL")
+            self.assertEqual(result["publication"], "primary.md")
+            primary.write_text("a supported claim", encoding="utf-8")
+            self.assertEqual(cc.run([claim])[0]["status"], "ok")
+            primary.unlink()
+            result = cc.run([claim])[0]
+            self.assertEqual(result["status"], "FAIL")
+            self.assertIn("missing or unreadable publication: primary.md", result["detail"])
+
     def test_matrix_counts_and_pipe_claims_reject_changed_results(self):
         original = cc.matrix_cells()
         changed = copy.deepcopy(original)
@@ -46,31 +64,32 @@ class Drift(unittest.TestCase):
         # Leave the stored summary unchanged: the claim must use per-sheet counts.
         cell["detail"]["sheets"]["6"]["tp"] = 0
         with patch.object(cc, "matrix_cells", return_value=changed):
-            results = {r["id"]: r for r in cc.run(readme_text=readme())}
+            results = {r["id"]: r for r in cc.run(publications=publication())}
         for name in ("M-pass", "M-fail", "M-open100-pipe"):
             self.assertEqual(results[name]["status"], "FAIL", name)
         for name in ("M-workflows", "M-na", "M-vendor-pipe"):
             self.assertEqual(results[name]["status"], "ok", name)
 
-    def test_edited_readme_number_is_noticed(self):
-        patched = readme().replace("**20.1**", "**21.4**")
-        self.assertNotEqual(patched, readme())
-        results = {r["id"]: r for r in cc.run(readme_text=patched)}
+    def test_edited_publication_number_is_noticed(self):
+        patched = publication()
+        patched[cc.PUBLICATION] = patched[cc.PUBLICATION].replace("**20.1**", "**21.4**")
+        self.assertNotEqual(patched, publication())
+        results = {r["id"]: r for r in cc.run(publications=patched)}
         self.assertEqual(results["A-gpt-load-r5"]["status"], "FAIL")
-        self.assertIn("README no longer contains", results["A-gpt-load-r5"]["detail"])
+        self.assertIn(cc.PUBLICATION + " no longer contains", results["A-gpt-load-r5"]["detail"])
         self.assertEqual(results["A-claude-load-r5"]["status"], "ok")
 
     def test_wrong_stated_value_is_caught_even_if_phrase_present(self):
         claim = next(c for c in cc.CLAIMS if c.id == "Q-red")
-        result = cc.run([dataclasses.replace(claim, stated=378)], readme())[0]
+        result = cc.run([dataclasses.replace(claim, stated=378)], publication())[0]
         self.assertEqual(result["status"], "FAIL")
-        self.assertIn("README says 378, evidence says 377", result["detail"])
+        self.assertIn(cc.PUBLICATION + " says 378, evidence says 377", result["detail"])
 
-    def test_rounding_is_at_readme_precision(self):
+    def test_rounding_is_at_publication_precision(self):
         claim = next(c for c in cc.CLAIMS if c.id == "A-gpt-load-r5")
-        self.assertEqual(cc.run([dataclasses.replace(claim, stated=20.0)], readme())[0]["status"], "FAIL")
-        close = dataclasses.replace(claim, derive=lambda: 20.0615)    # rounds to the README's 20.1
-        self.assertEqual(cc.run([close], readme())[0]["status"], "ok")
+        self.assertEqual(cc.run([dataclasses.replace(claim, stated=20.0)], publication())[0]["status"], "FAIL")
+        close = dataclasses.replace(claim, derive=lambda: 20.0615)    # rounds to the publication's 20.1
+        self.assertEqual(cc.run([close], publication())[0]["status"], "ok")
 
     def test_exit_status_is_one_on_a_failure(self):
         original = cc.CLAIMS
@@ -88,21 +107,21 @@ class MissingEvidence(unittest.TestCase):
     def test_missing_file_fails_and_names_the_file(self):
         claim = next(c for c in cc.CLAIMS if c.id == "Q-red")
         gone = dataclasses.replace(claim, derive=lambda: cc.load_json("out/no_such_result.json"))
-        result = cc.run([gone], readme())[0]
+        result = cc.run([gone], publication())[0]
         self.assertEqual(result["status"], "FAIL")
         self.assertIn("out/no_such_result.json", result["detail"])
 
     def test_missing_field_fails_loudly(self):
         claim = next(c for c in cc.CLAIMS if c.id == "X-median")
         bad = dataclasses.replace(claim, derive=lambda: cc.at(cc.load_json(cc.FAULTS), ["no_such_field"], cc.FAULTS))
-        result = cc.run([bad], readme())[0]
+        result = cc.run([bad], publication())[0]
         self.assertEqual(result["status"], "FAIL")
         self.assertIn("no field no_such_field", result["detail"])
 
     def test_missing_prose_sentence_is_not_a_pass(self):
         claim = next(c for c in cc.CLAIMS if c.id == "B-fig10-first")
         gone = dataclasses.replace(claim, derive=lambda: cc.prose_in_doc(cc.BAYER_DOC, r"no such sentence (\d+)"))
-        self.assertNotEqual(cc.run([gone], readme())[0]["status"], "ok")
+        self.assertNotEqual(cc.run([gone], publication())[0]["status"], "ok")
 
 
 class Counts(unittest.TestCase):
