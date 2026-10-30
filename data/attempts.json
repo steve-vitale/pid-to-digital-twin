@@ -3235,6 +3235,22 @@
         "examples/from-description/README.md#use-the-model-for-one-engineering-question",
         "examples/first-pilot/README.md#after-the-first-packet"
       ]
+    },
+    {
+      "id": "A220",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Connect both CAD entry guides to existing question screening, a plain source brief and company handoff, with explicit conversion and eligibility limits.",
+      "hypothesis": "An engineer starting from CAD should reach one useful records question without first importing into a platform, and should retain a manual route when a valid conversion cannot be screened.",
+      "evidence": "Actual offline C01 direct XML-to-model screen produces3findings(C2,C3,C9); converted-key intake bundle produces1(C9). These are different lossy representations, not competing accuracy scores. Public C03 reader succeeds with no units/instruments; question engine refuses exit2 before output. Direct guide separates reading/questions from optional exports, offers committed-C01 clean-clone screen, and explains recognized screening fields versus retained DEXPI attributes/design values. Both guides link exact finding/assets/requests to a plain brief and company home. Independent route/field-state and navigation review is scoped separately from historical source/feature audits.",
+      "runs": "Offline existing-tool route checks on public development examples; no model calls, new source family, held-out score, matrix cell or operational trial.",
+      "verdict": "kept",
+      "why": "Makes the CAD on-ramp coherent without adding a tool, schema, local governance or adapter. Keeps inferred identity, omitted semantics, unknown owner/acceptance and manual source clarification visible. N062/N063 remain unproven.",
+      "source": [
+        "docs/JOURNAL.md#87-take-cad-exports-to-a-first-question-with-their-limits",
+        "examples/from-dexpi-xml/README.md#from-the-model-to-one-question",
+        "examples/from-dexpi/README.md#from-the-bundle-to-one-useful-question"
+      ]
     }
   ],
   "not_tried": [

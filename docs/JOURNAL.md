@@ -4345,3 +4345,36 @@ home as the work grows. This change adds no governance application, adapter, doc
 round trip. It neither re-audits the historical report/model nor changes the catalog, tools, committed screens,
 matrix or accuracy claims. AI reader/CLI checks establish a runnable route, not human adoption or benefit;
 N062/N063 remain unproven.
+
+
+## 87. Take CAD exports to a first question, with their limits
+
+The preceding goal turn published the written-description bridge. This pass checks the two CAD entry routes
+against the same first-use purpose. Both guides previously ended at models, bundles and platform exports without
+showing the existing question-to-brief and company-handoff route. An independent engineering-reader pass confirms
+the omission; this is a guide repair, not a new software capability or observed human adoption result.
+
+Actual offline commands reach the question engine through both representations of public C01. The direct XML
+reader's model yields three questions (`C2@model`, `C3@model`, `C9@model`); the converted-key intake bundle yields
+one (`C9@model`). The reduced classes, undirected links and omitted controls/attributes differ, so these are not
+accuracy scores or evidence that more findings are better. Check each question against its model, conversion
+report and original source. Retained DEXPI attributes are not automatically normalized screening fields, and
+design values are not measured operating conditions. The source model, catalog and tools remain unchanged.
+
+Public C03 supplies the boundary case: the XML reader succeeds, keeping three streams, one manual valve and one
+unplaced item, but has no units or instruments. The question engine refuses that model before publishing output.
+The guide now names that limit and directs the engineer to a labelled manual source question in the same plain
+brief, rather than inventing equipment or treating conversion success as universal screening compatibility.
+
+The direct guide separates reading and questions from optional graph/platform outputs and offers a screen on the
+committed C01 model without downloading XML or running a renderer. Both guides carry exact finding/asset IDs,
+source revision/hash/locators, omissions and missing evidence into the existing brief and company handoff. Unknown
+ownership and acceptance stay visible; shared maintenance and decisions belong in the company home. No local
+register, native import or new connector is required for that first packet.
+
+Independent verification includes seven workflow CLIs with the expected C03 refusal; an earlier unsupported
+`--quiet` probe is retained separately as a usage error, not counted as a successful route. The root separately
+screens the committed C01 model. These checks do not repeat the historical primary-source, platform, portability
+or whole-feature audits. No matrix result, corpus input, generated screen or criterion is changed, and no source
+meaning, current plant truth, review-time saving or company round trip is newly established. N062/N063 remain
+unproven.

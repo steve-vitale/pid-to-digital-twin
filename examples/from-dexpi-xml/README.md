@@ -9,17 +9,16 @@ DEXPI P&ID XML file directly (standard library only, no model, no drawing needed
 the DEXPI 1.3 examples and on DEXPI 1.2 and 1.3 TrainingTestCases files, see [Other tools' exports](#other-tools-exports))
 and writes the same kind of
 process model that [`examples/from-description`](../from-description/README.md) starts from, so `generate.py` and
-`graph_export.py` work on it unchanged.
+`graph_export.py` work on it unchanged. The model can also support a first engineering question before any
+platform export. Keep the conversion report and original XML with that investigation.
 
 ## Commands
 
 ```sh
 python -S scripts/dexpi_reader.py --xml my_pid.xml --out my-model --sheet-id unit-47
-python -S scripts/generate.py my-model/unit-47.model.json --out my-exports      # Ignition tags, PI AF sheet, SVGs, review sheet
-python -S scripts/graph_export.py my-model/unit-47.model.json --out unit-47.graph.json
 ```
 
-The first writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.report.md` and prints the report. Options:
+The reader writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.report.md` and prints the report. Options:
 
 - `--png drawing.png`: also write an intake prediction and manifest for `scripts/import_site_drawing.py` (the PNG
   must be a render of the whole drawing; this needs the drawing geometry in the XML). On C01 its symbols and
@@ -36,6 +35,50 @@ A file that is not well-formed XML, whose root is not `<PlantModel>`, or that re
 a message and exit code 2; nothing is written. A pipe segment whose `Connection` names an ID the file does not
 contain is read, not refused: that end becomes `BL`, the stream's `from_end`/`to_end` says "broken reference", and
 the ID is listed under `broken_references` in the report and in the model's `meta` (the real end is unknown).
+
+## From the model to one question
+
+Run the existing question engine on the reader's process-model file, offline and with the standard library:
+
+```sh
+python -S scripts/question_engine.py --model my-model/unit-47.model.json --out my-questions
+```
+
+To try just this step from a clean clone, use the committed public C01 model. No XML download, drawing renderer
+or platform import is needed:
+
+```sh
+python -S scripts/question_engine.py --model examples/from-dexpi-xml/dexpi-c01.model.json --out my-c01-questions
+```
+
+Open the output's `screen.md` beside the conversion report. The screen reads the model's supported asset and
+control fields, not every retained DEXPI attribute. Its collection states reflect recognized screening fields;
+check the retained attributes and original XML before treating a requested value as absent from the source.
+Design limits or design duties do not establish actual operating values. A finding is a question about the draft
+model, not a verified plant deficiency or permission to change equipment.
+
+Choose one useful question with an engineering recipient. Copy its exact finding ID, asset references and
+evidence requests into a private copy of the [plain brief](../first-pilot/pilot-brief.md). Retain the XML identity,
+revision/hash and element locators, the conversion's omissions and inferences, what the evidence supports and
+what remains unknown. The [first-question guide](../first-pilot/README.md) takes that packet into a company
+handoff; ongoing shared information, decisions, ownership and history need the company's maintained home.
+
+The question engine requires units or instruments. Public C03 converts but has neither, so the screen refuses it;
+its streams, manual valve and unplaced item do not make an eligible model. Start a labelled manual source question
+in the same plain brief instead of inventing equipment. No findings on an eligible model likewise establishes
+only that no catalog trigger fired on the supplied representation.
+
+## Optional platform and graph outputs
+
+Generate these when the investigation needs them:
+
+```sh
+python -S scripts/generate.py my-model/unit-47.model.json --out my-exports
+python -S scripts/graph_export.py my-model/unit-47.model.json --out unit-47.graph.json
+```
+
+These are draft staging files and a portable graph. Organizational acceptance, reviewed signal mapping and any
+receiving-system integration remain separate work; generating a file does not complete the company handoff.
 
 ## This folder (public example C01)
 

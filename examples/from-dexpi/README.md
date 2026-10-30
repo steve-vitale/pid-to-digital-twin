@@ -99,3 +99,25 @@ The converter prints these and writes them into the prediction's `conversion` bl
 
 Everything in the bundle is still a draft marked unverified, exactly as in the own-drawing runbook: no signal
 mapping, live values or operational approval come from a DEXPI file.
+
+## From the bundle to one useful question
+
+The existing question engine can screen the bundle's model without another extraction, renderer or platform
+connection:
+
+```sh
+python -S scripts/question_engine.py --model my-bundle/plant_model.json --out my-questions
+```
+
+Open `my-questions/screen.md` beside the conversion's loss report and original source. This route's reduced
+classes, undirected links and omitted controls/attributes limit which questions can fire and what their evidence
+means. A quiet screen does not establish that the source or plant lacks an issue. The
+[direct XML route](../from-dexpi-xml/README.md#from-the-model-to-one-question) retains more source structure, but
+its screening input still needs review; neither route establishes current plant configuration.
+
+Choose one question with the intended engineering recipient. Put its exact finding ID, asset references and
+missing-evidence requests into a private copy of the [plain brief](../first-pilot/pilot-brief.md), together with
+the XML/drawing revision and source locations, conversion limits and qualified answer or unresolved disposition.
+Use the [first-question guide](../first-pilot/README.md) for source review and company handoff. Unknown ownership
+or acceptance stays visible. The company needs a maintained home for ongoing evidence, decisions and history;
+the toolkit supplies this starting packet. No native import or local context register is required for this step.
