@@ -180,8 +180,14 @@ python scripts/fetch_corpus.py wikimedia-pid
   another year of the development network, not a different network or real plant. See the
   [historian guide](../examples/historian-csv/README.md) for the baseline, overlapping leak windows and criterion.
 
-Staged locally but not integrated (data in `data/external/`, not yet a fetch source): the HAI boiler physical graph and
-the Covestro PCS list. They are listed as candidates in `data/corpus.json`.
+Staged locally but not integrated: the HAI boiler physical graph. It is listed as a candidate in `data/corpus.json`.
+
+The [Covestro PCS intake example](../examples/loop-audit/covestro/README.md) now preserves seven connection records
+and checks them against two pinned workbooks plus the licence within the existing `dexpi-ttc-all` source. Its
+optional `--fetch` downloads only those three originals (329,011 bytes); matching cached files are checked offline.
+It demonstrates source intake and a manually authored controls question, not a compatible simple-loop list or
+new generalization-matrix cell. The candidate entry records that applicability limit. No new source family or
+extraction score is added.
 
 ## Linked engineering-context packets
 

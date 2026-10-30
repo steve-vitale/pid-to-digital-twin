@@ -1,6 +1,8 @@
 # Your own loop list: which loops does the drawing actually show?
 
-**Why it matters:** Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change.
+**Why it matters:** Controls records and drawings can disagree. Comparing a supplied loop list with a reviewed
+key or extracted model exposes differences for an engineer to investigate. The comparison does not establish
+what the installed control system currently runs.
 
 `scripts/loop_audit.py` takes a control-loop list (the kind a plant can export from its DCS or PLC configuration) and
 a drawing's answer key, and reports each loop as **drawn**, **partly drawn** (with what is missing) or **not drawn**.
@@ -9,6 +11,15 @@ Eastman code. Stdlib only, no AI, offline.
 
 It grades the drawing against the list. It never judges the control strategy: a wrong list gives a confident wrong
 report.
+
+## Before converting a vendor export
+
+Check whether its records actually fit one controller, measurement and output per row. A connections report can
+contain several links around one function without specifying their direction or logic. Keep those records and
+their source locations intact. The [Covestro worked intake](covestro/README.md) preserves all seven connections
+from two public engineering-tool reports, identifies one question for a controls owner and explains why it does
+not manufacture a simple-loop audit score. It also shows where a manually authored question fits the pilot and
+company handoff when no supported asset model exists for the question engine.
 
 ## The loop list
 

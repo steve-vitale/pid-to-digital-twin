@@ -189,7 +189,7 @@
   {
    "id": "loop-audit",
    "category": "check",
-   "title": "A drawing checked against a DCS loop list",
+   "title": "A supplied loop list checked against a drawing key or model",
    "tools": [
     "scripts/loop_audit.py"
    ],
@@ -197,16 +197,17 @@
    "example_outputs": [
     "examples/loop-audit/te_loops.csv",
     "examples/loop-audit/results/rev_a.md",
-    "examples/loop-audit/results/rev_d.md"
+    "examples/loop-audit/results/rev_d.md",
+    "examples/loop-audit/covestro/connections.csv"
    ],
    "tests": [
     "scripts/test_loop_audit.py"
    ],
-   "job": "Check whether a drawing shows the control loops the DCS actually runs",
-   "you_need": "A loop list exported from the DCS or PLC configuration (controller, measurement, output)",
+   "job": "Compare a supplied loop list with a drawing key or model",
+   "you_need": "A reviewed simple-loop list (controller, measurement, output) and a corresponding drawing key or extracted model",
    "time": "Seconds",
-   "you_get": "Each loop drawn, partly drawn (and what's missing) or not drawn",
-   "why": "Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change."
+   "you_get": "Key: drawn, partly drawn or not drawn; extracted model: tag presence only. Vendor intake example preserves multi-connection functions without inventing loops.",
+   "why": "Controls records and drawings can disagree. Comparing supplied records exposes differences to investigate; current installed behavior still needs site evidence."
   },
   {
    "id": "vendor-evaluation",

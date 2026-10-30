@@ -3945,3 +3945,38 @@ reader and software checks, not engineering approval. The change adds no applica
 source family or extraction result. Existing matrix results and their tool hashes remain unchanged, with no
 matrix-cell rerun; all 52 configured pipeline stages remain fresh. Local verification targets the exercised
 starter commands, exact catalog/output diff and existing question tests. CI must report its own actual coverage.
+
+## 76. Keep a vendor controls export intact before inventing a loop
+
+The existing corpus candidate described the Covestro C08 PCS export as two signal loops suitable for the generic
+loop audit. Reading the pinned original shows seven connection records around two system functions, with several
+links per function. The report does not by itself establish signal direction or cause-and-effect logic. Mapping
+it to one controller/measurement/output row per function would discard connections or require an interpretation.
+The candidate is now a worked development intake case, not a new row-4 score or source family.
+
+The example retains every field in all seven connection rows, including both sides' identities, drawing references,
+blank OPC addresses and source report-date serials. A standard-library checker compares the transcription to the
+original workbook and verifies the instrument workbook and licence against existing byte/SHA-256 pins. Optional
+fetch uses the existing downloader for just those three files. An actual fresh-cache fetch retrieved 329,011 bytes
+and passed; matching cached files also pass at a zero download budget. Workbooks are read as ZIP/XML data only.
+
+The first draft wrongly described a C-versus-S disagreement for U0020. The actual source checker refused that
+assertion, and a separate controls reader independently found C in both reports. The draft was corrected before
+acceptance. The remaining question is supported and bounded: what reviewed records explain U0001's connections,
+including two references to a legend sheet, and establish its intended behavior? A legend reference is a request
+for context, not proof of a drawing error. The public records do not supply a current governing revision, logic,
+setpoints, test evidence or an assigned site owner.
+
+An engineer can carry that question and the source packet into the existing pilot brief without inventing an asset
+model or question-engine finding. The guide explains that generated screens need a supported model; manually
+authored investigations also belong in the toolkit. When colleagues begin contributing, the next home is the
+company's shared context and decision system, with execution remaining in existing operational systems. No local
+governance application or receiving-system adapter was added.
+
+Root verification exercises eight actual CLI controls: original/cached success, changed field, omitted row, absent
+source, exhausted fetch budget, nonfinite budget and changed original. All pass their expected outcomes; the existing
+17 loop-audit tests pass. A separate source reader compares every connection field and reproduces the older revision-A
+and revision-D Markdown and JSON reports byte-for-byte. The catalog now says supplied loop list and key/model rather
+than claiming knowledge of what a DCS currently runs. Matrix cells, tool hashes and recorded extraction results are
+unchanged; its page is re-rendered only for the corrected candidate description. These are software and AI source-reader
+checks, not engineering approval, measured adoption or operational benefit.

@@ -951,8 +951,9 @@
    "name": "Covestro PCS connections list (DEXPI C08)",
    "url": "https://gitlab.com/dexpi/TrainingTestCases/-/tree/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.3/example%20pids/C08%20Two%20connected%20P%26IDs%20(Covestro)/C08V01",
    "license": "CC BY 4.0",
-   "what": "an SPPID PCS list with 2 signal loops (a ratio controller and an interlock)",
-   "would_exercise": "loop audit (row 4) on a real tool's loop export (format test; staging adapter A3)"
+   "what": "Seven engineering-tool connection records around two system functions; multiple connections are not an established simple-loop list.",
+   "would_exercise": "Source intake and a controls-owner investigation; not a row-4 loop-audit score without a reviewed mapping and appropriate key/model.",
+   "tried_2026_10_30": "Worked development intake in examples/loop-audit/covestro/: all seven rows and 19 source columns retained; exact original byte/SHA-256 and transcription check. Same previously inspected DEXPI family. Does not establish signal direction, cause-and-effect logic, current installed behavior or a new matrix cell."
   },
   {
    "name": "HAI boiler physical graph (phy_boiler.json)",
