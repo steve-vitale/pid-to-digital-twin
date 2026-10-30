@@ -3102,6 +3102,22 @@
         "examples/review-and-mapping/README.md",
         "docs/REVIEW_LOOP.md"
       ]
+    },
+    {
+      "id": "A212",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Add a filled source-only first-question brief beside the existing Covestro intake and link it from the starter.",
+      "hypothesis": "A concrete partial handoff can help an engineer assemble the first useful packet without fabricating a model, completed investigation or organizational owner.",
+      "evidence": "Existing instructions already permit partial evidence and needs owner; AI recipient reader finds no consequential instruction ambiguity but supports showing the assembled document. New brief retains exact original identities/hashes/cells, missing behavior evidence and unassigned reviewer/recipient/acceptance. Root executes both documented source commands in an isolated minimal receiving copy: three originals/329,011 bytes and offline check pass; absent-source control refuses with exit 2/no output. Separate source/controls reader checks factual claims against originals; recipient review checks CSV/links and unknown states only. Scripts, registered outputs, matrix and not-tried records unchanged.",
+      "runs": "Documentation/source-reader and three actual source-check CLI observations on existing development records; no new source family, model call, human adoption or measured pilot",
+      "verdict": "kept",
+      "why": "Shows the useful starting artifact and company handoff while keeping intended behavior unresolved and ongoing stewardship in the company system. No local governance application or receiving adapter is introduced.",
+      "source": [
+        "docs/JOURNAL.md#79-show-what-an-incomplete-first-packet-looks-like",
+        "examples/loop-audit/covestro/first-question.md",
+        "examples/first-pilot/README.md"
+      ]
     }
   ],
   "not_tried": [

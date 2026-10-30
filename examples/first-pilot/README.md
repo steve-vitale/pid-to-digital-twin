@@ -8,6 +8,10 @@ Copy [pilot-brief.md](pilot-brief.md) into the team's working documents. Begin w
 sections. Extend the same brief if the team later chooses a measured pilot. Missing information stays unknown;
 the template neither validates completion nor supplies an approval, threshold or achieved result.
 
+For a filled source-only example, read the [Covestro first-question brief](../loop-audit/covestro/first-question.md).
+It shows exact source citations, a qualified partial explanation and missing evidence in one handoff document.
+The main behavior question stays unresolved, with no assigned recipient, accepted handoff or trial result.
+
 ## First, investigate the existing sources
 
 Record the question, intended recipient, source identities/revisions and exact locations, what they support and

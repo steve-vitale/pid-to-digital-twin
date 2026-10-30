@@ -63,6 +63,10 @@ revision. Request those records from the controls/document owner and reconcile t
 reviewer, applicable site and resolution date remain **unassigned/unknown** in this example. Do not invent a
 customer or an approval to finish the story.
 
+The [filled first-question brief](first-question.md) assembles those ingredients into one draft handoff, including
+the original fingerprints, exact cells, partial explanation, outstanding requests and **needs owner** status.
+It demonstrates how to start the document; the main behavior question and actual recipient remain unresolved.
+
 A useful next result is a reviewed explanation, or a specific unresolved discrepancy with a named recipient.
 Record what evidence settled the question, what remains unknown and who takes it forward. An operating change
 needs the site's own engineering and change process; this question supplies no equipment instruction.

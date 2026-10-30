@@ -4052,3 +4052,31 @@ only. Root runs all seven worked-example commands; only the mapping report chang
 These are software and AI reader checks on existing public/synthetic inputs, not new corpus accuracy, receiving-
 system acceptance, signal verification, human adoption or measured operational value. Matrix results remain
 unchanged. Full-suite and CI logs retain their actual omissions separately.
+
+## 79. Show what an incomplete first packet looks like
+
+The starter already permitted a manual source question, a partial answer and an unassigned next owner. The
+Covestro intake contained the question and supporting facts; the plain brief contained the fields. A recipient
+reader found those instructions coherent, but a newcomer still had to assemble the handoff document. The new
+filled brief shows that first result in one place without inventing a completed investigation or an owner.
+
+It keeps the existing U0001 question, complete source identity, original fingerprints and exact workbook cells,
+a qualified partial explanation, outstanding records and the next action. The cited records support identities,
+function labels and connection references; they do not settle the intended behavior or establish a drawing error.
+Reviewer, receiving owner, acceptance, current installed state and authority remain unknown. The trial is not run
+and benefit is not measured. No model, generated finding or context-register entry is fabricated for this question.
+
+The packet retains the complete seven-row transcription, unchanged originals, licence and toolkit revision used
+for checking. Two commands let a colleague fetch just the three pinned originals into a separate cache and repeat
+the existing source check offline. Root executes both from an isolated copy of the five required public files,
+with no access to the original workspace's cache: three files, 329,011 bytes, both commands pass. A missing-original
+control refuses with exit 2 and no output. This is a minimal receiving-copy software check, not a clean-clone or
+human handoff experiment. The checker does not validate the new prose; original-cell review is separate.
+
+The first-pilot guide and source-intake guide link directly to the filled example. A separate AI recipient reader
+finds no consequential instruction or identity ambiguity and confirms the unresolved states remain visible. Its
+review checks the CSV and document links, not the original workbooks. Source/controls review compares the factual
+claims and raw fingerprints against the original records. Neither is engineering approval, observed adoption or
+measured benefit. The next company home supplies ongoing access, ownership and decision history; no application,
+schema, connector or new company workflow is added. Existing scripts, data, registered outputs, matrix results
+and not-tried items are unchanged. No feature-output verdict or generalization result is renewed by this example.
