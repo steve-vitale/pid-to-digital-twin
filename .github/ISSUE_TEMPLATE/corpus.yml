@@ -1,0 +1,30 @@
+name: Contribute a corpus case
+description: Add a source, difficult example or reproducible failure that helps a toolkit task generalize.
+title: "Corpus case: "
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task and failure or capability to test
+      description: Which tool/task should handle it, and what would a correct result demonstrate?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Public source, attribution and redistribution rights
+      description: Link a cleared public original and its license/revision. Keep private company material out of this issue.
+    validations:
+      required: true
+  - type: textarea
+    id: key
+    attributes:
+      label: Expected result, uncertainty and key provenance
+      description: Who produced/reviewed the answer key? Is it independent, agent-made, derived or self-generated?
+    validations:
+      required: true
+  - type: textarea
+    id: exposure
+    attributes:
+      label: Family, development exposure and available runs
+      description: Related drawings/documents, methods already tuned on them, model/version/settings, and saved failed or successful answers.

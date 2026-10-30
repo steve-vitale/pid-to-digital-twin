@@ -4741,3 +4741,39 @@ interpret unfamiliar prose. A deliberate incorrect equipment name with a genuine
 format check: quotation matching locates evidence, and a person must assess what it supports. Readable labels,
 physical nozzle attachment, source authority/completeness and actual plant correctness still require review.
 No automatic detailed layout, tenant deployment, operating acceptance or new corpus score is claimed.
+
+## 99. Make corpus contributions and task/model comparisons reproducible
+
+The project already retains public corpora, parsed predictions, scoring controls and an attempts ledger, but
+contributors must understand several research-specific entry points to add evidence. The new contribution guide
+connects source/key registration, saved model/method answers, offline scoring, failure analysis and baseline
+regression checks. PR and corpus-issue templates request provenance, development exposure and regressions. The
+benchmark registry is separate from the eight-workflow deterministic matrix and from feature-example reviews.
+
+`benchmark.py` has two task adapters. Drawing extraction uses the existing frozen scorer and vendor controls,
+without changing their rules. A first registered snapshot re-scores the saved round-5 Claude and Codex predictions:
+five replicates each, six OPEN100 validation drawings. These are historical runs registered retrospectively, with
+the original model identifiers, recipe/input fingerprints and dates. Exact provider builds and unrecorded settings
+stay unknown; the method includes deterministic tracing. No new model call or held-out experiment occurred.
+
+The description-fact adapter measures only literal selected native-model fields against explicit fact atoms.
+It reports categories and missing/unexpected facts separately; a wrong stream endpoint cannot disappear behind
+an aggregate of equipment fields. Its initial two cases and three methods are synthetic reference/empty/wrong
+controls. The keys derive from the authored reference models, so this is circular scorer development, not
+independent evidence about interpretation. Unfamiliar descriptions still need separately prepared source truth.
+
+Comparisons retain task, family, split, evidence type, exact attempted cases, source/key and scoring-code hashes.
+Versions, interfaces, prompt/recipe and method settings remain separate. An attempted missing/failed/invalid answer
+scores empty; a new case an old run never attempted remains a coverage gap. The old run keeps its comparison
+cohort; a run attempting the expanded set gets a different cohort.
+The report keeps per-case counts and optional reported resources, with mean/range/SD over repeated runs. It does
+not declare a statistically significant winner or pool unrelated tasks into a universal model ranking.
+
+Independent adversarial baseline probes exposed schema-label bypasses of saved metadata checks, hardlink aliases
+counted as separate replicates, and contradictory declared interface/tiling settings. The candidate now checks
+recorded model/input/prompt/tool and supported settings regardless of the envelope schema, and uses physical file
+identity to refuse alias replicates. Metadata remains contributor-declared rather than provider-attested. Keys and
+recipes are fingerprinted; changed bytes fail validation instead of being misreported as model performance.
+Existing reports are refused as write targets, and CI re-scores the registered snapshots offline. Other toolkit
+functions retain their existing tests/matrix evidence and have explicit evaluator gaps; no all-function benchmark
+coverage, new corpus family, company acceptance or operational performance is claimed.

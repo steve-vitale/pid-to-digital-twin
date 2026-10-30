@@ -28,6 +28,7 @@ python scripts/pipeline.py status   # whether every output is fresh against the 
 python scripts/attempts_ledger.py --check   # the tuning ledger is complete, sourced and current
 python scripts/feature_catalog.py --check   # every feature, its evidence and its independent review status
 python scripts/corpus_matrix.py --check     # the generalization matrix page matches its results
+python scripts/benchmark.py --registry benchmarks/registry.json  # saved model/task results reproduce offline
 python scripts/rescore.py --check           # re-score the committed predictions; diff every table against out/
 ```
 
@@ -93,6 +94,11 @@ Pick whichever matters to your user and follow it from source to number. Each of
   the agents and the author were wrong (`docs/JOURNAL.md`).
 
 ## If you find a problem
+
+For a user-requested improvement or corpus contribution, follow [CONTRIBUTING.md](CONTRIBUTING.md): retain a
+reproducible failing case, source/key provenance, saved model/method metadata and matched baseline results.
+The [task/model benchmarks](benchmarks/README.md) are separate from the eight-workflow matrix and feature reviews;
+only the documented task adapters are implemented. Their checks re-score saved answers without calling models.
 
 Open an issue on the repository with the claim, the file and line, and what you expected. That is the most useful
 thing a reviewer can leave.

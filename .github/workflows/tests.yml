@@ -25,6 +25,8 @@ jobs:
       # All tests run offline after setup; OPEN100 drawings/keys are committed.
       - name: Run full cached-data suite
         run: python scripts/run_tests.py --full
+      - name: Re-score registered corpus and model comparisons offline
+        run: python scripts/benchmark.py --registry benchmarks/registry.json
   snapshot-mcp:
     runs-on: ubuntu-latest
     steps:

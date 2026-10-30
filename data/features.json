@@ -552,6 +552,53 @@
    "you_need": "Cleared UTF-8 description, an engineer or approved assistant to author native model/layout JSON, and approved Python/drawing dependencies for local checks and generation",
    "time": "Authored development fixtures only; assistant quality and engineering review time unmeasured",
    "you_get": "Numbered source/prompt/contract, exact quotation and directed consistency feedback, then draft P&ID PNG/SVG, question screen, sourced graph and platform staging with payload hashes. No automatic interpretation/layout, tested Copilot tenant or plant approval"
+  },
+  {
+   "id": "task-benchmarks",
+   "category": "check",
+   "title": "Contribute corpus cases and compare saved model/method runs by task",
+   "tools": [
+    "scripts/benchmark.py"
+   ],
+   "guide": "benchmarks/README.md",
+   "example_outputs": [
+    "benchmarks/controls/branch-empty.json",
+    "benchmarks/controls/branch-reference.json",
+    "benchmarks/controls/branch-wrong-endpoint.json",
+    "benchmarks/controls/linear-empty.json",
+    "benchmarks/controls/linear-reference.json",
+    "benchmarks/controls/linear-wrong-endpoint.json",
+    "benchmarks/description-controls.json",
+    "benchmarks/keys/branch-facts.json",
+    "benchmarks/keys/linear-facts.json",
+    "benchmarks/open100-validation.json",
+    "benchmarks/registry.json",
+    "benchmarks/results/description-controls.json",
+    "benchmarks/results/description-controls.md",
+    "benchmarks/results/open100-validation.json",
+    "benchmarks/results/open100-validation.md",
+    "benchmarks/runs/claude-r5-rep1.json",
+    "benchmarks/runs/claude-r5-rep2.json",
+    "benchmarks/runs/claude-r5-rep3.json",
+    "benchmarks/runs/claude-r5-rep4.json",
+    "benchmarks/runs/claude-r5-rep5.json",
+    "benchmarks/runs/codex-r5-rep1.json",
+    "benchmarks/runs/codex-r5-rep2.json",
+    "benchmarks/runs/codex-r5-rep3.json",
+    "benchmarks/runs/codex-r5-rep4.json",
+    "benchmarks/runs/codex-r5-rep5.json",
+    "benchmarks/runs/description-empty.json",
+    "benchmarks/runs/description-reference.json",
+    "benchmarks/runs/description-wrong-endpoint.json"
+   ],
+   "tests": [
+    "scripts/test_benchmark.py"
+   ],
+   "job": "Improve a toolkit task with source-backed corpus cases, reproducible model results and baseline regression evidence",
+   "why": "New examples should expose failures and support tested generalizations. Matched task/source/key/scorer cohorts make comparisons inspectable without conflating model versions, methods, source families or incomplete coverage.",
+   "you_need": "Cleared source and reviewed key with provenance, a supported versioned task, saved answers for declared attempts, model/interface/configuration and pinned recipe metadata; no model account needed to re-score",
+   "time": "Offline rescoring; model execution and human source/key review are separate contributions",
+   "you_get": "Reproducible per-case task counts and failures, model/version/method groups, repeated-run mean/range/SD, coverage gaps and source/code fingerprints. Two adapters initially: historical drawing results and synthetic description-fact scorer controls; other tasks still need evaluators"
   }
  ]
 }

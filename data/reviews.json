@@ -6575,6 +6575,150 @@
     "final-public-bindings-final.json": "2a7d31a30447f56f0abad6ad35c63a3e0dbbbb10e6f840434daf509eadc3faef",
     "proposed-public-feature-review.json": "5eff6ad0e98ccab812d2f5fbbc318b40b87e1db3e61f5070d8ce850b20fa8edb"
    }
+  },
+  {
+   "feature": "task-benchmarks",
+   "reviewer": "Independent Codex coding agent: iterative offline benchmark integrity, cohort and saved-answer software review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 28,
+   "file_hash_method": "Registered file/support bindings use SHA256 after CRLF to LF byte normalization, matching the catalog selector. Private proof hashes are exact raw SHA256; no newline normalization.",
+   "files": {
+    "benchmarks/controls/branch-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/branch-reference.json": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483",
+    "benchmarks/controls/branch-wrong-endpoint.json": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32",
+    "benchmarks/controls/linear-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/linear-reference.json": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a",
+    "benchmarks/controls/linear-wrong-endpoint.json": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd",
+    "benchmarks/description-controls.json": "b5f2d827008e3310c8e433a0b1168a3819f7674758e08cfcf3d59d59de288a4b",
+    "benchmarks/keys/branch-facts.json": "d46a66cdc5a2ea3e0900849533786a2f115af10fa24dfe129b96ef909b0e8626",
+    "benchmarks/keys/linear-facts.json": "37c4a9bffab394111813775a840af65440546ae1a9a2f2c414f1ecde031159aa",
+    "benchmarks/open100-validation.json": "715b3aa5151a052ce7f9b6495d4743bd0fef8c92704db23c6caa8dd4426fdab8",
+    "benchmarks/registry.json": "a77746baf36371249cbe9e1e315bae731cd7321c1bfd90dba5aa532a53e77d64",
+    "benchmarks/results/description-controls.json": "10c3c64ef0d1a63e07fefccec26720340b63b91d6f96aa42c319db78bccafc4c",
+    "benchmarks/results/description-controls.md": "d20a10b074f9f50a0ff3085fc6cfa78de9d9679aac74ff94d78872042fdbee2a",
+    "benchmarks/results/open100-validation.json": "4a5f143e2d963115b853e8dd301dfe4dcd49971debc85a6d646e9737ef2c7b18",
+    "benchmarks/results/open100-validation.md": "91bfdcb5a54b7f09a30b0cd255f918edd994afea05cace9d6cd2de2c9dd61ed7",
+    "benchmarks/runs/claude-r5-rep1.json": "5dbdcfa47c22c970a204c64f66c6c2618a7f245db67d040fdca85f61336a786e",
+    "benchmarks/runs/claude-r5-rep2.json": "5035dd75b39ae3aac46718b8af905bdbf5e6bce3a5b7e6261aac3fe202dcb8a2",
+    "benchmarks/runs/claude-r5-rep3.json": "4ad03cd984e3366b532dd3152c3b012f424161657241d33150a69c3e7ce6993e",
+    "benchmarks/runs/claude-r5-rep4.json": "509a76baa4cbb43a9dfd3cd268d5c96eca7dbabea510dab3a0881b385aeb040d",
+    "benchmarks/runs/claude-r5-rep5.json": "d684c6011705651c1b95e7c2bea22eebdf894e8c4f45d9000dfb9cd73ce95f96",
+    "benchmarks/runs/codex-r5-rep1.json": "1c2d0f38972179fdf7ec0d3e5790efaadf58db2f338f97c9fee47878d504a217",
+    "benchmarks/runs/codex-r5-rep2.json": "56cd9ef8a592dfd940b5ec502281accc8c37c8be391ba61140d53f7823b62bde",
+    "benchmarks/runs/codex-r5-rep3.json": "f8a28abef45d962b1aa02f9fe06a0aa2667e9c87f580435659a534044caf73d4",
+    "benchmarks/runs/codex-r5-rep4.json": "1e45f5584f00a1e6778a37413ab2cd62b36c0b27bdc3d273a1f79c77fdb7a42e",
+    "benchmarks/runs/codex-r5-rep5.json": "5a0c76189c30464aaf61d66e623c42d8744049afeeb5908116d39ef1dd504d32",
+    "benchmarks/runs/description-empty.json": "4d676da3dbfa5e21d2e36650c087b28385882c15c113398a03a29761d28f525c",
+    "benchmarks/runs/description-reference.json": "17a7f283474e35cab92ffb4552e3e776495853a30dcf35a5e26dc1bd13e8a6c6",
+    "benchmarks/runs/description-wrong-endpoint.json": "40307a01834f554a01ef14ab770f22fe7f60840e17434340cc8f219f3fd1eb7e"
+   },
+   "supporting_files": {
+    "scripts/benchmark.py": "5686e4bc1afeef3462a4104e131a3807b2bba71073ba583e990130acecd52a71",
+    "scripts/test_benchmark.py": "2bc84398cb7d92b11caeffd2c26953dda8055acc1a2c628cd07f360f2cdeafa9",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/evaluate_vendor.py": "734c154c31964449c8cdc67302d3316f19384cf59a94dd4112568bd8d1896787",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "CONTRIBUTING.md": "43e407131e478d7d78e4093df4cb224be390787258dc31d5765435af1addebfc",
+    "benchmarks/README.md": "5694d6fab09ae611b07dd5ce2e4fe8c3d7c28a0ae4f49a23e4a39f811b2a8276",
+    ".github/PULL_REQUEST_TEMPLATE.md": "cc4f5ef72eb648d54cd14a6201fd4f40c0120b588013a44904fbf0507214bb6a",
+    ".github/ISSUE_TEMPLATE/corpus.yml": "ed494a14b4a9d90956bbb2254c8affab9b5e0ae265dab8cedcd4358fec7659ff",
+    ".github/workflows/tests.yml": "eaee6ca6bcd9c506b60b72046fd314a65b8e74c50e6c38eabdb3a089eb9b8a17",
+    ".gitattributes": "0327ac514a971dd814baa39e1fef473b93131f1063bd823eef3d9842e64bc920",
+    "scripts/run_tests.py": "1af547573647c79e2d3453113c12aa0399ef93f02ec27365ac39ac36daf8fe45",
+    "data/script_index.json": "a7107e3c598ad0d77864d30ac4c589b2b7f4b044c4b826fa146326b17b79be15",
+    "data/features.json": "06ca6b4e0f06461093d2ddefaacea63f77f27f1d3ca8383f9f3f4e2372ebc06b",
+    "AGENTS.md": "70b08837176edde7403e0f1b6dfb2c1698f927f8766d23486a9bf6d4fe472c3a",
+    "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+    "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+   },
+   "supporting_excerpts": [
+    {
+     "path": "README.md",
+     "selector": "From '**Help it generalize:**' to immediately before 'Future manufacturing tools need'; normalize CRLF to LF, rstrip then one LF",
+     "sha256_lf": "ef0884f3cc33b80964fcdb2b7457e5aa5ef616302080fc72ee3916d0e3f6e3b1",
+     "text": "**Help it generalize:** contribute cases, saved model runs and tested improvements through the\n[contribution loop](CONTRIBUTING.md). The [task/model results](benchmarks/README.md) re-score saved answers,\ntrack model versions and methods on matching test cohorts, and retain failures and coverage gaps as the corpus\ngrows. New tasks need explicit evaluators; a passing example is not evidence for every function.\n"
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "id": "BENCH-1",
+     "finding": "Saved envelope metadata validation depended on a schema/prediction shape, allowing contradictory recorded identities through unknown, absent or flattened envelopes.",
+     "resolution": "Metadata checks now apply to drawing records with saved-envelope fields regardless of schema. A known successful envelope requires prediction and recorded fields; explicit failed attempts may lack metadata, while present contradictions refuse. Actual final known/unknown/absent flattened controls refuse; plain symbols/connections remain accepted."
+    },
+    {
+     "id": "BENCH-2",
+     "finding": "A hardlink to the same saved answer could be presented as another replicate.",
+     "resolution": "Replicate alias checks include native file identity. The retained real hardlink control and final registered tests refuse reuse; separately recorded equal-byte files remain permitted as declared provenance."
+    },
+    {
+     "id": "BENCH-3",
+     "finding": "Declared interface/settings and prompt recipes could contradict the recorded tool, tiling/tracing configuration or nested tile-preface hash.",
+     "resolution": "Recorded tool/configuration and distinct main_prompt/tile_preface roles bind the corresponding saved fields. Actual final wrong-preface, swapped-role, missing-role and duplicate-role controls refuse."
+    },
+    {
+     "id": "BENCH-4",
+     "finding": "A coverage sentence could imply suite-wide unattempted cases were a count within one family.",
+     "resolution": "Reports state the selected family case count, suite total and suite-wide unattempted coverage explicitly. An actual two-family final control checks the distinction."
+    }
+   ],
+   "checks": [
+    "Inspected the offline path from pinned suite/source/key/recipe/answer files through the existing PID2Graph scorer or selected native-fact adapter to per-case results, repeated-run summaries and exclusive new report publication. There are no manifest-dispatched programs, model calls, downloads or company services in this workflow. Paths are restricted to the operator-selected corpus root.",
+    "Retained the initial moving-source review separately: seven child CLI calls completed before a source-hash guard refused further execution. One initial unknown-schema report recorded a later code hash, so its exact loaded version is not attributed to the starting snapshot. Ten further CLI controls on an immutable starting-code/dependency copy establish the original bypasses; the timing refusal is a review-harness event, not a product crash.",
+    "On intermediate frozen hash adf8acd57522df849dc740fec9eb491d6816cea4cc98903eee46a9ac6f57723e, independently executed 35 CLI controls: 15 integrity controls, two full-suite rescores, 16 cohort/fact/preservation controls and two further counterexamples. These demonstrated the original repairs and then identified the flattened-envelope, nested-preface and coverage gaps. This is corrective development review, not blind or human engineering signoff.",
+    "On final script hash 5686e4bc1afeef3462a4104e131a3807b2bba71073ba583e990130acecd52a71, independently executed 15 direct CLIs: 11 envelope/role/positive controls, two registered-suite rescores, one actual registry check and one two-family coverage control. All declared expectations passed and all fixture input bytes were preserved. The current 12-case benchmark regression script also passed with zero skips. These final calls are distinct from earlier-hash controls.",
+    "The two final suite runs re-scored 60 existing saved drawing answers (five repeats each for two declared model pipelines on six validation drawings) and six authored native-fact control outputs (three controls on two synthetic cases). All four committed JSON/Markdown reports were reproduced exactly. No model was executed, and no unfamiliar description, new held-out cohort or independent source family was created.",
+    "Independently recomputed pooled per-case counts, per-run F1, group mean/minimum/maximum and sample standard deviation from retained final reports. Ten drawing rows form two model groups; three synthetic-control rows form three groups. Arithmetic agrees within 1e-12. This does not supply statistical significance or establish a model winner.",
+    "Actual copied-fixture controls preserve failed/missing/malformed attempted answers as empty scores, distinguish unattempted cases, separate changed attempted sets and model versions, and avoid pooling source families/splits/evidence types. Scorer code hashes enter cohort identity. Wrong endpoint controls expose missing/unexpected stream atoms and category scores; deliberately wrong ungraded names/source strings can still score perfectly, as the guide explicitly states.",
+    "Read the final contribution instructions, task guide, PR/issue templates, README contribution excerpt, index/test-runner registration and offline CI command. The docs distinguish source/key review, saved-answer rescoring and actual model execution; require declared development exposure; keep evaluation keys out of inference packets; and explain unsupported tasks, unknown model builds/settings, scorer changes and company-data clearance.",
+    "Bound exactly 28 new registered files: suites/registry, source-specific fact keys, authored controls, retrospective run manifests and four reports. Against baseline fa739701d4939f2f56292e9f22e30f70cf645d34, all 19 prior feature objects, all 146 prior registered outputs and all 111 prior review records remain unchanged. The existing scorer/prompt files remain unchanged. This static comparison does not renew their prior substantive review scopes or the eight-workflow matrix."
+   ],
+   "actual_validation": {
+    "initial_live_candidate_cli_calls_before_timing_guard": 7,
+    "starting_frozen_copy_cli_calls": 10,
+    "intermediate_adf8_cli_calls": 35,
+    "final_direct_cli_calls": 15,
+    "final_integrity_cli_calls": 11,
+    "final_full_saved_suite_rescore_cli_calls": 2,
+    "final_registry_cli_calls": 1,
+    "final_two_family_coverage_cli_calls": 1,
+    "final_registered_tests": 12,
+    "final_registered_test_skips": 0,
+    "historical_saved_drawing_answers_rescored": 60,
+    "authored_native_fact_control_outputs_rescored": 6,
+    "final_report_files_exactly_reproduced": 4,
+    "registered_paths_bound": 28,
+    "prior_feature_objects_statically_unchanged": 19,
+    "prior_registered_outputs_statically_unchanged": 146,
+    "prior_review_records_statically_unchanged": 111
+   },
+   "review_process_limits": [
+    "This was iterative review with maintainer repairs and replay, not a preregistered held-out evaluation. Earlier-hash tests remain attributed to those hashes; they are not relabelled as final-code executions.",
+    "The initial source-hash guard stopped a moving-candidate review, and the exact loaded version of one initial call is uncertain. The frozen baseline repro, failed counterexamples and corrected final evidence are retained rather than hidden.",
+    "No independently run whole repository suite, future CI result, general filesystem security, transaction atomicity or concurrent-writer safety is certified by this review."
+   ],
+   "limits": [
+    "Historical drawing results are retrospective rescoring of saved predictions from one validation family that also informed method selection. Model identity/version/interface/configuration and independently recorded repeats remain contributor-declared rather than provider-attested. Missing timing/cost/build settings are unknown, not zero.",
+    "Description-fact keys derive from the same two authored reference cases. Reference/empty/wrong-endpoint controls test scorer behavior and plumbing, not source interpretation, AI capability, novel-description accuracy, drawing layout or engineering completeness. Only the documented literal field subset is scored.",
+    "Passing fingerprints and software controls do not establish source/license rights, independent key correctness, engineering truth, plant state, data completeness or blindness to public keys. Those require their own source and methods review; old primary/source audits are not repeated here.",
+    "Only two task adapters are implemented. Per-family and exact-cohort comparisons do not demonstrate that every toolkit function generalizes, establish a universal model ranking, measure review time, prove operational benefit or show adoption.",
+    "No model API, native import, live plant connector, company tenant, server deployment or operating decision was exercised. The contribution/benchmark packet remains an on-ramp; ongoing company authority, permissions and decisions belong in the company system."
+   ],
+   "private_proof_hash_method": "Exact raw SHA256; no newline normalization. Proof names are opaque archived artifact names, not public repository paths.",
+   "private_proof_hashes": {
+    "first-attempt-timing.json": "b142abf53ead77f0aed0c6c9e1248f9b29a333b3635feb4eec01091148ada753",
+    "frozen-baseline-integrity-probes.json": "15afbec3b58c6fc3f599b03ecaf452775b45aa2d5bdb6fcc303775470eaab1b9",
+    "intermediate-integrity-reproduction.json": "e2632523c996def67e77d15ebf5e23b78142319d064f6a535457477bb69b49d0",
+    "intermediate-cohort-facts-controls.json": "7ed4093f4cd3f5651cd51a2619caf2d64e5a090417f0c09603961e14c60b41eb",
+    "flat-envelope-bypass.json": "43488f828fd6db2262671c164d2ef4fb71bbaa80a0d69470095fcf466ab6d3a3",
+    "tile-preface-bypass.json": "4b36b0c370c469ea10a8471908ace01854ab04697ea61316397f5e1bf58a3a59",
+    "final-controls.json": "0e32165fb55bc5602fd76e2f9770649a7b44a3cee93ba8fb9110987a1111c2eb",
+    "independent-statistics-check.json": "565e5707dd18c7c939520bfcb7c95491d129216eb7e4cf3a3ebaa0d37b0d1267",
+    "final-public-bindings.json": "0c70d83707f7fa966aed8ae9741df5b215ee55926b257ced2b80a6de8e984b18"
+   }
   }
  ]
 }

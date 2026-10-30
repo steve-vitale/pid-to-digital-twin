@@ -1,0 +1,66 @@
+{
+  "cases": [
+    "open100-6",
+    "open100-7",
+    "open100-8",
+    "open100-9",
+    "open100-10",
+    "open100-11"
+  ],
+  "configuration": {
+    "overlap": 0.15,
+    "reasoning_effort": "not recorded",
+    "temperature": "not recorded",
+    "tiles": "2x2",
+    "trace": "replace"
+  },
+  "id": "claude-r5-hA-rep1-trace",
+  "interface": "claude CLI",
+  "method": "2x2 tiled model extraction + deterministic trace replacement",
+  "model": {
+    "id": "claude-opus-5-5[1m]",
+    "provider": "Anthropic",
+    "version": "provider build not recorded beyond the saved model identifier"
+  },
+  "predictions": {
+    "open100-10": {
+      "path": "predictions/r5-hA-rep1-trace/claude/10.json",
+      "sha256": "341639e877c571eb197ecf37faa5c8b9cb438a49252dbf03fbd161c5b99dcf3d"
+    },
+    "open100-11": {
+      "path": "predictions/r5-hA-rep1-trace/claude/11.json",
+      "sha256": "b695051ba523a7af67757675d3332142715f7352ce29f4b3bc071c75e7d6cb36"
+    },
+    "open100-6": {
+      "path": "predictions/r5-hA-rep1-trace/claude/6.json",
+      "sha256": "de6a8d83c4da4c1d54dde788404714d107c2933f3c67fa41717f345672f3b086"
+    },
+    "open100-7": {
+      "path": "predictions/r5-hA-rep1-trace/claude/7.json",
+      "sha256": "d1979b8eec8fe178df8c8c1e6d1d95bb0198174b57d35aad586eef1200b0f2b5"
+    },
+    "open100-8": {
+      "path": "predictions/r5-hA-rep1-trace/claude/8.json",
+      "sha256": "2e0d4feed4229be8b1eb8abc5275a5b06a16a9f84e7939f524dcfc4fdba6485b"
+    },
+    "open100-9": {
+      "path": "predictions/r5-hA-rep1-trace/claude/9.json",
+      "sha256": "c1eb18cc6d4f81f20fcca6cf43ae3d1d7b1fc45358e36a6d92291edc88d3f8fa"
+    }
+  },
+  "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+  "ran_at": "2026-10-13T11:10:09+00:00",
+  "recipe": [
+    {
+      "path": "extraction/prompt_v2.md",
+      "role": "main_prompt",
+      "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+    },
+    {
+      "path": "extraction/tile_preface.md",
+      "role": "tile_preface",
+      "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+    }
+  ],
+  "recorded_tool": "claude"
+}

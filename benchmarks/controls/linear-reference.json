@@ -1,0 +1,261 @@
+{
+  "evidence": {
+    "source.txt:L2-L2": "TK-1 is a water tank.",
+    "source.txt:L3-L3": "P-1 pumps water from TK-1 to a downstream battery limit.",
+    "source.txt:L4-L4": "S1 feeds TK-1 from an upstream battery limit; S2 runs TK-1 to P-1; S3 runs P-1 to the downstream battery limit.",
+    "source.txt:L5-L5": "FT-101 measures flow on S3 downstream of P-1.",
+    "source.txt:L6-L6": "FV-101 is a control valve on S3, downstream of FT-101.",
+    "source.txt:L7-L7": "FIC-101 reads FT-101 and adjusts FV-101."
+  },
+  "layout": {
+    "control_valve_stations": false,
+    "line_label_prefix": "UNSIZED",
+    "register_header": "# Illustrative draft, not a plant drawing register.",
+    "sheet_px": [
+      3200,
+      2130
+    ],
+    "sheets": [
+      {
+        "controllers": {
+          "FIC-101": [
+            2250,
+            600
+          ]
+        },
+        "drawing": "DRAFT-001",
+        "flags": {
+          "IN": {
+            "at": [
+              120,
+              900
+            ],
+            "dir": "right",
+            "label": "WATER FEED",
+            "stream": "S1"
+          },
+          "OUT": {
+            "at": [
+              2750,
+              900
+            ],
+            "dir": "right",
+            "label": "WATER DISCHARGE",
+            "stream": "S3"
+          }
+        },
+        "id": "D1",
+        "routes": [
+          {
+            "from": {
+              "flag": "IN"
+            },
+            "id": "S1",
+            "pts": [
+              [
+                350,
+                900
+              ],
+              [
+                700,
+                900
+              ]
+            ],
+            "stream": "S1",
+            "to": {
+              "unit": "TK-1"
+            }
+          },
+          {
+            "from": {
+              "unit": "TK-1"
+            },
+            "id": "S2",
+            "pts": [
+              [
+                900,
+                900
+              ],
+              [
+                1655,
+                900
+              ]
+            ],
+            "stream": "S2",
+            "to": {
+              "unit": "P-1"
+            }
+          },
+          {
+            "from": {
+              "unit": "P-1"
+            },
+            "id": "S3",
+            "place": {
+              "FT-101": [
+                2000,
+                900
+              ],
+              "FV-101": [
+                2400,
+                900
+              ]
+            },
+            "pts": [
+              [
+                1745,
+                900
+              ],
+              [
+                2750,
+                900
+              ]
+            ],
+            "stream": "S3",
+            "to": {
+              "flag": "OUT"
+            }
+          }
+        ],
+        "signals": [
+          {
+            "from": "FT-101",
+            "to": "FIC-101",
+            "via": [
+              [
+                2000,
+                600
+              ]
+            ]
+          },
+          {
+            "from": "FIC-101",
+            "to": "FV-101",
+            "via": [
+              [
+                2400,
+                600
+              ]
+            ]
+          }
+        ],
+        "system": "WATER",
+        "title": "ILLUSTRATIVE WATER UTILITY",
+        "units": {
+          "P-1": {
+            "at": [
+              1700,
+              900
+            ],
+            "r": 45,
+            "shape": "pump"
+          },
+          "TK-1": {
+            "bottom": 1040,
+            "cx": 800,
+            "head": 40,
+            "shape": "vertical_vessel",
+            "top": 760,
+            "w": 200
+          }
+        }
+      }
+    ],
+    "title_block": {
+      "date": "UNKNOWN",
+      "drawn_by": "ASSISTED DRAFT",
+      "notes": [
+        "NOT A DRAWING OF RECORD",
+        "SOURCE FACTS REQUIRE REVIEW",
+        "GEOMETRY IS PROPOSED ONLY",
+        "SIZE/SPEC ARE PLACEHOLDERS"
+      ],
+      "project": "ILLUSTRATIVE WATER UTILITY",
+      "revision": "DRAFT",
+      "scale": "NONE"
+    }
+  },
+  "model": {
+    "controllers": [
+      {
+        "measurement": "FT-101",
+        "output": {
+          "final_element": "FV-101"
+        },
+        "source": "source.txt:L7-L7",
+        "tag": "FIC-101",
+        "unit": "P-1"
+      }
+    ],
+    "final_elements": [
+      {
+        "description": "Discharge flow control valve",
+        "source": "source.txt:L6-L6",
+        "stream": "S3",
+        "tag": "FV-101",
+        "unit": "P-1",
+        "uom": ""
+      }
+    ],
+    "instruments": [
+      {
+        "description": "Discharge flow measurement",
+        "source": "source.txt:L5-L5",
+        "stream": "S3",
+        "tag": "FT-101",
+        "unit": "P-1",
+        "uom": "",
+        "variable": "flow"
+      }
+    ],
+    "meta": {
+      "assumptions": [
+        "Symbol dimensions and locations are proposed drafting geometry, not plant dimensions."
+      ],
+      "model_id": "illustrative-water",
+      "source_document": "source.txt",
+      "source_sha256": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+      "title": "Illustrative water utility",
+      "unknowns": [
+        "Flow engineering unit, valve fail position, line sizes, operating limits and trips are unspecified."
+      ]
+    },
+    "streams": [
+      {
+        "from": "BL",
+        "id": "S1",
+        "name": "Water feed",
+        "source": "source.txt:L4-L4",
+        "to": "TK-1"
+      },
+      {
+        "from": "TK-1",
+        "id": "S2",
+        "name": "Pump suction",
+        "source": "source.txt:L4-L4",
+        "to": "P-1"
+      },
+      {
+        "from": "P-1",
+        "id": "S3",
+        "name": "Water discharge",
+        "source": "source.txt:L4-L4",
+        "to": "BL"
+      }
+    ],
+    "units": [
+      {
+        "id": "TK-1",
+        "name": "Water tank",
+        "source": "source.txt:L2-L2",
+        "type": "tank"
+      },
+      {
+        "id": "P-1",
+        "name": "Water pump",
+        "source": "source.txt:L3-L3",
+        "type": "pump"
+      }
+    ]
+  }
+}

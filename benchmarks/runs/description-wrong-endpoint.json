@@ -1,0 +1,33 @@
+{
+  "cases": [
+    "linear",
+    "branch"
+  ],
+  "configuration": {},
+  "id": "description-control-wrong-endpoint",
+  "interface": "authored fixture",
+  "method": "wrong-endpoint",
+  "model": {
+    "id": "synthetic-control",
+    "provider": "none",
+    "version": "1"
+  },
+  "predictions": {
+    "branch": {
+      "path": "benchmarks/controls/branch-wrong-endpoint.json",
+      "sha256": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32"
+    },
+    "linear": {
+      "path": "benchmarks/controls/linear-wrong-endpoint.json",
+      "sha256": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd"
+    }
+  },
+  "provenance": "Deterministic authored scorer control, no AI model run.",
+  "ran_at": "2026-10-30",
+  "recipe": [
+    {
+      "path": "examples/from-description/README.md",
+      "sha256": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d"
+    }
+  ]
+}

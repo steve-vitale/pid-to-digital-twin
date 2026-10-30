@@ -3434,6 +3434,23 @@
         "examples/from-description/README.md",
         "scripts/test_description_workflow.py"
       ]
+    },
+    {
+      "id": "A232",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Add a contribution loop and offline task/model benchmark registry with pinned cases, saved runs, known-answer controls, matched cohorts and explicit failures.",
+      "hypothesis": "A contributor can add a source/key or method without reverse-engineering research-specific scripts, and compare results on exactly the same evidence while keeping new unattempted cases distinct from attempted failures.",
+      "evidence": "Existing5replicates each forClaude/Codex on6OPEN100 validationdrawings re-scored through unchanged PID2Graph scorer and vendorcontrols. Newdescription-fact adapter exercised by2authored self-keyedsyntheticcases and reference/empty/wrongendpoint controls. Regressioncontrols cover provenance/cohort/coverage/refusals; independent adversarial starting-code probes exposed schema bypasses, alias replicates and contradicted settings, addressed by source-metadata and physical-file checks. No AI model was called.",
+      "runs": "Retrospective scoring of10existing runs and synthetic scorer controls; no newmodel/heldout/sourcefamily or all-function benchmark experiment.",
+      "verdict": "kept",
+      "why": "Makes improvements and regressions reproducible with task-specific scope. Exactsource/key/scoringhashes enter cohorts; oldevidence is retained. Otherfunctions require declared evaluators rather than fabricated leaderboard scores.",
+      "source": [
+        "docs/JOURNAL.md#99-make-corpus-contributions-and-taskmodel-comparisons-reproducible",
+        "CONTRIBUTING.md",
+        "benchmarks/README.md",
+        "scripts/test_benchmark.py"
+      ]
     }
   ],
   "not_tried": [

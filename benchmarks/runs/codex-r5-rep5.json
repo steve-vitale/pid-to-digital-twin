@@ -1,0 +1,66 @@
+{
+  "cases": [
+    "open100-6",
+    "open100-7",
+    "open100-8",
+    "open100-9",
+    "open100-10",
+    "open100-11"
+  ],
+  "configuration": {
+    "overlap": 0.15,
+    "reasoning_effort": "not recorded",
+    "temperature": "not recorded",
+    "tiles": "2x2",
+    "trace": "replace"
+  },
+  "id": "codex-r5-hA-rep5-trace",
+  "interface": "codex CLI",
+  "method": "2x2 tiled model extraction + deterministic trace replacement",
+  "model": {
+    "id": "gpt-6.1-sol",
+    "provider": "OpenAI",
+    "version": "provider build not recorded beyond the saved model identifier"
+  },
+  "predictions": {
+    "open100-10": {
+      "path": "predictions/r5-hA-rep5-trace/codex/10.json",
+      "sha256": "c4bf62cadfa7a6cb246f2bcbb90cb39cc0de5d9099ca28d9bd9f06563250d3b4"
+    },
+    "open100-11": {
+      "path": "predictions/r5-hA-rep5-trace/codex/11.json",
+      "sha256": "809c288238fb3a25e5c4cc481c8b28022f202dfa0d3683906c04349ab36b6ef8"
+    },
+    "open100-6": {
+      "path": "predictions/r5-hA-rep5-trace/codex/6.json",
+      "sha256": "f4e5b12e64bef9059ee148f3a4b10ee1fd2919d09500145734ae073a02443984"
+    },
+    "open100-7": {
+      "path": "predictions/r5-hA-rep5-trace/codex/7.json",
+      "sha256": "57b1fe06e28646f37e292fcbeba1e446f402b191580833d7e5423fae2aa3bdbc"
+    },
+    "open100-8": {
+      "path": "predictions/r5-hA-rep5-trace/codex/8.json",
+      "sha256": "cd56df52275597ccf273fe7fd7ef21377fa69799d095270707f3a856ee7b3628"
+    },
+    "open100-9": {
+      "path": "predictions/r5-hA-rep5-trace/codex/9.json",
+      "sha256": "4ab95070ec91534b355d3ef40805d51c37024e1ea5a1664e26068d5942494618"
+    }
+  },
+  "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+  "ran_at": "2026-10-13T11:41:13+00:00",
+  "recipe": [
+    {
+      "path": "extraction/prompt_v2.md",
+      "role": "main_prompt",
+      "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+    },
+    {
+      "path": "extraction/tile_preface.md",
+      "role": "tile_preface",
+      "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+    }
+  ],
+  "recorded_tool": "codex"
+}
