@@ -1,0 +1,26 @@
+{
+  "schema": "test-coverage-example-1",
+  "scope": "Illustrative real child programs, not a repository-suite run or engineering approval",
+  "cases": {
+    "complete": {
+      "exit": 0,
+      "summary": "FULL CACHED-DATA: 1/1 scripts passed; 0 failed; 0 unittest case(s) skipped; 0 platform notice(s); 0 additional skipped-check notice(s).",
+      "complete_suite_claim": true
+    },
+    "class_method_subtest_stdout": {
+      "exit": 0,
+      "summary": "FULL CACHED-DATA: 1/1 scripts passed; 0 failed; 4 unittest case(s) skipped; 0 platform notice(s); 0 additional skipped-check notice(s).",
+      "complete_suite_claim": false
+    },
+    "platform_and_extra_notice": {
+      "exit": 0,
+      "summary": "FULL CACHED-DATA: 1/1 scripts passed; 0 failed; 1 unittest case(s) skipped; 1 platform notice(s); 1 additional skipped-check notice(s).",
+      "complete_suite_claim": false
+    },
+    "failure_with_skip_stderr": {
+      "exit": 1,
+      "summary": "FULL CACHED-DATA: 0/1 scripts passed; 1 failed; 1 unittest case(s) skipped; 0 platform notice(s); 0 additional skipped-check notice(s).",
+      "complete_suite_claim": false
+    }
+  }
+}

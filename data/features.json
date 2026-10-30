@@ -241,18 +241,20 @@
    ],
    "guide": "docs/REVIEWING.md",
    "example_outputs": [
-    "out/claims_check.md"
+    "out/claims_check.md",
+    "examples/test-coverage/expected.json"
    ],
    "tests": [
     "scripts/test_check_claims.py",
     "scripts/test_attempts_ledger.py",
     "scripts/test_script_index.py",
-    "scripts/test_feature_catalog.py"
+    "scripts/test_feature_catalog.py",
+    "scripts/test_run_tests.py"
    ],
    "job": "Decide whether to trust this repository at all",
-   "you_need": "Python alone for the claim check and pipeline status; the full test suite also needs the packages in requirements.txt and the cached public data (it says what is missing and stops)",
+   "you_need": "Python alone for claim and freshness checks; full tests also need pinned packages and required public caches; optional-source omissions are reported separately",
    "time": "Under a minute for the claim check",
-   "you_get": "Every headline number checked against its source file, stage freshness, the full test suite",
+   "you_get": "Headline claims checked against results files, stage freshness, and selected tests with skipped cases and coverage limits visible",
    "why": "Before trusting any tool with your plant's data, you should be able to check its claims yourself in minutes."
   },
   {

@@ -44,6 +44,27 @@ tools), offline: it needs the packages in `requirements.txt` and the cached publ
 PID2Graph OPEN100 drawings), and stops with exit code 2 naming what is missing instead of downloading anything.
 `--source-only` is the subset a bare clone with only the standard library can run.
 
+Read the case-level omissions as well as script success. The summary counts unittest skipped cases from either
+output stream. Platform notices explain specific cases already in that total; do not add them again. Other
+`SKIP` notices describe checks or groups and have their own count. A successful script exit can include skips;
+the runner withholds its complete full-suite message whenever any of these omissions is reported. Exit 0 means
+the selected runnable checks passed; failures still exit 1 and missing required prerequisites exit 2. The runner
+reports child-program results, not proof that arbitrary test code cannot silently omit work. See the
+[reproducible illustrative example](../examples/test-coverage/README.md).
+
+Some original-source checks are optional, beyond the preflight's required data. Missing DEXPI TrainingTestCases
+XML, adapted DEXPI sheets/keys or the SPPID vendor-render fixture can skip those checks. The default CI setup
+fetches the required TE data and revised code, not these optional caches. Committed-fixture checks still run;
+their success does not establish that the missing originals were reread. To inspect an affected unittest's exact
+case and reason, run that script with `-v` (for example, `python scripts/test_dexpi_reader.py -v`).
+
+For original-source coverage, prepare the relevant cache separately: the
+[pinned corpus fetcher](CORPUS_FETCH.md) covers TrainingTestCases, and the
+[DEXPI adapter guide](../examples/from-dexpi/README.md) covers source fetch and rendered sheets/keys. Rendering
+requires the guide's optional PyMuPDF dependency. The vendor-render check uses the staged corpus described in
+the [generalization guide](GENERALIZATION.md). Preparation can use the network and is separate from this offline
+runner. Do not relabel a cached local run or a historical receipt as coverage of a different CI environment.
+
 ## One hour: time a review of one drawing
 
 The biggest number this project hasn't measured is how long a person takes to check what the extraction produced.

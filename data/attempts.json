@@ -2953,6 +2953,22 @@
         "examples/context-register/nist-smstestbed/expected_history_checks.json",
         "docs/CONTEXT_REGISTER.md"
       ]
+    },
+    {
+      "id": "A203",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Report unittest skips from both streams separately from platform and additional-check notices, make the missing-cache oracle a real skip, and correct optional DEXPI render setup.",
+      "hypothesis": "Successful script exits must not imply complete coverage when cases or checks did not run.",
+      "evidence": "The earlier CI log showed at least12visible unittest skips plus an oracle early return while the final wrapper claimed a complete suite; discarded stderr prevents an exhaustive historical total. Four real illustrative child programs now reproduce declared coverage counts. Eighteen independent actual-child controls reproduce four incorrect baseline complete-pass cases and verify the repair; the cached three-sheet oracle executes with unchanged inputs. Optional PyMuPDF1.27.2.3 preparation rebuilt all13 adapted files byte-identically in a temporary directory.",
+      "runs": "Deterministic software-reporting controls and source-cache preparation checks; no new extraction benchmark or human review",
+      "verdict": "kept",
+      "why": "Makes evidence scope inspectable without automatic installs/downloads or changing failure/preflight semantics. Missing optional caches remain visible limitations; arbitrary silent omissions cannot be detected from child reports.",
+      "source": [
+        "docs/JOURNAL.md#70-count-omitted-checks-before-calling-the-suite-complete",
+        "examples/test-coverage/README.md",
+        "docs/REVIEWING.md"
+      ]
     }
   ],
   "not_tried": [

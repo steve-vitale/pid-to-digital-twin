@@ -1,6 +1,10 @@
 # From a DEXPI file: a draft twin bundle with no model reading the drawing
 
-**Why it matters:** If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether.
+**Why it matters:** A supported CAD export can supply symbols and connections as data, avoiding a visual
+model-reading step. Conversion rules, source errors and omissions still need checking.
+
+This route uses three configured public example sheets. For your own CAD XML, start with the
+[DEXPI reader](../from-dexpi-xml/README.md).
 
 A DEXPI P&ID (the ISO 15926 / DEXPI XML exchange format) already holds the symbols, their labels and the lines
 between them. This example turns one public DEXPI sheet into the same review bundle that
@@ -10,25 +14,30 @@ bundle comes from the drawn label text with no reading step: an equipment tag is
 instrument bubble's tag is assembled from the label's first two separate text pieces joined with a space (`PI` and
 `4712.01` become `PI 4712.01`).
 
-It is a ceiling, not a result: it shows what the intake produces when the extraction is perfect. It says nothing
-about how well a model reads drawings.
+This is an oracle-route demonstration using converted answer keys, not a visual-extraction benchmark. Agreement
+with those keys is by construction; it does not prove that a CAD export or its conversion is complete or correct.
+It says nothing about how well a model reads drawings.
 
 ## Source
 
 DEXPI example P&IDs from the [DEXPI TrainingTestCases](https://gitlab.com/dexpi/TrainingTestCases) repository
 (DEXPI initiative and its contributing members), licensed CC BY 4.0, pinned to one commit in
-`data/dataset_adapters/dexpi_examples.json`. Nothing from it is committed here. The files are downloaded, checked
-against SHA-256 and converted into the gitignored `data/external/dexpi/` by `scripts/adapt_dexpi.py`; the converted
-keys and bundles are adaptations under the same license.
+`data/dataset_adapters/dexpi_examples.json`. Downloaded originals stay in the ignored cache. The committed outputs
+in this example are derived records. Sources are checked against SHA-256 and converted into the gitignored
+`data/external/dexpi/` by `scripts/adapt_dexpi.py`; converted keys and bundles are adaptations under the same license.
 
 ## Once: fetch and build the keys (network, PyMuPDF)
 
 ```sh
+python -m pip install -r requirements-render.txt  # optional renderer; separate network-capable setup
 python scripts/adapt_dexpi.py fetch    # downloads the pinned files, refuses any hash mismatch
 python scripts/adapt_dexpi.py build    # renders each sheet to PNG and writes <id>.graphml + <id>.tags.json
 ```
 
-`build` needs `PyMuPDF` from `requirements.txt`. The three sheets with geometry are `dexpi-c01`, `dexpi-c02` and
+`build` needs PyMuPDF from the separate [requirements-render.txt](../../requirements-render.txt), not the core
+requirements file. The optional pin is [PyMuPDF 1.27.2.3](https://pypi.org/project/pymupdf/1.27.2.3/): on
+2026-10-30 it rebuilt all 13 files of the five-sheet adapted cache byte for byte in a disposable directory.
+The offline bundle commands below do not import that renderer. The three sheets with geometry are `dexpi-c01`, `dexpi-c02` and
 `dexpi-c03`; the C08 sheets are keyed by tag lists only (no boxes, no links) and are refused.
 
 ## The two commands (offline, stdlib only)

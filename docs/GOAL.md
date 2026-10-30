@@ -625,3 +625,28 @@ truth-definition issue or change the matrix's pre-registered pass criteria.
 8. Independently review the frozen code and exact new examples, rerun affected matrix cells with their original
    criteria/tool hashes, and run the appropriate registered tests. These are local software/source checks, not
    adoption, authenticated approval, concurrent-service guarantees or an incumbent integration.
+
+### Maintenance acceptance: report the checks that actually ran
+
+2026-10-29. The exact-commit CI log for `8b90d3a` reported 58 successful scripts and zero platform skips, but also
+showed at least 12 visible cache-dependent unittest skips and an optional oracle that returned normally without running its
+check. The final complete-suite message hid those omissions. The local cache-backed run exercised those source
+checks but skipped two Windows symlink controls. Those environments have different coverage.
+
+1. Count unittest's reported skipped cases from either output stream, including failure summaries. Identify
+   explicit platform notices separately from other skipped-check notices, without double-counting a platform
+   case already included in unittest's total. Do not classify a missing source cache or dependency as a platform
+   restriction merely because its message begins with `SKIP`.
+2. Replace the oracle's normal return on absent data with a real unittest skip. A test script's successful exit
+   may coexist with skipped cases; the runner must not claim a complete full-suite pass in that situation.
+   Preserve failure/preflight exit meanings and source-only exclusions. Do not silently install or fetch inputs.
+3. Exercise actual child processes with genuine unittest class/method/subtest skips and custom notices, as well
+   as failures and fully executed positive controls. Verify counts across stdout/stderr and avoid false matches
+   on ordinary prose mentioning a skipped action. Keep existing platform/refusal controls meaningful.
+4. Reproduce the omission using the earlier implementation and the same child results, then show the corrected
+   report. Check the actual optional-oracle path on a disposable missing cache and the real local cached path.
+   Explain optional source coverage and setup in the reviewer/replication guides; historical receipts retain
+   their original scope and must not be relabeled as having run missing checks.
+5. Review the frozen reporting change independently and run the registered suite locally and in CI. Report each
+   environment's actual omissions. No new extraction score, plant acceptance, customer benefit or exhaustive
+   proof that arbitrary test programs cannot hide work is implied.

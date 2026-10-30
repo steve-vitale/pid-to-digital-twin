@@ -220,8 +220,7 @@ class OracleOnBuiltSheets(unittest.TestCase):
     def test_oracle_scores_zero_corrections(self):
         built = [s["id"] for s in A.config()["geometry_keyed"] if (A.SHEETS / f"{s['id']}.graphml").exists()]
         if not built:
-            print("oracle check skipped: DEXPI sheets not built (python scripts/adapt_dexpi.py fetch && build)")
-            return
+            self.skipTest("DEXPI sheets not built; run python scripts/adapt_dexpi.py fetch then build")
         for sid in built:
             g, png = A.SHEETS / f"{sid}.graphml", A.SHEETS / f"{sid}.png"
             w, h = sc.png_size(png)

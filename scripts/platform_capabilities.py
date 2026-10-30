@@ -1,7 +1,8 @@
 """Platform capability checks shared by tests. Stdlib only.
 
 A test may skip a sub-case ONLY when the operating system refuses the fixture it needs, never when the code under
-test misbehaves. Each skip prints a line starting with "SKIP " that scripts/run_tests.py surfaces and counts, so a
+test misbehaves. Each skip prints "SKIP [platform] " that scripts/run_tests.py surfaces separately from unittest's
+skipped-case totals, so the same skipped case is not counted twice and a
 platform gap can never pass silently.
 """
 import os
@@ -22,6 +23,6 @@ def symlink_or_skip(test, link, target, target_is_directory=False):
             reason = (f"{test.id()}: this Windows account cannot create symlinks (WinError 1314, "
                       "SeCreateSymbolicLinkPrivilege). Enable Developer Mode or run elevated to exercise it; "
                       "Linux/macOS CI always runs it.")
-            print("\nSKIP " + reason, file=sys.stderr, flush=True)  # own line: unittest's dots share stderr
+            print("\nSKIP [platform] " + reason, file=sys.stderr, flush=True)  # own line: unittest's dots share stderr
             test.skipTest(reason)
         raise

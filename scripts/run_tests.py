@@ -8,6 +8,7 @@ Exit codes: 0 selected checks pass, 1 test failure, 2 missing/invalid prerequisi
 import argparse
 import hashlib
 import importlib.util
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -174,6 +175,27 @@ def report_remediation(issues):
     print("  python scripts/run_tests.py --source-only  # narrower checks; NOT a full-suite pass")
 
 
+def coverage_notices(stdout, stderr):
+    """Read unittest summaries and explicit notices, not arbitrary prose containing the word 'skip'.
+
+    Platform notices add reasons for unittest skips; they are reported separately, never added to its case count.
+    Other SKIP lines describe extra checks/groups, whose granularity may differ from unittest cases. These are
+    child-program reports, not independent proof that a test program attempted every intended check.
+    """
+    cases, platform, other = 0, [], []
+    for line in (stdout + "\n" + stderr).splitlines():
+        summary = re.fullmatch(r"(?:OK|FAILED)(?: \(([^)]*)\))?", line.strip())
+        if summary and summary[1]:
+            skipped = re.search(r"(?:^|,\s*)skipped=(\d+)(?:,|$)", summary[1])
+            if skipped:
+                cases += int(skipped[1])
+        if line.startswith("SKIP [platform] "):
+            platform.append(line[len("SKIP [platform] "):])
+        elif line.startswith("SKIP "):
+            other.append(line[5:])
+    return cases, platform, other
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     modes = parser.add_mutually_exclusive_group()
@@ -197,7 +219,7 @@ def main(argv=None):
         return 0
     selected = SOURCE_TESTS if args.source_only else TESTS
     failed = 0
-    skipped = []  # (script, reason): platform gaps printed by scripts/platform_capabilities.py, never silent
+    unittest_skips, platform_skips, other_skips = 0, [], []
     for script in selected:
         # -S makes the source-only promise testable even on a machine with packages installed.
         command = [sys.executable] + (["-S"] if args.source_only else []) + [script]
@@ -211,18 +233,26 @@ def main(argv=None):
         status = "PASS" if result.returncode == 0 else "FAIL"
         last = (result.stdout.strip().splitlines() or result.stderr.strip().splitlines() or [""])[-1]
         print(f"{status}  {script}: {last}".rstrip())
-        for line in (result.stdout + "\n" + result.stderr).splitlines():
-            if line.startswith("SKIP "):
-                skipped.append((script, line[5:]))
-                print(f"      SKIP (platform) {line[5:]}")
+        cases, platform, other = coverage_notices(result.stdout, result.stderr)
+        unittest_skips += cases
+        if cases:
+            print(f"      SKIP (unittest) {cases} case(s); run this unittest script with -v for identities/reasons")
+        for reasons, retained, category in ((platform, platform_skips, "platform"),
+                                             (other, other_skips, "additional check")):
+            for reason in reasons:
+                retained.append((script, reason))
+                print(f"      SKIP ({category}) {reason}")
         if result.returncode:
             print(result.stdout[-2000:], result.stderr[-2000:])
     print(f"{label}: {len(selected) - failed}/{len(selected)} scripts passed; {failed} failed; "
-          f"{len(skipped)} sub-case(s) skipped by the platform.")
+          f"{unittest_skips} unittest case(s) skipped; {len(platform_skips)} platform notice(s); "
+          f"{len(other_skips)} additional skipped-check notice(s).")
+    if platform_skips:
+        print("Platform notices explain unittest skips where reported; do not add them to the unittest case count.")
     if args.source_only:
         print("SOURCE-ONLY result is NOT a full-suite pass; cached-data and dependency checks were excluded.")
-    elif not failed and skipped:
-        print("FULL CACHED-DATA scripts passed, but the SKIP lines above did not run on this machine: "
+    elif not failed and (unittest_skips or platform_skips or other_skips):
+        print("FULL CACHED-DATA scripts passed, but some checks did not run (see skipped cases/notices above): "
               "not a complete pass here. This is offline evidence, not gateway/runtime acceptance.")
     elif not failed:
         print("FULL CACHED-DATA suite passed. This is offline evidence, not gateway/runtime acceptance.")

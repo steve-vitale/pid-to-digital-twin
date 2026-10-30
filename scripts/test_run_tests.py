@@ -59,15 +59,55 @@ class RunnerControls(unittest.TestCase):
     def test_platform_skips_are_surfaced_and_withhold_the_complete_pass(self):
         output = io.StringIO()
         result = subprocess.CompletedProcess([], 0, stdout='OK (skipped=1)\n',
-                                             stderr='SKIP case: this Windows account cannot create symlinks\n')
+                                             stderr='SKIP [platform] case: this Windows account cannot create symlinks\n')
         with patch.object(runner, 'prerequisites', return_value=[]), \
              patch.object(runner.subprocess, 'run', return_value=result), contextlib.redirect_stdout(output):
             self.assertEqual(runner.main([]), 0)
         text = output.getvalue()
         self.assertIn('SKIP (platform) case: this Windows account cannot create symlinks', text)
-        self.assertIn(f'{len(runner.TESTS)} sub-case(s) skipped by the platform', text)
+        self.assertIn(f'{len(runner.TESTS)} unittest case(s) skipped; {len(runner.TESTS)} platform notice(s)', text)
+        self.assertIn('do not add them to the unittest case count', text)
         self.assertIn('not a complete pass here', text)
         self.assertNotIn('FULL CACHED-DATA suite passed', text)
+
+    def test_unittest_skips_in_either_stream_withhold_complete_pass(self):
+        for stdout, stderr in (('OK (skipped=9)\n', ''), ('ordinary test log\n', 'OK (skipped=9)\n')):
+            with self.subTest(stdout=stdout):
+                result = subprocess.CompletedProcess([], 0, stdout=stdout, stderr=stderr)
+                with patch.object(runner, 'prerequisites', return_value=[]), \
+                     patch.object(runner.subprocess, 'run', return_value=result), \
+                     contextlib.redirect_stdout(io.StringIO()) as output:
+                    self.assertEqual(runner.main([]), 0)
+                self.assertIn(f'{9 * len(runner.TESTS)} unittest case(s) skipped; 0 platform notice(s)', output.getvalue())
+                self.assertIn('not a complete pass here', output.getvalue())
+                self.assertNotIn('FULL CACHED-DATA suite passed', output.getvalue())
+
+    def test_skip_notices_do_not_classify_caches_as_platform_constraints(self):
+        self.assertEqual(runner.coverage_notices('SKIP optional cache unavailable\n', 'OK\n'),
+                         (0, [], ['optional cache unavailable']))
+        self.assertEqual(runner.coverage_notices('SKIP [platform] simulated constraint\n', 'OK (skipped=1)\n'),
+                         (1, ['simulated constraint'], []))
+        self.assertEqual(runner.coverage_notices('Example: OK (skipped=9)\nordinary prose says skipped=8\n',
+                                                 'OK (expected failures=2)\n'), (0, [], []))
+        self.assertEqual(runner.coverage_notices('', 'FAILED (failures=1, errors=2, skipped=3)\n'), (3, [], []))
+
+    def test_additional_skipped_check_withholds_complete_pass(self):
+        result = subprocess.CompletedProcess([], 0, stdout='SKIP optional source unavailable\nOK\n', stderr='')
+        with patch.object(runner, 'prerequisites', return_value=[]), \
+             patch.object(runner.subprocess, 'run', return_value=result), \
+             contextlib.redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(runner.main([]), 0)
+        self.assertIn(f'{len(runner.TESTS)} additional skipped-check notice(s)', output.getvalue())
+        self.assertIn('not a complete pass here', output.getvalue())
+        self.assertNotIn('SKIP (platform)', output.getvalue())
+
+    def test_public_example_executes_real_children_and_matches_declared_counts(self):
+        result = subprocess.run([runner.sys.executable, '-S',
+                                 str(runner.ROOT / 'examples/test-coverage/demonstrate.py'), '--check'],
+                                capture_output=True, encoding='utf-8', timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('class_method_subtest_stdout', result.stdout)
+        self.assertIn('failure_with_skip_stderr', result.stdout)
 
     def test_source_only_exclusions_and_label_are_explicit(self):
         status, output, run = self.invoke(['--source-only'])

@@ -2733,6 +2733,275 @@
      "pass": true
     }
    ]
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "Independent Codex agent (read-only review, real child-process controls and independent cache rebuild)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF. Explicit raw-byte source/cache and baseline-code hashes are not normalized.",
+   "registered_output_count": 2,
+   "files": {
+    "out/claims_check.md": "a530e33867d4651099fe8599d90c9cad693ccf3415861c1a64f0528f7c8a81da",
+    "examples/test-coverage/expected.json": "c3f9c317aec4b9b5dfe3f9cdf1461a08c376f0f15fcff0eb0a5a3c0b099215d4"
+   },
+   "supporting_files": {
+    ".github/workflows/tests.yml": "f2c274898d5a64b90371870b1f319e3d8b7f70776118cd2bc35b71673ac52e45",
+    "data/dataset_adapters/dexpi_examples.json": "23228640937e468099918af66de52b9e3c66d7d80ce79cc931a080e1821b6706",
+    "docs/GOAL.md": "90bdaad60318d99e45d563f031da978ad78e8ef47b747b16c5e18b2470cc7d67",
+    "docs/REPLICATE_AT_YOUR_PLANT.md": "acae2bea4e572b66b5b5f4bab5f00de8ab706b92aac4485e034a50892dcd88d2",
+    "docs/REVIEWING.md": "b3e2328fc909c8a19678cc05f95c81aa9b644dff27ff76a833dabbd54abc9a6d",
+    "examples/from-dexpi/README.md": "39c9ea26447b23582f542efa9e20e5b84a63543e930e89cc5df4e1a13c8270dc",
+    "examples/test-coverage/README.md": "3a84fdaa6a53c31ace2e2067f127914beed7957e460a166819ea4ea7094a2d8f",
+    "examples/test-coverage/demonstrate.py": "c2ae4b0b55932d543fde01a7f088ebcedd090c02e6837ebb85a7d554a7966f0e",
+    "requirements-render.txt": "76259e1cd656bc788de8a71e6fa731d9779066c5abbf24008db0f8c9138c8e82",
+    "requirements.txt": "a7e58f9cdc7b395e162ab27f61b2eac1ff74abcd6c495c3abcea55237268bdbf",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/check_claims.py": "e52c14c22cbc7567bbcb9be44fb27b8516c4b4409306f5e8beadf7bea1dc6476",
+    "scripts/platform_capabilities.py": "0c2d5d41eb6549af19e765dd34df21030fc4955c304d7c8931d2caebd023f1a6",
+    "scripts/run_tests.py": "508a4605defeaae279df70ccd6246f8135977755b1ca6072797594e0c92b31d9",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/test_check_claims.py": "33720892047c51748d779161e3689fb00ee0828fa26d1144b3472e660f79a3b2",
+    "scripts/test_dexpi_adapter.py": "1b0f02d0278ec55ee027b63df9c0444e4d37167ecce5cec1c16a91c4a411e785",
+    "scripts/test_run_tests.py": "09d4861d1f3b182f896b603ce9c5f0a8f56d14e3e084f009a74489959e47b18b"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Test coverage paragraph beginning CI runs the full selection on every push and ending before step 5",
+     "normalized_utf8_sha256": "e96bc69c2323e9d052d5f69582df82b67d741dc593b1985c2b997197f056eb75",
+     "scope": "The separate generated feature table is excluded from this section binding."
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "The 8b90d3a runner could report a complete full-suite pass when successful children had genuine unittest skips on stdout or stderr. Generic SKIP notices were all labelled platform restrictions, and the optional DEXPI oracle returned normally when no built sheets existed.",
+     "resolution": "Independently reproduced the incorrect complete-pass message through actual child processes using the exact earlier runner. Final code reads OK and FAILED skipped-case summaries from both streams, separates explicit platform notices from additional check/group notices, does not add platform notices to unittest totals, and withholds complete coverage when any omission is reported. The actual absent-cache oracle now produces a unittest skip; failure and preflight exit meanings remain intact."
+    },
+    {
+     "issue": "The DEXPI adapter guide said PyMuPDF was in the core requirements and described the key-conversion route as error-free or perfect extraction.",
+     "resolution": "The guide now identifies the separate optional requirements-render.txt pin, directs arbitrary CAD XML to the actual reader, distinguishes ignored originals from committed derived records, and describes key agreement as an oracle-route check rather than extraction accuracy. Independently ran the actual five-sheet adapter build with installed PyMuPDF 1.27.2.3 into external scratch: all 13 adapted cache files reproduce byte-for-byte, all 11 configured source pins match, and all 12 original source files plus the existing cache remain unchanged."
+    }
+   ],
+   "resolution": "No open finding in this bounded reporting/setup scope. The new four-child illustrative output reproduces its declared counts and complete-pass decisions. The earlier claims report is unchanged and reproduces from the committed evidence: 41 numerical checks agree, one is explicitly prose-only, none fail. This receipt binds the exact two registered outputs and reviewed code/docs; it does not retroactively expand older CI or review coverage.",
+   "checks": [
+    "18 independent actual-child controls pass against the exact final runner hash. Only fixture selection and unrelated prerequisite discovery are isolated by a wrapper; subprocess results, unittest runners and child streams are real, not mocked CompletedProcess records.",
+    "The exact 8b90d3a runner incorrectly claims a complete pass in four independently reproduced cases: five genuine class/setUpClass/method/subtest skips on stderr; two method/subtest skips on stdout; two genuine skipped suites split across both streams; and the actual no-built-cache optional oracle. Final reporting withholds the complete-pass claim in each case.",
+    "Genuine FAILED summaries combining a failure, error, expected failure and skip retain exit 1 and count the skipped case. A failure without skips and an exception before unittest also remain failures. Ordinary prose mentioning skipped actions, skipped= values and embedded example summaries produces no false skip count.",
+    "Separate generic notices on stdout and stderr are additional check/group notices, never platform restrictions. The real platform helper exercised with a labelled planted WinError 1314 emits one platform notice and one unittest skip, not two skipped cases. A different planted OS error propagates as failure. A combined platform/additional-notice child retains separate units.",
+    "Source-only mode preserves explicit exclusions and its not-a-full-suite warning while reporting genuine skips. Missing-prerequisite and check-only controls launch no child and retain exit 2 and exit 0 respectively. The actual local full-mode prerequisite command also returns 0 with tests NOT RUN and no suite-pass claim.",
+    "Actual optional-oracle controls use a disposable absent path without modifying the real cache. The pre-repair oracle silently returns normally; the current oracle records one unittest skip. The positive current oracle executes against all three real local built geometry sheets with zero skips, zero corrections and unchanged raw bytes for all six PNG/GraphML files.",
+    "Independently ran the frozen public demonstrate.py --check: all four real fixture children match expected.json exactly, including a fully executed positive, stdout class/method/subtest omissions, a simulated platform restriction plus additional notice, and a failure with a stderr skip. Temporary child programs stay outside the repository.",
+    "Independently ran all 13 test_run_tests.py controls and all 13 test_check_claims.py controls: pass. check_claims.py --no-write --quiet passes; independent in-memory regeneration exactly matches out/claims_check.md and its previous reviewed hash.",
+    "Independently rebuilt the adapter cache with the actual optional PyMuPDF 1.27.2.3 renderer and existing sources. BASE and SHEETS point into external scratch; SOURCE is unchanged and urlopen is forbidden. All five sheets produce exactly the same 13 cache files. All 11 configured XML/SVG/PDF/list pins match; hashes of all 12 original source files and the pre-existing cache are unchanged after the build.",
+    "Read final reviewer, replication, example, setup and README coverage instructions against the actual runner and CI workflow. Required TE data/revised-code setup remains separate from the offline runner; optional DEXPI originals/adapted keys/vendor renders may be absent. Successful script exits, reported case skips and group notices are distinct; the documentation does not claim missing originals were read or that arbitrary silent omissions are detectable."
+   ],
+   "baseline_reproduction": {
+    "commit": "8b90d3a",
+    "runner_raw_sha256": "0e67ee05ab0422463ad88342e74bdc111dfeba826a81e6ec0142fcbdd3ef70e9",
+    "oracle_test_raw_sha256": "0b8b428bddb745297a43fb8f2725923985a43469af6d953d070d9f40b231a055",
+    "incorrect_complete_pass_reproductions": 4,
+    "scope": "Reproduced behavior with actual controlled child results. This review does not infer an exhaustive historical CI skip total from partially surfaced logs."
+   },
+   "independent_controls": [
+    {
+     "check": "executed_positive_false_prose",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "stderr_class_setup_method_subtest_skips",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 5,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": true
+    },
+    {
+     "check": "stdout_unittest_summary",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 2,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": true
+    },
+    {
+     "check": "failure_error_expected_failure_and_skip",
+     "pass": true,
+     "returncode": 1,
+     "unittest_skips": 1,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "two_real_suites_both_streams",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 2,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": true
+    },
+    {
+     "check": "additional_notice_stdout",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 1,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "additional_notice_stderr",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 1,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "platform_helper_real_skip",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 1,
+     "platform_notices": 1,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "platform_and_additional_notice",
+     "pass": true,
+     "returncode": 0,
+     "unittest_skips": 1,
+     "platform_notices": 1,
+     "additional_notices": 1,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "platform_helper_other_error_fails",
+     "pass": true,
+     "returncode": 1,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "failure_without_skip",
+     "pass": true,
+     "returncode": 1,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "child_exception",
+     "pass": true,
+     "returncode": 1,
+     "unittest_skips": 0,
+     "platform_notices": 0,
+     "additional_notices": 0,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "source-only exclusions and real child skips remain explicit",
+     "pass": true
+    },
+    {
+     "check": "preflight [] preserves status and does not launch child",
+     "pass": true
+    },
+    {
+     "check": "preflight ['--check-prerequisites'] preserves status and does not launch child",
+     "pass": true
+    },
+    {
+     "check": "actual optional oracle missing cache current",
+     "pass": true,
+     "baseline_incorrect_complete_pass": false
+    },
+    {
+     "check": "actual optional oracle missing cache baseline",
+     "pass": true,
+     "baseline_incorrect_complete_pass": true
+    },
+    {
+     "check": "actual three-sheet local cached oracle executes with no skipped cases and no changed cache bytes",
+     "pass": true,
+     "cached_files": {
+      "dexpi-c01.graphml": "f72a66b0132f2beb43e802335026043f5d48b317d051194d05882d3e970966e3",
+      "dexpi-c01.png": "69a14663282407f55794594d1c45f2ae2ec7ed1466566fc7af70bfb790fcfcea",
+      "dexpi-c02.graphml": "27a7509b3ac92f843b5b7baa89809c8fb91ae057a173264a582db14e4c7bd3c2",
+      "dexpi-c02.png": "ca9d9901e4fd4ad5b7e72c095a14f9b438f643203539fde1ee4703134f3acbcf",
+      "dexpi-c03.graphml": "8ae933e3d78d709e302836b9feffa3b77d9676ad6f83e76c4d79bfb8bf6511a3",
+      "dexpi-c03.png": "307a3fb5636bf7423b5f3a84a131f238e04f187407994be665d131a00c582003"
+     }
+    }
+   ],
+   "optional_renderer_rebuild": {
+    "renderer": "PyMuPDF",
+    "version": "1.27.2.3",
+    "five_sheets": true,
+    "rebuilt_file_count": 13,
+    "all_cache_bytes_identical": true,
+    "source_root_unchanged": true,
+    "all_source_bytes_unchanged": true,
+    "existing_cache_bytes_unchanged": true,
+    "supplied_source_pins_checked": 11,
+    "source_file_count": 12,
+    "network_forbidden": true,
+    "rebuilt_files_raw_sha256": {
+     "dexpi-c01.graphml": "f72a66b0132f2beb43e802335026043f5d48b317d051194d05882d3e970966e3",
+     "dexpi-c01.png": "69a14663282407f55794594d1c45f2ae2ec7ed1466566fc7af70bfb790fcfcea",
+     "dexpi-c01.tags.json": "b97f1d7169c8d2c6144bda7c70b8a7efc6cb0668465073d75e72a8ca5cef1049",
+     "dexpi-c02.graphml": "27a7509b3ac92f843b5b7baa89809c8fb91ae057a173264a582db14e4c7bd3c2",
+     "dexpi-c02.png": "ca9d9901e4fd4ad5b7e72c095a14f9b438f643203539fde1ee4703134f3acbcf",
+     "dexpi-c02.tags.json": "a79231eaaa53a156161c5792c8cf5ecb5095f8924ba7c1b8c38d49c694f4abc4",
+     "dexpi-c03.graphml": "8ae933e3d78d709e302836b9feffa3b77d9676ad6f83e76c4d79bfb8bf6511a3",
+     "dexpi-c03.png": "307a3fb5636bf7423b5f3a84a131f238e04f187407994be665d131a00c582003",
+     "dexpi-c03.tags.json": "de4e8646376c291a25245bf97c0a773d0dab1e4cec43525f19ac77d21154da4b",
+     "dexpi-c08a.png": "91af950809b11157cb248dbf6eee5d7a87dc7c81aaf14141a8094d7ed524f58c",
+     "dexpi-c08a.taglist.json": "d6034a44eb072e24e0a191f299a0b1c312aa33795945b7ac1e98d38f8bc21e34",
+     "dexpi-c08b.png": "0c19cf50550878d5c73e3b6aaf843377f8e5c74d5403accf3b518596e44fdcc9",
+     "dexpi-c08b.taglist.json": "7482ee7f07ad8769f2c3586c7052290ec1e3b380f6ae16d5b3753db8435345b3"
+    },
+    "source_files_raw_sha256": {
+     "LICENSE": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+     "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.svg": "49696872639b2f99a9da72cd83adb0ae29e427c24c75ad374d33e3382e1db047",
+     "dexpi 1.3/example pids/C01 DEXPI Reference P&ID/C01V04-VER.EX01.xml": "a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c",
+     "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.svg": "a2e5f4e740ab203213ca9e697956b3a10d7603ffe4d1239158e077cd4cc260a9",
+     "dexpi 1.3/example pids/C02 Process Column (BASF)/C02V03-VER.EX02.xml": "dfe4323c18d018caa4b28ec789b3dbee21be73c6a07c7cbd0791ceebd322113b",
+     "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.svg": "6c0dacb00362dba4261b6b752b3b9e73ad9ac952bb7d6fac068fe1a37540d18d",
+     "dexpi 1.3/example pids/C03 Piping (Equinor)/C03V04-VER.EX02.xml": "a1c892f3bc21338c2546baf71e10abf11e3653b7cd6956b1a24bcfab0db88f14",
+     "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Equipment List.xlsm": "afdf56ceaf1b4c37753c3db64089474b591c7c2f4aad611d1d27e551cccc2756",
+     "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Instrument List.xlsm": "b3efe5b9938846c667962a6129c8c2a11a95c9b8d314c5d6243c489d2fd1326f",
+     "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/COV Valve List.xlsm": "382ac22ad1f5091f9a4764347c544b19e8afa11916b4c6bf24759797e1216cc9",
+     "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-1234567_bw.pdf": "c4184cab8538f728f1ab23787415ad90076582d50f8039509c384a2398bf8ccf",
+     "dexpi 1.3/example pids/C08 Two connected P&IDs (Covestro)/C08V01/UER-2345678_bw.pdf": "a9bfe903a2a8ba07eea128190f6332239790d3246aaeef498b761a8c0e5ff622"
+    }
+   },
+   "prior_review": {
+    "claims_report_unchanged": true,
+    "scope": "Previous wider repository-check review scope remains historical. This increment independently checks reporting/setup behavior, the illustrative output and current claim-report reproduction; it does not re-certify every unrelated registry or pipeline claim."
+   },
+   "proof_artifact_raw_sha256": {
+    "review_skip_reporting.py": "727a43bf815a174aadd4fd90012654397df6ba02f36faafda875fc6f63f1bfe9",
+    "independent-skip-controls.json": "72341b1f3eefb53e7a9f4f7ffc5b937585ca31936b7e25e4afaf3fd0a4487656",
+    "check_renderer_setup.py": "3e2350d04ffa9e1b2677fa22665cee324b7547396bef57494dce3e316577d838",
+    "independent-render-proof.json": "e0fe4d4aebd7218f4faad2f5d7d4d51b0098c52b8a1a27a8c226e8c22ce9b8cb",
+    "public-example.actual.json": "c3f9c317aec4b9b5dfe3f9cdf1461a08c376f0f15fcff0eb0a5a3c0b099215d4"
+   },
+   "limits": "Independent coding-agent software review only. No new whole-repository suite run or current CI run is claimed by this reviewer. The separately planned full local/CI runs must report their own actual omissions; this receipt does not predict their totals. The historical CI observation is a minimum visible count, not an exhaustive total. The runner parses conventional unittest summaries and explicit child notices; it cannot prove that arbitrary programs attempted all intended checks or truthfully reported them. Case totals and notice counts have different units and must not be summed. The oracle positive checks key self-agreement, and the renderer check proves byte reproducibility on these existing pinned inputs; neither establishes source completeness, drawing extraction accuracy, current plant truth, human review benefit, native runtime/import acceptance or customer adoption. No network, download, package installation, original-source change or live organizational write was performed in this review."
   }
  ]
 }

@@ -3658,3 +3658,51 @@ apply command using the retained current register. The neutral lifecycle guide n
 systems can retain execution/release authority while reviewed context supports investigation. Outcome learning
 requires attributed execution and observations to return. No incumbent connector is supplied. Software preservation
 and clearer responsibilities do not establish engineer adoption, review time saved or a successful operational decision.
+
+## 70. Count omitted checks before calling the suite complete
+
+**What:** 2026-10-30. The `8b90d3a` CI run completed all 58 registered scripts successfully, but its final
+zero-platform-skip summary was not an exhaustive omission count. At least 12 unittest skips were visible in its
+per-script last lines, and the DEXPI oracle printed that its check was skipped before returning normally. Other
+successful scripts' stderr was discarded by the wrapper, so the old log cannot establish the total. The local
+cached-data run and Linux CI had different coverage. Historical receipts retain their original, limited scope.
+
+The runner now reads unittest's skipped-case totals from both output streams, including failure summaries. Explicit
+platform notices identify operating-system restrictions; generic skipped-check notices have their own category.
+Platform notices explain unittest cases rather than adding another case count. Additional notices can describe
+groups, so they are not another unit-test denominator either. A successful script exit can coexist with omitted
+cases. Any reported omission withholds the complete full-suite message; test failure and prerequisite exit meanings
+are unchanged. No missing source or dependency is installed or fetched by the runner.
+
+The known oracle early return is now a real unittest skip. This repair does not prove that an arbitrary test
+program cannot silently omit work or fabricate a report. Tests with optional original-source caches can still
+skip; preflight covers the declared required files and dependencies. Source-only still selects a narrower suite.
+The reviewer, replication and entry guides explain those boundaries and how to inspect affected cases with `-v`.
+
+The [offline four-child example](../examples/test-coverage/README.md) executes actual illustrative programs through
+the runner: all checks execute; four class/method/subtest skips reported on stdout; a simulated platform restriction
+plus an extra check notice; and a failure with a skipped method on stderr. Declared fixture counts are checked
+against the real reports and the committed expected JSON. Only test selection and prerequisite discovery are
+replaced; process execution is real. These are software controls, not another corpus benchmark or a plant review.
+
+Independent actual-child controls reproduce four incorrect complete-pass cases in the earlier implementation,
+including the missing-cache oracle path. The repaired reporting passed 18 independent controls covering class,
+setup, method and subtest skips; both streams and multiple summaries; failures/errors/expected failures; genuine
+platform-helper behavior under a planted privilege error; generic notices and prose negatives; and source-only,
+preflight and exit semantics. The real three-sheet cached oracle also executes without skips, with its six input
+cache files unchanged. The core runner controls now include the public process example.
+
+**Make optional source preparation runnable.** Following the skip messages found that the DEXPI guide claimed
+PyMuPDF was in `requirements.txt`, although the core file did not list it. A separate `requirements-render.txt`
+now pins the locally tested renderer. Rebuilding all five configured public sheets into a disposable directory
+with PyMuPDF 1.27.2.3 reproduced all 13 adapted files byte for byte. No source original or existing cache was
+overwritten. The guide also replaces its error-free/perfect-conversion wording with the actual oracle-route
+scope, points own-CAD users to the reader, and distinguishes ignored originals from committed derived examples.
+This changes no adapter rule, drawing, model prediction, answer key, benchmark score or matrix criterion.
+
+All 58 registered scripts passed in the local cached-data run. Its new summary reports two skipped unittest cases,
+two platform notices explaining those same cases, and zero additional skipped-check notices; it correctly withholds
+the complete-suite message. No optional-cache skip was reported locally. CI and other environments need their own
+reports. All 17 feature entries have current independent output receipts; this increment binds the two repo-checks
+outputs, 18 supporting files and the reviewed README section. The 94-cell matrix and its tool hashes remain unchanged,
+all 52 pipeline stages are fresh, and the claim check still has 41 numeric matches, one prose-only entry and no failures.
