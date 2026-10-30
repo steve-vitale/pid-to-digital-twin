@@ -4,6 +4,7 @@ Uses the committed OPEN100 answer keys; skips cleanly if they are absent. No mod
 Run: python scripts/test_evaluate_vendor.py
 """
 import contextlib
+import copy
 import io
 import json
 import sys
@@ -34,6 +35,39 @@ def quiet_main(argv):
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as err:
         code = ev.main(argv)
     return code, err.getvalue()
+
+
+class Interpretation(unittest.TestCase):
+    """Interpretation controls run from the committed receipt without cached keys or model calls."""
+    def setUp(self):
+        self.record = json.loads((Path(__file__).resolve().parents[1] /
+                                 "examples/vendor-evaluation/report.json").read_text(encoding="utf-8"))
+
+    def test_counts_are_not_presented_as_measured_labor(self):
+        before = copy.deepcopy(self.record)
+        text = ev.markdown(self.record)
+        self.assertIn("100 equals the empty-answer count", text)
+        self.assertIn("not measured review time, effort or labor savings", text)
+        self.assertNotIn("same work as starting from nothing", text)
+        self.assertEqual(self.record, before)
+
+    def test_overlapping_individual_intervals_do_not_establish_a_tie(self):
+        first, second = [0, 1, 2, 3, 4], [2.5, 3.5, 4.5, 5.5, 6.5]
+        a, b = ev.rs.run_interval(first), ev.rs.run_interval(second)
+        self.assertLess(b["lo"], a["hi"])
+        self.assertLess(ev.rs.welch(first, second)["hi"], 0)
+        text = ev.markdown(self.record)
+        self.assertIn("Overlap alone does not establish a tie, equivalence or absence of a difference", text)
+        self.assertIn("does not perform a between-vendor comparison test", text)
+
+    def test_intervals_and_geometry_keep_their_actual_scope(self):
+        text = ev.markdown(self.record)
+        for qualification in ("mean score on these fixed sheets", "not a prediction interval",
+                              "resamples only the observed sheets", "one observed run per sampled sheet",
+                              "Neither threshold establishes CAD precision or drawing readiness",
+                              "does not verify direct pipe adjacency"):
+            self.assertIn(qualification, text)
+        self.assertNotIn("precise enough to draw from", text)
 
 
 @unittest.skipUnless(HAVE_KEYS, "cached OPEN100 answer keys not present")

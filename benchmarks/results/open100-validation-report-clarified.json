@@ -1,0 +1,3260 @@
+{
+  "case_total": 6,
+  "code_sha256": {
+    "benchmark.py": "35578237d1f8bd01e3e509847ecc5708983230468d9996218e34c4c0e8d717f3",
+    "evaluate_vendor.py": "444d178db665b3db401b57aedb5704a0215e61f43c63c45de1d1c6e32319047b",
+    "replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b"
+  },
+  "controls": {
+    "open100-10": {
+      "_key_links": 207,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 341,
+        "key_items": 341,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 341,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 134,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 472,
+        "key_items": 341,
+        "review_load_per_100": 138.4,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.022
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 341,
+        "key_items": 341,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    },
+    "open100-11": {
+      "_key_links": 142,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 238,
+        "key_items": 238,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 238,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 96,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 334,
+        "key_items": 238,
+        "review_load_per_100": 140.3,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 238,
+        "key_items": 238,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    },
+    "open100-6": {
+      "_key_links": 101,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 192,
+        "key_items": 192,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 192,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 91,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 272,
+        "key_items": 192,
+        "review_load_per_100": 141.7,
+        "symbol_f1_rough_classified": 0.033,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.088
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 191,
+        "key_items": 192,
+        "review_load_per_100": 99.5,
+        "symbol_f1_rough_classified": 0.011,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    },
+    "open100-7": {
+      "_key_links": 141,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 212,
+        "key_items": 212,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 212,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 71,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 281,
+        "key_items": 212,
+        "review_load_per_100": 132.5,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.028
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 212,
+        "key_items": 212,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    },
+    "open100-8": {
+      "_key_links": 51,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 91,
+        "key_items": 91,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 91,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 40,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 131,
+        "key_items": 91,
+        "review_load_per_100": 144.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 91,
+        "key_items": 91,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    },
+    "open100-9": {
+      "_key_links": 170,
+      "empty": {
+        "connection_f1": 0.0,
+        "corrections": 226,
+        "key_items": 226,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.0
+      },
+      "perfect": {
+        "connection_f1": 1.0,
+        "corrections": 0,
+        "key_items": 226,
+        "review_load_per_100": 0.0,
+        "symbol_f1_rough_classified": 1.0,
+        "symbol_f1_strict_classified": 1.0,
+        "symbol_recall_rough_located": 1.0
+      },
+      "shifted": {
+        "_strict_located_key": 56,
+        "_strict_located_tp": 0,
+        "connection_f1": 0.0,
+        "corrections": 280,
+        "key_items": 226,
+        "review_load_per_100": 123.9,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 0.036
+      },
+      "wrong_class": {
+        "connection_f1": 0.0,
+        "corrections": 226,
+        "key_items": 226,
+        "review_load_per_100": 100.0,
+        "symbol_f1_rough_classified": 0.0,
+        "symbol_f1_strict_classified": 0.0,
+        "symbol_recall_rough_located": 1.0
+      }
+    }
+  },
+  "hash_method": "SHA256; CRLF normalized to LF for declared text extensions, raw binary otherwise",
+  "limits": [
+    "Compare only the same cohort and scoring contract; model identity is contributor-declared, not provider-attested.",
+    "Each replicate pools counts over its cases; summary reports mean/range/stdev over replicates, not a significance test or winner.",
+    "Missing/failed attempted answers score empty; unattempted cases remain visible and create different comparison cohorts.",
+    "Public keys and retrospective registration do not establish blindness. Synthetic controls and corrected/development results are separate.",
+    "Description facts grade literal selected fields only: no prose names, source validity, dimensions, limits, layout quality or plant truth."
+  ],
+  "registration": "Retrospective registration on2026-10-30 of the existing round5 runs. This is not a new preregistered, held-out or model-execution experiment.",
+  "results": [
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 706,
+          "tp": 599,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 436,
+          "tp": 413,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 436,
+          "tp": 382,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.7891963109354414,
+          "precision": 0.8484419263456091,
+          "recall": 0.7376847290640394
+        },
+        "symbols_rough": {
+          "f1": 0.8939393939393939,
+          "precision": 0.9472477064220184,
+          "recall": 0.8463114754098361
+        },
+        "symbols_strict": {
+          "f1": 0.8268398268398268,
+          "precision": 0.8761467889908257,
+          "recall": 0.7827868852459017
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:10:09+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 133,
+              "tp": 88,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 90,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 86,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/10.json",
+            "sha256": "341639e877c571eb197ecf37faa5c8b9cb438a49252dbf03fbd161c5b99dcf3d"
+          },
+          "recorded_run_at": "2026-10-13T11:13:57+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4546,
+            "seconds": 63.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 140,
+              "tp": 127,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 94,
+              "tp": 90,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 94,
+              "tp": 76,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/11.json",
+            "sha256": "b695051ba523a7af67757675d3332142715f7352ce29f4b3bc071c75e7d6cb36"
+          },
+          "recorded_run_at": "2026-10-13T11:15:31+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.5467,
+            "seconds": 94.7
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 86,
+              "tp": 62,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 88,
+              "tp": 79,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 88,
+              "tp": 74,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/6.json",
+            "sha256": "de6a8d83c4da4c1d54dde788404714d107c2933f3c67fa41717f345672f3b086"
+          },
+          "recorded_run_at": "2026-10-13T11:10:09+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4386,
+            "seconds": 54.1
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 143,
+              "tp": 123,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 64,
+              "tp": 61,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 64,
+              "tp": 59,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/7.json",
+            "sha256": "d1979b8eec8fe178df8c8c1e6d1d95bb0198174b57d35aad586eef1200b0f2b5"
+          },
+          "recorded_run_at": "2026-10-13T11:11:11+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.408,
+            "seconds": 62.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 41,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 39,
+              "tp": 38,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 39,
+              "tp": 38,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/8.json",
+            "sha256": "2e0d4feed4229be8b1eb8abc5275a5b06a16a9f84e7939f524dcfc4fdba6485b"
+          },
+          "recorded_run_at": "2026-10-13T11:11:57+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3464,
+            "seconds": 45.6
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 158,
+              "tp": 158,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 56,
+              "tp": 55,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 56,
+              "tp": 49,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/claude/9.json",
+            "sha256": "c1eb18cc6d4f81f20fcca6cf43ae3d1d7b1fc45358e36a6d92291edc88d3f8fa"
+          },
+          "recorded_run_at": "2026-10-13T11:12:53+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3786,
+            "seconds": 56.4
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "claude-r5-hA-rep1-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 695,
+          "tp": 594,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 431,
+          "tp": 411,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 431,
+          "tp": 379,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.7883211678832117,
+          "precision": 0.8546762589928057,
+          "recall": 0.7315270935960592
+        },
+        "symbols_rough": {
+          "f1": 0.8944504896626768,
+          "precision": 0.9535962877030162,
+          "recall": 0.8422131147540983
+        },
+        "symbols_strict": {
+          "f1": 0.8248095756256801,
+          "precision": 0.8793503480278422,
+          "recall": 0.7766393442622951
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:16:46+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 139,
+              "tp": 93,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 92,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 87,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/10.json",
+            "sha256": "94129af24bd8953ae6e2c5c87c97788177734f6053eabb02dc62976aead5d7e2"
+          },
+          "recorded_run_at": "2026-10-13T11:20:04+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4454,
+            "seconds": 52.4
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 137,
+              "tp": 124,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 93,
+              "tp": 89,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 93,
+              "tp": 69,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/11.json",
+            "sha256": "4bc7679f8c5f96085bace1ee4d1ad896b5ff99f3c2b3c14a24ff2022cef4dfa4"
+          },
+          "recorded_run_at": "2026-10-13T11:21:01+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4649,
+            "seconds": 57.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 81,
+              "tp": 60,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 84,
+              "tp": 77,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 84,
+              "tp": 76,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/6.json",
+            "sha256": "8c68cb830c39e12a647db1d9edc4524df718b90d6d0fb0aaebc3e35bdab0bf34"
+          },
+          "recorded_run_at": "2026-10-13T11:16:46+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4887,
+            "seconds": 62.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 134,
+              "tp": 118,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 63,
+              "tp": 61,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 63,
+              "tp": 58,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/7.json",
+            "sha256": "ab3d60d20961d575a8b5d8ad41cd17866558748d66cb5e50ee4da7d0b3b30b41"
+          },
+          "recorded_run_at": "2026-10-13T11:17:47+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4167,
+            "seconds": 61.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 45,
+              "tp": 40,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 39,
+              "tp": 38,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 39,
+              "tp": 38,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/8.json",
+            "sha256": "310b9634e77a6fe95e9ed992f79b3ec61c01fde4f9fe38cdd00db9482b3954b6"
+          },
+          "recorded_run_at": "2026-10-13T11:18:41+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3481,
+            "seconds": 54.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 159,
+              "tp": 159,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 55,
+              "tp": 54,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 55,
+              "tp": 51,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/claude/9.json",
+            "sha256": "0a7d63edae384ed7b01e312b46515d1b796f355b095e601f2dfa5a71bccd3351"
+          },
+          "recorded_run_at": "2026-10-13T11:19:12+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3167,
+            "seconds": 30.4
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "claude-r5-hA-rep2-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 695,
+          "tp": 606,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 433,
+          "tp": 416,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 433,
+          "tp": 382,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8042468480424685,
+          "precision": 0.8719424460431655,
+          "recall": 0.7463054187192119
+        },
+        "symbols_rough": {
+          "f1": 0.9033659066232356,
+          "precision": 0.9607390300230947,
+          "recall": 0.8524590163934426
+        },
+        "symbols_strict": {
+          "f1": 0.8295331161780674,
+          "precision": 0.8822170900692841,
+          "recall": 0.7827868852459017
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:22:09+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 132,
+              "tp": 89,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 92,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 86,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/10.json",
+            "sha256": "b785c105c484ec7e7277b63472597cee2bd935de7011746d8828ea493ee677d5"
+          },
+          "recorded_run_at": "2026-10-13T11:24:57+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4584,
+            "seconds": 54.9
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 145,
+              "tp": 132,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 77,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/11.json",
+            "sha256": "d2a829985fa23a21a217e9aa77589f63fcc06591fffe6be8374e057ac59c126d"
+          },
+          "recorded_run_at": "2026-10-13T11:26:02+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4717,
+            "seconds": 65.6
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 87,
+              "tp": 65,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 87,
+              "tp": 81,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 87,
+              "tp": 79,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/6.json",
+            "sha256": "e415f0c8f1eef3150c1f0bc03ff6c3d674088bbf3bae303b8ba6f8139f92ad6f"
+          },
+          "recorded_run_at": "2026-10-13T11:22:09+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4378,
+            "seconds": 50.1
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 132,
+              "tp": 123,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 62,
+              "tp": 61,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 62,
+              "tp": 58,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/7.json",
+            "sha256": "6be3dfe1a434b3b7c5cd592b7c61fe1dc4afd3388d7cef46888a5f9d7fefb33c"
+          },
+          "recorded_run_at": "2026-10-13T11:22:46+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3461,
+            "seconds": 37.4
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 43,
+              "tp": 41,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 37,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/8.json",
+            "sha256": "52833b69cdf41d30e2ee2cf4c1d131c830c44311720c9c8ef3f02c10a5ad0ebb"
+          },
+          "recorded_run_at": "2026-10-13T11:23:27+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3475,
+            "seconds": 41.1
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 156,
+              "tp": 156,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 52,
+              "tp": 52,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 52,
+              "tp": 45,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/claude/9.json",
+            "sha256": "072d229b7813243c1ea9a1a9b5b4574d01bda8f1784063ee66ad6d413f0be57d"
+          },
+          "recorded_run_at": "2026-10-13T11:24:02+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3165,
+            "seconds": 34.4
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "claude-r5-hA-rep3-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 675,
+          "tp": 604,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 439,
+          "tp": 419,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 439,
+          "tp": 395,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.812373907195696,
+          "precision": 0.8948148148148148,
+          "recall": 0.7438423645320197
+        },
+        "symbols_rough": {
+          "f1": 0.9039913700107874,
+          "precision": 0.9544419134396356,
+          "recall": 0.8586065573770492
+        },
+        "symbols_strict": {
+          "f1": 0.8522114347357066,
+          "precision": 0.8997722095671982,
+          "recall": 0.8094262295081968
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:27:09+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 106,
+              "tp": 89,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 92,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 86,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/10.json",
+            "sha256": "6a1afa093fc5270c39f814bbdcc8eb35e77d86419ef110d3f6a3814118fb0f02"
+          },
+          "recorded_run_at": "2026-10-13T11:29:51+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4536,
+            "seconds": 55.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 142,
+              "tp": 129,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 81,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/11.json",
+            "sha256": "7a7384b38f35b7e172c11aa906150637404a392727a7605ece8b151003be484e"
+          },
+          "recorded_run_at": "2026-10-13T11:30:50+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4773,
+            "seconds": 59.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 90,
+              "tp": 63,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 90,
+              "tp": 82,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 90,
+              "tp": 81,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/6.json",
+            "sha256": "a550972265c7641362f727de0b1033ff8eebc6d3592f5e24e64913f0f3a4ef35"
+          },
+          "recorded_run_at": "2026-10-13T11:27:09+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4503,
+            "seconds": 51.3
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 132,
+              "tp": 123,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 62,
+              "tp": 61,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 62,
+              "tp": 60,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/7.json",
+            "sha256": "26cfeed98b7619d0830bf5945652ad7b5f94acfb31c682be9fb6b4d612cb873c"
+          },
+          "recorded_run_at": "2026-10-13T11:27:44+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3522,
+            "seconds": 35.7
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 41,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 39,
+              "tp": 38,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 39,
+              "tp": 37,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/8.json",
+            "sha256": "1140965041ce01a2c295bd89fe66c47e819c4d515888f03a45978a34c4bb0de8"
+          },
+          "recorded_run_at": "2026-10-13T11:28:20+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3449,
+            "seconds": 36.1
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 159,
+              "tp": 159,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 56,
+              "tp": 55,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 56,
+              "tp": 50,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/claude/9.json",
+            "sha256": "52871b23c5f363cea1445a7d904251a9b983e3c4bfde05ce2b2f2556cd929d3b"
+          },
+          "recorded_run_at": "2026-10-13T11:28:56+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3243,
+            "seconds": 35.6
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "claude-r5-hA-rep4-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 702,
+          "tp": 591,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 436,
+          "tp": 414,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 436,
+          "tp": 381,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.7807133421400264,
+          "precision": 0.8418803418803419,
+          "recall": 0.7278325123152709
+        },
+        "symbols_rough": {
+          "f1": 0.8961038961038961,
+          "precision": 0.9495412844036697,
+          "recall": 0.8483606557377049
+        },
+        "symbols_strict": {
+          "f1": 0.8246753246753247,
+          "precision": 0.8738532110091743,
+          "recall": 0.7807377049180327
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:32:09+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 132,
+              "tp": 86,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 90,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 83,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/10.json",
+            "sha256": "144938e2fc6000032152c013583fda6777937489bb57e1032aee4da2fdad077a"
+          },
+          "recorded_run_at": "2026-10-13T11:34:55+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4579,
+            "seconds": 56.9
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 149,
+              "tp": 131,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 75,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/11.json",
+            "sha256": "23ec60eb0ff4fff68c483f2717dd162b32fc68f4bb33df0aee7a80b2206f250a"
+          },
+          "recorded_run_at": "2026-10-13T11:35:51+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.4618,
+            "seconds": 56.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 87,
+              "tp": 62,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 89,
+              "tp": 81,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 89,
+              "tp": 77,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/6.json",
+            "sha256": "c124e3410615dba9ed56e5a1a27d14ff2262b5a3c9a8d6dafce9419195de30af"
+          },
+          "recorded_run_at": "2026-10-13T11:32:09+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.444,
+            "seconds": 50.8
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 133,
+              "tp": 117,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 63,
+              "tp": 61,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 63,
+              "tp": 58,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/7.json",
+            "sha256": "4b8e5e5f91d13c9330e178b8692e35504257bb2ba5a12975adecd9668372c106"
+          },
+          "recorded_run_at": "2026-10-13T11:32:49+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.359,
+            "seconds": 39.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 43,
+              "tp": 38,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 38,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 37,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/8.json",
+            "sha256": "e947f0ed4e2308c35c3dc35833d5871cfc9f5b121a2a5f0b79ddd87c28f1c910"
+          },
+          "recorded_run_at": "2026-10-13T11:33:24+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3449,
+            "seconds": 35.3
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 158,
+              "tp": 157,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 54,
+              "tp": 53,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 54,
+              "tp": 51,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/claude/9.json",
+            "sha256": "5db9d235d36e38176a030cfb2951bf236cc4a7e4ca1f233ea09b237918a44135"
+          },
+          "recorded_run_at": "2026-10-13T11:33:58+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": 0.3145,
+            "seconds": 34.0
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "claude-r5-hA-rep5-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 756,
+          "tp": 679,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 481,
+          "tp": 448,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 481,
+          "tp": 433,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8660714285714286,
+          "precision": 0.8981481481481481,
+          "recall": 0.8362068965517241
+        },
+        "symbols_rough": {
+          "f1": 0.9246646026831785,
+          "precision": 0.9313929313929314,
+          "recall": 0.9180327868852459
+        },
+        "symbols_strict": {
+          "f1": 0.8937048503611971,
+          "precision": 0.9002079002079002,
+          "recall": 0.8872950819672131
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:10:34+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 165,
+              "tp": 154,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 116,
+              "tp": 110,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 116,
+              "tp": 105,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/10.json",
+            "sha256": "cba22501c8ef90f7c4333fbff36d325128b9a9ee49521e3430b53e7e7c369302"
+          },
+          "recorded_run_at": "2026-10-13T11:14:37+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 68.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 139,
+              "tp": 126,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 96,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 96,
+              "tp": 83,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/11.json",
+            "sha256": "5196d05816ca896c00bb63c9597a20a54d614b884909c423a0092e30995145d6"
+          },
+          "recorded_run_at": "2026-10-13T11:15:44+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 67.6
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 95,
+              "tp": 68,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 86,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 84,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/6.json",
+            "sha256": "9f84a666ccd01e0a1bd47e3f4d26d9d6e8b6a4365b41508ac7593da02539ea16"
+          },
+          "recorded_run_at": "2026-10-13T11:10:34+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 79.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 148,
+              "tp": 133,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 74,
+              "tp": 66,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 74,
+              "tp": 66,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/7.json",
+            "sha256": "4230048411a424e612a05e7de959b32e883d18bac0fff59fb7d6627748444725"
+          },
+          "recorded_run_at": "2026-10-13T11:11:31+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 57.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 44,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/8.json",
+            "sha256": "6511bc24b331ec9413bcbd5b5dc8d25c1585308346c6665106bb2e9b3d269d37"
+          },
+          "recorded_run_at": "2026-10-13T11:12:25+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 53.9
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 163,
+              "tp": 154,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 60,
+              "tp": 56,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 60,
+              "tp": 56,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep1-trace/codex/9.json",
+            "sha256": "1070792f64172ca06eae7da018191140790039a6e5826d7c9a5e97be7f2e5359"
+          },
+          "recorded_run_at": "2026-10-13T11:13:28+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 62.9
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "codex-r5-hA-rep1-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 789,
+          "tp": 694,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 502,
+          "tp": 455,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 502,
+          "tp": 439,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8669581511555278,
+          "precision": 0.8795944233206591,
+          "recall": 0.854679802955665
+        },
+        "symbols_rough": {
+          "f1": 0.9191919191919192,
+          "precision": 0.9063745019920318,
+          "recall": 0.9323770491803278
+        },
+        "symbols_strict": {
+          "f1": 0.8868686868686869,
+          "precision": 0.8745019920318725,
+          "recall": 0.8995901639344263
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:17:03+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 193,
+              "tp": 173,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 123,
+              "tp": 117,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 123,
+              "tp": 112,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/10.json",
+            "sha256": "b2dfdcfbc4c9aff87020b1b2246f579bd749cd38308e42205c6c0695202e8d5a"
+          },
+          "recorded_run_at": "2026-10-13T11:21:05+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 71.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 145,
+              "tp": 121,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 80,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/11.json",
+            "sha256": "9f928cbaa84965817abbae85743f1349bbfa3dd89ecc01a282544bc599d02a54"
+          },
+          "recorded_run_at": "2026-10-13T11:22:45+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 99.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 93,
+              "tp": 68,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 94,
+              "tp": 86,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 94,
+              "tp": 86,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/6.json",
+            "sha256": "32b5a945794b97364beaaa9dd052755b25193102e2944544b3229122640cafcd"
+          },
+          "recorded_run_at": "2026-10-13T11:17:03+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 59.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 149,
+              "tp": 134,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 74,
+              "tp": 66,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 74,
+              "tp": 66,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/7.json",
+            "sha256": "90851cabfd975598c49e6b0860c79a7967871ab2a973001eb646648ecbe84c02"
+          },
+          "recorded_run_at": "2026-10-13T11:18:00+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 57.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 44,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/8.json",
+            "sha256": "9a36d35c593108e97c875c7e43cd248039783c28d6cb92b4ab0d8b69bc9303b9"
+          },
+          "recorded_run_at": "2026-10-13T11:18:49+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 48.3
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 163,
+              "tp": 154,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 74,
+              "tp": 56,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 74,
+              "tp": 56,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep2-trace/codex/9.json",
+            "sha256": "24f90bf111f97d184ea7ccaac3d1104092869ff33bd55defcedf222747f0bfc0"
+          },
+          "recorded_run_at": "2026-10-13T11:19:54+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 65.1
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "codex-r5-hA-rep2-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 790,
+          "tp": 704,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 497,
+          "tp": 463,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 497,
+          "tp": 443,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8789013732833958,
+          "precision": 0.8911392405063291,
+          "recall": 0.8669950738916257
+        },
+        "symbols_rough": {
+          "f1": 0.9401015228426396,
+          "precision": 0.93158953722334,
+          "recall": 0.9487704918032787
+        },
+        "symbols_strict": {
+          "f1": 0.899492385786802,
+          "precision": 0.8913480885311871,
+          "recall": 0.9077868852459017
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:24:28+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 202,
+              "tp": 181,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 130,
+              "tp": 123,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 130,
+              "tp": 110,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/10.json",
+            "sha256": "c4b372bec750298e7519dfc6f08ee93a4f1dca170ce6b5a5e2ffcc9ea02100c3"
+          },
+          "recorded_run_at": "2026-10-13T11:28:38+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 79.6
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 139,
+              "tp": 126,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 84,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/11.json",
+            "sha256": "78f5f02cc92013c311b4de6308f160613da5b82f6d25cb1f72716116c8f796d4"
+          },
+          "recorded_run_at": "2026-10-13T11:33:05+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 267.8
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 92,
+              "tp": 68,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 92,
+              "tp": 86,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 92,
+              "tp": 86,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/6.json",
+            "sha256": "a45c9d979449ed125c9ba525aa2a7b7ebef3ed1c18a4a4d8c591160255526a24"
+          },
+          "recorded_run_at": "2026-10-13T11:24:28+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 67.8
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 149,
+              "tp": 132,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 75,
+              "tp": 68,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 75,
+              "tp": 68,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/7.json",
+            "sha256": "3d35c56a09fcdfa788ffa7b1eea4aeac3240c99a145187e63c144b5a2092af66"
+          },
+          "recorded_run_at": "2026-10-13T11:25:30+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 61.8
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 44,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 41,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 41,
+              "tp": 39,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/8.json",
+            "sha256": "4e78870aedeefe60bf49f96338a6138534a55dc03da2d3daba1b8a1d0ff2ea72"
+          },
+          "recorded_run_at": "2026-10-13T11:26:16+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 46.3
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 162,
+              "tp": 153,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 62,
+              "tp": 56,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 62,
+              "tp": 56,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep3-trace/codex/9.json",
+            "sha256": "0937237c8aba022b936c1114617f62d675fcfbf6d121a9d7b4711f594bf696dc"
+          },
+          "recorded_run_at": "2026-10-13T11:27:18+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 61.6
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "codex-r5-hA-rep3-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 812,
+          "tp": 713,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 500,
+          "tp": 463,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 500,
+          "tp": 439,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8780788177339901,
+          "precision": 0.8780788177339901,
+          "recall": 0.8780788177339901
+        },
+        "symbols_rough": {
+          "f1": 0.937246963562753,
+          "precision": 0.926,
+          "recall": 0.9487704918032787
+        },
+        "symbols_strict": {
+          "f1": 0.888663967611336,
+          "precision": 0.878,
+          "recall": 0.8995901639344263
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:34:11+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 211,
+              "tp": 189,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 133,
+              "tp": 127,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 133,
+              "tp": 110,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/10.json",
+            "sha256": "ebf6dd21dc01db4f99afdf705217ad11fbcdfb23cf3c78c6a78e53088e81dfd6"
+          },
+          "recorded_run_at": "2026-10-13T11:38:24+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 97.2
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 141,
+              "tp": 127,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 95,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 95,
+              "tp": 84,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/11.json",
+            "sha256": "22fe61b6711d95e2a0ae24e3d519596fb5689e227beb835281cdaed637171ff4"
+          },
+          "recorded_run_at": "2026-10-13T11:39:39+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 75.3
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 103,
+              "tp": 66,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 96,
+              "tp": 85,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 96,
+              "tp": 85,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/6.json",
+            "sha256": "d05d1639d30aee84b79b34134267f75e9f8739362dae49976a2b2cb9640de694"
+          },
+          "recorded_run_at": "2026-10-13T11:34:11+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 52.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 147,
+              "tp": 135,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 72,
+              "tp": 65,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 72,
+              "tp": 65,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/7.json",
+            "sha256": "9d6decbb53bfbd7ca21a98cbf8eb4cad55af25fe30ebe9c7d08c52e333687251"
+          },
+          "recorded_run_at": "2026-10-13T11:35:04+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 53.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 46,
+              "tp": 44,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/8.json",
+            "sha256": "561151e5d13322d21e36370781060dbd480e91f777344044b7bd6109df7e2d75"
+          },
+          "recorded_run_at": "2026-10-13T11:35:58+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 53.9
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 164,
+              "tp": 152,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 64,
+              "tp": 56,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 64,
+              "tp": 56,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep4-trace/codex/9.json",
+            "sha256": "7f9d4e9e36979276dc4467fa8a9201be3b4b970aef4df48673626d0d07b16b3d"
+          },
+          "recorded_run_at": "2026-10-13T11:36:47+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 48.9
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "codex-r5-hA-rep4-trace",
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "counts": {
+        "networks": {
+          "predicted": 793,
+          "tp": 697,
+          "truth": 812
+        },
+        "symbols_rough": {
+          "predicted": 499,
+          "tp": 456,
+          "truth": 488
+        },
+        "symbols_strict": {
+          "predicted": 499,
+          "tp": 435,
+          "truth": 488
+        }
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "f1": 0.8685358255451714,
+          "precision": 0.8789407313997478,
+          "recall": 0.8583743842364532
+        },
+        "symbols_rough": {
+          "f1": 0.9240121580547113,
+          "precision": 0.9138276553106213,
+          "recall": 0.9344262295081968
+        },
+        "symbols_strict": {
+          "f1": 0.8814589665653495,
+          "precision": 0.8717434869739479,
+          "recall": 0.8913934426229508
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "not_attempted": [],
+      "provenance": "Retrospective manifest of existing committed predictions, not a new model call or provider attestation; original run dates retained per case.",
+      "ran_at": "2026-10-13T11:41:13+00:00",
+      "recipe": [
+        {
+          "path": "extraction/prompt_v2.md",
+          "role": "main_prompt",
+          "sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65"
+        },
+        {
+          "path": "extraction/tile_preface.md",
+          "role": "tile_preface",
+          "sha256": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+        }
+      ],
+      "rows": [
+        {
+          "case": "open100-10",
+          "counts": {
+            "networks": {
+              "predicted": 190,
+              "tp": 170,
+              "truth": 207
+            },
+            "symbols_rough": {
+              "predicted": 123,
+              "tp": 117,
+              "truth": 134
+            },
+            "symbols_strict": {
+              "predicted": 123,
+              "tp": 109,
+              "truth": 134
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/10.json",
+            "sha256": "c4bf62cadfa7a6cb246f2bcbb90cb39cc0de5d9099ca28d9bd9f06563250d3b4"
+          },
+          "recorded_run_at": "2026-10-13T11:46:07+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 93.0
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-11",
+          "counts": {
+            "networks": {
+              "predicted": 145,
+              "tp": 131,
+              "truth": 142
+            },
+            "symbols_rough": {
+              "predicted": 96,
+              "tp": 91,
+              "truth": 96
+            },
+            "symbols_strict": {
+              "predicted": 96,
+              "tp": 78,
+              "truth": 96
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/11.json",
+            "sha256": "809c288238fb3a25e5c4cc481c8b28022f202dfa0d3683906c04349ab36b6ef8"
+          },
+          "recorded_run_at": "2026-10-13T11:47:39+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 91.9
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-6",
+          "counts": {
+            "networks": {
+              "predicted": 100,
+              "tp": 68,
+              "truth": 101
+            },
+            "symbols_rough": {
+              "predicted": 97,
+              "tp": 86,
+              "truth": 91
+            },
+            "symbols_strict": {
+              "predicted": 97,
+              "tp": 86,
+              "truth": 91
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/6.json",
+            "sha256": "f4e5b12e64bef9059ee148f3a4b10ee1fd2919d09500145734ae073a02443984"
+          },
+          "recorded_run_at": "2026-10-13T11:41:13+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 62.6
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-7",
+          "counts": {
+            "networks": {
+              "predicted": 149,
+              "tp": 132,
+              "truth": 141
+            },
+            "symbols_rough": {
+              "predicted": 73,
+              "tp": 67,
+              "truth": 71
+            },
+            "symbols_strict": {
+              "predicted": 73,
+              "tp": 67,
+              "truth": 71
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/7.json",
+            "sha256": "57b1fe06e28646f37e292fcbeba1e446f402b191580833d7e5423fae2aa3bdbc"
+          },
+          "recorded_run_at": "2026-10-13T11:42:16+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 63.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-8",
+          "counts": {
+            "networks": {
+              "predicted": 47,
+              "tp": 45,
+              "truth": 51
+            },
+            "symbols_rough": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            },
+            "symbols_strict": {
+              "predicted": 40,
+              "tp": 39,
+              "truth": 40
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/8.json",
+            "sha256": "cd56df52275597ccf273fe7fd7ef21377fa69799d095270707f3a856ee7b3628"
+          },
+          "recorded_run_at": "2026-10-13T11:43:35+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 78.5
+          },
+          "status": "ok"
+        },
+        {
+          "case": "open100-9",
+          "counts": {
+            "networks": {
+              "predicted": 162,
+              "tp": 151,
+              "truth": 170
+            },
+            "symbols_rough": {
+              "predicted": 70,
+              "tp": 56,
+              "truth": 56
+            },
+            "symbols_strict": {
+              "predicted": 70,
+              "tp": 56,
+              "truth": 56
+            }
+          },
+          "diagnostics": {
+            "ignored_or_malformed_symbols": 0
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "predictions/r5-hA-rep5-trace/codex/9.json",
+            "sha256": "4ab95070ec91534b355d3ef40805d51c37024e1ea5a1664e26068d5942494618"
+          },
+          "recorded_run_at": "2026-10-13T11:44:34+00:00",
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": 59.8
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "codex-r5-hA-rep5-trace",
+      "split": "validation"
+    }
+  ],
+  "schema": "task-benchmark-1",
+  "scoring_contract": "pid2graph-v1",
+  "submissions": [
+    {
+      "id": "claude-r5-hA-rep1-trace",
+      "path": "benchmarks/runs/claude-r5-rep1.json",
+      "sha256": "5dbdcfa47c22c970a204c64f66c6c2618a7f245db67d040fdca85f61336a786e"
+    },
+    {
+      "id": "claude-r5-hA-rep2-trace",
+      "path": "benchmarks/runs/claude-r5-rep2.json",
+      "sha256": "5035dd75b39ae3aac46718b8af905bdbf5e6bce3a5b7e6261aac3fe202dcb8a2"
+    },
+    {
+      "id": "claude-r5-hA-rep3-trace",
+      "path": "benchmarks/runs/claude-r5-rep3.json",
+      "sha256": "4ad03cd984e3366b532dd3152c3b012f424161657241d33150a69c3e7ce6993e"
+    },
+    {
+      "id": "claude-r5-hA-rep4-trace",
+      "path": "benchmarks/runs/claude-r5-rep4.json",
+      "sha256": "509a76baa4cbb43a9dfd3cd268d5c96eca7dbabea510dab3a0881b385aeb040d"
+    },
+    {
+      "id": "claude-r5-hA-rep5-trace",
+      "path": "benchmarks/runs/claude-r5-rep5.json",
+      "sha256": "d684c6011705651c1b95e7c2bea22eebdf894e8c4f45d9000dfb9cd73ce95f96"
+    },
+    {
+      "id": "codex-r5-hA-rep1-trace",
+      "path": "benchmarks/runs/codex-r5-rep1.json",
+      "sha256": "1c2d0f38972179fdf7ec0d3e5790efaadf58db2f338f97c9fee47878d504a217"
+    },
+    {
+      "id": "codex-r5-hA-rep2-trace",
+      "path": "benchmarks/runs/codex-r5-rep2.json",
+      "sha256": "56cd9ef8a592dfd940b5ec502281accc8c37c8be391ba61140d53f7823b62bde"
+    },
+    {
+      "id": "codex-r5-hA-rep3-trace",
+      "path": "benchmarks/runs/codex-r5-rep3.json",
+      "sha256": "f8a28abef45d962b1aa02f9fe06a0aa2667e9c87f580435659a534044caf73d4"
+    },
+    {
+      "id": "codex-r5-hA-rep4-trace",
+      "path": "benchmarks/runs/codex-r5-rep4.json",
+      "sha256": "1e45f5584f00a1e6778a37413ab2cd62b36c0b27bdc3d273a1f79c77fdb7a42e"
+    },
+    {
+      "id": "codex-r5-hA-rep5-trace",
+      "path": "benchmarks/runs/codex-r5-rep5.json",
+      "sha256": "5a0c76189c30464aaf61d66e623c42d8744049afeeb5908116d39ef1dd504d32"
+    }
+  ],
+  "suite": "open100-r5-validation",
+  "suite_sha256": "715b3aa5151a052ce7f9b6495d4743bd0fef8c92704db23c6caa8dd4426fdab8",
+  "suite_version": "1",
+  "summary": [
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "group": "134d2d4cad7edd6174fada8545130cddc0c6332f3c974515e316e46e43f0a176",
+      "interface": "claude CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "max_f1": 0.812373907195696,
+          "mean_f1": 0.7949703152393688,
+          "min_f1": 0.7807133421400264,
+          "stdev_f1": 0.01293977049690563
+        },
+        "symbols_rough": {
+          "max_f1": 0.9039913700107874,
+          "mean_f1": 0.898370211267998,
+          "min_f1": 0.8939393939393939,
+          "stdev_f1": 0.004916475917252586
+        },
+        "symbols_strict": {
+          "max_f1": 0.8522114347357066,
+          "mean_f1": 0.8316138556109212,
+          "min_f1": 0.8246753246753247,
+          "stdev_f1": 0.011681422545630381
+        }
+      },
+      "model": {
+        "id": "claude-opus-5-5[1m]",
+        "provider": "Anthropic",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "replicates": 5,
+      "runs": [
+        "claude-r5-hA-rep1-trace",
+        "claude-r5-hA-rep2-trace",
+        "claude-r5-hA-rep3-trace",
+        "claude-r5-hA-rep4-trace",
+        "claude-r5-hA-rep5-trace"
+      ],
+      "split": "validation"
+    },
+    {
+      "case_count": 6,
+      "cohort": "674e46b121ea9f428315c67903128806a3d3b5769d08418653e45b87f8dd06b3",
+      "configuration": {
+        "overlap": 0.15,
+        "reasoning_effort": "not recorded",
+        "temperature": "not recorded",
+        "tiles": "2x2",
+        "trace": "replace"
+      },
+      "evidence": "historical same-plant validation also used for method selection; third-party keys",
+      "family": "pid2graph-open100",
+      "group": "6dfd25a32d18fdae8416788da9d0a7eac31d438d10c9eb1ea149a0306c55097e",
+      "interface": "codex CLI",
+      "method": "2x2 tiled model extraction + deterministic trace replacement",
+      "metrics": {
+        "networks": {
+          "max_f1": 0.8789013732833958,
+          "mean_f1": 0.8717091192579027,
+          "min_f1": 0.8660714285714286,
+          "stdev_f1": 0.006259525217955685
+        },
+        "symbols_rough": {
+          "max_f1": 0.9401015228426396,
+          "mean_f1": 0.9290434332670403,
+          "min_f1": 0.9191919191919192,
+          "stdev_f1": 0.00909834423798258
+        },
+        "symbols_strict": {
+          "max_f1": 0.899492385786802,
+          "mean_f1": 0.8900377714386744,
+          "min_f1": 0.8814589665653495,
+          "stdev_f1": 0.0068622796379584385
+        }
+      },
+      "model": {
+        "id": "gpt-6.1-sol",
+        "provider": "OpenAI",
+        "version": "provider build not recorded beyond the saved model identifier"
+      },
+      "replicates": 5,
+      "runs": [
+        "codex-r5-hA-rep1-trace",
+        "codex-r5-hA-rep2-trace",
+        "codex-r5-hA-rep3-trace",
+        "codex-r5-hA-rep4-trace",
+        "codex-r5-hA-rep5-trace"
+      ],
+      "split": "validation"
+    }
+  ],
+  "task": "drawing-extraction"
+}

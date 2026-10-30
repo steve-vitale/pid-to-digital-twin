@@ -9,7 +9,7 @@ There is no universal best-model score.
 
 | Task | What is scored | Current evidence | Results |
 |---|---|---|---|
-| `drawing-extraction`, `pid2graph-v1` | Rough/strict six-class symbol F1 and asset-network F1 using the unchanged scorer | Existing five replicates each for Claude and Codex on six OPEN100 validation drawings. The method includes tiling and deterministic tracing. This is retrospective registration of saved runs; validation also informed method selection. | [Model comparison](results/open100-validation.md), [JSON](results/open100-validation.json), [suite](open100-validation.json) |
+| `drawing-extraction`, `pid2graph-v1` | Rough/strict six-class symbol F1 and asset-network F1 using the unchanged scorer | Existing five replicates each for Claude and Codex on six OPEN100 validation drawings. The method includes tiling and deterministic tracing. This is retrospective registration of saved runs; validation also informed method selection. | [Model comparison](results/open100-validation-report-clarified.md), [JSON](results/open100-validation-report-clarified.json), [suite](open100-validation.json) |
 | `description-facts`, `native-facts-v1` | Literal selected equipment/type, stream endpoints, instrument/valve placement and controller relations against explicit fact atoms | Two authored synthetic cases with reference, empty and wrong-endpoint controls. Keys come from those same references. **Scorer development only: no AI interpretation benchmark.** | [Scorer controls](results/description-controls.md), [JSON](results/description-controls.json), [suite](description-controls.json) |
 | `description-facts`, `native-facts-v1`, source review | The same selected fields against separately prepared original-source keys | [MGPI source-adapted development case](../examples/from-description/mgpi/README.md), with retained unsupported initial adaptation and an explicit source/key expansion. No held-out or original-text model trial. A planted false-shutdown claim still scores perfectly and exposes a scorer blindspot. | [Development artifacts and controls](results/mgpi-development.md), [suite](mgpi-development.json) |
 
@@ -67,3 +67,16 @@ resources. Mean F1 pools counts within each replicate, then averages across repe
 repeats; they do not establish statistical significance or a winner. Unknown model builds, cost and timing stay
 unknown. For a new method, retain the old answer artifacts and score both on the same baseline before expanding
 the corpus. This makes improvements inspectable and keeps failures useful to the next contributor.
+
+## Report implementation revisions
+
+The current drawing report was re-scored offline after correcting the vendor-report interpretation. Counts,
+metrics, controls, source/key/prediction/recipe bindings and model declarations are unchanged. The evaluator
+module is part of the implementation fingerprint, so its wording edit produces new cohort and group identities.
+That is an implementation revision, not a new model trial or performance improvement.
+
+The [original drawing JSON](results/open100-validation.json) and [Markdown](results/open100-validation.md) remain
+unchanged as historical snapshots of the implementation at commit `283146fbfff512b6fe7b5281967a8e04fa18ec62`.
+They are outside the current registry and will not byte-reproduce under the changed implementation. All four
+description-report files remain unchanged and current. Do not replace an older report's fingerprints by hand;
+retain it, re-score the saved answers into a new prefix, and declare the new snapshot in the registry.

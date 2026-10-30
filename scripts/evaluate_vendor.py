@@ -44,10 +44,10 @@ Limits (read before quoting a number)
     .taglist.json formats it defines).
   - "general" is a catch-all whose meaning is the annotators' habit; don't let a vendor tune toward it
     (docs/EVALUATION.md rule 9).
-  - A handful of sheets is a small sample. The bootstrap interval says how far the score could move on other
-    sheets like these; it is wide on purpose.
-  - The answer is only as good as your labelling. The perfect control proves the scorer reads your keys; it can't
-    prove your keys are right.
+  - The runs interval estimates the mean on these fixed sheets, not the range of a future run. The bootstrap
+    resamples only the observed sheets and runs; it cannot establish performance on unfamiliar drawings.
+  - The answer is only as good as your labelling. The perfect control checks agreement with the supplied key;
+    it cannot establish that the key is right.
 """
 import argparse
 import hashlib
@@ -318,9 +318,9 @@ def markdown(r):
               "known on these keys, so it cannot tell a good extraction from a bad one here:", ""]
         L += [f"> - {f}" for f in r["control_failures"]] + [""]
     else:
-        L += [f"Controls behaved on every sheet: the perfect answer scored perfect, the empty answer zero, and both "
-              f"deliberately wrong answers stayed at or below symbol F1 {r['wrong_answer_max_f1']}. The scorer can "
-              "tell right from wrong on these keys.", ""]
+        L += [f"Controls behaved on every sheet: perfect and empty answers met their declared checks, and both "
+              f"deliberately wrong answers stayed at or below symbol F1 {r['wrong_answer_max_f1']}. These checks "
+              "passed; they do not validate the answer keys or every possible extraction error.", ""]
     L += [f"Sheets: {', '.join(r['sheets'])}. Runs treated as replicates: {n} "
           f"({', '.join(x['label'] for x in r['runs'])}). Scorer: `{r['scorer']}` (sha256 {r['scorer_sha256'][:12]}).",
           ""]
@@ -346,9 +346,13 @@ def markdown(r):
     L += [""]
     if n > 1:
         L += ["## Replicates", "",
-              "Each run's value, then two 95% intervals: **runs** (these sheets, the method run again) and "
-              "**bootstrap** (other sheets like these, and another run; seed and draws as in "
-              "`scripts/replicate_stats.py`).", "",
+              "Each run's value, then two 95% intervals: **runs** is an approximate Student-t interval for the mean score on "
+              "these fixed sheets, assuming independent, comparable runs. It is not a prediction interval for "
+              "the next run. Duplicate or correlated answers do not establish independent replicates. "
+              "**Bootstrap** resamples only the observed sheets with replacement and picks one "
+              "observed run per sampled sheet, then recomputes the pooled score. It does not resample a whole "
+              "run together or demonstrate performance on unfamiliar drawings. Seed and draws are as in "
+              "`scripts/replicate_stats.py`.", "",
               "| Metric | Runs | Mean | Min-max | Runs 95% | Bootstrap 95% (sheets) |", "|---|---|---|---|---|---|"]
         for m, lbl in HEADLINE:
             e = rep[m]
@@ -389,25 +393,27 @@ def markdown(r):
     if extra:
         L += ["", "Prediction files with no answer key (not scored): " + "; ".join(extra) + "."]
     L += ["", "## How to read this", "",
-          "- **Start with the controls, not the vendor.** The perfect row is the best any tool can score on these "
-          "keys; the empty row is what doing nothing scores. A deliberately wrong answer must land near the empty row. "
-          "If it doesn't, the scorer is being fooled and the vendor number means nothing (the report would say so at "
-          "the top).",
-          "- **Review load** is the headline: the corrections a person needs to turn the tool's answer into the answer "
-          "key (delete false symbols, add missed ones, fix wrong classes, delete false links, add missed links), per "
-          "100 items in the key. 0 is perfect, 100 is the same work as starting from nothing. Above 100 is worse than "
-          "nothing: the reviewer also deletes the tool's mistakes.",
-          "- **Symbol F1** says whether the tool found the symbols and called them the right class. *Rough* means "
-          "\"in about the right place\" (box overlap of at least 10%), *strict* means precise enough to draw from "
-          "(at least 50%). A big gap between the two means the boxes are loose.",
-          "- **Connection F1** says whether it knows which assets connect. It ignores classes: compare it with the "
-          "symbol columns.",
-          "- **Per sheet**: look for one sheet much worse than the rest. That sheet is usually a drawing style, scan "
-          "quality or symbol mix the tool hasn't seen, and your other sheets may have more of it.",
-          "- **Several runs**: AI tools don't give the same answer twice. *Min-max* and *runs 95%* show how much the "
-          "same tool moves on the same sheets. Two vendors whose ranges overlap are tied on this evidence. The "
-          "*bootstrap* interval is how far the score could move on other sheets like these: with a few sheets it is "
-          "wide, and that width is the honest size of your sample.",
+          "- **Start with the controls.** The perfect row checks agreement with these keys; the empty row is the "
+          "no-prediction baseline. Wrong-class and shifted answers must satisfy the declared control thresholds. "
+          "A failure is reported at the top. Passing these controls does not establish that the keys are correct "
+          "or that other kinds of error will be caught.",
+          "- **Review load** counts differences from the answer key (delete false symbols, add missed ones, fix "
+          "wrong classes, delete false links, add missed links), normalized per 100 key items. 0 means no counted "
+          "differences; 100 equals the empty-answer count; above 100 means more counted differences than that "
+          "baseline. This is not measured review time, effort or labor savings: different corrections can take "
+          "different amounts of work, and real review may include tasks this score omits.",
+          "- **Symbol F1** says whether the tool found the symbols and called them the right class. *Rough* uses "
+          "box intersection-over-union of at least 0.10; *strict* uses at least 0.50. A gap shows "
+          "sensitivity to the overlap threshold. Neither threshold establishes CAD precision or drawing readiness.",
+          "- **Connection F1** compares undirected asset-network pairs through the key's pass-through nodes. "
+          "It does not verify direct pipe adjacency, physical routing or flow direction. Class-agnostic symbol "
+          "matches can receive connection credit even with wrong classes: read the symbol columns too.",
+          "- **Per sheet**: inspect sheets that score worse than the rest. Drawing style, scan quality, symbol mix "
+          "and key quality are possible causes to investigate; the score alone does not identify the cause.",
+          "- **Several runs**: *min-max* describes the observed runs; *runs 95%* estimates their mean under its "
+          "assumptions. Overlap alone does not establish a tie, equivalence or absence of a difference; this report "
+          "does not perform a between-vendor comparison test. The *bootstrap* interval is conditional on the "
+          "observed sheets and runs, not a guarantee for new drawings or another plant.",
           "- **Missing or failed sheets count as empty answers.** A tool shouldn't look better by failing quietly.",
           "- **What this does not measure:** tag text (use `scripts/score_tags.py` on keys with tag truth), line "
           "routes, sizes, flow direction, or anything outside the six classes. And it is only as good as your "

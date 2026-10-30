@@ -229,7 +229,8 @@
    "guide": "examples/vendor-evaluation/README.md",
    "example_outputs": [
     "examples/vendor-evaluation/report.md",
-    "examples/vendor-evaluation/report.json"
+    "examples/vendor-evaluation/report.json",
+    "examples/vendor-evaluation/history/report-before-interpretation.md"
    ],
    "tests": [
     "scripts/test_evaluate_vendor.py",
@@ -634,7 +635,9 @@
     "benchmarks/runs/mgpi-expanded-source.json",
     "benchmarks/runs/mgpi-false-shutdown.json",
     "benchmarks/runs/mgpi-initial.json",
-    "benchmarks/runs/mgpi-wrong-endpoint.json"
+    "benchmarks/runs/mgpi-wrong-endpoint.json",
+    "benchmarks/results/open100-validation-report-clarified.json",
+    "benchmarks/results/open100-validation-report-clarified.md"
    ],
    "tests": [
     "scripts/test_benchmark.py"

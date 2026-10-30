@@ -8344,6 +8344,250 @@
     "mixed_tuples_cli.py": "42292331456a0ca503a1e194756daa5649f8c6b50564914079a3293ddf44ec5e",
     "mixed-tuples-cli-proof.json": "afb59f99f1b41077d65fc35de1793083f7caa0ffe54f2da10120444f63dae5cb"
    }
+  },
+  {
+   "feature": "vendor-evaluation",
+   "reviewer": "fresh independent coding agent; source/statistics inspection, matched offline CLI reruns and report interpretation review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "files": {
+    "examples/vendor-evaluation/report.md": "0f202d2ef3db63fce90dfc745bfa1bf42273dcee8a5938f91c6837c3fafbe88a",
+    "examples/vendor-evaluation/report.json": "98785bd72e52262c54f09ee68d7741fb823b87a72d1bbd70c3fb20e35d86bab3",
+    "examples/vendor-evaluation/history/report-before-interpretation.md": "aafd85c888f89bd7cd28e6a2ca54af6237ae7aa8fd8a8cf78c1fc2957cfc0cfb"
+   },
+   "supporting_files": {
+    "docs/STATUS.md": "b606ef62f63d1b9ab33222f859a0cfd31ef74b8b42d238e7e11eb0cf6a5fac69",
+    "examples/vendor-evaluation/README.md": "dcc118fd6260f87c1e2dfacec7635a397f221d1e888d877c44859f1372659530",
+    "scripts/degrade_scans.py": "95ff4b696e29205dacb0ff3776acf05a9f7ef8c40d0b15851f763c91799b5207",
+    "scripts/evaluate_vendor.py": "444d178db665b3db401b57aedb5704a0215e61f43c63c45de1d1c6e32319047b",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/test_evaluate_vendor.py": "b24c8a5c57a8a89feedf642758e7e6a1a3a7c8143e716528364c40bb18049740",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b"
+   },
+   "findings": [],
+   "resolution": "Corrected generator and guide distinguish counted differences from measured labor, observed ranges from approximate Student-t mean intervals, empirical resampling from unfamiliar-drawing evidence, and overlap from between-vendor inference. They qualify CAD readiness, keyed undirected network semantics, possible error causes and control scope. Holdout A retains its historical name with method-selection role explicit. Actual baseline and candidate CLIs over 30 saved predictions on six cached public keys exit 0; full generated scoring JSON is identical between them, all 14 non-renderer function ASTs and scoring dependencies are unchanged. Compared with historical saved JSON, only bare-prediction file hashes differ from private historical wrappers. Current Markdown renders from unchanged historical JSON; every numeric table row is identical. Original Markdown is retained with prior errors labelled. Independently ran 12 vendor unittest cases and all scorer controls across 12 cached drawings successfully. This scoped interpretation repair inherits unchanged score/source evidence; it establishes no new model trial, unseen-drawing accuracy, human review-time benefit, vendor equivalence/ranking, company integration or plant acceptance.",
+   "resolved_findings": [
+    {
+     "severity": "should-fix",
+     "issue": "Earlier renderer interpreted keyed difference counts as labor and overlapping individual ranges as a tie.",
+     "resolution": "Corrected generator and guide distinguish counted differences from measured labor, observed ranges from approximate Student-t mean intervals, empirical resampling from unfamiliar-drawing evidence, and overlap from between-vendor inference. They qualify CAD readiness, keyed undirected network semantics, possible error causes and control scope. Holdout A retains its historical name with method-selection role explicit. Actual baseline and candidate CLIs over 30 saved predictions on six cached public keys exit 0; full generated scoring JSON is identical between them, all 14 non-renderer function ASTs and scoring dependencies are unchanged. Compared with historical saved JSON, only bare-prediction file hashes differ from private historical wrappers. Current Markdown renders from unchanged historical JSON; every numeric table row is identical. Original Markdown is retained with prior errors labelled. Independently ran 12 vendor unittest cases and all scorer controls across 12 cached drawings successfully. This scoped interpretation repair inherits unchanged score/source evidence; it establishes no new model trial, unseen-drawing accuracy, human review-time benefit, vendor equivalence/ranking, company integration or plant acceptance."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "Earlier renderer overstated strict IoU as drawing readiness, interpreted a mean interval as future-run spread and empirically conditional bootstrap as generalization.",
+     "resolution": "Corrected generator and guide distinguish counted differences from measured labor, observed ranges from approximate Student-t mean intervals, empirical resampling from unfamiliar-drawing evidence, and overlap from between-vendor inference. They qualify CAD readiness, keyed undirected network semantics, possible error causes and control scope. Holdout A retains its historical name with method-selection role explicit. Actual baseline and candidate CLIs over 30 saved predictions on six cached public keys exit 0; full generated scoring JSON is identical between them, all 14 non-renderer function ASTs and scoring dependencies are unchanged. Compared with historical saved JSON, only bare-prediction file hashes differ from private historical wrappers. Current Markdown renders from unchanged historical JSON; every numeric table row is identical. Original Markdown is retained with prior errors labelled. Independently ran 12 vendor unittest cases and all scorer controls across 12 cached drawings successfully. This scoped interpretation repair inherits unchanged score/source evidence; it establishes no new model trial, unseen-drawing accuracy, human review-time benefit, vendor equivalence/ranking, company integration or plant acceptance."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "Earlier prose inferred per-sheet causes and lacked precise keyed network/control boundaries; guide overstated untouched holdout status.",
+     "resolution": "Corrected generator and guide distinguish counted differences from measured labor, observed ranges from approximate Student-t mean intervals, empirical resampling from unfamiliar-drawing evidence, and overlap from between-vendor inference. They qualify CAD readiness, keyed undirected network semantics, possible error causes and control scope. Holdout A retains its historical name with method-selection role explicit. Actual baseline and candidate CLIs over 30 saved predictions on six cached public keys exit 0; full generated scoring JSON is identical between them, all 14 non-renderer function ASTs and scoring dependencies are unchanged. Compared with historical saved JSON, only bare-prediction file hashes differ from private historical wrappers. Current Markdown renders from unchanged historical JSON; every numeric table row is identical. Original Markdown is retained with prior errors labelled. Independently ran 12 vendor unittest cases and all scorer controls across 12 cached drawings successfully. This scoped interpretation repair inherits unchanged score/source evidence; it establishes no new model trial, unseen-drawing accuracy, human review-time benefit, vendor equivalence/ranking, company integration or plant acceptance."
+    }
+   ],
+   "file_hash_method": "SHA-256 of exact file bytes with CRLF normalized to LF only; UTF-8 BOM retained, matching scripts/feature_catalog.py:file_hash."
+  },
+  {
+   "date": "2026-10-30",
+   "reviewer": "Independent Codex coding agent: bounded vendor interpretation, scorer-cohort and matrix refresh review",
+   "verdict": "pass",
+   "findings": [],
+   "limits": [
+    "Coding-agent software and artifact review only; no human engineering acceptance, timed review, company deployment or plant truth validation.",
+    "No model was called, no source was downloaded and no new model-performance or blind/held-out result was created.",
+    "Inherited unchanged artifacts retain only their prior recorded scope; this review does not freshly certify source keys, historical source-match judgments or every toolkit workflow."
+   ],
+   "private_proofs": {
+    "inspect_baseline.py": "aa4ccdcd936112d63fd24f742359998a87750d1489e435fcfd1b85ba066988e3",
+    "baseline-proof.json": "00db34c0005734c92a7300aeb0ad85cb07c394980f08acd0550a777fd747c389",
+    "reproduce_baseline.py": "d59d7e2e864cc878f6547ccfd8c7c571a6d809cc529b374163166baf2721810b",
+    "baseline-reproduction.json": "a0ff67c769b5b8c10d5c751dc224e23e741cb4dc1e88e8d854c50949cac338ce",
+    "baseline-reproduction.log": "7318b6962be28df8a8c4ab47a0b49e3902e1a948ff165e3af4834e27557deb8b",
+    "compare_candidate.py": "776faf931f69325a392993c5ec0fd998de6abdbbf8c36b4f8d9d3b03ee7cee2b",
+    "candidate-comparison.json": "48eee0f5b0e45b3211be9d3608ef5d8a6e9f907f06b14b467dad2cae2b2d65ec",
+    "run_candidate_checks.py": "4ef166c89ac942eb980c98a497d56fa887fefb30d28b19649d05498b2b30b5fe",
+    "candidate-execution.json": "9794dc418b51393ca519a60a1c0ff9c02cf88fc0582dff87d02ff2bf3d38ef8b",
+    "registry.log": "7318b6962be28df8a8c4ab47a0b49e3902e1a948ff165e3af4834e27557deb8b",
+    "matrix.log": "92ec77fada54d0faa97817bb3654f8469beeeabdf8f90371b27cfa1a4877ad19",
+    "test-benchmark.log": "090daaa9c8b5934fdfd962fd62fbc79eca48bce7e98d67f683d6177793737aff",
+    "test-matrix.log": "2f0a1310e7a7f6b1575abaa9b763c30310e374cce3b0d9b126580990e1ffb8bb",
+    "independent-matrix-proof.json": "9211ea6ddf920a0ab2f5902d67df5eec5783642826efe3ae3f6396f44b9ee592"
+   },
+   "feature": "task-benchmarks",
+   "files": {
+    "benchmarks/controls/branch-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/branch-reference.json": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483",
+    "benchmarks/controls/branch-wrong-endpoint.json": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32",
+    "benchmarks/controls/linear-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/linear-reference.json": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a",
+    "benchmarks/controls/linear-wrong-endpoint.json": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd",
+    "benchmarks/description-controls.json": "b5f2d827008e3310c8e433a0b1168a3819f7674758e08cfcf3d59d59de288a4b",
+    "benchmarks/keys/branch-facts.json": "d46a66cdc5a2ea3e0900849533786a2f115af10fa24dfe129b96ef909b0e8626",
+    "benchmarks/keys/linear-facts.json": "37c4a9bffab394111813775a840af65440546ae1a9a2f2c414f1ecde031159aa",
+    "benchmarks/open100-validation.json": "715b3aa5151a052ce7f9b6495d4743bd0fef8c92704db23c6caa8dd4426fdab8",
+    "benchmarks/registry.json": "6bdafaafc3205814861091329e07b8af8b61de1debbd65a49343e512f9c7f52f",
+    "benchmarks/results/description-controls.json": "4f504635b1c0ac299410197e984da2ffd55d2f0c358c7d1f72e286982176cee1",
+    "benchmarks/results/description-controls.md": "5e0a2b6c6f35257613a7d5a9ce3471e8e6b2e7b17d5ea51a03f3e88d08a83eba",
+    "benchmarks/results/open100-validation.json": "3d0032a9e81c117f64a9b6dc07a9922648b42c9e0a6b3f4bce0de82ecc1a6e07",
+    "benchmarks/results/open100-validation.md": "3a33ec2cd1ce1837b77533d62dbea62d865dec7d33f58ffb9b77ae08a5f9b396",
+    "benchmarks/runs/claude-r5-rep1.json": "5dbdcfa47c22c970a204c64f66c6c2618a7f245db67d040fdca85f61336a786e",
+    "benchmarks/runs/claude-r5-rep2.json": "5035dd75b39ae3aac46718b8af905bdbf5e6bce3a5b7e6261aac3fe202dcb8a2",
+    "benchmarks/runs/claude-r5-rep3.json": "4ad03cd984e3366b532dd3152c3b012f424161657241d33150a69c3e7ce6993e",
+    "benchmarks/runs/claude-r5-rep4.json": "509a76baa4cbb43a9dfd3cd268d5c96eca7dbabea510dab3a0881b385aeb040d",
+    "benchmarks/runs/claude-r5-rep5.json": "d684c6011705651c1b95e7c2bea22eebdf894e8c4f45d9000dfb9cd73ce95f96",
+    "benchmarks/runs/codex-r5-rep1.json": "1c2d0f38972179fdf7ec0d3e5790efaadf58db2f338f97c9fee47878d504a217",
+    "benchmarks/runs/codex-r5-rep2.json": "56cd9ef8a592dfd940b5ec502281accc8c37c8be391ba61140d53f7823b62bde",
+    "benchmarks/runs/codex-r5-rep3.json": "f8a28abef45d962b1aa02f9fe06a0aa2667e9c87f580435659a534044caf73d4",
+    "benchmarks/runs/codex-r5-rep4.json": "1e45f5584f00a1e6778a37413ab2cd62b36c0b27bdc3d273a1f79c77fdb7a42e",
+    "benchmarks/runs/codex-r5-rep5.json": "5a0c76189c30464aaf61d66e623c42d8744049afeeb5908116d39ef1dd504d32",
+    "benchmarks/runs/description-empty.json": "4d676da3dbfa5e21d2e36650c087b28385882c15c113398a03a29761d28f525c",
+    "benchmarks/runs/description-reference.json": "17a7f283474e35cab92ffb4552e3e776495853a30dcf35a5e26dc1bd13e8a6c6",
+    "benchmarks/runs/description-wrong-endpoint.json": "40307a01834f554a01ef14ab770f22fe7f60840e17434340cc8f219f3fd1eb7e",
+    "benchmarks/mgpi-development.json": "b4d4f855e8d40cd4fedeca7dd61cfed036e4be82c981918f0680ba2fc3db5c99",
+    "benchmarks/results/mgpi-development.json": "8764f90a16566e96fa2ed6cddeb8166e32053378b13dfe07499178a2391ebf47",
+    "benchmarks/results/mgpi-development.md": "b8aa2bfd224dc3f22c97ec0c84f6dbfdf369f252a0c4a2653df5a6598e44cc02",
+    "benchmarks/runs/mgpi-empty.json": "4fd3eafac514518e4514601a50c7308d611fc7401613d096438ea394396b22ef",
+    "benchmarks/runs/mgpi-expanded-source.json": "2edfc327f53d0ea45ca68665442f33733d65059348a5aaa3e8d3019bfb879ec9",
+    "benchmarks/runs/mgpi-false-shutdown.json": "7b211de00eb3c63288c8ce30831babebf5efbc65e5315b7d4c4ef683c143fbaa",
+    "benchmarks/runs/mgpi-initial.json": "4d4a0effd376c152e347bb80d1ff903f46324cc319d25139c80baad2bc9a4647",
+    "benchmarks/runs/mgpi-wrong-endpoint.json": "09ddd314a106c4c7f36e6d5895bdf3ef9bc34da431c556eab9cca360f47d12d9",
+    "benchmarks/results/open100-validation-report-clarified.json": "59f197f0733d8e6aec24ea7a6caae80b5345b86e38a96f354912cd582d0b4831",
+    "benchmarks/results/open100-validation-report-clarified.md": "45d0d70a07dab065872585bc31b823553fbb74fac0e9d97ac3dad45935374c36"
+   },
+   "inherited_scope": {
+    "reviewer": "Independent Codex coding agent: bounded MGPI source, software, render and arrival follow-up",
+    "date": "2026-10-30",
+    "prior_scope": "Fresh MGPI suite,5 retrospective development/control run manifests and saved-result rescoring review; registry addition inspected.27 unchanged registered benchmark outputs retain prior scope only.",
+    "prior_registered_output_count": 36,
+    "unchanged_registered_output_bindings": {
+     "benchmarks/controls/branch-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+     "benchmarks/controls/branch-reference.json": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483",
+     "benchmarks/controls/branch-wrong-endpoint.json": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32",
+     "benchmarks/controls/linear-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+     "benchmarks/controls/linear-reference.json": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a",
+     "benchmarks/controls/linear-wrong-endpoint.json": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd",
+     "benchmarks/description-controls.json": "b5f2d827008e3310c8e433a0b1168a3819f7674758e08cfcf3d59d59de288a4b",
+     "benchmarks/keys/branch-facts.json": "d46a66cdc5a2ea3e0900849533786a2f115af10fa24dfe129b96ef909b0e8626",
+     "benchmarks/keys/linear-facts.json": "37c4a9bffab394111813775a840af65440546ae1a9a2f2c414f1ecde031159aa",
+     "benchmarks/open100-validation.json": "715b3aa5151a052ce7f9b6495d4743bd0fef8c92704db23c6caa8dd4426fdab8",
+     "benchmarks/results/description-controls.json": "4f504635b1c0ac299410197e984da2ffd55d2f0c358c7d1f72e286982176cee1",
+     "benchmarks/results/description-controls.md": "5e0a2b6c6f35257613a7d5a9ce3471e8e6b2e7b17d5ea51a03f3e88d08a83eba",
+     "benchmarks/results/open100-validation.json": "3d0032a9e81c117f64a9b6dc07a9922648b42c9e0a6b3f4bce0de82ecc1a6e07",
+     "benchmarks/results/open100-validation.md": "3a33ec2cd1ce1837b77533d62dbea62d865dec7d33f58ffb9b77ae08a5f9b396",
+     "benchmarks/runs/claude-r5-rep1.json": "5dbdcfa47c22c970a204c64f66c6c2618a7f245db67d040fdca85f61336a786e",
+     "benchmarks/runs/claude-r5-rep2.json": "5035dd75b39ae3aac46718b8af905bdbf5e6bce3a5b7e6261aac3fe202dcb8a2",
+     "benchmarks/runs/claude-r5-rep3.json": "4ad03cd984e3366b532dd3152c3b012f424161657241d33150a69c3e7ce6993e",
+     "benchmarks/runs/claude-r5-rep4.json": "509a76baa4cbb43a9dfd3cd268d5c96eca7dbabea510dab3a0881b385aeb040d",
+     "benchmarks/runs/claude-r5-rep5.json": "d684c6011705651c1b95e7c2bea22eebdf894e8c4f45d9000dfb9cd73ce95f96",
+     "benchmarks/runs/codex-r5-rep1.json": "1c2d0f38972179fdf7ec0d3e5790efaadf58db2f338f97c9fee47878d504a217",
+     "benchmarks/runs/codex-r5-rep2.json": "56cd9ef8a592dfd940b5ec502281accc8c37c8be391ba61140d53f7823b62bde",
+     "benchmarks/runs/codex-r5-rep3.json": "f8a28abef45d962b1aa02f9fe06a0aa2667e9c87f580435659a534044caf73d4",
+     "benchmarks/runs/codex-r5-rep4.json": "1e45f5584f00a1e6778a37413ab2cd62b36c0b27bdc3d273a1f79c77fdb7a42e",
+     "benchmarks/runs/codex-r5-rep5.json": "5a0c76189c30464aaf61d66e623c42d8744049afeeb5908116d39ef1dd504d32",
+     "benchmarks/runs/description-empty.json": "4d676da3dbfa5e21d2e36650c087b28385882c15c113398a03a29761d28f525c",
+     "benchmarks/runs/description-reference.json": "17a7f283474e35cab92ffb4552e3e776495853a30dcf35a5e26dc1bd13e8a6c6",
+     "benchmarks/runs/description-wrong-endpoint.json": "40307a01834f554a01ef14ab770f22fe7f60840e17434340cc8f219f3fd1eb7e",
+     "benchmarks/mgpi-development.json": "b4d4f855e8d40cd4fedeca7dd61cfed036e4be82c981918f0680ba2fc3db5c99",
+     "benchmarks/results/mgpi-development.json": "8764f90a16566e96fa2ed6cddeb8166e32053378b13dfe07499178a2391ebf47",
+     "benchmarks/results/mgpi-development.md": "b8aa2bfd224dc3f22c97ec0c84f6dbfdf369f252a0c4a2653df5a6598e44cc02",
+     "benchmarks/runs/mgpi-empty.json": "4fd3eafac514518e4514601a50c7308d611fc7401613d096438ea394396b22ef",
+     "benchmarks/runs/mgpi-expanded-source.json": "2edfc327f53d0ea45ca68665442f33733d65059348a5aaa3e8d3019bfb879ec9",
+     "benchmarks/runs/mgpi-false-shutdown.json": "7b211de00eb3c63288c8ce30831babebf5efbc65e5315b7d4c4ef683c143fbaa",
+     "benchmarks/runs/mgpi-initial.json": "4d4a0effd376c152e347bb80d1ff903f46324cc319d25139c80baad2bc9a4647",
+     "benchmarks/runs/mgpi-wrong-endpoint.json": "09ddd314a106c4c7f36e6d5895bdf3ef9bc34da431c556eab9cca360f47d12d9"
+    },
+    "scope": "Matching original output bindings preserve the earlier stated scope and limits only; unchanged artifacts are not newly promoted to model-performance or engineering acceptance evidence."
+   },
+   "supporting_files": {
+    "scripts/evaluate_vendor.py": "444d178db665b3db401b57aedb5704a0215e61f43c63c45de1d1c6e32319047b",
+    "scripts/benchmark.py": "35578237d1f8bd01e3e509847ecc5708983230468d9996218e34c4c0e8d717f3",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "scripts/test_benchmark.py": "7f3e77c3f9afbf268547eb72236a84738bbde13965c97ff73ae5e5f0619d6de9",
+    "scripts/test_evaluate_vendor.py": "b24c8a5c57a8a89feedf642758e7e6a1a3a7c8143e716528364c40bb18049740",
+    "benchmarks/README.md": "6638e3bc5bd81d25e5134c19cb6949daac7b8f35d6b84e90ff851df3f2d90105",
+    "examples/vendor-evaluation/README.md": "dcc118fd6260f87c1e2dfacec7635a397f221d1e888d877c44859f1372659530",
+    "examples/vendor-evaluation/report.json": "98785bd72e52262c54f09ee68d7741fb823b87a72d1bbd70c3fb20e35d86bab3",
+    "examples/vendor-evaluation/report.md": "0f202d2ef3db63fce90dfc745bfa1bf42273dcee8a5938f91c6837c3fafbe88a",
+    "examples/vendor-evaluation/history/report-before-interpretation.md": "aafd85c888f89bd7cd28e6a2ca54af6237ae7aa8fd8a8cf78c1fc2957cfc0cfb"
+   },
+   "scope": "Fresh offline rescoring and complete baseline/candidate comparison of the new drawing report pair and current registry selection after a report-wording edit. All 35 matching original registered outputs retain only prior recorded review scope. All six original benchmark reports remain exact historical/current records as documented; no new model trial or metric gain.",
+   "checks": [
+    "Independently froze all six scoring modules from immutable commit 283146fbfff512b6fe7b5281967a8e04fa18ec62 and actually reproduced the three original registry suites and six baseline report files offline.",
+    "Executed the final current registry: ten drawing run/cohort results and two groups; three description controls; five MGPI development/control results. All current report pairs reproduce exactly without model calls.",
+    "192-control artifact/AST comparison verifies all ten drawing results field-for-field except cohort IDs, including per-case counts, diagnostics, status, reported resources, source/prediction references, model/interface/configuration, recipe bindings, run dates and provenance. Summary values/SD/ranges and replicate membership match after independently sorting away changed group IDs.",
+    "Only the actual normalized evaluate_vendor.py fingerprint changed among scoring modules; new cohort/group IDs reflect that change. The evaluator AST is identical except string contents, including unchanged scoring, controls, thresholds, normalization, bootstrap/interval logic and CLI behavior.",
+    "Registry changes only its drawing result prefix. All six original benchmark report files are byte-identical after LF normalization; the four description report files remain current and the old drawing pair is explicitly historical outside the registry.",
+    "Independently ran all thirteen benchmark regression tests; all pass, including malformed/failed answers, metadata, historical/development cohorts, known controls and newline portability. Passing tests do not establish semantic completeness of the selected-fields evaluator.",
+    "Rendered the unchanged vendor report JSON with the final actual renderer: exact current Markdown match, all numeric table rows unchanged, and the archived prior Markdown equals the immutable baseline. Read the revised benchmark guide: implementation revision is distinguished from a model trial or improvement."
+   ]
+  },
+  {
+   "date": "2026-10-30",
+   "reviewer": "Independent Codex coding agent: bounded vendor interpretation, scorer-cohort and matrix refresh review",
+   "verdict": "pass",
+   "findings": [],
+   "limits": [
+    "Coding-agent software and artifact review only; no human engineering acceptance, timed review, company deployment or plant truth validation.",
+    "No model was called, no source was downloaded and no new model-performance or blind/held-out result was created.",
+    "Inherited unchanged artifacts retain only their prior recorded scope; this review does not freshly certify source keys, historical source-match judgments or every toolkit workflow."
+   ],
+   "private_proofs": {
+    "inspect_baseline.py": "aa4ccdcd936112d63fd24f742359998a87750d1489e435fcfd1b85ba066988e3",
+    "baseline-proof.json": "00db34c0005734c92a7300aeb0ad85cb07c394980f08acd0550a777fd747c389",
+    "reproduce_baseline.py": "d59d7e2e864cc878f6547ccfd8c7c571a6d809cc529b374163166baf2721810b",
+    "baseline-reproduction.json": "a0ff67c769b5b8c10d5c751dc224e23e741cb4dc1e88e8d854c50949cac338ce",
+    "baseline-reproduction.log": "7318b6962be28df8a8c4ab47a0b49e3902e1a948ff165e3af4834e27557deb8b",
+    "compare_candidate.py": "776faf931f69325a392993c5ec0fd998de6abdbbf8c36b4f8d9d3b03ee7cee2b",
+    "candidate-comparison.json": "48eee0f5b0e45b3211be9d3608ef5d8a6e9f907f06b14b467dad2cae2b2d65ec",
+    "run_candidate_checks.py": "4ef166c89ac942eb980c98a497d56fa887fefb30d28b19649d05498b2b30b5fe",
+    "candidate-execution.json": "9794dc418b51393ca519a60a1c0ff9c02cf88fc0582dff87d02ff2bf3d38ef8b",
+    "registry.log": "7318b6962be28df8a8c4ab47a0b49e3902e1a948ff165e3af4834e27557deb8b",
+    "matrix.log": "92ec77fada54d0faa97817bb3654f8469beeeabdf8f90371b27cfa1a4877ad19",
+    "test-benchmark.log": "090daaa9c8b5934fdfd962fd62fbc79eca48bce7e98d67f683d6177793737aff",
+    "test-matrix.log": "2f0a1310e7a7f6b1575abaa9b763c30310e374cce3b0d9b126580990e1ffb8bb",
+    "independent-matrix-proof.json": "9211ea6ddf920a0ab2f5902d67df5eec5783642826efe3ae3f6396f44b9ee592"
+   },
+   "feature": "generalization-matrix",
+   "files": {
+    "docs/GENERALIZATION.md": "038b6351722a90c4216d4baf2d7337b173996ce137b7352042c83c94c525a8f4",
+    "out/generalization/matrix.json": "24f0e861ee84d6e8f77488099db2a615f1410dfad9bfedaf6db80b7c1499a787",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "inherited_scope": {
+    "reviewer": "Independent Codex coding agent: bounded source-preservation dependency refresh review",
+    "date": "2026-10-30",
+    "prior_scope": "Bounded refresh of the ten row-6 historian cells whose imported CSV implementation/helper changed. The maintainer actually reran row 6; this reviewer independently compared all 95 typed cell objects, verified current code fingerprints and checked rendering/freshness/tests. This is not a fresh unfiltered matrix execution or a new detector result.",
+    "prior_registered_output_count": 3,
+    "unchanged_registered_output_bindings": {
+     "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+    },
+    "scope": "Matching original output bindings preserve the earlier stated scope and limits only; unchanged artifacts are not newly promoted to model-performance or engineering acceptance evidence.",
+    "unchanged_complete_cell_count": 80,
+    "unchanged_complete_cells_sha256": "d83cfa0fa3170d005d66b7e6295078736d57e854d796125470be94b412419562",
+    "cell_scope": "The eighty non-row-2 complete cell objects exactly match the baseline; their earlier evidence and limitations remain inherited. No fresh unfiltered matrix run is claimed."
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "afeba23897d26b22aafc7be05cc3f27f7e2dc18999297ea608dc84c3d8e50134",
+    "scripts/test_corpus_matrix.py": "8fd0f15410e56ef6711951dbf1147cd74ce9aa646a4cbded447f1025e43139ba",
+    "scripts/evaluate_vendor.py": "444d178db665b3db401b57aedb5704a0215e61f43c63c45de1d1c6e32319047b",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b"
+   },
+   "scope": "Fresh independent actual scratch execution of all fifteen scorer-control row-2 cells, complete artifact comparison, final fingerprint/rendering checks and matrix tests after report-wording-only code change. The other eighty complete cells and unchanged corpus registry retain prior scope only. No new tracing, detector or held-out performance result.",
+   "checks": [
+    "Actually reran python scripts/corpus_matrix.py --rows 2 into a private scratch output directory. All fifteen row-2 inputs pass and equal the published candidate cells after excluding only actual execution timestamps and durations.",
+    "Compared all 95 typed cell objects with immutable 283146fbfff512b6fe7b5281967a8e04fa18ec62: the other eighty complete cells are exact; all fifteen row-2 statuses, values, control counts/details, failure lists and criteria are unchanged.",
+    "The two OPEN100 publication anchors moved by one line because the vendor README changed. Verified that each refreshed line points at its actual corresponding control row and that says/ours/agrees numeric records are unchanged.",
+    "Every affected cell records the actual final evaluator hash under the matrix short-hash format. Only that module fingerprint changes; dependency declarations, matrix code, scoring helpers and corpus registry remain unchanged.",
+    "Global totals remain 64 pass, 23 fail and 8 not applicable. Actual final --check confirms that generated documentation matches matrix JSON and all required tool hashes are current.",
+    "Independently ran all thirty matrix tests: pass. These include registry validity, applicable inputs, source-family accounting, red-cell rendering and stale-evidence checks; they are distinct from the actual fifteen-cell scratch execution.",
+    "Preserved original source/key/recipe/prediction declarations and historical/development labels. Key-only controls remain key-only; they do not demonstrate image robustness, operational fitness or correct source keys."
+   ]
   }
  ]
 }

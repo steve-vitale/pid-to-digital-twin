@@ -3581,6 +3581,22 @@
         "docs/JOURNAL.md#106-preserve-item-appearances-through-graph-and-context-handoff",
         "docs/STATEMENT_REVIEW.md"
       ]
+    },
+    {
+      "id": "A241",
+      "function": "scoring",
+      "date": "2026-10-30",
+      "change": "Correct vendor-report labor, interval, geometry and source-role interpretations while preserving all scoring functions and historical evidence; declare a new benchmark implementation/cohort identity after actual saved-answer re-scoring.",
+      "hypothesis": "Counted corrections and overlapping ranges cannot establish labor savings or equivalence; a wording-only implementation edit must remain visible in provenance without changing numerical evidence.",
+      "evidence": "Three cache-free controls include an actual overlapping-mean-interval/nonzero-difference counterexample. Saved vendor JSON and every numeric Markdown table row remain unchanged; original Markdown retained. Actual thirty-prediction CLI run reproduces all fields except original-wrapper versus bare-prediction hashes. New drawing benchmark pair retains ten run results, two model/method groups and all substantive values, with honest new code/cohort/group fingerprints. Original six report files remain exact. Fifteen affected row-2 matrix cells actually rerun; eighty unselected complete cells retained, global64pass/23fail/8n-a unchanged.",
+      "runs": "Offline saved-answer scoring, observed-sample statistics controls, actual row-2 refresh and independent software/reader reviews; no new model or source-family trial.",
+      "verdict": "kept",
+      "why": "Repairs N068 interpretation and historical holdout-A framing without changing criteria, methods or metrics. No human review-time, drawing readiness, plant truth or vendor winner is established.",
+      "source": [
+        "docs/JOURNAL.md#107-correct-vendor-report-interpretation-without-changing-its-scores",
+        "examples/vendor-evaluation/README.md",
+        "benchmarks/README.md#report-implementation-revisions"
+      ]
     }
   ],
   "not_tried": [
@@ -4288,12 +4304,13 @@
     {
       "id": "N068",
       "function": "scoring",
-      "status": "not-done",
+      "status": "done",
       "idea": "Repair the vendor-report generator language that treats counted differences as manual work and overlapping run ranges as a tie, while retaining metric definitions and historical evidence.",
-      "why_not_yet": "The user guide now qualifies review load as counted differences with no measured labor saving. The generated report and its template still contain the old interpretations. Their separately checked wording repair should preserve all numerical results and make any changed code/cohort identities explicit.",
+      "why_not_yet": "Completed 2026-10-30: renderer/guide distinguish counted differences from labor, mean intervals from prediction, empirical resampling from new-input performance, IoU from drafting readiness, and overlapping ranges from equivalence. Original vendor Markdown/JSON and all six benchmark files retained; actual new benchmark scoring records changed implementation/cohort IDs with identical substantive values. Fifteen affected matrix cells actually rerun with unchanged criteria/results. No statistical method or score changed.",
       "source": [
         "docs/STATUS.md#known-defects",
-        "examples/vendor-evaluation/README.md"
+        "examples/vendor-evaluation/README.md",
+        "docs/JOURNAL.md#107-correct-vendor-report-interpretation-without-changing-its-scores"
       ]
     }
   ]

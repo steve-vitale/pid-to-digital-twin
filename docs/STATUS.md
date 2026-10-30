@@ -7,7 +7,7 @@ The evidence-preservation repairs below follow that audit; company integrations 
 workflow. It is not a turnkey document-to-digital-twin product or a company context service.** The strongest
 starting use is one source-backed engineering investigation. Most utilities have real implementations; the
 unfinished work is concentrated in evidence preservation, conversion between formats, semantic evaluation and
-company integration. There are also reproducible defects, listed first.
+company integration. Repaired defects and remaining validation boundaries are listed below.
 
 The [script registry](SCRIPTS.md) distinguishes 31 scripts classified as tools, 12 repository checks, eleven support modules and
 76 research scripts. Research scripts reproduce this project's demonstrations; their presence is not evidence
@@ -15,12 +15,9 @@ that the same output is available for arbitrary company inputs. Test scripts are
 
 ## Known defects
 
-| Finding | Observed behavior | Current boundary and next repair |
-|---|---|---|
-| **Vendor report prose overstates what scores establish** | The historical generated report calls review-load counts equivalent work and overlapping run ranges a tie. Neither labor savings nor equivalence follows from those values. | The user guide is corrected. The report generator and historical report still need a separately checked wording repair. Scores and statistical methods have not been changed in this audit. |
-
-The vendor interpretation finding remains open. Correcting that report and validating a bounded investigation
-journey take priority over adding outputs or more corpus cases.
+The reproduced source-preservation and report-interpretation findings from this audit are repaired below.
+This does not establish that every input or workflow is defect-free. Validating a bounded investigation journey
+takes priority over adding outputs or more corpus cases.
 
 **Repaired source-output collisions:** graph export, impact estimation and CSV-band generation now check all
 their active input paths and every output before creating directories or writing files. Exact/resolved names,
@@ -34,6 +31,13 @@ packets expose the recorded appearances and explicit image gaps; context binding
 appearances. Refreshed examples retain earlier decisions and require new evidence-bound proposals or exercises.
 The [offline regression packet](../examples/graph-export/multi-appearance/README.md) uses one of seven affected
 OPEN100 items. This preserves supplied evidence; it does not verify that a source supports an engineering claim.
+
+**Repaired report interpretation:** the vendor renderer now distinguishes counted differences from labor,
+intervals for a mean from a future-run prediction, and observed-sample resampling from unfamiliar-drawing
+performance. Overlapping ranges do not establish a tie; strict box overlap does not establish drawing readiness.
+The saved JSON and all numeric rows remain unchanged, with the original Markdown retained. An actual benchmark
+re-score records the changed implementation/cohort identities in a new report; earlier reports remain intact.
+See the [report revision](../examples/vendor-evaluation/README.md#report-interpretation-revision).
 
 ## What exists, and what remains manual
 
@@ -50,7 +54,7 @@ files, not product readiness, source completeness, usefulness or plant acceptanc
 | [Portable graph](FEATURES.md#graph-export) | Exports supported identities, relationships, claims and complete supplied item appearances; line-layer tools distinguish selected connection meanings. | One-way conversion. Source correctness still needs review; no generic inverse into a generator model. |
 | [Platform staging](FEATURES.md#platform-exports) | Generates Ignition tags and PI AF staging; offline checks inspect conventions. | Reviewed signal mapping, real import/readback and plant acceptance. PI has never been imported here. The gateway demo builder is TE-specific. |
 | [Loop audit](FEATURES.md#loop-audit) | Compares supplied loop records against supported drawings/models. | Loop truth must be supplied; matching an inventory does not verify wiring, settings or installed safeguards. |
-| [Vendor evaluation](FEATURES.md#vendor-evaluation) | Scores saved drawing answers with planted controls and per-sheet results. | Limited ontology and graph layer; no review-time study. Report interpretation defects are listed above. |
+| [Vendor evaluation](FEATURES.md#vendor-evaluation) | Scores saved drawing answers with planted controls and per-sheet results. | Limited ontology and graph layer; no review-time study or between-vendor comparison test. |
 | [Repository checks](FEATURES.md#repo-checks) | Checks claims, configured freshness, registries and test results. | Repository-specific, not engineering truth. Test exits can contain omissions; inspect the actual coverage summary. |
 | [Historian CSV tools](FEATURES.md#historian-csv) | Analyze recorded CSVs; a separate server can replay rows. | Qualified operating baseline, site metadata/mapping and live data access. Replay is not a historian connector or process simulator. |
 | [Review and point mapping](FEATURES.md#review-and-mapping) | Applies supported supplied decisions; separate commands stage OPC and PI mappings. | Human identity/source review, native signal checks and explicit regeneration. Valid review rows can persist when another row refuses. |
@@ -96,13 +100,11 @@ are external responsibilities by design, not a proposed replacement application 
 
 ## Recommended order of work
 
-1. **Correct report interpretation.** Repair the vendor-report prose without changing scores. Retain the
-   source-preservation and multi-appearance regression controls.
-2. **Finish one bounded investigation journey.** Specify the supported files, human decisions and acceptance
+1. **Finish one bounded investigation journey.** Specify the supported files, human decisions and acceptance
    checks. Measure whether an engineer can complete it and whether the resulting packet helps its recipient.
-3. **Evaluate semantics.** Add independent source/claim keys and useful/unacceptable question rubrics before
+2. **Evaluate semantics.** Add independent source/claim keys and useful/unacceptable question rubrics before
    increasing generalization claims. Preserve negative controls that a field-only score misses.
-4. **Prove one company handoff.** Build and read back a scoped adapter in an approved environment, with source
+3. **Prove one company handoff.** Build and read back a scoped adapter in an approved environment, with source
    permissions and an accountable owner. Add operating data only through an allowed path.
 
 Defer wider synchronization, more visualization formats and extra connectors until the relevant boundary is

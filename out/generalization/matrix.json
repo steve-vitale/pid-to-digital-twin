@@ -1,12 +1,9 @@
 {
  "about": "Generalization matrix written by scripts/corpus_matrix.py; rendered as docs/GENERALIZATION.md.",
- "ran_at": "2026-10-30 21:45 UTC",
- "seconds": 1510.3,
+ "ran_at": "2026-10-30 22:52 UTC",
+ "seconds": 1493.3,
  "rows_run_this_time": [
-  6
- ],
- "inputs_run_this_time": [
-  "te-braatz-runs"
+  2
  ],
  "tracer_pass_f1": 0.88,
  "pipe_pass_f1": 0.88,
@@ -1707,10 +1704,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 3.6,
-   "ran_at": "2026-10-30 16:36 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1742,23 +1739,23 @@
    "published": [
     {
      "file": "examples/vendor-evaluation/README.md",
-     "line": 78,
+     "line": 79,
      "says": "every class wrong: review load 99.9, symbol F1 0.002",
      "ours": "review load 99.9, symbol F1 0.002",
      "agrees": true
     },
     {
      "file": "examples/vendor-evaluation/README.md",
-     "line": 79,
+     "line": 80,
      "says": "every box moved half a sheet: review load 136.2, symbol F1 0.006",
      "ours": "review load 136.2, symbol F1 0.006",
      "agrees": true
     }
    ],
-   "seconds": 2.6,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 1.8,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1790,10 +1787,10 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 3.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 2.2,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1825,10 +1822,10 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 3.7,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1860,10 +1857,10 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 3.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 1.6,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1893,10 +1890,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 12.8,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 7.3,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1926,10 +1923,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1959,10 +1956,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.8,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1992,10 +1989,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 1.1,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2025,10 +2022,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2058,10 +2055,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 1.1,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2091,10 +2088,10 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2134,10 +2131,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.7,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 1.2,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2184,10 +2181,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 3.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2231,10 +2228,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 22:52 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
+    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",

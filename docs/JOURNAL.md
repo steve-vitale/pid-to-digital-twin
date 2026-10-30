@@ -5000,3 +5000,48 @@ now distinguish drawing references from supplied images and count statement evid
 The repair does not evaluate source agreement, interpretation quality, human review time, company adoption or
 plant truth. Vendor-report interpretation (N068), semantic question evaluation and the bounded engineer journey
 remain next work. No company system, live process connection or public-post publication is involved.
+
+## 107. Correct vendor-report interpretation without changing its scores
+
+The audit's N068 finding was reproducible in the generated report, not just an old guide: an empty-answer
+correction count was described as equivalent manual work, and overlapping run ranges as a tie. Independent
+review followed the actual count, matching, interval and bootstrap functions. It also found claims of drawing
+readiness from strict IoU, prospective new-sheet performance from empirical resampling, and an unsupported
+explanation for a weak sheet. Holdout A was called untouched even though it also informed method selection.
+
+The renderer and guide now state the narrower interpretation. Review load counts keyed differences, not time
+or labor savings. Runs 95% is an approximate Student-t interval for a mean under independent/comparable-run
+assumptions, not one future run's range. Bootstrap draws only observed sheets and independently selects an
+observed run for each sampled sheet; it does not retain whole-run correlations or establish unfamiliar-input
+performance. Overlap is not a tie or equivalence test. Strict IoU is a matching threshold, and connection credit
+concerns undirected keyed asset-network pairs, not direct adjacency, routing or process truth. Controls probe
+declared failures; passing does not establish correct keys or every kind of error. The historical holdout-A label
+remains with its method-selection qualification.
+
+Three new cache-free regression controls use the saved report and existing statistics. One explicit synthetic
+counterexample has overlapping individual mean intervals while the existing Welch difference interval excludes
+zero. These controls do not add a comparison test to the vendor tool or establish which vendor is better.
+Scoring/control functions, matching thresholds, normalization, interval calculations, bootstrap draws/seed and
+all source keys and predictions remain unchanged.
+
+The original vendor Markdown is retained unchanged under history. Current Markdown is an actual render of the
+unchanged historical JSON, with every numeric table row identical. This is not a new scoring or model trial.
+Independent CLI re-scoring of thirty saved bare predictions reproduces all values and report fields except the
+thirty prediction-file hashes: the saved JSON names original run wrappers, whose parsed predictions are the
+committed files. Neither hash set is substituted for the other, and missing original wrappers are not hidden.
+
+The benchmark includes the whole evaluator module in its implementation fingerprint. An actual offline run
+therefore creates a new drawing report pair and new cohort/group identities. Its ten run/cohort rows, two
+model/method groups and every substantive control/count/metric/input/recipe/model/resource record are retained.
+The registry explicitly selects that new pair. All six original benchmark files remain byte-identical, including
+the now-historical drawing pair; the four description-report files remain current. No recipe or saved report is
+hand-rehashed to conceal implementation drift.
+
+The fifteen affected matrix row-2 cells are actually rerun after the final renderer edit. Their substantive
+results and criteria remain unchanged; the other eighty complete cells are retained. An earlier row-2 run and
+new benchmark candidate preceded the last wording edit and are retained privately as superseded evidence;
+they are not counted as final freshness. The global 64 pass / 23 fail / 8 not-applicable result is unchanged.
+
+These repairs improve how evidence is read, not model accuracy or operational outcomes. The next work remains
+one bounded engineer investigation, source-grounded useful/unacceptable question rubrics, and an approved
+company handoff. No paid models, new source download, company write, plant import or public post was involved.
