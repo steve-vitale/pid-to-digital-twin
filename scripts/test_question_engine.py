@@ -978,5 +978,111 @@ class OutputPublication(unittest.TestCase):
                 self.assertEqual(self.snapshot(base), before)
 
 
+class CatalogHandoff(unittest.TestCase):
+    """A source label must name the selected catalog; a shared ID must not hide a visible definition conflict."""
+
+    def cli(self, args):
+        result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/question_engine.py"),
+                                 *map(str, args)], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return result.stdout
+
+    def refuse(self, base, doc, catalog=None, message="conflicts with catalog question E18"):
+        source = base / "questions.json"
+        source.write_text(json.dumps(doc), encoding="utf-8")
+        out = base / "reports"
+        out.mkdir()
+        for name in ("rollup.json", "rollup.md"):
+            (out / name).write_text("prior report", encoding="utf-8")
+        before = OutputPublication.snapshot(self, base)
+        args = ["--rollup", "fixture=" + str(base), "--out", str(out)]
+        if catalog:
+            args += ["--catalog", str(catalog)]
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as err:
+            self.assertEqual(qe.main(args), 2)
+        self.assertIn(message, err.getvalue())
+        self.assertEqual(OutputPublication.snapshot(self, base), before)
+
+    def test_custom_catalog_is_identified_in_both_file_and_stdout_modes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            catalog = copy.deepcopy(CAT)
+            q = next(q for q in catalog["questions"] if q["id"] == "E18")
+            q["question"] = "Fictional custom question: " + q["question"]
+            path = base / "company-questions.json"
+            path.write_text(json.dumps(catalog), encoding="utf-8")
+            site = base / "site"
+            args = ["--model", ROOT / "data/bayer_rt/process_model.json", "--question", "E18",
+                    "--catalog", path]
+            self.cli([*args, "--out", site])
+            doc = json.loads((site / "questions.json").read_text(encoding="utf-8"))
+            self.assertEqual(doc["catalog"], path.name)
+            self.assertEqual(doc["questions"][0]["question"], q["question"])
+            for text in ((site / "screen.md").read_text(encoding="utf-8"), self.cli(args)):
+                self.assertIn(f"Questions: `{path.name}`", text)
+                self.assertIn(q["question"], text)
+                self.assertNotIn(str(base), text)
+            roll_args = ["--rollup", "fixture=" + str(site), "--catalog", path]
+            self.cli([*roll_args, "--out", base / "combined"])
+            rolled = json.loads((base / "combined/rollup.json").read_text(encoding="utf-8"))
+            self.assertEqual(rolled["catalog"], path.name)
+            self.assertEqual(rolled["questions"][0]["question"], q["question"])
+            for text in ((base / "combined/rollup.md").read_text(encoding="utf-8"), self.cli(roll_args)):
+                self.assertIn(f"Questions: `{path.name}`", text)
+                self.assertNotIn(str(base), text)
+
+    def test_rollup_refuses_visible_definition_conflicts_without_replacing_reports(self):
+        changes = [("question", "Fictional other question"), ("family", "controls"),
+                   ("decision_rule", "Fictional other rule"), ("limits", "Fictional other limit"),
+                   ("typical_benefit.wording", "Fictional other wording"),
+                   ("typical_benefit.source_titles", ["Fictional other title"]),
+                   ("data_requests.how", "Fictional other collection instruction"),
+                   ("data_requests.item", "Fictional other collection item")]
+        for field, value in changes:
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as tmp:
+                doc = copy.deepcopy(load("bayer"))
+                f = finding(doc, "E18@model")
+                parts = field.split(".")
+                if parts[0] == "data_requests":
+                    f["data_requests"][0][parts[1]] = value
+                elif len(parts) == 2:
+                    f[parts[0]][parts[1]] = value
+                else:
+                    f[field] = value
+                self.refuse(Path(tmp), doc)
+
+    def test_malformed_findings_and_request_shapes_refuse_clearly(self):
+        for bad in (None, {}, "requests", ["request"], [{"item": [], "how": "collect"}]):
+            with self.subTest(requests=bad), tempfile.TemporaryDirectory() as tmp:
+                doc = copy.deepcopy(load("bayer"))
+                finding(doc, "E18@model")["data_requests"] = bad
+                self.refuse(Path(tmp), doc)
+        for bad in (None, "finding", {"question_id": []}):
+            with self.subTest(finding=bad), tempfile.TemporaryDirectory() as tmp:
+                doc = copy.deepcopy(load("bayer"))
+                doc["questions"] = [bad]
+                self.refuse(Path(tmp), doc, message="without a string question_id")
+
+    def test_compatible_catalog_copy_does_not_require_the_same_filename(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            path = base / "reviewed-copy.json"
+            path.write_text(json.dumps(CAT), encoding="utf-8")
+            self.cli(["--rollup", "fixture=" + str(EX / "bayer"), "--catalog", path, "--out", base / "reports"])
+            doc = json.loads((base / "reports/rollup.json").read_text(encoding="utf-8"))
+            self.assertEqual(doc["catalog"], path.name)
+            self.assertEqual(doc["counts"]["findings"], len(load("bayer")["questions"]))
+
+    def test_ambiguous_catalog_request_instructions_are_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            catalog = copy.deepcopy(CAT)
+            q = next(q for q in catalog["questions"] if q["id"] == "E18")
+            q["data_requests"].append(dict(q["data_requests"][0], how="Fictional conflicting instruction"))
+            path = base / "catalog.json"
+            path.write_text(json.dumps(catalog), encoding="utf-8")
+            self.refuse(base, load("bayer"), catalog=path, message="conflicting instructions for the same request item")
+
+
 if __name__ == "__main__":
     unittest.main()

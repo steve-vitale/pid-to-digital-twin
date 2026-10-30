@@ -4446,3 +4446,43 @@ evidence into the plain question brief, then the company's shared context and de
 contribute. This is a repair to the investigation on-ramp, not an extension of the local context register or a
 new governance application. No operating benefit, human adoption, receiving-system adapter or accepted company
 handoff is established by these software checks.
+
+
+## 90. Keep the question catalog with the first packet
+
+The source-preservation repair is published before this pass. A fresh engineer-reader check asks what happens
+when the first question comes from a company-specific catalog. Five disposable baseline CLI calls demonstrate
+that the screen uses the supplied question text but labels the repository default catalog in its JSON, Markdown
+and printed screen. Roll-up JSON has the same wrong label. Another catalog can reuse the question ID and silently
+substitute its question and decision rule while retaining collection instructions from an earlier screen. A
+separate reader reproduces both defects with five actual offline calls on fictional catalog variants.
+
+The existing catalog field now names the actual selected file in screen and roll-up modes. A custom roll-up's
+Markdown names it too; paths outside the repository remain filenames rather than private absolute directories.
+Before combining findings, the loader compares their embedded question, family, decision rule, benefit and
+limits with the selected catalog, and checks emitted collection item/instruction pairs. Visible conflicts are
+refused before publishing either report. Missing/non-string question IDs, malformed request lists/items and
+conflicting instructions for one selected-catalog request item have explicit refusals as well.
+
+This is not proof of whole-catalog equivalence. Trigger rules, exclusions, some source metadata and the meaning
+of quiet/unrun questions are not present in a finding. A missing request may have been satisfied by drawing facts.
+The plain first-packet brief therefore retains the actual catalog file, revision and content hash alongside its
+source/model references. After rule changes the engineer reconciles the catalog and regenerates the screens;
+matching IDs or filenames alone cannot establish the same investigation. That remains a manual evidence step,
+without a new schema, local versioning service, approval process or company connector.
+
+All 15 existing opportunity outputs, the committed catalog, question matching and models remain unchanged. The
+regressions exercise both custom output modes, compatible catalog copies, visible definition/request conflicts,
+malformed records and preservation of existing report pairs on refusal. These software checks establish accurate
+attribution and bounded conflict detection for the first handoff, not source authority, a governing revision,
+full catalog compatibility, human adoption, engineering approval or operational value.
+
+The independent completed audit runs 54 direct CLIs plus six children in the existing refresh demonstration,
+with 205 checks and 29 byte-preserving refusals. Twelve registered report files regenerate exactly and the
+wrapper checks its three expected artifacts; all 15 also match the preceding checkpoint. An extra Bayer E18 pair
+is separate bridge evidence. Seven accepted residual cases exercise the documented limits rather than passing
+them off as whole-catalog validation. A private harness initially compared Windows stdout newlines with report
+bytes; that comparison was corrected, its failed attempt retained, and the repeated bounded run disclosed.
+
+The filled Millard brief demonstrates catalog retention with a pinned catalog revision and hash of its committed
+LF bytes. This is a catalog citation check, not a new audit of the original incident report or current plant state.

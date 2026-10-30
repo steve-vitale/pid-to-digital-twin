@@ -902,7 +902,7 @@ drawing** (collect it from the place named). Systems listed under "Left out" wer
 
 def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=None, *, catalog_path=CATALOG):
     out = prepare_output(out, ("questions.json", "screen.md"), [catalog_path, *model.source_paths])
-    doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(CATALOG),
+    doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(catalog_path),
            "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched, "schedules": sorted({e["file"] for e in model.schedule.values()} |
                                                            {e["fields_file"] for e in model.schedule.values()
                                                             if e.get("fields_file")}),
@@ -1038,14 +1038,34 @@ def load_site(arg, catalog):
     if d.get("schema") != SCHEMA or not isinstance(d.get("questions"), list):
         raise InputError(f"{shown_path(f)} is not an opportunity screen (schema {d.get('schema')!r}, expected "
                          f"{SCHEMA!r}): run question_engine.py --model ... --out first")
-    unknown = sorted({q.get("question_id") for q in d["questions"]} - {q["id"] for q in catalog["questions"]})
+    if any(not isinstance(q, dict) or not isinstance(q.get("question_id"), str) for q in d["questions"]):
+        raise InputError(f"{shown_path(f)} has a finding without a string question_id")
+    qmap = {q["id"]: q for q in catalog["questions"]}
+    unknown = sorted({q["question_id"] for q in d["questions"]} - qmap.keys())
     if unknown:
         raise InputError(f"{shown_path(f)} has question ids this catalog does not know ({', '.join(unknown)}): "
-                         "was it made with another version of data/questions.json?")
+                         "was it made with another catalog revision?")
+    for finding in d["questions"]:
+        q = qmap[finding["question_id"]]
+        expected = {key: q.get(key) for key in ("question", "family", "decision_rule", "limits")}
+        expected["typical_benefit"] = benefit(q, catalog)
+        conflicts = [key for key, value in expected.items() if finding.get(key) != value]
+        requests = finding.get("data_requests")
+        pairs = {(r["item"], r["how"]) for r in q.get("data_requests", [])}
+        if len({item for item, _ in pairs}) != len(pairs):
+            raise InputError(f"catalog question {q['id']} gives conflicting instructions for the same request item")
+        if not isinstance(requests, list) or any(
+                not isinstance(r, dict) or not isinstance(r.get("item"), str) or
+                not isinstance(r.get("how"), str) or (r["item"], r["how"]) not in pairs for r in requests):
+            conflicts.append("data_requests")
+        if conflicts:
+            raise InputError(f"{shown_path(f)} finding {finding.get('id', q['id'])!r} conflicts with catalog "
+                             f"question {q['id']} ({', '.join(conflicts)}); reconcile the catalog and regenerate "
+                             "the screen before combining sites")
     return name, shown_path(f), d
 
 
-def rollup(site_args, catalog):
+def rollup(site_args, catalog, *, catalog_path=CATALOG):
     """Combine several sites' screens: per question, the sites and assets it fired on and the data requests merged
     by item (each site's places kept, duplicates dropped). Ordered by how many sites a question fired at, then by
     findings, then catalog order. Nothing is ranked by value and no saving is computed."""
@@ -1096,7 +1116,7 @@ def rollup(site_args, catalog):
     out.sort(key=lambda x: (-len(x["sites"]), -x["findings"], order[x["question_id"]]))
     quiet_everywhere = [q["id"] for q in catalog["questions"] if q["id"] not in per
                         and all(q["id"] in d.get("did_not_fire", []) for _, _, d in sites)]
-    return {"schema": ROLLUP_SCHEMA, "catalog": shown_path(CATALOG),
+    return {"schema": ROLLUP_SCHEMA, "catalog": shown_path(catalog_path),
             "note": "Several sites' opportunity screens combined: where each question fired and the data to collect "
                     "at each. A screen, not an audit: no savings are computed and nothing is ranked by value; the "
                     "order is only how many sites a question fired at, then how many findings.",
@@ -1117,6 +1137,8 @@ def render_rollup_md(doc, catalog):
          "ranking by value, and no savings are computed. The \"what the source says\" lines are the sources' "
          "general figures, quoted as written. Read each site's own screen for the evidence behind a finding.", "",
          "| Site | Screen | Model | Findings |", "|---|---|---|---|"]
+    if doc["catalog"] != shown_path(CATALOG):
+        L[2:2] = [f"Questions: `{doc['catalog']}`.", ""]
     L += [f"| {s['site']} | `{s['screen']}` | `{s['source_model']}` | {s['findings']} |" for s in doc["sites"]]
     L += ["", "| Question | Family | Sites | Findings |", "|---|---|---|---|"]
     fams = catalog["families"]
@@ -1199,7 +1221,7 @@ def main(argv=None):
         if a.model:
             ap.error("give --model (one site's screen) or --rollup (several screens), not both")
         try:
-            doc = rollup(a.rollup, catalog)
+            doc = rollup(a.rollup, catalog, catalog_path=a.catalog)
             if a.out:
                 write_rollup(doc, catalog, a.out, catalog_path=a.catalog,
                              source_paths=[site_source(arg)[2] for arg in a.rollup])
@@ -1233,7 +1255,7 @@ def main(argv=None):
             return 2
         print(json.dumps(doc["counts"]) + f" -> {shown_path(a.out)}")
     else:
-        doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(CATALOG),
+        doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(a.catalog),
                "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched,
                "schedules": sorted({e["file"] for e in model.schedule.values()} |
                                    {e["fields_file"] for e in model.schedule.values() if e.get("fields_file")}),

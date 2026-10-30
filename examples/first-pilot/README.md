@@ -23,6 +23,11 @@ what evidence is missing. For a generated question, copy its complete finding ID
 `questions.json` (for example `E18@model`, not just catalog rule `E18`). For a manual question, use a labelled local
 reference and the source's full identities. No asset model or generated ID is required for a document clarification.
 
+For a generated question, retain the actual question catalog too, including any working copy supplied through
+`--catalog`. Record its revision/content hash with the source/model references in the brief. The report's displayed
+catalog filename helps locate it but cannot prove its contents or authority. If question rules change, regenerate
+the screen rather than assuming the same finding ID still describes the same investigation.
+
 Read the cited records and ask the document or engineering owner for the missing evidence. Record a qualified
 answer, partial answer or unresolved question with the evidence and review date. If no recipient has agreed to
 take it, keep the handoff marked **needs owner**. An assembled draft can still be useful while that remains open.

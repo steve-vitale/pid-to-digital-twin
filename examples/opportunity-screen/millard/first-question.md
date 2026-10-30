@@ -6,6 +6,11 @@ Investigator, engineering reviewer/date, receiving owner and acceptance: **Unass
 Generated reference: `E30@EVAP-GROUP`; exact model references: `EVAP-GROUP`, `HG-MAIN`.
 Both are authored labels. Intended recipient: a refrigeration controls/document owner; no actual person is assigned.
 
+Question catalog: [`data/questions.json` at revision `4622436`](https://github.com/steve-vitale/pid-to-digital-twin/blob/46224363d4907a461c8051c0dcc8caec0e193f09/data/questions.json),
+schema `question-catalog-1`. SHA-256 of the committed catalog bytes (LF):
+`18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3`.
+This identifies the investigation definition; it supplies no company approval or governing-revision verdict.
+
 ## What question are we taking forward?
 
 Which applicable configuration and operating records explain defrost initiation and performance for the equipment
@@ -34,7 +39,7 @@ needed by E30. Reconcile any returned records to the exact equipment scope befor
 Responsible owner and due date: **Unassigned / not set**. Next review: **Not set; revisit when records arrive**.
 Packet/company destination and accepted handoff: **Not recorded**. Trial: **Not run; benefit not measured**.
 
-Keep the original, model, screen, this brief and toolkit revision together. Carry the packet to the company's
+Keep the original, model, catalog, screen, this brief and toolkit revision together. Carry the packet to the company's
 shared context and decision system for ongoing stewardship. The [blank brief](../../first-pilot/pilot-brief.md)
 can be extended when an actual recipient or measured trial is agreed. No model/context-register expansion is
 needed to ask for these records.

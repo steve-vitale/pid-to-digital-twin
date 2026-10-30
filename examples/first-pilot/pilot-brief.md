@@ -13,6 +13,7 @@ when planning or running a measured trial. This is a plain working document; it 
 - Question and decision it could inform: **Unknown**
 - Scope and excluded work: **Unknown**
 - Question reference: **Unknown** (complete generated finding ID, or a labelled local reference for a manual question)
+- Generated-question catalog file, revision and content hash, if used: **Not used / not recorded**
 - Source identities and relevant asset IDs: **Unknown** (use exact supplied identities; model IDs only where a model is used)
 - Investigator / evidence owner: **Unassigned**
 - Document or engineering owner to ask: **Unassigned**

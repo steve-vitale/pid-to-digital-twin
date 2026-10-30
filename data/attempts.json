@@ -3283,6 +3283,23 @@
         "docs/OPPORTUNITY_SCREEN.md",
         "scripts/test_question_engine.py"
       ]
+    },
+    {
+      "id": "A223",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Carry actual custom-catalog attribution through question screens and rollups, refuse visible same-ID finding conflicts and retain catalog evidence in the plain first-packet brief.",
+      "hypothesis": "A recipient needs to know which investigation definition produced a finding; a shared question ID must not silently combine conflicting questions, decisions or collection instructions.",
+      "evidence": "Root5baselineCLIs and a separate engineer-reader5CLI audit reproduce wrong default-catalog labels and silent same-ID question/rule/request substitution. Existing catalog fields now name the actual selected file; custom rollup Markdown names it too. Embedded question/family/decision_rule/benefit/limits and emitted request(item,how) conflicts refuse before publication; malformed IDs/request shapes and ambiguous current-catalog request instructions refuse explicitly. Default15outputs/catalog/models/question matching remain unchanged. Guide and plain brief retain exact catalog file/revision/hash and explain that triggers, exclusions, source metadata, quiet/unrun rules and omitted requests cannot establish full catalog equivalence from a screen.",
+      "runs": "66local question-engine unittest cases run with1actual Windows file-symlink privilege skip and no failures. Bounded independent final software/compatibility controls are recorded separately in the opportunity-screen feature review. Fictional catalog variants are development controls; no new source family or held-out result.",
+      "verdict": "kept",
+      "why": "Makes the first evidence handoff truthful without a new schema, fingerprint service, local governance or receiving adapter. Filenames remain privacy-preserving display labels, not authority or full-catalog identity. Question rules changed outside embedded findings require manual reconciliation and regeneration.",
+      "source": [
+        "docs/JOURNAL.md#90-keep-the-question-catalog-with-the-first-packet",
+        "docs/OPPORTUNITY_SCREEN.md#several-sites-the-roll-up",
+        "examples/first-pilot/pilot-brief.md",
+        "scripts/test_question_engine.py"
+      ]
     }
   ],
   "not_tried": [

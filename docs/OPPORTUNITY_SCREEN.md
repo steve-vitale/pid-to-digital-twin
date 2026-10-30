@@ -28,6 +28,18 @@ changes. Both reports are rendered before writing; this is not a lock against co
 Normal refresh into the same folder is allowed when inputs have different filenames. Choose another output
 folder to keep an earlier report pair.
 
+For company-specific questions, use a working copy of `data/questions.json` with `--catalog`:
+
+```sh
+python -S scripts/question_engine.py --model my-bundle/plant_model.json --catalog my-bundle/questions.json --out out/screen-site
+```
+
+The screen's `catalog` field and readable header name the selected file. Paths outside this repository are
+displayed as a filename to avoid disclosing local directories. Keep the actual catalog with the packet and record
+its revision and content hash in the [plain brief](../examples/first-pilot/pilot-brief.md); a displayed filename is
+not a version or authority check. The catalog supplies the investigation rules and collection instructions, so it
+is evidence needed to interpret the generated finding too.
+
 For your own model, add `--schedule` only for your corresponding records after checking their sheet/asset
 identities and scope. The committed OPEN100 schedules describe that public source, not arbitrary site equipment.
 Its complete scheduled example is in the [worked-example commands](../examples/opportunity-screen/README.md).
@@ -152,6 +164,18 @@ folder with no `questions.json`, a file that is not a screen, a screen with ques
 or the same site named twice is refused (exit code 2). Example:
 [`examples/opportunity-screen/rollup-food-bayer/rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md).
 
+Use `--catalog` for a custom roll-up too. Its JSON names that catalog, and its Markdown adds the custom filename.
+Before combining findings, the engine refuses disagreement with the selected catalog in the embedded question,
+family, decision rule, typical-benefit record or limits, and emitted collection items/instructions. Findings must
+identify a catalog question; request lists must contain records with matching item/instruction strings. Conflicting
+instructions for one selected-catalog request item are also refused before publication.
+
+This checks visible finding conflicts, not complete catalog equivalence. The input JSON does not retain all trigger
+rules, exclusions, source URLs/licenses or the meaning of quiet/unrun questions. A request omitted from a screen may
+already have been satisfied on the drawing, so omission cannot prove that the catalog never requested it. Retain
+the exact original catalogs and their revisions/hashes; after rule changes, reconcile them and regenerate the
+screens under the reviewed catalog. Matching IDs or filenames alone do not establish the same investigation.
+
 ## The questions
 
 `data/questions.json` holds 50 questions as data: energy (E1-E24, E27-E32), heat grade (H1-H6), metering (C1,
@@ -197,8 +221,8 @@ Each question has: `applies_when` (the triggers), `evidence_fields`, `data_reque
 
 ## How to add a question
 
-Add an entry to `questions` in `data/questions.json`; no code change is needed for anything the trigger language
-covers. `fields_help` in the file documents every key. In short:
+Add an entry to `questions` in `data/questions.json` or your working copy; no code change is needed for anything
+the trigger language covers. `fields_help` in the file documents every key. The example below illustrates that format:
 
 ```json
 {"id": "E99", "family": "energy", "question": "Is this agitator running at full speed all the time?",
@@ -231,8 +255,10 @@ covers. `fields_help` in the file documents every key. In short:
 - Copy the source's wording exactly. If no source has a number, say so in the wording (the tests insist that a
   question with no source key says it has none). Never write a figure for a specific plant.
 
-Then run `python -S scripts/test_question_engine.py` and regenerate the examples (the command lines are in
-[`examples/opportunity-screen/README.md`](../examples/opportunity-screen/README.md)).
+For changes to the repository catalog, run `python -S scripts/test_question_engine.py` and regenerate the examples
+(the command lines are in [`examples/opportunity-screen/README.md`](../examples/opportunity-screen/README.md)).
+Those tests cover the committed catalog. For your working copy, run with `--catalog`, review the emitted findings
+and collection instructions against the intended sources, and retain the reviewed file with the first packet.
 
 ## Left out on purpose
 

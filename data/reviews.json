@@ -6082,6 +6082,163 @@
     "prior-accepted-opportunity-review.json": "cc1cd4434fafa2f17e3b8447af1878bc8d41eaec0340f2a1377465bb54185f9c",
     "evidence-manifest-final.json": "e8371d06a68a16d7a7bc1253a9c97682836d86de2789ed2d82d6404477413734"
    }
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Independent Codex agent: catalog-label and visible-definition compatibility review with explicit inherited source/preservation scope",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+    "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+    "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/opportunity-screen/open100/screen.md": "1c8914cd0aff439ed0e296cf50d7d4b6cea64be23560a04dc5cdb710ccdea6f1",
+    "examples/opportunity-screen/open100/questions.json": "e35dc35e40c510820af49a079f7beee10427d55d71f6a483d80da50076f75c9e",
+    "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+    "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7",
+    "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+    "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67"
+   },
+   "supporting_files": {
+    "scripts/question_engine.py": "bd7b4027e03c682cbeeb297b814f279259f6ca5f3776794114378e713a59ee79",
+    "scripts/test_question_engine.py": "6e3c56a14bdbbf0d77e42489e6c385f81abacf2b48521005276a7e1b52925141",
+    "docs/OPPORTUNITY_SCREEN.md": "b7748380ffa74b739570fe0f34c559edcce03aaad4d60a9f9909093cfa8310e9",
+    "examples/first-pilot/README.md": "022a81853e89dbab7fd6d1c9dd3ae994a6a58386438814923684dfb966798634",
+    "examples/first-pilot/pilot-brief.md": "7e176df83e7e53ee4162df1927f07b1c2fd062e3852bc5070bc203e331d7cadb",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4",
+    "examples/opportunity-screen/open100_schedule_fields.json": "9b0b3fce95428ceb4b5e83100516553aec6fc128e81e34df2777791bd2bce9dc",
+    "examples/opportunity-screen/food_plant_model.json": "c703129813cb7ac342c5c140a8601bc947e047006d93033bd1fb1714f87cd9c1",
+    "examples/opportunity-screen/millard/model.json": "4f2d7e39890a689778242b50418a7f5fa7235dbf05f5fbb377bb02e06c24967a",
+    "examples/opportunity-screen/review-refresh/demonstrate.py": "0fea35e6e4fd6517787e9051fa2a5e715f3903882751d109d23589a02f276f33",
+    "examples/opportunity-screen/millard/first-question.md": "7c0901a467745b5916ab23618a84589a2ea25a71c2d30297a4fe13c910f9a6cd",
+    "examples/opportunity-screen/review-refresh/rejections.csv": "2e1ee81407d0acb233f5a564da1beae3385e88c074f7b1db8ac9b0c876fd4f70",
+    "examples/opportunity-screen/review-refresh/reconfirmations.csv": "7e2c34cf878a61ff43e0fbb736c8eb57616466088b4601f7d45f90abc3656d34",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f"
+   },
+   "findings": [],
+   "resolution": "Actual selected catalog labels now travel with screen and rollup outputs, and rollups refuse conflicts in the embedded visible question definitions and emitted collection instructions before publication. All 15 registered outputs retain accepted baseline bytes. This renews only the bounded software/catalog-compatibility leaf; it does not establish complete catalog equivalence, engineering authority or plant value.",
+   "checks": [
+    "Preserved the independent baseline evidence: five actual offline commands demonstrated custom-catalog default labels and silent same-ID definition substitution. Final checks use task-owned fictional catalog and screen copies with existing public development inputs.",
+    "The completed independent run records 54 direct command invocations, plus 6 child CLIs in the existing read-only review-refresh wrapper, with 205 checks and 29 refusal cases. This reviewer did not run the maintainer-reported 66-test suite or a full repository suite.",
+    "Screen JSON, saved screen Markdown and screen stdout identify the actual selected catalog display path. Rollup JSON always carries the selected catalog label. Custom-catalog rollup Markdown and stdout add an explicit catalog line; default rollup Markdown and stdout intentionally have no catalog line and retain their established output. Paths outside the repository remain filename-only privacy labels.",
+    "Mixed same-ID catalog screens refuse against either selected catalog. Individual visible conflicts were exercised for question, family, decision rule, limits, typical-benefit wording/source IDs/source titles/ARC value, and emitted request item and instruction.",
+    "Question records without string question_id, unknown question IDs, scoped malformed request lists/item/instruction records, and ambiguous selected-catalog instructions for one request item refuse with exit2 and clear error messages. Tested refusals preserve all fixture input and existing output bytes; a fresh refused output directory remains absent.",
+    "Renamed identical custom/default catalogs and a same-name identical copy in another location are compatible. This demonstrates that filenames are labels rather than asserted catalog identity.",
+    "Five default screen pairs and the established food/Bayer rollup reproduce 12 registered files raw-byte exactly. The existing read-only review-refresh wrapper executes 6 actual child CLIs and passes its 3 expected regenerated-text checks. All 15 registered artifacts also match the baseline and inherited accepted bindings raw-byte exactly. The additional Bayer E18 bridge pair reproduces separately and is not counted among the 15.",
+    "Seven expected limitation cases actually remain accepted: changed trigger, changed exclusions, changed source URL/license, newly added but unemitted request, omitted emitted-request list, changed quiet rule and changed unrun rule. These are documented limits of retained input JSON, not proof of complete catalog equivalence.",
+    "Final static wording explicitly says the input JSON does not retain full trigger/exclusion/source URL/license/quiet/unrun meaning. Readable Markdown separately cites used source URLs/licenses. No CLI rerun was performed for this prose-only correction.",
+    "The first-pilot guide and plain brief tell engineers to retain the actual catalog and revision/content hash and regenerate screens under a reviewed catalog after rule changes. The Millard worked brief demonstrates a pinned local-Git-verified catalog revision/schema/LF-byte hash and includes the catalog in the handoff packet. It remains partial evidence with unassigned ownership, no trial/benefit or accepted company handoff.",
+    "An initial private harness attempt completed 52 direct command invocations before a stdout comparison wrongly treated Windows CRLF as a product difference. Saved-file comparisons were raw-byte exact. The corrected bounded run normalizes platform newline only for stdout and explicitly accounts for print final newline. Both attempts are preserved; the fresh rerun had begun before advice to resume instead arrived. No engine change was required and no broader tests followed."
+   ],
+   "command_accounting": {
+    "completed_direct_CLIs": 54,
+    "completed_nested_review_refresh_CLIs": 6,
+    "completed_checks": 205,
+    "refusal_cases": 29,
+    "registered_raw_regenerated_files": 12,
+    "existing_wrapper_expected_checks": 3,
+    "registered_total": 15,
+    "extra_Bayer_E18_raw_files": 2,
+    "initial_partial_attempt_direct_CLIs": 52,
+    "initial_partial_attempt_nested_CLIs": 0,
+    "initial_harness_failure_was_product_failure": false,
+    "no_new_CLI_execution_for_final_prose_followup": true
+   },
+   "residual_limits_actually_exercised": [
+    {
+     "case": "changed-trigger",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "changed-exclusions",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "changed-source-url-license",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "added-unemitted-request",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "omitted-emitted-requests",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "changed-quiet-rule",
+     "outcome": "accepted as documented retained-JSON limitation"
+    },
+    {
+     "case": "changed-unrun-rule",
+     "outcome": "accepted as documented retained-JSON limitation"
+    }
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent: source-preservation repair and inherited-output compatibility review",
+    "date": "2026-10-30",
+    "verdict": "pass",
+    "archived_record_sha256_raw": "9e1090781c34fd28ffd32d0bd1cb6dd34a0273afec40706994e70f57d7e02d37",
+    "inherited_output_count": 15,
+    "inherited_files": {
+     "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+     "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+     "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+     "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+     "examples/opportunity-screen/open100/screen.md": "1c8914cd0aff439ed0e296cf50d7d4b6cea64be23560a04dc5cdb710ccdea6f1",
+     "examples/opportunity-screen/open100/questions.json": "e35dc35e40c510820af49a079f7beee10427d55d71f6a483d80da50076f75c9e",
+     "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+     "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+     "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+     "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+     "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7",
+     "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+     "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67"
+    },
+    "scope": "Prior original-source meaning, quotations, historical source/model audits and rights/authority qualifications remain attributed to their historical reviewers and were not re-audited. Prior source-preservation/alias controls and their file-symlink OS skip remain separately attributed; this run does not repeat or renew the full preservation leaf. New refusal byte-preservation assertions apply only to the catalog-conflict controls actually executed here.",
+    "previous_source_review_archive_sha256_raw": "cc1cd4434fafa2f17e3b8447af1878bc8d41eaec0340f2a1377465bb54185f9c"
+   },
+   "inherited_source_review_attribution": {
+    "initial_receipt_sha256_raw": "a82517235bd5541da7627723c27432891d9266492ae7a98450248209f15c0aac",
+    "citation_followup_sha256_raw": "81e372d497be429ab1027ae2fa8b8eefd99af914f6bb76b955cbe8c25a213e4a",
+    "kind": "Separate independent AI source-reader review of historical source claims, not human engineering or this reviewer repeating the PDF audit.",
+    "source_bytes": 656148,
+    "source_sha256_raw": "5b5643fc7fd94799cc6516e09af933d7fd0fe5b207bbef39adc5ec639b70c8a4",
+    "limits": "Development subset selected after source inspection. Unknown plant inventory/initiation remain unknown; no current-state, governing revision, safe sequence, site approval, demand absence, duration recommendation or energy benefit follows."
+   },
+   "hash_convention": "Repository files use SHA256 after CRLF-to-LF normalization, matching the feature-catalog convention. Named private proof hashes are exact raw-byte SHA256. The archived prior review hash binds its archival JSON serialization, not original submission formatting.",
+   "private_proof_hashes": {
+    "independent-baseline-evidence.json": "dfae95bc7ace71127683854a7a722b683c6b21175849a966125dbe6ca1034f8c",
+    "baseline-reader-judgment.json": "feb83ffa91f6eb39013f890cb4dbf80c4e8d5adacf647f5dda7a064e7e8b7418",
+    "frozen-cli-audit-evidence-v2.json": "52f4420c1c44bdbe427138da82f3185ab40a771b5ab0aa16b056f1d8f0b6545b",
+    "final-reader-receipt.json": "cdf6b81ef710a5dc79e996c3ad2376c4df6c1aa0c189b61ad4fc80466a6219e6",
+    "final-reader-supporting-brief-followup.json": "30c7339ef4a19bdb66710ddb7e53f53b7160b6fb25300f36af73833a3f8abbce",
+    "final-json-input-wording-followup.json": "09ac5f9294fc53ed3d1941f882674c3799fe83c65845ccb1add9d713c254eed2",
+    "inherited-preservation-review.json": "9e1090781c34fd28ffd32d0bd1cb6dd34a0273afec40706994e70f57d7e02d37",
+    "frozen_cli_audit.py": "e6e9ddaf277124138c9d60dcd7a1dd946a97d8668b80b0b3c9728063e37c0779",
+    "frozen_cli_audit_v2.py": "9fb6d6402888ba741eab3f7b42286de784e7da67ce4f7f0ef48bdc4e112d29b5"
+   },
+   "limits": [
+    "Independent AI software/document reader evidence only, not human engineering review or an adoption study. Existing outputs are historical development examples; no new source family, holdout/generalization result or benchmark score is introduced.",
+    "Passing visible compatibility does not authenticate filenames, compare complete catalogs, recover omitted request meaning, or validate quiet/unrun rules, triggers, exclusions or source URL/license changes. Retain exact catalogs/revisions/hashes and regenerate after reviewed rule changes.",
+    "No primary-source correctness/rights audit, source fetch, commercial model call, current plant data, equipment action, native import, live server/gateway operation, current CI or full-suite pass was performed or certified here.",
+    "Previous preservation controls remain bounded local preflight evidence with their documented limitations; no concurrent-writer lock, fully atomic two-report transaction or broad filesystem portability guarantee is added.",
+    "No source authority, governing revision, accepted owner/handoff, current installed state, energy benefit, saving, measured review time or customer adoption follows. The toolkit supplies an initial evidence/question packet for the company information and decision home; no company connector or local governance replacement is established.",
+    "Mutable journals, attempt ledgers, review indexes and generated feature tables are excluded from bindings. The supporting Millard brief is a citation example, not a sixteenth registered output."
+   ]
   }
  ]
 }
