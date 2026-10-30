@@ -564,19 +564,23 @@ that plants five faults before its nine checks: [IGNITION_BUILD.md](docs/IGNITIO
 the free trial works), or by hand, [IGNITION_QUICKSTART.md](docs/IGNITION_QUICKSTART.md). Review decisions and
 I/O-list mapping: [REVIEW_LOOP.md](docs/REVIEW_LOOP.md).
 
-**9. One plant end to end: draw the TE model, read it back, diff it.** The sheets are committed; regenerating
-them checks the model against the layout. The extraction needs the `claude` or `codex` CLI:
+**9. Check the TE round-trip evidence.** Re-score the saved predictions against the matching historical drawings
+and keys, without model calls or replacing the published results:
 ```
-python scripts/draw_pid_from_model.py && python scripts/style_fidelity.py
-python scripts/degrade_scans.py --src data/te_pid --drawings 101,102,103 --dest data/te_pid/scan
-PID_SHEETS_DIR=data/te_pid python scripts/run_extraction.py --tool codex --drawings 101,102,103 --prompt extraction/prompt_v2.md --tiles 2x2 --label te-clean-tiles-r1
-PID_SHEETS_DIR=data/te_pid python scripts/trace_connections.py --src-label te-clean-tiles-r1 --tool codex --drawings 101,102,103 --label te-clean-trace-r1
-python scripts/score_te_roundtrip.py --conditions clean --tools codex
-PID_SHEETS_DIR=data/te_pid python scripts/build_twin.py --label te-clean-trace-r1 --tools codex --sheets 101,102,103 --holdout-ok --sheet-register data/sheet_registers/te_generated.csv --out out/te_pid/twin/codex-clean-r1
-python scripts/te_model_diff.py out/te_pid/twin/codex-clean-r1/plant_model.json
-python scripts/te_live_check.py out/te_pid/twin/codex-clean-r1/plant_model.json   # needs fetch_te_data.py first
+python scripts/rescore.py --check --label te-clean-trace-r1
+python scripts/rescore.py --check --label tec-clean-trace-r1
 ```
-(`PID_SHEETS_DIR=...` is shell syntax; in PowerShell set `$env:PID_SHEETS_DIR` first.)
+The `te-*` predictions and `out/te_pid/roundtrip_scores.*` belong to revision A (`data/te_pid/rev-a`);
+`tec-*` and `roundtrip_scores_revC.*` belong to revision C (`data/te_pid/rev-c`). The current drawings in
+`data/te_pid` are revision D. Regenerating those drawings or extracting them now is a new experiment, not a
+reproduction of A or C. The [prediction guide](predictions/README.md) describes the saved records and historical
+format adjustments; the [TE evaluation](docs/EVALUATION.md#6-one-plant-end-to-end-tennessee-eastman)
+explains what the round trip measures.
+
+For a fresh extraction, retain the exact drawing/key revision, use a new run prefix and unused twin/score output
+paths, and set the scorer's `--keys`, `--prefix` and `--out` explicitly (`python scripts/score_te_roundtrip.py --help`).
+Keep the historical `te-*`/`tec-*` labels and published outputs intact. Extraction requires a model CLI and
+subscription; the existing [drawing runbook](examples/own-drawing/README.md) explains that separate workflow.
 
 **10. Read why each step is done this way** in [docs/JOURNAL.md](docs/JOURNAL.md). Each entry ends with how to apply
 it at a real site.

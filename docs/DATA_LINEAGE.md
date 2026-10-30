@@ -298,7 +298,10 @@ These are built so we can iterate on them, and labelled that way in their own fi
   OpenCV) or a local program (Blender for the 3D stills, a headless browser for the OPEN100 mimic PNGs, named in
   `BLENDER_EXE` and `BROWSER_EXE`) report `BLOCKED` on a checkout without them; in this commit they were rebuilt
   with them, so the lock shows them fresh. Two stages, the live replay and the native acceptance run, need a running
-  Ignition gateway and stay `NEVER BUILT HERE`; their evidence is the receipts.
+  Ignition gateway to execute again. Their recorded lock entries currently show `FRESH` for the declared inputs;
+  neither runtime stage declares output files in that lock. The historical gateway receipts are separate evidence.
+  This status does not verify those receipts, repeat a gateway run or establish that a gateway is running now.
+  A stage without a lock entry reports `NEVER BUILT HERE`.
 
 ## Adding a stage
 

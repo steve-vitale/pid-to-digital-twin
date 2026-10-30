@@ -4523,3 +4523,31 @@ full local test-suite rerun is claimed for these prose changes.
 Ownership, acceptance, governing authority and deployment remain unresolved. The first packet goes to the
 company's shared context and decision system as participation grows; this adds no local governance, adapter,
 history service or operating-value claim.
+
+## 92. Keep the starter route and its historical evidence distinct
+
+A completion audit keeps the product boundary at the first useful engineering packet: an engineer starts with
+documents, investigates a sourced question and takes the evidence and decisions into the company's shared
+system. The existing local register remains optional. This pass adds no application, governance service,
+adapter or new corpus input.
+
+The fresh skeptical reader finds a consequential tutorial error. README step 9 used the current TE drawings
+with revision-A run labels and historical twin/score destinations. Following it would be a new experiment under
+old names, with the scorer's default current keys, rather than a reproduction of the cited evidence. The step now
+uses saved-prediction re-scoring against each recorded revision. A future extraction needs a new prefix, unused
+outputs and explicit matching keys. No new extraction or commercial-model call is made here.
+
+Two stale guide claims are corrected too. Evaluation section 7 retains the original layered-review result and
+adds the completed historical 75-statement r2 review, including its item error and unclear case. Neither is a
+measurement of today's full population. The unfinished N059 idea retains its missing model-symbol/scan work
+while acknowledging that historical review. The lineage guide now explains the runtime stages' actual lock state:
+their accepted entries show fresh declared inputs, with no runtime output files declared. Historical gateway
+receipts are separate evidence; freshness neither verifies those receipts nor repeats a gateway run.
+
+The two documented TE commands regenerate revision A in its explicitly supported historical format and
+revision C exactly. Re-scoring the saved r2 review reproduces its layer-specific rates. The cached-data suite
+also runs all 58 selected scripts with no failures and four skipped unittest cases on this Windows account;
+two platform notices explain skips rather than adding cases. This is not a complete-suite or native-runtime
+acceptance claim. These checks concern the existing prototype and its records, not engineering approval,
+organizational adoption or measured operating benefit. Registered example outputs and their existing
+whole-feature reviews remain unchanged by these documentation corrections.
