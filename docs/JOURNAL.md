@@ -3428,3 +3428,68 @@ preceded the last cell refresh); two Windows symlink subcases require Linux CI. 
 matches, one prose-only claim and zero failures. All 16 feature entries have current passing independent reviews
 of their registered example outputs, with limitations attached. That does not mean every possible input or
 organizational workflow has been validated.
+
+## 66. Keep the questions, answers and next owner together
+
+**What:** 2026-10-29. Extend the tools from producing a draft model to retaining the engineering investigation
+around it. The [context register](CONTEXT_REGISTER.md) accepts a model, questions and original local documents,
+then keeps answers, explicit assignments, source-match reviews and plant-truth judgments separately. It emits a
+readable report, dated history and versioned JSON with enriched graph and questions. No model call or account is
+needed. Initial owners and reviewers remain unassigned; the tool does not invent responsibility from a file date.
+
+**The question engine now has a demonstrated return path.** The
+[Bayer E18 example](../examples/context-register/bayer/README.md) runs the actual engine and retains a partial
+interpretation of the original CSB report's temperature-control narrative. Its six asset/stream references,
+three collection prompts, decision rule and limits survive in the register. A description of intended operating
+sequence does not establish simultaneous duties, an energy opportunity or savings. Answers do not automatically
+complete collection prompts. The example remains proposed, unassigned and unknown for plant truth.
+
+**Expand linked evidence, rather than count the same plant twice.** The
+[PRONTO packet](../examples/context-register/pronto/README.md) connects four existing original documents: the
+technical report, alarm workbook, operation log and day-3 event journal. It has 22 proposed statements over 21
+questions and 11 asset identities. Every original byte hash is checked; the derived transcription key never
+substitutes for a missing original. An independent agent checked all 22 facts against the actual cells, records,
+PDF text and a separately rendered schematic. Three disabled-limit controls stay disabled; uncertain numerical
+units and the FIC301/FIR305/FT302 labels stay unresolved. No alias is guessed. This adds linked-document workflow
+coverage within an existing source family, not an independent plant or a human-reviewed answer key.
+
+**A source revision reopens its dependent answers.** Each answer records exact question and asset content,
+incident relationships, source revision, raw-byte hash and locator. A refresh compares that snapshot with the
+current inputs; an old CSV cannot approve new evidence. Synthetic copies of the PRONTO report reopened exactly
+six answers, leaving sixteen unrelated answers current; an alarm-workbook revision reopened seven, leaving
+fifteen current. Both retained the decision history. An offline invented packet also exercises accepted source
+interpretation, conflicting values, missing data and unanswered questions. Its fictional people and approvals
+are explicitly labelled. Plant truth is unknown throughout these examples.
+
+**Independent probes changed the implementation.** Early versions could overwrite a register saved under an
+alternate output filename or clobber a source through a hard link. They also accepted correctly rehashed but
+malformed historical identities, and silently trimmed an asset ID whose references did not match. Those cases
+now refuse before output writes. Exact IDs, attributed dates, record structure and evidence bindings are checked
+separately from hashes. History hashes are consistency checks, not signatures or tamper-proof records. Exact
+source reversion matches the old snapshot again; there is no watcher, expiry or record of intervening changes.
+
+**A young engineer needs a decision and an organization around the tools.** A fresh reader found that collection
+requests, walkdown guidance, mapping previews and technical review already exist. The missing step was a compact
+[first-pilot brief](../examples/first-pilot/README.md): choose one operational decision, involve its sponsor and
+operator, record a baseline and trial observation under comparable conditions, then decide continue, change
+scope, stop or insufficient evidence. The site supplies authority and thresholds. The brief is a manual working
+record, with no approval or measured benefit in its blank fields. Retain unsuccessful attempts and a receiving
+owner as well as the successful result.
+
+**Maintenance and handoff are explicit.** Refresh deliberately against released source revisions, retain the
+register and backups, and hand over stable identities, unresolved states, original evidence and full history.
+The neutral interchange is `context-register-1` plus `twin-graph-1`; a receiving system needs a reviewed adapter.
+There is no live sync or verified downstream integration. The earlier statement-review CSV remains a separate
+workflow with a documented limitation: its semantic statement IDs do not bind a changed source revision, and
+those approvals are not migrated into this register.
+
+**Validation boundary:** deterministic software examples and independent agent review. Engineering adoption,
+review time, source authority at a real site, operational acceptance and measured business value remain untested.
+The next useful evidence is one engineer using the packet for one real decision, including a recorded result
+that it did not help. Additional synthetic examples cannot establish that outcome.
+
+All 57 registered test scripts passed locally; two Windows symlink subcases remain for Linux CI. The new controls
+include 32 register tests and three example tests. The claim check still reports 41 numeric matches, one prose-only
+claim and no failures; the existing 52 pipeline stages remain fresh. All 17 feature entries now have a current
+passing independent agent review of their exact registered example outputs. The new receipt also records the
+primary-source checks and remaining limits; it is not human adoption or an operational acceptance record.

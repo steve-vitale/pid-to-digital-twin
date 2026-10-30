@@ -1,0 +1,57 @@
+{
+  "schema": "context-sources-1",
+  "documents": [
+    {
+      "id": "BASIS",
+      "revision": "A",
+      "path": "basis.txt",
+      "locators": [
+        {
+          "id": "pressure",
+          "locator": "line 2",
+          "questions": [
+            "pressure@P-101"
+          ]
+        }
+      ],
+      "sha256": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac"
+    },
+    {
+      "id": "LATER-NOTE",
+      "revision": "B",
+      "path": "later-note.txt",
+      "locators": [
+        {
+          "id": "pressure",
+          "locator": "line 2",
+          "questions": [
+            "pressure@P-101"
+          ]
+        }
+      ],
+      "sha256": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3"
+    },
+    {
+      "id": "SERVICE",
+      "revision": "A",
+      "path": "service-sheet.txt",
+      "locators": [
+        {
+          "id": "service",
+          "locator": "line 2",
+          "questions": [
+            "service@P-102"
+          ]
+        },
+        {
+          "id": "range",
+          "locator": "line 3",
+          "questions": [
+            "range@P-101"
+          ]
+        }
+      ],
+      "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20"
+    }
+  ]
+}

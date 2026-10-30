@@ -410,6 +410,37 @@
    "you_need": "A graph export (twin-graph-1), plus the sheet image or report PDF its sources cite",
    "time": "Seconds to render; review time per statement not yet measured",
    "you_get": "A stratified sample of plain sentences, each beside its drawing crop or report page, with two separate verdict columns; an error rate with a 95% interval; and the verdicts written back into the graph as dated events"
+  },
+  {
+   "id": "context-register",
+   "category": "operate",
+   "title": "Keep engineering answers, ownership and evidence current",
+   "tools": [
+    "scripts/context_register.py"
+   ],
+   "guide": "docs/CONTEXT_REGISTER.md",
+   "example_outputs": [
+    "examples/context-register/illustrative/expected/context.json",
+    "examples/context-register/illustrative/expected/context.md",
+    "examples/context-register/illustrative/expected/enriched_graph.json",
+    "examples/context-register/illustrative/expected/enriched_questions.json",
+    "examples/context-register/pronto/source_key.json",
+    "examples/context-register/pronto/sources.json",
+    "examples/context-register/pronto/proposed_answers.csv",
+    "examples/context-register/pronto/expected/context.md",
+    "examples/context-register/bayer/screen/questions.json",
+    "examples/context-register/bayer/expected/context.md",
+    "examples/context-register/bayer/expected/context.json"
+   ],
+   "tests": [
+    "scripts/test_context_register.py",
+    "scripts/test_context_examples.py"
+   ],
+   "job": "Turn a set of starting documents and questions into context the team can maintain and own",
+   "why": "Answers and their reasons get lost between drawings, spreadsheets and people. A persistent register keeps responsibility, competing evidence and the need for a new review beside each question.",
+   "you_need": "A draft model or graph, a question list, local source documents and their revision/locator manifest; an engineer to assign and review answers",
+   "time": "Local workflow; engineering review time has not been measured",
+   "you_get": "A readable context report, evidence-bound dated decisions and ownership history, unanswered/disputed/stale queues, and versioned JSON plus enriched graph/questions for a reviewed handoff"
   }
  ]
 }

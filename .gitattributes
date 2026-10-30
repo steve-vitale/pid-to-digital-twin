@@ -15,3 +15,5 @@ examples/own-drawing/extraction_sheet0.json -text
 
 # Committed predictions (scripts/rescore.py writes them with LF); keep their bytes identical on every OS.
 predictions/** text eol=lf
+# Context source bytes and decision snapshots must reproduce across operating systems.
+examples/context-register/** text eol=lf

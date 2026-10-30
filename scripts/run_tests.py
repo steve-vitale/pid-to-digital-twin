@@ -52,6 +52,8 @@ SOURCE_TESTS = (
     "scripts/test_question_engine.py",
     "scripts/test_estimate_impact.py",
     "scripts/test_statements.py",
+    "scripts/test_context_register.py",
+    "scripts/test_context_examples.py",
     "scripts/test_deliverable_report.py",
     "scripts/test_fetch_corpus.py",
 )

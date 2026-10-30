@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "model_id": "pronto-context-packet",
+    "title": "PRONTO historical document context packet (AI-authored identity draft)",
+    "created": "2026-10-29",
+    "source_document": "Zenodo 1341583, CC BY 4.0",
+    "extraction_method": "Manual coding-agent transcription of pinned public documents; no model extraction calls",
+    "limits": "Identity-only draft; no complete plant topology or control-loop pairings asserted. No human review or sign-off."
+  },
+  "units": [
+    {
+      "id": "PRONTO-FACILITY",
+      "name": "PRONTO experimental multiphase flow facility",
+      "type": "experimental_facility",
+      "source": "PRONTO-REPORT PDF page 5"
+    }
+  ],
+  "streams": [],
+  "instruments": [
+    {
+      "tag": "PT312",
+      "unit": "PRONTO-FACILITY",
+      "variable": "pressure",
+      "description": "Air delivery pressure",
+      "source": "PRONTO-REPORT Table 2 page 6"
+    },
+    {
+      "tag": "FT305",
+      "unit": "PRONTO-FACILITY",
+      "variable": "flow",
+      "description": "Input air meter label",
+      "source": "PRONTO-REPORT Figure 1 page 5"
+    },
+    {
+      "tag": "FT302",
+      "unit": "PRONTO-FACILITY",
+      "variable": "flow",
+      "description": "Input air meter label",
+      "source": "PRONTO-REPORT Figure 1 page 5"
+    },
+    {
+      "tag": "TT402",
+      "unit": "PRONTO-FACILITY",
+      "variable": "temperature",
+      "description": "Mixing-zone temperature (settings row)",
+      "source": "PRONTO-ALARMS Sheet1 row 19"
+    },
+    {
+      "tag": "LI101",
+      "unit": "PRONTO-FACILITY",
+      "variable": "level",
+      "description": "Water tank level",
+      "source": "PRONTO-ALARMS Sheet1 row 39"
+    },
+    {
+      "tag": "LI503",
+      "unit": "PRONTO-FACILITY",
+      "variable": "level",
+      "description": "Water coalescer interface (units uncertain in source)",
+      "source": "PRONTO-ALARMS Sheet1 row 41"
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "FIC301",
+      "unit": "PRONTO-FACILITY",
+      "description": "Input air controller label; measurement pairing unresolved",
+      "source": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+    },
+    {
+      "tag": "FIC302",
+      "unit": "PRONTO-FACILITY",
+      "description": "Input air controller label; measurement pairing unresolved",
+      "source": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+    }
+  ],
+  "manual_valves": [
+    {
+      "tag": "V10",
+      "unit": "PRONTO-FACILITY",
+      "description": "Manual valve label; no alias between V10 and V11",
+      "source": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+    },
+    {
+      "tag": "V11",
+      "unit": "PRONTO-FACILITY",
+      "description": "Manual valve label; no alias between V10 and V11",
+      "source": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+    }
+  ]
+}

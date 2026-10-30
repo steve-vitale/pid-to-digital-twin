@@ -1,0 +1,3088 @@
+{
+  "schema": "twin-graph-1",
+  "source_model": "data/bayer_rt/process_model.json",
+  "model_kind": "hand_built",
+  "title": "Bayer CropScience methomyl residue treater (Institute, West Virginia), as described by the CSB",
+  "nodes": [
+    {
+      "id": "PLANT",
+      "kind": "plant",
+      "tag": "bayer-residue-treater",
+      "name": "Bayer CropScience methomyl residue treater (Institute, West Virginia), as described by the CSB",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "checked_against_figure",
+          "value": "scripts/compare_bayer_fig10.py compares this model with Figure 10 (p. 29) as recorded in data/bayer_rt/fig10_inventory.json; results in out/bayer_rt/fig10_compare.md.",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "created",
+          "value": "2026-10-28",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "not_a_drawing_of_record",
+          "value": "Built from a public investigation report to show the method. Not the plant's design, not reviewed by anyone who operated it.",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "page_convention",
+          "value": "p. = the report's printed page number; Fig = the report's figure number.",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "scope",
+          "value": "The residue treater and its recirculation, heating, cooling, vent and discharge systems as drawn in Fig 10 (p. 29) and described on pp. 27-32 and 38-40. Upstream (methomyl synthesis, flashers) and downstream (alternate fuel tank, flare) are battery limits.",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "source_document",
+          "value": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        },
+        {
+          "name": "tag_convention",
+          "value": "The report names instrument types but no instrument or valve tag numbers for the residue treater, so every tag here is ASSIGNED by this project (ISA-5.1 letters, loop numbers 101-113) and marked assigned_tag: true. Equipment identifiers RT-1, E-1, E-2, E-3, P-1 are assigned the same way. Nothing here is the plant's own numbering.",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+            "note": "the item cites no source of its own"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BL",
+      "kind": "boundary",
+      "tag": null,
+      "name": "battery limit",
+      "aliases": [],
+      "status": "confirmed",
+      "attributes": []
+    },
+    {
+      "id": "RT-1",
+      "kind": "equipment",
+      "tag": "RT-1",
+      "name": "Residue treater",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "material",
+          "value": "stainless steel (replacement vessel, 2008)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "mawp_psig",
+          "value": 50,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "relief_basis",
+          "value": "methomyl concentration not to exceed 1.0 percent",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "volume_gal",
+          "value": 4500,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Residue treater",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        },
+        {
+          "name": "type",
+          "value": "pressure_vessel",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (§1.7.3); Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E-1",
+      "kind": "equipment",
+      "tag": "E-1",
+      "name": "Vent condenser",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Vent condenser",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+          }
+        },
+        {
+          "name": "type",
+          "value": "condenser",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "P-1",
+      "kind": "equipment",
+      "tag": "P-1",
+      "name": "Recirculation pump",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 31, p. 38"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Recirculation pump",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 31, p. 38"
+          }
+        },
+        {
+          "name": "type",
+          "value": "pump",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 31, p. 38"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E-2",
+      "kind": "equipment",
+      "tag": "E-2",
+      "name": "Recirculation heater (steam)",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Recirculation heater (steam)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+          }
+        },
+        {
+          "name": "type",
+          "value": "heat_exchanger",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E-3",
+      "kind": "equipment",
+      "tag": "E-3",
+      "name": "Recirculation cooler (80 C water)",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "cooling_water_C",
+          "value": 80,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Recirculation cooler (80 C water)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "type",
+          "value": "heat_exchanger",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "PT-101",
+      "kind": "instrument",
+      "tag": "PT-101",
+      "name": "Residue treater pressure",
+      "aliases": [
+        "PI-101"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Residue treater pressure",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "fig11_series",
+          "value": "pressure_psig",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "psig",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "pressure",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Pressure Transmitter); Fig 11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LT-102",
+      "kind": "instrument",
+      "tag": "LT-102",
+      "name": "Residue treater liquid level",
+      "aliases": [
+        "LI-102"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Residue treater liquid level",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        },
+        {
+          "name": "fig11_series",
+          "value": "level_pct",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "%",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "level",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+          }
+        }
+      ]
+    },
+    {
+      "id": "FT-103",
+      "kind": "instrument",
+      "tag": "FT-103",
+      "name": "Recirculation flow",
+      "aliases": [
+        "FI-103"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Recirculation flow",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "fig11_series",
+          "value": "recirc_flow_klbh",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S10",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "P-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "klb/h",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "flow",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TT-104",
+      "kind": "instrument",
+      "tag": "TT-104",
+      "name": "Residue treater temperature (as plotted in Fig 11)",
+      "aliases": [
+        "TI-104"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Residue treater temperature (as plotted in Fig 11)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "fig11_series",
+          "value": "temperature_C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "open_question",
+          "value": "The report says the control system monitored both the bulk liquid and the recirculation loop (p. 28) but does not say which one Fig 11 plots or Fig 10's transmitter measures.",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "temperature",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (Temperature Transmitter); Fig 11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TT-105",
+      "kind": "instrument",
+      "tag": "TT-105",
+      "name": "Second temperature measurement (bulk liquid or recirculation loop; see TT-104)",
+      "aliases": [
+        "TI-105"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Second temperature measurement (bulk liquid or recirculation loop; see TT-104)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        },
+        {
+          "name": "drawn_in_source_figure",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "temperature",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28 (text only; not drawn in Fig 10)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "FT-106",
+      "kind": "instrument",
+      "tag": "FT-106",
+      "name": "Indicated steam flow to the heater",
+      "aliases": [
+        "FI-106"
+      ],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Indicated steam flow to the heater",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "drawn_in_source_figure",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "E-2",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "uom",
+          "value": "klb/h",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        },
+        {
+          "name": "variable",
+          "value": "flow",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 19 (p. 72)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "FV-107",
+      "kind": "final_element",
+      "tag": "FV-107",
+      "name": "Feed control valve (flasher bottoms)",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Feed control valve (flasher bottoms)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LV-102",
+      "kind": "final_element",
+      "tag": "LV-102",
+      "name": "Discharge control valve to the alternate fuel tank",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Discharge control valve to the alternate fuel tank",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S6",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TV-104A",
+      "kind": "final_element",
+      "tag": "TV-104A",
+      "name": "Recirculation valve, heater leg",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Recirculation valve, heater leg",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S4",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "E-2",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TV-104B",
+      "kind": "final_element",
+      "tag": "TV-104B",
+      "name": "Recirculation valve, cooler leg",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Recirculation valve, cooler leg",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S5",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "E-3",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29; p. 39 footnote 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TV-104C",
+      "kind": "final_element",
+      "tag": "TV-104C",
+      "name": "Steam flow valve to the heater (Fig 10: Temperature Control Valve)",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Steam flow valve to the heater (Fig 10: Temperature Control Valve)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "E-2",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIC-102",
+      "kind": "controller",
+      "tag": "LIC-102",
+      "name": "Automatic level control at about 50 percent",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "as_operated",
+          "value": "kept in manual; level allowed to rise to the upper fill limit and transferred in batches (p. 32)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28; p. 32"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Automatic level control at about 50 percent",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28; p. 32"
+          }
+        },
+        {
+          "name": "setpoint.uom",
+          "value": "%",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28"
+          }
+        },
+        {
+          "name": "setpoint.value",
+          "value": 50,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28"
+          }
+        }
+      ]
+    },
+    {
+      "id": "TIC-104",
+      "kind": "controller",
+      "tag": "TIC-104",
+      "name": "Split-range temperature control: heats through the heater (steam valve and heater-leg valve) during startup; at the setpoint it closes the steam valve and moves recirculation from the heater to the cooler",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "as_found",
+          "value": "incorrectly programmed: changing from heating to cooling closed the recirculation valves to both the heater and the cooler, blocking all recirculation flow (p. 39, footnote 29; CSB: not causal)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28-29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Split-range temperature control: heats through the heater (steam valve and heater-leg valve) during startup; at the setpoint it closes the steam valve and moves recirculation from the heater to the cooler",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28-29; p. 39 footnote 29"
+          }
+        },
+        {
+          "name": "setpoint.uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 29 (contents maintained at approximately 135 C)"
+          }
+        },
+        {
+          "name": "setpoint.value",
+          "value": 135,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 29 (contents maintained at approximately 135 C)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-108",
+      "kind": "manual_valve",
+      "tag": "HV-108",
+      "name": "Steam block valve, heater steam supply",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Steam block valve, heater steam supply",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-109",
+      "kind": "manual_valve",
+      "tag": "HV-109",
+      "name": "Solvent fill valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Solvent fill valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S2",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-110",
+      "kind": "manual_valve",
+      "tag": "HV-110",
+      "name": "Vessel bottom valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Vessel bottom valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S3",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-111",
+      "kind": "manual_valve",
+      "tag": "HV-111",
+      "name": "Heater steam outlet valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+          }
+        },
+        {
+          "name": "description",
+          "value": "Heater steam outlet valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U3",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-112",
+      "kind": "manual_valve",
+      "tag": "HV-112",
+      "name": "Cooling water supply valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Cooling water supply valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U2",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "HV-113",
+      "kind": "manual_valve",
+      "tag": "HV-113",
+      "name": "Cooling water return valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Cooling water return valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "U4",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "PSV-101",
+      "kind": "relief_device",
+      "tag": "PSV-101",
+      "name": "Residue treater relief valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Residue treater relief valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        },
+        {
+          "name": "opened_at",
+          "value": "22:27",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        },
+        {
+          "name": "opened_at_psig",
+          "value": 44,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S9",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "RT-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "PSV-102",
+      "kind": "relief_device",
+      "tag": "PSV-102",
+      "name": "Vent condenser relief valve",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "assigned_tag",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "description",
+          "value": "Vent condenser relief valve",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "stream",
+          "value": "S11",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        },
+        {
+          "name": "unit",
+          "value": "E-1",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "IL-1",
+      "kind": "interlock",
+      "tag": null,
+      "name": "TT-104 below the minimum temperature setpoint",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "as_found",
+          "value": "bypassed on the night of the incident, based on experience with the heater (p. 69)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        },
+        {
+          "name": "bypass",
+          "value": "password-protected",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        },
+        {
+          "name": "cause",
+          "value": "TT-104 below the minimum temperature setpoint",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        },
+        {
+          "name": "class",
+          "value": "safety",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        },
+        {
+          "name": "drawn_in_source_figure",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        },
+        {
+          "name": "effect",
+          "value": "FV-107 held closed",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 69"
+          }
+        }
+      ]
+    },
+    {
+      "id": "IL-2",
+      "kind": "interlock",
+      "tag": null,
+      "name": "PT-101 at or above the maximum pressure setpoint",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "bypass",
+          "value": "password-protected",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30"
+          }
+        },
+        {
+          "name": "cause",
+          "value": "PT-101 at or above the maximum pressure setpoint",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30"
+          }
+        },
+        {
+          "name": "class",
+          "value": "safety",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30"
+          }
+        },
+        {
+          "name": "drawn_in_source_figure",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30"
+          }
+        },
+        {
+          "name": "effect",
+          "value": "FV-107 held closed",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30"
+          }
+        }
+      ]
+    },
+    {
+      "id": "IL-3",
+      "kind": "interlock",
+      "tag": null,
+      "name": "FT-103 recirculation flow not established",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "as_found",
+          "value": "left bypassed by the computer programmers (p. 38)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 38"
+          }
+        },
+        {
+          "name": "cause",
+          "value": "FT-103 recirculation flow not established",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 38"
+          }
+        },
+        {
+          "name": "class",
+          "value": "operating",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 38"
+          }
+        },
+        {
+          "name": "drawn_in_source_figure",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 38"
+          }
+        },
+        {
+          "name": "effect",
+          "value": "FV-107 held closed",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30; p. 38"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-1",
+      "kind": "limit",
+      "tag": null,
+      "name": "Minimum fill before starting the pump",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "%",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31"
+          }
+        },
+        {
+          "name": "value",
+          "value": 30,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Minimum fill before starting the pump",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-2",
+      "kind": "limit",
+      "tag": null,
+      "name": "Methomyl in the vessel before feeding",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "% (max)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28-31"
+          }
+        },
+        {
+          "name": "value",
+          "value": 0.5,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28-31"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Methomyl in the vessel before feeding",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28-31"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-3",
+      "kind": "limit",
+      "tag": null,
+      "name": "Sample before re-heating if cooled below",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30 (SOP administrative control)"
+          }
+        },
+        {
+          "name": "value",
+          "value": 130,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30 (SOP administrative control)"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Sample before re-heating if cooled below",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 30 (SOP administrative control)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-4",
+      "kind": "limit",
+      "tag": null,
+      "name": "Methomyl concentration with runaway risk on heating",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "% (above)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31 (SOP)"
+          }
+        },
+        {
+          "name": "value",
+          "value": 1.3,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31 (SOP)"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Methomyl concentration with runaway risk on heating",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 31 (SOP)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-5",
+      "kind": "limit",
+      "tag": null,
+      "name": "Critical decomposition temperature (normal operation)",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 29; p. 39"
+          }
+        },
+        {
+          "name": "value",
+          "value": 135,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 29; p. 39"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Critical decomposition temperature (normal operation)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 29; p. 39"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-6",
+      "kind": "limit",
+      "tag": null,
+      "name": "Safe operating limit",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "C",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 39"
+          }
+        },
+        {
+          "name": "value",
+          "value": 155,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 39"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Safe operating limit",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 39"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LIM-7",
+      "kind": "limit",
+      "tag": null,
+      "name": "Maximum allowable operating pressure",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "uom",
+          "value": "psig",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28"
+          }
+        },
+        {
+          "name": "value",
+          "value": 50,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28"
+          }
+        },
+        {
+          "name": "what",
+          "value": "Maximum allowable operating pressure",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "p. 28"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "E00001",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28 (§1.7.3); Fig 10"
+      }
+    },
+    {
+      "id": "E00002",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "E-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+      }
+    },
+    {
+      "id": "E00003",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "P-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 31, p. 38"
+      }
+    },
+    {
+      "id": "E00004",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+      }
+    },
+    {
+      "id": "E00005",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "E-3",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      }
+    },
+    {
+      "id": "S1",
+      "type": "connects",
+      "from": "BL",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "normal_temperature_C",
+          "value": 80,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Flasher bottoms feed (methomyl-solvent liquid)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "type": "connects",
+      "from": "BL",
+      "to": "P-1",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (From Solvent Tank)"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Solvent fill",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (From Solvent Tank)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "type": "connects",
+      "from": "RT-1",
+      "to": "P-1",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Recirculation suction",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "type": "connects",
+      "from": "P-1",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Recirculation to the heater",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "type": "connects",
+      "from": "P-1",
+      "to": "E-3",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Recirculation to the cooler",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "type": "connects",
+      "from": "E-2",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "joins_from",
+          "value": [
+            "E-3"
+          ],
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Recirculation return to the residue treater (heater and cooler outlets joined)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S6",
+      "type": "connects",
+      "from": "P-1",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "branches_from",
+          "value": "S10",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32"
+          }
+        },
+        {
+          "name": "name",
+          "value": "Discharge to the auxiliary (alternate) fuel tank",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S7",
+      "type": "connects",
+      "from": "RT-1",
+      "to": "E-1",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Vapour to the vent condenser",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S8",
+      "type": "connects",
+      "from": "E-1",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Condenser vent to the process vent (flare)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 28"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S9",
+      "type": "connects",
+      "from": "RT-1",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Relief to the vent header",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "type": "connects",
+      "from": "E-1",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Condenser relief to the vent header (joins S9)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "U1",
+      "type": "connects",
+      "from": "BL",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 72"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Steam supply to the heater",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 72"
+          }
+        },
+        {
+          "name": "utility",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 72"
+          }
+        }
+      ]
+    },
+    {
+      "id": "U2",
+      "type": "connects",
+      "from": "BL",
+      "to": "E-3",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Cooling water (80 C) supply to the cooler",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        },
+        {
+          "name": "utility",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10; p. 29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "U3",
+      "type": "connects",
+      "from": "E-2",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Heater steam outlet (condensate)",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
+          }
+        },
+        {
+          "name": "utility",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "U4",
+      "type": "connects",
+      "from": "E-3",
+      "to": "BL",
+      "status": "unverified",
+      "direction": "known",
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "layer": "stream",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Cooling water return from the cooler",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        },
+        {
+          "name": "utility",
+          "value": true,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E00021",
+      "type": "measures",
+      "from": "PT-101",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Pressure Transmitter); Fig 11"
+      }
+    },
+    {
+      "id": "E00022",
+      "type": "measures",
+      "from": "LT-102",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+      }
+    },
+    {
+      "id": "E00023",
+      "type": "measures",
+      "from": "FT-103",
+      "to": "P-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      }
+    },
+    {
+      "id": "E00024",
+      "type": "sits_on",
+      "from": "FT-103",
+      "to": "stream:S10",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      }
+    },
+    {
+      "id": "E00025",
+      "type": "measures",
+      "from": "TT-104",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Temperature Transmitter); Fig 11"
+      }
+    },
+    {
+      "id": "E00026",
+      "type": "measures",
+      "from": "TT-105",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28 (text only; not drawn in Fig 10)"
+      }
+    },
+    {
+      "id": "E00027",
+      "type": "measures",
+      "from": "FT-106",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 19 (p. 72)"
+      }
+    },
+    {
+      "id": "E00028",
+      "type": "sits_on",
+      "from": "FT-106",
+      "to": "stream:U1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 19 (p. 72)"
+      }
+    },
+    {
+      "id": "E00029",
+      "type": "acts_on",
+      "from": "FV-107",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      }
+    },
+    {
+      "id": "E00030",
+      "type": "sits_on",
+      "from": "FV-107",
+      "to": "stream:S1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      }
+    },
+    {
+      "id": "E00031",
+      "type": "acts_on",
+      "from": "LV-102",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      }
+    },
+    {
+      "id": "E00032",
+      "type": "sits_on",
+      "from": "LV-102",
+      "to": "stream:S6",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      }
+    },
+    {
+      "id": "E00033",
+      "type": "acts_on",
+      "from": "TV-104A",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00034",
+      "type": "sits_on",
+      "from": "TV-104A",
+      "to": "stream:S4",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00035",
+      "type": "acts_on",
+      "from": "TV-104B",
+      "to": "E-3",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00036",
+      "type": "sits_on",
+      "from": "TV-104B",
+      "to": "stream:S5",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00037",
+      "type": "acts_on",
+      "from": "TV-104C",
+      "to": "E-2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      }
+    },
+    {
+      "id": "E00038",
+      "type": "sits_on",
+      "from": "TV-104C",
+      "to": "stream:U1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      }
+    },
+    {
+      "id": "E00039",
+      "type": "controls",
+      "from": "LT-102",
+      "to": "LIC-102",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28; p. 32"
+      }
+    },
+    {
+      "id": "E00040",
+      "type": "controls",
+      "from": "LIC-102",
+      "to": "LV-102",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28; p. 32"
+      }
+    },
+    {
+      "id": "E00041",
+      "type": "controls",
+      "from": "TT-104",
+      "to": "TIC-104",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28-29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00042",
+      "type": "controls",
+      "from": "TIC-104",
+      "to": "TV-104A",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28-29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00043",
+      "type": "controls",
+      "from": "TIC-104",
+      "to": "TV-104B",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28-29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00044",
+      "type": "controls",
+      "from": "TIC-104",
+      "to": "TV-104C",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 28-29; p. 39 footnote 29"
+      }
+    },
+    {
+      "id": "E00045",
+      "type": "sits_on",
+      "from": "HV-108",
+      "to": "stream:U1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+      }
+    },
+    {
+      "id": "E00046",
+      "type": "sits_on",
+      "from": "HV-109",
+      "to": "stream:S2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      }
+    },
+    {
+      "id": "E00047",
+      "type": "sits_on",
+      "from": "HV-110",
+      "to": "stream:S3",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      }
+    },
+    {
+      "id": "E00048",
+      "type": "sits_on",
+      "from": "HV-111",
+      "to": "stream:U3",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+      }
+    },
+    {
+      "id": "E00049",
+      "type": "sits_on",
+      "from": "HV-112",
+      "to": "stream:U2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      }
+    },
+    {
+      "id": "E00050",
+      "type": "sits_on",
+      "from": "HV-113",
+      "to": "stream:U4",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      }
+    },
+    {
+      "id": "E00051",
+      "type": "protects",
+      "from": "PSV-101",
+      "to": "RT-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      }
+    },
+    {
+      "id": "E00052",
+      "type": "sits_on",
+      "from": "PSV-101",
+      "to": "stream:S9",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      }
+    },
+    {
+      "id": "E00053",
+      "type": "protects",
+      "from": "PSV-102",
+      "to": "E-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      }
+    },
+    {
+      "id": "E00054",
+      "type": "sits_on",
+      "from": "PSV-102",
+      "to": "stream:S11",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      }
+    },
+    {
+      "id": "E00055",
+      "type": "trips",
+      "from": "TT-104",
+      "to": "IL-1",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 69"
+      }
+    },
+    {
+      "id": "E00056",
+      "type": "acts_on",
+      "from": "IL-1",
+      "to": "FV-107",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 69"
+      }
+    },
+    {
+      "id": "E00057",
+      "type": "trips",
+      "from": "PT-101",
+      "to": "IL-2",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30"
+      }
+    },
+    {
+      "id": "E00058",
+      "type": "acts_on",
+      "from": "IL-2",
+      "to": "FV-107",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30"
+      }
+    },
+    {
+      "id": "E00059",
+      "type": "trips",
+      "from": "FT-103",
+      "to": "IL-3",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 38"
+      }
+    },
+    {
+      "id": "E00060",
+      "type": "acts_on",
+      "from": "IL-3",
+      "to": "FV-107",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 38"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "E18@model",
+      "question_id": "E18",
+      "family": "energy",
+      "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+      "about": "U2, HV-112",
+      "assets": [
+        {
+          "id": "stream:U2",
+          "tag": "U2"
+        },
+        {
+          "id": "HV-112",
+          "tag": "HV-112"
+        },
+        {
+          "id": "stream:U1",
+          "tag": "U1"
+        },
+        {
+          "id": "FT-106",
+          "tag": "FT-106"
+        },
+        {
+          "id": "TV-104C",
+          "tag": "TV-104C"
+        },
+        {
+          "id": "HV-108",
+          "tag": "HV-108"
+        }
+      ],
+      "evidence": [
+        {
+          "role": "trigger",
+          "id": "stream:U2",
+          "tag": "U2",
+          "text": "stream U2 (asset stream:U2) reads \"Cooling water (80 C) supply to the cooler\" at E-3",
+          "field": "streams[U2]"
+        },
+        {
+          "role": "trigger",
+          "id": "HV-112",
+          "tag": "HV-112",
+          "text": "hand valve HV-112 reads \"HV-112 Cooling water supply valve\" at E-3",
+          "field": "manual_valves[HV-112]"
+        },
+        {
+          "role": "steam-heated user",
+          "id": "stream:U1",
+          "tag": "U1",
+          "text": "stream U1 (asset stream:U1) reads \"Steam supply to the heater\" at E-2",
+          "field": "streams[U1]"
+        },
+        {
+          "role": "steam-heated user",
+          "id": "FT-106",
+          "tag": "FT-106",
+          "text": "instrument FT-106 reads \"FT-106 Indicated steam flow to the heater\" at E-2",
+          "field": "instruments[FT-106]"
+        },
+        {
+          "role": "steam-heated user",
+          "id": "TV-104C",
+          "tag": "TV-104C",
+          "text": "valve TV-104C reads \"TV-104C Steam flow valve to the heater (Fig 10: Temperature Control Valve)\" at E-2",
+          "field": "final_elements[TV-104C]"
+        },
+        {
+          "role": "steam-heated user",
+          "id": "HV-108",
+          "tag": "HV-108",
+          "text": "hand valve HV-108 reads \"HV-108 Steam block valve, heater steam supply\" at E-2",
+          "field": "manual_valves[HV-108]"
+        }
+      ],
+      "data_requests": [
+        {
+          "item": "Temperatures and duties of the cooled and the heated streams",
+          "state": "not_on_drawing",
+          "where": [
+            "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+            "historian or DCS trend for FT-106 (no historian tag is mapped in this model for these)",
+            "site records: heat and material balance"
+          ],
+          "how": "For each stream: supply and target temperature and duty."
+        },
+        {
+          "item": "Whether the duties overlap in time",
+          "state": "not_on_drawing",
+          "where": [
+            "site records: operating sequence: are both duties needed at the same time?"
+          ],
+          "how": "Mark each duty continuous, batch or startup-only."
+        },
+        {
+          "item": "Layout distance and fouling",
+          "state": "not_on_drawing",
+          "where": [
+            "a walkdown: distance between the two exchangers",
+            "maintenance records: cleaning history"
+          ],
+          "how": "Note pipe run and fouling service."
+        }
+      ],
+      "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+      "typical_benefit": {
+        "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+        "source": [
+          "S19",
+          "S24"
+        ],
+        "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+        "source_titles": [
+          "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+          "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+        ]
+      },
+      "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "E18@model",
+          "question_id": "E18",
+          "family": "energy",
+          "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+          "about": "U2, HV-112",
+          "assets": [
+            {
+              "id": "FT-106",
+              "tag": "FT-106"
+            },
+            {
+              "id": "HV-108",
+              "tag": "HV-108"
+            },
+            {
+              "id": "HV-112",
+              "tag": "HV-112"
+            },
+            {
+              "id": "TV-104C",
+              "tag": "TV-104C"
+            },
+            {
+              "id": "stream:U1",
+              "tag": "U1"
+            },
+            {
+              "id": "stream:U2",
+              "tag": "U2"
+            }
+          ],
+          "evidence": [
+            {
+              "role": "trigger",
+              "id": "stream:U2",
+              "tag": "U2",
+              "text": "stream U2 (asset stream:U2) reads \"Cooling water (80 C) supply to the cooler\" at E-3",
+              "field": "streams[U2]"
+            },
+            {
+              "role": "trigger",
+              "id": "HV-112",
+              "tag": "HV-112",
+              "text": "hand valve HV-112 reads \"HV-112 Cooling water supply valve\" at E-3",
+              "field": "manual_valves[HV-112]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "stream:U1",
+              "tag": "U1",
+              "text": "stream U1 (asset stream:U1) reads \"Steam supply to the heater\" at E-2",
+              "field": "streams[U1]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "FT-106",
+              "tag": "FT-106",
+              "text": "instrument FT-106 reads \"FT-106 Indicated steam flow to the heater\" at E-2",
+              "field": "instruments[FT-106]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "TV-104C",
+              "tag": "TV-104C",
+              "text": "valve TV-104C reads \"TV-104C Steam flow valve to the heater (Fig 10: Temperature Control Valve)\" at E-2",
+              "field": "final_elements[TV-104C]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "HV-108",
+              "tag": "HV-108",
+              "text": "hand valve HV-108 reads \"HV-108 Steam block valve, heater steam supply\" at E-2",
+              "field": "manual_valves[HV-108]"
+            }
+          ],
+          "data_requests": [
+            {
+              "item": "Temperatures and duties of the cooled and the heated streams",
+              "state": "not_on_drawing",
+              "where": [
+                "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+                "historian or DCS trend for FT-106 (no historian tag is mapped in this model for these)",
+                "site records: heat and material balance"
+              ],
+              "how": "For each stream: supply and target temperature and duty."
+            },
+            {
+              "item": "Whether the duties overlap in time",
+              "state": "not_on_drawing",
+              "where": [
+                "site records: operating sequence: are both duties needed at the same time?"
+              ],
+              "how": "Mark each duty continuous, batch or startup-only."
+            },
+            {
+              "item": "Layout distance and fouling",
+              "state": "not_on_drawing",
+              "where": [
+                "a walkdown: distance between the two exchangers",
+                "maintenance records: cleaning history"
+              ],
+              "how": "Note pipe run and fouling service."
+            }
+          ],
+          "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+          "typical_benefit": {
+            "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+            "source": [
+              "S19",
+              "S24"
+            ],
+            "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+            "source_titles": [
+              "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+              "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+            ]
+          },
+          "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+        },
+        "owner": null,
+        "ownership": "needs_owner",
+        "assigned_by": null,
+        "assigned_on": null,
+        "state": "partial",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-5b789821221b7c7ca2ae43c9a08ecfbd0cc81331af300073f91f17f9852bfca1",
+            "answer_id": "published-control-sequence",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    }
+  ],
+  "events": [],
+  "not_exported": [
+    {
+      "section": "events_2008_08_28",
+      "items": 6,
+      "why": "left out on purpose"
+    },
+    {
+      "section": "people",
+      "items": 1,
+      "why": "left out on purpose"
+    }
+  ],
+  "counts": {
+    "nodes": 38,
+    "edges": 60,
+    "claims": 181,
+    "questions": 1,
+    "events": 0
+  },
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json"
+  }
+}

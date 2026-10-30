@@ -243,3 +243,25 @@ same evaluation, then decide with your security and data-governance owners, not 
 ---
 
 Measured costs from this project, and a worked sizing for 1,000 sheets: [COSTS.md](COSTS.md).
+
+## Keep the context current after the first bundle
+
+Keep the drawings and source documents, the reviewed model, the signal mappings, and the reasons behind the
+engineering decisions together. Give unresolved questions an accountable owner. A drawing conversion alone does
+not supply the operating sequence, governing limit, current alarm configuration or knowledge held by the people
+who maintain the unit.
+
+The [context register](../examples/context-register/README.md) supplies a local return step: fill answers from
+procedures, data sheets, logs or other evidence; record their exact source revisions and locations; keep competing
+answers visible; and retain who assigned and reviewed the work and when. Source match and plant truth are separate.
+It has an offline illustrative example and a public four-document PRONTO packet with unresolved source differences.
+
+At each incoming document revision or engineering change, check the current source pack and refresh the preserved
+register. Recheck the affected answers, resolve disputes explicitly, and retain the earlier decisions. The tool
+does this comparison when you run it; it does not watch folders or authenticate reviewers. Your organization
+chooses the authoritative documents, responsible people, review intervals and access controls.
+
+Transfer the source manifest, register history and enriched graph together when another team or system takes
+over. The [versioned handoff guide](CONTEXT_REGISTER.md#versioned-handoff-and-limits) explains the interchange
+boundary. No downstream live integration has been tested; a receiving system must preserve identities, evidence,
+unfinished states and review history rather than flattening them into an approved asset list.

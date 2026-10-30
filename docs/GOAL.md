@@ -524,3 +524,39 @@ items on five sheets from one publisher is a small sample. The bootstrap interva
 
 **Nothing was changed because of these results.** A key that counts nozzles, a tracer that ignores small stubs on
 equipment, or a prompt line about nozzles would each be a new method and would need new, unseen drawings.
+
+## Standing engineering-context goal (2026-10-29)
+
+Help an engineer start from a usable set of drawings, equipment information, operating documents, controls
+records and historian data, then build context their organization can review, maintain and own. More inputs or
+features count as progress only when they resolve a concrete engineering task and carry their source, uncertainty,
+review state and update path. No saved answer should silently become a plant fact.
+
+The next increment follows two fresh AI reader exercises: a solo plant engineer, and a controls integrator with
+a skeptical manager's concerns. Both found the missing return step after a question is generated: preserve an
+answer, its accountable owner, competing evidence and the reason it must be revisited. A read-only control also
+showed that the legacy statement-review command accepts a verdict after the cited source changes if the statement's
+subject, predicate and value stay the same. That command's limitation is now visible in its guide.
+
+**First increment and acceptance criteria, set before measuring its results:**
+
+1. A local, offline context-answer sidecar reads an existing model/questions and a document manifest, accepts an
+   engineer-filled CSV, and writes a readable context report and enriched graph without editing the base model.
+2. Answers have stable asset/question references, an explicit owner (or needs owner), reviewer/date, source identity,
+   revision, exact locator and raw-byte hash. Source interpretation and plant truth remain separate.
+3. Partial, unanswered, rejected, disputed and stale answers remain visible. Different sourced observations are
+   not automatically a conflict; an explicit comparable claim with differing values is.
+4. Identical reruns preserve decisions and history without duplicate events. Changing evidence or a dependent
+   question/asset invalidates only affected decisions. Unrelated or status-only changes preserve other decisions.
+5. An old CSV cannot approve revised evidence. Missing, unknown or ambiguous references refuse the operation before
+   output writes. Old decision history survives; no automatic source rebinding or organizational authority is inferred.
+6. An illustrative offline fixture tests these mechanics. A linked PRONTO packet exercises real public report,
+   alarm-setting, operation-log and event-record sources with exact locators and independently checked facts.
+   Disabled alarm settings must never become enabled alarms, and documented source disagreements remain unresolved.
+7. Source-revision and conflict controls are planted changes to disposable copies, labelled as such. They are not
+   historical revisions or real operator decisions. PRONTO expands multi-document coverage within an existing
+   facility; it adds no independent source family.
+
+After this increment, use another fresh reader pass and the observed failures to choose the next workflow or
+corpus extension. Actual ownership assignments, governing-document decisions, walkdowns, live-signal validation
+and review time require people at a site; this goal does not treat software fixtures as those results.

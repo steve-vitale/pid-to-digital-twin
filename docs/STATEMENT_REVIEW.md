@@ -99,6 +99,11 @@ extraction (sheet 0) has no structured source in the repository to compare again
 
 ## Limits
 
+- Legacy `apply` joins verdicts by statement ID (subject, predicate and value), without verifying the cited document
+  revision or the render's graph hash. Keep its review with immutable source/graph copies and re-review after
+  evidence changes; an old CSV must not be carried into a changed source pack. The separate
+  [context-answer register](CONTEXT_REGISTER.md) binds answers to source bytes and revisions. It does not migrate
+  or validate legacy statement approvals.
 - The sentence is a rendering of the claim, not the claim. A template can mislead; when a reviewer finds the sentence
   wrong but the underlying claim right, mark `unclear` and say so in the note, so template errors and data errors are
   counted apart. Known weak spots are listed in the pilot README.

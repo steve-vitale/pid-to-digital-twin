@@ -2871,6 +2871,24 @@
         "predictions/README.md",
         "predictions/RECOVERY.json"
       ]
+    },
+    {
+      "id": "A198",
+      "function": "review_loop",
+      "date": "2026-10-29",
+      "change": "Add a source-bound context register, an actual question-engine E18 bridge, a four-document PRONTO packet and a first-pilot decision brief.",
+      "hypothesis": "Answers, explicit ownership and evidence snapshots can survive a source refresh without approving changed evidence or discarding competing answers.",
+      "evidence": "32 context controls and 3 committed-example controls pass. PRONTO retains 22 proposals over 21 questions: 18 partial, 2 needs_data, 1 disputed. Copied report and workbook revisions stale exactly 6 and 7 dependent answers respectively, leaving 16 and 15 unrelated answers current with unchanged histories. Independent agent reproduction and adversarial review closed overwrite, hard-link, malformed-history and exact-ID findings; all 22 primary-source facts checked, including the figure. Actual Bayer E18 keeps its 3 collection requests and remains partial, proposed and unknown for plant truth.",
+      "runs": "Deterministic development examples and independent agent probes; no model calls or real-site pilot",
+      "verdict": "kept",
+      "why": "Adds the return path from a screen to maintained evidence and responsibility. Current means the exact snapshot matches, including after exact source reversion; no watcher, authenticated authority, downstream integration or measured adoption is claimed.",
+      "source": [
+        "docs/JOURNAL.md#66-keep-the-questions-answers-and-next-owner-together",
+        "docs/CONTEXT_REGISTER.md",
+        "examples/context-register/pronto/ACCEPTANCE.md",
+        "examples/context-register/bayer/README.md",
+        "examples/first-pilot/README.md"
+      ]
     }
   ],
   "not_tried": [
@@ -3497,6 +3515,17 @@
         "predictions/README.md",
         "predictions/RECOVERY.json",
         "out/replicates_r5_holdout-a.md"
+      ]
+    },
+    {
+      "id": "N062",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "Have one engineer use the question-to-context packet for one real organizational decision, with sponsor, operator, baseline, observation and a dated continue/change/stop/insufficient-evidence outcome.",
+      "why_not_yet": "The software examples and reader perspectives do not establish adoption, review time or operational value; these require an actual site participant and comparable observations.",
+      "source": [
+        "docs/JOURNAL.md#66-keep-the-questions-answers-and-next-owner-together",
+        "examples/first-pilot/README.md"
       ]
     }
   ]

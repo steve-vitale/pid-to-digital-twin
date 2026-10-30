@@ -1,0 +1,212 @@
+{
+  "schema": "context-sources-1",
+  "about": "Actual original files, resolved with --source-root data/external; no copies or extracted echoes are substituted.",
+  "documents": [
+    {
+      "id": "PRONTO-REPORT",
+      "title": "Multiphase flow facility case study technical report",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto-more/PRONTO benchmark case study/Technical documents/Technical report/Multiphase flow facility case study technical report.pdf",
+      "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locators": [
+        {
+          "id": "f01",
+          "locator": "PDF page 6 (printed 6), Table 2, PT312 row",
+          "questions": [
+            "CTX-01@PT312"
+          ]
+        },
+        {
+          "id": "f02",
+          "locator": "PDF page 11 (printed 11), Air leakage (0911 Test4/5/6), first paragraph",
+          "questions": [
+            "CTX-02@V10"
+          ]
+        },
+        {
+          "id": "f03",
+          "locator": "PDF page 12 (printed 12), Table 6, Test5 column",
+          "questions": [
+            "CTX-03@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f04",
+          "locator": "PDF page 5 (printed 5), Figure 1, lower of the two green parallel inlet-air branches: FT302 and FIC301 with dashed signal line",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f05",
+          "locator": "PDF page 7 (printed 7), Table 2 continuation, FIC301/PID1/SP.CV row",
+          "questions": [
+            "CTX-05@FIC301"
+          ]
+        },
+        {
+          "id": "f22",
+          "locator": "PDF page 6 (printed 6), Table 1, Process variables and Alarm/event/change logs rows",
+          "questions": [
+            "CTX-22@PRONTO-FACILITY"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-ALARMS",
+      "title": "Alarm settings in DeltaV.xlsx",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/Technical documents/Alarm settings in DeltaV.xlsx",
+      "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locators": [
+        {
+          "id": "f06",
+          "locator": "Worksheet 'Sheet1', B16:D16 (tag, HiHi, Hi); remarks G16 must be read with the numbers",
+          "questions": [
+            "CTX-06@PT312"
+          ]
+        },
+        {
+          "id": "f07",
+          "locator": "Worksheet 'Sheet1', B16 and G16",
+          "questions": [
+            "CTX-07@PT312"
+          ]
+        },
+        {
+          "id": "f08",
+          "locator": "Worksheet 'Sheet1', B13:D13 and G13",
+          "questions": [
+            "CTX-08@FIC301"
+          ]
+        },
+        {
+          "id": "f09",
+          "locator": "Worksheet 'Sheet1', B15:F15 and G15",
+          "questions": [
+            "CTX-09@FT305"
+          ]
+        },
+        {
+          "id": "f10",
+          "locator": "Worksheet 'Sheet1', B39:G39",
+          "questions": [
+            "CTX-10@LI101"
+          ]
+        },
+        {
+          "id": "f11",
+          "locator": "Worksheet 'Sheet1', B19:G19",
+          "questions": [
+            "CTX-11@TT402"
+          ]
+        },
+        {
+          "id": "f12",
+          "locator": "Worksheet 'Sheet1', B41:G41",
+          "questions": [
+            "CTX-12@LI503"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-OPS",
+      "title": "Operation log.xlsx",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/Operation logs/Operation log.xlsx",
+      "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locators": [
+        {
+          "id": "f13",
+          "locator": "Worksheet 'Operation Log 0911', A11:C11 and G11:H11; date B1",
+          "questions": [
+            "CTX-13@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f14",
+          "locator": "Worksheet 'Operation Log 0911', G12:H12 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-14@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f15",
+          "locator": "Worksheet 'Operation Log 0911', J18:M18; date B1",
+          "questions": [
+            "CTX-15@V10"
+          ]
+        },
+        {
+          "id": "f16",
+          "locator": "Worksheet 'Operation Log 0911', J27:M27; date B1",
+          "questions": [
+            "CTX-16@V10"
+          ]
+        },
+        {
+          "id": "f17",
+          "locator": "Worksheet 'Operation Log 0911', F16:H16 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-17@V11"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-EVENTS-D3",
+      "title": "0911Testday3_Alm_Evt.txt",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/C2 Air Leakage/Test5/Alarms and Events/0911Testday3_Alm_Evt.txt",
+      "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locators": [
+        {
+          "id": "f18",
+          "locator": "Physical line 217 (header is line 1), record 216; Module and Module Description fields",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f19",
+          "locator": "Physical line 2 (header is line 1), record 1; Module and Module Description fields",
+          "questions": [
+            "CTX-19@FIC302"
+          ]
+        },
+        {
+          "id": "f20",
+          "locator": "Physical line 217 (header is line 1), record 216; Date/Time*, Event Type, Category, Parameter, State and Level fields",
+          "questions": [
+            "CTX-20@FIC301"
+          ]
+        },
+        {
+          "id": "f21",
+          "locator": "Physical line 213 (header is line 1), record 212; Date/Time*, Parameter and State fields",
+          "questions": [
+            "CTX-21@FIC301"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    }
+  ]
+}

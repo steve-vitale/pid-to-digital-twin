@@ -1679,6 +1679,125 @@
    },
    "findings": [],
    "resolution": "The final 94 cells exactly match registered row/input membership: 63 pass, 23 fail, 8 n/a. All 732 recorded file-hash bindings match current files, and an independent AST traversal agrees with the hashed local-script dependency coverage. Every scored cell verdict was independently checked against recorded counts and its stated criterion; every n/a has a reason. corpus_matrix --check and all 28 corpus-matrix tests pass. Four complete cells and two pixel-level single-sheet samples were independently reproduced in scratch; two BattLeDIM 2019 runs were independently checked through adapter plus band tool and agree with the final matrix. Earlier scope wording was narrowed from every tool to eight selected workflows. Generated inputs, agent-made keys, key-only scan duplicates, confirmed refusals, development reuse, nonblind baselines, changed derived truth and the separate scorer fix are disclosed."
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (read-only review, primary-source checks and adversarial CLI controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over file bytes with CRLF normalized to LF; primary original-document hashes below bind raw bytes without normalization.",
+   "registered_output_count": 11,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7"
+   },
+   "supporting_files": {
+    ".gitattributes": "e5bc2fdf8b6833f4ee3240621e106ca814ffa09ab88123a22b7bc39b1c163552",
+    "docs/CONTEXT_REGISTER.md": "bab4a2556cd5dee236315395132f6e6fd15f2033e4b86c1622f68e6c4125485f",
+    "docs/GOAL.md": "eb8abb0c5a1091b92497879d4e1c1fe0a492e7101ddde0f817ce1c5366332739",
+    "examples/context-register/README.md": "70e479bea18f9bffefc8843ada15fc491f887ac32c61d662fa797738866cf282",
+    "examples/context-register/bayer/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/bayer/README.md": "f43650b0fa0f4f285b4c7e13d916f6d5a59a1c3c9f29883bb735d61fb3ec72bc",
+    "examples/context-register/bayer/expected/enriched_graph.json": "f7f8a08bb74bbad9521664678ed9dc2eb5e043418f7bac6c22b4c195c682e648",
+    "examples/context-register/bayer/expected/enriched_questions.json": "d44b9477f727a25962d038cbf270593a3b9464c9bfe579824f7174c13a114bd7",
+    "examples/context-register/bayer/proposed_answer.csv": "c627ab68ce98d5add2ac5ac84384ccd4be0699cf5cee3e5d98311b675886092c",
+    "examples/context-register/bayer/screen/screen.md": "92a79cb3e532e0750398f4f54730c4bea95470aef989bd9b2b07476cd6bcf3a1",
+    "examples/context-register/bayer/source_key.json": "bab7d493a934ae8ab41bf5e5ae3f73ab26e475a6ded6895f77019f51c28dd747",
+    "examples/context-register/bayer/sources.json": "3c39b3a2da11e9ab7346ef2b7f7fc6242a02b5631552f21a4dfdd71d017d1767",
+    "examples/context-register/illustrative/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "examples/context-register/illustrative/README.md": "e2b92c88a596e120045337f5618e7cde20a250ffdbddaa751fa2490666f11e70",
+    "examples/context-register/illustrative/basis.txt": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+    "examples/context-register/illustrative/filled_answers.csv": "10d3df5f512bad4d7ba975f354205b14e66ccd0f550d72659121fc55415d54cf",
+    "examples/context-register/illustrative/later-note.txt": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+    "examples/context-register/illustrative/model.json": "72619283ecc3c97154d548850d06688463e6f2de05eb8cf53f3c278c9f2fa1dc",
+    "examples/context-register/illustrative/questions.json": "6b883257ddc4d420c10077bdf0998e7a98e1c34465cf902432f464caf01dbd76",
+    "examples/context-register/illustrative/service-sheet.txt": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+    "examples/context-register/illustrative/sources.json": "1137a61d46098763bdd5486ce2b0efcb0b6838721306be233dd8c9b6b9459e86",
+    "examples/context-register/pronto/.gitignore": "b7db0191fd3d5aafda7255244750e17e2ba9f911dee89ca6c4ae2ed270f82130",
+    "examples/context-register/pronto/ACCEPTANCE.md": "3af098c64e0e4f82583fab97526d3f4e1db2b58387697c696785009b025fd536",
+    "examples/context-register/pronto/README.md": "00372fcb4e1018cfb6169179b9b9746c57bb2eeaf8a73d0a5ccd6e8f98b27748",
+    "examples/context-register/pronto/check_packet.py": "9b49909aeb83fb5df78287ef0044a59f02efb069f19d9a2dd20ee8a793d46575",
+    "examples/context-register/pronto/model.json": "d013645ba6c4cc0d935117c5d845459de3c9ec2d2cc92b50d78662e0aac4f58f",
+    "examples/context-register/pronto/questions.json": "fd19f05fcba3b3ef763838b6a2237e35fb6a4de701fca448ac05c6f2c0db3b41",
+    "examples/context-register/pronto/verify_sources.py": "75e8274bada91d1756daf874dac8f20175699b1e8741827a6801b6f5612844fc",
+    "scripts/context_register.py": "48c70e403a03112731aabc4ffc526e5d6b80e45d93b3a205cd7809ee6fce012b",
+    "scripts/graph_export.py": "ed1618a1305dffd5accbde544beaf2f230dc200b5f57f25988df36db9e5f1c02",
+    "scripts/question_engine.py": "d66e95619d4aa70a98b687e6ff01c3ed57964c9c3f17446e04dabce4938c7327",
+    "scripts/test_context_examples.py": "d7a9fe3e9a638760b0312fd4a253803c70ca4eb179f237393822a89cc1adb6b9",
+    "scripts/test_context_register.py": "62155e4a31362a564d112e968568769c3c4fefbed9e0a44b4c2dc4e99c741872"
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "An alternate register filename colliding with context.md could be overwritten by the report.",
+     "resolution": "The independent CLI reproduction now refuses before any write while normal context.json refresh remains available."
+    },
+    {
+     "issue": "A hardlink from an output to a supporting source could overwrite the source bytes.",
+     "resolution": "File-identity collision checks now refuse the independent NTFS-hardlink reproduction before any write."
+    },
+    {
+     "issue": "Correctly rehashed malformed ownership IDs and malformed asset snapshots were accepted.",
+     "resolution": "Both independent malformed-history reproductions now return clear input errors and create no outputs; history structure and bindings are validated as well as hashes."
+    },
+    {
+     "issue": "Whitespace trimming could bind a question to an ID different from the preserved graph node ID.",
+     "resolution": "The independent exact-identity reproduction now refuses before writes; surrounding whitespace in identities is rejected."
+    },
+    {
+     "issue": "The PRONTO expected report was stale after collection prompts were added to rendering.",
+     "resolution": "The final report now reproduces byte-for-byte. Structured requested fields and location descriptions are readable, and decisions and JSON remain unchanged."
+    }
+   ],
+   "resolution": "All findings were fixed and independently rechecked on the frozen files. The 11 registered outputs are bound by the hashes above. The final PRONTO report and Bayer bridge reproduce exactly; responsibility, review provenance, uncertainty, source snapshots and revision handling remain explicit.",
+   "checks": [
+    "32 context-register controls and 3 example integration tests pass on the final code. The illustrative runbook reproduces all 4 committed expected outputs without changing sources or model statuses.",
+    "15 independent CLI lifecycle/safety/portability controls pass: explicit accepted responses; byte-identical reruns; selective source-only staleness; old CSV refusal; exact snapshot reversion; claim conflict and explicit rejection; direct, alternate-register and hardlink collision refusal; unknown/duplicate references; and preservation of deliberately entered engineer text.",
+    "7 independent role/date/state boundary controls pass: reviewer does not become owner; invalid calendar dates refuse; assignment actor/date is explicit; accepted answered and plant truth require source match; accepted partial mismatch remains visible; an outstanding data request keeps the question open and unmentioned ownership persists.",
+    "Two correctly rehashed malformed-history controls and one whitespace-identity control independently refuse before output creation.",
+    "12 independent PRONTO controls pass using disposable exact copies of the originals: 22 proposals, 21 questions, 18 partial, 2 needs_data, 1 disputed; no inferred owner, reviewer, approval or plant truth; disabled-limit controls and FT302/FIR305 disagreement retained; synthetic report/alarm revisions stale exactly 6/7 dependent decisions while retaining history; old CSV and unknown/ambiguous identities refuse.",
+    "All 22 PRONTO source facts match independent primary-source readers: bundled openpyxl for cells/dates/times, CSV TSV parsing for physical records, pypdf for text, and a separately rendered full-page visual inspection for Figure 1. Four original hashes match. Missing-original verification reports unavailable rather than passed.",
+    "Fresh question_engine generation reproduces both Bayer E18 screen files byte-for-byte. Applying its actual 6 asset/stream references, original CSB bytes and proposed partial response reproduces all 4 expected context files byte-for-byte. Three collection prompts, item/how/where, decision rule and limits remain visible and unchanged in enriched JSON; owner/reviewer and plant truth remain unknown.",
+    "Final PRONTO context.md reproduces byte-for-byte from the preserved 22 decisions. All structured request.fields and location kind/description text are visible; no per-request completion tracking or automatic clearing is claimed. The full register JSON is unchanged by report polishing.",
+    "Illustrative, PRONTO and Bayer enriched graphs each pass graph_export --check with 0 problems. Original public files remain ignored. Selected new public docs, fixtures and tool/test files contain no private product names, local user paths or email addresses."
+   ],
+   "primary_sources": [
+    {
+     "id": "PRONTO-REPORT",
+     "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-ALARMS",
+     "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-OPS",
+     "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "PRONTO-EVENTS-D3",
+     "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+     "check": "Matched original local bytes to pinned manifest; independent transcription checks cover all 22 facts across the four documents."
+    },
+    {
+     "id": "CSB-2008-08-I-WV",
+     "raw_sha256": "6b4c944c7c5c8b5537c32e86d247064c164fe50c15d08ea64083975e574cf619",
+     "check": "Matched original local bytes and independently read PDF page 37, printed page 29, temperature-control narrative above Figure 10. Only the proposed intended-sequence interpretation was checked."
+    }
+   ],
+   "limits": "Independent coding-agent review only. No human/site sign-off, engineer timing, walkdown, live-signal validation, safe-operation certification, savings measurement or native-system import is established. The source checks establish selected published transcriptions and the Bayer cited narrative, not current plant truth or comprehensive revalidation of historical models. PRONTO and Bayer reuse existing source families. Currentness means an exact snapshot match when the tool is run; there is no watcher, permanent invalidation or automatic expiry. Reviewer and owner identities are unauthenticated user entries. History hashes are integrity controls, not signatures."
   }
  ]
 }

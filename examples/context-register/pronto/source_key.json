@@ -1,0 +1,830 @@
+{
+  "schema": "pronto-context-source-key-1",
+  "source_family": "pronto",
+  "limitations": [
+    "AI-authored example, no human sign-off.",
+    "The derived key is a checkable transcription, not an independent source or replacement for original files.",
+    "Published experimental data; no current operational plant truth or human ownership inferred.",
+    "22 claims across four documents in the existing PRONTO source family; no new source-family coverage."
+  ],
+  "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+  "license": "CC BY 4.0",
+  "metadata_verified": {
+    "api_url": "https://zenodo.org/api/records/1341583",
+    "checked_on": "2026-10-29",
+    "record_id": 1341583,
+    "conceptrecid": "1341582",
+    "publication_date": "2019-05-16",
+    "access_right": "open",
+    "license_id": "cc-by-4.0"
+  },
+  "documents": [
+    {
+      "id": "PRONTO-REPORT",
+      "title": "Multiphase flow facility case study technical report",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto-more/PRONTO benchmark case study/Technical documents/Technical report/Multiphase flow facility case study technical report.pdf",
+      "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locators": [
+        {
+          "id": "f01",
+          "locator": "PDF page 6 (printed 6), Table 2, PT312 row",
+          "questions": [
+            "CTX-01@PT312"
+          ]
+        },
+        {
+          "id": "f02",
+          "locator": "PDF page 11 (printed 11), Air leakage (0911 Test4/5/6), first paragraph",
+          "questions": [
+            "CTX-02@V10"
+          ]
+        },
+        {
+          "id": "f03",
+          "locator": "PDF page 12 (printed 12), Table 6, Test5 column",
+          "questions": [
+            "CTX-03@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f04",
+          "locator": "PDF page 5 (printed 5), Figure 1, lower of the two green parallel inlet-air branches: FT302 and FIC301 with dashed signal line",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f05",
+          "locator": "PDF page 7 (printed 7), Table 2 continuation, FIC301/PID1/SP.CV row",
+          "questions": [
+            "CTX-05@FIC301"
+          ]
+        },
+        {
+          "id": "f22",
+          "locator": "PDF page 6 (printed 6), Table 1, Process variables and Alarm/event/change logs rows",
+          "questions": [
+            "CTX-22@PRONTO-FACILITY"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-ALARMS",
+      "title": "Alarm settings in DeltaV.xlsx",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/Technical documents/Alarm settings in DeltaV.xlsx",
+      "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locators": [
+        {
+          "id": "f06",
+          "locator": "Worksheet 'Sheet1', B16:D16 (tag, HiHi, Hi); remarks G16 must be read with the numbers",
+          "questions": [
+            "CTX-06@PT312"
+          ]
+        },
+        {
+          "id": "f07",
+          "locator": "Worksheet 'Sheet1', B16 and G16",
+          "questions": [
+            "CTX-07@PT312"
+          ]
+        },
+        {
+          "id": "f08",
+          "locator": "Worksheet 'Sheet1', B13:D13 and G13",
+          "questions": [
+            "CTX-08@FIC301"
+          ]
+        },
+        {
+          "id": "f09",
+          "locator": "Worksheet 'Sheet1', B15:F15 and G15",
+          "questions": [
+            "CTX-09@FT305"
+          ]
+        },
+        {
+          "id": "f10",
+          "locator": "Worksheet 'Sheet1', B39:G39",
+          "questions": [
+            "CTX-10@LI101"
+          ]
+        },
+        {
+          "id": "f11",
+          "locator": "Worksheet 'Sheet1', B19:G19",
+          "questions": [
+            "CTX-11@TT402"
+          ]
+        },
+        {
+          "id": "f12",
+          "locator": "Worksheet 'Sheet1', B41:G41",
+          "questions": [
+            "CTX-12@LI503"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-OPS",
+      "title": "Operation log.xlsx",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/Operation logs/Operation log.xlsx",
+      "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locators": [
+        {
+          "id": "f13",
+          "locator": "Worksheet 'Operation Log 0911', A11:C11 and G11:H11; date B1",
+          "questions": [
+            "CTX-13@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f14",
+          "locator": "Worksheet 'Operation Log 0911', G12:H12 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-14@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f15",
+          "locator": "Worksheet 'Operation Log 0911', J18:M18; date B1",
+          "questions": [
+            "CTX-15@V10"
+          ]
+        },
+        {
+          "id": "f16",
+          "locator": "Worksheet 'Operation Log 0911', J27:M27; date B1",
+          "questions": [
+            "CTX-16@V10"
+          ]
+        },
+        {
+          "id": "f17",
+          "locator": "Worksheet 'Operation Log 0911', F16:H16 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-17@V11"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    },
+    {
+      "id": "PRONTO-EVENTS-D3",
+      "title": "0911Testday3_Alm_Evt.txt",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "path": "pronto/zip/C2 Air Leakage/Test5/Alarms and Events/0911Testday3_Alm_Evt.txt",
+      "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locators": [
+        {
+          "id": "f18",
+          "locator": "Physical line 217 (header is line 1), record 216; Module and Module Description fields",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f19",
+          "locator": "Physical line 2 (header is line 1), record 1; Module and Module Description fields",
+          "questions": [
+            "CTX-19@FIC302"
+          ]
+        },
+        {
+          "id": "f20",
+          "locator": "Physical line 217 (header is line 1), record 216; Date/Time*, Event Type, Category, Parameter, State and Level fields",
+          "questions": [
+            "CTX-20@FIC301"
+          ]
+        },
+        {
+          "id": "f21",
+          "locator": "Physical line 213 (header is line 1), record 212; Date/Time*, Parameter and State fields",
+          "questions": [
+            "CTX-21@FIC301"
+          ]
+        }
+      ],
+      "source_family": "pronto",
+      "license": "CC BY 4.0",
+      "attribution": "A. Stief, R. Tan, Y. Cao, J. R. Ottewill, N. F. Thornhill, J. Baranowski, A heterogeneous benchmark dataset for data analytics: Multiphase flow facility case study, Journal of Process Control 79 (2019) 41-55, doi:10.1016/j.jprocont.2019.04.009. Data: doi:10.5281/zenodo.1341583, CC BY 4.0.",
+      "source_url": "https://zenodo.org/records/1341583"
+    }
+  ],
+  "facts": [
+    {
+      "id": "F01",
+      "asset_id": "PT312",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f01",
+      "locator": "PDF page 6 (printed 6), Table 2, PT312 row",
+      "question_id": "CTX-01@PT312",
+      "question": "What variable and unit does the report assign to PT312?",
+      "answer": "Table 2 assigns PT312 to air delivery pressure, with unit barg. This describes the report, not a verified present-day installation.",
+      "claim_key": "PT312.report-variable-and-unit",
+      "value": "air delivery pressure; barg",
+      "check": {
+        "kind": "pdf_text",
+        "page": 6,
+        "contains": [
+          "PT312 Air delivery pressure barg"
+        ]
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F02",
+      "asset_id": "V10",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f02",
+      "locator": "PDF page 11 (printed 11), Air leakage (0911 Test4/5/6), first paragraph",
+      "question_id": "CTX-02@V10",
+      "question": "What purpose does the report give manual valve V10 in the leakage experiment?",
+      "answer": "The report says manually opening V10 leaks part of the input air to atmosphere to simulate developing air leakage.",
+      "claim_key": "V10.report-purpose",
+      "value": "induced input-air leakage to atmosphere",
+      "check": {
+        "kind": "pdf_text",
+        "page": 11,
+        "contains": [
+          "By opening valve V10 manually the air is partially leaked to the atmosphere."
+        ]
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F03",
+      "asset_id": "PRONTO-FACILITY",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f03",
+      "locator": "PDF page 12 (printed 12), Table 6, Test5 column",
+      "question_id": "CTX-03@PRONTO-FACILITY",
+      "question": "Which air and water flow conditions does the report give for Test5?",
+      "answer": "Table 6 gives Test5 air flow 120 sm3/h and water flow 0.1 kg/s. These are published test conditions, not current setpoints.",
+      "claim_key": "Test5.report-flow-conditions",
+      "value": "air 120 sm3/h; water 0.1 kg/s",
+      "check": {
+        "kind": "pdf_text",
+        "page": 12,
+        "contains": [
+          "Test5 Test4/6",
+          "Air flow rate (sm3/h) 120 150",
+          "Water flow rate (kg/s) 0.1 0.5"
+        ]
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F04",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f04",
+      "locator": "PDF page 5 (printed 5), Figure 1, lower of the two green parallel inlet-air branches: FT302 and FIC301 with dashed signal line",
+      "question_id": "CTX-04@FIC301",
+      "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+      "answer": "Figure 1 draws FT302 beside FIC301 on the lower parallel air branch, joined by a dashed control-signal line. This figure alone does not establish the authoritative pairing or whether any FIR and FT identifiers are equivalent.",
+      "claim_key": "FIC301.input-measurement-label",
+      "value": "FT302",
+      "check": {
+        "kind": "pdf_figure",
+        "page": 5,
+        "figure": "1",
+        "region": "lower green parallel air branch",
+        "labels": [
+          "FT302",
+          "FIC301"
+        ],
+        "method": "visually inspected rendered page; requires visual verification"
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F05",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f05",
+      "locator": "PDF page 7 (printed 7), Table 2 continuation, FIC301/PID1/SP.CV row",
+      "question_id": "CTX-05@FIC301",
+      "question": "Which setpoint channel and unit does the report document for FIC301?",
+      "answer": "The report lists FIC301/PID1/SP.CV as inlet air flow rate controller 2 set point, in Sm3/h. It gives no current setpoint value here.",
+      "claim_key": "FIC301.report-setpoint-channel",
+      "value": "FIC301/PID1/SP.CV; Sm3/h",
+      "check": {
+        "kind": "pdf_text",
+        "page": 7,
+        "contains": [
+          "FIC301/PID1/SP.CV Inlet air flow rate controller 2 set point  Sm3/h"
+        ]
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F06",
+      "asset_id": "PT312",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f06",
+      "locator": "Worksheet 'Sheet1', B16:D16 (tag, HiHi, Hi); remarks G16 must be read with the numbers",
+      "question_id": "CTX-06@PT312",
+      "question": "What Hi and HiHi values are entered for PT312, and what limits their interpretation?",
+      "answer": "The workbook enters HiHi 95 and Hi 90 for PT312 (bar). G16 also says scale 0-15 bar and not enabled. Preserve the entered numbers and the scale inconsistency; do not turn them into enabled physical-pressure limits.",
+      "claim_key": "PT312.settings-entered-HH-H",
+      "value": "95; 90",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B16": "PT312 (bar)",
+          "C16": 95,
+          "D16": 90,
+          "G16": "air pressure; scale 0-15 bar, not enabled"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F07",
+      "asset_id": "PT312",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f07",
+      "locator": "Worksheet 'Sheet1', B16 and G16",
+      "question_id": "CTX-07@PT312",
+      "question": "Does the settings workbook mark the PT312 limit row as enabled?",
+      "answer": "G16 explicitly says not enabled. This negative control prevents treating numeric cells C16:F16 as enabled process alarms. It does not describe the separate historical module-health alarms.",
+      "claim_key": "PT312.settings-enabled-state",
+      "value": "not enabled",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B16": "PT312 (bar)",
+          "G16": "air pressure; scale 0-15 bar, not enabled"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F08",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f08",
+      "locator": "Worksheet 'Sheet1', B13:D13 and G13",
+      "question_id": "CTX-08@FIC301",
+      "question": "Does the settings workbook support an enabled high limit for FIC301?",
+      "answer": "The row enters HiHi 100 and Hi 95, while G13 says air inputs; scale 0-4250, not enabled, no units. It supports no assertion that a high process alarm is enabled.",
+      "claim_key": "FIC301.settings-enabled-state",
+      "value": "not enabled",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B13": "FIC301 (%)",
+          "C13": 100,
+          "D13": 95,
+          "G13": "air inputs; scale 0-4250, not enabled, no units"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F09",
+      "asset_id": "FT305",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f09",
+      "locator": "Worksheet 'Sheet1', B15:F15 and G15",
+      "question_id": "CTX-09@FT305",
+      "question": "What does the settings workbook say about FT305 limit entries and enablement?",
+      "answer": "The FT305 row enters HiHi 95, Hi 90, Lo 10 and LoLo 5. Its remark gives scale 0-200 sm3/h and not enabled. No conversion or enabled-limit inference has been made.",
+      "claim_key": "FT305.settings-enabled-state",
+      "value": "not enabled",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B15": "FT305 (%)",
+          "C15": 95,
+          "D15": 90,
+          "E15": 10,
+          "F15": 5,
+          "G15": "air input; scale 0-200 sm3/h, not enabled"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F10",
+      "asset_id": "LI101",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f10",
+      "locator": "Worksheet 'Sheet1', B39:G39",
+      "question_id": "CTX-10@LI101",
+      "question": "What LI101 level limits are entered, and does this row establish enablement?",
+      "answer": "The LI101 (m) row enters HiHi 1.6, Hi 1.4, Lo 0.2 and LoLo 0.1. Its remark says water tank level, scale 0-2m. The absence of not enabled does not positively establish enablement; confirm against an authoritative configuration export.",
+      "claim_key": "LI101.settings-entered-limits",
+      "value": "HH 1.6; H 1.4; L 0.2; LL 0.1; m",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B39": "LI101 (m)",
+          "C39": 1.6,
+          "D39": 1.4,
+          "E39": 0.2,
+          "F39": 0.1,
+          "G39": "water tank level, scale 0~2m"
+        }
+      },
+      "answer_state": "partial",
+      "data_request": "Obtain the alarm enable flags and configuration revision for LI101 from a controlled DeltaV export."
+    },
+    {
+      "id": "F11",
+      "asset_id": "TT402",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f11",
+      "locator": "Worksheet 'Sheet1', B19:G19",
+      "question_id": "CTX-11@TT402",
+      "question": "Does TT402 have a documented enabled high-temperature process alarm?",
+      "answer": "The TT402 row enters HiHi 95, Hi 90, Lo 10 and LoLo 5 and describes mixing-zone temperature with scale 0-100 degrees C. No enabled flag is given in this row. Obtain configuration evidence before asserting enablement.",
+      "claim_key": "TT402.settings-enabled-state",
+      "value": "not stated",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B19": "TT402 (°C)",
+          "C19": 95,
+          "D19": 90,
+          "E19": 10,
+          "F19": 5,
+          "G19": "mixing zone T, scale 0-100 °C"
+        }
+      },
+      "answer_state": "needs_data",
+      "data_request": "Obtain TT402 enabled-state flags, measurement units and a controlled configuration revision."
+    },
+    {
+      "id": "F12",
+      "asset_id": "LI503",
+      "document_id": "PRONTO-ALARMS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locator_id": "f12",
+      "locator": "Worksheet 'Sheet1', B41:G41",
+      "question_id": "CTX-12@LI503",
+      "question": "Which uncertainty in the LI503 settings row requires an engineering check?",
+      "answer": "G41 describes the water-coalescer interface as in percentage and explicitly says not sure. The row enters HiHi 70, Hi 55, Lo 45 and LoLo 30. Its engineering basis and enablement remain unconfirmed.",
+      "claim_key": "LI503.settings-unit-certainty",
+      "value": "source says not sure",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Sheet1",
+        "cells": {
+          "B41": "LI503 (%)",
+          "C41": 70,
+          "D41": 55,
+          "E41": 45,
+          "F41": 30,
+          "G41": "Water coalescer interface, in percentage, not sure"
+        }
+      },
+      "answer_state": "needs_data",
+      "data_request": "Request the LI503 interface measurement basis, scaling and enabled-state flags from controlled configuration and instrument documentation."
+    },
+    {
+      "id": "F13",
+      "asset_id": "PRONTO-FACILITY",
+      "document_id": "PRONTO-OPS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locator_id": "f13",
+      "locator": "Worksheet 'Operation Log 0911', A11:C11 and G11:H11; date B1",
+      "question_id": "CTX-13@PRONTO-FACILITY",
+      "question": "What air flow condition is recorded for the 10:34 Test5_0 measurement?",
+      "answer": "The 2017-09-11 log names Air leakage, run 0911Test5_0, at 10:34 and records air flow 120 sm^3/h. It records a historical experiment condition.",
+      "claim_key": "Test5_0.ops-air-flow",
+      "value": "120 sm^3/h",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Operation Log 0911",
+        "cells": {
+          "A11": "Air leakage",
+          "B11": "0911Test5_0",
+          "C11": {
+            "time": "10:34:00"
+          },
+          "G11": "Air flow rate",
+          "H11": "120 sm^3/h",
+          "B1": {
+            "datetime": "2017-09-11T00:00:00"
+          }
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F14",
+      "asset_id": "PRONTO-FACILITY",
+      "document_id": "PRONTO-OPS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locator_id": "f14",
+      "locator": "Worksheet 'Operation Log 0911', G12:H12 in run 0911Test5_0 (B11)",
+      "question_id": "CTX-14@PRONTO-FACILITY",
+      "question": "What water flow condition is recorded for Test5_0?",
+      "answer": "The Test5_0 section records water flow rate 0.1 kg/s. It does not establish the current plant flow.",
+      "claim_key": "Test5_0.ops-water-flow",
+      "value": "0.1 kg/s",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Operation Log 0911",
+        "cells": {
+          "B11": "0911Test5_0",
+          "G12": "Water flow rate",
+          "H12": "0.1 kg/s"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F15",
+      "asset_id": "V10",
+      "document_id": "PRONTO-OPS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locator_id": "f15",
+      "locator": "Worksheet 'Operation Log 0911', J18:M18; date B1",
+      "question_id": "CTX-15@V10",
+      "question": "Which first V10 movement is explicitly recorded in the day-3 log?",
+      "answer": "J18:M18 records Manual valve V10 at 10:40, from 0 to 5 degree on 2017-09-11. This is a log entry, not independent confirmation of valve travel.",
+      "claim_key": "V10.ops-movement-20170911-1040",
+      "value": "0 to 5 degree",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Operation Log 0911",
+        "cells": {
+          "J18": "Manual valve V10:",
+          "K18": {
+            "time": "10:40:00"
+          },
+          "L18": "0 to 5",
+          "M18": "degree"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F16",
+      "asset_id": "V10",
+      "document_id": "PRONTO-OPS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locator_id": "f16",
+      "locator": "Worksheet 'Operation Log 0911', J27:M27; date B1",
+      "question_id": "CTX-16@V10",
+      "question": "Which next V10 movement is explicitly recorded in the day-3 log?",
+      "answer": "J27:M27 records Manual valve V10 at 10:50, from 5 to 10 degree on 2017-09-11.",
+      "claim_key": "V10.ops-movement-20170911-1050",
+      "value": "5 to 10 degree",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Operation Log 0911",
+        "cells": {
+          "J27": "Manual valve V10:",
+          "K27": {
+            "time": "10:50:00"
+          },
+          "L27": "5 to 10",
+          "M27": "degree"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F17",
+      "asset_id": "V11",
+      "document_id": "PRONTO-OPS",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locator_id": "f17",
+      "locator": "Worksheet 'Operation Log 0911', F16:H16 in run 0911Test5_0 (B11)",
+      "question_id": "CTX-17@V11",
+      "question": "Which valve is named in the opening field of Test5_0, and may it be silently joined to V10?",
+      "answer": "The Valve opening field names V11 and 0 deg. This field provides no authority to alias V11 to V10; the packet retains V11 as a distinct ID.",
+      "claim_key": "V11.ops-Test5_0-opening",
+      "value": "0 deg",
+      "check": {
+        "kind": "xlsx_cells",
+        "sheet": "Operation Log 0911",
+        "cells": {
+          "B11": "0911Test5_0",
+          "F16": "Valve opening: ",
+          "G16": "V11",
+          "H16": "0 deg"
+        }
+      },
+      "answer_state": "partial",
+      "data_request": "Ask a qualified reviewer to reconcile the log fields against the experiment procedure; do not alias V11 to V10."
+    },
+    {
+      "id": "F18",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-EVENTS-D3",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locator_id": "f18",
+      "locator": "Physical line 217 (header is line 1), record 216; Module and Module Description fields",
+      "question_id": "CTX-04@FIC301",
+      "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+      "answer": "Record 216 names FIC301 as Air Flowrate Controller via FIR305 (High). FIR305 is retained verbatim; this module description alone does not establish that it is an alias of FT305 or resolve the authoritative measurement pairing.",
+      "claim_key": "FIC301.input-measurement-label",
+      "value": "FIR305",
+      "check": {
+        "kind": "tsv_record",
+        "line": 217,
+        "record": "216",
+        "fields": {
+          "Module": "FIC301",
+          "Module Description": "Air Flowrate Controller via FIR305 (High)"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F19",
+      "asset_id": "FIC302",
+      "document_id": "PRONTO-EVENTS-D3",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locator_id": "f19",
+      "locator": "Physical line 2 (header is line 1), record 1; Module and Module Description fields",
+      "question_id": "CTX-19@FIC302",
+      "question": "What measurement label is named for FIC302 in the journal?",
+      "answer": "Record 1 names FIC302 as Air Flowrate Controller via FIR302 (Low). This is a module description in the journal; it does not resolve the separate Figure 1 label discrepancy or name a distinct output tag.",
+      "claim_key": "FIC302.journal-measurement-label",
+      "value": "FIR302",
+      "check": {
+        "kind": "tsv_record",
+        "line": 2,
+        "record": "1",
+        "fields": {
+          "Module": "FIC302",
+          "Module Description": "Air Flowrate Controller via FIR302 (Low)"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F20",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-EVENTS-D3",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locator_id": "f20",
+      "locator": "Physical line 217 (header is line 1), record 216; Date/Time*, Event Type, Category, Parameter, State and Level fields",
+      "question_id": "CTX-20@FIC301",
+      "question": "What FIC301 alarm state is recorded at 14:41:01.928 on day 3, and is it a process high-limit alarm?",
+      "answer": "Record 216 is an INSTRUMENT ALARM at 2017-09-11 14:41:01.928, parameter MODULE_ALM, state ACT/UNACK, level 15-CRITICAL. It is a historical module-health alarm record; it does not establish enablement of a process high-limit alarm.",
+      "claim_key": "FIC301.journal-state-record216",
+      "value": "MODULE_ALM; ACT/UNACK; 15-CRITICAL",
+      "check": {
+        "kind": "tsv_record",
+        "line": 217,
+        "record": "216",
+        "fields": {
+          "Date/Time*": "9/11/2017 2:41:01.928 PM",
+          "Event Type": "ALARM",
+          "Category": "INSTRUMENT",
+          "Module": "FIC301",
+          "Parameter": "MODULE_ALM",
+          "State": "ACT/UNACK",
+          "Level": "15-CRITICAL"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F21",
+      "asset_id": "FIC301",
+      "document_id": "PRONTO-EVENTS-D3",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locator_id": "f21",
+      "locator": "Physical line 213 (header is line 1), record 212; Date/Time*, Parameter and State fields",
+      "question_id": "CTX-21@FIC301",
+      "question": "Which later FIC301 module-alarm state is recorded, without inferring present state?",
+      "answer": "Record 212 at 2017-09-11 14:41:41.928 records MODULE_ALM as INACT/UNACK. The file is reverse chronological; this later record does not make the present alarm state known.",
+      "claim_key": "FIC301.journal-state-record212",
+      "value": "MODULE_ALM; INACT/UNACK",
+      "check": {
+        "kind": "tsv_record",
+        "line": 213,
+        "record": "212",
+        "fields": {
+          "Date/Time*": "9/11/2017 2:41:41.928 PM",
+          "Module": "FIC301",
+          "Parameter": "MODULE_ALM",
+          "State": "INACT/UNACK"
+        }
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    },
+    {
+      "id": "F22",
+      "asset_id": "PRONTO-FACILITY",
+      "document_id": "PRONTO-REPORT",
+      "document_revision": "zenodo-1341583-published-2019-05-16",
+      "raw_sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locator_id": "f22",
+      "locator": "PDF page 6 (printed 6), Table 1, Process variables and Alarm/event/change logs rows",
+      "question_id": "CTX-22@PRONTO-FACILITY",
+      "question": "What timing basis does the report give for joining process data and event records?",
+      "answer": "Table 1 lists process variables as continuous 1 Hz DeltaV data and alarm/event/change logs as event-driven discrete DeltaV events. The two grains differ; a time join needs an explicit time policy.",
+      "claim_key": "PRONTO.report-data-grains",
+      "value": "process 1 Hz continuous; logs event driven discrete",
+      "check": {
+        "kind": "pdf_text",
+        "page": 6,
+        "contains": [
+          "Process variables 1 Hz Continuous DeltaV",
+          "Alarm, event, change logs Event driven Discrete event DeltaV"
+        ]
+      },
+      "answer_state": "answered",
+      "data_request": ""
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "FIC301-SOURCE-LABELS",
+      "facts": [
+        "F04",
+        "F18"
+      ],
+      "status": "unresolved",
+      "note": "Figure 1 and journal name different measurement labels for FIC301. FIR305 is not assumed to mean FT305. Human confirmation and output tags are absent."
+    },
+    {
+      "id": "V10-V11-LOG-FIELDS",
+      "facts": [
+        "F15",
+        "F17"
+      ],
+      "status": "unresolved",
+      "note": "Separate log fields name different valves; neither a synonym nor a physical contradiction is inferred."
+    }
+  ]
+}

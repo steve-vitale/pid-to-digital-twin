@@ -1,0 +1,279 @@
+{
+  "schema": "twin-graph-1",
+  "source_model": "examples/context-register/illustrative/model.json",
+  "model_kind": "hand_built",
+  "title": "ILLUSTRATIVE context training model; no real plant",
+  "nodes": [
+    {
+      "id": "PLANT",
+      "kind": "plant",
+      "tag": null,
+      "name": "ILLUSTRATIVE context training model; no real plant",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "source_document",
+          "value": "Illustrative training fixtures licensed under the repository MIT license; not engineering evidence",
+          "status": "unverified",
+          "source": {
+            "kind": "model",
+            "document": "Illustrative training fixtures licensed under the repository MIT license; not engineering evidence",
+            "note": "the item cites no source of its own"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BL",
+      "kind": "boundary",
+      "tag": null,
+      "name": "battery limit",
+      "aliases": [],
+      "status": "confirmed",
+      "attributes": []
+    },
+    {
+      "id": "P-101",
+      "kind": "equipment",
+      "tag": "P-101",
+      "name": "Illustrative pump one",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Illustrative pump one",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "basis.txt"
+          }
+        },
+        {
+          "name": "type",
+          "value": "pump",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "basis.txt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "P-102",
+      "kind": "equipment",
+      "tag": "P-102",
+      "name": "Illustrative pump two",
+      "aliases": [],
+      "status": "unverified",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Illustrative pump two",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "service-sheet.txt"
+          }
+        },
+        {
+          "name": "type",
+          "value": "pump",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "service-sheet.txt"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "E00001",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "P-101",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "basis.txt"
+      }
+    },
+    {
+      "id": "E00002",
+      "type": "contains",
+      "from": "PLANT",
+      "to": "P-102",
+      "status": "unverified",
+      "direction": null,
+      "source": {
+        "kind": "document",
+        "document": "service-sheet.txt"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "pressure@P-101",
+      "question": "What upper operating pressure do these documents specify?",
+      "assets": [
+        {
+          "id": "P-101"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "pressure@P-101",
+          "question": "What upper operating pressure do these documents specify?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "owner": null,
+        "ownership": "needs_owner",
+        "assigned_by": null,
+        "assigned_on": null,
+        "state": "disputed",
+        "disputed_claims": [
+          "upper-operating-pressure"
+        ],
+        "answers": [
+          {
+            "decision_id": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f",
+            "answer_id": "basis-pressure",
+            "freshness": "current",
+            "changed": []
+          },
+          {
+            "decision_id": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa",
+            "answer_id": "later-pressure",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "service@P-102",
+      "question": "What service is named in the training sheet?",
+      "assets": [
+        {
+          "id": "P-102"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "service@P-102",
+          "question": "What service is named in the training sheet?",
+          "assets": [
+            {
+              "id": "P-102"
+            }
+          ]
+        },
+        "owner": "Fictional training maintainer",
+        "ownership": "assigned",
+        "assigned_by": "Fictional training coordinator",
+        "assigned_on": "2026-10-29",
+        "state": "answered",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934",
+            "answer_id": "service",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "range@P-101",
+      "question": "Has the normal operating range been checked against a trend?",
+      "assets": [
+        {
+          "id": "P-101"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "range@P-101",
+          "question": "Has the normal operating range been checked against a trend?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "owner": null,
+        "ownership": "needs_owner",
+        "assigned_by": null,
+        "assigned_on": null,
+        "state": "needs_data",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de",
+            "answer_id": "range-request",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "walkdown@P-101",
+      "question": "Has the equipment identity been checked in the plant?",
+      "assets": [
+        {
+          "id": "P-101"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "walkdown@P-101",
+          "question": "Has the equipment identity been checked in the plant?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "owner": null,
+        "ownership": "needs_owner",
+        "assigned_by": null,
+        "assigned_on": null,
+        "state": "unanswered",
+        "disputed_claims": [],
+        "answers": []
+      }
+    }
+  ],
+  "events": [],
+  "not_exported": [],
+  "counts": {
+    "nodes": 4,
+    "edges": 2,
+    "claims": 5,
+    "questions": 4,
+    "events": 0
+  },
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json"
+  }
+}

@@ -1,0 +1,144 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "data/bayer_rt/process_model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "E18"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 1,
+  "by_family": {
+   "energy": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E18@model",
+   "question_id": "E18",
+   "family": "energy",
+   "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+   "about": "U2, HV-112",
+   "assets": [
+    {
+     "id": "stream:U2",
+     "tag": "U2"
+    },
+    {
+     "id": "HV-112",
+     "tag": "HV-112"
+    },
+    {
+     "id": "stream:U1",
+     "tag": "U1"
+    },
+    {
+     "id": "FT-106",
+     "tag": "FT-106"
+    },
+    {
+     "id": "TV-104C",
+     "tag": "TV-104C"
+    },
+    {
+     "id": "HV-108",
+     "tag": "HV-108"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "stream:U2",
+     "tag": "U2",
+     "text": "stream U2 (asset stream:U2) reads \"Cooling water (80 C) supply to the cooler\" at E-3",
+     "field": "streams[U2]"
+    },
+    {
+     "role": "trigger",
+     "id": "HV-112",
+     "tag": "HV-112",
+     "text": "hand valve HV-112 reads \"HV-112 Cooling water supply valve\" at E-3",
+     "field": "manual_valves[HV-112]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "stream:U1",
+     "tag": "U1",
+     "text": "stream U1 (asset stream:U1) reads \"Steam supply to the heater\" at E-2",
+     "field": "streams[U1]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "FT-106",
+     "tag": "FT-106",
+     "text": "instrument FT-106 reads \"FT-106 Indicated steam flow to the heater\" at E-2",
+     "field": "instruments[FT-106]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "TV-104C",
+     "tag": "TV-104C",
+     "text": "valve TV-104C reads \"TV-104C Steam flow valve to the heater (Fig 10: Temperature Control Valve)\" at E-2",
+     "field": "final_elements[TV-104C]"
+    },
+    {
+     "role": "steam-heated user",
+     "id": "HV-108",
+     "tag": "HV-108",
+     "text": "hand valve HV-108 reads \"HV-108 Steam block valve, heater steam supply\" at E-2",
+     "field": "manual_valves[HV-108]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Temperatures and duties of the cooled and the heated streams",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "historian or DCS trend for FT-106 (no historian tag is mapped in this model for these)",
+      "site records: heat and material balance"
+     ],
+     "how": "For each stream: supply and target temperature and duty."
+    },
+    {
+     "item": "Whether the duties overlap in time",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operating sequence: are both duties needed at the same time?"
+     ],
+     "how": "Mark each duty continuous, batch or startup-only."
+    },
+    {
+     "item": "Layout distance and fouling",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: distance between the two exchangers",
+      "maintenance records: cleaning history"
+     ],
+     "how": "Note pipe run and fouling service."
+    }
+   ],
+   "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+    "source": [
+     "S19",
+     "S24"
+    ],
+    "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [],
+ "left_out": {}
+}

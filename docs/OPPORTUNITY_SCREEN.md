@@ -231,6 +231,20 @@ Full titles and URLs are in `data/questions.json` under `sources`. S12 is unused
 figures (cost per kW, a partner's annual saving, IAC average savings) they are left out on purpose: they assume one
 plant's prices and hours.
 
+## Keep the answers and test one useful decision
+
+`questions.json` is the handoff from screening to investigation. Its stable finding IDs and exact asset/stream
+references let the [context register](CONTEXT_REGISTER.md) retain answers, owners, dates and evidence revisions
+without editing the starting model. The [Bayer bridge example](../examples/context-register/bayer/README.md) runs
+the actual E18 screen and attaches a proposed partial answer from a public narrative. The original three collection
+requests, decision rule and limits remain visible; historical source text does not establish actual duty overlap
+or savings. Changed supporting evidence reopens the affected answers when the register is refreshed.
+
+Choose one finding with the [first-pilot brief](../examples/first-pilot/README.md). Name the operational decision,
+baseline, evidence owner, decision-maker and stop conditions before collecting the trial result. The engine
+generates investigation prompts; the company chooses the priority and decides whether the result supports a next
+step. It is most developed for energy and utility questions, not a complete transformation roadmap.
+
 ## Honest limits
 
 - **There is no public method for screening a P&ID for energy opportunities.** The closest citable building blocks

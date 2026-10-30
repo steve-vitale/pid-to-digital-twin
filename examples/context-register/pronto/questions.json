@@ -1,0 +1,465 @@
+{
+  "schema": "opportunity-questions-1",
+  "source_model": "examples/context-register/pronto/model.json",
+  "note": "AI-authored source-specific context questions, not automatically triggered opportunity-screen findings. No human ownership or approval inferred.",
+  "counts": {
+    "findings": 21
+  },
+  "questions": [
+    {
+      "id": "CTX-01@PT312",
+      "question_id": "CTX-01",
+      "family": "engineering_context",
+      "question": "What variable and unit does the report assign to PT312?",
+      "about": "PT312",
+      "assets": [
+        {
+          "id": "PT312",
+          "tag": "PT312"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-02@V10",
+      "question_id": "CTX-02",
+      "family": "engineering_context",
+      "question": "What purpose does the report give manual valve V10 in the leakage experiment?",
+      "about": "V10",
+      "assets": [
+        {
+          "id": "V10",
+          "tag": "V10"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-03@PRONTO-FACILITY",
+      "question_id": "CTX-03",
+      "family": "engineering_context",
+      "question": "Which air and water flow conditions does the report give for Test5?",
+      "about": "PRONTO-FACILITY",
+      "assets": [
+        {
+          "id": "PRONTO-FACILITY",
+          "tag": "PRONTO-FACILITY"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-04@FIC301",
+      "question_id": "CTX-04",
+      "family": "engineering_context",
+      "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+      "about": "FIC301",
+      "assets": [
+        {
+          "id": "FIC301",
+          "tag": "FIC301"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-05@FIC301",
+      "question_id": "CTX-05",
+      "family": "engineering_context",
+      "question": "Which setpoint channel and unit does the report document for FIC301?",
+      "about": "FIC301",
+      "assets": [
+        {
+          "id": "FIC301",
+          "tag": "FIC301"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-06@PT312",
+      "question_id": "CTX-06",
+      "family": "engineering_context",
+      "question": "What Hi and HiHi values are entered for PT312, and what limits their interpretation?",
+      "about": "PT312",
+      "assets": [
+        {
+          "id": "PT312",
+          "tag": "PT312"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-07@PT312",
+      "question_id": "CTX-07",
+      "family": "engineering_context",
+      "question": "Does the settings workbook mark the PT312 limit row as enabled?",
+      "about": "PT312",
+      "assets": [
+        {
+          "id": "PT312",
+          "tag": "PT312"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-08@FIC301",
+      "question_id": "CTX-08",
+      "family": "engineering_context",
+      "question": "Does the settings workbook support an enabled high limit for FIC301?",
+      "about": "FIC301",
+      "assets": [
+        {
+          "id": "FIC301",
+          "tag": "FIC301"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-09@FT305",
+      "question_id": "CTX-09",
+      "family": "engineering_context",
+      "question": "What does the settings workbook say about FT305 limit entries and enablement?",
+      "about": "FT305",
+      "assets": [
+        {
+          "id": "FT305",
+          "tag": "FT305"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-10@LI101",
+      "question_id": "CTX-10",
+      "family": "engineering_context",
+      "question": "What LI101 level limits are entered, and does this row establish enablement?",
+      "about": "LI101",
+      "assets": [
+        {
+          "id": "LI101",
+          "tag": "LI101"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "LI101",
+          "fields": [
+            "Obtain the alarm enable flags and configuration revision for LI101 from a controlled DeltaV export."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Obtain the missing controlled source and its revision."
+            }
+          ],
+          "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+        }
+      ],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-11@TT402",
+      "question_id": "CTX-11",
+      "family": "engineering_context",
+      "question": "Does TT402 have a documented enabled high-temperature process alarm?",
+      "about": "TT402",
+      "assets": [
+        {
+          "id": "TT402",
+          "tag": "TT402"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "TT402",
+          "fields": [
+            "Obtain TT402 enabled-state flags, measurement units and a controlled configuration revision."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Obtain the missing controlled source and its revision."
+            }
+          ],
+          "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+        }
+      ],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-12@LI503",
+      "question_id": "CTX-12",
+      "family": "engineering_context",
+      "question": "Which uncertainty in the LI503 settings row requires an engineering check?",
+      "about": "LI503",
+      "assets": [
+        {
+          "id": "LI503",
+          "tag": "LI503"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "LI503",
+          "fields": [
+            "Request the LI503 interface measurement basis, scaling and enabled-state flags from controlled configuration and instrument documentation."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Obtain the missing controlled source and its revision."
+            }
+          ],
+          "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+        }
+      ],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-13@PRONTO-FACILITY",
+      "question_id": "CTX-13",
+      "family": "engineering_context",
+      "question": "What air flow condition is recorded for the 10:34 Test5_0 measurement?",
+      "about": "PRONTO-FACILITY",
+      "assets": [
+        {
+          "id": "PRONTO-FACILITY",
+          "tag": "PRONTO-FACILITY"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-14@PRONTO-FACILITY",
+      "question_id": "CTX-14",
+      "family": "engineering_context",
+      "question": "What water flow condition is recorded for Test5_0?",
+      "about": "PRONTO-FACILITY",
+      "assets": [
+        {
+          "id": "PRONTO-FACILITY",
+          "tag": "PRONTO-FACILITY"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-15@V10",
+      "question_id": "CTX-15",
+      "family": "engineering_context",
+      "question": "Which first V10 movement is explicitly recorded in the day-3 log?",
+      "about": "V10",
+      "assets": [
+        {
+          "id": "V10",
+          "tag": "V10"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-16@V10",
+      "question_id": "CTX-16",
+      "family": "engineering_context",
+      "question": "Which next V10 movement is explicitly recorded in the day-3 log?",
+      "about": "V10",
+      "assets": [
+        {
+          "id": "V10",
+          "tag": "V10"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-17@V11",
+      "question_id": "CTX-17",
+      "family": "engineering_context",
+      "question": "Which valve is named in the opening field of Test5_0, and may it be silently joined to V10?",
+      "about": "V11",
+      "assets": [
+        {
+          "id": "V11",
+          "tag": "V11"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "V11",
+          "fields": [
+            "Ask a qualified reviewer to reconcile the log fields against the experiment procedure; do not alias V11 to V10."
+          ],
+          "where": [
+            {
+              "kind": "controlled engineering record",
+              "description": "Obtain the missing controlled source and its revision."
+            }
+          ],
+          "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+        }
+      ],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-19@FIC302",
+      "question_id": "CTX-19",
+      "family": "engineering_context",
+      "question": "What measurement label is named for FIC302 in the journal?",
+      "about": "FIC302",
+      "assets": [
+        {
+          "id": "FIC302",
+          "tag": "FIC302"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-20@FIC301",
+      "question_id": "CTX-20",
+      "family": "engineering_context",
+      "question": "What FIC301 alarm state is recorded at 14:41:01.928 on day 3, and is it a process high-limit alarm?",
+      "about": "FIC301",
+      "assets": [
+        {
+          "id": "FIC301",
+          "tag": "FIC301"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-21@FIC301",
+      "question_id": "CTX-21",
+      "family": "engineering_context",
+      "question": "Which later FIC301 module-alarm state is recorded, without inferring present state?",
+      "about": "FIC301",
+      "assets": [
+        {
+          "id": "FIC301",
+          "tag": "FIC301"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    },
+    {
+      "id": "CTX-22@PRONTO-FACILITY",
+      "question_id": "CTX-22",
+      "family": "engineering_context",
+      "question": "What timing basis does the report give for joining process data and event records?",
+      "about": "PRONTO-FACILITY",
+      "assets": [
+        {
+          "id": "PRONTO-FACILITY",
+          "tag": "PRONTO-FACILITY"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [],
+      "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+      "typical_benefit": null,
+      "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off.",
+      "status": "asked"
+    }
+  ]
+}
