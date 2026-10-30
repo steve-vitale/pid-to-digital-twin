@@ -4186,3 +4186,50 @@ skip count. The original failed run remains in the earlier chronology record. CI
 coverage and omissions. Only the matrix output review is renewed; existing feature/source review scopes remain.
 The transfer mechanism prepares a first engineering packet for company handoff and adds no organizational
 governance service or ready receiving-system connector.
+
+
+## 83. Use risk tiers to order review, not accept items
+
+The export guide still called red items more likely wrong than right and told a reviewer to spot-check green
+items and accept the batch. The CLI help repeated that green was safe to batch-accept. Those instructions were
+stronger than the evidence: the [saved Codex M3 holdout-A result](../out/triage_r2-tiles-trace_holdout-a.json)
+records a red-tier observed error fraction of 0.230 across 191 output items. That historical result is not a
+new-site calibration. Its truth test covers rough symbol class/location and keyed link endpoints; missing items,
+tag text, parents, installed state and operating duty are outside that denominator.
+
+The guide, review loop and actual CLI help now describe priority. A tier accepts nothing; sampling alone does not
+accept the unreviewed remainder. Unfamiliar drawings need an agreed review plan against originals. Green does not
+establish safety duty: the floor only recognizes its implemented tag/model-field rules on instruments and in-line
+items. Independent source review also caught the old zero-weight duplicate-tag statement (its fitted weight is
+small but nonzero) and the claim that the score tested correct labels. Both are corrected. The original round-3
+goal and fitted threshold-rule text remain historical, with a dated current-use note rather than rewritten rules.
+Source review also corrects the displayed holdout-A green-precision lower bound from 94% to 93%: the saved Gemini
+M0 result is 93.4%. A dated correction cites that table; no stored result is changed or re-scored. The old round's
+"calibration" label is qualified as its tier-order check, not demonstrated probability calibration.
+
+Only the confidence module docstring changes. Removing that module docstring yields the exact old executable AST,
+including all function docstrings and constants. Coefficients, thresholds, six recorded model outputs and every
+saved triage file remain unchanged. Actual old/current help commands check the exposed wording. The two existing
+recorded pipeline stages accept their historical files unchanged using the existing ACCEPT branch, with generation
+subprocesses prohibited. The lock changes exactly their two confidence-source hashes; every output hash and other
+entry remains exact. Stage notes and the lineage guide explicitly state that no extraction, build or scoring run
+was repeated. This is source-binding maintenance, not reproduced extraction or new calibration.
+
+The N054 audit finds a separate unresolved packaging gap. The documented default Ignition preflight exits 2:
+its required manifest and browser contract are ignored and not committed. Native acceptance stays NOT RUN, also
+when `--require-native` first encounters those missing inputs. The guides now state that limitation, the fixed
+TE/OPEN100 scope and conditional held-package arguments. Synthetic tests do not supply actual candidate evidence.
+The outdated release-version claim is replaced by instructions to use matching checkout files and record the commit;
+the 2026-10-13 native receipts remain specific to their historical candidate.
+
+The own-input contract is exercised separately on a task-owned receiving copy of the existing public OPEN100
+sheet and saved extraction: `--check-only` writes no output, the build retains original image/extraction bytes,
+and existing-output and duplicate-ID controls refuse. No plant data or model call is involved. Root's first
+preflight wrapper wrongly expected a default success and stopped on the actual missing-manifest refusal; that
+failed wrapper/output is retained, and the missing evidence stays a gap. No manifest was manufactured to make it pass.
+
+All 45 existing pipeline checks and the existing risk/safety-floor controls pass. The 26 synthetic preflight tests
+pass with one explicit Windows symlink skip. A separate AI engineer reader checks what a newcomer would follow;
+independent source and provenance readers check the bounded evidence. No feature-output review, corpus score,
+held-out result, operator approval or adoption claim is renewed. N054 remains not-done for the complete public
+candidate-package recipe; N062 and N063 remain unproven. A first source question or evidence packet needs no gateway.

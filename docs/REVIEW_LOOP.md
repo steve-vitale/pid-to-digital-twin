@@ -25,8 +25,11 @@ receiving-system adaptation and acceptance; generic file generation does not per
 
 In an extracted twin, an item whose tag reads as a relief device, shutdown valve, trip switch or isolation valve
 is never green: its `why` starts "safety-relevant (...): always checked", whatever the extraction checks say. Green
-still means "the extraction agrees with itself", not "safe to skip"; untagged and manual block valves are not
-caught by that floor ([TWIN_OUTPUTS.md](TWIN_OUTPUTS.md#the-safety-floor)).
+is a lower review-priority tier under the fitted rating; it does not accept an item or establish safety duty.
+Untagged and manual block valves are not caught by that floor. On unfamiliar drawings, check representative
+sheets against originals and agree review criteria; a sampled check does not accept the unreviewed remainder.
+See the [tier scope and limits](TWIN_OUTPUTS.md#risk-tiers-where-to-spend-review-time) and
+[tag-based floor](TWIN_OUTPUTS.md#the-safety-floor).
 
 CSV exports prefix formula-like text (`=`, `+`, `-`, `@`, including after leading
 whitespace), control-containing text and leading apostrophes with one apostrophe.

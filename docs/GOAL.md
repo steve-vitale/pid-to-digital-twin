@@ -173,6 +173,12 @@ score once on holdout A (6–11) and holdout B.
 
 ## Goal 1: point reviewers at the most problematic items
 
+**Current-use note (2026-10-30):** this section preserves the original round-3 goal and its batch-acceptance
+aspiration. It is not the current review instruction. Use the [review-priority guidance](TWIN_OUTPUTS.md#risk-tiers-where-to-spend-review-time):
+tiers do not accept items, and the development/holdout error fractions do not validate a new site's acceptance
+policy. The original round's "calibration" check meant error fractions increasing from green to amber to red;
+it did not establish probability calibration. The original rules and stored results remain unchanged.
+
 Give every item the system outputs (each symbol and each link) a **risk rating** and a tier: **green** (safe to
 batch-accept), **amber** (quick check) or **red** (look closely). The rating may only use signals available without
 the answer key at run time. Examples:
@@ -246,10 +252,14 @@ random order catches 20%).
 | **M3 tiling + tracing (declared)** | 64/31 · **40/43 ✗** · 67/28 | 68/42 · **58/30** · 76/31 |
 
 **Green tier:**
-- **Holdout A:** precision 94–96%, covering 44–79% of items.
+- **Holdout A:** precision 93–96%, covering 44–79% of items.
 - **Holdout B:** precision 97–100%, covering 27–77% of items.
 - **Calibration:** error rates rise green → amber → red in every combination. For example, Codex M3 on holdout A is
   6% → 15% → 23%, and on holdout B 3% → 11% → 47%.
+
+**Display correction (2026-10-30):** the holdout-A lower bound was shown as 94%. The saved
+[Gemini M0 table](../out/triage_v2-named-fields_holdout-a.json) contains 93.4%, which rounds to 93%.
+No result table was re-scored.
 
 **Verdict, stated plainly:**
 - **Passes in 23 of 24 holdout comparisons.** The rating beats the model's own confidence, usually by two to four

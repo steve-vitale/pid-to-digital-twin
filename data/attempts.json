@@ -3167,6 +3167,23 @@
         "examples/from-dexpi-xml/README.md",
         "scripts/test_dexpi_to_twin.py"
       ]
+    },
+    {
+      "id": "A216",
+      "function": "risk_ranking",
+      "date": "2026-10-30",
+      "change": "Describe confidence tiers as review priority, correct the tag/weight/safety-floor scope, and expose missing default preflight evidence.",
+      "hypothesis": "An engineer should not infer batch acceptance, a new-site error probability, tag correctness or actual safety duty from a fitted tier, nor mistake a missing candidate package for a runnable public preflight.",
+      "evidence": "Saved triage truth/metrics and coefficients contradict the old universal wording: Codex M3 holdout-A red observed error is23%, not a >50% guarantee; duplicate-tag weight is small/nonzero; truth uses rough class/location and keyed links, not tag text. Guides and actual CLI help now state review priority and domain limits. Executable AST, coefficients/thresholds, six recorded models and all saved triage files are unchanged. Existing recorded-stage ACCEPT updates only two source hashes and explicitly claims no extraction/build/scoring reproduction. Root actual default preflight refuses missing uncommitted manifest with exit2/nativeNOTRUN; public-source own-input check/build and invalid/existing-output controls pass. Existing45pipeline checks, risk/floor controls and26synthetic preflight tests pass, one OS symlink skip; independent reader/provenance checks and CI coverage are scoped separately.",
+      "runs": "Documentation/source-help controls, unchanged-record acceptance and public-source receiving checks; no new extraction, score, matrix cell, source family, native acceptance or adoption experiment",
+      "verdict": "kept",
+      "why": "Puts the limitation beside the action a newcomer follows and preserves historical criteria/results. N054 remains open for the complete public candidate packaging recipe; source questions and local evidence packets need no gateway or company-governance application.",
+      "source": [
+        "docs/JOURNAL.md#83-use-risk-tiers-to-order-review-not-accept-items",
+        "docs/TWIN_OUTPUTS.md#risk-tiers-where-to-spend-review-time",
+        "docs/REPLICATE_AT_YOUR_PLANT.md#offline-exact-candidate-ignition-preflight",
+        "docs/DATA_LINEAGE.md#what-this-does-not-prove"
+      ]
     }
   ],
   "not_tried": [
@@ -3718,9 +3735,12 @@
       "function": "intake_and_reuse",
       "status": "not-done",
       "idea": "A real-candidate recipe beside the offline preflight, an own-dataset handoff contract, and a domain warning beside the batch advice.",
-      "why_not_yet": "Cold-reader findings still open.",
+      "why_not_yet": "Partly addressed on 2026-10-30: current tier/CLI guidance now states domain and review-priority limits, and the own-input manifest/handoff contract has actual public-source receiving controls. The default candidate manifest/browser contract are uncommitted; actual bare preflight exits2 before native evidence. A complete public real-candidate packaging recipe is still missing. N054 stays not-done; no native acceptance or new-site validation is inferred.",
       "source": [
-        "docs/JOURNAL.md#37-take-a-cold-reader-documentation-review-seriously"
+        "docs/JOURNAL.md#37-take-a-cold-reader-documentation-review-seriously",
+        "docs/JOURNAL.md#83-use-risk-tiers-to-order-review-not-accept-items",
+        "docs/TWIN_OUTPUTS.md#risk-tiers-where-to-spend-review-time",
+        "docs/REPLICATE_AT_YOUR_PLANT.md#offline-exact-candidate-ignition-preflight"
       ]
     },
     {

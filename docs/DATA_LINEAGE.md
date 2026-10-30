@@ -282,10 +282,15 @@ These are built so we can iterate on them, and labelled that way in their own fi
 
 ## What this does not prove
 
-- **Fresh is not correct.** `status` says an output was rebuilt from its current inputs. It says nothing about
+- **Fresh is not correct.** `status` compares files with their last build or accepted-record hashes. It says nothing about
   whether those inputs are right; that is what Stage 0 and the review are for.
 - **A lock entry for a recorded stage** says the committed files were accepted as the record, not that this
   checkout re-ran the models. `pipeline.py record` after a manual check means someone says they ran it.
+  On 2026-10-30, the confidence module's help text was corrected to describe review priority rather than batch
+  acceptance. The two recorded model stages accepted their unchanged historical outputs with the new source
+  binding after executable-AST, coefficient/threshold and output-hash checks. No extraction, model build or score
+  was repeated; their historical extraction and later review/mapping provenance remains. The stage notes identify
+  that documentation-only renewal.
 - **The confidence rollup trusts the reviewer string.** A string that names an operations role counts as an
   operations review; nothing authenticates it. Anything else, including a confirmation by a non-process-expert,
   keeps its label in every output.

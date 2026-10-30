@@ -956,7 +956,7 @@
      "out/te_pid/twin/codex-clean-r1"
     ]
    ],
-   "requires_note": "the run records under runs/ (not committed), PID_SHEETS_DIR=data/te_pid/rev-a",
+   "requires_note": "the run records under runs/ (not committed), PID_SHEETS_DIR=data/te_pid/rev-a. 2026-10-30 documentation-only confidence guidance/source-binding renewal: executable AST, coefficients/thresholds and recorded model/result bytes unchanged. Historical outputs accepted unchanged, including later review/mapping provenance; no extraction/build/scoring run repeated.",
    "treatment": "The same converter as OPEN100; every item starts unverified.",
    "carries": "verification.status (unverified), risk.tier, tag_status",
    "checked_by": "te.pid_diff against the verified model"
@@ -1389,7 +1389,7 @@
      "--holdout-ok"
     ]
    ],
-   "requires_note": "the run records under runs/ (not committed); after building, review decisions are applied to this file in place",
+   "requires_note": "the run records under runs/ (not committed); after building, review decisions are applied to this file in place. 2026-10-30 documentation-only confidence guidance/source-binding renewal: executable AST, coefficients/thresholds and recorded model/result bytes unchanged. Historical outputs accepted unchanged, including later review/mapping provenance; no extraction/build/scoring run repeated.",
    "treatment": "Deterministic conversion; every item starts unverified, gets a risk tier and a plain-language reason. Review corrections and I/O mappings are then applied to this file by the edited_by tools.",
    "edited_by": [
     "python scripts/apply_review.py out/twin/r2-tiles-trace/codex/plant_model.json <reviewed.csv> --reviewer \"<ID>, <role>\"",

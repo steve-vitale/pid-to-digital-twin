@@ -8,7 +8,13 @@ Start with public data on a separate learning copy. Then decide whether a small,
 - **Tennessee Eastman (TE):** a **hand-built seed model**, verified against the simulator source (tag names and units; units, streams, flow directions and tag ownership), and generated screens driven by **recorded simulation replay**. The TE model and screens were not extracted from OPEN100. Replay is not a live process simulator responding to control changes.
 - **PID2Graph Synthetic:** two development sheets through a labeled-dataset adapter. Oracle-label scores test adapter consistency; model scores are development results. Ontology and line-semantics gaps remain. This is not a held-out plant trial. See [the adaptation guide](ADAPT_LABELED_DATASET.md).
 
-**Version matters.** This guide matches release v1.2.0 on `main`. Parts of it were written against development snapshots that were later published as one sanitized commit, so the short commit IDs in journal entries 30–32 are not in this repository's history. Confirm the files and revision you have before following the instructions. Historical screenshots, gateway receipts and the Docker backup do not validate the current provider/project exports. The current project passed native Ignition acceptance in a disposable lab gateway on 2026-10-13, including data-source loss and a 390 px `/m` overview (the control-room screens stay 1600 px); see the [native acceptance page](IGNITION_ACCEPTANCE.md). PI import has **not** been run.
+**Version matters.** Use the guide and scripts from the same checkout and record its commit (`git rev-parse HEAD`).
+Parts of the guide began as development snapshots later published as one sanitized commit, so the short commit
+IDs in journal entries 30–32 are not in this repository's history. Historical screenshots, gateway receipts and
+the Docker backup do not validate current exports. A 2026-10-13 candidate passed native Ignition acceptance in a
+disposable lab gateway, including data-source loss and a 390 px `/m` overview (the control-room screens stay
+1600 px); those receipts apply to that candidate. See the [native acceptance page](IGNITION_ACCEPTANCE.md).
+PI import has **not** been run.
 
 ## 2. Learn without customer drawings or a gateway
 
@@ -180,16 +186,41 @@ Keep observation read-only toward process systems: no PLC/DCS writes, control lo
 
 ### Offline exact-candidate Ignition preflight
 
-Before requesting native testing, use the read-only local preflight:
+This optional platform step is separate from a [first source question and evidence packet](../examples/first-pilot/README.md).
+It needs no company-context application, and a source investigation needs no gateway.
+
+**Required evidence is not in a public checkout.** The default paths
+`out/review/current-gateway-2026-10-10/manifest.json` and `browser-contract.json` are not committed. The bare
+preflight command therefore exits 2 for missing inputs. The public repository does not supply a complete
+candidate-package creator for them. Do not replace missing evidence with the synthetic test fixture or relabel
+historical receipts as a current run.
+
+If you already hold a matching candidate package, point the read-only checker at that folder and its actual
+root-relative manifest/contract paths (replace these illustrative paths):
 
 ```sh
-python -S scripts/ignition/acceptance_preflight.py
-python -S scripts/ignition/acceptance_preflight.py --require-native
+python -S scripts/ignition/acceptance_preflight.py --root /path/to/held-candidate --manifest review/manifest.json --contract review/browser-contract.json
+python -S scripts/ignition/acceptance_preflight.py --root /path/to/held-candidate --manifest review/manifest.json --contract review/browser-contract.json --require-native
 ```
 
-The default checks the manifest-listed build inputs, exact provider/project/build metadata and bound browser contract. It needs the already staged, hash-verified TE inputs; it never downloads missing files. It prints JSON and changes nothing. Historical test/handoff hash drift is reported separately, not treated as a current test run. Manifest-listed input checking is not a complete upstream source-dependency audit. The original receipts remain historical even where output bytes are unchanged.
+For a supplied matching package, the checker verifies the manifest-listed build inputs, exact provider/project/build
+metadata and bound browser contract. Its inventory and expected counts are specific to the TE/OPEN100 demonstration;
+`--root` does not adapt it to another plant. It needs the already staged files and never downloads missing inputs.
+It prints JSON and changes nothing. Historical test/handoff hash drift is reported separately, not treated as a
+current test run. Manifest-listed input checking is not a complete upstream source-dependency audit. The original
+receipts remain historical even where output bytes are unchanged.
 
-`--require-native` always returns nonzero, because this offline tool never establishes native acceptance by itself; it reports **NOT RUN**. The 2026-10-13 native run used the separate harness in `scripts/ignition/acceptance/` and is recorded in its own receipt. Future `--observations` input must be a root-relative local JSON file matching the exact candidate identity; synthetic fixtures and supplied native-capture claims remain clearly separated. Offline sample checks cover expected paths and quality: only the 52 recorded TE and 24 mapped OPEN100 paths require Good finite values and advancing/fresh source timestamps. SC-212 must remain Bad; 334 placeholders must remain non-Good and may have null/absent values and source timestamps. The metadata-only callout has no PV sample. These checks cannot authenticate provenance or substitute for actual gateway/browser observation. Import fidelity, history, navigation, display/alarm behavior, read-only configuration, write rejection, fault recovery and operator acceptance remain distinct gates. Only separately authorized isolated tests may perform imports, write probes or fault injection. See [the native acceptance page](IGNITION_ACCEPTANCE.md).
+`--require-native` always returns nonzero: invalid/missing inputs return 2; a valid offline-only package returns 3
+with native acceptance **NOT RUN**. The 2026-10-13 native run used the separate harness in
+`scripts/ignition/acceptance/` and is recorded in its own receipt. Future `--observations` input must be a
+root-relative local JSON file matching the exact candidate identity; synthetic fixtures and supplied native-capture
+claims remain clearly separated. Offline sample checks cover expected paths and quality: only the 52 recorded TE
+and 24 mapped OPEN100 paths require Good finite values and advancing/fresh source timestamps. SC-212 must remain
+Bad; 334 placeholders must remain non-Good and may have null/absent values and source timestamps. The metadata-only
+callout has no PV sample. These checks cannot authenticate provenance or substitute for actual gateway/browser
+observation. Import fidelity, history, navigation, display/alarm behavior, read-only configuration, write rejection,
+fault recovery and operator acceptance remain distinct gates. Only separately authorized isolated tests may perform
+imports, write probes or fault injection. See the [native acceptance page](IGNITION_ACCEPTANCE.md).
 
 ## 6. Acceptance evidence and stop conditions
 

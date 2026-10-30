@@ -177,6 +177,8 @@ controls change its state. Never point these tools at a production gateway.
 The offline preflight (`scripts/ignition/acceptance_preflight.py`, see
 [the replication guide](REPLICATE_AT_YOUR_PLANT.md#offline-exact-candidate-ignition-preflight)) checks a candidate's
 files before any of this. It cannot replace the gateway run.
+Its default manifest and browser contract are not committed; the public checkout alone cannot run that candidate
+check successfully. The linked guide states the required held-package inputs and the remaining packaging gap.
 
 ## The acceptance checklist
 

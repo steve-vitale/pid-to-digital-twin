@@ -1,7 +1,7 @@
 """Risk rating for every extracted item (round 3, docs/GOAL.md "Goal 1"): which symbols and links to look at first.
 
 A model's own confidence is a weak signal (Codex and Gemini say 0.9-1.0 for almost everything), so the rating is built
-from independent signals that exist at run time, WITHOUT the answer key. This file never reads an answer key; the
+from additional signals that exist at run time, WITHOUT the answer key. This file never reads an answer key; the
 fitting and scoring that need the key live in scripts/score_triage.py.
 
 Symbol signals (each 0..1, higher = more suspicious):
@@ -30,13 +30,19 @@ Link signals:
 
 The rating is a logistic regression with one weight per signal, fit on the development drawings (0-5) only, with
 every weight constrained to the sign the signal is meant to have (a "suspicious" signal can only raise risk). That
-keeps it monotonic and readable: the risk is a probability-like number, and each reason in "why" is a signal whose
-weight x value pushed the risk up. Weights live in scripts/confidence_model.json (written by score_triage.py --fit).
+keeps it monotonic and readable: the score is the fitted model's output, not a validated probability of error on
+unfamiliar drawings. Each reason in "why" is a signal whose weight x value pushed the score up. Weights live in
+scripts/confidence_model.json (written by score_triage.py --fit).
 
 Tiers (thresholds on the risk, set on the development drawings only, scripts/confidence_model.json):
-    green  risk below green_max: safe to batch-accept
-    amber  in between: quick check
-    red    risk at or above red_min: look closely
+    green  risk below green_max: lower review priority; still unreviewed until explicitly reviewed
+    amber  in between (or raised by an implemented review floor): check the source and flags
+    red    risk at or above red_min: higher review priority, not proof that the item is wrong
+
+No tier accepts an item. Development/holdout error fractions do not validate a new site's review or sampling
+policy. Check representative unfamiliar drawings against originals and agree review criteria; a spot-checked
+sample alone does not accept its unreviewed remainder. See docs/TWIN_OUTPUTS.md, "Risk tiers". Rating only covers
+output items, so it cannot find a symbol every extraction missed or establish source authority or safety duty.
 
 Twin instruments also get a parent second opinion (annotate_model): the twin is rebuilt with the other parent rule
 (along_line vs linked); when the two disagree the instrument is at least amber, with both candidates in "why".

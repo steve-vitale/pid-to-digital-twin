@@ -257,14 +257,30 @@ done; it was not run for this page.
 
 ## Risk tiers: where to spend review time
 
-Every symbol and every connection gets a risk score (roughly, the chance it is wrong) and a tier. The queue is
-sorted red first, then amber, then green, riskiest first inside each tier.
+When risk rating is available, extracted symbols and connections get a fitted score and a review-priority tier.
+The queue is sorted red first, then amber, then green, highest score first inside each tier. These scores were
+fitted on OPEN100 development drawings; they are not validated probabilities of error on a new plant's drawings.
+The own-drawing intake does not calculate this rating and uses its separate review flags.
+
+**A tier prioritizes review; it does not accept an item.** Before relying on the ordering for unfamiliar drawings,
+check representative sheets against their originals and agree the review criteria with the responsible engineer.
+Include missing items, tags, connections and safety-related duties; the score and tag-based floor cannot establish
+all of these. A spot-checked sample does not mark the unreviewed remainder accepted. The
+[review-effort protocol](REVIEW_EFFORT_PROTOCOL.md) provides a way to measure a bounded trial; no reviewer time
+saving has been demonstrated here.
 
 | Tier | Meaning | What to do |
 |---|---|---|
-| **Red** | More likely wrong than right (risk 50% or more). | Look closely at the sheet. Delete, relabel or fix. |
-| **Amber** | Probably right, with at least one warning sign. | Quick check against the sheet. |
-| **Green** | No strong warning sign, and not safety-relevant (see "The safety floor" below). On the development sheets, about 1 in 20 green items was wrong (1 in 8 to 1 in 16 when each sheet was left out of the fitting). | Spot-check a sample, then accept as a batch. |
+| **Red** | At or above the fitted model's red cutoff. This does not guarantee that most red items are wrong. | Check against the source first; correct or reject only when the evidence supports it. |
+| **Amber** | Intermediate score, or an applied review floor such as a parent disagreement or recognized safety-related tag. | Check the source and resolve the stated flags. |
+| **Green** | Lower fitted score, with no implemented floor raising it to amber. Unrecognized safety-related items can still be green. | Review later in the queue using the agreed criteria. Keep unreviewed items marked unreviewed. |
+
+The [saved holdout-A triage table](../out/triage_r2-tiles-trace_holdout-a.md) reports observed error fractions for
+those outputs and answer keys; they vary by tool and tier. Those historical fractions and development-set cutoff
+choices do not transfer as acceptance rates for another drafting style, scan quality, model run or plant. A match
+in that score tests symbol class/location or keyed link endpoints, not tag accuracy, parent assignment, drawing
+completeness, installed state or safety duty. Keep the [evaluation scope](EVALUATION.md) and
+[review records](REVIEW_LOOP.md) beside the queue.
 
 The `why` column says what raised the risk, in plain words. The rating doesn't trust the model's own confidence
 much, because Codex and Gemini say 0.9–1.0 for almost everything. It uses checks that need no answer key:
@@ -282,9 +298,9 @@ much, because Codex and Gemini say 0.9–1.0 for almost everything. It uses chec
 
 How it was built (`scripts/confidence.py`, fit by `scripts/score_triage.py --fit`): one logistic regression for
 symbols (10 signals) and one for links (7), fit on development sheets 0–5 only, with every weight forced to be zero
-or positive, so a warning sign can only raise risk. Signals that didn't help got a weight of zero: placeholder tags
-(placeholders are real symbols with an unassigned tag), duplicate tags, the `general` class, network size and,
-notably, the model's own confidence. The green and red cut-offs were also set on the development sheets. Results:
+or positive, so a warning sign can only raise risk. Signals with a zero fitted weight include placeholder tags
+(placeholders are real symbols with an unassigned tag), the `general` class, network size and the model's own
+confidence. Duplicate tags have a small nonzero weight. The green and red cut-offs were also set on the development sheets. Results:
 `out/triage_<label>_<split>.md`.
 
 **Limits a reviewer should know:**
@@ -295,8 +311,9 @@ notably, the model's own confidence. The green and red cut-offs were also set on
   (they read the same drawing, and every traced run uses the same line tracer), the item can land in green or amber.
 - **Without the other models' runs,** the agreement signals are neutral (0.5). The rating still works, but it
   ranks less sharply.
-- **Instrument parents get a second opinion, not a score.** The risk score is about "is this item real and
-  labeled right". For "which equipment does it hang under", the twin is also built with the other parent rule
+- **Instrument parents get a second opinion, not a score.** The fitted rating targets rough class/location and
+  keyed-link agreement; it does not establish tag-text correctness or equipment ownership. For "which equipment
+  does it hang under", the twin is also built with the other parent rule
   (`along_line` vs `linked`). When the two pick different equipment, the instrument is at least amber and `why`
   names both candidates (`parent_second_opinion` in `plant_model.json`). On the development sheets this happened
   to about 1 instrument in 20, and the along-the-line choice was right in 16 of 18 such cases. So it means "decide
@@ -304,13 +321,15 @@ notably, the model's own confidence. The green and red cut-offs were also set on
 
 ### The safety floor
 
-The tiers measure whether the extraction agrees with itself, not what the item does, so a relief valve that every
-model read the same way would be green. A process-safety reviewer checks those regardless. So, on top of the
-rating, an item whose function is safety-relevant is **never green**: a green tier becomes amber, and `why` starts
+The rating uses extraction and geometry signals; it does not determine an item's plant function. A relief device
+with a low fitted score could be green before this floor. On top of the rating, an instrument or in-line item
+whose recorded tag/fields match the implemented safety rules is raised from green to amber, and `why` starts
 with "safety-relevant (relief device): always checked" (or shutdown / on-off valve, trip switch, isolation valve).
 `why_check_this` names the basis (for example "tag letters PSV"). The risk score, the fitted weights and the green
 and red cut-offs are unchanged; the floor is reported on its own in `meta.risk_model.safety_floor` (and each moved
 item keeps `risk.tier_before_floor: "green"`).
+Unrecognized safety duties can remain green; the site reviewer still needs to identify them from the source and
+engineering context.
 
 **The rule** (`scripts/confidence.py`, `mark_safety` / `safety_floor`), from the model's own fields only:
 
