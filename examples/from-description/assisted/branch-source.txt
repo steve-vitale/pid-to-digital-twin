@@ -1,0 +1,11 @@
+ILLUSTRATIVE water utility; not a plant description.
+TK-1 is a water tank.
+P-1 is a water pump.
+E-1 is a water cooler, a heat exchanger.
+S1 feeds TK-1 from an upstream battery limit; S2 runs TK-1 to P-1.
+S3 runs P-1 to E-1; S4 returns E-1 to TK-1; S5 branches from S3 downstream of P-1 to a downstream battery limit.
+HV-201 is a manual block valve on S3 before the S5 branch.
+FT-201 measures flow on S5.
+FV-201 is a control valve on S5 downstream of FT-201.
+FIC-201 reads FT-201 and adjusts FV-201.
+Engineering units, pipe sizes, valve fail positions, operating limits and trips are not specified.

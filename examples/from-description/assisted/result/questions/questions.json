@@ -1,0 +1,341 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "C9",
+  "E25",
+  "E26",
+  "E27",
+  "E28",
+  "E29",
+  "E30",
+  "E31",
+  "E32",
+  "H5",
+  "H6",
+  "C11",
+  "C12"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 3,
+  "by_family": {
+   "controls": 1,
+   "energy": 1,
+   "safety_question": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E1@P-1",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "P-1",
+   "assets": [
+    {
+     "id": "P-1",
+     "tag": "P-1"
+    },
+    {
+     "id": "FV-101",
+     "tag": "FV-101"
+    },
+    {
+     "id": "FT-101",
+     "tag": "FT-101"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "P-1",
+     "tag": "P-1",
+     "text": "equipment P-1 reads \"P-1 Water pump\"",
+     "field": "units[P-1]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "FV-101",
+     "tag": "FV-101",
+     "text": "valve FV-101 reads \"FV-101 Discharge flow control valve\" at P-1",
+     "field": "final_elements[FV-101]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "FT-101",
+     "tag": "FT-101",
+     "text": "instrument FT-101 reads \"FT-101 Discharge flow measurement\" at P-1",
+     "field": "instruments[FT-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FV-101 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FT-101 (no historian tag is mapped in this model for these)",
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on P-1"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on P-1",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "C3@model",
+   "question_id": "C3",
+   "family": "controls",
+   "question": "Do these control valves lack position feedback?",
+   "about": "FV-101",
+   "assets": [
+    {
+     "id": "FV-101",
+     "tag": "FV-101"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FV-101",
+     "tag": "FV-101",
+     "text": "valve FV-101 reads \"FV-101 Discharge flow control valve\" at P-1",
+     "field": "final_elements[FV-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+      "maintenance records: valve records"
+     ],
+     "how": "List which valves report position."
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FV-101 (no historian tag is mapped in this model for these)",
+      "a walkdown: a small step test on each loop in manual"
+     ],
+     "how": "Compare controller output with measured response."
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   },
+   "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted.",
+   "status": "asked"
+  },
+  {
+   "id": "C9@model",
+   "question_id": "C9",
+   "family": "safety_question",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "about": "P-1",
+   "assets": [
+    {
+     "id": "P-1",
+     "tag": "P-1"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "P-1",
+     "tag": "P-1",
+     "text": "equipment P-1 reads \"P-1 Water pump\"",
+     "field": "units[P-1]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+      "DCS/PLC configuration: safety system configuration"
+     ],
+     "how": "Confirm what protects each machine and that it is tested."
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   },
+   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C1",
+  "C2",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "E25",
+  "E26",
+  "E27",
+  "E28",
+  "E29",
+  "E30",
+  "E31",
+  "E32",
+  "H5",
+  "H6",
+  "C11",
+  "C12"
+ ],
+ "left_out": {}
+}

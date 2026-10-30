@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d12" for="node" attr.name="model_ref" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="tank1">
+      <data key="d0">tank</data>
+      <data key="d1">698.0</data>
+      <data key="d2">902.0</data>
+      <data key="d3">758.0</data>
+      <data key="d4">1042.0</data>
+      <data key="d11">TK-1</data>
+      <data key="d12">unit:TK-1</data>
+    </node>
+    <node id="pump1">
+      <data key="d0">pump</data>
+      <data key="d1">1653.0</data>
+      <data key="d2">1747.0</data>
+      <data key="d3">853.0</data>
+      <data key="d4">947.0</data>
+      <data key="d11">P-1</data>
+      <data key="d12">unit:P-1</data>
+    </node>
+    <node id="inlet_outlet1">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">120</data>
+      <data key="d2">350</data>
+      <data key="d3">875.0</data>
+      <data key="d4">925.0</data>
+      <data key="d11">BATTERY LIMIT / WATER FEED</data>
+      <data key="d12">stream:S1</data>
+    </node>
+    <node id="inlet_outlet2">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">2750</data>
+      <data key="d2">2980</data>
+      <data key="d3">875.0</data>
+      <data key="d4">925.0</data>
+      <data key="d11">BATTERY LIMIT / WATER DISCHARGE</data>
+      <data key="d12">stream:S3</data>
+    </node>
+    <node id="arrow1">
+      <data key="d0">arrow</data>
+      <data key="d1">510.0</data>
+      <data key="d2">540.0</data>
+      <data key="d3">894.0</data>
+      <data key="d4">906.0</data>
+    </node>
+    <node id="arrow2">
+      <data key="d0">arrow</data>
+      <data key="d1">1262.5</data>
+      <data key="d2">1292.5</data>
+      <data key="d3">894.0</data>
+      <data key="d4">906.0</data>
+    </node>
+    <node id="instrumentation1">
+      <data key="d0">instrumentation</data>
+      <data key="d1">1975</data>
+      <data key="d2">2025</data>
+      <data key="d3">795</data>
+      <data key="d4">845</data>
+      <data key="d11">FT 101</data>
+      <data key="d12">FT-101</data>
+    </node>
+    <node id="valve1">
+      <data key="d0">valve</data>
+      <data key="d1">2387</data>
+      <data key="d2">2413</data>
+      <data key="d3">874</data>
+      <data key="d4">909</data>
+      <data key="d12">FV-101</data>
+    </node>
+    <node id="instrumentation2">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2375</data>
+      <data key="d2">2425</data>
+      <data key="d3">795</data>
+      <data key="d4">845</data>
+      <data key="d11">FV 101</data>
+      <data key="d12">FV-101</data>
+    </node>
+    <node id="connector1">
+      <data key="d0">connector</data>
+      <data key="d1">2396</data>
+      <data key="d2">2404</data>
+      <data key="d3">870</data>
+      <data key="d4">878</data>
+    </node>
+    <node id="arrow3">
+      <data key="d0">arrow</data>
+      <data key="d1">2232.5</data>
+      <data key="d2">2262.5</data>
+      <data key="d3">894.0</data>
+      <data key="d4">906.0</data>
+    </node>
+    <node id="instrumentation3">
+      <data key="d0">instrumentation</data>
+      <data key="d1">2225</data>
+      <data key="d2">2275</data>
+      <data key="d3">575</data>
+      <data key="d4">625</data>
+      <data key="d11">FIC 101</data>
+      <data key="d12">FIC-101</data>
+    </node>
+    <node id="connector2">
+      <data key="d0">connector</data>
+      <data key="d1">521.0</data>
+      <data key="d2">529.0</data>
+      <data key="d3">896.0</data>
+      <data key="d4">904.0</data>
+    </node>
+    <node id="connector3">
+      <data key="d0">connector</data>
+      <data key="d1">1273.5</data>
+      <data key="d2">1281.5</data>
+      <data key="d3">896.0</data>
+      <data key="d4">904.0</data>
+    </node>
+    <node id="connector4">
+      <data key="d0">connector</data>
+      <data key="d1">2068.5</data>
+      <data key="d2">2076.5</data>
+      <data key="d3">896.0</data>
+      <data key="d4">904.0</data>
+    </node>
+    <node id="connector5">
+      <data key="d0">connector</data>
+      <data key="d1">2571.0</data>
+      <data key="d2">2579.0</data>
+      <data key="d3">896.0</data>
+      <data key="d4">904.0</data>
+    </node>
+    <edge source="connector1" target="instrumentation2"><data key="d9">solid</data></edge>
+    <edge source="connector1" target="valve1"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="inlet_outlet1"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector3" target="pump1"><data key="d9">solid</data></edge>
+    <edge source="connector3" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="instrumentation1"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="pump1"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="valve1"><data key="d9">solid</data></edge>
+    <edge source="connector5" target="inlet_outlet2"><data key="d9">solid</data></edge>
+    <edge source="connector5" target="valve1"><data key="d9">solid</data></edge>
+  </graph>
+</graphml>

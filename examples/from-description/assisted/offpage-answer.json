@@ -1,0 +1,312 @@
+{
+  "model": {
+    "meta": {
+      "model_id": "illustrative-water",
+      "title": "Illustrative water utility",
+      "source_document": "source.txt",
+      "source_sha256": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+      "unknowns": [
+        "Flow engineering unit, valve fail position, line sizes, operating limits and trips are unspecified."
+      ],
+      "assumptions": [
+        "Symbol dimensions and locations are proposed drafting geometry, not plant dimensions."
+      ]
+    },
+    "units": [
+      {
+        "id": "TK-1",
+        "name": "Water tank",
+        "type": "tank",
+        "source": "source.txt:L2-L2"
+      },
+      {
+        "id": "P-1",
+        "name": "Water pump",
+        "type": "pump",
+        "source": "source.txt:L3-L3"
+      }
+    ],
+    "streams": [
+      {
+        "id": "S1",
+        "name": "Water feed",
+        "from": "BL",
+        "to": "TK-1",
+        "source": "source.txt:L4-L4"
+      },
+      {
+        "id": "S2",
+        "name": "Pump suction",
+        "from": "TK-1",
+        "to": "P-1",
+        "source": "source.txt:L4-L4"
+      },
+      {
+        "id": "S3",
+        "name": "Water discharge",
+        "from": "P-1",
+        "to": "BL",
+        "source": "source.txt:L4-L4"
+      }
+    ],
+    "instruments": [
+      {
+        "tag": "FT-101",
+        "unit": "P-1",
+        "stream": "S3",
+        "variable": "flow",
+        "uom": "",
+        "description": "Discharge flow measurement",
+        "source": "source.txt:L5-L5"
+      }
+    ],
+    "final_elements": [
+      {
+        "tag": "FV-101",
+        "unit": "P-1",
+        "stream": "S3",
+        "uom": "",
+        "description": "Discharge flow control valve",
+        "source": "source.txt:L6-L6"
+      }
+    ],
+    "controllers": [
+      {
+        "tag": "FIC-101",
+        "unit": "P-1",
+        "measurement": "FT-101",
+        "output": {
+          "final_element": "FV-101"
+        },
+        "source": "source.txt:L7-L7"
+      }
+    ]
+  },
+  "layout": {
+    "sheet_px": [
+      3200,
+      2130
+    ],
+    "control_valve_stations": false,
+    "line_label_prefix": "UNSIZED",
+    "register_header": "# Illustrative draft, not a plant drawing register.",
+    "title_block": {
+      "project": "ILLUSTRATIVE WATER UTILITY",
+      "drawn_by": "ASSISTED DRAFT",
+      "date": "UNKNOWN",
+      "revision": "DRAFT",
+      "scale": "NONE",
+      "notes": [
+        "NOT A DRAWING OF RECORD",
+        "SOURCE FACTS REQUIRE REVIEW",
+        "GEOMETRY IS PROPOSED ONLY",
+        "SIZE/SPEC ARE PLACEHOLDERS"
+      ]
+    },
+    "sheets": [
+      {
+        "id": "D1",
+        "drawing": "DRAFT-001",
+        "system": "WATER",
+        "title": "ILLUSTRATIVE WATER UTILITY",
+        "units": {
+          "TK-1": {
+            "shape": "vertical_vessel",
+            "cx": 800,
+            "top": 760,
+            "bottom": 1040,
+            "w": 200,
+            "head": 40
+          }
+        },
+        "flags": {
+          "IN": {
+            "stream": "S1",
+            "label": "WATER FEED",
+            "at": [
+              120,
+              900
+            ],
+            "dir": "right"
+          },
+          "NEXT": {
+            "stream": "S2",
+            "at": [
+              2400,
+              900
+            ],
+            "dir": "right"
+          }
+        },
+        "controllers": {},
+        "signals": [],
+        "routes": [
+          {
+            "id": "S1",
+            "stream": "S1",
+            "from": {
+              "flag": "IN"
+            },
+            "to": {
+              "unit": "TK-1"
+            },
+            "pts": [
+              [
+                350,
+                900
+              ],
+              [
+                700,
+                900
+              ]
+            ]
+          },
+          {
+            "id": "S2",
+            "stream": "S2",
+            "from": {
+              "unit": "TK-1"
+            },
+            "to": {
+              "flag": "NEXT"
+            },
+            "pts": [
+              [
+                900,
+                900
+              ],
+              [
+                2400,
+                900
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "D2",
+        "drawing": "DRAFT-003",
+        "system": "WATER",
+        "title": "ILLUSTRATIVE WATER UTILITY",
+        "units": {
+          "P-1": {
+            "shape": "pump",
+            "at": [
+              1700,
+              900
+            ],
+            "r": 45
+          }
+        },
+        "flags": {
+          "IN": {
+            "stream": "S2",
+            "label": "WATER FEED",
+            "at": [
+              120,
+              900
+            ],
+            "dir": "right"
+          },
+          "OUT": {
+            "stream": "S3",
+            "label": "WATER DISCHARGE",
+            "at": [
+              2750,
+              900
+            ],
+            "dir": "right"
+          }
+        },
+        "controllers": {
+          "FIC-101": [
+            2250,
+            600
+          ]
+        },
+        "signals": [
+          {
+            "from": "FT-101",
+            "to": "FIC-101",
+            "via": [
+              [
+                2000,
+                600
+              ]
+            ]
+          },
+          {
+            "from": "FIC-101",
+            "to": "FV-101",
+            "via": [
+              [
+                2400,
+                600
+              ]
+            ]
+          }
+        ],
+        "routes": [
+          {
+            "id": "S2",
+            "stream": "S2",
+            "from": {
+              "flag": "IN"
+            },
+            "to": {
+              "unit": "P-1"
+            },
+            "pts": [
+              [
+                350,
+                900
+              ],
+              [
+                1655,
+                900
+              ]
+            ]
+          },
+          {
+            "id": "S3",
+            "stream": "S3",
+            "from": {
+              "unit": "P-1"
+            },
+            "to": {
+              "flag": "OUT"
+            },
+            "pts": [
+              [
+                1745,
+                900
+              ],
+              [
+                2750,
+                900
+              ]
+            ],
+            "place": {
+              "FT-101": [
+                2000,
+                900
+              ],
+              "FV-101": [
+                2400,
+                900
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": {
+    "source.txt:L2-L2": "TK-1 is a water tank.",
+    "source.txt:L3-L3": "P-1 pumps water from TK-1 to a downstream battery limit.",
+    "source.txt:L4-L4": "S1 feeds TK-1 from an upstream battery limit; S2 runs TK-1 to P-1; S3 runs P-1 to the downstream battery limit.",
+    "source.txt:L5-L5": "FT-101 measures flow on S3 downstream of P-1.",
+    "source.txt:L6-L6": "FV-101 is a control valve on S3, downstream of FT-101.",
+    "source.txt:L7-L7": "FIC-101 reads FT-101 and adjusts FV-101."
+  }
+}

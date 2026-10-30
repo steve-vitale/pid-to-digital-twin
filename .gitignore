@@ -14,6 +14,9 @@ data/external/pid2graph/PID2Graph/Complete/*
 !data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100 scan-L3/
 .env
 .venv/
+# The description quickstart's generated local packets are not publication inputs.
+out/description-packet/
+out/description-result/
 *.gwbk
 *.key
 runs/*/

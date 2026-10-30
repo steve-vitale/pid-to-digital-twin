@@ -4704,3 +4704,40 @@ Completing the description route remains implementation work: a company-approved
 preserve source locations, unknowns and assumptions, produce valid model/layout inputs, render them, and return
 useful validation feedback for review. Its end-to-end evaluation still needs the separate source and rendered
 output checks described in evaluation section 8. A documentation caveat does not complete that missing workflow.
+
+## 98. Connect description authoring to the actual review bundle
+
+The standalone renderer needs a model and drafting layout. The missing practical connection was a packaged way
+to give an approved assistant the source and format, check its response and run the downstream tools together.
+`description_workflow.py` now supplies prepare, check and build commands. Preparation preserves raw UTF-8 source
+bytes, numbers the lines and writes a prompt, contract and separate illustrative answer. The engineer uses the
+company-approved assistant, then saves its JSON response. The command calls no model API and assumes no working
+Copilot tenant or particular file-transfer channel.
+
+Checking requires source spans and exact quotations on represented records, unknowns and assumptions, supported
+model references and a bounded layout. Building renders the draft PNG/SVG P&IDs, exports logical/platform staging,
+runs the question engine and exports the graph. The bundle keeps the source, authored answer, model and layout,
+validation, review instructions and payload hashes together. Existing destinations are refused. It is an initial
+review packet; the company retains continuing authority, ownership, decisions and execution.
+
+Actual independent probes caught important errors in the first private candidate. A layout could draw a different
+endpoint while the graph retained the model's connection; an unknown stream could be added. An unsupported
+controller output key still drew a signal but silently lost its graph edge. Extreme column coordinates reached
+a native rendering loop before geometry validation. A model tank could also be drawn as a pump. These cases now
+have early consistency/type/bounds checks and regression controls. Tees resolve the parent route's corresponding
+upstream/downstream endpoint; paired off-page flags connect complementary route pieces. Ambiguous networks,
+unsourced utility routes and unsupported symbol choices return feedback instead of a guessed simplification.
+The standalone historical renderer's broader contract and existing outputs are unchanged.
+
+The corrective review also found that an answer could replace the drawing's notes with an operating-approval
+label while leaving the model unverified. The first-draft route now requires a fixed DRAFT revision and the four
+reference disclaimers on every drawing. This protects the drawing's own status when it travels separately from
+the rest of the packet; it is not semantic detection of every misleading statement in arbitrary source text.
+
+Three authored illustrative development fixtures build: a simple water utility, a branch with cooler recycle,
+and a two-sheet continuation. The generated branch drawing was inspected, and the tests check preservation,
+inventory completeness, native output creation and planted conflicts. They do not measure a model's ability to
+interpret unfamiliar prose. A deliberate incorrect equipment name with a genuine quotation still passes the
+format check: quotation matching locates evidence, and a person must assess what it supports. Readable labels,
+physical nozzle attachment, source authority/completeness and actual plant correctness still require review.
+No automatic detailed layout, tenant deployment, operating acceptance or new corpus score is claimed.

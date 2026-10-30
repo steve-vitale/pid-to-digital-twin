@@ -1,0 +1,178 @@
+{
+ "about": "Answer key emitted by scripts/draw_pid_from_model.py from the same model that drew the sheets. Scoring against it is a ROUND TRIP: it measures how faithfully a reader recovers our own clean house-style drawing, not real-plant accuracy.",
+ "model": "model.json",
+ "sheets": {
+  "D1": {
+   "drawing": "DRAFT-001",
+   "system": "WATER",
+   "title": "ILLUSTRATIVE WATER UTILITY",
+   "size_px": [
+    3200,
+    2130
+   ],
+   "symbols": {
+    "tank1": {
+     "class": "tank",
+     "box": [
+      698.0,
+      758.0,
+      902.0,
+      1042.0
+     ],
+     "text": "TK-1",
+     "model_ref": "unit:TK-1",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "pump1": {
+     "class": "pump",
+     "box": [
+      1653.0,
+      853.0,
+      1747.0,
+      947.0
+     ],
+     "text": "P-1",
+     "model_ref": "unit:P-1",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "inlet_outlet1": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      875.0,
+      350,
+      925.0
+     ],
+     "text": "BATTERY LIMIT / WATER FEED",
+     "model_ref": "stream:S1",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet2": {
+     "class": "inlet/outlet",
+     "box": [
+      2750,
+      875.0,
+      2980,
+      925.0
+     ],
+     "text": "BATTERY LIMIT / WATER DISCHARGE",
+     "model_ref": "stream:S3",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "instrumentation1": {
+     "class": "instrumentation",
+     "box": [
+      1975,
+      795,
+      2025,
+      845
+     ],
+     "text": "FT 101",
+     "model_ref": "FT-101",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    },
+    "valve1": {
+     "class": "valve",
+     "box": [
+      2387,
+      874,
+      2413,
+      909
+     ],
+     "text": null,
+     "model_ref": "FV-101",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation2": {
+     "class": "instrumentation",
+     "box": [
+      2375,
+      795,
+      2425,
+      845
+     ],
+     "text": "FV 101",
+     "model_ref": "FV-101",
+     "model_kind": "final_element",
+     "drafting_addition": false
+    },
+    "instrumentation3": {
+     "class": "instrumentation",
+     "box": [
+      2225,
+      575,
+      2275,
+      625
+     ],
+     "text": "FIC 101",
+     "model_ref": "FIC-101",
+     "model_kind": "controller",
+     "drafting_addition": false,
+     "loop": "FIC-101"
+    }
+   },
+   "edges": [
+    [
+     "connector1",
+     "instrumentation2"
+    ],
+    [
+     "connector1",
+     "valve1"
+    ],
+    [
+     "connector2",
+     "inlet_outlet1"
+    ],
+    [
+     "connector2",
+     "tank1"
+    ],
+    [
+     "connector3",
+     "pump1"
+    ],
+    [
+     "connector3",
+     "tank1"
+    ],
+    [
+     "connector4",
+     "instrumentation1"
+    ],
+    [
+     "connector4",
+     "pump1"
+    ],
+    [
+     "connector4",
+     "valve1"
+    ],
+    [
+     "connector5",
+     "inlet_outlet2"
+    ],
+    [
+     "connector5",
+     "valve1"
+    ]
+   ],
+   "signal_edges": [
+    [
+     "instrumentation1",
+     "instrumentation3"
+    ],
+    [
+     "instrumentation3",
+     "instrumentation2"
+    ]
+   ]
+  }
+ }
+}

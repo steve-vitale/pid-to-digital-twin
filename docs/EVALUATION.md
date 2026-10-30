@@ -439,6 +439,11 @@ not tuned on; both had been scored as baselines, and OPEN100 is only partly blin
 
 ## 8. Description-to-P&ID evaluation gap
 
+The [packaged assisted route](../examples/from-description/README.md#try-the-connected-route-offline) now connects
+numbered source text, an approved assistant's authored answer, local validation and the generated review bundle.
+Its three illustrative fixtures and planted faults test software behavior and internal consistency. They do not
+supply the unfamiliar-description interpretation measurement planned below.
+
 The [written-description route](../examples/from-description/README.md) requires a sourced process model and an
 authored drafting layout. The current generalization matrix has no end-to-end description-to-P&ID accuracy row.
 Row 5 tests platform exports; rows 4 and 8 test their loop and tracing contracts on existing drawings. Generator

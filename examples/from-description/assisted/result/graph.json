@@ -1,0 +1,647 @@
+{
+ "schema": "twin-graph-1",
+ "source_model": "model.json",
+ "model_kind": "hand_built",
+ "title": "Illustrative water utility",
+ "nodes": [
+  {
+   "id": "PLANT",
+   "kind": "plant",
+   "tag": "illustrative-water",
+   "name": "Illustrative water utility",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assumptions",
+     "value": [
+      "Symbol dimensions and locations are proposed drafting geometry, not plant dimensions."
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_document",
+     "value": "source.txt",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_sha256",
+     "value": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "unknowns",
+     "value": [
+      "Flow engineering unit, valve fail position, line sizes, operating limits and trips are unspecified."
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    }
+   ]
+  },
+  {
+   "id": "BL",
+   "kind": "boundary",
+   "tag": null,
+   "name": "battery limit",
+   "aliases": [],
+   "status": "confirmed",
+   "attributes": []
+  },
+  {
+   "id": "TK-1",
+   "kind": "equipment",
+   "tag": "TK-1",
+   "name": "Water tank",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Water tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L2-L2"
+     }
+    },
+    {
+     "name": "type",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L2-L2"
+     }
+    }
+   ]
+  },
+  {
+   "id": "P-1",
+   "kind": "equipment",
+   "tag": "P-1",
+   "name": "Water pump",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Water pump",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "type",
+     "value": "pump",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    }
+   ]
+  },
+  {
+   "id": "FT-101",
+   "kind": "instrument",
+   "tag": "FT-101",
+   "name": "Discharge flow measurement",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "description",
+     "value": "Discharge flow measurement",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "stream",
+     "value": "S3",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "unit",
+     "value": "P-1",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "uom",
+     "value": "",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "variable",
+     "value": "flow",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    }
+   ]
+  },
+  {
+   "id": "FV-101",
+   "kind": "final_element",
+   "tag": "FV-101",
+   "name": "Discharge flow control valve",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "description",
+     "value": "Discharge flow control valve",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    },
+    {
+     "name": "stream",
+     "value": "S3",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    },
+    {
+     "name": "unit",
+     "value": "P-1",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    },
+    {
+     "name": "uom",
+     "value": "",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "FIC-101",
+   "kind": "controller",
+   "tag": "FIC-101",
+   "name": null,
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "unit",
+     "value": "P-1",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    }
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "id": "E00001",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "TK-1",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L2-L2"
+   }
+  },
+  {
+   "id": "E00002",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "P-1",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L3-L3"
+   }
+  },
+  {
+   "id": "S1",
+   "type": "connects",
+   "from": "BL",
+   "to": "TK-1",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L4-L4"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Water feed",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "S2",
+   "type": "connects",
+   "from": "TK-1",
+   "to": "P-1",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L4-L4"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Pump suction",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "S3",
+   "type": "connects",
+   "from": "P-1",
+   "to": "BL",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L4-L4"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Water discharge",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "E00006",
+   "type": "measures",
+   "from": "FT-101",
+   "to": "P-1",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L5-L5"
+   }
+  },
+  {
+   "id": "E00007",
+   "type": "sits_on",
+   "from": "FT-101",
+   "to": "stream:S3",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L5-L5"
+   }
+  },
+  {
+   "id": "E00008",
+   "type": "acts_on",
+   "from": "FV-101",
+   "to": "P-1",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   }
+  },
+  {
+   "id": "E00009",
+   "type": "sits_on",
+   "from": "FV-101",
+   "to": "stream:S3",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   }
+  },
+  {
+   "id": "E00010",
+   "type": "controls",
+   "from": "FT-101",
+   "to": "FIC-101",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L7-L7"
+   }
+  },
+  {
+   "id": "E00011",
+   "type": "controls",
+   "from": "FIC-101",
+   "to": "FV-101",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L7-L7"
+   }
+  }
+ ],
+ "questions": [
+  {
+   "id": "E1@P-1",
+   "question_id": "E1",
+   "family": "energy",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "about": "P-1",
+   "assets": [
+    {
+     "id": "P-1",
+     "tag": "P-1"
+    },
+    {
+     "id": "FV-101",
+     "tag": "FV-101"
+    },
+    {
+     "id": "FT-101",
+     "tag": "FT-101"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "P-1",
+     "tag": "P-1",
+     "text": "equipment P-1 reads \"P-1 Water pump\"",
+     "field": "units[P-1]"
+    },
+    {
+     "role": "control valve on the discharge",
+     "id": "FV-101",
+     "tag": "FV-101",
+     "text": "valve FV-101 reads \"FV-101 Discharge flow control valve\" at P-1",
+     "field": "final_elements[FV-101]"
+    },
+    {
+     "role": "flow measurement",
+     "id": "FT-101",
+     "tag": "FT-101",
+     "text": "instrument FT-101 reads \"FT-101 Discharge flow measurement\" at P-1",
+     "field": "instruments[FT-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FV-101 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the valve's controller output",
+      "a walkdown: read the positioner stroke indicator at several rates"
+     ],
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FT-101 (no historian tag is mapped in this model for these)",
+      "site records: production rate records"
+     ],
+     "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+     "item": "Pump rated flow and head",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on P-1"
+     ],
+     "how": "Copy the rated flow and head and get the pump curve."
+    },
+    {
+     "item": "Motor rating and speed",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on P-1",
+      "maintenance records: motor record card"
+     ],
+     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+    },
+    {
+     "item": "Static head versus friction head",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: elevations and pressures at the suction source and the delivery point",
+      "site records: line list or isometrics for pipe lengths and sizes"
+     ],
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "C3@model",
+   "question_id": "C3",
+   "family": "controls",
+   "question": "Do these control valves lack position feedback?",
+   "about": "FV-101",
+   "assets": [
+    {
+     "id": "FV-101",
+     "tag": "FV-101"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "FV-101",
+     "tag": "FV-101",
+     "text": "valve FV-101 reads \"FV-101 Discharge flow control valve\" at P-1",
+     "field": "final_elements[FV-101]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+      "maintenance records: valve records"
+     ],
+     "how": "List which valves report position."
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FV-101 (no historian tag is mapped in this model for these)",
+      "a walkdown: a small step test on each loop in manual"
+     ],
+     "how": "Compare controller output with measured response."
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   },
+   "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted.",
+   "status": "asked"
+  },
+  {
+   "id": "C9@model",
+   "question_id": "C9",
+   "family": "safety_question",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "about": "P-1",
+   "assets": [
+    {
+     "id": "P-1",
+     "tag": "P-1"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "P-1",
+     "tag": "P-1",
+     "text": "equipment P-1 reads \"P-1 Water pump\"",
+     "field": "units[P-1]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+      "DCS/PLC configuration: safety system configuration"
+     ],
+     "how": "Confirm what protects each machine and that it is tested."
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   },
+   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "status": "asked"
+  }
+ ],
+ "events": [],
+ "not_exported": [],
+ "counts": {
+  "nodes": 7,
+  "edges": 11,
+  "claims": 21,
+  "questions": 3,
+  "events": 0
+ }
+}

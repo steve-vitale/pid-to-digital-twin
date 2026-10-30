@@ -500,6 +500,58 @@
    "you_need": "An approved IT developer environment, optional pinned MCP SDK, and a selected twin-graph-1 JSON snapshot; shared authentication and Copilot reachability require separate work",
    "time": "Local developer setup; company deployment and engineering review time unmeasured",
    "you_get": "Six read-only snapshot tools and a summary resource, with source claims, statuses, fingerprints and bounded paging. Public-example SDK/stdio/loopback tests; no source fetching, process-data connector or shared company deployment"
+  },
+  {
+   "id": "description-workflow",
+   "category": "model",
+   "title": "A description packet through approved-assistant authoring to a checked draft bundle",
+   "tools": [
+    "scripts/description_workflow.py"
+   ],
+   "guide": "examples/from-description/README.md",
+   "example_outputs": [
+    "examples/from-description/assisted/source.txt",
+    "examples/from-description/assisted/branch-source.txt",
+    "examples/from-description/assisted/branch-answer.json",
+    "examples/from-description/assisted/offpage-answer.json",
+    "examples/from-description/assisted/result/REVIEW.md",
+    "examples/from-description/assisted/result/answer.json",
+    "examples/from-description/assisted/result/build.json",
+    "examples/from-description/assisted/result/exports/ignition/tags.json",
+    "examples/from-description/assisted/result/exports/ops_review_sheet.csv",
+    "examples/from-description/assisted/result/exports/pi/IMPORT_STEPS.txt",
+    "examples/from-description/assisted/result/exports/pi/attribute_descriptions.csv",
+    "examples/from-description/assisted/result/exports/pi/custom_uoms.csv",
+    "examples/from-description/assisted/result/exports/pi/pi_builder_af.csv",
+    "examples/from-description/assisted/result/exports/seed_export_manifest.json",
+    "examples/from-description/assisted/result/exports/seed_review_projection.json",
+    "examples/from-description/assisted/result/exports/svg/P-1.svg",
+    "examples/from-description/assisted/result/exports/svg/TK-1.svg",
+    "examples/from-description/assisted/result/exports/svg/overview.svg",
+    "examples/from-description/assisted/result/graph.json",
+    "examples/from-description/assisted/result/layout.json",
+    "examples/from-description/assisted/result/model.json",
+    "examples/from-description/assisted/result/packet.json",
+    "examples/from-description/assisted/result/pid/D1.graphml",
+    "examples/from-description/assisted/result/pid/D1.png",
+    "examples/from-description/assisted/result/pid/D1.svg",
+    "examples/from-description/assisted/result/pid/key.json",
+    "examples/from-description/assisted/result/pid/manifest.json",
+    "examples/from-description/assisted/result/pid/sheet_register.csv",
+    "examples/from-description/assisted/result/questions/questions.json",
+    "examples/from-description/assisted/result/questions/screen.md",
+    "examples/from-description/assisted/result/source.txt",
+    "examples/from-description/assisted/result/source_numbered.txt",
+    "examples/from-description/assisted/result/validation.json"
+   ],
+   "tests": [
+    "scripts/test_description_workflow.py"
+   ],
+   "job": "Connect a written description to a locally checkable model, drawing, questions and graph",
+   "why": "Engineers need a usable authoring contract and feedback loop between their approved assistant and the separate generation tools. One packet makes the interpretation, unknowns and resulting outputs inspectable before company handoff.",
+   "you_need": "Cleared UTF-8 description, an engineer or approved assistant to author native model/layout JSON, and approved Python/drawing dependencies for local checks and generation",
+   "time": "Authored development fixtures only; assistant quality and engineering review time unmeasured",
+   "you_get": "Numbered source/prompt/contract, exact quotation and directed consistency feedback, then draft P&ID PNG/SVG, question screen, sourced graph and platform staging with payload hashes. No automatic interpretation/layout, tested Copilot tenant or plant approval"
   }
  ]
 }

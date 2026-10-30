@@ -1,0 +1,107 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "name": "_types_",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "Tank",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": []
+        },
+        {
+          "name": "Pump",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "DischargeFlowMeasurement",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "FT-101 | source.txt:L5-L5 | Discharge flow measurement | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FT-101"
+              }
+            },
+            {
+              "name": "DischargeFlowControlValve",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "FV-101 | source.txt:L6-L6 | Discharge flow control valve | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.FV-101"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "illustrative-water",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "TK-1",
+          "tagType": "UdtInstance",
+          "typeId": "Tank",
+          "documentation": "Water tank | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=illustrative-water.TK-1"
+            }
+          }
+        },
+        {
+          "name": "P-1",
+          "tagType": "UdtInstance",
+          "typeId": "Pump",
+          "documentation": "Water pump | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=illustrative-water.P-1"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

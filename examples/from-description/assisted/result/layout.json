@@ -1,0 +1,168 @@
+{
+  "sheet_px": [
+    3200,
+    2130
+  ],
+  "control_valve_stations": false,
+  "line_label_prefix": "UNSIZED",
+  "register_header": "# Illustrative draft, not a plant drawing register.",
+  "title_block": {
+    "project": "ILLUSTRATIVE WATER UTILITY",
+    "drawn_by": "ASSISTED DRAFT",
+    "date": "UNKNOWN",
+    "revision": "DRAFT",
+    "scale": "NONE",
+    "notes": [
+      "NOT A DRAWING OF RECORD",
+      "SOURCE FACTS REQUIRE REVIEW",
+      "GEOMETRY IS PROPOSED ONLY",
+      "SIZE/SPEC ARE PLACEHOLDERS"
+    ]
+  },
+  "sheets": [
+    {
+      "id": "D1",
+      "drawing": "DRAFT-001",
+      "system": "WATER",
+      "title": "ILLUSTRATIVE WATER UTILITY",
+      "units": {
+        "TK-1": {
+          "shape": "vertical_vessel",
+          "cx": 800,
+          "top": 760,
+          "bottom": 1040,
+          "w": 200,
+          "head": 40
+        },
+        "P-1": {
+          "shape": "pump",
+          "at": [
+            1700,
+            900
+          ],
+          "r": 45
+        }
+      },
+      "flags": {
+        "IN": {
+          "stream": "S1",
+          "label": "WATER FEED",
+          "at": [
+            120,
+            900
+          ],
+          "dir": "right"
+        },
+        "OUT": {
+          "stream": "S3",
+          "label": "WATER DISCHARGE",
+          "at": [
+            2750,
+            900
+          ],
+          "dir": "right"
+        }
+      },
+      "controllers": {
+        "FIC-101": [
+          2250,
+          600
+        ]
+      },
+      "signals": [
+        {
+          "from": "FT-101",
+          "to": "FIC-101",
+          "via": [
+            [
+              2000,
+              600
+            ]
+          ]
+        },
+        {
+          "from": "FIC-101",
+          "to": "FV-101",
+          "via": [
+            [
+              2400,
+              600
+            ]
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "S1",
+          "stream": "S1",
+          "from": {
+            "flag": "IN"
+          },
+          "to": {
+            "unit": "TK-1"
+          },
+          "pts": [
+            [
+              350,
+              900
+            ],
+            [
+              700,
+              900
+            ]
+          ]
+        },
+        {
+          "id": "S2",
+          "stream": "S2",
+          "from": {
+            "unit": "TK-1"
+          },
+          "to": {
+            "unit": "P-1"
+          },
+          "pts": [
+            [
+              900,
+              900
+            ],
+            [
+              1655,
+              900
+            ]
+          ]
+        },
+        {
+          "id": "S3",
+          "stream": "S3",
+          "from": {
+            "unit": "P-1"
+          },
+          "to": {
+            "flag": "OUT"
+          },
+          "pts": [
+            [
+              1745,
+              900
+            ],
+            [
+              2750,
+              900
+            ]
+          ],
+          "place": {
+            "FT-101": [
+              2000,
+              900
+            ],
+            "FV-101": [
+              2400,
+              900
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

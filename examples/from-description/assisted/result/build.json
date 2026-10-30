@@ -1,0 +1,48 @@
+{
+  "mode": "assisted_draft",
+  "source_sha256": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+  "answer_sha256": "9711b7f1f7613f2d25d598dc38e1476032d92d384322788fac71734f8440fcc8",
+  "code_sha256": {
+    "description_workflow.py": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594",
+    "draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28",
+    "generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "question_engine.py": "bd7b4027e03c682cbeeb297b814f279259f6ca5f3776794114378e713a59ee79",
+    "graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2"
+  },
+  "files_sha256": {
+    "answer.json": "9711b7f1f7613f2d25d598dc38e1476032d92d384322788fac71734f8440fcc8",
+    "graph.json": "d75f07dd4e4801b50e6646597efa223dd6c08358ecc4b8607d9cf5d56b271563",
+    "layout.json": "5de65e16a27bfdc92ebf5a7a71a4f442474d024aee6d3bbef26025f6c36c4c09",
+    "model.json": "7523c5f8f5b4918e1fd00315d332befc68b0888d35b48ccb31fd8f71399f99f4",
+    "packet.json": "06a7dfc98dfd707ab4e886d28b7fa67c647abd3da06a8dd9d09644b922f090f7",
+    "source.txt": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+    "source_numbered.txt": "135234ecb19ca7c10a5ff442bdf0b73bcd8bd84181449e8f2d9cecab56f978f7",
+    "exports/ops_review_sheet.csv": "e03fce04f6c65001d3fe04add2bae11f53b64d08123b3dbe940e0e5f74772394",
+    "exports/seed_export_manifest.json": "0588bf76e5e72fa940d3cd7fd196235dcbe2ddc2107dee376398c70cdf12adb3",
+    "exports/seed_review_projection.json": "7ae6ed40cf47145b2975465e34309d4d99507a8afc6a9d398f74cea71424728a",
+    "pid/D1.graphml": "46479c2adf003eccf718a099261f25d8ff2923375f4b532ded59fbc47adbaec8",
+    "pid/D1.png": "7b4a46f8fe54ac7ff6e1c7e2bc80721b3c136c7bcf111707f3854bcc454de768",
+    "pid/D1.svg": "369e912752d5f14ca1307e9ac1c7e0ee3a11598d770760f2ea8256c218a1438e",
+    "pid/key.json": "280cf9f65a82a55234d911263e547a84961b9838a3864cddb0cd1b48fc0a37e1",
+    "pid/manifest.json": "2702769e2decb06808e4c3765388242ea2bedebd59089efc287740daaa1f773a",
+    "pid/sheet_register.csv": "5f2251cb19cf345143d37cce802822c55f4fdc744f17a7fbd1a5af884afe69b0",
+    "questions/questions.json": "f5932ef24f2801bc00a4b9add05f52bd3c4d3fd921fb70f5a7ee121813d738b7",
+    "questions/screen.md": "9edd0363d272f912d158aeab8f6b0aae4d6eecaad82f9d8b1ec4b0644f6c727d",
+    "exports/ignition/tags.json": "2fa09782fddf70f5422d0cf4753d795b57a43de9013430b88d990953f33c0ab9",
+    "exports/pi/attribute_descriptions.csv": "10c29785961b1ad399c087a7a606d7fe58058b1456e0dbeaf07d8da77622c492",
+    "exports/pi/custom_uoms.csv": "1ccb9a299570e814268abb43e9d0fe9b073a03e986b007f2a1330fd8a9f2c31c",
+    "exports/pi/IMPORT_STEPS.txt": "f483b2d39dd0196849f843dd428db908daf7394ede56790b7ae7be62d51efd70",
+    "exports/pi/pi_builder_af.csv": "58e67cca179376fe0af1367acb23c94cddc5ca3ab114145258fef437a441da1b",
+    "exports/svg/overview.svg": "707d4a77846e6dd260abf8f7aa1d5938dce5fa2b4c0823b9e400a1a72a83c419",
+    "exports/svg/P-1.svg": "fd07d1bcfc6585e4b0ead093d050cf2ef3aa6d2f51e78a701899ee175a9544af",
+    "exports/svg/TK-1.svg": "cd3675a0a81aa8ebee2cd5b3b4642fe5620e82d8650ae226d371c053a26e8a4d",
+    "validation.json": "0faa64c65acea8dd54ccecb6ec3078a1fc00b57ff5d4b95be08158edd9d21d42",
+    "REVIEW.md": "c206b954799147329de1a98914866b5a710937017f55491d0362f2087e2dfb1e"
+  },
+  "source_acquisition_time": null,
+  "limits": [
+    "Exact quotations locate supplied evidence; they do not verify every engineering assertion.",
+    "Drafting geometry is authored; no automatic layout or plant acceptance is established.",
+    "The approved assistant/client and source authority require company approval; no tenant was tested."
+  ]
+}

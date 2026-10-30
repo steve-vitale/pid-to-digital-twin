@@ -1,0 +1,366 @@
+{
+  "model": {
+    "meta": {
+      "model_id": "illustrative-branch",
+      "title": "Illustrative branch and recycle",
+      "source_document": "source.txt",
+      "source_sha256": "6bb042f23d8b2b83fdbcbf78c1e7d19febdba1971f1f978965c160a4f9cae5ae",
+      "unknowns": [
+        "Flow engineering unit, valve fail position, line sizes, operating limits and trips are unspecified."
+      ],
+      "assumptions": [
+        "Symbol dimensions and locations are proposed drafting geometry, not plant dimensions."
+      ]
+    },
+    "units": [
+      {
+        "id": "TK-1",
+        "name": "Water tank",
+        "type": "tank",
+        "source": "source.txt:L2-L2"
+      },
+      {
+        "id": "P-1",
+        "name": "Water pump",
+        "type": "pump",
+        "source": "source.txt:L3-L3"
+      },
+      {
+        "id": "E-1",
+        "name": "Water cooler",
+        "type": "heat_exchanger",
+        "source": "source.txt:L4-L4"
+      }
+    ],
+    "streams": [
+      {
+        "id": "S1",
+        "name": "Water feed",
+        "from": "BL",
+        "to": "TK-1",
+        "source": "source.txt:L5-L5"
+      },
+      {
+        "id": "S2",
+        "name": "Pump suction",
+        "from": "TK-1",
+        "to": "P-1",
+        "source": "source.txt:L5-L5"
+      },
+      {
+        "id": "S3",
+        "name": "Cooler feed",
+        "from": "P-1",
+        "to": "E-1",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "S4",
+        "name": "Cooler return",
+        "from": "E-1",
+        "to": "TK-1",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "S5",
+        "name": "Water discharge",
+        "from": "P-1",
+        "to": "BL",
+        "source": "source.txt:L6-L6"
+      }
+    ],
+    "instruments": [
+      {
+        "tag": "FT-201",
+        "unit": "P-1",
+        "stream": "S5",
+        "variable": "flow",
+        "uom": "",
+        "description": "Discharge flow measurement",
+        "source": "source.txt:L8-L8"
+      }
+    ],
+    "final_elements": [
+      {
+        "tag": "FV-201",
+        "unit": "P-1",
+        "stream": "S5",
+        "uom": "",
+        "description": "Discharge flow valve",
+        "source": "source.txt:L9-L9"
+      }
+    ],
+    "controllers": [
+      {
+        "tag": "FIC-201",
+        "unit": "P-1",
+        "measurement": "FT-201",
+        "output": {
+          "final_element": "FV-201"
+        },
+        "source": "source.txt:L10-L10"
+      }
+    ],
+    "manual_valves": [
+      {
+        "tag": "HV-201",
+        "unit": "P-1",
+        "stream": "S3",
+        "description": "Cooler feed block valve",
+        "source": "source.txt:L7-L7"
+      }
+    ]
+  },
+  "layout": {
+    "sheet_px": [
+      3200,
+      2130
+    ],
+    "control_valve_stations": false,
+    "line_label_prefix": "UNSIZED",
+    "register_header": "# Illustrative draft, not a plant drawing register.",
+    "title_block": {
+      "project": "ILLUSTRATIVE WATER UTILITY",
+      "drawn_by": "ASSISTED DRAFT",
+      "date": "UNKNOWN",
+      "revision": "DRAFT",
+      "scale": "NONE",
+      "notes": [
+        "NOT A DRAWING OF RECORD",
+        "SOURCE FACTS REQUIRE REVIEW",
+        "GEOMETRY IS PROPOSED ONLY",
+        "SIZE/SPEC ARE PLACEHOLDERS"
+      ]
+    },
+    "sheets": [
+      {
+        "id": "D1",
+        "drawing": "DRAFT-002",
+        "system": "WATER",
+        "title": "ILLUSTRATIVE BRANCH AND RECYCLE",
+        "units": {
+          "TK-1": {
+            "shape": "vertical_vessel",
+            "cx": 800,
+            "top": 760,
+            "bottom": 1040,
+            "w": 200,
+            "head": 40
+          },
+          "P-1": {
+            "shape": "pump",
+            "at": [
+              1500,
+              900
+            ],
+            "r": 45
+          },
+          "E-1": {
+            "shape": "horizontal_exchanger",
+            "x0": 2100,
+            "x1": 2400,
+            "cy": 900,
+            "h": 100
+          }
+        },
+        "flags": {
+          "IN": {
+            "stream": "S1",
+            "label": "WATER FEED",
+            "at": [
+              120,
+              900
+            ],
+            "dir": "right"
+          },
+          "OUT": {
+            "stream": "S5",
+            "label": "WATER DISCHARGE",
+            "at": [
+              2450,
+              1450
+            ],
+            "dir": "right"
+          }
+        },
+        "controllers": {
+          "FIC-201": [
+            2250,
+            1150
+          ]
+        },
+        "signals": [
+          {
+            "from": "FT-201",
+            "to": "FIC-201",
+            "via": [
+              [
+                2150,
+                1150
+              ]
+            ]
+          },
+          {
+            "from": "FIC-201",
+            "to": "FV-201",
+            "via": [
+              [
+                2350,
+                1150
+              ]
+            ]
+          }
+        ],
+        "routes": [
+          {
+            "id": "S1",
+            "stream": "S1",
+            "from": {
+              "flag": "IN"
+            },
+            "to": {
+              "unit": "TK-1"
+            },
+            "pts": [
+              [
+                350,
+                900
+              ],
+              [
+                700,
+                900
+              ]
+            ]
+          },
+          {
+            "id": "S2",
+            "stream": "S2",
+            "from": {
+              "unit": "TK-1"
+            },
+            "to": {
+              "unit": "P-1"
+            },
+            "pts": [
+              [
+                900,
+                900
+              ],
+              [
+                1455,
+                900
+              ]
+            ]
+          },
+          {
+            "id": "S3",
+            "stream": "S3",
+            "from": {
+              "unit": "P-1"
+            },
+            "to": {
+              "unit": "E-1"
+            },
+            "pts": [
+              [
+                1545,
+                900
+              ],
+              [
+                2100,
+                900
+              ]
+            ],
+            "place": {
+              "HV-201": [
+                1750,
+                900
+              ]
+            }
+          },
+          {
+            "id": "S4",
+            "stream": "S4",
+            "from": {
+              "unit": "E-1"
+            },
+            "to": {
+              "unit": "TK-1"
+            },
+            "pts": [
+              [
+                2400,
+                900
+              ],
+              [
+                2700,
+                900
+              ],
+              [
+                2700,
+                500
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                800,
+                760
+              ]
+            ]
+          },
+          {
+            "id": "S5",
+            "stream": "S5",
+            "from": {
+              "tee": "S3",
+              "at": [
+                1900,
+                900
+              ]
+            },
+            "to": {
+              "flag": "OUT"
+            },
+            "pts": [
+              [
+                1900,
+                900
+              ],
+              [
+                1900,
+                1450
+              ],
+              [
+                2450,
+                1450
+              ]
+            ],
+            "place": {
+              "FT-201": [
+                2150,
+                1450
+              ],
+              "FV-201": [
+                2350,
+                1450
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": {
+    "source.txt:L2-L2": "TK-1 is a water tank.",
+    "source.txt:L3-L3": "P-1 is a water pump.",
+    "source.txt:L4-L4": "E-1 is a water cooler, a heat exchanger.",
+    "source.txt:L5-L5": "S1 feeds TK-1 from an upstream battery limit; S2 runs TK-1 to P-1.",
+    "source.txt:L6-L6": "S3 runs P-1 to E-1; S4 returns E-1 to TK-1; S5 branches from S3 downstream of P-1 to a downstream battery limit.",
+    "source.txt:L7-L7": "HV-201 is a manual block valve on S3 before the S5 branch.",
+    "source.txt:L8-L8": "FT-201 measures flow on S5.",
+    "source.txt:L9-L9": "FV-201 is a control valve on S5 downstream of FT-201.",
+    "source.txt:L10-L10": "FIC-201 reads FT-201 and adjusts FV-201."
+  }
+}

@@ -6419,6 +6419,162 @@
     "case-1.stderr": "8847f992f405047fce7a2a5c5d49a5fcc1548b5810b5cb716f3ca9110156b266",
     "removed-writer.stderr": "9fed9f59ddda55c8b32f11a01f8681484fac13d9e9b58149526b18896843cd76"
    }
+  },
+  {
+   "feature": "description-workflow",
+   "reviewer": "Independent Codex coding agent: iterative description-workflow contract, preservation and authored-fixture software review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 33,
+   "file_hash_method": "Registered file/support bindings use SHA256 after CRLF to LF byte normalization, matching the catalog selector. Exact raw source/answer and generated-artifact inventories are separately exercised; private proof hashes are raw SHA256.",
+   "files": {
+    "examples/from-description/assisted/source.txt": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+    "examples/from-description/assisted/branch-source.txt": "6bb042f23d8b2b83fdbcbf78c1e7d19febdba1971f1f978965c160a4f9cae5ae",
+    "examples/from-description/assisted/branch-answer.json": "9bf9a2fc9f2fd25a3f9903878100b3f99d19e88dcf6bde22b605871f94186e19",
+    "examples/from-description/assisted/offpage-answer.json": "5001894877c49e129f1600784a0943e463e939a6642caf0c0676f961957e353b",
+    "examples/from-description/assisted/result/REVIEW.md": "c206b954799147329de1a98914866b5a710937017f55491d0362f2087e2dfb1e",
+    "examples/from-description/assisted/result/answer.json": "9711b7f1f7613f2d25d598dc38e1476032d92d384322788fac71734f8440fcc8",
+    "examples/from-description/assisted/result/build.json": "fde75357398ca30866423d638b132e5f4304b72bd912aaa7de5c04722e068f54",
+    "examples/from-description/assisted/result/exports/ignition/tags.json": "2fa09782fddf70f5422d0cf4753d795b57a43de9013430b88d990953f33c0ab9",
+    "examples/from-description/assisted/result/exports/ops_review_sheet.csv": "e03fce04f6c65001d3fe04add2bae11f53b64d08123b3dbe940e0e5f74772394",
+    "examples/from-description/assisted/result/exports/pi/IMPORT_STEPS.txt": "f483b2d39dd0196849f843dd428db908daf7394ede56790b7ae7be62d51efd70",
+    "examples/from-description/assisted/result/exports/pi/attribute_descriptions.csv": "10c29785961b1ad399c087a7a606d7fe58058b1456e0dbeaf07d8da77622c492",
+    "examples/from-description/assisted/result/exports/pi/custom_uoms.csv": "1ccb9a299570e814268abb43e9d0fe9b073a03e986b007f2a1330fd8a9f2c31c",
+    "examples/from-description/assisted/result/exports/pi/pi_builder_af.csv": "58e67cca179376fe0af1367acb23c94cddc5ca3ab114145258fef437a441da1b",
+    "examples/from-description/assisted/result/exports/seed_export_manifest.json": "0588bf76e5e72fa940d3cd7fd196235dcbe2ddc2107dee376398c70cdf12adb3",
+    "examples/from-description/assisted/result/exports/seed_review_projection.json": "7ae6ed40cf47145b2975465e34309d4d99507a8afc6a9d398f74cea71424728a",
+    "examples/from-description/assisted/result/exports/svg/P-1.svg": "fd07d1bcfc6585e4b0ead093d050cf2ef3aa6d2f51e78a701899ee175a9544af",
+    "examples/from-description/assisted/result/exports/svg/TK-1.svg": "cd3675a0a81aa8ebee2cd5b3b4642fe5620e82d8650ae226d371c053a26e8a4d",
+    "examples/from-description/assisted/result/exports/svg/overview.svg": "707d4a77846e6dd260abf8f7aa1d5938dce5fa2b4c0823b9e400a1a72a83c419",
+    "examples/from-description/assisted/result/graph.json": "d75f07dd4e4801b50e6646597efa223dd6c08358ecc4b8607d9cf5d56b271563",
+    "examples/from-description/assisted/result/layout.json": "5de65e16a27bfdc92ebf5a7a71a4f442474d024aee6d3bbef26025f6c36c4c09",
+    "examples/from-description/assisted/result/model.json": "7523c5f8f5b4918e1fd00315d332befc68b0888d35b48ccb31fd8f71399f99f4",
+    "examples/from-description/assisted/result/packet.json": "06a7dfc98dfd707ab4e886d28b7fa67c647abd3da06a8dd9d09644b922f090f7",
+    "examples/from-description/assisted/result/pid/D1.graphml": "46479c2adf003eccf718a099261f25d8ff2923375f4b532ded59fbc47adbaec8",
+    "examples/from-description/assisted/result/pid/D1.png": "5e9305bde5e2aec93bbacac6207796f53a292f7b66ce40ee835a03c386a06f75",
+    "examples/from-description/assisted/result/pid/D1.svg": "369e912752d5f14ca1307e9ac1c7e0ee3a11598d770760f2ea8256c218a1438e",
+    "examples/from-description/assisted/result/pid/key.json": "280cf9f65a82a55234d911263e547a84961b9838a3864cddb0cd1b48fc0a37e1",
+    "examples/from-description/assisted/result/pid/manifest.json": "2702769e2decb06808e4c3765388242ea2bedebd59089efc287740daaa1f773a",
+    "examples/from-description/assisted/result/pid/sheet_register.csv": "5f2251cb19cf345143d37cce802822c55f4fdc744f17a7fbd1a5af884afe69b0",
+    "examples/from-description/assisted/result/questions/questions.json": "f5932ef24f2801bc00a4b9add05f52bd3c4d3fd921fb70f5a7ee121813d738b7",
+    "examples/from-description/assisted/result/questions/screen.md": "9edd0363d272f912d158aeab8f6b0aae4d6eecaad82f9d8b1ec4b0644f6c727d",
+    "examples/from-description/assisted/result/source.txt": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+    "examples/from-description/assisted/result/source_numbered.txt": "135234ecb19ca7c10a5ff442bdf0b73bcd8bd84181449e8f2d9cecab56f978f7",
+    "examples/from-description/assisted/result/validation.json": "0faa64c65acea8dd54ccecb6ec3078a1fc00b57ff5d4b95be08158edd9d21d42"
+   },
+   "supporting_files": {
+    "scripts/description_workflow.py": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594",
+    "scripts/test_description_workflow.py": "1140de1926a130f354ae411350084948bdaa8bd55ef34c7abb9decff0c76c044",
+    "scripts/draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28",
+    "scripts/generate.py": "f178c3480f0be11c703b29a8c2bbcdc9047f9317c78cdafd04b0ca9d9e111d24",
+    "scripts/question_engine.py": "bd7b4027e03c682cbeeb297b814f279259f6ca5f3776794114378e713a59ee79",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/serve_snapshot.py": "f333a4e328583711d71cfb13446d4c7910f65cf6bcbd3172e5cc5c0df30aedfd",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "requirements.txt": "a7e58f9cdc7b395e162ab27f61b2eac1ff74abcd6c495c3abcea55237268bdbf",
+    ".gitattributes": "4900114a40079620b6f108f552866538ad2747661bcfd45e508b2265d0a512cf",
+    "scripts/run_tests.py": "1eb7cbf9139617d2d37b26f291efade15488bb1722f720c02bbdcaf34f383e59",
+    "data/features.json": "1cc0686f7dd3e7d7c52774f82359caf003cd57b956af2cdf4cc2b7fa013c16e1",
+    "data/script_index.json": "9e9014d4e684bcf474bf100d045a2a0fc4ab04e47a995ef7f278d534d7237af1",
+    "examples/from-description/README.md": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d",
+    "docs/CONTEXT_LIFECYCLE.md": "d66f024735d7c12af5f67e45ab9b4ab15f93193685b0e2ceafef26e0d1f5f8f9",
+    "docs/EVALUATION.md": "3cb8ac7e2e2de84920412ba386c456fa68da3fb1fd386fd663e7e1d74284dd3c",
+    ".gitignore": "d805dde820c6eb8c6e65bc10e2530dac4c29755456e7ac7e1f12482a56daa1c3"
+   },
+   "supporting_excerpts": [
+    {
+     "path": "README.md",
+     "selector": "From Start with a small, reviewable packet. to immediately before These are prototype tools tested on public inputs.; rstrip then one LF",
+     "sha256_lf": "c3bb5259ac4dbecb088f46f9f44fb57ad10706a057a66f1bb9601ad0140e0df0",
+     "text": "Start with a small, reviewable packet. Drawings and supported CAD exports\ncan seed a draft asset model; a written description can enter an approved-assistant authoring and local validation\nworkflow. Controls records and\nhistorian CSVs have their own checks and analyses. Linking their findings to assets requires reviewed identity\nmapping. Check the model's claims where a model is used, investigate useful questions and retain the answers\nwith their evidence. The first result is a portable engineering packet that another person can understand\nand continue: what the records say, what remains unknown and what evidence the next decision needs.\n"
+    },
+    {
+     "path": "README.md",
+     "selector": "Complete Description → process model and review bundle route row plus one LF",
+     "sha256_lf": "04899cf541ad39ccc6e59b5e5feedc4c6e63d129fcdd65109662b3883a022cbf",
+     "text": "| **Description → process model and review bundle** | [Prepare → approved assistant → check → build](examples/from-description/README.md#try-the-connected-route-offline) packages numbered text, a complete answer contract, validation feedback, draft sheets, questions, graph and platform staging. It calls no model API. | The engineer or assistant authors the interpretation and layout. Local checks locate quotations and check structure/consistency; they cannot establish engineering truth. Copilot tenant support and unfamiliar-description accuracy are untested. |\n"
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "id": "DWF-1",
+     "finding": "The first private candidate accepted a layout that contradicted the model stream endpoint and an extra unknown-stream route.",
+     "resolution": "The workflow now checks directed unit/flag/tee equivalence, existing streams, one route per stream per sheet and complementary paired continuation roles before native rendering. Original inputs refuse; positive branch/recycle and offpage fixtures build."
+    },
+    {
+     "id": "DWF-2",
+     "finding": "An unsupported controller output key was drawn as a signal but silently omitted as a graph control edge.",
+     "resolution": "Exactly one supported output key and typed distinct target identities are required. The original unsupported shape refuses. Generated model/graph control edges are checked in the scoped regression suite."
+    },
+    {
+     "id": "DWF-3",
+     "finding": "Extreme finite column geometry reached the drawing loop before frame validation and exceeded the bounded probe time.",
+     "resolution": "Typed finite geometry, ranges and collection sizes are checked before native drawing. Original and matching-type extreme geometry now refuse promptly without publishing output."
+    },
+    {
+     "id": "DWF-4",
+     "finding": "The initial candidate allowed a tank model to use a pump drawing symbol.",
+     "resolution": "The supported subset has an explicit fixed equipment-type/symbol mapping. The incompatible symbol input refuses; advanced alternate symbols remain outside this authoring route."
+    },
+    {
+     "id": "DWF-5",
+     "finding": "Assistant title metadata could remove draft warnings and label an independently consumable drawing approved while the model remained unverified.",
+     "resolution": "The workflow requires revision DRAFT and the four exact source/geometry/placeholder disclaimers. The actual approved-label counterexample now refuses before publication."
+    },
+    {
+     "id": "DWF-6",
+     "finding": "The maintainer found platform text newlines in generated files made raw bundle inventories unsuitable for portable committed fixtures.",
+     "resolution": "Generated text is packaged as LF before inventory; Markdown hardbreak spelling is preserved with a backslash newline. Raw source and answer, including BOM/CRLF, and PNG bytes remain exact. Independent final controls verified emitted raw and native LF hash conventions."
+    }
+   ],
+   "checks": [
+    "The package supplies prepare, check and build around the existing native model/layout contracts. It calls no model API, accepts no client-specified executable/URL/file include, and keeps interpretation and detailed geometry authored. Fixed trusted tool invocation and new-output-only publication were inspected; paths resolve from the script repository rather than the caller working directory.",
+    "Independent private discovery used 18 top-level subprocess attempts on the original candidate:17 completed and one deliberately extreme invalid geometry case was terminated after3seconds. The refusal gap and all source-preservation evidence were retained; this was not presented as an engineering accuracy measurement or hidden as a harness success.",
+    "On the first portable repaired script, independently executed21 scoped CLIs from another working directory: positive linear, branch/recycle and two-sheet builds; original counterexample replays; cyclic/unknown/wrong-side tee and wrong-stream/same-role/unused-flag continuation refusals. Twenty declared expectations passed. A separate accepted bounding-box corner-port case records the documented limit: actual nozzle attachment still needs rendered review. Two additional CLIs then demonstrated the title-approval defect before its repair.",
+    "On the subsequent title repair, independently executed10 direct CLI controls and the10-case registered regression suite, with no skipped case. All original counterexamples and the approved-label input refused; valid linear/branch/offpage cases remained usable. Evidence from that hash remains separate from the final packaging followup.",
+    "On final workflow hash4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594, independently ran four focused CLIs and the current10-case regression suite: standard-library prepare, BOM+CRLF source and answer build, approved-label refusal and exact standard-bundle reproduction. Source/answer raw bytes, generated LF text, raw bundle inventory and both native renderer/seed manifest conventions all match. The final29-file committed result was reproduced byte for byte. Only build changed function AST from the preceding title-repair version; its change is selective preinventory text normalization.",
+    "All existing fixture bytes were preserved around the probes. The existing destination and answer-file destination refuse; existing aliases are also covered by the inspected lexists new-directory guard. No comprehensive alias, concurrency/atomic-transaction or filesystem security claim is made. The native tools execute in isolated temporary directories before publication; tested generation refusals leave the requested final directory absent.",
+    "The linear PNG, branch/recycle PNG and both offpage PNGs were inspected for basic readable labels, the represented paths, signals and continuation references. They were coherent in these illustrative fixtures. This is a bounded software/visual review, not a general drawing-quality score, pixel interpretation accuracy or a site engineering acceptance.",
+    "The regression suite verifies native model/graph equipment and directed/control relationships, output inventory, question screen and staging files. It loads the generated graph through the existing local Snapshot class and reads an asset plus nonempty questions; no MCP SDK session, tenant/client connection, listener or company service is claimed by that check.",
+    "The guide supplies the actual offline example, approved-assistant handoff, exact answer contract, feedback loop, supported restrictions and company-home next step. It explicitly says source quotations locate evidence but do not prove interpretation, preserves unresolved facts and requires rendered/source review. The evaluation-guide change adds only the authored-fixture software scope; its unfamiliar-description evaluation remains unperformed.",
+    "The registry adds only this new feature and33 example paths:4 authored illustrative input/answer fixtures and29 generated linear-bundle files. Previous18 feature objects and113 registered outputs remain exact against the preceding release. Test runner/index registration and raw-byte fixture attributes were reviewed. No old feature, matrix cell, source interpretation, native acceptance or method result is renewed; evolving journal/ledger/generated feature tables are excluded.",
+    "The final company-content instructions require an approved private folder outside the public checkout and say local preparation grants no public-sharing clearance. The ignore file adds only the two illustrative quickstart destinations; it is not represented as company-data access control. This is a narrowly read prose/packaging addition; code,33 paths and actual control results are unchanged."
+   ],
+   "actual_validation": {
+    "original_private_top_level_attempts": 18,
+    "original_deliberate_invalid_geometry_timeout": 1,
+    "intermediate_portable_cli_calls": 21,
+    "intermediate_approval_counterexample_calls": 2,
+    "title_repair_direct_cli_calls": 10,
+    "title_repair_registered_tests": 10,
+    "final_packaging_direct_cli_calls": 4,
+    "final_registered_tests": 10,
+    "final_registered_test_skips": 0,
+    "final_linear_artifact_files_raw_byte_reproduced": 29,
+    "registered_paths_bound": 33,
+    "prior_registered_outputs_statically_unchanged": 113
+   },
+   "limits": [
+    "These are authored illustrative development fixtures and corrective software review. No unfamiliar-description submission, actual assistant interpretation quality, tested Copilot tenant/client or timed engineer review is established.",
+    "Exact quotations and fingerprints locate selected evidence; they do not establish current revision, document authority, completeness, physical plant truth or every engineering assertion. A source-backed-looking incorrect interpretation can still pass.",
+    "Layout remains authored. Supported type/route/bounds checks are narrower than general geometry validation; label collisions, actual nozzle attachment, unintended crossings and engineering drawing quality still need rendered-sheet review. No automatic detailed layout or general model/graph inverse is added.",
+    "Local toolkit dependencies and approved operation are required for check/build. Source clearance and assistant/file transfer approval belong to the company. No company authentication, live process connector, operational signal mapping, native plant import, operating decision, savings or safety outcome is demonstrated.",
+    "The toolkit ends at an inspectable first packet and company handoff. Ongoing authority, permissions, ownership, decisions and history remain in the company system; this package is not that system.",
+    "Actual local controls and retained hashes do not certify every operating system or future CI result. This review does not claim the separately executed broader full suite."
+   ],
+   "private_proof_hash_method": "Exact raw SHA256; no newline normalization.",
+   "private_proof_hashes": {
+    "pre-repair-independent-review.json": "3052e67eb8ee48927db56d5daa76a74ba47bcf5aeb15968b2fd9fbb6e08bceb3",
+    "repair-probes.json": "5c03cb51fe7fc69a868c733b736f4ded090b37e0777f6454f2bd2680cc212162",
+    "approval-label-probe.json": "59e28e59fd4e1ed289984ba2bf6ee89c8a9e4e4722eda03e709856716871d135",
+    "title-final-controls.json": "bbcafdf18454e8430042c9971b7de195e69cbfe5e76e11502c32469fea38142e",
+    "newline-controls.json": "bbcac9df0619a3d357ecd58c3ab2bfa71e950dfb7960efc36b94f83883bc52d9",
+    "final-public-bindings-final.json": "2a7d31a30447f56f0abad6ad35c63a3e0dbbbb10e6f840434daf509eadc3faef",
+    "proposed-public-feature-review.json": "5eff6ad0e98ccab812d2f5fbbc318b40b87e1db3e61f5070d8ce850b20fa8edb"
+   }
   }
  ]
 }

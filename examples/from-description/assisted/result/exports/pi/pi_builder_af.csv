@@ -1,0 +1,8 @@
+﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
+x,,Tank,ElementTemplate,Seed model unit type: tank,,,,,
+x,,Pump,ElementTemplate,Seed model unit type: pump,,,,,
+x,,illustrative-water,Element,Illustrative water utility,,,,,
+x,illustrative-water,TK-1,Element,Water tank | source check: unverified | ops review: unverified,Tank,,,,
+x,illustrative-water,P-1,Element,Water pump | source check: unverified | ops review: unverified,Pump,,,,
+x,illustrative-water\P-1,DischargeFlowMeasurement,Attribute,,,Double,,PI Point,\\%Server%\illustrative-water.FT-101.PV
+x,illustrative-water\P-1,DischargeFlowControlValve,Attribute,,,Double,,PI Point,\\%Server%\illustrative-water.FV-101.PV
