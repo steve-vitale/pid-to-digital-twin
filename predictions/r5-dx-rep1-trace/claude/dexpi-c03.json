@@ -1,0 +1,46 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "claude",
+ "drawing": "dexpi-c03",
+ "label": "r5-dx-rep1-trace",
+ "model": "claude-opus-5-5[1m]",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "307a3fb5636bf7423b5f3a84a131f238e04f187407994be665d131a00c582003",
+ "ran_at": "2026-10-13T11:11:20+00:00",
+ "seconds": 40.6,
+ "cost_usd": null,
+ "cost_usd_notional": 0.2653,
+ "error": null,
+ "parse_error": null,
+ "source_label": "r5-dx-rep1-tiles",
+ "tiling": {"grid":"2x2","overlap":0.15,"preface_sha256":"642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3","tile_seconds_sum":146.8,"tiles_failed":0},
+ "tracer": {"script":"scripts/trace_connections.py","mode":"replace","seconds":0.7,"ran_at":"2026-10-13T11:13:53+00:00"},
+ "prediction": {
+  "symbols": [
+   {"id":"s1","class":"instrumentation","bbox":{"x_min":268.7,"y_min":43.2,"x_max":335.7,"y_max":197.8},"tag":"ESD","confidence":0.7},
+   {"id":"s2","class":"instrumentation","bbox":{"x_min":51.9,"y_min":195.1,"x_max":114.6,"y_max":314.6},"tag":"ESV 3712","confidence":0.9},
+   {"id":"s3","class":"instrumentation","bbox":{"x_min":204.4,"y_min":282.7,"x_max":267.6,"y_max":403.2},"tag":"ESV 3712","confidence":0.9},
+   {"id":"s4","class":"valve","bbox":{"x_min":278.4,"y_min":382.1,"x_max":326.5,"y_max":540.5},"tag":"ESV 3712","confidence":0.85},
+   {"id":"s5","class":"general","bbox":{"x_min":129.2,"y_min":413.5,"x_max":162.2,"y_max":451.3},"tag":null,"confidence":0.5},
+   {"id":"s6","class":"general","bbox":{"x_min":436.8,"y_min":501.1,"x_max":462.8,"y_max":584.9},"tag":null,"confidence":0.6},
+   {"id":"s7","class":"general","bbox":{"x_min":465.5,"y_min":504.4,"x_max":504.9,"y_max":582.2},"tag":null,"confidence":0.55},
+   {"id":"s8","class":"general","bbox":{"x_min":507.5,"y_min":506.0,"x_max":535.6,"y_max":555.7},"tag":"0200x0800","confidence":0.8},
+   {"id":"s9","class":"inlet/outlet","bbox":{"x_min":541.5,"y_min":71.3,"x_max":710.2,"y_max":152.4},"tag":null,"confidence":0.6},
+   {"id":"s10","class":"valve","bbox":{"x_min":279.0,"y_min":504.4,"x_max":326.0,"y_max":582.2},"tag":null,"confidence":0.85},
+   {"id":"s11","class":"general","bbox":{"x_min":460.5,"y_min":500.0,"x_max":466.9,"y_max":584.9},"tag":null,"confidence":0.55}
+  ],
+  "connections": [
+   {"from":"s1","to":"s2"},
+   {"from":"s1","to":"s4"},
+   {"from":"s10","to":"s4"},
+   {"from":"s10","to":"s5"},
+   {"from":"s10","to":"s6"},
+   {"from":"s2","to":"s4"},
+   {"from":"s4","to":"s5"},
+   {"from":"s4","to":"s6"},
+   {"from":"s7","to":"s8"},
+   {"from":"s8","to":"s9"}
+  ]
+ }
+}

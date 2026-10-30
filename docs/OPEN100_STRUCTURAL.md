@@ -6,7 +6,7 @@ while the Tennessee Eastman track (process knowledge, no drawing) got the mimic,
 the LOTO mockup. Most of those don't need process data. They need structure, and the drawings carry structure.
 
 This page covers the structural deliverables built from the drawings alone, how far each one goes, and how it was
-checked. The [deliverables matrix](../README.md#what-you-can-do-with-only-drawings-only-process-knowledge-or-both)
+checked. The [deliverables matrix](DELIVERABLES.md)
 puts both tracks side by side.
 
 | Deliverable | Output | Still |

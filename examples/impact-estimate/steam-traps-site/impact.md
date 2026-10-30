@@ -35,7 +35,7 @@ Rounded to 3 significant figures; the working below carries more. A positive num
 This estimate holds only if all of these are true:
 
 1. Failed steam traps on the 150 psig main: the steam rate entered holds for all 8,760 h/yr.
-2. Failed steam traps on the 150 psig main: each pound of steam carries the stated energy from feedwater to steam, and the steam conditions do not change through the year.
+2. Failed steam traps on the 150 psig main: each pound carries the stated enthalpy difference at the measured boundary, and those conditions do not change through the year.
 3. Failed steam traps on the 150 psig main: boiler efficiency is constant at this load, and the fuel saved is priced at the margin.
 4. Failed steam traps on the 150 psig main: Scope 1 covers combustion only (no upstream fuel supply); water, treatment chemicals and pumping are not costed.
 5. Where a range is entered, the result carries both ends. That is the spread of what was entered, not a probability interval.

@@ -1,6 +1,6 @@
 # Your own historian export: replay it over OPC UA and learn normal bands from it
 
-**Why it matters:** Normal bands catch a value drifting before it reaches an alarm, and replaying recorded data lets you test new screens without touching the live system.
+**Why it matters:** Normal bands highlight unusual changes in recorded values, and replaying recorded data lets you test new screens without touching the live system.
 
 The Tennessee Eastman (TE) screens get their values from `scripts/ignition/te_sim_server.py` and their normal bands
 from `scripts/normal_bands.py`. Both read the TE `.dat` files only. The two tools here do the same jobs for **any**
@@ -9,13 +9,24 @@ historian-style CSV, so a plant can try them on its own export:
 - `scripts/csv_replay_server.py` replays the CSV over OPC UA, one row per step (read-only nodes, same conventions as the
   TE server). It is not a simulator: the values are the recorded ones and do not respond to anything.
 - `scripts/csv_normal_bands.py` learns per-tag normal bands from a CSV of normal running, then scores a second CSV.
-  Two methods:
-  - `--method drift` (the default, for real plant data): each tag is compared with its own recent past. The gap
+  Three methods, and a default that picks between the first two:
+  - `--method auto` (the default): `cyclic` when the data has a daily cycle, otherwise `drift`. "Has a daily cycle"
+    means: the first column is a timestamp, the fit rows (the first half of the normal CSV) span at least 2 days,
+    and a time-of-day profile fitted on them explains at least 0.1 of the variation of the held-out rows (the median
+    over tags, each tag's level allowed to move between the halves). The report says which was chosen and why
+    (`method_choice` in the JSON, a line in the .md).
+  - `--method drift` (for real plant data): each tag is compared with its own recent past. The gap
     between its 10-sample average and its 600-sample baseline is flagged when it is wider than K times that gap's
     normal spread, and never when it is under 1% of the tag's normal reading. Where the tag runs below its normal
     reading the band shrinks in proportion (noise as a percent of reading, as a flowmeter's), to no less than half.
     Slow drift moves the baseline and is not flagged; a step or a fast change is. K is the smallest of 10, 12, 15, 20
     that flags under 0.5% of the held-out normal rows (any tag). The windows count rows, not seconds.
+  - `--method cyclic` (for a daily cycle: water demand, shifts, day/night load): each value minus its tag's
+    time-of-day profile (the fit rows' mean in each of 48 half-hour slots), then a median of 3 samples so a
+    single-sample spike is ignored, then the drift method's gap on what is left. The band is the drift method's
+    (K x the gap's normal spread, never under 1% of the reading) but does not shrink with the reading. The daily swing
+    no longer sets the band's width, so a step it would hide (a leak's extra flow) shows. Without timestamps the
+    profile is flat (one slot per tag) and the report warns.
   - `--method level`: the method of `normal_bands.py` (mean ± K population standard deviations on the first half;
     K = the smallest of 3, 4, 5, 6 whose worst per-tag false-flag rate on the held-out second half is under 0.5%).
     It reproduces the TE scripts exactly (section (a) below), and on real data it flags normal running long before
@@ -27,11 +38,15 @@ Both are stdlib plus `asyncua` (for the server only). Nothing here uses a model.
 
 | Your data | Use | Why |
 |---|---|---|
-| A real plant historian export: tags drift with ambient, feed, wear | `--method drift` (default) | On the development sources (PRONTO, SKAB, HAI 21.03) the level bands flagged normal running before almost every fault; the drift method passes more runs on every one (PRONTO 4/6 against 2/6, SKAB 16/34 against 1/34, HAI 2/2 against 0/2) |
+| A real plant historian export: tags drift with ambient, feed, wear | `--method auto` (default), which picks drift unless it finds a daily cycle; `--method drift` forces it | On the development sources (PRONTO, SKAB, HAI 21.03) the level bands flagged normal running before almost every fault; auto picks drift and passes more runs on every one (PRONTO 4/6 against 2/6, SKAB 16/34 against 1/34, HAI 2/2 against 0/2) |
 | A stationary simulation, or a plant held at one steady operating point with no drift | `--method level` | It flags a level that stays wrong forever and reacts on the first sample; on the TE runs it detects 16 of 21 faults to the drift method's 14, at 0 min on fault 6 against 18 |
-| A process that cycles (batch steps, compressor load/unload, daily demand) | neither, as they stand | On three sources scored once after the method was frozen (UCI hydraulic test rig, MetroPT-3 compressor, BattLeDIM water network) the drift method passed 1 of 21 runs and the level bands 2 of 21 (`docs/TRIED.md`) |
+| Timestamped data with a daily cycle (water demand, shifts, day/night load), at least 4 days of normal running | `--method cyclic` (the default `auto` picks it when the cycle is there) | BattLeDIM's simulated water network: 2018 (development) 8 of 14 leaks against 0 with drift and 1 with the level bands; 2019 (held-out year, scored once) 6 of 19 against 0 and 0. It is the same network across years; 2019 detections arrive 14 hours to 5 days late, and tank level T1 drives most flags ([attempts A183-A184](../../docs/TRIED.md)) |
+| A cycle not tied to the clock (compressor load/unload, batch steps) or data already averaged per cycle | no method here handles it well | MetroPT-3's compressor: drift 1 of 4 failures, cyclic 0 of 4 (its pressure pulses before two failures flag either way). UCI's hydraulic rig (one row per load cycle): drift 0 of 3; `--method cyclic` (flat profile: only its 3-sample median differs) 2 of 3. A mode found in the data was tried and rejected: a fault can move the tag that defines the mode (`docs/TRIED.md` A183) |
 
 Whichever you use, read the pre-fault and held-out flag counts in the report before trusting a detection.
+The median of 3 belongs to `cyclic` only; `drift` keeps its existing timing. UCI, MetroPT-3 and BattLeDIM 2018
+were held out for the earlier drift method, then became development inputs for auto/cyclic. BattLeDIM 2019
+tests carry-over to another year of that same simulated network, not to a different plant.
 
 ## The CSV shape
 
@@ -51,7 +66,7 @@ value that is neither a number nor a timestamp is refused with a message naming 
 | `te_normal_d00.csv` | TE test run `d00_te.dat` (normal operation), all 960 rows, XMEAS 1-22 (the 22 continuous measurements) |
 | `te_fault6_d06.csv` | TE test run `d06_te.dat` (fault 6, A feed loss, switched on at row 160), same rows and columns |
 | `with_gaps.csv` | Rows 0-19 of `te_normal_d00.csv` with four cells deliberately emptied (see below) |
-| `results/csv_normal_bands.md`, `.json` | Bands fitted on `te_normal_d00.csv` with the default (drift) method, fault-6 CSV scored |
+| `results/csv_normal_bands.md`, `.json` | Bands fitted on `te_normal_d00.csv` with default auto (chooses drift here), fault-6 CSV scored |
 | `results/replay_smoke.txt` | Transcript of the replay server serving `with_gaps.csv` to an OPC UA client |
 | `TE_DATA_NOTICE.txt` | The Braatz group's permission notice for the TE values in these CSVs |
 
@@ -86,6 +101,21 @@ python scripts/csv_replay_server.py --csv examples/historian-csv/te_fault6_d06.c
 python scripts/test_csv_tools.py
 ```
 
+To reproduce the public daily-cycle check, fetch the pinned BattLeDIM 2019 source and run its matrix cell:
+
+```sh
+python scripts/fetch_corpus.py battledim-2019
+python scripts/corpus_matrix.py --rows 6 --inputs battledim-2019
+```
+
+The [source and hash pins](../../docs/CORPUS_FETCH.md) credit S. G. Vrachimis et al., BattLeDIM, Zenodo record
+[4017659](https://zenodo.org/records/4017659), CC BY 4.0. Downloaded data stay under `data/external/` and converted
+CSVs live only in a temporary folder. Fit = January 1 up to the first leak starting in 2019 (January 15, 23:00);
+the four leaks carried over from 2018 are part of this baseline. Each of the 19 runs spans two days before leak
+start and up to seven days after it (or repair, if earlier). A run passes when three consecutive flags start at
+or after the labelled leak start and at most 0.5% of its pre-fault rows are flagged. Other leaks can already be
+running in those pre-fault windows, so a flag is not evidence that the method located the newly starting leak.
+
 `--fault-start` takes a 0-based data-row number (an integer, `160`), or a first-column value: a timestamp
 (`"2026-10-01 09:40:00"`) or a number with a decimal point (`480.0`) picks the first row at or after it. With timestamps, delays are in seconds. `--k 5` fixes K instead of choosing it;
 `--fit-fraction` changes the fit share (default 0.5). If the fit rows, or the held-out rows K is chosen on, number fewer than 30 (or a tag has fewer than 30 good fit values), the .md and .json carry a small-sample warning: below that a band's sd is a rough estimate, and with fewer than 200 held-out rows one false flag already exceeds the 0.5% K target. The TE example (480 + 480 rows) has none. For an Ignition OPC UA connection to the replay, point it at
@@ -93,7 +123,8 @@ python scripts/test_csv_tools.py
 
 ## Results on the TE export
 
-From `results/csv_normal_bands.md` (default drift method): K = 10 (0 of the 480 held-out rows flagged at any K);
+From `results/csv_normal_bands.md` (default `auto`, which picks the drift method here: the `minutes` column is not a
+timestamp, so there is no time of day to profile): K = 10 (0 of the 480 held-out rows flagged at any K);
 three bands are set by the 1% floor (TT-109, TT-121, TT-122, whose 10-sample averages barely move in normal running).
 On the fault-6 export: detection by the 3-consecutive rule at 18 minutes (row 166, FT-101), 0 of the 160 pre-fault
 samples flagged, 99.2% of post-fault samples flagged. 13 of 22 tags leave their band; the first are FT-101 (18 min),
@@ -157,12 +188,20 @@ The TE export is clean, evenly sampled, single-mode simulator data. A real expor
 the held-out false-flag table before trusting the bands, and fit on a period you know was normal. A flag says
 "unusual compared with this export", not why.
 
-On public real-plant data the default method is better than the level bands but does not pass everywhere
-(`docs/GENERALIZATION.md` row 6; development and held-out runs reported separately in `docs/TRIED.md`): no
+On public real-plant data auto still chooses drift for the sources below and does not pass everywhere
+([generalization matrix](../../docs/GENERALIZATION.md), row 6; development and held-out runs reported separately
+in [the attempts ledger](../../docs/TRIED.md)): no
 pre-fault flag on PRONTO test day 3 and HAI 21.03, but normal running is still flagged before the PRONTO day 2
 air leak and day 4's second slugging test, and 18 of 34 SKAB runs fail (11 faults missed). On three sources scored
-once after it was frozen it passed 1 of 21 runs: UCI hydraulic 0/3 (one or more pre-fault flags in each run, where
+once after the earlier drift method was frozen it passed 1 of 21 runs: UCI hydraulic 0/3 (one or more pre-fault flags in each run, where
 none is allowed), MetroPT-3 1/4 (a pulsing dryer-discharge pressure flags normal running), BattLeDIM 0/14 (no leak
-detected: the daily demand swing sets the bands, and a leak moves pressure less). By design it misses a fault that
-develops as slowly as normal drift, and it stops flagging a level that stays wrong once the 600-sample baseline has
+detected: the daily demand swing sets the bands, and a leak moves pressure less). Those three sources are now
+development data for auto/cyclic: UCI and MetroPT-3 stay at 0/3 and 1/4; auto chooses cyclic for BattLeDIM 2018,
+which improves to 8/14. On the held-out 2019 year of that same network it passes 6/19, detects 13/19 and flags too
+many pre-fault rows in 7/19. Detections arrive **14 hours to 5 days late**, with tank level **T1 first in 11 of
+13 detections**. This is a flag after the labelled start, not proof of leak isolation or early warning; the same
+tag also drives most pre-fault flags. The method was not tuned further on 2019.
+
+By design drift misses a fault that develops as slowly as normal drift, and it stops flagging a level that stays
+wrong once the 600-sample baseline has
 caught up with it.

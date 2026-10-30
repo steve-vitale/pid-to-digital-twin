@@ -29,7 +29,7 @@ LIMITATIONS = [
     "Imported extraction and producer claims were supplied, not independently verified; no model was run.",
     "PNG structure and CRCs checked, not full pixel decoding, readability or revision authority.",
     "Class roles, tag conventions, linked parents and geometry fallback require engineering review.",
-    "Connections are unverified undirected adjacency; SVG segments are logical links, not pipe routes.",
+    "Connections are unverified undirected logical links; direct pipe adjacency is not established. SVG segments are not pipe routes.",
     "Supplied confidence and the existing 0.75 highlighting rule are uncalibrated for this drawing; no trained risk model was applied.",
     "No point mapping, signal identity, range, quality, native import or operational approval was established.",
     "Draft-only status is descriptive metadata, not a technical deployment interlock in other tools.",

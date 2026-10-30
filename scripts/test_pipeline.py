@@ -294,6 +294,10 @@ def unit_checks():
     check("reviewer track: non-operations wins over the word 'operations'",
           reviewer_track("A-1, non-operations reviewer") == "non-operations")
     check("reviewer track: no stated role is not an operations review", reviewer_track("A. Person") == "role not stated")
+    manifest, _ = pipeline.load(ROOT)
+    summary = pipeline.summary(ROOT, manifest, "open100")
+    check("OPEN100 summary accounts for the seven unscored cross-sheet links and names the queue fallback",
+          "amber 691" in summary and "7 unrated (review queue puts these in amber)" in summary, summary)
 
 
 def main():

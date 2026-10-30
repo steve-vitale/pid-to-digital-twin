@@ -41,6 +41,8 @@ class R:
 
     def __init__(self, lo, hi=None):
         hi = lo if hi is None else hi
+        if not math.isfinite(lo) or not math.isfinite(hi):
+            raise SpecError("calculation exceeds the finite numeric range; check the input units and magnitudes")
         if lo > hi:
             raise ValueError(f"range low {lo} is above high {hi}")
         self.lo, self.hi = float(lo), float(hi)
@@ -105,9 +107,16 @@ def parse_value(v, name):
     if isinstance(v, bool) or v is None:
         raise SpecError(f"{name}: expected a number or a low/high range, got {v!r}")
     if isinstance(v, (int, float)):
-        if not math.isfinite(v):
+        try:
+            finite = math.isfinite(v)
+        except OverflowError:
+            finite = False
+        if not finite:
             raise SpecError(f"{name}: {v!r} is not a finite number")
         return R(v)
+    if isinstance(v, dict) and set(v) != {"low", "high"}:
+        raise SpecError(f"{name}: a range is {{\"low\": a, \"high\": b}} with nothing else, got keys "
+                        f"{', '.join(sorted(map(str, v)))} (units are fixed per field; see the guide)")
     if isinstance(v, dict) and set(v) >= {"low", "high"}:
         lo, hi = v["low"], v["high"]
     elif isinstance(v, list) and len(v) == 2:
@@ -116,7 +125,11 @@ def parse_value(v, name):
         raise SpecError(f"{name}: expected a number or a low/high range, got {v!r}")
     if not all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in (lo, hi)):
         raise SpecError(f"{name}: range ends must be numbers")
-    if not all(math.isfinite(x) for x in (lo, hi)):
+    try:
+        finite = all(math.isfinite(x) for x in (lo, hi))
+    except OverflowError:
+        finite = False
+    if not finite:
         raise SpecError(f"{name}: {v!r} is not a finite number")
     if lo > hi:
         raise SpecError(f"{name}: low {lo} is above high {hi}")
@@ -130,7 +143,8 @@ BOUNDS = {"hours_per_year": (0, 8784, "a year has 8,760 hours, 8,784 in a leap y
           "boiler_efficiency": (0, 1, "a fraction: give 0.82, not 82"),
           "feedwater_temp_F": (32, 400, "feedwater between freezing and 400 F"),
           "steam_pressure_psig": (0, 3000, "a gauge pressure up to 3,000 psig"),
-          "energy_btu_per_lb": (100, 1600, "steam carries roughly 900 to 1,500 Btu/lb from feedwater; check the unit")}
+          "energy_btu_per_lb": (0, 1600, "steam production is roughly 900 to 1,500 Btu/lb from feedwater, but an "
+                                  "incremental enthalpy difference can be smaller; check the unit and heat boundary")}
 
 
 def bounded(r, name, key):
@@ -263,7 +277,9 @@ NEEDS = {
                                                            "boiler_fuel"],
            "note": "Backpressure turbogenerator across a pressure-reducing station: the kW it would generate x hours "
                    "(an electricity saving) AND the extra boiler fuel for the heat it extracts (steam lb/h x enthalpy "
-                   "drop across the turbine, as a steam change marked increase: true)."},
+                   "drop across the turbine, as a steam change marked increase: true with energy_btu_per_lb set "
+                   "to the actual inlet-minus-outlet enthalpy). The gross DOE steam-production default does not "
+                   "estimate this penalty."},
     "E8": {"forms": ["steam"], "measure": ["steam_lb_h", "hours", "steam_conditions", "boiler_fuel"],
            "note": "Failed steam traps: steam lost per failed trap (lb/h, from the survey) x number failed, hours the "
                    "steam is on, the energy per lb at those conditions, then fuel via boiler efficiency."},
@@ -327,6 +343,31 @@ NEEDS = {
            "note": "Compressor sequencing: total compressor kW before and after a master sequencer, same air demand."},
     "C10": {"forms": ["steam"], "measure": ["steam_lb_h", "hours", "steam_conditions", "boiler_fuel"],
             "note": "Trap monitoring: steam lb/h lost by failures caught earlier x the hours sooner they are caught."},
+    "E27": {"forms": ["electricity"], "measure": ["kw", "hours"],
+            "note": "Floating head pressure: compressor kW plus condenser fan and pump kW before and after, at matched "
+                    "load and wet-bulb bins, with hours per bin."},
+    "E28": {"forms": ["electricity"], "measure": ["kw", "hours"],
+            "note": "Suction pressure: compressor kW at the old and the new suction setpoint, at the same load."},
+    "E29": {"forms": ["electricity"], "measure": ["kw", "hours", "demand_kw"],
+            "note": "Slide valve part load: kW per load band (slide valve position and power logs), before and after "
+                    "a drive or sequencing change."},
+    "E30": {"forms": ["electricity"], "measure": ["kw", "hours"],
+            "note": "Demand defrost: defrosts per day before and after, times the energy per defrost (hot gas plus "
+                    "the refrigeration needed to remove the heat afterwards)."},
+    "E31": {"forms": ["heat"], "measure": ["heat_btu_h", "hours", "boiler_fuel"],
+            "note": "Oven or dryer exhaust heat recovery: heat recovered (Btu/h) that displaces burner or heater fuel, "
+                    "hours."},
+    "E32": {"forms": ["fuel"], "measure": ["fuel_mmbtu", "boiler_fuel"],
+            "note": "Burner air-fuel ratio: fuel before and after the tune, at the same production rate."},
+    "H5": {"forms": ["heat", "electricity"], "measure": ["heat_btu_h", "hours", "boiler_fuel", "kw"],
+           "note": "Refrigeration condenser heat to low-grade duties: heat recovered, plus any extra compressor kW "
+                   "(as an increase) if the head pressure has to rise."},
+    "H6": {"forms": ["heat"], "measure": ["heat_btu_h", "hours", "boiler_fuel"],
+           "note": "Oven or dryer exhaust heat to low-grade duties: heat recovered that displaces burner or heater "
+                   "fuel, hours."},
+    "C11": {"forms": ["fuel", "heat"], "measure": ["fuel_mmbtu", "hours"],
+            "note": "Exhaust humidity control: burner fuel before and after the exhaust and make-up air rate is "
+                    "reduced."},
 }
 
 # Questions with no measurable energy quantity of their own, and why.
@@ -343,6 +384,7 @@ NO_ENERGY = {
     "E25": "Tank vapor recovery is product and emissions (vapor mass and composition), not combustion energy; its CO2e "
            "needs the vapor's composition, which this tool does not take.",
     "E26": "Metering relief and vent flows enables measurement; flared gas CO2e needs composition, not covered here.",
+    "C12": "Compressor power metering saves nothing by itself; its value is the decisions behind E27-E30.",
 }
 
 FORM_CONSTANTS = {
@@ -473,14 +515,31 @@ SITE_NUMBERS = ("electricity_price_per_kwh", "grid_kg_co2e_per_kwh", "demand_cha
 SITE_TEXT = ("fuel_price_unit",)
 
 
+TYPE_FIELDS = {"electricity": {"kw_before", "kw_after", "kw_reduction", "kwh_per_year", "hours_per_year",
+                               "demand_kw_reduction", "demand_months"},
+               "steam": {"steam_lb_per_h", "hours_per_year", "steam_pressure_psig", "feedwater_temp_F",
+                         "energy_btu_per_lb"},
+               "heat": {"heat_btu_per_h", "heat_mmbtu_per_year", "hours_per_year"},
+               "fuel": {"mmbtu_per_year"}}
+
+
+def no_duplicate_keys(pairs):
+    """json object hook: a key written twice in the spec is refused (the second would silently replace the first)."""
+    seen = {}
+    for k, v in pairs:
+        if k in seen:
+            raise SpecError(f"the field '{k}' appears twice in one object of the spec")
+        seen[k] = v
+    return seen
+
+
 def agree(a, b):
     return abs(a.lo - b.lo) <= 0.01 * max(abs(b.lo), 1) and abs(a.hi - b.hi) <= 0.01 * max(abs(b.hi), 1)
 
 
 def check_spec(spec, changes, site):
-    """Refuse a spec before anything is computed: unknown field names, out-of-bounds numbers anywhere, and any two
-    supplied forms of the same quantity that disagree (kWh vs kW x hours vs kW before/after, annual heat vs rate x
-    hours, a direct fuel price beside a per-unit one), so a contradictory input can never become an estimate."""
+    """Check the schema and bounds before computing. Quantity cross-checks belong to the calculation that uses
+    them: agreeing with another unused input does not make a field part of the annual estimate."""
     extra = sorted(set(spec) - SPEC_KEYS)
     if extra:
         raise SpecError(f"unknown field(s) in the spec: {', '.join(extra)}")
@@ -490,32 +549,35 @@ def check_spec(spec, changes, site):
     for k in SITE_NUMBERS:
         if site.get(k) is not None:
             bounded(parse_value(site[k], f"site.{k}"), f"site.{k}", k)
+    if site.get("fuel_price_unit") is not None and not isinstance(site["fuel_price_unit"], str):
+        raise SpecError(f"site.fuel_price_unit must be text such as \"therm\" or \"Mcf\", got "
+                        f"{json.dumps(site['fuel_price_unit'])}")
+    if site.get("fuel_price_unit") is not None and site.get("fuel_price_per_unit") is None:
+        raise SpecError("site.fuel_price_unit is given without site.fuel_price_per_unit (it would be ignored)")
+    if site.get("fuel_heat_content_mmbtu_per_unit") is not None and site.get("fuel_price_per_unit") is None:
+        raise SpecError("site.fuel_heat_content_mmbtu_per_unit is given without site.fuel_price_per_unit "
+                        "(it would be ignored)")
+    notes = spec.get("site_notes") or {}
+    bad = sorted(set(notes) - set(SITE_NUMBERS) - set(SITE_TEXT))
+    if bad:
+        raise SpecError(f"site_notes names field(s) that don't exist: {', '.join(bad)}")
+    if any(not isinstance(x, str) for x in notes.values()):
+        raise SpecError("site_notes values must be text")
     if site.get("fuel_price_per_mmbtu") is not None and site.get("fuel_price_per_unit") is not None:
         raise SpecError("site gives both fuel_price_per_mmbtu and fuel_price_per_unit: give one")
     for i, ch in enumerate(changes, 1):
         bad = sorted(set(ch) - set(CHANGE_NUMBERS) - set(CHANGE_TEXT))
         if bad:
             raise SpecError(f"change {i}: unknown field(s): {', '.join(bad)}")
+        for k in ("label", "energy_note", "note", "notes", "source"):
+            if ch.get(k) is not None and not isinstance(ch[k], str):
+                raise SpecError(f"change {i}: {k} must be text, got {json.dumps(ch[k])[:40]}")
+        wrong = sorted(k for k in ch if k in CHANGE_NUMBERS and k not in TYPE_FIELDS.get(ch.get("type"), ()))
+        if wrong:
+            raise SpecError(f"change {i}: {', '.join(wrong)} can't be used in a {ch.get('type')} change (it would be "
+                            "ignored); allowed: " + ", ".join(sorted(TYPE_FIELDS.get(ch.get("type"), ()))))
         v = {k: bounded(parse_value(ch[k], f"change {i}: {k}"), f"change {i}: {k}", k)
              for k in CHANGE_NUMBERS if ch.get(k) is not None}
-        # every complete form of the kW change must agree
-        if "kw_before" in v and "kw_after" in v and "kw_reduction" in v and \
-                not agree(v["kw_before"] - v["kw_after"], v["kw_reduction"]):
-            raise SpecError(f"change {i}: kw_reduction {show(v['kw_reduction'], 'kW')} disagrees with kw_before - "
-                            f"kw_after = {show(v['kw_before'] - v['kw_after'], 'kW')}; give one or make them agree")
-        if "kwh_per_year" in v and "hours_per_year" in v:
-            for what, kw in (("(kw_before - kw_after) x hours", v["kw_before"] - v["kw_after"]
-                              if "kw_before" in v and "kw_after" in v else None),
-                             ("kw_reduction x hours", v.get("kw_reduction"))):
-                if kw is not None and not agree(kw * v["hours_per_year"], v["kwh_per_year"]):
-                    raise SpecError(f"change {i}: kwh_per_year {show(v['kwh_per_year'], 'kWh/yr')} disagrees with "
-                                    f"{what} = {show(kw * v['hours_per_year'], 'kWh/yr')}; give one or make them agree")
-        if "heat_mmbtu_per_year" in v and "heat_btu_per_h" in v and "hours_per_year" in v:
-            implied = v["heat_btu_per_h"] * v["hours_per_year"] / 1e6
-            if not agree(implied, v["heat_mmbtu_per_year"]):
-                raise SpecError(f"change {i}: heat_mmbtu_per_year {show(v['heat_mmbtu_per_year'], 'MMBtu/yr')} "
-                                f"disagrees with heat_btu_per_h x hours = {show(implied, 'MMBtu/yr')}; give one or make "
-                                "them agree")
         # the sign comes from the measurements; "increase" is only for a reduction figure that should count as load
         if ch.get("increase") and "kw_before" in v and "kw_after" in v and (v["kw_before"] - v["kw_after"]).lo < 0:
             raise SpecError(f"change {i}: kw_after can be at or above kw_before, so the measurements already carry "
@@ -527,6 +589,13 @@ def resolve(spec, consts, use_defaults):
     """Return (changes, constants dict, missing list). Raises SpecError on malformed input."""
     if not isinstance(spec, dict):
         raise SpecError("the spec must be a JSON object")
+    if "change" in spec and "changes" in spec:
+        raise SpecError("the spec gives both 'change' and 'changes': give one")
+    for k, kind in (("title", str), ("description", str), ("fuel", str), ("illustrative", bool), ("site", dict),
+                    ("site_notes", dict)):
+        if k in spec and spec[k] is not None and not isinstance(spec[k], kind):
+            raise SpecError(f"'{k}' must be {'text' if kind is str else 'true or false' if kind is bool else 'an object'}"
+                            f", got {json.dumps(spec[k])[:40]}")
     changes = spec.get("changes") or ([spec["change"]] if "change" in spec else [])
     if not changes:
         raise SpecError("the spec needs 'changes': a list of at least one change")
@@ -595,6 +664,10 @@ def resolve(spec, consts, use_defaults):
                             "site.fuel_price_per_unit", "fuel_price_per_unit")
             per = {"mmbtu": R(1.0), "dekatherm": R(consts["unit_conversions"]["mmbtu_per_dekatherm"]["value"]),
                    "therm": R(consts["unit_conversions"]["mmbtu_per_therm"]["value"])}
+            if unit in per and site.get("fuel_heat_content_mmbtu_per_unit") is not None:
+                raise SpecError(f"site.fuel_heat_content_mmbtu_per_unit is given, but a {unit} is exactly "
+                                f"{per[unit].lo} MMBtu by definition: drop the heat content, or price per a unit "
+                                "without a fixed definition (e.g. Mcf)")
             if unit in per:
                 conv = per[unit]
                 C["fuel_price_per_mmbtu"] = {
@@ -608,7 +681,8 @@ def resolve(spec, consts, use_defaults):
                     hcv = parse_value(hc, "site.fuel_heat_content_mmbtu_per_unit")
                     if hcv.lo <= 0:
                         raise SpecError("site.fuel_heat_content_mmbtu_per_unit must be above zero")
-                    hc_label, hc_default = "site value", None
+                    hc_note = notes.get("fuel_heat_content_mmbtu_per_unit")
+                    hc_label, hc_default = "site value" + (f": {hc_note}" if hc_note else ""), None
                 elif use_defaults and fuel == "natural_gas" and unit == "Mcf":
                     hcv = R(consts["constants"]["natural_gas_heat_content_mmbtu_per_mcf"]["value"])
                     hc_default = default_entry(consts, "natural_gas_heat_content_mmbtu_per_mcf", hcv, "MMBtu/Mcf")
@@ -622,7 +696,8 @@ def resolve(spec, consts, use_defaults):
                     C["fuel_price_per_mmbtu"] = {
                         "value": price / hcv, "unit": "$/MMBtu", "origin": "user",
                         "label": f"site value: {show(price, '$/' + unit, 7)} / {show(hcv, 'MMBtu/' + unit, 7)} "
-                                 f"({hc_label})"}
+                                 f"({hc_label})" + (f"; {notes['fuel_price_per_unit']}"
+                                                    if notes.get("fuel_price_per_unit") else "")}
                     if hc_default:  # the price is the user's, its conversion is a public value: keep its source
                         C["fuel_price_per_mmbtu"]["uses_default"] = {
                             k: hc_default[k] for k in ("value", "unit", "source", "url", "year", "license", "note")}
@@ -681,6 +756,77 @@ def steam_energy(ch, i, consts, use_defaults, missing):
     return None
 
 
+def electricity_energy(ch, i):
+    """Resolve one annual quantity and check every complete alternate derivation against it.
+
+    Only fields on an annual derivation are credited as used. A kW agreement without hours is disconnected from
+    annual kWh, even when all three kW fields agree. The sole partial-form check is a before-load bound on a used
+    reduction: without an after-load range, every independent combination must leave a nonnegative after load.
+    """
+    v = {k: parse_value(ch[k], f"change {i}: {k}")
+         for k in TYPE_FIELDS["electricity"] if ch.get(k) is not None}
+
+    def required(key):
+        if key not in v:
+            raise SpecError(f"change {i} (electricity): missing measured input {key!r}")
+        return v[key]
+
+    pair = {"kw_before", "kw_after"} <= set(v)
+    if ch.get("increase") and "kw_before" in v and not pair:
+        raise SpecError(f"change {i}: kw_before with increase: true and no kw_after is ambiguous; give actual "
+                        "kw_before/kw_after without increase, or give the added kw_reduction with increase: true "
+                        "without kw_before")
+    power = []  # (quantity, value, input fields, formula, substituted numbers)
+    if pair:
+        before, after = v["kw_before"], v["kw_after"]
+        power.append(("kw_before - kw_after", before - after, {"kw_before", "kw_after"},
+                      "(kW before - kW after) x hours", f"({show(before, 'kW')} - {show(after, 'kW')})"))
+    if "kw_reduction" in v:
+        reduction = v["kw_reduction"]
+        if "kw_before" in v:
+            before = v["kw_before"]
+            # With a complete form, before and after already define the possible change. The old comparison of
+            # reduction.high to before.low wrongly rejected consistent broad ranges such as [10,20]-[0,5]=[5,20].
+            impossible = reduction.lo > before.hi if pair else reduction.hi > before.lo
+            if impossible:
+                raise SpecError(f"change {i}: kw_reduction {show(reduction, 'kW')} can be more than kw_before "
+                                f"{show(before, 'kW')}: the load can't fall below zero")
+        if pair and not agree(power[0][1], reduction):
+            raise SpecError(f"change {i}: kw_reduction {show(reduction, 'kW')} disagrees with kw_before - "
+                            f"kw_after = {show(power[0][1], 'kW')}; give one or make them agree")
+        power.append(("kw_reduction", reduction, {"kw_reduction"}, "kW reduction x hours", show(reduction, "kW")))
+
+    annual = []  # Complete annual forms only; their fields are the inputs linked to the actual result.
+    if "kwh_per_year" in v:
+        annual.append(("kwh_per_year", v["kwh_per_year"], {"kwh_per_year"},
+                       "kWh/yr (measured)", show(v["kwh_per_year"], "kWh/yr")))
+    if "hours_per_year" in v:
+        hours = v["hours_per_year"]
+        for name, kw, fields, formula, substituted in power:
+            annual.append((name + " x hours", kw * hours, fields | {"hours_per_year"},
+                           formula, substituted + " x " + show(hours, "h/yr")))
+    if not annual:
+        required("hours_per_year")
+        required("kw_before")
+        required("kw_after")
+    # Preserve the documented preference: measured annual kWh, then a measured reduction, then before/after.
+    selected = annual[0] if "kwh_per_year" in v else annual[-1]
+    for name, value, _, _, _ in annual:
+        if not agree(value, selected[1]):
+            raise SpecError(f"change {i}: {selected[0]} {show(selected[1], 'kWh/yr')} disagrees with "
+                            f"{name} = {show(value, 'kWh/yr')}; give one or make them agree")
+    used = set().union(*(a[2] for a in annual))
+    if "kw_reduction" in used and "kw_before" in v and not pair:
+        used.add("kw_before")  # the partial-form physical bound constrains a reduction linked to annual kWh
+    inputs = {k: value for k, value in v.items() if k in used}
+    # Return input keys in a stable order, preserving the existing worked examples' output.
+    order = ("kwh_per_year", "kw_reduction", "kw_before", "kw_after", "hours_per_year")
+    inputs = {k: inputs[k] for k in order if k in inputs}
+    dkw = power[-1][1] if power and "hours_per_year" in used else None
+    step = ("Energy", selected[3], selected[4], selected[1], "kWh/yr")
+    return selected[1], dkw, inputs, step
+
+
 def compute(spec, consts, use_defaults=False):
     changes, C, missing = resolve(spec, consts, use_defaults)
     steam_E = {}
@@ -705,51 +851,8 @@ def compute(spec, consts, use_defaults=False):
         S = []
         inputs = {}
         if t == "electricity":
-            dkw = None
-            if ch.get("kwh_per_year") is not None:
-                kwh = g(ch, "kwh_per_year", i)
-                # Every form supplied must agree with every other: annual kWh, (before - after) x hours, reduction x hours.
-                implied = []
-                if ch.get("hours_per_year") is not None:
-                    h = g(ch, "hours_per_year", i)
-                    if ch.get("kw_before") is not None and ch.get("kw_after") is not None:
-                        implied.append(("(kw_before - kw_after) x hours", (g(ch, "kw_before", i) - g(ch, "kw_after", i)) * h))
-                    if ch.get("kw_reduction") is not None:
-                        implied.append(("kw_reduction x hours", g(ch, "kw_reduction", i) * h))
-                for what, imp in implied:
-                    if abs(imp.lo - kwh.lo) > 0.01 * max(abs(kwh.lo), 1) or \
-                            abs(imp.hi - kwh.hi) > 0.01 * max(abs(kwh.hi), 1):
-                        raise SpecError(f"change {i}: kwh_per_year {show(kwh, 'kWh/yr')} disagrees with {what} = "
-                                        f"{show(imp, 'kWh/yr')}; give one or make them agree")
-                inputs["kwh_per_year"] = kwh
-                S.append(("Energy", "kWh/yr (measured)", f"{show(kwh, 'kWh/yr')}", kwh, "kWh/yr"))
-            else:
-                h = g(ch, "hours_per_year", i)
-                if ch.get("kw_reduction") is not None:
-                    dkw = g(ch, "kw_reduction", i)
-                    if ch.get("kw_before") is not None and ch.get("kw_after") is not None:
-                        both = g(ch, "kw_before", i) - g(ch, "kw_after", i)
-                        if abs(both.lo - dkw.lo) > 0.01 * max(abs(dkw.lo), 1) or \
-                                abs(both.hi - dkw.hi) > 0.01 * max(abs(dkw.hi), 1):
-                            raise SpecError(f"change {i}: kw_reduction {show(dkw, 'kW')} disagrees with kw_before - "
-                                            f"kw_after = {show(both, 'kW')}; give one or make them agree")
-                    inputs.update(kw_reduction=dkw, hours_per_year=h)
-                    expr = "kW reduction x hours"
-                    sub = f"{show(dkw, 'kW')} x {show(h, 'h/yr')}"
-                else:
-                    kb, ka = g(ch, "kw_before", i), g(ch, "kw_after", i)
-                    dkw = kb - ka
-                    if ch.get("increase") and dkw.lo < 0:
-                        # The measurements already show the load went up; flagging it as an increase as well would
-                        # flip the sign twice and report a saving.
-                        raise SpecError(f"change {i}: kw_after is above kw_before, so the measurements already show an "
-                                        "increase; remove \"increase\": true (it is for a reduction figure that "
-                                        "should count as added load)")
-                    inputs.update(kw_before=kb, kw_after=ka, hours_per_year=h)
-                    expr = "(kW before - kW after) x hours"
-                    sub = f"({show(kb, 'kW')} - {show(ka, 'kW')}) x {show(h, 'h/yr')}"
-                kwh = dkw * h
-                S.append(("Energy", expr, sub, kwh, "kWh/yr"))
+            kwh, dkw, inputs, energy_step = electricity_energy(ch, i)
+            S.append(energy_step)
             kwh_s = kwh * sign
             price = C["electricity_price_per_kwh"]["value"]
             cost = kwh_s * price
@@ -795,6 +898,14 @@ def compute(spec, consts, use_defaults=False):
                     if ch.get("heat_mmbtu_per_year") is not None:
                         useful = g(ch, "heat_mmbtu_per_year", i)
                         inputs["heat_mmbtu_per_year"] = useful
+                        if ch.get("heat_btu_per_h") is not None and ch.get("hours_per_year") is not None:
+                            q, h = g(ch, "heat_btu_per_h", i), g(ch, "hours_per_year", i)
+                            implied = q * h / 1e6
+                            if not agree(implied, useful):
+                                raise SpecError(f"change {i}: heat_mmbtu_per_year {show(useful, 'MMBtu/yr')} "
+                                                f"disagrees with heat_btu_per_h x hours = "
+                                                f"{show(implied, 'MMBtu/yr')}; give one or make them agree")
+                            inputs.update(heat_btu_per_h=q, hours_per_year=h)
                         S.append(("Useful heat", "MMBtu/yr (measured)", show(useful, "MMBtu/yr"), useful, "MMBtu/yr"))
                     else:
                         q, h = g(ch, "heat_btu_per_h", i), g(ch, "hours_per_year", i)
@@ -819,8 +930,17 @@ def compute(spec, consts, use_defaults=False):
             tot["cost"] = tot["cost"] + cost
             tot["co2e_scope1_kg"] = tot["co2e_scope1_kg"] + co2
             row = {"fuel_mmbtu": fuel_s, "cost": cost, "co2e_kg": co2}
+        used = set(inputs) | ({"energy_btu_per_lb"} if t == "steam" else set())
+        unused = sorted(k for k in CHANGE_NUMBERS if ch.get(k) is not None and k not in used)
+        if unused:
+            raise SpecError(f"change {i}: {', '.join(unused)} would be ignored (this change is computed from "
+                            f"{', '.join(sorted(k for k in inputs if k in CHANGE_NUMBERS))}, and no check uses "
+                            "the rest): drop it, or give the fields that make it part of the calculation")
         steps.append({"change": label, "type": t, "increase": bool(ch.get("increase")), "inputs": inputs,
                       "steam_energy": steam_E.get(i), "lines": S, "result": row})
+        provenance = {k: ch[k] for k in ("source", "note", "notes") if k in ch}
+        if provenance:
+            steps[-1]["provenance"] = provenance
     tot["co2e_t"] = (tot["co2e_scope1_kg"] + tot["co2e_scope2_kg"]) * 0.001
     return {"changes": steps, "constants": C, "totals": tot}
 
@@ -876,7 +996,7 @@ def draft_notes(res):
         if s["type"] == "electricity":
             if "kwh_per_year" in inp:
                 A.append(f"{name}: the annual kWh entered is a metered difference at the same production rate.")
-            else:
+            if "hours_per_year" in inp:
                 A.append(f"{name}: the kW figures are the average load over the whole year's running, at the same "
                          "production rate before and after, not a single spot reading.")
                 A.append(f"{name}: the change applies for {show(inp['hours_per_year'], 'h/yr')}.")
@@ -896,8 +1016,8 @@ def draft_notes(res):
             A.append(f"{name}: the {'steam' if s['type'] == 'steam' else 'heat'} rate entered holds for all "
                      f"{show(inp['hours_per_year'], 'h/yr') if 'hours_per_year' in inp else 'the stated year'}.")
             if s["type"] == "steam":
-                A.append(f"{name}: each pound of steam carries the stated energy from feedwater to steam, and the steam "
-                         "conditions do not change through the year.")
+                A.append(f"{name}: each pound carries the stated enthalpy difference at the measured boundary, "
+                         "and those conditions do not change through the year.")
             A.append(f"{name}: boiler efficiency is constant at this load, and the fuel saved is priced at the margin.")
             A.append(f"{name}: Scope 1 covers combustion only (no upstream fuel supply); water, treatment chemicals and "
                      "pumping are not costed.")
@@ -943,6 +1063,7 @@ def doc_json(spec, res, spec_name, use_defaults):
         "illustrative": bool(spec.get("illustrative")), "use_defaults": use_defaults,
         "constants": {k: ent(v) for k, v in res["constants"].items()},
         "changes": [{"change": s["change"], "type": s["type"], "increase": s["increase"],
+                     **({"provenance": s["provenance"]} if "provenance" in s else {}),
                      "inputs": {k: rj(v) for k, v in s["inputs"].items()}, "steam_energy": ent(s["steam_energy"]),
                      "steps": [{"quantity": a, "formula": b, "substituted": c, "result": rj(d), "unit": u}
                                for a, b, c, d, u in s["lines"]],
@@ -1030,6 +1151,8 @@ def doc_md(spec, res, spec_name, use_defaults):
     L += ["", "## Working", ""]
     for s in res["changes"]:
         L += [f"### {s['change']} ({s['type']}{', an increase' if s['increase'] else ''})", ""]
+        if s.get("provenance"):
+            L += [f"- {key.capitalize()}: {value}" for key, value in s["provenance"].items()] + [""]
         for a, b, c, d, u in s["lines"]:
             L.append(f"- {a} = {b} = {c} = **{show(d, u)}**")
         L.append("")
@@ -1080,7 +1203,7 @@ def main(argv=None):
             md, js, stem = needs_md(doc), doc, "needs"
         else:
             try:
-                spec = json.loads(Path(a.estimate).read_text(encoding="utf-8"))
+                spec = json.loads(Path(a.estimate).read_text(encoding="utf-8"), object_pairs_hook=no_duplicate_keys)
             except json.JSONDecodeError as e:
                 raise SpecError(f"{spec_display_name(a.estimate)} is not valid JSON ({e})")
             consts = load_constants(a.constants)

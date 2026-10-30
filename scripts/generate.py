@@ -554,21 +554,50 @@ def af_name(text, used):
     return _unique(re.sub(r"\s+", " ", n), used)
 
 
+def review_marks(item):
+    """Review status and risk tier for the exported documentation/description text, so an HMI or AF user sees how
+    far to trust the item: 'review: UNVERIFIED | risk tier: amber (safety floor)'. The status is the operations
+    review decision (unverified / confirmed / corrected / rejected); the tier is the round-3 rating (not rated
+    when the model has none), marked when the safety floor lifted it from green (scripts/confidence.py)."""
+    risk = item.get("risk") or {}
+    tier = risk.get("tier") or "not rated"
+    if risk.get("tier_before_floor"):
+        tier += " (safety floor)"
+    safety = f' | safety-relevant: {item["safety"]["function"]}' if item.get("safety") else ""
+    return f'review: {ops_status(item).upper()} | risk tier: {tier}{safety}'
+
+
 def _twin_doc(item, extra=""):
     p = item["provenance"][0]
     return (f'{item["id"]} | tag: {item.get("tag") or "none read"} ({item["tag_status"]}) | {extra}'
-            f'sheet {p["sheet"]} symbol {p["symbol"]} | confidence {item.get("confidence")} | UNVERIFIED')
+            f'sheet {p["sheet"]} symbol {p["symbol"]} | confidence {item.get("confidence")} | {review_marks(item)}')
+
+
+# Extracted-twin instrument UDTs are reusable templates keyed on what the instrument is (build_twin.py's
+# instrument_kind), not on each drawing's tag letters: every instrument type has the same members, and per-letter
+# types multiplied with every plant's naming (Instrument_MSBV, Instrument_AORV). Relief devices (marked by
+# confidence.mark_safety) get their own template so they can be found and handled as a group.
+INSTRUMENT_TEMPLATES = {"measurement / control": "Measurement", "final element (valve)": "ControlValve",
+                        "operated valve": "OperatedValve", "valve (plant-coded tag)": "Valve"}
+
+
+def instrument_template(item):
+    if (item.get("safety") or {}).get("function") == "relief device":
+        return "Relief"
+    return INSTRUMENT_TEMPLATES.get(item.get("instrument_kind"), "Unknown")
 
 
 def twin_ignition(model):
     """Ignition 8 tag JSON (same shape as ignition_tags above). One UDT type per equipment class, per instrument
-    type (ISA letters) and per line-item class; one instance per asset, foldered Site/System/Equipment.
-    Instrument PVs are OPC tags marked readOnly (monitoring-only intent); BasePath and PointName are placeholders."""
+    kind (instrument_template: Measurement, ControlValve, OperatedValve, Valve, Relief, Unknown) and per line-item
+    class; one instance per asset, foldered Site/System/Equipment. Each instance's documentation carries its review
+    status and risk tier (review_marks). Instrument PVs are OPC tags marked readOnly (monitoring-only intent);
+    BasePath and PointName are placeholders."""
     units = {u["id"]: u for u in model["units"]}
     types, used_types = {}, set()
 
     def udt(kind, cls):
-        label = cls if kind == "Instrument" else cls.title()  # instrument types keep their ISA letters: PT, TCV
+        label = cls if kind == "Instrument" else cls.title()  # instrument templates are already CamelCase
         name = f"{kind}_{re.sub(r'[^A-Za-z0-9]', '', label) or 'Unknown'}"
         if name not in types:
             members = [{"name": "ReviewStatus", "tagType": "AtomicTag", "valueSource": "memory",
@@ -601,8 +630,14 @@ def twin_ignition(model):
                 params["PointName"] = {"dataType": "String", "value": point["point"]}
         inst = {"name": ign_name(_label(item), used), "tagType": "UdtInstance", "typeId": type_name,
                 "documentation": _twin_doc(item, extra), "parameters": params}
+        overrides = []
+        if type_name.startswith("Instrument_") and item.get("uom"):
+            # One kind template covers several measured variables: the supplied unit belongs to the instance.
+            overrides.append({"name": "PV", "tagType": "AtomicTag", "engUnit": item["uom"]})
         if ops_status(item) != "unverified":  # the review decision travels to the gateway (V2 checks it)
-            inst["tags"] = [{"name": "ReviewStatus", "tagType": "AtomicTag", "value": ops_status(item)}]
+            overrides.append({"name": "ReviewStatus", "tagType": "AtomicTag", "value": ops_status(item)})
+        if overrides:
+            inst["tags"] = overrides
         return inst
 
     sys_folders = {}
@@ -656,7 +691,7 @@ def twin_ignition(model):
             extra += f'valve callout for {x["reviewed_valve_association"]}; function/signal unknown | '
             f["tags"].append(instance(x, udt("Callout", "valve"), used, extra))
         else:
-            f["tags"].append(instance(x, udt("Instrument", x["isa_letters"] or "Unknown"), used, extra))
+            f["tags"].append(instance(x, udt("Instrument", instrument_template(x)), used, extra))
     site = {"name": ign_name(model["site"]["name"].split(" (")[0], set()), "tagType": "Folder",
             "documentation": model["meta"]["title"] + " | every value is a PLACEHOLDER until mapped",
             "tags": [sf["folder"] for sf in sys_folders.values()]}
@@ -824,7 +859,9 @@ def twin_review_rows(model):
     added by build_twin.py), rows sort by risk tier (red, amber, green), then highest risk first, and carry the
     tier, risk_score and plain-language why. Without ratings, the round-2 order: low confidence; off-page connector
     not paired; placeholder tag; instrument with no drawn connection; other flags; then everything else. Inside a
-    tier the lowest confidence comes first. The round-2 flags stay in why_check_this either way."""
+    tier the lowest confidence comes first. The round-2 flags stay in why_check_this either way. Safety-relevant
+    items (confidence.mark_safety) are flagged in why_check_this and, with a rating, are never green (the floor
+    already applied by confidence.safety_floor; their why starts "safety-relevant (...): always checked")."""
     low = model["meta"].get("low_confidence_threshold", 0.75)
     rated = "risk_model" in model["meta"]
     names = {x["id"]: _label(x) for x in model["units"] + model["instruments"] + model["line_items"]
@@ -869,6 +906,8 @@ def twin_review_rows(model):
             r.append((5, "extracted box had its corners reversed; position may be wrong"))
         if {p["sheet"] for p in x["provenance"]} & failed:
             r.append((1, "the extraction of this sheet failed"))
+        if x.get("safety"):  # confidence.mark_safety; with a rating, the safety floor also keeps it out of green
+            r.append((5, f'safety-relevant {x["safety"]["function"]} ({x["safety"]["basis"]}): check whatever the tier'))
         return r
 
     for u in model["units"]:

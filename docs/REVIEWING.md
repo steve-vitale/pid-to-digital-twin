@@ -17,7 +17,19 @@ python scripts/check_claims.py      # each headline number against the committed
 python scripts/pipeline.py status   # whether every output is fresh against what made it
 ```
 
-Both use only the Python standard library and finish in under a minute.
+Both use only the Python standard library and finish in under a minute. To go one step further and re-score the
+results instead of reading them:
+
+```sh
+python scripts/rescore.py --check   # re-score the committed predictions; diff every scorecard and replicate table
+```
+
+It rebuilds each table from `predictions/` (the parsed per-drawing answers, without the raw model text) and the
+committed answer keys, and exits 1 if any differs from the file in `out/`. It takes a few minutes. Tables
+whose predictions have not been located (five earlier round-2 diagnostic tables) are listed as `GAP` with the
+reason. The round-5 headline replicates and both TE round trips now reproduce after records were recovered from
+preserved research working copies; [predictions/README.md](../predictions/README.md) gives the exact coverage and
+historical formatting adjustments.
 
 To run the test suite too:
 

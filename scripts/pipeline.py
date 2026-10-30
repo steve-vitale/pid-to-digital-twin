@@ -217,8 +217,10 @@ def summary(root, manifest, dataset):
         for k, v in c.get("risk_tier", {}).items():
             tiers[k] = tiers.get(k, 0) + v
     unver = sum(c.get("source_check", {}).get("unverified", 0) for c in r.values())
+    unrated = total - sum(tiers.get(k, 0) for k in ("green", "amber", "red"))
+    unrated_note = f"; {unrated:,} unrated (review queue puts these in amber)" if unrated else ""
     return (f"{unver:,}/{total:,} items unverified; risk green {tiers.get('green', 0):,} / amber {tiers.get('amber', 0):,} "
-            f"/ red {tiers.get('red', 0):,}; {reviewed} operations-reviewed")
+            f"/ red {tiers.get('red', 0):,}{unrated_note}; {reviewed} operations-reviewed")
 
 
 def carried(root, manifest, stage, cache):

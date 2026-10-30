@@ -1,5 +1,5 @@
 {
- "about": "Questions an engineer or operator asks of a plant drawing, as data. scripts/question_engine.py runs them over a process model or an extracted twin and writes, for each item a question applies to, the evidence found, the data still needed and where to get it, how the data settles the question, and what a public source says the typical benefit is. A screen, not an audit: it computes no savings for any plant. Rules E1-E26 and C1-C10 follow a research review of public DOE, LBNL, EPA and HSE sources (wording copied from text extracts of those documents); H1-H4 (high-grade heat used for low-grade duty) were added on request and cite the closest source wording, saying so where no number exists. IAC/ITAC statistics are browse-page averages read through a summarizing fetch, not re-verified against the download; average dollar figures are deliberately left out. See docs/OPPORTUNITY_SCREEN.md.",
+ "about": "Questions an engineer or operator asks of a plant drawing, as data. scripts/question_engine.py runs them over a process model or an extracted twin and writes, for each item a question applies to, the evidence found, the data still needed and where to get it, how the data settles the question, and what a public source says the typical benefit is. A screen, not an audit: it computes no savings for any plant. Rules E1-E26 and C1-C10 follow a research review of public DOE, LBNL, EPA and HSE sources (wording copied from text extracts of those documents); H1-H4 (high-grade heat used for low-grade duty) were added on request and cite the closest source wording, saying so where no number exists. E27-E32, H5, H6, C11 and C12 (refrigeration, ovens, dryers and fryers) were added from a food manufacturer's walkthrough; each quotes S25-S28 with a page, checked word for word against the PDF named in the source's 'checked' note. IAC/ITAC statistics are browse-page averages read through a summarizing fetch, not re-verified against the download; average dollar figures are deliberately left out. See docs/OPPORTUNITY_SCREEN.md.",
  "schema": "question-catalog-1",
  "families": {
   "energy": "Energy",
@@ -12,7 +12,7 @@
  "fields_help": {
   "applies_when": "absent_note: a sentence quoted as evidence saying what was looked for and not found. anchor: a selector (or list of selectors, any may match) for the item that triggers the question. with: clauses that must all find a related item. without: clauses of which none may find one. also_show: related items quoted as evidence if present. group_by: unit | item | model. needs_model: item kinds the model must contain, else the question is reported as not checked. min_anchors: fewest triggering items per group.",
   "selector": "kind (equipment, instrument, valve = control valve, final_element = other operated valve or speed element, hand_valve, relief, controller, interlock, stream, line_item, offpage), type (exact), type_text (regex over type and text), isa (regex over ISA letters), variable, text (regex over tag, name, description and schedule service), text_all (all regexes), not_text, tagged, control_valve, fact_C_min / fact_C_max (a stated temperature fact), schedule_field (the drawing prints this field, filled or blank).",
-  "relation": "same_unit, same_stream, same_unit_same_medium (same unit and same utility: steam, cooling water, air...), other_unit, discharge_side (streams leaving the anchor's unit; on an extracted twin, within max_hops drawn links on the same sheet, direction unknown), near (same unit or stream; on a twin within max_hops links), drives (a controller writing to the anchor), reads (a controller or interlock reading the anchor), anywhere. twin_only / hand_only: true limits a clause to extracted twins / hand-built models. anchor_kind: the clause applies only to anchors of these kinds.",
+  "relation": "same_unit, same_stream, same_unit_same_medium (same unit and same utility: steam, cooling water, air...), other_unit, discharge_side (streams leaving the anchor's unit; on an extracted twin, within max_hops drawn links on the same sheet, direction unknown), near (same unit or stream; on a twin within max_hops links), drives (a controller writing to the anchor), reads (a controller or interlock reading the anchor), anywhere, linked (on a hand-built model: a stream drawn from or to the anchor's unit, an item on such a stream, or the equipment at its other end; on an extracted twin, within max_hops drawn links like near). twin_only / hand_only: true limits a clause to extracted twins / hand-built models. anchor_kind: the clause applies only to anchors of these kinds.",
   "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any of its fields is still missing), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how.",
   "typical_benefit": "wording copied from the source, source keys, arc = DOE IAC/ITAC recommendation code where mapped. Never a figure for a specific plant."
  },
@@ -138,6 +138,30 @@
    "title": "DOE IAC/ITAC database: browse pages, download, schema document",
    "url": "https://itac.university/index/arc/2.",
    "license": "No license or terms stated: unclear"
+  },
+  "S25": {
+   "title": "Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)",
+   "url": "https://www.osti.gov/servlets/purl/1171534",
+   "license": "DOE-lab report sponsored by US EPA: unclear, freely citable; its figures from older sources are quoted as reported there",
+   "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 5ec369a1e6c10ac9e046c484705e1eab9d05ba284b13a98a294727a774d7655d. Page numbers are the report's printed page numbers (PDF page = printed page + 6)."
+  },
+  "S26": {
+   "title": "Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)",
+   "url": "https://eta-publications.lbl.gov/sites/default/files/lbnl-59289-rev.pdf",
+   "license": "DOE-lab report sponsored by US EPA: unclear, freely citable; its figures from older sources are quoted as reported there",
+   "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 68dffe9422854aa7d716093bbdbd8e23d4bcd9d167ed117e63e8f2d76063d35a. Page numbers are the report's printed page numbers (PDF page = printed page + 8)."
+  },
+  "S27": {
+   "title": "DOE Industrial Technologies Program, Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (Nov 2007)",
+   "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/42110.pdf",
+   "license": "Public domain (US federal)",
+   "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 bc541d8b0b3fe511bad519b65073afbe092872e4d2902f199b1311662d5b786a. Page numbers are PDF pages."
+  },
+  "S28": {
+   "title": "DOE Industrial Technologies Program, Process Heating Tip Sheet #10, Using Waste Heat for External Processes (DOE/GO-102006-2225, Jan 2006)",
+   "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/38853.pdf",
+   "license": "Public domain (US federal)",
+   "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 5a22ead317624a47b4bb731f274d63ff1cbd37283cd03ad207ed7aa7597a36f2. Page numbers are PDF pages."
   }
  },
  "source_notes": "S12 is not used (no citable sheet survived review). Figures marked 'as reported in LBNL-56183' come from that report's tables, which quote older secondary sources. Where a source quotes dollar figures they are deliberately not copied: they assume one plant's prices and hours.",
@@ -1522,7 +1546,8 @@
      "kind": [
       "equipment"
      ],
-     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR"
+     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+     "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
     },
     "group_by": "unit",
     "with": [
@@ -1653,13 +1678,15 @@
      "kind": [
       "equipment"
      ],
-     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR"
+     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+     "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
     },
     "group_by": "unit",
     "without": [
      {
       "select": {
-       "text": "RECEIVER|AIR TANK|STORAGE"
+       "text": "RECEIVER|AIR TANK|STORAGE",
+       "not_text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b|COLD STOR"
       },
       "relation": "anywhere"
      }
@@ -1701,7 +1728,8 @@
      "kind": [
       "equipment"
      ],
-     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR"
+     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+     "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
     },
     "group_by": "unit"
    },
@@ -2805,7 +2833,8 @@
      "kind": [
       "equipment"
      ],
-     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR"
+     "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+     "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
     },
     "group_by": "model",
     "min_anchors": 2,
@@ -3056,7 +3085,8 @@
       "offpage",
       "relief"
      ],
-     "text": "FLARE|TO ATM|VENT HEADER|PROCESS VENT"
+     "text": "FLARE|TO ATM|VENT HEADER|PROCESS VENT",
+     "not_text": "EXHAUST AIR|DRYER|\\bOVEN|FRYER"
     },
     "group_by": "model",
     "without": [
@@ -3121,6 +3151,1269 @@
     "arc": null
    },
    "limits": "Relief paths are safety systems; metering or recovery changes go through a hazard review."
+  },
+  {
+   "id": "E27",
+   "family": "energy",
+   "question": "Is the refrigeration condensing (head) pressure held higher than the weather allows, with no floating head pressure?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "CONDENSER",
+     "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER"
+    },
+    "group_by": "unit",
+    "without": [
+     {
+      "select": {
+       "text": "FLOATING HEAD|WET.?BULB (RESET|COMPENSAT)|HEAD PRESSURE RESET"
+      },
+      "relation": "anywhere"
+     }
+    ],
+    "absent_note": "no floating head pressure or wet-bulb reset is named on any controller or item",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "pressure",
+        "temperature"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "head pressure or condensing temperature"
+     },
+     {
+      "select": {
+       "kind": [
+        "controller"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "head pressure control"
+     },
+     {
+      "select": {
+       "kind": [
+        "equipment"
+       ],
+       "type_text": "COMPRESSOR",
+       "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+       "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+      },
+      "relation": "anywhere",
+      "as": "refrigeration compressor"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "power"
+       ]
+      },
+      "relation": "anywhere",
+      "as": "compressor power"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration condenser",
+    "head pressure measurement and its controller, if drawn",
+    "the compressors it serves"
+   ],
+   "data_requests": [
+    {
+     "item": "Head (discharge) pressure and condensing temperature, hourly over a year",
+     "where": [
+      {
+       "place": "historian",
+       "for": "head pressure or condensing temperature",
+       "quantity": [
+        "pressure",
+        "temperature"
+       ]
+      },
+      {
+       "place": "dcs",
+       "what": "the head pressure setpoint and its low limit in the refrigeration plant controls"
+      }
+     ],
+     "how": "Convert pressure to saturated condensing temperature with the refrigerant's tables; see whether it falls in cool weather or sits at the setpoint."
+    },
+    {
+     "item": "Ambient wet-bulb temperature (dry-bulb for an air-cooled condenser) at the same times",
+     "where": [
+      {
+       "place": "records",
+       "what": "the site weather station, or the nearest public weather station's hourly record"
+      }
+     ],
+     "how": "Line it up hour by hour with the condensing temperature."
+    },
+    {
+     "item": "The lowest head pressure the plant can run at",
+     "where": [
+      {
+       "place": "dcs",
+       "what": "the minimum needed for hot gas defrost, liquid injection oil cooling and liquid feed to the farthest evaporator"
+      },
+      {
+       "place": "vendor",
+       "what": "compressor and expansion valve minimum pressure difference"
+      }
+     ],
+     "how": "This is the floor a floating setpoint may not go below."
+    },
+    {
+     "item": "Compressor and condenser fan and pump power",
+     "where": [
+      {
+       "place": "historian",
+       "for": "compressor power",
+       "quantity": "power"
+      },
+      {
+       "place": "walkdown",
+       "what": "power logger on the compressor motors and on the condenser fan and spray pump motors"
+      }
+     ],
+     "how": "Floating the head pressure moves load from the compressors to the condenser fans; count both."
+    }
+   ],
+   "decision_rule": "Worth a look when the head pressure sits at a fixed setpoint through cool weather, above both what the condenser could reach and the plant's own minimum. If it already follows the wet-bulb down to that minimum, close it.",
+   "typical_benefit": {
+    "wording": "Floating head pressure (S25, p. 62) \"allows compressor head pressures to move up or down with variations in ambient wet-bulb temperature, saving energy compared to fixed head pressure operation.\" Condensing pressure (S25, p. 65): \"Lowering the condensing temperature can reduce compressor energy use by around 2% to 3% for every degree Celsius (1.8 degrees Fahrenheit) of temperature reduction (SenterNovem 2003).\" Condenser fans (S25, p. 65): \"On systems where floating head operation is stable, ASDs can lower condenser fan energy consumption by up to 40% compared to operating a fixed-speed condenser fan in on/off fashion (IRC 2004b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "S25 (p. 62) warns that condenser fan energy rises as head pressure falls and that head pressure must not go below what defrost or liquid injection oil cooling need. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
+  },
+  {
+   "id": "E28",
+   "family": "energy",
+   "question": "Is each refrigeration suction level held colder than the warmest load on it needs?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "COMPRESSOR",
+     "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+    },
+    "group_by": "model",
+    "without": [
+     {
+      "select": {
+       "text": "FLOATING SUCTION|SUCTION (PRESSURE )?RESET"
+      },
+      "relation": "anywhere"
+     }
+    ],
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "pressure"
+       ],
+       "text": "SUCTION"
+      },
+      "relation": "same_unit",
+      "as": "suction pressure"
+     },
+     {
+      "select": {
+       "kind": [
+        "equipment"
+       ],
+       "type_text": "EVAPORATOR|UNIT COOLER|FREEZER|COLD STORE|COLD ROOM|BLAST|CHILLER",
+       "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|EVAPORATIVE CONDENSER|FALLING FILM|MULTIPLE.?EFFECT|\\bMVR\\b|\\bTVR\\b"
+      },
+      "relation": "anywhere",
+      "as": "refrigeration load"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "temperature"
+       ],
+       "text": "FREEZER|FROZEN|COLD STORE|COLD ROOM|\\bSTORE\\b|CHILL|BLAST|\\bROOM\\b|PRODUCT"
+      },
+      "relation": "anywhere",
+      "as": "refrigerated space temperature"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "power"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "compressor power"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration compressors and their suction pressure measurements",
+    "the freezers, cold stores and chillers they serve"
+   ],
+   "data_requests": [
+    {
+     "item": "Suction pressure at each suction level, hourly",
+     "where": [
+      {
+       "place": "historian",
+       "for": "suction pressure",
+       "quantity": "pressure"
+      },
+      {
+       "place": "dcs",
+       "what": "suction pressure setpoints per compressor or suction level"
+      }
+     ],
+     "how": "Convert to saturated evaporating temperature; note whether it changes at night, weekends or in winter."
+    },
+    {
+     "item": "The temperature each load actually needs",
+     "where": [
+      {
+       "place": "records",
+       "what": "room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it"
+      },
+      {
+       "place": "historian",
+       "for": "refrigerated space temperature",
+       "quantity": "temperature"
+      }
+     ],
+     "how": "The warmest load on a suction level, less its coil approach, sets the coldest suction that level needs."
+    },
+    {
+     "item": "Compressor power and run hours per suction level",
+     "where": [
+      {
+       "place": "historian",
+       "for": "compressor power",
+       "quantity": "power"
+      },
+      {
+       "place": "records",
+       "what": "compressor run hours from the refrigeration plant controls"
+      }
+     ],
+     "how": "A month or more at normal production."
+    }
+   ],
+   "decision_rule": "Worth a look when a suction level runs colder than its warmest load needs after the coil approach, or stays fixed when loads ease at night and weekends. Close it when the loads on that level need the present temperature.",
+   "typical_benefit": {
+    "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005).\" No figure is given there for single-stage systems.",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "Product temperature and food-safety limits set the floor: a suction change changes how product is held and needs the quality owner's sign-off. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
+  },
+  {
+   "id": "E29",
+   "family": "energy",
+   "question": "Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "COMPRESSOR",
+     "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+    },
+    "group_by": "unit",
+    "without": [
+     {
+      "select": {
+       "text": "\\bVFD\\b|\\bVSD\\b|\\bASD\\b|VARIABLE.?SPEED|ADJUSTABLE.?SPEED|VARIABLE.?FREQUENCY"
+      },
+      "relation": "same_unit"
+     },
+     {
+      "select": {
+       "isa": "^S(C|IC|Y|V)$"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no variable speed drive or speed controller drawn on this compressor",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument",
+        "final_element",
+        "valve"
+       ],
+       "text": "SLIDE|CAPACITY|HOT GAS BYPASS"
+      },
+      "relation": "same_unit",
+      "as": "capacity control"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "power"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "compressor power"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration compressor",
+    "its capacity control, if drawn",
+    "no speed control"
+   ],
+   "data_requests": [
+    {
+     "item": "Slide valve (capacity) position over normal operation",
+     "where": [
+      {
+       "place": "historian",
+       "for": "capacity control",
+       "quantity": "position"
+      },
+      {
+       "place": "dcs",
+       "what": "slide valve position or percent capacity per compressor from the refrigeration plant controls, a month or more"
+      }
+     ],
+     "how": "Hours spent below full load, by load band."
+    },
+    {
+     "item": "Compressor power and run hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "compressor power",
+       "quantity": "power"
+      },
+      {
+       "place": "walkdown",
+       "what": "power logger on the compressor motor across a normal week"
+      }
+     ],
+     "how": "Power at each load band, so part-load efficiency can be seen."
+    },
+    {
+     "item": "How the compressors are sequenced",
+     "where": [
+      {
+       "place": "dcs",
+       "what": "which compressor trims, and the order and pressures at which they load and unload"
+      }
+     ],
+     "how": "Note whether more than one machine trims at the same time."
+    }
+   ],
+   "decision_rule": "Worth a look when screws spend long hours part-loaded on the slide valve while another could be off, or when no machine on a suction level has speed control to trim. Close it if each runs near full load or a sequencer already keeps one machine trimming.",
+   "typical_benefit": {
+    "wording": "Among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003): \"Slide valve unloading of oversized screw compressors.\" and \"Hot gas bypass of compressors.\" Speed control (S25, p. 63): \"ASDs used on compressors below a part-load ratio of about 95% will deliver performance equal to a fixed speed compressor but with lower electricity requirements. However, at near full (i.e., 100%) load, ASDs are approximately 3% less efficient than fixed speed drives\".",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "A drive or sequencing change goes through the compressor vendor (minimum speed, oil management, vibration). Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
+  },
+  {
+   "id": "E30",
+   "family": "energy",
+   "question": "Are these evaporators defrosted on a fixed timer rather than when frost is actually there?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "EVAPORATOR|UNIT COOLER|AIR COOLER|FREEZER|BLAST",
+     "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b|FREEZER|COLD STORE|COLD ROOM|CHILL|BLAST|DEFROST",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|EVAPORATIVE CONDENSER|FALLING FILM|MULTIPLE.?EFFECT|\\bMVR\\b|\\bTVR\\b"
+    },
+    "group_by": "unit",
+    "with": [
+     {
+      "select": {
+       "text": "DEFROST|HOT GAS"
+      },
+      "relation": "same_unit",
+      "as": "defrost"
+     }
+    ],
+    "without": [
+     {
+      "select": {
+       "text": "DEMAND DEFROST|DEFROST ON DEMAND|ON-?DEMAND|FROST (SENSOR|DETECT)"
+      },
+      "relation": "same_unit"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "isa": "^PD(T|I|IT|S)$"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no demand defrost initiation (coil differential pressure, frost sensor) drawn on this evaporator",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "temperature"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "room or coil temperature"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration evaporator with defrost drawn",
+    "no demand defrost initiation"
+   ],
+   "data_requests": [
+    {
+     "item": "Defrost schedule per evaporator",
+     "where": [
+      {
+       "place": "dcs",
+       "what": "defrost initiation (timer or demand), defrosts per day, duration and termination (time or coil temperature) per evaporator"
+      }
+     ],
+     "how": "List defrosts per day by season."
+    },
+    {
+     "item": "Frost on the coil when a scheduled defrost starts",
+     "where": [
+      {
+       "place": "walkdown",
+       "what": "look at the coil just before a few scheduled defrosts, in a dry week and a humid week"
+      }
+     ],
+     "how": "Note clear, light or heavy frost."
+    },
+    {
+     "item": "Hot gas use and room temperature rise per defrost",
+     "where": [
+      {
+       "place": "historian",
+       "for": "defrost",
+       "quantity": "position"
+      },
+      {
+       "place": "historian",
+       "for": "room or coil temperature",
+       "quantity": "temperature"
+      }
+     ],
+     "how": "The heat put in to defrost comes back as refrigeration load afterwards."
+    }
+   ],
+   "decision_rule": "Worth a look when coils are clear at scheduled defrosts, or the count per day is the same in dry weeks as in humid ones. Close it if defrost is already started on demand.",
+   "typical_benefit": {
+    "wording": "Demand defrost (S25, p. 66): \"Evaporators should be defrosted only when necessary, as opposed to on timed schedules where defrosting occurs regardless of need.\" \"Too frequent defrosts.\" is listed among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003). No % stated.",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "A coil differential pressure instrument on the evaporator is taken as demand defrost; check that it is used for that. A P&ID rarely shows the defrost timer itself, so the schedule always comes from the controls."
+  },
+  {
+   "id": "E31",
+   "family": "energy",
+   "question": "Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+    },
+    "group_by": "unit",
+    "without": [
+     {
+      "select": {
+       "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "linked"
+     },
+     {
+      "select": {
+       "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no heat recovery exchanger, recuperator, run-around coil or exhaust recirculation on this unit or on a stream drawn from it",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "stream",
+        "instrument",
+        "valve",
+        "final_element"
+       ],
+       "text": "EXHAUST|STACK|FLUE|\\bVENT"
+      },
+      "relation": "linked",
+      "as": "exhaust"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "text": "EXHAUST|STACK|FLUE"
+      },
+      "relation": "same_unit",
+      "as": "exhaust"
+     },
+     {
+      "select": {
+       "kind": [
+        "stream",
+        "valve",
+        "final_element",
+        "instrument"
+       ],
+       "text": "BURNER|NATURAL GAS|FUEL (GAS|OIL)|PROPANE|\\bLPG\\b|\\bSTEAM\\b|THERMAL OIL|HOT OIL"
+      },
+      "relation": "same_unit",
+      "as": "fuel or heat supply"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "oven, dryer or fryer",
+    "its exhaust and heat supply",
+    "no heat recovery on the exhaust"
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature and flow",
+     "where": [
+      {
+       "place": "historian",
+       "for": "exhaust",
+       "quantity": [
+        "temperature",
+        "flow"
+       ]
+      },
+      {
+       "place": "walkdown",
+       "what": "thermometer and a pitot or anemometer traverse in the exhaust duct, at normal production"
+      }
+     ],
+     "how": "Record both at normal production; heat on offer = mass flow x specific heat x (exhaust temperature minus the temperature it could be cooled to)."
+    },
+    {
+     "item": "Exhaust moisture and contaminants",
+     "where": [
+      {
+       "place": "walkdown",
+       "what": "humidity or dew point probe in the exhaust; note fat, flour, sugar or product dust"
+      },
+      {
+       "place": "maintenance",
+       "what": "duct and stack cleaning history"
+      }
+     ],
+     "how": "Moist exhaust carries latent heat but condenses; fat and dust foul exchangers unless filtered or washed."
+    },
+    {
+     "item": "Fuel or heat input and operating hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "fuel or heat supply",
+       "quantity": "flow"
+      },
+      {
+       "place": "bills",
+       "what": "gas sub-meter readings for this line"
+      },
+      {
+       "place": "records",
+       "what": "production schedule: hours per week the line runs"
+      }
+     ],
+     "how": "A month of input at a known production rate."
+    },
+    {
+     "item": "Where the heat could go in the unit itself",
+     "where": [
+      {
+       "place": "records",
+       "what": "inlet (drying or combustion) air temperature and flow"
+      },
+      {
+       "place": "walkdown",
+       "what": "room next to the unit for ductwork or a run-around coil"
+      }
+     ],
+     "how": "Preheating the unit's own inlet air comes first; H6 asks about users elsewhere."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust leaves hot, the line runs long hours, and the exhaust is clean enough or can be filtered or washed. Close it for short or intermittent runs, or when there is no room for the ductwork.",
+   "typical_benefit": {
+    "wording": "Dryers (S26, p. 104): \"A simple form of heat recovery in retrofit applications is to utilize the exhaust air of a dryer to preheat the inlet air stream, thereby saving energy.\" Spray dryers (S25, p. 90): \"It is estimated that up to 30% of the heat from the dryer exhaust can be recovered.\" Fryers (S26, p. 107): \"Conditioning of the exhaust gas is required, however, to remove fats and to reduce fouling of the heat exchange system.\" No source in this set gives a figure for ovens.",
+    "source": [
+     "S26",
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "S26 (p. 104) notes that recirculating saturated exhaust can raise the inlet humidity and cut drying capacity. A heat recovery item on the unit, or at the other end of a stream drawn from it, quiets the question; recovery drawn elsewhere does not. Ovens and dryers that drive off solvents, or carry combustible dust, need a safety review before any exhaust change."
+  },
+  {
+   "id": "E32",
+   "family": "energy",
+   "question": "Is the burner air-fuel ratio on this oven, dryer or fryer checked and set, with no flue O2 measurement drawn?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+    },
+    "group_by": "unit",
+    "with": [
+     {
+      "select": {
+       "text": "BURNER|NATURAL GAS|FUEL (GAS|OIL)|PROPANE|\\bLPG\\b|GAS.?FIRED|DIRECT.?FIRED"
+      },
+      "relation": "same_unit",
+      "as": "burner or fuel supply"
+     }
+    ],
+    "without": [
+     {
+      "select": {
+       "text": "\\bO2\\b|OXYGEN|EXCESS AIR|COMBUSTION ANALY|FLUE GAS ANALY"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no flue O2 analyser or excess air measurement drawn on this unit"
+   },
+   "evidence_fields": [
+    "gas- or oil-fired oven, dryer or fryer",
+    "its burner or fuel supply",
+    "no flue O2 measurement"
+   ],
+   "data_requests": [
+    {
+     "item": "Flue O2 and CO at high and low fire",
+     "where": [
+      {
+       "place": "walkdown",
+       "what": "portable combustion analyser in the flue or exhaust at high and low fire"
+      },
+      {
+       "place": "records",
+       "what": "the last burner tuning report"
+      }
+     ],
+     "how": "Compare with the burner maker's recommended O2 for this equipment."
+    },
+    {
+     "item": "Air-fuel ratio settings and how they are held",
+     "where": [
+      {
+       "place": "dcs",
+       "what": "burner management and ratio control settings"
+      },
+      {
+       "place": "vendor",
+       "what": "burner datasheet: recommended excess air across the turndown range"
+      }
+     ],
+     "how": "Note whether the ratio is fixed linkage, electronic ratio or trimmed."
+    },
+    {
+     "item": "Fuel use",
+     "where": [
+      {
+       "place": "historian",
+       "for": "burner or fuel supply",
+       "quantity": "flow"
+      },
+      {
+       "place": "bills",
+       "what": "gas sub-meter readings for this unit"
+      }
+     ],
+     "how": "A month of fuel use at a known production rate."
+    },
+    {
+     "item": "Excess air the process needs",
+     "where": [
+      {
+       "place": "records",
+       "what": "the oven or dryer maker's minimum exhaust and excess air for moisture and solvent removal, and any flammable-vapour (LEL) limit"
+      }
+     ],
+     "how": "This is a floor: the burner may not be tuned below it."
+    }
+   ],
+   "decision_rule": "Worth a tune-up when measured flue O2 is above what the burner maker recommends and the process does not need the extra air. On ovens and dryers that drive off water or solvent the dilution and drying air are part of the process: never cut below the maker's or the safety minimum.",
+   "typical_benefit": {
+    "wording": "S27 (p. 1): \"Periodic checking and resetting of air-fuel ratios for burners is one of the simplest ways to get maximum efficiency out of fuel-fired process heating equipment such as furnaces, ovens, heaters, and boilers.\" And: \"Processes that evaporate moisture or solvents need large amounts of excess air to dilute flammable solvents to noncombustible levels, to ensure adequate drying rates, and to carry vapors out of the oven. Lowering excess air to minimal levels can slow down the process and create an explosion hazard.\" No typical % stated (the sheet's worked example is one furnace).",
+    "source": [
+     "S27"
+    ],
+    "arc": null
+   },
+   "limits": "Burner adjustment is a combustion-safety change, done by a qualified burner technician under the site's burner management procedures. Indirect (steam or thermal oil) heated units have no burner on them and do not fire this question."
+  },
+  {
+   "id": "H5",
+   "family": "heat_grade",
+   "question": "Is refrigeration condenser heat rejected while a low-grade heating duty nearby is met with fuel or steam?",
+   "applies_when": {
+    "anchor": [
+     {
+      "kind": [
+       "equipment"
+      ],
+      "type_text": "CONDENSER",
+      "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+      "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER"
+     },
+     {
+      "kind": [
+       "equipment"
+      ],
+      "type_text": "COMPRESSOR",
+      "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+      "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+     }
+    ],
+    "group_by": "model",
+    "with": [
+     {
+      "select": {
+       "kind": [
+        "equipment",
+        "stream"
+       ],
+       "text": "HOT WATER|WASH WATER|\\bCIP\\b|CLEAN.?IN.?PLACE|SPACE HEAT|UNDER.?FLOOR|SUB.?FLOOR|FLOOR HEAT|BOILER FEED|BOILER MAKE-?UP",
+       "not_text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "anywhere",
+      "as": "low-grade heating duty"
+     }
+    ],
+    "without": [
+     {
+      "select": {
+       "text": "HEAT RECLAIM|(REFRIGERA|AMMONIA|\\bNH3\\b|\\bR-?717\\b|HOT GAS).{0,40}(HEAT RECOVERY|DESUPERHEAT)|(HEAT RECOVERY|DESUPERHEAT).{0,40}(REFRIGERA|AMMONIA|\\bNH3\\b|\\bR-?717\\b|HOT GAS)"
+      },
+      "relation": "anywhere"
+     }
+    ],
+    "absent_note": "no desuperheater or refrigeration heat recovery exchanger anywhere in the model",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "temperature",
+        "pressure"
+       ],
+       "text": "DISCHARGE|HEAD|CONDENS"
+      },
+      "relation": "same_unit",
+      "as": "discharge or condensing measurement"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "power"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "compressor power"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration condenser and compressors",
+    "a low-grade heating duty (hot water, CIP, wash water, floor or space heating)",
+    "no desuperheater or heat recovery drawn"
+   ],
+   "data_requests": [
+    {
+     "item": "Discharge and condensing temperatures",
+     "where": [
+      {
+       "place": "historian",
+       "for": "discharge or condensing measurement",
+       "quantity": [
+        "temperature",
+        "pressure"
+       ]
+      },
+      {
+       "place": "dcs",
+       "what": "discharge temperature and head pressure readings in the refrigeration plant controls"
+      }
+     ],
+     "how": "Discharge superheat is the hotter, smaller part; condensing heat is larger but only at the condensing temperature."
+    },
+    {
+     "item": "Compressor power and run hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "compressor power",
+       "quantity": "power"
+      },
+      {
+       "place": "records",
+       "what": "compressor run hours from the refrigeration plant controls"
+      }
+     ],
+     "how": "Heat rejected is about the compressor power plus the refrigeration load at the same time."
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "low-grade heating duty",
+       "quantity": [
+        "temperature",
+        "flow"
+       ]
+      },
+      {
+       "place": "records",
+       "what": "temperatures and loads of the hot water, CIP, wash water, floor heating and space heating users, by hour"
+      }
+     ],
+     "how": "Match by temperature, hours and distance."
+    },
+    {
+     "item": "Effect on head pressure",
+     "where": [
+      {
+       "place": "vendor",
+       "what": "whether a heat recovery exchanger would need a higher condensing pressure than now"
+      }
+     ],
+     "how": "Recovery that raises the head pressure in cool weather costs compressor power (see E27); count it."
+    }
+   ],
+   "decision_rule": "Worth a study when the refrigeration plant runs at the same times as a duty that needs heat below the discharge or condensing temperature, and recovery does not force the head pressure up. Close it if the duties do not overlap or recovery would need a higher condensing pressure all year.",
+   "typical_benefit": {
+    "wording": "S25 (p. 64), refrigeration compressors: \"Where economically feasible, rejected heat can be recovered from compressors and used in other facility applications, such as space heating or water heating.\" No % stated there for refrigeration (the air compressor heat recovery figures quoted under E23 do not apply).",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "The with-clause finds any low-grade duty in the model, not one next to the plant: distance is for the walkdown. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
+  },
+  {
+   "id": "H6",
+   "family": "heat_grade",
+   "question": "Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+    },
+    "group_by": "unit",
+    "with": [
+     {
+      "select": {
+       "kind": [
+        "equipment",
+        "stream"
+       ],
+       "text": "HOT WATER|WASH WATER|\\bCIP\\b|CLEAN.?IN.?PLACE|SPACE HEAT|UNDER.?FLOOR|SUB.?FLOOR|FLOOR HEAT|BOILER FEED|BOILER MAKE-?UP",
+       "not_text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "anywhere",
+      "as": "low-grade heating duty"
+     }
+    ],
+    "without": [
+     {
+      "select": {
+       "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "linked"
+     },
+     {
+      "select": {
+       "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no heat recovery on this unit or on a stream drawn from it",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "stream",
+        "instrument"
+       ],
+       "text": "EXHAUST|STACK|FLUE|\\bVENT"
+      },
+      "relation": "linked",
+      "as": "exhaust"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "text": "EXHAUST|STACK|FLUE"
+      },
+      "relation": "same_unit",
+      "as": "exhaust"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "oven, dryer or fryer exhaust",
+    "a low-grade heating duty in the model"
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature, flow and hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "exhaust",
+       "quantity": [
+        "temperature",
+        "flow"
+       ]
+      },
+      {
+       "place": "walkdown",
+       "what": "thermometer and a pitot or anemometer traverse in the exhaust duct"
+      },
+      {
+       "place": "records",
+       "what": "production schedule"
+      }
+     ],
+     "how": "At normal production."
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "where": [
+      {
+       "place": "historian",
+       "for": "low-grade heating duty",
+       "quantity": [
+        "temperature",
+        "flow"
+       ]
+      },
+      {
+       "place": "records",
+       "what": "hot water, CIP, wash water and space heating loads by hour"
+      }
+     ],
+     "how": "Match by temperature, hours and distance."
+    },
+    {
+     "item": "Distance and exhaust cleanliness",
+     "where": [
+      {
+       "place": "walkdown",
+       "what": "duct or pipe run from the stack to the user; fat, dust or product carry-over in the exhaust"
+      }
+     ],
+     "how": "The closer and cleaner, the better."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+    "source": [
+     "S28",
+     "S26"
+    ],
+    "arc": null
+   },
+   "limits": "Overlaps E31, which asks about the unit's own inlet air first. The with-clause finds any low-grade duty in the model, not one next to the unit."
+  },
+  {
+   "id": "C11",
+   "family": "controls",
+   "question": "Is this dryer's or oven's exhaust (and make-up air) rate set by hand rather than by exhaust humidity?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+    },
+    "group_by": "unit",
+    "without": [
+     {
+      "select": {
+       "text": "HUMIDITY|DEW ?POINT|MOISTURE|WET.?BULB|\\bRH\\b"
+      },
+      "relation": "same_unit"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "isa": "^M(T|E|I|IT|IC|IK)$"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no humidity, dew point or moisture measurement drawn on this unit",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "text": "EXHAUST|STACK|FLUE"
+      },
+      "relation": "same_unit",
+      "as": "exhaust measurement"
+     },
+     {
+      "select": {
+       "kind": [
+        "valve",
+        "final_element",
+        "hand_valve"
+       ],
+       "text": "DAMPER|EXHAUST|FAN"
+      },
+      "relation": "same_unit",
+      "as": "exhaust damper or fan"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "dryer or oven",
+    "no humidity measurement or control on its exhaust"
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust humidity and temperature over a production run",
+     "where": [
+      {
+       "place": "historian",
+       "for": "exhaust measurement",
+       "quantity": "temperature"
+      },
+      {
+       "place": "walkdown",
+       "what": "humidity or dew point logger in the exhaust duct for a full run"
+      }
+     ],
+     "how": "Compare the exhaust humidity with what the product and the process allow."
+    },
+    {
+     "item": "Exhaust damper or fan setting and how it is set",
+     "where": [
+      {
+       "place": "historian",
+       "for": "exhaust damper or fan",
+       "quantity": "position"
+      },
+      {
+       "place": "dcs",
+       "what": "exhaust damper position or fan speed, and whether anything adjusts it"
+      },
+      {
+       "place": "walkdown",
+       "what": "damper position marks"
+      }
+     ],
+     "how": "Note whether it moves with production rate or product."
+    },
+    {
+     "item": "Product moisture at the exit and its specification",
+     "where": [
+      {
+       "place": "records",
+       "what": "quality records: product moisture out of the dryer or oven against specification"
+      }
+     ],
+     "how": "Over-drying shows as moisture well below specification."
+    }
+   ],
+   "decision_rule": "Worth a look when the exhaust leaves well below the humidity the product and the safety limits allow, so heated air is thrown away unsaturated. Close it if the exhaust is already near the allowed humidity or the rate is set by a solvent (LEL) or dust limit.",
+   "typical_benefit": {
+    "wording": "S26 (p. 104): \"Process controls, such as feedback controllers, feed forward controllers, and model-based predictive controllers, can help to minimize dryer energy consumption by more precisely controlling energy inputs to meet the needs of the product being processed.\" The sensors it lists include \"absorption capacitive sensors (for air humidity)\". No % stated.",
+    "source": [
+     "S26"
+    ],
+    "arc": null
+   },
+   "limits": "Exhaust rates on ovens that bake off solvents, or dryers with combustible dust, are set by safety limits: any change goes through the safety review. Fryers are left out: their exhaust is set by the vapour they boil off."
+  },
+  {
+   "id": "C12",
+   "family": "metering",
+   "question": "Is power to these refrigeration compressors measured, so the plant's kW against load can be tracked?",
+   "applies_when": {
+    "anchor": {
+     "kind": [
+      "equipment"
+     ],
+     "type_text": "COMPRESSOR",
+     "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+     "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+    },
+    "group_by": "model",
+    "without": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "power"
+       ]
+      },
+      "relation": "same_unit"
+     },
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "isa": "^(J|E|W|I)(T|I|IT|Q|QI)$"
+      },
+      "relation": "same_unit"
+     }
+    ],
+    "absent_note": "no power, current or energy measurement drawn on these compressors",
+    "also_show": [
+     {
+      "select": {
+       "kind": [
+        "instrument"
+       ],
+       "variable": [
+        "pressure"
+       ]
+      },
+      "relation": "same_unit",
+      "as": "suction or discharge pressure"
+     }
+    ]
+   },
+   "evidence_fields": [
+    "refrigeration compressors with no power measurement drawn"
+   ],
+   "data_requests": [
+    {
+     "item": "Compressor power",
+     "where": [
+      {
+       "place": "walkdown",
+       "what": "the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor"
+      },
+      {
+       "place": "bills",
+       "what": "site interval meter data to apportion"
+      }
+     ],
+     "how": "A representative period at known production."
+    },
+    {
+     "item": "Suction and discharge pressures logged at the same times",
+     "where": [
+      {
+       "place": "historian",
+       "for": "suction or discharge pressure",
+       "quantity": "pressure"
+      },
+      {
+       "place": "dcs",
+       "what": "suction and discharge pressure per compressor in the refrigeration plant controls"
+      }
+     ],
+     "how": "Logged together with power, these show how the plant runs."
+    },
+    {
+     "item": "What to normalise against",
+     "where": [
+      {
+       "place": "records",
+       "what": "production throughput or freezer and cold store loads by day"
+      }
+     ],
+     "how": "kW per unit of product or per unit of refrigeration."
+    }
+   ],
+   "decision_rule": "Meter, or log from the drives, where the refrigeration plant is large enough that kW against load would change decisions; a reading nobody reviews saves nothing.",
+   "typical_benefit": {
+    "wording": "S25 (p. 58): \"A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a).\" \"In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null
+   },
+   "limits": "The 3% is one review of winery refrigeration, as reported in S25. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
   }
  ]
 }

@@ -1,9 +1,11 @@
 """Controls for scripts/check_claims.py: the committed tree agrees with the README, a wrong README is caught, and a
 missing evidence file fails loudly. Reads only committed files; the README is patched in memory, never on disk."""
 import contextlib
+import copy
 import dataclasses
 import io
 import unittest
+from unittest.mock import patch
 
 import check_claims as cc
 
@@ -35,6 +37,21 @@ class CommittedTree(unittest.TestCase):
 
 
 class Drift(unittest.TestCase):
+    def test_matrix_counts_and_pipe_claims_reject_changed_results(self):
+        original = cc.matrix_cells()
+        changed = copy.deepcopy(original)
+        cell = next(c for c in changed if c["row"] == 8 and c["input"] == "open100-holdout")
+        self.assertEqual(cell["status"], "pass")
+        cell["status"] = "fail"
+        # Leave the stored summary unchanged: the claim must use per-sheet counts.
+        cell["detail"]["sheets"]["6"]["tp"] = 0
+        with patch.object(cc, "matrix_cells", return_value=changed):
+            results = {r["id"]: r for r in cc.run(readme_text=readme())}
+        for name in ("M-pass", "M-fail", "M-open100-pipe"):
+            self.assertEqual(results[name]["status"], "FAIL", name)
+        for name in ("M-workflows", "M-na", "M-vendor-pipe"):
+            self.assertEqual(results[name]["status"], "ok", name)
+
     def test_edited_readme_number_is_noticed(self):
         patched = readme().replace("**20.1**", "**21.4**")
         self.assertNotEqual(patched, readme())

@@ -18,7 +18,23 @@
     "red_min": 0.5,
     "rule": "(fixed before looking at any holdout): green = items whose dev error rate stays at or below 5%\nwhen taken from the lowest risk up; red = items with a predicted risk of at least 50% (more likely wrong than\nright). Both thresholds come from the development drawings only."
    },
-   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"
+   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md",
+   "safety_floor": {
+    "rule": "Instruments and in-line items only (never equipment, off-page connectors or links). Letters are the tag's letter group as build_twin.py reads it. ISA-read letters: relief = <variable>S + V/E (PSV, TSV, PSE) or RV, PRV, SRV, PRD, PRSV, RD; shutdown = XV, SDV, ESDV, ESD, BDV; trip switch = <variable>[D]S + H/L/HH/LL/HL (PSH, LSLL, PDSH). Operated-valve shorthand ending in RV (AORV) = relief. Plant-coded tags (letters led by the sheet's system code, build_twin.plant_coded): the letters after the code SV/RV/SRV = relief, IV/ISV = isolation (MSIV). Tag words RUPTURE/BURST/RELIEF/SAFETY VALVE = relief; ESD/SHUTDOWN/SHUTOFF = shutdown; ISOLATION/ISOL = isolation. Reviewed valve callouts keep the reviewer's reading and are not re-classified.",
+    "limits": "Only what a tag says. An untagged valve (most valves on OPEN100), a manual block valve, a normally-closed (NC) valve, a motor/air-operated valve (MOV/AOV) or a plant-coded bypass/block valve (MSBV) is not identified: the extraction has no field that tells isolation duty from control. Interlocks are found only through trip-switch letters; a transmitter that feeds a trip is not marked. PRV and RD are read as relief (they can mean a pressure-reducing valve or another variable), which costs at most an extra check.",
+    "marked": {
+     "general": 2,
+     "instrumentation": 23
+    },
+    "raised_green_to_amber": {
+     "instrumentation": 22
+    },
+    "by_function": {
+     "isolation valve": 1,
+     "relief device": 24
+    },
+    "note": "a floor on the tiers, applied after the calibrated rating; risk scores and thresholds unchanged"
+   }
   }
  },
  "site": {
@@ -42513,10 +42529,15 @@
    "description": "AORV XXX",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "operated-valve letters AORV end in RV (operated relief valve)"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -42580,10 +42601,15 @@
    "description": "PSV 1404",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -42647,10 +42673,15 @@
    "description": "PSV 1405",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -42714,10 +42745,15 @@
    "description": "PSV 1406",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -42781,10 +42817,15 @@
    "description": "PSV 1407",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -43028,10 +43069,15 @@
    "description": "MSIV 1402",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "isolation valve",
+    "basis": "plant tag MSIV: IV after system code MSS"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (isolation valve): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -44918,10 +44964,15 @@
    "description": "PSV 1601",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -44985,10 +45036,15 @@
    "description": "RD 1602",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters RD"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -48885,10 +48941,14 @@
    "description": "PSV 1663",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.1396,
     "tier": "amber",
-    "why": "the other models didn't find this symbol here"
+    "why": "safety-relevant (relief device): always checked; the other models didn't find this symbol here"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -49220,10 +49280,15 @@
    "description": "PSV 14014",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -53392,10 +53457,15 @@
    "description": "PRV 1031",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PRV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -53453,10 +53523,15 @@
    "description": "PRV 1032",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PRV"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -53922,10 +53997,15 @@
    "description": "PSE 1041",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSE"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -53983,10 +54063,15 @@
    "description": "PSE 1042",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSE"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -58077,10 +58162,15 @@
    "description": "PSV XXX",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -60393,10 +60483,15 @@
    "description": "PSV 1161",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -60844,10 +60939,15 @@
    "description": "PSV 1101",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -61478,10 +61578,15 @@
    "description": "PSV 1113",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -62051,10 +62156,15 @@
    "description": "RV 1153",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters RV"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -62112,10 +62222,15 @@
    "description": "RV 1152",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters RV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -62173,10 +62288,15 @@
    "description": "RV 1151",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters RV"
+   },
    "risk": {
     "risk_score": 0.072,
-    "tier": "green",
-    "why": "no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs (minor: it isn't on any drawn line (or a straight line runs right through its box))",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -62914,10 +63034,15 @@
    "description": "PSV 1001",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -64169,10 +64294,15 @@
    "description": "PSV 1212",
    "stream": null,
    "duplicate_tag": false,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag letters PSV"
+   },
    "risk": {
     "risk_score": 0.0395,
-    "tier": "green",
-    "why": "no strong warning signs"
+    "tier": "amber",
+    "why": "safety-relevant (relief device): always checked; extraction checks: no strong warning signs",
+    "tier_before_floor": "green"
    },
    "parent_second_opinion": {
     "rule": "linked",
@@ -75599,10 +75729,14 @@
    "system": "SYS-6",
    "description": "RUPTURE DISK",
    "duplicate_tag": true,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag text RUPTURE"
+   },
    "risk": {
     "risk_score": 0.3963,
     "tier": "amber",
-    "why": "the other models didn't find this symbol here"
+    "why": "safety-relevant (relief device): always checked; the other models didn't find this symbol here"
    }
   },
   {
@@ -75638,10 +75772,14 @@
    "system": "SYS-6",
    "description": "RUPTURE DISK",
    "duplicate_tag": true,
+   "safety": {
+    "function": "relief device",
+    "basis": "tag text RUPTURE"
+   },
    "risk": {
     "risk_score": 0.5535,
     "tier": "red",
-    "why": "the other models didn't find this symbol here; it isn't on any drawn line (or a straight line runs right through its box)"
+    "why": "safety-relevant (relief device): always checked; the other models didn't find this symbol here; it isn't on any drawn line (or a straight line runs right through its box)"
    }
   },
   {

@@ -1,0 +1,2886 @@
+{
+ "schema": "opportunity-rollup-1",
+ "catalog": "data/questions.json",
+ "note": "Several sites' opportunity screens combined: where each question fired and the data to collect at each. A screen, not an audit: no savings are computed and nothing is ranked by value; the order is only how many sites a question fired at, then how many findings.",
+ "sites": [
+  {
+   "site": "food",
+   "screen": "examples/opportunity-screen/food/questions.json",
+   "source_model": "examples/opportunity-screen/food_plant_model.json",
+   "findings": 24,
+   "questions_run": 50
+  },
+  {
+   "site": "bayer",
+   "screen": "examples/opportunity-screen/bayer/questions.json",
+   "source_model": "data/bayer_rt/process_model.json",
+   "findings": 12,
+   "questions_run": 50
+  }
+ ],
+ "counts": {
+  "questions_fired": 24,
+  "findings": 36,
+  "fired_at_every_site": 4
+ },
+ "questions": [
+  {
+   "question_id": "C1",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "family": "metering",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C1@O-302",
+       "about": "O-302",
+       "assets": [
+        {
+         "id": "O-302",
+         "tag": "O-302"
+        },
+        {
+         "id": "stream:U2",
+         "tag": "U2"
+        },
+        {
+         "id": "TV-302",
+         "tag": "TV-302"
+        }
+       ]
+      },
+      {
+       "finding_id": "C1@F-303",
+       "about": "F-303",
+       "assets": [
+        {
+         "id": "F-303",
+         "tag": "F-303"
+        },
+        {
+         "id": "stream:U3",
+         "tag": "U3"
+        },
+        {
+         "id": "TV-303",
+         "tag": "TV-303"
+        }
+       ]
+      },
+      {
+       "finding_id": "C1@WH-401",
+       "about": "WH-401",
+       "assets": [
+        {
+         "id": "WH-401",
+         "tag": "WH-401"
+        },
+        {
+         "id": "stream:U4",
+         "tag": "U4"
+        },
+        {
+         "id": "TV-401",
+         "tag": "TV-401"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "C1@E-3",
+       "about": "E-3",
+       "assets": [
+        {
+         "id": "E-3",
+         "tag": "E-3"
+        },
+        {
+         "id": "stream:U2",
+         "tag": "U2"
+        },
+        {
+         "id": "HV-112",
+         "tag": "HV-112"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 4,
+   "quiet_at": [],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "how": "Measure flow over a representative period and compare with production.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+        "utility bills or the site energy report: site-level meter readings to apportion"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "C1@O-302",
+         "where": [
+          "only a valve (TV-302) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve"
+         ]
+        },
+        {
+         "finding_id": "C1@F-303",
+         "where": [
+          "only a valve (TV-303) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve"
+         ]
+        },
+        {
+         "finding_id": "C1@WH-401",
+         "where": [
+          "only a valve (TV-401) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve"
+         ]
+        }
+       ]
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+        "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+        "utility bills or the site energy report: site-level meter readings to apportion"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Who would use the reading",
+     "how": "Name the report the meter would feed.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: energy or production reporting"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: energy or production reporting"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   }
+  },
+  {
+   "question_id": "C2",
+   "question": "Which measurements have no controller (read by people, or by nothing)?",
+   "family": "controls",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C2@model",
+       "about": "PT-201, JT-201, TT-202, TT-205, TT-206, PDT-206 and 4 more",
+       "assets": [
+        {
+         "id": "PT-201",
+         "tag": "PT-201"
+        },
+        {
+         "id": "JT-201",
+         "tag": "JT-201"
+        },
+        {
+         "id": "TT-202",
+         "tag": "TT-202"
+        },
+        {
+         "id": "TT-205",
+         "tag": "TT-205"
+        },
+        {
+         "id": "TT-206",
+         "tag": "TT-206"
+        },
+        {
+         "id": "PDT-206",
+         "tag": "PDT-206"
+        },
+        {
+         "id": "TT-304",
+         "tag": "TT-304"
+        },
+        {
+         "id": "FT-301",
+         "tag": "FT-301"
+        },
+        {
+         "id": "TT-305",
+         "tag": "TT-305"
+        },
+        {
+         "id": "AT-302",
+         "tag": "AT-302"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "C2@model",
+       "about": "PT-101, FT-103, TT-105, FT-106",
+       "assets": [
+        {
+         "id": "PT-101",
+         "tag": "PT-101"
+        },
+        {
+         "id": "FT-103",
+         "tag": "FT-103"
+        },
+        {
+         "id": "TT-105",
+         "tag": "TT-105"
+        },
+        {
+         "id": "FT-106",
+         "tag": "FT-106"
+        },
+        {
+         "id": "IL-2",
+         "tag": "IL-2"
+        },
+        {
+         "id": "IL-3",
+         "tag": "IL-3"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Whether operators adjust anything by hand from these readings",
+     "how": "Note manual adjustments per shift tied to each reading.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: operator logs and round sheets",
+        "ask the operators which of these they act on, and how often"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: operator logs and round sheets",
+        "ask the operators which of these they act on, and how often"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "The control system's own loop list",
+     "how": "Confirm the reading is indication-only and not read by logic the model lacks.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: export the loop and point list"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: export the loop and point list"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth automating a reading that operators adjust by hand often, on a service where steadier control saves energy or quality; indication-only readings nobody acts on close the question.",
+   "typical_benefit": {
+    "wording": "\"energy and cost savings are around 5% or more for many industrial applications of process control systems\" (for plants without updated controls). Process control: \"Typically 2-18% savings.\" The source says these figures \"cannot be added\".",
+    "source": [
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   }
+  },
+  {
+   "question_id": "C3",
+   "question": "Do these control valves lack position feedback?",
+   "family": "controls",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C3@model",
+       "about": "TV-301, TV-302, TV-303, TV-401, PV-501",
+       "assets": [
+        {
+         "id": "TV-301",
+         "tag": "TV-301"
+        },
+        {
+         "id": "TV-302",
+         "tag": "TV-302"
+        },
+        {
+         "id": "TV-303",
+         "tag": "TV-303"
+        },
+        {
+         "id": "TV-401",
+         "tag": "TV-401"
+        },
+        {
+         "id": "PV-501",
+         "tag": "PV-501"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "C3@model",
+       "about": "FV-107, LV-102, TV-104A, TV-104B, TV-104C",
+       "assets": [
+        {
+         "id": "FV-107",
+         "tag": "FV-107"
+        },
+        {
+         "id": "LV-102",
+         "tag": "LV-102"
+        },
+        {
+         "id": "TV-104A",
+         "tag": "TV-104A"
+        },
+        {
+         "id": "TV-104B",
+         "tag": "TV-104B"
+        },
+        {
+         "id": "TV-104C",
+         "tag": "TV-104C"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "how": "List which valves report position.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+        "maintenance records: valve records"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+        "maintenance records: valve records"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "how": "Compare controller output with measured response.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for PV-501, TV-301, TV-302, TV-303, TV-401 (no historian tag is mapped in this model for these)",
+        "a walkdown: a small step test on each loop in manual"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for FV-107, LV-102, TV-104A, TV-104B, TV-104C (no historian tag is mapped in this model for these)",
+        "a walkdown: a small step test on each loop in manual"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   }
+  },
+  {
+   "question_id": "C9",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "family": "safety_question",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C9@model",
+       "about": "K-201, K-202, K-203, AC-501",
+       "assets": [
+        {
+         "id": "K-201",
+         "tag": "K-201"
+        },
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "K-203",
+         "tag": "K-203"
+        },
+        {
+         "id": "AC-501",
+         "tag": "AC-501"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "C9@model",
+       "about": "P-1",
+       "assets": [
+        {
+         "id": "P-1",
+         "tag": "P-1"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "how": "Confirm what protects each machine and that it is tested.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+        "DCS/PLC configuration: safety system configuration"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+        "DCS/PLC configuration: safety system configuration"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   }
+  },
+  {
+   "question_id": "E11",
+   "question": "Is this hot line insulated?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "E11@stream:S1",
+       "about": "S1",
+       "assets": [
+        {
+         "id": "stream:S1",
+         "tag": "S1"
+        }
+       ]
+      },
+      {
+       "finding_id": "E11@stream:U1",
+       "about": "U1",
+       "assets": [
+        {
+         "id": "stream:U1",
+         "tag": "U1"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Insulation condition and length of bare pipe",
+     "how": "Note bare or damaged lengths and their pipe size.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: infrared camera or surface thermometer along the line",
+        "site records: line list insulation code"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Line temperature",
+     "how": "Surfaces over 120 F (49 C) qualify.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: surface thermometer"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.",
+   "typical_benefit": {
+    "wording": "\"Insulation can typically reduce energy losses by 90%.\" \"Any surface over 120°F should be insulated.\" LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.",
+    "source": [
+     "S1",
+     "S19",
+     "S24"
+    ],
+    "arc": "2.2136 (IAC/ITAC browse page: 1,647 recommendations, 2.2 yr average payback, 61.5% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S1: DOE AMO Steam Tip Sheet #2, Insulate Steam Distribution and Condensate Return Lines (DOE/GO-102012-3404, Jan 2012)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   }
+  },
+  {
+   "question_id": "E29",
+   "question": "Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E29@K-201",
+       "about": "K-201",
+       "assets": [
+        {
+         "id": "K-201",
+         "tag": "K-201"
+        },
+        {
+         "id": "JT-201",
+         "tag": "JT-201"
+        }
+       ]
+      },
+      {
+       "finding_id": "E29@K-202",
+       "about": "K-202",
+       "assets": [
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "ZT-202",
+         "tag": "ZT-202"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Slide valve (capacity) position over normal operation",
+     "how": "Hours spent below full load, by load band.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: slide valve position or percent capacity per compressor from the refrigeration plant controls, a month or more"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "E29@K-202",
+         "where": [
+          "historian or DCS trend for ZT-202 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Compressor power and run hours",
+     "how": "Power at each load band, so part-load efficiency can be seen.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: power logger on the compressor motor across a normal week"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "E29@K-201",
+         "where": [
+          "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "How the compressors are sequenced",
+     "how": "Note whether more than one machine trims at the same time.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: which compressor trims, and the order and pressures at which they load and unload"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when screws spend long hours part-loaded on the slide valve while another could be off, or when no machine on a suction level has speed control to trim. Close it if each runs near full load or a sequencer already keeps one machine trimming.",
+   "typical_benefit": {
+    "wording": "Among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003): \"Slide valve unloading of oversized screw compressors.\" and \"Hot gas bypass of compressors.\" Speed control (S25, p. 63): \"ASDs used on compressors below a part-load ratio of about 95% will deliver performance equal to a fixed speed compressor but with lower electricity requirements. However, at near full (i.e., 100%) load, ASDs are approximately 3% less efficient than fixed speed drives\".",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "E31",
+   "question": "Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E31@D-301",
+       "about": "D-301",
+       "assets": [
+        {
+         "id": "D-301",
+         "tag": "D-301"
+        },
+        {
+         "id": "stream:S1",
+         "tag": "S1"
+        },
+        {
+         "id": "TT-304",
+         "tag": "TT-304"
+        },
+        {
+         "id": "stream:U1",
+         "tag": "U1"
+        },
+        {
+         "id": "FT-301",
+         "tag": "FT-301"
+        },
+        {
+         "id": "TV-301",
+         "tag": "TV-301"
+        }
+       ]
+      },
+      {
+       "finding_id": "E31@O-302",
+       "about": "O-302",
+       "assets": [
+        {
+         "id": "O-302",
+         "tag": "O-302"
+        },
+        {
+         "id": "stream:S2",
+         "tag": "S2"
+        },
+        {
+         "id": "TT-305",
+         "tag": "TT-305"
+        },
+        {
+         "id": "AT-302",
+         "tag": "AT-302"
+        },
+        {
+         "id": "stream:U2",
+         "tag": "U2"
+        },
+        {
+         "id": "TV-302",
+         "tag": "TV-302"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature and flow",
+     "how": "Record both at normal production; heat on offer = mass flow x specific heat x (exhaust temperature minus the temperature it could be cooled to).",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct, at normal production"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "E31@D-301",
+         "where": [
+          "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)"
+         ]
+        },
+        {
+         "finding_id": "E31@O-302",
+         "where": [
+          "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Exhaust moisture and contaminants",
+     "how": "Moist exhaust carries latent heat but condenses; fat and dust foul exchangers unless filtered or washed.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: humidity or dew point probe in the exhaust; note fat, flour, sugar or product dust",
+        "maintenance records: duct and stack cleaning history"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Fuel or heat input and operating hours",
+     "how": "A month of input at a known production rate.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "utility bills or the site energy report: gas sub-meter readings for this line",
+        "site records: production schedule: hours per week the line runs"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "E31@D-301",
+         "where": [
+          "historian or DCS trend for FT-301 (no historian tag is mapped in this model for these)"
+         ]
+        },
+        {
+         "finding_id": "E31@O-302",
+         "where": [
+          "only a valve (TV-302) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Where the heat could go in the unit itself",
+     "how": "Preheating the unit's own inlet air comes first; H6 asks about users elsewhere.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: inlet (drying or combustion) air temperature and flow",
+        "a walkdown: room next to the unit for ductwork or a run-around coil"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust leaves hot, the line runs long hours, and the exhaust is clean enough or can be filtered or washed. Close it for short or intermittent runs, or when there is no room for the ductwork.",
+   "typical_benefit": {
+    "wording": "Dryers (S26, p. 104): \"A simple form of heat recovery in retrofit applications is to utilize the exhaust air of a dryer to preheat the inlet air stream, thereby saving energy.\" Spray dryers (S25, p. 90): \"It is estimated that up to 30% of the heat from the dryer exhaust can be recovered.\" Fryers (S26, p. 107): \"Conditioning of the exhaust gas is required, however, to remove fats and to reduce fouling of the heat exchange system.\" No source in this set gives a figure for ovens.",
+    "source": [
+     "S26",
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)",
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "E32",
+   "question": "Is the burner air-fuel ratio on this oven, dryer or fryer checked and set, with no flue O2 measurement drawn?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E32@D-301",
+       "about": "D-301",
+       "assets": [
+        {
+         "id": "D-301",
+         "tag": "D-301"
+        },
+        {
+         "id": "stream:U1",
+         "tag": "U1"
+        },
+        {
+         "id": "FT-301",
+         "tag": "FT-301"
+        },
+        {
+         "id": "TV-301",
+         "tag": "TV-301"
+        }
+       ]
+      },
+      {
+       "finding_id": "E32@F-303",
+       "about": "F-303",
+       "assets": [
+        {
+         "id": "F-303",
+         "tag": "F-303"
+        },
+        {
+         "id": "stream:U3",
+         "tag": "U3"
+        },
+        {
+         "id": "TV-303",
+         "tag": "TV-303"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Flue O2 and CO at high and low fire",
+     "how": "Compare with the burner maker's recommended O2 for this equipment.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: portable combustion analyser in the flue or exhaust at high and low fire",
+        "site records: the last burner tuning report"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Air-fuel ratio settings and how they are held",
+     "how": "Note whether the ratio is fixed linkage, electronic ratio or trimmed.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: burner management and ratio control settings",
+        "the vendor datasheet: burner datasheet: recommended excess air across the turndown range"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Fuel use",
+     "how": "A month of fuel use at a known production rate.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "utility bills or the site energy report: gas sub-meter readings for this unit"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "E32@D-301",
+         "where": [
+          "historian or DCS trend for FT-301 (no historian tag is mapped in this model for these)"
+         ]
+        },
+        {
+         "finding_id": "E32@F-303",
+         "where": [
+          "only a valve (TV-303) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Excess air the process needs",
+     "how": "This is a floor: the burner may not be tuned below it.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: the oven or dryer maker's minimum exhaust and excess air for moisture and solvent removal, and any flammable-vapour (LEL) limit"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a tune-up when measured flue O2 is above what the burner maker recommends and the process does not need the extra air. On ovens and dryers that drive off water or solvent the dilution and drying air are part of the process: never cut below the maker's or the safety minimum.",
+   "typical_benefit": {
+    "wording": "S27 (p. 1): \"Periodic checking and resetting of air-fuel ratios for burners is one of the simplest ways to get maximum efficiency out of fuel-fired process heating equipment such as furnaces, ovens, heaters, and boilers.\" And: \"Processes that evaporate moisture or solvents need large amounts of excess air to dilute flammable solvents to noncombustible levels, to ensure adequate drying rates, and to carry vapors out of the oven. Lowering excess air to minimal levels can slow down the process and create an explosion hazard.\" No typical % stated (the sheet's worked example is one furnace).",
+    "source": [
+     "S27"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S27: DOE Industrial Technologies Program, Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (Nov 2007)"
+    ]
+   }
+  },
+  {
+   "question_id": "H6",
+   "question": "Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?",
+   "family": "heat_grade",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "H6@D-301",
+       "about": "D-301",
+       "assets": [
+        {
+         "id": "D-301",
+         "tag": "D-301"
+        },
+        {
+         "id": "WH-401",
+         "tag": "WH-401"
+        },
+        {
+         "id": "stream:W2",
+         "tag": "W2"
+        },
+        {
+         "id": "stream:S1",
+         "tag": "S1"
+        },
+        {
+         "id": "TT-304",
+         "tag": "TT-304"
+        }
+       ]
+      },
+      {
+       "finding_id": "H6@O-302",
+       "about": "O-302",
+       "assets": [
+        {
+         "id": "O-302",
+         "tag": "O-302"
+        },
+        {
+         "id": "WH-401",
+         "tag": "WH-401"
+        },
+        {
+         "id": "stream:W2",
+         "tag": "W2"
+        },
+        {
+         "id": "stream:S2",
+         "tag": "S2"
+        },
+        {
+         "id": "TT-305",
+         "tag": "TT-305"
+        },
+        {
+         "id": "AT-302",
+         "tag": "AT-302"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature, flow and hours",
+     "how": "At normal production.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct",
+        "site records: production schedule"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "H6@D-301",
+         "where": [
+          "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)"
+         ]
+        },
+        {
+         "finding_id": "H6@O-302",
+         "where": [
+          "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "how": "Match by temperature, hours and distance.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: hot water, CIP, wash water and space heating loads by hour"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Distance and exhaust cleanliness",
+     "how": "The closer and cleaner, the better.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: duct or pipe run from the stack to the user; fat, dust or product carry-over in the exhaust"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+    "source": [
+     "S28",
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S28: DOE Industrial Technologies Program, Process Heating Tip Sheet #10, Using Waste Heat for External Processes (DOE/GO-102006-2225, Jan 2006)",
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   }
+  },
+  {
+   "question_id": "C11",
+   "question": "Is this dryer's or oven's exhaust (and make-up air) rate set by hand rather than by exhaust humidity?",
+   "family": "controls",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C11@D-301",
+       "about": "D-301",
+       "assets": [
+        {
+         "id": "D-301",
+         "tag": "D-301"
+        },
+        {
+         "id": "TT-304",
+         "tag": "TT-304"
+        },
+        {
+         "id": "HV-304",
+         "tag": "HV-304"
+        }
+       ]
+      },
+      {
+       "finding_id": "C11@O-302",
+       "about": "O-302",
+       "assets": [
+        {
+         "id": "O-302",
+         "tag": "O-302"
+        },
+        {
+         "id": "TT-305",
+         "tag": "TT-305"
+        },
+        {
+         "id": "AT-302",
+         "tag": "AT-302"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 2,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Exhaust humidity and temperature over a production run",
+     "how": "Compare the exhaust humidity with what the product and the process allow.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: humidity or dew point logger in the exhaust duct for a full run"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "C11@D-301",
+         "where": [
+          "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)"
+         ]
+        },
+        {
+         "finding_id": "C11@O-302",
+         "where": [
+          "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Exhaust damper or fan setting and how it is set",
+     "how": "Note whether it moves with production rate or product.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: exhaust damper position or fan speed, and whether anything adjusts it",
+        "a walkdown: damper position marks"
+       ],
+       "where_by_finding": [
+        {
+         "finding_id": "C11@D-301",
+         "where": [
+          "historian or DCS trend for HV-304 (no historian tag is mapped in this model for these)"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Product moisture at the exit and its specification",
+     "how": "Over-drying shows as moisture well below specification.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: quality records: product moisture out of the dryer or oven against specification"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when the exhaust leaves well below the humidity the product and the safety limits allow, so heated air is thrown away unsaturated. Close it if the exhaust is already near the allowed humidity or the rate is set by a solvent (LEL) or dust limit.",
+   "typical_benefit": {
+    "wording": "S26 (p. 104): \"Process controls, such as feedback controllers, feed forward controllers, and model-based predictive controllers, can help to minimize dryer energy consumption by more precisely controlling energy inputs to meet the needs of the product being processed.\" The sensors it lists include \"absorption capacitive sensors (for air humidity)\". No % stated.",
+    "source": [
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   }
+  },
+  {
+   "question_id": "E1",
+   "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "E1@P-1",
+       "about": "P-1",
+       "assets": [
+        {
+         "id": "P-1",
+         "tag": "P-1"
+        },
+        {
+         "id": "LV-102",
+         "tag": "LV-102"
+        },
+        {
+         "id": "TV-104A",
+         "tag": "TV-104A"
+        },
+        {
+         "id": "TV-104B",
+         "tag": "TV-104B"
+        },
+        {
+         "id": "FT-103",
+         "tag": "FT-103"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Control valve position (% open) over normal operation",
+     "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for LV-102 (no historian tag is mapped in this model for these)",
+        "DCS/PLC configuration: the valve's controller output",
+        "a walkdown: read the positioner stroke indicator at several rates"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Flow over the same period (a flow-duration curve)",
+     "how": "Bin the flow into ranges and count the hours in each.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian / recorded data: FT-103: digitized series 'recirc_flow_klbh' (from the source report's Fig 11)",
+        "site records: production rate records"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Pump rated flow and head",
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "the vendor datasheet: pump curve and rated duty point",
+        "the pump nameplate on P-1"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Motor rating and speed",
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "the motor nameplate on P-1",
+        "maintenance records: motor record card"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Static head versus friction head",
+     "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: elevations and pressures at the suction source and the delivery point",
+        "site records: line list or isometrics for pipe lengths and sizes"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+   "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+     "S15",
+     "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   }
+  },
+  {
+   "question_id": "E18",
+   "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "E18@model",
+       "about": "U2, HV-112",
+       "assets": [
+        {
+         "id": "stream:U2",
+         "tag": "U2"
+        },
+        {
+         "id": "HV-112",
+         "tag": "HV-112"
+        },
+        {
+         "id": "stream:U1",
+         "tag": "U1"
+        },
+        {
+         "id": "FT-106",
+         "tag": "FT-106"
+        },
+        {
+         "id": "TV-104C",
+         "tag": "TV-104C"
+        },
+        {
+         "id": "HV-108",
+         "tag": "HV-108"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Temperatures and duties of the cooled and the heated streams",
+     "how": "For each stream: supply and target temperature and duty.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+        "historian or DCS trend for FT-106 (no historian tag is mapped in this model for these)",
+        "site records: heat and material balance"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Whether the duties overlap in time",
+     "how": "Mark each duty continuous, batch or startup-only.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: operating sequence: are both duties needed at the same time?"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Layout distance and fouling",
+     "how": "Note pipe run and fouling service.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: distance between the two exchangers",
+        "maintenance records: cleaning history"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+    "source": [
+     "S19",
+     "S24"
+    ],
+    "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   }
+  },
+  {
+   "question_id": "E19",
+   "question": "Is the compressed air header pressure higher than the end users need?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E19@AC-501",
+       "about": "AC-501",
+       "assets": [
+        {
+         "id": "AC-501",
+         "tag": "AC-501"
+        },
+        {
+         "id": "PIC-202",
+         "tag": "PIC-202"
+        },
+        {
+         "id": "PIC-203",
+         "tag": "PIC-203"
+        },
+        {
+         "id": "PIC-501",
+         "tag": "PIC-501"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Header pressure profile and the minimum end-use pressure",
+     "how": "Find the highest pressure any user truly needs.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: pressure at the farthest and most demanding users"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Lower the setpoint toward the highest true end-use need plus distribution losses.",
+   "typical_benefit": {
+    "wording": "\"for every 2 psi decrease in discharge pressure, energy consumption will decrease by approximately 1 percent at full output flow.\" With 30-50% unregulated usage, \"about 1 to 1.6 percent for every 2 psi.\"",
+    "source": [
+     "S11",
+     "S24"
+    ],
+    "arc": "2.4231 (IAC/ITAC browse page: 6,522 recommendations, 0.5 yr average payback, 51.6% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   }
+  },
+  {
+   "question_id": "E22",
+   "question": "Does the air compressor lack enough storage for intermittent large users?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E22@AC-501",
+       "about": "AC-501",
+       "assets": [
+        {
+         "id": "AC-501",
+         "tag": "AC-501"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Demand profile",
+     "how": "Find short high-demand events.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: data-log compressor load and header pressure for a week"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Add storage when short peaks force an extra compressor on.",
+   "typical_benefit": {
+    "wording": "Storage \"may allow such a compressor to be turned off.\" No % stated.",
+    "source": [
+     "S10",
+     "S24"
+    ],
+    "arc": "2.422x (category only) (IAC/ITAC browse page: 8,589 recommendations, 1.2 yr average payback, 46.5% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S10: Compressed Air Tip #9, Compressed Air Storage Strategies (DOE/GO-102004-1965)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   }
+  },
+  {
+   "question_id": "E23",
+   "question": "Is air compressor heat rejected when it could heat something?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E23@AC-501",
+       "about": "AC-501",
+       "assets": [
+        {
+         "id": "AC-501",
+         "tag": "AC-501"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Load hours and a nearby heat sink",
+     "how": "List heat users within reach.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: compressor run hours",
+        "a walkdown: space or water heating needs nearby"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when the compressor runs long hours and a low-temperature heat user is nearby.",
+   "typical_benefit": {
+    "wording": "\"As much as 80 to 93 percent of the electrical energy\" becomes heat; recovery \"anywhere from 50 to 90 percent of this\".",
+    "source": [
+     "S11"
+    ],
+    "arc": "2.243x (by description)",
+    "source_titles": [
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   }
+  },
+  {
+   "question_id": "H2",
+   "question": "Is high-grade (or unknown-grade) steam doing a low-temperature job?",
+   "family": "heat_grade",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "H2@E-2",
+       "about": "E-2",
+       "assets": [
+        {
+         "id": "E-2",
+         "tag": "E-2"
+        },
+        {
+         "id": "stream:U1",
+         "tag": "U1"
+        },
+        {
+         "id": "TV-104C",
+         "tag": "TV-104C"
+        },
+        {
+         "id": "TIC-104",
+         "tag": "TIC-104"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Steam supply pressure and temperature",
+     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: pressure gauge and thermometer at the supply",
+        "site records: steam header list"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Temperature the user actually needs",
+     "how": "Note setpoint and normal range.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: the temperature setpoint"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity",
+     "how": "List sources whose temperature exceeds the need with a practical approach.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: site steam balance",
+        "a walkdown: headers and hot streams near this user"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
+   "typical_benefit": {
+    "wording": "Closest source wordings: pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management\" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.",
+    "source": [
+     "S19",
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   }
+  },
+  {
+   "question_id": "H4",
+   "question": "Is heat rejected to cooling water at a temperature another user could use?",
+   "family": "heat_grade",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "H4@E-3",
+       "about": "E-3",
+       "assets": [
+        {
+         "id": "E-3",
+         "tag": "E-3"
+        },
+        {
+         "id": "stream:U2",
+         "tag": "U2"
+        },
+        {
+         "id": "HV-112",
+         "tag": "HV-112"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Cooling water return temperature",
+     "how": "Record at normal operation; the return temperature is the grade of the heat on offer.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: thermometer on the return"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Temperature of the stream being cooled (in and out)",
+     "how": "Record at normal operation.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: heat and material balance"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Cooler duty",
+     "how": "Duty = flow x heat capacity x temperature rise.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "the vendor datasheet: exchanger datasheet",
+        "site records: heat and material balance"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "A heat user that needs heat below the return temperature",
+     "how": "Match by temperature, hours and distance.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: list of heating duties with temperatures",
+        "a walkdown: users nearby"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.",
+   "typical_benefit": {
+    "wording": "Closest source wording (S19, pinch): potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated. For air compressors S11 says recovery \"anywhere from 50 to 90 percent\" of the heat, which applies to compressors only.",
+    "source": [
+     "S19",
+     "S11"
+    ],
+    "arc": "2.243x (by description)",
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   }
+  },
+  {
+   "question_id": "C6",
+   "question": "Does a temperature controller write straight to a steam valve with no flow controller underneath (a cascade candidate)?",
+   "family": "controls",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "C6@TV-104C",
+       "about": "TV-104C",
+       "assets": [
+        {
+         "id": "TV-104C",
+         "tag": "TV-104C"
+        },
+        {
+         "id": "TIC-104",
+         "tag": "TIC-104"
+        },
+        {
+         "id": "FT-106",
+         "tag": "FT-106"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Loop behaviour",
+     "how": "Look for oscillation or slow recovery after steam pressure changes.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: controller tuning and output history"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Steam header pressure swings",
+     "how": "Note how often supply pressure moves.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: steam header pressure trend"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "A flow slave helps when steam supply pressure swings disturb the temperature; a steady header and a well-behaved loop close it.",
+   "typical_benefit": {
+    "wording": "No public numeric source found. Report as qualitative only.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   }
+  },
+  {
+   "question_id": "E26",
+   "question": "Are relief and vent flows to the flare or atmosphere unmetered?",
+   "family": "emissions",
+   "sites": [
+    {
+     "site": "bayer",
+     "findings": [
+      {
+       "finding_id": "E26@model",
+       "about": "S8, S9, S11",
+       "assets": [
+        {
+         "id": "stream:S8",
+         "tag": "S8"
+        },
+        {
+         "id": "stream:S9",
+         "tag": "S9"
+        },
+        {
+         "id": "stream:S11",
+         "tag": "S11"
+        },
+        {
+         "id": "PSV-101",
+         "tag": "PSV-101"
+        },
+        {
+         "id": "PSV-102",
+         "tag": "PSV-102"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "food"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Flare or vent flow and composition",
+     "how": "Separate continuous (background) flow from relief events.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: ultrasonic flare-gas meter or a temporary vent flow measurement",
+        "site records: relief valve lift records"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth metering when background flow is continuous; relief-only lines that seldom lift close the question.",
+   "typical_benefit": {
+    "wording": "Background flaring \"can be as much as 50% of all flared gases (Miles, 2001).\" In refineries it \"will generally be less than 50%.\" No recovery % stated.",
+    "source": [
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   }
+  },
+  {
+   "question_id": "E27",
+   "question": "Is the refrigeration condensing (head) pressure held higher than the weather allows, with no floating head pressure?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E27@C-201",
+       "about": "C-201",
+       "assets": [
+        {
+         "id": "C-201",
+         "tag": "C-201"
+        },
+        {
+         "id": "PT-203",
+         "tag": "PT-203"
+        },
+        {
+         "id": "PIC-203",
+         "tag": "PIC-203"
+        },
+        {
+         "id": "K-201",
+         "tag": "K-201"
+        },
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "K-203",
+         "tag": "K-203"
+        },
+        {
+         "id": "JT-201",
+         "tag": "JT-201"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Head (discharge) pressure and condensing temperature, hourly over a year",
+     "how": "Convert pressure to saturated condensing temperature with the refrigerant's tables; see whether it falls in cool weather or sits at the setpoint.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for PT-203 (no historian tag is mapped in this model for these)",
+        "DCS/PLC configuration: the head pressure setpoint and its low limit in the refrigeration plant controls"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Ambient wet-bulb temperature (dry-bulb for an air-cooled condenser) at the same times",
+     "how": "Line it up hour by hour with the condensing temperature.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: the site weather station, or the nearest public weather station's hourly record"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "The lowest head pressure the plant can run at",
+     "how": "This is the floor a floating setpoint may not go below.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: the minimum needed for hot gas defrost, liquid injection oil cooling and liquid feed to the farthest evaporator",
+        "the vendor datasheet: compressor and expansion valve minimum pressure difference"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Compressor and condenser fan and pump power",
+     "how": "Floating the head pressure moves load from the compressors to the condenser fans; count both.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+        "a walkdown: power logger on the compressor motors and on the condenser fan and spray pump motors"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when the head pressure sits at a fixed setpoint through cool weather, above both what the condenser could reach and the plant's own minimum. If it already follows the wet-bulb down to that minimum, close it.",
+   "typical_benefit": {
+    "wording": "Floating head pressure (S25, p. 62) \"allows compressor head pressures to move up or down with variations in ambient wet-bulb temperature, saving energy compared to fixed head pressure operation.\" Condensing pressure (S25, p. 65): \"Lowering the condensing temperature can reduce compressor energy use by around 2% to 3% for every degree Celsius (1.8 degrees Fahrenheit) of temperature reduction (SenterNovem 2003).\" Condenser fans (S25, p. 65): \"On systems where floating head operation is stable, ASDs can lower condenser fan energy consumption by up to 40% compared to operating a fixed-speed condenser fan in on/off fashion (IRC 2004b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "E28",
+   "question": "Is each refrigeration suction level held colder than the warmest load on it needs?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E28@model",
+       "about": "K-201, K-202, K-203",
+       "assets": [
+        {
+         "id": "K-201",
+         "tag": "K-201"
+        },
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "K-203",
+         "tag": "K-203"
+        },
+        {
+         "id": "PT-201",
+         "tag": "PT-201"
+        },
+        {
+         "id": "PT-202",
+         "tag": "PT-202"
+        },
+        {
+         "id": "EV-201",
+         "tag": "EV-201"
+        },
+        {
+         "id": "EV-202",
+         "tag": "EV-202"
+        },
+        {
+         "id": "CS-201",
+         "tag": "CS-201"
+        },
+        {
+         "id": "TT-205",
+         "tag": "TT-205"
+        },
+        {
+         "id": "TT-206",
+         "tag": "TT-206"
+        },
+        {
+         "id": "JT-201",
+         "tag": "JT-201"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Suction pressure at each suction level, hourly",
+     "how": "Convert to saturated evaporating temperature; note whether it changes at night, weekends or in winter.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for PT-201, PT-202 (no historian tag is mapped in this model for these)",
+        "DCS/PLC configuration: suction pressure setpoints per compressor or suction level"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "The temperature each load actually needs",
+     "how": "The warmest load on a suction level, less its coil approach, sets the coldest suction that level needs.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it",
+        "historian or DCS trend for TT-205, TT-206 (no historian tag is mapped in this model for these)"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Compressor power and run hours per suction level",
+     "how": "A month or more at normal production.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+        "site records: compressor run hours from the refrigeration plant controls"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when a suction level runs colder than its warmest load needs after the coil approach, or stays fixed when loads ease at night and weekends. Close it when the loads on that level need the present temperature.",
+   "typical_benefit": {
+    "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005).\" No figure is given there for single-stage systems.",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "E30",
+   "question": "Are these evaporators defrosted on a fixed timer rather than when frost is actually there?",
+   "family": "energy",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "E30@EV-201",
+       "about": "EV-201",
+       "assets": [
+        {
+         "id": "EV-201",
+         "tag": "EV-201"
+        },
+        {
+         "id": "HGV-201",
+         "tag": "HGV-201"
+        },
+        {
+         "id": "TT-205",
+         "tag": "TT-205"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Defrost schedule per evaporator",
+     "how": "List defrosts per day by season.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "DCS/PLC configuration: defrost initiation (timer or demand), defrosts per day, duration and termination (time or coil temperature) per evaporator"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Frost on the coil when a scheduled defrost starts",
+     "how": "Note clear, light or heavy frost.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: look at the coil just before a few scheduled defrosts, in a dry week and a humid week"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Hot gas use and room temperature rise per defrost",
+     "how": "The heat put in to defrost comes back as refrigeration load afterwards.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for HGV-201 (no historian tag is mapped in this model for these)",
+        "historian or DCS trend for TT-205 (no historian tag is mapped in this model for these)"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a look when coils are clear at scheduled defrosts, or the count per day is the same in dry weeks as in humid ones. Close it if defrost is already started on demand.",
+   "typical_benefit": {
+    "wording": "Demand defrost (S25, p. 66): \"Evaporators should be defrosted only when necessary, as opposed to on timed schedules where defrosting occurs regardless of need.\" \"Too frequent defrosts.\" is listed among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003). No % stated.",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "H5",
+   "question": "Is refrigeration condenser heat rejected while a low-grade heating duty nearby is met with fuel or steam?",
+   "family": "heat_grade",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "H5@model",
+       "about": "K-201, K-202, K-203, C-201",
+       "assets": [
+        {
+         "id": "K-201",
+         "tag": "K-201"
+        },
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "K-203",
+         "tag": "K-203"
+        },
+        {
+         "id": "C-201",
+         "tag": "C-201"
+        },
+        {
+         "id": "WH-401",
+         "tag": "WH-401"
+        },
+        {
+         "id": "stream:W2",
+         "tag": "W2"
+        },
+        {
+         "id": "TT-202",
+         "tag": "TT-202"
+        },
+        {
+         "id": "PT-203",
+         "tag": "PT-203"
+        },
+        {
+         "id": "JT-201",
+         "tag": "JT-201"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Discharge and condensing temperatures",
+     "how": "Discharge superheat is the hotter, smaller part; condensing heat is larger but only at the condensing temperature.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for PT-203, TT-202 (no historian tag is mapped in this model for these)",
+        "DCS/PLC configuration: discharge temperature and head pressure readings in the refrigeration plant controls"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Compressor power and run hours",
+     "how": "Heat rejected is about the compressor power plus the refrigeration load at the same time.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+        "site records: compressor run hours from the refrigeration plant controls"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "how": "Match by temperature, hours and distance.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: temperatures and loads of the hot water, CIP, wash water, floor heating and space heating users, by hour"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Effect on head pressure",
+     "how": "Recovery that raises the head pressure in cool weather costs compressor power (see E27); count it.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "the vendor datasheet: whether a heat recovery exchanger would need a higher condensing pressure than now"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Worth a study when the refrigeration plant runs at the same times as a duty that needs heat below the discharge or condensing temperature, and recovery does not force the head pressure up. Close it if the duties do not overlap or recovery would need a higher condensing pressure all year.",
+   "typical_benefit": {
+    "wording": "S25 (p. 64), refrigeration compressors: \"Where economically feasible, rejected heat can be recovered from compressors and used in other facility applications, such as space heating or water heating.\" No % stated there for refrigeration (the air compressor heat recovery figures quoted under E23 do not apply).",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  },
+  {
+   "question_id": "C12",
+   "question": "Is power to these refrigeration compressors measured, so the plant's kW against load can be tracked?",
+   "family": "metering",
+   "sites": [
+    {
+     "site": "food",
+     "findings": [
+      {
+       "finding_id": "C12@model",
+       "about": "K-202, K-203",
+       "assets": [
+        {
+         "id": "K-202",
+         "tag": "K-202"
+        },
+        {
+         "id": "K-203",
+         "tag": "K-203"
+        },
+        {
+         "id": "PT-202",
+         "tag": "PT-202"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "findings": 1,
+   "quiet_at": [
+    "bayer"
+   ],
+   "not_checked_at": [],
+   "not_run_at": [],
+   "data_requests": [
+    {
+     "item": "Compressor power",
+     "how": "A representative period at known production.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "a walkdown: the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor",
+        "utility bills or the site energy report: site interval meter data to apportion"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Suction and discharge pressures logged at the same times",
+     "how": "Logged together with power, these show how the plant runs.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "historian or DCS trend for PT-202 (no historian tag is mapped in this model for these)",
+        "DCS/PLC configuration: suction and discharge pressure per compressor in the refrigeration plant controls"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "What to normalise against",
+     "how": "kW per unit of product or per unit of refrigeration.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: production throughput or freezer and cold store loads by day"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    }
+   ],
+   "decision_rule": "Meter, or log from the drives, where the refrigeration plant is large enough that kW against load would change decisions; a reading nobody reviews saves nothing.",
+   "typical_benefit": {
+    "wording": "S25 (p. 58): \"A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a).\" \"In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   }
+  }
+ ],
+ "quiet_at_every_site": [
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E20",
+  "E21",
+  "E24",
+  "H1",
+  "H3",
+  "C4",
+  "C5",
+  "C7",
+  "C10",
+  "C8",
+  "E25"
+ ]
+}

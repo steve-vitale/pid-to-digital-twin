@@ -28,6 +28,7 @@ python scripts/pipeline.py status   # whether every output is fresh against the 
 python scripts/attempts_ledger.py --check   # the tuning ledger is complete, sourced and current
 python scripts/feature_catalog.py --check   # every feature, its evidence and its independent review status
 python scripts/corpus_matrix.py --check     # the generalization matrix page matches its results
+python scripts/rescore.py --check           # re-score the committed predictions; diff every table against out/
 ```
 
 Before suggesting a change to a method, read `docs/TRIED.md`: it lists every variant tried with its result and
@@ -46,7 +47,9 @@ python scripts/run_tests.py         # the same suite CI runs
 `check_claims.py` prints one row per claim: what the README says, what the evidence file says, the file, and
 whether they agree. It checks that the README's numbers match the committed results files. It does not re-run
 models or re-score predictions, so a pass means "the README matches the results files", not "the results were
-reproduced"; tell your user which one you checked. Claims marked "prose only" rest on narrative in the journal, not on a result file; say so if
+reproduced"; tell your user which one you checked. `python scripts/rescore.py --check` is the second step: it
+  re-scores the committed predictions and diffs the regenerated tables against those results files (five earlier
+diagnostic tables still lack predictions; see below). Claims marked "prose only" rest on narrative in the journal, not on a result file; say so if
 your user relies on one.
 
 ## One claim end to end
@@ -64,9 +67,18 @@ Pick whichever matters to your user and follow it from source to number. Each of
 ## What you can't reproduce here, and why
 
 - **Model extraction runs.** They call commercial models through the author's subscriptions. The prompts, images,
-  hashes and scorecards are committed. The raw run records, which hold the per-drawing model outputs, are not
-  (`runs/README.md` says why), so the headline scores can be re-scored only from run records you produce by running
-  the models again.
+  hashes and scorecards are committed. The raw run records are not (`runs/README.md` says why), but the parsed
+  prediction from each one is: `predictions/<label>/<tool>/<drawing>.json`. `python scripts/rescore.py --check`
+  regenerates the scorecards and replicate tables from those predictions and the committed answer keys alone and
+  diffs them against `out/` (exit 1 on any difference; a few minutes, standard library only). On
+  2026-10-29 it regenerated 30 tables in their original formats, including the round-5 headline replicates, the
+  holdout-B and round-4 scorecards and both Tennessee Eastman round trips (`predictions/README.md`).
+  Seven use explicit historical formatting adjustments; their metric values and JSON still compare in full.
+- **Five earlier diagnostic tables.** The round-2 `-ov`, oracle and union variants and the development `r2-trace`
+  table still lack predictions. `rescore.py --check` reports `GAP`, not a pass. The round-5 and revision-A TE
+  predictions were recovered from preserved research working copies; `predictions/RECOVERY.json` records the hashes.
+- **Holdout B without a download.** Its answer keys are not committed; until `scripts/fetch_pid2graph.py` has
+  fetched them, its four scorecards report `SKIP`, not a pass.
 - **The Ignition acceptance run.** It needs a local Ignition 8.3 gateway. The receipts are committed;
   `docs/IGNITION_QUICKSTART.md` is how to stand one up.
 - **The 3D stills.** They need Blender (`BLENDER_EXE`).

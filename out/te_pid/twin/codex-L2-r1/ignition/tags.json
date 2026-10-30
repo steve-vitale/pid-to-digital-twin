@@ -53,7 +53,7 @@
      ]
     },
     {
-     "name": "Instrument_AI",
+     "name": "Instrument_ControlValve",
      "tagType": "UdtType",
      "parameters": {
       "AssetId": {
@@ -104,568 +104,7 @@
      ]
     },
     {
-     "name": "Instrument_FI",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_FV",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_LE",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_LI",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_LV",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_PI",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_PR",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_PV",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_SC",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_TI",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_TR",
-     "tagType": "UdtType",
-     "parameters": {
-      "AssetId": {
-       "dataType": "String",
-       "value": ""
-      },
-      "SourceTag": {
-       "dataType": "String",
-       "value": ""
-      },
-      "BasePath": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "PointName": {
-       "dataType": "String",
-       "value": "PLACEHOLDER"
-      },
-      "OPCServer": {
-       "dataType": "String",
-       "value": "Ignition OPC UA Server"
-      }
-     },
-     "tags": [
-      {
-       "name": "PV",
-       "tagType": "AtomicTag",
-       "valueSource": "opc",
-       "dataType": "Float8",
-       "readOnly": true,
-       "documentation": "Process value. OPC path is a placeholder until mapped to the real point.",
-       "opcServer": {
-        "bindType": "parameter",
-        "binding": "{OPCServer}"
-       },
-       "opcItemPath": {
-        "bindType": "parameter",
-        "binding": "{BasePath}.{PointName}"
-       }
-      },
-      {
-       "name": "ReviewStatus",
-       "tagType": "AtomicTag",
-       "valueSource": "memory",
-       "dataType": "String",
-       "value": "unverified"
-      }
-     ]
-    },
-    {
-     "name": "Instrument_TV",
+     "name": "Instrument_Measurement",
      "tagType": "UdtType",
      "parameters": {
       "AssetId": {
@@ -780,7 +219,7 @@
          "name": "R-101",
          "tagType": "UdtInstance",
          "typeId": "Equipment_Tank",
-         "documentation": "S101-TK001 | tag: R-101 (as_extracted) | on sheets 101 | sheet 101 symbol s14 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S101-TK001 | tag: R-101 (as_extracted) | on sheets 101 | sheet 101 symbol s14 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -796,7 +235,7 @@
          "name": "S101-VL001",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S101-VL001 | tag: none read (missing) | sheet 101 symbol s6 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S101-VL001 | tag: none read (missing) | sheet 101 symbol s6 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -812,7 +251,7 @@
          "name": "S101-VL002",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S101-VL002 | tag: none read (missing) | sheet 101 symbol s9 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S101-VL002 | tag: none read (missing) | sheet 101 symbol s9 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -828,7 +267,7 @@
          "name": "S101-VL003",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S101-VL003 | tag: none read (missing) | sheet 101 symbol s12 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S101-VL003 | tag: none read (missing) | sheet 101 symbol s12 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -844,7 +283,7 @@
          "name": "M",
          "tagType": "UdtInstance",
          "typeId": "LineItem_General",
-         "documentation": "S101-GN001 | tag: M (as_extracted) | sheet 101 symbol s16 | confidence 0.95 | UNVERIFIED",
+         "documentation": "S101-GN001 | tag: M (as_extracted) | sheet 101 symbol s16 | confidence 0.95 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -860,7 +299,7 @@
          "name": "U-100",
          "tagType": "UdtInstance",
          "typeId": "LineItem_General",
-         "documentation": "S101-GN002 | tag: U-100 (as_extracted) | sheet 101 symbol s22 | confidence 0.97 | UNVERIFIED",
+         "documentation": "S101-GN002 | tag: U-100 (as_extracted) | sheet 101 symbol s22 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -876,7 +315,7 @@
          "name": "S101-VL004",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S101-VL004 | tag: none read (missing) | sheet 101 symbol s26 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S101-VL004 | tag: none read (missing) | sheet 101 symbol s26 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -891,8 +330,8 @@
         {
          "name": "FV_200",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FV",
-         "documentation": "S101-IN001 | tag: FV 200 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s5 | confidence 0.92 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S101-IN001 | tag: FV 200 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s5 | confidence 0.92 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -911,8 +350,8 @@
         {
          "name": "FI_101",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FI",
-         "documentation": "S101-IN002 | tag: FI 101 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s7 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN002 | tag: FI 101 (as_extracted) | attached to S101-VL001 (along_line) | sheet 101 symbol s7 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -931,8 +370,8 @@
         {
          "name": "FV_201",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FV",
-         "documentation": "S101-IN003 | tag: FV 201 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s8 | confidence 0.93 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S101-IN003 | tag: FV 201 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s8 | confidence 0.93 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -951,8 +390,8 @@
         {
          "name": "FI_102",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FI",
-         "documentation": "S101-IN004 | tag: FI 102 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s10 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN004 | tag: FI 102 (as_extracted) | attached to S101-VL002 (along_line) | sheet 101 symbol s10 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -971,8 +410,8 @@
         {
          "name": "FV_202",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FV",
-         "documentation": "S101-IN005 | tag: FV 202 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s11 | confidence 0.93 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S101-IN005 | tag: FV 202 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s11 | confidence 0.93 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -991,8 +430,8 @@
         {
          "name": "FI_103",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FI",
-         "documentation": "S101-IN006 | tag: FI 103 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s13 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN006 | tag: FI 103 (as_extracted) | attached to S101-VL003 (along_line) | sheet 101 symbol s13 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1011,8 +450,8 @@
         {
          "name": "SC_721",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_SC",
-         "documentation": "S101-IN007 | tag: SC 721 (as_extracted) | attached to S101-GN001 (along_line) | sheet 101 symbol s17 | confidence 0.93 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN007 | tag: SC 721 (as_extracted) | attached to S101-GN001 (along_line) | sheet 101 symbol s17 | confidence 0.93 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1031,8 +470,8 @@
         {
          "name": "PR_107",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PR",
-         "documentation": "S101-IN008 | tag: PR 107 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s18 | confidence 0.92 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN008 | tag: PR 107 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s18 | confidence 0.92 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1051,8 +490,8 @@
         {
          "name": "LE_108",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_LE",
-         "documentation": "S101-IN009 | tag: LE 108 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s19 | confidence 0.98 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN009 | tag: LE 108 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s19 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1071,8 +510,8 @@
         {
          "name": "TR_109",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TR",
-         "documentation": "S101-IN010 | tag: TR 109 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s20 | confidence 0.98 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN010 | tag: TR 109 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s20 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1091,8 +530,8 @@
         {
          "name": "PI_106",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S101-IN011 | tag: PI 106 (as_extracted) | attached to S101-GN002 (along_line) | sheet 101 symbol s23 | confidence 0.88 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN011 | tag: PI 106 (as_extracted) | attached to S101-GN002 (along_line) | sheet 101 symbol s23 | confidence 0.88 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1111,8 +550,8 @@
         {
          "name": "AI",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_AI",
-         "documentation": "S101-IN012 | tag: AI (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s24 | confidence 0.98 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN012 | tag: AI (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s24 | confidence 0.98 | review: UNVERIFIED | risk tier: amber",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1131,8 +570,8 @@
         {
          "name": "TV_210",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TV",
-         "documentation": "S101-IN013 | tag: TV 210 (as_extracted) | attached to S101-VL004 (along_line) | sheet 101 symbol s27 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S101-IN013 | tag: TV 210 (as_extracted) | attached to S101-VL004 (along_line) | sheet 101 symbol s27 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1151,8 +590,8 @@
         {
          "name": "TI_121",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S101-IN014 | tag: TI 121 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s28 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S101-IN014 | tag: TI 121 (as_extracted) | attached to S101-TK001 (along_line) | sheet 101 symbol s28 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1185,7 +624,7 @@
          "name": "E-101",
          "tagType": "UdtInstance",
          "typeId": "Equipment_Tank",
-         "documentation": "S102-TK001 | tag: E-101 (as_extracted) | on sheets 102 | sheet 102 symbol s5 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S102-TK001 | tag: E-101 (as_extracted) | on sheets 102 | sheet 102 symbol s5 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1201,7 +640,7 @@
          "name": "S102-VL001",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S102-VL001 | tag: none read (missing) | sheet 102 symbol s8 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S102-VL001 | tag: none read (missing) | sheet 102 symbol s8 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1216,8 +655,8 @@
         {
          "name": "TI_122",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S102-IN001 | tag: TI 122 (as_extracted) | attached to S102-TK001 (along_line) | sheet 102 symbol s6 | confidence 0.94 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN001 | tag: TI 122 (as_extracted) | attached to S102-TK001 (along_line) | sheet 102 symbol s6 | confidence 0.94 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1236,8 +675,8 @@
         {
          "name": "TV_211",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TV",
-         "documentation": "S102-IN002 | tag: TV 211 (as_extracted) | attached to S102-VL001 (along_line) | sheet 102 symbol s7 | confidence 0.95 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S102-IN002 | tag: TV 211 (as_extracted) | attached to S102-VL001 (along_line) | sheet 102 symbol s7 | confidence 0.95 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1263,7 +702,7 @@
          "name": "V-101",
          "tagType": "UdtInstance",
          "typeId": "Equipment_Tank",
-         "documentation": "S102-TK002 | tag: V-101 (as_extracted) | on sheets 102 | sheet 102 symbol s9 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S102-TK002 | tag: V-101 (as_extracted) | on sheets 102 | sheet 102 symbol s9 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1279,7 +718,7 @@
          "name": "S102-VL003",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S102-VL003 | tag: none read (missing) | sheet 102 symbol s18 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S102-VL003 | tag: none read (missing) | sheet 102 symbol s18 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1295,7 +734,7 @@
          "name": "S102-VL004",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S102-VL004 | tag: none read (missing) | sheet 102 symbol s25 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S102-VL004 | tag: none read (missing) | sheet 102 symbol s25 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1310,8 +749,8 @@
         {
          "name": "PI_110",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S102-IN006 | tag: PI 110 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s15 | confidence 0.94 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN006 | tag: PI 110 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s15 | confidence 0.94 | review: UNVERIFIED | risk tier: amber",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1330,8 +769,8 @@
         {
          "name": "AI_119",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_AI",
-         "documentation": "S102-IN007 | tag: AI 119 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s16 | confidence 0.73 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN007 | tag: AI 119 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s16 | confidence 0.73 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1350,8 +789,8 @@
         {
          "name": "FV_206",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FV",
-         "documentation": "S102-IN008 | tag: FV 206 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s17 | confidence 0.87 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S102-IN008 | tag: FV 206 (as_extracted) | attached to S102-VL003 (along_line) | sheet 102 symbol s17 | confidence 0.87 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1370,8 +809,8 @@
         {
          "name": "TI_111",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S102-IN009 | tag: TI 111 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s20 | confidence 0.92 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN009 | tag: TI 111 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s20 | confidence 0.92 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1390,8 +829,8 @@
         {
          "name": "LI_112",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_LI",
-         "documentation": "S102-IN010 | tag: LI 112 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s21 | confidence 0.96 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN010 | tag: LI 112 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s21 | confidence 0.96 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1410,8 +849,8 @@
         {
          "name": "PI_113",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S102-IN011 | tag: PI 113 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s22 | confidence 0.95 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN011 | tag: PI 113 (as_extracted) | attached to S102-TK002 (along_line) | sheet 102 symbol s22 | confidence 0.95 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1430,8 +869,8 @@
         {
          "name": "PI_114",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S102-IN012 | tag: PI 114 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s23 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN012 | tag: PI 114 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s23 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1450,8 +889,8 @@
         {
          "name": "LV_207",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_LV",
-         "documentation": "S102-IN013 | tag: LV 207 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s24 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S102-IN013 | tag: LV 207 (as_extracted) | attached to S102-VL004 (along_line) | sheet 102 symbol s24 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1477,7 +916,7 @@
          "name": "K-101",
          "tagType": "UdtInstance",
          "typeId": "Equipment_Pump",
-         "documentation": "S102-PU001 | tag: K-101 (as_extracted) | on sheets 102 | sheet 102 symbol s10 | confidence 0.96 | UNVERIFIED",
+         "documentation": "S102-PU001 | tag: K-101 (as_extracted) | on sheets 102 | sheet 102 symbol s10 | confidence 0.96 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1493,7 +932,7 @@
          "name": "S102-VL002",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S102-VL002 | tag: none read (missing) | sheet 102 symbol s13 | confidence 0.96 | UNVERIFIED",
+         "documentation": "S102-VL002 | tag: none read (missing) | sheet 102 symbol s13 | confidence 0.96 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1508,8 +947,8 @@
         {
          "name": "PI_109",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S102-IN003 | tag: PI 109 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s11 | confidence 0.94 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN003 | tag: PI 109 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s11 | confidence 0.94 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1528,8 +967,8 @@
         {
          "name": "AI_120",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_AI",
-         "documentation": "S102-IN004 | tag: AI 120 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s12 | confidence 0.87 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S102-IN004 | tag: AI 120 (as_extracted) | attached to S102-PU001 (along_line) | sheet 102 symbol s12 | confidence 0.87 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1548,8 +987,8 @@
         {
          "name": "FV_205",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_FV",
-         "documentation": "S102-IN005 | tag: FV 205 (as_extracted) | attached to S102-VL002 (along_line) | sheet 102 symbol s14 | confidence 0.77 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S102-IN005 | tag: FV 205 (as_extracted) | attached to S102-VL002 (along_line) | sheet 102 symbol s14 | confidence 0.77 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1582,7 +1021,7 @@
          "name": "C-101",
          "tagType": "UdtInstance",
          "typeId": "Equipment_Tank",
-         "documentation": "S103-TK001 | tag: C-101 (as_extracted) | on sheets 103 | sheet 103 symbol s1 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S103-TK001 | tag: C-101 (as_extracted) | on sheets 103 | sheet 103 symbol s1 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1598,7 +1037,7 @@
          "name": "S103-VL001",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S103-VL001 | tag: none read (missing) | sheet 103 symbol s8 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S103-VL001 | tag: none read (missing) | sheet 103 symbol s8 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1614,7 +1053,7 @@
          "name": "S103-VL002",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S103-VL002 | tag: none read (missing) | sheet 103 symbol s12 | confidence 0.98 | UNVERIFIED",
+         "documentation": "S103-VL002 | tag: none read (missing) | sheet 103 symbol s12 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1630,7 +1069,7 @@
          "name": "S103-VL003",
          "tagType": "UdtInstance",
          "typeId": "LineItem_Valve",
-         "documentation": "S103-VL003 | tag: none read (missing) | sheet 103 symbol s19 | confidence 0.99 | UNVERIFIED",
+         "documentation": "S103-VL003 | tag: none read (missing) | sheet 103 symbol s19 | confidence 0.99 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1645,8 +1084,8 @@
         {
          "name": "PI_116",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S103-IN001 | tag: PI 116 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s4 | confidence 0.98 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN001 | tag: PI 116 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s4 | confidence 0.98 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1665,8 +1104,8 @@
         {
          "name": "TI_118",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S103-IN002 | tag: TI 118 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s5 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN002 | tag: TI 118 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s5 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1685,8 +1124,8 @@
         {
          "name": "LI_115",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_LI",
-         "documentation": "S103-IN003 | tag: LI 115 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s6 | confidence 0.95 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN003 | tag: LI 115 (as_extracted) | attached to S103-TK001 (along_line) | sheet 103 symbol s6 | confidence 0.95 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1705,8 +1144,8 @@
         {
          "name": "PV_204",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PV",
-         "documentation": "S103-IN004 | tag: PV 204 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s7 | confidence 0.91 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S103-IN004 | tag: PV 204 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s7 | confidence 0.91 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1725,8 +1164,8 @@
         {
          "name": "PI_104",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PI",
-         "documentation": "S103-IN005 | tag: PI 104 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s9 | confidence 0.95 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN005 | tag: PI 104 (as_extracted) | attached to S103-VL001 (along_line) | sheet 103 symbol s9 | confidence 0.95 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1745,8 +1184,8 @@
         {
          "name": "PV_209",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_PV",
-         "documentation": "S103-IN006 | tag: PV 209 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s13 | confidence 0.87 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S103-IN006 | tag: PV 209 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s13 | confidence 0.87 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1765,8 +1204,8 @@
         {
          "name": "TI_110",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S103-IN007 | tag: TI 110 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s14 | confidence 0.89 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN007 | tag: TI 110 (as_extracted) | attached to S103-VL002 (along_line) | sheet 103 symbol s14 | confidence 0.89 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1785,8 +1224,8 @@
         {
          "name": "TI_133",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_TI",
-         "documentation": "S103-IN008 | tag: TI 133 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s15 | confidence 0.96 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN008 | tag: TI 133 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s15 | confidence 0.96 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1805,8 +1244,8 @@
         {
          "name": "AI_137",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_AI",
-         "documentation": "S103-IN009 | tag: AI 137 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s16 | confidence 0.97 | UNVERIFIED",
+         "typeId": "Instrument_Measurement",
+         "documentation": "S103-IN009 | tag: AI 137 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s16 | confidence 0.97 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",
@@ -1825,8 +1264,8 @@
         {
          "name": "LV_208",
          "tagType": "UdtInstance",
-         "typeId": "Instrument_LV",
-         "documentation": "S103-IN010 | tag: LV 208 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s18 | confidence 0.96 | UNVERIFIED",
+         "typeId": "Instrument_ControlValve",
+         "documentation": "S103-IN010 | tag: LV 208 (as_extracted) | attached to S103-VL003 (along_line) | sheet 103 symbol s18 | confidence 0.96 | review: UNVERIFIED | risk tier: green",
          "parameters": {
           "AssetId": {
            "dataType": "String",

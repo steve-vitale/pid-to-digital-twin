@@ -642,6 +642,10 @@ def build(tool, run_dir, sheet_list, images_dir, register, label, parent_rule="a
                         if x["tag"] and x["tag_status"] == "as_extracted")
     for x in instruments + line_items:
         x["duplicate_tag"] = bool(x["tag"] and tag_count[re.sub(r"\s+", " ", x["tag"].upper())] > 1)
+    # safety-relevant function (relief device, shutdown valve, trip switch, isolation valve) from the tag as read;
+    # confidence.safety_floor() keeps these out of the green tier once the model is rated.
+    sys_ident = [{"id": f"SYS-{s}", **ident[s]} for s in sheets]
+    __import__("confidence").mark_safety({"systems": sys_ident, "instruments": instruments, "line_items": line_items})
 
     model = {
         "meta": {
@@ -749,6 +753,7 @@ def main():
     for tool, run_dir in run_dirs.items():
         model = build(tool, run_dir, sheet_list, Path(args.images), register, label, args.parent_rule)
         __import__("confidence").annotate_model(model, run_dir, sheet_list, Path(args.images))  # round-3 risk tiers
+        floor = __import__("confidence").safety_floor(model)  # safety-relevant items are never green
         out = Path(args.out) / tool if args.out and len(run_dirs) > 1 else Path(args.out) if args.out \
             else ROOT / "out" / "twin" / label / tool
         out.mkdir(parents=True, exist_ok=True)
@@ -759,6 +764,7 @@ def main():
               f"{s['offpage_connectors']} off-page ({s['offpage_pairs']} pairs), {s['streams_extracted']} links "
               f"-> {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
         print(f"        wrote plant_model.json, {', '.join(written)}")
+        print(f"        safety floor: marked {floor['marked']}; raised green -> amber {floor['raised_green_to_amber']}")
         built.append(out)
     if args.score:
         import score_twin

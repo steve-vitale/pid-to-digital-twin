@@ -52,7 +52,7 @@ These are the rules this project follows. Each one also applies at a plant.
    ran the declared method five times per tool on holdout A: review load moved with a standard deviation of 1.4
    (GPT) and 1.9 (Claude) points, more than the "about 1 point" round 2 assumed. A gap smaller than the run-to-run
    noise is a tie, not a ranking, and a gap bigger than the noise on six drawings can still be a tie across drawings
-   (section 4a).
+   (section 4a). Here "tie" means no clear ranking under that rule; it does not establish statistical equivalence.
 5. **Count failures as zeros.** A crashed or unparseable run scores zero on that drawing; it is never skipped. A tool
    shouldn't look better by failing quietly.
 6. **First try is the headline; improvements are labeled.** The first-try scorecard is kept and published as-is.
@@ -69,7 +69,11 @@ These are the rules this project follows. Each one also applies at a plant.
      no one has looked at. That's either fresh public drawings or the dataset's unseen synthetic sheets, reported
      separately.
 8. **Don't change the grader and the thing being graded in the same step.** Each run records the prompt hash,
-   image hash, model, and date. Scorer changes are separate commits with controls rerun.
+   image hash, model, and date. Scorer changes are separate commits with controls rerun. The parsed prediction
+   from each run, with those hashes, is committed under `predictions/`, so `python scripts/rescore.py --check` can
+   re-score the committed tables with the current scorer and show that a scorer change moved nothing it shouldn't
+   (five earlier diagnostic tables still lack predictions; the recovered round-5 records now re-score too;
+   `predictions/README.md` gives the coverage).
 9. **Watch for "teaching to the key".** The answer key has a catch-all class called `general`. Every model scores
    poorly on it (F1 0.11–0.45), because "general" means whatever the annotators decided.
    - We could raise that number by tuning prompts to guess the annotators' habits.
@@ -187,7 +191,7 @@ drawings like these, and run again).
 | Set and measure | GPT | Claude | GPT minus Claude |
 |---|---|---|---|
 | Holdout A, review load | 20.1 (18.3–21.8 / 14.2–28.0) | 29.8 (27.5–32.1 / 12.8–47.3) | −9.8: beyond run noise on these 6 sheets; a **tie** across drawings (bootstrap −26.5 to +4.5) |
-| Holdout A, connection F1 | 0.872 (0.864–0.879 / 0.801–0.916) | 0.795 (0.779–0.811 / 0.638–0.920) | same pattern: tie across drawings |
+| Holdout A, connection F1 | 0.872 (0.864–0.879 / 0.801–0.916) | 0.795 (0.779–0.811 / 0.638–0.920) | same pattern: no clear ranking across drawings |
 | DEXPI (3 XML sheets), review load | 95.4 (53.2–137.6 / 42.1–138.6) | 61.8 (60.5–63.1 / 26.3–127.9) | tie |
 | DEXPI tags, end-to-end, strict | 29 of 33 (0.88) | 28 of 33 (0.85) | tie; identical in all 5 runs |
 | DEXPI tag lists (2 sheets, 145 identifiers) | 100% | 99.4% | tie |
@@ -380,10 +384,10 @@ A line on a P&ID carries two different facts, and this repository used one relat
   with no item between). Its pairwise form, every pair of members, is how `score_pid2graph.py` reads a PID2Graph
   answer key (it walks the key's graph through its `connector`, `crossing` and `arrow` nodes and links every pair of
   symbols it reaches) and what the tracer emits as `connects`. The key itself is a graph, not a list of pairs. It
-  answers "what is hydraulically on this line system?"
+  answers "which items share this drawn line network?"; instrument and signal lines can be members too.
 - **Pipe layer**: which item or junction is piped directly to which (consecutive along a run, through bends and past
-  instrument taps, never through another item or a pipe tee). It answers "what is between X and Y?", "what do I
-  isolate?". 22 of 27 sampled sheet-0 network links were not pipe neighbours
+  instrument taps, never through another item or a pipe tee). It supports checking drawn neighbours and what is
+  between X and Y; it is a draft graph, not an isolation plan. 22 of 27 sampled sheet-0 network links were not pipe neighbours
   ([statement review](../examples/statement-review/README.md)). Drawn lines that are not pipe (instrument
   connections, actuator stems, nozzle stubs) are kept as their own edge types, and instrument taps as their own
   junction kind ([GRAPH_EXPORT.md](GRAPH_EXPORT.md#three-layers-for-the-lines)).
@@ -398,7 +402,7 @@ A high network score says nothing about pipe adjacency, and the other way round.
 | Round 4, old scans | §4a | same | network | connection F1 clean 0.89 / 0.78 down to 0.22 / 0.19 at L3 (GPT / Claude) | adjacency on scans |
 | Round 5 replicates | §4a, `out/replicates_r5_*.md` | same; DEXPI keys from `adapt_dexpi.py` (all pairs, tees as pass-through connectors) | network | holdout A connection F1 0.872 (GPT) / 0.795 (Claude); DEXPI review load 95.4 / 61.8 | adjacency |
 | Vendor kit controls and example | `examples/vendor-evaluation/` | the user's own PID2Graph-format keys | network | example: connection F1 0.960 | adjacency: a vendor delivering a pipe-level graph is scored against all pairs |
-| Generalization matrix row 1 | [GENERALIZATION.md](GENERALIZATION.md) | each set's key | network | open100-dev 0.928, holdout 0.889, scans L1 0.877 / L2 0.566 / L3 0.387, synthetic 0.921, DEXPI 0.822, TE revisions A, C and D 1.000, TE C scan L3 0.917, Bayer 1.000 | adjacency (that is row 8) |
+| Generalization matrix row 1, current opt-in scan cleanup | [GENERALIZATION.md](GENERALIZATION.md) | each set's key, with the key's symbols supplied | network | open100-dev 0.928, holdout 0.889, scans L1 0.894 / L2 0.818 / L3 0.753, synthetic 0.921, DEXPI 0.822, TE revisions A, C and D 1.000, TE C scan L3 0.988, Bayer 1.000 | adjacency (row 8), model symbol-reading accuracy, or a re-run of round 4; these are oracle-symbol tracer checks |
 | Generalization matrix rows 3 and 7 | GENERALIZATION.md | key link counts; `dexpi_to_twin` against its own key | network | bundle links equal key links on every set; 0 corrections on C01-C03 | adjacency |
 | TE round trip, revisions A and C | §6, `out/te_pid/roundtrip_scores*.json` | the drawer's key: one group per drawn line network | network | connection F1 clean 0.99 / 0.99, L3 0.85 / 0.85; revision C review load 1.26 to 14.9 (GPT) | adjacency (matrix row 8 measures it on revision D) |
 | TE reviewer diff | §6, `scripts/te_model_diff.py` | the verified model's streams | network pairs compared with streams | 7 of 7 unit-to-unit streams found; 2 extra unit links | the 2 extras are network co-membership through a tee, not a reading error and not a missing stream |
@@ -407,11 +411,11 @@ A high network score says nothing about pipe adjacency, and the other way round.
 | Flow direction blind spot check | [OPEN100_STRUCTURAL.md](OPEN100_STRUCTURAL.md) | two readers on crops | network pairs | 65 sampled, none disagreed; 19 unclear, mostly across a branch | a direction on a pair beyond a branch says flow can reach, not that a pipe joins the two |
 | Statement review, sheet 0 (2026-10-29) | [statement review](../examples/statement-review/README.md) | the drawing, read by an independent agent | network wording read two ways | 2 of 60 wrong read as network (3.3%), 24 of 60 read as adjacency (40%) | measured the old wording |
 | Layered statement review, sheet 0 (2026-10-29) | `sheet0/review-2026-10-29-layers/` | the drawing, read by an independent agent | each layer apart | network 0 of 15, pairwise 0 of 15, items 0 of 13 (2 unclear); **pipe 3 of 15 wrong (20%, Wilson 7-45%)**: an actuator stem and an instrument leader said to be pipes | measured the version before the pipe/instrument/actuator split (attempt A146); its fix is unreviewed: `sheet0/sample_layers_r2.*` (75 statements, 15 per layer, seed 1031) is ready |
-| **Pipe layer, matrix row 8** | GENERALIZATION.md, `python scripts/line_layers.py score` | DEXPI 1.3 XML piping segments (tees are elements); the current drawer's routes, valves, taps and tees, split into pipe and instrument lines by the symbols' classes | **pipe** | pipe-segment F1: DEXPI 1.3 0.782 (P 0.810 / R 0.756; C01 0.902, C02 0.714, C03 0.545; 5 of 5 tees found, 11 junctions predicted; it was 0.681 before the A170 crossing rules, and C01-C02 were development sheets for that change); TE revision D 1.000; Bayer 1.000 (both self-generated; instrument connections 1.000, every junction's kind right) | DEXPI is scored on process piping only (its measuring and signal lines are not pipes). Fails the 0.88 bar |
-| Pipe layer, OPEN100 development sheets 0-5 (derived truth) | `python scripts/line_layers.py score --set open100` | **derived** from the PID2Graph key graph: symbol, then `connector` / `crossing` / `arrow` chains, then symbol; 3-edge crossings are junctions; split into pipe and instrument lines by the symbols' classes (`pid2graph_truth`) | **pipe** | pipe-segment F1 0.914 (P 0.943 / R 0.887; sheets 0.97 / 0.91 / 0.96 / 0.96 / 0.96 / 0.73); 154 of 165 junctions found, 161 predicted; instrument connections F1 0.835. Passes the 0.88 bar | a derived truth: the key does not say which lines are pipe, nor how a 4-edge crossing's arms pair (2 on these sheets, both on sheet 5, taken as junctions). Development sheets: the tracer was tuned on them. The truth's line networks equal the key's all-pairs links on all six sheets |
-| Pipe layer, OPEN100 holdout sheets 6-11 (derived truth) | same, matrix row 8 `open100-holdout` | derived the same way | **pipe** | pipe-segment F1 0.898 (P 0.899 / R 0.897; 348 of 388 true segments; sheets 0.83 / 0.90 / 0.86 / 0.98 / 0.91 / 0.90); 134 of 139 junctions found, 148 predicted; instrument connections F1 0.827. Passes the 0.88 bar (before the A170 rules: 0.872, which failed) | only partly blind: scored once with the rule frozen, but one of the two error classes that rule fixed (stray pixels at an unmarked crossing read as a dot) was first noticed on holdout sheet 6's images (A170), so most of the lift from 0.872 is not a clean held-out result. Same derived-truth limits as the development row |
-| Pipe layer, DEXPI 1.2 vendor renders (held out) | matrix rows 1 and 8 `dexpi-1.2-vendor-renders`, A173, A174 | each vendor export's own XML, mapped onto the exporting tool's render by adapter A2; only the 22 of 81 renders that map cleanly are scored | **network and pipe** | pipe-segment F1 0.570 (P 0.525 / R 0.624), network connection F1 0.738 (P 0.679 / R 0.809). By exporter: SPPID (14 renders) pipe 0.679 / network 0.844; Comos (7) 0.246 / 0.436; AVEVA (1) 1.000 / 1.000; AutoCAD none mapped. Fails the 0.88 bar | held out: nothing chosen or changed on it, scored once. 10 of the 22 are single-feature cases with 0-2 links, so the figures rest on the C01-C03 sheets. The low Comos figures are not diagnosed. 59 of the 81 renders were not scored (16 map fails its check, 37 too few scored symbols, 6 refused by the converter) |
-| Agent-made keys: OMRE 1958 scan (bottom-right quadrant), Wikimedia Commons sheets, PRONTO Figure 1 | matrix rows 1 and 8, A172 | first-pass keys a coding agent made (`data/agent_keys/`), not reviewed by a person | **network and pipe** | network F1 0.561 / 0.697 / 0.918; pipe F1 0.244 / 0.745 / 0.810 | weaker evidence than a hand key: labelled agent-made in every cell and not counted as an independent source family. Only PRONTO Figure 1 passes the network bar; none passes the pipe bar |
+| **Pipe layer, matrix row 8** | GENERALIZATION.md, `python scripts/line_layers.py score` | DEXPI 1.3 XML piping segments (tees are elements); the current drawer's routes, valves, taps and tees, split into pipe and instrument lines by the symbols' classes | **pipe** | DEXPI 1.3 F1 0.916 (P 1.000 / R 0.844; C01 0.962, C02 0.714, C03 0.941; 5 of 5 tees found, 5 junctions predicted); TE revision D 1.000; Bayer 1.000 (both self-generated) | DEXPI is scored on process piping only. Passes the 0.88 bar; development result, including scorer corrections, not a fresh held-out benchmark |
+| Pipe layer, OPEN100 development sheets 0-5 (derived truth) | `python scripts/line_layers.py score --set open100` | **derived** from the PID2Graph key graph (`pid2graph_truth`); pipe vs instrument classes and junction rules supplied by this project | **pipe** | F1 0.931 (P 0.936 / R 0.926; sheets 0.995 / 0.896 / 0.960 / 0.980 / 0.981 / 0.758); 150 of 160 junctions found, 155 predicted. Passes the 0.88 bar | development sheets; the truth does not label pipe vs instrument lines or resolve all crossing ambiguities. A191 changed the derived truth as well as tracing. The truth's line networks still equal the key's all-pairs links on all six sheets |
+| Pipe layer, OPEN100 holdout sheets 6-11 (derived truth) | same, matrix row 8 `open100-holdout`, A196 | derived the same way | **pipe** | F1 0.912 (P 0.901 / R 0.922; 356 of 386 true segments; sheets 0.839 / 0.903 / 0.862 / 0.988 / 0.937 / 0.901); 132 of 137 junctions found, 144 predicted. Passes the 0.88 bar | A177 reserved these sheets for the frozen A191-A195 rules, after a previous baseline. Only partly blind overall: A170's crossing error class came from sheet 6. A191 changed the truth from 388 to 386 segments, so 0.898 to 0.912 is not pure tracing gain |
+| Pipe layer, DEXPI 1.2 vendor renders (mixed development and held out) | matrix rows 1 and 8 `dexpi-1.2-vendor-renders`, A173-A174, A191-A196 | each vendor export's XML, mapped onto its render; 22 of 81 renders map cleanly | **network and pipe** | pooled pipe F1 0.776 (P 0.720 / R 0.842), network F1 unchanged at 0.738. Pipe by exporter: SPPID 0.939 (14 development renders), Comos 0.264 (7 held-out renders), AVEVA 1.000 (one held-out render, one pipe segment); no AutoCAD render mapped. Pooled pipe fails 0.88 | the pool is not held out: A177 made SPPID development data and reserved Comos/AVEVA, seen previously as a baseline. A192's scorer-only junction fix moves SPPID 0.679 to 0.852, about two thirds of its total gain to 0.939. Ten mapped renders are small feature cases; 59 renders remain unscored |
+| Agent-made keys: OMRE 1958 scan (bottom-right quadrant), Wikimedia Commons sheets, PRONTO Figure 1 | matrix rows 1 and 8, A172, A189 | first-pass keys a coding agent made (`data/agent_keys/`), not reviewed by a person | **network and pipe** | network F1 0.522 / 0.697 / 0.918; pipe F1 0.446 / 0.782 / 0.878 | weaker evidence than a hand key, not an independent source family. Opt-in scan cleanup lowers OMRE network F1 from 0.561 to 0.522; it stays opt-in. Only PRONTO passes the network bar; none passes the pipe bar |
 | Pipe layer vs the review's notes, sheet 0 (diagnostic) | this section | the 27 network links the 2026-10-29 reviewer traced, with "direct" or "through N junctions" in the note | pipe | the pipe layer agrees on direct vs not for 24 of 27; of the other 3, 2 are drawn lines the reviewer said are not process lines (a tag leader, an actuator box) and 1 is a pair the reviewer saw one tee between | an error rate: one reviewer's notes, not a scored review |
 
 **Adjacency in the PID2Graph keys (corrected 2026-10-29).** Earlier versions of this page said the OPEN100 and
@@ -422,10 +426,12 @@ sheet). It is this repository's scorer (`score_pid2graph.py`) that collapses tho
 co-membership, and every network-layer score above keeps that reading unchanged. Walked symbol to symbol, the key
 gives direct adjacency; `line_layers.py` derives a pipe truth from it for the six development sheets (row above).
 What the key does not say: which lines are pipe and which are instrument lines (split here by the symbols' classes),
-and whether a 4-edge crossing is two lines passing or a 4-way joint. The PID2Graph paper (arXiv 2411.13929) scores
-direct node-to-node edges on this graph; it was not available offline here, so that is the coordinator's reading,
-not checked against the paper's text.
+and whether a 4-edge crossing is two lines passing or a 4-way joint. The [PID2Graph paper, §3.5.2 and supplement Algorithm S1](https://arxiv.org/html/2411.13929v1#S3.SS5.SSS2)
+was checked against its text on 2026-10-29. It matches graph nodes by bounding boxes, then scores the presence and
+class of individual edges using edge mAP, with crossings and bends represented as nodes. This repository's
+network F1 collapses connector paths to symbol pairs, and its pipe F1 uses a separately derived pipe truth.
+Neither reproduces the paper's metric, so their scores are not directly comparable.
 
 **Not yet measured:** the pipe layer against truth with a model's own symbols (row 8 and the OPEN100 rows use the
-key's symbols), on scans, and in a reviewed sample of the current version. The holdout and vendor-render rows above
-are the only pipe-layer numbers on drawings the tracer was not tuned on, and the holdout one is only partly blind.
+key's symbols), on scans, and in a reviewed sample of the current version. The holdout and reserved Comos/AVEVA subsets above are the pipe-layer checks on drawings the latest rules were
+not tuned on; both had been scored as baselines, and OPEN100 is only partly blind overall.

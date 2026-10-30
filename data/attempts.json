@@ -2553,6 +2553,324 @@
       "source": [
         "docs/GENERALIZATION.md"
       ]
+    },
+    {
+      "id": "A176",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Pre-registered a development / held-out split for a scan clean-up step before the line tracer (N020; matrix row 1: holdout scan cells L1/L2/L3 connection F1 0.877 / 0.566 / 0.387 against 0.889 clean, bar 0.88), written before any clean-up code. DEVELOPMENT (every candidate operation and parameter judged here only): degraded copies of OPEN100 development sheets 0-5 made with scripts/degrade_scans.py's own levels and per-drawing seeding (degrade_set, written to the gitignored 'PID2Graph OPEN100 dev-scan-L1..L3' folders; committed scan data untouched), plus the clean OPEN100 0-5 sheets and TE revision C scan-L3 as a guard. HELD OUT, run once at the end with the frozen method: open100-scan-L1/L2/L3 (holdout sheets 6-11). Holdout images are not looked at. Parameters must be derived from the image (stroke width, background, noise), never chosen per level. Guards: the clean OPEN100 dev (0-5) and holdout (6-11) links byte-identical with the step on (either the step leaves a clean image's binarization unchanged or it detects a clean image and skips); TE revision A/C/D and Bayer RT1 links unchanged. Criterion unchanged (row 1: connection F1 >= 0.88 with the key's symbols)",
+      "hypothesis": "The scan failure is in binarization and broken strokes (A052 localised it in the tracer), so a clean-up derived from each image's own statistics lifts degraded sheets without touching clean ones",
+      "evidence": "Split only; no candidate run yet. Not blind to the holdout's headline: the held-out per-level F1 (0.877 / 0.566 / 0.387) is already published in the matrix",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in the attempts that follow under this split",
+      "source": [
+        "docs/GENERALIZATION.md",
+        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered"
+      ]
+    },
+    {
+      "id": "A177",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Pre-registered a development / held-out split for closing the pipe-layer gap outside OPEN100 and the generated drawings (matrix row 8: DEXPI 1.3 C01-C03 0.782 with C03 0.545; DEXPI 1.2 vendor renders 0.570, SPPID 0.679, Comos 0.246, AVEVA 1 render; agent-keyed OMRE quadrant 0.244, Commons 0.745, PRONTO Figure 1 0.810), written before any line_layers.py change. DEVELOPMENT (error classes diagnosed and any rule judged here only): DEXPI 1.3 C01-C03 against their XML piping, the 14 mapped SPPID vendor renders against their own XML, OPEN100 sheets 0-5 against the key-graph derived truth, TE revision D and Bayer RT1 against the drawer's routes. HELD OUT, re-scored once at the end with the frozen rules: the 7 mapped Comos renders and the 1 mapped AVEVA render, OPEN100 holdout sheets 6-11, and the agent-keyed OMRE quadrant, Commons sheets and PRONTO Figure 1. Every held-out set was scored at least once before (A170, A174, A175), so its after figure is labelled 'seen once before as a baseline', not blind; held-out images are not opened. Guards: trace_connections.py, corpus_matrix.py and the network and pairwise layers unchanged (links compared before and after on every development sheet); OPEN100 dev and TE / Bayer must not regress. Criterion unchanged (pipe-segment F1 >= 0.88)",
+      "hypothesis": "If the shortfall outside OPEN100 comes from drawing conventions that also occur on the development sheets (vendor symbol styles, fittings drawn as symbols, tees drawn as filled dots, symbols touching lines, crossings), general rules chosen on development will lift the held-out sets without being fitted to them",
+      "evidence": "Split only; no candidate run yet. Not blind: every held-out set's figure was already seen (Comos 0.246, AVEVA 1.000, OPEN100 holdout 0.898, OMRE 0.244, Commons 0.745, PRONTO 0.810)",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in the entries that follow under this split",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A178",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Pre-registered a third split for csv_normal_bands.py, for a method for CYCLIC processes, written before any candidate was run. DEVELOPMENT: everything already seen, now including the three cyclic sources scored once in A171 (UCI hydraulic 3 runs, MetroPT-3 4 runs, BattLeDIM 2018 14 runs) and all earlier row-6 sources (PRONTO days 2-4, SKAB 34, HAI 21.03 test1/test4, TE 21), which must not regress. HELD OUT, scored once with the frozen tool default: BattLeDIM 2019 (the evaluation year of the same Zenodo record 4017659, CC BY 4.0; 2019_SCADA_Pressures/Flows/Levels.csv staged into data/external/battledim-2019, MD5 checked against the record, SHA-256 pinned; never run through any band method before). Label mapping, fixed now, the same rules as the 2018 adapter: 33 pressures, 3 flows and 1 tank level joined row by row (5 min; ';' separator, decimal comma); normal CSV = 2019-01-01 00:00 up to the first leak that starts in 2019 (p523, 2019-01-15 23:00, exclusive), so the four leaks running on from 2018 (p257, p427, p810, p654) are part of normal; one run per leak in dataset_configuration.yaml starting in 2019 (19 leaks), score CSV = 2 days before its start to the earlier of its end and 7 days after its start, fault start = the leak start; leaks already running count as pre-fault rows. Criterion unchanged: detected by 3 flagged rows in a row at or after the labelled start AND at most 0.5% of pre-fault rows flagged. The tool's automatic choice decides the method on the held-out runs (no per-source flag); the drift method (A171) is scored beside it on the same runs for comparison",
+      "hypothesis": "A method chosen and frozen on the three cyclic development sources, scored once on a year of data nobody tuned on, shows whether it carries over",
+      "evidence": "Split and mapping only; no run on BattLeDIM 2019 yet. Known limit: the held-out source is the same network, sensors and demand pattern as the development source BattLeDIM 2018 (a new year with new leaks, not a new process family), so a pass shows carry-over across time on one network, not across kinds of cyclic process",
+      "runs": "0 (split only)",
+      "verdict": "kept",
+      "why": "Development and held-out results are reported separately in the entries that follow",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A179",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Committed the parsed per-drawing predictions (predictions/<label>/<tool>/<drawing>.json: symbols with id, class, box/bbox, tag and confidence, connections unchanged, and the record metadata the scorers print; no raw model text) for all 52 run labels on the author's machine (732 files, 11.4 MB), and scripts/rescore.py, which rebuilds a temporary runs/ tree from them and runs the unchanged scorecard.py, replicate_stats.py and score_te_roundtrip.py against the committed answer keys, diffing every regenerated table with out/ after CRLF to LF. No scorer, rule or committed table changed",
+      "hypothesis": "If the predictions keep everything the scorers read, every committed table whose run records still exist regenerates byte for byte from predictions alone",
+      "evidence": "Of 35 committed tables: 20 regenerate byte for byte (the round-2 holdout-A and development scorecards except r2-trace_dev, the four holdout-B scorecards, the seven round-4 scan scorecards, v2-named-fields_dev/_holdout-a, and the TE revision-C round trip roundtrip_scores_revC); 6 written before commit 3caf420 added review load (first-try, repeat-v1, smoke, v2-named-fields, both v2-open-weight-gemma) regenerate every committed byte once the column the current scorer adds is taken out; 9 cannot be re-scored because their run records were not on the machine: the round-5 replicates (r5-hA-rep1..5-trace behind the README headline 20.1 / 29.8, r5-dx-rep*), r2-trace_dev (runs/r2-trace holds drawings 6-11 only), the -ov, oracle and union round-2 variants, and TE revision A (te-*). A dropped link in one prediction makes the check fail (scripts/test_rescore.py)",
+      "runs": "0 (no model call; one deterministic re-score of every table)",
+      "verdict": "kept",
+      "why": "Turns check_claims.py's 'the README matches the committed summary' into 're-scored from committed predictions' for every table except the nine listed, which rescore.py names with their reason (KNOWN_GAPS) so a new gap fails the check",
+      "source": [
+        "predictions/README.md",
+        "runs/README.md"
+      ]
+    },
+    {
+      "id": "A180",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "question_engine.py: ten questions added as data for refrigeration plant and ovens, dryers and fryers (E27 head pressure, E28 suction pressure, E29 slide valve part load, E30 timed defrost, E31 oven/dryer/fryer exhaust heat recovery, E32 burner air-fuel ratio, H5 refrigeration condenser heat to low-grade duties, H6 oven/dryer/fryer exhaust heat to low-grade duties, C11 dryer/oven exhaust humidity control, C12 refrigeration compressor power metering). Each quotes S25-S28 (LBNL dairy and fruit and vegetable ENERGY STAR guides, DOE process heating tip sheets #2 and #10) with a page; every quote was checked word for word against a pdftotext extract of the PDF at the cited URL and the file's SHA-256 is recorded under the source's 'checked' key. A new 'linked' relation (a stream drawn from or to the unit, or the equipment at its other end) lets a heat recovery exchanger on one fryer's exhaust quiet that fryer only. Exercised on an ILLUSTRATIVE synthetic food plant section (examples/opportunity-screen/food_plant_model.json) with anti-triggers drawn on purpose",
+      "hypothesis": "Refrigeration and oven/dryer questions can be triggered from what a drawing names (refrigerant in the equipment's name or service, an oven/dryer/fryer, a defrost valve, a burner) without firing on air compressors, process condensers or compressed air dryers",
+      "evidence": "Food example: 24 findings, 15 of them from the new questions, all as drawn; the six anti-triggers (drive on K-203, demand defrost on EV-202, metered K-201, O2 analyser on the oven, fryer exhaust heat recovery, instrument air compressor and refrigerated air dryer) stay quiet. None of the ten fires on TE, Bayer or OPEN100 (their outputs change only in the questions-run and quiet lists, plus the flow-meter line in the next entry). Six look-alikes in a test model (cooling-water condenser, recycle gas compressor, instrument air compressor, refrigerated and desiccant air dryers, steam dryer) get none. Limits: run on a synthetic model only; the refrigeration triggers depend on the refrigerant being named on the equipment",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "Closes the coverage gap an energy manager for a multi-site food manufacturer named, with sourced wording and no computed savings",
+      "source": [
+        "docs/OPPORTUNITY_SCREEN.md#the-questions",
+        "examples/opportunity-screen/README.md#illustrative-food-plant-section-24-findings"
+      ]
+    },
+    {
+      "id": "A181",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "question_engine.py and data/questions.json, triggers tightened after the food example's first run: E19/E22/E23/C7 skip air dryers, filters, separators, receivers and aftercoolers; E22's storage check ignores refrigerant receivers and cold stores; E26 skips oven, dryer and fryer exhausts; H5's heat recovery check needs refrigerant context; E28 shows only refrigerated-space temperatures; and a flow request drops 'only a valve is drawn on this line, with no flow measurement' when a flow meter is among the signals it offers",
+      "hypothesis": "Each first-run false trigger in the food example is a trigger fault, fixable without changing any finding on the three earlier examples",
+      "evidence": "First food run: E19 and E23 on the refrigerated compressed air dryer AD-502, E22 silenced by the ammonia receiver, E26 on the dryer and fryer exhausts, H5 silenced by the fryer vapour condenser, E28 listing every plant temperature, and the dryer fuel request contradicting its own gas meter FT-301. After the fixes: TE, Bayer and OPEN100 finding counts unchanged (10, 12, 29); the only content change is one line each in the TE and Bayer E18 data requests (FV-119 beside FT-119; HV-108 and TV-104C beside FT-106 no longer called unmetered). Each fix has a test",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "Removes six wrong or contradictory outputs and changes nothing else measured",
+      "source": [
+        "examples/opportunity-screen/README.md#triggers-tightened-while-checking"
+      ]
+    },
+    {
+      "id": "A182",
+      "function": "intake_and_reuse",
+      "date": "2026-10-29",
+      "change": "question_engine.py --rollup [NAME=]FOLDER (repeatable): combines several sites' screens into rollup.json and rollup.md. Per question: the sites and assets it fired on, where it was asked and quiet, not checked or not run, and data requests merged by item (per site, the places all findings share once, the rest per finding). Ordered by number of sites, then findings, then catalog order; no savings and no value ranking. Refuses a folder without questions.json, a non-screen file, unknown question ids and a repeated site name (exit 2)",
+      "hypothesis": "A multi-site energy manager needs to see which questions recur across sites and plan each data request once, without the tool pretending to rank sites by value",
+      "evidence": "Roll-up of the food and Bayer screens: 24 questions, 36 findings, 4 questions at both sites (C1, C2, C3, C9); the test checks every finding of both screens appears exactly once, the order, the per-item merge, no currency and the refusals. Limits: two sites, one of them synthetic; no person has used it to plan a campaign",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "One site per run was the second gap in the walkthrough; the roll-up reuses the screens without re-running models",
+      "source": [
+        "docs/OPPORTUNITY_SCREEN.md#several-sites-the-roll-up"
+      ]
+    },
+    {
+      "id": "A183",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Development (A178 split) of a band method for cyclic processes, csv_normal_bands.py. Variants: (a) operating mode detected from the data: the tag whose fit values split most cleanly into two clusters (2-means, separation >= 4 within-cluster sd, minority >= 2% of rows), each tag's residual from its per-mode mean, then the drift gap; chosen by held-out variance explained; (b) mode x time of day (48 bins); (c) time of day alone, 12, 24, 48 or 96 slots per day; (d) a median of 3 samples ahead of the fast average, with and without (c); (e) fast average 6 or 20 samples, baseline 288 or 1200 samples, on (c); (f) the median of 3 added to the existing drift method for every source",
+      "hypothesis": "Removing a profile conditioned on cycle phase (the clock, or a mode found in the data) lets a step that the daily or duty cycle hides stand out, without flagging the cycle itself",
+      "evidence": "Development, drift method (A171) before: UCI 0/3, MetroPT-3 1/4, BattLeDIM 2018 0/14. (a) mode: BattLeDIM picks pressure n726 (median held-out R2 0.49, more than time of day's 0.20) and passes 1/14; MetroPT's mode tags (TP2, H1, Motor_current) explain little of the other tags (median R2 0.01-0.15) and nothing is chosen; forced Motor_current x time of day (b, R2 0.36) MetroPT 0/4. (c) time of day: 12 slots R2 under the threshold (not chosen); 24 slots 7/14; 48 or 96 slots 8/14. (d) without the median: 24 slots 5/14 (with 7/14). (e) fast 20: 9/14 (24, 48 or 96 slots); fast 6: 6/14; baseline 288 or 1200: 7/14, unchanged. (f) drift + median on every source: UCI 0/3 -> 2/3, MetroPT 1/4 -> 1/4 (failure 1 lost, failure 4 gained), BattLeDIM 0/14; PRONTO, SKAB, HAI and TE pass counts unchanged, but every detection 1 sample later (TE fault 6 18 -> 21 min, SKAB other/8 1 -> 421 s). Non-cyclic sources: no time-of-day candidate (HAI's fit is 1.25 days, PRONTO and SKAB minutes, TE and UCI have no timestamps); MetroPT's time-of-day R2 is -0.003",
+      "runs": "about 20 settings x 21 cyclic development runs; 2 full development passes (100 runs)",
+      "verdict": "rejected",
+      "why": "A mode found in a process tag can be moved by the fault itself (a leak shifts the zone pressure across the mode threshold, so the residual absorbs it: BattLeDIM 1/14); the clock cannot, so the phase kept is time of day. 48 slots kept over 24 (8 against 7 of 14); fast 20 (9/14) not kept: one run on one source, and it would be the only constant that differs from the drift method's. The median of 3 is kept inside the cyclic method (5 -> 7 of 14 at 24 slots) but not added to the drift default: it costs a sample of delay on every source for UCI's gain, which is a choice for the author, not a tuning step. Frozen as A184 before any held-out run (csv_normal_bands.py sha256 7713eceed011853f4e73764a577f90fd2202aac3d5e0d9408a367f7a76cd1463)",
+      "source": [
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A184",
+      "function": "replay_and_bands",
+      "date": "2026-10-29",
+      "change": "Frozen on the A178 development runs (sha256 recorded in A183), then BattLeDIM 2019 scored once: csv_normal_bands.py --method cyclic, and a new default --method auto that runs it when the data is cyclic by the clock. cyclic: each value minus its tag's time-of-day profile (the fit rows' mean in each of 48 slots of 30 min; a slot with under 3 fit values uses the tag's mean), a median of 3 samples (a single-sample spike never reaches the averages), then the drift method's 10-vs-600-sample gap on that residual; band = gap fit mean +/- max(K x gap fit sd, 1% of the tag's fit mean), not scaled with the reading; K = smallest of 10, 12, 15, 20 with under 0.5% of held-out normal rows flagged. auto: cyclic when the first column is a timestamp, the fit rows span at least 2 days and the profile fitted on them explains at least 0.1 of the held-out rows' variation (median tag, each tag's level allowed to move); otherwise drift, unchanged. The threshold 0.1 sits between the two development sources long enough to test (MetroPT-3 -0.003, BattLeDIM 2018 0.20)",
+      "hypothesis": "A daily profile taken from normal running removes the demand cycle that sets the drift band's width, so a leak's step shows, and the choice can be made from the data",
+      "evidence": "DEVELOPMENT, drift (A171) -> auto: BattLeDIM 2018 0/14 -> 8/14 (auto picks cyclic, R2 0.20; detected 9, one run over 0.5% pre-fault: p810 5/576 rows; the 5 abrupt leaks p673, p538, p866, p183, p158 at 25 min to 2.5 days, incipient p257, p31, p654 at 1.6-3.3 days); UCI 0/3 -> 0/3 and MetroPT-3 1/4 -> 1/4 (auto keeps drift: UCI has no timestamps, MetroPT's duty cycle is not tied to the clock); PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs: auto keeps drift on every one (fit under 2 days or no timestamps), results identical run for run. --method cyclic asked for explicitly: UCI 2/3 (flat profile; the median of 3 removes PS4's one-row blips; section 3's accumulator repair still flags 15/110), MetroPT-3 0/4 (DV_pressure pulses lasting 2+ samples before failures 2 and 3, 217-438 pre-fault rows). Level bands on BattLeDIM 2018 1/14. HELD OUT, BattLeDIM 2019 (A178 mapping), scored once with the frozen default: auto picks cyclic (R2 0.87 on the 15-day normal export) and passes 6/19 (p280, p710 abrupt; p653, p277, p586, p721 incipient), detects 13, 7 runs over 0.5% pre-fault (p514 10, p331 71, p193 129, p680 101, p426 63, p142 9, p123 4 of 576 rows; the tank level T1 among the flagged tags in 5 of the 7); 6 not detected (p523 and p827 abrupt, 4 incipient). Detections are late: 14 h to 5 days after the start (median about 2 days); the first flagged tag is the tank level T1 in 11 of 13. Same runs, drift 0/19 (detects none, no pre-fault flag), level 0/19 (detects 17, all 17 over 0.5% pre-fault)",
+      "runs": "1 held-out pass over 19 runs (deterministic, scored once); 100 development runs per full pass",
+      "verdict": "kept",
+      "why": "Kept as an automatic choice: on daily-cycle data it passes runs the drift and level bands cannot (development 8/14, held out 6/19, both 0 with drift), and on every non-cyclic development source auto reproduces the drift method exactly. Limits: the held-out source is the same network as the development one (A178); 5 of the 6 held-out passes rest on flags 1 to 5 days after the start, mostly on the tank level, whose cycle follows the pump rather than the clock, and the same tag causes most pre-fault flags, so a detection here is a flag after the start, not evidence the method saw the leak. Duty cycles not tied to the clock (MetroPT-3) and data already averaged per cycle (UCI) are not detected as cyclic and stay at drift's 1/4 and 0/3. Not tuned further on 2019",
+      "source": [
+        "examples/historian-csv/README.md",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A185",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Scan clean-up candidates, single thresholds on the darkness below an estimated paper (closing wider than any stroke, smoothed), under the A176 split: (a) global Otsu on that darkness; (b) a noise threshold, 4 x the robust spread (MAD) of the darkness; (c) an oriented line filter alone (darkness averaged along horizontal and vertical windows of 0.8% of the long side, 6 x its spread, plus speck-free strong ink). Tracer and its defaults unchanged; the key's symbols, scored as matrix row 1",
+      "hypothesis": "A threshold set against the local paper instead of one global grey level keeps the faint lines a global Otsu loses",
+      "evidence": "Development connection F1, degraded copies of OPEN100 0-5 at L1 / L2 / L3 (no clean-up: 0.888 / 0.693 / 0.513): (a) 0.791 / 0.705 / 0.465; (b) 0.674 / 0.660 / 0.746 (precision 0.53 / 0.51 / 0.67: the paper's spread is near zero on L1, so blur halos and text fuse into the lines); (c) 0.669 / 0.592 / 0.473",
+      "runs": "1 (deterministic)",
+      "verdict": "rejected",
+      "why": "None beats no clean-up at L1 and L2; a single cut either drops faint lines or fattens every stroke until neighbouring strokes merge",
+      "source": [
+        "scripts/scan_cleanup.py"
+      ]
+    },
+    {
+      "id": "A186",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Hysteresis clean-up: seeds are Otsu-strong components at least 4 x stroke width squared (no specks); weak pixels above 0.35 (also tried 0.5) of the Otsu threshold that connect to a seed are kept",
+      "hypothesis": "Faint stretches of a line connect to its darker stretches, specks connect to nothing",
+      "evidence": "Development F1 L1 / L2 / L3: 0.914 / 0.686 / 0.753 (0.5: 0.920 / 0.684 / 0.771), recall 0.90 at L2. Sheet 5 at L2 fell to 0.42: one network of 42 symbols (635 false pairs). Traced on the image, the merges are text and nozzle marks fused onto lines, and horizontal lines that stop a few pixels short of a vertical line (drawn as not connected) filled in by the grown blur",
+      "runs": "1 (deterministic)",
+      "verdict": "rejected",
+      "why": "Recovers recall but erases the gaps the drawing uses to keep lines apart; one false merge costs a whole sheet under the all-pairs link definition",
+      "source": [
+        "scripts/scan_cleanup.py"
+      ]
+    },
+    {
+      "id": "A187",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Half-maximum stroke cores alone: a pixel is ink when at least half as dark as the darkest pixel within one stroke width (width from the distance transform of the Otsu ink), the local peak clears 0.4 of the Otsu threshold, specks below 4 x width squared dropped. Variants: peak radius 2 widths; darkness smoothed (Gaussian sigma 1) first",
+      "hypothesis": "Cutting every stroke at half its own peak keeps the gaps between blurred strokes while following faint ones",
+      "evidence": "Development F1 L1 / L2 / L3: 0.850 / 0.835 / 0.549; radius 2 widths 0.787 / 0.664 / 0.389; smoothed 0.782 / 0.703 / 0.734. Sheet 5 at L2 0.81 (no giant merge), but thin lines touching thick ones are cut where the thick line dominates the peak, and faint L3 lines break",
+      "runs": "1 (deterministic)",
+      "verdict": "rejected",
+      "why": "Precision kept, recall lost (worse than no clean-up at L1); kept as one part of the final method",
+      "source": [
+        "scripts/scan_cleanup.py"
+      ]
+    },
+    {
+      "id": "A188",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Stroke cores plus straight runs: horizontal and vertical runs (0.8% of the long side) opened from the hysteresis ink are added, each cut to pixels at least half as dark as the darkest across the run; then the dip rule: a run pixel less than 0.6 x as dark as the darkest pixel on BOTH sides along the run within 3 stroke widths is not added. One-at-a-time sweep around it: dip 0.5 / 0.7, dip distance 2 / 5 widths, hysteresis floor 0.25 / 0.5, core floor 0.3, speck area 2 widths squared, run length 1.2%",
+      "hypothesis": "Runs bridge faint and worn stretches of straight lines; a dip (darker on both sides) is a gap the drawing left, a step (darker on one side) is a worn patch",
+      "evidence": "Development F1 L1 / L2 / L3: runs without the dip rule 0.907 / 0.696 / 0.765 (sheet 5 L2 0.43); with it 0.923 / 0.851 / 0.759. Sweep: dip 0.5 0.923 / 0.717 / 0.765, 0.7 0.925 / 0.860 / 0.734; distance 2 0.923 / 0.728 / 0.771, 5 0.922 / 0.844 / 0.737; floor 0.25 0.923 / 0.862 / 0.754, 0.5 0.911 / 0.841 / 0.708; core floor 0.3 0.923 / 0.851 / 0.763; area 2 0.923 / 0.852 / 0.759; run 1.2% 0.920 / 0.852 / 0.755. L2 swings with one merge on sheet 5 (0.42-0.80)",
+      "runs": "1 per setting (deterministic)",
+      "verdict": "superseded",
+      "why": "Defaults kept at the middle of each sweep; the L2 result rests on one fragile merge, addressed next",
+      "source": [
+        "scripts/scan_cleanup.py"
+      ]
+    },
+    {
+      "id": "A189",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Frozen clean-up (scripts/scan_cleanup.py clean_gray): peaks and dips measured on the darkness after a 3x3 median (a speck on a line is not a peak), plus perp_guard: within 3 stroke widths of a perpendicular line, a pixel the stroke cores missed that is under dip_near x both neighbours is not bridged. Also tried: the guard with no dip test (block every core-missing pixel near a perpendicular line), guard distance 1.5 / 4.5 widths, dip_near 0.8; a noise-based hysteresis floor (4 / 6 x the darkness spread). Detection for clean='auto' fixed on measurements: isolated specks >= 300 per million pixels, or under 50% of pixels within one grey level of the commonest value. No tracer file edited (scan_cleanup.trace cleans to a temporary PNG and calls trace_connections.trace; with nothing detected it traces the original file)",
+      "hypothesis": "A short gap beside a crossing line blurs to a shallow dip; a real tee (a thin line rising steadily into a thick one) has none",
+      "evidence": "Development F1 L1 / L2 / L3 (no clean-up 0.888 / 0.693 / 0.513): median reference alone 0.920 / 0.732 / 0.783; plain guard 0.899 / 0.874 / 0.776 (sheet 0 L1 lost 37 true links: PT bubble leaders meeting a heavy header), distances 1.5 / 4.5 no change; dip_near 0.8 0.921 / 0.814 / 0.782; dip_near 0.9 (kept, best mean) 0.919 / 0.870 / 0.789, precision 0.941 / 0.838 / 0.728, recall 0.898 / 0.904 / 0.862, worst sheets 5 (0.87), 3 (0.80), 5 (0.66); noise floor 4 / 6: 0.919 / 0.721 / 0.785, 0.920 / 0.721 / 0.769. TE revision C scan-L3 (generated): 0.917 -> 0.988. Detection: every degraded development sheet flagged (1,648 or more isolated specks per million px); clean renders 0-95 per million, flat 0.56 and up. Invariant run, clean='auto' on every row-1 input except the held-out scan cells: links byte-identical on all OPEN100 dev (6) and holdout (6), PID2Graph synthetic (20), DEXPI (3), TE revisions A, C, D (9), Bayer RT1, vendor renders (22), Commons (5) and PRONTO (1) sheets (none detected). Detected besides the scans: the agent-keyed OMRE 1958 quadrant, a real scan, where tracer F1 fell 0.561 -> 0.522 (seen after freezing; nothing changed on it). 10 unit tests, each rule's test failing with that rule turned off",
+      "runs": "1 per setting (deterministic)",
+      "verdict": "kept",
+      "why": "Best mean development F1 over the three levels with no level below no clean-up; clean drawings untouched by construction. Limits: L3 still below the 0.88 bar; sheet 5 L2 swings with dip_near; a real archive scan (OMRE) gets worse, so the step is not shown to help real scans; vendor renders' flatness (0.56) is near the 0.5 detection cut",
+      "source": [
+        "scripts/scan_cleanup.py",
+        "scripts/test_scan_cleanup.py"
+      ]
+    },
+    {
+      "id": "A190",
+      "function": "scan_robustness",
+      "date": "2026-10-29",
+      "change": "Held-out run of the frozen scan clean-up (scripts/scan_cleanup.py, sha256 5f3e2774..., A189 settings) under the A176 split, once: open100-scan-L1/L2/L3 (OPEN100 holdout sheets 6-11), the key's symbols, scan_cleanup.trace(clean='auto') against trace_connections.trace alone, micro connection F1 by score_pid2graph as matrix row 1",
+      "hypothesis": "The clean-up chosen on degraded development sheets lifts the degraded holdout sheets by a similar amount",
+      "evidence": "Connection F1 without -> with clean-up: L1 0.877 -> 0.894 (passes the row's 0.88 bar; links unchanged on sheets 7 and 8), L2 0.566 -> 0.818, L3 0.387 -> 0.753 (bar 0.88 still failed at L2 and L3). Development for comparison: L1 0.888 -> 0.919, L2 0.693 -> 0.870, L3 0.513 -> 0.789. All 18 held-out sheets detected as scans (1,665-5,628 isolated specks per million px)",
+      "runs": "1 (deterministic, single held-out run)",
+      "verdict": "kept",
+      "why": "Gains on every held-out level, of the same order as on development (+0.017 / +0.252 / +0.366 against +0.031 / +0.177 / +0.276); only L1 reaches the bar. Synthetic degradation from the same generator as development, so this is not evidence for real archive scans (the one real scan with a key, OMRE 1958, got worse: A189)",
+      "source": [
+        "scripts/scan_cleanup.py",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A191",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers.contract (A177 split): a junction must meet three or more DIFFERENT neighbours. Line that leaves a point and comes back to it, or two lines between the same two places, makes points with three arms but fewer than three neighbours; such a point is passed through (two neighbours) or pruned (one), repeated until every junction left meets three. Error classes found on development: DEXPI C03 (an unkeyed actuator box drawn on the operated valve's stem made three tees; a filled flow arrowhead on the line into the tank made two), DEXPI C01 (one false tee at the plate heat exchanger). contract() is shared, so the same definition applies to every truth built with it (DEXPI, the drawer's routes, the PID2Graph-derived truth) and to dexpi_reader.py",
+      "hypothesis": "Closed shapes drawn on a line (arrowheads, outlines of symbols the key does not box) are a general source of false tees, and a junction defined by distinct neighbours removes them without touching real tees or bypasses",
+      "evidence": "Development, with the scorer fix A192 in the same run: DEXPI 1.3 0.782 -> 0.875 (C01 0.902 -> 0.920, C03 0.545 -> 0.875; 11 -> 5 junctions predicted, 5 of 5 tees found, precision 1.000); OPEN100 sheets 0-5 0.914 -> 0.919 (sheet 1 0.907 -> 0.915, sheet 2 0.960 -> 0.965, sheet 5 0.726 -> 0.744). The derived OPEN100 truth changed with it: sheet 1 51 -> 45 true segments and 18 -> 14 junctions (two closed loops in the key graph that touch one symbol each), sheet 5 90 -> 89 and 47 -> 46 (an arrow node with a loop); DEXPI, TE and Bayer truths unchanged. TE revision D and Bayer 1.000 unchanged. Pairwise links identical on all 27 development sheets. examples/from-dexpi-xml/dexpi-c01.* topology unchanged (only the piped_to definition text changed)",
+      "runs": "1 per development set (deterministic)",
+      "verdict": "kept",
+      "why": "A definition, not a threshold: no number was chosen on a scored sheet. It changes the derived OPEN100 truth too (stated in the evidence), so part of the OPEN100 movement is the truth, not the tracing",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A192",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "line_layers.score_pipe junction matching (now match_junctions): a truth junction with no drawn position (a DEXPI 1.2 PipeTee, which these exports draw with no shape) goes to the unmatched predicted junction with the most neighbours in common counting junctions already matched as well as items (at least two), repeated until nothing new matches. Before, only item neighbours counted, so a tee between two other tees (one item neighbour) could never be matched and its three segments scored as wrong",
+      "hypothesis": "Part of the SPPID renders' low pipe score is the scorer failing to place position-less tees, not the tracing",
+      "evidence": "Seen on development (SPPID C01-C03 renders: the pump-discharge tee between two tees, predicted correctly at (3388, 2240) but unmatched). Development, tracing unchanged by this fix alone: SPPID renders 0.679 -> 0.852 (C01 EX02 and EX03 0.609 -> 0.783, C02 0.811 -> 0.973, C03 0.720 -> 0.960); DEXPI 1.3, OPEN100, TE and Bayer unaffected (their tees have positions). A test (one shared neighbour is still not enough) guards against loose matching",
+      "runs": "1 (deterministic)",
+      "verdict": "kept",
+      "why": "A scorer bug fix, recorded apart from the tracing rules so the vendor-render lift is not read as tracing gain: about two thirds of the SPPID development lift is this fix",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures"
+      ]
+    },
+    {
+      "id": "A193",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers (A177 split): the 'tee drawn beside a box' rule (A147) required two arms leading away from ONE meeting point, so two pipes landing apart on a vessel's shell (joined only along the shell, which runs along the box edge) are each piped to the vessel instead of meeting at a tee",
+      "hypothesis": "The SPPID heat-exchanger false tee (PV 4712.02 and TV 4750.03 landing at nozzles N2 and N3, 53 px apart) is the A147 rule grouping separate landing points",
+      "evidence": "Fixed the development case (SPPID C01 0.783 -> 0.889), but regenerating examples/graph-export/sheet0_graph.json with the extraction's own symbols removed S0-JN-537-274, the reviewed tee beside MSCV-XXX that A147 was made for: there the meeting is split into two cluster points 10 px apart, each with one arm leading away. The key-symbol score on OPEN100 sheet 0 did not move, so only the example regeneration caught it",
+      "runs": "1",
+      "verdict": "rejected",
+      "why": "One cluster point is stricter than the drawing: a single tee can be read as two nearby points. Replaced by A194",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A194",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers (A177 split): a tee beside an item's box (A147) needs two of its arms leading away to leave within half a symbol side of each other (SAME_PLACE_FRAC 0.5, the same tolerance the scorer uses to match junctions); landing points further apart on the item's outline are separate connections to the item",
+      "hypothesis": "As A193, without losing the sheet-0 tee whose meeting is split into nearby cluster points",
+      "evidence": "Development: SPPID C01 EX02 and EX03 0.783 -> 0.889 (the exchanger's false tee gone, both valves piped to it); DEXPI 1.3, OPEN100 0-5, TE and Bayer unchanged. Sheet-0 extraction keeps S0-JN-537-274 (38 junctions as before). Test: a crop of the SPPID C01 render (skipped when the vendor renders are not built) fails on the previous code and passes now",
+      "runs": "1 per development set (deterministic)",
+      "verdict": "kept",
+      "why": "The constant reuses an existing tolerance rather than one fitted to a sheet; known limit: two nozzles drawn closer than half a symbol side would still read as one tee",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A195",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "line_layers (A177 split): two process items (not a bubble, not an actuator) whose boxes touch or overlap (gap at most TOUCH_FRAC 0.1 of a symbol side) with no traced line between them are piped directly: fittings drawn against each other (a blind flange on a valve, a reducer against a valve, a flange or nozzle on a vessel's shell). A nozzle mark against its own vessel becomes its nozzle stub. No line is drawn, so the segment has network None unless both ends already share one network; traced_layers lists the pairs as 'touching' and enrich marks the segment touching: true. The network and pairwise layers are not changed",
+      "hypothesis": "Fittings drawn touching are consecutive on the pipe in every truth here, so the tracer's lack of a line between them is a missed segment, not an absence",
+      "evidence": "Probe on development before the change: of 33 touching process pairs with no traced line, 25 are truth segments (DEXPI 1.3 3 of 3, SPPID 4 of 4, OPEN100 18 of 26). Development after: DEXPI 1.3 0.875 -> 0.916 (C01 0.920 -> 0.962, C03 0.875 -> 0.941); SPPID 0.912 -> 0.939 (I01 and I03 0 -> 1.000, C01 EX03 0.889 -> 0.936); OPEN100 0-5 0.919 -> 0.931 (sheets 0 0.969 -> 0.995, 3 0.958 -> 0.980, 4 0.955 -> 0.981, 5 0.744 -> 0.758; down: 1 0.915 -> 0.896 and 2 0.965 -> 0.960, general-to-general and general-to-tank contacts the key does not join); TE and Bayer 1.000 unchanged; pairwise links identical. Sheet-0 example: 2 new pipe segments (S0-TK001 to S0-GN001, S0-TK002 to S0-GN016), 92 in all",
+      "runs": "1 per development set (deterministic)",
+      "verdict": "kept",
+      "why": "The threshold is a contact test (a tenth of a symbol side), not tuned. Precision on OPEN100 contacts is about 0.7, so roughly one in three added there is not in the key. Known limit: statements.py words these as 'a pipe runs directly'; a touching segment should say the two are drawn against each other (statements.py is not changed here)",
+      "source": [
+        "docs/GRAPH_EXPORT.md#three-layers-for-the-lines"
+      ]
+    },
+    {
+      "id": "A196",
+      "function": "line_tracing",
+      "date": "2026-10-29",
+      "change": "Held-out run of the A177 split, once, with the rules frozen (A191, A192, A194, A195; trace_connections.py unchanged): the 7 mapped Comos renders and the 1 AVEVA render, OPEN100 holdout sheets 6-11, and the agent-keyed OMRE quadrant, Commons sheets and PRONTO Figure 1. Every one of them had been scored before (seen once before as a baseline), and none of their images was opened during this work",
+      "hypothesis": "The development rules generalize: held-out pipe F1 rises and no held-out set falls",
+      "evidence": "DEVELOPMENT before -> after: DEXPI 1.3 C01-C03 0.782 -> 0.916 (P 1.000 / R 0.844; C01 0.962, C02 0.714, C03 0.941); SPPID renders 0.679 -> 0.939 (0.852 of it from the A192 scorer fix); OPEN100 0-5 0.914 -> 0.931 (P 0.936 / R 0.926; instrument connections 0.835 unchanged); TE revision D and Bayer 1.000 unchanged. HELD OUT (seen once before as a baseline) before -> after: Comos 0.246 -> 0.264 (7 of 19 true segments either way, 38 -> 34 predicted); AVEVA 1.000 -> 1.000 (1 segment); vendor renders pooled 0.570 -> 0.776 (85 of 101, 118 predicted); OPEN100 holdout 6-11 0.898 -> 0.912 (P 0.901 / R 0.922; 356 of 386 true segments, the derived truth 388 -> 386 with A191; sheets 6 0.826 -> 0.839, 7 0.900 -> 0.903, 8 0.862, 9 0.976 -> 0.988, 10 0.906 -> 0.937, 11 0.901; instrument connections 0.833); agent-made keys OMRE quadrant 0.244 -> 0.446, Commons 0.745 -> 0.782, PRONTO Figure 1 0.810 -> 0.878. No held-out set fell. Network layer unchanged by construction (trace_connections.py not edited; links identical on every development sheet)",
+      "runs": "1 (single held-out run)",
+      "verdict": "kept",
+      "why": "Every held-out set held or rose, but only OPEN100 holdout passes 0.88 (PRONTO Figure 1 misses by 0.002, Comos stays far below: its errors were not diagnosed, by the split); the vendor and agent-key figures include the A192 scorer fix and A191's truth change, so they are not pure tracing gains. Left for later: pipe ends that stop at a nozzle tick just outside a vessel's box (DEXPI C01 N5 and N6, C02 column nozzles) are unattached in the tracer itself (trace_connections.py, network layer), not fixable in line_layers",
+      "source": [
+        "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A197",
+      "function": "scoring",
+      "date": "2026-10-29",
+      "change": "Complete N061: recover the original round-5 and revision-A TE parsed predictions from preserved research working copies.",
+      "hypothesis": "Missing records may survive outside the active checkout; re-score original predictions rather than run new models.",
+      "evidence": "391 source-record hashes and parsed exports independently verified; 30 of 35 tables reproduce in their original formats (23 MATCH, 7 MATCH-OLD), with 5 earlier diagnostic GAPs. Headline round-5 JSON and Markdown match exactly.",
+      "runs": "1 deterministic recovery and re-score; no model calls",
+      "verdict": "kept",
+      "why": "Closes the headline reproducibility gap without changing the original readings or result values.",
+      "source": [
+        "predictions/README.md",
+        "predictions/RECOVERY.json"
+      ]
     }
   ],
   "not_tried": [
@@ -2756,12 +3074,12 @@
     {
       "id": "N020",
       "function": "scan_robustness",
-      "status": "not-done",
+      "status": "done",
       "idea": "Image clean-up before tracing, or tracing only above a quality threshold.",
-      "why_not_yet": "Either is a new method needing its own sealed test; nothing was tuned in round 4.",
+      "why_not_yet": "Completed by A185-A190: optional scan clean-up evaluated with frozen defaults; holdout L1 clears the bar, L2/L3 do not, and the one agent-keyed archive scan regresses. The original tracer default is unchanged.",
       "source": [
-        "docs/GOAL.md#round-4-results-scored-once-per-level-as-pre-registered",
-        "docs/JOURNAL.md#18-old-scans-where-the-method-breaks-and-which-part-breaks"
+        "scripts/scan_cleanup.py",
+        "docs/GENERALIZATION.md"
       ]
     },
     {
@@ -3167,6 +3485,18 @@
       "why_not_yet": "needs a person; the agent's own re-key is not independent",
       "source": [
         "data/agent_keys/README.md"
+      ]
+    },
+    {
+      "id": "N061",
+      "function": "scoring",
+      "status": "done",
+      "idea": "Recover or re-run the round-5 replicate records (r5-hA-rep1..5-trace, r5-dx-rep1..5-trace and -tiles) and export them with scripts/rescore.py --export, so the README's headline 20.1 / 29.8 can be re-scored from committed predictions like the other tables",
+      "why_not_yet": "Completed 2026-10-29: 391 parsed predictions recovered from preserved research checkouts with original-record and export hashes; both headline replicate files re-score exactly, without new model calls.",
+      "source": [
+        "predictions/README.md",
+        "predictions/RECOVERY.json",
+        "out/replicates_r5_holdout-a.md"
       ]
     }
   ]

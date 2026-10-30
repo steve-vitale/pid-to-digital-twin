@@ -1,13 +1,13 @@
-"""Run every tool against every public input it applies to and publish the pass/fail matrix (docs/GENERALIZATION.md).
+"""Run selected workflows across registered public inputs and publish the pass/fail matrix (docs/GENERALIZATION.md).
 
-Each tool in docs/SCRIPTS.md marked "tool" was built and tuned on a few inputs. This script runs them on every public
-input registered in data/corpus.json that they apply to, and records one cell per (tool, input): pass, fail, n/a
+The eight rows below cover selected workflows, not every tool in docs/SCRIPTS.md. This script runs each row on its
+applicable registered public inputs and records one cell per (workflow, input): pass, fail, n/a
 (the tool can't apply to this input, with the reason), needs data (the input isn't cached; the cell names the fetch
 command) or needs deps (a third-party module is missing). A red cell is the point: it says where a tool has not been
 shown to carry over.
 
 Rows (all model-free, offline):
-  1  trace_connections.trace with the answer key's symbols (the --oracle diagnostic): connection F1 by
+  1  scan_cleanup.trace(clean="auto") with the answer key's symbols (the --oracle diagnostic): connection F1 by
      score_pid2graph, per keyed sheet set. Pass = F1 >= TRACER_PASS_F1, fixed before the first run.
   2  evaluate_vendor's known-answer controls (perfect, every class wrong, every box moved, empty) on every keyed set.
      Pass = evaluate_vendor's own control check (wrong answers <= symbol F1 0.10 on every sheet and overall).
@@ -81,7 +81,7 @@ FAULT_START = 160
 STATUSES = ("pass", "fail", "n/a", "needs data", "needs deps")
 
 ROWS = {
-    1: {"tool": "trace_connections.py (oracle symbols)", "short": "Line tracer",
+    1: {"tool": "trace_connections.py with scan clean-up (auto; oracle symbols)", "short": "Line tracer",
         "question": "Does the tracer tuned on OPEN100 0-5 hold on other styles and scans?"},
     2: {"tool": "evaluate_vendor.py controls", "short": "Scorer controls",
         "question": "Does a deliberately wrong answer stay at or below symbol F1 0.10 on every style?"},
@@ -119,7 +119,9 @@ AGENT_KIND = "agent-keyed-sheets"
 AGENT_KEYED = ["omre-1958-pid", "commons-pid-sheets", "pronto-fig1"]
 AGENT_KEY_MARK = "(agent-made key)"
 AGENT_KEY_LABEL = "agent-made key, first pass, not reviewed by a person"
-HELDOUT_HISTORIAN = ["uci-hydraulic", "metropt3", "battledim"]
+# Adapter sources: the original three were held out for drift, then used to develop cyclic. Only 2019 remains
+# held out for the default auto/cyclic method (A178 split, A183 method, A184 run).
+HELDOUT_HISTORIAN = ["uci-hydraulic", "metropt3", "battledim", "battledim-2019"]
 ROW_INPUTS = {
     1: KEYED + ["dexpi-1.2-vendor-renders"] + AGENT_KEYED,
     2: KEYED + AGENT_KEYED,
@@ -135,7 +137,7 @@ ROW_INPUTS = {
 # The tool files each row's cells exercise (roots; the scripts/ modules they import are added by tool_files), hashed
 # into every cell so --check can tell a stale cell.
 ROW_TOOL_FILES = {
-    1: ["scripts/trace_connections.py", "scripts/score_pid2graph.py"],
+    1: ["scripts/scan_cleanup.py", "scripts/trace_connections.py", "scripts/score_pid2graph.py"],
     2: ["scripts/evaluate_vendor.py", "scripts/score_pid2graph.py"],
     3: ["scripts/import_site_drawing.py", "scripts/deliverable_report.py", "scripts/test_scorer_controls.py"],
     4: ["scripts/loop_audit.py"],
@@ -155,7 +157,8 @@ ROW_TOOL_FILES_ONLY = {
     **{(6, i): ["scripts/csv_normal_bands.py", ADAPTER] for i in ("pronto-day2", "pronto-day4", "skab", "hai-21.03")},
     **{(6, i): ["scripts/csv_normal_bands.py", "scripts/historian_adapters.py"] for i in HELDOUT_HISTORIAN},
     **{(r, "dexpi-1.2-vendor-renders"): [ADAPTER, "scripts/adapt_dexpi.py", "scripts/line_layers.py",
-                                         "scripts/trace_connections.py", "scripts/score_pid2graph.py"] for r in (1, 8)},
+                                         "scripts/trace_connections.py", "scripts/score_pid2graph.py"]
+                                         + (["scripts/scan_cleanup.py"] if r == 1 else []) for r in (1, 8)},
 }
 ROW_TOOL_FILES_BY_INPUT = {(4, "dexpi"): ["scripts/dexpi_to_twin.py", "scripts/adapt_dexpi.py",
                                           "scripts/import_site_drawing.py"],
@@ -166,13 +169,16 @@ ROW_TOOL_FILES_BY_INPUT = {(4, "dexpi"): ["scripts/dexpi_to_twin.py", "scripts/a
 PIPE_SETS = {"dexpi": "dexpi", "te-rev-d": "te", "bayer-rt1": "bayer", "open100-dev": "open100",
              "open100-holdout": "open100", "dexpi-1.2-vendor-renders": "dexpi-1.2-vendor"}
 VENDOR = "dexpi-1.2-vendor-renders"
-VENDOR_HELD_OUT = ("held out, scored once as attempt A174: the mapping (adapter A2, corpus_adapters.build_vendor_keys) "
-                   "and the scoring plan were fixed in A173 before any scored run, and no tracer or line_layers rule was "
-                   "chosen or changed on these renders; the matrix re-runs the same frozen tools (deterministic)")
-OPEN100_HOLDOUT_PIPE_NOTE = ("only partly blind since line_layers.py A170: one of the two error classes that change "
-                             "removed (stray pixels at an unmarked crossing read as a dot) was first noticed on holdout "
-                             "sheet 6's images (allowed by the A162 split for naming classes, then confirmed on "
-                             "development sheet DEXPI C01), so this cell's gain is not a clean held-out result")
+VENDOR_HELD_OUT = ("initial baseline held out (A173 mapping and scoring plan, A174 scored once). For the later pipe "
+                   "changes A191-A195, A177 made SPPID development data and kept Comos and AVEVA held out, seen once "
+                   "before as a baseline (frozen run A196); the pooled vendor result mixes those splits. A192 fixes "
+                   "junction matching in the scorer: SPPID 0.679 to 0.852 without a tracing change, about two thirds "
+                   "of its total development gain to 0.939. The row-1 tracer is unchanged on these renders by the "
+                   "auto scan clean-up (A189). Matrix re-runs are deterministic checks of the frozen rules")
+OPEN100_HOLDOUT_PIPE_NOTE = ("A177 held these sheets out for the frozen A191-A195 rules (A196, seen once before as a "
+                             "baseline); not fully blind overall: A170's crossing error class was first noticed on "
+                             "sheet 6, then confirmed on development DEXPI C01. A191 changes the derived truth too "
+                             "(388 to 386 segments), so the change from 0.898 to 0.912 is not pure tracing gain")
 PIPE_NA = {"te-rev-a": "drawn by an earlier generator, model and layout (data/te_pid/rev-a/manifest.json); the pipe "
                        "truth comes from the current drawer's own routes, so it can't be re-derived for this revision",
            "te-rev-c": "drawn by an earlier generator, model and layout (data/te_pid/rev-c/manifest.json); the pipe "
@@ -338,7 +344,7 @@ def key_symbols(graphml, png):
 
 def row1(inp):
     try:
-        import trace_connections as tc
+        import scan_cleanup
     except ImportError as e:
         return cell(1, inp, "needs deps", reason=f"needs deps: pip install -r requirements.txt ({e.name})")
     import score_pid2graph as sc
@@ -348,13 +354,14 @@ def row1(inp):
         png, g = base / f"{s}.png", base / f"{s}.graphml"
         syms = key_symbols(g, png)
         t0 = time.time()
-        links = tc.trace(png, syms)
+        cleanup_info = {}
+        links = scan_cleanup.trace(png, syms, clean="auto", info=cleanup_info)
         r = sc.score(g, {"symbols": syms, "connections": links}, png)
         c = r["connections"]
         per[s] = {"connection_f1": round(c["f1"], 3), "precision": round(c["precision"], 3),
                   "recall": round(c["recall"], 3), "key_links": c["in_key"], "tp": c["tp"], "predicted": c["predicted"],
                   "truth": c["in_key"], "review_load_per_100": r["review_load"]["per_100"],
-                  "seconds": round(time.time() - t0, 1)}
+                  "seconds": round(time.time() - t0, 1), "scan_cleaned": cleanup_info["cleaned"]}
         tp, npred, nkey = tp + c["tp"], npred + c["predicted"], nkey + c["in_key"]
         corr, items = corr + r["review_load"]["corrections"], items + r["review_load"]["key_items"]
     f1 = 2 * tp / (npred + nkey) if npred + nkey else 0.0
@@ -362,7 +369,7 @@ def row1(inp):
     rl = round(100 * corr / items, 1) if items else 0.0
     worst = min(per, key=lambda s: per[s]["connection_f1"])
     detail = {"sheets": per, "connection_f1": round(f1, 3), "precision": round(p, 3), "recall": round(rc, 3),
-              "review_load_per_100": rl, "key_links": nkey, "worst_sheet": worst}
+              "review_load_per_100": rl, "key_links": nkey, "worst_sheet": worst, "scan_cleanup": "auto"}
     pub = []
     if inp["id"] == "open100-dev":
         ours = f"{f1:.2f} (P {p:.2f} / R {rc:.2f}), review load {rl}"
@@ -816,25 +823,22 @@ HELDOUT_NOTE = ("held-out source for the drift method's second iteration: the sp
                 "before any run (data/attempts.json A165) and the method was frozen on the development sources before "
                 "this source was first scored, once (A171); the matrix re-runs that same frozen method "
                 "(deterministic), nothing was tuned on the result")
+CYCLIC_DEVELOPMENT_NOTE = ("development data for the auto/cyclic method (A178, A183): this source was held out for "
+                           "the earlier drift method (A165, A171), then used to choose the cyclic method, so the "
+                           "current result is not held-out evidence")
+CYCLIC_HELDOUT_NOTE = ("held-out year for the auto/cyclic method: the split and label mapping were fixed in A178, "
+                       "the method frozen in A183 and scored once in A184; the matrix re-runs that method "
+                       "deterministically. This is the same L-Town network as 2018 development, so it tests "
+                       "carry-over across years only. Detections arrive 14 hours to 5 days after leak start, "
+                       "and tank level T1 drives most flags; it does not show prompt leak isolation")
 
 
 def tool_flags(normal_csv, score_csv, k, method):
     """Per row of score_csv, whether any tag is flagged: csv_normal_bands.run's own fit and flags (first half of the
     normal CSV fits, the tags both CSVs share are scored) for the method it ran at the K it chose."""
     import csv_normal_bands as cnb
-    _, tags, _, rows = cnb.read_historian_csv(normal_csv)
-    fit = rows[:int(len(rows) * 0.5)]
-    _, st, _, srows = cnb.read_historian_csv(score_csv)
-    common = [t for t in tags if t in st]
-    pick = [st.index(t) for t in common]
-    srows = [[r[j] for j in pick] for r in srows]
-    if method == "level":
-        bands = cnb.fit_bands(tags, fit, k)
-        fl = cnb.flag_matrix(common, srows, {t: bands[t] for t in common})
-    else:
-        bands = cnb.drift_bands(cnb.fit_drift(tags, fit), k)
-        fl = cnb.drift_flags(common, cnb.gap_columns(common, srows), {t: bands[t] for t in common})
-    return [any(f) for f in fl], tags
+    _, tags, _, _ = cnb.read_historian_csv(normal_csv)
+    return cnb.score_flags(normal_csv, score_csv, k, method), tags
 
 
 def row6(inp):
@@ -1410,7 +1414,7 @@ def band_cell(inp, runs, fit, extra=None, criterion_set=NEW_CRITERIA_SET, note="
     if missed:
         import csv_normal_bands as cnb
         ks = sorted({runs[n]["k"] for n in missed})
-        largest = {"drift": max(cnb.DRIFT_KS), "level": max(cnb.KS)}
+        largest = {"drift": max(cnb.DRIFT_KS), "cyclic": max(cnb.DRIFT_KS), "level": max(cnb.KS)}
         top = all(runs[n]["k"] == largest.get(runs[n].get("method")) for n in missed)
         value += f"; K target not met {len(missed)}/{len(runs)}"
         k_note = (f"`k_target_met` is false on {len(missed)} of {len(runs)} runs ({', '.join(missed)}): K="
@@ -1528,15 +1532,17 @@ HELDOUT_FIT = {
     "uci-hydraulic": "per run, the first 100 load cycles of its section, all at the section's opening grades",
     "metropt3": "2020-02-01 to 2020-02-08 (a normal week, before any reported failure)",
     "battledim": "2018-01-01 00:00 up to the first leak start (2018-01-08 13:30)",
+    "battledim-2019": "2019-01-01 00:00 up to the first leak starting in 2019 (2019-01-15 23:00); the four "
+                      "leaks carried over from 2018 are part of normal",
 }
 
 
 def row6_heldout(inp):
-    """The three held-out sources of the drift method's second iteration (A165 split; A171 method), through
-    scripts/historian_adapters.py, with the same criterion as every real row-6 source."""
+    """Historian adapter sources, with the same criterion as every real row-6 source. The original three are now
+    development data for auto/cyclic; BattLeDIM 2019 alone is held out for that method (A178, A183, A184)."""
     import historian_adapters as ha
     make = {"uci-hydraulic": ha.uci_hydraulic_runs, "metropt3": ha.metropt3_runs,
-            "battledim": ha.battledim_runs}[inp["id"]]
+            "battledim": ha.battledim_runs, "battledim-2019": ha.battledim_2019_runs}[inp["id"]]
     res = {}
     with tempfile.TemporaryDirectory() as tmp:  # converted CSVs live only here
         for r in make(tmp):
@@ -1544,12 +1550,17 @@ def row6_heldout(inp):
             one[r["name"]]["what"] = r["what"]
             res.update(one)
     cyc = inp.get("cyclic", "")
-    return band_cell(inp, res, HELDOUT_FIT[inp["id"]],
-                     {"held_out": HELDOUT_NOTE, "cyclic_process": cyc, "adapter": "scripts/historian_adapters.py"},
-                     criterion_set="before any run on this source (data/attempts.json A165: the same criterion as the "
-                                   "other real sources, label mapping fixed with it)",
-                     note=f". Held-out source for the drift method (A165 split, A171 method), scored once with the "
-                          f"frozen method; a cyclic process ({cyc})")
+    heldout = inp["id"] == "battledim-2019"
+    evidence_note = CYCLIC_HELDOUT_NOTE if heldout else CYCLIC_DEVELOPMENT_NOTE
+    split = "A178" if heldout else "A165"
+    extra = {"held_out" if heldout else "development_data": evidence_note,
+             "cyclic_process": cyc, "adapter": "scripts/historian_adapters.py"}
+    if not heldout:
+        extra["earlier_drift_split"] = HELDOUT_NOTE
+    return band_cell(inp, res, HELDOUT_FIT[inp["id"]], extra,
+                     criterion_set=f"before any run on this source (data/attempts.json {split}: the same criterion "
+                                   "as the other real sources, label mapping fixed with it)",
+                     note=f". {evidence_note}; a cyclic process ({cyc})")
 
 
 RUNNERS = {1: row1, 2: row2, 3: row3, 4: row4, 5: row5, 6: row6, 7: row7, 8: row8}
@@ -1724,7 +1735,11 @@ def run_cell(row, inp):
                                ", ".join(f"{n} {k}" for k, n in built["not_mapped_by_reason"].items()) +
                                "; by exporter: " + ", ".join(
                                    f"{e} {v['sheets']} sheets F1 {v[('pipe' if row == 8 else 'network') + '_f1']}"
-                                   for e, v in c["detail"]["by_exporter"].items()) + "; held out (A174), scored once")
+                                   for e, v in c["detail"]["by_exporter"].items()) +
+                               ("; A177/A196 split: SPPID development, Comos/AVEVA held out; pooled result mixes "
+                                "splits and includes the A192 scorer fix" if row == 8 else
+                                "; initial held-out tracer baseline A174; auto clean-up leaves these renders "
+                                "unchanged (A189)"))
     if (row, inp["id"]) in KEY_ONLY_SCAN_CELLS and c["status"] in ("pass", "fail"):
         c["key_only_duplicate_of"] = KEY_ONLY_SCAN_CELLS[(row, inp["id"])]
         add_note(c, KEY_ONLY_SCAN_NOTE)
@@ -1794,11 +1809,14 @@ def render(matrix, corpus):
             if i not in order:
                 order.append(i)
     counts = {s: sum(c["status"] == s for c in matrix["cells"]) for s in STATUSES}
-    L = ["# Does each tool generalize? The corpus matrix", "",
+    L = ["# Where the selected workflows generalize: the corpus matrix", "",
          "Generated by `scripts/corpus_matrix.py` from `out/generalization/matrix.json`; the inputs are registered in",
          "`data/corpus.json`. Do not edit by hand: `python scripts/corpus_matrix.py` re-runs it and",
          "`python scripts/corpus_matrix.py --check` confirms this page matches the JSON.", "",
-         "Every tool here was built and tuned on a few inputs. Each cell runs one tool on one public input it applies "
+         "These eight workflows cover tracing, scorer controls, intake/report, loop audit, exports, historian bands, "
+         "DEXPI conversion and pipe topology. They do not cover every tool: point mapping, applying reviews, the "
+         "question engine, impact estimates and live replay have their own feature tests and examples. Each cell "
+         "runs one selected workflow on one registered public input it applies "
          "to, with no model and no network. **pass** and **FAIL** use the criterion stated for each row below; each "
          "was fixed before that row's first run unless the row says otherwise. **n/a** means the tool can't apply to "
          "that input (the reason is given); **needs data** names the "
@@ -1902,7 +1920,9 @@ def detail_line(c):
     d = c["detail"]
     if c["row"] == 1 and "sheets" in d:
         return (f"P {d['precision']} / R {d['recall']}, review load {d['review_load_per_100']}, {len(d['sheets'])} "
-                f"sheets, worst {d['worst_sheet']} ({d['sheets'][d['worst_sheet']]['connection_f1']})")
+                f"sheets, worst {d['worst_sheet']} ({d['sheets'][d['worst_sheet']]['connection_f1']})" +
+                (f"; scan clean-up (auto), {sum(bool(s.get('scan_cleaned')) for s in d['sheets'].values())} "
+                 f"of {len(d['sheets'])} sheets cleaned" if d.get("scan_cleanup") == "auto" else ""))
     if c["row"] == 2 and "wrong_answer_symbol_f1_overall" in d:
         w = d["wrong_answer_symbol_f1_overall"]
         return (f"{d['sheets']} sheets; overall wrong class {w['wrong_class']}, moved {w['shifted']}; perfect review load "
@@ -1969,10 +1989,13 @@ VENDOR_TEXT = ("`dexpi-1.2-vendor-renders` (added 2026-10-29): each DEXPI 1.2 ve
                "own render beside it is keyed from its own XML by adapter A2 (`corpus_adapters.build_vendor_keys`, "
                "run by the matrix before the cell: a per-axis scale-and-offset map from drawing coordinates onto the "
                "render's ink, kept only when it passes its own check); only the renders that map cleanly are scored, "
-               "and the cell's detail counts the others by reason. Held out: the mapping and this scoring plan were "
-               "fixed before any scored run (data/attempts.json A173) and the renders were scored once (A174); "
-               "nothing was chosen or changed on them. Same pass bar as the row; the detail splits the result by "
-               "exporter.")
+               "and the cell's detail counts the others by reason. The original baseline was held out: mapping and "
+               "scoring plan fixed before any scored run (A173), scored once (A174). For the later pipe rules "
+               "A191-A195, A177 made the 14 SPPID renders development data; the 7 Comos and 1 AVEVA renders stayed "
+               "held out, seen once before as a baseline (A196). The pooled vendor score mixes development and "
+               "held-out data and includes the A192 scorer fix (SPPID 0.679 to 0.852 with tracing unchanged, about "
+               "two thirds of its development gain to 0.939). Same pass bar as the row; detail splits by exporter. "
+               "The row-1 auto scan clean-up leaves these renders unchanged (A189).")
 
 
 AGENT_KEYED_TEXT = ("`omre-1958-pid` (bottom-right quadrant), `commons-pid-sheets` (5 sheets) and `pronto-fig1` are "
@@ -1990,8 +2013,13 @@ ROW_CRITERIA = {
     1: f"{VENDOR_TEXT} {AGENT_KEYED_TEXT} Symbols come from the answer key (ids, classes, boxes), so only the line tracing is measured. Connection F1 "
        f"is micro-averaged over the set's sheets by `score_pid2graph`. Pass: F1 >= {TRACER_PASS_F1}, i.e. within "
        f"0.05 of the published development-set figure (0.93). The `--oracle` command line refuses sheets outside "
-       f"OPEN100 0-5 (docs/GOAL.md); this row calls the same library function `trace()` directly. Nothing is tuned "
-       f"on the result.",
+       f"OPEN100 0-5 (docs/GOAL.md); this row calls `scan_cleanup.trace(..., clean=\"auto\")`, which cleans detected "
+       f"scans before calling the tracer and otherwise uses the original image. The tracer's own default is "
+       f"unchanged. Clean-up was chosen on synthetic damage to development sheets 0-5 (A176, A185-A189), then "
+       f"frozen for holdout sheets 6-11 (A190): L1 0.877 to 0.894, L2 0.566 to 0.818, L3 0.387 to 0.753. Only "
+       f"L1 reaches the bar. Both splits use the same damage generator; on the one real archive scan, agent-keyed "
+       f"OMRE, F1 falls 0.561 to 0.522. Clean renders' links are unchanged (A189). These re-runs check the frozen "
+       f"method, not new held-out samples.",
     2: "The four known answers of `evaluate_vendor.py` on every sheet of the set. Pass: its own check "
        "(`check_controls`): perfect scores perfect, empty scores zero, and neither wrong answer earns symbol F1 above "
        "0.10 on any sheet or overall. Key number: the highest wrong-answer symbol F1 on any one sheet. The controls are "
@@ -2056,23 +2084,29 @@ ROW_CRITERIA = {
        "a variant fitted on each run's own pre-changepoint rows (reported, not the criterion). HAI 21.03: fitted on "
        "train1, test1 and test4 scored from their first attack row; detail lists every attack event and whether 3 "
        "flagged rows in a row fall inside it. SKAB is GPL-3.0 data: it is converted only into a temporary folder.\n\n"
-       "**Method.** Every cell runs `csv_normal_bands.py` with its default, `--method drift` (each cell's detail "
-       "records the method): per tag, the gap between a 10-sample and a 600-sample exponentially weighted average, "
-       "flagged when wider than K times its normal spread (never under 1% of the tag's normal reading; the band "
-       "shrinks with the reading to no less than half); K = the smallest of 10, 12, 15, 20 that flags under 0.5% of "
-       "the held-out normal rows. Until 2026-10-29 these cells ran the fixed level bands (`--method level`, mean +/- "
-       "K sd), which flagged normal running before almost every real fault; the drift method was developed and "
-       "frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs (data/attempts.json A163, A165, A171), so a pass "
-       "on those inputs is development evidence, not a held-out result. On the TE runs the drift method "
-       "detects later than the level bands (the README's fault-6 statement for the method run is what the "
-       "published-number check reads), so the fault-by-fault agreement with the shipped TE bands is expected to "
-       "drop; the criterion is unchanged.\n\n"
-       "Added 2026-10-29, held out: `uci-hydraulic`, `metropt3` and `battledim` were the held-out set of the drift "
-       "method's second iteration: split and label mappings fixed before any run (A165, `historian_adapters.py`), "
-       "scored once with the frozen method (A171), same criterion as the other real sources (3 flagged rows in a row "
-       "at or after the labelled start; at most 0.5% of pre-fault rows flagged). All three are cyclic processes "
-       "(hydraulic load cycles, a compressor's duty cycle, a water network's daily demand), which neither method was "
-       "built for.",
+       "**Method.** Every cell runs `csv_normal_bands.py` with its default, `--method auto` (each cell's detail "
+       "records the chosen method). It picks `cyclic` when timestamps cover at least 2 days in the fit half and "
+       "a time-of-day profile explains at least 0.1 of held-out variation (median over tags, allowing each tag's "
+       "level to move); otherwise it picks `drift`. `--method drift`: per tag, the gap between a 10-sample and a "
+       "600-sample exponentially weighted average, flagged when wider than K times its normal spread (never under "
+       "1% of the tag's normal reading; the band shrinks with the reading to no less than half). `--method cyclic`: "
+       "subtract each tag's mean in 48 half-hour slots, take a median of 3 samples, then apply the same drift gap; "
+       "its band does not shrink with the reading. For either, K is the smallest of 10, 12, 15, 20 that flags under "
+       "0.5% of held-out normal rows. The median of 3 is used only by cyclic. The older fixed level bands "
+       "(`--method level`, mean +/- K sd) flagged normal running before almost every real fault. Drift was "
+       "developed on PRONTO days 2-4, SKAB, HAI 21.03 and TE (A163, A165, A171); cyclic and auto were developed "
+       "on those sources plus `uci-hydraulic`, `metropt3` and `battledim` (A178, A183). A pass there is development "
+       "evidence. On TE, auto still chooses drift and detects later than level; the README's matching fault-6 "
+       "statement is what the published-number check reads. The criterion is unchanged.\n\n"
+       "**Split.** `uci-hydraulic`, `metropt3` and `battledim` were held out for drift's second iteration "
+       "(A165 split and label mappings, A171 frozen-method run); they became development data when their cyclic "
+       "failures informed A183. **Held out for auto/cyclic:** `battledim-2019`, split and mapping fixed in A178, "
+       "method frozen in A183, scored once in A184 under the same criterion (3 flagged rows in a row at or after "
+       "the start; at most 0.5% of pre-fault rows flagged). This is the same L-Town water network as 2018, so it "
+       "tests carry-over across years only: 2018 development improves from 0/14 to 8/14, 2019 from 0/19 to 6/19. "
+       "Detections arrive **14 hours to 5 days late**, and **tank level T1 drives most flags**; these results do "
+       "not establish prompt leak isolation or performance on a different network. UCI's cycle-averaged rows and "
+       "MetroPT-3's compressor duty cycle are not daily clock cycles, so auto leaves them on drift.",
     7: "`dexpi_to_twin.convert` on each geometry sheet, scored against its own key, then the intake. Pass: zero "
        "corrections on every sheet and bundle counts equal to the prediction's.\n\n"
        "Added 2026-10-29, criteria set before the first run (not blind: the staging pilot's reader counts had been "
@@ -2112,9 +2146,13 @@ ROW_CRITERIA = {
        f"(data/attempts.json A149), so that cell is not a blind test; holdout sheets 6-11 were not. "
        f"{VENDOR_TEXT} Its truth is the XML's piping segments, process piping only, as for `dexpi` "
        f"(`line_layers.score_set('dexpi-1.2-vendor')`, sheets from the build's sidecars). Re-run 2026-10-29 for every "
-       f"input after line_layers.py changed (A170: a crossing counts as a dot only when its corners are filled; a "
-       f"slanted stroke carrying on across a pipe does not join it); the `open100-holdout` cell says why its gain is "
-       f"only partly blind. {AGENT_KEYED_TEXT} Their pipe truth is derived from the agent-made key graph as for OPEN100 "
+       f"input after line_layers.py changed (A191-A196): closed shapes are contracted using distinct neighbours, "
+       f"nearby landing points are separated, touching process items gain a marked segment, and position-less "
+       f"junction matching is fixed in the scorer (A192). DEXPI C01-C03, SPPID, OPEN100 0-5, TE and Bayer were "
+       f"development data; Comos, AVEVA, OPEN100 6-11 and the agent-keyed sets were held out for these changes, "
+       f"seen once before as baselines. A191 changes derived truth too (OPEN100 holdout 388 to 386 segments), "
+       f"so score movement is not pure tracing gain. The `open100-holdout` cell also records why the earlier A170 "
+       f"result was only partly blind. {AGENT_KEYED_TEXT} Their pipe truth is derived from the agent-made key graph as for OPEN100 "
        f"(`pid2graph_truth`; the key's networks reproduce its all-pairs links on every sheet), and the agent-keyed "
        f"sheets are scored with the set registered for that call only (`line_layers.SETS` itself is not edited).",
 }

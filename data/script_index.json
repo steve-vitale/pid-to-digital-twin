@@ -9,6 +9,7 @@
  "scripts": {
   "scripts/run_extraction.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
   "scripts/trace_connections.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
+  "scripts/scan_cleanup.py": {"kind": "tool", "guide": "docs/GRAPH_EXPORT.md"},
   "scripts/site_extraction_workflow.py": {"kind": "tool", "guide": "docs/SITE_EXTRACTION_WORKFLOW.md"},
   "scripts/import_site_drawing.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
   "scripts/generate.py": {"kind": "tool", "guide": "examples/from-description/README.md"},
@@ -30,6 +31,7 @@
   "scripts/deliverable_report.py": {"kind": "tool", "guide": "examples/own-drawing/README.md"},
 
   "scripts/check_claims.py": {"kind": "check", "guide": "docs/REVIEWING.md"},
+  "scripts/rescore.py": {"kind": "check", "guide": "docs/REVIEWING.md"},
   "scripts/pipeline.py": {"kind": "check", "guide": "docs/DATA_LINEAGE.md"},
   "scripts/run_tests.py": {"kind": "check"},
   "scripts/script_index.py": {"kind": "check"},

@@ -26,7 +26,7 @@ either: a bubble's leader, a valve's actuator stem and a nozzle stub on a vessel
 
 | Layer | In the graph | Means | Where it comes from |
 |---|---|---|---|
-| Pipe | `junction` nodes (`junction_kind` pipe_tee or marked_crossing), `piped_to` edges | a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between. "A is piped to B" | a drawing: `scripts/line_layers.py` from the tracer's own geometry; DEXPI XML: `scripts/dexpi_reader.py` from the piping segments (tees are elements) |
+| Pipe | `junction` nodes (`junction_kind` pipe_tee or marked_crossing), `piped_to` edges | consecutive process items along a run, through bends and past instrument taps, with no pipe tee or other item between; a `touching: true` edge instead records two items drawn against each other with no line between | a drawing: `scripts/line_layers.py` from the tracer's geometry and item boxes; DEXPI XML: `scripts/dexpi_reader.py` from the piping segments (tees are elements) |
 | Lines that are not pipe | `instrument_connection` edges (and `junction` nodes of kind instrument_tap or instrument_line_junction), `actuated_by` edges, `nozzle_of` edges | a bubble's leader or impulse line (to a tap on a pipe, an item, or another instrument line); a valve and the actuator stacked on it; a nozzle mark and the vessel it sits on. None of them is a pipe | a drawing: `scripts/line_layers.py` (rules below) |
 | Network | `line_network` nodes, `on_network` edges (item or junction to its network) | the items and junctions on one drawn line network: lines that touch outside the item boxes, through bends, junctions or crossings, as the tracer joins them | the same |
 | Pairwise | `connects` edges with `layer: network_pair` (and the `network` they share) | both ends are on the same line network. Every pair of a network's members, so derivable from the network layer. **Not** pipe adjacency | the tracer's links, unchanged (every connection score uses them: `score_pid2graph.py` reads the answer key's graph the same way, every pair of symbols reachable through its connector and crossing nodes) |
@@ -70,9 +70,22 @@ either: a bubble's leader, a valve's actuator stem and a nozzle stub on a vessel
   as a crossing.
 - **An item's own drawing**: meeting points inside an item's box, or just outside it, are the item's own drawing (an
   outline stroke, an actuator stem, a nozzle stub): lines meeting there meet at the item. Except a tee drawn beside a
-  box: meeting points just outside an item whose arms lead away to two or more other items (not ones drawn against
-  it, like a nozzle on its vessel) and into the item are a junction next to the item (on sheet 0, where the drop from
-  MS 14010 lands on the main line just left of MSCV-XXX).
+  box: two arms leading away to other items must leave within half a symbol side of each other, with an arm into the
+  item. This keeps the tee where MS 14010 lands beside MSCV-XXX, while pipes landing further apart on a vessel's
+  shell remain separate connections to the vessel (A194). Two nozzles closer than that tolerance can still be read
+  as one tee.
+- **Closed shapes on a line**: a retained junction must meet at least three **different neighbours**. A line that
+  leaves a point and comes back, or two lines between the same two places, can make three arms without three
+  neighbours (an arrowhead, an unkeyed symbol outline, a box on a stem). `contract()` passes through points with two
+  neighbours and prunes those with one, repeatedly. This definition also changes the truth derived from the OPEN100
+  key graph (A191); a score improvement can therefore include a truth change, not just better tracing.
+- **Items drawn touching**: two process items (excluding bubbles and actuators) with a box gap at most 0.1 of a
+  symbol side are treated as consecutive when no traced line joins them (a flange against a valve or vessel, a
+  reducer against a valve). Their edge has `touching: true`; its statement says they are drawn against each other,
+  with no line between. It has no line network unless both ends already share one; network and pairwise links are
+  unchanged. A nozzle against its own vessel remains `nozzle_of`. Limit: on the OPEN100 development drawings only
+  18 of 26 such process contacts are segments in the derived key (A195), so contact alone is a draft inference to
+  check, not proof of a pipe connection.
 - **Left out of the layers**: dead-end stubs, and line that joins fewer than two items (a closed loop, a symbol's own
   outline or internals drawn outside its box). A network with a single item carries no link and is only counted
   (`single_item_networks`).
@@ -87,10 +100,38 @@ either: a bubble's leader, a valve's actuator stem and a nozzle stub on a vessel
   are `layer: offpage_pair`.
 
 Sheet 0: 345 pairwise links (unchanged) on 48 line networks (17 more networks touch only one item); 38 junctions (28
-pipe tees, 10 instrument taps); 90 pipe segments, 20 instrument connections, 2 actuator stems, 2 nozzle stubs. DEXPI
+pipe tees, 10 instrument taps); 92 pipe segments (2 inferred from touching items), 20 instrument connections, 2 actuator stems, 2 nozzle stubs. DEXPI
 C01: 17 networks, 5 junctions (its 5 PipeTees), 27 pipe segments. How well the pipe layer matches a real topology
 (DEXPI XML, the generated drawings, and a truth derived from the PID2Graph key graph on the OPEN100 development
 and holdout sheets, and the DEXPI 1.2 vendor renders), and which evaluation measures which layer: [EVALUATION.md §7](EVALUATION.md#7-which-layer-each-evaluation-measures).
+
+The latest pipe rules were chosen on DEXPI C01-C03, SPPID renders and OPEN100 sheets 0-5, with TE and Bayer as
+guards (A177, A191-A195). Comos and AVEVA renders, OPEN100 6-11 and the agent-keyed sheets were held out for those
+changes, after their baselines had been seen (A196). The pooled vendor result mixes development and held-out
+renders. About two thirds of the SPPID development gain comes from a scorer fix: matching position-less tees
+through already matched neighbouring tees raises F1 from 0.679 to 0.852 with tracing unchanged (A192), before the
+final 0.939. OPEN100 scores also include the changed derived truth. These are not pure tracing gains.
+
+## Scan clean-up before tracing
+
+`scripts/scan_cleanup.py` is an optional step for faded, blurred or noisy drawing images. It detects speckled or
+uneven paper, estimates its background, keeps stroke cores and reconnects faint straight runs while preserving
+visible gaps. OpenCV and NumPy are required; there are no model calls.
+
+```sh
+python scripts/scan_cleanup.py my-sheet.png --clean auto --out my-sheet-cleaned.png
+```
+
+The command prints the detection and writes the image to use when tracing. With `auto`, a drawing detected as clean
+is left unchanged. `--clean on` forces clean-up when a faded image has flat paper and no specks that auto can detect.
+In code, `scan_cleanup.trace(image, symbols, clean="auto")` runs the tracer on a temporary cleaned image or the
+original file. The [generalization matrix](GENERALIZATION.md) uses this wrapper in row 1; the underlying tracer's
+default and the pipe-layer row are unchanged.
+
+Chosen on synthetic damage to OPEN100 development sheets 0-5, the frozen method raises holdout sheets 6-11 from
+0.877 to 0.894 at L1, 0.566 to 0.818 at L2, and 0.387 to 0.753 at L3; only L1 clears the 0.88 bar (A189/A190).
+Both splits use the same damage generator. On the one keyed real archive scan, the agent-keyed OMRE quadrant, F1
+falls from 0.561 to 0.522. It has not been shown to improve real archive scans; check its result on your drawing.
 
 ## Why you'd want this, if you've never needed a graph
 
@@ -201,16 +242,16 @@ python scripts/graph_export.py my-bundle/plant_model.json --profile core --out m
 
 | Profile | Keeps | Drops |
 |---|---|---|
-| `full` (default) | everything the model holds | nothing |
+| `full` (default) | all supported claims and relations | declared exclusions listed in `not_exported` (for example, the Bayer incident timeline) |
 | `core` | nodes, identity and configuration claims, `measures` / `controls` / `sets_point_of` / `protects` / `trips` / `piped_to` / `instrument_connection` / `actuated_by` / `nozzle_of` / `on_network` / `contains`, every claim's `source` | extraction internals (`*_method`, hashes, `source_evidence.*`, pixel geometry, candidate lists, `sheet`, which every claim's source already names) and the all-pairs `connects` links, which `on_network` rebuilds |
 
 Nothing leaves silently: a `core` graph has a `profile` block counting every dropped claim name, the dropped edges
-and the claims they carried. On sheet 0, 6,565 claims become 942 kept + 1,138 extraction internals + 4,485 carried on
-the 345 dropped all-pairs links, and 734 edges become 389
+and the claims they carried. On sheet 0, 6,581 claims become 956 kept + 1,140 extraction internals + 4,485 carried on
+the 345 dropped all-pairs links, and 736 edges become 391
 ([`sheet0_graph_core.json`](../examples/graph-export/sheet0_graph_core.json)). Hand-built models (TE, Bayer) carry no
 extraction internals, so their `core` export equals the full one. `core` is a view for loading, not a replacement:
-keep the full export as the record. It drops nothing a reviewer needs to check a claim, because each kept claim still
-carries its source.
+keep the full export as the record. Each kept claim still carries its source; the full export retains methods and
+candidate alternatives a reviewer may also need.
 
 ## The format
 

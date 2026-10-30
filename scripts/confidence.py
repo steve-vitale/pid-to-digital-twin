@@ -41,8 +41,14 @@ Tiers (thresholds on the risk, set on the development drawings only, scripts/con
 Twin instruments also get a parent second opinion (annotate_model): the twin is rebuilt with the other parent rule
 (along_line vs linked); when the two disagree the instrument is at least amber, with both candidates in "why".
 
+Safety floor (separate from the rating, applied after it): instruments and in-line items whose function is
+safety-relevant by their own fields (relief devices, shutdown valves, trip switches, isolation valves; SAFETY_RULE,
+SAFETY_LIMITS) are never green. mark_safety() marks them during the build; safety_floor() lifts green to amber
+with the reason "safety-relevant (...): always checked". Weights, scores and thresholds are not changed.
+
 Library:   rate_run(label, tool, sheet, images_dir) -> {"symbols": {id: rating}, "links": {(a, b): rating}}
            annotate_model(model, run_dir, sheets, images_dir)   (adds "risk" to every twin item; see build_twin.py)
+           mark_safety(model), safety_floor(model) -> report    (the safety floor; see build_twin.py)
 CLI:       python scripts/confidence.py --label r2-tiles-trace --tool codex --sheets 0,1,2,3,4,5
 """
 import argparse
@@ -439,6 +445,127 @@ def annotate_model(model, run_dir, sheets, images_dir=None):
     model.setdefault("meta", {})["risk_model"] = {"file": "scripts/confidence_model.json", "tiers": cp["tiers"],
                                                   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"}
     return model
+
+
+# ---------------------------------------------------------------- safety floor (a floor on the tiers, not a rating)
+#
+# The tiers above say whether the extraction agrees with itself, not what the item does: a relief valve every model
+# read the same way is green. A process-safety reviewer checks those regardless, so items whose function is
+# safety-relevant are never green. This does not touch the fitted weights, the risk score or the green/red
+# thresholds; it only lifts a green tier to amber and says why. Identification uses the model's own fields only
+# (class, tag letters as build_twin.py read them, instrument_kind, the sheet's system codes), never an answer key.
+
+RELIEF = "relief device"
+SHUTDOWN = "shutdown / on-off valve"
+TRIP = "trip switch (possible interlock input)"
+ISOLATION = "isolation valve"
+SAFETY_RULE = (
+    "Instruments and in-line items only (never equipment, off-page connectors or links). Letters are the tag's "
+    "letter group as build_twin.py reads it. ISA-read letters: relief = <variable>S + V/E (PSV, TSV, PSE) or "
+    "RV, PRV, SRV, PRD, PRSV, RD; shutdown = XV, SDV, ESDV, ESD, BDV; trip switch = <variable>[D]S + H/L/HH/LL/HL "
+    "(PSH, LSLL, PDSH). Operated-valve shorthand ending in RV (AORV) = relief. Plant-coded tags (letters led by the "
+    "sheet's system code, build_twin.plant_coded): the letters after the code SV/RV/SRV = relief, IV/ISV = isolation "
+    "(MSIV). Tag words RUPTURE/BURST/RELIEF/SAFETY VALVE = relief; ESD/SHUTDOWN/SHUTOFF = shutdown; ISOLATION/ISOL = "
+    "isolation. Reviewed valve callouts keep the reviewer's reading and are not re-classified.")
+SAFETY_LIMITS = (
+    "Only what a tag says. An untagged valve (most valves on OPEN100), a manual block valve, a normally-closed "
+    "(NC) valve, a motor/air-operated valve (MOV/AOV) or a plant-coded bypass/block valve (MSBV) is not identified: "
+    "the extraction has no field that tells isolation duty from control. Interlocks are found only through trip-"
+    "switch letters; a transmitter that feeds a trip is not marked. PRV and RD are read as relief (they can mean a "
+    "pressure-reducing valve or another variable), which costs at most an extra check.")
+_RELIEF_ISA = {"RV", "PRV", "SRV", "PRD", "RD", "PRSV"}
+_SHUTDOWN_ISA = {"XV", "SDV", "ESDV", "ESD", "BDV"}
+_WORDS = [(re.compile(r"\b(RUPTURE|BURST|RELIEF|SAFETY\s+VALVE)\b"), RELIEF),
+          (re.compile(r"\b(ESD|SHUTDOWN|SHUT-?OFF)\b"), SHUTDOWN),
+          (re.compile(r"\b(ISOLATION|ISOL)\b"), ISOLATION)]
+
+
+def safety_function(letters, kind, tag, codes):
+    """(function, basis) for one item, or None. letters/kind as build_twin.py set them (instruments) or read from the
+    tag (in-line items); codes = the sheet's system codes. See SAFETY_RULE and SAFETY_LIMITS."""
+    import build_twin as bt  # lazy: build_twin imports this module
+    if letters:
+        if kind == "operated valve" or (kind is None and re.search(r"OR?V$", letters)):
+            if letters.endswith("RV"):
+                return RELIEF, f"operated-valve letters {letters} end in RV (operated relief valve)"
+        else:
+            pc = bt.plant_coded(letters, codes)
+            if pc:
+                code = pc[0]
+                stems = [s for s in [code] + ([code[:-1]] if len(code) >= 3 and code.endswith("S") else [])
+                         if len(s) >= 2 and letters.startswith(s)]
+                for stem in stems:
+                    rest = letters[len(stem):]
+                    if rest in ("SV", "RV", "SRV"):
+                        return RELIEF, f"plant tag {letters}: {rest} after system code {code}"
+                    if rest in ("IV", "ISV"):
+                        return ISOLATION, f"plant tag {letters}: {rest} after system code {code}"
+            elif re.fullmatch(r"[A-Z]S[EV]", letters) or letters in _RELIEF_ISA:
+                return RELIEF, f"tag letters {letters}"
+            elif letters in _SHUTDOWN_ISA:
+                return SHUTDOWN, f"tag letters {letters}"
+            elif re.fullmatch(r"[A-Z]D?S(HH|LL|HL|H|L)", letters):
+                return TRIP, f"tag letters {letters}"
+    text = (tag or "").upper()
+    for pat, function in _WORDS:
+        m = pat.search(text)
+        if m:
+            return function, f"tag text {m.group(0)}"
+    return None
+
+
+def mark_safety(model):
+    """Add "safety" = {function, basis} to every instrument and in-line item whose function is safety-relevant by
+    SAFETY_RULE. Called by build_twin.build(); the floor on the tiers is safety_floor() below."""
+    import build_twin as bt
+    codes = {s["id"]: set(s.get("system_codes_seen") or {}) | {s.get("system_code")} for s in model.get("systems", [])}
+    for key in ("instruments", "line_items"):
+        for x in model.get(key, []):
+            if x.get("reviewed_valve_association"):
+                continue
+            letters, kind = ((x.get("isa_letters"), x.get("instrument_kind")) if key == "instruments"
+                             else (bt.isa_parts(x.get("tag"))[0], None))
+            found = safety_function(letters, kind, x.get("tag"), codes.get(x.get("system"), set()))
+            if found:
+                x["safety"] = {"function": found[0], "basis": found[1]}
+    return model
+
+
+def safety_note(item):
+    return f"safety-relevant ({item['safety']['function']}): always checked"
+
+
+def safety_floor(model):
+    """The floor: an item marked by mark_safety() is never green. A green tier becomes amber (tier_before_floor
+    records it); every marked item's why starts with the safety note. Risk scores and thresholds are unchanged.
+    Returns a report, also stored in meta.risk_model.safety_floor for a rated model (an unrated model has no tiers
+    to lift; its review queue still flags the item)."""
+    rated = "risk_model" in model.get("meta", {})
+    marked, raised, by_function = Counter(), Counter(), Counter()
+    for key in ("instruments", "line_items"):
+        for x in model.get(key, []):
+            if not x.get("safety"):
+                continue
+            marked[x["class"]] += 1
+            by_function[x["safety"]["function"]] += 1
+            if not rated:
+                continue
+            r = x.get("risk")
+            if r is None:  # not rated: the queue shows it amber anyway; keep that and say why it matters
+                x["risk"] = {"risk_score": None, "tier": "amber",
+                             "why": f"{safety_note(x)}; not rated by the risk model; check by hand"}
+            elif r["tier"] == "green":
+                r["tier"], r["tier_before_floor"] = "amber", "green"
+                r["why"] = f"{safety_note(x)}; extraction checks: {r['why']}"
+                raised[x["class"]] += 1
+            else:
+                r["why"] = f"{safety_note(x)}; {r['why']}" if r.get("why") else safety_note(x)
+    report = {"rule": SAFETY_RULE, "limits": SAFETY_LIMITS, "marked": dict(sorted(marked.items())),
+              "raised_green_to_amber": dict(sorted(raised.items())), "by_function": dict(sorted(by_function.items())),
+              "note": "a floor on the tiers, applied after the calibrated rating; risk scores and thresholds unchanged"}
+    if rated:
+        model["meta"]["risk_model"]["safety_floor"] = report
+    return report
 
 
 # ---------------------------------------------------------------- CLI

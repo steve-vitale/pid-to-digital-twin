@@ -1,0 +1,22 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "gemini",
+ "drawing": "23",
+ "label": "hb-trace",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "e19d13a4e42260489165d67eb449e4f181a6618c0116a2550b0862b968ab6c1d",
+ "ran_at": "2026-10-08T03:56:23+00:00",
+ "seconds": 82.4,
+ "cost_usd": 0.1829,
+ "cost_usd_notional": null,
+ "error": null,
+ "parse_error": "invalid JSON: Expecting ':' delimiter: line 7 column 33 (char 122)",
+ "source_label": "hb-v2",
+ "tracer": {"script":"scripts/trace_connections.py","mode":"replace","seconds":0.3,"ran_at":"2026-10-08T05:40:49+00:00"},
+ "prediction": {
+  "symbols": [],
+  "connections": []
+ }
+}

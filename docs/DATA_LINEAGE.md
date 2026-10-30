@@ -199,11 +199,11 @@ no I/O list. The I/O list used in the mapping demo is synthetic and labelled so.
 | Class | Count | Measured against the answer keys (holdout A, rough match F1) | Risk tier green / amber / red | Tag status |
 |---|---|---|---|---|
 | Equipment (tanks, pumps) | 74 | tank 0.72, pump 0.50 (5 pumps in the keys) | 46 / 14 / 14 | 14 missing |
-| Instruments | 359 | 1.00 | 318 / 36 / 5 | 55 placeholder, 2 missing |
+| Instruments | 359 | 1.00 | 296 / 58 / 5 (22 lifted from green by the safety floor) | 55 placeholder, 2 missing |
 | Line items (valves, in-line symbols) | 477 | valve 0.99, general 0.83 | 241 / 143 / 93 | 340 untagged, 1 placeholder |
 | Off-page connectors | 95 | 0.99 | 94 / 1 / 0 | all read |
 | Connections | 1,881 | 0.89 | 1,134 / 475 / 265 (the 7 cross-sheet links carry no tier in the model; the review queue shows them amber) | n/a |
-| **All items** | **2,886** | review load **20.1** per 100 (holdout A, mean of five round-5 runs; the single round-2 run scored 17.8), **20.7** (holdout B, round 2) | **1,833 / 676 / 377** in the review queue | every item `unverified` |
+| **All items** | **2,886** | review load **20.1** per 100 (holdout A, mean of five round-5 runs; the single round-2 run scored 17.8), **20.7** (holdout B, round 2) | **1,811 / 698 / 377** in the review queue | every item `unverified` |
 
 Green items were 94–96% right on holdout A and 97–100% on holdout B. Item-level confidence is the risk tier; the
 scores above are set-level and do not say which individual item is right.
@@ -215,7 +215,7 @@ flowchart LR
     S0["Stage 0: 12 drawings + answer keys<br/>symbols, boxes, connections<br/>no text in the keys"]:::verified
     X["Stage 1: extraction (recorded)<br/>models read symbols + tags<br/>code traces lines<br/>review load 20.1 / 100 (round 5)"]:::measured
     SC["Stage 1: scorecards (recorded)<br/>frozen scorer, sealed holdouts"]:::measured
-    T["Stage 2: asset model (recorded)<br/>2,886 items, all unverified<br/>green 1,833 / amber 676 / red 377"]:::inherits
+    T["Stage 2: asset model (recorded)<br/>2,886 items, all unverified<br/>green 1,811 / amber 698 / red 377"]:::inherits
     R["Review loop<br/>apply_review.py, map_points.py<br/>edit the model in place"]:::human
     E["Stage 3: exports<br/>review queue, Ignition tags,<br/>PI AF sheet, SVG overlays<br/>inherits Stage 2"]:::inherits
     G["Stage 4: Ignition gateway kit<br/>sheet screens, placeholders<br/>read 'not connected'"]:::measured
@@ -240,7 +240,7 @@ flowchart LR
 | 2 `open100.model` (recorded) | run records | `build_twin.py`: hierarchy, parent along the traced line, risk tier and reason per item | `out/twin/r2-tiles-trace/codex/plant_model.json` | `verification` (unverified), `risk.tier`, `tag_status`, later `ops_review` | `score_twin.py`, `score_triage.py` on holdouts |
 | Review (not a build stage) | `review_queue.csv` filled in by a reviewer; an I/O list | `apply_review.py` (Track A text corrections never change an item's status); `map_points.py` (never guesses) | the same model file, changed in place, plus change records | as for TE: only a named operations role counts as an operations review | the scripts' refusals; `test_apply_review.py`, `test_map_points.py` |
 | 3 `open100.exports` | the model | `generate.py`; signal paths stay placeholders | `review_queue.csv`, `ignition/tags.json`, `pi/*.csv`, `pi/reconciliation.json`, `svg/sheet_*.svg` | every Ignition and PI description carries confidence and `UNVERIFIED` | `test_generate_validation.py`, `test_export_review_boundaries.py`, `test_pi_mapping.py` |
-| 1 `open100.replicates` (recorded) | holdout A, five fresh runs per tool | the declared method, pre-registered | `out/replicates_r5_holdout-a.md` | means with run and drawing intervals; GPT minus Claude a tie across drawings | `test_replicate_stats.py` |
+| 1 `open100.replicates` (recorded) | holdout A, five fresh runs per tool | the declared method, pre-registered | `out/replicates_r5_holdout-a.md` | means with run and drawing intervals; no clear ranking across drawings, equivalence not established | `test_replicate_stats.py` |
 | 4 `open100.review_kit` | the review queue, sheet 8 | one sheet's rows with blank OPS_ columns, an empty timer log | `out/review_kit/sheet-8/` | no measured minutes | `test_review_kit.py` |
 | 3-5 `open100.direction_spot_check`, `open100.schedule` (recorded); `open100.flow_direction`, `open100.structure`, `open100.mimic`, `open100.scene` (generated; mimic and 3D are proof of concept); `open100.structural_check` | the model, the drawings | flow direction from drawing evidence, sheets stitched by connector drawing numbers, purposes from the printed equipment schedules, a mimic and a 3D tour of structure only, candidate isolation points | `out/open100_structural/`, `docs/screenshots/open100/` | structure only; every value "not connected"; isolation points are a reviewer's checklist, not a procedure | `test_open100_structural.py`; [OPEN100_STRUCTURAL.md](OPEN100_STRUCTURAL.md) |
 | 4 `pi.export_check` (shared) | both PI Builder sheets | offline comparison with the vendor-published conventions | none (a check) | offline-checked, not import-tested | `test_check_pi_export.py` |

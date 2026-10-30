@@ -46,6 +46,7 @@ WALK = "out/bayer_rt/walkthrough.json"
 REVC = "out/te_pid/roundtrip_scores_revC.json"
 LOOPS = "data/te_control_loops.json"
 BAYER_DOC = "docs/BAYER_RT.md"
+MATRIX = "out/generalization/matrix.json"
 
 
 class EvidenceError(Exception):
@@ -98,6 +99,28 @@ def queue_rows():
 
 def queue_tier(tier):
     return sum(1 for row in queue_rows() if row["tier"] == tier)
+
+
+def matrix_cells():
+    return at(load_json(MATRIX), ["cells"], MATRIX)
+
+
+def matrix_pipe_f1(input_id):
+    cells = [c for c in matrix_cells() if c["row"] == 8 and c["input"] == input_id]
+    if len(cells) != 1:
+        raise EvidenceError(f"{MATRIX}: expected one row-8 cell for {input_id}, found {len(cells)}")
+    sheets = at(cells[0], ["detail", "sheets"], MATRIX)
+    tp = predicted = truth = 0
+    for name, sheet in sheets.items():
+        counts = [at(sheet, [key], MATRIX) for key in ("tp", "predicted", "truth")]
+        if any(type(v) is not int or v < 0 for v in counts) or counts[0] > min(counts[1:]):
+            raise EvidenceError(f"{MATRIX}: invalid pipe counts for {input_id}/{name}")
+        tp += counts[0]
+        predicted += counts[1]
+        truth += counts[2]
+    if not sheets:
+        raise EvidenceError(f"{MATRIX}: no pipe sheet counts for {input_id}")
+    return 2 * tp / (predicted + truth) if predicted + truth else 1.0
 
 
 def process_streams():
@@ -199,6 +222,18 @@ class Claim:
 
 
 CLAIMS = [
+    Claim("M-workflows", "eight selected workflows in the corpus matrix", ["covers eight selected workflows"], 8,
+          lambda: len({c["row"] for c in matrix_cells()}), [MATRIX]),
+    Claim("M-pass", "63 corpus cells pass", ["63 cells pass, 23 fail and 8 are not applicable"], 63,
+          lambda: sum(c["status"] == "pass" for c in matrix_cells()), [MATRIX]),
+    Claim("M-fail", "23 corpus cells fail", ["63 cells pass, 23 fail and 8 are not applicable"], 23,
+          lambda: sum(c["status"] == "fail" for c in matrix_cells()), [MATRIX]),
+    Claim("M-na", "8 corpus cells are not applicable", ["63 cells pass, 23 fail and 8 are not applicable"], 8,
+          lambda: sum(c["status"] == "n/a" for c in matrix_cells()), [MATRIX]),
+    Claim("M-open100-pipe", "OPEN100 validation pipe F1 0.912", ["Pipe tracing reaches F1 0.912"], 0.912,
+          lambda: matrix_pipe_f1("open100-holdout"), [MATRIX], 3),
+    Claim("M-vendor-pipe", "mixed vendor-render pool pipe F1 0.776", ["mixed vendor-render pool still fails at 0.776"], 0.776,
+          lambda: matrix_pipe_f1("dexpi-1.2-vendor-renders"), [MATRIX], 3),
     Claim("A-symbols-f1", "symbols F1 0.93 on held-out drawings, mean of five round-5 runs (GPT)", ["F1 0.93"], 0.93,
           lambda: replicate_mean(HOLDOUT_A, "symbol_f1_rough_classified", "codex"), [HOLDOUT_A], 2,
           note="rough_classified F1; the single round-2 run's rough_located F1 was 0.97"),
@@ -212,8 +247,8 @@ CLAIMS = [
           lambda: scorecard_value("codex", "review_load_per_100"), [SCORECARD_A], 1),
     Claim("Q-items", "2,886 extracted OPEN100 items", ["2,886"], 2886,
           lambda: len(queue_rows()), [QUEUE]),
-    Claim("Q-green", "1,833 green items", ["1,833"], 1833, lambda: queue_tier("green"), [QUEUE]),
-    Claim("Q-amber", "676 amber items", ["676"], 676, lambda: queue_tier("amber"), [QUEUE]),
+    Claim("Q-green", "1,811 green items", ["1,811"], 1811, lambda: queue_tier("green"), [QUEUE]),
+    Claim("Q-amber", "698 amber items", ["698"], 698, lambda: queue_tier("amber"), [QUEUE]),
     Claim("Q-red", "377 red items", ["377"], 377, lambda: queue_tier("red"), [QUEUE]),
     Claim("F-directed", "flow direction on 361 process links", ["361 of 1,133"], 361,
           directed_process_links, [FLOW]),

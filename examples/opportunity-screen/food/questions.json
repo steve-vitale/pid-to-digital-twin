@@ -1,0 +1,2599 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "examples/opportunity-screen/food_plant_model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "C9",
+  "E25",
+  "E26",
+  "E27",
+  "E28",
+  "E29",
+  "E30",
+  "E31",
+  "E32",
+  "H5",
+  "H6",
+  "C11",
+  "C12"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 24,
+  "by_family": {
+   "controls": 4,
+   "energy": 12,
+   "heat_grade": 3,
+   "metering": 4,
+   "safety_question": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E19@AC-501",
+   "question_id": "E19",
+   "family": "energy",
+   "question": "Is the compressed air header pressure higher than the end users need?",
+   "about": "AC-501",
+   "assets": [
+    {
+     "id": "AC-501",
+     "tag": "AC-501"
+    },
+    {
+     "id": "PIC-202",
+     "tag": "PIC-202"
+    },
+    {
+     "id": "PIC-203",
+     "tag": "PIC-203"
+    },
+    {
+     "id": "PIC-501",
+     "tag": "PIC-501"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "AC-501",
+     "tag": "AC-501",
+     "text": "equipment AC-501 reads \"AC-501 Instrument air compressor\"",
+     "field": "units[AC-501]"
+    },
+    {
+     "role": "pressure control or regulator",
+     "id": "PIC-202",
+     "tag": "PIC-202",
+     "text": "controller PIC-202 reads \"PIC-202 High-stage suction pressure control, loads and unloads K-202 and K-203\" at K-202",
+     "field": "controllers[PIC-202]"
+    },
+    {
+     "role": "pressure control or regulator",
+     "id": "PIC-203",
+     "tag": "PIC-203",
+     "text": "controller PIC-203 reads \"PIC-203 Head pressure control at a fixed setpoint, on the condenser fans\" at C-201",
+     "field": "controllers[PIC-203]"
+    },
+    {
+     "role": "pressure control or regulator",
+     "id": "PIC-501",
+     "tag": "PIC-501",
+     "text": "controller PIC-501 reads \"PIC-501 Instrument air header pressure control\" at AC-501",
+     "field": "controllers[PIC-501]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Header pressure profile and the minimum end-use pressure",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: pressure at the farthest and most demanding users"
+     ],
+     "how": "Find the highest pressure any user truly needs."
+    }
+   ],
+   "decision_rule": "Lower the setpoint toward the highest true end-use need plus distribution losses.",
+   "typical_benefit": {
+    "wording": "\"for every 2 psi decrease in discharge pressure, energy consumption will decrease by approximately 1 percent at full output flow.\" With 30-50% unregulated usage, \"about 1 to 1.6 percent for every 2 psi.\"",
+    "source": [
+     "S11",
+     "S24"
+    ],
+    "arc": "2.4231 (IAC/ITAC browse page: 6,522 recommendations, 0.5 yr average payback, 51.6% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E22@AC-501",
+   "question_id": "E22",
+   "family": "energy",
+   "question": "Does the air compressor lack enough storage for intermittent large users?",
+   "about": "AC-501",
+   "assets": [
+    {
+     "id": "AC-501",
+     "tag": "AC-501"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "AC-501",
+     "tag": "AC-501",
+     "text": "equipment AC-501 reads \"AC-501 Instrument air compressor\"",
+     "field": "units[AC-501]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no receiver or air storage anywhere in the model",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Demand profile",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: data-log compressor load and header pressure for a week"
+     ],
+     "how": "Find short high-demand events."
+    }
+   ],
+   "decision_rule": "Add storage when short peaks force an extra compressor on.",
+   "typical_benefit": {
+    "wording": "Storage \"may allow such a compressor to be turned off.\" No % stated.",
+    "source": [
+     "S10",
+     "S24"
+    ],
+    "arc": "2.422x (category only) (IAC/ITAC browse page: 8,589 recommendations, 1.2 yr average payback, 46.5% implemented; average dollar figure omitted)",
+    "source_titles": [
+     "S10: Compressed Air Tip #9, Compressed Air Storage Strategies (DOE/GO-102004-1965)",
+     "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+    ]
+   },
+   "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.",
+   "status": "asked"
+  },
+  {
+   "id": "E23@AC-501",
+   "question_id": "E23",
+   "family": "energy",
+   "question": "Is air compressor heat rejected when it could heat something?",
+   "about": "AC-501",
+   "assets": [
+    {
+     "id": "AC-501",
+     "tag": "AC-501"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "AC-501",
+     "tag": "AC-501",
+     "text": "equipment AC-501 reads \"AC-501 Instrument air compressor\"",
+     "field": "units[AC-501]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Load hours and a nearby heat sink",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: compressor run hours",
+      "a walkdown: space or water heating needs nearby"
+     ],
+     "how": "List heat users within reach."
+    }
+   ],
+   "decision_rule": "Worth a look when the compressor runs long hours and a low-temperature heat user is nearby.",
+   "typical_benefit": {
+    "wording": "\"As much as 80 to 93 percent of the electrical energy\" becomes heat; recovery \"anywhere from 50 to 90 percent of this\".",
+    "source": [
+     "S11"
+    ],
+    "arc": "2.243x (by description)",
+    "source_titles": [
+     "S11: Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)"
+    ]
+   },
+   "limits": null,
+   "status": "asked"
+  },
+  {
+   "id": "C1@O-302",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "O-302",
+   "assets": [
+    {
+     "id": "O-302",
+     "tag": "O-302"
+    },
+    {
+     "id": "stream:U2",
+     "tag": "U2"
+    },
+    {
+     "id": "TV-302",
+     "tag": "TV-302"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "stream:U2",
+     "tag": "U2",
+     "text": "stream U2 (asset stream:U2) reads \"Natural gas to the oven burners\" at O-302",
+     "field": "streams[U2]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-302",
+     "tag": "TV-302",
+     "text": "valve TV-302 reads \"TV-302 Oven burner natural gas control valve\" at O-302",
+     "field": "final_elements[TV-302]"
+    },
+    {
+     "role": "equipment",
+     "id": "O-302",
+     "tag": "O-302",
+     "text": "equipment O-302 reads \"O-302 Gas-fired tunnel oven\"",
+     "field": "units[O-302]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (TV-302) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@F-303",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "F-303",
+   "assets": [
+    {
+     "id": "F-303",
+     "tag": "F-303"
+    },
+    {
+     "id": "stream:U3",
+     "tag": "U3"
+    },
+    {
+     "id": "TV-303",
+     "tag": "TV-303"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "stream:U3",
+     "tag": "U3",
+     "text": "stream U3 (asset stream:U3) reads \"Natural gas to the fryer burner\" at F-303",
+     "field": "streams[U3]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-303",
+     "tag": "TV-303",
+     "text": "valve TV-303 reads \"TV-303 Fryer burner natural gas control valve\" at F-303",
+     "field": "final_elements[TV-303]"
+    },
+    {
+     "role": "equipment",
+     "id": "F-303",
+     "tag": "F-303",
+     "text": "equipment F-303 reads \"F-303 Gas-fired continuous fryer\"",
+     "field": "units[F-303]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (TV-303) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C1@WH-401",
+   "question_id": "C1",
+   "family": "metering",
+   "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+   "about": "WH-401",
+   "assets": [
+    {
+     "id": "WH-401",
+     "tag": "WH-401"
+    },
+    {
+     "id": "stream:U4",
+     "tag": "U4"
+    },
+    {
+     "id": "TV-401",
+     "tag": "TV-401"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "stream:U4",
+     "tag": "U4",
+     "text": "stream U4 (asset stream:U4) reads \"Natural gas to the water heater\" at WH-401",
+     "field": "streams[U4]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-401",
+     "tag": "TV-401",
+     "text": "valve TV-401 reads \"TV-401 Water heater burner natural gas control valve\" at WH-401",
+     "field": "final_elements[TV-401]"
+    },
+    {
+     "role": "equipment",
+     "id": "WH-401",
+     "tag": "WH-401",
+     "text": "equipment WH-401 reads \"WH-401 Gas-fired water heater, CIP and wash hot water\"",
+     "field": "units[WH-401]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Utility flow to this user",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (TV-401) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "a walkdown: clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading",
+      "utility bills or the site energy report: site-level meter readings to apportion"
+     ],
+     "how": "Measure flow over a representative period and compare with production."
+    },
+    {
+     "item": "Who would use the reading",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: energy or production reporting"
+     ],
+     "how": "Name the report the meter would feed."
+    }
+   ],
+   "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+   "typical_benefit": {
+    "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+    "source": [
+     "S22",
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S22: FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.",
+   "status": "asked"
+  },
+  {
+   "id": "C2@model",
+   "question_id": "C2",
+   "family": "controls",
+   "question": "Which measurements have no controller (read by people, or by nothing)?",
+   "about": "PT-201, JT-201, TT-202, TT-205, TT-206, PDT-206 and 4 more",
+   "assets": [
+    {
+     "id": "PT-201",
+     "tag": "PT-201"
+    },
+    {
+     "id": "JT-201",
+     "tag": "JT-201"
+    },
+    {
+     "id": "TT-202",
+     "tag": "TT-202"
+    },
+    {
+     "id": "TT-205",
+     "tag": "TT-205"
+    },
+    {
+     "id": "TT-206",
+     "tag": "TT-206"
+    },
+    {
+     "id": "PDT-206",
+     "tag": "PDT-206"
+    },
+    {
+     "id": "TT-304",
+     "tag": "TT-304"
+    },
+    {
+     "id": "FT-301",
+     "tag": "FT-301"
+    },
+    {
+     "id": "TT-305",
+     "tag": "TT-305"
+    },
+    {
+     "id": "AT-302",
+     "tag": "AT-302"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "PT-201",
+     "tag": "PT-201",
+     "text": "instrument PT-201 reads \"PT-201 Low-stage suction pressure\" at K-201",
+     "field": "instruments[PT-201]"
+    },
+    {
+     "role": "trigger",
+     "id": "JT-201",
+     "tag": "JT-201",
+     "text": "instrument JT-201 reads \"JT-201 Low-stage compressor motor power\" at K-201",
+     "field": "instruments[JT-201]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-202",
+     "tag": "TT-202",
+     "text": "instrument TT-202 reads \"TT-202 Compressor discharge temperature\" at K-202",
+     "field": "instruments[TT-202]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-205",
+     "tag": "TT-205",
+     "text": "instrument TT-205 reads \"TT-205 Spiral freezer air temperature\" at EV-201",
+     "field": "instruments[TT-205]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-206",
+     "tag": "TT-206",
+     "text": "instrument TT-206 reads \"TT-206 Frozen store air temperature\" at EV-202",
+     "field": "instruments[TT-206]"
+    },
+    {
+     "role": "trigger",
+     "id": "PDT-206",
+     "tag": "PDT-206",
+     "text": "instrument PDT-206 reads \"PDT-206 Unit cooler coil air-side differential pressure (demand defrost initiation)\" at EV-202",
+     "field": "instruments[PDT-206]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-304",
+     "tag": "TT-304",
+     "text": "instrument TT-304 reads \"TT-304 Dryer exhaust air temperature\" at D-301",
+     "field": "instruments[TT-304]"
+    },
+    {
+     "role": "trigger",
+     "id": "FT-301",
+     "tag": "FT-301",
+     "text": "instrument FT-301 reads \"FT-301 Dryer burner natural gas flow\" at D-301",
+     "field": "instruments[FT-301]"
+    },
+    {
+     "role": "trigger",
+     "id": "TT-305",
+     "tag": "TT-305",
+     "text": "instrument TT-305 reads \"TT-305 Oven exhaust temperature\" at O-302",
+     "field": "instruments[TT-305]"
+    },
+    {
+     "role": "trigger",
+     "id": "AT-302",
+     "tag": "AT-302",
+     "text": "instrument AT-302 reads \"AT-302 Oven flue O2 analyser\" at O-302",
+     "field": "instruments[AT-302]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no controller in the model or loop list reads these measurements",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Whether operators adjust anything by hand from these readings",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: operator logs and round sheets",
+      "ask the operators which of these they act on, and how often"
+     ],
+     "how": "Note manual adjustments per shift tied to each reading."
+    },
+    {
+     "item": "The control system's own loop list",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: export the loop and point list"
+     ],
+     "how": "Confirm the reading is indication-only and not read by logic the model lacks."
+    }
+   ],
+   "decision_rule": "Worth automating a reading that operators adjust by hand often, on a service where steadier control saves energy or quality; indication-only readings nobody acts on close the question.",
+   "typical_benefit": {
+    "wording": "\"energy and cost savings are around 5% or more for many industrial applications of process control systems\" (for plants without updated controls). Process control: \"Typically 2-18% savings.\" The source says these figures \"cannot be added\".",
+    "source": [
+     "S19"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)"
+    ]
+   },
+   "limits": "The model or loop list may be incomplete; an uncontrolled reading may be read by logic not in the model.",
+   "status": "asked"
+  },
+  {
+   "id": "C3@model",
+   "question_id": "C3",
+   "family": "controls",
+   "question": "Do these control valves lack position feedback?",
+   "about": "TV-301, TV-302, TV-303, TV-401, PV-501",
+   "assets": [
+    {
+     "id": "TV-301",
+     "tag": "TV-301"
+    },
+    {
+     "id": "TV-302",
+     "tag": "TV-302"
+    },
+    {
+     "id": "TV-303",
+     "tag": "TV-303"
+    },
+    {
+     "id": "TV-401",
+     "tag": "TV-401"
+    },
+    {
+     "id": "PV-501",
+     "tag": "PV-501"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TV-301",
+     "tag": "TV-301",
+     "text": "valve TV-301 reads \"TV-301 Dryer burner natural gas control valve\" at D-301",
+     "field": "final_elements[TV-301]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-302",
+     "tag": "TV-302",
+     "text": "valve TV-302 reads \"TV-302 Oven burner natural gas control valve\" at O-302",
+     "field": "final_elements[TV-302]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-303",
+     "tag": "TV-303",
+     "text": "valve TV-303 reads \"TV-303 Fryer burner natural gas control valve\" at F-303",
+     "field": "final_elements[TV-303]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-401",
+     "tag": "TV-401",
+     "text": "valve TV-401 reads \"TV-401 Water heater burner natural gas control valve\" at WH-401",
+     "field": "final_elements[TV-401]"
+    },
+    {
+     "role": "trigger",
+     "id": "PV-501",
+     "tag": "PV-501",
+     "text": "valve PV-501 reads \"PV-501 Air compressor load/unload control\" at AC-501",
+     "field": "final_elements[PV-501]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Positioner type and diagnostics available",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)",
+      "maintenance records: valve records"
+     ],
+     "how": "List which valves report position."
+    },
+    {
+     "item": "Valve stiction or backlash",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for PV-501, TV-301, TV-302, TV-303, TV-401 (no historian tag is mapped in this model for these)",
+      "a walkdown: a small step test on each loop in manual"
+     ],
+     "how": "Compare controller output with measured response."
+    }
+   ],
+   "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+   "typical_benefit": {
+    "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+    "source": [
+     "S13"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S13: Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)"
+    ]
+   },
+   "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted.",
+   "status": "asked"
+  },
+  {
+   "id": "C9@model",
+   "question_id": "C9",
+   "family": "safety_question",
+   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "about": "K-201, K-202, K-203, AC-501",
+   "assets": [
+    {
+     "id": "K-201",
+     "tag": "K-201"
+    },
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "K-203",
+     "tag": "K-203"
+    },
+    {
+     "id": "AC-501",
+     "tag": "AC-501"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-201",
+     "tag": "K-201",
+     "text": "equipment K-201 reads \"K-201 Ammonia (R-717) screw compressor, low stage (booster)\"",
+     "field": "units[K-201]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-203",
+     "tag": "K-203",
+     "text": "equipment K-203 reads \"K-203 Ammonia (R-717) screw compressor, high stage (trim)\"",
+     "field": "units[K-203]"
+    },
+    {
+     "role": "trigger",
+     "id": "AC-501",
+     "tag": "AC-501",
+     "text": "equipment AC-501 reads \"AC-501 Instrument air compressor\"",
+     "field": "units[AC-501]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: cause-and-effect matrix, HAZOP and LOPA reports",
+      "DCS/PLC configuration: safety system configuration"
+     ],
+     "how": "Confirm what protects each machine and that it is tested."
+    }
+   ],
+   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "typical_benefit": {
+    "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+    "source": [],
+    "arc": null,
+    "source_titles": []
+   },
+   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "status": "asked"
+  },
+  {
+   "id": "E27@C-201",
+   "question_id": "E27",
+   "family": "energy",
+   "question": "Is the refrigeration condensing (head) pressure held higher than the weather allows, with no floating head pressure?",
+   "about": "C-201",
+   "assets": [
+    {
+     "id": "C-201",
+     "tag": "C-201"
+    },
+    {
+     "id": "PT-203",
+     "tag": "PT-203"
+    },
+    {
+     "id": "PIC-203",
+     "tag": "PIC-203"
+    },
+    {
+     "id": "K-201",
+     "tag": "K-201"
+    },
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "K-203",
+     "tag": "K-203"
+    },
+    {
+     "id": "JT-201",
+     "tag": "JT-201"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "C-201",
+     "tag": "C-201",
+     "text": "equipment C-201 reads \"C-201 Ammonia evaporative condenser\"",
+     "field": "units[C-201]"
+    },
+    {
+     "role": "head pressure or condensing temperature",
+     "id": "PT-203",
+     "tag": "PT-203",
+     "text": "instrument PT-203 reads \"PT-203 Condenser head (discharge) pressure\" at C-201",
+     "field": "instruments[PT-203]"
+    },
+    {
+     "role": "head pressure control",
+     "id": "PIC-203",
+     "tag": "PIC-203",
+     "text": "controller PIC-203 reads \"PIC-203 Head pressure control at a fixed setpoint, on the condenser fans\" at C-201",
+     "field": "controllers[PIC-203]"
+    },
+    {
+     "role": "refrigeration compressor",
+     "id": "K-201",
+     "tag": "K-201",
+     "text": "equipment K-201 reads \"K-201 Ammonia (R-717) screw compressor, low stage (booster)\"",
+     "field": "units[K-201]"
+    },
+    {
+     "role": "refrigeration compressor",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "refrigeration compressor",
+     "id": "K-203",
+     "tag": "K-203",
+     "text": "equipment K-203 reads \"K-203 Ammonia (R-717) screw compressor, high stage (trim)\"",
+     "field": "units[K-203]"
+    },
+    {
+     "role": "compressor power",
+     "id": "JT-201",
+     "tag": "JT-201",
+     "text": "instrument JT-201 reads \"JT-201 Low-stage compressor motor power\" at K-201",
+     "field": "instruments[JT-201]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no floating head pressure or wet-bulb reset is named on any controller or item",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Head (discharge) pressure and condensing temperature, hourly over a year",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for PT-203 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: the head pressure setpoint and its low limit in the refrigeration plant controls"
+     ],
+     "how": "Convert pressure to saturated condensing temperature with the refrigerant's tables; see whether it falls in cool weather or sits at the setpoint."
+    },
+    {
+     "item": "Ambient wet-bulb temperature (dry-bulb for an air-cooled condenser) at the same times",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: the site weather station, or the nearest public weather station's hourly record"
+     ],
+     "how": "Line it up hour by hour with the condensing temperature."
+    },
+    {
+     "item": "The lowest head pressure the plant can run at",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: the minimum needed for hot gas defrost, liquid injection oil cooling and liquid feed to the farthest evaporator",
+      "the vendor datasheet: compressor and expansion valve minimum pressure difference"
+     ],
+     "how": "This is the floor a floating setpoint may not go below."
+    },
+    {
+     "item": "Compressor and condenser fan and pump power",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+      "a walkdown: power logger on the compressor motors and on the condenser fan and spray pump motors"
+     ],
+     "how": "Floating the head pressure moves load from the compressors to the condenser fans; count both."
+    }
+   ],
+   "decision_rule": "Worth a look when the head pressure sits at a fixed setpoint through cool weather, above both what the condenser could reach and the plant's own minimum. If it already follows the wet-bulb down to that minimum, close it.",
+   "typical_benefit": {
+    "wording": "Floating head pressure (S25, p. 62) \"allows compressor head pressures to move up or down with variations in ambient wet-bulb temperature, saving energy compared to fixed head pressure operation.\" Condensing pressure (S25, p. 65): \"Lowering the condensing temperature can reduce compressor energy use by around 2% to 3% for every degree Celsius (1.8 degrees Fahrenheit) of temperature reduction (SenterNovem 2003).\" Condenser fans (S25, p. 65): \"On systems where floating head operation is stable, ASDs can lower condenser fan energy consumption by up to 40% compared to operating a fixed-speed condenser fan in on/off fashion (IRC 2004b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "S25 (p. 62) warns that condenser fan energy rises as head pressure falls and that head pressure must not go below what defrost or liquid injection oil cooling need. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  },
+  {
+   "id": "E28@model",
+   "question_id": "E28",
+   "family": "energy",
+   "question": "Is each refrigeration suction level held colder than the warmest load on it needs?",
+   "about": "K-201, K-202, K-203",
+   "assets": [
+    {
+     "id": "K-201",
+     "tag": "K-201"
+    },
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "K-203",
+     "tag": "K-203"
+    },
+    {
+     "id": "PT-201",
+     "tag": "PT-201"
+    },
+    {
+     "id": "PT-202",
+     "tag": "PT-202"
+    },
+    {
+     "id": "EV-201",
+     "tag": "EV-201"
+    },
+    {
+     "id": "EV-202",
+     "tag": "EV-202"
+    },
+    {
+     "id": "CS-201",
+     "tag": "CS-201"
+    },
+    {
+     "id": "TT-205",
+     "tag": "TT-205"
+    },
+    {
+     "id": "TT-206",
+     "tag": "TT-206"
+    },
+    {
+     "id": "JT-201",
+     "tag": "JT-201"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-201",
+     "tag": "K-201",
+     "text": "equipment K-201 reads \"K-201 Ammonia (R-717) screw compressor, low stage (booster)\"",
+     "field": "units[K-201]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-203",
+     "tag": "K-203",
+     "text": "equipment K-203 reads \"K-203 Ammonia (R-717) screw compressor, high stage (trim)\"",
+     "field": "units[K-203]"
+    },
+    {
+     "role": "suction pressure",
+     "id": "PT-201",
+     "tag": "PT-201",
+     "text": "instrument PT-201 reads \"PT-201 Low-stage suction pressure\" at K-201",
+     "field": "instruments[PT-201]"
+    },
+    {
+     "role": "suction pressure",
+     "id": "PT-202",
+     "tag": "PT-202",
+     "text": "instrument PT-202 reads \"PT-202 High-stage suction pressure\" at K-202",
+     "field": "instruments[PT-202]"
+    },
+    {
+     "role": "refrigeration load",
+     "id": "EV-201",
+     "tag": "EV-201",
+     "text": "equipment EV-201 reads \"EV-201 Spiral freezer evaporator (ammonia, hot gas defrost)\"",
+     "field": "units[EV-201]"
+    },
+    {
+     "role": "refrigeration load",
+     "id": "EV-202",
+     "tag": "EV-202",
+     "text": "equipment EV-202 reads \"EV-202 Frozen store unit cooler (ammonia, hot gas defrost)\"",
+     "field": "units[EV-202]"
+    },
+    {
+     "role": "refrigeration load",
+     "id": "CS-201",
+     "tag": "CS-201",
+     "text": "equipment CS-201 reads \"CS-201 Frozen product cold store\"",
+     "field": "units[CS-201]"
+    },
+    {
+     "role": "refrigerated space temperature",
+     "id": "TT-205",
+     "tag": "TT-205",
+     "text": "instrument TT-205 reads \"TT-205 Spiral freezer air temperature\" at EV-201",
+     "field": "instruments[TT-205]"
+    },
+    {
+     "role": "refrigerated space temperature",
+     "id": "TT-206",
+     "tag": "TT-206",
+     "text": "instrument TT-206 reads \"TT-206 Frozen store air temperature\" at EV-202",
+     "field": "instruments[TT-206]"
+    },
+    {
+     "role": "compressor power",
+     "id": "JT-201",
+     "tag": "JT-201",
+     "text": "instrument JT-201 reads \"JT-201 Low-stage compressor motor power\" at K-201",
+     "field": "instruments[JT-201]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Suction pressure at each suction level, hourly",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for PT-201, PT-202 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: suction pressure setpoints per compressor or suction level"
+     ],
+     "how": "Convert to saturated evaporating temperature; note whether it changes at night, weekends or in winter."
+    },
+    {
+     "item": "The temperature each load actually needs",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it",
+      "historian or DCS trend for TT-205, TT-206 (no historian tag is mapped in this model for these)"
+     ],
+     "how": "The warmest load on a suction level, less its coil approach, sets the coldest suction that level needs."
+    },
+    {
+     "item": "Compressor power and run hours per suction level",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+      "site records: compressor run hours from the refrigeration plant controls"
+     ],
+     "how": "A month or more at normal production."
+    }
+   ],
+   "decision_rule": "Worth a look when a suction level runs colder than its warmest load needs after the coil approach, or stays fixed when loads ease at night and weekends. Close it when the loads on that level need the present temperature.",
+   "typical_benefit": {
+    "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005).\" No figure is given there for single-stage systems.",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "Product temperature and food-safety limits set the floor: a suction change changes how product is held and needs the quality owner's sign-off. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  },
+  {
+   "id": "E29@K-201",
+   "question_id": "E29",
+   "family": "energy",
+   "question": "Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?",
+   "about": "K-201",
+   "assets": [
+    {
+     "id": "K-201",
+     "tag": "K-201"
+    },
+    {
+     "id": "JT-201",
+     "tag": "JT-201"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-201",
+     "tag": "K-201",
+     "text": "equipment K-201 reads \"K-201 Ammonia (R-717) screw compressor, low stage (booster)\"",
+     "field": "units[K-201]"
+    },
+    {
+     "role": "compressor power",
+     "id": "JT-201",
+     "tag": "JT-201",
+     "text": "instrument JT-201 reads \"JT-201 Low-stage compressor motor power\" at K-201",
+     "field": "instruments[JT-201]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no variable speed drive or speed controller drawn on this compressor",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Slide valve (capacity) position over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: slide valve position or percent capacity per compressor from the refrigeration plant controls, a month or more"
+     ],
+     "how": "Hours spent below full load, by load band."
+    },
+    {
+     "item": "Compressor power and run hours",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+      "a walkdown: power logger on the compressor motor across a normal week"
+     ],
+     "how": "Power at each load band, so part-load efficiency can be seen."
+    },
+    {
+     "item": "How the compressors are sequenced",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: which compressor trims, and the order and pressures at which they load and unload"
+     ],
+     "how": "Note whether more than one machine trims at the same time."
+    }
+   ],
+   "decision_rule": "Worth a look when screws spend long hours part-loaded on the slide valve while another could be off, or when no machine on a suction level has speed control to trim. Close it if each runs near full load or a sequencer already keeps one machine trimming.",
+   "typical_benefit": {
+    "wording": "Among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003): \"Slide valve unloading of oversized screw compressors.\" and \"Hot gas bypass of compressors.\" Speed control (S25, p. 63): \"ASDs used on compressors below a part-load ratio of about 95% will deliver performance equal to a fixed speed compressor but with lower electricity requirements. However, at near full (i.e., 100%) load, ASDs are approximately 3% less efficient than fixed speed drives\".",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "A drive or sequencing change goes through the compressor vendor (minimum speed, oil management, vibration). Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  },
+  {
+   "id": "E29@K-202",
+   "question_id": "E29",
+   "family": "energy",
+   "question": "Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?",
+   "about": "K-202",
+   "assets": [
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "ZT-202",
+     "tag": "ZT-202"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "capacity control",
+     "id": "ZT-202",
+     "tag": "ZT-202",
+     "text": "instrument ZT-202 reads \"ZT-202 Slide valve (capacity) position\" at K-202",
+     "field": "instruments[ZT-202]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no variable speed drive or speed controller drawn on this compressor",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Slide valve (capacity) position over normal operation",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for ZT-202 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: slide valve position or percent capacity per compressor from the refrigeration plant controls, a month or more"
+     ],
+     "how": "Hours spent below full load, by load band."
+    },
+    {
+     "item": "Compressor power and run hours",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: power logger on the compressor motor across a normal week"
+     ],
+     "how": "Power at each load band, so part-load efficiency can be seen."
+    },
+    {
+     "item": "How the compressors are sequenced",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: which compressor trims, and the order and pressures at which they load and unload"
+     ],
+     "how": "Note whether more than one machine trims at the same time."
+    }
+   ],
+   "decision_rule": "Worth a look when screws spend long hours part-loaded on the slide valve while another could be off, or when no machine on a suction level has speed control to trim. Close it if each runs near full load or a sequencer already keeps one machine trimming.",
+   "typical_benefit": {
+    "wording": "Among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003): \"Slide valve unloading of oversized screw compressors.\" and \"Hot gas bypass of compressors.\" Speed control (S25, p. 63): \"ASDs used on compressors below a part-load ratio of about 95% will deliver performance equal to a fixed speed compressor but with lower electricity requirements. However, at near full (i.e., 100%) load, ASDs are approximately 3% less efficient than fixed speed drives\".",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "A drive or sequencing change goes through the compressor vendor (minimum speed, oil management, vibration). Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  },
+  {
+   "id": "E30@EV-201",
+   "question_id": "E30",
+   "family": "energy",
+   "question": "Are these evaporators defrosted on a fixed timer rather than when frost is actually there?",
+   "about": "EV-201",
+   "assets": [
+    {
+     "id": "EV-201",
+     "tag": "EV-201"
+    },
+    {
+     "id": "HGV-201",
+     "tag": "HGV-201"
+    },
+    {
+     "id": "TT-205",
+     "tag": "TT-205"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "EV-201",
+     "tag": "EV-201",
+     "text": "equipment EV-201 reads \"EV-201 Spiral freezer evaporator (ammonia, hot gas defrost)\"",
+     "field": "units[EV-201]"
+    },
+    {
+     "role": "defrost",
+     "id": "HGV-201",
+     "tag": "HGV-201",
+     "text": "final element HGV-201 reads \"HGV-201 Hot gas defrost valve, spiral freezer evaporator (defrost started by a timer)\" at EV-201",
+     "field": "final_elements[HGV-201]"
+    },
+    {
+     "role": "room or coil temperature",
+     "id": "TT-205",
+     "tag": "TT-205",
+     "text": "instrument TT-205 reads \"TT-205 Spiral freezer air temperature\" at EV-201",
+     "field": "instruments[TT-205]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no demand defrost initiation (coil differential pressure, frost sensor) drawn on this evaporator",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Defrost schedule per evaporator",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: defrost initiation (timer or demand), defrosts per day, duration and termination (time or coil temperature) per evaporator"
+     ],
+     "how": "List defrosts per day by season."
+    },
+    {
+     "item": "Frost on the coil when a scheduled defrost starts",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: look at the coil just before a few scheduled defrosts, in a dry week and a humid week"
+     ],
+     "how": "Note clear, light or heavy frost."
+    },
+    {
+     "item": "Hot gas use and room temperature rise per defrost",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for HGV-201 (no historian tag is mapped in this model for these)",
+      "historian or DCS trend for TT-205 (no historian tag is mapped in this model for these)"
+     ],
+     "how": "The heat put in to defrost comes back as refrigeration load afterwards."
+    }
+   ],
+   "decision_rule": "Worth a look when coils are clear at scheduled defrosts, or the count per day is the same in dry weeks as in humid ones. Close it if defrost is already started on demand.",
+   "typical_benefit": {
+    "wording": "Demand defrost (S25, p. 66): \"Evaporators should be defrosted only when necessary, as opposed to on timed schedules where defrosting occurs regardless of need.\" \"Too frequent defrosts.\" is listed among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003). No % stated.",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "A coil differential pressure instrument on the evaporator is taken as demand defrost; check that it is used for that. A P&ID rarely shows the defrost timer itself, so the schedule always comes from the controls.",
+   "status": "asked"
+  },
+  {
+   "id": "E31@D-301",
+   "question_id": "E31",
+   "family": "energy",
+   "question": "Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it?",
+   "about": "D-301",
+   "assets": [
+    {
+     "id": "D-301",
+     "tag": "D-301"
+    },
+    {
+     "id": "stream:S1",
+     "tag": "S1"
+    },
+    {
+     "id": "TT-304",
+     "tag": "TT-304"
+    },
+    {
+     "id": "stream:U1",
+     "tag": "U1"
+    },
+    {
+     "id": "FT-301",
+     "tag": "FT-301"
+    },
+    {
+     "id": "TV-301",
+     "tag": "TV-301"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "D-301",
+     "tag": "D-301",
+     "text": "equipment D-301 reads \"D-301 Gas-fired product dryer (continuous belt)\"",
+     "field": "units[D-301]"
+    },
+    {
+     "role": "exhaust",
+     "id": "stream:S1",
+     "tag": "S1",
+     "text": "stream S1 (asset stream:S1) reads \"Dryer exhaust air to atmosphere\"",
+     "field": "streams[S1]"
+    },
+    {
+     "role": "exhaust",
+     "id": "TT-304",
+     "tag": "TT-304",
+     "text": "instrument TT-304 reads \"TT-304 Dryer exhaust air temperature\" at D-301",
+     "field": "instruments[TT-304]"
+    },
+    {
+     "role": "fuel or heat supply",
+     "id": "stream:U1",
+     "tag": "U1",
+     "text": "stream U1 (asset stream:U1) reads \"Natural gas to the dryer burner\" at D-301",
+     "field": "streams[U1]"
+    },
+    {
+     "role": "fuel or heat supply",
+     "id": "FT-301",
+     "tag": "FT-301",
+     "text": "instrument FT-301 reads \"FT-301 Dryer burner natural gas flow\" at D-301",
+     "field": "instruments[FT-301]"
+    },
+    {
+     "role": "fuel or heat supply",
+     "id": "TV-301",
+     "tag": "TV-301",
+     "text": "valve TV-301 reads \"TV-301 Dryer burner natural gas control valve\" at D-301",
+     "field": "final_elements[TV-301]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no heat recovery exchanger, recuperator, run-around coil or exhaust recirculation on this unit or on a stream drawn from it",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature and flow",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)",
+      "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct, at normal production"
+     ],
+     "how": "Record both at normal production; heat on offer = mass flow x specific heat x (exhaust temperature minus the temperature it could be cooled to)."
+    },
+    {
+     "item": "Exhaust moisture and contaminants",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: humidity or dew point probe in the exhaust; note fat, flour, sugar or product dust",
+      "maintenance records: duct and stack cleaning history"
+     ],
+     "how": "Moist exhaust carries latent heat but condenses; fat and dust foul exchangers unless filtered or washed."
+    },
+    {
+     "item": "Fuel or heat input and operating hours",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FT-301 (no historian tag is mapped in this model for these)",
+      "utility bills or the site energy report: gas sub-meter readings for this line",
+      "site records: production schedule: hours per week the line runs"
+     ],
+     "how": "A month of input at a known production rate."
+    },
+    {
+     "item": "Where the heat could go in the unit itself",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: inlet (drying or combustion) air temperature and flow",
+      "a walkdown: room next to the unit for ductwork or a run-around coil"
+     ],
+     "how": "Preheating the unit's own inlet air comes first; H6 asks about users elsewhere."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust leaves hot, the line runs long hours, and the exhaust is clean enough or can be filtered or washed. Close it for short or intermittent runs, or when there is no room for the ductwork.",
+   "typical_benefit": {
+    "wording": "Dryers (S26, p. 104): \"A simple form of heat recovery in retrofit applications is to utilize the exhaust air of a dryer to preheat the inlet air stream, thereby saving energy.\" Spray dryers (S25, p. 90): \"It is estimated that up to 30% of the heat from the dryer exhaust can be recovered.\" Fryers (S26, p. 107): \"Conditioning of the exhaust gas is required, however, to remove fats and to reduce fouling of the heat exchange system.\" No source in this set gives a figure for ovens.",
+    "source": [
+     "S26",
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)",
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "S26 (p. 104) notes that recirculating saturated exhaust can raise the inlet humidity and cut drying capacity. A heat recovery item on the unit, or at the other end of a stream drawn from it, quiets the question; recovery drawn elsewhere does not. Ovens and dryers that drive off solvents, or carry combustible dust, need a safety review before any exhaust change.",
+   "status": "asked"
+  },
+  {
+   "id": "E31@O-302",
+   "question_id": "E31",
+   "family": "energy",
+   "question": "Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it?",
+   "about": "O-302",
+   "assets": [
+    {
+     "id": "O-302",
+     "tag": "O-302"
+    },
+    {
+     "id": "stream:S2",
+     "tag": "S2"
+    },
+    {
+     "id": "TT-305",
+     "tag": "TT-305"
+    },
+    {
+     "id": "AT-302",
+     "tag": "AT-302"
+    },
+    {
+     "id": "stream:U2",
+     "tag": "U2"
+    },
+    {
+     "id": "TV-302",
+     "tag": "TV-302"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "O-302",
+     "tag": "O-302",
+     "text": "equipment O-302 reads \"O-302 Gas-fired tunnel oven\"",
+     "field": "units[O-302]"
+    },
+    {
+     "role": "exhaust",
+     "id": "stream:S2",
+     "tag": "S2",
+     "text": "stream S2 (asset stream:S2) reads \"Oven exhaust (flue gas and vapour) to stack\"",
+     "field": "streams[S2]"
+    },
+    {
+     "role": "exhaust",
+     "id": "TT-305",
+     "tag": "TT-305",
+     "text": "instrument TT-305 reads \"TT-305 Oven exhaust temperature\" at O-302",
+     "field": "instruments[TT-305]"
+    },
+    {
+     "role": "exhaust",
+     "id": "AT-302",
+     "tag": "AT-302",
+     "text": "instrument AT-302 reads \"AT-302 Oven flue O2 analyser\" at O-302",
+     "field": "instruments[AT-302]"
+    },
+    {
+     "role": "fuel or heat supply",
+     "id": "stream:U2",
+     "tag": "U2",
+     "text": "stream U2 (asset stream:U2) reads \"Natural gas to the oven burners\" at O-302",
+     "field": "streams[U2]"
+    },
+    {
+     "role": "fuel or heat supply",
+     "id": "TV-302",
+     "tag": "TV-302",
+     "text": "valve TV-302 reads \"TV-302 Oven burner natural gas control valve\" at O-302",
+     "field": "final_elements[TV-302]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no heat recovery exchanger, recuperator, run-around coil or exhaust recirculation on this unit or on a stream drawn from it",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature and flow",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)",
+      "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct, at normal production"
+     ],
+     "how": "Record both at normal production; heat on offer = mass flow x specific heat x (exhaust temperature minus the temperature it could be cooled to)."
+    },
+    {
+     "item": "Exhaust moisture and contaminants",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: humidity or dew point probe in the exhaust; note fat, flour, sugar or product dust",
+      "maintenance records: duct and stack cleaning history"
+     ],
+     "how": "Moist exhaust carries latent heat but condenses; fat and dust foul exchangers unless filtered or washed."
+    },
+    {
+     "item": "Fuel or heat input and operating hours",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (TV-302) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "utility bills or the site energy report: gas sub-meter readings for this line",
+      "site records: production schedule: hours per week the line runs"
+     ],
+     "how": "A month of input at a known production rate."
+    },
+    {
+     "item": "Where the heat could go in the unit itself",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: inlet (drying or combustion) air temperature and flow",
+      "a walkdown: room next to the unit for ductwork or a run-around coil"
+     ],
+     "how": "Preheating the unit's own inlet air comes first; H6 asks about users elsewhere."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust leaves hot, the line runs long hours, and the exhaust is clean enough or can be filtered or washed. Close it for short or intermittent runs, or when there is no room for the ductwork.",
+   "typical_benefit": {
+    "wording": "Dryers (S26, p. 104): \"A simple form of heat recovery in retrofit applications is to utilize the exhaust air of a dryer to preheat the inlet air stream, thereby saving energy.\" Spray dryers (S25, p. 90): \"It is estimated that up to 30% of the heat from the dryer exhaust can be recovered.\" Fryers (S26, p. 107): \"Conditioning of the exhaust gas is required, however, to remove fats and to reduce fouling of the heat exchange system.\" No source in this set gives a figure for ovens.",
+    "source": [
+     "S26",
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)",
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "S26 (p. 104) notes that recirculating saturated exhaust can raise the inlet humidity and cut drying capacity. A heat recovery item on the unit, or at the other end of a stream drawn from it, quiets the question; recovery drawn elsewhere does not. Ovens and dryers that drive off solvents, or carry combustible dust, need a safety review before any exhaust change.",
+   "status": "asked"
+  },
+  {
+   "id": "E32@D-301",
+   "question_id": "E32",
+   "family": "energy",
+   "question": "Is the burner air-fuel ratio on this oven, dryer or fryer checked and set, with no flue O2 measurement drawn?",
+   "about": "D-301",
+   "assets": [
+    {
+     "id": "D-301",
+     "tag": "D-301"
+    },
+    {
+     "id": "stream:U1",
+     "tag": "U1"
+    },
+    {
+     "id": "FT-301",
+     "tag": "FT-301"
+    },
+    {
+     "id": "TV-301",
+     "tag": "TV-301"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "D-301",
+     "tag": "D-301",
+     "text": "equipment D-301 reads \"D-301 Gas-fired product dryer (continuous belt)\"",
+     "field": "units[D-301]"
+    },
+    {
+     "role": "burner or fuel supply",
+     "id": "stream:U1",
+     "tag": "U1",
+     "text": "stream U1 (asset stream:U1) reads \"Natural gas to the dryer burner\" at D-301",
+     "field": "streams[U1]"
+    },
+    {
+     "role": "burner or fuel supply",
+     "id": "FT-301",
+     "tag": "FT-301",
+     "text": "instrument FT-301 reads \"FT-301 Dryer burner natural gas flow\" at D-301",
+     "field": "instruments[FT-301]"
+    },
+    {
+     "role": "burner or fuel supply",
+     "id": "TV-301",
+     "tag": "TV-301",
+     "text": "valve TV-301 reads \"TV-301 Dryer burner natural gas control valve\" at D-301",
+     "field": "final_elements[TV-301]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flue O2 analyser or excess air measurement drawn on this unit",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Flue O2 and CO at high and low fire",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: portable combustion analyser in the flue or exhaust at high and low fire",
+      "site records: the last burner tuning report"
+     ],
+     "how": "Compare with the burner maker's recommended O2 for this equipment."
+    },
+    {
+     "item": "Air-fuel ratio settings and how they are held",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: burner management and ratio control settings",
+      "the vendor datasheet: burner datasheet: recommended excess air across the turndown range"
+     ],
+     "how": "Note whether the ratio is fixed linkage, electronic ratio or trimmed."
+    },
+    {
+     "item": "Fuel use",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for FT-301 (no historian tag is mapped in this model for these)",
+      "utility bills or the site energy report: gas sub-meter readings for this unit"
+     ],
+     "how": "A month of fuel use at a known production rate."
+    },
+    {
+     "item": "Excess air the process needs",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: the oven or dryer maker's minimum exhaust and excess air for moisture and solvent removal, and any flammable-vapour (LEL) limit"
+     ],
+     "how": "This is a floor: the burner may not be tuned below it."
+    }
+   ],
+   "decision_rule": "Worth a tune-up when measured flue O2 is above what the burner maker recommends and the process does not need the extra air. On ovens and dryers that drive off water or solvent the dilution and drying air are part of the process: never cut below the maker's or the safety minimum.",
+   "typical_benefit": {
+    "wording": "S27 (p. 1): \"Periodic checking and resetting of air-fuel ratios for burners is one of the simplest ways to get maximum efficiency out of fuel-fired process heating equipment such as furnaces, ovens, heaters, and boilers.\" And: \"Processes that evaporate moisture or solvents need large amounts of excess air to dilute flammable solvents to noncombustible levels, to ensure adequate drying rates, and to carry vapors out of the oven. Lowering excess air to minimal levels can slow down the process and create an explosion hazard.\" No typical % stated (the sheet's worked example is one furnace).",
+    "source": [
+     "S27"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S27: DOE Industrial Technologies Program, Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (Nov 2007)"
+    ]
+   },
+   "limits": "Burner adjustment is a combustion-safety change, done by a qualified burner technician under the site's burner management procedures. Indirect (steam or thermal oil) heated units have no burner on them and do not fire this question.",
+   "status": "asked"
+  },
+  {
+   "id": "E32@F-303",
+   "question_id": "E32",
+   "family": "energy",
+   "question": "Is the burner air-fuel ratio on this oven, dryer or fryer checked and set, with no flue O2 measurement drawn?",
+   "about": "F-303",
+   "assets": [
+    {
+     "id": "F-303",
+     "tag": "F-303"
+    },
+    {
+     "id": "stream:U3",
+     "tag": "U3"
+    },
+    {
+     "id": "TV-303",
+     "tag": "TV-303"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "F-303",
+     "tag": "F-303",
+     "text": "equipment F-303 reads \"F-303 Gas-fired continuous fryer\"",
+     "field": "units[F-303]"
+    },
+    {
+     "role": "burner or fuel supply",
+     "id": "stream:U3",
+     "tag": "U3",
+     "text": "stream U3 (asset stream:U3) reads \"Natural gas to the fryer burner\" at F-303",
+     "field": "streams[U3]"
+    },
+    {
+     "role": "burner or fuel supply",
+     "id": "TV-303",
+     "tag": "TV-303",
+     "text": "valve TV-303 reads \"TV-303 Fryer burner natural gas control valve\" at F-303",
+     "field": "final_elements[TV-303]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no flue O2 analyser or excess air measurement drawn on this unit",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Flue O2 and CO at high and low fire",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: portable combustion analyser in the flue or exhaust at high and low fire",
+      "site records: the last burner tuning report"
+     ],
+     "how": "Compare with the burner maker's recommended O2 for this equipment."
+    },
+    {
+     "item": "Air-fuel ratio settings and how they are held",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: burner management and ratio control settings",
+      "the vendor datasheet: burner datasheet: recommended excess air across the turndown range"
+     ],
+     "how": "Note whether the ratio is fixed linkage, electronic ratio or trimmed."
+    },
+    {
+     "item": "Fuel use",
+     "state": "not_on_drawing",
+     "where": [
+      "only a valve (TV-303) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+      "utility bills or the site energy report: gas sub-meter readings for this unit"
+     ],
+     "how": "A month of fuel use at a known production rate."
+    },
+    {
+     "item": "Excess air the process needs",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: the oven or dryer maker's minimum exhaust and excess air for moisture and solvent removal, and any flammable-vapour (LEL) limit"
+     ],
+     "how": "This is a floor: the burner may not be tuned below it."
+    }
+   ],
+   "decision_rule": "Worth a tune-up when measured flue O2 is above what the burner maker recommends and the process does not need the extra air. On ovens and dryers that drive off water or solvent the dilution and drying air are part of the process: never cut below the maker's or the safety minimum.",
+   "typical_benefit": {
+    "wording": "S27 (p. 1): \"Periodic checking and resetting of air-fuel ratios for burners is one of the simplest ways to get maximum efficiency out of fuel-fired process heating equipment such as furnaces, ovens, heaters, and boilers.\" And: \"Processes that evaporate moisture or solvents need large amounts of excess air to dilute flammable solvents to noncombustible levels, to ensure adequate drying rates, and to carry vapors out of the oven. Lowering excess air to minimal levels can slow down the process and create an explosion hazard.\" No typical % stated (the sheet's worked example is one furnace).",
+    "source": [
+     "S27"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S27: DOE Industrial Technologies Program, Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (Nov 2007)"
+    ]
+   },
+   "limits": "Burner adjustment is a combustion-safety change, done by a qualified burner technician under the site's burner management procedures. Indirect (steam or thermal oil) heated units have no burner on them and do not fire this question.",
+   "status": "asked"
+  },
+  {
+   "id": "H5@model",
+   "question_id": "H5",
+   "family": "heat_grade",
+   "question": "Is refrigeration condenser heat rejected while a low-grade heating duty nearby is met with fuel or steam?",
+   "about": "K-201, K-202, K-203, C-201",
+   "assets": [
+    {
+     "id": "K-201",
+     "tag": "K-201"
+    },
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "K-203",
+     "tag": "K-203"
+    },
+    {
+     "id": "C-201",
+     "tag": "C-201"
+    },
+    {
+     "id": "WH-401",
+     "tag": "WH-401"
+    },
+    {
+     "id": "stream:W2",
+     "tag": "W2"
+    },
+    {
+     "id": "TT-202",
+     "tag": "TT-202"
+    },
+    {
+     "id": "PT-203",
+     "tag": "PT-203"
+    },
+    {
+     "id": "JT-201",
+     "tag": "JT-201"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-201",
+     "tag": "K-201",
+     "text": "equipment K-201 reads \"K-201 Ammonia (R-717) screw compressor, low stage (booster)\"",
+     "field": "units[K-201]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-203",
+     "tag": "K-203",
+     "text": "equipment K-203 reads \"K-203 Ammonia (R-717) screw compressor, high stage (trim)\"",
+     "field": "units[K-203]"
+    },
+    {
+     "role": "trigger",
+     "id": "C-201",
+     "tag": "C-201",
+     "text": "equipment C-201 reads \"C-201 Ammonia evaporative condenser\"",
+     "field": "units[C-201]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "WH-401",
+     "tag": "WH-401",
+     "text": "equipment WH-401 reads \"WH-401 Gas-fired water heater, CIP and wash hot water\"",
+     "field": "units[WH-401]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "stream:W2",
+     "tag": "W2",
+     "text": "stream W2 (asset stream:W2) reads \"CIP and wash hot water supply\"",
+     "field": "streams[W2]"
+    },
+    {
+     "role": "discharge or condensing measurement",
+     "id": "TT-202",
+     "tag": "TT-202",
+     "text": "instrument TT-202 reads \"TT-202 Compressor discharge temperature\" at K-202",
+     "field": "instruments[TT-202]"
+    },
+    {
+     "role": "discharge or condensing measurement",
+     "id": "PT-203",
+     "tag": "PT-203",
+     "text": "instrument PT-203 reads \"PT-203 Condenser head (discharge) pressure\" at C-201",
+     "field": "instruments[PT-203]"
+    },
+    {
+     "role": "compressor power",
+     "id": "JT-201",
+     "tag": "JT-201",
+     "text": "instrument JT-201 reads \"JT-201 Low-stage compressor motor power\" at K-201",
+     "field": "instruments[JT-201]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no desuperheater or refrigeration heat recovery exchanger anywhere in the model",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Discharge and condensing temperatures",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for PT-203, TT-202 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: discharge temperature and head pressure readings in the refrigeration plant controls"
+     ],
+     "how": "Discharge superheat is the hotter, smaller part; condensing heat is larger but only at the condensing temperature."
+    },
+    {
+     "item": "Compressor power and run hours",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for JT-201 (no historian tag is mapped in this model for these)",
+      "site records: compressor run hours from the refrigeration plant controls"
+     ],
+     "how": "Heat rejected is about the compressor power plus the refrigeration load at the same time."
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: temperatures and loads of the hot water, CIP, wash water, floor heating and space heating users, by hour"
+     ],
+     "how": "Match by temperature, hours and distance."
+    },
+    {
+     "item": "Effect on head pressure",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: whether a heat recovery exchanger would need a higher condensing pressure than now"
+     ],
+     "how": "Recovery that raises the head pressure in cool weather costs compressor power (see E27); count it."
+    }
+   ],
+   "decision_rule": "Worth a study when the refrigeration plant runs at the same times as a duty that needs heat below the discharge or condensing temperature, and recovery does not force the head pressure up. Close it if the duties do not overlap or recovery would need a higher condensing pressure all year.",
+   "typical_benefit": {
+    "wording": "S25 (p. 64), refrigeration compressors: \"Where economically feasible, rejected heat can be recovered from compressors and used in other facility applications, such as space heating or water heating.\" No % stated there for refrigeration (the air compressor heat recovery figures quoted under E23 do not apply).",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "The with-clause finds any low-grade duty in the model, not one next to the plant: distance is for the walkdown. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  },
+  {
+   "id": "H6@D-301",
+   "question_id": "H6",
+   "family": "heat_grade",
+   "question": "Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?",
+   "about": "D-301",
+   "assets": [
+    {
+     "id": "D-301",
+     "tag": "D-301"
+    },
+    {
+     "id": "WH-401",
+     "tag": "WH-401"
+    },
+    {
+     "id": "stream:W2",
+     "tag": "W2"
+    },
+    {
+     "id": "stream:S1",
+     "tag": "S1"
+    },
+    {
+     "id": "TT-304",
+     "tag": "TT-304"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "D-301",
+     "tag": "D-301",
+     "text": "equipment D-301 reads \"D-301 Gas-fired product dryer (continuous belt)\"",
+     "field": "units[D-301]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "WH-401",
+     "tag": "WH-401",
+     "text": "equipment WH-401 reads \"WH-401 Gas-fired water heater, CIP and wash hot water\"",
+     "field": "units[WH-401]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "stream:W2",
+     "tag": "W2",
+     "text": "stream W2 (asset stream:W2) reads \"CIP and wash hot water supply\"",
+     "field": "streams[W2]"
+    },
+    {
+     "role": "exhaust",
+     "id": "stream:S1",
+     "tag": "S1",
+     "text": "stream S1 (asset stream:S1) reads \"Dryer exhaust air to atmosphere\"",
+     "field": "streams[S1]"
+    },
+    {
+     "role": "exhaust",
+     "id": "TT-304",
+     "tag": "TT-304",
+     "text": "instrument TT-304 reads \"TT-304 Dryer exhaust air temperature\" at D-301",
+     "field": "instruments[TT-304]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no heat recovery on this unit or on a stream drawn from it",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature, flow and hours",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)",
+      "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct",
+      "site records: production schedule"
+     ],
+     "how": "At normal production."
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: hot water, CIP, wash water and space heating loads by hour"
+     ],
+     "how": "Match by temperature, hours and distance."
+    },
+    {
+     "item": "Distance and exhaust cleanliness",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: duct or pipe run from the stack to the user; fat, dust or product carry-over in the exhaust"
+     ],
+     "how": "The closer and cleaner, the better."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+    "source": [
+     "S28",
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S28: DOE Industrial Technologies Program, Process Heating Tip Sheet #10, Using Waste Heat for External Processes (DOE/GO-102006-2225, Jan 2006)",
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   },
+   "limits": "Overlaps E31, which asks about the unit's own inlet air first. The with-clause finds any low-grade duty in the model, not one next to the unit.",
+   "status": "asked"
+  },
+  {
+   "id": "H6@O-302",
+   "question_id": "H6",
+   "family": "heat_grade",
+   "question": "Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?",
+   "about": "O-302",
+   "assets": [
+    {
+     "id": "O-302",
+     "tag": "O-302"
+    },
+    {
+     "id": "WH-401",
+     "tag": "WH-401"
+    },
+    {
+     "id": "stream:W2",
+     "tag": "W2"
+    },
+    {
+     "id": "stream:S2",
+     "tag": "S2"
+    },
+    {
+     "id": "TT-305",
+     "tag": "TT-305"
+    },
+    {
+     "id": "AT-302",
+     "tag": "AT-302"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "O-302",
+     "tag": "O-302",
+     "text": "equipment O-302 reads \"O-302 Gas-fired tunnel oven\"",
+     "field": "units[O-302]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "WH-401",
+     "tag": "WH-401",
+     "text": "equipment WH-401 reads \"WH-401 Gas-fired water heater, CIP and wash hot water\"",
+     "field": "units[WH-401]"
+    },
+    {
+     "role": "low-grade heating duty",
+     "id": "stream:W2",
+     "tag": "W2",
+     "text": "stream W2 (asset stream:W2) reads \"CIP and wash hot water supply\"",
+     "field": "streams[W2]"
+    },
+    {
+     "role": "exhaust",
+     "id": "stream:S2",
+     "tag": "S2",
+     "text": "stream S2 (asset stream:S2) reads \"Oven exhaust (flue gas and vapour) to stack\"",
+     "field": "streams[S2]"
+    },
+    {
+     "role": "exhaust",
+     "id": "TT-305",
+     "tag": "TT-305",
+     "text": "instrument TT-305 reads \"TT-305 Oven exhaust temperature\" at O-302",
+     "field": "instruments[TT-305]"
+    },
+    {
+     "role": "exhaust",
+     "id": "AT-302",
+     "tag": "AT-302",
+     "text": "instrument AT-302 reads \"AT-302 Oven flue O2 analyser\" at O-302",
+     "field": "instruments[AT-302]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no heat recovery on this unit or on a stream drawn from it",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust temperature, flow and hours",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)",
+      "a walkdown: thermometer and a pitot or anemometer traverse in the exhaust duct",
+      "site records: production schedule"
+     ],
+     "how": "At normal production."
+    },
+    {
+     "item": "The low-grade duty: temperature needed, load and hours",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: hot water, CIP, wash water and space heating loads by hour"
+     ],
+     "how": "Match by temperature, hours and distance."
+    },
+    {
+     "item": "Distance and exhaust cleanliness",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: duct or pipe run from the stack to the user; fat, dust or product carry-over in the exhaust"
+     ],
+     "how": "The closer and cleaner, the better."
+    }
+   ],
+   "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
+   "typical_benefit": {
+    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+    "source": [
+     "S28",
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S28: DOE Industrial Technologies Program, Process Heating Tip Sheet #10, Using Waste Heat for External Processes (DOE/GO-102006-2225, Jan 2006)",
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   },
+   "limits": "Overlaps E31, which asks about the unit's own inlet air first. The with-clause finds any low-grade duty in the model, not one next to the unit.",
+   "status": "asked"
+  },
+  {
+   "id": "C11@D-301",
+   "question_id": "C11",
+   "family": "controls",
+   "question": "Is this dryer's or oven's exhaust (and make-up air) rate set by hand rather than by exhaust humidity?",
+   "about": "D-301",
+   "assets": [
+    {
+     "id": "D-301",
+     "tag": "D-301"
+    },
+    {
+     "id": "TT-304",
+     "tag": "TT-304"
+    },
+    {
+     "id": "HV-304",
+     "tag": "HV-304"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "D-301",
+     "tag": "D-301",
+     "text": "equipment D-301 reads \"D-301 Gas-fired product dryer (continuous belt)\"",
+     "field": "units[D-301]"
+    },
+    {
+     "role": "exhaust measurement",
+     "id": "TT-304",
+     "tag": "TT-304",
+     "text": "instrument TT-304 reads \"TT-304 Dryer exhaust air temperature\" at D-301",
+     "field": "instruments[TT-304]"
+    },
+    {
+     "role": "exhaust damper or fan",
+     "id": "HV-304",
+     "tag": "HV-304",
+     "text": "hand valve HV-304 reads \"HV-304 Dryer exhaust damper (manual, fixed position)\" at D-301",
+     "field": "manual_valves[HV-304]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no humidity, dew point or moisture measurement drawn on this unit",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust humidity and temperature over a production run",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-304 (no historian tag is mapped in this model for these)",
+      "a walkdown: humidity or dew point logger in the exhaust duct for a full run"
+     ],
+     "how": "Compare the exhaust humidity with what the product and the process allow."
+    },
+    {
+     "item": "Exhaust damper or fan setting and how it is set",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for HV-304 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: exhaust damper position or fan speed, and whether anything adjusts it",
+      "a walkdown: damper position marks"
+     ],
+     "how": "Note whether it moves with production rate or product."
+    },
+    {
+     "item": "Product moisture at the exit and its specification",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: quality records: product moisture out of the dryer or oven against specification"
+     ],
+     "how": "Over-drying shows as moisture well below specification."
+    }
+   ],
+   "decision_rule": "Worth a look when the exhaust leaves well below the humidity the product and the safety limits allow, so heated air is thrown away unsaturated. Close it if the exhaust is already near the allowed humidity or the rate is set by a solvent (LEL) or dust limit.",
+   "typical_benefit": {
+    "wording": "S26 (p. 104): \"Process controls, such as feedback controllers, feed forward controllers, and model-based predictive controllers, can help to minimize dryer energy consumption by more precisely controlling energy inputs to meet the needs of the product being processed.\" The sensors it lists include \"absorption capacitive sensors (for air humidity)\". No % stated.",
+    "source": [
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   },
+   "limits": "Exhaust rates on ovens that bake off solvents, or dryers with combustible dust, are set by safety limits: any change goes through the safety review. Fryers are left out: their exhaust is set by the vapour they boil off.",
+   "status": "asked"
+  },
+  {
+   "id": "C11@O-302",
+   "question_id": "C11",
+   "family": "controls",
+   "question": "Is this dryer's or oven's exhaust (and make-up air) rate set by hand rather than by exhaust humidity?",
+   "about": "O-302",
+   "assets": [
+    {
+     "id": "O-302",
+     "tag": "O-302"
+    },
+    {
+     "id": "TT-305",
+     "tag": "TT-305"
+    },
+    {
+     "id": "AT-302",
+     "tag": "AT-302"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "O-302",
+     "tag": "O-302",
+     "text": "equipment O-302 reads \"O-302 Gas-fired tunnel oven\"",
+     "field": "units[O-302]"
+    },
+    {
+     "role": "exhaust measurement",
+     "id": "TT-305",
+     "tag": "TT-305",
+     "text": "instrument TT-305 reads \"TT-305 Oven exhaust temperature\" at O-302",
+     "field": "instruments[TT-305]"
+    },
+    {
+     "role": "exhaust measurement",
+     "id": "AT-302",
+     "tag": "AT-302",
+     "text": "instrument AT-302 reads \"AT-302 Oven flue O2 analyser\" at O-302",
+     "field": "instruments[AT-302]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no humidity, dew point or moisture measurement drawn on this unit",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Exhaust humidity and temperature over a production run",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for TT-305 (no historian tag is mapped in this model for these)",
+      "a walkdown: humidity or dew point logger in the exhaust duct for a full run"
+     ],
+     "how": "Compare the exhaust humidity with what the product and the process allow."
+    },
+    {
+     "item": "Exhaust damper or fan setting and how it is set",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: exhaust damper position or fan speed, and whether anything adjusts it",
+      "a walkdown: damper position marks"
+     ],
+     "how": "Note whether it moves with production rate or product."
+    },
+    {
+     "item": "Product moisture at the exit and its specification",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: quality records: product moisture out of the dryer or oven against specification"
+     ],
+     "how": "Over-drying shows as moisture well below specification."
+    }
+   ],
+   "decision_rule": "Worth a look when the exhaust leaves well below the humidity the product and the safety limits allow, so heated air is thrown away unsaturated. Close it if the exhaust is already near the allowed humidity or the rate is set by a solvent (LEL) or dust limit.",
+   "typical_benefit": {
+    "wording": "S26 (p. 104): \"Process controls, such as feedback controllers, feed forward controllers, and model-based predictive controllers, can help to minimize dryer energy consumption by more precisely controlling energy inputs to meet the needs of the product being processed.\" The sensors it lists include \"absorption capacitive sensors (for air humidity)\". No % stated.",
+    "source": [
+     "S26"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S26: Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)"
+    ]
+   },
+   "limits": "Exhaust rates on ovens that bake off solvents, or dryers with combustible dust, are set by safety limits: any change goes through the safety review. Fryers are left out: their exhaust is set by the vapour they boil off.",
+   "status": "asked"
+  },
+  {
+   "id": "C12@model",
+   "question_id": "C12",
+   "family": "metering",
+   "question": "Is power to these refrigeration compressors measured, so the plant's kW against load can be tracked?",
+   "about": "K-202, K-203",
+   "assets": [
+    {
+     "id": "K-202",
+     "tag": "K-202"
+    },
+    {
+     "id": "K-203",
+     "tag": "K-203"
+    },
+    {
+     "id": "PT-202",
+     "tag": "PT-202"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "K-202",
+     "tag": "K-202",
+     "text": "equipment K-202 reads \"K-202 Ammonia (R-717) screw compressor, high stage\"",
+     "field": "units[K-202]"
+    },
+    {
+     "role": "trigger",
+     "id": "K-203",
+     "tag": "K-203",
+     "text": "equipment K-203 reads \"K-203 Ammonia (R-717) screw compressor, high stage (trim)\"",
+     "field": "units[K-203]"
+    },
+    {
+     "role": "suction or discharge pressure",
+     "id": "PT-202",
+     "tag": "PT-202",
+     "text": "instrument PT-202 reads \"PT-202 High-stage suction pressure\" at K-202",
+     "field": "instruments[PT-202]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no power, current or energy measurement drawn on these compressors",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Compressor power",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor",
+      "utility bills or the site energy report: site interval meter data to apportion"
+     ],
+     "how": "A representative period at known production."
+    },
+    {
+     "item": "Suction and discharge pressures logged at the same times",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for PT-202 (no historian tag is mapped in this model for these)",
+      "DCS/PLC configuration: suction and discharge pressure per compressor in the refrigeration plant controls"
+     ],
+     "how": "Logged together with power, these show how the plant runs."
+    },
+    {
+     "item": "What to normalise against",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: production throughput or freezer and cold store loads by day"
+     ],
+     "how": "kW per unit of product or per unit of refrigeration."
+    }
+   ],
+   "decision_rule": "Meter, or log from the drives, where the refrigeration plant is large enough that kW against load would change decisions; a reading nobody reviews saves nothing.",
+   "typical_benefit": {
+    "wording": "S25 (p. 58): \"A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a).\" \"In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b).\"",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "The 3% is one review of winery refrigeration, as reported in S25. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "E5",
+  "E6",
+  "E7",
+  "E8",
+  "E9",
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E20",
+  "E21",
+  "E24",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C10",
+  "C8",
+  "E25",
+  "E26"
+ ],
+ "left_out": {}
+}

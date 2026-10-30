@@ -303,6 +303,10 @@ def attr_statement(gr, node, a):
     nid, name, v = node["id"], a["name"], a["value"]
     S = gr.name(nid)
     kind = node["kind"]
+    if name == "safety.function":
+        return 5, name, f"The tag-derived screen flags {S} for review as {article(v)} {fmt(v)}; the function is unverified"
+    if name == "safety.basis":
+        return 5, name, f"The tag-derived screening basis for {S} is {fmt(v)}; this requires review"
     if name == "class" and kind == "interlock":
         return 1, "is_a", f"{S} is classed as {article(v)} {fmt(v)} interlock"
     if name == "instrument_kind" and gr.g.get("model_kind") == "extracted_twin" and \
@@ -442,6 +446,9 @@ def edge_text(gr, e):
             return f"{gr.obj_name(a)} and {gr.obj_name(b)} are paired: the line continues from one drawing to the other"
         return f"{gr.obj_name(a)} and {gr.obj_name(b)} are joined by a line (direction not shown)"
     if t == "piped_to":
+        if edge_attr(e, "touching") is True:
+            return (f"{gr.obj_name(a)} and {gr.obj_name(b)} are drawn against each other, with no line between "
+                    f"them; the pipe layer treats them as consecutive process items")
         what = "A line is drawn" if {ka, kb} & {"instrument", "controller"} else "A pipe runs"
         taps = [x for x in (edge_attr(e, "taps") or []) if x in gr.nodes]
         by = [i for x in taps for i in gr.tapped_by.get(x, [])]
@@ -992,12 +999,24 @@ def model_item(m, kind, nid):
 
 
 def model_field(it, name):
+    if not isinstance(it, dict):
+        return False, None
     if name in it:
         return True, it[name]
-    if "." in name:
-        a, b = name.split(".", 1)
-        if isinstance(it.get(a), dict) and b in it[a]:
-            return True, it[a][b]
+    if name == "cited_source":
+        for key in ("source", "sources"):
+            if key in it:
+                return True, it[key]
+    path = re.fullmatch(r"([^.[\]]+)(?:\[(\d+)\])?(?:\.(.+))?", name)
+    if path and path[1] in it:
+        value = it[path[1]]
+        if path[2] is not None:
+            if not isinstance(value, list) or int(path[2]) >= len(value):
+                return False, None
+            value = value[int(path[2])]
+        if path[3]:
+            return model_field(value, path[3])
+        return True, value
     if isinstance(it.get("facts"), dict) and name in it["facts"]:
         return True, it["facts"][name]
     return False, None
@@ -1082,7 +1101,7 @@ def edge_in_model(m, gr, e, streams):
         out = it.get("output") or {}
         return b == out.get("final_element") or b in (out.get("split_range") or []), f"{where}.output"
     if t == "sets_point_of":
-        return (it.get("output") or {}).get("controller") == b, f"{where}.output.controller"
+        return (it.get("output") or {}).get("setpoint_of") == b, f"{where}.output.setpoint_of"
     if t == "trips":
         il, w = model_item(m, "interlock", b)
         return il is not None and il.get("measurement") == a, f"{w}.measurement"

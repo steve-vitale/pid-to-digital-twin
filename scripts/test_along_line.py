@@ -130,6 +130,55 @@ def plant_coded_tags(tmp, check):
             check("ACC sheet: with no MS system code the letters are read as ISA, as before",
                   got["MSBV 1407"][0] == "moisture" and got["MSBV 1407"][1] == "final element (valve)",
                   got["MSBV 1407"])
+        safety = {i["tag"]: (i.get("safety") or {}).get("function") for i in m["instruments"]}
+        want = {"PSV 7": "relief device", "MSBV 1407": None, "MOV 5": None, "PT 6": None, "TCV 8": None,
+                "MS 4010": None, "MSIV 2": "isolation valve" if code == "MSS" else None}
+        check(f"{code} sheet: safety marks follow the tag as read (MSIV isolation only where MS is the plant code)",
+              safety == want, safety)
+    safety_floor(check)
+
+
+def safety_floor(check):
+    """The floor never changes a score, lifts only green to amber, and leaves unmarked items alone."""
+    import confidence
+    rule = [("PSV 1", "PSV", "final element (valve)", "relief device"), ("PSE 2", "PSE", "measurement / control",
+            "relief device"), ("RD 3", "RD", "measurement / control", "relief device"),
+            ("XV 4", "XV", "final element (valve)", "shutdown / on-off valve"),
+            ("PSHH 5", "PSHH", "measurement / control", "trip switch (possible interlock input)"),
+            ("AORV 6", "AORV", "operated valve", "relief device"), ("MOV 7", "MOV", "operated valve", None),
+            ("PSC 8", "PSC", "measurement / control", None), ("FCV 9", "FCV", "final element (valve)", None),
+            ("PT 10", "PT", "measurement / control", None)]
+    model = {"meta": {"risk_model": {"tiers": {}}}, "systems": [{"id": "SYS-0", "system_code": None}],
+             "instruments": [{"id": f"I{n}", "class": "instrumentation", "system": "SYS-0", "tag": t,
+                              "isa_letters": lt, "instrument_kind": k,
+                              "risk": {"risk_score": 0.01 * n, "tier": ["green", "amber", "red"][n % 3], "why": "w"}}
+                             for n, (t, lt, k, _) in enumerate(rule)],
+             "line_items": [{"id": "L1", "class": "general", "system": "SYS-0", "tag": "RUPTURE DISK",
+                             "risk": {"risk_score": 0.02, "tier": "green", "why": "w"}},
+                            {"id": "L2", "class": "valve", "system": "SYS-0", "tag": "NC",
+                             "risk": {"risk_score": 0.02, "tier": "green", "why": "w"}}]}
+    confidence.mark_safety(model)
+    got = {x["tag"]: (x.get("safety") or {}).get("function") for x in model["instruments"]}
+    check("safety rule: relief / shutdown / trip letters marked; MOV, PSC, FCV, PT not",
+          got == {t: f for t, _, _, f in rule}, got)
+    check("safety rule: RUPTURE DISK text marked, NC valve not",
+          [(x.get("safety") or {}).get("function") for x in model["line_items"]] == ["relief device", None])
+    before = {x["id"]: dict(x["risk"]) for x in model["instruments"] + model["line_items"]}
+    rep = confidence.safety_floor(model)
+    after = {x["id"]: x for x in model["instruments"] + model["line_items"]}
+    check("floor: no marked item stays green; unmarked items untouched; scores never change",
+          all(after[i]["risk"]["tier"] != "green" for i in after if after[i].get("safety"))
+          and all(after[i]["risk"] == before[i] for i in after if not after[i].get("safety"))
+          and all(after[i]["risk"]["risk_score"] == before[i]["risk_score"] for i in after),
+          {i: after[i]["risk"] for i in after})
+    check("floor: red stays red, green becomes amber with the reason first",
+          after["I2"]["risk"]["tier"] == "red" and after["I0"]["risk"]["tier"] == "amber"
+          and after["I0"]["risk"]["tier_before_floor"] == "green"
+          and after["I0"]["risk"]["why"].startswith("safety-relevant (relief device): always checked"),
+          (after["I0"]["risk"], after["I2"]["risk"]))
+    check("floor report counts the moves by class",
+          rep["raised_green_to_amber"] == {"general": 1, "instrumentation": 2}
+          and model["meta"]["risk_model"]["safety_floor"]["marked"] == {"general": 1, "instrumentation": 6}, rep)
 
 
 if __name__ == "__main__":

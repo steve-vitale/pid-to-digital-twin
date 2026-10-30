@@ -9,6 +9,7 @@ import asyncio
 import csv
 import importlib.util
 import json
+import math
 import random
 import socket
 import sys
@@ -64,6 +65,25 @@ def percent_noise(level, start, n, step_at=None, step=0.0):
         a = level * (1 + 0.01 * rng.gauss(0, 1)) + (step if step_at is not None and i >= step_at else 0)
         b = 50 + 0.2 * ((i * 5) % 13 - 6) / 6
         rows.append([i, f"{a:.5f}", f"{b:.5f}"])
+    return rows
+
+
+def daily(start_day, days, step_at=None, step=0.0, spike_at=None):
+    """5-minute samples with a strong daily cycle, as a water network's demand: tag A = 50 + 20 sin(time of day)
+    with 0.3 gaussian noise (seeded, deterministic), tag B = 30 + 5 sin(...) with 0.1 noise. Timestamps from
+    2026-01-01 + start_day. A steps by `step` from row step_at (a row of this export); spike_at puts a single-row
+    spike of +40 in A."""
+    rng = random.Random(start_day)
+    t0 = datetime(2026, 1, 1) + timedelta(days=start_day)
+    rows = []
+    for i in range(days * 288):
+        t = t0 + timedelta(minutes=5 * i)
+        ph = 2 * math.pi * (t.hour * 60 + t.minute) / 1440
+        a = 50 + 20 * math.sin(ph) + rng.gauss(0, 0.3) + (step if step_at is not None and i >= step_at else 0)
+        if spike_at is not None and i == spike_at:
+            a += 40
+        b = 30 + 5 * math.sin(ph + 1) + rng.gauss(0, 0.1)
+        rows.append([f"{t:%Y-%m-%d %H:%M:%S}", f"{a:.4f}", f"{b:.4f}"])
     return rows
 
 
@@ -139,6 +159,15 @@ class BandsTest(unittest.TestCase):
         p = write_csv(self.d / "r.csv", ["t", "A"], [[0, 1.0], [1, 1.0, 2.0]])
         with self.assertRaisesRegex(cnb.CsvFormatError, "line 3 has 3 cells, the header has 2"):
             cnb.read_historian_csv(p)
+
+    def test_nonfinite_time_cells_are_refused_with_their_line(self):
+        for value in ("nan", "NaN", "inf", "-inf", "1e999"):
+            with self.subTest(value):
+                p = write_csv(self.d / "nonfinite.csv", ["t", "A"], [[0, 1], [value, 2]])
+                with self.assertRaisesRegex(cnb.CsvFormatError, "line 3:.*numeric times must be finite"):
+                    cnb.read_historian_csv(p)
+                with self.assertRaises(ValueError):
+                    cnb.parse_time(value)
         p = write_csv(self.d / "t.csv", ["t", "A"], [["yesterday", 1.0]])
         with self.assertRaisesRegex(cnb.CsvFormatError, "neither a number nor an ISO 8601 timestamp"):
             cnb.read_historian_csv(p)
@@ -230,6 +259,91 @@ class BandsTest(unittest.TestCase):
         self.assertEqual(r["held_out_normal"]["flagged_samples_any_tag"], 0)
         with self.assertRaises(SystemExit):
             cnb.main(["--normal", str(normal), "--method", "nope", "--out", str(self.d / "o")])
+
+    # ---------------------------------------------------------------- cyclic method and the automatic choice
+
+    def test_daily_cycle_chosen_automatically_and_step_found(self):
+        # BattLeDIM in miniature: a daily swing of +/-20 hides a step of 2 (a leak) from the drift method, whose
+        # 10-vs-600-sample gap swings with the day; against the time-of-day profile the step stands out.
+        normal = write_csv(self.d / "n.csv", ["Time", "A", "B"], daily(0, 6))
+        fault = write_csv(self.d / "f.csv", ["Time", "A", "B"], daily(20, 4, step_at=600, step=2.0))
+        r = cnb.run(normal, fault, fault_start=600)
+        self.assertEqual(r["method_name"], "cyclic")
+        self.assertEqual(r["method_choice"]["requested"], "auto")
+        self.assertGreaterEqual(r["method_choice"]["daily_profile_r2"], cnb.CYCLIC_MIN_R2)
+        f = r["scored"]["fault"]
+        self.assertEqual(f["false_alarms_before_fault"]["flagged_samples"], 0)
+        self.assertIsNotNone(f["detection_run3_row"])
+        self.assertLess(f["detection_run3_row"] - 600, 30)
+        self.assertEqual(f["first_tags"][0]["tag"], "A")
+        drift = cnb.run(normal, fault, fault_start=600, method="drift")["scored"]["fault"]
+        self.assertIsNone(drift["detection_run3_row"])  # the swing sets the drift band far wider than the step
+        md = cnb.markdown(r, "seconds")
+        self.assertIn("cyclic", md)
+        self.assertIn("time of day", md)
+
+    def test_cyclic_profile_slots(self):
+        # 48 slots of 30 minutes; a slot with fewer than CYCLIC_MIN_SLOT fit values falls back to the tag's mean.
+        self.assertEqual(cnb.CYCLIC_SLOTS, 48)
+        times = [datetime(2026, 1, 1, 0, 0), datetime(2026, 1, 1, 0, 29), datetime(2026, 1, 1, 0, 30),
+                 datetime(2026, 1, 1, 23, 59)]
+        self.assertEqual([cnb.day_slot(t) for t in times], [0, 0, 1, 47])
+        rows = [[1.0], [3.0], [5.0], [None]] + [[2.0]] * 3
+        slots = [0, 0, 0, 0, 5, 5, 5]
+        prof = cnb.slot_profile(["A"], rows, slots)["A"]
+        self.assertEqual(prof["slots"][0], 3.0)  # bad cell left out
+        self.assertEqual(prof["slots"][5], 2.0)
+        self.assertNotIn(7, prof["slots"])
+        self.assertAlmostEqual(cnb.profile_value(prof, 7), prof["mean"])
+        thin = cnb.slot_profile(["A"], [[1.0], [9.0]], [3, 3])["A"]
+        self.assertNotIn(3, thin["slots"])  # 2 values < CYCLIC_MIN_SLOT
+
+    def test_single_row_spike_ignored_by_cyclic_method(self):
+        normal = write_csv(self.d / "n.csv", ["Time", "A", "B"], daily(0, 6))
+        fault = write_csv(self.d / "f.csv", ["Time", "A", "B"], daily(20, 4, spike_at=300, step_at=900, step=2.0))
+        f = cnb.run(normal, fault, fault_start=900, method="cyclic")["scored"]["fault"]
+        self.assertEqual(f["false_alarms_before_fault"]["flagged_samples"], 0)  # median of 3 removes a 1-row spike
+        self.assertIsNotNone(f["detection_run3_row"])
+        self.assertEqual(cnb.median3([1.0, None, 9.0, 1.0, 1.0, 5.0]), [1.0, None, 9.0, 1.0, 1.0, 1.0])
+
+    def test_auto_keeps_drift_without_a_daily_cycle(self):
+        normal = write_csv(self.d / "n.csv", ["sample", "A", "B"], drifting(0, 1200))
+        fault = write_csv(self.d / "f.csv", ["sample", "A", "B"], drifting(3000, 1200, step_at=3900))
+        auto = cnb.run(normal, fault, fault_start=900)
+        drift = cnb.run(normal, fault, fault_start=900, method="drift")
+        self.assertEqual(auto["method_name"], "drift")
+        self.assertIn("not a timestamp", auto["method_choice"]["why"])
+        for key in ("k", "bands", "scored", "held_out_normal"):
+            self.assertEqual(auto[key], drift[key])
+        # Timestamps over enough days but no daily pattern: still drift.
+        rng = random.Random(1)
+        t0 = datetime(2026, 1, 1)
+        flat = [[f"{t0 + timedelta(minutes=5 * i):%Y-%m-%d %H:%M:%S}", f"{50 + rng.gauss(0, 1):.4f}"]
+                for i in range(6 * 288)]
+        r = cnb.run(write_csv(self.d / "flat.csv", ["Time", "A"], flat))
+        self.assertEqual(r["method_name"], "drift")
+        self.assertLess(r["method_choice"]["daily_profile_r2"], cnb.CYCLIC_MIN_R2)
+        short = cnb.run(write_csv(self.d / "short.csv", ["Time", "A", "B"], daily(0, 3)))  # fit 1.5 days
+        self.assertEqual(short["method_name"], "drift")
+        self.assertIn("days", short["method_choice"]["why"])
+
+    def test_cyclic_requested_without_timestamps_uses_a_flat_profile(self):
+        normal = write_csv(self.d / "n.csv", ["sample", "A", "B"], drifting(0, 1200))
+        r = cnb.run(normal, method="cyclic")
+        self.assertEqual(r["method_name"], "cyclic")
+        self.assertEqual(r["cyclic_profile"], "flat")
+        self.assertTrue(any("no time-of-day profile" in w for w in r["warnings"]))
+
+    def test_score_flags_reproduce_run(self):
+        # The per-row flags a caller needs (the matrix's HAI attack events) for every method, from one function.
+        normal = write_csv(self.d / "n.csv", ["Time", "A", "B"], daily(0, 6))
+        fault = write_csv(self.d / "f.csv", ["Time", "A", "B"], daily(20, 4, step_at=600, step=2.0))
+        for method in ("cyclic", "drift", "level"):
+            with self.subTest(method):
+                r = cnb.run(normal, fault, fault_start=600, method=method)
+                flags = cnb.score_flags(normal, fault, r["k"], r["method_name"])
+                self.assertEqual(cnb.first_run(flags, 600), r["scored"]["fault"]["detection_run3_row"])
+                self.assertEqual(sum(flags), r["scored"]["flagged_samples_any_tag"])
 
     def test_cli_refuses_malformed_header_without_traceback(self):
         p = write_csv(self.d / "bad.csv", ["t", "A", "A"], [[0, 1, 2]])
@@ -371,6 +485,29 @@ class HistorianAdaptersTest(unittest.TestCase):
         bad = [p, f[:-1]]
         with self.assertRaisesRegex(ValueError, "row counts"):
             ha.battledim_runs_from(bad, config, self.d)
+
+    def test_battledim_2019_year_mapping(self):
+        # A178: normal = the year's start up to the first leak STARTING that year (leaks running on from 2018 are
+        # part of normal); one run per leak starting in 2019; file names carry the year.
+        ha = self.ha
+        times = [datetime(2019, 1, 1) + timedelta(minutes=5 * i) for i in range(8000)]
+        p = [["Timestamp", "n1"]] + [[f"{t:%Y-%m-%d %H:%M:%S}", "28,92"] for t in times]
+        config = ("leakages:\n- # linkID, startTime, endTime, leakDiameter (m), leakType, peakTime\n"
+                  "- p1, 2018-01-08 13:30, 2019-12-31 23:55, 0.01, incipient, 2018-01-25 08:30\n"
+                  "- p7, 2019-01-15 23:00, 2019-01-17 00:00, 0.01, abrupt, 2019-01-15 23:00\n"
+                  "- p8, 2019-01-18 10:00, 2019-12-31 23:55, 0.01, abrupt, 2019-01-18 10:00\n")
+        runs = ha.battledim_runs_from([p], config, self.d, year=2019)
+        self.assertEqual([r["name"] for r in runs], ["p7", "p8"])
+        _, _, nt, normal = cnb.read_historian_csv(runs[0]["normal"])
+        self.assertEqual((nt[0], nt[-1]), (datetime(2019, 1, 1), datetime(2019, 1, 15, 22, 55)))
+        self.assertTrue(str(runs[0]["normal"]).endswith("battledim2019_normal.csv"))
+        r = runs[1]
+        _, _, st, _ = cnb.read_historian_csv(r["score"])
+        self.assertEqual(st[r["fault_start_row"]], datetime(2019, 1, 18, 10, 0))
+        self.assertEqual((st[0], st[-1]), (datetime(2019, 1, 16, 10, 0), datetime(2019, 1, 25, 10, 0)))
+        self.assertEqual(ha.battledim_files(2019), ("2019_SCADA_Pressures.csv", "2019_SCADA_Flows.csv",
+                                                    "2019_SCADA_Levels.csv"))
+        self.assertEqual(ha.battledim_files(2018), ha.BATTLEDIM_FILES)
 
 
 def free_port():

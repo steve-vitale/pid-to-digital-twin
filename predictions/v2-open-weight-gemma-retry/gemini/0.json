@@ -1,0 +1,17 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "gemini",
+ "drawing": "0",
+ "label": "v2-open-weight-gemma-retry",
+ "model": "gemma-4-31b-it",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+ "ran_at": "2026-10-07T20:37:07+00:00",
+ "seconds": 5402.2,
+ "cost_usd": null,
+ "cost_usd_notional": null,
+ "error": "TimeoutError: The read operation timed out",
+ "parse_error": "no text",
+ "prediction": null
+}

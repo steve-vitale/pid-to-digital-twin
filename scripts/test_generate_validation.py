@@ -37,6 +37,32 @@ def snapshot(path):
 
 
 class GenerationValidationTests(unittest.TestCase):
+    def test_instance_units_survive_beside_review_status_without_changing_shared_template(self):
+        model = twin_fixture()
+        a = model["instruments"][0]
+        a.update(uom="bar", instrument_kind="measurement / control", ops_review={"status": "corrected"})
+        b = copy.deepcopy(a)
+        b.update(id="I-2", uom="kg/h", ops_review={"status": "unverified"})
+        b["provenance"][0]["symbol"] = "s4"
+        model["instruments"].append(b)
+        tags = generate.twin_ignition(model)
+        found = {}
+        def walk(node):
+            if node.get("tagType") == "UdtInstance":
+                found[node["parameters"]["AssetId"]["value"]] = node
+            for child in node.get("tags", []):
+                walk(child)
+        walk(tags)
+        for identity, unit in (("I-1", "bar"), ("I-2", "kg/h")):
+            members = {x["name"]: x for x in found[identity]["tags"]}
+            self.assertEqual(members["PV"]["engUnit"], unit)
+        self.assertEqual(next(x for x in found["I-1"]["tags"] if x["name"] == "ReviewStatus")["value"], "corrected")
+        self.assertEqual(found["I-1"]["typeId"], found["I-2"]["typeId"])
+        shared = next(x for x in tags["tags"][0]["tags"] if x["name"] == found["I-1"]["typeId"])
+        pv = next(x for x in shared["tags"] if x["name"] == "PV")
+        self.assertNotIn("engUnit", pv)
+        self.assertTrue(pv["readOnly"])
+
     def setUp(self):
         self.seed = json.loads((ROOT / "data/te_process_model.json").read_text(encoding="utf-8"))
         self.twin = twin_fixture()
@@ -146,6 +172,54 @@ class GenerationValidationTests(unittest.TestCase):
             self.assertEqual((pv["AttributeDataReference"], pv["AttributeConfigString"]), ("", ""))
             descriptions = (Path(tmp) / "pi/attribute_descriptions.csv").read_text(encoding="utf-8-sig")
             self.assertIn("function/signal unknown", descriptions)
+
+    def test_instrument_udts_are_templates_by_kind_and_carry_review_and_risk(self):
+        """Extracted-twin instrument UDTs are keyed on instrument_kind (and Relief for marked relief devices), not
+        on tag letters; instance documentation and PI descriptions carry review status and risk tier."""
+        base = self.twin["instruments"][0]
+        cases = [("I-1", "FIT", "measurement / control", None, "Instrument_Measurement"),
+                 ("I-2", "MSBV", "valve (plant-coded tag)", None, "Instrument_Valve"),
+                 ("I-3", "AORV", "operated valve", {"function": "relief device", "basis": "x"}, "Instrument_Relief"),
+                 ("I-4", "FCV", "final element (valve)", None, "Instrument_ControlValve"),
+                 ("I-5", "MOV", "operated valve", None, "Instrument_OperatedValve"),
+                 ("I-6", None, None, None, "Instrument_Unknown")]
+        insts = []
+        for n, (ident, letters, kind, safety, _) in enumerate(cases):
+            x = dict(copy.deepcopy(base), id=ident, isa_letters=letters, instrument_kind=kind,
+                     tag=f"{letters or 'X'} {n}", tag_status="as_extracted")
+            x["provenance"] = [dict(x["provenance"][0], symbol=f"i{n}")]
+            if safety:
+                x["safety"] = safety
+                x["risk"] = {"risk_score": 0.01, "tier": "amber", "why": "w", "tier_before_floor": "green"}
+            insts.append(x)
+        insts[0]["risk"] = {"risk_score": 0.6, "tier": "red", "why": "w"}
+        insts[0]["ops_review"] = {"status": "corrected"}
+        self.twin["instruments"] = insts
+        tags = generate.twin_ignition(self.twin)
+        types = {t["name"] for t in tags["tags"][0]["tags"]}
+        self.assertEqual({t for t in types if t.startswith("Instrument_")}, {c[4] for c in cases})
+        found = {}
+
+        def walk(node):
+            for t in node.get("tags", []):
+                if t["tagType"] == "UdtInstance":
+                    found[t["parameters"]["AssetId"]["value"]] = t
+                walk(t)
+        walk(tags["tags"][1])
+        for ident, *_, type_name in cases:
+            self.assertEqual(found[ident]["typeId"], type_name, ident)
+        self.assertTrue(found["I-1"]["documentation"].endswith("review: CORRECTED | risk tier: red"))
+        self.assertTrue(found["I-3"]["documentation"].endswith(
+            "review: UNVERIFIED | risk tier: amber (safety floor) | safety-relevant: relief device"))
+        self.assertTrue(found["I-5"]["documentation"].endswith("review: UNVERIFIED | risk tier: not rated"))
+        self.assertTrue(found["U-1"]["documentation"].endswith("review: UNVERIFIED | risk tier: not rated"))
+        rows = generate.twin_pi_rows(self.twin)
+        attr = next(r for r in rows if r[3] == "Attribute" and r[4].startswith("I-1 |"))
+        self.assertTrue(attr[4].endswith("review: CORRECTED | risk tier: red"))
+        queue = generate.twin_review_rows(self.twin)
+        col = generate.TWIN_REVIEW_COLS.index("why_check_this")
+        row = next(r for r in queue if r[generate.TWIN_REVIEW_COLS.index("item_id")] == "I-3")
+        self.assertIn("safety-relevant relief device (x): check whatever the tier", row[col])
 
     def test_cli_failure_is_nonzero_without_success_or_traceback(self):
         with tempfile.TemporaryDirectory() as tmp:

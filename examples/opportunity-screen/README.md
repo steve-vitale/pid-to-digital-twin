@@ -1,4 +1,4 @@
-# Opportunity screen: three worked examples
+# Opportunity screen: four worked examples and a roll-up
 
 **Why it matters:** the first day of an energy or controls review is mostly asking the same questions of the
 drawings and writing down what to go and measure. These screens do that part, cite where every claim comes from,
@@ -11,6 +11,8 @@ How the engine works, the three evidence states and how to add a question: [`doc
 | [`te/`](te/) | Tennessee Eastman, hand-built (`data/te_process_model.json`) plus its loop list | 10 | [`te/screen.md`](te/screen.md) |
 | [`bayer/`](bayer/) | Bayer residue treater from the CSB report (`data/bayer_rt/process_model.json`) | 12 | [`bayer/screen.md`](bayer/screen.md) |
 | [`open100/`](open100/) | 12 OPEN100 sheets extracted to a twin (`out/twin/r2-tiles-trace/codex/plant_model.json`) plus the equipment schedules | 29 | [`open100/screen.md`](open100/screen.md) |
+| [`food/`](food/) | **ILLUSTRATIVE** synthetic food plant section: ammonia refrigeration, a dryer, an oven, a fryer and utilities ([`food_plant_model.json`](food_plant_model.json)) | 24 | [`food/screen.md`](food/screen.md) |
+| [`rollup-food-bayer/`](rollup-food-bayer/) | Roll-up of the `food` and `bayer` screens as two sites | 36 across 24 questions | [`rollup-food-bayer/rollup.md`](rollup-food-bayer/rollup.md) |
 
 Regenerate (the test checks these outputs byte for byte):
 
@@ -20,7 +22,16 @@ python -S scripts/question_engine.py --model data/bayer_rt/process_model.json --
 python -S scripts/question_engine.py --model out/twin/r2-tiles-trace/codex/plant_model.json \
     --schedule data/open100_equipment_schedule.json \
     --schedule examples/opportunity-screen/open100_schedule_fields.json --out examples/opportunity-screen/open100
+python -S scripts/question_engine.py --model examples/opportunity-screen/food_plant_model.json --out examples/opportunity-screen/food
+python -S scripts/question_engine.py --rollup examples/opportunity-screen/food --rollup examples/opportunity-screen/bayer \
+    --out examples/opportunity-screen/rollup-food-bayer
 ```
+
+[`food_plant_model.json`](food_plant_model.json) is an input and is **ILLUSTRATIVE**: written by hand for this
+example, not any plant, every tag invented, nothing measured. No public source gives a food plant P&ID to
+transcribe, so each item instead cites the public source that describes that kind of item in food plants (S25 dairy
+and S26 fruit and vegetable ENERGY STAR guides, S27 the DOE burner tip sheet, with pages). Some items are drawn on
+purpose to show a question staying quiet (listed under "Anti-triggers" below).
 
 [`open100_schedule_fields.json`](open100_schedule_fields.json) is an input, not an output: the printed fields of
 every OPEN100 equipment schedule entry, read by eye from `data/drawings/open100_<sheet>.jpg` (one reader,
@@ -104,9 +115,57 @@ safety-related design changes go through the licensing basis, not an energy scre
   the rule looks for condensate or trap outlets to drain.
 - The ACC condensate drain through LCV-1501 to the condensate system is not asked about.
 
+### Illustrative food plant section (24 findings)
+
+Checked against the model it was written from. **Expected** means the finding is the question the item was drawn to
+raise; **legit** means an older question fired on the new equipment and is a fair question there.
+
+| Finding | Judgement |
+|---|---|
+| E27 C-201: ammonia evaporative condenser, PT-203 head pressure, PIC-203 "head pressure control at a fixed setpoint" | Expected. The head pressure request names PT-203 and the setpoint and low limit in the plant controls; the floor (hot gas defrost, liquid injection) is its own request |
+| E28 model: K-201, K-202, K-203 with suction pressures PT-201, PT-202, the spiral freezer, unit cooler and cold store, TT-205 and TT-206 | Expected. One finding per model: suction levels are a plant-wide setting |
+| E29 K-201 and K-202: screws with no drive (ZT-202 slide valve position shown on K-202) | Expected |
+| E30 EV-201: hot gas defrost valve HGV-201, defrost started by a timer | Expected |
+| E31 D-301 (exhaust S1, TT-304) and O-302 (exhaust S2, TT-305) | Expected. The fuel request names FT-301 on the dryer and, on the oven, says only a valve is drawn |
+| E32 D-301 and F-303: gas-fired, no flue O2 | Expected; the decision rule and source keep the excess air a drying process needs |
+| H5 model: compressors and condenser, with the CIP and wash hot water heater WH-401 as the low-grade duty | Expected |
+| H6 D-301 and O-302, with WH-401 | Expected; overlaps E31 by design (E31 asks about the unit's own inlet air first) |
+| C11 D-301 and O-302: no humidity measurement | Expected. The dryer's manual exhaust damper HV-304 is shown |
+| C12 model: K-202, K-203 with no power measurement | Expected |
+| E19, E22, E23 AC-501 (instrument air compressor) | Legit. E19 also lists the refrigeration pressure controllers PIC-202 and PIC-203 as "pressure control" because its clause looks anywhere: **low value** in that part |
+| C1 O-302, F-303, WH-401: gas with no meter | Legit; the dryer's gas is metered (FT-301), so it is quiet |
+| C2, C3 model | Legit; **low value** as in the other examples |
+| C9 model: K-201, K-202, K-203, AC-501 with no trip drawn | Legit, a question to verify (no high discharge pressure cutout was drawn) |
+
+**Anti-triggers, each drawn on purpose and pinned in the test:** K-203 has a drive (SC-203), so E29 is quiet there;
+EV-202 starts defrost from a coil differential pressure (PDT-206), so E30 is quiet there; K-201's power is measured
+(JT-201), so C12 leaves it out; the oven has a flue O2 analyser (AT-302), so E32 is quiet there; the fryer's exhaust
+goes to a vapour condenser heat recovery exchanger (HX-303, the S26 p. 107 arrangement), so E31 and H6 are quiet
+there; and the instrument air compressor AC-501 and its refrigerated air dryer AD-502 get no refrigeration, oven or
+dryer question.
+
+**On the other three examples:** none of the ten new questions fired on TE, Bayer or OPEN100 (TE's recycle
+compressor K-101 and condenser E-101, Bayer's vent condenser E-1 and OPEN100's air-cooled condenser name no
+refrigerant). Their regenerated outputs differ only in the list of questions run and quiet, and in one line of the
+TE and Bayer E18 data requests, where a valve beside a drawn flow meter is no longer called "no flow measurement".
+
+### Roll-up: food and Bayer as two sites
+
+24 questions fired across the two; 4 fired at both (C1, C2, C3, C9). The roll-up lists every finding of both screens
+exactly once (the test checks it), names the sites where each question was asked and quiet, and merges data requests
+by item: C1's "utility flow to this user" shows the shared places (temporary meter, site meter readings) once for the
+food site and each unmetered valve under its own finding. Its order (most sites first) is not a ranking by value.
+
 ## Triggers tightened while checking
 
 Each of these fired wrongly on a first run and was fixed; the test keeps them quiet:
+
+- **Food example, 2026-10-29:** E19 and E23 fired on the refrigerated compressed air dryer AD-502 (its name says
+  "compressed air"), E22 was silenced by the ammonia receiver (its storage check looked for any RECEIVER), E26 read
+  the dryer and fryer exhausts "to atmosphere" as relief or process vents, H5 was silenced by the fryer's vapour
+  condenser heat recovery (its regex took any "condenser ... heat recovery"), E28 showed every temperature in the
+  plant as a refrigerated space, and the dryer's fuel request said "only a valve is drawn on this line, with no flow
+  measurement" beside the drawn gas meter FT-301. Each is fixed and pinned.
 
 - **H4 on ACW-AXC-210** (found by an independent review): the auxiliary cooling water cooler was read as a user
   rejecting heat into cooling water, which reverses the heat flow. H4 now skips cooling water coolers, air-cooled

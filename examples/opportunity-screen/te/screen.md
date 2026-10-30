@@ -58,7 +58,7 @@ drawing** (collect it from the place named). Systems listed under "Left out" wer
 
 **Data to collect**
 
-- Temperatures and duties of the cooled and the heated streams [not on drawing]. Where: historian / recorded data: TT-121: recorded signal XMEAS(21) in the TE data files; TT-122: recorded signal XMEAS(22) in the TE data files; only the valve position is recorded (FV-117: recorded signal XMV(11) in the TE data files; TV-121: recorded signal XMV(10) in the TE data files); flow needs a meter or a calibrated valve curve; then historian / recorded data: FT-119: recorded signal XMEAS(19) in the TE data files; only the valve position is recorded (FV-119: recorded signal XMV(9) in the TE data files); flow needs a meter or a calibrated valve curve; then site records: heat and material balance. How: For each stream: supply and target temperature and duty.
+- Temperatures and duties of the cooled and the heated streams [not on drawing]. Where: historian / recorded data: TT-121: recorded signal XMEAS(21) in the TE data files; TT-122: recorded signal XMEAS(22) in the TE data files; only the valve position is recorded (FV-117: recorded signal XMV(11) in the TE data files; TV-121: recorded signal XMV(10) in the TE data files); flow needs a meter or a calibrated valve curve; then historian / recorded data: FT-119: recorded signal XMEAS(19) in the TE data files; then site records: heat and material balance. How: For each stream: supply and target temperature and duty.
 - Whether the duties overlap in time [not on drawing]. Where: site records: operating sequence: are both duties needed at the same time?. How: Mark each duty continuous, batch or startup-only.
 - Layout distance and fouling [not on drawing]. Where: a walkdown: distance between the two exchangers; then maintenance records: cleaning history. How: Note pipe run and fouling service.
 
@@ -273,7 +273,7 @@ IAC/ITAC recommendation code: 2.243x (by description).
 
 ## Questions that found nothing to ask here
 
-No item in this model matched these questions' triggers. That is not a clean bill of health: the model may simply not show what the question looks for. E1, E2, E3, E4, E5, E7, E8, E9, E10, E11, E12, E13, E14, E15, E16, E17, E19, E20, E21, E22, E23, E24, H1, H3, C4, C5, C6, C7, C10, C8, E25, E26.
+No item in this model matched these questions' triggers. That is not a clean bill of health: the model may simply not show what the question looks for. E1, E2, E3, E4, E5, E7, E8, E9, E10, E11, E12, E13, E14, E15, E16, E17, E19, E20, E21, E22, E23, E24, H1, H3, C4, C5, C6, C7, C10, C8, E25, E26, E27, E28, E29, E30, E31, E32, H5, H6, C11, C12.
 
 ## Sources cited above
 

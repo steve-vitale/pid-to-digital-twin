@@ -100,7 +100,7 @@ drawn direction (both fed from P4712).
   line that ends only at a closed end (blind, plug, vent valve) gets `BL` as that end and says so in `to_end` or
   `from_end`. Signal lines between bubbles are kept as `signal_from`/`signal_to` lists, not edges.
 - **Items that need a unit and reach none** (C03's shutdown valve ESV 3712 sits on a line with no equipment) go to
-  `unplaced`: kept in the model, not exported by `generate.py` or `graph_export.py`.
+  `unplaced`: kept in the model and graph export as nodes with a placement reason; not exported by `generate.py`.
 - **Tags**: valves with no unique identifier use their XML ID (drawn spec codes repeat); the drawn label is kept.
   A hand switch (HS 4750.01) that drives a valve is a controller, so it gets no Ignition tag.
 - **Person names** in the drawing metadata are left out on purpose. **Values** stay as written (text) with DEXPI

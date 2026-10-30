@@ -45,10 +45,24 @@ Stdlib only, offline. Worked examples, with a hand check of every number:
 }
 ```
 
-Any number may be a range, `{"low": a, "high": b}` or `[a, b]`, except the steam pressure and feedwater temperature used to look up steam energy from the public table, which must be single values (give `energy_btu_per_lb` as a range instead). Field names are checked: a name the tool does not know is refused, so a typo is never silently ignored; results are then ranges, by interval arithmetic
+Any number may be a range, `{"low": a, "high": b}` or `[a, b]`, except the steam pressure and feedwater temperature used to look up steam energy from the public table, which must be single values (give `energy_btu_per_lb` as a range instead). The spec is checked strictly before anything is computed: an unknown field name, a field that doesn't belong to the change's type, a range with anything but `low` and `high`, a field written twice, two forms of the same quantity that disagree, or a number that would neither feed the result nor be checked against it (for example hours beside an annual kWh with nothing to compare them to) are all refused with the reason, so nothing you wrote is ever silently ignored; results are then ranges, by interval arithmetic
 (each bound takes the worst and best combination, so the range is wide, never falsely narrow). `"increase": true` on a
 change makes it count against the saving (for example the extra boiler fuel a backpressure turbogenerator takes).
 Several changes in one spec are summed. `site_notes` text is printed next to each site value, so say where it came from.
+Each change can also carry `source`, `note` and `notes`; these travel into both output files as measurement provenance.
+For added electrical load, use actual `kw_before` / `kw_after` without `increase`, or an increment in `kw_reduction`
+with `increase: true`. A partial `kw_before` beside that flag is ambiguous and is refused with those two alternatives.
+
+When you supply more than one electricity form, each must reach the annual quantity: kW figures beside measured annual
+kWh need `hours_per_year`. Agreement between `kw_before`, `kw_after` and `kw_reduction` alone cannot check annual kWh.
+Complete alternate calculations must match both range ends within 1% of the reported form (or 0.01 for an end whose absolute value is below 1),
+allowing rounding; overlapping ranges alone do not establish agreement. Every input that passes a cross-check is
+retained in the output's `inputs`.
+
+A complete before/after range is compared with the reduction it calculates: for example, `kw_before: [10,20]` and
+`kw_after: [0,5]` give `kw_reduction: [5,20]`. With only before and reduction supplied, the reduction's high end must
+not exceed the before-load's low end, so no independent combination implies a negative after load. Add the measured
+after range when those quantities are related. These are interval calculations; the tool does not model correlations.
 
 | Change type | Measured inputs | Becomes |
 |---|---|---|
@@ -56,6 +70,11 @@ Several changes in one spec are summed. `site_notes` text is printed next to eac
 | `fuel` | `mmbtu_per_year` (HHV) | cost and Scope 1 CO2e |
 | `steam` | `steam_lb_per_h`, `hours_per_year`, and `energy_btu_per_lb` (or, with `--use-defaults`, `steam_pressure_psig` + `feedwater_temp_F` for the DOE table) | useful heat, fuel via boiler efficiency, then cost and Scope 1 CO2e |
 | `heat` | `heat_btu_per_h` + `hours_per_year`, or `heat_mmbtu_per_year` | fuel via boiler (or heater) efficiency, then cost and CO2e |
+
+For an explicit `energy_btu_per_lb`, use the enthalpy difference at the boundary you measured. Condensate-return
+heat can be below 100 Btu/lb; it is not the gross energy needed to make steam from feedwater. The public steam-table
+default covers that gross production duty only. Turbine generation belongs in an `electricity` change, with any
+additional boiler fuel as a separate `increase: true` change; enthalpy extracted as shaft work is not fuel saved.
 
 Site constants (`site` block): `electricity_price_per_kwh`, `demand_charge_per_kw_month`, `grid_kg_co2e_per_kwh`,
 `fuel_price_per_mmbtu` (or `fuel_price_per_unit` + `fuel_price_unit`: `mmbtu`, `therm`, `dekatherm`, or any unit such
@@ -133,7 +152,7 @@ The point is to send you out to collect better data, not to stop at the estimate
   Scope 1 CO2e in kg, total CO2e in t). A range is `{"low": a, "high": b}`.
 - `needs.md` / `needs.json` for `--needs`.
 
-Exit codes: 0 written; 2 refused, nothing written: a missing constant, a malformed spec, or a value outside what is physically possible (hours outside 0 to 8,784, the hours in a leap year; a boiler efficiency of 85 instead of 0.85; a negative quantity or price; steam energy outside 100 to 1,600 Btu/lb; inputs that disagree with each other). A billing-peak reduction larger than the average load reduction is not refused, because a change can cut the peak more than the average; it is listed as an assumption to check against interval meter data. The message says which value and why.
+Exit codes: 0 written; 2 refused, nothing written: a missing constant, a malformed spec, or a value outside the supported bounds (hours outside 0 to 8,784, the hours in a leap year; a boiler efficiency of 85 instead of 0.85; a negative quantity or price; steam enthalpy difference outside 0 to 1,600 Btu/lb; inputs that disagree with each other). A billing-peak reduction larger than the average load reduction is not refused, because a change can cut the peak more than the average; it is listed as an assumption to check against interval meter data. The message says which value and why.
 
 ## Limits
 

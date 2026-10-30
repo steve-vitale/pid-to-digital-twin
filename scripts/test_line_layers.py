@@ -190,6 +190,22 @@ class Drawn(unittest.TestCase):
         self.assertEqual(segs(out), {("B", "N")})
         self.assertEqual({tuple(s[:2]) for s in out["nozzle_stubs"]}, {("N", "E")})
 
+    def test_items_drawn_against_each_other_are_piped_directly(self):
+        # blind flange F drawn against valve V's end, reducer R against valve W: no line between them, nothing between
+        # them either, so each pair is consecutive on the pipe (the segment says it is drawn touching); a bubble I
+        # drawn against W is not a pipe end
+        syms = self.draw({"A": [100, 470, 160, 530], "V": [400, 480, 440, 520], "F": [441, 485, 451, 515],
+                          "B": [840, 470, 900, 530], "W": [600, 480, 640, 520], "R": [560, 485, 599, 515],
+                          "I": [605, 440, 635, 479]},
+                         [((160, 500), (400, 500)), ((640, 500), (840, 500))],
+                         classes={"F": "general", "R": "general", "I": "instrumentation"})
+        out = ll.traced_layers(self.image, syms)
+        self.assertEqual(segs(out), {("A", "V"), ("F", "V"), ("B", "W"), ("R", "W")})
+        touching = {tuple(sorted(s[:2])) for s in out["segments"] if s[2] is None}
+        self.assertEqual(touching, {("F", "V"), ("R", "W")})
+        self.assertEqual(out["instrument_lines"], [])
+        self.assertEqual(out["problems"], [])
+
 
 class Generic(unittest.TestCase):
     def test_contract_prunes_stubs_walks_bends_and_keeps_junctions(self):
@@ -205,6 +221,21 @@ class Generic(unittest.TestCase):
         loop = {"A": {1: 0}, 1: {"A": 0, 2: 0, 3: 0}, 2: {1: 0, 3: 0, 4: 0}, 3: {1: 0, 2: 0, 4: 0},
                 4: {2: 0, 3: 0}}
         self.assertEqual(ll.contract(loop, {"A"}), ({}, {}))
+
+    def test_a_closed_shape_on_a_line_is_not_a_junction(self):
+        # A filled arrowhead (or an unkeyed symbol's outline) drawn on the run from A to B: the run splits into two
+        # paths around it and joins again, so 1 and 2 have three arms each but meet only A, B and each other
+        tri = {"A": {1: 0}, 1: {"A": 0, 2: 0, 3: 0}, 3: {1: 0, 2: 0}, 2: {1: 0, 3: 0, "B": 0}, "B": {2: 0}}
+        self.assertEqual(ll.contract(tri, {"A", "B"}), ({("A", "B"): 0}, {}))
+        # an actuator's box drawn (unkeyed) on valve V's stem: a loop hanging off the valve by one line
+        box = {"A": {"V": 0}, "V": {"A": 0, "B": 0, 5: 0}, "B": {"V": 0}, 5: {"V": 0, 3: 0, 4: 0},
+               3: {5: 0, 4: 0}, 4: {5: 0, 3: 0}}
+        self.assertEqual(ll.contract(box, {"A", "B", "V"}), ({("A", "V"): 0, ("B", "V"): 0}, {}))
+        # a real bypass is kept: two tees joined directly and through valve V
+        byp = {"A": {1: 0}, 1: {"A": 0, 2: 0, "V": 0}, "V": {1: 0, 2: 0}, 2: {1: 0, "V": 0, "B": 0}, "B": {2: 0}}
+        sg, arms = ll.contract(byp, {"A", "B", "V"})
+        self.assertEqual(arms, {1: 3, 2: 3})
+        self.assertEqual(set(sg), {tuple(sorted(s, key=str)) for s in [("A", 1), (1, 2), (1, "V"), (2, "V"), (2, "B")]})
 
     def test_classify_lines_by_what_they_join(self):
         # A - J1 - J2 - B with a tap J1 (bubble I1) and a branch to C at J2; bubbles I2 and I3 share a leader that
@@ -252,6 +283,22 @@ class Generic(unittest.TestCase):
         far = {"junctions": {"J": {"x": 900, "y": 900}}, "segments": perfect["segments"]}
         self.assertEqual(ll.score_pipe(far, t, 40)["segments"]["tp"], 0)  # a junction elsewhere is not the tee
 
+    def test_scorer_matches_a_tee_without_position_through_matched_junctions(self):
+        # DEXPI tee T2 (no drawn position) sits between tees T1 and T3 with a branch to valve V: its neighbours are
+        # two junctions and one item, so item neighbours alone (1) cannot place it; matched junctions count too
+        truth = {"junctions": {"T1": (100.0, 500.0), "T2": None, "T3": (300.0, 500.0)},
+                 "segments": {("A", "T1"), ("C", "T1"), ("T1", "T2"), ("T2", "V"), ("T2", "T3"), ("B", "T3"),
+                              ("D", "T3")}}
+        pred = {"junctions": {"J1": {"x": 101, "y": 500}, "J2": {"x": 200, "y": 500}, "J3": {"x": 299, "y": 500}},
+                "segments": [("A", "J1", 0), ("C", "J1", 0), ("J1", "J2", 0), ("J2", "V", 0), ("J2", "J3", 0),
+                             ("B", "J3", 0), ("D", "J3", 0)]}
+        r = ll.score_pipe(pred, truth, side=40)
+        self.assertEqual((r["junctions"]["tp"], r["segments"]["tp"]), (3, 7))
+        # but one shared neighbour is not enough to name a tee
+        lone = {"junctions": {"T": None}, "segments": {("A", "T"), ("B", "T"), ("C", "T")}}
+        guess = {"junctions": {"J": {"x": 5, "y": 5}}, "segments": [("A", "J", 0), ("X", "J", 0), ("Y", "J", 0)]}
+        self.assertEqual(ll.score_pipe(guess, lone, side=40)["junctions"]["tp"], 0)
+
 
 class Truths(unittest.TestCase):
     def test_generated_drawing_truth_matches_its_key_and_scores(self):
@@ -272,6 +319,33 @@ class Truths(unittest.TestCase):
         self.assertFalse([s for s in c["segments"] if any(pred["roles"].get(x) == "instrument" for x in s)])
         self.assertEqual(r["total"]["instrument_lines"]["truth"], len(c["instrument_lines"]))
         self.assertGreater(r["total"]["segments"]["f1"], 0.0)
+
+    def test_two_pipes_landing_on_a_vessel_shell_are_not_a_tee(self):
+        # SPPID's render of DEXPI C01 (a development sheet, A177): the lines from PV 4712.02 and TV 4750.03 land on
+        # the heat exchanger's shell 53 px apart, at nozzles N2 and N3; the shell runs along the box edge between them,
+        # so the two landing points were read as one tee beside the box. Each pipe goes to the exchanger.
+        base = ROOT / "data" / "external" / "dexpi-ttc-all" / "vendor-keys"
+        png = base / "C01V01-HEX.EX02.png"
+        if not png.is_file():
+            self.skipTest("DEXPI 1.2 vendor render not present (scripts/corpus_adapters.py build_vendor_keys)")
+        im = cv2.imread(str(png), cv2.IMREAD_GRAYSCALE)
+        H, W = im.shape
+        x0, y0, x1, y1 = 3750, 1200, 4350, 1900
+        with tempfile.TemporaryDirectory() as tmp:
+            crop = Path(tmp) / "crop.png"
+            cv2.imwrite(str(crop), im[y0:y1, x0:x1])
+            syms = []
+            for x in ll.key_symbols(base / "C01V01-HEX.EX02.graphml", png):
+                b = [x["box"][0] * W / 1000 - x0, x["box"][1] * H / 1000 - y0, x["box"][2] * W / 1000 - x0,
+                     x["box"][3] * H / 1000 - y0]
+                if b[0] >= 0 and b[1] >= 0 and b[2] <= x1 - x0 and b[3] <= y1 - y0:
+                    syms.append({"id": x["id"][:6], "class": x["class"],
+                                 "box": [1000 * b[0] / (x1 - x0), 1000 * b[1] / (y1 - y0), 1000 * b[2] / (x1 - x0),
+                                         1000 * b[3] / (y1 - y0)]})
+            self.assertEqual(sorted(x["id"] for x in syms), ["SP5539", "SPE107", "SPFA27"])
+            out = ll.traced_layers(crop, syms)
+        self.assertEqual(out["junctions"], {})
+        self.assertEqual(segs(out), {("SP5539", "SPE107"), ("SPE107", "SPFA27")})
 
     def test_a_drawing_from_another_generator_version_is_refused(self):
         cfg = ll.SETS["te"]

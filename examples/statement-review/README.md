@@ -55,7 +55,7 @@ stays as the measurement of the version it saw. It is not overwritten.
 
 | File | What it is |
 |---|---|
-| `sheet0/statements.json` | All 1,073 statements from [`sheet0_graph.json`](../graph-export/sheet0_graph.json) (the extracted OPEN100 sheet 0), with sources, evidence pointers, ranks, groups and layer |
+| `sheet0/statements.json` | All 1,087 statements from [`sheet0_graph.json`](../graph-export/sheet0_graph.json) (the extracted OPEN100 sheet 0), with sources, evidence pointers, ranks, groups and layer |
 | `sheet0/review_sheet.csv` | The full sheet, verdicts empty |
 | `sheet0/sample_60.json`, `.csv`, `.html` | The seeded stratified sample of 60 the 2026-10-29 review measured, drawn from the 704 statements of the version before the line layers (their ids are unchanged; their wording has changed since), its sheet, and its review page with the drawing crops it shows (`sheet0/evidence/`) |
 | `sheet0/sample_layers.json`, `.csv`, `.html` | The sample of 60, 15 per relationship layer (seed 1030), that the 2026-10-29 layered review measured (`review-2026-10-29-layers/`); kept as drawn from that day's statements |
@@ -72,10 +72,10 @@ the repository.
 
 | | Sheet 0 (drawing extraction) | Bayer (hand-built from a report) |
 |---|---|---|
-| Statements | 1,073: 188 identity, 151 attribute, 734 relation | 215: 44 identity, 111 attribute, 60 relation |
-| By layer | 354 item, 345 pairwise (same line network), 222 network (48 networks and what is attached), 118 pipe (28 pipe tees, 90 pipe segments), 34 lines that are not pipe (10 instrument taps, 20 instrument connections, 2 actuator stems, 2 nozzle stubs) | 200 item (7 of them the model's own notes, exported since round 4), 15 stream (the model's process streams, already pipe-level) |
-| By rank | 795 connection, 277 identity, 1 descriptive; **no control or safety relation and no value with units was extracted** | 33 control/safety, 46 connection, 12 value with units, 79 identity, 45 descriptive |
-| Evidence | 609 with a crop of their own drawing box (items, junctions, networks); 459 traced links and drawn lines with no source of their own, shown as a crop of both ends; 5 with no source and no crop (the plant, the drawing-area system, its description and code, and its place in the plant) | 206 cite report pages (57 with a matching report line quoted, 149 page/figure only); 9 with no source of their own (the plant, the battery limit and the model's 7 notes about itself) |
+| Statements | 1,087: 188 identity, 163 attribute, 736 relation | 215: 44 identity, 111 attribute, 60 relation |
+| By layer | 366 item, 345 pairwise (same line network), 222 network (48 networks and what is attached), 120 pipe (28 pipe tees, 92 pipe segments, including 2 inferred contacts), 34 lines that are not pipe (10 instrument taps, 20 instrument connections, 2 actuator stems, 2 nozzle stubs) | 200 item (7 of them the model's own notes, exported since round 4), 15 stream (the model's process streams, already pipe-level) |
+| By rank | 797 connection, 277 identity, 13 descriptive (including 12 tag-derived safety screening notes); **no control or safety relation and no value with units was extracted** | 33 control/safety, 46 connection, 12 value with units, 79 identity, 45 descriptive |
+| Evidence | 621 with a crop of their own drawing box (items, junctions, networks); 461 traced links and drawn lines with no source of their own, shown as a crop of both ends; 5 with no source and no crop (the plant, the drawing-area system, its description and code, and its place in the plant) | 206 cite report pages (57 with a matching report line quoted, 149 page/figure only); 9 with no source of their own (the plant, the battery limit and the model's 7 notes about itself) |
 | Machine check | none possible: no structured source in the repository | 206 match their model field (this proves only that the export is faithful to the model); 2 not checked |
 
 Strata are statement type x rank (`identity|4`, `attribute|1`, `relation|2`, ...). Each stratum gets at least two
@@ -110,7 +110,7 @@ What changed since (`scripts/line_layers.py`, `scripts/statements.py`; rules in
 - each drawn line is classed by what it joins: a line to an instrument bubble is an **instrument connection**, the
   stem from a valve to the small symbol stacked on it is an **actuator stem** (`actuated_by`), the stub from a nozzle
   mark to its vessel is part of the vessel (`nozzle_of`); only the rest is pipe (`piped_to`), with its own layer
-  `non_pipe` for the others. On sheet 0: 90 pipe segments (was 123), 20 instrument connections, 2 actuator stems
+  `non_pipe` for the others. At that fix sheet 0 had 90 pipe segments (was 123), 20 instrument connections, 2 actuator stems
   (H on S0-VL022, M on S0-VL023), 2 nozzle stubs (N1, N2);
 - junctions have a kind and are worded by it: 28 pipe tees and 10 instrument taps (the PT taps at y 276 and the TE
   thermowells). A tap does not split the pipe: the segment runs past it and the tap names the segment it is on;
@@ -147,7 +147,7 @@ What changed since r2:
   (`build_twin.plant_coded`; MS... on the MSS sheet): MSIV 1402, MSV 1404, MSV 1405 and MSBV 1407 have no measured
   variable now and their kind is "valve (plant-coded tag)"; MS 4010 has neither (5 of 36 instruments on this sheet; on
   the OPEN100 extraction, 5 of 359, all on sheet 0). MSCV-XXX is a valve symbol, not an instrument, so it never had a
-  variable. Their five "moisture" statements are gone (1,078 statements, now 1,073);
+  variable. Their five "moisture" statements were withdrawn (1,078 statements became 1,073 at that fix);
 - an instrument kind is said as the tag letters' reading, with the extraction's class beside it: "PSV 1405's tag
   letters read as a valve (PSV: pressure safety valve); the extraction classed the symbol as an instrument bubble".
   Nothing is called a "final element" any more (a PSV is self-acting);
@@ -160,8 +160,24 @@ What changed since r2:
   answer key's own graph (instrument connections F1 0.835 to 0.742). The key counts that contact as a connection,
   so no rule tells this one apart yet; it stays a known limit (`data/attempts.json`).
 
+**Current population, after the later changes.** The pipe rules A191-A195 add two contacts on sheet 0: items drawn
+against each other, without a line between them. These are marked `touching: true`; their sentences say what is
+drawn and that the pipe layer treats the items as consecutive, rather than claiming a visible pipe. That takes
+the full file from 1,073 to 1,075 statements. Re-exporting the current intake bundle adds 12 safety screening
+attributes on six items (the AORV, four PSVs and MSIV 1402), for **1,087 statements**. They describe the tag-based
+rule and its reading, not a reviewed safety function or a newly extracted control relation. The rule only sees
+recognised tag letters and words; untagged valves, manual block and NC valves, and MOV/AOV tags are not caught.
+
+All recorded `sample*.json`, `.csv`, `.html` and review scores are kept as drawn. The reviews above describe those
+recorded samples and versions; they do not measure the changed population or validate the new contacts and safety
+notes. A fresh source check must sample the current file. Pipe performance and its limits are recorded in
+[EVALUATION.md §7](../../docs/EVALUATION.md#7-which-layer-each-evaluation-measures): DEXPI, SPPID and OPEN100 0-5
+were development data for the latest changes; Comos/AVEVA, OPEN100 6-11 and the agent-keyed sheets were held out
+after their baselines were seen. Pooled vendor scores mix those splits, and about two thirds of the SPPID gain is
+the A192 scorer fix, not better tracing. OPEN100 score changes also include a changed derived truth.
+
 `sheet0/sample_layers.*` was drawn with one stratum per relationship layer and 15 statements each (seed 1030), so
-each layer gets its own error rate. `sheet0/sample_layers_r2.*` does the same over today's five layers (75
+each layer gets its own error rate. `sheet0/sample_layers_r2.*` does the same over the five layers of its version (75
 statements, seed 1031): `pipe` (is X piped directly to Y, with no tee or other item between? is there a pipe tee where
 the junction is placed?), `non_pipe` (is that line an instrument line, an actuator stem or a nozzle stub, and is that
 point an instrument tap on a pipe?), `network` (is X on that drawn line network?), `network_pair` (are X and Y on the
@@ -188,6 +204,12 @@ it prints one rate per layer and no blended one. What the pipe layer gets right 
 python scripts/statements.py score reviewed_sample_60.csv --sample examples/statement-review/bayer/sample_60.json
 python scripts/statements.py apply examples/graph-export/bayer_graph.json reviewed_sample_60.csv --date 2026-11-02 --out bayer_graph_reviewed.json
 ```
+
+**Current revision limit:** statement IDs identify subject, predicate and value; they do not identify the cited
+document revision or its evidence. `apply` does not compare the rendered graph hash with today's graph. An old
+verdict can therefore be accepted after its source changed, if the statement's content stayed the same. Keep each
+review with an immutable copy of the graph and source documents, and re-render and review after source changes;
+do not carry old verdicts into a revised evidence set. Evidence-bound carry-over is an open workflow gap.
 
 ## Reproduce it
 

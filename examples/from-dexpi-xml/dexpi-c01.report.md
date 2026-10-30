@@ -60,6 +60,6 @@ Lossy steps:
 - A segment Connection that names an ID the file does not contain (a broken reference) gets BL at that end, said in from_end/to_end and listed under broken_references.
 - Units of instruments, final elements and relief devices are inferred through the piping (unit_basis).
 - Signal lines between bubbles are kept as signal_from/signal_to lists, not graph edges.
-- Items that need a unit but reach none through the piping go to 'unplaced': kept in the model, not exported by generate.py or graph_export.py.
+- Items that need a unit but reach none through the piping go to 'unplaced': kept in the model and graph export as nodes with a placement reason; not exported by generate.py.
 - Person names in the drawing metadata and the title block text are left out on purpose.
 - Values are kept as written (text); units of measure as DEXPI names (Bar, DegreeCelsius), not converted.

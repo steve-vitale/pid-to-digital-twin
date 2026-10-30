@@ -318,7 +318,7 @@ class CurrentGatewayContract(unittest.TestCase):
             self.assertNotIn(aid, self.meta['twin_review']['mapped'])
         for aid in ('S0-IN002', 'S0-IN003'):
             self.assertIn('NEEDS CLARIFICATION', instruments[aid]['ops_review']['notes'])
-            self.assertEqual(instances[aid]['typeId'], 'Instrument_FT')
+            self.assertEqual(instances[aid]['typeId'], 'Instrument_Measurement')  # templates by kind, not tag letters
             self.assertTrue(instances[aid]['parameters']['PointName']['value'].startswith('PLACEHOLDER_'))
         self.assertEqual(instances['S0-IN019']['typeId'], 'Callout_Valve')
         self.assertIsNone(self.held.member(instances['S0-IN019'], 'PV'))

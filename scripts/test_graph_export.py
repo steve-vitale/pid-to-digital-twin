@@ -42,6 +42,26 @@ def hand_built(**sections):
 
 
 class GraphExport(unittest.TestCase):
+    def test_validator_rejects_bad_ids_statuses_and_dangling_stream_refs(self):
+        graph = json.loads((EX / "bayer_graph.json").read_text(encoding="utf-8"))
+        self.assertEqual(gx.problems(graph), [])
+        def dangling(g):
+            next(e for e in g["edges"] if e["type"] == "sits_on")["to"] = "stream:DOES_NOT_EXIST"
+        for mutate, message in (
+            (lambda g: g["edges"].append(copy.deepcopy(g["edges"][0])), "edge id"),
+            (lambda g: g["edges"][0].update(status="NOT_A_STATUS"), "unknown status"),
+            (lambda g: g["nodes"][0].update(status="NOT_A_STATUS"), "unknown status"),
+            (dangling, "DOES_NOT_EXIST"),
+        ):
+            bad = copy.deepcopy(graph)
+            mutate(bad)
+            with tempfile.TemporaryDirectory() as folder:
+                path = Path(folder) / "bad.json"
+                path.write_text(json.dumps(bad), encoding="utf-8")
+                code, text = run_cli("--check", path)
+            self.assertEqual(code, 1, text)
+            self.assertIn(message, text)
+
     def test_no_text_in_a_hand_built_model_is_silently_dropped(self):
         # Round 4 review: verification caveats, a second check's evidence, an item's own citation and the model's
         # meta notes were dropped from the TE export. Every sentence-length value must reach the graph, except the

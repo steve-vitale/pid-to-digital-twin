@@ -1,7 +1,7 @@
 {
  "format": "statements-1",
  "graph": "examples/graph-export/sheet0_graph.json",
- "graph_sha256": "1891ef94332dd7e62f7d4266eae3897d48a57ed73df66340c4eba879d72cb786",
+ "graph_sha256": "d1c1b751b204c4291e2ea58f6c2782c4a0493daa3f26969607e489bb9cfc4b2f",
  "title": "Digital twin starter kit: site-drawing / supplied-extraction",
  "verdicts": {
   "source_match": [
@@ -25,35 +25,35 @@
  },
  "report_reader": null,
  "summary": {
-  "statements": 1073,
+  "statements": 1087,
   "by_type": {
-   "attribute": 151,
+   "attribute": 163,
    "identity": 188,
-   "relation": 734
+   "relation": 736
   },
   "by_rank": {
-   "2 connection": 795,
+   "2 connection": 797,
    "4 identity": 277,
-   "5 descriptive text": 1
+   "5 descriptive text": 13
   },
   "by_stratum": {
    "attribute|2": 61,
    "attribute|4": 89,
-   "attribute|5": 1,
+   "attribute|5": 13,
    "identity|4": 188,
-   "relation|2": 734
+   "relation|2": 736
   },
   "evidence": {
-   "drawing_crop": 609,
-   "endpoints_on_drawing": 459,
+   "drawing_crop": 621,
+   "endpoints_on_drawing": 461,
    "none": 5
   },
   "source_kind": {
-   "drawing": 609,
-   "model": 464
+   "drawing": 621,
+   "model": 466
   },
   "machine_check": {
-   "not checked": 1073
+   "not checked": 1087
   }
  },
  "skipped": {
@@ -2847,6 +2847,112 @@
    }
   },
   {
+   "id": "st-4d70f8c78661",
+   "subject": "S0-IN014",
+   "predicate": "safety.basis",
+   "object": "operated-valve letters AORV end in RV (operated relief valve)",
+   "text": "The tag-derived screening basis for AORV XXX is operated-valve letters AORV end in RV (operated relief valve); this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "AORV XXX",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     410.9,
+     162.8,
+     426.6,
+     186.5
+    ],
+    "read_as": "AORV XXX",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [411, 163, 427, 186] (0-1000 scale), read as “AORV XXX”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN014",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     410.9,
+     162.8,
+     426.6,
+     186.5
+    ],
+    "image": "evidence/s0_ad608abe40.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-f13a3b284f32",
+   "subject": "S0-IN014",
+   "predicate": "safety.function",
+   "object": "relief device",
+   "text": "The tag-derived screen flags AORV XXX for review as a relief device; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "AORV XXX",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     410.9,
+     162.8,
+     426.6,
+     186.5
+    ],
+    "read_as": "AORV XXX",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [411, 163, 427, 186] (0-1000 scale), read as “AORV XXX”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN014",
+     "safety.function"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     410.9,
+     162.8,
+     426.6,
+     186.5
+    ],
+    "image": "evidence/s0_ad608abe40.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
    "id": "st-b0a1fd6736ef",
    "subject": "S0-IN014",
    "predicate": "unit",
@@ -2985,6 +3091,112 @@
      "claim",
      "S0-IN015",
      "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     166.0
+    ],
+    "image": "evidence/s0_f61b5a21d8.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-084508043332",
+   "subject": "S0-IN015",
+   "predicate": "safety.basis",
+   "object": "tag letters PSV",
+   "text": "The tag-derived screening basis for PSV 1404 is tag letters PSV; this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1404",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     166.0
+    ],
+    "read_as": "PSV 1404",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [442, 142, 457, 166] (0-1000 scale), read as “PSV 1404”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN015",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     166.0
+    ],
+    "image": "evidence/s0_f61b5a21d8.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-ff5e3ba7d56d",
+   "subject": "S0-IN015",
+   "predicate": "safety.function",
+   "object": "relief device",
+   "text": "The tag-derived screen flags PSV 1404 for review as a relief device; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1404",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     166.0
+    ],
+    "read_as": "PSV 1404",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [442, 142, 457, 166] (0-1000 scale), read as “PSV 1404”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN015",
+     "safety.function"
     ]
    ],
    "evidence": {
@@ -3216,6 +3428,112 @@
    }
   },
   {
+   "id": "st-d02362531f12",
+   "subject": "S0-IN016",
+   "predicate": "safety.basis",
+   "object": "tag letters PSV",
+   "text": "The tag-derived screening basis for PSV 1405 is tag letters PSV; this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "read_as": "PSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [463, 142, 479, 166] (0-1000 scale), read as “PSV 1405”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN016",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "image": "evidence/s0_4e61673a80.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-bcf22c3f349f",
+   "subject": "S0-IN016",
+   "predicate": "safety.function",
+   "object": "relief device",
+   "text": "The tag-derived screen flags PSV 1405 for review as a relief device; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1405",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "read_as": "PSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [463, 142, 479, 166] (0-1000 scale), read as “PSV 1405”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN016",
+     "safety.function"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "image": "evidence/s0_4e61673a80.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
    "id": "st-d3d834905cd3",
    "subject": "S0-IN016",
    "predicate": "unit",
@@ -3427,6 +3745,112 @@
    }
   },
   {
+   "id": "st-70b850298e6f",
+   "subject": "S0-IN017",
+   "predicate": "safety.basis",
+   "object": "tag letters PSV",
+   "text": "The tag-derived screening basis for PSV 1406 is tag letters PSV; this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1406",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "read_as": "PSV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [484, 142, 501, 166] (0-1000 scale), read as “PSV 1406”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN017",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "image": "evidence/s0_14fa8bc4b3.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-e63bbc802f9a",
+   "subject": "S0-IN017",
+   "predicate": "safety.function",
+   "object": "relief device",
+   "text": "The tag-derived screen flags PSV 1406 for review as a relief device; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1406",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "read_as": "PSV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [484, 142, 501, 166] (0-1000 scale), read as “PSV 1406”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN017",
+     "safety.function"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "image": "evidence/s0_14fa8bc4b3.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
    "id": "st-9a4381058322",
    "subject": "S0-IN017",
    "predicate": "unit",
@@ -3618,6 +4042,112 @@
      "claim",
      "S0-IN018",
      "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "image": "evidence/s0_93781321e8.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-bda7aebe7c0f",
+   "subject": "S0-IN018",
+   "predicate": "safety.basis",
+   "object": "tag letters PSV",
+   "text": "The tag-derived screening basis for PSV 1407 is tag letters PSV; this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "read_as": "PSV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [506, 142, 522, 166] (0-1000 scale), read as “PSV 1407”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN018",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "image": "evidence/s0_93781321e8.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-79fe0b32ee50",
+   "subject": "S0-IN018",
+   "predicate": "safety.function",
+   "object": "relief device",
+   "text": "The tag-derived screen flags PSV 1407 for review as a relief device; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "PSV 1407",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "read_as": "PSV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [506, 142, 522, 166] (0-1000 scale), read as “PSV 1407”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN018",
+     "safety.function"
     ]
    ],
    "evidence": {
@@ -3934,6 +4464,112 @@
      "claim",
      "S0-IN020",
      "instrument_kind"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     475.3,
+     239.5,
+     491.5,
+     262.8
+    ],
+    "image": "evidence/s0_2ea64dea3c.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-8dbcae2201c3",
+   "subject": "S0-IN020",
+   "predicate": "safety.basis",
+   "object": "plant tag MSIV: IV after system code MSS",
+   "text": "The tag-derived screening basis for MSIV 1402 is plant tag MSIV: IV after system code MSS; this requires review.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "MSIV 1402",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     475.3,
+     239.5,
+     491.5,
+     262.8
+    ],
+    "read_as": "MSIV 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [475, 240, 492, 263] (0-1000 scale), read as “MSIV 1402”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN020",
+     "safety.basis"
+    ]
+   ],
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "0",
+    "box_0_1000": [
+     475.3,
+     239.5,
+     491.5,
+     262.8
+    ],
+    "image": "evidence/s0_2ea64dea3c.jpg",
+    "note": null
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-22b39c91f3d6",
+   "subject": "S0-IN020",
+   "predicate": "safety.function",
+   "object": "isolation valve",
+   "text": "The tag-derived screen flags MSIV 1402 for review as an isolation valve; the function is unverified.",
+   "type": "attribute",
+   "rank": 5,
+   "rank_label": "descriptive text",
+   "stratum": "attribute|5",
+   "layer": "item",
+   "group": "MSIV 1402",
+   "system": "SYS-0",
+   "subject_kind": "instrument",
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     475.3,
+     239.5,
+     491.5,
+     262.8
+    ],
+    "read_as": "MSIV 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 0, box [475, 240, 492, 263] (0-1000 scale), read as “MSIV 1402”",
+   "targets": [
+    [
+     "claim",
+     "S0-IN020",
+     "safety.function"
     ]
    ],
    "evidence": {
@@ -45267,6 +45903,44 @@
    }
   },
   {
+   "id": "st-63a144f8e055",
+   "subject": "S0-TK001",
+   "predicate": "edge:piped_to",
+   "object": "S0-GN001",
+   "text": "MSS-XSS-140 (classed as a tank by the extraction) and untagged general S0-GN001 are drawn against each other, with no line between them; the pipe layer treats them as consecutive process items.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "layer": "pipe",
+   "group": "MSS-XSS-140",
+   "system": "SYS-0",
+   "subject_kind": "equipment",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS002"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_09beb23492.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
    "id": "st-9a05eedce372",
    "subject": "S0-JN-163-538",
    "predicate": "edge:piped_to",
@@ -45290,7 +45964,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS002"
+     "S0-PS003"
     ]
    ],
    "evidence": {
@@ -45328,7 +46002,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS003"
+     "S0-PS004"
     ]
    ],
    "evidence": {
@@ -45366,7 +46040,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS004"
+     "S0-PS005"
     ]
    ],
    "evidence": {
@@ -45404,7 +46078,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS005"
+     "S0-PS006"
     ]
    ],
    "evidence": {
@@ -45442,7 +46116,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS006"
+     "S0-PS007"
     ]
    ],
    "evidence": {
@@ -45480,7 +46154,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS007"
+     "S0-PS008"
     ]
    ],
    "evidence": {
@@ -45518,7 +46192,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS008"
+     "S0-PS009"
     ]
    ],
    "evidence": {
@@ -45556,7 +46230,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS009"
+     "S0-PS010"
     ]
    ],
    "evidence": {
@@ -45594,7 +46268,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS010"
+     "S0-PS011"
     ]
    ],
    "evidence": {
@@ -45632,7 +46306,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS011"
+     "S0-PS012"
     ]
    ],
    "evidence": {
@@ -45670,7 +46344,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS012"
+     "S0-PS013"
     ]
    ],
    "evidence": {
@@ -45708,7 +46382,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS013"
+     "S0-PS014"
     ]
    ],
    "evidence": {
@@ -45746,7 +46420,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS014"
+     "S0-PS015"
     ]
    ],
    "evidence": {
@@ -45784,7 +46458,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS015"
+     "S0-PS016"
     ]
    ],
    "evidence": {
@@ -45822,7 +46496,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS016"
+     "S0-PS017"
     ]
    ],
    "evidence": {
@@ -45860,7 +46534,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS017"
+     "S0-PS018"
     ]
    ],
    "evidence": {
@@ -45898,7 +46572,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS018"
+     "S0-PS019"
     ]
    ],
    "evidence": {
@@ -45936,7 +46610,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS019"
+     "S0-PS020"
     ]
    ],
    "evidence": {
@@ -45974,7 +46648,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS020"
+     "S0-PS021"
     ]
    ],
    "evidence": {
@@ -45982,6 +46656,44 @@
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
     "sheet": "0",
     "image": "evidence/s0_985af4f801.jpg"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-95f5964d86fa",
+   "subject": "S0-TK002",
+   "predicate": "edge:piped_to",
+   "object": "S0-GN016",
+   "text": "RCS-SG-100 (classed as a tank by the extraction) and untagged general S0-GN016 are drawn against each other, with no line between them; the pipe layer treats them as consecutive process items.",
+   "type": "relation",
+   "rank": 2,
+   "rank_label": "connection",
+   "stratum": "relation|2",
+   "layer": "pipe",
+   "group": "RCS-SG-100",
+   "system": "SYS-0",
+   "subject_kind": "equipment",
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: OPEN100-0, revision public, page 1)",
+   "targets": [
+    [
+     "edge",
+     "S0-PS022"
+    ]
+   ],
+   "evidence": {
+    "kind": "endpoints_on_drawing",
+    "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
+    "sheet": "0",
+    "image": "evidence/s0_bad74cdfb9.jpg"
    },
    "machine_check": {
     "result": "not checked",
@@ -46012,7 +46724,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS021"
+     "S0-PS023"
     ]
    ],
    "evidence": {
@@ -46050,7 +46762,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS022"
+     "S0-PS024"
     ]
    ],
    "evidence": {
@@ -46088,7 +46800,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS023"
+     "S0-PS025"
     ]
    ],
    "evidence": {
@@ -46126,7 +46838,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS024"
+     "S0-PS026"
     ]
    ],
    "evidence": {
@@ -46164,7 +46876,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS025"
+     "S0-PS027"
     ]
    ],
    "evidence": {
@@ -46202,7 +46914,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS026"
+     "S0-PS028"
     ]
    ],
    "evidence": {
@@ -46240,7 +46952,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS027"
+     "S0-PS029"
     ]
    ],
    "evidence": {
@@ -46278,7 +46990,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS028"
+     "S0-PS030"
     ]
    ],
    "evidence": {
@@ -46316,7 +47028,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS029"
+     "S0-PS031"
     ]
    ],
    "evidence": {
@@ -46354,7 +47066,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS030"
+     "S0-PS032"
     ]
    ],
    "evidence": {
@@ -46392,7 +47104,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS031"
+     "S0-PS033"
     ]
    ],
    "evidence": {
@@ -46430,7 +47142,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS032"
+     "S0-PS034"
     ]
    ],
    "evidence": {
@@ -46468,7 +47180,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS033"
+     "S0-PS035"
     ]
    ],
    "evidence": {
@@ -46506,7 +47218,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS034"
+     "S0-PS036"
     ]
    ],
    "evidence": {
@@ -46544,7 +47256,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS035"
+     "S0-PS037"
     ]
    ],
    "evidence": {
@@ -46582,7 +47294,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS036"
+     "S0-PS038"
     ]
    ],
    "evidence": {
@@ -46620,7 +47332,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS037"
+     "S0-PS039"
     ]
    ],
    "evidence": {
@@ -46658,7 +47370,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS038"
+     "S0-PS040"
     ]
    ],
    "evidence": {
@@ -46696,7 +47408,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS039"
+     "S0-PS041"
     ]
    ],
    "evidence": {
@@ -46734,7 +47446,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS040"
+     "S0-PS042"
     ]
    ],
    "evidence": {
@@ -46772,7 +47484,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS041"
+     "S0-PS043"
     ]
    ],
    "evidence": {
@@ -46810,7 +47522,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS042"
+     "S0-PS044"
     ]
    ],
    "evidence": {
@@ -46848,7 +47560,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS043"
+     "S0-PS045"
     ]
    ],
    "evidence": {
@@ -46886,7 +47598,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS044"
+     "S0-PS046"
     ]
    ],
    "evidence": {
@@ -46924,7 +47636,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS045"
+     "S0-PS047"
     ]
    ],
    "evidence": {
@@ -46962,7 +47674,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS046"
+     "S0-PS048"
     ]
    ],
    "evidence": {
@@ -47000,7 +47712,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS047"
+     "S0-PS049"
     ]
    ],
    "evidence": {
@@ -47038,7 +47750,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS048"
+     "S0-PS050"
     ]
    ],
    "evidence": {
@@ -47076,7 +47788,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS049"
+     "S0-PS051"
     ]
    ],
    "evidence": {
@@ -47114,7 +47826,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS050"
+     "S0-PS052"
     ]
    ],
    "evidence": {
@@ -47152,7 +47864,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS051"
+     "S0-PS053"
     ]
    ],
    "evidence": {
@@ -47190,7 +47902,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS052"
+     "S0-PS054"
     ]
    ],
    "evidence": {
@@ -47228,7 +47940,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS053"
+     "S0-PS055"
     ]
    ],
    "evidence": {
@@ -47266,7 +47978,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS054"
+     "S0-PS056"
     ]
    ],
    "evidence": {
@@ -47304,7 +48016,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS055"
+     "S0-PS057"
     ]
    ],
    "evidence": {
@@ -47342,7 +48054,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS056"
+     "S0-PS058"
     ]
    ],
    "evidence": {
@@ -47380,7 +48092,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS057"
+     "S0-PS059"
     ]
    ],
    "evidence": {
@@ -47418,7 +48130,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS058"
+     "S0-PS060"
     ]
    ],
    "evidence": {
@@ -47456,7 +48168,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS059"
+     "S0-PS061"
     ]
    ],
    "evidence": {
@@ -47494,7 +48206,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS060"
+     "S0-PS062"
     ]
    ],
    "evidence": {
@@ -47532,7 +48244,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS061"
+     "S0-PS063"
     ]
    ],
    "evidence": {
@@ -47570,7 +48282,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS062"
+     "S0-PS064"
     ]
    ],
    "evidence": {
@@ -47608,7 +48320,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS063"
+     "S0-PS065"
     ]
    ],
    "evidence": {
@@ -47646,7 +48358,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS064"
+     "S0-PS066"
     ]
    ],
    "evidence": {
@@ -47684,7 +48396,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS065"
+     "S0-PS067"
     ]
    ],
    "evidence": {
@@ -47722,7 +48434,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS066"
+     "S0-PS068"
     ]
    ],
    "evidence": {
@@ -47760,7 +48472,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS067"
+     "S0-PS069"
     ]
    ],
    "evidence": {
@@ -47798,7 +48510,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS068"
+     "S0-PS070"
     ]
    ],
    "evidence": {
@@ -47836,7 +48548,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS069"
+     "S0-PS071"
     ]
    ],
    "evidence": {
@@ -47874,7 +48586,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS070"
+     "S0-PS072"
     ]
    ],
    "evidence": {
@@ -47912,7 +48624,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS071"
+     "S0-PS073"
     ]
    ],
    "evidence": {
@@ -47950,7 +48662,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS072"
+     "S0-PS074"
     ]
    ],
    "evidence": {
@@ -47988,7 +48700,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS073"
+     "S0-PS075"
     ]
    ],
    "evidence": {
@@ -48026,7 +48738,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS074"
+     "S0-PS076"
     ]
    ],
    "evidence": {
@@ -48064,7 +48776,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS075"
+     "S0-PS077"
     ]
    ],
    "evidence": {
@@ -48102,7 +48814,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS076"
+     "S0-PS078"
     ]
    ],
    "evidence": {
@@ -48140,7 +48852,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS077"
+     "S0-PS079"
     ]
    ],
    "evidence": {
@@ -48178,7 +48890,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS078"
+     "S0-PS080"
     ]
    ],
    "evidence": {
@@ -48216,7 +48928,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS079"
+     "S0-PS081"
     ]
    ],
    "evidence": {
@@ -48254,7 +48966,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS080"
+     "S0-PS082"
     ]
    ],
    "evidence": {
@@ -48292,7 +49004,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS081"
+     "S0-PS083"
     ]
    ],
    "evidence": {
@@ -48330,7 +49042,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS082"
+     "S0-PS084"
     ]
    ],
    "evidence": {
@@ -48368,7 +49080,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS083"
+     "S0-PS085"
     ]
    ],
    "evidence": {
@@ -48406,7 +49118,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS084"
+     "S0-PS086"
     ]
    ],
    "evidence": {
@@ -48444,7 +49156,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS085"
+     "S0-PS087"
     ]
    ],
    "evidence": {
@@ -48482,7 +49194,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS086"
+     "S0-PS088"
     ]
    ],
    "evidence": {
@@ -48520,7 +49232,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS087"
+     "S0-PS089"
     ]
    ],
    "evidence": {
@@ -48558,7 +49270,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS088"
+     "S0-PS090"
     ]
    ],
    "evidence": {
@@ -48596,7 +49308,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS089"
+     "S0-PS091"
     ]
    ],
    "evidence": {
@@ -48634,7 +49346,7 @@
    "targets": [
     [
      "edge",
-     "S0-PS090"
+     "S0-PS092"
     ]
    ],
    "evidence": {

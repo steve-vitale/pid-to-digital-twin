@@ -20,6 +20,11 @@ I/O list (spreadsheet)     ──► map_points.py   ──►      │         
 - Tennessee Eastman: `out/ops_review_sheet.csv`;
 - an extracted twin: `review_queue.csv`.
 
+In an extracted twin, an item whose tag reads as a relief device, shutdown valve, trip switch or isolation valve
+is never green: its `why` starts "safety-relevant (...): always checked", whatever the extraction checks say. Green
+still means "the extraction agrees with itself", not "safe to skip"; untagged and manual block valves are not
+caught by that floor ([TWIN_OUTPUTS.md](TWIN_OUTPUTS.md#the-safety-floor)).
+
 CSV exports prefix formula-like text (`=`, `+`, `-`, `@`, including after leading
 whitespace), control-containing text and leading apostrophes with one apostrophe.
 This is intentional spreadsheet text encoding, not a change to the engineering
@@ -50,8 +55,10 @@ python scripts/generate.py                                  # or: generate.py <t
 
 **What happens:**
 - **Every row is checked against the model before anything changes.** An unknown item, an unknown field, a
-  `correct` with no value, or an unreadable decision is refused and listed. The run exits non-zero, so a bad sheet
-  can't half-apply.
+  `correct` with no value, or an unreadable decision is refused and listed. Rows are processed independently:
+  valid rows can be applied even when other rows are refused, and the run then exits non-zero. Preview with
+  `--dry-run` first. After any failure, inspect the change record and model diff before retrying or regenerating;
+  a non-zero exit does not mean the model was left unchanged.
 - **Decisions are written onto each item** as `ops_review`: status, reviewer, date, notes, screen and alarm choices.
   Each correction keeps the old value in the item's history. The model file is updated in place, so the git diff is
   exactly the review. A dated change record goes to `out/review/`.
@@ -61,6 +68,9 @@ python scripts/generate.py                                  # or: generate.py <t
   - rejected items leave the Ignition tags, the PI AF sheet and the SVGs (items under rejected equipment move to
     `_Unassigned`);
   - each Ignition instance's `ReviewStatus` tag carries the decision, and the verifier checks it matches (V2);
+  - in an extracted twin, each Ignition instance's `documentation` and each PI element/attribute description end
+    with `review: <status> | risk tier: <tier>`, so the decision and the remaining uncertainty show where the
+    tag is used;
   - "don't show" items get no screen label.
 
 An existing OPC `data_point` or reviewed PI `pi_point` blocks a scoped valve-callout

@@ -16,6 +16,7 @@
    "tools": [
     "scripts/run_extraction.py",
     "scripts/trace_connections.py",
+    "scripts/scan_cleanup.py",
     "scripts/import_site_drawing.py",
     "scripts/site_extraction_workflow.py"
    ],
@@ -26,13 +27,14 @@
    ],
    "tests": [
     "scripts/test_own_drawing_example.py",
+    "scripts/test_scan_cleanup.py",
     "scripts/test_site_drawing_intake.py"
    ],
    "job": "Get a starting asset model out of a P&ID without retyping it",
    "you_need": "One P&ID as a PNG; a model subscription (or the committed example)",
    "time": "88 s of commands on one new sheet (sheet 8), measured once; sheet 0's recorded run took 75 s plus 1 s; review time not measured",
-   "you_get": "Every symbol, tag and link as a draft model, a review sheet ranked for checking, Ignition tags and PI staging",
-   "why": "Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking."
+   "you_get": "Extracted symbols, tags and links as a draft model, a review sheet ranked for checking, Ignition tags and PI staging",
+   "why": "Retyping drawings into asset lists takes manual effort in historian, HMI and digital twin projects. A draft turns some of that typing into checking; the time saved has not been measured."
   },
   {
    "id": "client-report",
@@ -74,7 +76,7 @@
    "you_need": "One of the three public DEXPI example sheets, prepared once by adapt_dexpi.py (downloads them; needs PyMuPDF). For your own DEXPI XML, use the DEXPI reader instead",
    "time": "Seconds once the sheets are prepared",
    "you_get": "The same bundle with no model reading: tags are the drawn label text, and links are the drawn connections, undirected, with each pipe tee expanded into pairwise links",
-   "why": "If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether."
+   "why": "A CAD export already represents symbols and connections as data. Reading supported DEXPI content directly avoids a visual model-reading step; conversion limits and omissions still need review."
   },
   {
    "id": "dexpi-xml-to-model",
@@ -93,7 +95,7 @@
     "scripts/test_dexpi_reader.py"
    ],
    "job": "Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits",
-   "why": "A plant's own CAD export already holds sizes, specs and design limits. Reading it directly keeps all of them, each citing the XML element it came from, with no reading errors and no retyping.",
+   "why": "A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations, and reports what it folds, cannot place or drops.",
    "you_need": "A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle",
    "time": "Seconds per sheet",
    "you_get": "A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why"
@@ -172,7 +174,7 @@
    "you_need": "A reviewed model",
    "time": "Seconds to generate; import is a manual step in a lab gateway",
    "you_get": "Ignition tag import with UDTs, PI Builder staging sheets; values are placeholders until mapped",
-   "why": "Building an Ignition tag structure and a PI asset tree by hand is days of clicking. Generating both from one model keeps them consistent with the drawing and with each other."
+   "why": "Generating the Ignition tag structure and PI asset staging from one model keeps them consistent with each other and avoids repeated manual entry. Native import still needs a lab check."
   },
   {
    "id": "loop-audit",
@@ -269,7 +271,7 @@
    "you_need": "Historian exports as CSV: one of normal running, optionally one of an upset. Standard library only; the replay server also needs asyncua",
    "time": "Seconds",
    "you_get": "Bands per tag with false-alarm rates, the first tag to leave its band in an upset, and an OPC UA server replaying the CSV",
-   "why": "Normal bands catch a value drifting before it reaches an alarm, and replaying recorded data lets you test new screens without touching the live system."
+   "why": "History can highlight unusual changes, and replaying recorded data lets you test new screens without touching the live system. Detection before an operational alarm is not guaranteed."
   },
   {
    "id": "review-and-mapping",
@@ -307,7 +309,7 @@
   {
    "id": "generalization-matrix",
    "category": "check",
-   "title": "Every tool run against every public input it applies to",
+   "title": "Selected workflows checked across registered public inputs",
    "tools": [
     "scripts/corpus_matrix.py"
    ],
@@ -321,7 +323,7 @@
     "scripts/test_corpus_matrix.py"
    ],
    "job": "Find out whether a tool will work on drawings or data like mine, not just the ones it was built on",
-   "why": "A tool that only ever saw one set of drawings can fail quietly on the next. Running each tool on every public input it applies to shows where it holds and where it breaks, red cells included, before you bet your own data on it.",
+   "why": "A workflow that only saw one set of drawings can fail on the next. Eight selected workflows run across registered applicable inputs, showing where they hold and break, red cells included; other features have their own tests and examples.",
    "you_need": "Nothing to read the page; the public datasets (fetched by script) to re-run it",
    "time": "Reading: minutes. Re-running everything: about 25 minutes of cell time, plus downloading the public data once",
    "you_get": "A pass/fail grid of tools against inputs, the reason for every failure, and the public datasets that would close each gap"
@@ -340,7 +342,11 @@
     "examples/opportunity-screen/bayer/screen.md",
     "examples/opportunity-screen/bayer/questions.json",
     "examples/opportunity-screen/open100/screen.md",
-    "examples/opportunity-screen/open100/questions.json"
+    "examples/opportunity-screen/open100/questions.json",
+    "examples/opportunity-screen/food/screen.md",
+    "examples/opportunity-screen/food/questions.json",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json"
    ],
    "tests": [
     "scripts/test_question_engine.py"

@@ -1,6 +1,11 @@
 {
  "method_name": "drift",
  "method": "gap = 10-sample average minus the 600-sample baseline one sample earlier (both exponentially weighted, starting as running averages of the export scored); band on the gap = its fit mean +/- max(K x its fit sd, 1% of the tag's fit mean), both scaled by the baseline's share of the fit mean, kept between 0.5 and 1; slow drift moves the baseline and is not flagged, a step or fast change is",
+ "method_choice": {
+  "requested": "auto",
+  "chosen": "drift",
+  "why": "the first column is not a timestamp, so there is no time of day to profile; drift"
+ },
  "normal_csv": "te_normal_d00.csv",
  "time_column": "minutes",
  "time_kind": "number",

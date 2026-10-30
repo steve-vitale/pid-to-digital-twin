@@ -1,0 +1,50 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "codex",
+ "drawing": "dexpi-c02",
+ "label": "r5-dx-rep5-tiles",
+ "model": "gpt-6.1-sol",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "ca9d9901e4fd4ad5b7e72c095a14f9b438f643203539fde1ee4703134f3acbcf",
+ "ran_at": "2026-10-13T11:34:05+00:00",
+ "seconds": 37.5,
+ "cost_usd": null,
+ "cost_usd_notional": null,
+ "error": null,
+ "parse_error": null,
+ "tiling": {"grid":"2x2","overlap":0.15,"preface_sha256":"642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3","tile_seconds_sum":85.1,"tiles_failed":0},
+ "prediction": {
+  "symbols": [
+   {"id":"s1","class":"tank","bbox":{"x_min":440.6,"y_min":194.6,"x_max":497.4,"y_max":762.7},"tag":"K 2750\nKX 2750","confidence":0.99},
+   {"id":"s2","class":"instrumentation","bbox":{"x_min":258.4,"y_min":170.2,"x_max":284.9,"y_max":189.7},"tag":"PIS+Z+A\n275003","confidence":0.98},
+   {"id":"s3","class":"instrumentation","bbox":{"x_min":359.5,"y_min":170.2,"x_max":386.0,"y_max":189.7},"tag":"PI(Z)\n275003A","confidence":0.99},
+   {"id":"s4","class":"instrumentation","bbox":{"x_min":404.4,"y_min":170.2,"x_max":430.9,"y_max":189.7},"tag":"PI(Z)\n275003B","confidence":0.99},
+   {"id":"s5","class":"valve","bbox":{"x_min":370.9,"y_min":201.6,"x_max":374.7,"y_max":212.4},"tag":"25\nAS9","confidence":0.96},
+   {"id":"s6","class":"valve","bbox":{"x_min":415.7,"y_min":201.6,"x_max":419.5,"y_max":212.4},"tag":"25\nAS9","confidence":0.96},
+   {"id":"s7","class":"general","bbox":{"x_min":370.9,"y_min":222.1,"x_max":374.7,"y_max":225.9},"tag":"80/25","confidence":0.8},
+   {"id":"s8","class":"general","bbox":{"x_min":415.7,"y_min":222.1,"x_max":419.5,"y_max":225.9},"tag":"80/25","confidence":0.8},
+   {"id":"s9","class":"general","bbox":{"x_min":467.1,"y_min":164.8,"x_max":470.9,"y_max":176.2},"tag":"200/150","confidence":0.94},
+   {"id":"s10","class":"general","bbox":{"x_min":466.9,"y_min":187.5,"x_max":471.3,"y_max":189.7},"tag":null,"confidence":0.76},
+   {"id":"s11","class":"general","bbox":{"x_min":558.3,"y_min":140.0,"x_max":572.4,"y_max":145.9},"tag":null,"confidence":0.65},
+   {"id":"s12","class":"inlet/outlet","bbox":{"x_min":674.5,"y_min":132.9,"x_max":688.6,"y_max":152.4},"tag":"2765\nW 2765\n2750.001","confidence":0.99},
+   {"id":"s13","class":"general","bbox":{"x_min":500.5,"y_min":249.7,"x_max":502.1,"y_max":256.2},"tag":null,"confidence":0.65},
+   {"id":"s14","class":"valve","bbox":{"x_min":443.3,"y_min":785.4,"x_max":449.8,"y_max":790.9},"tag":"H672B1V","confidence":0.96}
+  ],
+  "connections": [
+   {"from":"s1","to":"s10"},
+   {"from":"s1","to":"s13"},
+   {"from":"s1","to":"s14"},
+   {"from":"s1","to":"s7"},
+   {"from":"s1","to":"s8"},
+   {"from":"s1","to":"s9"},
+   {"from":"s11","to":"s12"},
+   {"from":"s3","to":"s5"},
+   {"from":"s4","to":"s6"},
+   {"from":"s5","to":"s7"},
+   {"from":"s6","to":"s8"},
+   {"from":"s9","to":"s10"},
+   {"from":"s9","to":"s11"}
+  ]
+ }
+}

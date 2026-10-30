@@ -38,8 +38,8 @@ Two packages are committed:
 |---|---|---|
 | `plant_model.json` | The asset model. Site → system (one per sheet) → equipment → line items → instruments, plus streams, off-page connectors and pairs, and per-item provenance (sheet, box, source run, model, confidence, status). It is a superset of `data/te_process_model.json`: `meta`, `units`, `streams`, `instruments` and `final_elements` keep their meaning, and `meta.model_kind = "extracted_twin"` tells the generator which path to take. | Your asset register, after review |
 | `review_queue.csv` | One row per item (symbols and connections), riskiest first. Columns `tier` (red / amber / green), `risk_score` and `why` come from the risk rating (see "Risk tiers" below). Same plain-language and `OPS_` columns as `out/ops_review_sheet.csv`, plus `rank`, `why_check_this` (the converter's own flags), `sheet`, `symbol`, location, `tag_status` and `how_attached`. | A spreadsheet, for the reviewer |
-| `ignition/tags.json` | Ignition 8 tag JSON, same shape as `out/ignition/te_tags.json`. UDT types per equipment class (`Equipment_Tank`, `Equipment_Pump`), per instrument type (`Instrument_PT`, `Instrument_TCV`, …) and per line-item class. Instances are foldered Site/System/Equipment, with an `Unassigned` folder per system. See "Ignition tag paths and UDTs" below. | Ignition Designer → Tag Browser → Import Tags (JSON) |
-| `pi/pi_builder_af.csv` | PI Builder sheet (schema v2, same columns as `out/pi/pi_builder_af.csv`). Elements are Site / System / Equipment (plus `Unassigned`), with one PI Point attribute per instrument. Placeholder references are left unselected, so they are not published. **Not import-tested** | PI Builder (Excel add-in) → Publish, in the order in `pi/IMPORT_STEPS.txt` |
+| `ignition/tags.json` | Ignition 8 tag JSON, same shape as `out/ignition/te_tags.json`. UDT types per equipment class (`Equipment_Tank`, `Equipment_Pump`), per instrument kind (`Instrument_Measurement`, `Instrument_ControlValve`, `Instrument_Relief`, …) and per line-item class. Instances are foldered Site/System/Equipment, with an `Unassigned` folder per system; each instance's `documentation` ends with its review status and risk tier. See "Ignition tag paths and UDTs" below. | Ignition Designer → Tag Browser → Import Tags (JSON) |
+| `pi/pi_builder_af.csv` | PI Builder sheet (schema v2, same columns as `out/pi/pi_builder_af.csv`). Elements are Site / System / Equipment (plus `Unassigned`), with one PI Point attribute per instrument. Each element and attribute description ends with its review status and risk tier. Placeholder references are left unselected, so they are not published. **Not import-tested** | PI Builder (Excel add-in) → Publish, in the order in `pi/IMPORT_STEPS.txt` |
 | `pi/custom_uoms.csv`, `pi/attribute_descriptions.csv`, `pi/IMPORT_STEPS.txt`, `pi/reconciliation.json` | Unit definitions the site must create or map; attribute descriptions (kept out of the sheet); the publish order; the reconciliation record. See [PI_MAPPING.md](PI_MAPPING.md) | Read before publishing |
 | `svg/sheet_<n>.svg` | Each symbol drawn at its extracted box, each extracted connection as a straight line. Every symbol group carries `data-asset`, `data-tag`, `data-class`, `data-confidence`, `data-status` (and `data-parent` / `data-pair`). Low confidence shows red and dashed; placeholder tags show orange. | Ignition Perspective (Drawing / embedded SVG), bound by `data-asset` |
 
@@ -54,17 +54,35 @@ A UDT (user-defined type) is Ignition's reusable tag template. `generate.py` (`t
 - **Instance names** are the item's tag. An item with no tag read keeps its converter id, such as `S0-VL001` (sheet
   0, valve 1), until a reviewer supplies the tag through the review sheet (`OPS_correct_value` = `tag=...`, applied
   with `apply_review.py`) and the files are regenerated. The id is a key for this repository, not a plant tag.
-- **UDT types** are generated per group, not written as reusable templates: one per equipment class
-  (`Equipment_Tank`), one per instrument tag-letter group (`Instrument_PT`, `Instrument_FIT`, `Instrument_LIT`) and one
-  per line-item class. The 12-sheet twin has 37 types, because every letter group a drawing uses gets its own,
-  including plant-coded ones such as `Instrument_MSIV`. All instrument types have the same members (`PV`,
-  `ReviewStatus`) and parameters. To collapse them into your own templates by hand: pick or create one type (say an
-  analog-input UDT), change the `typeId` of the instances that should use it in `tags.json` (or in the Tag Browser
-  after import), then delete the unused types. Regenerating writes the generated types again, so do this on a copy
-  you keep.
+- **UDT types** are reusable templates: one per equipment class (`Equipment_Tank`), one per line-item class
+  (`LineItem_Valve`, `LineItem_General`) and one per instrument kind, whatever the drawing's tag letters:
+  `Instrument_Measurement` (transmitters, elements, indicators: ISA letters not ending in V),
+  `Instrument_ControlValve` (ISA letters ending in V: FCV, LCV, PCV), `Instrument_OperatedValve` (MOV, AOV, SOV),
+  `Instrument_Valve` (a plant-coded valve tag such as MSV or MSBV on a main steam sheet), `Instrument_Relief` (relief
+  devices found by the safety rule below: PSV, PRV, RV, PSE, RD, AORV) and `Instrument_Unknown` (no letters read).
+  The kind is `instrument_kind` in `plant_model.json`, set by `build_twin.py`; `generate.py` (`instrument_template`)
+  maps it. A reviewed valve callout keeps `Callout_Valve`. The 12-sheet twin has 12 types (it had 37 when
+  types followed tag letters, `Instrument_MSBV` and `Instrument_AORV` among them). All instrument types have the
+  same members (`PV`, `ReviewStatus`) and parameters. Their `PV` is a generic read-only OPC `Float8`, including on
+  valve and relief templates; the type name does not establish the source signal's type or valve state semantics.
+  Adapting an instance to a site's analog-input or valve UDT requires a reviewed mapping of parameters, member
+  paths and meanings, units, data types and any scaling or state encoding, followed by an import and read-back in
+  a lab gateway. Changing `typeId` alone does not establish compatibility; an engineer must supply and test that
+  adapter. This applies to extracted twins only; the Tennessee Eastman and Bayer exports keep their hand-built types.
+- **Engineering units on an instrument instance.** A supplied, reviewed `uom` in `plant_model.json` is copied to
+  that instance's `PV.engUnit`. This propagates a label; it does not infer a unit from the drawing, verify it
+  against the source point, convert values or configure scaling. A missing `uom` stays unspecified. The optional
+  `units` column in `map_points.py` does not populate this field; the site engineer must establish the unit and
+  source compatibility before lab acceptance.
+- **Review status and risk in the tags.** Each instance's `documentation` ends with
+  `review: <UNVERIFIED|CONFIRMED|CORRECTED|REJECTED> | risk tier: <red|amber|green|not rated>`, plus
+  `(safety floor)` when the floor lifted it from green and `safety-relevant: <function>` for a marked item, so the
+  uncertainty is visible in the Tag Browser and to any screen that shows documentation. The `ReviewStatus` member
+  carries the same decision as a value a screen can bind to (the verifier checks it, V2). The PI sheet's element and
+  attribute descriptions end with the same text.
 
-The PI sheet is an empty shell until an I/O list maps each point; placeholder references stay unselected so they are
-never published. The PI mapping step is `map_pi_points.py`, from reviewer-supplied PI references
+The PI sheet's unmapped attributes remain placeholders and stay unselected so they are never published. The
+separate PI mapping step is `map_pi_points.py`, from reviewer-supplied PI references
 ([PI_MAPPING.md](PI_MAPPING.md)).
 
 ## How the hierarchy is decided (and where it guesses)
@@ -114,11 +132,13 @@ never published. The PI mapping step is `map_pi_points.py`, from reviewer-suppli
 
 ## What is placeholder
 
-- **Every signal path.** Ignition `BasePath` defaults to `PLACEHOLDER`, and `PointName` is `PLACEHOLDER_<tag>`.
+- **Unmapped signal paths.** Ignition `BasePath` defaults to `PLACEHOLDER`, and `PointName` is `PLACEHOLDER_<tag>`.
   PI attributes point at `\\%Server%\PLACEHOLDER.<tag>.PV`. A drawing does not say which PLC address or historian
   point carries a value. Mapping these is a site task, ideally from the control system's I/O list.
-- **Engineering units** are blank, and **data types** default to Float8 / Double. Switches and discrete signals
-  need changing.
+- **Engineering units** stay blank unless supplied and reviewed: an instrument's `uom` propagates to its Ignition
+  `PV.engUnit` label, while PI units come from the separate PI mapping. Neither path verifies source units or
+  converts values. **Data types** default to Float8 / Double; switches and discrete signals need an engineer's
+  reviewed type/state mapping and lab checks.
 - **The measured variable** comes from the ISA-5.1 first letter (T = temperature). Plant shorthand for operated
   valves (`MOV`, `AOV`, `AORV`) gets no variable, because ISA would read MOV's M as "moisture". Neither does a
   plant-coded tag: a letter group that starts with a system code seen on its own sheet (the sheet's system code or
@@ -152,9 +172,10 @@ never published. The PI mapping step is `map_pi_points.py`, from reviewer-suppli
   story belongs to Ignition here.
 - **A historical Ignition build was tested end to end:** import, replayed values, alarms and verification. The current regenerated project then passed V1–V8 and a 23-route browser contract in a disposable Ignition gateway, and the corrected 24-view build passed again with 24 routes ([native acceptance page](IGNITION_ACCEPTANCE.md)). PI import has not been run.
 
-To validate at a site, publish the sheet to a development AF database with PI Builder, check the hierarchy in PI
-System Explorer, then separately configure and verify real PI point bindings. The current exporter retains
-`%Server%`/placeholder point references; `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings.
+To validate at a site, reconcile the schema-v2 sheet and units with the installed PI Builder version, publish to a
+development AF database, and check the hierarchy, real point bindings, types, units, values and quality. Unmapped
+attributes retain `%Server%`/placeholder point references and stay unselected. `map_pi_points.py` stages reviewed
+PI references; `map_points.py` maps OPC addresses for Ignition and does not fill PI bindings.
 
 ### AF XML: not emitted
 
@@ -238,7 +259,7 @@ sorted red first, then amber, then green, riskiest first inside each tier.
 |---|---|---|
 | **Red** | More likely wrong than right (risk 50% or more). | Look closely at the sheet. Delete, relabel or fix. |
 | **Amber** | Probably right, with at least one warning sign. | Quick check against the sheet. |
-| **Green** | No strong warning sign. On the development sheets, about 1 in 20 green items was wrong (1 in 8 to 1 in 16 when each sheet was left out of the fitting). | Spot-check a sample, then accept as a batch. |
+| **Green** | No strong warning sign, and not safety-relevant (see "The safety floor" below). On the development sheets, about 1 in 20 green items was wrong (1 in 8 to 1 in 16 when each sheet was left out of the fitting). | Spot-check a sample, then accept as a batch. |
 
 The `why` column says what raised the risk, in plain words. The rating doesn't trust the model's own confidence
 much, because Codex and Gemini say 0.9–1.0 for almost everything. It uses checks that need no answer key:
@@ -275,6 +296,41 @@ notably, the model's own confidence. The green and red cut-offs were also set on
   names both candidates (`parent_second_opinion` in `plant_model.json`). On the development sheets this happened
   to about 1 instrument in 20, and the along-the-line choice was right in 16 of 18 such cases. So it means "decide
   which", not "the parent is wrong". Other parent flags stay in `why_check_this`.
+
+### The safety floor
+
+The tiers measure whether the extraction agrees with itself, not what the item does, so a relief valve that every
+model read the same way would be green. A process-safety reviewer checks those regardless. So, on top of the
+rating, an item whose function is safety-relevant is **never green**: a green tier becomes amber, and `why` starts
+with "safety-relevant (relief device): always checked" (or shutdown / on-off valve, trip switch, isolation valve).
+`why_check_this` names the basis (for example "tag letters PSV"). The risk score, the fitted weights and the green
+and red cut-offs are unchanged; the floor is reported on its own in `meta.risk_model.safety_floor` (and each moved
+item keeps `risk.tier_before_floor: "green"`).
+
+**The rule** (`scripts/confidence.py`, `mark_safety` / `safety_floor`), from the model's own fields only:
+
+- only instruments and in-line items (never equipment, off-page connectors or connections);
+- ISA-read tag letters: relief = a variable letter + S + V or E (PSV, TSV, PSE), or RV, PRV, SRV, PRD, PRSV, RD;
+  shutdown = XV, SDV, ESDV, ESD, BDV; trip switch = a variable letter (+ D) + S + H, L, HH, LL or HL (PSH, LSLL,
+  PDSH);
+- operated-valve shorthand ending in RV (AORV) = relief;
+- plant-coded tags (letters led by the sheet's system code, the rule `instrument_kind` already uses): the letters
+  after the code SV, RV or SRV = relief, IV or ISV = isolation (MSIV on a main steam sheet);
+- tag words RUPTURE, BURST, RELIEF, SAFETY VALVE = relief; ESD, SHUTDOWN, SHUTOFF = shutdown; ISOLATION, ISOL =
+  isolation;
+- a reviewed valve callout keeps the reviewer's reading.
+
+**What it moved** on the 12-sheet twin: 25 items marked (23 instruments: 21 relief devices, the AORV and MSIV 1402;
+2 `general` symbols tagged RUPTURE DISK), 22 instruments lifted from green to amber. The other three were already
+amber or red. Tiers went from 1,833 / 676 / 377 to 1,811 / 698 / 377 (green / amber / red). Nothing on the five
+Tennessee Eastman twins is marked (their tags are FI, PI, LV and the like).
+
+**Limits.** It only sees what a tag says. An untagged valve (most valves on OPEN100), a manual block valve, a
+normally-closed (NC) valve, a motor- or air-operated valve (MOV, AOV) and a plant-coded bypass or block valve (MSBV)
+are not identified: the extraction has no field that tells isolation duty from control. Interlocks are found only
+through trip-switch letters; a transmitter that feeds a trip is not marked. PRV and RD are read as relief though
+they can mean a pressure-reducing valve or another variable, which costs at most an extra check. A bundle without a
+risk rating (the own-drawing intake) has no tiers to lift; its queue still flags the item in `why_check_this`.
 
 ## What must be reviewed before anything goes live
 

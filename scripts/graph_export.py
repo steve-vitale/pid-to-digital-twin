@@ -455,9 +455,14 @@ def problems(g):
     dup = {i for i in ids if ids.count(i) > 1}
     out += [f"node id {i!r} appears more than once" for i in sorted(dup)]
     known = set(ids)
+    edge_ids = [e["id"] for e in g.get("edges", [])]
+    out += [f"edge id {i!r} appears more than once" for i in sorted({i for i in edge_ids if edge_ids.count(i) > 1})]
+    streams = {e["id"] for e in g.get("edges", []) if e.get("type") == "connects" and e.get("layer") == "stream"}
     for n in g.get("nodes", []):
         if n.get("kind") not in NODE_KINDS:
             out.append(f"node {n.get('id')}: unknown kind {n.get('kind')!r}")
+        if n.get("status") not in STATUSES:
+            out.append(f"node {n.get('id')}: unknown status {n.get('status')!r}")
         for c in n.get("attributes", []):
             if c.get("status") not in STATUSES:
                 out.append(f"node {n['id']} attribute {c.get('name')}: status {c.get('status')!r}")
@@ -516,6 +521,8 @@ def problems(g):
                     out.append(f"node {n['id']}: an instrument tap must sit on a piped_to edge (on_segment "
                                f"{attrs.get('on_segment')!r} is not one)")
     for e in g.get("edges", []):
+        if e.get("status") not in STATUSES:
+            out.append(f"edge {e.get('id')}: unknown status {e.get('status')!r}")
         for c in e.get("attributes", []):
             if c.get("status") not in STATUSES:
                 out.append(f"edge {e.get('id')} attribute {c.get('name')}: status {c.get('status')!r}")
@@ -526,7 +533,8 @@ def problems(g):
         if e.get("type") not in EDGE_TYPES:
             out.append(f"edge {e.get('id')}: unknown type {e.get('type')!r}")
         for end in (e.get("from"), e.get("to")):
-            if end not in known and not str(end).startswith("stream:"):
+            stream_ref = str(end).startswith("stream:") and str(end)[len("stream:"):] in streams
+            if end not in known and not stream_ref:
                 out.append(f"edge {e.get('id')}: end {end!r} is not a node")
     return out
 

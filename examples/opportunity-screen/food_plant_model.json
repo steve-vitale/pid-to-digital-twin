@@ -1,0 +1,98 @@
+{
+ "meta": {
+  "model_id": "illustrative-food-plant-section",
+  "title": "ILLUSTRATIVE food plant section (synthetic): ammonia refrigeration, dryer, oven, fryer and utilities",
+  "illustrative": true,
+  "not_a_drawing_of_record": "ILLUSTRATIVE. A synthetic model written by hand to exercise the refrigeration, oven, dryer and fryer questions. It is not any plant, no plant's drawing or data was used, and every tag is invented. No public source gives a food plant P&ID to transcribe, so each item instead names the public source that describes that kind of item in food plants (source keys as in data/questions.json; p. = the source's printed page). Nothing here is a measurement.",
+  "sources": {
+   "S25": "Brush, Masanet and Worrell, Dairy Processing ENERGY STAR guide, LBNL-6261E (2011), https://www.osti.gov/servlets/purl/1171534",
+   "S26": "Masanet, Worrell, Graus and Galitsky, Fruit and Vegetable Processing ENERGY STAR guide, LBNL-59289-Revision (2008), https://eta-publications.lbl.gov/sites/default/files/lbnl-59289-rev.pdf",
+   "S27": "DOE Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (2007), https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/42110.pdf"
+  },
+  "drawn_on_purpose": "Anti-triggers, each placed to show a question staying quiet: K-203 has a variable speed drive (E29), EV-202 starts defrost on demand from a coil differential pressure (E30), K-201's motor power is measured (C12), the oven has a flue O2 analyser (E32), the fryer's exhaust goes to a vapour condenser heat recovery exchanger (E31, H6), and the instrument air compressor and its refrigerated air dryer are not refrigeration plant or a process dryer.",
+  "created": "2026-10-29"
+ },
+ "units": [
+  {"id": "K-201", "name": "Ammonia (R-717) screw compressor, low stage (booster)", "type": "compressor", "source": "ILLUSTRATIVE. Ammonia is the usual refrigerant in dairy plants (S25, p. 57); two-stage compressor systems (S25, p. 63)"},
+  {"id": "K-202", "name": "Ammonia (R-717) screw compressor, high stage", "type": "compressor", "source": "ILLUSTRATIVE. Two-stage systems and slide valve unloading of screw compressors (S25, pp. 59, 63)"},
+  {"id": "K-203", "name": "Ammonia (R-717) screw compressor, high stage (trim)", "type": "compressor", "source": "ILLUSTRATIVE. Adjustable-speed drives on refrigeration compressors (S25, p. 63)"},
+  {"id": "C-201", "name": "Ammonia evaporative condenser", "type": "condenser", "source": "ILLUSTRATIVE. Evaporative condensers on refrigeration systems (S25, pp. 64-65)"},
+  {"id": "V-201", "name": "Ammonia high-pressure receiver", "type": "vessel", "source": "ILLUSTRATIVE. Receiver named as a purge point (S25, p. 64)"},
+  {"id": "V-202", "name": "Ammonia low-temperature recirculator vessel", "type": "vessel", "source": "ILLUSTRATIVE. Low pressure side of the cycle (S25, p. 57)"},
+  {"id": "EV-201", "name": "Spiral freezer evaporator (ammonia, hot gas defrost)", "type": "evaporator", "source": "ILLUSTRATIVE. Evaporators, hot gas defrost and demand defrost (S25, p. 66)"},
+  {"id": "EV-202", "name": "Frozen store unit cooler (ammonia, hot gas defrost)", "type": "evaporator", "source": "ILLUSTRATIVE. Demand defrost based on coil pressure readings (S25, p. 66)"},
+  {"id": "CS-201", "name": "Frozen product cold store", "type": "cold_store", "source": "ILLUSTRATIVE. Cold storage areas (S25, p. 58)"},
+  {"id": "D-301", "name": "Gas-fired product dryer (continuous belt)", "type": "dryer", "source": "ILLUSTRATIVE. Continuous belt driers, heated directly by fuel combustion (S26, p. 18); dryer exhaust heat recovery and process controls (S26, p. 104)"},
+  {"id": "O-302", "name": "Gas-fired tunnel oven", "type": "oven", "source": "ILLUSTRATIVE. Fuel-fired ovens and their burner air-fuel ratios (S27, p. 1)"},
+  {"id": "F-303", "name": "Gas-fired continuous fryer", "type": "fryer", "source": "ILLUSTRATIVE. Frying and fryer exhaust heat recovery (S26, p. 107)"},
+  {"id": "HX-303", "name": "Fryer exhaust vapour condenser (heat recovery)", "type": "heat_exchanger", "source": "ILLUSTRATIVE. Vapor condensing heat exchanger on fryer exhaust, heat used for hot water (S26, p. 107)"},
+  {"id": "WH-401", "name": "Gas-fired water heater, CIP and wash hot water", "type": "heater", "source": "ILLUSTRATIVE. Water heating and clean-in-place in dairy plants (S25, pp. 30, 64)"},
+  {"id": "AC-501", "name": "Instrument air compressor", "type": "compressor", "source": "ILLUSTRATIVE. Compressed air systems (S25, p. 67)"},
+  {"id": "AD-502", "name": "Refrigerated compressed air dryer", "type": "dryer", "source": "ILLUSTRATIVE. Dryers on the compressed air supply side (S25, p. 71)"}
+ ],
+ "streams": [
+  {"id": "R1", "name": "Ammonia low-stage suction", "from": "V-202", "to": "K-201", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "R2", "name": "Ammonia intermediate pressure gas to the high stage", "from": "K-201", "to": "K-202", "source": "ILLUSTRATIVE (S25, p. 63)"},
+  {"id": "R3", "name": "Ammonia hot gas discharge to the condenser", "from": "K-202", "to": "C-201", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "R4", "name": "Ammonia hot gas discharge to the condenser", "from": "K-203", "to": "C-201", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "R5", "name": "Liquid ammonia to the receiver", "from": "C-201", "to": "V-201", "source": "ILLUSTRATIVE (S25, p. 64)"},
+  {"id": "R6", "name": "Liquid ammonia to the recirculator", "from": "V-201", "to": "V-202", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "R7", "name": "Pumped liquid ammonia feed, spiral freezer", "from": "V-202", "to": "EV-201", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "R8", "name": "Pumped liquid ammonia feed, frozen store", "from": "V-202", "to": "EV-202", "source": "ILLUSTRATIVE (S25, p. 57)"},
+  {"id": "U1", "name": "Natural gas to the dryer burner", "from": "BL", "to": "D-301", "utility": true, "source": "ILLUSTRATIVE (S26, p. 18: air heated directly via fuel combustion)"},
+  {"id": "U2", "name": "Natural gas to the oven burners", "from": "BL", "to": "O-302", "utility": true, "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"id": "U3", "name": "Natural gas to the fryer burner", "from": "BL", "to": "F-303", "utility": true, "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"id": "U4", "name": "Natural gas to the water heater", "from": "BL", "to": "WH-401", "utility": true, "source": "ILLUSTRATIVE (S25, p. 64)"},
+  {"id": "S1", "name": "Dryer exhaust air to atmosphere", "from": "D-301", "to": "BL", "source": "ILLUSTRATIVE (S26, p. 104)"},
+  {"id": "S2", "name": "Oven exhaust (flue gas and vapour) to stack", "from": "O-302", "to": "BL", "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"id": "S3", "name": "Fryer exhaust vapour", "from": "F-303", "to": "HX-303", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"id": "S4", "name": "Fryer exhaust after the vapour condenser, to atmosphere", "from": "HX-303", "to": "BL", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"id": "W1", "name": "Wash water preheated in the fryer vapour condenser", "from": "HX-303", "to": "WH-401", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"id": "W2", "name": "CIP and wash hot water supply", "from": "WH-401", "to": "BL", "source": "ILLUSTRATIVE (S25, p. 30)"},
+  {"id": "A1", "name": "Instrument air from the compressor", "from": "AC-501", "to": "AD-502", "source": "ILLUSTRATIVE (S25, p. 67)"},
+  {"id": "A2", "name": "Dried instrument air header", "from": "AD-502", "to": "BL", "source": "ILLUSTRATIVE (S25, p. 71)"}
+ ],
+ "instruments": [
+  {"tag": "PT-201", "unit": "K-201", "variable": "pressure", "description": "Low-stage suction pressure", "source": "ILLUSTRATIVE. Logging of compressor suction and discharge pressures (S25, p. 58)"},
+  {"tag": "JT-201", "unit": "K-201", "variable": "power", "description": "Low-stage compressor motor power", "source": "ILLUSTRATIVE. Placed so C12 stays quiet on K-201"},
+  {"tag": "PT-202", "unit": "K-202", "variable": "pressure", "description": "High-stage suction pressure", "source": "ILLUSTRATIVE (S25, p. 58)"},
+  {"tag": "ZT-202", "unit": "K-202", "variable": "position", "description": "Slide valve (capacity) position", "source": "ILLUSTRATIVE. Slide valve unloading (S25, p. 59)"},
+  {"tag": "TT-202", "unit": "K-202", "variable": "temperature", "description": "Compressor discharge temperature", "source": "ILLUSTRATIVE (S25, p. 58)"},
+  {"tag": "PT-203", "unit": "C-201", "variable": "pressure", "description": "Condenser head (discharge) pressure", "source": "ILLUSTRATIVE. Discharge pressure logging (S25, p. 58); head pressure (S25, p. 62)"},
+  {"tag": "TT-205", "unit": "EV-201", "variable": "temperature", "description": "Spiral freezer air temperature", "source": "ILLUSTRATIVE (S25, p. 66)"},
+  {"tag": "TT-206", "unit": "EV-202", "variable": "temperature", "description": "Frozen store air temperature", "source": "ILLUSTRATIVE (S25, p. 58)"},
+  {"tag": "PDT-206", "unit": "EV-202", "variable": "pressure", "description": "Unit cooler coil air-side differential pressure (demand defrost initiation)", "source": "ILLUSTRATIVE. Defrost based on coil pressure readings (S25, p. 66)"},
+  {"tag": "TT-301", "unit": "D-301", "variable": "temperature", "description": "Dryer inlet air temperature", "source": "ILLUSTRATIVE. Air temperature sensors in drying process control (S26, p. 104)"},
+  {"tag": "TT-304", "unit": "D-301", "variable": "temperature", "description": "Dryer exhaust air temperature", "source": "ILLUSTRATIVE (S26, p. 104)"},
+  {"tag": "FT-301", "unit": "D-301", "stream": "U1", "variable": "flow", "description": "Dryer burner natural gas flow", "source": "ILLUSTRATIVE (S27, p. 1: flow metering of air and fuel)"},
+  {"tag": "TT-302", "unit": "O-302", "variable": "temperature", "description": "Oven zone temperature", "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"tag": "TT-305", "unit": "O-302", "variable": "temperature", "description": "Oven exhaust temperature", "source": "ILLUSTRATIVE (S27, p. 1: temperature of the products of combustion)"},
+  {"tag": "AT-302", "unit": "O-302", "variable": "composition", "description": "Oven flue O2 analyser", "source": "ILLUSTRATIVE (S27, p. 1: oxygen in flue gases)"},
+  {"tag": "TT-303", "unit": "F-303", "variable": "temperature", "description": "Fryer oil temperature", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"tag": "TT-401", "unit": "WH-401", "variable": "temperature", "description": "CIP and wash hot water supply temperature", "source": "ILLUSTRATIVE (S25, p. 30)"},
+  {"tag": "PT-501", "unit": "AC-501", "variable": "pressure", "description": "Instrument air header pressure", "source": "ILLUSTRATIVE (S25, p. 67)"}
+ ],
+ "final_elements": [
+  {"tag": "SC-203", "unit": "K-203", "description": "Variable speed drive, high-stage trim compressor", "source": "ILLUSTRATIVE. ASDs on compressor motors (S25, p. 63)"},
+  {"tag": "SC-204", "unit": "C-201", "description": "Condenser fan drive", "source": "ILLUSTRATIVE. ASDs on condenser fans (S25, p. 65)"},
+  {"tag": "HGV-201", "unit": "EV-201", "description": "Hot gas defrost valve, spiral freezer evaporator (defrost started by a timer)", "source": "ILLUSTRATIVE. Timed defrost schedules (S25, p. 66)"},
+  {"tag": "HGV-202", "unit": "EV-202", "description": "Hot gas defrost valve, frozen store unit cooler", "source": "ILLUSTRATIVE (S25, p. 66)"},
+  {"tag": "TV-301", "unit": "D-301", "stream": "U1", "description": "Dryer burner natural gas control valve", "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"tag": "TV-302", "unit": "O-302", "stream": "U2", "description": "Oven burner natural gas control valve", "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"tag": "TV-303", "unit": "F-303", "stream": "U3", "description": "Fryer burner natural gas control valve", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"tag": "TV-401", "unit": "WH-401", "stream": "U4", "description": "Water heater burner natural gas control valve", "source": "ILLUSTRATIVE (S25, p. 64)"},
+  {"tag": "PV-501", "unit": "AC-501", "description": "Air compressor load/unload control", "source": "ILLUSTRATIVE (S25, p. 67)"}
+ ],
+ "manual_valves": [
+  {"tag": "HV-304", "unit": "D-301", "stream": "S1", "description": "Dryer exhaust damper (manual, fixed position)", "source": "ILLUSTRATIVE (S26, p. 104)"}
+ ],
+ "controllers": [
+  {"tag": "PIC-202", "unit": "K-202", "measurement": "PT-202", "output": {"split_range": ["SC-203"]}, "description": "High-stage suction pressure control, loads and unloads K-202 and K-203", "source": "ILLUSTRATIVE (S25, p. 63)"},
+  {"tag": "PIC-203", "unit": "C-201", "measurement": "PT-203", "output": {"final_element": "SC-204"}, "description": "Head pressure control at a fixed setpoint, on the condenser fans", "source": "ILLUSTRATIVE. Fixed head pressure operation (S25, p. 62)"},
+  {"tag": "TIC-301", "unit": "D-301", "measurement": "TT-301", "output": {"final_element": "TV-301"}, "description": "Dryer inlet air temperature control", "source": "ILLUSTRATIVE (S26, p. 104)"},
+  {"tag": "TIC-302", "unit": "O-302", "measurement": "TT-302", "output": {"final_element": "TV-302"}, "description": "Oven zone temperature control", "source": "ILLUSTRATIVE (S27, p. 1)"},
+  {"tag": "TIC-303", "unit": "F-303", "measurement": "TT-303", "output": {"final_element": "TV-303"}, "description": "Fryer oil temperature control", "source": "ILLUSTRATIVE (S26, p. 107)"},
+  {"tag": "TIC-401", "unit": "WH-401", "measurement": "TT-401", "output": {"final_element": "TV-401"}, "description": "Hot water supply temperature control", "source": "ILLUSTRATIVE (S25, p. 64)"},
+  {"tag": "PIC-501", "unit": "AC-501", "measurement": "PT-501", "output": {"final_element": "PV-501"}, "description": "Instrument air header pressure control", "source": "ILLUSTRATIVE (S25, p. 67)"}
+ ]
+}

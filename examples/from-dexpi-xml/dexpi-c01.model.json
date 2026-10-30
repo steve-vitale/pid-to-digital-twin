@@ -4007,7 +4007,7 @@
   "schema": "line-layers-2",
   "method": "scripts/dexpi_reader.py from the XML's piping topology",
   "definitions": {
-   "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between",
+   "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between; or two items drawn against each other with nothing between (touching: no line is drawn, so the segment is on no line network unless both ends already share one)",
    "junction": "a point where three or more drawn line arms meet. junction_kind says which: pipe_tee (three or more pipe arms: a tee or branch), instrument_tap (an instrument line meets a pipe that carries on through it: the tap sits on the pipe segment named by on_segment and does not split it), marked_crossing (a 4-arm crossing the drawing marks connected with a dot), instrument_line_junction (instrument lines meeting away from a pipe)",
    "instrument_connection": "a drawn line that joins an instrument (its bubble) to a pipe at a tap, to an item, or to another instrument line: a leader, impulse or signal line, not a process pipe",
    "actuated_by": "a valve and the actuator drawn stacked on it (a small symbol beside the valve box, joined only by a short stem): the stem is part of the valve, not a pipe",

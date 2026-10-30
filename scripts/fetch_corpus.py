@@ -34,16 +34,18 @@ fetched again, so a re-run with everything present needs no network:
                  because the site may rebuild a zip around the same flowsheet.
   wikimedia-pid  seven P&ID images from Wikimedia Commons with their per-file licences (agent-made first-pass keys
                  for six of them are in data/agent_keys/).
-  uci-hydraulic  UCI hydraulic condition monitoring zip (CC BY 4.0).           Held-out historian sources for
+  uci-hydraulic  UCI hydraulic condition monitoring zip (CC BY 4.0).           Historian sources for
   metropt3       MetroPT-3 compressor zip (CC BY 4.0).                         csv_normal_bands.py (matrix row 6),
   battledim      BattLeDIM 2018 SCADA CSVs and leak configuration (CC BY 4.0). read by historian_adapters.py.
+                 These three were held out for drift, then used to develop the cyclic/auto method.
+  battledim-2019 BattLeDIM 2019 SCADA CSVs, configuration, README (CC BY 4.0): held out for cyclic/auto, same network.
 
 Model use: none. Stdlib only. No downloaded code is executed. Claude (the coding agent) wrote the code.
 
   python scripts/fetch_corpus.py pronto [--max-mb 500]
   python scripts/fetch_corpus.py dtu-te [--max-mb 500]
   python scripts/fetch_corpus.py dexpi-ttc-all | hai | skab | pronto-more | idaes-hda | dwsim-fossee | wikimedia-pid
-  python scripts/fetch_corpus.py uci-hydraulic | metropt3 | battledim
+  python scripts/fetch_corpus.py uci-hydraulic | metropt3 | battledim | battledim-2019
 """
 import argparse
 import csv
@@ -206,10 +208,11 @@ FILE_SOURCES = {
         "api_url": "https://commons.wikimedia.org/w/api.php",
         "kind": "pinned-files", "url": "{url}",
         "skipped": "other Commons sheets (no per-file licence check yet)"},
-    # Three held-out historian sources for csv_normal_bands.py (data/attempts.json A165, A171), read by
-    # scripts/historian_adapters.py. Pinned from the copies staged 2026-10-29 (bytes and SHA-256 of each staged file);
-    # the download URLs were not re-checked when the pins were written (no network), so a first fetch that gets
-    # different bytes is refused, never saved.
+    # The original three historian sources were held out for drift (A165, A171), then used to develop cyclic;
+    # BattLeDIM 2019 was held out for cyclic (A178, A183, A184). All are read by
+    # scripts/historian_adapters.py. Pinned from the copies staged 2026-10-29 (bytes and SHA-256 of each file).
+    # The original three sources' URLs were not re-checked when their pins were written (no network); 2019's
+    # URLs and published MD5s are from its download receipt. Different upstream bytes are refused, never saved.
     "uci-hydraulic": {
         "name": "UCI condition monitoring of hydraulic systems (Helwig, Pignanelli, Schutze 2015)",
         "license": "CC BY 4.0", "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -239,6 +242,17 @@ FILE_SOURCES = {
         "kind": "pinned-files", "url": "{url}",
         "skipped": "the 2018 demands, the 2019 evaluation year, the .xlsx copies and the EPANET models: the row-6 "
                    "adapter reads the 2018 pressures, flows and level and the leak table only"},
+    "battledim-2019": {
+        "name": "BattLeDIM 2020 dataset: L-Town 2019 SCADA (pressures, flows, tank level) and the leak configuration",
+        "license": "CC BY 4.0", "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "S. G. Vrachimis et al., BattLeDIM: Battle of the Leakage Detection and Isolation Methods "
+                       "dataset (KIOS Research and Innovation Center of Excellence, University of Cyprus), Zenodo "
+                       "record 4017659, CC BY 4.0",
+        "landing_url": "https://zenodo.org/records/4017659",
+        "api_url": "https://zenodo.org/api/records/4017659",
+        "kind": "pinned-files", "url": "{url}",
+        "skipped": "the demands, the 2018 development year, the .xlsx copies and the EPANET models: the row-6 "
+                   "adapter reads the 2019 pressures, flows and level and the leak table only"},
 }
 
 

@@ -1,6 +1,6 @@
 # Your own drawing: from one P&ID to a draft asset model
 
-**Why it matters:** Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking.
+**Why it matters:** Retyping drawings into an asset list is a manual step in many historian, HMI or digital twin projects. Starting from a draft turns that typing into checking.
 
 This is the runbook for using this repository on a drawing it has never seen. Start with the worked example below:
 it runs offline from a clean clone, on a public sheet, with a real model extraction that is committed here.
@@ -108,6 +108,36 @@ minute of reading. Scored afterwards against that sheet's answer key, it matched
 The tracer's settings were tuned on six OPEN100 sheets, so expect it to do worse on faded scans and very different
 drafting styles ([results](../../README.md#results-held-out-drawings-and-how-they-were-used)).
 
+### Optional: clean a scan before tracing
+
+Keep the original PNG for source review. `scan_cleanup.py` writes a separate image at the same pixel dimensions,
+so the symbols' boxes still fit. After the extraction command in route A, create `mysheets-clean/` and run:
+
+```sh
+python scripts/scan_cleanup.py mysheets/0.png --clean auto --out mysheets-clean/0.png
+PID_SHEETS_DIR=mysheets-clean python scripts/trace_connections.py --src-label mine-tiles --tool codex --drawings 0 --label mine-trace-clean
+```
+
+Use `runs/mine-trace-clean/codex/0.json` for step 3, keeping the manifest's `image` pointed at the original
+`mysheets/0.png`. The extraction's top-level `image_sha256`, when present, describes that original; the new
+`tracer.image_sha256` describes the cleaned PNG. Keep both images and the printed clean-up detection with your
+records. The intake bundles the original drawing and the traced extraction; it does not copy the separate cleaned
+image automatically. Hashes can differ even when pixel dimensions agree; do not relabel one image as the other.
+
+`auto` cleans images detected as speckled or uneven and leaves clean ones alone. `--clean on` forces the step for a
+faded scan on flat paper that auto may miss. For callers importing `scripts/scan_cleanup.py`,
+`prepare(gray, clean="auto", info=info)` returns `(image, cleaned)`; `trace(image_path, symbols, clean="auto",
+info=info)` calls the tracer on a temporary cleaned image and records detection and clean-up details in `info`.
+The underlying tracer's default remains unchanged.
+
+The [matrix](../../docs/GENERALIZATION.md) uses auto only for its row-1 oracle-symbol diagnostic. It does not
+replace the published round-2 or round-4 model extraction results. The frozen clean-up raises synthetic damaged
+holdout connection F1 from 0.877 to 0.894 (L1), 0.566 to 0.818 (L2), and 0.387 to 0.753 (L3); only L1 passes
+0.88 (A189/A190). Development and holdout damage come from the same generator. On the one keyed real archive scan,
+the agent-keyed OMRE quadrant, it makes F1 worse: 0.561 to 0.522. Inspect your own result before using it.
+
+### Other extraction routes
+
 **B. The one-sheet workflow with a full audit trail** (`site_extraction_workflow.py` prepare, execute, collect).
 It records hashes, the exact prompt and every attempt, but it uses a simpler recipe: the whole sheet at once, no
 tiles, no tracing. It is not the method the headline numbers measure. See
@@ -133,6 +163,14 @@ A qualified reviewer fills the `OPS_` columns in `review_queue.csv`. Then previe
 I/O list (`map_points.py` for OPC addresses, `map_pi_points.py` for reviewed PI references). The commands, and what
 each one refuses, are in [REPLICATE_AT_YOUR_PLANT.md §4](../../docs/REPLICATE_AT_YOUR_PLANT.md#4-review-and-map-on-copies).
 Nothing here derives an I/O list from a drawing.
+
+**If an item or line is missing:** the review CSV edits existing records only; it cannot add a symbol or link.
+Record the omission with its sheet, crop or box, tag, both link endpoints where applicable, reviewer and date.
+Keep the original extraction and bundle unchanged. Correct a separate copy of the extraction, name it in a new
+manifest with the human correction stated in `producer.method`, and run the intake into a new output folder.
+Compare old and new items by their source symbol IDs before carrying decisions forward: generated item IDs can
+change when symbols are added. There is no automated merge of additions or old review decisions across a rebuild;
+reconcile those decisions explicitly and retain both review records. Adding a CSV row with a new item ID is refused.
 
 ## 5. Into Ignition
 

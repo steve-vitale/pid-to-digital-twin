@@ -1,0 +1,41 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "codex",
+ "drawing": "dexpi-c03",
+ "label": "r5-dx-rep2-tiles",
+ "model": "gpt-6.1-sol",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "307a3fb5636bf7423b5f3a84a131f238e04f187407994be665d131a00c582003",
+ "ran_at": "2026-10-13T11:17:02+00:00",
+ "seconds": 30.1,
+ "cost_usd": null,
+ "cost_usd_notional": null,
+ "error": null,
+ "parse_error": null,
+ "tiling": {"grid":"2x2","overlap":0.15,"preface_sha256":"642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3","tile_seconds_sum":86.1,"tiles_failed":0},
+ "prediction": {
+  "symbols": [
+   {"id":"s1","class":"instrumentation","bbox":{"x_min":51.9,"y_min":196.2,"x_max":114.6,"y_max":316.2},"tag":"ESV\n3712","confidence":0.99},
+   {"id":"s2","class":"inlet/outlet","bbox":{"x_min":268.7,"y_min":43.2,"x_max":336.3,"y_max":200.5},"tag":"D\nESD","confidence":0.85},
+   {"id":"s3","class":"instrumentation","bbox":{"x_min":204.4,"y_min":283.8,"x_max":267.1,"y_max":403.7},"tag":"ESV\n3712","confidence":0.99},
+   {"id":"s4","class":"valve","bbox":{"x_min":278.4,"y_min":383.2,"x_max":326.0,"y_max":540.5},"tag":null,"confidence":0.94},
+   {"id":"s5","class":"general","bbox":{"x_min":129.8,"y_min":415.6,"x_max":161.6,"y_max":450.8},"tag":null,"confidence":0.9},
+   {"id":"s6","class":"valve","bbox":{"x_min":460.1,"y_min":502.1,"x_max":534.0,"y_max":540.5},"tag":null,"confidence":0.72},
+   {"id":"s7","class":"general","bbox":{"x_min":436.3,"y_min":501.1,"x_max":463.3,"y_max":586.5},"tag":null,"confidence":0.88},
+   {"id":"s8","class":"general","bbox":{"x_min":506.9,"y_min":506.0,"x_max":534.5,"y_max":558.4},"tag":"0200x0800","confidence":0.92},
+   {"id":"s9","class":"general","bbox":{"x_min":541.0,"y_min":70.3,"x_max":709.1,"y_max":153.5},"tag":null,"confidence":0.65},
+   {"id":"s10","class":"general","bbox":{"x_min":631.8,"y_min":329.2,"x_max":647.5,"y_max":454.6},"tag":null,"confidence":0.5},
+   {"id":"s11","class":"valve","bbox":{"x_min":278.4,"y_min":504.9,"x_max":326.5,"y_max":583.3},"tag":null,"confidence":0.83},
+   {"id":"s12","class":"general","bbox":{"x_min":464.4,"y_min":505.4,"x_max":505.5,"y_max":583.3},"tag":null,"confidence":0.66}
+  ],
+  "connections": [
+   {"from":"s1","to":"s4"},
+   {"from":"s2","to":"s4"},
+   {"from":"s3","to":"s4"},
+   {"from":"s7","to":"s11"},
+   {"from":"s7","to":"s12"},
+   {"from":"s8","to":"s12"}
+  ]
+ }
+}

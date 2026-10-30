@@ -18,7 +18,15 @@
     "red_min": 0.5,
     "rule": "(fixed before looking at any holdout): green = items whose dev error rate stays at or below 5%\nwhen taken from the lowest risk up; red = items with a predicted risk of at least 50% (more likely wrong than\nright). Both thresholds come from the development drawings only."
    },
-   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md"
+   "note": "risk from independent signals; see docs/TWIN_OUTPUTS.md",
+   "safety_floor": {
+    "rule": "Instruments and in-line items only (never equipment, off-page connectors or links). Letters are the tag's letter group as build_twin.py reads it. ISA-read letters: relief = <variable>S + V/E (PSV, TSV, PSE) or RV, PRV, SRV, PRD, PRSV, RD; shutdown = XV, SDV, ESDV, ESD, BDV; trip switch = <variable>[D]S + H/L/HH/LL/HL (PSH, LSLL, PDSH). Operated-valve shorthand ending in RV (AORV) = relief. Plant-coded tags (letters led by the sheet's system code, build_twin.plant_coded): the letters after the code SV/RV/SRV = relief, IV/ISV = isolation (MSIV). Tag words RUPTURE/BURST/RELIEF/SAFETY VALVE = relief; ESD/SHUTDOWN/SHUTOFF = shutdown; ISOLATION/ISOL = isolation. Reviewed valve callouts keep the reviewer's reading and are not re-classified.",
+    "limits": "Only what a tag says. An untagged valve (most valves on OPEN100), a manual block valve, a normally-closed (NC) valve, a motor/air-operated valve (MOV/AOV) or a plant-coded bypass/block valve (MSBV) is not identified: the extraction has no field that tells isolation duty from control. Interlocks are found only through trip-switch letters; a transmitter that feeds a trip is not marked. PRV and RD are read as relief (they can mean a pressure-reducing valve or another variable), which costs at most an extra check.",
+    "marked": {},
+    "raised_green_to_amber": {},
+    "by_function": {},
+    "note": "a floor on the tiers, applied after the calibrated rating; risk scores and thresholds unchanged"
+   }
   }
  },
  "site": {

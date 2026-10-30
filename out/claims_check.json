@@ -1,6 +1,72 @@
 {
-  "summary": "35 ok, 1 prose only, 0 FAIL of 36 claims",
+  "summary": "41 ok, 1 prose only, 0 FAIL of 42 claims",
   "claims": [
+    {
+      "id": "M-workflows",
+      "phrase": "eight selected workflows in the corpus matrix",
+      "readme_says": "8",
+      "evidence_says": "8",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "id": "M-pass",
+      "phrase": "63 corpus cells pass",
+      "readme_says": "63",
+      "evidence_says": "63",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "id": "M-fail",
+      "phrase": "23 corpus cells fail",
+      "readme_says": "23",
+      "evidence_says": "23",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "id": "M-na",
+      "phrase": "8 corpus cells are not applicable",
+      "readme_says": "8",
+      "evidence_says": "8",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "id": "M-open100-pipe",
+      "phrase": "OPEN100 validation pipe F1 0.912",
+      "readme_says": "0.912",
+      "evidence_says": "0.912",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "id": "M-vendor-pipe",
+      "phrase": "mixed vendor-render pool pipe F1 0.776",
+      "readme_says": "0.776",
+      "evidence_says": "0.776",
+      "files": "out/generalization/matrix.json",
+      "te": false,
+      "note": "",
+      "status": "ok",
+      "detail": ""
+    },
     {
       "id": "A-symbols-f1",
       "phrase": "symbols F1 0.93 on held-out drawings, mean of five round-5 runs (GPT)",
@@ -69,9 +135,9 @@
     },
     {
       "id": "Q-green",
-      "phrase": "1,833 green items",
-      "readme_says": "1833",
-      "evidence_says": "1833",
+      "phrase": "1,811 green items",
+      "readme_says": "1811",
+      "evidence_says": "1811",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
       "note": "",
@@ -80,9 +146,9 @@
     },
     {
       "id": "Q-amber",
-      "phrase": "676 amber items",
-      "readme_says": "676",
-      "evidence_says": "676",
+      "phrase": "698 amber items",
+      "readme_says": "698",
+      "evidence_says": "698",
       "files": "out/twin/r2-tiles-trace/codex/review_queue.csv",
       "te": false,
       "note": "",

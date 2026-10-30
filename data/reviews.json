@@ -1427,6 +1427,258 @@
     }
    ],
    "resolution": "Three rounds found the same class (inputs never examined together), so the fix is one validation pass at the door (check_spec): unknown field names refused, every recognised number bounds-checked whether used or not, every complete form of a quantity cross-checked, two forms of one price refused; the range limit is documented. Tests cover each case; examples unchanged. A further Codex confirmation was run."
+  },
+  {
+   "feature": "graph-export",
+   "reviewer": "independent Codex agent (fresh context, read-only review; author fixes independently reproduced)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/graph-export/te_graph.json": "a55c1eb0a677f698258da8b1aa1e272467b56d7af8f26e7db5ec5bf3753ec2de",
+    "examples/graph-export/bayer_graph.json": "424f95f1891a6293930b31727b5adb3447bd496ef0ff4d85df0b33a78b125659",
+    "examples/graph-export/sheet0_graph.json": "d1c1b751b204c4291e2ea58f6c2782c4a0493daa3f26969607e489bb9cfc4b2f",
+    "examples/graph-export/sheet0_graph_core.json": "c1560f253a8879e674ed77729be66fb4cc26bb5cbe51364bbfc012e99ee4cd34"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "The structural validator accepted duplicate edge IDs, unknown node/edge statuses, and dangling stream: endpoints while reporting zero problems.",
+     "resolution": "Fixed by the author during this review. Independently reran four negative CLI fixtures copied from the Bayer graph: each now exits 1 and identifies the specific problem; valid examples still pass."
+    }
+   ],
+   "resolution": "All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.",
+   "checks": [
+    "Reproduced documented TE, Bayer, and sheet-0 import/enrich/full/core commands into scratch outputs; all four graphs exactly match reviewed JSON.",
+    "All graph examples validate. Sheet 0 has 188 nodes, 736 edges, 6581 claims; core has 188 nodes, 391 edges, 956 claims.",
+    "Reconstructed all 345 network-pair links from core on_network membership with no missing or extra pair; verified 956+1140+4485=6581 claim accounting.",
+    "Inspected both new touching-contact crops and statements: they describe visible item contact without claiming a drawn pipe; both edges remain unverified."
+   ]
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "independent Codex agent (fresh context, read-only review; author fixes independently reproduced)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "ce38b284c1c8522b1484f20548dc7f22f5e7920033aa35c60423588dc2a2cfc1"
+   },
+   "findings": [
+    {
+     "severity": "nit",
+     "issue": "The generated loss report and guide said unplaced items are not exported by graph_export.py, although C03 ESV-3712 is exported as a final_element node with a placement reason.",
+     "resolution": "Generator wording, report and guide corrected by the author during this review. Fresh C01 model/report match the reviewed examples exactly after LF normalization; fresh C03 report describes the graph export correctly."
+    }
+   ],
+   "resolution": "All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.",
+   "checks": [
+    "Reproduced documented C01 reader, generator, graph export and check commands using the cached public XML and scratch outputs. Model/report regenerate exactly with LF normalization; graph differs only in its scratch source_model path.",
+    "Independently checked all 727 GenericAttribute records against original XML element ID, Name, Value and Units; zero mismatches.",
+    "Independently traversed XML Connection chains through nonretained fittings and found exactly the same 27 pipe segments, including the five tees; no missing or extra segments.",
+    "C01 generation passes structural validation; graph validates with 46 nodes, 113 edges, 1,273 claims."
+   ]
+  },
+  {
+   "feature": "statement-review",
+   "reviewer": "independent Codex agent (fresh context, read-only review; author fixes independently reproduced)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/statement-review/bayer/statements.json": "ee24e35976010a19eec7ba7b4a1af5186665021309a68950dfb88aa377cecde9",
+    "examples/statement-review/bayer/sample_60.csv": "639359a89637c435b55ef4a9d8b0500047ba77bacc9a62937deb53f3a4600be7",
+    "examples/statement-review/sheet0/statements.json": "a82146a8ba04854bd59aebb340dd4ba911ddfec4dfb3e84bad53c5010b2c6bd5",
+    "examples/statement-review/sheet0/sample_60.csv": "e83a6affbd920e8e15f9f6b52f5ab7adb4dd8b0cf3bf90116c72c26c1cdbd354",
+    "examples/statement-review/sheet0/sample_layers.csv": "56d42a3d28906013fbb99e325ff2b355f94f8425876fbc57791db1e3dd05c483",
+    "examples/statement-review/sheet0/review-2026-10-29-layers/score.txt": "fade0763048e916461ee40c31f1359275c5969785593483cc60fe48302e726d6",
+    "examples/statement-review/sheet0/sample_layers_r2.csv": "67d05a9a3fda5b3f9016166c70806a795db94bd863fbca37a59ed63c789b6ac3",
+    "examples/statement-review/bayer/review-2026-10-29/score.txt": "c6e358d0f360b1ae9fea830dd832425b7d8cbdb32a95bd45f059a3d3a337069a",
+    "examples/statement-review/sheet0/review-2026-10-29/score.txt": "9fec66f7c2caa1ddd09daedf2d911ddbb66fff89034e1dcf1706db45931922dd",
+    "examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt": "350e00f66f01f8052909ae49fca6b6bdd197de866b4f4b94095601391fe0f4a2"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "Cascade machine checks read output.controller instead of output.setpoint_of, falsely reporting all eight TE cascade relations as different from their model.",
+     "resolution": "Fixed by the author during this review; the eight TE cascade checks now match, and wrong-target controls still fail."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "The model-field resolver falsely rejected ten TE claims: six retained cited_source claims and four fields below verification.previous or topology_verification.previous.",
+     "resolution": "Fixed by the author during this review with recursive/indexed field lookup and cited_source source alias. A fresh TE CLI render now reports 576 model matches, seven not checked, and zero differences; independent altered-citation and altered-nested-value controls still report differences."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "The twelve new tag-derived safety notes used generic sentences that read as established safety functions/bases.",
+     "resolution": "Fixed by the author during this review. All twelve now explicitly describe a tag-derived screen requiring review; function sentences say the function is unverified. Independently inspected the six tag crops, which support the letters being interpreted, not a verified plant safety function."
+    }
+   ],
+   "resolution": "All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.",
+   "checks": [
+    "Current Bayer and sheet-0 render commands reproduce the reviewed statements JSON exactly:215 and 1,087 statements respectively.",
+    "Reproduced all five preserved historical score files byte-for-byte after LF normalization, including the r2 score referenced by the guide. Historical sample sheets were not redrawn or edited.",
+    "All evidence images referenced by the four historical samples are present. Fresh current sheet-0 render generates all 614 unique referenced crops; only sample crops are committed beside the full statements file.",
+    "Fresh seeded current sampling works. Preserved historical samples differ from current wording/population as documented; historical errors are measurements of those versions, not an error-rate estimate for the current 1,087 statements.",
+    "The source-match and plant-truth verdict separation and unchanged values are covered by the passing targeted suite; this review establishes no plant truth."
+   ]
+  },
+  {
+   "feature": "impact-estimate",
+   "reviewer": "independent Codex agent (fresh context; boundary and interval review, fixes independently reproduced)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/impact-estimate/pump-vfd-site/impact.md": "0397c54354816c5bd0d286be7b1a45b9f8136e107b5751a5fe0fe593ad46b534",
+    "examples/impact-estimate/pump-vfd-defaults/impact.md": "33bd23cdebf57071077921898731993ad77936deeaceaf1350f40bff4d905202",
+    "examples/impact-estimate/steam-traps-site/impact.md": "9c4d6ca0740f6361ce8962ce728c26951e19c0851cf57c45a4daa8965df9535f",
+    "examples/impact-estimate/steam-traps-defaults/impact.md": "fb2f18bdbdfe5808008f229d5d68bad361e21bcd7e5097d556501ebdd1cbf4c2",
+    "examples/impact-estimate/needs-E1/needs.md": "c970f3b50087bd31eded9426b1d588ca6d7cbebd5143320d35ac07963b755f7e",
+    "examples/impact-estimate/needs-E8/needs.md": "c756ad86c9b138b09e2cf8fbcc64c09c68b45ed4120a75a082c9d50cded336ac"
+   },
+   "findings": [
+    {
+     "severity": "should-fix",
+     "issue": "Small incremental steam enthalpies were refused; assumptions described gross production for all steam changes."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "Partial before-load plus increase was falsely called physically impossible."
+    },
+    {
+     "severity": "should-fix",
+     "issue": "Accepted measurement source/note/notes fields were dropped from both outputs."
+    }
+   ],
+   "resolution": "All resolved and independently rechecked. Valid small deltas match the heat form, E7 names the turbine inlet/outlet boundary, ambiguous partial forms give explicit alternatives, and measurement provenance survives both formats.",
+   "checks": [
+    "37 tests pass; all 12 example Markdown/JSON files reproduce in external scratch.",
+    "400 scalar endpoint cases and 10,000 mixed saving/load scenarios remain enclosed by interval results.",
+    "Independent review of all 32 electricity field subsets, zero-hour and range bounds, and supplied site-source notes."
+   ],
+   "limits": "Software and covered example validation; no real-plant savings, human review, native import or independent audit of every published default."
+  },
+  {
+   "feature": "drawing-to-bundle",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/own-drawing/extraction_sheet0.json": "fbb9c92c322c0b4dd8e5a48482b0dc13c52a3144f92c3c77c5f2d4a308d571de",
+    "examples/own-drawing/manifest.json": "fb92b0ad0194687c1872cc35c06bdc5aea4b1382e87a5e7218072758e707f0df"
+   },
+   "findings": [],
+   "resolution": "Re-ran import_site_drawing check-only and import through guide tests; 7 own-drawing, 18 intake, 10 scan-cleanup tests passed. Recorded model extraction was not rerun; guide limitations are explicit. Final 18 intake tests and 7 own-drawing tests pass. Revised own-drawing guide accurately says omitted items require a corrected extraction copy, new intake bundle, and manual decision reconciliation by source symbol ID; reusable generic intake is distinguished from OPEN100 research visualizations.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "client-report",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/own-drawing/deliverable/REPORT.html": "f88c1ffae19394035127612751b79d7527664a7802c36f35a0e9cb70d0c5872e"
+   },
+   "findings": [],
+   "resolution": "7 deliverable-report tests and 7 own-drawing tests pass. Exact committed REPORT reproduction, stale or edited generated queue columns refused, decided items correctly leave to-check list. Final regenerated reports reproduce exactly through 7 deliverable-report and 7 own-drawing tests; both HTML reports now state unverified undirected logical links and no established direct pipe adjacency.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+    "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+    "examples/review-and-mapping/mapping_dry_run.md": "94f103eb01920d44e03ea953430f78b11a1b6261be165d5fa9130121db63619d",
+    "examples/review-and-mapping/graph_after_review.json": "bb24f58a94cb5341a2dfd831a0e3451dca66142691d0bd2db1407355b4ac741c",
+    "examples/review-and-mapping/REPORT_after_review.html": "33e641c1c5b7d718034671829b0575b927848d1d947636c1c94d3e08775b3b88",
+    "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+    "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d"
+   },
+   "findings": [],
+   "resolution": "README workflow reproduced byte-for-byte by test_deliverable_report, apply_review custom checks, 19 map_points, 15 PI mapping, 8 review-kit tests pass. Illustrative decisions, invented corrected tag, synthetic I/O and unrun timer clearly labelled. Actual model remains unchanged on dry-run. Final README reproduction and all 55 custom apply_review checks pass. REVIEW_LOOP explicitly warns valid rows apply even when refused rows cause exit 1, calls for dry-run and record/model-diff inspection; this matches the tested behavior.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "platform-exports",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "out/ignition/te_tags.json": "fbfcab3b38b901cf88284ec3540c04a1542b73bee1318d0c9e429dcfb2621ad4",
+    "out/pi/pi_builder_af.csv": "ba2379b28ab5fae73c7e940496ab4ba5ef6899501eeaee6cb2d39193929db5d8"
+   },
+   "findings": [],
+   "resolution": "10 generation-validation and 15 PI-export tests pass. Source/actual artifact cross-check: all 910 twin UDT instances carry expected review/risk labels, 25 safety-marked assets non-green, 22 Instrument_Relief, 12 total templates, 358 PI placeholders and zero selected. TE seed outputs regenerated by tests. Did not import into Ignition/PI. Final narrow recheck: 10 generation-validation and 15 PI-export tests pass; independently exported actual twin copies with kg/h and bar on separate instrument PV overrides. ReviewStatus overrides coexist, shared PV template stays readOnly/opc/Float8, and metadata-only callout does not acquire a PV even if a unit is supplied.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+    "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+    "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/opportunity-screen/open100/screen.md": "cbb7c60a1b08a1e2b48b61a5982399490338fc5078fadb4ad1d3fcd35d427cb5",
+    "examples/opportunity-screen/open100/questions.json": "4f84ad100e1bba2dda4f7bd362b168e519421ed8ea39642022e41c2c23e854ad",
+    "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+    "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1"
+   },
+   "findings": [],
+   "resolution": "All 35 question-engine tests pass including exact reproduction of four screens and rollup. Food findings 24, Bayer 12; rollup 36 findings across 24 questions. New-question anti-triggers, quantity-specific data requests and evidence states tested. Downloaded S25/S27/S28 hashes equal catalog pins and verified quotations; S26 direct download 403, official web PDF text confirms all used dryer/fryer/control quotations. No real food-plant validation.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "examples/historian-csv/results/csv_normal_bands.md": "0ff44fa6613576c811e0e8e327ae73d2763524d06875118a349295ffc4036c78",
+    "examples/historian-csv/results/csv_normal_bands.json": "343b28c4e14f6cfdeabcefb73c87a11f67f9e6ab7939be3b4d5fe9fb972c8a9e",
+    "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56"
+   },
+   "findings": [
+    {
+     "priority": "P2",
+     "file": "scripts/csv_normal_bands.py",
+     "line": 119,
+     "issue": "parse_time accepts nonfinite numeric time/index cells, yielding NaN detection delays and nonstandard JSON NaN instead of a clear line-numbered input refusal.",
+     "reproduce": "normal-probe.csv + fault-probe.csv in this scratch directory; cnb.run(normal, fault, fault_start=50, method=\"level\", k=3) gives first_flag_delay=nan and detection_run3_delay=nan. Reject nonfinite time/index values in reader."
+    }
+   ],
+   "resolution": "All 31 csv-tools tests pass, including exact default example reproduction, TE level agreement, cyclic/auto synthetic checks and live OPC UA smoke. Independently repeated original failure plus nan, NaN, inf, -inf, 1e999: each refuses line 52, no traceback and no output folder. Finite input times whose elapsed subtraction overflows are refused by the allow_nan=False serialization gate before output folder creation; an existing output directory remains unchanged on input rejection. Valid guide example regenerated byte-for-byte and strict JSON parsing succeeds.",
+   "limits": "Commercial model calls, full historian corpus, real plant validation, human timing and native gateway/PI import were not repeated by this reviewer."
+  },
+  {
+   "feature": "repo-checks",
+   "reviewer": "Independent Codex agent (read-only source review, independent reproductions and adversarial controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "out/claims_check.md": "a530e33867d4651099fe8599d90c9cad693ccf3415861c1a64f0528f7c8a81da"
+   },
+   "findings": [],
+   "resolution": "Final claim Markdown and JSON equal independent in-memory regeneration: 41 numerical claims agree, 1 is explicitly prose only, 0 fail. Pipeline status is 52/52 fresh. test_check_claims passes all 13 tests; independently changing only one matrix sheet true-positive count, while leaving its stored summary and status unchanged, changes the pipe claim from ok to FAIL (0.812). The helper now pools validated per-sheet counts instead of trusting the summary. Pipeline propagation/determinism checks passed 45/45 in scratch; attempts, script-index, feature-catalog and deliverables checks pass. Full test prerequisites are present; this review does not claim a new full-suite run."
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent (read-only source review, independent reproductions and adversarial controls)",
+   "date": "2026-10-29",
+   "verdict": "pass",
+   "files": {
+    "docs/GENERALIZATION.md": "baae8555373556a97569e18a284b30bc3cd3e4cc2b32e18160e6eaad7e3f4e9f",
+    "out/generalization/matrix.json": "30ca81a45f33a4cc9cbb1151308e02a7100e1636d957c5c0a2e86f47d69a0a20",
+    "data/corpus.json": "48bbeb09a052c1574246608f9bea14d0d48d8e42a10c5be7ad57183539642b87"
+   },
+   "findings": [],
+   "resolution": "The final 94 cells exactly match registered row/input membership: 63 pass, 23 fail, 8 n/a. All 732 recorded file-hash bindings match current files, and an independent AST traversal agrees with the hashed local-script dependency coverage. Every scored cell verdict was independently checked against recorded counts and its stated criterion; every n/a has a reason. corpus_matrix --check and all 28 corpus-matrix tests pass. Four complete cells and two pixel-level single-sheet samples were independently reproduced in scratch; two BattLeDIM 2019 runs were independently checked through adapter plus band tool and agree with the final matrix. Earlier scope wording was narrowed from every tool to eight selected workflows. Generated inputs, agent-made keys, key-only scan duplicates, confirmed refusals, development reuse, nonblind baselines, changed derived truth and the separate scorer fix are disclosed."
   }
  ]
 }

@@ -1,13 +1,12 @@
 {
  "about": "Generalization matrix written by scripts/corpus_matrix.py; rendered as docs/GENERALIZATION.md.",
- "ran_at": "2026-10-29 23:26 UTC",
- "seconds": 1469.0,
+ "ran_at": "2026-10-30 01:55 UTC",
+ "seconds": 1598.3,
  "rows_run_this_time": [
-  6
+  1
  ],
  "inputs_run_this_time": [
-  "hai-21.03",
-  "metropt3"
+  "dexpi-1.2-vendor-renders"
  ],
  "tracer_pass_f1": 0.88,
  "pipe_pass_f1": 0.88,
@@ -26,48 +25,72 @@
       "precision": 0.997,
       "recall": 0.961,
       "key_links": 359,
+      "tp": 345,
+      "predicted": 346,
+      "truth": 359,
       "review_load_per_100": 3.3,
-      "seconds": 3.3
+      "seconds": 2.5,
+      "scan_cleaned": false
      },
      "1": {
       "connection_f1": 0.909,
       "precision": 0.833,
       "recall": 1.0,
       "key_links": 60,
+      "tp": 60,
+      "predicted": 72,
+      "truth": 60,
       "review_load_per_100": 11.9,
-      "seconds": 1.5
+      "seconds": 1.0,
+      "scan_cleaned": false
      },
      "2": {
       "connection_f1": 0.933,
       "precision": 0.912,
       "recall": 0.954,
       "key_links": 153,
+      "tp": 146,
+      "predicted": 160,
+      "truth": 153,
       "review_load_per_100": 8.3,
-      "seconds": 4.0
+      "seconds": 2.9,
+      "scan_cleaned": false
      },
      "3": {
       "connection_f1": 0.926,
       "precision": 0.957,
       "recall": 0.898,
       "key_links": 98,
+      "tp": 88,
+      "predicted": 92,
+      "truth": 98,
       "review_load_per_100": 8.2,
-      "seconds": 1.4
+      "seconds": 1.6,
+      "scan_cleaned": false
      },
      "4": {
       "connection_f1": 0.931,
       "precision": 0.983,
       "recall": 0.885,
       "key_links": 130,
+      "tp": 115,
+      "predicted": 117,
+      "truth": 130,
       "review_load_per_100": 7.5,
-      "seconds": 1.4
+      "seconds": 1.2,
+      "scan_cleaned": false
      },
      "5": {
       "connection_f1": 0.872,
       "precision": 0.971,
       "recall": 0.792,
       "key_links": 341,
+      "tp": 270,
+      "predicted": 278,
+      "truth": 341,
       "review_load_per_100": 18.5,
-      "seconds": 3.8
+      "seconds": 3.4,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.928,
@@ -75,7 +98,8 @@
     "recall": 0.897,
     "review_load_per_100": 9.6,
     "key_links": 1141,
-    "worst_sheet": "5"
+    "worst_sheet": "5",
+    "scan_cleanup": "auto"
    },
    "published": [
     {
@@ -86,9 +110,10 @@
      "agrees": true
     }
    ],
-   "seconds": 15.8,
-   "ran_at": "2026-10-29 22:21 UTC",
+   "seconds": 12.9,
+   "ran_at": "2026-10-30 01:20 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -107,48 +132,72 @@
       "precision": 0.686,
       "recall": 0.822,
       "key_links": 101,
+      "tp": 83,
+      "predicted": 121,
+      "truth": 101,
       "review_load_per_100": 29.2,
-      "seconds": 3.9
+      "seconds": 3.7,
+      "scan_cleaned": false
      },
      "7": {
       "connection_f1": 0.832,
       "precision": 0.807,
       "recall": 0.858,
       "key_links": 141,
+      "tp": 121,
+      "predicted": 150,
+      "truth": 141,
       "review_load_per_100": 23.1,
-      "seconds": 3.6
+      "seconds": 3.0,
+      "scan_cleaned": false
      },
      "8": {
       "connection_f1": 0.918,
       "precision": 0.957,
       "recall": 0.882,
       "key_links": 51,
+      "tp": 45,
+      "predicted": 47,
+      "truth": 51,
       "review_load_per_100": 8.8,
-      "seconds": 3.6
+      "seconds": 2.5,
+      "scan_cleaned": false
      },
      "9": {
       "connection_f1": 0.973,
       "precision": 1.0,
       "recall": 0.947,
       "key_links": 170,
+      "tp": 161,
+      "predicted": 161,
+      "truth": 170,
       "review_load_per_100": 4.0,
-      "seconds": 4.0
+      "seconds": 4.1,
+      "scan_cleaned": false
      },
      "10": {
       "connection_f1": 0.907,
       "precision": 0.896,
       "recall": 0.918,
       "key_links": 207,
+      "tp": 190,
+      "predicted": 212,
+      "truth": 207,
       "review_load_per_100": 11.4,
-      "seconds": 3.9
+      "seconds": 4.8,
+      "scan_cleaned": false
      },
      "11": {
       "connection_f1": 0.922,
       "precision": 0.929,
       "recall": 0.915,
       "key_links": 142,
+      "tp": 130,
+      "predicted": 140,
+      "truth": 142,
       "review_load_per_100": 9.2,
-      "seconds": 2.4
+      "seconds": 2.4,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.889,
@@ -156,12 +205,14 @@
     "recall": 0.899,
     "review_load_per_100": 14.1,
     "key_links": 812,
-    "worst_sheet": "6"
+    "worst_sheet": "6",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 21.6,
-   "ran_at": "2026-10-29 22:21 UTC",
+   "seconds": 20.6,
+   "ran_at": "2026-10-30 01:20 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -170,71 +221,97 @@
    "row": 1,
    "input": "open100-scan-L1",
    "family": "pid2graph-open100",
-   "status": "fail",
-   "value": "F1 0.877",
-   "reason": "connection F1 0.877 < 0.88 (precision 0.878, recall 0.876; worst sheet 6 at 0.759)",
+   "status": "pass",
+   "value": "F1 0.894",
+   "reason": "",
    "detail": {
     "sheets": {
      "6": {
-      "connection_f1": 0.759,
-      "precision": 0.691,
-      "recall": 0.842,
+      "connection_f1": 0.748,
+      "precision": 0.686,
+      "recall": 0.822,
       "key_links": 101,
-      "review_load_per_100": 28.1,
-      "seconds": 3.9
+      "tp": 83,
+      "predicted": 121,
+      "truth": 101,
+      "review_load_per_100": 29.2,
+      "seconds": 4.9,
+      "scan_cleaned": true
      },
      "7": {
       "connection_f1": 0.832,
       "precision": 0.807,
       "recall": 0.858,
       "key_links": 141,
+      "tp": 121,
+      "predicted": 150,
+      "truth": 141,
       "review_load_per_100": 23.1,
-      "seconds": 3.5
+      "seconds": 5.6,
+      "scan_cleaned": true
      },
      "8": {
       "connection_f1": 0.918,
       "precision": 0.957,
       "recall": 0.882,
       "key_links": 51,
+      "tp": 45,
+      "predicted": 47,
+      "truth": 51,
       "review_load_per_100": 8.8,
-      "seconds": 3.1
+      "seconds": 5.7,
+      "scan_cleaned": true
      },
      "9": {
-      "connection_f1": 0.973,
-      "precision": 1.0,
-      "recall": 0.947,
+      "connection_f1": 0.976,
+      "precision": 0.994,
+      "recall": 0.959,
       "key_links": 170,
-      "review_load_per_100": 4.0,
-      "seconds": 3.9
+      "tp": 163,
+      "predicted": 164,
+      "truth": 170,
+      "review_load_per_100": 3.5,
+      "seconds": 4.7,
+      "scan_cleaned": true
      },
      "10": {
-      "connection_f1": 0.915,
-      "precision": 0.894,
-      "recall": 0.937,
+      "connection_f1": 0.931,
+      "precision": 0.912,
+      "recall": 0.952,
       "key_links": 207,
-      "review_load_per_100": 10.6,
-      "seconds": 4.7
+      "tp": 197,
+      "predicted": 216,
+      "truth": 207,
+      "review_load_per_100": 8.5,
+      "seconds": 4.8,
+      "scan_cleaned": true
      },
      "11": {
-      "connection_f1": 0.827,
-      "precision": 0.938,
-      "recall": 0.739,
+      "connection_f1": 0.909,
+      "precision": 0.903,
+      "recall": 0.915,
       "key_links": 142,
-      "review_load_per_100": 18.5,
-      "seconds": 2.3
+      "tp": 130,
+      "predicted": 144,
+      "truth": 142,
+      "review_load_per_100": 10.9,
+      "seconds": 3.4,
+      "scan_cleaned": true
      }
     },
-    "connection_f1": 0.877,
+    "connection_f1": 0.894,
     "precision": 0.878,
-    "recall": 0.876,
-    "review_load_per_100": 15.4,
+    "recall": 0.91,
+    "review_load_per_100": 13.5,
     "key_links": 812,
-    "worst_sheet": "6"
+    "worst_sheet": "6",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 21.7,
-   "ran_at": "2026-10-29 22:22 UTC",
+   "seconds": 29.1,
+   "ran_at": "2026-10-30 01:21 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -244,70 +321,96 @@
    "input": "open100-scan-L2",
    "family": "pid2graph-open100",
    "status": "fail",
-   "value": "F1 0.566",
-   "reason": "connection F1 0.566 < 0.88 (precision 0.803, recall 0.437; worst sheet 6 at 0.432)",
+   "value": "F1 0.818",
+   "reason": "connection F1 0.818 < 0.88 (precision 0.752, recall 0.898; worst sheet 11 at 0.573)",
    "detail": {
     "sheets": {
      "6": {
-      "connection_f1": 0.432,
-      "precision": 0.789,
-      "recall": 0.297,
+      "connection_f1": 0.771,
+      "precision": 0.685,
+      "recall": 0.881,
       "key_links": 101,
-      "review_load_per_100": 41.1,
-      "seconds": 2.6
+      "tp": 89,
+      "predicted": 130,
+      "truth": 101,
+      "review_load_per_100": 27.6,
+      "seconds": 8.0,
+      "scan_cleaned": true
      },
      "7": {
-      "connection_f1": 0.56,
+      "connection_f1": 0.827,
       "precision": 0.792,
-      "recall": 0.433,
+      "recall": 0.865,
       "key_links": 141,
-      "review_load_per_100": 45.3,
-      "seconds": 2.8
+      "tp": 122,
+      "predicted": 154,
+      "truth": 141,
+      "review_load_per_100": 24.1,
+      "seconds": 8.4,
+      "scan_cleaned": true
      },
      "8": {
-      "connection_f1": 0.723,
-      "precision": 0.938,
-      "recall": 0.588,
+      "connection_f1": 0.897,
+      "precision": 0.857,
+      "recall": 0.941,
       "key_links": 51,
-      "review_load_per_100": 25.3,
-      "seconds": 2.1
+      "tp": 48,
+      "predicted": 56,
+      "truth": 51,
+      "review_load_per_100": 12.1,
+      "seconds": 5.4,
+      "scan_cleaned": true
      },
      "9": {
-      "connection_f1": 0.473,
-      "precision": 0.981,
-      "recall": 0.312,
+      "connection_f1": 0.976,
+      "precision": 0.994,
+      "recall": 0.959,
       "key_links": 170,
-      "review_load_per_100": 52.2,
-      "seconds": 2.9
+      "tp": 163,
+      "predicted": 164,
+      "truth": 170,
+      "review_load_per_100": 3.5,
+      "seconds": 12.8,
+      "scan_cleaned": true
      },
      "10": {
-      "connection_f1": 0.659,
-      "precision": 0.82,
-      "recall": 0.551,
+      "connection_f1": 0.903,
+      "precision": 0.845,
+      "recall": 0.971,
       "key_links": 207,
-      "review_load_per_100": 34.6,
-      "seconds": 4.4
+      "tp": 201,
+      "predicted": 238,
+      "truth": 207,
+      "review_load_per_100": 12.6,
+      "seconds": 22.9,
+      "scan_cleaned": true
      },
      "11": {
-      "connection_f1": 0.549,
-      "precision": 0.657,
-      "recall": 0.472,
+      "connection_f1": 0.573,
+      "precision": 0.465,
+      "recall": 0.746,
       "key_links": 142,
-      "review_load_per_100": 46.2,
-      "seconds": 1.9
+      "tp": 106,
+      "predicted": 228,
+      "truth": 142,
+      "review_load_per_100": 66.4,
+      "seconds": 6.7,
+      "scan_cleaned": true
      }
     },
-    "connection_f1": 0.566,
-    "precision": 0.803,
-    "recall": 0.437,
-    "review_load_per_100": 41.8,
+    "connection_f1": 0.818,
+    "precision": 0.752,
+    "recall": 0.898,
+    "review_load_per_100": 24.9,
     "key_links": 812,
-    "worst_sheet": "6"
+    "worst_sheet": "11",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 16.8,
-   "ran_at": "2026-10-29 22:22 UTC",
+   "seconds": 64.5,
+   "ran_at": "2026-10-30 01:21 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -317,70 +420,96 @@
    "input": "open100-scan-L3",
    "family": "pid2graph-open100",
    "status": "fail",
-   "value": "F1 0.387",
-   "reason": "connection F1 0.387 < 0.88 (precision 0.734, recall 0.262; worst sheet 9 at 0.256)",
+   "value": "F1 0.753",
+   "reason": "connection F1 0.753 < 0.88 (precision 0.708, recall 0.805; worst sheet 7 at 0.711)",
    "detail": {
     "sheets": {
      "6": {
-      "connection_f1": 0.414,
-      "precision": 0.744,
-      "recall": 0.287,
+      "connection_f1": 0.779,
+      "precision": 0.704,
+      "recall": 0.871,
       "key_links": 101,
-      "review_load_per_100": 42.7,
-      "seconds": 3.1
+      "tp": 88,
+      "predicted": 125,
+      "truth": 101,
+      "review_load_per_100": 26.0,
+      "seconds": 6.8,
+      "scan_cleaned": true
      },
      "7": {
-      "connection_f1": 0.282,
-      "precision": 0.694,
-      "recall": 0.177,
+      "connection_f1": 0.711,
+      "precision": 0.706,
+      "recall": 0.716,
       "key_links": 141,
-      "review_load_per_100": 59.9,
-      "seconds": 3.8
+      "tp": 101,
+      "predicted": 143,
+      "truth": 141,
+      "review_load_per_100": 38.7,
+      "seconds": 15.6,
+      "scan_cleaned": true
      },
      "8": {
-      "connection_f1": 0.507,
-      "precision": 0.9,
-      "recall": 0.353,
+      "connection_f1": 0.9,
+      "precision": 0.918,
+      "recall": 0.882,
       "key_links": 51,
-      "review_load_per_100": 38.5,
-      "seconds": 5.7
+      "tp": 45,
+      "predicted": 49,
+      "truth": 51,
+      "review_load_per_100": 11.0,
+      "seconds": 6.5,
+      "scan_cleaned": true
      },
      "9": {
-      "connection_f1": 0.256,
-      "precision": 1.0,
-      "recall": 0.147,
+      "connection_f1": 0.716,
+      "precision": 0.98,
+      "recall": 0.565,
       "key_links": 170,
-      "review_load_per_100": 64.2,
-      "seconds": 3.5
+      "tp": 96,
+      "predicted": 98,
+      "truth": 170,
+      "review_load_per_100": 33.6,
+      "seconds": 12.1,
+      "scan_cleaned": true
      },
      "10": {
-      "connection_f1": 0.451,
-      "precision": 0.744,
-      "recall": 0.324,
+      "connection_f1": 0.78,
+      "precision": 0.65,
+      "recall": 0.976,
       "key_links": 207,
-      "review_load_per_100": 47.8,
-      "seconds": 6.9
+      "tp": 202,
+      "predicted": 311,
+      "truth": 207,
+      "review_load_per_100": 33.4,
+      "seconds": 32.9,
+      "scan_cleaned": true
      },
      "11": {
-      "connection_f1": 0.441,
-      "precision": 0.613,
-      "recall": 0.345,
+      "connection_f1": 0.718,
+      "precision": 0.616,
+      "recall": 0.859,
       "key_links": 142,
-      "review_load_per_100": 52.1,
-      "seconds": 2.2
+      "tp": 122,
+      "predicted": 198,
+      "truth": 142,
+      "review_load_per_100": 40.3,
+      "seconds": 6.3,
+      "scan_cleaned": true
      }
     },
-    "connection_f1": 0.387,
-    "precision": 0.734,
-    "recall": 0.262,
-    "review_load_per_100": 52.0,
+    "connection_f1": 0.753,
+    "precision": 0.708,
+    "recall": 0.805,
+    "review_load_per_100": 32.9,
     "key_links": 812,
-    "worst_sheet": "9"
+    "worst_sheet": "7",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 25.4,
-   "ran_at": "2026-10-29 22:22 UTC",
+   "seconds": 80.2,
+   "ran_at": "2026-10-30 01:22 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -399,160 +528,240 @@
       "precision": 1.0,
       "recall": 0.952,
       "key_links": 502,
+      "tp": 478,
+      "predicted": 478,
+      "truth": 502,
       "review_load_per_100": 3.9,
-      "seconds": 24.2
+      "seconds": 16.8,
+      "scan_cleaned": false
      },
      "44": {
       "connection_f1": 0.57,
       "precision": 1.0,
       "recall": 0.399,
       "key_links": 657,
+      "tp": 262,
+      "predicted": 262,
+      "truth": 657,
       "review_load_per_100": 51.1,
-      "seconds": 23.2
+      "seconds": 14.9,
+      "scan_cleaned": false
      },
      "62": {
       "connection_f1": 0.981,
       "precision": 1.0,
       "recall": 0.963,
       "key_links": 680,
+      "tp": 655,
+      "predicted": 655,
+      "truth": 680,
       "review_load_per_100": 3.0,
-      "seconds": 26.7
+      "seconds": 19.2,
+      "scan_cleaned": false
      },
      "78": {
       "connection_f1": 0.987,
       "precision": 1.0,
       "recall": 0.974,
       "key_links": 608,
+      "tp": 592,
+      "predicted": 592,
+      "truth": 608,
       "review_load_per_100": 2.2,
-      "seconds": 26.8
+      "seconds": 16.1,
+      "scan_cleaned": false
      },
      "109": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 732,
+      "tp": 732,
+      "predicted": 732,
+      "truth": 732,
       "review_load_per_100": 0.0,
-      "seconds": 20.8
+      "seconds": 18.7,
+      "scan_cleaned": false
      },
      "111": {
       "connection_f1": 0.991,
       "precision": 1.0,
       "recall": 0.982,
       "key_links": 1194,
+      "tp": 1173,
+      "predicted": 1173,
+      "truth": 1194,
       "review_load_per_100": 1.6,
-      "seconds": 22.1
+      "seconds": 16.7,
+      "scan_cleaned": false
      },
      "122": {
       "connection_f1": 0.67,
       "precision": 1.0,
       "recall": 0.503,
       "key_links": 576,
+      "tp": 290,
+      "predicted": 290,
+      "truth": 576,
       "review_load_per_100": 41.9,
-      "seconds": 23.1
+      "seconds": 18.3,
+      "scan_cleaned": false
      },
      "143": {
       "connection_f1": 0.799,
       "precision": 1.0,
       "recall": 0.666,
       "key_links": 975,
+      "tp": 649,
+      "predicted": 649,
+      "truth": 975,
       "review_load_per_100": 30.1,
-      "seconds": 17.4
+      "seconds": 16.0,
+      "scan_cleaned": false
      },
      "149": {
       "connection_f1": 0.995,
       "precision": 1.0,
       "recall": 0.989,
       "key_links": 747,
+      "tp": 739,
+      "predicted": 739,
+      "truth": 747,
       "review_load_per_100": 1.0,
-      "seconds": 21.4
+      "seconds": 17.2,
+      "scan_cleaned": false
      },
      "158": {
       "connection_f1": 0.939,
       "precision": 1.0,
       "recall": 0.885,
       "key_links": 583,
+      "tp": 516,
+      "predicted": 516,
+      "truth": 583,
       "review_load_per_100": 8.9,
-      "seconds": 20.5
+      "seconds": 16.7,
+      "scan_cleaned": false
      },
      "209": {
       "connection_f1": 0.782,
       "precision": 1.0,
       "recall": 0.642,
       "key_links": 639,
+      "tp": 410,
+      "predicted": 410,
+      "truth": 639,
       "review_load_per_100": 30.3,
-      "seconds": 18.8
+      "seconds": 15.1,
+      "scan_cleaned": false
      },
      "224": {
       "connection_f1": 0.773,
       "precision": 1.0,
       "recall": 0.63,
       "key_links": 578,
+      "tp": 364,
+      "predicted": 364,
+      "truth": 578,
       "review_load_per_100": 31.1,
-      "seconds": 19.0
+      "seconds": 17.4,
+      "scan_cleaned": false
      },
      "290": {
       "connection_f1": 0.784,
       "precision": 1.0,
       "recall": 0.644,
       "key_links": 630,
+      "tp": 406,
+      "predicted": 406,
+      "truth": 630,
       "review_load_per_100": 29.4,
-      "seconds": 17.7
+      "seconds": 16.3,
+      "scan_cleaned": false
      },
      "345": {
       "connection_f1": 0.997,
       "precision": 1.0,
       "recall": 0.994,
       "key_links": 1705,
+      "tp": 1694,
+      "predicted": 1694,
+      "truth": 1705,
       "review_load_per_100": 0.6,
-      "seconds": 22.9
+      "seconds": 18.3,
+      "scan_cleaned": false
      },
      "363": {
       "connection_f1": 0.974,
       "precision": 1.0,
       "recall": 0.949,
       "key_links": 751,
+      "tp": 713,
+      "predicted": 713,
+      "truth": 751,
       "review_load_per_100": 4.2,
-      "seconds": 23.2
+      "seconds": 18.2,
+      "scan_cleaned": false
      },
      "366": {
       "connection_f1": 0.939,
       "precision": 1.0,
       "recall": 0.886,
       "key_links": 734,
+      "tp": 650,
+      "predicted": 650,
+      "truth": 734,
       "review_load_per_100": 9.9,
-      "seconds": 22.4
+      "seconds": 16.4,
+      "scan_cleaned": false
      },
      "382": {
       "connection_f1": 0.94,
       "precision": 1.0,
       "recall": 0.887,
       "key_links": 602,
+      "tp": 534,
+      "predicted": 534,
+      "truth": 602,
       "review_load_per_100": 9.3,
-      "seconds": 20.5
+      "seconds": 16.8,
+      "scan_cleaned": false
      },
      "400": {
       "connection_f1": 0.979,
       "precision": 1.0,
       "recall": 0.958,
       "key_links": 697,
+      "tp": 668,
+      "predicted": 668,
+      "truth": 697,
       "review_load_per_100": 3.6,
-      "seconds": 20.6
+      "seconds": 17.5,
+      "scan_cleaned": false
      },
      "494": {
       "connection_f1": 0.939,
       "precision": 1.0,
       "recall": 0.885,
       "key_links": 572,
+      "tp": 506,
+      "predicted": 506,
+      "truth": 572,
       "review_load_per_100": 9.7,
-      "seconds": 18.1
+      "seconds": 17.1,
+      "scan_cleaned": false
      },
      "496": {
       "connection_f1": 0.982,
       "precision": 1.0,
       "recall": 0.964,
       "key_links": 560,
+      "tp": 540,
+      "predicted": 540,
+      "truth": 560,
       "review_load_per_100": 3.0,
-      "seconds": 18.9
+      "seconds": 18.3,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.921,
@@ -560,12 +769,14 @@
     "recall": 0.854,
     "review_load_per_100": 12.6,
     "key_links": 14722,
-    "worst_sheet": "44"
+    "worst_sheet": "44",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 429.1,
-   "ran_at": "2026-10-29 22:23 UTC",
+   "seconds": 342.3,
+   "ran_at": "2026-10-30 01:24 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -584,24 +795,36 @@
       "precision": 0.909,
       "recall": 0.811,
       "key_links": 37,
+      "tp": 30,
+      "predicted": 33,
+      "truth": 37,
       "review_load_per_100": 16.1,
-      "seconds": 7.4
+      "seconds": 8.1,
+      "scan_cleaned": false
      },
      "dexpi-c02": {
       "connection_f1": 0.762,
       "precision": 1.0,
       "recall": 0.615,
       "key_links": 13,
+      "tp": 8,
+      "predicted": 8,
+      "truth": 13,
       "review_load_per_100": 19.2,
-      "seconds": 1.4
+      "seconds": 1.6,
+      "scan_cleaned": false
      },
      "dexpi-c03": {
       "connection_f1": 0.75,
       "precision": 1.0,
       "recall": 0.6,
       "key_links": 10,
+      "tp": 6,
+      "predicted": 6,
+      "truth": 10,
       "review_load_per_100": 19.0,
-      "seconds": 1.2
+      "seconds": 1.2,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.822,
@@ -609,12 +832,14 @@
     "recall": 0.733,
     "review_load_per_100": 17.4,
     "key_links": 60,
-    "worst_sheet": "dexpi-c03"
+    "worst_sheet": "dexpi-c03",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 10.1,
-   "ran_at": "2026-10-29 22:30 UTC",
+   "seconds": 10.9,
+   "ran_at": "2026-10-30 01:29 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -633,24 +858,36 @@
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 59,
+      "tp": 59,
+      "predicted": 59,
+      "truth": 59,
       "review_load_per_100": 0.0,
-      "seconds": 3.0
+      "seconds": 3.0,
+      "scan_cleaned": false
      },
      "102": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 34,
+      "tp": 34,
+      "predicted": 34,
+      "truth": 34,
       "review_load_per_100": 0.0,
-      "seconds": 3.1
+      "seconds": 2.8,
+      "scan_cleaned": false
      },
      "103": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 24,
+      "tp": 24,
+      "predicted": 24,
+      "truth": 24,
       "review_load_per_100": 0.0,
-      "seconds": 3.5
+      "seconds": 2.6,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 1.0,
@@ -658,12 +895,14 @@
     "recall": 1.0,
     "review_load_per_100": 0.0,
     "key_links": 117,
-    "worst_sheet": "101"
+    "worst_sheet": "101",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 9.6,
-   "ran_at": "2026-10-29 22:30 UTC",
+   "seconds": 8.4,
+   "ran_at": "2026-10-30 01:30 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -682,24 +921,36 @@
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 107,
+      "tp": 107,
+      "predicted": 107,
+      "truth": 107,
       "review_load_per_100": 0.0,
-      "seconds": 2.3
+      "seconds": 2.8,
+      "scan_cleaned": false
      },
      "102": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 55,
+      "tp": 55,
+      "predicted": 55,
+      "truth": 55,
       "review_load_per_100": 0.0,
-      "seconds": 3.3
+      "seconds": 2.7,
+      "scan_cleaned": false
      },
      "103": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 46,
+      "tp": 46,
+      "predicted": 46,
+      "truth": 46,
       "review_load_per_100": 0.0,
-      "seconds": 3.1
+      "seconds": 2.2,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 1.0,
@@ -707,12 +958,14 @@
     "recall": 1.0,
     "review_load_per_100": 0.0,
     "key_links": 208,
-    "worst_sheet": "101"
+    "worst_sheet": "101",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 8.7,
-   "ran_at": "2026-10-29 22:30 UTC",
+   "seconds": 7.7,
+   "ran_at": "2026-10-30 01:30 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -731,24 +984,36 @@
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 107,
+      "tp": 107,
+      "predicted": 107,
+      "truth": 107,
       "review_load_per_100": 0.0,
-      "seconds": 3.9
+      "seconds": 2.6,
+      "scan_cleaned": false
      },
      "102": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 55,
+      "tp": 55,
+      "predicted": 55,
+      "truth": 55,
       "review_load_per_100": 0.0,
-      "seconds": 2.8
+      "seconds": 2.1,
+      "scan_cleaned": false
      },
      "103": {
       "connection_f1": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 46,
+      "tp": 46,
+      "predicted": 46,
+      "truth": 46,
       "review_load_per_100": 0.0,
-      "seconds": 2.9
+      "seconds": 2.8,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 1.0,
@@ -756,12 +1021,14 @@
     "recall": 1.0,
     "review_load_per_100": 0.0,
     "key_links": 208,
-    "worst_sheet": "101"
+    "worst_sheet": "101",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 9.6,
-   "ran_at": "2026-10-29 22:30 UTC",
+   "seconds": 7.5,
+   "ran_at": "2026-10-30 01:30 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -771,46 +1038,60 @@
    "input": "te-rev-c-scan-L3",
    "family": "te-generated",
    "status": "pass",
-   "value": "F1 0.917",
+   "value": "F1 0.988",
    "reason": "",
    "detail": {
     "sheets": {
      "101": {
-      "connection_f1": 0.914,
-      "precision": 1.0,
-      "recall": 0.841,
+      "connection_f1": 0.995,
+      "precision": 0.991,
+      "recall": 1.0,
       "key_links": 107,
-      "review_load_per_100": 10.8,
-      "seconds": 3.7
+      "tp": 107,
+      "predicted": 108,
+      "truth": 107,
+      "review_load_per_100": 0.6,
+      "seconds": 4.5,
+      "scan_cleaned": true
      },
      "102": {
-      "connection_f1": 0.962,
+      "connection_f1": 1.0,
       "precision": 1.0,
-      "recall": 0.927,
+      "recall": 1.0,
       "key_links": 55,
-      "review_load_per_100": 4.2,
-      "seconds": 3.6
+      "tp": 55,
+      "predicted": 55,
+      "truth": 55,
+      "review_load_per_100": 0.0,
+      "seconds": 4.5,
+      "scan_cleaned": true
      },
      "103": {
-      "connection_f1": 0.864,
-      "precision": 1.0,
-      "recall": 0.761,
+      "connection_f1": 0.956,
+      "precision": 0.977,
+      "recall": 0.935,
       "key_links": 46,
-      "review_load_per_100": 13.3,
-      "seconds": 3.3
+      "tp": 43,
+      "predicted": 44,
+      "truth": 46,
+      "review_load_per_100": 4.8,
+      "seconds": 4.1,
+      "scan_cleaned": true
      }
     },
-    "connection_f1": 0.917,
-    "precision": 1.0,
-    "recall": 0.846,
-    "review_load_per_100": 9.6,
+    "connection_f1": 0.988,
+    "precision": 0.99,
+    "recall": 0.986,
+    "review_load_per_100": 1.5,
     "key_links": 208,
-    "worst_sheet": "103"
+    "worst_sheet": "103",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 10.6,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 13.2,
+   "ran_at": "2026-10-30 01:30 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -829,8 +1110,12 @@
       "precision": 1.0,
       "recall": 1.0,
       "key_links": 52,
+      "tp": 52,
+      "predicted": 52,
+      "truth": 52,
       "review_load_per_100": 0.0,
-      "seconds": 2.9
+      "seconds": 2.0,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 1.0,
@@ -838,12 +1123,14 @@
     "recall": 1.0,
     "review_load_per_100": 0.0,
     "key_links": 52,
-    "worst_sheet": "RT1"
+    "worst_sheet": "RT1",
+    "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 2.9,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 2.0,
+   "ran_at": "2026-10-30 01:30 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
    }
@@ -854,7 +1141,7 @@
    "family": "dexpi-1.2-vendor-exports",
    "status": "fail",
    "value": "F1 0.738",
-   "reason": "connection F1 0.738 < 0.88 (precision 0.679, recall 0.809; worst sheet E05V01-SAG.EX01 at 0.0); 22 of 81 renders mapped cleanly (by exporter {'autocad': '0/12', 'aveva': '1/22', 'comos': '7/28', 'sppid': '14/19'}); not mapped: 16 map fails its check, 37 too few scored symbols in the XML, 6 refused by adapt_dexpi.convert_xml; by exporter: aveva 1 sheets F1 1.0, comos 7 sheets F1 0.436, sppid 14 sheets F1 0.844; held out (A174), scored once",
+   "reason": "connection F1 0.738 < 0.88 (precision 0.679, recall 0.809; worst sheet E05V01-SAG.EX01 at 0.0); 22 of 81 renders mapped cleanly (by exporter {'autocad': '0/12', 'aveva': '1/22', 'comos': '7/28', 'sppid': '14/19'}); not mapped: 16 map fails its check, 37 too few scored symbols in the XML, 6 refused by adapt_dexpi.convert_xml; by exporter: aveva 1 sheets F1 1.0, comos 7 sheets F1 0.436, sppid 14 sheets F1 0.844; initial held-out tracer baseline A174; auto clean-up leaves these renders unchanged (A189)",
    "detail": {
     "sheets": {
      "C01V01-HEX.EX02": {
@@ -866,7 +1153,8 @@
       "predicted": 34,
       "truth": 29,
       "review_load_per_100": 25.0,
-      "seconds": 20.5
+      "seconds": 30.0,
+      "scan_cleaned": false
      },
      "C01V01-HEX.EX03": {
       "connection_f1": 0.754,
@@ -877,7 +1165,8 @@
       "predicted": 32,
       "truth": 29,
       "review_load_per_100": 28.8,
-      "seconds": 17.7
+      "seconds": 33.7,
+      "scan_cleaned": false
      },
      "C01V01-SAG.EX02": {
       "connection_f1": 0.449,
@@ -888,7 +1177,8 @@
       "predicted": 31,
       "truth": 18,
       "review_load_per_100": 57.4,
-      "seconds": 5.6
+      "seconds": 12.3,
+      "scan_cleaned": false
      },
      "C02V01-HEX.EX02": {
       "connection_f1": 0.933,
@@ -899,7 +1189,8 @@
       "predicted": 24,
       "truth": 21,
       "review_load_per_100": 8.6,
-      "seconds": 19.9
+      "seconds": 39.5,
+      "scan_cleaned": false
      },
      "C03V01-HEX.EX02": {
       "connection_f1": 0.968,
@@ -910,7 +1201,8 @@
       "predicted": 16,
       "truth": 15,
       "review_load_per_100": 4.0,
-      "seconds": 4.1
+      "seconds": 5.6,
+      "scan_cleaned": false
      },
      "C03V01-SAG.EX01": {
       "connection_f1": 0.4,
@@ -921,7 +1213,8 @@
       "predicted": 11,
       "truth": 4,
       "review_load_per_100": 64.3,
-      "seconds": 4.9
+      "seconds": 5.9,
+      "scan_cleaned": false
      },
      "C04V01-HEX.EX02": {
       "connection_f1": 1.0,
@@ -932,7 +1225,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 2.8
+      "seconds": 5.1,
+      "scan_cleaned": false
      },
      "C05V01-SAG.EX01": {
       "connection_f1": 0.5,
@@ -943,7 +1237,8 @@
       "predicted": 3,
       "truth": 5,
       "review_load_per_100": 30.8,
-      "seconds": 4.3
+      "seconds": 6.3,
+      "scan_cleaned": false
      },
      "E05V01-SAG.EX01": {
       "connection_f1": 0.0,
@@ -954,7 +1249,8 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 3.4
+      "seconds": 4.8,
+      "scan_cleaned": false
      },
      "E06V01-SAG.EX01": {
       "connection_f1": 1.0,
@@ -965,7 +1261,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 3.3
+      "seconds": 4.8,
+      "scan_cleaned": false
      },
      "I01V02-HEX.EX03": {
       "connection_f1": 0.667,
@@ -976,7 +1273,8 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 20.0,
-      "seconds": 2.9
+      "seconds": 6.1,
+      "scan_cleaned": false
      },
      "I02V01-HEX.EX03": {
       "connection_f1": 0.0,
@@ -987,7 +1285,8 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 9.2
+      "seconds": 9.3,
+      "scan_cleaned": false
      },
      "I03V01-HEX.EX03": {
       "connection_f1": 0.667,
@@ -998,7 +1297,8 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 16.7,
-      "seconds": 8.6
+      "seconds": 6.2,
+      "scan_cleaned": false
      },
      "I04V01-HEX.EX05": {
       "connection_f1": 1.0,
@@ -1009,7 +1309,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 10.4
+      "seconds": 9.2,
+      "scan_cleaned": false
      },
      "I05V01-SAG.EX01": {
       "connection_f1": 0.0,
@@ -1020,7 +1321,8 @@
       "predicted": 1,
       "truth": 3,
       "review_load_per_100": 50.0,
-      "seconds": 4.6
+      "seconds": 3.2,
+      "scan_cleaned": false
      },
      "I09V02-HEX.EX03": {
       "connection_f1": 1.0,
@@ -1031,7 +1333,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 8.2
+      "seconds": 7.0,
+      "scan_cleaned": false
      },
      "I11V01-HEX.EX03": {
       "connection_f1": 1.0,
@@ -1042,7 +1345,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 10.4
+      "seconds": 7.0,
+      "scan_cleaned": false
      },
      "I12V01-HEX.EX03": {
       "connection_f1": 0.0,
@@ -1053,7 +1357,8 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 8.1
+      "seconds": 6.0,
+      "scan_cleaned": false
      },
      "I12V01-SAG.EX01": {
       "connection_f1": 0.0,
@@ -1064,7 +1369,8 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 5.6
+      "seconds": 3.2,
+      "scan_cleaned": false
      },
      "P01V01-AVV.EX01": {
       "connection_f1": 1.0,
@@ -1075,7 +1381,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 0.9
+      "seconds": 0.6,
+      "scan_cleaned": false
      },
      "P01V01-HEX.EX03": {
       "connection_f1": 1.0,
@@ -1086,7 +1393,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 3.0
+      "seconds": 2.9,
+      "scan_cleaned": false
      },
      "P01V01-ING.EX01": {
       "connection_f1": 1.0,
@@ -1097,7 +1405,8 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 0.8
+      "seconds": 0.6,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.738,
@@ -1106,6 +1415,7 @@
     "review_load_per_100": 26.9,
     "key_links": 136,
     "worst_sheet": "E05V01-SAG.EX01",
+    "scan_cleanup": "auto",
     "build": {
      "renders": 81,
      "mapped": 22,
@@ -1121,7 +1431,7 @@
       "sppid": "14/19"
      }
     },
-    "held_out": "held out, scored once as attempt A174: the mapping (adapter A2, corpus_adapters.build_vendor_keys) and the scoring plan were fixed in A173 before any scored run, and no tracer or line_layers rule was chosen or changed on these renders; the matrix re-runs the same frozen tools (deterministic)",
+    "held_out": "initial baseline held out (A173 mapping and scoring plan, A174 scored once). For the later pipe changes A191-A195, A177 made SPPID development data and kept Comos and AVEVA held out, seen once before as a baseline (frozen run A196); the pooled vendor result mixes those splits. A192 fixes junction matching in the scorer: SPPID 0.679 to 0.852 without a tracing change, about two thirds of its total development gain to 0.939. The row-1 tracer is unchanged on these renders by the auto scan clean-up (A189). Matrix re-runs are deterministic checks of the frozen rules",
     "by_exporter": {
      "aveva": {
       "sheets": 1,
@@ -1147,20 +1457,21 @@
     }
    },
    "published": [],
-   "seconds": 159.6,
-   "ran_at": "2026-10-29 22:47 UTC",
+   "seconds": 209.6,
+   "ran_at": "2026-10-30 01:52 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
@@ -1171,25 +1482,30 @@
    "input": "omre-1958-pid",
    "family": "osti-aec-scans",
    "status": "fail",
-   "value": "F1 0.561",
-   "reason": "connection F1 0.561 < 0.88 (precision 0.442, recall 0.768; worst sheet omre_q4 at 0.561)",
+   "value": "F1 0.522",
+   "reason": "connection F1 0.522 < 0.88 (precision 0.396, recall 0.768; worst sheet omre_q4 at 0.522)",
    "detail": {
     "sheets": {
      "omre_q4": {
-      "connection_f1": 0.561,
-      "precision": 0.442,
+      "connection_f1": 0.522,
+      "precision": 0.396,
       "recall": 0.768,
       "key_links": 99,
-      "review_load_per_100": 64.7,
-      "seconds": 1.4
+      "tp": 76,
+      "predicted": 192,
+      "truth": 99,
+      "review_load_per_100": 75.5,
+      "seconds": 1.7,
+      "scan_cleaned": true
      }
     },
-    "connection_f1": 0.561,
-    "precision": 0.442,
+    "connection_f1": 0.522,
+    "precision": 0.396,
     "recall": 0.768,
-    "review_load_per_100": 64.7,
+    "review_load_per_100": 75.5,
     "key_links": 99,
     "worst_sheet": "omre_q4",
+    "scan_cleanup": "auto",
     "key": {
      "made_by": "agent-made key, first pass, not reviewed by a person",
      "keys": "data/agent_keys/omre-1958-pid",
@@ -1202,9 +1518,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 3.4,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 2.4,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
     "data/agent_keys/omre-1958-pid/omre_q4.graphml": "sha256:6cb0e9db7871f0c6"
@@ -1224,40 +1541,60 @@
       "precision": 0.926,
       "recall": 0.61,
       "key_links": 41,
+      "tp": 25,
+      "predicted": 27,
+      "truth": 41,
       "review_load_per_100": 22.5,
-      "seconds": 1.0
+      "seconds": 1.1,
+      "scan_cleaned": false
      },
      "Sch_ma_P_ID1": {
       "connection_f1": 0.716,
       "precision": 0.923,
       "recall": 0.585,
       "key_links": 41,
+      "tp": 24,
+      "predicted": 26,
+      "truth": 41,
       "review_load_per_100": 23.8,
-      "seconds": 1.2
+      "seconds": 1.3,
+      "scan_cleaned": false
      },
      "RI_Sample_ISO": {
       "connection_f1": 0.862,
       "precision": 0.862,
       "recall": 0.862,
       "key_links": 65,
+      "tp": 56,
+      "predicted": 65,
+      "truth": 65,
       "review_load_per_100": 14.9,
-      "seconds": 0.8
+      "seconds": 0.9,
+      "scan_cleaned": false
      },
      "Pump_with_tank_pid_en": {
       "connection_f1": 0.765,
       "precision": 1.0,
       "recall": 0.619,
       "key_links": 21,
+      "tp": 13,
+      "predicted": 13,
+      "truth": 21,
       "review_load_per_100": 21.6,
-      "seconds": 0.1
+      "seconds": 0.1,
+      "scan_cleaned": false
      },
      "P_ID": {
       "connection_f1": 0.629,
       "precision": 0.895,
       "recall": 0.485,
       "key_links": 264,
+      "tp": 128,
+      "predicted": 143,
+      "truth": 264,
       "review_load_per_100": 36.2,
-      "seconds": 2.4
+      "seconds": 2.4,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.697,
@@ -1266,6 +1603,7 @@
     "review_load_per_100": 29.1,
     "key_links": 432,
     "worst_sheet": "P_ID",
+    "scan_cleanup": "auto",
     "key": {
      "made_by": "agent-made key, first pass, not reviewed by a person",
      "keys": "data/agent_keys/commons-pid-sheets",
@@ -1284,9 +1622,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 6.4,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 6.5,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "sha256:43a4ebe740bc78b9",
@@ -1310,8 +1649,12 @@
       "precision": 0.935,
       "recall": 0.902,
       "key_links": 112,
+      "tp": 101,
+      "predicted": 108,
+      "truth": 112,
       "review_load_per_100": 11.4,
-      "seconds": 0.8
+      "seconds": 0.6,
+      "scan_cleaned": false
      }
     },
     "connection_f1": 0.918,
@@ -1320,6 +1663,7 @@
     "review_load_per_100": 11.4,
     "key_links": 112,
     "worst_sheet": "fig1",
+    "scan_cleanup": "auto",
     "key": {
      "made_by": "agent-made key, first pass, not reviewed by a person",
      "keys": "data/agent_keys/pronto-fig1",
@@ -1331,9 +1675,10 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.0,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
+    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
     "data/agent_keys/pronto-fig1/fig1.graphml": "sha256:f4e0b59ebaea8b3a"
@@ -1362,8 +1707,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 2.6,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 2.1,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1410,8 +1755,8 @@
      "agrees": true
     }
    ],
-   "seconds": 2.0,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 2.3,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1445,8 +1790,8 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 2.5,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 2.7,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1480,8 +1825,8 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 2.8,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 2.4,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1515,8 +1860,8 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 2.9,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 2.3,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1548,8 +1893,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 11.8,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 9.6,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1581,8 +1926,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1614,8 +1959,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1647,8 +1992,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.9,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1681,7 +2026,7 @@
    },
    "published": [],
    "seconds": 0.8,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1713,8 +2058,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.8,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1746,8 +2091,8 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1790,7 +2135,7 @@
    "published": [],
    "key": "agent-made",
    "seconds": 1.4,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1839,8 +2184,8 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 2.1,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 2.5,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1886,8 +2231,8 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.5,
-   "ran_at": "2026-10-29 22:31 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-30 01:34 UTC",
    "tool_files": {
     "scripts/evaluate_vendor.py": "sha256:734c154c31964449",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
@@ -1918,13 +2263,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.7,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -1955,12 +2300,12 @@
    },
    "published": [],
    "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -1992,13 +2337,13 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2030,13 +2375,13 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2069,12 +2414,12 @@
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
    "seconds": 0.5,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2105,12 +2450,12 @@
    },
    "published": [],
    "seconds": 1.0,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2141,12 +2486,12 @@
    },
    "published": [],
    "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2176,13 +2521,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2213,12 +2558,12 @@
    },
    "published": [],
    "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2248,13 +2593,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2285,12 +2630,12 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2330,13 +2675,13 @@
      "agrees": true
     }
    ],
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2376,13 +2721,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.5,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 1.4,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2429,13 +2774,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.1,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 1.4,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2479,13 +2824,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -2524,7 +2869,7 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -2558,7 +2903,7 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -2592,7 +2937,7 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -2641,7 +2986,7 @@
    },
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -2690,14 +3035,14 @@
     "not_checked": "signal lines (the bundle has none); a separate measurement symbol (every loop here is a combined instrument: DEXPI nests the sensor in the controller bubble, so the measurement is the controller's own tag)"
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2743,19 +3088,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 1.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2801,19 +3146,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 5.2,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 1.9,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2931,19 +3276,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 4.7,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 4.8,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2972,19 +3317,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 4.6,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 5.2,
+   "ran_at": "2026-10-30 01:48 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -3013,19 +3358,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 2.8,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 3.3,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -3055,19 +3400,19 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 1.6,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 2.7,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -3262,12 +3607,12 @@
     }
    },
    "published": [],
-   "seconds": 0.1,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.0,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
   },
@@ -3281,7 +3626,7 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -3296,7 +3641,7 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
    }
@@ -3316,10 +3661,10 @@
     "stderr": ""
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2961882a40e42313",
+    "scripts/generate.py": "sha256:38639f82898923c6",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3347,10 +3692,10 @@
      "agrees": true
     }
    ],
-   "seconds": 0.3,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2961882a40e42313",
+    "scripts/generate.py": "sha256:38639f82898923c6",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3370,10 +3715,10 @@
     "stderr": ""
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2961882a40e42313",
+    "scripts/generate.py": "sha256:38639f82898923c6",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3410,13 +3755,13 @@
     "not_tested": "instruments, controllers, valves and PI/Ignition tag content: the flowsheet has none"
    },
    "published": [],
-   "seconds": 0.4,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
@@ -3946,13 +4291,13 @@
     "not_tested": "instruments, controllers and valves: DWSIM flowsheets are steady-state process models with no instrumentation; 2 solver Adjust/Spec blocks in all 42 (solver targets, not plant controllers) are not mapped"
    },
    "published": [],
-   "seconds": 22.5,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 23.3,
+   "ran_at": "2026-10-30 01:49 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
@@ -4402,16 +4747,16 @@
     },
     {
      "file": "examples/historian-csv/README.md",
-     "line": 98,
+     "line": 129,
      "says": "fault 6 (drift): detection at 18 minutes, 0 of the 160 pre-fault samples flagged",
      "ours": "fault 6 (drift): detection at 18.0 minutes, 0 of 160 pre-fault samples flagged",
      "agrees": true
     }
    ],
-   "seconds": 3.6,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 2.9,
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40"
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a"
    }
   },
   {
@@ -4451,9 +4796,9 @@
    },
    "published": [],
    "seconds": 0.5,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40"
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a"
    }
   },
   {
@@ -4522,13 +4867,13 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 1.1,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
   },
@@ -4597,13 +4942,13 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 1.0,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 0.9,
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
   },
@@ -5850,13 +6195,13 @@
     "development_data": "development data for the drift method (it was tuned and frozen on PRONTO days 2-4, SKAB, HAI 21.03 and the TE runs; data/attempts.json A163, A165, A171), so a pass here is not a held-out result"
    },
    "published": [],
-   "seconds": 15.9,
-   "ran_at": "2026-10-29 22:32 UTC",
+   "seconds": 15.0,
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
   },
@@ -6006,13 +6351,13 @@
    },
    "published": [],
    "note": "`k_target_met` is false on 2 of 2 runs (test1, test4): K=20 (the largest K the tool tries) did not bring held-out normal flags under the tool's 0.5% target, so the bands ran with a K that misses the tool's own selection rule; the verdict uses the row's criterion, which does not include that target",
-   "seconds": 277.8,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 318.3,
+   "ran_at": "2026-10-30 01:35 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
    }
   },
@@ -6022,7 +6367,7 @@
    "family": "uci-hydraulic",
    "status": "fail",
    "value": "0/3 runs pass; detected 3/3, too many pre-fault flags 3/3",
-   "reason": "drift method: 3 of 3 runs fail: 0 not detected, 3 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 38/110 rows flagged (tags PS4). Held-out source for the drift method (A165 split, A171 method), scored once with the frozen method; a cyclic process (load cycles of 60 s (each historian row is one cycle's average))",
+   "reason": "drift method: 3 of 3 runs fail: 0 not detected, 3 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 38/110 rows flagged (tags PS4). development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence; a cyclic process (load cycles of 60 s (each historian row is one cycle's average))",
    "detail": {
     "method": "drift",
     "fit": "per run, the first 100 load cycles of its section, all at the section's opening grades",
@@ -6095,16 +6440,17 @@
       "what": "cycles 1465-2205: normal = cycles 1465-1564 at grades (100, 100, 0, 90); fault = cycle 1675 at (100, 100, 2, 130)"
      }
     },
-    "held_out": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result",
+    "development_data": "development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence",
     "cyclic_process": "load cycles of 60 s (each historian row is one cycle's average)",
-    "adapter": "scripts/historian_adapters.py"
+    "adapter": "scripts/historian_adapters.py",
+    "earlier_drift_split": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result"
    },
    "published": [],
-   "seconds": 27.1,
-   "ran_at": "2026-10-29 22:38 UTC",
+   "seconds": 23.8,
+   "ran_at": "2026-10-30 01:41 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/historian_adapters.py": "sha256:4d3495cc0161928d"
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
   {
@@ -6113,7 +6459,7 @@
    "family": "metropt",
    "status": "fail",
    "value": "1/4 runs pass; detected 3/4, too many pre-fault flags 3/4; K target not met 4/4",
-   "reason": "drift method: 3 of 4 runs fail: 1 not detected, 3 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 211/7466 rows flagged (tags DV_pressure). Held-out source for the drift method (A165 split, A171 method), scored once with the frozen method; a cyclic process (compressor load/unload and air-dryer tower duty cycles)",
+   "reason": "drift method: 3 of 4 runs fail: 1 not detected, 3 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 211/7466 rows flagged (tags DV_pressure). development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence; a cyclic process (compressor load/unload and air-dryer tower duty cycles)",
    "detail": {
     "method": "drift",
     "fit": "2020-02-01 to 2020-02-08 (a normal week, before any reported failure)",
@@ -6198,17 +6544,18 @@
       "what": "air leak 2020-07-15 14:30 to 2020-07-15 19:00 (report); scored from 2020-07-14 14:30"
      }
     },
-    "held_out": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result",
+    "development_data": "development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence",
     "cyclic_process": "compressor load/unload and air-dryer tower duty cycles",
-    "adapter": "scripts/historian_adapters.py"
+    "adapter": "scripts/historian_adapters.py",
+    "earlier_drift_split": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result"
    },
    "published": [],
    "note": "`k_target_met` is false on 4 of 4 runs (failure1, failure2, failure3, failure4): K=20 (the largest K the tool tries) did not bring held-out normal flags under the tool's 0.5% target, so the bands ran with a K that misses the tool's own selection rule; the verdict uses the row's criterion, which does not include that target",
-   "seconds": 14.0,
-   "ran_at": "2026-10-29 23:26 UTC",
+   "seconds": 16.5,
+   "ran_at": "2026-10-30 01:41 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/historian_adapters.py": "sha256:4d3495cc0161928d"
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
   {
@@ -6216,32 +6563,34 @@
    "input": "battledim",
    "family": "battledim",
    "status": "fail",
-   "value": "0/14 runs pass; detected 0/14, too many pre-fault flags 0/14",
-   "reason": "drift method: 14 of 14 runs fail: 14 not detected, 0 with more than 0.5% of pre-fault rows flagged. Held-out source for the drift method (A165 split, A171 method), scored once with the frozen method; a cyclic process (daily water-demand cycle)",
+   "value": "8/14 runs pass; detected 9/14, too many pre-fault flags 1/14",
+   "reason": "cyclic method: 6 of 14 runs fail: 5 not detected, 1 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 5/576 rows flagged (tags n288, n726, n752). development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence; a cyclic process (daily water-demand cycle)",
    "detail": {
-    "method": "drift",
+    "method": "cyclic",
     "fit": "2018-01-01 00:00 up to the first leak start (2018-01-08 13:30)",
     "criterion": "PRONTO criterion: detected by 3 in a row at or after the labelled start, and at most 0.5% of pre-fault rows flagged; set before any run on this source (data/attempts.json A165: the same criterion as the other real sources, label mapping fixed with it)",
     "runs": {
      "p257": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 1038,
+      "detection_run3_delay": 138600.0,
+      "first_tags": [
+       "T1"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p257 (incipient) from 2018-01-08 13:30; scored 2018-01-06 13:30 to 2018-01-15 13:30"
      },
      "p461": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
@@ -6256,8 +6605,8 @@
       "what": "leak p461 (incipient) from 2018-01-23 04:25; scored 2018-01-21 04:25 to 2018-01-30 04:25"
      },
      "p232": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
@@ -6272,8 +6621,8 @@
       "what": "leak p232 (incipient) from 2018-01-31 02:35; scored 2018-01-29 02:35 to 2018-02-07 02:35"
      },
      "p427": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
@@ -6288,24 +6637,26 @@
       "what": "leak p427 (incipient) from 2018-02-13 08:25; scored 2018-02-11 08:25 to 2018-02-20 08:25"
      },
      "p673": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 581,
+      "detection_run3_delay": 1500.0,
+      "first_tags": [
+       "n229"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p673 (abrupt) from 2018-03-05 15:45; scored 2018-03-03 15:45 to 2018-03-12 15:45"
      },
      "p628": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
@@ -6320,120 +6671,152 @@
       "what": "leak p628 (incipient) from 2018-05-02 14:55; scored 2018-04-30 14:55 to 2018-05-09 14:55"
      },
      "p538": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 656,
+      "detection_run3_delay": 24000.0,
+      "first_tags": [
+       "n506",
+       "n114",
+       "n469"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p538 (abrupt) from 2018-05-18 08:35; scored 2018-05-16 08:35 to 2018-05-25 08:35"
      },
      "p866": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 620,
+      "detection_run3_delay": 13200.0,
+      "first_tags": [
+       "n296",
+       "n722",
+       "n726"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p866 (abrupt) from 2018-06-01 09:05; scored 2018-05-30 09:05 to 2018-06-08 09:05"
      },
      "p31": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 1117,
+      "detection_run3_delay": 162300.0,
+      "first_tags": [
+       "n726",
+       "n752",
+       "n288"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p31 (incipient) from 2018-06-28 10:35; scored 2018-06-26 10:35 to 2018-07-05 10:35"
      },
      "p654": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 1515,
+      "detection_run3_delay": 281700.0,
+      "first_tags": [
+       "n288",
+       "n726",
+       "n752"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p654 (incipient) from 2018-07-05 03:40; scored 2018-07-03 03:40 to 2018-07-12 03:40"
      },
      "p810": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
-      "pre_fault_flagged": 0,
+      "pre_fault_flagged": 5,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
-      "pre_fault_tags": [],
+      "detected": true,
+      "detection_run3_row": 693,
+      "detection_run3_delay": 35100.0,
+      "first_tags": [
+       "n4",
+       "n31",
+       "T1"
+      ],
+      "pre_fault_tags": [
+       "n288",
+       "n726",
+       "n752"
+      ],
       "overlap_detection_only": false,
       "pass": false,
       "what": "leak p810 (incipient) from 2018-07-28 03:05; scored 2018-07-26 03:05 to 2018-08-04 03:05"
      },
      "p183": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 637,
+      "detection_run3_delay": 18300.0,
+      "first_tags": [
+       "n752",
+       "n726",
+       "n288"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p183 (abrupt) from 2018-08-07 02:35; scored 2018-08-05 02:35 to 2018-08-14 02:35"
      },
      "p158": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
       "pre_fault_rows": 576,
-      "detected": false,
-      "detection_run3_row": null,
-      "detection_run3_delay": null,
-      "first_tags": [],
+      "detected": true,
+      "detection_run3_row": 1292,
+      "detection_run3_delay": 214800.0,
+      "first_tags": [
+       "n644",
+       "n288",
+       "n726"
+      ],
       "pre_fault_tags": [],
       "overlap_detection_only": false,
-      "pass": false,
+      "pass": true,
       "what": "leak p158 (abrupt) from 2018-10-06 02:35; scored 2018-10-04 02:35 to 2018-10-13 02:35"
      },
      "p369": {
-      "method": "drift",
-      "k": 10,
+      "method": "cyclic",
+      "k": 12,
       "k_target_met": true,
       "fault_start_row": 576,
       "pre_fault_flagged": 0,
@@ -6448,16 +6831,416 @@
       "what": "leak p369 (abrupt) from 2018-10-26 02:05; scored 2018-10-24 02:05 to 2018-11-02 02:05"
      }
     },
-    "held_out": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result",
+    "development_data": "development data for the auto/cyclic method (A178, A183): this source was held out for the earlier drift method (A165, A171), then used to choose the cyclic method, so the current result is not held-out evidence",
+    "cyclic_process": "daily water-demand cycle",
+    "adapter": "scripts/historian_adapters.py",
+    "earlier_drift_split": "held-out source for the drift method's second iteration: the split and the label mapping were fixed before any run (data/attempts.json A165) and the method was frozen on the development sources before this source was first scored, once (A171); the matrix re-runs that same frozen method (deterministic), nothing was tuned on the result"
+   },
+   "published": [],
+   "seconds": 11.2,
+   "ran_at": "2026-10-30 01:41 UTC",
+   "tool_files": {
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
+   }
+  },
+  {
+   "row": 6,
+   "input": "battledim-2019",
+   "family": "battledim",
+   "status": "fail",
+   "value": "6/19 runs pass; detected 13/19, too many pre-fault flags 7/19",
+   "reason": "cyclic method: 13 of 19 runs fail: 6 not detected, 7 with more than 0.5% of pre-fault rows flagged; worst pre-fault: 129/576 rows flagged (tags T1, n1, n31). held-out year for the auto/cyclic method: the split and label mapping were fixed in A178, the method frozen in A183 and scored once in A184; the matrix re-runs that method deterministically. This is the same L-Town network as 2018 development, so it tests carry-over across years only. Detections arrive 14 hours to 5 days after leak start, and tank level T1 drives most flags; it does not show prompt leak isolation; a cyclic process (daily water-demand cycle)",
+   "detail": {
+    "method": "cyclic",
+    "fit": "2019-01-01 00:00 up to the first leak starting in 2019 (2019-01-15 23:00); the four leaks carried over from 2018 are part of normal",
+    "criterion": "PRONTO criterion: detected by 3 in a row at or after the labelled start, and at most 0.5% of pre-fault rows flagged; set before any run on this source (data/attempts.json A178: the same criterion as the other real sources, label mapping fixed with it)",
+    "runs": {
+     "p523": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p523 (abrupt) from 2019-01-15 23:00; scored 2019-01-13 23:00 to 2019-01-22 23:00"
+     },
+     "p827": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p827 (abrupt) from 2019-01-24 18:30; scored 2019-01-22 18:30 to 2019-01-31 18:30"
+     },
+     "p280": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 872,
+      "detection_run3_delay": 88800.0,
+      "first_tags": [
+       "T1",
+       "n31",
+       "n1"
+      ],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p280 (abrupt) from 2019-02-10 13:05; scored 2019-02-08 13:05 to 2019-02-17 13:05"
+     },
+     "p653": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1339,
+      "detection_run3_delay": 228900.0,
+      "first_tags": [
+       "T1"
+      ],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p653 (incipient) from 2019-03-03 13:10; scored 2019-03-01 13:10 to 2019-03-10 13:10"
+     },
+     "p710": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1144,
+      "detection_run3_delay": 170400.0,
+      "first_tags": [
+       "T1"
+      ],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p710 (abrupt) from 2019-03-24 14:15; scored 2019-03-22 14:15 to 2019-03-31 14:15"
+     },
+     "p514": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 10,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1054,
+      "detection_run3_delay": 143400.0,
+      "first_tags": [
+       "T1"
+      ],
+      "pre_fault_tags": [
+       "T1"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p514 (abrupt) from 2019-04-02 20:40; scored 2019-03-31 20:40 to 2019-04-09 20:40"
+     },
+     "p331": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 71,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1209,
+      "detection_run3_delay": 189900.0,
+      "first_tags": [
+       "T1",
+       "n31",
+       "n1"
+      ],
+      "pre_fault_tags": [
+       "T1",
+       "n4"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p331 (abrupt) from 2019-04-20 10:10; scored 2019-04-18 10:10 to 2019-04-27 10:10"
+     },
+     "p193": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 129,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1342,
+      "detection_run3_delay": 229800.0,
+      "first_tags": [
+       "T1",
+       "n1",
+       "n31"
+      ],
+      "pre_fault_tags": [
+       "T1",
+       "n1",
+       "n31"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p193 (incipient) from 2019-05-19 10:40; scored 2019-05-17 10:40 to 2019-05-26 10:40"
+     },
+     "p277": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 2,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 749,
+      "detection_run3_delay": 51900.0,
+      "first_tags": [
+       "T1",
+       "n31",
+       "n1"
+      ],
+      "pre_fault_tags": [
+       "n410"
+      ],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p277 (incipient) from 2019-05-30 21:55; scored 2019-05-28 21:55 to 2019-06-06 21:55"
+     },
+     "p142": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 9,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 746,
+      "detection_run3_delay": 51000.0,
+      "first_tags": [
+       "n613",
+       "n188",
+       "n163"
+      ],
+      "pre_fault_tags": [
+       "n410",
+       "n429",
+       "n54"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p142 (abrupt) from 2019-06-12 19:55; scored 2019-06-10 19:55 to 2019-06-19 19:55"
+     },
+     "p680": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 101,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1785,
+      "detection_run3_delay": 362700.0,
+      "first_tags": [
+       "T1",
+       "n31",
+       "n1"
+      ],
+      "pre_fault_tags": [
+       "T1",
+       "n1",
+       "n163",
+       "n188",
+       "n31"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p680 (abrupt) from 2019-07-10 08:45; scored 2019-07-08 08:45 to 2019-07-17 08:45"
+     },
+     "p586": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1886,
+      "detection_run3_delay": 393000.0,
+      "first_tags": [
+       "n31",
+       "T1"
+      ],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p586 (incipient) from 2019-07-26 14:40; scored 2019-07-24 14:40 to 2019-08-02 14:40"
+     },
+     "p721": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 2019,
+      "detection_run3_delay": 432900.0,
+      "first_tags": [
+       "T1",
+       "n31"
+      ],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": true,
+      "what": "leak p721 (incipient) from 2019-08-02 03:00; scored 2019-07-31 03:00 to 2019-08-09 03:00"
+     },
+     "p800": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p800 (incipient) from 2019-08-16 14:00; scored 2019-08-14 14:00 to 2019-08-23 14:00"
+     },
+     "p123": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 4,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 798,
+      "detection_run3_delay": 66600.0,
+      "first_tags": [
+       "T1",
+       "n296"
+      ],
+      "pre_fault_tags": [
+       "n296"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p123 (incipient) from 2019-09-13 20:05; scored 2019-09-11 20:05 to 2019-09-20 20:05"
+     },
+     "p455": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p455 (incipient) from 2019-10-03 14:00; scored 2019-10-01 14:00 to 2019-10-10 14:00"
+     },
+     "p762": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p762 (incipient) from 2019-10-09 10:15; scored 2019-10-07 10:15 to 2019-10-16 10:15"
+     },
+     "p426": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 63,
+      "pre_fault_rows": 576,
+      "detected": true,
+      "detection_run3_row": 1156,
+      "detection_run3_delay": 174000.0,
+      "first_tags": [
+       "T1",
+       "n31"
+      ],
+      "pre_fault_tags": [
+       "T1",
+       "n1",
+       "n31",
+       "n4"
+      ],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p426 (abrupt) from 2019-10-25 13:25; scored 2019-10-23 13:25 to 2019-11-01 13:25"
+     },
+     "p879": {
+      "method": "cyclic",
+      "k": 10,
+      "k_target_met": true,
+      "fault_start_row": 576,
+      "pre_fault_flagged": 0,
+      "pre_fault_rows": 576,
+      "detected": false,
+      "detection_run3_row": null,
+      "detection_run3_delay": null,
+      "first_tags": [],
+      "pre_fault_tags": [],
+      "overlap_detection_only": false,
+      "pass": false,
+      "what": "leak p879 (incipient) from 2019-11-20 11:55; scored 2019-11-18 11:55 to 2019-11-27 11:55"
+     }
+    },
+    "held_out": "held-out year for the auto/cyclic method: the split and label mapping were fixed in A178, the method frozen in A183 and scored once in A184; the matrix re-runs that method deterministically. This is the same L-Town network as 2018 development, so it tests carry-over across years only. Detections arrive 14 hours to 5 days after leak start, and tank level T1 drives most flags; it does not show prompt leak isolation",
     "cyclic_process": "daily water-demand cycle",
     "adapter": "scripts/historian_adapters.py"
    },
    "published": [],
-   "seconds": 9.0,
-   "ran_at": "2026-10-29 22:38 UTC",
+   "seconds": 30.0,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
-    "scripts/csv_normal_bands.py": "sha256:3f505525f50d0e40",
-    "scripts/historian_adapters.py": "sha256:4d3495cc0161928d"
+    "scripts/csv_normal_bands.py": "sha256:f4e15a259356108a",
+    "scripts/historian_adapters.py": "sha256:1020bb06a248667a"
    }
   },
   {
@@ -6532,14 +7315,14 @@
      "agrees": true
     }
    ],
-   "seconds": 0.6,
-   "ran_at": "2026-10-29 22:38 UTC",
+   "seconds": 0.8,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -7492,19 +8275,19 @@
     }
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-29 22:38 UTC",
+   "seconds": 1.1,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -7859,19 +8642,19 @@
     }
    },
    "published": [],
-   "seconds": 4.3,
-   "ran_at": "2026-10-29 22:38 UTC",
+   "seconds": 2.8,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -9480,19 +10263,19 @@
     }
    },
    "published": [],
-   "seconds": 3.1,
-   "ran_at": "2026-10-29 22:39 UTC",
+   "seconds": 4.9,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -10727,19 +11510,19 @@
     }
    },
    "published": [],
-   "seconds": 3.2,
-   "ran_at": "2026-10-29 22:39 UTC",
+   "seconds": 5.0,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -11463,19 +12246,19 @@
     }
    },
    "published": [],
-   "seconds": 3.2,
-   "ran_at": "2026-10-29 22:39 UTC",
+   "seconds": 3.5,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -13020,19 +13803,19 @@
    },
    "published": [],
    "note": "the pass counts (primary and second reading) include 6 files the reader refused for a reason seen in the XML (I02V01_AUD.EX01.xml, I03V01_AUD.EX01.xml, I04V01_AUD.EX01.xml, I08V01_AUD.EX01.xml, I11V01_AUD.EX01I.xml, I12V01_AUD.EX01.xml); the criterion counts a confirmed refusal as a pass, so these files show the refusal is right, not that their content was read",
-   "seconds": 2.6,
-   "ran_at": "2026-10-29 23:21 UTC",
+   "seconds": 2.2,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -14498,19 +15281,19 @@
     "xml_agrees": 37
    },
    "published": [],
-   "seconds": 7.5,
-   "ran_at": "2026-10-29 22:39 UTC",
+   "seconds": 9.6,
+   "ran_at": "2026-10-30 01:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:61422239124220aa",
+    "scripts/dexpi_reader.py": "sha256:4df35b3756356349",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -14523,18 +15306,18 @@
    "input": "open100-dev",
    "family": "pid2graph-open100",
    "status": "pass",
-   "value": "F1 0.914",
+   "value": "F1 0.931",
    "reason": "",
    "detail": {
     "sheets": {
      "0": {
-      "segment_f1": 0.969,
-      "tp": 93,
-      "predicted": 94,
+      "segment_f1": 0.995,
+      "tp": 98,
+      "predicted": 99,
       "truth": 98,
-      "precision": 0.989,
-      "recall": 0.949,
-      "item_to_item_f1": 0.903,
+      "precision": 0.99,
+      "recall": 1.0,
+      "item_to_item_f1": 0.985,
       "junctions_found": 38,
       "junctions_true": 38,
       "junctions_predicted": 38,
@@ -14544,7 +15327,7 @@
       },
       "pred_networks": 52,
       "pred_junctions": 38,
-      "pred_segments": 94,
+      "pred_segments": 99,
       "pairwise_links": 346,
       "pred_instrument_lines": 23,
       "pred_actuator_stems": 0,
@@ -14553,48 +15336,48 @@
       "truth_instrument_lines": 32
      },
      "1": {
-      "segment_f1": 0.907,
-      "tp": 49,
-      "predicted": 57,
-      "truth": 51,
-      "precision": 0.86,
-      "recall": 0.961,
-      "item_to_item_f1": 0.957,
-      "junctions_found": 18,
-      "junctions_true": 18,
-      "junctions_predicted": 22,
+      "segment_f1": 0.896,
+      "tp": 43,
+      "predicted": 51,
+      "truth": 45,
+      "precision": 0.843,
+      "recall": 0.956,
+      "item_to_item_f1": 0.88,
+      "junctions_found": 14,
+      "junctions_true": 14,
+      "junctions_predicted": 17,
       "crossings": {
        "pass_through": 0,
        "marked_connected": 0
       },
       "pred_networks": 24,
-      "pred_junctions": 22,
-      "pred_segments": 57,
+      "pred_junctions": 17,
+      "pred_segments": 51,
       "pairwise_links": 72,
       "pred_instrument_lines": 7,
       "pred_actuator_stems": 0,
-      "truth_junctions": 18,
-      "truth_segments": 51,
+      "truth_junctions": 14,
+      "truth_segments": 45,
       "truth_instrument_lines": 6
      },
      "2": {
       "segment_f1": 0.96,
-      "tp": 96,
-      "predicted": 101,
+      "tp": 97,
+      "predicted": 103,
       "truth": 99,
-      "precision": 0.95,
-      "recall": 0.97,
-      "item_to_item_f1": 0.943,
+      "precision": 0.942,
+      "recall": 0.98,
+      "item_to_item_f1": 0.937,
       "junctions_found": 22,
       "junctions_true": 22,
-      "junctions_predicted": 24,
+      "junctions_predicted": 23,
       "crossings": {
        "pass_through": 1,
        "marked_connected": 0
       },
       "pred_networks": 79,
-      "pred_junctions": 24,
-      "pred_segments": 101,
+      "pred_junctions": 23,
+      "pred_segments": 103,
       "pairwise_links": 160,
       "pred_instrument_lines": 16,
       "pred_actuator_stems": 0,
@@ -14603,13 +15386,13 @@
       "truth_instrument_lines": 20
      },
      "3": {
-      "segment_f1": 0.958,
-      "tp": 46,
-      "predicted": 46,
+      "segment_f1": 0.98,
+      "tp": 49,
+      "predicted": 50,
       "truth": 50,
-      "precision": 1.0,
-      "recall": 0.92,
-      "item_to_item_f1": 0.933,
+      "precision": 0.98,
+      "recall": 0.98,
+      "item_to_item_f1": 0.969,
       "junctions_found": 18,
       "junctions_true": 18,
       "junctions_predicted": 19,
@@ -14619,7 +15402,7 @@
       },
       "pred_networks": 46,
       "pred_junctions": 19,
-      "pred_segments": 46,
+      "pred_segments": 50,
       "pairwise_links": 92,
       "pred_instrument_lines": 19,
       "pred_actuator_stems": 1,
@@ -14628,13 +15411,13 @@
       "truth_instrument_lines": 24
      },
      "4": {
-      "segment_f1": 0.955,
-      "tp": 74,
-      "predicted": 75,
+      "segment_f1": 0.981,
+      "tp": 79,
+      "predicted": 81,
       "truth": 80,
-      "precision": 0.987,
-      "recall": 0.925,
-      "item_to_item_f1": 0.918,
+      "precision": 0.975,
+      "recall": 0.988,
+      "item_to_item_f1": 0.967,
       "junctions_found": 22,
       "junctions_true": 22,
       "junctions_predicted": 22,
@@ -14644,7 +15427,7 @@
       },
       "pred_networks": 65,
       "pred_junctions": 22,
-      "pred_segments": 75,
+      "pred_segments": 81,
       "pairwise_links": 117,
       "pred_instrument_lines": 21,
       "pred_actuator_stems": 0,
@@ -14653,15 +15436,15 @@
       "truth_instrument_lines": 29
      },
      "5": {
-      "segment_f1": 0.726,
-      "tp": 57,
-      "predicted": 67,
-      "truth": 90,
-      "precision": 0.851,
-      "recall": 0.633,
-      "item_to_item_f1": 0.857,
+      "segment_f1": 0.758,
+      "tp": 61,
+      "predicted": 72,
+      "truth": 89,
+      "precision": 0.847,
+      "recall": 0.685,
+      "item_to_item_f1": 0.9,
       "junctions_found": 36,
-      "junctions_true": 47,
+      "junctions_true": 46,
       "junctions_predicted": 36,
       "crossings": {
        "pass_through": 2,
@@ -14669,27 +15452,27 @@
       },
       "pred_networks": 28,
       "pred_junctions": 36,
-      "pred_segments": 67,
+      "pred_segments": 72,
       "pairwise_links": 278,
       "pred_instrument_lines": 28,
       "pred_actuator_stems": 0,
-      "truth_junctions": 47,
-      "truth_segments": 90,
+      "truth_junctions": 46,
+      "truth_segments": 89,
       "truth_instrument_lines": 36
      }
     },
     "scope": "all",
-    "segment_f1": 0.914,
-    "precision": 0.943,
-    "recall": 0.887,
-    "item_to_item_f1": 0.923,
+    "segment_f1": 0.931,
+    "precision": 0.936,
+    "recall": 0.926,
+    "item_to_item_f1": 0.949,
     "junctions": {
-     "tp": 154,
-     "predicted": 161,
-     "truth": 165,
-     "precision": 0.957,
-     "recall": 0.933,
-     "f1": 0.945
+     "tp": 150,
+     "predicted": 155,
+     "truth": 160,
+     "precision": 0.968,
+     "recall": 0.938,
+     "f1": 0.952
     },
     "truth": "derived from the PID2Graph key graph (line_layers.pid2graph_truth): connector and crossing nodes walked as line points, 3+-edge crossings as junctions",
     "worst_sheet": "5",
@@ -14703,16 +15486,16 @@
     }
    },
    "published": [],
-   "seconds": 15.0,
-   "ran_at": "2026-10-29 22:40 UTC",
+   "seconds": 14.2,
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -14725,43 +15508,43 @@
    "input": "open100-holdout",
    "family": "pid2graph-open100",
    "status": "pass",
-   "value": "F1 0.898",
+   "value": "F1 0.912",
    "reason": "",
    "detail": {
     "sheets": {
      "6": {
-      "segment_f1": 0.826,
-      "tp": 38,
-      "predicted": 44,
-      "truth": 48,
-      "precision": 0.864,
-      "recall": 0.792,
-      "item_to_item_f1": 0.844,
-      "junctions_found": 16,
-      "junctions_true": 17,
-      "junctions_predicted": 17,
+      "segment_f1": 0.839,
+      "tp": 39,
+      "predicted": 47,
+      "truth": 46,
+      "precision": 0.83,
+      "recall": 0.848,
+      "item_to_item_f1": 0.88,
+      "junctions_found": 14,
+      "junctions_true": 15,
+      "junctions_predicted": 15,
       "crossings": {
        "pass_through": 4,
        "marked_connected": 0
       },
       "pred_networks": 60,
-      "pred_junctions": 17,
-      "pred_segments": 44,
+      "pred_junctions": 15,
+      "pred_segments": 47,
       "pairwise_links": 121,
       "pred_instrument_lines": 43,
       "pred_actuator_stems": 0,
-      "truth_junctions": 17,
-      "truth_segments": 48,
+      "truth_junctions": 15,
+      "truth_segments": 46,
       "truth_instrument_lines": 49
      },
      "7": {
-      "segment_f1": 0.9,
-      "tp": 54,
-      "predicted": 60,
+      "segment_f1": 0.903,
+      "tp": 56,
+      "predicted": 64,
       "truth": 60,
-      "precision": 0.9,
-      "recall": 0.9,
-      "item_to_item_f1": 0.846,
+      "precision": 0.875,
+      "recall": 0.933,
+      "item_to_item_f1": 0.857,
       "junctions_found": 26,
       "junctions_true": 26,
       "junctions_predicted": 30,
@@ -14771,7 +15554,7 @@
       },
       "pred_networks": 35,
       "pred_junctions": 30,
-      "pred_segments": 60,
+      "pred_segments": 64,
       "pairwise_links": 150,
       "pred_instrument_lines": 20,
       "pred_actuator_stems": 0,
@@ -14805,13 +15588,13 @@
       "truth_instrument_lines": 13
      },
      "9": {
-      "segment_f1": 0.976,
-      "tp": 40,
-      "predicted": 40,
+      "segment_f1": 0.988,
+      "tp": 41,
+      "predicted": 41,
       "truth": 42,
       "precision": 1.0,
-      "recall": 0.952,
-      "item_to_item_f1": 0.933,
+      "recall": 0.976,
+      "item_to_item_f1": 0.968,
       "junctions_found": 22,
       "junctions_true": 22,
       "junctions_predicted": 22,
@@ -14821,7 +15604,7 @@
       },
       "pred_networks": 18,
       "pred_junctions": 22,
-      "pred_segments": 40,
+      "pred_segments": 41,
       "pairwise_links": 161,
       "pred_instrument_lines": 14,
       "pred_actuator_stems": 0,
@@ -14830,22 +15613,22 @@
       "truth_instrument_lines": 21
      },
      "10": {
-      "segment_f1": 0.906,
-      "tp": 115,
+      "segment_f1": 0.937,
+      "tp": 119,
       "predicted": 131,
       "truth": 123,
-      "precision": 0.878,
-      "recall": 0.935,
-      "item_to_item_f1": 0.94,
+      "precision": 0.908,
+      "recall": 0.967,
+      "item_to_item_f1": 0.971,
       "junctions_found": 30,
       "junctions_true": 31,
-      "junctions_predicted": 35,
+      "junctions_predicted": 33,
       "crossings": {
        "pass_through": 2,
        "marked_connected": 0
       },
       "pred_networks": 97,
-      "pred_junctions": 35,
+      "pred_junctions": 33,
       "pred_segments": 131,
       "pairwise_links": 212,
       "pred_instrument_lines": 22,
@@ -14881,17 +15664,17 @@
      }
     },
     "scope": "all",
-    "segment_f1": 0.898,
-    "precision": 0.899,
-    "recall": 0.897,
-    "item_to_item_f1": 0.907,
+    "segment_f1": 0.912,
+    "precision": 0.901,
+    "recall": 0.922,
+    "item_to_item_f1": 0.929,
     "junctions": {
-     "tp": 134,
-     "predicted": 148,
-     "truth": 139,
-     "precision": 0.905,
+     "tp": 132,
+     "predicted": 144,
+     "truth": 137,
+     "precision": 0.917,
      "recall": 0.964,
-     "f1": 0.934
+     "f1": 0.94
     },
     "truth": "derived from the PID2Graph key graph (line_layers.pid2graph_truth): connector and crossing nodes walked as line points, 3+-edge crossings as junctions",
     "worst_sheet": "6",
@@ -14903,19 +15686,19 @@
      "10": true,
      "11": true
     },
-    "blindness": "only partly blind since line_layers.py A170: one of the two error classes that change removed (stray pixels at an unmarked crossing read as a dot) was first noticed on holdout sheet 6's images (allowed by the A162 split for naming classes, then confirmed on development sheet DEXPI C01), so this cell's gain is not a clean held-out result"
+    "blindness": "A177 held these sheets out for the frozen A191-A195 rules (A196, seen once before as a baseline); not fully blind overall: A170's crossing error class was first noticed on sheet 6, then confirmed on development DEXPI C01. A191 changes the derived truth too (388 to 386 segments), so the change from 0.898 to 0.912 is not pure tracing gain"
    },
    "published": [],
-   "seconds": 17.8,
-   "ran_at": "2026-10-29 22:40 UTC",
+   "seconds": 19.4,
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -14927,29 +15710,29 @@
    "row": 8,
    "input": "dexpi",
    "family": "dexpi",
-   "status": "fail",
-   "value": "F1 0.782",
-   "reason": "pipe-segment F1 0.782 < 0.88 (precision 0.810, recall 0.756; worst sheet dexpi-c03 at 0.545)",
+   "status": "pass",
+   "value": "F1 0.916",
+   "reason": "",
    "detail": {
     "sheets": {
      "dexpi-c01": {
-      "segment_f1": 0.902,
-      "tp": 23,
-      "predicted": 24,
+      "segment_f1": 0.962,
+      "tp": 25,
+      "predicted": 25,
       "truth": 27,
-      "precision": 0.958,
-      "recall": 0.852,
-      "item_to_item_f1": 0.846,
+      "precision": 1.0,
+      "recall": 0.926,
+      "item_to_item_f1": 0.929,
       "junctions_found": 5,
       "junctions_true": 5,
-      "junctions_predicted": 6,
+      "junctions_predicted": 5,
       "crossings": {
        "pass_through": 76,
        "marked_connected": 0
       },
       "pred_networks": 16,
-      "pred_junctions": 6,
-      "pred_segments": 24,
+      "pred_junctions": 5,
+      "pred_segments": 25,
       "pairwise_links": 33,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -14985,23 +15768,23 @@
       "truth_tees_with_fewer_than_3_arms": 1
      },
      "dexpi-c03": {
-      "segment_f1": 0.545,
-      "tp": 6,
-      "predicted": 13,
+      "segment_f1": 0.941,
+      "tp": 8,
+      "predicted": 8,
       "truth": 9,
-      "precision": 0.462,
-      "recall": 0.667,
-      "item_to_item_f1": 0.8,
+      "precision": 1.0,
+      "recall": 0.889,
+      "item_to_item_f1": 0.941,
       "junctions_found": 0,
       "junctions_true": 0,
-      "junctions_predicted": 5,
+      "junctions_predicted": 0,
       "crossings": {
        "pass_through": 1,
        "marked_connected": 0
       },
       "pred_networks": 6,
-      "pred_junctions": 5,
-      "pred_segments": 13,
+      "pred_junctions": 0,
+      "pred_segments": 8,
       "pairwise_links": 6,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15012,32 +15795,32 @@
      }
     },
     "scope": "process",
-    "segment_f1": 0.782,
-    "precision": 0.81,
-    "recall": 0.756,
-    "item_to_item_f1": 0.8,
+    "segment_f1": 0.916,
+    "precision": 1.0,
+    "recall": 0.844,
+    "item_to_item_f1": 0.881,
     "junctions": {
      "tp": 5,
-     "predicted": 11,
+     "predicted": 5,
      "truth": 5,
-     "precision": 0.455,
+     "precision": 1.0,
      "recall": 1.0,
-     "f1": 0.625
+     "f1": 1.0
     },
     "truth": "DEXPI XML PipingNetworkSegment chains",
-    "worst_sheet": "dexpi-c03"
+    "worst_sheet": "dexpi-c02"
    },
    "published": [],
-   "seconds": 12.8,
-   "ran_at": "2026-10-29 22:41 UTC",
+   "seconds": 13.2,
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15055,15 +15838,15 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:41 UTC",
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15081,15 +15864,15 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-29 22:41 UTC",
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15199,16 +15982,16 @@
     "worst_sheet": "101"
    },
    "published": [],
-   "seconds": 11.5,
-   "ran_at": "2026-10-29 22:41 UTC",
+   "seconds": 12.3,
+   "ran_at": "2026-10-30 01:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15268,16 +16051,16 @@
     "worst_sheet": "RT1"
    },
    "published": [],
-   "seconds": 4.3,
-   "ran_at": "2026-10-29 22:41 UTC",
+   "seconds": 4.5,
+   "ran_at": "2026-10-30 01:44 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15290,28 +16073,28 @@
    "input": "dexpi-1.2-vendor-renders",
    "family": "dexpi-1.2-vendor-exports",
    "status": "fail",
-   "value": "F1 0.570",
-   "reason": "pipe-segment F1 0.570 < 0.88 (precision 0.525, recall 0.624; worst sheet C05V01-SAG.EX01 at 0.0); 22 of 81 renders mapped cleanly (by exporter {'autocad': '0/12', 'aveva': '1/22', 'comos': '7/28', 'sppid': '14/19'}); not mapped: 16 map fails its check, 37 too few scored symbols in the XML, 6 refused by adapt_dexpi.convert_xml; by exporter: aveva 1 sheets F1 1.0, comos 7 sheets F1 0.246, sppid 14 sheets F1 0.679; held out (A174), scored once",
+   "value": "F1 0.776",
+   "reason": "pipe-segment F1 0.776 < 0.88 (precision 0.720, recall 0.842; worst sheet C05V01-SAG.EX01 at 0.0); 22 of 81 renders mapped cleanly (by exporter {'autocad': '0/12', 'aveva': '1/22', 'comos': '7/28', 'sppid': '14/19'}); not mapped: 16 map fails its check, 37 too few scored symbols in the XML, 6 refused by adapt_dexpi.convert_xml; by exporter: aveva 1 sheets F1 1.0, comos 7 sheets F1 0.264, sppid 14 sheets F1 0.939; A177/A196 split: SPPID development, Comos/AVEVA held out; pooled result mixes splits and includes the A192 scorer fix",
    "detail": {
     "sheets": {
      "C01V01-HEX.EX02": {
-      "segment_f1": 0.609,
-      "tp": 14,
-      "predicted": 23,
+      "segment_f1": 0.889,
+      "tp": 20,
+      "predicted": 22,
       "truth": 23,
-      "precision": 0.609,
-      "recall": 0.609,
-      "item_to_item_f1": 0.783,
-      "junctions_found": 2,
+      "precision": 0.909,
+      "recall": 0.87,
+      "item_to_item_f1": 0.88,
+      "junctions_found": 4,
       "junctions_true": 4,
-      "junctions_predicted": 5,
+      "junctions_predicted": 4,
       "crossings": {
        "pass_through": 20,
        "marked_connected": 0
       },
       "pred_networks": 19,
-      "pred_junctions": 5,
-      "pred_segments": 23,
+      "pred_junctions": 4,
+      "pred_segments": 22,
       "pairwise_links": 34,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 2,
@@ -15321,23 +16104,23 @@
       "truth_tees_with_fewer_than_3_arms": 1
      },
      "C01V01-HEX.EX03": {
-      "segment_f1": 0.609,
-      "tp": 14,
-      "predicted": 23,
+      "segment_f1": 0.936,
+      "tp": 22,
+      "predicted": 24,
       "truth": 23,
-      "precision": 0.609,
-      "recall": 0.609,
-      "item_to_item_f1": 0.783,
-      "junctions_found": 2,
+      "precision": 0.917,
+      "recall": 0.957,
+      "item_to_item_f1": 0.963,
+      "junctions_found": 4,
       "junctions_true": 4,
-      "junctions_predicted": 5,
+      "junctions_predicted": 4,
       "crossings": {
        "pass_through": 4,
        "marked_connected": 15
       },
       "pred_networks": 17,
-      "pred_junctions": 5,
-      "pred_segments": 23,
+      "pred_junctions": 4,
+      "pred_segments": 24,
       "pairwise_links": 32,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15347,23 +16130,23 @@
       "truth_tees_with_fewer_than_3_arms": 1
      },
      "C01V01-SAG.EX02": {
-      "segment_f1": 0.158,
+      "segment_f1": 0.167,
       "tp": 3,
-      "predicted": 24,
+      "predicted": 22,
       "truth": 14,
-      "precision": 0.125,
+      "precision": 0.136,
       "recall": 0.214,
-      "item_to_item_f1": 0.273,
+      "item_to_item_f1": 0.231,
       "junctions_found": 0,
       "junctions_true": 0,
-      "junctions_predicted": 6,
+      "junctions_predicted": 4,
       "crossings": {
        "pass_through": 28,
        "marked_connected": 0
       },
       "pred_networks": 16,
-      "pred_junctions": 6,
-      "pred_segments": 24,
+      "pred_junctions": 4,
+      "pred_segments": 22,
       "pairwise_links": 31,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15373,14 +16156,14 @@
       "truth_tees_with_fewer_than_3_arms": 5
      },
      "C02V01-HEX.EX02": {
-      "segment_f1": 0.811,
-      "tp": 15,
+      "segment_f1": 0.973,
+      "tp": 18,
       "predicted": 19,
       "truth": 18,
-      "precision": 0.789,
-      "recall": 0.833,
+      "precision": 0.947,
+      "recall": 1.0,
       "item_to_item_f1": 0.941,
-      "junctions_found": 3,
+      "junctions_found": 4,
       "junctions_true": 4,
       "junctions_predicted": 4,
       "crossings": {
@@ -15399,14 +16182,14 @@
       "truth_tees_with_fewer_than_3_arms": 1
      },
      "C03V01-HEX.EX02": {
-      "segment_f1": 0.72,
-      "tp": 9,
+      "segment_f1": 0.96,
+      "tp": 12,
       "predicted": 13,
       "truth": 12,
-      "precision": 0.692,
-      "recall": 0.75,
+      "precision": 0.923,
+      "recall": 1.0,
       "item_to_item_f1": 0.909,
-      "junctions_found": 2,
+      "junctions_found": 3,
       "junctions_true": 3,
       "junctions_predicted": 3,
       "crossings": {
@@ -15425,23 +16208,23 @@
       "truth_tees_with_fewer_than_3_arms": 0
      },
      "C03V01-SAG.EX01": {
-      "segment_f1": 0.375,
+      "segment_f1": 0.429,
       "tp": 3,
-      "predicted": 12,
+      "predicted": 10,
       "truth": 4,
-      "precision": 0.25,
+      "precision": 0.3,
       "recall": 0.75,
-      "item_to_item_f1": 0.75,
+      "item_to_item_f1": 0.667,
       "junctions_found": 0,
       "junctions_true": 0,
-      "junctions_predicted": 4,
+      "junctions_predicted": 2,
       "crossings": {
        "pass_through": 4,
        "marked_connected": 0
       },
       "pred_networks": 6,
-      "pred_junctions": 4,
-      "pred_segments": 12,
+      "pred_junctions": 2,
+      "pred_segments": 10,
       "pairwise_links": 11,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15555,13 +16338,13 @@
       "truth_tees_with_fewer_than_3_arms": 0
      },
      "I01V02-HEX.EX03": {
-      "segment_f1": 0.0,
-      "tp": 0,
-      "predicted": 0,
+      "segment_f1": 1.0,
+      "tp": 1,
+      "predicted": 1,
       "truth": 1,
-      "precision": 0.0,
-      "recall": 0.0,
-      "item_to_item_f1": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "item_to_item_f1": 1.0,
       "junctions_found": 0,
       "junctions_true": 0,
       "junctions_predicted": 0,
@@ -15571,7 +16354,7 @@
       },
       "pred_networks": 1,
       "pred_junctions": 0,
-      "pred_segments": 0,
+      "pred_segments": 1,
       "pairwise_links": 1,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15607,13 +16390,13 @@
       "truth_tees_with_fewer_than_3_arms": 0
      },
      "I03V01-HEX.EX03": {
-      "segment_f1": 0.0,
-      "tp": 0,
-      "predicted": 0,
+      "segment_f1": 1.0,
+      "tp": 1,
+      "predicted": 1,
       "truth": 1,
-      "precision": 0.0,
-      "recall": 0.0,
-      "item_to_item_f1": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "item_to_item_f1": 1.0,
       "junctions_found": 0,
       "junctions_true": 0,
       "junctions_predicted": 0,
@@ -15623,7 +16406,7 @@
       },
       "pred_networks": 1,
       "pred_junctions": 0,
-      "pred_segments": 0,
+      "pred_segments": 1,
       "pairwise_links": 1,
       "pred_instrument_lines": 0,
       "pred_actuator_stems": 0,
@@ -15868,17 +16651,17 @@
      }
     },
     "scope": "process",
-    "segment_f1": 0.57,
-    "precision": 0.525,
-    "recall": 0.624,
-    "item_to_item_f1": 0.718,
+    "segment_f1": 0.776,
+    "precision": 0.72,
+    "recall": 0.842,
+    "item_to_item_f1": 0.769,
     "junctions": {
-     "tp": 9,
-     "predicted": 27,
+     "tp": 15,
+     "predicted": 21,
      "truth": 15,
-     "precision": 0.333,
-     "recall": 0.6,
-     "f1": 0.429
+     "precision": 0.714,
+     "recall": 1.0,
+     "f1": 0.833
     },
     "truth": "DEXPI XML PipingNetworkSegment chains",
     "worst_sheet": "C05V01-SAG.EX01",
@@ -15897,7 +16680,7 @@
       "sppid": "14/19"
      }
     },
-    "held_out": "held out, scored once as attempt A174: the mapping (adapter A2, corpus_adapters.build_vendor_keys) and the scoring plan were fixed in A173 before any scored run, and no tracer or line_layers rule was chosen or changed on these renders; the matrix re-runs the same frozen tools (deterministic)",
+    "held_out": "initial baseline held out (A173 mapping and scoring plan, A174 scored once). For the later pipe changes A191-A195, A177 made SPPID development data and kept Comos and AVEVA held out, seen once before as a baseline (frozen run A196); the pooled vendor result mixes those splits. A192 fixes junction matching in the scorer: SPPID 0.679 to 0.852 without a tracing change, about two thirds of its total development gain to 0.939. The row-1 tracer is unchanged on these renders by the auto scan clean-up (A189). Matrix re-runs are deterministic checks of the frozen rules",
     "by_exporter": {
      "aveva": {
       "sheets": 1,
@@ -15908,33 +16691,33 @@
      },
      "comos": {
       "sheets": 7,
-      "pipe_f1": 0.246,
+      "pipe_f1": 0.264,
       "tp": 7,
-      "predicted": 38,
+      "predicted": 34,
       "truth": 19
      },
      "sppid": {
       "sheets": 14,
-      "pipe_f1": 0.679,
-      "tp": 55,
-      "predicted": 81,
+      "pipe_f1": 0.939,
+      "tp": 77,
+      "predicted": 83,
       "truth": 81
      }
     }
    },
    "published": [],
-   "seconds": 181.6,
-   "ran_at": "2026-10-29 22:43 UTC",
+   "seconds": 174.2,
+   "ran_at": "2026-10-30 01:44 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/fetch_corpus.py": "sha256:01604036735cb6e1",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -15947,30 +16730,30 @@
    "input": "omre-1958-pid",
    "family": "osti-aec-scans",
    "status": "fail",
-   "value": "F1 0.244",
-   "reason": "pipe-segment F1 0.244 < 0.88 (precision 0.185, recall 0.361; worst sheet omre_q4 at 0.244)",
+   "value": "F1 0.446",
+   "reason": "pipe-segment F1 0.446 < 0.88 (precision 0.379, recall 0.541; worst sheet omre_q4 at 0.446)",
    "detail": {
     "sheets": {
      "omre_q4": {
-      "segment_f1": 0.244,
-      "tp": 22,
-      "predicted": 119,
+      "segment_f1": 0.446,
+      "tp": 33,
+      "predicted": 87,
       "truth": 61,
-      "precision": 0.185,
-      "recall": 0.361,
-      "item_to_item_f1": 0.558,
+      "precision": 0.379,
+      "recall": 0.541,
+      "item_to_item_f1": 0.807,
       "junctions_found": 13,
       "junctions_true": 21,
-      "junctions_predicted": 73,
+      "junctions_predicted": 38,
       "crossings": {
        "pass_through": 3,
        "marked_connected": 1
       },
       "pred_networks": 46,
-      "pred_junctions": 73,
-      "pred_segments": 119,
+      "pred_junctions": 38,
+      "pred_segments": 87,
       "pairwise_links": 172,
-      "pred_instrument_lines": 30,
+      "pred_instrument_lines": 29,
       "pred_actuator_stems": 0,
       "truth_junctions": 21,
       "truth_segments": 61,
@@ -15978,17 +16761,17 @@
      }
     },
     "scope": "all",
-    "segment_f1": 0.244,
-    "precision": 0.185,
-    "recall": 0.361,
-    "item_to_item_f1": 0.558,
+    "segment_f1": 0.446,
+    "precision": 0.379,
+    "recall": 0.541,
+    "item_to_item_f1": 0.807,
     "junctions": {
      "tp": 13,
-     "predicted": 73,
+     "predicted": 38,
      "truth": 21,
-     "precision": 0.178,
+     "precision": 0.342,
      "recall": 0.619,
-     "f1": 0.277
+     "f1": 0.441
     },
     "truth": "derived from the PID2Graph key graph (line_layers.pid2graph_truth): connector and crossing nodes walked as line points, 3+-edge crossings as junctions",
     "worst_sheet": "omre_q4",
@@ -16007,16 +16790,16 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 3.2,
-   "ran_at": "2026-10-29 22:46 UTC",
+   "seconds": 2.6,
+   "ran_at": "2026-10-30 01:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -16030,8 +16813,8 @@
    "input": "commons-pid-sheets",
    "family": "commons-textbook",
    "status": "fail",
-   "value": "F1 0.745",
-   "reason": "pipe-segment F1 0.745 < 0.88 (precision 0.856, recall 0.659; worst sheet P_ID at 0.617)",
+   "value": "F1 0.782",
+   "reason": "pipe-segment F1 0.782 < 0.88 (precision 0.888, recall 0.699; worst sheet P_ID at 0.678)",
    "detail": {
     "sheets": {
      "Sch_ma_P_ID": {
@@ -16085,13 +16868,13 @@
       "truth_instrument_lines": 23
      },
      "RI_Sample_ISO": {
-      "segment_f1": 0.895,
-      "tp": 34,
-      "predicted": 36,
+      "segment_f1": 0.909,
+      "tp": 35,
+      "predicted": 37,
       "truth": 40,
-      "precision": 0.944,
-      "recall": 0.85,
-      "item_to_item_f1": 0.909,
+      "precision": 0.946,
+      "recall": 0.875,
+      "item_to_item_f1": 0.929,
       "junctions_found": 7,
       "junctions_true": 8,
       "junctions_predicted": 7,
@@ -16101,7 +16884,7 @@
       },
       "pred_networks": 49,
       "pred_junctions": 7,
-      "pred_segments": 36,
+      "pred_segments": 37,
       "pairwise_links": 65,
       "pred_instrument_lines": 20,
       "pred_actuator_stems": 0,
@@ -16135,23 +16918,23 @@
       "truth_instrument_lines": 4
      },
      "P_ID": {
-      "segment_f1": 0.617,
-      "tp": 70,
-      "predicted": 92,
+      "segment_f1": 0.678,
+      "tp": 78,
+      "predicted": 95,
       "truth": 135,
-      "precision": 0.761,
-      "recall": 0.519,
-      "item_to_item_f1": 0.473,
+      "precision": 0.821,
+      "recall": 0.578,
+      "item_to_item_f1": 0.636,
       "junctions_found": 29,
       "junctions_true": 49,
-      "junctions_predicted": 35,
+      "junctions_predicted": 30,
       "crossings": {
        "pass_through": 9,
        "marked_connected": 1
       },
       "pred_networks": 67,
-      "pred_junctions": 35,
-      "pred_segments": 92,
+      "pred_junctions": 30,
+      "pred_segments": 95,
       "pairwise_links": 143,
       "pred_instrument_lines": 40,
       "pred_actuator_stems": 0,
@@ -16161,17 +16944,17 @@
      }
     },
     "scope": "all",
-    "segment_f1": 0.745,
-    "precision": 0.856,
-    "recall": 0.659,
-    "item_to_item_f1": 0.808,
+    "segment_f1": 0.782,
+    "precision": 0.888,
+    "recall": 0.699,
+    "item_to_item_f1": 0.848,
     "junctions": {
      "tp": 38,
-     "predicted": 46,
+     "predicted": 41,
      "truth": 62,
-     "precision": 0.826,
+     "precision": 0.927,
      "recall": 0.613,
-     "f1": 0.704
+     "f1": 0.738
     },
     "truth": "derived from the PID2Graph key graph (line_layers.pid2graph_truth): connector and crossing nodes walked as line points, 3+-edge crossings as junctions",
     "worst_sheet": "P_ID",
@@ -16200,16 +16983,16 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 8.7,
-   "ran_at": "2026-10-29 22:46 UTC",
+   "seconds": 6.7,
+   "ran_at": "2026-10-30 01:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
@@ -16227,30 +17010,30 @@
    "input": "pronto-fig1",
    "family": "pronto",
    "status": "fail",
-   "value": "F1 0.810",
-   "reason": "pipe-segment F1 0.810 < 0.88 (precision 0.773, recall 0.850; worst sheet fig1 at 0.81)",
+   "value": "F1 0.878",
+   "reason": "pipe-segment F1 0.878 < 0.88 (precision 0.857, recall 0.900; worst sheet fig1 at 0.878)",
    "detail": {
     "sheets": {
      "fig1": {
-      "segment_f1": 0.81,
-      "tp": 34,
-      "predicted": 44,
+      "segment_f1": 0.878,
+      "tp": 36,
+      "predicted": 42,
       "truth": 40,
-      "precision": 0.773,
-      "recall": 0.85,
-      "item_to_item_f1": 0.824,
+      "precision": 0.857,
+      "recall": 0.9,
+      "item_to_item_f1": 0.889,
       "junctions_found": 16,
       "junctions_true": 20,
-      "junctions_predicted": 24,
+      "junctions_predicted": 19,
       "crossings": {
        "pass_through": 1,
        "marked_connected": 0
       },
       "pred_networks": 25,
-      "pred_junctions": 24,
-      "pred_segments": 44,
+      "pred_junctions": 19,
+      "pred_segments": 42,
       "pairwise_links": 108,
-      "pred_instrument_lines": 20,
+      "pred_instrument_lines": 18,
       "pred_actuator_stems": 0,
       "truth_junctions": 20,
       "truth_segments": 40,
@@ -16258,17 +17041,17 @@
      }
     },
     "scope": "all",
-    "segment_f1": 0.81,
-    "precision": 0.773,
-    "recall": 0.85,
-    "item_to_item_f1": 0.824,
+    "segment_f1": 0.878,
+    "precision": 0.857,
+    "recall": 0.9,
+    "item_to_item_f1": 0.889,
     "junctions": {
      "tp": 16,
-     "predicted": 24,
+     "predicted": 19,
      "truth": 20,
-     "precision": 0.667,
+     "precision": 0.842,
      "recall": 0.8,
-     "f1": 0.727
+     "f1": 0.821
     },
     "truth": "derived from the PID2Graph key graph (line_layers.pid2graph_truth): connector and crossing nodes walked as line points, 3+-edge crossings as junctions",
     "worst_sheet": "fig1",
@@ -16286,16 +17069,16 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.1,
-   "ran_at": "2026-10-29 22:46 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-30 01:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
-    "scripts/build_twin.py": "sha256:b6407fcb04c90837",
+    "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:b46dbe5f6aa6eae4",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2961882a40e42313",
-    "scripts/import_site_drawing.py": "sha256:34dfe57ae7375998",
-    "scripts/line_layers.py": "sha256:a466b5d3afcb5a56",
+    "scripts/generate.py": "sha256:38639f82898923c6",
+    "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",

@@ -229,11 +229,19 @@ def matrix():
     doc = dm.load()
     check("deliverables matrix follows its own rules (status, reason, evidence on disk)", not dm.problems(doc),
           dm.problems(doc))
+    page = dm.TARGET.read_text(encoding="utf-8").replace("\r\n", "\n")
+    a, b = page.index(dm.START) + len(dm.START), page.index(dm.END)
+    check("docs/DELIVERABLES.md table is exactly the generated matrix", page[a:b].strip() == dm.markdown(doc).strip())
+    check("docs/DELIVERABLES.md is exactly what deliverables_matrix.py writes", page == dm.page(doc))
+    check("docs/DELIVERABLES.md section heading is present",
+          "# What you can do with only drawings, only process knowledge, or both" in page)
+    links = re.findall(r"\]\(([^)#\s]+)(?:#[^)]*)?\)", page[a:b])
+    check("every evidence link in docs/DELIVERABLES.md resolves from docs/",
+          bool(links) and all((dm.TARGET.parent / p).resolve().exists() for p in links),
+          [p for p in links if not (dm.TARGET.parent / p).resolve().exists()])
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    a, b = readme.index(dm.START) + len(dm.START), readme.index(dm.END)
-    check("README table is exactly the generated matrix", readme[a:b].strip() == dm.markdown(doc).strip())
-    check("README section heading is present",
-          "What you can do with only drawings, only process knowledge, or both" in readme)
+    check("README links to docs/DELIVERABLES.md and no longer carries the full matrix",
+          "](docs/DELIVERABLES.md)" in readme and dm.START not in readme and dm.END not in readme)
     rows = {r["deliverable"]: r for r in doc["rows"]}
     check("OPEN100 cannot show values, bands, alarms or replay without process data, and says why",
           all(rows[k]["open100"]["status"] == "not_possible" and any(

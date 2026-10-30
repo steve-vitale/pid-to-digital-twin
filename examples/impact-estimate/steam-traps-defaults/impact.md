@@ -46,7 +46,7 @@ This estimate holds only if all of these are true:
 3. Your boiler efficiency equals the public typical value used (0.8 (fraction)). National or generic figures can differ a great deal from a single site's.
 4. Failed steam traps on the 150 psig main: each pound of steam carries the public steam-table value used (1,028 Btu/lb), read at the pressure and feedwater temperature entered.
 5. Failed steam traps on the 150 psig main: the steam rate entered holds for all 8,760 h/yr.
-6. Failed steam traps on the 150 psig main: each pound of steam carries the stated energy from feedwater to steam, and the steam conditions do not change through the year.
+6. Failed steam traps on the 150 psig main: each pound carries the stated enthalpy difference at the measured boundary, and those conditions do not change through the year.
 7. Failed steam traps on the 150 psig main: boiler efficiency is constant at this load, and the fuel saved is priced at the margin.
 8. Failed steam traps on the 150 psig main: Scope 1 covers combustion only (no upstream fuel supply); water, treatment chemicals and pumping are not costed.
 9. Where a range is entered, the result carries both ends. That is the spread of what was entered, not a probability interval.

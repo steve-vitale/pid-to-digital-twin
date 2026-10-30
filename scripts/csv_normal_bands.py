@@ -1,9 +1,13 @@
 """Normal operating bands for any historian-style CSV: learn them from a normal-running export, then score a second export.
 
-Two methods (--method). Both fit on the first FIT_FRACTION of the normal CSV (default: the first half) and choose K
-on the rest of it, which the fit never saw.
+Three methods (--method), and a default that picks one. Each fits on the first FIT_FRACTION of the normal CSV
+(default: the first half) and chooses K on the rest of it, which the fit never saw.
 
-  drift (the default; for real plant data, which drifts slowly):
+  auto (the default): cyclic when the data has a daily cycle, else drift. A daily cycle: the first column is a
+           timestamp, the fit rows span at least CYCLIC_MIN_DAYS (2) days, and a time-of-day profile fitted on them
+           explains at least CYCLIC_MIN_R2 (0.1) of the held-out rows' variation (median over tags; each tag's level
+           may move between the halves). The report's method_choice says which was chosen and why.
+  drift (for real plant data, which drifts slowly):
            Each tag is compared with its own recent past, not with a fixed level. For every sample: the
            10-sample average (exponentially weighted, DRIFT_FAST) minus the 600-sample baseline as it stood one sample
            earlier (exponentially weighted, DRIFT_SLOW; both start as plain running averages of the export being
@@ -24,7 +28,18 @@ on the rest of it, which the fit never saw.
            These numbers were chosen on development runs and then frozen: first PRONTO test day 3 and half of SKAB,
            then (the scaling) all of PRONTO, SKAB, HAI 21.03 and the TE runs; UCI hydraulic, MetroPT-3 and BattLeDIM
            were scored once afterwards (data/attempts.json, docs/GENERALIZATION.md row 6).
-  level (scripts/normal_bands.py's method, kept for the Tennessee Eastman comparison):
+  cyclic (for a daily cycle: water demand, shifts, day/night load):
+           Each value minus its tag's time-of-day profile: the fit rows' mean in each of CYCLIC_SLOTS (48) slots of
+           30 minutes (a slot with fewer than CYCLIC_MIN_SLOT good fit values uses the tag's fit mean). Then a median
+           of 3 samples, so a single-sample spike never reaches the averages, then the drift method's gap on that
+           residual, with the drift method's band (K x the gap's fit sd, never under 1% of the tag's fit mean) not
+           scaled with the reading (the residual's baseline is not a reading). The daily swing no longer sets the
+           band's width, so a step it would hide shows. The profile is the fit rows' clock profile only: a cycle not
+           tied to the clock (a compressor's load/unload) is not removed, and a mode taken from a process tag was
+           rejected because the fault can move that tag (data/attempts.json A183). Without timestamps the profile is
+           flat (one slot) and the report warns. Developed on BattLeDIM 2018, UCI hydraulic and MetroPT-3 with the
+           earlier sources kept unchanged; BattLeDIM 2019 scored once afterwards (A178, A184).
+  level (scripts/normal_bands.py's method, kept for the Tennessee Eastman comparison; never chosen by auto):
            Band per tag = mean +/- K population standard deviations of that tag's good (numeric) values. K given,
            or the smallest in (3, 4, 5, 6) whose worst per-tag false-flag rate on the held-out rows is under 0.5%
            (K = 6 and a note if none). On real data this flags slow drift as a fault (PRONTO, SKAB, HAI 21.03).
@@ -43,7 +58,8 @@ CSV format (what a historian export usually looks like; comma-separated, '.' as 
 
 What this is NOT: not an alarm system and not a fault diagnosis. A value outside its band says "this is unusual
 compared with the normal export" (level) or "this tag changed faster than it does in normal running" (drift), nothing
-about why. The bands are only as good as the normal export: if it contains upsets, they widen the bands; if it covers
+about why. The cyclic method needs normal running covering the times of day it scores (a slot never seen in the fit
+uses the tag's mean). The bands are only as good as the normal export: if it contains upsets, they widen the bands; if it covers
 one operating mode, other modes will flag. The drift method by design misses a fault that develops as slowly as
 normal drift does, and stops flagging a level that stays wrong once its baseline has caught up (after roughly
 DRIFT_SLOW samples).
@@ -52,6 +68,7 @@ Model use: none. Plain statistics (stdlib only). Claude (the coding agent) wrote
 
   python scripts/csv_normal_bands.py --normal normal.csv --score fault.csv --fault-start 160 --out out/csv_bands
   python scripts/csv_normal_bands.py ... --method level      # the TE scripts' fixed-level bands
+  python scripts/csv_normal_bands.py ... --method cyclic     # time-of-day profile even if auto would not pick it
   writes <out>/csv_normal_bands.json and <out>/csv_normal_bands.md
 """
 import argparse
@@ -65,13 +82,18 @@ from pathlib import Path
 
 KS = (3, 4, 5, 6)
 TARGET = 0.005  # worst-tag false-flag rate on held-out normal data, as in normal_bands.py
-METHODS = ("drift", "level")
-DEFAULT_METHOD = "drift"
+METHODS = ("auto", "drift", "cyclic", "level")
+DEFAULT_METHOD = "auto"
 DRIFT_FAST = 10  # samples: the short average each value is smoothed over before comparing
 DRIFT_SLOW = 600  # samples: the baseline that follows slow drift
 DRIFT_FLOOR = 0.01  # a gap under 1% of the tag's normal mean is never flagged
 DRIFT_KS = (10, 12, 15, 20)
 DRIFT_SCALE_MIN = 0.5  # a band follows the reading down to half its normal width, never narrower, never wider
+CYCLIC_SLOTS = 48  # time-of-day profile: 48 slots of 30 minutes
+CYCLIC_MIN_SLOT = 3  # a slot with fewer good fit values than this uses the tag's fit mean
+CYCLIC_MIN_DAYS = 2  # the fit rows must span at least this many days before a daily profile is tried
+CYCLIC_MIN_R2 = 0.1  # auto picks cyclic when the profile explains at least this share of held-out variance (median tag)
+CYCLIC_EVAL_ROWS = 20000  # the auto check reads at most about this many fit and held-out rows (evenly spaced)
 RUN = 3  # consecutive flagged samples for a detection, as in fault_detection_eval.py
 # Fewer rows than this in the fit or the held-out half and the report warns that its numbers are not to be trusted:
 # the relative standard error of a standard deviation is about 1/sqrt(2n), 13% at n = 30 and 35% at n = 4, so a band
@@ -100,10 +122,12 @@ def parse_time(text):
     if not text:
         raise ValueError("empty")
     try:
-        return float(text)
+        value = float(text)
     except ValueError:
-        pass
-    return datetime.fromisoformat(text.replace("Z", "+00:00"))
+        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+    if not math.isfinite(value):
+        raise ValueError("time/index must be finite")
+    return value
 
 
 def parse_value(text):
@@ -150,7 +174,7 @@ def read_historian_csv(path, with_text=False):
             t = parse_time(r[0])
         except ValueError:
             raise CsvFormatError(f"{path.name}: line {n}: first column '{r[0]}' is neither a number nor an ISO 8601 "
-                                 "timestamp") from None
+                                 "timestamp (numeric times must be finite)") from None
         k = (type(t), getattr(t, "tzinfo", None) is not None)
         if kind is None:
             kind = k
@@ -272,9 +296,10 @@ def drift_bands(stats, k):
     return bands
 
 
-def drift_flags(tags, gaps, bands):
+def drift_flags(tags, gaps, bands, follow_reading=True):
     """Flag matrix [row][tag] from precomputed (gaps, baselines) columns. The band (gap mean and half-width) is
-    scaled by level_scale of the baseline the gap was taken against."""
+    scaled by level_scale of the baseline the gap was taken against (unless follow_reading is False: the cyclic
+    method's gaps are taken on residuals, whose baseline is not a reading)."""
     n = len(gaps[0][0]) if gaps else 0
     cols = []
     for j, t in enumerate(tags):
@@ -287,17 +312,149 @@ def drift_flags(tags, gaps, bands):
             if g is None:
                 col.append(False)
                 continue
-            r = level_scale(lv, b["mean"])
+            r = level_scale(lv, b["mean"]) if follow_reading else 1.0
             col.append(abs(g - b["gap_mean"] * r) > b["half_width"] * r)
         cols.append(col)
     return [[c[i] for c in cols] for i in range(n)]
 
 
-def choose_k_drift(tags, stats, held_gaps):
+# ------------------------------------------------------------------ cyclic method
+
+def day_slot(t):
+    """The time-of-day slot (0 .. CYCLIC_SLOTS-1) of a timestamp."""
+    s = t.hour * 3600 + t.minute * 60 + t.second + t.microsecond / 1e6
+    return min(CYCLIC_SLOTS - 1, int(s * CYCLIC_SLOTS / 86400))
+
+
+def row_slots(times, daily):
+    """Per row, its profile slot: the time-of-day slot when `daily`, else 0 (a flat profile)."""
+    return [day_slot(t) for t in times] if daily else [0] * len(times)
+
+
+def slot_profile(tags, rows, slots):
+    """Per tag: {"mean": mean of its good values, "slots": {slot: mean}} over the rows given; a slot is kept only
+    with at least CYCLIC_MIN_SLOT good values. None for a tag with no good value."""
+    out = {}
+    for j, t in enumerate(tags):
+        by, allv = {}, []
+        for r, s in zip(rows, slots):
+            if r[j] is not None:
+                by.setdefault(s, []).append(r[j])
+                allv.append(r[j])
+        out[t] = None if not allv else {
+            "mean": statistics.fmean(allv),
+            "slots": {s: statistics.fmean(v) for s, v in sorted(by.items()) if len(v) >= CYCLIC_MIN_SLOT}}
+    return out
+
+
+def profile_value(prof, slot):
+    return prof["slots"].get(slot, prof["mean"])
+
+
+def residual_rows(tags, rows, slots, prof):
+    """Each value minus its tag's profile at the row's slot (None for bad cells and tags with no profile)."""
+    return [[None if r[j] is None or prof[t] is None else r[j] - profile_value(prof[t], s)
+             for j, t in enumerate(tags)] for r, s in zip(rows, slots)]
+
+
+def median3(col):
+    """Median of each value and the two good values before it (None stays None; the first two pass through), so a
+    single-sample spike never reaches the averages; a change lasting 2 samples or more does."""
+    out, last = [], []
+    for x in col:
+        if x is None:
+            out.append(None)
+            continue
+        last = (last + [x])[-3:]
+        out.append(sorted(last)[1] if len(last) == 3 else x)
+    return out
+
+
+def cyclic_gap_columns(tags, rrows):
+    """Per tag: (gaps, baselines) of the residual series after median3, as drift_gaps."""
+    out = []
+    for j in range(len(tags)):
+        lv = []
+        out.append((drift_gaps(median3([r[j] for r in rrows]), levels=lv), lv))
+    return out
+
+
+def fit_cyclic(tags, rows, gaps):
+    """Per tag, over the fit rows: the reading's mean and sd, and the residual gap's mean and sd (the floor is a
+    share of the reading's mean, as the drift method's)."""
+    stats = {}
+    for j, t in enumerate(tags):
+        vals = [r[j] for r in rows if r[j] is not None]
+        g = [x for x in gaps[j][0] if x is not None]
+        if not g:
+            stats[t] = None
+            continue
+        m, sd = statistics.fmean(vals), statistics.pstdev(vals)
+        stats[t] = {"mean": m, "sd": sd, "gap_mean": statistics.fmean(g), "resid_sd": statistics.pstdev(g),
+                    "floor": DRIFT_FLOOR * abs(m), "fit_good": len(vals), "fit_bad": len(rows) - len(vals),
+                    "constant_in_fit": sd == 0}
+    return stats
+
+
+def _evenly(seq, n):
+    step = max(1, len(seq) // n)
+    return seq[::step]
+
+
+def daily_profile_r2(tags, fit_times, fit_rows, held_times, held_rows):
+    """How much of the held-out rows' variation a time-of-day profile fitted on the fit rows explains: per tag,
+    1 - SS(held - its mean - (profile - the profile's mean over those rows)) / SS(held - its mean), so a level that
+    moved between fit and held-out is not counted against the profile; the median over tags. At most about
+    CYCLIC_EVAL_ROWS rows of each part are read (evenly spaced)."""
+    ft, fr = _evenly(fit_times, CYCLIC_EVAL_ROWS), _evenly(fit_rows, CYCLIC_EVAL_ROWS)
+    ht, hr = _evenly(held_times, CYCLIC_EVAL_ROWS), _evenly(held_rows, CYCLIC_EVAL_ROWS)
+    prof = slot_profile(tags, fr, row_slots(ft, True))
+    hs = row_slots(ht, True)
+    scores = []
+    for j, t in enumerate(tags):
+        if prof[t] is None:
+            continue
+        pv = [(r[j], profile_value(prof[t], s)) for r, s in zip(hr, hs) if r[j] is not None]
+        if len(pv) < MIN_ROWS:
+            continue
+        m = statistics.fmean(v for v, _ in pv)
+        pm = statistics.fmean(p for _, p in pv)
+        sst = sum((v - m) ** 2 for v, _ in pv)
+        if sst <= 0:
+            continue
+        scores.append(1 - sum((v - m - (p - pm)) ** 2 for v, p in pv) / sst)
+    return statistics.median(scores) if scores else None
+
+
+def choose_method(requested, tags, times, n_fit, rows):
+    """The method to run and why. auto: cyclic when the first column is a timestamp, the fit rows span at least
+    CYCLIC_MIN_DAYS days and a time-of-day profile fitted on them explains at least CYCLIC_MIN_R2 of the held-out
+    rows' variation (median tag); otherwise drift."""
+    out = {"requested": requested}
+    if requested != "auto":
+        return dict(out, chosen=requested, why="requested")
+    if not isinstance(times[0], datetime):
+        return dict(out, chosen="drift", why="the first column is not a timestamp, so there is no time of day to "
+                                             "profile; drift")
+    span = elapsed(times, 0, n_fit - 1) / 86400 if n_fit > 1 else 0.0
+    if span < CYCLIC_MIN_DAYS or n_fit >= len(rows):
+        return dict(out, chosen="drift", why=f"the fit rows span {span:.2f} days, fewer than the {CYCLIC_MIN_DAYS} "
+                                             f"days a daily profile needs (or nothing is held out to test it); drift")
+    r2 = daily_profile_r2(tags, times[:n_fit], rows[:n_fit], times[n_fit:], rows[n_fit:])
+    if r2 is None or r2 < CYCLIC_MIN_R2:
+        return dict(out, chosen="drift", daily_profile_r2=None if r2 is None else round(r2, 4),
+                    why=f"a time-of-day profile fitted on the fit rows explains {'-' if r2 is None else f'{r2:.2f}'} "
+                        f"of the held-out rows' variation (median tag), under {CYCLIC_MIN_R2}; drift")
+    return dict(out, chosen="cyclic", daily_profile_r2=round(r2, 4),
+                why=f"a time-of-day profile fitted on the fit rows explains {r2:.2f} of the held-out rows' variation "
+                    f"(median tag), at least {CYCLIC_MIN_R2}; cyclic")
+
+
+def choose_k_drift(tags, stats, held_gaps, follow_reading=True):
     """Smallest K in DRIFT_KS whose share of held-out rows with any tag flagged is under TARGET."""
     table = {}
     for k in DRIFT_KS:
-        fl = drift_flags(tags, held_gaps, drift_bands(stats, k))
+        fl = drift_flags(tags, held_gaps, drift_bands(stats, k), follow_reading)
         per = {t: sum(f[j] for f in fl) / len(fl) for j, t in enumerate(tags)}
         worst = max(per, key=per.get)
         table[k] = {"worst_tag_rate": per[worst], "worst_tag": worst, "mean_tag_rate": statistics.fmean(per.values()),
@@ -424,7 +581,79 @@ METHOD_TEXT = {
              f"fit mean +/- max(K x its fit sd, {DRIFT_FLOOR:.0%} of the tag's fit mean), both scaled by the "
              f"baseline's share of the fit mean, kept between {DRIFT_SCALE_MIN} and 1; slow drift moves the "
              f"baseline and is not flagged, a step or fast change is",
+    "cyclic": f"each value minus its tag's time-of-day profile (the fit rows' mean in each of {CYCLIC_SLOTS} slots of "
+              f"{1440 // CYCLIC_SLOTS} min; a flat profile if the first column is not a timestamp), then a median of "
+              f"3 samples so a single-sample spike is ignored, then the drift method's gap on that residual "
+              f"({DRIFT_FAST}-sample average minus the {DRIFT_SLOW}-sample baseline one sample earlier); band on the "
+              f"gap = its fit mean +/- max(K x its fit sd, {DRIFT_FLOOR:.0%} of the tag's fit mean), not scaled; "
+              f"the daily swing is removed, so a step that the swing would hide is flagged",
 }
+
+
+def fit_method(method, tags, times, rows, n_fit, k=None):
+    """Fit `method` (level, drift or cyclic) on rows[:n_fit], choosing K on the rest unless k is given. Returns
+    {k, table, met, rule, bands, flags_for(tags, times, rows, bands) -> flag matrix or None, profile}."""
+    fit_rows, held = rows[:n_fit], rows[n_fit:]
+    table = met = profile = None
+    if method == "level":
+        if k is None:
+            k, table, met = choose_k(tags, fit_rows, held)
+        bands = fit_bands(tags, fit_rows, k)
+        rule = f"smallest K in {list(KS)} with worst-tag false-flag rate < {TARGET:.1%} on held-out rows"
+
+        def flags_for(tg, ts, rs, bd):
+            return None  # score() applies the fixed bands
+    elif method == "drift":
+        stats = fit_drift(tags, fit_rows)
+        if k is None:
+            k, table, met = choose_k_drift(tags, stats, gap_columns(tags, held))
+        bands = drift_bands(stats, k)
+        rule = f"smallest K in {list(DRIFT_KS)} with the share of held-out rows with any tag flagged < {TARGET:.1%}"
+
+        def flags_for(tg, ts, rs, bd):
+            return drift_flags(tg, gap_columns(tg, rs), bd)
+    else:
+        daily = isinstance(times[0], datetime)
+        profile = slot_profile(tags, fit_rows, row_slots(times[:n_fit], daily))
+
+        def gaps(tg, ts, rs):
+            return cyclic_gap_columns(tg, residual_rows(tg, rs, row_slots(ts, daily), {t: profile[t] for t in tg}))
+        stats = fit_cyclic(tags, fit_rows, gaps(tags, times[:n_fit], fit_rows))
+        if k is None:
+            k, table, met = choose_k_drift(tags, stats, gaps(tags, times[n_fit:], held), follow_reading=False)
+        bands = drift_bands(stats, k)
+        rule = f"smallest K in {list(DRIFT_KS)} with the share of held-out rows with any tag flagged < {TARGET:.1%}"
+
+        def flags_for(tg, ts, rs, bd):
+            return drift_flags(tg, gaps(tg, ts, rs), bd, follow_reading=False)
+    return {"k": k, "table": table, "met": met, "rule": rule, "bands": bands, "flags_for": flags_for,
+            "profile": profile}
+
+
+def _common(tags, score_csv):
+    """The score CSV read and cut to the tags it shares with the normal CSV: (common, missing, extra, times, rows)."""
+    _, stags, stimes, srows = read_historian_csv(score_csv)
+    common = [t for t in tags if t in stags]
+    if not common:
+        raise SystemExit("the score CSV shares no tag names with the normal CSV")
+    pick = [stags.index(t) for t in common]
+    return (common, [t for t in tags if t not in stags], [t for t in stags if t not in tags], stimes,
+            [[r[j] for j in pick] for r in srows])
+
+
+def score_flags(normal, score_csv, k, method, fit_fraction=0.5):
+    """Per row of score_csv, whether any tag is flagged: the same fit and flags run() uses for `method` (level, drift
+    or cyclic, as run() reports in method_name) at K = k, on the tags both CSVs share. For a caller that needs the
+    per-row flags (e.g. to score several labelled events in one export)."""
+    _, tags, times, rows = read_historian_csv(normal)
+    n_fit = int(len(rows) * fit_fraction)
+    f = fit_method(method, tags, times, rows, n_fit, k)
+    common, _, _, stimes, srows = _common(tags, score_csv)
+    cb = {t: f["bands"][t] for t in common}
+    fl = f["flags_for"](common, stimes, srows, cb)
+    if fl is None:
+        fl = flag_matrix(common, srows, cb)
+    return [any(x) for x in fl]
 
 
 def run(normal, score_csv=None, fault_start=None, fit_fraction=0.5, k=None, method=DEFAULT_METHOD):
@@ -434,28 +663,20 @@ def run(normal, score_csv=None, fault_start=None, fit_fraction=0.5, k=None, meth
     n_fit = int(len(rows) * fit_fraction)
     if n_fit < 2:
         raise SystemExit(f"fit portion has {n_fit} rows; need at least 2")
-    fit_rows, held = rows[:n_fit], rows[n_fit:]
+    held = rows[n_fit:]
     if k is None and not held:
         raise SystemExit("--fit-fraction 1 leaves nothing to choose K on; pass --k")
-    table = met = None
-    if method == "level":
-        if k is None:
-            k, table, met = choose_k(tags, fit_rows, held)
-        bands = fit_bands(tags, fit_rows, k)
-        rule = f"smallest K in {list(KS)} with worst-tag false-flag rate < {TARGET:.1%} on held-out rows"
-
-        def flags_for(tg, rs, bd):
-            return None  # score() applies the fixed bands
-    else:
-        stats = fit_drift(tags, fit_rows)
-        if k is None:
-            k, table, met = choose_k_drift(tags, stats, gap_columns(tags, held))
-        bands = drift_bands(stats, k)
-        rule = f"smallest K in {list(DRIFT_KS)} with the share of held-out rows with any tag flagged < {TARGET:.1%}"
-
-        def flags_for(tg, rs, bd):
-            return drift_flags(tg, gap_columns(tg, rs), bd)
-    out = {"method_name": method, "method": METHOD_TEXT[method],
+    choice = choose_method(method, tags, times, n_fit, rows)
+    method = choice["chosen"]
+    f = fit_method(method, tags, times, rows, n_fit, k)
+    k, table, met, rule, bands = f["k"], f["table"], f["met"], f["rule"], f["bands"]
+    flags_for = f["flags_for"]
+    if f["profile"] is not None:  # cyclic: each band carries its tag's time-of-day profile
+        bands = {t: None if b is None else dict(b, profile=None if f["profile"][t] is None else {
+            "mean": round(f["profile"][t]["mean"], 6),
+            "slots": {str(s): round(v, 6) for s, v in f["profile"][t]["slots"].items()}})
+            for t, b in bands.items()}
+    out = {"method_name": method, "method": METHOD_TEXT[method], "method_choice": choice,
            "normal_csv": Path(normal).name, "time_column": tname,
            "time_kind": "timestamp" if isinstance(times[0], datetime) else "number", "tags": tags, "k": k,
            "k_selection": None if table is None else {
@@ -467,23 +688,25 @@ def run(normal, score_csv=None, fault_start=None, fit_fraction=0.5, k=None, meth
                      for t, b in bands.items()},
            "no_band": [t for t, b in bands.items() if b is None]}
     warnings = small_sample_warnings(n_fit, len(held), table is not None, bands)
+    if method == "cyclic":
+        daily = isinstance(times[0], datetime)
+        out["cyclic_profile"] = (f"time of day ({CYCLIC_SLOTS} slots of {1440 // CYCLIC_SLOTS} min)" if daily
+                                 else "flat")
+        if not daily:
+            warnings.append("no time-of-day profile: the first column is not a timestamp, so the profile is each "
+                            "tag's fit mean (one slot); the method then differs from drift only by the 3-sample "
+                            "median and by the band not following the reading")
     if warnings:  # the key only appears when there is something to warn about
         out["warnings"] = warnings
     if held:
-        out["held_out_normal"] = score(tags, times[n_fit:], held, bands, flags=flags_for(tags, held, bands))
+        out["held_out_normal"] = score(tags, times[n_fit:], held, bands,
+                                       flags=flags_for(tags, times[n_fit:], held, bands))
         out["held_out_normal"].pop("per_tag")
     if score_csv:
-        sname, stags, stimes, srows = read_historian_csv(score_csv)
-        missing = [t for t in tags if t not in stags]
-        extra = [t for t in stags if t not in tags]
-        common = [t for t in tags if t in stags]
-        if not common:
-            raise SystemExit("the score CSV shares no tag names with the normal CSV")
-        pick = [stags.index(t) for t in common]
-        srows = [[r[j] for j in pick] for r in srows]
+        common, missing, extra, stimes, srows = _common(tags, score_csv)
         fs = None if fault_start is None else resolve_fault_start(str(fault_start), stimes)
         cb = {t: bands[t] for t in common}
-        out["scored"] = dict(score(common, stimes, srows, cb, fs, flags=flags_for(common, srows, cb)),
+        out["scored"] = dict(score(common, stimes, srows, cb, fs, flags=flags_for(common, stimes, srows, cb)),
                              csv=Path(score_csv).name, tags_missing=missing, tags_not_in_normal=extra)
     return out
 
@@ -499,10 +722,15 @@ def markdown(r, units):
           f"{len(r['tags'])} tags.", f"- K = {r['k']}" +
           ("" if r["k_selection"] is None else
            f" ({r['k_selection']['rule']}; target {'met' if r['k_selection']['target_met'] else 'NOT met'})") + "."]
+    c = r.get("method_choice")
+    if c and c["requested"] == "auto":
+        md.append(f"- Method chosen automatically: {c['why']}.")
+    if r.get("cyclic_profile"):
+        md.append(f"- Profile: {r['cyclic_profile']}.")
     if r["no_band"]:
         md.append(f"- No good values in the fit, so no band: {', '.join(r['no_band'])}.")
     for w in r.get("warnings", []):
-        md.append(f"- **Warning (small sample):** {w}")
+        md.append(f"- **Warning{'' if w.startswith('no time-of-day profile') else ' (small sample)'}:** {w}")
     if r["k_selection"]:
         md += ["", "| K | False flags, worst tag | Mean tag | Any tag flagged |", "|---|---|---|---|"]
         md += [f"| {k} | {v['worst_tag_rate']:.1%} ({v['worst_tag']}) | {v['mean_tag_rate']:.2%} | "
@@ -514,6 +742,18 @@ def markdown(r, units):
                "| Tag | Fit mean | Gap sd | Half-width | Set by |", "|---|---|---|---|---|"]
         md += [f"| {t} | {b['mean']:.6g} | {b['resid_sd']:.3g} | {b['half_width']:.3g} | {b['limited_by']} |"
                for t, b in r["bands"].items() if b is not None]
+    if r["method_name"] == "cyclic":
+        md += ["", "Band half-width on the gap of each tag's residual from its time-of-day profile (set by the floor "
+                   f"where the residual varies less than {DRIFT_FLOOR:.0%} of the reading allows; not scaled with the "
+                   "reading). Profile range = the lowest and highest slot means:", "",
+               "| Tag | Fit mean | Profile range | Gap sd | Half-width | Set by |", "|---|---|---|---|---|---|"]
+        for t, b in r["bands"].items():
+            if b is None:
+                continue
+            sl = list((b.get("profile") or {}).get("slots", {}).values())
+            rng = f"{min(sl):.6g} to {max(sl):.6g}" if sl else "-"
+            md.append(f"| {t} | {b['mean']:.6g} | {rng} | {b['resid_sd']:.3g} | {b['half_width']:.3g} | "
+                      f"{b['limited_by']} |")
     if "held_out_normal" in r:
         h = r["held_out_normal"]
         md += ["", f"Held-out normal rows at K = {r['k']}: {h['flagged_samples_any_tag']}/{h['rows']} samples with any "
@@ -559,8 +799,12 @@ def main(argv=None):
                                           "number with a decimal point (480.0) is matched against the first column")
     ap.add_argument("--fit-fraction", type=float, default=0.5, help="share of the normal CSV used to fit (default 0.5)")
     ap.add_argument("--method", choices=METHODS, default=DEFAULT_METHOD,
-                    help="drift (default): each tag against its own slow baseline, for real data that drifts; "
-                         "level: fixed mean +/- K sd bands, the Tennessee Eastman scripts' method")
+                    help="auto (default): cyclic when the export has timestamps over at least "
+                         f"{CYCLIC_MIN_DAYS} fit days and a time-of-day profile explains at least {CYCLIC_MIN_R2} of "
+                         "the held-out variation, else drift; drift: each tag against its own slow baseline, for real "
+                         "data that drifts; cyclic: the drift method on each tag's residual from its time-of-day "
+                         "profile, for daily cycles; level: fixed mean +/- K sd bands, the Tennessee Eastman scripts' "
+                         "method")
     ap.add_argument("--k", type=float, help="band half-width in sd; default: chosen on the held-out normal rows")
     ap.add_argument("--units", default=None, help="label for delays (default: 'seconds' for timestamps, else the "
                                                    "first column's units)")
@@ -579,10 +823,14 @@ def main(argv=None):
     except ValueError as e:  # a --fault-start that is neither a row number nor a time in the first column
         raise SystemExit(f"error: {e}") from None
     units = a.units or ("seconds" if r["time_kind"] == "timestamp" else f"'{r['time_column']}' units")
+    try:
+        serialized = json.dumps(r, indent=1, allow_nan=False)
+    except ValueError:
+        raise SystemExit("error: computed result contains a nonfinite value; check sample times and magnitudes") from None
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     # LF on every OS, so the committed example regenerates byte for byte on Windows too
-    (out / "csv_normal_bands.json").write_text(json.dumps(r, indent=1), encoding="utf-8", newline="\n")
+    (out / "csv_normal_bands.json").write_text(serialized, encoding="utf-8", newline="\n")
     md = markdown(r, units)
     (out / "csv_normal_bands.md").write_text(md, encoding="utf-8", newline="\n")
     print(md)

@@ -22,9 +22,10 @@ saved. `--max-mb` (default 500) caps what one run may download. Tests: `python s
 | `idaes-hda` | IDAES BSD-style | 7 files of IDAES/examples at a pinned commit | Exports (row 5) from a flowsheet nobody here wrote |
 | `dwsim-fossee` | CC BY-SA 4.0 | 42 flowsheet project zips (inner flowsheet pinned too) | Exports (row 5) from 42 independent student flowsheets |
 | `wikimedia-pid` | per file (public domain / CC BY-SA 3.0) | 7 Commons images | Rows 1, 2, 3 and 8 on six of them, scored against agent-made first-pass keys (`data/agent_keys/`; marked as such in the matrix) |
-| `uci-hydraulic` | CC BY 4.0 | one zip (77 MB) | Historian bands (row 6) on a hydraulic test rig's load cycles: a held-out source for the drift method |
-| `metropt3` | CC BY 4.0 | one zip (218 MB) | Historian bands (row 6) on a train compressor with reported air leaks: held out |
-| `battledim` | CC BY 4.0 | 2018 pressures, flows, level, leak configuration, README (29 MB) | Historian bands (row 6) on a water network with 14 leaks: held out |
+| `uci-hydraulic` | CC BY 4.0 | one zip (77 MB) | Historian bands (row 6) on a hydraulic test rig's load cycles: held out for drift, now development for auto/cyclic |
+| `metropt3` | CC BY 4.0 | one zip (218 MB) | Historian bands (row 6) on a train compressor with reported air leaks: held out for drift, now development for auto/cyclic |
+| `battledim` | CC BY 4.0 | 2018 pressures, flows, level, leak configuration, README (29 MB) | Historian bands (row 6) on a simulated water network with 14 leaks: held out for drift, now development for auto/cyclic |
+| `battledim-2019` | CC BY 4.0 | 2019 pressures, flows, level, leak configuration, README (29.5 MB) | Held-out year for auto/cyclic (19 leaks), same simulated L-Town network as 2018; carry-over across years only |
 
 The sources added 2026-10-29 are pinned file by file in `data/corpus_pins.json` (bytes, SHA-256, and CRC-32 or the
 inner flowsheet's SHA-256 where there is one). A file already on disk that matches its pin is not fetched again, so
@@ -168,6 +169,16 @@ python scripts/fetch_corpus.py wikimedia-pid
   staged file). The download URLs (UCI's static zips; Zenodo record 4017659's file links) were not re-checked when the
   pins were written, so a first fetch that receives different bytes is refused, not saved. `scripts/historian_adapters.py`
   turns them into historian CSVs in a temporary folder; nothing derived is committed.
+- `battledim-2019`: S. G. Vrachimis et al., *BattLeDIM: Battle of the Leakage Detection and Isolation Methods*,
+  KIOS Research and Innovation Center of Excellence, University of Cyprus,
+  [Zenodo record 4017659](https://zenodo.org/records/4017659), CC BY 4.0. The three 2019 SCADA CSVs, shared
+  `dataset_configuration.yaml` and `README.txt` were downloaded on 2026-10-29 without login or click-through;
+  every file has its exact size, SHA-256, published Zenodo MD5 and direct URL in `data/corpus_pins.json`.
+  `python scripts/fetch_corpus.py battledim-2019` checks matching local files without network. The split and
+  mapping were fixed before scoring (A178), the method frozen in A183 and scored once in A184: 6/19 pass
+  against drift's 0/19. Detection takes 14 hours to 5 days, and tank level T1 drives most flags. This tests
+  another year of the development network, not a different network or real plant. See the
+  [historian guide](../examples/historian-csv/README.md) for the baseline, overlapping leak windows and criterion.
 
 Staged locally but not integrated (data in `data/external/`, not yet a fetch source): the HAI boiler physical graph and
 the Covestro PCS list. They are listed as candidates in `data/corpus.json`.

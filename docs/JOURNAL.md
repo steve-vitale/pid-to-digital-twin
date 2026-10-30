@@ -3339,3 +3339,92 @@ isolation CSV and image themselves.
 
 **Lesson:** a claim checked only against the thing that produced it isn't checked. The statement review, the corpus
 and the role-played readers each found what every internal test had passed.
+
+## 65. Finish the tool handoff and check the public story
+
+**What:** 2026-10-29. Continued the same evening's handoff: scan cleanup, the pipe layer, cyclic historian data,
+review metadata, food-plant questions, estimates and reproducible predictions. The aim was a coherent set of
+prototype tools a visitor can try and check, with the research record kept distinct from general-purpose tools.
+The README links each entry point to a runnable example; [DELIVERABLES.md](DELIVERABLES.md) carries the full output
+inventory, [SCRIPTS.md](SCRIPTS.md) identifies the 27 tools, and [FEATURES.md](FEATURES.md) records which exact
+examples have passed an independent agent review. That status is software evidence, not a person's sign-off.
+
+**Scan cleanup helps some scans and hurts another.** The optional `scan_cleanup.py` wrapper is now wired into
+matrix row 1 and documented in the own-drawing runbook. On the OPEN100 synthetic scans, with answer-key symbols
+supplied, network F1 is 0.894 / 0.818 / 0.753 for L1 / L2 / L3; the original tracer gave 0.877 / 0.566 / 0.387.
+The real OMRE quadrant goes the other way, 0.561 to 0.522 against an agent-made key. Cleanup stays opt-in; the
+original tracer default is unchanged. These are deterministic oracle-symbol checks, not new model-extraction
+runs, and do not replace round 4's pre-registered results.
+
+**Pipe scores improved, partly because the scorer was wrong.** DEXPI 1.3 pipe F1 is now 0.916, OPEN100 development
+0.931 and validation 0.912. The vendor-render pool is 0.776 and still fails the 0.88 criterion. Its SPPID subset
+became development data: the scorer-only junction correction accounts for 0.679 to 0.852, about two thirds of its
+total gain to 0.939. Reserved Comos renders still score 0.264; the one AVEVA render has just one pipe segment.
+The pooled result mixes splits and is not a held-out accuracy claim. OPEN100 is only partly blind, and the derived
+truth changed too. [EVALUATION.md §7](EVALUATION.md#7-which-layer-each-evaluation-measures) gives the current numbers
+and limitations. The PID2Graph paper's metric was checked directly: edge mAP on individual graph edges differs
+from this project's F1 on network pairs or derived pipe segments.
+
+**Cyclic history is a limited result.** CSV `auto` selects daily-cycle bands only with sufficient periodic evidence;
+drift remains the fallback. The 2018 BattLeDIM development windows pass 8 of 14 cases. The reserved 2019 year,
+from the same water network, passes only 6 of 19: 13 leaks detected, seven windows with excessive pre-leak flags,
+and detections delayed roughly 14 to 120 hours. This is not a new-plant test or an early-warning claim. The guide
+now says history can highlight unusual changes. Independent probes also found accepted NaN/infinite timestamps
+and finite inputs whose derived values overflowed: these now fail explicitly before writing an invalid report.
+
+**Review information reaches the exports.** The tag-based safety floor marks 25 instruments and moved 22 from
+green to amber; it does not catch untagged valves, manual block valves or every NC/MOV/AOV convention. Ignition
+types are keyed by kind (12 instead of 37 on the extracted twin), with per-instance engineering units when the
+model supplies them. Ignition documentation and PI descriptions carry review status, risk and applicable safety
+notes. Unit labels do not perform conversion or validate a source signal's units. Pipeline confidence now names
+the seven unrated cross-sheet links that the review queue puts in amber. All 2,886 extracted items remain
+unverified until reviewed; risk ranking does not upgrade their verification status.
+
+**The estimator's checks now constrain the calculation.** Redundant electricity forms must constrain the annual
+energy actually used, including complete ranges and zero-hour cases. Ambiguous partial load increases are refused
+with explicit alternatives. Incremental steam enthalpy can be smaller than gross steam-production heat; the E7
+assumption names the actual turbine inlet/outlet boundary. Site notes and measurement provenance survive both
+JSON and Markdown. A fresh reviewer reproduced all 12 example files, passed 37 tests, and checked 400 scalar
+endpoints and 10,000 mixed saving/load scenarios against the reported intervals. These are first-draft estimates,
+not measured plant savings. Ten food-process questions and a multi-site rollup bring the question registry to 50;
+the food model and its 24 findings are explicitly illustrative, not evidence from a food plant.
+
+**Fresh reviews found faults the existing suite missed.** The graph validator accepted duplicate edge IDs,
+invalid review states and dangling stream endpoints; it now refuses them. All eight TE cascade statements were
+being checked against the wrong model field, and nested source paths caused false mismatches: the source checker
+now reports 576 matches, seven not checked and no differences on the TE graph, with negative controls. Safety
+sentences now identify tag-derived, unverified screening. The sheet-0 population is 1,087 statements (163
+attributes, 188 identities, 736 relations); older seeded samples and their measured error rates are retained as
+historical samples rather than silently redrawn. A DEXPI report wrongly said unplaced items were excluded from
+platform exports; the report now describes the automatic fallback placement that the code actually uses.
+
+**The headline can now be re-scored.** Preserved research working copies contained the round-5 and TE parsed run
+records that were missing from the earlier export. Recovered 391 parsed predictions, with raw-byte and exported
+hashes in [predictions/RECOVERY.json](../predictions/RECOVERY.json); an independent reviewer verified every source
+hash and slim export. Raw model text stays outside git. There are now 1,123 prediction files across 101 labels.
+`rescore.py --check` reproduces 30 of 35 result tables, including the round-5 headline replicates and both TE
+round trips. Twenty-three match current formats and seven match explicitly supported historical formats; no
+metric differences are discarded. Five earlier diagnostic tables still report GAP. A recovery receipt proves
+which local records were exported, not provider attestation or a fresh commercial-model run.
+
+**Four LinkedIn readers, role-played by fresh agents:** a solo plant engineer, a controls integrator, a manager and
+a skeptic. Their checks removed unmeasured time-saving claims, clarified that the review CSV cannot add an omitted
+symbol, corrected an old PI file list and explained that valid CSV review rows can persist even if another row
+fails. A rebuilt extraction needs review reconciliation by source symbol IDs; decisions are not automatically
+merged. Generic drawing bundles do not generate the research demo's mimic, 3D or LOTO outputs. The delivered
+one-page report was regenerated and inspected in a browser with its draft banner and review steps visible.
+
+**Verification and remaining boundaries.** The full matrix is 63 pass / 23 fail / 8 n/a (94 cells), compared with
+61 / 24 / 8 before this batch; BattLeDIM 2019 adds one failing cell. Every cell records the current tool hashes,
+and all 52 pipeline stages are fresh after rebuilding the affected exports and renders. The claim checker now
+also checks the six new README matrix claims against the result JSON. It checks agreement with committed evidence;
+the separate rescore check regenerates results from predictions. No commercial extraction, human timed review,
+operations review, PI import or own-drawing native gateway import was run in this continuation. Historical native
+gateway receipts remain historical. Median-of-three drift smoothing and making scan cleanup the tracer's default
+remain unadopted choices; no LinkedIn post was published.
+
+The 55 registered test scripts passed after the final matrix freshness test was rerun (its first invocation
+preceded the last cell refresh); two Windows symlink subcases require Linux CI. The claim check reports 41 numeric
+matches, one prose-only claim and zero failures. All 16 feature entries have current passing independent reviews
+of their registered example outputs, with limitations attached. That does not mean every possible input or
+organizational workflow has been validated.

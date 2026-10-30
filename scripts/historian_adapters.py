@@ -23,6 +23,11 @@ BattLeDIM 2018 (CC BY 4.0; data/external/battledim)
   leak start (2018-01-08 13:30, exclusive). One run per leak in dataset_configuration.yaml that starts in 2018: score
   CSV = 2 days before its start to the earlier of its end (repair) and 7 days after its start; fault start = the
   leak start. Leaks already running are part of later runs' pre-fault rows.
+BattLeDIM 2019 (CC BY 4.0, same Zenodo record; data/external/battledim-2019) -- the cyclic method's held-out source
+  (data/attempts.json A178, mapping written before any run): 2019_SCADA_Pressures, _Flows, _Levels joined as for
+  2018. Normal CSV = 2019-01-01 00:00 up to the first leak that STARTS in 2019 (p523, 2019-01-15 23:00, exclusive):
+  the four leaks running on from 2018 (p257, p427, p810, p654) are part of normal. One run per leak starting in 2019
+  (19), windows as for 2018.
 
   import historian_adapters as ha
   runs = ha.metropt3_runs(zip_path, out_dir)   # [{"name", "normal", "score", "fault_start_row", "what", ...}]
@@ -220,30 +225,44 @@ def battledim_join(tables):
     return header, rows
 
 
-def battledim_runs_from(tables, config_text, dest):
+def battledim_files(year=2018):
+    """The SCADA files of one BattLeDIM year (pressures, flows, level)."""
+    return tuple(f"{year}{n[4:]}" for n in BATTLEDIM_FILES)
+
+
+def battledim_runs_from(tables, config_text, dest, year=2018):
+    """The normal CSV (the export's start up to the first leak that STARTS in `year`; leaks running on from an
+    earlier year are part of it) and one score CSV per leak starting in `year`. File names carry the year after
+    2018 (battledim2019_normal.csv ...); 2018's keep their original names."""
     header, rows = battledim_join(tables)
     times = [datetime.fromisoformat(r[0]) for r in rows]
-    leaks = battledim_leaks(config_text)
+    leaks = battledim_leaks(config_text, year)
     first = min(s for _, s, _, _ in leaks)
-    normal = _write(Path(dest) / "battledim_normal.csv", header, [r for r, t in zip(rows, times) if t < first])
+    stem = "battledim" if year == 2018 else f"battledim{year}"
+    normal = _write(Path(dest) / f"{stem}_normal.csv", header, [r for r, t in zip(rows, times) if t < first])
     runs = []
     for link, s, e, kind in sorted(leaks, key=lambda x: x[1]):
         a, b = s - BATTLEDIM_BEFORE, min(e, s + BATTLEDIM_AFTER)
         sel = [i for i, t in enumerate(times) if a <= t <= b]
         fs = next(k for k, i in enumerate(sel) if times[i] >= s)
         runs.append({"name": link, "normal": normal, "kind": kind,
-                     "score": _write(Path(dest) / f"battledim_{link}.csv", header, [rows[i] for i in sel]),
+                     "score": _write(Path(dest) / f"{stem}_{link}.csv", header, [rows[i] for i in sel]),
                      "fault_start_row": fs, "rows": len(sel),
                      "what": f"leak {link} ({kind}) from {s:%Y-%m-%d %H:%M}; scored {a:%Y-%m-%d %H:%M} to "
                              f"{b:%Y-%m-%d %H:%M}"})
     return runs
 
 
-def battledim_runs(dest, folder=None):
-    folder = Path(folder or EXTERNAL / "battledim")
+def battledim_runs(dest, folder=None, year=2018):
+    folder = Path(folder or EXTERNAL / ("battledim" if year == 2018 else f"battledim-{year}"))
     tables = []
-    for name in BATTLEDIM_FILES:
+    for name in battledim_files(year):
         with (folder / name).open(encoding="utf-8-sig", newline="") as f:
             tables.append([r for r in csv.reader(f, delimiter=";") if r])
     config = (folder / "dataset_configuration.yaml").read_text(encoding="utf-8")
-    return battledim_runs_from(tables, config, dest)
+    return battledim_runs_from(tables, config, dest, year)
+
+
+def battledim_2019_runs(dest, folder=None):
+    """The held-out source of the cyclic method (data/attempts.json A178): BattLeDIM's 2019 evaluation year."""
+    return battledim_runs(dest, folder, year=2019)

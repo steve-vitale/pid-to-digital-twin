@@ -15,6 +15,7 @@ python -S scripts/question_engine.py --model data/bayer_rt/process_model.json --
 python -S scripts/question_engine.py --model my-bundle/plant_model.json \
     --schedule data/open100_equipment_schedule.json \
     --schedule examples/opportunity-screen/open100_schedule_fields.json --out out/screen-site
+python -S scripts/question_engine.py --rollup out/screen-site-a --rollup out/screen-site-b --out out/rollup
 ```
 
 Stdlib only, offline, no model calls. Without `--out` it prints the screen.
@@ -33,12 +34,18 @@ what a public source says about the typical benefit, quoted as written, with the
 are general figures for plants in general.
 
 **What it covers, and what it doesn't yet.**
-- The 40 questions cover pumps, fans, steam, boilers and fired heaters, compressed air, cooling water, heat grade,
-  metering, controls and a few emissions and safety checks ([the questions](#the-questions)). There are no questions
-  yet for refrigeration or ammonia systems, ovens or dryers.
-- One site per run. There is no multi-site roll-up; to compare sites, run each one and combine the outputs yourself.
+- The 50 questions cover pumps, fans, steam, boilers and fired heaters, compressed air, cooling water, heat grade,
+  metering, controls, a few emissions and safety checks, and (since 2026-10-29) refrigeration plant (head pressure,
+  suction pressure, compressor part load, defrost, condenser heat recovery, compressor power metering) and ovens,
+  dryers and fryers (exhaust heat recovery, burner air-fuel ratio, exhaust humidity control) ([the
+  questions](#the-questions)). Refrigerated spaces themselves (doors, infiltration, lighting) are not on a P&ID and
+  are not asked about.
+- One site per run; `--rollup` then combines several runs into one list ([the roll-up](#several-sites-the-roll-up)).
+  The roll-up does not weigh sites against each other: there are no savings to weigh.
 - The worked examples are a chemical process simulation (Tennessee Eastman), a chemical unit from a public
-  investigation report (Bayer) and the sheets of a power-plant design (OPEN100). None is a plant's own data.
+  investigation report (Bayer), the sheets of a power-plant design (OPEN100) and an ILLUSTRATIVE synthetic food plant
+  section written to exercise the refrigeration and oven questions. None is a plant's own data, and no refrigeration
+  or oven question has been checked against a real food plant's drawing.
 
 ## The three evidence states
 
@@ -92,10 +99,29 @@ and why (exit code 2), never a traceback or an empty "found nothing" screen.
 - `screen.md`: the same, grouped by family, readable on its own, with a "how to read this" note at the top and the
   cited sources with their licenses at the bottom.
 
+## Several sites: the roll-up
+
+```sh
+python -S scripts/question_engine.py --rollup examples/opportunity-screen/food --rollup examples/opportunity-screen/bayer \
+    --out examples/opportunity-screen/rollup-food-bayer
+```
+
+Each `--rollup` is the `--out` folder of one site's screen (or `NAME=FOLDER` to name the site; otherwise the folder's
+name is used). It writes `rollup.json` (`schema: opportunity-rollup-1`) and `rollup.md`: every question that fired
+anywhere, listed once, with the sites and assets it fired on (`finding_id`, `about`, `assets`), the sites where it was
+asked and found nothing (`quiet_at`), could not be checked (`not_checked_at`) or was not run (`not_run_at`), and its
+data requests merged by item. Per site, the places every finding there shares are listed once (`where`) and the rest
+per finding (`where_by_finding`), so a request such as "utility flow to this user" can be planned across all sites at
+once. Questions are ordered by how many sites they fired at, then by findings, then catalog order. That order says
+where a question is common, not where the money is: the roll-up computes no savings and ranks nothing by value. A
+folder with no `questions.json`, a file that is not a screen, a screen with question ids this catalog does not know,
+or the same site named twice is refused (exit code 2). Example:
+[`examples/opportunity-screen/rollup-food-bayer/rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md).
+
 ## The questions
 
-`data/questions.json` holds 40 questions as data: energy (E1-E24), heat grade (H1-H4), metering (C1), controls
-(C2-C7, C10), emissions (E25, E26) and safety questions to verify (C8, C9). `--list` prints them. E1-E26 and C1-C10
+`data/questions.json` holds 50 questions as data: energy (E1-E24, E27-E32), heat grade (H1-H6), metering (C1,
+C12), controls (C2-C7, C10, C11), emissions (E25, E26) and safety questions to verify (C8, C9). `--list` prints them. E1-E26 and C1-C10
 come from a review of public DOE, LBNL, EPA and HSE documents; the wording was copied from text extracts of those
 documents. H1-H4 are the "high-grade heat used for low-grade duty" family:
 
@@ -105,6 +131,32 @@ documents. H1-H4 are the "high-grade heat used for low-grade duty" family:
 | H2 | Is high-grade (or unknown-grade) steam doing a low-temperature job? | S19 (pinch) wording; S6 for the letdown. No source gives a number for matching steam grade to duty |
 | H3 | Is electric resistance heat serving a low-temperature load another source could carry? | No source in the reviewed set |
 | H4 | Is heat rejected to cooling water at a temperature another user could use? | S19 (pinch) wording, no % stated; S11 for air compressors only. Never fires on equipment that cools the cooling water itself (a cooling water cooler, air-cooled exchanger or cooling tower) |
+
+**Refrigeration, ovens, dryers and fryers** (added 2026-10-29 after an energy manager's walkthrough for a multi-site
+food manufacturer). Every quote names its page and was checked word for word against a text extract of the PDF at
+the source's URL; each source entry in `data/questions.json` records that file's SHA-256 under `checked`.
+
+| ID | Question | Fires on | Source (page) |
+|---|---|---|---|
+| E27 | Is the refrigeration condensing (head) pressure held higher than the weather allows? | a condenser whose name or service names the refrigerant; quiet if a floating head or wet-bulb reset is named | S25 pp. 62, 65 (2% to 3% per degree C of condensing temperature, as reported there) |
+| E28 | Is each suction level colder than its warmest load needs? | refrigeration compressors (one finding per model), shown with suction pressures and the freezers, cold stores and chillers | S25 p. 63 (about 8% for a two-stage system raised from -30 °F to -20 °F) |
+| E29 | Does a refrigeration compressor carry part load on its slide valve with no speed control? | a refrigeration compressor with no drive (VFD, VSD, ASD, SC, SIC) on it | S25 pp. 59, 63 |
+| E30 | Are evaporators defrosted on a fixed timer? | an evaporator or unit cooler with defrost drawn on it; quiet with a coil differential pressure or demand defrost | S25 pp. 59, 66 (no %) |
+| E31 | Does an oven, dryer or fryer send hot exhaust to atmosphere with no heat recovery? | an oven, dryer, fryer, roaster or dehydrator; quiet if a heat recovery item is on it or at the other end of a stream from it | S26 pp. 104, 107; S25 p. 90 (up to 30% of spray dryer exhaust heat) |
+| E32 | Is the burner air-fuel ratio checked, with no flue O2 drawn? | an oven, dryer or fryer with a burner or fuel supply; quiet with an O2 analyser | S27 p. 1 (no %; excess air is part of a drying process) |
+| H5 | Is refrigeration condenser heat rejected while a low-grade duty is heated another way? | refrigeration plant plus a hot water, CIP, wash water, floor or space heating duty anywhere; quiet with a refrigeration desuperheater or heat recovery | S25 p. 64 (no %) |
+| H6 | Could oven, dryer or fryer exhaust heat serve a low-grade duty elsewhere? | the E31 units, plus a low-grade duty anywhere | S28 p. 1; S26 p. 107 (no %) |
+| C11 | Is a dryer's or oven's exhaust rate set by hand rather than by humidity? | a dryer or oven with no humidity, dew point or moisture measurement | S26 p. 104 (no %) |
+| C12 | Is refrigeration compressor power measured? | refrigeration compressors with no power, current or energy measurement | S25 p. 58 (3% for monitoring, one winery review as reported there) |
+
+Anti-triggers, each in the tests: an air compressor, a recycle gas compressor, a process condenser on cooling water,
+a power-plant air-cooled condenser, a refrigerated or desiccant compressed air dryer and a nuclear steam dryer are not
+refrigeration plant, ovens or dryers. Adding these also tightened older questions, without changing any finding in
+the TE, Bayer or OPEN100 examples: E19, E22, E23 and C7 no longer read an air dryer, filter, separator, receiver or
+aftercooler as an air compressor; E22's air storage check no longer counts an ammonia receiver or a cold store; E26
+no longer reads an oven, dryer or fryer exhaust as a relief or process vent. And a flow request no longer adds "only
+a valve is drawn on this line, with no flow measurement" when a flow meter is drawn on the same line (one line each
+in the TE and Bayer E18 findings changed: FV-119 beside FT-119, HV-108 and TV-104C beside FT-106).
 
 Each question has: `applies_when` (the triggers), `evidence_fields`, `data_requests`, `decision_rule`,
 `typical_benefit` (`wording`, `source`, `arc`) and `limits`.
@@ -134,7 +186,9 @@ covers. `fields_help` in the file documents every key. In short:
   connector...). A list of anchors means any of them.
 - **with** clauses must all find a related item; **without** clauses must find none; **also_show** quotes related
   items as evidence if present. Relations: same unit, same stream, same unit and same utility, another unit, the
-  discharge side, near, a controller that drives it, a controller or interlock that reads it, anywhere.
+  discharge side, near, linked (a stream drawn from or to the unit, an item on that stream, or the equipment at its
+  other end: an exhaust going to a heat recovery exchanger), a controller that drives it, a controller or interlock
+  that reads it, anywhere.
 - **quantity** on a historian place (`flow`, `temperature`, `pressure`, `power`, `composition`, `position`) limits
   it to signals that measure that quantity; **match** is a regex the item must match (for example supply versus
   return).
@@ -169,6 +223,9 @@ equipment is listed under "Left out" in every screen.
 | S22 | FEMP *Metering Best Practices* 3.0 (PNNL-23892) | Contractor-prepared: unclear; buildings-focused figures |
 | S23 | UK HSE, *Better Alarm Handling* (CHIS6) | Crown copyright, generally Open Government Licence; verify |
 | S24 | DOE IAC/ITAC database (itac.university) | No license or terms stated: unclear |
+| S25 | LBNL-6261E, Brush, Masanet & Worrell, dairy processing ENERGY STAR guide (2011) | DOE-lab report for US EPA: unclear, freely citable; figures from older sources quoted "as reported" |
+| S26 | LBNL-59289-Revision, Masanet, Worrell, Graus & Galitsky, fruit and vegetable processing ENERGY STAR guide (2008) | As S25 |
+| S27, S28 | DOE process heating tip sheets #2 (burner air-fuel ratios) and #10 (waste heat for external processes) | Public domain |
 
 Full titles and URLs are in `data/questions.json` under `sources`. S12 is unused. Where a source quotes dollar
 figures (cost per kW, a partner's annual saving, IAC average savings) they are left out on purpose: they assume one
@@ -181,7 +238,12 @@ plant's prices and hours.
   improvement opportunities, and the IAC recommendation codes. The triggers here are this project's own, built from
   those, and are not a standard.
 - **The typical benefits are the sources' general figures,** mostly from US industry or refineries, sometimes from
-  buildings (S22). They say nothing about your plant.
+  buildings (S22) or dairy, fruit and vegetable or winery reviews (S25, S26). They say nothing about your plant.
+- **The refrigeration questions fire on names.** A compressor or condenser counts as refrigeration plant only when
+  its own name, type or service says ammonia, NH3, R-717, a refrigerant number or refrigeration. A drawing that labels
+  an ammonia compressor only "K-201 SCREW COMPRESSOR" gets the generic compressor questions and none of these; give
+  the service in the equipment schedule (`--schedule`) or the model. The refrigeration, oven, dryer and fryer
+  questions have been run on a synthetic model only.
 - **IAC/ITAC numbers are averages from the browse pages,** read through a summarizing fetch and not re-verified
   against the downloadable database. Averages are skewed badly by outliers (one code shows a 1,201-year average
   payback). Medians and quartiles per code would need the database download (about 15.7 MB); that was not done

@@ -23,12 +23,16 @@ RUNS = {
     "open100": ["--model", "out/twin/r2-tiles-trace/codex/plant_model.json", "--schedule",
                 "data/open100_equipment_schedule.json", "--schedule",
                 "examples/opportunity-screen/open100_schedule_fields.json"],
+    "food": ["--model", "examples/opportunity-screen/food_plant_model.json"],
 }
+ROLLUP = ["examples/opportunity-screen/food", "examples/opportunity-screen/bayer"]
+# Refrigeration, oven, dryer and fryer questions (added 2026-10-29 from a food manufacturer's walkthrough)
+NEW = {"E27", "E28", "E29", "E30", "E31", "E32", "H5", "H6", "C11", "C12"}
 SELECTOR_KEYS = {"kind", "type", "type_text", "isa", "variable", "text", "text_all", "not_text", "tagged",
                  "control_valve", "fact_C_min", "fact_C_max", "schedule_field"}
 CLAUSE_KEYS = {"select", "relation", "max_hops", "as", "twin_only", "hand_only", "anchor_kind"}
 RELATIONS = {"same_unit", "same_stream", "same_unit_same_medium", "other_unit", "discharge_side", "near", "drives",
-             "reads", "anywhere"}
+             "reads", "anywhere", "linked"}
 PLACES = {"historian", "dcs", "nameplate", "vendor", "maintenance", "records", "bills", "walkdown", "text"}
 CURRENCY = re.compile(r"[$€£¥]|\bUSD\b|\d[\d,.]*\s*(dollars?|cents?)\b", re.I)
 
@@ -105,8 +109,22 @@ class Catalog(unittest.TestCase):
         fam = {}
         for q in CAT["questions"]:
             fam[q["family"]] = fam.get(q["family"], 0) + 1
-        self.assertEqual(fam, {"energy": 24, "heat_grade": 4, "metering": 1, "controls": 7, "safety_question": 2,
+        self.assertEqual(fam, {"energy": 30, "heat_grade": 6, "metering": 2, "controls": 8, "safety_question": 2,
                                "emissions": 2})
+
+    def test_new_questions_quote_a_page_of_a_checked_source(self):
+        """Each refrigeration / oven / dryer / fryer question quotes its source with a page, and the source records
+        which file its quotes were checked against."""
+        qs = {q["id"]: q for q in CAT["questions"]}
+        self.assertEqual(NEW - set(qs), set())
+        for qid in NEW:
+            tb = qs[qid]["typical_benefit"]
+            with self.subTest(q=qid):
+                self.assertTrue(tb["source"])
+                self.assertRegex(tb["wording"], r"p\. \d+")
+                self.assertIn('"', tb["wording"])
+                for s in tb["source"]:
+                    self.assertIn("checked", CAT["sources"][s], s)
 
 
 class Examples(unittest.TestCase):
@@ -148,7 +166,8 @@ class Examples(unittest.TestCase):
 
     def test_graph_export_accepts_each_questions_file(self):
         models = {"te": "data/te_process_model.json", "bayer": "data/bayer_rt/process_model.json",
-                  "open100": "out/twin/r2-tiles-trace/codex/plant_model.json"}
+                  "open100": "out/twin/r2-tiles-trace/codex/plant_model.json",
+                  "food": "examples/opportunity-screen/food_plant_model.json"}
         for name, model in models.items():
             g = gx.build(ROOT / model, questions=EX / name / "questions.json")
             self.assertEqual(gx.problems(g), [], name)
@@ -218,6 +237,158 @@ class ExpectedFindings(unittest.TestCase):
         self.assertIn("RCS-EX-105", sum(doc["left_out"].values(), []))
         # no controller list in an extracted drawing: controller questions are reported as not checked
         self.assertEqual({n["question_id"] for n in doc["not_checked"]}, {"C2", "C6"})
+
+    def test_new_questions_stay_quiet_on_the_chemical_and_power_examples(self):
+        """No refrigerant, oven, dryer or fryer is drawn in TE, Bayer or OPEN100: TE's recycle compressor K-101, its
+        condenser E-101, Bayer's vent condenser E-1 and OPEN100's air-cooled condenser must not read as
+        refrigeration plant."""
+        for name in ("te", "bayer", "open100"):
+            doc = load(name)
+            with self.subTest(model=name):
+                self.assertEqual(NEW - set(doc["did_not_fire"]), set())
+                self.assertFalse({f["question_id"] for f in doc["questions"]} & NEW)
+
+    def test_food_plant(self):
+        doc = load("food")
+        found = ids(doc)
+        for fid in ("E27@C-201", "E28@model", "E29@K-201", "E29@K-202", "E30@EV-201", "H5@model", "C12@model",
+                    "E31@D-301", "E31@O-302", "E32@D-301", "E32@F-303", "C11@D-301", "C11@O-302", "H6@D-301",
+                    "H6@O-302"):
+            self.assertIn(fid, found)
+        # anti-triggers, each drawn on purpose: K-203 has a drive; EV-202 defrosts on demand (coil dP); the oven has
+        # a flue O2 analyser; the fryer's exhaust goes to a vapour condenser heat recovery exchanger; K-201's power
+        # is metered
+        for fid in ("E29@K-203", "E30@EV-202", "E32@O-302", "E31@F-303", "H6@F-303"):
+            self.assertNotIn(fid, found)
+        c12 = {a["id"] for a in finding(doc, "C12@model")["assets"]}
+        self.assertEqual(c12 & {"K-201", "K-202", "K-203"}, {"K-202", "K-203"})
+        # the instrument air compressor and its refrigerated air dryer are not refrigeration plant or a process dryer
+        for f in doc["questions"]:
+            if f["question_id"] in NEW:
+                self.assertFalse({a["id"] for a in f["assets"]} & {"AC-501", "AD-502"}, f["id"])
+        self.assertIn("E19@AC-501", found)  # ...while the compressed air questions do ask about the air compressor
+        self.assertFalse({i for i in found if i.split("@")[0] in ("E19", "E20", "E21", "E22", "E23") and
+                          i.split("@")[1].startswith("K-")})
+        # data requests name the quantities and where they live
+        e27 = {r["item"]: r for r in finding(doc, "E27@C-201")["data_requests"]}
+        head = next(r for k, r in e27.items() if k.startswith("Head (discharge) pressure"))
+        self.assertIn("PT-203", " ".join(head["where"]))
+        self.assertTrue(any("head pressure setpoint" in w for w in head["where"]))
+        e30 = " ".join(json.dumps(r) for r in finding(doc, "E30@EV-201")["data_requests"])
+        self.assertIn("defrost", e30.lower())
+        e31 = {r["item"]: r for r in finding(doc, "E31@D-301")["data_requests"]}
+        self.assertIn("TT-304", " ".join(e31["Exhaust temperature and flow"]["where"]))
+
+    def test_new_triggers_ignore_look_alikes(self):
+        """A process condenser on cooling water, a recycle gas compressor, an instrument air compressor, a
+        refrigerated compressed air dryer, a desiccant air dryer and a nuclear steam dryer are not refrigeration
+        plant, ovens or dryers."""
+        with tempfile.TemporaryDirectory() as tmp:
+            m = {"meta": {"title": "look-alikes"}, "instruments": [], "final_elements": [],
+                 "units": [{"id": "E-1", "name": "Overhead condenser (cooling water)", "type": "condenser"},
+                           {"id": "K-1", "name": "Recycle gas compressor", "type": "compressor"},
+                           {"id": "K-2", "name": "Instrument air compressor", "type": "compressor"},
+                           {"id": "D-1", "name": "Refrigerated compressed air dryer", "type": "dryer"},
+                           {"id": "D-2", "name": "Desiccant air dryer", "type": "dryer"},
+                           {"id": "D-3", "name": "Steam dryer", "type": "dryer"},
+                           {"id": "W-1", "name": "Hot water heater for CIP", "type": "heater"}],
+                 "streams": [{"id": "U1", "name": "Natural gas", "from": "BL", "to": "W-1", "utility": True}]}
+            (Path(tmp) / "m.json").write_text(json.dumps(m), encoding="utf-8")
+            _, doc = run(["--model", str(Path(tmp) / "m.json")], tmp)
+        self.assertFalse({f["question_id"] for f in doc["questions"]} & NEW, ids(doc))
+        # tightened with them: an air dryer is not an air compressor (E19-E23 fired on it as "compressed air")
+        self.assertEqual({i for i in ids(doc) if i.startswith(("E19@", "E22@", "E23@"))},
+                         {"E19@K-2", "E22@K-2", "E23@K-2"} & ids(doc))
+        self.assertIn("E23@K-2", ids(doc))
+
+    def test_a_linked_heat_recovery_exchanger_only_suppresses_its_own_unit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = {"meta": {"title": "two dryers"}, "instruments": [], "final_elements": [],
+                 "units": [{"id": "D-1", "name": "Product dryer", "type": "dryer"},
+                           {"id": "D-2", "name": "Product dryer", "type": "dryer"},
+                           {"id": "HX-1", "name": "Exhaust air heat recovery exchanger", "type": "heat_exchanger"}],
+                 "streams": [{"id": "S1", "name": "Dryer exhaust", "from": "D-1", "to": "HX-1"},
+                             {"id": "S2", "name": "Dryer exhaust to atmosphere", "from": "D-2", "to": "ATM"}]}
+            (Path(tmp) / "m.json").write_text(json.dumps(m), encoding="utf-8")
+            _, doc = run(["--model", str(Path(tmp) / "m.json"), "--question", "E31"], tmp)
+        self.assertEqual(ids(doc), {"E31@D-2"})
+
+
+class Rollup(unittest.TestCase):
+    def roll(self, dirs, out):
+        old = sys.stdout
+        try:
+            sys.stdout = open(Path(out) / "log.txt", "w", encoding="utf-8")
+            rc = qe.main([*sum((["--rollup", d] for d in dirs), []), "--out", str(out)])
+        finally:
+            sys.stdout.close()
+            sys.stdout = old
+        return rc
+
+    def test_committed_rollup_regenerates_exactly(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(self.roll(ROLLUP, tmp), 0)
+            for f in ("rollup.json", "rollup.md"):
+                self.assertEqual((Path(tmp) / f).read_text(encoding="utf-8"),
+                                 (EX / "rollup-food-bayer" / f).read_text(encoding="utf-8"), f)
+
+    def test_rollup_content(self):
+        doc = json.loads((EX / "rollup-food-bayer" / "rollup.json").read_text(encoding="utf-8"))
+        self.assertEqual([s["site"] for s in doc["sites"]], ["food", "bayer"])
+        by = {q["question_id"]: q for q in doc["questions"]}
+        # every finding of every site is accounted for, once
+        for site in ("food", "bayer"):
+            src = load(site)
+            got = sorted(f["finding_id"] for q in doc["questions"] for s in q["sites"] if s["site"] == site
+                         for f in s["findings"])
+            self.assertEqual(got, sorted(f["id"] for f in src["questions"]), site)
+        # a question asked at both sites lists both, with the assets, and comes before single-site questions
+        c9 = by["C9"]
+        self.assertEqual([s["site"] for s in c9["sites"]], ["food", "bayer"])
+        self.assertIn("P-1", {a["tag"] for s in c9["sites"] for f in s["findings"] for a in f["assets"]})
+        order = [len(q["sites"]) for q in doc["questions"]]
+        self.assertEqual(order, sorted(order, reverse=True))
+        # data requests are combined by item: one entry per item, each site's places kept and deduplicated
+        for q in doc["questions"]:
+            items = [r["item"] for r in q["data_requests"]]
+            self.assertEqual(len(items), len(set(items)), q["question_id"])
+            for r in q["data_requests"]:
+                for s in r["sites"]:
+                    places = s["where"] + [w for b in s["where_by_finding"] for w in b["where"]]
+                    self.assertTrue(places)
+                    self.assertEqual(len(s["where"]), len(set(s["where"])))
+                    for b in s["where_by_finding"]:
+                        self.assertFalse(set(b["where"]) & set(s["where"]))
+        # places shared by a site's findings are listed once; each meter-less valve stays with its own finding
+        c1 = {r["item"]: r for r in by["C1"]["data_requests"]}["Utility flow to this user"]
+        food = next(s for s in c1["sites"] if s["site"] == "food")
+        self.assertTrue(any(w.startswith("a walkdown: clamp-on") for w in food["where"]))
+        self.assertEqual({b["finding_id"] for b in food["where_by_finding"]}, {"C1@O-302", "C1@F-303", "C1@WH-401"})
+        self.assertEqual([s["site"] for s in by["E27"]["sites"]], ["food"])
+        self.assertIn("bayer", by["E27"]["quiet_at"])
+        text = (EX / "rollup-food-bayer" / "rollup.md").read_text(encoding="utf-8")
+        self.assertIsNone(CURRENCY.search(text))
+        self.assertIsNone(CURRENCY.search(json.dumps(doc)))
+        self.assertNotIn("Users/", text)
+
+    def test_rollup_refuses_bad_inputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            err, old = io.StringIO(), sys.stderr
+            sys.stderr = err
+            try:
+                rc = qe.main(["--rollup", str(Path(tmp) / "nope"), "--rollup", ROLLUP[0], "--out", tmp])
+                self.assertEqual(rc, 2)
+                self.assertIn("no questions.json", err.getvalue())
+                (Path(tmp) / "x").mkdir()
+                (Path(tmp) / "x" / "questions.json").write_text('{"schema": "other"}', encoding="utf-8")
+                rc = qe.main(["--rollup", str(Path(tmp) / "x"), "--rollup", ROLLUP[0], "--out", tmp])
+                self.assertEqual(rc, 2)
+                self.assertIn("not an opportunity screen", err.getvalue())
+                rc = qe.main(["--rollup", ROLLUP[0], "--rollup", ROLLUP[0], "--out", tmp])
+                self.assertEqual(rc, 2)
+                self.assertIn("named twice", err.getvalue())
+            finally:
+                sys.stderr = old
 
 
 class EvidenceStates(unittest.TestCase):
@@ -368,6 +539,19 @@ class ReviewFixes(unittest.TestCase):
         h4 = {r["item"]: r for r in finding(load("te"), "H4@R-101")["data_requests"]}
         self.assertNotIn("TT-121", " ".join(h4["Cooling water supply temperature"]["where"]))
         self.assertIn("TT-121", " ".join(h4["Cooling water return temperature"]["where"]))
+
+    def test_a_drawn_flow_meter_is_not_contradicted_by_the_valve_beside_it(self):
+        """2026-10-29: a flow request said 'only a valve is drawn on this line, with no flow measurement' next to the
+        flow meter on the same line (TE FT-119 with FV-119, the food dryer's FT-301 with TV-301)."""
+        e18 = {r["item"]: r for r in finding(load("te"), "E18@model")["data_requests"]}
+        where = " ".join(e18["Temperatures and duties of the cooled and the heated streams"]["where"])
+        self.assertIn("FT-119", where)
+        self.assertNotIn("XMV(9)", where)
+        self.assertIn("XMV(10)", where)  # the unmetered cooling water side keeps its caveat
+        e31 = {r["item"]: r for r in finding(load("food"), "E31@D-301")["data_requests"]}
+        fuel = " ".join(e31["Fuel or heat input and operating hours"]["where"])
+        self.assertIn("FT-301", fuel)
+        self.assertNotIn("only a valve", fuel)
 
     def test_every_source_named_in_a_wording_is_in_its_source_list(self):
         for q in CAT["questions"]:

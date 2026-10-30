@@ -3,6 +3,7 @@ needed constant is missing without --use-defaults, defaults always labelled, eve
 derived values recompute, --needs covers every question with a measurable energy quantity, and the committed examples
 regenerate byte for byte and match a hand recomputation. Stdlib only."""
 import io
+import itertools
 import json
 import re
 import sys
@@ -45,6 +46,37 @@ def lohi(r):
 
 
 class Formulas(unittest.TestCase):
+    def test_measurement_provenance_survives_json_and_markdown(self):
+        notes = {"source": "meter certificate A123", "note": "matched throughput, October survey",
+                 "notes": "logged over three shifts"}
+        spec = {"site": SITE_E, "changes": [dict(type="electricity", kwh_per_year=3000, **notes)]}
+        result = run(spec)
+        machine = ei.doc_json(spec, result, "survey.json", False)
+        self.assertEqual(machine["changes"][0]["provenance"], notes)
+        page = ei.doc_md(spec, result, "survey.json", False)
+        for value in notes.values():
+            self.assertIn(value, page)
+
+    def test_partial_before_and_added_load_is_refused_as_ambiguous(self):
+        with self.assertRaisesRegex(ei.SpecError, "ambiguous.*actual kw_before/kw_after"):
+            run({"site": SITE_E, "changes": [dict(type="electricity", kw_before=10, kw_reduction=30,
+                                                   hours_per_year=100, increase=True)]})
+        for change in (dict(type="electricity", kw_before=10, kw_after=40, hours_per_year=100),
+                       dict(type="electricity", kw_reduction=30, hours_per_year=100, increase=True)):
+            self.assertEqual(lohi(run({"site": SITE_E, "changes": [change]})["totals"]["kwh"]), (-3000, -3000))
+
+    def test_small_incremental_steam_enthalpy_matches_the_heat_form(self):
+        # A condensate-return delta is not the gross enthalpy needed to make steam from feedwater.
+        for delta in (0, 0.1, 50, {"low": 25, "high": 75}):
+            steam = {"type": "steam", "steam_lb_per_h": 1000, "hours_per_year": 1000,
+                     "energy_btu_per_lb": delta}
+            value = ei.parse_value(delta, "delta") * 1000
+            heat = {"type": "heat", "hours_per_year": 1000, "heat_btu_per_h": value.as_json()}
+            a = run({"fuel": "natural_gas", "site": SITE_F, "changes": [steam]})
+            b = run({"fuel": "natural_gas", "site": SITE_F, "changes": [heat]})
+            for key in ("fuel_mmbtu", "cost", "co2e_scope1_kg"):
+                self.assertEqual(lohi(a["totals"][key]), lohi(b["totals"][key]), (delta, key))
+
     def test_electricity_kw_before_after(self):
         res = run({"changes": [elec()], "site": SITE_E})
         t = res["totals"]
@@ -109,6 +141,27 @@ class Formulas(unittest.TestCase):
         self.assertAlmostEqual(d["totals"]["cost"].lo, 500.0)  # EIA 1.036 MMBtu/Mcf default
         self.assertIn(ei.DEFAULT_LABEL, d["constants"]["fuel_price_per_mmbtu"]["label"])
 
+    def test_custom_heat_content_keeps_both_site_sources_in_both_outputs(self):
+        spec = {"fuel": "natural_gas", "changes": [{"type": "fuel", "mmbtu_per_year": 100}],
+                "site": {"fuel_price_per_unit": 5.18, "fuel_price_unit": "Mcf",
+                         "fuel_heat_content_mmbtu_per_unit": 1.036, "fuel_kg_co2e_per_mmbtu": 50},
+                "site_notes": {"fuel_price_per_unit": "October commodity and delivery invoice",
+                               "fuel_heat_content_mmbtu_per_unit": "October invoice Btu factor"}}
+        res = run(spec)
+        self.assertAlmostEqual(res["totals"]["cost"].lo, 500)
+        md = ei.doc_md(spec, res, "site.json", False)
+        js = ei.doc_json(spec, res, "site.json", False)
+        for note in spec["site_notes"].values():
+            self.assertIn(note, md)
+            self.assertIn(note, js["constants"]["fuel_price_per_mmbtu"]["label"])
+        self.assertNotIn("uses_default", res["constants"]["fuel_price_per_mmbtu"])
+        # A site price's source also survives when only its heat-content conversion is public.
+        spec["site"].pop("fuel_heat_content_mmbtu_per_unit")
+        spec["site_notes"].pop("fuel_heat_content_mmbtu_per_unit")
+        res = run(spec, True)
+        self.assertIn("October commodity and delivery invoice", res["constants"]["fuel_price_per_mmbtu"]["label"])
+        self.assertIn("uses_default", res["constants"]["fuel_price_per_mmbtu"])
+
 
 class Ranges(unittest.TestCase):
     def test_interval_arithmetic(self):
@@ -127,9 +180,114 @@ class Ranges(unittest.TestCase):
         self.assertEqual(lohi(s["totals"]["fuel_mmbtu"]), (750.0, 800.0))  # low uses the HIGH efficiency
 
     def test_bad_ranges_and_values_rejected(self):
-        for bad in ({"low": 5, "high": 1}, "12", None, True, [1, 2, 3]):
+        for bad in ({"low": 5, "high": 1}, "12", None, True, [1, 2, 3], 10 ** 400, [1, 10 ** 400]):
             with self.assertRaises(ei.SpecError):
                 ei.parse_value(bad, "x")
+
+    def test_finite_inputs_cannot_overflow_into_an_invalid_report(self):
+        with self.assertRaisesRegex(ei.SpecError, "finite numeric range"):
+            run({"changes": [{"type": "electricity", "kw_reduction": 1e308, "hours_per_year": 100}],
+                 "site": SITE_E})
+
+    def test_complete_power_ranges_and_partial_physical_bounds(self):
+        # This interval difference is complete: 10..20 - 0..5 = 5..20. Comparing reduction.high to before.low
+        # would reject it even though the full before/after calculation supplies exactly the same range.
+        complete = {"type": "electricity", "kw_before": [10, 20], "kw_after": [0, 5],
+                    "kw_reduction": [5, 20], "hours_per_year": [100, 200]}
+        for annual in ({}, {"kwh_per_year": [500, 4000]}):
+            res = run({"changes": [dict(complete, **annual)], "site": SITE_E})
+            self.assertEqual(lohi(res["totals"]["kwh"]), (500, 4000))
+            self.assertEqual(set(res["changes"][0]["inputs"]), set(complete) - {"type"} | set(annual))
+        partial = {k: v for k, v in complete.items() if k != "kw_after"}
+        with self.assertRaisesRegex(ei.SpecError, "can't fall below zero"):
+            run({"changes": [partial], "site": SITE_E})
+        # With no after range, every independent combination must be feasible. Equality is allowed, one ulp over
+        # the minimum before load is not. A complete form also rejects a reduction above every possible before.
+        for reduction, accepted in (([5, 10], True), ([5, 10.000000000000002], False)):
+            ch = dict(partial, kw_reduction=reduction)
+            if accepted:
+                self.assertEqual(lohi(run({"changes": [ch], "site": SITE_E})["totals"]["kwh"]), (500, 2000))
+            else:
+                with self.assertRaisesRegex(ei.SpecError, "can't fall below zero"):
+                    run({"changes": [ch], "site": SITE_E})
+        with self.assertRaisesRegex(ei.SpecError, "can't fall below zero"):
+            run({"changes": [{"type": "electricity", "kw_before": 0, "kw_after": 0,
+                               "kw_reduction": 0.001, "hours_per_year": 100}], "site": SITE_E})
+
+    def test_redundant_range_ends_and_rounding_tolerance(self):
+        # Overlap is insufficient: both ends describe the same annual quantity and must agree within 1%.
+        ch = {"type": "electricity", "kw_before": 100, "kw_after": [55, 65],
+              "hours_per_year": 100, "kwh_per_year": [3500, 4500]}
+        self.assertEqual(lohi(run({"changes": [ch], "site": SITE_E})["totals"]["kwh"]), (3500, 4500))
+        for annual in ([3500, 4600], [3400, 4500]):
+            with self.assertRaisesRegex(ei.SpecError, "disagrees"):
+                run({"changes": [dict(ch, kwh_per_year=annual)], "site": SITE_E})
+        # The tolerance is anchored to the annual figure actually reported, not to an unused peer value.
+        for reduction, accepted in ((40.4, True), (40.40001, False)):
+            spec = {"changes": [{"type": "electricity", "kwh_per_year": 4000,
+                                  "kw_reduction": reduction, "hours_per_year": 100}], "site": SITE_E}
+            if accepted:
+                self.assertEqual(lohi(run(spec)["totals"]["kwh"]), (4000, 4000))
+            else:
+                with self.assertRaisesRegex(ei.SpecError, "disagrees"):
+                    run(spec)
+
+
+class QuantityDependencies(unittest.TestCase):
+    def test_every_combination_requires_a_path_to_the_annual_quantity(self):
+        # Enumerate the input schema, rather than another individual reproducer. These are the nine complete,
+        # useful combinations; all other subsets have either a missing calculation or disconnected redundancy.
+        fields = {"kwh_per_year": 4000, "kw_before": 100, "kw_after": 60,
+                  "kw_reduction": 40, "hours_per_year": 100}
+        valid = [
+            {"kwh_per_year"},
+            {"kw_reduction", "hours_per_year"},
+            {"kw_before", "kw_reduction", "hours_per_year"},
+            {"kw_before", "kw_after", "hours_per_year"},
+            {"kw_before", "kw_after", "kw_reduction", "hours_per_year"},
+            {"kwh_per_year", "kw_reduction", "hours_per_year"},
+            {"kwh_per_year", "kw_before", "kw_reduction", "hours_per_year"},
+            {"kwh_per_year", "kw_before", "kw_after", "hours_per_year"},
+            set(fields),
+        ]
+        for size in range(len(fields) + 1):
+            for keys in itertools.combinations(fields, size):
+                with self.subTest(keys=keys):
+                    ch = dict(type="electricity", **{k: fields[k] for k in keys})
+                    if set(keys) in valid:
+                        res = run({"changes": [ch], "site": SITE_E})
+                        self.assertEqual(lohi(res["totals"]["kwh"]), (4000, 4000))
+                        # The output retains each input that constrained the answer, including checked forms.
+                        self.assertEqual(set(res["changes"][0]["inputs"]), set(keys))
+                    else:
+                        with self.assertRaises(ei.SpecError):
+                            run({"changes": [ch], "site": SITE_E})
+
+    def test_no_supplied_complete_form_can_disagree_even_with_zero_hours(self):
+        base = {"type": "electricity", "kw_before": 100, "kw_after": 60, "kw_reduction": 40,
+                "hours_per_year": 100, "kwh_per_year": 4000}
+        for field, changed in (("kw_before", 102), ("kw_after", 62), ("kw_reduction", 42),
+                               ("hours_per_year", 102), ("kwh_per_year", 4200)):
+            with self.subTest(field=field), self.assertRaisesRegex(ei.SpecError, "disagrees"):
+                run({"changes": [dict(base, **{field: changed})], "site": SITE_E})
+        # Multiplication by zero must not hide a contradictory instantaneous measurement.
+        with self.assertRaisesRegex(ei.SpecError, "kw_reduction.*disagrees"):
+            run({"changes": [dict(base, hours_per_year=0, kwh_per_year=0, kw_reduction=42)], "site": SITE_E})
+        self.assertEqual(lohi(run({"changes": [dict(base, hours_per_year=0, kwh_per_year=0)],
+                                  "site": SITE_E})["totals"]["kwh"]), (0, 0))
+
+    def test_heat_redundancy_is_checked_against_the_annual_quantity(self):
+        ch = {"type": "heat", "heat_mmbtu_per_year": [1, 2],
+              "heat_btu_per_h": [10000, 20000], "hours_per_year": 100}
+        spec = {"fuel": "natural_gas", "site": SITE_F, "changes": [ch]}
+        res = run(spec)
+        self.assertEqual(lohi(res["totals"]["fuel_mmbtu"]), (1.25, 2.5))
+        self.assertEqual(set(res["changes"][0]["inputs"]), set(ch) - {"type"})
+        for missing in ("heat_btu_per_h", "hours_per_year"):
+            with self.subTest(missing=missing), self.assertRaisesRegex(ei.SpecError, "would be ignored"):
+                run(dict(spec, changes=[{k: v for k, v in ch.items() if k != missing}]))
+        with self.assertRaisesRegex(ei.SpecError, "disagrees"):
+            run(dict(spec, changes=[dict(ch, heat_mmbtu_per_year=[1, 3])]))
 
 
 class Refusals(unittest.TestCase):
@@ -195,6 +353,36 @@ class Refusals(unittest.TestCase):
              "feedwater_temp_F"),
             ({"changes": [elec(kw_befor=10)], "site": SITE_E}, "unknown field(s): kw_befor"),  # a typo is not ignored
             ({"changes": [elec()], "site": dict(SITE_E, electricty_price_per_kwh=0.1)}, "unknown site field"),
+            # round 7 (Codex): a strict schema closes the class
+            ({"changes": [{"type": "electricity", "kw_before": 10, "kw_reduction": 30, "hours_per_year": 100}],
+              "site": SITE_E}, "can't fall below zero"),
+            ({"fuel": "natural_gas", "changes": [{"type": "fuel", "mmbtu_per_year": 1000}],
+              "site": {"fuel_price_per_unit": 1, "fuel_price_unit": "therm", "fuel_heat_content_mmbtu_per_unit": 1,
+                       "fuel_kg_co2e_per_mmbtu": 50}}, "by definition"),
+            ({"fuel": "natural_gas", "changes": [dict(steam, heat_mmbtu_per_year=1000)], "site": SITE_F},
+             "can't be used in a steam change"),
+            ({"changes": [elec()], "change": elec(), "site": SITE_E}, "both 'change' and 'changes'"),
+            ({"changes": [elec(kw_reduction={"low": 25, "high": 30, "unit": "MW"}, kw_before=None, kw_after=None)],
+              "site": SITE_E}, "nothing else"),
+            ({"changes": [elec()], "site": [], "fuel": "natural_gas"}, "'site' must be"),
+            ({"fuel": True, "changes": [{"type": "fuel", "mmbtu_per_year": 1000}], "site": SITE_F}, "'fuel' must be"),
+            ({"illustrative": "false", "changes": [elec()], "site": SITE_E}, "'illustrative' must be"),
+            # round 8 (Codex): every supplied number feeds the result or a check, or it is refused
+            ({"changes": [{"type": "electricity", "kwh_per_year": 3000, "hours_per_year": 0}], "site": SITE_E},
+             "hours_per_year would be ignored"),
+            ({"changes": [{"type": "electricity", "kwh_per_year": 3000, "demand_months": 12}], "site": SITE_E},
+             "demand_months would be ignored"),
+            ({"changes": [{"type": "electricity", "kw_before": 10, "kw_reduction": [5, 30], "hours_per_year": 100}],
+              "site": SITE_E}, "can be more than kw_before"),
+            ({"changes": [{"type": "electricity", "kw_before": 75, "kw_after": 100, "kwh_per_year": 3000}],
+              "site": SITE_E}, "would be ignored"),
+            ({"fuel": "natural_gas", "changes": [{"type": "fuel", "mmbtu_per_year": 1000}],
+              "site": dict(SITE_F, fuel_price_unit=42)}, "fuel_price_unit must be text"),
+            ({"fuel": "natural_gas", "changes": [{"type": "fuel", "mmbtu_per_year": 1000}],
+              "site": dict(SITE_F, fuel_price_unit="therm")}, "without site.fuel_price_per_unit"),
+            ({"changes": [elec()], "site": SITE_E, "site_notes": {"electricty_price_per_kwh": "bill"}},
+             "site_notes names field"),
+            ({"changes": [elec(label={"bad": "object"})], "site": SITE_E}, "label must be text"),
         )
         for spec, msg in cases:
             with self.assertRaises(ei.SpecError, msg=msg) as cm:
@@ -214,6 +402,18 @@ class Refusals(unittest.TestCase):
         used = d["constants"]["fuel_price_per_mmbtu"]["uses_default"]
         self.assertIn("eia.gov", used["url"])
         self.assertIn(used["source"], ei.doc_md({"changes": []}, d, "s.json", True))
+
+    def test_a_key_written_twice_is_refused(self):
+        # Round 7 (Codex): the second value silently replaced the first.
+        with tempfile.TemporaryDirectory() as d:
+            spec = Path(d) / "dup.json"
+            spec.write_text('{"changes":[{"type":"electricity","kwh_per_year":3000,"kwh_per_year":3000000}],'
+                            '"site":{"electricity_price_per_kwh":0.1,"grid_kg_co2e_per_kwh":0.5}}', encoding="utf-8")
+            err = io.StringIO()
+            with redirect_stderr(err), redirect_stdout(io.StringIO()):
+                rc = ei.main(["--estimate", str(spec)])
+            self.assertEqual(rc, 2)
+            self.assertIn("appears twice", err.getvalue())
 
     def test_an_empty_spec_file_is_named(self):
         with tempfile.TemporaryDirectory() as d:
@@ -316,7 +516,7 @@ class Needs(unittest.TestCase):
         for qid, n in ei.NEEDS.items():
             self.assertTrue(set(n["forms"]) <= set(ei.FORM_CONSTANTS), qid)
             self.assertTrue(set(n["measure"]) <= set(ei.MEASURE_INFO), qid)
-            self.assertIn("hours" if qid not in ("E16", "C5") else "fuel_mmbtu", n["measure"], qid)
+            self.assertIn("hours" if qid not in ("E16", "C5", "E32") else "fuel_mmbtu", n["measure"], qid)
         for qid, why in ei.NO_ENERGY.items():
             self.assertGreater(len(why), 20, qid)
 

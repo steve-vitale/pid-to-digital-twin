@@ -8,21 +8,21 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 
 | I need to... | Why it matters | You need | Time | You get | Evidence |
 |---|---|---|---|---|---|
-| [Get a starting asset model out of a P&ID without retyping it](../examples/own-drawing/README.md) | Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking. | One P&ID as a PNG; a model subscription (or the committed example) | 88 s of commands on one new sheet (sheet 8), measured once; sheet 0's recorded run took 75 s plus 1 s; review time not measured | Every symbol, tag and link as a draft model, a review sheet ranked for checking, Ignition tags and PI staging | proven |
+| [Get a starting asset model out of a P&ID without retyping it](../examples/own-drawing/README.md) | Retyping drawings into asset lists takes manual effort in historian, HMI and digital twin projects. A draft turns some of that typing into checking; the time saved has not been measured. | One P&ID as a PNG; a model subscription (or the committed example) | 88 s of commands on one new sheet (sheet 8), measured once; sheet 0's recorded run took 75 s plus 1 s; review time not measured | Extracted symbols, tags and links as a draft model, a review sheet ranked for checking, Ignition tags and PI staging | proven |
 | [Show someone what came out of a drawing, and what still needs checking](../examples/own-drawing/README.md) | Whoever approves the work needs one page that says what was found and what is still unchecked, without opening a spreadsheet of 445 rows. | A review bundle from the step above | Under a second | One page: the drawing with every item boxed, what is still to check first and why, what a person has already decided (shown with the decision and left out of the to-check list), next steps, limits. Refuses if any generated column of the review sheet doesn't match what the model gives now; the reviewer's OPS_ entries aren't checked, so decisions not yet applied with apply_review.py don't appear | proven |
-| [Use a DEXPI file my CAD tool already exports](../examples/from-dexpi/README.md) | If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether. | One of the three public DEXPI example sheets, prepared once by adapt_dexpi.py (downloads them; needs PyMuPDF). For your own DEXPI XML, use the DEXPI reader instead | Seconds once the sheets are prepared | The same bundle with no model reading: tags are the drawn label text, and links are the drawn connections, undirected, with each pipe tee expanded into pairwise links | proven |
-| [Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits](../examples/from-dexpi-xml/README.md) | A plant's own CAD export already holds sizes, specs and design limits. Reading it directly keeps all of them, each citing the XML element it came from, with no reading errors and no retyping. | A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle | Seconds per sheet | A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why | proven |
+| [Use a DEXPI file my CAD tool already exports](../examples/from-dexpi/README.md) | A CAD export already represents symbols and connections as data. Reading supported DEXPI content directly avoids a visual model-reading step; conversion limits and omissions still need review. | One of the three public DEXPI example sheets, prepared once by adapt_dexpi.py (downloads them; needs PyMuPDF). For your own DEXPI XML, use the DEXPI reader instead | Seconds once the sheets are prepared | The same bundle with no model reading: tags are the drawn label text, and links are the drawn connections, undirected, with each pipe tee expanded into pairwise links | proven |
+| [Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits](../examples/from-dexpi-xml/README.md) | A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations, and reports what it folds, cannot place or drops. | A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle | Seconds per sheet | A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why | proven |
 | [Build a model of a unit that has no usable drawing](../examples/from-description/README.md) | Many older units have no usable drawing but do have procedures and design notes. A model with a source on every item lets you build asset lists and screens for them anyway, and shows where the text and the plant disagree. | A written description (procedure, design basis, report); someone to cite every item | Writing the model is the work; exports take seconds | Ignition tags, PI staging and overview screens from the model; a P&ID once a drafting layout is written | proven |
 | [Load the model into an asset register, graph database or change system](../docs/GRAPH_EXPORT.md) | A plant model is a web of relationships: this transmitter measures that line, this controller moves that valve. Kept as a graph, it answers questions a flat tag list can't, like what a valve's failure affects or which instruments nobody has checked, and other systems can load it without retyping. | Any model this repository produces | Seconds | One open JSON graph: assets, typed links in three layers (pipe segments and tees, line networks, and network pairs), every attribute with its source and status; plus a smaller core profile (identity, settings, impact relations and sources) for loading into another system, with everything it leaves out counted | proven |
-| [Get the model into Ignition and PI](../docs/TWIN_OUTPUTS.md) | Building an Ignition tag structure and a PI asset tree by hand is days of clicking. Generating both from one model keeps them consistent with the drawing and with each other. | A reviewed model | Seconds to generate; import is a manual step in a lab gateway | Ignition tag import with UDTs, PI Builder staging sheets; values are placeholders until mapped | proven |
+| [Get the model into Ignition and PI](../docs/TWIN_OUTPUTS.md) | Generating the Ignition tag structure and PI asset staging from one model keeps them consistent with each other and avoids repeated manual entry. Native import still needs a lab check. | A reviewed model | Seconds to generate; import is a manual step in a lab gateway | Ignition tag import with UDTs, PI Builder staging sheets; values are placeholders until mapped | proven |
 | [Check whether a drawing shows the control loops the DCS actually runs](../examples/loop-audit/README.md) | Drawings drift from what the control system actually runs. A quick check shows which loops a drawing misses before someone relies on it to troubleshoot or plan a change. | A loop list exported from the DCS or PLC configuration (controller, measurement, output) | Seconds | Each loop drawn, partly drawn (and what's missing) or not drawn | proven |
 | [Find out whether a digitization tool or vendor is actually accurate on our drawings](../examples/vendor-evaluation/README.md) | Vendors quote accuracy on their own test drawings. Scoring them on yours, with a deliberately wrong answer scored beside them, shows whether the number means anything. | A few of our sheets labelled by hand, and the tool's output for them | Seconds once labelled; labelling takes hours | A score beside perfect, wrong and empty answers, per sheet, refusing to report if the scorer can be fooled | proven |
 | [Decide whether to trust this repository at all](../docs/REVIEWING.md) | Before trusting any tool with your plant's data, you should be able to check its claims yourself in minutes. | Python alone for the claim check and pipeline status; the full test suite also needs the packages in requirements.txt and the cached public data (it says what is missing and stops) | Under a minute for the claim check | Every headline number checked against its source file, stage freshness, the full test suite | proven |
-| [Learn normal operating bands from history, or test screens against recorded data](../examples/historian-csv/README.md) | Normal bands catch a value drifting before it reaches an alarm, and replaying recorded data lets you test new screens without touching the live system. | Historian exports as CSV: one of normal running, optionally one of an upset. Standard library only; the replay server also needs asyncua | Seconds | Bands per tag with false-alarm rates, the first tag to leave its band in an upset, and an OPC UA server replaying the CSV | proven |
+| [Learn normal operating bands from history, or test screens against recorded data](../examples/historian-csv/README.md) | History can highlight unusual changes, and replaying recorded data lets you test new screens without touching the live system. Detection before an operational alarm is not guaranteed. | Historian exports as CSV: one of normal running, optionally one of an upset. Standard library only; the replay server also needs asyncua | Seconds | Bands per tag with false-alarm rates, the first tag to leave its band in an upset, and an OPC UA server replaying the CSV | proven |
 | [Feed operators' review decisions back into the model, and connect instruments to real signals](../examples/review-and-mapping/README.md) | A model is only useful once someone who knows the unit has checked it and its instruments point at real signals. This records who decided what and when, so every change can be traced. | A filled review sheet; the plant's I/O list | Seconds per apply; the review itself is people's time | An updated model with a dated change record, and instruments mapped to OPC or PI addresses | proven |
-| [Find out whether a tool will work on drawings or data like mine, not just the ones it was built on](../docs/GENERALIZATION.md) | A tool that only ever saw one set of drawings can fail quietly on the next. Running each tool on every public input it applies to shows where it holds and where it breaks, red cells included, before you bet your own data on it. | Nothing to read the page; the public datasets (fetched by script) to re-run it | Reading: minutes. Re-running everything: about 25 minutes of cell time, plus downloading the public data once | A pass/fail grid of tools against inputs, the reason for every failure, and the public datasets that would close each gap | proven |
+| [Find out whether a tool will work on drawings or data like mine, not just the ones it was built on](../docs/GENERALIZATION.md) | A workflow that only saw one set of drawings can fail on the next. Eight selected workflows run across registered applicable inputs, showing where they hold and break, red cells included; other features have their own tests and examples. | Nothing to read the page; the public datasets (fetched by script) to re-run it | Reading: minutes. Re-running everything: about 25 minutes of cell time, plus downloading the public data once | A pass/fail grid of tools against inputs, the reason for every failure, and the public datasets that would close each gap | proven |
 | [Find energy, heat-grade and control questions worth asking about my unit, and what data answers each](../docs/OPPORTUNITY_SCREEN.md) | Many energy and controls questions can be spotted on a P&ID before anyone collects data: a throttled pump, high-pressure steam let down for a low-temperature job, heat dumped to cooling water, a loop with no controller. A solo engineer rarely has time to look. This lists the questions with the evidence by tag and exactly what to collect, and where, to settle each one, without inventing a savings number. | A process model or extracted drawing set; optionally the plant's loop list and equipment schedules | Seconds | Per question and asset: the evidence by tag, what to collect and where (down to a blank field on a named schedule), how the data decides it, and what public sources say is typical. A screen, not an audit | proven |
-| [Turn a change I measured into an annual energy, cost and greenhouse-gas figure](../docs/IMPACT_ESTIMATE.md) | A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it. | What you measured (kW before and after, steam lb/h, fuel saved, hours) and your tariff, gas price, emission factors and boiler efficiency, or labelled public typical values | Minutes | A first-draft estimate, marked as one: annual kWh or MMBtu, cost and CO2e with the formula and source of every constant, the assumptions it rests on, and the data to collect (and where) to replace each one; or, per question, what to measure and where each constant comes from | not yet: findings open |
+| [Turn a change I measured into an annual energy, cost and greenhouse-gas figure](../docs/IMPACT_ESTIMATE.md) | A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it. | What you measured (kW before and after, steam lb/h, fuel saved, hours) and your tariff, gas price, emission factors and boiler efficiency, or labelled public typical values | Minutes | A first-draft estimate, marked as one: annual kWh or MMBtu, cost and CO2e with the formula and source of every constant, the assumptions it rests on, and the data to collect (and where) to replace each one; or, per question, what to measure and where each constant comes from | proven |
 | [Measure how often the model's statements match their sources, and let an operator check a unit in plain English](../docs/STATEMENT_REVIEW.md) | "Does this look right?" has no answer you can track. A sampled review of plain sentences against their sources gives an error rate for each kind of statement, and keeps 'matches the drawing' apart from 'true in the plant', which only someone who knows the unit can say. | A graph export (twin-graph-1), plus the sheet image or report PDF its sources cite | Seconds to render; review time per statement not yet measured | A stratified sample of plain sentences, each beside its drawing crop or report page, with two separate verdict columns; an error rate with a 95% interval; and the verdicts written back into the graph as dated events | proven |
 
 ## By category
@@ -39,12 +39,12 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 | [A drawing checked against a DCS loop list](#loop-audit) | check | **proven** |
 | [Any digitization tool scored beside perfect, wrong and empty answers](#vendor-evaluation) | check | **proven** |
 | [Checks a stranger (or their agent) can run on this repository](#repo-checks) | check | **proven** |
-| [Every tool run against every public input it applies to](#generalization-matrix) | check | **proven** |
+| [Selected workflows checked across registered public inputs](#generalization-matrix) | check | **proven** |
 | [Every output as plain statements, checked against its source](#statement-review) | check | **proven** |
 | [Normal bands and an OPC UA replay from historian CSV exports](#historian-csv) | operate | **proven** |
 | [Reviewer decisions back into the model, and instruments mapped to real signals](#review-and-mapping) | operate | **proven** |
 | [Energy, heat-grade and controls questions worth asking of a drawing, and the data to answer them](#opportunity-screen) | screen | **proven** |
-| [First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up](#impact-estimate) | screen | not yet: findings open |
+| [First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up](#impact-estimate) | screen | **proven** |
 
 ## Extract: Read a drawing or a structured file into a draft asset model
 
@@ -53,20 +53,20 @@ Each row is a job (click it for the guide), why it matters, what it needs from y
 
 Status: **proven**
 
-**Why it matters:** Retyping drawings into an asset list is the first and slowest step of any historian, HMI or digital twin project. Starting from a draft turns that typing into checking.
+**Why it matters:** Retyping drawings into asset lists takes manual effort in historian, HMI and digital twin projects. A draft turns some of that typing into checking; the time saved has not been measured.
 
-- **Tools:** `run_extraction.py`, `trace_connections.py`, `import_site_drawing.py`, `site_extraction_workflow.py`
+- **Tools:** `run_extraction.py`, `trace_connections.py`, `scan_cleanup.py`, `import_site_drawing.py`, `site_extraction_workflow.py`
 - **How to use it:** [README.md](../examples/own-drawing/README.md)
 - **Example outputs:** [`extraction_sheet0.json`](../examples/own-drawing/extraction_sheet0.json), [`manifest.json`](../examples/own-drawing/manifest.json)
-- **Tests:** `test_own_drawing_example.py`, `test_site_drawing_intake.py`
-- **Independent review:** independent Claude agent (fresh context, given only the guide, outputs and sources), 2026-10-29: pass (1 finding(s); wording fixed)
+- **Tests:** `test_own_drawing_example.py`, `test_scan_cleanup.py`, `test_site_drawing_intake.py`
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
 
 <a id="dexpi-to-bundle"></a>
 ### A DEXPI P&ID file to the same bundle, with no model reading
 
 Status: **proven**
 
-**Why it matters:** If a CAD tool already exports your drawings as DEXPI, the symbols and connections are already data. Reading them directly removes reading errors altogether.
+**Why it matters:** A CAD export already represents symbols and connections as data. Reading supported DEXPI content directly avoids a visual model-reading step; conversion limits and omissions still need review.
 
 - **Tools:** `dexpi_to_twin.py`
 - **How to use it:** [README.md](../examples/from-dexpi/README.md)
@@ -79,13 +79,13 @@ Status: **proven**
 
 Status: **proven**
 
-**Why it matters:** A plant's own CAD export already holds sizes, specs and design limits. Reading it directly keeps all of them, each citing the XML element it came from, with no reading errors and no retyping.
+**Why it matters:** A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations, and reports what it folds, cannot place or drops.
 
 - **Tools:** `dexpi_reader.py`
 - **How to use it:** [README.md](../examples/from-dexpi-xml/README.md)
 - **Example outputs:** [`dexpi-c01.model.json`](../examples/from-dexpi-xml/dexpi-c01.model.json), [`dexpi-c01.report.md`](../examples/from-dexpi-xml/dexpi-c01.report.md), [`dexpi-c01.graph.json`](../examples/from-dexpi-xml/dexpi-c01.graph.json)
 - **Tests:** `test_dexpi_reader.py`
-- **Independent review:** independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run), 2026-10-29: pass
+- **Independent review:** independent Codex agent (fresh context, read-only review; author fixes independently reproduced), 2026-10-29: pass (1 finding(s); All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.)
 
 ## Model: Build a process model from a description, and drawings and exports from a model
 
@@ -115,7 +115,7 @@ Status: **proven**
 - **How to use it:** [README.md](../examples/own-drawing/README.md)
 - **Example outputs:** [`REPORT.html`](../examples/own-drawing/deliverable/REPORT.html)
 - **Tests:** `test_own_drawing_example.py`, `test_deliverable_report.py`
-- **Independent review:** independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run), 2026-10-29: pass
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
 
 <a id="graph-export"></a>
 ### The model as an open graph of sourced claims
@@ -128,20 +128,20 @@ Status: **proven**
 - **How to use it:** [GRAPH_EXPORT.md](../docs/GRAPH_EXPORT.md)
 - **Example outputs:** [`te_graph.json`](../examples/graph-export/te_graph.json), [`bayer_graph.json`](../examples/graph-export/bayer_graph.json), [`sheet0_graph.json`](../examples/graph-export/sheet0_graph.json), [`sheet0_graph_core.json`](../examples/graph-export/sheet0_graph_core.json)
 - **Tests:** `test_graph_export.py`, `test_line_layers.py`
-- **Independent review:** independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run), 2026-10-29: pass
+- **Independent review:** independent Codex agent (fresh context, read-only review; author fixes independently reproduced), 2026-10-29: pass (1 finding(s); All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.)
 
 <a id="platform-exports"></a>
 ### Ignition tags and PI AF staging from a model
 
 Status: **proven**
 
-**Why it matters:** Building an Ignition tag structure and a PI asset tree by hand is days of clicking. Generating both from one model keeps them consistent with the drawing and with each other.
+**Why it matters:** Generating the Ignition tag structure and PI asset staging from one model keeps them consistent with each other and avoids repeated manual entry. Native import still needs a lab check.
 
 - **Tools:** `generate.py`, `check_pi_export.py`, `ignition/import_tags.py`
 - **How to use it:** [TWIN_OUTPUTS.md](../docs/TWIN_OUTPUTS.md)
 - **Example outputs:** [`te_tags.json`](../out/ignition/te_tags.json), [`pi_builder_af.csv`](../out/pi/pi_builder_af.csv)
 - **Tests:** `test_generate_validation.py`, `test_check_pi_export.py`
-- **Independent review:** independent Claude agent (fresh context, round 3: each round-2 finding reproduced, then outputs and tests re-run), 2026-10-29: pass (1 finding(s); All round-2 findings fixed; TE and twin exports byte-identical; check_pi_export output matches the guide.)
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
 
 ## Check: Check a drawing, a tool or this repository against something independent
 
@@ -182,20 +182,20 @@ Status: **proven**
 - **How to use it:** [REVIEWING.md](../docs/REVIEWING.md)
 - **Example outputs:** [`claims_check.md`](../out/claims_check.md)
 - **Tests:** `test_check_claims.py`, `test_attempts_ledger.py`, `test_script_index.py`, `test_feature_catalog.py`
-- **Independent review:** independent Claude agent (fresh context, round 5: each round-4 finding reproduced, outputs and tests re-run), 2026-10-29: pass (1 finding(s); Wording fix and pipeline freshness (52/52) confirmed.)
+- **Independent review:** Independent Codex agent (read-only source review, independent reproductions and adversarial controls), 2026-10-29: pass
 
 <a id="generalization-matrix"></a>
-### Every tool run against every public input it applies to
+### Selected workflows checked across registered public inputs
 
 Status: **proven**
 
-**Why it matters:** A tool that only ever saw one set of drawings can fail quietly on the next. Running each tool on every public input it applies to shows where it holds and where it breaks, red cells included, before you bet your own data on it.
+**Why it matters:** A workflow that only saw one set of drawings can fail on the next. Eight selected workflows run across registered applicable inputs, showing where they hold and break, red cells included; other features have their own tests and examples.
 
 - **Tools:** `corpus_matrix.py`
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** independent Claude agent (fresh context, round 6: latest findings reproduced, outputs and tests re-run), 2026-10-29: pass
+- **Independent review:** Independent Codex agent (read-only source review, independent reproductions and adversarial controls), 2026-10-29: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source
@@ -208,7 +208,7 @@ Status: **proven**
 - **How to use it:** [STATEMENT_REVIEW.md](../docs/STATEMENT_REVIEW.md)
 - **Example outputs:** [`statements.json`](../examples/statement-review/bayer/statements.json), [`sample_60.csv`](../examples/statement-review/bayer/sample_60.csv), [`statements.json`](../examples/statement-review/sheet0/statements.json), [`sample_60.csv`](../examples/statement-review/sheet0/sample_60.csv), [`sample_layers.csv`](../examples/statement-review/sheet0/sample_layers.csv), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29-layers/score.txt), [`sample_layers_r2.csv`](../examples/statement-review/sheet0/sample_layers_r2.csv), [`score.txt`](../examples/statement-review/bayer/review-2026-10-29/score.txt), [`score.txt`](../examples/statement-review/sheet0/review-2026-10-29/score.txt), [`score_strict_adjacency.txt`](../examples/statement-review/sheet0/review-2026-10-29/score_strict_adjacency.txt)
 - **Tests:** `test_statements.py`
-- **Independent review:** independent Claude agent (fresh context, round 6: latest findings reproduced, outputs and tests re-run), 2026-10-29: pass (1 finding(s); Round-5 finding confirmed fixed; all five score files and both statement renders reproduce. Nits fixed after (README only).)
+- **Independent review:** independent Codex agent (fresh context, read-only review; author fixes independently reproduced), 2026-10-29: pass (3 finding(s); All findings listed above were independently reproduced as fixed. No remaining should-fix finding in the reviewed feature scope.)
 
 ## Operate: Work with live or historical process data, and review the model
 
@@ -217,13 +217,13 @@ Status: **proven**
 
 Status: **proven**
 
-**Why it matters:** Normal bands catch a value drifting before it reaches an alarm, and replaying recorded data lets you test new screens without touching the live system.
+**Why it matters:** History can highlight unusual changes, and replaying recorded data lets you test new screens without touching the live system. Detection before an operational alarm is not guaranteed.
 
 - **Tools:** `csv_normal_bands.py`, `csv_replay_server.py`
 - **How to use it:** [README.md](../examples/historian-csv/README.md)
 - **Example outputs:** [`csv_normal_bands.md`](../examples/historian-csv/results/csv_normal_bands.md), [`csv_normal_bands.json`](../examples/historian-csv/results/csv_normal_bands.json), [`replay_smoke.txt`](../examples/historian-csv/results/replay_smoke.txt)
 - **Tests:** `test_csv_tools.py`
-- **Independent review:** independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run), 2026-10-29: pass (1 finding(s); Every earlier finding fixed; outputs byte-identical; the README's which-method claims checked against results. you_need fixed after.)
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass (1 finding(s); All 31 csv-tools tests pass, including exact default example reproduction, TE level agreement, cyclic/auto synthetic checks and live OPC UA smoke. Independently repeated original failure plus nan, NaN, inf, -inf, 1e999: each refuses line 52, no traceback and no output folder. Finite input times whose elapsed subtraction overflows are refused by the allow_nan=False serialization gate before output folder creation; an existing output directory remains unchanged on input rejection. Valid guide example regenerated byte-for-byte and strict JSON parsing succeeds.)
 
 <a id="review-and-mapping"></a>
 ### Reviewer decisions back into the model, and instruments mapped to real signals
@@ -236,7 +236,7 @@ Status: **proven**
 - **How to use it:** [README.md](../examples/review-and-mapping/README.md)
 - **Example outputs:** [`reviewed_sheet0.csv`](../examples/review-and-mapping/reviewed_sheet0.csv), [`2026-10-29-bundle.md`](../examples/review-and-mapping/records/2026-10-29-bundle.md), [`mapping_dry_run.md`](../examples/review-and-mapping/mapping_dry_run.md), [`graph_after_review.json`](../examples/review-and-mapping/graph_after_review.json), [`REPORT_after_review.html`](../examples/review-and-mapping/REPORT_after_review.html), [`pi_mapping_dry_run.txt`](../examples/review-and-mapping/pi_mapping_dry_run.txt), [`README.md`](../out/review_kit/sheet-8/README.md)
 - **Tests:** `test_apply_review.py`, `test_map_points.py`, `test_pi_mapping.py`, `test_review_kit.py`, `test_deliverable_report.py`
-- **Independent review:** independent Claude agent (fresh context, round 4: every earlier finding reproduced, outputs and tests re-run), 2026-10-29: pass (1 finding(s); All earlier findings verified fixed; README commands reproduce byte for byte.)
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
 
 ## Screen: Find questions worth asking and the data needed to answer them
 
@@ -249,14 +249,14 @@ Status: **proven**
 
 - **Tools:** `question_engine.py`
 - **How to use it:** [OPPORTUNITY_SCREEN.md](../docs/OPPORTUNITY_SCREEN.md)
-- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json)
+- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json)
 - **Tests:** `test_question_engine.py`
-- **Independent review:** Codex (OpenAI model family, read-only sandbox, fresh context, round 5), 2026-10-29: pass (1 finding(s); Round-4 findings confirmed fixed.)
+- **Independent review:** independent Codex agent (fresh context; artifact reproduction and adversarial probes), 2026-10-29: pass
 
 <a id="impact-estimate"></a>
 ### First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up
 
-Status: not yet: findings open
+Status: **proven**
 
 **Why it matters:** A measured change becomes a first-draft cost and emissions figure, good enough to decide whether to collect better data, with every constant's source shown and every assumption listed. If you don't have a constant, it tells you exactly which bill, contract or public table has it.
 
@@ -264,4 +264,4 @@ Status: not yet: findings open
 - **How to use it:** [IMPACT_ESTIMATE.md](../docs/IMPACT_ESTIMATE.md)
 - **Example outputs:** [`impact.md`](../examples/impact-estimate/pump-vfd-site/impact.md), [`impact.md`](../examples/impact-estimate/pump-vfd-defaults/impact.md), [`impact.md`](../examples/impact-estimate/steam-traps-site/impact.md), [`impact.md`](../examples/impact-estimate/steam-traps-defaults/impact.md), [`needs.md`](../examples/impact-estimate/needs-E1/needs.md), [`needs.md`](../examples/impact-estimate/needs-E8/needs.md)
 - **Tests:** `test_estimate_impact.py`
-- **Independent review:** Codex (OpenAI model family, read-only sandbox, fresh context, round 6), 2026-10-29: findings (5 finding(s); Three rounds found the same class (inputs never examined together), so the fix is one validation pass at the door (check_spec): unknown field names refused, every recognised number bounds-checked whether used or not, every complete form of a quantity cross-checked, two forms of one price refused; the range limit is documented. Tests cover each case; examples unchanged. A further Codex confirmation was run.)
+- **Independent review:** independent Codex agent (fresh context; boundary and interval review, fixes independently reproduced), 2026-10-29: pass (3 finding(s); All resolved and independently rechecked. Valid small deltas match the heat form, E7 names the turbine inlet/outlet boundary, ambiguous partial forms give explicit alternatives, and measurement provenance survives both formats.)

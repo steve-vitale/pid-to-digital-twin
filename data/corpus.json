@@ -543,7 +543,7 @@
    ],
    "sheets": "set:dexpi-1.2-vendor",
    "build": "corpus_adapters.build_vendor_keys (run by the matrix before rows 1 and 8; writes <id>.png/.graphml/.json into the gitignored vendor-keys folder from the fetched XML and renders)",
-   "held_out": "scored held out once as attempt A174 (mapping and scoring plan fixed in A173 before any scored run; no tracer or line_layers rule chosen or changed on these renders)"
+   "held_out": "initial baseline scored held out once in A174 (A173 mapping and scoring plan, no rule chosen or changed on those renders then). For the later pipe-layer changes A191-A195, A177 assigned SPPID to development and kept Comos and AVEVA held out, with the A174 baseline already seen; frozen evaluation A196. The pooled vendor result mixes those splits. A192 is a junction-matching scorer fix: SPPID F1 0.679 to 0.852 without a tracer change, about two thirds of its total development gain to 0.939. Row-1 auto scan clean-up leaves these renders unchanged (A189)"
   },
   {
    "id": "omre-1958-pid",
@@ -803,6 +803,7 @@
    "fetch": "python scripts/fetch_corpus.py uci-hydraulic",
    "real": true,
    "cyclic": "load cycles of 60 s (each historian row is one cycle's average)",
+   "evaluation_role": "development for auto/cyclic (A178, A183); held out for the earlier drift method (A165, A171)",
    "exercises": [
     6
    ]
@@ -820,6 +821,7 @@
    "fetch": "python scripts/fetch_corpus.py metropt3",
    "real": true,
    "cyclic": "compressor load/unload and air-dryer tower duty cycles",
+   "evaluation_role": "development for auto/cyclic (A178, A183); held out for the earlier drift method (A165, A171)",
    "exercises": [
     6
    ]
@@ -837,6 +839,25 @@
    "fetch": "python scripts/fetch_corpus.py battledim",
    "real": false,
    "cyclic": "daily water-demand cycle",
+   "evaluation_role": "development for auto/cyclic (A178, A183); held out for the earlier drift method (A165, A171)",
+   "exercises": [
+    6
+   ]
+  },
+  {
+   "id": "battledim-2019",
+   "name": "BattLeDIM 2019: L-Town water network SCADA (33 pressures, 3 flows, 1 tank level, 5 min) with 19 leaks starting in 2019 (held out for auto/cyclic; same simulated network as 2018 development)",
+   "family": "battledim",
+   "kind": "historian",
+   "source_url": "https://zenodo.org/records/4017659",
+   "license": "CC BY 4.0",
+   "attribution": "S. G. Vrachimis et al., BattLeDIM dataset (KIOS Research and Innovation Center of Excellence, University of Cyprus), Zenodo record 4017659",
+   "local_path": "data/external/battledim-2019",
+   "committed": false,
+   "fetch": "python scripts/fetch_corpus.py battledim-2019",
+   "real": false,
+   "cyclic": "daily water-demand cycle",
+   "evaluation_role": "held out for auto/cyclic (A178 split and label mapping, A183 frozen method, A184 first run); carry-over across years of the same network only",
    "exercises": [
     6
    ]
@@ -903,7 +924,7 @@
    "url": "https://zenodo.org/records/4017659",
    "license": "CC BY 4.0",
    "what": "simulated water-network SCADA with 14 leak starts; a 905-pipe network",
-   "would_exercise": "graph functions at scale on the 905-pipe L-TOWN network (A11, A12); its 2018 SCADA is already the row-6 input battledim"
+   "would_exercise": "graph functions at scale on the 905-pipe L-TOWN network (A11, A12); its 2018 and 2019 SCADA are already row-6 inputs battledim (development) and battledim-2019 (held-out year)"
   }
  ],
  "excluded": [

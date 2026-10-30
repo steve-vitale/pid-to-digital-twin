@@ -1,5 +1,5 @@
 {
- "about": "What each evidence track can deliver, and how sure each deliverable is. Source of truth for the README table under 'What you can do with only drawings, only process knowledge, or both', inside the README's 'Data first' section (python scripts/deliverables_matrix.py --write regenerates it; scripts/test_open100_structural.py checks they match and that every evidence path exists). Per-element confidence: python scripts/pipeline.py confidence.",
+ "about": "What each evidence track can deliver, and how sure each deliverable is. Source of truth for docs/DELIVERABLES.md ('What you can do with only drawings, only process knowledge, or both'), summarised in the README's 'Data first' section (python scripts/deliverables_matrix.py --write regenerates it and --check reports a stale page; scripts/test_open100_structural.py checks they match and that every evidence path exists). Per-element confidence: python scripts/pipeline.py confidence.",
  "tracks": {
   "te": "Tennessee Eastman: process knowledge (a model transcribed from the published process and checked against the simulator source, recorded simulator replay); no original P&ID, only one generated from the model",
   "open100": "OPEN100: 12 real P&IDs, extracted and scored, no process data"
@@ -29,7 +29,7 @@
    },
    "open100": {
     "status": "done",
-    "note": "extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,833 green / 676 amber / 377 red; on six held-out drawings (which also chose the method) symbols found F1 0.93, connections 0.87, review load 20.1 per 100, all means of five round-5 runs (the earlier single round-2 run scored 17.8)",
+    "note": "extracted from the drawings: 2,886 items, all unverified until reviewed, risk tiers 1,811 green / 698 amber / 377 red (22 instruments held at amber by the safety floor); on six held-out drawings (which also chose the method) symbols found F1 0.93, connections 0.87, review load 20.1 per 100, all means of five round-5 runs (the earlier single round-2 run scored 17.8)",
     "evidence": [
      "out/twin/r2-tiles-trace/codex/review_queue.csv",
      "out/replicates_r5_holdout-a.md",

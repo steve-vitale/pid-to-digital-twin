@@ -1,0 +1,40 @@
+{
+ "schema": "pid-prediction/1",
+ "tool": "codex",
+ "drawing": "dexpi-c03",
+ "label": "r5-dx-rep4-tiles",
+ "model": "gpt-6.1-sol",
+ "prompt_file": "extraction/prompt_v2.md",
+ "prompt_sha256": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+ "image_sha256": "307a3fb5636bf7423b5f3a84a131f238e04f187407994be665d131a00c582003",
+ "ran_at": "2026-10-13T11:28:59+00:00",
+ "seconds": 31.2,
+ "cost_usd": null,
+ "cost_usd_notional": null,
+ "error": null,
+ "parse_error": null,
+ "tiling": {"grid":"2x2","overlap":0.15,"preface_sha256":"642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3","tile_seconds_sum":87.4,"tiles_failed":0},
+ "prediction": {
+  "symbols": [
+   {"id":"s1","class":"instrumentation","bbox":{"x_min":51.9,"y_min":196.2,"x_max":114.6,"y_max":316.2},"tag":"ESV 3712","confidence":0.99},
+   {"id":"s2","class":"instrumentation","bbox":{"x_min":268.7,"y_min":43.2,"x_max":336.3,"y_max":201.1},"tag":"ESD","confidence":0.85},
+   {"id":"s3","class":"instrumentation","bbox":{"x_min":204.4,"y_min":283.8,"x_max":267.1,"y_max":404.3},"tag":"ESV 3712","confidence":0.99},
+   {"id":"s4","class":"valve","bbox":{"x_min":278.4,"y_min":383.2,"x_max":326.0,"y_max":583.3},"tag":null,"confidence":0.95},
+   {"id":"s5","class":"general","bbox":{"x_min":130.3,"y_min":415.6,"x_max":161.6,"y_max":451.9},"tag":null,"confidence":0.91},
+   {"id":"s6","class":"general","bbox":{"x_min":436.8,"y_min":501.1,"x_max":463.3,"y_max":586.5},"tag":null,"confidence":0.9},
+   {"id":"s7","class":"valve","bbox":{"x_min":464.8,"y_min":505.4,"x_max":535.2,"y_max":582.7},"tag":null,"confidence":0.65},
+   {"id":"s8","class":"tank","bbox":{"x_min":541.0,"y_min":70.3,"x_max":709.1,"y_max":153.5},"tag":null,"confidence":0.55},
+   {"id":"s9","class":"general","bbox":{"x_min":631.8,"y_min":329.2,"x_max":647.5,"y_max":455.1},"tag":null,"confidence":0.6},
+   {"id":"s10","class":"general","bbox":{"x_min":506.9,"y_min":505.4,"x_max":534.5,"y_max":559.0},"tag":"0200x0800","confidence":0.94}
+  ],
+  "connections": [
+   {"from":"s1","to":"s4"},
+   {"from":"s2","to":"s4"},
+   {"from":"s3","to":"s4"},
+   {"from":"s4","to":"s6"},
+   {"from":"s6","to":"s10"},
+   {"from":"s6","to":"s7"},
+   {"from":"s7","to":"s10"}
+  ]
+ }
+}

@@ -7,6 +7,10 @@
     python -S scripts/question_engine.py --model my-bundle/plant_model.json \
         --schedule data/open100_equipment_schedule.json \
         --schedule examples/opportunity-screen/open100_schedule_fields.json --out out/screen-site
+    python -S scripts/question_engine.py --rollup out/screen-site-a --rollup out/screen-site-b --out out/rollup
+
+--rollup combines several sites' screens (their --out folders) into one list: per question, the sites and assets it
+fired on and the data requests merged across sites. It ranks nothing by value and computes no savings.
 
 The questions live in data/questions.json, as data, so an engineer can add one without touching this file. Each
 question says when it applies (triggers over the model), what evidence to quote, what to collect and where, how the
@@ -431,6 +435,9 @@ class Model:
     def out_streams(self, unit):
         return {i["stream"] for i in self.items if i["kind"] == "stream" and i.get("src") == unit}
 
+    def linked_streams(self, unit):
+        return {i["stream"] for i in self.items if i["kind"] == "stream" and unit in (i.get("src"), i.get("dst"))}
+
 
 # ---------------------------------------------------------------- matching
 
@@ -499,6 +506,16 @@ def related(model, anchor, cand, clause):
     if rel == "reads":  # cand is a controller or interlock reading the anchor measurement
         return cand["kind"] in ("controller", "interlock") and norm_tag(cand.get("measurement")) == \
             norm_tag(anchor["tag"])
+    if rel == "linked":  # joined to the anchor's unit by a drawn stream (an exhaust to a recovery exchanger)
+        if model.twin:
+            return cand["id"] in model.near(anchor["id"], clause.get("max_hops", 2), anchor.get("sheet"))
+        u = anchor_unit(anchor)
+        if not u:
+            return False
+        streams = model.linked_streams(u)
+        if cand["kind"] == "equipment":
+            return any({s.get("from"), s.get("to")} >= {u, cand["id"]} for s in model.m.get("streams", []))
+        return cand.get("stream") in streams
     if rel in ("discharge_side", "near"):
         if model.twin:
             hops = model.near(anchor["id"], clause.get("max_hops", 2), anchor.get("sheet"))
@@ -590,8 +607,8 @@ def render_historian(place, ctx):
     elif bare:
         parts.append(f"historian or DCS trend for {', '.join(bare)} (no historian tag is mapped in this model for "
                      "these)")
-    if position_only:
-        rec = sorted({f"{i.label()}: {i['signal']}" for i in position_only if i.get("signal")})
+    if position_only and not any(i.get("variable") == "flow" for i in usable):  # a drawn flow meter answers it
+        rec =sorted({f"{i.label()}: {i['signal']}" for i in position_only if i.get("signal")})
         names = ", ".join(sorted({i.label() for i in position_only}))
         lead = (f"only the valve position is recorded ({'; '.join(rec)})" if rec
                 else f"only a valve ({names}) is drawn on this line, with no flow measurement")
@@ -883,6 +900,153 @@ def render_md(model, catalog, doc):
     return "\n".join(L)
 
 
+# ---------------------------------------------------------------- roll-up across sites
+
+ROLLUP_SCHEMA = "opportunity-rollup-1"
+
+
+def load_site(arg, catalog):
+    """'NAME=FOLDER' or 'FOLDER' (the site is then the folder's name) holding a screen's questions.json."""
+    name, _, folder = arg.rpartition("=") if "=" in arg else ("", "", arg)
+    folder = Path(folder)
+    name = name or folder.resolve().name
+    f = folder / "questions.json" if folder.is_dir() else folder
+    if not f.is_file():
+        raise InputError(f"no questions.json in {shown_path(folder)}: give the --out folder of a screen run")
+    d = read_json(f, "screen")
+    if d.get("schema") != SCHEMA or not isinstance(d.get("questions"), list):
+        raise InputError(f"{shown_path(f)} is not an opportunity screen (schema {d.get('schema')!r}, expected "
+                         f"{SCHEMA!r}): run question_engine.py --model ... --out first")
+    unknown = sorted({q.get("question_id") for q in d["questions"]} - {q["id"] for q in catalog["questions"]})
+    if unknown:
+        raise InputError(f"{shown_path(f)} has question ids this catalog does not know ({', '.join(unknown)}): "
+                         "was it made with another version of data/questions.json?")
+    return name, shown_path(f), d
+
+
+def rollup(site_args, catalog):
+    """Combine several sites' screens: per question, the sites and assets it fired on and the data requests merged
+    by item (each site's places kept, duplicates dropped). Ordered by how many sites a question fired at, then by
+    findings, then catalog order. Nothing is ranked by value and no saving is computed."""
+    sites, seen = [], {}
+    for a in site_args:
+        name, path, d = load_site(a, catalog)
+        if name in seen:
+            raise InputError(f"site {name!r} is named twice ({seen[name]} and {path}); name them with NAME=FOLDER")
+        seen[name] = path
+        sites.append((name, path, d))
+    order = {q["id"]: n for n, q in enumerate(catalog["questions"])}
+    qmap = {q["id"]: q for q in catalog["questions"]}
+    per = OrderedDict()
+    for name, _, d in sites:
+        for f in d["questions"]:
+            e = per.setdefault(f["question_id"], {"sites": OrderedDict(), "requests": OrderedDict()})
+            e["sites"].setdefault(name, []).append(
+                {"finding_id": f["id"], "about": f["about"],
+                 "assets": [{"id": a["id"], "tag": a.get("tag")} for a in f["assets"]]})
+            for r in f["data_requests"]:
+                req = e["requests"].setdefault(r["item"], {"item": r["item"], "how": r["how"], "sites": OrderedDict()})
+                s = req["sites"].setdefault(name, {"site": name, "states": [], "per": OrderedDict()})
+                if r["state"] not in s["states"]:
+                    s["states"].append(r["state"])
+                s["per"].setdefault(f["id"], [])
+                s["per"][f["id"]] += [w for w in r["where"] if w not in s["per"][f["id"]]]
+    for e in per.values():  # places every finding at a site shares are listed once; the rest per finding
+        for req in e["requests"].values():
+            for s in req["sites"].values():
+                lists = list(s.pop("per").items())
+                common = [w for w in lists[0][1] if all(w in ws for _, ws in lists)]
+                s["where"] = common
+                s["where_by_finding"] = [{"finding_id": fid, "where": [w for w in ws if w not in common]}
+                                         for fid, ws in lists if [w for w in ws if w not in common]]
+    out = []
+    for qid, e in per.items():
+        q = qmap[qid]
+        fired = list(e["sites"])
+        out.append({
+            "question_id": qid, "question": q["question"], "family": q["family"],
+            "sites": [{"site": s, "findings": fs} for s, fs in e["sites"].items()],
+            "findings": sum(len(fs) for fs in e["sites"].values()),
+            "quiet_at": [n for n, _, d in sites if n not in fired and qid in d.get("did_not_fire", [])],
+            "not_checked_at": [n for n, _, d in sites if qid in {x["question_id"] for x in d.get("not_checked", [])}],
+            "not_run_at": [n for n, _, d in sites if n not in fired and qid not in d.get("questions_run", [qid])],
+            "data_requests": [dict(r, sites=list(r["sites"].values())) for r in e["requests"].values()],
+            "decision_rule": q["decision_rule"], "typical_benefit": benefit(q, catalog)})
+    out.sort(key=lambda x: (-len(x["sites"]), -x["findings"], order[x["question_id"]]))
+    quiet_everywhere = [q["id"] for q in catalog["questions"] if q["id"] not in per
+                        and all(q["id"] in d.get("did_not_fire", []) for _, _, d in sites)]
+    return {"schema": ROLLUP_SCHEMA, "catalog": shown_path(CATALOG),
+            "note": "Several sites' opportunity screens combined: where each question fired and the data to collect "
+                    "at each. A screen, not an audit: no savings are computed and nothing is ranked by value; the "
+                    "order is only how many sites a question fired at, then how many findings.",
+            "sites": [{"site": n, "screen": p, "source_model": d.get("source_model"),
+                       "findings": len(d["questions"]), "questions_run": len(d.get("questions_run", []))}
+                      for n, p, d in sites],
+            "counts": {"questions_fired": len(out), "findings": sum(q["findings"] for q in out),
+                       "fired_at_every_site": sum(len(q["sites"]) == len(sites) for q in out)},
+            "questions": out, "quiet_at_every_site": quiet_everywhere}
+
+
+def render_rollup_md(doc, catalog):
+    names = [s["site"] for s in doc["sites"]]
+    L = [f"# Opportunity screen roll-up: {', '.join(names)}", "",
+         "**How to read this.** Each site's screen, combined. A question is listed once, with every site and "
+         "asset it fired on and the data to collect at each site, so the same request can be planned across "
+         "sites. The order is only how many sites a question fired at, then how many findings: it is not a "
+         "ranking by value, and no savings are computed. The \"what the source says\" lines are the sources' "
+         "general figures, quoted as written. Read each site's own screen for the evidence behind a finding.", "",
+         "| Site | Screen | Model | Findings |", "|---|---|---|---|"]
+    L += [f"| {s['site']} | `{s['screen']}` | `{s['source_model']}` | {s['findings']} |" for s in doc["sites"]]
+    L += ["", "| Question | Family | Sites | Findings |", "|---|---|---|---|"]
+    fams = catalog["families"]
+    for q in doc["questions"]:
+        L.append(f"| {q['question_id']}: {q['question']} | {fams.get(q['family'], q['family'])} | "
+                 f"{', '.join(s['site'] for s in q['sites'])} | {q['findings']} |")
+    L.append("")
+    for q in doc["questions"]:
+        L += [f"## {q['question_id']}: {q['question']}", "",
+              f"Fired at {len(q['sites'])} of {len(names)} sites."
+              + (f" Asked and quiet at: {', '.join(q['quiet_at'])}." if q["quiet_at"] else "")
+              + (f" Not checked at: {', '.join(q['not_checked_at'])}." if q["not_checked_at"] else "")
+              + (f" Not run at: {', '.join(q['not_run_at'])}." if q["not_run_at"] else ""), ""]
+        for s in q["sites"]:
+            for f in s["findings"]:
+                tags = ", ".join(sorted({a["tag"] or a["id"] for a in f["assets"]}))
+                L.append(f"- **{s['site']}**, {f['about']} (`{f['finding_id']}`): {tags}")
+        L += ["", "**Data to collect**", ""]
+        for r in q["data_requests"]:
+            L.append(f"- {r['item']}. How: {r['how']}")
+            for s in r["sites"]:
+                parts = [f"For `{b['finding_id']}`: " + "; then ".join(b["where"]) for b in s["where_by_finding"]]
+                if s["where"]:
+                    parts.append(("Then, for all of them: " if parts else "") + "; then ".join(s["where"]))
+                L.append(f"  - {s['site']} [{', '.join(x.replace('_', ' ') for x in s['states'])}]: "
+                         + ". ".join(parts))
+        tb = q["typical_benefit"]
+        L += ["", f"**How it is decided:** {q['decision_rule']}", "",
+              f"**What the source says ({', '.join(tb.get('source') or []) or 'no source'}):** {tb['wording']}", ""]
+    if doc["quiet_at_every_site"]:
+        L += ["## Asked at every site, fired at none", "",
+              "Not a clean bill of health: the models may not show what these questions look for. "
+              + ", ".join(doc["quiet_at_every_site"]) + ".", ""]
+    used = sorted({s for q in doc["questions"] for s in (q["typical_benefit"].get("source") or [])},
+                  key=lambda s: int(s[1:]))
+    if used:
+        L += ["## Sources cited above", ""]
+        L += [f"- {s}: {catalog['sources'][s]['title']}. {catalog['sources'][s]['url']} "
+              f"(license: {catalog['sources'][s]['license']})" for s in used]
+        L.append("")
+    return "\n".join(L)
+
+
+def write_rollup(doc, catalog, out):
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "rollup.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                     newline="\n")
+    (out / "rollup.md").write_text(render_rollup_md(doc, catalog), encoding="utf-8", newline="\n")
+
+
 def list_questions(catalog):
     lines = []
     for fam, name in catalog["families"].items():
@@ -901,10 +1065,28 @@ def main(argv=None):
     ap.add_argument("--catalog", default=str(CATALOG))
     ap.add_argument("--out", help="folder for questions.json and screen.md (default: print the screen)")
     ap.add_argument("--list", action="store_true", help="print the questions and exit")
+    ap.add_argument("--rollup", action="append", metavar="[NAME=]FOLDER",
+                    help="combine screens from several sites (repeatable): each a --out folder holding questions.json; "
+                         "the site is named after the folder unless NAME= is given. Writes rollup.json and rollup.md")
     a = ap.parse_args(argv)
     catalog = json.loads(Path(a.catalog).read_text(encoding="utf-8"))
     if a.list:
         print(list_questions(catalog))
+        return 0
+    if a.rollup:
+        if a.model:
+            ap.error("give --model (one site's screen) or --rollup (several screens), not both")
+        try:
+            doc = rollup(a.rollup, catalog)
+        except InputError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 2
+        if a.out:
+            write_rollup(doc, catalog, a.out)
+            print(json.dumps(doc["counts"]) + f" -> {shown_path(a.out)}")
+        else:
+            sys.stdout.reconfigure(encoding="utf-8")
+            print(render_rollup_md(doc, catalog))
         return 0
     if not a.model:
         ap.error("give --model, or --list")

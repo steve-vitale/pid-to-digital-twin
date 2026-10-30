@@ -191,9 +191,12 @@ class Statements(unittest.TestCase):
                                      and "does not say a pipe runs directly" in s["text"] for s in pair))
         self.assertFalse([s for s in sts if "joined by a line" in s["text"]])  # the old, misread wording is gone
         piped = [s for s in by["pipe"] if s["predicate"] == "edge:piped_to"]
-        self.assertTrue(piped and all(s["text"].startswith("A pipe runs directly from") and (
+        touching = {e["id"] for e in graph("sheet0_graph.json")["edges"]
+                    if e["type"] == "piped_to" and stm.edge_attr(e, "touching") is True}
+        drawn = [s for s in piped if s["targets"][0][1] not in touching]
+        self.assertTrue(drawn and all(s["text"].startswith("A pipe runs directly from") and (
             "with no junction or other item between" in s["text"] or "with no pipe tee or other item between"
-            in s["text"]) for s in piped))  # every drawn line that is pipe, and only those
+            in s["text"]) for s in drawn))  # every drawn line that is pipe, and only those
         self.assertTrue(all("arms meet (a pipe tee or branch)" in s["text"] for s in by["pipe"]
                             if s["predicate"] == "kind"))
         self.assertTrue(all(s["text"].startswith(("Junction", "Untagged", "Line network")) or "attached to drawn line "
@@ -202,6 +205,76 @@ class Statements(unittest.TestCase):
         # a hand-built model's streams are pipe-level: they keep their stream wording and their own layer
         bay, _, _ = stm.build(graph("bayer_graph.json"))
         self.assertEqual({s["layer"] for s in bay if s["predicate"] == "edge:connects"}, {"stream"})
+
+    def test_touching_process_items_do_not_claim_a_drawn_pipe(self):
+        """Contact is a pipe-layer inference, not a line visible between the two items."""
+        g = every_kind_graph()
+        e = next(e for e in g["edges"] if e["type"] == "piped_to")
+        e["from"], e["to"] = "N-equipment", "N-line_item"
+        ordinary, _, _ = stm.build(g)
+        before = next(s for s in ordinary if s["targets"] == [["edge", e["id"]]])
+        self.assertTrue(before["text"].startswith("A pipe runs directly from"))
+        e["attributes"] = [{"name": "touching", "value": True, "status": "unverified", "source": e["source"]}]
+        contact, _, _ = stm.build(g)
+        after = next(s for s in contact if s["targets"] == [["edge", e["id"]]])
+        self.assertIn("are drawn against each other, with no line between them", after["text"])
+        self.assertIn("the pipe layer treats them as consecutive process items", after["text"])
+        self.assertNotIn("pipe runs", after["text"])
+        self.assertEqual((after["id"], after["layer"], after["rank"], after["source"]),
+                         (before["id"], "pipe", 2, before["source"]))
+        # Both contact segments in the committed drawing get that wording too.
+        sheet = graph("sheet0_graph.json")
+        touching = {e["id"] for e in sheet["edges"]
+                    if e["type"] == "piped_to" and stm.edge_attr(e, "touching") is True}
+        self.assertEqual(len(touching), 2)
+        statements, _, _ = stm.build(sheet)
+        contacts = [s for s in statements if s["type"] == "relation" and s["targets"][0][1] in touching]
+        self.assertEqual(len(contacts), len(touching))
+        self.assertTrue(all("are drawn against each other" in s["text"] and "pipe runs" not in s["text"]
+                            for s in contacts))
+
+    def test_safety_screening_notes_are_explicitly_unverified_inferences(self):
+        statements, _, _ = stm.build(graph("sheet0_graph.json"))
+        notes = [s for s in statements if s["predicate"].startswith("safety.")]
+        self.assertEqual(len(notes), 12)
+        for s in notes:
+            self.assertIn("tag-derived", s["text"].lower())
+            self.assertIn("review", s["text"])
+            if s["predicate"] == "safety.function":
+                self.assertIn("function is unverified", s["text"])
+
+    def test_all_te_cascades_match_their_actual_model_field(self):
+        g = graph("te_graph.json")
+        gr = stm.Graph(g)
+        model = json.loads((ROOT / "data/te_process_model.json").read_text(encoding="utf-8"))
+        cascades = [e for e in g["edges"] if e["type"] == "sets_point_of"]
+        self.assertEqual(len(cascades), 8)
+        for e in cascades:
+            matches, field = stm.edge_in_model(model, gr, e, {})
+            self.assertTrue(matches, (e, field))
+            self.assertTrue(field.endswith(".output.setpoint_of"))
+            bad = dict(e, to="NONEXISTENT-CONTROLLER")
+            self.assertFalse(stm.edge_in_model(model, gr, bad, {})[0])
+
+    def test_nested_model_fields_and_retained_citations_match_without_hiding_errors(self):
+        item = {"source": "original report", "verification": {"previous": {"description": "old"}},
+                "ratings": [{"psig": 150}], "literal.key": 7}
+        for field, expected in (("cited_source", "original report"), ("verification.previous.description", "old"),
+                                ("ratings[0].psig", 150), ("literal.key", 7)):
+            self.assertEqual(stm.model_field(item, field), (True, expected))
+        for field in ("ratings[1].psig", "verification.missing.description", "ratings[0].absent"):
+            self.assertEqual(stm.model_field(item, field), (False, None))
+        g = graph("te_graph.json")
+        statements, _, _ = stm.build(g)
+        model = json.loads((ROOT / "data/te_process_model.json").read_text(encoding="utf-8"))
+        stm.machine_check(statements, g, model, "te model")
+        self.assertFalse([s for s in statements if s["machine_check"]["result"] == "differs from its model field"])
+        changed = next(s for s in statements if s["predicate"] == "cited_source")
+        target = changed["targets"][0]
+        node = next(n for n in g["nodes"] if n["id"] == target[1])
+        next(c for c in node["attributes"] if c["name"] == target[2])["value"] = "WRONG SOURCE"
+        stm.machine_check([changed], g, model, "te model")
+        self.assertEqual(changed["machine_check"]["result"], "differs from its model field")
 
     def test_lines_that_are_not_pipe_are_said_as_what_they_are(self):
         """Independent review of the layered sheet-0 sample (2026-10-29): 3 of 15 pipe statements were wrong because

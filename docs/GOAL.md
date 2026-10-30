@@ -23,8 +23,8 @@ To turn the system's output into the answer key, a reviewer has to:
 | Add a connection the system missed | 1 |
 
 **Review load = total corrections ÷ (symbols + connections in the answer key) × 100.** That's corrections per 100
-things on the drawing. **Lower is better.** 0 means nothing to fix. Around 100 means about as much work as drawing
-it from scratch.
+key items. **Lower is better.** 0 means no scored differences. At 100, differences equal the number of key items;
+this is a count, not a measured equivalence to drawing from scratch. Network-pair differences can share one cause.
 
 - **Matching:** symbol matching uses rough location (IoU ≥ 0.1, as in round 1), because a reviewer fixes "is it
   there and what is it", not pixel boxes. Box precision for graphics is a secondary score.
@@ -455,7 +455,8 @@ round-2 run was a good draw, Claude's a bad one.
 **GPT minus Claude, review load:** −9.8. Runs interval −12.2 to −7.3: on these six sheets, GPT is better by more than
 run-to-run noise. Bootstrap interval −26.5 to +4.5: across drawings like these, the gap is **not** established. By
 the pre-registered rule (bootstrap is the headline) this is a **tie**. The same holds for symbol F1 and connection
-F1: different on these sheets, a tie across drawings. One sheet carries much of it: sheet 10 (Claude 58.7, GPT
+F1: different on these sheets, no clear ranking across drawings. "Tie" here means the rule does not establish a
+winner; it does not establish equivalence. One sheet carries much of it: sheet 10 (Claude 58.7, GPT
 20.1 mean review load).
 
 **Run-to-run noise is larger than round 2 assumed.** Round 2's decision rule used "about 1 point" of review load,

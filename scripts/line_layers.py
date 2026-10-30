@@ -36,9 +36,16 @@ Definitions (fixed here; tests in scripts/test_line_layers.py):
                  in the pipe layer it does not join that run (slanted_crossings lists where).
   bend           a horizontal and a vertical run meeting with two arms: passed through, not a node.
   dead end       a line end with no item on it: pruned (a stub is not a branch).
+  closed shape   a junction meets three or more DIFFERENT neighbours: line that leaves a point and comes back to it, or
+  on a line      two lines between the same two places (a filled arrowhead, an unkeyed symbol's outline, a box drawn
+                 on a stem), is passed through or pruned, not a junction (contract()).
+  touching       two process items drawn against each other with no line between (a blind flange on a valve, a
+                 reducer against a valve, a flange on a vessel's shell): consecutive, so piped directly; no line is
+                 drawn, so the segment is on no line network unless both ends already share one (TOUCH_FRAC).
   item's own     a meeting point inside an item's box, or just outside it, is the item's own drawing, unless the
-  drawing        points there have two or more arms leading away to other items and one into the item (a tee drawn
-                 beside the box). An actuator and its valve count as one assembly here.
+  drawing        points there have two or more arms leading away to other items from one point, and one into the item
+                 (a tee drawn beside the box; two pipes landing apart on a vessel's shell are not one). An actuator
+                 and its valve count as one assembly here.
 Junction ids: <sheet>-JN-<x>-<y> with the position on the 0-1000 sheet scale; network ids: <sheet>-NET<n> numbered
 by their sorted member ids; segment ids: <sheet>-PS<n> (pipe), -IL<n> (instrument line), -AS<n> (actuator stem),
 -NZ<n> (nozzle stub), numbered by their sorted ends.
@@ -75,12 +82,16 @@ CLUSTER_FRAC = 0.15      # line-meeting points closer than this share of a symbo
 JUNCTION_BOX_FRAC = 0.4  # half-size of a junction's evidence box, share of a symbol side
 ACTUATOR_GAP_FRAC = 0.25  # an actuator box is at most this share of a symbol side from its valve's box
 NOZZLE_GAP_FRAC = 0.5     # a nozzle mark's box is at most this share of a symbol side from its vessel's box
+SAME_PLACE_FRAC = 0.5     # a tee beside a box: its arms leading away leave within this share of a symbol side
+TOUCH_FRAC = 0.1          # process items whose boxes are this share of a symbol side apart or closer are drawn touching
 NOZZLE_TAG = re.compile(r"^N\d{1,2}[A-Z]?$")  # how a nozzle is marked on the drawing (N1, N2, N12A)
 VESSEL_CLASSES = ("tank",)                    # classes a nozzle can belong to (and any item from the model's units)
 JUNCTION_KINDS = ("pipe_tee", "instrument_tap", "marked_crossing", "instrument_line_junction")
 DEFINITIONS = {
     "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and "
-                "past instrument taps, with no pipe tee or other item between",
+                "past instrument taps, with no pipe tee or other item between; or two items drawn against each other "
+                "with nothing between (touching: no line is drawn, so the segment is on no line network unless both "
+                "ends already share one)",
     "junction": "a point where three or more drawn line arms meet. junction_kind says which: pipe_tee (three or more "
                 "pipe arms: a tee or branch), instrument_tap (an instrument line meets a pipe that carries on through "
                 "it: the tap sits on the pipe segment named by on_segment and does not split it), marked_crossing (a "
@@ -150,6 +161,30 @@ def contract(adj, items):
             if cur is None or cur == u:
                 continue
             segs.setdefault(tuple(sorted((u, cur), key=str)), net)
+    # A junction joins three or more DIFFERENT things. Line that leaves a junction and comes back to it, or two lines
+    # between the same two places (a filled arrowhead or an unkeyed symbol's outline drawn on a run, a box drawn on a
+    # stem), makes points with three arms that meet fewer than three neighbours: such a point is passed through (two
+    # neighbours) or is a dead end (one), until every junction left meets three or more.
+    nb = defaultdict(dict)
+    for (a, b), net in segs.items():
+        nb[a][b] = net
+        nb[b][a] = net
+    todo = [u for u in nb if u not in items]
+    while todo:
+        u = todo.pop()
+        if u in items or u not in nb or len(nb[u]) >= 3:
+            continue
+        vs = nb.pop(u)
+        for v in vs:
+            nb[v].pop(u, None)
+        if len(vs) == 2:
+            (x, n1), (y, _) = sorted(vs.items(), key=lambda kv: str(kv[0]))
+            if y not in nb[x]:
+                nb[x][y] = nb[y][x] = n1
+        todo += [v for v in vs if v not in items]
+    now = {tuple(sorted((a, b), key=str)) for a in nb for b in nb[a]}
+    segs = {**{k: n for k, n in segs.items() if k in now},
+            **{k: nb[k[0]][k[1]] for k in sorted(now - set(segs), key=str)}}
     # Line that joins fewer than two items (a closed loop of lines, a table grid, an item's own outline or internals
     # drawn outside its box): not pipe between items. Drop it with its junctions.
     uf = _UF()
@@ -161,7 +196,7 @@ def contract(adj, items):
             count[uf.find(i)] += 1
     keep = {r for r, n in count.items() if n >= 2}
     segs = {s: n for s, n in segs.items() if uf.find(s[0]) in keep}
-    arms = {u: len(adj[u]) for u in key if u not in items and u in uf.p and uf.find(u) in keep}
+    arms = {u: len(nb[u]) for u in nb if u not in items and u in uf.p and uf.find(u) in keep}
     return segs, arms
 
 
@@ -365,7 +400,9 @@ def traced_layers(image_path, symbols, exclude=(), **opt):
     of the pipe layer only (their lines become dead ends and are pruned, a branch they made is passed through): used
     to score process piping alone against a truth that has no instrument lines.
     Returns {"links", "networks" {root: [ids]}, "junctions" {jid: {x, y, arms, basis, kind, network, on_segment}},
-    "segments" [(a, b, network)] (process pipe only), "segment_taps" {(a, b): [taps]}, "instrument_lines"
+    "segments" [(a, b, network)] (process pipe only; network None for items drawn touching on no shared network),
+    "touching" [(a, b)] (pairs joined by being drawn against each other), "segment_taps" {(a, b): [taps]},
+    "instrument_lines"
     [(from, to, network)], "actuator_stems" [(valve, actuator, network)], "nozzle_stubs" [(nozzle, vessel, network)],
     "crossings" {...}, "side", "size", "problems"}. The links are exactly trace()'s."""
     import cv2
@@ -376,7 +413,7 @@ def traced_layers(image_path, symbols, exclude=(), **opt):
     out = {"links": links, "networks": {}, "junctions": {}, "segments": [], "segment_taps": {}, "instrument_lines": [],
            "actuator_stems": [], "nozzle_stubs": [], "side": g.get("side"),
            "single_item_networks": 0, "crossings": {"pass_through": 0, "marked_connected": 0},
-           "slanted_crossings": [], "problems": []}
+           "slanted_crossings": [], "touching": [], "problems": []}
     if not g:
         return out
     o = {**tc.DEFAULTS, **opt}
@@ -657,6 +694,9 @@ def traced_layers(image_path, symbols, exclude=(), **opt):
                     return "stub"
                 prev, cur = cur, nxt[0]
             return "stub"
+        def centre(u):
+            return (sum(pos[i][0] for i in members_of[u]) / len(members_of[u]),
+                    sum(pos[i][1] for i in members_of[u]) / len(members_of[u]))
         done = set()
         for u0 in sorted(inside):
             if u0 in done:
@@ -670,8 +710,13 @@ def traced_layers(image_path, symbols, exclude=(), **opt):
             done |= comp
             if comp & strict:
                 continue
-            ends = [leads(u, v, sid, comp) for u in comp for v in final.get(u, {}) if v not in comp]
-            if ends.count("away") < 2 or not any(v in own[sid] for u in comp for v in final.get(u, {})):
+            # ...where two of those arms leave from one place (within SAME_PLACE_FRAC of a symbol side): pipes landing
+            # on the item's outline well apart (two nozzles side by side on a vessel's shell, joined only along the
+            # shell) each go to the item
+            at = [centre(u) for u in comp for v in final.get(u, {})
+                  if v not in comp and leads(u, v, sid, comp) == "away"]
+            if (not any(math.dist(p, q) <= SAME_PLACE_FRAC * side for i, p in enumerate(at) for q in at[i + 1:])
+                    or not any(v in own[sid] for u in comp for v in final.get(u, {}))):
                 continue
             r = min(comp)
             for u in sorted(comp - {r}):
@@ -766,17 +811,48 @@ def traced_layers(image_path, symbols, exclude=(), **opt):
             out["segment_taps"][k] = taps
         for t in taps:
             out["junctions"][t]["on_segment"] = k
-    out["segments"].sort()
     out["roles"] = roles
     for name, part in (("instrument_lines", "instrument"), ("actuator_stems", "actuator"),
                        ("nozzle_stubs", "nozzle")):
         out[name] = sorted((nm(a), nm(b), net) for (a, b), net in c[part].items())
+    # Items drawn against each other (a blind flange on a valve's end, a reducer against a valve, a nozzle or flange
+    # on a vessel's shell): no line between them and nothing between them either, so they are consecutive on the
+    # pipe. Process items only (not a bubble or an actuator); a nozzle mark against its own vessel is its nozzle.
+    # Such a segment has no traced line, so it is on no line network (network None) unless both ends already share
+    # one; out["touching"] lists them.
+    joined = {frozenset(x[:2]) for part in ("segments", "instrument_lines", "actuator_stems", "nozzle_stubs")
+              for x in out[part]}
+    nets_of = defaultdict(set)
+    for r, ms in g["networks"].items():
+        for x in ms:
+            nets_of[x].add(int(r))
+    proc = sorted(k for k in g["symbols"] if k not in exclude and roles.get(k) is None
+                  or isinstance(roles.get(k), tuple) and roles[k][0] == "nozzle" and k not in exclude)
+    out["touching"] = []
+    for i, a in enumerate(proc):
+        for b in proc[i + 1:]:
+            if frozenset((a, b)) in joined or box_gap(g["symbols"][a], g["symbols"][b]) > TOUCH_FRAC * side:
+                continue
+            common = nets_of[a] & nets_of[b]
+            net = min(common) if len(common) == 1 else None
+            noz = [x for x, y in ((a, b), (b, a)) if roles.get(x) == ("nozzle", y)]
+            if noz:
+                out["nozzle_stubs"].append((noz[0], b if noz[0] == a else a, net))
+            elif not any(isinstance(roles.get(x), tuple) for x in (a, b)):
+                out["segments"].append((a, b, net))
+            else:
+                continue
+            out["touching"].append((a, b))
+    out["segments"].sort(key=lambda s: (s[0], s[1]))
+    out["nozzle_stubs"].sort(key=lambda s: (s[0], s[1]))
     # The network layer: networks joining two or more items. One with a single item (a line leaving the sheet with
     # no connector, the unerased edge of a symbol's own outline) carries no link and is only counted.
     out["networks"] = {int(r): list(ms) for r, ms in g["networks"].items() if len(ms) >= 2}
     out["single_item_networks"] = sum(1 for ms in g["networks"].values() if len(ms) < 2)
     for a, b, net in out["segments"] + out["instrument_lines"] + out["actuator_stems"] + out["nozzle_stubs"]:
         for e in (a, b):
+            if net is None and ((a, b) in out["touching"] or (b, a) in out["touching"]):
+                continue  # drawn against each other: no traced line, so on no network
             if e in out["junctions"]:
                 if out["junctions"][e]["network"] != net:
                     out["problems"].append(f"segment {a}-{b}: junction {e} is on another network")
@@ -858,14 +934,17 @@ def enrich(model, images, **opt):
             net_ids[root] = f"S{sheet}-NET{n:03d}"
         name = lambda e: jid.get(e) or asset[e]  # noqa: E731
         first = len(segs)
+        touch = {frozenset(x) for x in S["touching"]}
         for a, b, root in S["segments"]:
             taps = [jid[t] for t in S["segment_taps"].get((a, b), [])]
-            segs.append({"from": name(a), "to": name(b), "sheet": sheet, "network": net_ids[root],
-                         **({"taps": taps} if taps else {}), "_key": (a, b)})
+            segs.append({"from": name(a), "to": name(b), "sheet": sheet, "network": net_ids.get(root),
+                         **({"taps": taps} if taps else {}),
+                         **({"touching": True} if frozenset((a, b)) in touch else {}), "_key": (a, b)})
         sheet_segs = segs[first:]
         for part in other:
             for a, b, root in S[part]:
-                other[part].append({"from": name(a), "to": name(b), "sheet": sheet, "network": net_ids[root]})
+                other[part].append({"from": name(a), "to": name(b), "sheet": sheet, "network": net_ids.get(root),
+                                    **({"touching": True} if frozenset((a, b)) in touch else {})})
         hb = JUNCTION_BOX_FRAC * side
         for j, v in sorted(S["junctions"].items(), key=lambda kv: jid[kv[0]]):
             bx = [round(1000 * (v["x"] - hb) / W, 1), round(1000 * (v["y"] - hb) / H, 1),
@@ -1157,14 +1236,10 @@ def classify_truth(truth, roles):
             "junctions": {j: truth["junctions"][j] for j in c["arms"]}, "kinds": c["kinds"]}
 
 
-def score_pipe(pred, truth, side):
-    """Precision / recall of the pipe layer. pred: traced_layers() output; truth: dexpi_truth / drawn_truth, through
-    classify_truth() when its lines are not all pipe. Junctions are matched one to one, nearest first, within half a
-    symbol side (both must have a position); a truth junction with no position (a DEXPI tee with no drawn shape) is
-    matched to the unmatched predicted junction with the most item neighbours in common. A predicted segment is right
-    when its two ends, after junction matching, are a truth segment. Also reported: item-to-item segments alone (no
-    junction matching involved), junction counts, instrument connections (when the truth has them) and how many
-    matched junctions are of the same kind."""
+def match_junctions(pred, truth, side):
+    """{predicted junction: truth junction}, one to one. Nearest first, within half a symbol side (both must have a
+    position); then each truth junction with no position (a DEXPI tee with no drawn shape) goes to the unmatched
+    predicted junction with the most neighbours in common, items or junctions already matched, at least two."""
     pj = {j: (v["x"], v["y"]) for j, v in pred["junctions"].items()}
     tj = dict(truth["junctions"])
     pairs = sorted((math.dist(p, t), a, b) for a, p in pj.items() for b, t in tj.items()
@@ -1179,13 +1254,34 @@ def score_pipe(pred, truth, side):
         return {b if a == j else a for a, b in segs if j in (a, b)}
     psegs = {tuple(sorted(s[:2])) for s in pred["segments"]}
     tsegs = set(truth["segments"])
-    for b in sorted(j for j, t in tj.items() if t is None):
-        tn = {x for x in nbrs(tsegs, b) if x not in tj}
-        best = max(((len(tn & {x for x in nbrs(psegs, a) if x not in pj}), a) for a in pj if a not in match),
-                   default=(0, None))
-        if best[0] >= 2:
-            match[best[1]] = b
-            used.add(b)
+    # A truth junction with no position: the unmatched predicted junction with the most neighbours in common, items
+    # or junctions already matched (a tee between two tees has one item neighbour), at least two; repeated until no
+    # new match, as each match can place the next.
+    found = True
+    while found:
+        found = False
+        for b in sorted(j for j, t in tj.items() if t is None and j not in used):
+            tn = {x for x in nbrs(tsegs, b) if x not in tj or x in used}
+            best = max(((len(tn & {match.get(x, x) for x in nbrs(psegs, a) if x not in pj or x in match}), a)
+                        for a in pj if a not in match), default=(0, None))
+            if best[0] >= 2:
+                match[best[1]] = b
+                used.add(b)
+                found = True
+    return match
+
+
+def score_pipe(pred, truth, side):
+    """Precision / recall of the pipe layer. pred: traced_layers() output; truth: dexpi_truth / drawn_truth, through
+    classify_truth() when its lines are not all pipe. Junctions are matched by match_junctions(). A predicted segment
+    is right when its two ends, after junction matching, are a truth segment. Also reported: item-to-item segments
+    alone (no junction matching involved), junction counts, instrument connections (when the truth has them) and how
+    many matched junctions are of the same kind."""
+    pj = {j: (v["x"], v["y"]) for j, v in pred["junctions"].items()}
+    tj = dict(truth["junctions"])
+    match = match_junctions(pred, truth, side)
+    psegs = {tuple(sorted(s[:2])) for s in pred["segments"]}
+    tsegs = set(truth["segments"])
     m = lambda x: match.get(x, "pred:" + x if x in pj else x)  # noqa: E731
     mapped = {tuple(sorted((m(a), m(b)))) for a, b in psegs}
     tp = len(mapped & tsegs)

@@ -3,11 +3,11 @@ x,,Site,Element,Digital twin starter kit: te-key / key,,,,,
 x,Site,Feed And Reaction,Element,"Sheet 101, drawing 101-1",,,,,
 x,Site,"Condensing, Separation And Recycle",Element,"Sheet 102, drawing 102-1",,,,,
 x,Site,Product Stripping,Element,"Sheet 103, drawing 103-1",,,,,
-x,Site\Feed And Reaction,R-101,Element,S101-TK001 | tag: R-101 (as_extracted) | tank | sheet 101 symbol tank1 | confidence 1.0 | UNVERIFIED,,,,,
-x,"Site\Condensing, Separation And Recycle",E-101,Element,S102-TK001 | tag: E-101 (as_extracted) | tank | sheet 102 symbol tank1 | confidence 1.0 | UNVERIFIED,,,,,
-x,"Site\Condensing, Separation And Recycle",V-101,Element,S102-TK002 | tag: V-101 (as_extracted) | tank | sheet 102 symbol tank2 | confidence 1.0 | UNVERIFIED,,,,,
-x,"Site\Condensing, Separation And Recycle",K-101,Element,S102-PU001 | tag: K-101 (as_extracted) | pump | sheet 102 symbol pump1 | confidence 1.0 | UNVERIFIED,,,,,
-x,Site\Product Stripping,C-101,Element,S103-TK001 | tag: C-101 (as_extracted) | tank | sheet 103 symbol tank1 | confidence 1.0 | UNVERIFIED,,,,,
+x,Site\Feed And Reaction,R-101,Element,S101-TK001 | tag: R-101 (as_extracted) | tank | sheet 101 symbol tank1 | confidence 1.0 | review: UNVERIFIED | risk tier: amber,,,,,
+x,"Site\Condensing, Separation And Recycle",E-101,Element,S102-TK001 | tag: E-101 (as_extracted) | tank | sheet 102 symbol tank1 | confidence 1.0 | review: UNVERIFIED | risk tier: amber,,,,,
+x,"Site\Condensing, Separation And Recycle",V-101,Element,S102-TK002 | tag: V-101 (as_extracted) | tank | sheet 102 symbol tank2 | confidence 1.0 | review: UNVERIFIED | risk tier: amber,,,,,
+x,"Site\Condensing, Separation And Recycle",K-101,Element,S102-PU001 | tag: K-101 (as_extracted) | pump | sheet 102 symbol pump1 | confidence 1.0 | review: UNVERIFIED | risk tier: amber,,,,,
+x,Site\Product Stripping,C-101,Element,S103-TK001 | tag: C-101 (as_extracted) | tank | sheet 103 symbol tank1 | confidence 1.0 | review: UNVERIFIED | risk tier: amber,,,,,
 ,Site\Feed And Reaction\R-101,FV 203,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_203.PV
 ,Site\Feed And Reaction\R-101,FI 101,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FI_101.PV
 ,Site\Feed And Reaction\R-101,FV 201,Attribute,,,Double,,PI Point,\\%Server%\PLACEHOLDER.FV_201.PV
