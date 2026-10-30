@@ -1,0 +1,299 @@
+{
+  "schema": "independent-source-inventory/1",
+  "status": "agent-authored original-source inventory, frozen before candidate inspection; no human engineering validation",
+  "source": {
+    "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+    "report_id": "2017-01-I-KS",
+    "sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+    "allowed_locators": [
+      {
+        "printed_page": 7,
+        "pdf_page": 7,
+        "section": "2.3",
+        "paragraph": "chemical storage and transfer; continues on page 8"
+      },
+      {
+        "printed_page": 8,
+        "pdf_page": 8,
+        "section": "2.3",
+        "paragraph": "first paragraph; continuation before section 2.3.1"
+      },
+      {
+        "printed_page": 23,
+        "pdf_page": 23,
+        "section": "5.2",
+        "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+      }
+    ],
+    "method": "pypdf text extraction, narrative-only bounded excerpts; no rendered page or figure examined"
+  },
+  "scope": {
+    "purpose": "source-adapted development example; not held-out or a model accuracy trial",
+    "excluded": [
+      "all figures and their engineering information",
+      "external contractor memorandum",
+      "other incident or postincident states",
+      "other report paragraphs"
+    ],
+    "quote_words_in_this_inventory": 0,
+    "exposure_disclosure": "Initial text extraction inadvertently displayed a page-7 photograph footnote and Figure 3 caption and some following page-8 section text. No figure image was opened. Neither extra text nor caption is used as evidence. Parent disclosed prior Figure 3 exposure; this reviewer has not seen the parent candidate."
+  },
+  "conventions": {
+    "aliases": "Every identifier in this inventory is a project alias, not a reported plant tag.",
+    "BL": "Scope boundary only; does not assert a physical junction, equipment item or shared chemical connection.",
+    "stream_ids": "H1-H3 and A1-A2 are projection identifiers for narrative transfers, not reported line numbers.",
+    "native_types": "Storage and day tanks project as tank; the unnamed downstream process vessel projects as vessel.",
+    "empty_uom": "Empty string for LI_HYPO uom encodes unspecified units, not a unitless physical level."
+  },
+  "facts": [
+    {
+      "id": "S01",
+      "subject": "HYPO_BULK",
+      "fact": "Sodium hypochlorite delivered to Mod B is 12.5 percent; it is received at the chemical unloading area and piped into an outdoor 6500-gallon bulk tank stored at atmospheric pressure.",
+      "locator": {
+        "printed_page": 7,
+        "pdf_page": 7,
+        "section": "2.3",
+        "paragraph": "chemical storage and transfer; continues on page 8"
+      }
+    },
+    {
+      "id": "S02",
+      "subject": "HYPO_DAY",
+      "fact": "Operators pipe sodium hypochlorite from the bulk tank to a smaller day tank inside the Mod B building.",
+      "locators": [
+        {
+          "printed_page": 7,
+          "pdf_page": 7,
+          "section": "2.3",
+          "paragraph": "chemical storage and transfer; continues on page 8"
+        },
+        {
+          "printed_page": 8,
+          "pdf_page": 8,
+          "section": "2.3",
+          "paragraph": "first paragraph; continuation before section 2.3.1"
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "subject": "HYPO_PROCESS",
+      "fact": "Sodium hypochlorite is transferred from the day tank into an unnamed process vessel when needed.",
+      "locator": {
+        "printed_page": 8,
+        "pdf_page": 8,
+        "section": "2.3",
+        "paragraph": "first paragraph; continuation before section 2.3.1"
+      }
+    },
+    {
+      "id": "S04",
+      "subject": "ACID_DAY",
+      "fact": "Thirty-percent sulfuric acid is received at the chemical unloading area in an outdoor 8500-gallon day tank.",
+      "locator": {
+        "printed_page": 8,
+        "pdf_page": 8,
+        "section": "2.3",
+        "paragraph": "first paragraph; continuation before section 2.3.1"
+      }
+    },
+    {
+      "id": "S05",
+      "subject": "ACID_DAY",
+      "fact": "Operators transfer sulfuric acid directly from the day tank into the process; the destination equipment is unnamed.",
+      "locator": {
+        "printed_page": 8,
+        "pdf_page": 8,
+        "section": "2.3",
+        "paragraph": "first paragraph; continuation before section 2.3.1"
+      }
+    },
+    {
+      "id": "S06",
+      "subject": "LI_HYPO",
+      "fact": "A sodium hypochlorite tank level indicator signals an alarm in the control system near tank capacity, notifying operators of high level. The transfer does not stop automatically because the system was not configured for that function.",
+      "locator": {
+        "printed_page": 23,
+        "pdf_page": 23,
+        "section": "5.2",
+        "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+      }
+    }
+  ],
+  "projection_support": [
+    {
+      "record": "HYPO_BULK",
+      "supported": true,
+      "source_facts": [
+        "S01"
+      ]
+    },
+    {
+      "record": "HYPO_DAY",
+      "supported": true,
+      "source_facts": [
+        "S02"
+      ]
+    },
+    {
+      "record": "HYPO_PROCESS",
+      "supported": true,
+      "source_facts": [
+        "S03"
+      ]
+    },
+    {
+      "record": "ACID_DAY",
+      "supported": true,
+      "source_facts": [
+        "S04",
+        "S05"
+      ]
+    },
+    {
+      "record": "LI_HYPO",
+      "supported": "existence, level variable and unspecified units supported; placement on HYPO_BULK not explicit in allowed paragraph",
+      "source_facts": [
+        "S06"
+      ]
+    },
+    {
+      "record": "H1",
+      "from": "BL",
+      "to": "HYPO_BULK",
+      "supported": true,
+      "qualification": "BL is scope truncation of unloading supply, not source equipment",
+      "source_facts": [
+        "S01"
+      ]
+    },
+    {
+      "record": "H2",
+      "from": "HYPO_BULK",
+      "to": "HYPO_DAY",
+      "supported": true,
+      "source_facts": [
+        "S02"
+      ]
+    },
+    {
+      "record": "H3",
+      "from": "HYPO_DAY",
+      "to": "HYPO_PROCESS",
+      "supported": true,
+      "source_facts": [
+        "S03"
+      ]
+    },
+    {
+      "record": "A1",
+      "from": "BL",
+      "to": "ACID_DAY",
+      "supported": true,
+      "qualification": "BL is scope truncation of unloading supply",
+      "source_facts": [
+        "S04"
+      ]
+    },
+    {
+      "record": "A2",
+      "from": "ACID_DAY",
+      "to": "BL",
+      "supported": true,
+      "qualification": "BL truncates the acid process destination; do not equate it with HYPO_PROCESS",
+      "source_facts": [
+        "S05"
+      ]
+    }
+  ],
+  "ambiguities": [
+    {
+      "id": "U01",
+      "issue": "The alarm paragraph says sodium hypochlorite tank without explicitly resolving bulk versus day tank. LI_HYPO may be used as a neutral alias, but its unit=HYPO_BULK placement is not admitted into this strict original-narrative key.",
+      "locator": {
+        "printed_page": 23,
+        "pdf_page": 23,
+        "section": "5.2",
+        "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+      }
+    },
+    {
+      "id": "U02",
+      "issue": "The acid destination is the process without a named vessel. Do not assert a shared vessel or chemical mixing junction.",
+      "locator": {
+        "printed_page": 8,
+        "pdf_page": 8,
+        "section": "2.3",
+        "paragraph": "first paragraph; continuation before section 2.3.1"
+      }
+    },
+    {
+      "id": "U03",
+      "issue": "Native type labels and all aliases are declared adaptation conventions; the narrative does not provide plant tags.",
+      "locators": [
+        {
+          "printed_page": 7,
+          "pdf_page": 7,
+          "section": "2.3",
+          "paragraph": "chemical storage and transfer; continues on page 8"
+        },
+        {
+          "printed_page": 8,
+          "pdf_page": 8,
+          "section": "2.3",
+          "paragraph": "first paragraph; continuation before section 2.3.1"
+        },
+        {
+          "printed_page": 23,
+          "pdf_page": 23,
+          "section": "5.2",
+          "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+        }
+      ]
+    },
+    {
+      "id": "U04",
+      "issue": "The excerpt reports an alarm function but does not specify its threshold, engineering units, alarm implementation, transmitter type, or control output.",
+      "locator": {
+        "printed_page": 23,
+        "pdf_page": 23,
+        "section": "5.2",
+        "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+      }
+    }
+  ],
+  "contradictions": [
+    {
+      "claim": "High sodium hypochlorite level automatically shuts down unloading/transfer.",
+      "verdict": "contradicted",
+      "actual": "The system only notifies operators; automatic transfer shutdown was not configured.",
+      "locator": {
+        "printed_page": 23,
+        "pdf_page": 23,
+        "section": "5.2",
+        "paragraph": "actual sodium hypochlorite level-indicator alarm paragraph"
+      }
+    }
+  ],
+  "omission_questions": [
+    "Which sodium hypochlorite tank has the reported indicator, and what evidence confirms that placement?",
+    "What level units and numerical alarm setpoint apply?",
+    "What supplies transfer motive force and what valves, sizes, materials and fail states apply?",
+    "What receiving acid process equipment and isolation arrangement exist?",
+    "What are the hypo day-tank and process-vessel capacities?",
+    "Which pressure, temperature, relief, containment and other operating protections are documented?",
+    "What exact instrument and equipment tags apply?"
+  ],
+  "native_facts_blindspots": {
+    "scored": "Literal record existence, selected type, selected stream endpoints, and selected instrument variable/uom; unknown placement omitted.",
+    "not_scored": [
+      "names and descriptions",
+      "concentration, capacity, location and atmospheric storage",
+      "numerical limits and alarms",
+      "automatic shutdown or interlock claims",
+      "source interpretation and unsupported engineering assumptions"
+    ],
+    "warning": "A perfect native-facts score cannot establish full engineering truth or detect a false automatic-shutdown assertion embedded in unscored limits/interlocks/description fields. Unlisted records are not proved physically absent."
+  }
+}

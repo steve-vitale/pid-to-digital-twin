@@ -1,0 +1,62 @@
+{
+  "id": "mgpi-source-development",
+  "version": "1",
+  "task": "description-facts",
+  "protocol": "Source-adapted development artifacts vs separate original-source keys. V1/V2 are different source/key cohorts; selected literal fields only. False-shutdown control intentionally exposes unscored behavior.",
+  "registration": "No original-text unfamiliar-description accuracy trial, heldout score or universal model comparison. Initial input adaptation fails its bounded-source review; expanded evidence resolves placement without a model algorithm change.",
+  "cases": [
+    {
+      "id": "mgpi-v1",
+      "family": "csb-mgpi",
+      "split": "development",
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "source_url": "https://www.csb.gov/file.aspx?DocumentId=6047",
+      "license": "Repository-authored adaptation, model and derived facts under repository license; original report cached separately, no CSB figures redistributed",
+      "key_author": "Independent coding-agent original-source inventory; v1 frozen separately; no human review",
+      "files": {
+        "input": {
+          "path": "examples/from-description/mgpi/source-initial.txt",
+          "sha256": "001f639eb86237eff8f727b72a5bac7030d536cfd0022f3e74af91e21e405acc"
+        },
+        "key": {
+          "path": "examples/from-description/mgpi/v1/facts.json",
+          "sha256": "a3327aad29ac19c1da9bc5b044357825a2edf10ce1338d71bffd4f7a84b940cb"
+        },
+        "expected": {
+          "path": "examples/from-description/mgpi/v1/expected_native.json",
+          "sha256": "8b59d5b931d48b20ed2571b2b9cb284b727867fbdafddf12891ce816def49ae9"
+        }
+      }
+    },
+    {
+      "id": "mgpi-v2",
+      "family": "csb-mgpi",
+      "split": "development",
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "source_url": "https://www.csb.gov/file.aspx?DocumentId=6047",
+      "license": "Repository-authored adaptation, model and derived facts under repository license; original report cached separately, no CSB figures redistributed",
+      "key_author": "Independent coding-agent original-source inventory; v2 frozen separately; no human review",
+      "files": {
+        "input": {
+          "path": "examples/from-description/mgpi/source.txt",
+          "sha256": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8"
+        },
+        "key": {
+          "path": "examples/from-description/mgpi/v2/facts.json",
+          "sha256": "912ed6dacaadd96f5c9d41fc4a0b2a8cb9d05dfa0a6e480b8688bb02863bd588"
+        },
+        "expected": {
+          "path": "examples/from-description/mgpi/v2/expected_native.json",
+          "sha256": "584b1f35db99ba7deb46fe529ed7ddfbc59f27bcf3322e43f9d213a735215507"
+        }
+      }
+    }
+  ],
+  "runs": [
+    "benchmarks/runs/mgpi-initial.json",
+    "benchmarks/runs/mgpi-expanded-source.json",
+    "benchmarks/runs/mgpi-empty.json",
+    "benchmarks/runs/mgpi-wrong-endpoint.json",
+    "benchmarks/runs/mgpi-false-shutdown.json"
+  ]
+}

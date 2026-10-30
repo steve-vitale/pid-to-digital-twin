@@ -3483,6 +3483,38 @@
         "examples/from-description/assisted/PUMP_WALKTHROUGH.md",
         "examples/from-description/README.md"
       ]
+    },
+    {
+      "id": "A235",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Add MGPI source-adapted development artifacts with independently frozen original-source inventories, explicit source-scope revisions, drafted outputs and failure controls.",
+      "hypothesis": "A separate original-source inventory can expose unsupported adaptation claims before a polished model/drawing is treated as evidence, and retain the clarification as a source/key change rather than a model gain.",
+      "evidence": "The V1 key, frozen before candidate inspection, matches 26 facts and flags one unsupported bulk placement introduced by the adapted input. The next original-report sentence supports placement; V2 adds only that fact. Five saved development/control rows retain both cohorts, empty/wrong-endpoint behavior and a false automatic-shutdown claim that the selected-field scorer misses. The current question screen has zero findings; a manual source question remains. Two draft sheets, platform staging and graph are actual outputs; no CSB figures are republished.",
+      "runs": "Source-adapted maintainer development artifacts plus planted controls; original-source coding-agent inventories, no human approval, paid modelAPI trial or heldout accuracy experiment.",
+      "verdict": "kept",
+      "why": "Expands the applicable public-report corpus while making source-curation failure, scorer blindspot and question-coverage gap explicit. Model/version/settings unknowns remain visible.",
+      "source": [
+        "docs/JOURNAL.md#102-separate-a-source-clarification-from-a-model-improvement",
+        "examples/from-description/mgpi/README.md",
+        "benchmarks/mgpi-development.json"
+      ]
+    },
+    {
+      "id": "A236",
+      "function": "ignition",
+      "date": "2026-10-30",
+      "change": "Preserve underscore/project-alias and multi-hyphen instrument/valve IDs in the hand-built model SVG exporter.",
+      "hypothesis": "Identifiers accepted by structural validation must render/export without assuming exactly one hyphen or silently renaming the supplied identity.",
+      "evidence": "MGPI LI_HYPO passes description structure checks but initially fails the full export with a split-unpacking ValueError. bubble now partitions the first hyphen, retains the entire final-element tag and displays separator-free IDs intact. A CLI regression covers LI_HYPO and FV-AREA-101 in SVG, Ignition and PI; 16 export tests pass. Independent visual review caught a crossing divider on the single-line alias; the repaired fallback omits it. Three existing pipeline export stages rerun through the existing orchestrator; standard-tag registered outputs remain unchanged.",
+      "runs": "Actual initial failing MGPI build retained; repaired actual build and CLIregression. No signalmapping or plant import.",
+      "verdict": "kept",
+      "why": "A real new corpus input exposed an avoidable exporter assumption. Preserve identity rather than forcing contributors to rename valid project aliases.",
+      "source": [
+        "docs/JOURNAL.md#103-let-a-new-corpus-case-expose-an-exporter-assumption",
+        "scripts/test_generate_any_model.py",
+        "scripts/test_description_workflow.py"
+      ]
     }
   ],
   "not_tried": [
@@ -4150,6 +4182,17 @@
         "docs/JOURNAL.md#71-carry-explicit-model-rejections-into-the-next-question-screen",
         "docs/REVIEW_LOOP.md",
         "docs/JOURNAL.md#72-make-a-reviewed-seed-bundle-consistent-across-its-outputs"
+      ]
+    },
+    {
+      "id": "N065",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Evaluate source-backed alarm-action and chemical-transfer questions on sparse level-indicator models without inferring installed interlocks or current operating safety from absent records.",
+      "why_not_yet": "The MGPI development model produces zero question-engine findings even though its source supports a useful notification-versus-unloading-shutdown question. A default catalog change needs source-grounded expected questions and false-positive checks across other source families; no new catalog rule is claimed.",
+      "source": [
+        "examples/from-description/mgpi/README.md",
+        "docs/JOURNAL.md#102-separate-a-source-clarification-from-a-model-improvement"
       ]
     }
   ]

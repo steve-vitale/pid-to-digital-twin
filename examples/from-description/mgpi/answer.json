@@ -1,0 +1,340 @@
+{
+  "model": {
+    "meta": {
+      "model_id": "mgpi-transfer-development",
+      "title": "MGPI transfer paths - source-adapted development draft",
+      "source_document": "source.txt",
+      "source_sha256": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8",
+      "source_report": "CSB 2017-01-I-KS, December2017; printedpages7-8,23",
+      "source_report_sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+      "authoring_exposure": [
+        "Maintainer read selected original narrative and saw report Figure3 during source scouting.",
+        "Source-adapted development case; not a blind or unfamiliar-description model experiment.",
+        "Independent original-source key not read before this candidate was frozen.",
+        "After first source audit, the original-source scope/key was expanded to resolve bulk placement; this is corrected development evidence, not model improvement."
+      ],
+      "unknowns": [
+        "All supplied IDs are project aliases, not reported plant tags.",
+        "Actual level units, alarm thresholds, pumps, valves, safeguards, line sizes and installed-state configuration remain unresolved.",
+        "HYPO_PROCESS is unnamed; the acid process destination is unspecified and must not be equated with it.",
+        "BL is a scope-boundary convention, not a common physical connection.",
+        "No automatic chemical-unloading shutdown is established; the level alarm is notification only."
+      ],
+      "assumptions": [
+        "No source-free process equipment or control equipment is added.",
+        "The later layout will propose geometry only; it will not infer equipment dimensions or nozzle positions."
+      ],
+      "source_scope_revision": "v2: adds the next section5.2 sentence explicitly locating the alarm in the bulk tank; v1 and its unsupported adaptation retained separately."
+    },
+    "units": [
+      {
+        "id": "HYPO_BULK",
+        "name": "Sodium hypochlorite bulk tank",
+        "type": "tank",
+        "source": "source.txt:L3-L3",
+        "assigned_tag": true,
+        "reported_capacity_gal": 6500,
+        "reported_concentration_pct": 12.5,
+        "storage_pressure_basis": "atmospheric"
+      },
+      {
+        "id": "HYPO_DAY",
+        "name": "Sodium hypochlorite day tank",
+        "type": "tank",
+        "source": "source.txt:L4-L4",
+        "assigned_tag": true
+      },
+      {
+        "id": "HYPO_PROCESS",
+        "name": "Unidentified sodium hypochlorite process vessel",
+        "type": "vessel",
+        "source": "source.txt:L4-L4",
+        "assigned_tag": true
+      },
+      {
+        "id": "ACID_DAY",
+        "name": "Sulfuric acid day tank",
+        "type": "tank",
+        "source": "source.txt:L5-L5",
+        "assigned_tag": true,
+        "reported_capacity_gal": 8500,
+        "reported_concentration_pct": 30
+      }
+    ],
+    "streams": [
+      {
+        "id": "H1",
+        "name": "Hypochlorite unloading across scope boundary",
+        "from": "BL",
+        "to": "HYPO_BULK",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "H2",
+        "name": "Hypochlorite bulk-to-day transfer",
+        "from": "HYPO_BULK",
+        "to": "HYPO_DAY",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "H3",
+        "name": "Hypochlorite day-to-process transfer",
+        "from": "HYPO_DAY",
+        "to": "HYPO_PROCESS",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "A1",
+        "name": "Sulfuric acid unloading across scope boundary",
+        "from": "BL",
+        "to": "ACID_DAY",
+        "source": "source.txt:L6-L6"
+      },
+      {
+        "id": "A2",
+        "name": "Sulfuric acid to unspecified process boundary",
+        "from": "ACID_DAY",
+        "to": "BL",
+        "source": "source.txt:L6-L6"
+      }
+    ],
+    "instruments": [
+      {
+        "tag": "LI_HYPO",
+        "unit": "HYPO_BULK",
+        "variable": "level",
+        "uom": "",
+        "description": "Level indication and high-level operator notification",
+        "source": "source.txt:L7-L7",
+        "assigned_tag": true,
+        "alarm_action_basis": "operator notification only; no automatic unloading shutdown"
+      }
+    ],
+    "final_elements": [],
+    "controllers": [],
+    "manual_valves": [],
+    "relief_devices": [],
+    "interlocks": [],
+    "limits": []
+  },
+  "layout": {
+    "sheet_px": [
+      3200,
+      2130
+    ],
+    "control_valve_stations": false,
+    "line_label_prefix": "UNSIZED",
+    "register_header": "# MGPI source-adapted development draft; project aliases; not a plant drawing register.",
+    "title_block": {
+      "project": "MGPI SOURCE-ADAPTED DEVELOPMENT",
+      "drawn_by": "MAINTAINER DRAFT",
+      "date": "UNKNOWN",
+      "revision": "DRAFT",
+      "scale": "NONE",
+      "notes": [
+        "NOT A DRAWING OF RECORD",
+        "SOURCE FACTS REQUIRE REVIEW",
+        "GEOMETRY IS PROPOSED ONLY",
+        "SIZE/SPEC ARE PLACEHOLDERS"
+      ]
+    },
+    "sheets": [
+      {
+        "id": "HYP",
+        "drawing": "MGPI-DRAFT-HYP",
+        "system": "HYPO_SCOPE",
+        "title": "HYPOCHLORITE PATH - ASSIGNED ALIASES",
+        "units": {
+          "HYPO_BULK": {
+            "shape": "vertical_vessel",
+            "cx": 800,
+            "top": 850,
+            "bottom": 1150,
+            "w": 200,
+            "head": 40,
+            "mount": {
+              "LI_HYPO": [
+                800,
+                650
+              ]
+            }
+          },
+          "HYPO_DAY": {
+            "shape": "vertical_vessel",
+            "cx": 1650,
+            "top": 850,
+            "bottom": 1150,
+            "w": 200,
+            "head": 40
+          },
+          "HYPO_PROCESS": {
+            "shape": "vertical_vessel",
+            "cx": 2500,
+            "top": 850,
+            "bottom": 1150,
+            "w": 200,
+            "head": 40
+          }
+        },
+        "flags": {
+          "H_IN": {
+            "stream": "H1",
+            "label": "HYPO DELIVERY - SCOPE",
+            "at": [
+              120,
+              1000
+            ],
+            "dir": "right"
+          }
+        },
+        "routes": [
+          {
+            "id": "H1",
+            "stream": "H1",
+            "from": {
+              "flag": "H_IN"
+            },
+            "to": {
+              "unit": "HYPO_BULK"
+            },
+            "pts": [
+              [
+                350,
+                1000
+              ],
+              [
+                700,
+                1000
+              ]
+            ]
+          },
+          {
+            "id": "H2",
+            "stream": "H2",
+            "from": {
+              "unit": "HYPO_BULK"
+            },
+            "to": {
+              "unit": "HYPO_DAY"
+            },
+            "pts": [
+              [
+                900,
+                1000
+              ],
+              [
+                1550,
+                1000
+              ]
+            ]
+          },
+          {
+            "id": "H3",
+            "stream": "H3",
+            "from": {
+              "unit": "HYPO_DAY"
+            },
+            "to": {
+              "unit": "HYPO_PROCESS"
+            },
+            "pts": [
+              [
+                1750,
+                1000
+              ],
+              [
+                2400,
+                1000
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ACID",
+        "drawing": "MGPI-DRAFT-ACID",
+        "system": "ACID_SCOPE",
+        "title": "ACID PATH - DESTINATION UNSPECIFIED",
+        "units": {
+          "ACID_DAY": {
+            "shape": "vertical_vessel",
+            "cx": 1400,
+            "top": 850,
+            "bottom": 1150,
+            "w": 200,
+            "head": 40
+          }
+        },
+        "flags": {
+          "A_IN": {
+            "stream": "A1",
+            "label": "ACID DELIVERY - SCOPE",
+            "at": [
+              120,
+              1000
+            ],
+            "dir": "right"
+          },
+          "A_OUT": {
+            "stream": "A2",
+            "label": "UNSPECIFIED PROCESS - SCOPE",
+            "at": [
+              2750,
+              1000
+            ],
+            "dir": "right"
+          }
+        },
+        "routes": [
+          {
+            "id": "A1",
+            "stream": "A1",
+            "from": {
+              "flag": "A_IN"
+            },
+            "to": {
+              "unit": "ACID_DAY"
+            },
+            "pts": [
+              [
+                350,
+                1000
+              ],
+              [
+                1300,
+                1000
+              ]
+            ]
+          },
+          {
+            "id": "A2",
+            "stream": "A2",
+            "from": {
+              "unit": "ACID_DAY"
+            },
+            "to": {
+              "flag": "A_OUT"
+            },
+            "pts": [
+              [
+                1500,
+                1000
+              ],
+              [
+                2750,
+                1000
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": {
+    "source.txt:L7-L7": "The added section 5.2 sentence explicitly places the alarmed indicator in the sodium hypochlorite bulk tank; LI_HYPO is its project alias. Its high-level alarm notifies operators; this indication does not automatically stop chemical unloading.",
+    "source.txt:L3-L3": "HYPO_BULK is an outdoor tank receiving 12.5% sodium hypochlorite through unloading piping. The report describes a 6,500-gallon tank and atmospheric storage.",
+    "source.txt:L6-L6": "For this model, H1 denotes the boundary-to-HYPO_BULK transfer, H2 the HYPO_BULK-to-HYPO_DAY transfer, H3 the HYPO_DAY-to-HYPO_PROCESS transfer, A1 the boundary-to-ACID_DAY transfer, and A2 the ACID_DAY-to-boundary transfer.",
+    "source.txt:L4-L4": "Sodium hypochlorite is transferred from HYPO_BULK into HYPO_DAY, a smaller tank inside Mod B, and then from HYPO_DAY into HYPO_PROCESS, an otherwise unidentified process vessel.",
+    "source.txt:L5-L5": "ACID_DAY is an outdoor day tank receiving 30% sulfuric acid in the unloading area. Its reported capacity is 8,500 gallons. Material goes from this tank directly into an unspecified process destination."
+  }
+}

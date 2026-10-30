@@ -1,0 +1,213 @@
+{
+  "sheet_px": [
+    3200,
+    2130
+  ],
+  "control_valve_stations": false,
+  "line_label_prefix": "UNSIZED",
+  "register_header": "# MGPI source-adapted development draft; project aliases; not a plant drawing register.",
+  "title_block": {
+    "project": "MGPI SOURCE-ADAPTED DEVELOPMENT",
+    "drawn_by": "MAINTAINER DRAFT",
+    "date": "UNKNOWN",
+    "revision": "DRAFT",
+    "scale": "NONE",
+    "notes": [
+      "NOT A DRAWING OF RECORD",
+      "SOURCE FACTS REQUIRE REVIEW",
+      "GEOMETRY IS PROPOSED ONLY",
+      "SIZE/SPEC ARE PLACEHOLDERS"
+    ]
+  },
+  "sheets": [
+    {
+      "id": "HYP",
+      "drawing": "MGPI-DRAFT-HYP",
+      "system": "HYPO_SCOPE",
+      "title": "HYPOCHLORITE PATH - ASSIGNED ALIASES",
+      "units": {
+        "HYPO_BULK": {
+          "shape": "vertical_vessel",
+          "cx": 800,
+          "top": 850,
+          "bottom": 1150,
+          "w": 200,
+          "head": 40,
+          "mount": {
+            "LI_HYPO": [
+              800,
+              650
+            ]
+          }
+        },
+        "HYPO_DAY": {
+          "shape": "vertical_vessel",
+          "cx": 1650,
+          "top": 850,
+          "bottom": 1150,
+          "w": 200,
+          "head": 40
+        },
+        "HYPO_PROCESS": {
+          "shape": "vertical_vessel",
+          "cx": 2500,
+          "top": 850,
+          "bottom": 1150,
+          "w": 200,
+          "head": 40
+        }
+      },
+      "flags": {
+        "H_IN": {
+          "stream": "H1",
+          "label": "HYPO DELIVERY - SCOPE",
+          "at": [
+            120,
+            1000
+          ],
+          "dir": "right"
+        }
+      },
+      "routes": [
+        {
+          "id": "H1",
+          "stream": "H1",
+          "from": {
+            "flag": "H_IN"
+          },
+          "to": {
+            "unit": "HYPO_BULK"
+          },
+          "pts": [
+            [
+              350,
+              1000
+            ],
+            [
+              700,
+              1000
+            ]
+          ]
+        },
+        {
+          "id": "H2",
+          "stream": "H2",
+          "from": {
+            "unit": "HYPO_BULK"
+          },
+          "to": {
+            "unit": "HYPO_DAY"
+          },
+          "pts": [
+            [
+              900,
+              1000
+            ],
+            [
+              1550,
+              1000
+            ]
+          ]
+        },
+        {
+          "id": "H3",
+          "stream": "H3",
+          "from": {
+            "unit": "HYPO_DAY"
+          },
+          "to": {
+            "unit": "HYPO_PROCESS"
+          },
+          "pts": [
+            [
+              1750,
+              1000
+            ],
+            [
+              2400,
+              1000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ACID",
+      "drawing": "MGPI-DRAFT-ACID",
+      "system": "ACID_SCOPE",
+      "title": "ACID PATH - DESTINATION UNSPECIFIED",
+      "units": {
+        "ACID_DAY": {
+          "shape": "vertical_vessel",
+          "cx": 1400,
+          "top": 850,
+          "bottom": 1150,
+          "w": 200,
+          "head": 40
+        }
+      },
+      "flags": {
+        "A_IN": {
+          "stream": "A1",
+          "label": "ACID DELIVERY - SCOPE",
+          "at": [
+            120,
+            1000
+          ],
+          "dir": "right"
+        },
+        "A_OUT": {
+          "stream": "A2",
+          "label": "UNSPECIFIED PROCESS - SCOPE",
+          "at": [
+            2750,
+            1000
+          ],
+          "dir": "right"
+        }
+      },
+      "routes": [
+        {
+          "id": "A1",
+          "stream": "A1",
+          "from": {
+            "flag": "A_IN"
+          },
+          "to": {
+            "unit": "ACID_DAY"
+          },
+          "pts": [
+            [
+              350,
+              1000
+            ],
+            [
+              1300,
+              1000
+            ]
+          ]
+        },
+        {
+          "id": "A2",
+          "stream": "A2",
+          "from": {
+            "unit": "ACID_DAY"
+          },
+          "to": {
+            "flag": "A_OUT"
+          },
+          "pts": [
+            [
+              1500,
+              1000
+            ],
+            [
+              2750,
+              1000
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

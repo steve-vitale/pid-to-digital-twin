@@ -1,0 +1,19 @@
+{
+  "schema": "source-truth-freeze/1",
+  "frozen_at_utc": "2026-10-30T20:25:53.541178+00:00",
+  "source_sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+  "source_method": "pypdf 6.14.2; bounded narrative extraction",
+  "candidate_seen": false,
+  "candidate_contents_received": false,
+  "independence": "Fresh source reviewer authored facts manually from original excerpts; task supplied aliases and projection conventions only.",
+  "files": {
+    "expected_native.json": "8b59d5b931d48b20ed2571b2b9cb284b727867fbdafddf12891ce816def49ae9",
+    "facts.json": "a3327aad29ac19c1da9bc5b044357825a2edf10ce1338d71bffd4f7a84b940cb",
+    "original_excerpt_private.txt": "9641aaa50e0b7a535a1d51e3063279716bedd836bd474195ccbc621271331f41",
+    "prepare_truth.py": "267cf8c35b4847c40e68edc64ff5dbfb7b33f279dfb2cc2c1a6bdfe2b28b15df",
+    "source_inventory.json": "96782e724fc9fad637666faf3777c2dfde9b54613452fe826b27bd9034eb4691"
+  },
+  "write_scope": "Only this private source-truth directory; public repository read-only.",
+  "blocking_scope_problem": false,
+  "limitations": "Agent-authored source key; partial native projection; candidate-independent manual source interpretation requires separate review."
+}

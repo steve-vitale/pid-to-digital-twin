@@ -481,6 +481,14 @@ The following is a plan for the missing evaluation, not a completed experiment o
    counts of discrepancies are not hours saved. No composite success rate should hide an unsupported safety or
    control claim behind good symbol coverage.
 
-No new interpretation run, independent source inventory, rendered-drawing review or timed engineer trial is
-claimed by this plan. It does not authorize changes to existing scorer criteria, the generated answer keys or
-the historical matrix results.
+The [MGPI development case](../examples/from-description/mgpi/README.md) now supplies a separate coding-agent
+inventory of bounded original narrative and a source-adapted model/draft workflow. Its initial adaptation added
+one unsupported placement; expanding the original-source scope resolves it. The two source/key versions stay
+separate, so their score difference is not model improvement. The author saw a source figure during scouting;
+the input is adapted prose. This is not the unfamiliar-original-description measurement planned above.
+
+Its wrong-endpoint control is detected by the selected-field scorer; its false automatic-shutdown claim is not.
+The generated question screen also has zero findings on this sparse case. Source/claim interpretation, useful
+question coverage and rendered engineering quality therefore remain separate assessments. No timed engineer
+trial, held-out accuracy, or broad description-to-P&ID success rate is claimed. The source inventory is agent
+work, not human approval. Existing historical criteria and results retain their original scopes.

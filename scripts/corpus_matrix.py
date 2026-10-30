@@ -128,7 +128,7 @@ ROW_INPUTS = {
     3: [i for i in KEYED if i != "te-rev-c-scan-L3"] + ["own-drawing-extraction"] + AGENT_KEYED,
     4: ["te-rev-a", "te-rev-c", "te-rev-d", "bayer-rt1", "dexpi"] + list(DEXPI_READER_INPUTS)
        + ["hai-dcs-loops", "omre-1958-pid", "pronto-fig1"],
-    5: ["te-model", "bayer-model", "water-fixture", "idaes-hda", "dwsim-fossee"],
+    5: ["te-model", "bayer-model", "water-fixture", "idaes-hda", "dwsim-fossee", "mgpi-model"],
     6: ["te-braatz-runs", "pronto-day3", "pronto-day2", "pronto-day4", "skab", "hai-21.03"] + HELDOUT_HISTORIAN,
     7: ["dexpi"] + list(DEXPI_READER_INPUTS) + ["dexpi-1.2-cross-vendor"],
     8: ["open100-dev", "open100-holdout", "dexpi", "te-rev-a", "te-rev-c", "te-rev-d", "bayer-rt1",

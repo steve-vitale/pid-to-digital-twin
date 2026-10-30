@@ -283,7 +283,7 @@ def _point_prefix(model):
 
 def bubble(item, x, y):
     """ISA-5.1 shared-display instrument (circle in square) or control valve, tagged for binding."""
-    letters, num = item["tag"].split("-")
+    letters, separator, num = item["tag"].partition("-")
     attrs = (f'id={quoteattr(item["tag"])} data-tag={quoteattr(item["tag"])} data-unit={quoteattr(item["unit"])} '
              f'data-uom={quoteattr(item["uom"])}')
     title = f'<title>{escape(item["tag"])}: {escape(item["description"])}</title>'
@@ -291,12 +291,15 @@ def bubble(item, x, y):
         body = ('<path class="inst" d="M-14 -8 L14 8 L14 -8 L-14 8 Z"/>'
                 '<line class="inst" x1="0" y1="0" x2="0" y2="-16"/>'
                 '<path class="inst" d="M-9 -16 A9 9 0 0 1 9 -16 Z"/>'
-                f'<text class="ti" y="22" text-anchor="middle">{escape(letters)}-{escape(num)}</text>')
+                f'<text class="ti" y="22" text-anchor="middle">{escape(item["tag"])}</text>')
     else:
+        split_label = bool(separator and letters and num)
+        label = (f'<text class="ti" y="-4" text-anchor="middle">{escape(letters)}</text>'
+                 f'<text class="ti" y="11" text-anchor="middle">{escape(num)}</text>') if split_label else (
+                 f'<text class="ti" y="4" text-anchor="middle">{escape(item["tag"])}</text>')
+        divider = '<line class="inst" x1="-17" y1="0" x2="17" y2="0"/>' if split_label else ''
         body = ('<rect class="inst" x="-19" y="-19" width="38" height="38"/>'
-                '<circle class="inst" r="17"/><line class="inst" x1="-17" y1="0" x2="17" y2="0"/>'
-                f'<text class="ti" y="-4" text-anchor="middle">{escape(letters)}</text>'
-                f'<text class="ti" y="11" text-anchor="middle">{escape(num)}</text>')
+                '<circle class="inst" r="17"/>' + divider + label)
     return f'<g {attrs} transform="translate({x},{y})">{title}{body}</g>'
 
 

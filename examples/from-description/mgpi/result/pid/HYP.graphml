@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d12" for="node" attr.name="model_ref" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="tank1">
+      <data key="d0">tank</data>
+      <data key="d1">698.0</data>
+      <data key="d2">902.0</data>
+      <data key="d3">848.0</data>
+      <data key="d4">1152.0</data>
+      <data key="d11">HYPO_BULK</data>
+      <data key="d12">unit:HYPO_BULK</data>
+    </node>
+    <node id="tank2">
+      <data key="d0">tank</data>
+      <data key="d1">1548.0</data>
+      <data key="d2">1752.0</data>
+      <data key="d3">848.0</data>
+      <data key="d4">1152.0</data>
+      <data key="d11">HYPO_DAY</data>
+      <data key="d12">unit:HYPO_DAY</data>
+    </node>
+    <node id="tank3">
+      <data key="d0">tank</data>
+      <data key="d1">2398.0</data>
+      <data key="d2">2602.0</data>
+      <data key="d3">848.0</data>
+      <data key="d4">1152.0</data>
+      <data key="d11">HYPO_PROCESS</data>
+      <data key="d12">unit:HYPO_PROCESS</data>
+    </node>
+    <node id="inlet_outlet1">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">120</data>
+      <data key="d2">350</data>
+      <data key="d3">975.0</data>
+      <data key="d4">1025.0</data>
+      <data key="d11">BATTERY LIMIT / HYPO DELIVERY - SCOPE</data>
+      <data key="d12">stream:H1</data>
+    </node>
+    <node id="arrow1">
+      <data key="d0">arrow</data>
+      <data key="d1">510.0</data>
+      <data key="d2">540.0</data>
+      <data key="d3">994.0</data>
+      <data key="d4">1006.0</data>
+    </node>
+    <node id="arrow2">
+      <data key="d0">arrow</data>
+      <data key="d1">1210.0</data>
+      <data key="d2">1240.0</data>
+      <data key="d3">994.0</data>
+      <data key="d4">1006.0</data>
+    </node>
+    <node id="arrow3">
+      <data key="d0">arrow</data>
+      <data key="d1">2060.0</data>
+      <data key="d2">2090.0</data>
+      <data key="d3">994.0</data>
+      <data key="d4">1006.0</data>
+    </node>
+    <node id="instrumentation1">
+      <data key="d0">instrumentation</data>
+      <data key="d1">775</data>
+      <data key="d2">825</data>
+      <data key="d3">625</data>
+      <data key="d4">675</data>
+      <data key="d11">LI_HYPO </data>
+      <data key="d12">LI_HYPO</data>
+    </node>
+    <node id="connector1">
+      <data key="d0">connector</data>
+      <data key="d1">796</data>
+      <data key="d2">804</data>
+      <data key="d3">846</data>
+      <data key="d4">854</data>
+    </node>
+    <node id="connector2">
+      <data key="d0">connector</data>
+      <data key="d1">521.0</data>
+      <data key="d2">529.0</data>
+      <data key="d3">996.0</data>
+      <data key="d4">1004.0</data>
+    </node>
+    <node id="connector3">
+      <data key="d0">connector</data>
+      <data key="d1">1221.0</data>
+      <data key="d2">1229.0</data>
+      <data key="d3">996.0</data>
+      <data key="d4">1004.0</data>
+    </node>
+    <node id="connector4">
+      <data key="d0">connector</data>
+      <data key="d1">2071.0</data>
+      <data key="d2">2079.0</data>
+      <data key="d3">996.0</data>
+      <data key="d4">1004.0</data>
+    </node>
+    <edge source="connector1" target="instrumentation1"><data key="d9">solid</data></edge>
+    <edge source="connector1" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="inlet_outlet1"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector3" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector3" target="tank2"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="tank2"><data key="d9">solid</data></edge>
+    <edge source="connector4" target="tank3"><data key="d9">solid</data></edge>
+  </graph>
+</graphml>

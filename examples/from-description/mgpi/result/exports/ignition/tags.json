@@ -1,0 +1,144 @@
+{
+  "name": "",
+  "tagType": "Provider",
+  "tags": [
+    {
+      "name": "_types_",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "Tank",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": [
+            {
+              "name": "LevelIndicationAndHighLevelOperatorNotif",
+              "tagType": "AtomicTag",
+              "valueSource": "opc",
+              "dataType": "Float8",
+              "engUnit": "",
+              "readOnly": true,
+              "documentation": "LI_HYPO | source.txt:L7-L7 | Level indication and high-level operator notification | source check: unverified | ops review: unverified",
+              "opcServer": {
+                "bindType": "parameter",
+                "binding": "{OPCServer}"
+              },
+              "opcItemPath": {
+                "bindType": "parameter",
+                "binding": "{BasePath}.LI_HYPO"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tank_HypoDay",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": []
+        },
+        {
+          "name": "Vessel",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": []
+        },
+        {
+          "name": "Tank_AcidDay",
+          "tagType": "UdtType",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": ""
+            },
+            "OPCServer": {
+              "dataType": "String",
+              "value": "Ignition OPC UA Server"
+            }
+          },
+          "tags": []
+        }
+      ]
+    },
+    {
+      "name": "mgpi-transfer-development",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "name": "HYPO_BULK",
+          "tagType": "UdtInstance",
+          "typeId": "Tank",
+          "documentation": "Sodium hypochlorite bulk tank | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=mgpi-transfer-development.HYPO_BULK"
+            }
+          }
+        },
+        {
+          "name": "HYPO_DAY",
+          "tagType": "UdtInstance",
+          "typeId": "Tank_HypoDay",
+          "documentation": "Sodium hypochlorite day tank | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=mgpi-transfer-development.HYPO_DAY"
+            }
+          }
+        },
+        {
+          "name": "HYPO_PROCESS",
+          "tagType": "UdtInstance",
+          "typeId": "Vessel",
+          "documentation": "Unidentified sodium hypochlorite process vessel | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=mgpi-transfer-development.HYPO_PROCESS"
+            }
+          }
+        },
+        {
+          "name": "ACID_DAY",
+          "tagType": "UdtInstance",
+          "typeId": "Tank_AcidDay",
+          "documentation": "Sulfuric acid day tank | source check: unverified | ops review: unverified",
+          "parameters": {
+            "BasePath": {
+              "dataType": "String",
+              "value": "ns=1;s=mgpi-transfer-development.ACID_DAY"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+ "about": "Answer key emitted by scripts/draw_pid_from_model.py from the same model that drew the sheets. Scoring against it is a ROUND TRIP: it measures how faithfully a reader recovers our own clean house-style drawing, not real-plant accuracy.",
+ "model": "model.json",
+ "sheets": {
+  "HYP": {
+   "drawing": "MGPI-DRAFT-HYP",
+   "system": "HYPO_SCOPE",
+   "title": "HYPOCHLORITE PATH - ASSIGNED ALIASES",
+   "size_px": [
+    3200,
+    2130
+   ],
+   "symbols": {
+    "tank1": {
+     "class": "tank",
+     "box": [
+      698.0,
+      848.0,
+      902.0,
+      1152.0
+     ],
+     "text": "HYPO_BULK",
+     "model_ref": "unit:HYPO_BULK",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "tank2": {
+     "class": "tank",
+     "box": [
+      1548.0,
+      848.0,
+      1752.0,
+      1152.0
+     ],
+     "text": "HYPO_DAY",
+     "model_ref": "unit:HYPO_DAY",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "tank3": {
+     "class": "tank",
+     "box": [
+      2398.0,
+      848.0,
+      2602.0,
+      1152.0
+     ],
+     "text": "HYPO_PROCESS",
+     "model_ref": "unit:HYPO_PROCESS",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "inlet_outlet1": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      975.0,
+      350,
+      1025.0
+     ],
+     "text": "BATTERY LIMIT / HYPO DELIVERY - SCOPE",
+     "model_ref": "stream:H1",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "instrumentation1": {
+     "class": "instrumentation",
+     "box": [
+      775,
+      625,
+      825,
+      675
+     ],
+     "text": "LI_HYPO ",
+     "model_ref": "LI_HYPO",
+     "model_kind": "instrument",
+     "drafting_addition": false
+    }
+   },
+   "edges": [
+    [
+     "connector1",
+     "instrumentation1"
+    ],
+    [
+     "connector1",
+     "tank1"
+    ],
+    [
+     "connector2",
+     "inlet_outlet1"
+    ],
+    [
+     "connector2",
+     "tank1"
+    ],
+    [
+     "connector3",
+     "tank1"
+    ],
+    [
+     "connector3",
+     "tank2"
+    ],
+    [
+     "connector4",
+     "tank2"
+    ],
+    [
+     "connector4",
+     "tank3"
+    ]
+   ],
+   "signal_edges": []
+  },
+  "ACID": {
+   "drawing": "MGPI-DRAFT-ACID",
+   "system": "ACID_SCOPE",
+   "title": "ACID PATH - DESTINATION UNSPECIFIED",
+   "size_px": [
+    3200,
+    2130
+   ],
+   "symbols": {
+    "tank1": {
+     "class": "tank",
+     "box": [
+      1298.0,
+      848.0,
+      1502.0,
+      1152.0
+     ],
+     "text": "ACID_DAY",
+     "model_ref": "unit:ACID_DAY",
+     "model_kind": "unit",
+     "drafting_addition": false
+    },
+    "inlet_outlet1": {
+     "class": "inlet/outlet",
+     "box": [
+      120,
+      975.0,
+      350,
+      1025.0
+     ],
+     "text": "BATTERY LIMIT / ACID DELIVERY - SCOPE",
+     "model_ref": "stream:A1",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    },
+    "inlet_outlet2": {
+     "class": "inlet/outlet",
+     "box": [
+      2750,
+      975.0,
+      2980,
+      1025.0
+     ],
+     "text": "BATTERY LIMIT / UNSPECIFIED PROCESS - SCOPE",
+     "model_ref": "stream:A2",
+     "model_kind": "stream_end",
+     "drafting_addition": false
+    }
+   },
+   "edges": [
+    [
+     "connector1",
+     "inlet_outlet1"
+    ],
+    [
+     "connector1",
+     "tank1"
+    ],
+    [
+     "connector2",
+     "inlet_outlet2"
+    ],
+    [
+     "connector2",
+     "tank1"
+    ]
+   ],
+   "signal_edges": []
+  }
+ }
+}

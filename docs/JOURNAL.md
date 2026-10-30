@@ -4817,3 +4817,54 @@ workflow commands, checked six in-process snapshot methods and compared seven se
 The reader checked the linked files and rendered drawing/graphic, with no factual blocker. The suggested arrival
 improvement was a direct walkthrough link in the accompanying caption. This is a narrow documentation/data-path
 review, not human engineering approval, a new protocol test or a renewed review of every feature.
+
+## 102. Separate a source clarification from a model improvement
+
+The MGPI transfer-path case extends description work beyond the authored water-utility fixtures with a
+project-authored adaptation of a public CSB report. A separate coding agent made a bounded original-narrative
+inventory/key without seeing the initial candidate. Both were frozen before comparison. The author had seen
+Figure 3 during scouting, so this is development evidence, not a blind original-description model trial.
+
+The initial adapted input placed a level indicator on the bulk tank, but the permitted paragraph only said
+tank. The model followed its supplied input: the source adaptation, rather than language interpretation, was
+unsupported. The V1 native comparison retains 26 matched facts and one unexpected placement. The next original
+sentence explicitly identifies the bulk tank. V2 enlarges the allowed source/key and adds exactly that fact;
+27 matched facts therefore cannot be reported as an algorithm gain. Both versions, their scopes, the first
+failed review and post-review exposure remain separate. These are agent keys, not CSB keys or human approval.
+
+The current two-sheet draft bundle is built through prepare/check/build. Distinct chemistry paths and proposed
+geometry remain explicit; BL is a scope boundary, not a physical mixing junction. Original report figures are
+not republished. Capacities, concentrations and notification-only alarm action remain sourced draft attributes.
+The literal native-fact scorer grades none of those attributes. Empty/wrong-endpoint controls are detected, but
+a false automatic-shutdown attribute retains a perfect selected-field score. The source inventory contradicts
+that planted claim; format checks and selected metrics cannot replace source/engineering review.
+
+The question engine produces zero findings on this sparse model. The case retains a useful manual source
+question about operator notification versus automatic unloading shutdown and records the catalog gap as N065.
+Current installed state, complete safeguards, accountable owners, company handoff acceptance and benefit remain
+unresolved. The new matrix cell measures platform export plumbing only; it supplies no interpretation score.
+
+## 103. Let a new corpus case expose an exporter assumption
+
+The MGPI alias LI_HYPO passed the description contract but its first full build failed in generate.bubble:
+splitting a tag into exactly two hyphen-separated parts raised ValueError. The renderer/exporter now preserves
+separator-free aliases intact and splits only the first hyphen for conventional two-line labels. Valve labels
+retain the complete supplied identity. Standard one-hyphen rendering is unchanged.
+
+An actual CLI regression exercises an underscore alias and a multi-hyphen final-element tag across SVG,
+Ignition and PI staging, with unchanged input bytes. The 16 exporter tests pass. The first regression fixture
+omitted required source_document metadata and was corrected; that test-construction failure is not attributed
+to the exporter repair. The original failing MGPI build is retained privately. Seven existing export commands
+were executed through the existing orchestrator on exactly three selected stages; no unrelated recorded,
+runtime, 3D or tour stage is asserted to have been rebuilt. Existing registered outputs remain unchanged except
+the registry deliberately extended for the new case; dependent freshness returns after the actual exports.
+
+Independent visual review then caught a divider crossing the new single-line alias in the native SVG. The
+fallback now omits that divider, while conventional split labels retain their original rendering. The CLI
+regression checks the alias has no crossing divider; the repaired native output is rendered again for review.
+
+The code change also made 48 matrix cells stale through their recorded dependency closures. Each was actually
+rerun with the existing row/input selectors; the other 47 complete cell records were retained. The final matrix
+has 64 passes, 23 failures and eight not-applicable cells. Its additional pass is the MGPI export-plumbing cell,
+not an interpretation result. The headline and claim checker's expected count move from 63 to 64 together;
+existing drift controls still reject changed results. Historical red cells and evaluation criteria remain.

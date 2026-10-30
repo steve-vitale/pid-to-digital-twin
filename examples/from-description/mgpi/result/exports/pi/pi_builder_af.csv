@@ -1,0 +1,9 @@
+﻿Selected(x),Parent,Name,ObjectType,Description,Template,AttributeType,AttributeDefaultUOM,AttributeDataReference,AttributeConfigString
+x,,Tank,ElementTemplate,Seed model unit type: tank,,,,,
+x,,Vessel,ElementTemplate,Seed model unit type: vessel,,,,,
+x,,mgpi-transfer-development,Element,MGPI transfer paths - source-adapted development draft,,,,,
+x,mgpi-transfer-development,HYPO_BULK,Element,Sodium hypochlorite bulk tank | source check: unverified | ops review: unverified,Tank,,,,
+x,mgpi-transfer-development\HYPO_BULK,LevelIndicationAndHighLevelOperatorNotif,Attribute,,,Double,,PI Point,\\%Server%\mgpi-transfer-development.LI_HYPO.PV
+x,mgpi-transfer-development,HYPO_DAY,Element,Sodium hypochlorite day tank | source check: unverified | ops review: unverified,Tank,,,,
+x,mgpi-transfer-development,HYPO_PROCESS,Element,Unidentified sodium hypochlorite process vessel | source check: unverified | ops review: unverified,Vessel,,,,
+x,mgpi-transfer-development,ACID_DAY,Element,Sulfuric acid day tank | source check: unverified | ops review: unverified,Tank,,,,

@@ -1,0 +1,44 @@
+{
+  "schema": "source-truth-freeze/2",
+  "frozen_at_utc": "2026-10-30T20:27:43.087580+00:00",
+  "source_sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+  "source_scope": "V1 section 2.3 pages 7-8 and first selected section 5.2 page-23 paragraph sentences, explicitly extended by one immediately following sentence identifying bulk-tank placement.",
+  "added_locator": {
+    "printed_page": 23,
+    "pdf_page": 23,
+    "section": "5.2",
+    "paragraph": "same actual level-indicator paragraph; immediately following sentence concerning the 7:59 AM alarm",
+    "boundary": "one sentence only; ends with acid beginning to flow into the tank"
+  },
+  "parent_version": {
+    "freeze_sha256_raw": "7c8072565eef3f4d6d9fdd6e532805642303472d861e5d8ff432cb0e289e454f",
+    "source_inventory_sha256_raw": "96782e724fc9fad637666faf3777c2dfde9b54613452fe826b27bd9034eb4691",
+    "expected_native_sha256_raw": "8b59d5b931d48b20ed2571b2b9cb284b727867fbdafddf12891ce816def49ae9",
+    "facts_sha256_raw": "a3327aad29ac19c1da9bc5b044357825a2edf10ce1338d71bffd4f7a84b940cb",
+    "initial_original_source_review_sha256_raw": "e1d96d96fc9e8eca2652e7e86f7b21aa77234c51c5b05e5c1e534106daea1edd"
+  },
+  "only_native_fact_added": [
+    "instruments",
+    "LI_HYPO",
+    "unit",
+    "HYPO_BULK"
+  ],
+  "native_facts_removed": [],
+  "v1_artifacts_unchanged": true,
+  "candidate_seen_before_v2": true,
+  "model_gain_claim": false,
+  "score_change_explanation": "Any score change with the unchanged initial candidate is due exclusively to enlarged source/key scope.",
+  "automatic_shutdown_criterion": "False automatic unloading/transfer shutdown remains contradicted by the preceding original paragraph. Current native-facts scorer excludes alarm/interlock/limit behavior and cannot grade that claim.",
+  "original_source_check_vs_inventory_revision": "Original PDF verifies the added placement statement. This private inventory/key revision does not itself revise a public inventory, publish a case, or validate a rendered diagram.",
+  "files": {
+    "added_original_sentence_private.txt": "d4939fd48327d114c17a19e9b18c10f3ef3dfcc2e96f2ebd2880d53965e06991",
+    "expected_native.json": "584b1f35db99ba7deb46fe529ed7ddfbc59f27bcf3322e43f9d213a735215507",
+    "facts.json": "912ed6dacaadd96f5c9d41fc4a0b2a8cb9d05dfa0a6e480b8688bb02863bd588",
+    "source_inventory.json": "facb294d3ccef0774f79523b9c0033c60e6af3b1baabefe5e7ed00f6be75b2ce"
+  },
+  "generator_script_sha256_raw": "06d31be798e2e07e0885c9e699dd48a5b0003d004656567ca3b1b8d3338c160a",
+  "public_changes": false,
+  "network_or_model_calls": false,
+  "source_images_or_figures_examined": false,
+  "limitation": "Agent-authored original-source inventory, no independent human engineering validation and no broad feature or generalization claim."
+}

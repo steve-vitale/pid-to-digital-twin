@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "model_id": "mgpi-transfer-development",
+    "title": "MGPI transfer paths - source-adapted development draft",
+    "source_document": "source.txt",
+    "source_sha256": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8",
+    "source_report": "CSB 2017-01-I-KS, December2017; printedpages7-8,23",
+    "source_report_sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+    "authoring_exposure": [
+      "Maintainer read selected original narrative and saw report Figure3 during source scouting.",
+      "Source-adapted development case; not a blind or unfamiliar-description model experiment.",
+      "Independent original-source key not read before this candidate was frozen.",
+      "After first source audit, the original-source scope/key was expanded to resolve bulk placement; this is corrected development evidence, not model improvement."
+    ],
+    "unknowns": [
+      "All supplied IDs are project aliases, not reported plant tags.",
+      "Actual level units, alarm thresholds, pumps, valves, safeguards, line sizes and installed-state configuration remain unresolved.",
+      "HYPO_PROCESS is unnamed; the acid process destination is unspecified and must not be equated with it.",
+      "BL is a scope-boundary convention, not a common physical connection.",
+      "No automatic chemical-unloading shutdown is established; the level alarm is notification only."
+    ],
+    "assumptions": [
+      "No source-free process equipment or control equipment is added.",
+      "The later layout will propose geometry only; it will not infer equipment dimensions or nozzle positions."
+    ],
+    "source_scope_revision": "v2: adds the next section5.2 sentence explicitly locating the alarm in the bulk tank; v1 and its unsupported adaptation retained separately."
+  },
+  "units": [
+    {
+      "id": "HYPO_BULK",
+      "name": "Sodium hypochlorite bulk tank",
+      "type": "tank",
+      "source": "source.txt:L3-L3",
+      "assigned_tag": true,
+      "reported_capacity_gal": 6500,
+      "reported_concentration_pct": 12.5,
+      "storage_pressure_basis": "atmospheric"
+    },
+    {
+      "id": "HYPO_DAY",
+      "name": "Sodium hypochlorite day tank",
+      "type": "tank",
+      "source": "source.txt:L4-L4",
+      "assigned_tag": true
+    },
+    {
+      "id": "HYPO_PROCESS",
+      "name": "Unidentified sodium hypochlorite process vessel",
+      "type": "vessel",
+      "source": "source.txt:L4-L4",
+      "assigned_tag": true
+    },
+    {
+      "id": "ACID_DAY",
+      "name": "Sulfuric acid day tank",
+      "type": "tank",
+      "source": "source.txt:L5-L5",
+      "assigned_tag": true,
+      "reported_capacity_gal": 8500,
+      "reported_concentration_pct": 30
+    }
+  ],
+  "streams": [
+    {
+      "id": "H1",
+      "name": "Hypochlorite unloading across scope boundary",
+      "from": "BL",
+      "to": "HYPO_BULK",
+      "source": "source.txt:L6-L6"
+    },
+    {
+      "id": "H2",
+      "name": "Hypochlorite bulk-to-day transfer",
+      "from": "HYPO_BULK",
+      "to": "HYPO_DAY",
+      "source": "source.txt:L6-L6"
+    },
+    {
+      "id": "H3",
+      "name": "Hypochlorite day-to-process transfer",
+      "from": "HYPO_DAY",
+      "to": "HYPO_PROCESS",
+      "source": "source.txt:L6-L6"
+    },
+    {
+      "id": "A1",
+      "name": "Sulfuric acid unloading across scope boundary",
+      "from": "BL",
+      "to": "ACID_DAY",
+      "source": "source.txt:L6-L6"
+    },
+    {
+      "id": "A2",
+      "name": "Sulfuric acid to unspecified process boundary",
+      "from": "ACID_DAY",
+      "to": "BL",
+      "source": "source.txt:L6-L6"
+    }
+  ],
+  "instruments": [
+    {
+      "tag": "LI_HYPO",
+      "unit": "HYPO_BULK",
+      "variable": "level",
+      "uom": "",
+      "description": "Level indication and high-level operator notification",
+      "source": "source.txt:L7-L7",
+      "assigned_tag": true,
+      "alarm_action_basis": "High level automatically shuts down unloading."
+    }
+  ],
+  "final_elements": [],
+  "controllers": [],
+  "manual_valves": [],
+  "relief_devices": [],
+  "interlocks": [],
+  "limits": []
+}

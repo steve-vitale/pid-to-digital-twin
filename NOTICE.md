@@ -83,3 +83,8 @@ as `assets/fonts/AtkinsonHyperlegible-Regular.ttf`, with the licence text in `as
 (source: the google/fonts repository, `ofl/atkinsonhyperlegible/`), and the OPEN100 structural tour uses it too.
 The font is bundled unmodified; the OFL allows bundling and
 redistribution with software, but not selling the font by itself.
+
+
+## MGPI source-adapted development case
+
+The model, adapted narrative, draft drawings and derived source inventories in `examples/from-description/mgpi/` are repository-authored development artifacts. They cite the U.S. Chemical Safety and Hazard Investigation Board, *Key Lessons for Preventing Inadvertent Mixing During Chemical Unloading Operations*, report 2017-01-I-KS, December 2017, https://www.csb.gov/file.aspx?DocumentId=6047. The original PDF is fetched only into ignored local source storage and is not redistributed. No CSB report figure or third-party photograph is republished. Project aliases, proposed geometry and agent-derived interpretations are not CSB plant tags, answer keys, approved designs or current installed-state evidence. See the case guide for exposure and source-revision limits.

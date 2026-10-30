@@ -1,0 +1,1690 @@
+{
+  "case_total": 2,
+  "code_sha256": {
+    "benchmark.py": "35578237d1f8bd01e3e509847ecc5708983230468d9996218e34c4c0e8d717f3"
+  },
+  "controls": {
+    "mgpi-v1": {
+      "empty": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 26
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 3
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 8
+        }
+      },
+      "expected": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 26,
+          "tp": 26,
+          "truth": 26
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 3,
+          "tp": 3,
+          "truth": 3
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      }
+    },
+    "mgpi-v2": {
+      "empty": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 8
+        }
+      },
+      "expected": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 27,
+          "tp": 27,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      }
+    }
+  },
+  "hash_method": "SHA256; CRLF normalized to LF for declared text extensions, raw binary otherwise",
+  "limits": [
+    "Compare only the same cohort and scoring contract; model identity is contributor-declared, not provider-attested.",
+    "Each replicate pools counts over its cases; summary reports mean/range/stdev over replicates, not a significance test or winner.",
+    "Missing/failed attempted answers score empty; unattempted cases remain visible and create different comparison cohorts.",
+    "Public keys and retrospective registration do not establish blindness. Synthetic controls and corrected/development results are separate.",
+    "Description facts grade literal selected fields only: no prose names, source validity, dimensions, limits, layout quality or plant truth."
+  ],
+  "registration": "No original-text unfamiliar-description accuracy trial, heldout score or universal model comparison. Initial input adaptation fails its bounded-source review; expanded evidence resolves placement without a model algorithm change.",
+  "results": [
+    {
+      "case_count": 1,
+      "cohort": "47e7e699d0edc5988507cc22428327c54b92c22cc54505e9e608500c7e214aee",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v1"
+      },
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 27,
+          "tp": 26,
+          "truth": 26
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 4,
+          "tp": 3,
+          "truth": 3
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "interface": "ongoing maintainer coding-agent session",
+      "method": "initial source adaptation and model",
+      "metrics": {
+        "controllers": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "facts": {
+          "f1": 0.9811320754716981,
+          "precision": 0.9629629629629629,
+          "recall": 1.0
+        },
+        "final_elements": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "instruments": {
+          "f1": 0.8571428571428571,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "Codex authoring session; exact model identifier unavailable",
+        "provider": "OpenAI",
+        "version": "unknown"
+      },
+      "not_attempted": [
+        "mgpi-v2"
+      ],
+      "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "examples/from-description/mgpi/protocol.json",
+          "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+        },
+        {
+          "path": "scripts/description_workflow.py",
+          "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+        }
+      ],
+      "rows": [
+        {
+          "case": "mgpi-v1",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "facts": {
+              "predicted": 27,
+              "tp": 26,
+              "truth": 26
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "instruments": {
+              "predicted": 4,
+              "tp": 3,
+              "truth": 3
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 15,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 8,
+              "tp": 8,
+              "truth": 8
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [],
+            "unexpected_facts": [
+              [
+                "instruments",
+                "LI_HYPO",
+                "unit",
+                "HYPO_BULK"
+              ]
+            ]
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "examples/from-description/mgpi/model-initial.json",
+            "sha256": "d8f18339e5f52f85ccd8a6a3ce6cf11d745be8570eb66d2ffb7cf24f9b24343a"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "mgpi-initial",
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 27,
+          "tp": 27,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "interface": "ongoing maintainer coding-agent session",
+      "method": "expanded original-source scope and reviewed model",
+      "metrics": {
+        "controllers": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "facts": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "final_elements": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "instruments": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "Codex authoring session; exact model identifier unavailable",
+        "provider": "OpenAI",
+        "version": "unknown"
+      },
+      "not_attempted": [
+        "mgpi-v1"
+      ],
+      "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "examples/from-description/mgpi/protocol.json",
+          "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+        },
+        {
+          "path": "scripts/description_workflow.py",
+          "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+        }
+      ],
+      "rows": [
+        {
+          "case": "mgpi-v2",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "facts": {
+              "predicted": 27,
+              "tp": 27,
+              "truth": 27
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "instruments": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 15,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 8,
+              "tp": 8,
+              "truth": 8
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "examples/from-description/mgpi/model-expanded-source.json",
+            "sha256": "317e65cc9aaa7324d8e64c6911ff87f03f9c4182e00fe22fc74b6525766c1277"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "mgpi-expanded-source",
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 8
+        }
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "interface": "deterministic authored control",
+      "method": "planted empty output",
+      "metrics": {
+        "controllers": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "facts": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "final_elements": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "instruments": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "manual_valves": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "units": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [
+        "mgpi-v1"
+      ],
+      "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "examples/from-description/mgpi/protocol.json",
+          "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+        },
+        {
+          "path": "scripts/description_workflow.py",
+          "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+        }
+      ],
+      "rows": [
+        {
+          "case": "mgpi-v2",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "facts": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 27
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "instruments": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 8
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "instruments",
+                "LI_HYPO",
+                "exists",
+                true
+              ],
+              [
+                "instruments",
+                "LI_HYPO",
+                "unit",
+                "HYPO_BULK"
+              ],
+              [
+                "instruments",
+                "LI_HYPO",
+                "uom",
+                ""
+              ],
+              [
+                "instruments",
+                "LI_HYPO",
+                "variable",
+                "level"
+              ],
+              [
+                "streams",
+                "A1",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "A1",
+                "from",
+                "BL"
+              ],
+              [
+                "streams",
+                "A1",
+                "to",
+                "ACID_DAY"
+              ],
+              [
+                "streams",
+                "A2",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "A2",
+                "from",
+                "ACID_DAY"
+              ],
+              [
+                "streams",
+                "A2",
+                "to",
+                "BL"
+              ],
+              [
+                "streams",
+                "H1",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "H1",
+                "from",
+                "BL"
+              ],
+              [
+                "streams",
+                "H1",
+                "to",
+                "HYPO_BULK"
+              ],
+              [
+                "streams",
+                "H2",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "H2",
+                "from",
+                "HYPO_BULK"
+              ],
+              [
+                "streams",
+                "H2",
+                "to",
+                "HYPO_DAY"
+              ],
+              [
+                "streams",
+                "H3",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "H3",
+                "from",
+                "HYPO_DAY"
+              ],
+              [
+                "streams",
+                "H3",
+                "to",
+                "HYPO_PROCESS"
+              ],
+              [
+                "units",
+                "ACID_DAY",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "ACID_DAY",
+                "type",
+                "tank"
+              ],
+              [
+                "units",
+                "HYPO_BULK",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "HYPO_BULK",
+                "type",
+                "tank"
+              ],
+              [
+                "units",
+                "HYPO_DAY",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "HYPO_DAY",
+                "type",
+                "tank"
+              ],
+              [
+                "units",
+                "HYPO_PROCESS",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "HYPO_PROCESS",
+                "type",
+                "vessel"
+              ]
+            ],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "examples/from-description/mgpi/controls/empty.json",
+            "sha256": "74bd449850f14090fffe328ef5e46e33fb634a7a1b11896cfeeace26f99313a8"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "mgpi-empty",
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 27,
+          "tp": 26,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 14,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "interface": "deterministic authored control",
+      "method": "planted wrong chemical endpoint",
+      "metrics": {
+        "controllers": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "facts": {
+          "f1": 0.9629629629629629,
+          "precision": 0.9629629629629629,
+          "recall": 0.9629629629629629
+        },
+        "final_elements": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "instruments": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 0.9333333333333333,
+          "precision": 0.9333333333333333,
+          "recall": 0.9333333333333333
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [
+        "mgpi-v1"
+      ],
+      "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "examples/from-description/mgpi/protocol.json",
+          "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+        },
+        {
+          "path": "scripts/description_workflow.py",
+          "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+        }
+      ],
+      "rows": [
+        {
+          "case": "mgpi-v2",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "facts": {
+              "predicted": 27,
+              "tp": 26,
+              "truth": 27
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "instruments": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 14,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 8,
+              "tp": 8,
+              "truth": 8
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "streams",
+                "H3",
+                "to",
+                "HYPO_PROCESS"
+              ]
+            ],
+            "unexpected_facts": [
+              [
+                "streams",
+                "H3",
+                "to",
+                "ACID_DAY"
+              ]
+            ]
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "examples/from-description/mgpi/controls/wrong-endpoint.json",
+            "sha256": "e97f93ff1c79db49092dc473a1ca2ac69356ffaeb64d1c00f90d68be73c47d9a"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "mgpi-wrong-endpoint",
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "facts": {
+          "predicted": 27,
+          "tp": 27,
+          "truth": 27
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "instruments": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        }
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "interface": "deterministic authored control",
+      "method": "planted unscored false automatic shutdown",
+      "metrics": {
+        "controllers": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "facts": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "final_elements": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "instruments": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [
+        "mgpi-v1"
+      ],
+      "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "examples/from-description/mgpi/protocol.json",
+          "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+        },
+        {
+          "path": "scripts/description_workflow.py",
+          "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+        }
+      ],
+      "rows": [
+        {
+          "case": "mgpi-v2",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "facts": {
+              "predicted": 27,
+              "tp": 27,
+              "truth": 27
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "instruments": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 15,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 8,
+              "tp": 8,
+              "truth": 8
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "examples/from-description/mgpi/controls/false-shutdown.json",
+            "sha256": "6ffa56e14e98a5400b0f572db379e284c953c5f764a386cd8593d623d60658e6"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "mgpi-false-shutdown",
+      "split": "development"
+    }
+  ],
+  "schema": "task-benchmark-1",
+  "scoring_contract": "native-facts-v1",
+  "submissions": [
+    {
+      "id": "mgpi-initial",
+      "path": "benchmarks/runs/mgpi-initial.json",
+      "sha256": "4d4a0effd376c152e347bb80d1ff903f46324cc319d25139c80baad2bc9a4647"
+    },
+    {
+      "id": "mgpi-expanded-source",
+      "path": "benchmarks/runs/mgpi-expanded-source.json",
+      "sha256": "2edfc327f53d0ea45ca68665442f33733d65059348a5aaa3e8d3019bfb879ec9"
+    },
+    {
+      "id": "mgpi-empty",
+      "path": "benchmarks/runs/mgpi-empty.json",
+      "sha256": "4fd3eafac514518e4514601a50c7308d611fc7401613d096438ea394396b22ef"
+    },
+    {
+      "id": "mgpi-wrong-endpoint",
+      "path": "benchmarks/runs/mgpi-wrong-endpoint.json",
+      "sha256": "09ddd314a106c4c7f36e6d5895bdf3ef9bc34da431c556eab9cca360f47d12d9"
+    },
+    {
+      "id": "mgpi-false-shutdown",
+      "path": "benchmarks/runs/mgpi-false-shutdown.json",
+      "sha256": "7b211de00eb3c63288c8ce30831babebf5efbc65e5315b7d4c4ef683c143fbaa"
+    }
+  ],
+  "suite": "mgpi-source-development",
+  "suite_sha256": "b4d4f855e8d40cd4fedeca7dd61cfed036e4be82c981918f0680ba2fc3db5c99",
+  "suite_version": "1",
+  "summary": [
+    {
+      "case_count": 1,
+      "cohort": "47e7e699d0edc5988507cc22428327c54b92c22cc54505e9e608500c7e214aee",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v1"
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "group": "1245e9f8d0901e49c4b6d4318c17433f8d01c618fabde461a80956b3d56ed982",
+      "interface": "ongoing maintainer coding-agent session",
+      "method": "initial source adaptation and model",
+      "metrics": {
+        "controllers": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 0.9811320754716981,
+          "mean_f1": 0.9811320754716981,
+          "min_f1": 0.9811320754716981,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 0.8571428571428571,
+          "mean_f1": 0.8571428571428571,
+          "min_f1": 0.8571428571428571,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "Codex authoring session; exact model identifier unavailable",
+        "provider": "OpenAI",
+        "version": "unknown"
+      },
+      "replicates": 1,
+      "runs": [
+        "mgpi-initial"
+      ],
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "group": "16795c6750f02adb6804c615c75ffcdc9e1e0e648cf8557df1107b846cfcb6bb",
+      "interface": "deterministic authored control",
+      "method": "planted empty output",
+      "metrics": {
+        "controllers": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "mgpi-empty"
+      ],
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "group": "4d24a23de279f90b7cca21aec4e6b7e0329d0ea75705e511652975c806bae502",
+      "interface": "ongoing maintainer coding-agent session",
+      "method": "expanded original-source scope and reviewed model",
+      "metrics": {
+        "controllers": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "Codex authoring session; exact model identifier unavailable",
+        "provider": "OpenAI",
+        "version": "unknown"
+      },
+      "replicates": 1,
+      "runs": [
+        "mgpi-expanded-source"
+      ],
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "group": "568cdda67125bc6946f3f13c4872b5651f7ccc272002d1deced3279c8adf836f",
+      "interface": "deterministic authored control",
+      "method": "planted unscored false automatic shutdown",
+      "metrics": {
+        "controllers": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "mgpi-false-shutdown"
+      ],
+      "split": "development"
+    },
+    {
+      "case_count": 1,
+      "cohort": "d49115c25c8caba97e7041475a957272983543679f29567ac0ae5fb324f8744f",
+      "configuration": {
+        "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+        "model_settings": "not recorded; no provider-attested run identity",
+        "source_scope": "v2"
+      },
+      "evidence": "Separate agent original-source key; curated source adaptation; no human validation",
+      "family": "csb-mgpi",
+      "group": "6f0654f7d20bed205b6fd2dd2d90d447ae2bf88e0377e0fd990353c19d7aca79",
+      "interface": "deterministic authored control",
+      "method": "planted wrong chemical endpoint",
+      "metrics": {
+        "controllers": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 0.9629629629629629,
+          "mean_f1": 0.9629629629629629,
+          "min_f1": 0.9629629629629629,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 0.9333333333333333,
+          "mean_f1": 0.9333333333333333,
+          "min_f1": 0.9333333333333333,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "planted-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "mgpi-wrong-endpoint"
+      ],
+      "split": "development"
+    }
+  ],
+  "task": "description-facts"
+}

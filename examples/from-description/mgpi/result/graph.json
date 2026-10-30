@@ -1,0 +1,570 @@
+{
+ "schema": "twin-graph-1",
+ "source_model": "model.json",
+ "model_kind": "hand_built",
+ "title": "MGPI transfer paths - source-adapted development draft",
+ "nodes": [
+  {
+   "id": "PLANT",
+   "kind": "plant",
+   "tag": "mgpi-transfer-development",
+   "name": "MGPI transfer paths - source-adapted development draft",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assumptions",
+     "value": [
+      "No source-free process equipment or control equipment is added.",
+      "The later layout will propose geometry only; it will not infer equipment dimensions or nozzle positions."
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "authoring_exposure",
+     "value": [
+      "Maintainer read selected original narrative and saw report Figure3 during source scouting.",
+      "Source-adapted development case; not a blind or unfamiliar-description model experiment.",
+      "Independent original-source key not read before this candidate was frozen.",
+      "After first source audit, the original-source scope/key was expanded to resolve bulk placement; this is corrected development evidence, not model improvement."
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_document",
+     "value": "source.txt",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_report",
+     "value": "CSB 2017-01-I-KS, December2017; printedpages7-8,23",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_report_sha256",
+     "value": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_scope_revision",
+     "value": "v2: adds the next section5.2 sentence explicitly locating the alarm in the bulk tank; v1 and its unsupported adaptation retained separately.",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "source_sha256",
+     "value": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8",
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    },
+    {
+     "name": "unknowns",
+     "value": [
+      "All supplied IDs are project aliases, not reported plant tags.",
+      "Actual level units, alarm thresholds, pumps, valves, safeguards, line sizes and installed-state configuration remain unresolved.",
+      "HYPO_PROCESS is unnamed; the acid process destination is unspecified and must not be equated with it.",
+      "BL is a scope-boundary convention, not a common physical connection.",
+      "No automatic chemical-unloading shutdown is established; the level alarm is notification only."
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "model",
+      "document": "source.txt",
+      "note": "the item cites no source of its own"
+     }
+    }
+   ]
+  },
+  {
+   "id": "BL",
+   "kind": "boundary",
+   "tag": null,
+   "name": "battery limit",
+   "aliases": [],
+   "status": "confirmed",
+   "attributes": []
+  },
+  {
+   "id": "HYPO_BULK",
+   "kind": "equipment",
+   "tag": "HYPO_BULK",
+   "name": "Sodium hypochlorite bulk tank",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assigned_tag",
+     "value": true,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "name",
+     "value": "Sodium hypochlorite bulk tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "reported_capacity_gal",
+     "value": 6500,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "reported_concentration_pct",
+     "value": 12.5,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "storage_pressure_basis",
+     "value": "atmospheric",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    },
+    {
+     "name": "type",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L3-L3"
+     }
+    }
+   ]
+  },
+  {
+   "id": "HYPO_DAY",
+   "kind": "equipment",
+   "tag": "HYPO_DAY",
+   "name": "Sodium hypochlorite day tank",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assigned_tag",
+     "value": true,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    },
+    {
+     "name": "name",
+     "value": "Sodium hypochlorite day tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    },
+    {
+     "name": "type",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "HYPO_PROCESS",
+   "kind": "equipment",
+   "tag": "HYPO_PROCESS",
+   "name": "Unidentified sodium hypochlorite process vessel",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assigned_tag",
+     "value": true,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    },
+    {
+     "name": "name",
+     "value": "Unidentified sodium hypochlorite process vessel",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    },
+    {
+     "name": "type",
+     "value": "vessel",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L4-L4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ACID_DAY",
+   "kind": "equipment",
+   "tag": "ACID_DAY",
+   "name": "Sulfuric acid day tank",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "assigned_tag",
+     "value": true,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "name",
+     "value": "Sulfuric acid day tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "reported_capacity_gal",
+     "value": 8500,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "reported_concentration_pct",
+     "value": 30,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    },
+    {
+     "name": "type",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L5-L5"
+     }
+    }
+   ]
+  },
+  {
+   "id": "LI_HYPO",
+   "kind": "instrument",
+   "tag": "LI_HYPO",
+   "name": "Level indication and high-level operator notification",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "alarm_action_basis",
+     "value": "operator notification only; no automatic unloading shutdown",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    },
+    {
+     "name": "assigned_tag",
+     "value": true,
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    },
+    {
+     "name": "description",
+     "value": "Level indication and high-level operator notification",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    },
+    {
+     "name": "unit",
+     "value": "HYPO_BULK",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    },
+    {
+     "name": "uom",
+     "value": "",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    },
+    {
+     "name": "variable",
+     "value": "level",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L7-L7"
+     }
+    }
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "id": "E00001",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "HYPO_BULK",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L3-L3"
+   }
+  },
+  {
+   "id": "E00002",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "HYPO_DAY",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L4-L4"
+   }
+  },
+  {
+   "id": "E00003",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "HYPO_PROCESS",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L4-L4"
+   }
+  },
+  {
+   "id": "E00004",
+   "type": "contains",
+   "from": "PLANT",
+   "to": "ACID_DAY",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L5-L5"
+   }
+  },
+  {
+   "id": "H1",
+   "type": "connects",
+   "from": "BL",
+   "to": "HYPO_BULK",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Hypochlorite unloading across scope boundary",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "H2",
+   "type": "connects",
+   "from": "HYPO_BULK",
+   "to": "HYPO_DAY",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Hypochlorite bulk-to-day transfer",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "H3",
+   "type": "connects",
+   "from": "HYPO_DAY",
+   "to": "HYPO_PROCESS",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Hypochlorite day-to-process transfer",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1",
+   "type": "connects",
+   "from": "BL",
+   "to": "ACID_DAY",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Sulfuric acid unloading across scope boundary",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "A2",
+   "type": "connects",
+   "from": "ACID_DAY",
+   "to": "BL",
+   "status": "unverified",
+   "direction": "known",
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "layer": "stream",
+   "attributes": [
+    {
+     "name": "name",
+     "value": "Sulfuric acid to unspecified process boundary",
+     "status": "unverified",
+     "source": {
+      "kind": "document",
+      "document": "source.txt:L6-L6"
+     }
+    }
+   ]
+  },
+  {
+   "id": "E00010",
+   "type": "measures",
+   "from": "LI_HYPO",
+   "to": "HYPO_BULK",
+   "status": "unverified",
+   "direction": null,
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L7-L7"
+   }
+  }
+ ],
+ "questions": [],
+ "events": [],
+ "not_exported": [],
+ "counts": {
+  "nodes": 7,
+  "edges": 10,
+  "claims": 36,
+  "questions": 0,
+  "events": 0
+ }
+}

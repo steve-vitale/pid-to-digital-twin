@@ -1,0 +1,58 @@
+{
+  "units": [
+    {
+      "id": "HYPO_BULK",
+      "type": "tank"
+    },
+    {
+      "id": "HYPO_DAY",
+      "type": "tank"
+    },
+    {
+      "id": "HYPO_PROCESS",
+      "type": "vessel"
+    },
+    {
+      "id": "ACID_DAY",
+      "type": "tank"
+    }
+  ],
+  "streams": [
+    {
+      "id": "H1",
+      "from": "BL",
+      "to": "HYPO_BULK"
+    },
+    {
+      "id": "H2",
+      "from": "HYPO_BULK",
+      "to": "HYPO_DAY"
+    },
+    {
+      "id": "H3",
+      "from": "HYPO_DAY",
+      "to": "HYPO_PROCESS"
+    },
+    {
+      "id": "A1",
+      "from": "BL",
+      "to": "ACID_DAY"
+    },
+    {
+      "id": "A2",
+      "from": "ACID_DAY",
+      "to": "BL"
+    }
+  ],
+  "instruments": [
+    {
+      "tag": "LI_HYPO",
+      "variable": "level",
+      "uom": ""
+    }
+  ],
+  "controllers": [],
+  "final_elements": [],
+  "manual_valves": [],
+  "relief_devices": []
+}

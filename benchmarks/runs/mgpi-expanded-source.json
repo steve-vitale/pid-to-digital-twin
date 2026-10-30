@@ -1,0 +1,36 @@
+{
+  "id": "mgpi-expanded-source",
+  "ran_at": "2026-10-30",
+  "model": {
+    "provider": "OpenAI",
+    "id": "Codex authoring session; exact model identifier unavailable",
+    "version": "unknown"
+  },
+  "interface": "ongoing maintainer coding-agent session",
+  "method": "expanded original-source scope and reviewed model",
+  "configuration": {
+    "source_scope": "v2",
+    "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+    "model_settings": "not recorded; no provider-attested run identity"
+  },
+  "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement.",
+  "recipe": [
+    {
+      "path": "examples/from-description/mgpi/protocol.json",
+      "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+    },
+    {
+      "path": "scripts/description_workflow.py",
+      "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+    }
+  ],
+  "cases": [
+    "mgpi-v2"
+  ],
+  "predictions": {
+    "mgpi-v2": {
+      "path": "examples/from-description/mgpi/model-expanded-source.json",
+      "sha256": "317e65cc9aaa7324d8e64c6911ff87f03f9c4182e00fe22fc74b6525766c1277"
+    }
+  }
+}

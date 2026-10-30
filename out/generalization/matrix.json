@@ -1,12 +1,22 @@
 {
  "about": "Generalization matrix written by scripts/corpus_matrix.py; rendered as docs/GENERALIZATION.md.",
- "ran_at": "2026-10-30 16:59 UTC",
- "seconds": 1766.5,
+ "ran_at": "2026-10-30 20:47 UTC",
+ "seconds": 1591.8,
  "rows_run_this_time": [
-  7
+  8
  ],
  "inputs_run_this_time": [
-  "dexpi"
+  "bayer-rt1",
+  "commons-pid-sheets",
+  "dexpi",
+  "dexpi-1.2-vendor-renders",
+  "omre-1958-pid",
+  "open100-dev",
+  "open100-holdout",
+  "pronto-fig1",
+  "te-rev-a",
+  "te-rev-c",
+  "te-rev-d"
  ],
  "tracer_pass_f1": 0.88,
  "pipe_pass_f1": 0.88,
@@ -1153,7 +1163,7 @@
       "predicted": 34,
       "truth": 29,
       "review_load_per_100": 25.0,
-      "seconds": 30.3,
+      "seconds": 21.5,
       "scan_cleaned": false
      },
      "C01V01-HEX.EX03": {
@@ -1165,7 +1175,7 @@
       "predicted": 32,
       "truth": 29,
       "review_load_per_100": 28.8,
-      "seconds": 27.0,
+      "seconds": 19.4,
       "scan_cleaned": false
      },
      "C01V01-SAG.EX02": {
@@ -1177,7 +1187,7 @@
       "predicted": 31,
       "truth": 18,
       "review_load_per_100": 57.4,
-      "seconds": 7.4,
+      "seconds": 4.5,
       "scan_cleaned": false
      },
      "C02V01-HEX.EX02": {
@@ -1189,7 +1199,7 @@
       "predicted": 24,
       "truth": 21,
       "review_load_per_100": 8.6,
-      "seconds": 24.1,
+      "seconds": 17.4,
       "scan_cleaned": false
      },
      "C03V01-HEX.EX02": {
@@ -1201,7 +1211,7 @@
       "predicted": 16,
       "truth": 15,
       "review_load_per_100": 4.0,
-      "seconds": 4.6,
+      "seconds": 3.2,
       "scan_cleaned": false
      },
      "C03V01-SAG.EX01": {
@@ -1213,7 +1223,7 @@
       "predicted": 11,
       "truth": 4,
       "review_load_per_100": 64.3,
-      "seconds": 4.8,
+      "seconds": 4.1,
       "scan_cleaned": false
      },
      "C04V01-HEX.EX02": {
@@ -1225,7 +1235,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 3.2,
+      "seconds": 2.4,
       "scan_cleaned": false
      },
      "C05V01-SAG.EX01": {
@@ -1237,7 +1247,7 @@
       "predicted": 3,
       "truth": 5,
       "review_load_per_100": 30.8,
-      "seconds": 4.5,
+      "seconds": 2.1,
       "scan_cleaned": false
      },
      "E05V01-SAG.EX01": {
@@ -1249,7 +1259,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 3.4,
+      "seconds": 2.0,
       "scan_cleaned": false
      },
      "E06V01-SAG.EX01": {
@@ -1261,7 +1271,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 3.0,
+      "seconds": 2.1,
       "scan_cleaned": false
      },
      "I01V02-HEX.EX03": {
@@ -1273,7 +1283,7 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 20.0,
-      "seconds": 3.8,
+      "seconds": 2.3,
       "scan_cleaned": false
      },
      "I02V01-HEX.EX03": {
@@ -1285,7 +1295,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 6.6,
+      "seconds": 5.8,
       "scan_cleaned": false
      },
      "I03V01-HEX.EX03": {
@@ -1297,7 +1307,7 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 16.7,
-      "seconds": 11.3,
+      "seconds": 6.7,
       "scan_cleaned": false
      },
      "I04V01-HEX.EX05": {
@@ -1309,7 +1319,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 11.2,
+      "seconds": 9.4,
       "scan_cleaned": false
      },
      "I05V01-SAG.EX01": {
@@ -1321,7 +1331,7 @@
       "predicted": 1,
       "truth": 3,
       "review_load_per_100": 50.0,
-      "seconds": 3.7,
+      "seconds": 2.8,
       "scan_cleaned": false
      },
      "I09V02-HEX.EX03": {
@@ -1333,7 +1343,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 9.8,
+      "seconds": 7.3,
       "scan_cleaned": false
      },
      "I11V01-HEX.EX03": {
@@ -1345,7 +1355,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 9.9,
+      "seconds": 7.5,
       "scan_cleaned": false
      },
      "I12V01-HEX.EX03": {
@@ -1357,7 +1367,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 11.0,
+      "seconds": 5.2,
       "scan_cleaned": false
      },
      "I12V01-SAG.EX01": {
@@ -1369,7 +1379,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 4.7,
+      "seconds": 2.9,
       "scan_cleaned": false
      },
      "P01V01-AVV.EX01": {
@@ -1381,7 +1391,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 0.8,
+      "seconds": 0.3,
       "scan_cleaned": false
      },
      "P01V01-HEX.EX03": {
@@ -1393,7 +1403,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 4.2,
+      "seconds": 2.9,
       "scan_cleaned": false
      },
      "P01V01-ING.EX01": {
@@ -1405,7 +1415,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 0.9,
+      "seconds": 0.8,
       "scan_cleaned": false
      }
     },
@@ -1457,8 +1467,8 @@
     }
    },
    "published": [],
-   "seconds": 190.8,
-   "ran_at": "2026-10-30 16:33 UTC",
+   "seconds": 133.4,
+   "ran_at": "2026-10-30 20:40 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -1466,7 +1476,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -2263,13 +2273,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2301,12 +2311,12 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2339,13 +2349,13 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2378,13 +2388,13 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2417,13 +2427,13 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.6,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2454,13 +2464,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 1.2,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2491,13 +2501,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2528,13 +2538,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2565,13 +2575,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2602,13 +2612,13 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2640,12 +2650,12 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2687,12 +2697,12 @@
     }
    ],
    "seconds": 0.4,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2733,13 +2743,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.4,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 1.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2787,13 +2797,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.2,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -2838,13 +2848,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -3050,14 +3060,14 @@
     "not_checked": "signal lines (the bundle has none); a separate measurement symbol (every loop here is a combined instrument: DEXPI nests the sensor in the controller bubble, so the measurement is the controller's own tag)"
    },
    "published": [],
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -3104,8 +3114,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 1.5,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3114,7 +3124,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3162,8 +3172,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 3.5,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 2.4,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3172,7 +3182,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3292,8 +3302,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 9.5,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 2.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3302,7 +3312,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3333,8 +3343,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 8.5,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 2.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3343,7 +3353,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3374,8 +3384,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 5.1,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 1.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3384,7 +3394,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3416,8 +3426,8 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 3.3,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -3426,7 +3436,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
@@ -3677,10 +3687,10 @@
     "stderr": ""
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3702,16 +3712,16 @@
    "published": [
     {
      "file": "examples/from-description/README.md",
-     "line": 80,
+     "line": 176,
      "says": "5 units, 15 streams, 6 instruments and 5 valves",
      "ours": "5 units, 15 streams, 6 instruments, 5 final elements",
      "agrees": true
     }
    ],
-   "seconds": 0.6,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3731,10 +3741,10 @@
     "stderr": ""
    },
    "published": [],
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3771,13 +3781,13 @@
     "not_tested": "instruments, controllers, valves and PI/Ignition tag content: the flowsheet has none"
    },
    "published": [],
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
@@ -4307,16 +4317,39 @@
     "not_tested": "instruments, controllers and valves: DWSIM flowsheets are steady-state process models with no instrumentation; 2 solver Adjust/Spec blocks in all 42 (solver targets, not plant controllers) are not mapped"
    },
    "published": [],
-   "seconds": 29.0,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 12.4,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
+   }
+  },
+  {
+   "row": 5,
+   "input": "mgpi-model",
+   "family": "csb-mgpi-development",
+   "status": "pass",
+   "value": "13 files",
+   "reason": "",
+   "detail": {
+    "exit": 0,
+    "files_in_out": 13,
+    "files_written_beside_model": [],
+    "stdout_first_line": "model: 4 units, 5 streams, 1 instruments, 0 final elements",
+    "stderr": ""
+   },
+   "published": [],
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
+   "tool_files": {
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
+    "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
   },
   {
@@ -7331,14 +7364,14 @@
      "agrees": true
     }
    ],
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 16:59 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
@@ -8292,8 +8325,8 @@
     }
    },
    "published": [],
-   "seconds": 0.8,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -8302,7 +8335,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -8659,8 +8692,8 @@
     }
    },
    "published": [],
-   "seconds": 5.9,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -8669,7 +8702,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -10280,8 +10313,8 @@
     }
    },
    "published": [],
-   "seconds": 4.1,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -10290,7 +10323,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -11527,8 +11560,8 @@
     }
    },
    "published": [],
-   "seconds": 4.0,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 2.1,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -11537,7 +11570,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -12263,8 +12296,8 @@
     }
    },
    "published": [],
-   "seconds": 2.4,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 1.3,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -12273,7 +12306,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -13820,8 +13853,8 @@
    },
    "published": [],
    "note": "the pass counts (primary and second reading) include 6 files the reader refused for a reason seen in the XML (I02V01_AUD.EX01.xml, I03V01_AUD.EX01.xml, I04V01_AUD.EX01.xml, I08V01_AUD.EX01.xml, I11V01_AUD.EX01I.xml, I12V01_AUD.EX01.xml); the criterion counts a confirmed refusal as a pass, so these files show the refusal is right, not that their content was read",
-   "seconds": 2.8,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -13830,7 +13863,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15298,8 +15331,8 @@
     "xml_agrees": 37
    },
    "published": [],
-   "seconds": 10.8,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 5.2,
+   "ran_at": "2026-10-30 20:42 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -15308,7 +15341,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15503,14 +15536,14 @@
     }
    },
    "published": [],
-   "seconds": 17.9,
-   "ran_at": "2026-10-30 16:46 UTC",
+   "seconds": 11.8,
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15706,14 +15739,14 @@
     "blindness": "A177 held these sheets out for the frozen A191-A195 rules (A196, seen once before as a baseline); not fully blind overall: A170's crossing error class was first noticed on sheet 6, then confirmed on development DEXPI C01. A191 changes the derived truth too (388 to 386 segments), so the change from 0.898 to 0.912 is not pure tracing gain"
    },
    "published": [],
-   "seconds": 21.7,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "seconds": 14.6,
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15828,14 +15861,14 @@
     "worst_sheet": "dexpi-c02"
    },
    "published": [],
-   "seconds": 9.3,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "seconds": 8.6,
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15855,13 +15888,13 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15881,13 +15914,13 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -15999,14 +16032,14 @@
     "worst_sheet": "101"
    },
    "published": [],
-   "seconds": 11.2,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "seconds": 8.3,
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -16068,14 +16101,14 @@
     "worst_sheet": "RT1"
    },
    "published": [],
-   "seconds": 5.0,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "seconds": 3.5,
+   "ran_at": "2026-10-30 20:43 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -16723,8 +16756,8 @@
     }
    },
    "published": [],
-   "seconds": 171.8,
-   "ran_at": "2026-10-30 16:47 UTC",
+   "seconds": 137.2,
+   "ran_at": "2026-10-30 20:44 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
@@ -16732,7 +16765,7 @@
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -16807,14 +16840,14 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 2.7,
-   "ran_at": "2026-10-30 16:50 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-30 20:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -17000,14 +17033,14 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 7.2,
-   "ran_at": "2026-10-30 16:50 UTC",
+   "seconds": 4.8,
+   "ran_at": "2026-10-30 20:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
@@ -17086,14 +17119,14 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.2,
-   "ran_at": "2026-10-30 16:50 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-30 20:47 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
     "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:f178c3480f0be11c",
+    "scripts/generate.py": "sha256:2f5d37d080e2baff",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
     "scripts/line_layers.py": "sha256:ebd9766c44b86813",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",

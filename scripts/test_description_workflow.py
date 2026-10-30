@@ -19,6 +19,33 @@ SCRIPT = ROOT / 'scripts/description_workflow.py'
 
 
 class DescriptionWorkflowTests(unittest.TestCase):
+    def test_mgpi_source_adaptation_preserves_aliases_evidence_and_scoring_limit(self):
+        import benchmark
+        case = ROOT / 'examples/from-description/mgpi'
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            workflow.prepare(case / 'source.txt', folder / 'packet')
+            result = folder / 'result'
+            report = workflow.build(folder / 'packet', case / 'answer.json', result)
+            self.assertTrue(report['ok'], report)
+            self.assertEqual(report['sheets'], 2)
+            graph = json.loads((result / 'graph.json').read_bytes())
+            indicator = next(n for n in graph['nodes'] if n['id'] == 'LI_HYPO')
+            self.assertEqual(indicator['status'], 'unverified')
+            claims = {a['name']: a['value'] for a in indicator['attributes']}
+            self.assertIn('no automatic unloading shutdown', claims['alarm_action_basis'])
+            text = (result / 'exports/svg/HYPO_BULK.svg').read_text(encoding='utf-8')
+            self.assertIn('LI_HYPO', text)
+            self.assertEqual(json.loads((result / 'questions/questions.json').read_bytes())['counts']['findings'], 0)
+        model = json.loads((case / 'model-expanded-source.json').read_bytes())
+        false = json.loads((case / 'controls/false-shutdown.json').read_bytes())
+        # Pin the exposed limit: alarm semantics are retained in output but not graded by native-facts-v1.
+        self.assertEqual(benchmark.native_facts(model), benchmark.native_facts(false))
+        initial = json.loads((case / 'v1/facts.json').read_bytes())['facts']
+        expanded = json.loads((case / 'v2/facts.json').read_bytes())['facts']
+        self.assertEqual({json.dumps(x) for x in expanded} - {json.dumps(x) for x in initial},
+                         {json.dumps(['instruments', 'LI_HYPO', 'unit', 'HYPO_BULK'])})
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='description-test-')
         self.addCleanup(self.tmp.cleanup)

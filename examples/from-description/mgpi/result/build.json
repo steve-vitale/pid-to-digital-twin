@@ -1,0 +1,53 @@
+{
+  "mode": "assisted_draft",
+  "source_sha256": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8",
+  "answer_sha256": "94776ad8a164c91add4840f09dae91cac7c9b35b01f9db9a261b116c5fb6423d",
+  "code_sha256": {
+    "description_workflow.py": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594",
+    "draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28",
+    "generate.py": "2f5d37d080e2baff223d072e517da9106394ada23e5df36ecad1b9e62ce8d36d",
+    "question_engine.py": "bd7b4027e03c682cbeeb297b814f279259f6ca5f3776794114378e713a59ee79",
+    "graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2"
+  },
+  "files_sha256": {
+    "answer.json": "94776ad8a164c91add4840f09dae91cac7c9b35b01f9db9a261b116c5fb6423d",
+    "graph.json": "a3bcfda7b1b893675d9162e443f9a5e1fc728783b45248ac2c49108ad744ffe0",
+    "layout.json": "2d3c5c78e802828c74b4f7d753750290970e2662705fc0212e091be9138f0914",
+    "model.json": "317e65cc9aaa7324d8e64c6911ff87f03f9c4182e00fe22fc74b6525766c1277",
+    "packet.json": "d6912fcf627c32e4ae1586db6842d1fb7e85f81d1a2f94c32d8911eeeab5264f",
+    "source.txt": "551078e52d39c0f2dc587951b7534afaf8865c9e7c87e55e26ec27cbff4c74e8",
+    "source_numbered.txt": "5361e428a59e0b2fec742c74777f654cba4d66ad34c8113cd9051608091554ac",
+    "exports/ops_review_sheet.csv": "edf9fc88b54c6a3e52f9f494d6f3a3575fe382b6e2f274de008063c07206717e",
+    "exports/seed_export_manifest.json": "2a9b796335434bbb7adf2757214158b65bcecdd40b1feff196378eea2fd667f2",
+    "exports/seed_review_projection.json": "7d39e8f4156b5c242acd2ab7c7b438e4ecd1a7deaa5f78e689999b71997d05f8",
+    "pid/ACID.graphml": "4134c268efc93932789017c494ca570bc72a192f4064338f0c7b266c36f87f59",
+    "pid/ACID.png": "dc09183b6452190b2aaa375fbc7d80d594649e9c09903aad96d28a66ac2976a2",
+    "pid/ACID.svg": "c2160cbcf57ee9ca40b9ea7146111048dafb20b2fab83bbd09d75bf20ccff0cd",
+    "pid/HYP.graphml": "22a557d44caa8e264be13e9200f81ad1806f7a7b1cbe394d3ebf709b33cf9c75",
+    "pid/HYP.png": "2a6edddaa62bff3a9e950c0b0ee0fc6f3c246624c7b52ad7345c5c5ae2a77bf9",
+    "pid/HYP.svg": "fffca912ad50ed921c87ff039d3dc2ad619a81740ec728cb3c61acf5ff9a4d3d",
+    "pid/key.json": "e4f61c414b60a0fa98def6a0ea6ca773ed23568b225e0828912ad800640f4e13",
+    "pid/manifest.json": "fa966e9dd60b1ea6662c2997db9440778829952f6982f87feef2e00200d57a1f",
+    "pid/sheet_register.csv": "219a991b83277b511fb4bec60e521f1e2d977e19e02c2059c5b211ef522bd853",
+    "questions/questions.json": "a23064f3873f769813a77b9cf7bf6584b5b182b2b51fbe45c2328a0934f4b39d",
+    "questions/screen.md": "f11b368cad2639435abaa370518aa2628bac4675d427a2da60bc9c5b1ac79808",
+    "exports/ignition/tags.json": "94ff59a59a30b6a9e3036f569132cf1b10fabdccd23582aa24462941cf523cbb",
+    "exports/pi/attribute_descriptions.csv": "b37e1807a304382cabe543020dc3a5dd667b1b37e38266f68203adb45f0c1a66",
+    "exports/pi/custom_uoms.csv": "1ccb9a299570e814268abb43e9d0fe9b073a03e986b007f2a1330fd8a9f2c31c",
+    "exports/pi/IMPORT_STEPS.txt": "5343deee3954ee42c09f8d4cf89031d3846de22417279847e4053c95bbbf18fc",
+    "exports/pi/pi_builder_af.csv": "322c1fe3efdef41aed676d7ba30c1a6ddcee085aed8ac3f5f30b0de892090e01",
+    "exports/svg/ACID_DAY.svg": "64b4045c394146ccc401b775d1d2208d5ba0493c0320bd0c1eab4f041d5667d6",
+    "exports/svg/HYPO_BULK.svg": "8ebfe5ea1816713be5179da5f8cca19c58d8a90d7cd8cf42c05e1ca4aa6530a9",
+    "exports/svg/HYPO_DAY.svg": "6679bc1622fbc6c1cfbd296cbf24de5bc4441f28d8c43d7afb80233a6712e7ac",
+    "exports/svg/HYPO_PROCESS.svg": "7163661df3c6e7716c8ab31e6a11da7fd218c51a41c2250b034ebd973143dc3a",
+    "exports/svg/overview.svg": "6a32d404751845b6ebe49fc15e681fcfd17700a4acc968cfe9e07da5a5158e1d",
+    "validation.json": "0f8cfb418e61782dbb7ad0fafe668b49a336468f766e8787bc2cd9ce9f2226ee",
+    "REVIEW.md": "35b8803513c29d9b442adc17565b8ae012c6dfb1e7af99e6ebb64d127f306ce1"
+  },
+  "source_acquisition_time": null,
+  "limits": [
+    "Exact quotations locate supplied evidence; they do not verify every engineering assertion.",
+    "Drafting geometry is authored; no automatic layout or plant acceptance is established.",
+    "The approved assistant/client and source authority require company approval; no tenant was tested."
+  ]
+}

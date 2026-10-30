@@ -542,7 +542,21 @@
     "examples/from-description/assisted/result/questions/screen.md",
     "examples/from-description/assisted/result/source.txt",
     "examples/from-description/assisted/result/source_numbered.txt",
-    "examples/from-description/assisted/result/validation.json"
+    "examples/from-description/assisted/result/validation.json",
+    "examples/from-description/mgpi/source-initial.txt",
+    "examples/from-description/mgpi/model-initial.json",
+    "examples/from-description/mgpi/source.txt",
+    "examples/from-description/mgpi/model-expanded-source.json",
+    "examples/from-description/mgpi/answer.json",
+    "examples/from-description/mgpi/v1/source_inventory.json",
+    "examples/from-description/mgpi/v1/facts.json",
+    "examples/from-description/mgpi/v2/source_inventory.json",
+    "examples/from-description/mgpi/v2/facts.json",
+    "examples/from-description/mgpi/result/pid/HYP.png",
+    "examples/from-description/mgpi/result/pid/ACID.png",
+    "examples/from-description/mgpi/result/graph.json",
+    "examples/from-description/mgpi/result/questions/questions.json",
+    "examples/from-description/mgpi/result/REVIEW.md"
    ],
    "tests": [
     "scripts/test_description_workflow.py"
@@ -589,7 +603,15 @@
     "benchmarks/runs/codex-r5-rep5.json",
     "benchmarks/runs/description-empty.json",
     "benchmarks/runs/description-reference.json",
-    "benchmarks/runs/description-wrong-endpoint.json"
+    "benchmarks/runs/description-wrong-endpoint.json",
+    "benchmarks/mgpi-development.json",
+    "benchmarks/results/mgpi-development.json",
+    "benchmarks/results/mgpi-development.md",
+    "benchmarks/runs/mgpi-empty.json",
+    "benchmarks/runs/mgpi-expanded-source.json",
+    "benchmarks/runs/mgpi-false-shutdown.json",
+    "benchmarks/runs/mgpi-initial.json",
+    "benchmarks/runs/mgpi-wrong-endpoint.json"
    ],
    "tests": [
     "scripts/test_benchmark.py"
@@ -598,7 +620,7 @@
    "why": "New examples should expose failures and support tested generalizations. Matched task/source/key/scorer cohorts make comparisons inspectable without conflating model versions, methods, source families or incomplete coverage.",
    "you_need": "Cleared source and reviewed key with provenance, a supported versioned task, saved answers for declared attempts, model/interface/configuration and pinned recipe metadata; no model account needed to re-score",
    "time": "Offline rescoring; model execution and human source/key review are separate contributions",
-   "you_get": "Reproducible per-case task counts and failures, model/version/method groups, repeated-run mean/range/SD, coverage gaps and source/code fingerprints. Two adapters initially: historical drawing results and synthetic description-fact scorer controls; other tasks still need evaluators"
+   "you_get": "Reproducible per-case task counts and failures, model/version/method groups, repeated-run mean/range/SD, coverage gaps and source/code fingerprints. Two adapters: historical drawing results and selected description facts, with synthetic controls and source-adapted development cases; other tasks still need evaluators"
   }
  ]
 }

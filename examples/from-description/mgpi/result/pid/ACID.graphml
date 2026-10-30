@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="d9" for="edge" attr.name="edge_label" attr.type="string" />
+  <key id="d12" for="node" attr.name="model_ref" attr.type="string" />
+  <key id="d11" for="node" attr.name="text" attr.type="string" />
+  <key id="d4" for="node" attr.name="ymax" attr.type="double" />
+  <key id="d3" for="node" attr.name="ymin" attr.type="double" />
+  <key id="d2" for="node" attr.name="xmax" attr.type="double" />
+  <key id="d1" for="node" attr.name="xmin" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="tank1">
+      <data key="d0">tank</data>
+      <data key="d1">1298.0</data>
+      <data key="d2">1502.0</data>
+      <data key="d3">848.0</data>
+      <data key="d4">1152.0</data>
+      <data key="d11">ACID_DAY</data>
+      <data key="d12">unit:ACID_DAY</data>
+    </node>
+    <node id="inlet_outlet1">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">120</data>
+      <data key="d2">350</data>
+      <data key="d3">975.0</data>
+      <data key="d4">1025.0</data>
+      <data key="d11">BATTERY LIMIT / ACID DELIVERY - SCOPE</data>
+      <data key="d12">stream:A1</data>
+    </node>
+    <node id="inlet_outlet2">
+      <data key="d0">inlet/outlet</data>
+      <data key="d1">2750</data>
+      <data key="d2">2980</data>
+      <data key="d3">975.0</data>
+      <data key="d4">1025.0</data>
+      <data key="d11">BATTERY LIMIT / UNSPECIFIED PROCESS - SCOPE</data>
+      <data key="d12">stream:A2</data>
+    </node>
+    <node id="arrow1">
+      <data key="d0">arrow</data>
+      <data key="d1">810.0</data>
+      <data key="d2">840.0</data>
+      <data key="d3">994.0</data>
+      <data key="d4">1006.0</data>
+    </node>
+    <node id="arrow2">
+      <data key="d0">arrow</data>
+      <data key="d1">2110.0</data>
+      <data key="d2">2140.0</data>
+      <data key="d3">994.0</data>
+      <data key="d4">1006.0</data>
+    </node>
+    <node id="connector1">
+      <data key="d0">connector</data>
+      <data key="d1">821.0</data>
+      <data key="d2">829.0</data>
+      <data key="d3">996.0</data>
+      <data key="d4">1004.0</data>
+    </node>
+    <node id="connector2">
+      <data key="d0">connector</data>
+      <data key="d1">2121.0</data>
+      <data key="d2">2129.0</data>
+      <data key="d3">996.0</data>
+      <data key="d4">1004.0</data>
+    </node>
+    <edge source="connector1" target="inlet_outlet1"><data key="d9">solid</data></edge>
+    <edge source="connector1" target="tank1"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="inlet_outlet2"><data key="d9">solid</data></edge>
+    <edge source="connector2" target="tank1"><data key="d9">solid</data></edge>
+  </graph>
+</graphml>

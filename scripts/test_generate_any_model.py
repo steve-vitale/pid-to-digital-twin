@@ -34,6 +34,39 @@ class AnyHandBuiltModel(unittest.TestCase):
             self.assertTrue((self.out / rel).is_file(), rel)
         self.assertFalse((self.out / "ignition" / "te_tags.json").exists())
 
+    def test_project_aliases_and_multiple_hyphens_preserve_export_identity(self):
+        model = {'meta': {'model_id': 'identifier-case', 'title': 'Identifier regression',
+                          'source_document': 'authored regression fixture'},
+                 'units': [{'id': 'P1', 'name': 'Illustrative pump', 'type': 'pump'}],
+                 'streams': [{'id': 'S1', 'name': 'In', 'from': 'BL', 'to': 'P1'},
+                             {'id': 'S2', 'name': 'Out', 'from': 'P1', 'to': 'BL'}],
+                 'instruments': [{'tag': 'LI_HYPO', 'unit': 'P1', 'variable': 'level',
+                                  'uom': '', 'description': 'Level indication', 'source': 'fixture'}],
+                 'final_elements': [{'tag': 'FV-AREA-101', 'unit': 'P1', 'stream': 'S2',
+                                     'uom': '', 'description': 'Discharge valve', 'source': 'fixture'}]}
+        import xml.etree.ElementTree as ET
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            path = folder / 'model.json'
+            path.write_text(json.dumps(model), encoding='utf-8')
+            before = path.read_bytes()
+            out = folder / 'out'
+            result = subprocess.run([sys.executable, str(ROOT / 'scripts/generate.py'), str(path),
+                                     '--out', str(out)], capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(path.read_bytes(), before)
+            tree = ET.parse(out / 'svg/P1.svg')
+            for tag in ('LI_HYPO', 'FV-AREA-101'):
+                groups = [n for n in tree.iter() if n.get('data-tag') == tag]
+                self.assertEqual(len(groups), 1, tag)
+                self.assertEqual(groups[0].get('id'), tag)
+                self.assertIn(tag, ''.join(groups[0].itertext()))
+                self.assertIn(tag, (out / 'ignition/tags.json').read_text(encoding='utf-8'))
+                self.assertIn(tag, (out / 'pi/pi_builder_af.csv').read_text(encoding='utf-8'))
+            alias = next(n for n in tree.iter() if n.get('data-tag') == 'LI_HYPO')
+            self.assertFalse(any(n.tag.endswith('line') and n.get('x1') == '-17'
+                                 and n.get('y1') == '0' for n in alias.iter()))
+
     def test_every_model_item_is_in_the_tag_export(self):
         tags = (self.out / "ignition" / "tags.json").read_text(encoding="utf-8")
         for item in self.model["instruments"] + self.model["final_elements"]:
