@@ -65,7 +65,10 @@ are general figures for plants in general.
 - The worked examples are a chemical process simulation (Tennessee Eastman), a chemical unit from a public
   investigation report (Bayer), the sheets of a power-plant design (OPEN100) and an ILLUSTRATIVE synthetic food plant
   section written to exercise the refrigeration and oven questions. None is a plant's own data, and no refrigeration
-  or oven question has been checked against a real food plant's drawing.
+  or oven question has been checked against a real food plant's complete drawing. A separate
+  [historical refrigeration subset](../examples/opportunity-screen/millard/README.md) exercises E30 on two
+  source-authored records from the CSB Millard bulletin and carries its missing evidence into a first-question
+  brief. It is a development example, not a test of full plant coverage, actual defrost initiation or safe controls.
 
 ## The three evidence states
 

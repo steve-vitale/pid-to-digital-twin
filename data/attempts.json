@@ -3184,6 +3184,23 @@
         "docs/REPLICATE_AT_YOUR_PLANT.md#offline-exact-candidate-ignition-preflight",
         "docs/DATA_LINEAGE.md#what-this-does-not-prove"
       ]
+    },
+    {
+      "id": "A217",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Exercise unchanged E30 on a two-record historical refrigeration source subset and carry the missing evidence into a first-question brief.",
+      "hypothesis": "An engineer can start a generated investigation from a small documented subset while preserving authored identities, unknown configuration and a clear company recipient need.",
+      "evidence": "Official CSB Millard bulletin pinned at656148bytes; independent reader visually checks original pages and source scope. Existing E30 produces1finding with2authored asset references and3unanswered requests. Root6actualCLIs cover explicit pinned download/reuse, changed-source and missing-source refusals and exact screen reproduction; independent source-reader5offlineCLIs cover source controls and valve-deletion anti-trigger. Existing51question-engine tests include the new fixture. Separate software/provenance and engineer wording reviews retain their bounded scope; CI coverage is reported separately.",
+      "runs": "Development source-authored example and deterministic controls; original read before subset selection, feasibility run before committed screen; no held-out drawing test or new detector/extraction.",
+      "verdict": "kept",
+      "why": "Adds an actual historical refrigeration source case beyond the synthetic model without expanding local governance. Distinguishes pump-out duration from defrost frequency and energy prompts from a manual controls-record question. Company ownership, authority, accepted handoff, operational benefit and receiving integration remain unproven.",
+      "source": [
+        "docs/JOURNAL.md#84-start-a-refrigeration-question-with-two-sourced-records",
+        "examples/opportunity-screen/millard/README.md",
+        "examples/opportunity-screen/millard/ACCEPTANCE.md",
+        "examples/opportunity-screen/millard/first-question.md"
+      ]
     }
   ],
   "not_tried": [

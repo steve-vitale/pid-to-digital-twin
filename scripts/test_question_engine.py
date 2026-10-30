@@ -26,6 +26,7 @@ RUNS = {
                 "data/open100_equipment_schedule.json", "--schedule",
                 "examples/opportunity-screen/open100_schedule_fields.json"],
     "food": ["--model", "examples/opportunity-screen/food_plant_model.json"],
+    "millard/screen": ["--model", "examples/opportunity-screen/millard/model.json", "--question", "E30"],
 }
 ROLLUP = ["examples/opportunity-screen/food", "examples/opportunity-screen/bayer"]
 # Refrigeration, oven, dryer and fryer questions (added 2026-10-29 from a food manufacturer's walkthrough)

@@ -1038,5 +1038,20 @@
    "size": "18.8 MB staged of 6.7 GB",
    "value": "rows 2 and 3 on 92 heterogeneous real rasters (symbol boxes only)"
   }
+ ],
+ "question_packets": [
+  {
+   "id": "millard-defrost-source",
+   "family": "csb-millard",
+   "guide": "examples/opportunity-screen/millard/README.md",
+   "source_pin": "examples/opportunity-screen/millard/source.json",
+   "model": "examples/opportunity-screen/millard/model.json",
+   "question_selection": [
+    "E30"
+   ],
+   "fetch": "python -S examples/opportunity-screen/millard/verify_source.py --fetch",
+   "check": "python -S scripts/test_question_engine.py",
+   "evidence_role": "Historical refrigeration source-authored subset and plain first-question handoff. Additional CSB case, not independent agency family, held-out drawing, complete facility model or safety/performance validation. Outside the eight-workflow matrix."
+  }
  ]
 }

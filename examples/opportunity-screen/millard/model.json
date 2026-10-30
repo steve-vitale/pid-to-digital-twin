@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "model_id": "millard-defrost-source",
+    "title": "Millard historical evaporator control-bank source subset",
+    "source_document": "CSB 2010-13-A-AL, January 2015; source.json pins original bytes and locators",
+    "scope": "Authored aggregate and identifiers. Incomplete source subset for E30 only; not a site inventory, drawing of record, control sequence or generator-ready platform model. Unrepresented instruments/configuration remain unknown.",
+    "identifier_policy": "EVAP-GROUP and HG-MAIN are authored local labels, not tags read from the facility. The engine serializes them in tag fields; that does not make them plant identifiers."
+  },
+  "units": [
+    {
+      "id": "EVAP-GROUP",
+      "name": "Ammonia blast freezer evaporator group",
+      "type": "evaporator",
+      "source": "CSB 2010-13-A-AL, printed p. 11, section 5.2.1; authored aggregate of reported pair of evaporators / four coils, not an equipment tag"
+    }
+  ],
+  "streams": [],
+  "instruments": [],
+  "final_elements": [
+    {
+      "tag": "HG-MAIN",
+      "unit": "EVAP-GROUP",
+      "description": "Hot gas main valve for defrost",
+      "source": "CSB 2010-13-A-AL, printed p. 9, Figure 5; authored identifier, not a plant tag"
+    }
+  ]
+}

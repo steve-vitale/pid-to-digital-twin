@@ -197,7 +197,7 @@ Status: **proven**
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex matrix compatibility evidence/hash reviewer, 2026-10-30: pass
+- **Independent review:** Independent Codex agent: narrow question-packet manifest binding review, 2026-10-30: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source
@@ -264,9 +264,9 @@ Status: **proven**
 
 - **Tools:** `question_engine.py`
 - **How to use it:** [OPPORTUNITY_SCREEN.md](../docs/OPPORTUNITY_SCREEN.md)
-- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json), [`expected.json`](../examples/opportunity-screen/review-refresh/expected/expected.json), [`questions.json`](../examples/opportunity-screen/review-refresh/expected/questions.json), [`screen.md`](../examples/opportunity-screen/review-refresh/expected/screen.md)
+- **Example outputs:** [`screen.md`](../examples/opportunity-screen/te/screen.md), [`questions.json`](../examples/opportunity-screen/te/questions.json), [`screen.md`](../examples/opportunity-screen/bayer/screen.md), [`questions.json`](../examples/opportunity-screen/bayer/questions.json), [`screen.md`](../examples/opportunity-screen/open100/screen.md), [`questions.json`](../examples/opportunity-screen/open100/questions.json), [`screen.md`](../examples/opportunity-screen/food/screen.md), [`questions.json`](../examples/opportunity-screen/food/questions.json), [`rollup.md`](../examples/opportunity-screen/rollup-food-bayer/rollup.md), [`rollup.json`](../examples/opportunity-screen/rollup-food-bayer/rollup.json), [`expected.json`](../examples/opportunity-screen/review-refresh/expected/expected.json), [`questions.json`](../examples/opportunity-screen/review-refresh/expected/questions.json), [`screen.md`](../examples/opportunity-screen/review-refresh/expected/screen.md), [`screen.md`](../examples/opportunity-screen/millard/screen/screen.md), [`questions.json`](../examples/opportunity-screen/millard/screen/questions.json)
 - **Tests:** `test_question_engine.py`
-- **Independent review:** Independent Codex agent (narrow read-only starter prose/source renewal), 2026-10-30: pass
+- **Independent review:** Independent Codex agent: new-example CLI controls and explicit inherited-output compatibility review, 2026-10-30: pass
 
 <a id="impact-estimate"></a>
 ### First-draft annual energy, cost and CO2e from a measured change, with its assumptions and the data to firm it up

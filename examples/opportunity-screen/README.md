@@ -1,4 +1,4 @@
-# Opportunity screen: four worked examples and a roll-up
+# Opportunity screen: worked examples and a roll-up
 
 **Why it matters:** the first day of an energy or controls review is mostly asking the same questions of the
 drawings and writing down what to go and measure. These screens do that part, cite where every claim comes from,
@@ -12,6 +12,7 @@ How the engine works, the three evidence states and how to add a question: [`doc
 | [`bayer/`](bayer/) | Bayer residue treater from the CSB report (`data/bayer_rt/process_model.json`) | 12 | [`bayer/screen.md`](bayer/screen.md) |
 | [`open100/`](open100/) | 12 OPEN100 sheets extracted to a twin (`out/twin/r2-tiles-trace/codex/plant_model.json`) plus the equipment schedules | 29 | [`open100/screen.md`](open100/screen.md) |
 | [`food/`](food/) | **ILLUSTRATIVE** synthetic food plant section: ammonia refrigeration, a dryer, an oven, a fryer and utilities ([`food_plant_model.json`](food_plant_model.json)) | 24 | [`food/screen.md`](food/screen.md) |
+| [`millard/`](millard/) | Two source-authored records from a historical refrigeration bulletin; E30 only, deliberately incomplete model | 1 | [Screen and first-question brief](millard/README.md) |
 | [`rollup-food-bayer/`](rollup-food-bayer/) | Roll-up of the `food` and `bayer` screens as two sites | 36 across 24 questions | [`rollup-food-bayer/rollup.md`](rollup-food-bayer/rollup.md) |
 
 Regenerate (the test checks these outputs byte for byte):
@@ -23,15 +24,20 @@ python -S scripts/question_engine.py --model out/twin/r2-tiles-trace/codex/plant
     --schedule data/open100_equipment_schedule.json \
     --schedule examples/opportunity-screen/open100_schedule_fields.json --out examples/opportunity-screen/open100
 python -S scripts/question_engine.py --model examples/opportunity-screen/food_plant_model.json --out examples/opportunity-screen/food
+python -S scripts/question_engine.py --model examples/opportunity-screen/millard/model.json --question E30 --out examples/opportunity-screen/millard/screen
 python -S scripts/question_engine.py --rollup examples/opportunity-screen/food --rollup examples/opportunity-screen/bayer \
     --out examples/opportunity-screen/rollup-food-bayer
 ```
 
 [`food_plant_model.json`](food_plant_model.json) is an input and is **ILLUSTRATIVE**: written by hand for this
-example, not any plant, every tag invented, nothing measured. No public source gives a food plant P&ID to
-transcribe, so each item instead cites the public source that describes that kind of item in food plants (S25 dairy
+example, not any plant, every tag invented, nothing measured. No source P&ID was used to
+build that example, so each item instead cites the public source that describes that kind of item in food plants (S25 dairy
 and S26 fruit and vegetable ENERGY STAR guides, S27 the DOE burner tip sheet, with pages). Some items are drawn on
 purpose to show a question staying quiet (listed under "Anti-triggers" below).
+
+The separate [Millard example](millard/README.md) starts from an actual public report and simplified diagram.
+Its two-record subset exercises E30 and carries an unresolved question into a plain brief. It does not validate
+the other refrigeration/oven questions, real food-plant P&ID reading, or the completeness of its own equipment model.
 
 [`open100_schedule_fields.json`](open100_schedule_fields.json) is an input, not an output: the printed fields of
 every OPEN100 equipment schedule entry, read by eye from `data/drawings/open100_<sheet>.jpg` (one reader,

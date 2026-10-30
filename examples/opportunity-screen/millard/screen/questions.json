@@ -1,0 +1,100 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "examples/opportunity-screen/millard/model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "E30"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 1,
+  "by_family": {
+   "energy": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "E30@EVAP-GROUP",
+   "question_id": "E30",
+   "family": "energy",
+   "question": "Are these evaporators defrosted on a fixed timer rather than when frost is actually there?",
+   "about": "EVAP-GROUP",
+   "assets": [
+    {
+     "id": "EVAP-GROUP",
+     "tag": "EVAP-GROUP"
+    },
+    {
+     "id": "HG-MAIN",
+     "tag": "HG-MAIN"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "EVAP-GROUP",
+     "tag": "EVAP-GROUP",
+     "text": "equipment EVAP-GROUP reads \"EVAP-GROUP Ammonia blast freezer evaporator group\"",
+     "field": "units[EVAP-GROUP]"
+    },
+    {
+     "role": "defrost",
+     "id": "HG-MAIN",
+     "tag": "HG-MAIN",
+     "text": "final element HG-MAIN reads \"HG-MAIN Hot gas main valve for defrost\" at EVAP-GROUP",
+     "field": "final_elements[HG-MAIN]"
+    },
+    {
+     "role": "checked, none found",
+     "text": "no demand defrost initiation (coil differential pressure, frost sensor) drawn on this evaporator",
+     "field": "applies_when.without"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Defrost schedule per evaporator",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: defrost initiation (timer or demand), defrosts per day, duration and termination (time or coil temperature) per evaporator"
+     ],
+     "how": "List defrosts per day by season."
+    },
+    {
+     "item": "Frost on the coil when a scheduled defrost starts",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: look at the coil just before a few scheduled defrosts, in a dry week and a humid week"
+     ],
+     "how": "Note clear, light or heavy frost."
+    },
+    {
+     "item": "Hot gas use and room temperature rise per defrost",
+     "state": "not_on_drawing",
+     "where": [
+      "historian or DCS trend for HG-MAIN (no historian tag is mapped in this model for these)"
+     ],
+     "how": "The heat put in to defrost comes back as refrigeration load afterwards."
+    }
+   ],
+   "decision_rule": "Worth a look when coils are clear at scheduled defrosts, or the count per day is the same in dry weeks as in humid ones. Close it if defrost is already started on demand.",
+   "typical_benefit": {
+    "wording": "Demand defrost (S25, p. 66): \"Evaporators should be defrosted only when necessary, as opposed to on timed schedules where defrosting occurs regardless of need.\" \"Too frequent defrosts.\" is listed among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003). No % stated.",
+    "source": [
+     "S25"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
+    ]
+   },
+   "limits": "A coil differential pressure instrument on the evaporator is taken as demand defrost; check that it is used for that. A P&ID rarely shows the defrost timer itself, so the schedule always comes from the controls.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [],
+ "left_out": {}
+}

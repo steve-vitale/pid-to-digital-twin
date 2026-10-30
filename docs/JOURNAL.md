@@ -4233,3 +4233,45 @@ pass with one explicit Windows symlink skip. A separate AI engineer reader check
 independent source and provenance readers check the bounded evidence. No feature-output review, corpus score,
 held-out result, operator approval or adoption claim is renewed. N054 remains not-done for the complete public
 candidate-package recipe; N062 and N063 remain unproven. A first source question or evidence packet needs no gateway.
+
+
+## 84. Start a refrigeration question with two sourced records
+
+A fresh AI newcomer/recipient reading found no consequential first-use obstacle in the existing source-only brief
+and drawing-to-question route. It did not justify another workflow feature. The refrigeration corpus still had a
+concrete gap: the worked refrigeration questions used only the illustrative food model.
+
+The new [Millard example](../examples/opportunity-screen/millard/README.md) starts from the official CSB January
+2015 safety bulletin, No. 2010-13-A-AL. The PDF's exact bytes are pinned; its original asset URL returned HTTP403,
+while the official file.aspx link supplied the 656,148-byte original. A fixed-case standard-library helper checks
+the fingerprint offline and fetches missing bytes only with explicit --fetch. Changed local originals refuse,
+including with --fetch, rather than being replaced. The original remains outside Git.
+
+The model retains one authored aggregate and a hot-gas main valve from the simplified diagram/narrative. Their
+identifiers are local labels, not plant tags. It deliberately does not reconstruct complete piping, devices or
+logic. The existing E30 produces one finding over both records with three unanswered collection requests. Its
+absence statement refers to this incomplete model, not actual plant absence or confirmed timer initiation.
+Only E30 is selected; the other questions and safety functions have not been evaluated here.
+
+The plain first-question brief separates that generated energy prompt from a manually authored question about
+applicable controls records. Source review matters: the historical 20-versus-15-minute comparison concerns a
+pump-out step, not defrost frequency, energy performance or a safe duration. The partial source explanation does
+not complete E30's requests. The recipient, current authority, governing revision and accepted handoff remain
+unknown; no operational instruction or configuration change is proposed. The company system owns continuing
+stewardship when an actual recipient takes the packet. No context-register expansion or connector is added.
+
+The original was read before choosing the subset, and a private feasibility run preceded the committed screen.
+The acceptance note records that sequence. This is development evidence on an additional historical CSB case,
+not a new independent source agency, held-out drawing test, full refrigeration model or accuracy improvement.
+Independent source reading inspected the full original pages and simplified diagram. Five offline CLIs reproduce
+the screen, remove the valve as a labelled anti-trigger, and check original/changed/missing source behavior. Root
+runs six actual CLIs including the explicit download and preservation/refusal controls. All 51 existing question-
+engine tests pass with the new fixture included. Software and engineer-reader receipts keep their narrower scope;
+existing outputs retain their inherited reviews. Full-suite/CI coverage and skips are recorded separately.
+
+The question engine/catalog, all earlier screens, matrix criteria and results are unchanged. Corpus registration
+uses a separate question-packet entry outside the eight-workflow matrix. The catalog also binds that manifest
+as matrix evidence, so its new metadata requires a narrow independent binding renewal: existing input objects and
+all matrix results stay exact, and no cells are rerun. This does not renew the original execution/source audits.
+No measured engineer adoption, energy saving, site approval or receiving-company round trip is claimed;
+N062/N063 remain unproven.
