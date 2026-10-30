@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 import graph_export
 import context_register
 
@@ -66,6 +67,19 @@ class WorkedContext(unittest.TestCase):
             before = {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()}
             with self.assertRaisesRegex(ValueError, 'directory'):
                 module.preflight_expected([targets[0], conflict / 'context.md'], [source])
+            self.assertEqual(before, {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()})
+            # Linux reports ENOTDIR for this child, whereas Windows may first report it missing. Exercise
+            # the observed Linux exception on either host as well as the real filesystem case above.
+            original_lstat = Path.lstat
+
+            def linux_parent_error(path, *args, **kwargs):
+                if path == conflict / 'context.md':
+                    raise NotADirectoryError('illustrative Linux ENOTDIR for the same ordinary-file parent')
+                return original_lstat(path, *args, **kwargs)
+
+            with mock.patch.object(Path, 'lstat', new=linux_parent_error):
+                with self.assertRaisesRegex(ValueError, 'directory'):
+                    module.preflight_expected([targets[0], conflict / 'context.md'], [source])
             self.assertEqual(before, {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()})
 
     def test_metropt_offline_packet_retains_qualified_claims_and_collection_requests(self):

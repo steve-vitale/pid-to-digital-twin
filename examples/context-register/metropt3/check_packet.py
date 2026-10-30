@@ -40,6 +40,8 @@ def preflight_expected(destinations, protected):
                 info = part.lstat()
             except FileNotFoundError:
                 continue
+            except NotADirectoryError as error:
+                raise ValueError('Expected output parent must be a directory; no expected files changed') from error
             if stat.S_ISLNK(info.st_mode) or getattr(info, 'st_file_attributes', 0) & 0x400:
                 raise ValueError('Expected output contains a symlink/reparse alias; no expected files changed')
             if n and not stat.S_ISDIR(info.st_mode):

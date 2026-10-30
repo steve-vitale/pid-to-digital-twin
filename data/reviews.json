@@ -3742,6 +3742,176 @@
    },
    "limits": "Independent coding-agent metadata/hash review only. No new 54-cell or 94-cell execution, primary-source audit, accuracy/generalization result, human review, engineering approval, native import, causal effectiveness or adoption evidence is established. Existing failures/n/a, development reuse, generated/agent-made keys and other prior matrix limits remain.",
    "check_stdout": "docs/GENERALIZATION.md matches out/generalization/matrix.json; every cell's tool hashes match the files on disk"
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (narrow portability follow-up; actual Windows guards and labelled errno simulation)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository file and section bindings use SHA-256 with CRLF normalized to LF. Original-source, primary-proof and private_proof_hashes entries use SHA-256 over exact raw bytes, without normalization.",
+   "registered_output_count": 23,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "examples/context-register/metropt3/source_key.json": "51d72abe7f1fdccc20e10d053042151603ce793b6d93bd4c2b946864707f862b",
+    "examples/context-register/metropt3/proposed_answers.csv": "b56b2612e6b143848f78531598eabd46a4910f97ee25d1e0c7aa89f3a19826b3",
+    "examples/context-register/metropt3/expected/context.json": "d21f2b87bb808ff8562a64fe97bfeead25ba3f56bfe3dda629efa2249cdc7ce4",
+    "examples/context-register/metropt3/expected/context.md": "d0a535b0e915aab3cb5ae57c7822917749d6733eead2f64e38bad2a2bb0dee37"
+   },
+   "supporting_files": {
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/test_context_register.py": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "scripts/test_context_examples.py": "3b1eddd695d8a658a8e1bc1d6a54d5ceb1c5be2a408cbbc41ff4a6952c4eb726",
+    "examples/context-register/metropt3/model.json": "53d91f25a49c45a62c0ee5fdbb93a6ecdf70b9b05ebaaae7f5e0a50fa2e06141",
+    "examples/context-register/metropt3/questions.json": "cb64e7207396bf13432e4c8762554e5c7a927de870367877b1e610231e112209",
+    "examples/context-register/metropt3/prepare_sources.py": "3ca5b0aed1bccae16517e004f4d27bc131fcfd09a71dd1f859dde6eb9b6d0dc6",
+    "examples/context-register/metropt3/verify_sources.py": "3686dbb94ad8a004248315f5bd77ec71d76b6eb906b504378b1fbcc4b04b46a7",
+    "examples/context-register/metropt3/check_packet.py": "9f05791331ff38ac984add069b28c96288f99526cf7deae5b3b534f615445003",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/ACCEPTANCE.md": "4c5ed61138f545328422ce30826980d5976043a8f3a869704b4a93c13c4f131d",
+    "examples/context-register/metropt3/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "docs/CONTEXT_REGISTER.md": "9d0dbdfdba9af9a369af9957d9372d2c56598af8069464a59e370ae55a3b3791",
+    "docs/CONTEXT_LIFECYCLE.md": "084dae03bebb7584683cfa6e1ff22a3f5a0a5ea52c6ae339f9e390d876c6c86f",
+    "examples/context-register/README.md": "fd0684621e7adac2bcd17d1c0f499c45aa29333614d8c5b4c53d369ccf94fea3",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4",
+    "data/features.json": "6e18faeb39fb352f9c97f8ac37b0687394caa242ad10b2e5918ce11fe1822369",
+    "requirements-render.txt": "76259e1cd656bc788de8a71e6fa731d9779066c5abbf24008db0f8c9138c8e82",
+    ".gitignore": "c9514ece3ce68e2a40ae27449270bd93283575ca51e3e9cd87a8e055669719be"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Single Maintenance and reliability navigation bullet",
+     "normalization": "Exact complete UTF-8 line, followed by one LF; generated feature-table text elsewhere is excluded.",
+     "normalized_utf8_sha256": "0c9e5e3ed5956c308560152308c0a921706c8f2239c247f92bef81cbb03df6b3"
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "Linux CI on the initial 700b920 commit raised NotADirectoryError for a child path beneath an ordinary file. The preflight already refused writes, but its test expected the existing directory ValueError and failed.",
+     "resolution": "The helper now converts only NotADirectoryError from lstat into the same directory ValueError, preserving its cause. Other exceptions and all existing path/alias checks remain unchanged. The real filesystem case remains in the registered test, with an additional clearly labelled synthetic Linux-errno control; the test still delegates every other lstat to the actual filesystem."
+    }
+   ],
+   "resolution": "No open finding in this focused diagnostic repair. All 23 registered outputs and 18 other support bindings remain unchanged; only the helper and its registered test are updated. Eight publication cases and all six registered source-example tests pass locally. A controlled errno 20 injection reproduces the initial exception class and verifies the repaired refusal without any fixture-byte change. Native Linux confirmation remains the subsequent CI run, not this local simulation.",
+   "checks": [
+    "Inspected the exact helper diff: the new lstat handler catches NotADirectoryError and raises the existing parent-must-be-a-directory ValueError. It does not continue, permit the path, suppress an unrelated error or alter publication order. Existing source/output refusal behavior is preserved.",
+    "Read the initial Linux CI log: run 41032456202 reported 57/58 scripts passing, one failed script, and 17 unittest skips. The context-example script reported one error and one skip; its error is the ordinary-file child lstat raising errno 20 before publication. This receipt does not relabel the initial CI run as passing.",
+    "Independently injected NotADirectoryError(errno.ENOTDIR) only for the same ordinary-file child, delegating every other lstat to its real implementation. Exact 700b920 code propagates NotADirectoryError; final code raises the directory ValueError with the original cause. Both controlled calls leave every fixture byte unchanged. This is labelled fault injection on Windows, not an actual Linux execution.",
+    "Reran eight independent actual --write publication cases on disposable packet fixtures and actual pinned source copies: hardlinks to each original/output position, a packet-input alias, an output-pair hardlink, a second-target directory, an ordinary-file parent, an actual Windows junction, and successful ordinary publication/repetition. All refusal cases preserve all tested fixture/source bytes; normal publication still matches both expected outputs.",
+    "Independently ran the final six registered context-example tests against the real cached archive: pass, no local skips. The real native parent-path test remains, and the added synthetic exception test is clearly labelled and does not replace it.",
+    "Rechecked all 23 output hashes and all 20 support bindings. The outputs and 18 support files are unchanged from the committed initial review; only check_packet.py and test_context_examples.py have new hashes. The maintenance README section binding also remains current."
+   ],
+   "initial_ci_evidence": {
+    "run_id": 41032456202,
+    "commit": "700b920a95a0617af1ce1feaee7517d793fe6f8d",
+    "reported_scripts_passed": 57,
+    "reported_scripts_total": 58,
+    "reported_failed_scripts": 1,
+    "runner_reported_unittest_skips": 17,
+    "failed_script": "scripts/test_context_examples.py",
+    "error": "NotADirectoryError: errno 20 on ordinary-file/context.md",
+    "write_safety": "The path was already refused before publication; the mismatch was diagnostic classification.",
+    "log_sha256_raw": "3726a630cd43efb06bd9ba34719dd1934367de90d9feaefb0c930ee8ec01c1d7"
+   },
+   "followup_local_validation": {
+    "actual_publication_cases": 8,
+    "registered_context_example_tests": 6,
+    "local_registered_test_skips": 0,
+    "controlled_errno_baseline_exception": "NotADirectoryError",
+    "controlled_errno_final_exception": "ValueError",
+    "controlled_errno_fixture_bytes_unchanged": true,
+    "native_Linux_rerun_by_this_reviewer": false
+   },
+   "prior_software_review": {
+    "receipt_sha256_raw": "b0bf1f048dc4ac4cf22e832e793760aa0e14906c9610ee855903d0926a412e28",
+    "prior_independent_controls": 33,
+    "attribution": "The initial 33-control actual-source/CLI run belongs to the unchanged committed initial receipt and its then-bound helper. It was not rerun in full for this diagnostic-only follow-up. This record adds the focused eight-case publication rerun and final six registered tests.",
+    "prior_helper_sha256_lf": "5ed3ff5ac24dc39fe1621f968800b9d083e9d685d31787c4c86b723a3479e610"
+   },
+   "attributed_primary_source_review": {
+    "reviewer": "Independent AI controls_reader persona",
+    "kind": "Primary-source software-development packet review; not human engineering or operations review",
+    "outcome": "pass_12_source_facts_and_locators; caught_cross_source_scope_issue_resolved",
+    "proof_sha256_raw": "cc27c4a61c2c8be72d0a10fe191f352983cd9b0150226bd2e347220728294a2a",
+    "fact_and_locator_checks": 12,
+    "packet_bindings_current": true,
+    "scope": "Separate independent controls-reader audit: all three complete original PDF pages visually inspected and the full CSV streamed. It caught and resolved four cross-document statements in single-source proposals. This reviewer checked its exact final packet bindings and ran source-verifier CLIs; the visual original-page audit is attributed to that reviewer, not claimed as repeated here.",
+    "limits": [
+     "Development facts seen before acceptance; not held out or a new source family.",
+     "No human/engineering approval, work-order execution verification, live system, model extraction, customer data or native import.",
+     "No fresh verification of online license/DOI metadata; local original bytes and source content were checked.",
+     "No software lifecycle verdict from this audit; software reviewer is separate.",
+     "No uniform cadence, timezone, downsampling explanation, unique mode, causal improvement or present asset state established."
+    ]
+   },
+   "prior_review_scope": {
+    "unchanged_output_hashes": {
+     "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+     "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+     "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+     "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+     "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+     "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+     "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+     "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+     "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+     "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+     "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+     "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+     "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+     "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+     "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+     "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+     "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3"
+    },
+    "preserved": "Earlier PRONTO, Bayer, NIST and illustrative source/software review scope and limitations remain unchanged. Existing original-source audits and broad context-core adversarial suites were not repeated for this packet-only increment."
+   },
+   "limits": [
+    "This is a focused independent coding-agent software follow-up. Native Linux verification remains the new actual CI run. No final full-suite or CI pass is claimed here.",
+    "The initial CI runner explicitly reported17 unittest skips. That report is retained as an observed runner result, not a claim of complete cached-source execution.",
+    "Earlier original-source, broad 33-control and old 17-output review scopes are preserved rather than presented as repeated. The primary source audit remains separately attributed and no source/data/output changed.",
+    "No human/site review, authenticated approval, work execution, current plant truth, causal effectiveness, new accuracy/generalization, deployment or adoption evidence is established. Known-path preflight is not a concurrent-writer lock or multi-file atomic transaction."
+   ],
+   "private_proof_hashes": {
+    "portability_followup.py": "7d57605f82120d458414c97f00203e1a219adb89d934ff76a6f7300d29851370",
+    "portability-followup-proof.json": "49277ebc28ff1d3c5e3eeff6867eda39bde467766e628665287bed2a4a5813f3"
+   },
+   "private_proof_hash_method": "SHA-256 over the exact raw bytes of each named private proof file; no line-ending normalization.",
+   "hash_convention_correction": {
+    "superseded_receipt_sha256_raw": "a7767387519302ba4e5d2cd360ef64c8071f9bd0fe1e6640c4f7455608cd08b6",
+    "reason": "The preceding receipt used LF-normalized private-proof digests under its general file convention. Ingestion expected raw proof digests. The current LF-normalized proof content exactly matches the preceding bound digest; no verification-result content changed. This reissue makes private-proof digests explicitly raw.",
+    "previous_private_proof_sha256_lf": {
+     "portability_followup.py": "7d57605f82120d458414c97f00203e1a219adb89d934ff76a6f7300d29851370",
+     "portability-followup-proof.json": "b17b8bd9242d4649d451c01ae481999f627d39c1a184ece8396e51499efeab81"
+    },
+    "actual_private_proof_sha256_raw": {
+     "portability_followup.py": "7d57605f82120d458414c97f00203e1a219adb89d934ff76a6f7300d29851370",
+     "portability-followup-proof.json": "49277ebc28ff1d3c5e3eeff6867eda39bde467766e628665287bed2a4a5813f3"
+    },
+    "proof_JSON_CRLF_sequences": 103,
+    "controls_rerun_for_hash_correction": false,
+    "all_repository_bindings_unchanged": true
+   }
   }
  ]
 }

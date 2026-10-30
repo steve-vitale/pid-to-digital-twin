@@ -3882,3 +3882,10 @@ matrix inputs. The central-context/receiving-system adapter and real engineer pi
 The full local runner reports 58 successful script exits, zero failures, two Windows privilege-related unittest
 skips and two platform notices explaining those same cases. The MetroPT original-source case executes locally.
 This is not a complete-suite pass; CI and source-absent environments need their own omission report.
+
+The first Linux CI run at `700b920` passed 57 scripts and failed the expected-publication regression. Linux
+raises `NotADirectoryError` for a child beneath an ordinary file; Windows first reports that child missing and
+then reaches the explicit parent-directory check. The unsafe path already refused, but its exception did not
+match the intended consistent diagnostic. Preflight now normalizes that Linux error to the same directory
+refusal. The real filesystem control is unchanged; a separately labelled Linux-errno control also exercises this
+path on Windows. No source/output content, matrix criterion or assertion was relaxed to obtain a pass.
