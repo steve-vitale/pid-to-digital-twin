@@ -14,6 +14,7 @@ import tempfile
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -72,6 +73,27 @@ class Registry(unittest.TestCase):
 
 
 class Rendering(unittest.TestCase):
+    def test_changed_dynamic_dependency_invalidates_intake_results(self):
+        original_hash = cm.file_hash
+        for row, input_id in ((3, "te-rev-a"), (4, "dexpi"), (7, "dexpi")):
+            with self.subTest(row=row, input=input_id):
+                recorded = {f: original_hash(f) for f in cm.tool_files(row, input_id)}
+                matrix = {"cells": [{"row": row, "input": input_id, "tool_files": recorded}]}
+                self.assertEqual(cm.stale_cells(matrix), [])
+                with patch.object(cm, "file_hash", side_effect=lambda f:
+                                  "changed-confidence-code" if f == "scripts/confidence.py" else original_hash(f)):
+                    stale = cm.stale_cells(matrix)
+                self.assertEqual(len(stale), 1)
+                self.assertIn("scripts/confidence.py", stale[0])
+
+    def test_omitted_required_dependency_is_not_a_current_result(self):
+        recorded = {f: cm.file_hash(f) for f in cm.tool_files(3, "open100-dev")}
+        self.assertIn("scripts/build_twin.py", recorded)
+        del recorded["scripts/build_twin.py"]
+        stale = cm.stale_cells({"cells": [{"row": 3, "input": "open100-dev", "tool_files": recorded}]})
+        self.assertEqual(len(stale), 1)
+        self.assertIn("required tool hash missing: scripts/build_twin.py", stale[0])
+
     def test_check_passes(self):
         self.assertTrue(cm.OUT_JSON.is_file(), "run python scripts/corpus_matrix.py first")
         self.assertEqual(cm.main(["--check"]), 0)

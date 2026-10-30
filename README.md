@@ -33,6 +33,11 @@ Existing operational systems can keep executing the work. Specialized generation
 context and return new findings for review. The toolkit demonstrates the starting workflow and supplies portable
 files; the receiving-system adapter still needs to be built and checked. See [the next step after a pilot](examples/first-pilot/README.md#after-the-first-packet).
 
+For the next connections, see [connecting a first packet to company systems](docs/INTERNAL_CONNECTIVITY.md):
+start with company-approved Copilot and documents, then add asset and signal identity, operating history,
+maintenance events and an optional internal MCP access layer. It distinguishes existing tools from integrations
+still to build, including an additional OKF export, and covers a strict food and beverage data boundary.
+
 P&ID extraction was the first tested entry point: AI vision models read symbols and tags on piping and
 instrumentation diagrams, code traces the lines, and a builder produces a draft asset model and platform staging
 files. Extraction from real drawings is scored against public third-party answer keys; the generated drawings

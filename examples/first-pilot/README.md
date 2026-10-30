@@ -105,5 +105,10 @@ should hold the maintained context and released snapshots from which those tools
 finding is a new proposal for review. The [lifecycle guide](../../docs/CONTEXT_LIFECYCLE.md) describes that intended
 handoff; an actual adapter and round trip still need validation. There is no ready hosted connector in this repo.
 
+The [connectivity sequence](../../docs/INTERNAL_CONNECTIVITY.md) starts with company-approved Copilot and selected
+documents, including a path with no custom agent or local installation. It then explains how an optional internal
+MCP access layer could add bounded historian and maintenance queries, while the company system retains the
+decisions. It is integration guidance; no MCP server or live connector is shipped yet.
+
 This workflow has software examples and AI reader review; no engineer's adoption or operational benefit has been
 measured with it. Use that first site pilot to learn whether the package helps, including a result that it does not.

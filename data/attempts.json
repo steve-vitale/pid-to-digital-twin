@@ -3334,6 +3334,42 @@
         "docs/EVALUATION.md#7-which-layer-each-evaluation-measures",
         "docs/DATA_LINEAGE.md#what-this-does-not-prove"
       ]
+    },
+    {
+      "id": "A226",
+      "function": "risk_ranking",
+      "date": "2026-10-30",
+      "change": "Bind cached confidence traces to image bytes and declare their dynamic dependency in matrix currentness checks.",
+      "hypothesis": "Revised drawings at the same filename must not inherit old geometry; a current matrix must bind every required declared dependency.",
+      "evidence": "A real TE copy changed to blank retains18networks in the old cache, while a fresh trace finds0. A synthetic real-tracer control reproduces the same-path/same-mtime defect and a missing-image cache hit. The matrix previously accepted an omitted builder binding and did not hash confidence.py. The fix adds the image digest, declares the known dynamic import on17actual intake routes and refuses missing required hashes.",
+      "runs": "Current whole94baseline reproduces63pass23fail8n/a, with7individually checked citation-line relocations. After the fix,17affected cells are actually refreshed with0substantive result changes and77complete cells retained exactly. Five TE twins rebuilt with separate empty caches have0fulltyped differences after exact source-run prefix relocation. OPEN100 private-copy reannotation has0field differences and preserves3ops_review records. Public models unchanged; two affected recorded stages renewed only after equivalence checks. No new extraction/model call, held-out trial, source family, operational acceptance or timing-savings claim.",
+      "verdict": "kept",
+      "why": "Closes demonstrated stale-evidence paths without changing calibrated weights, thresholds, tracer, criteria or engineering models.",
+      "source": [
+        "docs/JOURNAL.md#93-bind-confidence-traces-to-the-drawing-bytes",
+        "scripts/confidence.py",
+        "scripts/corpus_matrix.py",
+        "scripts/test_along_line.py",
+        "scripts/test_corpus_matrix.py",
+        "docs/GENERALIZATION.md"
+      ]
+    },
+    {
+      "id": "A227",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Explain a Copilot-first connectivity sequence for a company with strict food and beverage data boundaries.",
+      "hypothesis": "An engineer with only approved work Copilot should be able to begin a sourced investigation before requesting custom agents, servers or live data access.",
+      "evidence": "New guide distinguishes selected-file Chat, optional SharePoint grounding, licensed/admin-backed agents and later Studio/MCP access. Primary Microsoft/MCP/OPC/OKF sources support the interface boundaries. It prioritizes source revisions, reviewed identities, history windows, maintenance events and a draft finding returned to the company system. Source permissions, connector policies, web grounding and controlled quality records remain explicit. OT boundary profiles distinguish no cross-network connection, existing one-way replication and explicitly approved cross-zone services; internal MCP does not create cloud reachability. No firewall/tunnel/reverse-relay workaround is prescribed.",
+      "runs": "Documentation and primary-specification review only. No company tenant, private data, deployment, connector or native import is exercised; no MCP server, OKF exporter, company governance application, regulatory compliance or measured user adoption is claimed.",
+      "verdict": "kept",
+      "why": "Keeps the toolkit usable as an on-ramp under realistic corporate constraints; ongoing authority, decisions and ownership remain in the company system.",
+      "source": [
+        "docs/JOURNAL.md#94-design-the-next-connections-for-a-copilot-only-engineer",
+        "docs/INTERNAL_CONNECTIVITY.md",
+        "README.md#from-a-first-packet-to-company-context",
+        "examples/first-pilot/README.md#after-the-first-packet"
+      ]
     }
   ],
   "not_tried": [

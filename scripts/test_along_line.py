@@ -12,9 +12,11 @@ Also checks that asking for the geometry never changes trace()'s links.
 Usage: python scripts/test_along_line.py
 """
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 import cv2
 import numpy as np
@@ -58,6 +60,7 @@ def main():
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
+        confidence_cache_revision(tmp, check)
         img = tmp / "0.png"
         draw(img)
         links = tc.trace(img, SYMBOLS)
@@ -97,6 +100,41 @@ def main():
         plant_coded_tags(tmp, check)
     print(f"{len(fails)} failed" if fails else "all passed")
     sys.exit(1 if fails else 0)
+
+
+def confidence_cache_revision(tmp, check):
+    """A real drawing revision must retrace even at the same filename and timestamp."""
+    import confidence
+    image = tmp / "cache-sheet.png"
+    draw(image)
+    old_cache = confidence.CACHE
+    confidence.CACHE = tmp / "isolated-cache"
+    try:
+        with patch.object(tc, "trace", wraps=tc.trace) as tracing:
+            original = confidence.trace_info(image, SYMBOLS, None)
+            repeated = confidence.trace_info(image, SYMBOLS, None)
+            check("identical drawing reuses its real line trace", original == repeated and tracing.call_count == 1)
+            stat = image.stat()
+            check("control drawing has real line networks", bool(original["networks"]))
+            cv2.imwrite(str(image), np.full((1000, 1000), 255, np.uint8))
+            os.utime(image, ns=(stat.st_atime_ns, stat.st_mtime_ns))
+            revised = confidence.trace_info(image, SYMBOLS, None)
+            check("same filename and retained timestamp retraces changed bytes", tracing.call_count == 2)
+            check("revised blank drawing does not inherit old networks",
+                  revised["networks"] == {} and revised != original)
+            repeated_revision = confidence.trace_info(image, SYMBOLS, None)
+            check("unchanged revised drawing reuses only its new trace",
+                  repeated_revision == revised and tracing.call_count == 2)
+            image.unlink()
+            try:
+                confidence.trace_info(image, SYMBOLS, None)
+            except FileNotFoundError:
+                missing_refused = True
+            else:
+                missing_refused = False
+            check("missing drawing cannot be masked by an existing trace cache", missing_refused)
+    finally:
+        confidence.CACHE = old_cache
 
 
 def plant_coded_tags(tmp, check):

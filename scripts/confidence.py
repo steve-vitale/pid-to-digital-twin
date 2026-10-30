@@ -178,7 +178,8 @@ def trace_info(image, symbols, options):
     """Which line networks each symbol touches, and which symbols the tracer dropped. Cached on disk by input hash."""
     import trace_connections as tc
     code = hashlib.sha256(Path(tc.__file__).read_bytes()).hexdigest()  # a tracer change invalidates the cache
-    key = hashlib.sha256(json.dumps([str(image), sorted((s["id"], s["box"]) for s in symbols), options, code],
+    image_hash = hashlib.sha256(Path(image).read_bytes()).hexdigest()
+    key = hashlib.sha256(json.dumps([str(image), image_hash, sorted((s["id"], s["box"]) for s in symbols), options, code],
                                     sort_keys=True).encode()).hexdigest()[:24]
     cpath = CACHE / f"{key}.json"
     if cpath.exists():

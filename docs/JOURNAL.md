@@ -4551,3 +4551,70 @@ two platform notices explain skips rather than adding cases. This is not a compl
 acceptance claim. These checks concern the existing prototype and its records, not engineering approval,
 organizational adoption or measured operating benefit. Registered example outputs and their existing
 whole-feature reviews remain unchanged by these documentation corrections.
+
+## 93. Bind confidence traces to the drawing bytes
+
+A current reproduction of the complete matrix executes all 94 cells at the previous code revision, with
+63 pass, 23 fail and 8 n/a verdicts. Every metric, reason and substantive result matches the committed matrix.
+Seven published-reference line numbers move with intervening documentation edits; each is checked against the
+same source passage. This is present-day reproduction, not recovery of an unlocated historical command log or
+a fresh held-out evaluation.
+
+That verification exposes a separate defect: the confidence trace cache keys the image path, symbols, options
+and tracer code, but omits the image bytes. Replacing a private copy of a TE drawing with a blank image at the
+same path returns its old 18 networks; a fresh cache returns zero. A synthetic real-tracer control also reproduces
+the problem when the revised file retains its timestamp. Missing source images can be hidden by the old cache.
+
+The key now includes the image's SHA256 digest, read before a cache hit. Controls exercise unchanged reuse,
+changed-byte retracing, no inherited networks, revised-image reuse and refusal of a missing image. Fitted weights,
+thresholds, safety rules, tracing and scoring methods do not change.
+
+The matrix also omitted confidence.py from its tool bindings because the builder imports it dynamically. Three
+explicit intake-route declarations add the dependency to exactly 17 cells. Native-reader overrides remain
+separate. The currentness check now refuses an omitted required dependency, as well as a changed recorded hash.
+This is a maintained declaration of a known dynamic import, not arbitrary dynamic-import discovery. Negative
+controls cover changed confidence code and a removed builder binding.
+
+All 17 affected cells are actually re-executed after the fix. Their engineering results are unchanged; the other
+77 complete cells are retained exactly from the current whole-matrix run. The resulting 94-cell matrix still
+reports 63 pass, 23 fail and 8 n/a. These refreshes are deterministic checks of existing inputs, not 17 new corpus
+items, new source families or prospective trials.
+
+Five historical revision-A twins are then rebuilt with separate empty confidence caches from hash-bound preserved
+raw run records. Clean images match revision A; degraded cases use the recorded L2/L3 images. Full parsed model
+comparisons find no differences after only the exact source-run directory relocation. A private copy of the
+current OPEN100 model is re-annotated from preserved extraction records for the public drawings with an empty
+cache: zero field differences, with
+all three existing ops_review records preserved. Public models are not overwritten. The existing pipeline record
+command renews just the two affected recorded stages after these checks; a fresh lock alone does not prove them.
+
+## 94. Design the next connections for a Copilot-only engineer
+
+The connectivity guide starts with an engineer who has company-approved Copilot, restricted installation rights
+and sensitive manufacturing records. The first investigation uses explicitly permitted documents and a source
+brief, with a manual evidence route where the available experience cannot retrieve them reliably. It does not
+require a coding agent, a personal subscription or a local Python installation for that reader.
+
+Primary Microsoft documentation distinguishes selected-file Copilot Chat, organizational grounding, SharePoint
+agents and Copilot Studio extensions. The guide keeps their licensing, source permissions, connector policies
+and actual channel behavior conditional. An internal MCP server is a later access layer; a local stdio developer
+experiment is not a ready endpoint for the documented Studio Streamable transport. No company tenant, account,
+private document or live data source is used or configured in this work.
+
+The proposed connection order is approved document revisions, reviewed asset/signal identities, bounded historian
+observations, maintenance events and a returned draft finding in the company's review process. Process data does
+not establish identity, causation or an accepted decision by itself. Food and beverage examples start with
+synthetic or explicitly cleared utility/equipment records. Original quality records and changes to sanitation,
+process limits or release decisions stay in the company's existing controlled processes.
+
+The user's operations-network constraint is explicit: some sites permit no ports across IT/OT. The guide now
+separates disconnected snapshots, existing one-way replication and an explicitly approved cross-zone service.
+An OT-local MCP service does not make cloud Copilot reachable. No tunnel, reverse relay or firewall change is
+proposed as a workaround; unavailable or aged observations must remain labelled as such. NIST's published OT
+guidance and unidirectional-gateway definition support those distinctions. No network configuration is changed.
+
+The guide distinguishes exact JSON/CSV engineering exports, the proposed additional OKF knowledge bundle, MCP
+access and process-data interfaces. Canonical OKF 0.2 and Google's October 22 announcement support the format
+direction; no OKF exporter or Google import is implemented or validated here. No MCP server, live connector,
+company governance application, compliance certification or measured adoption benefit is claimed. These are
+next-step integration instructions and boundaries for the on-ramp, not additional shipped features or corpus runs.

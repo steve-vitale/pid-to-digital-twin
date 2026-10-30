@@ -136,15 +136,18 @@ ROW_INPUTS = {
 }
 # The tool files each row's cells exercise (roots; the scripts/ modules they import are added by tool_files), hashed
 # into every cell so --check can tell a stale cell.
+# Known dynamic imports need explicit roots: build_twin calls confidence through __import__.
+# These declarations cover the intake routes below; native-reader overrides do not call it.
 ROW_TOOL_FILES = {
     1: ["scripts/scan_cleanup.py", "scripts/trace_connections.py", "scripts/score_pid2graph.py"],
     2: ["scripts/evaluate_vendor.py", "scripts/score_pid2graph.py"],
-    3: ["scripts/import_site_drawing.py", "scripts/deliverable_report.py", "scripts/test_scorer_controls.py"],
+    3: ["scripts/import_site_drawing.py", "scripts/deliverable_report.py", "scripts/test_scorer_controls.py",
+        "scripts/confidence.py"],
     4: ["scripts/loop_audit.py"],
     5: ["scripts/generate.py"],
     6: ["scripts/csv_normal_bands.py"],
     7: ["scripts/dexpi_to_twin.py", "scripts/adapt_dexpi.py", "scripts/import_site_drawing.py",
-        "scripts/score_pid2graph.py"],
+        "scripts/score_pid2graph.py", "scripts/confidence.py"],
     8: ["scripts/line_layers.py", "scripts/trace_connections.py", "scripts/score_pid2graph.py"],
 }
 # Cells that exercise other files than their row's roots (the 2026-10-29 inputs): exactly these, plus their imports.
@@ -161,7 +164,7 @@ ROW_TOOL_FILES_ONLY = {
                                          + (["scripts/scan_cleanup.py"] if r == 1 else []) for r in (1, 8)},
 }
 ROW_TOOL_FILES_BY_INPUT = {(4, "dexpi"): ["scripts/dexpi_to_twin.py", "scripts/adapt_dexpi.py",
-                                          "scripts/import_site_drawing.py"],
+                                          "scripts/import_site_drawing.py", "scripts/confidence.py"],
                            (8, "dexpi"): ["scripts/adapt_dexpi.py", "scripts/dexpi_to_twin.py"],
                            (8, "te-rev-d"): ["scripts/draw_pid_from_model.py"],
                            (8, "bayer-rt1"): ["scripts/draw_pid_from_model.py"]}
@@ -238,7 +241,7 @@ def missing_files(inp):
 
 
 def tool_files(row, input_id):
-    """The row's root tool files plus every scripts/ module they import, directly or not (read from the source)."""
+    """Explicit roots (including known dynamic imports), plus scripts/ imports found in source text."""
     todo = list(ROW_TOOL_FILES_ONLY.get((row, input_id))
                 or ROW_TOOL_FILES[row] + ROW_TOOL_FILES_BY_INPUT.get((row, input_id), []))
     seen = []
@@ -273,6 +276,10 @@ def stale_cells(matrix):
         recorded = c.get("tool_files")
         if not recorded:
             out.append(f"{where}: no tool hash recorded (the cell predates per-cell hashes)")
+            continue
+        missing = sorted(set(tool_files(c["row"], c["input"])) - set(recorded))
+        if missing:
+            out.append(f"{where}: required tool hash missing: {', '.join(missing)}")
             continue
         changed = [f for f, h in recorded.items() if file_hash(f) != h]
         if changed:

@@ -197,7 +197,7 @@ Status: **proven**
 - **How to use it:** [GENERALIZATION.md](../docs/GENERALIZATION.md)
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent Codex agent: bounded pyTEP source-provenance and matrix metadata review, 2026-10-30: pass
+- **Independent review:** Independent Codex agent: current whole-matrix reproduction and bounded cache/dependency refresh review, 2026-10-30: pass
 
 <a id="statement-review"></a>
 ### Every output as plain statements, checked against its source
