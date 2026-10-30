@@ -1,0 +1,116 @@
+{
+  "schema": "context-sources-1",
+  "about": "Two exact members of one pinned UCI release; content-derived revision label, not a manufacturer revision. Resolve using --source-root data/external/metropt3/context.",
+  "documents": [
+    {
+      "id": "MPT-DESCRIPTION",
+      "title": "Data Description_Metro.pdf",
+      "path": "Data Description_Metro.pdf",
+      "revision": "uci-791/zip-aab991a970e58210",
+      "bytes": 81208,
+      "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+      "url": "https://archive.ics.uci.edu/dataset/791/metropt+3+dataset",
+      "license": "CC BY 4.0",
+      "attribution": "N. Davari, B. Veloso, R. Ribeiro and J. Gama, MetroPT-3 Dataset, UCI Machine Learning Repository, doi:10.24432/C5VW3R, CC BY 4.0.",
+      "locators": [
+        {
+          "id": "m01",
+          "locator": "PDF pages 1-2; summary Number of Instances, Data Set Information and Attribute Information opening paragraph",
+          "questions": [
+            "MPT-COVERAGE@MPT-APU"
+          ]
+        },
+        {
+          "id": "m03",
+          "locator": "PDF page 3, Failure Information table, data rows 1-2 including Nr., Start Time and End Time",
+          "questions": [
+            "MPT-EVENT-IDENTITY@MPT-APU"
+          ]
+        },
+        {
+          "id": "m04",
+          "locator": "PDF page 3, Failure Information table, data row 2, all six columns (printed Nr. #1)",
+          "questions": [
+            "MPT-MAY-WORK@MPT-APU"
+          ]
+        },
+        {
+          "id": "m05",
+          "locator": "PDF page 3, Failure Information table, data row 3, all six columns (printed Nr. #3)",
+          "questions": [
+            "MPT-EFFECTIVENESS@MPT-APU"
+          ]
+        },
+        {
+          "id": "m06",
+          "locator": "PDF page 3, Failure Information table, data row 4, all six columns (printed Nr. #4)",
+          "questions": [
+            "MPT-EFFECTIVENESS@MPT-APU"
+          ]
+        },
+        {
+          "id": "m07",
+          "locator": "PDF page 2, Attribute Information, numbered items 6 (Motor Current) and 7 (Oil Temperature)",
+          "questions": [
+            "MPT-COLUMNS@MPT-APU"
+          ]
+        },
+        {
+          "id": "m10",
+          "locator": "PDF page 2, Attribute Information, item 8 COMP, complete definition",
+          "questions": [
+            "MPT-MODE@MPT-APU"
+          ]
+        },
+        {
+          "id": "m11",
+          "locator": "PDF page 3, Attribute Information, item 9 DV electric, complete definition",
+          "questions": [
+            "MPT-MODE@MPT-APU"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MPT-CSV",
+      "title": "MetroPT3(AirCompressor).csv",
+      "path": "MetroPT3(AirCompressor).csv",
+      "revision": "uci-791/zip-aab991a970e58210",
+      "bytes": 218300507,
+      "sha256": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+      "url": "https://archive.ics.uci.edu/dataset/791/metropt+3+dataset",
+      "license": "CC BY 4.0",
+      "attribution": "N. Davari, B. Veloso, R. Ribeiro and J. Gama, MetroPT-3 Dataset, UCI Machine Learning Repository, doi:10.24432/C5VW3R, CC BY 4.0.",
+      "locators": [
+        {
+          "id": "m02",
+          "locator": "CSV physical lines 1-1516949; header and all timestamp fields, first/last records and adjacent-gap profile",
+          "questions": [
+            "MPT-COVERAGE@MPT-APU"
+          ]
+        },
+        {
+          "id": "m08",
+          "locator": "CSV physical line 1; named columns H:I (one-based, including the unnamed leading field), plus exact DV_eletric header",
+          "questions": [
+            "MPT-COLUMNS@MPT-APU"
+          ]
+        },
+        {
+          "id": "m09",
+          "locator": "CSV physical lines 1-2; header H:I and first data record at timestamp 2020-02-01 00:00:00",
+          "questions": [
+            "MPT-COLUMNS@MPT-APU"
+          ]
+        },
+        {
+          "id": "m12",
+          "locator": "CSV physical lines 1-2; timestamp and named Motor_current, COMP, DV_eletric columns",
+          "questions": [
+            "MPT-MODE@MPT-APU"
+          ]
+        }
+      ]
+    }
+  ]
+}

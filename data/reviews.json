@@ -3545,6 +3545,203 @@
     "matrix-change-proof.json": "9d4788eef2865b21a7fddbb65db9ffbf7081a50b792073faa74bee84b19575e6"
    },
    "maintainer_runner_sha256_lf": "677a7708edd06fbefd6dea1245c20ffd7d3f0297fb54147db884e6661a0f6b6f"
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (read-only actual-source/CLI and adversarial publication review)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over bytes with CRLF normalized to LF; original-source and explicitly marked primary-proof hashes are raw SHA-256.",
+   "registered_output_count": 23,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "examples/context-register/metropt3/source_key.json": "51d72abe7f1fdccc20e10d053042151603ce793b6d93bd4c2b946864707f862b",
+    "examples/context-register/metropt3/proposed_answers.csv": "b56b2612e6b143848f78531598eabd46a4910f97ee25d1e0c7aa89f3a19826b3",
+    "examples/context-register/metropt3/expected/context.json": "d21f2b87bb808ff8562a64fe97bfeead25ba3f56bfe3dda629efa2249cdc7ce4",
+    "examples/context-register/metropt3/expected/context.md": "d0a535b0e915aab3cb5ae57c7822917749d6733eead2f64e38bad2a2bb0dee37"
+   },
+   "supporting_files": {
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/test_context_register.py": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "scripts/test_context_examples.py": "899750da82e671aa3381bfe0aef1e9bc94a031c28bec8ed615a580b7f9b31dc7",
+    "examples/context-register/metropt3/model.json": "53d91f25a49c45a62c0ee5fdbb93a6ecdf70b9b05ebaaae7f5e0a50fa2e06141",
+    "examples/context-register/metropt3/questions.json": "cb64e7207396bf13432e4c8762554e5c7a927de870367877b1e610231e112209",
+    "examples/context-register/metropt3/prepare_sources.py": "3ca5b0aed1bccae16517e004f4d27bc131fcfd09a71dd1f859dde6eb9b6d0dc6",
+    "examples/context-register/metropt3/verify_sources.py": "3686dbb94ad8a004248315f5bd77ec71d76b6eb906b504378b1fbcc4b04b46a7",
+    "examples/context-register/metropt3/check_packet.py": "5ed3ff5ac24dc39fe1621f968800b9d083e9d685d31787c4c86b723a3479e610",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/ACCEPTANCE.md": "4c5ed61138f545328422ce30826980d5976043a8f3a869704b4a93c13c4f131d",
+    "examples/context-register/metropt3/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "docs/CONTEXT_REGISTER.md": "9d0dbdfdba9af9a369af9957d9372d2c56598af8069464a59e370ae55a3b3791",
+    "docs/CONTEXT_LIFECYCLE.md": "084dae03bebb7584683cfa6e1ff22a3f5a0a5ea52c6ae339f9e390d876c6c86f",
+    "examples/context-register/README.md": "fd0684621e7adac2bcd17d1c0f499c45aa29333614d8c5b4c53d369ccf94fea3",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4",
+    "data/features.json": "6e18faeb39fb352f9c97f8ac37b0687394caa242ad10b2e5918ce11fe1822369",
+    "requirements-render.txt": "76259e1cd656bc788de8a71e6fa731d9779066c5abbf24008db0f8c9138c8e82",
+    ".gitignore": "c9514ece3ce68e2a40ae27449270bd93283575ca51e3e9cd87a8e055669719be"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Single Maintenance and reliability navigation bullet",
+     "normalization": "Exact complete UTF-8 line, followed by one LF; generated feature-table text elsewhere is excluded.",
+     "normalized_utf8_sha256": "0c9e5e3ed5956c308560152308c0a921706c8f2239c247f92bef81cbb03df6b3"
+    }
+   ],
+   "findings": [],
+   "resolved_findings": [
+    {
+     "issue": "The first check_packet.py --write could overwrite an original source through a hard-linked expected output, return zero and falsely report original-byte preservation. The preservation assertion occurred before final publication.",
+     "independent_reproduction": "On disposable copies of the actual pinned sources and packet, linking expected/context.json to the copied original PDF changed that PDF from its pinned raw hash to the generated context JSON hash while returning success. The public original remained unchanged.",
+     "resolution": "Final code preflights both destinations, every ancestor, aliases and known packet/source inputs before controls and again before either write; original/model hashes are checked after publication too. Independent actual --write controls verify both original/output positions, a packet-input alias, an output-pair hardlink, directory/parent conflicts and an actual Windows junction all refuse with exit 2 and no fixture-byte changes. Ordinary publication and repeat still succeed."
+    }
+   ],
+   "resolution": "No open finding in this bounded MetroPT context increment. The six added registered files reproduce through actual original-source CLIs, and all seventeen earlier registered output hashes remain unchanged. The existing context core is unchanged. This is source-specific development on an existing historian family, with proposed answers and unresolved ownership/evidence; no new global source family, anomaly-method score, held-out claim or operational authority is established.",
+   "checks": [
+    "Thirty-three independent source-copy/CLI controls pass. Preparation extracts only the two pinned original ZIP members, with exact names, sizes and raw hashes. Re-preparation preserves bytes and modification times; missing ZIP, incomplete/changed/extra-file destinations and actual Windows root/ancestor junctions refuse without changing the tested fixture.",
+    "The source verifier checks actual hashes and the full released-file CSV profile. Default execution explicitly withholds PDF semantics; optional --pdf-text succeeds with the installed optional dependency. A private packet copy with deliberately invalid source_key and proposals still verifies actual originals, demonstrating that source verification does not substitute derived material. Changed PDF and CSV refuse.",
+    "Actual context prepare/apply produces the exact committed context JSON/report: six questions, twelve proposed decisions, five needs-data states and one partial state. All six need owners. Every proposal retains unknown plant truth with blank owner, assignment, reviewer and review dates. The authored packet asset scope is not promoted into physical identity, ownership or current equipment state.",
+    "Independent copied-PDF and copied-CSV byte revisions stale exactly eight and four dependent answers while preserving all twelve immutable decisions and unrelated current answers. A single locator edit stales only MPT-M01; an effectiveness-request edit stales only MPT-M05/M06. Old fingerprints, an unannounced source digest change, missing originals and an unknown proposal locator refuse before changing existing outputs.",
+    "Same-path retained-register reapplication is byte-identical. Omitting --register from a nonempty destination refuses a history reset. Editing cached current states, owners and answers cannot mint decisions or assignments: actual refresh rebuilds the prior current state from real inputs and immutable history.",
+    "Eight actual --write publication cases pass on copied packet fixtures and actual source copies, including the reproduced original-alias failure now refused and successful ordinary publication/repetition. The copied helper retains the exact reviewed source; only its repository-root setting is redirected so its core child commands use the actual unchanged repository CLI. No public expected file or original was written by this review.",
+    "All six registered context-example tests pass locally, with the real archive cached and no skips. Separately executed the actual optional-source test method with a disposable source-absent root: it visibly skips one test with the explicit fetch instruction, without downloading or substituting a derived key.",
+    "Read final acceptance, packet runbook, source-local responses, context guides, notice and registry metadata. They distinguish source evidence from operating truth, current snapshot from present equipment, proposed custodians from assigned owners, source-specific authored questions from automatic question-engine rules, and maintenance notes from executed or effective repair.",
+    "Verified the raw original archive/PDF/CSV hashes remain unchanged. Verified every one of the seventeen previously reviewed output hashes remains current; no old original-source audit is presented as repeated. One private harness assertion initially expected the diagnostic substring hash while the correct refusal said sha256; only that textual assertion was corrected and the same safe refusal was independently rerun, with no product change."
+   ],
+   "control_results": {
+    "independent_source_CLI_controls": 33,
+    "failures": 0,
+    "actual_publication_cases": 8,
+    "registered_context_example_tests": 6,
+    "registered_test_skips_with_cached_source": 0,
+    "separate_absent_source_test_skips": 1,
+    "earlier_registered_outputs_hash_unchanged": 17,
+    "new_questions": 6,
+    "new_proposals": 12,
+    "accepted_new_decisions": 0,
+    "confirmed_new_plant_truth": 0
+   },
+   "attributed_primary_source_review": {
+    "reviewer": "Independent AI controls_reader persona",
+    "kind": "Primary-source software-development packet review; not human engineering or operations review",
+    "outcome": "pass_12_source_facts_and_locators; caught_cross_source_scope_issue_resolved",
+    "proof_sha256_raw": "cc27c4a61c2c8be72d0a10fe191f352983cd9b0150226bd2e347220728294a2a",
+    "fact_and_locator_checks": 12,
+    "packet_bindings_current": true,
+    "scope": "Separate independent controls-reader audit: all three complete original PDF pages visually inspected and the full CSV streamed. It caught and resolved four cross-document statements in single-source proposals. This reviewer checked its exact final packet bindings and ran source-verifier CLIs; the visual original-page audit is attributed to that reviewer, not claimed as repeated here.",
+    "limits": [
+     "Development facts seen before acceptance; not held out or a new source family.",
+     "No human/engineering approval, work-order execution verification, live system, model extraction, customer data or native import.",
+     "No fresh verification of online license/DOI metadata; local original bytes and source content were checked.",
+     "No software lifecycle verdict from this audit; software reviewer is separate.",
+     "No uniform cadence, timezone, downsampling explanation, unique mode, causal improvement or present asset state established."
+    ]
+   },
+   "prior_review_scope": {
+    "unchanged_output_hashes": {
+     "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+     "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+     "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+     "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+     "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+     "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+     "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+     "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+     "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+     "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+     "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+     "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+     "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+     "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+     "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+     "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+     "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3"
+    },
+    "preserved": "Earlier PRONTO, Bayer, NIST and illustrative source/software review scope and limitations remain unchanged. Existing original-source audits and broad context-core adversarial suites were not repeated for this packet-only increment."
+   },
+   "limits": [
+    "Independent coding-agent development/software evidence only. Discovery facts were seen before acceptance. No human/site sign-off, verified physical asset join, native import, live connector, execution confirmation, engineering review timing, savings, unique operating mode, causal effectiveness or adoption result is established.",
+    "The primary-source visual/fact audit is separately attributed. No new online licensing/DOI verification or legal adjudication was performed; notice/metadata were checked for consistency.",
+    "Source hashes bind whole raw documents, so an unrelated byte change reopens dependent answers. Current means this exact snapshot matches; no watcher, permanent invalidation, expiry, present-equipment validation or authenticated authority is implied.",
+    "Known publication conflicts are checked before writes; no concurrent-writer lock or multi-file crash-atomic transaction is claimed. The registered optional-original workflow requires the cache and visibly skips when absent.",
+    "The existing matrix criteria, failed MetroPT anomaly result and global input families are unchanged. Full-suite/CI results and broader tool/source audits require their separate evidence."
+   ],
+   "private_proof_hashes": {
+    "final_probe.py": "69c15f8e960ca015bda7e58257629c7533d9faa2f5a232cfbe62ea82eb5c461f",
+    "final-controls.json": "53fe6d2340bb786b024fb901d9993d96f1dfa2039c5fd81001c131d769318925",
+    "registered-tests.json": "1fdd057027f6a0d5453081794916745e1f90826d8368322302921bf93bcf0656",
+    "absent-source-test.json": "45baea8fa2a1b9c2e2a6cfd686610da00bd139e69965741b585bb7d8c6dda1ff",
+    "mismatch-rerun.json": "c90e49250b9aa90c10f44f46682f1c79c301736554b998f168ce3bd52b0daca7",
+    "write-original-alias-before.json": "31652be69b8294f613f4915be95a86666b5e243559a85b35090a3b87636bb233"
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent Codex agent (narrow read-only context-packet registry-extension review)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 over bytes with CRLF normalized to LF.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "baf4c7e96b0d1b09ed33e7cafdaf7ed7e5624efa31d5a773299efba0cdecc4e2",
+    "out/generalization/matrix.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "scripts/test_corpus_matrix.py": "c1ae5acf5eba56ae190ef91d186147a2d9d490695e000705d8b41e195303d324",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/features.json": "6e18faeb39fb352f9c97f8ac37b0687394caa242ad10b2e5918ce11fe1822369"
+   },
+   "findings": [],
+   "resolution": "The only corpus object change is one appended context_packets entry for MetroPT maintenance context. Every other corpus key, all 42 matrix inputs, earlier context packets, matrix runner/criteria, all 94 complete cell records and the generated generalization page remain unchanged. All 732 recorded hashes match actual current files and corpus_matrix --check passes. No matrix cells were rerun for this narrow metadata review; the prior substantive/source and seed-refresh scopes are preserved.",
+   "checks": [
+    "Compared all corpus keys and values against HEAD, with only the single appended context packet excepted. The entry uses an existing metropt family and points to the actual packet guide, manifest, key and explicit fetch/prepare/check instructions. It clearly declares development outside the cell matrix, without a new global family, held-out score or anomaly-method change.",
+    "Verified matrix.json and GENERALIZATION.md retain their prior accepted hashes and are byte-identical after LF normalization to HEAD. All 94 cell objects, their statuses, scores, execution metadata and tool hashes are unchanged.",
+    "Recomputed all 732 recorded tool/input-key hashes against actual current files; zero mismatches. The unchanged runner and criteria source matches HEAD. Independently ran corpus_matrix --check successfully."
+   ],
+   "registered_inputs": 42,
+   "unchanged_cells": 94,
+   "verified_hash_bindings": 732,
+   "cells_rerun_by_this_review": 0,
+   "prior_review_scope": {
+    "prior_accepted_output_hashes": {
+     "docs/GENERALIZATION.md": "baf4c7e96b0d1b09ed33e7cafdaf7ed7e5624efa31d5a773299efba0cdecc4e2",
+     "out/generalization/matrix.json": "7600222c74eb8c3fe4f752b492743c3586e76122e63f2997ab27f0a555fc6069",
+     "data/corpus.json": "84996684be832a2ab0767b6c64be30ef80c7fcc2947284d46d467528b16ee9f0"
+    },
+    "preserved": "Earlier substantive 94-cell/source review and the separate seed-refresh 54-selected-cell/47-dependency execution review retain their original scope and limitations; neither is claimed as repeated here."
+   },
+   "separate_context_evidence": {
+    "feature": "context-register",
+    "receipt_sha256_raw": "b0bf1f048dc4ac4cf22e832e793760aa0e14906c9610ee855903d0926a412e28",
+    "scope": "The MetroPT packet has separate original-source attribution and 33 source/CLI software controls. It does not add matrix cells or convert a failed historian result into a pass."
+   },
+   "limits": "Independent coding-agent metadata/hash review only. No new 54-cell or 94-cell execution, primary-source audit, accuracy/generalization result, human review, engineering approval, native import, causal effectiveness or adoption evidence is established. Existing failures/n/a, development reuse, generated/agent-made keys and other prior matrix limits remain.",
+   "check_stdout": "docs/GENERALIZATION.md matches out/generalization/matrix.json; every cell's tool hashes match the files on disk"
   }
  ]
 }

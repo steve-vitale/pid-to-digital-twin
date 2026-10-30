@@ -3819,3 +3819,66 @@ example's test counting the new independent seed example as parent-generated out
 only the named sub-example, whose actual CLI packet is already exercised by the registered generator tests.
 The parent's seven cases pass, retaining exact comparison of its own generated files and rejection of unexpected
 parent artifacts. No generator, matrix method or expected historical output was changed to resolve this failure.
+
+## 73. Make maintenance records useful without inventing repair effectiveness
+
+**What:** 2026-10-30. The context workflow now includes the original MetroPT-3 description and measured CSV,
+already an input to the historian matrix. The question is practical: does a reported failure have enough linked
+evidence for a maintenance-effectiveness review, and what record should the engineer request next? This is
+development on an existing family, not a new global source family, held-out test or anomaly-method improvement.
+Discovery facts were seen before the packet acceptance was written.
+
+The original three-page PDF reports 15,169,480 instances at 1 Hz. The actual released CSV has 1,516,948 data rows,
+timestamps extending into September 1 and nonuniform gaps. No downsampling history, timezone or healthy-state
+labels are inferred. The PDF enumerates motor current before oil temperature; their named CSV columns appear
+in the opposite order. Joining by enumeration would swap meanings. The failure table prints two different rows
+as `#1`; its May 29-30 interval carries a literal `30Apr` maintenance note. These source observations remain
+separate, without correcting dates or treating an interval end as verified repair completion.
+
+The [maintenance packet](../examples/context-register/metropt3/README.md) has six source-specific questions and
+twelve proposed answers. The questions use the existing context format rather than new automatic catalog rules.
+Five need data and one is partial; all six need an owner. No human assignment, reviewer, acceptance, plant truth
+or maintenance-success verdict is invented. The source-scoped APU identity is not a known serial number/current
+train. Concrete collection prompts request the original execution record, affected asset, actual action/times,
+resulting configuration and disposition, followed by comparable observations and an attributed effectiveness
+review. A maintenance note or copied completed status cannot supply those facts by itself.
+
+Independent primary review inspected all three rendered PDF pages and streamed the complete CSV. All twelve
+final values and locators match. It caught four proposed-answer sentences that compared documents while binding
+only one source. Each answer now states only its own source's facts; comparison stays in the question and its
+collection rule. That scope matters: otherwise changing one document could leave a cross-document assertion
+marked current through its unchanged other source. Separate claim slots also prevent a documentation acquisition
+claim and released-file observation becoming an invented simultaneous dispute.
+
+The packet retains raw hashes and exact page/table-row/CSV-line locators. The explicit existing fetch command
+downloads the archive; offline preparation verifies and extracts only the two pinned original members, refusing
+to replace a changed/incomplete cache. Originals stay ignored and unchanged. The default verifier checks their
+hashes and computes the full CSV profile without reading the derived key or proposals. Optional PDF text checks
+are explicit; table layout was separately inspected. Original-source checks never substitute a committed key.
+
+Actual prepare/apply CLIs verify twelve bindings, byte-identical repetition, retained history and original bytes.
+Labelled synthetic PDF/CSV revisions reopen exactly eight/four answers; changing only the effectiveness collection
+request reopens its two answers. Stale-answer resubmission and missing originals refuse without output changes.
+The registered example script passes six cases locally, including an optional actual-original workflow and
+always-offline committed-packet/path controls. Environments without the ZIP report an explicit source-case skip.
+
+Software review reproduced a hard-link defect in the first `check_packet.py --write`: expected-output publication
+could overwrite an original after the preservation check and still report success. Both expected destinations
+and their ancestors/known input aliases are now checked before either write, and originals are checked again
+after publication. These local guards are not a concurrent-writer lock or atomic filesystem transaction.
+Final independent software review passes 33 actual-source/CLI controls, including eight expected-publication
+cases, and all six registered example tests with no local skips. A private harness's reason-text assertion was
+corrected from `hash` to the actual `sha256` refusal text and that already-safe case was rerun; no product change
+was made to accommodate it.
+A separate cold reader executed the offline commands in fresh paths, reproduced the expected report/register
+and could reconstruct the May question and next evidence request. This is AI software/reader evidence, not an
+engineer's observed adoption, timed review, executed intervention or operational outcome.
+
+The 94-cell matrix, its methods, scores and tool hashes remain unchanged; its MetroPT result is still a failing
+development result. No matrix cell was rerun for this packet-only increment. All 52 configured pipeline stages
+remain fresh without a rebuild. The corpus registry adds this linked-context packet separately from its 42
+matrix inputs. The central-context/receiving-system adapter and real engineer pilot remain unverified.
+
+The full local runner reports 58 successful script exits, zero failures, two Windows privilege-related unittest
+skips and two platform notices explaining those same cases. The MetroPT original-source case executes locally.
+This is not a complete-suite pass; CI and source-absent environments need their own omission report.

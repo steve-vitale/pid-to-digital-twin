@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "model_id": "metropt3-context-packet",
+    "title": "MetroPT-3 APU historical evidence scope (AI-authored identity draft)",
+    "created": "2026-10-30",
+    "source_document": "Original UCI dataset members pinned in originals.json",
+    "limits": "MPT-APU is a packet scope, not a known serial number or current train. No physical signal topology, configuration, maintenance execution or present state is inferred."
+  },
+  "units": [
+    {
+      "id": "MPT-APU",
+      "name": "APU described by the MetroPT-3 release; physical identity unverified",
+      "type": "air_production_unit",
+      "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+    }
+  ],
+  "streams": [],
+  "instruments": [],
+  "controllers": [],
+  "manual_valves": []
+}

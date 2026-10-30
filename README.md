@@ -81,6 +81,7 @@ drafts of the docs. The [build journal](docs/JOURNAL.md) logs where they and I w
 - *Plant engineers:* [your own drawing](examples/own-drawing/README.md) · [at your plant](docs/AT_YOUR_PLANT.md) ·
   [costs and review time](docs/COSTS.md) · [keep the answers and context current](examples/context-register/README.md)
 - *Engineers starting a transformation pilot:* [one problem, one decision, one evidence pack](examples/first-pilot/README.md)
+- *Maintenance and reliability:* [from a reported failure to reviewable execution and outcome evidence](examples/context-register/metropt3/README.md)
 - *Controls and Ignition integrators:* [the output files](docs/TWIN_OUTPUTS.md) ·
   [gateway acceptance](docs/IGNITION_ACCEPTANCE.md) · [PI mapping](docs/PI_MAPPING.md)
 - *Energy and sustainability:* [questions to ask of a drawing](docs/OPPORTUNITY_SCREEN.md) ·

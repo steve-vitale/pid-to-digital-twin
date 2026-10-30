@@ -4,7 +4,9 @@ The small training packet is invented. The Bayer bridge uses committed public-so
 these offline controls do not read its downloaded original or establish plant truth.
 """
 import copy
+import csv
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -29,6 +31,100 @@ def invoke(*args, cwd=None):
 
 
 class WorkedContext(unittest.TestCase):
+    def test_metropt_expected_write_preflights_both_destinations(self):
+        """Regression for --write aliasing an original; labelled local filesystem fixtures, not source evidence."""
+        packet = ROOT / 'examples/context-register/metropt3'
+        sys.path.insert(0, str(packet))
+        try:
+            spec = importlib.util.spec_from_file_location('metropt_context_checks', packet / 'check_packet.py')
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+        finally:
+            sys.path.pop(0)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            source = folder / 'original.pdf'
+            source.write_bytes(b'ILLUSTRATIVE FILESYSTEM GUARD FIXTURE')
+            out = folder / 'expected'
+            out.mkdir()
+            targets = [out / 'context.json', out / 'context.md']
+            for target in targets:
+                target.write_bytes(b'previous expected contents')
+            for target in targets:
+                with self.subTest(alias=target.name):
+                    old = target.read_bytes()
+                    target.unlink()
+                    os.link(source, target)
+                    before = {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()}
+                    with self.assertRaisesRegex(ValueError, 'regular file|linked'):
+                        module.preflight_expected(targets, [source])
+                    self.assertEqual(before, {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()})
+                    target.unlink()
+                    target.write_bytes(old)
+            conflict = out / 'ordinary-file'
+            conflict.write_text('authored file', encoding='utf-8')
+            before = {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()}
+            with self.assertRaisesRegex(ValueError, 'directory'):
+                module.preflight_expected([targets[0], conflict / 'context.md'], [source])
+            self.assertEqual(before, {p.relative_to(folder): p.read_bytes() for p in folder.rglob('*') if p.is_file()})
+
+    def test_metropt_offline_packet_retains_qualified_claims_and_collection_requests(self):
+        """Committed snapshots are software fixtures; this test does not verify absent original sources."""
+        packet = ROOT / 'examples/context-register/metropt3'
+        register = json.loads((packet / 'expected/context.json').read_text(encoding='utf-8'))
+        context_register.validate_register(register)
+        key = json.loads((packet / 'source_key.json').read_text(encoding='utf-8'))
+        _, _, questions = context_register.load_inputs(packet / 'model.json', packet / 'questions.json')
+        with (packet / 'proposed_answers.csv').open(encoding='utf-8', newline='') as stream:
+            proposals = {row['answer_id']: row for row in csv.DictReader(stream)}
+        self.assertEqual(len(register['decisions']), 12)
+        self.assertEqual(len(register['current']), 6)
+        self.assertEqual(sum(q['state'] == 'needs_data' for q in register['current'].values()), 5)
+        self.assertFalse(register['ownership_history'])
+        self.assertTrue(all(q['owner'] is None for q in register['current'].values()))
+        self.assertTrue(all(d['decision'] == 'proposed' and d['plant_truth'] == 'unknown'
+                            and not d['reviewer'] and not d['reviewed_on'] for d in register['decisions']))
+        decisions = {d['answer_id']: d for d in register['decisions']}
+        for fact in key['facts']:
+            decision = decisions['MPT-' + fact['id']]
+            self.assertEqual(proposals[decision['answer_id']]['evidence_fingerprint'], decision['evidence_fingerprint'])
+            self.assertEqual(decision['evidence']['question'], questions[fact['question_id']]['question'])
+            for field in ('value', 'answer', 'answer_state', 'claim_key'):
+                self.assertEqual(decision[field], fact[field])
+            source = decision['evidence']['source']
+            self.assertEqual((source['id'], source['sha256'], source['locator']),
+                             (fact['document_id'], fact['raw_sha256'], fact['locator']))
+        report = (packet / 'expected/context.md').read_text(encoding='utf-8')
+        self.assertIn('30Apr', report)
+        self.assertIn('Work-record ID/revision', report)
+        self.assertIn('chosen metric', report)
+        self.assertIn('off or offloaded', report)
+        self.assertIn('DV_eletric', report)
+
+    def test_metropt_actual_original_workflow_when_cached(self):
+        """An explicit optional original-source check; no downloads and no use of a derived substitute."""
+        archive = ROOT / 'data/external/metropt3/metropt3.zip'
+        if not archive.is_file():
+            self.skipTest('MetroPT original ZIP not cached; run python scripts/fetch_corpus.py metropt3 --max-mb 250')
+        packet = ROOT / 'examples/context-register/metropt3'
+        before = hashlib.sha256(archive.read_bytes()).hexdigest()
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'originals'
+            prepare = [sys.executable, '-S', str(packet / 'prepare_sources.py'), '--zip', str(archive), '--out', str(source)]
+            for command in (prepare, prepare,
+                            [sys.executable, '-S', str(packet / 'verify_sources.py'), '--source-root', str(source)],
+                            [sys.executable, '-S', str(packet / 'check_packet.py'), '--source-root', str(source)]):
+                result = subprocess.run(command, cwd=ROOT, env=ENV, capture_output=True, encoding='utf-8', timeout=180)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            description = source / 'Data Description_Metro.pdf'
+            description.write_bytes(description.read_bytes() + b'\nTEST-ONLY MANUAL EDIT\n')
+            old = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source.iterdir()}
+            refused = subprocess.run(prepare, cwd=ROOT, env=ENV, capture_output=True, encoding='utf-8', timeout=60)
+            self.assertEqual(refused.returncode, 2, refused.stdout + refused.stderr)
+            self.assertIn('changed original', refused.stderr)
+            self.assertEqual(old, {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source.iterdir()})
+        self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), before)
+
     def test_actual_question_engine_bridge_retains_requests_and_partial_answer(self):
         packet = ROOT / 'examples/context-register/bayer'
         with tempfile.TemporaryDirectory() as tmp:

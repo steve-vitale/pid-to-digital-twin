@@ -457,7 +457,13 @@
     "examples/context-register/nist-smstestbed/proposed_answers.csv",
     "examples/context-register/nist-smstestbed/expected_context.md",
     "examples/context-register/nist-smstestbed/fetch.json",
-    "examples/context-register/nist-smstestbed/expected_history_checks.json"
+    "examples/context-register/nist-smstestbed/expected_history_checks.json",
+    "examples/context-register/metropt3/originals.json",
+    "examples/context-register/metropt3/sources.json",
+    "examples/context-register/metropt3/source_key.json",
+    "examples/context-register/metropt3/proposed_answers.csv",
+    "examples/context-register/metropt3/expected/context.json",
+    "examples/context-register/metropt3/expected/context.md"
    ],
    "tests": [
     "scripts/test_context_register.py",

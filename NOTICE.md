@@ -60,6 +60,15 @@ name and abbreviation) is extracted from `AF Database - Green Power Company.xml`
 Apache License 2.0. Only those three fields were extracted; nothing else from that file is included. AVEVA, PI System, PI Builder and
 PI AF are AVEVA trademarks. This project is not affiliated with or endorsed by AVEVA.
 
+**MetroPT-3 context packet**: selected transcriptions, computed released-file observations and the proposed
+question/answer material in `examples/context-register/metropt3/` derive from *MetroPT-3 Dataset*, N. Davari,
+B. Veloso, R. Ribeiro and J. Gama, UCI Machine Learning Repository,
+[doi:10.24432/C5VW3R](https://doi.org/10.24432/C5VW3R), under
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+Changes include source-scoped identities, explicit uncertainty, collection prompts and synthetic software
+revision controls. The original PDF and CSV remain unchanged in the ignored cache and are not redistributed.
+Packet helper code remains MIT licensed like the repository code.
+
 **anatomy** (MIT License, Copyright (c) 2026 Ryan, [github.com/wheresryan22/anatomy](https://github.com/wheresryan22/anatomy),
 commit `e6600ff`): the interactive process tour in `drafts/interactive-tour/` vendors four files of its drawing kit
 unchanged, `kit/iso-kit.mjs`, `kit/lathe.mjs`, `kit/tube.mjs` and `kit/audit.mjs`, with the MIT licence text in

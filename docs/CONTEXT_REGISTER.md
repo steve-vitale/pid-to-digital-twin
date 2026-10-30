@@ -15,6 +15,10 @@ Start with the [small offline example](../examples/context-register/illustrative
 sources; the second preserves qualified statements from four public originals. Neither is a person's sign-off.
 The [question-engine bridge](../examples/context-register/bayer/README.md) also runs an actual generated E18 finding
 through this workflow, retaining a source-backed partial answer and the original collection prompts.
+The [MetroPT-3 maintenance packet](../examples/context-register/metropt3/README.md) adds source-specific questions
+in the same format: what the operating record actually contains, which reported event is meant, and what an
+execution record and effectiveness review still need to supply. These questions are authored for the source;
+they are not new automatic question-engine rules.
 
 ## The engineer's steps
 

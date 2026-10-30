@@ -3003,6 +3003,23 @@
         "examples/review-and-mapping/seed-refresh/README.md",
         "docs/REVIEW_LOOP.md"
       ]
+    },
+    {
+      "id": "A206",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Extend linked-context coverage to MetroPT-3 original measurements and failure/maintenance documentation, with source-local proposals, stable row locators and explicit execution/effectiveness collection needs.",
+      "hypothesis": "An engineer can use operating and reported maintenance records to prepare the next evidence request without inventing a repair, current physical identity or successful outcome.",
+      "evidence": "Six authored questions and twelve unapproved proposals; five need data, one is partial, all need owners. Independent complete original PDF/CSV review verifies twelve final facts/locators and catches four cross-source answer clauses; source-local corrections preserve the eight-PDF/four-CSV staleness boundary. Actual CLI copies check repetition, history, selective source/request staleness and refusal of stale answers or missing originals. Software review exposes and the repair closes expected-output hard-link overwriting of an original. Six registered example cases pass locally. A separate cold reader runs the offline commands and reconstructs the ambiguous May event with its missing execution/effectiveness evidence.",
+      "runs": "Deterministic source/CLI checks on an existing historian development family; synthetic byte revisions explicitly labelled; no new global family or held-out score",
+      "verdict": "kept",
+      "why": "Makes maintenance records and measurements reusable as qualified context while preserving missing identity, timing, mapping and effectiveness evidence. Core context/question algorithms, historical matrix scores and original bytes are unchanged; human adoption and operational value remain unmeasured.",
+      "source": [
+        "docs/JOURNAL.md#73-make-maintenance-records-useful-without-inventing-repair-effectiveness",
+        "examples/context-register/metropt3/ACCEPTANCE.md",
+        "examples/context-register/metropt3/README.md",
+        "docs/CONTEXT_REGISTER.md"
+      ]
     }
   ],
   "not_tried": [

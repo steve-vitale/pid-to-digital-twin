@@ -1,0 +1,214 @@
+{
+  "schema": "opportunity-questions-1",
+  "source_model": "examples/context-register/metropt3/model.json",
+  "note": "AI-authored source-specific maintenance evidence questions; not generated catalog findings or operational instructions.",
+  "counts": {
+    "findings": 6
+  },
+  "questions": [
+    {
+      "id": "MPT-COVERAGE@MPT-APU",
+      "question_id": "MPT-COVERAGE",
+      "family": "engineering_context",
+      "question": "What time/population scope can the released CSV support?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Release/export provenance and usable observation windows",
+          "state": "needs_data",
+          "fields": "Original acquisition cadence, export/transformation history, unnamed-field meaning, timezone and documented missing intervals; reconcile the description with the released file.",
+          "how": "Ask the dataset or historian custodian for the versioned export recipe and original timebase. Retain the file profile as observations, without inferring downsampling or treating unreported periods as healthy.",
+          "where": [
+            "Versioned acquisition/export records held by the data custodian"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "Versioned acquisition/export records held by the data custodian"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "Separate published acquisition claims from released-file observations. Do not impose a uniform period, invent a timezone or silently interpolate gaps.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    },
+    {
+      "id": "MPT-EVENT-IDENTITY@MPT-APU",
+      "question_id": "MPT-EVENT-IDENTITY",
+      "family": "engineering_context",
+      "question": "How are the two printed #1 failure records kept separate?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Stable external event and asset identities",
+          "state": "needs_data",
+          "fields": "Original failure/work-record IDs and revisions, affected train/APU identifier, event dates and links to this dataset release.",
+          "how": "Ask the failure-record custodian for the original records. Use document hash and table-row locator until a verified external identity is supplied; a printed number alone is insufficient.",
+          "where": [
+            "Original failure reports or maintenance system, with its record custodian"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "Original failure reports or maintenance system, with its record custodian"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "Keep table rows 1 and 2 separate while preserving their identical printed number. Internal row ordinals are locators, not corrected report numbers.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    },
+    {
+      "id": "MPT-MAY-WORK@MPT-APU",
+      "question_id": "MPT-MAY-WORK",
+      "family": "engineering_context",
+      "question": "What intervention, if any, belongs to the May 29-30 reported interval?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Original execution record and date clarification",
+          "state": "needs_data",
+          "fields": "Work-record ID/revision, affected APU, work performed, actual start/completion, year/timezone, resulting configuration and return-to-service disposition; clarify the literal 30Apr note.",
+          "how": "Request the original work record and date clarification from its custodian. Preserve both the May interval and April note until reviewed evidence explains their relationship.",
+          "where": [
+            "Maintenance execution record and operational return-to-service record"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "Maintenance execution record and operational return-to-service record"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "Do not change April to May, equate a reported interval ending with repair completion, or infer which work was executed.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    },
+    {
+      "id": "MPT-EFFECTIVENESS@MPT-APU",
+      "question_id": "MPT-EFFECTIVENESS",
+      "family": "engineering_context",
+      "question": "Is there enough evidence to review the June/July maintenance effectiveness?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Intervention identity, comparable outcomes and attributed effectiveness review",
+          "state": "needs_data",
+          "fields": "Verified work-record revision, affected asset and action/configuration; before/after operating conditions and exposure window; usable measurement coverage, chosen metric, uncertainty and dated reviewer disposition.",
+          "how": "First reconcile the original execution record with operations. Then prepare comparable observations under a defined criterion for an authorized reviewer. A copied completed status or maintenance note alone leaves insufficient evidence.",
+          "where": [
+            "Maintenance, operations and measurement custodians in the existing execution system"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "Maintenance, operations and measurement custodians in the existing execution system"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "Retain insufficient evidence until the intervention and comparable observations are linked and reviewed. Do not infer successful repair, root cause, downtime or causal improvement from the table.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    },
+    {
+      "id": "MPT-COLUMNS@MPT-APU",
+      "question_id": "MPT-COLUMNS",
+      "family": "engineering_context",
+      "question": "Which named CSV columns carry oil temperature and motor current?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Reviewed channel-to-meaning mapping",
+          "state": "needs_data",
+          "fields": "Exact export column names and dictionary revision, engineering units and any transformation; explicitly check Oil_temperature and Motor_current against their names rather than the PDF enumeration.",
+          "how": "Compare the original header and source dictionary, then obtain the export owner's mapping verification before joining channels to plant identities. Keep the exact DV_eletric spelling.",
+          "where": [
+            "CSV header, source dictionary and controlled channel-mapping record"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "CSV header, source dictionary and controlled channel-mapping record"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "Do not pair values by the PDF item order. Keep source definitions, literal column names and recorded values distinct.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    },
+    {
+      "id": "MPT-MODE@MPT-APU",
+      "question_id": "MPT-MODE",
+      "family": "engineering_context",
+      "question": "Does the first recorded electrical state identify a unique operating mode?",
+      "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+      "assets": [
+        {
+          "id": "MPT-APU"
+        }
+      ],
+      "evidence": [],
+      "data_requests": [
+        {
+          "item": "Time-aligned operating-state and configuration evidence",
+          "state": "needs_data",
+          "fields": "Applicable control/configuration revision, timestamp/timezone mapping, state transitions and operational observations distinguishing off from offloaded conditions.",
+          "how": "Ask the controls/operational counterpart to reconcile the state timing and applicable configuration. Retain raw flags and motor-current values without assigning a unique operating mode.",
+          "where": [
+            "Applicable controls export and operational state/event records"
+          ],
+          "locations": [
+            {
+              "kind": "record",
+              "description": "Applicable controls export and operational state/event records"
+            }
+          ]
+        }
+      ],
+      "decision_rule": "A source-described COMP/DV flag combination permits more than one condition. A near-zero current is an observation, not a verified unique mode or failure diagnosis.",
+      "typical_benefit": null,
+      "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments.",
+      "status": "asked"
+    }
+  ]
+}

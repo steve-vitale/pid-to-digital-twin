@@ -30,6 +30,16 @@
    "fetch": "python -S examples/context-register/nist-smstestbed/fetch_sources.py --max-mb 1",
    "check": "python -S examples/context-register/nist-smstestbed/check_packet.py",
    "evidence_role": "New public manufacturing source family for the context workflow: two original configurations and an archived raw log, with a fourth notice file. Discovery facts were seen; this is development evidence outside the eight-workflow matrix, not a held-out transfer score. No human approval or deployed-configuration truth is inferred."
+  },
+  {
+   "id": "metropt3-maintenance-context",
+   "family": "metropt",
+   "guide": "examples/context-register/metropt3/README.md",
+   "sources": "examples/context-register/metropt3/sources.json",
+   "source_key": "examples/context-register/metropt3/source_key.json",
+   "fetch": "python scripts/fetch_corpus.py metropt3 --max-mb 250; python -S examples/context-register/metropt3/prepare_sources.py",
+   "check": "python -S examples/context-register/metropt3/check_packet.py",
+   "evidence_role": "Context-workflow development on an existing historian family: original description and measured CSV, attributed report rows, source-local proposals and unresolved execution/effectiveness needs. No new global family, held-out result, successful maintenance or anomaly-method change."
   }
  ],
  "inputs": [

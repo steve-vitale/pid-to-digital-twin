@@ -4,7 +4,7 @@ A model can give an engineer useful questions. This workflow keeps the answers, 
 beside those questions, then reopens affected answers when a supporting source changes. It works locally with
 standard-library Python. The starting model and source documents stay unchanged.
 
-There are four examples:
+There are five examples:
 
 - **[Illustrative, offline](illustrative/README.md):** three small invented documents, four questions and a filled
   answer sheet. It shows an unresolved conflict, a fictional dated review, missing data and an unanswered walkdown.
@@ -19,6 +19,11 @@ There are four examples:
   operating log share a machine UUID while reusing a signal ID for different meanings across revisions. The packet
   keeps the meanings revision-scoped and the deployed configuration unknown. This is a new public source family
   for the context workflow, examined as development evidence rather than a held-out score.
+- **[MetroPT-3 maintenance evidence](metropt3/README.md):** reported failures, maintenance notes and the actual
+  released measurement CSV stay distinct. The packet preserves duplicate event numbers, a date ambiguity,
+  acquisition/release scope differences and a column-order trap, with explicit requests for execution records
+  and comparable observations. It extends context coverage on an existing historian family; no successful
+  repair, root cause, current asset identity or new anomaly result is inferred.
 
 For your own work, start with a draft model/graph and question list from the existing tools. Keep stable asset
 identities, register the supporting document revisions and exact locations, assign owners, and fill the answer CSV.
