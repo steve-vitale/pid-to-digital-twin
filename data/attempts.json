@@ -3201,6 +3201,24 @@
         "examples/opportunity-screen/millard/ACCEPTANCE.md",
         "examples/opportunity-screen/millard/first-question.md"
       ]
+    },
+    {
+      "id": "A218",
+      "function": "replay_and_bands",
+      "date": "2026-10-30",
+      "change": "Record a fixed paired PRONTO baseline-context diagnostic and a first company records question, keeping the detector and published matrix unchanged.",
+      "hypothesis": "A Normal label, greater recency or a longer span alone does not qualify a historian baseline; a useful first packet must retain operating context, window choices and unsuccessful outcomes.",
+      "evidence": "Before new runs, independent source audit verifies14pinned originals and9Normal blocks/11899records, longest2770records; no contiguous multi-day qualified window. Independent methods review freezes4pairedcases and rejects pooling because row-based filters ignore gaps. Existing drift CLI runs8pairedscores+4separatefull-scorecontrols, then reproduces with companion source metadata. On common scoring rows early/recent criteria met3/4 versus2/4: day2flags155/181->0/181; day3leak0/150->17/150; day3diverted0/300eitherway butdelay1922->7290seconds; day4slugging0/1385->895/1385. Two recent candidates miss Ktarget. All full controls match existing matrix metrics. Source, methods and audience judgments have distinct scopes; no human adoption or causal mode result.",
+      "runs": "Four fixed development comparisons plus four original full-score controls, with deterministic reproduction; no new held-out run, threshold tuning, matrix cell or pooled normal series.",
+      "verdict": "kept",
+      "why": "Makes a first historian finding inspectable and turns baseline applicability into a concrete records request for the company owner. Shorter recent candidates also change history/noise and filters restart at the common score start; paired counts cannot replace older matrix populations. N056 remains open for qualified longer multi-day data.",
+      "source": [
+        "docs/JOURNAL.md#85-keep-the-operating-context-with-a-normal-baseline",
+        "examples/historian-csv/baseline-context/README.md",
+        "examples/historian-csv/baseline-context/plan.json",
+        "examples/historian-csv/baseline-context/expected/results.md",
+        "examples/historian-csv/baseline-context/first-question.md"
+      ]
     }
   ],
   "not_tried": [
@@ -3775,9 +3793,11 @@
       "function": "replay_and_bands",
       "status": "not-done",
       "idea": "Fit normal bands on a longer, multi-day window of normal running (PRONTO has more normal periods across its test days)",
-      "why_not_yet": "Found 2026-10-29 that 10 minutes is far too short; not yet tried",
+      "why_not_yet": "Availability and context audited on2026-10-30: the inspected day2-4 merged originals contain9separate Normal blocks/11899records, longest2770one-second records, with changing flow conditions. No qualified contiguous multi-day baseline was established. A218 compares shorter recent candidates on fixed common scoring windows, not longer windows; outcomes are mixed and the original detector/matrix stay unchanged. N056 remains not-done for appropriately qualified longer data; the inspected subset does not prove such data unavailable elsewhere.",
       "source": [
-        "docs/GENERALIZATION.md"
+        "docs/GENERALIZATION.md",
+        "docs/JOURNAL.md#85-keep-the-operating-context-with-a-normal-baseline",
+        "examples/historian-csv/baseline-context/README.md"
       ]
     },
     {

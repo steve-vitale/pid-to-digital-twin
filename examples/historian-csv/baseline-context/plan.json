@@ -1,0 +1,16 @@
+{
+  "schema": "pronto-baseline-context-plan-1",
+  "scope": "Development diagnostic on previously inspected PRONTO records. Fixed before new band runs. Context and length change together; no causal or prospective performance claim.",
+  "method": "drift",
+  "fit_fraction": 0.5,
+  "criterion": "Three consecutive any-tag flags at or after the labelled onset and at most 0.5% of common pre-fault rows flagged. K-target failure is reported separately, never hidden.",
+  "row_convention": "Zero-based merged data rows, half-open intervals. Every fit and K-selection record precedes the identical score bytes used by both choices. No burn-in is discarded.",
+  "cases": [
+    {"id": "day2-leakage", "day": "2", "early": [0, 361], "recent": [9241, 9421], "score": [9421, 12420], "fault": 9602, "label": "Air leakage", "reference_score": [9241, 12420]},
+    {"id": "day3-leakage", "day": "3", "early": [0, 600], "recent": [600, 750], "score": [750, 3781], "fault": 900, "label": "Air leakage", "reference_score": [600, 3781]},
+    {"id": "day3-diverted", "day": "3", "early": [0, 600], "recent": [8701, 9001], "score": [9001, 16621], "fault": 9301, "label": "Diverted flow", "reference_score": [8701, 16621]},
+    {"id": "day4-slugging2", "day": "4", "early": [1559, 3540], "recent": [4544, 5929], "score": [5929, 9594], "fault": 7314, "label": "Slugging", "reference_score": [4544, 9594]}
+  ],
+  "excluded": "Do not pool disjoint Normal blocks: the filter treats successive rows as adjacent across gaps. No thresholds, constants, tags, source labels, matrix criteria or defaults may be tuned from these results.",
+  "limits": "Recent means a shorter retrospective labelled-normal candidate, not a verified matching operating mode. Preserve all outcomes. The four original full-score controls have different pre-fault populations and are not the paired comparison. N056 remains open for a qualified longer multi-day baseline."
+}

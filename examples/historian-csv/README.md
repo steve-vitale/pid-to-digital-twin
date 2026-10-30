@@ -96,6 +96,11 @@ and `FT-101` blank on rows 10 and 11. These gaps are made up to show bad-quality
 
 ## Commands (from the repository root)
 
+Before choosing a normal export, read the [baseline-context investigation](baseline-context/README.md).
+It compares the existing method on fixed earlier/recent windows from public records, retains choices that make
+results worse, and shows which operating and configuration evidence remains to request. A `Normal` label,
+greater recency or a longer window alone does not qualify a baseline.
+
 ```sh
 # Bands: fit on the normal export, score the fault export (labelled fault start = data row 160)
 python scripts/csv_normal_bands.py --normal examples/historian-csv/te_normal_d00.csv \

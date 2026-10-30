@@ -5699,6 +5699,112 @@
     "prepare-independent-matrix-metadata-review.py": "2e81ae4d470d7665e7b5f3c7cabcac6265904fd077a68309d422201f054dd845",
     "proposed-public-feature-review.json": "cc1cd4434fafa2f17e3b8447af1878bc8d41eaec0340f2a1377465bb54185f9c"
    }
+  },
+  {
+   "feature": "historian-csv",
+   "reviewer": "Independent Codex agent: fixed-range methods, primary-CSV CLI reproduction and explicit inherited-output compatibility review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 5,
+   "file_hash_method": "Repository bindings use SHA256 after CRLF to LF normalization. Private evidence hashes use exact raw bytes. Reproduced TE output comparisons were exact raw bytes.",
+   "files": {
+    "examples/historian-csv/results/csv_normal_bands.md": "0ff44fa6613576c811e0e8e327ae73d2763524d06875118a349295ffc4036c78",
+    "examples/historian-csv/results/csv_normal_bands.json": "343b28c4e14f6cfdeabcefb73c87a11f67f9e6ab7939be3b4d5fe9fb972c8a9e",
+    "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56",
+    "examples/historian-csv/baseline-context/expected/results.json": "5aa398dc384ac0d365119dcb703a7662dd0d1176edb3696fc2f90cb4ebe005c0",
+    "examples/historian-csv/baseline-context/expected/results.md": "9ad7d452296ff3194b8362d55bed8efb6aad228eebe97aaf1c896f45c7c1be2c"
+   },
+   "supporting_files": {
+    "scripts/csv_normal_bands.py": "af2fdf402128b024ff62b16a086a718beda14dfd12954dd88c3778ba573a6e40",
+    "scripts/csv_replay_server.py": "e3abd78c439af569e3ee01b1c4a5095a0b6ddf72391de3656186c48bd25f4130",
+    "scripts/test_csv_tools.py": "9cde9eda1e5264382d8e464472bc71c456991e8554aeeaa5967a87c363f80dc0",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/corpus_matrix.py": "29cb52cb56219b8ffd9734f7a92d0fa506f274b88d9a1297ec333a99f3f07fa1",
+    "data/corpus_pins.json": "e802a93e20a94a8a8284be0c6614fcfc59646494b83e9655443ac1659b9a6617",
+    "data/features.json": "f21b52ce636be224c9b07e4f9b124760fef18ae35e41e9b8a5b39757aa4f98c1",
+    "examples/context-register/pronto/verify_sources.py": "75e8274bada91d1756daf874dac8f20175699b1e8741827a6801b6f5612844fc",
+    "examples/historian-csv/README.md": "03f8f113ea230102122a02b67f92aae6a6d520687c502582aea7200b106f3955",
+    "examples/historian-csv/te_normal_d00.csv": "86af4c3568dcc07eaee8fbccbd47d0656b11eadaef302bc18049775ff1badc4d",
+    "examples/historian-csv/te_fault6_d06.csv": "91b3df5704480888acd85e50b4871401563061667b56ea7fddec0b1431763327",
+    "examples/historian-csv/baseline-context/README.md": "36712e62177dd61c7ff38b09f918cfcaa3cfb8312e7490727814877adcd013e7",
+    "examples/historian-csv/baseline-context/first-question.md": "3fdacbcd8d465adcb74bcc328768d248a9e19112a003878b5bac7b4b90d8f28b",
+    "examples/historian-csv/baseline-context/ACCEPTANCE.md": "9bf9b7e2fa42c1423c0d1f393399aa47cb4e0b35d206a6dd547d561d3f615ba8",
+    "examples/historian-csv/baseline-context/plan.json": "27ecee57904bdd27c6764c03be14c9ab0cd804d9978395795b45bb77f649e8d5",
+    "examples/historian-csv/baseline-context/run.py": "1bd3fc24020be8468c34404e3d3650280f63b74afc62809f4c9350f744bb425c"
+   },
+   "findings": [],
+   "resolution": "Adds two bounded development-record outputs for baseline context and length sensitivity, with all failures preserved. Inherits the exact three previously accepted outputs and their prior scope; the two TE band files were also independently reproduced offline. The historical replay transcript was checked unchanged only, with no server execution. No detector, threshold, default, matrix result or company system was changed.",
+   "checks": [
+    "Read the immutable independent methods recommendation and acceptance/ranges before reproducing the fixed record. The recommendation preceded the first twelve new runs but followed inspection of source profiles and historical development data; it is not blind held-out preregistration. The original plan and four complete first-run case objects remain unchanged after companion metadata and report wording additions.",
+    "Executed 19 actual CLI subprocesses in fresh external D-drive scratch:12 direct band CLIs,1 TE offline reproduction and6 runner refusals. The two proof files record 178 software assertions plus 75 metadata/provenance assertions, all passing. Final Markdown rendering was additionally checked byte-exact without another band execution. No full test suite, matrix cell, model, source fetch or live server was run by this reviewer.",
+    "Directly parsed all six pinned primary merged/raw CSVs without importing the example runner or corpus adapters to construct cuts. Independently checked every raw timestamp against its source interval and unique all-row Air T/Air P alignment, deriving offsets 5400/1500/1200. Preserved the 17 fixed numeric-text columns, timestamps, row order and source labels. Normal/common-score CSV hashes and every complete band JSON match the frozen results.",
+    "Checked every fit/K range against the immutable pre-run recommendation, strict separation from common score rows, relative fault indices 181/150/300/1385, onset timestamps, all retained tags/no-band results and every fit/scored bad-cell count. Existing strict K-selection failures remain false for recent day 3 leakage and day 4 slugging. No hidden burn-in, pooling, interpolation or tag removal occurs.",
+    "All outcomes remain visible: early-to-recent preflags 155/181 to 0/181, 0/150 to 17/150, 0/300 to 0/300, 0/1385 to 895/1385. Delays are 3 to 20, 631 to 26, 1922 to 7290, 1144 to 0 seconds. The 7290-second detection is near the end of the 7320-record fault interval and is not prompt or fault-specific attribution.",
+    "The four separately executed original full-score controls reproduce 347/361, 0/300, 0/600, 492/2770 preflags and delays 0/631/1922/1144 seconds. These metrics equal the existing matrix objects. No matrix cell was rerun or renewed; the paired score prefixes and denominators differ from the matrix.",
+    "Actual runner controls refuse missing and same-length tampered measurement originals, missing/tampered companion workbook, and existing output file/directory. Every tested source/copy/prior-report byte remains unchanged and no final report is published on refusal. All six cache CSVs and three companion originals remain pinned after controls.",
+    "Independently recomputed all nine Normal blocks, exact physical record spans/timestamps, 11899 total records, 2770 longest run and AirIn/WaterIn medians. Compared all 20 retained literal companion cells to the separately authored source-reader transcript, without repeating its primary workbook interpretation. Current output source/tool bindings are exact.",
+    "Guide and first-question brief distinguish supplied health labels, nominal log values, observed medians and unresolved raw-channel identity. No log-to-test/block join is inferred from similar values. Shorter recent candidates confound context/recency/length; three score prefixes are shorter than 600 good samples. N056 remains not-done for a qualified longer multi-day baseline.",
+    "Feature registry differs only by two appended historian output paths; every other feature object/property is exact baseline. Three inherited outputs, source catalogs, detector/replay/test code and matrix objects are unchanged against baseline. The current parent guide links a fixed research record, not an automatic baseline selector or governance replacement."
+   ],
+   "prior_review_scope": {
+    "reviewer": "independent Codex agent (fresh context; artifact reproduction and adversarial probes)",
+    "date": "2026-10-29",
+    "archived_record_sha256_raw": "9baac358ded2f2470a6109c7b4cf8f835174abc334501f82c5b31a4f77572d6f",
+    "inherited_output_count": 3,
+    "inherited_files": {
+     "examples/historian-csv/results/csv_normal_bands.md": "0ff44fa6613576c811e0e8e327ae73d2763524d06875118a349295ffc4036c78",
+     "examples/historian-csv/results/csv_normal_bands.json": "343b28c4e14f6cfdeabcefb73c87a11f67f9e6ab7939be3b4d5fe9fb972c8a9e",
+     "examples/historian-csv/results/replay_smoke.txt": "0b127dd5b1d93cd1444acc64b8c5e71f01950305e315f7c8ae62f01712e81a56"
+    },
+    "newly_regenerated_inherited_outputs": [
+     "examples/historian-csv/results/csv_normal_bands.md",
+     "examples/historian-csv/results/csv_normal_bands.json"
+    ],
+    "hash_inherited_only_outputs": [
+     "examples/historian-csv/results/replay_smoke.txt"
+    ],
+    "limits": "Prior source, OPC UA, synthetic test and native/human limitations remain historical and attributed. This review does not repeat the replay server or general historian corpus."
+   },
+   "attributed_source_review": {
+    "receipt_sha256_raw": "135bc046de94258f591dbd28a6e7a72520cb7742f678b977c52194877741813e",
+    "kind": "Separate independent AI primary-source reader, before band experiment; not a person operating the facility or this reviewer repeating the complete source audit.",
+    "scope": "Original source labels/blocks, workbook literal cells, readme meaning and unresolved identities. Matching bytes establish neither governing company authority nor a qualified normal state."
+   },
+   "prospective_methods": {
+    "recommendation_sha256_raw": "816146d0b13f99ce4bbbc2202a442e892da9370556be86268e5e23585eaa1335",
+    "before_first_run_record_sha256_raw": "89b6e6e0b94fb8daab1b8cf9d6c086675fc98a40e82152e21e0b99abee6d7966",
+    "initial_results_sha256_raw": "b88ef4984b3448bb71dc0519925cb4b727fa7598ddb86404842b614991ade75e",
+    "initial_markdown_sha256_raw": "378d08f5bd3c9498f3e98c5a8a16751ec6d04b9c1ca49aab0574bfaa90b01df1",
+    "initial_runner_recorded_raw_sha256": "0fab942c4eb8c2e02f6a0e2c4dc20bd66012c4c657648764eff12f4200518fff",
+    "recovered_runner_note": "Existing recovered file uses CRLF and hashes c17930faeca96f547f498389778e3165a2f0f46a4b5a4b771cbb4325b7daea2c raw. A separate CRLF-to-LF-only recovery exactly matches the before-first raw 0fab942c binding; original recovery is preserved.",
+    "first_case_objects_unchanged": true
+   },
+   "supporting_excerpts": {
+    "N056": {
+     "source": "data/attempts.json",
+     "selector": "not_tried item id N056",
+     "hash_method": "SHA256 over UTF8 json.dumps(record,sort_keys=True,separators=(comma,colon),ensure_ascii=False), no terminal newline",
+     "sha256": "de91ad3f114d28200064d7887530de203c1a65a51b15c42d071fc0bbbf02fbb6",
+     "scope": "Status remains not-done; context/length diagnostic is not a qualified multi-day baseline. Whole evolving ledger is excluded."
+    }
+   },
+   "limits": [
+    "Previously inspected development episodes from one facility; no new held-out result, generalization score, longer-window qualification or isolated recency effect. No new detector or operational recommendation follows.",
+    "Normal labels do not qualify steady healthy operating conditions. Source identity, clock truth, mapping and comparable configuration remain unresolved. Readiness, attribution, safety, savings and human review-time are not established.",
+    "The fixed runner verifies known pins/ranges, not a general baseline-selection policy. Drift windows count good samples and reset at score start; short correlated windows do not calibrate day-scale false-alarm probability.",
+    "No receiving owner, accepted handoff, authenticated review, customer adoption, company-state import, live OPC UA, gateway/PI action or governance service is demonstrated. The toolkit produces a starting packet for a company owner.",
+    "Inherited replay/source/native evidence is explicitly attributed; no wholesale semantic renewal, matrix/cell/test-suite reproduction, network or model action is claimed. Whole evolving journals/ledger/TRIED and generated README/FEATURES tables are excluded."
+   ],
+   "private_proof_hash_method": "SHA256 over exact raw bytes; no newline normalization.",
+   "private_proof_hashes": {
+    "independent-software-proof-final/proof.json": "51279bb0bb2cfb6f7fe71a5a23050b98814899bbd36de94a40b074b77c44dbc0",
+    "independent-software-proof-final/metadata-proof.json": "a85f8864a580ab2f32ce59026810aca58dee602f42b403ba3a4ceeee9bd6d70b",
+    "independent-reproduce.py": "4f0de9b2ab875e7de223e7932aeb20d78bdcc5780bcb59dfdc5177cafa18e810",
+    "independent-metadata.py": "b08387497b60de4d0eaa15516d14bf48403a0707dd90c0ce9f4f66d1c55d2515",
+    "independent-software-proof-final/prior-accepted-historian-review.json": "9baac358ded2f2470a6109c7b4cf8f835174abc334501f82c5b31a4f77572d6f",
+    "first-run-runner-LF-recovered.py": "0fab942c4eb8c2e02f6a0e2c4dc20bd66012c4c657648764eff12f4200518fff"
+   }
   }
  ]
 }

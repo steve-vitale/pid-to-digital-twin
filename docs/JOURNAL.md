@@ -4275,3 +4275,49 @@ as matrix evidence, so its new metadata requires a narrow independent binding re
 all matrix results stay exact, and no cells are rerun. This does not renew the original execution/source audits.
 No measured engineer adoption, energy saving, site approval or receiving-company round trip is claimed;
 N062/N063 remain unproven.
+
+
+## 85. Keep the operating context with a normal baseline
+
+N056 proposed fitting longer normal-running windows. The source audit comes first: the inspected PRONTO day2-4
+merged originals contain nine separate Normal blocks totaling 11,899 records; the longest is 2,770 one-second
+records. A source label is not an operating-mode definition. Measured air/water values differ between and within
+blocks, and the operation log separately records nominal settings, health labels and flow descriptions. All 14
+original members inspected by the independent source reader match their pins and remain unchanged. No contiguous
+qualified multi-day normal baseline is established by that cache subset.
+
+One preliminary identity guess was refused before publication. The log's Test3 Normal row is not the second
+merged day2 Normal block: exact raw alignment puts that block later, beside later logged actions. The brief
+preserves the supplied labels and asks for reviewed time/identity joins instead of manufacturing a source conflict.
+
+The independent methods review fixed four paired comparisons before new band runs and rejected pooling disjoint
+Normal blocks. Preserving timestamp text would not preserve filter dynamics: the row-based drift method treats
+those records as adjacent across gaps. No gap policy or detector change was added. For each accepted pair, a
+short recent labeled-normal segment fits/selects K before both choices score identical later rows. The earlier
+baseline and recent candidate use the same frozen drift method, fit fraction, K search and diagnostic criterion.
+All cases are development data already inspected; the recent candidate is shorter in every case. Context, length
+and noise history change together, so this is sensitivity evidence, not a causal mode study or prospective rule.
+
+The [comparison](../examples/historian-csv/baseline-context/expected/results.md) retains mixed outcomes: early
+baselines meet the diagnostic in three of four cases, recent candidates in two. Day2 pre-fault flags change from
+155/181 to 0/181, but day3 leakage changes from 0/150 to 17/150 and day4's second slugging case from 0/1,385 to
+895/1,385. Those two recent candidates also miss K's calibration target. Day3 diverted-flow detection moves from
+1,922 to 7,290 seconds, near the end of its 7,320-record fault interval; a criterion pass does not establish prompt
+detection or causal attribution. Every complete band result, source fingerprint, range, warning and bad-sample
+count is retained. Companion log cells and source metadata were added after the first run; all complete scored
+case objects stayed exact.
+
+The paired scoring start resets both filters, and three cases reach the fault before 600 good scoring samples.
+There is no carried history or extra discarded burn-in. The shorter scoring population is different from the
+original matrix: day4's early baseline is clean on the common prefix while its separate original full-score
+control remains 492/2,770 flagged. All four full-score controls match the existing matrix metrics. The paired
+counts cannot replace those older populations. No method, default, threshold, source label, matrix cell or
+headline accuracy changes.
+
+A fresh AI engineering/LinkedIn-reader perspective supports the narrow usefulness of a baseline-applicability
+case even when recent data is worse. The resulting plain brief asks which operating/configuration and mapping
+records establish comparability and who reviews that choice. Ownership, governing authority and acceptance stay
+unknown. It creates no automated baseline selector, local governance service or company connector. Independent
+source, methods, software and wording checks retain their separate scopes; repetition and CI coverage are
+reported separately from any human outcome. N056 remains open for qualified longer multi-day data; N062/N063
+remain unproven.

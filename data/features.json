@@ -275,7 +275,9 @@
    "example_outputs": [
     "examples/historian-csv/results/csv_normal_bands.md",
     "examples/historian-csv/results/csv_normal_bands.json",
-    "examples/historian-csv/results/replay_smoke.txt"
+    "examples/historian-csv/results/replay_smoke.txt",
+    "examples/historian-csv/baseline-context/expected/results.json",
+    "examples/historian-csv/baseline-context/expected/results.md"
    ],
    "tests": [
     "scripts/test_csv_tools.py"
