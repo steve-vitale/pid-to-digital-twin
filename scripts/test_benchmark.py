@@ -98,6 +98,31 @@ class BenchmarkTests(unittest.TestCase):
                 self.evaluate()
             (self.root / name).write_bytes(original)
 
+    def test_source_newlines_preserve_cohort_and_report(self):
+        from unittest.mock import patch
+        sources = ['benchmark.py', 'score_pid2graph.py', 'evaluate_vendor.py',
+                   'replicate_stats.py', 'score_tags.py', 'test_scorer_controls.py']
+        variants = []
+        for newline, folder in ((b'\n', 'lf'), (b'\r\n', 'crlf')):
+            directory = self.root / folder
+            directory.mkdir()
+            for name in sources:
+                raw = (ROOT / 'scripts' / name).read_bytes().replace(b'\r\n', b'\n')
+                (directory / name).write_bytes(raw.replace(b'\n', newline))
+            with patch.object(b, '__file__', str(directory / 'benchmark.py')):
+                variants.append(b.evaluate(ROOT / 'benchmarks/open100-validation.json', ROOT))
+        self.assertEqual(b.encoded(variants[0]), b.encoded(variants[1]))
+        self.assertEqual(b.markdown(variants[0]), b.markdown(variants[1]))
+        for name in sources:
+            self.assertEqual(b.file_hash(self.root / 'lf' / name), b.file_hash(self.root / 'crlf' / name))
+        # Source edits still change the fingerprint; binary newlines stay significant.
+        source = self.root / 'crlf' / 'score_tags.py'
+        source.write_bytes(source.read_bytes() + b'# changed\r\n')
+        self.assertNotEqual(b.file_hash(source), b.file_hash(self.root / 'lf' / source.name))
+        for directory, raw in (('lf', b'a\nb'), ('crlf', b'a\r\nb')):
+            (self.root / directory / 'binary.png').write_bytes(raw)
+        self.assertNotEqual(b.file_hash(self.root / 'lf/binary.png'), b.file_hash(self.root / 'crlf/binary.png'))
+
     def test_replicate_identity_model_versions_and_configuration_stay_separate(self):
         run2 = copy.deepcopy(self.run)
         run2['id'] = 'run2'

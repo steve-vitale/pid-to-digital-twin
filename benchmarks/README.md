@@ -51,7 +51,9 @@ python scripts/test_benchmark.py
 
 No models, subscriptions, downloads or servers are used. Registered files and saved model identities/prompts are
 checked before scoring. Changed source/key/prediction fingerprints fail validation; they are not counted as a
-model's failure. Missing/invalid attempted answers remain scored failures. New unattempted cases remain a visible
+model's failure. Python scoring-code fingerprints normalize CRLF to LF, so equivalent Windows/Linux checkouts
+share a cohort; actual source edits still change it. Other declared text extensions use the same normalization.
+Missing/invalid attempted answers remain scored failures. New unattempted cases remain a visible
 coverage gap. Comparisons group by task, scorer-code/contract, exact selected inputs/keys/protocol, family, split
 and evidence type; model versions, interfaces and method settings remain separate rows. Five model replicates
 on one drawing family do not establish five independent source families or a new held-out experiment.

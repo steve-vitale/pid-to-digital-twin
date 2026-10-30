@@ -3451,6 +3451,22 @@
         "benchmarks/README.md",
         "scripts/test_benchmark.py"
       ]
+    },
+    {
+      "id": "A233",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Normalize Python scoring-code line endings when identifying benchmark cohorts.",
+      "hypothesis": "Equivalent Windows CRLF and Linux LF checkouts must reproduce the same corpus reports while actual source edits still invalidate cohort fingerprints.",
+      "evidence": "First release CI passed61/61scripts with17unittest skips, then failed registry report comparison. Python was omitted from declared text extensions; two scorer dependencies have CRLF in the Windows checkout and LF in Git. Added Python normalization and a full-suite report regression over actual LF/CRLF copies of all six scoring modules;13benchmark tests pass. Prior fourreports retained; per-case/control counts, metrics and declared runmetadata unchanged after regeneration.",
+      "runs": "Offline saved-answer rescoring and newline portability controls only; no new model calls or source/key changes.",
+      "verdict": "kept",
+      "why": "Report identity must capture code changes rather than operating-system checkout newlines. Binary fingerprints remain exact.",
+      "source": [
+        "docs/JOURNAL.md#100-reproduce-benchmark-cohorts-across-windows-and-linux",
+        "scripts/test_benchmark.py",
+        "benchmarks/README.md"
+      ]
     }
   ],
   "not_tried": [

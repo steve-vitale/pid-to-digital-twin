@@ -4777,3 +4777,19 @@ recipes are fingerprinted; changed bytes fail validation instead of being misrep
 Existing reports are refused as write targets, and CI re-scores the registered snapshots offline. Other toolkit
 functions retain their existing tests/matrix evidence and have explicit evaluator gaps; no all-function benchmark
 coverage, new corpus family, company acceptance or operational performance is claimed.
+
+## 100. Reproduce benchmark cohorts across Windows and Linux
+
+The first benchmark release passed all 61 CI test scripts (17 unittest cases skipped), but its new registry
+step failed to reproduce the committed reports. The scoring-code fingerprint helper normalized declared text
+formats but omitted Python. Two unchanged scorer dependencies had CRLF in the Windows checkout and LF in Git;
+their raw fingerprints changed cohort IDs on Linux. Main was not promoted after that failure.
+
+Python code now uses the same CRLF-to-LF normalization as other declared text inputs. A regression creates
+actual LF and CRLF copies of all six scoring modules, evaluates the complete saved drawing suite with each
+code binding, and compares JSON and Markdown exactly. It also checks that a real source edit changes the hash
+and binary newline bytes remain significant. The 13 benchmark tests pass locally. The previous four reports
+are retained in release evidence; regenerated controls, per-case counts, metrics and run metadata are unchanged.
+Only code/cohort/group identifiers and their ordering change. This repair adds no model run, case, source key,
+held-out result or new task coverage. The initial failed release and its earlier review remain in history;
+portability review and final CI are recorded separately.

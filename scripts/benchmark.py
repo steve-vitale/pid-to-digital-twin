@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 TASKS = {'drawing-extraction': 'pid2graph-v1', 'description-facts': 'native-facts-v1'}
-TEXT = {'.json', '.graphml', '.xml', '.md', '.txt', '.csv'}
+TEXT = {'.json', '.graphml', '.xml', '.md', '.txt', '.csv', '.py'}
 FIELDS = {'units': ('id', ('type',)), 'streams': ('id', ('from', 'to')),
           'instruments': ('tag', ('unit', 'stream', 'variable', 'uom')),
           'final_elements': ('tag', ('unit', 'stream', 'uom')),

@@ -34,7 +34,8 @@ which model/version and method handles each task. Both kinds of improvement belo
    self-generated. For a new public download use the existing checksum-pinned fetcher pattern; CI does not fetch
    arbitrary URLs from benchmark manifests.
 3. Add a suite case using the examples in [benchmarks/](benchmarks/). Paths are relative to the selected root.
-   File references contain `path` and `sha256`; text hashes normalize CRLF to LF, binary hashes retain raw bytes.
+   File references contain `path` and `sha256`; text hashes (including Python scoring code) normalize CRLF to LF,
+   while binary hashes retain raw bytes.
    Input/key changes create a new comparison cohort. Keep old keys and explain corrections rather than silently
    editing them to match a model.
 

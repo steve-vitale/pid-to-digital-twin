@@ -6719,6 +6719,126 @@
     "independent-statistics-check.json": "565e5707dd18c7c939520bfcb7c95491d129216eb7e4cf3a3ebaa0d37b0d1267",
     "final-public-bindings.json": "0c70d83707f7fa966aed8ae9741df5b215ee55926b257ced2b80a6de8e984b18"
    }
+  },
+  {
+   "feature": "task-benchmarks",
+   "reviewer": "Independent Codex coding agent: bounded Python source-newline portability followup",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 28,
+   "file_hash_method": "Public file/support bindings use SHA256 after CRLF to LF normalization. Private proof hashes use exact raw SHA256.",
+   "files": {
+    "benchmarks/controls/branch-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/branch-reference.json": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483",
+    "benchmarks/controls/branch-wrong-endpoint.json": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32",
+    "benchmarks/controls/linear-empty.json": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423",
+    "benchmarks/controls/linear-reference.json": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a",
+    "benchmarks/controls/linear-wrong-endpoint.json": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd",
+    "benchmarks/description-controls.json": "b5f2d827008e3310c8e433a0b1168a3819f7674758e08cfcf3d59d59de288a4b",
+    "benchmarks/keys/branch-facts.json": "d46a66cdc5a2ea3e0900849533786a2f115af10fa24dfe129b96ef909b0e8626",
+    "benchmarks/keys/linear-facts.json": "37c4a9bffab394111813775a840af65440546ae1a9a2f2c414f1ecde031159aa",
+    "benchmarks/open100-validation.json": "715b3aa5151a052ce7f9b6495d4743bd0fef8c92704db23c6caa8dd4426fdab8",
+    "benchmarks/registry.json": "a77746baf36371249cbe9e1e315bae731cd7321c1bfd90dba5aa532a53e77d64",
+    "benchmarks/results/description-controls.json": "4f504635b1c0ac299410197e984da2ffd55d2f0c358c7d1f72e286982176cee1",
+    "benchmarks/results/description-controls.md": "5e0a2b6c6f35257613a7d5a9ce3471e8e6b2e7b17d5ea51a03f3e88d08a83eba",
+    "benchmarks/results/open100-validation.json": "3d0032a9e81c117f64a9b6dc07a9922648b42c9e0a6b3f4bce0de82ecc1a6e07",
+    "benchmarks/results/open100-validation.md": "3a33ec2cd1ce1837b77533d62dbea62d865dec7d33f58ffb9b77ae08a5f9b396",
+    "benchmarks/runs/claude-r5-rep1.json": "5dbdcfa47c22c970a204c64f66c6c2618a7f245db67d040fdca85f61336a786e",
+    "benchmarks/runs/claude-r5-rep2.json": "5035dd75b39ae3aac46718b8af905bdbf5e6bce3a5b7e6261aac3fe202dcb8a2",
+    "benchmarks/runs/claude-r5-rep3.json": "4ad03cd984e3366b532dd3152c3b012f424161657241d33150a69c3e7ce6993e",
+    "benchmarks/runs/claude-r5-rep4.json": "509a76baa4cbb43a9dfd3cd268d5c96eca7dbabea510dab3a0881b385aeb040d",
+    "benchmarks/runs/claude-r5-rep5.json": "d684c6011705651c1b95e7c2bea22eebdf894e8c4f45d9000dfb9cd73ce95f96",
+    "benchmarks/runs/codex-r5-rep1.json": "1c2d0f38972179fdf7ec0d3e5790efaadf58db2f338f97c9fee47878d504a217",
+    "benchmarks/runs/codex-r5-rep2.json": "56cd9ef8a592dfd940b5ec502281accc8c37c8be391ba61140d53f7823b62bde",
+    "benchmarks/runs/codex-r5-rep3.json": "f8a28abef45d962b1aa02f9fe06a0aa2667e9c87f580435659a534044caf73d4",
+    "benchmarks/runs/codex-r5-rep4.json": "1e45f5584f00a1e6778a37413ab2cd62b36c0b27bdc3d273a1f79c77fdb7a42e",
+    "benchmarks/runs/codex-r5-rep5.json": "5a0c76189c30464aaf61d66e623c42d8744049afeeb5908116d39ef1dd504d32",
+    "benchmarks/runs/description-empty.json": "4d676da3dbfa5e21d2e36650c087b28385882c15c113398a03a29761d28f525c",
+    "benchmarks/runs/description-reference.json": "17a7f283474e35cab92ffb4552e3e776495853a30dcf35a5e26dc1bd13e8a6c6",
+    "benchmarks/runs/description-wrong-endpoint.json": "40307a01834f554a01ef14ab770f22fe7f60840e17434340cc8f219f3fd1eb7e"
+   },
+   "supporting_files": {
+    "scripts/benchmark.py": "35578237d1f8bd01e3e509847ecc5708983230468d9996218e34c4c0e8d717f3",
+    "scripts/test_benchmark.py": "7f3e77c3f9afbf268547eb72236a84738bbde13965c97ff73ae5e5f0619d6de9",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/evaluate_vendor.py": "734c154c31964449c8cdc67302d3316f19384cf59a94dd4112568bd8d1896787",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "CONTRIBUTING.md": "45333d6d96b59ad6178bb1b9ae30b9925287e82e087fdc06d57e9dbf2ebcbb1f",
+    "benchmarks/README.md": "dbc7196e0091793f3463a3ffe492e6fa7b6cf0af424421ad1cf91232ef9bcdd7",
+    ".github/PULL_REQUEST_TEMPLATE.md": "cc4f5ef72eb648d54cd14a6201fd4f40c0120b588013a44904fbf0507214bb6a",
+    ".github/ISSUE_TEMPLATE/corpus.yml": "ed494a14b4a9d90956bbb2254c8affab9b5e0ae265dab8cedcd4358fec7659ff",
+    ".github/workflows/tests.yml": "eaee6ca6bcd9c506b60b72046fd314a65b8e74c50e6c38eabdb3a089eb9b8a17",
+    ".gitattributes": "0327ac514a971dd814baa39e1fef473b93131f1063bd823eef3d9842e64bc920",
+    "scripts/run_tests.py": "1af547573647c79e2d3453113c12aa0399ef93f02ec27365ac39ac36daf8fe45",
+    "data/script_index.json": "a7107e3c598ad0d77864d30ac4c589b2b7f4b044c4b826fa146326b17b79be15",
+    "data/features.json": "06ca6b4e0f06461093d2ddefaacea63f77f27f1d3ca8383f9f3f4e2372ebc06b",
+    "AGENTS.md": "70b08837176edde7403e0f1b6dfb2c1698f927f8766d23486a9bf6d4fe472c3a",
+    "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
+    "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3"
+   },
+   "supporting_excerpts": [
+    {
+     "path": "README.md",
+     "selector": "From '**Help it generalize:**' to immediately before 'Future manufacturing tools need'; normalize CRLF to LF, rstrip then one LF",
+     "sha256_lf": "ef0884f3cc33b80964fcdb2b7457e5aa5ef616302080fc72ee3916d0e3f6e3b1",
+     "text": "**Help it generalize:** contribute cases, saved model runs and tested improvements through the\n[contribution loop](CONTRIBUTING.md). The [task/model results](benchmarks/README.md) re-score saved answers,\ntrack model versions and methods on matching test cohorts, and retain failures and coverage gaps as the corpus\ngrows. New tasks need explicit evaluators; a passing example is not evidence for every function.\n"
+    }
+   ],
+   "prior_review_scope": {
+    "baseline_commit": "5b5a52f452ad4c2116fbf6d5a82b1ba651ec971e",
+    "reviewer": "Independent Codex coding agent: iterative offline benchmark integrity, cohort and saved-answer software review",
+    "date": "2026-10-30",
+    "initial_proposal_sha256_raw": "bd1d0ee22f71a818ae8df9f01ab2b8f45fcbd12636a5a4205fcd453b850671e6",
+    "inherited_scope": "The initial task-benchmark integrity, cohort, saved-answer and synthetic-control review remains historical and unchanged. This followup checks only newline portability and regenerated report compatibility; it does not repeat or broaden the original review.",
+    "existing_review_records_retained": 112
+   },
+   "findings": [],
+   "resolved_findings": [
+    {
+     "id": "BENCH-5",
+     "finding": "Python source dependencies used raw hashes although equivalent Windows/Linux checkouts can contain CRLF/LF. Consequently exact-SHA CI41117766997 passed its script suite but failed registered benchmark report comparison.",
+     "resolution": "Add .py to the existing explicit text-extension set. Code and cohort identities now normalize Python CRLF to LF while retaining substantive source edits and binary newline differences. The four reports are regenerated with this explicit code binding."
+    }
+   ],
+   "checks": [
+    "Independently reproduced the pre-fix defect with immutable 5686 code/dependency copies: two full historical-suite CLI runs differing only in the newline bytes of replicate_stats.py and score_tags.py yield identical substantive report content but different dependency/cohort/group identities. An actual LF-copy --check against the retained old report refuses. These three pre-fix CLI calls are separate from repaired controls.",
+    "On final script35578237d1f8bd01e3e509847ecc5708983230468d9996218e34c4c0e8d717f3, independently ran seven direct benchmark CLI controls: both registered suites from six actual LF module copies and six actual CRLF copies; both registry checks; and a deliberate source-edit variant. Each returned0. Four reports are byte-identical across LF/CRLF and match all current committed JSON/Markdown files. The source edit still changes the dependency fingerprint and cohort; direct binary controls retain byte-significant newlines.",
+    "The actual13-test benchmark script passed with zero skips. The first12 test methods remain unchanged and only the new newline regression is added. Source inspection confirms the executable module body is unchanged except adding .py to TEXT; no scorer method, coefficients, thresholds or answer data changed.",
+    "Compared old/final reports independently: all top-level fields except code identities/results/summary are exact; every result row is exact after excluding only cohort; each complete summary object is exact after excluding cohort/group and array order. Thus per-case counts, metrics, statuses, controls, submissions, declarations, resources, coverage and all summary statistics remain unchanged.",
+    "Exactly four registered report files and four support files changed; the other24 registered paths and15 support bindings remain exact against the initial review. The current guide changes describe Python newline normalization. All112 existing review records remain retained unchanged. This review binds the same28-path feature only; generated feature tables, evolving journal/ledger and unrelated feature outputs are excluded."
+   ],
+   "actual_validation": {
+    "pre_fix_cli_calls": 3,
+    "repaired_direct_benchmark_cli_calls": 7,
+    "repaired_registered_suite_rescores": 4,
+    "repaired_registry_checks": 2,
+    "deliberate_source_edit_cli_controls": 1,
+    "registered_tests": 13,
+    "registered_test_skips": 0,
+    "reports_reproduced_exactly_in_both_newline_variants": 4,
+    "registered_paths_bound": 28,
+    "unchanged_registered_paths": 24
+   },
+   "review_process_notes": [
+    "Two postprocessing assertions were corrected without product edits or repeating the successful CLI calls: the initial baseline comparator omitted derived summary.group; the deliberate source-edit comparator assumed stable summary array order. Both harness refusals and their original outputs are retained. Matching complete nonidentity summary objects resolves the order issue without suppressing a metric difference.",
+    "The initial published review and its exact-SHA CI failure remain part of the history. The maintainer-reported61/61 script result with17 skips is not an independent full-suite execution in this review, and future Linux CI is not certified here."
+   ],
+   "limits": [
+    "Offline rescoring of unchanged saved drawing answers and authored synthetic scorer controls only. No model execution, new held-out evidence, source/key accuracy audit, whole matrix run, plant validation or deployment is added.",
+    "The original contributor-declared provenance, source-family/development exposure and synthetic fact-subset limits remain in force. Hash portability does not establish engineering correctness, provider attestation, unseen generalization or operational benefit.",
+    "The toolkit remains a first evidence/question packet on-ramp; ongoing company authority and decisions belong in the company system."
+   ],
+   "private_proof_hash_method": "Exact raw SHA256; opaque archived artifact names, not public repository paths.",
+   "private_proof_hashes": {
+    "baseline-newline-reproduction.json": "c2ecc9f516df56231bbc525e6ffee8eb05052f3db96648f1d0d3d1885d419646",
+    "repaired-newline-controls.json": "f6d9c69b4b67ca5af4a6c09964336a24a0281f08a7ffc6dbeb4bf8491b3f16a3",
+    "review-harness-refusal.json": "954981f6d49cda43285d09e4a1d725b8115fbdfb84c8bbaee51e8852413a2686",
+    "source-edit-review-harness-refusal.json": "76e59c6197abbd574f7dd98d196b641d0a453535a494a09880639ad626ff531a",
+    "initial-feature-review.json": "bd1d0ee22f71a818ae8df9f01ab2b8f45fcbd12636a5a4205fcd453b850671e6",
+    "final-public-bindings.json": "82f5d2cc102ab79c97a0b82fcbc9c8b116cdd8a5ff2056a87614929b9f98c98f"
+   }
   }
  ]
 }
