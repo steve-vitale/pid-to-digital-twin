@@ -3267,6 +3267,22 @@
         "docs/GENERALIZATION.md#public-sources-not-yet-added",
         "docs/CORPUS_FETCH.md#needs-a-human-decision"
       ]
+    },
+    {
+      "id": "A222",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Refuse question-screen and roll-up destinations that overlap their actual inputs or each other, and render both reports before publication.",
+      "hypothesis": "An engineer should be able to refresh a first-question packet without destroying its model, catalog, controls records, schedules or input screens through an overlapping output path.",
+      "evidence": "Disposable baseline copies demonstrate actual source replacement, output-output hardlink corruption and a partial first write when the second destination is a directory. Complete destination preflight now protects concrete model/catalog/loop/repeated-schedule/roll-up inputs and local I/O descriptions, resolves path aliases and checks existing filesystem identity. Regression controls preserve existing bytes on refusal or rendering failure and retain valid same-folder/repeated generation. Catalog, rules, schemas and all15registered opportunity outputs remain unchanged.",
+      "runs": "61local question-engine unittest cases pass with1Windows file-symlink privilege skip; independent actual-CLI preservation and compatibility controls are recorded in the scoped feature review. No model, network, live/native action or company handoff.",
+      "verdict": "kept",
+      "why": "Repairs a demonstrated first-use defect without adding local governance, history services or a receiving adapter. Both strings are staged, but no concurrent-writer lock or atomic two-file transaction is promised. The guide ends at a plain brief and company context home.",
+      "source": [
+        "docs/JOURNAL.md#89-preserve-the-inputs-to-the-first-question",
+        "docs/OPPORTUNITY_SCREEN.md",
+        "scripts/test_question_engine.py"
+      ]
     }
   ],
   "not_tried": [

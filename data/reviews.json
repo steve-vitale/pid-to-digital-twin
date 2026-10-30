@@ -5944,6 +5944,144 @@
     "check_pinned_provenance.py": "7bf0ee229c23682a891487cf27cbf41e1fccb176ae5dddd883b96b1092d661d4",
     "prepare_metadata_review.py": "3daffd43729ff4af259cf21091a9baa8ac06d3cf6861ee5c995cc217a23b808a"
    }
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Independent Codex agent: source-preservation repair and inherited-output compatibility review",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 15,
+   "file_hash_method": "Repository bindings use SHA256 after CRLF to LF normalization. Private evidence uses exact raw SHA256. Twelve regenerated screen/rollup files were compared as exact raw bytes; the maintenance wrapper compares its three expected files using its established UTF8 text convention.",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+    "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+    "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+    "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+    "examples/opportunity-screen/open100/screen.md": "1c8914cd0aff439ed0e296cf50d7d4b6cea64be23560a04dc5cdb710ccdea6f1",
+    "examples/opportunity-screen/open100/questions.json": "e35dc35e40c510820af49a079f7beee10427d55d71f6a483d80da50076f75c9e",
+    "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+    "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7",
+    "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+    "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67"
+   },
+   "supporting_files": {
+    "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
+    "data/features.json": "f21b52ce636be224c9b07e4f9b124760fef18ae35e41e9b8a5b39757aa4f98c1",
+    "data/open100_equipment_schedule.json": "e02a031de6173271b98c66be238b4ffaefa1686eb25f87028e15d2ebd5387ef4",
+    "data/questions.json": "18c97205ff03f80655b8119a8facff883e1ef8f2a6b92dbd6e1dd02e68ae31b3",
+    "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
+    "data/io_lists/open100_sheet0_demo.csv": "8cf3457547537d7113cc52f6c5ef44b70d668d08295afc7bca7cec95a6aec857",
+    "docs/OPPORTUNITY_SCREEN.md": "c99859850069b82dfaee6b5d5e913eb354c64503f0e3c0e9ca1bf99cc10bd620",
+    "examples/loop-audit/te_loops.csv": "3273fb0870f44250d9ab43270d7ce1998fb72c2f5759c5e1545589f176a04ebf",
+    "examples/opportunity-screen/food_plant_model.json": "c703129813cb7ac342c5c140a8601bc947e047006d93033bd1fb1714f87cd9c1",
+    "examples/opportunity-screen/millard/model.json": "4f2d7e39890a689778242b50418a7f5fa7235dbf05f5fbb377bb02e06c24967a",
+    "examples/opportunity-screen/open100_schedule_fields.json": "9b0b3fce95428ceb4b5e83100516553aec6fc128e81e34df2777791bd2bce9dc",
+    "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
+    "examples/opportunity-screen/review-refresh/demonstrate.py": "0fea35e6e4fd6517787e9051fa2a5e715f3903882751d109d23589a02f276f33",
+    "examples/opportunity-screen/review-refresh/rejections.csv": "2e1ee81407d0acb233f5a564da1beae3385e88c074f7b1db8ac9b0c876fd4f70",
+    "examples/opportunity-screen/review-refresh/reconfirmations.csv": "7e2c34cf878a61ff43e0fbb736c8eb57616466088b4601f7d45f90abc3656d34",
+    "scripts/apply_review.py": "b964aab922eea64ec7df473c08fd2661eb04acfceebcc340735493f2d7ddd56f",
+    "scripts/question_engine.py": "5a4f9aff06bd199638bd53747dfc587a309560b2bbc45d4658b70896837283df",
+    "scripts/test_question_engine.py": "04c178e6c2bae8f4e4fcc54661c2c684cfbb1861f279f3cbbad77c6deacdb48c"
+   },
+   "findings": [],
+   "resolution": "The existing screen/rollup CLI now refuses known source/output collisions and aliased or invalid publication targets before changing either report. Normal same-folder and repeated refreshes remain supported. All 15 registered outputs are unchanged; this is a bounded software repair, not a renewed source-interpretation, model-accuracy or operating-value claim.",
+   "checks": [
+    "Independently reproduced the 753e baseline defect on task-owned copies: 22 actual subprocesses included 15 source replacements, corrupt JSON from aliased output files, and a second-target failure after the first report changed. Baseline proof and prospective control plan are preserved unchanged. No repository original was overwritten.",
+    "The final completed independent run records 47 direct subprocesses plus 6 actual child CLIs inside the existing fictional review-refresh demonstration, 200 assertions and one explicit WinError1314 file-symlink skip. Native Windows hardlinks and a directory junction were actually exercised. No model, network, server, native-import or full test-suite action was performed.",
+    "Both report positions were tested against actual model, default/custom catalog, loop CSV and both repeated schedule roles, including an earlier schedule fully shadowed by a later file. Relative spelling, Windows case alias and existing source hardlinks refuse with exit2/error messages and every known fixture byte unchanged.",
+    "Rollup direct files and NAME=FOLDER concrete screen inputs, custom catalog and hardlink aliases were tested at both rollup.json/rollup.md positions. A source directory reached through an actual Windows junction also refuses. The guard protects the actual concrete read paths, not merely displayed provenance strings.",
+    "An isolated receiving copy exercises the actual implicit I/O-description CSV lookup used by an extracted mapped-point model, with its source hardlinked to either output position. Both refuse and preserve the source. Only copied files are linked; public I/O-list/model/catalog bytes remain intact.",
+    "Output-output hardlinks, a directory at the second target and an ordinary file in a parent chain were tested for both screen and rollup pairs. Every refusal preserves prior outputs. Actual valid-shaped catalogs missing a cited URL induce renderer exceptions before publication in both modes: both existing report files remain unchanged; these legacy renderer failures exit1 rather than being claimed uniform input-validation messages.",
+    "Safe same-directory generation, byte-identical repeated screen/rollup refresh, a source named questions.json with a different safe output folder, and stdout-only screen/rollup runs remain valid. Rendering/serialization of both strings occurs before writes. This is a local preflight, not a concurrent-writer lock or fully atomic two-file transaction.",
+    "Five established screens and the food/Bayer rollup reproduce 12 registered output files raw-byte exactly through actual current CLIs. The existing read-only maintenance demonstration runs 6 child CLIs and compares its 3 expected outputs, including review idempotence and explicit reconfirmation. All 15 files also equal both the accepted prior bindings and 753e baseline.",
+    "Question matching, traversal, benefit construction, active-review projection and Markdown renderer ASTs are unchanged. The feature registry and question catalog are unchanged. Current guide wording accurately describes known-input preservation and hands ongoing responsibility/history to the company shared context and decision system, with no local governance expansion.",
+    "An earlier private review-harness attempt ran the same 47 direct commands and 6 nested maintenance CLIs successfully, then failed only while reading source for the final AST check: the harness omitted UTF8 and inherited the Windows cp1252 default. Its logs/harness/note are archived separately. No product change was needed; explicit UTF8 and durable private progress recording allowed the completed rerun. Final-run 47/6 counts do not conceal or double-count that earlier attempt."
+   ],
+   "prior_review_scope": {
+    "reviewer": "Independent Codex agent: new-example CLI controls and explicit inherited-output compatibility review",
+    "date": "2026-10-30",
+    "archived_record_sha256_raw": "cc1cd4434fafa2f17e3b8447af1878bc8d41eaec0340f2a1377465bb54185f9c",
+    "inherited_output_count": 15,
+    "inherited_files": {
+     "examples/opportunity-screen/te/screen.md": "dabec38c8ea9882e2a39143e0a440088aa96db4ca4ff9a3f531f1f9fb1aa7884",
+     "examples/opportunity-screen/te/questions.json": "5fd5c66655410fb1533c0b4a9dd27fe407b57c6e97ca73e948fc21a5eae18573",
+     "examples/opportunity-screen/bayer/screen.md": "f8b56a142f757e8a57bb63bbec039b30346357206e7b59b1fb2e89c6f65f2cd8",
+     "examples/opportunity-screen/bayer/questions.json": "c662abc33c6810a998e38e787460c1fd224a6ea1708af7ee50df05922ac2d6ec",
+     "examples/opportunity-screen/open100/screen.md": "1c8914cd0aff439ed0e296cf50d7d4b6cea64be23560a04dc5cdb710ccdea6f1",
+     "examples/opportunity-screen/open100/questions.json": "e35dc35e40c510820af49a079f7beee10427d55d71f6a483d80da50076f75c9e",
+     "examples/opportunity-screen/food/screen.md": "f4f5252323f45599040e3bfb432186042a9140f4881980a8b44efc49f8b82fd7",
+     "examples/opportunity-screen/food/questions.json": "0daa70dc21c7e37e0083395df2f77e1969a071665bc9b1a835f8747e003440c0",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.md": "bb807a0e82d5e2a0d0b407870d448d74432530b11b8855cca48e73868bc1e09c",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.json": "c749d0ab6ac4104a7e6902d86cbc7cf9eb3691bf8bef2f7b63c2c02502e695a1",
+     "examples/opportunity-screen/review-refresh/expected/expected.json": "d34b0181ddcb68fdb6504427f03defaea9180cdcc3a125e45d2b6a6c8f560879",
+     "examples/opportunity-screen/review-refresh/expected/questions.json": "9ba10f6cf24216d8905d4fda336cac1b46296a4c020cfa47504101e0aae4648c",
+     "examples/opportunity-screen/review-refresh/expected/screen.md": "701dbe2f877fcaafc105954dc7c1087c737dfec7fdad82b3916e5b6f2c3caee7",
+     "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+     "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67"
+    },
+    "actual_raw_byte_regenerated_outputs": [
+     "examples/opportunity-screen/te/screen.md",
+     "examples/opportunity-screen/te/questions.json",
+     "examples/opportunity-screen/bayer/screen.md",
+     "examples/opportunity-screen/bayer/questions.json",
+     "examples/opportunity-screen/open100/screen.md",
+     "examples/opportunity-screen/open100/questions.json",
+     "examples/opportunity-screen/food/screen.md",
+     "examples/opportunity-screen/food/questions.json",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.md",
+     "examples/opportunity-screen/rollup-food-bayer/rollup.json",
+     "examples/opportunity-screen/millard/screen/screen.md",
+     "examples/opportunity-screen/millard/screen/questions.json"
+    ],
+    "existing_actual_CLI_wrapper_compared_outputs": [
+     "examples/opportunity-screen/review-refresh/expected/expected.json",
+     "examples/opportunity-screen/review-refresh/expected/questions.json",
+     "examples/opportunity-screen/review-refresh/expected/screen.md"
+    ],
+    "scope": "Prior engineering interpretation, original quotations, historical model/source audits and source rights/authority limits remain historical and attributed. Current controls renew software preservation and exact output compatibility only. No wholesale source/model accuracy or real-plant usefulness review is claimed."
+   },
+   "inherited_source_review_attribution": {
+    "initial_receipt_sha256_raw": "a82517235bd5541da7627723c27432891d9266492ae7a98450248209f15c0aac",
+    "citation_followup_sha256_raw": "81e372d497be429ab1027ae2fa8b8eefd99af914f6bb76b955cbe8c25a213e4a",
+    "kind": "Separate independent AI source-reader review of historical source claims, not human engineering or this reviewer repeating the PDF audit.",
+    "source_bytes": 656148,
+    "source_sha256_raw": "5b5643fc7fd94799cc6516e09af933d7fd0fe5b207bbef39adc5ec639b70c8a4",
+    "limits": "Development subset selected after source inspection. Unknown plant inventory/initiation remain unknown; no current-state, governing revision, safe sequence, site approval, demand absence, duration recommendation or energy benefit follows."
+   },
+   "command_accounting": {
+    "baseline_discovery_direct_CLIs": 22,
+    "final_completed_run_direct_CLIs": 47,
+    "final_completed_run_nested_maintenance_CLIs": 6,
+    "earlier_aborted_review_harness_direct_CLIs": 47,
+    "earlier_aborted_review_harness_nested_maintenance_CLIs": 6,
+    "earlier_failure_was_product_failure": false,
+    "earlier_failure": "Private source-reading postprocessing used platform-default cp1252 rather than UTF8; all preceding product controls had passed. No public fix was required.",
+    "actual_file_symlink_skip": "Windows denied creation with WinError1314; no successful symlink-refusal claim. Hardlink and native directory-junction cases executed separately."
+   },
+   "limits": [
+    "Independent coding-agent software verification only. No inherited primary-source quotation/model-accuracy audit was repeated; no source absence, plant condition, energy benefit, safe operating sequence, measured review time or adoption follows from a screen.",
+    "All 15 outputs remain historical development examples. Fictional review-refresh decisions demonstrate software behavior, not human engineering review or accepted plant truth. No new question, detector, source family, matrix score or benchmark execution is introduced.",
+    "Protection covers actual known read inputs and complete fixed target sets at preflight time. It does not authenticate source authority, infer arbitrary provenance paths, watch files, guard concurrent filesystem races or provide a fully atomic pair replacement.",
+    "Actual file-symlink testing is OS-skipped. No broad portability, native gateway/PI import, live OPC UA, current CI or full repository/unit-test-suite pass is certified by this reviewer. The maintainer 61-test result remains separately attributed.",
+    "The toolkit prepares an evidence/question handoff. No customer/company data, accepted owner/decision, company connector or local governance replacement is established. Whole evolving journals/attempt ledgers/TRIED and generated README/FEATURES tables are excluded."
+   ],
+   "private_proof_hash_method": "SHA256 over exact raw bytes, no newline normalization.",
+   "private_proof_hashes": {
+    "final/final-controls.json": "c734798b75746132ca22e3711debac8aafe3ba9fe1e5b65b3ee6b3c0fa45a364",
+    "final/probe_final.py": "e679a414d17ff4cac1a0196ab13979a9f65fa4bb54db6cb5dd77176e81a15751",
+    "baseline-overlap-proof.json": "de51d34bd930d590832a8de380e1faf47c218ee24d2cf629302faf21bb87dd39",
+    "requirements-and-final-control-plan.json": "6af91542d76dcca644de0f66eee51ebd81a91c23dff952edca579b8bad68e6bb",
+    "final-first-attempt/harness-note.json": "9ed6f2054d6c13416e247ec2f9967f44c8cf2b9e8d8c6021899877cdce7d73c8",
+    "final-first-attempt/probe_final.py": "19a334d083e70adc01ccfe02bc5c4caae1dd94002009b9c257408f9441f242ea",
+    "prior-accepted-opportunity-review.json": "cc1cd4434fafa2f17e3b8447af1878bc8d41eaec0340f2a1377465bb54185f9c",
+    "evidence-manifest-final.json": "e8371d06a68a16d7a7bc1253a9c97682836d86de2789ed2d82d6404477413734"
+   }
   }
  ]
 }

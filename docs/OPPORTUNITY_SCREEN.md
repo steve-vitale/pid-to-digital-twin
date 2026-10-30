@@ -21,6 +21,13 @@ python -S scripts/question_engine.py --rollup out/screen-site-a --rollup out/scr
 
 Stdlib only, offline, no model calls. Without `--out` it prints the screen.
 
+Before writing either report, the engine checks both destinations against the model, catalog, loop list and
+every supplied schedule, including any local I/O-description file it reads. Roll-ups check their catalog and
+input screens too. An overlapping input, aliased output pair or invalid target is refused before either report
+changes. Both reports are rendered before writing; this is not a lock against concurrent filesystem changes.
+Normal refresh into the same folder is allowed when inputs have different filenames. Choose another output
+folder to keep an earlier report pair.
+
 For your own model, add `--schedule` only for your corresponding records after checking their sheet/asset
 identities and scope. The committed OPEN100 schedules describe that public source, not arbitrary site equipment.
 Its complete scheduled example is in the [worked-example commands](../examples/opportunity-screen/README.md).
@@ -37,8 +44,10 @@ cannot silently reinstate a rejected controller; live duplicate tags remain elig
 Missing/unverified review stays eligible and does not mean approval. Malformed review metadata is refused before
 output writes. The [offline worked refresh](../examples/opportunity-screen/review-refresh/README.md) follows three
 fictional decisions through the actual CLIs, checks changed questions, repeats the review and explicitly reinstates
-the items. It uses invented equipment and establishes software behavior only. If you maintain answered questions,
-[refresh the retained context register](CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers) against the new model and screen.
+the items. It uses invented equipment and establishes software behavior only. For the first investigation, carry
+the finding IDs, source revision, answers and remaining evidence requests into the
+[question and pilot brief](../examples/first-pilot/README.md). As colleagues contribute, take the packet into the
+company's shared context and decision system; that system owns ongoing review, responsibility and history.
 
 ## What it is, and what it is not
 

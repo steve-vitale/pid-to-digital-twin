@@ -4412,3 +4412,37 @@ metadata bindings, inheriting earlier substantive/source/execution scopes with t
 The next corpus experiment must still choose an applicable source, define its control scheme and operating
 scope, map its identities and retain what the comparison cannot represent. This correction adds no toolkit
 governance service, receiving adapter, new independent-family result, human adoption or operational benefit.
+
+
+## 89. Preserve the inputs to the first question
+
+A disposable copy of the Bayer model named `questions.json` exposed an actual first-use defect: writing a screen
+to its containing folder replaced the model with the generated questions. Equivalent collisions exist for the
+catalog, loop list, repeated schedules and roll-up inputs. Two aliased output files can overwrite each other;
+an invalid second destination can also leave a partially replaced report pair. The original repository inputs
+were not used as destructive test targets.
+
+The existing question engine now checks its complete pair of destinations before creating a directory or writing
+either file. It protects the concrete inputs it read, including optional local I/O descriptions used for mapped
+points. Roll-up loading and protection share the same input selection. Resolved paths and existing filesystem
+identity cover alternate spellings and links. An ordinary file in the parent chain, non-file destination or
+output-output alias is refused. Both strings are rendered before publication, so a rendering exception leaves
+the prior pair untouched. This preflight is not a concurrent-writer lock or an atomic two-file transaction.
+
+Normal generation and repeated refresh into an existing folder remain valid when source and report filenames
+do not collide. Question rules, catalog, model schemas and committed example outputs are unchanged. Regression
+checks exercise source preservation, repeated schedules, implicit I/O reads, links, invalid destinations, render
+failures and valid reruns. A Windows file-symlink privilege refusal is recorded as a skipped test rather than a
+pass; hardlink and directory-junction checks are separate evidence.
+
+The independent final run executes 47 direct subprocesses plus six child CLIs in the existing review-refresh
+example, with 200 assertions. The same Windows file-symlink privilege limit remains explicit. Twelve existing
+screen/roll-up files regenerate byte for byte; the existing demonstration checks the three review-refresh
+outputs. All 15 registered outputs match the preceding checkpoint. These are compatibility and file-preservation
+checks, not a renewed audit of the models' engineering interpretations or catalog sources.
+
+The screen guide also keeps the first-use destination clear: take findings, source revisions, answers and missing
+evidence into the plain question brief, then the company's shared context and decision system as colleagues
+contribute. This is a repair to the investigation on-ramp, not an extension of the local context register or a
+new governance application. No operating benefit, human adoption, receiving-system adapter or accepted company
+handoff is established by these software checks.

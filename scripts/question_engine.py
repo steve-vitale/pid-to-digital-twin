@@ -101,6 +101,38 @@ def read_json(path, what):
     return d
 
 
+def prepare_output(out, names, sources):
+    """Check the complete publication target set before making a directory or replacing any file.
+
+    Resolve path aliases and existing filesystem identities: spelling a source differently, or using a hard
+    link, must not turn it into a report destination. This is a local preflight, not a concurrent-writer lock.
+    """
+    out = Path(out)
+
+    def same_file(a, b):
+        return a.resolve() == b.resolve() or (a.exists() and b.exists() and a.samefile(b))
+
+    try:
+        for parent in (out, *out.parents):
+            if (parent.exists() or parent.is_symlink()) and not parent.is_dir():
+                raise InputError(f"output parent {parent.name!r} is not a directory; choose a separate output folder")
+        targets = [out / name for name in names]
+        for target in targets:
+            if (target.exists() or target.is_symlink()) and not target.is_file():
+                raise InputError(f"output {target.name!r} is not a regular file")
+            for source in sources:
+                if source is not None and same_file(target, Path(source)):
+                    raise InputError(f"output {target.name!r} overlaps input {Path(source).name!r}; "
+                                     "choose a separate output folder")
+        for i, target in enumerate(targets):
+            for other in targets[:i]:
+                if same_file(target, other):
+                    raise InputError(f"outputs {target.name!r} and {other.name!r} refer to the same file")
+    except (OSError, RuntimeError) as exc:
+        raise InputError(f"cannot check output paths: {exc}") from exc
+    return out
+
+
 class Item(dict):
     """One model thing the questions can look at. Keys: id, tag, kind, type, isa, variable, text, unit, stream,
     sheet, system, facts, signal, field (where in the model it was read)."""
@@ -305,7 +337,7 @@ def from_hand(m):
     return items
 
 
-def from_twin(m, schedule):
+def from_twin(m, schedule, source_paths=None):
     systems = {s["id"]: s for s in m.get("systems", [])}
     items = []
     for u in m.get("units", []):
@@ -333,7 +365,7 @@ def from_twin(m, schedule):
         dp = it.get("data_point") or {}
         sig = None
         if dp.get("point"):
-            what = point_description(dp.get("source"))
+            what = point_description(dp.get("source"), source_paths)
             sig = f"mapped data point {dp['point']} on {dp.get('server')} ({dp.get('source')}"
             sig += (f": {what})" if what else ")")
             if what and "synthetic" in what.lower():
@@ -361,13 +393,15 @@ def from_twin(m, schedule):
 _IO_ROWS = {}
 
 
-def point_description(source):
+def point_description(source, source_paths=None):
     """The description column of the I/O list row a data point came from ('<file>.csv row N'), if the file is in
     data/io_lists/; that is where a synthetic demo point says it is synthetic."""
     m = re.match(r"^(.+\.csv) row (\d+)$", source or "")
     if not m:
         return None
     f = ROOT / "data" / "io_lists" / Path(m.group(1)).name
+    if source_paths is not None and f.exists():
+        source_paths.add(f)
     if f not in _IO_ROWS:
         try:
             with open(f, encoding="utf-8", newline="") as h:
@@ -388,6 +422,7 @@ def norm_text(t):
 class Model:
     def __init__(self, path, loops=None, schedule_paths=None):
         self.path = path
+        self.source_paths = {Path(p) for p in [path, loops, *(schedule_paths or [])] if p is not None}
         self.m = read_json(path, "model")
         if "meta" in self.m and self.m["meta"] is None:
             self.m["meta"] = {}  # an empty meta is no meta
@@ -403,7 +438,7 @@ class Model:
         try:
             self.active_m, self.review_exclusions = screening_model(self.m)
             self.schedule = load_schedule(schedule_paths)
-            self.items = from_twin(self.active_m, self.schedule) if self.twin else from_hand(self.active_m)
+            self.items = from_twin(self.active_m, self.schedule, self.source_paths) if self.twin else from_hand(self.active_m)
         except (KeyError, TypeError, AttributeError, ValueError) as e:
             # A record inside the model or schedule is missing a field or has the wrong shape: refuse and name it,
             # rather than crash or screen a model that was only partly read.
@@ -865,9 +900,8 @@ are in one of three states: **on drawing** (the value is on the drawing or model
 drawing** (collect it from the place named). Systems listed under "Left out" were not screened."""
 
 
-def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=None):
-    out = Path(out)
-    out.mkdir(parents=True, exist_ok=True)
+def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=None, *, catalog_path=CATALOG):
+    out = prepare_output(out, ("questions.json", "screen.md"), [catalog_path, *model.source_paths])
     doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(CATALOG),
            "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched, "schedules": sorted({e["file"] for e in model.schedule.values()} |
                                                            {e["fields_file"] for e in model.schedule.values()
@@ -879,9 +913,12 @@ def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=Non
            "questions": found, "not_checked": not_checked, "did_not_fire": quiet,
            "left_out": {k: sorted(set(v)) for k, v in sorted(excl.items())}}
     add_review_exclusions(model, doc)
-    (out / "questions.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
-                                        newline="\n")
-    (out / "screen.md").write_text(render_md(model, catalog, doc), encoding="utf-8", newline="\n")
+    # Render both before publishing either: a rendering error must leave prior reports intact.
+    outputs = {"questions.json": json.dumps(doc, indent=1, ensure_ascii=False) + "\n",
+               "screen.md": render_md(model, catalog, doc)}
+    out.mkdir(parents=True, exist_ok=True)
+    for name, text in outputs.items():
+        (out / name).write_text(text, encoding="utf-8", newline="\n")
     return doc
 
 
@@ -983,12 +1020,18 @@ def render_md(model, catalog, doc):
 ROLLUP_SCHEMA = "opportunity-rollup-1"
 
 
-def load_site(arg, catalog):
-    """'NAME=FOLDER' or 'FOLDER' (the site is then the folder's name) holding a screen's questions.json."""
+def site_source(arg):
+    """The same concrete input selection for rollup loading and publication protection."""
     name, _, folder = arg.rpartition("=") if "=" in arg else ("", "", arg)
     folder = Path(folder)
     name = name or folder.resolve().name
     f = folder / "questions.json" if folder.is_dir() else folder
+    return name, folder, f
+
+
+def load_site(arg, catalog):
+    """'NAME=FOLDER' or 'FOLDER' (the site is then the folder's name) holding a screen's questions.json."""
+    name, folder, f = site_source(arg)
     if not f.is_file():
         raise InputError(f"no questions.json in {shown_path(folder)}: give the --out folder of a screen run")
     d = read_json(f, "screen")
@@ -1117,12 +1160,13 @@ def render_rollup_md(doc, catalog):
     return "\n".join(L)
 
 
-def write_rollup(doc, catalog, out):
-    out = Path(out)
+def write_rollup(doc, catalog, out, *, catalog_path=CATALOG, source_paths=()):
+    out = prepare_output(out, ("rollup.json", "rollup.md"), [catalog_path, *source_paths])
+    outputs = {"rollup.json": json.dumps(doc, indent=1, ensure_ascii=False) + "\n",
+               "rollup.md": render_rollup_md(doc, catalog)}
     out.mkdir(parents=True, exist_ok=True)
-    (out / "rollup.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
-                                     newline="\n")
-    (out / "rollup.md").write_text(render_rollup_md(doc, catalog), encoding="utf-8", newline="\n")
+    for name, text in outputs.items():
+        (out / name).write_text(text, encoding="utf-8", newline="\n")
 
 
 def list_questions(catalog):
@@ -1156,11 +1200,13 @@ def main(argv=None):
             ap.error("give --model (one site's screen) or --rollup (several screens), not both")
         try:
             doc = rollup(a.rollup, catalog)
+            if a.out:
+                write_rollup(doc, catalog, a.out, catalog_path=a.catalog,
+                             source_paths=[site_source(arg)[2] for arg in a.rollup])
         except InputError as e:
             print(f"error: {e}", file=sys.stderr)
             return 2
         if a.out:
-            write_rollup(doc, catalog, a.out)
             print(json.dumps(doc["counts"]) + f" -> {shown_path(a.out)}")
         else:
             sys.stdout.reconfigure(encoding="utf-8")
@@ -1179,7 +1225,12 @@ def main(argv=None):
         return 2
     found, nc, quiet, excl = screen(model, catalog, a.question)
     if a.out:
-        doc = write_outputs(model, catalog, found, nc, quiet, excl, a.out, a.question)
+        try:
+            doc = write_outputs(model, catalog, found, nc, quiet, excl, a.out, a.question,
+                                catalog_path=a.catalog)
+        except InputError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 2
         print(json.dumps(doc["counts"]) + f" -> {shown_path(a.out)}")
     else:
         doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(CATALOG),

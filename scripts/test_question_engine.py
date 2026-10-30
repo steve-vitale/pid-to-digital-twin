@@ -4,12 +4,15 @@ quiet, the three evidence states come out right, and no output carries a currenc
 Stdlib only."""
 import io
 import copy
+import contextlib
 import json
+import os
 import re
 import sys
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -824,6 +827,155 @@ class ReviewRefresh(unittest.TestCase):
                     sys.stderr = old
                 self.assertIn("ops_review", err.getvalue())
                 self.assertEqual({p.name: p.read_bytes() for p in base.iterdir()}, prior)
+
+
+class OutputPublication(unittest.TestCase):
+    """Reports may refresh, but must never replace any of their inputs."""
+
+    def call(self, args):
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as err:
+            rc = qe.main([str(a) for a in args])
+        return rc, err.getvalue()
+
+    def snapshot(self, folder):
+        return {p.relative_to(folder).as_posix(): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
+
+    def model(self, folder, name="model.json"):
+        path = folder / name
+        path.write_bytes((ROOT / "data/bayer_rt/process_model.json").read_bytes())
+        return path
+
+    def refuse_unchanged(self, folder, args):
+        before = self.snapshot(folder)
+        rc, err = self.call(args)
+        self.assertEqual(rc, 2, err)
+        self.assertTrue(err.startswith("error:"), err)
+        self.assertEqual(self.snapshot(folder), before)
+
+    def test_model_overlap_preserves_both_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.model(base, "questions.json")
+            (base / "screen.md").write_text("prior report", encoding="utf-8")
+            self.refuse_unchanged(base, ["--model", model, "--out", base])
+
+    def test_catalog_and_loop_inputs_are_protected(self):
+        for role in ("catalog", "loops"):
+            with self.subTest(role=role), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = self.model(base)
+                target = base / "screen.md"
+                target.write_text(json.dumps(CAT) if role == "catalog" else "controller,measurement,output\n",
+                                  encoding="utf-8")
+                (base / "questions.json").write_text("prior JSON", encoding="utf-8")
+                self.refuse_unchanged(base, ["--model", model, "--" + role, target, "--out", base])
+
+    def test_every_schedule_is_protected_even_when_later_entries_replace_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.model(base)
+            first, second = base / "screen.md", base / "later.json"
+            first.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "earlier"}]}}),
+                             encoding="utf-8")
+            second.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "later"}]}}),
+                              encoding="utf-8")
+            (base / "questions.json").write_text("prior JSON", encoding="utf-8")
+            self.refuse_unchanged(base, ["--model", model, "--schedule", first, "--schedule", second,
+                                         "--out", base])
+
+    def test_rollup_direct_file_and_catalog_inputs_are_protected(self):
+        for role in ("screen", "catalog"):
+            with self.subTest(role=role), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                screen = base / ("rollup.json" if role == "screen" else "questions.json")
+                screen.write_bytes((EX / "bayer/questions.json").read_bytes())
+                args = ["--rollup", "site=" + str(screen if role == "screen" else base)]
+                if role == "catalog":
+                    catalog = base / "rollup.md"
+                    catalog.write_text(json.dumps(CAT), encoding="utf-8")
+                    (base / "rollup.json").write_text("prior JSON", encoding="utf-8")
+                    args += ["--catalog", catalog]
+                else:
+                    (base / "rollup.md").write_text("prior report", encoding="utf-8")
+                self.refuse_unchanged(base, [*args, "--out", base])
+
+    def test_hardlink_alias_to_source_or_other_output_is_refused(self):
+        for alias in ("source", "output"):
+            with self.subTest(alias=alias), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = self.model(base)
+                first, second = base / "questions.json", base / "screen.md"
+                if alias == "source":
+                    os.link(model, first)
+                    second.write_text("prior report", encoding="utf-8")
+                else:
+                    first.write_text("prior JSON", encoding="utf-8")
+                    os.link(first, second)
+                self.refuse_unchanged(base, ["--model", model, "--out", base])
+
+    def test_symlink_source_alias_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.model(base)
+            try:
+                (base / "questions.json").symlink_to(model)
+            except OSError as exc:
+                self.skipTest(f"file symlinks unavailable: {exc}")
+            self.refuse_unchanged(base, ["--model", model, "--out", base])
+
+    def test_invalid_second_target_or_parent_preserves_existing_report(self):
+        for kind in ("second target directory", "parent file"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = self.model(base)
+                (base / "questions.json").write_text("prior JSON", encoding="utf-8")
+                if kind == "second target directory":
+                    (base / "screen.md").mkdir()
+                    out = base
+                else:
+                    out = base / "questions.json" / "reports"
+                self.refuse_unchanged(base, ["--model", model, "--out", out])
+
+    def test_implicit_io_list_is_protected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            source = base / "data/io_lists/io.csv"
+            source.parent.mkdir(parents=True)
+            source.write_text("point,description\nPT-1,synthetic fixture\n", encoding="utf-8")
+            model = base / "model.json"
+            model.write_text(json.dumps({"meta": {"model_kind": "extracted_twin"}, "units": [],
+                "instruments": [{"id": "PT-1", "tag": "PT-1", "data_point":
+                                 {"point": "PT-1", "source": "io.csv row 2"}}]}), encoding="utf-8")
+            os.link(source, base / "questions.json")
+            with patch.object(qe, "ROOT", base):
+                self.refuse_unchanged(base, ["--model", model, "--out", base])
+
+    def test_same_directory_generation_and_repeated_refresh_remain_valid(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.model(base)
+            original = model.read_bytes()
+            for args in (["--model", model], ["--rollup", "site=" + str(base)]):
+                self.assertEqual(self.call([*args, "--out", base])[0], 0)
+                before = self.snapshot(base)
+                self.assertEqual(self.call([*args, "--out", base])[0], 0)
+                self.assertEqual(self.snapshot(base), before)
+            self.assertEqual(model.read_bytes(), original)
+
+    def test_render_failure_leaves_existing_pairs_untouched(self):
+        for renderer, args, names in (
+                ("render_md", ["--model", ROOT / "data/bayer_rt/process_model.json"],
+                 ("questions.json", "screen.md")),
+                ("render_rollup_md", ["--rollup", EX / "bayer"], ("rollup.json", "rollup.md"))):
+            with self.subTest(renderer=renderer), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                for name in names:
+                    (base / name).write_text("prior report", encoding="utf-8")
+                before = self.snapshot(base)
+                with patch.object(qe, renderer, side_effect=ValueError("render control")):
+                    with self.assertRaisesRegex(ValueError, "render control"):
+                        self.call([*args, "--out", base])
+                self.assertEqual(self.snapshot(base), before)
 
 
 if __name__ == "__main__":
