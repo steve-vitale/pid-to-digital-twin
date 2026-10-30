@@ -5,6 +5,11 @@ model and its questions. It keeps the base model unchanged. It writes a versione
 and copies of the graph and questions with the context attached. No accounts, network, model calls or plant imports
 are involved.
 
+Use it to prepare the first evidence and decision packet for one engineering problem. As people and projects
+begin relying on that knowledge, move the maintained context into the company's shared system with its access,
+ownership and review rules. The local packet demonstrates what needs to travel; it does not supply that shared
+organizational home. [After the first pilot](../examples/first-pilot/README.md#after-the-first-packet) explains the transition.
+
 Start with documents worth trusting, an identity model, and questions that an engineer actually needs answered.
 The tool does not decide whether a document is authoritative, choose an owner, or infer an answer from nearby prose.
 Its job is to make the decision, its responsibility and its evidence travel together, and to reopen the affected

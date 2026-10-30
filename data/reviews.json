@@ -3912,6 +3912,162 @@
     "controls_rerun_for_hash_correction": false,
     "all_repository_bindings_unchanged": true
    }
+  },
+  {
+   "feature": "context-register",
+   "reviewer": "Independent Codex agent (narrow read-only onboarding and company-handoff prose review)",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "file_hash_method": "Repository file and section bindings use SHA-256 with CRLF normalized to LF. Named private-proof and prior-receipt bindings use SHA-256 over exact raw bytes, without normalization.",
+   "registered_output_count": 23,
+   "files": {
+    "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+    "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+    "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+    "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+    "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+    "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3",
+    "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+    "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+    "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+    "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+    "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+    "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+    "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+    "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+    "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+    "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+    "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+    "examples/context-register/metropt3/originals.json": "8988be99d64f20bb4c1b5c20425a9d09c9919e91740599c28ef21105c784ee6c",
+    "examples/context-register/metropt3/sources.json": "7f3f1e21f179b66d52e7f175eced2e424d9f896369bc325236b9820ab852772a",
+    "examples/context-register/metropt3/source_key.json": "51d72abe7f1fdccc20e10d053042151603ce793b6d93bd4c2b946864707f862b",
+    "examples/context-register/metropt3/proposed_answers.csv": "b56b2612e6b143848f78531598eabd46a4910f97ee25d1e0c7aa89f3a19826b3",
+    "examples/context-register/metropt3/expected/context.json": "d21f2b87bb808ff8562a64fe97bfeead25ba3f56bfe3dda629efa2249cdc7ce4",
+    "examples/context-register/metropt3/expected/context.md": "d0a535b0e915aab3cb5ae57c7822917749d6733eead2f64e38bad2a2bb0dee37"
+   },
+   "supporting_files": {
+    "scripts/context_register.py": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "scripts/graph_export.py": "c0d3ad02347edb6952be086fd40ce631e3423af6e3c712947058df66dc7891f2",
+    "scripts/test_context_register.py": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "scripts/test_context_examples.py": "3b1eddd695d8a658a8e1bc1d6a54d5ceb1c5be2a408cbbc41ff4a6952c4eb726",
+    "examples/context-register/metropt3/model.json": "53d91f25a49c45a62c0ee5fdbb93a6ecdf70b9b05ebaaae7f5e0a50fa2e06141",
+    "examples/context-register/metropt3/questions.json": "cb64e7207396bf13432e4c8762554e5c7a927de870367877b1e610231e112209",
+    "examples/context-register/metropt3/prepare_sources.py": "3ca5b0aed1bccae16517e004f4d27bc131fcfd09a71dd1f859dde6eb9b6d0dc6",
+    "examples/context-register/metropt3/verify_sources.py": "3686dbb94ad8a004248315f5bd77ec71d76b6eb906b504378b1fbcc4b04b46a7",
+    "examples/context-register/metropt3/check_packet.py": "9f05791331ff38ac984add069b28c96288f99526cf7deae5b3b534f615445003",
+    "examples/context-register/metropt3/README.md": "8fc90d2ae4a3e660157b99b2ed3df1e3cd68d0817ead0bd995123c040c687bb0",
+    "examples/context-register/metropt3/ACCEPTANCE.md": "4c5ed61138f545328422ce30826980d5976043a8f3a869704b4a93c13c4f131d",
+    "examples/context-register/metropt3/.gitignore": "bd1b372a653d8cb7d21610a2003bda1e69beb233637edec7fd6e20fe72efc004",
+    "docs/CONTEXT_REGISTER.md": "bd5ff4becec31c2b8d983c5a9ee82a3a635717d5b0ff04f26efd85066e4eed59",
+    "docs/CONTEXT_LIFECYCLE.md": "ccd5254234551fd77f55c10d849e2ee1f559b8cb41633a1f9da02b3c6d390de3",
+    "examples/context-register/README.md": "7bf7fa34ea6c2edc880aabb9df9317675e46e27c81a00d033c79b3015ebb4e5f",
+    "NOTICE.md": "b7c551e30f46f7ce6a03c80e5d575b2be4227dec3e61b9267a737c9296bca81f",
+    "data/corpus.json": "ce03608b8b3ceedb75f483a3462968d85176aee4985a216b172bf1e7a44281d4",
+    "data/features.json": "6e18faeb39fb352f9c97f8ac37b0687394caa242ad10b2e5918ce11fe1822369",
+    "requirements-render.txt": "76259e1cd656bc788de8a71e6fa731d9779066c5abbf24008db0f8c9138c8e82",
+    ".gitignore": "c9514ece3ce68e2a40ae27449270bd93283575ca51e3e9cd87a8e055669719be",
+    "examples/first-pilot/README.md": "bcdd13a5e78e97ce511e18362f001050a6a229a804de6345ffddc29c2fc85268"
+   },
+   "reviewed_sections": [
+    {
+     "file": "README.md",
+     "section": "Starter introduction and From a first packet to company context transition",
+     "normalization": "Read UTF-8 with universal LF newlines. Exact text[text.index('**Turn starting documents'):text.index('## How each piece contributes')]. Preserve every trailing newline; do not strip or append. The heading is excluded.",
+     "normalized_utf8_sha256": "a0774a643d9034b690c149c96a4c150020fb97e98897e752b307cb5dbd1889d9"
+    },
+    {
+     "file": "README.md",
+     "section": "Single Maintenance and reliability navigation bullet",
+     "normalization": "Exact complete UTF-8 line, followed by one LF; generated feature-table text elsewhere is excluded.",
+     "normalized_utf8_sha256": "0c9e5e3ed5956c308560152308c0a921706c8f2239c247f92bef81cbb03df6b3"
+    },
+    {
+     "file": "README.md",
+     "section": "Manual How each piece contributes evidence and decision packet row",
+     "normalization": "Exact complete line beginning '| **An evidence and decision packet**', followed by one LF. Generated feature-table text is excluded.",
+     "normalized_utf8_sha256": "2c7c7e1bcb3ebcffc3b790238d3ca788f393f52e445e519da4e66c2c16628896"
+    }
+   ],
+   "findings": [],
+   "resolution": "No open finding in the five-document on-ramp clarification. The public toolkit begins with one useful engineering evidence and decision packet. A shared company system supplies maintained organizational context, responsibility, access and review; operational execution may remain in existing systems. The receiving adapter and round trip still need implementation and validation. All 23 registered outputs, public core, tests, schemas and feature/corpus registry retain the accepted baseline; this receipt rebinds prose only.",
+   "checks": [
+    "Read the final README starter introduction, From a first packet to company context section and manual evidence/decision contribution row. They retain prototype/public-input limits, separate document/CAD/description modeling from controls/historian analysis, require reviewed identity mapping and define the first result as a portable record of evidence, unknowns and the next decision. They do not turn a local packet into organizational authority or represent a receiving adapter as implemented.",
+    "Read the final register and lifecycle introductions and context-example title/introduction. They position local work as the first useful packet and direct maintained multi-person context to a shared company system. Existing single-source limitations, explicit manual refresh, identity/reviewer authentication limits, unknown/source-match/plant-truth distinctions and receiving-authority rules remain intact.",
+    "Read the complete first-pilot guide, including After the first packet. Baseline, observed result, site decision-maker, resources and next owner are still required. The company system is to retain revisions, evidence, relationships, questions, decisions and history; existing operational systems retain execution. Generated findings remain proposals, and the actual adapter and round trip still need validation. Measured adoption and operational benefit remain explicitly absent.",
+    "Recomputed the exact 23 registered output bindings and all 20 prior supporting bindings against the accepted portability receipt. Every output and 17 supports are unchanged under the declared LF convention. Only the register guide, lifecycle guide and context-example index change; first-pilot README is added as support 21. Verified core, both tests, feature registry and corpus registry equal baseline; the public tree contains no new evidence-set example or schema implementation.",
+    "Bound the exact README starter/transition excerpt, changed manual contribution row and unchanged maintenance navigation bullet separately. Generated feature-table state, journal and attempts metadata are excluded. Preserved the prior raw receipt unchanged. No software test, source audit, source-copy CLI control, matrix run or product implementation was executed for this prose-only review."
+   ],
+   "control_results": {
+    "registered_outputs_unchanged": 23,
+    "prior_supports_unchanged": 17,
+    "existing_guide_supports_rebound": 3,
+    "added_first_pilot_supports": 1,
+    "total_support_bindings": 21,
+    "software_tests_executed_for_this_review": 0,
+    "source_audits_executed_for_this_review": 0,
+    "matrix_cells_executed_for_this_review": 0,
+    "new_product_features": 0
+   },
+   "prior_software_review": {
+    "receipt_sha256_raw": "280f9a2f693f3c31cc9debd7b08aec7b4f62d4f6a8e9be0529b2c7b997678f9b",
+    "scope": "The accepted baseline retains its historical core/history, source/CLI, publication and portability evidence. Historical 43 core cases and six source-example tests are not attributed as rerun for this prose receipt. The earlier 33 source/CLI controls and focused eight publication cases retain their original code hashes and scope.",
+    "public_core_sha256_lf": "ae09d33a6a296154d5c27b3b403ae358638db6b791d2d8b8e88fbb64457a5441",
+    "public_core_test_sha256_lf": "f4853c4942422b2c4471da832ae5c66c430c66b6bdf2bd50ee1a3893226cc380",
+    "public_example_test_sha256_lf": "3b1eddd695d8a658a8e1bc1d6a54d5ceb1c5be2a408cbbc41ff4a6952c4eb726",
+    "historical_core_case_count": 43,
+    "historical_source_example_test_count": 6,
+    "rerun_in_this_review": false
+   },
+   "prior_review_scope": {
+    "unchanged_output_hashes": {
+     "examples/context-register/bayer/expected/context.json": "aeb289e27ac8312ef84ecc441366c4926a02a2a015704e65a60d7a45014706d7",
+     "examples/context-register/bayer/expected/context.md": "9d462d74c70ea03ceee8a9d36e27d81be3cd74efdf54692737150f30aa60e3ab",
+     "examples/context-register/bayer/screen/questions.json": "9b87cd0f87722f9433210042533823374cf6e8800692cb8fb841a417fd86dc39",
+     "examples/context-register/illustrative/expected/context.json": "36df5a0e3b4a26f1ee48526c05325bf6cf5b488c0cecacf1f4900d11a60c3492",
+     "examples/context-register/illustrative/expected/context.md": "fd0335ddc954f13e3a47671129dbc176b75ac0ffeb20d9f27b96a5dd10aea563",
+     "examples/context-register/illustrative/expected/enriched_graph.json": "da86b266d479ad76ec4c3cd3c4a107aa5e3ef721cf1c9694a892a3abcb5e0057",
+     "examples/context-register/illustrative/expected/enriched_questions.json": "08c10b94499fd9ff208a48744c5e3b1edcaed18d0a87d44b038d920fdd77d848",
+     "examples/context-register/nist-smstestbed/expected_context.md": "1f7914288611577c03a44e3e851599a203dc4b39448fe62afa7ad17b217709e4",
+     "examples/context-register/nist-smstestbed/expected_history_checks.json": "4d5b85c8af1b573d0b2f8f70a2611785dbd810ad8c0dd549ed227959d4aca417",
+     "examples/context-register/nist-smstestbed/fetch.json": "8511fca58cf8496798c68efaf1d4731b0f4c180eb649be2a251652f699496bb6",
+     "examples/context-register/nist-smstestbed/proposed_answers.csv": "7e535eb1e7e562379f7b6161d7adf0cfce581828c01dee1fe375827319afbb43",
+     "examples/context-register/nist-smstestbed/source_key.json": "6c67a375b795dd781ede5e62e21fa09fe9563ed6006df849fca810e132623ab4",
+     "examples/context-register/nist-smstestbed/sources.json": "a453ec52f30754486fda3395ada4066b92d31ca3ad20cd45d4b5832dba2172e2",
+     "examples/context-register/pronto/expected/context.md": "7f83bb3a80ee295548d83a7143f97242261867ddef430f3aac1353ee92d38aa1",
+     "examples/context-register/pronto/proposed_answers.csv": "89038278446f47da015ed450e422bfbcd557a56edda3304ad051c412c5952f04",
+     "examples/context-register/pronto/source_key.json": "3de94f211b32524874616543dd6dce5bc9be522ef13d62062b786be3f641c848",
+     "examples/context-register/pronto/sources.json": "67ff8accecdafc924fc4c4486a3e630a545984331b928369650d1edc806602e3"
+    },
+    "preserved": "Earlier PRONTO, Bayer, NIST and illustrative source/software review scope and limitations remain unchanged. Existing original-source audits and broad context-core adversarial suites were not repeated for this packet-only increment."
+   },
+   "attributed_primary_source_review": {
+    "reviewer": "Independent AI controls_reader persona",
+    "kind": "Primary-source software-development packet review; not human engineering or operations review",
+    "outcome": "pass_12_source_facts_and_locators; caught_cross_source_scope_issue_resolved",
+    "proof_sha256_raw": "cc27c4a61c2c8be72d0a10fe191f352983cd9b0150226bd2e347220728294a2a",
+    "fact_and_locator_checks": 12,
+    "packet_bindings_current": true,
+    "scope": "Separate independent controls-reader audit: all three complete original PDF pages visually inspected and the full CSV streamed. It caught and resolved four cross-document statements in single-source proposals. This reviewer checked its exact final packet bindings and ran source-verifier CLIs; the visual original-page audit is attributed to that reviewer, not claimed as repeated here.",
+    "limits": [
+     "Development facts seen before acceptance; not held out or a new source family.",
+     "No human/engineering approval, work-order execution verification, live system, model extraction, customer data or native import.",
+     "No fresh verification of online license/DOI metadata; local original bytes and source content were checked.",
+     "No software lifecycle verdict from this audit; software reviewer is separate.",
+     "No uniform cadence, timezone, downsampling explanation, unique mode, causal improvement or present asset state established."
+    ]
+   },
+   "limits": [
+    "Independent coding-agent prose and binding review only. No tests, original-source audits, source-copy CLI controls, matrix cells, native imports, customer/plant work or hosted integration were newly executed.",
+    "The shared company home and released-snapshot return path describe an intended handoff. The toolkit supplies local files, not a shared governance service, authenticated organizational approval, live connector or validated receiving-system round trip.",
+    "No measured adoption, engineering review timing, operational benefit, causal effectiveness or human/site approval follows from these examples or this review. Existing primary-source, development and software-scope limits remain attributed to their accepted records.",
+    "The public release retains the existing one-source-locator-per-answer contract. Only changed onboarding prose is reviewed here; privately shelved prototypes and their control counts are excluded from public capability and validation claims.",
+    "Repository bindings use the declared LF convention. Generated README feature tables, journal and attempts metadata are not bound by this narrow prose receipt. No matrix support changed and no renewed matrix verdict is issued."
+   ],
+   "private_proof_hash_method": "SHA-256 over exact raw private bytes; no line-ending normalization.",
+   "private_proof_hashes": {
+    "context-register-portability-review-prior.json": "280f9a2f693f3c31cc9debd7b08aec7b4f62d4f6a8e9be0529b2c7b997678f9b",
+    "onramp-binding-proof.json": "e6cdf9d6c11a92c106bcb81f5caf08e1977e425335d8077840807a3bcbdf55c3"
+   }
   }
  ]
 }

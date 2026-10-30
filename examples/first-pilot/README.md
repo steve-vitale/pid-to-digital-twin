@@ -43,5 +43,21 @@ refuse. A context answer alone does not edit the generator model. For ongoing or
 from its released snapshot. The organizational snapshot adapter and automated document update service remain
 an integration target.
 
+## After the first packet
+
+The pilot should leave one useful engineering result and an understandable record of how the team reached it.
+It also makes the next organizational need concrete: someone else must be able to find the evidence, understand
+the decision and know who maintains it when the documents or equipment change.
+
+When several people or projects need that context, take the packet into a shared company system. Look for a place
+that retains source revisions and relationships, open questions, attributed decisions, ownership and history
+under the company's access and review rules. A folder of generated documents leaves those responsibilities to
+individuals. Keep the existing operational systems responsible for executing work and returning its results.
+
+Use the toolkit's specialist tools as needed for new drafts, checks and evidence collection. The company system
+should hold the maintained context and released snapshots from which those tools work. Returning a generated
+finding is a new proposal for review. The [lifecycle guide](../../docs/CONTEXT_LIFECYCLE.md) describes that intended
+handoff; an actual adapter and round trip still need validation. There is no ready hosted connector in this repo.
+
 This workflow has software examples and AI reader review; no engineer's adoption or operational benefit has been
 measured with it. Use that first site pilot to learn whether the package helps, including a result that it does not.

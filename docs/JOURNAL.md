@@ -3889,3 +3889,18 @@ then reaches the explicit parent-directory check. The unsafe path already refuse
 match the intended consistent diagnostic. Preflight now normalizes that Linux error to the same directory
 refusal. The real filesystem control is unchanged; a separately labelled Linux-errno control also exercises this
 path on Windows. No source/output content, matrix criterion or assertion was relaxed to obtain a pass.
+
+## 74. Keep the toolkit a starting point
+
+The next useful result is an engineer's first evidence and decision packet around one problem. As people and
+projects begin relying on it, the company needs a shared home for the information, relationships, decisions,
+ownership and history. The toolkit should make that need concrete through useful work, rather than grow into a
+local organizational-governance application.
+
+The README now describes that journey explicitly. The pilot guide adds what happens after the first packet;
+the context and lifecycle introductions place ongoing organizational responsibility in the company's shared
+system. Operational execution can remain in its existing systems, and specialist tools can later consume
+released context and return findings for review. No ready receiving-system adapter or measured adoption is claimed.
+This increment changes documentation only: existing scripts, schemas, source packets, outputs and matrix results
+remain unchanged. Further feature work should earn its place by helping an engineer start or demonstrate the
+handoff, rather than recreating the company system inside this repository.

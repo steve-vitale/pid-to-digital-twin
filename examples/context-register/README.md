@@ -1,8 +1,12 @@
-# From starting documents to maintained engineering context
+# From starting documents to a first context packet
 
 A model can give an engineer useful questions. This workflow keeps the answers, responsibility and evidence
 beside those questions, then reopens affected answers when a supporting source changes. It works locally with
 standard-library Python. The starting model and source documents stay unchanged.
+
+Use these examples to start the process on one problem. When the company needs to retain and coordinate this
+knowledge across people and projects, take the packet into a shared organizational system. The
+[next step after a pilot](../first-pilot/README.md#after-the-first-packet) describes what that home needs to retain.
 
 There are five examples:
 

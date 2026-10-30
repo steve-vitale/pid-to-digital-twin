@@ -3020,6 +3020,22 @@
         "examples/context-register/metropt3/README.md",
         "docs/CONTEXT_REGISTER.md"
       ]
+    },
+    {
+      "id": "A207",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Clarify the path from one useful engineering packet to a shared company home for context and decisions.",
+      "hypothesis": "A useful first investigation should demonstrate why organizational context needs shared ownership and history, without making the toolkit an organizational-governance application.",
+      "evidence": "README, first-pilot guide and context/lifecycle introductions describe the starter-to-company handoff. Existing scripts, schemas,23context outputs and matrix remain unchanged; receiving adapters and measured engineer adoption remain unverified.",
+      "runs": "Documentation clarification; no new model, source, accuracy or operational result",
+      "verdict": "kept",
+      "why": "Keeps specialist tools useful for starting the process and producing portable evidence, while ongoing company context belongs in a shared system under organizational rules.",
+      "source": [
+        "docs/JOURNAL.md#74-keep-the-toolkit-a-starting-point",
+        "README.md#from-a-first-packet-to-company-context",
+        "examples/first-pilot/README.md#after-the-first-packet"
+      ]
     }
   ],
   "not_tried": [

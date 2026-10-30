@@ -2,23 +2,35 @@
 
 [![tests](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml/badge.svg)](https://github.com/steve-vitale/pid-to-digital-twin/actions/workflows/tests.yml)
 
-**From engineering records to knowledge the organization can own.**
+**Turn starting documents into a first engineering context packet.**
 
-The aim is an engineering foundation for future manufacturing tools: a shared understanding of the plant that
-people can inspect, improve and maintain. Equipment identities and connections are part of it. So are the
-documents supporting an answer, its operating context, the questions still unresolved, and the people responsible
-for the next decision. A drawing becomes one view into that larger body of engineering knowledge.
+Future manufacturing tools need a shared understanding of the plant: equipment identities and connections,
+supporting documents, operating context, unresolved questions and the reasons behind decisions. A drawing is one
+view into that knowledge. This toolkit helps an engineer begin building it around one useful problem.
 
-This repository develops that foundation through local, reviewable workflows. Drawings and supported CAD exports
+Start with a small, reviewable packet. Drawings and supported CAD exports
 can seed a draft asset model; a written description can support one an engineer authors. Controls records and
 historian CSVs have their own checks and analyses. Linking their findings to assets requires reviewed identity
 mapping. Check the model's claims where a model is used, investigate useful questions and retain the answers
-with their evidence. The intended result is a portable engineering packet that another person can understand
-and continue, and that future applications can build on.
+with their evidence. The first result is a portable engineering packet that another person can understand
+and continue: what the records say, what remains unknown and what evidence the next decision needs.
 
 These are prototype tools tested on public inputs. The software examples do not establish an organization's
 source authority, an engineer's approval or measured operational value. The [first-pilot brief](examples/first-pilot/README.md)
 connects the tools to one real decision, with a sponsor, baseline, observation and accountable recipient.
+
+## From a first packet to company context
+
+Use the tools to investigate one asset, area or question and demonstrate the process. The local files make that
+first attempt inspectable. As more people contribute, the company needs a shared place to retain the information
+and decisions: which revision governs, who owns a question, why a change was accepted and what new evidence
+reopens it. Copies on individual engineers' machines cannot supply that organizational responsibility.
+
+Take the reviewed packet into the company's shared context and decision system. That system should retain source
+identities, evidence, relationships, decisions, owners and history under the company's access and review rules.
+Existing operational systems can keep executing the work. Specialized generation tools can then use released
+context and return new findings for review. The toolkit demonstrates the starting workflow and supplies portable
+files; the receiving-system adapter still needs to be built and checked. See [the next step after a pilot](examples/first-pilot/README.md#after-the-first-packet).
 
 P&ID extraction was the first tested entry point: AI vision models read symbols and tags on piping and
 instrumentation diagrams, code traces the lines, and a builder produces a draft asset model and platform staging
@@ -49,7 +61,7 @@ flowchart LR
 | **Source review, loop checks and signal mapping** | Check what a source actually says, compare drawn loops with controls records, and map instruments to supplied signal addresses. A source match and current plant truth remain separate verdicts. | [Statement review](docs/STATEMENT_REVIEW.md), [loop audit](examples/loop-audit/README.md), [mapping](examples/review-and-mapping/README.md) |
 | **The question engine** | Turn the model into specific energy and controls investigations: why a question applies, which assets it concerns, what evidence to collect and how that evidence could settle it. A finding remains a question. | [Screening guide](docs/OPPORTUNITY_SCREEN.md), [a generated question and partial answer](examples/context-register/bayer/README.md) |
 | **Historian tools and impact estimates** | Examine supplied operating history, replay recorded data, and turn a measured change into a first-draft energy, cost and emissions estimate. Retain false alarms, assumptions and missing measurements. | [Historian CSVs](examples/historian-csv/README.md), [impact estimates](docs/IMPACT_ESTIMATE.md) |
-| **The context register** | Keep answers, owners, competing evidence and dated decisions together. Refresh against released source revisions to reopen affected answers while retaining the earlier reasoning. It runs locally and does not monitor documents or authenticate people. | [Offline and public-source examples](examples/context-register/README.md), [maintenance guide](docs/CONTEXT_REGISTER.md) |
+| **An evidence and decision packet** | Demonstrate how answers, owners, competing evidence and decisions stay together. A local refresh shows which answers a source revision reopens. Carry that packet into the company's shared context system as the work grows. | [Offline and public-source examples](examples/context-register/README.md), [maintenance guide](docs/CONTEXT_REGISTER.md) |
 | **A bounded engineering pilot** | Choose one useful decision with its sponsor and intended user. Record the baseline, observation, resource use and outcome before expanding; a supported decision to stop is useful evidence too. | [Pilot guide and brief](examples/first-pilot/README.md) |
 | **Portable handoff and platform staging** | Carry the model, source manifest, context history and open questions to the next engineer or system. Ignition and PI exports supply asset/tag structure; signal values stay placeholders until mapped. Receiving systems require an explicit adapter and acceptance check. | [Versioned handoff](docs/CONTEXT_REGISTER.md#versioned-handoff-and-limits), [platform outputs](docs/TWIN_OUTPUTS.md) |
 | **Reproducibility and change checks** | Make the foundation inspectable: compare claims with committed results, re-score saved predictions, report stale generated outputs, and show where tools fail on other public inputs. These checks support review without conferring plant authority. | [Checks](AGENTS.md), [lineage](docs/DATA_LINEAGE.md), [generalization](docs/GENERALIZATION.md) |
