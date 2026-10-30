@@ -1,0 +1,96 @@
+{
+ "meta": {
+  "model_kind": "extracted_twin",
+  "title": "OPEN100 multi-appearance evidence regression",
+  "source_document": "Extraction run r2-tiles-trace/codex, sheets 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+ },
+ "systems": [],
+ "units": [
+  {
+   "id": "S2-TK002",
+   "tag": "CND-TK-165",
+   "tag_status": "as_extracted",
+   "class": "tank",
+   "confidence": 0.99,
+   "provenance": [
+    {
+     "sheet": "2",
+     "symbol": "s24",
+     "class": "tank",
+     "box_0_1000": [
+      536.7,
+      228.6,
+      782.7,
+      334.5
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 0.99,
+     "source_run": "runs/r2-tiles-trace/codex/2.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    },
+    {
+     "sheet": "3",
+     "symbol": "s2",
+     "class": "tank",
+     "box_0_1000": [
+      146.0,
+      324.2,
+      321.7,
+      429.0
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 0.99,
+     "source_run": "runs/r2-tiles-trace/codex/3.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    },
+    {
+     "sheet": "4",
+     "symbol": "s11",
+     "class": "tank",
+     "box_0_1000": [
+      204.9,
+      440.0,
+      380.6,
+      546.4
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 1.0,
+     "source_run": "runs/r2-tiles-trace/codex/4.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "verification": {
+    "status": "unverified"
+   },
+   "name": "CND-TK-165",
+   "type": "tank",
+   "role_reason": "class tank",
+   "system": "SYS-2",
+   "layout": {
+    "x": 659.7,
+    "y": 281.6,
+    "sheet": "2",
+    "frame": "sheet_0_1000"
+   },
+   "source": "codex extraction, sheet 2 symbol s24",
+   "sheets": [
+    "2",
+    "3",
+    "4"
+   ],
+   "risk": {
+    "risk_score": 0.0395,
+    "tier": "green",
+    "why": "no strong warning signs"
+   }
+  }
+ ],
+ "streams": [],
+ "instruments": [],
+ "final_elements": [],
+ "line_items": [],
+ "offpage_connectors": []
+}

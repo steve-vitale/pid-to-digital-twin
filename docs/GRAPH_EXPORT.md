@@ -5,9 +5,9 @@ a graph database or a change-management system can load without knowing this rep
 [`examples/graph-export/`](../examples/graph-export/) (the Tennessee Eastman model, the Bayer model and the extracted
 OPEN100 sheet 0).
 
-**Current preservation gaps:** for extracted items with several provenance appearances, the exporter uses the
-first appearance's locator; it does not retain the complete provenance list or report that loss. Keep the source
-model and original records alongside the graph. See the [audited defects](STATUS.md#known-defects).
+Each represented item keeps its identity `source` and complete original drawing `provenance`, when supplied.
+Claims keep their own sources, including document-specific citations and later corrections. Keep the source
+model and original records alongside the graph; exported references do not verify those records or plant truth.
 
 The CLI refuses an output that aliases the input model, question file or any consumed `--reviews/*.json`
 record, including resolved directory links and existing hardlinks. Choose a separate output path. This local
@@ -39,6 +39,21 @@ the source/model reference explicitly; the exporter does not guess an alias or r
 The [unplaced DEXPI example](../examples/graph-export/unplaced-dexpi/README.md) follows actual public XML through
 the reader and export. Its software checks show retained meaning, not better extraction accuracy or resolved
 placement. The original generalization-matrix criteria and failed placement cells remain unchanged.
+
+## Keep every recorded appearance
+
+The [three-appearance example](../examples/graph-export/multi-appearance/README.md) follows an exact OPEN100 item
+through full/core export and statement review. Nodes and edges retain ordered original `provenance` records,
+including duplicate/empty entries and unknown fields. Separate `citations` retain original `source` and `sources`
+fields. These are item-level records; they do not imply that every appearance supports every claim or agrees
+with the others. The primary `source` stays distinct from this list and from claim-specific review/doc sources.
+
+Identity evidence survives even when an item has no attribute claims. Missing locators remain explicit gaps;
+malformed supplied sheets/boxes refuse rather than silently disappear. Source geometry is finite, ordered and
+within the stated 0-1000 scale. Both profiles keep the evidence records and locator geometry. Snapshot access
+returns them without fetching originals; context refresh compares their complete content, including later
+appearances. Statements expose each locator, show supplied crops and mark missing images. A later evidence or
+supplied-original change invalidates its old review binding. None of these checks authenticates a reviewer.
 
 `examples/graph-export/sheet0_graph.json` is the extracted OPEN100 sheet 0, with its line layers (below):
 
@@ -283,6 +298,11 @@ keep the full export as the record. Each kept claim still carries its source; th
 candidate alternatives a reviewer may also need.
 
 ## The format
+
+New exports include `nodes[].source` for item identity. Optional `provenance` and `citations` on nodes/edges
+retain original item evidence independently of attribute count or a claim's later source override. Older graphs
+without these additions remain readable; a consumer must not interpret a primary locator as an exhaustive
+appearance list. `core` removes its declared claims/links, while retaining these item evidence fields.
 
 | Section | Each entry has | Notes |
 |---|---|---|

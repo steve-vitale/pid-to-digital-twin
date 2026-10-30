@@ -1,7 +1,7 @@
 # State of the toolkit
 
 Audit date: 2026-10-30. Original functional baseline: `e8277779f7a30f526740a58af9bdb5088555fa4d`.
-The source-output collision repair below follows that audit; company integrations remain incomplete.
+The evidence-preservation repairs below follow that audit; company integrations remain incomplete.
 
 **This is a collection of working local prototypes and research demonstrations, with a partially connected user
 workflow. It is not a turnkey document-to-digital-twin product or a company context service.** The strongest
@@ -17,17 +17,23 @@ that the same output is available for arbitrary company inputs. Test scripts are
 
 | Finding | Observed behavior | Current boundary and next repair |
 |---|---|---|
-| **The graph loses additional source locators** | `graph_export.source_of` selects the first provenance appearance. Seven items in the full OPEN100 model have multiple appearances; the graph retains their sheet list but loses later appearances' source locators without reporting the loss. | Keep the source model and original records with the graph. Preserve all appearances or explicitly report losses before treating the graph as an evidence archive. |
 | **Vendor report prose overstates what scores establish** | The historical generated report calls review-load counts equivalent work and overlapping run ranges a tie. Neither labor savings nor equivalence follows from those values. | The user guide is corrected. The report generator and historical report still need a separately checked wording repair. Scores and statistical methods have not been changed in this audit. |
 
-These findings remain open. Preserving source locators is higher priority than adding outputs or more corpus
-cases. Sources and evidence must survive a round trip before the package can support continuing ownership.
+The vendor interpretation finding remains open. Correcting that report and validating a bounded investigation
+journey take priority over adding outputs or more corpus cases.
 
 **Repaired source-output collisions:** graph export, impact estimation and CSV-band generation now check all
 their active input paths and every output before creating directories or writing files. Exact/resolved names,
 native case aliases, directory links and existing hardlink identities are checked; aliased sibling outputs also
 refuse. Regression tests verify unchanged source and companion bytes. This is a preflight for stable local files,
 not a concurrent-writer lock or a transactional guarantee for later I/O failures. See [JOURNAL §105](JOURNAL.md#105-refuse-source-output-collisions-before-publication).
+
+**Repaired source-locator loss:** full and core graphs now retain every supplied item appearance, including
+ordered duplicates, empty records and unknown metadata. Claim-specific sources remain separate. Statement
+packets expose the recorded appearances and explicit image gaps; context bindings detect changes to later
+appearances. Refreshed examples retain earlier decisions and require new evidence-bound proposals or exercises.
+The [offline regression packet](../examples/graph-export/multi-appearance/README.md) uses one of seven affected
+OPEN100 items. This preserves supplied evidence; it does not verify that a source supports an engineering claim.
 
 ## What exists, and what remains manual
 
@@ -41,7 +47,7 @@ files, not product readiness, source completeness, usefulness or plant acceptanc
 | [Converted-key DEXPI route](FEATURES.md#dexpi-to-bundle) | Converts the supported adapted DEXPI key/sheet representation. | Bound to that adapter contract; not an arbitrary CAD/XML importer. |
 | [Direct DEXPI XML reader](FEATURES.md#dexpi-xml-to-model) | Reads supported XML and reports omissions and unresolved placement. | Coverage varies by exporter. A parsed model may still be ineligible for downstream questions; C03 demonstrates this boundary. |
 | [Model drawing/export](FEATURES.md#description-to-model) | Generates outputs from authored process-model JSON; detailed P&IDs use an authored layout. | No automatic description interpretation or detailed layout. Drafting style adaptation is separate work. |
-| [Portable graph](FEATURES.md#graph-export) | Exports supported identities, relationships and claims; line-layer tools distinguish selected connection meanings. | One-way conversion and incomplete multi-appearance provenance. No generic inverse into a generator model. |
+| [Portable graph](FEATURES.md#graph-export) | Exports supported identities, relationships, claims and complete supplied item appearances; line-layer tools distinguish selected connection meanings. | One-way conversion. Source correctness still needs review; no generic inverse into a generator model. |
 | [Platform staging](FEATURES.md#platform-exports) | Generates Ignition tags and PI AF staging; offline checks inspect conventions. | Reviewed signal mapping, real import/readback and plant acceptance. PI has never been imported here. The gateway demo builder is TE-specific. |
 | [Loop audit](FEATURES.md#loop-audit) | Compares supplied loop records against supported drawings/models. | Loop truth must be supplied; matching an inventory does not verify wiring, settings or installed safeguards. |
 | [Vendor evaluation](FEATURES.md#vendor-evaluation) | Scores saved drawing answers with planted controls and per-sheet results. | Limited ontology and graph layer; no review-time study. Report interpretation defects are listed above. |
@@ -90,8 +96,8 @@ are external responsibilities by design, not a proposed replacement application 
 
 ## Recommended order of work
 
-1. **Protect evidence.** Preserve multi-appearance provenance; retain the source-output collision regression
-   controls and verify the unchanged baseline.
+1. **Correct report interpretation.** Repair the vendor-report prose without changing scores. Retain the
+   source-preservation and multi-appearance regression controls.
 2. **Finish one bounded investigation journey.** Specify the supported files, human decisions and acceptance
    checks. Measure whether an engineer can complete it and whether the resulting packet helps its recipient.
 3. **Evaluate semantics.** Add independent source/claim keys and useful/unacceptable question rubrics before

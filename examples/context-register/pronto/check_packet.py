@@ -21,7 +21,8 @@ register = json.loads(register_path.read_text(encoding='utf-8'))
 key = json.loads((packet/'source_key.json').read_text(encoding='utf-8'))
 assert (packet/'run/context.md').read_text(encoding='utf-8') == (packet/'expected/context.md').read_text(encoding='utf-8'), 'committed report differs from the README run'
 print('Committed readable report matches the README run')
-assert len(register['decisions']) == 22
+assert len(register['decisions']) == 44
+assert register['decisions'][:22] == json.loads((packet/'history/before-appearances.context.json').read_bytes())['decisions']
 assert len(register['current']) == 21
 assert register['current']['CTX-04@FIC301']['state'] == 'disputed'
 assert all(not d.get('reviewer') and d['plant_truth'] == 'unknown' and d['decision'] == 'proposed'

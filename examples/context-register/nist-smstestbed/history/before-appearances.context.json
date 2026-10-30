@@ -1,0 +1,1519 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "SMS-IDENTITY@mtc_adapter008",
+      "answer_id": "SMS-N01",
+      "claim_key": "machine.identity.at-2016-config",
+      "value": "Hurco04; mtc_adapter008; Hurco; VMX24",
+      "answer": "The 2016 configuration identifies device Hurco04 with UUID mtc_adapter008 and description Hurco VMX 24 #4, manufacturer Hurco, model VMX24. This is the published configuration identity.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "6dfbdeeb6199c91ffc81c82828554441f892eab38d713245eeac562fee2275ea",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-IDENTITY@mtc_adapter008",
+          "question_id": "SMS-IDENTITY",
+          "family": "engineering_context",
+          "question": "Which published machine identity joins the two device configurations?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2016",
+          "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+          "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+          "locator_id": "n01",
+          "locator": "Physical lines 691-692; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description"
+        }
+      },
+      "previous": null,
+      "id": "d-fb69660b14838cd52790ba940262fbdbfdd6c55c73e10d5c356f42b7c3d2890a"
+    },
+    {
+      "question_id": "SMS-IDENTITY@mtc_adapter008",
+      "answer_id": "SMS-N02",
+      "claim_key": "machine.identity.at-later-config",
+      "value": "Hurco04; mtc_adapter008; Hurco; VMX24",
+      "answer": "The later configuration also identifies Hurco04 with UUID mtc_adapter008, manufacturer Hurco and model VMX24. Matching published identities support a document join; they do not prove which configuration was deployed during the archived recording.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "098b45d387724fa6f9f74b5b76112284332f3f7ae550701affd240fc352bc2f3",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-IDENTITY@mtc_adapter008",
+          "question_id": "SMS-IDENTITY",
+          "family": "engineering_context",
+          "question": "Which published machine identity joins the two device configurations?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2017",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+          "locator_id": "n02",
+          "locator": "Physical lines 463-464; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description"
+        }
+      },
+      "previous": null,
+      "id": "d-9d016988eebe25d85d8d7fa13d4a13e0548b42e42ad0289ee5c094bc07c7a2c8"
+    },
+    {
+      "question_id": "SMS-REUSED-ID@mtc_adapter008",
+      "answer_id": "SMS-N03",
+      "claim_key": "Hurco04-path_7.meaning.at-2016-config",
+      "value": "current_tool; TOOL_NUMBER; EVENT",
+      "answer": "In the 2016 document, Hurco04-path_7 is named current_tool and has type TOOL_NUMBER in category EVENT. This meaning is scoped to this configuration revision.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "ba67acfe6dccecf45b86af28001a5779c027565bfec7d050493e558daeaf2464",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-REUSED-ID@mtc_adapter008",
+          "question_id": "SMS-REUSED-ID",
+          "family": "engineering_context",
+          "question": "What does Hurco04-path_7 mean in each configuration revision?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2016",
+          "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+          "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+          "locator_id": "n03",
+          "locator": "Physical line 724; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']"
+        }
+      },
+      "previous": null,
+      "id": "d-5db4e43612ae8b4c2e7a96dec0b6be3fd0453981334881b492d4692f24097648"
+    },
+    {
+      "question_id": "SMS-REUSED-ID@mtc_adapter008",
+      "answer_id": "SMS-N04",
+      "claim_key": "Hurco04-path_7.meaning.at-later-config",
+      "value": "Program_Runtime_Seconds; ACCUMULATED_TIME; SAMPLE; SECOND",
+      "answer": "In the later document, Hurco04-path_7 is named Program_Runtime_Seconds, type ACCUMULATED_TIME, category SAMPLE, unit SECOND. Reusing the ID across revisions does not make tool number and elapsed runtime equivalent signals.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "8763734e9e50de7bc9442ccc3ffcf1317aefb251d8dede62775029b21c68f42b",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-REUSED-ID@mtc_adapter008",
+          "question_id": "SMS-REUSED-ID",
+          "family": "engineering_context",
+          "question": "What does Hurco04-path_7 mean in each configuration revision?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2017",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+          "locator_id": "n04",
+          "locator": "Physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']"
+        }
+      },
+      "previous": null,
+      "id": "d-6a600135caaa7016f814b8065b8311e4578a9a785fdfbb9d51b8ff8bffc26b7f"
+    },
+    {
+      "question_id": "SMS-SPINDLE-DEFINITION@mtc_adapter008",
+      "answer_id": "SMS-N05",
+      "claim_key": "Hurco04-C_1.definition.at-later-config",
+      "value": "Spindle_Speed; ROTARY_VELOCITY; ACTUAL; REVOLUTION/MINUTE",
+      "answer": "The later document names Hurco04-C_1 Spindle_Speed, type ROTARY_VELOCITY, subtype ACTUAL, with units REVOLUTION/MINUTE and Source spindle_speed. This supplies this document revision's measurement definition.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "10e92fde1902d93376cdaef9397ade09d408166e7881ef41c35918f9839cd169",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-SPINDLE-DEFINITION@mtc_adapter008",
+          "question_id": "SMS-SPINDLE-DEFINITION",
+          "family": "engineering_context",
+          "question": "How does the later configuration define the spindle-speed field?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2017",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+          "locator_id": "n05",
+          "locator": "Physical lines 473-475; Device[@id='Hurco04']//DataItem[@id='Hurco04-C_1'] attributes and Source"
+        }
+      },
+      "previous": null,
+      "id": "d-a4cfff49e1886c268a7f80b45ab46a310136898ec515c0a16e06df2e6e81f075"
+    },
+    {
+      "question_id": "SMS-RAW-SPINDLE@mtc_adapter008",
+      "answer_id": "SMS-N06",
+      "claim_key": "raw.Spindle_Speed.at-20170217T092608",
+      "value": "1000.000000",
+      "answer": "The archived Hurco04 file records 2017-02-17T09:26:08.0468750Z | Spindle_Speed | 1000.000000. The raw record supplies no unit or deployed configuration revision; those remain separate source questions.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "a838109ce13258704de5f224e3027edade29d1348005ab197ed720e379103f9d",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-RAW-SPINDLE@mtc_adapter008",
+          "question_id": "SMS-RAW-SPINDLE",
+          "family": "engineering_context",
+          "question": "Which spindle-speed value is actually recorded at the selected timestamp?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-RAW-20170217",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+          "locator_id": "n06",
+          "locator": "Physical line 81; pipe-delimited timestamp, item name and value; source path raw/Hurco04/Hurco04-20170217-20170218.txt"
+        }
+      },
+      "previous": null,
+      "id": "d-df56d1e34fa0779154bf608418ecb03fcb4a79a1447702b83a4c0d667b22a8e5"
+    },
+    {
+      "question_id": "SMS-UNAVAILABLE@mtc_adapter008",
+      "answer_id": "SMS-N07",
+      "claim_key": "raw.Spindle_Speed.unavailable-versus-zero",
+      "value": "UNAVAILABLE at 2017-02-14T16:12:54.968217Z; 0 at 2017-02-17T09:18:51.4531250Z",
+      "answer": "Line 3 records Spindle_Speed as UNAVAILABLE. Line 34 records a numeric 0 at a different timestamp. Preserve both values and their times; the unavailable observation cannot be replaced with zero. The filename date range also does not bound every timestamp in this file.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "e9d41bcd18ff53b7e306bc1b0acba420343b8b94d17f89ed5a5b9e37dfe9f8c5",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-UNAVAILABLE@mtc_adapter008",
+          "question_id": "SMS-UNAVAILABLE",
+          "family": "engineering_context",
+          "question": "How should unavailable and zero observations stay distinct?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-RAW-20170217",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+          "locator_id": "n07",
+          "locator": "Physical lines 3 and 34; Spindle_Speed records at 2017-02-14T16:12:54.968217Z and 2017-02-17T09:18:51.4531250Z"
+        }
+      },
+      "previous": null,
+      "id": "d-0f8c6d0db93223cf7ba0e4bec7198988495088fc0b7e95ac6a6ead9c7a38055a"
+    },
+    {
+      "question_id": "SMS-EXECUTION-GAPS@mtc_adapter008",
+      "answer_id": "SMS-N08",
+      "claim_key": "raw.program-status.recorded-evidence",
+      "value": "blank running name; READY; later UNAVAILABLE",
+      "answer": "At 09:18:51.4531250Z the running-program field is a single blank space and Program_Status is READY. At 09:40:46.755688Z Program_Status is UNAVAILABLE. These sparse records do not establish a named production job or uninterrupted execution-state coverage.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation. Obtain the collection completeness policy and a controlled job/execution record before asserting production status or a named job.",
+      "evidence_fingerprint": "465350d73f26efc95950512f4f0519391ac1f015df803d92e43b31d015bb7798",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-EXECUTION-GAPS@mtc_adapter008",
+          "question_id": "SMS-EXECUTION-GAPS",
+          "family": "engineering_context",
+          "question": "Do these raw records establish a named job and complete execution-state coverage?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "mtc_adapter008",
+              "fields": [
+                "Obtain the collection completeness policy and a controlled job/execution record before asserting production status or a named job."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Applicable configuration, deployment or collection record."
+                }
+              ],
+              "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+            }
+          ],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-RAW-20170217",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+          "locator_id": "n08",
+          "locator": "Physical lines 37, 45 and 359; Program_Name_Running and Program_Status records"
+        }
+      },
+      "previous": null,
+      "id": "d-74d3138f3679625df8c40e04e6b7f21fe4a75c7323b7f40518c16831797847bc"
+    },
+    {
+      "question_id": "SMS-DEPLOYED-REVISION@mtc_adapter008",
+      "answer_id": "SMS-N09",
+      "claim_key": "capture.deployed-configuration-revision",
+      "value": "unknown",
+      "answer": "This raw file contains timestamp, item name and value records. It contains no UUID or deployed configuration revision. Its Hurco04 path and signal names provide a bounded document association, while the configuration active at capture remains unknown.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation. Request the configuration and adapter deployment record applicable to the 2017-02-17 capture; a later Git commit date does not supply a deployment date.",
+      "evidence_fingerprint": "28b5094b51df333dcf2939b3a12f4003fa10273aafa766320cedc33f23f2bd76",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-DEPLOYED-REVISION@mtc_adapter008",
+          "question_id": "SMS-DEPLOYED-REVISION",
+          "family": "engineering_context",
+          "question": "Which configuration revision was deployed during the recorded capture?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "mtc_adapter008",
+              "fields": [
+                "Request the configuration and adapter deployment record applicable to the 2017-02-17 capture; a later Git commit date does not supply a deployment date."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Applicable configuration, deployment or collection record."
+                }
+              ],
+              "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+            }
+          ],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-RAW-20170217",
+          "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+          "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+          "locator_id": "n09",
+          "locator": "Whole 363-line archived raw file; three pipe-delimited fields per line; exact example at physical line 81"
+        }
+      },
+      "previous": null,
+      "id": "d-f0e3f7eec773d345aef428dabf7b0d8fed42517c2b06e01413a43708afd05f33"
+    },
+    {
+      "question_id": "SMS-OLD-FEED-SEMANTICS@mtc_adapter008",
+      "answer_id": "SMS-N10",
+      "claim_key": "Hurco04-path_10.uncertainty.at-2016-config",
+      "value": "source comment Actual?",
+      "answer": "The 2016 feed_rate data item is typed PATH_FEEDRATE with subtype ACTUAL and units MILLIMETER/SECOND, but the same source line retains an Actual? comment. The packet preserves that author uncertainty and does not assign an owner from a comment.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored development proposal; no human owner, assignment, reviewer, approval or plant-truth confirmation. Confirm the actual-versus-commanded measurement semantics from an applicable controlled adapter/configuration record; no person is assigned by this example.",
+      "evidence_fingerprint": "5c8dd29d2733997db69af19363f878ed5875a43b2d9e474d7f9f90f53576e7cf",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "SMS-OLD-FEED-SEMANTICS@mtc_adapter008",
+          "question_id": "SMS-OLD-FEED-SEMANTICS",
+          "family": "engineering_context",
+          "question": "Which feed-rate semantic uncertainty remains in the older configuration?",
+          "about": "Hurco04 (UUID mtc_adapter008)",
+          "assets": [
+            {
+              "id": "mtc_adapter008",
+              "tag": "Hurco04"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "mtc_adapter008",
+              "fields": [
+                "Confirm the actual-versus-commanded measurement semantics from an applicable controlled adapter/configuration record; no person is assigned by this example."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Applicable configuration, deployment or collection record."
+                }
+              ],
+              "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+            }
+          ],
+          "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+          "typical_benefit": null,
+          "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+        },
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "content": {
+              "id": "mtc_adapter008",
+              "kind": "equipment",
+              "tag": "Hurco04",
+              "name": "Hurco VMX 24 #4",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "manufacturer",
+                  "value": "Hurco",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "model",
+                  "value": "VMX24",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Hurco VMX 24 #4",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "machine_tool",
+                  "source": {
+                    "kind": "document",
+                    "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "mtc_adapter008",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "SMS-DEV-2016 lines 691-692 and SMS-DEV-2017 lines 463-464; UUID mtc_adapter008"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SMS-DEV-2016",
+          "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+          "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+          "locator_id": "n10",
+          "locator": "Physical line 727; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_10'] and its trailing Actual? XML comment"
+        }
+      },
+      "previous": null,
+      "id": "d-fb7ed7510b28b93959fd263290c8afeda3ea60c893fe6f376b7bee34225638fb"
+    }
+  ],
+  "ownership_history": [],
+  "current": {
+    "SMS-DEPLOYED-REVISION@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-DEPLOYED-REVISION@mtc_adapter008",
+        "question_id": "SMS-DEPLOYED-REVISION",
+        "family": "engineering_context",
+        "question": "Which configuration revision was deployed during the recorded capture?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "mtc_adapter008",
+            "fields": [
+              "Request the configuration and adapter deployment record applicable to the 2017-02-17 capture; a later Git commit date does not supply a deployment date."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Applicable configuration, deployment or collection record."
+              }
+            ],
+            "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+          }
+        ],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-f0e3f7eec773d345aef428dabf7b0d8fed42517c2b06e01413a43708afd05f33",
+          "answer_id": "SMS-N09",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-EXECUTION-GAPS@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-EXECUTION-GAPS@mtc_adapter008",
+        "question_id": "SMS-EXECUTION-GAPS",
+        "family": "engineering_context",
+        "question": "Do these raw records establish a named job and complete execution-state coverage?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "mtc_adapter008",
+            "fields": [
+              "Obtain the collection completeness policy and a controlled job/execution record before asserting production status or a named job."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Applicable configuration, deployment or collection record."
+              }
+            ],
+            "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+          }
+        ],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-74d3138f3679625df8c40e04e6b7f21fe4a75c7323b7f40518c16831797847bc",
+          "answer_id": "SMS-N08",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-IDENTITY@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-IDENTITY@mtc_adapter008",
+        "question_id": "SMS-IDENTITY",
+        "family": "engineering_context",
+        "question": "Which published machine identity joins the two device configurations?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-fb69660b14838cd52790ba940262fbdbfdd6c55c73e10d5c356f42b7c3d2890a",
+          "answer_id": "SMS-N01",
+          "freshness": "current",
+          "changed": []
+        },
+        {
+          "decision_id": "d-9d016988eebe25d85d8d7fa13d4a13e0548b42e42ad0289ee5c094bc07c7a2c8",
+          "answer_id": "SMS-N02",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-OLD-FEED-SEMANTICS@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-OLD-FEED-SEMANTICS@mtc_adapter008",
+        "question_id": "SMS-OLD-FEED-SEMANTICS",
+        "family": "engineering_context",
+        "question": "Which feed-rate semantic uncertainty remains in the older configuration?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "mtc_adapter008",
+            "fields": [
+              "Confirm the actual-versus-commanded measurement semantics from an applicable controlled adapter/configuration record; no person is assigned by this example."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Applicable configuration, deployment or collection record."
+              }
+            ],
+            "how": "Resolve the specific unknown before using this historical draft as operating knowledge."
+          }
+        ],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-fb7ed7510b28b93959fd263290c8afeda3ea60c893fe6f376b7bee34225638fb",
+          "answer_id": "SMS-N10",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-RAW-SPINDLE@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-RAW-SPINDLE@mtc_adapter008",
+        "question_id": "SMS-RAW-SPINDLE",
+        "family": "engineering_context",
+        "question": "Which spindle-speed value is actually recorded at the selected timestamp?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-df56d1e34fa0779154bf608418ecb03fcb4a79a1447702b83a4c0d667b22a8e5",
+          "answer_id": "SMS-N06",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-REUSED-ID@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-REUSED-ID@mtc_adapter008",
+        "question_id": "SMS-REUSED-ID",
+        "family": "engineering_context",
+        "question": "What does Hurco04-path_7 mean in each configuration revision?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-5db4e43612ae8b4c2e7a96dec0b6be3fd0453981334881b492d4692f24097648",
+          "answer_id": "SMS-N03",
+          "freshness": "current",
+          "changed": []
+        },
+        {
+          "decision_id": "d-6a600135caaa7016f814b8065b8311e4578a9a785fdfbb9d51b8ff8bffc26b7f",
+          "answer_id": "SMS-N04",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-SPINDLE-DEFINITION@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-SPINDLE-DEFINITION@mtc_adapter008",
+        "question_id": "SMS-SPINDLE-DEFINITION",
+        "family": "engineering_context",
+        "question": "How does the later configuration define the spindle-speed field?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-a4cfff49e1886c268a7f80b45ab46a310136898ec515c0a16e06df2e6e81f075",
+          "answer_id": "SMS-N05",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "SMS-UNAVAILABLE@mtc_adapter008": {
+      "present": true,
+      "question": {
+        "id": "SMS-UNAVAILABLE@mtc_adapter008",
+        "question_id": "SMS-UNAVAILABLE",
+        "family": "engineering_context",
+        "question": "How should unavailable and zero observations stay distinct?",
+        "about": "Hurco04 (UUID mtc_adapter008)",
+        "assets": [
+          {
+            "id": "mtc_adapter008",
+            "tag": "Hurco04"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain version-scoped source observations and explicit unknowns. An engineer must supply applicable controlled evidence and review.",
+        "typical_benefit": null,
+        "limits": "AI-authored illustrative question; no assigned human owner, reviewer or approval."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-0f8c6d0db93223cf7ba0e4bec7198988495088fc0b7e95ac6a6ead9c7a38055a",
+          "answer_id": "SMS-N07",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "SMS-DEV-2016",
+      "revision": "git-1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "locators": [
+        {
+          "id": "n01",
+          "locator": "Physical lines 691-692; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n03",
+          "locator": "Physical line 724; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n10",
+          "locator": "Physical line 727; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_10'] and its trailing Actual? XML comment",
+          "questions": [
+            "SMS-OLD-FEED-SEMANTICS@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SMS-DEV-2017",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "locators": [
+        {
+          "id": "n02",
+          "locator": "Physical lines 463-464; MTConnectDevices/Devices/Device[@id='Hurco04'] attributes and Description",
+          "questions": [
+            "SMS-IDENTITY@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n04",
+          "locator": "Physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7']",
+          "questions": [
+            "SMS-REUSED-ID@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n05",
+          "locator": "Physical lines 473-475; Device[@id='Hurco04']//DataItem[@id='Hurco04-C_1'] attributes and Source",
+          "questions": [
+            "SMS-SPINDLE-DEFINITION@mtc_adapter008"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SMS-NOTICE",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+      "locators": [
+        {
+          "id": "reuse-notice",
+          "locator": "README physical lines 28-46, Use of NIST Information and Software Disclaimer",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "id": "SMS-RAW-20170217",
+      "revision": "git-968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "locators": [
+        {
+          "id": "n06",
+          "locator": "Physical line 81; pipe-delimited timestamp, item name and value; source path raw/Hurco04/Hurco04-20170217-20170218.txt",
+          "questions": [
+            "SMS-RAW-SPINDLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n07",
+          "locator": "Physical lines 3 and 34; Spindle_Speed records at 2017-02-14T16:12:54.968217Z and 2017-02-17T09:18:51.4531250Z",
+          "questions": [
+            "SMS-UNAVAILABLE@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n08",
+          "locator": "Physical lines 37, 45 and 359; Program_Name_Running and Program_Status records",
+          "questions": [
+            "SMS-EXECUTION-GAPS@mtc_adapter008"
+          ]
+        },
+        {
+          "id": "n09",
+          "locator": "Whole 363-line archived raw file; three pipe-delimited fields per line; exact example at physical line 81",
+          "questions": [
+            "SMS-DEPLOYED-REVISION@mtc_adapter008"
+          ]
+        }
+      ]
+    }
+  ]
+}

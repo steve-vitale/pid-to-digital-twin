@@ -1,0 +1,485 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "pressure@P-101",
+      "answer_id": "basis-pressure",
+      "claim_key": "upper-operating-pressure",
+      "value": "50 kPa",
+      "answer": "Illustrative basis says 50 kPa; the conflicting note needs reconciliation.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review.",
+      "evidence_fingerprint": "28cf36e20b1563626e8118b499370cff5746e081e98292f1569a1be528c3c780",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "pressure@P-101",
+          "question": "What upper operating pressure do these documents specify?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "BASIS",
+          "revision": "A",
+          "sha256": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+          "locator_id": "pressure",
+          "locator": "line 2"
+        }
+      },
+      "previous": null,
+      "id": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f"
+    },
+    {
+      "question_id": "pressure@P-101",
+      "answer_id": "later-pressure",
+      "claim_key": "upper-operating-pressure",
+      "value": "60 kPa",
+      "answer": "Illustrative note says 60 kPa. No governing document has been selected.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review.",
+      "evidence_fingerprint": "9be07751b5d5bd85c48d1fccd28e843c42fdb399150e18d3a39b3a084621004b",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "pressure@P-101",
+          "question": "What upper operating pressure do these documents specify?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "LATER-NOTE",
+          "revision": "B",
+          "sha256": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+          "locator_id": "pressure",
+          "locator": "line 2"
+        }
+      },
+      "previous": null,
+      "id": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa"
+    },
+    {
+      "question_id": "service@P-102",
+      "answer_id": "service",
+      "claim_key": "service",
+      "value": "water",
+      "answer": "The illustrative sheet names water service. This is only a source interpretation.",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "reviewer": "Fictional training reviewer",
+      "reviewed_on": "2026-10-29",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review.",
+      "evidence_fingerprint": "756d7971c73095c730ee0bfae294275c12456ebdd2e86a69b05492112c41f4fa",
+      "owner": "Fictional training maintainer",
+      "evidence": {
+        "question": {
+          "id": "service@P-102",
+          "question": "What service is named in the training sheet?",
+          "assets": [
+            {
+              "id": "P-102"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-102",
+            "content": {
+              "id": "P-102",
+              "kind": "equipment",
+              "tag": "P-102",
+              "name": "Illustrative pump two",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump two",
+                  "source": {
+                    "kind": "document",
+                    "document": "service-sheet.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "service-sheet.txt"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-102",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "service-sheet.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SERVICE",
+          "revision": "A",
+          "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+          "locator_id": "service",
+          "locator": "line 2"
+        }
+      },
+      "previous": null,
+      "id": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934"
+    },
+    {
+      "question_id": "range@P-101",
+      "answer_id": "range-request",
+      "claim_key": "range-check",
+      "value": "not checked",
+      "answer": "Collect a representative trend and have an engineer check the range.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review.",
+      "evidence_fingerprint": "db34f0a08cf1227dec43870c1eefc7af5e3dc371f5dc5f2b90a569f39a4784e8",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "range@P-101",
+          "question": "Has the normal operating range been checked against a trend?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SERVICE",
+          "revision": "A",
+          "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+          "locator_id": "range",
+          "locator": "line 3"
+        }
+      },
+      "previous": null,
+      "id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "service@P-102",
+      "owner": "Fictional training maintainer",
+      "by": "Fictional training coordinator",
+      "on": "2026-10-29",
+      "previous": null,
+      "id": "o-b82b01727a78895f75387f6de3601fbf867de97c4451c28430f893de756580a3"
+    }
+  ],
+  "current": {
+    "pressure@P-101": {
+      "present": true,
+      "question": {
+        "id": "pressure@P-101",
+        "question": "What upper operating pressure do these documents specify?",
+        "assets": [
+          {
+            "id": "P-101"
+          }
+        ]
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "disputed",
+      "disputed_claims": [
+        "upper-operating-pressure"
+      ],
+      "answers": [
+        {
+          "decision_id": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f",
+          "answer_id": "basis-pressure",
+          "freshness": "current",
+          "changed": []
+        },
+        {
+          "decision_id": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa",
+          "answer_id": "later-pressure",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "range@P-101": {
+      "present": true,
+      "question": {
+        "id": "range@P-101",
+        "question": "Has the normal operating range been checked against a trend?",
+        "assets": [
+          {
+            "id": "P-101"
+          }
+        ]
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de",
+          "answer_id": "range-request",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "service@P-102": {
+      "present": true,
+      "question": {
+        "id": "service@P-102",
+        "question": "What service is named in the training sheet?",
+        "assets": [
+          {
+            "id": "P-102"
+          }
+        ]
+      },
+      "owner": "Fictional training maintainer",
+      "ownership": "assigned",
+      "assigned_by": "Fictional training coordinator",
+      "assigned_on": "2026-10-29",
+      "state": "answered",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934",
+          "answer_id": "service",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "walkdown@P-101": {
+      "present": true,
+      "question": {
+        "id": "walkdown@P-101",
+        "question": "Has the equipment identity been checked in the plant?",
+        "assets": [
+          {
+            "id": "P-101"
+          }
+        ]
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "unanswered",
+      "disputed_claims": [],
+      "answers": []
+    }
+  },
+  "sources": [
+    {
+      "id": "BASIS",
+      "revision": "A",
+      "sha256": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+      "locators": [
+        {
+          "id": "pressure",
+          "locator": "line 2",
+          "questions": [
+            "pressure@P-101"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LATER-NOTE",
+      "revision": "B",
+      "sha256": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+      "locators": [
+        {
+          "id": "pressure",
+          "locator": "line 2",
+          "questions": [
+            "pressure@P-101"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SERVICE",
+      "revision": "A",
+      "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+      "locators": [
+        {
+          "id": "service",
+          "locator": "line 2",
+          "questions": [
+            "service@P-102"
+          ]
+        },
+        {
+          "id": "range",
+          "locator": "line 3",
+          "questions": [
+            "range@P-101"
+          ]
+        }
+      ]
+    }
+  ]
+}

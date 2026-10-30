@@ -19,6 +19,12 @@ blank sheet is the starting point for a person's review; the browser download re
 and an explanatory note. Plant truth stays blank. `apply_summary.json` records that single software application
 and its input/output bindings. The result does not certify that the sampled statements match the drawing.
 
+The `*-before-appearances.*` files retain the previous packet, worksheet and receipt byte-for-byte. Their graph
+revision is [74f2a11](https://github.com/steve-vitale/pid-to-digital-twin/tree/74f2a11376b84f01669843681b576497ff1257c1/examples/graph-export).
+The old worksheet correctly refuses against the expanded evidence. The current worksheet is a **new fictional
+software exercise**, dated 2026-10-30; no real verdict was transferred to a new fingerprint. Historical measured
+reviews and scores in the parent example remain unchanged.
+
 ## Reproduce in a new working folder
 
 From the repository root, with Pillow installed for drawing crops:
@@ -26,7 +32,7 @@ From the repository root, with Pillow installed for drawing crops:
 ```sh
 python scripts/statements.py render examples/graph-export/sheet0_graph.json --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --out examples/statement-review/bound-sheet0/run/full
 python scripts/statements.py sample examples/statement-review/bound-sheet0/run/full/statements.json --n 12 --seed 1032 --strata layer --floor 2 --out examples/statement-review/bound-sheet0/run/sample.json
-python scripts/statements.py apply examples/graph-export/sheet0_graph.json examples/statement-review/bound-sheet0/illustrative_review.csv --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --date 2026-10-29 --out examples/statement-review/bound-sheet0/run/reviewed_graph.json
+python scripts/statements.py apply examples/graph-export/sheet0_graph.json examples/statement-review/bound-sheet0/illustrative_review.csv --image "0=data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png" --date 2026-10-30 --out examples/statement-review/bound-sheet0/run/reviewed_graph.json
 python scripts/graph_export.py --check examples/statement-review/bound-sheet0/run/reviewed_graph.json
 python -S scripts/test_bound_statement_example.py
 ```

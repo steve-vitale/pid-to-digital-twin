@@ -4948,3 +4948,55 @@ This is a preflight on stable local paths, not a concurrent-writer lock or a mul
 I/O failure can still leave a partial report pair. The separate graph loss of additional provenance appearances
 (N067) and vendor-report interpretation defects (N068) remain open. Source preservation takes priority over
 adding more corpus cases, outputs or integration claims.
+
+## 106. Preserve item appearances through graph and context handoff
+
+The state audit found seven actual OPEN100 items whose later drawing appearances vanished in graph export.
+Independent baseline probes also showed that changing a later locator left the exported graph and downstream
+context binding unchanged. A zero-attribute item could lose even its primary source. These were evidence losses,
+not extraction-accuracy findings.
+
+Full and core exports now keep a separate identity source, the complete ordered item provenance list and the
+original source/sources citation fields. Empty records, duplicates and unknown JSON metadata survive unchanged;
+malformed later records or invalid supplied geometry refuse before publication. Claim-specific document and
+review sources retain their original precedence. Removing only the added evidence fields reproduces the old
+example graphs exactly: no engineering values, node/edge identities, claims or review states were corrected.
+
+Statement packets expose every recorded appearance, available crops and explicit missing-image/locator notes.
+Complete records remain bound in JSON; the CSV pointer is a readable locator summary. Item appearances do not
+establish support for every claim, and one statement still receives one verdict. An independent adversarial
+probe found that a missing sheet could select an unrelated image literally keyed None; the crop path now
+requires a usable sheet locator. Changes to later appearances invalidate statement and context bindings.
+Context preserves evidence metadata opaquely, including nested keys that resemble bookkeeping names.
+
+A second independent CLI probe found that two relations with equal endpoints could share one statement while
+only the first edge's evidence was displayed. Relations with different sources or item evidence now receive
+separate statement identities and verdict targets; identical evidence can still coalesce. The same guard also
+preserves distinct document/review sources when equal attribute wording would otherwise merge their targets.
+Regressions check both cases. This does not change the graph's relationships or claim values.
+Review also caught a corrected value combined with a separately sourced unit: the sentence showed only the
+value's source. Setpoints and limits now combine only equal-source constituents; otherwise each description,
+value and unit keeps its own visible source and verdict target.
+
+The offline regression packet selects one existing OPEN100 item with three appearances across sheets 2–4.
+It needs no original images or new model calls. All seven affected items were checked separately. The current
+snapshot result retains additive evidence without changing its startup-only, read-only contract. Direct XML,
+review/mapping and description examples were regenerated through actual CLIs; unrelated outputs remain intact.
+
+Refreshing bindings does not refresh a person's decision. Five context families retain their old registers and
+answer sheets, then add explicitly labelled proposals or fictional exercises against current evidence. The old
+decision prefixes remain unchanged, and old sheets refuse before writing outputs. The bound statement exercise
+likewise retains its complete earlier packet and uses a newly labelled fictional verdict. Historical measured
+samples, scores, predictions, benchmark recipes and source/key records remain unchanged.
+
+A fresh reader review caught extraction-priority scores presented as plant-risk statements. The review view
+now skips and counts only risk.risk_score, risk.tier, risk.why and risk.tier_before_floor on extracted twins;
+the raw graph retains them. The last field records the extraction safety floor, not a plant operating condition.
+Authored process-model risk and unknown risk fields remain visible. On the full OPEN100 view this removes exactly
+3,037 bookkeeping statements (10,663 → 7,626). All remaining statement identities, wording, ranks and ordering
+are unchanged. This is a presentation correction, not an accuracy improvement. Summary image-availability counts
+now distinguish drawing references from supplied images and count statement evidence entries, not unique photos.
+
+The repair does not evaluate source agreement, interpretation quality, human review time, company adoption or
+plant truth. Vendor-report interpretation (N068), semantic question evaluation and the bounded engineer journey
+remain next work. No company system, live process connection or public-post publication is involved.

@@ -9,7 +9,7 @@ From the repository root:
 
 ```sh
 python -S scripts/context_register.py prepare --model examples/context-register/illustrative/model.json --questions examples/context-register/illustrative/questions.json --sources examples/context-register/illustrative/sources.json --out my-context/prepared
-python -S scripts/context_register.py apply --model examples/context-register/illustrative/model.json --questions examples/context-register/illustrative/questions.json --sources examples/context-register/illustrative/sources.json --answers examples/context-register/illustrative/filled_answers.csv --out my-context/current
+python -S scripts/context_register.py apply --model examples/context-register/illustrative/model.json --questions examples/context-register/illustrative/questions.json --sources examples/context-register/illustrative/sources.json --register examples/context-register/illustrative/history/before-appearances.context.json --answers examples/context-register/illustrative/filled_answers.csv --out my-context/current
 ```
 
 `my-context/prepared/answers.csv` is the blank sheet you would fill. `evidence_choices.csv` gives the source,
@@ -25,7 +25,10 @@ The result keeps all four questions visible:
 | P-101 normal range | Needs data | Collect and review a trend |
 | P-101 identity walkdown | Unanswered | A person must check the equipment |
 
-Four historical decision snapshots and one fictional ownership assignment are retained. Three questions still
+Eight decision snapshots and one fictional ownership assignment are retained. The first four snapshots remain
+unchanged in [the prior register](history/before-appearances.context.json). The four new fictional exercise
+records bind the expanded item evidence; the [old sheet](history/before-appearances.answers.csv) correctly
+refuses against that evidence. No real review was transferred to a new fingerprint. Three questions still
 need an owner. The [expected files](expected/context.md) are committed and reproduced by the example test.
 
 To retain decisions when you rerun, pass the current register explicitly:

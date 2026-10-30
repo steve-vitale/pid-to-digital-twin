@@ -312,6 +312,358 @@
       },
       "previous": null,
       "id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de"
+    },
+    {
+      "question_id": "pressure@P-101",
+      "answer_id": "basis-pressure",
+      "claim_key": "upper-operating-pressure",
+      "value": "50 kPa",
+      "answer": "Illustrative basis says 50 kPa; the conflicting note needs reconciliation.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review. New fictional software exercise against expanded item evidence; prior record retained.",
+      "evidence_fingerprint": "868a6f4fc2fe9b1d292f9fb7d7be61457f0d6ba53df7c54267134b163ee37298",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "pressure@P-101",
+          "question": "What upper operating pressure do these documents specify?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "basis.txt"
+              },
+              "citations": {
+                "source": "basis.txt"
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                },
+                "citations": {
+                  "source": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "BASIS",
+          "revision": "A",
+          "sha256": "e20e0c89e1f4147841f1f2d6144ff4e5aa119bf9c7eb81d13168271b0958c7ac",
+          "locator_id": "pressure",
+          "locator": "line 2"
+        }
+      },
+      "previous": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f",
+      "id": "d-3dc1d0b0e1c248e4125ce2be08ea3d9b32187a23def071a7fc688aa1db260a73"
+    },
+    {
+      "question_id": "pressure@P-101",
+      "answer_id": "later-pressure",
+      "claim_key": "upper-operating-pressure",
+      "value": "60 kPa",
+      "answer": "Illustrative note says 60 kPa. No governing document has been selected.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review. New fictional software exercise against expanded item evidence; prior record retained.",
+      "evidence_fingerprint": "08d9e300331b7b44e23c55c10a53d8be857a5e090a3486d447b602d4928d2923",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "pressure@P-101",
+          "question": "What upper operating pressure do these documents specify?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "basis.txt"
+              },
+              "citations": {
+                "source": "basis.txt"
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                },
+                "citations": {
+                  "source": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "LATER-NOTE",
+          "revision": "B",
+          "sha256": "b0413ec04581fda66cb1184cdc6f22026d77c235c54bb2d39b5366dcb71652a3",
+          "locator_id": "pressure",
+          "locator": "line 2"
+        }
+      },
+      "previous": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa",
+      "id": "d-4efd4e4020cce7484f7d2fa4fe4e68d77c8aa0f5b0927821493bf195fd15b26e"
+    },
+    {
+      "question_id": "service@P-102",
+      "answer_id": "service",
+      "claim_key": "service",
+      "value": "water",
+      "answer": "The illustrative sheet names water service. This is only a source interpretation.",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "reviewer": "Fictional training reviewer",
+      "reviewed_on": "2026-10-30",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review. New fictional software exercise against expanded item evidence; prior record retained.",
+      "evidence_fingerprint": "53fc6d3a5790e32704602a3f9a2fd87db9f979c0a00b08e9cfd072881c068db0",
+      "owner": "Fictional training maintainer",
+      "evidence": {
+        "question": {
+          "id": "service@P-102",
+          "question": "What service is named in the training sheet?",
+          "assets": [
+            {
+              "id": "P-102"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-102",
+            "content": {
+              "id": "P-102",
+              "kind": "equipment",
+              "tag": "P-102",
+              "name": "Illustrative pump two",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump two",
+                  "source": {
+                    "kind": "document",
+                    "document": "service-sheet.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "service-sheet.txt"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "service-sheet.txt"
+              },
+              "citations": {
+                "source": "service-sheet.txt"
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-102",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "service-sheet.txt"
+                },
+                "citations": {
+                  "source": "service-sheet.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SERVICE",
+          "revision": "A",
+          "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+          "locator_id": "service",
+          "locator": "line 2"
+        }
+      },
+      "previous": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934",
+      "id": "d-7417447c1fc4e668dd05c0f5e8535ba4aeaa9b478d2b04ab9484e6e9b6581c3a"
+    },
+    {
+      "question_id": "range@P-101",
+      "answer_id": "range-request",
+      "claim_key": "range-check",
+      "value": "not checked",
+      "answer": "Collect a representative trend and have an engineer check the range.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "ILLUSTRATIVE training record; no real person or plant review. New fictional software exercise against expanded item evidence; prior record retained.",
+      "evidence_fingerprint": "d7ee07e2f50c4f362b0265793cbcd7f9f16e4e5d7ed50b432b6b3b48e63345b9",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "range@P-101",
+          "question": "Has the normal operating range been checked against a trend?",
+          "assets": [
+            {
+              "id": "P-101"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-101",
+            "content": {
+              "id": "P-101",
+              "kind": "equipment",
+              "tag": "P-101",
+              "name": "Illustrative pump one",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Illustrative pump one",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "basis.txt"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "basis.txt"
+              },
+              "citations": {
+                "source": "basis.txt"
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-101",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "basis.txt"
+                },
+                "citations": {
+                  "source": "basis.txt"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SERVICE",
+          "revision": "A",
+          "sha256": "b489ff65912ee117f69a0cca70fb3bb02c83d0d40f36e069a05ff22c5be61c20",
+          "locator_id": "range",
+          "locator": "line 3"
+        }
+      },
+      "previous": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de",
+      "id": "d-83420f005a3b0a2e73529dca0099aa5fe1589f55df8c53190425ac7a78b09c32"
     }
   ],
   "ownership_history": [
@@ -346,13 +698,13 @@
       ],
       "answers": [
         {
-          "decision_id": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f",
+          "decision_id": "d-3dc1d0b0e1c248e4125ce2be08ea3d9b32187a23def071a7fc688aa1db260a73",
           "answer_id": "basis-pressure",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa",
+          "decision_id": "d-4efd4e4020cce7484f7d2fa4fe4e68d77c8aa0f5b0927821493bf195fd15b26e",
           "answer_id": "later-pressure",
           "freshness": "current",
           "changed": []
@@ -378,7 +730,7 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de",
+          "decision_id": "d-83420f005a3b0a2e73529dca0099aa5fe1589f55df8c53190425ac7a78b09c32",
           "answer_id": "range-request",
           "freshness": "current",
           "changed": []
@@ -404,7 +756,7 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934",
+          "decision_id": "d-7417447c1fc4e668dd05c0f5e8535ba4aeaa9b478d2b04ab9484e6e9b6581c3a",
           "answer_id": "service",
           "freshness": "current",
           "changed": []

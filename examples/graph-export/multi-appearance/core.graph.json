@@ -1,0 +1,302 @@
+{
+ "schema": "twin-graph-1",
+ "source_model": "examples/graph-export/multi-appearance/model.json",
+ "model_kind": "extracted_twin",
+ "title": "OPEN100 multi-appearance evidence regression",
+ "nodes": [
+  {
+   "id": "PLANT",
+   "kind": "plant",
+   "tag": null,
+   "name": "OPEN100 multi-appearance evidence regression",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "Extraction run r2-tiles-trace/codex, sheets 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11",
+    "note": "the item cites no source of its own"
+   }
+  },
+  {
+   "id": "S2-TK002",
+   "kind": "equipment",
+   "tag": "CND-TK-165",
+   "name": "CND-TK-165",
+   "aliases": [],
+   "status": "unverified",
+   "attributes": [
+    {
+     "name": "class",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "name",
+     "value": "CND-TK-165",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "risk.risk_score",
+     "value": 0.0395,
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "risk.tier",
+     "value": "green",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "risk.why",
+     "value": "no strong warning signs",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "role_reason",
+     "value": "class tank",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "sheets",
+     "value": [
+      "2",
+      "3",
+      "4"
+     ],
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "system",
+     "value": "SYS-2",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "tag_status",
+     "value": "as_extracted",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    },
+    {
+     "name": "type",
+     "value": "tank",
+     "status": "unverified",
+     "source": {
+      "kind": "drawing",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "read_as": "CND-TK-165",
+      "run": "runs/r2-tiles-trace/codex/2.json",
+      "model": "gpt-6.1-sol"
+     }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "2",
+    "box_0_1000": [
+     536.7,
+     228.6,
+     782.7,
+     334.5
+    ],
+    "read_as": "CND-TK-165",
+    "run": "runs/r2-tiles-trace/codex/2.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "2",
+     "symbol": "s24",
+     "class": "tank",
+     "box_0_1000": [
+      536.7,
+      228.6,
+      782.7,
+      334.5
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 0.99,
+     "source_run": "runs/r2-tiles-trace/codex/2.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    },
+    {
+     "sheet": "3",
+     "symbol": "s2",
+     "class": "tank",
+     "box_0_1000": [
+      146.0,
+      324.2,
+      321.7,
+      429.0
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 0.99,
+     "source_run": "runs/r2-tiles-trace/codex/3.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    },
+    {
+     "sheet": "4",
+     "symbol": "s11",
+     "class": "tank",
+     "box_0_1000": [
+      204.9,
+      440.0,
+      380.6,
+      546.4
+     ],
+     "tag_as_extracted": "CND-TK-165",
+     "confidence": 1.0,
+     "source_run": "runs/r2-tiles-trace/codex/4.json",
+     "tool": "codex",
+     "model": "gpt-6.1-sol"
+    }
+   ],
+   "citations": {
+    "source": "codex extraction, sheet 2 symbol s24"
+   }
+  }
+ ],
+ "edges": [],
+ "questions": [],
+ "events": [],
+ "not_exported": [],
+ "counts": {
+  "nodes": 2,
+  "edges": 0,
+  "claims": 10,
+  "questions": 0,
+  "events": 0
+ },
+ "profile": {
+  "name": "core",
+  "rule": "identity, configuration, impact relations and sources kept; extraction internals and all-pairs network links dropped (rebuildable from on_network). The full export is the record.",
+  "dropped_claims": {
+   "extraction_confidence": 1
+  },
+  "dropped_edges": {},
+  "claims_on_dropped_edges": 0
+ }
+}

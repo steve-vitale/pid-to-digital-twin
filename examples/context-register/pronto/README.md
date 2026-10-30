@@ -7,6 +7,11 @@ The packet, questions and decisions are illustrative AI-authored drafts. No engi
 Read the [committed context report](expected/context.md) before downloading anything. It is the proposed packet's
 readable result, with every answer's source revision, exact locator and remaining uncertainty.
 
+The [prior register](history/before-appearances.context.json) retains the original 22 proposal snapshots unchanged.
+The current 22 AI re-proposals bind expanded item evidence; 44 snapshots remain in history with the same active
+answers and unresolved questions. The [old answer sheet](history/before-appearances.answers.csv) refuses against
+the revised evidence. No human review or plant-truth verdict was carried onto a new fingerprint.
+
 From the repository root, fetch the pinned originals if they are not cached:
 
 ```sh
@@ -20,7 +25,7 @@ Run the register offline:
 
 ```sh
 python -S scripts/context_register.py prepare --model examples/context-register/pronto/model.json --questions examples/context-register/pronto/questions.json --sources examples/context-register/pronto/sources.json --source-root data/external --out examples/context-register/pronto/run
-python -S scripts/context_register.py apply --model examples/context-register/pronto/model.json --questions examples/context-register/pronto/questions.json --sources examples/context-register/pronto/sources.json --source-root data/external --answers examples/context-register/pronto/proposed_answers.csv --out examples/context-register/pronto/run
+python -S scripts/context_register.py apply --model examples/context-register/pronto/model.json --questions examples/context-register/pronto/questions.json --sources examples/context-register/pronto/sources.json --source-root data/external --register examples/context-register/pronto/history/before-appearances.context.json --answers examples/context-register/pronto/proposed_answers.csv --out examples/context-register/pronto/run
 python -S examples/context-register/pronto/check_packet.py
 ```
 

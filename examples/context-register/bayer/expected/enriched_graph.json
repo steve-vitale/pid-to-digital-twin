@@ -82,7 +82,12 @@
             "note": "the item cites no source of its own"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "model",
+        "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+        "note": "the item cites no source of its own"
+      }
     },
     {
       "id": "BL",
@@ -91,7 +96,12 @@
       "name": "battery limit",
       "aliases": [],
       "status": "confirmed",
-      "attributes": []
+      "attributes": [],
+      "source": {
+        "kind": "model",
+        "document": "U.S. Chemical Safety Board, Investigation Report No. 2008-08-I-WV (January 2011): Pesticide Chemical Runaway Reaction Pressure Vessel Explosion, Bayer CropScience, LP, Institute, West Virginia, August 28, 2008. https://www.csb.gov/assets/1/20/Bayer_Report_Final.pdf",
+        "note": "the item cites no source of its own"
+      }
     },
     {
       "id": "RT-1",
@@ -164,7 +174,14 @@
             "document": "p. 28 (§1.7.3); Fig 10"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28 (§1.7.3); Fig 10"
+      },
+      "citations": {
+        "source": "p. 28 (§1.7.3); Fig 10"
+      }
     },
     {
       "id": "E-1",
@@ -201,7 +218,14 @@
             "document": "Fig 10; p. 28 (vent piping prone to blockages)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28 (vent piping prone to blockages)"
+      }
     },
     {
       "id": "P-1",
@@ -238,7 +262,14 @@
             "document": "Fig 10; p. 31, p. 38"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 31, p. 38"
+      },
+      "citations": {
+        "source": "Fig 10; p. 31, p. 38"
+      }
     },
     {
       "id": "E-2",
@@ -275,7 +306,14 @@
             "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+      }
     },
     {
       "id": "E-3",
@@ -321,7 +359,14 @@
             "document": "Fig 10; p. 29"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
+      }
     },
     {
       "id": "PT-101",
@@ -387,7 +432,14 @@
             "document": "Fig 10 (Pressure Transmitter); Fig 11"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Pressure Transmitter); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Pressure Transmitter); Fig 11"
+      }
     },
     {
       "id": "LT-102",
@@ -453,7 +505,14 @@
             "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+      },
+      "citations": {
+        "source": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+      }
     },
     {
       "id": "FT-103",
@@ -528,7 +587,14 @@
             "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      }
     },
     {
       "id": "TT-104",
@@ -603,7 +669,14 @@
             "document": "Fig 10 (Temperature Transmitter); Fig 11"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (Temperature Transmitter); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Temperature Transmitter); Fig 11"
+      }
     },
     {
       "id": "TT-105",
@@ -669,7 +742,14 @@
             "document": "p. 28 (text only; not drawn in Fig 10)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28 (text only; not drawn in Fig 10)"
+      },
+      "citations": {
+        "source": "p. 28 (text only; not drawn in Fig 10)"
+      }
     },
     {
       "id": "FT-106",
@@ -744,7 +824,14 @@
             "document": "Fig 19 (p. 72)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 19 (p. 72)"
+      },
+      "citations": {
+        "source": "Fig 19 (p. 72)"
+      }
     },
     {
       "id": "FV-107",
@@ -790,7 +877,14 @@
             "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      },
+      "citations": {
+        "source": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      }
     },
     {
       "id": "LV-102",
@@ -836,7 +930,14 @@
             "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      }
     },
     {
       "id": "TV-104A",
@@ -882,7 +983,14 @@
             "document": "Fig 10; p. 29; p. 39 footnote 29"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
+      }
     },
     {
       "id": "TV-104B",
@@ -928,7 +1036,14 @@
             "document": "Fig 10; p. 29; p. 39 footnote 29"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
+      }
     },
     {
       "id": "TV-104C",
@@ -974,7 +1089,14 @@
             "document": "Fig 10; p. 29"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
+      }
     },
     {
       "id": "LIC-102",
@@ -1020,7 +1142,14 @@
             "document": "p. 28"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28; p. 32"
+      },
+      "citations": {
+        "source": "p. 28; p. 32"
+      }
     },
     {
       "id": "TIC-104",
@@ -1066,7 +1195,14 @@
             "document": "p. 29 (contents maintained at approximately 135 C)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28-29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "p. 28-29; p. 39 footnote 29"
+      }
     },
     {
       "id": "HV-108",
@@ -1103,7 +1239,14 @@
             "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+      },
+      "citations": {
+        "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+      }
     },
     {
       "id": "HV-109",
@@ -1140,7 +1283,14 @@
             "document": "Fig 10"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
+      }
     },
     {
       "id": "HV-110",
@@ -1177,7 +1327,14 @@
             "document": "Fig 10"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
+      }
     },
     {
       "id": "HV-111",
@@ -1214,7 +1371,14 @@
             "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+      }
     },
     {
       "id": "HV-112",
@@ -1251,7 +1415,14 @@
             "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      }
     },
     {
       "id": "HV-113",
@@ -1288,7 +1459,14 @@
             "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      }
     },
     {
       "id": "PSV-101",
@@ -1352,7 +1530,14 @@
             "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      },
+      "citations": {
+        "source": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      }
     },
     {
       "id": "PSV-102",
@@ -1398,7 +1583,14 @@
             "document": "Fig 10"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
+      }
     },
     {
       "id": "IL-1",
@@ -1462,7 +1654,14 @@
             "document": "p. 30; p. 69"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 69"
+      },
+      "citations": {
+        "source": "p. 30; p. 69"
+      }
     },
     {
       "id": "IL-2",
@@ -1517,7 +1716,14 @@
             "document": "p. 30"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 30"
+      },
+      "citations": {
+        "source": "p. 30"
+      }
     },
     {
       "id": "IL-3",
@@ -1572,7 +1778,14 @@
             "document": "p. 30; p. 38"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 30; p. 38"
+      },
+      "citations": {
+        "source": "p. 30; p. 38"
+      }
     },
     {
       "id": "LIM-1",
@@ -1609,7 +1822,14 @@
             "document": "p. 31"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 31"
+      },
+      "citations": {
+        "source": "p. 31"
+      }
     },
     {
       "id": "LIM-2",
@@ -1646,7 +1866,14 @@
             "document": "p. 28-31"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28-31"
+      },
+      "citations": {
+        "source": "p. 28-31"
+      }
     },
     {
       "id": "LIM-3",
@@ -1683,7 +1910,14 @@
             "document": "p. 30 (SOP administrative control)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 30 (SOP administrative control)"
+      },
+      "citations": {
+        "source": "p. 30 (SOP administrative control)"
+      }
     },
     {
       "id": "LIM-4",
@@ -1720,7 +1954,14 @@
             "document": "p. 31 (SOP)"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 31 (SOP)"
+      },
+      "citations": {
+        "source": "p. 31 (SOP)"
+      }
     },
     {
       "id": "LIM-5",
@@ -1757,7 +1998,14 @@
             "document": "p. 29; p. 39"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 29; p. 39"
+      },
+      "citations": {
+        "source": "p. 29; p. 39"
+      }
     },
     {
       "id": "LIM-6",
@@ -1794,7 +2042,14 @@
             "document": "p. 39"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 39"
+      },
+      "citations": {
+        "source": "p. 39"
+      }
     },
     {
       "id": "LIM-7",
@@ -1831,7 +2086,14 @@
             "document": "p. 28"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "p. 28"
+      },
+      "citations": {
+        "source": "p. 28"
+      }
     }
   ],
   "edges": [
@@ -1845,6 +2107,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28 (§1.7.3); Fig 10"
+      },
+      "citations": {
+        "source": "p. 28 (§1.7.3); Fig 10"
       }
     },
     {
@@ -1857,6 +2122,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 28 (vent piping prone to blockages)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28 (vent piping prone to blockages)"
       }
     },
     {
@@ -1869,6 +2137,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 31, p. 38"
+      },
+      "citations": {
+        "source": "Fig 10; p. 31, p. 38"
       }
     },
     {
@@ -1881,6 +2152,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29; pp. 69-72 (heater performance)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; pp. 69-72 (heater performance)"
       }
     },
     {
@@ -1893,6 +2167,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
       }
     },
     {
@@ -1905,6 +2182,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
       },
       "layer": "stream",
       "attributes": [
@@ -1939,6 +2219,9 @@
         "kind": "document",
         "document": "Fig 10 (From Solvent Tank)"
       },
+      "citations": {
+        "source": "Fig 10 (From Solvent Tank)"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -1962,6 +2245,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
       },
       "layer": "stream",
       "attributes": [
@@ -1987,6 +2273,9 @@
         "kind": "document",
         "document": "Fig 10; p. 29"
       },
+      "citations": {
+        "source": "Fig 10; p. 29"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2011,6 +2300,9 @@
         "kind": "document",
         "document": "Fig 10; p. 29"
       },
+      "citations": {
+        "source": "Fig 10; p. 29"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2034,6 +2326,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the heater and cooler outlets join one return line into the vessel's upper side)"
       },
       "layer": "stream",
       "attributes": [
@@ -2070,6 +2365,9 @@
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32"
       },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py: the discharge branches off the recirculation return, not off the vessel); p. 32"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2103,6 +2401,9 @@
         "kind": "document",
         "document": "Fig 10; p. 28"
       },
+      "citations": {
+        "source": "Fig 10; p. 28"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2126,6 +2427,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 28"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28"
       },
       "layer": "stream",
       "attributes": [
@@ -2151,6 +2455,9 @@
         "kind": "document",
         "document": "Fig 10"
       },
+      "citations": {
+        "source": "Fig 10"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2175,6 +2482,9 @@
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
       },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2198,6 +2508,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 72"
+      },
+      "citations": {
+        "source": "Fig 10; p. 72"
       },
       "layer": "stream",
       "attributes": [
@@ -2232,6 +2545,9 @@
         "kind": "document",
         "document": "Fig 10; p. 29"
       },
+      "citations": {
+        "source": "Fig 10; p. 29"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2264,6 +2580,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py; the figure does not label this line)"
       },
       "layer": "stream",
       "attributes": [
@@ -2298,6 +2617,9 @@
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
       },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
       "layer": "stream",
       "attributes": [
         {
@@ -2330,6 +2652,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (Pressure Transmitter); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Pressure Transmitter); Fig 11"
       }
     },
     {
@@ -2342,6 +2667,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (Level Transmitter); Fig 11; p. 28"
+      },
+      "citations": {
+        "source": "Fig 10 (Level Transmitter); Fig 11; p. 28"
       }
     },
     {
@@ -2354,6 +2682,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
       }
     },
     {
@@ -2366,6 +2697,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Flow Transmitter, on the recirculation return; corrected against Fig 10 by scripts/compare_bayer_fig10.py, first placed on the suction); Fig 11"
       }
     },
     {
@@ -2378,6 +2712,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (Temperature Transmitter); Fig 11"
+      },
+      "citations": {
+        "source": "Fig 10 (Temperature Transmitter); Fig 11"
       }
     },
     {
@@ -2390,6 +2727,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28 (text only; not drawn in Fig 10)"
+      },
+      "citations": {
+        "source": "p. 28 (text only; not drawn in Fig 10)"
       }
     },
     {
@@ -2402,6 +2742,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 19 (p. 72)"
+      },
+      "citations": {
+        "source": "Fig 19 (p. 72)"
       }
     },
     {
@@ -2414,6 +2757,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 19 (p. 72)"
+      },
+      "citations": {
+        "source": "Fig 19 (p. 72)"
       }
     },
     {
@@ -2426,6 +2772,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      },
+      "citations": {
+        "source": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
       }
     },
     {
@@ -2438,6 +2787,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
+      },
+      "citations": {
+        "source": "Fig 10; pp. 30-31 (set in manual, closed during startup; automatic once samples confirmed)"
       }
     },
     {
@@ -2450,6 +2802,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
       }
     },
     {
@@ -2462,6 +2817,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
+      },
+      "citations": {
+        "source": "Fig 10; p. 28 (automatic level control); p. 32 (kept in manual, batch transfers)"
       }
     },
     {
@@ -2474,6 +2832,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
       }
     },
     {
@@ -2486,6 +2847,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
       }
     },
     {
@@ -2498,6 +2862,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
       }
     },
     {
@@ -2510,6 +2877,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29; p. 39 footnote 29"
       }
     },
     {
@@ -2522,6 +2892,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
       }
     },
     {
@@ -2534,6 +2907,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 29"
+      },
+      "citations": {
+        "source": "Fig 10; p. 29"
       }
     },
     {
@@ -2546,6 +2922,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28; p. 32"
+      },
+      "citations": {
+        "source": "p. 28; p. 32"
       }
     },
     {
@@ -2558,6 +2937,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28; p. 32"
+      },
+      "citations": {
+        "source": "p. 28; p. 32"
       }
     },
     {
@@ -2570,6 +2952,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28-29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "p. 28-29; p. 39 footnote 29"
       }
     },
     {
@@ -2582,6 +2967,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28-29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "p. 28-29; p. 39 footnote 29"
       }
     },
     {
@@ -2594,6 +2982,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28-29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "p. 28-29; p. 39 footnote 29"
       }
     },
     {
@@ -2606,6 +2997,9 @@
       "source": {
         "kind": "document",
         "document": "p. 28-29; p. 39 footnote 29"
+      },
+      "citations": {
+        "source": "p. 28-29; p. 39 footnote 29"
       }
     },
     {
@@ -2618,6 +3012,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+      },
+      "citations": {
+        "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
       }
     },
     {
@@ -2630,6 +3027,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
       }
     },
     {
@@ -2642,6 +3042,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
       }
     },
     {
@@ -2654,6 +3057,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py). The figure draws this valve shaded grey and does not say why; the closed valve the CSB found was on the steam supply (p. 70), which is HV-108."
       }
     },
     {
@@ -2666,6 +3072,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
       }
     },
     {
@@ -2678,6 +3087,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+      },
+      "citations": {
+        "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
       }
     },
     {
@@ -2690,6 +3102,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      },
+      "citations": {
+        "source": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
       }
     },
     {
@@ -2702,6 +3117,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
+      },
+      "citations": {
+        "source": "Fig 10; Fig 11 label (relief valve open, 44 psig, 22:27)"
       }
     },
     {
@@ -2714,6 +3132,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
       }
     },
     {
@@ -2726,6 +3147,9 @@
       "source": {
         "kind": "document",
         "document": "Fig 10"
+      },
+      "citations": {
+        "source": "Fig 10"
       }
     },
     {
@@ -2738,6 +3162,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30; p. 69"
+      },
+      "citations": {
+        "source": "p. 30; p. 69"
       }
     },
     {
@@ -2750,6 +3177,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30; p. 69"
+      },
+      "citations": {
+        "source": "p. 30; p. 69"
       }
     },
     {
@@ -2762,6 +3192,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30"
+      },
+      "citations": {
+        "source": "p. 30"
       }
     },
     {
@@ -2774,6 +3207,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30"
+      },
+      "citations": {
+        "source": "p. 30"
       }
     },
     {
@@ -2786,6 +3222,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30; p. 38"
+      },
+      "citations": {
+        "source": "p. 30; p. 38"
       }
     },
     {
@@ -2798,6 +3237,9 @@
       "source": {
         "kind": "document",
         "document": "p. 30; p. 38"
+      },
+      "citations": {
+        "source": "p. 30; p. 38"
       }
     }
   ],
@@ -3052,7 +3494,7 @@
         "disputed_claims": [],
         "answers": [
           {
-            "decision_id": "d-5b789821221b7c7ca2ae43c9a08ecfbd0cc81331af300073f91f17f9852bfca1",
+            "decision_id": "d-6dd58384fd930f0c50af855ca867976551ce78559ebb0f4f204b95440d393458",
             "answer_id": "published-control-sequence",
             "freshness": "current",
             "changed": []

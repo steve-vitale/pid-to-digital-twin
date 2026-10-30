@@ -1,7 +1,7 @@
 # Statement review: check the model one plain sentence at a time
 
-**Why.** Everything this repository produces can be said as plain statements, and every statement has a source of
-truth: a box on a drawing sheet, a page of a report, a field of a model, an element of an XML file, a row of a CSV.
+**Why.** Supported graph records become plain statements with a supplied source reference or an explicit gap:
+a box on a drawing sheet, a page of a report, a field of a model, an element of an XML file, a row of a CSV.
 Reviewing a random, stratified sample of those statements against their sources, grouped by asset, turns "does this
 output look right?" into a measured error rate with an honest interval. It also lets an operator check a unit in
 plain language ("PSV-101 protects the residue treater RT-1 against overpressure") without reading JSON.
@@ -36,12 +36,32 @@ page or sheet; the commands above do not perform that review. Historical review 
 
 ## What `render` makes
 
+For items with several recorded drawing appearances, the page and CSV list every locator; the JSON retains
+the complete ordered records. Expand **Recorded item appearances** for their original metadata and any supplied
+crops. Missing images or locators are labelled individually. These are item-level extraction records, not
+corroboration of an overridden claim or proof that the sheets agree. Identity uses the item's own source;
+individual claims keep their document/review sources. One statement still receives one verdict.
+
+The machine summary separates evidence kind from `evidence_availability`: actual primary-image entries,
+recorded appearance entries and appearance-image entries. Reused images are counted per statement, not as
+distinct originals or verified sources. The [source-only example](../examples/graph-export/multi-appearance/README.md)
+has zero available images despite its drawing references. Four known extraction-priority fields on extracted
+twins (`risk.risk_score`, `risk.tier`, `risk.why`, `risk.tier_before_floor`) are counted as skipped bookkeeping and remain in the graph;
+they are not plant-risk or safety statements. Authored process-model fields and other risk records are not
+silently reclassified by this rule. Historical measured samples and their scores remain separate records.
+
+Equal statement wording with different sources or item evidence produces separate statements and verdict
+targets. Identical records can still share one statement. This keeps a later target's evidence visible instead
+of silently displaying only the first claim's locator.
+Value/unit combinations (and limit descriptions) also remain separate when their constituent sources differ.
+A combined sentence with one source is used only when all its constituent claims cite the same source record.
+
 The input is a twin-graph-1 file from [`graph_export.py`](GRAPH_EXPORT.md); anything else is refused with a message
 saying how to make one. Each node, each attribute claim and each edge becomes one statement:
 
 | Field | What it is |
 |---|---|
-| `id` | `st-` + the first 12 hex of SHA-1 over `subject|predicate|object`. Status, source and evidence are not part of it, so a reviewed graph gives the same ids. A stream's own id is part of its key, so two streams between the same ends stay two statements |
+| `id` | Normally `st-` + the first 12 hex of SHA-1 over `subject|predicate|object`. A stream includes its own id in the key. When equal wording has different sources or item evidence, the later statement instead keys its object by `value` and `review_targets`; the first keeps its original id. An id is not an approval or evidence fingerprint |
 | `text` | The sentence, from a template per node kind, attribute and edge type ("FT 1401 measures flow", "Controller TIC-104 moves TV-104C", "TIC-104 is set to hold 135 C (its setpoint)"). An item without a tag is named by what it is and its id ("Untagged valve S0-VL001"); a tag that appears twice gets its id ("FT 1401 (S0-IN002)") |
 | `layer` | Which relationship it states: `pipe` (a `piped_to` segment or a junction: what is piped directly to what), `network` (a line network and what is attached to it), `network_pair` (a drawing's pairwise link: both items on the same line network, **not** piped to each other), `stream` (a hand-built model's process stream), `offpage_pair`, or `item` (identity, attributes, every other relation). Error rates are reported per layer, never blended ([line layers](GRAPH_EXPORT.md#three-layers-for-the-lines)) |
 | `type`, `rank` | `identity` / `attribute` / `relation`, and consequence rank 1 control or safety relation (controls, trips, protects, sets_point_of, applies_to, interlock action, interlock cause/effect/bypass, relief basis, limit values), 2 connection, 3 value with units, 4 identity, 5 descriptive text |

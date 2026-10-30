@@ -56,7 +56,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "source.txt",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "BL",
@@ -65,7 +70,12 @@
    "name": "battery limit",
    "aliases": [],
    "status": "confirmed",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "source.txt",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "TK-1",
@@ -93,7 +103,14 @@
       "document": "source.txt:L2-L2"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L2-L2"
+   },
+   "citations": {
+    "source": "source.txt:L2-L2"
+   }
   },
   {
    "id": "P-1",
@@ -121,7 +138,14 @@
       "document": "source.txt:L3-L3"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L3-L3"
+   },
+   "citations": {
+    "source": "source.txt:L3-L3"
+   }
   },
   {
    "id": "FT-101",
@@ -176,7 +200,14 @@
       "document": "source.txt:L5-L5"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L5-L5"
+   },
+   "citations": {
+    "source": "source.txt:L5-L5"
+   }
   },
   {
    "id": "FV-101",
@@ -222,7 +253,14 @@
       "document": "source.txt:L6-L6"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L6-L6"
+   },
+   "citations": {
+    "source": "source.txt:L6-L6"
+   }
   },
   {
    "id": "FIC-101",
@@ -241,7 +279,14 @@
       "document": "source.txt:L7-L7"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "source.txt:L7-L7"
+   },
+   "citations": {
+    "source": "source.txt:L7-L7"
+   }
   }
  ],
  "edges": [
@@ -255,6 +300,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L2-L2"
+   },
+   "citations": {
+    "source": "source.txt:L2-L2"
    }
   },
   {
@@ -267,6 +315,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L3-L3"
+   },
+   "citations": {
+    "source": "source.txt:L3-L3"
    }
   },
   {
@@ -279,6 +330,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L4-L4"
+   },
+   "citations": {
+    "source": "source.txt:L4-L4"
    },
    "layer": "stream",
    "attributes": [
@@ -304,6 +358,9 @@
     "kind": "document",
     "document": "source.txt:L4-L4"
    },
+   "citations": {
+    "source": "source.txt:L4-L4"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -328,6 +385,9 @@
     "kind": "document",
     "document": "source.txt:L4-L4"
    },
+   "citations": {
+    "source": "source.txt:L4-L4"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -351,6 +411,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L5-L5"
+   },
+   "citations": {
+    "source": "source.txt:L5-L5"
    }
   },
   {
@@ -363,6 +426,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L5-L5"
+   },
+   "citations": {
+    "source": "source.txt:L5-L5"
    }
   },
   {
@@ -375,6 +441,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L6-L6"
+   },
+   "citations": {
+    "source": "source.txt:L6-L6"
    }
   },
   {
@@ -387,6 +456,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L6-L6"
+   },
+   "citations": {
+    "source": "source.txt:L6-L6"
    }
   },
   {
@@ -399,6 +471,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L7-L7"
+   },
+   "citations": {
+    "source": "source.txt:L7-L7"
    }
   },
   {
@@ -411,6 +486,9 @@
    "source": {
     "kind": "document",
     "document": "source.txt:L7-L7"
+   },
+   "citations": {
+    "source": "source.txt:L7-L7"
    }
   }
  ],

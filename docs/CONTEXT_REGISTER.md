@@ -15,6 +15,12 @@ The tool does not decide whether a document is authoritative, choose an owner, o
 Its job is to make the decision, its responsibility and its evidence travel together, and to reopen the affected
 answers when that evidence changes.
 
+Graph item appearances and original citations travel as evidence records, separately from each claim's source.
+Their complete supplied metadata participates in context binding, including later drawing appearances. An
+added or changed appearance can therefore reopen a dependent answer even when the engineering value is unchanged.
+Keep the prior register when refreshing: preparing a new sheet does not authorize copying an earlier verdict
+onto changed evidence. The examples retain earlier records and label their new proposals or fictional exercises.
+
 Start with the [small offline example](../examples/context-register/illustrative/README.md), then the
 [public PRONTO document packet](../examples/context-register/pronto/README.md). The first uses invented training
 sources; the second preserves qualified statements from four public originals. Neither is a person's sign-off.

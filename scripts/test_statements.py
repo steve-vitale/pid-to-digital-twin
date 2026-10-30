@@ -663,7 +663,8 @@ class ReviewBinding(unittest.TestCase):
         self.render()
         row = self.fill()[0]
         before_id = row["statement_id"]
-        self.g["nodes"][0]["attributes"][0]["source"]["document"] = "ILLUSTRATIVE different source, p. 99"
+        # Identity statements now use the node's own source, independently of its attributes.
+        self.g["nodes"][0]["source"]["document"] = "ILLUSTRATIVE different source, p. 99"
         self.write_graph()
         current = {st["id"]: st for st in stm.build(self.g)[0]}
         self.assertIn(before_id, current)

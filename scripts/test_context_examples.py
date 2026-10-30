@@ -91,7 +91,9 @@ class WorkedContext(unittest.TestCase):
         _, _, questions = context_register.load_inputs(packet / 'model.json', packet / 'questions.json')
         with (packet / 'proposed_answers.csv').open(encoding='utf-8', newline='') as stream:
             proposals = {row['answer_id']: row for row in csv.DictReader(stream)}
-        self.assertEqual(len(register['decisions']), 12)
+        self.assertEqual(len(register['decisions']), 24)
+        prior = json.loads((packet / 'history/before-appearances.context.json').read_bytes())
+        self.assertEqual(register['decisions'][:12], prior['decisions'])
         self.assertEqual(len(register['current']), 6)
         self.assertEqual(sum(q['state'] == 'needs_data' for q in register['current'].values()), 5)
         self.assertFalse(register['ownership_history'])
@@ -154,7 +156,10 @@ class WorkedContext(unittest.TestCase):
             register = json.loads((packet / 'expected/context.json').read_text(encoding='utf-8'))
             context_register.validate_register(register)
             self.assertEqual(register['current']['E18@model']['state'], 'partial')
-            decision, = register['decisions']
+            prior = json.loads((packet / 'history/before-appearances.context.json').read_bytes())
+            self.assertEqual(register['decisions'][:len(prior['decisions'])], prior['decisions'])
+            self.assertEqual(len(register['decisions']), 2)
+            decision = register['decisions'][-1]
             self.assertEqual(decision['decision'], 'proposed')
             self.assertEqual(decision['plant_truth'], 'unknown')
             self.assertEqual(decision['evidence']['question'], questions['E18@model']['question'])

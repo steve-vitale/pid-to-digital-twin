@@ -142,7 +142,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file I01V01-SAG.EX01.xml, SHA-256 72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "BL",
@@ -151,7 +156,12 @@
    "name": "battery limit",
    "aliases": [],
    "status": "confirmed",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file I01V01-SAG.EX01.xml, SHA-256 72b6c61c776d9db953a03cd321462390b95617f1decbffeff0d71fcf5618a985",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "T100",
@@ -1691,7 +1701,14 @@
       "document": "DEXPI XML XMP_1 (Tank)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML XMP_1 (Tank)"
+   },
+   "citations": {
+    "source": "DEXPI XML XMP_1 (Tank)"
+   }
   },
   {
    "id": "XMP_6",
@@ -3043,6 +3060,13 @@
      }
     }
    ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML XMP_6 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML XMP_6 (ProcessInstrumentationFunction)"
+   },
    "placement": "no sensor location in the file"
   }
  ],
@@ -3057,6 +3081,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML XMP_1 (Tank)"
+   },
+   "citations": {
+    "source": "DEXPI XML XMP_1 (Tank)"
    }
   },
   {
@@ -3069,6 +3096,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML XMP_23 (PipingNetworkSystem), segments XMP_20"
+   },
+   "citations": {
+    "source": "DEXPI XML XMP_23 (PipingNetworkSystem), segments XMP_20"
    },
    "layer": "stream",
    "attributes": [

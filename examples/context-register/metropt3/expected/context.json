@@ -1224,6 +1224,1350 @@
       },
       "previous": null,
       "id": "d-fddbb0cb86f07b58cb856c16a5b1a064664699f231721f10e1d76968a38b286b"
+    },
+    {
+      "question_id": "MPT-COVERAGE@MPT-APU",
+      "answer_id": "MPT-M01",
+      "claim_key": "description.acquisition-scope",
+      "value": "15169480 instances; 1Hz; February-August 2020",
+      "answer": "The description reports 15,169,480 instances/data points and acquisition at 1 Hz during February-August 2020. This is a documentation claim; the acquisition/export history is not verified here.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "5e949b4a927082fff2bb746925ac5e01c4b4ed3a35b965930c1fcbdc01692e41",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-COVERAGE@MPT-APU",
+          "question_id": "MPT-COVERAGE",
+          "family": "engineering_context",
+          "question": "What time/population scope can the released CSV support?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Release/export provenance and usable observation windows",
+              "state": "needs_data",
+              "fields": "Original acquisition cadence, export/transformation history, unnamed-field meaning, timezone and documented missing intervals; reconcile the description with the released file.",
+              "how": "Ask the dataset or historian custodian for the versioned export recipe and original timebase. Retain the file profile as observations, without inferring downsampling or treating unreported periods as healthy.",
+              "where": [
+                "Versioned acquisition/export records held by the data custodian"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Versioned acquisition/export records held by the data custodian"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Separate published acquisition claims from released-file observations. Do not impose a uniform period, invent a timezone or silently interpolate gaps.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m01",
+          "locator": "PDF pages 1-2; summary Number of Instances, Data Set Information and Attribute Information opening paragraph"
+        }
+      },
+      "previous": "d-4506ff5f52d1127cde07233aaff5fa9e621be7a217c8663210ed0f81bb5044c3",
+      "id": "d-18bd97c09bfe6dee7ffc9b0366a727a0c30a7d800fb231b9e1f914ebf346dc3f"
+    },
+    {
+      "question_id": "MPT-COVERAGE@MPT-APU",
+      "answer_id": "MPT-M02",
+      "claim_key": "released-file.observed-scope",
+      "value": "1516948 data rows; 17 fields; 2020-02-01 00:00:00 to 2020-09-01 03:59:50; gaps min/median/max 8/10/172918 s",
+      "answer": "The actual release contains 1,516,948 data rows and 17 fields. Its timestamps run from 2020-02-01 00:00:00 to 2020-09-01 03:59:50 and strictly increase; adjacent gaps have minimum/median/maximum 8/10/172918 seconds. The first gaps are 10, 9 and 10 seconds. These are released-file observations, not a uniform period, timezone or explanation of the acquisition/export history.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "6e0084ec3cd708f839a3d7d44e9079a2797c5ef9a9b77c48cb73ac3d69c04e4f",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-COVERAGE@MPT-APU",
+          "question_id": "MPT-COVERAGE",
+          "family": "engineering_context",
+          "question": "What time/population scope can the released CSV support?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Release/export provenance and usable observation windows",
+              "state": "needs_data",
+              "fields": "Original acquisition cadence, export/transformation history, unnamed-field meaning, timezone and documented missing intervals; reconcile the description with the released file.",
+              "how": "Ask the dataset or historian custodian for the versioned export recipe and original timebase. Retain the file profile as observations, without inferring downsampling or treating unreported periods as healthy.",
+              "where": [
+                "Versioned acquisition/export records held by the data custodian"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Versioned acquisition/export records held by the data custodian"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Separate published acquisition claims from released-file observations. Do not impose a uniform period, invent a timezone or silently interpolate gaps.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-CSV",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+          "locator_id": "m02",
+          "locator": "CSV physical lines 1-1516949; header and all timestamp fields, first/last records and adjacent-gap profile"
+        }
+      },
+      "previous": "d-4254d30496dd6a880700011abdaab0c962804bbcf73fe640cace70581e386138",
+      "id": "d-3026ceae3070211f783045c7d3ec70aefd4e302f15ce68697eb639d7e406c17d"
+    },
+    {
+      "question_id": "MPT-EVENT-IDENTITY@MPT-APU",
+      "answer_id": "MPT-M03",
+      "claim_key": "failure-table.printed-identities",
+      "value": "row 1: #1, 4/18/2020 0:00-4/18/2020 23:59; row 2: #1, 5/29/2020 23:30-5/30/2020 6:00",
+      "answer": "The first and second table rows both print #1 but have different reported time windows. Keep them as separate row-scoped records. This packet supplies neither a corrected report number nor verified external work-record or physical-asset identity.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "d44e9a84fc34b79d4f148fe898f85d8572461844a96ac2b88cf39dbb130c8729",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-EVENT-IDENTITY@MPT-APU",
+          "question_id": "MPT-EVENT-IDENTITY",
+          "family": "engineering_context",
+          "question": "How are the two printed #1 failure records kept separate?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Stable external event and asset identities",
+              "state": "needs_data",
+              "fields": "Original failure/work-record IDs and revisions, affected train/APU identifier, event dates and links to this dataset release.",
+              "how": "Ask the failure-record custodian for the original records. Use document hash and table-row locator until a verified external identity is supplied; a printed number alone is insufficient.",
+              "where": [
+                "Original failure reports or maintenance system, with its record custodian"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Original failure reports or maintenance system, with its record custodian"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Keep table rows 1 and 2 separate while preserving their identical printed number. Internal row ordinals are locators, not corrected report numbers.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m03",
+          "locator": "PDF page 3, Failure Information table, data rows 1-2 including Nr., Start Time and End Time"
+        }
+      },
+      "previous": "d-d9fc001e0f856f93a43fa6549ae86ca0903bd0e4f5539258381c147890205ac7",
+      "id": "d-1bd083b5178e69c1a51315c65f61e8c18191406a792b306c3c1d57bc607e9e2c"
+    },
+    {
+      "question_id": "MPT-MAY-WORK@MPT-APU",
+      "answer_id": "MPT-M04",
+      "claim_key": "failure-table.row2.report",
+      "value": "5/29/2020 23:30-5/30/2020 6:00; Air Leak; High stress; Maintenance on 30Apr at 12:00",
+      "answer": "Table row 2 reports a May 29-30 air-leak interval and separately says Maintenance on 30Apr at 12:00. Preserve both literal dates. The note does not establish a May repair completion, performed work, resulting configuration, timezone or return to service; the original execution record and date clarification are needed.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "6b85506014154d1633cdb25574b42708ed48042ed7d2278a07387c833462d1b5",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-MAY-WORK@MPT-APU",
+          "question_id": "MPT-MAY-WORK",
+          "family": "engineering_context",
+          "question": "What intervention, if any, belongs to the May 29-30 reported interval?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Original execution record and date clarification",
+              "state": "needs_data",
+              "fields": "Work-record ID/revision, affected APU, work performed, actual start/completion, year/timezone, resulting configuration and return-to-service disposition; clarify the literal 30Apr note.",
+              "how": "Request the original work record and date clarification from its custodian. Preserve both the May interval and April note until reviewed evidence explains their relationship.",
+              "where": [
+                "Maintenance execution record and operational return-to-service record"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Maintenance execution record and operational return-to-service record"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Do not change April to May, equate a reported interval ending with repair completion, or infer which work was executed.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m04",
+          "locator": "PDF page 3, Failure Information table, data row 2, all six columns (printed Nr. #1)"
+        }
+      },
+      "previous": "d-007791ea4630d213e14738b7cf75d34fbee9b91de806ab5747b121d13cab7ed8",
+      "id": "d-993b2118d8ce535e81a245d7b3d2cf32604f7c17f5e48362cd046f70e6022a52"
+    },
+    {
+      "question_id": "MPT-EFFECTIVENESS@MPT-APU",
+      "answer_id": "MPT-M05",
+      "claim_key": "failure-table.row3.report",
+      "value": "6/5/2020 10:00-6/7/2020 14:30; Air Leak; High stress; Maintenance on 8Jun at 16:00",
+      "answer": "Table row 3 gives this reported failure interval and a maintenance note naming 8Jun at 16:00. The note lacks a year/timezone and does not identify the executed action or an effectiveness criterion/result. The interval end is not a verified repair-completion or return-to-service time.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "7a14da7c46f0acd6c556b4bbf501d929e691658185f25746da59fb2cbae8d6de",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-EFFECTIVENESS@MPT-APU",
+          "question_id": "MPT-EFFECTIVENESS",
+          "family": "engineering_context",
+          "question": "Is there enough evidence to review the June/July maintenance effectiveness?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Intervention identity, comparable outcomes and attributed effectiveness review",
+              "state": "needs_data",
+              "fields": "Verified work-record revision, affected asset and action/configuration; before/after operating conditions and exposure window; usable measurement coverage, chosen metric, uncertainty and dated reviewer disposition.",
+              "how": "First reconcile the original execution record with operations. Then prepare comparable observations under a defined criterion for an authorized reviewer. A copied completed status or maintenance note alone leaves insufficient evidence.",
+              "where": [
+                "Maintenance, operations and measurement custodians in the existing execution system"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Maintenance, operations and measurement custodians in the existing execution system"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Retain insufficient evidence until the intervention and comparable observations are linked and reviewed. Do not infer successful repair, root cause, downtime or causal improvement from the table.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m05",
+          "locator": "PDF page 3, Failure Information table, data row 3, all six columns (printed Nr. #3)"
+        }
+      },
+      "previous": "d-a01bfedd7cc96e4eba58ef0c61787ed37f5a26b8c87be807d28e34e7a9e7b74b",
+      "id": "d-89c9bf043f6321931232c904b85dc5d173cb22a0798d3a1c43f83ffb75e94ca5"
+    },
+    {
+      "question_id": "MPT-EFFECTIVENESS@MPT-APU",
+      "answer_id": "MPT-M06",
+      "claim_key": "failure-table.row4.report",
+      "value": "7/15/2020 14:30-7/15/2020 19:00; Air Leak; High stress; Maintenance on 16Jul at 00:00",
+      "answer": "Table row 4 gives this reported failure interval and a maintenance note naming 16Jul at 00:00. It does not establish which repair occurred, its configuration, actual completion, recovery or causal improvement. Comparable observations and attributed review remain missing.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "507019e022950741aad8acd64cc72b831be909a098efbd52288709ebcd6bd6fb",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-EFFECTIVENESS@MPT-APU",
+          "question_id": "MPT-EFFECTIVENESS",
+          "family": "engineering_context",
+          "question": "Is there enough evidence to review the June/July maintenance effectiveness?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Intervention identity, comparable outcomes and attributed effectiveness review",
+              "state": "needs_data",
+              "fields": "Verified work-record revision, affected asset and action/configuration; before/after operating conditions and exposure window; usable measurement coverage, chosen metric, uncertainty and dated reviewer disposition.",
+              "how": "First reconcile the original execution record with operations. Then prepare comparable observations under a defined criterion for an authorized reviewer. A copied completed status or maintenance note alone leaves insufficient evidence.",
+              "where": [
+                "Maintenance, operations and measurement custodians in the existing execution system"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Maintenance, operations and measurement custodians in the existing execution system"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Retain insufficient evidence until the intervention and comparable observations are linked and reviewed. Do not infer successful repair, root cause, downtime or causal improvement from the table.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m06",
+          "locator": "PDF page 3, Failure Information table, data row 4, all six columns (printed Nr. #4)"
+        }
+      },
+      "previous": "d-ceaa6a88b7ab5ad7b1e95187341beb8ba229508ca8015e457ab96febe532da0f",
+      "id": "d-3e77fd8ff1ca9196c6cf7bf1d9835d86b2383a7cae53d42dff3e40c710c77689"
+    },
+    {
+      "question_id": "MPT-COLUMNS@MPT-APU",
+      "answer_id": "MPT-M07",
+      "claim_key": "description.analogue-enumeration",
+      "value": "item 6: Motor Current (A); item 7: Oil Temperature (C)",
+      "answer": "The description enumerates Motor Current in amperes as item 6 and Oil Temperature in degrees Celsius as item 7. These are definitions in the PDF enumeration, not a verified plant channel mapping.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "72c313e8622552019aaf40c7f7cec390c4aebad7f01087f844dd0bccdfdc2401",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-COLUMNS@MPT-APU",
+          "question_id": "MPT-COLUMNS",
+          "family": "engineering_context",
+          "question": "Which named CSV columns carry oil temperature and motor current?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Reviewed channel-to-meaning mapping",
+              "state": "needs_data",
+              "fields": "Exact export column names and dictionary revision, engineering units and any transformation; explicitly check Oil_temperature and Motor_current against their names rather than the PDF enumeration.",
+              "how": "Compare the original header and source dictionary, then obtain the export owner's mapping verification before joining channels to plant identities. Keep the exact DV_eletric spelling.",
+              "where": [
+                "CSV header, source dictionary and controlled channel-mapping record"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "CSV header, source dictionary and controlled channel-mapping record"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Do not pair values by the PDF item order. Keep source definitions, literal column names and recorded values distinct.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m07",
+          "locator": "PDF page 2, Attribute Information, numbered items 6 (Motor Current) and 7 (Oil Temperature)"
+        }
+      },
+      "previous": "d-2f67c90f5276611d28e47d08b5d9fad82647cb975c6afbd8365d66428a7011c3",
+      "id": "d-6ed34ccab80a5ff689144db7cd52e0e60aa41f725bf81bbd3fa1fe1682287ed7"
+    },
+    {
+      "question_id": "MPT-COLUMNS@MPT-APU",
+      "answer_id": "MPT-M08",
+      "claim_key": "released-file.column-identities",
+      "value": "H: Oil_temperature; I: Motor_current; K: DV_eletric",
+      "answer": "The raw header places Oil_temperature before Motor_current and spells the electrical column DV_eletric. Preserve these names. These are literal file column identities; units and physical channel mapping need separate review.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "0004afd4fda6b5d7eb271af10db125c7f468babcfb0d587861c510ae5fc04cc7",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-COLUMNS@MPT-APU",
+          "question_id": "MPT-COLUMNS",
+          "family": "engineering_context",
+          "question": "Which named CSV columns carry oil temperature and motor current?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Reviewed channel-to-meaning mapping",
+              "state": "needs_data",
+              "fields": "Exact export column names and dictionary revision, engineering units and any transformation; explicitly check Oil_temperature and Motor_current against their names rather than the PDF enumeration.",
+              "how": "Compare the original header and source dictionary, then obtain the export owner's mapping verification before joining channels to plant identities. Keep the exact DV_eletric spelling.",
+              "where": [
+                "CSV header, source dictionary and controlled channel-mapping record"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "CSV header, source dictionary and controlled channel-mapping record"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Do not pair values by the PDF item order. Keep source definitions, literal column names and recorded values distinct.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-CSV",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+          "locator_id": "m08",
+          "locator": "CSV physical line 1; named columns H:I (one-based, including the unnamed leading field), plus exact DV_eletric header"
+        }
+      },
+      "previous": "d-13fcbdef9e5e957e918ba776a1a039477205f49d58964d740162d727a997cb22",
+      "id": "d-d3f6834e992480fa892f34f4d620b084420969deef9013aa76d114bc562454b3"
+    },
+    {
+      "question_id": "MPT-COLUMNS@MPT-APU",
+      "answer_id": "MPT-M09",
+      "claim_key": "released-file.first-record.analogue-values",
+      "value": "Oil_temperature=53.60000000000001; Motor_current=0.04",
+      "answer": "The first record contains these literal values under Oil_temperature and Motor_current respectively. These literal fields alone do not establish units, calibration or current plant truth.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "6d7c505bb4982eebca42dc7711f741f5ec55344786a333dc9b33427826e26bdb",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-COLUMNS@MPT-APU",
+          "question_id": "MPT-COLUMNS",
+          "family": "engineering_context",
+          "question": "Which named CSV columns carry oil temperature and motor current?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Reviewed channel-to-meaning mapping",
+              "state": "needs_data",
+              "fields": "Exact export column names and dictionary revision, engineering units and any transformation; explicitly check Oil_temperature and Motor_current against their names rather than the PDF enumeration.",
+              "how": "Compare the original header and source dictionary, then obtain the export owner's mapping verification before joining channels to plant identities. Keep the exact DV_eletric spelling.",
+              "where": [
+                "CSV header, source dictionary and controlled channel-mapping record"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "CSV header, source dictionary and controlled channel-mapping record"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "Do not pair values by the PDF item order. Keep source definitions, literal column names and recorded values distinct.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-CSV",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+          "locator_id": "m09",
+          "locator": "CSV physical lines 1-2; header H:I and first data record at timestamp 2020-02-01 00:00:00"
+        }
+      },
+      "previous": "d-eefead956d3b91e848a181970875e4d158106678dc9da5fdafee6a0fd5feb7b4",
+      "id": "d-77850a160856e8711b2842c81cbc15c08d184f33fa4414b9d8a1b2adaa40f09d"
+    },
+    {
+      "question_id": "MPT-MODE@MPT-APU",
+      "answer_id": "MPT-M10",
+      "claim_key": "description.COMP.meaning",
+      "value": "active: no air intake; compressor off or offloaded",
+      "answer": "The description says an active COMP intake-valve signal indicates no air intake and permits either off or offloaded operation. It does not select one of those conditions for the observed record.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "5496b39b0850e11f534cbb96ffce573503d777097f1305dddbd7d37e6fd51dae",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-MODE@MPT-APU",
+          "question_id": "MPT-MODE",
+          "family": "engineering_context",
+          "question": "Does the first recorded electrical state identify a unique operating mode?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Time-aligned operating-state and configuration evidence",
+              "state": "needs_data",
+              "fields": "Applicable control/configuration revision, timestamp/timezone mapping, state transitions and operational observations distinguishing off from offloaded conditions.",
+              "how": "Ask the controls/operational counterpart to reconcile the state timing and applicable configuration. Retain raw flags and motor-current values without assigning a unique operating mode.",
+              "where": [
+                "Applicable controls export and operational state/event records"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Applicable controls export and operational state/event records"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "A source-described COMP/DV flag combination permits more than one condition. A near-zero current is an observation, not a verified unique mode or failure diagnosis.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m10",
+          "locator": "PDF page 2, Attribute Information, item 8 COMP, complete definition"
+        }
+      },
+      "previous": "d-7c1d0e2b15ab4f59d744f92c72552c292f8a833511c8e97feb85b7ee2b4c71af",
+      "id": "d-cddb4ed4b45b28c21fc196c5a5ff1716bd7cdd2e99d223fe49e8a0c7738d2a60"
+    },
+    {
+      "question_id": "MPT-MODE@MPT-APU",
+      "answer_id": "MPT-M11",
+      "claim_key": "description.DV-electric.meaning",
+      "value": "active: under load; inactive: off or offloaded",
+      "answer": "The description associates active DV electric with under-load operation and inactive with off or offloaded operation. This published meaning does not verify the applicable configuration or a unique observed mode.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "e506d7264db3008ca5074f3e64b27aee1e39772fccabc5cff0286b809caadbc2",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-MODE@MPT-APU",
+          "question_id": "MPT-MODE",
+          "family": "engineering_context",
+          "question": "Does the first recorded electrical state identify a unique operating mode?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Time-aligned operating-state and configuration evidence",
+              "state": "needs_data",
+              "fields": "Applicable control/configuration revision, timestamp/timezone mapping, state transitions and operational observations distinguishing off from offloaded conditions.",
+              "how": "Ask the controls/operational counterpart to reconcile the state timing and applicable configuration. Retain raw flags and motor-current values without assigning a unique operating mode.",
+              "where": [
+                "Applicable controls export and operational state/event records"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Applicable controls export and operational state/event records"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "A source-described COMP/DV flag combination permits more than one condition. A near-zero current is an observation, not a verified unique mode or failure diagnosis.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-DESCRIPTION",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127",
+          "locator_id": "m11",
+          "locator": "PDF page 3, Attribute Information, item 9 DV electric, complete definition"
+        }
+      },
+      "previous": "d-5cdb420c785833178dcb9085a5c447cb0fdc6c294ccae3ff2de2c15d68ba6945",
+      "id": "d-9b137a569cd84ce11d764ca4275da93d5d3f9fdaef4cd0694ab66726976a7626"
+    },
+    {
+      "question_id": "MPT-MODE@MPT-APU",
+      "answer_id": "MPT-M12",
+      "claim_key": "released-file.first-record.electrical-values",
+      "value": "2020-02-01 00:00:00; Motor_current=0.04; COMP=1.0; DV_eletric=0.0",
+      "answer": "The first record has Motor_current 0.04, COMP 1.0 and DV_eletric 0.0. Keep those raw observations. They do not by themselves identify a unique mode, failure cause or current asset condition; applicable control logic and time-aligned operating evidence are still needed.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "93758cccb19164ea3bf2570c12edf7ce1a8e22f3c34caa5c941ba435fd89dd47",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "MPT-MODE@MPT-APU",
+          "question_id": "MPT-MODE",
+          "family": "engineering_context",
+          "question": "Does the first recorded electrical state identify a unique operating mode?",
+          "about": "MetroPT-3 source-scoped APU; physical identity unverified",
+          "assets": [
+            {
+              "id": "MPT-APU"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "Time-aligned operating-state and configuration evidence",
+              "state": "needs_data",
+              "fields": "Applicable control/configuration revision, timestamp/timezone mapping, state transitions and operational observations distinguishing off from offloaded conditions.",
+              "how": "Ask the controls/operational counterpart to reconcile the state timing and applicable configuration. Retain raw flags and motor-current values without assigning a unique operating mode.",
+              "where": [
+                "Applicable controls export and operational state/event records"
+              ],
+              "locations": [
+                {
+                  "kind": "record",
+                  "description": "Applicable controls export and operational state/event records"
+                }
+              ]
+            }
+          ],
+          "decision_rule": "A source-described COMP/DV flag combination permits more than one condition. A near-zero current is an observation, not a verified unique mode or failure diagnosis.",
+          "typical_benefit": null,
+          "limits": "Development packet. No human owner, approval, plant truth or effectiveness claim; suggested custodians are evidence locations, not assignments."
+        },
+        "assets": [
+          {
+            "id": "MPT-APU",
+            "content": {
+              "id": "MPT-APU",
+              "kind": "equipment",
+              "tag": "MPT-APU",
+              "name": "APU described by the MetroPT-3 release; physical identity unverified",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "APU described by the MetroPT-3 release; physical identity unverified",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "air_production_unit",
+                  "source": {
+                    "kind": "document",
+                    "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              },
+              "citations": {
+                "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+              }
+            },
+            "relations": [
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "MPT-APU",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                },
+                "citations": {
+                  "source": "Data Description_Metro.pdf page 1, Abstract and Data Set Information; source-scoped record only."
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "MPT-CSV",
+          "revision": "uci-791/zip-aab991a970e58210",
+          "sha256": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+          "locator_id": "m12",
+          "locator": "CSV physical lines 1-2; timestamp and named Motor_current, COMP, DV_eletric columns"
+        }
+      },
+      "previous": "d-fddbb0cb86f07b58cb856c16a5b1a064664699f231721f10e1d76968a38b286b",
+      "id": "d-836c69a5ca3165756f6f86e8ec52639edd620c583583fbf5365d3a909c91084d"
     }
   ],
   "ownership_history": [],
@@ -1271,19 +2615,19 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-2f67c90f5276611d28e47d08b5d9fad82647cb975c6afbd8365d66428a7011c3",
+          "decision_id": "d-6ed34ccab80a5ff689144db7cd52e0e60aa41f725bf81bbd3fa1fe1682287ed7",
           "answer_id": "MPT-M07",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-13fcbdef9e5e957e918ba776a1a039477205f49d58964d740162d727a997cb22",
+          "decision_id": "d-d3f6834e992480fa892f34f4d620b084420969deef9013aa76d114bc562454b3",
           "answer_id": "MPT-M08",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-eefead956d3b91e848a181970875e4d158106678dc9da5fdafee6a0fd5feb7b4",
+          "decision_id": "d-77850a160856e8711b2842c81cbc15c08d184f33fa4414b9d8a1b2adaa40f09d",
           "answer_id": "MPT-M09",
           "freshness": "current",
           "changed": []
@@ -1333,13 +2677,13 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-4506ff5f52d1127cde07233aaff5fa9e621be7a217c8663210ed0f81bb5044c3",
+          "decision_id": "d-18bd97c09bfe6dee7ffc9b0366a727a0c30a7d800fb231b9e1f914ebf346dc3f",
           "answer_id": "MPT-M01",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-4254d30496dd6a880700011abdaab0c962804bbcf73fe640cace70581e386138",
+          "decision_id": "d-3026ceae3070211f783045c7d3ec70aefd4e302f15ce68697eb639d7e406c17d",
           "answer_id": "MPT-M02",
           "freshness": "current",
           "changed": []
@@ -1389,13 +2733,13 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-a01bfedd7cc96e4eba58ef0c61787ed37f5a26b8c87be807d28e34e7a9e7b74b",
+          "decision_id": "d-89c9bf043f6321931232c904b85dc5d173cb22a0798d3a1c43f83ffb75e94ca5",
           "answer_id": "MPT-M05",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-ceaa6a88b7ab5ad7b1e95187341beb8ba229508ca8015e457ab96febe532da0f",
+          "decision_id": "d-3e77fd8ff1ca9196c6cf7bf1d9835d86b2383a7cae53d42dff3e40c710c77689",
           "answer_id": "MPT-M06",
           "freshness": "current",
           "changed": []
@@ -1445,7 +2789,7 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-d9fc001e0f856f93a43fa6549ae86ca0903bd0e4f5539258381c147890205ac7",
+          "decision_id": "d-1bd083b5178e69c1a51315c65f61e8c18191406a792b306c3c1d57bc607e9e2c",
           "answer_id": "MPT-M03",
           "freshness": "current",
           "changed": []
@@ -1495,7 +2839,7 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-007791ea4630d213e14738b7cf75d34fbee9b91de806ab5747b121d13cab7ed8",
+          "decision_id": "d-993b2118d8ce535e81a245d7b3d2cf32604f7c17f5e48362cd046f70e6022a52",
           "answer_id": "MPT-M04",
           "freshness": "current",
           "changed": []
@@ -1545,19 +2889,19 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-7c1d0e2b15ab4f59d744f92c72552c292f8a833511c8e97feb85b7ee2b4c71af",
+          "decision_id": "d-cddb4ed4b45b28c21fc196c5a5ff1716bd7cdd2e99d223fe49e8a0c7738d2a60",
           "answer_id": "MPT-M10",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-5cdb420c785833178dcb9085a5c447cb0fdc6c294ccae3ff2de2c15d68ba6945",
+          "decision_id": "d-9b137a569cd84ce11d764ca4275da93d5d3f9fdaef4cd0694ab66726976a7626",
           "answer_id": "MPT-M11",
           "freshness": "current",
           "changed": []
         },
         {
-          "decision_id": "d-fddbb0cb86f07b58cb856c16a5b1a064664699f231721f10e1d76968a38b286b",
+          "decision_id": "d-836c69a5ca3165756f6f86e8ec52639edd620c583583fbf5365d3a909c91084d",
           "answer_id": "MPT-M12",
           "freshness": "current",
           "changed": []

@@ -1,7 +1,7 @@
 {
  "format": "statement-sample-1",
  "statements_file": "statements.json",
- "statements_sha256": "79ab5844ed69747a13b909ffc3d41538c8f5b4c5cf546c98bf30a81c1412d6f6",
+ "statements_sha256": "d15d6ed5839a3b39c61ad7e00ed9bbda00c6b65cd0b63bc1e1d548f8b97f80e4",
  "graph": "examples/graph-export/sheet0_graph.json",
  "seed": 1032,
  "n": 12,
@@ -84,14 +84,42 @@
     "model": "gpt-6.1-sol"
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [582, 396, 589, 403] (0-1000 scale)",
+   "source_pointer": "drawing sheet 0, box [582, 396, 589, 403] (0-1000 scale); Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [582, 396, 589, 403] (0-1000 scale). Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "node",
      "S0-GN013"
     ]
    ],
-   "review_fingerprint": "8887b06ffba7bfdbf1bbd31191a8a3d33ba5ddfa775b5f3d95bad0376deda57a",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "symbol": "s74",
+      "class": "general",
+      "box_0_1000": [
+       582.0,
+       395.8,
+       589.1,
+       402.8
+      ],
+      "tag_as_extracted": null,
+      "confidence": 0.81,
+      "source_run": "source/0.json",
+      "tool": "supplied-extraction",
+      "model": "gpt-6.1-sol",
+      "source_manifest": "intake_manifest.json",
+      "source_drawing": {
+       "drawing_id": "OPEN100-0",
+       "revision": "public",
+       "page": 1
+      },
+      "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+      "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+     }
+    ]
+   },
+   "review_fingerprint": "64ab19fbda99577ec867c6c6ab991f4de79149cb150e321b67b313ccd84e3871",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -102,7 +130,46 @@
      402.8
     ],
     "image": "evidence/s0_9b44322a23.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [582, 396, 589, 403] (0-1000 scale)",
+      "sheet": "0",
+      "box_0_1000": [
+       582.0,
+       395.8,
+       589.1,
+       402.8
+      ],
+      "image": "evidence/s0_9b44322a23.jpg",
+      "record": {
+       "sheet": "0",
+       "symbol": "s74",
+       "class": "general",
+       "box_0_1000": [
+        582.0,
+        395.8,
+        589.1,
+        402.8
+       ],
+       "tag_as_extracted": null,
+       "confidence": 0.81,
+       "source_run": "source/0.json",
+       "tool": "supplied-extraction",
+       "model": "gpt-6.1-sol",
+       "source_manifest": "intake_manifest.json",
+       "source_drawing": {
+        "drawing_id": "OPEN100-0",
+        "revision": "public",
+        "page": 1
+       },
+       "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+       "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -137,7 +204,7 @@
     "model": "gpt-6.1-sol"
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [455, 342, 464, 364] (0-1000 scale)",
+   "source_pointer": "drawing sheet 0, box [455, 342, 464, 364] (0-1000 scale); Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [455, 342, 464, 364] (0-1000 scale). Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "claim",
@@ -145,7 +212,35 @@
      "class"
     ]
    ],
-   "review_fingerprint": "d26bc92412c7ec0c94a415d81f108b983d543b878e7d485fa390a7ac6589c5c8",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "symbol": "s46",
+      "class": "valve",
+      "box_0_1000": [
+       455.3,
+       342.3,
+       464.5,
+       364.4
+      ],
+      "tag_as_extracted": null,
+      "confidence": 0.99,
+      "source_run": "source/0.json",
+      "tool": "supplied-extraction",
+      "model": "gpt-6.1-sol",
+      "source_manifest": "intake_manifest.json",
+      "source_drawing": {
+       "drawing_id": "OPEN100-0",
+       "revision": "public",
+       "page": 1
+      },
+      "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+      "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+     }
+    ]
+   },
+   "review_fingerprint": "a4f21e127fdd05a490ec1713eb8ff266bfc9f8be8f70720d47f6e0e4e380b665",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -156,7 +251,46 @@
      364.4
     ],
     "image": "evidence/s0_10fbfe8f6a.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [455, 342, 464, 364] (0-1000 scale)",
+      "sheet": "0",
+      "box_0_1000": [
+       455.3,
+       342.3,
+       464.5,
+       364.4
+      ],
+      "image": "evidence/s0_10fbfe8f6a.jpg",
+      "record": {
+       "sheet": "0",
+       "symbol": "s46",
+       "class": "valve",
+       "box_0_1000": [
+        455.3,
+        342.3,
+        464.5,
+        364.4
+       ],
+       "tag_as_extracted": null,
+       "confidence": 0.99,
+       "source_run": "source/0.json",
+       "tool": "supplied-extraction",
+       "model": "gpt-6.1-sol",
+       "source_manifest": "intake_manifest.json",
+       "source_drawing": {
+        "drawing_id": "OPEN100-0",
+        "revision": "public",
+        "page": 1
+       },
+       "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+       "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -191,7 +325,7 @@
     "model": "gpt-6.1-sol"
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [768, 124, 838, 147] (0-1000 scale), read as “EXTRACTION STEAM ES PID 180-1”",
+   "source_pointer": "drawing sheet 0, box [768, 124, 838, 147] (0-1000 scale), read as “EXTRACTION STEAM ES PID 180-1”; Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [768, 124, 838, 147] (0-1000 scale), read as “EXTRACTION STEAM ES PID 180-1”. Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "claim",
@@ -199,7 +333,35 @@
      "refers_to_system_code"
     ]
    ],
-   "review_fingerprint": "1fa38f251207a2591b6148779b7b41fc64fa316f1b445ab4492261c220b84c70",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "symbol": "s56",
+      "class": "inlet/outlet",
+      "box_0_1000": [
+       767.5,
+       124.4,
+       838.3,
+       147.1
+      ],
+      "tag_as_extracted": "EXTRACTION STEAM ES PID 180-1",
+      "confidence": 0.99,
+      "source_run": "source/0.json",
+      "tool": "supplied-extraction",
+      "model": "gpt-6.1-sol",
+      "source_manifest": "intake_manifest.json",
+      "source_drawing": {
+       "drawing_id": "OPEN100-0",
+       "revision": "public",
+       "page": 1
+      },
+      "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+      "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+     }
+    ]
+   },
+   "review_fingerprint": "8c7cd695bb59f538cf6d6749b94e1e6a4e09116b62e56fa69abc67e88c78acad",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -210,7 +372,46 @@
      147.1
     ],
     "image": "evidence/s0_5dc0f2a17e.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [768, 124, 838, 147] (0-1000 scale), read as “EXTRACTION STEAM ES PID 180-1”",
+      "sheet": "0",
+      "box_0_1000": [
+       767.5,
+       124.4,
+       838.3,
+       147.1
+      ],
+      "image": "evidence/s0_5dc0f2a17e.jpg",
+      "record": {
+       "sheet": "0",
+       "symbol": "s56",
+       "class": "inlet/outlet",
+       "box_0_1000": [
+        767.5,
+        124.4,
+        838.3,
+        147.1
+       ],
+       "tag_as_extracted": "EXTRACTION STEAM ES PID 180-1",
+       "confidence": 0.99,
+       "source_run": "source/0.json",
+       "tool": "supplied-extraction",
+       "model": "gpt-6.1-sol",
+       "source_manifest": "intake_manifest.json",
+       "source_drawing": {
+        "drawing_id": "OPEN100-0",
+        "revision": "public",
+        "page": 1
+       },
+       "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+       "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -245,14 +446,29 @@
     "model": null
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale)",
+   "source_pointer": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale); Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale). Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "edge",
      "E00538"
     ]
    ],
-   "review_fingerprint": "2301224e3ebfe4f91062e41ac81e6ab4bddbb35a0701eeec43466e5138ced622",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "box_0_1000": [
+       538.2,
+       233.0,
+       838.3,
+       673.4
+      ],
+      "source_run": "scripts/line_layers.py",
+      "model": null
+     }
+    ]
+   },
+   "review_fingerprint": "beb041a145e758081d7734aeffbb9fb99a038b61feb2cb669b1ffb1cbdd8205c",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -263,7 +479,33 @@
      673.4
     ],
     "image": "evidence/s0_fd56f5f378.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [538, 233, 838, 673] (0-1000 scale)",
+      "sheet": "0",
+      "box_0_1000": [
+       538.2,
+       233.0,
+       838.3,
+       673.4
+      ],
+      "image": "evidence/s0_fd56f5f378.jpg",
+      "record": {
+       "sheet": "0",
+       "box_0_1000": [
+        538.2,
+        233.0,
+        838.3,
+        673.4
+       ],
+       "source_run": "scripts/line_layers.py",
+       "model": null
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -298,14 +540,29 @@
     "model": null
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [639, 242, 663, 281] (0-1000 scale)",
+   "source_pointer": "drawing sheet 0, box [639, 242, 663, 281] (0-1000 scale); Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [639, 242, 663, 281] (0-1000 scale). Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "edge",
      "E00525"
     ]
    ],
-   "review_fingerprint": "a923efefea051246c50a6731ed1b85b8e2dba23c6b0cd85ba64dde8b0ac205c4",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "box_0_1000": [
+       638.8,
+       242.2,
+       662.6,
+       280.6
+      ],
+      "source_run": "scripts/line_layers.py",
+      "model": null
+     }
+    ]
+   },
+   "review_fingerprint": "c1fbad91566b71221a3ca1d954003492dc2331054e23911f415223865867343c",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -316,7 +573,33 @@
      280.6
     ],
     "image": "evidence/s0_60f22c225b.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [639, 242, 663, 281] (0-1000 scale)",
+      "sheet": "0",
+      "box_0_1000": [
+       638.8,
+       242.2,
+       662.6,
+       280.6
+      ],
+      "image": "evidence/s0_60f22c225b.jpg",
+      "record": {
+       "sheet": "0",
+       "box_0_1000": [
+        638.8,
+        242.2,
+        662.6,
+        280.6
+       ],
+       "source_run": "scripts/line_layers.py",
+       "model": null
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -350,7 +633,7 @@
      "L0-061"
     ]
    ],
-   "review_fingerprint": "0c6f567f5580b516ad02fa8509566d044be5d96e124d0854a4e2c4f327de1e5a",
+   "review_fingerprint": "541141aa212a1a357cab9324b362079c128074120333750275f917ecb488b4b1",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -389,7 +672,7 @@
      "L0-037"
     ]
    ],
-   "review_fingerprint": "3cd548e1b6429fbcc0a93c20ece588904d3688b711a0af5e6dc1d16894acbe02",
+   "review_fingerprint": "2b79781a4baab8639459f3921261fc1b41ce10de4480396753b3a7e729ff4e5c",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -428,7 +711,7 @@
      "L0-131"
     ]
    ],
-   "review_fingerprint": "9912f49588d1cc5958610930be1783bca09f75af0745000266296d04dd4e963f",
+   "review_fingerprint": "aca7f82d6ece62a357bde2735ce3662980330a899fe80aa2aaf09f571fea71df",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -467,7 +750,7 @@
      "S0-IL012"
     ]
    ],
-   "review_fingerprint": "385b10e6936f6a4e5754c06a8b4c8a9e1e6dba231a5b4ff936ee58b0339653d5",
+   "review_fingerprint": "709c047ab5421e953f3065ae4824768a36954494a2286f9c16ea9d1aba3a7a2c",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -507,14 +790,29 @@
     "model": null
    },
    "source_kind": "drawing",
-   "source_pointer": "drawing sheet 0, box [337, 300, 347, 315] (0-1000 scale)",
+   "source_pointer": "drawing sheet 0, box [337, 300, 347, 315] (0-1000 scale); Recorded item appearances (not per-claim verification): 1: drawing sheet 0, box [337, 300, 347, 315] (0-1000 scale). Complete extraction records are in the bound JSON packet",
    "targets": [
     [
      "node",
      "S0-JN-342-307"
     ]
    ],
-   "review_fingerprint": "5d0fc6a5ca3df2b4691096a2cb5f3b1aa75d7b6629a4a5171df93503006d88e1",
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "0",
+      "box_0_1000": [
+       337.2,
+       299.9,
+       347.3,
+       315.0
+      ],
+      "source_run": "scripts/line_layers.py",
+      "model": null
+     }
+    ]
+   },
+   "review_fingerprint": "e43f2da5544bf082fe54b19af3ba35cd7cd882f19456b65085d05d0292b754a4",
    "evidence": {
     "kind": "drawing_crop",
     "sheet": "0",
@@ -525,7 +823,33 @@
      315.0
     ],
     "image": "evidence/s0_c71363e811.jpg",
-    "note": null
+    "note": null,
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 0, box [337, 300, 347, 315] (0-1000 scale)",
+      "sheet": "0",
+      "box_0_1000": [
+       337.2,
+       299.9,
+       347.3,
+       315.0
+      ],
+      "image": "evidence/s0_c71363e811.jpg",
+      "record": {
+       "sheet": "0",
+       "box_0_1000": [
+        337.2,
+        299.9,
+        347.3,
+        315.0
+       ],
+       "source_run": "scripts/line_layers.py",
+       "model": null
+      },
+      "note": null
+     }
+    ]
    },
    "machine_check": {
     "result": "not checked",
@@ -559,7 +883,7 @@
      "S0-PS068"
     ]
    ],
-   "review_fingerprint": "66c1f3f4bc7808d85a6529655c8480046a74b85632894a3ddc482f3ca003791a",
+   "review_fingerprint": "b2533a83e88b38771348ffd44e8b2cf3b7fdb345b0de7ea4ba950cad5787b362",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -598,7 +922,7 @@
      "S0-PS075"
     ]
    ],
-   "review_fingerprint": "762a64dc8dada40eb6d425ed7719a2adc8d0df7d95d2311ddf73d8eba18512da",
+   "review_fingerprint": "6fcc7850acf06f8696793ae7fa5ecfa6cdccb0de6a8ef62c035ad6219d2e8561",
    "evidence": {
     "kind": "endpoints_on_drawing",
     "note": "no source of its own: the line was traced, not read from a box. The crop shows both ends (red, blue) so you can follow it on the sheet",
@@ -613,7 +937,7 @@
  ],
  "review_basis": {
   "schema": "statement-review-binding-1",
-  "graph_sha256": "0c93d74c05b8b76be1fbd22b5a7c0dcde3da632dea600b963367c2ee9a188e99",
+  "graph_sha256": "8467b27489175f9f9585e44a7aad21021c6bcbe0017318325aed7986e81aeef2",
   "machine_model_sha256": null,
   "images": [
    {

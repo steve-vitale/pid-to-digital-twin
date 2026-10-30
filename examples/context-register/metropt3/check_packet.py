@@ -63,6 +63,7 @@ def check(write=False, source_root=DEFAULT_SOURCE, expected_root=None):
     names = ['context.json', 'context.md']
     destinations = [expected_dir / name for name in names]
     protected = [p for p in PACKET.iterdir() if p.is_file()]
+    protected += [p for p in (PACKET / 'history').iterdir() if p.is_file()]
     protected += [source_root / name for name in pins['members']]
     protected += [ROOT / pins['archive']['path']]
     if write:
@@ -76,10 +77,12 @@ def check(write=False, source_root=DEFAULT_SOURCE, expected_root=None):
     with tempfile.TemporaryDirectory(prefix='metropt-context-') as temp:
         scratch = Path(temp)
         base = scratch / 'current'
-        invoke('prepare', PACKET / 'sources.json', source_root, base)
-        invoke('apply', PACKET / 'sources.json', source_root, base, answers=PACKET / 'proposed_answers.csv')
+        prior = PACKET / 'history/before-appearances.context.json'
+        invoke('prepare', PACKET / 'sources.json', source_root, base, register=prior)
+        invoke('apply', PACKET / 'sources.json', source_root, base, register=prior, answers=PACKET / 'proposed_answers.csv')
         original = json.loads((base / 'context.json').read_text(encoding='utf-8'))
-        assert len(original['decisions']) == 12 and len(original['current']) == 6
+        assert len(original['decisions']) == 24 and len(original['current']) == 6
+        assert original['decisions'][:12] == json.loads(prior.read_bytes())['decisions']
         assert not original['ownership_history']
         assert {q['state'] for q in original['current'].values()} == {'partial', 'needs_data'}
         assert sum(q['state'] == 'needs_data' for q in original['current'].values()) == 5

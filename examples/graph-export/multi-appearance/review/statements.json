@@ -1,0 +1,521 @@
+{
+ "format": "statements-1",
+ "graph": "examples/graph-export/multi-appearance/full.graph.json",
+ "graph_sha256": "b0555036d9ebe5ec059956300293919547eb6d15146bdfef295ad026bf81edb6",
+ "graph_hash_kind": "canonical-json",
+ "review_basis": {
+  "schema": "statement-review-binding-1",
+  "graph_sha256": "b0555036d9ebe5ec059956300293919547eb6d15146bdfef295ad026bf81edb6",
+  "machine_model_sha256": null,
+  "images": [],
+  "document_sha256": null,
+  "coverage": "graph/model-only"
+ },
+ "title": "OPEN100 multi-appearance evidence regression",
+ "verdicts": {
+  "source_match": [
+   "match",
+   "mismatch",
+   "unclear"
+  ],
+  "plant_truth": [
+   "confirmed",
+   "wrong",
+   "unknown"
+  ],
+  "rule": "plant_truth only for a statement whose source_match is 'match'"
+ },
+ "ranks": {
+  "1": "control or safety relation",
+  "2": "connection",
+  "3": "value with units",
+  "4": "identity",
+  "5": "descriptive text"
+ },
+ "report_reader": null,
+ "summary": {
+  "statements": 3,
+  "evidence_availability": {
+   "primary_images": 0,
+   "item_appearances": 6,
+   "item_appearance_images": 0,
+   "counting_unit": "statement evidence entries; reused image paths are counted for each statement"
+  },
+  "by_type": {
+   "attribute": 1,
+   "identity": 2
+  },
+  "by_rank": {
+   "4 identity": 3
+  },
+  "by_stratum": {
+   "attribute|4": 1,
+   "identity|4": 2
+  },
+  "evidence": {
+   "drawing_crop": 2,
+   "none": 1
+  },
+  "source_kind": {
+   "drawing": 2,
+   "model": 1
+  },
+  "machine_check": {
+   "not checked": 3
+  }
+ },
+ "skipped": {
+  "internal field: extraction_confidence": 1,
+  "internal field: risk.*": 3,
+  "internal field: role_reason": 1,
+  "internal field: sheets": 1,
+  "internal field: system": 1,
+  "internal field: tag_status": 1,
+  "repeats the tag": 1
+ },
+ "statements": [
+  {
+   "id": "st-5ac5847d4b1c",
+   "subject": "PLANT",
+   "predicate": "kind",
+   "object": "plant",
+   "text": "This model describes OPEN100 multi-appearance evidence regression.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "layer": "item",
+   "group": "the plant",
+   "system": null,
+   "subject_kind": "plant",
+   "source": {
+    "kind": "model",
+    "document": "Extraction run r2-tiles-trace/codex, sheets 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11",
+    "note": "the item cites no source of its own"
+   },
+   "source_kind": "model",
+   "source_pointer": "no source of its own (the model's source document: Extraction run r2-tiles-trace/codex, sheets 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)",
+   "targets": [
+    [
+     "node",
+     "PLANT"
+    ]
+   ],
+   "review_fingerprint": "7529b76ee0b4c6748826b3711c3056b2cb6c41df9ae729e4141aa50e7ad370df",
+   "evidence": {
+    "kind": "none",
+    "note": "no source of its own"
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-874ad7ba435c",
+   "subject": "S2-TK002",
+   "predicate": "kind",
+   "object": "equipment",
+   "text": "CND-TK-165 is a piece of equipment.",
+   "type": "identity",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "identity|4",
+   "layer": "item",
+   "group": "CND-TK-165",
+   "system": null,
+   "subject_kind": "equipment",
+   "source": {
+    "kind": "drawing",
+    "sheet": "2",
+    "box_0_1000": [
+     536.7,
+     228.6,
+     782.7,
+     334.5
+    ],
+    "read_as": "CND-TK-165",
+    "run": "runs/r2-tiles-trace/codex/2.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”; Recorded item appearances (not per-claim verification): 1: drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”; 2: drawing sheet 3, box [146, 324, 322, 429] (0-1000 scale), read as “CND-TK-165”; 3: drawing sheet 4, box [205, 440, 381, 546] (0-1000 scale), read as “CND-TK-165”. Complete extraction records are in the bound JSON packet; Original item citations: {\"source\": \"codex extraction, sheet 2 symbol s24\"}",
+   "targets": [
+    [
+     "node",
+     "S2-TK002"
+    ]
+   ],
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "2",
+      "symbol": "s24",
+      "class": "tank",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 0.99,
+      "source_run": "runs/r2-tiles-trace/codex/2.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     },
+     {
+      "sheet": "3",
+      "symbol": "s2",
+      "class": "tank",
+      "box_0_1000": [
+       146.0,
+       324.2,
+       321.7,
+       429.0
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 0.99,
+      "source_run": "runs/r2-tiles-trace/codex/3.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     },
+     {
+      "sheet": "4",
+      "symbol": "s11",
+      "class": "tank",
+      "box_0_1000": [
+       204.9,
+       440.0,
+       380.6,
+       546.4
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 1.0,
+      "source_run": "runs/r2-tiles-trace/codex/4.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     }
+    ],
+    "citations": {
+     "source": "codex extraction, sheet 2 symbol s24"
+    }
+   },
+   "review_fingerprint": "a383ef7d8d2cac7f85d4fd31ae2f7614dd9f2b610b89b1e715359f34c8bb7e9f",
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "2",
+    "box_0_1000": [
+     536.7,
+     228.6,
+     782.7,
+     334.5
+    ],
+    "image": null,
+    "note": "no sheet image given (--image SHEET=PNG)",
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "image": null,
+      "record": {
+       "sheet": "2",
+       "symbol": "s24",
+       "class": "tank",
+       "box_0_1000": [
+        536.7,
+        228.6,
+        782.7,
+        334.5
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 0.99,
+       "source_run": "runs/r2-tiles-trace/codex/2.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     },
+     {
+      "index": 2,
+      "locator": "drawing sheet 3, box [146, 324, 322, 429] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "3",
+      "box_0_1000": [
+       146.0,
+       324.2,
+       321.7,
+       429.0
+      ],
+      "image": null,
+      "record": {
+       "sheet": "3",
+       "symbol": "s2",
+       "class": "tank",
+       "box_0_1000": [
+        146.0,
+        324.2,
+        321.7,
+        429.0
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 0.99,
+       "source_run": "runs/r2-tiles-trace/codex/3.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     },
+     {
+      "index": 3,
+      "locator": "drawing sheet 4, box [205, 440, 381, 546] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "4",
+      "box_0_1000": [
+       204.9,
+       440.0,
+       380.6,
+       546.4
+      ],
+      "image": null,
+      "record": {
+       "sheet": "4",
+       "symbol": "s11",
+       "class": "tank",
+       "box_0_1000": [
+        204.9,
+        440.0,
+        380.6,
+        546.4
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 1.0,
+       "source_run": "runs/r2-tiles-trace/codex/4.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     }
+    ],
+    "item_citations": {
+     "source": "codex extraction, sheet 2 symbol s24"
+    }
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  },
+  {
+   "id": "st-1b75d8a48fed",
+   "subject": "S2-TK002",
+   "predicate": "is_a",
+   "object": "tank",
+   "text": "CND-TK-165 is classed as a tank by the extraction.",
+   "type": "attribute",
+   "rank": 4,
+   "rank_label": "identity",
+   "stratum": "attribute|4",
+   "layer": "item",
+   "group": "CND-TK-165",
+   "system": null,
+   "subject_kind": "equipment",
+   "source": {
+    "kind": "drawing",
+    "sheet": "2",
+    "box_0_1000": [
+     536.7,
+     228.6,
+     782.7,
+     334.5
+    ],
+    "read_as": "CND-TK-165",
+    "run": "runs/r2-tiles-trace/codex/2.json",
+    "model": "gpt-6.1-sol"
+   },
+   "source_kind": "drawing",
+   "source_pointer": "drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”; Recorded item appearances (not per-claim verification): 1: drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”; 2: drawing sheet 3, box [146, 324, 322, 429] (0-1000 scale), read as “CND-TK-165”; 3: drawing sheet 4, box [205, 440, 381, 546] (0-1000 scale), read as “CND-TK-165”. Complete extraction records are in the bound JSON packet; Original item citations: {\"source\": \"codex extraction, sheet 2 symbol s24\"}",
+   "targets": [
+    [
+     "claim",
+     "S2-TK002",
+     "class"
+    ],
+    [
+     "claim",
+     "S2-TK002",
+     "type"
+    ]
+   ],
+   "item_evidence": {
+    "provenance": [
+     {
+      "sheet": "2",
+      "symbol": "s24",
+      "class": "tank",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 0.99,
+      "source_run": "runs/r2-tiles-trace/codex/2.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     },
+     {
+      "sheet": "3",
+      "symbol": "s2",
+      "class": "tank",
+      "box_0_1000": [
+       146.0,
+       324.2,
+       321.7,
+       429.0
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 0.99,
+      "source_run": "runs/r2-tiles-trace/codex/3.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     },
+     {
+      "sheet": "4",
+      "symbol": "s11",
+      "class": "tank",
+      "box_0_1000": [
+       204.9,
+       440.0,
+       380.6,
+       546.4
+      ],
+      "tag_as_extracted": "CND-TK-165",
+      "confidence": 1.0,
+      "source_run": "runs/r2-tiles-trace/codex/4.json",
+      "tool": "codex",
+      "model": "gpt-6.1-sol"
+     }
+    ],
+    "citations": {
+     "source": "codex extraction, sheet 2 symbol s24"
+    }
+   },
+   "review_fingerprint": "e21bdb39cd6414df02f0ac6773199e3326c0075b0f307eb687a8b14181dd1daf",
+   "evidence": {
+    "kind": "drawing_crop",
+    "sheet": "2",
+    "box_0_1000": [
+     536.7,
+     228.6,
+     782.7,
+     334.5
+    ],
+    "image": null,
+    "note": "no sheet image given (--image SHEET=PNG)",
+    "item_appearances": [
+     {
+      "index": 1,
+      "locator": "drawing sheet 2, box [537, 229, 783, 334] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "2",
+      "box_0_1000": [
+       536.7,
+       228.6,
+       782.7,
+       334.5
+      ],
+      "image": null,
+      "record": {
+       "sheet": "2",
+       "symbol": "s24",
+       "class": "tank",
+       "box_0_1000": [
+        536.7,
+        228.6,
+        782.7,
+        334.5
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 0.99,
+       "source_run": "runs/r2-tiles-trace/codex/2.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     },
+     {
+      "index": 2,
+      "locator": "drawing sheet 3, box [146, 324, 322, 429] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "3",
+      "box_0_1000": [
+       146.0,
+       324.2,
+       321.7,
+       429.0
+      ],
+      "image": null,
+      "record": {
+       "sheet": "3",
+       "symbol": "s2",
+       "class": "tank",
+       "box_0_1000": [
+        146.0,
+        324.2,
+        321.7,
+        429.0
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 0.99,
+       "source_run": "runs/r2-tiles-trace/codex/3.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     },
+     {
+      "index": 3,
+      "locator": "drawing sheet 4, box [205, 440, 381, 546] (0-1000 scale), read as “CND-TK-165”",
+      "sheet": "4",
+      "box_0_1000": [
+       204.9,
+       440.0,
+       380.6,
+       546.4
+      ],
+      "image": null,
+      "record": {
+       "sheet": "4",
+       "symbol": "s11",
+       "class": "tank",
+       "box_0_1000": [
+        204.9,
+        440.0,
+        380.6,
+        546.4
+       ],
+       "tag_as_extracted": "CND-TK-165",
+       "confidence": 1.0,
+       "source_run": "runs/r2-tiles-trace/codex/4.json",
+       "tool": "codex",
+       "model": "gpt-6.1-sol"
+      },
+      "note": "no sheet image supplied for this appearance"
+     }
+    ],
+    "item_citations": {
+     "source": "codex extraction, sheet 2 symbol s24"
+    }
+   },
+   "machine_check": {
+    "result": "not checked",
+    "why": "no structured source in the repository to check against (an extracted drawing is checked by eye)"
+   }
+  }
+ ]
+}

@@ -29,13 +29,18 @@ Then run the context workflow against the current original bytes:
 
 ```sh
 python -S scripts/context_register.py prepare --model data/bayer_rt/process_model.json --questions my-bayer-question/screen/questions.json --sources examples/context-register/bayer/sources.json --source-root data/external --out my-bayer-question/prepared
-python -S scripts/context_register.py apply --model data/bayer_rt/process_model.json --questions my-bayer-question/screen/questions.json --sources examples/context-register/bayer/sources.json --source-root data/external --answers examples/context-register/bayer/proposed_answer.csv --out my-bayer-question/current
+python -S scripts/context_register.py apply --model data/bayer_rt/process_model.json --questions my-bayer-question/screen/questions.json --sources examples/context-register/bayer/sources.json --source-root data/external --register examples/context-register/bayer/history/before-appearances.context.json --answers examples/context-register/bayer/proposed_answer.csv --out my-bayer-question/current
 ```
 
 The supplied CSV is an AI-authored proposed interpretation of the temperature-control narrative on PDF page 37
 (printed page 29). `source_key.json` records the exact locator, file identity, interpretation and remaining requests.
 Neither the report PDF nor its figures are redistributed here. Historical model data and its existing caveats
 are not revalidated or upgraded by attaching this answer.
+
+The [prior register](history/before-appearances.context.json) retains the original proposal unchanged. The current
+sheet is an explicitly labelled AI re-proposal against expanded item evidence; both decision snapshots remain.
+The [old answer sheet](history/before-appearances.answers.csv) refuses against the revised evidence. This software
+refresh adds no human review, plant-truth verdict or opportunity claim.
 
 For your own unit, the owner must examine the operating sequence and representative measured duties together,
 including their timing and operating states. Record further independently sourced answers without overwriting

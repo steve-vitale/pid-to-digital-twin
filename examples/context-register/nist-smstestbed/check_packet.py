@@ -38,7 +38,8 @@ def check():
     manifest = json.loads((PACKET/'sources.json').read_text(encoding='utf-8'))
     key = json.loads((PACKET/'source_key.json').read_text(encoding='utf-8'))
     graph = json.loads((PACKET/'run/enriched_graph.json').read_text(encoding='utf-8'))
-    assert len(original['decisions']) == 10 and len(original['current']) == 8
+    assert len(original['decisions']) == 20 and len(original['current']) == 8
+    assert original['decisions'][:10] == json.loads((PACKET/'history/before-appearances.context.json').read_bytes())['decisions']
     assert len(graph['questions']) == graph['counts']['questions'] == 8
     assert not original['ownership_history']
     assert all(q['owner'] is None and q['ownership']=='needs_owner' for q in original['current'].values())

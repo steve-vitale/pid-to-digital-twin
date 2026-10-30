@@ -22,7 +22,12 @@
             "note": "the item cites no source of its own"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "model",
+        "document": "Illustrative training fixtures licensed under the repository MIT license; not engineering evidence",
+        "note": "the item cites no source of its own"
+      }
     },
     {
       "id": "BL",
@@ -31,7 +36,12 @@
       "name": "battery limit",
       "aliases": [],
       "status": "confirmed",
-      "attributes": []
+      "attributes": [],
+      "source": {
+        "kind": "model",
+        "document": "Illustrative training fixtures licensed under the repository MIT license; not engineering evidence",
+        "note": "the item cites no source of its own"
+      }
     },
     {
       "id": "P-101",
@@ -59,7 +69,14 @@
             "document": "basis.txt"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "basis.txt"
+      },
+      "citations": {
+        "source": "basis.txt"
+      }
     },
     {
       "id": "P-102",
@@ -87,7 +104,14 @@
             "document": "service-sheet.txt"
           }
         }
-      ]
+      ],
+      "source": {
+        "kind": "document",
+        "document": "service-sheet.txt"
+      },
+      "citations": {
+        "source": "service-sheet.txt"
+      }
     }
   ],
   "edges": [
@@ -101,6 +125,9 @@
       "source": {
         "kind": "document",
         "document": "basis.txt"
+      },
+      "citations": {
+        "source": "basis.txt"
       }
     },
     {
@@ -113,6 +140,9 @@
       "source": {
         "kind": "document",
         "document": "service-sheet.txt"
+      },
+      "citations": {
+        "source": "service-sheet.txt"
       }
     }
   ],
@@ -147,13 +177,13 @@
         ],
         "answers": [
           {
-            "decision_id": "d-f36a53b22867c982186dd0e7c79a71c142fdb7420905b69c1bb21d6daf22cf6f",
+            "decision_id": "d-3dc1d0b0e1c248e4125ce2be08ea3d9b32187a23def071a7fc688aa1db260a73",
             "answer_id": "basis-pressure",
             "freshness": "current",
             "changed": []
           },
           {
-            "decision_id": "d-8207c6fc0fac2ead596bf69bbbd2f58deb8e14f50982e80472532473e44df6aa",
+            "decision_id": "d-4efd4e4020cce7484f7d2fa4fe4e68d77c8aa0f5b0927821493bf195fd15b26e",
             "answer_id": "later-pressure",
             "freshness": "current",
             "changed": []
@@ -189,7 +219,7 @@
         "disputed_claims": [],
         "answers": [
           {
-            "decision_id": "d-3a823501ff7be8b013f3a9793bf9184b0a8cf4d43566d5bea741c37c3d125934",
+            "decision_id": "d-7417447c1fc4e668dd05c0f5e8535ba4aeaa9b478d2b04ab9484e6e9b6581c3a",
             "answer_id": "service",
             "freshness": "current",
             "changed": []
@@ -225,7 +255,7 @@
         "disputed_claims": [],
         "answers": [
           {
-            "decision_id": "d-e860769e811d9fdde25c7e2fafdccdf43a3adfb6fb2b400e5fe97e2037dce8de",
+            "decision_id": "d-83420f005a3b0a2e73529dca0099aa5fe1589f55df8c53190425ac7a78b09c32",
             "answer_id": "range-request",
             "freshness": "current",
             "changed": []

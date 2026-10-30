@@ -104,10 +104,11 @@ approved cross-zone service are separate site architectures, not settings enable
 
 ## Evidence and limits
 
-The [sample asset response](sample_asset.json) is a recorded real SDK response for `P-1` from the checker's
-generated Bayer snapshot with questions, using the two inputs and canonical serialization above. Its SHA-256
+The [sample asset response](sample_asset.json) is a recorded `Snapshot.asset` application response for `P-1`
+from the generated Bayer snapshot with questions, using the two inputs and canonical serialization above. The
+protocol checker separately exercises this response through the SDK. Its SHA-256
 identifies that generated file, not the plain committed graph used in the standalone commands. Its load
-timestamp is historical and its source acquisition time is unknown. The checker compares
+timestamp records this local snapshot load and its source acquisition time is unknown. The checker compares
 the full asset to the committed input, checks typed relationships/questions, traverses larger synthetic pages,
 and exercises expected errors without losing the session. Regression controls also cover malformed inputs,
 size/escaping limits, snapshot immutability and refusal without source fetching.

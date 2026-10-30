@@ -1,0 +1,3260 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "CTX-01@PT312",
+      "answer_id": "PRONTO-F01",
+      "claim_key": "PT312.report-variable-and-unit",
+      "value": "air delivery pressure; barg",
+      "answer": "Table 2 assigns PT312 to air delivery pressure, with unit barg. This describes the report, not a verified present-day installation.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "9e97b04eb24f8026337041d8424df1ce4ca413730f7c17b21a51d90228d7f73f",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-01@PT312",
+          "question_id": "CTX-01",
+          "family": "engineering_context",
+          "question": "What variable and unit does the report assign to PT312?",
+          "about": "PT312",
+          "assets": [
+            {
+              "id": "PT312",
+              "tag": "PT312"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PT312",
+            "content": {
+              "id": "PT312",
+              "kind": "instrument",
+              "tag": "PT312",
+              "name": "Air delivery pressure",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Air delivery pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f01",
+          "locator": "PDF page 6 (printed 6), Table 2, PT312 row"
+        }
+      },
+      "previous": null,
+      "id": "d-6942f06aa4aa9a600869f65f3071e660a6c8a1bcab5aaa18d9846af0b56ec9ca"
+    },
+    {
+      "question_id": "CTX-02@V10",
+      "answer_id": "PRONTO-F02",
+      "claim_key": "V10.report-purpose",
+      "value": "induced input-air leakage to atmosphere",
+      "answer": "The report says manually opening V10 leaks part of the input air to atmosphere to simulate developing air leakage.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "be2e4f64499f0c47342276a578c724fc6b27eec523c76fa22c36097e08b28bf2",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-02@V10",
+          "question_id": "CTX-02",
+          "family": "engineering_context",
+          "question": "What purpose does the report give manual valve V10 in the leakage experiment?",
+          "about": "V10",
+          "assets": [
+            {
+              "id": "V10",
+              "tag": "V10"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "V10",
+            "content": {
+              "id": "V10",
+              "kind": "manual_valve",
+              "tag": "V10",
+              "name": "Manual valve label; no alias between V10 and V11",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Manual valve label; no alias between V10 and V11",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f02",
+          "locator": "PDF page 11 (printed 11), Air leakage (0911 Test4/5/6), first paragraph"
+        }
+      },
+      "previous": null,
+      "id": "d-586b659cdf9f939dc039034ab4d35c5865372fe874ae9162ec60712d35418133"
+    },
+    {
+      "question_id": "CTX-03@PRONTO-FACILITY",
+      "answer_id": "PRONTO-F03",
+      "claim_key": "Test5.report-flow-conditions",
+      "value": "air 120 sm3/h; water 0.1 kg/s",
+      "answer": "Table 6 gives Test5 air flow 120 sm3/h and water flow 0.1 kg/s. These are published test conditions, not current setpoints.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "8123729f7eff0bec303fe82099af70cfba20fa1b14ceb1bbde68fafff5a19dd1",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-03@PRONTO-FACILITY",
+          "question_id": "CTX-03",
+          "family": "engineering_context",
+          "question": "Which air and water flow conditions does the report give for Test5?",
+          "about": "PRONTO-FACILITY",
+          "assets": [
+            {
+              "id": "PRONTO-FACILITY",
+              "tag": "PRONTO-FACILITY"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "content": {
+              "id": "PRONTO-FACILITY",
+              "kind": "equipment",
+              "tag": "PRONTO-FACILITY",
+              "name": "PRONTO experimental multiphase flow facility",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "PRONTO experimental multiphase flow facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "experimental_facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT302",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT305",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI101",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 39"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI503",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 41"
+                }
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT PDF page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "TT402",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 19"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V11",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f03",
+          "locator": "PDF page 12 (printed 12), Table 6, Test5 column"
+        }
+      },
+      "previous": null,
+      "id": "d-a43abaced8787a2009ea579abe5592f2b85daec38c92f39b35e0da4d0dba86a8"
+    },
+    {
+      "question_id": "CTX-04@FIC301",
+      "answer_id": "PRONTO-F04",
+      "claim_key": "FIC301.input-measurement-label",
+      "value": "FT302",
+      "answer": "Figure 1 draws FT302 beside FIC301 on the lower parallel air branch, joined by a dashed control-signal line. This figure alone does not establish the authoritative pairing or whether any FIR and FT identifiers are equivalent.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "0a5924c18a91e434709b6d782abe7e26bda71804c46e9f03c2f9a03e349c9d70",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-04@FIC301",
+          "question_id": "CTX-04",
+          "family": "engineering_context",
+          "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f04",
+          "locator": "PDF page 5 (printed 5), Figure 1, lower of the two green parallel inlet-air branches: FT302 and FIC301 with dashed signal line"
+        }
+      },
+      "previous": null,
+      "id": "d-52b6591921a4fc007e60658afce2c07c09c4d6bbe4991b8f84beefe626c1ca98"
+    },
+    {
+      "question_id": "CTX-05@FIC301",
+      "answer_id": "PRONTO-F05",
+      "claim_key": "FIC301.report-setpoint-channel",
+      "value": "FIC301/PID1/SP.CV; Sm3/h",
+      "answer": "The report lists FIC301/PID1/SP.CV as inlet air flow rate controller 2 set point, in Sm3/h. It gives no current setpoint value here.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "d46388a35b49c9b4114f56dc7e2299e7fba89a41463c894046f6087b3659d45d",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-05@FIC301",
+          "question_id": "CTX-05",
+          "family": "engineering_context",
+          "question": "Which setpoint channel and unit does the report document for FIC301?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f05",
+          "locator": "PDF page 7 (printed 7), Table 2 continuation, FIC301/PID1/SP.CV row"
+        }
+      },
+      "previous": null,
+      "id": "d-f4115d347d04064ace0972aae522586a962361d0f0aabc8f828816eb30d365b5"
+    },
+    {
+      "question_id": "CTX-06@PT312",
+      "answer_id": "PRONTO-F06",
+      "claim_key": "PT312.settings-entered-HH-H",
+      "value": "95; 90",
+      "answer": "The workbook enters HiHi 95 and Hi 90 for PT312 (bar). G16 also says scale 0-15 bar and not enabled. Preserve the entered numbers and the scale inconsistency; do not turn them into enabled physical-pressure limits.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "8f98c4bb084a599f7c325f18da2e007cfad5c7c4b70d2c1b474759d553fb69fd",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-06@PT312",
+          "question_id": "CTX-06",
+          "family": "engineering_context",
+          "question": "What Hi and HiHi values are entered for PT312, and what limits their interpretation?",
+          "about": "PT312",
+          "assets": [
+            {
+              "id": "PT312",
+              "tag": "PT312"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PT312",
+            "content": {
+              "id": "PT312",
+              "kind": "instrument",
+              "tag": "PT312",
+              "name": "Air delivery pressure",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Air delivery pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f06",
+          "locator": "Worksheet 'Sheet1', B16:D16 (tag, HiHi, Hi); remarks G16 must be read with the numbers"
+        }
+      },
+      "previous": null,
+      "id": "d-c6671d71eada465f1772655c57ea2e0212945ee9bf2ca3c55772922b238faa61"
+    },
+    {
+      "question_id": "CTX-07@PT312",
+      "answer_id": "PRONTO-F07",
+      "claim_key": "PT312.settings-enabled-state",
+      "value": "not enabled",
+      "answer": "G16 explicitly says not enabled. This negative control prevents treating numeric cells C16:F16 as enabled process alarms. It does not describe the separate historical module-health alarms.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "97f4b5c8283c4443c8f641f1a64e9e7850c0a39f0ee63bab1d942b0b8e2a47a7",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-07@PT312",
+          "question_id": "CTX-07",
+          "family": "engineering_context",
+          "question": "Does the settings workbook mark the PT312 limit row as enabled?",
+          "about": "PT312",
+          "assets": [
+            {
+              "id": "PT312",
+              "tag": "PT312"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PT312",
+            "content": {
+              "id": "PT312",
+              "kind": "instrument",
+              "tag": "PT312",
+              "name": "Air delivery pressure",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Air delivery pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "pressure",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Table 2 page 6"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f07",
+          "locator": "Worksheet 'Sheet1', B16 and G16"
+        }
+      },
+      "previous": null,
+      "id": "d-7762fa49826bbc1c603cf94d51d061a360e2fdc16b16468b01bf7de9fd37e077"
+    },
+    {
+      "question_id": "CTX-08@FIC301",
+      "answer_id": "PRONTO-F08",
+      "claim_key": "FIC301.settings-enabled-state",
+      "value": "not enabled",
+      "answer": "The row enters HiHi 100 and Hi 95, while G13 says air inputs; scale 0-4250, not enabled, no units. It supports no assertion that a high process alarm is enabled.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "f60630d9e9d0658c4fcef50ee8124867e42bfdd60aa4ef87a72c214ff1bb8cc9",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-08@FIC301",
+          "question_id": "CTX-08",
+          "family": "engineering_context",
+          "question": "Does the settings workbook support an enabled high limit for FIC301?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f08",
+          "locator": "Worksheet 'Sheet1', B13:D13 and G13"
+        }
+      },
+      "previous": null,
+      "id": "d-0ec85db0c8e8e99c88af2e7e6b36b7fafd30f4e77c02d3104034dbb5055241ec"
+    },
+    {
+      "question_id": "CTX-09@FT305",
+      "answer_id": "PRONTO-F09",
+      "claim_key": "FT305.settings-enabled-state",
+      "value": "not enabled",
+      "answer": "The FT305 row enters HiHi 95, Hi 90, Lo 10 and LoLo 5. Its remark gives scale 0-200 sm3/h and not enabled. No conversion or enabled-limit inference has been made.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "6c41e93e548b28807e283eb913bc34d4473e8e108d4a950fde1bf3ca8017a51a",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-09@FT305",
+          "question_id": "CTX-09",
+          "family": "engineering_context",
+          "question": "What does the settings workbook say about FT305 limit entries and enablement?",
+          "about": "FT305",
+          "assets": [
+            {
+              "id": "FT305",
+              "tag": "FT305"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FT305",
+            "content": {
+              "id": "FT305",
+              "kind": "instrument",
+              "tag": "FT305",
+              "name": "Input air meter label",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air meter label",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "flow",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT305",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f09",
+          "locator": "Worksheet 'Sheet1', B15:F15 and G15"
+        }
+      },
+      "previous": null,
+      "id": "d-8d84b75379ed43c0b55c4caf42dc15a72866cd62925e7f46587192029fe365e2"
+    },
+    {
+      "question_id": "CTX-10@LI101",
+      "answer_id": "PRONTO-F10",
+      "claim_key": "LI101.settings-entered-limits",
+      "value": "HH 1.6; H 1.4; L 0.2; LL 0.1; m",
+      "answer": "The LI101 (m) row enters HiHi 1.6, Hi 1.4, Lo 0.2 and LoLo 0.1. Its remark says water tank level, scale 0-2m. The absence of not enabled does not positively establish enablement; confirm against an authoritative configuration export.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation. Obtain the alarm enable flags and configuration revision for LI101 from a controlled DeltaV export.",
+      "evidence_fingerprint": "f4cc5c209d260f32ec0e798861473c3f885288fa06443097817c890bc260e238",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-10@LI101",
+          "question_id": "CTX-10",
+          "family": "engineering_context",
+          "question": "What LI101 level limits are entered, and does this row establish enablement?",
+          "about": "LI101",
+          "assets": [
+            {
+              "id": "LI101",
+              "tag": "LI101"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "LI101",
+              "fields": [
+                "Obtain the alarm enable flags and configuration revision for LI101 from a controlled DeltaV export."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Obtain the missing controlled source and its revision."
+                }
+              ],
+              "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+            }
+          ],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "LI101",
+            "content": {
+              "id": "LI101",
+              "kind": "instrument",
+              "tag": "LI101",
+              "name": "Water tank level",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Water tank level",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 39"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 39"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "level",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 39"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "LI101",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 39"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f10",
+          "locator": "Worksheet 'Sheet1', B39:G39"
+        }
+      },
+      "previous": null,
+      "id": "d-06914218060bc1d2ea920e9d96a844d406e6e871f83c16d6ea8357e05659f245"
+    },
+    {
+      "question_id": "CTX-11@TT402",
+      "answer_id": "PRONTO-F11",
+      "claim_key": "TT402.settings-enabled-state",
+      "value": "not stated",
+      "answer": "The TT402 row enters HiHi 95, Hi 90, Lo 10 and LoLo 5 and describes mixing-zone temperature with scale 0-100 degrees C. No enabled flag is given in this row. Obtain configuration evidence before asserting enablement.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation. Obtain TT402 enabled-state flags, measurement units and a controlled configuration revision.",
+      "evidence_fingerprint": "cfcb394de03e11e7d0682a33e1fbf8825578a01eb86acc5a21a7569700e768b2",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-11@TT402",
+          "question_id": "CTX-11",
+          "family": "engineering_context",
+          "question": "Does TT402 have a documented enabled high-temperature process alarm?",
+          "about": "TT402",
+          "assets": [
+            {
+              "id": "TT402",
+              "tag": "TT402"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "TT402",
+              "fields": [
+                "Obtain TT402 enabled-state flags, measurement units and a controlled configuration revision."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Obtain the missing controlled source and its revision."
+                }
+              ],
+              "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+            }
+          ],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "TT402",
+            "content": {
+              "id": "TT402",
+              "kind": "instrument",
+              "tag": "TT402",
+              "name": "Mixing-zone temperature (settings row)",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Mixing-zone temperature (settings row)",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 19"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 19"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "temperature",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 19"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "TT402",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 19"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f11",
+          "locator": "Worksheet 'Sheet1', B19:G19"
+        }
+      },
+      "previous": null,
+      "id": "d-ad11fce5da4ab5f362800b3cab0934183b3239876da9cfb0049ad92f8b8b16a1"
+    },
+    {
+      "question_id": "CTX-12@LI503",
+      "answer_id": "PRONTO-F12",
+      "claim_key": "LI503.settings-unit-certainty",
+      "value": "source says not sure",
+      "answer": "G41 describes the water-coalescer interface as in percentage and explicitly says not sure. The row enters HiHi 70, Hi 55, Lo 45 and LoLo 30. Its engineering basis and enablement remain unconfirmed.",
+      "answer_state": "needs_data",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation. Request the LI503 interface measurement basis, scaling and enabled-state flags from controlled configuration and instrument documentation.",
+      "evidence_fingerprint": "f70c5828ebb8bd352298c194158b0ebcdf33e22c528bc8e448850f4fda24fb8f",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-12@LI503",
+          "question_id": "CTX-12",
+          "family": "engineering_context",
+          "question": "Which uncertainty in the LI503 settings row requires an engineering check?",
+          "about": "LI503",
+          "assets": [
+            {
+              "id": "LI503",
+              "tag": "LI503"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "LI503",
+              "fields": [
+                "Request the LI503 interface measurement basis, scaling and enabled-state flags from controlled configuration and instrument documentation."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Obtain the missing controlled source and its revision."
+                }
+              ],
+              "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+            }
+          ],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "LI503",
+            "content": {
+              "id": "LI503",
+              "kind": "instrument",
+              "tag": "LI503",
+              "name": "Water coalescer interface (units uncertain in source)",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Water coalescer interface (units uncertain in source)",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 41"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 41"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "level",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-ALARMS Sheet1 row 41"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "LI503",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 41"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-ALARMS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+          "locator_id": "f12",
+          "locator": "Worksheet 'Sheet1', B41:G41"
+        }
+      },
+      "previous": null,
+      "id": "d-425ba03a4a7a954ca5969ab6b4477c982d9d35f8e4818426f9b62cdda602fb37"
+    },
+    {
+      "question_id": "CTX-13@PRONTO-FACILITY",
+      "answer_id": "PRONTO-F13",
+      "claim_key": "Test5_0.ops-air-flow",
+      "value": "120 sm^3/h",
+      "answer": "The 2017-09-11 log names Air leakage, run 0911Test5_0, at 10:34 and records air flow 120 sm^3/h. It records a historical experiment condition.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "9a902601d4bb15a58c51c489a927dc13b5f0446d526ce0b81b6960fe2f220e2c",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-13@PRONTO-FACILITY",
+          "question_id": "CTX-13",
+          "family": "engineering_context",
+          "question": "What air flow condition is recorded for the 10:34 Test5_0 measurement?",
+          "about": "PRONTO-FACILITY",
+          "assets": [
+            {
+              "id": "PRONTO-FACILITY",
+              "tag": "PRONTO-FACILITY"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "content": {
+              "id": "PRONTO-FACILITY",
+              "kind": "equipment",
+              "tag": "PRONTO-FACILITY",
+              "name": "PRONTO experimental multiphase flow facility",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "PRONTO experimental multiphase flow facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "experimental_facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT302",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT305",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI101",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 39"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI503",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 41"
+                }
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT PDF page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "TT402",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 19"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V11",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-OPS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+          "locator_id": "f13",
+          "locator": "Worksheet 'Operation Log 0911', A11:C11 and G11:H11; date B1"
+        }
+      },
+      "previous": null,
+      "id": "d-346aa1d5abcf07b6bed46392dc2cdae0e75cb7ec2c517aeb52ab664fef314fbd"
+    },
+    {
+      "question_id": "CTX-14@PRONTO-FACILITY",
+      "answer_id": "PRONTO-F14",
+      "claim_key": "Test5_0.ops-water-flow",
+      "value": "0.1 kg/s",
+      "answer": "The Test5_0 section records water flow rate 0.1 kg/s. It does not establish the current plant flow.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "9e7d203b55b3aa743c660ba8a4b82c77ab7c84f66dfb163e7266601682ce9b97",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-14@PRONTO-FACILITY",
+          "question_id": "CTX-14",
+          "family": "engineering_context",
+          "question": "What water flow condition is recorded for Test5_0?",
+          "about": "PRONTO-FACILITY",
+          "assets": [
+            {
+              "id": "PRONTO-FACILITY",
+              "tag": "PRONTO-FACILITY"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "content": {
+              "id": "PRONTO-FACILITY",
+              "kind": "equipment",
+              "tag": "PRONTO-FACILITY",
+              "name": "PRONTO experimental multiphase flow facility",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "PRONTO experimental multiphase flow facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "experimental_facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT302",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT305",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI101",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 39"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI503",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 41"
+                }
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT PDF page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "TT402",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 19"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V11",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-OPS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+          "locator_id": "f14",
+          "locator": "Worksheet 'Operation Log 0911', G12:H12 in run 0911Test5_0 (B11)"
+        }
+      },
+      "previous": null,
+      "id": "d-0b9da14886170af9248495f9d7e79e192a2fbad4e6acfb2ea0cfd8a895ccc63e"
+    },
+    {
+      "question_id": "CTX-15@V10",
+      "answer_id": "PRONTO-F15",
+      "claim_key": "V10.ops-movement-20170911-1040",
+      "value": "0 to 5 degree",
+      "answer": "J18:M18 records Manual valve V10 at 10:40, from 0 to 5 degree on 2017-09-11. This is a log entry, not independent confirmation of valve travel.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "de3e736bf0f99c88c659bf9a19ec5ef202862611dfed6bbdba7d931eeee75e7e",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-15@V10",
+          "question_id": "CTX-15",
+          "family": "engineering_context",
+          "question": "Which first V10 movement is explicitly recorded in the day-3 log?",
+          "about": "V10",
+          "assets": [
+            {
+              "id": "V10",
+              "tag": "V10"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "V10",
+            "content": {
+              "id": "V10",
+              "kind": "manual_valve",
+              "tag": "V10",
+              "name": "Manual valve label; no alias between V10 and V11",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Manual valve label; no alias between V10 and V11",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-OPS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+          "locator_id": "f15",
+          "locator": "Worksheet 'Operation Log 0911', J18:M18; date B1"
+        }
+      },
+      "previous": null,
+      "id": "d-cf23177790cdbd874a42dacdbd4d8f77ca2ee6f698a35dc9ae2b9ab80ff1501d"
+    },
+    {
+      "question_id": "CTX-16@V10",
+      "answer_id": "PRONTO-F16",
+      "claim_key": "V10.ops-movement-20170911-1050",
+      "value": "5 to 10 degree",
+      "answer": "J27:M27 records Manual valve V10 at 10:50, from 5 to 10 degree on 2017-09-11.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "78bd1bcbcb1c11060d24cfe681004277b19a849ce69167ee7c2535cc6b1d6b74",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-16@V10",
+          "question_id": "CTX-16",
+          "family": "engineering_context",
+          "question": "Which next V10 movement is explicitly recorded in the day-3 log?",
+          "about": "V10",
+          "assets": [
+            {
+              "id": "V10",
+              "tag": "V10"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "V10",
+            "content": {
+              "id": "V10",
+              "kind": "manual_valve",
+              "tag": "V10",
+              "name": "Manual valve label; no alias between V10 and V11",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Manual valve label; no alias between V10 and V11",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-OPS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+          "locator_id": "f16",
+          "locator": "Worksheet 'Operation Log 0911', J27:M27; date B1"
+        }
+      },
+      "previous": null,
+      "id": "d-4a29f48794cac4e937d07b6c8bec5b92d9a15bc6524d92cf98e93f4d50829a1a"
+    },
+    {
+      "question_id": "CTX-17@V11",
+      "answer_id": "PRONTO-F17",
+      "claim_key": "V11.ops-Test5_0-opening",
+      "value": "0 deg",
+      "answer": "The Valve opening field names V11 and 0 deg. This field provides no authority to alias V11 to V10; the packet retains V11 as a distinct ID.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation. Ask a qualified reviewer to reconcile the log fields against the experiment procedure; do not alias V11 to V10.",
+      "evidence_fingerprint": "4106557614435da6638c6931170cc104d29bc2a643e1962a50a5b8ac2aff2f23",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-17@V11",
+          "question_id": "CTX-17",
+          "family": "engineering_context",
+          "question": "Which valve is named in the opening field of Test5_0, and may it be silently joined to V10?",
+          "about": "V11",
+          "assets": [
+            {
+              "id": "V11",
+              "tag": "V11"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [
+            {
+              "item": "V11",
+              "fields": [
+                "Ask a qualified reviewer to reconcile the log fields against the experiment procedure; do not alias V11 to V10."
+              ],
+              "where": [
+                {
+                  "kind": "controlled engineering record",
+                  "description": "Obtain the missing controlled source and its revision."
+                }
+              ],
+              "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+            }
+          ],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "V11",
+            "content": {
+              "id": "V11",
+              "kind": "manual_valve",
+              "tag": "V11",
+              "name": "Manual valve label; no alias between V10 and V11",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Manual valve label; no alias between V10 and V11",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "acts_on",
+                "from": "V11",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-OPS",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+          "locator_id": "f17",
+          "locator": "Worksheet 'Operation Log 0911', F16:H16 in run 0911Test5_0 (B11)"
+        }
+      },
+      "previous": null,
+      "id": "d-7b5b41eb47fc27b10e2574382694ffaa9ab1d77288340b32ab8f9de90a3e3949"
+    },
+    {
+      "question_id": "CTX-04@FIC301",
+      "answer_id": "PRONTO-F18",
+      "claim_key": "FIC301.input-measurement-label",
+      "value": "FIR305",
+      "answer": "Record 216 names FIC301 as Air Flowrate Controller via FIR305 (High). FIR305 is retained verbatim; this module description alone does not establish that it is an alias of FT305 or resolve the authoritative measurement pairing.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "da8a238b2ff8760c6f261c3822234fcced78ae91c3cb063481d4e755cb786d44",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-04@FIC301",
+          "question_id": "CTX-04",
+          "family": "engineering_context",
+          "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-EVENTS-D3",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+          "locator_id": "f18",
+          "locator": "Physical line 217 (header is line 1), record 216; Module and Module Description fields"
+        }
+      },
+      "previous": null,
+      "id": "d-2f5f2322c594e174e0c36c5a59f4f6f504d88664ee414f7cdffb7cad9f42eab9"
+    },
+    {
+      "question_id": "CTX-19@FIC302",
+      "answer_id": "PRONTO-F19",
+      "claim_key": "FIC302.journal-measurement-label",
+      "value": "FIR302",
+      "answer": "Record 1 names FIC302 as Air Flowrate Controller via FIR302 (Low). This is a module description in the journal; it does not resolve the separate Figure 1 label discrepancy or name a distinct output tag.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "5f543c5b2187ef80ff4bec31f63995c7d9945d13bcec7efbe411306c3ad26fad",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-19@FIC302",
+          "question_id": "CTX-19",
+          "family": "engineering_context",
+          "question": "What measurement label is named for FIC302 in the journal?",
+          "about": "FIC302",
+          "assets": [
+            {
+              "id": "FIC302",
+              "tag": "FIC302"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC302",
+            "content": {
+              "id": "FIC302",
+              "kind": "controller",
+              "tag": "FIC302",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-EVENTS-D3",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+          "locator_id": "f19",
+          "locator": "Physical line 2 (header is line 1), record 1; Module and Module Description fields"
+        }
+      },
+      "previous": null,
+      "id": "d-610004999d77edf254f3e9caabd749b290323b8a7dfc84439a80f7178b305087"
+    },
+    {
+      "question_id": "CTX-20@FIC301",
+      "answer_id": "PRONTO-F20",
+      "claim_key": "FIC301.journal-state-record216",
+      "value": "MODULE_ALM; ACT/UNACK; 15-CRITICAL",
+      "answer": "Record 216 is an INSTRUMENT ALARM at 2017-09-11 14:41:01.928, parameter MODULE_ALM, state ACT/UNACK, level 15-CRITICAL. It is a historical module-health alarm record; it does not establish enablement of a process high-limit alarm.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "86de5c09d2a1243a3dc464e030c61d5c43d1dbcdff80630cbea294f7f3d8b16c",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-20@FIC301",
+          "question_id": "CTX-20",
+          "family": "engineering_context",
+          "question": "What FIC301 alarm state is recorded at 14:41:01.928 on day 3, and is it a process high-limit alarm?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-EVENTS-D3",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+          "locator_id": "f20",
+          "locator": "Physical line 217 (header is line 1), record 216; Date/Time*, Event Type, Category, Parameter, State and Level fields"
+        }
+      },
+      "previous": null,
+      "id": "d-3a177c409f31592cc6eff79914f2ed5390b6b8f76190f878252d566dd0da041a"
+    },
+    {
+      "question_id": "CTX-21@FIC301",
+      "answer_id": "PRONTO-F21",
+      "claim_key": "FIC301.journal-state-record212",
+      "value": "MODULE_ALM; INACT/UNACK",
+      "answer": "Record 212 at 2017-09-11 14:41:41.928 records MODULE_ALM as INACT/UNACK. The file is reverse chronological; this later record does not make the present alarm state known.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "2d4892389c0eb4e04ba2427044597df6a8c9ffbacfd3d658815cbe61d123849c",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-21@FIC301",
+          "question_id": "CTX-21",
+          "family": "engineering_context",
+          "question": "Which later FIC301 module-alarm state is recorded, without inferring present state?",
+          "about": "FIC301",
+          "assets": [
+            {
+              "id": "FIC301",
+              "tag": "FIC301"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "FIC301",
+            "content": {
+              "id": "FIC301",
+              "kind": "controller",
+              "tag": "FIC301",
+              "name": "Input air controller label; measurement pairing unresolved",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "description",
+                  "value": "Input air controller label; measurement pairing unresolved",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "PRONTO-FACILITY",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT Figure 1 and PRONTO-EVENTS-D3"
+                  }
+                }
+              ]
+            },
+            "relations": []
+          }
+        ],
+        "source": {
+          "id": "PRONTO-EVENTS-D3",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+          "locator_id": "f21",
+          "locator": "Physical line 213 (header is line 1), record 212; Date/Time*, Parameter and State fields"
+        }
+      },
+      "previous": null,
+      "id": "d-46f997498a5ec90f5c35d7b03f9f66762d7def3399b1353d68bac1e652ef4398"
+    },
+    {
+      "question_id": "CTX-22@PRONTO-FACILITY",
+      "answer_id": "PRONTO-F22",
+      "claim_key": "PRONTO.report-data-grains",
+      "value": "process 1 Hz continuous; logs event driven discrete",
+      "answer": "Table 1 lists process variables as continuous 1 Hz DeltaV data and alarm/event/change logs as event-driven discrete DeltaV events. The two grains differ; a time join needs an explicit time policy.",
+      "answer_state": "answered",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Illustrative AI-authored proposal; no human owner, reviewer, approval or plant-truth confirmation.",
+      "evidence_fingerprint": "1c35a0fed5025bceb38d3ec56e361dcd388f98641a83a9953ff766746876a780",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "CTX-22@PRONTO-FACILITY",
+          "question_id": "CTX-22",
+          "family": "engineering_context",
+          "question": "What timing basis does the report give for joining process data and event records?",
+          "about": "PRONTO-FACILITY",
+          "assets": [
+            {
+              "id": "PRONTO-FACILITY",
+              "tag": "PRONTO-FACILITY"
+            }
+          ],
+          "evidence": [],
+          "data_requests": [],
+          "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+          "typical_benefit": null,
+          "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+        },
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "content": {
+              "id": "PRONTO-FACILITY",
+              "kind": "equipment",
+              "tag": "PRONTO-FACILITY",
+              "name": "PRONTO experimental multiphase flow facility",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "PRONTO experimental multiphase flow facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "experimental_facility",
+                  "source": {
+                    "kind": "document",
+                    "document": "PRONTO-REPORT PDF page 5"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT302",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT305",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI101",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 39"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "LI503",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 41"
+                }
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT PDF page 5"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "PT312",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Table 2 page 6"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "TT402",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-ALARMS Sheet1 row 19"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V10",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "V11",
+                "to": "PRONTO-FACILITY",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "PRONTO-REPORT Figure 1 page 5; PRONTO-OPS Operation Log 0911"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PRONTO-REPORT",
+          "revision": "zenodo-1341583-published-2019-05-16",
+          "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+          "locator_id": "f22",
+          "locator": "PDF page 6 (printed 6), Table 1, Process variables and Alarm/event/change logs rows"
+        }
+      },
+      "previous": null,
+      "id": "d-dfdb8902a2a63e45e368c49e881af3015fa801126204c62fd4f17655440ed501"
+    }
+  ],
+  "ownership_history": [],
+  "current": {
+    "CTX-01@PT312": {
+      "present": true,
+      "question": {
+        "id": "CTX-01@PT312",
+        "question_id": "CTX-01",
+        "family": "engineering_context",
+        "question": "What variable and unit does the report assign to PT312?",
+        "about": "PT312",
+        "assets": [
+          {
+            "id": "PT312",
+            "tag": "PT312"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-6942f06aa4aa9a600869f65f3071e660a6c8a1bcab5aaa18d9846af0b56ec9ca",
+          "answer_id": "PRONTO-F01",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-02@V10": {
+      "present": true,
+      "question": {
+        "id": "CTX-02@V10",
+        "question_id": "CTX-02",
+        "family": "engineering_context",
+        "question": "What purpose does the report give manual valve V10 in the leakage experiment?",
+        "about": "V10",
+        "assets": [
+          {
+            "id": "V10",
+            "tag": "V10"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-586b659cdf9f939dc039034ab4d35c5865372fe874ae9162ec60712d35418133",
+          "answer_id": "PRONTO-F02",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-03@PRONTO-FACILITY": {
+      "present": true,
+      "question": {
+        "id": "CTX-03@PRONTO-FACILITY",
+        "question_id": "CTX-03",
+        "family": "engineering_context",
+        "question": "Which air and water flow conditions does the report give for Test5?",
+        "about": "PRONTO-FACILITY",
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "tag": "PRONTO-FACILITY"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-a43abaced8787a2009ea579abe5592f2b85daec38c92f39b35e0da4d0dba86a8",
+          "answer_id": "PRONTO-F03",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-04@FIC301": {
+      "present": true,
+      "question": {
+        "id": "CTX-04@FIC301",
+        "question_id": "CTX-04",
+        "family": "engineering_context",
+        "question": "Which input-measurement label is associated with FIC301 in each source, and is the pairing resolved?",
+        "about": "FIC301",
+        "assets": [
+          {
+            "id": "FIC301",
+            "tag": "FIC301"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "disputed",
+      "disputed_claims": [
+        "FIC301.input-measurement-label"
+      ],
+      "answers": [
+        {
+          "decision_id": "d-52b6591921a4fc007e60658afce2c07c09c4d6bbe4991b8f84beefe626c1ca98",
+          "answer_id": "PRONTO-F04",
+          "freshness": "current",
+          "changed": []
+        },
+        {
+          "decision_id": "d-2f5f2322c594e174e0c36c5a59f4f6f504d88664ee414f7cdffb7cad9f42eab9",
+          "answer_id": "PRONTO-F18",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-05@FIC301": {
+      "present": true,
+      "question": {
+        "id": "CTX-05@FIC301",
+        "question_id": "CTX-05",
+        "family": "engineering_context",
+        "question": "Which setpoint channel and unit does the report document for FIC301?",
+        "about": "FIC301",
+        "assets": [
+          {
+            "id": "FIC301",
+            "tag": "FIC301"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-f4115d347d04064ace0972aae522586a962361d0f0aabc8f828816eb30d365b5",
+          "answer_id": "PRONTO-F05",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-06@PT312": {
+      "present": true,
+      "question": {
+        "id": "CTX-06@PT312",
+        "question_id": "CTX-06",
+        "family": "engineering_context",
+        "question": "What Hi and HiHi values are entered for PT312, and what limits their interpretation?",
+        "about": "PT312",
+        "assets": [
+          {
+            "id": "PT312",
+            "tag": "PT312"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-c6671d71eada465f1772655c57ea2e0212945ee9bf2ca3c55772922b238faa61",
+          "answer_id": "PRONTO-F06",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-07@PT312": {
+      "present": true,
+      "question": {
+        "id": "CTX-07@PT312",
+        "question_id": "CTX-07",
+        "family": "engineering_context",
+        "question": "Does the settings workbook mark the PT312 limit row as enabled?",
+        "about": "PT312",
+        "assets": [
+          {
+            "id": "PT312",
+            "tag": "PT312"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-7762fa49826bbc1c603cf94d51d061a360e2fdc16b16468b01bf7de9fd37e077",
+          "answer_id": "PRONTO-F07",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-08@FIC301": {
+      "present": true,
+      "question": {
+        "id": "CTX-08@FIC301",
+        "question_id": "CTX-08",
+        "family": "engineering_context",
+        "question": "Does the settings workbook support an enabled high limit for FIC301?",
+        "about": "FIC301",
+        "assets": [
+          {
+            "id": "FIC301",
+            "tag": "FIC301"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-0ec85db0c8e8e99c88af2e7e6b36b7fafd30f4e77c02d3104034dbb5055241ec",
+          "answer_id": "PRONTO-F08",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-09@FT305": {
+      "present": true,
+      "question": {
+        "id": "CTX-09@FT305",
+        "question_id": "CTX-09",
+        "family": "engineering_context",
+        "question": "What does the settings workbook say about FT305 limit entries and enablement?",
+        "about": "FT305",
+        "assets": [
+          {
+            "id": "FT305",
+            "tag": "FT305"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-8d84b75379ed43c0b55c4caf42dc15a72866cd62925e7f46587192029fe365e2",
+          "answer_id": "PRONTO-F09",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-10@LI101": {
+      "present": true,
+      "question": {
+        "id": "CTX-10@LI101",
+        "question_id": "CTX-10",
+        "family": "engineering_context",
+        "question": "What LI101 level limits are entered, and does this row establish enablement?",
+        "about": "LI101",
+        "assets": [
+          {
+            "id": "LI101",
+            "tag": "LI101"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "LI101",
+            "fields": [
+              "Obtain the alarm enable flags and configuration revision for LI101 from a controlled DeltaV export."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Obtain the missing controlled source and its revision."
+              }
+            ],
+            "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+          }
+        ],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-06914218060bc1d2ea920e9d96a844d406e6e871f83c16d6ea8357e05659f245",
+          "answer_id": "PRONTO-F10",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-11@TT402": {
+      "present": true,
+      "question": {
+        "id": "CTX-11@TT402",
+        "question_id": "CTX-11",
+        "family": "engineering_context",
+        "question": "Does TT402 have a documented enabled high-temperature process alarm?",
+        "about": "TT402",
+        "assets": [
+          {
+            "id": "TT402",
+            "tag": "TT402"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "TT402",
+            "fields": [
+              "Obtain TT402 enabled-state flags, measurement units and a controlled configuration revision."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Obtain the missing controlled source and its revision."
+              }
+            ],
+            "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+          }
+        ],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-ad11fce5da4ab5f362800b3cab0934183b3239876da9cfb0049ad92f8b8b16a1",
+          "answer_id": "PRONTO-F11",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-12@LI503": {
+      "present": true,
+      "question": {
+        "id": "CTX-12@LI503",
+        "question_id": "CTX-12",
+        "family": "engineering_context",
+        "question": "Which uncertainty in the LI503 settings row requires an engineering check?",
+        "about": "LI503",
+        "assets": [
+          {
+            "id": "LI503",
+            "tag": "LI503"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "LI503",
+            "fields": [
+              "Request the LI503 interface measurement basis, scaling and enabled-state flags from controlled configuration and instrument documentation."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Obtain the missing controlled source and its revision."
+              }
+            ],
+            "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+          }
+        ],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "needs_data",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-425ba03a4a7a954ca5969ab6b4477c982d9d35f8e4818426f9b62cdda602fb37",
+          "answer_id": "PRONTO-F12",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-13@PRONTO-FACILITY": {
+      "present": true,
+      "question": {
+        "id": "CTX-13@PRONTO-FACILITY",
+        "question_id": "CTX-13",
+        "family": "engineering_context",
+        "question": "What air flow condition is recorded for the 10:34 Test5_0 measurement?",
+        "about": "PRONTO-FACILITY",
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "tag": "PRONTO-FACILITY"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-346aa1d5abcf07b6bed46392dc2cdae0e75cb7ec2c517aeb52ab664fef314fbd",
+          "answer_id": "PRONTO-F13",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-14@PRONTO-FACILITY": {
+      "present": true,
+      "question": {
+        "id": "CTX-14@PRONTO-FACILITY",
+        "question_id": "CTX-14",
+        "family": "engineering_context",
+        "question": "What water flow condition is recorded for Test5_0?",
+        "about": "PRONTO-FACILITY",
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "tag": "PRONTO-FACILITY"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-0b9da14886170af9248495f9d7e79e192a2fbad4e6acfb2ea0cfd8a895ccc63e",
+          "answer_id": "PRONTO-F14",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-15@V10": {
+      "present": true,
+      "question": {
+        "id": "CTX-15@V10",
+        "question_id": "CTX-15",
+        "family": "engineering_context",
+        "question": "Which first V10 movement is explicitly recorded in the day-3 log?",
+        "about": "V10",
+        "assets": [
+          {
+            "id": "V10",
+            "tag": "V10"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-cf23177790cdbd874a42dacdbd4d8f77ca2ee6f698a35dc9ae2b9ab80ff1501d",
+          "answer_id": "PRONTO-F15",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-16@V10": {
+      "present": true,
+      "question": {
+        "id": "CTX-16@V10",
+        "question_id": "CTX-16",
+        "family": "engineering_context",
+        "question": "Which next V10 movement is explicitly recorded in the day-3 log?",
+        "about": "V10",
+        "assets": [
+          {
+            "id": "V10",
+            "tag": "V10"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-4a29f48794cac4e937d07b6c8bec5b92d9a15bc6524d92cf98e93f4d50829a1a",
+          "answer_id": "PRONTO-F16",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-17@V11": {
+      "present": true,
+      "question": {
+        "id": "CTX-17@V11",
+        "question_id": "CTX-17",
+        "family": "engineering_context",
+        "question": "Which valve is named in the opening field of Test5_0, and may it be silently joined to V10?",
+        "about": "V11",
+        "assets": [
+          {
+            "id": "V11",
+            "tag": "V11"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [
+          {
+            "item": "V11",
+            "fields": [
+              "Ask a qualified reviewer to reconcile the log fields against the experiment procedure; do not alias V11 to V10."
+            ],
+            "where": [
+              {
+                "kind": "controlled engineering record",
+                "description": "Obtain the missing controlled source and its revision."
+              }
+            ],
+            "how": "The requested evidence resolves the stated unknown; no decision is accepted by this example."
+          }
+        ],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-7b5b41eb47fc27b10e2574382694ffaa9ab1d77288340b32ab8f9de90a3e3949",
+          "answer_id": "PRONTO-F17",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-19@FIC302": {
+      "present": true,
+      "question": {
+        "id": "CTX-19@FIC302",
+        "question_id": "CTX-19",
+        "family": "engineering_context",
+        "question": "What measurement label is named for FIC302 in the journal?",
+        "about": "FIC302",
+        "assets": [
+          {
+            "id": "FIC302",
+            "tag": "FIC302"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-610004999d77edf254f3e9caabd749b290323b8a7dfc84439a80f7178b305087",
+          "answer_id": "PRONTO-F19",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-20@FIC301": {
+      "present": true,
+      "question": {
+        "id": "CTX-20@FIC301",
+        "question_id": "CTX-20",
+        "family": "engineering_context",
+        "question": "What FIC301 alarm state is recorded at 14:41:01.928 on day 3, and is it a process high-limit alarm?",
+        "about": "FIC301",
+        "assets": [
+          {
+            "id": "FIC301",
+            "tag": "FIC301"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-3a177c409f31592cc6eff79914f2ed5390b6b8f76190f878252d566dd0da041a",
+          "answer_id": "PRONTO-F20",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-21@FIC301": {
+      "present": true,
+      "question": {
+        "id": "CTX-21@FIC301",
+        "question_id": "CTX-21",
+        "family": "engineering_context",
+        "question": "Which later FIC301 module-alarm state is recorded, without inferring present state?",
+        "about": "FIC301",
+        "assets": [
+          {
+            "id": "FIC301",
+            "tag": "FIC301"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-46f997498a5ec90f5c35d7b03f9f66762d7def3399b1353d68bac1e652ef4398",
+          "answer_id": "PRONTO-F21",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "CTX-22@PRONTO-FACILITY": {
+      "present": true,
+      "question": {
+        "id": "CTX-22@PRONTO-FACILITY",
+        "question_id": "CTX-22",
+        "family": "engineering_context",
+        "question": "What timing basis does the report give for joining process data and event records?",
+        "about": "PRONTO-FACILITY",
+        "assets": [
+          {
+            "id": "PRONTO-FACILITY",
+            "tag": "PRONTO-FACILITY"
+          }
+        ],
+        "evidence": [],
+        "data_requests": [],
+        "decision_rule": "Retain the exact source statement. A qualified engineer must resolve disagreements and unknowns before using it as plant truth.",
+        "typical_benefit": null,
+        "limits": "Illustrative AI-authored question and proposed answer. No assigned human owner, reviewer or sign-off."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-dfdb8902a2a63e45e368c49e881af3015fa801126204c62fd4f17655440ed501",
+          "answer_id": "PRONTO-F22",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "PRONTO-ALARMS",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "sha256": "07d019fbde971ace8ab389d0b30d229d2db9847a76d1b0cc71ede7b012522fb0",
+      "locators": [
+        {
+          "id": "f06",
+          "locator": "Worksheet 'Sheet1', B16:D16 (tag, HiHi, Hi); remarks G16 must be read with the numbers",
+          "questions": [
+            "CTX-06@PT312"
+          ]
+        },
+        {
+          "id": "f07",
+          "locator": "Worksheet 'Sheet1', B16 and G16",
+          "questions": [
+            "CTX-07@PT312"
+          ]
+        },
+        {
+          "id": "f08",
+          "locator": "Worksheet 'Sheet1', B13:D13 and G13",
+          "questions": [
+            "CTX-08@FIC301"
+          ]
+        },
+        {
+          "id": "f09",
+          "locator": "Worksheet 'Sheet1', B15:F15 and G15",
+          "questions": [
+            "CTX-09@FT305"
+          ]
+        },
+        {
+          "id": "f10",
+          "locator": "Worksheet 'Sheet1', B39:G39",
+          "questions": [
+            "CTX-10@LI101"
+          ]
+        },
+        {
+          "id": "f11",
+          "locator": "Worksheet 'Sheet1', B19:G19",
+          "questions": [
+            "CTX-11@TT402"
+          ]
+        },
+        {
+          "id": "f12",
+          "locator": "Worksheet 'Sheet1', B41:G41",
+          "questions": [
+            "CTX-12@LI503"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRONTO-EVENTS-D3",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "sha256": "5b302d6c599c3550759824c11d17ba31db234014acab7df56500155ed7189961",
+      "locators": [
+        {
+          "id": "f18",
+          "locator": "Physical line 217 (header is line 1), record 216; Module and Module Description fields",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f19",
+          "locator": "Physical line 2 (header is line 1), record 1; Module and Module Description fields",
+          "questions": [
+            "CTX-19@FIC302"
+          ]
+        },
+        {
+          "id": "f20",
+          "locator": "Physical line 217 (header is line 1), record 216; Date/Time*, Event Type, Category, Parameter, State and Level fields",
+          "questions": [
+            "CTX-20@FIC301"
+          ]
+        },
+        {
+          "id": "f21",
+          "locator": "Physical line 213 (header is line 1), record 212; Date/Time*, Parameter and State fields",
+          "questions": [
+            "CTX-21@FIC301"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRONTO-OPS",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "sha256": "36676c5e73b91b0d029e96643d7b3f9d7748df802c367fe785cee16734a2ab82",
+      "locators": [
+        {
+          "id": "f13",
+          "locator": "Worksheet 'Operation Log 0911', A11:C11 and G11:H11; date B1",
+          "questions": [
+            "CTX-13@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f14",
+          "locator": "Worksheet 'Operation Log 0911', G12:H12 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-14@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f15",
+          "locator": "Worksheet 'Operation Log 0911', J18:M18; date B1",
+          "questions": [
+            "CTX-15@V10"
+          ]
+        },
+        {
+          "id": "f16",
+          "locator": "Worksheet 'Operation Log 0911', J27:M27; date B1",
+          "questions": [
+            "CTX-16@V10"
+          ]
+        },
+        {
+          "id": "f17",
+          "locator": "Worksheet 'Operation Log 0911', F16:H16 in run 0911Test5_0 (B11)",
+          "questions": [
+            "CTX-17@V11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRONTO-REPORT",
+      "revision": "zenodo-1341583-published-2019-05-16",
+      "sha256": "a6d5454113f86130af7f34c3fbebe1c5143d5e45ea6b10608c7c33fe961b5ba3",
+      "locators": [
+        {
+          "id": "f01",
+          "locator": "PDF page 6 (printed 6), Table 2, PT312 row",
+          "questions": [
+            "CTX-01@PT312"
+          ]
+        },
+        {
+          "id": "f02",
+          "locator": "PDF page 11 (printed 11), Air leakage (0911 Test4/5/6), first paragraph",
+          "questions": [
+            "CTX-02@V10"
+          ]
+        },
+        {
+          "id": "f03",
+          "locator": "PDF page 12 (printed 12), Table 6, Test5 column",
+          "questions": [
+            "CTX-03@PRONTO-FACILITY"
+          ]
+        },
+        {
+          "id": "f04",
+          "locator": "PDF page 5 (printed 5), Figure 1, lower of the two green parallel inlet-air branches: FT302 and FIC301 with dashed signal line",
+          "questions": [
+            "CTX-04@FIC301"
+          ]
+        },
+        {
+          "id": "f05",
+          "locator": "PDF page 7 (printed 7), Table 2 continuation, FIC301/PID1/SP.CV row",
+          "questions": [
+            "CTX-05@FIC301"
+          ]
+        },
+        {
+          "id": "f22",
+          "locator": "PDF page 6 (printed 6), Table 1, Process variables and Alarm/event/change logs rows",
+          "questions": [
+            "CTX-22@PRONTO-FACILITY"
+          ]
+        }
+      ]
+    }
+  ]
+}

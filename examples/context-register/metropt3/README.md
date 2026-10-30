@@ -16,6 +16,11 @@ There is no invented plant topology or cross-system asset join. [ACCEPTANCE.md](
 and prior observations. This is development evidence on a family already used by the historian matrix, not
 a new source family, held-out result or maintenance-effectiveness finding.
 
+The [prior register](history/before-appearances.context.json) retains all twelve original proposal snapshots.
+Twelve AI re-proposals bind expanded item evidence; twenty-four snapshots remain with the same active answers
+and question states. The [old sheet](history/before-appearances.answers.csv) refuses against the revised evidence.
+No human review, owner assignment or plant-truth verdict was transferred to a new fingerprint.
+
 ## What stays separate
 
 | Evidence | What the packet retains | What remains to collect |
@@ -52,12 +57,12 @@ Then run with standard-library Python, offline:
 
 ```sh
 python -S scripts/context_register.py prepare --model examples/context-register/metropt3/model.json --questions examples/context-register/metropt3/questions.json --sources examples/context-register/metropt3/sources.json --source-root data/external/metropt3/context --out examples/context-register/metropt3/run
-python -S scripts/context_register.py apply --model examples/context-register/metropt3/model.json --questions examples/context-register/metropt3/questions.json --sources examples/context-register/metropt3/sources.json --source-root data/external/metropt3/context --answers examples/context-register/metropt3/proposed_answers.csv --out examples/context-register/metropt3/run
+python -S scripts/context_register.py apply --model examples/context-register/metropt3/model.json --questions examples/context-register/metropt3/questions.json --sources examples/context-register/metropt3/sources.json --source-root data/external/metropt3/context --register examples/context-register/metropt3/history/before-appearances.context.json --answers examples/context-register/metropt3/proposed_answers.csv --out examples/context-register/metropt3/run
 python -S examples/context-register/metropt3/verify_sources.py
 python -S examples/context-register/metropt3/check_packet.py
 ```
 
-The first apply follows an empty prepared register. Later applies into `run` must include
+The first apply continues the retained prior proposal register. Later applies into `run` must include
 `--register examples/context-register/metropt3/run/context.json`. Refresh with the current sources and no answer
 CSV to assess staleness. Prepare a new evidence sheet into a fresh folder before recording a reviewed revision;
 do not resubmit old fingerprints as new decisions. `prepare` refuses to overwrite an existing answer sheet.

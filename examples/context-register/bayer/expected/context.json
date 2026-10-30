@@ -523,6 +523,596 @@
       },
       "previous": null,
       "id": "d-5b789821221b7c7ca2ae43c9a08ecfbd0cc81331af300073f91f17f9852bfca1"
+    },
+    {
+      "question_id": "E18@model",
+      "answer_id": "published-control-sequence",
+      "claim_key": "intended-heating-cooling-sequence",
+      "value": "steam closed; recirculation redirected at setpoint",
+      "answer": "The published narrative describes the intended sequence: at the temperature setpoint, steam flow closes and recirculation is redirected from the heater to the cooler. This is useful operating context, but it does not establish actual simultaneous duties, their duration, or an available heat-recovery opportunity.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "",
+      "reviewed_on": "",
+      "source_match": "unknown",
+      "plant_truth": "unknown",
+      "note": "AI-authored proposed source interpretation; no owner, reviewer or site decision. Still collect representative temperatures/flows/duties, time alignment and overlap under comparable operating states, and layout/fouling evidence. Do not close E18 or calculate savings from this narrative. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.",
+      "evidence_fingerprint": "36700c2556b8f4577ef74be9b39580bf790d3d630afc778480059bbb60860f6e",
+      "owner": null,
+      "evidence": {
+        "question": {
+          "id": "E18@model",
+          "question_id": "E18",
+          "family": "energy",
+          "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+          "about": "U2, HV-112",
+          "assets": [
+            {
+              "id": "FT-106",
+              "tag": "FT-106"
+            },
+            {
+              "id": "HV-108",
+              "tag": "HV-108"
+            },
+            {
+              "id": "HV-112",
+              "tag": "HV-112"
+            },
+            {
+              "id": "TV-104C",
+              "tag": "TV-104C"
+            },
+            {
+              "id": "stream:U1",
+              "tag": "U1"
+            },
+            {
+              "id": "stream:U2",
+              "tag": "U2"
+            }
+          ],
+          "evidence": [
+            {
+              "role": "trigger",
+              "id": "stream:U2",
+              "tag": "U2",
+              "text": "stream U2 (asset stream:U2) reads \"Cooling water (80 C) supply to the cooler\" at E-3",
+              "field": "streams[U2]"
+            },
+            {
+              "role": "trigger",
+              "id": "HV-112",
+              "tag": "HV-112",
+              "text": "hand valve HV-112 reads \"HV-112 Cooling water supply valve\" at E-3",
+              "field": "manual_valves[HV-112]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "stream:U1",
+              "tag": "U1",
+              "text": "stream U1 (asset stream:U1) reads \"Steam supply to the heater\" at E-2",
+              "field": "streams[U1]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "FT-106",
+              "tag": "FT-106",
+              "text": "instrument FT-106 reads \"FT-106 Indicated steam flow to the heater\" at E-2",
+              "field": "instruments[FT-106]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "TV-104C",
+              "tag": "TV-104C",
+              "text": "valve TV-104C reads \"TV-104C Steam flow valve to the heater (Fig 10: Temperature Control Valve)\" at E-2",
+              "field": "final_elements[TV-104C]"
+            },
+            {
+              "role": "steam-heated user",
+              "id": "HV-108",
+              "tag": "HV-108",
+              "text": "hand valve HV-108 reads \"HV-108 Steam block valve, heater steam supply\" at E-2",
+              "field": "manual_valves[HV-108]"
+            }
+          ],
+          "data_requests": [
+            {
+              "item": "Temperatures and duties of the cooled and the heated streams",
+              "state": "not_on_drawing",
+              "where": [
+                "only a valve (HV-112) is drawn on this line, with no flow measurement; flow needs a meter or a calibrated valve curve",
+                "historian or DCS trend for FT-106 (no historian tag is mapped in this model for these)",
+                "site records: heat and material balance"
+              ],
+              "how": "For each stream: supply and target temperature and duty."
+            },
+            {
+              "item": "Whether the duties overlap in time",
+              "state": "not_on_drawing",
+              "where": [
+                "site records: operating sequence: are both duties needed at the same time?"
+              ],
+              "how": "Mark each duty continuous, batch or startup-only."
+            },
+            {
+              "item": "Layout distance and fouling",
+              "state": "not_on_drawing",
+              "where": [
+                "a walkdown: distance between the two exchangers",
+                "maintenance records: cleaning history"
+              ],
+              "how": "Note pipe run and fouling service."
+            }
+          ],
+          "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+          "typical_benefit": {
+            "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+            "source": [
+              "S19",
+              "S24"
+            ],
+            "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)",
+            "source_titles": [
+              "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+              "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+            ]
+          },
+          "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+        },
+        "assets": [
+          {
+            "id": "FT-106",
+            "content": {
+              "id": "FT-106",
+              "kind": "instrument",
+              "tag": "FT-106",
+              "name": "Indicated steam flow to the heater",
+              "aliases": [
+                "FI-106"
+              ],
+              "attributes": [
+                {
+                  "name": "assigned_tag",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "description",
+                  "value": "Indicated steam flow to the heater",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "drawn_in_source_figure",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "value": "U1",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "E-2",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "uom",
+                  "value": "klb/h",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                },
+                {
+                  "name": "variable",
+                  "value": "flow",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 19 (p. 72)"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Fig 19 (p. 72)"
+              },
+              "citations": {
+                "source": "Fig 19 (p. 72)"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-106",
+                "to": "E-2",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 19 (p. 72)"
+                },
+                "citations": {
+                  "source": "Fig 19 (p. 72)"
+                }
+              },
+              {
+                "type": "sits_on",
+                "from": "FT-106",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 19 (p. 72)"
+                },
+                "citations": {
+                  "source": "Fig 19 (p. 72)"
+                }
+              }
+            ]
+          },
+          {
+            "id": "HV-108",
+            "content": {
+              "id": "HV-108",
+              "kind": "manual_valve",
+              "tag": "HV-108",
+              "name": "Steam block valve, heater steam supply",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "assigned_tag",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                  }
+                },
+                {
+                  "name": "description",
+                  "value": "Steam block valve, heater steam supply",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "value": "U1",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+              },
+              "citations": {
+                "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+              }
+            },
+            "relations": [
+              {
+                "type": "sits_on",
+                "from": "HV-108",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                },
+                "citations": {
+                  "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                }
+              }
+            ]
+          },
+          {
+            "id": "HV-112",
+            "content": {
+              "id": "HV-112",
+              "kind": "manual_valve",
+              "tag": "HV-112",
+              "name": "Cooling water supply valve",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "assigned_tag",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                  }
+                },
+                {
+                  "name": "description",
+                  "value": "Cooling water supply valve",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "value": "U2",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+              },
+              "citations": {
+                "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+              }
+            },
+            "relations": [
+              {
+                "type": "sits_on",
+                "from": "HV-112",
+                "to": "stream:U2",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                },
+                "citations": {
+                  "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                }
+              }
+            ]
+          },
+          {
+            "id": "TV-104C",
+            "content": {
+              "id": "TV-104C",
+              "kind": "final_element",
+              "tag": "TV-104C",
+              "name": "Steam flow valve to the heater (Fig 10: Temperature Control Valve)",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "assigned_tag",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                },
+                {
+                  "name": "description",
+                  "value": "Steam flow valve to the heater (Fig 10: Temperature Control Valve)",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "value": "U1",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                },
+                {
+                  "name": "unit",
+                  "value": "E-2",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "Fig 10; p. 29"
+              },
+              "citations": {
+                "source": "Fig 10; p. 29"
+              }
+            },
+            "relations": [
+              {
+                "type": "acts_on",
+                "from": "TV-104C",
+                "to": "E-2",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10; p. 29"
+                },
+                "citations": {
+                  "source": "Fig 10; p. 29"
+                }
+              },
+              {
+                "type": "sits_on",
+                "from": "TV-104C",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10; p. 29"
+                },
+                "citations": {
+                  "source": "Fig 10; p. 29"
+                }
+              },
+              {
+                "type": "controls",
+                "from": "TIC-104",
+                "to": "TV-104C",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "p. 28-29; p. 39 footnote 29"
+                },
+                "citations": {
+                  "source": "p. 28-29; p. 39 footnote 29"
+                }
+              }
+            ]
+          },
+          {
+            "id": "stream:U1",
+            "content": {
+              "id": "U1",
+              "type": "connects",
+              "from": "BL",
+              "to": "E-2",
+              "direction": "known",
+              "source": {
+                "kind": "document",
+                "document": "Fig 10; p. 72"
+              },
+              "citations": {
+                "source": "Fig 10; p. 72"
+              },
+              "layer": "stream",
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Steam supply to the heater",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 72"
+                  }
+                },
+                {
+                  "name": "utility",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 72"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "sits_on",
+                "from": "TV-104C",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10; p. 29"
+                },
+                "citations": {
+                  "source": "Fig 10; p. 29"
+                }
+              },
+              {
+                "type": "sits_on",
+                "from": "HV-108",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                },
+                "citations": {
+                  "source": "Fig 10; p. 70 (found closed instead of fully open); Fig 20, p. 72"
+                }
+              },
+              {
+                "type": "sits_on",
+                "from": "FT-106",
+                "to": "stream:U1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 19 (p. 72)"
+                },
+                "citations": {
+                  "source": "Fig 19 (p. 72)"
+                }
+              }
+            ]
+          },
+          {
+            "id": "stream:U2",
+            "content": {
+              "id": "U2",
+              "type": "connects",
+              "from": "BL",
+              "to": "E-3",
+              "direction": "known",
+              "source": {
+                "kind": "document",
+                "document": "Fig 10; p. 29"
+              },
+              "citations": {
+                "source": "Fig 10; p. 29"
+              },
+              "layer": "stream",
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Cooling water (80 C) supply to the cooler",
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                },
+                {
+                  "name": "utility",
+                  "value": true,
+                  "source": {
+                    "kind": "document",
+                    "document": "Fig 10; p. 29"
+                  }
+                }
+              ]
+            },
+            "relations": [
+              {
+                "type": "sits_on",
+                "from": "HV-112",
+                "to": "stream:U2",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                },
+                "citations": {
+                  "source": "Fig 10 (corrected against Fig 10 by scripts/compare_bayer_fig10.py)"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "CSB-2008-08-I-WV",
+          "revision": "final report; exact file pinned by SHA-256",
+          "sha256": "6b4c944c7c5c8b5537c32e86d247064c164fe50c15d08ea64083975e574cf619",
+          "locator_id": "temperature-control-sequence",
+          "locator": "PDF page 37 (printed page 29), temperature-control paragraph above Figure 10; narrative only"
+        }
+      },
+      "previous": "d-5b789821221b7c7ca2ae43c9a08ecfbd0cc81331af300073f91f17f9852bfca1",
+      "id": "d-6dd58384fd930f0c50af855ca867976551ce78559ebb0f4f204b95440d393458"
     }
   ],
   "ownership_history": [],
@@ -657,7 +1247,7 @@
       "disputed_claims": [],
       "answers": [
         {
-          "decision_id": "d-5b789821221b7c7ca2ae43c9a08ecfbd0cc81331af300073f91f17f9852bfca1",
+          "decision_id": "d-6dd58384fd930f0c50af855ca867976551ce78559ebb0f4f204b95440d393458",
           "answer_id": "published-control-sequence",
           "freshness": "current",
           "changed": []

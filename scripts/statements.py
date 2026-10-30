@@ -25,6 +25,7 @@ are content bindings, not authenticated approvals or source verification.
 import argparse
 import csv
 import datetime
+import copy
 import hashlib
 import html
 import json
@@ -37,6 +38,7 @@ import sys
 import tempfile
 from collections import Counter, OrderedDict
 from pathlib import Path
+from graph_export import provenance_of
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "twin-graph-1"
@@ -94,12 +96,13 @@ INTERNAL = {"extraction_confidence", "layout", "id", "ids", "image", "image_sha2
             "pair_status", "pair_description_similarity", "grid_ref_on_target", "fig11_series", "isa_letters",
             "xmeas", "xmv", "at_0_1000", "pairwise_links", "arms", "junction_kind", "on_segment", "joined_only_at"}
 INTERNAL_PREFIXES = ("source_drawing.", "parent_source.", "system_codes_seen.", "lines.")
+EXTRACTION_PRIORITY_FIELDS = {"risk.risk_score", "risk.tier", "risk.why", "risk.tier_before_floor"}
 INTERNAL_SUFFIXES = ("_method", "_sha256")
 
 
 # ----------------------------------------------------------------------------------------------- helpers
 def sid(subject, predicate, obj):
-    """Stable statement id: a hash of subject|predicate|object. Status, source and evidence are not part of it."""
+    """Hash the semantic key; build() disambiguates equal wording with distinct evidence targets."""
     key = "%s|%s|%s" % (subject, predicate, json.dumps(obj, sort_keys=True, ensure_ascii=False))
     return "st-" + hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
 
@@ -203,13 +206,16 @@ def evidence_refs(statements):
     refs = set()
     for st in statements:
         evidence = st.get("evidence") or {}
-        if not isinstance(evidence, dict) or not isinstance(evidence.get("figure_images", []), list):
-            raise ValueError("sample evidence must name image files in an object with a figure_images list")
-        for rel in ([evidence["image"]] if evidence.get("image") else []) + evidence.get("figure_images", []):
-            if (not isinstance(rel, str) or not rel or Path(rel).anchor or re.match(r"^[A-Za-z]:", rel)
-                    or rel.startswith(("/", "\\")) or ".." in Path(rel).parts):
-                raise ValueError("sample evidence references must be relative paths within the source packet")
-            refs.add(Path(rel))
+        if not isinstance(evidence, dict) or not isinstance(evidence.get("item_appearances", []), list):
+            raise ValueError("sample evidence and its item appearances must be objects")
+        for part in [evidence, *evidence.get("item_appearances", [])]:
+            if not isinstance(part, dict) or not isinstance(part.get("figure_images", []), list):
+                raise ValueError("sample evidence must name image files in an object with a figure_images list")
+            for rel in ([part["image"]] if part.get("image") else []) + part.get("figure_images", []):
+                if (not isinstance(rel, str) or not rel or Path(rel).anchor or re.match(r"^[A-Za-z]:", rel)
+                        or rel.startswith(("/", "\\")) or ".." in Path(rel).parts):
+                    raise ValueError("sample evidence references must be relative paths within the source packet")
+                refs.add(Path(rel))
     return sorted(refs)
 
 
@@ -694,20 +700,30 @@ def merged_value_statements(gr, n):
     by = {a["name"]: a for a in n["attributes"]}
     out, used = [], set()
     S = gr.name(n["id"])
+
+    def append(rank, predicate, values, text, names):
+        if all(by[name]["source"] == by[names[0]]["source"] for name in names):
+            out.append((rank, predicate, values, text, names))
+        else:
+            # A corrected value and a unit from a document are separate source judgments. Keep both visible
+            # with individual verdict targets instead of attributing the combined sentence to the value alone.
+            for name in names:
+                value = by[name]["value"]
+                out.append((rank, name, value, f"{S}'s {words(name)} is {fmt(value)}", [name]))
+        used.update(names)
+
     if "setpoint.value" in by:
         u = by.get("setpoint.uom")
         names = ["setpoint.value"] + (["setpoint.uom"] if u else [])
         text = f"{S} is set to hold {fmt(by['setpoint.value']['value'])}{' ' + fmt(u['value']) if u else ''} " \
                f"(its setpoint)"
-        out.append((3, "setpoint", [by[x]["value"] for x in names], text, names))
-        used.update(names)
+        append(3, "setpoint", [by[x]["value"] for x in names], text, names)
     if n["kind"] == "limit" and "value" in by:
         names = [x for x in ("what", "value", "uom") if x in by]
         what = by["what"]["value"] if "what" in by else n.get("name")
         what = what[0].lower() + what[1:] if what and not what[:2].isupper() else what
         text = f"Limit {S}, {what}: {fmt(by['value']['value'])}{' ' + fmt(by['uom']['value']) if 'uom' in by else ''}"
-        out.append((1, "limit_value", [by[x]["value"] for x in names], text, names))
-        used.update(names)
+        append(1, "limit_value", [by[x]["value"] for x in names], text, names)
     return out, used
 
 
@@ -738,14 +754,38 @@ def source_pointer(src):
                                      if src.get("document") else "")
 
 
+def appearance_source(appearance):
+    return {"kind": "drawing", "sheet": appearance.get("sheet"),
+            "box_0_1000": appearance.get("box_0_1000"), "read_as": appearance.get("tag_as_extracted")}
+
+
+def item_pointer(evidence):
+    parts = []
+    appearances = provenance_of(evidence)
+    if appearances:
+        parts.append("Recorded item appearances (not per-claim verification): " + "; ".join(
+            f"{i}: {source_pointer(appearance_source(p))}" for i, p in enumerate(appearances, 1)) +
+            ". Complete extraction records are in the bound JSON packet")
+    if evidence.get("citations"):
+        parts.append("Original item citations: " + json.dumps(evidence["citations"], ensure_ascii=False))
+    return "; ".join(parts)
+
+
 def build(g):
     """Every statement in a graph, without evidence. Deterministic: the same graph gives the same ids and order."""
     gr = Graph(g)
     out = OrderedDict()
     skipped = Counter()
 
-    def add(subject, predicate, obj, rank, stype, text, src, targets, kind, key=None, layer="item"):
+    def add(subject, predicate, obj, rank, stype, text, src, targets, kind, key=None, layer="item", record=None):
+        record = gr.nodes.get(subject, {}) if record is None else record
+        evidence = {k: copy.deepcopy(record[k]) for k in ("provenance", "citations") if k in record}
         i = sid(subject, predicate, obj if key is None else key)
+        if i in out and (out[i]["source"] != src or
+                out[i].get("item_evidence", {}) != evidence):
+            # Equal wording can have different source records. Keep verdict targets separate so a coalesced
+            # sentence cannot hide another claim's evidence behind the first claim's locator.
+            i = sid(subject, predicate, {"value": obj, "review_targets": targets})
         if i in out:  # the same thing said twice (e.g. class and type both "tank"): one statement, every target
             out[i]["targets"] += [t for t in targets if t not in out[i]["targets"]]
             return
@@ -759,11 +799,16 @@ def build(g):
                   "group": group, "system": gr.name(system) if system and system != subject else None,
                   "subject_kind": kind, "source": src, "source_kind": source_kind(src),
                   "source_pointer": source_pointer(src), "targets": targets}
+        if evidence:
+            out[i]["item_evidence"] = evidence
+            pointer = item_pointer(evidence)
+            if pointer:
+                out[i]["source_pointer"] += "; " + pointer
 
     for n in g["nodes"]:
         nid = n["id"]
-        first_src = n["attributes"][0]["source"] if n.get("attributes") else \
-            {"kind": "model", "note": "the item cites no source of its own"}
+        first_src = n.get("source") or (n["attributes"][0]["source"] if n.get("attributes") else
+            {"kind": "model", "note": "the item cites no source of its own"})
         nl = layer_of(gr, n["kind"], nid=nid)
         add(nid, "kind", n["kind"], 4, "identity", identity_text(gr, n), first_src, [["node", nid]], n["kind"],
             layer=nl)
@@ -779,7 +824,8 @@ def build(g):
             name, v = a["name"], a["value"]
             if name in used:
                 continue
-            if (name in INTERNAL or name.startswith(INTERNAL_PREFIXES) or name.endswith(INTERNAL_SUFFIXES)):
+            if (name in INTERNAL or name.startswith(INTERNAL_PREFIXES) or name.endswith(INTERNAL_SUFFIXES) or
+                    g.get("model_kind") == "extracted_twin" and name in EXTRACTION_PRIORITY_FIELDS):
                 skipped["internal field: " + re.sub(r"\..*", ".*", name)] += 1
                 continue
             if blank(v):
@@ -804,7 +850,7 @@ def build(g):
         # id is part of what is said, so it is part of the key.
         key = [obj, e["id"]] if e["type"] == "connects" and e.get("id") else None
         add(subject, "edge:" + e["type"], obj, rank, "relation", text, e.get("source"),
-            [["edge", e["id"]]], kind, key, layer=layer_of(gr, kind, e))
+            [["edge", e["id"]]], kind, key, layer=layer_of(gr, kind, e), record=e)
     return list(out.values()), dict(sorted(skipped.items())), gr
 
 
@@ -1038,18 +1084,20 @@ def subject_tokens(st, gr):
 def add_evidence(statements, gr, crops, report):
     boxes = {}
     for n in gr.g["nodes"]:
-        for a in n.get("attributes", []):
-            s = a.get("source") or {}
-            if s.get("kind") == "drawing" and s.get("box_0_1000"):
+        for s in [n.get("source") or {}, *(a.get("source") or {} for a in n.get("attributes", []))]:
+            if (s.get("kind") == "drawing" and s.get("box_0_1000") and
+                    s.get("sheet") is not None and str(s["sheet"]).strip()):
                 boxes.setdefault(n["id"], (s.get("sheet"), s["box_0_1000"]))
                 break
     for st in statements:
         src = st["source"] or {}
         k = st["source_kind"]
-        if k == "drawing" and src.get("box_0_1000"):
-            rel = crops.crop(src.get("sheet"), [src["box_0_1000"]]) if crops else None
-            st["evidence"] = {"kind": "drawing_crop", "sheet": src.get("sheet"), "box_0_1000": src["box_0_1000"],
-                              "image": rel, "note": None if rel else "no sheet image given (--image SHEET=PNG)"}
+        if k == "drawing":
+            located = src.get("sheet") is not None and str(src["sheet"]).strip() and src.get("box_0_1000")
+            rel = crops.crop(src.get("sheet"), [src["box_0_1000"]]) if crops and located else None
+            st["evidence"] = {"kind": "drawing_crop", "sheet": src.get("sheet"), "box_0_1000": src.get("box_0_1000"),
+                              "image": rel, "note": (None if rel else "no sheet image given (--image SHEET=PNG)"
+                                    if located else "no usable sheet and box recorded for this source")}
         elif k == "document":
             st["evidence"] = report.evidence(src.get("document"), statement_tokens(st, gr), subject_tokens(st, gr))
         elif k == "review":
@@ -1066,6 +1114,22 @@ def add_evidence(statements, gr, crops, report):
                                    "note": ("no source of its own: the line was traced, not read from a box. The "
                                             "crop shows both ends (red, blue) so you can follow it on the sheet")})
             st["evidence"] = ev
+        context = st.get("item_evidence") or {}
+        appearances = provenance_of(context)
+        if appearances:
+            records = []
+            for i, appearance in enumerate(appearances, 1):
+                sheet, box = appearance.get("sheet"), appearance.get("box_0_1000")
+                located = sheet is not None and str(sheet).strip() and box is not None
+                image = crops.crop(sheet, [box]) if crops and located else None
+                records.append({"index": i, "locator": source_pointer(appearance_source(appearance)),
+                                "sheet": sheet, "box_0_1000": copy.deepcopy(box), "image": image,
+                                "record": copy.deepcopy(appearance),
+                                "note": (None if image else "no sheet image supplied for this appearance" if located
+                                         else "no usable sheet and box recorded for this appearance")})
+            st["evidence"]["item_appearances"] = records
+        if context.get("citations"):
+            st["evidence"]["item_citations"] = copy.deepcopy(context["citations"])
 
 
 # ----------------------------------------------------------------------------------------------- machine check
@@ -1124,6 +1188,8 @@ def review_fingerprint(statement, basis):
     # Sampling stratum is deliberately absent: --strata layer changes allocation, not the reviewed claim.
     payload = {key: statement[key] for key in ("id", "subject", "predicate", "object", "text", "source",
                                               "source_pointer", "targets", "layer")}
+    if "item_evidence" in statement:
+        payload["item_evidence"] = statement["item_evidence"]
     return canonical_hash({"basis": basis, "statement": payload})
 
 
@@ -1324,6 +1390,23 @@ def evidence_html(ev, prefix):
                          f"<div class='src'>{html.escape(ev['quote_note'])}</div>")
     if ev.get("note"):
         parts.append(f"<div class='src'>{html.escape(ev['note'])}</div>")
+    if ev.get("item_appearances"):
+        parts.append("<details><summary>Recorded item appearances</summary><p>Original extraction context. "
+                     "These records do not establish that every appearance supports this claim or agrees with the "
+                     "others. One verdict still applies to this statement.</p>")
+        for appearance in ev["item_appearances"]:
+            parts.append(f"<div class='src'>{appearance['index']}: {html.escape(appearance['locator'])}</div>")
+            if appearance.get("image") == ev.get("image") and appearance.get("image"):
+                parts.append("<div class='src'>Primary locator shown above.</div>")
+            else:
+                parts.append(evidence_html(appearance, prefix))
+            parts.append("<details><summary>Original record</summary><pre>" +
+                         html.escape(json.dumps(appearance["record"], ensure_ascii=False, indent=2)) +
+                         "</pre></details>")
+        parts.append("</details>")
+    if ev.get("item_citations"):
+        parts.append("<details><summary>Original item citations</summary><pre>" +
+                     html.escape(json.dumps(ev["item_citations"], ensure_ascii=False, indent=2)) + "</pre></details>")
     return "".join(parts)
 
 
@@ -1386,6 +1469,12 @@ def write_sheet(path, statements):
 
 def summary(statements):
     return {"statements": len(statements),
+            "evidence_availability": {
+                "primary_images": sum(bool(s.get("evidence", {}).get("image")) for s in statements),
+                "item_appearances": sum(len(s.get("evidence", {}).get("item_appearances", [])) for s in statements),
+                "item_appearance_images": sum(bool(a.get("image")) for s in statements
+                                              for a in s.get("evidence", {}).get("item_appearances", [])),
+                "counting_unit": "statement evidence entries; reused image paths are counted for each statement"},
             "by_type": dict(sorted(Counter(s["type"] for s in statements).items())),
             "by_rank": {f"{r} {RANKS[r]}": n for r, n in sorted(Counter(s["rank"] for s in statements).items())},
             "by_stratum": dict(sorted(Counter(s["stratum"] for s in statements).items())),

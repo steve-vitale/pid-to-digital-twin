@@ -145,11 +145,19 @@
     "examples/graph-export/unplaced-dexpi/i04.model.json",
     "examples/graph-export/unplaced-dexpi/i04.graph.json",
     "examples/graph-export/unplaced-dexpi/i01.model.json",
-    "examples/graph-export/unplaced-dexpi/i01.graph.json"
+    "examples/graph-export/unplaced-dexpi/i01.graph.json",
+    "examples/graph-export/multi-appearance/source.json",
+    "examples/graph-export/multi-appearance/model.json",
+    "examples/graph-export/multi-appearance/full.graph.json",
+    "examples/graph-export/multi-appearance/core.graph.json",
+    "examples/graph-export/multi-appearance/review/statements.json",
+    "examples/graph-export/multi-appearance/review/review_sheet.csv",
+    "examples/graph-export/multi-appearance/review/review.html"
    ],
    "tests": [
     "scripts/test_graph_export.py",
-    "scripts/test_line_layers.py"
+    "scripts/test_line_layers.py",
+    "scripts/test_graph_provenance.py"
    ],
    "job": "Load the model into an asset register, graph database or change system",
    "you_need": "Any model this repository produces",
@@ -425,7 +433,12 @@
     "examples/statement-review/bound-sheet0/sample.csv",
     "examples/statement-review/bound-sheet0/sample.html",
     "examples/statement-review/bound-sheet0/illustrative_review.csv",
-    "examples/statement-review/bound-sheet0/apply_summary.json"
+    "examples/statement-review/bound-sheet0/apply_summary.json",
+    "examples/statement-review/bound-sheet0/sample-before-appearances.json",
+    "examples/statement-review/bound-sheet0/sample-before-appearances.csv",
+    "examples/statement-review/bound-sheet0/sample-before-appearances.html",
+    "examples/statement-review/bound-sheet0/illustrative_review-before-appearances.csv",
+    "examples/statement-review/bound-sheet0/apply_summary-before-appearances.json"
    ],
    "tests": [
     "scripts/test_statements.py",
@@ -468,7 +481,17 @@
     "examples/context-register/metropt3/source_key.json",
     "examples/context-register/metropt3/proposed_answers.csv",
     "examples/context-register/metropt3/expected/context.json",
-    "examples/context-register/metropt3/expected/context.md"
+    "examples/context-register/metropt3/expected/context.md",
+    "examples/context-register/illustrative/history/before-appearances.context.json",
+    "examples/context-register/illustrative/history/before-appearances.answers.csv",
+    "examples/context-register/bayer/history/before-appearances.context.json",
+    "examples/context-register/bayer/history/before-appearances.answers.csv",
+    "examples/context-register/pronto/history/before-appearances.context.json",
+    "examples/context-register/pronto/history/before-appearances.answers.csv",
+    "examples/context-register/nist-smstestbed/history/before-appearances.context.json",
+    "examples/context-register/nist-smstestbed/history/before-appearances.answers.csv",
+    "examples/context-register/metropt3/history/before-appearances.context.json",
+    "examples/context-register/metropt3/history/before-appearances.answers.csv"
    ],
    "tests": [
     "scripts/test_context_register.py",

@@ -21,19 +21,19 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   The description enumerates Motor Current in amperes as item 6 and Oil Temperature in degrees Celsius as item 7. These are definitions in the PDF enumeration, not a verified plant channel mapping.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 2, Attribute Information, numbered items 6 (Motor Current) and 7 (Oil Temperature); SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M08`: **current**, proposed, partial; `released-file.column-identities` = **H: Oil_temperature; I: Motor_current; K: DV_eletric**.
   The raw header places Oil_temperature before Motor_current and spells the electrical column DV_eletric. Preserve these names. These are literal file column identities; units and physical channel mapping need separate review.
   Source: MPT-CSV, revision uci-791/zip-aab991a970e58210, CSV physical line 1; named columns H:I (one-based, including the unnamed leading field), plus exact DV_eletric header; SHA-256 `db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M09`: **current**, proposed, partial; `released-file.first-record.analogue-values` = **Oil_temperature=53.60000000000001; Motor_current=0.04**.
   The first record contains these literal values under Oil_temperature and Motor_current respectively. These literal fields alone do not establish units, calibration or current plant truth.
   Source: MPT-CSV, revision uci-791/zip-aab991a970e58210, CSV physical lines 1-2; header H:I and first data record at timestamp 2020-02-01 00:00:00; SHA-256 `db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 ## MPT-COVERAGE@MPT-APU: What time/population scope can the released CSV support?
 
@@ -54,13 +54,13 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   The description reports 15,169,480 instances/data points and acquisition at 1 Hz during February-August 2020. This is a documentation claim; the acquisition/export history is not verified here.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF pages 1-2; summary Number of Instances, Data Set Information and Attribute Information opening paragraph; SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M02`: **current**, proposed, needs_data; `released-file.observed-scope` = **1516948 data rows; 17 fields; 2020-02-01 00:00:00 to 2020-09-01 03:59:50; gaps min/median/max 8/10/172918 s**.
   The actual release contains 1,516,948 data rows and 17 fields. Its timestamps run from 2020-02-01 00:00:00 to 2020-09-01 03:59:50 and strictly increase; adjacent gaps have minimum/median/maximum 8/10/172918 seconds. The first gaps are 10, 9 and 10 seconds. These are released-file observations, not a uniform period, timezone or explanation of the acquisition/export history.
   Source: MPT-CSV, revision uci-791/zip-aab991a970e58210, CSV physical lines 1-1516949; header and all timestamp fields, first/last records and adjacent-gap profile; SHA-256 `db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 ## MPT-EFFECTIVENESS@MPT-APU: Is there enough evidence to review the June/July maintenance effectiveness?
 
@@ -81,13 +81,13 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   Table row 3 gives this reported failure interval and a maintenance note naming 8Jun at 16:00. The note lacks a year/timezone and does not identify the executed action or an effectiveness criterion/result. The interval end is not a verified repair-completion or return-to-service time.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 3, Failure Information table, data row 3, all six columns (printed Nr. #3); SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M06`: **current**, proposed, needs_data; `failure-table.row4.report` = **7/15/2020 14:30-7/15/2020 19:00; Air Leak; High stress; Maintenance on 16Jul at 00:00**.
   Table row 4 gives this reported failure interval and a maintenance note naming 16Jul at 00:00. It does not establish which repair occurred, its configuration, actual completion, recovery or causal improvement. Comparable observations and attributed review remain missing.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 3, Failure Information table, data row 4, all six columns (printed Nr. #4); SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 ## MPT-EVENT-IDENTITY@MPT-APU: How are the two printed #1 failure records kept separate?
 
@@ -108,7 +108,7 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   The first and second table rows both print #1 but have different reported time windows. Keep them as separate row-scoped records. This packet supplies neither a corrected report number nor verified external work-record or physical-asset identity.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 3, Failure Information table, data rows 1-2 including Nr., Start Time and End Time; SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 ## MPT-MAY-WORK@MPT-APU: What intervention, if any, belongs to the May 29-30 reported interval?
 
@@ -129,7 +129,7 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   Table row 2 reports a May 29-30 air-leak interval and separately says Maintenance on 30Apr at 12:00. Preserve both literal dates. The note does not establish a May repair completion, performed work, resulting configuration, timezone or return to service; the original execution record and date clarification are needed.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 3, Failure Information table, data row 2, all six columns (printed Nr. #1); SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 ## MPT-MODE@MPT-APU: Does the first recorded electrical state identify a unique operating mode?
 
@@ -150,20 +150,20 @@ Limits from the screen: Development packet. No human owner, approval, plant trut
   The description says an active COMP intake-valve signal indicates no air intake and permits either off or offloaded operation. It does not select one of those conditions for the observed record.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 2, Attribute Information, item 8 COMP, complete definition; SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M11`: **current**, proposed, partial; `description.DV-electric.meaning` = **active: under load; inactive: off or offloaded**.
   The description associates active DV electric with under-load operation and inactive with off or offloaded operation. This published meaning does not verify the applicable configuration or a unique observed mode.
   Source: MPT-DESCRIPTION, revision uci-791/zip-aab991a970e58210, PDF page 3, Attribute Information, item 9 DV electric, complete definition; SHA-256 `b00fac0e8899854078309bef4adaa480d82ecf14dc81c5097c3646973e824127`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
 - `MPT-M12`: **current**, proposed, needs_data; `released-file.first-record.electrical-values` = **2020-02-01 00:00:00; Motor_current=0.04; COMP=1.0; DV_eletric=0.0**.
   The first record has Motor_current 0.04, COMP 1.0 and DV_eletric 0.0. Keep those raw observations. They do not by themselves identify a unique mode, failure cause or current asset condition; applicable control logic and time-aligned operating evidence are still needed.
   Source: MPT-CSV, revision uci-791/zip-aab991a970e58210, CSV physical lines 1-2; timestamp and named Motor_current, COMP, DV_eletric columns; SHA-256 `db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24`.
   Source match: match; plant truth: unknown; reviewer: not recorded, reviewed on: not recorded; owner at decision: needs owner.
-  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict.
+  Note: AI-authored development proposal; no human owner, assignment, reviewer, approval or effectiveness verdict. AI-authored re-proposal against expanded item evidence; prior proposal retained. No new human or plant review.
 
-Immutable history: 12 decisions, 0 ownership assignments. Full old evidence snapshots are in context.json.
+Immutable history: 24 decisions, 0 ownership assignments. Full old evidence snapshots are in context.json.
 
 A repeated answer_id explicitly revises that answer. Independent answers need different answer ids. Different canonical values under one claim_key remain disputed until an engineer explicitly revises or rejects an answer. Prose wording is not compared for agreement.

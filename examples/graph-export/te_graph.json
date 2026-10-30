@@ -72,7 +72,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "BL",
@@ -81,7 +86,12 @@
    "name": "battery limit",
    "aliases": [],
    "status": "confirmed",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "Downs, J.J. & Vogel, E.F. (1993). A plant-wide industrial process control problem. Computers & Chemical Engineering 17(3), 245-255.",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "U-100",
@@ -133,7 +143,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "holdup with states YY(28)-YY(36) in TEFUNC (component balance YP(I+27), energy YP(36))",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "R-101",
@@ -185,7 +207,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "holdup with states YY(1)-YY(9) in TEFUNC (component balance YP(I+0), energy YP(9))",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "E-101",
@@ -253,7 +287,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "heat term QUS = UAS*(TWS - TST(8)) cools the reactor effluent FTM(8); cooling-water flow XMV(11) 'Condenser Cooling Water Flow'",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "V-101",
@@ -305,7 +351,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "holdup with states YY(10)-YY(18) in TEFUNC (component balance YP(I+9), energy YP(18))",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "K-101",
@@ -373,7 +431,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "compressor curve drives FTM(9) from separator to header; work CPDH = XMEAS(20)",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "C-101",
@@ -425,7 +495,19 @@
       "checked_on": "2026-10-13"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "teprob.f (Downs & Vogel TE code, Braatz group mirror)",
+     "temexd_mod.c header (Bathelt, Ricker & Jelali 2015 revised TE code)"
+    ],
+    "evidence": "holdup with states YY(19)-YY(27) in TEFUNC (component balance YP(I+18), energy YP(27))",
+    "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
+   }
   },
   {
    "id": "FT-101",
@@ -539,7 +621,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 1: \"A Feed\" kscmh",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-102",
@@ -653,7 +741,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 2: \"D Feed\" kg/hr",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-103",
@@ -767,7 +861,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 3: \"E Feed\" kg/hr",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-104",
@@ -881,7 +981,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 4: \"A and C Feed\" kscmh",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-105",
@@ -1008,7 +1114,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 5: \"Recycle Flow\" kscmh",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-106",
@@ -1122,7 +1234,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 6: \"Reactor Feed Rate\" kscmh",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "PT-107",
@@ -1225,7 +1343,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 7: \"Reactor Pressure\" kPa gauge",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "LT-108",
@@ -1328,7 +1452,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 8: \"Reactor Level\" %",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TT-109",
@@ -1431,7 +1561,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 9: \"Reactor Temperature\" Deg C",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-110",
@@ -1556,7 +1692,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 10: \"Purge Rate (stream 9)\" kscmh",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TT-111",
@@ -1659,7 +1801,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 11: \"Product Sep Temp\" Deg C",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "LT-112",
@@ -1762,7 +1910,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 12: \"Product Sep Level\" %",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "PT-113",
@@ -1865,7 +2019,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 13: \"Prod Sep Pressure\" kPa gauge",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-114",
@@ -1979,7 +2139,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 14: \"Prod Sep Underflow (stream 10)\" m3/hr",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "LT-115",
@@ -2082,7 +2248,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 15: \"Stripper Level\" %",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "PT-116",
@@ -2198,7 +2370,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 16: \"Stripper Pressure\" kPa gauge",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-117",
@@ -2312,7 +2490,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 17: \"Stripper Underflow (stream 11)\" m3/hr",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TT-118",
@@ -2415,7 +2599,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 18: \"Stripper Temperature\" Deg C",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FT-119",
@@ -2531,7 +2721,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 19: \"Stripper Steam Flow\" kg/hr",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "JT-120",
@@ -2634,7 +2830,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 20: \"Compressor Work\" kW",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TT-121",
@@ -2737,7 +2939,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 21: \"Reactor Cooling Water Outlet Temp\" Deg C",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TT-122",
@@ -2875,7 +3083,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMEAS 22: \"Separator Cooling Water Outlet Temp\" Deg C",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "AT-123",
@@ -3007,7 +3221,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "Reactor Feed Analysis (stream 6): components A-F",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "AT-129",
@@ -3150,7 +3370,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "Purge Gas Analysis (stream 9): components A-H",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "AT-137",
@@ -3282,7 +3508,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "Product Analysis (stream 11): components D-H",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-102",
@@ -3385,7 +3617,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 1: \"D Feed Flow (stream 2)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-103",
@@ -3488,7 +3726,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 2: \"E Feed Flow (stream 3)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-101",
@@ -3591,7 +3835,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 3: \"A Feed Flow (stream 1)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-104",
@@ -3694,7 +3944,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 4: \"A and C Feed Flow (stream 4)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-105",
@@ -3799,7 +4055,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 5: \"Compressor Recycle Valve\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-110",
@@ -3913,7 +4175,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 6: \"Purge Valve (stream 9)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "LV-112",
@@ -4016,7 +4284,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 7: \"Separator Pot Liquid Flow (stream 10)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "LV-115",
@@ -4119,7 +4393,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 8: \"Stripper Liquid Product Flow (stream 11)\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-119",
@@ -4211,7 +4491,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 9: \"Stripper Steam Valve\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "TV-121",
@@ -4303,7 +4589,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 10: \"Reactor Cooling Water Flow\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FV-117",
@@ -4395,7 +4687,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 11: \"Condenser Cooling Water Flow\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "SC-212",
@@ -4485,7 +4783,13 @@
       "checked_on": "2026-10-06"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "teprob.f (Braatz group TE code)",
+    "evidence": "XMV 12: \"Agitator Speed\"",
+    "checked_on": "2026-10-06"
+   }
   },
   {
    "id": "FIC-102",
@@ -4579,7 +4883,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL1: error line 501 reads XMEAS(2) against SETPT(1); update line 509 moves XMV(1); recorded mean 3662 vs setpoint 3664 (0.07 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-103",
@@ -4673,7 +4986,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL2: error line 542 reads XMEAS(3) against SETPT(2); update line 550 moves XMV(2); recorded mean 4511 vs setpoint 4509.3 (0.04 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-101",
@@ -4767,7 +5089,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL3: error line 583 reads XMEAS(1) against SETPT(3); update line 591 moves XMV(3); recorded mean 0.2502 vs setpoint 0.25052 (0.01 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-104",
@@ -4861,7 +5192,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL4: error line 624 reads XMEAS(4) against SETPT(4); update line 632 moves XMV(4); recorded mean 9.344 vs setpoint 9.3477 (0.04 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-105",
@@ -4955,7 +5295,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL5: error line 665 reads XMEAS(5) against SETPT(5); update line 678 moves XMV(5); recorded mean 26.9 vs setpoint 26.902 (0.00 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-110",
@@ -5049,7 +5398,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL6: error line 735 reads XMEAS(10) against SETPT(6); update line 747 moves XMV(6); recorded mean 0.3369 vs setpoint 0.33712 (0.02 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "LIC-112",
@@ -5143,7 +5501,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL7: error line 784 reads XMEAS(12) against SETPT(7); update line 792 moves XMV(7); recorded mean 49.93 vs setpoint 50 (0.07 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "LIC-115",
@@ -5237,7 +5604,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL8: error line 825 reads XMEAS(15) against SETPT(8); update line 833 moves XMV(8); recorded mean 49.96 vs setpoint 50 (0.04 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-119",
@@ -5331,7 +5707,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL9: error line 866 reads XMEAS(19) against SETPT(9); update line 874 moves XMV(9); recorded mean 234 vs setpoint 230.31 (0.34 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "TIC-121",
@@ -5425,7 +5810,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL10: error line 907 reads XMEAS(21) against SETPT(10); update line 915 moves XMV(10); recorded mean 94.61 vs setpoint 94.599 (0.05 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "FIC-117",
@@ -5519,7 +5913,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL11: error line 948 reads XMEAS(17) against SETPT(11); update line 956 moves XMV(11); recorded mean 22.91 vs setpoint 22.949 (0.07 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "AIC-123A",
@@ -5627,7 +6030,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL13: error line 989 reads XMEAS(23) against SETPT(13); update line 997 moves SETPT(3); recorded mean 32.19 vs setpoint 32.188 (0.00 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "AIC-123D",
@@ -5735,7 +6147,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL14: error line 1030 reads XMEAS(26) against SETPT(14); update line 1038 moves SETPT(1); recorded mean 6.883 vs setpoint 6.882 (0.01 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "AIC-123E",
@@ -5843,7 +6264,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL15: error line 1071 reads XMEAS(27) against SETPT(15); update line 1079 moves SETPT(2); recorded mean 18.77 vs setpoint 18.776 (0.02 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "TIC-118",
@@ -5937,7 +6367,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL16: error line 1112 reads XMEAS(18) against SETPT(16); update line 1120 moves SETPT(9); recorded mean 65.85 vs setpoint 65.731 (0.26 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "LIC-108",
@@ -6031,7 +6470,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL17: error line 1153 reads XMEAS(8) against SETPT(17); update line 1161 moves SETPT(4); recorded mean 75.02 vs setpoint 75 (0.04 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "TIC-109",
@@ -6125,7 +6573,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL18: error line 1194 reads XMEAS(9) against SETPT(18); update line 1202 moves SETPT(10); recorded mean 120.4 vs setpoint 120.4 (0.01 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "AIC-129",
@@ -6233,7 +6690,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL19: error line 1235 reads XMEAS(30) against SETPT(19); update line 1244 moves SETPT(6); recorded mean 13.82 vs setpoint 13.823 (0.02 SD)",
+    "checked_on": null
+   }
   },
   {
    "id": "AIC-137",
@@ -6341,7 +6807,16 @@
       "checked_on": null
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": [
+     "temain_mod.f (Braatz group closed-loop TE code, sha256 31b83c17f8d52332...)",
+     "d00_te.dat (recorded normal run)"
+    ],
+    "evidence": "CONTRL20: error line 1278 reads XMEAS(38) against SETPT(20); update line 1286 moves SETPT(16); recorded mean 0.8355 vs setpoint 0.8357 (0.01 SD)",
+    "checked_on": null
+   }
   }
  ],
  "edges": [
@@ -6360,6 +6835,9 @@
     ],
     "evidence": "holdup with states YY(28)-YY(36) in TEFUNC (component balance YP(I+27), energy YP(36))",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {
@@ -6377,6 +6855,9 @@
     ],
     "evidence": "holdup with states YY(1)-YY(9) in TEFUNC (component balance YP(I+0), energy YP(9))",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {
@@ -6394,6 +6875,9 @@
     ],
     "evidence": "heat term QUS = UAS*(TWS - TST(8)) cools the reactor effluent FTM(8); cooling-water flow XMV(11) 'Condenser Cooling Water Flow'",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {
@@ -6411,6 +6895,9 @@
     ],
     "evidence": "holdup with states YY(10)-YY(18) in TEFUNC (component balance YP(I+9), energy YP(18))",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {
@@ -6428,6 +6915,9 @@
     ],
     "evidence": "compressor curve drives FTM(9) from separator to header; work CPDH = XMEAS(20)",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {
@@ -6445,6 +6935,9 @@
     ],
     "evidence": "holdup with states YY(19)-YY(27) in TEFUNC (component balance YP(I+18), energy YP(27))",
     "checked_on": "2026-10-13"
+   },
+   "citations": {
+    "source": "D&V 1993 Fig. 1"
    }
   },
   {

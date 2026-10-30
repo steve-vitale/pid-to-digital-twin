@@ -12,6 +12,7 @@ drawing, scripts/dexpi_reader.py for DEXPI XML). The format is described in docs
 source and status the model already holds, and an item with no status is exported as "unverified". Stdlib only.
 """
 import argparse
+import copy
 import json
 import re
 import sys
@@ -68,8 +69,35 @@ def status_of(item):
     return item.get("status") or "unverified"
 
 
+def provenance_of(item):
+    """Original ordered drawing appearances, including empty/duplicate records and unknown fields.
+
+    Missing locators remain missing. A supplied locator must be usable in the stated 0-1000 coordinate system;
+    refuse malformed geometry rather than silently dropping a later appearance or crashing its reviewer.
+    """
+    prov = item.get("provenance")
+    if prov is None:
+        return []
+    if not isinstance(prov, list) or any(not isinstance(p, dict) for p in prov):
+        raise ValueError("provenance must be a list of appearance objects")
+    for i, p in enumerate(prov):
+        try:
+            json.dumps(p, allow_nan=False, ensure_ascii=False).encode("utf-8")
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"provenance[{i}] must contain finite UTF-8 JSON values") from exc
+        sheet = p.get("sheet")
+        if sheet is not None and (isinstance(sheet, bool) or not isinstance(sheet, (str, int))):
+            raise ValueError(f"provenance[{i}].sheet must be text or an integer")
+        box = p.get("box_0_1000")
+        if box is not None and (not isinstance(box, list) or len(box) != 4 or
+                any(isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 <= v <= 1000 for v in box) or
+                not (0 <= box[0] < box[2] <= 1000 and 0 <= box[1] < box[3] <= 1000)):
+            raise ValueError(f"provenance[{i}].box_0_1000 must be an ordered finite box within 0-1000")
+    return prov
+
+
 def source_of(item, model_source):
-    prov = item.get("provenance") or []
+    prov = provenance_of(item)
     if prov:
         p = prov[0]
         return {"kind": "drawing", "sheet": p.get("sheet"), "box_0_1000": p.get("box_0_1000"),
@@ -83,6 +111,18 @@ def source_of(item, model_source):
     if src:
         return {"kind": "document", "document": src}
     return {"kind": "model", "document": model_source, "note": "the item cites no source of its own"}
+
+
+def item_evidence(item, model_source):
+    """Identity source plus original item evidence; it does not corroborate each claim or override its source."""
+    result = {"source": source_of(item, model_source)}
+    prov = provenance_of(item)
+    if prov:
+        result["provenance"] = copy.deepcopy(prov)
+    citations = {k: copy.deepcopy(item[k]) for k in ("source", "sources") if k in item}
+    if citations:
+        result["citations"] = citations
+    return result
 
 
 def plain(v):
@@ -151,7 +191,7 @@ def node(id_, kind, item, model_source, name=None, consumed=()):
     review = item.get("ops_review") or None
     out = {"id": id_, "kind": kind, "tag": item.get("tag") or (id_ if kind in ("equipment", "system") else None),
            "name": name or item.get("name") or item.get("description"), "aliases": aliases,
-           "status": status_of(item), "attributes": attrs}
+           "status": status_of(item), "attributes": attrs, **item_evidence(item, model_source)}
     if review and review.get("status"):
         out["status"] = review["status"]
         out["review"] = {k: review.get(k) for k in ("status", "by", "on", "notes")}
@@ -172,9 +212,9 @@ def from_hand_built(m):
     # The model's own notes (its source, how it was made, its tag convention) are claims on the plant node.
     meta_claims = claims({k: v for k, v in m["meta"].items() if k not in ("model_id", "title")}, src)
     nodes = [{"id": "PLANT", "kind": "plant", "tag": m["meta"].get("model_id"), "name": m["meta"].get("title"),
-              "aliases": [], "status": "unverified", "attributes": meta_claims},
+              "aliases": [], "status": "unverified", "attributes": meta_claims, **item_evidence(m["meta"], src)},
              {"id": "BL", "kind": "boundary", "tag": None, "name": "battery limit", "aliases": [],
-              "status": "confirmed", "attributes": []}]
+              "status": "confirmed", "attributes": [], **item_evidence({}, src)}]
     edges = []
     for u in m["units"]:
         nodes.append(node(u["id"], "equipment", u, src))
@@ -266,7 +306,7 @@ def append_unplaced_controls(m, nodes, edges):
 def from_extracted(m):
     src = m["meta"].get("source_document")
     nodes = [{"id": "PLANT", "kind": "plant", "tag": None, "name": m["meta"].get("title"), "aliases": [],
-              "status": "unverified", "attributes": []}]
+              "status": "unverified", "attributes": [], **item_evidence(m["meta"], src)}]
     edges = []
     for s in m.get("systems", []):
         nodes.append(node(s["id"], "system", s, src))
@@ -394,7 +434,7 @@ def build(model_path, reviews=None, questions=None):
              "from": a, "to": b, "status": status_of(item),
              "direction": item.get("direction", "known" if typ == "connects" and not extracted else
                                    "unknown" if typ == "piped_to" else None),
-             "source": source_of(item, src)}
+             **item_evidence(item, src)}
         if typ == "connects":  # a line is more than its ends: size, fluid, insulation, temperature travel with it
             e["layer"] = ("stream" if not extracted else
                           "offpage_pair" if item.get("kind") == "cross_sheet" else "network_pair")
@@ -496,6 +536,14 @@ def problems(g):
     out += [f"edge id {i!r} appears more than once" for i in sorted({i for i in edge_ids if edge_ids.count(i) > 1})]
     streams = {e["id"] for e in g.get("edges", []) if e.get("type") == "connects" and e.get("layer") == "stream"}
     for n in g.get("nodes", []):
+        try:
+            provenance_of(n)
+        except ValueError as exc:
+            out.append(f"node {n.get('id')}: {exc}")
+        if "source" in n and not isinstance(n["source"], dict):
+            out.append(f"node {n.get('id')}: source must be an object")
+        if "citations" in n and not isinstance(n["citations"], dict):
+            out.append(f"node {n.get('id')}: citations must be an object")
         if n.get("kind") not in NODE_KINDS:
             out.append(f"node {n.get('id')}: unknown kind {n.get('kind')!r}")
         if n.get("status") not in STATUSES:
@@ -510,6 +558,12 @@ def problems(g):
     kind = {n["id"]: n.get("kind") for n in g.get("nodes", [])}
     nets_of = {}
     for e in g.get("edges", []):
+        try:
+            provenance_of(e)
+        except ValueError as exc:
+            out.append(f"edge {e.get('id')}: {exc}")
+        if "citations" in e and not isinstance(e["citations"], dict):
+            out.append(f"edge {e.get('id')}: citations must be an object")
         if e.get("type") == "on_network":
             nets_of.setdefault(e.get("from"), set()).add(e.get("to"))
     ends_of = {t: set() for t in LINE_EDGES}

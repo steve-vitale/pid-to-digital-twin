@@ -23,13 +23,20 @@ IMAGE = ROOT / 'data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.p
 REVIEW = PACKET / 'illustrative_review.csv'
 
 
-def invoke(graph, image, output):
+def invoke(graph, image, output, sheet=REVIEW):
     return subprocess.run([sys.executable, '-S', str(ROOT / 'scripts/statements.py'), 'apply', str(graph),
-        str(REVIEW), '--image', f'0={image}', '--date', '2026-10-29', '--out', str(output)],
+        str(sheet), '--image', f'0={image}', '--date', '2026-10-30', '--out', str(output)],
         env={**os.environ, 'PYTHONIOENCODING': 'utf-8'}, capture_output=True, encoding='utf-8', timeout=30)
 
 
 class BoundPublicExample(unittest.TestCase):
+    def test_prior_worksheet_is_retained_and_refuses_the_expanded_graph(self):
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder) / 'must-not-exist.json'
+            run = invoke(GRAPH, IMAGE, output, PACKET / 'illustrative_review-before-appearances.csv')
+            self.assertEqual(run.returncode, 2, run.stdout + run.stderr)
+            self.assertIn('stale review fingerprint', run.stdout + run.stderr)
+            self.assertFalse(output.exists())
     def test_sample_binds_the_current_graph_and_actual_public_original(self):
         graph = json.loads(GRAPH.read_text(encoding='utf-8'))
         packet = json.loads((PACKET / 'sample.json').read_text(encoding='utf-8'))

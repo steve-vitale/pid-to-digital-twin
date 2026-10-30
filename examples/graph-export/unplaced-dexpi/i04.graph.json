@@ -182,7 +182,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file I04V01-VER.EX01.xml, SHA-256 91b301bad8f432feb5dfff46190830a9415c63fd9904485a700f9fda7dfc10b5",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "BL",
@@ -191,7 +196,12 @@
    "name": "battery limit",
    "aliases": [],
    "status": "confirmed",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file I04V01-VER.EX01.xml, SHA-256 91b301bad8f432feb5dfff46190830a9415c63fd9904485a700f9fda7dfc10b5",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "FIC-04",
@@ -327,7 +337,14 @@
       "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   }
   },
   {
    "id": "FV-04",
@@ -491,6 +508,13 @@
      }
     }
    ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
    "placement": "no unit reachable through the piping from GlobeValve-1"
   },
   {
@@ -628,6 +652,13 @@
      }
     }
    ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessSignalGeneratingFunction-1 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-1"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-1 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-1"
+   },
    "placement": "no unit reachable through the piping from FlowMeasuringElement-1"
   },
   {
@@ -656,7 +687,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   }
  ],
  "edges": [
@@ -670,6 +708,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-1 (PipingNetworkSystem), segments PipingNetworkSegment-1"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-1 (PipingNetworkSystem), segments PipingNetworkSegment-1"
    },
    "layer": "stream",
    "attributes": [
@@ -757,6 +798,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-2 (PipingNetworkSystem), segments PipingNetworkSegment-2"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-2 (PipingNetworkSystem), segments PipingNetworkSegment-2"
    },
    "layer": "stream",
    "attributes": [
@@ -862,6 +906,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
    }
   },
   {
@@ -874,6 +921,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessSignalGeneratingFunction-1 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-1"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-1 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-1"
    }
   },
   {
@@ -886,6 +936,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -898,6 +951,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -910,6 +966,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -933,6 +992,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -945,6 +1007,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
    }
   }
  ],

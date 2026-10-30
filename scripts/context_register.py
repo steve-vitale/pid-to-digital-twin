@@ -75,7 +75,10 @@ def text(value, where):
 
 def semantic(value):
     if isinstance(value, dict):
-        return {k: semantic(v) for k, v in value.items() if k not in BOOKKEEPING}
+        # Original evidence records are opaque content, including fields named status/context. Stripping
+        # bookkeeping inside them would hide an evidence change from the context freshness comparison.
+        return {k: copy.deepcopy(v) if k in ("provenance", "citations") else semantic(v)
+                for k, v in value.items() if k not in BOOKKEEPING}
     if isinstance(value, list):
         # Lists can carry engineering order (curves, split ranges); preserve that order.
         return [semantic(v) for v in value]

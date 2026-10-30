@@ -11,7 +11,12 @@
    "name": "Digital twin starter kit: site-drawing / supplied-extraction",
    "aliases": [],
    "status": "unverified",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "SYS-0",
@@ -244,7 +249,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "OPEN100-0, revision public, page 1",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "S0-TK001",
@@ -401,6 +411,48 @@
      }
     }
    ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     226.6,
+     433.1,
+     259.0,
+     569.1
+    ],
+    "read_as": "MSS-XSS-140",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s1",
+     "class": "tank",
+     "box_0_1000": [
+      226.6,
+      433.1,
+      259.0,
+      569.1
+     ],
+     "tag_as_extracted": "MSS-XSS-140",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ],
+   "citations": {
+    "source": "supplied-extraction extraction, sheet 0 symbol s1"
+   },
    "review": {
     "status": "confirmed",
     "by": "R1 (illustrative example, not a real review)",
@@ -562,7 +614,49 @@
       "model": "gpt-6.1-sol"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     85.4,
+     565.3,
+     120.0,
+     761.0
+    ],
+    "read_as": "RCS-SG-100",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s83",
+     "class": "tank",
+     "box_0_1000": [
+      85.4,
+      565.3,
+      120.0,
+      761.0
+     ],
+     "tag_as_extracted": "RCS-SG-100",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ],
+   "citations": {
+    "source": "supplied-extraction extraction, sheet 0 symbol s83"
+   }
   },
   {
    "id": "S0-IN001",
@@ -985,6 +1079,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     187.1,
+     385.0,
+     202.8,
+     409.3
+    ],
+    "read_as": "TCV 1401",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s3",
+     "class": "instrumentation",
+     "box_0_1000": [
+      187.1,
+      385.0,
+      202.8,
+      409.3
+     ],
+     "tag_as_extracted": "TCV 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -1409,6 +1542,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     287.1,
+     354.2,
+     302.8,
+     377.4
+    ],
+    "read_as": "FT 1401",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      287.1,
+      354.2,
+      302.8,
+      377.4
+     ],
+     "tag_as_extracted": "FT 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ],
    "review": {
@@ -1841,6 +2013,45 @@
      }
     }
    ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     301.2,
+     354.2,
+     316.3,
+     377.4
+    ],
+    "read_as": "FT 1401",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s8",
+     "class": "instrumentation",
+     "box_0_1000": [
+      301.2,
+      354.2,
+      316.3,
+      377.4
+     ],
+     "tag_as_extracted": "FT 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ],
    "review": {
     "status": "rejected",
     "by": "R1 (illustrative example, not a real review)",
@@ -2270,6 +2481,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     246.6,
+     306.0,
+     261.7,
+     329.8
+    ],
+    "read_as": "TE 14084A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s9",
+     "class": "instrumentation",
+     "box_0_1000": [
+      246.6,
+      306.0,
+      261.7,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14084A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -2693,6 +2943,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     246.6,
+     327.1,
+     261.7,
+     350.4
+    ],
+    "read_as": "TE 14084B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s10",
+     "class": "instrumentation",
+     "box_0_1000": [
+      246.6,
+      327.1,
+      261.7,
+      350.4
+     ],
+     "tag_as_extracted": "TE 14084B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -3118,6 +3407,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     302.3,
+     222.8,
+     317.9,
+     247.1
+    ],
+    "read_as": "RE 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      302.3,
+      222.8,
+      317.9,
+      247.1
+     ],
+     "tag_as_extracted": "RE 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -3541,6 +3869,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     337.4,
+     222.8,
+     353.1,
+     247.1
+    ],
+    "read_as": "PT 14085",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      337.4,
+      222.8,
+      353.1,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14085",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -3966,6 +4333,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     358.5,
+     222.8,
+     374.2,
+     247.1
+    ],
+    "read_as": "PT 14086",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      358.5,
+      222.8,
+      374.2,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14086",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -4389,6 +4795,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     379.0,
+     222.8,
+     395.3,
+     247.1
+    ],
+    "read_as": "PT 14087",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      379.0,
+      222.8,
+      395.3,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14087",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -4814,6 +5259,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     400.7,
+     222.8,
+     416.3,
+     247.1
+    ],
+    "read_as": "PT 14088",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      400.7,
+      222.8,
+      416.3,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14088",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -5237,6 +5721,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     354.2,
+     295.8,
+     369.8,
+     320.1
+    ],
+    "read_as": "TE 14089A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      354.2,
+      295.8,
+      369.8,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14089A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -5662,6 +6185,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     370.4,
+     295.8,
+     386.1,
+     320.1
+    ],
+    "read_as": "TE 14089B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      370.4,
+      295.8,
+      386.1,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14089B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -6085,6 +6647,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     362.8,
+     326.0,
+     378.5,
+     349.8
+    ],
+    "read_as": "TCV 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s20",
+     "class": "instrumentation",
+     "box_0_1000": [
+      362.8,
+      326.0,
+      378.5,
+      349.8
+     ],
+     "tag_as_extracted": "TCV 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -6546,6 +7147,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     410.9,
+     162.8,
+     426.6,
+     186.5
+    ],
+    "read_as": "AORV XXX",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s29",
+     "class": "instrumentation",
+     "box_0_1000": [
+      410.9,
+      162.8,
+      426.6,
+      186.5
+     ],
+     "tag_as_extracted": "AORV XXX",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -7005,6 +7645,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     441.8,
+     142.2,
+     457.4,
+     166.0
+    ],
+    "read_as": "PSV 1404",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s31",
+     "class": "instrumentation",
+     "box_0_1000": [
+      441.8,
+      142.2,
+      457.4,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1404",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -7466,6 +8145,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.8,
+     142.2,
+     479.1,
+     166.0
+    ],
+    "read_as": "PSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s33",
+     "class": "instrumentation",
+     "box_0_1000": [
+      462.8,
+      142.2,
+      479.1,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1405",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -7925,6 +8643,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     484.5,
+     142.2,
+     500.7,
+     166.0
+    ],
+    "read_as": "PSV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s35",
+     "class": "instrumentation",
+     "box_0_1000": [
+      484.5,
+      142.2,
+      500.7,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1406",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -8386,6 +9143,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     505.6,
+     142.2,
+     522.3,
+     166.0
+    ],
+    "read_as": "PSV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s37",
+     "class": "instrumentation",
+     "box_0_1000": [
+      505.6,
+      142.2,
+      522.3,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1407",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -8809,6 +9605,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     520.9,
+     186.5,
+     536.6,
+     209.8
+    ],
+    "read_as": "MS 4010",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s39",
+     "class": "instrumentation",
+     "box_0_1000": [
+      520.9,
+      186.5,
+      536.6,
+      209.8
+     ],
+     "tag_as_extracted": "MS 4010",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -9270,6 +10105,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     475.3,
+     239.5,
+     491.5,
+     262.8
+    ],
+    "read_as": "MSIV 1402",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s41",
+     "class": "instrumentation",
+     "box_0_1000": [
+      475.3,
+      239.5,
+      491.5,
+      262.8
+     ],
+     "tag_as_extracted": "MSIV 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -9693,6 +10567,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     515.5,
+     223.3,
+     530.7,
+     246.0
+    ],
+    "read_as": "RE 1403",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s42",
+     "class": "instrumentation",
+     "box_0_1000": [
+      515.5,
+      223.3,
+      530.7,
+      246.0
+     ],
+     "tag_as_extracted": "RE 1403",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -10118,6 +11031,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     458.5,
+     295.8,
+     474.2,
+     320.1
+    ],
+    "read_as": "TE 14090A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s44",
+     "class": "instrumentation",
+     "box_0_1000": [
+      458.5,
+      295.8,
+      474.2,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14090A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -10541,6 +11493,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     474.7,
+     295.8,
+     490.4,
+     320.1
+    ],
+    "read_as": "TE 14090B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s45",
+     "class": "instrumentation",
+     "box_0_1000": [
+      474.7,
+      295.8,
+      490.4,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14090B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -10966,6 +11957,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     328.2,
+     478.0,
+     352.0
+    ],
+    "read_as": "TCV 1403",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s47",
+     "class": "instrumentation",
+     "box_0_1000": [
+      462.3,
+      328.2,
+      478.0,
+      352.0
+     ],
+     "tag_as_extracted": "TCV 1403",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -11389,6 +12419,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     605.8,
+     233.0,
+     621.5,
+     256.3
+    ],
+    "read_as": "TE 14091A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s57",
+     "class": "instrumentation",
+     "box_0_1000": [
+      605.8,
+      233.0,
+      621.5,
+      256.3
+     ],
+     "tag_as_extracted": "TE 14091A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -11814,6 +12883,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     622.0,
+     233.0,
+     637.2,
+     256.3
+    ],
+    "read_as": "TE 14091B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s58",
+     "class": "instrumentation",
+     "box_0_1000": [
+      622.0,
+      233.0,
+      637.2,
+      256.3
+     ],
+     "tag_as_extracted": "TE 14091B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -12237,6 +13345,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     646.9,
+     242.2,
+     662.6,
+     265.5
+    ],
+    "read_as": "MSV 1404",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s59",
+     "class": "instrumentation",
+     "box_0_1000": [
+      646.9,
+      242.2,
+      662.6,
+      265.5
+     ],
+     "tag_as_extracted": "MSV 1404",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -12662,6 +13809,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     677.2,
+     242.2,
+     693.4,
+     265.5
+    ],
+    "read_as": "MSV 1405",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s62",
+     "class": "instrumentation",
+     "box_0_1000": [
+      677.2,
+      242.2,
+      693.4,
+      265.5
+     ],
+     "tag_as_extracted": "MSV 1405",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -13085,6 +14271,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     598.8,
+     306.6,
+     614.5,
+     329.8
+    ],
+    "read_as": "TE 14092A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s67",
+     "class": "instrumentation",
+     "box_0_1000": [
+      598.8,
+      306.6,
+      614.5,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14092A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -13510,6 +14735,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     615.6,
+     306.6,
+     631.2,
+     329.8
+    ],
+    "read_as": "TE 14092B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s68",
+     "class": "instrumentation",
+     "box_0_1000": [
+      615.6,
+      306.6,
+      631.2,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14092B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -13933,6 +15197,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     603.1,
+     331.5,
+     618.8,
+     354.7
+    ],
+    "read_as": "TCV 1406",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s69",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.1,
+      331.5,
+      618.8,
+      354.7
+     ],
+     "tag_as_extracted": "TCV 1406",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -14358,6 +15661,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     586.9,
+     494.2,
+     602.6,
+     517.5
+    ],
+    "read_as": "TE 14093B",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s78",
+     "class": "instrumentation",
+     "box_0_1000": [
+      586.9,
+      494.2,
+      602.6,
+      517.5
+     ],
+     "tag_as_extracted": "TE 14093B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -14781,6 +16123,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     603.1,
+     494.2,
+     618.8,
+     517.5
+    ],
+    "read_as": "TE 14093A",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s79",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.1,
+      494.2,
+      618.8,
+      517.5
+     ],
+     "tag_as_extracted": "TE 14093A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -15206,6 +16587,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     639.3,
+     497.5,
+     655.6,
+     521.2
+    ],
+    "read_as": "MSBV 1407",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s80",
+     "class": "instrumentation",
+     "box_0_1000": [
+      639.3,
+      497.5,
+      655.6,
+      521.2
+     ],
+     "tag_as_extracted": "MSBV 1407",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -15629,6 +17049,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     540.9,
+     633.4,
+     563.6
+    ],
+    "read_as": "TCV 1408",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s87",
+     "class": "instrumentation",
+     "box_0_1000": [
+      618.3,
+      540.9,
+      633.4,
+      563.6
+     ],
+     "tag_as_extracted": "TCV 1408",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -16054,6 +17513,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     583.1,
+     597.2,
+     598.8,
+     620.4
+    ],
+    "read_as": "TCV 1409",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s90",
+     "class": "instrumentation",
+     "box_0_1000": [
+      583.1,
+      597.2,
+      598.8,
+      620.4
+     ],
+     "tag_as_extracted": "TCV 1409",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -16225,6 +17723,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     179.5,
+     402.8,
+     188.2,
+     424.5
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s2",
+     "class": "valve",
+     "box_0_1000": [
+      179.5,
+      402.8,
+      188.2,
+      424.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -16398,6 +17935,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     259.5,
+     449.3,
+     263.3,
+     458.5
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s4",
+     "class": "general",
+     "box_0_1000": [
+      259.5,
+      449.3,
+      263.3,
+      458.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.85,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -16569,6 +18145,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     221.1,
+     533.4,
+     225.5,
+     542.0
+    ],
+    "read_as": "N1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s5",
+     "class": "general",
+     "box_0_1000": [
+      221.1,
+      533.4,
+      225.5,
+      542.0
+     ],
+     "tag_as_extracted": "N1",
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -16742,6 +18357,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     270.4,
+     347.7,
+     294.1,
+     383.9
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s6",
+     "class": "general",
+     "box_0_1000": [
+      270.4,
+      347.7,
+      294.1,
+      383.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -16913,6 +18567,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     301.7,
+     266.0,
+     318.5,
+     286.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s12",
+     "class": "general",
+     "box_0_1000": [
+      301.7,
+      266.0,
+      318.5,
+      286.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.86,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -17086,6 +18779,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     355.8,
+     342.3,
+     364.4,
+     364.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s19",
+     "class": "valve",
+     "box_0_1000": [
+      355.8,
+      342.3,
+      364.4,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -17257,6 +18989,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     347.1,
+     373.1,
+     355.2,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s21",
+     "class": "valve",
+     "box_0_1000": [
+      347.1,
+      373.1,
+      355.2,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -17430,6 +19201,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     361.2,
+     373.1,
+     367.7,
+     383.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s22",
+     "class": "general",
+     "box_0_1000": [
+      361.2,
+      373.1,
+      367.7,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -17601,6 +19411,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     373.1,
+     373.1,
+     381.7,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s23",
+     "class": "valve",
+     "box_0_1000": [
+      373.1,
+      373.1,
+      381.7,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -17774,6 +19623,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     336.9,
+     395.8,
+     344.4,
+     402.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s24",
+     "class": "general",
+     "box_0_1000": [
+      336.9,
+      395.8,
+      344.4,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.87,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -17945,6 +19833,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     343.9,
+     410.9,
+     352.5,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s25",
+     "class": "valve",
+     "box_0_1000": [
+      343.9,
+      410.9,
+      352.5,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -18118,6 +20045,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     357.4,
+     410.9,
+     366.1,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s26",
+     "class": "valve",
+     "box_0_1000": [
+      357.4,
+      410.9,
+      366.1,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -18289,6 +20255,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     428.2,
+     191.4,
+     434.7,
+     204.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s27",
+     "class": "valve",
+     "box_0_1000": [
+      428.2,
+      191.4,
+      434.7,
+      204.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -18462,6 +20467,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     420.1,
+     149.2,
+     435.3,
+     162.2
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s28",
+     "class": "valve",
+     "box_0_1000": [
+      420.1,
+      149.2,
+      435.3,
+      162.2
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -18633,6 +20677,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     443.4,
+     167.6,
+     449.9,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s30",
+     "class": "valve",
+     "box_0_1000": [
+      443.4,
+      167.6,
+      449.9,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -18806,6 +20889,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     464.5,
+     167.6,
+     471.0,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s32",
+     "class": "valve",
+     "box_0_1000": [
+      464.5,
+      167.6,
+      471.0,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -18977,6 +21099,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     485.0,
+     167.6,
+     491.5,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s34",
+     "class": "valve",
+     "box_0_1000": [
+      485.0,
+      167.6,
+      491.5,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -19150,6 +21311,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     506.1,
+     167.6,
+     512.6,
+     183.3
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s36",
+     "class": "valve",
+     "box_0_1000": [
+      506.1,
+      167.6,
+      512.6,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -19321,6 +21521,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     511.5,
+     201.7,
+     521.2,
+     223.9
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s38",
+     "class": "valve",
+     "box_0_1000": [
+      511.5,
+      201.7,
+      521.2,
+      223.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -19494,6 +21733,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     490.4,
+     259.0,
+     499.1,
+     280.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s40",
+     "class": "valve",
+     "box_0_1000": [
+      490.4,
+      259.0,
+      499.1,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -19665,6 +21943,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     515.0,
+     264.9,
+     531.7,
+     287.1
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s43",
+     "class": "general",
+     "box_0_1000": [
+      515.0,
+      264.9,
+      531.7,
+      287.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.88,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -19838,6 +22155,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     455.3,
+     342.3,
+     464.5,
+     364.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s46",
+     "class": "valve",
+     "box_0_1000": [
+      455.3,
+      342.3,
+      464.5,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -20009,6 +22365,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     452.0,
+     373.1,
+     460.1,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s48",
+     "class": "valve",
+     "box_0_1000": [
+      452.0,
+      373.1,
+      460.1,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -20182,6 +22577,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     465.5,
+     373.1,
+     472.6,
+     383.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s49",
+     "class": "general",
+     "box_0_1000": [
+      465.5,
+      373.1,
+      472.6,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -20353,6 +22787,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     478.0,
+     373.1,
+     486.6,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s50",
+     "class": "valve",
+     "box_0_1000": [
+      478.0,
+      373.1,
+      486.6,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -20526,6 +22999,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     442.3,
+     395.8,
+     449.9,
+     402.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s51",
+     "class": "general",
+     "box_0_1000": [
+      442.3,
+      395.8,
+      449.9,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.87,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -20697,6 +23209,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     448.2,
+     410.9,
+     456.9,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s52",
+     "class": "valve",
+     "box_0_1000": [
+      448.2,
+      410.9,
+      456.9,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -20870,6 +23421,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     462.3,
+     410.9,
+     471.0,
+     420.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s53",
+     "class": "valve",
+     "box_0_1000": [
+      462.3,
+      410.9,
+      471.0,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -21036,6 +23626,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     538.2,
+     269.3,
+     549.1,
+     281.2
+    ],
+    "read_as": "MSCV-XXX",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s54",
+     "class": "valve",
+     "box_0_1000": [
+      538.2,
+      269.3,
+      549.1,
+      281.2
+     ],
+     "tag_as_extracted": "MSCV-XXX",
+     "confidence": 0.97,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ],
    "review": {
@@ -21215,6 +23844,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     596.6,
+     254.7,
+     603.1,
+     267.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s55",
+     "class": "valve",
+     "box_0_1000": [
+      596.6,
+      254.7,
+      603.1,
+      267.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -21386,6 +24054,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     638.8,
+     270.9,
+     647.5,
+     280.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s60",
+     "class": "valve",
+     "box_0_1000": [
+      638.8,
+      270.9,
+      647.5,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -21559,6 +24266,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     639.9,
+     256.8,
+     645.3,
+     269.8
+    ],
+    "read_as": "H",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s61",
+     "class": "general",
+     "box_0_1000": [
+      639.9,
+      256.8,
+      645.3,
+      269.8
+     ],
+     "tag_as_extracted": "H",
+     "confidence": 0.92,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -21730,6 +24476,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     668.0,
+     270.9,
+     676.1,
+     280.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s63",
+     "class": "valve",
+     "box_0_1000": [
+      668.0,
+      270.9,
+      676.1,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -21903,6 +24688,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     669.1,
+     256.8,
+     675.0,
+     269.8
+    ],
+    "read_as": "M",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s64",
+     "class": "general",
+     "box_0_1000": [
+      669.1,
+      256.8,
+      675.0,
+      269.8
+     ],
+     "tag_as_extracted": "M",
+     "confidence": 0.92,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -22074,6 +24898,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     595.6,
+     343.4,
+     604.2,
+     364.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s70",
+     "class": "valve",
+     "box_0_1000": [
+      595.6,
+      343.4,
+      604.2,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -22247,6 +25110,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     592.3,
+     374.7,
+     600.4,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s71",
+     "class": "valve",
+     "box_0_1000": [
+      592.3,
+      374.7,
+      600.4,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -22418,6 +25320,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     606.4,
+     373.1,
+     613.4,
+     383.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s72",
+     "class": "general",
+     "box_0_1000": [
+      606.4,
+      373.1,
+      613.4,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -22591,6 +25532,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     618.3,
+     374.7,
+     626.9,
+     382.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s73",
+     "class": "valve",
+     "box_0_1000": [
+      618.3,
+      374.7,
+      626.9,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -22762,6 +25742,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     582.0,
+     395.8,
+     589.1,
+     402.8
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s74",
+     "class": "general",
+     "box_0_1000": [
+      582.0,
+      395.8,
+      589.1,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.81,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -22935,6 +25954,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     588.0,
+     411.5,
+     596.1,
+     420.1
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s75",
+     "class": "valve",
+     "box_0_1000": [
+      588.0,
+      411.5,
+      596.1,
+      420.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -23106,6 +26164,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     602.0,
+     411.5,
+     610.7,
+     420.1
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s76",
+     "class": "valve",
+     "box_0_1000": [
+      602.0,
+      411.5,
+      610.7,
+      420.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -23279,6 +26376,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     630.7,
+     521.5,
+     641.5,
+     543.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s81",
+     "class": "valve",
+     "box_0_1000": [
+      630.7,
+      521.5,
+      641.5,
+      543.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -23450,6 +26586,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     100.0,
+     553.9,
+     105.4,
+     559.3
+    ],
+    "read_as": "N2",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s84",
+     "class": "general",
+     "box_0_1000": [
+      100.0,
+      553.9,
+      105.4,
+      559.3
+     ],
+     "tag_as_extracted": "N2",
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -23623,6 +26798,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     120.0,
+     616.6,
+     127.6,
+     624.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s85",
+     "class": "general",
+     "box_0_1000": [
+      120.0,
+      616.6,
+      127.6,
+      624.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.9,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -23794,6 +27008,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     115.2,
+     732.3,
+     123.8,
+     740.5
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s86",
+     "class": "general",
+     "box_0_1000": [
+      115.2,
+      732.3,
+      123.8,
+      740.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.9,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -23967,6 +27220,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     628.0,
+     564.2,
+     642.1,
+     576.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s88",
+     "class": "valve",
+     "box_0_1000": [
+      628.0,
+      564.2,
+      642.1,
+      576.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -24138,6 +27430,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     576.6,
+     613.9,
+     584.7,
+     635.6
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s91",
+     "class": "valve",
+     "box_0_1000": [
+      576.6,
+      613.9,
+      584.7,
+      635.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -24311,6 +27642,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     568.0,
+     644.8,
+     576.1,
+     653.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s92",
+     "class": "valve",
+     "box_0_1000": [
+      568.0,
+      644.8,
+      576.1,
+      653.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -24482,6 +27852,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     582.0,
+     644.2,
+     588.0,
+     653.9
+    ],
+    "read_as": "T",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s93",
+     "class": "general",
+     "box_0_1000": [
+      582.0,
+      644.2,
+      588.0,
+      653.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.96,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -24655,6 +28064,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     593.9,
+     644.8,
+     602.6,
+     653.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s94",
+     "class": "valve",
+     "box_0_1000": [
+      593.9,
+      644.8,
+      602.6,
+      653.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -24826,6 +28274,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     557.7,
+     665.8,
+     564.7,
+     673.4
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s95",
+     "class": "general",
+     "box_0_1000": [
+      557.7,
+      665.8,
+      564.7,
+      673.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.79,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -24999,6 +28486,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     564.2,
+     682.1,
+     572.3,
+     690.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s96",
+     "class": "valve",
+     "box_0_1000": [
+      564.2,
+      682.1,
+      572.3,
+      690.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -25170,6 +28696,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     578.2,
+     682.1,
+     586.4,
+     690.7
+    ],
+    "read_as": null,
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s97",
+     "class": "valve",
+     "box_0_1000": [
+      578.2,
+      682.1,
+      586.4,
+      690.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.97,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -25433,6 +28998,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     124.4,
+     838.3,
+     147.1
+    ],
+    "read_as": "EXTRACTION STEAM ES PID 180-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s56",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      124.4,
+      838.3,
+      147.1
+     ],
+     "tag_as_extracted": "EXTRACTION STEAM ES PID 180-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -25694,6 +29298,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     264.9,
+     838.3,
+     288.2
+    ],
+    "read_as": "TBS PID 240-1 TURBINE SYSTEM",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s65",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      264.9,
+      838.3,
+      288.2
+     ],
+     "tag_as_extracted": "TBS PID 240-1 TURBINE SYSTEM",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -25957,6 +29600,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     333.1,
+     838.3,
+     356.3
+    ],
+    "read_as": "TBS PID 240-1 TURBINE SYSTEM",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s66",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      333.1,
+      838.3,
+      356.3
+     ],
+     "tag_as_extracted": "TBS PID 240-1 TURBINE SYSTEM",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -26218,6 +29900,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.5,
+     426.1,
+     838.3,
+     449.3
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s77",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      426.1,
+      838.3,
+      449.3
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -26481,6 +30202,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     526.3,
+     838.3,
+     549.0
+    ],
+    "read_as": "MAIN STEAM BY-PASS",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s82",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      526.3,
+      838.3,
+      549.0
+     ],
+     "tag_as_extracted": "MAIN STEAM BY-PASS",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -26742,6 +30502,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     578.2,
+     838.3,
+     601.5
+    ],
+    "read_as": "FWS TO STM BYPASS FWS PID 170-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s89",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      578.2,
+      838.3,
+      601.5
+     ],
+     "tag_as_extracted": "FWS TO STM BYPASS FWS PID 170-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -27005,6 +30804,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     686.9,
+     838.3,
+     710.2
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s98",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      686.9,
+      838.3,
+      710.2
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   },
   {
@@ -27266,6 +31104,45 @@
       "run": "source/0.json",
       "model": "gpt-6.1-sol"
      }
+    }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     746.9,
+     838.3,
+     770.2
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s99",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      746.9,
+      838.3,
+      770.2
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
     }
    ]
   },
@@ -27529,6 +31406,45 @@
       "model": "gpt-6.1-sol"
      }
     }
+   ],
+   "source": {
+    "kind": "drawing",
+    "sheet": "0",
+    "box_0_1000": [
+     767.0,
+     807.5,
+     838.3,
+     830.8
+    ],
+    "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+    "run": "source/0.json",
+    "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s100",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      807.5,
+      838.3,
+      830.8
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
    ]
   }
  ],
@@ -27565,6 +31481,35 @@
     "read_as": "MSS-XSS-140",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s1",
+     "class": "tank",
+     "box_0_1000": [
+      226.6,
+      433.1,
+      259.0,
+      569.1
+     ],
+     "tag_as_extracted": "MSS-XSS-140",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ],
+   "citations": {
+    "source": "supplied-extraction extraction, sheet 0 symbol s1"
    }
   },
   {
@@ -27586,6 +31531,35 @@
     "read_as": "RCS-SG-100",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s83",
+     "class": "tank",
+     "box_0_1000": [
+      85.4,
+      565.3,
+      120.0,
+      761.0
+     ],
+     "tag_as_extracted": "RCS-SG-100",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ],
+   "citations": {
+    "source": "supplied-extraction extraction, sheet 0 symbol s83"
    }
   },
   {
@@ -27607,7 +31581,33 @@
     "read_as": "TCV 1401",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s3",
+     "class": "instrumentation",
+     "box_0_1000": [
+      187.1,
+      385.0,
+      202.8,
+      409.3
+     ],
+     "tag_as_extracted": "TCV 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00005",
@@ -27628,7 +31628,33 @@
     "read_as": "FT 1401",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s7",
+     "class": "instrumentation",
+     "box_0_1000": [
+      287.1,
+      354.2,
+      302.8,
+      377.4
+     ],
+     "tag_as_extracted": "FT 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00006",
@@ -27649,7 +31675,33 @@
     "read_as": "FT 1401",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s8",
+     "class": "instrumentation",
+     "box_0_1000": [
+      301.2,
+      354.2,
+      316.3,
+      377.4
+     ],
+     "tag_as_extracted": "FT 1401",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00007",
@@ -27670,7 +31722,33 @@
     "read_as": "TE 14084A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s9",
+     "class": "instrumentation",
+     "box_0_1000": [
+      246.6,
+      306.0,
+      261.7,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14084A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00008",
@@ -27691,7 +31769,33 @@
     "read_as": "TE 14084B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s10",
+     "class": "instrumentation",
+     "box_0_1000": [
+      246.6,
+      327.1,
+      261.7,
+      350.4
+     ],
+     "tag_as_extracted": "TE 14084B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00009",
@@ -27712,7 +31816,33 @@
     "read_as": "RE 1402",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s11",
+     "class": "instrumentation",
+     "box_0_1000": [
+      302.3,
+      222.8,
+      317.9,
+      247.1
+     ],
+     "tag_as_extracted": "RE 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00010",
@@ -27733,7 +31863,33 @@
     "read_as": "PT 14085",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s13",
+     "class": "instrumentation",
+     "box_0_1000": [
+      337.4,
+      222.8,
+      353.1,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14085",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00011",
@@ -27754,7 +31910,33 @@
     "read_as": "PT 14086",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s14",
+     "class": "instrumentation",
+     "box_0_1000": [
+      358.5,
+      222.8,
+      374.2,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14086",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00012",
@@ -27775,7 +31957,33 @@
     "read_as": "PT 14087",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s15",
+     "class": "instrumentation",
+     "box_0_1000": [
+      379.0,
+      222.8,
+      395.3,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14087",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00013",
@@ -27796,7 +32004,33 @@
     "read_as": "PT 14088",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s16",
+     "class": "instrumentation",
+     "box_0_1000": [
+      400.7,
+      222.8,
+      416.3,
+      247.1
+     ],
+     "tag_as_extracted": "PT 14088",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00014",
@@ -27817,7 +32051,33 @@
     "read_as": "TE 14089A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s17",
+     "class": "instrumentation",
+     "box_0_1000": [
+      354.2,
+      295.8,
+      369.8,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14089A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00015",
@@ -27838,7 +32098,33 @@
     "read_as": "TE 14089B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s18",
+     "class": "instrumentation",
+     "box_0_1000": [
+      370.4,
+      295.8,
+      386.1,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14089B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00016",
@@ -27859,7 +32145,33 @@
     "read_as": "TCV 1402",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s20",
+     "class": "instrumentation",
+     "box_0_1000": [
+      362.8,
+      326.0,
+      378.5,
+      349.8
+     ],
+     "tag_as_extracted": "TCV 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00017",
@@ -27880,7 +32192,33 @@
     "read_as": "AORV XXX",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s29",
+     "class": "instrumentation",
+     "box_0_1000": [
+      410.9,
+      162.8,
+      426.6,
+      186.5
+     ],
+     "tag_as_extracted": "AORV XXX",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00018",
@@ -27901,7 +32239,33 @@
     "read_as": "PSV 1404",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s31",
+     "class": "instrumentation",
+     "box_0_1000": [
+      441.8,
+      142.2,
+      457.4,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1404",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00019",
@@ -27922,7 +32286,33 @@
     "read_as": "PSV 1405",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s33",
+     "class": "instrumentation",
+     "box_0_1000": [
+      462.8,
+      142.2,
+      479.1,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1405",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00020",
@@ -27943,7 +32333,33 @@
     "read_as": "PSV 1406",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s35",
+     "class": "instrumentation",
+     "box_0_1000": [
+      484.5,
+      142.2,
+      500.7,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1406",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00021",
@@ -27964,7 +32380,33 @@
     "read_as": "PSV 1407",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s37",
+     "class": "instrumentation",
+     "box_0_1000": [
+      505.6,
+      142.2,
+      522.3,
+      166.0
+     ],
+     "tag_as_extracted": "PSV 1407",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00022",
@@ -27985,7 +32427,33 @@
     "read_as": "MS 4010",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s39",
+     "class": "instrumentation",
+     "box_0_1000": [
+      520.9,
+      186.5,
+      536.6,
+      209.8
+     ],
+     "tag_as_extracted": "MS 4010",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00023",
@@ -28006,7 +32474,33 @@
     "read_as": "MSIV 1402",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s41",
+     "class": "instrumentation",
+     "box_0_1000": [
+      475.3,
+      239.5,
+      491.5,
+      262.8
+     ],
+     "tag_as_extracted": "MSIV 1402",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00024",
@@ -28027,7 +32521,33 @@
     "read_as": "RE 1403",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s42",
+     "class": "instrumentation",
+     "box_0_1000": [
+      515.5,
+      223.3,
+      530.7,
+      246.0
+     ],
+     "tag_as_extracted": "RE 1403",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00025",
@@ -28048,7 +32568,33 @@
     "read_as": "TE 14090A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s44",
+     "class": "instrumentation",
+     "box_0_1000": [
+      458.5,
+      295.8,
+      474.2,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14090A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00026",
@@ -28069,7 +32615,33 @@
     "read_as": "TE 14090B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s45",
+     "class": "instrumentation",
+     "box_0_1000": [
+      474.7,
+      295.8,
+      490.4,
+      320.1
+     ],
+     "tag_as_extracted": "TE 14090B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00027",
@@ -28090,7 +32662,33 @@
     "read_as": "TCV 1403",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s47",
+     "class": "instrumentation",
+     "box_0_1000": [
+      462.3,
+      328.2,
+      478.0,
+      352.0
+     ],
+     "tag_as_extracted": "TCV 1403",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00028",
@@ -28111,7 +32709,33 @@
     "read_as": "TE 14091A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s57",
+     "class": "instrumentation",
+     "box_0_1000": [
+      605.8,
+      233.0,
+      621.5,
+      256.3
+     ],
+     "tag_as_extracted": "TE 14091A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00029",
@@ -28132,7 +32756,33 @@
     "read_as": "TE 14091B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s58",
+     "class": "instrumentation",
+     "box_0_1000": [
+      622.0,
+      233.0,
+      637.2,
+      256.3
+     ],
+     "tag_as_extracted": "TE 14091B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00030",
@@ -28153,7 +32803,33 @@
     "read_as": "MSV 1404",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s59",
+     "class": "instrumentation",
+     "box_0_1000": [
+      646.9,
+      242.2,
+      662.6,
+      265.5
+     ],
+     "tag_as_extracted": "MSV 1404",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00031",
@@ -28174,7 +32850,33 @@
     "read_as": "MSV 1405",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s62",
+     "class": "instrumentation",
+     "box_0_1000": [
+      677.2,
+      242.2,
+      693.4,
+      265.5
+     ],
+     "tag_as_extracted": "MSV 1405",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00032",
@@ -28195,7 +32897,33 @@
     "read_as": "TE 14092A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s67",
+     "class": "instrumentation",
+     "box_0_1000": [
+      598.8,
+      306.6,
+      614.5,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14092A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00033",
@@ -28216,7 +32944,33 @@
     "read_as": "TE 14092B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s68",
+     "class": "instrumentation",
+     "box_0_1000": [
+      615.6,
+      306.6,
+      631.2,
+      329.8
+     ],
+     "tag_as_extracted": "TE 14092B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00034",
@@ -28237,7 +32991,33 @@
     "read_as": "TCV 1406",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s69",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.1,
+      331.5,
+      618.8,
+      354.7
+     ],
+     "tag_as_extracted": "TCV 1406",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00035",
@@ -28258,7 +33038,33 @@
     "read_as": "TE 14093B",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s78",
+     "class": "instrumentation",
+     "box_0_1000": [
+      586.9,
+      494.2,
+      602.6,
+      517.5
+     ],
+     "tag_as_extracted": "TE 14093B",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00036",
@@ -28279,7 +33085,33 @@
     "read_as": "TE 14093A",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s79",
+     "class": "instrumentation",
+     "box_0_1000": [
+      603.1,
+      494.2,
+      618.8,
+      517.5
+     ],
+     "tag_as_extracted": "TE 14093A",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00037",
@@ -28300,7 +33132,33 @@
     "read_as": "MSBV 1407",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s80",
+     "class": "instrumentation",
+     "box_0_1000": [
+      639.3,
+      497.5,
+      655.6,
+      521.2
+     ],
+     "tag_as_extracted": "MSBV 1407",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00038",
@@ -28321,7 +33179,33 @@
     "read_as": "TCV 1408",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s87",
+     "class": "instrumentation",
+     "box_0_1000": [
+      618.3,
+      540.9,
+      633.4,
+      563.6
+     ],
+     "tag_as_extracted": "TCV 1408",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00039",
@@ -28342,7 +33226,33 @@
     "read_as": "TCV 1409",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s90",
+     "class": "instrumentation",
+     "box_0_1000": [
+      583.1,
+      597.2,
+      598.8,
+      620.4
+     ],
+     "tag_as_extracted": "TCV 1409",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00040",
@@ -28363,7 +33273,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s2",
+     "class": "valve",
+     "box_0_1000": [
+      179.5,
+      402.8,
+      188.2,
+      424.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00041",
@@ -28384,7 +33320,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s4",
+     "class": "general",
+     "box_0_1000": [
+      259.5,
+      449.3,
+      263.3,
+      458.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.85,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00042",
@@ -28405,7 +33367,33 @@
     "read_as": "N1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s5",
+     "class": "general",
+     "box_0_1000": [
+      221.1,
+      533.4,
+      225.5,
+      542.0
+     ],
+     "tag_as_extracted": "N1",
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00043",
@@ -28426,7 +33414,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s6",
+     "class": "general",
+     "box_0_1000": [
+      270.4,
+      347.7,
+      294.1,
+      383.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00044",
@@ -28447,7 +33461,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s12",
+     "class": "general",
+     "box_0_1000": [
+      301.7,
+      266.0,
+      318.5,
+      286.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.86,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00045",
@@ -28468,7 +33508,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s19",
+     "class": "valve",
+     "box_0_1000": [
+      355.8,
+      342.3,
+      364.4,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00046",
@@ -28489,7 +33555,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s21",
+     "class": "valve",
+     "box_0_1000": [
+      347.1,
+      373.1,
+      355.2,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00047",
@@ -28510,7 +33602,33 @@
     "read_as": "T",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s22",
+     "class": "general",
+     "box_0_1000": [
+      361.2,
+      373.1,
+      367.7,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00048",
@@ -28531,7 +33649,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s23",
+     "class": "valve",
+     "box_0_1000": [
+      373.1,
+      373.1,
+      381.7,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00049",
@@ -28552,7 +33696,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s24",
+     "class": "general",
+     "box_0_1000": [
+      336.9,
+      395.8,
+      344.4,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.87,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00050",
@@ -28573,7 +33743,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s25",
+     "class": "valve",
+     "box_0_1000": [
+      343.9,
+      410.9,
+      352.5,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00051",
@@ -28594,7 +33790,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s26",
+     "class": "valve",
+     "box_0_1000": [
+      357.4,
+      410.9,
+      366.1,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00052",
@@ -28615,7 +33837,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s27",
+     "class": "valve",
+     "box_0_1000": [
+      428.2,
+      191.4,
+      434.7,
+      204.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00053",
@@ -28636,7 +33884,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s28",
+     "class": "valve",
+     "box_0_1000": [
+      420.1,
+      149.2,
+      435.3,
+      162.2
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00054",
@@ -28657,7 +33931,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s30",
+     "class": "valve",
+     "box_0_1000": [
+      443.4,
+      167.6,
+      449.9,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00055",
@@ -28678,7 +33978,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s32",
+     "class": "valve",
+     "box_0_1000": [
+      464.5,
+      167.6,
+      471.0,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00056",
@@ -28699,7 +34025,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s34",
+     "class": "valve",
+     "box_0_1000": [
+      485.0,
+      167.6,
+      491.5,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00057",
@@ -28720,7 +34072,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s36",
+     "class": "valve",
+     "box_0_1000": [
+      506.1,
+      167.6,
+      512.6,
+      183.3
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00058",
@@ -28741,7 +34119,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s38",
+     "class": "valve",
+     "box_0_1000": [
+      511.5,
+      201.7,
+      521.2,
+      223.9
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00059",
@@ -28762,7 +34166,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s40",
+     "class": "valve",
+     "box_0_1000": [
+      490.4,
+      259.0,
+      499.1,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00060",
@@ -28783,7 +34213,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s43",
+     "class": "general",
+     "box_0_1000": [
+      515.0,
+      264.9,
+      531.7,
+      287.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.88,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00061",
@@ -28804,7 +34260,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s46",
+     "class": "valve",
+     "box_0_1000": [
+      455.3,
+      342.3,
+      464.5,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00062",
@@ -28825,7 +34307,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s48",
+     "class": "valve",
+     "box_0_1000": [
+      452.0,
+      373.1,
+      460.1,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00063",
@@ -28846,7 +34354,33 @@
     "read_as": "T",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s49",
+     "class": "general",
+     "box_0_1000": [
+      465.5,
+      373.1,
+      472.6,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00064",
@@ -28867,7 +34401,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s50",
+     "class": "valve",
+     "box_0_1000": [
+      478.0,
+      373.1,
+      486.6,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00065",
@@ -28888,7 +34448,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s51",
+     "class": "general",
+     "box_0_1000": [
+      442.3,
+      395.8,
+      449.9,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.87,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00066",
@@ -28909,7 +34495,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s52",
+     "class": "valve",
+     "box_0_1000": [
+      448.2,
+      410.9,
+      456.9,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00067",
@@ -28930,7 +34542,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s53",
+     "class": "valve",
+     "box_0_1000": [
+      462.3,
+      410.9,
+      471.0,
+      420.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00068",
@@ -28951,7 +34589,33 @@
     "read_as": "MSCV-XXX",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s54",
+     "class": "valve",
+     "box_0_1000": [
+      538.2,
+      269.3,
+      549.1,
+      281.2
+     ],
+     "tag_as_extracted": "MSCV-XXX",
+     "confidence": 0.97,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00069",
@@ -28972,7 +34636,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s55",
+     "class": "valve",
+     "box_0_1000": [
+      596.6,
+      254.7,
+      603.1,
+      267.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00070",
@@ -28993,7 +34683,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s60",
+     "class": "valve",
+     "box_0_1000": [
+      638.8,
+      270.9,
+      647.5,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00071",
@@ -29014,7 +34730,33 @@
     "read_as": "H",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s61",
+     "class": "general",
+     "box_0_1000": [
+      639.9,
+      256.8,
+      645.3,
+      269.8
+     ],
+     "tag_as_extracted": "H",
+     "confidence": 0.92,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00072",
@@ -29035,7 +34777,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s63",
+     "class": "valve",
+     "box_0_1000": [
+      668.0,
+      270.9,
+      676.1,
+      280.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00073",
@@ -29056,7 +34824,33 @@
     "read_as": "M",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s64",
+     "class": "general",
+     "box_0_1000": [
+      669.1,
+      256.8,
+      675.0,
+      269.8
+     ],
+     "tag_as_extracted": "M",
+     "confidence": 0.92,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00074",
@@ -29077,7 +34871,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s70",
+     "class": "valve",
+     "box_0_1000": [
+      595.6,
+      343.4,
+      604.2,
+      364.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00075",
@@ -29098,7 +34918,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s71",
+     "class": "valve",
+     "box_0_1000": [
+      592.3,
+      374.7,
+      600.4,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00076",
@@ -29119,7 +34965,33 @@
     "read_as": "T",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s72",
+     "class": "general",
+     "box_0_1000": [
+      606.4,
+      373.1,
+      613.4,
+      383.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00077",
@@ -29140,7 +35012,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s73",
+     "class": "valve",
+     "box_0_1000": [
+      618.3,
+      374.7,
+      626.9,
+      382.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00078",
@@ -29161,7 +35059,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s74",
+     "class": "general",
+     "box_0_1000": [
+      582.0,
+      395.8,
+      589.1,
+      402.8
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.81,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00079",
@@ -29182,7 +35106,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s75",
+     "class": "valve",
+     "box_0_1000": [
+      588.0,
+      411.5,
+      596.1,
+      420.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00080",
@@ -29203,7 +35153,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s76",
+     "class": "valve",
+     "box_0_1000": [
+      602.0,
+      411.5,
+      610.7,
+      420.1
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00081",
@@ -29224,7 +35200,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s81",
+     "class": "valve",
+     "box_0_1000": [
+      630.7,
+      521.5,
+      641.5,
+      543.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00082",
@@ -29245,7 +35247,33 @@
     "read_as": "N2",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s84",
+     "class": "general",
+     "box_0_1000": [
+      100.0,
+      553.9,
+      105.4,
+      559.3
+     ],
+     "tag_as_extracted": "N2",
+     "confidence": 0.94,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00083",
@@ -29266,7 +35294,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s85",
+     "class": "general",
+     "box_0_1000": [
+      120.0,
+      616.6,
+      127.6,
+      624.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.9,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00084",
@@ -29287,7 +35341,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s86",
+     "class": "general",
+     "box_0_1000": [
+      115.2,
+      732.3,
+      123.8,
+      740.5
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.9,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00085",
@@ -29308,7 +35388,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s88",
+     "class": "valve",
+     "box_0_1000": [
+      628.0,
+      564.2,
+      642.1,
+      576.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00086",
@@ -29329,7 +35435,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s91",
+     "class": "valve",
+     "box_0_1000": [
+      576.6,
+      613.9,
+      584.7,
+      635.6
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00087",
@@ -29350,7 +35482,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s92",
+     "class": "valve",
+     "box_0_1000": [
+      568.0,
+      644.8,
+      576.1,
+      653.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00088",
@@ -29371,7 +35529,33 @@
     "read_as": "T",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s93",
+     "class": "general",
+     "box_0_1000": [
+      582.0,
+      644.2,
+      588.0,
+      653.9
+     ],
+     "tag_as_extracted": "T",
+     "confidence": 0.96,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00089",
@@ -29392,7 +35576,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s94",
+     "class": "valve",
+     "box_0_1000": [
+      593.9,
+      644.8,
+      602.6,
+      653.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00090",
@@ -29413,7 +35623,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s95",
+     "class": "general",
+     "box_0_1000": [
+      557.7,
+      665.8,
+      564.7,
+      673.4
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.79,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00091",
@@ -29434,7 +35670,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s96",
+     "class": "valve",
+     "box_0_1000": [
+      564.2,
+      682.1,
+      572.3,
+      690.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.98,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00092",
@@ -29455,7 +35717,33 @@
     "read_as": null,
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s97",
+     "class": "valve",
+     "box_0_1000": [
+      578.2,
+      682.1,
+      586.4,
+      690.7
+     ],
+     "tag_as_extracted": null,
+     "confidence": 0.97,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00093",
@@ -29476,7 +35764,33 @@
     "read_as": "EXTRACTION STEAM ES PID 180-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s56",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      124.4,
+      838.3,
+      147.1
+     ],
+     "tag_as_extracted": "EXTRACTION STEAM ES PID 180-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00094",
@@ -29497,7 +35811,33 @@
     "read_as": "TBS PID 240-1 TURBINE SYSTEM",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s65",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      264.9,
+      838.3,
+      288.2
+     ],
+     "tag_as_extracted": "TBS PID 240-1 TURBINE SYSTEM",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00095",
@@ -29518,7 +35858,33 @@
     "read_as": "TBS PID 240-1 TURBINE SYSTEM",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s66",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      333.1,
+      838.3,
+      356.3
+     ],
+     "tag_as_extracted": "TBS PID 240-1 TURBINE SYSTEM",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00096",
@@ -29539,7 +35905,33 @@
     "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s77",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.5,
+      426.1,
+      838.3,
+      449.3
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00097",
@@ -29560,7 +35952,33 @@
     "read_as": "MAIN STEAM BY-PASS",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s82",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      526.3,
+      838.3,
+      549.0
+     ],
+     "tag_as_extracted": "MAIN STEAM BY-PASS",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00098",
@@ -29581,7 +35999,33 @@
     "read_as": "FWS TO STM BYPASS FWS PID 170-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s89",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      578.2,
+      838.3,
+      601.5
+     ],
+     "tag_as_extracted": "FWS TO STM BYPASS FWS PID 170-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00099",
@@ -29602,7 +36046,33 @@
     "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s98",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      686.9,
+      838.3,
+      710.2
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00100",
@@ -29623,7 +36093,33 @@
     "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s99",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      746.9,
+      838.3,
+      770.2
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "E00101",
@@ -29644,7 +36140,33 @@
     "read_as": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
     "run": "source/0.json",
     "model": "gpt-6.1-sol"
-   }
+   },
+   "provenance": [
+    {
+     "sheet": "0",
+     "symbol": "s100",
+     "class": "inlet/outlet",
+     "box_0_1000": [
+      767.0,
+      807.5,
+      838.3,
+      830.8
+     ],
+     "tag_as_extracted": "HIGH PRESSURE STEAM DRAINS HPD PID 190-1",
+     "confidence": 0.99,
+     "source_run": "source/0.json",
+     "tool": "supplied-extraction",
+     "model": "gpt-6.1-sol",
+     "source_manifest": "intake_manifest.json",
+     "source_drawing": {
+      "drawing_id": "OPEN100-0",
+      "revision": "public",
+      "page": 1
+     },
+     "image_sha256": "2451fbe9b8d0494a822901493cfbf1d2656f0bd7678f0f25bb2266b5e78a7dc9",
+     "extraction_sha256": "ace574686c84b2155ea9cd2b64a471763c2625576911c4a12facec0419ef668b"
+    }
+   ]
   },
   {
    "id": "L0-001",

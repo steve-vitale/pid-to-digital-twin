@@ -3550,6 +3550,37 @@
         "docs/IMPACT_ESTIMATE.md",
         "examples/historian-csv/README.md"
       ]
+    },
+    {
+      "id": "A239",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Preserve complete item provenance and citations through full/core graphs, statement evidence, snapshot reads and context bindings; refresh examples with retained prior decisions and explicitly new proposals/exercises.",
+      "hypothesis": "A later recorded appearance must remain available and changes to it must invalidate dependent evidence bindings without changing engineering values.",
+      "evidence": "Seven affected OPEN100 items retained; the offline three-appearance packet reproduces source records. Additive-only graph comparisons and actual CLI controls retain original claims, expose missing images, reject malformed later evidence and refuse stale sheets before outputs. Earlier context decision prefixes and bound review packet remain preserved.",
+      "runs": "Offline CLI reproductions and adversarial software controls; no new model or source-family run.",
+      "verdict": "kept",
+      "why": "Repairs a demonstrated evidence-loss defect while preserving claim-specific overrides and explicit evidence gaps. Retention does not establish source agreement or engineering truth.",
+      "source": [
+        "docs/JOURNAL.md#106-preserve-item-appearances-through-graph-and-context-handoff",
+        "docs/GRAPH_EXPORT.md",
+        "examples/graph-export/multi-appearance/README.md"
+      ]
+    },
+    {
+      "id": "A240",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Remove only four known extraction-priority fields from the extracted-twin statement view and report actual image availability separately from reference kinds.",
+      "hypothesis": "Review bookkeeping must not read as a plant-risk claim, and a drawing reference must not imply an available source image.",
+      "evidence": "Full OPEN100 view changes from 10,663 to 7,626 statements: exactly 3,037 risk.risk_score/risk.tier/risk.why/risk.tier_before_floor entries skipped and counted, with raw graph claims retained. Remaining statement identity/text/rank/order and historical sheet0/Bayer populations are unchanged. Authored risk and unknown extracted risk fields remain visible. The source-only packet reports 0 primary images, 6 statement-appearance entries and 0 appearance images.",
+      "runs": "Independent reader finding, scoped population comparison and software regression controls.",
+      "verdict": "kept",
+      "why": "Corrects presentation and availability reporting; no accuracy, labor saving, plant risk or generalization improvement claimed.",
+      "source": [
+        "docs/JOURNAL.md#106-preserve-item-appearances-through-graph-and-context-handoff",
+        "docs/STATEMENT_REVIEW.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4245,12 +4276,13 @@
     {
       "id": "N067",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Preserve every extracted-model provenance appearance in graph export, or report each unsupported source locator as a declared loss.",
-      "why_not_yet": "The state audit found seven actual OPEN100 items with several source appearances. source_of selects the first and claims omits the provenance list; later locators disappear without a not_exported count. The original model must remain alongside the graph. A multi-source regression and reviewed export change are still required.",
+      "why_not_yet": "Completed 2026-10-30: complete ordered item appearances, duplicates, empty/unknown metadata and original citations survive full/core graph, statement, snapshot and context paths. Independent baseline/candidate controls cover seven affected OPEN100 items, missing images, malformed later evidence, source overrides and stale-binding refusal. Refreshed examples preserve prior decisions and use explicitly new proposals/exercises. This preserves supplied evidence, not source support or plant truth.",
       "source": [
         "docs/STATUS.md#known-defects",
-        "docs/GRAPH_EXPORT.md"
+        "docs/GRAPH_EXPORT.md",
+        "docs/JOURNAL.md#106-preserve-item-appearances-through-graph-and-context-handoff"
       ]
     },
     {

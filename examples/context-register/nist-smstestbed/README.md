@@ -8,6 +8,11 @@ The two configurations both publish machine name `Hurco04` and UUID `mtc_adapter
 
 The log has actual recorded spindle/feed values and explicit missing-state controls. `UNAVAILABLE`, numeric zero and a single blank program-name space remain different values. Its filename is not the boundary of all timestamps inside it. A recorded `READY` status and later missing status do not establish a named production job or complete operating-state coverage. The log does not identify the deployed configuration revision; that question remains open.
 
+The [prior register](history/before-appearances.context.json) retains ten original proposal snapshots. Ten new
+AI re-proposals bind expanded item evidence, preserving all twenty snapshots and the same active answers.
+The [old sheet](history/before-appearances.answers.csv) refuses against the revised evidence; no human review,
+owner assignment or plant-truth verdict was added.
+
 ## Start with one source question
 
 The [plain first-question brief](first-question.md) asks which deployed configuration and adapter mapping explain
@@ -41,7 +46,7 @@ question and company handoff above do not require this local setup. Run offline 
 
 ```sh
 python -S scripts/context_register.py prepare --model examples/context-register/nist-smstestbed/model.json --questions examples/context-register/nist-smstestbed/questions.json --sources examples/context-register/nist-smstestbed/sources.json --source-root data/external/nist-smstestbed --out examples/context-register/nist-smstestbed/run
-python -S scripts/context_register.py apply --model examples/context-register/nist-smstestbed/model.json --questions examples/context-register/nist-smstestbed/questions.json --sources examples/context-register/nist-smstestbed/sources.json --source-root data/external/nist-smstestbed --answers examples/context-register/nist-smstestbed/proposed_answers.csv --out examples/context-register/nist-smstestbed/run
+python -S scripts/context_register.py apply --model examples/context-register/nist-smstestbed/model.json --questions examples/context-register/nist-smstestbed/questions.json --sources examples/context-register/nist-smstestbed/sources.json --source-root data/external/nist-smstestbed --register examples/context-register/nist-smstestbed/history/before-appearances.context.json --answers examples/context-register/nist-smstestbed/proposed_answers.csv --out examples/context-register/nist-smstestbed/run
 python -S examples/context-register/nist-smstestbed/verify_sources.py
 python -S examples/context-register/nist-smstestbed/check_packet.py
 ```

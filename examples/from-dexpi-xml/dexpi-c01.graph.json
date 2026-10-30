@@ -592,7 +592,12 @@
       "note": "the item cites no source of its own"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file C01V04-VER.EX01.xml, SHA-256 a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "BL",
@@ -601,7 +606,12 @@
    "name": "battery limit",
    "aliases": [],
    "status": "confirmed",
-   "attributes": []
+   "attributes": [],
+   "source": {
+    "kind": "model",
+    "document": "DEXPI XML file C01V04-VER.EX01.xml, SHA-256 a2b172f04e0dcf9a668e158c6dee3b5fd0dd4e9027b572dc39e54470562b809c",
+    "note": "the item cites no source of its own"
+   }
   },
   {
    "id": "H1007",
@@ -1223,7 +1233,14 @@
       "document": "DEXPI XML PlateHeatExchanger-1 (PlateHeatExchanger)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PlateHeatExchanger-1 (PlateHeatExchanger)"
+   },
+   "citations": {
+    "source": "DEXPI XML PlateHeatExchanger-1 (PlateHeatExchanger)"
+   }
   },
   {
    "id": "H1008",
@@ -1872,7 +1889,14 @@
       "document": "DEXPI XML TubularHeatExchanger-1 (TubularHeatExchanger)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML TubularHeatExchanger-1 (TubularHeatExchanger)"
+   },
+   "citations": {
+    "source": "DEXPI XML TubularHeatExchanger-1 (TubularHeatExchanger)"
+   }
   },
   {
    "id": "P4711",
@@ -2287,7 +2311,14 @@
       "document": "DEXPI XML CentrifugalPump-1 (CentrifugalPump)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML CentrifugalPump-1 (CentrifugalPump)"
+   },
+   "citations": {
+    "source": "DEXPI XML CentrifugalPump-1 (CentrifugalPump)"
+   }
   },
   {
    "id": "P4712",
@@ -2702,7 +2733,14 @@
       "document": "DEXPI XML ReciprocatingPump-1 (ReciprocatingPump)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ReciprocatingPump-1 (ReciprocatingPump)"
+   },
+   "citations": {
+    "source": "DEXPI XML ReciprocatingPump-1 (ReciprocatingPump)"
+   }
   },
   {
    "id": "T4750",
@@ -3540,7 +3578,14 @@
       "document": "DEXPI XML Tank-1 (Tank)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML Tank-1 (Tank)"
+   },
+   "citations": {
+    "source": "DEXPI XML Tank-1 (Tank)"
+   }
   },
   {
    "id": "PI-4712.01",
@@ -3730,7 +3775,14 @@
       "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   }
   },
   {
    "id": "PT-4712.02",
@@ -3848,7 +3900,14 @@
       "document": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
+   }
   },
   {
    "id": "TT-4750.03",
@@ -3957,7 +4016,14 @@
       "document": "DEXPI XML ProcessSignalGeneratingFunction-3 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-4"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessSignalGeneratingFunction-3 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-4"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-3 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-4"
+   }
   },
   {
    "id": "HV-4750.01",
@@ -4237,7 +4303,14 @@
       "document": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
+   }
   },
   {
    "id": "PV-4712.02",
@@ -4526,7 +4599,14 @@
       "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   }
   },
   {
    "id": "TV-4750.03",
@@ -4842,7 +4922,14 @@
       "document": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
+   }
   },
   {
    "id": "PICSA-4712.02",
@@ -4969,7 +5056,14 @@
       "document": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
+   }
   },
   {
    "id": "HS-4750.01",
@@ -5087,7 +5181,14 @@
       "document": "DEXPI XML ProcessInstrumentationFunction-3 (ProcessInstrumentationFunction)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessInstrumentationFunction-3 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-3 (ProcessInstrumentationFunction)"
+   }
   },
   {
    "id": "TICSA-4750.03",
@@ -5214,7 +5315,14 @@
       "document": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
+   }
   },
   {
    "id": "ButterflyValve-1",
@@ -5386,7 +5494,14 @@
       "document": "DEXPI XML ButterflyValve-1 (ButterflyValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML ButterflyValve-1 (ButterflyValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML ButterflyValve-1 (ButterflyValve)"
+   }
   },
   {
    "id": "SwingCheckValve-1",
@@ -5558,7 +5673,14 @@
       "document": "DEXPI XML SwingCheckValve-1 (SwingCheckValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML SwingCheckValve-1 (SwingCheckValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML SwingCheckValve-1 (SwingCheckValve)"
+   }
   },
   {
    "id": "BallValve-1",
@@ -5730,7 +5852,14 @@
       "document": "DEXPI XML BallValve-1 (BallValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML BallValve-1 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-1 (BallValve)"
+   }
   },
   {
    "id": "BallValve-2",
@@ -5902,7 +6031,14 @@
       "document": "DEXPI XML BallValve-2 (BallValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML BallValve-2 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-2 (BallValve)"
+   }
   },
   {
    "id": "BallValve-3",
@@ -6074,7 +6210,14 @@
       "document": "DEXPI XML BallValve-3 (BallValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML BallValve-3 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-3 (BallValve)"
+   }
   },
   {
    "id": "BallValve-4",
@@ -6246,7 +6389,14 @@
       "document": "DEXPI XML BallValve-4 (BallValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML BallValve-4 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-4 (BallValve)"
+   }
   },
   {
    "id": "BallValve-5",
@@ -6418,7 +6568,14 @@
       "document": "DEXPI XML BallValve-5 (BallValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML BallValve-5 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-5 (BallValve)"
+   }
   },
   {
    "id": "SV 104.01",
@@ -6608,7 +6765,14 @@
       "document": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
+   }
   },
   {
    "id": "dexpi-c01-JN-PipeTee-1",
@@ -6654,7 +6818,14 @@
       "document": "DEXPI XML PipeTee-1 (PipeTee)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PipeTee-1 (PipeTee)"
+   },
+   "citations": {
+    "source": "DEXPI XML PipeTee-1 (PipeTee)"
+   }
   },
   {
    "id": "dexpi-c01-JN-PipeTee-2",
@@ -6700,7 +6871,14 @@
       "document": "DEXPI XML PipeTee-2 (PipeTee)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PipeTee-2 (PipeTee)"
+   },
+   "citations": {
+    "source": "DEXPI XML PipeTee-2 (PipeTee)"
+   }
   },
   {
    "id": "dexpi-c01-JN-PipeTee-3",
@@ -6746,7 +6924,14 @@
       "document": "DEXPI XML PipeTee-3 (PipeTee)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PipeTee-3 (PipeTee)"
+   },
+   "citations": {
+    "source": "DEXPI XML PipeTee-3 (PipeTee)"
+   }
   },
   {
    "id": "dexpi-c01-JN-PipeTee-4",
@@ -6792,7 +6977,14 @@
       "document": "DEXPI XML PipeTee-4 (PipeTee)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PipeTee-4 (PipeTee)"
+   },
+   "citations": {
+    "source": "DEXPI XML PipeTee-4 (PipeTee)"
+   }
   },
   {
    "id": "dexpi-c01-JN-PipeTee-5",
@@ -6838,7 +7030,14 @@
       "document": "DEXPI XML PipeTee-5 (PipeTee)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML PipeTee-5 (PipeTee)"
+   },
+   "citations": {
+    "source": "DEXPI XML PipeTee-5 (PipeTee)"
+   }
   },
   {
    "id": "dexpi-c01-NET001",
@@ -6866,7 +7065,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET002",
@@ -6894,7 +7100,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET003",
@@ -6922,7 +7135,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET004",
@@ -6950,7 +7170,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET005",
@@ -6978,7 +7205,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET006",
@@ -7006,7 +7240,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET007",
@@ -7034,7 +7275,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET008",
@@ -7062,7 +7310,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET009",
@@ -7090,7 +7345,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET010",
@@ -7118,7 +7380,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET011",
@@ -7146,7 +7415,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET012",
@@ -7174,7 +7450,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET013",
@@ -7202,7 +7485,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET014",
@@ -7230,7 +7520,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET015",
@@ -7258,7 +7555,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET016",
@@ -7286,7 +7590,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   },
   {
    "id": "dexpi-c01-NET017",
@@ -7314,7 +7625,14 @@
       "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
      }
     }
-   ]
+   ],
+   "source": {
+    "kind": "document",
+    "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   }
   }
  ],
  "edges": [
@@ -7328,6 +7646,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PlateHeatExchanger-1 (PlateHeatExchanger)"
+   },
+   "citations": {
+    "source": "DEXPI XML PlateHeatExchanger-1 (PlateHeatExchanger)"
    }
   },
   {
@@ -7340,6 +7661,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML TubularHeatExchanger-1 (TubularHeatExchanger)"
+   },
+   "citations": {
+    "source": "DEXPI XML TubularHeatExchanger-1 (TubularHeatExchanger)"
    }
   },
   {
@@ -7352,6 +7676,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML CentrifugalPump-1 (CentrifugalPump)"
+   },
+   "citations": {
+    "source": "DEXPI XML CentrifugalPump-1 (CentrifugalPump)"
    }
   },
   {
@@ -7364,6 +7691,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ReciprocatingPump-1 (ReciprocatingPump)"
+   },
+   "citations": {
+    "source": "DEXPI XML ReciprocatingPump-1 (ReciprocatingPump)"
    }
   },
   {
@@ -7376,6 +7706,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML Tank-1 (Tank)"
+   },
+   "citations": {
+    "source": "DEXPI XML Tank-1 (Tank)"
    }
   },
   {
@@ -7388,6 +7721,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-1 (PipingNetworkSystem), segments PipingNetworkSegment-1"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-1 (PipingNetworkSystem), segments PipingNetworkSegment-1"
    },
    "layer": "stream",
    "attributes": [
@@ -7611,6 +7947,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-2 (PipingNetworkSystem), segments PipingNetworkSegment-2"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-2 (PipingNetworkSystem), segments PipingNetworkSegment-2"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -7824,6 +8163,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-3 (PipingNetworkSystem), segments PipingNetworkSegment-3"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-3 (PipingNetworkSystem), segments PipingNetworkSegment-3"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -8036,6 +8378,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-4 (PipingNetworkSystem), segments PipingNetworkSegment-4, PipingNetworkSegment-5, PipingNetworkSegment-6"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-4 (PipingNetworkSystem), segments PipingNetworkSegment-4, PipingNetworkSegment-5, PipingNetworkSegment-6"
    },
    "layer": "stream",
    "attributes": [
@@ -8529,6 +8874,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-5 (PipingNetworkSystem), segments PipingNetworkSegment-7, PipingNetworkSegment-8"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-5 (PipingNetworkSystem), segments PipingNetworkSegment-7, PipingNetworkSegment-8"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -8831,6 +9179,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-6 (PipingNetworkSystem), segments PipingNetworkSegment-9, PipingNetworkSegment-11, PipingNetworkSegment-12, PipingNetworkSegment-14, PipingNetworkSegment-15"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-6 (PipingNetworkSystem), segments PipingNetworkSegment-9, PipingNetworkSegment-11, PipingNetworkSegment-12, PipingNetworkSegment-14, PipingNetworkSegment-15"
    },
    "layer": "stream",
    "attributes": [
@@ -10332,6 +10683,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-6 (PipingNetworkSystem), segments PipingNetworkSegment-9, PipingNetworkSegment-11, PipingNetworkSegment-12, PipingNetworkSegment-14, PipingNetworkSegment-16, PipingNetworkSegment-18"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-6 (PipingNetworkSystem), segments PipingNetworkSegment-9, PipingNetworkSegment-11, PipingNetworkSegment-12, PipingNetworkSegment-14, PipingNetworkSegment-16, PipingNetworkSegment-18"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -10716,6 +11070,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-7 (PipingNetworkSystem), segments PipingNetworkSegment-19"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-7 (PipingNetworkSystem), segments PipingNetworkSegment-19"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -10992,6 +11349,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-8 (PipingNetworkSystem), segments PipingNetworkSegment-20"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-8 (PipingNetworkSystem), segments PipingNetworkSegment-20"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -11214,6 +11574,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-9 (PipingNetworkSystem), segments PipingNetworkSegment-21"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-9 (PipingNetworkSystem), segments PipingNetworkSegment-21"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -11435,6 +11798,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-10 (PipingNetworkSystem), segments PipingNetworkSegment-22"
+   },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-10 (PipingNetworkSystem), segments PipingNetworkSegment-22"
    },
    "layer": "stream",
    "attributes": [
@@ -11712,6 +12078,9 @@
     "kind": "document",
     "document": "DEXPI XML PipingNetworkSystem-11 (PipingNetworkSystem), segments PipingNetworkSegment-23"
    },
+   "citations": {
+    "source": "DEXPI XML PipingNetworkSystem-11 (PipingNetworkSystem), segments PipingNetworkSegment-23"
+   },
    "layer": "stream",
    "attributes": [
     {
@@ -11987,6 +12356,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -11999,6 +12371,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-1 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12011,6 +12386,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
    }
   },
   {
@@ -12023,6 +12401,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-2 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-2"
    }
   },
   {
@@ -12035,6 +12416,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessSignalGeneratingFunction-3 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-4"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessSignalGeneratingFunction-3 (ProcessSignalGeneratingFunction) in ProcessInstrumentationFunction-4"
    }
   },
   {
@@ -12047,6 +12431,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
    }
   },
   {
@@ -12059,6 +12446,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-2 (GlobeValve), operated by ActuatingSystem-2 (ActuatingSystem)"
    }
   },
   {
@@ -12071,6 +12461,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
    }
   },
   {
@@ -12083,6 +12476,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-1 (GlobeValve), operated by ActuatingSystem-1 (ActuatingSystem)"
    }
   },
   {
@@ -12095,6 +12491,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
    }
   },
   {
@@ -12107,6 +12506,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
+   },
+   "citations": {
+    "source": "DEXPI XML GlobeValve-3 (GlobeValve), operated by ActuatingSystem-3 (ActuatingSystem)"
    }
   },
   {
@@ -12119,6 +12521,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12131,6 +12536,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-2 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12143,6 +12551,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-3 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-3 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12155,6 +12566,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12167,6 +12581,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
+   },
+   "citations": {
+    "source": "DEXPI XML ProcessInstrumentationFunction-4 (ProcessInstrumentationFunction)"
    }
   },
   {
@@ -12179,6 +12596,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML ButterflyValve-1 (ButterflyValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML ButterflyValve-1 (ButterflyValve)"
    }
   },
   {
@@ -12191,6 +12611,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML SwingCheckValve-1 (SwingCheckValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML SwingCheckValve-1 (SwingCheckValve)"
    }
   },
   {
@@ -12203,6 +12626,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML BallValve-1 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-1 (BallValve)"
    }
   },
   {
@@ -12215,6 +12641,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML BallValve-2 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-2 (BallValve)"
    }
   },
   {
@@ -12227,6 +12656,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML BallValve-3 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-3 (BallValve)"
    }
   },
   {
@@ -12239,6 +12671,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML BallValve-4 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-4 (BallValve)"
    }
   },
   {
@@ -12251,6 +12686,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML BallValve-5 (BallValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML BallValve-5 (BallValve)"
    }
   },
   {
@@ -12263,6 +12701,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
    }
   },
   {
@@ -12275,6 +12716,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
+   },
+   "citations": {
+    "source": "DEXPI XML SpringLoadedGlobeSafetyValve-1 (SpringLoadedGlobeSafetyValve)"
    }
   },
   {
@@ -12287,6 +12731,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12299,6 +12746,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12311,6 +12761,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12323,6 +12776,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12335,6 +12791,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12347,6 +12806,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12359,6 +12821,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12371,6 +12836,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12383,6 +12851,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12395,6 +12866,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12407,6 +12881,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12419,6 +12896,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12431,6 +12911,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12443,6 +12926,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12455,6 +12941,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12467,6 +12956,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12479,6 +12971,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12491,6 +12986,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12503,6 +13001,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12515,6 +13016,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12527,6 +13031,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12539,6 +13046,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12551,6 +13061,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12563,6 +13076,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12575,6 +13091,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12587,6 +13106,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12599,6 +13121,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12611,6 +13136,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12623,6 +13151,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12635,6 +13166,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12647,6 +13181,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12659,6 +13196,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12671,6 +13211,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12683,6 +13226,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12695,6 +13241,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12707,6 +13256,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12719,6 +13271,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12731,6 +13286,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12743,6 +13301,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12755,6 +13316,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12767,6 +13331,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12779,6 +13346,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12791,6 +13361,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12803,6 +13376,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    }
   },
   {
@@ -12815,6 +13391,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -12839,6 +13418,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -12861,6 +13443,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -12885,6 +13470,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -12907,6 +13495,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -12931,6 +13522,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -12953,6 +13547,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -12977,6 +13574,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -12999,6 +13599,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13023,6 +13626,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13045,6 +13651,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13069,6 +13678,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13091,6 +13703,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13115,6 +13730,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13137,6 +13755,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13161,6 +13782,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13183,6 +13807,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13207,6 +13834,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13229,6 +13859,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13253,6 +13886,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13275,6 +13911,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13299,6 +13938,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13321,6 +13963,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13345,6 +13990,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13367,6 +14015,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
@@ -13391,6 +14042,9 @@
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
    "attributes": [
     {
      "name": "sheet",
@@ -13413,6 +14067,9 @@
    "source": {
     "kind": "document",
     "document": "DEXPI XML piping topology (PipingNetworkSegment connections)"
+   },
+   "citations": {
+    "source": "DEXPI XML piping topology (PipingNetworkSegment connections)"
    },
    "attributes": [
     {
