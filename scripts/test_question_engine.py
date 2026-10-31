@@ -679,6 +679,470 @@ class FieldSubjects(unittest.TestCase):
                         qe.rollup([str(site)], CAT)
 
 
+class CollectionContractRepairs(unittest.TestCase):
+    """Actual CLI regressions for ratings, source-scoped questions and ambiguous field intake."""
+
+    example = EX / "pump-motor-basis"
+    source_example = EX / "source-investigation"
+
+    def cli(self, args, expected=0):
+        result = subprocess.run([sys.executable, str(ROOT / "scripts/question_engine.py"), *map(str, args)],
+                                cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, expected, result.stderr)
+        return result
+
+    def test_pump_motor_and_duty_example_reproduces(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.cli(["--model", self.example / "model.json", "--question", "E1", "--question", "E2",
+                      "--question", "E4", "--question", "H4", "--out", tmp])
+            for name in ("questions.json", "screen.md"):
+                self.assertEqual((Path(tmp) / name).read_text(encoding="utf-8"),
+                                 (self.example / name).read_text(encoding="utf-8"))
+
+    def test_scalar_and_document_candidates_cannot_close_larger_tasks(self):
+        cases = [{}, {"pump_curve": True}, {"pump_curve_uri": "other.pdf", "pump_curve_asset": "P-901",
+                                          "pump_curve_readable": False},
+                 {"BEP_flow": 100, "BEP_head": 90, "motor_efficiency": 0.9, "full_load_efficiency": 0.9,
+                  "input_power_kW": 0, "operating_hours": 8000, "heat_duty_kW": 100}]
+        tasks = {"E1@P-900": {"Matched pump curve, rated duty and system operating points",
+                              "Motor nameplate, efficiency and drive basis"},
+                 "E2@P-900": {"Matched pump curve and best-efficiency-point (BEP) duty"},
+                 "E4@P-900": {"Motor nameplate, rated output and full-load efficiency",
+                              "Measured input power or current at normal load"},
+                 "H4@E-900": {"Cooler duty"}}
+        for values in cases:
+            with self.subTest(values=values), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = json.loads((self.example / "model.json").read_text(encoding="utf-8"))
+                for unit in model["units"]:
+                    unit["facts"].update(values)
+                path = base / "model.json"
+                path.write_text(json.dumps(model), encoding="utf-8")
+                self.cli(["--model", path, "--out", base])
+                doc = json.loads((base / "questions.json").read_text(encoding="utf-8"))
+                for fid, required in tasks.items():
+                    actual = {r["item"]: r for r in finding(doc, fid)["data_requests"]}
+                    self.assertLessEqual(required, actual.keys())
+                    for name in required:
+                        self.assertIn("candidate_facts", actual[name])
+                        self.assertNotIn("already_on_drawing", actual[name])
+                cooler = next(r for r in finding(doc, "H4@E-900")["data_requests"] if r["item"] == "Cooler duty")
+                self.assertEqual(cooler["candidate_scope"], "unit")
+                self.assertTrue(any(f["name"] == "CAPACITY" and f["value"] == "100 gpm"
+                                    for f in cooler["candidate_facts"]))
+                self.assertEqual(gx.build(path, questions=base / "questions.json")["questions"], doc["questions"])
+                qe.rollup([str(base)], CAT)
+
+    def test_source_scoped_catalog_reproduces_and_retains_historical_answers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            self.cli(["--model", ROOT / "examples/from-description/mgpi/model-expanded-source.json",
+                      "--catalog", self.source_example / "catalog.json", "--out", base])
+            for name in ("questions.json", "screen.md"):
+                self.assertEqual((base / name).read_text(encoding="utf-8"),
+                                 (self.source_example / name).read_text(encoding="utf-8"))
+            doc = json.loads((base / "questions.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(doc["questions"]), 2)
+            self.assertTrue(all(q["data_requests"] for q in doc["questions"]))
+            notify = finding(doc, "MGPI-NOTIFY@HYPO_BULK")
+            endpoint = finding(doc, "MGPI-ENDPOINT@HYPO_BULK")
+            self.assertIn("not configured to shut the transfer automatically", notify["limits"])
+            self.assertIn("likely", notify["limits"])
+            self.assertIn("not unloading-to-bulk flow", endpoint["limits"])
+            self.assertIn("historical question", notify["decision_rule"])
+            catalog = json.loads((self.source_example / "catalog.json").read_text(encoding="utf-8"))
+            rolled = qe.rollup([str(base)], catalog)
+            self.assertIn("MGPI", qe.render_rollup_md(rolled, catalog))
+
+    def test_source_recipe_does_not_become_a_generic_level_checklist(self):
+        models = [ROOT / "data/te_process_model.json", ROOT / "data/bayer_rt/process_model.json",
+                  EX / "food_plant_model.json"]
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            for n, path in enumerate(models):
+                self.cli(["--model", path, "--catalog", self.source_example / "catalog.json", "--out", base / str(n)])
+                doc = json.loads((base / str(n) / "questions.json").read_text(encoding="utf-8"))
+                self.assertEqual(doc["questions"], [])
+            # Default remains an honest zero; this authored recipe is not a generalization improvement.
+            self.cli(["--model", ROOT / "examples/from-description/mgpi/model-expanded-source.json",
+                      "--out", base / "default"])
+            self.assertEqual(json.loads((base / "default/questions.json").read_text(encoding="utf-8"))["questions"], [])
+
+    def intake(self, base, facts=None):
+        model = {"meta": {"model_kind": "extracted_twin", "title": "fictional field intake"},
+                 "units": [{"id": "P1", "tag": "P-1", "class": "pump", "sheets": ["1"],
+                            "facts": facts or {}}], "instruments": [], "streams": []}
+        path = base / "model.json"
+        path.write_text(json.dumps(model), encoding="utf-8")
+        return path
+
+    def schedule(self, base, name, fields):
+        path = base / name
+        path.write_text(json.dumps({"sheets": {"1": [{"tag": "P-1", "service": "Water pump", "fields": fields}]}}),
+                        encoding="utf-8")
+        return path
+
+    def test_disjoint_schedule_fields_merge_with_per_field_provenance(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.intake(base)
+            first = self.schedule(base, "first.json", {"HP": 10, "RPM": 1750})
+            second = self.schedule(base, "second.json", {"CAPACITY": "100 gpm"})
+            third = self.schedule(base, "third.json", {"DISCHARGE": "90 ft"})
+            self.cli(["--model", model, "--schedule", first, "--schedule", second, "--schedule", third,
+                      "--out", base / "reports"])
+            doc = json.loads((base / "reports/questions.json").read_text(encoding="utf-8"))
+            self.assertEqual(doc["schedules"], ["first.json", "second.json", "third.json"])
+            motor = finding(doc, "E4@P1")
+            evidence = next(e for e in motor["evidence"] if "HP = 10" in e["text"])
+            self.assertIn("first.json", evidence["field"])
+            loaded = qe.Model(model, schedule_paths=[third, second, first])
+            self.assertEqual(qe.field_state(loaded.by_id["P1"], "HP")[1], 10)
+
+    def test_ambiguous_inputs_refuse_before_overwriting_reports(self):
+        cases = [("facts", {"HP": 10, "hp": 20}, None, None, "case-variant"),
+                 ("fields", None, {"HP": 10, "hp": 20}, None, "case-variant"),
+                 ("scheduleconflict", None, {"HP": 10}, {"hp": 20}, "conflicting schedule"),
+                 ("typedconflict", None, {"HP": False}, {"hp": 0}, "conflicting schedule"),
+                 ("factconflict", {"HP": 10}, {"hp": 20}, None, "conflicting model fact"),
+                 ("whitespace", {" HP ": 10}, None, None, "surrounding whitespace")]
+        for name, facts, fields, later, diagnostic in cases:
+            with self.subTest(case=name), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = self.intake(base, facts)
+                out = base / "reports"
+                out.mkdir()
+                (out / "questions.json").write_text("prior JSON", encoding="utf-8")
+                (out / "screen.md").write_text("prior report", encoding="utf-8")
+                before = {p.name: p.read_bytes() for p in out.iterdir()}
+                args = ["--model", model, "--out", out]
+                if fields is not None:
+                    args += ["--schedule", self.schedule(base, "first.json", fields)]
+                if later is not None:
+                    args += ["--schedule", self.schedule(base, "second.json", later)]
+                result = self.cli(args, 2)
+                self.assertIn(diagnostic, result.stderr)
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+
+    def test_duplicate_and_nonfinite_json_refuse(self):
+        for raw in ['{"units":[],"units":[]}', '{"units":[],"value":NaN}', '{"units":[],"value":1e999}']:
+            with self.subTest(raw=raw), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                path = base / "model.json"
+                path.write_text(raw, encoding="utf-8")
+                result = self.cli(["--model", path, "--out", base / "reports"], 2)
+                self.assertIn("not valid JSON", result.stderr)
+                self.assertFalse((base / "reports").exists())
+
+    def test_identical_fields_and_opaque_qualifiers_survive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model = self.intake(base, {"HP": {"value": 10, "basis": "unknown", "source": {"revision": "A"}}})
+            first = self.schedule(base, "first.json", {"hp": {"value": 10, "basis": "unknown", "source": {"revision": "A"}}})
+            self.cli(["--model", model, "--schedule", first, "--out", base / "reports"])
+            loaded = qe.Model(model, schedule_paths=[first])
+            self.assertEqual(qe.field_state(loaded.by_id["P1"], "HP")[1],
+                             {"value": 10, "basis": "unknown", "source": {"revision": "A"}})
+
+    def test_native_schedule_is_refused_instead_of_silently_ignored(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            path = self.schedule(base, "schedule.json", {"HP": 10})
+            result = self.cli(["--model", self.example / "model.json", "--schedule", path,
+                               "--out", base / "reports"], 2)
+            self.assertIn("only to extracted twins", result.stderr)
+            self.assertFalse((base / "reports").exists())
+
+
+class SteamCollectionContracts(unittest.TestCase):
+    """Public-model copies expose wrong units/basis without treating field presence as suitability."""
+
+    cli = CollectionContractRepairs.cli
+    ids_by_question = {"E11": "E11@stream:U1", "H1": "H1@S4-TK001", "H2": "H2@E-2"}
+    tasks = {"E11": "Applicable surface-temperature and insulation evidence",
+             "H1": "Matched station steam-throughput rating and conditions",
+             "H2": "Applicable steam-supply conditions and operating basis"}
+
+    def copied_model(self, qid, facts):
+        relative = ("out/twin/r2-tiles-trace/codex/plant_model.json" if qid == "H1"
+                    else "data/bayer_rt/process_model.json")
+        model = json.loads((ROOT / relative).read_text(encoding="utf-8"))
+        target = (next(u for u in model["units"] if u["id"] == "S4-TK001") if qid == "H1"
+                  else next(s for s in model["streams"] if s["id"] == "U1"))
+        target["facts"] = copy.deepcopy(facts)
+        if qid == "H2":
+            next(v for v in model["final_elements"] if v["tag"] == "TV-104C")["facts"] = copy.deepcopy(facts)
+        model.setdefault("meta", {})["audit_fixture"] = "Fictional software mutation of a public development model"
+        return model
+
+    def generate(self, base, qid, facts):
+        path = base / "model.json"
+        path.write_text(json.dumps(self.copied_model(qid, facts)), encoding="utf-8")
+        before = path.read_bytes()
+        args = ["--model", path, "--question", qid, "--out", base]
+        if qid == "H1":
+            args += ["--schedule", ROOT / "data/open100_equipment_schedule.json"]
+        self.cli(args)
+        self.assertEqual(path.read_bytes(), before)
+        return json.loads((base / "questions.json").read_text(encoding="utf-8"))
+
+    def test_wrong_basis_units_flags_and_rich_candidates_keep_review_tasks_open(self):
+        cases = {
+            "E11": [{}, {"normal_temperature_C": False}, {"normal_temperature_C": 0},
+                    {"normal_temperature_C": None},
+                    {"normal_temperature_C": {"value": 150, "basis": "design fluid; surface unknown", "status": "draft"}},
+                    {"normal_temperature_C": 150, "insulation_survey": "wrong-asset.pdf",
+                     "insulation_survey_asset": "OTHER", "insulation_survey_readable": False},
+                    {"normal_temperature_C": 150, "surface_temperature_C": 75,
+                     "surface_temperature_basis": {"source": "survey", "period": "example", "status": "unreviewed"},
+                     "insulation_condition": "bare? draft observation"}],
+            "H1": [{}, {"CAPACITY": False}, {"CAPACITY": 0}, {"CAPACITY": None},
+                   {"CAPACITY": "500 gal internal volume"},
+                   {"CAPACITY": "500 gal", "rating_document": "wrong-asset.pdf", "rating_asset": "OTHER",
+                    "rating_document_readable": False},
+                   {"CAPACITY": "3000 lb/hr", "rated_steam_flow": 3000, "rated_steam_flow_uom": "lb/hr",
+                    "rating_conditions": {"basis": "vendor rating; actual duration unknown", "status": "unreviewed"}}],
+            "H2": [{}, {"steam_pressure": False, "steam_temperature_C": False},
+                   {"steam_pressure": 0, "steam_temperature_C": 0},
+                   {"steam_pressure": None, "steam_temperature_C": "  "},
+                   {"steam_pressure": {"value": 10, "units": "bar", "reference": "unknown", "basis": "design"},
+                    "steam_temperature_C": {"value": 300, "basis": "different time/location", "status": "draft"}},
+                   {"steam_pressure": "10 bar", "steam_temperature_C": 300, "steam_supply_asset": "OTHER",
+                    "steam_conditions_source": "unreadable.pdf", "steam_conditions_readable": False},
+                   {"steam_pressure": "10 bar", "steam_temperature_C": 300, "steam_state": "superheated candidate",
+                    "steam_pressure_reference": "absolute", "steam_conditions_period": {"period": "example", "status": "unreviewed"}}]}
+        for qid, variants in cases.items():
+            for facts in variants:
+                with self.subTest(question=qid, facts=facts), tempfile.TemporaryDirectory() as tmp:
+                    base = Path(tmp)
+                    doc = self.generate(base, qid, facts)
+                    selected = finding(doc, self.ids_by_question[qid])
+                    task = next(r for r in selected["data_requests"] if r["item"] == self.tasks[qid])
+                    self.assertIn("candidate_facts", task)
+                    self.assertNotIn("already_on_drawing", task)
+                    self.assertNotIn("still_needed", task)
+                    for fact in task["candidate_facts"]:
+                        self.assertEqual(fact["value"], facts[fact["name"]])
+                        self.assertIn(".facts.", fact["where"])
+                    graph = gx.build(base / "model.json", questions=base / "questions.json")
+                    self.assertEqual(graph["questions"], doc["questions"])
+                    qe.rollup([str(base)], CAT)
+                    self.assertIn("collection/review request remains open", (base / "screen.md").read_text(encoding="utf-8"))
+
+    def test_missing_new_review_tasks_refuse_rollup_without_changing_reports(self):
+        for qid in self.tasks:
+            with self.subTest(question=qid), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                doc = self.generate(base, qid, {})
+                selected = finding(doc, self.ids_by_question[qid])
+                selected["data_requests"] = [r for r in selected["data_requests"] if r["item"] != self.tasks[qid]]
+                (base / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                out = base / "rollup"
+                out.mkdir()
+                (out / "rollup.json").write_text("prior JSON", encoding="utf-8")
+                (out / "rollup.md").write_text("prior Markdown", encoding="utf-8")
+                before = {p.name: p.read_bytes() for p in out.iterdir()}
+                result = self.cli(["--rollup", base, "--out", out], 2)
+                self.assertIn("missing_required", result.stderr)
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+
+    def test_stated_field_accounting_does_not_claim_semantic_completion(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            doc = self.generate(base, "H1", {"CAPACITY": "500 gal internal volume"})
+            selected = finding(doc, self.ids_by_question["H1"])
+            self.assertNotIn("Stated station capacity", {r["item"] for r in selected["data_requests"]})
+            self.assertIn(self.tasks["H1"], {r["item"] for r in selected["data_requests"]})
+            self.assertTrue(any("500 gal internal volume" in e["text"] for e in selected["evidence"]))
+            self.assertIn("not actual flow-duration", next(r for r in selected["data_requests"]
+                                                         if r["item"] == self.tasks["H1"])["how"])
+
+
+class ServiceReconciliation(unittest.TestCase):
+    """Exact imported service choices replace input-order selection, without claiming approval."""
+
+    cli = CollectionContractRepairs.cli
+    intake = CollectionContractRepairs.intake
+    schedule = CollectionContractRepairs.schedule
+
+    def sources(self, base):
+        model = self.intake(base)
+        first = self.schedule(base, "water.json", {"HP": 10})
+        second = self.schedule(base, "refrigeration.json", {"HP": 10})
+        value = json.loads(second.read_text(encoding="utf-8"))
+        value["sheets"]["1"][0]["service"] = "Ammonia refrigeration compressor"
+        second.write_text(json.dumps(value), encoding="utf-8")
+        return model, first, second
+
+    def declaration(self, first="water.json", second="refrigeration.json", selected=0):
+        candidates = [{"file": first, "row": 1, "service": "Water pump"},
+                      {"file": second, "row": 1, "service": "Ammonia refrigeration compressor"}]
+        return {"candidates": candidates, "selected": candidates[selected],
+                "basis": "Fictional imported service choice; needs source review", "status": "draft"}
+
+    def attach(self, path, resolution):
+        value = json.loads(path.read_text(encoding="utf-8"))
+        value["sheets"]["1"][0]["service_resolution"] = resolution
+        path.write_text(json.dumps(value), encoding="utf-8")
+
+    def test_conflicting_services_refuse_in_both_orders_before_publication(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model, first, second = self.sources(base)
+            out = base / "reports"
+            out.mkdir()
+            (out / "questions.json").write_text("previous JSON", encoding="utf-8")
+            (out / "screen.md").write_text("previous Markdown", encoding="utf-8")
+            prior = {p.name: p.read_bytes() for p in out.iterdir()}
+            for a, b in ((first, second), (second, first)):
+                result = self.cli(["--model", model, "--schedule", a, "--schedule", b, "--out", out], 2)
+                self.assertIn("conflicting schedule service", result.stderr)
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, prior)
+
+    def test_exact_draft_choice_is_order_independent_and_retained_in_graph(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model, first, second = self.sources(base)
+            self.attach(second, self.declaration())
+            packets = []
+            for n, (a, b) in enumerate(((first, second), (second, first))):
+                out = base / str(n)
+                self.cli(["--model", model, "--schedule", a, "--schedule", b, "--out", out])
+                doc = json.loads((out / "questions.json").read_text(encoding="utf-8"))
+                self.assertEqual(ids(doc), {"E4@P1", "C9@model"})
+                resolution = doc["service_reconciliations"][0]
+                self.assertEqual({r["service"] for r in resolution["candidates"]},
+                                 {"Water pump", "Ammonia refrigeration compressor"})
+                self.assertIn("unverified", resolution["authority"])
+                self.assertEqual(resolution["declarations"][0]["status"], "draft")
+                self.assertTrue(any(e.get("service_reconciliation") == resolution
+                                    for q in doc["questions"] for e in q["evidence"]))
+                self.assertEqual(gx.build(model, questions=out / "questions.json")["questions"], doc["questions"])
+                self.assertIn("Supplied service choice, unverified", (out / "screen.md").read_text(encoding="utf-8"))
+                packets.append({p.name: p.read_bytes() for p in out.iterdir()})
+            self.assertEqual(packets[0], packets[1])
+
+    def test_stale_unknown_and_malformed_declarations_refuse(self):
+        good = self.declaration()
+        def duplicate(value):
+            value["candidates"].append(copy.deepcopy(value["candidates"][0]))
+        mutations = [lambda value: value.update(basis="  "), lambda value: value.update(status="accepted"),
+                     lambda value: value.update(status=[]), lambda value: value.update(selected={}),
+                     lambda value: value["selected"].update(file="missing.json"), duplicate,
+                     lambda value: value["candidates"][0].update(row=2),
+                     lambda value: value["candidates"][0].update(service="different source text"),
+                     lambda value: value.pop("basis"), lambda value: value.update(extra="ignored?")]
+        for mutate in mutations:
+            with self.subTest(mutation=mutate), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model, first, second = self.sources(base)
+                resolution = copy.deepcopy(good)
+                mutate(resolution)
+                self.attach(second, resolution)
+                result = self.cli(["--model", model, "--schedule", first, "--schedule", second,
+                                   "--out", base / "reports"], 2)
+                self.assertIn("service_resolution", result.stderr)
+                self.assertFalse((base / "reports").exists())
+
+    def test_multiple_declarations_are_retained_but_conflicting_choices_refuse(self):
+        for selected in (0, 1):
+            with self.subTest(selected=selected), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model, first, second = self.sources(base)
+                self.attach(first, self.declaration())
+                other = self.declaration(selected=selected)
+                other.update(status="reviewed", basis="Another supplied declaration; no authenticated approval")
+                self.attach(second, other)
+                result = self.cli(["--model", model, "--schedule", first, "--schedule", second,
+                                   "--out", base / "reports"], 2 if selected else 0)
+                if selected:
+                    self.assertIn("conflicting service_resolution", result.stderr)
+                else:
+                    doc = json.loads((base / "reports/questions.json").read_text(encoding="utf-8"))
+                    resolution = doc["service_reconciliations"][0]
+                    self.assertEqual(len(resolution["declarations"]), 2)
+                    self.assertEqual({r["status"] for r in resolution["declarations"]}, {"draft", "reviewed"})
+                    self.assertIn("organizational approval unverified", resolution["authority"])
+
+    def test_identical_and_blank_services_do_not_create_conflicts(self):
+        for value in (None, "", "  ", "Water pump"):
+            with self.subTest(service=value), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model, first, second = self.sources(base)
+                data = json.loads(second.read_text(encoding="utf-8"))
+                data["sheets"]["1"][0]["service"] = value
+                second.write_text(json.dumps(data), encoding="utf-8")
+                for n, (a, b) in enumerate(((first, second), (second, first))):
+                    out = base / str(n)
+                    self.cli(["--model", model, "--schedule", a, "--schedule", b, "--out", out])
+                    doc = json.loads((out / "questions.json").read_text(encoding="utf-8"))
+                    self.assertEqual(ids(doc), {"E4@P1", "C9@model"})
+                    self.assertNotIn("service_reconciliations", doc)
+
+    def test_changed_source_set_or_asset_identity_cannot_reuse_a_declaration(self):
+        for changed in ("missing_source", "identity", "text", "row"):
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model, first, second = self.sources(base)
+                self.attach(second, self.declaration())
+                data = json.loads(first.read_text(encoding="utf-8"))
+                if changed == "identity":
+                    data["sheets"]["1"][0]["tag"] = "P-OTHER"
+                elif changed == "text":
+                    data["sheets"]["1"][0]["service"] = "Changed description"
+                elif changed == "row":
+                    data["sheets"]["1"].insert(0, {"tag": "P-OTHER", "service": "Other pump"})
+                first.write_text(json.dumps(data), encoding="utf-8")
+                args = ["--model", model, "--schedule", second, "--out", base / "reports"]
+                if changed != "missing_source":
+                    args += ["--schedule", first]
+                result = self.cli(args, 2)
+                self.assertIn("stale or mismatched service_resolution", result.stderr)
+                self.assertFalse((base / "reports").exists())
+
+    def test_unmatched_asset_declarations_and_nontext_services_do_not_escape_validation(self):
+        for service in (False, 23, [], {}, "Water pump"):
+            with self.subTest(service=service), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                model = self.intake(base)
+                schedule = self.schedule(base, "other.json", {})
+                value = json.loads(schedule.read_text(encoding="utf-8"))
+                value["sheets"]["1"][0].update(tag="unmatched", service=service)
+                if service == "Water pump":
+                    value["sheets"]["1"][0]["service_resolution"] = {}
+                schedule.write_text(json.dumps(value), encoding="utf-8")
+                result = self.cli(["--model", model, "--schedule", schedule, "--out", base / "reports"], 2)
+                self.assertIn("service", result.stderr)
+
+    def test_open100_resolutions_are_explicit_and_original_transcriptions_remain(self):
+        paths = ["data/open100_equipment_schedule.json", "examples/opportunity-screen/open100_schedule_fields.json"]
+        original = json.loads((ROOT / paths[0]).read_text(encoding="utf-8"))
+        supplements = json.loads((ROOT / paths[1]).read_text(encoding="utf-8"))
+        self.assertEqual(sum("service_resolution" in r for rows in supplements["sheets"].values() for r in rows), 3)
+        entries = qe.load_schedule([ROOT / p for p in paths])
+        reversed_entries = qe.load_schedule([ROOT / p for p in reversed(paths)])
+        for sheet in ("2", "3", "4"):
+            row = next(r for r in original["sheets"][sheet] if r["tag"] == "CND-TK-165")
+            self.assertIn(row["service"], {"DEAREATOR STORAGE TANK", "DEAREATER STORAGE TANK"})
+            resolution = entries[(sheet, "CND-TK-165")]["service_reconciliation"]
+            self.assertEqual(resolution, reversed_entries[(sheet, "CND-TK-165")]["service_reconciliation"])
+            self.assertEqual(resolution["selected"]["service"], "DEAERATOR STORAGE TANK")
+            self.assertEqual(resolution["declarations"][0]["status"], "draft")
+
+    def test_resolution_inputs_are_protected_from_output_aliases(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            model, first, second = self.sources(base)
+            target = base / "screen.md"
+            first.rename(target)
+            self.attach(second, self.declaration(first="screen.md"))
+            (base / "questions.json").write_text("previous JSON", encoding="utf-8")
+            prior = {p.name: p.read_bytes() for p in base.iterdir() if p.is_file()}
+            result = self.cli(["--model", model, "--schedule", target, "--schedule", second, "--out", base], 2)
+            self.assertIn("overlaps input", result.stderr)
+            self.assertEqual({p.name: p.read_bytes() for p in base.iterdir() if p.is_file()}, prior)
+
+
 class CollectionBasis(unittest.TestCase):
     """Scalar candidates cannot stand in for performance documents or representative operating records."""
 
@@ -1226,15 +1690,21 @@ class OutputPublication(unittest.TestCase):
     def test_every_schedule_is_protected_even_when_later_entries_replace_it(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            model = self.model(base)
+            model = base / "model.json"
+            model.write_text(json.dumps({"meta": {"model_kind": "extracted_twin"},
+                                         "units": [{"id": "P1", "tag": "P-1", "class": "pump", "sheets": ["0"]}],
+                                         "instruments": [], "streams": []}), encoding="utf-8")
             first, second = base / "screen.md", base / "later.json"
-            first.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "earlier"}]}}),
+            first.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "Water pump"}]}}),
                              encoding="utf-8")
-            second.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "later"}]}}),
+            second.write_text(json.dumps({"sheets": {"0": [{"tag": "P-1", "service": "Water pump"}]}}),
                               encoding="utf-8")
             (base / "questions.json").write_text("prior JSON", encoding="utf-8")
             self.refuse_unchanged(base, ["--model", model, "--schedule", first, "--schedule", second,
                                          "--out", base])
+            rc, err = self.call(["--model", model, "--schedule", first, "--schedule", second, "--out", base])
+            self.assertEqual(rc, 2)
+            self.assertIn("overlaps input", err)
 
     def test_rollup_direct_file_and_catalog_inputs_are_protected(self):
         for role in ("screen", "catalog"):

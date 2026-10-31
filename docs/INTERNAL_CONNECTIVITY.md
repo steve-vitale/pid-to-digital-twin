@@ -165,9 +165,12 @@ as a workaround. Verify tools, resource handling and end-user authorization in t
 channel, not only a developer test client. No such end-to-end Copilot test has been performed here.
 
 An IT developer can first run the [snapshot starter](../examples/internal-mcp/README.md) over the public example
-or a cleared graph packet with the pinned MCP SDK and a test client. It exposes six bounded tools for snapshot
-identity, asset search/readback, typed relations and existing questions, plus a summary resource. It reads the
-selected file once; sources are returned as references and are not fetched. Its local transport tests are
+or a cleared graph packet with the pinned MCP SDK and a test client. It exposes nine bounded tools for snapshot
+identity, asset/stream search and readback, typed relations, existing questions, and complete answer/ownership
+history from an explicitly selected, hash-bound context sidecar, plus a summary resource. It reads the
+selected files once; sources are returned as references and are not fetched. Graph-only use explicitly reports
+that complete context is unavailable. A new source revision needs a preserved-register refresh, explicit review
+and [snapshot restart/readback](CONTEXT_LIFECYCLE.md#maintain-one-local-packet-between-reviews). Its local transport tests are
 separate from the default Copilot-only reader path and a company shared deployment.
 
 Future source-document and process-data connectors could add `search_sources`, `get_source` and

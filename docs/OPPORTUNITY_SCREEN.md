@@ -11,9 +11,10 @@ finding: [`examples/opportunity-screen/`](../examples/opportunity-screen/README.
 Decision rules describe which investigations to pursue or conclude. In this screening language, "close it" means
 close the investigation, never operate or close equipment. Findings do not authorize operational changes.
 
-**Open collection defects:** E1/E2/E4 can drop pump-curve or efficiency obligations after basic rating fields are
-supplied; E2 can label generic ratings as BEP evidence. Review those obligations separately. The E5/H3 repairs
-do not certify the rest of the catalog. See [N073 in the current audit](STATUS.md#known-defects).
+**Collection limits:** E1/E2/E4 now keep matched curves, BEP and efficiency review separate from scalar ratings;
+H4 keeps generic capacity separate from actual heat duty. Source-informed software controls establish those
+bounded repairs, not whole-catalog engineering adequacy. Do not use field-complete screens as proof that the
+underlying engineering evidence is suitable, current or complete. See the [current audit](STATUS.md).
 
 ```sh
 python -S scripts/question_engine.py --list
@@ -126,7 +127,8 @@ Open field requests retain `field_scope`, `field_coverage` (subject identity, ea
 state and locator) and `still_needed`. `already_on_drawing` names fields supplied on at least one subject;
 it can overlap the remaining list when another subject lacks that field. Read the subject coverage rather than
 treating either list as a plant-wide answer. Null, empty/whitespace and recognized placeholder values are blank;
-zero and false remain supplied values. Conflicting facts/schedules and duplicate case variants are not resolved.
+zero and false remain supplied values. Ambiguous case-variant names and conflicting model-fact/schedule or
+repeated schedule-field values refuse before publication; source reconciliation remains an engineering task.
 This accounting covers the fields encoded in a request, not everything its prose may require. Field completion
 alone does not establish that the full engineering collection task is satisfied.
 
@@ -136,6 +138,22 @@ H3 separates stated rating from actual hours/load and source compatibility. Both
 candidates without demanding two power-unit representations or converting a rating into measured input. The
 [worked collection example](../examples/opportunity-screen/collection-basis/README.md) starts with the scalars
 that previously hid those requests.
+E1/E2 now keep matched pump curves and BEP review separate from stated ratings; E4 keeps full-load efficiency
+and representative input/load basis separate from HP; H4 keeps generic capacity separate from actual heat duty.
+The [pump/motor/cooler control](../examples/opportunity-screen/pump-motor-basis/README.md) demonstrates these
+distinctions without changing the 50 triggers or cited benefit objects. A full-catalog engineering validation
+and human-usefulness study remain open.
+
+E11, H1 and H2 also separate stated fields from an always-open applicability/basis review. A fluid/design
+temperature is not surface evidence; generic capacity is not rated steam throughput; a rated flow is not actual
+duration. Supply pressure/temperature need an identified location, units/reference, steam state and coincident
+operating period. Boolean, wrong-asset, unreadable or design-only candidates remain useful records of what was
+supplied, without settling those tasks. These distinctions follow DOE [Tip2](https://www.energy.gov/sites/default/files/2014/05/f16/steam2_insulate.pdf),
+[Tip20](https://www.energy.gov/sites/prod/files/2014/05/f16/steam20_turbogenerators.pdf) and the
+[steam sourcebook](https://www.energy.gov/sites/default/files/2014/05/f15/steamsourcebook.pdf)
+(printed pp.5,9,18–19,54). They instruct evidence review, not new live measurements or operating changes.
+The remaining 41 rules still need original-source adequacy review; passing these bounded controls does not
+establish broad usefulness.
 
 `candidate_facts` retains each supplied value, subject and locator; `candidate_scope` uses the request's subject
 scope. Missing/blank optional candidates receive no satisfaction credit and do not add required fields. With
@@ -160,15 +178,55 @@ list row (in `data/io_lists/`) describes it as synthetic is labelled SYNTHETIC, 
 - `--loops`: a loop list CSV in the `loop_audit.py` format (`controller,measurement,output[,description]`). An
   extracted drawing has no controllers, so without this the controller questions (C2, C6) are reported as
   "not checked".
-- `--schedule` (repeatable): equipment schedule entries per sheet, `{"sheets": {"2": [{"tag", "service",
-  "fields"}]}}`. `fields` maps each printed field to its value, with `null` for a printed blank. A later file's
-  fields object replaces the earlier fields object for a matching entry; it does not merge individual field
-  keys. Supply a complete replacement when combining a tag/service list with a fields transcription.
+- `--schedule` (repeatable, extracted twins only): equipment schedule entries per sheet,
+  `{"sheets": {"2": [{"tag", "service", "fields"}]}}`. `fields` maps printed fields to values, with `null`
+  for a printed blank. Disjoint fields merge for matching sheet/tag; identical values may repeat. Conflicting
+  values, including a blank versus a supplied value, refuse rather than implicitly select a revision. Merged
+  fields retain their source files and every supplied schedule remains listed/protected. Native models use
+  `facts`; a schedule supplied to that path refuses instead of being ignored. Nonempty facts on extracted
+  items are retained, and conflicts with corresponding schedule fields refuse. Case-duplicate field names,
+  duplicate JSON object keys and nonfinite JSON numbers also refuse.
 - `--question ID` (repeatable): run only these questions.
 
 A missing, empty or malformed file, a model with no units or instruments, a loop list without the
 `controller,measurement,output` columns, or a schedule without `sheets` is refused with a message saying which file
 and why (exit code 2), never a traceback or an empty "found nothing" screen.
+
+Distinct nonempty service descriptions for the same sheet/tag now refuse. Input order never selects the
+governing description. An engineer can reconcile the sources first, or supply an explicit `service_resolution`
+on that schedule entry. It names every exact candidate source filename, one-based row and service string,
+selects one existing candidate, and records a nonempty basis and declared `draft` or `reviewed` status:
+
+```json
+"service_resolution": {
+  "candidates": [
+    {"file": "earlier.json", "row": 1, "service": "Water pump"},
+    {"file": "later.json", "row": 1, "service": "Ammonia compressor"}
+  ],
+  "selected": {"file": "earlier.json", "row": 1, "service": "Water pump"},
+  "basis": "Supplied source interpretation; needs receiving engineering review",
+  "status": "draft"
+}
+```
+
+The surrounding entry supplies the sheet/tag scope. Candidate files use the displayed repository-relative
+path, or filename for an external source; distinct external inputs need distinct filenames. The complete
+source set must be present. Changed text, row, identity or source set requires a new declaration; stale,
+duplicate-candidate, malformed and conflicting selections refuse before publication. Multiple agreeing
+declarations retain their separate provenance. Blank/null service values supply no description and cannot
+override a nonempty one. Nothing guesses a spelling or engineering equivalence.
+
+The screen retains exact candidates, selected source, status and basis in `service_reconciliations`, and in
+affected finding evidence for graph/context handoff. Readable output marks the choice **unverified**, including
+when a supplied label says `reviewed`: this does not authenticate authority or certify the selected meaning.
+The OPEN100 supplement explicitly declares three **draft** spelling choices and preserves both original
+DEAREATOR/DEAREATER transcriptions and normalized DEAERATOR strings. Those declarations are inspectable
+development interpretations, not a global normalization rule or plant acceptance.
+
+The [source-investigation recipe](../examples/opportunity-screen/source-investigation/README.md) uses a custom,
+source-scoped catalog to retain already-known MGPI historical answers and ask conditional receiving-installation
+questions. It demonstrates an authored handoff when the default catalog has no finding. It adds no generic
+level-indicator rule, broad source-comprehension score or measured usefulness result.
 
 ## Outputs
 

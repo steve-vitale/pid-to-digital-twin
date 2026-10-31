@@ -23,7 +23,7 @@ python scripts/check_snapshot_mcp.py
 The check builds a graph from the committed `data/bayer_rt/process_model.json` and
 `examples/opportunity-screen/bayer/questions.json`, serialized as UTF-8 JSON with LF endings, one-space indent
 and a final newline. It uses temporary local files and tests in-memory, stdio and loopback HTTP clients. It
-starts one temporary listener on `127.0.0.1`, then stops it. It needs no account, API key, model call, source
+starts temporary graph-only and context-bound listeners on `127.0.0.1` sequentially, then stops them. It needs no account, API key, model call, source
 download or plant connection. A successful check is local protocol evidence only.
 
 For a client that supports local stdio servers, configure its executable and arguments as:
@@ -59,6 +59,9 @@ handle the selected content; a local listener does not isolate it from other use
 | `get_relations(asset_id, limit, offset)` | Returns the supplied typed, directed relationships. | Network co-membership must not be read as direct pipe adjacency. |
 | `list_questions(asset_id, limit, offset)` | Finds the existing investigation questions, optionally for one asset. | It does not run the question engine or resolve a question. |
 | `get_question(question_id)` | Returns a full supplied question, its evidence and data requests. | A question or recommendation is not an accepted change or operating instruction. |
+| `list_context_questions(limit, offset)` | Lists present and removed question IDs, current states and owners from the selected register. | Requires explicit `--context`; removed questions are retained history, not current findings. |
+| `get_context(question_id)` | Returns current answer/freshness references, question ownership history and current source metadata. | Current means snapshot agreement. Use `list_decisions` for full answer records. |
+| `list_decisions(question_id, limit, offset)` | Returns complete immutable decisions, including answer text, canonical value, verdicts, reviewer, predecessor and the original evidence snapshot. Omit the question ID to traverse all history. | Includes superseded, rejected and stale decisions. Their original verdicts are historical records, not new approval or plant checks. |
 | `engineering://snapshot/summary` | Offers the same summary as an MCP resource. | Client support for resources varies; the summary tool is available separately. |
 
 The server reads existing [twin-graph-1](../../docs/GRAPH_EXPORT.md) JSON. The standalone commands above use
@@ -75,19 +78,46 @@ Source references are returned as data and are never opened. Tool callers cannot
 URL. A supplied asset whose identity looks like a path is still just an opaque ID. No write tool is exposed.
 Source text is evidence to inspect, not authorization for the client to run instructions found inside it.
 
-The context register's enriched graph contains answer IDs/freshness and a sidecar reference, rather than the
-answer text, canonical values and decision/source verdicts. Those remain in `context.json`, which this server
-does not load. Read the packet's sidecar/report separately. Asset retrieval and asset-filtered queries accept
-graph node IDs only; context's virtual stream IDs such as `stream:S1` are unavailable through those operations.
-An existing stream question can still be retrieved by its question ID. This partial readback bridge is
-[N076 in the audit](../../docs/STATUS.md#known-defects).
+Exact graph node IDs and virtual stream IDs such as `stream:S1` work with `get_asset`, `get_relations` and
+`list_questions`. A stream ID means the `connects` edge whose original ID is `S1`; `get_asset` returns that original
+edge unchanged. Search identifies it as `stream:S1`. Its relation page includes the original edge and any relations
+explicitly referring to that virtual identity. It does not infer new adjacency from a shared endpoint or network.
+Bare `S1` is not guessed as a stream alias. Node/virtual-stream identity collisions refuse at startup.
 
-Search and question pages allow 1–50 results; relationships allow 1–100. Start at `offset=0` and follow
+## Read the complete context packet
+
+An enriched graph alone contains answer IDs and freshness, not full answers. Select its matching register explicitly:
+
+```sh
+python scripts/serve_snapshot.py --graph examples/context-register/bayer/expected/enriched_graph.json --context examples/context-register/bayer/expected/context.json
+```
+
+The operator chooses both paths at startup. The server never follows the graph's sidecar string, opens source
+documents, or accepts a path or URL from a client tool call. It validates immutable register history, the graph's
+`context_register.content_sha256`, current evidence projections and attached question context before serving.
+A mismatched pair refuses. Legacy graphs without that binding can still be served alone; first refresh the preserved
+register through [the context workflow](../../docs/CONTEXT_REGISTER.md#incoming-revisions-reopen-affected-answers)
+to create a bound pair. A content hash detects mismatches; it does not authenticate a reviewer or protect against
+someone deliberately replacing both files.
+
+Call `snapshot_summary` and check `context_available`. When it is false, the three context tools return an explicit
+unavailable error; a question's answer references must not be mistaken for a complete answer. With a selected pair,
+each response adds `context_sha256` for the actual sidecar bytes and `context_content_sha256` for its canonical
+content. Keep all pages only when both graph and context hashes agree.
+
+Use `list_context_questions` to discover all retained IDs, including removed questions. For one ID, `get_context`
+shows current freshness and owner history; `list_decisions` returns full historical answers. Follow `next_offset`
+to read every decision. Match each current `decision_id` to its complete decision record; older records remain
+visible with their original verdicts and exact source/revision/hash/locator. An accepted historical answer may now
+be stale or refer to a removed question. This readback does not upgrade source match, plant truth or release state.
+The readable `context.md` and exact `context.json` remain usable without an MCP client.
+
+Search, question, context-question and decision pages allow 1–50 results; relationships allow 1–100. Start at `offset=0` and follow
 `next_offset` until it is `null`. Ordering is stable within the loaded snapshot. Keep pages only when their
 `snapshot_sha256` values agree. Invalid offsets and unknown IDs return errors; an empty first page is valid.
 `truncated` means the page does not contain the entire matching set, including when it is a later page.
 
-Input is capped at 32 MiB. Application responses and serialized successful MCP result data are bounded at
+Each selected input is capped at 32 MiB. Application responses and serialized successful MCP result data are bounded at
 2 MiB, including duplicated text/structured JSON and escaping, with a 4 KiB allowance for pinned SDK metadata.
 This is not a bound on arbitrary outer JSON-RPC request IDs or transport framing. A large single record is
 refused rather than silently losing claims. Request fewer items or prepare a smaller cleared packet; this is
@@ -123,5 +153,8 @@ size/escaping limits, snapshot immutability and refusal without source fetching.
 The optional CI job installs the pinned [official MCP Python SDK release](https://github.com/modelcontextprotocol/python-sdk/releases/tag/v2.3.0)
 and runs those protocol checks separately from the base toolkit suite. Local development has exercised both
 negotiated `2025-11-25` and `2026-07-28` protocol modes; this does not establish compatibility with every client.
+The checker also uses fictional context records to compare every returned decision field through in-memory,
+stdio and loopback clients in both protocol modes. It retains a stale accepted answer after explicit rejection
+and a removed question's history; these are software controls, not company decisions.
 Company authentication, Copilot channels, historian connections, native imports and operational value remain
 unvalidated. This feature adds snapshot access, not additional corpus cells or description-to-P&ID accuracy.

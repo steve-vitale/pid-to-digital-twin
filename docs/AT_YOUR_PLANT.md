@@ -14,6 +14,10 @@ uses Python, with no accounts, downloads or model calls.
 
 ## Choose a route before planning the pilot
 
+Use the [acceptance exercise](ACCEPTANCE.md) to record a recipient's reconstruction, receiving-system readback,
+approved-client access and a subsequent revision. Its status remains not run until real participants and the
+authorized environment supply observations.
+
 Use the [input selector](../README.md#start-wherever-you-are) and [format contracts](WORKFLOWS.md) rather than
 assuming every route produces the same outputs. The [first-question brief](../examples/first-pilot/README.md)
 works with approved documents and Copilot or manual review, without a local model or custom agent.

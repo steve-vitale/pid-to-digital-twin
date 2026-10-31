@@ -5,7 +5,9 @@ The answer wraps existing process-model/layout JSON, with exact source-span quot
 """
 import argparse
 import copy
+import csv
 import hashlib
+import io
 import json
 import os
 import re
@@ -609,6 +611,61 @@ def check(packet,answer):
         return report
 
 
+def interpretation_review(model, source_raw):
+    """Expose every authored record value and source line; no semantic verdict is inferred."""
+    lines=source_raw.decode('utf-8-sig').splitlines()
+    claims=[]
+    coverage={i:[] for i in range(1,len(lines)+1)}
+    def encoded(value):
+        return json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':'))
+    def leaves(value,path,citation=''):
+        if isinstance(value,dict) and value:
+            citation=value.get('source',citation)
+            for key,child in value.items():
+                if key!='source':
+                    yield from leaves(child,path+'/'+str(key).replace('~','~0').replace('/','~1'),citation)
+        elif isinstance(value,list) and value:
+            for i,child in enumerate(value):
+                yield from leaves(child,path+'/'+str(i),citation)
+        else:
+            yield path,value,citation
+    def cite_lines(value,pointer):
+        if isinstance(value,dict):
+            if 'source' in value:
+                start,end=map(int,CITATION.fullmatch(value['source']).groups())
+                for n in range(start,end+1):
+                    if pointer not in coverage[n]:coverage[n].append(pointer)
+            for child in value.values():cite_lines(child,pointer)
+        elif isinstance(value,list):
+            for child in value:cite_lines(child,pointer)
+    for section,key in RECORDS.items():
+        for i,record in enumerate(model.get(section,[])):
+            pointer=f'/{section}/{i}'
+            cite_lines(record,pointer)
+            for path,value,citation in leaves(record,pointer):
+                start,end=map(int,CITATION.fullmatch(citation).groups())
+                quotation='\n'.join(lines[start-1:end])
+                claims.append([path,encoded(record[key]),encoded(value),citation,encoded(quotation),
+                               'unreviewed','',''])
+    # Unknowns and assumptions are part of the authored interpretation, never source-backed facts.
+    for field in ('unknowns','assumptions'):
+        for path,value,_ in leaves(model['meta'][field],'/meta/'+field):
+            claims.append([path,'',encoded(value),'','', 'unreviewed','',''])
+    def csv_bytes(header,rows):
+        stream=io.StringIO(newline='')
+        writer=csv.writer(stream,lineterminator='\n')
+        writer.writerow(header);writer.writerows(rows)
+        return stream.getvalue().encode('utf-8')
+    return {
+        'interpretation_review.csv':csv_bytes(
+            ['model_pointer','record_identity_json','value_json','source_locator','source_quote_json',
+             'verdict','independent_evidence','review_note'],claims),
+        'source_coverage.csv':csv_bytes(
+            ['source_locator','line_text_json','citing_record_pointers_json','review_state','omission_or_scope_note'],
+            [[f'source.txt:L{n}-L{n}',encoded(line),encoded(coverage[n]),'unreviewed','']
+             for n,line in enumerate(lines,1)])}
+
+
 def build(packet,answer,out):
     out=fresh(out)
     with tempfile.TemporaryDirectory(prefix='description-build-') as folder:
@@ -642,10 +699,16 @@ def build(packet,answer,out):
                 if name.endswith('.md'):raw=raw.replace(b'  \n',b'\\\n')
                 files[name]=raw
         files['validation.json']=json_bytes(report)
+        files.update(interpretation_review(data['model'],data['source_raw']))
         code=[Path(__file__),ROOT/'scripts/draw_pid_from_model.py',ROOT/'scripts/generate.py',ROOT/'scripts/question_engine.py',ROOT/'scripts/graph_export.py']
         drawings=', '.join('pid/'+sheet['id']+'.png' for sheet in data['layout']['sheets'])
         files['REVIEW.md']=('# Draft engineering review bundle\n\n'
-            'Open '+drawings+', then inspect model.json, source.txt, source_numbered.txt, graph.json and questions/screen.md. '
+            'Open '+drawings+', then interpretation_review.csv and source_coverage.csv beside source.txt. '
+            'The first lists every supplied record value (including control actions and nested settings); '
+            'the second lists every source line, including uncited lines. All rows start unreviewed. '
+            'JSON text columns preserve exact values; a cited line is not a verified claim and an uncited line is not proof of an omission. '
+            'Retain filled review copies outside this immutable bundle and use the separate model-review route for supported corrections. '
+            'Then inspect model.json, source_numbered.txt, graph.json and questions/screen.md. '
             'The existing validation only checks quotations, structure and drawing consistency. Check every engineering '
             'claim, pipe/signal join and label against the source. Unknowns/assumptions remain in model.meta. '
             'Geometry and size/spec placeholders are drafts. Platform files in exports are staging, with no live signals. '

@@ -32,18 +32,21 @@ drawing** (collect it from the place named). Systems listed under "Left out" wer
 - Equipment: equipment H-1 reads "H-1 Process water heater" (`units[H-1]`)
 - On drawing: Steam supply pressure and temperature: TV-101 steam_pressure = 8 bar; header A (`final_elements[TV-101].facts.steam_pressure`)
 - On drawing: Steam supply pressure and temperature: TV-102 steam_temperature_C = 140 (`final_elements[TV-102].facts.steam_temperature_C`)
+- On drawing: Supplied candidate fact, basis unverified: TV-101 steam_pressure = 8 bar; header A (`final_elements[TV-101].facts.steam_pressure`)
+- On drawing: Supplied candidate fact, basis unverified: TV-102 steam_temperature_C = 140 (`final_elements[TV-102].facts.steam_temperature_C`)
 
 **Data to collect**
 
-- Steam supply pressure and temperature [not on drawing]. TV-101 (TV-101): supplied steam_pressure; still needed steam_temperature_C (absent). TV-102 (TV-102): supplied steam_temperature_C; still needed steam_pressure (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C. Where: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list. How: Record supply conditions; saturation temperature follows from pressure.
+- Steam supply pressure and temperature [not on drawing]. TV-101 (TV-101): supplied steam_pressure; still needed steam_temperature_C (absent). TV-102 (TV-102): supplied steam_temperature_C; still needed steam_pressure (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C. Where: site records: approved supply/header list and existing pressure/temperature records. How: Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.
 - Temperature the user actually needs [not on drawing]. Where: DCS/PLC configuration: the temperature setpoint. How: Note setpoint and normal range.
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity [not on drawing]. Where: site records: site steam balance; then a walkdown: headers and hot streams near this user. How: List sources whose temperature exceeds the need with a practical approach.
+- Applicable steam-supply conditions and operating basis [not on drawing]. Candidate scope: anchors. Supplied candidate facts (meaning and suitability unverified): TV-101 (TV-101) steam_pressure = "8 bar; header A" [final_elements[TV-101].facts.steam_pressure]; TV-102 (TV-102) steam_temperature_C = 140 [final_elements[TV-102].facts.steam_temperature_C]. The collection/review request remains open; supplied values or document references do not settle it. Where: site records: approved existing supply/user configuration and coincident operating-condition records. How: Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.
 
 **How it is decided:** Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.
 
 **What the source says (S19, S6):** Closest source wordings: pinch potential "far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.
 
-**Limits:** Where the model does not state the steam grade, the question is first 'what grade is it?'.
+**Limits:** Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.
 
 ## Sources cited above
 

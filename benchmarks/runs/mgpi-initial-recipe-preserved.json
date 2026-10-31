@@ -1,0 +1,36 @@
+{
+  "id": "mgpi-initial",
+  "ran_at": "2026-10-30",
+  "model": {
+    "provider": "OpenAI",
+    "id": "Codex authoring session; exact model identifier unavailable",
+    "version": "unknown"
+  },
+  "interface": "ongoing maintainer coding-agent session",
+  "method": "initial source adaptation and model",
+  "configuration": {
+    "source_scope": "v1",
+    "development_exposure": "Source narrative and Figure3 seen during scouting; original key hidden before initial candidate freeze.",
+    "model_settings": "not recorded; no provider-attested run identity"
+  },
+  "provenance": "Retrospective registration of development artifact, not a provider model benchmark. V2 source/key expands after v1 source audit; do not attribute score change to model improvement. Historical recipe source preserved from bdf1b41fff9d16442cc617c2081598390c624fae at an immutable archive path; metadata relocation and offline saved-answer re-scoring only. Original run identity, predictions, model declarations and ran_at are retained; no new model/control execution.",
+  "recipe": [
+    {
+      "path": "examples/from-description/mgpi/protocol.json",
+      "sha256": "33c06ddcb7e11e2516e1e1e5658015ca0da51e9a1f409644be0d833773b73c83"
+    },
+    {
+      "path": "benchmarks/recipes/description-workflow-20261030.py.txt",
+      "sha256": "4c4adb3b797023fe1782ebb64598a32605860876f3b1e4b238cda1def2d30594"
+    }
+  ],
+  "cases": [
+    "mgpi-v1"
+  ],
+  "predictions": {
+    "mgpi-v1": {
+      "path": "examples/from-description/mgpi/model-initial.json",
+      "sha256": "d8f18339e5f52f85ccd8a6a3ce6cf11d745be8570eb66d2ffb7cf24f9b24343a"
+    }
+  }
+}

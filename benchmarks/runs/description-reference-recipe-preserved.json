@@ -1,0 +1,33 @@
+{
+  "cases": [
+    "linear",
+    "branch"
+  ],
+  "configuration": {},
+  "id": "description-control-reference",
+  "interface": "authored fixture",
+  "method": "reference",
+  "model": {
+    "id": "synthetic-control",
+    "provider": "none",
+    "version": "1"
+  },
+  "predictions": {
+    "branch": {
+      "path": "benchmarks/controls/branch-reference.json",
+      "sha256": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483"
+    },
+    "linear": {
+      "path": "benchmarks/controls/linear-reference.json",
+      "sha256": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a"
+    }
+  },
+  "provenance": "Deterministic authored scorer control, no AI model run. Historical recipe bytes preserved from bdf1b41fff9d16442cc617c2081598390c624fae at an immutable archive path; this is metadata relocation and offline re-scoring, not a new model/control execution. Original run identity, predictions and ran_at are retained.",
+  "ran_at": "2026-10-30",
+  "recipe": [
+    {
+      "path": "benchmarks/recipes/description-workflow-20261030.txt",
+      "sha256": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d"
+    }
+  ]
+}

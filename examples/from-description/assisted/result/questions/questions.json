@@ -142,7 +142,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on P-1"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -178,7 +178,7 @@
       "the motor nameplate on P-1",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -215,6 +215,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on P-1"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on P-1",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",

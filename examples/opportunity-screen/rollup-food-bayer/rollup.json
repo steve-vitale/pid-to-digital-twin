@@ -642,7 +642,7 @@
    "data_requests": [
     {
      "item": "Insulation condition and length of bare pipe",
-     "how": "Note bare or damaged lengths and their pipe size.",
+     "how": "Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process.",
      "sites": [
       {
        "site": "bayer",
@@ -650,16 +650,51 @@
         "not_on_drawing"
        ],
        "where": [
-        "a walkdown: infrared camera or surface thermometer along the line",
-        "site records: line list insulation code"
+        "site records: approved existing line list, insulation survey and inspection records"
        ],
        "where_by_finding": []
       }
      ]
     },
     {
-     "item": "Line temperature",
-     "how": "Surfaces over 120 F (49 C) qualify.",
+     "item": "Applicable surface-temperature and insulation evidence",
+     "how": "Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E11@stream:S1",
+         "candidate_scope": "anchors",
+         "candidate_facts": [
+          {
+           "id": "stream:S1",
+           "label": "S1",
+           "name": "normal_temperature_C",
+           "value": 80,
+           "where": "streams[S1].facts.normal_temperature_C"
+          }
+         ]
+        },
+        {
+         "finding_id": "E11@stream:U1",
+         "candidate_scope": "anchors",
+         "candidate_facts": []
+        }
+       ],
+       "where": [
+        "site records: approved existing surface/insulation records or suitable documented analysis for this line"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Stated line/process temperature",
+     "how": "Retain the stated temperature and original source/basis. A process-fluid or design temperature is not an actual surface-temperature measurement or a completed insulation evaluation.",
      "sites": [
       {
        "site": "bayer",
@@ -692,14 +727,14 @@
         }
        ],
        "where": [
-        "a walkdown: surface thermometer"
+        "site records: identified source temperature field and its stated basis"
        ],
        "where_by_finding": []
       }
      ]
     }
    ],
-   "decision_rule": "Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.",
+   "decision_rule": "Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.",
    "typical_benefit": {
     "wording": "\"Insulation can typically reduce energy losses by 90%.\" \"Any surface over 120°F should be insulated.\" LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.",
     "source": [
@@ -1540,7 +1575,7 @@
     },
     {
      "item": "Pump rated flow and head",
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "sites": [
       {
        "site": "bayer",
@@ -1589,7 +1624,7 @@
     },
     {
      "item": "Motor rating and speed",
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "sites": [
       {
        "site": "bayer",
@@ -1648,6 +1683,54 @@
        "where": [
         "a walkdown: elevations and pressures at the suction source and the delivery point",
         "site records: line list or isometrics for pipe lengths and sizes"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E1@P-1",
+         "candidate_scope": "anchors",
+         "candidate_facts": []
+        }
+       ],
+       "where": [
+        "the vendor datasheet: pump curve and rated duty point",
+        "the pump nameplate on P-1"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E1@P-1",
+         "candidate_scope": "anchors",
+         "candidate_facts": []
+        }
+       ],
+       "where": [
+        "the motor nameplate on P-1",
+        "maintenance records: motor record card"
        ],
        "where_by_finding": []
       }
@@ -2012,7 +2095,7 @@
    "data_requests": [
     {
      "item": "Steam supply pressure and temperature",
-     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.",
      "sites": [
       {
        "site": "bayer",
@@ -2072,8 +2155,7 @@
         }
        ],
        "where": [
-        "a walkdown: pressure gauge and thermometer at the supply",
-        "site records: steam header list"
+        "site records: approved supply/header list and existing pressure/temperature records"
        ],
        "where_by_finding": []
       }
@@ -2107,6 +2189,29 @@
        "where": [
         "site records: site steam balance",
         "a walkdown: headers and hot streams near this user"
+       ],
+       "where_by_finding": []
+      }
+     ]
+    },
+    {
+     "item": "Applicable steam-supply conditions and operating basis",
+     "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.",
+     "sites": [
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "H2@E-2",
+         "candidate_scope": "anchors",
+         "candidate_facts": []
+        }
+       ],
+       "where": [
+        "site records: approved existing supply/user configuration and coincident operating-condition records"
        ],
        "where_by_finding": []
       }
@@ -2197,7 +2302,7 @@
     },
     {
      "item": "Cooler duty",
-     "how": "Duty = flow x heat capacity x temperature rise.",
+     "how": "Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.",
      "sites": [
       {
        "site": "bayer",
@@ -2207,26 +2312,8 @@
        "coverage_by_finding": [
         {
          "finding_id": "H4@E-3",
-         "field_scope": "unit",
-         "field_coverage": [
-          {
-           "id": "E-3",
-           "label": "E-3",
-           "fields": [
-            {
-             "name": "CAPACITY",
-             "state": "absent",
-             "where": null
-            }
-           ],
-           "still_needed": [
-            "CAPACITY"
-           ]
-          }
-         ],
-         "still_needed": [
-          "CAPACITY"
-         ]
+         "candidate_scope": "unit",
+         "candidate_facts": []
         }
        ],
        "where": [

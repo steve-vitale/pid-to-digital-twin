@@ -15,10 +15,14 @@ The tool does not decide whether a document is authoritative, choose an owner, o
 Its job is to make the decision, its responsibility and its evidence travel together, and to reopen the affected
 answers when that evidence changes.
 
-Record-level `status` changes are excluded from evidence binding: a graph asset/claim changing to `rejected`
-alone does not reopen its accepted answer. A semantic rejection policy remains open as
-[N075](STATUS.md#known-defects); inspect such transitions explicitly rather than relying on `current` alone.
-Historical source truth and applicability to a rejected asset are separate questions.
+Explicit `status: rejected` is evidence content on a question, referenced asset, claim or incident relation.
+Changing that status changes dependent-answer freshness; exact restoration of the complete bound evidence can
+restore prior currentness. Other record-level review bookkeeping, such as
+`unverified` becoming `confirmed`, does not change the evidence binding. A rejection on an unrelated asset does
+not reopen the question. Historical source truth and applicability to a rejected record remain separate questions:
+old answers, verdicts and source snapshots stay in history. A new answer about a rejected record can explain what
+the historical source says; accepting that answer does not restore the record, release a company change or confirm
+current plant conditions. The engineer must describe that scope explicitly.
 
 Graph item appearances and original citations travel as evidence records, separately from each claim's source.
 Their complete supplied metadata participates in context binding, including later drawing appearances. An
@@ -197,6 +201,9 @@ unverified information, without settling the collection/review task. Context che
 asset identities; it does not reapply the engine's catalog, decide field meaning or validate document suitability.
 Claim values and recorded field/candidate evidence are opaque: qualifiers named `status`, `context` or
 `context_register` inside them remain content, survive the handoff and change the evidence binding when edited.
+An imported `service_reconciliation` in finding evidence is opaque for the same reason: its selected source,
+declared draft/reviewed status and basis remain exact content and changes reopen dependent answers. An accepted
+answer about that evidence does not authenticate the imported declaration or confirm its selected meaning.
 
 Each immutable decision includes its question id, answer id, owner at the time, reviewer, review date, verdicts, note,
 predecessor decision id, and the full evidence snapshot. That snapshot binds:
@@ -230,8 +237,9 @@ python -S scripts/context_register.py apply --model plant_model.json --questions
 
 A document's revision, bytes or locator changing makes dependent decisions stale. Changing a question's wording,
 request or referenced asset content does the same. Removing a question or its source binding preserves the old
-decision and marks its absence. A different question, an unrelated asset or a review `status` change does not stale
-unaffected decisions. Generated edge numbering and relation ordering are ignored; changed relations incident to a
+decision and marks its absence. A different question, an unrelated asset or an ordinary review `status` change
+does not stale unaffected decisions. Explicit rejection is the exception described above. Generated edge numbering
+and relation ordering are ignored; changed relations incident to a
 referenced asset are bound. Because raw bytes are bound at document level, changing any part of a cited document
 reopens every decision citing that document. This is deliberately conservative.
 
@@ -261,6 +269,15 @@ watcher, expiry, record of every intervening change, irreversible approval revoc
 machine. A source file changing and changing back between runs is not observed.
 
 ## Versioned handoff and limits
+
+The enriched graph and questions include `context_register.content_sha256`, a SHA-256 over the register's canonical
+JSON content. This binds the complete selected sidecar, including old decisions and ownership history, without
+depending on JSON indentation or line endings. It is an accidental-mismatch check, not a signature or authority.
+The [snapshot MCP starter](../examples/internal-mcp/README.md#read-the-complete-context-packet) accepts the sidecar
+only through an explicit operator `--context` selection and validates both the binding and derived current state.
+It never follows the graph's `sidecar` string. Older graphs remain usable alone; refresh with the preserved current
+register to create a bound pair for complete answer readback. Keep the source originals and raw-byte hashes with
+the packet; a serving process does not reopen sources or verify their content.
 
 The interchange contract is `context-register-1`, with source manifests `context-sources-1`, a `twin-graph-1` enriched
 graph, and the original questions format plus a `context` field. Asset, question, document and locator ids come from

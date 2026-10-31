@@ -198,7 +198,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-162"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -236,7 +236,7 @@
       "the motor nameplate on CND-PU-162",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -273,6 +273,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-162"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-162",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -417,7 +439,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-163"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -455,7 +477,7 @@
       "the motor nameplate on CND-PU-163",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -492,6 +514,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-163"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-163",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -636,7 +680,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-164"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -674,7 +718,7 @@
       "the motor nameplate on CND-PU-164",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -711,6 +755,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on CND-PU-164"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-164",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -810,7 +876,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on FWS-PU-170A"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -848,7 +914,7 @@
       "the motor nameplate on FWS-PU-170A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -885,6 +951,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on FWS-PU-170A"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on FWS-PU-170A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -984,7 +1072,7 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on FWS-PU-170B"
      ],
-     "how": "Copy the rated flow and head and get the pump curve.",
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1022,7 +1110,7 @@
       "the motor nameplate on FWS-PU-170B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1059,6 +1147,28 @@
       "site records: line list or isometrics for pipe lengths and sizes"
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: pump curve and rated duty point",
+      "the pump nameplate on FWS-PU-170B"
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on FWS-PU-170B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -1107,7 +1217,7 @@
       "the motor nameplate on ACC-PU-151",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1133,9 +1243,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACC-PU-151",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1184,7 +1307,7 @@
       "the motor nameplate on ACC-PU-152",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1210,9 +1333,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACC-PU-152",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1261,7 +1397,7 @@
       "the motor nameplate on ACC-PU-153",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1287,9 +1423,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACC-PU-153",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1338,7 +1487,7 @@
       "the motor nameplate on CND-PU-162",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1364,9 +1513,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-162",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1415,7 +1577,7 @@
       "the motor nameplate on CND-PU-163",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1441,9 +1603,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-163",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1492,7 +1667,7 @@
       "the motor nameplate on CND-PU-164",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1518,9 +1693,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on CND-PU-164",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1569,7 +1757,7 @@
       "the motor nameplate on FWS-PU-170A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1595,9 +1783,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on FWS-PU-170A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1646,7 +1847,7 @@
       "the motor nameplate on FWS-PU-170B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1672,9 +1873,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on FWS-PU-170B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1723,7 +1937,7 @@
       "the motor nameplate on ACW-PU-211A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1749,9 +1963,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACW-PU-211A",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1800,7 +2027,7 @@
       "the motor nameplate on ACW-PU-211B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1826,9 +2053,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACW-PU-211B",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1877,7 +2117,7 @@
       "the motor nameplate on ACW-PU-211C",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency.",
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -1903,9 +2143,22 @@
      "item": "Measured input power or current at normal load",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+      "site records: approved existing motor input-power and representative load/production records"
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "state": "not_on_drawing",
+     "where": [
+      "the motor nameplate on ACW-PU-211C",
+      "maintenance records: motor record card"
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -2020,13 +2273,13 @@
      "how": "Record at normal operation."
     },
     {
-     "item": "Station rating",
+     "item": "Stated station capacity",
      "state": "blank_on_drawing",
      "where": [
       "the blank CAPACITY field on the sheet 4 equipment schedule, entry ESS-HTR-180",
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow.",
+     "how": "Retain the generic CAPACITY field and its original units/basis. A volume, heat capacity or unqualified scalar does not identify rated steam throughput; the matched rating and actual operating history remain separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -2055,6 +2308,16 @@
       "site records: operating procedures: startup, trip, normal duty"
      ],
      "how": "Mark the station startup-only, trip-only or normal duty."
+    },
+    {
+     "item": "Matched station steam-throughput rating and conditions",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: existing station/desuperheater datasheet matched to the equipment and configuration"
+     ],
+     "how": "Review source revision/locator, asset identity, steam-throughput units and rating conditions. Retain generic capacity, unreadable references, wrong-asset records and unknown basis as unverified candidates. Even a suitable-looking mass-flow rating is not actual flow-duration evidence or proof of turbine suitability; this request authorizes no plant action.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
@@ -2068,7 +2331,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question concerns normal-duty flow. Generic capacity, vendor rating, actual throughput/duration and available pressure drop are distinct. The cited applicability conditions support further study, not a turbine decision or an operating instruction.",
    "status": "asked"
   },
   {
@@ -2145,12 +2408,12 @@
      "how": "Record at normal operation."
     },
     {
-     "item": "Station rating",
+     "item": "Stated station capacity",
      "state": "not_on_drawing",
      "where": [
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow.",
+     "how": "Retain the generic CAPACITY field and its original units/basis. A volume, heat capacity or unqualified scalar does not identify rated steam throughput; the matched rating and actual operating history remain separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -2179,6 +2442,16 @@
       "site records: operating procedures: startup, trip, normal duty"
      ],
      "how": "Mark the station startup-only, trip-only or normal duty."
+    },
+    {
+     "item": "Matched station steam-throughput rating and conditions",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: existing station/desuperheater datasheet matched to the equipment and configuration"
+     ],
+     "how": "Review source revision/locator, asset identity, steam-throughput units and rating conditions. Retain generic capacity, unreadable references, wrong-asset records and unknown basis as unverified candidates. Even a suitable-looking mass-flow rating is not actual flow-duration evidence or proof of turbine suitability; this request authorizes no plant action.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
@@ -2192,7 +2465,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question concerns normal-duty flow. Generic capacity, vendor rating, actual throughput/duration and available pressure drop are distinct. The cited applicability conditions support further study, not a turbine decision or an operating instruction.",
    "status": "asked"
   },
   {
@@ -2235,12 +2508,12 @@
      "how": "Record at normal operation."
     },
     {
-     "item": "Station rating",
+     "item": "Stated station capacity",
      "state": "not_on_drawing",
      "where": [
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow.",
+     "how": "Retain the generic CAPACITY field and its original units/basis. A volume, heat capacity or unqualified scalar does not identify rated steam throughput; the matched rating and actual operating history remain separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -2269,6 +2542,16 @@
       "site records: operating procedures: startup, trip, normal duty"
      ],
      "how": "Mark the station startup-only, trip-only or normal duty."
+    },
+    {
+     "item": "Matched station steam-throughput rating and conditions",
+     "state": "not_on_drawing",
+     "where": [
+      "the vendor datasheet: existing station/desuperheater datasheet matched to the equipment and configuration"
+     ],
+     "how": "Review source revision/locator, asset identity, steam-throughput units and rating conditions. Retain generic capacity, unreadable references, wrong-asset records and unknown basis as unverified candidates. Even a suitable-looking mass-flow rating is not actual flow-duration evidence or proof of turbine suitability; this request authorizes no plant action.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
@@ -2282,7 +2565,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow.",
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question concerns normal-duty flow. Generic capacity, vendor rating, actual throughput/duration and available pressure drop are distinct. The cited applicability conditions support further study, not a turbine decision or an operating instruction.",
    "status": "asked"
   },
   {
@@ -2311,10 +2594,9 @@
      "item": "Steam supply pressure and temperature",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: pressure gauge and thermometer at the supply",
-      "site records: steam header list"
+      "site records: approved supply/header list and existing pressure/temperature records"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -2359,6 +2641,16 @@
       "a walkdown: headers and hot streams near this user"
      ],
      "how": "List sources whose temperature exceeds the need with a practical approach."
+    },
+    {
+     "item": "Applicable steam-supply conditions and operating basis",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: approved existing supply/user configuration and coincident operating-condition records"
+     ],
+     "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
@@ -2374,7 +2666,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "limits": "Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.",
    "status": "asked"
   },
   {
@@ -3397,5 +3689,112 @@
    "S6-TK003",
    "S6-TK004"
   ]
- }
+ },
+ "service_reconciliations": [
+  {
+   "sheet": "2",
+   "tag": "CND-TK-165",
+   "candidates": [
+    {
+     "file": "data/open100_equipment_schedule.json",
+     "row": 6,
+     "service": "DEAREATOR STORAGE TANK"
+    },
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 6,
+     "service": "DEAERATOR STORAGE TANK"
+    }
+   ],
+   "selected": {
+    "file": "examples/opportunity-screen/open100_schedule_fields.json",
+    "row": 6,
+    "service": "DEAERATOR STORAGE TANK"
+   },
+   "declarations": [
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 6,
+     "status": "draft",
+     "basis": "Draft spelling normalization from the transcribed DEAREATOR/DEAREATER to DEAERATOR for this same sheet/tag. Both original service strings and source records are retained; no equipment identity or engineering meaning is independently certified.",
+     "selected": {
+      "file": "examples/opportunity-screen/open100_schedule_fields.json",
+      "row": 6,
+      "service": "DEAERATOR STORAGE TANK"
+     }
+    }
+   ],
+   "authority": "Supplied service choice; source suitability and organizational approval unverified."
+  },
+  {
+   "sheet": "3",
+   "tag": "CND-TK-165",
+   "candidates": [
+    {
+     "file": "data/open100_equipment_schedule.json",
+     "row": 1,
+     "service": "DEAREATER STORAGE TANK"
+    },
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 2,
+     "service": "DEAERATOR STORAGE TANK"
+    }
+   ],
+   "selected": {
+    "file": "examples/opportunity-screen/open100_schedule_fields.json",
+    "row": 2,
+    "service": "DEAERATOR STORAGE TANK"
+   },
+   "declarations": [
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 2,
+     "status": "draft",
+     "basis": "Draft spelling normalization from the transcribed DEAREATOR/DEAREATER to DEAERATOR for this same sheet/tag. Both original service strings and source records are retained; no equipment identity or engineering meaning is independently certified.",
+     "selected": {
+      "file": "examples/opportunity-screen/open100_schedule_fields.json",
+      "row": 2,
+      "service": "DEAERATOR STORAGE TANK"
+     }
+    }
+   ],
+   "authority": "Supplied service choice; source suitability and organizational approval unverified."
+  },
+  {
+   "sheet": "4",
+   "tag": "CND-TK-165",
+   "candidates": [
+    {
+     "file": "data/open100_equipment_schedule.json",
+     "row": 2,
+     "service": "DEAREATER STORAGE TANK"
+    },
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 2,
+     "service": "DEAERATOR STORAGE TANK"
+    }
+   ],
+   "selected": {
+    "file": "examples/opportunity-screen/open100_schedule_fields.json",
+    "row": 2,
+    "service": "DEAERATOR STORAGE TANK"
+   },
+   "declarations": [
+    {
+     "file": "examples/opportunity-screen/open100_schedule_fields.json",
+     "row": 2,
+     "status": "draft",
+     "basis": "Draft spelling normalization from the transcribed DEAREATOR/DEAREATER to DEAERATOR for this same sheet/tag. Both original service strings and source records are retained; no equipment identity or engineering meaning is independently certified.",
+     "selected": {
+      "file": "examples/opportunity-screen/open100_schedule_fields.json",
+      "row": 2,
+      "service": "DEAERATOR STORAGE TANK"
+     }
+    }
+   ],
+   "authority": "Supplied service choice; source suitability and organizational approval unverified."
+  }
+ ]
 }

@@ -48,6 +48,7 @@ also works with the standard library alone; rendering needs Pillow. Open
 | `graph.json` | Export the same identities and sourced relationships for review, context preparation and the [local MCP starter](../internal-mcp/README.md). It is a snapshot, not a live digital twin. |
 | `exports/` | Supply logical SVGs and Ignition/PI staging with placeholder signals. These files have not been accepted by a plant system. |
 | `validation.json`, `build.json`, `REVIEW.md` | Record the checks, payload fingerprints and what the receiving engineer should inspect. They grant no engineering approval. |
+| `interpretation_review.csv`, `source_coverage.csv` | Expose every supplied record value beside its cited text, plus every source line and its citing records. All rows start unreviewed; check unsupported interpretations and possible omissions explicitly. |
 
 Source and answer bytes are retained exactly, including a UTF-8 BOM or CRLF newlines. Generated text in the bundle
 uses LF newlines across platforms; the payload inventory hashes the published bytes.
@@ -79,6 +80,15 @@ The contract checks exact line quotations, record references, typed controller o
 declared process routes and the model's endpoints. It bounds geometry before rendering and applies the native
 renderer's completeness/signal checks. A matching quotation **does not prove the interpretation**. For example,
 a tank can still be given an incorrect name while citing a real line; a person must catch that.
+
+Use `interpretation_review.csv` for that review. It includes nested control actions/settings and explicit unknowns
+and assumptions, beyond the selected fields graded by the description benchmark. `model_pointer` addresses the
+exact authored value; JSON text columns preserve the value and full quoted span. A nested `source` overrides its
+parent citation. `source_coverage.csv` exposes uncited lines as review candidates; citation coverage cannot prove
+completeness or correctness. Keep filled copies with the investigation, then make supported model corrections
+through the separate review route or revise the authored answer into a new bundle. These CSVs do not apply
+verdicts, authenticate a reviewer or establish plant truth. Use the [acceptance exercise](../../docs/ACCEPTANCE.md)
+to measure whether an engineer and recipient can actually use the result.
 
 The first-draft route deliberately supports a narrower drawing contract than the standalone renderer:
 

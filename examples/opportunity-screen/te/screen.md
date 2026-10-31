@@ -84,15 +84,16 @@ IAC/ITAC recommendation code: 2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,67
 
 **Data to collect**
 
-- Steam supply pressure and temperature [not on drawing]. Where: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list. How: Record supply conditions; saturation temperature follows from pressure.
+- Steam supply pressure and temperature [not on drawing]. Where: site records: approved supply/header list and existing pressure/temperature records. How: Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.
 - Temperature the user actually needs [not on drawing]. Where: historian / recorded data: TT-118: recorded signal XMEAS(18) in the TE data files; then DCS/PLC configuration: the temperature setpoint. How: Note setpoint and normal range.
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity [not on drawing]. Where: site records: site steam balance; then a walkdown: headers and hot streams near this user. How: List sources whose temperature exceeds the need with a practical approach.
+- Applicable steam-supply conditions and operating basis [not on drawing]. Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: site records: approved existing supply/user configuration and coincident operating-condition records. How: Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.
 
 **How it is decided:** Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.
 
 **What the source says (S19, S6):** Closest source wordings: pinch potential "far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.
 
-**Limits:** Where the model does not state the steam grade, the question is first 'what grade is it?'.
+**Limits:** Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.
 
 ### H4: Is heat rejected to cooling water at a temperature another user could use?
 
@@ -110,7 +111,7 @@ IAC/ITAC recommendation code: 2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,67
 - Cooling water supply temperature [not on drawing]. Where: a walkdown: thermometer on the supply. How: Record at normal operation.
 - Cooling water return temperature [not on drawing]. Where: historian / recorded data: TT-121: recorded signal XMEAS(21) in the TE data files; then a walkdown: thermometer on the return. How: Record at normal operation; the return temperature is the grade of the heat on offer.
 - Temperature of the stream being cooled (in and out) [not on drawing]. Where: historian / recorded data: TT-109: recorded signal XMEAS(9) in the TE data files; then site records: heat and material balance. How: Record at normal operation.
-- Cooler duty [not on drawing]. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Duty = flow x heat capacity x temperature rise.
+- Cooler duty [not on drawing]. Candidate scope: unit. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.
 - A heat user that needs heat below the return temperature [not on drawing]. Where: site records: list of heating duties with temperatures; then a walkdown: users nearby. How: Match by temperature, hours and distance.
 
 **How it is decided:** Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.
@@ -135,7 +136,7 @@ IAC/ITAC recommendation code: 2.243x (by description).
 - Cooling water supply temperature [not on drawing]. Where: a walkdown: thermometer on the supply. How: Record at normal operation.
 - Cooling water return temperature [not on drawing]. Where: historian / recorded data: TT-122: recorded signal XMEAS(22) in the TE data files; then a walkdown: thermometer on the return. How: Record at normal operation; the return temperature is the grade of the heat on offer.
 - Temperature of the stream being cooled (in and out) [not on drawing]. Where: site records: heat and material balance. How: Record at normal operation.
-- Cooler duty [not on drawing]. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Duty = flow x heat capacity x temperature rise.
+- Cooler duty [not on drawing]. Candidate scope: unit. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.
 - A heat user that needs heat below the return temperature [not on drawing]. Where: site records: list of heating duties with temperatures; then a walkdown: users nearby. How: Match by temperature, hours and distance.
 
 **How it is decided:** Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.

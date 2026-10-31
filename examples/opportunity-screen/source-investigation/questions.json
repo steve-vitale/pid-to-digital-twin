@@ -1,0 +1,130 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "examples/from-description/mgpi/model-expanded-source.json",
+ "catalog": "examples/opportunity-screen/source-investigation/catalog.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "MGPI-NOTIFY",
+  "MGPI-ENDPOINT"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 2,
+  "by_family": {
+   "source_investigation": 2
+  }
+ },
+ "questions": [
+  {
+   "id": "MGPI-NOTIFY@HYPO_BULK",
+   "question_id": "MGPI-NOTIFY",
+   "family": "source_investigation",
+   "question": "If this historical example applies to a receiving installation, what current approved evidence distinguishes high-level indication/notification from automatic action on incoming unloading?",
+   "about": "HYPO_BULK",
+   "assets": [
+    {
+     "id": "HYPO_BULK",
+     "tag": "HYPO_BULK"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "HYPO_BULK",
+     "tag": "HYPO_BULK",
+     "text": "equipment HYPO_BULK reads \"HYPO_BULK Sodium hypochlorite bulk tank\"",
+     "field": "units[HYPO_BULK]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Receiving scope, applicability and engineering owner",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: company-approved scope and designated controls/document owner"
+     ],
+     "how": "First decide whether this historical question applies to an identified receiving asset/process and period. No receiving company, owner, due date or current configuration is supplied here; if not applicable, record that reason rather than inventing a collection task."
+    },
+    {
+     "item": "Current signal function and incoming-transfer action path",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: approved current control narrative, logic/cause-and-effect revision and signal mapping"
+     ],
+     "how": "Retain revision/locator and distinguish indication, ordinary feedback, operator notification, automatic protective action and remote commanded action. Identify the affected unloading-to-bulk final element or endpoint; do not infer an installed trip or its absence from a level indicator or a missing model record."
+    }
+   ],
+   "decision_rule": "Historical reading is already answered: the report describes high-level notification, without automatic incoming-transfer shutdown (p.23 section5.2). Close that bounded historical question with its citation. Only an explicitly applicable current-installation question needs receiving records and owner review; record unknowns or not-applicable rather than prescribing equipment or settings.",
+   "typical_benefit": {
+    "wording": "No operational benefit or measured usefulness is established. The source supports a distinction between notification and endpoint-specific action.",
+    "source": [
+     "MGPI"
+    ],
+    "arc": null,
+    "source_titles": [
+     "MGPI: CSB, Key Lessons from the MGPI Processing Inc. Toxic Chemical Release, 2017-01-I-KS, December 2017"
+    ]
+   },
+   "limits": "Known historical answer to retain: the sodium hypochlorite bulk-tank high-level signal notified operators and was not configured to shut the transfer automatically (p.23 section5.2). The report records alarm activation at7:59AM and says awareness/evacuation was likely about the same time; do not turn likely into exact timing. This source does not establish every ordinary-control use, present-day configuration, required safeguards or operating safety. HYPO_BULK and LI_HYPO are project aliases.",
+   "status": "asked"
+  },
+  {
+   "id": "MGPI-ENDPOINT@HYPO_BULK",
+   "question_id": "MGPI-ENDPOINT",
+   "family": "source_investigation",
+   "question": "If this example applies to a receiving installation, which current approved remote/emergency action actually affects unloading-to-bulk transfer, separately from bulk-to-day-tank or downstream processes?",
+   "about": "HYPO_BULK",
+   "assets": [
+    {
+     "id": "HYPO_BULK",
+     "tag": "HYPO_BULK"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "HYPO_BULK",
+     "tag": "HYPO_BULK",
+     "text": "equipment HYPO_BULK reads \"HYPO_BULK Sodium hypochlorite bulk tank\"",
+     "field": "units[HYPO_BULK]"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Endpoint-specific current action and applicability",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: approved P&ID/line tracing and remote-command or emergency-stop functional description"
+     ],
+     "how": "A receiving engineering owner must identify applicability, process segment, actual final element and current revision. Distinguish incoming unloading-to-bulk from bulk-to-day/downstream transfer; action on one segment does not establish action on another."
+    },
+    {
+     "item": "Evidence for any asserted current capability",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: applicable approved functional-test/acceptance record or other owner-approved action-path evidence"
+     ],
+     "how": "Retain declared test scope, revision/date, result and unresolved discrepancies. No present-day test, acceptance or operational action is supplied here; no new test or live action is instructed."
+    }
+   ],
+   "decision_rule": "The bounded report-era answer is already sufficient: downstream emergency/remote action existed, but incoming unloading lacked remote shutdown (p.23 section5.2; transfer segments pp.7-8 section2.3). Retain that answer. A separately accepted current-installation claim needs endpoint-specific receiving evidence and a reviewer, not inference from the drawing or the historical source.",
+   "typical_benefit": {
+    "wording": "No operational benefit or measured usefulness is established. The source supports a distinction between notification and endpoint-specific action.",
+    "source": [
+     "MGPI"
+    ],
+    "arc": null,
+    "source_titles": [
+     "MGPI: CSB, Key Lessons from the MGPI Processing Inc. Toxic Chemical Release, 2017-01-I-KS, December 2017"
+    ]
+   },
+   "limits": "Known historical answer to retain: two emergency-stop buttons and control-system remote actions affected downstream equipment; one could stop bulk-to-day flow but not unloading-to-bulk flow. The report says even activation would not mitigate the reaction because unloading lacked remote shutdown (p.23 section5.2). The manually activated unloading-area deluge addressed cloud suppression, not automatic unloading isolation. No current action capability/absence, named owner or engineering prescription follows.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [],
+ "left_out": {}
+}

@@ -89,6 +89,10 @@ DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
 TWIN = "out/twin/r2-tiles-trace/codex"
 DRAWINGS = "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"
 SOURCE_FILES = (
+    *(f"examples/opportunity-screen/pump-motor-basis/{name}" for name in
+      ("model.json", "questions.json", "screen.md", "README.md")),
+    *(f"examples/opportunity-screen/source-investigation/{name}" for name in
+      ("catalog.json", "questions.json", "screen.md", "README.md")),
     "examples/review-and-mapping/native-identity/model.json",
     "examples/review-and-mapping/native-identity/README.md",
     "examples/review-and-mapping/native-identity/review.csv",
@@ -119,7 +123,9 @@ SOURCE_FILES = (
     f"{DRAWINGS}/{i}.{extension}" for i in range(12) for extension in ("graphml", "png"))
 
 # Committed files the full-mode tests read beyond SOURCE_FILES.
-FULL_FILES = ("out/ignition/gateway/PIDTwin.zip", "data/te_control_loops.json", f"{TWIN}/ignition/tags.json",
+FULL_FILES = (*(f"examples/from-description/{case}/result/{name}" for case in ("assisted", "mgpi")
+                for name in ("interpretation_review.csv", "source_coverage.csv")),
+              "out/ignition/gateway/PIDTwin.zip", "data/te_control_loops.json", f"{TWIN}/ignition/tags.json",
               "out/open100_structural/flow_direction.json", "out/open100_structural/plant_structure.json",
               "out/open100_structural/mimic/views.json", "data/open100_direction_confidence.json",
               "data/open100_equipment_schedule.json", "docs/deliverables_matrix.json",

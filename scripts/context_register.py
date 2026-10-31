@@ -31,7 +31,7 @@ PLANT_TRUTH = ("unknown", "confirmed", "wrong")
 ANSWER_STATES = ("partial", "needs_data", "answered")
 DECISIONS = ("proposed", "accepted", "rejected")
 HASH = re.compile(r"^[0-9a-f]{64}$")
-# Review bookkeeping is ignored at record levels; opaque source evidence and claim values stay bound.
+# Review bookkeeping is ignored at record levels, except explicit evidence rejection.
 BOOKKEEPING = {"status", "context", "context_register"}
 
 
@@ -77,8 +77,9 @@ def semantic(value):
     if isinstance(value, dict):
         # Original evidence records are opaque content, including fields named status/context. Stripping
         # bookkeeping inside them would hide an evidence change from the context freshness comparison.
-        return {k: copy.deepcopy(v) if k in ("provenance", "citations", "value", "candidate_facts", "field_coverage") else semantic(v)
-                for k, v in value.items() if k not in BOOKKEEPING}
+        return {k: copy.deepcopy(v) if k in ("provenance", "citations", "value", "candidate_facts", "field_coverage",
+                                            "service_reconciliation") else semantic(v)
+                for k, v in value.items() if k not in BOOKKEEPING or k == "status" and v == "rejected"}
     if isinstance(value, list):
         # Lists can carry engineering order (curves, split ranges); preserve that order.
         return [semantic(v) for v in value]
@@ -143,6 +144,12 @@ def load_inputs(model_path, question_path):
             graph = graph_export.build(model_path)
         except (ValueError, KeyError, TypeError) as exc:
             raise InputError(f"model cannot be exported: {exc}") from exc
+    qdoc = read_json(question_path, "questions")
+    return bind_inputs(graph, qdoc)
+
+
+def bind_inputs(graph, qdoc):
+    """Bind supplied in-memory records without opening evidence references or sidecar pointers."""
     if not isinstance(graph.get("nodes"), list) or not isinstance(graph.get("edges", []), list):
         raise InputError("graph needs nodes and edges lists")
     assets = {}
@@ -181,7 +188,6 @@ def load_inputs(model_path, question_path):
                 assets[ref]["relations"].append(relation)
     for asset in assets.values():
         asset["relations"].sort(key=canonical)
-    qdoc = read_json(question_path, "questions")
     if not isinstance(qdoc.get("questions"), list):
         raise InputError("questions file needs a questions list")
     questions = {}
@@ -675,7 +681,8 @@ def report(register):
 def outputs(graph, qdoc, register, choices, prepare=False):
     g, qs = copy.deepcopy(graph), copy.deepcopy(qdoc)
     for doc in (g, qs):
-        doc["context_register"] = {"schema": SCHEMA, "sidecar": "context.json"}
+        doc["context_register"] = {"schema": SCHEMA, "sidecar": "context.json",
+                                   "content_sha256": digest(register)}
         for question in doc.get("questions", []):
             if question.get("id") in register["current"]:
                 question["context"] = copy.deepcopy(register["current"][question["id"]])
@@ -710,6 +717,54 @@ def outputs(graph, qdoc, register, choices, prepare=False):
         files["evidence_choices.csv"] = csv_text(CHOICE_COLUMNS, rows)
         files["evidence_choices.md"] = "\n".join(lines)
     return files
+
+
+def validate_export(graph, register):
+    """Check a selected snapshot/sidecar pair from memory; never read source bytes or infer authority."""
+    validate_register(register)
+    binding = graph.get("context_register")
+    if (not isinstance(binding, dict) or binding.get("schema") != SCHEMA
+            or not HASH.fullmatch(str(binding.get("content_sha256", "")))):
+        raise InputError("graph has no bound context content hash; refresh the preserved register first")
+    if binding["content_sha256"] != digest(register):
+        raise InputError("selected context content hash does not match the graph")
+    _, _, questions = bind_inputs(graph, {"questions": graph.get("questions", [])})
+    if not isinstance(register.get("sources"), list):
+        raise InputError("selected context needs current source metadata")
+    sources, choices = {}, {}
+    for source in register["sources"]:
+        if (not isinstance(source, dict) or set(source) != {"id", "revision", "sha256", "locators"}
+                or not isinstance(source.get("locators"), list) or not source["locators"]
+                or not HASH.fullmatch(str(source.get("sha256", "")))):
+            raise InputError("selected context source metadata is malformed")
+        did = identifier(source["id"], "selected context source id")
+        text(source["revision"], "selected context source revision")
+        if did in sources:
+            raise InputError("selected context repeats a source id")
+        sources[did] = source
+        seen = set()
+        for loc in source["locators"]:
+            if not isinstance(loc, dict) or set(loc) != {"id", "locator", "questions"}:
+                raise InputError("selected context locator is malformed")
+            lid = identifier(loc["id"], "selected context locator id")
+            text(loc["locator"], "selected context locator")
+            refs = loc["questions"]
+            if (lid in seen or not isinstance(refs, list)
+                    or any(not isinstance(q, str) for q in refs) or len(set(refs)) != len(refs)
+                    or any(q not in questions for q in refs)):
+                raise InputError("selected context has duplicate or unknown source/question bindings")
+            seen.add(lid)
+            for qid in refs:
+                evidence = dict(copy.deepcopy(questions[qid]), source={"id": did,
+                    "revision": source["revision"], "sha256": source["sha256"],
+                    "locator_id": lid, "locator": loc["locator"]})
+                choices[(qid, did, lid)] = {"evidence": evidence, "fingerprint": digest(evidence)}
+    expected = reconcile(register, questions, sources, choices, [])
+    if register.get("current") != expected["current"]:
+        raise InputError("selected context current state disagrees with its graph/evidence/history")
+    for question in graph.get("questions", []):
+        if question.get("context") != register["current"].get(question["id"]):
+            raise InputError("graph question context disagrees with the selected register")
 
 
 def preserve_destination_history(destination, register, supplied_register):

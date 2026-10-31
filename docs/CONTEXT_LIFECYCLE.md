@@ -101,6 +101,35 @@ The [pipeline](DATA_LINEAGE.md) already checks input/code/configuration freshnes
 The [context register](CONTEXT_REGISTER.md) already checks answer dependencies when explicitly refreshed. Those
 are useful local mechanisms to connect to an organizational service; neither is a service connection by itself.
 
+## Maintain one local packet between reviews
+
+For a bounded investigation, an engineer can operate the existing tools without a shared service:
+
+1. Preserve the last packet, its original sources and current register. Record the source revision arriving for
+   review. A changed file with a pinned source hash refuses until its owner deliberately checks and updates that
+   revision/hash; never remove the pin just to make the command pass.
+2. Refresh using `context_register.py apply` with the current model, questions, source manifest and preserved
+   `--register`, omitting `--answers`. Inspect reopened answers and removed questions in `context.md`. Explicit
+   rejection of a referenced record is evidence change; ordinary confirmation bookkeeping is not. Old source and
+   plant verdicts remain historical. Refresh does not notify an owner or verify the new source's meaning.
+3. Prepare a new review folder with the preserved register, give the relevant source and question brief to its
+   owner through the company's existing process, and record a new attributed review only after it happens.
+   Apply that new sheet with the current register. Reusing an old sheet against changed evidence refuses.
+4. Generate the supported output into a new draft folder from the selected reviewed snapshot. Retain its previous
+   version, input/code hashes and differences. Reconcile authored text and any changed drawing layout manually;
+   this toolkit does not merge reports or rewrite controlled originals. Publish through the document owner's
+   existing release process. Local `accepted` is not organizational release.
+5. If using the [snapshot MCP starter](../examples/internal-mcp/README.md#read-the-complete-context-packet), select
+   the matching enriched graph and context register explicitly. Stop the old process and start a new one with
+   that cleared pair. Check `snapshot_summary`, both returned byte hashes, a changed question's current state and
+   its complete decision history. A running process keeps the old bytes in memory even if its files change.
+   Repeated requests never fetch new documents or silently update that snapshot.
+
+This is an explicit local maintenance procedure, with source/output protection and retained decision history.
+It supplies no scheduler, owner notification, cross-system delivery guarantee, concurrent editing, rollback of
+company records or automatic document synchronization. Keep the existing organizational record as the authority.
+Use the [acceptance plan](ACCEPTANCE.md) to distinguish these offline controls from an actual company pilot.
+
 ## Prove one complete loop before promising ongoing synchronization
 
 1. Select one unit and one useful decision with a named engineer, operational counterpart and source owner. Use

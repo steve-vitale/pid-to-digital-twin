@@ -1,0 +1,1533 @@
+{
+  "case_total": 2,
+  "code_sha256": {
+    "benchmark.py": "a53feba40d2fe3fbb710670a269bed574f9830eee3d23f2edf8d91114bb0ec1c"
+  },
+  "controls": {
+    "branch": {
+      "empty": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 37
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 5
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 3
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 6
+        }
+      },
+      "expected": {
+        "controllers": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "facts": {
+          "predicted": 37,
+          "tp": 37,
+          "truth": 37
+        },
+        "final_elements": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "instruments": {
+          "predicted": 5,
+          "tp": 5,
+          "truth": 5
+        },
+        "manual_valves": {
+          "predicted": 3,
+          "tp": 3,
+          "truth": 3
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 15,
+          "tp": 15,
+          "truth": 15
+        },
+        "units": {
+          "predicted": 6,
+          "tp": 6,
+          "truth": 6
+        }
+      }
+    },
+    "linear": {
+      "empty": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 26
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 5
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 9
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 4
+        }
+      },
+      "expected": {
+        "controllers": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "facts": {
+          "predicted": 26,
+          "tp": 26,
+          "truth": 26
+        },
+        "final_elements": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        },
+        "instruments": {
+          "predicted": 5,
+          "tp": 5,
+          "truth": 5
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 9,
+          "tp": 9,
+          "truth": 9
+        },
+        "units": {
+          "predicted": 4,
+          "tp": 4,
+          "truth": 4
+        }
+      }
+    }
+  },
+  "hash_method": "SHA256; CRLF normalized to LF for declared text extensions, raw binary otherwise",
+  "limits": [
+    "Compare only the same cohort and scoring contract; model identity is contributor-declared, not provider-attested.",
+    "Each replicate pools counts over its cases; summary reports mean/range/stdev over replicates, not a significance test or winner.",
+    "Missing/failed attempted answers score empty; unattempted cases remain visible and create different comparison cohorts.",
+    "Public keys and retrospective registration do not establish blindness. Synthetic controls and corrected/development results are separate.",
+    "Description facts grade literal selected fields only: no prose names, source validity, dimensions, limits, layout quality or plant truth."
+  ],
+  "registration": "Synthetic development controls only. Reference-derived keys are circular and must never be presented as text interpretation accuracy.",
+  "results": [
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "counts": {
+        "controllers": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        },
+        "facts": {
+          "predicted": 63,
+          "tp": 63,
+          "truth": 63
+        },
+        "final_elements": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        },
+        "instruments": {
+          "predicted": 10,
+          "tp": 10,
+          "truth": 10
+        },
+        "manual_valves": {
+          "predicted": 3,
+          "tp": 3,
+          "truth": 3
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 24,
+          "tp": 24,
+          "truth": 24
+        },
+        "units": {
+          "predicted": 10,
+          "tp": 10,
+          "truth": 10
+        }
+      },
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "interface": "authored fixture",
+      "method": "reference",
+      "metrics": {
+        "controllers": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "facts": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "final_elements": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "instruments": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [],
+      "provenance": "Deterministic authored scorer control, no AI model run. Historical recipe bytes preserved from bdf1b41fff9d16442cc617c2081598390c624fae at an immutable archive path; this is metadata relocation and offline re-scoring, not a new model/control execution. Original run identity, predictions and ran_at are retained.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "benchmarks/recipes/description-workflow-20261030.txt",
+          "sha256": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d"
+        }
+      ],
+      "rows": [
+        {
+          "case": "branch",
+          "counts": {
+            "controllers": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 37,
+              "tp": 37,
+              "truth": 37
+            },
+            "final_elements": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 5,
+              "tp": 5,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 3,
+              "tp": 3,
+              "truth": 3
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 15,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 6,
+              "tp": 6,
+              "truth": 6
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/branch-reference.json",
+            "sha256": "14e25ea8afff0e2105b83cc3bbe977588a42ba4d270808e45a1102230bc1c483"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        },
+        {
+          "case": "linear",
+          "counts": {
+            "controllers": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 26,
+              "tp": 26,
+              "truth": 26
+            },
+            "final_elements": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 5,
+              "tp": 5,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 9,
+              "tp": 9,
+              "truth": 9
+            },
+            "units": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/linear-reference.json",
+            "sha256": "c2b5f7514773dfc3a6b034263d484c01169842bdbd28769aa195e20686adec3a"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "description-control-reference",
+      "split": "synthetic-control"
+    },
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "counts": {
+        "controllers": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 8
+        },
+        "facts": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 63
+        },
+        "final_elements": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 8
+        },
+        "instruments": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 10
+        },
+        "manual_valves": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 3
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 24
+        },
+        "units": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 10
+        }
+      },
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "interface": "authored fixture",
+      "method": "empty",
+      "metrics": {
+        "controllers": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "facts": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "final_elements": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "instruments": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "manual_valves": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "units": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [],
+      "provenance": "Deterministic authored scorer control, no AI model run. Historical recipe bytes preserved from bdf1b41fff9d16442cc617c2081598390c624fae at an immutable archive path; this is metadata relocation and offline re-scoring, not a new model/control execution. Original run identity, predictions and ran_at are retained.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "benchmarks/recipes/description-workflow-20261030.txt",
+          "sha256": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d"
+        }
+      ],
+      "rows": [
+        {
+          "case": "branch",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 37
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 3
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 6
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "controllers",
+                "FIC-201",
+                "exists",
+                true
+              ],
+              [
+                "controllers",
+                "FIC-201",
+                "measurement",
+                "FT-201"
+              ],
+              [
+                "controllers",
+                "FIC-201",
+                "output.final_element",
+                "FV-201"
+              ],
+              [
+                "controllers",
+                "FIC-201",
+                "unit",
+                "P-1"
+              ],
+              [
+                "final_elements",
+                "FV-201",
+                "exists",
+                true
+              ],
+              [
+                "final_elements",
+                "FV-201",
+                "stream",
+                "S5"
+              ],
+              [
+                "final_elements",
+                "FV-201",
+                "unit",
+                "P-1"
+              ],
+              [
+                "final_elements",
+                "FV-201",
+                "uom",
+                ""
+              ],
+              [
+                "instruments",
+                "FT-201",
+                "exists",
+                true
+              ],
+              [
+                "instruments",
+                "FT-201",
+                "stream",
+                "S5"
+              ],
+              [
+                "instruments",
+                "FT-201",
+                "unit",
+                "P-1"
+              ],
+              [
+                "instruments",
+                "FT-201",
+                "uom",
+                ""
+              ],
+              [
+                "instruments",
+                "FT-201",
+                "variable",
+                "flow"
+              ],
+              [
+                "manual_valves",
+                "HV-201",
+                "exists",
+                true
+              ],
+              [
+                "manual_valves",
+                "HV-201",
+                "stream",
+                "S3"
+              ],
+              [
+                "manual_valves",
+                "HV-201",
+                "unit",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S1",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S1",
+                "from",
+                "BL"
+              ],
+              [
+                "streams",
+                "S1",
+                "to",
+                "TK-1"
+              ],
+              [
+                "streams",
+                "S2",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S2",
+                "from",
+                "TK-1"
+              ],
+              [
+                "streams",
+                "S2",
+                "to",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S3",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S3",
+                "from",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S3",
+                "to",
+                "E-1"
+              ],
+              [
+                "streams",
+                "S4",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S4",
+                "from",
+                "E-1"
+              ],
+              [
+                "streams",
+                "S4",
+                "to",
+                "TK-1"
+              ],
+              [
+                "streams",
+                "S5",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S5",
+                "from",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S5",
+                "to",
+                "BL"
+              ],
+              [
+                "units",
+                "E-1",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "E-1",
+                "type",
+                "heat_exchanger"
+              ],
+              [
+                "units",
+                "P-1",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "P-1",
+                "type",
+                "pump"
+              ],
+              [
+                "units",
+                "TK-1",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "TK-1",
+                "type",
+                "tank"
+              ]
+            ],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/branch-empty.json",
+            "sha256": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        },
+        {
+          "case": "linear",
+          "counts": {
+            "controllers": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 26
+            },
+            "final_elements": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 9
+            },
+            "units": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 4
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "controllers",
+                "FIC-101",
+                "exists",
+                true
+              ],
+              [
+                "controllers",
+                "FIC-101",
+                "measurement",
+                "FT-101"
+              ],
+              [
+                "controllers",
+                "FIC-101",
+                "output.final_element",
+                "FV-101"
+              ],
+              [
+                "controllers",
+                "FIC-101",
+                "unit",
+                "P-1"
+              ],
+              [
+                "final_elements",
+                "FV-101",
+                "exists",
+                true
+              ],
+              [
+                "final_elements",
+                "FV-101",
+                "stream",
+                "S3"
+              ],
+              [
+                "final_elements",
+                "FV-101",
+                "unit",
+                "P-1"
+              ],
+              [
+                "final_elements",
+                "FV-101",
+                "uom",
+                ""
+              ],
+              [
+                "instruments",
+                "FT-101",
+                "exists",
+                true
+              ],
+              [
+                "instruments",
+                "FT-101",
+                "stream",
+                "S3"
+              ],
+              [
+                "instruments",
+                "FT-101",
+                "unit",
+                "P-1"
+              ],
+              [
+                "instruments",
+                "FT-101",
+                "uom",
+                ""
+              ],
+              [
+                "instruments",
+                "FT-101",
+                "variable",
+                "flow"
+              ],
+              [
+                "streams",
+                "S1",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S1",
+                "from",
+                "BL"
+              ],
+              [
+                "streams",
+                "S1",
+                "to",
+                "TK-1"
+              ],
+              [
+                "streams",
+                "S2",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S2",
+                "from",
+                "TK-1"
+              ],
+              [
+                "streams",
+                "S2",
+                "to",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S3",
+                "exists",
+                true
+              ],
+              [
+                "streams",
+                "S3",
+                "from",
+                "P-1"
+              ],
+              [
+                "streams",
+                "S3",
+                "to",
+                "BL"
+              ],
+              [
+                "units",
+                "P-1",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "P-1",
+                "type",
+                "pump"
+              ],
+              [
+                "units",
+                "TK-1",
+                "exists",
+                true
+              ],
+              [
+                "units",
+                "TK-1",
+                "type",
+                "tank"
+              ]
+            ],
+            "unexpected_facts": []
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/linear-empty.json",
+            "sha256": "a9a2bdce03bb53101b4148af9deacff6ff2619c4050a72068eff8e52f4b41423"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "description-control-empty",
+      "split": "synthetic-control"
+    },
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "counts": {
+        "controllers": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        },
+        "facts": {
+          "predicted": 63,
+          "tp": 61,
+          "truth": 63
+        },
+        "final_elements": {
+          "predicted": 8,
+          "tp": 8,
+          "truth": 8
+        },
+        "instruments": {
+          "predicted": 10,
+          "tp": 10,
+          "truth": 10
+        },
+        "manual_valves": {
+          "predicted": 3,
+          "tp": 3,
+          "truth": 3
+        },
+        "relief_devices": {
+          "predicted": 0,
+          "tp": 0,
+          "truth": 0
+        },
+        "streams": {
+          "predicted": 24,
+          "tp": 22,
+          "truth": 24
+        },
+        "units": {
+          "predicted": 10,
+          "tp": 10,
+          "truth": 10
+        }
+      },
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "interface": "authored fixture",
+      "method": "wrong-endpoint",
+      "metrics": {
+        "controllers": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "facts": {
+          "f1": 0.9682539682539683,
+          "precision": 0.9682539682539683,
+          "recall": 0.9682539682539683
+        },
+        "final_elements": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "instruments": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "manual_valves": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "relief_devices": {
+          "f1": null,
+          "precision": 0.0,
+          "recall": null
+        },
+        "streams": {
+          "f1": 0.9166666666666666,
+          "precision": 0.9166666666666666,
+          "recall": 0.9166666666666666
+        },
+        "units": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "not_attempted": [],
+      "provenance": "Deterministic authored scorer control, no AI model run. Historical recipe bytes preserved from bdf1b41fff9d16442cc617c2081598390c624fae at an immutable archive path; this is metadata relocation and offline re-scoring, not a new model/control execution. Original run identity, predictions and ran_at are retained.",
+      "ran_at": "2026-10-30",
+      "recipe": [
+        {
+          "path": "benchmarks/recipes/description-workflow-20261030.txt",
+          "sha256": "088843fb85a645a05da43065ff8e94d0214d53a6e3b74eb7e84c3096c9e5e25d"
+        }
+      ],
+      "rows": [
+        {
+          "case": "branch",
+          "counts": {
+            "controllers": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 37,
+              "tp": 36,
+              "truth": 37
+            },
+            "final_elements": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 5,
+              "tp": 5,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 3,
+              "tp": 3,
+              "truth": 3
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 15,
+              "tp": 14,
+              "truth": 15
+            },
+            "units": {
+              "predicted": 6,
+              "tp": 6,
+              "truth": 6
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "streams",
+                "S2",
+                "to",
+                "P-1"
+              ]
+            ],
+            "unexpected_facts": [
+              [
+                "streams",
+                "S2",
+                "to",
+                "TK-1"
+              ]
+            ]
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/branch-wrong-endpoint.json",
+            "sha256": "ff9fd71133919637f6e4cb1038c597bff08d4b895c7057fa6c4f96630e9d9b32"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        },
+        {
+          "case": "linear",
+          "counts": {
+            "controllers": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "facts": {
+              "predicted": 26,
+              "tp": 25,
+              "truth": 26
+            },
+            "final_elements": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            },
+            "instruments": {
+              "predicted": 5,
+              "tp": 5,
+              "truth": 5
+            },
+            "manual_valves": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "relief_devices": {
+              "predicted": 0,
+              "tp": 0,
+              "truth": 0
+            },
+            "streams": {
+              "predicted": 9,
+              "tp": 8,
+              "truth": 9
+            },
+            "units": {
+              "predicted": 4,
+              "tp": 4,
+              "truth": 4
+            }
+          },
+          "diagnostics": {
+            "missing_facts": [
+              [
+                "streams",
+                "S2",
+                "to",
+                "P-1"
+              ]
+            ],
+            "unexpected_facts": [
+              [
+                "streams",
+                "S2",
+                "to",
+                "TK-1"
+              ]
+            ]
+          },
+          "note": null,
+          "prediction_ref": {
+            "path": "benchmarks/controls/linear-wrong-endpoint.json",
+            "sha256": "f18909c0aabdc600da59b1075fbbda9631bf6dfdfc8d74afdfd3d0f2a43a3cdd"
+          },
+          "recorded_run_at": null,
+          "reported_resources": {
+            "cost_usd": null,
+            "cost_usd_notional": null,
+            "seconds": null
+          },
+          "status": "ok"
+        }
+      ],
+      "run": "description-control-wrong-endpoint",
+      "split": "synthetic-control"
+    }
+  ],
+  "schema": "task-benchmark-1",
+  "scoring_contract": "native-facts-v1",
+  "submissions": [
+    {
+      "id": "description-control-reference",
+      "path": "benchmarks/runs/description-reference-recipe-preserved.json",
+      "sha256": "f61a1f68474bea81f42e4205ecef6b56c03fb8f32aa1bc5958877bf037e70152"
+    },
+    {
+      "id": "description-control-empty",
+      "path": "benchmarks/runs/description-empty-recipe-preserved.json",
+      "sha256": "1dc6243ed2756f4f117c85dc6f09d4f56a98fdc79305e45879ebdc5fa312f008"
+    },
+    {
+      "id": "description-control-wrong-endpoint",
+      "path": "benchmarks/runs/description-wrong-endpoint-recipe-preserved.json",
+      "sha256": "cb7f85def1c0e7e6a6c040adf79617708a4466b0a13785841c25039650461514"
+    }
+  ],
+  "suite": "description-fact-scorer-controls",
+  "suite_sha256": "e04635d03e0b8a522e86c646c55c3dffd544988c3d7f190a8445a2cb18c85043",
+  "suite_version": "1",
+  "summary": [
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "group": "757adcb518dca43c0e386bef1991cd13baadc47d894b58535fdf858463d46292",
+      "interface": "authored fixture",
+      "method": "wrong-endpoint",
+      "metrics": {
+        "controllers": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 0.9682539682539683,
+          "mean_f1": 0.9682539682539683,
+          "min_f1": 0.9682539682539683,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 0.9166666666666666,
+          "mean_f1": 0.9166666666666666,
+          "min_f1": 0.9166666666666666,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "description-control-wrong-endpoint"
+      ],
+      "split": "synthetic-control"
+    },
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "group": "d134f645cd082f31348bb71a2448c908d4d0c36af5b02a7efb1367b5eaa96922",
+      "interface": "authored fixture",
+      "method": "empty",
+      "metrics": {
+        "controllers": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 0.0,
+          "mean_f1": 0.0,
+          "min_f1": 0.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "description-control-empty"
+      ],
+      "split": "synthetic-control"
+    },
+    {
+      "case_count": 2,
+      "cohort": "79546dca189095121d9f56d19e39f082a1604f404a1120100d50c5766352bee2",
+      "configuration": {},
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "group": "e278c289fac25619d781a4cfb95c205ee5eda12ea7f063336fca0f3c4afae1b5",
+      "interface": "authored fixture",
+      "method": "reference",
+      "metrics": {
+        "controllers": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "facts": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "final_elements": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "instruments": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "manual_valves": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "relief_devices": {
+          "max_f1": null,
+          "mean_f1": null,
+          "min_f1": null,
+          "stdev_f1": null
+        },
+        "streams": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        },
+        "units": {
+          "max_f1": 1.0,
+          "mean_f1": 1.0,
+          "min_f1": 1.0,
+          "stdev_f1": null
+        }
+      },
+      "model": {
+        "id": "synthetic-control",
+        "provider": "none",
+        "version": "1"
+      },
+      "replicates": 1,
+      "runs": [
+        "description-control-reference"
+      ],
+      "split": "synthetic-control"
+    }
+  ],
+  "task": "description-facts"
+}

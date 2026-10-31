@@ -67,6 +67,16 @@
      "role": "on drawing",
      "text": "Steam supply pressure and temperature: TV-102 steam_temperature_C = 140",
      "field": "final_elements[TV-102].facts.steam_temperature_C"
+    },
+    {
+     "role": "on drawing",
+     "text": "Supplied candidate fact, basis unverified: TV-101 steam_pressure = 8 bar; header A",
+     "field": "final_elements[TV-101].facts.steam_pressure"
+    },
+    {
+     "role": "on drawing",
+     "text": "Supplied candidate fact, basis unverified: TV-102 steam_temperature_C = 140",
+     "field": "final_elements[TV-102].facts.steam_temperature_C"
     }
    ],
    "data_requests": [
@@ -74,10 +84,9 @@
      "item": "Steam supply pressure and temperature",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: pressure gauge and thermometer at the supply",
-      "site records: steam header list"
+      "site records: approved supply/header list and existing pressure/temperature records"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.",
      "already_on_drawing": [
       "steam_pressure",
       "steam_temperature_C"
@@ -146,6 +155,31 @@
       "a walkdown: headers and hot streams near this user"
      ],
      "how": "List sources whose temperature exceeds the need with a practical approach."
+    },
+    {
+     "item": "Applicable steam-supply conditions and operating basis",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: approved existing supply/user configuration and coincident operating-condition records"
+     ],
+     "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.",
+     "candidate_scope": "anchors",
+     "candidate_facts": [
+      {
+       "id": "TV-101",
+       "label": "TV-101",
+       "name": "steam_pressure",
+       "value": "8 bar; header A",
+       "where": "final_elements[TV-101].facts.steam_pressure"
+      },
+      {
+       "id": "TV-102",
+       "label": "TV-102",
+       "name": "steam_temperature_C",
+       "value": 140,
+       "where": "final_elements[TV-102].facts.steam_temperature_C"
+      }
+     ]
     }
    ],
    "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
@@ -161,7 +195,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "limits": "Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.",
    "status": "asked"
   }
  ],

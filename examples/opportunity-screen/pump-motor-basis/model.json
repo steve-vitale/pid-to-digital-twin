@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "model_id": "collection-controls",
+    "title": "Fictional pump, motor and cooler collection controls",
+    "source": "Authored software regression; not a plant, source-family evaluation or model attempt."
+  },
+  "units": [
+    {
+      "id": "P-900",
+      "type": "pump",
+      "name": "Water transfer pump",
+      "facts": {
+        "CAPACITY": "100 gpm",
+        "DISCHARGE": "90 ft",
+        "HP": 10,
+        "RPM": 1750,
+        "pump_curve_uri": "P-901-curve.pdf",
+        "pump_curve_asset": "P-901",
+        "pump_curve_readable": false,
+        "motor_efficiency": {
+          "value": 0.9,
+          "basis": "unreviewed nameplate transcription; motor identity unknown"
+        }
+      }
+    },
+    {
+      "id": "E-900",
+      "type": "cooler",
+      "name": "Process cooler with cooling water",
+      "facts": {
+        "CAPACITY": "100 gpm",
+        "cooling_water_C": 20
+      }
+    }
+  ],
+  "streams": [
+    {
+      "id": "S1",
+      "from": "P-900",
+      "to": "BL",
+      "name": "Water discharge"
+    },
+    {
+      "id": "S2",
+      "from": "P-900",
+      "to": "P-900",
+      "name": "Bypass"
+    }
+  ],
+  "instruments": [],
+  "final_elements": [
+    {
+      "tag": "FV-900",
+      "unit": "P-900",
+      "stream": "S1",
+      "description": "Discharge flow control valve"
+    }
+  ],
+  "controllers": [],
+  "manual_valves": [
+    {
+      "tag": "HV-900",
+      "unit": "P-900",
+      "stream": "S2",
+      "description": "Pump bypass valve"
+    }
+  ],
+  "relief_devices": [],
+  "interlocks": [],
+  "limits": []
+}

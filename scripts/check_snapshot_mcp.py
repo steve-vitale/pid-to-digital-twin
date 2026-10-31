@@ -18,6 +18,7 @@ from pathlib import Path
 
 import graph_export
 import serve_snapshot
+import test_context_register
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,7 +28,7 @@ async def exercise(client, graph, digest, label):
     assert summary['snapshot_sha256'] == digest and summary['live'] is False
     assert summary['source_acquisition_time'] is None
     tools = (await client.list_tools()).tools
-    assert len(tools) == 6 and all(t.annotations.read_only_hint and not t.annotations.open_world_hint for t in tools)
+    assert len(tools) == 9 and all(t.annotations.read_only_hint and not t.annotations.open_world_hint for t in tools)
     asset = await client.call_tool('get_asset', {'asset_id':'P-1'})
     assert not asset.is_error
     assert asset.structured_content['result'] == next(n for n in graph['nodes'] if n['id']=='P-1')
@@ -40,14 +41,117 @@ async def exercise(client, graph, digest, label):
     qid = questions['questions'][0]['id']
     question = (await client.call_tool('get_question', {'question_id':qid})).structured_content['result']
     assert question == next(q for q in graph['questions'] if q['id']==qid)
+    stream = next(e for e in graph['edges'] if e['id'] == 'S1' and e['type'] == 'connects')
+    assert (await client.call_tool('get_asset', {'asset_id': 'stream:S1'})).structured_content['result'] == stream
+    stream_questions = (await client.call_tool('list_questions', {'asset_id': 'stream:S1'})).structured_content['result']
+    assert any(q['id'] == 'E11@stream:S1' for q in stream_questions['questions'])
+    expected_stream_relations = [e for e in graph['edges'] if e is stream or 'stream:S1' in (e['from'], e['to'])]
+    assert (await client.call_tool('get_relations', {'asset_id': 'stream:S1'})).structured_content['result']['relations'] == expected_stream_relations
     for name,args in [('get_asset',{'asset_id':'../../outside.json'}),('find_assets',{'query':'   '}),
-                      ('get_relations',{'asset_id':'P-1','limit':101})]:
+                      ('get_relations',{'asset_id':'P-1','limit':101}),
+                      ('get_context', {'question_id': qid}), ('list_decisions', {}), ('list_context_questions', {})]:
         assert (await client.call_tool(name,args)).is_error
     assert (await client.call_tool('snapshot_summary')).structured_content == summary
     resource = await client.read_resource('engineering://snapshot/summary')
     assert json.loads(resource.contents[0].text) == summary
     print(f'PASS {label}: protocol {client.protocol_version}; evidence, errors and session retained',flush=True)
     return asset.structured_content
+
+
+async def exercise_context(client, graph, register, graph_digest, context_digest, label):
+    summary = (await client.call_tool('snapshot_summary')).structured_content
+    assert summary['snapshot_sha256'] == graph_digest and summary['context_sha256'] == context_digest
+    assert summary['result']['context_available'] and summary['result']['decisions'] == 2
+    questions = (await client.call_tool('list_context_questions', {'limit': 50})).structured_content['result']
+    assert [q['id'] for q in questions['questions']] == list(register['current'])
+    removed = (await client.call_tool('get_context', {'question_id': 'Q2@P-2'})).structured_content['result']
+    assert removed['current'] == register['current']['Q2@P-2'] and not removed['current']['present']
+    assert removed['ownership_history'] == [r for r in register['ownership_history'] if r['question_id'] == 'Q2@P-2']
+    current = (await client.call_tool('get_context', {'question_id': 'Q1@P-1'})).structured_content['result']
+    assert current['current'] == register['current']['Q1@P-1']
+    assert current['current']['answers'][0]['freshness'] == 'stale'
+    seen, offset = [], 0
+    while True:
+        result = await client.call_tool('list_decisions', {'limit': 1, 'offset': offset})
+        assert not result.is_error
+        payload = result.structured_content
+        assert payload['snapshot_sha256'] == graph_digest and payload['context_sha256'] == context_digest
+        assert json.loads(result.content[0].text) == payload
+        seen.extend(payload['result']['decisions'])
+        offset = payload['result']['next_offset']
+        if offset is None:
+            break
+    assert seen == register['decisions']  # Full prose/values/verdicts/old evidence, not only IDs/counts.
+    assert seen[0]['decision'] == 'accepted' and seen[0]['plant_truth'] == 'unknown'
+    assert (await client.call_tool('list_decisions', {'question_id': 'Q2@P-2'})).structured_content['result']['decisions'] == [seen[1]]
+    for name, args in [('get_context', {'question_id': '../../outside.json'}),
+                       ('list_decisions', {'offset': 2}), ('list_decisions', {'limit': True}),
+                       ('list_context_questions', {'offset': 99})]:
+        assert (await client.call_tool(name, args)).is_error
+    assert (await client.call_tool('snapshot_summary')).structured_content == summary
+    print(f'PASS {label}: complete bound answer/source/verdict/ownership history, removed question and rejection freshness', flush=True)
+
+
+async def check_context(Client, StdioServerParameters, folder):
+    fixture = test_context_register.ContextRegister()
+    fixture.setUp()
+    try:
+        fixture.graph['nodes'][1]['attributes'][0]['source'] = {'kind': 'illustrative fixture'}
+        fixture.save_inputs()
+        fixture.two_accepted()
+        fixture.graph['nodes'][1]['status'] = 'rejected'
+        fixture.questions['questions'] = [q for q in fixture.questions['questions'] if q['id'] != 'Q2@P-2']
+        fixture.manifest['documents'][1]['locators'][0]['questions'] = []
+        fixture.save_inputs()
+        fixture.refresh()
+        graph_path, context_path = fixture.root/'bundle/enriched_graph.json', fixture.root/'bundle/context.json'
+        graph, register = fixture.read('bundle/enriched_graph.json'), fixture.read()
+        graph_raw, context_raw = graph_path.read_bytes(), context_path.read_bytes()
+        graph_digest, context_digest = hashlib.sha256(graph_raw).hexdigest(), hashlib.sha256(context_raw).hexdigest()
+        for mode in ('auto', 'legacy'):
+            async with Client(serve_snapshot.create_server(graph_path, context_path), mode=mode) as client:
+                await exercise_context(client, graph, register, graph_digest, context_digest, 'context-in-memory-'+mode)
+                context_path.write_text('{}', encoding='utf-8')
+                graph_path.write_text('{}', encoding='utf-8')
+                assert (await client.call_tool('list_decisions')).structured_content['result']['decisions'] == register['decisions']
+            graph_path.write_bytes(graph_raw)
+            context_path.write_bytes(context_raw)
+        command = [sys.executable, '-u', str(ROOT/'scripts/serve_snapshot.py'), '--graph', str(graph_path), '--context', str(context_path)]
+        env = dict(os.environ, NO_PROXY='127.0.0.1,localhost')
+        for mode in ('auto', 'legacy'):
+            params = StdioServerParameters(command=sys.executable, args=command[1:], env=env)
+            async with Client(params, mode=mode, read_timeout_seconds=15) as client:
+                await exercise_context(client, graph, register, graph_digest, context_digest, 'context-stdio-'+mode)
+        with socket.socket() as reservation:
+            reservation.bind(('127.0.0.1', 0))
+            port = reservation.getsockname()[1]
+        with (folder/'context-http.log').open('w', encoding='utf-8') as log:
+            proc = subprocess.Popen(command+['--transport', 'streamable-http', '--port', str(port)], cwd=ROOT,
+                                    env=env, stdout=log, stderr=subprocess.STDOUT)
+            try:
+                url, ready = f'http://127.0.0.1:{port}/mcp', False
+                for _ in range(50):
+                    assert proc.poll() is None, 'Context HTTP server stopped before readiness'
+                    try:
+                        async with Client(url, read_timeout_seconds=1) as client:
+                            await client.call_tool('snapshot_summary')
+                        ready = True
+                        break
+                    except Exception:
+                        await asyncio.sleep(0.1)
+                assert ready, 'Context loopback server did not become ready'
+                for mode in ('auto', 'legacy'):
+                    async with Client(url, mode=mode, read_timeout_seconds=15) as client:
+                        await exercise_context(client, graph, register, graph_digest, context_digest, 'context-loopback-http-'+mode)
+            finally:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+                    proc.wait(timeout=5)
+    finally:
+        fixture.doCleanups()
 
 
 async def check_pages(Client, path, base):
@@ -166,6 +270,7 @@ async def run(Client, StdioServerParameters, folder):
     assert hashlib.sha256(packet.read_bytes()).hexdigest()==digest
     await check_pages(Client,folder/'pages.json',graph)
     await check_sizes(Client,folder/'sizes.json',graph)
+    await check_context(Client, StdioServerParameters, folder)
     return sample
 
 

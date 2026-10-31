@@ -1,0 +1,9 @@
+source_locator,line_text_json,citing_record_pointers_json,review_state,omission_or_scope_note
+source.txt:L1-L1,"""ILLUSTRATIVE training utility; not a plant description.""",[],unreviewed,
+source.txt:L2-L2,"""TK-1 is a water tank.""","[""/units/0""]",unreviewed,
+source.txt:L3-L3,"""P-1 pumps water from TK-1 to a downstream battery limit.""","[""/units/1""]",unreviewed,
+source.txt:L4-L4,"""S1 feeds TK-1 from an upstream battery limit; S2 runs TK-1 to P-1; S3 runs P-1 to the downstream battery limit.""","[""/streams/0"",""/streams/1"",""/streams/2""]",unreviewed,
+source.txt:L5-L5,"""FT-101 measures flow on S3 downstream of P-1.""","[""/instruments/0""]",unreviewed,
+source.txt:L6-L6,"""FV-101 is a control valve on S3, downstream of FT-101.""","[""/final_elements/0""]",unreviewed,
+source.txt:L7-L7,"""FIC-101 reads FT-101 and adjusts FV-101.""","[""/controllers/0""]",unreviewed,
+source.txt:L8-L8,"""Engineering units, valve failure positions, pipe sizes, operating limits and trip settings are not specified.""",[],unreviewed,

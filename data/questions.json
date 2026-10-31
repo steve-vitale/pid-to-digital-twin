@@ -164,7 +164,7 @@
    "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 5a22ead317624a47b4bb731f274d63ff1cbd37283cd03ad207ed7aa7597a36f2. Page numbers are PDF pages."
   }
  },
- "source_notes": "S12 is not used (no citable sheet survived review). Figures marked 'as reported in LBNL-56183' come from that report's tables, which quote older secondary sources. Where a source quotes dollar figures they are deliberately not copied: they assume one plant's prices and hours.",
+ "source_notes": "S12 is not used (no citable sheet survived review). Figures marked 'as reported in LBNL-56183' come from that report's tables, which quote older secondary sources. Where a source quotes dollar figures they are deliberately not copied: they assume one plant's prices and hours.\n\nCollection-contract review (2026-10-30): E1/E2 distinguish generic ratings from matched curves and BEP; E4 retains efficiency and measured-input basis; H4 keeps generic CAPACITY separate from heat duty. Supplied candidate facts cannot close those collection/review tasks. DOE pumping sourcebook S13, printed pp.37-39 and55-61; S14 p.1; DOE Determining Electric Motor Load and Efficiency, https://www.energy.gov/sites/default/files/2014/04/f15/10097517.pdf, printed pp.3-4. This is source-informed development review, not whole-catalog engineering validation.\n\nCollection follow-up (2026-10-30): E11 separates stated process/design temperature from applicable surface/insulation evidence; H1 separates generic capacity, matched steam-throughput rating and actual duration; H2 retains source/reference/state/location/period review beyond named pressure/temperature fields. Source-informed development contract: S1 pp.1-2, S6 pp.1-2 and S8 printed pp.5,9,18-19,54. No additional rule/source-family accuracy or human usefulness result is claimed.",
  "questions": [
   {
    "id": "E1",
@@ -277,10 +277,6 @@
     },
     {
      "item": "Pump rated flow and head",
-     "fields": [
-      "CAPACITY",
-      "DISCHARGE"
-     ],
      "where": [
       {
        "place": "vendor",
@@ -291,14 +287,14 @@
        "what": "pump"
       }
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
+     "fields": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
-     "fields": [
-      "HP",
-      "RPM"
-     ],
      "where": [
       {
        "place": "nameplate",
@@ -309,7 +305,11 @@
        "what": "motor record card"
       }
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
+     "fields": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -324,6 +324,49 @@
       }
      ],
      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+     "item": "Matched pump curve, rated duty and system operating points",
+     "where": [
+      {
+       "place": "vendor",
+       "what": "pump curve and rated duty point"
+      },
+      {
+       "place": "nameplate",
+       "what": "pump"
+      }
+     ],
+     "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+     "show_fields": [
+      "pump_curve",
+      "pump_curve_uri",
+      "pump_curve_asset",
+      "pump_curve_readable",
+      "BEP_flow",
+      "BEP_head"
+     ]
+    },
+    {
+     "item": "Motor nameplate, efficiency and drive basis",
+     "where": [
+      {
+       "place": "nameplate",
+       "what": "motor"
+      },
+      {
+       "place": "maintenance",
+       "what": "motor record card"
+      }
+     ],
+     "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+     "show_fields": [
+      "kW",
+      "motor_rated_output_kW",
+      "motor_efficiency",
+      "full_load_efficiency",
+      "full_load_current"
+     ]
     }
    ],
    "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
@@ -395,18 +438,18 @@
      "how": "Read flow and suction and discharge pressure at steady operation."
     },
     {
-     "item": "Pump best-efficiency-point (BEP) flow",
-     "fields": [
-      "CAPACITY",
-      "DISCHARGE"
-     ],
+     "item": "Pump stated rated flow and head",
      "where": [
       {
        "place": "vendor",
        "what": "pump curve"
       }
      ],
-     "how": "Read BEP flow and head from the curve."
+     "how": "Retain the stated rating and original units as model evidence; generic CAPACITY/DISCHARGE do not identify BEP.",
+     "fields": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "How often the bypass is open",
@@ -421,6 +464,24 @@
       }
      ],
      "how": "Record bypass position over several shifts."
+    },
+    {
+     "item": "Matched pump curve and best-efficiency-point (BEP) duty",
+     "where": [
+      {
+       "place": "vendor",
+       "what": "pump curve"
+      }
+     ],
+     "how": "Review the matching curve for installed impeller, speed, fluid and units, then identify its BEP flow/head with source revision and locator. Keep generic CAPACITY/DISCHARGE as rated candidates, not BEP. Retain unknown or unsuitable curve evidence and compare with representative measured operation.",
+     "show_fields": [
+      "pump_curve",
+      "pump_curve_uri",
+      "pump_curve_asset",
+      "pump_curve_readable",
+      "BEP_flow",
+      "BEP_head"
+     ]
     }
    ],
    "decision_rule": "Prioritize the pump if it runs at a flow 30% or more away from BEP or the bypass is used routinely; otherwise close it.",
@@ -536,9 +597,6 @@
    "data_requests": [
     {
      "item": "Motor rated power",
-     "fields": [
-      "HP"
-     ],
      "where": [
       {
        "place": "nameplate",
@@ -549,22 +607,50 @@
        "what": "motor record card"
       }
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
+     "fields": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
      "where": [
       {
-       "place": "historian",
-       "for": "equipment",
-       "quantity": "power"
-      },
-      {
-       "place": "walkdown",
-       "what": "a clamp-on power meter (or ammeter plus voltage) at the motor starter"
+       "place": "records",
+       "what": "approved existing motor input-power and representative load/production records"
       }
      ],
-     "how": "Measure kW (or amps and volts) over a typical period."
+     "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+     "show_fields": [
+      "input_power_kW",
+      "operating_hours",
+      "run_hours",
+      "current_A",
+      "voltage_V",
+      "power_factor"
+     ]
+    },
+    {
+     "item": "Motor nameplate, rated output and full-load efficiency",
+     "where": [
+      {
+       "place": "nameplate",
+       "what": "motor"
+      },
+      {
+       "place": "maintenance",
+       "what": "motor record card"
+      }
+     ],
+     "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+     "show_fields": [
+      "kW",
+      "motor_rated_output_kW",
+      "RPM",
+      "motor_efficiency",
+      "full_load_efficiency",
+      "full_load_current"
+     ]
     }
    ],
    "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
@@ -1081,38 +1167,52 @@
      "item": "Insulation condition and length of bare pipe",
      "where": [
       {
-       "place": "walkdown",
-       "what": "infrared camera or surface thermometer along the line"
-      },
-      {
        "place": "records",
-       "what": "line list insulation code"
+       "what": "approved existing line list, insulation survey and inspection records"
       }
      ],
-     "how": "Note bare or damaged lengths and their pipe size."
+     "how": "Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process."
     },
     {
-     "item": "Line temperature",
+     "item": "Stated line/process temperature",
      "fields": [
       "normal_temperature_C"
      ],
      "where": [
       {
-       "place": "historian",
-       "for": "trigger",
-       "quantity": "temperature"
-      },
-      {
-       "place": "walkdown",
-       "what": "surface thermometer"
+       "place": "records",
+       "what": "identified source temperature field and its stated basis"
       }
      ],
-     "how": "Surfaces over 120 F (49 C) qualify."
+     "how": "Retain the stated temperature and original source/basis. A process-fluid or design temperature is not an actual surface-temperature measurement or a completed insulation evaluation."
+    },
+    {
+     "item": "Applicable surface-temperature and insulation evidence",
+     "show_fields": [
+      "normal_temperature_C",
+      "surface_temperature_C",
+      "surface_temperature_basis",
+      "insulation_condition",
+      "insulation_survey",
+      "insulation_survey_asset",
+      "insulation_survey_readable",
+      "ambient_temperature_C",
+      "operating_period",
+      "pipe_length",
+      "pipe_diameter"
+     ],
+     "where": [
+      {
+       "place": "records",
+       "what": "approved existing surface/insulation records or suitable documented analysis for this line"
+      }
+     ],
+     "how": "Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established."
     }
    ],
-   "decision_rule": "Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.",
+   "decision_rule": "Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.",
    "typical_benefit": {
-    "wording": "\"Insulation can typically reduce energy losses by 90%.\" \"Any surface over 120°F should be insulated.\" LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.",
+    "wording": "\"Insulation can typically reduce energy losses by 90%.\" \"Any surface over 120\u00b0F should be insulated.\" LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.",
     "source": [
      "S1",
      "S19",
@@ -1120,7 +1220,7 @@
     ],
     "arc": "2.2136 (IAC/ITAC browse page: 1,647 recommendations, 2.2 yr average payback, 61.5% implemented; average dollar figure omitted)"
    },
-   "limits": "Many models, and many P&IDs, never record insulation: a finding here means 'not recorded', not 'bare'. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+   "limits": "Many models and P&IDs never record insulation: a finding means not recorded, not bare. Stated process/design temperature is not surface evidence. Collection and source applicability need review. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
   },
   {
    "id": "E12",
@@ -1286,7 +1386,7 @@
    ],
    "decision_rule": "Worth a quote when stack temperature is high and the fuel allows cooling the flue gas.",
    "typical_benefit": {
-    "wording": "Efficiency \"can be increased by 1% for every 40°F reduction in flue gas temperature.\" An economizer \"can often reduce fuel requirements by 5% to 10% and pay for itself in less than 2 years.\"",
+    "wording": "Efficiency \"can be increased by 1% for every 40\u00b0F reduction in flue gas temperature.\" An economizer \"can often reduce fuel requirements by 5% to 10% and pay for itself in less than 2 years.\"",
     "source": [
      "S4",
      "S24"
@@ -1998,7 +2098,7 @@
      "how": "Record at normal operation."
     },
     {
-     "item": "Station rating",
+     "item": "Stated station capacity",
      "fields": [
       "CAPACITY"
      ],
@@ -2008,7 +2108,7 @@
        "what": "station or desuperheater datasheet"
       }
      ],
-     "how": "Copy rated flow."
+     "how": "Retain the generic CAPACITY field and its original units/basis. A volume, heat capacity or unqualified scalar does not identify rated steam throughput; the matched rating and actual operating history remain separate review tasks."
     },
     {
      "item": "When the station is used",
@@ -2019,6 +2119,25 @@
       }
      ],
      "how": "Mark the station startup-only, trip-only or normal duty."
+    },
+    {
+     "item": "Matched station steam-throughput rating and conditions",
+     "show_fields": [
+      "CAPACITY",
+      "rated_steam_flow",
+      "rated_steam_flow_uom",
+      "rating_conditions",
+      "rating_asset",
+      "rating_document",
+      "rating_document_readable"
+     ],
+     "where": [
+      {
+       "place": "vendor",
+       "what": "existing station/desuperheater datasheet matched to the equipment and configuration"
+      }
+     ],
+     "how": "Review source revision/locator, asset identity, steam-throughput units and rating conditions. Retain generic capacity, unreadable references, wrong-asset records and unknown basis as unverified candidates. Even a suitable-looking mass-flow rating is not actual flow-duration evidence or proof of turbine suitability; this request authorizes no plant action."
     }
    ],
    "decision_rule": "If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
@@ -2029,7 +2148,7 @@
     ],
     "arc": null
    },
-   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question is only about hours of normal-duty flow."
+   "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question concerns normal-duty flow. Generic capacity, vendor rating, actual throughput/duration and available pressure drop are distinct. The cited applicability conditions support further study, not a turbine decision or an operating instruction."
   },
   {
    "id": "H2",
@@ -2110,15 +2229,11 @@
      ],
      "where": [
       {
-       "place": "walkdown",
-       "what": "pressure gauge and thermometer at the supply"
-      },
-      {
        "place": "records",
-       "what": "steam header list"
+       "what": "approved supply/header list and existing pressure/temperature records"
       }
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure."
+     "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks."
     },
     {
      "item": "Temperature the user actually needs",
@@ -2148,6 +2263,27 @@
       }
      ],
      "how": "List sources whose temperature exceeds the need with a practical approach."
+    },
+    {
+     "item": "Applicable steam-supply conditions and operating basis",
+     "show_fields": [
+      "steam_pressure",
+      "steam_temperature_C",
+      "steam_pressure_reference",
+      "steam_state",
+      "steam_supply_asset",
+      "steam_conditions_source",
+      "steam_conditions_readable",
+      "steam_conditions_period",
+      "operating_mode"
+     ],
+     "where": [
+      {
+       "place": "records",
+       "what": "approved existing supply/user configuration and coincident operating-condition records"
+      }
+     ],
+     "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed."
     }
    ],
    "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
@@ -2159,7 +2295,7 @@
     ],
     "arc": null
    },
-   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'."
+   "limits": "Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred."
   },
   {
    "id": "H3",
@@ -2351,9 +2487,6 @@
     },
     {
      "item": "Cooler duty",
-     "fields": [
-      "CAPACITY"
-     ],
      "where": [
       {
        "place": "vendor",
@@ -2364,8 +2497,15 @@
        "what": "heat and material balance"
       }
      ],
-     "how": "Duty = flow x heat capacity x temperature rise.",
-     "field_scope": "unit"
+     "how": "Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.",
+     "field_scope": "unit",
+     "show_fields": [
+      "CAPACITY",
+      "heat_duty_kW",
+      "cooling_water_flow",
+      "heat_capacity",
+      "operating_period"
+     ]
     },
     {
      "item": "A heat user that needs heat below the return temperature",
@@ -3481,7 +3621,7 @@
    ],
    "decision_rule": "Worth a look when a suction level runs colder than its warmest load needs after the coil approach, or stays fixed when loads ease at night and weekends. Close it when the loads on that level need the present temperature.",
    "typical_benefit": {
-    "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005).\" No figure is given there for single-stage systems.",
+    "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 \u00b0F to -20 \u00b0F (ISU 2005).\" No figure is given there for single-stage systems.",
     "source": [
      "S25"
     ],
@@ -4240,7 +4380,7 @@
    ],
    "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
    "typical_benefit": {
-    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+    "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200\u00b0F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
     "source": [
      "S28",
      "S26"

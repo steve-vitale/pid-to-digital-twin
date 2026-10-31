@@ -19,6 +19,10 @@ The separate [two-supply regression](field-coverage/README.md) shows why groupin
 combine different assets' partial answers. It is a fictional software control, not another public source family.
 The [fan/heater collection example](collection-basis/README.md) keeps nameplate candidates separate from
 curves, actual operation and the review still needed. It also uses invented assets, without a usefulness claim.
+The [pump/motor/cooler example](pump-motor-basis/README.md) separates stated ratings from matched curves, BEP,
+motor efficiency and actual heat duty. The [source-investigation recipe](source-investigation/README.md)
+retains the MGPI historical answer while asking conditional receiving-installation questions; it is an
+authored source-specific catalog, not a new default rule or usefulness score.
 
 Regenerate (the test checks these outputs byte for byte):
 
@@ -49,7 +53,14 @@ every OPEN100 equipment schedule entry, read by eye from `data/drawings/open100_
 unverified). Rotating-style entries print CAPACITY, DISCHARGE, RPM and HP; vessel-style entries print OD, LENGTH and
 MATERIAL; the two deaerator entries print design data as `XXX`. Every value is blank or a placeholder, because these
 are template drawings. `data/open100_equipment_schedule.json` holds the tags and services; the second file
-supplies each entry's complete fields object, replacing any earlier fields for that entry.
+adds disjoint fields for the same sheet/tag. Identical values may repeat; different values for the same
+case-insensitive field refuse and need explicit reconciliation. Each merged field retains its source file.
+Case-variant duplicate field names also refuse. Schedules apply only to extracted twins; native models use
+`facts`. Different service descriptions also refuse unless an exact, source-labelled `service_resolution`
+declares the selected source and basis. Input order is not a revision policy. This supplement carries three
+explicit draft spelling choices; both original strings and source records remain visible. See the
+[selection contract](../../docs/OPPORTUNITY_SCREEN.md#inputs) before adapting it; supplied draft/reviewed labels
+are provenance, not organizational approval.
 
 ## How the findings were checked
 
@@ -94,7 +105,7 @@ compressor, so the compressed-air questions (E19-E23, C7) are silent too.
 
 | Finding | Judgement |
 |---|---|
-| H1 ESS-HTR-180: desuperheater with PCV-14011, FCV-18012, TCV-16013, fed by "MSS PID 140-1 PEGGING STEAM", condensate quench | True, checked on sheet 4: main steam is pressure-reduced and desuperheated to peg the deaerator. Station rating request points at the blank CAPACITY field on the sheet 4 schedule |
+| H1 ESS-HTR-180: desuperheater with PCV-14011, FCV-18012, TCV-16013, fed by "MSS PID 140-1 PEGGING STEAM", condensate quench | True, checked on sheet 4: main steam is pressure-reduced and desuperheated to peg the deaerator. Stated capacity points at the blank CAPACITY field on the sheet 4 schedule; matched steam-throughput rating and operating conditions remain separate requests. |
 | H1 "MAIN STEAM BY-PASS" (sheet 0): MSBV-1407, TCV-1408 and the "FWS TO STM BYPASS" spray | True, checked on sheet 0: a turbine bypass with desuperheating spray. The decision rule closes it if the bypass runs only at startup and trips |
 | H1 "MSS PID 140-1 (E-1) MAIN STEAM BYPASS" (sheet 1) | True; **duplicate**: the same bypass line arriving at the air-cooled condenser |
 | H2 "MSS PID 140-1 PEGGING STEAM" (sheet 4) | True: main steam is used to heat the deaerator. **Overlaps** H1 on ESS-HTR-180 (same station, asked as a heat-grade question rather than a letdown question) |

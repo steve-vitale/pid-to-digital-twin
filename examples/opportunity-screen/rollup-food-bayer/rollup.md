@@ -122,12 +122,16 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
 
 **Data to collect**
 
-- Insulation condition and length of bare pipe. How: Note bare or damaged lengths and their pipe size.
-  - bayer [not on drawing]: a walkdown: infrared camera or surface thermometer along the line; then site records: line list insulation code
-- Line temperature. How: Surfaces over 120 F (49 C) qualify.
-  - bayer [not on drawing]: a walkdown: surface thermometer
+- Insulation condition and length of bare pipe. How: Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process.
+  - bayer [not on drawing]: site records: approved existing line list, insulation survey and inspection records
+- Applicable surface-temperature and insulation evidence. How: Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established.
+  - bayer [not on drawing]: site records: approved existing surface/insulation records or suitable documented analysis for this line
+    - For `E11@stream:S1`: Candidate scope: anchors. Supplied candidate facts (meaning and suitability unverified): S1 (stream:S1) normal_temperature_C = 80 [streams[S1].facts.normal_temperature_C]. The collection/review request remains open; supplied values or document references do not settle it.
+    - For `E11@stream:U1`: Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it.
+- Stated line/process temperature. How: Retain the stated temperature and original source/basis. A process-fluid or design temperature is not an actual surface-temperature measurement or a completed insulation evaluation.
+  - bayer [not on drawing]: site records: identified source temperature field and its stated basis
 
-**How it is decided:** Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.
+**How it is decided:** Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.
 
 **What the source says (S1, S19, S24):** "Insulation can typically reduce energy losses by 90%." "Any surface over 120°F should be insulated." LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.
 
@@ -247,12 +251,18 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
   - bayer [not on drawing]: historian or DCS trend for LV-102 (no historian tag is mapped in this model for these); then DCS/PLC configuration: the valve's controller output; then a walkdown: read the positioner stroke indicator at several rates
 - Flow over the same period (a flow-duration curve). How: Bin the flow into ranges and count the hours in each.
   - bayer [not on drawing]: historian / recorded data: FT-103: digitized series 'recirc_flow_klbh' (from the source report's Fig 11); then site records: production rate records
-- Pump rated flow and head. How: Copy the rated flow and head and get the pump curve.
+- Pump rated flow and head. How: Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.
   - bayer [not on drawing]: the vendor datasheet: pump curve and rated duty point; then the pump nameplate on P-1
-- Motor rating and speed. How: Copy rated power, speed and efficiency from the motor nameplate.
+- Motor rating and speed. How: Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.
   - bayer [not on drawing]: the motor nameplate on P-1; then maintenance records: motor record card
 - Static head versus friction head. How: Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop.
   - bayer [not on drawing]: a walkdown: elevations and pressures at the suction source and the delivery point; then site records: line list or isometrics for pipe lengths and sizes
+- Matched pump curve, rated duty and system operating points. How: Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.
+  - bayer [not on drawing]: the vendor datasheet: pump curve and rated duty point; then the pump nameplate on P-1
+    - For `E1@P-1`: Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it.
+- Motor nameplate, efficiency and drive basis. How: Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.
+  - bayer [not on drawing]: the motor nameplate on P-1; then maintenance records: motor record card
+    - For `E1@P-1`: Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it.
 
 **How it is decided:** Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.
 
@@ -330,13 +340,16 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
 
 **Data to collect**
 
-- Steam supply pressure and temperature. How: Record supply conditions; saturation temperature follows from pressure.
-  - bayer [not on drawing]: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list
+- Steam supply pressure and temperature. How: Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.
+  - bayer [not on drawing]: site records: approved supply/header list and existing pressure/temperature records
     - For `H2@E-2`: U1 (stream:U1): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). TV-104C (TV-104C): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C.
 - Temperature the user actually needs. How: Note setpoint and normal range.
   - bayer [not on drawing]: DCS/PLC configuration: the temperature setpoint
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity. How: List sources whose temperature exceeds the need with a practical approach.
   - bayer [not on drawing]: site records: site steam balance; then a walkdown: headers and hot streams near this user
+- Applicable steam-supply conditions and operating basis. How: Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.
+  - bayer [not on drawing]: site records: approved existing supply/user configuration and coincident operating-condition records
+    - For `H2@E-2`: Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it.
 
 **How it is decided:** Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.
 
@@ -354,8 +367,9 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
   - bayer [not on drawing]: a walkdown: thermometer on the return
 - Temperature of the stream being cooled (in and out). How: Record at normal operation.
   - bayer [not on drawing]: site records: heat and material balance
-- Cooler duty. How: Duty = flow x heat capacity x temperature rise.
+- Cooler duty. How: Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.
   - bayer [not on drawing]: the vendor datasheet: exchanger datasheet; then site records: heat and material balance
+    - For `H4@E-3`: Candidate scope: unit. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it.
 - A heat user that needs heat below the return temperature. How: Match by temperature, hours and distance.
   - bayer [not on drawing]: site records: list of heating duties with temperatures; then a walkdown: users nearby
 

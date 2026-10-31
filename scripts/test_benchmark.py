@@ -12,6 +12,32 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class BenchmarkTests(unittest.TestCase):
+    def test_historical_recipe_relocation_preserves_saved_attempts(self):
+        """Current registration may relocate frozen recipes; it must not rewrite what the old attempt did."""
+        for stem in ('description-controls', 'mgpi-development'):
+            with self.subTest(suite=stem):
+                original = b.read_json(ROOT / f'benchmarks/{stem}.json')
+                current = b.read_json(ROOT / f'benchmarks/{stem}-recipe-preserved.json')
+                self.assertEqual({k:v for k,v in original.items() if k != 'runs'},
+                                 {k:v for k,v in current.items() if k != 'runs'})
+                self.assertEqual(len(original['runs']), len(current['runs']))
+                for old_path, new_path in zip(original['runs'], current['runs']):
+                    self.assertNotEqual(old_path, new_path)
+                    old, new = b.read_json(ROOT / old_path), b.read_json(ROOT / new_path)
+                    self.assertEqual({k:v for k,v in old.items() if k not in ('recipe','provenance')},
+                                     {k:v for k,v in new.items() if k not in ('recipe','provenance')})
+                    self.assertTrue(new['provenance'].startswith(old['provenance']))
+                    self.assertIn('metadata relocation', new['provenance'])
+                    self.assertEqual(len(old['recipe']), len(new['recipe']))
+                    for before, after in zip(old['recipe'], new['recipe']):
+                        self.assertEqual({k:v for k,v in before.items() if k != 'path'},
+                                         {k:v for k,v in after.items() if k != 'path'})
+                        # The scorer itself validates the archived content against the historical fingerprint.
+                        b.reference(ROOT, after)
+                        if before['path'] != after['path']:
+                            self.assertTrue(after['path'].startswith('benchmarks/recipes/'))
+                            self.assertTrue(after['path'].endswith('.txt'))
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='benchmark-test-')
         self.addCleanup(self.tmp.cleanup)

@@ -475,6 +475,50 @@ class ContextRegister(unittest.TestCase):
             after = cr.load_inputs(self.root / "model.json", self.root / "questions.json")[2]
             self.assertNotEqual(cr.digest(after["Q1@P-1"]), original_digest)
 
+    def test_imported_service_choice_retains_declared_status_and_reopens_changed_evidence(self):
+        first = {'file': 'first.json', 'row': 1, 'service': 'Water pump'}
+        second = {'file': 'second.json', 'row': 1, 'service': 'Refrigeration compressor'}
+        resolution = {'sheet': '1', 'tag': 'P-1', 'candidates': [first, second], 'selected': first,
+            'declarations': [{'file': 'first.json', 'row': 1, 'status': 'draft', 'basis': 'Illustrative choice',
+                              'selected': first}],
+            'authority': 'Supplied service choice; organizational approval unverified.'}
+        evidence = {'id': 'P-1', 'text': 'Supplied interpretation, not a plant verification.',
+                    'service_reconciliation': resolution}
+        self.questions['questions'][0]['evidence'] = [evidence]
+        self.save_inputs()
+        self.two_accepted()
+        original = self.read()
+        self.assertEqual(self.state(original)['state'], 'answered')
+        self.assertEqual(self.state(original)['question']['evidence'], [evidence])
+        old = next(r for r in original['decisions'] if r['question_id'] == 'Q1@P-1')
+        self.assertEqual(old['evidence']['question']['evidence'], [evidence])
+        for field, value in [('status', 'reviewed'), ('basis', 'A different supplied basis'), ('selected', second)]:
+            with self.subTest(field=field):
+                changed = copy.deepcopy(resolution)
+                changed['declarations'][0][field] = value
+                if field == 'selected':
+                    changed['selected'] = value
+                self.questions['questions'][0]['evidence'][0]['service_reconciliation'] = changed
+                self.save_inputs()
+                refreshed = self.refresh()
+                self.assertEqual(self.state(refreshed)['state'], 'unanswered')
+                self.assertEqual(self.state(refreshed)['answers'][0]['freshness'], 'stale')
+                self.assertEqual(refreshed['decisions'], original['decisions'])
+                for name in ('enriched_graph.json', 'enriched_questions.json'):
+                    question = next(q for q in self.read('bundle/'+name)['questions'] if q['id'] == 'Q1@P-1')
+                    self.assertEqual(question['evidence'][0]['service_reconciliation'], changed)
+                    self.assertEqual(question['context']['question']['evidence'][0]['service_reconciliation'], changed)
+        # A fresh explicit answer can discuss this selected evidence, without approving that imported choice.
+        self.invoke('prepare', out='service-review', register='bundle/context.json')
+        with (self.root/'service-review/evidence_choices.csv').open(encoding='utf-8', newline='') as stream:
+            choice = next(r for r in csv.DictReader(stream) if r['question_id'] == 'Q1@P-1')
+        self.answers(self.row(evidence_fingerprint=choice['evidence_fingerprint']))
+        latest = self.apply()
+        self.assertEqual(self.state(latest)['state'], 'answered')
+        self.assertEqual(latest['decisions'][:len(original['decisions'])], original['decisions'])
+        self.assertEqual(latest['decisions'][-1]['plant_truth'], 'unknown')
+        self.assertEqual(latest['decisions'][-1]['evidence']['question']['evidence'][0]['service_reconciliation'], changed)
+
     def test_source_and_plant_truth_are_separate_and_checked_in_order(self):
         self.prepared()
         self.answers(self.row(source_match="mismatch", plant_truth="unknown", answer_state="partial"))
@@ -552,6 +596,67 @@ class ContextRegister(unittest.TestCase):
         doc = self.refresh()
         self.assertEqual(self.state(doc)["state"], "answered")
         self.assertEqual(self.state(doc, "Q2@P-2")["state"], "answered")
+
+    def test_explicit_rejection_reopens_dependent_answers_without_rewriting_history(self):
+        self.graph['edges'] = [{'id': 'E1', 'type': 'contains', 'from': 'PLANT', 'to': 'P-1',
+                               'status': 'unverified', 'attributes': [
+                                   {'name': 'basis', 'value': 'illustrative', 'status': 'unverified'}]}]
+        self.save_inputs()
+        original_graph, original_questions = copy.deepcopy((self.graph, self.questions))
+        self.two_accepted()
+        original = copy.deepcopy(self.read())
+        mutations = ('asset', 'claim', 'relation', 'relation claim', 'question')
+        for target in mutations:
+            with self.subTest(target=target):
+                self.graph, self.questions = copy.deepcopy((original_graph, original_questions))
+                record = {'asset': self.graph['nodes'][1],
+                          'claim': self.graph['nodes'][1]['attributes'][0],
+                          'relation': self.graph['edges'][0],
+                          'relation claim': self.graph['edges'][0]['attributes'][0],
+                          'question': self.questions['questions'][0]}[target]
+                record['status'] = 'rejected'
+                self.save_inputs()
+                rejected = self.refresh()
+                self.assertEqual(self.state(rejected)['state'], 'unanswered')
+                self.assertEqual(self.state(rejected)['answers'][0]['freshness'], 'stale')
+                self.assertEqual(self.state(rejected, 'Q2@P-2')['state'], 'answered')
+                self.assertEqual(rejected['decisions'], original['decisions'])
+                self.assertEqual(rejected['ownership_history'], original['ownership_history'])
+                self.assertEqual(rejected['decisions'][0]['plant_truth'], 'unknown')
+                before = self.all_bytes()
+                self.invoke('apply', register='bundle/context.json', answers='filled.csv', expected=2)
+                self.assertEqual(before, self.all_bytes())
+        # Exact evidence reversion restores byte/snapshot agreement, not a new review or plant check.
+        self.graph, self.questions = original_graph, original_questions
+        self.save_inputs()
+        restored = self.refresh()
+        self.assertEqual(self.state(restored)['state'], 'answered')
+        self.assertEqual(restored['decisions'], original['decisions'])
+
+    def test_unrelated_rejection_and_ordinary_relation_status_are_bookkeeping(self):
+        self.graph['edges'] = [{'id': 'E1', 'type': 'contains', 'from': 'PLANT', 'to': 'P-1',
+                               'status': 'unverified'}]
+        self.save_inputs()
+        self.two_accepted()
+        self.graph['nodes'].append({'id': 'UNRELATED', 'kind': 'equipment', 'status': 'rejected'})
+        self.graph['edges'][0]['status'] = 'confirmed'
+        self.save_inputs()
+        self.assertEqual(self.state(self.refresh())['state'], 'answered')
+
+    def test_context_export_binds_complete_register_without_revising_decisions(self):
+        self.two_accepted()
+        register = self.read()
+        graph = self.read('bundle/enriched_graph.json')
+        self.assertEqual(graph['context_register']['content_sha256'], cr.digest(register))
+        cr.validate_export(graph, register)
+        wrong = copy.deepcopy(register)
+        wrong['current']['Q1@P-1']['state'] = 'unanswered'
+        with self.assertRaisesRegex(cr.InputError, 'hash'):
+            cr.validate_export(graph, wrong)
+        # Re-hashing a malformed projection does not make it a valid current state.
+        graph['context_register']['content_sha256'] = cr.digest(wrong)
+        with self.assertRaisesRegex(cr.InputError, 'current state'):
+            cr.validate_export(graph, wrong)
 
     def test_relevant_asset_question_and_relation_changes_only_stale_dependents(self):
         self.two_accepted()

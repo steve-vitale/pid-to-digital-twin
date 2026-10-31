@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "files": {
+        "expected": {
+          "path": "examples/from-description/assisted/result/answer.json",
+          "sha256": "9711b7f1f7613f2d25d598dc38e1476032d92d384322788fac71734f8440fcc8"
+        },
+        "input": {
+          "path": "examples/from-description/assisted/source.txt",
+          "sha256": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f"
+        },
+        "key": {
+          "path": "benchmarks/keys/linear-facts.json",
+          "sha256": "37c4a9bffab394111813775a840af65440546ae1a9a2f2c414f1ecde031159aa"
+        }
+      },
+      "id": "linear",
+      "key_author": "Derived mechanically from the same authored reference; not independent source truth",
+      "license": "Repository license; synthetic project fixture",
+      "source_url": "repository:examples/from-description/assisted",
+      "split": "synthetic-control"
+    },
+    {
+      "evidence": "Authored reference answer supplies its own key; scorer plumbing only, no independent interpretation evidence",
+      "family": "illustrative-water",
+      "files": {
+        "expected": {
+          "path": "examples/from-description/assisted/branch-answer.json",
+          "sha256": "9bf9a2fc9f2fd25a3f9903878100b3f99d19e88dcf6bde22b605871f94186e19"
+        },
+        "input": {
+          "path": "examples/from-description/assisted/branch-source.txt",
+          "sha256": "6bb042f23d8b2b83fdbcbf78c1e7d19febdba1971f1f978965c160a4f9cae5ae"
+        },
+        "key": {
+          "path": "benchmarks/keys/branch-facts.json",
+          "sha256": "d46a66cdc5a2ea3e0900849533786a2f115af10fa24dfe129b96ef909b0e8626"
+        }
+      },
+      "id": "branch",
+      "key_author": "Derived mechanically from the same authored reference; not independent source truth",
+      "license": "Repository license; synthetic project fixture",
+      "source_url": "repository:examples/from-description/assisted",
+      "split": "synthetic-control"
+    }
+  ],
+  "id": "description-fact-scorer-controls",
+  "protocol": "Literal selected native-model fields compared with explicit atom keys. No names, engineering correctness, source support, dimensions, limits or layout quality graded.",
+  "registration": "Synthetic development controls only. Reference-derived keys are circular and must never be presented as text interpretation accuracy.",
+  "runs": [
+    "benchmarks/runs/description-reference-recipe-preserved.json",
+    "benchmarks/runs/description-empty-recipe-preserved.json",
+    "benchmarks/runs/description-wrong-endpoint-recipe-preserved.json"
+  ],
+  "task": "description-facts",
+  "version": "1"
+}

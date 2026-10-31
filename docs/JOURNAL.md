@@ -5294,3 +5294,90 @@ Final local cached-data rerun passes all 64 registered scripts, with five unitte
 platform notices and no additional skipped-check notices. Four saved benchmark suites and thirty saved-
 prediction tables reproduce; five prediction gaps remain. Recorded matrix code bindings and all 52
 configured pipeline stages check fresh; no matrix or provider run is added.
+
+
+## 115. Repair the audit gaps with owned workstreams and independent handoffs
+
+Steve asked for every gap to have an agent and work in motion. Three implementation workstreams own questions,
+evaluation and context/retrieval; the integration workstream owns description review, company acceptance,
+documentation and release. Each implementation received a separate coding-agent cross-review. All unfinished,
+non-rejected historical ideas also have workstream owners; rejected methods were not reactivated. Real engineer,
+recipient, company/native-system and Copilot observations remain separate external requirements.
+
+**A249 — N073/N079.** E1/E2/E4 and H4 no longer let scalar ratings erase larger curve, efficiency, BEP or duty
+collection tasks. Candidate facts remain available with their qualifiers. All fifty default triggers and benefit
+objects remain unchanged. The source-scoped MGPI recipe retains known historical answers and endpoint/function
+distinctions; its two authored questions are not a generic new alarm classifier or evidence of usefulness.
+Default MGPI still yields zero findings. Field intake merges disjoint additions and refuses ambiguous case keys,
+conflicting values, duplicate JSON keys and previously ignored native-model schedules.
+
+Fresh service-order probes find another real failure: opposite contradictory service order changes eligibility.
+N079 now refuses that ambiguity, or requires an exact source-bound candidate selection with supplied basis and
+draft/reviewed provenance. The three existing OPEN100 spelling choices are explicit drafts; original service
+transcriptions remain intact. No declaration grants organizational approval. Independent review retains 62
+question/graph CLIs across the N073/N079 controls and complete public reproductions, with prior harness errors
+separate. Its new context bridge initially strips structured declaration status: the minimal opaque-evidence
+repair preserves the full value and binding. A separate reviewer checks that repair with nine CLIs/35 checks.
+
+**A250 — N075/N076.** Explicit record/claim rejection participates in context dependencies; ordinary/unrelated
+bookkeeping does not. A changed bound snapshot reopens its answers, while exact restoration can restore prior
+currentness. Historical decisions, source verdicts and ownership remain intact. The server reads a deliberately
+selected, hash-bound context sidecar at startup, never a pointer supplied by graph content. Three additional
+read-only tools expose retained context IDs, current/source/ownership data and paged full decisions, including
+removed questions. Exact virtual stream identities work through asset, relation and question operations.
+Independent controls retain 17 CLIs/92 checks, actual SDK/stdio/loopback tests and the separate N079 bridge
+follow-up. This supplies no shared authorization, source fetching, live data or company deployment.
+
+**A251 — N074.** Actual matrix runs now bind declared source/key bytes, directory inventories, registry entry,
+runner and imported tools. Text hashes normalize CRLF; binary hashes preserve raw bytes. Missing committed or
+partially missing inputs refuse; entirely absent optional caches are explicitly UNVERIFIED unless strict
+--require-inputs is requested. Bindings captured before/after each run refuse mutation, rather than backfilling
+hashes onto historical results. Root independently runs a water-export cell plus six CLI freshness controls and
+an uppercase-XML inventory/change/removal oracle.
+
+Follow-up review catches platform-dependent glob matching: Linux would omit seventeen uppercase .XML consumers.
+The initial 474-second matrix run is stopped and retained before any matrix publication. Its wrapper's 95-cell
+counts describe the previously committed matrix, not completed fresh cells; the private record explicitly says
+so. The corrected case-independent inventory retains original path identities and matches all 185 selected XMLs.
+The final actual 95-cell run and strict checks reproduce 64 pass / 23 fail / 8 n/a with all substantive cell results
+unchanged. Existing failures are assigned bounded source-informed experiments; a rerun is not new generalization.
+
+**A252 — N078.** Description builds now publish interpretation_review.csv and source_coverage.csv. Every supplied
+record leaf, nested control/limit value, unknown/assumption and selected source line is exposed; all verdicts
+start unreviewed. Nested citations retain their source spans. The false-shutdown control still passes structure
+and the limited fact scorer, but its contrary action claim appears beside the same quote. No semantic acceptance
+is inferred. A separate reader checks a 73-leaf oracle and actually reproduces all 67 bundle files; all 54 registered
+bindings are checked with fresh versus inherited scope explicit. Later catalog-only N080 changes yield no bundle
+delta. ACCEPTANCE.md prepares recipient reconstruction, receiving-system/native readback, client permissions and
+the next revision; these real exercises remain not run. The main pump walkthrough is corrected from five to
+seven requests and links the new review sheets.
+
+**A253 — N081.** The current benchmark check first refuses a legitimately changed guide recipe, then exposes the
+changed description-workflow code recipe. Exact historical guide/code bytes from bdf1b41 are retained as .txt
+snapshots; original suites, eight manifests and all old reports remain unchanged. Two current suites/eight
+metadata manifests point at those identical recipe bytes. Actual re-scoring writes four new report files;
+source/key/prediction/model/date/cohort/numerical results remain unchanged. Only declared provenance, submission
+and group identities/order change. Independent review covers87 registered files (17fresh/70inherited), exact
+archives, report reproductions and tamper refusals. This is not a new model execution or performance improvement.
+
+**A254 — N080.** The remaining field-discharge inventory exposes H1 volume capacity erasing rated steam-flow
+collection, E11 design-fluid temperature erasing a surface task and H2 design/Boolean fields erasing supply
+conditions. An independent DOE source contract precedes the candidate. Three new always-open review tasks keep
+the distinct source/basis obligations while retaining exact candidates. The 105-test question suite passes with
+one Windows skip; an independent review uses 36 CLIs, including 27 custom screen/graph/context/rollup/omission controls
+and nine complete public reproductions. All 50 triggers/benefits remain exact. Nine named rules now have bounded
+collection repairs; the 50-rule/119-request inventory leaves 41 rules' source adequacy and N065 usefulness open.
+
+N080 also changes the graph behind the MCP sample, so its old fingerprint correctly refuses. Actual refresh and
+independent protocol verification keep that source dependency explicit. Earlier failures, stale checks and
+reviewer harness corrections are retained rather than relabelled as initial passes. Model calls, new original
+downloads, company/plant writes and LinkedIn publication were not exercised.
+
+Final local validation: all 64 registered test scripts pass, with five Windows unittest skips, two explanatory
+platform notices and no additional skipped-check notices. The notices explain platform skips and are not extra
+skipped cases. The 95-cell actual matrix and strict input check pass their reproduction/freshness contracts;
+64 pass / 23 fail / 8 n/a remain unchanged as research results. All 52 configured pipeline stages are fresh,
+41 numerical README claims match (one additional claim is prose-only), four current benchmark suites reproduce,
+and saved predictions reproduce 30 tables (23 MATCH / seven MATCH-OLD), retaining five historical GAPs. Six
+independent review records bind the repaired examples. This is local software evidence; actual engineer,
+receiving-company, native-system and Copilot tenant acceptance remain unrun.

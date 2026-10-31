@@ -28,13 +28,19 @@ record found there. **Not recorded in this model does not mean not installed.** 
 actual drive, operating duty, valve position or an energy-saving opportunity. A discharge valve alone cannot settle
 the question.
 
-The five `data_requests` for `E1@P-1` remain `not_on_drawing`:
+The seven `data_requests` for `E1@P-1` remain `not_on_drawing`:
 
 1. Control-valve position over normal operation.
 2. Flow over the same period.
-3. Pump rated flow/head and curve.
+3. Stated pump rating fields, as unverified candidates.
 4. Motor rating and speed.
 5. Static head versus friction head.
+6. Matched pump curve, rated duty and system operating points.
+7. Motor efficiency and drive/input-power basis review.
+
+Ratings alone cannot settle the curve or efficiency tasks. The [interpretation sheet](result/interpretation_review.csv)
+also exposes each supplied record value beside its quotation; the [source-line sheet](result/source_coverage.csv)
+helps review possible omissions. Both start unreviewed.
 
 No historian tags are mapped in this example. The screen names possible collection locations, but connecting to
 a system, validating signal identity and obtaining company approval are separate work. Generic benefits quoted

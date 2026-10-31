@@ -354,7 +354,7 @@
    "why": "A workflow that only saw one set of drawings can fail on the next. Eight selected workflows run across registered applicable inputs, showing where they hold and break, red cells included; other features have their own tests and examples.",
    "you_need": "Nothing to read the page; the public datasets (fetched by script) to re-run it",
    "time": "Reading: minutes. Re-running everything: about 25 minutes of cell time, plus downloading the public data once",
-   "you_get": "A pass/fail grid of tools against inputs, the reason for every failure, and the public datasets that would close each gap"
+   "you_get": "A pass/fail grid with reasons and declared code, input/key, registry and runner bindings from actual runs. Missing optional caches are explicitly unverified; strict --require-inputs requires them. Workflow criteria and independent-source limits remain separate from completion percentages"
   },
   {
    "id": "opportunity-screen",
@@ -388,7 +388,11 @@
     "examples/opportunity-screen/collection-basis/model.json",
     "examples/opportunity-screen/collection-basis/questions.json",
     "examples/opportunity-screen/collection-basis/screen.md",
-    "examples/opportunity-screen/collection-basis/sources.json"
+    "examples/opportunity-screen/collection-basis/sources.json",
+    "examples/opportunity-screen/pump-motor-basis/questions.json",
+    "examples/opportunity-screen/pump-motor-basis/screen.md",
+    "examples/opportunity-screen/source-investigation/questions.json",
+    "examples/opportunity-screen/source-investigation/screen.md"
    ],
    "tests": [
     "scripts/test_question_engine.py"
@@ -534,9 +538,9 @@
    ],
    "job": "Let an approved local assistant retrieve assets, relations and questions from one cleared packet",
    "why": "A sourced engineering packet becomes reusable through a standard assistant interface while the company keeps authority over its records and decisions.",
-   "you_need": "An approved IT developer environment, optional pinned MCP SDK, and a selected twin-graph-1 JSON snapshot; shared authentication and Copilot reachability require separate work",
+   "you_need": "An approved IT developer environment, optional pinned MCP SDK, and a selected twin-graph-1 JSON snapshot; optional explicitly selected context-register-1 sidecar; shared authentication and Copilot reachability require separate work",
    "time": "Local developer setup; company deployment and engineering review time unmeasured",
-   "you_get": "Six read-only snapshot tools and a summary resource, with source claims, statuses, fingerprints and bounded paging. Public-example SDK/stdio/loopback tests; no source fetching, process-data connector or shared company deployment"
+   "you_get": "Nine read-only snapshot tools and a summary resource, with source claims, statuses, fingerprints, stream identities and bounded paging. An explicitly selected, hash-bound context sidecar adds full retained answer/decision/source readback. Local SDK/stdio/loopback tests; no source fetching, process-data connector or shared company deployment"
   },
   {
    "id": "description-workflow",
@@ -596,7 +600,11 @@
     "examples/from-description/mgpi/result/REVIEW.md",
     "examples/from-description/mgpi/first-question.md",
     "examples/from-description/mgpi/result/build.json",
-    "examples/from-description/mgpi/result/pid/manifest.json"
+    "examples/from-description/mgpi/result/pid/manifest.json",
+    "examples/from-description/assisted/result/interpretation_review.csv",
+    "examples/from-description/assisted/result/source_coverage.csv",
+    "examples/from-description/mgpi/result/interpretation_review.csv",
+    "examples/from-description/mgpi/result/source_coverage.csv"
    ],
    "tests": [
     "scripts/test_description_workflow.py"
@@ -605,7 +613,7 @@
    "why": "Engineers need a usable authoring contract and feedback loop between their approved assistant and the separate generation tools. One packet makes the interpretation, unknowns and resulting outputs inspectable before company handoff.",
    "you_need": "Cleared UTF-8 description, an engineer or approved assistant to author native model/layout JSON, and approved Python/drawing dependencies for local checks and generation",
    "time": "Authored development fixtures only; assistant quality and engineering review time unmeasured",
-   "you_get": "Numbered source/prompt/contract, exact quotation and directed consistency feedback, then draft P&ID PNG/SVG, question screen, sourced graph and platform staging with payload hashes. No automatic interpretation/layout, tested Copilot tenant or plant approval"
+   "you_get": "Numbered source/prompt/contract, exact quotation and directed consistency feedback, then draft P&ID PNG/SVG, questions, graph and platform staging with payload hashes. Full supplied-record interpretation and source-line review sheets start unreviewed. No automatic interpretation/layout, tested Copilot tenant or plant approval"
   },
   {
    "id": "task-benchmarks",
@@ -686,7 +694,23 @@
     "benchmarks/results/mgpi-development-source-preserved.json",
     "benchmarks/results/mgpi-development-source-preserved.md",
     "benchmarks/results/source-support-development.json",
-    "benchmarks/results/source-support-development.md"
+    "benchmarks/results/source-support-development.md",
+    "benchmarks/recipes/description-workflow-20261030.txt",
+    "benchmarks/description-controls-recipe-preserved.json",
+    "benchmarks/runs/description-reference-recipe-preserved.json",
+    "benchmarks/runs/description-empty-recipe-preserved.json",
+    "benchmarks/runs/description-wrong-endpoint-recipe-preserved.json",
+    "benchmarks/results/description-controls-recipe-preserved.json",
+    "benchmarks/results/description-controls-recipe-preserved.md",
+    "benchmarks/recipes/description-workflow-20261030.py.txt",
+    "benchmarks/mgpi-development-recipe-preserved.json",
+    "benchmarks/runs/mgpi-initial-recipe-preserved.json",
+    "benchmarks/runs/mgpi-expanded-source-recipe-preserved.json",
+    "benchmarks/runs/mgpi-empty-recipe-preserved.json",
+    "benchmarks/runs/mgpi-wrong-endpoint-recipe-preserved.json",
+    "benchmarks/runs/mgpi-false-shutdown-recipe-preserved.json",
+    "benchmarks/results/mgpi-development-recipe-preserved.json",
+    "benchmarks/results/mgpi-development-recipe-preserved.md"
    ],
    "tests": [
     "scripts/test_benchmark.py",

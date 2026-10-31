@@ -10,8 +10,8 @@ There is no universal best-model score.
 | Task | What is scored | Current evidence | Results |
 |---|---|---|---|
 | `drawing-extraction`, `pid2graph-v1` | Rough/strict six-class symbol F1 and asset-network F1 using the unchanged scorer | Existing five replicates each for Claude and Codex on six OPEN100 validation drawings. The method includes tiling and deterministic tracing. This is retrospective registration of saved runs; validation also informed method selection. | [Model comparison](results/open100-validation-report-clarified-source-preserved.md), [JSON](results/open100-validation-report-clarified-source-preserved.json), [suite](open100-validation.json) |
-| `description-facts`, `native-facts-v1` | Literal selected equipment/type, stream endpoints, instrument/valve placement and controller relations against explicit fact atoms | Two authored synthetic cases with reference, empty and wrong-endpoint controls. Keys come from those same references. **Scorer development only: no AI interpretation benchmark.** | [Scorer controls](results/description-controls-source-preserved.md), [JSON](results/description-controls-source-preserved.json), [suite](description-controls.json) |
-| `description-facts`, `native-facts-v1`, source review | The same selected fields against separately prepared original-source keys | [MGPI source-adapted development case](../examples/from-description/mgpi/README.md), with retained unsupported initial adaptation and an explicit source/key expansion. No held-out or original-text model trial. A planted false-shutdown claim still scores perfectly and exposes a scorer blindspot. | [Development artifacts and controls](results/mgpi-development-source-preserved.md), [suite](mgpi-development.json) |
+| `description-facts`, `native-facts-v1` | Literal selected equipment/type, stream endpoints, instrument/valve placement and controller relations against explicit fact atoms | Two authored synthetic cases with reference, empty and wrong-endpoint controls. Keys come from those same references. **Scorer development only: no AI interpretation benchmark.** | [Scorer controls](results/description-controls-recipe-preserved.md), [JSON](results/description-controls-recipe-preserved.json), [suite](description-controls-recipe-preserved.json) |
+| `description-facts`, `native-facts-v1`, source review | The same selected fields against separately prepared original-source keys | [MGPI source-adapted development case](../examples/from-description/mgpi/README.md), with retained unsupported initial adaptation and an explicit source/key expansion. No held-out or original-text model trial. A planted false-shutdown claim still scores perfectly and exposes a scorer blindspot. | [Development artifacts and controls](results/mgpi-development-recipe-preserved.md), [suite](mgpi-development-recipe-preserved.json) |
 | `source-support`, `claim-judgments-v1` | Labels for fixed supplied claims against a bounded key; missing claims stay in the accuracy denominator | Twelve MGPI/NIST development claims using explicit project paraphrases. Synthetic scorer controls only; reasons and source validity unscored. | [Control results](results/source-support-development.md), [suite](source-support-development.json) |
 
 The third adapter, `source-support` / `claim-judgments-v1`, grades **fixed supplied claims** as supported,
@@ -98,3 +98,17 @@ All eight earlier JSON/Markdown files remain byte-identical historical snapshots
 vendor-interpretation revision. They are outside the current registry and do not byte-reproduce under the
 changed implementation. The source-preserved report pairs are actual re-scores, not hand-rehashed receipts.
 Retain previous reports and register a new prefix whenever the implementation changes.
+
+The current description-control and MGPI suites separately preserve their historical recipes after the live
+description guide and workflow gained interpretation-review sheets. The exact guide and code bytes from
+commit `bdf1b41` are retained as [recipe text](recipes/description-workflow-20261030.txt) and
+[code text](recipes/description-workflow-20261030.py.txt), with the original pinned content hashes. These are
+historical sources, not the current guide or executable workflow. New `*-recipe-preserved` manifests relocate
+those recipe references and explain the provenance; their original run IDs, dates, predictions, model declarations,
+case inputs and keys remain unchanged. The registry selects actual offline re-scores under new report prefixes.
+Counts, controls, metrics and scoring cohorts are unchanged; recipe paths change submission/group identities
+and may reorder the summary. This is no new model attempt, method improvement or interpretation result.
+
+The original suites, run manifests and report pairs remain unchanged. Their references to the former live
+guide/code require the corresponding historical checkout; use the current registry for reproducible checks
+against the archived recipes. Keeping an old result does not authorize rewriting its original recipe or date.

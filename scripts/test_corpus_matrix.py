@@ -10,6 +10,8 @@ import contextlib
 import copy
 import io
 import json
+import shutil
+import subprocess
 import tempfile
 import sys
 import unittest
@@ -78,7 +80,9 @@ class Rendering(unittest.TestCase):
         for row, input_id in ((3, "te-rev-a"), (4, "dexpi"), (7, "dexpi")):
             with self.subTest(row=row, input=input_id):
                 recorded = {f: original_hash(f) for f in cm.tool_files(row, input_id)}
-                matrix = {"cells": [{"row": row, "input": input_id, "tool_files": recorded}]}
+                inp = cm.inputs_by_id(cm.load_corpus())[input_id]
+                matrix = {"cells": [{"row": row, "input": input_id, "tool_files": recorded,
+                                     "input_bindings": cm.source_manifest(row, inp)}]}
                 self.assertEqual(cm.stale_cells(matrix), [])
                 with patch.object(cm, "file_hash", side_effect=lambda f:
                                   "changed-confidence-code" if f == "scripts/confidence.py" else original_hash(f)):
@@ -396,6 +400,205 @@ class Rendering(unittest.TestCase):
         changed = copy.deepcopy(matrix)
         changed["cells"][0]["value"] = "tampered"
         self.assertNotEqual(cm.render(matrix, cm.load_corpus()), cm.render(changed, cm.load_corpus()))
+
+
+class SourceBindings(unittest.TestCase):
+    """Actual copied-root --check CLI controls; never edit repository evidence to test freshness."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.corpus = cm.load_corpus()
+        self.inp = cm.inputs_by_id(self.corpus)["water-fixture"]
+        for rel in [*cm.tool_files(5, "water-fixture"), "scripts/corpus_matrix.py", "data/corpus.json",
+                    self.inp["local_path"]]:
+            target = self.root / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, target)
+        self.out = self.root / "proof"
+        self.out.mkdir()
+        self.paths = patch.multiple(cm, ROOT=self.root, SCRIPTS=self.root / "scripts")
+        self.paths.start()
+        self.addCleanup(self.paths.stop)
+
+    def save_cell(self, row=5, inp=None):
+        inp = inp or self.inp
+        c = cm.cell(row, inp, "pass", "fictional binding control, no performance claim")
+        c.update(ran_at="binding test", tool_files={f: cm.file_hash(f) for f in cm.tool_files(row, inp["id"])},
+                 input_bindings=cm.source_manifest(row, inp))
+        matrix = {"ran_at": "test", "seconds": 0, "cells": [c]}
+        (self.out / "matrix.json").write_text(json.dumps(matrix), encoding="utf-8")
+        (self.out / "GENERALIZATION.md").write_text(cm.render(matrix, self.corpus), encoding="utf-8")
+        return c
+
+    def check(self, expected=0, strict=False):
+        command = [sys.executable, str(self.root / "scripts/corpus_matrix.py"), "--check", "--out-dir", str(self.out)]
+        if strict:
+            command.append("--require-inputs")
+        run = subprocess.run(command, capture_output=True, text=True, cwd=self.root, timeout=60)
+        self.assertEqual(run.returncode, expected, run.stdout + run.stderr)
+        return run.stdout
+
+    def test_model_change_and_removal_refuse_actual_cli(self):
+        self.save_cell()
+        self.check()
+        model = self.root / self.inp["local_path"]
+        model.write_bytes(model.read_bytes() + b"\n ")
+        self.assertIn(self.inp["local_path"], self.check(1))
+        model.unlink()
+        self.assertIn(self.inp["local_path"], self.check(1))
+
+    def test_runner_and_registry_changes_refuse_actual_cli(self):
+        self.save_cell()
+        runner = self.root / "scripts/corpus_matrix.py"
+        original = runner.read_bytes()
+        runner.write_bytes(original + b"\n# changed runner control\n")
+        self.assertIn("runner_sha256 changed", self.check(1))
+        runner.write_bytes(original)
+        self.check()
+        corpus = copy.deepcopy(self.corpus)
+        cm.inputs_by_id(corpus)["water-fixture"]["family"] = "changed control"
+        (self.root / "data/corpus.json").write_text(json.dumps(corpus), encoding="utf-8")
+        self.assertIn("registry_entry_sha256 changed", self.check(1))
+
+    def test_consumed_loop_list_change_refuses_actual_cli(self):
+        inp = cm.inputs_by_id(self.corpus)["te-rev-d"]
+        for rel in [*cm.tool_files(4, inp["id"]), cm.TE_LOOPS, "examples/loop-audit/README.md", "data/te_pid/key.json"]:
+            target = self.root / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, target)
+        self.save_cell(4, inp)
+        self.check()
+        path = self.root / cm.TE_LOOPS
+        path.write_bytes(path.read_bytes() + b"\n ")
+        self.assertIn(cm.TE_LOOPS, self.check(1))
+
+    def test_input_change_during_run_keeps_original_binding_and_fails(self):
+        before = cm.source_manifest(5, self.inp)
+
+        def changing_runner(inp):
+            model = self.root / inp["local_path"]
+            model.write_bytes(model.read_bytes() + b"\n ")
+            return cm.cell(5, inp, "pass", "planted mid-run mutation")
+
+        with patch.dict(cm.RUNNERS, {5: changing_runner}):
+            c = cm.run_cell(5, self.inp)
+        self.assertEqual(c["status"], "fail")
+        self.assertIn("changed during", c["reason"])
+        self.assertEqual(c["input_bindings"], before)
+        self.assertNotEqual(c["input_bindings"], cm.source_manifest(5, self.inp))
+
+    def test_comma_separated_import_dependencies_are_found(self):
+        self.assertEqual(cm.imported_modules("import first, second\nfrom third.module import x\n"),
+                         ("first", "second", "third"))
+
+    def test_uppercase_XML_consumers_change_and_removal_refuse_actual_cli(self):
+        inp = cm.inputs_by_id(self.corpus)["dexpi-1.2-comos"]
+        with patch.multiple(cm, ROOT=ROOT, SCRIPTS=ROOT / "scripts"):
+            deps = cm.tool_files(7, inp["id"])
+        for rel in deps:
+            target = self.root / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, target)
+        spec = next(s for s in cm.source_specs(7, inp) if s["path"].endswith("example pids"))
+        base = self.root / spec["path"]
+        xml = base / "C01 sample" / "C01-SAG.EX01.XML"
+        xml.parent.mkdir(parents=True)
+        xml.write_text("<PlantModel />", encoding="utf-8")
+        saved = self.save_cell(7, inp)
+        inventory = next(s for s in saved["input_bindings"]["sources"] if s["path"] == spec["path"])["files"]
+        self.assertIn(xml.relative_to(self.root).as_posix(), inventory)
+        self.check(strict=True)
+        xml.write_text("<PlantModel changed='true' />", encoding="utf-8")
+        self.assertIn("inventory", self.check(1))
+        xml.unlink()
+        self.assertIn("inventory", self.check(1))
+
+    def test_portable_inventory_matching_preserves_distinct_original_names(self):
+        for path in ("UPPER.XML", "deep/UPPER.XML", "deep/nested/UPPER.XML"):
+            self.assertTrue(cm.inventory_match(path, "**/*.xml"), path)
+        self.assertTrue(cm.inventory_match("E01 sample/deep/UPPER.XML", "E*/**/*.xml"))
+        self.assertFalse(cm.inventory_match("C01 sample/UPPER.XML", "E*/**/*.xml"))
+        self.assertFalse(cm.inventory_match("deep/UPPER.XML", "*.xml"))
+        self.assertFalse(cm.inventory_match("UPPER.XML.zip", "**/*.xml"))
+        names = ["same.XML", "same.xml"]
+        matched = {name: "distinct original name" for name in names if cm.inventory_match(name, "*.xml")}
+        self.assertEqual(list(matched), names)
+
+    def test_directory_inventory_catches_added_changed_removed_keys_and_images(self):
+        inp = copy.deepcopy(cm.inputs_by_id(self.corpus)["open100-holdout"])
+        inp.update(local_path="data/key-control", sheets="all")
+        base = self.root / inp["local_path"]
+        base.mkdir(parents=True)
+        for name in ("0.graphml", "0.png"):
+            (base / name).write_bytes(b"original" + name.encode())
+        before = cm.source_manifest(1, inp)
+        c = {"row": 1, "input_bindings": before}
+        self.assertEqual(cm.input_binding_problems(c, inp), ([], []))
+        for action in ("change", "remove", "add"):
+            with self.subTest(action=action):
+                if action == "change":
+                    (base / "0.png").write_bytes(b"changed image")
+                elif action == "remove":
+                    (base / "0.png").unlink()
+                else:
+                    (base / "1.graphml").write_text("new key", encoding="utf-8")
+                self.assertIn("inventory", cm.input_binding_problems(c, inp)[0][0])
+
+    def test_entire_absent_optional_cache_unverified_partial_cache_stale(self):
+        inp = copy.deepcopy(self.inp)
+        inp.update(local_path="data/external/binding-cache/model.json", committed=False)
+        corpus = copy.deepcopy(self.corpus)
+        cm.inputs_by_id(corpus)[inp["id"]].update(inp)
+        self.corpus = corpus
+        (self.root / "data/corpus.json").write_text(json.dumps(corpus), encoding="utf-8")
+        cache = self.root / "data/external/binding-cache"
+        cache.mkdir(parents=True)
+        model = cache / "model.json"
+        model.write_text("{}", encoding="utf-8")
+        self.save_cell(inp=inp)
+        self.check(strict=True)
+        model.unlink()
+        self.assertIn("changed since", self.check(1))
+        cache.rmdir()
+        self.assertIn("UNVERIFIED", self.check())
+        self.assertIn("optional inputs unavailable", self.check(1, strict=True))
+
+    def test_legacy_or_omitted_input_bindings_refuse_instead_of_backfill(self):
+        c = self.save_cell()
+        del c["input_bindings"]
+        self.assertIn("actual cell rerun", cm.input_binding_problems(c, self.inp)[0][0])
+        c = self.save_cell()
+        c["input_bindings"]["sources"] = []
+        self.assertIn("declared source paths changed", cm.input_binding_problems(c, self.inp)[0][0])
+
+    def test_text_cross_checkout_and_binary_hashes(self):
+        text = self.root / "boundary.csv"
+        original = b"x" * (1024 * 1024 - 1) + b"\r\nnext\r\n"
+        text.write_bytes(original)
+        before = cm.source_hash(text)
+        text.write_bytes(original.replace(b"\r\n", b"\n"))
+        self.assertEqual(cm.source_hash(text), before)
+        binary = self.root / "boundary.png"
+        binary.write_bytes(original)
+        before = cm.source_hash(binary)
+        binary.write_bytes(original.replace(b"\r\n", b"\n"))
+        self.assertNotEqual(cm.source_hash(binary), before)
+
+    def test_declared_auxiliary_sources_include_actual_configs_and_loop_truth(self):
+        with patch.multiple(cm, ROOT=ROOT, SCRIPTS=ROOT / "scripts"):
+            inputs = cm.inputs_by_id(self.corpus)
+            te = {s["path"] for s in cm.source_specs(4, inputs["te-rev-d"])}
+            self.assertIn(cm.TE_LOOPS, te)
+            self.assertIn("data/te_pid/key.json", te)
+            native = {s["path"] for s in cm.source_specs(7, inputs["dexpi"])}
+            self.assertIn("data/dataset_adapters/dexpi_examples.json", native)
+            self.assertIn("scripts/confidence_model.json", native)
+            self.assertTrue(any(p.startswith("data/external/dexpi/source/") and p.endswith(".xml") for p in native))
+            own = {s["path"] for s in cm.source_specs(3, inputs["own-drawing-extraction"])}
+            self.assertIn("data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/0.png", own)
+            self.assertFalse(any(".." in Path(p).parts for p in own))
 
 
 class Adapters(unittest.TestCase):

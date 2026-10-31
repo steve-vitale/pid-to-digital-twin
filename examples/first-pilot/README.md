@@ -48,6 +48,10 @@ Missing baseline, observations or responsible decision-maker means **insufficien
 has been measured by these software examples. Applicable site access, engineering, quality and change processes
 still govern actual work.
 
+The [acceptance exercise](../../docs/ACCEPTANCE.md) gives the concrete recipient reconstruction, company-system
+readback, approved-client and subsequent-revision checks. Run only the parts needed for the selected question;
+retain actual observations separately from software examples.
+
 ## After the first packet
 
 Keep the brief, original sources and revisions together so another engineer can reconstruct the reasoning.

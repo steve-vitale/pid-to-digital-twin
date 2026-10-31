@@ -38,9 +38,11 @@ drawing** (collect it from the place named). Systems listed under "Left out" wer
 
 - Control valve position (% open) over normal operation [not on drawing]. Where: historian or DCS trend for LV-102 (no historian tag is mapped in this model for these); then DCS/PLC configuration: the valve's controller output; then a walkdown: read the positioner stroke indicator at several rates. How: Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each.
 - Flow over the same period (a flow-duration curve) [not on drawing]. Where: historian / recorded data: FT-103: digitized series 'recirc_flow_klbh' (from the source report's Fig 11); then site records: production rate records. How: Bin the flow into ranges and count the hours in each.
-- Pump rated flow and head [not on drawing]. Where: the vendor datasheet: pump curve and rated duty point; then the pump nameplate on P-1. How: Copy the rated flow and head and get the pump curve.
-- Motor rating and speed [not on drawing]. Where: the motor nameplate on P-1; then maintenance records: motor record card. How: Copy rated power, speed and efficiency from the motor nameplate.
+- Pump rated flow and head [not on drawing]. Where: the vendor datasheet: pump curve and rated duty point; then the pump nameplate on P-1. How: Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.
+- Motor rating and speed [not on drawing]. Where: the motor nameplate on P-1; then maintenance records: motor record card. How: Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.
 - Static head versus friction head [not on drawing]. Where: a walkdown: elevations and pressures at the suction source and the delivery point; then site records: line list or isometrics for pipe lengths and sizes. How: Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop.
+- Matched pump curve, rated duty and system operating points [not on drawing]. Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: the vendor datasheet: pump curve and rated duty point; then the pump nameplate on P-1. How: Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.
+- Motor nameplate, efficiency and drive basis [not on drawing]. Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: the motor nameplate on P-1; then maintenance records: motor record card. How: Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.
 
 **How it is decided:** Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.
 
@@ -57,18 +59,20 @@ IAC/ITAC recommendation code: 2.4146 (IAC/ITAC browse page: 5,227 recommendation
 
 - stream S1 (asset stream:S1) reads "Flasher bottoms feed (methomyl-solvent liquid)" (`streams[S1]`)
 - Checked, none found: no insulation code recorded for the line (`applies_when.without`)
-- On drawing: Line temperature: S1 normal_temperature_C = 80 (`streams[S1].facts.normal_temperature_C`)
+- On drawing: Stated line/process temperature: S1 normal_temperature_C = 80 (`streams[S1].facts.normal_temperature_C`)
+- On drawing: Supplied candidate fact, basis unverified: S1 normal_temperature_C = 80 (`streams[S1].facts.normal_temperature_C`)
 
 **Data to collect**
 
-- Insulation condition and length of bare pipe [not on drawing]. Where: a walkdown: infrared camera or surface thermometer along the line; then site records: line list insulation code. How: Note bare or damaged lengths and their pipe size.
+- Insulation condition and length of bare pipe [not on drawing]. Where: site records: approved existing line list, insulation survey and inspection records. How: Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process.
+- Applicable surface-temperature and insulation evidence [not on drawing]. Candidate scope: anchors. Supplied candidate facts (meaning and suitability unverified): S1 (stream:S1) normal_temperature_C = 80 [streams[S1].facts.normal_temperature_C]. The collection/review request remains open; supplied values or document references do not settle it. Where: site records: approved existing surface/insulation records or suitable documented analysis for this line. How: Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established.
 
-**How it is decided:** Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.
+**How it is decided:** Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.
 
 **What the source says (S1, S19, S24):** "Insulation can typically reduce energy losses by 90%." "Any surface over 120°F should be insulated." LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.
 IAC/ITAC recommendation code: 2.2136 (IAC/ITAC browse page: 1,647 recommendations, 2.2 yr average payback, 61.5% implemented; average dollar figure omitted).
 
-**Limits:** Many models, and many P&IDs, never record insulation: a finding here means 'not recorded', not 'bare'. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.
+**Limits:** Many models and P&IDs never record insulation: a finding means not recorded, not bare. Stated process/design temperature is not surface evidence. Collection and source applicability need review. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.
 
 ### E11: Is this hot line insulated?
 
@@ -81,15 +85,16 @@ IAC/ITAC recommendation code: 2.2136 (IAC/ITAC browse page: 1,647 recommendation
 
 **Data to collect**
 
-- Insulation condition and length of bare pipe [not on drawing]. Where: a walkdown: infrared camera or surface thermometer along the line; then site records: line list insulation code. How: Note bare or damaged lengths and their pipe size.
-- Line temperature [not on drawing]. Where: a walkdown: surface thermometer. How: Surfaces over 120 F (49 C) qualify.
+- Insulation condition and length of bare pipe [not on drawing]. Where: site records: approved existing line list, insulation survey and inspection records. How: Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process.
+- Stated line/process temperature [not on drawing]. Where: site records: identified source temperature field and its stated basis. How: Retain the stated temperature and original source/basis. A process-fluid or design temperature is not an actual surface-temperature measurement or a completed insulation evaluation.
+- Applicable surface-temperature and insulation evidence [not on drawing]. Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: site records: approved existing surface/insulation records or suitable documented analysis for this line. How: Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established.
 
-**How it is decided:** Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.
+**How it is decided:** Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.
 
 **What the source says (S1, S19, S24):** "Insulation can typically reduce energy losses by 90%." "Any surface over 120°F should be insulated." LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.
 IAC/ITAC recommendation code: 2.2136 (IAC/ITAC browse page: 1,647 recommendations, 2.2 yr average payback, 61.5% implemented; average dollar figure omitted).
 
-**Limits:** Many models, and many P&IDs, never record insulation: a finding here means 'not recorded', not 'bare'. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.
+**Limits:** Many models and P&IDs never record insulation: a finding means not recorded, not bare. Stated process/design temperature is not surface evidence. Collection and source applicability need review. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers.
 
 ### E18: Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?
 
@@ -132,15 +137,16 @@ IAC/ITAC recommendation code: 2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,67
 
 **Data to collect**
 
-- Steam supply pressure and temperature [not on drawing]. U1 (stream:U1): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). TV-104C (TV-104C): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C. Where: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list. How: Record supply conditions; saturation temperature follows from pressure.
+- Steam supply pressure and temperature [not on drawing]. U1 (stream:U1): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). TV-104C (TV-104C): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C. Where: site records: approved supply/header list and existing pressure/temperature records. How: Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.
 - Temperature the user actually needs [not on drawing]. Where: DCS/PLC configuration: the temperature setpoint. How: Note setpoint and normal range.
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity [not on drawing]. Where: site records: site steam balance; then a walkdown: headers and hot streams near this user. How: List sources whose temperature exceeds the need with a practical approach.
+- Applicable steam-supply conditions and operating basis [not on drawing]. Candidate scope: anchors. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: site records: approved existing supply/user configuration and coincident operating-condition records. How: Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.
 
 **How it is decided:** Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.
 
 **What the source says (S19, S6):** Closest source wordings: pinch potential "far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.
 
-**Limits:** Where the model does not state the steam grade, the question is first 'what grade is it?'.
+**Limits:** Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.
 
 ### H4: Is heat rejected to cooling water at a temperature another user could use?
 
@@ -157,7 +163,7 @@ IAC/ITAC recommendation code: 2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,67
 
 - Cooling water return temperature [not on drawing]. Where: a walkdown: thermometer on the return. How: Record at normal operation; the return temperature is the grade of the heat on offer.
 - Temperature of the stream being cooled (in and out) [not on drawing]. Where: site records: heat and material balance. How: Record at normal operation.
-- Cooler duty [not on drawing]. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Duty = flow x heat capacity x temperature rise.
+- Cooler duty [not on drawing]. Candidate scope: unit. No candidate values found in the selected model records. The collection/review request remains open; supplied values or document references do not settle it. Where: the vendor datasheet: exchanger datasheet; then site records: heat and material balance. How: Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.
 - A heat user that needs heat below the return temperature [not on drawing]. Where: site records: list of heating duties with temperatures; then a walkdown: users nearby. How: Match by temperature, hours and distance.
 
 **How it is decided:** Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.

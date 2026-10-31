@@ -335,10 +335,9 @@
      "item": "Steam supply pressure and temperature",
      "state": "not_on_drawing",
      "where": [
-      "a walkdown: pressure gauge and thermometer at the supply",
-      "site records: steam header list"
+      "site records: approved supply/header list and existing pressure/temperature records"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks.",
      "field_scope": "anchors",
      "field_coverage": [
       {
@@ -384,6 +383,16 @@
       "a walkdown: headers and hot streams near this user"
      ],
      "how": "List sources whose temperature exceeds the need with a practical approach."
+    },
+    {
+     "item": "Applicable steam-supply conditions and operating basis",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: approved existing supply/user configuration and coincident operating-condition records"
+     ],
+     "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed.",
+     "candidate_scope": "anchors",
+     "candidate_facts": []
     }
    ],
    "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
@@ -399,7 +408,7 @@
      "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
     ]
    },
-   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "limits": "Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred.",
    "status": "asked"
   },
   {
@@ -510,27 +519,9 @@
       "the vendor datasheet: exchanger datasheet",
       "site records: heat and material balance"
      ],
-     "how": "Duty = flow x heat capacity x temperature rise.",
-     "field_scope": "unit",
-     "field_coverage": [
-      {
-       "id": "R-101",
-       "label": "R-101",
-       "fields": [
-        {
-         "name": "CAPACITY",
-         "state": "absent",
-         "where": null
-        }
-       ],
-       "still_needed": [
-        "CAPACITY"
-       ]
-      }
-     ],
-     "still_needed": [
-      "CAPACITY"
-     ]
+     "how": "Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.",
+     "candidate_scope": "unit",
+     "candidate_facts": []
     },
     {
      "item": "A heat user that needs heat below the return temperature",
@@ -654,27 +645,9 @@
       "the vendor datasheet: exchanger datasheet",
       "site records: heat and material balance"
      ],
-     "how": "Duty = flow x heat capacity x temperature rise.",
-     "field_scope": "unit",
-     "field_coverage": [
-      {
-       "id": "E-101",
-       "label": "E-101",
-       "fields": [
-        {
-         "name": "CAPACITY",
-         "state": "absent",
-         "where": null
-        }
-       ],
-       "still_needed": [
-        "CAPACITY"
-       ]
-      }
-     ],
-     "still_needed": [
-      "CAPACITY"
-     ]
+     "how": "Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.",
+     "candidate_scope": "unit",
+     "candidate_facts": []
     },
     {
      "item": "A heat user that needs heat below the return temperature",

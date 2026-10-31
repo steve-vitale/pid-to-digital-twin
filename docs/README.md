@@ -27,6 +27,7 @@ manual bridges and the recommended order of work. Numerical research evidence li
 | Retain answers and source-revision dependencies in a local packet | [Context register](CONTEXT_REGISTER.md) |
 | Retrieve a selected snapshot through an approved local MCP client | [MCP starter](../examples/internal-mcp/README.md) |
 | Plan company access and ongoing responsibility | [Connectivity](INTERNAL_CONNECTIVITY.md) · [Lifecycle](CONTEXT_LIFECYCLE.md) |
+| Test a real recipient, company handoff and next revision | [Acceptance exercise](ACCEPTANCE.md) |
 
 These tasks are optional branches, not prerequisites for every investigation. A plain source-question brief may
 be enough. Exact file contracts belong in the [workflow map](WORKFLOWS.md); all tools are in [FEATURES.md](FEATURES.md).

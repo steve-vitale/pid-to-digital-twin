@@ -39,15 +39,18 @@ Usage
   python scripts/corpus_matrix.py --rows 6 --inputs skab,hai-21.03  # only those cells; every other cell is kept as is
 Intermediate files go to temporary folders; nothing is written into data/ or other out/ folders.
 
-Each cell records when it ran (`ran_at`) and a hash of every tool file it exercised (`tool_files`). `--check` fails
-when a recorded hash no longer matches the file on disk, or a cell has none, so a cell left over from an older version
-of a tool can't pass silently. corpus_matrix.py itself is not hashed (a wording change in the page would otherwise
-stale every cell); a change to a row's runner here needs that row re-run by hand.
+Each cell records its run time, tool dependencies and a source manifest: input/key bytes, directory inventories,
+adapter configuration, registry entry and this runner. Bindings are captured by an actual run, never backfilled
+onto old results. `--check` refuses changed bindings. Entire optional caches absent in a clean clone are explicitly
+UNVERIFIED; `--require-inputs` makes that a failure too. A partially present or changed collection is stale.
 """
 import argparse
+import ast
 import contextlib
 from collections import Counter, defaultdict
 import csv
+import fnmatch
+import functools
 import hashlib
 import io
 import json
@@ -240,6 +243,18 @@ def missing_files(inp):
             if not (base / f"{s}.{e}").is_file()]
 
 
+@functools.lru_cache(maxsize=256)
+def imported_modules(source):
+    """Parse by content, so repeated cells are cheap without caching away changed dependency declarations."""
+    modules = []
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Import):
+            modules.extend(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            modules.append(node.module.split(".")[0])
+    return tuple(modules)
+
+
 def tool_files(row, input_id):
     """Explicit roots (including known dynamic imports), plus scripts/ imports found in source text."""
     todo = list(ROW_TOOL_FILES_ONLY.get((row, input_id))
@@ -253,8 +268,7 @@ def tool_files(row, input_id):
         path = ROOT / rel
         if not path.is_file():
             continue
-        for mod in re.findall(r"^[ \t]*(?:from|import)[ \t]+([A-Za-z_]\w*)", path.read_text(encoding="utf-8"),
-                              flags=re.M):
+        for mod in imported_modules(path.read_text(encoding="utf-8-sig")):
             if (SCRIPTS / f"{mod}.py").is_file():
                 todo.append(f"scripts/{mod}.py")
     return sorted(seen)
@@ -268,7 +282,202 @@ def file_hash(rel):
     return "sha256:" + hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:16]
 
 
-def stale_cells(matrix):
+TEXT_INPUT_SUFFIXES = {".py", ".json", ".graphml", ".xml", ".csv", ".dat", ".txt", ".md", ".yml", ".yaml"}
+
+
+def source_hash(path):
+    """Full SHA-256, streaming large inputs; normalize CRLF only for declared text formats."""
+    path = Path(path)
+    digest = hashlib.sha256()
+    text = path.suffix.lower() in TEXT_INPUT_SUFFIXES
+    carry = b""
+    with path.open("rb") as stream:
+        while chunk := stream.read(1024 * 1024):
+            chunk = carry + chunk
+            carry = b"\r" if text and chunk.endswith(b"\r") else b""
+            if carry:
+                chunk = chunk[:-1]
+            digest.update(chunk.replace(b"\r\n", b"\n") if text else chunk)
+    digest.update(carry)
+    return "sha256:" + digest.hexdigest()
+
+
+def source_specs(row, inp):
+    """Conservative, bounded input inventories, including source-selection and adapter sidecars.
+
+    These are declared dependencies, not a claim to trace every OS read. DEXPI XML selection examines every XML
+    in its version/case range before exporter filtering; bind that range, not unrelated spreadsheets/archives.
+    Source paths remain repository relative. Changes to this declaration also change the bound runner hash.
+    """
+    specs = []
+
+    def add(path, patterns=None, optional=False):
+        rel = (ROOT / path).resolve().relative_to(ROOT.resolve()).as_posix()
+        spec = {"path": rel, "patterns": sorted(patterns or []), "optional": optional}
+        if optional and spec["path"].startswith("data/external/"):
+            spec["cache_root"] = "/".join(spec["path"].split("/")[:3])
+        existing = next((s for s in specs if s["path"] == rel), None)
+        if existing is None:
+            specs.append(spec)
+        else:
+            existing["patterns"] = sorted(set(existing["patterns"] + spec["patterns"]))
+            existing["optional"] = existing["optional"] and optional
+            if not existing["optional"]:
+                existing.pop("cache_root", None)
+
+    iid, kind, local = inp["id"], inp["kind"], inp["local_path"]
+    optional = not inp.get("committed", False)
+    if kind == "keyed-sheets":
+        if row == 4 and iid != "dexpi":
+            add(local + "/key.json", optional=optional)
+        elif row == 8 and iid in PIPE_NA:
+            add(local + "/manifest.json", optional=optional)
+        else:
+            sheets = inp.get("sheets")
+            patterns = ([f"{s}.{ext}" for s in sheets for ext in ("png", "graphml")]
+                        if isinstance(sheets, list) else ["*.png", "*.graphml", "*.json"])
+            if row in (7, 8) or iid == VENDOR:
+                patterns += ["*.json"]
+            add(local, patterns, optional)
+    elif kind == AGENT_KIND:
+        if row != 4:
+            add(local, ["*.graphml", "*.json"], optional)
+            for stage in inp.get("stage", {}).values():
+                add(stage["source"], optional=stage["source"].startswith("data/external/"))
+    elif iid in DEXPI_READER_INPUTS or iid == "dexpi-1.2-cross-vendor":
+        import corpus_adapters as ca
+        version = DEXPI_READER_INPUTS.get(iid, ("1.2",))[0]
+        prefixes = DEXPI_READER_INPUTS.get(iid, (None, None, None))[2]
+        patterns = [f"{p}*/**/*.xml" for p in prefixes] if prefixes else ["**/*.xml"]
+        add((ca.DEXPI_ROOT.relative_to(ca.ROOT) / f"dexpi {version}" / "example pids").as_posix(), patterns, optional)
+    elif iid == VENDOR:
+        add(local, ["*.png", "*.graphml", "*.json"], optional)
+    elif kind in NOT_SCORED_KINDS:
+        if iid == "hai-dcs-loops":
+            add(local, ["dcs_*.json"], optional)
+    else:
+        # Dataset directories contain the CSV/DAT/ZIP/label files the adapters select. Bind their complete
+        # inventory so new or removed runs cannot silently reuse an old cell; ignore no nested data file.
+        add(local, ["**/*"] if (ROOT / local).is_dir() else None, optional)
+
+    if iid == VENDOR:
+        import corpus_adapters as ca
+        add((ca.DEXPI_ROOT.relative_to(ca.ROOT) / "dexpi 1.2/example pids").as_posix(),
+            ["**/*.xml", "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.svg", "**/*.pdf"], True)
+    if iid == "dexpi" and row in (4, 7, 8):
+        add("data/dataset_adapters/dexpi_examples.json")
+        cfg = json.loads((ROOT / "data/dataset_adapters/dexpi_examples.json").read_text(encoding="utf-8"))
+        for spec in cfg["geometry_keyed"]:
+            add("data/external/dexpi/source/" + spec["xml"], optional=True)
+    if row == 4 and iid.startswith("te-rev-"):
+        add(TE_LOOPS)
+        add("examples/loop-audit/README.md")
+    if row == 4 and iid == "bayer-rt1":
+        add("data/bayer_rt/process_model.json")
+    if row == 8 and iid in ("te-rev-d", "bayer-rt1"):
+        for rel in (("data/te_process_model.json", "data/te_pid_layout.json") if iid == "te-rev-d"
+                    else ("data/bayer_rt/process_model.json", "data/bayer_rt/pid_layout.json")):
+            add(rel)
+        add(local, ["manifest.json", "key.json"])
+    if "scripts/confidence.py" in tool_files(row, iid):
+        add("scripts/confidence_model.json")
+    if row == 3 and iid == "own-drawing-extraction":
+        add("examples/own-drawing/manifest.json")
+        manifest = json.loads((ROOT / "examples/own-drawing/manifest.json").read_text(encoding="utf-8"))
+        add((Path("examples/own-drawing") / manifest["image"]).as_posix())
+        add("examples/own-drawing/README.md")
+    if row == 1 and iid == "open100-dev":
+        add("out/scorecard_r2-trace-oracle_dev.md")
+    if row == 2 and iid == "open100-holdout":
+        add("examples/vendor-evaluation/README.md")
+    if row == 5 and iid == "bayer-model":
+        add("examples/from-description/README.md")
+    if row == 6 and iid == "te-braatz-runs":
+        for rel in ("out/fault_detection/fault_detection.json", "examples/historian-csv/te_normal_d00.csv",
+                    "examples/historian-csv/te_fault6_d06.csv", "examples/historian-csv/README.md",
+                    "docs/OPERATOR_SCREENS.md"):
+            add(rel)
+    if row == 7 and iid == "dexpi":
+        add("examples/from-dexpi/README.md")
+    return sorted(specs, key=lambda s: (s["path"], s["patterns"]))
+
+
+def source_manifest(row, inp):
+    sources = []
+    for spec in source_specs(row, inp):
+        path = ROOT / spec["path"]
+        if path.is_dir():
+            files = sorted(p for p in path.rglob("*") if p.is_file() and
+                           any(inventory_match(p.relative_to(path).as_posix(), pattern)
+                               for pattern in spec["patterns"] or ["**/*"]))
+        else:
+            files = [path] if path.is_file() else []
+        sources.append({**spec, "exists": path.exists(), "directory": path.is_dir(),
+                        "files": {p.relative_to(ROOT).as_posix(): source_hash(p) for p in files}})
+    return {"schema_version": "corpus-source-bindings-1",
+            "hash_method": "SHA-256; CRLF-to-LF for declared text suffixes; exact bytes for other formats",
+            "registry_entry_sha256": "sha256:" + hashlib.sha256(
+                json.dumps(inp, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest(),
+            "runner_sha256": source_hash(ROOT / "scripts/corpus_matrix.py"), "sources": sources}
+
+
+def inventory_match(relative, pattern):
+    """Case-independent glob by path segment, with recursive **; retain original path spelling as identity.
+
+    Path.glob defaults to different case rules on Windows/Linux. DEXPI source selection accepts suffix.lower(),
+    so an uppercase .XML consumer must remain bound on either host. Matching never lowercases inventory keys or
+    merges two distinct file names on a case-sensitive filesystem. This implementation supports Python3.10+.
+    """
+    parts, tokens = tuple(relative.split("/")), tuple(pattern.split("/"))
+
+    @functools.lru_cache(maxsize=None)
+    def match(i, j):
+        if j == len(tokens):
+            return i == len(parts)
+        if tokens[j] == "**":
+            return match(i, j + 1) or i < len(parts) and match(i + 1, j)
+        return (i < len(parts) and fnmatch.fnmatchcase(parts[i].casefold(), tokens[j].casefold())
+                and match(i + 1, j + 1))
+
+    return bool(match(0, 0))
+
+
+def input_binding_problems(c, inp, require_inputs=False):
+    """Return (stale reasons, explicitly unavailable optional collections), never silently bless old cells."""
+    recorded = c.get("input_bindings")
+    if not recorded:
+        return ["no input bindings recorded; an actual cell rerun is required"], []
+    current = source_manifest(c["row"], inp)
+    problems, unavailable = [], []
+    for key in ("schema_version", "hash_method", "registry_entry_sha256", "runner_sha256"):
+        if recorded.get(key) != current[key]:
+            problems.append(f"{key} changed since the cell ran")
+    old = {s["path"]: s for s in recorded.get("sources", [])}
+    now = {s["path"]: s for s in current["sources"]}
+    if len(old) != len(recorded.get("sources", [])):
+        problems.append("duplicate declared source paths in saved bindings")
+    if old.keys() != now.keys():
+        problems.append("declared source paths changed since the cell ran")
+    for rel in sorted(old.keys() & now.keys()):
+        before, after = old[rel], now[rel]
+        absent_cache = (after["optional"] and not after["exists"] and
+                        not (ROOT / after.get("cache_root", after["path"])).exists())
+        if before == after:
+            if absent_cache:
+                unavailable.append(rel)
+            elif not after["exists"]:
+                problems.append(f"{rel}: required input missing from a present collection")
+            continue
+        if absent_cache:
+            unavailable.append(rel)
+            continue
+        problems.append(f"{rel}: input bytes, inventory or declaration changed since the cell ran")
+    if require_inputs and unavailable:
+        problems.append("optional inputs unavailable: " + ", ".join(unavailable))
+    return problems, unavailable
+
+
+def stale_cells(matrix, corpus=None, require_inputs=False):
     """One line per cell whose recorded tool hashes are missing or differ from the files on disk now."""
     out = []
     for c in matrix.get("cells", []):
@@ -281,9 +490,17 @@ def stale_cells(matrix):
         if missing:
             out.append(f"{where}: required tool hash missing: {', '.join(missing)}")
             continue
-        changed = [f for f, h in recorded.items() if file_hash(f) != h]
+        changed = [f for f, h in recorded.items() if h is None or file_hash(f) != h]
         if changed:
             out.append(f"{where}: {', '.join(changed)} changed since the cell ran ({c.get('ran_at', 'time unknown')})")
+            continue
+        inputs = inputs_by_id(corpus if corpus is not None else load_corpus())
+        if c["input"] not in inputs:
+            out.append(f"{where}: input no longer registered")
+            continue
+        problems, _ = input_binding_problems(c, inputs[c["input"]], require_inputs)
+        if problems:
+            out.append(f"{where}: " + "; ".join(problems))
     return out
 
 
@@ -1711,16 +1928,17 @@ def run_cell(row, inp):
         except Exception as e:  # a build crash is reported in the cell, not a crashed matrix
             built = {"error": f"{type(e).__name__}: {str(e)[:200]}"}
     missing = [] if agent_na else missing_files(inp)
-    if missing:
-        return needs_data(row, inp, missing)
     t0 = time.time()
     ran_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     hashes = {f: file_hash(f) for f in tool_files(row, inp["id"])}  # before the run: what this run exercised
     if inp["kind"] == AGENT_KIND and row != 4:  # an edited agent-made key stales its cells too
         hashes.update({f"{inp['local_path']}/{s}.graphml": file_hash(f"{inp['local_path']}/{s}.graphml")
                        for s in inp["sheets"]})
+    bindings = source_manifest(row, inp)
     try:
-        if inp["kind"] in NOT_SCORED_KINDS:
+        if missing:
+            c = needs_data(row, inp, missing)
+        elif inp["kind"] in NOT_SCORED_KINDS:
             c = not_scored(row, inp)
         elif inp["kind"] == AGENT_KIND:
             c = run_agent_keyed(row, inp)
@@ -1757,6 +1975,11 @@ def run_cell(row, inp):
     c["seconds"] = round(time.time() - t0, 1)
     c["ran_at"] = ran_at
     c["tool_files"] = hashes
+    c["input_bindings"] = bindings
+    if (source_manifest(row, inp) != bindings or
+            {f: file_hash(f) for f in tool_files(row, inp["id"])} != {f: h for f, h in hashes.items() if f.startswith("scripts/")}):
+        c["status"] = "fail"
+        c["reason"] += ("; " if c["reason"] else "") + "source bindings changed during the cell run; rerun required"
     return c
 
 
@@ -1835,8 +2058,11 @@ def render(matrix, corpus):
          f"**{AGENT_KEY_MARK}** marks a cell scored against an answer key a coding agent made (data/agent_keys/, a "
          "first pass no person has reviewed): weaker evidence than a hand key, kept apart from the human-keyed results "
          "and never counted as an independent source family.", "",
-         "Rows are not always run together, so each cell records its own run time and a hash of the tool files it "
-         "exercised; `--check` fails when a tool has changed since its cells ran. Cells ran at: "
+         "Rows are not always run together. Each cell binds its tool files, this runner, registry entry and declared "
+         "input/key/configuration bytes and inventories. `--check` refuses changed bindings; an entirely absent "
+         "optional cache is explicitly UNVERIFIED. Use `--check --require-inputs` for complete local input "
+         "verification. These manifests were captured by actual cell runs, not inferred for historical results. "
+         "Text hashes normalize CRLF to LF; other formats hash exact bytes. Cells ran at: "
          f"{run_times(matrix)}. Last written {matrix['ran_at']}; the cells' run times add up to "
          f"{round(sum(c.get('seconds', 0) for c in matrix['cells']), 1)} s. Cells: " +
          ", ".join(f"{counts[s]} {s}" for s in STATUSES) + "." + key_only_count_text(matrix), "",
@@ -2213,13 +2439,17 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--rows", help="comma-separated row numbers (default: all)")
     ap.add_argument("--check", action="store_true",
-                    help="only verify docs/GENERALIZATION.md matches the JSON and no cell's tool has changed since it ran")
+                    help="verify the page, tools, runner, registry and available input bindings; report absent optional caches")
+    ap.add_argument("--require-inputs", action="store_true",
+                    help="with --check, fail on absent optional input caches instead of reporting UNVERIFIED")
     ap.add_argument("--inputs", help="comma-separated input ids: run only those cells of the chosen rows and keep every "
                                      "other cell exactly as recorded (needs an existing matrix.json)")
     ap.add_argument("--out-dir", type=Path,
                     help="read/write matrix.json and GENERALIZATION.md here instead of out/generalization/ and docs/ "
                          "(a scratch run; with --rows, the other rows are copied from the committed matrix.json)")
     a = ap.parse_args(argv)
+    if a.require_inputs and not a.check:
+        ap.error("--require-inputs requires --check")
     corpus = load_corpus()
     out_json = a.out_dir / "matrix.json" if a.out_dir else OUT_JSON
     doc = a.out_dir / "GENERALIZATION.md" if a.out_dir else DOC
@@ -2231,15 +2461,28 @@ def main(argv=None):
         problems = []
         if (doc.read_text(encoding="utf-8") if doc.is_file() else "") != render(matrix, corpus):
             problems.append(f"{show(doc)} does not match {show(out_json)} (or data/corpus.json)")
-        stale = stale_cells(matrix)
+        stale = stale_cells(matrix, corpus, a.require_inputs)
         if stale:
-            problems.append(f"{len(stale)} of {len(matrix.get('cells', []))} cells are stale (their tool changed "
-                            "since they ran, or they carry no tool hash):\n  " + "\n  ".join(stale))
+            problems.append(f"{len(stale)} of {len(matrix.get('cells', []))} cells are stale or unverified under the "
+                            "requested policy:\n  " + "\n  ".join(stale))
         if problems:
             print("\n".join(problems) + "\nre-run python scripts/corpus_matrix.py (all rows, or --rows for the stale "
                   "ones)")
             return 1
-        print(f"{show(doc)} matches {show(out_json)}; every cell's tool hashes match the files on disk")
+        unavailable = [(c['row'], c['input'], missing) for c in matrix.get("cells", [])
+                       if c.get("input_bindings") for _, missing in [input_binding_problems(c, inputs_by_id(corpus)[c['input']])]
+                       if missing]
+        print(f"{show(doc)} matches {show(out_json)}; tool, runner and registry bindings match")
+        expected = sum(len(ids) for ids in ROW_INPUTS.values())
+        print(f"Recorded scope: {len(matrix.get('cells', []))} of {expected} configured workflow/input cells; "
+              "not a count of independent trials or complete toolkit features")
+        if unavailable:
+            print(f"UNVERIFIED: {len(unavailable)} cells have entirely absent optional input caches; "
+                  "their historical source bytes were not verified here. Use --require-inputs to require them.")
+            for row, iid, missing in unavailable:
+                print(f"  row {row} x {iid}: {', '.join(missing)}")
+        else:
+            print(f"All {len(matrix.get('cells', []))} cells' declared input bindings verified locally; no model rerun implied")
         return 0
     rows = sorted(int(x) for x in a.rows.split(",")) if a.rows else sorted(ROWS)
     unknown = [r for r in rows if r not in ROWS]

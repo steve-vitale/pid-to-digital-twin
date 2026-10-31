@@ -37,6 +37,7 @@ audit result: it says the drawing shows a pattern, never that the plant wastes e
 import argparse
 import csv
 import json
+import math
 import re
 import sys
 from collections import OrderedDict, defaultdict, deque
@@ -93,7 +94,25 @@ def read_json(path, what):
     except OSError as e:
         raise InputError(f"cannot read the {what} {shown_path(path)}: {e.strerror or e}")
     try:
-        d = json.loads(text)
+        def unique_pairs(pairs):
+            obj = {}
+            for key, value in pairs:
+                if key in obj:
+                    raise ValueError(f"duplicate object key {key!r}")
+                obj[key] = value
+            return obj
+
+        def invalid_constant(value):
+            raise ValueError(f"non-finite JSON value {value}")
+
+        def finite_float(value):
+            number = float(value)
+            if not math.isfinite(number):
+                raise ValueError(f"non-finite JSON number {value}")
+            return number
+
+        d = json.loads(text, object_pairs_hook=unique_pairs, parse_constant=invalid_constant,
+                       parse_float=finite_float)
     except ValueError as e:
         raise InputError(f"the {what} {shown_path(path)} is not valid JSON ({e})")
     if not isinstance(d, dict):
@@ -146,24 +165,123 @@ class Item(dict):
 # ---------------------------------------------------------------- reading models
 
 def load_schedule(paths):
-    """{(sheet, tag): entry}; later files add printed fields to earlier entries for the same sheet and tag."""
+    """Merge disjoint fields; refuse conflicting values instead of selecting an implicit revision."""
     out = {}
+    labels = {}
     for p in paths or []:
+        label = shown_path(p)
+        if label in labels and Path(p).resolve() != labels[label]:
+            raise InputError(f"schedule source label {label!r} is ambiguous; use distinct source filenames")
+        labels[label] = Path(p).resolve()
         d = read_json(p, "equipment schedule")
         if not isinstance(d.get("sheets"), dict):
             raise InputError(f"the equipment schedule {shown_path(p)} has no 'sheets' object; expected "
                              '{"sheets": {"<sheet>": [{"tag": ..., "service": ..., "fields": {...}}]}}')
         for sheet, rows in d.get("sheets", {}).items():
-            for r in rows:
+            for row_number, r in enumerate(rows, 1):
                 key = (str(sheet), norm_tag(r["tag"]))
                 e = out.setdefault(key, {"tag": norm_tag(r["tag"]), "sheet": str(sheet), "service": None,
                                          "fields": None, "file": shown_path(p)})
-                if r.get("service"):
-                    e["service"] = r["service"]
+                service = r.get("service")
+                if service is not None and not isinstance(service, str):
+                    raise InputError(f"schedule {label}, sheet {sheet}, entry {r['tag']}: service must be text or null")
+                if service and service.strip():
+                    record = {"file": label, "row": row_number, "service": service}
+                    if record not in e.setdefault("service_records", []):
+                        e["service_records"].append(record)
+                if "service_resolution" in r:
+                    e.setdefault("service_declarations", []).append(
+                        {"file": label, "row": row_number, "resolution": r["service_resolution"]})
                 if r.get("fields") is not None:
-                    e["fields"] = dict(r["fields"])
+                    fields = r["fields"]
+                    validate_named_values(fields, f"schedule {shown_path(p)}, sheet {sheet}, entry {r['tag']}")
+                    e["fields"] = e["fields"] or {}
+                    sources = e.setdefault("field_sources", {})
+                    for name, value in fields.items():
+                        old = next((n for n in e["fields"] if n.casefold() == name.casefold()), None)
+                        if old is not None and not same_value(e["fields"][old], value):
+                            raise InputError(f"conflicting schedule field {name!r} for sheet {sheet}, entry "
+                                             f"{r['tag']}: {', '.join(sources[old])} and {shown_path(p)}; "
+                                             "reconcile the records explicitly before screening")
+                        chosen = old if old is not None else name
+                        e["fields"][chosen] = value
+                        sources.setdefault(chosen, [])
+                        if shown_path(p) not in sources[chosen]:
+                            sources[chosen].append(shown_path(p))
                     e["fields_file"] = shown_path(p)
+    for e in out.values():
+        for files in e.get("field_sources", {}).values():
+            files.sort()
+        reconcile_service(e)
     return out
+
+
+def reconcile_service(entry):
+    """A supplied source choice is inspectable provenance, never an authenticated approval."""
+    records = sorted(entry.get("service_records", []), key=lambda r: (r["file"], r["row"], r["service"]))
+    declarations = entry.get("service_declarations", [])
+    values = {r["service"] for r in records}
+    where = f"sheet {entry['sheet']}, entry {entry['tag']}"
+    if len(values) > 1 and not declarations:
+        raise InputError(f"conflicting schedule service for {where}; supply an exact service_resolution "
+                         "or reconcile the source records before screening; input order is not a revision policy")
+    choices = []
+    validated = []
+    for declaration in declarations:
+        resolution = declaration["resolution"]
+        if (not isinstance(resolution, dict) or set(resolution) != {"candidates", "selected", "basis", "status"}
+                or not isinstance(resolution["basis"], str) or not resolution["basis"].strip()
+                or resolution["status"] not in ("draft", "reviewed")):
+            raise InputError(f"invalid service_resolution for {where}; provide candidates, selected, "
+                             "nonempty basis and declared status draft or reviewed")
+        candidates = resolution["candidates"]
+        def valid_record(record):
+            return (isinstance(record, dict) and set(record) == {"file", "row", "service"}
+                    and isinstance(record["file"], str) and bool(record["file"].strip())
+                    and type(record["row"]) is int and record["row"] > 0
+                    and isinstance(record["service"], str) and bool(record["service"].strip()))
+        if (not isinstance(candidates, list) or not candidates or not all(valid_record(r) for r in candidates)
+                or not valid_record(resolution["selected"])):
+            raise InputError(f"invalid service_resolution candidate/selected records for {where}; "
+                             "each needs exact file, one-based row and service text")
+        encoded = [json.dumps(r, sort_keys=True, ensure_ascii=False) for r in candidates]
+        if len(set(encoded)) != len(encoded):
+            raise InputError(f"duplicate service_resolution candidates for {where}")
+        if sorted(candidates, key=lambda r: (r["file"], r["row"], r["service"])) != records:
+            raise InputError(f"stale or mismatched service_resolution candidates for {where}; "
+                             "retain every supplied source record exactly")
+        if resolution["selected"] not in candidates:
+            raise InputError(f"service_resolution selected record is not a candidate for {where}")
+        choices.append(resolution["selected"])
+        validated.append({"file": declaration["file"], "row": declaration["row"],
+                          "status": resolution["status"], "basis": resolution["basis"],
+                          "selected": resolution["selected"]})
+    if choices and any(choice != choices[0] for choice in choices[1:]):
+        raise InputError(f"conflicting service_resolution selections for {where}; reconcile the declarations")
+    entry["service"] = choices[0]["service"] if choices else next(iter(values), None)
+    if declarations:
+        entry["service_reconciliation"] = {
+            "sheet": entry["sheet"], "tag": entry["tag"], "candidates": records, "selected": choices[0],
+            "declarations": sorted(validated, key=lambda r: (r["file"], r["row"], r["status"], r["basis"])),
+            "authority": "Supplied service choice; source suitability and organizational approval unverified."}
+
+
+def same_value(a, b):
+    """Preserve types as well as values: False is not a zero measurement."""
+    return json.dumps(a, sort_keys=True, ensure_ascii=False) == json.dumps(b, sort_keys=True, ensure_ascii=False)
+
+
+def validate_named_values(values, where):
+    if not isinstance(values, dict):
+        raise InputError(f"{where}: named fields must be an object")
+    seen = set()
+    for name in values:
+        if not isinstance(name, str) or not name.strip() or name != name.strip():
+            raise InputError(f"{where}: field names must be nonempty text without surrounding whitespace")
+        folded = name.casefold()
+        if folded in seen:
+            raise InputError(f"{where}: ambiguous case-variant field name {name!r}; reconcile the records first")
+        seen.add(folded)
 
 
 def load_loops(path):
@@ -237,6 +355,8 @@ def check_shapes(m, path):
                                    f"{json.dumps(sr)[:40]}")
             if "facts" in r and r["facts"] is not None and not isinstance(r["facts"], dict):
                 bad.append(f"{where}.facts must be an object of named values, not {type(r['facts']).__name__}")
+            elif r.get("facts") is not None:
+                validate_named_values(r["facts"], f"{where}.facts")
             review = r.get("ops_review")
             if review is not None:
                 if not isinstance(review, dict):
@@ -350,7 +470,7 @@ def from_twin(m, schedule, source_paths=None):
                                       sch and sch.get("service")]))
         items.append(Item(id=u["id"], tag=tag, kind="equipment", type=u.get("class"), isa=None, text=text,
                           unit=u["id"], stream=None, sheet=str(sheets[0]), system=u.get("system"),
-                          schedule=sch, facts={}, field=f"units[{u['id']}]",
+                          schedule=sch, facts=dict(u.get("facts") or {}), field=f"units[{u['id']}]",
                           raw_tag=u.get("tag")))
     for it in m.get("instruments", []):
         isa, kindtxt = it.get("isa_letters") or isa_of(it.get("tag")), it.get("instrument_kind") or ""
@@ -373,17 +493,17 @@ def from_twin(m, schedule, source_paths=None):
         items.append(Item(id=it["id"], tag=norm_tag(it.get("tag")), kind=kind, isa=isa, variable=it.get("variable"),
                           text=norm_tag(it.get("tag")) or "", unit=it.get("unit"), parent=it.get("parent"),
                           stream=None, sheet=str((it.get("provenance") or [{}])[0].get("sheet")),
-                          system=it.get("system"), facts={}, signal=sig, field=f"instruments[{it['id']}]",
+                          system=it.get("system"), facts=dict(it.get("facts") or {}), signal=sig, field=f"instruments[{it['id']}]",
                           raw_tag=it.get("tag")))
     for it in m.get("line_items", []):
         items.append(Item(id=it["id"], tag=norm_tag(it.get("tag")), kind="line_item", type=it.get("class"),
                           text=it.get("description") or "", unit=it.get("unit"), stream=None,
                           sheet=str((it.get("provenance") or [{}])[0].get("sheet")), system=it.get("system"),
-                          facts={}, field=f"line_items[{it['id']}]"))
+                          facts=dict(it.get("facts") or {}), field=f"line_items[{it['id']}]"))
     for it in m.get("offpage_connectors", []):
         items.append(Item(id=it["id"], tag=None, kind="offpage", text=norm_text(it.get("text")),
                           unit=it.get("unit"), stream=None, system=it.get("system"),
-                          sheet=str((it.get("provenance") or [{}])[0].get("sheet")), facts={},
+                          sheet=str((it.get("provenance") or [{}])[0].get("sheet")), facts=dict(it.get("facts") or {}),
                           field=f"offpage_connectors[{it['id']}].text"))
     for it in items:
         it["system_code"] = (systems.get(it.get("system")) or {}).get("system_code")
@@ -430,6 +550,7 @@ class Model:
             raise InputError(f"can't read {shown_path(path)}: 'meta' must be an object, not "
                              f"{type(self.m['meta']).__name__}")
         self.twin = (self.m.get("meta") or {}).get("model_kind") == "extracted_twin"
+        self.schedule_sources = sorted({shown_path(p) for p in schedule_paths or []})
         if not (self.m.get("units") or self.m.get("instruments")):
             raise InputError(f"the model {shown_path(path)} has no units or instruments: is this the right file? "
                              "Expected a process model (units, streams, instruments, ...) or an extracted twin "
@@ -438,7 +559,17 @@ class Model:
         try:
             self.active_m, self.review_exclusions = screening_model(self.m)
             self.schedule = load_schedule(schedule_paths)
+            if schedule_paths and not self.twin:
+                raise InputError("--schedule applies only to extracted twins; put native model values in facts "
+                                 "with their source basis instead of supplying an ignored schedule")
             self.items = from_twin(self.active_m, self.schedule, self.source_paths) if self.twin else from_hand(self.active_m)
+            for item in self.items:
+                fields = (item.get("schedule") or {}).get("fields") or {}
+                for name, value in (item.get("facts") or {}).items():
+                    other = next((n for n in fields if n.casefold() == name.casefold()), None)
+                    if other is not None and not same_value(value, fields[other]):
+                        raise InputError(f"conflicting model fact and schedule field {name!r} for {item.label()}; "
+                                         "reconcile the records explicitly before screening")
         except (KeyError, TypeError, AttributeError, ValueError) as e:
             # A record inside the model or schedule is missing a field or has the wrong shape: refuse and name it,
             # rather than crash or screen a model that was only partly read.
@@ -642,6 +773,9 @@ def field_state(item, name):
         for k, v in sch["fields"].items():
             if k.upper() == name.upper():
                 where = f"sheet {sch['sheet']} equipment schedule, entry {sch['tag']}, field {k}"
+                files = {p for paths in sch.get("field_sources", {}).values() for p in paths}
+                if len(files) > 1:
+                    where += " (source: " + ", ".join(sch["field_sources"][k]) + ")"
                 if v is None or (isinstance(v, str) and (not v.strip() or PLACEHOLDER.match(v))):
                     return ("blank", v, where)
                 return ("present", v, where)
@@ -815,7 +949,21 @@ def evidence_line(model, it, role):
         u = model.by_id.get(it["unit"])
         bits.append(f"at {u.label() if u else it['unit']}" + (" (by the extraction's attribution)" if model.twin
                                                                  else ""))
-    return {"role": role, "id": it["id"], "tag": it.get("tag"), "text": " ".join(bits), "field": it["field"]}
+    result = {"role": role, "id": it["id"], "tag": it.get("tag"), "text": " ".join(bits), "field": it["field"]}
+    resolution = (it.get("schedule") or {}).get("service_reconciliation")
+    if resolution:
+        result["service_reconciliation"] = resolution
+        result["text"] += " " + service_reconciliation_text(resolution)
+    return result
+
+
+def service_reconciliation_text(resolution):
+    candidates = "; ".join(f"{r['file']} row {r['row']}: {json.dumps(r['service'], ensure_ascii=False)}"
+                           for r in resolution["candidates"])
+    declarations = "; ".join(f"{r['file']} row {r['row']} ({r['status']}): {r['basis']}"
+                             for r in resolution["declarations"])
+    return (f"Supplied service choice, unverified: {json.dumps(resolution['selected']['service'], ensure_ascii=False)}. "
+            f"Original candidates: {candidates}. Declared basis: {declarations}. " + resolution["authority"])
 
 
 def ruled_out_by_unit(model, aw, key, anchors):
@@ -955,9 +1103,8 @@ drawing** (collect it from the place named). Systems listed under "Left out" wer
 def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=None, *, catalog_path=CATALOG):
     out = prepare_output(out, ("questions.json", "screen.md"), [catalog_path, *model.source_paths])
     doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(catalog_path),
-           "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched, "schedules": sorted({e["file"] for e in model.schedule.values()} |
-                                                           {e["fields_file"] for e in model.schedule.values()
-                                                            if e.get("fields_file")}),
+           "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched,
+           "schedules": model.schedule_sources,
            "questions_run": [q["id"] for q in catalog["questions"] if not only or q["id"] in only],
            "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings "
                    "are computed; typical benefits are the cited sources' general wording.",
@@ -975,6 +1122,10 @@ def write_outputs(model, catalog, found, not_checked, quiet, excl, out, only=Non
 
 
 def add_review_exclusions(model, doc):
+    reconciliations = [entry["service_reconciliation"] for _, entry in sorted(model.schedule.items())
+                       if entry.get("service_reconciliation")]
+    if reconciliations:
+        doc["service_reconciliations"] = reconciliations
     # Omit empty fields to retain historical unreviewed packets byte for byte.
     if model.review_exclusions:
         doc["review_exclusions"] = model.review_exclusions
@@ -1030,6 +1181,14 @@ def render_md(model, catalog, doc):
          f"Model: `{doc['source_model']}`. Questions: `{doc['catalog']}`"
          + (f". Loop list: `{doc['loops']}`" if doc["loops"] else "")
          + ("".join(f". Schedule: `{s}`" for s in doc["schedules"])) + ".", ""]
+    if doc.get("service_reconciliations"):
+        L += ["## Supplied service choices", "",
+              "These exact source selections affect screening eligibility. Draft/reviewed labels are supplied "
+              "provenance, not authenticated authority or engineering acceptance.", ""]
+        for resolution in doc["service_reconciliations"]:
+            L.append(f"- Sheet {resolution['sheet']}, `{resolution['tag']}`: "
+                     + service_reconciliation_text(resolution))
+        L.append("")
     if doc.get("loop_rows_unmatched"):
         L += [f"**Loop list rows naming no tag in the model** (not used to judge what is read or driven): "
               f"{', '.join(doc['loop_rows_unmatched'])}.", ""]
@@ -1091,7 +1250,7 @@ def render_md(model, catalog, doc):
             L.append(f"- {reason}: {', '.join(tags)}")
         L.append("")
     used = sorted({s for f in doc["questions"] for s in (f["typical_benefit"].get("source") or [])},
-                  key=lambda s: int(s[1:]))
+                  key=lambda s: (0, int(s[1:])) if re.fullmatch(r"S\d+", s) else (1, s.casefold()))
     if used:
         L += ["## Sources cited above", ""]
         for s in used:
@@ -1397,7 +1556,7 @@ def render_rollup_md(doc, catalog):
               "Not a clean bill of health: the models may not show what these questions look for. "
               + ", ".join(doc["quiet_at_every_site"]) + ".", ""]
     used = sorted({s for q in doc["questions"] for s in (q["typical_benefit"].get("source") or [])},
-                  key=lambda s: int(s[1:]))
+                  key=lambda s: (0, int(s[1:])) if re.fullmatch(r"S\d+", s) else (1, s.casefold()))
     if used:
         L += ["## Sources cited above", ""]
         L += [f"- {s}: {catalog['sources'][s]['title']}. {catalog['sources'][s]['url']} "
@@ -1437,8 +1596,8 @@ def main(argv=None):
                     help="combine screens from several sites (repeatable): each a --out folder holding questions.json; "
                          "the site is named after the folder unless NAME= is given. Writes rollup.json and rollup.md")
     a = ap.parse_args(argv)
-    catalog = json.loads(Path(a.catalog).read_text(encoding="utf-8"))
     try:
+        catalog = read_json(a.catalog, "catalog")
         validate_field_scopes(catalog)
     except InputError as e:
         print(f"error: {e}", file=sys.stderr)
@@ -1486,8 +1645,7 @@ def main(argv=None):
     else:
         doc = {"schema": SCHEMA, "source_model": shown_path(model.path), "catalog": shown_path(a.catalog),
                "loops": model.loop_source, "loop_rows_unmatched": model.loop_unmatched,
-               "schedules": sorted({e["file"] for e in model.schedule.values()} |
-                                   {e["fields_file"] for e in model.schedule.values() if e.get("fields_file")}),
+               "schedules": model.schedule_sources,
                "questions": found, "not_checked": nc,
                "did_not_fire": quiet, "left_out": {k: sorted(set(v)) for k, v in excl.items()},
                "counts": {"findings": len(found), "by_family": dict(count_by(found, "family"))}}

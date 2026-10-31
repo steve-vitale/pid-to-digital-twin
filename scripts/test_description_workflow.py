@@ -3,6 +3,8 @@
 Uses authored illustrative fixtures, Pillow and native generators; no model calls or network.
 """
 import copy
+import csv
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -41,6 +43,17 @@ class DescriptionWorkflowTests(unittest.TestCase):
         false = json.loads((case / 'controls/false-shutdown.json').read_bytes())
         # Pin the exposed limit: alarm semantics are retained in output but not graded by native-facts-v1.
         self.assertEqual(benchmark.native_facts(model), benchmark.native_facts(false))
+        # Every action claim is now visible beside its quote even though legacy selected-field scoring misses it.
+        reviews=[]
+        for candidate in (model,false):
+            packet=workflow.interpretation_review(candidate,(case/'source.txt').read_bytes())
+            rows=list(csv.DictReader(io.StringIO(packet['interpretation_review.csv'].decode('utf-8'))))
+            row=next(r for r in rows if r['model_pointer']=='/instruments/0/alarm_action_basis')
+            self.assertEqual(row['verdict'],'unreviewed')
+            self.assertIn('alarm',json.loads(row['source_quote_json']).lower())
+            reviews.append(row)
+        self.assertNotEqual(reviews[0]['value_json'],reviews[1]['value_json'])
+        self.assertEqual(reviews[0]['source_quote_json'],reviews[1]['source_quote_json'])
         initial = json.loads((case / 'v1/facts.json').read_bytes())['facts']
         expanded = json.loads((case / 'v2/facts.json').read_bytes())['facts']
         self.assertEqual({json.dumps(x) for x in expanded} - {json.dumps(x) for x in initial},
@@ -62,6 +75,28 @@ class DescriptionWorkflowTests(unittest.TestCase):
 
     def check_value(self, value):
         return workflow.check(self.packet, self.answer(value))
+
+    def test_review_packet_preserves_nested_values_and_exposes_uncited_source(self):
+        answer=workflow.reference_answer()
+        record=answer['model']['units'][0]
+        record['extra']={'a/b~c':[None,False,0,{},[]],'source':'source.txt:L8-L8'}
+        record['name']='=SUM(1,2)'
+        files=workflow.interpretation_review(answer['model'],workflow.REFERENCE_SOURCE.encode('utf-8'))
+        rows=list(csv.DictReader(io.StringIO(files['interpretation_review.csv'].decode('utf-8'))))
+        values={r['model_pointer']:json.loads(r['value_json']) for r in rows}
+        self.assertEqual([values['/units/0/extra/a~1b~0c/'+str(i)] for i in range(5)],
+                         [None,False,0,{},[]])
+        self.assertEqual(values['/units/0/name'],'=SUM(1,2)')
+        self.assertTrue(all(r['verdict']=='unreviewed' for r in rows))
+        self.assertTrue(all(not cell.startswith(('=','+','-','@')) for r in rows for cell in r.values()))
+        nested=next(r for r in rows if r['model_pointer']=='/units/0/extra/a~1b~0c/0')
+        self.assertEqual(nested['source_locator'],'source.txt:L8-L8')
+        self.assertEqual(json.loads(nested['source_quote_json']),workflow.REFERENCE_SOURCE.splitlines()[7])
+        coverage=list(csv.DictReader(io.StringIO(files['source_coverage.csv'].decode('utf-8'))))
+        self.assertEqual(len(coverage),8)
+        self.assertEqual(json.loads(coverage[0]['citing_record_pointers_json']),[])
+        self.assertIn('/units/0',json.loads(coverage[7]['citing_record_pointers_json']))
+        self.assertTrue(all(r['review_state']=='unreviewed' for r in coverage))
 
     def test_prepare_runs_without_site_packages_and_preserves_raw_source(self):
         raw = b'\xef\xbb\xbf' + workflow.REFERENCE_SOURCE.replace('\n', '\r\n').encode('utf-8')
@@ -98,6 +133,8 @@ class DescriptionWorkflowTests(unittest.TestCase):
                 self.assertTrue(report['ok'], report)
                 self.assertEqual((out / 'source.txt').read_bytes(), (EXAMPLE / source).read_bytes())
                 manifest = json.loads((out / 'build.json').read_bytes())
+                self.assertIn('interpretation_review.csv',manifest['files_sha256'])
+                self.assertIn('source_coverage.csv',manifest['files_sha256'])
                 self.assertIn('REVIEW.md', manifest['files_sha256'])
                 self.assertEqual(set(manifest['files_sha256']),
                                  {p.relative_to(out).as_posix() for p in out.rglob('*') if p.is_file()} - {'build.json'})
