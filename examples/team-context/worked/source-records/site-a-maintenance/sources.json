@@ -1,0 +1,20 @@
+{
+  "schema": "context-sources-1",
+  "documents": [
+    {
+      "id": "INSPECTION-NOTE",
+      "revision": "A",
+      "path": "inspection-note.txt",
+      "sha256": "9721180a211ddacd6204c1b25f9bf959bfab78ffdd283e248a0c901b8a4ee018",
+      "locators": [
+        {
+          "id": "inspection-note",
+          "locator": "inspection-note.txt:L1-L3",
+          "questions": [
+            "MAINT@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

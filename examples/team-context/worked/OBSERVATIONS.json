@@ -1,0 +1,370 @@
+{
+  "metric_definitions": "Frozen before execution in private author controls; per-command wall time also retained privately.",
+  "post_source_refresh_answers": [
+    {
+      "packet": "site-a-process",
+      "question": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "source": "PROCESS-BASIS",
+      "freshness": "stale",
+      "changed": [
+        "source revision/bytes/locator"
+      ]
+    },
+    {
+      "packet": "site-a-ei",
+      "question": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "source": "PROCESS-BASIS",
+      "freshness": "stale",
+      "changed": [
+        "source revision/bytes/locator"
+      ]
+    },
+    {
+      "packet": "site-a-ei",
+      "question": "LOOP@P-1",
+      "answer_id": "loop-source",
+      "source": "LOOP-NOTE",
+      "freshness": "current",
+      "changed": []
+    },
+    {
+      "packet": "site-a-maintenance",
+      "question": "MAINT@P-1",
+      "answer_id": "inspection-source",
+      "source": "INSPECTION-NOTE",
+      "freshness": "current",
+      "changed": []
+    },
+    {
+      "packet": "site-b-process",
+      "question": "BASIS@P-1",
+      "answer_id": "site-b-source",
+      "source": "SITE-B-BASIS",
+      "freshness": "current",
+      "changed": []
+    }
+  ],
+  "dependent_stale_count": 2,
+  "independent_current_count": 3,
+  "selected_packet_sizes": [
+    {
+      "packet": "site-a-process",
+      "scope": "Site A Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-process-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Process design-basis publication; incoming B review",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "2a023ba874024777a4cd9cc37ffdc03495b233ab85558b157df43fcb54d1704c",
+      "context_raw_sha256": "897767f27de41951e419fd2e02216b025ac8b77de478afae2fbd3852955d8720",
+      "questions_raw_sha256": "cc8c6ac12f9ead5ae308ac7f9b1eafd61b5cddd7f5ca9d8d9cabb181a08a1d36",
+      "graph_bytes": 3158,
+      "context_bytes": 4522,
+      "declared_source_bytes_sum": 302,
+      "sources": [
+        {
+          "id": "PROCESS-BASIS",
+          "revision": "B",
+          "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+          "bytes": 302,
+          "retained_original": "source-records/site-a-process/sources/B/process-basis.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-a-ei",
+      "scope": "Site A E&I",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-controls-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "E&I interpretation and unresolved configuration/proposals; no logic authorization",
+      "selected_state": "proposals-forward",
+      "graph_raw_sha256": "abf11661e5e9d7746dc671d3b6bbd0417d03991e92baac231f1ce68bf8198b73",
+      "context_raw_sha256": "05593bf32c7e3824c386ddcc1ddcd6e2c2233fbb24197bb260c70120e2a24c5d",
+      "questions_raw_sha256": "a6359354657f5b415ce2752170046f6768f73d56dc9f851207e5122b1aae866d",
+      "graph_bytes": 5375,
+      "context_bytes": 19313,
+      "declared_source_bytes_sum": 867,
+      "sources": [
+        {
+          "id": "PROCESS-BASIS",
+          "revision": "B",
+          "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+          "bytes": 302,
+          "retained_original": "source-records/site-a-ei/sources/B/process-basis.txt"
+        },
+        {
+          "id": "LOOP-NOTE",
+          "revision": "A",
+          "raw_sha256": "8f37eaca002bd7b7bdbdeda1df4773a2cf42e339e95d3306c8f6437e4e1b258d",
+          "bytes": 191,
+          "retained_original": "source-records/site-a-ei/loop-note.txt"
+        },
+        {
+          "id": "PROPOSAL-OPTIONS",
+          "revision": "A",
+          "raw_sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+          "bytes": 374,
+          "retained_original": "source-records/site-a-ei/proposal-options.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-a-maintenance",
+      "scope": "Site A Maintenance",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-maintenance-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Maintenance inspection/vendor evidence",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "5c0137f392dc7a7c6c63e6856cd7dcbbf554830b2921faf3453772114712af74",
+      "context_raw_sha256": "9edb8dd990a57d88a1960208ac6cf12a92e7d551750539a2d1a908767c77106a",
+      "questions_raw_sha256": "ae55a884dfbe542e2d4db08bf95686d38106ebef22611227e281f979fd150fdb",
+      "graph_bytes": 3063,
+      "context_bytes": 4449,
+      "declared_source_bytes_sum": 196,
+      "sources": [
+        {
+          "id": "INSPECTION-NOTE",
+          "revision": "A",
+          "raw_sha256": "9721180a211ddacd6204c1b25f9bf959bfab78ffdd283e248a0c901b8a4ee018",
+          "bytes": 196,
+          "retained_original": "source-records/site-a-maintenance/inspection-note.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-b-process",
+      "scope": "Site B Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-b:pump-001",
+      "owning_role": "training-site-b-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Separate Site B process basis",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "33ec2e8e52a5b33a3a4574fd29c6e5bdf9b30126597e45b2795562cc6fc3d49b",
+      "context_raw_sha256": "0675e77aef7ca57e101e522934c986e2498f4034aa453a4e6f0e46930d3cbaf0",
+      "questions_raw_sha256": "8979c22b18464639fdc77258082ffecb0b74be70e933e01cbeed9e470013f1f2",
+      "graph_bytes": 3038,
+      "context_bytes": 4385,
+      "declared_source_bytes_sum": 180,
+      "sources": [
+        {
+          "id": "SITE-B-BASIS",
+          "revision": "A",
+          "raw_sha256": "5089e79f94ec6fdd5720d101017fbad02c254d09fd2fcb6b7c30ccb033576bb3",
+          "bytes": 180,
+          "retained_original": "source-records/site-b-process/site-b-basis.txt"
+        }
+      ]
+    }
+  ],
+  "per_command_wall_seconds": [
+    {
+      "label": "site-a-process-graph-check",
+      "exit": 0,
+      "wall_seconds": 0.10909579999861307
+    },
+    {
+      "label": "site-a-process-prepare-A",
+      "exit": 0,
+      "wall_seconds": 0.167096400000446
+    },
+    {
+      "label": "site-a-process-apply-A",
+      "exit": 0,
+      "wall_seconds": 0.14742349999869475
+    },
+    {
+      "label": "site-a-ei-graph-check",
+      "exit": 0,
+      "wall_seconds": 0.10030060000281082
+    },
+    {
+      "label": "site-a-ei-prepare-A",
+      "exit": 0,
+      "wall_seconds": 0.15017810000063037
+    },
+    {
+      "label": "site-a-ei-apply-A",
+      "exit": 0,
+      "wall_seconds": 0.1697625999986485
+    },
+    {
+      "label": "site-a-maintenance-graph-check",
+      "exit": 0,
+      "wall_seconds": 0.13270250000277883
+    },
+    {
+      "label": "site-a-maintenance-prepare-A",
+      "exit": 0,
+      "wall_seconds": 0.3190571999984968
+    },
+    {
+      "label": "site-a-maintenance-apply-A",
+      "exit": 0,
+      "wall_seconds": 0.23416619999989052
+    },
+    {
+      "label": "site-b-process-graph-check",
+      "exit": 0,
+      "wall_seconds": 0.13802289999875939
+    },
+    {
+      "label": "site-b-process-prepare-A",
+      "exit": 0,
+      "wall_seconds": 0.20765899999969406
+    },
+    {
+      "label": "site-b-process-apply-A",
+      "exit": 0,
+      "wall_seconds": 0.1823934999993071
+    },
+    {
+      "label": "site-a-process-bad-pin-absent",
+      "exit": 2,
+      "wall_seconds": 0.1377914000004239
+    },
+    {
+      "label": "site-a-process-bad-pin-populated",
+      "exit": 2,
+      "wall_seconds": 0.13233770000078948
+    },
+    {
+      "label": "site-a-ei-bad-pin-absent",
+      "exit": 2,
+      "wall_seconds": 0.13752849999946193
+    },
+    {
+      "label": "site-a-ei-bad-pin-populated",
+      "exit": 2,
+      "wall_seconds": 0.13781359999848064
+    },
+    {
+      "label": "site-a-process-refresh",
+      "exit": 0,
+      "wall_seconds": 0.1618945000009262
+    },
+    {
+      "label": "site-a-ei-refresh",
+      "exit": 0,
+      "wall_seconds": 0.16769190000195522
+    },
+    {
+      "label": "site-a-maintenance-refresh",
+      "exit": 0,
+      "wall_seconds": 0.138918200002081
+    },
+    {
+      "label": "site-b-process-refresh",
+      "exit": 0,
+      "wall_seconds": 0.1357029999999213
+    },
+    {
+      "label": "site-a-ei-old-sheet-absent",
+      "exit": 2,
+      "wall_seconds": 0.12648360000093817
+    },
+    {
+      "label": "site-a-ei-old-sheet-populated",
+      "exit": 2,
+      "wall_seconds": 0.11359620000075665
+    },
+    {
+      "label": "ei-prepare-B",
+      "exit": 0,
+      "wall_seconds": 0.1495044000002963
+    },
+    {
+      "label": "ei-apply-B",
+      "exit": 0,
+      "wall_seconds": 0.1315294999985781
+    },
+    {
+      "label": "ei-prepare-proposals",
+      "exit": 0,
+      "wall_seconds": 0.1686941999978444
+    },
+    {
+      "label": "ei-apply-proposals-forward",
+      "exit": 0,
+      "wall_seconds": 0.13492290000067442
+    },
+    {
+      "label": "ei-apply-proposals-reverse",
+      "exit": 0,
+      "wall_seconds": 0.13754079999853275
+    },
+    {
+      "label": "site-a-process-A-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.10545660000207135
+    },
+    {
+      "label": "site-a-process-refreshed-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.10276549999980489
+    },
+    {
+      "label": "site-a-ei-A-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.11371929999950225
+    },
+    {
+      "label": "site-a-ei-refreshed-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.11900279999827035
+    },
+    {
+      "label": "site-a-ei-B-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.1185698000008415
+    },
+    {
+      "label": "site-a-ei-proposals-forward-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.11360260000219569
+    },
+    {
+      "label": "site-a-ei-proposals-reverse-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.1019826000010653
+    },
+    {
+      "label": "site-a-maintenance-A-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.10205640000276617
+    },
+    {
+      "label": "site-a-maintenance-refreshed-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.09678709999934654
+    },
+    {
+      "label": "site-b-process-A-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.09981490000063786
+    },
+    {
+      "label": "site-b-process-refreshed-selected-check",
+      "exit": 0,
+      "wall_seconds": 0.09623160000046482
+    }
+  ],
+  "environment": "One actual Windows environment and tiny fictional workload; not throughput/large-team capacity or human review time.",
+  "company_acceptance": "not performed",
+  "recipient_acceptance": "not performed"
+}

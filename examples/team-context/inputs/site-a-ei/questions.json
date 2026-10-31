@@ -1,0 +1,36 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "All questions in this exercise are authored source questions; none are catalog findings.",
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked"
+    },
+    {
+      "id": "LOOP@P-1",
+      "question": "What measurement is named in the independent loop note?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked"
+    },
+    {
+      "id": "PROPOSAL@P-1",
+      "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked"
+    }
+  ]
+}

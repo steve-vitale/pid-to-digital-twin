@@ -264,10 +264,11 @@
     "scripts/test_attempts_ledger.py",
     "scripts/test_script_index.py",
     "scripts/test_feature_catalog.py",
-    "scripts/test_run_tests.py"
+    "scripts/test_run_tests.py",
+    "scripts/test_checkout_contracts.py"
    ],
    "job": "Decide whether to trust this repository at all",
-   "you_need": "Python alone for claim and freshness checks; full tests also need pinned packages and required public caches; optional-source omissions are reported separately",
+   "you_need": "Python alone for claim and freshness checks; full tests also need Git, pinned packages and required public caches; optional-source omissions are reported separately",
    "time": "Under a minute for the claim check",
    "you_get": "Headline claims checked against results files, stage freshness, and selected tests with skipped cases and coverage limits visible",
    "why": "Before trusting any tool with your plant's data, you should be able to check its claims yourself in minutes."
@@ -514,7 +515,8 @@
    "tests": [
     "scripts/test_context_register.py",
     "scripts/test_context_examples.py",
-    "scripts/test_pump_revision.py"
+    "scripts/test_pump_revision.py",
+    "scripts/test_team_context.py"
    ],
    "job": "Build a first evidence and decision packet for company handoff",
    "why": "A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination.",

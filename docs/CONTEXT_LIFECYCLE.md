@@ -162,6 +162,12 @@ Use the [acceptance plan](ACCEPTANCE.md) to distinguish these offline controls f
 
 ## Prove one complete loop before promising ongoing synchronization
 
+The [four-packet exercise](../examples/team-context/README.md) demonstrates local composition using invented
+Process, E&I, Maintenance and second-site records. Its explicit source-only revision reopens two dependent
+answers while three independent answers stay current after actual refresh. Same-base proposed values remain
+disputed in both input orders. The company identity mapping is supplied teaching data, and local freshness is
+not proof of engineering applicability. This exercises existing local tools; company acceptance below is separate.
+
 First establish one useful investigation with a named engineer, operational counterpart and source owner through
 the [pilot brief](../examples/first-pilot/README.md). Then rehearse process engineering, maintenance and controls
 as three participant roles. These are proposed integration acceptance cases, not completed company or large-team

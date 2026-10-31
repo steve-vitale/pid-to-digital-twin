@@ -1,0 +1,67 @@
+{
+  "kind": "teaching-composition-index-input",
+  "product_schema": false,
+  "scope": "Supplied and visibly reviewed fictional mapping, not resolver/merge/organization authority.",
+  "packets": [
+    {
+      "packet": "site-a-process",
+      "scope": "Site A Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-process-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Process design-basis publication; incoming B review"
+    },
+    {
+      "packet": "site-a-ei",
+      "scope": "Site A E&I",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-controls-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "E&I interpretation and unresolved configuration/proposals; no logic authorization"
+    },
+    {
+      "packet": "site-a-maintenance",
+      "scope": "Site A Maintenance",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-maintenance-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Maintenance inspection/vendor evidence"
+    },
+    {
+      "packet": "site-b-process",
+      "scope": "Site B Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-b:pump-001",
+      "owning_role": "training-site-b-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Separate Site B process basis"
+    }
+  ],
+  "published_dependency": {
+    "publication": "training:site-a:process-basis",
+    "publisher": "site-a-process",
+    "recipient": "site-a-ei",
+    "transfer": "explicit staged byte copy; no subscription",
+    "revisions": {
+      "A": {
+        "path": "publications/process-basis-A.txt",
+        "raw_sha256": "5fb8bfc9f50445f0083d6ff5d915f5ff5f5d9d07d161eed6869e7587ce822642"
+      },
+      "B": {
+        "path": "publications/process-basis-B.txt",
+        "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc"
+      }
+    }
+  }
+}

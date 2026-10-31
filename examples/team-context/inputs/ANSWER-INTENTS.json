@@ -1,0 +1,118 @@
+{
+  "site-a-process/A": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Revision A states a draft 200 kPa basis; installed suitability remains unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_id": "PROCESS-BASIS",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ],
+  "site-a-ei/A": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Received Process revision A states 200 kPa; configuration review remains unresolved.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_id": "PROCESS-BASIS",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    },
+    {
+      "question_id": "LOOP@P-1",
+      "answer_id": "loop-source",
+      "claim_key": "listed-measurement",
+      "value": "flow",
+      "answer": "Independent loop note lists flow indication; actual configuration remains unknown.",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "source_id": "LOOP-NOTE",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ],
+  "site-a-ei/B": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "220 kPa",
+      "answer": "Received Process revision B states 220 kPa; no logic/plant correction or suitability acceptance follows.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_id": "PROCESS-BASIS",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ],
+  "site-a-maintenance/A": [
+    {
+      "question_id": "MAINT@P-1",
+      "answer_id": "inspection-source",
+      "claim_key": "stated-inspection-date",
+      "value": "unknown",
+      "answer": "Independent record leaves inspection date unspecified; actual inspection remains unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_id": "INSPECTION-NOTE",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ],
+  "site-b-process/A": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "site-b-source",
+      "claim_key": "site-b-supplied-pressure-kPa",
+      "value": "150 kPa",
+      "answer": "Separate Site B source states draft 150 kPa; actual suitability unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_id": "SITE-B-BASIS",
+      "reviewer": "training-source-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ],
+  "proposals": [
+    {
+      "question_id": "PROPOSAL@P-1",
+      "answer_id": "process-option",
+      "claim_key": "proposed-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Source records Process reviewer option 200 kPa; unresolved proposal only.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "source_id": "PROPOSAL-OPTIONS",
+      "reviewer": "training-process-proposal-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    },
+    {
+      "question_id": "PROPOSAL@P-1",
+      "answer_id": "controls-option",
+      "claim_key": "proposed-pressure-kPa",
+      "value": "220 kPa",
+      "answer": "Source records E&I reviewer option 220 kPa; unresolved proposal only.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "source_id": "PROPOSAL-OPTIONS",
+      "reviewer": "training-controls-proposal-reviewer",
+      "source_match": "match",
+      "plant_truth": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "All questions in this exercise are authored source questions; none are catalog findings.",
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-controls-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "unanswered",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-487c47200c1a4964dbc0934f41dbb1a23379d21fdee618fe2188b012113025d1",
+            "answer_id": "basis-source",
+            "freshness": "stale",
+            "changed": [
+              "source revision/bytes/locator"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LOOP@P-1",
+      "question": "What measurement is named in the independent loop note?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "LOOP@P-1",
+          "question": "What measurement is named in the independent loop note?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-controls-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "answered",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-8652d42a47aa8ad5271ada25d0cb27e777789671bbd34f873d2f88684469c5fa",
+            "answer_id": "loop-source",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "PROPOSAL@P-1",
+      "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "PROPOSAL@P-1",
+          "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": null,
+        "ownership": "needs_owner",
+        "assigned_by": null,
+        "assigned_on": null,
+        "state": "unanswered",
+        "disputed_claims": [],
+        "answers": []
+      }
+    }
+  ],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "a5db97a9d437911fd9d2fe92e2f34a7b7f56154fe6797f7c059e0f6a8de806be"
+  }
+}

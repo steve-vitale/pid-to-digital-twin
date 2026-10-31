@@ -1,0 +1,47 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "All questions in this exercise are authored source questions; none are catalog findings.",
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis does the separate Site B publication state?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the separate Site B publication state?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-site-b-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "partial",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-bec0229cbf7fbf2cefadd04e3f96fec62dee53c73755c5de5b0952f11bfe33dd",
+            "answer_id": "site-b-source",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    }
+  ],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "70b9f413a038cf61e752436f04e1644da9ec4b40073a6e5c08e5f80ff7c13b56"
+  }
+}

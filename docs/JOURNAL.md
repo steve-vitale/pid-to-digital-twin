@@ -5698,3 +5698,82 @@ validations. A separate different-drive run performs17producer CLIs and two pinn
 including both mixed-pair startup refusals. This is a local fictional workload, not company capacity or benefit.
 Subsequent edits are documentation and append-only review metadata; product code, fixtures and worked raw pins
 remain the tested bytes. No matrix method/input/output changes or model reruns are required for this example.
+
+## 122. Keep departmental context separate while making dependencies reviewable
+
+**A263 / N094.** A four-packet fictional exercise extends the local revision journey to Process, E&I,
+Maintenance and a second site. Each keeps its graph, questions, sources, owner and register. A supplied teaching
+map relates three Site A P-1 references to one canonical fixture identity while keeping Site B separate. Equal
+tags do not drive an automatic join, and the index is not a supported federation schema or identity resolver.
+
+Process and E&I explicitly stage the same published basis bytes. A source-only revision stales their two
+dependent answers after actual refresh; E&I's separately sourced loop answer, Maintenance and Site B remain
+current after their own real refreshes. E&I graph/question/asset/relation content stays exact in this fixture.
+A real configuration change could legitimately reopen more answers; whole-document pins are not field-level
+impact analysis. Earlier decisions, source evidence and ownership remain complete, with plant truth unknown.
+
+Two distinct attributed answers propose `200 kPa` and `220 kPa` against the same source, question, claim and base. Both
+remain proposed/partial with different reviewers and one question owner. Forward and reversed input orders keep
+the complete proposal records and disputed state; neither selects an accepted winner. This is local string-value
+dispute accounting, not engineering unit inference, simultaneous-writer control or company change approval.
+
+The 97-file example retains 33 input fixtures, 61 worked files and 3 ordinary entry files. Independent review executes
+38 fresh and 38 relocated producer/check/refusal CLIs, two complete stdio sessions with 24 responses and 101 assertions,
+and two mixed-pair startup refusals. Two further SDK inventory sessions make six protocol operations. Its 391 independent
+saved-result checks cover full bodies, histories, source pins and 27 closed local links. All original author and
+prior example proofs remain unchanged; this is fictional development evidence, not a new source-family/model score.
+
+Actual Git controls check all 97 index and checkout identities across two ingest and two checkout settings,
+including 94 raw-pinned evidence files and 3 ordinary LF entries. The original driver CRLF bytes and declared LF
+identity are distinguished explicitly; no source pin is recalculated to hide conversion. Independent review
+retains a real default-Git failure on deeply nested Windows paths, then validates a shorter path with spaces.
+The separately reviewed README paragraph advises a short Windows clone path. No global Git configuration changes.
+
+The observed workload records packet/source bytes and command times only. Its two stale/three current denominator
+belongs to the source-refresh stage, before later reviews and proposals. Shared publication copies count in each
+recipient's source-byte total. None of these observations establishes throughput, large-company capacity, human
+review savings, installed conditions or company acceptance. N062/N063 remain open; N094 closes only this bounded
+composition exercise. The existing core graph, context, question and MCP implementations are unchanged.
+
+## 123. Preserve committed byte contracts without rewriting the evidence
+
+**A264 / N095.** The first A263 full-suite run preserves a real failure: 63 of 66 scripts pass, with three
+failures and unchanged inputs during the run. Default Windows Git checkout had converted 20 unpinned contracts
+to CRLF. Statement-review and impact outputs then differed from regenerated LF bytes; the drawing truth check
+rejected its generator hash before reaching similarly changed model/layout dependencies. Canonical c6 Git blobs
+still match every saved contract. The failed suite, exact inputs and complete logs remain unchanged.
+
+The repair appends 12 scoped LF rules: three generated statement-review files, twelve generated impact/needs
+files, and five current drawing generator/model/layout dependencies. It changes no producer, verifier, golden,
+manifest, source pin, model value or metric. Each affected working file is rematerialized from its original Git
+blob only after checking the failed-run raw hash and exact CRLF-to-LF equality. Those 20 Git blobs stay unchanged.
+
+Private actual old checkouts pass all three affected test modules with autocrlf=false and reproduce all three
+failures with true. Both repaired modes pass the complete 13/39/32-case modules with no added skips. The new
+standard-library/Git regression checks 40 indexed and 80 checkout identities, existing raw packets and ordinary
+text/binary negative controls. Separate real drawing API calls retain current successes, historical refusals
+and genuine dependency-tamper refusals. Independent review repeats a fresh true checkout, all three workflows,
+the new regression and seven API controls. Original setup errors remain separate from product failures.
+
+**Open N096.** A separate probe finds an external-input contract mismatch: the writer's existing sha_file folds
+CRLF pairs before hashing text, while drawn_truth checks raw bytes. Four actual writer runs succeed and generate
+identical six-file outputs; the LF control verifies, but model-only, layout-only and combined CRLF inputs reject
+their newly generated manifests. Real model/layout edits remain refused. The separately frozen private verifier
+candidate uses the unchanged writer policy, with genuine edits, other whitespace and historical versions still
+requiring refusal. It is not included in N095; independent repair acceptance and current-code matrix validation
+remain separate gates. Raw original-document hashes and controlled source references are not normalized.
+
+A fresh reader review also finds two practical gaps in the team guide: no actionable manual/Copilot route and
+no record of who notices, sends and acknowledges a later publication. The revised README links one existing
+first-question brief per owned scope and gives a human-maintained publisher/consumer/location/trigger/receipt
+row. It explains the actual `200 kPa` to `220 kPa` draft-basis change without making it an installed setting.
+This is company-owned manual coordination, not an implemented notification service. Independent document review
+checks the route, source meaning and links; all 94 raw evidence pins and executable example bytes stay exact.
+
+The successor full run passes all 67 scripts in 391.37 seconds, with five explicit Windows unittest skips,
+two platform notices and no additional skipped-check notices. All tracked and new public bytes stay exact during
+the run. The original failed 63/66 run remains intact. Root selected readback also passes on a different drive
+with spaces in the path: 38 producer CLIs, two stdio sessions with 24 complete responses and both mixed-pair
+refusals. Later changes are documentation/review metadata only; executable code, fixtures, contracts and source
+values remain the tested bytes. N096's private correction is independently accepted separately, and public
+source-capture corrections remain unaccepted until their own current-candidate review.

@@ -1,0 +1,107 @@
+{
+  "kind": "teaching-exercise-expected-invariants",
+  "product_schema": false,
+  "states": {
+    "site-a-process/A": {
+      "BASIS@P-1": "partial"
+    },
+    "site-a-process/refreshed": {
+      "BASIS@P-1": "unanswered"
+    },
+    "site-a-ei/A": {
+      "BASIS@P-1": "partial",
+      "LOOP@P-1": "answered",
+      "PROPOSAL@P-1": "unanswered"
+    },
+    "site-a-ei/refreshed": {
+      "BASIS@P-1": "unanswered",
+      "LOOP@P-1": "answered",
+      "PROPOSAL@P-1": "unanswered"
+    },
+    "site-a-ei/B": {
+      "BASIS@P-1": "partial",
+      "LOOP@P-1": "answered",
+      "PROPOSAL@P-1": "unanswered"
+    },
+    "site-a-ei/proposals-forward": {
+      "BASIS@P-1": "partial",
+      "LOOP@P-1": "answered",
+      "PROPOSAL@P-1": "disputed"
+    },
+    "site-a-ei/proposals-reverse": {
+      "BASIS@P-1": "partial",
+      "LOOP@P-1": "answered",
+      "PROPOSAL@P-1": "disputed"
+    },
+    "site-a-maintenance/A": {
+      "MAINT@P-1": "partial"
+    },
+    "site-a-maintenance/refreshed": {
+      "MAINT@P-1": "partial"
+    },
+    "site-b-process/A": {
+      "BASIS@P-1": "partial"
+    },
+    "site-b-process/refreshed": {
+      "BASIS@P-1": "partial"
+    }
+  },
+  "freshness": {
+    "site-a-process/refreshed": {
+      "basis-source": "stale"
+    },
+    "site-a-ei/refreshed": {
+      "basis-source": "stale",
+      "loop-source": "current"
+    },
+    "site-a-maintenance/refreshed": {
+      "inspection-source": "current"
+    },
+    "site-b-process/refreshed": {
+      "site-b-source": "current"
+    }
+  },
+  "unchanged_records": {
+    "all_initial_decisions_and_ownership": "exact ordered prefixes in every later register",
+    "site-a-ei/loop-source": "same full initial decision, fingerprint, asset+relation evidence and current-answer wrapper after every refresh/review/proposal",
+    "site-a-maintenance": "complete register and enriched outputs equal after actual unchanged refresh",
+    "site-b-process": "complete register and enriched outputs equal after actual unchanged refresh",
+    "all_four_input_graphs_and_questions": "raw byte exact throughout; no source-driven native interpretation changes"
+  },
+  "proposals": {
+    "question": "PROPOSAL@P-1",
+    "claim_key": "proposed-pressure-kPa",
+    "answer_ids": [
+      "controls-option",
+      "process-option"
+    ],
+    "values": [
+      "200 kPa",
+      "220 kPa"
+    ],
+    "decision": "proposed",
+    "answer_state": "partial",
+    "plant_truth": "unknown",
+    "same_source_fingerprint": true,
+    "same_immutable_base": "site-a-ei/B/context.json",
+    "same_owner": "training-controls-owner",
+    "distinct_reviewers": true,
+    "compare": "complete proposal decision records sorted by answer_id; preserve both ordered histories"
+  },
+  "refusals": [
+    "process bad B pin absent/populated",
+    "E&I bad B pin absent/populated",
+    "old E&I filled CSV absent/populated",
+    "selected E&Igraph+SiteBcontext and SiteBgraph+E&Icontext"
+  ],
+  "selected_sdk_packets": [
+    "site-a-ei/proposals-forward",
+    "site-b-process/refreshed"
+  ],
+  "physical_correction": false,
+  "plant_truth": "unknown",
+  "company_acceptance": "not performed",
+  "real_recipient_acceptance": "not performed",
+  "large_team_capacity": "not tested",
+  "concurrent_writers": "not implemented"
+}

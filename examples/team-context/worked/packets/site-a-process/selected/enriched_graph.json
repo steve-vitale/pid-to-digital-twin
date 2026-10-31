@@ -1,0 +1,123 @@
+{
+  "schema": "twin-graph-1",
+  "title": "Site A Process fictional selected scope",
+  "source_model": "authored graph fixture; no model extraction or generated plant accepted",
+  "model_kind": "authored teaching fixture",
+  "nodes": [
+    {
+      "id": "P-1",
+      "kind": "equipment",
+      "tag": "P-1",
+      "name": "Site A Process local pump reference",
+      "aliases": [],
+      "attributes": [
+        {
+          "name": "installed_pressure_basis",
+          "value": "unknown",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "in_service_confirmed",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "measured_pressure",
+          "value": null,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        }
+      ],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    },
+    {
+      "id": "FT-101",
+      "kind": "instrument",
+      "tag": "FT-101",
+      "name": "Invented flow instrument",
+      "aliases": [],
+      "attributes": [],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "M1",
+      "type": "measures",
+      "from": "FT-101",
+      "to": "P-1",
+      "direction": null,
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-process-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "unanswered",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-a6a1e25d18b4aa430198d230383f89502526bbe76fb88392069989b8887b05b7",
+            "answer_id": "basis-source",
+            "freshness": "stale",
+            "changed": [
+              "source revision/bytes/locator"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "events": [],
+  "not_exported": [],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "89e248be05eb33293e0d12a943f80e40b73666b09dd9842c7f0130de75587385"
+  }
+}

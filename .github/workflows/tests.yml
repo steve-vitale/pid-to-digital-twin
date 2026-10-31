@@ -42,3 +42,7 @@ jobs:
         run: |
           python examples/pump-revision/reproduce.py --out "$RUNNER_TEMP/pump-revision"
           python examples/pump-revision/reproduce.py --out "$RUNNER_TEMP/pump-revision" --sdk-only
+      - name: Reproduce owned team packets and complete selected readback
+        run: |
+          python examples/team-context/reproduce.py --out "$RUNNER_TEMP/team-context"
+          python examples/team-context/reproduce.py --out "$RUNNER_TEMP/team-context" --sdk-only

@@ -1,0 +1,196 @@
+{
+  "kind": "teaching-composition-index-result",
+  "product_schema": false,
+  "mapping_input": {
+    "kind": "teaching-composition-index-input",
+    "product_schema": false,
+    "scope": "Supplied and visibly reviewed fictional mapping, not resolver/merge/organization authority.",
+    "packets": [
+      {
+        "packet": "site-a-process",
+        "scope": "Site A Process",
+        "native_asset": "P-1",
+        "supplied_company_asset": "training:site-a:pump-001",
+        "owning_role": "training-process-owner",
+        "reviewed_by": "training-fixture-identity-reviewer",
+        "reviewed_on": "2026-10-31",
+        "mapping_verdict": "authored training mapping; not independently verified company identity",
+        "record_responsibility": "Process design-basis publication; incoming B review"
+      },
+      {
+        "packet": "site-a-ei",
+        "scope": "Site A E&I",
+        "native_asset": "P-1",
+        "supplied_company_asset": "training:site-a:pump-001",
+        "owning_role": "training-controls-owner",
+        "reviewed_by": "training-fixture-identity-reviewer",
+        "reviewed_on": "2026-10-31",
+        "mapping_verdict": "authored training mapping; not independently verified company identity",
+        "record_responsibility": "E&I interpretation and unresolved configuration/proposals; no logic authorization"
+      },
+      {
+        "packet": "site-a-maintenance",
+        "scope": "Site A Maintenance",
+        "native_asset": "P-1",
+        "supplied_company_asset": "training:site-a:pump-001",
+        "owning_role": "training-maintenance-owner",
+        "reviewed_by": "training-fixture-identity-reviewer",
+        "reviewed_on": "2026-10-31",
+        "mapping_verdict": "authored training mapping; not independently verified company identity",
+        "record_responsibility": "Maintenance inspection/vendor evidence"
+      },
+      {
+        "packet": "site-b-process",
+        "scope": "Site B Process",
+        "native_asset": "P-1",
+        "supplied_company_asset": "training:site-b:pump-001",
+        "owning_role": "training-site-b-owner",
+        "reviewed_by": "training-fixture-identity-reviewer",
+        "reviewed_on": "2026-10-31",
+        "mapping_verdict": "authored training mapping; not independently verified company identity",
+        "record_responsibility": "Separate Site B process basis"
+      }
+    ],
+    "published_dependency": {
+      "publication": "training:site-a:process-basis",
+      "publisher": "site-a-process",
+      "recipient": "site-a-ei",
+      "transfer": "explicit staged byte copy; no subscription",
+      "revisions": {
+        "A": {
+          "path": "publications/process-basis-A.txt",
+          "raw_sha256": "5fb8bfc9f50445f0083d6ff5d915f5ff5f5d9d07d161eed6869e7587ce822642"
+        },
+        "B": {
+          "path": "publications/process-basis-B.txt",
+          "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc"
+        }
+      }
+    }
+  },
+  "packets": [
+    {
+      "packet": "site-a-process",
+      "scope": "Site A Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-process-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Process design-basis publication; incoming B review",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "2a023ba874024777a4cd9cc37ffdc03495b233ab85558b157df43fcb54d1704c",
+      "context_raw_sha256": "897767f27de41951e419fd2e02216b025ac8b77de478afae2fbd3852955d8720",
+      "questions_raw_sha256": "cc8c6ac12f9ead5ae308ac7f9b1eafd61b5cddd7f5ca9d8d9cabb181a08a1d36",
+      "graph_bytes": 3158,
+      "context_bytes": 4522,
+      "declared_source_bytes_sum": 302,
+      "sources": [
+        {
+          "id": "PROCESS-BASIS",
+          "revision": "B",
+          "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+          "bytes": 302,
+          "retained_original": "source-records/site-a-process/sources/B/process-basis.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-a-ei",
+      "scope": "Site A E&I",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-controls-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "E&I interpretation and unresolved configuration/proposals; no logic authorization",
+      "selected_state": "proposals-forward",
+      "graph_raw_sha256": "abf11661e5e9d7746dc671d3b6bbd0417d03991e92baac231f1ce68bf8198b73",
+      "context_raw_sha256": "05593bf32c7e3824c386ddcc1ddcd6e2c2233fbb24197bb260c70120e2a24c5d",
+      "questions_raw_sha256": "a6359354657f5b415ce2752170046f6768f73d56dc9f851207e5122b1aae866d",
+      "graph_bytes": 5375,
+      "context_bytes": 19313,
+      "declared_source_bytes_sum": 867,
+      "sources": [
+        {
+          "id": "PROCESS-BASIS",
+          "revision": "B",
+          "raw_sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+          "bytes": 302,
+          "retained_original": "source-records/site-a-ei/sources/B/process-basis.txt"
+        },
+        {
+          "id": "LOOP-NOTE",
+          "revision": "A",
+          "raw_sha256": "8f37eaca002bd7b7bdbdeda1df4773a2cf42e339e95d3306c8f6437e4e1b258d",
+          "bytes": 191,
+          "retained_original": "source-records/site-a-ei/loop-note.txt"
+        },
+        {
+          "id": "PROPOSAL-OPTIONS",
+          "revision": "A",
+          "raw_sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+          "bytes": 374,
+          "retained_original": "source-records/site-a-ei/proposal-options.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-a-maintenance",
+      "scope": "Site A Maintenance",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-a:pump-001",
+      "owning_role": "training-maintenance-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Maintenance inspection/vendor evidence",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "5c0137f392dc7a7c6c63e6856cd7dcbbf554830b2921faf3453772114712af74",
+      "context_raw_sha256": "9edb8dd990a57d88a1960208ac6cf12a92e7d551750539a2d1a908767c77106a",
+      "questions_raw_sha256": "ae55a884dfbe542e2d4db08bf95686d38106ebef22611227e281f979fd150fdb",
+      "graph_bytes": 3063,
+      "context_bytes": 4449,
+      "declared_source_bytes_sum": 196,
+      "sources": [
+        {
+          "id": "INSPECTION-NOTE",
+          "revision": "A",
+          "raw_sha256": "9721180a211ddacd6204c1b25f9bf959bfab78ffdd283e248a0c901b8a4ee018",
+          "bytes": 196,
+          "retained_original": "source-records/site-a-maintenance/inspection-note.txt"
+        }
+      ]
+    },
+    {
+      "packet": "site-b-process",
+      "scope": "Site B Process",
+      "native_asset": "P-1",
+      "supplied_company_asset": "training:site-b:pump-001",
+      "owning_role": "training-site-b-owner",
+      "reviewed_by": "training-fixture-identity-reviewer",
+      "reviewed_on": "2026-10-31",
+      "mapping_verdict": "authored training mapping; not independently verified company identity",
+      "record_responsibility": "Separate Site B process basis",
+      "selected_state": "refreshed",
+      "graph_raw_sha256": "33ec2e8e52a5b33a3a4574fd29c6e5bdf9b30126597e45b2795562cc6fc3d49b",
+      "context_raw_sha256": "0675e77aef7ca57e101e522934c986e2498f4034aa453a4e6f0e46930d3cbaf0",
+      "questions_raw_sha256": "8979c22b18464639fdc77258082ffecb0b74be70e933e01cbeed9e470013f1f2",
+      "graph_bytes": 3038,
+      "context_bytes": 4385,
+      "declared_source_bytes_sum": 180,
+      "sources": [
+        {
+          "id": "SITE-B-BASIS",
+          "revision": "A",
+          "raw_sha256": "5089e79f94ec6fdd5720d101017fbad02c254d09fd2fcb6b7c30ccb033576bb3",
+          "bytes": 180,
+          "retained_original": "source-records/site-b-process/site-b-basis.txt"
+        }
+      ]
+    }
+  ],
+  "scope": "Explicit supplied mapping and selected local records; no federation/identity/auth consumer."
+}

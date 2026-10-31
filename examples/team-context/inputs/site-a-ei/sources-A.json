@@ -1,0 +1,50 @@
+{
+  "schema": "context-sources-1",
+  "documents": [
+    {
+      "id": "PROCESS-BASIS",
+      "revision": "A",
+      "path": "sources/A/process-basis.txt",
+      "sha256": "5fb8bfc9f50445f0083d6ff5d915f5ff5f5d9d07d161eed6869e7587ce822642",
+      "locators": [
+        {
+          "id": "process-basis",
+          "locator": "process-basis revision A:L1-L4",
+          "questions": [
+            "BASIS@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LOOP-NOTE",
+      "revision": "A",
+      "path": "loop-note.txt",
+      "sha256": "8f37eaca002bd7b7bdbdeda1df4773a2cf42e339e95d3306c8f6437e4e1b258d",
+      "locators": [
+        {
+          "id": "loop-note",
+          "locator": "loop-note.txt:L1-L3",
+          "questions": [
+            "LOOP@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PROPOSAL-OPTIONS",
+      "revision": "A",
+      "path": "proposal-options.txt",
+      "sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+      "locators": [
+        {
+          "id": "proposal-options",
+          "locator": "proposal-options.txt:L3-L6",
+          "questions": [
+            "PROPOSAL@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

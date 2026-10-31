@@ -60,6 +60,8 @@ updates require separate integration and acceptance. See the [handoff and lifecy
 [Follow a source revision](examples/pump-revision/README.md) through a complete local example: the affected answer
 reopens, an independently sourced answer stays current, earlier decisions remain, and selected MCP readback
 changes only after restart. This is the local foundation for the cross-team handoff, using fictional records.
+[Follow four owned scopes](examples/team-context/README.md) to see a Process publication reach controls while
+independent maintenance and second-site work stay current, with conflicting proposals kept for review.
 
 ## Status
 

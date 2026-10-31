@@ -3942,6 +3942,41 @@
         "scripts/test_pump_revision.py",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A263",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Demonstrate four separately owned Process/E&I/Maintenance and second-site packets with explicit publication dependencies, source-only selective refresh, preserved same-base proposals and complete selected readback (N094).",
+      "hypothesis": "Bounded owned scopes and exact published dependencies can make cross-team review reconstructable without building a new organization platform or merging local registers.",
+      "evidence": "Independently accepted 97-path fictional example: 38 fresh and 38 relocated CLIs, 2 complete stdio sessions with 24 responses and 101 assertions plus 2 mixed-pair refusals, 2 extra SDK inventory sessions with 6 operations, 391 saved-result checks and 27 closed links. Real refresh stales 2 shared-basis answers while 3 independent answers remain current. Complete same-base proposal records survive order reversal. Actual Git comparisons (194 index / 388 checkout) retain 94 raw pins and 3 declared LF entries; the deep Windows path failure and raw/LF harness corrections remain preserved. Root regression and CI integration validation are recorded in journal 122.",
+      "runs": "Small fictional Windows development/independent coding-agent controls, not a new source-family/model comparison or company trial.",
+      "verdict": "kept",
+      "why": "Keep ownership, identity mappings, dependency changes and disputes explicit while company permissions, concurrent writers and organizational release remain separate.",
+      "source": [
+        "docs/JOURNAL.md#122-keep-departmental-context-separate-while-making-dependencies-reviewable",
+        "examples/team-context/README.md",
+        "docs/CONTEXT_LIFECYCLE.md",
+        "scripts/test_team_context.py",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "A264",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Pin 20 committed raw-byte contracts to LF across Git checkout modes and add an actual checkout regression, without changing producers, goldens or source hashes (N095).",
+      "hypothesis": "Scoped checkout policy can preserve existing strict byte/manifest contracts across Windows and Linux without hiding genuine source edits or changing historical evidence.",
+      "evidence": "First full A263 suite fails 3 scripts (63/66) with unchanged inputs: statement render bytes, impact report bytes and drawing generator hash differ after CRLF checkout. Exact original Git blobs match all saved contracts. Twelve narrow rules affect precisely 20 paths. Actual old false checkouts pass the complete 13/39/32-case modules, old true fails all three; fixed modes pass all three without added skips. Git 40 index/80 checkout controls retain 271 effective raw files. Independent fresh true workflow/test and seven API checks pass; historical and tampered inputs remain refused. Root validation and the separate external-input N096 boundary are recorded in journal 123.",
+      "runs": "Actual Git and existing-workflow Windows development/independent review; no model call, new corpus source or operating result.",
+      "verdict": "kept",
+      "why": "Keep raw evidence and current manifest identities stable under clone/checkout. External writer/verifier newline semantics and arbitrary inputs remain a separate explicit contract.",
+      "source": [
+        "docs/JOURNAL.md#123-preserve-committed-byte-contracts-without-rewriting-the-evidence",
+        "scripts/test_checkout_contracts.py",
+        "docs/STATUS.md",
+        ".gitattributes"
+      ]
     }
   ],
   "not_tried": [
@@ -4911,12 +4946,41 @@
     {
       "id": "N094",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Demonstrate bounded Process/E&I/Maintenance packets and a second site with supplied canonical identities, explicit published dependencies, selective refresh and preserved same-field disputes.",
-      "why_not_yet": "Integration owns the fictional multi-team exercise, with independent Context/retrieval criteria and actual review. Current release proves one local source-change loop only. No company namespace resolver, cross-team concurrency, release permission, real recipient acceptance or large-team performance is implemented or established.",
+      "why_not_yet": "Completed A263 for the bounded fictional four-packet exercise after independent actual workflow/history/dispute/readback/Git review. Company identities remain supplied teaching data; no global resolver, unit-aware merge, concurrent writer, company authentication/release, real recipient acceptance or large-team capacity is implemented or established. N062/N063 remain open.",
       "source": [
         "docs/JOURNAL.md#121-make-owned-revisions-the-foundation-for-cross-team-work",
         "docs/CONTEXT_LIFECYCLE.md",
+        "docs/STATUS.md",
+        "docs/JOURNAL.md#122-keep-departmental-context-separate-while-making-dependencies-reviewable",
+        "examples/team-context/README.md",
+        "scripts/test_team_context.py"
+      ]
+    },
+    {
+      "id": "N095",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Preserve committed statement/impact output bytes and current drawing manifest dependencies across Git newline modes.",
+      "why_not_yet": "Completed A264 with exactly 12 scoped LF rules for 20 paths, actual old/fixed workflow controls, raw-packet conservation and independent review. No source/golden/hash rewrite or global Git configuration change. External-input normalization is separate N096.",
+      "source": [
+        "docs/JOURNAL.md#123-preserve-committed-byte-contracts-without-rewriting-the-evidence",
+        "scripts/test_checkout_contracts.py",
+        "docs/STATUS.md",
+        ".gitattributes"
+      ]
+    },
+    {
+      "id": "N096",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Make the drawing topology verifier honor the same declared text-hash policy as the writer for external LF/CRLF generator, model and layout inputs while preserving genuine-edit and historical refusals.",
+      "why_not_yet": "Actual matched writer/verifier runs preserve the external CRLF failure and unchanged generated outputs. The separate private two-file correction has passed independent actual review (all eight newline combinations and strict negative controls); affected matrix runs, full public integration and exact-head CI remain pending. This is not repaired or included in N095 checkout attributes.",
+      "source": [
+        "docs/JOURNAL.md#123-preserve-committed-byte-contracts-without-rewriting-the-evidence",
+        "scripts/draw_pid_from_model.py",
+        "scripts/line_layers.py",
         "docs/STATUS.md"
       ]
     }

@@ -52,10 +52,21 @@ preserves the original failures and independently reviewed repairs. N086 source-
 The current design priority is [engineering context across teams](CONTEXT_LIFECYCLE.md): separately owned
 scopes, explicit published dependencies, reviewed company identities and preserved conflicting proposals.
 The [worked source revision](../examples/pump-revision/README.md) exercises one local maintenance loop with
-fictional records. A multi-department, multi-site composition exercise is open as **N094**, owned by Integration
-with independent Context/retrieval review. Neither local registers nor selected MCP packets provide concurrent
-editing, company permissions or organizational release. Large-team capacity and actual recipient effort remain
-unmeasured; a larger combined file is not evidence of scalability.
+fictional records. **N094** adds [four owned packets](../examples/team-context/README.md): Process/E&I share a
+pinned publication; independent Maintenance and second-site evidence stays current after actual refresh;
+same-field proposed strings remain disputed in both input orders. Its company identity mapping is supplied
+teaching data. Neither local registers nor selected MCP packets provide concurrent editing, company permissions
+or organizational release. Large-team capacity and actual recipient effort remain unmeasured; four fictional
+scopes demonstrate composition only. Integration owns the real company handoff through N062/N063.
+
+**N095 — checkout contracts.** A Windows checkout exposed three preexisting failures: regenerated statement and
+impact reports differed in line endings, and current drawing inputs no longer matched their saved hashes.
+Twelve narrow Git rules now retain the original LF bytes for 20 committed contracts. The new Git regression
+checks both ingest and checkout modes while preserving existing raw-pinned packets. No golden, manifest, model
+value or metric is rewritten. **Open N096:** the drawing writer normalizes text hashes but the topology verifier
+compares raw bytes; a fresh external CRLF input can still be rejected by that verifier. This separate contract
+repair has passed private independent review; public integration, affected-matrix validation and CI remain
+pending. It is not included in this checkout-policy repair.
 
 The [workflow map](WORKFLOWS.md) owns exact format contracts; [FEATURES.md](FEATURES.md) owns individual evidence.
 

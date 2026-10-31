@@ -26,6 +26,7 @@ manual bridges and the recommended order of work. Numerical research evidence li
 | Prepare a portable graph or inspect sourced statements | [Graph format](GRAPH_EXPORT.md) · [Statement review](STATEMENT_REVIEW.md) |
 | Retain answers and source-revision dependencies in a local packet | [Context register](CONTEXT_REGISTER.md) |
 | Follow a revised source through questions, review history and snapshot readback | [Worked revision example](../examples/pump-revision/README.md) |
+| Keep department scopes and cross-team dependencies explicit | [Four owned packets](../examples/team-context/README.md) |
 | Retrieve a selected snapshot through an approved local MCP client | [MCP starter](../examples/internal-mcp/README.md) |
 | Plan team ownership, published dependencies and company access | [Lifecycle](CONTEXT_LIFECYCLE.md) · [Connectivity](INTERNAL_CONNECTIVITY.md) |
 | Test a real recipient, company handoff and next revision | [Acceptance exercise](ACCEPTANCE.md) |

@@ -1,0 +1,121 @@
+{
+  "schema": "twin-graph-1",
+  "title": "Site B Process fictional selected scope",
+  "source_model": "authored graph fixture; no model extraction or generated plant accepted",
+  "model_kind": "authored teaching fixture",
+  "nodes": [
+    {
+      "id": "P-1",
+      "kind": "equipment",
+      "tag": "P-1",
+      "name": "Site B Process local pump reference",
+      "aliases": [],
+      "attributes": [
+        {
+          "name": "installed_pressure_basis",
+          "value": "unknown",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "in_service_confirmed",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "measured_pressure",
+          "value": null,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        }
+      ],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    },
+    {
+      "id": "FT-101",
+      "kind": "instrument",
+      "tag": "FT-101",
+      "name": "Invented flow instrument",
+      "aliases": [],
+      "attributes": [],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "M1",
+      "type": "measures",
+      "from": "FT-101",
+      "to": "P-1",
+      "direction": null,
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis does the separate Site B publication state?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the separate Site B publication state?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-site-b-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "partial",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-bec0229cbf7fbf2cefadd04e3f96fec62dee53c73755c5de5b0952f11bfe33dd",
+            "answer_id": "site-b-source",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    }
+  ],
+  "events": [],
+  "not_exported": [],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "70b9f413a038cf61e752436f04e1644da9ec4b40073a6e5c08e5f80ff7c13b56"
+  }
+}

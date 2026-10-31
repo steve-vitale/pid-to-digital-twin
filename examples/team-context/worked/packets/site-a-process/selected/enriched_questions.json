@@ -1,0 +1,49 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "All questions in this exercise are authored source questions; none are catalog findings.",
+  "questions": [
+    {
+      "id": "BASIS@P-1",
+      "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-process-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "unanswered",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-a6a1e25d18b4aa430198d230383f89502526bbe76fb88392069989b8887b05b7",
+            "answer_id": "basis-source",
+            "freshness": "stale",
+            "changed": [
+              "source revision/bytes/locator"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "89e248be05eb33293e0d12a943f80e40b73666b09dd9842c7f0130de75587385"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "site-b-source",
+      "claim_key": "site-b-supplied-pressure-kPa",
+      "value": "150 kPa",
+      "answer": "Separate Site B source states draft 150 kPa; actual suitability unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "a4045308ad8af10ab1faae4783104865ba58f7e22392883789db5d6c7ff934ea",
+      "owner": "training-site-b-owner",
+      "evidence": {
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the separate Site B publication state?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site B Process local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "SITE-B-BASIS",
+          "revision": "A",
+          "sha256": "5089e79f94ec6fdd5720d101017fbad02c254d09fd2fcb6b7c30ccb033576bb3",
+          "locator_id": "site-b-basis",
+          "locator": "site-b-basis.txt:L1-L3"
+        }
+      },
+      "previous": null,
+      "id": "d-bec0229cbf7fbf2cefadd04e3f96fec62dee53c73755c5de5b0952f11bfe33dd"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "BASIS@P-1",
+      "owner": "training-site-b-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-81ea930ca1a9f03fb042b3d1de2cc281719ad1d3781b91361797a7b6db569b82"
+    }
+  ],
+  "current": {
+    "BASIS@P-1": {
+      "present": true,
+      "question": {
+        "id": "BASIS@P-1",
+        "question": "What pressure basis does the separate Site B publication state?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-site-b-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-bec0229cbf7fbf2cefadd04e3f96fec62dee53c73755c5de5b0952f11bfe33dd",
+          "answer_id": "site-b-source",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "SITE-B-BASIS",
+      "revision": "A",
+      "sha256": "5089e79f94ec6fdd5720d101017fbad02c254d09fd2fcb6b7c30ccb033576bb3",
+      "locators": [
+        {
+          "id": "site-b-basis",
+          "locator": "site-b-basis.txt:L1-L3",
+          "questions": [
+            "BASIS@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -319,7 +319,7 @@ Example review: **reviewed example**
 
 **Why it matters:** Before trusting any tool with your plant's data, you should be able to check its claims yourself in minutes.
 
-**Inputs:** Python alone for claim and freshness checks; full tests also need pinned packages and required public caches; optional-source omissions are reported separately
+**Inputs:** Python alone for claim and freshness checks; full tests also need Git, pinned packages and required public caches; optional-source omissions are reported separately
 
 **Outputs:** Headline claims checked against results files, stage freshness, and selected tests with skipped cases and coverage limits visible
 
@@ -332,8 +332,8 @@ Example review: **reviewed example**
 <summary>Example files, tests and independent review</summary>
 
 - **Example outputs:** [`claims_check.md`](../out/claims_check.md), [`expected.json`](../examples/test-coverage/expected.json)
-- **Tests:** `test_check_claims.py`, `test_attempts_ledger.py`, `test_script_index.py`, `test_feature_catalog.py`, `test_run_tests.py`
-- **Independent review:** Independent Codex coding agent: bounded documentation architecture, claim-preservation and functional-state audit A, 2026-10-30: pass
+- **Tests:** `test_check_claims.py`, `test_attempts_ledger.py`, `test_script_index.py`, `test_feature_catalog.py`, `test_run_tests.py`, `test_checkout_contracts.py`
+- **Independent review:** Independent AI review: scoped checkout byte contracts and matched workflow regressions, 2026-10-31: pass
 
 </details>
 
@@ -484,8 +484,8 @@ Example review: **reviewed example**
 <summary>Example files, tests and independent review</summary>
 
 - **Example outputs:** [`context.json`](../examples/context-register/illustrative/expected/context.json), [`context.md`](../examples/context-register/illustrative/expected/context.md), [`enriched_graph.json`](../examples/context-register/illustrative/expected/enriched_graph.json), [`enriched_questions.json`](../examples/context-register/illustrative/expected/enriched_questions.json), [`source_key.json`](../examples/context-register/pronto/source_key.json), [`sources.json`](../examples/context-register/pronto/sources.json), [`proposed_answers.csv`](../examples/context-register/pronto/proposed_answers.csv), [`context.md`](../examples/context-register/pronto/expected/context.md), [`questions.json`](../examples/context-register/bayer/screen/questions.json), [`context.md`](../examples/context-register/bayer/expected/context.md), [`context.json`](../examples/context-register/bayer/expected/context.json), [`sources.json`](../examples/context-register/nist-smstestbed/sources.json), [`source_key.json`](../examples/context-register/nist-smstestbed/source_key.json), [`proposed_answers.csv`](../examples/context-register/nist-smstestbed/proposed_answers.csv), [`expected_context.md`](../examples/context-register/nist-smstestbed/expected_context.md), [`fetch.json`](../examples/context-register/nist-smstestbed/fetch.json), [`expected_history_checks.json`](../examples/context-register/nist-smstestbed/expected_history_checks.json), [`originals.json`](../examples/context-register/metropt3/originals.json), [`sources.json`](../examples/context-register/metropt3/sources.json), [`source_key.json`](../examples/context-register/metropt3/source_key.json), [`proposed_answers.csv`](../examples/context-register/metropt3/proposed_answers.csv), [`context.json`](../examples/context-register/metropt3/expected/context.json), [`context.md`](../examples/context-register/metropt3/expected/context.md), [`before-appearances.context.json`](../examples/context-register/illustrative/history/before-appearances.context.json), [`before-appearances.answers.csv`](../examples/context-register/illustrative/history/before-appearances.answers.csv), [`before-appearances.context.json`](../examples/context-register/bayer/history/before-appearances.context.json), [`before-appearances.answers.csv`](../examples/context-register/bayer/history/before-appearances.answers.csv), [`before-appearances.context.json`](../examples/context-register/pronto/history/before-appearances.context.json), [`before-appearances.answers.csv`](../examples/context-register/pronto/history/before-appearances.answers.csv), [`before-appearances.context.json`](../examples/context-register/nist-smstestbed/history/before-appearances.context.json), [`before-appearances.answers.csv`](../examples/context-register/nist-smstestbed/history/before-appearances.answers.csv), [`before-appearances.context.json`](../examples/context-register/metropt3/history/before-appearances.context.json), [`before-appearances.answers.csv`](../examples/context-register/metropt3/history/before-appearances.answers.csv)
-- **Tests:** `test_context_register.py`, `test_context_examples.py`, `test_pump_revision.py`
-- **Independent review:** Independent AI review: portable source-revision handoff, Git byte pins and cross-drive regression, 2026-10-31: pass
+- **Tests:** `test_context_register.py`, `test_context_examples.py`, `test_pump_revision.py`, `test_team_context.py`
+- **Independent review:** Independent AI review: owned team packets, preserved disputes and root integration, 2026-10-31: pass
 
 </details>
 

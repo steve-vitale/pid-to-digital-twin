@@ -1,0 +1,47 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "All questions in this exercise are authored source questions; none are catalog findings.",
+  "questions": [
+    {
+      "id": "MAINT@P-1",
+      "question": "What inspection date does the independent Maintenance record state?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked",
+      "context": {
+        "present": true,
+        "question": {
+          "id": "MAINT@P-1",
+          "question": "What inspection date does the independent Maintenance record state?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "owner": "training-maintenance-owner",
+        "ownership": "assigned",
+        "assigned_by": "training-assignment-coordinator",
+        "assigned_on": "2026-10-31",
+        "state": "partial",
+        "disputed_claims": [],
+        "answers": [
+          {
+            "decision_id": "d-4611e1714d5cc96b6a6a3617528ffcc2b839757c6c99ff34b72986263a9bd9d6",
+            "answer_id": "inspection-source",
+            "freshness": "current",
+            "changed": []
+          }
+        ]
+      }
+    }
+  ],
+  "context_register": {
+    "schema": "context-register-1",
+    "sidecar": "context.json",
+    "content_sha256": "714977a26abdd575a65b536cb72ffe0f5b1ad8c23f6a106de7ab5c9014a69abc"
+  }
+}

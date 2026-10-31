@@ -1,0 +1,149 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "MAINT@P-1",
+      "answer_id": "inspection-source",
+      "claim_key": "stated-inspection-date",
+      "value": "unknown",
+      "answer": "Independent record leaves inspection date unspecified; actual inspection remains unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "80721884e74728e77dfbfcd97635cd17109ff23482546d17e49ed1a2d8d27ca0",
+      "owner": "training-maintenance-owner",
+      "evidence": {
+        "question": {
+          "id": "MAINT@P-1",
+          "question": "What inspection date does the independent Maintenance record state?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A Maintenance local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "INSPECTION-NOTE",
+          "revision": "A",
+          "sha256": "9721180a211ddacd6204c1b25f9bf959bfab78ffdd283e248a0c901b8a4ee018",
+          "locator_id": "inspection-note",
+          "locator": "inspection-note.txt:L1-L3"
+        }
+      },
+      "previous": null,
+      "id": "d-4611e1714d5cc96b6a6a3617528ffcc2b839757c6c99ff34b72986263a9bd9d6"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "MAINT@P-1",
+      "owner": "training-maintenance-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-90b21ea7536aa98a7ba3b313d56c6fa7cb716569828c14d28cee7be256973a33"
+    }
+  ],
+  "current": {
+    "MAINT@P-1": {
+      "present": true,
+      "question": {
+        "id": "MAINT@P-1",
+        "question": "What inspection date does the independent Maintenance record state?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-maintenance-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-4611e1714d5cc96b6a6a3617528ffcc2b839757c6c99ff34b72986263a9bd9d6",
+          "answer_id": "inspection-source",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "INSPECTION-NOTE",
+      "revision": "A",
+      "sha256": "9721180a211ddacd6204c1b25f9bf959bfab78ffdd283e248a0c901b8a4ee018",
+      "locators": [
+        {
+          "id": "inspection-note",
+          "locator": "inspection-note.txt:L1-L3",
+          "questions": [
+            "MAINT@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

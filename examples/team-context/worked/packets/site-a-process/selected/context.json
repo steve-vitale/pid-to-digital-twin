@@ -1,0 +1,151 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Revision A states a draft 200 kPa basis; installed suitability remains unknown.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "b79e952e761b9d3816884f26e46f49533a95f07b546bc4f0fab366a04733af56",
+      "owner": "training-process-owner",
+      "evidence": {
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A Process local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PROCESS-BASIS",
+          "revision": "A",
+          "sha256": "5fb8bfc9f50445f0083d6ff5d915f5ff5f5d9d07d161eed6869e7587ce822642",
+          "locator_id": "process-basis",
+          "locator": "process-basis revision A:L1-L4"
+        }
+      },
+      "previous": null,
+      "id": "d-a6a1e25d18b4aa430198d230383f89502526bbe76fb88392069989b8887b05b7"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "BASIS@P-1",
+      "owner": "training-process-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-411cb8646028feaaf9cd74ca8661f10c4fce9c54f9be90d8fc2eeacd1c3e2d94"
+    }
+  ],
+  "current": {
+    "BASIS@P-1": {
+      "present": true,
+      "question": {
+        "id": "BASIS@P-1",
+        "question": "What pressure basis does the supplied Process publication state, and what remains unresolved?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-process-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "unanswered",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-a6a1e25d18b4aa430198d230383f89502526bbe76fb88392069989b8887b05b7",
+          "answer_id": "basis-source",
+          "freshness": "stale",
+          "changed": [
+            "source revision/bytes/locator"
+          ]
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "PROCESS-BASIS",
+      "revision": "B",
+      "sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+      "locators": [
+        {
+          "id": "process-basis",
+          "locator": "process-basis revision B:L1-L4",
+          "questions": [
+            "BASIS@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

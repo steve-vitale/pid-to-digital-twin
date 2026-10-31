@@ -1,0 +1,7 @@
+# Original source and selected worked-packet hashes bind raw bytes.
+/inputs/** -text
+/worked/** -text
+# Entry files remain ordinary text.
+/.gitattributes text eol=lf
+/README.md text eol=lf
+/reproduce.py text eol=lf

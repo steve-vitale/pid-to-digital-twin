@@ -1,0 +1,613 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Received Process revision A states 200 kPa; configuration review remains unresolved.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "597758b957581c653534ebd81a1ba1ce3897f7f5ce95cc333a6b4f3cdb128c13",
+      "owner": "training-controls-owner",
+      "evidence": {
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A E&I local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PROCESS-BASIS",
+          "revision": "A",
+          "sha256": "5fb8bfc9f50445f0083d6ff5d915f5ff5f5d9d07d161eed6869e7587ce822642",
+          "locator_id": "process-basis",
+          "locator": "process-basis revision A:L1-L4"
+        }
+      },
+      "previous": null,
+      "id": "d-487c47200c1a4964dbc0934f41dbb1a23379d21fdee618fe2188b012113025d1"
+    },
+    {
+      "question_id": "LOOP@P-1",
+      "answer_id": "loop-source",
+      "claim_key": "listed-measurement",
+      "value": "flow",
+      "answer": "Independent loop note lists flow indication; actual configuration remains unknown.",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "4d73097c5cdc37ac7b4fbd089fd461762cd045f2d9f936fd8ef32287abaf6500",
+      "owner": "training-controls-owner",
+      "evidence": {
+        "question": {
+          "id": "LOOP@P-1",
+          "question": "What measurement is named in the independent loop note?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A E&I local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "LOOP-NOTE",
+          "revision": "A",
+          "sha256": "8f37eaca002bd7b7bdbdeda1df4773a2cf42e339e95d3306c8f6437e4e1b258d",
+          "locator_id": "loop-note",
+          "locator": "loop-note.txt:L1-L3"
+        }
+      },
+      "previous": null,
+      "id": "d-8652d42a47aa8ad5271ada25d0cb27e777789671bbd34f873d2f88684469c5fa"
+    },
+    {
+      "question_id": "BASIS@P-1",
+      "answer_id": "basis-source",
+      "claim_key": "supplied-pressure-kPa",
+      "value": "220 kPa",
+      "answer": "Received Process revision B states 220 kPa; no logic/plant correction or suitability acceptance follows.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "159f4729d106d3224814b2bb52a8205ffe951fb0b145532425d2a9049a4f72df",
+      "owner": "training-controls-owner",
+      "evidence": {
+        "question": {
+          "id": "BASIS@P-1",
+          "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A E&I local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PROCESS-BASIS",
+          "revision": "B",
+          "sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+          "locator_id": "process-basis",
+          "locator": "process-basis revision B:L1-L4"
+        }
+      },
+      "previous": "d-487c47200c1a4964dbc0934f41dbb1a23379d21fdee618fe2188b012113025d1",
+      "id": "d-96eb78fb87a22368c776abd18c9f91d3f11cf3289322605a4a8eaaf7eee8b2ab"
+    },
+    {
+      "question_id": "PROPOSAL@P-1",
+      "answer_id": "process-option",
+      "claim_key": "proposed-pressure-kPa",
+      "value": "200 kPa",
+      "answer": "Source records Process reviewer option 200 kPa; unresolved proposal only.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "training-process-proposal-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "7524204ac81c3726f203138a6a0b03397669e6a046c58d7f1153e4118241fd84",
+      "owner": "training-controls-owner",
+      "evidence": {
+        "question": {
+          "id": "PROPOSAL@P-1",
+          "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A E&I local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PROPOSAL-OPTIONS",
+          "revision": "A",
+          "sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+          "locator_id": "proposal-options",
+          "locator": "proposal-options.txt:L3-L6"
+        }
+      },
+      "previous": null,
+      "id": "d-100f2869a34ac380c33c75a3bc0bb8366916b60433978b18ffc4022a0637650a"
+    },
+    {
+      "question_id": "PROPOSAL@P-1",
+      "answer_id": "controls-option",
+      "claim_key": "proposed-pressure-kPa",
+      "value": "220 kPa",
+      "answer": "Source records E&I reviewer option 220 kPa; unresolved proposal only.",
+      "answer_state": "partial",
+      "decision": "proposed",
+      "reviewer": "training-controls-proposal-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Fictional local source/proposal record; no company authority or observed plant truth.",
+      "evidence_fingerprint": "7524204ac81c3726f203138a6a0b03397669e6a046c58d7f1153e4118241fd84",
+      "owner": "training-controls-owner",
+      "evidence": {
+        "question": {
+          "id": "PROPOSAL@P-1",
+          "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Site A E&I local pump reference",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "installed_pressure_basis",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "in_service_confirmed",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                },
+                {
+                  "name": "measured_pressure",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "scope.txt:L2-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "scope.txt:L2-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "scope.txt:L2-L3"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PROPOSAL-OPTIONS",
+          "revision": "A",
+          "sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+          "locator_id": "proposal-options",
+          "locator": "proposal-options.txt:L3-L6"
+        }
+      },
+      "previous": null,
+      "id": "d-5617631903dbe7e10a2bd9c53e6ba6a1d4d3c1969cca3b7d2338367f3ab51eb3"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "BASIS@P-1",
+      "owner": "training-controls-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-42fe29425aa7a3a0ae2ccade41d72c253546bc0293494ec2bd6ef3410c373e97"
+    },
+    {
+      "question_id": "LOOP@P-1",
+      "owner": "training-controls-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-a047aea6e7def53ed02ad24fd90721991e409d2b846d11df14cf429dd965732f"
+    },
+    {
+      "question_id": "PROPOSAL@P-1",
+      "owner": "training-controls-owner",
+      "by": "training-assignment-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-9699d4965e89002388f6a301cd3eb7fec66d2dab581ec6b785e70251f3fb7ebd"
+    }
+  ],
+  "current": {
+    "BASIS@P-1": {
+      "present": true,
+      "question": {
+        "id": "BASIS@P-1",
+        "question": "What pressure basis did E&I receive from Process, pending configuration review?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-controls-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-96eb78fb87a22368c776abd18c9f91d3f11cf3289322605a4a8eaaf7eee8b2ab",
+          "answer_id": "basis-source",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "LOOP@P-1": {
+      "present": true,
+      "question": {
+        "id": "LOOP@P-1",
+        "question": "What measurement is named in the independent loop note?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-controls-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "answered",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-8652d42a47aa8ad5271ada25d0cb27e777789671bbd34f873d2f88684469c5fa",
+          "answer_id": "loop-source",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "PROPOSAL@P-1": {
+      "present": true,
+      "question": {
+        "id": "PROPOSAL@P-1",
+        "question": "Which proposed pressure basis in kPa must the owner reconcile? Both options remain unresolved.",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-controls-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-assignment-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "disputed",
+      "disputed_claims": [
+        "proposed-pressure-kPa"
+      ],
+      "answers": [
+        {
+          "decision_id": "d-5617631903dbe7e10a2bd9c53e6ba6a1d4d3c1969cca3b7d2338367f3ab51eb3",
+          "answer_id": "controls-option",
+          "freshness": "current",
+          "changed": []
+        },
+        {
+          "decision_id": "d-100f2869a34ac380c33c75a3bc0bb8366916b60433978b18ffc4022a0637650a",
+          "answer_id": "process-option",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "LOOP-NOTE",
+      "revision": "A",
+      "sha256": "8f37eaca002bd7b7bdbdeda1df4773a2cf42e339e95d3306c8f6437e4e1b258d",
+      "locators": [
+        {
+          "id": "loop-note",
+          "locator": "loop-note.txt:L1-L3",
+          "questions": [
+            "LOOP@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PROCESS-BASIS",
+      "revision": "B",
+      "sha256": "cb425dc294fcf498991b5e5cff5150c85d6ccb37126f2c1b731c882cad52d6cc",
+      "locators": [
+        {
+          "id": "process-basis",
+          "locator": "process-basis revision B:L1-L4",
+          "questions": [
+            "BASIS@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PROPOSAL-OPTIONS",
+      "revision": "A",
+      "sha256": "3fbe4f99d717b6ddc8602faca111abce3882844118db1315bf6e180a4e710fe6",
+      "locators": [
+        {
+          "id": "proposal-options",
+          "locator": "proposal-options.txt:L3-L6",
+          "questions": [
+            "PROPOSAL@P-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

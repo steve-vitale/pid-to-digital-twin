@@ -1,0 +1,79 @@
+{
+  "schema": "twin-graph-1",
+  "title": "Site A Maintenance fictional selected scope",
+  "source_model": "authored graph fixture; no model extraction or generated plant accepted",
+  "model_kind": "authored teaching fixture",
+  "nodes": [
+    {
+      "id": "P-1",
+      "kind": "equipment",
+      "tag": "P-1",
+      "name": "Site A Maintenance local pump reference",
+      "aliases": [],
+      "attributes": [
+        {
+          "name": "installed_pressure_basis",
+          "value": "unknown",
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "in_service_confirmed",
+          "value": false,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        },
+        {
+          "name": "measured_pressure",
+          "value": null,
+          "status": "unverified",
+          "source": {
+            "kind": "document",
+            "document": "scope.txt:L2-L3"
+          }
+        }
+      ],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    },
+    {
+      "id": "FT-101",
+      "kind": "instrument",
+      "tag": "FT-101",
+      "name": "Invented flow instrument",
+      "aliases": [],
+      "attributes": [],
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "M1",
+      "type": "measures",
+      "from": "FT-101",
+      "to": "P-1",
+      "direction": null,
+      "status": "unverified",
+      "source": {
+        "kind": "document",
+        "document": "scope.txt:L2-L3"
+      }
+    }
+  ],
+  "questions": [],
+  "events": [],
+  "not_exported": []
+}

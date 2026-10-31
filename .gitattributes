@@ -27,3 +27,19 @@ examples/statement-review/bound-sheet0/*.html text eol=lf
 examples/from-description/assisted/** -text
 examples/from-description/mgpi/** -text
 benchmarks/** text eol=lf
+
+# Committed statement-review outputs reproduce as LF bytes.
+examples/graph-export/multi-appearance/review/statements.json text eol=lf
+examples/graph-export/multi-appearance/review/review.html text eol=lf
+examples/graph-export/multi-appearance/review/review_sheet.csv text eol=lf
+# The estimator compares only these generated estimate/needs outputs byte for byte.
+examples/impact-estimate/*/impact.md text eol=lf
+examples/impact-estimate/*/impact.json text eol=lf
+examples/impact-estimate/needs-*/needs.md text eol=lf
+examples/impact-estimate/needs-*/needs.json text eol=lf
+# Current drawn-truth manifests bind these exact generator/model/layout LF bytes.
+scripts/draw_pid_from_model.py text eol=lf
+data/bayer_rt/process_model.json text eol=lf
+data/bayer_rt/pid_layout.json text eol=lf
+data/te_process_model.json text eol=lf
+data/te_pid_layout.json text eol=lf
