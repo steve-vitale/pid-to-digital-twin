@@ -28,7 +28,7 @@
 | H4: Is heat rejected to cooling water at a temperature another user could use? | Heat grade (high-grade heat for low-grade duty) | bayer | 1 |
 | C6: Does a temperature controller write straight to a steam valve with no flow controller underneath (a cascade candidate)? | Controls and automation | bayer | 1 |
 | E26: Are relief and vent flows to the flare or atmosphere unmetered? | Emissions | bayer | 1 |
-| E27: Is the refrigeration condensing (head) pressure held higher than the weather allows, with no floating head pressure? | Energy | food | 1 |
+| E27: Is this refrigeration condenser train's head pressure appropriate for its weather, operating limits and actual reset coverage? | Energy | food | 1 |
 | E28: Does each refrigeration suction level match the conditions required by every coincident load it serves? | Energy | food | 1 |
 | E30: Are these evaporators defrosted on a fixed timer rather than when frost is actually there? | Energy | food | 1 |
 | H5: Is refrigeration condenser heat rejected while a low-grade heating duty nearby is met with fuel or steam? | Heat grade (high-grade heat for low-grade duty) | food | 1 |
@@ -412,7 +412,7 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
 
 **What the source says (S19):** Background flaring "can be as much as 50% of all flared gases (Miles, 2001)." In refineries it "will generally be less than 50%." No recovery % stated.
 
-## E27: Is the refrigeration condensing (head) pressure held higher than the weather allows, with no floating head pressure?
+## E27: Is this refrigeration condenser train's head pressure appropriate for its weather, operating limits and actual reset coverage?
 
 Fired at 1 of 2 sites. Asked and quiet at: bayer.
 
@@ -428,8 +428,10 @@ Fired at 1 of 2 sites. Asked and quiet at: bayer.
   - food [not on drawing]: DCS/PLC configuration: the minimum needed for hot gas defrost, liquid injection oil cooling and liquid feed to the farthest evaporator; then the vendor datasheet: compressor and expansion valve minimum pressure difference
 - Compressor and condenser fan and pump power. How: Floating the head pressure moves load from the compressors to the condenser fans; count both.
   - food [not on drawing]: historian or DCS trend for JT-201 (no historian tag is mapped in this model for these); then a walkdown: power logger on the compressor motors and on the condenser fan and spray pump motors
+- Condenser-train coverage and applicable head-pressure operating basis. How: Keep this condenser train in the review even when local, shared, unrelated, negated or disabled reset text is supplied. Such records are candidates, not proof of current mode, complete coverage or suitable data. Verify exact train membership, pressure units/reference, refrigerant and saturation basis, appropriate wet-bulb or dry-bulb weather/sensor basis, coincident periods and relevant defrost, oil-cooling, feed and vendor constraints. Retain raw targets, revisions and qualifiers; unknown or contradictory scope stays unresolved. Compare total affected compressor and condenser fan/pump demand before drawing an economic conclusion. This requests existing records and qualified review, not a setpoint change, control design or operating action.
+  - food [not on drawing]: site records: source-labelled compressor discharge/header, condenser, sensor, controller, fan/pump and served-demand membership; actual reset scope, enabled/as-operated mode, revision and unknown or contradictory targets for this train; then DCS/PLC configuration: existing representative coincident head-pressure/condensing-temperature, ambient and power records; stated minimum-pressure constraints and applicable periods before further collection through the approved site process
 
-**How it is decided:** Worth a look when the head pressure sits at a fixed setpoint through cool weather, above both what the condenser could reach and the plant's own minimum. If it already follows the wet-bulb down to that minimum, close it.
+**How it is decided:** Review only after source-qualified train membership, actual operating/reset mode, coincident representative observations, applicable pressure limits and total affected power are established. Fixed-head behavior may justify investigation, while an operating reset may narrow the question, but a supplied label or one scalar does not close coverage or suitability. No setpoint or operating change is inferred.
 
 **What the source says (S25):** Floating head pressure (S25, p. 62) "allows compressor head pressures to move up or down with variations in ambient wet-bulb temperature, saving energy compared to fixed head pressure operation." Condensing pressure (S25, p. 65): "Lowering the condensing temperature can reduce compressor energy use by around 2% to 3% for every degree Celsius (1.8 degrees Fahrenheit) of temperature reduction (SenterNovem 2003)." Condenser fans (S25, p. 65): "On systems where floating head operation is stable, ASDs can lower condenser fan energy consumption by up to 40% compared to operating a fixed-speed condenser fan in on/off fashion (IRC 2004b)."
 

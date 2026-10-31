@@ -100,6 +100,12 @@ NOT_ITEMS = {"PipeFlowArrow": "flow arrow (direction comes from segment From/To)
              "PipeSlopeSymbol": "slope mark", "InsulationSymbol": "insulation mark (insulation attributes are on the line)",
              "Symbol": "annotation symbol", "MetaData": "drawing metadata (kept in meta)"}
 PERSON_ATTRS = re.compile(r"(Approver|Checker|Creator|Designer|Drafter|Editor|Reviewer|Owner)Name", re.I)
+
+
+def person_designated(ga):
+    """Privacy eligibility, not QName schema interpretation: any supplied Name can protect the whole GA."""
+    return any(PERSON_ATTRS.search(value) for name, value in ga.attrib.items()
+               if name.rsplit("}", 1)[-1].casefold() == "name")
 ISA_VARIABLE = {"A": "composition", "B": "burner/combustion", "C": "user's choice", "D": "density", "E": "voltage",
                 "F": "flow", "G": "gauging/position", "H": "hand", "I": "current", "J": "power", "K": "time",
                 "L": "level", "M": "moisture", "N": "user's choice", "O": "user's choice", "P": "pressure",
@@ -210,6 +216,12 @@ class Reader:
             for a in el.findall("Association"):
                 self.assoc[el.get("ID")].append((a.get("Type"), a.get("ItemID") or self.resolve(a.get("TagName"))))
         self.ga_state = {}         # GenericAttribute element -> "claim" | "meta" | "unplaced" | ("dropped", reason)
+        # Classify before ga()/ga_lang() or any native identity/fact derivation. Keep the raw tree/counts,
+        # including unsupported owners; a safe unqualified Name cannot override a protected qualified one.
+        self.protected_gas = frozenset(g for g in self.root.iter("GenericAttribute") if person_designated(g))
+        for g in self.protected_gas:
+            self.ga_state[g] = ("dropped", "person name: left out on purpose" if g.get("Value")
+                                else "no value in the file")
         self.element_fate = {}     # element ID -> what became of it
         self.notes = []
         self.broken_refs = []      # segment Connection FromID/ToID values that name no element in the file
@@ -220,6 +232,8 @@ class Reader:
     def own_gas(self, el):
         for gs in el.findall("GenericAttributes"):
             for ga in gs.findall("GenericAttribute"):
+                if ga in self.protected_gas:
+                    continue
                 yield gs.get("Set"), ga
 
     def records(self, el, prefix="", into=None, state="claim", what=None):

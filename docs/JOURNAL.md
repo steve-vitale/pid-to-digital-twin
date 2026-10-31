@@ -5591,3 +5591,69 @@ No bindings are backfilled and no failed cell is relabelled as passing because t
 
 No provider/model call, new original-source download, company/plant/native write, network-boundary change or
 LinkedIn publication is performed. Source interpretation and real engineer/company acceptance remain open.
+
+
+## 120. Keep qualified private fields and condenser-train review at their source boundaries
+
+**A260 / N089.** Original CLI probes demonstrate that a qualified Name can bypass the existing named-person
+GenericAttribute policy, including when a canonical Name says Description or TagNameAssignmentClass. In the
+latter case the protected synthetic value becomes a native unit ID before output filtering. The candidate
+inspects every expanded-local Name designation and excludes the entire protected GA at the common eligibility
+boundary before ga(), ga_lang() or native tag/title/fact derivation. This conservatively applies the existing
+eight-role policy; qualified unknown fields acquire no process semantics. Raw tree/counts, missing/empty native
+Value precedence and eligible neighboring values survive. No actual personal data is used.
+
+The independently frozen reader/test candidate passes62author CLIs/271assertions and40reader tests with9explicit
+archive-cache skips. Independent review executes90fresh CLIs/249assertions and22actual pinned MCP2.3stdio
+sessions/199responses/655assertions. It follows seven unseen fixtures through full/core graphs and complete
+selected context, sources, ownership and decision history. Six exposed original XMLs retain18complete artifacts;
+the prior N087 fixtures retain9. Registered C01 model/report reproduce after LF normalization; its complete graph
+differs only in the declared external source_model display path. Initial author/reviewer harness assumptions and
+their original failures remain preserved separately; no product failure is inferred from those corrections.
+
+This extends the bounded field policy, not arbitrary-text personal-data detection. Preserved registers can
+still carry earlier excluded values into regenerated decision history. Regeneration does not scrub that history;
+review retained evidence before sharing. The prior N087 acceptance retains its original narrower scope.
+
+**A261 / N088.** Thirteen unchanged-method E27 baselines preserve eight train-coverage failures. A reset label
+for A, unrelated C, an unknown or contradictory target, negated/disabled text or text on A's own name can quiet B.
+The catalog-only repair removes that global quiet condition, shows supplied reset records as candidates and
+keeps train membership/operating basis open for every applicable condenser, including an explicit shared reset.
+The engine, other49complete rules and all50benefit objects remain exact.
+
+The selected primary source is Brush, Masanet and Worrell, LBNL-6261E (2011), printed pp.62,65, independently
+read in the official EPA ENERGY STAR distribution. It discusses conditional compressor/condenser-energy tradeoffs
+and minimum-pressure demands. It does not prove this example's train membership, mode or savings. The conservative
+association rule is software/engineering reasoning, not a verbatim source mandate or control-design approval.
+
+Independent checks follow scope, canonical pointers, raw supported qualifiers, exact source/catalog identity,
+full graph/context and actual pinned stdio readback. Changed sources/catalogs stale old answers while retaining
+history; old CSVs, omitted tasks and missing/swapped sources refuse before writes. Screens and rollups are indexes:
+retain original site/model packets for complete evidence. Matching names or pointers alone are not source equality.
+The root's three persistent regression methods use identical corrected test bytes against both catalogs:
+the released catalog fails and the candidate passes. An initial test harness used an ignored status field and
+wrongly excluded diagnostics; the original code/results and corrected fresh runs remain. Only tests change there.
+
+The six documented example producers are actually rerun, changing four food-screen/rollup outputs only. The private
+question suite runs114cases successfully with one explicit optional-cache skip. The current inventory is50rules,
+124collection requests and14bounded collection reviews;36rules still need source-adequacy review. N065human
+usefulness and N062/N063real engineer/recipient/company/Copilot acceptance remain unobserved.
+
+N086 source-record capture stays open. Its initial prospective inclusion/namespace/snapshot/mapping contract
+was rejected before implementation; clarifications retain units/provenance metadata and separate raw retention
+from native mappings. Unknown source structure must not invent process topology or company authority. Neither
+repair changes historical corpus criteria or establishes unfamiliar-source/model performance.
+
+Final integration runs all64cached test scripts successfully: five explicit Windows unittest skips and two
+platform notices remain separate counts. All frozen tested inputs stay exact during the run. The13actual
+reader-dependent matrix cells retain their complete substantive results, while82other cell objects stay exact;
+the matrix remains64pass/23fail/8n/a with unchanged criteria. Independent matrix review checks124conditions and
+all95declared input bindings. Its append-only review renews the current generated matrix evidence after testing.
+Only review metadata, the generated feature page and this validation paragraph change after the full suite;
+all tested product code, inputs and generated engineering outputs stay exact. The affected metadata checks pass.
+The seven repository checks also pass:41numeric claims agree with their evidence, one remains prose-only,
+52pipeline stages are fresh, four benchmark suites reproduce and30saved-prediction tables regenerate
+(23MATCH/sevenMATCH-OLD). Five historical prediction gaps remain explicit; no commercial model is rerun.
+
+No provider/model call, new original-source download, company write, live native import, firewall/tunnel change
+or LinkedIn publication is performed.

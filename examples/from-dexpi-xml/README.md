@@ -151,7 +151,10 @@ drawn direction (both fed from P4712).
 - **Tags**: valves with no unique identifier use their XML ID (drawn spec codes repeat); the drawn label is kept.
   A hand switch (HS 4750.01) that drives a valve is a controller, so it gets no Ignition tag.
 - **Named-person fields** matching the reader's existing role-name policy are excluded from ordinary records,
-  drawing metadata, plant-structure metadata and direct `PlantInformation` attributes. GenericAttribute exclusions
+  drawing metadata, plant-structure metadata and direct `PlantInformation` attributes. For GenericAttributes,
+  any protected role-name designation wins, including qualified `Name` attributes and conflicting aliases,
+  before values can become tags, identities or facts. This exclusion does not promote qualified attributes into
+  native DEXPI fields. GenericAttribute exclusions
   use the report's dropped counts; direct XML-attribute exclusions have a separate count when nonzero. Other text
   remains supplied evidence: this is a named-field policy, not general personal-data detection. Regenerate the
   model, graph and selected context/snapshot after updating the reader; earlier artifacts are not scrubbed.

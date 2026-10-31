@@ -3889,6 +3889,41 @@
         "scripts/test_dexpi_reader.py",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A260",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Exclude protected GenericAttributes before any native value or identity derivation when any qualified or unqualified Name designation matches the existing role-name policy (N089).",
+      "hypothesis": "A safe canonical Name must not override another protected expanded-local Name, and filtering the emitted dictionary is too late when the value has already become a tag or identity.",
+      "evidence": "Original actual CLI probes retain qualified-only and conflicting-Name leaks; a further original probe derives a native unit ID from the synthetic protected value. The frozen reader/test candidate excludes protected GAs at the common enumeration boundary. Author62reader CLIs/271assertions,40reader tests with9explicit archive-cache skips and18 original artifact comparisons pass. Independent90CLIs/249assertions and22actual MCP2.3stdio sessions/199responses/655assertions check all8roles, conflicting aliases/order, tags/title/facts, metadata, empty precedence, supported values, full/core graphs, selected contexts, history and prewrite refusals. Six exposed original XML inputs preserve18 complete artifacts; prior N087 controls preserve9 artifacts. Registered C01 model/report reproduce exactly; graph differs only in the declared external source_model display path.",
+      "runs": "Offline synthetic development controls and already exposed public XML compatibility; no model run, new source-family performance or general personal-data detector.",
+      "verdict": "kept",
+      "why": "Close the proven pre-derivation field-policy bypass, preserving eligible fields, raw counts, native empty-value precedence and old-history limits. Unknown namespaces gain no process interpretation.",
+      "source": [
+        "docs/JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "A261",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Keep E27 condenser-train operating-basis review open when local, shared, unrelated, unknown, contradictory or negated reset records are supplied (N088).",
+      "hypothesis": "A reset label cannot discharge another train's coverage or demonstrate suitable operating data, even when a shared declaration is supplied.",
+      "evidence": "Thirteen original matched baseline CLIs preserve8scope failures. Independently accepted catalog-only candidate retains reset candidates and adds one always-open train/operating-basis task; engine and other49complete rules/all50benefit objects stay exact. Independent source, screen, rollup, full graph/context, changed-source/catalog stale-history, oldCSV/source-swap/omission refusal and actual pinned stdio MCP readback controls pass. Root3persistent regression methods fail against the original catalog and pass against the candidate; the same corrected test bytes are independently reviewed. Six documented producers change only4food-screen/rollup outputs; private full question suite runs114cases with1explicit optional-cache skip. Inventory is50rules/124requests,14bounded collection reviews/36remaining source contracts.",
+      "runs": "Source-informed offline synthetic development/independent coding-agent controls; no held-out model comparison, operating-control acceptance, measured savings or human usefulness result.",
+      "verdict": "kept",
+      "why": "Remove model-wide suppression while retaining exact source pointers, complete supported selected evidence and unresolved operating scope. Keep N065/N082 and actual engineer/company acceptance open.",
+      "source": [
+        "docs/JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries",
+        "docs/OPPORTUNITY_SCREEN.md",
+        "scripts/test_question_engine.py",
+        "examples/opportunity-screen/README.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4762,13 +4797,14 @@
       "id": "N082",
       "function": "intake_and_reuse",
       "status": "not-done",
-      "idea": "Source-review the remaining 37 catalog rules and 123-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
-      "why_not_yet": "Thirteen named rules have bounded source-informed collection reviews after A258; this is not whole-catalog engineering adequacy, safety validation or usefulness. N065 and real engineer/recipient acceptance remain open.",
+      "idea": "Source-review the remaining36 catalog rules and124-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
+      "why_not_yet": "Fourteen named rules have bounded source-informed collection reviews after A261;36 remain. This is not whole-catalog engineering adequacy, safety validation or usefulness. N065 and real engineer/recipient acceptance remain open.",
       "source": [
         "docs/JOURNAL.md#115-repair-the-audit-gaps-with-owned-workstreams-and-independent-handoffs",
         "docs/STATUS.md",
         "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
-        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current"
+        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current",
+        "docs/JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries"
       ]
     },
     {
@@ -4832,13 +4868,26 @@
     {
       "id": "N088",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Keep E27 refrigeration condenser-train coverage and operating-basis review open when unrelated, ambiguous or qualified floating-head/reset labels are supplied.",
-      "why_not_yet": "A prospective source-scoped contract and13 unchanged-method baseline CLIs expose8 uncovered-train scope failures, including A-only/unrelated/unknown/contradictory/negated text and own-anchor inversion. No E27 product repair or additional bounded collection review is accepted yet; N08237 source contracts and usefulness remain open.",
+      "why_not_yet": "Completed A261 after frozen source/coverage controls and independent downstream/history/MCP review. Every eligible condenser keeps applicable train/operating-basis collection; labels do not establish mode, complete coverage, data suitability or savings. N08236 source contracts and N065usefulness remain open.",
       "source": [
         "docs/JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools",
         "docs/STATUS.md",
-        "docs/OPPORTUNITY_SCREEN.md"
+        "docs/OPPORTUNITY_SCREEN.md",
+        "docs/JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries"
+      ]
+    },
+    {
+      "id": "N089",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Apply the existing named-person GenericAttribute exclusion to every expanded-local Name designation before any native tag, identity, title or fact derivation.",
+      "why_not_yet": "Completed A260 with independent all-role/alias/derivation/counting and complete receiving/history controls. Unknown QName attributes gain no DEXPI semantics; eligible data and empty-value precedence remain. No arbitrary-text personal-data detection or old-history scrub.",
+      "source": [
+        "docs/JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries",
+        "docs/STATUS.md",
+        "examples/from-dexpi-xml/README.md"
       ]
     }
   ]

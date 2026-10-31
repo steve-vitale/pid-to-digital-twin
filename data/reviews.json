@@ -12110,6 +12110,283 @@
     "preserved-history-SDK-result": "204a528a498fe0c2a630bfb1a5dd86bcb9933d86de3956ec86b7bbba30e7780b",
     "post-suite-prose-review": "66dd2e81da3714df60fb135618b5cf555b534939f1714912615cf6ec2363fa01"
    }
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "Independent AI review: qualified Name exclusion before native derivation and complete selected history readback",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA256 after CRLF-to-LF normalization; private execution/proof receipts bind raw bytes.",
+   "registered_output_count": 3,
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "supporting_files": {
+    "scripts/dexpi_reader.py": "56c1c70cffe1d498bf7e08bc1f638ada33f107f3a0940142552da26b12b04f0c",
+    "scripts/test_dexpi_reader.py": "677fb3b7c56cc290489965e74c36640557bfdd7e33f11c9e116ef4c676c62e99",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/context_register.py": "da0fbde2a1100b02b82bd1380ce6bc64d3106ed57c39108235da73e7cf7a32bb",
+    "scripts/serve_snapshot.py": "030e52612c8622fa119cf31b7e59b5121aecf550022589dc4de8d6119b0a1489",
+    "examples/from-dexpi-xml/README.md": "8abdf731b934917f3660ead10fc89e8e10325b2c605b180af9d0042a04914b1a"
+   },
+   "supporting_inputs_not_independently_certified": {
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9"
+   },
+   "freshly_reproduced_or_validated_files": [
+    "examples/from-dexpi-xml/dexpi-c01.model.json",
+    "examples/from-dexpi-xml/dexpi-c01.report.md",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json"
+   ],
+   "inherited_unchanged_files": [],
+   "changed_registered_outputs": [],
+   "comparison_notes": {
+    "fresh": "Three actual registered C01 CLIs reproduce complete model and readable report after LF normalization. The complete graph differs only in source_model because the fresh output is outside the checkout; all three registered outputs stay unchanged.",
+    "current_method": "Public reader/test exactly match the independently accepted two-file candidate; current guide was inspected and bound after integration. Twenty-seven saved actual reader-source/report bindings remain exact.",
+    "prior_guard_boundary": "An earlier graph guard was authored by the original receiving reviewer. Its unchanged hash is consumed evidence, not renewed independent certification of that guard implementation. The exact C01 output comparison and privacy readback remain checked.",
+    "history": "The repaired current model/graph can omit a protected value while preserved earlier decisions still retain it. The actual guide explicitly requires reviewing retained history before sharing; no automatic redaction or safe-to-share acceptance follows."
+   },
+   "checks": [
+    "Independent frozen fixtures cover all eight protected roles, case/order/namespace aliases, conflicting canonical designators, TagName/title/fact/instrument-number derivation, qualified payloads, empty/missing precedence and later eligible duplicate-name values.",
+    "Ninety actual CLIs and 249 valid assertions cover reader, full/core graph, complete selected context, refusal sentinels and source compatibility. Forty reader cases run successfully with nine explicit archive-cache skips; six exposed original XML sources are separately run and preserve eighteen complete native/report artifacts.",
+    "Twenty-two actual pinned MCP2.3 stdio sessions provide 199 responses and 655 valid assertions, comparing complete selected node/relation/question/current-context/owner/decision records and the preserved-history caveat. The unchanged loopback transport is outside this rerun.",
+    "Three prior N087 fixtures preserve all nine complete artifacts. The authorized reader/test are the only changes among 2719 archived files; all 369 frozen author bindings remain exact.",
+    "A successor review verifies 599 retained proof files and 339 saved-receipt/current-byte conditions to complete the interrupted freeze, without rerunning product commands. Twenty-eight initial diagnostic CLIs with reviewer harness assumptions remain preserved and excluded from the accepted 90-CLI count.",
+    "The integrated guide accurately bounds qualified Name exclusion, separate accounting, regeneration, arbitrary-text limits and retained historical evidence. An overly broad namespace sentence was narrowed before this guide acceptance."
+   ],
+   "scope": "Independent acceptance of the exact existing eight-role GenericAttribute designation exclusion before native derivation, supported selected receiving readback and three reproduced C01 outputs. No source-record feature, whole XML fidelity or engineering/company acceptance is inferred.",
+   "limits": [
+    "This is a named-field policy, not general personal-data detection or unfamiliar namespace support.",
+    "Previously generated decisions/history can retain earlier excluded values; neither regeneration nor this review automatically scrubs them or certifies a packet as safe to share.",
+    "Exposed public XML compatibility is development evidence, not a new held-out source-family or model-performance result.",
+    "Source-record capture, new graph semantics and the E27 catalog repair require separate reviews.",
+    "No provider calls, new original downloads, company writes, native imports or operational/Copilot acceptance."
+   ],
+   "private_proofs": {
+    "independent-acceptance": "4225983d88d75ec1e91851e9270a9293bd612d6a5ba19ccf7f6737f004730821",
+    "independent-review": "1069062d814f05f9f9cad3acbb9a6e6eb56e4d0357a9c35308f30e03ccc8774e",
+    "independent-proof-manifest": "a57f696eecaf386560eaa53fb77eb7d721008f15d31ab67a3d900cda32ac0559",
+    "saved-receipt-revalidation": "f2dabcb2986f8f741b62333fb695e8671134c669f4b1e9cb96d32672cca732b9",
+    "C01-reproduction": "63a17ad366d80b8d28b1d6b655e2bb81b24cf25bf89cf8d9733dfe361aa9207e",
+    "C01-commands": "b16d2c67a9621e4a2a1feef01506e9226359ec9f928e13b0fa4e1307ec2908a5",
+    "primary-CLI-result": "36837b0da1dde06f3d633be1a8df8dfc60ecfceab7227711eba84c905f221db2",
+    "primary-SDK-result": "8dd02a3277ff389b5a445d90823c1b3c2e1bfc173bc6c9a5e289cf91ca091acf",
+    "history-CLI-result": "0576c93f2e00b283d608cd96af7fa11f0db8678ac3ab5b496cb3249a3c023c72",
+    "history-SDK-result": "09a9ef975445402425b5f35afaecffb419461ed8a6bc960c94efa85fd06f84e9",
+    "integrated-leaf-guide-review": "828530b564fccb72d6de66df307b720e6fc87e18b96ed19d5ffb7792590a49e9"
+   }
+  },
+  {
+   "feature": "opportunity-screen",
+   "reviewer": "Independent AI review: E27 condenser-train collection and complete receiving history",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "registered_output_count": 28,
+   "file_hash_method": "SHA256 after CRLF-to-LF normalization; private proof bindings use raw bytes.",
+   "files": {
+    "examples/opportunity-screen/te/screen.md": "5353796c62c58632af18b974e286ae3d183ee5d20724ce4a2d4cb28de81f6db7",
+    "examples/opportunity-screen/te/questions.json": "e2fd46ace1c6ca87586b10617fd6d8b254345fdc73d0f2a573a097a626b4ae0e",
+    "examples/opportunity-screen/bayer/screen.md": "e8f0df878396f2bb14bce659ecbd523d9d137615f06f4afbb1def154157f525e",
+    "examples/opportunity-screen/bayer/questions.json": "75a81e3efa33659b3378167ec77e9468f68b572bc26cf9c9e82ec380a190f39d",
+    "examples/opportunity-screen/open100/screen.md": "febc46457fcb53bd9ac949515219d2a3f44e3c420d216c139b09ee33d0b28ee9",
+    "examples/opportunity-screen/open100/questions.json": "b7debd2fe5c6b75bc0297b495eb7257f32eb3693c644f73eac621afe6a447161",
+    "examples/opportunity-screen/food/screen.md": "6b5c8e4a340f88ea13cab1b75ffa7fdbc5869e0eb73fb493673347ee15fdaa63",
+    "examples/opportunity-screen/food/questions.json": "5cd09970364c6dd835a05411845e6d0d2d8f3ede337405b2a172742e5487cbca",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "f8b0c2f5b7cc093c7c5ad68a19976a69437568f8863b0190e239b641d8bc9119",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "8fa386f9a148e61491127ccac113bf9d13c67a7cb4aa3f90bc070bbc1bd1edf7",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "1e185af179fb8999022f911677210a0ee1f92246ac66da7525b1c4ae52c1e15f",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "be8f59067505fb0fb86132c531b804cf62e14d9fc6b792e640e5e48285fa0ac7",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "9b19e4230db0d32099378eae1aa2ac942855531f8e7b0973b6dfb558a7a9addb",
+    "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+    "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67",
+    "examples/opportunity-screen/field-coverage/README.md": "5de9e8482479c69687edad39ca4157567ccc5ae387148554682cbe05c450df9b",
+    "examples/opportunity-screen/field-coverage/model.json": "25680206678be6dd3ecf75a8e88f14b38a4f74bc4d4b0d471d45eb18b424f750",
+    "examples/opportunity-screen/field-coverage/questions.json": "68ea10598e3f218057d99f254ef085838c9347e5b82b598a94419b4e99d920f4",
+    "examples/opportunity-screen/field-coverage/screen.md": "a0d676aa124cb613a80847ef2284fd4e5e05597c650c50aabd937fe4ae39ccda",
+    "examples/opportunity-screen/collection-basis/README.md": "a022e30b3dd9c3201339e3614bdc79a0d8136cc90e47ca29bd02e51e3982b1ab",
+    "examples/opportunity-screen/collection-basis/model.json": "4363ccd5a89ceb18957208bed29e59f88d2ff9bcda7aa99569f12ec7c5834103",
+    "examples/opportunity-screen/collection-basis/questions.json": "533da8fc2ca905ef3267325dc877021e0cae1bf331ac13d71e0400b250b056e2",
+    "examples/opportunity-screen/collection-basis/screen.md": "997305753067bebccda74389d613e94abf6bf0faa45c8eba86838bf6b4058d97",
+    "examples/opportunity-screen/collection-basis/sources.json": "965d33656f97e4fca4ff8d28fe323071ce3c5fb03e24d2cd513ff7c5593d7a0d",
+    "examples/opportunity-screen/pump-motor-basis/questions.json": "67c57e0db0e098025ec22eaf7427faa47473213178d26084efd4285636737ee3",
+    "examples/opportunity-screen/pump-motor-basis/screen.md": "25b3ee7ca5f9402322d6dc7243e41d3c1243c7bfd4cbdf73636f68f11bdfafba",
+    "examples/opportunity-screen/source-investigation/questions.json": "4308f9ce8000e7f97481e3b2cf51ee3599d8a9114ce05d95cf11791ddd39568e",
+    "examples/opportunity-screen/source-investigation/screen.md": "0264c10bd5b3681cd99cf5d2b44755a0a6752b6bf870379ac23bacb48ecd9a1f"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "examples/opportunity-screen/food/questions.json": "5cd09970364c6dd835a05411845e6d0d2d8f3ede337405b2a172742e5487cbca",
+    "examples/opportunity-screen/food/screen.md": "6b5c8e4a340f88ea13cab1b75ffa7fdbc5869e0eb73fb493673347ee15fdaa63",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json": "8fa386f9a148e61491127ccac113bf9d13c67a7cb4aa3f90bc070bbc1bd1edf7",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md": "f8b0c2f5b7cc093c7c5ad68a19976a69437568f8863b0190e239b641d8bc9119"
+   },
+   "inherited_unchanged_files": {
+    "examples/opportunity-screen/te/screen.md": "5353796c62c58632af18b974e286ae3d183ee5d20724ce4a2d4cb28de81f6db7",
+    "examples/opportunity-screen/te/questions.json": "e2fd46ace1c6ca87586b10617fd6d8b254345fdc73d0f2a573a097a626b4ae0e",
+    "examples/opportunity-screen/bayer/screen.md": "e8f0df878396f2bb14bce659ecbd523d9d137615f06f4afbb1def154157f525e",
+    "examples/opportunity-screen/bayer/questions.json": "75a81e3efa33659b3378167ec77e9468f68b572bc26cf9c9e82ec380a190f39d",
+    "examples/opportunity-screen/open100/screen.md": "febc46457fcb53bd9ac949515219d2a3f44e3c420d216c139b09ee33d0b28ee9",
+    "examples/opportunity-screen/open100/questions.json": "b7debd2fe5c6b75bc0297b495eb7257f32eb3693c644f73eac621afe6a447161",
+    "examples/opportunity-screen/review-refresh/expected/expected.json": "1e185af179fb8999022f911677210a0ee1f92246ac66da7525b1c4ae52c1e15f",
+    "examples/opportunity-screen/review-refresh/expected/questions.json": "be8f59067505fb0fb86132c531b804cf62e14d9fc6b792e640e5e48285fa0ac7",
+    "examples/opportunity-screen/review-refresh/expected/screen.md": "9b19e4230db0d32099378eae1aa2ac942855531f8e7b0973b6dfb558a7a9addb",
+    "examples/opportunity-screen/millard/screen/screen.md": "63194dec803102f1b393f28e2555af2407fc0714ba576378640a3cfc230e8018",
+    "examples/opportunity-screen/millard/screen/questions.json": "0ee10a50790cf8429be5ac097d543f4e4028d6305d0b382090abd051556f9d67",
+    "examples/opportunity-screen/field-coverage/README.md": "5de9e8482479c69687edad39ca4157567ccc5ae387148554682cbe05c450df9b",
+    "examples/opportunity-screen/field-coverage/model.json": "25680206678be6dd3ecf75a8e88f14b38a4f74bc4d4b0d471d45eb18b424f750",
+    "examples/opportunity-screen/field-coverage/questions.json": "68ea10598e3f218057d99f254ef085838c9347e5b82b598a94419b4e99d920f4",
+    "examples/opportunity-screen/field-coverage/screen.md": "a0d676aa124cb613a80847ef2284fd4e5e05597c650c50aabd937fe4ae39ccda",
+    "examples/opportunity-screen/collection-basis/README.md": "a022e30b3dd9c3201339e3614bdc79a0d8136cc90e47ca29bd02e51e3982b1ab",
+    "examples/opportunity-screen/collection-basis/model.json": "4363ccd5a89ceb18957208bed29e59f88d2ff9bcda7aa99569f12ec7c5834103",
+    "examples/opportunity-screen/collection-basis/questions.json": "533da8fc2ca905ef3267325dc877021e0cae1bf331ac13d71e0400b250b056e2",
+    "examples/opportunity-screen/collection-basis/screen.md": "997305753067bebccda74389d613e94abf6bf0faa45c8eba86838bf6b4058d97",
+    "examples/opportunity-screen/collection-basis/sources.json": "965d33656f97e4fca4ff8d28fe323071ce3c5fb03e24d2cd513ff7c5593d7a0d",
+    "examples/opportunity-screen/pump-motor-basis/questions.json": "67c57e0db0e098025ec22eaf7427faa47473213178d26084efd4285636737ee3",
+    "examples/opportunity-screen/pump-motor-basis/screen.md": "25b3ee7ca5f9402322d6dc7243e41d3c1243c7bfd4cbdf73636f68f11bdfafba",
+    "examples/opportunity-screen/source-investigation/questions.json": "4308f9ce8000e7f97481e3b2cf51ee3599d8a9114ce05d95cf11791ddd39568e",
+    "examples/opportunity-screen/source-investigation/screen.md": "0264c10bd5b3681cd99cf5d2b44755a0a6752b6bf870379ac23bacb48ecd9a1f"
+   },
+   "changed_registered_outputs": [
+    "examples/opportunity-screen/food/questions.json",
+    "examples/opportunity-screen/food/screen.md",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.json",
+    "examples/opportunity-screen/rollup-food-bayer/rollup.md"
+   ],
+   "supporting_files": {
+    "data/questions.json": "d20115933c48ad81d2430db2bc552c5fdcfe2f6e3797603f9a93c1c55f1ca75a",
+    "scripts/question_engine.py": "400499e51ad788ca6055accbbd63395d1c356a32fb1898a21cecbac7ac989a05",
+    "scripts/test_question_engine.py": "f418fd873c23e37a6c9db0293ef727c279de7b6c601f3e44d27b2d29f6f06969",
+    "docs/OPPORTUNITY_SCREEN.md": "54cc3cbf7ce6fa9572173347f192c374ac651c4030d8e6ed37401c5074b4b55a",
+    "examples/opportunity-screen/README.md": "0bf0ea089dd705b023409d08dba0c1586bf5def9d64de6438d162aeb13df2d9b",
+    "docs/STATUS.md": "fbb22cca6ffb0310a99e234f442dcad6fad00fe31df5fc9d47147243aadfb2eb",
+    "scripts/context_register.py": "da0fbde2a1100b02b82bd1380ce6bc64d3106ed57c39108235da73e7cf7a32bb",
+    "scripts/serve_snapshot.py": "030e52612c8622fa119cf31b7e59b5121aecf550022589dc4de8d6119b0a1489"
+   },
+   "supporting_inputs_not_independently_certified": {
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9",
+    "scripts/test_graph_export.py": "595f50eccf2dfc21c6bd5ad46474b397b35826aff3abe88b4a69e7c624050a2b"
+   },
+   "comparison_notes": {
+    "fresh": "Two actual CLI calls against current integrated public code freshly reproduce the complete four food-screen/rollup artifacts after LF normalization. Those four also equal the separately regenerated accepted catalog candidate.",
+    "inherited": "The other24registered outputs retain exact hashes from the preceding independent C9 review. They are not all newly regenerated or re-reviewed here.",
+    "scope": "The earlier graph-export guard is consumed unchanged and retains its separate prior independent scope; it is not recertified by this collection repair."
+   },
+   "checks": [
+    "The frozen catalog-only candidate passes50actual independent product CLIs/151assertions across13matched and10different-ID fixtures, rollup omission, complete supported qualifiers, changed-source/catalog stale history and source/oldCSV prewrite refusals.",
+    "Five actual pinned MCP2.3stdio sessions produce30responses/106assertions matching complete selected summary, asset, incident relations, question, ownership/current context and immutable decisions. All retained decisions keep plant_truth unknown.",
+    "The three root-authored persistent regression methods use identical test bytes against released and candidate catalogs: original fails and candidate passes in the independent two-process pair. Earlier test AST stays exact. Root separately ran the114case suite with one optional-cache skip; no second independent full-suite run is claimed.",
+    "Other49complete rules and all50benefit objects stay exact. Current50rules/124requests include14bounded collection reviews;36source contracts and actual human usefulness remain open.",
+    "Current guides describe always-open train/operating-basis collection and the retained original-packet requirement. Screen/rollup pointers alone do not carry every raw qualifier or establish unchanged content."
+   ],
+   "scope": "Four freshly reproduced registered outputs and24hash-inherited outputs; independently accepted E27 collection/source association, source identity and complete bounded receiving history. Public integration is reviewed here; final whole-repository suite/publication/CI remain separate gates.",
+   "limits": [
+    "Exposed synthetic development and earlier-public-source compatibility evidence, not held-out model performance or broad source generalization.",
+    "No optimum setpoint, operating action, installed-control adequacy, measured savings, safety/company authority or human usefulness follows from labels or software checks.",
+    "No provider/model calls, new originals, live native import, company writes, network ports or actual Copilot tenant acceptance.",
+    "N086typed source capture, general organizational governance and the remaining36source contracts remain open."
+   ],
+   "private_proofs": {
+    "independent-acceptance": "3a0a87f46bfdceee8f08c3cc9efe5a9c89f8afd52169954dd2f1bfd5daadc592",
+    "independent-proof-manifest": "a73db3eea5786bbc2150aa298e9146dc6ad2db9776c6d9f086205c1e803e5a65",
+    "independent-review": "55b61a918b74f3684ae16760a7942944dcbef7edee4b1a43833b885a14636d39",
+    "public-four-output-reproduction": "205d95f8d3eee5848c7a14a3e9fefecc4a59b27cb9b9c7c878889bdf29ae36e0"
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent AI review: actual thirteen-cell reader rerun and exact remaining matrix preservation",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA256 after CRLF-to-LF normalization; private proof receipts bind raw bytes. Existing matrix tool IDs retain their16hex display format; source/runner input hashes remain full64hex.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "d5d4f4a6abc97e07b71d7bdc59cb60c1cb1110a3d20b2bfcf4f78a57dfe1f80b",
+    "out/generalization/matrix.json": "bc081d51dbc635eef328fcadea3599e1eaa29601fb2fbe81a4a31d5db1b4f05b",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "supporting_files": {
+    "data/agent_keys/commons-pid-sheets/P_ID.graphml": "d321542187a15bc1141060ae6dd7689bd1a85aa295fd4284ab4a03497d7a93ad",
+    "data/agent_keys/commons-pid-sheets/Pump_with_tank_pid_en.graphml": "a2255c924710353fe7fb669380e34e7f0a6a868ff1384a678ba74be00ccc7e61",
+    "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "7b6b80b3a3886802af0ceb0c24772e2c3685fc4e5dcfed63072b1d6228c03c00",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "43a4ebe740bc78b961011a476bbc7e8af98415011d2da104d841cd80ce41b037",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "ac948b59d12183e4dcc690566040ed2c1fa5d35345c3f183c12f0b1022266e8f",
+    "data/agent_keys/omre-1958-pid/omre_q4.graphml": "6cb0e9db7871f0c647d98e26d7dc84aa42a798c4fa342ae01c706d1de06d3e05",
+    "data/agent_keys/pronto-fig1/fig1.graphml": "f4e0b59ebaea8b3a97cc60b47a3f27c46a0f7ba835fe805008bba5da55327013",
+    "data/features.json": "0e19bc44577bc26eb4e2d16050d91a151e60b5e1781a15f746ef001fc46debc5",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/build_twin.py": "8e9a5e26b9938a8adcca9590e03c3dde8c63af38aba09f6cf1aeafe6c4b0ded7",
+    "scripts/confidence.py": "0fc9948199d89edfeb091f4a9c1c961f5361f10bf0f292d7b7ce72740e7e4a10",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/csv_normal_bands.py": "88baa8aa94fd29002956843a947a5e7bb2d428b09fc57af002c554c399099f6e",
+    "scripts/deliverable_report.py": "6df4ee498e6544d8f57327a1d6e675c059f189c2cc8fcac411a20fc120a4e425",
+    "scripts/dexpi_reader.py": "56c1c70cffe1d498bf7e08bc1f638ada33f107f3a0940142552da26b12b04f0c",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/evaluate_vendor.py": "304be06c4a31e852dfcef093bd3cb858429fd962c5e45d0241cadefd0baf7fcd",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/historian_adapters.py": "1020bb06a248667a9308756bc24415ce1ec9cc8169b23b9df8cd378d1c78b761",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "scripts/line_layers.py": "3b9644c94ea7fabdd1b254fc9286bf3fbb23808be179faa21ffc72e099dc4ac2",
+    "scripts/loop_audit.py": "ec7837928220abfffa5762650b9ee53c5aa30c048d32b2d591d0fe9dd9c4c4a5",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/score_twin.py": "3bdf5993e0e3eb4ea11e5f01f23ba4571d2e25510a43d6f637132428841af223",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
+   },
+   "freshly_reproduced_or_validated_files": [
+    "docs/GENERALIZATION.md",
+    "out/generalization/matrix.json"
+   ],
+   "inherited_unchanged_files": [
+    "data/corpus.json"
+   ],
+   "changed_registered_outputs": [
+    "docs/GENERALIZATION.md",
+    "out/generalization/matrix.json"
+   ],
+   "comparison_notes": {
+    "actual_partial_rerun": "Root executes all13cells consuming the accepted reader. Complete input/key/runner/registry bindings and all substantive results remain exact; only top-level timing and reader tool IDs change. The actual log and terminal receipt identify exactly those13pairs.",
+    "unaffected": "All82other complete cell objects remain exact. Current registry and every consumed nonreader method retain their baseline full bytes. No historical source/key, criterion or second-reading result is rewritten.",
+    "strict": "An independent actual --check --require-inputs CLI verifies the generated page and all95declared input bindings locally. This is a read-only verification, not a second execution of the13workflow cells or any model.",
+    "inherited": "Corpus registry, unchanged methods and earlier freshness/refusal experiments retain their documented scopes. Two output files were regenerated by the actual partial run;95cells are recorded, not95newindependenttrials."
+   },
+   "findings": [],
+   "checks": [
+    "Saved preintegration JSON/page match released5fb Git blobs and their frozen hashes. All95cell identities, criteria and top-level nonexecution metadata are retained.",
+    "For every affected cell, compare the complete record excluding only top-level seconds, ran_at and tool_files. Every substantive value/reason/detail and full source/key/runner/registry binding stays exact. Only the reader tool identifier changes, and it matches the accepted current reader.",
+    "Verify the complete82unaffected cell objects are exact. Verify full current bytes of every consumed nonreader method against baseline Git blobs; runner, runner tests, corpus adapters, corpus registry and feature registry are unchanged.",
+    "Inspect the root actual13row log and its frozen digest, selected rows4/7 and seveninputsets. Current statuses remain64pass/23fail/8n/a; original and second-reading scopes, self-generated/agent-key/duplicate-control limits remain.",
+    "Execute one actual independent strict read-only check: all95cells declared inputs verified locally, no absent-cache UNVERIFIED result, current generated page matches JSON and code/runner/registry bindings match. Reviewed source hashes remain exact. Comparison and verification pass124conditions.",
+    "Initial reviewer digest-format assumptions and diagnostic-module naming correction remain preserved. No public file, source, criterion or result changes; no workflow cell or model is rerun by this reviewer."
+   ],
+   "scope": "Independent current-output and provenance review after the actual partial reader-dependent rerun. The eight selected workflows retain their existing scoped criteria and failures. This does not certify all features or new generalization.",
+   "limits": [
+    "95configured cells are not independent trial counts or a whole-toolkit completion percentage. Eight workflows do not cover every tool.",
+    "23failed cells and8not-applicable cells remain visible; no result is promoted because a privacy defect was repaired.",
+    "Declared dependencies and normalized hashes are conservative bindings, not operating-system read tracing or authenticity signatures.",
+    "No new source-family, model extraction, held-out performance, human usefulness, plant data, company/native-system/Copilot or engineering acceptance.",
+    "Full-suite completion, publication checks and exact-head CI remain separate root release gates."
+   ],
+   "private_proofs": {
+    "independent-report": "0e531f7cde377daf804c664ad00d0350370c83539687ed256f304ba87e786a67",
+    "independent-result": "c174c57ef28608228474675378be22a5ff3b36f1b5213767a81c620eeb95b645",
+    "independent-comparison": "738ff83ab0528aecd43c468e65fb399ecb5f2987ffeed6aabe830e48e7de1116",
+    "independent-strict-check-log": "2da9f02a1613b29a1dc480f84b286059b15b0b364413f8d211b512436550bcc0",
+    "independent-evidence-manifest": "ac0f9532a85aa47e85bcb87b3360c8bf63f98e537fd425f46a82778b9ad12c88",
+    "actual-root-rerun-result": "7d1337f7a8a3cd5c678b611dd917db0cb51adff66ad35935bbe256f3187d03db",
+    "actual-root-rerun-log": "6b2cebe9a3a347379e3d3a88a843c776011b3c95b192aa348b9f6a6d6086c2f5",
+    "preserved-harness-correction": "011f6cbbe199f7c28eadafcd69375a89740ac3bd30c2de570911f410f653a4a4",
+    "preserved-harness-format-correction": "11b50d8eb111e2099c0ff59f19f0b86573023c5ab5d783f6c48c93370d4e566e"
+   }
   }
  ]
 }

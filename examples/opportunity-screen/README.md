@@ -152,7 +152,7 @@ raise; **legit** means an older question fired on the new equipment and is a fai
 
 | Finding | Judgement |
 |---|---|
-| E27 C-201: ammonia evaporative condenser, PT-203 head pressure, PIC-203 "head pressure control at a fixed setpoint" | Expected. The head pressure request names PT-203 and the setpoint and low limit in the plant controls; the floor (hot gas defrost, liquid injection) is its own request |
+| E27 C-201: ammonia evaporative condenser, PT-203 head pressure, PIC-203 "head pressure control at a fixed setpoint" | Expected. Supplied pressure/control records remain candidates; train membership, actual reset mode, operating limits and coincident total demand remain open for review, including when a reset is named |
 | E28 model: K-201, K-202, K-203 with suction pressures and candidate loads | Expected. The grouped question keeps suction membership, every coincident load/approach and reset coverage unresolved; grouping does not establish shared topology. |
 | E29 K-201 and K-202: screws with no drive (ZT-202 slide valve position shown on K-202) | Expected |
 | E30 EV-201: hot gas defrost valve HGV-201, defrost started by a timer | Expected |

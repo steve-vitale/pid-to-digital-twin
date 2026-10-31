@@ -164,6 +164,15 @@ two-stage example. E28/H5 retain drawn reset/recovery as candidates and keep cov
 item cannot silence the other trains. Heating-duty words do not establish useful delivered heat, simultaneous
 operation, clean separation or acceptable compressor/head-pressure impact.
 
+E27 keeps each named refrigeration condenser in review even when reset text is local, shared, unrelated,
+negated or disabled. Verify source-qualified train membership, actual mode, pressure reference/refrigerant,
+appropriate ambient basis, coincident observations and applicable operating limits. Review total affected
+compressor and condenser fan/pump demand. S25 (printed pp.62,65) supplies conditional energy tradeoffs and
+minimum-pressure constraints; the train-association rule is conservative software reasoning. Neither a
+label nor an absent drawing record establishes installed controls, suitable data, savings or a setpoint.
+The screen and rollup are indexes: retain their original site/model packets and inspect full supported
+values in the graph/context. Matching IDs or pointers alone do not establish identical source content.
+
 C9 keeps every named rotating or fired machine's function/association record review open, with supplied nearby
 switches and interlock records as candidates. A record for one machine cannot settle another; shared targets must
 remain explicit, and unknown or contradictory targets stay unresolved. Cause/effect text, measurement/final-element
@@ -174,8 +183,8 @@ establish effectiveness, testing, approval or operating authority. The independe
 [HSE's functional-safety guidance](https://www.hse.gov.uk/eci/functional.htm) to keep specification, validation and
 continuing evidence distinct; it makes no safety-design or compliance determination.
 
-The catalog has 50 rules and 123 collection requests. Thirteen rules have bounded source-informed collection
-reviews; the other 37 still need original-source adequacy review. These controls do not establish whole-catalog
+The catalog has 50 rules and 124 collection requests. Fourteen rules have bounded source-informed collection
+reviews; the other 36 still need original-source adequacy review. These controls do not establish whole-catalog
 engineering correctness or human usefulness. The [worked food screen](../examples/opportunity-screen/food/screen.md)
 shows the retained candidates and open coverage tasks.
 
@@ -322,7 +331,7 @@ the source's URL; each source entry in `data/questions.json` records that file's
 
 | ID | Question | Fires on | Source (page) |
 |---|---|---|---|
-| E27 | Is the refrigeration condensing (head) pressure held higher than the weather allows? | a condenser whose name or service names the refrigerant; quiet if a floating head or wet-bulb reset is named | S25 pp. 62, 65 (2% to 3% per degree C of condensing temperature, as reported there) |
+| E27 | Is this condenser train's head pressure appropriate for its weather, limits and actual reset coverage? | named refrigeration condenser; supplied reset labels remain candidates and train/operating-basis review stays open | S25 pp. 62, 65 (conditional reported benefit; no site calculation) |
 | E28 | Does each suction level meet the conditions required by every coincident served load? | refrigeration compressors, with suction/load records and drawn reset candidates; membership, approaches and coverage stay open | S25 p. 63 (about 8% for a two-stage system raised from -30 °F to -20 °F) |
 | E29 | Does a refrigeration compressor carry part load on its slide valve with no speed control? | a refrigeration compressor with no drive (VFD, VSD, ASD, SC, SIC) on it | S25 pp. 59, 63 |
 | E30 | Are evaporators defrosted on a fixed timer? | an evaporator or unit cooler with defrost drawn on it; quiet with a coil differential pressure or demand defrost | S25 pp. 59, 66 (no %) |

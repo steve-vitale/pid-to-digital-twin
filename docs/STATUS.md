@@ -22,11 +22,11 @@ controls. Keep the remaining source-adequacy and external-acceptance work separa
 | **Model review — N072/N077** | Supplied alarm metadata and old receipts survive. Supported native tag corrections migrate live references; separate layouts, mappings and snapshots still need reconciliation. [Worked correction](../examples/review-and-mapping/native-identity/README.md). |
 | **Schedule choices — N079** | Contradictory service declarations refuse in either input order. Exact source-bound selections retain candidates and supplied qualifiers; existing spelling choices remain drafts. No choice grants organizational approval. |
 | **Description review — N078** | Every supplied record value and source line is exposed for review; all rows start unreviewed. Structural validity does not decide whether the interpretation is correct. [Description guide](../examples/from-description/README.md). |
-| **Collection contracts — N071/N073/N080/N084/N085** | Thirteen named rules keep candidate fields, electrical quantities, measurements, machine/function association and actual coverage distinct from suitable evidence. Unrelated trips/reset/recovery cannot quiet other machines' review obligations. The other 37 rules still need source-adequacy review; no whole-catalog correctness or usefulness is established. [Collection limits](OPPORTUNITY_SCREEN.md). |
+| **Collection contracts — N071/N073/N080/N084/N085/N088** | Fourteen named rules keep candidate fields, electrical quantities, measurements, machine/function association and actual coverage distinct from suitable evidence. Unrelated trips/reset/recovery cannot quiet other machines' review obligations. The other 36 rules still need source-adequacy review; no whole-catalog correctness or usefulness is established. [Collection limits](OPPORTUNITY_SCREEN.md). |
 | **Context and readback — N075/N076/N083** | Rejected evidence changes dependent-answer freshness; validated selected packets serve full retained sources, values, decisions and ownership. Bound enriched-question re-export refuses: use the complete graph/context pair or explicitly refresh the preserved register. No automatic source fetching, rebinding, authentication or company authority. [Context guide](CONTEXT_REGISTER.md). |
 | **Matrix provenance — N074** | Actual runs bind declared inputs/keys, inventories, registry, runner and code. Changed/missing required inputs refuse; absent optional caches are explicitly unverified. Strict input mode still requires them. Bindings are conservative declarations, not operating-system read tracing. |
 | **Benchmark recipes — N081** | Re-scores retain exact historical recipe snapshots, attempts, predictions and reports. New provenance identities are not new model performance. |
-| **Metadata exclusions — N087** | The existing named-person field policy now applies before plant-structure and direct XML metadata reach model, graph or snapshot outputs. Eligible metadata and separate occurrence counts survive. Regenerate selected artifacts; earlier packets are not scrubbed. A refreshed register can retain old evidence in decision history; review that history before sharing a regenerated packet. This is a bounded field policy, not general personal-data detection. |
+| **Metadata exclusions — N087/N089** | The existing named-person field policy applies before metadata reaches receiving tools. Any protected GenericAttribute Name designation, including qualified/conflicting aliases, blocks values before tag, identity or fact derivation. Eligible metadata and separate occurrence counts survive. Regenerate selected artifacts; earlier packets are not scrubbed. A refreshed register can retain old evidence in decision history; review that history before sharing a regenerated packet. This is a bounded field policy, not general personal-data detection. |
 
 Schedule-field intake also rejects ambiguous case keys and conflicting values, merges only disjoint additions
 and refuses previously ignored native-model schedules. These input checks preserve evidence and explicit choices;
@@ -39,14 +39,13 @@ losses in aggregate. Exact identity/value dispositions and declared uncertainty 
 repair. Evaluation owns the source accounting; Questions provides independent source/key review. Historical
 matrix failures and source-owner/engineering acceptance remain unchanged.
 
-**Open N088 — E27 condenser-train coverage.** Thirteen matched unchanged-method baseline runs expose
-eight scope failures: a reset label for A, unrelated C, an unknown or contradictory target, negated/disabled text
-or text on A's own name can suppress B's questions. Questions owns the bounded repair; Context provides the
-source/coverage contract. No E27 repair or additional collection-review completion is claimed yet. The source
-requires investigation of operating constraints and total affected demand; a label establishes neither.
+**N088 — bounded E27 repair.** The original thirteen matched runs preserve eight scope failures. A local,
+shared, unrelated, unknown or negated reset label now stays a candidate while each applicable condenser retains
+train/operating-basis review. Source pointers and complete selected graph/context history stay bound; old catalog
+answers can become stale. This does not establish actual control coverage, operating suitability or site savings.
 
-The [follow-up record](JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools)
-preserves the metadata failures and E27 baselines. N086 source-identity and receiving work remains separate.
+The [follow-up record](JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries)
+preserves the original failures and independently reviewed repairs. N086 source-identity and receiving work remains open.
 
 ## What exists, and what remains manual
 
@@ -79,7 +78,7 @@ actual participant, recipient, native-system and tenant observations remain **no
 
 | Workstream owner | Remaining work | Completion evidence |
 |---|---|---|
-| **Questions agent** | N088 E27 train coverage, N065 useful source-backed questions, N082 remaining catalog source adequacy and independent N086 source/key review. Fifty rules/123 request bundles are inventoried; 13 rules have bounded collection reviews and 37 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
+| **Questions agent** | N065 useful source-backed questions, N082 remaining catalog source adequacy and independent N086 source/key review. Fifty rules/124 request bundles are inventoried; 14 rules have bounded collection reviews and 36 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
 | **Evaluation agent** | N086 exact source identity/value accounting, the matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
 | **Context/retrieval agent** | Keep the local refresh/review/restart contract bounded and test receiving projections, including changed or removed identifiers and complete history. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
 | **Integration agent** | N062 real engineer/recipient pilot; N063 authorized company import/readback, client permissions and subsequent revision. | Actual observations from the [acceptance exercise](ACCEPTANCE.md), not an agent simulation. Native PI/gateway acceptance and operational benefit remain unverified. |

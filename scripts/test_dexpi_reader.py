@@ -783,5 +783,108 @@ class PublicExamples(unittest.TestCase):
                 self.assertEqual((ka["values_kept"], ka["distinct_per_item_kept"]), (ka["values"], ka["distinct_per_item"]))
 
 
+class QualifiedDesignationPrivacy(unittest.TestCase):
+    def read_root(self, root):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "source.xml"
+            ET.ElementTree(root).write(source, encoding="utf-8")
+            reader = R.Reader(source, "qualified-privacy")
+            # Assertions below identify the exact reparsed source occurrence, not the pre-serialization ET object.
+            reader._test_source_elements = dict(zip(root.iter(), reader.root.iter()))
+            model = reader.read()
+            return reader, model, reader.report(model)
+
+    def root_and_owner(self):
+        root = ET.Element("PlantModel")
+        owner = ET.SubElement(root, "Equipment", ID="E1", ComponentClass="Tank")
+        return root, owner
+
+    def test_any_expanded_name_blocks_records_and_derived_identity_before_reads(self):
+        for role in ("Approver", "Checker", "Creator", "Designer", "Drafter", "Editor", "Reviewer", "Owner"):
+            for namespace in ("urn:privacy:first", "urn:privacy:second"):
+                for reverse in (False, True):
+                    with self.subTest(role=role, namespace=namespace, reverse=reverse):
+                        root, owner = self.root_and_owner()
+                        group = ET.SubElement(owner, "GenericAttributes", Set="DexpiAttributes")
+                        pairs = [("Name", "TagNameAssignmentClass"),
+                                 (f"{{{namespace}}}nAmE", role.swapcase() + "nAmEAssignmentClass")]
+                        marker = "SYNTHETIC_PRIVATE_DERIVATION_6327"
+                        ga = ET.SubElement(group, "GenericAttribute", dict(reversed(pairs) if reverse else pairs))
+                        ga.set("Value", marker)
+                        ga.set(f"{{{namespace}}}Units", marker)
+                        ga.set("Language", marker)
+                        ET.SubElement(group, "GenericAttribute", Name="TagNameAssignmentClass", Value="SAFE-17")
+                        reader, model, report = self.read_root(root)
+                        self.assertEqual(reader.ga(reader._test_source_elements[owner], "TagNameAssignmentClass"), "SAFE-17")
+                        self.assertEqual(model["units"][0]["id"], "SAFE-17")
+                        self.assertEqual(reader.ga_state[reader._test_source_elements[ga]],
+                                         ("dropped", "person name: left out on purpose"))
+                        self.assertEqual(report["attributes"]["in_file"], 2)
+                        self.assertNotIn(marker, json.dumps([model, report]) + R.report_text(report))
+
+    def test_empty_and_missing_native_values_keep_precedence_and_no_qualified_payload(self):
+        root, owner = self.root_and_owner()
+        group = ET.SubElement(owner, "GenericAttributes")
+        protected = []
+        marker = "SYNTHETIC_PRIVATE_QUALIFIED_PAYLOAD_914"
+        for value in (None, "", "0", "false"):
+            attrs = {"Name": "Description", "{urn:test}Name": "CreatorNameAssignmentClass",
+                     "{urn:test}Value": marker, "{urn:test}Units": marker}
+            if value is not None:
+                attrs["Value"] = value
+            protected.append(ET.SubElement(group, "GenericAttribute", attrs))
+        ET.SubElement(group, "GenericAttribute", Name="Description", Value="0", Units="Bar")
+        reader, model, report = self.read_root(root)
+        self.assertEqual([reader.ga_state[reader._test_source_elements[g]][1] for g in protected],
+                         ["no value in the file"] * 2 + ["person name: left out on purpose"] * 2)
+        self.assertEqual(report["attributes"]["in_file"], 5)
+        self.assertEqual(model["units"][0]["Description"]["value"], "0")
+        self.assertNotIn(marker, json.dumps([model, report]) + R.report_text(report))
+
+    def test_metadata_unsupported_and_node_routes_keep_target_drop_and_safe_neighbor(self):
+        root, owner = self.root_and_owner()
+        nodes = [owner, ET.SubElement(root, "MetaData"), ET.SubElement(root, "PlantStructureItem", ID="PS1"),
+                 ET.SubElement(root, "UnsupportedOwner", ID="U1")]
+        cp = ET.SubElement(owner, "ConnectionPoints")
+        nodes.append(ET.SubElement(cp, "Node", ID="N1"))
+        marker = "SYNTHETIC_PRIVATE_ALL_ROUTES_981"
+        protected = []
+        for node in nodes:
+            group = ET.SubElement(node, "GenericAttributes")
+            protected.append(ET.SubElement(group, "GenericAttribute",
+                {"Name": "Description", "{urn:one}Name": "Benign", "{urn:two}Name": "ReviewerName",
+                 "Value": marker, "Units": marker}))
+            ET.SubElement(group, "GenericAttribute", Name="EngineeringNote", Value="benign note")
+        reader, model, report = self.read_root(root)
+        self.assertTrue(all(reader.ga_state[reader._test_source_elements[g]] ==
+                            ("dropped", "person name: left out on purpose") for g in protected))
+        self.assertEqual(report["attributes"]["in_file"], 10)
+        self.assertEqual(model["meta"]["drawing"]["EngineeringNote"], "benign note")
+        self.assertNotIn(marker, json.dumps([model, report]) + R.report_text(report))
+
+    def test_ga_lang_cannot_select_protected_english_before_safe_alternative(self):
+        root, owner = self.root_and_owner()
+        group = ET.SubElement(owner, "GenericAttributes")
+        ET.SubElement(group, "GenericAttribute", {"Name": "Description", "Language": "en", "Value": "PRIVATE_9147",
+                                                "{urn:test}Name": "OwnerName"})
+        ET.SubElement(group, "GenericAttribute", Name="Description", Language="en", Value="safe engineering")
+        reader, model, report = self.read_root(root)
+        self.assertEqual(reader.ga_lang(reader._test_source_elements[owner], "Description"), "safe engineering")
+        self.assertNotIn("PRIVATE_9147", json.dumps([model, report]))
+
+    def test_nonperson_qualified_designations_do_not_gain_schema_meaning(self):
+        root, owner = self.root_and_owner()
+        group = ET.SubElement(owner, "GenericAttributes")
+        qualified_only = ET.SubElement(group, "GenericAttribute", {"{urn:test}Name": "TagNameAssignmentClass",
+                                                                  "Value": "ordinary opaque value"})
+        ET.SubElement(group, "GenericAttribute", {"Name": "Description", "{urn:test}Name": "urn:ordinary:review",
+                                                  "Value": "safe engineering", "Units": "0"})
+        reader, model, _ = self.read_root(root)
+        self.assertFalse(R.person_designated(qualified_only))
+        self.assertEqual(model["units"][0]["id"], "E1")
+        self.assertEqual(model["units"][0]["unnamed"]["value"], "ordinary opaque value")
+        self.assertEqual(model["units"][0]["Description"]["value"], "safe engineering")
+
+
 if __name__ == "__main__":
     unittest.main()

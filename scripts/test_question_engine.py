@@ -1078,6 +1078,103 @@ class RefrigerationCollectionContracts(unittest.TestCase):
                 self.assertFalse((base / "rollup").exists())
 
 
+class CondenserTrainCollectionContracts(unittest.TestCase):
+    """Two fictional disconnected condensers: supplied reset text cannot settle either operating basis."""
+
+    cli = CollectionContractRepairs.cli
+    task = "Condenser-train coverage and applicable head-pressure operating basis"
+
+    def model(self):
+        return {"meta": {"model_id": "fictional-condenser-trains",
+                         "title": "Synthetic collection-contract regression; no plant observations"},
+                "units": [{"id": "CA", "type": "condenser", "name": "Ammonia condenser A"},
+                          {"id": "CB", "type": "condenser", "name": "Ammonia condenser B"},
+                          {"id": "CC", "type": "vessel", "name": "Unrelated vessel C"}],
+                "streams": [], "instruments": [], "controllers": [], "final_elements": []}
+
+    def screen(self, base, model):
+        source = base / "model.json"
+        source.write_text(json.dumps(model), encoding="utf-8")
+        before = source.read_bytes()
+        self.cli(["--model", source, "--question", "E27", "--out", base / "screen"])
+        self.assertEqual(source.read_bytes(), before)
+        return json.loads((base / "screen/questions.json").read_text(encoding="utf-8"))
+
+    def assert_both_open(self, doc):
+        self.assertEqual(ids(doc), {"E27@CA", "E27@CB"})
+        for uid in ("CA", "CB"):
+            selected = finding(doc, "E27@" + uid)
+            self.assertIn(uid, {a["id"] for a in selected["assets"]})
+            task = next(r for r in selected["data_requests"] if r["item"] == self.task)
+            self.assertNotIn("already_on_drawing", task)
+            self.assertNotIn("still_needed", task)
+        return doc
+
+    def test_reset_scope_and_qualified_labels_keep_both_train_reviews_open(self):
+        cases = [("none", None, None),
+                 ("local", "CA", "Floating head pressure for A only"),
+                 ("wet_bulb", "CA", "Wet-bulb reset for A only"),
+                 ("unrelated", "CC", "Floating head pressure for unrelated C"),
+                 ("unknown", None, "Head pressure reset, target unknown"),
+                 ("contradictory", "CA", "Floating head pressure for B; disabled; draft"),
+                 ("negated", "CA", "No floating head pressure; reset disabled"),
+                 ("shared", "CA", "Floating head pressure explicitly shared by A and B"),
+                 ("own_label", None, None),
+                 ("rejected", "CA", "Floating head pressure, rejected record")]
+        for case, unit, description in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                base, model = Path(tmp), self.model()
+                if description is not None:
+                    controller = {"tag": "PIC-1", "description": description,
+                                  "source": "Synthetic source revision R1",
+                                  "facts": {"enabled": {"value": False},
+                                            "target": {"value": "unknown", "status": "draft"}}}
+                    if unit is not None:
+                        controller["unit"] = unit
+                    if case == "rejected":
+                        controller["ops_review"] = {"status": "rejected"}
+                    model["controllers"].append(controller)
+                if case == "own_label":
+                    model["units"][0]["name"] += "; floating head pressure on A only"
+                doc = self.assert_both_open(self.screen(base, model))
+                graph = gx.build(base / "model.json", questions=base / "screen/questions.json")
+                self.assertEqual(graph["questions"], doc["questions"])
+                if description is not None and case != "rejected":
+                    self.assertTrue(any(description in e["text"]
+                                        for q in doc["questions"] for e in q["evidence"]))
+                if case == "rejected":
+                    self.assertFalse(any(description in e["text"]
+                                         for q in doc["questions"] for e in q["evidence"]))
+
+    def test_nonrefrigeration_and_rejected_condensers_do_not_trigger(self):
+        for case in ("nonrefrigeration", "rejected"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                model = self.model()
+                for unit in model["units"][:2]:
+                    if case == "rejected":
+                        unit["ops_review"] = {"status": "rejected"}
+                    else:
+                        unit["name"] = "Process water condenser"
+                self.assertEqual(ids(self.screen(Path(tmp), model)), set())
+
+    def test_named_rollup_retains_basis_and_refuses_missing_task_before_write(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            doc = self.assert_both_open(self.screen(base, self.model()))
+            self.cli(["--rollup", "synthetic=" + str(base / "screen"), "--out", base / "rollup"])
+            rolled = json.loads((base / "rollup/rollup.json").read_text(encoding="utf-8"))
+            text = json.dumps(rolled)
+            self.assertIn(self.task, text)
+            self.assertIn("synthetic", text)
+            selected = finding(doc, "E27@CB")
+            selected["data_requests"] = [r for r in selected["data_requests"] if r["item"] != self.task]
+            (base / "screen/questions.json").write_text(json.dumps(doc), encoding="utf-8")
+            refused = self.cli(["--rollup", base / "screen", "--out", base / "refused"], 2)
+            self.assertIn("missing_required", refused.stderr)
+            self.assertFalse((base / "refused").exists())
+
+
+
 class MachineFunctionCollectionContracts(unittest.TestCase):
     """C9 is record collection: a supplied trip label cannot settle another machine or actual protection."""
 
