@@ -565,6 +565,67 @@ class SourceBindings(unittest.TestCase):
         self.assertIn("UNVERIFIED", self.check())
         self.assertIn("optional inputs unavailable", self.check(1, strict=True))
 
+    def test_absent_selected_collection_is_unverified_despite_present_sibling_actual_cli(self):
+        inp = cm.inputs_by_id(self.corpus)["pid2graph-synthetic"]
+        with patch.multiple(cm, ROOT=ROOT, SCRIPTS=ROOT / "scripts"):
+            deps = cm.tool_files(2, inp["id"])
+        for rel in deps:
+            target = self.root / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, target)
+        base = self.root / inp["local_path"]
+        base.mkdir(parents=True)
+        for name in ("0.png", "0.graphml"):
+            (base / name).write_bytes(b"fictional hash-only input")
+        sibling = base.parent / "PID2Graph OPEN100" / "0.png"
+        sibling.parent.mkdir()
+        sibling.write_bytes(b"committed sibling collection")
+        self.save_cell(2, inp)
+        self.check(strict=True)
+        (base / "0.png").unlink()
+        self.assertIn("inventory", self.check(1))  # one consumed file missing is still stale
+        (base / "0.graphml").unlink()
+        self.assertIn("inventory", self.check(1))  # a present empty collection is still stale
+        base.rmdir()
+        shown = self.check()
+        self.assertIn("UNVERIFIED", shown)
+        self.assertNotIn("All 1 cells' declared input bindings verified", shown)
+        self.assertIn("optional inputs unavailable", self.check(1, strict=True))
+        self.assertTrue(sibling.is_file())
+
+    def test_te_inventory_binds_only22_consumed_test_runs_actual_cli(self):
+        inp = cm.inputs_by_id(self.corpus)["te-braatz-runs"]
+        with patch.multiple(cm, ROOT=ROOT, SCRIPTS=ROOT / "scripts"):
+            deps = cm.tool_files(6, inp["id"])
+            auxiliaries = [s["path"] for s in cm.source_specs(6, inp) if not s["optional"]]
+        for rel in deps + auxiliaries:
+            target = self.root / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, target)
+        base = self.root / inp["local_path"]
+        base.mkdir(parents=True)
+        names = [f"d{i:02d}_te.dat" for i in range(22)]
+        for name in names:
+            (base / name).write_bytes(b"fictional consumed test-run bytes " + name.encode())
+        for name in ("README.md", "LICENSE", "d00.dat", "teprob.f"):
+            (base / name).write_bytes(b"unconsumed clone or training material")
+        saved = self.save_cell(6, inp)
+        spec = next(s for s in saved["input_bindings"]["sources"] if s["path"] == inp["local_path"])
+        self.assertEqual(set(spec["files"]), {f"{inp['local_path']}/{name}" for name in names})
+        self.check(strict=True)
+        for name in ("README.md", "LICENSE", "d00.dat", "teprob.f"):
+            (base / name).unlink()
+        (base / "CI-setup.txt").write_text("not consumed by row6", encoding="utf-8")
+        self.check(strict=True)  # CI can fetch the actual runs without unrelated clone files
+        consumed = base / "d10_te.dat"
+        original = consumed.read_bytes()
+        consumed.write_bytes(original + b" changed")
+        self.assertIn("inventory", self.check(1))
+        consumed.write_bytes(original)
+        self.check(strict=True)
+        consumed.unlink()
+        self.assertIn("inventory", self.check(1))
+
     def test_legacy_or_omitted_input_bindings_refuse_instead_of_backfill(self):
         c = self.save_cell()
         del c["input_bindings"]

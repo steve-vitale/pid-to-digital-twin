@@ -311,11 +311,11 @@ def source_specs(row, inp):
     """
     specs = []
 
-    def add(path, patterns=None, optional=False):
+    def add(path, patterns=None, optional=False, cache_root=None):
         rel = (ROOT / path).resolve().relative_to(ROOT.resolve()).as_posix()
         spec = {"path": rel, "patterns": sorted(patterns or []), "optional": optional}
         if optional and spec["path"].startswith("data/external/"):
-            spec["cache_root"] = "/".join(spec["path"].split("/")[:3])
+            spec["cache_root"] = cache_root or "/".join(spec["path"].split("/")[:3])
         existing = next((s for s in specs if s["path"] == rel), None)
         if existing is None:
             specs.append(spec)
@@ -338,7 +338,9 @@ def source_specs(row, inp):
                         if isinstance(sheets, list) else ["*.png", "*.graphml", "*.json"])
             if row in (7, 8) or iid == VENDOR:
                 patterns += ["*.json"]
-            add(local, patterns, optional)
+            # Collections may share a downloaded ancestor with committed siblings (OPEN100 and Dataset PID).
+            # Only absence of this selected collection is unverified; a present but incomplete one is stale.
+            add(local, patterns, optional, cache_root=local)
     elif kind == AGENT_KIND:
         if row != 4:
             add(local, ["*.graphml", "*.json"], optional)
@@ -355,6 +357,10 @@ def source_specs(row, inp):
     elif kind in NOT_SCORED_KINDS:
         if iid == "hai-dcs-loops":
             add(local, ["dcs_*.json"], optional)
+    elif iid == "te-braatz-runs":
+        # row6 reads exactly these22 test runs. Training runs, Fortran and checkout README/license files are
+        # separate sources; CI's checksum fetch need not reproduce an unrelated local clone inventory.
+        add(local, [f"d{i:02d}_te.dat" for i in range(22)], optional, cache_root=local)
     else:
         # Dataset directories contain the CSV/DAT/ZIP/label files the adapters select. Bind their complete
         # inventory so new or removed runs cannot silently reuse an old cell; ignore no nested data file.

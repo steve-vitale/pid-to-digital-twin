@@ -358,7 +358,7 @@ Example review: **reviewed example**
 
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent integration coding agent: actual source-bound matrix rerun and input invalidation review, 2026-10-30: pass
+- **Independent review:** Independent integration coding agent: selected collection and exact consumer inventory follow-up, 2026-10-30: pass
 
 </details>
 

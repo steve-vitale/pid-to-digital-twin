@@ -5381,3 +5381,40 @@ skipped cases. The 95-cell actual matrix and strict input check pass their repro
 and saved predictions reproduce 30 tables (23 MATCH / seven MATCH-OLD), retaining five historical GAPs. Six
 independent review records bind the repaired examples. This is local software evidence; actual engineer,
 receiving-company, native-system and Copilot tenant acceptance remain unrun.
+
+
+## 116. Correct collection boundaries after clean CI refuses the first repair candidate
+
+**A255 / N074 follow-up.** Candidate 143fcf8 passes all 64 local test scripts, but the actual clean Linux
+[CI run 41163003002](https://github.com/steve-vitale/pid-to-digital-twin/actions/runs/41163003002) passes 63/64:
+three Synthetic cells and the TE historian cell report changed input inventories. The snapshot MCP job passes.
+Main is not promoted from that failed candidate. The failure exposes two dependency-declaration defects, not
+changed workflow scores or a reason to relax their criteria.
+
+The optional Dataset PID collection shares an ancestor with committed OPEN100 sheets; that ancestor cannot
+establish the selected collection's presence. Keyed-sheet declarations now identify their own collection boundary.
+A wholly absent selected optional collection reports UNVERIFIED, with strict --require-inputs still refusing.
+Partial and empty present collections remain stale. TE row 6 reads exactly d00_te.dat through d21_te.dat;
+its declaration now binds those 22 runs and retains its five explicit committed reference/publication inputs.
+Unconsumed clone README/license files, training runs and Fortran are no longer incidental dependencies of row6.
+
+Fourteen targeted lineage tests pass. Root freezes a separate primary-code contract and executes 53 actual
+copied-root freshness CLIs: each of the 22 TE runs is independently changed and deleted, unrelated metadata varies,
+selected collection absence with a committed sibling is explicit, partial/empty presence refuses and exact
+restoration passes. The first private reviewer fixture omitted a required render timestamp before any CLI;
+it is retained and corrected separately, rather than labelled a product failure.
+
+Changing the runner invalidates the earlier matrix bindings. All 95 cells are actually rerun with the final
+frozen runner; strict inputs verify and every substantive result remains unchanged: 64 pass / 23 fail / 8 n/a.
+No historical bindings are copied onto those results. The initial failed CI and preceding matrix run remain
+available. This is software/dependency evidence, not a new model trial or engineering acceptance result.
+
+Final follow-up validation: all 64 local test scripts pass, with five unittest skips, two explanatory platform
+notices and no additional skipped-check notices; the 13 frozen code/catalog inputs stay unchanged during the run.
+An independent exact tracked-tree fixture adds only the corrected runner/tests, fresh matrix/page and 46 locally
+copied checksum-pinned TE setup files. Six actual check CLIs and 20 assertions pass: default mode explicitly
+reports 50 cells UNVERIFIED, strict mode refuses absent originals, changed/deleted consumed TE files refuse and
+exact restoration passes. All 2,715 other tracked files remain identical to the archive. This Windows inventory
+exercise complements the subsequent Linux CI gate; it does not claim that CI has passed or absent data was read.
+New C12/E28/H5 quantity/equipment-scope and bound-question re-export defects remain explicit in STATUS.md, with
+separately prepared candidates and assigned owners. They are not counted as repairs in this release.

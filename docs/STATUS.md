@@ -14,7 +14,7 @@ example does not certify every input, current implementation or engineering conc
 
 ## Known defects
 
-The reproduced review, collection, freshness and retrieval failures now have bounded repairs and negative
+The initial review, collection, freshness and retrieval failures below now have bounded repairs and negative
 controls. Keep the remaining source-adequacy and external-acceptance work separate from those software results.
 
 | Repair | Observable behavior and remaining limit |
@@ -32,6 +32,12 @@ controls. Keep the remaining source-adequacy and external-acceptance work separa
 Schedule-field intake also rejects ambiguous case keys and conflicting values, merges only disjoint additions
 and refuses previously ignored native-model schedules. These input checks preserve evidence and explicit choices;
 they do not decide which source governs a company's engineering work.
+
+**Still open after this repair wave:** C12 can suppress collection from current/voltage or unqualified energy
+signals; E28/H5 can suppress it from disconnected equipment. Re-exporting bound enriched questions through
+`graph_export.py` can also lose the context binding while retaining answer references. Use the register's original
+`enriched_graph.json` and matching `context.json` directly. These reproduced software defects have assigned
+follow-ups below; their candidate fixes are not included in this release.
 
 ## What exists, and what remains manual
 
@@ -64,9 +70,9 @@ actual participant, recipient, native-system and tenant observations remain **no
 
 | Workstream owner | Remaining work | Completion evidence |
 |---|---|---|
-| **Questions agent** | N065 useful source-backed questions; remaining catalog source adequacy. Fifty rules/119 request bundles are inventoried; 41 rules have not had this source-adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
+| **Questions agent** | Integrate the C12/E28/H5 quantity and equipment-scope corrections; N065 useful source-backed questions; remaining catalog source adequacy. Fifty rules/119 request bundles are inventoried; 41 rules still await integrated source-adequacy evidence. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
 | **Evaluation agent** | The matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
-| **Context/retrieval agent** | Keep the local refresh/review/restart contract bounded; test further evidence transitions and receiving projections. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
+| **Context/retrieval agent** | Integrate the bound-question re-export guard; keep the local refresh/review/restart contract bounded and test receiving projections. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
 | **Integration agent** | N062 real engineer/recipient pilot; N063 authorized company import/readback, client permissions and subsequent revision. | Actual observations from the [acceptance exercise](ACCEPTANCE.md), not an agent simulation. Native PI/gateway acceptance and operational benefit remain unverified. |
 
 The company retains authority over accepted context, access, controlled documents, work execution and ownership.
@@ -97,6 +103,12 @@ and independent cross-reviews support the bounded repairs.
 The README check matches 41 numerical claims and identifies one prose-only claim; all 52 configured pipeline
 stages are fresh. Four current benchmark suites reproduce. Re-scoring saved predictions reproduces 30 tables
 (23 MATCH, seven MATCH-OLD); five historical tables still report GAP. These checks do not rerun commercial models.
+An initial clean Linux CI run caught two collection-declaration defects after the local suite passed. The
+follow-up separates an absent selected collection from committed siblings and binds exactly the TE files its
+consumer reads. Partial-present and strict missing-input checks remain. The matrix was actually rerun after
+this correction; [the journal](JOURNAL.md#116-correct-collection-boundaries-after-clean-ci-refuses-the-first-repair-candidate)
+retains the failed candidate and follow-up evidence.
+
 No model calls, new original-source downloads, company/plant imports or live gateway were exercised.
 
 ## Earlier repairs and their scope

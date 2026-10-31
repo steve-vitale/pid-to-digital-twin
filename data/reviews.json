@@ -10628,6 +10628,47 @@
     "matrix-strict.log": "2da9f02a1613b29a1dc480f84b286059b15b0b364413f8d211b512436550bcc0",
     "matrix-comparison.json": "77e67b6eab9aff32087609a0916a968c1b025964e07b33ff2391f90f9ef81712"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent integration coding agent: selected collection and exact consumer inventory follow-up",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "files": {
+    "docs/GENERALIZATION.md": "0a928bbba3580a2d0b8509bd978c5b08e5ad27f57d8469321121ef851fbd2e4c",
+    "out/generalization/matrix.json": "1c286f96d2a591b3e3aaaf423f1e31d9608c5ff561677d53430fa00e41856675",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10"
+   },
+   "registered_output_count": 3,
+   "findings": [],
+   "scope": "Root did not author the two declaration fixes. Froze an independent primary-code contract, executed 53 actual copied-root freshness CLI controls and all 95 actual workflow cells, verified strict input bindings and compared all substantive results. Two fresh matrix outputs; corpus registry inherited unchanged.",
+   "checks": [
+    "Each of 22 consumed TE runs individually changed and deleted: freshness refuses; exact restoration passes.",
+    "Unconsumed TE files added/removed: freshness passes. A present partial or empty selected collection refuses.",
+    "Wholly absent selected optional collection with committed sibling reports UNVERIFIED; strict require-inputs refuses.",
+    "All 95 cells actually rerun with frozen corrected runner, strict inputs verified, substantive results unchanged: 64 pass / 23 fail / 8 n/a."
+   ],
+   "limits": [
+    "First Linux CI remains failed; subsequent exact-head CI is a separate release gate, not implied by local controls.",
+    "Conservative declared dependencies are not operating-system read tracing; declared text hashes normalize CRLF.",
+    "No new model/source-family, human usefulness, company/native-system/Copilot or plant acceptance."
+   ],
+   "private_proofs": {
+    "ci-first-tests.log": "2a3457569cef623f3f59268b99e5f412dae5a48be1b98294c929ef5d67f247a6",
+    "matrix-ci-independent-contract.json": "c692226b74f10f5fd30bb37dbc8be1a9b4badf922b5f04655eaabdb094586899",
+    "matrix-ci-independent-harness-note.json": "e39e38531069692d19add64cc830f36080774f645c4b7a4fae9b0fcd608cf4d7",
+    "matrix-ci-independent-v2/RESULT.json": "77c6a22c5ca33b768ad417fa6fe5e5c7eb3842ee6b85bf17406beddd3d2950a2",
+    "matrix-ci-independent-v2/commands.json": "9f32247c4bc193259c198e2a480c77419d4ac9b68e9bb8b6e585ae5658527cee",
+    "matrix-ci-final.json": "b98ce18de1b3199634150eed4eaca8eee90607701f1dd277179f58e50408d9fc",
+    "matrix-ci-final.log": "ed5c96c02f569a723a4f68bd8893944d05a6474e37ec63c12cb4bd91acdd9ad1",
+    "matrix-ci-strict.json": "437195c50362665e434f0fa18526c817765151f8f8346dff60ad368172fec075",
+    "matrix-ci-strict.log": "2da9f02a1613b29a1dc480f84b286059b15b0b364413f8d211b512436550bcc0",
+    "matrix-ci-comparison.json": "31b9863562ed0751bc53205db9d7d0f14f62008b13e3f0de60c315f86abfaed3"
+   }
   }
  ]
 }

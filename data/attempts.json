@@ -3806,6 +3806,22 @@
         "docs/OPPORTUNITY_SCREEN.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A255",
+      "function": "scoring",
+      "date": "2026-10-30",
+      "change": "Correct N074 selected optional-collection presence and exact TE consumer inventories after clean Linux CI failure.",
+      "hypothesis": "A committed sibling does not make an absent optional collection partially present; unrelated clone files cannot determine freshness of a consumer that reads a fixed set of runs.",
+      "evidence": "Initial CI 41163003002 passes 63/64 scripts and fails on four matrix bindings; MCP passes. Two declaration fixes pass 14 targeted lineage tests and 53 independent actual freshness CLIs, including mutation/deletion of each of the 22 TE runs. All 95 cells are actually rerun; strict inputs verify and all substantive results remain 64 pass / 23 fail / 8 n/a.",
+      "runs": "Offline copied-root controls and actual complete cached matrix execution; no provider calls, new original sources or engineering/company acceptance.",
+      "verdict": "kept",
+      "why": "Repair the clean-inventory boundary without weakening consumed-file, partial-present or strict missing-input checks; preserve the failed CI and require new actual run bindings.",
+      "source": [
+        "docs/JOURNAL.md#116-correct-collection-boundaries-after-clean-ci-refuses-the-first-repair-candidate",
+        "docs/GENERALIZATION.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
