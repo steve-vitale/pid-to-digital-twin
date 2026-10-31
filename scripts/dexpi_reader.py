@@ -1069,22 +1069,26 @@ class Reader:
         for psi in self.live("PlantStructureItem"):
             attrs = {}
             for _, g in self.own_gas(psi):
-                if g.get("Value"):
+                if not g.get("Value"):
+                    self.ga_state[g] = ("dropped", "no value in the file")
+                elif PERSON_ATTRS.search(g.get("Name") or ""):
+                    self.ga_state[g] = ("dropped", "person name: left out on purpose")
+                else:
                     attrs[g.get("Name")] = g.get("Value")
                     self.ga_state[g] = "meta"
-                else:
-                    self.ga_state[g] = ("dropped", "no value in the file")
             structure.append({"dexpi_id": psi.get("ID"), "class": psi.get("ComponentClass"), "attributes": attrs})
             self.fate(psi, "meta.plant_structure")
         title_bits = [drawing.get(k) for k in ("DrawingNameAssignmentClass", "DrawingNumberAssignmentClass",
                                                "TitleAssignmentClass@en", "TitleAssignmentClass") if drawing.get(k)]
+        info_attrs = info.attrib if info is not None else {}
+        self.person_metadata_attributes_excluded = sum(bool(PERSON_ATTRS.search(k)) for k in info_attrs)
         meta = {"model_id": self.sheet_id,
                 "title": f"{' / '.join(dict.fromkeys(title_bits))} (DEXPI XML {self.path.name})" if title_bits
                          else f"DEXPI XML {self.path.name}",
                 "source_document": f"DEXPI XML file {self.path.name}, SHA-256 {sha256(self.path)}",
                 "model_kind": "dexpi_import",
                 "converted_by": f"scripts/{TOOL} (no model; every item cites its XML element ID)",
-                "dexpi_file": {k: v for k, v in (info.attrib if info is not None else {}).items()},
+                "dexpi_file": {k: v for k, v in info_attrs.items() if not PERSON_ATTRS.search(k)},
                 "drawing": drawing, "plant_structure": structure,
                 "not_a_drawing_of_record": "Converted from an exported file. Nothing here is verified by anyone; "
                                            "units of instruments and valves are inferred through the piping (unit_basis)."}
@@ -1299,6 +1303,9 @@ class Reader:
                  "Person names in the drawing metadata and the title block text are left out on purpose.",
                  "Values are kept as written (text); units of measure as DEXPI names (Bar, DegreeCelsius), not converted.",
              ]}
+        if self.person_metadata_attributes_excluded:
+            # These are direct XML attributes, not GenericAttribute occurrences.
+            r["person_metadata_attributes_excluded"] = self.person_metadata_attributes_excluded
         return r
 
 
@@ -1408,6 +1415,9 @@ def report_text(r):
            + ", ".join(f"{k} {v}" for k, v in r["sourced_records_by_section"].items() if v)
            + ". graph_export.py makes each item's records claims on its node, and each stream's line, segment and "
              "fitting records claims on its `connects` edge; the graph file's counts give the total."]
+    if r.get("person_metadata_attributes_excluded"):
+        out.append(f"PlantInformation person-field XML attributes deliberately excluded: "
+                   f"{r['person_metadata_attributes_excluded']} (separate from GenericAttribute counts).")
     if r.get("broken_references"):
         out += ["", "Broken references (a segment Connection names an ID the file does not contain; BL stands in, "
                     "the real end is unknown):"]

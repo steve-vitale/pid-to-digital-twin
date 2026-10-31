@@ -12045,6 +12045,71 @@
    },
    "scope": "40 registered generated artifacts freshly reproduced across67bundle files;14authored/historical files baseline-identical and inherited.4assisted result changes;63bundle files unchanged. No new interpretation/approval.",
    "limits": "Software collection/output identity only; no installed safety absence/adequacy, engineering design, SIL/compliance, successful proof test, operating authority, measured usefulness, whole-catalog or company/Copilot/native/OT acceptance. Own earlier graph guard code/tests/docs excluded."
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "Independent AI review: legacy PERSON-field exclusion and complete receiving readback",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA256 after CRLF-to-LF normalization; private proof hashes bind raw bytes.",
+   "registered_output_count": 3,
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "supporting_files": {
+    "scripts/dexpi_reader.py": "0aae4524708bfaae40c708f63a310afe7e0ee8ae89fbf23c173291ff5b20b8cd",
+    "scripts/test_dexpi_reader.py": "797236e88d3a75500b57c17296a03a509a588ea41e3fdcfe2993dfcdb7ae14d0",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/context_register.py": "da0fbde2a1100b02b82bd1380ce6bc64d3106ed57c39108235da73e7cf7a32bb",
+    "scripts/serve_snapshot.py": "030e52612c8622fa119cf31b7e59b5121aecf550022589dc4de8d6119b0a1489",
+    "examples/from-dexpi-xml/README.md": "6ecd57f0048329913f1b9efbff5d68ca052f0bf6d888f06f143c9685bf4943a8"
+   },
+   "supporting_inputs_not_independently_certified": {
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9"
+   },
+   "freshly_reproduced_or_validated_files": [
+    "examples/from-dexpi-xml/dexpi-c01.model.json",
+    "examples/from-dexpi-xml/dexpi-c01.report.md",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json"
+   ],
+   "inherited_unchanged_files": [],
+   "changed_registered_outputs": [],
+   "comparison_notes": {
+    "fresh": "Three actual C01 CLIs reproduce the complete model and readable report after LF normalization. The complete graph differs only in source_model, whose display path changes because the output folder is outside the checkout. All three registered artifacts remain unchanged.",
+    "inherited": "Original source interpretation, source-family coverage, engineering judgments and limits retain only their prior scope. This review does not accept source oracle V3, general XML fidelity or revised historical row 7 criteria.",
+    "excluded_authored_guard": "The graph_export hash is a consumed input. This reviewer authored its earlier guard and does not independently certify that implementation; a different agent previously reviewed it. The ordinary C01 output reproduction is freshly checked.",
+    "current_guide": "Current post-suite guide clarifies that a newly regenerated packet can retain earlier excluded values when an old register is preserved. Independent prose review and actual transition evidence support that distinction; the source-policy repair and three fresh C01 output bindings remain unchanged."
+   },
+   "checks": [
+    "Thirty-two additional actual CLIs and 97 assertions check three independently authored role/case/empty/eligible metadata fixtures, full/core graphs, context sources and history, alias and duplicate-ID refusals, and three original/candidate I01 pairs with nine byte-identical artifact pairs. The reader suite runs 35 cases successfully with nine explicit optional-cache skips.",
+    "Nine actual MCP 2.3 stdio sessions produce 75 responses and pass 249 assertions. Full/core graph-only and explicitly selected context sessions return complete records, sources, ownership and decision history without echoing the synthetic protected-field markers.",
+    "Direct PlantInformation exclusions use an optional report-only count when nonzero, separate from GenericAttribute totals. GenericAttribute empty/missing precedence and eligible metadata remain exact.",
+    "Exactly two candidate files change; 2,717 baseline files remain exact. The original 23 baseline files, 77 author-proof files and independent fixtures remain unchanged. Public code and sources are untouched during review.",
+    "The current leaf guide accurately describes the bounded role-name policy, separate exclusion accounting and regeneration requirement. It explicitly states that arbitrary text is not general personal-data detection and earlier artifacts are not scrubbed.",
+    "A separate six-CLI/16-assertion history transition and one targeted MCP stdio session/three tools/11 assertions confirm that a sanitized current node and stale old answer can coexist with retained old evidence in a newly refreshed packet. The current guide explicitly requires reviewing preserved decision history before sharing; no old-decision redaction is claimed."
+   ],
+   "scope": "Independent review of the existing named-field exclusion policy and complete consumer readback, with three freshly reproduced C01 outputs and current supporting hashes. Source-record functionality, general PII detection, old-artifact scrubbing, engineering acceptance and company/native acceptance are outside this review.",
+   "limits": [
+    "The existing PERSON_ATTRS policy is bounded. Near-match fields and arbitrary free text retain their existing behavior.",
+    "No provider calls, new original downloads or company writes. Actual SDK validation uses stdio; the unchanged loopback transport was not rerun.",
+    "Typed source-record receiving and independent source-oracle V3 acceptance remain separate gates. These outputs do not establish complete XML fidelity.",
+    "Preserved decisions can carry earlier excluded values into newly regenerated packets. The current reader excludes newly captured named fields; it does not automatically scrub old evidence or make packets safe to share."
+   ],
+   "private_proofs": {
+    "independent-acceptance": "0f8f1a21aa26a1edb5d36244144091ac4d8fe0464486e23d67c08725d865994d",
+    "independent-review": "3ae84df7ed5c488fcee32fcecae226a85a2ed892ded9026c04f4610c26ab2d17",
+    "independent-proof-manifest": "261c1c3199f6191243e44be2802186bac1ad189c2843caa7debad14af15485e5",
+    "C01-current-reproduction": "b3ef199d3fa17544dca5d2118a7dab846aec68754fcb3577cabe7b385017dc8b",
+    "C01-command-record": "0855e7c97de02e1846ae5653be7bb83f63fe39d0bae89260e3d22ee8a0bbed86",
+    "SDK-current-result": "e10358312b2aa74aef7370369749838ece48e6beff1a4e2391c8b348010eeece",
+    "current-leaf-guide-review": "3fbb7f8705c0cfe0e34fe09a2d2bf22955d776d7333f867f0cc3ffb9710182e5",
+    "preserved-history-transition-manifest": "bb4b16207385ba321a34a97c9e814278a157fe7fc419ebf82341cf861baccbfb",
+    "preserved-history-CLI-result": "8ca34d2606045c93cabb80a8fadce00a53c2ff0df8bdbc60b8c21291d39cea5e",
+    "preserved-history-SDK-result": "204a528a498fe0c2a630bfb1a5dd86bcb9933d86de3956ec86b7bbba30e7780b",
+    "post-suite-prose-review": "66dd2e81da3714df60fb135618b5cf555b534939f1714912615cf6ec2363fa01"
+   }
   }
  ]
 }

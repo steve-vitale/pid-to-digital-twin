@@ -3872,6 +3872,23 @@
         "examples/opportunity-screen/README.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A259",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Apply the existing named-person field exclusion to plant-structure GenericAttributes and direct PlantInformation XML attributes before metadata export (N087).",
+      "hypothesis": "A metadata path must not bypass the existing named-field exclusion; newly captured metadata in model, graph and freshly prepared selected context must not reintroduce those excluded values. Previously retained history is a separate obligation.",
+      "evidence": "Four original actual CLI probes preserve the PlantStructureItem marker leak through model, graph and snapshot, ordinary MetaData exclusion and eligible-field controls. An additional original-reader fixture preserves the direct PlantInformation leak. Author executes23 CLI checks including C01 reproduction; independent review executes35 product CLIs/101 assertions plus9 pinned MCP2.3 stdio sessions/75 responses/249 assertions. All8 role prefixes/case variants, empty/missing values, eligible metadata, full/core graphs, selected context/history, duplicate-ID/alias refusal and exact3I01 models/reports are checked. Three registered C01 outputs freshly reproduce; graph comparison declares only the external source_model display-path difference. No registered artifact changes. A separate6CLI/16assertion transition and1 targeted MCPstdio session/11assertions show that refreshing a preserved old register stales the answer but retains its historical marker; current nodes remain sanitized. The guide explicitly requires reviewing retained history before sharing a regenerated packet.",
+      "runs": "Synthetic offline development controls and previously exposed public XML compatibility checks; no new source family, provider/model run, general PII detection or actual company-data acceptance.",
+      "verdict": "kept",
+      "why": "Close a demonstrated metadata-policy bypass before retrieval. Preserve unrelated metadata, occurrence accounting, original process interpretation and old evidence; regeneration does not scrub earlier confidential artifacts.",
+      "source": [
+        "docs/JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools",
+        "examples/from-dexpi-xml/README.md",
+        "scripts/test_dexpi_reader.py",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4798,6 +4815,30 @@
         "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current",
         "docs/STATUS.md",
         "examples/from-dexpi-xml/README.md"
+      ]
+    },
+    {
+      "id": "N087",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Apply the existing PERSON_ATTRS field policy to PlantStructureItem metadata and direct PlantInformation attributes before model, graph and snapshot receiving paths.",
+      "why_not_yet": "Completed A259 after independently frozen policy/receiving controls. Direct-attribute exclusions receive a separate nonzero report count; GenericAttribute empty/missing classification and nonperson metadata remain. This is bounded named-field exclusion, not general PII detection or old-artifact redaction.",
+      "source": [
+        "docs/JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools",
+        "docs/STATUS.md",
+        "examples/from-dexpi-xml/README.md"
+      ]
+    },
+    {
+      "id": "N088",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Keep E27 refrigeration condenser-train coverage and operating-basis review open when unrelated, ambiguous or qualified floating-head/reset labels are supplied.",
+      "why_not_yet": "A prospective source-scoped contract and13 unchanged-method baseline CLIs expose8 uncovered-train scope failures, including A-only/unrelated/unknown/contradictory/negated text and own-anchor inversion. No E27 product repair or additional bounded collection review is accepted yet; N08237 source contracts and usefulness remain open.",
+      "source": [
+        "docs/JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools",
+        "docs/STATUS.md",
+        "docs/OPPORTUNITY_SCREEN.md"
       ]
     }
   ]

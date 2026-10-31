@@ -1,6 +1,6 @@
 # State of the toolkit
 
-Audit and repair follow-up: **2026-10-30, Central time**. This work starts from `bdf1b41`, following the
+Audit and repair follow-up: **2026-10-31, Central time**. This work starts from `bdf1b41`, following the
 [whole-toolkit audit](JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs). Earlier failures and
 their original evidence remain in the journal and attempt ledger.
 
@@ -26,6 +26,7 @@ controls. Keep the remaining source-adequacy and external-acceptance work separa
 | **Context and readback — N075/N076/N083** | Rejected evidence changes dependent-answer freshness; validated selected packets serve full retained sources, values, decisions and ownership. Bound enriched-question re-export refuses: use the complete graph/context pair or explicitly refresh the preserved register. No automatic source fetching, rebinding, authentication or company authority. [Context guide](CONTEXT_REGISTER.md). |
 | **Matrix provenance — N074** | Actual runs bind declared inputs/keys, inventories, registry, runner and code. Changed/missing required inputs refuse; absent optional caches are explicitly unverified. Strict input mode still requires them. Bindings are conservative declarations, not operating-system read tracing. |
 | **Benchmark recipes — N081** | Re-scores retain exact historical recipe snapshots, attempts, predictions and reports. New provenance identities are not new model performance. |
+| **Metadata exclusions — N087** | The existing named-person field policy now applies before plant-structure and direct XML metadata reach model, graph or snapshot outputs. Eligible metadata and separate occurrence counts survive. Regenerate selected artifacts; earlier packets are not scrubbed. A refreshed register can retain old evidence in decision history; review that history before sharing a regenerated packet. This is a bounded field policy, not general personal-data detection. |
 
 Schedule-field intake also rejects ambiguous case keys and conflicting values, merges only disjoint additions
 and refuses previously ignored native-model schedules. These input checks preserve evidence and explicit choices;
@@ -38,10 +39,14 @@ losses in aggregate. Exact identity/value dispositions and declared uncertainty 
 repair. Evaluation owns the source accounting; Questions provides independent source/key review. Historical
 matrix failures and source-owner/engineering acceptance remain unchanged.
 
-C9's machine-specific collection gap now has independently reviewed controls and current receiving artifacts.
-The [follow-up record](JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current)
-preserves the original failures. Missing records do not establish absent installed safeguards, and supplied
-trip records do not establish effective or tested protection. These are collection and software results.
+**Open N088 — E27 condenser-train coverage.** Thirteen matched unchanged-method baseline runs expose
+eight scope failures: a reset label for A, unrelated C, an unknown or contradictory target, negated/disabled text
+or text on A's own name can suppress B's questions. Questions owns the bounded repair; Context provides the
+source/coverage contract. No E27 repair or additional collection-review completion is claimed yet. The source
+requires investigation of operating constraints and total affected demand; a label establishes neither.
+
+The [follow-up record](JOURNAL.md#119-apply-the-existing-person-field-exclusion-before-metadata-reaches-receiving-tools)
+preserves the metadata failures and E27 baselines. N086 source-identity and receiving work remains separate.
 
 ## What exists, and what remains manual
 
@@ -74,7 +79,7 @@ actual participant, recipient, native-system and tenant observations remain **no
 
 | Workstream owner | Remaining work | Completion evidence |
 |---|---|---|
-| **Questions agent** | N065 useful source-backed questions, N082 remaining catalog source adequacy and independent N086 source/key review. Fifty rules/123 request bundles are inventoried; 13 rules have bounded collection reviews and 37 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
+| **Questions agent** | N088 E27 train coverage, N065 useful source-backed questions, N082 remaining catalog source adequacy and independent N086 source/key review. Fifty rules/123 request bundles are inventoried; 13 rules have bounded collection reviews and 37 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
 | **Evaluation agent** | N086 exact source identity/value accounting, the matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
 | **Context/retrieval agent** | Keep the local refresh/review/restart contract bounded and test receiving projections, including changed or removed identifiers and complete history. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
 | **Integration agent** | N062 real engineer/recipient pilot; N063 authorized company import/readback, client permissions and subsequent revision. | Actual observations from the [acceptance exercise](ACCEPTANCE.md), not an agent simulation. Native PI/gateway acceptance and operational benefit remain unverified. |
@@ -98,9 +103,10 @@ research, intentional tool boundaries and external acceptance are not silently c
 
 ## How this audit was checked
 
-The latest actual 95-cell matrix rerun records **64 pass / 23 fail / 8 n/a**. The subsequent 19-file C9 collection
-repair changes none of its 853 declared consumed paths; strict input verification still passes. No matrix
-bindings were rewritten for this repair, and its substantive results remain unchanged. These failures remain research work, not failing unit tests.
+The latest full 95-cell matrix run records **64 pass / 23 fail / 8 n/a**. The metadata-exclusion repair then
+actually reruns all 13 cells that consume the XML reader. Their results remain unchanged apart from timing/code
+bindings; the other 82 complete cells stay exact. Criteria, source/key inputs and historical failures are retained.
+No binding is backfilled. These failures remain research work, not failing unit tests.
 All **64 local test scripts pass**, with five Windows unittest skips and two explanatory platform notices;
 those counts are not added together. Targeted CLI controls, source-preservation checks, full-value reproductions
 and independent cross-reviews support the bounded repairs.

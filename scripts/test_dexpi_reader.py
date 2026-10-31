@@ -150,6 +150,66 @@ def cites_real_ids(case, model, xml_path):
                 case.assertIn(cited, ids, f"{sec} {key}: {rec['source']}")
 
 
+class MetadataPrivacy(unittest.TestCase):
+    def test_same_named_person_policy_applies_before_all_metadata_projections(self):
+        root = ET.Element("PlantModel")
+        roles = ("Approver", "Checker", "Creator", "Designer", "Drafter", "Editor", "Reviewer", "Owner")
+        info = ET.SubElement(root, "PlantInformation", SchemaVersion="4.1.1", OwnerTag="false")
+        markers = []
+        for i, role in enumerate(roles):
+            name = (role + "NameAssignmentClass") if i % 2 else (role + "NameAssignmentClass").lower()
+            marker = f"PERSON_SENTINEL_INFO_{i}"
+            markers.append(marker)
+            info.set(name, marker)
+        info.set("CreatorNameEmpty", "")
+        for tag in ("MetaData", "PlantStructureItem"):
+            owner = ET.SubElement(root, tag, ID=tag + "-1", ComponentClass="Plant")
+            for i, role in enumerate(roles):
+                group = ET.SubElement(owner, "GenericAttributes", Set="DexpiAttributes" if i % 2 else "Vendor")
+                marker = f"PERSON_SENTINEL_{tag}_{i}"
+                markers.append(marker)
+                name = role + "NameAssignmentClass"
+                ET.SubElement(group, "GenericAttribute", Name=name.swapcase() if i % 2 else name, Value=marker)
+            group = ET.SubElement(owner, "GenericAttributes")
+            ET.SubElement(group, "GenericAttribute", Name="CreatorNameEmpty", Value="")
+            ET.SubElement(group, "GenericAttribute", Name="EditorNameMissing")
+            ET.SubElement(group, "GenericAttribute", Name="EngineeringNote", Value=" 0 ")
+            ET.SubElement(group, "GenericAttribute", Name="OwnerTag", Value="false")
+        ET.SubElement(root, "Equipment", ID="E1", ComponentClass="Tank")
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            xml = folder / "metadata.xml"
+            ET.ElementTree(root).write(xml, encoding="utf-8", xml_declaration=True)
+            original = xml.read_bytes()
+            with contextlib.redirect_stdout(io.StringIO()):
+                model, report = R.run(xml, folder / "reader", "metadata")
+            self.assertEqual(xml.read_bytes(), original)
+            self.assertEqual(model["meta"]["dexpi_file"], {"SchemaVersion": "4.1.1", "OwnerTag": "false"})
+            self.assertEqual(report["person_metadata_attributes_excluded"], 9)
+            a = report["attributes"]
+            self.assertEqual((a["in_file"], a["kept_in_meta_only"], a["dropped"]), (24, 4, 20))
+            self.assertEqual(a["dropped_by_reason"], {"person name: left out on purpose": 16, "no value in the file": 4})
+            for attrs in (model["meta"]["drawing"], model["meta"]["plant_structure"][0]["attributes"]):
+                self.assertEqual(attrs, {"EngineeringNote": " 0 ", "OwnerTag": "false"})
+            self.assertEqual((len(model["units"]), len(model["streams"])), (1, 0))
+            import serve_snapshot
+            for profile in ("full", "core"):
+                graph = graph_export.apply_profile(graph_export.build(folder / "reader/metadata.model.json"), profile)
+                self.assertEqual(graph_export.problems(graph), [])
+                path = folder / f"{profile}.json"
+                path.write_text(json.dumps(graph), encoding="utf-8")
+                packet = serve_snapshot.Snapshot(path)
+                result = packet.asset("PLANT")
+                self.assertIn(" 0 ", json.dumps(result))
+                self.assertIn("false", json.dumps(result))
+                for marker in markers:
+                    self.assertNotIn(marker, json.dumps(result))
+            generated = [p for p in folder.rglob("*") if p.is_file() and p != xml]
+            for path in generated:
+                for marker in markers:
+                    self.assertNotIn(marker.encode(), path.read_bytes(), path.name)
+
+
 class Synthetic(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

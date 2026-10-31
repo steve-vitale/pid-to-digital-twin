@@ -150,8 +150,16 @@ drawn direction (both fed from P4712).
   `unplaced`: kept in the model and graph export as nodes with a placement reason; not exported by `generate.py`.
 - **Tags**: valves with no unique identifier use their XML ID (drawn spec codes repeat); the drawn label is kept.
   A hand switch (HS 4750.01) that drives a valve is a controller, so it gets no Ignition tag.
-- **Person names** in the drawing metadata are left out on purpose. **Values** stay as written (text) with DEXPI
-  unit names (`Bar` is as written; the drawn labels say barg); nothing is converted.
+- **Named-person fields** matching the reader's existing role-name policy are excluded from ordinary records,
+  drawing metadata, plant-structure metadata and direct `PlantInformation` attributes. GenericAttribute exclusions
+  use the report's dropped counts; direct XML-attribute exclusions have a separate count when nonzero. Other text
+  remains supplied evidence: this is a named-field policy, not general personal-data detection. Regenerate the
+  model, graph and selected context/snapshot after updating the reader; earlier artifacts are not scrubbed.
+
+Refreshing with a preserved context register also retains earlier evidence in decision history. That history can still contain values produced by an older reader; review retained history before sharing a regenerated packet. This update does not automatically redact old decisions.
+
+- **Values** stay as written (text) with DEXPI unit names (`Bar` is as written; the drawn labels say barg);
+  nothing is converted.
 
 ## Other tools' exports
 

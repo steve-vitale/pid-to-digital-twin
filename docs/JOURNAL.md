@@ -5528,3 +5528,66 @@ result, blanket XML fidelity pass or source-owner engineering acceptance is clai
 
 Model/provider calls, new original-source downloads, plant/company writes, native imports, network-boundary
 changes and LinkedIn publication are not exercised. The remaining work keeps its owners and original limits.
+
+
+## 119. Apply the existing person-field exclusion before metadata reaches receiving tools
+
+**A259 / N087.** Four actual unchanged-tool CLI probes put the same synthetic named-person field beside
+eligible engineering metadata in ordinary MetaData and PlantStructureItem records. Ordinary metadata excludes
+the value; plant-structure metadata carries it into the model, PLANT graph attributes and snapshot readback.
+An initial root narrative says the graph omits it; its exact result rows and saved artifacts contradict that
+sentence. The original report and a separate correction remain. A later actual original-reader fixture confirms
+the direct PlantInformation XML-attribute route also copies the protected marker. No real personal data is used.
+
+Independent prospective criteria freeze the existing case-insensitive eight-role PERSON_ATTRS policy before
+the candidate. The repair applies it before plant-structure values enter metadata and before direct
+PlantInformation attributes are copied. Ordinary GenericAttribute empty/missing precedence stays unchanged;
+excluded values use the existing person-drop reason. Direct XML attributes are separate occurrences, so the
+report adds person_metadata_attributes_excluded only when nonzero and names that separate count in readable
+output. Excluded names/values and individual value hashes are not added to that report count. Eligible fields,
+whitespace, zero/false-like strings and deliberately unmatched names keep their existing behavior.
+
+The private candidate changes exactly two code/test files. All 2,717 other archive files stay exact. Author
+validation executes 23 actual CLIs, including a separate C01 reproduction. Independent review executes 35
+product CLIs with 101 assertions and nine actual pinned MCP 2.3 stdio sessions with 75 responses and 249
+assertions. Three independent fixtures cover all eight role prefixes and case variants, full/core graph and
+graph checks, qualified partial answers, complete selected context/source/decision/ownership history, no-echo
+readback and duplicate-ID/alias refusals. The reader suite runs 35 cases with nine explicit optional-cache skips
+in the clean archive; the three original/candidate I01 pairs separately reproduce all nine saved model/report
+artifacts exactly. This is bounded compatibility evidence, not general XML fidelity or a new held-out result.
+
+The three registered C01 outputs are freshly reproduced. Model and readable report match after LF
+normalization; the complete graph differs only in source_model because its fresh output is outside the checkout.
+The committed model/report/graph remain unchanged. The feature review excludes independent certification of
+the reviewer's previously authored graph guard, while retaining its consumed hash and prior independent scope.
+The first reviewer harness confuses raw CRLF and normalized LF hashes and refuses before product execution;
+the original source/check and corrected fresh run remain. No product failure is inferred from that harness error.
+
+Regenerate the model, graph and selected context/snapshot when using the updated reader. This change does not
+redact original XML or previously generated packets/history. The named-field policy does not detect arbitrary
+personal data in free text and does not establish a company permission or sharing decision. Original source
+identity, placement, process/control eligibility, historical row 7 criteria and engineering acceptance are unchanged.
+
+A fresh transition from the old leaked graph through a qualified partial answer to the sanitized graph confirms the distinction: six actual CLIs and one targeted MCP stdio session retain the old evidence and verdict, stale the answer and serve the old marker through decision history. The current node is sanitized. A newly regenerated context packet can therefore carry historical excluded values; preserved history needs review before sharing. No automatic historical redaction is implemented.
+
+**Open N088 / N082.** A separate prospective E27 contract reads the existing LBNL dairy guide's floating-head,
+minimum-pressure constraint and condenser-fan tradeoff sections before 13 matched unchanged-method baseline
+CLIs. Eight violate the uncovered-train minimum: A-only and unrelated reset text, unknown/contradictory targets,
+negated/disabled qualifiers and an own-anchor name can suppress B's review. All original fixtures, catalog,
+other rules and benefits remain. This is a source/collection association failure, not evidence of plant energy
+waste or permission to adjust a control. No E27 candidate or additional bounded source-review completion is
+accepted here; 13 named rules have bounded collection reviews and 37 source contracts remain.
+
+**Open N086.** Independent exact-occurrence review retains original false-match failures and a namespace-scope
+failure. A strictly namespace-free diagnostic must disclose/refuse the original Comos schema-location attribute
+rather than silently count it as supported. A future typed source-record contract must preserve original expanded
+namespaces, opaque qualifiers, mapping uncertainty and never-reviewed removal history through graph/context/MCP.
+No new whole-source fidelity score, source-owner acceptance or source-record consumer feature is claimed.
+
+The root integration actually reruns all 13 matrix cells consuming dexpi_reader.py. Their complete substantive
+results remain unchanged apart from timing and current code bindings; all 82 other complete cells remain exact.
+The matrix still records 64 pass / 23 fail / 8 n/a, with criteria, source/key records and runner unchanged.
+No bindings are backfilled and no failed cell is relabelled as passing because the metadata policy was repaired.
+
+No provider/model call, new original-source download, company/plant/native write, network-boundary change or
+LinkedIn publication is performed. Source interpretation and real engineer/company acceptance remain open.
