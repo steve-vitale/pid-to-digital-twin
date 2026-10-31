@@ -18,6 +18,10 @@ platform export. Keep the conversion report and original XML with that investiga
 python -S scripts/dexpi_reader.py --xml my_pid.xml --out my-model --sheet-id unit-47
 ```
 
+The XML input limit is 256 MiB. Reads request at most 64 KiB at a time, retaining the complete original bytes
+for parsing and hashing. This avoids eager cap-sized reads; it is not a constant-memory parser or a capacity
+guarantee for large drawings. Every existing source-integrity check remains.
+
 The reader writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.report.md` and prints the report. Options:
 
 - `--png drawing.png`: also write an intake prediction and manifest for `scripts/import_site_drawing.py` (the PNG
@@ -32,7 +36,8 @@ The reader writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.repor
 - `--attribution TEXT`: carried in `meta.attribution`.
 
 A file that is not well-formed XML, whose root is not `<PlantModel>`, or that reuses an element ID is refused with
-a message and exit code 2; nothing is written. A pipe segment whose `Connection` names an ID the file does not
+a message and exit code 2; nothing is written. Duplicate-ID errors report the number of distinct duplicate
+identifiers without echoing their values. A pipe segment whose `Connection` names an ID the file does not
 contain is read, not refused: that end becomes `BL`, the stream's `from_end`/`to_end` says "broken reference", and
 the ID is listed under `broken_references` in the report and in the model's `meta` (the real end is unknown).
 
@@ -113,7 +118,7 @@ drawn direction (both fed from P4712).
 
 ## What is kept
 
-- **Every GenericAttribute** of an item, its parts and its connection points, as `{value, uom, source}` under the
+- **Eligible GenericAttributes** of an item, its parts and its connection points, as `{value, uom, source}` under the
   item, keyed by the DEXPI name (a part's attribute is prefixed with the part's XML ID). On C01: pump P4711's
   `DesignShaftPower` 60 Kilowatt, H1007's `Chamber-1:UpperLimitDesignPressure` 60 Bar, line 47121's
   `FluidCodeAssignmentClass` MNb, segment 6's `NominalDiameterRepresentationAssignmentClass` DN 50, the safety
@@ -156,8 +161,28 @@ drawn direction (both fed from P4712).
   before values can become tags, identities or facts. This exclusion does not promote qualified attributes into
   native DEXPI fields. GenericAttribute exclusions
   use the report's dropped counts; direct XML-attribute exclusions have a separate count when nonzero. Other text
-  remains supplied evidence: this is a named-field policy, not general personal-data detection. Regenerate the
-  model, graph and selected context/snapshot after updating the reader; earlier artifacts are not scrubbed.
+  remains supplied evidence: this is a named-field policy, not general personal-data detection. Protected
+  descendants cannot supply native metadata, labels or bundle diagnostic identifiers. Physical records nested
+  inside protected metadata are refused; optional `--png` also refuses protected content on the adapter's
+  geometry, label, topology or catalogue read paths. These precise unsupported nestings are not a general
+  DEXPI-validity check. Original XML and retained PNG bytes remain unchanged and unsanitized.
+- **Unkeyed metadata**: a drawing or plant-structure GenericAttribute with a value but no `Name` attribute is
+  reported as not mapped, rather than becoming a fabricated native key. An empty value keeps its existing
+  no-value classification; a present empty name or literal `null` name is not the same as an absent attribute.
+
+The following additional exclusion counters appear only when nonzero. Their scopes overlap; do not add them
+to each other or treat them as a count of all private information:
+
+| Counter | Scope |
+|---|---|
+| Report `person_subtree_descendants_excluded` | Descendant elements of protected GenericAttributes outside the reader's shape catalogue. |
+| PNG prediction `conversion.xml.person_generic_attributes_excluded` | Distinct protected GenericAttribute occurrences encountered below the adapter's kept symbol elements, outside its catalogue. |
+| PNG prediction `conversion.xml.person_subtree_items_excluded` | Distinct protected elements with an ID excluded from the diagnostic inventory outside its catalogue; identifier values are not derived. |
+
+The PNG path checks the signature and nonempty header dimensions before unpacking them; it does not fully decode
+or validate an image. Source checks use the captured XML and check current bytes before output; filesystem
+atomicity and concurrent publication are not provided. Regenerate the model, graph and selected context/snapshot
+after updating the reader; earlier artifacts are not scrubbed.
 
 Refreshing with a preserved context register also retains earlier evidence in decision history. That history can still contain values produced by an older reader; review retained history before sharing a regenerated packet. This update does not automatically redact old decisions.
 

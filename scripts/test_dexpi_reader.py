@@ -886,5 +886,367 @@ class QualifiedDesignationPrivacy(unittest.TestCase):
         self.assertEqual(model["units"][0]["Description"]["value"], "safe engineering")
 
 
+class MetadataIdentityGuards(unittest.TestCase):
+    """Unkeyed metadata stays unmapped; duplicate diagnostics never echo raw identifiers."""
+
+    reason = "missing metadata Name: not mapped to native metadata"
+
+    def metadata_xml(self, owner_tag):
+        root = ET.Element("PlantModel")
+        ET.SubElement(root, "Equipment", ID="E1", ComponentClass="Tank")
+        owner = ET.SubElement(root, owner_tag, ID="META1")
+        group = ET.SubElement(owner, "GenericAttributes")
+        for value in ("0", "false", " "):
+            ET.SubElement(group, "GenericAttribute", Value=value)
+        ET.SubElement(group, "GenericAttribute")
+        ET.SubElement(group, "GenericAttribute", Value="")
+        ET.SubElement(group, "GenericAttribute", Name="", Value="explicit-blank")
+        ET.SubElement(group, "GenericAttribute", Name="null", Value="literal-null")
+        ET.SubElement(group, "GenericAttribute", Name="Safe", Value="safe")
+        ET.SubElement(group, "GenericAttribute", {"{urn:privacy}Name": "CreatorName", "Value": "SYNTHETIC_GUARD_PERSON_991"})
+        return ET.tostring(root, encoding="utf-8")
+
+    def test_both_metadata_writers_preserve_unkeyed_loss_and_explicit_blank_literal_keys(self):
+        for owner in ("MetaData", "PlantStructureItem"):
+            with self.subTest(owner=owner), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                xml = base / "source.xml"
+                raw = self.metadata_xml(owner)
+                xml.write_bytes(raw)
+                model, report = R.run(xml, base / "out", "guard", quiet=True)
+                values = model["meta"]["drawing"] if owner == "MetaData" else model["meta"]["plant_structure"][0]["attributes"]
+                self.assertEqual(values, {"": "explicit-blank", "null": "literal-null", "Safe": "safe"})
+                self.assertEqual(report["attributes"]["dropped_by_reason"][self.reason], 3)
+                self.assertEqual(report["attributes"]["dropped_by_reason"]["no value in the file"], 2)
+                self.assertEqual(report["attributes"]["dropped_by_reason"]["person name: left out on purpose"], 1)
+                self.assertEqual(report["attributes"]["in_file"], 9)
+                self.assertNotIn("SYNTHETIC_GUARD_PERSON_991", json.dumps([model, report]) + R.report_text(report))
+                self.assertIn("- dropped 3: " + self.reason, R.report_text(report))
+                self.assertEqual(xml.read_bytes(), raw)
+
+    def test_empty_name_language_suffix_and_nonmetadata_naming_keep_existing_rules(self):
+        raw = b'<PlantModel><MetaData><GenericAttributes><GenericAttribute Name="" Language="en" Value="explicit-en"/></GenericAttributes></MetaData><Equipment ID="E1" ComponentClass="Tank"><GenericAttributes><GenericAttribute Value="ordinary-unkeyed"/></GenericAttributes></Equipment></PlantModel>'
+        with tempfile.TemporaryDirectory() as tmp:
+            xml = Path(tmp) / "source.xml"
+            xml.write_bytes(raw)
+            model, report = R.run(xml, Path(tmp) / "out", "guard", quiet=True)
+            self.assertEqual(model["meta"]["drawing"], {"@en": "explicit-en"})
+            self.assertEqual(model["units"][0]["unnamed"]["value"], "ordinary-unkeyed")
+            self.assertNotIn(self.reason, report["attributes"]["dropped_by_reason"])
+
+    def test_protected_duplicate_id_refuses_without_echo_before_existing_or_absent_outputs(self):
+        marker = "SYNTHETIC_PROTECTED_DUPLICATE_ID_7721"
+        raw = ('<PlantModel><Equipment ID="E1" ComponentClass="Tank"><GenericAttributes>' +
+               ('<GenericAttribute ID="' + marker + '" Name="Description" xmlns:p="urn:privacy" p:Name="CreatorName" Value="protected"/>') * 2 +
+               '</GenericAttributes></Equipment></PlantModel>').encode("utf-8")
+        for existing in (False, True):
+            with self.subTest(existing=existing), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                xml = base / "source.xml"
+                xml.write_bytes(raw)
+                out = base / "out"
+                if existing:
+                    out.mkdir()
+                    (out / "guard.model.json").write_bytes(b'prior model sentinel')
+                    (out / "guard.source.png").write_bytes(b'prior retained image sentinel')
+                before = {p.name: p.read_bytes() for p in out.iterdir()} if existing else None
+                stdout, stderr = io.StringIO(), io.StringIO()
+                with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+                    code = R.main(["--xml", str(xml), "--sheet-id", "guard", "--out", str(out)])
+                self.assertEqual(code, 2)
+                self.assertNotIn(marker, stdout.getvalue() + stderr.getvalue())
+                self.assertIn("more than once (1 duplicate identifier(s))", stderr.getvalue())
+                self.assertNotIn("Traceback", stderr.getvalue())
+                self.assertEqual(xml.read_bytes(), raw)
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()} if out.exists() else None, before)
+
+
+
+class ProtectedSubtreePrivacy(unittest.TestCase):
+    """Raw-input privacy boundaries, opaque QNames and source/geometry mutation controls."""
+
+    @staticmethod
+    def raw(inner):
+        return ('<PlantModel><Equipment ID="E1" ComponentClass="Tank">' + inner +
+                '</Equipment><Drawing><Extent><Min X="0" Y="0"/><Max X="100" Y="100"/></Extent></Drawing></PlantModel>').encode()
+
+    def reader(self, raw, base):
+        xml = base / 'source.xml'; xml.write_bytes(raw)
+        return R.Reader(xml, 'privacy')
+
+    def test_inventory_all_roles_qualified_aliases_and_both_payload_positions(self):
+        for role in ('Approver', 'Checker', 'Creator', 'Designer', 'Drafter', 'Editor', 'Reviewer', 'Owner'):
+            for form in ('plain', 'alias', 'name'):
+                with self.subTest(role=role, form=form), tempfile.TemporaryDirectory() as tmp:
+                    marker = 'SYNTHETIC_N092_991'
+                    name = role + 'Name' + ('_' + marker if form == 'name' else '')
+                    attrs = 'Name="' + name + '"'
+                    if form == 'alias': attrs = 'Name="TagNameAssignmentClass" xmlns:p="urn:q" p:nAmE="' + name + '"'
+                    raw = self.raw('<GenericAttributes><GenericAttribute Name="TagNameAssignmentClass" Value="SAFE17"/>' +
+                                   '<GenericAttribute ' + attrs + ' Value="' + marker + '"/>' +
+                                   '<GenericAttribute Name="Engineering" Value="retained"/></GenericAttributes>')
+                    reader = self.reader(raw, Path(tmp))
+                    model = reader.read(); report = reader.report(model)
+                    inventory = reader.safe_xml_inventory({'E1'}, {'E1': None})
+                    self.assertEqual(inventory['identifiers_on_untagged_symbols'], {'E1': 'SAFE17 (TagNameAssignmentClass)'})
+                    self.assertEqual(inventory['attributes_not_carried_on_kept_items'], {'TagNameAssignmentClass': 1, 'Engineering': 1})
+                    self.assertEqual(inventory['person_generic_attributes_excluded'], 1)
+                    self.assertNotIn('person_subtree_items_excluded', inventory)
+                    self.assertEqual(report['attributes']['in_file'], 3)
+                    self.assertNotIn(marker, json.dumps([model, report, inventory]) + R.report_text(report))
+                    self.assertEqual(reader.path.read_bytes(), raw)
+
+    def test_inventory_last_eligible_wins_and_exclusion_counts_are_unique_occurrences(self):
+        inner = '<Equipment ID="PART" ComponentClass="Impeller"><GenericAttributes>'
+        inner += '<GenericAttribute Name="TagNameAssignmentClass" Value="SAFE1"/>'
+        inner += '<GenericAttribute Name="TagNameAssignmentClass" xmlns:p="urn:q" p:Name="OwnerName" Value="SYNTHETIC_PROTECTED_662"><GenericAttribute Name="TagNameAssignmentClass" Value=""/><Unknown ID="SYNTHETIC_PROTECTED_662"/></GenericAttribute>'
+        inner += '<GenericAttribute Name="TagNameAssignmentClass" Value="SAFE2"/></GenericAttributes></Equipment>'
+        with tempfile.TemporaryDirectory() as tmp:
+            reader = self.reader(self.raw(inner), Path(tmp))
+            inventory = reader.safe_xml_inventory({'E1', 'PART'}, {'E1': None, 'PART': None})
+            self.assertEqual(inventory['attributes_not_carried_on_kept_items'], {'TagNameAssignmentClass': 2})
+            self.assertEqual(inventory['person_generic_attributes_excluded'], 2)
+            self.assertEqual(inventory['person_subtree_items_excluded'], 1)
+            self.assertEqual(set(inventory['identifiers_on_untagged_symbols'].values()), {'SAFE2 (TagNameAssignmentClass)'})
+            model = reader.read(); report = reader.report(model)
+            self.assertEqual(report['attributes']['in_file'], 4)
+            self.assertEqual(report['person_subtree_descendants_excluded'], 2)
+            self.assertNotIn('SYNTHETIC_PROTECTED_662', json.dumps([model, report, inventory]))
+
+    def test_original_qualified_names_do_not_gain_legacy_diagnostic_roles(self):
+        raw = self.raw('<GenericAttributes><p:GenericAttribute xmlns:p="urn:q" Name="TagNameAssignmentClass" Value="OPAQUE"/>'
+                       '<p:GenericAttribute xmlns:p="urn:q" Name="CreatorName" Value="SYNTHETIC_QUALIFIED_82"><GenericAttribute Name="Unsafe" Value="SYNTHETIC_QUALIFIED_82"/></p:GenericAttribute></GenericAttributes>')
+        with tempfile.TemporaryDirectory() as tmp:
+            reader = self.reader(raw, Path(tmp))
+            inventory = reader.safe_xml_inventory({'E1'}, {'E1': None})
+            self.assertEqual(inventory['attributes_not_carried_on_kept_items'], {})
+            self.assertEqual(inventory['identifiers_on_untagged_symbols'], {})
+            self.assertEqual(inventory['person_generic_attributes_excluded'], 1)  # unqualified child only
+            model = reader.read(); report = reader.report(model)
+            self.assertEqual(report['attributes']['in_file'], 3)  # native normalization remains separate
+            self.assertNotIn('SYNTHETIC_QUALIFIED_82', json.dumps([model, report, inventory]))
+
+    def test_physical_nested_record_refusal_and_duplicate_precedence_preserve_all_sentinels(self):
+        tags = ('Equipment PipingNetworkSystem PipingNetworkSegment PipingComponent Nozzle PipeOffPageConnector '
+                'PropertyBreak ProcessInstrumentationFunction ProcessInstrument InstrumentComponent '
+                'ProcessSignalGeneratingFunction ActuatingSystem ActuatingSystemComponent ActuatingFunction '
+                'InstrumentationLoopFunction InstrumentLoop InformationFlow SignalLine').split()
+        for tag in tags:
+            for duplicate in (False, True):
+                with self.subTest(tag=tag, duplicate=duplicate), tempfile.TemporaryDirectory() as tmp:
+                    base = Path(tmp); out = base / 'out'; out.mkdir()
+                    (out / 'privacy.model.json').write_bytes(b'prior model')
+                    (out / 'privacy.source.png').write_bytes(b'prior image')
+                    before = {p.name: p.read_bytes() for p in out.iterdir()}
+                    ident = 'E1' if duplicate else 'SYNTHETIC_N093_77'
+                    raw = self.raw('<GenericAttributes><GenericAttribute Name="CreatorName" Value="protected"><' + tag + ' ID="' + ident + '"/></GenericAttribute></GenericAttributes>')
+                    xml = base / 'source.xml'; xml.write_bytes(raw)
+                    with self.assertRaisesRegex(R.DexpiError, 'more than once' if duplicate else '^physical records nested inside protected metadata are not supported; nothing was written$') as error:
+                        R.run(xml, out, 'privacy', png=base / 'missing.png', quiet=True)
+                    self.assertNotIn('SYNTHETIC_N093_77', str(error.exception))
+                    self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+                    self.assertEqual(xml.read_bytes(), raw)
+
+    def test_protected_label_text_is_filtered_native_and_refused_before_adapter_with_png(self):
+        from unittest.mock import patch
+        import adapt_dexpi as A
+        inner = '<Label ComponentClass="EquipmentTagNameLabel"><GenericAttribute Name="CreatorName" Value="protected"><Text String="SYNTHETIC_TEXT_87"/></GenericAttribute><Text String="SAFE17"/></Label>'
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp); reader = self.reader(self.raw(inner), base)
+            model = reader.read(); report = reader.report(model)
+            self.assertEqual(model['units'][0]['id'], 'SAFE17')
+            self.assertEqual(report['person_subtree_descendants_excluded'], 1)
+            self.assertIn('Protected GenericAttribute descendant elements deliberately excluded from native interpretation: 1 (raw XML retained).', R.report_text(report))
+            self.assertNotIn('SYNTHETIC_TEXT_87', json.dumps([model, report]))
+            for existing in (False, True):
+                out = base / ('out-' + str(existing))
+                if existing:
+                    out.mkdir(); (out / 'privacy.source.png').write_bytes(b'prior image')
+                before = {p.name: p.read_bytes() for p in out.iterdir()} if existing else None
+                with patch.object(A, 'convert_xml') as adapter:
+                    with self.assertRaisesRegex(R.DexpiError, '^protected metadata overlaps with unsupported drawing adapter records; nothing was written$'):
+                        R.run(reader.path, out, 'privacy', png=base / 'missing.png', quiet=True)
+                    adapter.assert_not_called()
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()} if out.exists() else None, before)
+
+    def test_source_changes_after_init_and_after_read_refuse_before_outputs_or_adapter(self):
+        from unittest.mock import patch
+        import adapt_dexpi as A
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp); raw = self.raw(''); reader = self.reader(raw, base)
+            reader.path.write_bytes(raw.replace(b'Tank', b'Pump'))
+            with self.assertRaisesRegex(R.DexpiError, 'source changed'):
+                reader.read()
+            original_read = R.Reader.read
+            for existing in (False, True):
+                reader.path.write_bytes(raw); out = base / ('out-' + str(existing))
+                if existing:
+                    out.mkdir(); (out / 'privacy.model.json').write_bytes(b'prior model')
+                    (out / 'privacy.source.png').write_bytes(b'prior image')
+                before = {p.name: p.read_bytes() for p in out.iterdir()} if existing else None
+                def change(instance):
+                    result = original_read(instance)
+                    instance.path.write_bytes(raw.replace(b'Tank', b'Pump'))
+                    return result
+                with patch.object(R.Reader, 'read', change), patch.object(A, 'convert_xml') as adapter:
+                    with self.assertRaisesRegex(R.DexpiError, 'source changed'):
+                        R.run(reader.path, out, 'privacy', png=base / 'missing.png', quiet=True)
+                    adapter.assert_not_called()
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()} if out.exists() else None, before)
+
+    def test_short_or_malformed_png_refuses_before_adapter_and_preserves_sentinels(self):
+        from unittest.mock import patch
+        import adapt_dexpi as A
+        malformed = (b'not a PNG', b'\x89PNG\r\n\x1a\n' + b'\0' * 16,
+                     b'\x89PNG\r\n\x1a\n' + (13).to_bytes(4, 'big') + b'IHDR' + (0).to_bytes(4, 'big') + (100).to_bytes(4, 'big'))
+        for raw_png in malformed:
+            for existing in (False, True):
+                with self.subTest(size=len(raw_png), existing=existing), tempfile.TemporaryDirectory() as tmp:
+                    base = Path(tmp); reader = self.reader(self.raw(''), base)
+                    image = base / 'bad.png'; image.write_bytes(raw_png)
+                    out = base / 'out'
+                    if existing:
+                        out.mkdir(); (out / 'privacy.model.json').write_bytes(b'prior model')
+                        (out / 'privacy.source.png').write_bytes(b'prior image')
+                    before = {p.name: p.read_bytes() for p in out.iterdir()} if existing else None
+                    with patch.object(A, 'convert_xml') as adapter, self.assertRaisesRegex(R.DexpiError, 'PNG signature and nonempty IHDR dimensions'):
+                        R.run(reader.path, out, 'privacy', png=image, quiet=True)
+                    adapter.assert_not_called()
+                    self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()} if out.exists() else None, before)
+
+    def test_native_duplicate_counts_use_original_native_scope_including_protected_ids(self):
+        cases = [
+            ('<Unknown ID="A"/><Unknown ID="A"/><GenericAttributes><GenericAttribute ID="SYNTHETIC_PROTECTED_REPEAT_B" Name="CreatorName" Value="protected"/><GenericAttribute ID="SYNTHETIC_PROTECTED_REPEAT_B" Name="CreatorName" Value="protected"/></GenericAttributes>', 2),
+            ('<Drawing><Unknown ID="A"/><Unknown ID="A"/></Drawing>', 1),
+            ('<ShapeCatalogue/><ShapeCatalogue><Unknown ID="A"/><Unknown ID="A"/></ShapeCatalogue>', 1),
+        ]
+        for inner, count in cases:
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as tmp:
+                raw = ('<PlantModel><Equipment ID="E1" ComponentClass="Tank"/>' + inner + '</PlantModel>').encode()
+                xml = Path(tmp) / 'source.xml'; xml.write_bytes(raw)
+                with self.assertRaisesRegex(R.DexpiError, 'more than once \\(' + str(count) + ' duplicate identifier\\(s\\)\\)') as error:
+                    R.Reader(xml)
+                self.assertNotIn('SYNTHETIC_PROTECTED_REPEAT_B', str(error.exception))
+                self.assertEqual(xml.read_bytes(), raw)
+        with tempfile.TemporaryDirectory() as tmp:
+            raw = b'<PlantModel><ShapeCatalogue><Unknown ID="A"/><Unknown ID="A"/></ShapeCatalogue><Equipment ID="E1" ComponentClass="Tank"/></PlantModel>'
+            reader = self.reader(raw, Path(tmp))
+            self.assertEqual(reader.read()['units'][0]['id'], 'E1')
+
+    def test_direct_prediction_stages_original_snapshot_and_omits_unsafe_converter_inventory(self):
+        from unittest.mock import patch
+        import adapt_dexpi as A
+        import dexpi_to_twin as D
+        import score_pid2graph as SC
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp); raw = self.raw(''); xml = base / 'source.xml'; xml.write_bytes(raw)
+            image = base / 'source.png'; image.write_bytes(b'\x89PNG\r\n\x1a\n' + (13).to_bytes(4, 'big') + b'IHDR' + (100).to_bytes(4, 'big') * 2)  # header-only; decoder/size explicitly stubbed
+            def geometry(staged):
+                self.assertNotEqual(Path(staged), xml)
+                self.assertEqual(Path(staged).name, xml.name)
+                self.assertEqual(Path(staged).read_bytes(), raw)
+                return {'extent': (0, 0, 100, 100), 'nodes': {}, 'edges': []}
+            report = {}; prediction = {'symbols': [], 'connections': [], 'conversion': report}
+            with patch.object(A, 'convert_xml', geometry), patch.object(SC, 'png_size', return_value=(100, 100)), patch.object(D, 'convert', return_value=(prediction, report)) as converter, patch.object(R.ET, 'parse', side_effect=AssertionError('unexpected native/inventory path parse')):
+                pred, rep = R.prediction(xml, image, 'privacy', 'title')
+            self.assertEqual(len(converter.call_args.args), 2)
+            self.assertEqual(converter.call_args.kwargs, {})
+            self.assertIs(pred['conversion']['xml'], rep['xml'])
+            self.assertEqual(pred['source']['xml_sha256'], R.hashlib.sha256(raw).hexdigest())
+            self.assertEqual(pred['source']['xml'], xml.name)
+            self.assertEqual(xml.read_bytes(), raw)
+
+
+class BoundedNativeSourceRead(unittest.TestCase):
+    def test_actual_run_source_requests_are_bounded_and_all_guards_remain(self):
+        from unittest.mock import patch
+        raw = b'<PlantModel><Equipment ID="E1" ComponentClass="Tank"/></PlantModel>'
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'source.xml'; source.write_bytes(raw)
+            original_open = Path.open; requests = []; opens = []
+            class Witness:
+                def __init__(self, stream): self.stream = stream
+                def __enter__(self): self.stream.__enter__(); return self
+                def __exit__(self, *args): return self.stream.__exit__(*args)
+                def __getattr__(self, key): return getattr(self.stream, key)
+                def read(self, size=-1):
+                    requests.append(size)
+                    self_case.assertTrue(0 < size <= 65536, 'actual reader requested more than64KiB')
+                    return self.stream.read(size)
+            self_case = self
+            def opening(path, mode='r', *args, **kwargs):
+                stream = original_open(path, mode, *args, **kwargs)
+                if path == source and mode == 'rb':
+                    opens.append(str(path)); return Witness(stream)
+                return stream
+            with patch.object(Path, 'open', opening), patch.object(R.Reader, 'assert_source_unchanged', autospec=True,
+                    side_effect=R.Reader.assert_source_unchanged) as guards:
+                R.run(source, Path(tmp) / 'out', sheet_id='bounded', quiet=True)
+            self.assertEqual(guards.call_count, 6)
+            self.assertEqual(len(opens), 7)
+            self.assertTrue(requests)
+            self.assertEqual(source.read_bytes(), raw)
+
+    def test_actual_reader_continues_positive_short_reads_before_one_parse(self):
+        import hashlib
+        from unittest.mock import patch
+        raw = b'<PlantModel><Equipment ID="E1" ComponentClass="Tank"/></PlantModel>'
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'source.xml'; source.write_bytes(raw)
+            original_open = Path.open
+            class Short(io.BytesIO):
+                def read(self, size=-1): return super().read(min(size, 7))
+            def opening(path, mode='r', *args, **kwargs):
+                return Short(raw) if path == source and mode == 'rb' else original_open(path, mode, *args, **kwargs)
+            original_parse = R.ET.fromstring
+            with patch.object(Path, 'open', opening), patch.object(R.ET, 'fromstring', side_effect=original_parse) as parse:
+                reader = R.Reader(source)
+            self.assertEqual(parse.call_count, 1)
+            self.assertEqual(reader.raw_bytes, raw)
+            self.assertEqual(reader.raw_sha256, hashlib.sha256(raw).hexdigest())
+
+    def test_helper_exact_cap_chunk_short_read_and_eof_boundaries(self):
+        from unittest.mock import patch
+        for cap in (0, 1, 65535, 65536, 65537):
+            lengths = sorted({n for n in (0, 1, 65535, 65536, 65537, cap-1, cap, cap+1, cap+2) if n >= 0})
+            for length in lengths:
+                raw = (b'\x00\xff\r\nXML' * (length // 7 + 1))[:length]
+                for short in (False, True):
+                    class Source:
+                        def __init__(self): self.offset = 0; self.eof = False; self.requests = []
+                        def read(self, size):
+                            self_case.assertFalse(self.eof)
+                            self_case.assertEqual(size, min(65536, cap+1-self.offset))
+                            self.requests.append(size)
+                            data = raw[self.offset:self.offset+min(size, 17 if short else size)]
+                            self.offset += len(data); self.eof = not data
+                            return data
+                    self_case = self; stream = Source()
+                    with patch.object(R, 'MAX_BYTES', cap):
+                        value = R._read_source_bytes(stream)
+                    self.assertEqual(value, raw[:cap+1])
+                    self.assertIs(type(value), bytes)
+                    self.assertTrue(all(0 < n <= 65536 for n in stream.requests))
+        self.assertEqual(R.MAX_BYTES, 268435456)
+
+    def test_size_limit_hash_and_error_classification_remain_exact(self):
+        import hashlib
+        from unittest.mock import patch
+        raw = b'<PlantModel><Equipment ID="E1"/></PlantModel>'
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'source.xml'; source.write_bytes(raw)
+            with patch.object(R, 'MAX_BYTES', len(raw)):
+                reader = R.Reader(source)
+                self.assertEqual(reader.raw_bytes, raw)
+                self.assertEqual(reader.raw_sha256, hashlib.sha256(raw).hexdigest())
+            with patch.object(R, 'MAX_BYTES', len(raw)-1), patch.object(R.ET, 'fromstring') as parse:
+                with self.assertRaises(R.DexpiError) as error: R.Reader(source)
+                self.assertEqual(str(error.exception), f'source.xml: larger than {len(raw)-1} bytes; refusing to parse')
+                parse.assert_not_called()
+            source.write_bytes(raw+b' ')
+            with self.assertRaises(R.DexpiError) as error: reader.assert_source_unchanged()
+            self.assertEqual(str(error.exception), 'source changed before output; nothing further was written')
+
+
 if __name__ == "__main__":
     unittest.main()

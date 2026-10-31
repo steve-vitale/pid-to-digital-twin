@@ -5823,3 +5823,90 @@ byte-identical throughout. Strict checks again verify all 95 input bindings. Ind
 accepts the new retained transcript and snapshots. This diagnostic repeat neither reconstructs the lost log nor
 replaces the original published timings, and adds no independent trial or performance claim. Later check logs
 are isolated from producing logs; the first loss and the failed publication guard remain part of the record.
+
+## 125. Keep native intake exclusions consistent through drawing diagnostics
+
+**A266 / N090–N093.** Existing source probes expose four separate intake failures: a drawing metadata value
+without a Name can raise TypeError, an unkeyed plant-structure value can become a fabricated `null` key,
+duplicate-ID errors can echo an excluded identifier, and the optional PNG diagnostic inventory can derive a
+label from a protected field. Deliberately nonstandard records nested inside protected metadata can also enter
+native traversal. Original failing commands and output/sentinel records remain preserved.
+
+The native-only correction keeps the existing named-role field policy. Missing metadata Name attributes are
+reported as not mapped; empty-value precedence and present empty or literal `null` names remain distinct.
+Duplicate validation still runs first and counts distinct duplicated IDs without quoting them. Reader-owned
+diagnostics use the original root and expanded-name witnesses before deriving labels or counters. Protected
+descendants stay outside native interpretation. Physical records inside that metadata and protected content on
+the optional adapter's semantic read paths refuse before output. This is precise unsupported nesting, not a
+general schema validator or personal-data detector. Original XML and retained image bytes remain unsanitized.
+
+The independently reviewed private native variant covers 340 finite scenarios, 32 Python API sessions and
+27 complete original artifacts. Its earlier short-PNG and full-source-only counting failures remain separate,
+with their actual code hashes. The public integration adopts d41c044 explicitly: reader/test and consumed
+helpers match the earlier released baseline; the later drawing-verifier function is not reached by the native
+network path. No source-evidence module, document-ID feature, transport or source-aware consumer is included.
+
+On the current checkout all 52 reader tests pass with no skips. Six already exposed public inputs reproduce
+all 27 complete native artifacts byte for byte. The registered C01 model, report and graph also reproduce in
+full, without a graph display-path exception or a golden change. Root actually refreshes the 13 reader-dependent
+matrix cells; 82 complete cell objects stay exact. The prospective comparison permits only execution timings,
+the reader binding and six exact duplicate-ID messages derived from the original AutoCAD XML. Every other
+value, source/key binding, reason, detail and criterion stays exact. Counts remain 64 pass, 23 fail and 8 n/a.
+
+Independent receiving review accepts that functional evidence. Its 343.06-second execution raises a separate
+cost question: earlier runs of the same selections completed much sooner. A frozen two-input observation then
+finds repeated cap-sized reads and higher traced heap peaks with complete outputs unchanged. Publication was
+held pending N100's allocation repair; functional acceptance does not establish acceptable cost,
+large-team capacity, actual recipient usefulness or engineering acceptance.
+
+## 126. Bound read requests without reducing source-integrity checks
+
+**A267 / N100.** The native-only candidate passes its functional checks but takes 343.06 seconds to refresh
+the 13 affected cells. A separate frozen probe uses the released reader and that candidate on two already
+exposed XML inputs. Twenty-eight isolated jobs separate warmups, plain wall/CPU samples, allocation traces,
+profiles and source-read witnesses. Complete outputs stay byte exact. Each candidate run requests 268,435,457
+bytes seven times even for the 7,477-byte input: once for acquisition and six times for source rechecks.
+Separate traces show a cap-sized transient allocation. That evidence justifies investigating the reads;
+it does not establish a cause for every part of the matrix runtime or measure company capacity.
+
+The correction adds one private helper and replaces exactly two read expressions. Each request is at most
+65,536 bytes and the total acquisition still stops at the existing MAX_BYTES + 1. Positive short reads continue;
+only empty bytes mean EOF. Exact original bytes, the 256 MiB input limit, single parse and cached raw hash stay
+unchanged. All seven lexical guard sites and their route-dependent order remain; optional PNG routes have more
+guard invocations than the two no-PNG examples. Existing error types, causes and late-write prefixes also remain.
+There is no stat shortcut, skipped recheck, streaming parser, rollback or atomic-publication claim.
+
+The pretest-frozen two-file variant preserves all 52 earlier test bodies and adds four regressions. The same
+new tests on the original include a real public-run oversized-read witness failure and an injected short-read
+parse failure; an absent-private-helper failure is recorded separately. All 56 candidate tests pass. Finite
+boundary, short-read, I/O and guard controls retain every byte and refusal boundary. Six original inputs retain
+all 27 complete artifacts. The 148 matched Python API sessions preserve guard order, full errors and output
+prefixes; observer chain and NameError failures remain recorded separately from product behavior.
+
+A new 28-job plan compares the native candidate with its bounded-read successor using identical dependencies.
+Every complete artifact stays raw and canonically equal; no sample is discarded. The following are observations
+on one Windows host. Plain times are medians of three runs per cell; each heap value comes from a separate traced
+run, is Python heap rather than RSS, and is not added to nested profiler times.
+
+| Saved input | Plain median seconds: cap-sized → bounded | Traced peak bytes: cap-sized → bounded |
+|---|---|---|
+| C01, 445,726 input bytes | 0.480223 → 0.075924 | 273,215,789 → 11,878,464 |
+| I04, 7,477 input bytes | 0.422536 → 0.031376 | 268,895,531 → 7,765,931 |
+
+Independent review checks the frozen proof files and recomputes those observations, then executes its own
+boundary streams, mid-read faults and matched no-PNG/PNG/retained-image guard cases. It accepts the exact private
+successor without a wall-time threshold. The original native functional result, slow execution and first probe
+retain their original hashes; none is relabelled as evidence for the successor.
+
+Root separately adopts the successor on d41c044, passes all 56 reader tests with no skips, and reproduces the six
+originals/27 raw artifacts and three registered outputs without display exceptions or golden changes. Both
+actual corpus-producing groups refresh all 13 declared cells. All 82 other objects and every substantive field,
+including the six already corrected duplicate-ID messages, stay exact. Only the frozen timing paths and reader
+binding change. Strict checking verifies all 95 input bindings. This is bounded input-handling and compatibility
+evidence, not a new extraction score, held-out source family, engineering approval or general scale benchmark.
+
+The complete current repository suite passes all 67 scripts in 774.85 seconds, with five explicit Windows
+unittest skips, two platform notices and no additional skipped-check notices. All tracked public bytes remain
+unchanged during that run. The later append of two independent review records, feature-index regeneration and
+this factual journal note change only metadata; the tested methods, fixtures and corpus artifacts stay exact.
+Suite duration is an execution receipt, not a throughput or capacity benchmark.

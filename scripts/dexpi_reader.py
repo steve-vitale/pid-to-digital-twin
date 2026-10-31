@@ -148,8 +148,9 @@ def humanize(cls):
     return " ".join([words[0]] + [w.lower() for w in words[1:]]) if words else "Item"
 
 
-def label_lines(label):
-    return [t.get("String", "").strip() for t in label.iter("Text") if t.get("String", "").strip()]
+def label_lines(label, excluded=()):
+    return [t.get("String", "").strip() for t in label.iter("Text")
+            if t not in excluded and t.get("String", "").strip()]
 
 
 def split_tag(text):
@@ -167,17 +168,33 @@ def isa_tag(letters, number):
     return f"{letters}-{number}"
 
 
+def _read_source_bytes(source):
+    """Acquire exact original bytes through the existing cap+1 without a cap-sized read request."""
+    chunks, total = [], 0
+    while total < MAX_BYTES + 1:
+        piece = source.read(min(65536, MAX_BYTES + 1 - total))
+        if piece == b"":
+            break
+        chunks.append(piece)
+        total += len(piece)
+    return b"".join(chunks)
+
+
 class Reader:
     def __init__(self, xml_path, sheet_id=None, attribution=None):
         self.path = Path(xml_path)
         if not self.path.is_file():
             raise DexpiError(f"{self.path.name}: no such file")
-        if self.path.stat().st_size > MAX_BYTES:
-            raise DexpiError(f"{self.path.name}: larger than {MAX_BYTES} bytes; refusing to parse")
         try:
-            self.root = ET.parse(self.path).getroot()
+            with self.path.open("rb") as source:
+                self.raw_bytes = _read_source_bytes(source)
+            if len(self.raw_bytes) > MAX_BYTES:
+                raise DexpiError(f"{self.path.name}: larger than {MAX_BYTES} bytes; refusing to parse")
+            self.root = ET.fromstring(self.raw_bytes)
         except ET.ParseError as exc:
-            raise DexpiError(f"{self.path.name}: not well-formed XML ({exc}); nothing was written") from exc
+            raise DexpiError(f"{self.path.name}: not well-formed XML; nothing was written") from exc
+        self.raw_sha256 = hashlib.sha256(self.raw_bytes).hexdigest()
+        self.original_tags = {el: el.tag for el in self.root.iter()}
         for el in self.root.iter():  # tolerate a default namespace: DEXPI 1.x files usually have none
             if isinstance(el.tag, str) and "}" in el.tag:
                 el.tag = el.tag.split("}", 1)[1]
@@ -197,8 +214,19 @@ class Reader:
                 dup.append(el.get("ID"))
             self.by_id[el.get("ID")] = el
         if dup:
-            raise DexpiError(f"{self.path.name}: element IDs used more than once ({', '.join(sorted(set(dup))[:8])}); "
+            raise DexpiError(f"{self.path.name}: element IDs used more than once ({len(set(dup))} duplicate identifier(s)); "
                              "references would be ambiguous; nothing was written")
+        self.protected_gas = frozenset(g for g in self.root.iter("GenericAttribute") if person_designated(g))
+        self.protected_descendants = frozenset(d for g in self.protected_gas for d in g.iter() if d is not g)
+        self.protected_subtree = self.protected_gas | self.protected_descendants
+        physical = {"Equipment", "PipingNetworkSystem", "PipingNetworkSegment", "PipingComponent", "Nozzle",
+                    "PipeOffPageConnector", "PropertyBreak", "ProcessInstrumentationFunction", "ProcessInstrument",
+                    "InstrumentComponent", "ProcessSignalGeneratingFunction", "ActuatingSystem",
+                    "ActuatingSystemComponent", "ActuatingFunction", "InstrumentationLoopFunction", "InstrumentLoop",
+                    "InformationFlow", "SignalLine"}
+        if any(e.tag in physical for e in self.protected_descendants):
+            raise DexpiError("physical records nested inside protected metadata are not supported; nothing was written")
+        self.by_id = {eid: el for eid, el in self.by_id.items() if el not in self.protected_subtree}
         if not any(el.tag in ("Equipment", "PipingNetworkSystem") + BUBBLE_TAGS for el in self.by_id.values()):
             raise DexpiError(f"{self.path.name}: a <PlantModel> with no equipment, piping or instrumentation; "
                              "nothing to read")
@@ -218,8 +246,9 @@ class Reader:
         self.ga_state = {}         # GenericAttribute element -> "claim" | "meta" | "unplaced" | ("dropped", reason)
         # Classify before ga()/ga_lang() or any native identity/fact derivation. Keep the raw tree/counts,
         # including unsupported owners; a safe unqualified Name cannot override a protected qualified one.
-        self.protected_gas = frozenset(g for g in self.root.iter("GenericAttribute") if person_designated(g))
-        for g in self.protected_gas:
+        for g in self.root.iter("GenericAttribute"):
+            if g not in self.protected_subtree:
+                continue
             self.ga_state[g] = ("dropped", "person name: left out on purpose" if g.get("Value")
                                 else "no value in the file")
         self.element_fate = {}     # element ID -> what became of it
@@ -227,12 +256,185 @@ class Reader:
         self.broken_refs = []      # segment Connection FromID/ToID values that name no element in the file
         self.used_ids = {"PLANT", "BL"}
 
+    def assert_source_unchanged(self):
+        """Bounded prewrite integrity guard; this is not filesystem atomicity after the check."""
+        try:
+            with self.path.open("rb") as source:
+                current = _read_source_bytes(source)
+        except OSError as exc:
+            raise DexpiError("source changed or became unavailable before output; nothing further was written") from exc
+        if current != self.raw_bytes:
+            raise DexpiError("source changed before output; nothing further was written")
+
+    def eligible_iter(self, element, tag=None):
+        """Native interpretation view; original tree and input occurrence totals stay intact."""
+        return (e for e in element.iter(tag) if e not in self.protected_subtree)
+
+    def original_iter(self, element, tag=None):
+        return (e for e in element.iter() if tag is None or self.original_tags[e] == tag)
+
+    def original_children(self, element, tag):
+        return [e for e in element if self.original_tags[e] == tag]
+
+    def original_child(self, element, tag):
+        return next(iter(self.original_children(element, tag)), None) if element is not None else None
+
+    def safe_xml_inventory(self, key_ids, drawn_tags):
+        """Legacy original-QName diagnostic scope, with eligibility before diagnostic derivation."""
+        import dexpi_to_twin as D
+        cat = self.original_child(self.root, "ShapeCatalogue")
+        catalogue = set(cat.iter()) if cat is not None else set()
+        not_symbols, attributes, untagged, directed = Counter(), Counter(), {}, 0
+        excluded_gas, excluded_items = set(), set()
+        for el in self.original_iter(self.root):
+            if el in catalogue:
+                continue
+            if el in self.protected_subtree:
+                if el.get("ID"):
+                    excluded_items.add(el)  # aggregate membership only; no identifier/label is derived
+                continue
+            eid = el.get("ID")
+            if not eid:
+                continue
+            if eid in key_ids:
+                ga = {}
+                for g in self.original_iter(el, "GenericAttribute"):
+                    if g in self.protected_subtree:
+                        excluded_gas.add(g)
+                        continue
+                    if g.get("Value"):
+                        ga[g.get("Name")] = g.get("Value")
+                for name in ga:
+                    attributes[name] += 1
+                ident = next(((n, ga[n]) for n in D.TAG_ATTRS if ga.get(n)), None)
+                if ident and eid in drawn_tags and not drawn_tags[eid]:
+                    untagged[eid] = f"{ident[1]} ({ident[0]})"
+                continue
+            tag = self.original_tags[el]
+            if tag in ("Drawing", "ShapeCatalogue", "PlantInformation", "Label", "Text"):
+                continue
+            reason = D.NOT_A_SYMBOL.get(tag, f"{tag}: no mapping to the six classes")
+            if tag == "PipingComponent" and el.get("ComponentClass") == "PipeTee":
+                reason = "PipeTee: pass-through, links collapsed through it"
+            not_symbols[reason] += 1
+            if tag == "PipingNetworkSegment":
+                c = self.original_child(el, "Connection")
+                directed += int(c is not None and bool(c.get("FromID")) and bool(c.get("ToID")))
+        result = {"not_symbols": dict(not_symbols.most_common()),
+                  "attributes_not_carried_on_kept_items": dict(attributes.most_common()),
+                  "identifiers_on_untagged_symbols": untagged, "directed_segments_made_undirected": directed}
+        if excluded_gas:
+            result["person_generic_attributes_excluded"] = len(excluded_gas)
+        if excluded_items:
+            result["person_subtree_items_excluded"] = len(excluded_items)
+        return result
+
+    def assert_png_admitted(self):
+        """Structural admission BEFORE unchanged adapter payload/tag/geometry derivation."""
+        import adapt_dexpi as A
+        def check(element):
+            if element is not None and element in self.protected_subtree:
+                raise DexpiError("protected metadata overlaps with unsupported drawing adapter records; nothing was written")
+            return element
+        def child(element, tag):
+            return check(self.original_child(element, tag))
+        def position(element):
+            pos = child(element, "Position")
+            if pos is not None:
+                for name in ("Location", "Reference", "Axis"):
+                    child(pos, name)
+        def primitive(element):
+            check(element)
+            tag = self.original_tags[element]
+            if tag in ("Line", "PolyLine", "Shape"):
+                for coordinate in self.original_iter(element, "Coordinate"):
+                    check(coordinate)
+            elif tag in ("Circle", "Ellipse"):
+                position(element)
+            elif tag == "TrimmedCurve":
+                curve = child(element, "Circle")
+                if curve is None:
+                    curve = child(element, "Ellipse")
+                if curve is not None:
+                    position(curve)
+        def shape(element):
+            for g in element:
+                tag = self.original_tags[g]
+                if tag in A.GEOMETRY:
+                    primitive(g)
+                elif tag not in ("Label", "Text", "GenericAttributes", "Position", "Scale", "Presentation"):
+                    shape(g)
+        def label(element):
+            check(element)
+            for text in self.original_iter(element, "Text"):
+                check(text)
+        cat = self.original_child(self.root, "ShapeCatalogue")
+        catalogue = set(cat.iter()) if cat is not None else set()
+        shapes = {}
+        if cat is not None:
+            for entry in cat:
+                check(entry)
+                shapes[entry.get("ComponentName")] = entry
+        drawing = child(self.root, "Drawing")
+        if drawing is not None:
+            extent = child(drawing, "Extent")
+            if extent is not None:
+                child(extent, "Min"); child(extent, "Max")
+        for item in self.original_iter(self.root):
+            tag = self.original_tags[item]
+            if item in catalogue or tag not in A.ITEM_TAGS:
+                continue
+            check(item)
+            if not item.get("ID"):
+                continue
+            cls = A.dexpi_class(tag, item.get("ComponentClass"), tag != "Equipment" or self.parent.get(item) is self.root)
+            if cls is None:
+                continue
+            for lab in self.original_children(item, "Label"):
+                check(lab)
+                label_class = lab.get("ComponentClass", "")
+                if tag == "ProcessInstrumentationFunction":
+                    if label_class != "ProcessInstrumentationFunctionLabel":
+                        continue
+                elif label_class in ("EquipmentBarLabel", "NozzleStandardLabel", "InsulationLabel"):
+                    continue
+                label(lab)
+            selected_shape = shapes.get(item.get("ComponentName"))
+            if selected_shape is not None:
+                shape(selected_shape)
+                position(item)
+                child(item, "Scale")
+            for g in item:
+                if self.original_tags[g] in A.GEOMETRY:
+                    primitive(g)
+        for asys in self.original_iter(self.root, "ActuatingSystem"):
+            if asys in catalogue:
+                continue
+            check(asys)
+            for lab in self.original_children(asys, "Label"):
+                check(lab)
+                if lab.get("ComponentClass") == "ActuatingSystemNumberLabel":
+                    label(lab)
+            for ref in self.original_iter(asys, "ActuatingSystemComponent"):
+                check(ref)
+                if ref.get("ComponentClass") == "OperatedValveReference":
+                    for association in self.original_iter(ref, "Association"):
+                        check(association)
+        for seg in self.original_iter(self.root, "PipingNetworkSegment"):
+            if seg not in catalogue:
+                check(seg); child(seg, "Connection")
+        for flow in self.original_iter(self.root, "InformationFlow"):
+            if flow not in catalogue:
+                check(flow)
+                for connection in self.original_iter(flow, "Connection"):
+                    check(connection)
+
     # ------------------------------------------------------------ attributes and labels
 
     def own_gas(self, el):
         for gs in el.findall("GenericAttributes"):
             for ga in gs.findall("GenericAttribute"):
-                if ga in self.protected_gas:
+                if ga in self.protected_subtree:
                     continue
                 yield gs.get("Set"), ga
 
@@ -275,7 +477,7 @@ class Reader:
         into = {} if into is None else into
         eid = el.get("ID") or el.tag
         for lab in el.findall("Label"):
-            lines = label_lines(lab)
+            lines = label_lines(lab, self.protected_subtree)
             if not lines:
                 self.fate(lab, "empty label")
                 continue
@@ -307,7 +509,7 @@ class Reader:
     def labels(self, el, cls=None):
         for lab in el.findall("Label"):
             if cls is None or lab.get("ComponentClass") == cls:
-                lines = label_lines(lab)
+                lines = label_lines(lab, self.protected_subtree)
                 if lines:
                     return lines
         return None
@@ -326,7 +528,7 @@ class Reader:
         return f"{fallback}_{n}", "XML ID with a suffix (identifier already used)"
 
     def live(self, tag):
-        return [el for el in self.root.iter(tag) if el not in self.catalogue]
+        return [el for el in self.eligible_iter(self.root, tag) if el not in self.catalogue]
 
     def fate(self, el, what):
         if el.get("ID") and el.get("ID") not in self.element_fate:
@@ -366,7 +568,7 @@ class Reader:
             self.label_records(eq, "", unit)
             self.fate(eq, f"unit {uid}")
             self.unit_of[eq.get("ID")] = uid
-            for sub in eq.iter():
+            for sub in self.eligible_iter(eq):
                 if sub is eq or not sub.get("ID") or sub.tag in ("Label", "Node"):
                     continue
                 if sub.tag in ("Equipment", "Nozzle") or list(self.own_gas(sub)):
@@ -416,7 +618,7 @@ class Reader:
         self.leaders, self.leader_segs = [], set()   # (bubble ID, other end ID or None, segment) for measuring leaders
         self.pns_list = self.live("PipingNetworkSystem")
         for pns in self.pns_list:
-            for seg in pns.iter("PipingNetworkSegment"):
+            for seg in self.eligible_iter(pns, "PipingNetworkSegment"):
                 self.seg_pns[seg.get("ID")] = pns
                 conn = seg.find("Connection")
                 ends = [conn.get(k) for k in ("FromID", "ToID")] if conn is not None else []
@@ -508,7 +710,7 @@ class Reader:
             edges = self.pns_edges.get(pid, [])
             label = self.labels(pns, "PipingNetworkSystemLabel")
             base = self.ga(pns, "LineNumberAssignmentClass") or (label[0] if label else None) or pid
-            segs_all = list(pns.iter("PipingNetworkSegment"))
+            segs_all = list(self.eligible_iter(pns, "PipingNetworkSegment"))
             if not edges and segs_all and all(sg.get("ID") in self.leader_segs for sg in segs_all):
                 self.leader_pns.append(pns)   # only leaders / instrument runs: folded into their bubble later
                 continue
@@ -565,7 +767,7 @@ class Reader:
             self.first_stream[pid] = first["id"]
             self.records(pns, "", first)
             self.label_records(pns, "", first)
-            for seg in pns.iter("PipingNetworkSegment"):
+            for seg in self.eligible_iter(pns, "PipingNetworkSegment"):
                 if seg.get("ID") in self.leader_segs:
                     continue   # folded into its bubble
                 owner = next((m for m in made if seg.get("ID") in m["_segs"]), first)
@@ -608,7 +810,7 @@ class Reader:
                     fulfilled_by[iid].append(af.get("ID"))
         for asys in self.live("ActuatingSystem"):
             valves = []
-            for comp in asys.iter("ActuatingSystemComponent"):
+            for comp in self.eligible_iter(asys, "ActuatingSystemComponent"):
                 refs = [iid for t, iid in self.assoc.get(comp.get("ID"), []) if t == "refers to" and is_valve(iid)]
                 refs += referenced_by.get(comp.get("ID"), [])
                 for v in refs:
@@ -619,7 +821,7 @@ class Reader:
             afuncs = list(dict.fromkeys(afuncs + fulfilled_by.get(asys.get("ID"), [])))
             for v in valves:
                 self.asys_of_valve[v] = asys
-                for comp in asys.iter("ActuatingSystemComponent"):
+                for comp in self.eligible_iter(asys, "ActuatingSystemComponent"):
                     self.valve_of_component[comp.get("ID")] = v
                 for iid in afuncs:
                     self.valve_of_afunc[iid] = v
@@ -629,7 +831,7 @@ class Reader:
         self.loop_members = {}
         for lp in [el for el in self.by_id.values() if el.tag in LOOP_TAGS and el not in self.catalogue]:
             m = [i for t, i in self.assoc.get(lp.get("ID"), []) if t == "is a collection including" and i]
-            m += [e.get("ID") for e in lp.iter() if e is not lp and e.get("ID")]
+            m += [e.get("ID") for e in self.eligible_iter(lp) if e is not lp and e.get("ID")]
             self.loop_members[lp.get("ID")] = set(m)
         for i in self.by_id:
             for t, lid in self.assoc.get(i, []):
@@ -681,7 +883,7 @@ class Reader:
     def components(self):
         finals, manual, relief, unplaced = [], [], [], []
         self.final_of_valve = {}
-        valves = [el for el in self.root.iter() if el not in self.catalogue and el.get("ID")
+        valves = [el for el in self.eligible_iter(self.root) if el not in self.catalogue and el.get("ID")
                   and (el.tag == "PipingComponent" or el.get("ID") in self.inline_valves)]
         for pc in valves:
             vid, cls = pc.get("ID"), pc.get("ComponentClass") or pc.tag
@@ -717,7 +919,7 @@ class Reader:
                     fail = fail or self.ga(ael, "FailActionSpecialization")
                 if asys is not None:
                     self.part(asys, item)
-                for comp in (asys.iter("ActuatingSystemComponent") if asys is not None else []):
+                for comp in (self.eligible_iter(asys, "ActuatingSystemComponent") if asys is not None else []):
                     self.part(comp, item)
                     self.fate(comp, f"part of final element {tag}")
                     fail = fail or self.ga(comp, "FailActionSpecialization") or self.ga(comp, "FailActionRepresentationAssignmentClass")
@@ -771,7 +973,7 @@ class Reader:
                 continue
             self.part(el, by_id[sid])
             self.fate(el, f"part of stream {sid}")
-            for sub in el.iter():
+            for sub in self.eligible_iter(el):
                 if sub is not el and sub.get("ID") and sub.tag not in ("Label", "Node"):
                     self.part(sub, by_id[sid])
                     self.fate(sub, f"part of stream {sid}")
@@ -783,7 +985,7 @@ class Reader:
         """Signal and measuring lines -> (class, start ID, end ID, element), keyed by ID (or position when the flow
         has none, as Comos writes them). InformationFlow (DEXPI 1.x) and SignalLine (Proteus 3.3.3)."""
         out = {}
-        for n, fl in enumerate(el for el in self.root.iter() if el.tag in FLOW_TAGS and el not in self.catalogue):
+        for n, fl in enumerate(el for el in self.eligible_iter(self.root) if el.tag in FLOW_TAGS and el not in self.catalogue):
             a = {}
             for x in fl.findall("Association"):
                 if x.get("Type") in ("has logical start", "has logical end"):
@@ -813,7 +1015,7 @@ class Reader:
 
     def instrumentation(self, finals_by_valve):
         flows = self.flows()
-        pifs = [el for el in self.root.iter() if el.get("ID") in self.bubble_ids]
+        pifs = [el for el in self.eligible_iter(self.root) if el.get("ID") in self.bubble_ids]
         instruments, controllers, unplaced = [], [], []
         info = {}
         for pif in pifs:
@@ -843,7 +1045,7 @@ class Reader:
                     letters = None
             else:
                 letters, number, basis = None, None, None
-            sensors = [s for s in pif.iter("ProcessSignalGeneratingFunction") if s not in self.catalogue]
+            sensors = [s for s in self.eligible_iter(pif, "ProcessSignalGeneratingFunction") if s not in self.catalogue]
             for fid, (fcls, start, end, fl) in flows.items():
                 if end == pid and start in self.by_id and self.by_id[start].tag == "ProcessSignalGeneratingFunction":
                     if self.by_id[start] not in sensors:
@@ -1030,7 +1232,7 @@ class Reader:
             else:
                 unplaced.append(("instrument", inst))
         # Loops: the loop number rides on each bubble it includes.
-        for loop in [el for el in self.root.iter() if el.tag in LOOP_TAGS and el not in self.catalogue]:
+        for loop in [el for el in self.eligible_iter(self.root) if el.tag in LOOP_TAGS and el not in self.catalogue]:
             members = [i for i in self.by_id if i in self.loop_members.get(loop.get("ID"), ()) and i in made]
             for i in members:
                 self.part(loop, made[i])
@@ -1052,7 +1254,7 @@ class Reader:
 
     def fold_pif_extras(self, pif, item, what):
         """Flows and actuating functions nested in a bubble that belong to no other item."""
-        for sub in pif.iter():
+        for sub in self.eligible_iter(pif):
             if sub is pif or not sub.get("ID") or sub.get("ID") in self.element_fate:
                 continue
             if sub.tag == "ActuatingFunction" and sub.get("ID") in self.valve_of_afunc:
@@ -1075,6 +1277,8 @@ class Reader:
                     self.ga_state[g] = ("dropped", "no value in the file")
                 elif PERSON_ATTRS.search(name or ""):
                     self.ga_state[g] = ("dropped", "person name: left out on purpose")
+                elif name is None:
+                    self.ga_state[g] = ("dropped", "missing metadata Name: not mapped to native metadata")
                 else:
                     drawing[name + (f"@{g.get('Language')}" if g.get("Language") else "")] = value
                     self.ga_state[g] = "meta"
@@ -1087,6 +1291,8 @@ class Reader:
                     self.ga_state[g] = ("dropped", "no value in the file")
                 elif PERSON_ATTRS.search(g.get("Name") or ""):
                     self.ga_state[g] = ("dropped", "person name: left out on purpose")
+                elif g.get("Name") is None:
+                    self.ga_state[g] = ("dropped", "missing metadata Name: not mapped to native metadata")
                 else:
                     attrs[g.get("Name")] = g.get("Value")
                     self.ga_state[g] = "meta"
@@ -1099,7 +1305,7 @@ class Reader:
         meta = {"model_id": self.sheet_id,
                 "title": f"{' / '.join(dict.fromkeys(title_bits))} (DEXPI XML {self.path.name})" if title_bits
                          else f"DEXPI XML {self.path.name}",
-                "source_document": f"DEXPI XML file {self.path.name}, SHA-256 {sha256(self.path)}",
+                "source_document": f"DEXPI XML file {self.path.name}, SHA-256 {self.raw_sha256}",
                 "model_kind": "dexpi_import",
                 "converted_by": f"scripts/{TOOL} (no model; every item cites its XML element ID)",
                 "dexpi_file": {k: v for k, v in info_attrs.items() if not PERSON_ATTRS.search(k)},
@@ -1111,6 +1317,7 @@ class Reader:
         return meta
 
     def read(self):
+        self.assert_source_unchanged()
         self.unmapped_classes, self.folded, self.stream_ids, self.pending_unit = Counter(), Counter(), set(), []
         meta = self.meta()
         units = self.equipment()
@@ -1235,7 +1442,7 @@ class Reader:
             if el is None:
                 continue
             names = defaultdict(list)
-            for g in el.iter("GenericAttribute"):
+            for g in self.eligible_iter(el, "GenericAttribute"):
                 if g.get("Value"):
                     values += 1
                     ok = self.ga_state.get(g) in ("claim", "unplaced")
@@ -1273,11 +1480,11 @@ class Reader:
                                            and self.parent[el].tag == "Drawing"):
                     continue   # the title block is counted on its own line
                 unread[f"<{el.tag}> {el.get('ComponentClass') or ''}".strip() + (f": {reason}" if reason else ": no rule")] += 1
-        drawing_labels = sum(1 for d in self.live("Drawing") for _ in d.iter("Label"))
+        drawing_labels = sum(1 for d in self.live("Drawing") for _ in self.eligible_iter(d, "Label"))
         claims = sum(1 for sec in ("units", "streams", "instruments", "final_elements", "controllers", "manual_valves",
                                    "relief_devices") for it in model.get(sec, []) for v in it.values()
                      if isinstance(v, dict) and "source" in v)
-        r = {"file": self.path.name, "sha256": sha256(self.path), "sheet_id": self.sheet_id,
+        r = {"file": self.path.name, "sha256": self.raw_sha256, "sheet_id": self.sheet_id,
              "dexpi_file": model["meta"]["dexpi_file"],
              "items": {k: len(model.get(k, [])) for k in ("units", "streams", "instruments", "final_elements",
                                                          "controllers", "manual_valves", "relief_devices", "unplaced")},
@@ -1317,6 +1524,9 @@ class Reader:
                  "Person names in the drawing metadata and the title block text are left out on purpose.",
                  "Values are kept as written (text); units of measure as DEXPI names (Bar, DegreeCelsius), not converted.",
              ]}
+        descendants = len(self.protected_descendants - self.catalogue)
+        if descendants:
+            r["person_subtree_descendants_excluded"] = descendants
         if self.person_metadata_attributes_excluded:
             # These are direct XML attributes, not GenericAttribute occurrences.
             r["person_metadata_attributes_excluded"] = self.person_metadata_attributes_excluded
@@ -1429,6 +1639,9 @@ def report_text(r):
            + ", ".join(f"{k} {v}" for k, v in r["sourced_records_by_section"].items() if v)
            + ". graph_export.py makes each item's records claims on its node, and each stream's line, segment and "
              "fitting records claims on its `connects` edge; the graph file's counts give the total."]
+    if r.get("person_subtree_descendants_excluded"):
+        out.append("Protected GenericAttribute descendant elements deliberately excluded from native interpretation: "
+                   f"{r['person_subtree_descendants_excluded']} (raw XML retained).")
     if r.get("person_metadata_attributes_excluded"):
         out.append(f"PlantInformation person-field XML attributes deliberately excluded: "
                    f"{r['person_metadata_attributes_excluded']} (separate from GenericAttribute counts).")
@@ -1478,18 +1691,37 @@ def report_text(r):
     return "\n".join(out) + "\n"
 
 
-def prediction(xml_path, png_path, sheet_id, title):
-    """Intake prediction + manifest for import_site_drawing.py, via the adapt_dexpi/dexpi_to_twin rules."""
+def prediction(xml_path, png_path, sheet_id, title, reader=None):
+    """Intake prediction from the same bounded original snapshot and eligible diagnostic root."""
     import shutil
     import tempfile
     import adapt_dexpi as A
     import dexpi_to_twin as D
     import score_pid2graph as sc
+    reader = Reader(xml_path, sheet_id) if reader is None else reader
+    if Path(xml_path).resolve() != reader.path.resolve():
+        raise DexpiError("prediction source does not match authoritative reader snapshot; nothing was written")
+    reader.assert_source_unchanged()
+    reader.assert_png_admitted()
+    with Path(png_path).open("rb") as source_image:
+        header = source_image.read(24)
+    if (len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n" or header[8:12] != (13).to_bytes(4, "big")
+            or header[12:16] != b"IHDR" or not int.from_bytes(header[16:20], "big")
+            or not int.from_bytes(header[20:24], "big")):
+        raise DexpiError("--png needs a PNG signature and nonempty IHDR dimensions; nothing was written")
+    image_sha = sha256(png_path)
+    with tempfile.TemporaryDirectory() as source_tmp:
+        staged_xml = Path(source_tmp) / reader.path.name
+        staged_xml.write_bytes(reader.raw_bytes)
+        try:
+            key = A.convert_xml(staged_xml)
+        except (ValueError, AttributeError) as exc:
+            raise DexpiError(f"--png needs drawing geometry for every symbol: {exc}") from exc
+    import struct
     try:
-        key = A.convert_xml(Path(xml_path))
-    except (ValueError, AttributeError) as exc:
-        raise DexpiError(f"--png needs drawing geometry for every symbol: {exc}") from exc
-    w, h = sc.png_size(png_path)
+        w, h = sc.png_size(png_path)
+    except (struct.error, ValueError) as exc:
+        raise DexpiError("--png needs a PNG signature and nonempty IHDR dimensions; nothing was written") from exc
     ext = key["extent"]
     scale = w / (ext[2] - ext[0])
     if abs(h - (ext[3] - ext[1]) * scale) > max(2, 0.01 * h):
@@ -1501,9 +1733,17 @@ def prediction(xml_path, png_path, sheet_id, title):
             {"tags": {n: v["tag"] for n, v in key["nodes"].items() if v["class"] != "connector"},
              "dexpi_class": {n: v["dexpi_class"] for n, v in key["nodes"].items()}}), encoding="utf-8")
         shutil.copyfile(png_path, Path(tmp) / f"{sheet_id}.png")
-        pred, rep = D.convert(sheet_id, tmp, xml_path)
+        if sha256(Path(tmp) / f"{sheet_id}.png") != image_sha or sha256(png_path) != image_sha:
+            raise DexpiError("source image changed before prediction; nothing was written")
+        pred, rep = D.convert(sheet_id, tmp)
+    inventory = reader.safe_xml_inventory(set(key["nodes"]), {s["id"]: s["tag"] for s in pred["symbols"]})
+    rep["xml"] = inventory
+    pred["conversion"]["xml"] = inventory
     pred["producer"] = PRODUCER
-    pred["source"] = {"xml": Path(xml_path).name, "xml_sha256": sha256(xml_path), "image_sha256": sha256(png_path)}
+    pred["source"] = {"xml": reader.path.name, "xml_sha256": reader.raw_sha256, "image_sha256": image_sha}
+    reader.assert_source_unchanged()
+    if sha256(png_path) != image_sha:
+        raise DexpiError("source image changed before prediction; nothing was written")
     return pred, rep
 
 
@@ -1522,9 +1762,10 @@ def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet
         import dexpi_to_twin as D
         try:
             image = D.intake_image_name(sid)
-            pred, _ = prediction(xml, png, sid, model["meta"]["title"])
+            pred, _ = prediction(xml, png, sid, model["meta"]["title"], reader=reader)
         except (ValueError, OSError) as exc:
             raise DexpiError(str(exc)) from exc
+    reader.assert_source_unchanged()
     pending = {}
     for name, obj in ((f"{sid}.model.json", model), (f"{sid}.report.json", rep)):
         pending[name] = json.dumps(obj, indent=1, ensure_ascii=False) + "\n"
@@ -1551,12 +1792,15 @@ def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet
         raise DexpiError(str(exc)) from exc
     if pred is not None:
         try:
+            reader.assert_source_unchanged()
             D.retain_intake_image(png, out, sid, pred["source"]["image_sha256"])
         except (ValueError, OSError) as exc:
             raise DexpiError(str(exc)) from exc
+    reader.assert_source_unchanged()
     out.mkdir(parents=True, exist_ok=True)
     written = []
     for name, content in pending.items():
+        reader.assert_source_unchanged()
         (out / name).write_text(content, encoding="utf-8", newline="\n")
         written.append(out / name)
     if pred is not None:

@@ -102,7 +102,7 @@ Example review: **reviewed example**
 
 - **Example outputs:** [`dexpi-c01.model.json`](../examples/from-dexpi-xml/dexpi-c01.model.json), [`dexpi-c01.report.md`](../examples/from-dexpi-xml/dexpi-c01.report.md), [`dexpi-c01.graph.json`](../examples/from-dexpi-xml/dexpi-c01.graph.json)
 - **Tests:** `test_dexpi_reader.py`
-- **Independent review:** Independent AI review: qualified Name exclusion before native derivation and complete selected history readback, 2026-10-31: pass
+- **Independent review:** Independent AI review: bounded native intake exclusions and exact source reads, with current-code original-artifact validation, 2026-10-31: pass
 
 </details>
 
@@ -358,7 +358,7 @@ Example review: **reviewed example**
 
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent AI review: actual twenty-five-cell verifier refresh and strict complete matrix receiving review, 2026-10-31: pass
+- **Independent review:** Independent AI review: native-reader successor thirteen-cell refresh and complete matrix receiving, 2026-10-31: pass
 
 </details>
 

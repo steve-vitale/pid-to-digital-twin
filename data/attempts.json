@@ -3995,6 +3995,42 @@
         "docs/WORKFLOWS.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A266",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Keep unkeyed metadata, duplicate-ID diagnostics and protected descendants consistent with the existing named-person field policy through native XML and optional PNG intake (N090\u2013N093).",
+      "hypothesis": "Applying one original-root eligibility boundary before native and diagnostic derivation can close the observed bypasses while preserving eligible values, complete proper-original artifacts and strict refusal behavior.",
+      "evidence": "Matched original failures and independently accepted native-only reader/test variant: 340 finite scenarios, 32 Python API sessions and 27 original artifacts. Current d41 adoption passes all52reader cases without skips; nine compatibility CLIs reproduce six original inputs/all27complete native artifacts and all3registeredC01 outputs, with zero graph display exceptions or golden changes. Actual13cell refresh preserves82wholeobjects and all substantive fields except6source-derived duplicate-ID refusal literals;64pass23fail8na unchanged. Independent functional receiving passes. Cost observations and allocation repair are separate N100; no public source-packet feature or consumer is implied.",
+      "runs": "Offline development/adversarial compatibility controls on saved public sources; no model extraction, new source-family performance, held-out or company trial.",
+      "verdict": "kept",
+      "why": "Close observed native/diagnostic field-policy and metadata-admission defects without redacting original XML/images or changing process interpretation. Native allocation and public release gates remain separate.",
+      "source": [
+        "docs/JOURNAL.md#125-keep-native-intake-exclusions-consistent-through-drawing-diagnostics",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "A267",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Replace eager cap-sized native XML reads with bounded requests while retaining the complete snapshot and every existing source-integrity check (N100).",
+      "hypothesis": "A fixed per-read request bound can avoid cap-sized transient allocation on small source files without changing the byte limit, source authority, parse/hash, output or failure semantics.",
+      "evidence": "Frozen original28-job probe exposes seven268435457-byte requests on both saved no-PNG inputs. New private one-helper/two-expression variant preserves all old52test bodies;56tests pass, matched original regressions retain real public-run request failure and controlled short-read error. Proper6inputs retain27complete raw artifacts; matched guard/error/order/prefix controls and all new28observation jobs/84complete artifacts pass. Independent actual review executes boundary/IO/guard/matched regressions and recomputes observational medians/heap peaks without a timing gate. Currentd41 successor56case run passes with0skips; fresh6/27raw and3registeredLF outputs match; actual13-cell refresh preserves82wholeobjects and every substantive field including six N091count diagnostics. Only26frozen timings/readerbinding change; all95inputbindings verify.",
+      "runs": "Two-input exploratory single-host cost observations and offline functional/adversarial compatibility; no model call, new held-out source, RSS, general throughput or company trial.",
+      "verdict": "kept",
+      "why": "Bound actual read requests to64KiB and cumulativeMAX_BYTES+1 while preserving exactraw bytes, all seven lexical guard sites, conditional PNG behavior and existing errors/late prefixes. Larger actual inputs still require full-byte/tree storage; no constant-memory or atomicity claim.",
+      "source": [
+        "docs/JOURNAL.md#126-bound-read-requests-without-reducing-source-integrity-checks",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4962,6 +4998,62 @@
       ]
     },
     {
+      "id": "N090",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Keep a missing metadata Name distinct from empty or literal null names, without crashing or fabricating a native key.",
+      "why_not_yet": "Completed A266 for drawing/plant-structure metadata with preserved empty-value precedence and proper-original artifacts; raw XML is retained, not scrubbed.",
+      "source": [
+        "docs/JOURNAL.md#125-keep-native-intake-exclusions-consistent-through-drawing-diagnostics",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N091",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Preserve strict duplicate-ID admission while avoiding raw identifier disclosure in refusal diagnostics.",
+      "why_not_yet": "Completed A266 with a distinct duplicate-identifier count before writes; original duplicate scope and ambiguity refusal remain. Six existing corpus diagnostic strings have exact source-derived replacements, not changed pass/fail or accuracy.",
+      "source": [
+        "docs/JOURNAL.md#125-keep-native-intake-exclusions-consistent-through-drawing-diagnostics",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N092",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Apply the existing named-field exclusion before optional PNG inventory derives identifiers and counters.",
+      "why_not_yet": "Completed A266 with reader-owned original-root/QName inventory and precise nonzero occurrence counters. Eligible labels/geometry and complete original artifacts remain; retained XML/PNG are unsanitized and no general text/image PII detection is provided.",
+      "source": [
+        "docs/JOURNAL.md#125-keep-native-intake-exclusions-consistent-through-drawing-diagnostics",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N093",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Keep protected metadata descendants outside native interpretation and refuse precise unsupported physical/PNG-adapter overlaps safely.",
+      "why_not_yet": "Completed A266 with original duplicate checks first, protected native eligibility and structural pre-adapter admission. Deliberately nonstandard nesting may refuse; this is not a DEXPI-validity or plant-accuracy result. Header checks are bounded, not full image decoding or filesystem atomicity.",
+      "source": [
+        "docs/JOURNAL.md#125-keep-native-intake-exclusions-consistent-through-drawing-diagnostics",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
       "id": "N094",
       "function": "intake_and_reuse",
       "status": "done",
@@ -5001,6 +5093,20 @@
         "scripts/line_layers.py",
         "docs/STATUS.md",
         "docs/JOURNAL.md#124-verify-a-generated-drawing-with-the-writers-own-text-identity"
+      ]
+    },
+    {
+      "id": "N100",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Avoid eager cap-sized allocation in native source acquisition and rechecks without reducing integrity, byte limits or complete output fidelity.",
+      "why_not_yet": "Completed A267 with an exact bounded helper, boundary/short-read/IO/route-order controls, same regression bytes on old/new methods, complete raw artifacts and independently reviewed single-host observations. Every existing guard and the256MiB limit remain; company capacity, RSS and broad throughput are not established.",
+      "source": [
+        "docs/JOURNAL.md#126-bound-read-requests-without-reducing-source-integrity-checks",
+        "scripts/dexpi_reader.py",
+        "scripts/test_dexpi_reader.py",
+        "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
       ]
     }
   ]

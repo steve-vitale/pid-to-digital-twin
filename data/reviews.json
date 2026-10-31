@@ -13663,6 +13663,194 @@
     "independent_replay_receiving_manifest_sha256": "33edac7f45653b6eb8ccba400a3f2147604df814e1e21183c77965a7c12788f3",
     "independent_replay_strict_sha256": "8d83d8b40c03dda7e60d9719520c2f85e3eea069699386d6772b65168ac8d51f"
    }
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "Independent AI review: bounded native intake exclusions and exact source reads, with current-code original-artifact validation",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 of complete text bytes with CRLF normalized to LF; private receipts separately bind raw input/artifact bytes. No semantic field stripping.",
+   "registered_output_count": 3,
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "inherited_unchanged_files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "current_code_complete_compatibility_validated_files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "changed_registered_outputs": [],
+   "supporting_files": {
+    "scripts/dexpi_reader.py": "b27d608ae4efeb1033af990c7f15e7f709c5c27813789bb7e196d2c65bffbfcd",
+    "scripts/test_dexpi_reader.py": "10d76e94b5559dfb2df720f9741a5764766ce306c013d7d32fdabc520b9137ce",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "examples/from-dexpi-xml/README.md": "13896c68a4a4ccda2bdaa0a281b1c67ee6d34fb848c457084964c81e2f44b04d",
+    "docs/STATUS.md": "d45122d1f46d52911fac4d6ec7a321d2ca78cf6828575021123daf63ba9c636c"
+   },
+   "current_consumed_method_hashes": {
+    "scripts/dexpi_reader.py": "b27d608ae4efeb1033af990c7f15e7f709c5c27813789bb7e196d2c65bffbfcd",
+    "scripts/test_dexpi_reader.py": "10d76e94b5559dfb2df720f9741a5764766ce306c013d7d32fdabc520b9137ce",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00",
+    "requirements.txt": "a7e58f9cdc7b395e162ab27f61b2eac1ff74abcd6c495c3abcea55237268bdbf",
+    "requirements-mcp.txt": "5d6679369dad83b8981b6593e12c4e2f6567d7d5cf258c1ac7186fe17e7ca674",
+    "data/dataset_adapters/dexpi_examples.json": "23228640937e468099918af66de52b9e3c66d7d80ce79cc931a080e1821b6706",
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838"
+   },
+   "findings": [],
+   "resolution": "Unkeyed metadata and protected descendants follow the existing named-field policy before native or optional PNG diagnostic derivation. Duplicate-ID refusals count distinct duplicate identifiers without echoing them. A measured cap-sized read allocation was repaired with exact bounded reads while retaining complete raw bytes and all integrity guards. The three registered C01 artifacts retain their earlier accepted hashes and also pass a fresh current-code compatibility bridge.",
+   "checks": [
+    "Inherited the exact native-only 340-scenario/32-Python-API acceptance for native3a. Independently verified the successor changes only one bounded-read helper and two expressions; all other product AST, 52 old test bodies and 2,717 private-tree dependencies remain exact. These 340 scenarios were not rerun against the successor.",
+    "Independently executed matched old3a/successor public-method request and short-read controls, 144 candidate binary boundary streams, two midread I/O controls and 26 guard API sessions across native, PNG and retained-image routes. Full output prefixes, error/cause chains and guard order match; same four added tests give old one failure/two errors/one pass and successor four passes. Helper absence alone is not treated as the defect.",
+    "Received root current-base 56-reader-test pass with zero skips and nine actual compatibility CLIs. All six approved public original inputs reproduce all 27 complete raw artifacts; fresh C01 model/report/graph match all three registered LF hashes with zero graph-path exceptions or golden changes.",
+    "Read the guide and status additions against the actual code: precise unsupported protected nesting, nonzero overlapping counter scopes, unsanitized originals, bounded PNG header checks, 256 MiB input cap, 64 KiB read requests and non-atomic prewrite checks are stated. Local guide targets exist."
+   ],
+   "scope": "Native XML and optional PNG intake only: unkeyed metadata handling, existing named-person-field exclusions, safe diagnostics and the N100 bounded source-read repair. Prior artifact bindings are inherited unchanged and freshly validated on current code; no source-packet, transport or company service is certified.",
+   "limits": [
+    "This remains a bounded field policy, not general personal-data detection. Original XML and retained PNG bytes are unsanitized; old generated artifacts and retained decision history are not scrubbed.",
+    "Protected physical or adapter-semantic records in precise unsupported nested positions refuse. PNG checks cover signature and nonempty IHDR dimensions, not full image decoding. Source rechecks do not provide filesystem atomicity or concurrent-publication control.",
+    "N100 request sizes and exact-byte/cap/error behavior are accepted. Fixed matched 28-job observations on two no-PNG public inputs showed lower wall time and traced Python heap on one host; these are not RSS, whole-matrix causal attribution, broad throughput or company capacity. No elapsed-time threshold was used.",
+    "Private native/privacy and successor function checks, current-code bridges and repository/fullsuite/publication/commit/CI have separate scopes. The full repository suite and exact-head CI are not certified by this record. No plant, human engineering acceptance or new heldout accuracy trial."
+   ],
+   "private_proofs": {
+    "current_output_prospective_sha256": "f6f758f23f10bd59dbb17b4a7e48fba7475ea1af8ee7006f3dcb1f546ee20a86",
+    "current_output_receiving_sha256": "fb65e091e6ac900a3ec6e13f3676bd8b9d5a264fbc1cc60e27de625660a5bbd4",
+    "current_output_receiving_manifest_sha256": "ebfb5fc0279f9ce0be39c79f2665e99b29c968fe943df160d5d22c3e4065ed27",
+    "native3a_functional_receiving_sha256": "257ea93f0191d36ad70ffc95fe5623b6fc5f23f00a54d813f98522f96eb0a750",
+    "private_native_only_acceptance_sha256": "bcfaad2640adeeeaf691f052e36975f4877b31fc60124abb7a696d4006178b92",
+    "private_N100_prospective_sha256": "15f045a340accfc3807738964a6e7737a2115a74c7b9eb7030b2829eaf77c4ac",
+    "private_N100_actual_acceptance_sha256": "41d7aa0e9afcd8cafa1ec7980238621678d50e268187431961c5a2cb1aea1400",
+    "current_reader56_suite_receipt_sha256": "1e3cd22710c3cd4caf33d16b2331ec26b69acb6a62b5f94501b9f5759b35f59f",
+    "current_proper_originals_result_sha256": "b91d0f915e20af0366027f4e21691694eacb9d2bc2afc9d09382968b0f74cd92",
+    "current_proper_originals_commands_sha256": "fadf391cf15d497ae28e980d7e637b191e618b7d60a7a6ca7b6ba4e4d87b18a1",
+    "current_proper_originals_comparisons_sha256": "2455042ba35898f947d58661110efedc11ae95c916c83a08f7946ad165fc3886",
+    "successor_actual_matrix_result_sha256": "e0dcc0f2317f038dd62fb5673445ee0a895b3b55e5452b7f5a7f376fa3401947",
+    "successor_actual_matrix_manifest_sha256": "f752a78cbc5d73c0051d8acbfd816b9bebd5f3d788665668985dd1da5cb8c14c",
+    "prior_native_review_object_canonical_sha256": "2408e0d667aec51346e77326a160ad4cf3c453b00b875bdf588c8d8928d4a4a5",
+    "original_perf_observation_freeze_sha256": "671aa15c40227e09395d42a2a3070e04aa4ec0c2bd25164ba02b9b0e3e37fd4b",
+    "independent_original_perf_receiving_sha256": "cfda6ccffe84d0ab643e298cbbbc3f564db64f8476a6c0e3af33ad663d0ba9eb"
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent AI review: native-reader successor thirteen-cell refresh and complete matrix receiving",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 of LF-normalized text; private execution receipts bind complete raw snapshots and exclusive retained log pairs. Matrix source/key binding contract is unchanged.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "c32d602cfb94beccd44c7977b2a0730e9b79da1cc1e509404c49ff17bbb2597b",
+    "out/generalization/matrix.json": "ee3c1477503a6249ec330c7ce4c40d24ed034eb3c005175354118081a7106d50",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "docs/GENERALIZATION.md": "c32d602cfb94beccd44c7977b2a0730e9b79da1cc1e509404c49ff17bbb2597b",
+    "out/generalization/matrix.json": "ee3c1477503a6249ec330c7ce4c40d24ed034eb3c005175354118081a7106d50"
+   },
+   "inherited_unchanged_files": {
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "changed_registered_outputs": [
+    "docs/GENERALIZATION.md",
+    "out/generalization/matrix.json"
+   ],
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10",
+    "scripts/dexpi_reader.py": "b27d608ae4efeb1033af990c7f15e7f709c5c27813789bb7e196d2c65bffbfcd",
+    "scripts/test_dexpi_reader.py": "10d76e94b5559dfb2df720f9741a5764766ce306c013d7d32fdabc520b9137ce",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "examples/from-dexpi-xml/README.md": "13896c68a4a4ccda2bdaa0a281b1c67ee6d34fb848c457084964c81e2f44b04d"
+   },
+   "current_consumed_method_hashes": {
+    "data/agent_keys/commons-pid-sheets/P_ID.graphml": "d321542187a15bc1141060ae6dd7689bd1a85aa295fd4284ab4a03497d7a93ad",
+    "data/agent_keys/commons-pid-sheets/Pump_with_tank_pid_en.graphml": "a2255c924710353fe7fb669380e34e7f0a6a868ff1384a678ba74be00ccc7e61",
+    "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "7b6b80b3a3886802af0ceb0c24772e2c3685fc4e5dcfed63072b1d6228c03c00",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "43a4ebe740bc78b961011a476bbc7e8af98415011d2da104d841cd80ce41b037",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "ac948b59d12183e4dcc690566040ed2c1fa5d35345c3f183c12f0b1022266e8f",
+    "data/agent_keys/omre-1958-pid/omre_q4.graphml": "6cb0e9db7871f0c647d98e26d7dc84aa42a798c4fa342ae01c706d1de06d3e05",
+    "data/agent_keys/pronto-fig1/fig1.graphml": "f4e0b59ebaea8b3a97cc60b47a3f27c46a0f7ba835fe805008bba5da55327013",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/build_twin.py": "8e9a5e26b9938a8adcca9590e03c3dde8c63af38aba09f6cf1aeafe6c4b0ded7",
+    "scripts/confidence.py": "0fc9948199d89edfeb091f4a9c1c961f5361f10bf0f292d7b7ce72740e7e4a10",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/csv_normal_bands.py": "88baa8aa94fd29002956843a947a5e7bb2d428b09fc57af002c554c399099f6e",
+    "scripts/deliverable_report.py": "6df4ee498e6544d8f57327a1d6e675c059f189c2cc8fcac411a20fc120a4e425",
+    "scripts/dexpi_reader.py": "b27d608ae4efeb1033af990c7f15e7f709c5c27813789bb7e196d2c65bffbfcd",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/evaluate_vendor.py": "304be06c4a31e852dfcef093bd3cb858429fd962c5e45d0241cadefd0baf7fcd",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/historian_adapters.py": "1020bb06a248667a9308756bc24415ce1ec9cc8169b23b9df8cd378d1c78b761",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "scripts/loop_audit.py": "ec7837928220abfffa5762650b9ee53c5aa30c048d32b2d591d0fe9dd9c4c4a5",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/score_twin.py": "3bdf5993e0e3eb4ea11e5f01f23ba4571d2e25510a43d6f637132428841af223",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
+   },
+   "checks": [
+    "Root actually ran the same two frozen groups covering twelve plus one reader-dependent cells. Independently checked both full 95-cell matrix/page snapshots and exact argv, UTC, exit and retained stdout/stderr hashes; no cells or models were rerun by this reviewer.",
+    "From the completed native3a baseline, only 26 explicit cell timing fields, actual top-level execution metadata and the reader binding b27d608ae4efeb10 change. All substantive fields, types, source/key/input/runner/registry bindings, other methods, splits, criteria, values, reasons and details compare in full. All six already-updated N091 duplicate-ID literals remain exact; no diagnostic or counter exception is allowed.",
+    "All 82 unaffected complete cell objects are exact in each snapshot. Final page matches the unchanged renderer; actual strict --check --require-inputs verifies all 95 declared bindings. Corpus registry is inherited at its unchanged prior accepted hash.",
+    "The preceding original-reader-to-native3a refresh has its own retained 13-cell/343-second result and independent receiving receipt. Its six finite source-derived diagnostic changes are not new differences in this successor run. The two refreshes are evidence maintenance, not 26 independent cells or an accuracy gain."
+   ],
+   "comparison_notes": {
+    "substantive_outcomes": "64 pass, 23 fail, 8 not applicable, unchanged. Historical revA/revC remain earlier-generator n/a with exact reasons. All prior development/heldout/generated/agent-key and scorer-cohort limitations remain.",
+    "execution_times": "Retained native3a and successor matrix times are observational and are not matched performance trials. The separately frozen two-input N100 observation is not evidence of whole-matrix causality or company capacity.",
+    "inherited_evidence": "82 cells inherit their exact prior actual objects. The prior drawing-manifest review retains its original complete-log-loss and separately retained diagnostic-replay disclosure; this native-only refresh neither recovers that old log nor repeats inherited cells."
+   },
+   "scope": "Current-code receiving for a native XML reader privacy/diagnostic adoption followed by one bounded-read successor. These 95 selected workflow/input checks are not 95 independent trials, model comparisons or whole-toolkit completion.",
+   "limits": [
+    "No improved accuracy or new public source family is established. Existing 23 failures and eight not-applicable results are preserved, not converted to successes.",
+    "Current13 producing cells and strict95 check are root execution independently received by complete artifact comparison; reviewer performed zero producing cell/model/suite reruns.",
+    "Original 167 review objects remain unchanged. Full repository suite, final publication, committed blobs and exact-head CI remain separate gates; full source capture and transport features are excluded."
+   ],
+   "private_proofs": {
+    "current_output_prospective_sha256": "f6f758f23f10bd59dbb17b4a7e48fba7475ea1af8ee7006f3dcb1f546ee20a86",
+    "current_output_receiving_sha256": "fb65e091e6ac900a3ec6e13f3676bd8b9d5a264fbc1cc60e27de625660a5bbd4",
+    "current_output_receiving_manifest_sha256": "ebfb5fc0279f9ce0be39c79f2665e99b29c968fe943df160d5d22c3e4065ed27",
+    "native3a_functional_receiving_sha256": "257ea93f0191d36ad70ffc95fe5623b6fc5f23f00a54d813f98522f96eb0a750",
+    "private_native_only_acceptance_sha256": "bcfaad2640adeeeaf691f052e36975f4877b31fc60124abb7a696d4006178b92",
+    "private_N100_prospective_sha256": "15f045a340accfc3807738964a6e7737a2115a74c7b9eb7030b2829eaf77c4ac",
+    "private_N100_actual_acceptance_sha256": "41d7aa0e9afcd8cafa1ec7980238621678d50e268187431961c5a2cb1aea1400",
+    "current_reader56_suite_receipt_sha256": "1e3cd22710c3cd4caf33d16b2331ec26b69acb6a62b5f94501b9f5759b35f59f",
+    "current_proper_originals_result_sha256": "b91d0f915e20af0366027f4e21691694eacb9d2bc2afc9d09382968b0f74cd92",
+    "current_proper_originals_commands_sha256": "fadf391cf15d497ae28e980d7e637b191e618b7d60a7a6ca7b6ba4e4d87b18a1",
+    "current_proper_originals_comparisons_sha256": "2455042ba35898f947d58661110efedc11ae95c916c83a08f7946ad165fc3886",
+    "successor_actual_matrix_result_sha256": "e0dcc0f2317f038dd62fb5673445ee0a895b3b55e5452b7f5a7f376fa3401947",
+    "successor_actual_matrix_manifest_sha256": "f752a78cbc5d73c0051d8acbfd816b9bebd5f3d788665668985dd1da5cb8c14c",
+    "prior_matrix_review_object_canonical_sha256": "287c9825f15e64b3f7f605c7cb25f12ada9317c251a1d0a405980fa143e034cc"
+   }
   }
  ]
 }
