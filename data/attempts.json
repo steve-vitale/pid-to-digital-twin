@@ -3977,6 +3977,24 @@
         "docs/STATUS.md",
         ".gitattributes"
       ]
+    },
+    {
+      "id": "A265",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Make generated-drawing topology verification use the writer's existing CRLF-pair-to-LF source hash policy for generator/model/layout dependencies (N096).",
+      "hypothesis": "A verifier should accept the same unchanged text identity that its writer records, while actual edits, non-CRLF whitespace and old/key-mismatched drawings must still refuse.",
+      "evidence": "Actual original four-writer probe produces identical six-file outputs: LF control verifies; model/layout CRLF variants reject freshly written own manifests. The two-file correction changes only a hash operand/docstring and adds three regression methods, preserving all old test/helper ASTs. Same new test bytes fail original with seven newline subcase failures; independent candidate full module passes 35 cases with no skips, including eight actual writer/API combinations, complete truth/output equality and 21 negative guards. Root current-base 35-case run also passes; actual code-dependent matrix reruns and required full-suite checks are recorded in journal 124.",
+      "runs": "Matched public-model development/independent compatibility controls; no model extraction call, new corpus source, metric improvement or company trial.",
+      "verdict": "kept",
+      "why": "Share one existing writer/verifier text-identity contract without broad normalization, source-pin changes or weakened historical/content/key checks.",
+      "source": [
+        "docs/JOURNAL.md#124-verify-a-generated-drawing-with-the-writers-own-text-identity",
+        "scripts/line_layers.py",
+        "scripts/test_line_layers.py",
+        "docs/WORKFLOWS.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4974,14 +4992,15 @@
     {
       "id": "N096",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Make the drawing topology verifier honor the same declared text-hash policy as the writer for external LF/CRLF generator, model and layout inputs while preserving genuine-edit and historical refusals.",
-      "why_not_yet": "Actual matched writer/verifier runs preserve the external CRLF failure and unchanged generated outputs. The separate private two-file correction has passed independent actual review (all eight newline combinations and strict negative controls); affected matrix runs, full public integration and exact-head CI remain pending. This is not repaired or included in N095 checkout attributes.",
+      "why_not_yet": "Completed A265 for the drawing writer/verifier text-hash contract with identical matched regressions and independent actual checks. CRLF pairs fold to LF exactly as the existing writer; real edits, other whitespace, historical versions and key mismatch still refuse. Raw source-document pins and manifests are not rewritten. No drawing accuracy, plant acceptance or operational benefit is inferred.",
       "source": [
         "docs/JOURNAL.md#123-preserve-committed-byte-contracts-without-rewriting-the-evidence",
         "scripts/draw_pid_from_model.py",
         "scripts/line_layers.py",
-        "docs/STATUS.md"
+        "docs/STATUS.md",
+        "docs/JOURNAL.md#124-verify-a-generated-drawing-with-the-writers-own-text-identity"
       ]
     }
   ]

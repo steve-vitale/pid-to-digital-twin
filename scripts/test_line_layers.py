@@ -593,6 +593,140 @@ class Enrich(unittest.TestCase):
         with self.assertRaises(ValueError):
             ll.enrich({"meta": {}, "units": [], "streams": []}, {})
 
+class DrawingManifest(unittest.TestCase):
+    """The real writer and truth reader share CRLF-only text identity, not JSON semantics."""
+
+    VERIFY = """import pathlib,pickle,sys
+sys.path.insert(0,sys.argv[1])
+import line_layers
+truth=line_layers.drawn_truth(*map(pathlib.Path,sys.argv[2:6]))
+pathlib.Path(sys.argv[6]).write_bytes(pickle.dumps(truth))
+"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.folder = Path(self.tmp.name)
+
+    def case(self, name, generator_crlf=False, model_crlf=False, layout_crlf=False):
+        import subprocess
+        folder = self.folder / name
+        scripts = folder / "scripts"
+        scripts.mkdir(parents=True)
+        for filename in ("draw_pid_from_model.py", "line_layers.py", "output_paths.py"):
+            data = (ROOT / "scripts" / filename).read_bytes()
+            if filename == "draw_pid_from_model.py":
+                data = data.replace(b"\r\n", b"\n")
+                if generator_crlf:
+                    data = data.replace(b"\n", b"\r\n")
+            (scripts / filename).write_bytes(data)
+        sources = folder / "external"
+        sources.mkdir()
+        for filename, crlf in (("process_model.json", model_crlf), ("pid_layout.json", layout_crlf)):
+            data = (ROOT / "data/bayer_rt" / filename).read_bytes().replace(b"\r\n", b"\n")
+            if crlf:
+                data = data.replace(b"\n", b"\r\n")
+            (sources / filename).write_bytes(data)
+        model, layout = sources / "process_model.json", sources / "pid_layout.json"
+        out = folder / "output"
+        before = {p: p.read_bytes() for p in (scripts / "draw_pid_from_model.py", model, layout)}
+        run = subprocess.run([sys.executable, str(scripts / "draw_pid_from_model.py"), "--model", str(model),
+                              "--layout", str(layout), "--out", str(out)], capture_output=True, text=True)
+        self.assertEqual(run.returncode, 0, run.stdout + run.stderr)
+        self.assertEqual(before, {p: p.read_bytes() for p in before})
+        return scripts, model, layout, out, before
+
+    def verify(self, case, manifest=None, key=None):
+        import subprocess
+        scripts, model, layout, out, _ = case
+        truth = out.parent / "truth.pickle"
+        run = subprocess.run([sys.executable, "-c", self.VERIFY, str(scripts), str(model), str(layout),
+                              str(manifest or out / "manifest.json"), str(key or out / "key.json"), str(truth)],
+                             capture_output=True, text=True)
+        return run, truth
+
+    def test_writer_and_verifier_agree_for_all_eight_newline_combinations(self):
+        import itertools
+        import pickle
+        expected_truth = expected_outputs = None
+        for flags in itertools.product((False, True), repeat=3):
+            with self.subTest(generator_crlf=flags[0], model_crlf=flags[1], layout_crlf=flags[2]):
+                case = self.case("".join("C" if f else "L" for f in flags), *flags)
+                run, truth = self.verify(case)
+                self.assertEqual(run.returncode, 0, run.stderr)
+                actual_truth = pickle.loads(truth.read_bytes())
+                outputs = {p.name: p.read_bytes() for p in case[3].iterdir()}
+                self.assertEqual(set(outputs), {"RT1.png", "RT1.svg", "RT1.graphml", "key.json",
+                                               "manifest.json", "sheet_register.csv"})
+                self.assertEqual(case[4], {p: p.read_bytes() for p in case[4]})
+                if expected_truth is None:
+                    expected_truth, expected_outputs = actual_truth, outputs
+                    self.assertEqual(set(actual_truth), {"RT1"})
+                    self.assertTrue(actual_truth["RT1"]["junctions"])
+                else:
+                    self.assertEqual(actual_truth, expected_truth)
+                    self.assertEqual(outputs, expected_outputs)
+
+    def test_other_dependency_byte_changes_still_refuse(self):
+        case = self.case("byte-changes")
+        scripts, model, layout, _, _ = case
+        for path, field in ((scripts / "draw_pid_from_model.py", "generator_sha256"),
+                            (model, "model_sha256"), (layout, "layout_sha256")):
+            original = path.read_bytes()
+            if path == model:
+                parsed = json.loads(original)
+                parsed["units"][0]["name"] += " changed content"
+                content_edit = json.dumps(parsed).encode("utf-8")
+            elif path == layout:
+                parsed = json.loads(original)
+                parsed["sheets"][0]["title"] += " changed content"
+                content_edit = json.dumps(parsed).encode("utf-8")
+            else:
+                content_edit = original + b"\n# changed generator content\n"
+            for kind, changed in (("content", content_edit), ("space", original + b" "),
+                                  ("bare-CR", original + b"\r"), ("extra-LF", original + b"\n")):
+                with self.subTest(dependency=field, change=kind):
+                    try:
+                        path.write_bytes(changed)
+                        run, _ = self.verify(case)
+                        self.assertNotEqual(run.returncode, 0)
+                        self.assertIn(field + " differs", run.stderr)
+                    finally:
+                        path.write_bytes(original)
+        run, _ = self.verify(case)
+        self.assertEqual(run.returncode, 0, run.stderr)
+
+    def test_wrong_missing_historical_hashes_and_changed_key_still_refuse(self):
+        case = self.case("guards")
+        _, _, _, out, _ = case
+        original = json.loads((out / "manifest.json").read_bytes())
+        modified = out.parent / "modified-manifest.json"
+        for field in ("generator_sha256", "model_sha256", "layout_sha256"):
+            for kind in ("missing", "wrong"):
+                with self.subTest(field=field, kind=kind):
+                    manifest = dict(original)
+                    if kind == "missing":
+                        del manifest[field]
+                    else:
+                        manifest[field] = "0" * 64
+                    modified.write_text(json.dumps(manifest), encoding="utf-8")
+                    run, _ = self.verify(case, manifest=modified)
+                    self.assertNotEqual(run.returncode, 0)
+                    self.assertIn(field + " differs", run.stderr)
+        for revision in ("rev-a", "rev-c"):
+            with self.subTest(historical=revision):
+                manifest = ROOT / "data/te_pid" / revision / "manifest.json"
+                self.assertTrue(manifest.is_file(), str(manifest))
+                run, _ = self.verify(case, manifest=manifest)
+                self.assertNotEqual(run.returncode, 0)
+                self.assertIn("generator_sha256 differs", run.stderr)
+        key = json.loads((out / "key.json").read_bytes())
+        key["sheets"]["RT1"]["edges"] = []
+        changed_key = out.parent / "changed-key.json"
+        changed_key.write_text(json.dumps(key), encoding="utf-8")
+        run, _ = self.verify(case, key=changed_key)
+        self.assertNotEqual(run.returncode, 0)
+        self.assertIn("pipe truth's line networks are not the key's", run.stderr)
 
 if __name__ == "__main__":
     unittest.main()

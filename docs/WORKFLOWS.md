@@ -60,6 +60,11 @@ converted-key DEXPI adapter produces an extracted twin through its separate cont
 | `pipeline.py` | The repository's declared stages, inputs, code and configuration | Freshness and rebuilds for its configured research demonstrations. An organization's own recipes and service orchestration need an explicit implementation; the existing stage list is not a universal plant integration. |
 
 
+Drawing manifests identify their generator, model and layout with the drawer's existing text-hash rule:
+CRLF pairs are folded to LF; other bytes remain significant. The topology verifier uses that same rule and
+still checks the recorded key networks. This does not normalize original source-document hashes, context
+source pins or bundle inventories, and a matching manifest does not establish engineering correctness.
+
 ## Carry a finding forward
 
 Keep the source revision and locator, exact asset/finding IDs, unresolved evidence and intended next owner with

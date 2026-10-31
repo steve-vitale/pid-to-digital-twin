@@ -63,10 +63,11 @@ scopes demonstrate composition only. Integration owns the real company handoff t
 impact reports differed in line endings, and current drawing inputs no longer matched their saved hashes.
 Twelve narrow Git rules now retain the original LF bytes for 20 committed contracts. The new Git regression
 checks both ingest and checkout modes while preserving existing raw-pinned packets. No golden, manifest, model
-value or metric is rewritten. **Open N096:** the drawing writer normalizes text hashes but the topology verifier
-compares raw bytes; a fresh external CRLF input can still be rejected by that verifier. This separate contract
-repair has passed private independent review; public integration, affected-matrix validation and CI remain
-pending. It is not included in this checkout-policy repair.
+value or metric is rewritten. **N096 — generated drawing identity:** the topology verifier now uses the drawer's
+existing text-hash rule for generator/model/layout dependencies. External CRLF inputs no longer fail solely
+because the writer folded their line endings before hashing. Genuine edits, other whitespace, historical
+generators and key mismatches still refuse. Original source-document pins remain raw; this is drawing-contract
+compatibility, not permission to normalize company evidence. See the [format contracts](WORKFLOWS.md).
 
 The [workflow map](WORKFLOWS.md) owns exact format contracts; [FEATURES.md](FEATURES.md) owns individual evidence.
 

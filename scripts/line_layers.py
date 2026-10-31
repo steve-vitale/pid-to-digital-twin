@@ -1119,14 +1119,14 @@ def drawn_truth(model_path, layout_path, manifest_path=None, key_path=None):
     each route's points with its valves (in-line items), instrument taps (a junction on the line plus the bubble),
     unit and flag ends, and tee / header ("net") ends landing on another route; unit-mounted bubbles joined to their
     unit by their leader. Signal lines are not pipes and are left out. Refuses when the manifest's generator, model
-    or layout hash differs from the files now (the drawing came from another version), and, given the sheets'
+    or layout hash differs using the writer's CRLF-to-LF text identity (other bytes remain significant), and, given the sheets'
     key.json, when the line networks this truth implies are not exactly the key's (a check that the routes were read
     right). Returns {sheet: truth}."""
     import draw_pid_from_model as dp
     if manifest_path:
         man = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
         for f, k in ((dp.__file__, "generator_sha256"), (model_path, "model_sha256"), (layout_path, "layout_sha256")):
-            if hashlib.sha256(Path(f).read_bytes()).hexdigest() != man.get(k):
+            if dp.sha_file(f) != man.get(k):
                 raise ValueError(f"{Path(manifest_path).parent.name}: drawn by another version ({k} differs from "
                                  f"{Path(f).name} now); its pipe topology can't be re-derived")
     seen, mounts = {}, defaultdict(list)

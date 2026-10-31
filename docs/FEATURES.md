@@ -358,7 +358,7 @@ Example review: **reviewed example**
 
 - **Example outputs:** [`GENERALIZATION.md`](../docs/GENERALIZATION.md), [`matrix.json`](../out/generalization/matrix.json), [`corpus.json`](../data/corpus.json)
 - **Tests:** `test_corpus_matrix.py`
-- **Independent review:** Independent AI review: actual thirteen-cell reader rerun and exact remaining matrix preservation, 2026-10-31: pass
+- **Independent review:** Independent AI review: actual twenty-five-cell verifier refresh and strict complete matrix receiving review, 2026-10-31: pass
 
 </details>
 

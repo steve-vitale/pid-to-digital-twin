@@ -5777,3 +5777,49 @@ with spaces in the path: 38 producer CLIs, two stdio sessions with 24 complete r
 refusals. Later changes are documentation/review metadata only; executable code, fixtures, contracts and source
 values remain the tested bytes. N096's private correction is independently accepted separately, and public
 source-capture corrections remain unaccepted until their own current-candidate review.
+
+## 124. Verify a generated drawing with the writer's own text identity
+
+**A265 / N096.** Four matched writer runs on the public Bayer model produce identical six-file outputs. The
+canonical LF control passes topology verification with 40 items, 49 segments and 7 junctions. Model-only,
+layout-only and combined external CRLF inputs instead reject their own freshly generated manifests. The writer
+already folds CRLF pairs to LF when hashing these text dependencies; the verifier compared raw bytes. Separate
+post-generation model and layout edits correctly refuse. All original commands, inputs, outputs and failures stay
+preserved. This is a compatibility defect, not a new drawing-accuracy result or an operating observation.
+
+The two-file repair changes only the verifier comparison to call the unchanged writer helper and clarifies its
+docstring. Three new regression methods leave the previous 32 tests and helpers unchanged. The identical new
+test bytes fail on the original with seven newline subcase failures; the corrected complete module passes all
+35 tests. Its eight generator/model/layout newline combinations run the actual writer and verifier, compare
+complete returned truth and six output files, and retain 21 negative guards. Real content changes, extra spaces,
+bare CR, extra LF, missing/wrong hashes, historical revisions and altered key networks remain refused.
+
+Independent review repeats the matched original/candidate runs and inspects the retained complete artifacts.
+The existing helper performs no JSON-semantic, Unicode or general whitespace normalization. No writer, source
+document, raw pin, manifest schema, public API, golden or criterion changes. Root integration adopts the current
+033ec65 base only after proving the consumed methods match the private c6d70f2 baseline. Its current complete
+35-case run passes without skips; matrix and whole-suite evidence are refreshed separately before publication.
+
+Root actually reruns every cell whose declared dependencies include the changed verifier: 25 cells in four
+command groups. All substantive values, reasons, details, source/key inventories, runner and registry bindings
+remain exact. The only changes are the frozen execution-timing paths and the new verifier code binding; 70
+other complete cell objects stay exact. Four intermediate matrix/page snapshots and command receipts are
+retained. Historical TE revisions A/C keep their original refusal reasons. Counts remain 64 pass, 23 fail and
+8 not applicable. No cell binding is backfilled and no failed cell is promoted because the text identity was fixed.
+
+Independent receiving review checks all four complete snapshots and their rendered pages, the exact declared
+cell sets and all 95 current input bindings. The root full suite then passes all 67 scripts in 445.33 seconds,
+with five explicit Windows unittest skips, two platform notices and no additional skipped-check notices. Public
+source bytes remain unchanged during that run. The later review append and generated feature index are metadata;
+the tested methods, fixtures, source bindings and matrix artifacts stay exact. This does not establish company
+capacity, concurrent editing, engineering acceptance or operational benefit.
+
+A later private check helper reuses the producing log's filename and overwrites its complete bytes after the
+independent review has inspected and hash-checked them. The original 4,826-byte transcript is explicitly recorded
+as lost; its historical hash, command receipts, four snapshots and review stay unchanged. Under a separately
+frozen recovery contract, root repeats the same 25 cells in a scratch directory with exclusive per-group logs
+and complete snapshots. All substantive comparisons use the original criteria; all 2,876 public files stay
+byte-identical throughout. Strict checks again verify all 95 input bindings. Independent receiving review
+accepts the new retained transcript and snapshots. This diagnostic repeat neither reconstructs the lost log nor
+replaces the original published timings, and adds no independent trial or performance claim. Later check logs
+are isolated from producing logs; the first loss and the failed publication guard remain part of the record.

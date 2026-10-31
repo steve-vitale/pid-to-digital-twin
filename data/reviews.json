@@ -13566,6 +13566,103 @@
     "combined_registration_review_sha256": "462e41b46e37f43fd38d911c7399b9d38614bb25902bbc97f4dc86237df2e59a",
     "combined_registration_manifest_sha256": "86d98ddbcaf7e8e0fb694f7ffe0d884e2ce79e4c7789bc50644f42050cf8e60c"
    }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent AI review: actual twenty-five-cell verifier refresh and strict complete matrix receiving review",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 of LF-normalized text bytes; source/input/key binding schema remains the unchanged matrix runner contract.",
+   "files": {
+    "docs/GENERALIZATION.md": "68d1ee6082170723de6168afd67b43bf01688000f52174a4ef3eb735ce51f397",
+    "out/generalization/matrix.json": "7a604bf0947595c8b14757d376c723036d3386a819d1321c8daa0ca42a76ebaa",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "docs/GENERALIZATION.md": "68d1ee6082170723de6168afd67b43bf01688000f52174a4ef3eb735ce51f397",
+    "out/generalization/matrix.json": "7a604bf0947595c8b14757d376c723036d3386a819d1321c8daa0ca42a76ebaa"
+   },
+   "inherited_unchanged_files": {
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "changed_registered_outputs": [
+    "docs/GENERALIZATION.md",
+    "out/generalization/matrix.json"
+   ],
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "scripts/test_line_layers.py": "90b71dddcb4aa93a74f5fbfcf8f37a9ae5f1fb132888b0d717502aa9e30c34bd",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "docs/WORKFLOWS.md": "e78e74edf75cc5b353e83a308c894594976dd42c5dd47e5ae589f50d7f67049e"
+   },
+   "current_consumed_method_hashes": {
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/build_twin.py": "8e9a5e26b9938a8adcca9590e03c3dde8c63af38aba09f6cf1aeafe6c4b0ded7",
+    "scripts/confidence.py": "0fc9948199d89edfeb091f4a9c1c961f5361f10bf0f292d7b7ce72740e7e4a10",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/csv_normal_bands.py": "88baa8aa94fd29002956843a947a5e7bb2d428b09fc57af002c554c399099f6e",
+    "scripts/deliverable_report.py": "6df4ee498e6544d8f57327a1d6e675c059f189c2cc8fcac411a20fc120a4e425",
+    "scripts/dexpi_reader.py": "56c1c70cffe1d498bf7e08bc1f638ada33f107f3a0940142552da26b12b04f0c",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/evaluate_vendor.py": "304be06c4a31e852dfcef093bd3cb858429fd962c5e45d0241cadefd0baf7fcd",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/historian_adapters.py": "1020bb06a248667a9308756bc24415ce1ec9cc8169b23b9df8cd378d1c78b761",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "scripts/loop_audit.py": "ec7837928220abfffa5762650b9ee53c5aa30c048d32b2d591d0fe9dd9c4c4a5",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/score_twin.py": "3bdf5993e0e3eb4ea11e5f01f23ba4571d2e25510a43d6f637132428841af223",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
+   },
+   "comparison_notes": {
+    "actual_execution": "Root ran4actual cell-producingCLIs covering25affected cells, not hash backfill. Each intermediate full95cell snapshot and unchanged renderer output was independently compared. Reviewer did not rerun cells/models.",
+    "complete_comparison": "Only72prefrozen timing paths, line_layers toolbinding8da and exact top runselection/timing metadata differ. All substantive values/reasons/detail/source/key/runner/registry/split/criterion data compare in full;70complete unchanged cells retain earlier actual evidence.",
+    "strict_current_inputs": "Independent read-only --check --require-inputs passes for all95declared input bindings; no absent optional cache is treated as verified.",
+    "unchanged_corpus": "The registered corpus file is exact prioraccepted hash and inherited. The2new matrix/doc hashes are freshly validated receiving artifacts of the root actual rerun.",
+    "proof_retention_correction": "The original4826-byte producing log (80ad2adc...) was hash-inspected at c3a receiving review, then lost when a later read-only checker reused its filename. Original result/four snapshots/review and oldhash remain immutable; no complete raw copy was recovered. A separately gated NEW scratch diagnostic replay ran the same4selections/25cells with exclusive per-group logpairs/receipts/snapshots, full349159comparison and all2876publicbytes unchanged. Its complete transcript is retained; it does not replace originalpublictimings or recreate80ad."
+   },
+   "checks": [
+    "Verified four actual argv/exit/log groups and all retained fullmatrix/doc snapshots with95ordered unique cells and exact intended1/12/1/11coverage.",
+    "Compared every25affected cell after only the frozen field substitutions; all70unaffected completeobjects and every source/key/runner/registry/other toolbinding remain exact.",
+    "Checked exact current tool hashes, generateddoc=unchanged render, all95strictinput bindings, preserved historicalna reasons and unchanged64pass/23fail/8na denominator.",
+    "Separately reviewed all4newdiagnostic replay logpairs, exactargv/UTC/exit/fullsnapshots, independent strict95inputbindings and all2876publicrawbytes/set preservation; originalpublicmatrix/doc and original166published reviewobjects stay exact."
+   ],
+   "scope": "Current-code receiving review for one drawing-manifest verifier hash-contract change. These95workflow/input cells are selected offline checks, not95independent trials, model comparisons or a whole-toolkit completion percentage.",
+   "limits": [
+    "64pass/23fail/8na unchanged. This is current-code evidence maintenance, not improved accuracy, engineering acceptance or completed toolkit coverage.",
+    "TE/Bayer self-generated controls, agent-made keys, held-out/development/scorer-cohort limitations remain exact. Historical revA/revC stay earlier-generator n/a, not new successes.",
+    "Actual25producing cells are root execution; this independent review inspected all4complete snapshots and ran one read-only strictcheck.70unchanged cells inherit their earlier actual results, not rerun.",
+    "Separate N0968newline/21negative private function acceptance remains a315 scope. Native/sourcecapture fixes excluded; root full67suite/publication/committed exactheadCI remain separate.",
+    "The original complete producing log is unavailable after a documented private filename collision. The old80ad proof field is its historical inspected hash only; new diagnostic replay proof fields identify actually retained replacement coverage, not recovered original bytes. The repeated25cells add no independent trial or performance claim."
+   ],
+   "private_proofs": {
+    "prospective_sha256": "34915926a653f468674e83b8e7f3255dc59322366873d3f6b7648555f82800ef",
+    "livehelper_review_sha256": "db7d90c5850e19cd1067de9352a45ad2f6857ecdd06321826b3156c1dc26f2bb",
+    "root_actual_matrix_receipt_sha256": "ca853293486653676fee7d2e694623b677f9f530bb977acf29c9ae728aac58f2",
+    "root_actual_matrix_log_sha256": "80ad2adc1bd0d93f96336dc4caf76d257fe1673745a718ab45c9a6db9cf50671",
+    "independent_receiving_acceptance_sha256": "c3a443a73eb77ea69b7171e867f8e54b78ebf089321d147e77fdcac082c5701b",
+    "independent_receiving_manifest_sha256": "f3b4c92e12637de43b8fa6da72d1b4932f0ae776fcdcf780d56e2d09be66c92f",
+    "independent_strict_receipt_sha256": "31a2ae779989a71f07d6f6330d4403714bf6d87754f33cdd7c74a6cbc7d33a8e",
+    "private_N096_function_acceptance_sha256": "a315e3d98e3e1af8a9cfa24fa2a8385083bf2c183d6c7a0cd0bd2f3a6fb6010b",
+    "proof_loss_record_sha256": "76591ddf24843c80469834fc3d4ee6b3e46ca990f4495e0e8ea88b6036d08a07",
+    "diagnostic_replay_prospective_sha256": "3dcf094db52552e871fd9896de0d23d90bc7bdccd4e2cec025925a441cf2145c",
+    "diagnostic_replay_RESULT_sha256": "9f59d98a6d76234cf9d24eb1632c3d02ce51de5b4ad0d1e4036b49f450e13521",
+    "diagnostic_replay_MANIFEST_sha256": "0821a0d95ab1032fc9746fd82fc69a37e0ff7e197bed9d41b8d2683de5f2ffca",
+    "independent_replay_receiving_acceptance_sha256": "97335b242c49a732c0c81a00273a1a0a63c5e5aa12500b0ee63260a64f364637",
+    "independent_replay_receiving_manifest_sha256": "33edac7f45653b6eb8ccba400a3f2147604df814e1e21183c77965a7c12788f3",
+    "independent_replay_strict_sha256": "8d83d8b40c03dda7e60d9719520c2f85e3eea069699386d6772b65168ac8d51f"
+   }
   }
  ]
 }
