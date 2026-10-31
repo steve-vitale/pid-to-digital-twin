@@ -12,7 +12,7 @@
 | C1: Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user? | Metering | food, bayer | 4 |
 | C2: Which measurements have no controller (read by people, or by nothing)? | Controls and automation | food, bayer | 2 |
 | C3: Do these control valves lack position feedback? | Controls and automation | food, bayer | 2 |
-| C9: Is a trip or interlock shown for this rotating or fired equipment? | Safety questions to verify | food, bayer | 2 |
+| C9: What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified? | Safety questions to verify | food, bayer | 2 |
 | E11: Is this hot line insulated? | Energy | bayer | 2 |
 | E29: Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control? | Energy | food | 2 |
 | E31: Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it? | Energy | food | 2 |
@@ -96,20 +96,23 @@ Fired at 2 of 2 sites.
 
 **What the source says (S13):** "Control valve backlash and stiction... are major contributors to process variability." No % stated.
 
-## C9: Is a trip or interlock shown for this rotating or fired equipment?
+## C9: What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified?
 
 Fired at 2 of 2 sites.
 
 - **food**, K-201, K-202, K-203, AC-501 (`C9@model`): AC-501, K-201, K-202, K-203
-- **bayer**, P-1 (`C9@model`): P-1
+- **bayer**, P-1 (`C9@model`): IL-1, IL-2, IL-3, P-1
 
 **Data to collect**
 
-- Cause-and-effect matrix and HAZOP/LOPA records. How: Confirm what protects each machine and that it is tested.
+- Cause-and-effect matrix and HAZOP/LOPA records. How: Review existing cause-and-effect, governing requirements and configuration records for each named machine, with their revisions and applicability. Retain supplied trip/switch indications as candidates; a drawing label or an unrelated function does not settle the records or establish effective, tested protection. Missing model information is not evidence that installed protection is absent.
   - food [not on drawing]: site records: cause-and-effect matrix, HAZOP and LOPA reports; then DCS/PLC configuration: safety system configuration
   - bayer [not on drawing]: site records: cause-and-effect matrix, HAZOP and LOPA reports; then DCS/PLC configuration: safety system configuration
+- Machine/function association and current evidence. How: Keep each machine in the review even where a switch or trip is supplied. Retain all explicit shared targets and supplied qualifiers; unknown or contradictory targets remain unresolved. Same-model text or nearby equipment does not prove function coverage. Record a responsible person or authority separately from protected-machine association; neither is inferred here. This requests record review, not a new test, safety design or operating action.
+  - food [not on drawing]: site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable; then DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process
+  - bayer [not on drawing]: site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable; then DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process
 
-**How it is decided:** This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.
+**How it is decided:** A qualified site review may resolve the source-labelled machine/function associations and remaining record requests using applicable current evidence. A supplied trip, switch, cause/effect row or shared-function label alone establishes neither complete coverage nor installed protection adequacy. This screen grants no acceptance or authority and performs no safety validation.
 
 **What the source says (no source):** Safety benefit; no energy source. Present it as a question to verify, not a finding.
 

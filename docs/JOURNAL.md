@@ -5476,3 +5476,55 @@ is a narrow drawing-coverage control; it is not protection acceptance. The quest
 reviewers own the private candidate and negative controls. This reproduced collection gap remains open in this
 release. Missing records do not establish absent installed safeguards, and a supplied trip does not establish
 adequate or tested protection. No operating recommendation is made.
+
+
+## 118. Keep machine-specific record review open and make the receiving packet current
+
+**A258 / N085.** The independently frozen record-association contract precedes ten actual unchanged-method
+baseline CLIs. A trip on A, a trip on unrelated C, a generic shutdown with unknown target and a contradictory
+description/target can each erase C9 collection for other machines. Local switches and explicit shared records
+provide controls; none establishes effective installed protection. The original failures and exact source/model
+bytes remain. The contract draws on HSE/JRC guidance cited in section 117 and keeps record association separate
+from safety design, validation, proof testing and operating authority.
+
+The catalog-only repair retains nearby switch and supplied interlock records as candidates and keeps actual
+machine/function/current-record review open for every named machine. It performs no target, owner, approval or
+protection inference. C9's catalog still cites no primary safety-design source. Other 49 complete rules and all 50
+benefit objects remain exact. The new inventory is 50 rules/123 requests; 13 bounded collection reviews leave 37
+source contracts and N065 usefulness open. N062/N063 real engineer/company/native/Copilot acceptance stays unrun.
+
+Isolated independent review executes 21 actual CLIs/96 assertions and three MCP stdio sessions/46 assertions.
+Mixed equipment and local/shared/unrelated/unknown/contradictory/rejected records retain source-qualified targets,
+cause/effect and draft/false/zero/null values. A prior accepted partial answer becomes stale under the new question
+contract while its immutable source, verdict and caveats remain. An old answer sheet and omitted required task
+refuse before writes. This is development evidence, not a new source-family or model performance result.
+
+Final integration independently reproduces 19 commands/164 checks, runs 111 question cases (110 pass and one Windows
+skip) and passes the pinned MCP2.3 checker. All 67 description files are actually rebuilt: the assisted graph,
+questions JSON/readable screen and build inventory change; its other 27 files and the 36-file MGPI bundle stay
+exact. Default MGPI still has zero findings. Source/answer/layout, interpretation rows and unreviewed verdicts
+are not rewritten or accepted by this change. Existing finding counts alone would not verify these obligations.
+
+All 33 context artifacts and historical decisions remain baseline bytes. The Bayer C9 question genuinely changes
+the MCP graph fingerprint from 4cde42f4... to 0cabebf2.... The sample is actually refreshed and read back; its P-1
+asset payload and limits remain unchanged. A load timestamp alone is not a semantic or engineering improvement.
+Independent registered-output scope remains explicit: question 23 fresh/5 inherited, description 40/14, context 7/26,
+and one fresh snapshot source/readback check. Older source/engineering evidence is inherited only at its prior scope.
+
+The author initially invents a downstream test fixture without the required streams list; the tool correctly
+refuses it. The original test source/failure and corrected empty-stream fixture are retained. Prior isolated
+author/reviewer assumptions about typed target edges and named rollup inputs are also retained as harness
+corrections, not product failures. All 150 isolated candidate/proof files and 217 integration before files remain
+exact. Only 19 declared integration paths change; all 2,700 other tracked public files remain exact before metadata.
+Those paths touch none of the 95 matrix cells' 853 declared consumed dependencies. No matrix binding is backfilled.
+
+**Open N086.** A separate source-identity diagnosis of two previously exposed I01 vendor/reference pairs reads
+the actual XML relationships before proposing a repair. It distinguishes an unassociated Comos instrument from
+a fabricated location and an AutoCAD instrument-ended segment from a native process stream. Root independently
+checks those source relationships. Current reports expose aggregate losses, but unattached identities/attributes
+need exact disposition and source tracing. Independent source/key review and a prospective observability contract
+are in motion. This neither approves all source keys nor changes historical row 7 criteria/failures. No new held-out
+result, blanket XML fidelity pass or source-owner engineering acceptance is claimed.
+
+Model/provider calls, new original-source downloads, plant/company writes, native imports, network-boundary
+changes and LinkedIn publication are not exercised. The remaining work keeps its owners and original limits.

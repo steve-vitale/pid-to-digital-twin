@@ -706,7 +706,7 @@ IAC/ITAC recommendation code: 2.41xx (category only) (IAC/ITAC browse page: moto
 
 ## Safety questions to verify
 
-### C9: Is a trip or interlock shown for this rotating or fired equipment?
+### C9: What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified?
 
 **About:** ACC-PU-151, ACC-PU-152, ACC-PU-153, CND-PU-162, CND-PU-163, CND-PU-164 and 5 more  
 
@@ -723,17 +723,17 @@ IAC/ITAC recommendation code: 2.41xx (category only) (IAC/ITAC browse page: moto
 - equipment ACW-PU-211A (asset S7-PU001) reads "ACW-PU-211A AUX COOLING WATER PUMP" on sheet 7 (`units[S7-PU001]`)
 - equipment ACW-PU-211B (asset S7-PU002) reads "ACW-PU-211B AUX COOLING WATER PUMP" on sheet 7 (`units[S7-PU002]`)
 - equipment ACW-PU-211C (asset S7-PU003) reads "ACW-PU-211C AUX COOLING WATER PUMP" on sheet 7 (`units[S7-PU003]`)
-- Checked, none found: no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment (`applies_when.without`)
 
 **Data to collect**
 
-- Cause-and-effect matrix and HAZOP/LOPA records [not on drawing]. Where: site records: cause-and-effect matrix, HAZOP and LOPA reports; then DCS/PLC configuration: safety system configuration. How: Confirm what protects each machine and that it is tested.
+- Cause-and-effect matrix and HAZOP/LOPA records [not on drawing]. Where: site records: cause-and-effect matrix, HAZOP and LOPA reports; then DCS/PLC configuration: safety system configuration. How: Review existing cause-and-effect, governing requirements and configuration records for each named machine, with their revisions and applicability. Retain supplied trip/switch indications as candidates; a drawing label or an unrelated function does not settle the records or establish effective, tested protection. Missing model information is not evidence that installed protection is absent.
+- Machine/function association and current evidence [not on drawing]. Where: site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable; then DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process. How: Keep each machine in the review even where a switch or trip is supplied. Retain all explicit shared targets and supplied qualifiers; unknown or contradictory targets remain unresolved. Same-model text or nearby equipment does not prove function coverage. Record a responsible person or authority separately from protected-machine association; neither is inferred here. This requests record review, not a new test, safety design or operating action.
 
-**How it is decided:** This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.
+**How it is decided:** A qualified site review may resolve the source-labelled machine/function associations and remaining record requests using applicable current evidence. A supplied trip, switch, cause/effect row or shared-function label alone establishes neither complete coverage nor installed protection adequacy. This screen grants no acceptance or authority and performs no safety validation.
 
 **What the source says (no source):** Safety benefit; no energy source. Present it as a question to verify, not a finding.
 
-**Limits:** P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.
+**Limits:** P&IDs often leave trips to separate cause-and-effect records. Missing or unknown model evidence does not establish missing installed protection. Supplied associations, shared targets, revisions and contradictions require review; no machine, person owner, approval, tested condition or effective protection is inferred. C9 has no primary safety-design source cited in the catalog and remains a question for record review, not safety design, SIL assignment, a legal-compliance assessment or an operating recommendation.
 
 ## Not checked
 

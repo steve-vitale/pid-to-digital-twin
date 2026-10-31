@@ -3446,7 +3446,7 @@
    "id": "C9@model",
    "question_id": "C9",
    "family": "safety_question",
-   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "question": "What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified?",
    "about": "ACC-PU-151, ACC-PU-152, ACC-PU-153, CND-PU-162, CND-PU-163, CND-PU-164 and 5 more",
    "assets": [
     {
@@ -3571,11 +3571,6 @@
      "tag": "ACW-PU-211C",
      "text": "equipment ACW-PU-211C (asset S7-PU003) reads \"ACW-PU-211C AUX COOLING WATER PUMP\" on sheet 7",
      "field": "units[S7-PU003]"
-    },
-    {
-     "role": "checked, none found",
-     "text": "no safety switch (xSLL, xSHH...), burner management or trip interlock drawn for this equipment",
-     "field": "applies_when.without"
     }
    ],
    "data_requests": [
@@ -3586,17 +3581,26 @@
       "site records: cause-and-effect matrix, HAZOP and LOPA reports",
       "DCS/PLC configuration: safety system configuration"
      ],
-     "how": "Confirm what protects each machine and that it is tested."
+     "how": "Review existing cause-and-effect, governing requirements and configuration records for each named machine, with their revisions and applicability. Retain supplied trip/switch indications as candidates; a drawing label or an unrelated function does not settle the records or establish effective, tested protection. Missing model information is not evidence that installed protection is absent."
+    },
+    {
+     "item": "Machine/function association and current evidence",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable",
+      "DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process"
+     ],
+     "how": "Keep each machine in the review even where a switch or trip is supplied. Retain all explicit shared targets and supplied qualifiers; unknown or contradictory targets remain unresolved. Same-model text or nearby equipment does not prove function coverage. Record a responsible person or authority separately from protected-machine association; neither is inferred here. This requests record review, not a new test, safety design or operating action."
     }
    ],
-   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "decision_rule": "A qualified site review may resolve the source-labelled machine/function associations and remaining record requests using applicable current evidence. A supplied trip, switch, cause/effect row or shared-function label alone establishes neither complete coverage nor installed protection adequacy. This screen grants no acceptance or authority and performs no safety validation.",
    "typical_benefit": {
     "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
     "source": [],
     "arc": null,
     "source_titles": []
    },
-   "limits": "P&IDs often leave trips to the cause-and-effect matrix; 'none drawn' is common and not by itself a gap.",
+   "limits": "P&IDs often leave trips to separate cause-and-effect records. Missing or unknown model evidence does not establish missing installed protection. Supplied associations, shared targets, revisions and contradictions require review; no machine, person owner, approval, tested condition or effective protection is inferred. C9 has no primary safety-design source cited in the catalog and remains a question for record review, not safety design, SIL assignment, a legal-compliance assessment or an operating recommendation.",
    "status": "asked"
   }
  ],

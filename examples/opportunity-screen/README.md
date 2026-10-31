@@ -2,7 +2,7 @@
 
 **Why it matters:** the first day of an energy or controls review is mostly asking the same questions of the
 drawings and writing down what to go and measure. These screens do that part, cite where every claim comes from,
-and say where each missing number lives. They are question lists, not audits: nothing here computes a saving.
+and say what records or measurements are still needed. They are question lists, not audits: nothing here computes a saving.
 
 How the engine works, the three evidence states and how to add a question: [`docs/OPPORTUNITY_SCREEN.md`](../../docs/OPPORTUNITY_SCREEN.md).
 
@@ -62,6 +62,13 @@ explicit draft spelling choices; both original strings and source records remain
 [selection contract](../../docs/OPPORTUNITY_SCREEN.md#inputs) before adapting it; supplied draft/reviewed labels
 are provenance, not organizational approval.
 
+C9 now keeps machine/function record review open for every applicable machine and shows supplied switches and
+interlocks as unverified candidates. Its earlier diagram-absence wording is replaced: one machine's trip cannot
+silence the other machines, and even a local or shared indication does not establish adequate installed
+protection. Current source-labelled targets, revisions and unresolved contradictions belong in the receiving
+review packet. C9 has no cited primary safety-design source in the catalog; this is a collection aid, not a
+safety-design or operating instruction.
+
 ## How the findings were checked
 
 Every finding below was checked against the model it cites (field by field) and, for OPEN100, against the drawing
@@ -80,7 +87,7 @@ thing. No finding was judged false after the fixes listed under "Triggers tighte
 | C1 R-101 and C1 E-101: cooling water to the reactor and condenser has no flow measurement | True: none of TE's measurements is a cooling water flow. The stripper steam (FT-119) is metered, so C-101 correctly does not fire |
 | C2 model: FT-106, PT-107, TT-111, PT-113, FT-114, PT-116, JT-120, TT-122 read by no loop | True against the model and the 19-loop list |
 | C3 model: no valve shows position feedback | True of the model; **low value** (the model has no positioners at all, so this is a blanket question) |
-| C9 model: no trip drawn for K-101 | True of the model; **low value**: the simulator has process shutdown limits that the model does not list, so this is a "go and check" question |
+| C9 model: K-101 machine/function record review | Source scope remains incomplete: simulator shutdown limits are not fully represented here. Retain current cause/effect and configuration questions; no installed-protection conclusion follows. |
 
 Not found and why: no pumps are modeled, so the pump questions (E1-E4) are silent; K-101 is a process recycle
 compressor, so the compressed-air questions (E19-E23, C7) are silent too.
@@ -99,7 +106,7 @@ compressor, so the compressed-air questions (E19-E23, C7) are silent too.
 | C3 model: five control valves, no position feedback | True of the model; **low value** (a report reconstruction, not a P&ID) |
 | E1 P-1: LV-102 on the discharge branch, TV-104A/B on the heater and cooler legs, no drive | True of the model; **low value**: P-1 serves a 4,500-gallon vessel with batch transfers, and the split valves route flow rather than throttle it |
 | E11 S1 (80 C feed) and E11 U1 (steam supply): no insulation recorded | True but **low value**: the model is built from an investigation report that never records insulation. Kept because the rule is right; the limit says "not recorded, not bare" |
-| C9 model: no trip drawn for P-1 | True of the model; a question to verify only |
+| C9 model: P-1 with supplied interlock records retained as candidates | Applicability to P-1 and current requirements remain unverified; another function's trip cannot settle this machine's review. |
 
 ### OPEN100 twin (29 findings, 29 true; 3 duplicates)
 
@@ -115,7 +122,7 @@ compressor, so the compressed-air questions (E19-E23, C7) are silent too.
 | C1 makeup water (sheet 2 to CND-TK-160, sheet 4 via LCV-5509, sheet 7 via FCV-XXX), LP and HP extraction steam (sheet 4), pegging steam (sheet 4) | True: no flow element within three drawn links of each, checked on the images |
 | C1 "EXTRACTION STEAM ES PID 180-1" (sheet 0) | True; **duplicate**: the pegging steam line seen from the main steam sheet |
 | C3 model: 27 control-valve records, none with ZT/ZI drawn | True of the drawings; **low value** (P&IDs often omit positioners). The 27 records are 20 distinct numbered tags, one duplicate extraction (LCV-1501 twice) and 6 placeholder tags (FCV-XXX four times, TCV-XXX twice), which the evidence marks as placeholders |
-| C9 model: 11 tagged pumps, no trip drawn | True of the drawings; question only |
+| C9 model: tagged rotating equipment and any supplied indications | Machine/function associations, current records and shared or unknown scope remain questions; drawing presence or absence does not establish installed adequacy. |
 
 C2 and C6 are reported as "not checked": an extracted drawing has no controllers, and no loop list was given.
 
@@ -158,7 +165,7 @@ raise; **legit** means an older question fired on the new equipment and is a fai
 | E19, E22, E23 AC-501 (instrument air compressor) | Legit. E19 also lists the refrigeration pressure controllers PIC-202 and PIC-203 as "pressure control" because its clause looks anywhere: **low value** in that part |
 | C1 O-302, F-303, WH-401: gas with no meter | Legit; the dryer's gas is metered (FT-301), so it is quiet |
 | C2, C3 model | Legit; **low value** as in the other examples |
-| C9 model: K-201, K-202, K-203, AC-501 with no trip drawn | Legit, a question to verify (no high discharge pressure cutout was drawn) |
+| C9 model: K-201, K-202, K-203, AC-501 record review | Each machine retains cause/effect and current association questions, including when a switch or trip is supplied. No protection, test or acceptance is inferred. |
 
 **Anti-triggers, each drawn on purpose and pinned in the test:** K-203 has a drive (SC-203), so E29 is quiet there;
 EV-202 starts defrost from a coil differential pressure (PDT-206), so E30 is quiet there; the oven has a flue O2

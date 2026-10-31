@@ -3855,6 +3855,23 @@
         "examples/opportunity-screen/README.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A258",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Repair C9 machine-specific trip/switch record collection after independently frozen source-association controls (N085).",
+      "hypothesis": "A trip label or record for one machine cannot discharge another machine's cause/effect and current-record association review; a supplied target does not establish effective protection.",
+      "evidence": "Ten original baseline CLIs retain four association failures. Accepted catalog-only change retains candidates and adds an always-open machine/function/current-record basis task. Independent 21 CLIs/96 assertions plus three stdio sessions/46 assertions verify source/target/history retention, stale old answers and omission refusal. Final integration independently runs 19 reproduction commands/164 checks, 111 question cases (110 pass/one Windows skip) and the full pinned MCP checker. Other 49 complete rules/all 50 benefits remain exact; 50 rules/123 requests,13 bounded collection reviews/37 source contracts remain.",
+      "runs": "Source-informed offline development and independent coding-agent controls; no provider model trial, unfamiliar-source performance, installed-safety or measured human usefulness result.",
+      "verdict": "kept",
+      "why": "Close reproduced model-wide suppression without inventing associations or protection acceptance. Preserve N065/N082 usefulness/source adequacy and N062/N063 actual engineer/company acceptance.",
+      "source": [
+        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current",
+        "docs/OPPORTUNITY_SCREEN.md",
+        "examples/opportunity-screen/README.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4728,12 +4745,13 @@
       "id": "N082",
       "function": "intake_and_reuse",
       "status": "not-done",
-      "idea": "Source-review the remaining 38 catalog rules and 122-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
-      "why_not_yet": "Twelve named rules have bounded source-informed collection reviews after A257; this is not whole-catalog engineering adequacy or usefulness. N065 and real engineer/recipient acceptance remain open.",
+      "idea": "Source-review the remaining 37 catalog rules and 123-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
+      "why_not_yet": "Thirteen named rules have bounded source-informed collection reviews after A258; this is not whole-catalog engineering adequacy, safety validation or usefulness. N065 and real engineer/recipient acceptance remain open.",
       "source": [
         "docs/JOURNAL.md#115-repair-the-audit-gaps-with-owned-workstreams-and-independent-handoffs",
         "docs/STATUS.md",
-        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff"
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
+        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current"
       ]
     },
     {
@@ -4761,12 +4779,25 @@
     {
       "id": "N085",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Keep C9 trip/pressure-switch collection tied to each named machine; unrelated or ambiguous trip records must not quiet other equipment.",
-      "why_not_yet": "Ten actual unchanged-method baseline CLIs reproduce model-wide trip suppression after an independent primary-source association contract. An A-only, unrelated or ambiguous trip can hide another machine's C9 question. A private candidate and independent review are assigned; no repair is released. This is record association and collection scope, not proof of installed protection or safety adequacy.",
+      "why_not_yet": "Completed A258 after retained original failures and independent source/association controls. C9 retains machine-specific current-record review and supplied switch/interlock candidates without model-wide quiet or inferred protection. All targets/qualifiers and historical decisions survive. This repairs collection scope, not installed safeguards, effectiveness, approval or operating authority.",
       "source": [
         "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
-        "docs/STATUS.md"
+        "docs/STATUS.md",
+        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current"
+      ]
+    },
+    {
+      "id": "N086",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Expose exact XML identity and GenericAttribute retention/loss dispositions, including unattached source records, without inventing process streams, instrument placement or loop membership.",
+      "why_not_yet": "Existing I01 vendor/reference diagnosis separates an unplaced instrument and an instrument-ended segment from supported-item omission. Current reader reports aggregate losses; exact orphan identity/value traceability needs an independently reviewed source-admission contract and candidate. No new fidelity score, source-owner approval or historical row-7 pass is claimed.",
+      "source": [
+        "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current",
+        "docs/STATUS.md",
+        "examples/from-dexpi-xml/README.md"
       ]
     }
   ]

@@ -1078,6 +1078,124 @@ class RefrigerationCollectionContracts(unittest.TestCase):
                 self.assertFalse((base / "rollup").exists())
 
 
+class MachineFunctionCollectionContracts(unittest.TestCase):
+    """C9 is record collection: a supplied trip label cannot settle another machine or actual protection."""
+
+    cli = CollectionContractRepairs.cli
+    task = "Machine/function association and current evidence"
+
+    def model(self, case):
+        model = {"meta": {"title": "Fictional mixed-machine association control", "illustrative": True},
+                 "units": [{"id": "K-901", "name": "Fictional compressor A", "type": "compressor"},
+                           {"id": "B-902", "name": "Fictional boiler B", "type": "boiler"}],
+                 "streams": [],
+                 "instruments": [{"tag": "PT-901", "unit": "K-901", "variable": "pressure",
+                                  "description": "Fictional A pressure"}],
+                 "final_elements": [{"tag": "MTR-901", "unit": "K-901", "description": "Fictional motor contactor"},
+                                    {"tag": "MV-902", "unit": "B-902", "description": "Fictional burner final element"}],
+                 "interlocks": []}
+        trip = {"id": "IL-901", "class": "safety", "cause": "Supplied condition at PT-901",
+                "effect": "STOP K-901 only", "measurement": "PT-901", "final_element": "MTR-901",
+                "source": "Fictional unverified function record; not installed or tested",
+                "facts": {"record_status": "draft", "proof_tested": False, "revision": 0, "unknown": None}}
+        if case != "none":
+            model["interlocks"] = [trip]
+        if case == "unrelated":
+            model["units"].append({"id": "P-903", "name": "Fictional unrelated pump C", "type": "pump"})
+            model["final_elements"].append({"tag": "MTR-903", "unit": "P-903", "description": "C contactor"})
+            trip.update(effect="TRIP unrelated P-903 only", final_element="MTR-903")
+        elif case == "unknown":
+            trip.pop("measurement"); trip.pop("final_element")
+            trip.update(cause="Unknown initiating condition", effect="SHUTDOWN target unknown")
+        elif case == "contradictory":
+            trip["final_element"] = "MV-902"  # Preserve conflict with supplied A-only text, never normalize it.
+        elif case == "shared":
+            trip["shared_record"] = "Supplied two-target function; coverage/effectiveness unverified"
+            other = copy.deepcopy(trip); other.update(id="IL-902", effect="STOP B-902 only", final_element="MV-902")
+            model["interlocks"].append(other)
+        elif case == "rejected":
+            trip["ops_review"] = {"status": "rejected", "by": "Fictional test", "on": "2026-10-30"}
+        elif case == "switch":
+            model["interlocks"] = []
+            model["instruments"].append({"tag": "BMS-902", "unit": "B-902", "variable": "unknown",
+                                         "description": "Supplied burner-management indication, scope unverified"})
+        return model
+
+    def generate(self, base, case):
+        model = self.model(case); path = base / "model.json"
+        path.write_text(json.dumps(model), encoding="utf-8"); before = path.read_bytes()
+        self.cli(["--model", path, "--question", "C9", "--out", base / "screen"])
+        self.assertEqual(path.read_bytes(), before)
+        doc = json.loads((base / "screen/questions.json").read_text(encoding="utf-8"))
+        selected = finding(doc, "C9@model")
+        self.assertIsNotNone(selected)
+        self.assertEqual({e["id"] for e in selected["evidence"] if e["role"] == "trigger"},
+                         {u["id"] for u in model["units"]})
+        self.assertIn(self.task, {r["item"] for r in selected["data_requests"]})
+        self.assertFalse(any(e["role"] == "checked, none found" for e in selected["evidence"]))
+        return model, doc, selected
+
+    def test_local_unrelated_shared_unknown_and_rejected_candidates_keep_machine_review(self):
+        for case in ("none", "local", "unrelated", "unknown", "contradictory", "shared", "rejected", "switch"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                _, _, selected = self.generate(Path(tmp), case)
+                evidence = {e.get("id") for e in selected["evidence"]}
+                if case not in ("none", "rejected", "switch"):
+                    self.assertIn("IL-901", evidence)
+                if case == "shared":
+                    self.assertIn("IL-902", evidence)
+                if case == "rejected":
+                    self.assertNotIn("IL-901", evidence)
+                if case == "switch":
+                    self.assertIn("BMS-902", evidence)
+                self.assertIn("Missing or unknown model evidence does not establish missing installed protection",
+                              selected["limits"])
+                self.assertIn("no primary safety-design source", selected["limits"])
+
+    def test_raw_targets_and_qualifiers_survive_context_and_snapshot_without_approval(self):
+        import serve_snapshot
+        for case in ("unknown", "shared", "contradictory"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp); model, doc, _ = self.generate(base, case)
+                sources = base / "sources.json"
+                sources.write_text(json.dumps({"schema": "context-sources-1", "documents": []}), encoding="utf-8")
+                result = subprocess.run([sys.executable, str(ROOT / "scripts/context_register.py"), "prepare",
+                                         "--model", str(base / "model.json"), "--questions",
+                                         str(base / "screen/questions.json"), "--sources", str(sources),
+                                         "--out", str(base / "context")], cwd=ROOT, capture_output=True,
+                                        text=True, encoding="utf-8")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                enriched = json.loads((base / "context/enriched_questions.json").read_text(encoding="utf-8"))
+                self.assertEqual([{k: v for k, v in q.items() if k != "context"}
+                                  for q in enriched["questions"]], doc["questions"])
+                snapshot = serve_snapshot.Snapshot(base / "context/enriched_graph.json", base / "context/context.json")
+                self.assertEqual(snapshot.question("C9@model")["result"], enriched["questions"][0])
+                for original in model["interlocks"]:
+                    asset = snapshot.asset(original["id"])["result"]
+                    self.assertEqual(asset["status"], "unverified")
+                    claims = {a["name"]: a["value"] for a in asset["attributes"]}
+                    self.assertEqual(claims["cause"], original["cause"])
+                    self.assertEqual(claims["effect"], original["effect"])
+                    for key, value in original["facts"].items():
+                        self.assertEqual(claims[key], value)
+                    edges = snapshot.relations(original["id"], 100)["result"]["relations"]
+                    if "final_element" in original:
+                        self.assertTrue(any(e["type"] == "acts_on" and e["to"] == original["final_element"]
+                                            and e["status"] == "unverified" for e in edges))
+                    else:
+                        self.assertFalse(any(e["type"] == "acts_on" for e in edges))
+                self.assertEqual(json.loads((base / "context/context.json").read_text(encoding="utf-8"))["decisions"], [])
+
+    def test_rollup_refuses_omitted_machine_basis_before_writing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp); _, doc, selected = self.generate(base, "local")
+            selected["data_requests"] = [r for r in selected["data_requests"] if r["item"] != self.task]
+            (base / "screen/questions.json").write_text(json.dumps(doc), encoding="utf-8")
+            result = self.cli(["--rollup", base / "screen", "--out", base / "rollup"], 2)
+            self.assertIn("missing_required", result.stderr)
+            self.assertFalse((base / "rollup").exists())
+
+
 class ServiceReconciliation(unittest.TestCase):
     """Exact imported service choices replace input-order selection, without claiming approval."""
 

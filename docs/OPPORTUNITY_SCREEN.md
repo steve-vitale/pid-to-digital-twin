@@ -82,7 +82,7 @@ are general figures for plants in general.
 
 **What it covers, and what it doesn't yet.**
 - The 50 questions cover pumps, fans, steam, boilers and fired heaters, compressed air, cooling water, heat grade,
-  metering, controls, a few emissions and safety checks, and (since 2026-10-29) refrigeration plant (head pressure,
+  metering, controls, a few emissions and safety-record questions, and (since 2026-10-29) refrigeration plant (head pressure,
   suction pressure, compressor part load, defrost, condenser heat recovery, compressor power metering) and ovens,
   dryers and fryers (exhaust heat recovery, burner air-fuel ratio, exhaust humidity control) ([the
   questions](#the-questions)). Refrigerated spaces themselves (doors, infiltration, lighting) are not on a P&ID and
@@ -164,8 +164,18 @@ two-stage example. E28/H5 retain drawn reset/recovery as candidates and keep cov
 item cannot silence the other trains. Heating-duty words do not establish useful delivered heat, simultaneous
 operation, clean separation or acceptable compressor/head-pressure impact.
 
-The catalog has 50 rules and 122 collection requests. Twelve rules have bounded source-informed collection
-reviews; the other 38 still need original-source adequacy review. These controls do not establish whole-catalog
+C9 keeps every named rotating or fired machine's function/association record review open, with supplied nearby
+switches and interlock records as candidates. A record for one machine cannot settle another; shared targets must
+remain explicit, and unknown or contradictory targets stay unresolved. Cause/effect text, measurement/final-element
+references and revisions need review together. A responsible person is separate from a protected-machine target.
+C9 cites no primary safety-design source in the catalog. This is record collection, not installed-protection
+validation: missing model evidence does not establish missing safety protection, and a supplied trip does not
+establish effectiveness, testing, approval or operating authority. The independent collection review uses
+[HSE's functional-safety guidance](https://www.hse.gov.uk/eci/functional.htm) to keep specification, validation and
+continuing evidence distinct; it makes no safety-design or compliance determination.
+
+The catalog has 50 rules and 123 collection requests. Thirteen rules have bounded source-informed collection
+reviews; the other 37 still need original-source adequacy review. These controls do not establish whole-catalog
 engineering correctness or human usefulness. The [worked food screen](../examples/opportunity-screen/food/screen.md)
 shows the retained candidates and open coverage tasks.
 

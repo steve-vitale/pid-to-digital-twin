@@ -514,7 +514,7 @@
   },
   {
    "question_id": "C9",
-   "question": "Is a trip or interlock shown for this rotating or fired equipment?",
+   "question": "What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified?",
    "family": "safety_question",
    "sites": [
     {
@@ -554,6 +554,18 @@
         {
          "id": "P-1",
          "tag": "P-1"
+        },
+        {
+         "id": "IL-1",
+         "tag": "IL-1"
+        },
+        {
+         "id": "IL-2",
+         "tag": "IL-2"
+        },
+        {
+         "id": "IL-3",
+         "tag": "IL-3"
         }
        ]
       }
@@ -567,7 +579,7 @@
    "data_requests": [
     {
      "item": "Cause-and-effect matrix and HAZOP/LOPA records",
-     "how": "Confirm what protects each machine and that it is tested.",
+     "how": "Review existing cause-and-effect, governing requirements and configuration records for each named machine, with their revisions and applicability. Retain supplied trip/switch indications as candidates; a drawing label or an unrelated function does not settle the records or establish effective, tested protection. Missing model information is not evidence that installed protection is absent.",
      "sites": [
       {
        "site": "food",
@@ -592,9 +604,37 @@
        "where_by_finding": []
       }
      ]
+    },
+    {
+     "item": "Machine/function association and current evidence",
+     "how": "Keep each machine in the review even where a switch or trip is supplied. Retain all explicit shared targets and supplied qualifiers; unknown or contradictory targets remain unresolved. Same-model text or nearby equipment does not prove function coverage. Record a responsible person or authority separately from protected-machine association; neither is inferred here. This requests record review, not a new test, safety design or operating action.",
+     "sites": [
+      {
+       "site": "food",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable",
+        "DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process"
+       ],
+       "where_by_finding": []
+      },
+      {
+       "site": "bayer",
+       "states": [
+        "not_on_drawing"
+       ],
+       "where": [
+        "site records: source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable",
+        "DCS/PLC configuration: existing configuration and its documented measurement/action/final-element identities, read through the approved site process"
+       ],
+       "where_by_finding": []
+      }
+     ]
     }
    ],
-   "decision_rule": "This is a question to verify, not a finding: close it once the protection is found in the cause-and-effect matrix or safety system.",
+   "decision_rule": "A qualified site review may resolve the source-labelled machine/function associations and remaining record requests using applicable current evidence. A supplied trip, switch, cause/effect row or shared-function label alone establishes neither complete coverage nor installed protection adequacy. This screen grants no acceptance or authority and performs no safety validation.",
    "typical_benefit": {
     "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
     "source": [],
