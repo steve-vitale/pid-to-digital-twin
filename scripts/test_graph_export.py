@@ -43,6 +43,70 @@ def hand_built(**sections):
 
 
 class GraphExport(unittest.TestCase):
+    def test_actual_cli_refuses_bound_question_packets_before_full_or_core_writes(self):
+        # This is a valid complete packet with historical answers, not a fabricated binding. Re-exporting its
+        # questions against a changed model would inherit currentness without validating the old decisions.
+        import context_register
+        packet = ROOT / "examples/context-register/illustrative"
+        questions = packet / "expected/enriched_questions.json"
+        graph = packet / "expected/enriched_graph.json"
+        register = packet / "expected/context.json"
+        context_register.validate_export(json.loads(graph.read_text(encoding="utf-8")),
+                                         json.loads(register.read_text(encoding="utf-8")))
+        originals = {p: p.read_bytes() for p in (questions, graph, register, packet / "model.json")}
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            model = json.loads(originals[packet / "model.json"])
+            model["units"][1]["service"] = "ILLUSTRATIVE changed service; requires new review"
+            model_path = folder / "model.json"
+            model_path.write_text(json.dumps(model), encoding="utf-8")
+            for profile in ("full", "core"):
+                for exists in (False, True):
+                    with self.subTest(profile=profile, existing_destination=exists):
+                        out = folder / f"{profile}-{exists}.json"
+                        if exists:
+                            out.write_bytes(b"preserve prior artifact\n")
+                        before = out.read_bytes() if exists else None
+                        result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/graph_export.py"),
+                                                 str(model_path), "--questions", str(questions),
+                                                 "--profile", profile, "--out", str(out)],
+                                                cwd=ROOT, capture_output=True, encoding="utf-8", timeout=30)
+                        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                        self.assertIn("bound enriched questions", result.stderr)
+                        self.assertIn("preserved register", result.stderr)
+                        self.assertIn("cannot rebind decisions", result.stderr)
+                        self.assertEqual(out.read_bytes() if out.exists() else None, before)
+            self.assertEqual(json.loads(model_path.read_text(encoding="utf-8")), model)
+        self.assertEqual(originals, {p: p.read_bytes() for p in originals})
+
+    def test_actual_cli_ordinary_questions_keep_complete_supplied_content_in_both_profiles(self):
+        model = hand_built(units=[{"id": "P-1", "type": "pump", "name": "ILLUSTRATIVE pump"}])
+        question = {"id": "Q@P-1", "question": "Which source supports this historical interpretation?",
+                    "assets": [{"id": "P-1"}], "evidence": [{"id": "P-1", "status": "draft",
+                    "basis": "Historical source only; no current observation.", "qualifiers": {
+                        "observed": False, "value": 0, "unknown": None, "text": "supplied °C"}}],
+                    "data_requests": [{"item": "Applicable evidence", "where": ["original source"],
+                                       "how": "Keep attribution and uncertainty."}]}
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            model_path, questions = folder / "model.json", folder / "questions.json"
+            model_path.write_text(json.dumps(model), encoding="utf-8")
+            questions.write_text(json.dumps({"questions": [question]}), encoding="utf-8")
+            before = {p: p.read_bytes() for p in (model_path, questions)}
+            for profile in ("full", "core"):
+                with self.subTest(profile=profile):
+                    out = folder / f"{profile}.json"
+                    result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/graph_export.py"),
+                                             str(model_path), "--questions", str(questions),
+                                             "--profile", profile, "--out", str(out)],
+                                            cwd=ROOT, capture_output=True, encoding="utf-8", timeout=30)
+                    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                    exported = json.loads(out.read_text(encoding="utf-8"))
+                    self.assertEqual(exported["questions"], [question])
+                    self.assertNotIn("context_register", exported)
+                    self.assertEqual(gx.problems(exported), [])
+            self.assertEqual(before, {p: p.read_bytes() for p in before})
+
     def test_cli_preserves_every_consumed_input_on_output_collision(self):
         for source in ("model", "questions", "review"):
             with self.subTest(source=source), tempfile.TemporaryDirectory() as d:

@@ -50,7 +50,7 @@ converted-key DEXPI adapter produces an extracted twin through its separate cont
 | `draw_pid_from_model.py` | Process-model fields plus an authored drafting-layout JSON | Detailed draft PNG/SVG P&ID sheets and a key. No automatic detailed layout or general graph/extracted-twin conversion into this drawing contract. |
 | `generate.py` | This repository's process-model JSON or extracted-twin JSON | Platform staging and the outputs supported by that model kind. A `twin-graph-1` file is not a direct generator input. Signal mapping and native acceptance remain separate steps. |
 | `question_engine.py` | Process-model or extracted-twin JSON; optional loop list and equipment schedules | Questions, asset references and collection requests. Findings propose investigations; they do not mutate the model or establish savings. |
-| `graph_export.py` | Process-model or extracted-twin JSON, with optional questions/review records | `twin-graph-1`, including the source/status information represented by the input. It is an export, with no general graph-to-process-model inverse. |
+| `graph_export.py` | Process-model or extracted-twin JSON, with optional ordinary question-engine questions/review records | `twin-graph-1`, including the source/status information represented by the input. Bound enriched questions are refused: use their complete enriched graph/context pair or explicitly refresh the preserved register. It is an export, with no general graph-to-process-model inverse. |
 | `apply_review.py`, then `generate.py` | A supported working model and its engineer-filled `OPS_` review sheet | The existing [local model-correction route](REVIEW_LOOP.md): preview with `--dry-run`, apply whitelisted corrections with old values and review history, then regenerate. Apply updates that working model in place; valid rows may persist when other rows refuse. Preserve the base and inspect its diff/change record. A hub integration must stage the resulting changes under its authority rather than treating local CSV entries as organizational acceptance. |
 | `statements.py` | `twin-graph-1`, with supplied source images/report and optional machine-check model | Statements, samples and review material. Applied reviews change statuses and add review events; they do not change engineering values or authenticate the reviewer. See the current [binding and application rules](STATEMENT_REVIEW.md). |
 | `context_register.py` | Process model, extracted twin or graph, questions and a manifest of actual local source documents | `context-register-1` and enriched graph/questions. Treat local answers and ownership history as a review packet when transferring into an organizational authority. It does not update the original working model. |
@@ -66,6 +66,14 @@ Keep the source revision and locator, exact asset/finding IDs, unresolved eviden
 the result. The [question brief](../examples/first-pilot/README.md) is the smallest handoff. The optional
 [context register](CONTEXT_REGISTER.md) retains supplied answers and revision dependencies in local files.
 Its answers do not edit the generator model; use the separate reviewed model-correction route when appropriate.
+
+Ordinary `question_engine.py` questions can be attached by `graph_export.py --questions`. Once the context register
+adds answers and a `context_register` content binding, carry `enriched_graph.json` and `context.json` together
+directly to the consumer. Do not pass `enriched_questions.json` back to the graph exporter: rebuilding a full or
+core graph cannot validate its inherited answer freshness or preserve the complete decision history. The exporter
+refuses that input before writing. For changed sources, model or questions, explicitly refresh through
+`context_register.py` with the preserved register, then use the new bound pair; the
+[context handoff instructions](CONTEXT_REGISTER.md#versioned-handoff-and-limits) describe that route.
 
 For continuing company use, [the lifecycle](CONTEXT_LIFECYCLE.md) owns the intended responsibility and return
 path. [Connectivity](INTERNAL_CONNECTIVITY.md) owns client approval, deployment and network boundaries.

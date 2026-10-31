@@ -262,12 +262,13 @@ class ExpectedFindings(unittest.TestCase):
                     "H6@O-302"):
             self.assertIn(fid, found)
         # anti-triggers, each drawn on purpose: K-203 has a drive; EV-202 defrosts on demand (coil dP); the oven has
-        # a flue O2 analyser; the fryer's exhaust goes to a vapour condenser heat recovery exchanger; K-201's power
-        # is metered
+        # a flue O2 analyser; the fryer's exhaust goes to a vapour condenser heat recovery exchanger.
+        # K-201's stated power reading remains a candidate; actual real-input suitability stays open.
         for fid in ("E29@K-203", "E30@EV-202", "E32@O-302", "E31@F-303", "H6@F-303"):
             self.assertNotIn(fid, found)
         c12 = {a["id"] for a in finding(doc, "C12@model")["assets"]}
-        self.assertEqual(c12 & {"K-201", "K-202", "K-203"}, {"K-202", "K-203"})
+        self.assertEqual(c12 & {"K-201", "K-202", "K-203"}, {"K-201", "K-202", "K-203"})
+        self.assertIn("JT-201", c12)
         # the instrument air compressor and its refrigerated air dryer are not refrigeration plant or a process dryer
         for f in doc["questions"]:
             if f["question_id"] in NEW:
@@ -956,6 +957,125 @@ class SteamCollectionContracts(unittest.TestCase):
             self.assertTrue(any("500 gal internal volume" in e["text"] for e in selected["evidence"]))
             self.assertIn("not actual flow-duration", next(r for r in selected["data_requests"]
                                                          if r["item"] == self.tasks["H1"])["how"])
+
+
+class RefrigerationCollectionContracts(unittest.TestCase):
+    """Source-informed development controls: quantity labels and unrelated trains cannot settle collection."""
+
+    cli = CollectionContractRepairs.cli
+    tasks = {"C12": "Applicable real-input-power and coincident operating basis",
+             "E28": "Suction-level membership and reset coverage",
+             "H5": "Recovery coverage by refrigeration train and heating duty"}
+
+    def model(self):
+        model = json.loads((EX / "food_plant_model.json").read_text(encoding="utf-8"))
+        model["meta"]["audit_fixture"] = "Fictional mutation of the illustrative food model; no new observation"
+        return model
+
+    def screen(self, base, model, qid):
+        source = base / "model.json"
+        source.write_text(json.dumps(model), encoding="utf-8")
+        before = source.read_bytes()
+        self.cli(["--model", source, "--question", qid, "--out", base / "screen"])
+        self.assertEqual(source.read_bytes(), before)
+        doc = json.loads((base / "screen/questions.json").read_text(encoding="utf-8"))
+        return doc, finding(doc, qid + "@model")
+
+    def assert_open(self, selected, qid):
+        task = next(r for r in selected["data_requests"] if r["item"] == self.tasks[qid])
+        self.assertNotIn("already_on_drawing", task)
+        self.assertNotIn("still_needed", task)
+        self.assertIn("K-201", {a["id"] for a in selected["assets"]})
+        return task
+
+    def test_electrical_quantities_and_claims_retain_actual_real_input_basis(self):
+        # DOE motor-input basis requires more than amperes, volts, or a supplied power label.
+        # Even an explicitly real-kW-labelled candidate is not authenticated, representative operating data.
+        cases = [("IT-201", "current", "A", "current only"),
+                 ("ET-201", "voltage", "V", "voltage only"),
+                 ("EQ-201", "energy", "kWh", "cumulative energy without interval"),
+                 ("JT-201", "power", "kVA", "apparent power"),
+                 ("JT-201", "power", "kvar", "reactive power"),
+                 ("JT-201", "power", "unknown", "unverified quantity"),
+                 ("OTHER-201", "power", "kW", "supplied real input power"),
+                 ("JT-201", "unknown", "kW", "typed claim with unknown quantity"),
+                 ("JT-201", "power", "kW", "average real power from supplied matching energy delta and interval")]
+        for tag, variable, uom, meaning in cases:
+            with self.subTest(quantity=meaning), tempfile.TemporaryDirectory() as tmp:
+                base, model = Path(tmp), self.model()
+                reading = next(i for i in model["instruments"] if i["tag"] == "JT-201")
+                reading.update(tag=tag, variable=variable, uom=uom,
+                               description=meaning + " (" + uom + ")",
+                               facts={"reading_basis": {"value": 0, "uom": uom, "status": "draft",
+                                                        "readable": False, "period": None}})
+                doc, selected = self.screen(base, model, "C12")
+                self.assert_open(selected, "C12")
+                self.assertIn(tag, {a["id"] for a in selected["assets"]})
+                self.assertTrue(any(meaning in e["text"] for e in selected["evidence"]))
+                self.assertNotIn("no power measurement", json.dumps(selected))
+                graph = gx.build(base / "model.json", questions=base / "screen/questions.json")
+                self.assertEqual(graph["questions"], doc["questions"])
+                self.assertIn("reading_basis", json.dumps(graph))
+                self.assertIn(uom, json.dumps(graph))
+
+    def test_reset_and_recovery_candidates_cannot_hide_other_trains(self):
+        for case in ("unrelated_reset", "own_reset", "owned_reset", "unrelated_recovery", "local_recovery"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                base, model = Path(tmp), self.model()
+                qid = "E28" if "reset" in case else "H5"
+                if case == "unrelated_reset":
+                    model["units"].append({"id": "K-999", "type": "compressor",
+                                           "name": "Ammonia compressor, floating suction on disconnected train"})
+                elif case == "own_reset":
+                    model["units"][0]["name"] += "; floating suction on K-201 only"
+                elif case == "owned_reset":
+                    model["controllers"].append({"tag": "PIC-999", "unit": "K-201", "measurement": "PT-201",
+                                                  "description": "Floating suction for K-201 only"})
+                else:
+                    model["units"].append({"id": "HX-999", "type": "heat_exchanger",
+                                           "name": "Ammonia heat recovery, supplied coverage unverified"})
+                    if case == "local_recovery":
+                        model["streams"].append({"id": "R999", "from": "K-201", "to": "HX-999",
+                                                 "name": "Supplied discharge connection, coverage unverified"})
+                # Unequal approaches mean even a generic 'coldest room governs' shortcut is insufficient.
+                for uid, required, approach in [("EV-201", -20, 1), ("EV-202", 4, 30)]:
+                    next(u for u in model["units"] if u["id"] == uid)["facts"] = {
+                        "required_temperature_C": required, "approach_K": approach,
+                        "served_suction_level": "unverified", "status": "draft"}
+                _, selected = self.screen(base, model, qid)
+                self.assert_open(selected, qid)
+                self.assertLessEqual({"K-201", "K-202", "K-203"}, {a["id"] for a in selected["assets"]})
+                if qid == "E28":
+                    self.assertNotIn("warmest load on a suction level", json.dumps(selected))
+                    self.assertIn("every coincident load", json.dumps(selected).lower())
+                    self.assertIn("approach", json.dumps(selected).lower())
+                else:
+                    self.assertIn("HX-999", {a["id"] for a in selected["assets"]})
+                    self.assertNotIn("no desuperheater or refrigeration heat recovery exchanger anywhere",
+                                     json.dumps(selected))
+
+    def test_new_basis_tasks_survive_context_and_omission_is_refused(self):
+        for qid in self.tasks:
+            with self.subTest(question=qid), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                doc, selected = self.screen(base, self.model(), qid)
+                self.assert_open(selected, qid)
+                sources = base / "sources.json"
+                sources.write_text(json.dumps({"schema": "context-sources-1", "documents": []}), encoding="utf-8")
+                result = subprocess.run([sys.executable, str(ROOT / "scripts/context_register.py"), "prepare",
+                                         "--model", str(base / "model.json"), "--questions",
+                                         str(base / "screen/questions.json"), "--sources", str(sources),
+                                         "--out", str(base / "context")], cwd=ROOT, capture_output=True,
+                                        text=True, encoding="utf-8")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                enriched = json.loads((base / "context/enriched_questions.json").read_text(encoding="utf-8"))
+                self.assertEqual([{k: v for k, v in f.items() if k != "context"}
+                                  for f in enriched["questions"]], doc["questions"])
+                selected["data_requests"] = [r for r in selected["data_requests"] if r["item"] != self.tasks[qid]]
+                (base / "screen/questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                refused = self.cli(["--rollup", base / "screen", "--out", base / "rollup"], 2)
+                self.assertIn("missing_required", refused.stderr)
+                self.assertFalse((base / "rollup").exists())
 
 
 class ServiceReconciliation(unittest.TestCase):

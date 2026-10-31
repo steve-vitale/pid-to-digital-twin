@@ -961,7 +961,7 @@
    "id": "C12@model",
    "question_id": "C12",
    "family": "metering",
-   "question": "Is power to these refrigeration compressors measured, so the plant's kW against load can be tracked?",
+   "question": "Is representative real input power available for each refrigeration compressor, with a usable coincident load and operating basis?",
    "about": "K-201, K-202, K-203",
    "assets": [
     {
@@ -1020,11 +1020,6 @@
      "tag": "PT-202",
      "text": "instrument PT-202 reads \"PT-202 High-stage suction pressure\" at K-202",
      "field": "instruments[PT-202]"
-    },
-    {
-     "role": "checked, none found",
-     "text": "no power, current or energy measurement drawn on these compressors",
-     "field": "applies_when.without"
     }
    ],
    "data_requests": [
@@ -1035,7 +1030,7 @@
       "a walkdown: the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor",
       "utility bills or the site energy report: site interval meter data to apportion"
      ],
-     "how": "A representative period at known production."
+     "how": "Retain the original reading type, units and source claim for each named compressor; collect a representative coincident period at known production. A field labelled power or kW remains a supplied candidate and does not prove representative real input power. Amperes, volts, apparent kVA, reactive kvar and a bare cumulative kWh tag are different quantities. Appropriate voltage/current/power-factor and phase evidence, or an energy difference over an explicit matching interval, may support a documented conversion; no conversion or suitability acceptance is automated."
     },
     {
      "item": "Suction and discharge pressures logged at the same times",
@@ -1053,9 +1048,18 @@
       "site records: production throughput or freezer and cold store loads by day"
      ],
      "how": "kW per unit of product or per unit of refrigeration."
+    },
+    {
+     "item": "Applicable real-input-power and coincident operating basis",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: source-labelled quantity and units, circuit or compressor identity, phase and conversion basis, matching measurement interval, and data suitability review for each supplied electrical reading",
+      "DCS/PLC configuration: availability and meaning of existing actual real-power readings and synchronized operating/load records before arranging any further collection"
+     ],
+     "how": "Keep current, voltage, uncertain power, apparent, reactive, cumulative-energy and explicitly real-kW-labelled candidates visible. Correct attribution, quantity, time/conversion basis and representative operating conditions must be reviewed even where a real-power instrument is drawn. A supplied label or rating cannot settle actual collection or confer approval; use existing records where suitable."
     }
    ],
-   "decision_rule": "Meter, or log from the drives, where the refrigeration plant is large enough that kW against load would change decisions; a reading nobody reviews saves nothing.",
+   "decision_rule": "Review the attributed real-input quantity, matching observations, production or refrigeration load and operating conditions before deciding whether additional collection would improve a concrete decision. Existing electrical readings are candidates, including supplied real-kW claims; no tag or quantity field automatically validates the actual basis. A reading nobody reviews establishes no benefit.",
    "typical_benefit": {
     "wording": "S25 (p. 58): \"A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a).\" \"In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b).\"",
     "source": [
@@ -1066,7 +1070,7 @@
      "S25: Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)"
     ]
    },
-   "limits": "The 3% is one review of winery refrigeration, as reported in S25. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.",
+   "limits": "The 3% is one review of winery refrigeration, as reported in S25. Electrical quantity labels, including power or kW, do not validate actual representative input power, circuit identity, conversion or time basis. Keep original claims and uncertainty; no conversion, measurement validity, collection completion or company approval is automated. Fires only where the equipment name, type or service names refrigeration or a supported refrigerant; air, instrument-air, process-recycle compressors and power-plant cooling equipment remain outside this rule.",
    "status": "asked"
   }
  ],

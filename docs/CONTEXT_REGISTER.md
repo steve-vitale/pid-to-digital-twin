@@ -279,6 +279,14 @@ It never follows the graph's `sidecar` string. Older graphs remain usable alone;
 register to create a bound pair for complete answer readback. Keep the source originals and raw-byte hashes with
 the packet; a serving process does not reopen sources or verify their content.
 
+Use that enriched graph and its matching `context.json` directly for consumer readback. `graph_export.py --questions`
+accepts ordinary question-engine output, but refuses a question document carrying a top-level
+`context_register` binding. Rebuilding either a full or core graph from `enriched_questions.json` cannot revalidate
+its inherited answer state or carry the complete history. Copying the old binding onto a changed projection would
+not make those decisions current. For changed inputs, run the explicit refresh above with the preserved register
+and use its newly written bound pair. Keep the full packet alongside any separately managed projection; no
+automatic graph-projection rebinding or organizational acceptance is supplied.
+
 The interchange contract is `context-register-1`, with source manifests `context-sources-1`, a `twin-graph-1` enriched
 graph, and the original questions format plus a `context` field. Asset, question, document and locator ids come from
 the supplied inputs and must be maintained across revisions. Answer ids identify an engineer's logical answer;

@@ -70,7 +70,9 @@ def demonstrate(write=False):
         after_ids = {f["id"] for f in after["questions"]}
         assert after_ids - before_ids == ADDED
         assert not before_ids - after_ids
-        assert "K-201" not in assets(before, "C12@model")
+        assert "K-201" in assets(before, "C12@model")
+        assert "JT-201" in assets(before, "C12@model")
+        assert "JT-201" not in assets(after, "C12@model")
         assert "K-201" in assets(after, "C12@model")
         assert not REJECTED & {a["id"] for f in after["questions"] for a in f["assets"]}
         assert {r["id"] for r in after["review_exclusions"]} == REJECTED

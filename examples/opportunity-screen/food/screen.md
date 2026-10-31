@@ -108,7 +108,7 @@ IAC/ITAC recommendation code: 2.243x (by description).
 
 **Limits:** S25 (p. 62) warns that condenser fan energy rises as head pressure falls and that head pressure must not go below what defrost or liquid injection oil cooling need. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.
 
-### E28: Is each refrigeration suction level held colder than the warmest load on it needs?
+### E28: Does each refrigeration suction level match the conditions required by every coincident load it serves?
 
 **About:** K-201, K-202, K-203  
 
@@ -128,15 +128,16 @@ IAC/ITAC recommendation code: 2.243x (by description).
 
 **Data to collect**
 
-- Suction pressure at each suction level, hourly [not on drawing]. Where: historian or DCS trend for PT-201, PT-202 (no historian tag is mapped in this model for these); then DCS/PLC configuration: suction pressure setpoints per compressor or suction level. How: Convert to saturated evaporating temperature; note whether it changes at night, weekends or in winter.
-- The temperature each load actually needs [not on drawing]. Where: site records: room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it; then historian or DCS trend for TT-205, TT-206 (no historian tag is mapped in this model for these). How: The warmest load on a suction level, less its coil approach, sets the coldest suction that level needs.
+- Suction pressure at each suction level, hourly [not on drawing]. Where: historian or DCS trend for PT-201, PT-202 (no historian tag is mapped in this model for these); then DCS/PLC configuration: suction pressure setpoints per compressor or suction level. How: Retain refrigerant identity, pressure reference and measurement location before relating suction pressure to saturated evaporating temperature. Match the operating periods of pressures, setpoints and loads; distinguish stages and pressure drops. No setpoint is calculated here.
+- The temperature each load actually needs [not on drawing]. Where: site records: room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it; then historian or DCS trend for TT-205, TT-206 (no historian tag is mapped in this model for these). How: For every coincident load, establish its required temperature and required heat-transfer approach, and the suction level actually serving it. The most demanding admissible evaporating condition across those loads constrains a shared level; the warmest load alone does not govern. This is an engineering constraint to review, not a quotation from the cited two-stage example or a plant setpoint recommendation.
 - Compressor power and run hours per suction level [not on drawing]. Where: historian or DCS trend for JT-201 (no historian tag is mapped in this model for these); then site records: compressor run hours from the refrigeration plant controls. How: A month or more at normal production.
+- Suction-level membership and reset coverage [not on drawing]. Where: site records: source-labelled compressor, suction header and served-load membership; reset strategy and coverage for each level, with stage and pressure-regulation boundaries. How: Drawn reset indications are candidates only. Confirm ownership and shared-level coverage; a reset on another compressor does not settle these loads. Unknown connections, applicable approaches and product or quality constraints remain open for qualified review.
 
-**How it is decided:** Worth a look when a suction level runs colder than its warmest load needs after the coil approach, or stays fixed when loads ease at night and weekends. Close it when the loads on that level need the present temperature.
+**How it is decided:** Study a level only after mapping every coincident served load and reviewing its required temperature, approach and operating constraints against the actual level and reset coverage. A colder-than-required level may warrant investigation, but the most demanding admissible evaporating condition across all served loads constrains any change. A drawn reset, ambient change or warm load alone does not settle the question. The cited benefit remains a conditional two-stage low-stage example; no setpoint or savings is calculated.
 
 **What the source says (S25):** Two-stage systems (S25, p. 63): "a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005)." No figure is given there for single-stage systems.
 
-**Limits:** Product temperature and food-safety limits set the floor: a suction change changes how product is held and needs the quality owner's sign-off. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.
+**Limits:** Product temperature and food-safety limits set the floor: a suction change changes how product is held and needs the quality owner's sign-off. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not. Drawn reset text does not prove usable operating observations or all-load coverage. Shared headers, different approaches, pressure regulation, stages, transients and equipment limits can change the governing condition; keep topology and applicability unverified until reviewed.
 
 ### E29: Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?
 
@@ -325,7 +326,6 @@ IAC/ITAC recommendation code: 2.243x (by description).
 - Discharge or condensing measurement: instrument TT-202 reads "TT-202 Compressor discharge temperature" at K-202 (`instruments[TT-202]`)
 - Discharge or condensing measurement: instrument PT-203 reads "PT-203 Condenser head (discharge) pressure" at C-201 (`instruments[PT-203]`)
 - Compressor power: instrument JT-201 reads "JT-201 Low-stage compressor motor power" at K-201 (`instruments[JT-201]`)
-- Checked, none found: no desuperheater or refrigeration heat recovery exchanger anywhere in the model (`applies_when.without`)
 
 **Data to collect**
 
@@ -333,12 +333,13 @@ IAC/ITAC recommendation code: 2.243x (by description).
 - Compressor power and run hours [not on drawing]. Where: historian or DCS trend for JT-201 (no historian tag is mapped in this model for these); then site records: compressor run hours from the refrigeration plant controls. How: Heat rejected is about the compressor power plus the refrigeration load at the same time.
 - The low-grade duty: temperature needed, load and hours [not on drawing]. Where: site records: temperatures and loads of the hot water, CIP, wash water, floor heating and space heating users, by hour. How: Match by temperature, hours and distance.
 - Effect on head pressure [not on drawing]. Where: the vendor datasheet: whether a heat recovery exchanger would need a higher condensing pressure than now. How: Recovery that raises the head pressure in cool weather costs compressor power (see E27); count it.
+- Recovery coverage by refrigeration train and heating duty [not on drawing]. Where: site records: source-labelled connections, heat delivered and operating periods for each existing refrigeration recovery device and served heating duty; then a walkdown: confirm boundaries, distance and separation or contamination constraints for the candidate source and sink. How: A recovery device elsewhere does not establish coverage here. Retain drawn indications as candidates and verify which train and sink they serve, whether useful duty is already met, and remaining coincident heat. Keep temperatures, isolation, compressor-power/head-pressure effects and required site review explicit; no installation mandate or savings is inferred.
 
 **How it is decided:** Worth a study when the refrigeration plant runs at the same times as a duty that needs heat below the discharge or condensing temperature, and recovery does not force the head pressure up. Close it if the duties do not overlap or recovery would need a higher condensing pressure all year.
 
 **What the source says (S25):** S25 (p. 64), refrigeration compressors: "Where economically feasible, rejected heat can be recovered from compressors and used in other facility applications, such as space heating or water heating." No % stated there for refrigeration (the air compressor heat recovery figures quoted under E23 do not apply).
 
-**Limits:** The with-clause finds any low-grade duty in the model, not one next to the plant: distance is for the walkdown. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.
+**Limits:** The with-clause finds any low-grade duty in the model, not one next to the plant: distance is for the walkdown. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not. Existing recovery anywhere in the model is candidate evidence, not proof that every train or heating duty is served. Membership, delivered heat, contamination/isolation, simultaneous operation and receiving-site review remain unresolved until supported.
 
 ### H6: Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?
 
@@ -459,28 +460,31 @@ IAC/ITAC recommendation code: 2.243x (by description).
 
 **Limits:** On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from.
 
-### C12: Is power to these refrigeration compressors measured, so the plant's kW against load can be tracked?
+### C12: Is representative real input power available for each refrigeration compressor, with a usable coincident load and operating basis?
 
-**About:** K-202, K-203  
+**About:** K-201, K-202, K-203  
 
 **Evidence on the drawing / model**
 
+- equipment K-201 reads "K-201 Ammonia (R-717) screw compressor, low stage (booster)" (`units[K-201]`)
 - equipment K-202 reads "K-202 Ammonia (R-717) screw compressor, high stage" (`units[K-202]`)
 - equipment K-203 reads "K-203 Ammonia (R-717) screw compressor, high stage (trim)" (`units[K-203]`)
+- Suction or discharge pressure: instrument PT-201 reads "PT-201 Low-stage suction pressure" at K-201 (`instruments[PT-201]`)
 - Suction or discharge pressure: instrument PT-202 reads "PT-202 High-stage suction pressure" at K-202 (`instruments[PT-202]`)
-- Checked, none found: no power, current or energy measurement drawn on these compressors (`applies_when.without`)
+- Electrical quantity candidate (real-power basis unverified): instrument JT-201 reads "JT-201 Low-stage compressor motor power" at K-201 (`instruments[JT-201]`)
 
 **Data to collect**
 
-- Compressor power [not on drawing]. Where: a walkdown: the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor; then utility bills or the site energy report: site interval meter data to apportion. How: A representative period at known production.
-- Suction and discharge pressures logged at the same times [not on drawing]. Where: historian or DCS trend for PT-202 (no historian tag is mapped in this model for these); then DCS/PLC configuration: suction and discharge pressure per compressor in the refrigeration plant controls. How: Logged together with power, these show how the plant runs.
+- Compressor power [not on drawing]. Where: a walkdown: the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor; then utility bills or the site energy report: site interval meter data to apportion. How: Retain the original reading type, units and source claim for each named compressor; collect a representative coincident period at known production. A field labelled power or kW remains a supplied candidate and does not prove representative real input power. Amperes, volts, apparent kVA, reactive kvar and a bare cumulative kWh tag are different quantities. Appropriate voltage/current/power-factor and phase evidence, or an energy difference over an explicit matching interval, may support a documented conversion; no conversion or suitability acceptance is automated.
+- Suction and discharge pressures logged at the same times [not on drawing]. Where: historian or DCS trend for PT-201, PT-202 (no historian tag is mapped in this model for these); then DCS/PLC configuration: suction and discharge pressure per compressor in the refrigeration plant controls. How: Logged together with power, these show how the plant runs.
 - What to normalise against [not on drawing]. Where: site records: production throughput or freezer and cold store loads by day. How: kW per unit of product or per unit of refrigeration.
+- Applicable real-input-power and coincident operating basis [not on drawing]. Where: site records: source-labelled quantity and units, circuit or compressor identity, phase and conversion basis, matching measurement interval, and data suitability review for each supplied electrical reading; then DCS/PLC configuration: availability and meaning of existing actual real-power readings and synchronized operating/load records before arranging any further collection. How: Keep current, voltage, uncertain power, apparent, reactive, cumulative-energy and explicitly real-kW-labelled candidates visible. Correct attribution, quantity, time/conversion basis and representative operating conditions must be reviewed even where a real-power instrument is drawn. A supplied label or rating cannot settle actual collection or confer approval; use existing records where suitable.
 
-**How it is decided:** Meter, or log from the drives, where the refrigeration plant is large enough that kW against load would change decisions; a reading nobody reviews saves nothing.
+**How it is decided:** Review the attributed real-input quantity, matching observations, production or refrigeration load and operating conditions before deciding whether additional collection would improve a concrete decision. Existing electrical readings are candidates, including supplied real-kW claims; no tag or quantity field automatically validates the actual basis. A reading nobody reviews establishes no benefit.
 
 **What the source says (S25):** S25 (p. 58): "A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a)." "In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b)."
 
-**Limits:** The 3% is one review of winery refrigeration, as reported in S25. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not.
+**Limits:** The 3% is one review of winery refrigeration, as reported in S25. Electrical quantity labels, including power or kW, do not validate actual representative input power, circuit identity, conversion or time basis. Keep original claims and uncertainty; no conversion, measurement validity, collection completion or company approval is automated. Fires only where the equipment name, type or service names refrigeration or a supported refrigerant; air, instrument-air, process-recycle compressors and power-plant cooling equipment remain outside this rule.
 
 ## Controls and automation
 

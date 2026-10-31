@@ -12,8 +12,9 @@ Decision rules describe which investigations to pursue or conclude. In this scre
 close the investigation, never operate or close equipment. Findings do not authorize operational changes.
 
 **Collection limits:** E1/E2/E4 now keep matched curves, BEP and efficiency review separate from scalar ratings;
-H4 keeps generic capacity separate from actual heat duty. Source-informed software controls establish those
-bounded repairs, not whole-catalog engineering adequacy. Do not use field-complete screens as proof that the
+H4 keeps generic capacity separate from actual heat duty. C12 keeps electrical readings separate from actual
+real-input suitability; E28/H5 keep reset/recovery indications separate from coverage of served loads. Source-informed
+software controls establish bounded collection behavior, not whole-catalog engineering adequacy. Do not use field-complete screens as proof that the
 underlying engineering evidence is suitable, current or complete. See the [current audit](STATUS.md).
 
 ```sh
@@ -152,8 +153,21 @@ supplied, without settling those tasks. These distinctions follow DOE [Tip2](htt
 [Tip20](https://www.energy.gov/sites/prod/files/2014/05/f16/steam20_turbogenerators.pdf) and the
 [steam sourcebook](https://www.energy.gov/sites/default/files/2014/05/f15/steamsourcebook.pdf)
 (printed pp.5,9,18–19,54). They instruct evidence review, not new live measurements or operating changes.
-The remaining 41 rules still need original-source adequacy review; passing these bounded controls does not
-establish broad usefulness.
+C12 keeps every supplied electrical reading as a candidate and asks for actual representative real input power,
+asset, units, time/conversion basis and coincident operating conditions. A field labelled `power` can describe
+apparent kVA or reactive kvar; even a real-kW label does not establish usable observations. Matched energy change
+over a known interval can support average-power evidence, but no conversion or acceptance is automated. This
+follows the DOE [motor-input basis](https://www.energy.gov/sites/default/files/2014/04/f15/10097517.pdf), printed pp.3–4.
+E28 maps every coincident load, required temperature/approach and actual suction membership before considering a
+change. Its governing-condition discussion is an engineering inference; S25's benefit remains a conditional
+two-stage example. E28/H5 retain drawn reset/recovery as candidates and keep coverage review open, so one unrelated
+item cannot silence the other trains. Heating-duty words do not establish useful delivered heat, simultaneous
+operation, clean separation or acceptable compressor/head-pressure impact.
+
+The catalog has 50 rules and 122 collection requests. Twelve rules have bounded source-informed collection
+reviews; the other 38 still need original-source adequacy review. These controls do not establish whole-catalog
+engineering correctness or human usefulness. The [worked food screen](../examples/opportunity-screen/food/screen.md)
+shows the retained candidates and open coverage tasks.
 
 `candidate_facts` retains each supplied value, subject and locator; `candidate_scope` uses the request's subject
 scope. Missing/blank optional candidates receive no satisfaction credit and do not add required fields. With
@@ -299,15 +313,15 @@ the source's URL; each source entry in `data/questions.json` records that file's
 | ID | Question | Fires on | Source (page) |
 |---|---|---|---|
 | E27 | Is the refrigeration condensing (head) pressure held higher than the weather allows? | a condenser whose name or service names the refrigerant; quiet if a floating head or wet-bulb reset is named | S25 pp. 62, 65 (2% to 3% per degree C of condensing temperature, as reported there) |
-| E28 | Is each suction level colder than its warmest load needs? | refrigeration compressors (one finding per model), shown with suction pressures and the freezers, cold stores and chillers | S25 p. 63 (about 8% for a two-stage system raised from -30 °F to -20 °F) |
+| E28 | Does each suction level meet the conditions required by every coincident served load? | refrigeration compressors, with suction/load records and drawn reset candidates; membership, approaches and coverage stay open | S25 p. 63 (about 8% for a two-stage system raised from -30 °F to -20 °F) |
 | E29 | Does a refrigeration compressor carry part load on its slide valve with no speed control? | a refrigeration compressor with no drive (VFD, VSD, ASD, SC, SIC) on it | S25 pp. 59, 63 |
 | E30 | Are evaporators defrosted on a fixed timer? | an evaporator or unit cooler with defrost drawn on it; quiet with a coil differential pressure or demand defrost | S25 pp. 59, 66 (no %) |
 | E31 | Does an oven, dryer or fryer send hot exhaust to atmosphere with no heat recovery? | an oven, dryer, fryer, roaster or dehydrator; quiet if a heat recovery item is on it or at the other end of a stream from it | S26 pp. 104, 107; S25 p. 90 (up to 30% of spray dryer exhaust heat) |
 | E32 | Is the burner air-fuel ratio checked, with no flue O2 drawn? | an oven, dryer or fryer with a burner or fuel supply; quiet with an O2 analyser | S27 p. 1 (no %; excess air is part of a drying process) |
-| H5 | Is refrigeration condenser heat rejected while a low-grade duty is heated another way? | refrigeration plant plus a hot water, CIP, wash water, floor or space heating duty anywhere; quiet with a refrigeration desuperheater or heat recovery | S25 p. 64 (no %) |
+| H5 | Is refrigeration condenser heat rejected while a low-grade duty is heated another way? | refrigeration plant plus a candidate heating duty; existing recovery remains evidence, with train/sink coverage unresolved | S25 p. 64 (no %) |
 | H6 | Could oven, dryer or fryer exhaust heat serve a low-grade duty elsewhere? | the E31 units, plus a low-grade duty anywhere | S28 p. 1; S26 p. 107 (no %) |
 | C11 | Is a dryer's or oven's exhaust rate set by hand rather than by humidity? | a dryer or oven with no humidity, dew point or moisture measurement | S26 p. 104 (no %) |
-| C12 | Is refrigeration compressor power measured? | refrigeration compressors with no power, current or energy measurement | S25 p. 58 (3% for monitoring, one winery review as reported there) |
+| C12 | Is representative real input power available with a usable coincident operating basis? | refrigeration compressors, including those with supplied electrical readings; labels do not settle actual collection | S25 p. 58 (3% for monitoring, one winery review as reported there) |
 
 Anti-triggers, each in the tests: an air compressor, a recycle gas compressor, a process condenser on cooling water,
 a power-plant air-cooled condenser, a refrigerated or desiccant compressed air dryer and a nuclear steam dryer are not

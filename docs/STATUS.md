@@ -27,17 +27,24 @@ controls. Keep the remaining source-adequacy and external-acceptance work separa
 | **N078 — description interpretation review** | Every supplied record value, nested controls/settings and source line is exposed for review. All rows start unreviewed. The false-shutdown control remains structurally valid but its contrary claim is now visible beside the source. This is not automatic semantic judgment. [Description guide](../examples/from-description/README.md). |
 | **N079 — schedule service choice** | Contradictory service descriptions refuse in either input order. Exact source-bound selections retain all candidates and a supplied basis/status; the three existing spelling choices are explicit drafts. Structured qualifiers survive the context handoff. No declaration grants organizational approval. |
 | **N080 — conditions and measurement basis** | E11 distinguishes stated fluid/design temperature from surface evidence; H1 distinguishes stated capacity from rated steam flow; H2 keeps representative supply-condition review open despite supplied fields. Raw candidates and qualifiers remain available. This repairs collection semantics, not measurement validity. |
+| **N083 — bound context at graph export** | Full/core graph export refuses bound enriched questions before writes. Use the complete enriched graph/context pair directly or explicitly refresh the preserved register. Ordinary unbound questions remain supported; no automatic projection rebinding or company authority. |
+| **N084 — electrical basis and refrigeration coverage** | C12 retains electrical readings as candidates and keeps representative real-input basis open. E28/H5 keep coincident-load/reset and recovery coverage open despite supplied or disconnected indicators. This adds three bounded source-informed collection reviews; engineering suitability and benefit remain unverified. |
 | **N081 — retained benchmark recipes** | Current re-scores use exact historical guide/code recipe snapshots after the live files change. Original attempts, dates, predictions, keys and reports stay intact; new provenance/group identities are not new model performance. |
 
 Schedule-field intake also rejects ambiguous case keys and conflicting values, merges only disjoint additions
 and refuses previously ignored native-model schedules. These input checks preserve evidence and explicit choices;
 they do not decide which source governs a company's engineering work.
 
-**Still open after this repair wave:** C12 can suppress collection from current/voltage or unqualified energy
-signals; E28/H5 can suppress it from disconnected equipment. Re-exporting bound enriched questions through
-`graph_export.py` can also lose the context binding while retaining answer references. Use the register's original
-`enriched_graph.json` and matching `context.json` directly. These reproduced software defects have assigned
-follow-ups below; their candidate fixes are not included in this release.
+**Open N085 — machine-specific trip coverage.** Ten actual unchanged-method controls reproduce C9 being
+silenced for other machines by an A-only, unrelated or ambiguous trip record. A local switch control retains the
+other machine's question. The Questions and Context/retrieval agents own a private candidate and independent
+review; it is not released. This concerns record association and collection scope, not installed protection or
+safety adequacy.
+
+C12/E28/H5 collection scope and bound-question graph re-entry now have independently reviewed repairs above.
+The [follow-up record](JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff) retains the original
+failures and rejected first quantity candidate. These software controls do not establish suitable observations,
+engineering correctness, useful savings or company acceptance.
 
 ## What exists, and what remains manual
 
@@ -70,9 +77,9 @@ actual participant, recipient, native-system and tenant observations remain **no
 
 | Workstream owner | Remaining work | Completion evidence |
 |---|---|---|
-| **Questions agent** | Integrate the C12/E28/H5 quantity and equipment-scope corrections; N065 useful source-backed questions; remaining catalog source adequacy. Fifty rules/119 request bundles are inventoried; 41 rules still await integrated source-adequacy evidence. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
+| **Questions agent** | N085 machine-specific trip association/collection repair; N065 useful source-backed questions and N082 remaining catalog source adequacy. Fifty rules/122 request bundles are inventoried; 12 rules have bounded collection reviews and 38 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
 | **Evaluation agent** | The matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
-| **Context/retrieval agent** | Integrate the bound-question re-export guard; keep the local refresh/review/restart contract bounded and test receiving projections. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
+| **Context/retrieval agent** | Keep the local refresh/review/restart contract bounded and test receiving projections, including changed or removed identifiers and complete history. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
 | **Integration agent** | N062 real engineer/recipient pilot; N063 authorized company import/readback, client permissions and subsequent revision. | Actual observations from the [acceptance exercise](ACCEPTANCE.md), not an agent simulation. Native PI/gateway acceptance and operational benefit remain unverified. |
 
 The company retains authority over accepted context, access, controlled documents, work execution and ownership.
@@ -94,13 +101,14 @@ research, intentional tool boundaries and external acceptance are not silently c
 
 ## How this audit was checked
 
-The actual 95-cell matrix rerun records **64 pass / 23 fail / 8 n/a**. Strict input verification passes; every
-substantive result matches the earlier matrix. These failures remain research work, not failing unit tests.
+The latest actual 95-cell matrix rerun records **64 pass / 23 fail / 8 n/a**. The subsequent 19-file question/graph
+repair changes none of its 853 declared consumed paths; strict input verification still passes. No matrix
+bindings were rewritten for this repair, and its substantive results remain unchanged. These failures remain research work, not failing unit tests.
 All **64 local test scripts pass**, with five Windows unittest skips and two explanatory platform notices;
 those counts are not added together. Targeted CLI controls, source-preservation checks, full-value reproductions
 and independent cross-reviews support the bounded repairs.
 
-The README check matches 41 numerical claims and identifies one prose-only claim; all 52 configured pipeline
+The publication check matches 41 numerical claims and identifies one prose-only claim; all 52 configured pipeline
 stages are fresh. Four current benchmark suites reproduce. Re-scoring saved predictions reproduces 30 tables
 (23 MATCH, seven MATCH-OLD); five historical tables still report GAP. These checks do not rerun commercial models.
 An initial clean Linux CI run caught two collection-declaration defects after the local suite passed. The

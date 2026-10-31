@@ -5418,3 +5418,61 @@ exact restoration passes. All 2,715 other tracked files remain identical to the 
 exercise complements the subsequent Linux CI gate; it does not claim that CI has passed or absent data was read.
 New C12/E28/H5 quantity/equipment-scope and bound-question re-export defects remain explicit in STATUS.md, with
 separately prepared candidates and assigned owners. They are not counted as repairs in this release.
+
+
+## 117. Keep collection scope and reviewed context bound at handoff
+
+**A256 / N083.** Actual receiving controls expose a graph-export seam: feeding bound enriched questions back
+through full/core export drops the complete register binding while retaining answered/current summaries. Changing
+the referenced asset does not revalidate that inherited state. The supported complete enriched graph/context pair
+continues to validate. The conservative repair refuses marked enriched questions before writing and directs the
+reader to that complete pair or explicit refresh with the preserved register. Blindly copying an old binding is
+not a repair. An independent reviewer runs 19 actual CLIs, 64 assertions and 3 stdio SDK sessions; the final graph
+suite runs 40 cases, 39 pass with one Windows file-symlink skip. Ordinary-question and no-question outputs remain
+equal under matched controls. This does not authenticate callers who remove a marker or provide arbitrary state.
+
+**A257 / N084.** Primary-source review and frozen expected/unacceptable controls precede the accepted collection
+repair. C12 originally treats current, voltage or bare cumulative energy as enough to quiet power collection.
+The first private candidate still quiets apparent kVA/reactive kvar; independent review rejects it, and that
+candidate and its failing evidence remain. Accepted v2 retains every supplied electrical signal as a candidate
+and always asks for representative real-input quantity, asset, time/conversion basis and suitability. Even a
+real-kW label does not establish usable observations. No conversion or data-validity judgment is automated.
+
+E28/H5 originally allow unrelated reset/recovery words to quiet the original train. Their new tasks retain
+indications while asking for actual suction membership, every coincident load/approach and recovery coverage.
+The governing-temperature constraint is explicitly engineering inference, not a generic warmest-load quotation
+or implemented setpoint calculator. Existing conditional benefits remain unchanged. DOE motor-input guidance
+and EPA ENERGY STAR dairy guidance inform the bounded contracts; this is not certification of all engineering
+or economic closeout wording. Other 47 complete rules and all 50 benefit objects remain exact. The 3 applicability
+contracts intentionally change; claiming all 50 triggers unchanged would be false.
+
+Accepted v2 has 16 fresh independent CLIs/61 assertions plus 18 inherited E28/H5 CLIs/36 assertions whose complete
+rule objects remain exact. Integration independently reproduces 18 commands/162 assertions and the 108-case question
+suite, 107 pass and one Windows skip. Cross-consumer controls retain raw qualifiers and history, stale old answers
+when the question contract changes, and refuse omitted always-open tasks. This is source-informed development
+evidence, not unfamiliar-source performance or measured usefulness. The catalog now has 50 rules/122 requests;
+12 rules have bounded collection reviews, leaving 38 source contracts and N065 usefulness open. N062/N063 actual
+engineer, recipient, native-system and Copilot tenant exercises remain unrun.
+
+Only 19 frozen code, guide and artifact paths are initially integrated; all 2,700 other tracked files stay exact.
+All 67 description bundle files are actually rebuilt: 65 payloads stay equal and only two build inventories change
+for the graph-code fingerprint. Independent output reviews distinguish fresh reproduction from unchanged
+authored/history artifacts: opportunity 23/5, description 40/14, context 7/26 and snapshot 0/1 with fresh full SDK
+readback. Historical decisions, source packets and the sample's unchanged fingerprint are preserved; a changed
+timestamp is not claimed as fresh engineering evidence. Additional independent graph-support reviews cover
+ordinary exports and declared refusal boundaries without relabelling every inherited artifact as freshly built.
+
+The 19 integrated paths are disjoint from 853 declared consumed paths across the 95 matrix cells. An actual strict
+input check passes, with the existing 64 pass / 23 fail / 8 n/a results unchanged; no matrix binding is backfilled
+and no unnecessary whole matrix run is claimed. Model/provider calls, new original-source downloads, plant or
+company writes, native imports, network-boundary changes and LinkedIn publication are not exercised.
+
+
+**Open N085 follow-up.** A record-association contract informed by [HSE functional-safety guidance](https://www.hse.gov.uk/eci/functional.htm)
+and [JRC function-identification guidance](https://minerva.jrc.ec.europa.eu/en/shorturl/technical_working_group_2_seveso_inspections/questions_and_tips_for_seveso_inspections_safety_instrumented_functions)
+precedes ten actual unchanged-method CLIs on fictional machine records. A local pressure switch leaves the other machine's question open, but an
+A-only trip, unrelated trip or ambiguous target can quiet C9 across the model. An explicit supplied shared mapping
+is a narrow drawing-coverage control; it is not protection acceptance. The question and independent context
+reviewers own the private candidate and negative controls. This reproduced collection gap remains open in this
+release. Missing records do not establish absent installed safeguards, and a supplied trip does not establish
+adequate or tested protection. No operating recommendation is made.

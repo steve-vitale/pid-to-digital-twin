@@ -454,7 +454,12 @@ def build(model_path, reviews=None, questions=None):
         for x in r.get("needs_moc", []):
             events.append({"type": "change_review_needed", "item": x["item"], "request": x["request"],
                            "why": x["why"], "by": r.get("reviewer"), "on": r.get("date"), "record": rec.name})
-    qs = json.loads(Path(questions).read_text(encoding="utf-8")).get("questions", []) if questions else []
+    qdoc = json.loads(Path(questions).read_text(encoding="utf-8")) if questions else {}
+    if "context_register" in qdoc:
+        raise ValueError("bound enriched questions require their complete context packet; use the existing "
+                         "enriched_graph.json/context.json pair or refresh through context_register.py "
+                         "with the preserved register before exporting; graph_export cannot rebind decisions")
+    qs = qdoc.get("questions", [])
     mp = Path(model_path).resolve()
     shown = mp.relative_to(ROOT).as_posix() if mp.is_relative_to(ROOT) else mp.name  # never a local absolute path
     return {"schema": SCHEMA, "source_model": shown, "model_kind":

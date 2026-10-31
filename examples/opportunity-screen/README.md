@@ -146,28 +146,34 @@ raise; **legit** means an older question fired on the new equipment and is a fai
 | Finding | Judgement |
 |---|---|
 | E27 C-201: ammonia evaporative condenser, PT-203 head pressure, PIC-203 "head pressure control at a fixed setpoint" | Expected. The head pressure request names PT-203 and the setpoint and low limit in the plant controls; the floor (hot gas defrost, liquid injection) is its own request |
-| E28 model: K-201, K-202, K-203 with suction pressures PT-201, PT-202, the spiral freezer, unit cooler and cold store, TT-205 and TT-206 | Expected. One finding per model: suction levels are a plant-wide setting |
+| E28 model: K-201, K-202, K-203 with suction pressures and candidate loads | Expected. The grouped question keeps suction membership, every coincident load/approach and reset coverage unresolved; grouping does not establish shared topology. |
 | E29 K-201 and K-202: screws with no drive (ZT-202 slide valve position shown on K-202) | Expected |
 | E30 EV-201: hot gas defrost valve HGV-201, defrost started by a timer | Expected |
 | E31 D-301 (exhaust S1, TT-304) and O-302 (exhaust S2, TT-305) | Expected. The fuel request names FT-301 on the dryer and, on the oven, says only a valve is drawn |
 | E32 D-301 and F-303: gas-fired, no flue O2 | Expected; the decision rule and source keep the excess air a drying process needs |
-| H5 model: compressors and condenser, with the CIP and wash hot water heater WH-401 as the low-grade duty | Expected |
+| H5 model: compressors and condenser, with WH-401 as a candidate heating duty | Expected. Source/sink grade, timing, distance, contamination/isolation, power impact and existing recovery coverage still require review. |
 | H6 D-301 and O-302, with WH-401 | Expected; overlaps E31 by design (E31 asks about the unit's own inlet air first) |
 | C11 D-301 and O-302: no humidity measurement | Expected. The dryer's manual exhaust damper HV-304 is shown |
-| C12 model: K-202, K-203 with no power measurement | Expected |
+| C12 model: K-201, K-202, K-203, with JT-201 retained as a supplied power candidate | Expected. Real-input quantity, attribution, time/conversion basis and usable coincident operation stay open even when a power instrument is drawn. |
 | E19, E22, E23 AC-501 (instrument air compressor) | Legit. E19 also lists the refrigeration pressure controllers PIC-202 and PIC-203 as "pressure control" because its clause looks anywhere: **low value** in that part |
 | C1 O-302, F-303, WH-401: gas with no meter | Legit; the dryer's gas is metered (FT-301), so it is quiet |
 | C2, C3 model | Legit; **low value** as in the other examples |
 | C9 model: K-201, K-202, K-203, AC-501 with no trip drawn | Legit, a question to verify (no high discharge pressure cutout was drawn) |
 
 **Anti-triggers, each drawn on purpose and pinned in the test:** K-203 has a drive (SC-203), so E29 is quiet there;
-EV-202 starts defrost from a coil differential pressure (PDT-206), so E30 is quiet there; K-201's power is measured
-(JT-201), so C12 leaves it out; the oven has a flue O2 analyser (AT-302), so E32 is quiet there; the fryer's exhaust
+EV-202 starts defrost from a coil differential pressure (PDT-206), so E30 is quiet there; the oven has a flue O2
+analyser (AT-302), so E32 is quiet there; the fryer's exhaust
 goes to a vapour condenser heat recovery exchanger (HX-303, the S26 p. 107 arrangement), so E31 and H6 are quiet
 there; and the instrument air compressor AC-501 and its refrigerated air dryer AD-502 get no refrigeration, oven or
 dryer question.
 
-**On the other three examples:** none of the ten new questions fired on TE, Bayer or OPEN100 (TE's recycle
+JT-201 originally served as a C12 quiet control; that historical purpose remains in the unchanged illustrative
+input metadata. The current collection contract retains it as a candidate and keeps actual real-input suitability
+open. Current-only, voltage-only, apparent/reactive power and bare cumulative-energy labels cannot settle that
+basis. Separate reset/recovery records also cannot erase other trains' requests. These are source-informed
+software controls, not food-plant or human-usefulness validation.
+
+**When the ten questions were first added, on the other three examples:** none of the ten new questions fired on TE, Bayer or OPEN100 (TE's recycle
 compressor K-101 and condenser E-101, Bayer's vent condenser E-1 and OPEN100's air-cooled condenser name no
 refrigerant). Their regenerated outputs differ only in the list of questions run and quiet, and in one line of the
 TE and Bayer E18 data requests, where a valve beside a drawn flow meter is no longer called "no flow measurement".

@@ -3822,6 +3822,39 @@
         "docs/GENERALIZATION.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A256",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Refuse bound enriched-question graph re-entry before writing; retain the complete graph/context pair or explicitly refresh the preserved register (N083).",
+      "hypothesis": "A new full/core projection cannot revalidate inherited answered/current state or reconstruct complete decision history merely by copying question summaries or an old binding.",
+      "evidence": "Original actual full/core exports dropped the complete binding while retaining answer references, including after an asset change. Independent 19 CLI controls/64 assertions and 3 stdio SDK sessions verify refusal, source/output conservation, ordinary-question equivalence, valid complete-pair readback and explicit refresh staleness. Final graph suite runs 40 cases:39 pass/one Windows symlink skip.",
+      "runs": "Offline fictional source-backed controls and independent coding-agent review; no company/client or engineering acceptance.",
+      "verdict": "kept",
+      "why": "A conservative input-contract guard closes reproduced binding loss; no automatic rebinding, inverse conversion or company authority is introduced.",
+      "source": [
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
+        "docs/WORKFLOWS.md",
+        "docs/CONTEXT_REGISTER.md"
+      ]
+    },
+    {
+      "id": "A257",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Repair C12 electrical-quantity basis and E28/H5 disconnected reset/recovery collection suppression after independent primary-source review (N084).",
+      "hypothesis": "Supplied electrical labels and local reset/recovery indications are candidates; they cannot discharge representative real-power basis or coverage of every served load.",
+      "evidence": "Original failures and first candidate rejection on apparent/reactive quantities are retained. Accepted v2 passes 16 fresh independent CLIs/61 checks plus 18 inherited E28/H5 CLIs/36 checks with exact rule conservation. Integration adds 18 fresh reproduction commands/162 assertions and 108 question cases:107 pass/one Windows skip. Other 47 complete rules and all 50 benefits remain exact; 3 applicability contracts intentionally change. 50 rules/122 requests; 12 bounded collection reviews, 38 source contracts remain open.",
+      "runs": "Source-informed offline development controls and independent coding-agent review; no provider inference, unfamiliar-source performance or timed engineer usefulness result.",
+      "verdict": "kept",
+      "why": "Keep raw candidates and qualifiers, explicit coverage and basis tasks, historical decisions and stale bindings; N065/N082 and N062/N063 stay open.",
+      "source": [
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
+        "docs/OPPORTUNITY_SCREEN.md",
+        "examples/opportunity-screen/README.md",
+        "docs/STATUS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4674,7 +4707,7 @@
       "function": "intake_and_reuse",
       "status": "done",
       "idea": "Repair H1/E11/H2 generic-capacity/design-temperature/design-condition false collection completion.",
-      "why_not_yet": "Completed A254 after independent primary-source contract; broader 41-rule adequacy is separately N082.",
+      "why_not_yet": "Completed A254 after independent primary-source contract; broader catalog adequacy is separately N082.",
       "source": [
         "docs/JOURNAL.md#115-repair-the-audit-gaps-with-owned-workstreams-and-independent-handoffs",
         "docs/STATUS.md"
@@ -4695,10 +4728,44 @@
       "id": "N082",
       "function": "intake_and_reuse",
       "status": "not-done",
-      "idea": "Source-review the remaining 41 catalog rules and 119-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
-      "why_not_yet": "Nine named rules have bounded collection repairs; this is not whole-catalog adequacy or usefulness. N065 and real engineer/recipient acceptance remain open.",
+      "idea": "Source-review the remaining 38 catalog rules and 122-request inventory with prospective expected/unacceptable questions, exact collection scope and independent source review.",
+      "why_not_yet": "Twelve named rules have bounded source-informed collection reviews after A257; this is not whole-catalog engineering adequacy or usefulness. N065 and real engineer/recipient acceptance remain open.",
       "source": [
         "docs/JOURNAL.md#115-repair-the-audit-gaps-with-owned-workstreams-and-independent-handoffs",
+        "docs/STATUS.md",
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff"
+      ]
+    },
+    {
+      "id": "N083",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Preserve the complete context binding at graph receiving projections, or refuse enriched-question re-entry before writes.",
+      "why_not_yet": "Completed A256: full/core re-entry refuses; ordinary questions remain supported; original enriched graph/context pair and explicit preserved-register refresh retain the supported handoff. No general projection rebinding, source authentication or company authority.",
+      "source": [
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N084",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Repair C12 actual real-input basis and E28/H5 equipment/load coverage without treating candidate labels or unrelated components as collected evidence.",
+      "why_not_yet": "Completed A257 after independent source contract and retained first-candidate rejection. Three always-open basis/coverage tasks retain supplied candidates and qualifiers;3 named rules reviewed, remaining38 source contracts and actual usefulness stay open.",
+      "source": [
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N085",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Keep C9 trip/pressure-switch collection tied to each named machine; unrelated or ambiguous trip records must not quiet other equipment.",
+      "why_not_yet": "Ten actual unchanged-method baseline CLIs reproduce model-wide trip suppression after an independent primary-source association contract. An A-only, unrelated or ambiguous trip can hide another machine's C9 question. A private candidate and independent review are assigned; no repair is released. This is record association and collection scope, not proof of installed protection or safety adequacy.",
+      "source": [
+        "docs/JOURNAL.md#117-keep-collection-scope-and-reviewed-context-bound-at-handoff",
         "docs/STATUS.md"
       ]
     }
